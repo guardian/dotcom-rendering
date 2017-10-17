@@ -4,6 +4,9 @@
   "description": "Frontend rendering framework",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "yarn clean && babel src/h.jsx --out-file dist/h.js",
+    "flow": "flow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git+https://github.com/guardian/guui.git",
@@ -17,6 +20,23 @@
   "engines": {
     "yarn": "1.2.0"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "emotion": "^8.0.8",
+    "preact": "^8.2.5",
+    "styletron-preact": "^2.5.9"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-flow-header": "^0.2.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "flow-bin": "^0.57.3"
+  }
 }
