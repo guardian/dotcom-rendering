@@ -1,0 +1,22 @@
+{
+  "name": "@guardian/guui",
+  "version": "0.0.1",
+  "description": "Frontend rendering framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/guardian/guui.git",
+  "keywords": [],
+  "author": "Simon Adcock <simon.adcock@guardian.co.uk>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/guardian/guui/issues"
+  },
+  "homepage": "https://github.com/guardian/guui#readme",
+  "engines": {
+    "yarn": "1.2.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
