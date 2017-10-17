@@ -2,10 +2,10 @@
   "name": "@guardian/guui",
   "version": "0.0.1",
   "description": "Frontend rendering framework",
-  "main": "index.js",
+  "main": "dist/h.js",
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
-    "build": "yarn clean && babel src/h.jsx --out-file dist/h.js",
+    "build": "yarn clean && webpack",
     "flow": "flow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,7 +29,9 @@
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -37,6 +39,7 @@
     "eslint-plugin-flow-header": "^0.2.0",
     "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-prettier": "^2.3.1",
-    "flow-bin": "^0.57.3"
+    "flow-bin": "^0.57.3",
+    "webpack": "^3.8.1"
   }
 }
