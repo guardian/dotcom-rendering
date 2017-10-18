@@ -24,7 +24,7 @@ module.exports = [
     },
     {
         entry: {
-            index: './src/index.js',
+            index: './src/index.jsx',
         },
         output: {
             path: __dirname,
