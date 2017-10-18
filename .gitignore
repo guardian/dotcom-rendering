@@ -59,4 +59,6 @@ typings/
 # dotenv environment variables file
 .env
 
-dist
+# built files
+h.js
+index.js
