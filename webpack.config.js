@@ -31,15 +31,4 @@ module.exports = [
         module: moduleConfig,
         resolve: resolveConfig,
     },
-    {
-        entry: {
-            css: './src/loaders/css.js',
-        },
-        output: {
-            path: __dirname,
-            filename: 'guui-[name]-loader.js',
-            libraryTarget: 'commonjs2',
-        },
-        module: moduleConfig,
-    },
 ];
