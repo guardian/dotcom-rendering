@@ -1,4 +1,21 @@
 // @flow
+const moduleConfig = {
+    rules: [
+        {
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+        },
+    ],
+};
+const resolveConfig = {
+    alias: {
+        // some libs expect react, this stops them bundling it
+        react: 'preact',
+    },
+    extensions: ['.js', '.jsx'],
+};
+
 module.exports = [
     {
         entry: {
@@ -10,22 +27,8 @@ module.exports = [
             library: 'h',
             libraryTarget: 'commonjs2',
         },
-        module: {
-            rules: [
-                {
-                    test: /\.(js|jsx)$/,
-                    exclude: /node_modules/,
-                    loader: 'babel-loader',
-                },
-            ],
-        },
-        resolve: {
-            alias: {
-                // some libs expect react, this stops them bundling it
-                react: 'preact',
-            },
-            extensions: ['.js', '.jsx'],
-        },
+        module: moduleConfig,
+        resolve: resolveConfig,
     },
     {
         entry: {
@@ -36,21 +39,7 @@ module.exports = [
             filename: '[name].js',
             libraryTarget: 'commonjs2',
         },
-        module: {
-            rules: [
-                {
-                    test: /\.(js|jsx)$/,
-                    exclude: /node_modules/,
-                    loader: 'babel-loader',
-                },
-            ],
-        },
-        resolve: {
-            alias: {
-                // some libs expect react, this stops them bundling it
-                react: 'preact',
-            },
-            extensions: ['.js', '.jsx'],
-        },
+        module: moduleConfig,
+        resolve: resolveConfig,
     },
 ];
