@@ -1,12 +1,20 @@
 {
   "presets": [
     "babel-preset-flow",
-    ["babel-preset-env", {
-      "modules": false
-    }]
+    [
+      "babel-preset-env",
+      {
+        "modules": false
+      }
+    ]
   ],
   "plugins": [
     "babel-plugin-transform-object-rest-spread",
-    "babel-plugin-transform-react-jsx"
+    [
+      "babel-plugin-transform-react-jsx",
+      {
+        "pragma": "h"
+      }
+    ]
   ]
 }

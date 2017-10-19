@@ -1,1 +1,3 @@
-dist
+src/__flow__
+h.js
+index.js

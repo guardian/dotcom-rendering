@@ -1,6 +1,4 @@
-//@flow
-const path = require('path');
-
+// @flow
 module.exports = [
     {
         entry: {
@@ -21,6 +19,13 @@ module.exports = [
                 },
             ],
         },
+        resolve: {
+            alias: {
+                // some libs expect react, this stops them bundling it
+                react: 'preact',
+            },
+            extensions: ['.js', '.jsx'],
+        },
     },
     {
         entry: {
@@ -29,6 +34,7 @@ module.exports = [
         output: {
             path: __dirname,
             filename: '[name].js',
+            libraryTarget: 'commonjs2',
         },
         module: {
             rules: [
@@ -39,5 +45,12 @@ module.exports = [
                 },
             ],
         },
-    }
+        resolve: {
+            alias: {
+                // some libs expect react, this stops them bundling it
+                react: 'preact',
+            },
+            extensions: ['.js', '.jsx'],
+        },
+    },
 ];

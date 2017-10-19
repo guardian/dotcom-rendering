@@ -6,7 +6,9 @@
   "scripts": {
     "build": "webpack",
     "flow": "flow",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js,.jsx",
+    "fix": "eslint . --ext .js,.jsx --fix"
   },
   "repository": "git+https://github.com/guardian/guui.git",
   "keywords": [],
@@ -21,8 +23,12 @@
   },
   "dependencies": {
     "emotion": "^8.0.8",
+    "emotion-server": "^8.0.8",
     "preact": "^8.2.5",
-    "styletron-preact": "^2.5.9"
+    "preact-render-to-string": "^3.7.0",
+    "styletron-client": "^2.5.7",
+    "styletron-preact": "^2.5.9",
+    "styletron-server": "^2.5.7"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -38,8 +44,12 @@
     "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-flow-header": "^0.2.0",
     "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.4.0",
     "flow-bin": "^0.57.3",
+    "prettier": "^1.7.4",
     "webpack": "^3.8.1"
   }
 }
