@@ -22,8 +22,14 @@
     "yarn": "1.2.0"
   },
   "dependencies": {
+    "babel-plugin-emotion": "7.3.2",
+    "decamelize": "^1.2.0",
     "emotion": "^8.0.8",
     "emotion-server": "^8.0.8",
+    "postcss": "^6.0.13",
+    "postcss-apply": "^0.8.0",
+    "postcss-custom-media": "^6.0.0",
+    "postcss-custom-properties": "^6.2.0",
     "preact": "^8.2.5",
     "preact-render-to-string": "^3.7.0",
     "styletron-client": "^2.5.7",

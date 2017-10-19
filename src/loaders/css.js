@@ -1,3 +1,5 @@
+// @flow
+
 // This loader breaks the webpack rule of 'do one thing' because we use it internally
 // and it makes life easier than passing loads of stuff about, reparsing it per transform etc
 
@@ -6,8 +8,12 @@ import customProperties from 'postcss-custom-properties';
 import customMedia from 'postcss-custom-media';
 import apply from 'postcss-apply';
 import decamelize from 'decamelize';
-import { parseCSS } from 'babel-plugin-emotion/lib/parser';
-import pasteup from './pasteup';
+import { parseCSS as emotionParser } from 'babel-plugin-emotion/lib/parser';
+import {
+    font as pasteupFonts,
+    colour as pasteupColours,
+    breakpoints as pasteupBreakpoints,
+} from '../pasteup';
 
 // convert pasteup exports to css vars
 // e.g. a.b.c => --a-b-c
@@ -31,20 +37,26 @@ const normaliseCSS = source =>
     postcss()
         .use(
             customProperties({
-                variables: toVars(pasteup),
+                variables: toVars({
+                    pasteupFonts,
+                    pasteupColours,
+                    pasteupBreakpoints,
+                }),
             })
         )
         .use(
             customMedia({
-                extensions: Object.keys(pasteup.breakpoints).reduce(
+                extensions: Object.keys(pasteupBreakpoints).reduce(
                     (breakpoints, breakpoint) =>
                         Object.assign({}, breakpoints, {
-                            [`--from-${breakpoint}`]: `(min-width: ${pasteup
-                                .breakpoints[breakpoint] / 16}em)`,
-                            [`--until-${breakpoint}`]: `(max-width: ${(pasteup
-                                    .breakpoints[breakpoint] -
+                            [`--from-${breakpoint}`]: `(min-width: ${pasteupBreakpoints[
+                                breakpoint
+                            ] / 16}em)`,
+                            [`--until-${breakpoint}`]: `(max-width: ${(pasteupBreakpoints[
+                                breakpoint
+                            ] -
                                 1) /
-                            16}em)`,
+                                16}em)`,
                         }),
                     {}
                 ),
