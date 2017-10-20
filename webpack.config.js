@@ -1,4 +1,6 @@
 // @flow
+const path = require('path');
+
 const moduleConfig = {
     rules: [
         {
@@ -19,23 +21,10 @@ const resolveConfig = {
 module.exports = [
     {
         entry: {
-            h: './src/h.jsx',
-        },
-        output: {
-            path: __dirname,
-            filename: '[name].js',
-            library: 'h',
-            libraryTarget: 'commonjs2',
-        },
-        module: moduleConfig,
-        resolve: resolveConfig,
-    },
-    {
-        entry: {
             index: './src/index.jsx',
         },
         output: {
-            path: __dirname,
+            path: path.join(__dirname, 'dist'),
             filename: '[name].js',
             libraryTarget: 'commonjs2',
         },

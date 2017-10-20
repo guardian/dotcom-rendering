@@ -29,5 +29,4 @@ node_modules/
 .yarn-integrity
 
 # built files
-h.js
-index.js
+dist

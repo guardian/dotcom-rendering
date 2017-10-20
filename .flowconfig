@@ -4,8 +4,6 @@
 [include]
 
 [libs]
-src/__flow__/flow-typed
-src/__flow__/preact.js
 
 [options]
 module.file_ext=.js

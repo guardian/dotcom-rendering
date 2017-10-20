@@ -2,9 +2,9 @@
   "name": "@guardian/guui",
   "version": "1.0.0",
   "description": "Frontend rendering framework",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "rm -rf dist && webpack",
     "flow": "flow",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js,.jsx",
