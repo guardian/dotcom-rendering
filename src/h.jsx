@@ -12,7 +12,7 @@ export default (
     component: string,
     attributes: ?Object,
     ...children: Array<any>
-) => {
+): React.Element<any> => {
     const { style = {}, ...otherAttributes } = attributes || {};
 
     // cheapCSS and expensiveCSS are added by __tools__/ui-css-loader.js

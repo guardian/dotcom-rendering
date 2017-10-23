@@ -7,6 +7,9 @@ yarn-debug.log*
 yarn-error.log*
 .npmrc
 
+# Flow
+flow-typed
+
 # Runtime data
 pids
 *.pid
