@@ -7,7 +7,7 @@ const startServer = () => {
     const server = new StyletronServer();
 
     return {
-        renderToString(node): string {
+        renderToString(node: React.Element<any>): string {
             return renderToString(server, node);
         },
         extractCriticalCss(body: string): string {
