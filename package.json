@@ -4,7 +4,7 @@
   "description": "Frontend rendering framework",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack",
+    "build": "rm -rf dist && webpack && babel lib/*.js lib/**/*.js -d dist",
     "flow": "flow",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js,.jsx",
