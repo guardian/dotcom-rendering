@@ -171,8 +171,8 @@ To avoid too much duplicating of rules in some circumstances, the `@apply` rule 
 import MySVG from './my-svg.svg';
 ```
 
-It will be loaded using `guui-svg-loader.js`, which runs it through [`svgo`](https://github.com/svg/svgo) then returns 
-it as a JSX object.
+SVGs are loaded using `guui-svg-loader.js`, which runs them through [`svgo`](https://github.com/svg/svgo) then returns 
+them as JSX objects.
 
 You can use the JSXified SVG as a normal JSX import:
 
@@ -215,7 +215,7 @@ Pasteup contains a set of variables for basic settings: breakpoints, colours, fo
 It can imported directly into components:
 
 ```jsx harmony
-import { colour } from 'pasteup'
+import { colour } from '@guardian/guui/dist/lib/pasteup'
 
 // colour === {
 //    brandBlue: '#005689',
