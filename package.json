@@ -25,8 +25,8 @@
   "dependencies": {
     "babel-plugin-emotion": "7.3.2",
     "decamelize": "^1.2.0",
-    "emotion": "^8.0.8",
-    "emotion-server": "^8.0.8",
+    "emotion": "^7.3.2",
+    "emotion-server": "^7.3.2",
     "htmltojsx": "^0.3.0",
     "postcss": "^6.0.13",
     "postcss-apply": "^0.8.0",
