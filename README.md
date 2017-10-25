@@ -208,42 +208,6 @@ export default () => <MySVG style={style} />
 
 ```
 
-### Pasteup
-
-Pasteup contains a set of variables for basic settings: breakpoints, colours, font-sizes etc. 
-
-It can imported directly into components:
-
-```jsx harmony
-import { colour } from '@guardian/guui/dist/lib/pasteup'
-
-// colour === {
-//    brandBlue: '#005689',
-//    etc.
-// }
-
-export () => 
-    <div style={{ color: colour.brandBlue }}>
-        blue text
-    </div>
-```
-
-It it also automatically provided to CSS files as a set of kebab-cased CSS custom properties and media:
-
-```scss
-/*
-colour.brandBlue (in pasteup.js) -> --colour-brand-blue
-*/
- 
-.blue-thing {
-    color: var(--colour-brand-blue); /* #005689 */
-    
-    @media (--from-tablet) and (--until-desktop) {
-        font-size: var(--font-size-small); 
-    }
-}
-```
-
 ### Rendering
 
 #### Server
