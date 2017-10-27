@@ -909,10 +909,6 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bowser@^1.0.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/bowser/-/bowser-1.8.0.tgz#889d46ac922ec5db8297672747362ef836781ba7"
-
 brace-expansion@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.8.tgz#c07b211c7c952ec1f8efd51a77ef0d1d3990a292"
@@ -2244,10 +2240,6 @@ https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
-hyphenate-style-name@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
-
 iconv-lite@^0.4.17, iconv-lite@~0.4.13:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
@@ -2290,13 +2282,6 @@ inherits@2.0.1:
 ini@~1.3.0:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.4.tgz#0537cb79daf59b59a1a517dff706c86ec039162e"
-
-inline-style-prefixer@^2.0.1:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/inline-style-prefixer/-/inline-style-prefixer-2.0.5.tgz#c153c7e88fd84fef5c602e95a8168b2770671fe7"
-  dependencies:
-    bowser "^1.0.0"
-    hyphenate-style-name "^1.0.1"
 
 inquirer@^3.0.6:
   version "3.3.0"
@@ -3764,36 +3749,6 @@ strip-eof@^1.0.0:
 strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
-
-styletron-client@^2.5.7:
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/styletron-client/-/styletron-client-2.5.7.tgz#104fa4dc564cd3fe78eb92488e5ef9039c9e242f"
-  dependencies:
-    styletron-core "^2.5.7"
-
-styletron-core@^2.5.7:
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/styletron-core/-/styletron-core-2.5.7.tgz#2c4a1fae537b42235462e438c24ab619bbf8993e"
-
-styletron-preact@^2.5.9:
-  version "2.5.9"
-  resolved "https://registry.yarnpkg.com/styletron-preact/-/styletron-preact-2.5.9.tgz#148985c148d8137bdbc8323a43f719f00136870f"
-  dependencies:
-    styletron-client "^2.5.7"
-    styletron-server "^2.5.7"
-    styletron-utils "^2.5.4"
-
-styletron-server@^2.5.7:
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/styletron-server/-/styletron-server-2.5.7.tgz#f3d0e86e1b8540cde10f25bfa08c40dc0df3851f"
-  dependencies:
-    styletron-core "^2.5.7"
-
-styletron-utils@^2.5.4:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/styletron-utils/-/styletron-utils-2.5.4.tgz#f08cca7d58ee0338ce85e408cb32900e65620240"
-  dependencies:
-    inline-style-prefixer "^2.0.1"
 
 supports-color@^2.0.0:
   version "2.0.0"

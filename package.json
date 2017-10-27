@@ -29,9 +29,6 @@
     "htmltojsx": "^0.3.0",
     "preact": "^8.2.5",
     "preact-render-to-string": "^3.7.0",
-    "styletron-client": "^2.5.7",
-    "styletron-preact": "^2.5.9",
-    "styletron-server": "^2.5.7",
     "svgo": "^0.7.2"
   },
   "devDependencies": {
