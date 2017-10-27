@@ -1,10 +1,7 @@
 // @flow
 import { extractCritical } from 'emotion-server';
 
-const extractCriticalCss = (styletron: Object, body: string) =>
-    [
-        styletron.getStylesheetsHtml(),
-        `<style expensive-css>${extractCritical(body).css}</style>`,
-    ].join('\n');
+const extractCriticalCss = (body: string): string =>
+    `<style expensive-css>${extractCritical(body).css}</style>`;
 
 export default extractCriticalCss;

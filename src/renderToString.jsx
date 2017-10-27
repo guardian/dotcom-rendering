@@ -2,11 +2,8 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import { render as renderToStringPreact } from 'preact-render-to-string';
-import { StyletronProvider } from 'styletron-preact';
 
-const renderToString = (styletron: Object, node: React.Element<any>): string =>
-    renderToStringPreact(
-        <StyletronProvider styletron={styletron}>{node}</StyletronProvider>
-    );
+const renderToString = (node: React.Element<any>): string =>
+    renderToStringPreact(node);
 
 export default renderToString;
