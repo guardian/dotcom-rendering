@@ -1,5 +1,5 @@
 // @flow
-import render from './render';
+import { render } from 'preact';
 import server from './server';
 import h from './h';
 
