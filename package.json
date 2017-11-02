@@ -1,6 +1,6 @@
 {
   "name": "@guardian/guui",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Frontend rendering framework",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/guardian/guui#readme",
   "engines": {
-    "yarn": "1.2.0"
+    "yarn": ">=1.2.0"
   },
   "dependencies": {
     "babel-plugin-emotion": "7.3.2",
