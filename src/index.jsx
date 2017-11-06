@@ -1,6 +1,6 @@
 // @flow
-import { render } from 'preact';
+import { render, Component } from 'preact';
 import server from './server';
 import h from './h';
 
-export { render, server, h };
+export { render, Component, server, h };
