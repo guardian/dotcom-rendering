@@ -3,6 +3,7 @@
 [include]
 
 [libs]
+flow-typed
 
 [options]
 module.file_ext=.js

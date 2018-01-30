@@ -4,11 +4,12 @@
     "description": "Frontend rendering framework",
     "main": "dist/index.js",
     "scripts": {
-        "build": "rm -rf dist && webpack && babel lib/**/*.js -d dist",
+        "build": "rm -rf dist && BABEL_ENV=production webpack -p",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .js,.jsx",
-        "fix": "eslint . --ext .js,.jsx --fix"
+        "fix": "eslint . --ext .js,.jsx --fix",
+        "start": "webpack-dev-server --hot"
     },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
@@ -21,19 +22,19 @@
         "emotion": "^8.0.12",
         "emotion-server": "^8.0.12",
         "react": "^16.2.0",
-        "react-dom": "^16.2.0"
+        "react-dom": "^16.2.0",
+        "react-emotion": "^8.0.12",
+        "react-hot-loader": "^4.0.0-beta.18"
     },
     "devDependencies": {
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.0.1",
         "babel-loader": "^7.1.2",
         "babel-plugin-emotion": "^8.0.12",
-        "babel-plugin-react-require": "^3.0.0",
+        "babel-plugin-provide-modules": "^1.0.3",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "babel-plugin-transform-react-display-name": "^6.25.0",
-        "babel-plugin-transform-react-jsx": "^6.24.1",
         "babel-preset-env": "^1.6.1",
-        "babel-preset-flow": "^6.23.0",
+        "babel-preset-react": "^6.24.1",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.6.0",
@@ -45,24 +46,48 @@
         "eslint-plugin-react": "^7.4.0",
         "flow-bin": "^0.64.0",
         "prettier": "^1.7.4",
-        "webpack": "^3.8.1"
+        "webpack": "^3.8.1",
+        "webpack-dev-server": "^2.11.1"
     },
     "babel": {
-        "presets": [
-            "babel-preset-flow",
+        "plugins": [
+            "babel-plugin-transform-object-rest-spread",
+            "babel-plugin-emotion",
+            "react-hot-loader/babel",
             [
-                "babel-preset-env",
+                "babel-plugin-provide-modules",
                 {
-                    "modules": false
+                    "react": "React",
+                    "react-emotion": [
+                        "css"
+                    ]
                 }
             ]
         ],
-        "plugins": [
-            "babel-plugin-transform-object-rest-spread",
-            "babel-plugin-transform-react-jsx",
-            "babel-plugin-transform-react-display-name",
-            "babel-plugin-react-require"
-        ]
+        "presets": [
+            "babel-preset-react",
+            [
+                "babel-preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ],
+        "env": {
+            "production": {
+                "presets": [
+                    "babel-preset-react",
+                    [
+                        "babel-preset-env",
+                        {
+                            "modules": false
+                        }
+                    ]
+                ]
+            }
+        }
     },
     "prettier": {
         "tabWidth": 4,
@@ -86,17 +111,37 @@
             "prettier/flowtype",
             "prettier/react"
         ],
-        "plugins": ["flow-header", "flowtype", "react", "prettier"],
+        "plugins": [
+            "flow-header",
+            "flowtype",
+            "react",
+            "prettier"
+        ],
         "rules": {
-            "prettier/prettier": ["error"],
+            "prettier/prettier": [
+                "error"
+            ],
             "flow-header/flow-header": "error",
             "consistent-return": "off",
             "react/react-in-jsx-scope": "off",
-            "react/prop-types": "off"
+            "react/prop-types": "off",
+            "react/jsx-filename-extension": [
+                1,
+                {
+                    "extensions": [
+                        ".js",
+                        ".jsx"
+                    ]
+                }
+            ]
         },
         "env": {
             "browser": true
         }
     },
-    "eslintIgnore": ["!.eslint.js", "dist", "flow-typed"]
+    "eslintIgnore": [
+        "!.eslint.js",
+        "dist",
+        "flow-typed"
+    ]
 }
