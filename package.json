@@ -1,48 +1,102 @@
 {
-  "name": "@guardian/guui",
-  "version": "2.0.0",
-  "description": "Frontend rendering framework",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "rm -rf dist && webpack && babel lib/**/*.js -d dist",
-    "flow": "flow",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .js,.jsx",
-    "fix": "eslint . --ext .js,.jsx --fix"
-  },
-  "repository": "git+https://github.com/guardian/guui.git",
-  "keywords": [],
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/guardian/guui/issues"
-  },
-  "homepage": "https://github.com/guardian/guui#readme",
-  "dependencies": {
-    "emotion": "^8.0.12",
-    "emotion-server": "^8.0.12",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-emotion": "^8.0.12",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-flow-header": "^0.2.0",
-    "eslint-plugin-flowtype": "^2.39.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-react": "^7.4.0",
-    "flow-bin": "^0.64.0",
-    "prettier": "^1.7.4",
-    "webpack": "^3.8.1"
-  }
+    "name": "@guardian/guui",
+    "version": "2.0.0",
+    "description": "Frontend rendering framework",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "rm -rf dist && webpack && babel lib/**/*.js -d dist",
+        "flow": "flow",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint . --ext .js,.jsx",
+        "fix": "eslint . --ext .js,.jsx --fix"
+    },
+    "repository": "git+https://github.com/guardian/guui.git",
+    "keywords": [],
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/guardian/guui/issues"
+    },
+    "homepage": "https://github.com/guardian/guui#readme",
+    "dependencies": {
+        "emotion": "^8.0.12",
+        "emotion-server": "^8.0.12",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-eslint": "^8.0.1",
+        "babel-loader": "^7.1.2",
+        "babel-plugin-emotion": "^8.0.12",
+        "babel-plugin-react-require": "^3.0.0",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-react-display-name": "^6.25.0",
+        "babel-plugin-transform-react-jsx": "^6.24.1",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-flow": "^6.23.0",
+        "eslint": "^4.9.0",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-config-prettier": "^2.6.0",
+        "eslint-plugin-flow-header": "^0.2.0",
+        "eslint-plugin-flowtype": "^2.39.1",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-jsx-a11y": "^6.0.2",
+        "eslint-plugin-prettier": "^2.3.1",
+        "eslint-plugin-react": "^7.4.0",
+        "flow-bin": "^0.64.0",
+        "prettier": "^1.7.4",
+        "webpack": "^3.8.1"
+    },
+    "babel": {
+        "presets": [
+            "babel-preset-flow",
+            [
+                "babel-preset-env",
+                {
+                    "modules": false
+                }
+            ]
+        ],
+        "plugins": [
+            "babel-plugin-transform-object-rest-spread",
+            "babel-plugin-transform-react-jsx",
+            "babel-plugin-transform-react-display-name",
+            "babel-plugin-react-require"
+        ]
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "trailingComma": "all",
+        "singleQuote": true,
+        "bracketSpacing": true
+    },
+    "eslintConfig": {
+        "parser": "babel-eslint",
+        "parserOptions": {
+            "ecmaVersion": "2017",
+            "sourceType": "module",
+            "ecmaFeatures": {
+                "jsx": true
+            }
+        },
+        "extends": [
+            "airbnb",
+            "prettier",
+            "plugin:flowtype/recommended",
+            "prettier/flowtype",
+            "prettier/react"
+        ],
+        "plugins": ["flow-header", "flowtype", "react", "prettier"],
+        "rules": {
+            "prettier/prettier": ["error"],
+            "flow-header/flow-header": "error",
+            "consistent-return": "off",
+            "react/react-in-jsx-scope": "off",
+            "react/prop-types": "off"
+        },
+        "env": {
+            "browser": true
+        }
+    },
+    "eslintIgnore": ["!.eslint.js", "dist", "flow-typed"]
 }

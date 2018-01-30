@@ -10,6 +10,7 @@ const moduleConfig = {
         },
     ],
 };
+
 const resolveConfig = {
     alias: {
         // some libs expect react, this stops them bundling it
