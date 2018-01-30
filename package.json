@@ -1,6 +1,6 @@
 {
   "name": "@guardian/guui",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "description": "Frontend rendering framework",
   "main": "dist/index.js",
   "scripts": {
@@ -8,34 +8,26 @@
     "flow": "flow",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js,.jsx",
-    "fix": "eslint . --ext .js,.jsx --fix",
-    "prepublish": "yarn build"
+    "fix": "eslint . --ext .js,.jsx --fix"
   },
   "repository": "git+https://github.com/guardian/guui.git",
   "keywords": [],
-  "author": "Simon Adcock <simon.adcock@guardian.co.uk>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/guardian/guui/issues"
   },
   "homepage": "https://github.com/guardian/guui#readme",
-  "engines": {
-    "yarn": ">=1.2.0"
-  },
   "dependencies": {
-    "babel-plugin-emotion": "7.3.2",
-    "emotion": "^7.3.2",
-    "emotion-server": "^7.3.2",
-    "htmltojsx": "^0.3.0",
-    "preact": "^8.2.5",
-    "preact-render-to-string": "^3.7.0",
-    "svgo": "^0.7.2"
+    "emotion": "^8.0.12",
+    "emotion-server": "^8.0.12",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-emotion": "^8.0.12",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
@@ -49,7 +41,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
-    "flow-bin": "^0.57.3",
+    "flow-bin": "^0.64.0",
     "prettier": "^1.7.4",
     "webpack": "^3.8.1"
   }
