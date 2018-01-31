@@ -58,20 +58,15 @@
                 "babel-plugin-provide-modules",
                 {
                     "react": "React",
-                    "react-emotion": ["css"]
+                    "react-emotion": [
+                        "css"
+                    ]
                 }
             ]
         ],
         "presets": [
             "babel-preset-react",
-            [
-                "babel-preset-env",
-                {
-                    "targets": {
-                        "node": "current"
-                    }
-                }
-            ]
+            "babel-preset-env"
         ],
         "env": {
             "production": {
@@ -109,9 +104,16 @@
             "prettier/flowtype",
             "prettier/react"
         ],
-        "plugins": ["flow-header", "flowtype", "react", "prettier"],
+        "plugins": [
+            "flow-header",
+            "flowtype",
+            "react",
+            "prettier"
+        ],
         "rules": {
-            "prettier/prettier": ["error"],
+            "prettier/prettier": [
+                "error"
+            ],
             "flow-header/flow-header": "error",
             "consistent-return": "off",
             "react/react-in-jsx-scope": "off",
@@ -119,7 +121,10 @@
             "react/jsx-filename-extension": [
                 1,
                 {
-                    "extensions": [".js", ".jsx"]
+                    "extensions": [
+                        ".js",
+                        ".jsx"
+                    ]
                 }
             ]
         },
@@ -127,5 +132,9 @@
             "browser": true
         }
     },
-    "eslintIgnore": ["!.eslint.js", "dist", "flow-typed"]
+    "eslintIgnore": [
+        "!.eslint.js",
+        "dist",
+        "flow-typed"
+    ]
 }
