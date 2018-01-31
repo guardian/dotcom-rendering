@@ -50,8 +50,8 @@ const stats = {
 
 module.exports = {
     entry: {
-        app: './app/index.browser.js',
-        'app.server': './app/index.server.js',
+        app: './index.browser.js',
+        'app.server': './index.server.js',
     },
     output: {
         path: path.join(__dirname, 'dist'),
