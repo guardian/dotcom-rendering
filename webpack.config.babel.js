@@ -9,7 +9,7 @@ const moduleConfig = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    forceEnv: 'app',
+                    forceEnv: 'production',
                 },
             },
         },

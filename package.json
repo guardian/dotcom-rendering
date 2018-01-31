@@ -4,7 +4,7 @@
     "description": "Frontend rendering framework",
     "main": "dist/index.js",
     "scripts": {
-        "build": "rm -rf dist && BABEL_ENV=production webpack -p",
+        "build": "rm -rf dist && webpack -p",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .js,.jsx",
@@ -58,9 +58,7 @@
                 "babel-plugin-provide-modules",
                 {
                     "react": "React",
-                    "react-emotion": [
-                        "css"
-                    ]
+                    "react-emotion": ["css"]
                 }
             ]
         ],
@@ -111,16 +109,9 @@
             "prettier/flowtype",
             "prettier/react"
         ],
-        "plugins": [
-            "flow-header",
-            "flowtype",
-            "react",
-            "prettier"
-        ],
+        "plugins": ["flow-header", "flowtype", "react", "prettier"],
         "rules": {
-            "prettier/prettier": [
-                "error"
-            ],
+            "prettier/prettier": ["error"],
             "flow-header/flow-header": "error",
             "consistent-return": "off",
             "react/react-in-jsx-scope": "off",
@@ -128,10 +119,7 @@
             "react/jsx-filename-extension": [
                 1,
                 {
-                    "extensions": [
-                        ".js",
-                        ".jsx"
-                    ]
+                    "extensions": [".js", ".jsx"]
                 }
             ]
         },
@@ -139,9 +127,5 @@
             "browser": true
         }
     },
-    "eslintIgnore": [
-        "!.eslint.js",
-        "dist",
-        "flow-typed"
-    ]
+    "eslintIgnore": ["!.eslint.js", "dist", "flow-typed"]
 }
