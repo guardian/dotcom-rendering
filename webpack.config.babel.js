@@ -1,54 +1,9 @@
 // @flow
+/* eslint-disable global-require */
 import path from 'path';
-import { readdirSync, readFileSync } from 'fs';
-import WebpackOnBuildPlugin from 'on-build-webpack';
-import filesizegzip from 'filesizegzip';
+import webpackMerge from 'webpack-merge';
 
-const moduleConfig = {
-    rules: [
-        {
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    forceEnv: 'production',
-                },
-            },
-        },
-    ],
-};
-
-const stats = {
-    assets: false,
-    cached: false,
-    cachedAssets: false,
-    children: false,
-    chunks: false,
-    chunkModules: false,
-    chunkOrigins: false,
-    depth: false,
-    entrypoints: false,
-    exclude: [],
-    hash: false,
-    modules: false,
-    moduleTrace: false,
-    performance: false,
-    providedExports: false,
-    publicPath: false,
-    reasons: false,
-    source: false,
-    version: false,
-
-    // show these...
-    colors: true,
-    errors: true,
-    errorDetails: true,
-    timings: true,
-    warnings: true,
-};
-
-module.exports = {
+const baseConfig = {
     entry: {
         app: './index.browser.js',
         'app.server': './index.server.js',
@@ -57,44 +12,54 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
     },
-    module: moduleConfig,
-    stats: { ...stats, timings: false },
-    plugins: [
-        new WebpackOnBuildPlugin(() => {
-            readdirSync(path.join(__dirname, 'dist')).forEach(file => {
-                console.log(
-                    `${file} ${filesizegzip(
-                        readFileSync(
-                            path.join(__dirname, 'dist', file),
-                            'utf8',
-                        ),
-                        true,
-                    )}`,
-                );
-            });
-        }),
-    ],
-    devServer: {
-        publicPath: '/assets/javascript/',
-        port: 3000,
-        overlay: true,
-        // noInfo: true,
-        stats,
-        before(app) {
-            app.get('/', (req, res) => {
-                // make sure each reload is a fresh rendering
-                Object.keys(require.cache).forEach(
-                    key => delete require.cache[key],
-                );
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        forceEnv: 'production',
+                    },
+                },
+            },
+        ],
+    },
+    stats: {
+        assets: false,
+        cached: false,
+        cachedAssets: false,
+        children: false,
+        chunks: false,
+        chunkModules: false,
+        chunkOrigins: false,
+        depth: false,
+        entrypoints: false,
+        exclude: [],
+        hash: false,
+        modules: false,
+        moduleTrace: false,
+        performance: false,
+        providedExports: false,
+        publicPath: false,
+        reasons: false,
+        source: false,
+        timings: false,
+        version: false,
 
-                // eslint-disable-next-line global-require
-                const { html, css } = require('./app/index.server');
-
-                // eslint-disable-next-line global-require
-                const document = require('./app/document/html').default;
-
-                res.send(document({ html, css }));
-            });
-        },
+        // show these...
+        colors: true,
+        errors: true,
+        errorDetails: true,
+        warnings: true,
     },
 };
+
+module.exports = (env: { prod?: boolean, dev?: boolean } = { prod: true }) =>
+    webpackMerge.smart(
+        baseConfig,
+        env.prod
+            ? require('./webpack.config.prod')({ dist: baseConfig.output.path })
+            : require('./webpack.config.dev')({ stats: baseConfig.stats }),
+    );
