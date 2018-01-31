@@ -1,5 +1,8 @@
 // @flow
-const path = require('path');
+import path from 'path';
+import { readdirSync, readFileSync } from 'fs';
+import WebpackOnBuildPlugin from 'on-build-webpack';
+import filesizegzip from 'filesizegzip';
 
 const moduleConfig = {
     rules: [
@@ -55,6 +58,22 @@ module.exports = {
         filename: '[name].js',
     },
     module: moduleConfig,
+    stats: { ...stats, timings: false },
+    plugins: [
+        new WebpackOnBuildPlugin(() => {
+            readdirSync(path.join(__dirname, 'dist')).forEach(file => {
+                console.log(
+                    `${file} ${filesizegzip(
+                        readFileSync(
+                            path.join(__dirname, 'dist', file),
+                            'utf8',
+                        ),
+                        true,
+                    )}`,
+                );
+            });
+        }),
+    ],
     devServer: {
         publicPath: '/assets/javascript/',
         port: 3000,
