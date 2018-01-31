@@ -1,6 +1,6 @@
 # guui
 
-Frontend rendering framework for theguardian.com.
+Frontend rendering framework for theguardian.com. It uses [react](https://reactjs.org/) and [emotion](https://emotion.sh/).
 
 Slack channel: [#dotcom-future](https://theguardian.slack.com/messages/C0JES5PEV)
 
