@@ -4,13 +4,8 @@ import path from 'path';
 import webpackMerge from 'webpack-merge';
 
 const baseConfig = {
-    entry: {
-        app: './index.browser.js',
-        'app.server': './index.server.js',
-    },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: '[name].js',
     },
     module: {
         rules: [
@@ -56,10 +51,34 @@ const baseConfig = {
     },
 };
 
-module.exports = (env: { prod?: boolean, dev?: boolean } = { prod: true }) =>
-    webpackMerge.smart(
-        baseConfig,
-        env.prod
-            ? require('./webpack.config.prod')({ dist: baseConfig.output.path })
-            : require('./webpack.config.dev')({ stats: baseConfig.stats }),
+const browserConfig = {
+    entry: './index.browser.js',
+    output: {
+        filename: 'app.browser.js',
+    },
+    target: 'web',
+};
+
+const serverConfig = {
+    entry: './index.server.js',
+    output: {
+        filename: 'app.server.js',
+    },
+    target: 'node',
+};
+
+module.exports = (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
+    const envConfig = env.prod
+        ? require('./webpack.config.prod')({ dist: baseConfig.output.path })
+        : require('./webpack.config.dev')({ stats: baseConfig.stats });
+
+    const config = webpackMerge.multiple(
+        {
+            browser: webpackMerge.smart(baseConfig, browserConfig),
+            server: webpackMerge.smart(baseConfig, serverConfig),
+        },
+        envConfig,
     );
+
+    return config;
+};

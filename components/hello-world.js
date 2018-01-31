@@ -1,6 +1,6 @@
 // @flow
 
-const redText = { color: 'blue' };
+const redText = { color: 'hotpink' };
 
 export default () => (
     <p>
