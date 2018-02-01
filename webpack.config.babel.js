@@ -1,7 +1,9 @@
 // @flow
-/* eslint-disable global-require */
+/* eslint-disable global-require,no-console */
 import path from 'path';
 import webpackMerge from 'webpack-merge';
+
+console.log(''); // just a spacer for console sweetness
 
 const baseConfig = {
     output: {
@@ -69,7 +71,10 @@ const serverConfig = {
 
 module.exports = (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
     const envConfig = env.prod
-        ? require('./webpack.config.prod')({ dist: baseConfig.output.path })
+        ? require('./webpack.config.prod')({
+              dist: baseConfig.output.path,
+              bundleName: browserConfig.output.filename,
+          })
         : require('./webpack.config.dev')({ stats: baseConfig.stats });
 
     const config = webpackMerge.multiple(

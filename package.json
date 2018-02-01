@@ -4,7 +4,7 @@
     "description": "Frontend rendering framework",
     "main": "dist/index.js",
     "scripts": {
-        "build": "rm -rf dist && webpack --env.prod",
+        "build": "rm -rf dist && webpack --env.prod && node ./util/report-bundle-size.js",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .js,.jsx",
@@ -27,6 +27,7 @@
         "styletron-server": "^3.0.4"
     },
     "devDependencies": {
+        "as-table": "^1.0.31",
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.0.1",
         "babel-loader": "^7.1.2",
@@ -45,8 +46,8 @@
         "eslint-plugin-react": "^7.4.0",
         "filesizegzip": "^2.0.0",
         "flow-bin": "^0.64.0",
-        "on-build-webpack": "^0.1.0",
         "prettier": "^1.7.4",
+        "simple-progress-webpack-plugin": "^1.0.4",
         "webpack": "^3.8.1",
         "webpack-bundle-analyzer": "^2.9.2",
         "webpack-dev-server": "^2.11.1",

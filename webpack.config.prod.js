@@ -1,32 +1,21 @@
 // @flow
 /* eslint-disable no-console */
 import path from 'path';
-import { readdirSync, readFileSync } from 'fs';
 
 import webpack from 'webpack';
-import WebpackOnBuildPlugin from 'on-build-webpack';
-import filesizegzip from 'filesizegzip';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import Progress from 'simple-progress-webpack-plugin';
 
-module.exports = ({ dist }: { dist: string }) => ({
+module.exports = ({
+    dist,
+    bundleName,
+}: {
+    dist: string,
+    bundleName: string,
+}) => ({
     browser: {
         devtool: 'source-map',
         plugins: [
-            new WebpackOnBuildPlugin(() => {
-                readdirSync(path.join(__dirname, 'dist'))
-                    .filter(
-                        file =>
-                            !file.endsWith('.map') && file.includes('browser'),
-                    )
-                    .forEach(file => {
-                        console.log(
-                            `${file} ${filesizegzip(
-                                readFileSync(path.join(dist, file), 'utf8'),
-                                true,
-                            )}`,
-                        );
-                    });
-            }),
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
@@ -37,10 +26,16 @@ module.exports = ({ dist }: { dist: string }) => ({
                 parallel: true,
             }),
             new BundleAnalyzerPlugin({
-                defaultSizes: 'gzip',
-                reportFilename: path.join(dist, 'ui.bundle.browser.stats.html'),
+                reportFilename: path.join(
+                    dist,
+                    `${bundleName.replace(/.js/, '')}.stats.html`,
+                ),
                 analyzerMode: 'static',
                 openAnalyzer: false,
+                logLevel: 'warn',
+            }),
+            new Progress({
+                format: 'compact',
             }),
         ],
     },
