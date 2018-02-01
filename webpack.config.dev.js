@@ -15,12 +15,12 @@ module.exports = ({ stats }: { stats: {} }) => ({
                     );
 
                     // eslint-disable-next-line global-require
-                    const { html, css } = require('./index.server');
+                    const { html, stylesForHead } = require('./index.server');
 
                     // eslint-disable-next-line global-require
                     const document = require('./app/__html').default;
 
-                    res.send(document({ html, css }));
+                    res.send(document({ html, stylesForHead }));
                 });
             },
         },

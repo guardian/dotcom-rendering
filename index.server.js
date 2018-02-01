@@ -1,10 +1,19 @@
 // @flow
 import { renderToString } from 'react-dom/server';
-import { extractCritical } from 'emotion-server';
+import Styletron from 'styletron-server';
+import { StyletronProvider } from 'styletron-react';
 
 import App from './app';
 
-const { html, css } = extractCritical(renderToString(<App />));
+const styletron = new Styletron();
+
+const html = renderToString(
+    <StyletronProvider styletron={styletron}>
+        <App />
+    </StyletronProvider>,
+);
+
+const stylesForHead = styletron.getStylesheetsHtml();
 
 export { html };
-export { css };
+export { stylesForHead };

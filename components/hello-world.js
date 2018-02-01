@@ -1,12 +1,14 @@
 // @flow
+import { styled } from 'styletron-react';
 
-const redText = { color: 'hotpink' };
+import Highlight from './highlight';
+
+const BlueHighlight = styled(Highlight, {
+    color: 'blue',
+});
 
 export default () => (
     <p>
-        Hello{' '}
-        <span css={{ ...redText, fontStyle: 'italic', fontWeight: 'bold' }}>
-            world
-        </span>
+        Hello <BlueHighlight>world</BlueHighlight>
     </p>
 );

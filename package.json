@@ -19,18 +19,17 @@
     },
     "homepage": "https://github.com/guardian/guui#readme",
     "dependencies": {
-        "emotion": "^8.0.12",
-        "emotion-server": "^8.0.12",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "react-emotion": "^8.0.12",
-        "react-hot-loader": "^4.0.0-beta.18"
+        "react-hot-loader": "^4.0.0-beta.18",
+        "styletron-client": "^3.0.4",
+        "styletron-react": "^3.0.4",
+        "styletron-server": "^3.0.4"
     },
     "devDependencies": {
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.0.1",
         "babel-loader": "^7.1.2",
-        "babel-plugin-emotion": "^8.0.12",
         "babel-plugin-provide-modules": "^1.0.3",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-env": "^1.6.1",
@@ -56,13 +55,11 @@
     "babel": {
         "plugins": [
             "babel-plugin-transform-object-rest-spread",
-            "babel-plugin-emotion",
             "react-hot-loader/babel",
             [
                 "babel-plugin-provide-modules",
                 {
-                    "react": "React",
-                    "react-emotion": ["css"]
+                    "react": "React"
                 }
             ]
         ],
@@ -113,9 +110,16 @@
             "prettier/flowtype",
             "prettier/react"
         ],
-        "plugins": ["flow-header", "flowtype", "react", "prettier"],
+        "plugins": [
+            "flow-header",
+            "flowtype",
+            "react",
+            "prettier"
+        ],
         "rules": {
-            "prettier/prettier": ["error"],
+            "prettier/prettier": [
+                "error"
+            ],
             "flow-header/flow-header": "error",
             "consistent-return": "off",
             "react/react-in-jsx-scope": "off",
@@ -123,7 +127,10 @@
             "react/jsx-filename-extension": [
                 1,
                 {
-                    "extensions": [".js", ".jsx"]
+                    "extensions": [
+                        ".js",
+                        ".jsx"
+                    ]
                 }
             ]
         },
@@ -131,5 +138,9 @@
             "browser": true
         }
     },
-    "eslintIgnore": ["!.eslint.js", "dist", "flow-typed"]
+    "eslintIgnore": [
+        "!.eslint.js",
+        "dist",
+        "flow-typed"
+    ]
 }

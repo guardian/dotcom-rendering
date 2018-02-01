@@ -51,12 +51,6 @@ module.exports = ({ dist }: { dist: string }) => ({
             }),
             new webpack.optimize.ModuleConcatenationPlugin(),
             new webpack.optimize.OccurrenceOrderPlugin(),
-            new webpack.optimize.UglifyJsPlugin({
-                sourceMap: true,
-                mangle: false,
-                beautify: true,
-                comments: true,
-            }),
         ],
     },
 });
