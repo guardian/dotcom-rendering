@@ -58,7 +58,7 @@ module.exports = (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
               dist: baseConfig.output.path,
               bundleName: baseConfig.output.filename,
           })
-        : require('./webpack.config.dev')({ stats: baseConfig.stats });
+        : require('./webpack.config.dev')();
 
     const config = webpackMerge.smart(baseConfig, envConfig);
 

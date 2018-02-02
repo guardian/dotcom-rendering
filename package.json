@@ -5,8 +5,7 @@
     "main": "dist/index.js",
     "scripts": {
         "build:server": "BABEL_ENV=rollup rollup -c",
-        "build:browser":
-            "BABEL_ENV=webpack webpack --env.prod && node ./util/report-bundle-size.js",
+        "build:browser": "BABEL_ENV=webpack webpack --env.prod && node ./util/report-bundle-size.js",
         "build": "rm -rf dist && yarn -s build:server && yarn -s build:browser",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -40,6 +39,7 @@
         "babel-preset-env": "^1.6.1",
         "babel-preset-flow": "^6.23.0",
         "babel-preset-react": "^6.24.1",
+        "concurrently": "^3.5.1",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.6.0",
@@ -51,6 +51,7 @@
         "eslint-plugin-react": "^7.4.0",
         "filesizegzip": "^2.0.0",
         "flow-bin": "^0.64.0",
+        "friendly-errors-webpack-plugin": "^1.6.1",
         "prettier": "^1.7.4",
         "rollup": "^0.55.3",
         "rollup-plugin-babel": "^3.0.3",
@@ -63,7 +64,9 @@
         "webpack-merge": "^4.1.1"
     },
     "babel": {
-        "plugins": ["babel-plugin-transform-object-rest-spread"],
+        "plugins": [
+            "babel-plugin-transform-object-rest-spread"
+        ],
         "presets": [
             "babel-preset-flow",
             [
@@ -98,9 +101,16 @@
             "prettier/flowtype",
             "prettier/react"
         ],
-        "plugins": ["flow-header", "flowtype", "react", "prettier"],
+        "plugins": [
+            "flow-header",
+            "flowtype",
+            "react",
+            "prettier"
+        ],
         "rules": {
-            "prettier/prettier": ["error"],
+            "prettier/prettier": [
+                "error"
+            ],
             "flow-header/flow-header": "error",
             "consistent-return": "off",
             "react/react-in-jsx-scope": "off",
@@ -108,7 +118,10 @@
             "react/jsx-filename-extension": [
                 1,
                 {
-                    "extensions": [".js", ".jsx"]
+                    "extensions": [
+                        ".js",
+                        ".jsx"
+                    ]
                 }
             ]
         },
@@ -116,5 +129,9 @@
             "browser": true
         }
     },
-    "eslintIgnore": ["!.eslint.js", "dist", "flow-typed"]
+    "eslintIgnore": [
+        "!.eslint.js",
+        "dist",
+        "flow-typed"
+    ]
 }
