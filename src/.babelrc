@@ -1,0 +1,21 @@
+{
+    "plugins": [
+        "babel-plugin-transform-object-rest-spread",
+        "react-hot-loader/babel",
+        [
+            "babel-plugin-provide-modules",
+            {
+                "react": "React"
+            }
+        ]
+    ],
+    "presets": [
+        "babel-preset-react",
+        [
+            "babel-preset-env",
+            {
+                "modules": false
+            }
+        ]
+    ]
+}

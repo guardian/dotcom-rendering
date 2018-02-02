@@ -6,7 +6,9 @@ import webpackMerge from 'webpack-merge';
 console.log(''); // just a spacer for console sweetness
 
 const baseConfig = {
+    entry: './src/app/index.browser.js',
     output: {
+        filename: 'app.browser.js',
         path: path.join(__dirname, 'dist'),
     },
     module: {
@@ -16,9 +18,6 @@ const baseConfig = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        forceEnv: 'production',
-                    },
                 },
             },
         ],
@@ -53,37 +52,15 @@ const baseConfig = {
     },
 };
 
-const browserConfig = {
-    entry: './index.browser.js',
-    output: {
-        filename: 'app.browser.js',
-    },
-    target: 'web',
-};
-
-const serverConfig = {
-    entry: './index.server.js',
-    output: {
-        filename: 'app.server.js',
-    },
-    target: 'node',
-};
-
 module.exports = (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
     const envConfig = env.prod
         ? require('./webpack.config.prod')({
               dist: baseConfig.output.path,
-              bundleName: browserConfig.output.filename,
+              bundleName: baseConfig.output.filename,
           })
         : require('./webpack.config.dev')({ stats: baseConfig.stats });
 
-    const config = webpackMerge.multiple(
-        {
-            browser: webpackMerge.smart(baseConfig, browserConfig),
-            server: webpackMerge.smart(baseConfig, serverConfig),
-        },
-        envConfig,
-    );
+    const config = webpackMerge.smart(baseConfig, envConfig);
 
     return config;
 };
