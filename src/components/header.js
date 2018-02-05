@@ -1,15 +1,19 @@
 import { styled } from 'styletron-react';
 import { hidden } from '../styles/mixins';
+import { from } from '../styles/functions';
 import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
 
 const Head = styled('header', {
     'margin-bottom': 0,
     'background-color': '#e9eff1',
     'position': 'relative',
+    [from('tablet')]: {
+        'display': 'block',
+    }
 });
 
 const Nav = styled('nav', {
-    'max-width': '46.25rem',
+    'max-width': '1300px',
     'position': 'relative',
     'margin': '0 auto',
     ':before': {
