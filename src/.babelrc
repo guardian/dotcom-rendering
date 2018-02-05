@@ -1,0 +1,22 @@
+{
+    "plugins": [
+        "babel-plugin-transform-object-rest-spread",
+        "react-hot-loader/babel",
+        [
+            "babel-plugin-provide-modules",
+            {
+                "react": "React"
+            }
+        ],
+        "inline-react-svg"
+    ],
+    "presets": [
+        "babel-preset-react",
+        [
+            "babel-preset-env",
+            {
+                "modules": false
+            }
+        ]
+    ]
+}

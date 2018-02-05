@@ -1,5 +1,5 @@
 // @flow
 import { hot } from 'react-hot-loader';
-import HelloWorld from '../components/hello-world';
+import Header from '../components/header';
 
-export default hot(module)(HelloWorld);
+export default hot(module)(Header);
