@@ -27,5 +27,8 @@ node_modules/
 # Yarn Integrity file
 .yarn-integrity
 
+# IDE files
+.vscode
+
 # built files
 dist
