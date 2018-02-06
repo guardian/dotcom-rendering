@@ -8,3 +8,15 @@ export const hidden = {
     'position': 'absolute !important',
     'width': '0.0625rem !important'
 };
+
+export const clearFix = {
+    ':before': {
+        'content': '""',
+        'display': 'table',
+    },
+    ':after': {
+        'content': '""',
+        'display': 'table',
+        'clear': 'both',
+    },
+};
