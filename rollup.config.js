@@ -20,6 +20,7 @@ export default {
     plugins: [
         babel({
             externalHelpers: true,
+            exclude: '**/*.css',
         }),
         commonjs({
             module: true,
