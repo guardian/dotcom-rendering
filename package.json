@@ -63,22 +63,6 @@
         "webpack-dev-server": "^2.11.1",
         "webpack-merge": "^4.1.1"
     },
-    "babel": {
-        "plugins": [
-            "babel-plugin-transform-object-rest-spread"
-        ],
-        "presets": [
-            "babel-preset-flow",
-            [
-                "babel-preset-env",
-                {
-                    "targets": {
-                        "node": "current"
-                    }
-                }
-            ]
-        ]
-    },
     "prettier": {
         "tabWidth": 4,
         "trailingComma": "all",
