@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/guardian/guui#readme",
     "dependencies": {
+        "normalize.css": "^7.0.0",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-hot-loader": "^4.0.0-beta.18",
@@ -57,6 +58,7 @@
         "rollup-plugin-babel": "^3.0.3",
         "rollup-plugin-commonjs": "^8.3.0",
         "rollup-plugin-node-resolve": "^3.0.2",
+        "rollup-plugin-string": "^2.0.2",
         "simple-progress-webpack-plugin": "^1.0.4",
         "webpack": "^3.8.1",
         "webpack-bundle-analyzer": "^2.9.2",
