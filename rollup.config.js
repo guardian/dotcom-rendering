@@ -2,6 +2,7 @@
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import string from 'rollup-plugin-string';
 
 export default {
     input: 'src/app/index.server.js',
@@ -27,5 +28,8 @@ export default {
             browser: false,
         }),
         resolve(),
+        string({
+			include: '**/*.css',
+		}),
     ],
 };
