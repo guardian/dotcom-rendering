@@ -1,41 +1,39 @@
 // @flow
-const { log } = require('util');
+/* eslint-disable global-require,import/no-dynamic-require */
 
-// @flow
+import { log } from 'util';
 
-const rollup = require('rollup');
-const rollupConfig = require('./rollup.config').default;
+import demo from './util/dev.server';
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
-module.exports = () => ({
-    devtool: 'cheap-module-eval-source-map',
+export default {
+    // devtool: 'cheap-module-eval-source-map',
+    entry: './util/dev.browser.js',
     devServer: {
         publicPath: '/assets/javascript/',
         port: 3000,
         overlay: true,
         quiet: true,
         before(app: any) {
-            app.get('/', async (req, res) => {
+            app.get('/src/*', async (req, res) => {
                 try {
                     // make sure each reload is a fresh rendering
                     Object.keys(require.cache).forEach(
                         key => delete require.cache[key],
                     );
-
-                    // re-bundle the server app
-                    const bundle = await rollup.rollup({ ...rollupConfig });
-                    const { code } = await bundle.generate({ ...rollupConfig });
-
-                    // in prod this would be a require statement,
-                    // so it's ok really 😌
-                    // eslint-disable-next-line no-eval
-                    res.send(eval(code)());
+                    res.send(demo(req.params[0]));
                 } catch (e) {
                     log(e);
                 }
             });
         },
     },
-    plugins: [new FriendlyErrorsWebpackPlugin()],
-});
+    plugins: [
+        new FriendlyErrorsWebpackPlugin({
+            compilationSuccessInfo: {
+                messages: ['Running in DEV mode at http://localhost:3000'],
+            },
+        }),
+    ],
+};

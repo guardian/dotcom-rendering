@@ -6,7 +6,7 @@ import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import Progress from 'simple-progress-webpack-plugin';
 
-module.exports = ({
+export default ({
     dist,
     bundleName,
 }: {
