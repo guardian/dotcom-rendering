@@ -4,14 +4,14 @@
     "description": "Frontend rendering framework",
     "main": "dist/index.js",
     "scripts": {
-        "build:server": "BABEL_ENV=rollup rollup -c",
-        "build:browser": "BABEL_ENV=webpack webpack --env.prod && node ./util/report-bundle-size.js",
+        "build:server": "BABEL_ENV=es rollup -c",
+        "build:browser": "BABEL_ENV=cjs webpack --config .webpack/webpack.config.babel.js --env.prod && node ./util/report-bundle-size.js",
         "build": "rm -rf dist && yarn -s build:server && yarn -s build:browser",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .js,.jsx",
         "fix": "eslint . --ext .js,.jsx --fix",
-        "start": "webpack-dev-server --hot --env.dev"
+        "dev": "BABEL_ENV=cjs webpack-dev-server --hot --env.dev"
     },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
