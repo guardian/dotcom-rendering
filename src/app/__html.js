@@ -9,7 +9,7 @@ export default ({
     <!doctype html>
     <html>
         <head>
-            <title>My Universal App</title>
+            <title>The Guardian</title>
             ${stylesForHead}
             <script src="/assets/javascript/app.browser.js" async></script>
         </head>
