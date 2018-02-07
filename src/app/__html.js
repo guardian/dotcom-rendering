@@ -1,4 +1,6 @@
 // @flow
+import normalize from 'normalize.css';
+
 export default ({
     stylesForHead,
     html,
@@ -10,6 +12,9 @@ export default ({
     <html>
         <head>
             <title>The Guardian</title>
+            <style>
+                ${normalize}
+            </style>
             ${stylesForHead}
             <script src="/assets/javascript/app.browser.js" async></script>
         </head>
