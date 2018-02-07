@@ -104,9 +104,7 @@ export default class extends React.Component<
                     </Monospace>
                 </Header>
 
-                <FrameSize data-breakpoint={this.state.breakpoint}>
-                    {this.state.breakpoint}
-                </FrameSize>
+                <FrameSize data-breakpoint={this.state.breakpoint} />
 
                 <Frame
                     src={`http://localhost:3000/component/${this.props.path}`}
