@@ -1,6 +1,10 @@
 {
     "plugins": [
         "babel-plugin-transform-object-rest-spread",
+        "babel-plugin-syntax-dynamic-import",
+        ["react-hot-loader/babel", {
+            "ignore": "node_modules"
+        }],
         [
             "babel-plugin-transform-runtime",
             {

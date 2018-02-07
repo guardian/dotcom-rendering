@@ -1,8 +1,6 @@
 {
     "extends": "../.babelrc",
     "plugins": [
-        "react-hot-loader/babel",
-        "babel-plugin-syntax-dynamic-import",
         [
             "babel-plugin-provide-modules",
             {

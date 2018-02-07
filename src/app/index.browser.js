@@ -4,7 +4,7 @@ import { hydrate } from 'react-dom';
 import Styletron from 'styletron-client';
 import { StyletronProvider } from 'styletron-react';
 
-import App from '.';
+import App from './App';
 
 __webpack_public_path__ = '/assets/javascript/';
 

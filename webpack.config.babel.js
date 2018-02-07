@@ -12,6 +12,7 @@ export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
             filename: 'app.browser.js',
             path: path.join(__dirname, 'dist'),
         },
+        stats: 'errors-only',
         module: {
             rules: [
                 {
@@ -26,34 +27,6 @@ export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
                 },
             ],
         },
-        stats: {
-            assets: false,
-            cached: false,
-            cachedAssets: false,
-            children: false,
-            chunks: false,
-            chunkModules: false,
-            chunkOrigins: false,
-            depth: false,
-            entrypoints: false,
-            exclude: [],
-            hash: false,
-            modules: false,
-            moduleTrace: false,
-            performance: false,
-            providedExports: false,
-            publicPath: false,
-            reasons: false,
-            source: false,
-            timings: false,
-            version: false,
-
-            // show these...
-            colors: true,
-            errors: true,
-            errorDetails: true,
-            warnings: true,
-        },
     };
 
     const envConfig = env.prod
@@ -61,7 +34,7 @@ export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
               dist: baseConfig.output.path,
               bundleName: baseConfig.output.filename,
           })
-        : require('./webpack.config.dev');
+        : require('./webpack.config.dev').default;
 
     const config = webpackMerge.smart(baseConfig, envConfig);
 

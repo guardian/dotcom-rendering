@@ -2,14 +2,14 @@
 /* eslint-disable global-require,import/no-dynamic-require */
 
 import { log } from 'util';
+import webpack from 'webpack';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 
-import demo from './util/dev.server';
-
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+import demo from './util/demo/index.server';
 
 export default {
-    // devtool: 'cheap-module-eval-source-map',
-    entry: './util/dev.browser.js',
+    devtool: 'cheap-module-eval-source-map',
+    entry: './util/demo/index.browser.js',
     devServer: {
         publicPath: '/assets/javascript/',
         port: 3000,
@@ -18,10 +18,6 @@ export default {
         before(app: any) {
             app.get('/src/*', async (req, res) => {
                 try {
-                    // make sure each reload is a fresh rendering
-                    Object.keys(require.cache).forEach(
-                        key => delete require.cache[key],
-                    );
                     res.send(demo(req.params[0]));
                 } catch (e) {
                     log(e);
@@ -35,5 +31,6 @@ export default {
                 messages: ['Running in DEV mode at http://localhost:3000'],
             },
         }),
+        new webpack.NamedModulesPlugin(),
     ],
 };
