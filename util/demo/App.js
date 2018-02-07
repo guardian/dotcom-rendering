@@ -93,6 +93,7 @@ export default class extends React.Component<
         return (
             <div>
                 <Header>
+                    rendering demo for{' '}
                     <Monospace>
                         <a
                             href={`https://github.com/guardian/guui/blob/master/src/${
