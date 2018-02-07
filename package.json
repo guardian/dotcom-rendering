@@ -42,6 +42,7 @@
         "babel-preset-env": "^1.6.1",
         "babel-preset-flow": "^6.23.0",
         "babel-preset-react": "^6.24.1",
+        "chalk": "^2.3.0",
         "concurrently": "^3.5.1",
         "decamelize": "^2.0.0",
         "eslint": "^4.9.0",

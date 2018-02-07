@@ -22,7 +22,7 @@ export default (componentPath: string): string => {
     try {
         demos = require(`${srcDir}/${componentPath}.demo`);
     } catch (e) {
-        // do thing, it's handled in the UI
+        // do nothing, it's handled in the UI
     }
 
     const html = renderToString(

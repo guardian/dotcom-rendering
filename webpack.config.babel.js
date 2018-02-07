@@ -7,9 +7,11 @@ console.log(''); // just a spacer for console sweetness
 
 export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
     const baseConfig = {
-        entry: './src/app/index.browser.js',
+        entry: {
+            app: './src/app/index.browser.js',
+        },
         output: {
-            filename: 'app.browser.js',
+            filename: '[name].browser.js',
             path: path.join(__dirname, 'dist'),
         },
         stats: 'errors-only',
@@ -32,7 +34,7 @@ export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
     const envConfig = env.prod
         ? require('./webpack.config.prod').default({
               dist: baseConfig.output.path,
-              bundleName: baseConfig.output.filename,
+              bundleName: 'app.browser.js',
           })
         : require('./webpack.config.dev').default;
 
