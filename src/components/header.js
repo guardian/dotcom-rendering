@@ -3,7 +3,10 @@ import {
     hidden,
     clearFix,
 } from '../styles/mixins';
-import { from } from '../styles/functions';
+import { 
+    from,
+    until
+} from '../styles/functions';
 import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
 
 // .new-header.pillar-scheme--News
@@ -53,68 +56,117 @@ const HomeLink = styled('a', {
         'position': 'relative',
         'z-index': 1071,
     },
-});
+});;
 
+// .u-h
 const ScreenReadable = styled('span', {
     ...hidden
 });
 
+// .inline-the-guardian-logo.inline-logo 
 const Logo = styled(TheGuardianLogoSVG, {
     'height': '95px',
     'width': '295px',
 });
 
+// .new-header__top-bar.hide-until-mobile
 const TopBar = styled('div', {
     'left': 0,
     'position': 'absolute',
     'top': 0,
 });
 
-const topBarItem = {
-    'font-size': '14px',
-    'font-family': '"Guardian Text Sans Web","Helvetica Neue","Helvetica","Arial","Lucida Grande","sans-serif"',
-    'color': '#121212',
-    'float': 'left',
-    'line-height': 1.2,
-    'position': 'relative',
-    'transition': 'color 80ms ease-out',
-    'padding': '6px 10px',
-    'margin': '10px 0 0',
+const topBarItem = (props) => {
+    const focusHoverStyles = {
+        'color': '#e9eff1'
+    };
+
+    let styles = {
+        'font-size': '14px',
+        'font-family': '"Guardian Text Sans Web","Helvetica Neue","Helvetica","Arial","Lucida Grande","sans-serif"',
+        'color': '#121212',
+        'float': 'left',
+        'line-height': 1.2,
+        'position': 'relative',
+        'transition': 'color 80ms ease-out',
+        'padding': '6px 10px',
+        'margin': '1px 0 0',
+        ':nth-child(2)': {
+            'padding-left': '20px / 2 + 20px / 4'
+        },
+        ':hover': focusHoverStyles,
+        ':focus': focusHoverStyles,
+        [from('tablet')]: {
+            'font-size': '14px',
+        },
+    };
+
+    if (props.isPayingMember || props.isRecentContributor) {
+        Object.assign(styles[':nth-child(2)'], {
+            'padding-left': 0,
+            'margin-left': '20px'
+        });
+    }
+
+    return styles;
 };
 
-const BecomeAMemberLink = styled('a', Object.assign(topBarItem, {
-    'color': '#e9eff1',
-    'font-family': '"Guardian Egyptian Web", "Guardian Text Egyptian Web", "Georgia", "serif"',
-    'font-weight': 800,
-    'padding': 0,
-    'margin': 0,
-}));
+// top-bar__item.top-bar__item--cta.js-change-become-member-link.js-acquisition-link
+const BecomeAMemberLink = styled('a', (props) => {
+    const focusHoverStyles = {
+        'color': '#e9eff1',
+        'text-decoration': 'none',
+    };
+
+    let styles = Object.assign({}, topBarItem(props), {
+        'color': '#e9eff1',
+        'font-family': '"Guardian Egyptian Web", "Guardian Text Egyptian Web", "Georgia", "serif"',
+        'font-weight': 800,
+        'padding': 0,
+        'margin': 0,
+        [until('mobileLandscape')]: {
+            'margin-left': '-10px',
+        },
+        ':focus': focusHoverStyles,
+        ':hover': focusHoverStyles,
+    });
+
+    if (props.isPayingMember || props.isRecentContributor) {
+        styles['display'] = 'none';
+    }
+
+    return styles;
+});
 
 const TopBarCTACircle = styled('span', {
-    // bottom: -$gs-baseline;
-    // left: 0;
-    // overflow: hidden;
-    // position: absolute;
-    // right: 0;
-    // top: 0;
-    // transition: transform 250ms ease-out;
-    // transform-origin: top center;
-
-    // &:before {
-    //     background: $nav-primary-colour;
-    //     border-radius: 50%;
-    //     bottom: 0;
-    //     content: '';
-    //     display: block;
-    //     left: 0;
-    //     padding-top: 100%;
-    //     position: absolute;
-    //     right: 0;
-    //     transition: background-color 250ms ease-out;
-    // }
+    'bottom': '-12px',
+    'left': 0,
+    'overflow': 'hidden',
+    'position': 'absolute',
+    'right': 0,
+    'top': 0,
+    'transition': 'transform 250ms ease-out',
+    'transform-origin': 'top center',
+    ':before': {
+        'background-color': '#121212',
+        'border-radius': '50%',
+        'bottom': 0,
+        'content': '""',
+        'display': 'block',
+        'left': 0,
+        'padding-top': '100%',
+        'position': 'absolute',
+        'right': 0,
+        'transition': 'background-color 250ms ease-out',
+    },
 });
 
 const TopBarCTAText = styled('span', { 
+    'box-sizing': 'border-box',
+    'display': 'block',
+    'padding': '6px 20px 3px',
+    'position': 'relative',
+    'text-align': 'center',
 });
 
 export default () => (
@@ -129,7 +181,9 @@ export default () => (
             <TopBar>
                 <BecomeAMemberLink>
                     <TopBarCTACircle />
-                    <TopBarCTAText />
+                    <TopBarCTAText>
+                    Support The <br/>Guardian
+                    </TopBarCTAText>
                 </BecomeAMemberLink>
             </TopBar>
         </Nav>
