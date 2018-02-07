@@ -81,7 +81,7 @@ export default class extends React.Component<
             const bp = Object.keys(breakpoints).reduce(
                 (prev, key) =>
                     breakpoints[key] > breakpoints[prev] &&
-                    breakpoints[key] < data.ComponentWindowWidth
+                    breakpoints[key] <= data.ComponentWindowWidth
                         ? key
                         : prev,
             );

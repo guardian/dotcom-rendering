@@ -3,7 +3,7 @@
 import { styled } from 'styletron-react';
 
 const pillarColours = {
-    news: 'green',
+    news: 'pink',
     alex: 'hotpink',
 };
 
