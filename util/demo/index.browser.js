@@ -17,11 +17,20 @@ if (module.hot) {
     module.hot.accept();
 }
 
-import(`../../src/${pathName}.demo.js`).then(demos => {
-    hydrate(
-        <StyletronProvider styletron={new Styletron(styleElements)}>
-            <App demos={{ ...demos }} path={pathName} />
-        </StyletronProvider>,
-        document.getElementById('app'),
+import(`../../src/${pathName}.demo.js`)
+    .then(demos => {
+        hydrate(
+            <StyletronProvider styletron={new Styletron(styleElements)}>
+                <App demos={{ ...demos }} path={pathName} />
+            </StyletronProvider>,
+            document.getElementById('app'),
+        );
+    })
+    .catch(() =>
+        hydrate(
+            <StyletronProvider styletron={new Styletron(styleElements)}>
+                <App demos={{}} path={pathName} />
+            </StyletronProvider>,
+            document.getElementById('app'),
+        ),
     );
-});

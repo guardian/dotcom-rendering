@@ -14,7 +14,7 @@ export default (componentPath: string): string => {
 
     // laoding it this way stops node caching it, so we
     // can pick up changes
-    const App = require('./App');
+    const App = require('./App').default;
     const styletron = new Styletron();
 
     let demos = {};
@@ -39,6 +39,7 @@ export default (componentPath: string): string => {
             <head>
                 <title>✍️ ɢᴜᴜɪ</title>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+                <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
                 <link rel="stylesheet" href="https://pasteup.guim.co.uk/0.0.8/css/fonts.pasteup.min.css">
                 <style>
                 body {

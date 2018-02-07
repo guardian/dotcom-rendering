@@ -3,19 +3,25 @@ import React from 'react';
 import { styled } from 'styletron-react';
 import decamelize from 'decamelize'; // eslint-disable-line import/no-extraneous-dependencies
 
-const Path = styled('div', {
+const Monospace = styled('span', {
+    fontFamily: 'Inconsolata',
+});
+
+const Header = styled('div', {
     fontFamily: 'Guardian Agate Sans',
-    fontSize: '16px',
-    // paddingBottom: '1rem',
+    fontSize: '13px',
+    paddingBottom: '2rem',
 });
 
 const Message = styled('div', {
+    fontFamily: 'Guardian Agate Sans',
     backgroundColor: 'yellow',
     display: 'inline-block',
+    fontSize: '13px',
 });
 
 const Component = styled('div', {
-    paddingTop: '2rem',
+    paddingBottom: '2rem',
 });
 
 const Title = styled('div', {
@@ -37,7 +43,15 @@ export default ({
     path: string,
 }) => (
     <div>
-        <Path>{path}</Path>
+        <Header>
+            <Monospace>
+                <a
+                    href={`https://github.com/guardian/guui/blob/master/src/${path}.js`}
+                >
+                    /src/{path}.js
+                </a>
+            </Monospace>
+        </Header>
         {Object.keys(demos).length ? (
             Object.keys(demos).map(demo => {
                 const Demo = demos[demo];
@@ -51,7 +65,11 @@ export default ({
                 );
             })
         ) : (
-            <Message>There is no demo for {path}.</Message>
+            <div>
+                <Message>
+                    Cannot find a demo for <Monospace>{path}</Monospace>
+                </Message>
+            </div>
         )}
     </div>
 );
