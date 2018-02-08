@@ -62,9 +62,9 @@ const breakpoints = {
 
 export default class extends React.Component<
     { path: string },
-    { breakpoint: ?string },
+    { breakpoint: string },
 > {
-    constructor(props) {
+    constructor(props: { path: string }) {
         super(props);
         this.state = {
             breakpoint: '?',
@@ -76,7 +76,7 @@ export default class extends React.Component<
         window.addEventListener('message', this.handleMessage, false);
     }
 
-    handleMessage({ data }: { data: { ComponentWindowWidth?: number } }) {
+    handleMessage({ data }: { data: { ComponentWindowWidth?: number } }): void {
         if (data.ComponentWindowWidth) {
             const bp = Object.keys(breakpoints).reduce(
                 (prev, key) =>

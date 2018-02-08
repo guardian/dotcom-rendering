@@ -33,7 +33,7 @@ export default ({
     demos,
     path,
 }: {
-    demos: { [string]: React.Node },
+    demos: { [string]: Component },
     path: string,
 }) => (
     <ul>
