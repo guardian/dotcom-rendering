@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import { renderToString } from 'react-dom/server';
 import Styletron from 'styletron-server';
 import { StyletronProvider } from 'styletron-react';

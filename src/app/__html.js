@@ -1,25 +1,28 @@
 // @flow
-import normalize from 'normalize.css';
+
+import resetCSS from './__reset-css';
 
 export default ({
-    stylesForHead,
-    html,
+    title = 'The Guardian',
+    stylesForHead = '',
+    html = '',
+    jsApp = '/assets/javascript/app.browser.js',
 }: {
+    title?: string,
     stylesForHead: string,
     html: string,
+    jsApp?: string,
 }) => `
     <!doctype html>
     <html>
         <head>
-            <title>The Guardian</title>
-            <style>
-                ${normalize}
-            </style>
+            <title>${title}</title>
+            <style>${resetCSS}</style>
             ${stylesForHead}
-            <script src="/assets/javascript/app.browser.js" async></script>
         </head>
         <body>
             <div id='app'>${html}</div>
+            <script src="${jsApp}"></script>
         </body>
     </html>
 `;

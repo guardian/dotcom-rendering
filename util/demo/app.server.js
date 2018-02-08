@@ -7,6 +7,8 @@ import { renderToString } from 'react-dom/server';
 import Styletron from 'styletron-server';
 import { StyletronProvider } from 'styletron-react';
 
+import doc from '../../src/app/__html';
+
 const srcDir = path.resolve(__dirname, '..', '..', 'src');
 
 export default (componentPath: string): string => {
@@ -31,28 +33,12 @@ export default (componentPath: string): string => {
         </StyletronProvider>,
     );
 
-    const stylesForHead = styletron.getStylesheetsHtml();
+    const stylesForHead = [
+        `<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">`,
+        `<link rel="stylesheet" href="https://pasteup.guim.co.uk/0.0.8/css/fonts.pasteup.min.css">`,
+        `<style>body { padding: 2rem; background-color: #efefef }</style>`,
+        styletron.getStylesheetsHtml(),
+    ].join('');
 
-    return `
-        <!doctype html>
-        <html>
-            <head>
-                <title>✍️ ɢᴜᴜɪ</title>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
-                <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-                <link rel="stylesheet" href="https://pasteup.guim.co.uk/0.0.8/css/fonts.pasteup.min.css">
-                <style>
-                body {
-                    padding: 2rem;
-                    background-color: #efefef;
-                }
-                </style>
-                ${stylesForHead}
-            </head>
-            <body>
-                <div id='app'>${html}</div>
-                <script src="/assets/javascript/app.browser.js"></script>
-            </body>
-        </html>
-    `;
+    return doc({ title: '✍️ ɢᴜᴜɪ', stylesForHead, html });
 };

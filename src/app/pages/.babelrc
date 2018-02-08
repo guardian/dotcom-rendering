@@ -1,5 +1,5 @@
 {
-    "extends": "../.babelrc",
+    "extends": "../../../.babelrc",
     "plugins": [
         [
             "babel-plugin-provide-modules",
