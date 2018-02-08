@@ -1,0 +1,41 @@
+{
+    "plugins": [
+        "babel-plugin-transform-object-rest-spread",
+        "babel-plugin-syntax-dynamic-import",
+        ["react-hot-loader/babel", {
+            "ignore": "node_modules"
+        }],
+        [
+            "babel-plugin-transform-runtime",
+            {
+                "polyfill": false
+            }
+        ]
+    ],
+    "env": {
+        "es": {
+            "presets": [
+                "babel-preset-react",
+                [
+                    "babel-preset-env",
+                    {
+                        "modules": false
+                    }
+                ]
+            ]
+        },
+        "cjs": {
+            "presets": [
+                "babel-preset-react",
+                [
+                    "babel-preset-env",
+                    {
+                        "targets": {
+                            "node": "current"
+                        }
+                    }
+                ]
+            ]
+        }
+    }
+}

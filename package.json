@@ -4,14 +4,14 @@
     "description": "Frontend rendering framework",
     "main": "dist/index.js",
     "scripts": {
-        "build:server": "BABEL_ENV=rollup rollup -c",
-        "build:browser": "BABEL_ENV=webpack webpack --env.prod && node ./util/report-bundle-size.js",
+        "build:server": "BABEL_ENV=es rollup -c",
+        "build:browser": "BABEL_ENV=cjs webpack --env.prod && node ./util/report-bundle-size.js",
         "build": "rm -rf dist && yarn -s build:server && yarn -s build:browser",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .js,.jsx",
         "fix": "eslint . --ext .js,.jsx --fix",
-        "start": "webpack-dev-server --hot --env.dev"
+        "dev": "BABEL_ENV=cjs webpack-dev-server --hot --env.dev"
     },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
@@ -36,11 +36,15 @@
         "babel-loader": "^7.1.2",
         "babel-plugin-external-helpers": "^6.22.0",
         "babel-plugin-provide-modules": "^1.0.3",
+        "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
         "babel-preset-env": "^1.6.1",
         "babel-preset-flow": "^6.23.0",
         "babel-preset-react": "^6.24.1",
+        "chalk": "^2.3.0",
         "concurrently": "^3.5.1",
+        "decamelize": "^2.0.0",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.6.0",
@@ -64,22 +68,6 @@
         "webpack-bundle-analyzer": "^2.9.2",
         "webpack-dev-server": "^2.11.1",
         "webpack-merge": "^4.1.1"
-    },
-    "babel": {
-        "plugins": [
-            "babel-plugin-transform-object-rest-spread"
-        ],
-        "presets": [
-            "babel-preset-flow",
-            [
-                "babel-preset-env",
-                {
-                    "targets": {
-                        "node": "current"
-                    }
-                }
-            ]
-        ]
     },
     "prettier": {
         "tabWidth": 4,

@@ -11,7 +11,7 @@ export default ({
     <!doctype html>
     <html>
         <head>
-            <title>My Universal App</title>
+            <title>The Guardian</title>
             <style>
                 ${normalize}
             </style>

@@ -4,7 +4,7 @@ import Styletron from 'styletron-server';
 import { StyletronProvider } from 'styletron-react';
 
 import doc from './__html';
-import App from '.';
+import App from './App';
 
 export default (): string => {
     const styletron = new Styletron();

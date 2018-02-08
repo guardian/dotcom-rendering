@@ -1,41 +1,57 @@
 // @flow
-const { log } = require('util');
+/* eslint-disable global-require,import/no-dynamic-require */
 
-// @flow
+import { log } from 'util';
+import webpack from 'webpack';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import chalk from 'chalk';
 
-const rollup = require('rollup');
-const rollupConfig = require('./rollup.config').default;
+import demo from './util/demo/app.server';
+import component from './util/demo/component.server';
 
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-
-module.exports = () => ({
+export default {
     devtool: 'cheap-module-eval-source-map',
+    entry: {
+        app: './util/demo/app.browser.js',
+        component: './util/demo/component.browser.js',
+    },
     devServer: {
         publicPath: '/assets/javascript/',
         port: 3000,
         overlay: true,
         quiet: true,
         before(app: any) {
-            app.get('/', async (req, res) => {
+            app.get('/src/*', async (req, res) => {
                 try {
-                    // make sure each reload is a fresh rendering
-                    Object.keys(require.cache).forEach(
-                        key => delete require.cache[key],
-                    );
-
-                    // re-bundle the server app
-                    const bundle = await rollup.rollup({ ...rollupConfig });
-                    const { code } = await bundle.generate({ ...rollupConfig });
-
-                    // in prod this would be a require statement,
-                    // so it's ok really 😌
-                    // eslint-disable-next-line no-eval
-                    res.send(eval(code)());
+                    res.send(demo(req.params[0]));
+                } catch (e) {
+                    log(e);
+                }
+            });
+            app.get('/component/*', async (req, res) => {
+                try {
+                    res.send(component(req.params[0]));
                 } catch (e) {
                     log(e);
                 }
             });
         },
     },
-    plugins: [new FriendlyErrorsWebpackPlugin()],
-});
+    plugins: [
+        new FriendlyErrorsWebpackPlugin({
+            compilationSuccessInfo: {
+                messages: [
+                    `DEV server running at ${chalk.blue.underline(
+                        'http://localhost:3000',
+                    )}`,
+                ],
+                notes: [
+                    chalk.dim(
+                        'http://localhost:3000/src/components/{MyComponentPath}',
+                    ),
+                ],
+            },
+        }),
+        new webpack.NamedModulesPlugin(),
+    ],
+};

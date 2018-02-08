@@ -9,6 +9,6 @@ const BlueHighlight = styled(Highlight, {
 
 export default () => (
     <p>
-        Hello <BlueHighlight>world</BlueHighlight>
+        Hello <BlueHighlight>worldss</BlueHighlight>
     </p>
 );
