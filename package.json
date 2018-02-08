@@ -35,11 +35,8 @@
         "babel-eslint": "^8.0.1",
         "babel-loader": "^7.1.2",
         "babel-plugin-external-helpers": "^6.22.0",
-<<<<<<< HEAD
         "babel-plugin-preval": "^1.6.3",
-=======
         "babel-plugin-inline-react-svg": "^0.2.0",
->>>>>>> add header component to guui
         "babel-plugin-provide-modules": "^1.0.3",
         "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
