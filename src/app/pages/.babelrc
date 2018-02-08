@@ -1,0 +1,11 @@
+{
+    "extends": "../../../.babelrc",
+    "plugins": [
+        [
+            "babel-plugin-provide-modules",
+            {
+                "react": "React"
+            }
+        ]
+    ]
+}
