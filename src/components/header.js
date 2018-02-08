@@ -92,7 +92,7 @@ const topBarItem = (props) => {
         'padding': '6px 10px',
         'margin': '1px 0 0',
         ':nth-child(2)': {
-            'padding-left': '20px / 2 + 20px / 4'
+            'padding-left': '13px'
         },
         ':hover': focusHoverStyles,
         ':focus': focusHoverStyles,
@@ -101,12 +101,12 @@ const topBarItem = (props) => {
         },
     };
 
-    if (props.isPayingMember || props.isRecentContributor) {
-        Object.assign(styles[':nth-child(2)'], {
-            'padding-left': 0,
-            'margin-left': '20px'
-        });
-    }
+    // if (props.isPayingMember || props.isRecentContributor) {
+    //     Object.assign(styles[':nth-child(2)'], {
+    //         'padding-left': 0,
+    //         'margin-left': '20px'
+    //     });
+    // }
 
     return styles;
 };
@@ -131,13 +131,14 @@ const BecomeAMemberLink = styled('a', (props) => {
         ':hover': focusHoverStyles,
     });
 
-    if (props.isPayingMember || props.isRecentContributor) {
-        styles['display'] = 'none';
-    }
+    // if (props.isPayingMember || props.isRecentContributor) {
+    //     styles['display'] = 'none';
+    // }
 
     return styles;
 });
 
+// .top-bar__item--cta--circle
 const TopBarCTACircle = styled('span', {
     'bottom': '-12px',
     'left': 0,
@@ -161,6 +162,7 @@ const TopBarCTACircle = styled('span', {
     },
 });
 
+// .top-bar__item--cta--text
 const TopBarCTAText = styled('span', { 
     'box-sizing': 'border-box',
     'display': 'block',
@@ -169,23 +171,99 @@ const TopBarCTAText = styled('span', {
     'text-align': 'center',
 });
 
-export default () => (
-    <Head>
-        <Nav>
-            <HomeLink href="/">
-                <ScreenReadable>
-                    The Guardian - Back to home
-                </ScreenReadable>
-                <Logo />
-            </HomeLink>
-            <TopBar>
-                <BecomeAMemberLink>
-                    <TopBarCTACircle />
-                    <TopBarCTAText>
-                    Support The <br/>Guardian
-                    </TopBarCTAText>
-                </BecomeAMemberLink>
-            </TopBar>
-        </Nav>
-    </Head>
-);
+// .pillars
+const PillarList = styled('ul', (props) => {
+    let styles ={
+        'clear': 'right',
+        'margin': 0,
+        'padding': '0 10px',
+        'list-style': 'none',
+        'list-style-image': 'none',
+        [from('mobileLandscape')]: {
+            'padding-left': '20px'
+        },
+    }
+
+    // if (props.isHeaderOpen) {
+    //     Object.assign({}, styles, {
+    //         [from('desktop')]: {
+    //             'z-index': 1070;
+    //         },
+    //     });
+    // }
+
+    // if (props.isHeaderSlim) {
+    //     Object.assign({}, styles, {
+    //         [from('tablet')]: {
+    //             'display': 'none'
+    //         },
+    //     });
+    // }
+
+    return styles;
+});
+
+const PillarListItem = styled('li', (props) => {
+    const styles = {
+        'display': 'block',
+        'float': 'left',
+        [from('desktop')]: {
+            'width': '118px'
+        },
+    };
+
+    // &:first-child .pillar-link {
+    //     padding-left: 0;
+
+    //     &:before {
+    //         content: none;
+    //     }
+    // }
+});
+
+export default () => {
+    const pillars = [{
+        label: 'News',
+        path: 'http://m.thegulocal.com/uk'
+    }, {
+        label: 'Opinion',
+        path: 'http://m.thegulocal.com/uk/commentisfree'
+    }, {
+        label: 'Sport',
+        path: 'http://m.thegulocal.com/uk/sport'
+    }, {
+        label: 'Culture',
+        path: 'http://m.thegulocal.com/uk/culture'
+    }, {
+        label: 'Lifestyle',
+        path: 'http://m.thegulocal.com/uk/lifeandstyle'
+    }];
+
+    return (
+        <Head>
+            <Nav>
+                <HomeLink href="/">
+                    <ScreenReadable uh>
+                        The Guardian - Back to home
+                    </ScreenReadable>
+                    <Logo />
+                </HomeLink>
+                <TopBar>
+                    <BecomeAMemberLink>
+                        <TopBarCTACircle />
+                        <TopBarCTAText>
+                            Support The <br/>Guardian
+                        </TopBarCTAText>
+                    </BecomeAMemberLink>
+                </TopBar>
+                <PillarList>
+                    {pillars.map(pillar => (
+                        <PillarListItem>
+                            {pillar.label}
+                        </PillarListItem>
+                    ))}
+                </PillarList>
+            </Nav>
+        </Head>
+    );
+};
