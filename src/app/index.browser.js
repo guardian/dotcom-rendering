@@ -1,5 +1,5 @@
 // @flow
-
+import React from 'react';
 import { hydrate } from 'react-dom';
 import Styletron from 'styletron-client';
 import { StyletronProvider } from 'styletron-react';

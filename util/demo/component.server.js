@@ -7,35 +7,7 @@ import { renderToString } from 'react-dom/server';
 import Styletron from 'styletron-server';
 import { StyletronProvider } from 'styletron-react';
 
-const doc = ({
-    stylesForHead,
-    html,
-}: {
-    stylesForHead: string,
-    html: string,
-}) => `
-    <!doctype html>
-    <html>
-        <head>
-            <title>The Guardian</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
-            <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-            <link rel="stylesheet" href="https://pasteup.guim.co.uk/0.0.8/css/fonts.pasteup.min.css">
-            ${stylesForHead}
-        </head>
-        <body>
-            <div id='app'>${html}</div>
-            <script src="/assets/javascript/component.browser.js"></script>
-            <script>
-            const sendWidth = () => {
-                window.parent.postMessage({ComponentWindowWidth: window.innerWidth}, "*");
-            };
-            sendWidth();
-            window.addEventListener("resize", sendWidth);
-            </script>
-        </body>
-    </html>
-`;
+import doc from '../../src/app/__html';
 
 const srcDir = path.resolve(__dirname, '..', '..', 'src');
 
@@ -55,13 +27,30 @@ export default (componentPath: string): string => {
         // do thing, it's handled in the UI
     }
 
-    const html = renderToString(
-        <StyletronProvider styletron={styletron}>
-            <Component demos={{ ...demos }} path={componentPath} />
-        </StyletronProvider>,
-    );
+    const html = `
+        ${renderToString(
+            <StyletronProvider styletron={styletron}>
+                <Component demos={{ ...demos }} path={componentPath} />
+            </StyletronProvider>,
+        )}
+        <script>
+            const sendWidth = () => {
+                window.parent.postMessage({ComponentWindowWidth: window.innerWidth}, "*");
+            };
+            sendWidth();
+            window.addEventListener("resize", sendWidth);
+        </script>
+    `;
 
-    const stylesForHead = styletron.getStylesheetsHtml();
+    const stylesForHead = [
+        `<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">`,
+        `<link rel="stylesheet" href="https://pasteup.guim.co.uk/0.0.8/css/fonts.pasteup.min.css">`,
+        styletron.getStylesheetsHtml(),
+    ].join('');
 
-    return doc({ html, stylesForHead });
+    return doc({
+        html,
+        stylesForHead,
+        jsApp: '/assets/javascript/component.browser.js',
+    });
 };
