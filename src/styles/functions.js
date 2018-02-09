@@ -1,3 +1,4 @@
+// @flow
 const breakpoints = {
     mobile: 320,
     mobileMedium: 360,
@@ -12,13 +13,17 @@ const breakpoints = {
 const getSizeFromBreakpoint = breakpoint => {
     if (breakpoints[breakpoint]) {
         return breakpoints[breakpoint];
-    } else {
-        return '0';
     }
+    return '0';
 };
-const getMinWidth = breakpoint => `(min-width: ${getSizeFromBreakpoint(breakpoint) + "px"})`;
-const getMaxWidth = breakpoint => `(max-width: ${getSizeFromBreakpoint(breakpoint) - 1 + "px"})`;
+const getMinWidth = breakpoint =>
+    `(min-width: ${`${getSizeFromBreakpoint(breakpoint)}px`})`;
+const getMaxWidth = breakpoint =>
+    `(max-width: ${`${getSizeFromBreakpoint(breakpoint) - 1}px`})`;
 
 export const from = breakpoint => `@media ${getMinWidth(breakpoint)}`;
 export const until = breakpoint => `@media ${getMaxWidth(breakpoint)}`;
-export const between = (lowerBreakpoint, upperBreakpoint) => `@media ${getMinWidth(lowerBreakpoint)} and ${getMaxWidth(upperBreakpoint)}`;
+export const between = (lowerBreakpoint, upperBreakpoint) =>
+    `@media ${getMinWidth(lowerBreakpoint)} and ${getMaxWidth(
+        upperBreakpoint,
+    )}`;

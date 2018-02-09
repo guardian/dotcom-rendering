@@ -1,21 +1,16 @@
+// @flow
 import { styled } from 'styletron-react';
-import {
-    hidden,
-    clearFix,
-} from '../styles/mixins';
-import { 
-    from,
-    until
-} from '../styles/functions';
+import { hidden, clearFix } from '../styles/mixins';
+import { from, until } from '../styles/functions';
 import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
 
 // .new-header.pillar-scheme--News
 const Head = styled('header', {
     'margin-bottom': 0,
     'background-color': '#e9eff1',
-    'position': 'relative',
+    position: 'relative',
     [from('tablet')]: {
-        'display': 'block',
+        display: 'block',
     },
 });
 
@@ -34,13 +29,13 @@ const Nav = styled('nav', {
     [from('wide')]: {
         'max-width': '1300px',
     },
-    'position': 'relative',
-    'margin': '0 auto',
+    position: 'relative',
+    margin: '0 auto',
 });
 
 // .new-header__logo
 const HomeLink = styled('a', {
-    'float': 'right',
+    float: 'right',
     'margin-bottom': '15px',
     'margin-right': '45px',
     'margin-top': '5px',
@@ -53,47 +48,48 @@ const HomeLink = styled('a', {
     [from('desktop')]: {
         'margin-bottom': '-34px',
         'margin-top': '5px',
-        'position': 'relative',
+        position: 'relative',
         'z-index': 1071,
     },
-});;
+});
 
 // .u-h
 const ScreenReadable = styled('span', {
-    ...hidden
+    ...hidden,
 });
 
-// .inline-the-guardian-logo.inline-logo 
+// .inline-the-guardian-logo.inline-logo
 const Logo = styled(TheGuardianLogoSVG, {
-    'height': '95px',
-    'width': '295px',
+    height: '95px',
+    width: '295px',
 });
 
 // .new-header__top-bar.hide-until-mobile
 const TopBar = styled('div', {
-    'left': 0,
-    'position': 'absolute',
-    'top': 0,
+    left: 0,
+    position: 'absolute',
+    top: 0,
 });
 
 // .top-bar__item
-const topBarItem = (props) => {
+const topBarItem = props => {
     const focusHoverStyles = {
-        'color': '#e9eff1'
+        color: '#e9eff1',
     };
 
-    let styles = {
+    const styles = {
         'font-size': '14px',
-        'font-family': '"Guardian Text Sans Web","Helvetica Neue","Helvetica","Arial","Lucida Grande","sans-serif"',
-        'color': '#121212',
-        'float': 'left',
+        'font-family':
+            '"Guardian Text Sans Web","Helvetica Neue","Helvetica","Arial","Lucida Grande","sans-serif"',
+        color: '#121212',
+        float: 'left',
         'line-height': 1.2,
-        'position': 'relative',
-        'transition': 'color 80ms ease-out',
-        'padding': '6px 10px',
-        'margin': '1px 0 0',
+        position: 'relative',
+        transition: 'color 80ms ease-out',
+        padding: '6px 10px',
+        margin: '1px 0 0',
         ':nth-child(2)': {
-            'padding-left': '13px'
+            'padding-left': '13px',
         },
         ':hover': focusHoverStyles,
         ':focus': focusHoverStyles,
@@ -105,7 +101,7 @@ const topBarItem = (props) => {
     if (props.isPayingMember || props.isRecentContributor) {
         styles[':nth-child(2)'] = Object.assign({}, styles[':nth-child(2)'], {
             'padding-left': 0,
-            'margin-left': '20px'
+            'margin-left': '20px',
         });
     }
 
@@ -113,18 +109,19 @@ const topBarItem = (props) => {
 };
 
 // top-bar__item.top-bar__item--cta.js-change-become-member-link.js-acquisition-link
-const BecomeAMemberLink = styled('a', (props) => {
+const BecomeAMemberLink = styled('a', props => {
     const focusHoverStyles = {
-        'color': '#e9eff1',
+        color: '#e9eff1',
         'text-decoration': 'none',
     };
 
-    let styles = Object.assign({}, topBarItem(props), {
-        'color': '#e9eff1',
-        'font-family': '"Guardian Egyptian Web", "Guardian Text Egyptian Web", "Georgia", "serif"',
+    const styles = Object.assign({}, topBarItem(props), {
+        color: '#e9eff1',
+        'font-family':
+            '"Guardian Egyptian Web", "Guardian Text Egyptian Web", "Georgia", "serif"',
         'font-weight': 800,
-        'padding': 0,
-        'margin': 0,
+        padding: 0,
+        margin: 0,
         [until('mobileLandscape')]: {
             'margin-left': '-10px',
         },
@@ -133,7 +130,7 @@ const BecomeAMemberLink = styled('a', (props) => {
     });
 
     if (props.isPayingMember || props.isRecentContributor) {
-        styles['display'] = 'none';
+        styles.display = 'none';
     }
 
     return styles;
@@ -141,54 +138,54 @@ const BecomeAMemberLink = styled('a', (props) => {
 
 // .top-bar__item--cta--circle
 const TopBarCTACircle = styled('span', {
-    'bottom': '-12px',
-    'left': 0,
-    'overflow': 'hidden',
-    'position': 'absolute',
-    'right': 0,
-    'top': 0,
-    'transition': 'transform 250ms ease-out',
+    bottom: '-12px',
+    left: 0,
+    overflow: 'hidden',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    transition: 'transform 250ms ease-out',
     'transform-origin': 'top center',
     ':before': {
         'background-color': '#121212',
         'border-radius': '50%',
-        'bottom': 0,
-        'content': '""',
-        'display': 'block',
-        'left': 0,
+        bottom: 0,
+        content: '""',
+        display: 'block',
+        left: 0,
         'padding-top': '100%',
-        'position': 'absolute',
-        'right': 0,
-        'transition': 'background-color 250ms ease-out',
+        position: 'absolute',
+        right: 0,
+        transition: 'background-color 250ms ease-out',
     },
 });
 
 // .top-bar__item--cta--text
-const TopBarCTAText = styled('span', { 
+const TopBarCTAText = styled('span', {
     'box-sizing': 'border-box',
-    'display': 'block',
-    'padding': '6px 20px 3px',
-    'position': 'relative',
+    display: 'block',
+    padding: '6px 20px 3px',
+    position: 'relative',
     'text-align': 'center',
 });
 
 // .pillars
-const PillarList = styled('ul', (props) => {
-    let styles ={
-        'clear': 'right',
-        'margin': 0,
-        'padding': '0 10px',
+const PillarList = styled('ul', props => {
+    let styles = {
+        clear: 'right',
+        margin: 0,
+        padding: '0 10px',
         'list-style': 'none',
         'list-style-image': 'none',
         [from('mobileLandscape')]: {
-            'padding-left': '20px'
+            'padding-left': '20px',
         },
-    }
+    };
 
     if (props.isHeaderOpen) {
         styles = Object.assign({}, styles, {
             [from('desktop')]: {
-                'z-index': 1070
+                'z-index': 1070,
             },
         });
     }
@@ -196,7 +193,7 @@ const PillarList = styled('ul', (props) => {
     if (props.isHeaderSlim) {
         styles = Object.assign({}, styles, {
             [from('tablet')]: {
-                'display': 'none'
+                display: 'none',
             },
         });
     }
@@ -206,74 +203,80 @@ const PillarList = styled('ul', (props) => {
 
 // .pillars__item
 const PillarListItem = styled('li', {
-    'display': 'block',
-    'float': 'left',
+    display: 'block',
+    float: 'left',
     [from('desktop')]: {
-        'width': '118px'
+        width: '118px',
     },
 });
 
 // .pillars-link
-const PillarListItemLink = styled('a', (props) => {
+const PillarListItemLink = styled('a', props => {
     const beforeAfterStyles = {
-        'bottom': 0,
-        'content': '""',
-        'display': 'block',
-        'left': 0,
-        'position': 'absolute',
+        bottom: 0,
+        content: '""',
+        display: 'block',
+        left: 0,
+        position: 'absolute',
     };
 
     const focusHoverStyles = {
-        'text-decoration': props.isHeaderOpen && !props.pillarLinkDropdown ? 'underline' : 'none',
+        'text-decoration':
+            props.isHeaderOpen && !props.pillarLinkDropdown
+                ? 'underline'
+                : 'none',
     };
 
     let styles = {
-        'font-family': '"Guardian Egyptian Web", "Guardian Text Egyptian Web", TimesNewRoman, serif',
+        'font-family':
+            '"Guardian Egyptian Web", "Guardian Text Egyptian Web", TimesNewRoman, serif',
         'font-weight': 600,
-        'color': 'currentColor',
-        'cursor': 'pointer',
-        'display': 'block',
+        color: 'currentColor',
+        cursor: 'pointer',
+        display: 'block',
         'font-size': '15.4px',
-        'height': '48px',
+        height: '48px',
         'line-height': 1,
-        'padding': '0 4px',
-        'position': 'relative',
-        'overflow': 'hidden',
+        padding: '0 4px',
+        position: 'relative',
+        overflow: 'hidden',
         [from('tablet')]: {
             'font-size': '22px',
-            'height': '42px',
+            height: '42px',
             'padding-right': '20px',
             'padding-left': '5px',
         },
         ':before': Object.assign({}, beforeAfterStyles, {
             'border-left': '1px solid #abc2c9',
-            'top': '3px',
+            top: '3px',
             'z-index': 1,
         }),
-        ':after': !props.pillarLinkDropdown ? Object.assign({}, beforeAfterStyles, {
-            'border-bottom': '4px solid currentColor',
-            'right': 0,
-            'bottom': '-4px',
-            'transition': 'transform 150ms ease-out',
-        }) : {},
+        ':after': !props.pillarLinkDropdown
+            ? Object.assign({}, beforeAfterStyles, {
+                  'border-bottom': '4px solid currentColor',
+                  right: 0,
+                  bottom: '-4px',
+                  transition: 'transform 150ms ease-out',
+              })
+            : {},
         ':focus': focusHoverStyles,
         ':hover': focusHoverStyles,
         ':focus:after': {
-            'transform': 'translateY(-4px)'
+            transform: 'translateY(-4px)',
         },
         ':hover:after': {
-            'transform': 'translateY(-4px)'
+            transform: 'translateY(-4px)',
         },
     };
 
     if (props.isHeaderSlim) {
         styles = Object.assign({}, styles, {
             'font-size': '20px',
-            'height': '44px',
+            height: '44px',
             'line-height': '44px',
             'padding-top': 0,
             ':before': {
-                'top': '17px',
+                top: '17px',
             },
         });
     }
@@ -282,7 +285,7 @@ const PillarListItemLink = styled('a', (props) => {
         styles = Object.assign({}, styles, {
             'padding-left': 0,
             ':before': {
-                'content': 'none',
+                content: 'none',
             },
         });
     }
@@ -291,37 +294,41 @@ const PillarListItemLink = styled('a', (props) => {
 });
 
 export default () => {
-    const pillars = [{
-        label: 'News',
-        path: 'http://m.thegulocal.com/uk'
-    }, {
-        label: 'Opinion',
-        path: 'http://m.thegulocal.com/uk/commentisfree'
-    }, {
-        label: 'Sport',
-        path: 'http://m.thegulocal.com/uk/sport'
-    }, {
-        label: 'Culture',
-        path: 'http://m.thegulocal.com/uk/culture'
-    }, {
-        label: 'Lifestyle',
-        path: 'http://m.thegulocal.com/uk/lifeandstyle'
-    }];
+    const pillars = [
+        {
+            label: 'News',
+            path: 'http://m.thegulocal.com/uk',
+        },
+        {
+            label: 'Opinion',
+            path: 'http://m.thegulocal.com/uk/commentisfree',
+        },
+        {
+            label: 'Sport',
+            path: 'http://m.thegulocal.com/uk/sport',
+        },
+        {
+            label: 'Culture',
+            path: 'http://m.thegulocal.com/uk/culture',
+        },
+        {
+            label: 'Lifestyle',
+            path: 'http://m.thegulocal.com/uk/lifeandstyle',
+        },
+    ];
 
     return (
         <Head>
             <Nav>
                 <HomeLink href="/">
-                    <ScreenReadable>
-                        The Guardian - Back to home
-                    </ScreenReadable>
+                    <ScreenReadable>The Guardian - Back to home</ScreenReadable>
                     <Logo />
                 </HomeLink>
                 <TopBar>
                     <BecomeAMemberLink>
                         <TopBarCTACircle />
                         <TopBarCTAText>
-                            Support The <br/>Guardian
+                            Support The <br />Guardian
                         </TopBarCTAText>
                     </BecomeAMemberLink>
                 </TopBar>
