@@ -76,6 +76,7 @@ const TopBar = styled('div', {
     'top': 0,
 });
 
+// .top-bar__item
 const topBarItem = (props) => {
     const focusHoverStyles = {
         'color': '#e9eff1'
@@ -216,7 +217,7 @@ const PillarListItem = styled('li', {
 const PillarListItemLink = styled('a', (props) => {
     const beforeAfterStyles = {
         'bottom': 0,
-        'content': "''",
+        'content': '""',
         'display': 'block',
         'left': 0,
         'position': 'absolute',
