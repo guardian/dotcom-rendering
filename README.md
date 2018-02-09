@@ -1,4 +1,4 @@
-# guui
+# guui [![Build Status](https://travis-ci.org/guardian/guui.svg?branch=master)](https://travis-ci.org/guardian/guui)
 
 Frontend rendering framework for theguardian.com. It uses [react](https://reactjs.org/) and [styletron](https://github.com/rtsao/styletron).
 
