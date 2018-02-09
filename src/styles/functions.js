@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 
-// underscored names to avoid export name class
+// underscored names to avoid clashing with the `from` shorthand exports
 const _mobile = 320;
 const _mobileMedium = 360;
 const _mobileLandscape = 480;
