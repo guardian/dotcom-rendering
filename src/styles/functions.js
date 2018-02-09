@@ -11,10 +11,12 @@ const _desktop = 980;
 const _leftCol = 1140;
 const _wide = 1300;
 
-const minWidth = from => `@media (min-width: ${`${from}px`})`;
+const minWidth = (from: number): string => `@media (min-width: ${`${from}px`})`;
 
-const maxWidth = until => `@media (max-width: ${`${until - 1}px`})`;
-const minWidthMaxWidth = (from, until) =>
+const maxWidth = (until: number): string =>
+    `@media (max-width: ${`${until - 1}px`})`;
+
+const minWidthMaxWidth = (from: number, until: number): string =>
     `@media (min-width: ${`${from}px`}) and (max-width: ${`${until - 1}px`})`;
 
 // e.g. from.*
