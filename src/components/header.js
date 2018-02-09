@@ -1,6 +1,15 @@
 // @flow
 import { styled } from 'styletron-react';
 import { hidden, clearFix } from '../styles/mixins';
+import {
+    until,
+    mobileLandscape,
+    mobileMedium,
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+    between,
 import { from, until } from '../styles/functions';
 import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
 
@@ -9,7 +18,7 @@ const Head = styled('header', {
     'margin-bottom': 0,
     'background-color': '#e9eff1',
     position: 'relative',
-    [from('tablet')]: {
+    [tablet]: {
         display: 'block',
     },
 });
@@ -17,16 +26,17 @@ const Head = styled('header', {
 // .new-header__inner.gs-container
 const Nav = styled('nav', {
     ...clearFix,
-    [from('tablet')]: {
+    [between.mobileMedium.and.desktop]: {},
+    [tablet]: {
         'max-width': '740px',
     },
-    [from('desktop')]: {
+    [desktop]: {
         'max-width': '980px',
     },
-    [from('leftCol')]: {
+    [leftCol]: {
         'max-width': '1140px',
     },
-    [from('wide')]: {
+    [wide]: {
         'max-width': '1300px',
     },
     position: 'relative',
@@ -39,13 +49,13 @@ const HomeLink = styled('a', {
     'margin-bottom': '15px',
     'margin-right': '45px',
     'margin-top': '5px',
-    [from('mobileMedium')]: {
+    [mobileMedium]: {
         'margin-right': '5px',
     },
-    [from('mobileLandscape')]: {
+    [mobileLandscape]: {
         'margin-right': '17px',
     },
-    [from('desktop')]: {
+    [desktop]: {
         'margin-bottom': '-34px',
         'margin-top': '5px',
         position: 'relative',
@@ -93,15 +103,15 @@ const topBarItem = props => {
         },
         ':hover': focusHoverStyles,
         ':focus': focusHoverStyles,
-        [from('tablet')]: {
+        [tablet]: {
             'font-size': '14px',
         },
     };
 
     if (props.isPayingMember || props.isRecentContributor) {
         styles[':nth-child(2)'] = Object.assign({}, styles[':nth-child(2)'], {
-            'padding-left': 0,
-            'margin-left': '20px',
+            paddingLeft: 0,
+            marginLeft: '20px',
         });
     }
 
@@ -122,7 +132,7 @@ const BecomeAMemberLink = styled('a', props => {
         'font-weight': 800,
         padding: 0,
         margin: 0,
-        [until('mobileLandscape')]: {
+        [until.mobileLandscape]: {
             'margin-left': '-10px',
         },
         ':focus': focusHoverStyles,
@@ -177,14 +187,14 @@ const PillarList = styled('ul', props => {
         padding: '0 10px',
         'list-style': 'none',
         'list-style-image': 'none',
-        [from('mobileLandscape')]: {
+        [mobileLandscape]: {
             'padding-left': '20px',
         },
     };
 
     if (props.isHeaderOpen) {
         styles = Object.assign({}, styles, {
-            [from('desktop')]: {
+            [desktop]: {
                 'z-index': 1070,
             },
         });
@@ -192,7 +202,7 @@ const PillarList = styled('ul', props => {
 
     if (props.isHeaderSlim) {
         styles = Object.assign({}, styles, {
-            [from('tablet')]: {
+            [tablet]: {
                 display: 'none',
             },
         });
@@ -205,7 +215,7 @@ const PillarList = styled('ul', props => {
 const PillarListItem = styled('li', {
     display: 'block',
     float: 'left',
-    [from('desktop')]: {
+    [desktop]: {
         width: '118px',
     },
 });
@@ -240,7 +250,7 @@ const PillarListItemLink = styled('a', props => {
         padding: '0 4px',
         position: 'relative',
         overflow: 'hidden',
-        [from('tablet')]: {
+        [tablet]: {
             'font-size': '22px',
             height: '42px',
             'padding-right': '20px',
@@ -334,8 +344,8 @@ export default () => {
                 </TopBar>
                 <PillarList>
                     {pillars.map((pillar, i) => (
-                        <PillarListItem key={i}>
-                            <PillarListItemLink index={i} key={i}>
+                        <PillarListItem key={pillar.label}>
+                            <PillarListItemLink index={i} key={pillar.label}>
                                 {pillar.label}
                             </PillarListItemLink>
                         </PillarListItem>
