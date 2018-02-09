@@ -3,6 +3,7 @@
         "babel-plugin-preval",
         "babel-plugin-transform-object-rest-spread",
         "babel-plugin-syntax-dynamic-import",
+        "babel-plugin-transform-class-properties",
         ["react-hot-loader/babel", {
             "ignore": "node_modules"
         }],

@@ -49,7 +49,9 @@ const FrameSize = styled('div', {
     },
 });
 
-const breakpoints = {
+const breakpoints: {
+    [string]: number,
+} = {
     mobile: 320,
     mobileMedium: 360,
     mobileLandscape: 480,
@@ -69,25 +71,26 @@ export default class extends React.Component<
         this.state = {
             breakpoint: '?',
         };
-        this.handleMessage = this.handleMessage.bind(this);
     }
 
     componentDidMount() {
         window.addEventListener('message', this.handleMessage, false);
     }
 
-    handleMessage({ data }: { data: { ComponentWindowWidth?: number } }): void {
-        if (data.ComponentWindowWidth) {
-            const bp = Object.keys(breakpoints).reduce(
-                (prev, key) =>
-                    breakpoints[key] > breakpoints[prev] &&
-                    breakpoints[key] <= data.ComponentWindowWidth
-                        ? key
-                        : prev,
+    handleMessage = (e: { data: { ComponentWindowWidth?: number } }): void => {
+        if (e.data.ComponentWindowWidth) {
+            const bp = Object.entries(breakpoints).reduce(
+                (prev, [breakpoint, width]): string =>
+                    width > breakpoints[prev] &&
+                    width <= e.data.ComponentWindowWidth
+                        ? prev
+                        : breakpoint,
+                'mobile',
             );
+
             this.setState({ breakpoint: bp });
         }
-    }
+    };
 
     render() {
         return (
