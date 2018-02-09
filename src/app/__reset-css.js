@@ -8,4 +8,15 @@
 const { readFileSync } = require('fs');
 
 const resetCSSPath = require.resolve('reset-css');
-module.exports = readFileSync(resetCSSPath, 'utf-8').replace(/\s/g, '');
+const resetCSS = readFileSync(resetCSSPath, 'utf-8');
+
+const defaults = `
+    html {
+        box-sizing: border-box;
+    }
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+`;
+
+module.exports = [resetCSS, defaults].join('').replace(/\s/g, '');
