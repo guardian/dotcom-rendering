@@ -9,8 +9,8 @@
         "build": "rm -rf dist && yarn -s build:server && yarn -s build:browser",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint . --ext .js,.jsx",
-        "fix": "eslint . --ext .js,.jsx --fix",
+        "lint": "eslint . --ext .js --quiet",
+        "fix": "eslint . --ext .js --fix --quiet",
         "dev": "BABEL_ENV=cjs webpack-dev-server --hot --env.dev"
     },
     "repository": "git+https://github.com/guardian/guui.git",
@@ -35,8 +35,8 @@
         "babel-eslint": "^8.0.1",
         "babel-loader": "^7.1.2",
         "babel-plugin-external-helpers": "^6.22.0",
-        "babel-plugin-preval": "^1.6.3",
         "babel-plugin-inline-react-svg": "^0.2.0",
+        "babel-plugin-preval": "^1.6.3",
         "babel-plugin-provide-modules": "^1.0.3",
         "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "babel-plugin-transform-class-properties": "^6.24.1",
@@ -58,7 +58,7 @@
         "eslint-plugin-prettier": "^2.3.1",
         "eslint-plugin-react": "^7.4.0",
         "filesizegzip": "^2.0.0",
-        "flow-bin": "^0.64.0",
+        "flow-bin": "^0.65.0",
         "friendly-errors-webpack-plugin": "^1.6.1",
         "prettier": "^1.7.4",
         "rollup": "^0.55.3",
@@ -117,6 +117,14 @@
                 }
             ]
         },
+        "overrides": [
+            {
+                "files": ["src/**/*.demo.js", "lib/*.js"],
+                "rules": {
+                    "import/prefer-default-export": "off"
+                }
+            }
+        ],
         "env": {
             "browser": true
         }
