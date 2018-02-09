@@ -10,7 +10,7 @@ import {
     leftCol,
     wide,
     between,
-import { from, until } from '../styles/functions';
+} from '../styles/functions';
 import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
 
 // .new-header.pillar-scheme--News
