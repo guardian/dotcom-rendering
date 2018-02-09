@@ -101,12 +101,12 @@ const topBarItem = (props) => {
         },
     };
 
-    // if (props.isPayingMember || props.isRecentContributor) {
-    //     Object.assign(styles[':nth-child(2)'], {
-    //         'padding-left': 0,
-    //         'margin-left': '20px'
-    //     });
-    // }
+    if (props.isPayingMember || props.isRecentContributor) {
+        styles[':nth-child(2)'] = Object.assign({}, styles[':nth-child(2)'], {
+            'padding-left': 0,
+            'margin-left': '20px'
+        });
+    }
 
     return styles;
 };
@@ -131,9 +131,9 @@ const BecomeAMemberLink = styled('a', (props) => {
         ':hover': focusHoverStyles,
     });
 
-    // if (props.isPayingMember || props.isRecentContributor) {
-    //     styles['display'] = 'none';
-    // }
+    if (props.isPayingMember || props.isRecentContributor) {
+        styles['display'] = 'none';
+    }
 
     return styles;
 });
@@ -184,41 +184,109 @@ const PillarList = styled('ul', (props) => {
         },
     }
 
-    // if (props.isHeaderOpen) {
-    //     Object.assign({}, styles, {
-    //         [from('desktop')]: {
-    //             'z-index': 1070;
-    //         },
-    //     });
-    // }
+    if (props.isHeaderOpen) {
+        styles = Object.assign({}, styles, {
+            [from('desktop')]: {
+                'z-index': 1070
+            },
+        });
+    }
 
-    // if (props.isHeaderSlim) {
-    //     Object.assign({}, styles, {
-    //         [from('tablet')]: {
-    //             'display': 'none'
-    //         },
-    //     });
-    // }
+    if (props.isHeaderSlim) {
+        styles = Object.assign({}, styles, {
+            [from('tablet')]: {
+                'display': 'none'
+            },
+        });
+    }
 
     return styles;
 });
 
-const PillarListItem = styled('li', (props) => {
-    const styles = {
+// .pillars__item
+const PillarListItem = styled('li', {
+    'display': 'block',
+    'float': 'left',
+    [from('desktop')]: {
+        'width': '118px'
+    },
+});
+
+// .pillars-link
+const PillarListItemLink = styled('a', (props) => {
+    const beforeAfterStyles = {
+        'bottom': 0,
+        'content': "''",
         'display': 'block',
-        'float': 'left',
-        [from('desktop')]: {
-            'width': '118px'
+        'left': 0,
+        'position': 'absolute',
+    };
+
+    const focusHoverStyles = {
+        'text-decoration': props.isHeaderOpen && !props.pillarLinkDropdown ? 'underline' : 'none',
+    };
+
+    let styles = {
+        'font-family': '"Guardian Egyptian Web", "Guardian Text Egyptian Web", TimesNewRoman, serif',
+        'font-weight': 600,
+        'color': 'currentColor',
+        'cursor': 'pointer',
+        'display': 'block',
+        'font-size': '15.4px',
+        'height': '48px',
+        'line-height': 1,
+        'padding': '0 4px',
+        'position': 'relative',
+        'overflow': 'hidden',
+        [from('tablet')]: {
+            'font-size': '22px',
+            'height': '42px',
+            'padding-right': '20px',
+            'padding-left': '5px',
+        },
+        ':before': Object.assign({}, beforeAfterStyles, {
+            'border-left': '1px solid #abc2c9',
+            'top': '3px',
+            'z-index': 1,
+        }),
+        ':after': !props.pillarLinkDropdown ? Object.assign({}, beforeAfterStyles, {
+            'border-bottom': '4px solid currentColor',
+            'right': 0,
+            'bottom': '-4px',
+            'transition': 'transform 150ms ease-out',
+        }) : {},
+        ':focus': focusHoverStyles,
+        ':hover': focusHoverStyles,
+        ':focus:after': {
+            'transform': 'translateY(-4px)'
+        },
+        ':hover:after': {
+            'transform': 'translateY(-4px)'
         },
     };
 
-    // &:first-child .pillar-link {
-    //     padding-left: 0;
+    if (props.isHeaderSlim) {
+        styles = Object.assign({}, styles, {
+            'font-size': '20px',
+            'height': '44px',
+            'line-height': '44px',
+            'padding-top': 0,
+            ':before': {
+                'top': '17px',
+            },
+        });
+    }
 
-    //     &:before {
-    //         content: none;
-    //     }
-    // }
+    if (props.index === 0) {
+        styles = Object.assign({}, styles, {
+            'padding-left': 0,
+            ':before': {
+                'content': 'none',
+            },
+        });
+    }
+
+    return styles;
 });
 
 export default () => {
@@ -243,7 +311,7 @@ export default () => {
         <Head>
             <Nav>
                 <HomeLink href="/">
-                    <ScreenReadable uh>
+                    <ScreenReadable>
                         The Guardian - Back to home
                     </ScreenReadable>
                     <Logo />
@@ -257,9 +325,11 @@ export default () => {
                     </BecomeAMemberLink>
                 </TopBar>
                 <PillarList>
-                    {pillars.map(pillar => (
-                        <PillarListItem>
-                            {pillar.label}
+                    {pillars.map((pillar, i) => (
+                        <PillarListItem key={i}>
+                            <PillarListItemLink index={i} key={i}>
+                                {pillar.label}
+                            </PillarListItemLink>
                         </PillarListItem>
                     ))}
                 </PillarList>
