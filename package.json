@@ -9,8 +9,8 @@
         "build": "rm -rf dist && yarn -s build:server && yarn -s build:browser",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint . --ext .js,.jsx",
-        "fix": "eslint . --ext .js,.jsx --fix",
+        "lint": "eslint . --ext .js --quiet",
+        "fix": "eslint . --ext .js --fix --quiet",
         "dev": "BABEL_ENV=cjs webpack-dev-server --hot --env.dev"
     },
     "repository": "git+https://github.com/guardian/guui.git",
@@ -117,6 +117,14 @@
                 }
             ]
         },
+        "overrides": [
+            {
+                "files": ["src/**/*.demo.js", "lib/*.js"],
+                "rules": {
+                    "import/prefer-default-export": "off"
+                }
+            }
+        ],
         "env": {
             "browser": true
         }
