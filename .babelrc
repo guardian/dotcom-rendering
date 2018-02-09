@@ -12,7 +12,8 @@
             {
                 "polyfill": false
             }
-        ]
+        ],
+        "inline-react-svg"
     ],
     "env": {
         "es": {
