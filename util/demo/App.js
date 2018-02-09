@@ -81,7 +81,9 @@ export default class extends React.Component<
         if (e.data.ComponentWindowWidth) {
             const bp = Object.entries(breakpoints).reduce(
                 (prev, [breakpoint, width]): string =>
+                    // $FlowFixMe
                     width > breakpoints[prev] &&
+                    // $FlowFixMe
                     width <= e.data.ComponentWindowWidth
                         ? prev
                         : breakpoint,
