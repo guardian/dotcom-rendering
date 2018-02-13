@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+
 import { styled } from 'styletron-react';
 import decamelize from 'decamelize'; // eslint-disable-line import/no-extraneous-dependencies
 

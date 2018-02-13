@@ -1,2 +1,3 @@
 // @flow
-// demo page
+
+export default () => <div>hi</div>;

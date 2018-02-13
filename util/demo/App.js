@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
 import { styled } from 'styletron-react';
 
 const Monospace = styled('span', {

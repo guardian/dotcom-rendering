@@ -1,18 +1,12 @@
 // @flow
 /* eslint-disable no-console */
-import path from 'path';
+const path = require('path');
 
-import webpack from 'webpack';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import Progress from 'simple-progress-webpack-plugin';
+const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const Progress = require('simple-progress-webpack-plugin');
 
-export default ({
-    dist,
-    bundleName,
-}: {
-    dist: string,
-    bundleName: string,
-}) => ({
+module.exports = ({ dist, bundleName }) => ({
     devtool: 'source-map',
     plugins: [
         new webpack.DefinePlugin({

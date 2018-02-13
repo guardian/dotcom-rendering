@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+
 // $FlowFixMe https://github.com/facebook/flow/issues/5035
 import { hydrate } from 'react-dom';
 import Styletron from 'styletron-client';

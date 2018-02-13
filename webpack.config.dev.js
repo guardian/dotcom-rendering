@@ -1,15 +1,19 @@
 // @flow
 /* eslint-disable global-require,import/no-dynamic-require */
 
-import { log } from 'util';
-import webpack from 'webpack';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import chalk from 'chalk';
+const { log } = require('util');
+const webpack = require('webpack');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const chalk = require('chalk');
 
-import demo from './util/demo/app.server';
-import component from './util/demo/component.server';
+require('@babel/register')({
+    only: [/util|src/],
+});
 
-export default {
+const demo = require('./util/demo/app.server').default;
+const component = require('./util/demo/component.server').default;
+
+module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: {
         app: './util/demo/app.browser.js',
@@ -20,7 +24,7 @@ export default {
         port: 3000,
         overlay: true,
         quiet: true,
-        before(app: any) {
+        before(app) {
             app.get('/src/*', async (req, res) => {
                 try {
                     res.send(demo(req.params[0]));

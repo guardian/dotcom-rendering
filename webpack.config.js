@@ -1,11 +1,11 @@
 // @flow
 /* eslint-disable global-require,no-console */
-import path from 'path';
-import webpackMerge from 'webpack-merge';
+const path = require('path');
+const webpackMerge = require('webpack-merge');
 
 console.log(''); // just a spacer for console sweetness
 
-export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
+module.exports = () => {
     const baseConfig = {
         entry: {
             app: './src/app/index.browser.js',
@@ -23,7 +23,7 @@ export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            forceEnv: env.prod ? 'es' : 'cjs',
+                            envName: 'app:browser',
                         },
                     },
                 },
@@ -31,12 +31,13 @@ export default (env: { prod?: boolean, dev?: boolean } = { prod: true }) => {
         },
     };
 
-    const envConfig = env.prod
-        ? require('./webpack.config.prod').default({
-              dist: baseConfig.output.path,
-              bundleName: 'app.browser.js',
-          })
-        : require('./webpack.config.dev').default;
+    const envConfig =
+        process.env.NODE_ENV === 'production'
+            ? require('./webpack.config.prod')({
+                  dist: baseConfig.output.path,
+                  bundleName: 'app.browser.js',
+              })
+            : require('./webpack.config.dev');
 
     const config = webpackMerge.smart(baseConfig, envConfig);
 
