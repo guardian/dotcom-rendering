@@ -88,6 +88,6 @@ module.exports = {
     env: {
         'app:server': appServerConfig,
         'app:browser': appBrowserConfig,
+        development: defaultConfig,
     },
-    ...defaultConfig,
 };
