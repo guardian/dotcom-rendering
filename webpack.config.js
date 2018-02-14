@@ -3,7 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const Progress = require('simple-progress-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -18,7 +17,6 @@ const babelLoader = env => ({
 
 const baseConfig = {
     output: {
-        filename: '[name].js',
         path: path.join(__dirname, 'dist'),
     },
     stats: 'errors-only',
@@ -27,11 +25,7 @@ const baseConfig = {
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
         new webpack.NamedModulesPlugin(),
-        production &&
-            new Progress({
-                format: 'compact',
-            }),
-    ].filter(Boolean),
+    ],
 };
 
 const envConfig = production
@@ -41,38 +35,33 @@ const envConfig = production
       })
     : require('./webpack.config.dev');
 
-const serverConfig = () =>
+const platformConfig = platform =>
     merge.smart(
-        baseConfig,
         {
-            entry: {
-                'app.server': './src/app/index.server.js',
+            entry: { app: `./src/app/app.${platform}.js` },
+            output: {
+                filename: `[name].${platform}.js`,
+                chunkFilename: `[name].${platform}.js`,
             },
             module: {
-                rules: [babelLoader('app:server')],
+                rules: [babelLoader(`app:${platform}`)],
             },
-            target: 'node',
-            externals: [require('webpack-node-externals')()],
         },
-        envConfig.server,
+        envConfig[platform],
     );
 
-const browserConfig = () =>
-    merge.smart(
-        baseConfig,
-        {
-            entry: {
-                'app.browser': './src/app/index.browser.js',
-            },
-            module: {
-                rules: [babelLoader('app:browser')],
-            },
-        },
-        envConfig.browser,
-    );
+const browserConfig = merge.smart(baseConfig, platformConfig('browser'));
+const serverConfig = merge.smart(
+    baseConfig,
+    {
+        target: 'node',
+        externals: [require('webpack-node-externals')()],
+    },
+    platformConfig('server'),
+);
 
 module.exports = ({ browser = false, server = false } = {}) => {
-    if (browser) return browserConfig();
-    if (server) return serverConfig();
-    return [browserConfig(), serverConfig()];
+    if (browser) return browserConfig;
+    if (server) return serverConfig;
+    return [browserConfig, serverConfig];
 };

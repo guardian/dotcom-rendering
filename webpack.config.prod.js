@@ -4,6 +4,8 @@ const path = require('path');
 
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ReportBundleSize = require('./util/report-bundle-size');
+const Progress = require('simple-progress-webpack-plugin');
 
 module.exports = ({ dist, bundleName }) => ({
     browser: {
@@ -24,6 +26,11 @@ module.exports = ({ dist, bundleName }) => ({
                 openAnalyzer: false,
                 logLevel: 'warn',
             }),
+
+            new Progress({
+                format: 'compact',
+            }),
+            new ReportBundleSize(),
         ],
     },
     server: {},

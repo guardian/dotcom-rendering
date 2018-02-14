@@ -4,13 +4,12 @@
     "description": "Frontend rendering framework",
     "main": "dist/index.js",
     "scripts": {
-        "build:server": "NODE_ENV=production webpack --env.server",
-        "build": "rm -rf dist && NODE_ENV=production webpack && node ./util/report-bundle-size.js",
+        "build": "rm -rf dist && NODE_ENV=production webpack",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .js,.jsx",
         "fix": "eslint . --ext .js,.jsx --fix",
-        "dev": "webpack-dev-server --hot --env.browser && webpack --env.server"
+        "dev": "webpack-dev-server --hot --env.browser"
     },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
@@ -23,6 +22,7 @@
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-hot-loader": "^4.0.0-beta.22",
+        "require-dir": "^1.0.0",
         "reset-css": "^2.2.1",
         "styletron-client": "^3.0.4",
         "styletron-react": "^3.0.4",
