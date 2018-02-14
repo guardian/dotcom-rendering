@@ -1,90 +1,93 @@
-var env = process.env.BABEL_ENV || 'cli';
+// @flow
 
-const targets = {
-    'app:server': {
-        plugins: ['babel-plugin-dynamic-import-node'],
-        presets: [
-            [
-                '@babel/preset-env',
-                {
-                    targets: {
-                        node: true,
-                    },
-                    useBuiltIns: 'usage',
-                    modules: false,
+const universalPlugins = [
+    'babel-plugin-preval',
+    ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
+    '@babel/plugin-proposal-class-properties',
+    'babel-plugin-react-require',
+    'babel-plugin-inline-react-svg',
+];
+
+const universalPresets = ['@babel/preset-flow', '@babel/preset-react'];
+
+const defaultConfig = {
+    plugins: ['babel-plugin-dynamic-import-node', ...universalPlugins],
+    presets: [
+        [
+            '@babel/preset-env',
+            {
+                targets: {
+                    node: 'current',
                 },
-            ],
+                useBuiltIns: 'usage',
+            },
         ],
-    },
-    'app:browser': {
-        plugins: [
-            '@babel/plugin-syntax-dynamic-import',
-            [
-                '@babel/plugin-transform-runtime',
-                {
-                    polyfill: false,
+        ...universalPresets,
+    ],
+};
+
+const appServerConfig = {
+    plugins: ['babel-plugin-dynamic-import-node', ...universalPlugins],
+    presets: [
+        [
+            '@babel/preset-env',
+            {
+                targets: {
+                    node: true,
                 },
-            ],
-            [
-                // this does (virtually) nothing if process.env.NODE_ENV === 'production'
-                'react-hot-loader/babel',
-                {
-                    ignore: 'node_modules',
+                useBuiltIns: 'usage',
+                modules: false,
+            },
+        ],
+        ...universalPresets,
+    ],
+};
+
+const appBrowserConfig = {
+    plugins: [
+        '@babel/plugin-syntax-dynamic-import',
+        [
+            '@babel/plugin-transform-runtime',
+            {
+                polyfill: false,
+            },
+        ],
+        [
+            // this does (virtually) nothing if process.env.NODE_ENV === 'production'
+            'react-hot-loader/babel',
+            {
+                ignore: 'node_modules',
+            },
+        ],
+        ...universalPlugins,
+    ],
+    presets: [
+        [
+            '@babel/preset-env',
+            {
+                targets: {
+                    browsers: [
+                        'Chrome >= 49',
+                        'Edge >= 14',
+                        'Firefox >= 45',
+                        'iOS >= 7',
+                        'Safari >= 8',
+                        '> 1%',
+                    ],
                 },
-            ],
+                useBuiltIns: false,
+                modules: false,
+                forceAllTransforms: true, // we're going to uglify
+            },
         ],
-        presets: [
-            [
-                '@babel/preset-env',
-                {
-                    targets: {
-                        browsers: [
-                            'Chrome >= 49',
-                            'Edge >= 14',
-                            'Firefox >= 45',
-                            'iOS >= 7',
-                            'Safari >= 8',
-                            '> 1%',
-                        ],
-                    },
-                    useBuiltIns: false,
-                    modules: false,
-                    forceAllTransforms: true, // we're going to uglify
-                },
-            ],
-        ],
-    },
-    // for things like webpack.config.babel.js
-    cli: {
-        plugins: [
-            'babel-plugin-dynamic-import-node',
-        ],
-        presets: [
-            [
-                '@babel/preset-env',
-                {
-                    targets: {
-                        node: 'current',
-                    },
-                    useBuiltIns: 'usage',
-                },
-            ],
-        ],
-    },
+        ...universalPresets,
+    ],
 };
 
 module.exports = {
-    plugins: [
-        'babel-plugin-preval',
-        ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
-        '@babel/plugin-proposal-class-properties',
-        'babel-plugin-react-require',
-        'babel-plugin-inline-react-svg',
-        ...(targets[env].plugins || []),
-    ],
-    presets: [
-        '@babel/preset-flow',
-        '@babel/preset-react',
-        ...(targets[env].presets || []),
-    ],
+    env: {
+        'app:server': appServerConfig,
+        'app:browser': appBrowserConfig,
+    },
+    ...defaultConfig,
 };

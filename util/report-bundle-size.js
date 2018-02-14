@@ -15,4 +15,4 @@ const files = readdirSync(dist)
         filesizegzip(readFileSync(path.join(dist, file), 'utf8'), true),
     ]);
 
-console.log(`${asTable(files)}\n`); // spacer
+console.log(`\n${asTable(files)}\n`); // spacer

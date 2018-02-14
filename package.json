@@ -4,14 +4,13 @@
     "description": "Frontend rendering framework",
     "main": "dist/index.js",
     "scripts": {
-        "build:server": "NODE_ENV=production BABEL_ENV=app:server rollup -c",
-        "build:browser": "NODE_ENV=production BABEL_ENV=app:browser webpack && node ./util/report-bundle-size.js",
-        "build": "rm -rf dist && yarn -s build:server && yarn -s build:browser",
+        "build:server": "NODE_ENV=production webpack --env.server",
+        "build": "rm -rf dist && NODE_ENV=production webpack && node ./util/report-bundle-size.js",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint . --ext .js,.jsx",
         "fix": "eslint . --ext .js,.jsx --fix",
-        "dev": "webpack-dev-server --hot"
+        "dev": "webpack-dev-server --hot --env.browser && webpack --env.server"
     },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
@@ -49,7 +48,6 @@
         "babel-plugin-preval": "^1.6.3",
         "babel-plugin-react-require": "^3.0.0",
         "chalk": "^2.3.0",
-        "concurrently": "^3.5.1",
         "decamelize": "^2.0.0",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
@@ -64,15 +62,12 @@
         "flow-bin": "^0.65.0",
         "friendly-errors-webpack-plugin": "^1.6.1",
         "prettier": "^1.7.4",
-        "rollup": "^0.55.3",
-        "rollup-plugin-babel": "^4.0.0-beta.1",
-        "rollup-plugin-commonjs": "^8.3.0",
-        "rollup-plugin-node-resolve": "^3.0.2",
         "simple-progress-webpack-plugin": "^1.0.4",
         "webpack": "^3.11.0",
         "webpack-bundle-analyzer": "^2.10.0",
         "webpack-dev-server": "^2.11.1",
-        "webpack-merge": "^4.1.1"
+        "webpack-merge": "^4.1.1",
+        "webpack-node-externals": "^1.6.0"
     },
     "prettier": {
         "tabWidth": 4,
@@ -126,6 +121,7 @@
     },
     "eslintIgnore": [
         "!.eslint.js",
+        "!.babelrc.js",
         "dist",
         "flow-typed"
     ]
