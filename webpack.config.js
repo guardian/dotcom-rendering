@@ -38,7 +38,7 @@ const envConfig = production
 const platformConfig = platform =>
     merge.smart(
         {
-            entry: { app: `./src/app/app.${platform}.js` },
+            entry: { app: `./src/app/${platform}.js` },
             output: {
                 filename: `[name].${platform}.js`,
                 chunkFilename: `[name].${platform}.js`,
