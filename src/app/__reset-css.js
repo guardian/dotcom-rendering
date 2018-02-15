@@ -17,6 +17,9 @@ const defaults = `
     *, *:before, *:after {
         box-sizing: inherit;
     }
+    body {
+        background-color: white;
+    }
 `;
 
 module.exports = [resetCSS, defaults].join('').replace(/\s/g, '');

@@ -1,1 +1,1 @@
-This is where we'll put dotcom-specific rendering code.
+The way in to the app for both server and browser

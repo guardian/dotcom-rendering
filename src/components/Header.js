@@ -1,5 +1,6 @@
 // @flow
 import { styled } from 'styletron-react';
+
 import { hidden, clearFix } from '../styles/mixins';
 import {
     until,
@@ -11,6 +12,7 @@ import {
     wide,
     between,
 } from '../styles/functions';
+
 import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
 
 // .new-header.pillar-scheme--News
