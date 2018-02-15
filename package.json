@@ -7,8 +7,8 @@
         "build": "rm -rf dist && NODE_ENV=production webpack",
         "flow": "flow",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint . --ext .js,.jsx",
-        "fix": "eslint . --ext .js,.jsx --fix",
+        "lint": "eslint . --ext .js --quiet",
+        "fix": "eslint . --ext .js --fix --quiet",
         "dev": "webpack-dev-server --hot --env.browser"
     },
     "repository": "git+https://github.com/guardian/guui.git",
@@ -77,6 +77,9 @@
     },
     "eslintConfig": {
         "parser": "babel-eslint",
+        "globals": {
+            "React": true
+        },
         "parserOptions": {
             "ecmaVersion": "2017",
             "sourceType": "module",
@@ -115,6 +118,14 @@
                 }
             ]
         },
+        "overrides": [
+            {
+                "files": ["src/**/*.demo.js", "lib/*.js"],
+                "rules": {
+                    "import/prefer-default-export": "off"
+                }
+            }
+        ],
         "env": {
             "browser": true
         }
