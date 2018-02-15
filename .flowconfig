@@ -1,4 +1,6 @@
 [ignore]
+.*/util/.*
+.*\webpack\.config.*
 
 [include]
 

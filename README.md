@@ -14,7 +14,7 @@ Slack channel: [#dotcom-future](https://theguardian.slack.com/messages/C0JES5PEV
 `yarn install`
 
 ## Develop
-`yarn start`
+`yarn dev`
 
 ## Build
 `yarn build`
