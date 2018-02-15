@@ -65,7 +65,7 @@ module.exports = {
                     ],
                     notes: [
                         chalk.dim(
-                            'To work on a specific componentent:\n    http://localhost:3000/demo/components/{MyComponent}',
+                            'To demo/dev a specific component:\n    http://localhost:3000/demo/components/{MyComponent}',
                         ),
                     ],
                 },
