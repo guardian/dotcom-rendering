@@ -11,11 +11,9 @@ import doc from '../../src/app/__html';
 const srcDir = path.resolve(__dirname, '..', '..', 'src');
 
 export default (componentPath: string): string => {
-    Object.keys(require.cache).forEach(key => delete require.cache[key]);
-
     // laoding it this way stops node caching it, so we
     // can pick up changes
-    const Component = require('./Component').default;
+    const Src = require('./Src').default;
     const styletron = new Styletron();
 
     let demos = {};
@@ -26,20 +24,11 @@ export default (componentPath: string): string => {
         // do thing, it's handled in the UI
     }
 
-    const html = `
-        ${renderToString(
-            <StyletronProvider styletron={styletron}>
-                <Component demos={{ ...demos }} path={componentPath} />
-            </StyletronProvider>,
-        )}
-        <script>
-            const sendWidth = () => {
-                window.parent.postMessage({ComponentWindowWidth: window.innerWidth}, "*");
-            };
-            sendWidth();
-            window.addEventListener("resize", sendWidth);
-        </script>
-    `;
+    const html = renderToString(
+        <StyletronProvider styletron={styletron}>
+            <Src demos={{ ...demos }} path={componentPath} />
+        </StyletronProvider>,
+    );
 
     const stylesForHead = [
         `<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">`,
@@ -50,6 +39,13 @@ export default (componentPath: string): string => {
     return doc({
         html,
         stylesForHead,
-        jsApp: '/assets/javascript/component.browser.js',
+        jsApp: '/assets/javascript/src.browser.js',
+        jsNonBlocking: `
+            const sendWidth = () => {
+                window.parent.postMessage({ComponentWindowWidth: window.innerWidth}, "*");
+            };
+            sendWidth();
+            window.addEventListener("resize", sendWidth);
+        `,
     });
 };

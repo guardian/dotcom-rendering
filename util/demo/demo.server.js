@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable global-require,import/no-dynamic-require */
 import path from 'path';
+import { readdirSync } from 'fs';
 
 import { renderToString } from 'react-dom/server';
 import Styletron from 'styletron-server';
@@ -8,36 +9,33 @@ import { StyletronProvider } from 'styletron-react';
 
 import doc from '../../src/app/__html';
 
-const srcDir = path.resolve(__dirname, '..', '..', 'src');
+const availableDemos = readdirSync('src/components').filter(file =>
+    file.endsWith('demo.js'),
+);
 
 export default (componentPath: string): string => {
-    Object.keys(require.cache).forEach(key => delete require.cache[key]);
-
     // laoding it this way stops node caching it, so we
     // can pick up changes
-    const App = require('./App').default;
+    const Demo = require('./Demo').default;
     const styletron = new Styletron();
-
-    let demos = {};
-
-    try {
-        demos = require(`${srcDir}/${componentPath}.demo`);
-    } catch (e) {
-        // do nothing, it's handled in the UI
-    }
 
     const html = renderToString(
         <StyletronProvider styletron={styletron}>
-            <App demos={{ ...demos }} path={componentPath} />
+            <Demo path={componentPath} availableDemos={availableDemos} />
         </StyletronProvider>,
     );
 
     const stylesForHead = [
         `<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">`,
         `<link rel="stylesheet" href="https://pasteup.guim.co.uk/0.0.8/css/fonts.pasteup.min.css">`,
-        `<style>body { padding: 2rem; background-color: #efefef }</style>`,
         styletron.getStylesheetsHtml(),
     ].join('');
 
-    return doc({ title: '✍️ ɢᴜᴜɪ', stylesForHead, html });
+    return doc({
+        title: '✍️ ɢᴜᴜɪ',
+        stylesForHead,
+        html,
+        jsApp: '/assets/javascript/demo.browser.js',
+        state: { availableDemos },
+    });
 };

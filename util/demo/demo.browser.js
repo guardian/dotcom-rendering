@@ -5,7 +5,7 @@ import { hydrate } from 'react-dom';
 import Styletron from 'styletron-client';
 import { StyletronProvider } from 'styletron-react';
 
-import App from './App';
+import Demo from './Demo';
 
 // webpack-specific
 // eslint-disable-next-line camelcase,no-undef
@@ -13,11 +13,13 @@ __webpack_public_path__ = '/assets/javascript/';
 
 const styleElements = document.getElementsByClassName('_styletron_hydrate_');
 
-const componentPath = window.location.pathname.split('/src/')[1];
+const { availableDemos } = window.gu.app.state;
+
+const componentPath = window.location.pathname.split('/demo/')[1];
 
 hydrate(
     <StyletronProvider styletron={new Styletron(styleElements)}>
-        <App path={componentPath} />
+        <Demo path={componentPath} availableDemos={availableDemos} />
     </StyletronProvider>,
     document.getElementById('app'),
 );

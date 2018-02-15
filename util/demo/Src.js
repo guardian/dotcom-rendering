@@ -11,7 +11,7 @@ const Title = styled('div', {
     fontFamily: 'Guardian Agate Sans',
     fontSize: '13px',
     textTransform: 'capitalize',
-    lineHeight: 1.5,
+    paddingBottom: '1rem',
 });
 
 const Stage = styled('div', {

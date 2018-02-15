@@ -9,16 +9,12 @@ require('@babel/register')({
     only: [/util|src/],
 });
 
-// const demo = require('./util/demo/app.server').default;
-// const component = require('./util/demo/component.server').default;
-const page = require('./src/app/app.server').default;
-
 module.exports = {
     browser: {
         devtool: 'cheap-module-eval-source-map',
         entry: {
-            // app: './util/demo/app.browser.js',
-            // component: './util/demo/component.browser.js',
+            demo: './util/demo/demo.browser.js',
+            src: './util/demo/src.browser.js',
         },
         devServer: {
             publicPath: '/assets/javascript/',
@@ -26,25 +22,31 @@ module.exports = {
             overlay: true,
             quiet: true,
             before(app) {
+                // always serve the current version
                 Object.keys(require.cache).forEach(
                     key => delete require.cache[key],
                 );
 
-                // app.get('/src/*', async (req, res) => {
-                //     try {
-                //         res.send(demo(req.params[0]));
-                //     } catch (e) {
-                //         log(e);
-                //     }
-                // });
-                // app.get('/component/*', async (req, res) => {
-                //     try {
-                //         res.send(component(req.params[0]));
-                //     } catch (e) {
-                //         log(e);
-                //     }
-                // });
+                app.get('/demo/*', async (req, res) => {
+                    const demo = require('./util/demo/demo.server').default;
+                    try {
+                        res.send(demo(req.params[0].split('/demo/')[0]));
+                    } catch (e) {
+                        log(e);
+                    }
+                });
+
+                app.get('/src/*', async (req, res) => {
+                    const src = require('./util/demo/src.server').default;
+                    try {
+                        res.send(src(req.params[0]));
+                    } catch (e) {
+                        log(e);
+                    }
+                });
+
                 app.get('/', async (req, res) => {
+                    const page = require('./src/app/server').default;
                     try {
                         res.send(page({ page: 'article' }));
                     } catch (e) {
@@ -59,11 +61,11 @@ module.exports = {
                     messages: [
                         `DEV server running at ${chalk.blue.underline(
                             'http://localhost:3000',
-                        )}`,
+                        )}\n    Currently serving a dummy article page`,
                     ],
                     notes: [
                         chalk.dim(
-                            'http://localhost:3000/src/components/{MyComponentPath}',
+                            'To work on a specific componentent:\n    http://localhost:3000/demo/components/{MyComponent}',
                         ),
                     ],
                 },

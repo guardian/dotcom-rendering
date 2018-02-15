@@ -8,12 +8,14 @@ export default ({
     html = '',
     jsApp = '/assets/javascript/app.browser.js',
     state = {},
+    jsNonBlocking = '',
 }: {
     title?: string,
     stylesForHead: string,
     html: string,
     jsApp?: string,
-    state: {},
+    state?: {},
+    jsNonBlocking?: string,
 }) => `
     <!doctype html>
     <html>
@@ -27,6 +29,7 @@ export default ({
             <script>
             window.gu = { app: { state: ${JSON.stringify(state)} } };</script>
             <script src="${jsApp}"></script>
+            <script>${jsNonBlocking}</script>
         </body>
     </html>
 `;

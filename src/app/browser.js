@@ -15,7 +15,7 @@ if (module.hot) {
     module.hot.accept();
 }
 
-// create code split point for all pages
+// create code split points for all ../pages
 import(/* webpackChunkName: "[request]" */ `../pages/${state.page}`).then(
     ({ default: Page }) => {
         const styleElements = document.getElementsByClassName(
