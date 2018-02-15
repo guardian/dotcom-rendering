@@ -15,8 +15,8 @@ import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
 
 // .new-header.pillar-scheme--News
 const Head = styled('header', {
-    'margin-bottom': 0,
-    'background-color': '#e9eff1',
+    marginBottom: 0,
+    backgroundColor: '#e9eff1',
     position: 'relative',
     [tablet]: {
         display: 'block',
@@ -28,16 +28,16 @@ const Nav = styled('nav', {
     ...clearFix,
     [between.mobileMedium.and.desktop]: {},
     [tablet]: {
-        'max-width': '740px',
+        maxWidth: '740px',
     },
     [desktop]: {
-        'max-width': '980px',
+        maxWidth: '980px',
     },
     [leftCol]: {
-        'max-width': '1140px',
+        maxWidth: '1140px',
     },
     [wide]: {
-        'max-width': '1300px',
+        maxWidth: '1300px',
     },
     position: 'relative',
     margin: '0 auto',
@@ -46,20 +46,20 @@ const Nav = styled('nav', {
 // .new-header__logo
 const HomeLink = styled('a', {
     float: 'right',
-    'margin-bottom': '15px',
-    'margin-right': '45px',
-    'margin-top': '5px',
+    marginBottom: '15px',
+    marginRight: '45px',
+    marginTop: '5px',
     [mobileMedium]: {
-        'margin-right': '5px',
+        marginRight: '5px',
     },
     [mobileLandscape]: {
-        'margin-right': '17px',
+        marginRight: '17px',
     },
     [desktop]: {
-        'margin-bottom': '-34px',
-        'margin-top': '5px',
+        marginBottom: '-34px',
+        marginTop: '5px',
         position: 'relative',
-        'z-index': 1071,
+        zIndex: 1071,
     },
 });
 
@@ -88,23 +88,23 @@ const topBarItem = props => {
     };
 
     const styles = {
-        'font-size': '14px',
-        'font-family':
+        fontSize: '14px',
+        fontFamily:
             '"Guardian Text Sans Web","Helvetica Neue","Helvetica","Arial","Lucida Grande","sans-serif"',
         color: '#121212',
         float: 'left',
-        'line-height': 1.2,
+        lineHeight: 1.2,
         position: 'relative',
         transition: 'color 80ms ease-out',
         padding: '6px 10px',
         margin: '1px 0 0',
         ':nth-child(2)': {
-            'padding-left': '13px',
+            paddingLeft: '13px',
         },
         ':hover': focusHoverStyles,
         ':focus': focusHoverStyles,
         [tablet]: {
-            'font-size': '14px',
+            fontSize: '14px',
         },
     };
 
@@ -122,14 +122,14 @@ const topBarItem = props => {
 const BecomeAMemberLink = styled('a', props => {
     const focusHoverStyles = {
         color: '#e9eff1',
-        'text-decoration': 'none',
+        textDecoration: 'none',
     };
 
     const styles = Object.assign({}, topBarItem(props), {
         color: '#e9eff1',
-        'font-family':
+        fontFamily:
             '"Guardian Egyptian Web", "Guardian Text Egyptian Web", "Georgia", "serif"',
-        'font-weight': 800,
+        fontWeight: 800,
         padding: 0,
         margin: 0,
         [until.mobileLandscape]: {
@@ -155,15 +155,15 @@ const TopBarCTACircle = styled('span', {
     right: 0,
     top: 0,
     transition: 'transform 250ms ease-out',
-    'transform-origin': 'top center',
+    transformOrigin: 'top center',
     ':before': {
-        'background-color': '#121212',
-        'border-radius': '50%',
+        backgroundColor: '#121212',
+        borderRadius: '50%',
         bottom: 0,
         content: '""',
         display: 'block',
         left: 0,
-        'padding-top': '100%',
+        paddingTop: '100%',
         position: 'absolute',
         right: 0,
         transition: 'background-color 250ms ease-out',
@@ -172,11 +172,11 @@ const TopBarCTACircle = styled('span', {
 
 // .top-bar__item--cta--text
 const TopBarCTAText = styled('span', {
-    'box-sizing': 'border-box',
+    boxSizing: 'border-box',
     display: 'block',
     padding: '6px 20px 3px',
     position: 'relative',
-    'text-align': 'center',
+    textAlign: 'center',
 });
 
 // .pillars
@@ -185,17 +185,17 @@ const PillarList = styled('ul', props => {
         clear: 'right',
         margin: 0,
         padding: '0 10px',
-        'list-style': 'none',
-        'list-style-image': 'none',
+        listStyle: 'none',
+        listStyleImage: 'none',
         [mobileLandscape]: {
-            'padding-left': '20px',
+            paddingLeft: '20px',
         },
     };
 
     if (props.isHeaderOpen) {
         styles = Object.assign({}, styles, {
             [desktop]: {
-                'z-index': 1070,
+                zIndex: 1070,
             },
         });
     }
@@ -231,39 +231,39 @@ const PillarListItemLink = styled('a', props => {
     };
 
     const focusHoverStyles = {
-        'text-decoration':
+        textDecoration:
             props.isHeaderOpen && !props.pillarLinkDropdown
                 ? 'underline'
                 : 'none',
     };
 
     let styles = {
-        'font-family':
+        fontFamily:
             '"Guardian Egyptian Web", "Guardian Text Egyptian Web", TimesNewRoman, serif',
-        'font-weight': 600,
+        fontWeight: 600,
         color: 'currentColor',
         cursor: 'pointer',
         display: 'block',
-        'font-size': '15.4px',
+        fontSize: '15.4px',
         height: '48px',
-        'line-height': 1,
+        lineHeight: 1,
         padding: '0 4px',
         position: 'relative',
         overflow: 'hidden',
         [tablet]: {
-            'font-size': '22px',
+            fontSize: '22px',
             height: '42px',
-            'padding-right': '20px',
-            'padding-left': '5px',
+            paddingRight: '20px',
+            paddingLeft: '5px',
         },
         ':before': Object.assign({}, beforeAfterStyles, {
-            'border-left': '1px solid #abc2c9',
+            borderLeft: '1px solid #abc2c9',
             top: '3px',
-            'z-index': 1,
+            zIndex: 1,
         }),
         ':after': !props.pillarLinkDropdown
             ? Object.assign({}, beforeAfterStyles, {
-                  'border-bottom': '4px solid currentColor',
+                  borderBottom: '4px solid currentColor',
                   right: 0,
                   bottom: '-4px',
                   transition: 'transform 150ms ease-out',
@@ -281,10 +281,10 @@ const PillarListItemLink = styled('a', props => {
 
     if (props.isHeaderSlim) {
         styles = Object.assign({}, styles, {
-            'font-size': '20px',
+            fontSize: '20px',
             height: '44px',
-            'line-height': '44px',
-            'padding-top': 0,
+            lineHeight: '44px',
+            paddingTop: 0,
             ':before': {
                 top: '17px',
             },
@@ -293,7 +293,7 @@ const PillarListItemLink = styled('a', props => {
 
     if (props.index === 0) {
         styles = Object.assign({}, styles, {
-            'padding-left': 0,
+            paddingLeft: 0,
             ':before': {
                 content: 'none',
             },
