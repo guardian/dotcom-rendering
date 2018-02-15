@@ -108,7 +108,9 @@ export default class extends React.Component<
     }
 
     handleChange = event => {
-        location = `${location.origin}/demo/${event.target.value}`;
+        window.location = `${window.location.origin}/demo/${
+            event.target.value
+        }`;
     };
 
     handleMessage = (e: { data: { ComponentWindowWidth?: number } }): void => {

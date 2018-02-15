@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable global-require,import/no-dynamic-require */
-import path from 'path';
 import { readdirSync } from 'fs';
 
 import { renderToString } from 'react-dom/server';
