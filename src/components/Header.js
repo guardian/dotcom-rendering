@@ -113,7 +113,7 @@ const topBarItem = props => {
     if (props.isPayingMember || props.isRecentContributor) {
         styles[':nth-child(2)'] = {
             ...styles[':nth-child(2)'],
-            paddingLeft: 0,
+            paddingLeft: '0',
             marginLeft: '20px',
         };
     }
