@@ -111,10 +111,11 @@ const topBarItem = props => {
     };
 
     if (props.isPayingMember || props.isRecentContributor) {
-        styles[':nth-child(2)'] = Object.assign({}, styles[':nth-child(2)'], {
+        styles[':nth-child(2)'] = {
+            ...styles[':nth-child(2)'],
             paddingLeft: 0,
             marginLeft: '20px',
-        });
+        };
     }
 
     return styles;
@@ -127,7 +128,8 @@ const BecomeAMemberLink = styled('a', props => {
         textDecoration: 'none',
     };
 
-    const styles = Object.assign({}, topBarItem(props), {
+    const styles = {
+        ...topBarItem(props),
         color: '#e9eff1',
         fontFamily:
             '"Guardian Egyptian Web", "Guardian Text Egyptian Web", "Georgia", "serif"',
@@ -139,7 +141,7 @@ const BecomeAMemberLink = styled('a', props => {
         },
         ':focus': focusHoverStyles,
         ':hover': focusHoverStyles,
-    });
+    };
 
     if (props.isPayingMember || props.isRecentContributor) {
         styles.display = 'none';
@@ -195,19 +197,21 @@ const PillarList = styled('ul', props => {
     };
 
     if (props.isHeaderOpen) {
-        styles = Object.assign({}, styles, {
+        styles = {
+            ...styles,
             [desktop]: {
                 zIndex: 1070,
             },
-        });
+        };
     }
 
     if (props.isHeaderSlim) {
-        styles = Object.assign({}, styles, {
+        styles = {
+            ...styles,
             [tablet]: {
                 display: 'none',
             },
-        });
+        };
     }
 
     return styles;
@@ -258,18 +262,20 @@ const PillarListItemLink = styled('a', props => {
             paddingRight: '20px',
             paddingLeft: '5px',
         },
-        ':before': Object.assign({}, beforeAfterStyles, {
+        ':before': {
+            ...beforeAfterStyles,
             borderLeft: '1px solid #abc2c9',
             top: '3px',
             zIndex: 1,
-        }),
+        },
         ':after': !props.pillarLinkDropdown
-            ? Object.assign({}, beforeAfterStyles, {
+            ? {
+                  ...beforeAfterStyles,
                   borderBottom: '4px solid currentColor',
                   right: 0,
                   bottom: '-4px',
                   transition: 'transform 150ms ease-out',
-              })
+              }
             : {},
         ':focus': focusHoverStyles,
         ':hover': focusHoverStyles,
@@ -282,7 +288,8 @@ const PillarListItemLink = styled('a', props => {
     };
 
     if (props.isHeaderSlim) {
-        styles = Object.assign({}, styles, {
+        styles = {
+            ...styles,
             fontSize: '20px',
             height: '44px',
             lineHeight: '44px',
@@ -290,16 +297,17 @@ const PillarListItemLink = styled('a', props => {
             ':before': {
                 top: '17px',
             },
-        });
+        };
     }
 
     if (props.index === 0) {
-        styles = Object.assign({}, styles, {
+        styles = {
+            ...styles,
             paddingLeft: 0,
             ':before': {
                 content: 'none',
             },
-        });
+        };
     }
 
     return styles;
