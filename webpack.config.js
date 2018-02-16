@@ -19,7 +19,7 @@ const baseConfig = {
     output: {
         path: path.join(__dirname, 'dist'),
     },
-    stats: 'errors-only',
+    stats: process.env.CI ? 'normal' : 'errors-only',
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),

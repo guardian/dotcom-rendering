@@ -27,11 +27,12 @@ module.exports = ({ dist, bundleName }) => ({
                 logLevel: 'warn',
             }),
 
-            new Progress({
-                format: process.env.CI ? 'expanded' : 'compact',
-            }),
+            process.env.CI &&
+                new Progress({
+                    format: 'compact',
+                }),
             new ReportBundleSize(),
-        ],
+        ].filter(Boolean),
     },
     server: {},
 });
