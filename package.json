@@ -5,9 +5,10 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "rm -rf dist && NODE_ENV=production webpack",
-        "flow": "flow",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "flow": "flow --quiet",
+        "test": "exit 0",
         "lint": "eslint . --ext .js --quiet",
+        "validate": "concurrently --raw \"yarn -s lint\" \"yarn -s flow\" \"yarn -s test && echo Tests passed!\" \"CI=true yarn -s build && echo Build succeeded!\"",
         "fix": "eslint . --ext .js --fix --quiet",
         "dev": "webpack-dev-server --hot --env.browser"
     },
@@ -45,13 +46,16 @@
         "babel-loader": "^8.0.0-beta.0",
         "babel-plugin-dynamic-import-node": "^1.2.0",
         "babel-plugin-inline-react-svg": "^0.5.2",
+        "babel-plugin-module-resolver": "^3.1.0",
         "babel-plugin-preval": "^1.6.3",
         "babel-plugin-react-require": "^3.0.0",
         "chalk": "^2.3.0",
+        "concurrently": "^3.5.1",
         "decamelize": "^2.0.0",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.6.0",
+        "eslint-import-resolver-babel-module": "^4.0.0",
         "eslint-plugin-flow-header": "^0.2.0",
         "eslint-plugin-flowtype": "^2.44.0",
         "eslint-plugin-import": "^2.7.0",
@@ -94,6 +98,13 @@
             "prettier/flowtype",
             "prettier/react"
         ],
+        "settings": {
+            "import/resolver": {
+                "babel-module": {
+                    "root": ["./src"]
+                }
+            }
+        },
         "plugins": [
             "flow-header",
             "flowtype",
