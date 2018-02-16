@@ -66,9 +66,7 @@ const HomeLink = styled('a', {
 });
 
 // .u-h
-const ScreenReadable = styled('span', {
-    ...screenReaderOnly,
-});
+const ScreenReadable = styled('span', screenReaderOnly);
 
 // .inline-the-guardian-logo.inline-logo
 const Logo = styled(TheGuardianLogoSVG, {
