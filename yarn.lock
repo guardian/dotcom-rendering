@@ -760,10 +760,6 @@ array-find-index@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-find-index/-/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
 
-array-find@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/array-find/-/array-find-1.0.0.tgz#6c8e286d11ed768327f8e62ecee87353ca3e78b8"
-
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
@@ -984,6 +980,16 @@ babel-plugin-macros@^2.0.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.1.0.tgz#e978fd4c5ee9cca73a809c176524c2e9f4dcccbf"
   dependencies:
     cosmiconfig "^4.0.0"
+
+babel-plugin-module-resolver@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.1.0.tgz#cf7868bd2c1818f855aede16141009b87dd1f95b"
+  dependencies:
+    find-babel-config "^1.1.0"
+    glob "^7.1.2"
+    pkg-up "^2.0.0"
+    reselect "^3.0.1"
+    resolve "^1.4.0"
 
 babel-plugin-preval@^1.6.3:
   version "1.6.3"
@@ -1937,14 +1943,6 @@ enhanced-resolve@^3.4.0:
     object-assign "^4.0.1"
     tapable "^0.2.7"
 
-enhanced-resolve@~0.9.0:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-0.9.1.tgz#4d6e689b3725f86090927ccc86cd9f1635b89e2e"
-  dependencies:
-    graceful-fs "^4.1.2"
-    memory-fs "^0.2.0"
-    tapable "^0.1.8"
-
 errno@^0.1.3:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.6.tgz#c386ce8a6283f14fc09563b71560908c9bf53026"
@@ -2068,28 +2066,19 @@ eslint-config-prettier@^2.6.0:
   dependencies:
     get-stdin "^5.0.1"
 
+eslint-import-resolver-babel-module@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-babel-module/-/eslint-import-resolver-babel-module-4.0.0.tgz#1c596f7fb9815050292c8750d523b27a5444b4bf"
+  dependencies:
+    pkg-up "^2.0.0"
+    resolve "^1.4.0"
+
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.2.tgz#58f15fb839b8d0576ca980413476aab2472db66a"
   dependencies:
     debug "^2.6.9"
     resolve "^1.5.0"
-
-eslint-import-resolver-webpack@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/eslint-import-resolver-webpack/-/eslint-import-resolver-webpack-0.8.4.tgz#0f7cd74bc9d7fc1773e8d5fc25baf864b2f87a42"
-  dependencies:
-    array-find "^1.0.0"
-    debug "^2.6.8"
-    enhanced-resolve "~0.9.0"
-    find-root "^0.1.1"
-    has "^1.0.1"
-    interpret "^1.0.0"
-    is-absolute "^0.2.3"
-    lodash.get "^3.7.0"
-    node-libs-browser "^1.0.0 || ^2.0.0"
-    resolve "^1.2.0"
-    semver "^5.3.0"
 
 eslint-module-utils@^2.1.1:
   version "2.1.1"
@@ -2509,6 +2498,13 @@ finalhandler@1.1.0:
     statuses "~1.3.1"
     unpipe "~1.0.0"
 
+find-babel-config@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/find-babel-config/-/find-babel-config-1.1.0.tgz#acc01043a6749fec34429be6b64f542ebb5d6355"
+  dependencies:
+    json5 "^0.5.1"
+    path-exists "^3.0.0"
+
 find-cache-dir@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-1.0.0.tgz#9288e3e9e3cc3748717d39eade17cf71fc30ee6f"
@@ -2516,10 +2512,6 @@ find-cache-dir@^1.0.0:
     commondir "^1.0.1"
     make-dir "^1.0.0"
     pkg-dir "^2.0.0"
-
-find-root@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/find-root/-/find-root-0.1.2.tgz#98d2267cff1916ccaf2743b3a0eea81d79d7dcd1"
 
 find-up@^1.0.0:
   version "1.1.2"
@@ -3049,13 +3041,6 @@ ipaddr.js@1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.5.2.tgz#d4b505bde9946987ccf0fc58d9010ff9607e3fa0"
 
-is-absolute@^0.2.3:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/is-absolute/-/is-absolute-0.2.6.tgz#20de69f3db942ef2d87b9c2da36f172235b1b5eb"
-  dependencies:
-    is-relative "^0.2.1"
-    is-windows "^0.2.0"
-
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz#a9e12cb3ae8d876727eeef3843f8a0897b5c98d6"
@@ -3248,12 +3233,6 @@ is-regex@^1.0.4:
   dependencies:
     has "^1.0.1"
 
-is-relative@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/is-relative/-/is-relative-0.2.1.tgz#d27f4c7d516d175fb610db84bbeef23c3bc97aa5"
-  dependencies:
-    is-unc-path "^0.1.1"
-
 is-resolvable@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-resolvable/-/is-resolvable-1.1.0.tgz#fb18f87ce1feb925169c9a407c19318a3206ed88"
@@ -3270,19 +3249,9 @@ is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
 
-is-unc-path@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/is-unc-path/-/is-unc-path-0.1.2.tgz#6ab053a72573c10250ff416a3814c35178af39b9"
-  dependencies:
-    unc-path-regex "^0.1.0"
-
 is-utf8@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
-
-is-windows@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-0.2.0.tgz#de1aa6d63ea29dd248737b69f1ff8b8002d2108c"
 
 is-wsl@^1.1.0:
   version "1.1.0"
@@ -3497,30 +3466,9 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash._baseget@^3.0.0:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/lodash._baseget/-/lodash._baseget-3.7.2.tgz#1b6ae1d5facf3c25532350a13c1197cb8bb674f4"
-
-lodash._topath@^3.0.0:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/lodash._topath/-/lodash._topath-3.8.1.tgz#3ec5e2606014f4cb97f755fe6914edd8bfc00eac"
-  dependencies:
-    lodash.isarray "^3.0.0"
-
 lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
-
-lodash.get@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-3.7.0.tgz#3ce68ae2c91683b281cc5394128303cbf75e691f"
-  dependencies:
-    lodash._baseget "^3.0.0"
-    lodash._topath "^3.0.0"
-
-lodash.isarray@^3.0.0:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
@@ -3606,10 +3554,6 @@ mem@^1.1.0:
   resolved "https://registry.yarnpkg.com/mem/-/mem-1.1.0.tgz#5edd52b485ca1d900fe64895505399a0dfa45f76"
   dependencies:
     mimic-fn "^1.0.0"
-
-memory-fs@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.2.0.tgz#f2bb25368bc121e391c2520de92969caee0a0290"
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
@@ -3809,7 +3753,7 @@ node-forge@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.1.tgz#9da611ea08982f4b94206b3beb4cc9665f20c300"
 
-"node-libs-browser@^1.0.0 || ^2.0.0", node-libs-browser@^2.0.0:
+node-libs-browser@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/node-libs-browser/-/node-libs-browser-2.1.0.tgz#5f94263d404f6e44767d726901fff05478d600df"
   dependencies:
@@ -4194,6 +4138,12 @@ pkg-dir@^1.0.0:
 pkg-dir@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-2.0.0.tgz#f6d5d1109e19d63edf428e0bd57e12777615334b"
+  dependencies:
+    find-up "^2.1.0"
+
+pkg-up@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-2.0.0.tgz#c819ac728059a461cab1c3889a2be3c49a004d7f"
   dependencies:
     find-up "^2.1.0"
 
@@ -4588,6 +4538,10 @@ requires-port@1.0.x, requires-port@1.x.x, requires-port@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
+reselect@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
+
 reset-css@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/reset-css/-/reset-css-2.2.1.tgz#fe3204c0c4831979fbb4967c90a992f0164635ed"
@@ -4614,7 +4568,7 @@ resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
 
-resolve@^1.2.0, resolve@^1.3.2, resolve@^1.5.0:
+resolve@^1.3.2, resolve@^1.4.0, resolve@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
   dependencies:
@@ -5128,10 +5082,6 @@ table@^4.0.1:
     slice-ansi "1.0.0"
     string-width "^2.1.1"
 
-tapable@^0.1.8:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.1.10.tgz#29c35707c2b70e50d07482b5d202e8ed446dafd4"
-
 tapable@^0.2.7:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"
@@ -5299,10 +5249,6 @@ uid-number@^0.0.6:
 ultron@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.1.tgz#9fe1536a10a664a65266a1e3ccf85fd36302bc9c"
-
-unc-path-regex@^0.1.0:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
 
 underscore.string@2.3.x:
   version "2.3.3"

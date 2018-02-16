@@ -6,6 +6,12 @@ const universalPlugins = [
     '@babel/plugin-proposal-class-properties',
     'babel-plugin-react-require',
     'babel-plugin-inline-react-svg',
+    [
+        'babel-plugin-module-resolver',
+        {
+            root: ['./src'],
+        },
+    ],
 ];
 
 const universalPresets = ['@babel/preset-flow', '@babel/preset-react'];

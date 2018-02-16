@@ -8,7 +8,7 @@
         "flow": "flow",
         "test": "echo \"Write tests!\"",
         "lint": "eslint . --ext .js --quiet",
-        "validate": "yarn lint && yarn flow && yarn test",
+        "validate": "yarn lint && yarn flow && yarn test && yarn build",
         "fix": "eslint . --ext .js --fix --quiet",
         "dev": "webpack-dev-server --hot --env.browser"
     },
@@ -46,6 +46,7 @@
         "babel-loader": "^8.0.0-beta.0",
         "babel-plugin-dynamic-import-node": "^1.2.0",
         "babel-plugin-inline-react-svg": "^0.5.2",
+        "babel-plugin-module-resolver": "^3.1.0",
         "babel-plugin-preval": "^1.6.3",
         "babel-plugin-react-require": "^3.0.0",
         "chalk": "^2.3.0",
@@ -53,7 +54,7 @@
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.6.0",
-        "eslint-import-resolver-webpack": "^0.8.4",
+        "eslint-import-resolver-babel-module": "^4.0.0",
         "eslint-plugin-flow-header": "^0.2.0",
         "eslint-plugin-flowtype": "^2.44.0",
         "eslint-plugin-import": "^2.7.0",
@@ -97,7 +98,11 @@
             "prettier/react"
         ],
         "settings": {
-            "import/resolver": "webpack"
+            "import/resolver": {
+                "babel-module": {
+                    "root": ["./src"]
+                }
+            }
         },
         "plugins": [
             "flow-header",
