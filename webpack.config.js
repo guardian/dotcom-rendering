@@ -26,6 +26,12 @@ const baseConfig = {
         }),
         new webpack.NamedModulesPlugin(),
     ],
+    resolve: {
+        modules: [
+            path.join(__dirname, 'src'),
+            'node_modules', // default location, but we're overiding above, so it needs to be explicit
+        ],
+    },
 };
 
 const envConfig = production

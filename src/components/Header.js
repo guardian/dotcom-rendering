@@ -1,7 +1,7 @@
 // @flow
 import { styled } from 'styletron-react';
 
-import { hidden, clearFix } from '../styles/mixins';
+import { screenReaderOnly, clearFix } from 'pasteup/mixins';
 import {
     until,
     mobileLandscape,
@@ -11,9 +11,9 @@ import {
     leftCol,
     wide,
     between,
-} from '../styles/functions';
+} from 'pasteup/breakpoints';
 
-import TheGuardianLogoSVG from '../../static/inline-svgs/the-guardian-logo.svg';
+import TheGuardianLogoSVG from 'static/inline-svgs/the-guardian-logo.svg';
 
 // .new-header.pillar-scheme--News
 const Head = styled('header', {
@@ -67,7 +67,7 @@ const HomeLink = styled('a', {
 
 // .u-h
 const ScreenReadable = styled('span', {
-    ...hidden,
+    ...screenReaderOnly,
 });
 
 // .inline-the-guardian-logo.inline-logo
@@ -154,7 +154,7 @@ const BecomeAMemberLink = styled('a', props => {
 const TopBarCTACircle = styled('span', {
     bottom: '-12px',
     left: 0,
-    overflow: 'hidden',
+    overflow: 'screenReaderOnly',
     position: 'absolute',
     right: 0,
     top: 0,
@@ -255,7 +255,7 @@ const PillarListItemLink = styled('a', props => {
         lineHeight: 1,
         padding: '0 4px',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'screenReaderOnly',
         [tablet]: {
             fontSize: '22px',
             height: '42px',
