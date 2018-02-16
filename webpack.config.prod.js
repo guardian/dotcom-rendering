@@ -27,7 +27,7 @@ module.exports = ({ dist, bundleName }) => ({
                 logLevel: 'warn',
             }),
 
-            process.env.CI &&
+            process.env.CI ||
                 new Progress({
                     format: 'compact',
                 }),
