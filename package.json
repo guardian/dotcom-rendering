@@ -5,10 +5,10 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "rm -rf dist && NODE_ENV=production webpack",
-        "flow": "flow",
-        "test": "echo \"Write tests!\"",
+        "flow": "flow --quiet",
+        "test": "exit 0",
         "lint": "eslint . --ext .js --quiet",
-        "validate": "yarn lint && yarn flow && yarn test && yarn build",
+        "validate": "concurrently --raw \"yarn -s lint\" \"yarn -s flow\" \"yarn -s test && echo Tests passed!\" \"CI=true yarn -s build && echo Build succeeded!\"",
         "fix": "eslint . --ext .js --fix --quiet",
         "dev": "webpack-dev-server --hot --env.browser"
     },
@@ -50,6 +50,7 @@
         "babel-plugin-preval": "^1.6.3",
         "babel-plugin-react-require": "^3.0.0",
         "chalk": "^2.3.0",
+        "concurrently": "^3.5.1",
         "decamelize": "^2.0.0",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
