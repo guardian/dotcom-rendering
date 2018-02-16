@@ -28,7 +28,7 @@ module.exports = ({ dist, bundleName }) => ({
             }),
 
             new Progress({
-                format: 'compact',
+                format: process.env.CI ? 'expanded' : 'compact',
             }),
             new ReportBundleSize(),
         ],
