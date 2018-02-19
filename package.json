@@ -82,7 +82,7 @@
     "eslintConfig": {
         "parser": "babel-eslint",
         "globals": {
-            "React": true
+            "React": false
         },
         "parserOptions": {
             "ecmaVersion": "2017",
