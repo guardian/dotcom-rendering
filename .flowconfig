@@ -1,5 +1,5 @@
 [ignore]
-.*/util/.*
+.*/__util/.*
 .*\webpack\.config.*
 
 [include]
