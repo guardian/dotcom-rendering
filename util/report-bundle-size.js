@@ -5,6 +5,7 @@ const { readdirSync, readFileSync } = require('fs');
 
 const filesizegzip = require('filesizegzip');
 const asTable = require('as-table');
+const chalk = require('chalk');
 
 const dist = path.join(__dirname, '..', 'dist');
 
@@ -18,7 +19,9 @@ ReportBundleSize.prototype.apply = compiler => {
                 file,
                 filesizegzip(readFileSync(path.join(dist, file), 'utf8'), true),
             ]);
-        console.log(`${asTable(files)}\n`);
+        console.log(
+            `${chalk.underline('Client bundles')}\n${asTable(files)}\n`,
+        );
     });
 };
 
