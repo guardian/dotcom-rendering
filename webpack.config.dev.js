@@ -62,15 +62,30 @@ module.exports = {
                     try {
                         res.send(`
                         <html>
+                        <h3>pages</h3>
                         <ul>
                         ${fs
                             .readdirSync(
                                 path.resolve(__dirname, 'src', 'pages'),
                             )
-                            .map(
-                                page =>
-                                    `<a href="/pages/${page}">pages/${page}</a>`,
-                            )}
+                            .map(page => {
+                                const name = page.replace(/.js$/, '');
+                                return `<li><a href="/pages/${name}">${name}</a></li>`;
+                            })
+                            .join('')}
+                        </ul>
+                        <h3>components</h3>
+                        <ul>
+                        ${fs
+                            .readdirSync(
+                                path.resolve(__dirname, 'src', 'components'),
+                            )
+                            .filter(page => page.endsWith('.demo.js'))
+                            .map(page => {
+                                const name = page.replace(/.demo.js$/, '');
+                                return `<li><a href="/demo/components/${name}">${name}</a></li>`;
+                            })
+                            .join('')}
                         </ul>
                         </html>
                         `);

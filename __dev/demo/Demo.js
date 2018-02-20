@@ -75,10 +75,6 @@ const FrameSize = styled('div', {
     },
 });
 
-const Selector = styled('select', {
-    marginLeft: '1ex',
-});
-
 const breakpoints: {
     [string]: number,
 } = {
@@ -135,8 +131,7 @@ export default class extends React.Component<
         return (
             <Preview>
                 <Header>
-                    demo for
-                    <Selector
+                    <select
                         value={this.props.path}
                         onChange={this.handleChange}
                     >
@@ -150,7 +145,7 @@ export default class extends React.Component<
                                 </option>
                             );
                         })}
-                    </Selector>
+                    </select>
                     <GithubLink
                         href={`https://github.com/guardian/guui/blob/master/src/${
                             this.props.path
