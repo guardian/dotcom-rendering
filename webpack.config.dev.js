@@ -2,19 +2,21 @@
 /* eslint-disable global-require,import/no-dynamic-require */
 
 const { log } = require('util');
+const fs = require('fs');
+const path = require('path');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
 
 require('@babel/register')({
-    only: [/__util|src/],
+    only: [/__dev|src/],
 });
 
 module.exports = {
     browser: {
         devtool: 'cheap-module-eval-source-map',
         entry: {
-            demo: './__util/demo/demo.browser.js',
-            src: './__util/demo/src.browser.js',
+            demo: './__dev/demo/demo.browser.js',
+            src: './__dev/demo/src.browser.js',
         },
         devServer: {
             publicPath: '/assets/javascript/',
@@ -28,7 +30,7 @@ module.exports = {
                 );
 
                 app.get('/demo/*', async (req, res) => {
-                    const demo = require('./__util/demo/demo.server').default;
+                    const demo = require('./__dev/demo/demo.server').default;
                     try {
                         res.send(demo(req.params[0].split('/demo/')[0]));
                     } catch (e) {
@@ -37,7 +39,7 @@ module.exports = {
                 });
 
                 app.get('/src/*', async (req, res) => {
-                    const src = require('./__util/demo/src.server').default;
+                    const src = require('./__dev/demo/src.server').default;
                     try {
                         res.send(src(req.params[0]));
                     } catch (e) {
@@ -45,10 +47,33 @@ module.exports = {
                     }
                 });
 
-                app.get('/', async (req, res) => {
+                app.get('/pages/*', async (req, res) => {
                     const page = require('./src/app/server').default;
+                    const pageType = req.params[0].split('/pages/')[0];
+                    const data = require(`./__dev/data/${pageType}`).default;
                     try {
-                        res.send(page({ page: 'article' }));
+                        res.send(page(data));
+                    } catch (e) {
+                        log(e);
+                    }
+                });
+
+                app.get('/', async (req, res) => {
+                    try {
+                        res.send(`
+                        <html>
+                        <ul>
+                        ${fs
+                            .readdirSync(
+                                path.resolve(__dirname, 'src', 'pages'),
+                            )
+                            .map(
+                                page =>
+                                    `<a href="/pages/${page}">pages/${page}</a>`,
+                            )}
+                        </ul>
+                        </html>
+                        `);
                     } catch (e) {
                         log(e);
                     }
