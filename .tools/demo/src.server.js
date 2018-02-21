@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server';
 import Styletron from 'styletron-server';
 import { StyletronProvider } from 'styletron-react';
 
-import doc from '../../src/app/__html';
+import doc from '../../src/lib/__html';
 
 const srcDir = path.resolve(__dirname, '..', '..', 'src');
 

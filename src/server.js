@@ -5,9 +5,9 @@ import Styletron from 'styletron-server';
 import { StyletronProvider } from 'styletron-react';
 import requireDir from 'require-dir';
 
-import doc from './__html';
+import doc from 'lib/__html';
 
-const pages = requireDir('../pages');
+const pages = requireDir('./pages');
 
 export default (state: { page: string }): string => {
     const Page = pages[state.page].default;

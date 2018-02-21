@@ -16,7 +16,7 @@ if (module.hot) {
 }
 
 // create code split points for all ../pages
-import(/* webpackChunkName: "[request]" */ `../pages/${state.page}`).then(
+import(/* webpackChunkName: "[request]" */ `./pages/${state.page}`).then(
     ({ default: Page }) => {
         const styleElements = document.getElementsByClassName(
             '_styletron_hydrate_',

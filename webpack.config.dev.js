@@ -48,7 +48,7 @@ module.exports = {
                 });
 
                 app.get('/pages/*', async (req, res) => {
-                    const page = require('./src/app/server').default;
+                    const page = require('./src/server').default;
                     const pageType = req.params[0].split('/pages/')[0];
                     const data = require(`./.data/${pageType}`);
 
