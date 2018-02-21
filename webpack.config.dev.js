@@ -2,19 +2,21 @@
 /* eslint-disable global-require,import/no-dynamic-require */
 
 const { log } = require('util');
+const fs = require('fs');
+const path = require('path');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
 
 require('@babel/register')({
-    only: [/util|src/],
+    only: [/__dev|src/],
 });
 
 module.exports = {
     browser: {
         devtool: 'cheap-module-eval-source-map',
         entry: {
-            demo: './util/demo/demo.browser.js',
-            src: './util/demo/src.browser.js',
+            demo: './__dev/demo/demo.browser.js',
+            src: './__dev/demo/src.browser.js',
         },
         devServer: {
             publicPath: '/assets/javascript/',
@@ -28,7 +30,7 @@ module.exports = {
                 );
 
                 app.get('/demo/*', async (req, res) => {
-                    const demo = require('./util/demo/demo.server').default;
+                    const demo = require('./__dev/demo/demo.server').default;
                     try {
                         res.send(demo(req.params[0].split('/demo/')[0]));
                     } catch (e) {
@@ -37,7 +39,7 @@ module.exports = {
                 });
 
                 app.get('/src/*', async (req, res) => {
-                    const src = require('./util/demo/src.server').default;
+                    const src = require('./__dev/demo/src.server').default;
                     try {
                         res.send(src(req.params[0]));
                     } catch (e) {
@@ -45,10 +47,48 @@ module.exports = {
                     }
                 });
 
-                app.get('/', async (req, res) => {
+                app.get('/pages/*', async (req, res) => {
                     const page = require('./src/app/server').default;
+                    const pageType = req.params[0].split('/pages/')[0];
+                    const data = require(`./__dev/data/${pageType}`).default;
                     try {
-                        res.send(page({ page: 'article' }));
+                        res.send(page(data));
+                    } catch (e) {
+                        log(e);
+                    }
+                });
+
+                app.get('/', async (req, res) => {
+                    try {
+                        res.send(`
+                        <html>
+                        <h3>pages</h3>
+                        <ul>
+                        ${fs
+                            .readdirSync(
+                                path.resolve(__dirname, 'src', 'pages'),
+                            )
+                            .map(page => {
+                                const name = page.replace(/.js$/, '');
+                                return `<li><a href="/pages/${name}">${name}</a></li>`;
+                            })
+                            .join('')}
+                        </ul>
+                        <h3>components</h3>
+                        <ul>
+                        ${fs
+                            .readdirSync(
+                                path.resolve(__dirname, 'src', 'components'),
+                            )
+                            .filter(page => page.endsWith('.demo.js'))
+                            .map(page => {
+                                const name = page.replace(/.demo.js$/, '');
+                                return `<li><a href="/demo/components/${name}">${name}</a></li>`;
+                            })
+                            .join('')}
+                        </ul>
+                        </html>
+                        `);
                     } catch (e) {
                         log(e);
                     }
@@ -61,12 +101,7 @@ module.exports = {
                     messages: [
                         `DEV server running at ${chalk.blue.underline(
                             'http://localhost:3000',
-                        )}\n    Currently serving a dummy article page`,
-                    ],
-                    notes: [
-                        chalk.dim(
-                            'To demo/dev a specific component:\n    http://localhost:3000/demo/components/{MyComponent}',
-                        ),
+                        )}`,
                     ],
                 },
             }),
