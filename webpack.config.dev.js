@@ -101,12 +101,7 @@ module.exports = {
                     messages: [
                         `DEV server running at ${chalk.blue.underline(
                             'http://localhost:3000',
-                        )}\n    Currently serving a dummy article page`,
-                    ],
-                    notes: [
-                        chalk.dim(
-                            'To demo/dev a specific component:\n    http://localhost:3000/demo/components/{MyComponent}',
-                        ),
+                        )}`,
                     ],
                 },
             }),
