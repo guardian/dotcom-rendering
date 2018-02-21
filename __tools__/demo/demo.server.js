@@ -31,7 +31,7 @@ export default (componentPath: string): string => {
     ].join('');
 
     return doc({
-        title: '✍️ ɢᴜᴜɪ',
+        title: '✍️ 𝐆𝐔𝐔𝐈',
         stylesForHead,
         html,
         jsApp: '/assets/javascript/demo.browser.js',
