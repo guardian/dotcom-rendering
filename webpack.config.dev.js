@@ -8,15 +8,15 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
 
 require('@babel/register')({
-    only: [/__dev|src/],
+    only: [/.tools\/demo|src/],
 });
 
 module.exports = {
     browser: {
         devtool: 'cheap-module-eval-source-map',
         entry: {
-            demo: './__dev/demo/demo.browser.js',
-            src: './__dev/demo/src.browser.js',
+            demo: './.tools/demo/demo.browser.js',
+            src: './.tools/demo/src.browser.js',
         },
         devServer: {
             publicPath: '/assets/javascript/',
@@ -30,7 +30,7 @@ module.exports = {
                 );
 
                 app.get('/demo/*', async (req, res) => {
-                    const demo = require('./__dev/demo/demo.server').default;
+                    const demo = require('./.tools/demo/demo.server').default;
                     try {
                         res.send(demo(req.params[0].split('/demo/')[0]));
                     } catch (e) {
@@ -39,7 +39,7 @@ module.exports = {
                 });
 
                 app.get('/src/*', async (req, res) => {
-                    const src = require('./__dev/demo/src.server').default;
+                    const src = require('./.tools/demo/src.server').default;
                     try {
                         res.send(src(req.params[0]));
                     } catch (e) {
@@ -50,7 +50,8 @@ module.exports = {
                 app.get('/pages/*', async (req, res) => {
                     const page = require('./src/app/server').default;
                     const pageType = req.params[0].split('/pages/')[0];
-                    const data = require(`./__dev/data/${pageType}`).default;
+                    const data = require(`./.data/${pageType}`);
+
                     try {
                         res.send(page(data));
                     } catch (e) {
