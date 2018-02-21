@@ -2,15 +2,19 @@
     "name": "@guardian/guui",
     "version": "2.0.0",
     "description": "Frontend rendering framework",
-    "main": "dist/index.js",
+    "main": "dist/app.server.js",
+    "bin": {
+        "guui": "./__tools__/cli/index.js"
+    },
     "scripts": {
-        "build": "rm -rf dist && NODE_ENV=production webpack",
+        "setup": "npm i && node __tools__/cli setup",
+        "build": "./__tools__/cli/index.js build",
         "flow": "flow --quiet",
         "test": "exit 0",
         "lint": "eslint . --ext .js --quiet",
         "validate": "concurrently --raw \"yarn -s lint\" \"yarn -s flow\" \"yarn -s test && echo Tests passed!\" \"CI=true yarn -s build && echo Build succeeded!\"",
         "fix": "eslint . --ext .js --fix --quiet",
-        "dev": "webpack-dev-server --hot --env.browser"
+        "dev": "node __tools__/cli dev"
     },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
@@ -20,6 +24,9 @@
     },
     "homepage": "https://github.com/guardian/guui#readme",
     "dependencies": {
+        "ansi-escapes": "^3.0.0",
+        "execa": "^0.9.0",
+        "minimist": "^1.2.0",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-hot-loader": "^4.0.0-rc.0",
