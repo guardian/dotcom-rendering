@@ -8,15 +8,15 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
 
 require('@babel/register')({
-    only: [/.tools\/demo|src/],
+    only: [/__tools__\/demo|src/],
 });
 
 module.exports = {
     browser: {
         devtool: 'cheap-module-eval-source-map',
         entry: {
-            demo: './.tools/demo/demo.browser.js',
-            src: './.tools/demo/src.browser.js',
+            demo: './__tools__/demo/demo.browser.js',
+            src: './__tools__/demo/src.browser.js',
         },
         devServer: {
             publicPath: '/assets/javascript/',
@@ -30,7 +30,8 @@ module.exports = {
                 );
 
                 app.get('/demo/*', async (req, res) => {
-                    const demo = require('./.tools/demo/demo.server').default;
+                    const demo = require('./__tools__/demo/demo.server')
+                        .default;
                     try {
                         res.send(demo(req.params[0].split('/demo/')[0]));
                     } catch (e) {
@@ -39,7 +40,7 @@ module.exports = {
                 });
 
                 app.get('/src/*', async (req, res) => {
-                    const src = require('./.tools/demo/src.server').default;
+                    const src = require('./__tools__/demo/src.server').default;
                     try {
                         res.send(src(req.params[0]));
                     } catch (e) {

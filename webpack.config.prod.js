@@ -4,7 +4,7 @@ const path = require('path');
 
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const ReportBundleSize = require('./.tools/report-bundle-size');
+const ReportBundleSize = require('./__tools__/report-bundle-size');
 const Progress = require('simple-progress-webpack-plugin');
 
 module.exports = ({ dist, bundleName }) => ({
