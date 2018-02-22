@@ -35,11 +35,20 @@ const envConfig = production
       })
     : require('./webpack.config.dev');
 
-const platformConfig = platform =>
-    merge.smart(
+const platformConfig = platform => {
+    const lib =
+        platform === 'server'
+            ? {
+                  library: 'serve',
+                  libraryTarget: 'commonjs2',
+              }
+            : {};
+
+    return merge.smart(
         {
             entry: { app: `./src/${platform}.js` },
             output: {
+                ...lib,
                 filename: `[name].${platform}.js`,
                 chunkFilename: `[name].${platform}.js`,
             },
@@ -49,6 +58,7 @@ const platformConfig = platform =>
         },
         envConfig[platform],
     );
+};
 
 const browserConfig = merge.smart(baseConfig, platformConfig('browser'));
 const serverConfig = merge.smart(
