@@ -20,6 +20,7 @@ module.exports = (...packages) =>
                         resolve(packages.map(require));
                     } catch (e2) {
                         console.log(e2);
+                        process.exit(1);
                     }
                 });
         }
