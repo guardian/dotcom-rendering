@@ -1,20 +1,30 @@
 // @flow
+
+// BRANDED LOGGING
+
 const capitalize = string =>
     string.replace(/^([a-z])/, match => match.toUpperCase());
 
 const wrap = messages => messages.join('\n     ');
 
-const guuiLog = async (string, color = '\x1b[2m') => {
+// we could use chalk, but this saves needing to pre-install it
+// if this is a first run
+const red = '\x1b[31m';
+const white = '\x1b[37m';
+const dim = '\x1b[2m';
+const reset = '\x1b[0m';
+
+const GUUILog = async (string, color = dim) => {
     console.log(
-        `\x1b[37m%s\x1b[0m${color}%s\x1b[0m`,
+        `${white}%s${reset}${color}%s${reset}`,
         '𝐆𝐔𝐔𝐈 ',
         capitalize(string),
     );
 };
 
 module.exports = {
-    log: (...messages) => guuiLog(wrap(messages)),
+    log: (...messages) => GUUILog(wrap(messages)),
     warn: async (...messages) => {
-        guuiLog(wrap(messages), '\x1b[31m');
+        GUUILog(wrap(messages), red);
     },
 };
