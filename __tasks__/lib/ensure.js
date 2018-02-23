@@ -4,7 +4,7 @@
 // if they've been installed yet (with yarn) by temporarily
 // installing with npm if node cannot resolve the package
 
-const { log } = require('./log');
+const { log } = require('../log');
 
 module.exports = (...packages) =>
     new Promise(resolve => {

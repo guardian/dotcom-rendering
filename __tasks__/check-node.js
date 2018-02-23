@@ -16,7 +16,7 @@ const ensure = require('./lib/ensure');
         )).trim();
 
         if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
-            await require('./lib/log').warn(`You need node@${nvmrcVersion}`);
+            require('./log').warn(`You need node@${nvmrcVersion}`);
             process.exit(1);
         }
     } catch (e) {
