@@ -3,9 +3,6 @@
     "version": "2.0.0",
     "description": "Frontend rendering framework",
     "main": "dist/app.server.js",
-    "bin": {
-        "guui": "./__tools__/cli/index.js"
-    },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
     "license": "Apache-2.0",
