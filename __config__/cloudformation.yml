@@ -161,21 +161,22 @@ Resources:
 
           cd /home/ubuntu
 
-          apt-get update
-
           curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-          apt-get install -y nodejs
-
           curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
           echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-          apt-get install yarn
+
+          apt-get update
+          apt-get install -y nodejs
+          apt-get install -y yarn
 
           git clone https://github.com/guardian/guui.git
           cd guui
+          git fetch
+          git checkout sa-productionise
 
-          yarn
-          yarn build
-          yarn start
+          export TERM=xterm-256color
+
+          make build start
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
