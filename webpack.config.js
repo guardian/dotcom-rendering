@@ -69,9 +69,27 @@ const serverConfig = merge.smart(
     },
     platformConfig('server'),
 );
+const pagesConfig = merge.smart(
+    baseConfig,
+    {
+        entry: {
+            article: './src/pages/article.js',
+        },
+        output: {
+            library: 'serve',
+            libraryTarget: 'commonjs2',
+            filename: `pages/[name].js`,
+            chunkFilename: `pages/[name].js`,
+        },
+        module: {
+            rules: [babelLoader('app:server')],
+        },
+    },
+    envConfig.server,
+);
 
 module.exports = ({ browser = false, server = false } = {}) => {
     if (browser) return browserConfig;
     if (server) return serverConfig;
-    return [browserConfig, serverConfig];
+    return [browserConfig, serverConfig, pagesConfig];
 };
