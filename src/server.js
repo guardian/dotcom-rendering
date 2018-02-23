@@ -23,6 +23,9 @@ const renderPage = async function renderPage(page: string): string => {
 };
 
 export default async (req: {}): string => {
+    if (req.url.includes('/healthcheck')) {
+        return 'OK';
+    }
     if (req.url.includes('/pages/')) {
         return renderPage(req.url.split('/pages/')[1]);
     }
