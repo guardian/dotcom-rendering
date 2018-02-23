@@ -8,9 +8,9 @@ import doc from 'lib/__html';
 
 const pages = requireDir('./pages');
 
-export default (state: { page: string }): string => {
-    const Page = pages[state.page].default;
-    const state = {}; // TODO: get state from request
+const renderPage = async function renderPage(page: string): string => {
+    const Page = pages[page].default;
+    const state = { page };
 
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(<Page />),
