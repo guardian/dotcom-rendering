@@ -1,4 +1,9 @@
 // @flow
+
+// provides a way to use packages in scripts when we don't know
+// if they've been installed yet (with yarn) by temporarily
+// installing with npm if node cannot resolve the package
+
 const { log } = require('./log');
 
 module.exports = (...packages) =>
