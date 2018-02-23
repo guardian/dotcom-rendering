@@ -52,7 +52,10 @@ module.exports = {
                     const page = require('./src/server').default;
                     const pageType = req.params[0].split('/pages/')[0];
                     const data = require(`./.data/${pageType}`);
-                    const body = await page({ url: `/pages/${req.params[0]}`, data });
+                    const body = await page({
+                        url: `/pages/${req.params[0]}`,
+                        data,
+                    });
 
                     try {
                         res.send(body);
