@@ -24,6 +24,9 @@ dev: clear install
 	$(call log, "starting DEV server...")
 	@env webpack-dev-server --hot --env.browser
 
+start: clear install
+	@env pm2 start micro -- -p 9000
+
 # quality #########################################
 
 flow: install
