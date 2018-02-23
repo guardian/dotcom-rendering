@@ -14,17 +14,15 @@ const white = '\x1b[37m';
 const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 
-const GUUILog = async (string, color = dim) => {
+const GUUILog = async (messages = [], color = dim) => {
     console.log(
         `${white}%s${reset}${color}%s${reset}`,
         '𝐆𝐔𝐔𝐈 ',
-        capitalize(string),
+        capitalize(wrap(messages)),
     );
 };
 
 module.exports = {
-    log: (...messages) => GUUILog(wrap(messages)),
-    warn: async (...messages) => {
-        GUUILog(wrap(messages), red);
-    },
+    log: (...messages) => GUUILog(messages),
+    warn: (...messages) => GUUILog(messages, red),
 };
