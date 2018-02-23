@@ -4,9 +4,9 @@ const ensure = require('./lib/ensure');
 const YARN_VERSION = '1.3.2';
 
 (async () => {
-    const [execa] = await ensure('execa');
     try {
-        const { stdout: version } = execa.sync('yarn', ['-v']);
+        const [execa] = await ensure('execa');
+        const { stdout: version } = await execa('yarn', ['-v']);
 
         if (version !== YARN_VERSION) {
             await require('./lib/log').warn(
