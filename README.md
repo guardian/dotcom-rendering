@@ -10,21 +10,18 @@ Slack channel: [#dotcom-future](https://theguardian.slack.com/messages/C0JES5PEV
   - [nvm](https://github.com/creationix/nvm) is probably your best bet here, especially with [this](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)
 - [yarn](https://yarnpkg.com/en/docs/install)
 
-## Setup
-`npm run setup`
-
 ## Develop
-`guui dev`
+`make dev`
 
 ## Build
-`guui build`
+`make build`
 
 ## Code quality
-- `yarn lint`
-- `yarn flow`
-- `yarn test`
+- `make lint`
+- `make flow`
+- `make test`
 
-`yarn validate` runs all of the above, plus a final `yarn build`.
+`make validate` runs all of the above, plus a final `make build`.
 
 ## Other
-See [the package scripts](https://github.com/guardian/guui/blob/master/package.json#L6) for all other options.
+See [the makefile](https://github.com/guardian/guui/blob/master/makefile) for the full list.

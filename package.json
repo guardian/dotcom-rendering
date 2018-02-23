@@ -6,16 +6,6 @@
     "bin": {
         "guui": "./__tools__/cli/index.js"
     },
-    "scripts": {
-        "setup": "npm i && node __tools__/cli setup",
-        "build": "./__tools__/cli/index.js build",
-        "flow": "flow --quiet",
-        "test": "exit 0",
-        "lint": "eslint . --ext .js --quiet",
-        "validate": "concurrently --raw \"yarn -s lint\" \"yarn -s flow\" \"yarn -s test && echo Tests passed!\" \"CI=true yarn -s build && echo Build succeeded!\"",
-        "fix": "eslint . --ext .js --fix --quiet",
-        "dev": "node __tools__/cli dev"
-    },
     "repository": "git+https://github.com/guardian/guui.git",
     "keywords": [],
     "license": "Apache-2.0",
@@ -24,9 +14,6 @@
     },
     "homepage": "https://github.com/guardian/guui#readme",
     "dependencies": {
-        "ansi-escapes": "^3.0.0",
-        "execa": "^0.9.0",
-        "minimist": "^1.2.0",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-hot-loader": "^4.0.0-rc.0",
@@ -57,7 +44,6 @@
         "babel-plugin-preval": "^1.6.3",
         "babel-plugin-react-require": "^3.0.0",
         "chalk": "^2.3.0",
-        "concurrently": "^3.5.1",
         "decamelize": "^2.0.0",
         "eslint": "^4.18.0",
         "eslint-config-airbnb": "^16.1.0",
@@ -69,10 +55,12 @@
         "eslint-plugin-jsx-a11y": "^6.0.2",
         "eslint-plugin-prettier": "^2.6.0",
         "eslint-plugin-react": "^7.4.0",
+        "execa": "^0.9.0",
         "filesizegzip": "^2.0.0",
         "flow-bin": "^0.66.0",
         "friendly-errors-webpack-plugin": "^1.6.1",
         "prettier": "^1.7.4",
+        "semver": "^5.5.0",
         "simple-progress-webpack-plugin": "^1.1.0",
         "webpack": "^3.11.0",
         "webpack-bundle-analyzer": "^2.10.0",
@@ -146,6 +134,15 @@
                 ],
                 "rules": {
                     "import/prefer-default-export": "off"
+                }
+            },
+            {
+                "files": [
+                    "__tasks__/**/*.js"
+                ],
+                "rules": {
+                    "global-require": "off",
+                    "no-console": "off"
                 }
             }
         ],
