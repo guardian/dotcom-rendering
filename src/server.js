@@ -25,6 +25,8 @@ export default async (req: {}): string => {
     if (req.url.includes('/pages/')) {
         return renderPage(req.url.split('/pages/')[1]);
     }
+
+    // TODO: retreive static assets from CDN
     if (req.url.includes('/assets/javascript/')) {
         return readFile(
             path.join('dist', req.url.split('/assets/javascript/')[1]),
