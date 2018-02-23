@@ -10,7 +10,7 @@ import {
     desktop,
     leftCol,
     wide,
-    between,
+    from,
 } from 'pasteup/breakpoints';
 
 import TheGuardianLogoSVG from 'static/inline-svgs/the-guardian-logo.svg';
@@ -28,7 +28,7 @@ const Head = styled('header', {
 // .new-header__inner.gs-container
 const Nav = styled('nav', {
     ...clearFix,
-    [between.mobileMedium.and.desktop]: {},
+    [from.mobileMedium.until.desktop]: {},
     [tablet]: {
         maxWidth: '740px',
     },
