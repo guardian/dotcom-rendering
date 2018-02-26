@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable import/no-extraneous-dependencies */
-import { styled } from 'styletron-react';
+import styled from 'react-emotion';
 
-const Preview = styled('div', {
+const Preview = styled('div')({
     margin: '2rem',
     display: 'flex',
     flexDirection: 'column',
@@ -13,7 +13,7 @@ const Preview = styled('div', {
     bottom: 0,
 });
 
-const GithubLink = styled('a', {
+const GithubLink = styled('a')({
     float: 'right',
     paddingLeft: '1em',
     textDecoration: 'none',
@@ -26,25 +26,25 @@ const GithubLink = styled('a', {
     },
 });
 
-const Isolate = styled(GithubLink, {
+const Isolate = styled(GithubLink)({
     ':after': {
         content: '" ➚"',
     },
 });
 
-const Header = styled('div', {
+const Header = styled('div')({
     fontFamily: 'Guardian Agate Sans',
     fontSize: '13px',
     paddingBottom: '2rem',
 });
 
-const Frame = styled('iframe', {
+const Frame = styled('iframe')({
     border: 'none',
     width: '100%',
     flex: 1,
 });
 
-const FrameSize = styled('div', {
+const FrameSize = styled('div')({
     width: '100%',
     textAlign: 'center',
     borderLeft: '1px solid #ddd',

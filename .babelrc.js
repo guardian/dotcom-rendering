@@ -32,8 +32,17 @@ const defaultConfig = {
     ],
 };
 
+const emotionConfig =
+    process.env.NODE_ENV === 'production'
+        ? { hoist: true }
+        : { sourceMap: true };
+
 const appServerConfig = {
-    plugins: ['babel-plugin-dynamic-import-node', ...universalPlugins],
+    plugins: [
+        ['babel-plugin-emotion', emotionConfig],
+        'babel-plugin-dynamic-import-node',
+        ...universalPlugins,
+    ],
     presets: [
         [
             '@babel/preset-env',
@@ -51,6 +60,7 @@ const appServerConfig = {
 
 const appBrowserConfig = {
     plugins: [
+        ['babel-plugin-emotion', emotionConfig],
         '@babel/plugin-syntax-dynamic-import',
         [
             '@babel/plugin-transform-runtime',

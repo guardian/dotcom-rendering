@@ -1,13 +1,13 @@
 // @flow
 
-import { styled } from 'styletron-react';
+import styled from 'react-emotion';
 
 const pillarColours = {
     news: 'pink',
     alex: 'hotpink',
 };
 
-export default styled('button', ({ pillar = 'alex' }) => ({
+export default styled('button')(({ pillar = 'alex' }) => ({
     border: 'none',
     backgroundColor: pillar ? pillarColours[pillar] : null,
 }));
