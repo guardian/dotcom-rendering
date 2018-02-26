@@ -15,7 +15,6 @@ import {
 
 import TheGuardianLogoSVG from 'static/inline-svgs/the-guardian-logo.svg';
 
-// .new-header.pillar-scheme--News
 const Head = styled('header')({
     marginBottom: 0,
     backgroundColor: '#e9eff1',
@@ -25,7 +24,6 @@ const Head = styled('header')({
     },
 });
 
-// .new-header__inner.gs-container
 const Nav = styled('nav')({
     ...clearFix,
     [from.mobileMedium.until.desktop]: {},
@@ -45,7 +43,6 @@ const Nav = styled('nav')({
     margin: '0 auto',
 });
 
-// .new-header__logo
 const HomeLink = styled('a')({
     float: 'right',
     marginBottom: '15px',
@@ -65,23 +62,35 @@ const HomeLink = styled('a')({
     },
 });
 
-// .u-h
 const ScreenReadable = styled('span')(screenReaderOnly);
 
-// .inline-the-guardian-logo.inline-logo
 const Logo = styled(TheGuardianLogoSVG)({
-    height: '95px',
-    width: '295px',
+    height: '51px',
+    width: '159px',
+    [from.mobileMedium.until.tablet]: {
+        height: '56px',
+        width: '175px',
+    },
+    [from.tablet.until.desktop]: {
+        height: '72px',
+        width: '224px',
+    },
+    [from.desktop.until.leftCol]: {
+        height: '80px',
+        width: '249px',
+    },
+    [leftCol]: {
+        height: '95px',
+        width: '295px',
+    },
 });
 
-// .new-header__top-bar.hide-until-mobile
 const TopBar = styled('div')({
     left: 0,
     position: 'absolute',
     top: 0,
 });
 
-// .top-bar__item
 const topBarItem = props => {
     const focusHoverStyles = {
         color: '#e9eff1',
@@ -119,7 +128,6 @@ const topBarItem = props => {
     return styles;
 };
 
-// top-bar__item.top-bar__item--cta.js-change-become-member-link.js-acquisition-link
 const BecomeAMemberLink = styled('a')(props => {
     const focusHoverStyles = {
         color: '#e9eff1',
@@ -152,7 +160,7 @@ const BecomeAMemberLink = styled('a')(props => {
 const TopBarCTACircle = styled('span')({
     bottom: '-12px',
     left: 0,
-    overflow: 'screenReaderOnly',
+    overflow: 'hidden',
     position: 'absolute',
     right: 0,
     top: 0,
@@ -234,31 +242,28 @@ const PillarListItemLink = styled('a')(props => {
         position: 'absolute',
     };
 
-    const focusHoverStyles = {
-        textDecoration:
-            props.isHeaderOpen && !props.pillarLinkDropdown
-                ? 'underline'
-                : 'none',
-    };
-
     let styles = {
         fontFamily:
             '"Guardian Egyptian Web", "Guardian Text Egyptian Web", TimesNewRoman, serif',
         fontWeight: 600,
+        textDecoration: 'none',
         color: 'currentColor',
         cursor: 'pointer',
         display: 'block',
         fontSize: '15.4px',
-        height: '48px',
+        height: '30px',
         lineHeight: 1,
         padding: '0 4px',
         position: 'relative',
-        overflow: 'screenReaderOnly',
+        overflow: 'hidden',
         [tablet]: {
             fontSize: '22px',
             height: '42px',
             paddingRight: '20px',
             paddingLeft: '5px',
+        },
+        [desktop]: {
+            height: '48px',
         },
         ':before': {
             ...beforeAfterStyles,
@@ -266,17 +271,6 @@ const PillarListItemLink = styled('a')(props => {
             top: '3px',
             zIndex: 1,
         },
-        ':after': !props.pillarLinkDropdown
-            ? {
-                  ...beforeAfterStyles,
-                  borderBottom: '4px solid currentColor',
-                  right: 0,
-                  bottom: '-4px',
-                  transition: 'transform 150ms ease-out',
-              }
-            : {},
-        ':focus': focusHoverStyles,
-        ':hover': focusHoverStyles,
         ':focus:after': {
             transform: 'translateY(-4px)',
         },
@@ -285,9 +279,22 @@ const PillarListItemLink = styled('a')(props => {
         },
     };
 
+    if (!props.pillarLinkDropdown) {
+        styles[':after'] = Object.assign(
+            {},
+            styles[':after'],
+            beforeAfterStyles,
+            {
+                borderBottom: '4px solid currentColor',
+                right: 0,
+                bottom: '-4px',
+                transition: 'transform 150ms ease-out',
+            },
+        );
+    }
+
     if (props.isHeaderSlim) {
-        styles = {
-            ...styles,
+        styles = Object.assign({}, styles, {
             fontSize: '20px',
             height: '44px',
             lineHeight: '44px',
@@ -295,41 +302,83 @@ const PillarListItemLink = styled('a')(props => {
             ':before': {
                 top: '17px',
             },
-        };
+        });
     }
 
     if (props.index === 0) {
-        styles = {
-            ...styles,
+        styles = Object.assign({}, styles, {
             paddingLeft: 0,
             ':before': {
                 content: 'none',
             },
-        };
+        });
+    }
+
+    if (props.isHeaderOpen && !props.pillarLinkDropdown) {
+        styles = Object.assign({}, styles, {
+            ':focus': {
+                'text-decoration': 'underline',
+            },
+            ':hover': {
+                'text-decoration': 'underline',
+            },
+        });
+    }
+
+    if (props.pillar) {
+        const pillarStyles = props.theme.pillars[props.pillar.toLowerCase()];
+
+        if (pillarStyles) {
+            styles = Object.assign({}, styles, pillarStyles);
+        }
     }
 
     return styles;
 });
 
+// .js-change-link.new-header__menu-toggle
+const MenuLabel = styled('label', {
+    [until.desktop]: {
+        position: 'absolute',
+        right: '5px',
+        top: '24px',
+    },
+    [from.mobileMedium.until.desktop]: {
+        bottom: '-6px',
+        top: 'auto',
+    },
+    [from.mobileLandscape.until.desktop]: {
+        right: '46px',
+    },
+    ':focus': {
+        outline: 0,
+    },
+});
+
 export default () => {
     const pillars = [
         {
+            id: 'news',
             label: 'News',
             path: 'http://m.thegulocal.com/uk',
         },
         {
+            id: 'opinion',
             label: 'Opinion',
             path: 'http://m.thegulocal.com/uk/commentisfree',
         },
         {
+            id: 'sport',
             label: 'Sport',
             path: 'http://m.thegulocal.com/uk/sport',
         },
         {
+            id: 'culture',
             label: 'Culture',
             path: 'http://m.thegulocal.com/uk/culture',
         },
         {
+            id: 'lifestyle',
             label: 'Lifestyle',
             path: 'http://m.thegulocal.com/uk/lifeandstyle',
         },
@@ -353,12 +402,18 @@ export default () => {
                 <PillarList>
                     {pillars.map((pillar, i) => (
                         <PillarListItem key={pillar.label}>
-                            <PillarListItemLink index={i} key={pillar.label}>
+                            <PillarListItemLink
+                                index={i}
+                                path={pillar.path}
+                                key={pillar.id}
+                                pillar={pillar.id}
+                            >
                                 {pillar.label}
                             </PillarListItemLink>
                         </PillarListItem>
                     ))}
                 </PillarList>
+                <MenuLabel htmlFor="main-menu-toggle" />
             </Nav>
         </Head>
     );

@@ -3,6 +3,8 @@
 // $FlowFixMe https://github.com/facebook/flow/issues/5035
 import { hydrate as hydrateDOM } from 'react-dom';
 import { hydrate as hydrateCSS } from 'emotion';
+import { ThemeProvider } from 'emotion-theming';
+import guTheme from 'styles/guTheme';
 
 // webpack-specific
 // eslint-disable-next-line camelcase,no-undef
@@ -18,6 +20,11 @@ if (module.hot) {
 import(/* webpackChunkName: "[request]" */ `./pages/${state.page}`).then(
     ({ default: Page }) => {
         hydrateCSS(cssIDs);
-        hydrateDOM(<Page />, document.getElementById('app'));
+        hydrateDOM(
+            <ThemeProvider theme={guTheme}>
+                <Page />
+            </ThemeProvider>,
+            document.getElementById('app'),
+        );
     },
 );

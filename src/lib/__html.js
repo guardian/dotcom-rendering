@@ -22,6 +22,7 @@ export default ({
     <html>
         <head>
             <title>${title}</title>
+            <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
             <style>${resetCSS}${css}</style>
         </head>
         <body>
