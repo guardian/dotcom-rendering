@@ -17,6 +17,11 @@ module.exports = ({ dist, bundleName }) => ({
         plugins: [
             new webpack.optimize.ModuleConcatenationPlugin(),
             new webpack.optimize.OccurrenceOrderPlugin(),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                minChunks: module =>
+                    module.context && module.context.includes('node_modules'),
+            }),
             new webpack.optimize.UglifyJsPlugin({
                 sourceMap: true,
                 parallel: true,

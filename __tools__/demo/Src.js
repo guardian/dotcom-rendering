@@ -1,31 +1,31 @@
 // @flow
 
-import { styled } from 'styletron-react';
+import styled from 'react-emotion';
 import decamelize from 'decamelize'; // eslint-disable-line import/no-extraneous-dependencies
 
-const Component = styled('li', {
+const Component = styled('li')({
     paddingBottom: '2rem',
 });
 
-const Title = styled('div', {
+const Title = styled('div')({
     fontFamily: 'Guardian Agate Sans',
     fontSize: '13px',
     textTransform: 'capitalize',
     paddingBottom: '1rem',
 });
 
-const Stage = styled('div', {
+const Stage = styled('div')({
     backgroundColor: 'white',
 });
 
-const Message = styled('div', {
+const Message = styled('div')({
     fontFamily: 'Guardian Agate Sans',
     backgroundColor: 'yellow',
     display: 'inline-block',
     fontSize: '13px',
 });
 
-const Monospace = styled('span', {
+const Monospace = styled('span')({
     fontFamily: 'Inconsolata',
 });
 

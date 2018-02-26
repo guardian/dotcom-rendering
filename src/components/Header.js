@@ -1,5 +1,5 @@
 // @flow
-import { styled } from 'styletron-react';
+import styled from 'react-emotion';
 
 import { screenReaderOnly, clearFix } from 'pasteup/mixins';
 import {
@@ -16,7 +16,7 @@ import {
 import TheGuardianLogoSVG from 'static/inline-svgs/the-guardian-logo.svg';
 
 // .new-header.pillar-scheme--News
-const Head = styled('header', {
+const Head = styled('header')({
     marginBottom: 0,
     backgroundColor: '#e9eff1',
     position: 'relative',
@@ -26,7 +26,7 @@ const Head = styled('header', {
 });
 
 // .new-header__inner.gs-container
-const Nav = styled('nav', {
+const Nav = styled('nav')({
     ...clearFix,
     [from.mobileMedium.until.desktop]: {},
     [tablet]: {
@@ -46,7 +46,7 @@ const Nav = styled('nav', {
 });
 
 // .new-header__logo
-const HomeLink = styled('a', {
+const HomeLink = styled('a')({
     float: 'right',
     marginBottom: '15px',
     marginRight: '45px',
@@ -66,16 +66,16 @@ const HomeLink = styled('a', {
 });
 
 // .u-h
-const ScreenReadable = styled('span', screenReaderOnly);
+const ScreenReadable = styled('span')(screenReaderOnly);
 
 // .inline-the-guardian-logo.inline-logo
-const Logo = styled(TheGuardianLogoSVG, {
+const Logo = styled(TheGuardianLogoSVG)({
     height: '95px',
     width: '295px',
 });
 
 // .new-header__top-bar.hide-until-mobile
-const TopBar = styled('div', {
+const TopBar = styled('div')({
     left: 0,
     position: 'absolute',
     top: 0,
@@ -120,7 +120,7 @@ const topBarItem = props => {
 };
 
 // top-bar__item.top-bar__item--cta.js-change-become-member-link.js-acquisition-link
-const BecomeAMemberLink = styled('a', props => {
+const BecomeAMemberLink = styled('a')(props => {
     const focusHoverStyles = {
         color: '#e9eff1',
         textDecoration: 'none',
@@ -149,7 +149,7 @@ const BecomeAMemberLink = styled('a', props => {
 });
 
 // .top-bar__item--cta--circle
-const TopBarCTACircle = styled('span', {
+const TopBarCTACircle = styled('span')({
     bottom: '-12px',
     left: 0,
     overflow: 'screenReaderOnly',
@@ -173,7 +173,7 @@ const TopBarCTACircle = styled('span', {
 });
 
 // .top-bar__item--cta--text
-const TopBarCTAText = styled('span', {
+const TopBarCTAText = styled('span')({
     boxSizing: 'border-box',
     display: 'block',
     padding: '6px 20px 3px',
@@ -182,7 +182,7 @@ const TopBarCTAText = styled('span', {
 });
 
 // .pillars
-const PillarList = styled('ul', props => {
+const PillarList = styled('ul')(props => {
     let styles = {
         clear: 'right',
         margin: 0,
@@ -216,7 +216,7 @@ const PillarList = styled('ul', props => {
 });
 
 // .pillars__item
-const PillarListItem = styled('li', {
+const PillarListItem = styled('li')({
     display: 'block',
     float: 'left',
     [desktop]: {
@@ -225,7 +225,7 @@ const PillarListItem = styled('li', {
 });
 
 // .pillars-link
-const PillarListItemLink = styled('a', props => {
+const PillarListItemLink = styled('a')(props => {
     const beforeAfterStyles = {
         bottom: 0,
         content: '""',

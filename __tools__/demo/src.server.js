@@ -3,8 +3,6 @@
 import path from 'path';
 
 import { renderToString } from 'react-dom/server';
-import Styletron from 'styletron-server';
-import { StyletronProvider } from 'styletron-react';
 
 import doc from '../../src/lib/__html';
 
@@ -14,7 +12,6 @@ export default (componentPath: string): string => {
     // laoding it this way stops node caching it, so we
     // can pick up changes
     const Src = require('./Src').default;
-    const styletron = new Styletron();
 
     let demos = {};
 
@@ -25,15 +22,12 @@ export default (componentPath: string): string => {
     }
 
     const html = renderToString(
-        <StyletronProvider styletron={styletron}>
-            <Src demos={{ ...demos }} path={componentPath} />
-        </StyletronProvider>,
+        <Src demos={{ ...demos }} path={componentPath} />,
     );
 
     const stylesForHead = [
         `<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">`,
         `<link rel="stylesheet" href="https://pasteup.guim.co.uk/0.0.8/css/fonts.pasteup.min.css">`,
-        styletron.getStylesheetsHtml(),
     ].join('');
 
     return doc({
