@@ -16,7 +16,20 @@ const ensure = require('./lib/ensure');
         )).trim();
 
         if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
-            require('./log').warn(`You need node@${nvmrcVersion}`);
+            const { warn, prompt, log } = require('./log');
+            warn(
+                `GUUI requires Node v${nvmrcVersion}`,
+                `You are using v${nodeVersion}`,
+            );
+            if (process.env.NVM_DIR) {
+                prompt('Run `nvm install` and try again.');
+                log('See also: https://git.io/vKTnK');
+            } else {
+                prompt(
+                    `NVM can make managing Node versions a lot easier:`,
+                    'https://github.com/creationix/nvm',
+                );
+            }
             process.exit(1);
         }
     } catch (e) {
