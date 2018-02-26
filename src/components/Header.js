@@ -337,7 +337,7 @@ const PillarListItemLink = styled('a')(props => {
 });
 
 // .js-change-link.new-header__menu-toggle
-const MenuLabel = styled('label', {
+const MenuLabel = styled('label')({
     [until.desktop]: {
         position: 'absolute',
         right: '5px',
