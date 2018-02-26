@@ -11,6 +11,7 @@ const wrap = messages => messages.join('\n     ');
 // if this is a first run
 const red = '\x1b[31m';
 const white = '\x1b[37m';
+const yellow = '\x1b[33m';
 const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 
@@ -24,6 +25,7 @@ const GUUILog = (messages = [], color = dim) => {
 
 const log = (...messages) => GUUILog(messages);
 const warn = (...messages) => GUUILog(messages, red);
+const prompt = (...messages) => GUUILog(messages, yellow);
 
 // can be used as a normal script too
 const [, , messages] = process.argv;
@@ -35,4 +37,5 @@ if (messages) {
 module.exports = {
     log,
     warn,
+    prompt,
 };
