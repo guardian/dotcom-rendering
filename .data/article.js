@@ -1,2 +1,2 @@
 // @flow
-module.exports = { page: 'article' };
+module.exports = { page: 'Article' };
