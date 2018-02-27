@@ -2,6 +2,8 @@
 
 // $FlowFixMe https://github.com/facebook/flow/issues/5035
 import { hydrate } from 'react-dom';
+import { ThemeProvider } from 'emotion-theming';
+import guTheme from '../../src/styles/guTheme';
 
 import Src from './Src';
 
@@ -17,7 +19,9 @@ if (module.hot) {
 
 const render = (demos = {}) => {
     hydrate(
-        <Src demos={{ ...demos }} path={componentPath} />,
+        <ThemeProvider theme={guTheme}>
+            <Src demos={{ ...demos }} path={componentPath} />
+        </ThemeProvider>,
         document.getElementById('app'),
     );
 };
