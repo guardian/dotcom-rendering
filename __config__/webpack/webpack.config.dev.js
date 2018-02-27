@@ -40,7 +40,8 @@ module.exports = {
                 });
 
                 app.get('/src/*', async (req, res) => {
-                    const src = require('../../__tools__/demo/src.server').default;
+                    const src = require('../../__tools__/demo/src.server')
+                        .default;
                     try {
                         res.send(src(req.params[0]));
                     } catch (e) {
