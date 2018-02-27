@@ -1,0 +1,215 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Frontend rendering service
+
+Parameters:
+  Subnets:
+    Description: The subnets where guui instances will run
+    Type: List<AWS::EC2::Subnet::Id>
+  VpcId:
+    Description: The VPC in which guui instances will run
+    Type: AWS::EC2::VPC::Id
+  App:
+    Description: Application name
+    Type: String
+    Default: guui
+  Stage:
+    Description: Stage name
+    Type: String
+    AllowedValues:
+      - PROD
+      - CODE
+    Default: CODE
+  Stack:
+    Description: Stack name
+    Type: String
+    Default: frontend
+  AMI:
+    Description: AMI to use for instances
+    Type: AWS::EC2::Image::Id
+
+Mappings:
+  Constants:
+    Stack:
+      Value: frontend
+    App:
+      Value: guui
+
+Resources:
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: HTTP access to the load balancer from within the Guardian (for now)
+      VpcId:
+        Ref: VpcId
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Stage
+        Value:
+          Ref: Stage
+      - Key: Stack
+        Value:
+          Fn::FindInMap: [ Constants, Stack, Value ]
+      - Key: App
+        Value:
+          Fn::FindInMap: [ Constants, App, Value ]
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: guui instance
+      VpcId:
+        Ref: VpcId
+      SecurityGroupIngress:
+        # allow ELB to talk to instance
+      - IpProtocol: tcp
+        FromPort: 9000
+        ToPort: 9000
+        SourceSecurityGroupId:
+          Ref: LoadBalancerSecurityGroup
+        # allow SSH access from within the office
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Stage
+        Value:
+          Ref: Stage
+      - Key: Stack
+        Value:
+          Fn::FindInMap: [ Constants, Stack, Value ]
+      - Key: App
+        Value:
+          Fn::FindInMap: [ Constants, App, Value ]
+
+  InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - ec2.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: /
+
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles:
+      - Ref: InstanceRole
+
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      Listeners:
+      - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
+      CrossZone: true
+      HealthCheck:
+        Target: HTTP:9000/healthcheck
+        HealthyThreshold: 2
+        UnhealthyThreshold: 10
+        Interval: 30
+        Timeout: 10
+      Subnets:
+        Ref: Subnets
+      SecurityGroups:
+      - Ref: LoadBalancerSecurityGroup
+      AccessLoggingPolicy:
+        EmitInterval: 5
+        Enabled: true
+        S3BucketName: gu-elb-logs
+        S3BucketPrefix:
+          Fn::Join:
+          - "/"
+          - - ELBLogs
+            - Fn::FindInMap: [ Constants, Stack, Value ]
+            - Fn::FindInMap: [ Constants, App, Value ]
+            - Ref: Stage
+      Tags:
+      - Key: Stage
+        Value:
+          Ref: Stage
+      - Key: Stack
+        Value:
+          Fn::FindInMap: [ Constants, Stack, Value ]
+      - Key: App
+        Value:
+          Fn::FindInMap: [ Constants, App, Value ]
+
+  LaunchConfig:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId:
+        Ref: AMI
+      SecurityGroups:
+      - Ref: InstanceSecurityGroup
+      InstanceType: c4.large
+      IamInstanceProfile:
+        Ref: InstanceProfile
+      AssociatePublicIpAddress: true
+      UserData:
+        'Fn::Base64': |
+          #!/bin/bash -ev
+
+          cd /home/ubuntu
+
+          curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+          apt-get update
+          apt-get install -y nodejs
+          apt-get install -y yarn
+
+          git clone https://github.com/guardian/guui.git
+          cd guui
+          git fetch
+          git checkout sa-productionise
+
+          export TERM=xterm-256color
+
+          make build start
+  AutoscalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AvailabilityZones:
+        - eu-west-1a
+      VPCZoneIdentifier:
+        Ref: Subnets
+      LaunchConfigurationName:
+        Ref: LaunchConfig
+      MinSize: 1
+      MaxSize: 2
+      DesiredCapacity: 1
+      HealthCheckType: ELB
+      HealthCheckGracePeriod: 120
+      LoadBalancerNames:
+      - Ref: LoadBalancer
+      Tags:
+      - Key: Stage
+        Value:
+          Ref: Stage
+        PropagateAtLaunch: true
+      - Key: Stack
+        Value:
+          Fn::FindInMap: [ Constants, Stack, Value ]
+        PropagateAtLaunch: true
+      - Key: App
+        Value:
+          Fn::FindInMap: [ Constants, App, Value ]
+        PropagateAtLaunch: true
+
+Outputs:
+  LoadBalancerUrl:
+    Value:
+      'Fn::GetAtt':
+      - LoadBalancer
+      - DNSName
