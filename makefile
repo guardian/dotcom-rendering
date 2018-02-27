@@ -12,17 +12,17 @@ build: clear install
 	$(call log, "building production bundles")
 	@echo '' # just a spacer
 	@rm -rf dist
-	@NODE_ENV=production webpack
+	@NODE_ENV=production webpack --config __config__/webpack/webpack.config.js
 
 build-ci: install
 	$(call log, "building production bundles")
 	@echo '' # just a spacer
 	@rm -rf dist
-	@CI=true NODE_ENV=production webpack
+	@CI=true NODE_ENV=production webpack --config __config__/webpack/webpack.config.js
 
 dev: clear install
 	$(call log, "starting DEV server...")
-	@env webpack-dev-server --hot --env.browser
+	@env webpack-dev-server --hot --env.browser  --config __config__/webpack/webpack.config.js
 
 # quality #########################################
 
@@ -60,7 +60,7 @@ reinstall: clear clean install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@CI=true NODE_ENV=production webpack >/dev/null
+	@CI=true NODE_ENV=production webpack --config __config__/webpack/webpack.config.js >/dev/null
 
 check-env: # private
 	$(call log, "checking environment")
