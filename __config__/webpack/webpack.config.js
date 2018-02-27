@@ -17,7 +17,7 @@ const babelLoader = env => ({
 
 const baseConfig = {
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../../dist'),
     },
     stats: 'errors-only',
     plugins: [
