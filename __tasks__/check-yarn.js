@@ -4,7 +4,7 @@ const exec = promisify(require('child_process').execFile);
 
 const ensure = require('./lib/ensure');
 
-const YARN_VERSION = '1.3.2';
+const YARN_VERSION = '1.5.1';
 
 (async () => {
     try {
@@ -12,18 +12,10 @@ const YARN_VERSION = '1.3.2';
         const [semver] = await ensure('semver');
 
         if (!semver.satisfies(version, YARN_VERSION)) {
-            const { warn, prompt } = require('./log');
-            warn(
-                `GUUI requires Yarn v${YARN_VERSION}`,
-                `You are using v${version}`,
-            );
-            prompt(`https://yarnpkg.com/lang/en/docs/install`);
-            process.exit(1);
+            throw new Error();
         }
     } catch (e) {
-        const { warn, prompt } = require('./log');
-        warn(`GUUI requires Yarn v${YARN_VERSION}`);
-        prompt(`https://yarnpkg.com/lang/en/docs/install`);
-        process.exit(1);
+        require('./log').log(`Installing yarn@${YARN_VERSION}`);
+        await exec('npm', ['i', '-g', `yarn@${YARN_VERSION}`])
     }
 })();
