@@ -5,15 +5,14 @@ import path from 'path';
 import { promisify } from 'util';
 import { renderToString } from 'react-dom/server';
 import { extractCritical } from 'emotion-server';
-import requireDir from 'require-dir';
 
 import doc from 'lib/__html';
 
-const pages = requireDir('./pages');
 const readFile = promisify(fs.readFile);
 
 const renderPage = async function renderPage(page: string): string {
-    const Page = pages[page].default;
+    const pageModule = await import(`./pages/${page}`);
+    const Page = pageModule.default;
     const state = { page };
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(<Page />),
@@ -22,12 +21,17 @@ const renderPage = async function renderPage(page: string): string {
     return doc({ html, state, css, cssIDs });
 };
 
+const initCap = (str: string): string =>
+    str.charAt(0).toUpperCase() + str.slice(1);
+
 export default async (req: {}): string => {
     if (req.url.includes('/healthcheck')) {
         return 'OK';
     }
     if (req.url.includes('/pages/')) {
-        return renderPage(req.url.split('/pages/')[1]);
+        const page = req.url.split('/pages/')[1];
+
+        return renderPage(initCap(page));
     }
 
     // TODO: retreive static assets from CDN
