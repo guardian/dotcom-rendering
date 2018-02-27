@@ -3,6 +3,7 @@
 import { readdirSync } from 'fs';
 
 import { renderToString } from 'react-dom/server';
+import { renderStylesToString } from 'emotion-server';
 
 import doc from '../../src/lib/__html';
 
@@ -15,8 +16,10 @@ export default (componentPath: string): string => {
     // can pick up changes
     const Demo = require('./Demo').default;
 
-    const html = renderToString(
-        <Demo path={componentPath} availableDemos={availableDemos} />,
+    const { html } = renderStylesToString(
+        renderToString(
+            <Demo path={componentPath} availableDemos={availableDemos} />,
+        ),
     );
 
     const stylesForHead = [

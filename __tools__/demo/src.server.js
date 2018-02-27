@@ -3,6 +3,7 @@
 import path from 'path';
 
 import { renderToString } from 'react-dom/server';
+import { renderStylesToString } from 'emotion-server';
 
 import doc from '../../src/lib/__html';
 
@@ -21,8 +22,8 @@ export default (componentPath: string): string => {
         // do thing, it's handled in the UI
     }
 
-    const html = renderToString(
-        <Src demos={{ ...demos }} path={componentPath} />,
+    const html = renderStylesToString(
+        renderToString(<Src demos={{ ...demos }} path={componentPath} />),
     );
 
     const stylesForHead = [
