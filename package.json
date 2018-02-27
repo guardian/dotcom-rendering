@@ -13,6 +13,7 @@
     "dependencies": {
         "emotion": "^9.0.2",
         "emotion-server": "^9.0.2",
+        "emotion-theming": "^9.0.0",
         "prop-types": "^15.6.0",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
