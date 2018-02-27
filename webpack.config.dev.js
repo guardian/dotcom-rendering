@@ -55,6 +55,7 @@ module.exports = {
                     const body = await page({
                         url: `/pages/${req.params[0]}`,
                         data,
+                        isProd: false,
                     });
 
                     try {

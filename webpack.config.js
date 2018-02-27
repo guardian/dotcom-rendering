@@ -35,20 +35,11 @@ const envConfig = production
       })
     : require('./webpack.config.dev');
 
-const platformConfig = platform => {
-    const lib =
-        platform === 'server'
-            ? {
-                  library: 'serve',
-                  libraryTarget: 'commonjs2',
-              }
-            : {};
-
-    return merge.smart(
+const platformConfig = platform =>
+    merge.smart(
         {
             entry: { app: `./src/${platform}.js` },
             output: {
-                ...lib,
                 filename: `[name].${platform}.js`,
                 chunkFilename: `[name].${platform}.js`,
             },
@@ -58,7 +49,6 @@ const platformConfig = platform => {
         },
         envConfig[platform],
     );
-};
 
 const browserConfig = merge.smart(baseConfig, platformConfig('browser'));
 const serverConfig = merge.smart(
@@ -68,6 +58,12 @@ const serverConfig = merge.smart(
         externals: [require('webpack-node-externals')()],
     },
     platformConfig('server'),
+    {
+        output: {
+            library: 'serve',
+            libraryTarget: 'commonjs2',
+        },
+    },
 );
 
 module.exports = ({ browser = false, server = false } = {}) => {

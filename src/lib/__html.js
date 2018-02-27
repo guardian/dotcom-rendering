@@ -8,9 +8,9 @@ export default ({
     cssIDs = '',
     html = '',
     jsApp = '/assets/javascript/app.browser.js',
-    jsVendor = '/assets/javascript/vendor.browser.js',
     state = {},
     jsNonBlocking = '',
+    isProd,
 }: {
     title?: string,
     css: string,
@@ -35,7 +35,11 @@ export default ({
                 }
             };
             </script>
-            <script src="${jsVendor}"></script>
+            ${
+                isProd
+                    ? `<script src="/assets/javascript/vendor.browser.js"></script>`
+                    : ''
+            }
             <script src="${jsApp}"></script>
             <script>${jsNonBlocking}</script>
         </body>
