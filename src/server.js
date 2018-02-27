@@ -12,7 +12,7 @@ import doc from 'lib/__html';
 const pages = requireDir('./pages');
 const readFile = promisify(fs.readFile);
 
-const renderPage = async function renderPage(page: string): string => {
+const renderPage = async function renderPage(page: string): string {
     const Page = pages[page].default;
     const state = { page };
     const { html, ids: cssIDs, css } = extractCritical(
