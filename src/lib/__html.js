@@ -10,6 +10,7 @@ export default ({
     jsApp = '/assets/javascript/app.browser.js',
     state = {},
     jsNonBlocking = '',
+    isProd,
 }: {
     title?: string,
     css: string,
@@ -34,6 +35,11 @@ export default ({
                 }
             };
             </script>
+            ${
+                isProd
+                    ? `<script src="/assets/javascript/vendor.browser.js"></script>`
+                    : ''
+            }
             <script src="${jsApp}"></script>
             <script>${jsNonBlocking}</script>
         </body>

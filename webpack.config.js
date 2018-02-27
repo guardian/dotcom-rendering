@@ -58,6 +58,12 @@ const serverConfig = merge.smart(
         externals: [require('webpack-node-externals')()],
     },
     platformConfig('server'),
+    {
+        output: {
+            library: 'serve',
+            libraryTarget: 'commonjs2',
+        },
+    },
 );
 
 module.exports = ({ browser = false, server = false } = {}) => {

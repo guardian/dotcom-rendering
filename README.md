@@ -16,6 +16,9 @@ Slack channel: [#dotcom-future](https://theguardian.slack.com/messages/C0JES5PEV
 ## Build
 `make build`
 
+## Start (production mode)
+`make start`
+
 ## Code quality
 - `make lint`
 - `make flow`
