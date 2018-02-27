@@ -16,6 +16,6 @@ const YARN_VERSION = '1.5.1';
         }
     } catch (e) {
         require('./log').log(`Installing yarn@${YARN_VERSION}`);
-        await exec('npm', ['i', '-g', `yarn@${YARN_VERSION}`])
+        await exec('npm', ['i', '-g', `yarn@${YARN_VERSION}`]);
     }
 })();
