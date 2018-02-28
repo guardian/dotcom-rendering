@@ -30,7 +30,7 @@ module.exports = {
                 );
 
                 app.get('/demo/*', async (req, res) => {
-                    const demo = require('./__tools__/demo/demo.server')
+                    const demo = require('../../__tools__/demo/demo.server')
                         .default;
                     try {
                         res.send(demo(req.params[0].split('/demo/')[0]));
@@ -40,7 +40,8 @@ module.exports = {
                 });
 
                 app.get('/src/*', async (req, res) => {
-                    const src = require('./__tools__/demo/src.server').default;
+                    const src = require('../../__tools__/demo/src.server')
+                        .default;
                     try {
                         res.send(src(req.params[0]));
                     } catch (e) {
@@ -49,9 +50,9 @@ module.exports = {
                 });
 
                 app.get('/pages/*', async (req, res) => {
-                    const page = require('./src/server').default;
+                    const page = require('../../src/server').default;
                     const pageType = req.params[0].split('/pages/')[0];
-                    const data = require(`./.data/${pageType}`);
+                    const data = require(`../../.data/${pageType}`);
 
                     try {
                         res.send(page(data));
@@ -68,7 +69,7 @@ module.exports = {
                         <ul>
                         ${fs
                             .readdirSync(
-                                path.resolve(__dirname, 'src', 'pages'),
+                                path.resolve(__dirname, '../../src/pages'),
                             )
                             .map(page => {
                                 const name = page.replace(/.js$/, '');
@@ -80,7 +81,7 @@ module.exports = {
                         <ul>
                         ${fs
                             .readdirSync(
-                                path.resolve(__dirname, 'src', 'components'),
+                                path.resolve(__dirname, '../../src/components'),
                             )
                             .filter(page => page.endsWith('.demo.js'))
                             .map(page => {
