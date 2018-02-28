@@ -1,3 +1,6 @@
+// @flow
+/* eslint-disable global-require,import/no-dynamic-require */
+
 const { log } = require('util');
 const fs = require('fs');
 const path = require('path');
@@ -5,29 +8,23 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-// const webpackConfig = {
-//     entry: {
-//         'app.browser': ['webpack-hot-middleware/client'],
-//     },
-//     output: {
-//         publicPath: '/dist/',
-//     },
-//     plugins: [
-//         new webpack.HotModuleReplacementPlugin(),
-//     ],
-// };
+const webpackConfig = require('../__config__/webpack/webpack.config')({
+    browser: true,
+});
 
-// const compiler = webpack(webpackConfig);
+console.log(webpackConfig.entry);
+
+const compiler = webpack(webpackConfig);
 const app = express();
 
-// app.use(
-//     webpackDevMiddleware(compiler, {
-//         publicPath: webpackConfig.output.publicPath,
-//         noInfo: true,
-//     })
-// );
+app.use(
+    webpackDevMiddleware(compiler, {
+        publicPath: webpackConfig.output.publicPath,
+        noInfo: true,
+    })
+);
 
-// app.use(webpackHotMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler));
 
 require('@babel/register')({
     only: [/__tools__\/demo|src/],
@@ -78,6 +75,26 @@ app.get('/pages/*', async (req, res) => {
 
     try {
         res.send(await page(data));
+    } catch (e) {
+        log(e);
+    }
+});
+
+app.get('/demo/*', async (req, res) => {
+    const demo = require('../../__tools__/demo/demo.server')
+        .default;
+    try {
+        res.send(demo(req.params[0].split('/demo/')[0]));
+    } catch (e) {
+        log(e);
+    }
+});
+
+app.get('/src/*', async (req, res) => {
+    const src = require('../../__tools__/demo/src.server')
+        .default;
+    try {
+        res.send(src(req.params[0]));
     } catch (e) {
         log(e);
     }
