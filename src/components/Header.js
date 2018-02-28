@@ -333,6 +333,8 @@ const PillarListItemLink = styled('a')(props => {
         }
     }
 
+    console.log('***');
+
     return styles;
 });
 

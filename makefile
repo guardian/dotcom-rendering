@@ -22,7 +22,8 @@ build-ci: install
 
 dev: clear install
 	$(call log, "starting DEV server...")
-	@env webpack-dev-server --hot --env.browser  --config __config__/webpack/webpack.config.js
+	@node __tools__/dev-server.js
+	# @env webpack-dev-server --hot --env.browser  --config __config__/webpack/webpack.config.js
 
 # quality #########################################
 
