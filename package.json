@@ -19,7 +19,6 @@
         "react-dom": "^16.2.0",
         "react-emotion": "^9.0.2",
         "react-hot-loader": "^4.0.0-rc.0",
-        "require-dir": "^1.0.0",
         "reset-css": "^2.2.1"
     },
     "devDependencies": {

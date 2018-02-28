@@ -55,7 +55,7 @@ module.exports = {
                     const data = require(`../../.data/${pageType}`);
 
                     try {
-                        res.send(page(data));
+                        res.send(await page(data));
                     } catch (e) {
                         log(e);
                     }
