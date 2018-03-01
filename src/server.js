@@ -13,7 +13,7 @@ export default async (state: { page: string }): string => {
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(
             <ThemeProvider theme={guTheme}>
-                <Page />
+                <Page state={state} />
             </ThemeProvider>,
         ),
     );
