@@ -1,11 +1,13 @@
 // @flow
 import styled from 'react-emotion';
 
+import palette from 'pasteup/palette';
+
 export default styled('a')({
     fontSize: 14,
     fontFamily:
         '"Guardian Text Sans Web","Helvetica Neue","Helvetica","Arial","Lucida Grande","sans-serif"',
-    color: '#121212',
+    color: palette.neutral['1'],
     float: 'left',
     lineHeight: 1.2,
     position: 'relative',

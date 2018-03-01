@@ -2,6 +2,7 @@
 import styled from 'react-emotion';
 
 import { tablet, desktop } from 'pasteup/breakpoints';
+import { pillars } from 'pasteup/palette';
 
 const Pillar = styled('li')({
     float: 'left',
@@ -10,12 +11,12 @@ const Pillar = styled('li')({
     },
 });
 
-const Link = styled('a')(({ pillar, theme, index }) => ({
+const Link = styled('a')(({ pillar, index }) => ({
     fontFamily:
         '"Guardian Egyptian Web", "Guardian Text Egyptian Web", TimesNewRoman, serif',
     fontWeight: 600,
     textDecoration: 'none',
-    color: theme.pillar[pillar].color,
+    color: pillars[pillar],
     cursor: 'pointer',
     display: 'block',
     fontSize: '15.4px',

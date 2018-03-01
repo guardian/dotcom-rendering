@@ -2,8 +2,10 @@
 
 import styled from 'react-emotion';
 
-export default styled('a')(props => ({
-    color: '#e9eff1',
+import palette, { pillars } from 'pasteup/palette';
+
+export default styled('a')(() => ({
+    color: palette.neutral.header,
     fontFamily:
         '"Guardian Egyptian Web", "Guardian Text Egyptian Web", "Georgia", "serif"',
     fontWeight: 800,
@@ -16,7 +18,7 @@ export default styled('a')(props => ({
     zIndex: 0,
     float: 'left',
     ':before': {
-        backgroundColor: '#121212',
+        backgroundColor: palette.neutral['1'],
         borderRadius: '50%',
         top: -100,
         left: 0,
@@ -29,6 +31,6 @@ export default styled('a')(props => ({
         zIndex: -1,
     },
     ':hover:before': {
-        backgroundColor: props.theme.pillar.news.color,
+        backgroundColor: pillars.news,
     },
 }));
