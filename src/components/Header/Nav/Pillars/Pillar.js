@@ -3,6 +3,7 @@ import styled from 'react-emotion';
 
 import { tablet, desktop } from 'pasteup/breakpoints';
 import { pillars } from 'pasteup/palette';
+import { headline } from 'pasteup/fonts';
 
 const Pillar = styled('li')({
     float: 'left',
@@ -12,8 +13,7 @@ const Pillar = styled('li')({
 });
 
 const Link = styled('a')(({ pillar, index }) => ({
-    fontFamily:
-        '"Guardian Egyptian Web", "Guardian Text Egyptian Web", TimesNewRoman, serif',
+    fontFamily: headline,
     fontWeight: 600,
     textDecoration: 'none',
     color: pillars[pillar],

@@ -20,8 +20,8 @@ export default ({ links, ...props }) => (
                     Support The Guardian
                 </SupportTheGuardian>
             )}
-        {links.map(link => (
-            <Link href={link.href} key={link.text}>
+        {links.map((link, i) => (
+            <Link href={link.href} key={link.text} index={i}>
                 {link.text}
             </Link>
         ))}
