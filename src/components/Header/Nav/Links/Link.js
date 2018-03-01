@@ -23,7 +23,7 @@ export default styled('a')(props => ({
     ':focus': {
         textDecoration: 'underline',
     },
-    ...(props.index < 2 && {
+    ...(props.showAtTablet && {
         [tablet]: {
             display: 'block',
         },
