@@ -1,6 +1,6 @@
 // @flow
 module.exports.header = {
-    topBarItems: [
+    links: [
         {
             text: 'Subscribe',
             href: '/',

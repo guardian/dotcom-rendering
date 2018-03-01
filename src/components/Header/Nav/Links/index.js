@@ -5,26 +5,26 @@ import SupportTheGuardian from './SupportTheGuardian';
 import Link from './Link';
 import Search from './Search';
 
-const TopBar = styled('div')({
+const Links = styled('div')({
     left: 0,
-    position: 'absolute',
     top: 0,
+    position: 'absolute',
 });
 
-export default ({ items, ...props }) => (
-    <TopBar>
+export default ({ links, ...props }) => (
+    <Links>
         {props.isPayingMember ||
             props.isRecentContributor || (
                 <SupportTheGuardian href="/">
                     Support The Guardian
                 </SupportTheGuardian>
             )}
-        {items.map(item => (
-            <Link href={item.href} key={item.text}>
-                {item.text}
+        {links.map(link => (
+            <Link href={link.href} key={link.text}>
+                {link.text}
             </Link>
         ))}
 
         <Search href="/">Search</Search>
-    </TopBar>
+    </Links>
 );

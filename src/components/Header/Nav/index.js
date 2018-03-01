@@ -32,7 +32,7 @@ const Nav = styled('nav')(
 export default ({ state: { header } }) => (
     <Nav>
         <Logo href="/" />
-        <Links items={header.topBarItems} />
+        <Links items={header.links} />
         <Pillars pillars={header.pillars} />
     </Nav>
 );
