@@ -39,3 +39,7 @@ We use [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-mo
 }
 ```
 
+The following extensions may also make life a bit easier:
+
+- [css-in-js autocomplete/conversion](https://marketplace.visualstudio.com/items?itemName=paulmolluzzo.convert-css-in-js)
+- [colour highlighting in JS](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
