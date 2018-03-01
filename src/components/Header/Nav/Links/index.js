@@ -10,6 +10,7 @@ const Links = styled('div')({
     top: 0,
     position: 'absolute',
 });
+Links.displayName = 'Links';
 
 export default ({ links, ...props }) => (
     <Links>

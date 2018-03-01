@@ -28,11 +28,12 @@ const Nav = styled('nav')(
     },
     clearFix,
 );
+Nav.displayName = 'Nav';
 
 export default ({ state: { header } }) => (
     <Nav>
         <Logo href="/" />
-        <Links items={header.links} />
+        <Links links={header.links} />
         <Pillars pillars={header.pillars} />
     </Nav>
 );

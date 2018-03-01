@@ -17,6 +17,7 @@ const Pillars = styled('ul')({
         paddingLeft: 20,
     },
 });
+Pillars.displayName = 'Pillars';
 
 export default ({ pillars }) => (
     <Pillars>

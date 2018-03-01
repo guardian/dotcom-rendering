@@ -13,6 +13,7 @@ const Header = styled('header')({
         display: 'block',
     },
 });
+Header.displayName = 'Header';
 
 export default ({ state }) => (
     <Header>
