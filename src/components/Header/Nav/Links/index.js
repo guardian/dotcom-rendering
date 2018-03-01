@@ -21,7 +21,7 @@ export default ({ links, ...props }) => (
                 </SupportTheGuardian>
             )}
         {links.map((link, i) => (
-            <Link href={link.href} key={link.text} index={i}>
+            <Link href={link.href} key={link.text} showAtTablet={i < 2}>
                 {link.text}
             </Link>
         ))}

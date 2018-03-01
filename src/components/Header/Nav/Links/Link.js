@@ -5,7 +5,7 @@ import palette from 'pasteup/palette';
 import { textSans } from 'pasteup/fonts';
 import { tablet, desktop } from 'pasteup/breakpoints';
 
-export default styled('a')(props => ({
+export default styled('a')(({ showAtTablet }) => ({
     fontSize: 14,
     fontFamily: textSans,
     color: palette.neutral['1'],
@@ -23,7 +23,7 @@ export default styled('a')(props => ({
     ':focus': {
         textDecoration: 'underline',
     },
-    ...(props.index < 2 && {
+    ...(showAtTablet && {
         [tablet]: {
             display: 'block',
         },
