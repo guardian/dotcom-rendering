@@ -2,4 +2,4 @@
 
 import Header from 'components/Header';
 
-export default () => <Header />;
+export default ({ state }) => <Header state={state} />;

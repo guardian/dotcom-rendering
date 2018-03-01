@@ -22,7 +22,7 @@ import(/* webpackChunkName: "[request]" */ `./pages/${state.page}`).then(
         hydrateCSS(cssIDs);
         hydrateDOM(
             <ThemeProvider theme={guTheme}>
-                <Page />
+                <Page state={state} />
             </ThemeProvider>,
             document.getElementById('app'),
         );

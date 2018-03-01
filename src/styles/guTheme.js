@@ -1,6 +1,6 @@
 // @flow
 export default {
-    pillars: {
+    pillar: {
         news: {
             color: '#c70000',
         },
@@ -10,7 +10,7 @@ export default {
         sport: {
             color: '#0084c6',
         },
-        art: {
+        culture: {
             color: '#a1845c',
         },
         lifestyle: {

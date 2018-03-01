@@ -152,6 +152,7 @@
     "eslintIgnore": [
         "!.eslint.js",
         "!.babelrc.js",
+        "!.data",
         "dist",
         "flow-typed"
     ]
