@@ -1,6 +1,7 @@
 // @flow
 
 import resetCSS from './__reset-css';
+import fonts from './__fonts';
 
 export default ({
     title = 'The Guardian',
@@ -23,7 +24,7 @@ export default ({
         <head>
             <title>${title}</title>
             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-            <style>${resetCSS}${css}</style>
+            <style>${resetCSS}${fonts}${css}</style>
         </head>
         <body>
             <div id='app'>${html}</div>
