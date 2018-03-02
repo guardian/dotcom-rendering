@@ -22,7 +22,7 @@ module.exports = {
     },
     server: {
         name: 'server',
-        target: "node",
+        target: 'node',
         entry: {
             app: './src/server',
             demo: './__tools__/demo/demo.browser.js',
@@ -31,7 +31,7 @@ module.exports = {
         output: {
             path: path.resolve(__dirname, '../../', 'dist'),
             publicPath: '/assets/javascript/',
-            libraryTarget: "commonjs2"
-        }
+            libraryTarget: 'commonjs2',
+        },
     },
 };

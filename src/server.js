@@ -1,4 +1,7 @@
 // @flow
+/* eslint-disable global-require,import/no-dynamic-require */
+
+import { log } from 'util';
 import { renderToString } from 'react-dom/server';
 import { extractCritical } from 'emotion-server';
 import { ThemeProvider } from 'emotion-theming';
@@ -6,7 +9,7 @@ import guTheme from 'styles/guTheme';
 
 import doc from 'lib/__html';
 
-const fetchPage = async (state) => {
+const fetchPage = async (state: { page: string }) => {
     const pageModule = await import(`./pages/${state.page}`);
     const Page = pageModule.default;
     const { html, ids: cssIDs, css } = extractCritical(
@@ -17,18 +20,19 @@ const fetchPage = async (state) => {
         ),
     );
 
-    return doc({ html, state, css, cssIDs });   
+    return doc({ html, state, css, cssIDs });
 };
 
-export default (options) => {
-    return (req, res, next) => {
-        const pageType = req.params[0].split('/pages/')[0];
-        const data = require(`../.data/${pageType}`);
+// eslint-disable-next-line no-unused-vars
+export default () => (req, res, next) => {
+    const pageType = req.params[0].split('/pages/')[0];
+    const data = require(`../.data/${pageType}`);
 
-        fetchPage(data).then((html) => {
+    fetchPage(data)
+        .then(html => {
             res.status(200).send(html);
-        }).catch((e) => {
+        })
+        .catch(e => {
             log(e);
         });
-    };
 };

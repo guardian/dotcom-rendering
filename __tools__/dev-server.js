@@ -1,5 +1,5 @@
 // @flow
-/* eslint-disable global-require,import/no-dynamic-require */
+/* eslint-disable global-require,import/no-extraneous-dependencies */
 
 const { log } = require('util');
 const fs = require('fs');
@@ -16,12 +16,15 @@ const app = express();
 
 app.use(
     webpackDevMiddleware(compiler, {
-
         serverSideRender: true,
-    })
+    }),
 );
 
-app.use(webpackHotMiddleware(compiler.compilers.find(compiler => compiler.name === 'browser')));
+app.use(
+    webpackHotMiddleware(
+        compiler.compilers.find(config => config.name === 'browser'),
+    ),
+);
 
 require('@babel/register')({
     only: [/__tools__\/demo|src/],
@@ -34,9 +37,7 @@ app.get('/', async (req, res) => {
         <h3>pages</h3>
         <ul>
         ${fs
-            .readdirSync(
-                path.resolve(__dirname, '../src/pages'),
-            )
+            .readdirSync(path.resolve(__dirname, '../src/pages'))
             .map(page => {
                 const name = page.replace(/.js$/, '');
                 return `<li><a href="/pages/${name}">${name}</a></li>`;
@@ -46,9 +47,7 @@ app.get('/', async (req, res) => {
         <h3>components</h3>
         <ul>
         ${fs
-            .readdirSync(
-                path.resolve(__dirname, '../src/components'),
-            )
+            .readdirSync(path.resolve(__dirname, '../src/components'))
             .filter(page => page.endsWith('.demo.js'))
             .map(page => {
                 const name = page.replace(/.demo.js$/, '');
@@ -63,13 +62,15 @@ app.get('/', async (req, res) => {
     }
 });
 
-app.get('/pages/*', webpackHotServerMiddleware(compiler, {
-    chunkName: 'app'
-}));
+app.get(
+    '/pages/*',
+    webpackHotServerMiddleware(compiler, {
+        chunkName: 'app',
+    }),
+);
 
 app.get('/demo/*', async (req, res) => {
-    const demo = require('../../__tools__/demo/demo.server')
-        .default;
+    const demo = require('./demo/demo.server').default;
     try {
         res.send(demo(req.params[0].split('/demo/')[0]));
     } catch (e) {
@@ -78,8 +79,7 @@ app.get('/demo/*', async (req, res) => {
 });
 
 app.get('/src/*', async (req, res) => {
-    const src = require('../../__tools__/demo/src.server')
-        .default;
+    const src = require('./demo/src.server').default;
     try {
         res.send(src(req.params[0]));
     } catch (e) {
