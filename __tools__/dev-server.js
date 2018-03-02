@@ -10,15 +10,13 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const webpackConfig = require('../__config__/webpack/webpack.config')();
-// const webpackConfig = require('../__config__/webpack/webpack.config')({
-//     browser: true,
-// });
 
 const compiler = webpack(webpackConfig);
 const app = express();
 
 app.use(
     webpackDevMiddleware(compiler, {
+
         serverSideRender: true,
     })
 );

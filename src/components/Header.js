@@ -359,7 +359,7 @@ export default () => {
     const pillars = [
         {
             id: 'news',
-            label: 'News!!',
+            label: 'News',
             path: 'http://m.thegulocal.com/uk',
         },
         {

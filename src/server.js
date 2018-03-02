@@ -6,8 +6,8 @@ import guTheme from 'styles/guTheme';
 
 import doc from 'lib/__html';
 
-const fetchPage = async (data) => {
-    const pageModule = await import(`./pages/${data.page}`);
+const fetchPage = async (state) => {
+    const pageModule = await import(`./pages/${state.page}`);
     const Page = pageModule.default;
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(
@@ -17,7 +17,7 @@ const fetchPage = async (data) => {
         ),
     );
 
-    return doc({ html, data, css, cssIDs });   
+    return doc({ html, state, css, cssIDs });   
 };
 
 export default (options) => {
