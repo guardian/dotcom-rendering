@@ -40,7 +40,7 @@ app.get('/', async (req, res) => {
             .readdirSync(path.resolve(__dirname, '../src/pages'))
             .map(page => {
                 const name = page.replace(/.js$/, '');
-                return `<li><a href="/pages/${name}">${name}</a></li>`;
+                return `<li><a href="/pages/${name.toLowerCase()}">${name}</a></li>`;
             })
             .join('')}
         </ul>
@@ -86,6 +86,8 @@ app.get('/src/*', async (req, res) => {
         log(e);
     }
 });
+
+
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

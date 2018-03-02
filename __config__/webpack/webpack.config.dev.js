@@ -30,7 +30,6 @@ module.exports = {
         },
         output: {
             path: path.resolve(__dirname, '../../', 'dist'),
-            publicPath: '/assets/javascript/',
             libraryTarget: 'commonjs2',
         },
     },
