@@ -5890,6 +5890,14 @@ webpack-hot-middleware@^2.21.0:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
+webpack-hot-server-middleware@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/webpack-hot-server-middleware/-/webpack-hot-server-middleware-0.4.0.tgz#757d4b8c24cc9c5d09b6eb3028b79350424b923e"
+  dependencies:
+    debug "^2.2.0"
+    require-from-string "^2.0.1"
+    source-map-support "^0.4.2"
+
 webpack-log@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/webpack-log/-/webpack-log-1.1.2.tgz#cdc76016537eed24708dc6aa3d1e52189efee107"

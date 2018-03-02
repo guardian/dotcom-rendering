@@ -8,31 +8,28 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackConfig = require('../__config__/webpack/webpack.config')({
-    browser: true,
-});
-
-console.log(webpackConfig.entry);
+const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const webpackConfig = require('../__config__/webpack/webpack.config')();
+// const webpackConfig = require('../__config__/webpack/webpack.config')({
+//     browser: true,
+// });
 
 const compiler = webpack(webpackConfig);
 const app = express();
 
 app.use(
     webpackDevMiddleware(compiler, {
-        publicPath: webpackConfig.output.publicPath,
-        noInfo: true,
+        serverSideRender: true,
     })
 );
 
-app.use(webpackHotMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler.compilers.find(compiler => compiler.name === 'browser')));
 
 require('@babel/register')({
     only: [/__tools__\/demo|src/],
 });
 
 app.get('/', async (req, res) => {
-    delete require.cache[require.resolve('../dist/app.server')];
-
     try {
         res.send(`
         <html>
@@ -68,17 +65,9 @@ app.get('/', async (req, res) => {
     }
 });
 
-app.get('/pages/*', async (req, res) => {
-    const page = require('../src/server').default;
-    const pageType = req.params[0].split('/pages/')[0];
-    const data = require(`../.data/${pageType}`);
-
-    try {
-        res.send(await page(data));
-    } catch (e) {
-        log(e);
-    }
-});
+app.get('/pages/*', webpackHotServerMiddleware(compiler, {
+    chunkName: 'app'
+}));
 
 app.get('/demo/*', async (req, res) => {
     const demo = require('../../__tools__/demo/demo.server')

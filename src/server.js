@@ -1,5 +1,4 @@
 // @flow
-
 import { renderToString } from 'react-dom/server';
 import { extractCritical } from 'emotion-server';
 import { ThemeProvider } from 'emotion-theming';
@@ -7,8 +6,8 @@ import guTheme from 'styles/guTheme';
 
 import doc from 'lib/__html';
 
-export default async (state: { page: string }): string => {
-    const pageModule = await import(`./pages/${state.page}`);
+const fetchPage = async (data) => {
+    const pageModule = await import(`./pages/${data.page}`);
     const Page = pageModule.default;
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(
@@ -18,5 +17,18 @@ export default async (state: { page: string }): string => {
         ),
     );
 
-    return doc({ html, state, css, cssIDs });
+    return doc({ html, data, css, cssIDs });   
+};
+
+export default (options) => {
+    return (req, res, next) => {
+        const pageType = req.params[0].split('/pages/')[0];
+        const data = require(`../.data/${pageType}`);
+
+        fetchPage(data).then((html) => {
+            res.status(200).send(html);
+        }).catch((e) => {
+            log(e);
+        });
+    };
 };
