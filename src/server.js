@@ -17,15 +17,14 @@ const fetchPage = async (state: { page: string }): string => {
     return doc({ html, state, css, cssIDs });
 };
 
-export default () => (req, res) => {
+export default () => async (req, res) => {
     const pageType = req.params[0].split('/pages/')[0];
     const data = require(`../.data/${pageType}`);
 
-    fetchPage(data)
-        .then(html => {
-            res.status(200).send(html);
-        })
-        .catch(e => {
-            log(e);
-        });
+    try {
+        const html = await fetchPage(data);
+        res.status(200).send(html);
+    } catch (e) {
+        log(e);
+    }
 };
