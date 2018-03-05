@@ -17,12 +17,17 @@ const app = express();
 app.use(
     webpackDevMiddleware(compiler, {
         serverSideRender: true,
+        logLevel: 'silent',
     }),
 );
 
 app.use(
     webpackHotMiddleware(
         compiler.compilers.find(config => config.name === 'browser'),
+        {
+            // https://www.npmjs.com/package/friendly-errors-webpack-plugin#turn-off-errors
+            log: () => {},
+        },
     ),
 );
 
@@ -87,14 +92,9 @@ app.get('/src/*', async (req, res) => {
     }
 });
 
-
-
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
     res.status(500).send(err.stack);
 });
 
-app.listen(3000, () => {
-    // eslint-disable-next-line no-console
-    console.log('Rendering dev server listening on port 3000\n');
-});
+app.listen(3000);
