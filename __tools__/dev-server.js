@@ -35,7 +35,7 @@ require('@babel/register')({
     only: [/__tools__\/demo|src/],
 });
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
     try {
         res.send(`
         <html>
@@ -74,7 +74,7 @@ app.get(
     }),
 );
 
-app.get('/demo/*', async (req, res) => {
+app.get('/demo/*', (req, res) => {
     const demo = require('./demo/demo.server').default;
     try {
         res.send(demo(req.params[0].split('/demo/')[0]));
@@ -83,7 +83,7 @@ app.get('/demo/*', async (req, res) => {
     }
 });
 
-app.get('/src/*', async (req, res) => {
+app.get('/src/*', (req, res) => {
     const src = require('./demo/src.server').default;
     try {
         res.send(src(req.params[0]));
