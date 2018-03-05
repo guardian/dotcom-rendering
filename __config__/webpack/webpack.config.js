@@ -51,7 +51,12 @@ const platformConfig = platform =>
         envConfig[platform],
     );
 
-const browserConfig = merge.smart(baseConfig, platformConfig('browser'));
+const browserConfig = merge.smart(baseConfig, platformConfig('browser'), {
+    output: {
+        publicPath: '/assets/javascript/',
+    },
+});
+
 const serverConfig = merge.smart(
     baseConfig,
     {

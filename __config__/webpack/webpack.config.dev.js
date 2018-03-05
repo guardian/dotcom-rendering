@@ -21,9 +21,6 @@ module.exports = {
             demo: './__tools__/demo/demo.browser.js',
             src: './__tools__/demo/src.browser.js',
         },
-        output: {
-            publicPath: '/assets/javascript/',
-        },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
