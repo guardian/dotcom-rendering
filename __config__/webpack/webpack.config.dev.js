@@ -1,5 +1,4 @@
 // @flow
-const path = require('path');
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
@@ -32,7 +31,7 @@ module.exports = {
         ],
     },
     server: {
-        entry: {,
+        entry: {
             demo: './__tools__/demo/demo.server.js',
             src: './__tools__/demo/src.server.js',
         },
