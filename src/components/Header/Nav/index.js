@@ -7,6 +7,7 @@ import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
 import Logo from './Logo';
 import Links from './Links';
 import Pillars from './Pillars';
+import SubNavLink from './SubNavLink';
 
 const Nav = styled('nav')(
     {
@@ -34,24 +35,6 @@ export default () => (
         <Logo href="/" />
         <Links />
         <Pillars />
+        <SubNavLink />
     </Nav>
 );
-
-// const MenuLabel = styled('label')({
-//     [until.desktop]: {
-//         position: 'absolute',
-//         right: '5px',
-//         top: '24px',
-//     },
-//     [from.mobileMedium.until.desktop]: {
-//         bottom: '-6px',
-//         top: 'auto',
-//     },
-//     [from.mobileLandscape.until.desktop]: {
-//         right: '46px',
-//     },
-//     ':focus': {
-//         outline: 0,
-//     },
-// });
-// <MenuLabel htmlFor="main-menu-toggle" />

@@ -15,7 +15,7 @@ export default styled(Link)({
         borderColor: 'currentColor',
         borderLeft: 'none',
         borderTop: 'none',
-        marginLeft: 2,
+        marginLeft: 4,
         verticalAlign: 'middle',
         webkitBackfaceVisibility: 'hidden',
         transition: 'transform 250ms ease-out',
