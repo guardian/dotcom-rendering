@@ -16,7 +16,6 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
 
 module.exports = {
     browser: {
-        name: 'browser',
         devtool: 'cheap-module-eval-source-map',
         entry: {
             app: ['webpack-hot-middleware/client', './src/browser'],
@@ -24,7 +23,6 @@ module.exports = {
             src: './__tools__/demo/src.browser.js',
         },
         output: {
-            path: path.resolve(__dirname, '../../', 'dist'),
             publicPath: '/assets/javascript/',
         },
         plugins: [
@@ -34,16 +32,9 @@ module.exports = {
         ],
     },
     server: {
-        name: 'server',
-        target: 'node',
-        entry: {
-            app: './src/server',
-            demo: './__tools__/demo/demo.browser.js',
-            src: './__tools__/demo/src.browser.js',
-        },
-        output: {
-            path: path.resolve(__dirname, '../../', 'dist'),
-            libraryTarget: 'commonjs2',
+        entry: {,
+            demo: './__tools__/demo/demo.server.js',
+            src: './__tools__/demo/src.server.js',
         },
         plugins: [friendlyErrorsWebpackPlugin],
     },

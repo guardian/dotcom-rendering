@@ -7,7 +7,7 @@ import { extractCritical } from 'emotion-server';
 
 import doc from 'lib/__html';
 
-const fetchPage = async (state: { page: string }) => {
+const fetchPage = async (state: { page: string }): string => {
     const pageModule = await import(`./pages/${state.page}`);
     const Page = pageModule.default;
     const { html, ids: cssIDs, css } = extractCritical(
@@ -17,8 +17,7 @@ const fetchPage = async (state: { page: string }) => {
     return doc({ html, state, css, cssIDs });
 };
 
-// eslint-disable-next-line no-unused-vars
-export default () => (req, res, next) => {
+export default () => (req, res) => {
     const pageType = req.params[0].split('/pages/')[0];
     const data = require(`../.data/${pageType}`);
 
