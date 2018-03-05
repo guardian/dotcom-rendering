@@ -25,6 +25,7 @@ app.use(
     webpackHotMiddleware(
         compiler.compilers.find(config => config.name === 'browser'),
         {
+            // https://www.npmjs.com/package/friendly-errors-webpack-plugin#turn-off-errors
             log: () => {},
         },
     ),
