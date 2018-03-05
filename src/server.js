@@ -4,8 +4,6 @@
 import { log } from 'util';
 import { renderToString } from 'react-dom/server';
 import { extractCritical } from 'emotion-server';
-import { ThemeProvider } from 'emotion-theming';
-import guTheme from 'styles/guTheme';
 
 import doc from 'lib/__html';
 
@@ -13,11 +11,7 @@ const fetchPage = async (state: { page: string }) => {
     const pageModule = await import(`./pages/${state.page}`);
     const Page = pageModule.default;
     const { html, ids: cssIDs, css } = extractCritical(
-        renderToString(
-            <ThemeProvider theme={guTheme}>
-                <Page />
-            </ThemeProvider>,
-        ),
+        renderToString(<Page state={state} />),
     );
 
     return doc({ html, state, css, cssIDs });

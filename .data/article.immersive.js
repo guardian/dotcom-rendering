@@ -1,2 +1,4 @@
 // @flow
-module.exports = { page: 'Article.immersive' };
+const common = require('./common');
+
+module.exports = { ...common, page: 'Article.immersive' };

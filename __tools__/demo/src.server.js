@@ -4,8 +4,6 @@ import path from 'path';
 
 import { renderToString } from 'react-dom/server';
 import { renderStylesToString } from 'emotion-server';
-import { ThemeProvider } from 'emotion-theming';
-import guTheme from '../../src/styles/guTheme';
 
 import doc from '../../src/lib/__html';
 
@@ -25,11 +23,7 @@ export default (componentPath: string): string => {
     }
 
     const html = renderStylesToString(
-        renderToString(
-            <ThemeProvider theme={guTheme}>
-                <Src demos={{ ...demos }} path={componentPath} />
-            </ThemeProvider>,
-        ),
+        renderToString(<Src demos={{ ...demos }} path={componentPath} />),
     );
 
     const stylesForHead = [

@@ -25,3 +25,21 @@ Slack channel: [#dotcom-future](https://theguardian.slack.com/messages/C0JES5PEV
 
 ## Other
 See [the makefile](https://github.com/guardian/guui/blob/master/makefile) for the full list.
+
+## IDE setup
+
+### VSCode
+We use [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver) to allow us to import things cleanly. If you're using VSCode, adding the following to a `./jsconfig.json` file will help it resolve modules usefully:
+
+```json
+{
+    "compilerOptions": {
+        "baseUrl": "src/",
+    }
+}
+```
+
+The following extensions may also make life a bit easier:
+
+- [css-in-js autocomplete/conversion](https://marketplace.visualstudio.com/items?itemName=paulmolluzzo.convert-css-in-js)
+- [colour highlighting in JS](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
