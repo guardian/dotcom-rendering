@@ -38,6 +38,7 @@ const envConfig = production
 const platformConfig = platform =>
     merge.smart(
         {
+            name: platform,
             entry: { app: `./src/${platform}.js` },
             output: {
                 filename: `[name].${platform}.js`,
@@ -50,12 +51,20 @@ const platformConfig = platform =>
         envConfig[platform],
     );
 
-const browserConfig = merge.smart(baseConfig, platformConfig('browser'));
+const browserConfig = merge.smart(baseConfig, platformConfig('browser'), {
+    output: {
+        publicPath: '/assets/javascript/',
+    },
+});
+
 const serverConfig = merge.smart(
     baseConfig,
     {
         target: 'node',
         externals: [require('webpack-node-externals')()],
+        output: {
+            libraryTarget: 'commonjs2',
+        },
     },
     platformConfig('server'),
 );
