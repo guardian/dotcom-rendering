@@ -32,7 +32,7 @@ app.use(
 );
 
 require('@babel/register')({
-    only: [/__tools__\/demo|src/],
+    only: [/__tools__/],
 });
 
 app.get('/', (req, res) => {
