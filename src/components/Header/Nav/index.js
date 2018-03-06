@@ -30,7 +30,7 @@ const Nav = styled('nav')(
 );
 Nav.displayName = 'Nav';
 
-export default ({ state: { header } }) => (
+export default ({ data: { header } }) => (
     <Nav>
         <Logo href="/" />
         <Links links={header.links} />

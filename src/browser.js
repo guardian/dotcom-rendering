@@ -8,16 +8,16 @@ import { hydrate as hydrateCSS } from 'emotion';
 // eslint-disable-next-line camelcase,no-undef
 __webpack_public_path__ = '/assets/javascript/';
 
-const { state, cssIDs } = window.gu.app;
+const { data, cssIDs } = window.gu.app;
 
 if (module.hot) {
     module.hot.accept();
 }
 
 // create code split points for all ../pages
-import(/* webpackChunkName: "[request]" */ `./pages/${state.page}`).then(
+import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(
     ({ default: Page }) => {
         hydrateCSS(cssIDs);
-        hydrateDOM(<Page state={state} />, document.getElementById('app'));
+        hydrateDOM(<Page data={data} />, document.getElementById('app'));
     },
 );

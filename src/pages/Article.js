@@ -2,6 +2,6 @@
 
 import Header from 'components/Header';
 
-const Article = ({ state }) => <Header state={state} />;
+const Article = ({ data }) => <Header data={data} />;
 
 export default Article;
