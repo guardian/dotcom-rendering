@@ -25,8 +25,8 @@ export default () => async (req, res) => {
     const data = fakeState(req.params.page);
 
     const { html: ignoreMe, ...config } = await fetch(
-        `https://www.theguardian.com/${req.query.url ||
-            'world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json`,
+        `${req.query.url ||
+            'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json`,
     ).then(article => article.json());
 
     try {
