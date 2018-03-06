@@ -1,76 +1,51 @@
 // @flow
-/* eslint-disable global-require,no-console */
+/* eslint-disable global-require,no-console,import/no-dynamic-require */
 const path = require('path');
-const webpack = require('webpack');
-const merge = require('webpack-merge');
 
-const production = process.env.NODE_ENV === 'production';
+// https://github.com/survivejs/webpack-merge#smart-merging
+const { smart: merge } = require('webpack-merge');
 
-const babelLoader = env => ({
-    test: /\.(js|jsx)$/,
-    exclude: /node_modules/,
-    use: {
-        loader: 'babel-loader',
-        options: { envName: env },
-    },
-});
+const dist = path.resolve(__dirname, '../../dist');
 
-const baseConfig = {
+const config = platform => ({
+    name: platform,
+    entry: { app: `./src/${platform}.js` },
     output: {
-        path: path.resolve(__dirname, '../../dist'),
-    },
-    stats: 'errors-only',
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        }),
-        new webpack.NamedModulesPlugin(),
-    ],
-};
-
-const envConfig = production
-    ? require('./webpack.config.prod')({
-          dist: baseConfig.output.path,
-          bundleName: 'app.browser.js',
-      })
-    : require('./webpack.config.dev');
-
-const platformConfig = platform =>
-    merge.smart(
-        {
-            name: platform,
-            entry: { app: `./src/${platform}.js` },
-            output: {
-                filename: `[name].${platform}.js`,
-                chunkFilename: `[name].${platform}.js`,
-            },
-            module: {
-                rules: [babelLoader(`app:${platform}`)],
-            },
-        },
-        envConfig[platform],
-    );
-
-const browserConfig = merge.smart(baseConfig, platformConfig('browser'), {
-    output: {
+        path: dist,
+        filename: `[name].${platform}.js`,
+        chunkFilename: `[name].${platform}.js`,
         publicPath: '/assets/javascript/',
     },
+    stats: 'errors-only',
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: { envName: `app:${platform}` },
+                },
+            },
+        ],
+    },
 });
 
-const serverConfig = merge.smart(
-    baseConfig,
-    {
-        target: 'node',
-        externals: [require('webpack-node-externals')()],
-        output: {
-            libraryTarget: 'commonjs2',
-        },
-    },
-    platformConfig('server'),
-);
+const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
+    dist,
+});
 
-module.exports = ({ browser = false, server = false } = {}) => {
-    if (browser) return browserConfig;
-    if (server) return serverConfig;
-    return [browserConfig, serverConfig];
-};
+module.exports = [
+    merge(config('browser'), envConfig.browser),
+    merge(
+        config('server'),
+        {
+            target: 'node',
+            externals: [require('webpack-node-externals')()],
+            output: {
+                libraryTarget: 'commonjs2',
+            },
+        },
+        envConfig.server,
+    ),
+];

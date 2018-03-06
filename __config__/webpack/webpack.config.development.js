@@ -13,7 +13,7 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     },
 });
 
-module.exports = {
+module.exports = () => ({
     browser: {
         devtool: 'cheap-module-eval-source-map',
         entry: {
@@ -28,4 +28,4 @@ module.exports = {
     server: {
         plugins: [friendlyErrorsWebpackPlugin],
     },
-};
+});
