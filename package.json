@@ -31,7 +31,6 @@
         "@babel/preset-env": "^7.0.0-beta.40",
         "@babel/preset-flow": "^7.0.0-beta.40",
         "@babel/preset-react": "^7.0.0-beta.40",
-        "@babel/register": "^7.0.0-beta.40",
         "@babel/runtime": "^7.0.0-beta.40",
         "as-table": "^1.0.31",
         "babel-eslint": "^8.2.1",
