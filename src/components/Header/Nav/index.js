@@ -1,5 +1,7 @@
 // @flow
-import styled from 'preact-emotion';
+
+import styled from 'react-emotion';
+import { Component } from 'react';
 
 import { clearFix } from 'pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
@@ -9,7 +11,7 @@ import Links from './Links';
 import Pillars from './Pillars';
 import SubNavLink from './SubNavLink';
 
-const Nav = styled('nav')(
+const NavStyled = styled('nav')(
     {
         [tablet]: {
             maxWidth: '740px',
@@ -28,13 +30,35 @@ const Nav = styled('nav')(
     },
     clearFix,
 );
-Nav.displayName = 'Nav';
 
-export default () => (
-    <Nav>
-        <Logo href="/" />
-        <Links />
-        <Pillars />
-        <SubNavLink />
-    </Nav>
-);
+NavStyled.displayName = 'Nav';
+
+export default class Nav extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showSubNav: false
+        };
+    }
+
+    toggleSubNav() {
+        this.setState({ 
+            showSubNav: this.state.showSubNav ? false : true
+        });
+    }
+
+    render() {
+        return (
+            <NavStyled>
+                <Logo href="/" />
+                <Links />
+                <Pillars />
+                <SubNavLink toggleSubNav={() => {
+                    this.toggleSubNav()
+                }} />
+            </NavStyled>
+        );
+    }
+};
+

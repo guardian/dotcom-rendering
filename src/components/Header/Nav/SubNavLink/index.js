@@ -1,6 +1,6 @@
 // @flow
 import styled from 'react-emotion';
-// import React, { Component } from 'react';
+import { Component } from 'react';
 
 import {
     tablet,
@@ -11,7 +11,7 @@ import { headline } from 'pasteup/fonts';
 
 const ScreenReadable = styled('span')(screenReaderOnly);
 
-const SubNavLink = styled('div')(props => {
+const SubNavLinkStyled = styled('div')(props => {
     const navPrimaryColour = '#121212';
     const navSecondaryColour = '#5d5f5f';
 
@@ -64,9 +64,13 @@ const SubNavLink = styled('div')(props => {
     return styles;
 });
 
-export default () => (
-    <SubNavLink>
-        <ScreenReadable>Show</ScreenReadable>
-        More
-    </SubNavLink>
-);
+export default class SubNavLink extends Component {
+    render() {
+        return (
+            <SubNavLinkStyled onClick={() => this.props.toggleSubNav()}>
+                <ScreenReadable>Show</ScreenReadable>
+                More
+            </SubNavLinkStyled>
+        );
+    }
+};
