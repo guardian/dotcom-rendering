@@ -30,11 +30,11 @@ const Nav = styled('nav')(
 );
 Nav.displayName = 'Nav';
 
-export default ({ data: { header } }) => (
+export default () => (
     <Nav>
         <Logo href="/" />
-        <Links links={header.links} />
-        <Pillars pillars={header.pillars} />
+        <Links />
+        <Pillars />
     </Nav>
 );
 

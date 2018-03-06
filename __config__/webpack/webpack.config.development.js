@@ -26,6 +26,7 @@ module.exports = () => ({
         ],
     },
     server: {
+        devtool: 'cheap-module-eval-source-map',
         plugins: [friendlyErrorsWebpackPlugin],
     },
 });

@@ -1,11 +1,16 @@
 // @flow
 
-import Header from 'components/Header';
+import { Subscribe } from 'unstated';
 
-const Article = ({ data }) => (
+import Header from 'components/Header';
+import App from 'lib/AppContainer';
+
+const Article = () => (
     <>
-        <Header data={data} />
-        <h1>{data.config.page.headline}</h1>
+        <Header />
+        <Subscribe to={[App]}>
+            {app => <h1>{app.state.config.page.headline}</h1>}
+        </Subscribe>
     </>
 );
 

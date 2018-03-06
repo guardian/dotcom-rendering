@@ -3,6 +3,9 @@
 // $FlowFixMe https://github.com/facebook/flow/issues/5035
 import { hydrate as hydrateDOM } from 'react-dom';
 import { hydrate as hydrateCSS } from 'emotion';
+import { Provider } from 'unstated';
+
+import App from 'lib/AppContainer';
 
 // webpack-specific
 // eslint-disable-next-line camelcase,no-undef
@@ -17,7 +20,13 @@ if (module.hot) {
 // create code split points for all ../pages
 import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(
     ({ default: Page }) => {
+        const app = new App(data);
         hydrateCSS(cssIDs);
-        hydrateDOM(<Page data={data} />, document.getElementById('app'));
+        hydrateDOM(
+            <Provider inject={[app]}>
+                <Page />
+            </Provider>,
+            document.getElementById('app'),
+        );
     },
 );
