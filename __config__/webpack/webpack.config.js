@@ -33,7 +33,6 @@ const config = platform => ({
 
 const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
     dist,
-    bundleName: 'app.browser.js',
 });
 
 module.exports = [

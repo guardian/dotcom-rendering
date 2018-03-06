@@ -11,7 +11,7 @@ const reporter = new Progress({
     format: process.env.CI ? 'expanded' : 'compact',
 });
 
-module.exports = ({ dist, bundleName }) => ({
+module.exports = ({ dist }) => ({
     browser: {
         devtool: 'source-map',
         plugins: [
@@ -27,10 +27,7 @@ module.exports = ({ dist, bundleName }) => ({
                 parallel: true,
             }),
             new BundleAnalyzerPlugin({
-                reportFilename: path.join(
-                    dist,
-                    `${bundleName.replace(/.js/, '')}.stats.html`,
-                ),
+                reportFilename: path.join(dist, `app.browser.stats.html`),
                 analyzerMode: 'static',
                 openAnalyzer: false,
                 logLevel: 'warn',
