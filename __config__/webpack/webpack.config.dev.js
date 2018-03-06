@@ -18,8 +18,6 @@ module.exports = {
         devtool: 'cheap-module-eval-source-map',
         entry: {
             app: ['webpack-hot-middleware/client', './src/browser'],
-            demo: './__tools__/demo/demo.browser.js',
-            src: './__tools__/demo/src.browser.js',
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
@@ -28,10 +26,6 @@ module.exports = {
         ],
     },
     server: {
-        entry: {
-            demo: './__tools__/demo/demo.server.js',
-            src: './__tools__/demo/src.server.js',
-        },
         plugins: [friendlyErrorsWebpackPlugin],
     },
 };

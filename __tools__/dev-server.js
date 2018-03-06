@@ -31,35 +31,22 @@ app.use(
     ),
 );
 
-require('@babel/register')({
-    only: [/__tools__/],
-});
-
 app.get('/', (req, res) => {
     try {
         res.send(`
+        <!DOCTYPE html>
         <html>
-        <h3>pages</h3>
-        <ul>
-        ${fs
-            .readdirSync(path.resolve(__dirname, '../src/pages'))
-            .map(page => {
-                const name = page.replace(/.js$/, '');
-                return `<li><a href="/pages/${name.toLowerCase()}">${name}</a></li>`;
-            })
-            .join('')}
-        </ul>
-        <h3>components</h3>
-        <ul>
-        ${fs
-            .readdirSync(path.resolve(__dirname, '../src/components'))
-            .filter(page => page.endsWith('.demo.js'))
-            .map(page => {
-                const name = page.replace(/.demo.js$/, '');
-                return `<li><a href="/demo/components/${name}">${name}</a></li>`;
-            })
-            .join('')}
-        </ul>
+        <body>
+            <ul>
+            ${fs
+                .readdirSync(path.resolve(__dirname, '../src/pages'))
+                .map(page => {
+                    const name = page.replace(/.js$/, '');
+                    return `<li><a href="/pages/${name.toLowerCase()}">${name}</a></li>`;
+                })
+                .join('')}
+            </ul>
+        </body>
         </html>
         `);
     } catch (e) {
@@ -73,24 +60,6 @@ app.get(
         chunkName: 'app',
     }),
 );
-
-app.get('/demo/*', (req, res) => {
-    const demo = require('./demo/demo.server').default;
-    try {
-        res.send(demo(req.params[0].split('/demo/')[0]));
-    } catch (e) {
-        log(e);
-    }
-});
-
-app.get('/src/*', (req, res) => {
-    const src = require('./demo/src.server').default;
-    try {
-        res.send(src(req.params[0]));
-    } catch (e) {
-        log(e);
-    }
-});
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
