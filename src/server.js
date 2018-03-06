@@ -8,7 +8,7 @@ import { extractCritical } from 'emotion-server';
 import doc from 'lib/__html';
 
 // just while we're not getting a full state from play
-import fakeState from '../__data__';
+import appConfig from '../__config__/app';
 
 const fetchPage = async ({ page, data }) => {
     const pageModule = await import(`./pages/${page}`);
@@ -24,7 +24,7 @@ export default () => async (req, res) => {
     try {
         const html = await fetchPage({
             page: req.params.page,
-            data: { ...fakeState, ...req.body },
+            data: { ...appConfig, ...req.body },
         });
         res.status(200).send(html);
     } catch (e) {

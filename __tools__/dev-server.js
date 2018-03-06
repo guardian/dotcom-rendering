@@ -34,10 +34,11 @@ app.use(
 );
 
 const loadConfig = async (req, res, next) => {
-    const { html: ignoreMe, ...config } = await fetch(
+    const config = await fetch(
         `${req.query.url ||
             'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json`,
     ).then(article => article.json());
+    delete config.html;
     req.body = config;
     next();
 };
