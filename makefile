@@ -22,7 +22,7 @@ build-ci: install
 
 dev: clear install
 	$(call log, "starting DEV server...")
-	@node __tools__/dev-server.js
+	@NODE_ENV=development node __tools__/dev-server.js
 
 # quality #########################################
 
