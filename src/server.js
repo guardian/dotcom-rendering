@@ -7,14 +7,14 @@ import { extractCritical } from 'emotion-server';
 
 import doc from 'lib/__html';
 
-const fetchPage = async (state: { page: string }): string => {
-    const pageModule = await import(`./pages/${state.page}`);
+const fetchPage = async (data: { page: string }): string => {
+    const pageModule = await import(`./pages/${data.page}`);
     const Page = pageModule.default;
     const { html, ids: cssIDs, css } = extractCritical(
-        renderToString(<Page state={state} />),
+        renderToString(<Page data={data} />),
     );
 
-    return doc({ html, state, css, cssIDs });
+    return doc({ html, data, css, cssIDs });
 };
 
 export default () => async (req, res) => {

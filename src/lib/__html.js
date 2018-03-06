@@ -9,14 +9,14 @@ export default ({
     cssIDs = '',
     html = '',
     jsApp = '/assets/javascript/app.browser.js',
-    state = {},
+    data = {},
     jsNonBlocking = '',
 }: {
     title?: string,
     css: string,
     html: string,
     jsApp?: string,
-    state?: {},
+    data?: {},
     jsNonBlocking?: string,
 }) => `
     <!doctype html>
@@ -31,7 +31,7 @@ export default ({
             <script>
             window.gu = {
                 app: {
-                    state: ${JSON.stringify(state)},
+                    app: ${JSON.stringify(data)},
                     cssIDs: ${JSON.stringify(cssIDs)},
                 }
             };

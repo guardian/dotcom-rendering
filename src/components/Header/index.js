@@ -15,8 +15,8 @@ const Header = styled('header')({
 });
 Header.displayName = 'Header';
 
-export default ({ state }) => (
+export default ({ data }) => (
     <Header>
-        <Nav state={state} />
+        <Nav data={data} />
     </Header>
 );
