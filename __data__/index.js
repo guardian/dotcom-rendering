@@ -44,15 +44,6 @@ const header = {
     ],
 };
 
-module.exports = page => {
-    let pageConfig = { page };
-    try {
-        pageConfig = require(`./${page}`);
-    } catch (e) {
-        // nothing
-    }
-    return {
-        header,
-        ...pageConfig,
-    };
+module.exports = {
+    header,
 };
