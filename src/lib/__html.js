@@ -31,7 +31,7 @@ export default ({
             <script>
             window.gu = {
                 app: {
-                    app: ${JSON.stringify(data)},
+                    data: ${JSON.stringify(data)},
                     cssIDs: ${JSON.stringify(cssIDs)},
                 }
             };
