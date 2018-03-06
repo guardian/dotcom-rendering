@@ -1,6 +1,6 @@
 {
     "name": "@guardian/guui",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha",
     "description": "Frontend rendering framework",
     "main": "dist/app.server.js",
     "repository": "git+https://github.com/guardian/guui.git",
