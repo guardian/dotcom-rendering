@@ -11,6 +11,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const webpackConfig = require('../__config__/webpack/webpack.config');
 
+const fetch = require('node-fetch');
+
 const compiler = webpack(webpackConfig);
 const app = express();
 
@@ -31,6 +33,20 @@ app.use(
     ),
 );
 
+app.use('/pages/:page', [
+    async (req, res, next) => {
+        const { html, ...config } = await fetch(
+            `${req.query.url ||
+                'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json`,
+        ).then(article => article.json());
+        req.body = config;
+        next();
+    },
+    webpackHotServerMiddleware(compiler, {
+        chunkName: 'app',
+    }),
+]);
+
 app.get('/', (req, res) => {
     try {
         res.send(`
@@ -42,7 +58,7 @@ app.get('/', (req, res) => {
                 .readdirSync(path.resolve(__dirname, '../src/pages'))
                 .map(page => {
                     const name = page.replace(/.js$/, '');
-                    return `<li><a href="/pages/${name.toLowerCase()}">${name}</a></li>`;
+                    return `<li><a href="/pages/${name}">${name}</a></li>`;
                 })
                 .join('')}
             </ul>
@@ -53,13 +69,6 @@ app.get('/', (req, res) => {
         log(e);
     }
 });
-
-app.get(
-    '/pages/*',
-    webpackHotServerMiddleware(compiler, {
-        chunkName: 'app',
-    }),
-);
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

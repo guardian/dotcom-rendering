@@ -1,5 +1,6 @@
 // @flow
-module.exports.header = {
+/* eslint-disable global-require,import/no-dynamic-require */
+const header = {
     links: [
         {
             text: 'Subscribe',
@@ -41,4 +42,8 @@ module.exports.header = {
             pillar: 'lifestyle',
         },
     ],
+};
+
+module.exports = {
+    header,
 };

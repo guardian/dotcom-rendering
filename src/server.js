@@ -7,8 +7,11 @@ import { extractCritical } from 'emotion-server';
 
 import doc from 'lib/__html';
 
-const fetchPage = async (data: { page: string }): string => {
-    const pageModule = await import(`./pages/${data.page}`);
+// just while we're not getting a full state from play
+import appConfig from '../__config__/app';
+
+const fetchPage = async ({ page, data }) => {
+    const pageModule = await import(`./pages/${page}`);
     const Page = pageModule.default;
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(<Page data={data} />),
@@ -18,11 +21,11 @@ const fetchPage = async (data: { page: string }): string => {
 };
 
 export default () => async (req, res) => {
-    const pageType = req.params[0].split('/pages/')[0];
-    const data = require(`../.data/${pageType}`);
-
     try {
-        const html = await fetchPage(data);
+        const html = await fetchPage({
+            page: req.params.page,
+            data: { ...appConfig, ...req.body },
+        });
         res.status(200).send(html);
     } catch (e) {
         log(e);

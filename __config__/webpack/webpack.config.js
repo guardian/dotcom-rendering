@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable global-require,no-console,import/no-dynamic-require */
 const path = require('path');
-
+const webpack = require('webpack');
 // https://github.com/survivejs/webpack-merge#smart-merging
 const { smart: merge } = require('webpack-merge');
 
@@ -16,6 +16,11 @@ const config = platform => ({
         chunkFilename: `[name].${platform}.js`,
         publicPath: '/assets/javascript/',
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        }),
+    ],
     stats: 'errors-only',
     module: {
         rules: [
