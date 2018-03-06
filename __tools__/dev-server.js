@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 });
 
 app.get(
-    '/pages/*',
+    '/pages/:page',
     webpackHotServerMiddleware(compiler, {
         chunkName: 'app',
     }),

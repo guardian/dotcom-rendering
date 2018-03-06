@@ -4,8 +4,11 @@
 import { log } from 'util';
 import { renderToString } from 'react-dom/server';
 import { extractCritical } from 'emotion-server';
+import fetch from 'node-fetch';
 
 import doc from 'lib/__html';
+
+import fakeState from '../__data__';
 
 const fetchPage = async (data: { page: string }): string => {
     const pageModule = await import(`./pages/${data.page}`);
@@ -18,11 +21,15 @@ const fetchPage = async (data: { page: string }): string => {
 };
 
 export default () => async (req, res) => {
-    const pageType = req.params[0].split('/pages/')[0];
-    const data = require(`../.data/${pageType}`);
+    // just while we're not getting a state from play
+    const data = fakeState(req.params.page);
+
+    const { html: ignoreMe, ...config } = await fetch(
+        'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance.json',
+    ).then(article => article.json());
 
     try {
-        const html = await fetchPage(data);
+        const html = await fetchPage({ ...data, ...config });
         res.status(200).send(html);
     } catch (e) {
         log(e);
