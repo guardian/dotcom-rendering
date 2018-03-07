@@ -10,6 +10,7 @@ import Logo from './Logo';
 import Links from './Links';
 import Pillars from './Pillars';
 import SubNavLink from './SubNavLink';
+import SubNav from './SubNav';
 
 const NavStyled = styled('nav')(
     {
@@ -38,13 +39,13 @@ export default class Nav extends Component {
         super(props);
 
         this.state = {
-            showSubNav: false
+            showSubNav: false,
         };
     }
 
     toggleSubNav() {
-        this.setState({ 
-            showSubNav: this.state.showSubNav ? false : true
+        this.setState({
+            showSubNav: !this.state.showSubNav,
         });
     }
 
@@ -54,11 +55,13 @@ export default class Nav extends Component {
                 <Logo href="/" />
                 <Links />
                 <Pillars />
-                <SubNavLink toggleSubNav={() => {
-                    this.toggleSubNav()
-                }} />
+                <SubNavLink
+                    toggleSubNav={() => {
+                        this.toggleSubNav();
+                    }}
+                />
+                <SubNav showSubNav={this.state.showSubNav} />
             </NavStyled>
         );
     }
-};
-
+}
