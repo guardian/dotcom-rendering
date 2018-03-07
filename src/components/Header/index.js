@@ -1,5 +1,4 @@
 // @flow
-import styled from 'react-emotion';
 
 import { tablet } from 'pasteup/breakpoints';
 

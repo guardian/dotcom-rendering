@@ -1,6 +1,6 @@
 // @flow
 
-import { connect } from 'unistore/react';
+import { connect } from 'unistore/preact';
 
 import Header from 'components/Header';
 

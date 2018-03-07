@@ -2,10 +2,10 @@
 /* eslint-disable global-require,import/no-dynamic-require */
 
 import { log } from 'util';
-import { renderToString } from 'react-dom/server';
+import renderToString from 'preact-render-to-string';
 import { extractCritical } from 'emotion-server';
 import createStore from 'unistore';
-import { Provider } from 'unistore/react';
+import { Provider } from 'unistore/preact';
 
 import doc from 'lib/__html';
 

@@ -1,10 +1,10 @@
 // @flow
 
 // $FlowFixMe https://github.com/facebook/flow/issues/5035
-import { hydrate as hydrateDOM } from 'react-dom';
+import { render } from 'preact';
 import { hydrate as hydrateCSS } from 'emotion';
 import createStore from 'unistore';
-import { Provider } from 'unistore/react';
+import { Provider } from 'unistore/preact';
 
 // webpack-specific
 // eslint-disable-next-line camelcase,no-undef
@@ -14,17 +14,19 @@ const { data, cssIDs } = window.gu.app;
 
 if (module.hot) {
     module.hot.accept();
+    require('preact/debug'); // eslint-disable-line global-require
 }
 
+const init = ({ default: Page }) => {
+    hydrateCSS(cssIDs);
+    render(
+        <Provider store={createStore(data)}>
+            <Page />
+        </Provider>,
+        document.getElementById('app'),
+        document.getElementById('app').lastElementChild,
+    );
+};
+
 // create code split points for all ../pages
-import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(
-    ({ default: Page }) => {
-        hydrateCSS(cssIDs);
-        hydrateDOM(
-            <Provider store={createStore(data)}>
-                <Page />
-            </Provider>,
-            document.getElementById('app'),
-        );
-    },
-);
+import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(init);

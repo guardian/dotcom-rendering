@@ -20,6 +20,10 @@ const config = platform => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
+        new webpack.ProvidePlugin({
+            h: ['preact', 'h'],
+            styled: ['preact-emotion', 'default'],
+        }),
     ],
     stats: 'errors-only',
     module: {
@@ -33,6 +37,12 @@ const config = platform => ({
                 },
             },
         ],
+    },
+    resolve: {
+        alias: {
+            // for libs that expect React
+            react: 'preact',
+        },
     },
 });
 

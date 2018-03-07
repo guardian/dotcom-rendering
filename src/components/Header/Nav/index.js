@@ -1,7 +1,5 @@
 // @flow
 
-import styled from 'react-emotion';
-
 import { clearFix } from 'pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
 

@@ -1,7 +1,5 @@
 // @flow
 
-import styled from 'react-emotion';
-
 import palette, { pillars } from 'pasteup/palette';
 import { headline } from 'pasteup/fonts';
 

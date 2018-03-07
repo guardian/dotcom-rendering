@@ -1,7 +1,5 @@
 // @flow
 
-import styled from 'react-emotion';
-
 const pillarColours = {
     news: 'pink',
     alex: 'hotpink',
