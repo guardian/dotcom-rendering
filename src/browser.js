@@ -20,10 +20,9 @@ if (module.hot) {
 // create code split points for all ../pages
 import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(
     ({ default: Page }) => {
-        const app = new App(data);
         hydrateCSS(cssIDs);
         hydrateDOM(
-            <Provider inject={[app]}>
+            <Provider inject={[new App(data)]}>
                 <Page />
             </Provider>,
             document.getElementById('app'),
