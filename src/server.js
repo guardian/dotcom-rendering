@@ -16,11 +16,9 @@ const fetchPage = async data => {
     const module = await import(`./pages/${data.page}`);
     const Page = module.default;
 
-    const app = new App(data);
-
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(
-            <Provider inject={[app]}>
+            <Provider inject={[new App(data)]}>
                 <Page />
             </Provider>,
         ),
