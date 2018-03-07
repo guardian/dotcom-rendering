@@ -11,6 +11,7 @@ import Links from './Links';
 import Pillars from './Pillars';
 import SubNavLink from './SubNavLink';
 import SubNav from './SubNav';
+import VeggieBurger from './VeggieBurger';
 
 const NavStyled = styled('nav')(
     {
@@ -50,15 +51,20 @@ export default class Nav extends Component {
     }
 
     render() {
+        const toggleSubNav = () => {
+            this.toggleSubNav();
+        };
+
         return (
             <NavStyled>
                 <Logo href="/" />
                 <Links />
                 <Pillars />
+                <VeggieBurger 
+                    toggleSubNav={toggleSubNav}
+                />
                 <SubNavLink
-                    toggleSubNav={() => {
-                        this.toggleSubNav();
-                    }}
+                    toggleSubNav={toggleSubNav}
                 />
                 <SubNav showSubNav={this.state.showSubNav} />
             </NavStyled>

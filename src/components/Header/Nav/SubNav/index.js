@@ -64,5 +64,5 @@ const SubNav = styled('div')(props => {
 });
 
 export default ({ showSubNav }) => (
-    <SubNav data-test="SubNav" showSubNav={showSubNav} />
+    <SubNav showSubNav={showSubNav} />
 );
