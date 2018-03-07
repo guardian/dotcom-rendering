@@ -9,7 +9,12 @@ const dist = path.resolve(__dirname, '../../dist');
 
 const config = platform => ({
     name: platform,
-    entry: { app: `./src/${platform}.js` },
+    entry: {
+        app: [
+            'preact-emotion', // force preact-emotion into the vendor chunk
+            `./src/${platform}.js`,
+        ],
+    },
     output: {
         path: dist,
         filename: `[name].${platform}.js`,

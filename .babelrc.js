@@ -52,16 +52,7 @@ const appServerConfig = {
 };
 
 const appBrowserConfig = {
-    plugins: [
-        '@babel/plugin-syntax-dynamic-import',
-        [
-            '@babel/plugin-transform-runtime',
-            {
-                polyfill: false,
-            },
-        ],
-        ...universalPlugins,
-    ],
+    plugins: ['@babel/plugin-syntax-dynamic-import', ...universalPlugins],
     presets: [
         [
             '@babel/preset-env',
