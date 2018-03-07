@@ -1,17 +1,14 @@
 // @flow
 
-import { Subscribe } from 'unstated';
+import { connect } from 'unistore/react';
 
 import Header from 'components/Header';
-import App from 'lib/AppContainer';
 
-const Article = () => (
-    <>
+const Article = ({ config }) => (
+    <article>
         <Header />
-        <Subscribe to={[App]}>
-            {app => <h1>{app.state.config.page.headline}</h1>}
-        </Subscribe>
-    </>
+        <h1>{config.page.headline}</h1>
+    </article>
 );
 
-export default Article;
+export default connect('config')(Article);
