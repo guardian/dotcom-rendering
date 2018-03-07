@@ -1,5 +1,7 @@
 // @flow
 import styled from 'react-emotion';
+import { Subscribe } from 'unstated';
+import App from 'lib/AppContainer';
 
 import SupportTheGuardian from './SupportTheGuardian';
 import Link from './Link';
@@ -12,7 +14,7 @@ const Links = styled('div')({
 });
 Links.displayName = 'Links';
 
-export default ({ links, ...props }) => (
+export default props => (
     <Links>
         {props.isPayingMember ||
             props.isRecentContributor || (
@@ -20,12 +22,15 @@ export default ({ links, ...props }) => (
                     Support The Guardian
                 </SupportTheGuardian>
             )}
-        {links.map((link, i) => (
-            <Link href={link.href} key={link.text} showAtTablet={i < 2}>
-                {link.text}
-            </Link>
-        ))}
-
+        <Subscribe to={[App]}>
+            {app =>
+                app.state.header.links.map(({ href, text }, i) => (
+                    <Link href={href} key={text} showAtTablet={i < 2}>
+                        {text}
+                    </Link>
+                ))
+            }
+        </Subscribe>
         <Search href="/">Search</Search>
     </Links>
 );

@@ -1,6 +1,9 @@
 // @flow
 // .pillars
 import styled from 'react-emotion';
+import { Subscribe } from 'unstated';
+
+import App from 'lib/AppContainer';
 
 import { mobileLandscape } from 'pasteup/breakpoints';
 
@@ -19,12 +22,16 @@ const Pillars = styled('ul')({
 });
 Pillars.displayName = 'Pillars';
 
-export default ({ pillars }) => (
+export default () => (
     <Pillars>
-        {pillars.map((pillar, i) => (
-            <Pillar pillar={pillar} index={i} key={pillar.label}>
-                {pillar.label}
-            </Pillar>
-        ))}
+        <Subscribe to={[App]}>
+            {app =>
+                app.state.header.pillars.map((pillar, i) => (
+                    <Pillar pillar={pillar} index={i} key={pillar.label}>
+                        {pillar.label}
+                    </Pillar>
+                ))
+            }
+        </Subscribe>
     </Pillars>
 );
