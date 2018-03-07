@@ -27,7 +27,6 @@ const config = platform => ({
         }),
         new webpack.ProvidePlugin({
             h: ['preact', 'h'],
-            styled: ['preact-emotion', 'default'],
         }),
     ],
     stats: 'errors-only',

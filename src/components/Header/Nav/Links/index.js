@@ -1,4 +1,5 @@
 // @flow
+import styled from 'preact-emotion';
 import { connect } from 'unistore/preact';
 
 import SupportTheGuardian from './SupportTheGuardian';

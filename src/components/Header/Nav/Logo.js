@@ -1,4 +1,5 @@
 // @flow
+import styled from 'preact-emotion';
 
 import {
     mobileMedium,

@@ -1,4 +1,5 @@
 // @flow
+import styled from 'preact-emotion';
 
 import { clearFix } from 'pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';

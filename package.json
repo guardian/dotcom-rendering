@@ -77,7 +77,7 @@
     "eslintConfig": {
         "parser": "babel-eslint",
         "globals": {
-            "styled": false
+
         },
         "parserOptions": {
             "ecmaVersion": "2017",
