@@ -1,7 +1,6 @@
 // @flow
 import styled from 'react-emotion';
-import { Subscribe } from 'unstated';
-import App from 'lib/AppContainer';
+import { connect } from 'unistore/react';
 
 import SupportTheGuardian from './SupportTheGuardian';
 import Link from './Link';
@@ -14,7 +13,7 @@ const Links = styled('div')({
 });
 Links.displayName = 'Links';
 
-export default props => (
+export default connect('header')(({ header, ...props }) => (
     <Links>
         {props.isPayingMember ||
             props.isRecentContributor || (
@@ -22,15 +21,11 @@ export default props => (
                     Support The Guardian
                 </SupportTheGuardian>
             )}
-        <Subscribe to={[App]}>
-            {app =>
-                app.state.header.links.map(({ href, text }, i) => (
-                    <Link href={href} key={text} showAtTablet={i < 2}>
-                        {text}
-                    </Link>
-                ))
-            }
-        </Subscribe>
+        {header.links.map(({ href, text }, i) => (
+            <Link href={href} key={text} showAtTablet={i < 2}>
+                {text}
+            </Link>
+        ))}
         <Search href="/">Search</Search>
     </Links>
-);
+));

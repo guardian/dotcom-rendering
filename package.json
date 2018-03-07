@@ -19,7 +19,7 @@
         "react-dom": "^16.2.0",
         "react-emotion": "^9.0.2",
         "reset-css": "^2.2.1",
-        "unstated": "^1.0.3"
+        "unistore": "^3.0.4"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0-beta.40",

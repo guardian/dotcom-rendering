@@ -3,9 +3,8 @@
 // $FlowFixMe https://github.com/facebook/flow/issues/5035
 import { hydrate as hydrateDOM } from 'react-dom';
 import { hydrate as hydrateCSS } from 'emotion';
-import { Provider } from 'unstated';
-
-import App from 'lib/AppContainer';
+import createStore from 'unistore';
+import { Provider } from 'unistore/react';
 
 // webpack-specific
 // eslint-disable-next-line camelcase,no-undef
@@ -22,7 +21,7 @@ import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(
     ({ default: Page }) => {
         hydrateCSS(cssIDs);
         hydrateDOM(
-            <Provider inject={[new App(data)]}>
+            <Provider store={createStore(data)}>
                 <Page />
             </Provider>,
             document.getElementById('app'),
