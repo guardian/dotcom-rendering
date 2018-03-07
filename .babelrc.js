@@ -58,13 +58,6 @@ const appBrowserConfig = {
                 polyfill: false,
             },
         ],
-        [
-            // this does (virtually) nothing if process.env.NODE_ENV === 'production'
-            'react-hot-loader/babel',
-            {
-                ignore: 'node_modules',
-            },
-        ],
         ...universalPlugins,
     ],
     presets: [
