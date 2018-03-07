@@ -1,6 +1,5 @@
 // @flow
-
-import styled from 'react-emotion';
+import styled from 'preact-emotion';
 
 const pillarColours = {
     news: 'pink',

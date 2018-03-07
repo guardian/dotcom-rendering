@@ -1,5 +1,5 @@
 // @flow
-import styled from 'react-emotion';
+import styled from 'preact-emotion';
 
 import palette from 'pasteup/palette';
 import { textSans } from 'pasteup/fonts';

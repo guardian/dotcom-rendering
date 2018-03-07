@@ -1,7 +1,6 @@
 // @flow
-// .pillars
-import styled from 'react-emotion';
-import { connect } from 'unistore/react';
+import styled from 'preact-emotion';
+import { connect } from 'unistore/preact';
 
 import { mobileLandscape } from 'pasteup/breakpoints';
 

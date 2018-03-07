@@ -1,6 +1,6 @@
 // @flow
-import styled from 'react-emotion';
-import { connect } from 'unistore/react';
+import styled from 'preact-emotion';
+import { connect } from 'unistore/preact';
 
 import SupportTheGuardian from './SupportTheGuardian';
 import Link from './Link';

@@ -4,7 +4,6 @@ const universalPlugins = [
     'babel-plugin-preval',
     ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
     '@babel/plugin-proposal-class-properties',
-    'babel-plugin-react-require',
     'babel-plugin-inline-react-svg',
     [
         'babel-plugin-module-resolver',
@@ -14,7 +13,10 @@ const universalPlugins = [
     ],
 ];
 
-const universalPresets = ['@babel/preset-flow', '@babel/preset-react'];
+const universalPresets = [
+    '@babel/preset-flow',
+    ['@babel/preset-react', { pragma: 'h' }],
+];
 
 const defaultConfig = {
     plugins: ['babel-plugin-dynamic-import-node', ...universalPlugins],
@@ -50,16 +52,7 @@ const appServerConfig = {
 };
 
 const appBrowserConfig = {
-    plugins: [
-        '@babel/plugin-syntax-dynamic-import',
-        [
-            '@babel/plugin-transform-runtime',
-            {
-                polyfill: false,
-            },
-        ],
-        ...universalPlugins,
-    ],
+    plugins: ['@babel/plugin-syntax-dynamic-import', ...universalPlugins],
     presets: [
         [
             '@babel/preset-env',
