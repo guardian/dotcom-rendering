@@ -5,6 +5,7 @@ import { render } from 'preact';
 import { hydrate as hydrateCSS } from 'emotion';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
+// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved,import/extensions
 import Page from '__PAGE__ENTRY__POINT__';
 
 // webpack-specific
