@@ -12,29 +12,26 @@ import doc from 'lib/__html';
 // just while we're not getting a full state from play
 import appConfig from '../__config__/app';
 
-const fetchPage = async data => {
-    const module = await import(`./pages/${data.page}`);
-    const Page = module.default;
-
-    const { html, ids: cssIDs, css } = extractCritical(
-        renderToString(
-            <Provider store={createStore(data)}>
-                <Page />
-            </Provider>,
-        ),
-    );
-
-    return doc({ html, data, css, cssIDs });
-};
-
-export default () => async (req, res) => {
+const renderPage = async (req, res) => {
     try {
-        const html = await fetchPage({
-            page: req.params.page,
+        const { page } = req.params;
+        const data = {
+            page,
             ...appConfig,
             ...req.body,
-        });
-        res.status(200).send(html);
+        };
+
+        const module = await import(`./pages/${page}`);
+        const Page = module.default;
+
+        const { html, ids: cssIDs, css } = extractCritical(
+            renderToString(
+                <Provider store={createStore(data)}>
+                    <Page />
+                </Provider>,
+            ),
+        );
+        res.status(200).send(doc({ html, data, css, cssIDs }));
     } catch (e) {
         log(e);
         res.status(404).send(`<pre>¯\\_(ツ)_/¯
@@ -42,3 +39,5 @@ export default () => async (req, res) => {
 ${e}</pre>`);
     }
 };
+
+export default () => renderPage;
