@@ -1,48 +1,145 @@
 // @flow
 
+import palette from 'pasteup/palette';
+import styled from 'react-emotion';
+import { egyptian } from 'pasteup/fonts';
+import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
 import GuardianLogo from './GuardianLogo';
 import NotFoundLogo from './NotFoundLogo';
 import BackToGuardianButton from './BackToGuardianButton';
 
-import {
-    Wrapper,
-    MainContent,
-    LogoWrapper,
-    VisuallyHidden,
-    BodyCopy,
-    Heading,
-    ContentText,
-    Link,
-} from './styles';
-
 const beaconUrl = '//beacon.gu-web.net';
 
+const VisuallyHidden = styled('span')({
+    border: 0,
+    clip: 'rect(0 0 0 0)',
+    height: '1px',
+    margin: '-1px',
+    overflow: 'hidden',
+    padding: 0,
+    position: 'absolute',
+    width: '1px',
+});
+
+const NotFoundWrapper = styled('div')({
+    content: '',
+    background: '#e7edef',
+    position: 'fixed',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: -1,
+    fontFamily: egyptian,
+});
+
+const MainContent = styled('div')({
+    boxSizing: 'border-box',
+    margin: '0 auto',
+    padding: '0 10px 24px',
+    position: 'relative',
+
+    [desktop]: {
+        width: '980px',
+    },
+
+    [leftCol]: {
+        width: '1140px',
+    },
+
+    [wide]: {
+        width: '1300px',
+    },
+});
+
+const LogoWrapper = styled('a')({
+    display: 'block',
+    margin: '6px 0 36px auto',
+    maxWidth: '295px',
+    width: '55%',
+    position: 'relative',
+    zIndex: 1,
+    [tablet]: {
+        width: '295px',
+    },
+    [desktop]: {
+        marginBottom: '-94px',
+    },
+});
+
+const ContentText = styled('div')({
+    [tablet]: {
+        marginLeft: '160px',
+    },
+
+    [desktop]: {
+        marginLeft: '320px',
+    },
+
+    [leftCol]: {
+        marginLeft: '480px',
+    },
+});
+
+const Heading = styled('h1')({
+    color: palette.neutral['1'],
+    fontSize: '28px',
+    fontWeight: 200,
+    lineHeight: 1.15,
+    marginBottom: '12px',
+    maxWidth: '540px',
+    [tablet]: {
+        fontSize: '42px',
+    },
+});
+
+const BodyCopy = styled('p')({
+    color: palette.neutral['1'],
+    fontSize: '15px',
+    marginBottom: '24px',
+    maxWidth: '220px',
+    lineHeight: '27px',
+
+    [tablet]: {
+        fontSize: '18px',
+        maxWidth: '300px',
+    },
+});
+
+const NeutralLink = styled('a')({
+    borderBottom: '2px solid #aabfc7',
+    color: palette.neutral['1'],
+    paddingBottom: '3px',
+    textDecoration: 'none',
+    transition: 'border-color .3s',
+    '&:hover': {
+        borderColor: palette.neutral['1'],
+    },
+});
+
 export default () => (
-    <div className={Wrapper}>
-        <div className={MainContent}>
-            <a href="https://www.theguardian.com/" className={LogoWrapper}>
+    <NotFoundWrapper>
+        <MainContent>
+            <LogoWrapper href="https://www.theguardian.com/">
                 <GuardianLogo />
-                <span className={VisuallyHidden}>The Guardian</span>
-            </a>
+                <VisuallyHidden>The Guardian</VisuallyHidden>
+            </LogoWrapper>
             <NotFoundLogo />
-            <div className={ContentText}>
-                <h1 className={Heading}>
+            <ContentText>
+                <Heading>
                     Sorry – the page you have requested does not exist
-                </h1>
-                <p className={BodyCopy}>
+                </Heading>
+                <BodyCopy>
                     You may have followed an outdated link, or have mistyped a
                     URL. If you believe this to be an error, please&nbsp;
-                    <a
-                        href="https://www.theguardian.com/info/tech-feedback"
-                        className={Link}
-                    >
+                    <NeutralLink href="https://www.theguardian.com/info/tech-feedback">
                         {' '}
                         report it{' '}
-                    </a>.
-                </p>
+                    </NeutralLink>.
+                </BodyCopy>
                 <BackToGuardianButton />
-            </div>
-        </div>
+            </ContentText>
+        </MainContent>
 
         <script
             dangerouslySetInnerHTML={{
@@ -81,5 +178,5 @@ export default () => (
             style={{ display: 'none' }}
             rel="nofollow"
         />
-    </div>
+    </NotFoundWrapper>
 );
