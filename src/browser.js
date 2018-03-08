@@ -17,7 +17,7 @@ if (module.hot) {
     require('preact/debug'); // eslint-disable-line global-require
 }
 
-export default ({ default: Page }) => {
+export default (Page) => {
     hydrateCSS(cssIDs);
     render(
         <Provider store={createStore(data)}>

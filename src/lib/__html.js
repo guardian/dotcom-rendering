@@ -36,7 +36,7 @@ export default ({
                 }
             };
             </script>
-            <script src="${jsApp}"></script>
+            <script src="/assets/javascript/${data.page}.browser.js"></script>
             <script>${jsNonBlocking}</script>
         </body>
     </html>

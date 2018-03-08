@@ -12,13 +12,16 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
         ],
     },
 });
+const pages = ['Article', 'Article.immersive'];
 
 module.exports = () => ({
     browser: {
         devtool: 'cheap-module-eval-source-map',
-        entry: {
-            app: ['webpack-hot-middleware/client', './src/browser'],
-        },
+        entry: pages.reduce((acc, page) => {
+            acc[page] = ['webpack-hot-middleware/client'];
+
+            return acc;
+        }, {}),
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
