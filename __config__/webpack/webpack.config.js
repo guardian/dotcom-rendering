@@ -8,20 +8,19 @@ const { smart: merge } = require('webpack-merge');
 const dist = path.resolve(__dirname, '../../dist');
 
 const config = ({ platform, pages }) => {
-    const entry = (platform === 'server') ?
-        {
-            app: [
-                'preact-emotion', // force preact-emotion into the vendor chunk
-                `./src/${platform}.js`,
-            ],
-        } :
-        pages.reduce((acc, page) => {
-            acc[page] = [
-                `./src/pages/${page}.js`
-            ];
+    const entry =
+        platform === 'server'
+            ? {
+                  app: [
+                      'preact-emotion', // force preact-emotion into the vendor chunk
+                      `./src/${platform}.js`,
+                  ],
+              }
+            : pages.reduce((acc, page) => {
+                  acc[page] = [`./src/pages/${page}.js`];
 
-            return acc;
-        }, {});
+                  return acc;
+              }, {});
 
     return {
         name: platform,
@@ -59,7 +58,7 @@ const config = ({ platform, pages }) => {
                 react: 'preact',
             },
         },
-    }
+    };
 };
 
 const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
@@ -67,10 +66,13 @@ const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
 });
 
 module.exports = [
-    merge(config({
-        platform: 'browser',
-        pages: ['Article', 'Article.immersive']
-    }), envConfig.browser),
+    merge(
+        config({
+            platform: 'browser',
+            pages: ['Article', 'Article.immersive'],
+        }),
+        envConfig.browser,
+    ),
     merge(
         config({ platform: 'server' }),
         {

@@ -1,6 +1,6 @@
 // @flow
 
-import ArticleImmersive from 'components/pages/Article.immersive.js';
+import ArticleImmersive from 'components/pages/Article.immersive';
 import init from '../browser';
 
 if (module.hot) {

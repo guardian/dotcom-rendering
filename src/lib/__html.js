@@ -8,14 +8,12 @@ export default ({
     css = '',
     cssIDs = '',
     html = '',
-    jsApp = '/assets/javascript/app.browser.js',
     data = {},
     jsNonBlocking = '',
 }: {
     title?: string,
     css: string,
     html: string,
-    jsApp?: string,
     data?: {},
     jsNonBlocking?: string,
 }) => `

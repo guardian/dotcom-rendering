@@ -12,7 +12,7 @@ __webpack_public_path__ = '/assets/javascript/';
 
 const { data, cssIDs } = window.gu.app;
 
-export default (Page) => {
+export default Page => {
     hydrateCSS(cssIDs);
     render(
         <Provider store={createStore(data)}>

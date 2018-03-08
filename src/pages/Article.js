@@ -1,6 +1,6 @@
 // @flow
 
-import Article from 'components/pages/Article.js';
+import Article from 'components/pages/Article';
 import init from '../browser';
 
 if (module.hot) {
