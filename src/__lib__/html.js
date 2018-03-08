@@ -1,7 +1,6 @@
 // @flow
 
-import resetCSS from './__reset-css';
-import fonts from './__fonts';
+import resetCSS from './reset-css';
 
 export default ({
     title = 'The Guardian',
@@ -22,17 +21,22 @@ export default ({
         <head>
             <title>${title}</title>
             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-            <style>${resetCSS}${fonts}${css}</style>
+            <link rel="stylesheet" href="/static/css/fonts.css" />
+            <style>${resetCSS}${css}</style>
         </head>
         <body>
             <div id='app'>${html}</div>
             <script>
-            window.gu = {
-                app: {
-                    data: ${JSON.stringify(data)},
-                    cssIDs: ${JSON.stringify(cssIDs)},
-                }
-            };
+window.gu = ${JSON.stringify(
+    {
+        app: {
+            data,
+            cssIDs,
+        },
+    },
+    null,
+    2,
+)};
             </script>
             <script src="/assets/javascript/${data.page}.browser.js"></script>
             <script>${jsNonBlocking}</script>

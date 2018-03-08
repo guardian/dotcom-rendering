@@ -10,7 +10,7 @@ import {
 } from 'pasteup/breakpoints';
 import { screenReaderOnly } from 'pasteup/mixins';
 
-import TheGuardianLogoSVG from 'static/inline-svgs/the-guardian-logo.svg';
+import TheGuardianLogoSVG from 'images/the-guardian-logo.svg';
 
 const Link = styled('a')({
     float: 'right',

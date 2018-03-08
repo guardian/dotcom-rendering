@@ -16,6 +16,8 @@ const fetch = require('node-fetch');
 const compiler = webpack(webpackConfig);
 const app = express();
 
+app.use('/static', express.static(path.join(__dirname, '..', 'src', 'static')));
+
 app.use(
     webpackDevMiddleware(compiler, {
         serverSideRender: true,
