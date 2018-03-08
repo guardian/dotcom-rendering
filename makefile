@@ -44,6 +44,9 @@ test: clear install
 validate: clear install flow lint test validate-build
 	$(call log, "everything seems 👌")
 
+validate-ci: clear install flow lint test
+	$(call log, "everything seems 👌")
+
 # helpers #########################################
 
 install: check-env
