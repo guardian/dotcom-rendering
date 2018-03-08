@@ -13,11 +13,11 @@ const config = ({ platform, page }) => {
             ? {
                   app: [
                       'preact-emotion', // force preact-emotion into the vendor chunk
-                      `./src/${platform}.js`,
+                      './src/server.js',
                   ],
               }
             : {
-                  [page]: [`./src/${platform}.js`],
+                  [page]: ['./src/browser.js'],
               };
 
     return {
