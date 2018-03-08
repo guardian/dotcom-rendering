@@ -7,7 +7,7 @@ import { extractCritical } from 'emotion-server';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
 
-import doc from 'lib/__html';
+import doc from '__lib__/html';
 
 // just while we're not getting a full state from play
 import appConfig from '../__config__/app';
