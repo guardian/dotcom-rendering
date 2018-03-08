@@ -26,7 +26,6 @@ const NotFoundWrapper = styled('div')({
 });
 
 const MainContent = styled('div')({
-    boxSizing: 'border-box',
     margin: '0 auto',
     padding: '0 10px 24px',
     position: 'relative',
