@@ -1,7 +1,7 @@
 // @flow
 
 import GuardianLogo from './GuardianLogo';
-import NotFoundLogo from './NotFoundSvg';
+import NotFoundLogo from './NotFoundLogo';
 import BackToGuardianButton from './BackToGuardianButton';
 
 import {
@@ -12,19 +12,19 @@ import {
     BodyCopy,
     Heading,
     ContentText,
-    Link
-} from './styles.js';
+    Link,
+} from './styles';
 
-const beaconUrl = "//beacon.gu-web.net";
+const beaconUrl = '//beacon.gu-web.net';
 
 export default () => (
     <div className={Wrapper}>
         <div className={MainContent}>
             <a href="https://www.theguardian.com/" className={LogoWrapper}>
-                <GuardianLogo/>
+                <GuardianLogo />
                 <span className={VisuallyHidden}>The Guardian</span>
             </a>
-            <NotFoundLogo/>
+            <NotFoundLogo />
             <div className={ContentText}>
                 <h1 className={Heading}>
                     Sorry – the page you have requested does not exist
@@ -32,7 +32,13 @@ export default () => (
                 <p className={BodyCopy}>
                     You may have followed an outdated link, or have mistyped a
                     URL. If you believe this to be an error, please&nbsp;
-                    <a href="https://www.theguardian.com/info/tech-feedback" className={Link}> report it </a>.
+                    <a
+                        href="https://www.theguardian.com/info/tech-feedback"
+                        className={Link}
+                    >
+                        {' '}
+                        report it{' '}
+                    </a>.
                 </p>
                 <BackToGuardianButton />
             </div>
@@ -75,6 +81,5 @@ export default () => (
             style={{ display: 'none' }}
             rel="nofollow"
         />
-
     </div>
 );

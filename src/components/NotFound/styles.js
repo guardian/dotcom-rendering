@@ -14,28 +14,26 @@ export const Wrapper = css({
     bottom: 0,
     left: 0,
     zIndex: -1,
-    fontFamily: egyptian
+    fontFamily: egyptian,
 });
 
 export const MainContent = css({
-
     boxSizing: 'border-box',
     margin: '0 auto',
     padding: '0 10px 24px',
     position: 'relative',
 
     [desktop]: {
-        width: '980px'
+        width: '980px',
     },
 
     [leftCol]: {
-        width: '1140px'
+        width: '1140px',
     },
 
     [wide]: {
-        width: '1300px'
-    }
-
+        width: '1300px',
+    },
 });
 
 export const Heading = css({
@@ -46,8 +44,8 @@ export const Heading = css({
     marginBottom: '12px',
     maxWidth: '540px',
     [tablet]: {
-        fontSize: '42px'
-    }
+        fontSize: '42px',
+    },
 });
 
 export const LogoWrapper = css({
@@ -58,21 +56,20 @@ export const LogoWrapper = css({
     position: 'relative',
     zIndex: 1,
     [tablet]: {
-        width: '295px'
+        width: '295px',
     },
     [desktop]: {
-        marginBottom: '-94px'
-    }
+        marginBottom: '-94px',
+    },
 });
 
 export const Logo = css({
     display: 'block',
     height: 'auto',
-    width: '100%'
+    width: '100%',
 });
 
 export const FourOhFour = css({
-
     display: 'block',
     height: '80%',
     maxWidth: '350px',
@@ -81,33 +78,30 @@ export const FourOhFour = css({
     [tablet]: {
         height: 'auto',
         maxWidth: '100%',
-        width: '350px'
+        width: '350px',
     },
 
     [desktop]: {
-        width: '378px'
+        width: '378px',
     },
 
     [leftCol]: {
-        width: '567px'
-    }
-
+        width: '567px',
+    },
 });
 
 export const ContentText = css({
-
     [tablet]: {
-        marginLeft: '160px'
+        marginLeft: '160px',
     },
 
     [desktop]: {
-        marginLeft: '320px'
+        marginLeft: '320px',
     },
 
     [leftCol]: {
-        marginLeft: '480px'
-    }
-
+        marginLeft: '480px',
+    },
 });
 
 export const Cta = css({
@@ -124,15 +118,12 @@ export const Cta = css({
     transition: 'background-color .3s',
 
     '&:hover': {
-
         backgroundColor: '#edd600',
 
         '&>svg': {
             transform: 'translate(5px, -50%)',
-        }
-
-    }
-
+        },
+    },
 });
 
 export const VisuallyHidden = css({
@@ -143,8 +134,8 @@ export const VisuallyHidden = css({
     overflow: 'hidden',
     padding: 0,
     position: 'absolute',
-    width: '1px'
-})
+    width: '1px',
+});
 
 export const Icon = css({
     fill: 'currentColor',
@@ -154,11 +145,10 @@ export const Icon = css({
     top: '50%',
     transform: 'translate(0, -50%)',
     transition: 'transform .3s',
-    width: '40px'
+    width: '40px',
 });
 
 export const BodyCopy = css({
-
     color: palette.neutral['1'],
     fontSize: '15px',
     marginBottom: '24px',
@@ -167,20 +157,17 @@ export const BodyCopy = css({
 
     [tablet]: {
         fontSize: '18px',
-        maxWidth: '300px'
-    }
-
+        maxWidth: '300px',
+    },
 });
 
 export const Link = css({
-
     borderBottom: '2px solid #aabfc7',
     color: palette.neutral['1'],
     paddingBottom: '3px',
     textDecoration: 'none',
     transition: 'border-color .3s',
     '&:hover': {
-        borderColor: palette.neutral['1']
-    }
-
+        borderColor: palette.neutral['1'],
+    },
 });
