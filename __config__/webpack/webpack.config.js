@@ -61,15 +61,17 @@ const config = ({ platform, pages }) => {
     };
 };
 
+const pages = ['Article', 'Article.immersive'];
 const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
     dist,
+    pages,
 });
 
 module.exports = [
     merge(
         config({
             platform: 'browser',
-            pages: ['Article', 'Article.immersive'],
+            pages,
         }),
         envConfig.browser,
     ),

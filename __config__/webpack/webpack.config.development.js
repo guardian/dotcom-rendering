@@ -12,9 +12,8 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
         ],
     },
 });
-const pages = ['Article', 'Article.immersive'];
 
-module.exports = () => ({
+module.exports = ({ pages }) => ({
     browser: {
         devtool: 'cheap-module-eval-source-map',
         entry: pages.reduce((acc, page) => {
