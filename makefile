@@ -24,6 +24,9 @@ dev: clear install
 	$(call log, "starting DEV server...")
 	@NODE_ENV=development node __server__/dev-server.js
 
+start:
+	@NODE_ENV=production node __server__/index.js
+
 # quality #########################################
 
 flow: install
