@@ -2,23 +2,26 @@
 /* eslint-disable global-require,import/no-dynamic-require */
 
 import { log } from 'util';
-import { renderToString } from 'react-dom/server';
+import renderToString from 'preact-render-to-string';
 import { extractCritical } from 'emotion-server';
-import { Provider } from 'unstated';
+import createStore from 'unistore';
+import { Provider } from 'unistore/preact';
 
-import doc from 'lib/__html';
-import App from 'lib/AppContainer';
+import doc from '__lib__/html';
 
 // just while we're not getting a full state from play
 import appConfig from '../__config__/app';
 
 const fetchPage = async data => {
-    const module = await import(`./pages/${data.page}`);
+    const module = await import(`./pages/${data.page.replace(
+        /^(.)(.*)/,
+        (match, first, rest) => first.toUpperCase() + rest,
+    )}`);
     const Page = module.default;
 
     const { html, ids: cssIDs, css } = extractCritical(
         renderToString(
-            <Provider inject={[new App(data)]}>
+            <Provider store={createStore(data)}>
                 <Page />
             </Provider>,
         ),
@@ -37,6 +40,8 @@ export default () => async (req, res) => {
         res.status(200).send(html);
     } catch (e) {
         log(e);
-        res.status(404).send(`¯\\_(ツ)_/¯ ${req.params.page} does not exist`);
+        res.status(404).send(`<pre>¯\\_(ツ)_/¯
+
+${e}</pre>`);
     }
 };

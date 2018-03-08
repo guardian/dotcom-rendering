@@ -9,7 +9,12 @@ const dist = path.resolve(__dirname, '../../dist');
 
 const config = platform => ({
     name: platform,
-    entry: { app: `./src/${platform}.js` },
+    entry: {
+        app: [
+            'preact-emotion', // force preact-emotion into the vendor chunk
+            `./src/${platform}.js`,
+        ],
+    },
     output: {
         path: dist,
         filename: `[name].${platform}.js`,
@@ -19,6 +24,9 @@ const config = platform => ({
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        }),
+        new webpack.ProvidePlugin({
+            h: ['preact', 'h'],
         }),
     ],
     stats: 'errors-only',
@@ -33,6 +41,12 @@ const config = platform => ({
                 },
             },
         ],
+    },
+    resolve: {
+        alias: {
+            // for libs that expect React
+            react: 'preact',
+        },
     },
 });
 
