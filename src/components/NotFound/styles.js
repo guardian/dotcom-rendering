@@ -104,28 +104,6 @@ export const ContentText = css({
     },
 });
 
-export const Cta = css({
-    backgroundColor: '#ffe500',
-    borderRadius: '9999px',
-    boxSizing: 'border-box',
-    color: '#121212',
-    display: 'inline-block',
-    fontSize: '16px',
-    lineHeight: '42px',
-    padding: '0 45px 0 20px',
-    position: 'relative',
-    textDecoration: 'none',
-    transition: 'background-color .3s',
-
-    '&:hover': {
-        backgroundColor: '#edd600',
-
-        '&>svg': {
-            transform: 'translate(5px, -50%)',
-        },
-    },
-});
-
 export const VisuallyHidden = css({
     border: 0,
     clip: 'rect(0 0 0 0)',
