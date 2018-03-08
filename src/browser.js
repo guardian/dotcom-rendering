@@ -5,6 +5,8 @@ import { render } from 'preact';
 import { hydrate as hydrateCSS } from 'emotion';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
+
+// will be replaced by string-replace-loader in webpack.config.js
 // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved,import/extensions
 import Page from '__PAGE__ENTRY__POINT__';
 
