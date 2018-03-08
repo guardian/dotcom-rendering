@@ -1,11 +1,5 @@
 // @flow
 
-import ArticleImmersive from 'components/pages/Article.immersive';
-import init from '../browser';
+import Header from 'components/Header';
 
-if (module.hot) {
-    module.hot.accept();
-    require('preact/debug'); // eslint-disable-line global-require
-}
-
-init(ArticleImmersive);
+export default () => <Header />;

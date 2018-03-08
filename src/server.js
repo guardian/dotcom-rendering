@@ -13,7 +13,7 @@ import doc from 'lib/__html';
 import appConfig from '../__config__/app';
 
 const fetchPage = async data => {
-    const module = await import(`./components/pages/${data.page}`);
+    const module = await import(`./pages/${data.page}`);
     const Page = module.default;
 
     const { html, ids: cssIDs, css } = extractCritical(

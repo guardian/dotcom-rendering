@@ -1,11 +1,14 @@
 // @flow
 
-import Article from 'components/pages/Article';
-import init from '../browser';
+import { connect } from 'unistore/preact';
 
-if (module.hot) {
-    module.hot.accept();
-    require('preact/debug'); // eslint-disable-line global-require
-}
+import Header from 'components/Header';
 
-init(Article);
+const Article = ({ config }) => (
+    <article>
+        <Header />
+        <h1>{config.page.headline}</h1>
+    </article>
+);
+
+export default connect('config')(Article);

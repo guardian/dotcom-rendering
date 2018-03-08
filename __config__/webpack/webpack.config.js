@@ -7,7 +7,7 @@ const { smart: merge } = require('webpack-merge');
 
 const dist = path.resolve(__dirname, '../../dist');
 
-const config = ({ platform, pages }) => {
+const config = ({ platform, page }) => {
     const entry =
         platform === 'server'
             ? {
@@ -16,11 +16,9 @@ const config = ({ platform, pages }) => {
                       `./src/${platform}.js`,
                   ],
               }
-            : pages.reduce((acc, page) => {
-                  acc[page] = [`./src/pages/${page}.js`];
-
-                  return acc;
-              }, {});
+            : {
+                  [page]: [`./src/${platform}.js`],
+              };
 
     return {
         name: platform,
@@ -50,6 +48,14 @@ const config = ({ platform, pages }) => {
                         options: { envName: `app:${platform}` },
                     },
                 },
+                {
+                    test: /browser\.(js|jsx)$/,
+                    loader: 'string-replace-loader',
+                    options: {
+                        search: '__PAGE__ENTRY__POINT__',
+                        replace: `pages/${page}.js`,
+                    },
+                },
             ],
         },
         resolve: {
@@ -69,13 +75,6 @@ const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
 
 module.exports = [
     merge(
-        config({
-            platform: 'browser',
-            pages,
-        }),
-        envConfig.browser,
-    ),
-    merge(
         config({ platform: 'server' }),
         {
             target: 'node',
@@ -85,5 +84,14 @@ module.exports = [
             },
         },
         envConfig.server,
+    ),
+    ...pages.map(page =>
+        merge(
+            config({
+                platform: 'browser',
+                page,
+            }),
+            envConfig.browser,
+        ),
     ),
 ];
