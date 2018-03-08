@@ -2,6 +2,7 @@
 /* eslint-disable global-require,no-console,import/no-dynamic-require */
 const path = require('path');
 const webpack = require('webpack');
+const fs = require('fs');
 // https://github.com/survivejs/webpack-merge#smart-merging
 const { smart: merge } = require('webpack-merge');
 
@@ -67,7 +68,10 @@ const config = ({ platform, page }) => {
     };
 };
 
-const pages = ['Article', 'Article.immersive'];
+const pages = fs
+    .readdirSync(path.resolve(__dirname, '../../src/pages'))
+    .map(filename => filename.split('.js')[0]);
+
 const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
     dist,
     pages,
