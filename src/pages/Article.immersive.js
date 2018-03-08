@@ -1,5 +1,6 @@
 // @flow
 
-import Header from 'components/Header';
+import ArticleImmersive from 'components/pages/Article.immersive.js';
+import init from '../browser';
 
-export default () => <Header />;
+init(ArticleImmersive);

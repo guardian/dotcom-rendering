@@ -17,7 +17,7 @@ if (module.hot) {
     require('preact/debug'); // eslint-disable-line global-require
 }
 
-const init = ({ default: Page }) => {
+export default ({ default: Page }) => {
     hydrateCSS(cssIDs);
     render(
         <Provider store={createStore(data)}>
@@ -27,6 +27,3 @@ const init = ({ default: Page }) => {
         document.getElementById('app').lastElementChild,
     );
 };
-
-// create code split points for all ../pages
-import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(init);
