@@ -1,7 +1,7 @@
 // @flow
 
 import palette from 'pasteup/palette';
-import styled from 'react-emotion';
+import styled from 'preact-emotion';
 import { egyptian } from 'pasteup/fonts';
 import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
 import { screenReaderOnly } from 'pasteup/mixins';

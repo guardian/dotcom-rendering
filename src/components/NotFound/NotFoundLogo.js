@@ -1,10 +1,10 @@
 // @flow
 
-import styled from 'react-emotion';
+import styled from 'preact-emotion';
 
 import { tablet, desktop, leftCol } from 'pasteup/breakpoints';
 
-import NotFoundSvg from 'static/inline-svgs/notfound.svg';
+import NotFoundSvg from './notfound.svg';
 
 const NotFoundLogo = styled(NotFoundSvg)({
     display: 'block',

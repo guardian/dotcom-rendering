@@ -1,7 +1,7 @@
 // @flow
 
-import styled from 'react-emotion';
-import ArrowRightSvg from 'static/inline-svgs/arrow-right.svg';
+import styled from 'preact-emotion';
+import ArrowRightSvg from 'images/arrow-right.svg';
 
 const BoldYellowLink = styled('a')({
     backgroundColor: '#ffe500',

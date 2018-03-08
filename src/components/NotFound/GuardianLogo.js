@@ -1,8 +1,8 @@
 // @flow
 
-import styled from 'react-emotion';
+import styled from 'preact-emotion';
 
-import TheGuardianLogoSVG from 'static/inline-svgs/the-guardian-logo.svg';
+import TheGuardianLogoSVG from 'images/the-guardian-logo.svg';
 
 const GuardianLogo = styled(TheGuardianLogoSVG)({
     display: 'block',
