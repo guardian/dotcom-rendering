@@ -12,11 +12,6 @@ __webpack_public_path__ = '/assets/javascript/';
 
 const { data, cssIDs } = window.gu.app;
 
-if (module.hot) {
-    module.hot.accept();
-    require('preact/debug'); // eslint-disable-line global-require
-}
-
 export default (Page) => {
     hydrateCSS(cssIDs);
     render(
