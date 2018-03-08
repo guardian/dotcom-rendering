@@ -1,5 +1,5 @@
 // @flow
-import styled from 'react-emotion';
+import styled from 'preact-emotion';
 
 import { desktop } from 'pasteup/breakpoints';
 import { screenReaderOnly } from 'pasteup/mixins';

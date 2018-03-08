@@ -1,7 +1,7 @@
 // @flow
 
-import styled from 'react-emotion';
-import { Component } from 'react';
+import styled from 'preact-emotion';
+import { Component } from 'preact';
 
 import { clearFix } from 'pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
