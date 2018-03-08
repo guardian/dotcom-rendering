@@ -1,6 +1,7 @@
 // @flow
 
 const express = require('express');
+// eslint-disable-next-line import/no-unresolved
 const pagesMiddleware = require('../dist/app.server.js').default;
 const fetch = require('node-fetch');
 
@@ -11,7 +12,7 @@ app.use('/pages/:page', [
         // TODO: get config from request
         const { html, ...config } = await fetch(
             `${req.query.url ||
-            'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json`,
+                'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json`,
         ).then(article => article.json());
         req.body = config;
         next();
