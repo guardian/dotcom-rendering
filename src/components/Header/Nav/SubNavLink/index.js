@@ -55,9 +55,7 @@ const SubNavLinkStyled = styled('div')({
 });
 
 export default ({ toggleSubNav }) => (
-    <SubNavLinkStyled
-        onClick={() => toggleSubNav()}
-    >
+    <SubNavLinkStyled onClick={() => toggleSubNav()}>
         <ScreenReadable>Show</ScreenReadable>
         More
     </SubNavLinkStyled>

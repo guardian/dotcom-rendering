@@ -1,10 +1,7 @@
+// @flow
 import styled from 'preact-emotion';
 
-import { 
-    desktop,
-    mobileMedium,
-    mobileLandscape
-} from 'pasteup/breakpoints';
+import { desktop, mobileMedium, mobileLandscape } from 'pasteup/breakpoints';
 
 const VeggieBurger = styled('span')({
     backgroundColor: '#121212',
@@ -26,7 +23,7 @@ const VeggieBurger = styled('span')({
         top: 'auto',
     },
     [mobileLandscape]: {
-        right: 51
+        right: 51,
     },
     [desktop]: {
         display: 'none',
@@ -61,6 +58,6 @@ const VeggieBurgerIcon = styled('span')({
 
 export default ({ toggleSubNav }) => (
     <VeggieBurger onClick={() => toggleSubNav()}>
-        <VeggieBurgerIcon /> 
+        <VeggieBurgerIcon />
     </VeggieBurger>
 );
