@@ -23,8 +23,11 @@ That's it – everything else should be installed for you on demand.
 ## Development
 `make dev` starts the development server.
 
-## Build
-`make build` creates production-ready bundles.
+## Production
+ - `make build` creates production-ready bundles.
+ - `make start` starts the production server.
+ 
+ _TIP:_ to kill a production server running locally, run `./node_modules/.bin/pm2 kill`
 
 ## Other tasks
 
