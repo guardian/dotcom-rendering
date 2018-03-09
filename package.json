@@ -11,6 +11,7 @@
     },
     "homepage": "https://github.com/guardian/guui#readme",
     "dependencies": {
+        "curlyquotes": "^1.3.2",
         "emotion": "^9.0.2",
         "emotion-server": "^9.0.2",
         "express": "^4.16.2",

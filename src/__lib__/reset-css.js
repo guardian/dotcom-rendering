@@ -11,14 +11,23 @@ const resetCSSPath = require.resolve('reset-css');
 const resetCSS = readFileSync(resetCSSPath, 'utf-8');
 
 const defaults = `
-    html {
-        box-sizing: border-box;
-    }
     *, *:before, *:after {
         box-sizing: inherit;
     }
+    html {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+    }
+    html, body {
+        text-rendering: optimizeLegibility;
+        font-feature-settings: 'kern';
+        font-kerning: normal; // Safari 7+, Firefox 24+, Chrome 33(?)+, Opera 21
+        font-variant-ligatures: common-ligatures;
+    }
     body {
         background-color: white;
+        color: #121212;
     }
 `;
 
