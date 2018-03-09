@@ -7,7 +7,9 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../../__tools__/report-bundle-size');
 const Progress = require('simple-progress-webpack-plugin');
 
-module.exports = ({ dist }) => ({
+const { dist } = require('./helpers');
+
+module.exports = {
     browser: {
         devtool: 'source-map',
         plugins: [
@@ -35,4 +37,4 @@ module.exports = ({ dist }) => ({
         ].filter(Boolean),
     },
     server: {},
-});
+};

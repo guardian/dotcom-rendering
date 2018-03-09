@@ -59,6 +59,7 @@
         "prettier": "^1.7.4",
         "semver": "^5.5.0",
         "simple-progress-webpack-plugin": "^1.1.0",
+        "string-replace-loader": "^2.1.1",
         "webpack": "^3.11.0",
         "webpack-bundle-analyzer": "^2.10.0",
         "webpack-dev-middleware": "^2.0.6",
@@ -76,9 +77,7 @@
     },
     "eslintConfig": {
         "parser": "babel-eslint",
-        "globals": {
-
-        },
+        "globals": {},
         "parserOptions": {
             "ecmaVersion": "2017",
             "sourceType": "module",
