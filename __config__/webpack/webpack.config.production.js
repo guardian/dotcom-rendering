@@ -9,6 +9,8 @@ const Progress = require('simple-progress-webpack-plugin');
 
 const { dist } = require('./helpers');
 
+const reportBundleSize = new ReportBundleSize({ configCount: 2 });
+
 module.exports = {
     browser: {
         devtool: 'source-map',
@@ -30,11 +32,15 @@ module.exports = {
                 openAnalyzer: false,
                 logLevel: 'warn',
             }),
-            new Progress({
-                format: 'compact',
-            }),
-            new ReportBundleSize(),
+            !process.env.CI &&
+                new Progress({
+                    format: 'compact',
+                }),
+            reportBundleSize,
         ].filter(Boolean),
     },
-    server: {},
+    server: {
+        devtool: 'source-map',
+        plugins: [reportBundleSize],
+    },
 };

@@ -1,28 +1,53 @@
 // @flow
-/* eslint-disable import/no-extraneous-dependencies,no-console */
-const path = require('path');
-const { readdirSync, readFileSync } = require('fs');
+/* eslint-disable import/no-extraneous-dependencies,no-console,no-underscore-dangle */
 
 const filesizegzip = require('filesizegzip');
-const asTable = require('as-table');
+const columnify = require('columnify');
 const chalk = require('chalk');
+const prettyBytes = require('pretty-bytes');
 
-const dist = path.join(__dirname, '..', 'dist');
+module.exports = class {
+    constructor({ configCount = 1 }) {
+        this.configCount = configCount;
+        this.configsBuilt = 0;
+        this.messages = {};
+    }
+    apply(compiler) {
+        compiler.plugin('done', ({ compilation }) => {
+            this.configsBuilt = this.configsBuilt + 1;
 
-function ReportBundleSize() {}
+            const platform = compilation.compiler.name;
 
-ReportBundleSize.prototype.apply = compiler => {
-    compiler.plugin('done', () => {
-        const files = readdirSync(dist)
-            .filter(file => file.endsWith('.js') && file.includes('browser'))
-            .map(file => [
-                file,
-                filesizegzip(readFileSync(path.join(dist, file), 'utf8'), true),
-            ]);
-        console.log(
-            `${chalk.underline('Client bundles')}\n${asTable(files)}\n`,
-        );
-    });
+            this.messages[
+                chalk.underline(
+                    `${platform.replace(/^./, match =>
+                        match.toUpperCase(),
+                    )} bundles`,
+                )
+            ] =
+                '';
+
+            Object.entries(compilation.assets)
+                .filter(([key]) => !key.endsWith('map'))
+                .forEach(([file, value]) => {
+                    this.messages[file] =
+                        platform === 'server'
+                            ? chalk.dim(
+                                  prettyBytes(value.children[0]._value.length),
+                              )
+                            : filesizegzip(value.children[0]._value, true);
+                });
+
+            if (this.configCount === this.configsBuilt) {
+                console.log(
+                    `${columnify(this.messages, {
+                        showHeaders: false,
+                        config: { value: { align: 'right' } },
+                    })}\n`,
+                );
+            } else {
+                this.messages[''] = '';
+            }
+        });
+    }
 };
-
-module.exports = ReportBundleSize;
