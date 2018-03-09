@@ -16,10 +16,10 @@ build: clear install
 
 dev: clear install
 	$(call log, "starting DEV server...")
-	@NODE_ENV=development node __server__/dev-server.js
+	@NODE_ENV=development node __server__/development.js
 
 start:
-	@NODE_ENV=production pm2 start __server__/index.js
+	@NODE_ENV=production pm2 start __server__/production.js
 
 # quality #########################################
 
