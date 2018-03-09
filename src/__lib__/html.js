@@ -21,7 +21,11 @@ export default ({
         <head>
             <title>${title}</title>
             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-            <link rel="stylesheet" href="/static/css/fonts.css" />
+            <link rel="preload" href="/static/css/fonts.css" as="style">
+            <link rel="preload" href="/assets/javascript/${
+                data.page
+            }.browser.js" as="script">
+            <link rel="stylesheet" href="/static/css/fonts.css" media="nope!" onload="this.media='all'">
             <style>${resetCSS}${css}</style>
         </head>
         <body>
