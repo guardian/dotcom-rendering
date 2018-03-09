@@ -26,8 +26,8 @@ const palette = {
         dark: '#7d0068',
     },
     yellow: {
-        light: '#ffe500',
-        medium: '#edd600',
+        medium: '#ffe500',
+        dark: '#edd600',
     },
     neutral: {
         header: '#e9eff1',

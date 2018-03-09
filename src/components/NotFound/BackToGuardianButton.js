@@ -5,7 +5,7 @@ import ArrowRightSvg from 'images/arrow-right.svg';
 import palette from 'pasteup/palette';
 
 const BoldYellowLink = styled('a')({
-    backgroundColor: palette.yellow.light,
+    backgroundColor: palette.yellow.medium,
     borderRadius: '9999px',
     boxSizing: 'border-box',
     color: palette.neutral[1],
@@ -18,7 +18,7 @@ const BoldYellowLink = styled('a')({
     transition: 'background-color .3s',
 
     '&:hover': {
-        backgroundColor: palette.yellow.medium,
+        backgroundColor: palette.yellow.dark,
 
         '&>svg': {
             transform: 'translate(5px, -50%)',
