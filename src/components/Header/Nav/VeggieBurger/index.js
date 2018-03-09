@@ -65,8 +65,6 @@ const VeggieBurgerIcon = styled('span')(({showSubNav}) => {
         },
     };
 
-    console.log('******', showSubNav);
-
     if (showSubNav) {
         styles[':before'] = Object.assign({}, styles[':before'], {
             top: 0,

@@ -52,7 +52,7 @@ const SubNavButton = styled('button')(({ pillar, isLastIndex, showSecondaryNav }
         fontFamily: headline,
         fontSize: 24,
         fontWeight: '700',
-        lineHeight: '20px',
+        lineHeight: 1,
         outline: 'none',
         padding: '6px 34px 18px 50px',
         position: 'relative',
@@ -137,7 +137,7 @@ const SubNavTitle = styled('a')({
     },
     [desktop]: {
         fontSize: 15,
-        lineHeight: '1.2',
+        lineHeight: 1.2,
         padding: '6px 0',
     },
     ':hover': {
