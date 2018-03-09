@@ -1,20 +1,14 @@
 // @flow
 /* eslint-disable global-require,no-console,import/no-dynamic-require */
-const path = require('path');
+
 const webpack = require('webpack');
 // https://github.com/survivejs/webpack-merge#smart-merging
 const { smart: merge } = require('webpack-merge');
 
-const dist = path.resolve(__dirname, '../../dist');
+const { pages, injectPage, dist } = require('./helpers');
 
-const config = platform => ({
+const config = ({ platform }) => ({
     name: platform,
-    entry: {
-        app: [
-            'preact-emotion', // force preact-emotion into the vendor chunk
-            `./src/${platform}.js`,
-        ],
-    },
     output: {
         path: dist,
         filename: `[name].${platform}.js`,
@@ -50,15 +44,15 @@ const config = platform => ({
     },
 });
 
-const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`)({
-    dist,
-});
+const envConfig = require(`./webpack.config.${process.env.NODE_ENV}`);
 
 module.exports = [
-    merge(config('browser'), envConfig.browser),
     merge(
-        config('server'),
+        config({ platform: 'server' }),
         {
+            entry: {
+                app: ['./src/server.js'],
+            },
             target: 'node',
             externals: [require('webpack-node-externals')()],
             output: {
@@ -66,5 +60,20 @@ module.exports = [
             },
         },
         envConfig.server,
+    ),
+    merge(
+        config({
+            platform: 'browser',
+        }),
+        {
+            entry: pages.reduce(
+                (entries, page) => ({
+                    [page]: injectPage(page),
+                    ...entries,
+                }),
+                {},
+            ),
+        },
+        envConfig.browser,
     ),
 ];
