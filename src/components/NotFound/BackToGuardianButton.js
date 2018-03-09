@@ -18,7 +18,7 @@ const BoldYellowLink = styled('a')({
     transition: 'background-color .3s',
 
     '&:hover': {
-        backgroundColor: palette.yellow.dark,
+        backgroundColor: palette.yellow.medium,
 
         '&>svg': {
             transform: 'translate(5px, -50%)',
