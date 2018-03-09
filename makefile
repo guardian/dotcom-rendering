@@ -18,8 +18,11 @@ dev: clear install
 	$(call log, "starting DEV server...")
 	@NODE_ENV=development node __server__/dev-server.js
 
-start:
+start: stop
 	@NODE_ENV=production pm2 start __server__/index.js
+
+stop:
+	@./node_modules/.bin/pm2 kill
 
 # quality #########################################
 
