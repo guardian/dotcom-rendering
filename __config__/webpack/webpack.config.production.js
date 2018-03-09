@@ -7,11 +7,11 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../../__tools__/report-bundle-size');
 const Progress = require('simple-progress-webpack-plugin');
 
-const reporter = new Progress({
-    format: process.env.CI ? 'expanded' : 'compact',
-});
+const { dist } = require('./helpers');
 
-module.exports = ({ dist }) => ({
+const reportBundleSize = new ReportBundleSize({ configCount: 2 });
+
+module.exports = {
     browser: {
         devtool: 'source-map',
         plugins: [
@@ -32,11 +32,15 @@ module.exports = ({ dist }) => ({
                 openAnalyzer: false,
                 logLevel: 'warn',
             }),
-            reporter,
-            new ReportBundleSize(),
+            !process.env.CI &&
+                new Progress({
+                    format: 'compact',
+                }),
+            reportBundleSize,
         ].filter(Boolean),
     },
     server: {
-        plugins: [process.env.CI && reporter].filter(Boolean),
+        devtool: 'source-map',
+        plugins: [reportBundleSize],
     },
-});
+};

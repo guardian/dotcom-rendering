@@ -4,9 +4,9 @@ notifications:
   email: false
 
 before_script:
-  - make validate
+  - make validate-ci
 
 script:
-  - make build-ci
+  - make build
 
 cache: yarn

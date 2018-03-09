@@ -6,6 +6,10 @@ import { hydrate as hydrateCSS } from 'emotion';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
 
+// will be replaced by string-replace-loader in webpack.config.js
+// eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved,import/extensions
+import Page from '__PAGE__ENTRY__POINT__';
+
 // webpack-specific
 // eslint-disable-next-line camelcase,no-undef
 __webpack_public_path__ = '/assets/javascript/';
@@ -17,16 +21,11 @@ if (module.hot) {
     require('preact/debug'); // eslint-disable-line global-require
 }
 
-const init = ({ default: Page }) => {
-    hydrateCSS(cssIDs);
-    render(
-        <Provider store={createStore(data)}>
-            <Page />
-        </Provider>,
-        document.getElementById('app'),
-        document.getElementById('app').lastElementChild,
-    );
-};
-
-// create code split points for all ../pages
-import(/* webpackChunkName: "[request]" */ `./pages/${data.page}`).then(init);
+hydrateCSS(cssIDs);
+render(
+    <Provider store={createStore(data)}>
+        <Page />
+    </Provider>,
+    document.getElementById('app'),
+    document.getElementById('app').lastElementChild,
+);

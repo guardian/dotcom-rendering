@@ -7,14 +7,12 @@ export default ({
     css = '',
     cssIDs = '',
     html = '',
-    jsApp = '/assets/javascript/app.browser.js',
     data = {},
     jsNonBlocking = '',
 }: {
     title?: string,
     css: string,
     html: string,
-    jsApp?: string,
     data?: {},
     jsNonBlocking?: string,
 }) => `
@@ -40,7 +38,7 @@ window.gu = ${JSON.stringify(
     2,
 )};
             </script>
-            <script src="${jsApp}"></script>
+            <script src="/assets/javascript/${data.page}.browser.js"></script>
             <script>${jsNonBlocking}</script>
         </body>
     </html>

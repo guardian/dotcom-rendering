@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
+const { pages, injectPage } = require('./helpers');
 
 const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
@@ -13,12 +14,16 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     },
 });
 
-module.exports = () => ({
+module.exports = {
     browser: {
         devtool: 'cheap-module-eval-source-map',
-        entry: {
-            app: ['webpack-hot-middleware/client', './src/browser'],
-        },
+        entry: pages.reduce(
+            (entries, page) => ({
+                [page]: ['webpack-hot-middleware/client', injectPage(page)],
+                ...entries,
+            }),
+            {},
+        ),
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
@@ -29,4 +34,4 @@ module.exports = () => ({
         devtool: 'cheap-module-eval-source-map',
         plugins: [friendlyErrorsWebpackPlugin],
     },
-});
+};
