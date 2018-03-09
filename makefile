@@ -18,7 +18,7 @@ dev: clear install
 	$(call log, "starting DEV server...")
 	@NODE_ENV=development node __server__/development.js
 
-start:
+start: stop
 	@NODE_ENV=production pm2 start __server__/production.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running at http://localhost:9000")
