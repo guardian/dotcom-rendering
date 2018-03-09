@@ -2,12 +2,13 @@
 
 import styled from 'preact-emotion';
 import ArrowRightSvg from 'images/arrow-right.svg';
+import palette from 'pasteup/palette';
 
 const BoldYellowLink = styled('a')({
-    backgroundColor: '#ffe500',
+    backgroundColor: palette.yellow.light,
     borderRadius: '9999px',
     boxSizing: 'border-box',
-    color: '#121212',
+    color: palette.neutral[1],
     display: 'inline-block',
     fontSize: '16px',
     lineHeight: '42px',
@@ -17,7 +18,7 @@ const BoldYellowLink = styled('a')({
     transition: 'background-color .3s',
 
     '&:hover': {
-        backgroundColor: '#edd600',
+        backgroundColor: palette.yellow.dark,
 
         '&>svg': {
             transform: 'translate(5px, -50%)',

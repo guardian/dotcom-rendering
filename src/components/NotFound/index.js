@@ -15,7 +15,7 @@ const VisuallyHidden = styled('span')(screenReaderOnly);
 
 const NotFoundWrapper = styled('div')({
     content: '',
-    background: '#e7edef',
+    background: palette.neutral[7],
     position: 'fixed',
     top: 0,
     right: 0,
@@ -98,7 +98,7 @@ const BodyCopy = styled('p')({
 });
 
 const NeutralLink = styled('a')({
-    borderBottom: '2px solid #aabfc7',
+    borderBottom: `2px solid ${palette.neutral['4']}`,
     color: palette.neutral['1'],
     paddingBottom: '3px',
     textDecoration: 'none',
