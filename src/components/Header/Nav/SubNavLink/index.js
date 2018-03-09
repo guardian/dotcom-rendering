@@ -30,10 +30,10 @@ const SubNavLinkStyled = styled('div')({
     [desktop]: {
         display: 'block',
     },
-    '&:hover': {
+    ':hover': {
         color: navPrimaryColour,
     },
-    '&:focus': {
+    ':focus': {
         color: navPrimaryColour,
     },
     ':after': {
