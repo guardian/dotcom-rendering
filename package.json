@@ -32,7 +32,6 @@
         "@babel/preset-flow": "^7.0.0-beta.40",
         "@babel/preset-react": "^7.0.0-beta.40",
         "@babel/runtime": "^7.0.0-beta.40",
-        "as-table": "^1.0.31",
         "babel-eslint": "^8.2.1",
         "babel-loader": "^8.0.0-beta.0",
         "babel-plugin-dynamic-import-node": "^1.2.0",
