@@ -10,11 +10,23 @@ import palette from 'pasteup/palette';
 import { string as curly } from 'curlyquotes';
 
 import Header from 'components/Header';
-import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
+import {
+    mobileLandscape,
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+} from 'pasteup/breakpoints';
 import { clearFix } from 'pasteup/mixins';
 
 const Article = styled('article')({
     margin: 'auto',
+    paddingLeft: 4,
+    paddingRight: 4,
+    [mobileLandscape]: {
+        paddingLeft: 24,
+        paddingRight: 24,
+    },
     [tablet]: {
         maxWidth: '740px',
     },
