@@ -39,7 +39,7 @@ app.use('/pages/:page', [
     async (req, res, next) => {
         const { html, ...config } = await fetch(
             `${req.query.url ||
-                'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json`,
+                'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json?guui`,
         ).then(article => article.json());
         req.body = config;
         next();
