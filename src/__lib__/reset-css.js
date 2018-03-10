@@ -22,7 +22,7 @@ const defaults = `
     html, body {
         text-rendering: optimizeLegibility;
         font-feature-settings: 'kern';
-        font-kerning: normal; // Safari 7+, Firefox 24+, Chrome 33(?)+, Opera 21
+        font-kerning: normal; /* Safari 7+, Firefox 24+, Chrome 33(?)+, Opera 21 */
         font-variant-ligatures: common-ligatures;
     }
     body {
