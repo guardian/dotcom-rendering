@@ -126,22 +126,19 @@ export default connect('content')(({ content }) => (
                     Glenn Greenwald on security and liberty
                 </SeriesLabel>
             </ArticleLabels>
-            <Headline data-content-headline>{content.headline}</Headline>
+            <Headline>{content.headline}</Headline>
             <Standfirst
-                data-content-standfirst
                 dangerouslySetInnerHTML={{
                     __html: content.standfirst,
                 }}
             />
 
             <div
-                data-content-main
                 dangerouslySetInnerHTML={{
                     __html: content.main,
                 }}
             />
             <ArticleBody
-                data-content-body
                 dangerouslySetInnerHTML={{
                     __html: content.body,
                 }}

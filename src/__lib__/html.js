@@ -33,25 +33,10 @@ export default ({
             <script>
             window.gu = ${JSON.stringify({
                 app: {
-                    data: {
-                        ...data,
-                        // instead of writing the data in the `content` object,
-                        // write calls to the innerHTML of elements we've already
-                        // rendered it into
-                        content: Object.entries(data.content).reduce(
-                            (content, [key]) => ({
-                                [key]: `document.querySelector('[data-content-${key}]').innerHTML`,
-                                ...content,
-                            }),
-                            {},
-                        ),
-                    },
+                    data,
                     cssIDs,
                 },
-            })
-                // JSON values are quoted, but we want real life JS,
-                // since it's not really JSON.
-                .replace(/"(document.*?innerHTML)"/g, '$1')};
+            })};
             </script>
             <script src="/assets/javascript/${data.page}.browser.js"></script>
             <script>${jsNonBlocking}</script>
