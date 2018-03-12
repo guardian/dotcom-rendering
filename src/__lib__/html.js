@@ -31,16 +31,12 @@ export default ({
         <body>
             <div id='app'>${html}</div>
             <script>
-window.gu = ${JSON.stringify(
-    {
-        app: {
-            data,
-            cssIDs,
-        },
-    },
-    null,
-    2,
-)};
+            window.gu = ${JSON.stringify({
+                app: {
+                    data,
+                    cssIDs,
+                },
+            })};
             </script>
             <script src="/assets/javascript/${data.page}.browser.js"></script>
             <script>${jsNonBlocking}</script>

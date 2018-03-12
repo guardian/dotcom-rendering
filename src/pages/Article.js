@@ -4,12 +4,9 @@
 
 import styled from 'preact-emotion';
 import { connect } from 'unistore/preact';
+
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
-
-import { string as curly } from 'curlyquotes';
-
-import Header from 'components/Header';
 import {
     mobileLandscape,
     tablet,
@@ -18,6 +15,8 @@ import {
     wide,
 } from 'pasteup/breakpoints';
 import { clearFix } from 'pasteup/mixins';
+
+import Header from 'components/Header';
 
 const Article = styled('article')({
     margin: 'auto',
@@ -67,6 +66,9 @@ const ArticleBody = styled('section')({
         marginTop: 27,
         marginBottom: 1,
     },
+    '.gu-video': {
+        maxWidth: '100%',
+    },
 });
 
 const Standfirst = styled('p')({
@@ -86,6 +88,17 @@ const Standfirst = styled('p')({
         borderBottomStyle: 'solid',
         borderBottomColor: palette.neutral[5],
     },
+
+    '.bullet': {
+        color: 'transparent',
+        height: '0.75em',
+        width: '0.75em',
+        borderRadius: '50%',
+        marginRight: 2,
+        backgroundColor: palette.red.dark,
+        display: 'inline-block',
+        lineHeight: 0.8,
+    },
 });
 
 const ArticleLabels = styled('div')({ ...clearFix, paddingTop: 6 });
@@ -103,7 +116,7 @@ const SeriesLabel = styled(SectionLabel)({
     fontWeight: 500,
 });
 
-export default connect('config,contentFields')(({ config, contentFields }) => (
+export default connect('content')(({ content }) => (
     <div>
         <Header />
         <Article>
@@ -113,23 +126,21 @@ export default connect('config,contentFields')(({ config, contentFields }) => (
                     Glenn Greenwald on security and liberty
                 </SeriesLabel>
             </ArticleLabels>
-            <Headline>{curly(config.page.headline)}</Headline>
+            <Headline>{content.headline}</Headline>
             <Standfirst
                 dangerouslySetInnerHTML={{
-                    __html: contentFields.fields.standfirst,
+                    __html: content.standfirst,
                 }}
             />
+
             <div
                 dangerouslySetInnerHTML={{
-                    __html: contentFields.fields.main,
+                    __html: content.main,
                 }}
             />
             <ArticleBody
                 dangerouslySetInnerHTML={{
-                    __html: contentFields.fields.blocks.body
-                        .map(block => block.bodyHtml)
-                        .filter(Boolean)
-                        .join(''),
+                    __html: content.body,
                 }}
             />
         </Article>
