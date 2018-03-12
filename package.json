@@ -12,9 +12,12 @@
     "homepage": "https://github.com/guardian/guui#readme",
     "dependencies": {
         "curlyquotes": "^1.3.2",
+        "dompurify": "^1.0.3",
         "emotion": "^9.0.2",
         "emotion-server": "^9.0.2",
         "express": "^4.16.2",
+        "html-minifier": "^3.5.10",
+        "jsdom": "^11.6.2",
         "node-fetch": "^2.1.1",
         "pm2": "^2.10.1",
         "preact": "^8.2.7",

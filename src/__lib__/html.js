@@ -31,16 +31,21 @@ export default ({
         <body>
             <div id='app'>${html}</div>
             <script>
-window.gu = ${JSON.stringify(
-    {
-        app: {
-            data,
-            cssIDs,
-        },
-    },
-    null,
-    2,
-)};
+            window.gu = ${JSON.stringify({
+                app: {
+                    data: {
+                        ...data,
+                        content: Object.entries(data.content).reduce(
+                            (content, [key]) => ({
+                                [key]: `document.querySelector('[data-content-${key}]').innerHTML`,
+                                ...content,
+                            }),
+                            {},
+                        ),
+                    },
+                    cssIDs,
+                },
+            }).replace(/"(document.*?innerHTML)"/g, '$1')};
             </script>
             <script src="/assets/javascript/${data.page}.browser.js"></script>
             <script>${jsNonBlocking}</script>

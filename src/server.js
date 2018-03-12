@@ -8,6 +8,7 @@ import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
 
 import doc from '__lib__/html';
+import cleanCapi from '../__tools__/clean-capi';
 
 // just while we're not getting a full state from play
 import appConfig from '../__config__/app';
@@ -18,7 +19,7 @@ const renderPage = async (req, res) => {
         const data = {
             page,
             ...appConfig,
-            ...req.body,
+            ...cleanCapi(req.body),
         };
 
         const module = await import(`./pages/${page}`);
