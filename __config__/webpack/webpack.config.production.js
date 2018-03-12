@@ -19,8 +19,9 @@ module.exports = {
             new webpack.optimize.OccurrenceOrderPlugin(),
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'vendor',
-                minChunks: module =>
-                    module.context && module.context.includes('node_modules'),
+                minChunks: ({ context = '' }) =>
+                    context.includes('node_modules') ||
+                    context.includes('pasteup'),
             }),
             new webpack.optimize.UglifyJsPlugin({
                 sourceMap: true,
