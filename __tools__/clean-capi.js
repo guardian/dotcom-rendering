@@ -8,11 +8,10 @@ import { minify } from 'html-minifier';
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
 
-const bulletsToListItems = s =>
-    s.replace(/•/g, '<span class="bullet">&bull;</span>');
+const bigBullets = s => s.replace(/•/g, '<span class="bullet">&bull;</span>');
 
 const headline = s => curly(s);
-const standfirst = s => bulletsToListItems(s);
+const standfirst = s => bigBullets(s);
 
 const parse = s =>
     minify(DOMPurify.sanitize(s), {
