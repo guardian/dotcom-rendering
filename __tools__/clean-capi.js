@@ -24,6 +24,7 @@ const parse = s =>
     });
 
 export default ({ contentFields, config }) => ({
+    // here we create our own object of CAPI content on the 'content' key
     content: {
         headline: parse(headline(config.page.headline)),
         standfirst: parse(standfirst(contentFields.fields.standfirst)),
