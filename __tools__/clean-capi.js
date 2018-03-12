@@ -2,12 +2,11 @@
 
 import { string as curly } from 'curlyquotes';
 import createDOMPurify from 'dompurify';
-
 import { JSDOM } from 'jsdom';
+import { minify } from 'html-minifier';
 
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
-const { minify } = require('html-minifier');
 
 const bulletsToListItems = s =>
     s.replace(/•/g, '<span class="bullet">&bull;</span>');
