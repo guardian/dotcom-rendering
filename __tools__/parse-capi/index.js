@@ -3,13 +3,13 @@
 import compose from 'compose-function';
 import { string as curly } from 'curlyquotes';
 
-import minify from './minify';
+import clean from './clean';
 import bigBullets from './big-bullets';
 
-const headline = compose(minify, curly);
-const standfirst = compose(minify, bigBullets);
-const main = minify;
-const body = minify;
+const headline = compose(clean, curly);
+const standfirst = compose(clean, bigBullets);
+const main = clean;
+const body = clean;
 
 export default ({ contentFields, config }) => ({
     // here we create our own object of CAPI content on the 'content' key
