@@ -116,7 +116,7 @@ const SeriesLabel = styled(SectionLabel)({
     fontWeight: 500,
 });
 
-export default connect('config,content')(({ content }) => (
+export default connect('content')(({ content }) => (
     <div>
         <Header />
         <Article>
