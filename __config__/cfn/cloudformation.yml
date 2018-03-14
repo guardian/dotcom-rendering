@@ -176,14 +176,12 @@ Resources:
 
           git clone https://github.com/guardian/guui.git
           cd guui
-          git fetch
-          git checkout sa-riff-raff
 
           export TERM=xterm-256color
 
           nvm install 8.9
           nvm use 8.9
-          make dev
+          make start
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
