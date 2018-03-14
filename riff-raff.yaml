@@ -1,0 +1,7 @@
+stacks: [frontend]
+regions: [eu-west-1]
+deployments:
+  guui:
+    parameters:
+      bucket: aws-frontend-artifacts
+    type: autoscaling

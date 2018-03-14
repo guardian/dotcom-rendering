@@ -169,14 +169,19 @@ Resources:
           apt-get install -y nodejs
           apt-get install -y yarn
 
+          # nvm
+          curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
           git clone https://github.com/guardian/guui.git
           cd guui
-          git fetch
-          git checkout sa-productionise
 
           export TERM=xterm-256color
 
+          nvm install
           make build start
+
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:

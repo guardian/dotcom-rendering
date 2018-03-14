@@ -26,6 +26,9 @@ start: stop
 stop:
 	@./node_modules/.bin/pm2 kill
 
+deploy:
+	@env ./__tasks__/build-riffraff-artifact.sh
+
 # quality #########################################
 
 flow: install
