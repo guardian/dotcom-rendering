@@ -14,12 +14,6 @@ build: clear install
 	@rm -rf dist
 	@NODE_ENV=production webpack --bail --color --config __config__/webpack/webpack.config.js
 
-build-ci: install
-	$(call log, "building production bundles")
-	@echo '' # just a spacer
-	@rm -rf dist
-	@CI=true NODE_ENV=production webpack --config __config__/webpack/webpack.config.js
-
 dev: clear install
 	$(call log, "starting DEV server...")
 	@NODE_ENV=development node __server__/development.js
