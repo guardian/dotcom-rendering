@@ -179,6 +179,7 @@ Resources:
 
           export TERM=xterm-256color
 
+          nvm install
           nvm use
           make build start
 
