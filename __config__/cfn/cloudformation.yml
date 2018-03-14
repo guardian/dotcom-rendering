@@ -179,9 +179,8 @@ Resources:
 
           export TERM=xterm-256color
 
-          nvm install 8.9
-          nvm use 8.9
-          make start
+          nvm use
+          make build start
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
