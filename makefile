@@ -24,10 +24,6 @@ dev: clear install
 	$(call log, "starting DEV server...")
 	@NODE_ENV=development node __server__/development.js
 
-ci: validate
-	$(call log, "deploying app")
-	@env ./__tools__/build.sh
-
 start: stop
 	@NODE_ENV=production pm2 start __server__/production.js
 	@echo '' # just a spacer
