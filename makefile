@@ -33,7 +33,7 @@ stop:
 	@./node_modules/.bin/pm2 kill
 
 deploy:
-	@env ./__tools__/build-riffraff-artifact.sh
+	@env ./__tasks__/build-riffraff-artifact.sh
 
 # quality #########################################
 
