@@ -104,15 +104,15 @@ const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
     padding: '0 0 12px',
     position: 'relative',
     backgroundColor: '#d9e4e7',
-    // [desktop]: {
-        // display: 'flex',
-        // flexDirection: 'row',
-        // flexWrap: 'nowrap',
-        // order: 1,
-        // paddingBottom: 0,
-        // backgroundColor: 'transparent',
-        // width: '100%',
-    // }
+    [desktop]: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        order: 1,
+        paddingBottom: 0,
+        backgroundColor: 'transparent',
+        width: '100%',
+    }
 }));
 
 const SecondarySubNavListItem = styled('li')({
@@ -184,13 +184,7 @@ export default class SubNavList extends Component {
                         {this.props.pillar.label}
                     </SubNavButton>
                     <SecondarySubNavList showSecondaryNav={this.state.showSecondaryNav}>
-                        {this.props.pillar.links.map((link, i) => (
-                            <SecondarySubNavListItem index={i} key={link.label}>
-                                <SubNavTitle>
-                                    {link.label}
-                                </SubNavTitle>
-                            </SecondarySubNavListItem>
-                        ))}
+                        <li>xxx</li>
                     </SecondarySubNavList>
                 </PrimarySubNavListItem>
             </PrimarySubNavList>
