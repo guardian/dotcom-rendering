@@ -12,20 +12,24 @@ import {
     desktop,
 } from 'pasteup/breakpoints';
 
-
-const PrimarySubNavList = styled('ul')({
-    fontSize: 18,
-    listStyle: 'none',
-    margin: 0,
-    padding: '0 0 12px',
-});
-
 const subNavListItem = {
     boxSizing: 'border-box',
     overflow: 'hidden',
     position: 'relative',
     width: '100%',
 };
+
+const PrimarySubNavList = styled('ul')({
+    fontSize: 18,
+    listStyle: 'none',
+    margin: 0,
+    padding: '0 0 12px',
+    [desktop]: {
+        width: 118,
+        float: 'left',
+        borderLeft: '1px solid #abc2c9',
+    }
+});
 
 const PrimarySubNavListItem = styled('li')({
     ...subNavListItem,
@@ -35,10 +39,6 @@ const PrimarySubNavListItem = styled('li')({
         width: 118,
         padding: '0 5px 12px',
     }
-});
-
-const SecondarySubNavListItem = styled('li')({
-    ...subNavListItem
 });
 
 const SubNavButton = styled('button')(({ pillar, isLastIndex, showSecondaryNav }) => {
@@ -79,20 +79,17 @@ const SubNavButton = styled('button')(({ pillar, isLastIndex, showSecondaryNav }
         [desktop]: {
             display: 'none',
         },
-    };
-
-    if (!isLastIndex) {
-        styles[':after'] = {
+        ':after': {
             backgroundColor: '#abc2c9',
             bottom: 0,
             content: '""',
-            display: 'block',
+            display: !showSecondaryNav && !isLastIndex ? 'block' : 'none',
             height: 1,
             left: 50,
             position: 'absolute',
             width: '100%',
-        };
-    }
+        }
+    };
 
     return styles;
 });
@@ -107,15 +104,20 @@ const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
     padding: '0 0 12px',
     position: 'relative',
     backgroundColor: '#d9e4e7',
-    [desktop]: {
-        display: 'flex',
-        flexDirection: 'column',
-        paddingBottom: 0,
-        backgroundColor: 'transparent',
-        paddingBottom: 0,
-        width: '100%',
-    }
+    // [desktop]: {
+        // display: 'flex',
+        // flexDirection: 'row',
+        // flexWrap: 'nowrap',
+        // order: 1,
+        // paddingBottom: 0,
+        // backgroundColor: 'transparent',
+        // width: '100%',
+    // }
 }));
+
+const SecondarySubNavListItem = styled('li')({
+    ...subNavListItem
+});
 
 const SubNavTitle = styled('a')({
     backgroundColor: 'transparent',
@@ -170,7 +172,7 @@ export default class SubNavList extends Component {
         console.log('this.state.showSecondaryNav', this.state.showSecondaryNav);
 
         return (
-            <PrimarySubNavList>
+            <PrimarySubNavList index={this.props.index}>
                 <PrimarySubNavListItem>
                     <SubNavButton 
                         pillar={this.props.pillar.pillar}
@@ -182,11 +184,13 @@ export default class SubNavList extends Component {
                         {this.props.pillar.label}
                     </SubNavButton>
                     <SecondarySubNavList showSecondaryNav={this.state.showSecondaryNav}>
-                        <SecondarySubNavListItem>
-                            <SubNavTitle>
-                                Test
-                            </SubNavTitle>
-                        </SecondarySubNavListItem>
+                        {this.props.pillar.links.map((link, i) => (
+                            <SecondarySubNavListItem index={i} key={link.label}>
+                                <SubNavTitle>
+                                    {link.label}
+                                </SubNavTitle>
+                            </SecondarySubNavListItem>
+                        ))}
                     </SecondarySubNavList>
                 </PrimarySubNavListItem>
             </PrimarySubNavList>
