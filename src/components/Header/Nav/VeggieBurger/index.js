@@ -1,7 +1,7 @@
 // @flow
 import styled from 'preact-emotion';
 
-import { desktop, mobileMedium, mobileLandscape } from 'pasteup/breakpoints';
+import { tablet, desktop, mobileMedium, mobileLandscape } from 'pasteup/breakpoints';
 
 const VeggieBurger = styled('span')(({showSubNav}) =>{
     const styles = {
@@ -17,6 +17,7 @@ const VeggieBurger = styled('span')(({showSubNav}) =>{
         borderRadius: '50%',
         outline: 'none',
         right: 5,
+        zIndex: showSubNav ? 1071 : 0,
         [mobileMedium]: {
             bottom: -6,
             height: 48,
@@ -26,14 +27,13 @@ const VeggieBurger = styled('span')(({showSubNav}) =>{
         [mobileLandscape]: {
             right: 51,
         },
+        [tablet]: {
+            zIndex: 0,
+        },
         [desktop]: {
             display: 'none',
-        },        
+        },     
     };
-
-    if (showSubNav) {
-        styles.zIndex = 1071;
-    }
 
     return styles;
 });

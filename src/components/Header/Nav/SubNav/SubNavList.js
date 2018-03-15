@@ -27,7 +27,6 @@ const PrimarySubNavList = styled('ul')({
     [desktop]: {
         width: 118,
         float: 'left',
-        borderLeft: '1px solid #abc2c9',
     }
 });
 
