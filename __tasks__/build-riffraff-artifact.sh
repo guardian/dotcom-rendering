@@ -16,12 +16,14 @@ if [[ -z $BRANCH_NAME ]]; then
   BRANCH_NAME=unknown
 fi
 
+TARGET_ROOT=target/guui
+
 zip -r guui.zip * -x node_modules/**\*
 [ -d target ] && rm -rf target
-mkdir -p target/dist
-mkdir -p target/cfn
-mv guui.zip ./target/dist/guui.zip
-cp __config__/cfn/cloudformation.yml ./target/cfn
+mkdir -p $TARGET_ROOT/dist
+mkdir -p $TARGET_ROOT/cfn
+mv guui.zip ./$TARGET_ROOT/dist/guui.zip
+cp __config__/cfn/cloudformation.yml ./$TARGET_ROOT/cfn
 
 cp riff-raff.yaml target
 
