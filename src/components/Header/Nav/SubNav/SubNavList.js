@@ -169,8 +169,6 @@ export default class SubNavList extends Component {
     }
 
     render() {
-        console.log('this.state.showSecondaryNav', this.state.showSecondaryNav);
-
         return (
             <PrimarySubNavList index={this.props.index}>
                 <PrimarySubNavListItem>
@@ -184,7 +182,13 @@ export default class SubNavList extends Component {
                         {this.props.pillar.label}
                     </SubNavButton>
                     <SecondarySubNavList showSecondaryNav={this.state.showSecondaryNav}>
-                        <li>xxx</li>
+                        {this.props.pillar.links.map((link, i) => (
+                            <SecondarySubNavListItem index={i} key={link.label}>
+                                <SubNavTitle>
+                                    {link.label}
+                                </SubNavTitle>
+                            </SecondarySubNavListItem>
+                        ))}
                     </SecondarySubNavList>
                 </PrimarySubNavListItem>
             </PrimarySubNavList>
