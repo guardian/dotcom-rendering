@@ -16,7 +16,7 @@ if [[ -z $BRANCH_NAME ]]; then
   BRANCH_NAME=unknown
 fi
 
-$TARGET_ROOT=target/guui
+TARGET_ROOT=target/guui
 
 zip -r guui.zip * -x node_modules/**\*
 [ -d target ] && rm -rf target
