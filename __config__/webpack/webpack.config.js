@@ -78,7 +78,7 @@ module.exports = [
         {
             entry: pages.reduce(
                 (entries, page) => ({
-                    [page]: injectPage(page),
+                    [page.toLowerCase()]: injectPage(page),
                     ...entries,
                 }),
                 {},
