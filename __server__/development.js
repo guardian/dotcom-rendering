@@ -46,7 +46,7 @@ app.use('/pages/:page', [
         next();
     },
     webpackHotServerMiddleware(compiler, {
-        chunkName: 'app',
+        chunkName: 'server',
     }),
 ]);
 

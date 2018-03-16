@@ -12,8 +12,8 @@ const config = ({ platform }) => ({
     name: platform,
     output: {
         path: dist,
-        filename: `[name].${platform}.js`,
-        chunkFilename: `[name].${platform}.js`,
+        filename: `[name].js`,
+        chunkFilename: `[name].js`,
         publicPath: '/assets/javascript/',
     },
     plugins: [
@@ -52,7 +52,7 @@ module.exports = [
         config({ platform: 'server' }),
         {
             entry: {
-                app: ['./src/server.js'],
+                server: ['./src/server.js'],
             },
             target: 'node',
             externals: [require('webpack-node-externals')()],

@@ -22,7 +22,7 @@ module.exports = {
                 parallel: true,
             }),
             new BundleAnalyzerPlugin({
-                reportFilename: path.join(dist, `app.browser.stats.html`),
+                reportFilename: path.join(dist, 'browser-stats.html'),
                 analyzerMode: 'static',
                 openAnalyzer: false,
                 logLevel: 'warn',
@@ -36,6 +36,14 @@ module.exports = {
     },
     server: {
         devtool: 'source-map',
-        plugins: [reportBundleSize],
+        plugins: [
+            reportBundleSize,
+            new BundleAnalyzerPlugin({
+                reportFilename: path.join(dist, 'server-stats.html'),
+                analyzerMode: 'static',
+                openAnalyzer: false,
+                logLevel: 'warn',
+            }),
+        ],
     },
 };
