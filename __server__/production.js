@@ -5,7 +5,7 @@ const express = require('express');
 // eslint-disable-next-line import/no-unresolved
 const pagesMiddleware = require('../dist/app.server.js').default;
 const fetch = require('node-fetch');
-const { dist } = require('../__config__/webpack/helpers');
+const { dist } = require('../__config__/webpack/paths');
 
 const app = express();
 

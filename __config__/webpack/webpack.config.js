@@ -5,7 +5,8 @@ const webpack = require('webpack');
 // https://github.com/survivejs/webpack-merge#smart-merging
 const { smart: merge } = require('webpack-merge');
 
-const { pages, injectPage, dist } = require('./helpers');
+const { pages, injectPage } = require('./helpers');
+const { dist } = require('./paths');
 
 const config = ({ platform }) => ({
     name: platform,

@@ -7,7 +7,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../../__tools__/report-bundle-size');
 const Progress = require('simple-progress-webpack-plugin');
 
-const { dist } = require('./helpers');
+const { dist } = require('./paths');
 
 const reportBundleSize = new ReportBundleSize({ configCount: 2 });
 
