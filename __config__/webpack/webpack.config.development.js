@@ -24,6 +24,9 @@ module.exports = {
             }),
             {},
         ),
+        output: {
+            pathinfo: true,
+        },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),

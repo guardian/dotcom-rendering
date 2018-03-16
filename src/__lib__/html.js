@@ -1,6 +1,7 @@
 // @flow
 
 import resetCSS from './reset-css';
+import hashedAsset from './asset-path';
 
 export default ({
     title = 'The Guardian',
@@ -15,16 +16,18 @@ export default ({
     html: string,
     data?: {},
     jsNonBlocking?: string,
-}) => `
+}) => {
+    const bundle = hashedAsset(`${data.page.toLowerCase()}.js`);
+    const vendor = hashedAsset('vendor.js');
+
+    return `
     <!doctype html>
     <html>
         <head>
             <title>${title}</title>
             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-            <link rel="preload" href="/static/css/fonts.css" as="style">
-            <link rel="preload" href="/assets/javascript/${
-                data.page
-            }.browser.js" as="script">
+            <link rel="preload" href="${vendor}" as="script">
+            <link rel="preload" href="${bundle}" as="script">
             <link rel="stylesheet" href="/static/css/fonts.css" media="nope!" onload="this.media='all'">
             <style>${resetCSS}${css}</style>
         </head>
@@ -38,8 +41,10 @@ export default ({
                 },
             })};
             </script>
-            <script src="/assets/javascript/${data.page}.browser.js"></script>
+            <script src="${vendor}"></script>
+            <script src="${bundle}"></script>
             <script>${jsNonBlocking}</script>
         </body>
     </html>
 `;
+};

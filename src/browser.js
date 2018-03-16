@@ -10,10 +10,6 @@ import { Provider } from 'unistore/preact';
 // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved,import/extensions
 import Page from '__PAGE__ENTRY__POINT__';
 
-// webpack-specific
-// eslint-disable-next-line camelcase,no-undef
-__webpack_public_path__ = '/assets/javascript/';
-
 const { data, cssIDs } = window.gu.app;
 
 if (module.hot) {

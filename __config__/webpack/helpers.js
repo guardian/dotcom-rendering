@@ -2,10 +2,8 @@
 const path = require('path');
 const fs = require('fs');
 
-module.exports.dist = path.resolve(__dirname, '../../dist');
-
 module.exports.pages = fs
-    .readdirSync(path.resolve(__dirname, '../../src/pages'))
+    .readdirSync(path.resolve(__dirname, '..', '..', 'src', 'pages'))
     .map(filename => filename.split('.js')[0]);
 
 module.exports.injectPage = page =>

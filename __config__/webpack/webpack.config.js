@@ -5,14 +5,15 @@ const webpack = require('webpack');
 // https://github.com/survivejs/webpack-merge#smart-merging
 const { smart: merge } = require('webpack-merge');
 
-const { pages, injectPage, dist } = require('./helpers');
+const { pages, injectPage } = require('./helpers');
+const { dist } = require('./paths');
 
 const config = ({ platform }) => ({
     name: platform,
     output: {
         path: dist,
-        filename: `[name].${platform}.js`,
-        chunkFilename: `[name].${platform}.js`,
+        filename: `[name].js`,
+        chunkFilename: `[name].js`,
         publicPath: '/assets/javascript/',
     },
     plugins: [
@@ -51,12 +52,21 @@ module.exports = [
         config({ platform: 'server' }),
         {
             entry: {
-                app: ['./src/server.js'],
+                server: ['./src/server.js'],
             },
             target: 'node',
-            externals: [require('webpack-node-externals')()],
+            externals: [
+                require('webpack-node-externals')(),
+                (context, request, callback) => {
+                    if (/manifest\.json$/.test(request)) {
+                        return callback(null, `commonjs ${request}`);
+                    }
+                    callback();
+                },
+            ],
             output: {
                 libraryTarget: 'commonjs2',
+                pathinfo: true,
             },
         },
         envConfig.server,
@@ -68,11 +78,20 @@ module.exports = [
         {
             entry: pages.reduce(
                 (entries, page) => ({
-                    [page]: injectPage(page),
+                    [page.toLowerCase()]: injectPage(page),
                     ...entries,
                 }),
                 {},
             ),
+            plugins: [
+                new webpack.optimize.CommonsChunkPlugin({
+                    name: 'vendor',
+                    minChunks: ({ context }) =>
+                        context &&
+                        (context.includes('node_modules') ||
+                            context.includes('pasteup')),
+                }),
+            ],
         },
         envConfig.browser,
     ),
