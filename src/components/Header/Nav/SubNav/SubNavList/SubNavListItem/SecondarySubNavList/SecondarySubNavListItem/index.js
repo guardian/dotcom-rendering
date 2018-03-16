@@ -9,6 +9,7 @@ const SecondarySubNavListItem = styled('li')({
     position: 'relative',
     width: '100%',
 });
+SecondarySubNavListItem.displayName = 'SecondarySubNavListItem';
 
 export default props => (
     <SecondarySubNavListItem>

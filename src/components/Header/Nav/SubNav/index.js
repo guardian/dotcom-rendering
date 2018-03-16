@@ -64,6 +64,7 @@ const SubNav = styled('div')(props => {
 
     return styles;
 });
+SubNav.displayName = 'SubNav';
 
 export default ({ showSubNav }) => (
     <SubNav showSubNav={showSubNav}>

@@ -24,6 +24,7 @@ const SubNavInner = styled('div')({
         maxWidth: '1300px',
     },
 });
+SubNavInner.displayName = 'SubNavInner';
 
 export default connect('header')(({ header }) => (
     <SubNavInner>

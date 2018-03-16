@@ -10,7 +10,7 @@ const ScreenReadable = styled('span')(screenReaderOnly);
 const navPrimaryColour = '#121212';
 const navSecondaryColour = '#5d5f5f';
 
-const SubNavLinkStyled = styled('div')({
+const SubNavLink = styled('div')({
     display: 'none',
     fontFamily: headline,
     fontWeight: 400,
@@ -53,10 +53,11 @@ const SubNavLinkStyled = styled('div')({
         transform: 'translateY(0) rotate(45deg)',
     },
 });
+SubNavLink.displayName = 'SubNavLink';
 
 export default ({ toggleSubNav }) => (
-    <SubNavLinkStyled onClick={() => toggleSubNav()}>
+    <SubNavLink onClick={() => toggleSubNav()}>
         <ScreenReadable>Show</ScreenReadable>
         More
-    </SubNavLinkStyled>
+    </SubNavLink>
 );

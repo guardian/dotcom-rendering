@@ -25,6 +25,7 @@ const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
         width: '100%',
     },
 }));
+SecondarySubNavList.displayName = 'SecondarySubNavList';
 
 export default props => (
     <SecondarySubNavList showSecondaryNav={props.showSecondaryNav}>

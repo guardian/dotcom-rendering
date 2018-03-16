@@ -16,6 +16,7 @@ const SubNavListStyled = styled('ul')({
         float: 'left',
     },
 });
+SubNavListStyled.displayName = 'SubNavListStyled';
 
 export default class SubNavList extends Component {
     constructor(props) {
