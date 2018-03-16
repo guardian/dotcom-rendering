@@ -27,7 +27,10 @@ start: stop
 	$(call log, "PROD server is running at http://localhost:9000")
 
 stop:
-	@./node_modules/.bin/pm2 kill
+	@env pm2 kill
+
+monitor:
+	@env pm2 monit
 
 deploy:
 	@env ./__tasks__/build-riffraff-artifact.sh
