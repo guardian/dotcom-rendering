@@ -22,6 +22,7 @@ module.exports = {
         plugins: [
             new webpack.optimize.ModuleConcatenationPlugin(),
             new webpack.optimize.OccurrenceOrderPlugin(),
+            new webpack.HashedModuleIdsPlugin(),
             new webpack.optimize.UglifyJsPlugin({
                 sourceMap: true,
                 parallel: true,
