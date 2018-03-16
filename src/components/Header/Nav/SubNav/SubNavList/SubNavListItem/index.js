@@ -7,7 +7,7 @@ import { desktop } from 'pasteup/breakpoints';
 import SubNavButton from './SubNavButton';
 import SecondarySubNavList from './SecondarySubNavList';
 
-const SubNavListItemStyled = styled('ul')({
+const SubNavListItemStyled = styled('li')({
     fontSize: 18,
     listStyle: 'none',
     margin: 0,
