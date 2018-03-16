@@ -16,7 +16,6 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
 
 module.exports = {
     browser: {
-        devtool: 'cheap-module-eval-source-map',
         entry: pages.reduce(
             (entries, page) => ({
                 [page]: ['webpack-hot-middleware/client', injectPage(page)],
@@ -34,7 +33,6 @@ module.exports = {
         ],
     },
     server: {
-        devtool: 'cheap-module-eval-source-map',
         plugins: [friendlyErrorsWebpackPlugin],
     },
 };

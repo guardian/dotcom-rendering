@@ -10,6 +10,7 @@ const { dist } = require('./paths');
 
 const config = ({ platform }) => ({
     name: platform,
+    mode: process.env.NODE_ENV,
     output: {
         path: dist,
         filename: `[name].js`,
@@ -83,15 +84,17 @@ module.exports = [
                 }),
                 {},
             ),
-            plugins: [
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: 'vendor',
-                    minChunks: ({ context }) =>
-                        context &&
-                        (context.includes('node_modules') ||
-                            context.includes('pasteup')),
-                }),
-            ],
+            optimization: {
+                splitChunks: {
+                    cacheGroups: {
+                        commons: {
+                            test: /[\\/]node_modules[\\/]|pasteup/,
+                            name: 'vendor',
+                            chunks: 'all',
+                        },
+                    },
+                },
+            },
         },
         envConfig.browser,
     ),
