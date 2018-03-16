@@ -10,7 +10,7 @@ const SubNavInner = styled('div')({
     boxSizing: 'border-box',
     maxWidth: 'none',
     [desktop]: {
-        maxWidth: '980px',
+        maxWidth: 980,
         backgroundColor: '#e9eff1',
         marginTop: -20,
         padding: '0 20px',
@@ -18,10 +18,10 @@ const SubNavInner = styled('div')({
         margin: '0 auto',
     },
     [leftCol]: {
-        maxWidth: '1140px',
+        maxWidth: 1140,
     },
     [wide]: {
-        maxWidth: '1300px',
+        maxWidth: 1300,
     },
 });
 SubNavInner.displayName = 'SubNavInner';
