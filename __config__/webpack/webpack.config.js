@@ -75,6 +75,15 @@ module.exports = [
                 }),
                 {},
             ),
+            plugins: [
+                new webpack.optimize.CommonsChunkPlugin({
+                    name: 'vendor',
+                    minChunks: ({ context }) =>
+                        context &&
+                        (context.includes('node_modules') ||
+                            context.includes('pasteup')),
+                }),
+            ],
         },
         envConfig.browser,
     ),
