@@ -22,6 +22,7 @@ app.use(
     webpackDevMiddleware(compiler, {
         serverSideRender: true,
         logLevel: 'silent',
+        publicPath: '/assets/javascript/',
     }),
 );
 
