@@ -7,16 +7,14 @@ import { desktop } from 'pasteup/breakpoints';
 import SubNavButton from './SubNavButton';
 import SecondarySubNavList from './SecondarySubNavList';
 
-const SubNavListItemStyled = styled('li')({
-    boxSizing: 'border-box',
-    overflow: 'hidden',
-    position: 'relative',
-    width: '100%',
+const SubNavListItemStyled = styled('ul')({
+    fontSize: 18,
+    listStyle: 'none',
+    margin: 0,
+    padding: '0 0 12px',
     [desktop]: {
-        float: 'left',
-        overflow: 'visible',
         width: 118,
-        padding: '0 5px 12px',
+        float: 'left',
     },
 });
 SubNavListItemStyled.displayName = 'SubNavListItem';

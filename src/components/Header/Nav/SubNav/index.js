@@ -8,7 +8,7 @@ import {
     desktop,
 } from 'pasteup/breakpoints';
 
-import SubNavInner from './SubNavInner';
+import SubNavList from './SubNavList';
 
 const SubNav = styled('div')(props => {
     const styles = {
@@ -68,6 +68,6 @@ SubNav.displayName = 'SubNav';
 
 export default ({ showSubNav }) => (
     <SubNav showSubNav={showSubNav}>
-        <SubNavInner />
+        <SubNavList />
     </SubNav>
 );

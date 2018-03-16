@@ -1,24 +1,40 @@
 // @flow
 import styled from 'preact-emotion';
+import { connect } from 'unistore/preact';
 
-import { desktop } from 'pasteup/breakpoints';
+import { desktop, leftCol, wide } from 'pasteup/breakpoints';
 
 import SubNavListItem from './SubNavListItem';
 
 const SubNavList = styled('ul')({
-    fontSize: 18,
-    listStyle: 'none',
-    margin: 0,
-    padding: '0 0 12px',
+    boxSizing: 'border-box',
+    maxWidth: 'none',
     [desktop]: {
-        width: 118,
-        float: 'left',
+        maxWidth: 980,
+        backgroundColor: '#e9eff1',
+        marginTop: -20,
+        padding: '0 20px',
+        position: 'relative',
+        margin: '0 auto',
+    },
+    [leftCol]: {
+        maxWidth: 1140,
+    },
+    [wide]: {
+        maxWidth: 1300,
     },
 });
 SubNavList.displayName = 'SubNavList';
 
-export default props => (
+export default connect('header')(({ header }) => (
     <SubNavList>
-        <SubNavListItem {...props} />
+        {header.pillars.map((pillar, i) => (
+            <SubNavListItem
+                pillar={pillar}
+                index={i}
+                isLastIndex={i === header.pillars.length - 1}
+                key={pillar.label}
+            />
+        ))}
     </SubNavList>
-);
+));
