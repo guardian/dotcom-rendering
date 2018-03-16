@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../../__tools__/report-bundle-size');
 const Progress = require('simple-progress-webpack-plugin');
+const AssetsManifest = require('webpack-assets-manifest');
 
 const { dist } = require('./paths');
 
@@ -13,6 +14,10 @@ const reportBundleSize = new ReportBundleSize({ configCount: 2 });
 
 module.exports = {
     browser: {
+        output: {
+            filename: `[name].[chunkhash].js`,
+            chunkFilename: `[name].[chunkhash].js`,
+        },
         devtool: 'source-map',
         plugins: [
             new webpack.optimize.ModuleConcatenationPlugin(),
@@ -27,6 +32,7 @@ module.exports = {
                 openAnalyzer: false,
                 logLevel: 'warn',
             }),
+            new AssetsManifest({ writeToDisk: true }),
             !process.env.CI &&
                 new Progress({
                     format: 'compact',

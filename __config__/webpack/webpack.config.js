@@ -55,7 +55,15 @@ module.exports = [
                 server: ['./src/server.js'],
             },
             target: 'node',
-            externals: [require('webpack-node-externals')()],
+            externals: [
+                require('webpack-node-externals')(),
+                (context, request, callback) => {
+                    if (/manifest\.json$/.test(request)) {
+                        return callback(null, `commonjs ${request}`);
+                    }
+                    callback();
+                },
+            ],
             output: {
                 libraryTarget: 'commonjs2',
                 pathinfo: true,
