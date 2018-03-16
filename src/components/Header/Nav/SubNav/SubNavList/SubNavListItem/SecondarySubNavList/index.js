@@ -1,8 +1,7 @@
+// @flow
 import styled from 'preact-emotion';
 
-import { 
-    desktop,
-} from 'pasteup/breakpoints';
+import { desktop } from 'pasteup/breakpoints';
 
 import SecondarySubNavListItem from './SecondarySubNavListItem';
 
@@ -24,12 +23,12 @@ const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
         paddingBottom: 0,
         backgroundColor: 'transparent',
         width: '100%',
-    }
+    },
 }));
 
-export default (props) => (
+export default props => (
     <SecondarySubNavList showSecondaryNav={props.showSecondaryNav}>
-        {props.pillar.links.map((link, i) => (
+        {props.pillar.links.map(link => (
             <SecondarySubNavListItem {...props} link={link} />
         ))}
     </SecondarySubNavList>

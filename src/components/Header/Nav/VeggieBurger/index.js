@@ -1,9 +1,14 @@
 // @flow
 import styled from 'preact-emotion';
 
-import { tablet, desktop, mobileMedium, mobileLandscape } from 'pasteup/breakpoints';
+import {
+    tablet,
+    desktop,
+    mobileMedium,
+    mobileLandscape,
+} from 'pasteup/breakpoints';
 
-const VeggieBurger = styled('span')(({showSubNav}) =>{
+const VeggieBurger = styled('span')(({ showSubNav }) => {
     const styles = {
         backgroundColor: '#121212',
         top: 24,
@@ -32,7 +37,7 @@ const VeggieBurger = styled('span')(({showSubNav}) =>{
         },
         [desktop]: {
             display: 'none',
-        },     
+        },
     };
 
     return styles;
@@ -47,7 +52,7 @@ const beforeAfterStyles = {
     width: 20,
 };
 
-const VeggieBurgerIcon = styled('span')(({showSubNav}) => {
+const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
     const styles = {
         top: '50%',
         marginTop: -1,

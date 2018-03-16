@@ -60,7 +60,10 @@ export default class Nav extends Component {
                 <Logo href="/" />
                 <Links />
                 <Pillars />
-                <VeggieBurger showSubNav={this.state.showSubNav} toggleSubNav={toggleSubNav} />
+                <VeggieBurger
+                    showSubNav={this.state.showSubNav}
+                    toggleSubNav={toggleSubNav}
+                />
                 <SubNavLink toggleSubNav={toggleSubNav} />
                 <SubNav showSubNav={this.state.showSubNav} />
             </NavStyled>

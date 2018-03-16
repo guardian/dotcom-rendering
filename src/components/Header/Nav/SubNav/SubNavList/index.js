@@ -2,9 +2,7 @@
 import styled from 'preact-emotion';
 import { Component } from 'preact';
 
-import { 
-    desktop,
-} from 'pasteup/breakpoints';
+import { desktop } from 'pasteup/breakpoints';
 
 import SubNavListItem from './SubNavListItem';
 
@@ -16,7 +14,7 @@ const SubNavListStyled = styled('ul')({
     [desktop]: {
         width: 118,
         float: 'left',
-    }
+    },
 });
 
 export default class SubNavList extends Component {
@@ -29,8 +27,6 @@ export default class SubNavList extends Component {
     }
 
     toggleSecondaryNav() {
-        console.log('****');
-
         this.setState({
             showSecondaryNav: !this.state.showSecondaryNav,
         });
@@ -39,9 +35,13 @@ export default class SubNavList extends Component {
     render(props) {
         return (
             <SubNavListStyled>
-                <SubNavListItem {...props} toggleSecondaryNav={() => {
-                    this.toggleSecondaryNav()
-                }} showSecondaryNav={this.state.showSecondaryNav}/>
+                <SubNavListItem
+                    {...props}
+                    toggleSecondaryNav={() => {
+                        this.toggleSecondaryNav();
+                    }}
+                    showSecondaryNav={this.state.showSecondaryNav}
+                />
             </SubNavListStyled>
         );
     }

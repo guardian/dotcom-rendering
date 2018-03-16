@@ -10,7 +10,7 @@ const SecondarySubNavListItem = styled('li')({
     width: '100%',
 });
 
-export default (props) => (
+export default props => (
     <SecondarySubNavListItem>
         <SubNavTitle {...props} />
     </SecondarySubNavListItem>

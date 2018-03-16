@@ -1,10 +1,7 @@
 // @flow
 import styled from 'preact-emotion';
-import { Component } from 'preact';
 
-import { 
-    desktop,
-} from 'pasteup/breakpoints';
+import { desktop } from 'pasteup/breakpoints';
 
 import SubNavButton from './SubNavButton';
 import SecondarySubNavList from './SecondarySubNavList';
@@ -19,12 +16,12 @@ const SubNavListItem = styled('li')({
         overflow: 'visible',
         width: 118,
         padding: '0 5px 12px',
-    }
+    },
 });
 
-export default (props) => (
+export default props => (
     <SubNavListItem>
-        <SubNavButton {...props}/>
+        <SubNavButton {...props} />
         <SecondarySubNavList {...props} />
     </SubNavListItem>
 );

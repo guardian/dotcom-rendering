@@ -1,15 +1,12 @@
+// @flow
 import styled from 'preact-emotion';
 
-import {
-    tablet,
-    desktop,
-} from 'pasteup/breakpoints';
-import { 
-    egyptian,
-} from 'pasteup/fonts';
+import { tablet, desktop } from 'pasteup/breakpoints';
+import { egyptian } from 'pasteup/fonts';
 
 const SubNavTitle = styled('a')({
     backgroundColor: 'transparent',
+    textDecoration: 'none',
     border: 0,
     boxSizing: 'border-box',
     color: '#121212',
@@ -39,11 +36,9 @@ const SubNavTitle = styled('a')({
     },
     '> *': {
         pointerEvents: 'none',
-    }
+    },
 });
 
-export default (props) => (
-    <SubNavTitle href={props.link.href}>
-        {props.link.label}
-    </SubNavTitle>
+export default props => (
+    <SubNavTitle href={props.link.href}>{props.link.label}</SubNavTitle>
 );

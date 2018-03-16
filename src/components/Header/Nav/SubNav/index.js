@@ -5,10 +5,7 @@ import {
     until,
     mobileMedium,
     mobileLandscape,
-    tablet,
     desktop,
-    leftCol,
-    wide,
 } from 'pasteup/breakpoints';
 
 import SubNavInner from './SubNavInner';

@@ -1,15 +1,8 @@
+// @flow
 import styled from 'preact-emotion';
 import { connect } from 'unistore/preact';
 
-import {
-    until,
-    mobileMedium,
-    mobileLandscape,
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-} from 'pasteup/breakpoints';
+import { desktop, leftCol, wide } from 'pasteup/breakpoints';
 
 import SubNavList from './SubNavList';
 
