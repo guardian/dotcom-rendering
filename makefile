@@ -8,13 +8,16 @@ endef
 
 # app #########################################
 
-build: clear install
+clean-dist:
+	$(call log, "deleting old artefacts")
+	@rm -rf dist
+
+build: clear install clean-dist
 	$(call log, "building production bundles")
 	@echo '' # just a spacer
-	@rm -rf dist
 	@NODE_ENV=production webpack --bail --color --config __config__/webpack/webpack.config.js
 
-dev: clear install
+dev: clear install clean-dist
 	$(call log, "starting DEV server...")
 	@NODE_ENV=development node __server__/development.js
 
@@ -58,11 +61,11 @@ install: check-env
 	$(call log, "refreshing dependencies")
 	@yarn >/dev/null
 
-clean:
+clean-modules:
 	$(call log, "trashing dependencies")
 	@rm -rf node_modules
 
-reinstall: clear clean install
+reinstall: clear clean-modules install
 	$(call log, "dependencies have been reinstalled ♻️")
 
 validate-build: # private
@@ -76,4 +79,4 @@ check-env: # private
 	@node __tasks__/check-yarn.js
 
 clear: # private
-	clear
+	@clear
