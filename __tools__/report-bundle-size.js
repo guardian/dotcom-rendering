@@ -28,7 +28,7 @@ module.exports = class {
                 '';
 
             Object.entries(compilation.assets)
-                .filter(([key]) => !key.endsWith('map'))
+                .filter(([key]) => key.endsWith('js'))
                 .forEach(([file, value]) => {
                     this.messages[file] =
                         platform === 'server'
