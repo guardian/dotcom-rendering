@@ -25,7 +25,7 @@ module.exports = {
                 analyzerMode: 'static',
                 openAnalyzer: false,
                 logLevel: 'warn',
-            });,
+            }),
             new AssetsManifest({ writeToDisk: true }),
             !process.env.CI &&
                 new Progress({
@@ -35,11 +35,14 @@ module.exports = {
         ].filter(Boolean),
     },
     server: {
-        plugins: [reportBundleSize, new BundleAnalyzerPlugin({
-            reportFilename: path.join(dist, 'server-bundle.html'),
-            analyzerMode: 'static',
-            openAnalyzer: false,
-            logLevel: 'warn',
-        });],
+        plugins: [
+            reportBundleSize,
+            new BundleAnalyzerPlugin({
+                reportFilename: path.join(dist, 'server-bundle.html'),
+                analyzerMode: 'static',
+                openAnalyzer: false,
+                logLevel: 'warn',
+            }),
+        ],
     },
 };
