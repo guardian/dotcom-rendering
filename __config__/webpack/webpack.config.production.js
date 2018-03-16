@@ -18,17 +18,10 @@ module.exports = {
             filename: `[name].[chunkhash].js`,
             chunkFilename: `[name].[chunkhash].js`,
         },
-        devtool: 'source-map',
         plugins: [
-            new webpack.optimize.ModuleConcatenationPlugin(),
-            new webpack.optimize.OccurrenceOrderPlugin(),
             new webpack.HashedModuleIdsPlugin(),
-            new webpack.optimize.UglifyJsPlugin({
-                sourceMap: true,
-                parallel: true,
-            }),
             new BundleAnalyzerPlugin({
-                reportFilename: path.join(dist, 'browser-stats.html'),
+                reportFilename: path.join(dist, 'browser-bundles.html'),
                 analyzerMode: 'static',
                 openAnalyzer: false,
                 logLevel: 'warn',
@@ -42,11 +35,10 @@ module.exports = {
         ].filter(Boolean),
     },
     server: {
-        devtool: 'source-map',
         plugins: [
             reportBundleSize,
             new BundleAnalyzerPlugin({
-                reportFilename: path.join(dist, 'server-stats.html'),
+                reportFilename: path.join(dist, 'server-bundle.html'),
                 analyzerMode: 'static',
                 openAnalyzer: false,
                 logLevel: 'warn',

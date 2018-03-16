@@ -29,13 +29,11 @@ module.exports = class {
 
             Object.entries(compilation.assets)
                 .filter(([key]) => key.endsWith('js'))
-                .forEach(([file, value]) => {
+                .forEach(([file, { _value }]) => {
                     this.messages[file] =
                         platform === 'server'
-                            ? chalk.dim(
-                                  prettyBytes(value.children[0]._value.length),
-                              )
-                            : filesizegzip(value.children[0]._value, true);
+                            ? chalk.dim(prettyBytes(_value.length))
+                            : filesizegzip(_value, true);
                 });
 
             if (this.configCount === this.configsBuilt) {
