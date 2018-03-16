@@ -58,6 +58,7 @@ module.exports = [
             externals: [require('webpack-node-externals')()],
             output: {
                 libraryTarget: 'commonjs2',
+                pathinfo: true,
             },
         },
         envConfig.server,
