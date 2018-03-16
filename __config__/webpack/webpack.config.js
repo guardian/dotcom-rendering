@@ -88,7 +88,7 @@ module.exports = [
                 splitChunks: {
                     cacheGroups: {
                         commons: {
-                            test: /[\\/]node_modules[\\/]|pasteup/,
+                            test: /node_modules|pasteup/,
                             name: 'vendor',
                             chunks: 'all',
                         },
