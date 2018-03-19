@@ -52,7 +52,16 @@ const appServerConfig = {
 };
 
 const appBrowserConfig = {
-    plugins: ['@babel/plugin-syntax-dynamic-import', ...universalPlugins],
+    plugins: [
+        '@babel/plugin-syntax-dynamic-import',
+        [
+            "emotion",
+            {
+                "sourceMap": true,
+            }
+        ],
+        ...universalPlugins
+    ],
     presets: [
         [
             '@babel/preset-env',
