@@ -40,6 +40,6 @@ const SubNavTitle = styled('a')({
 });
 SubNavTitle.displayName = 'SubNavTitle';
 
-export default props => (
-    <SubNavTitle href={props.link.href}>{props.link.label}</SubNavTitle>
+export default ({ link }) => (
+    <SubNavTitle href={link.href}>{link.label}</SubNavTitle>
 );

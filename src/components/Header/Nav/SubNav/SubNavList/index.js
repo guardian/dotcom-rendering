@@ -31,8 +31,8 @@ export default connect('header')(({ header }) => (
         {header.pillars.map((pillar, i) => (
             <SubNavListItem
                 pillar={pillar}
-                index={i}
-                isLastIndex={i === header.pillars.length - 1}
+                // index={i}
+                // isLastIndex={i === header.pillars.length - 1}
                 key={pillar.label}
             />
         ))}

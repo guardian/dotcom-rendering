@@ -61,6 +61,7 @@ const SubNavButton = styled('button')(
         return styles;
     },
 );
+SubNavButton.displayName = 'SubNavButton';
 
 export default ({
     pillar,

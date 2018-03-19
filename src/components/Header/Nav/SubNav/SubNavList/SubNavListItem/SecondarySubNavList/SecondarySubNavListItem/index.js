@@ -11,8 +11,8 @@ const SecondarySubNavListItem = styled('li')({
 });
 SecondarySubNavListItem.displayName = 'SecondarySubNavListItem';
 
-export default props => (
+export default ({ link }) => (
     <SecondarySubNavListItem>
-        <SubNavTitle {...props} />
+        <SubNavTitle link={link} />
     </SecondarySubNavListItem>
 );

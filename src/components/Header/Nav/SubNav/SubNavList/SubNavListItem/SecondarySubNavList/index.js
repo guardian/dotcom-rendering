@@ -27,10 +27,10 @@ const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
 }));
 SecondarySubNavList.displayName = 'SecondarySubNavList';
 
-export default props => (
-    <SecondarySubNavList showSecondaryNav={props.showSecondaryNav}>
-        {props.pillar.links.map(link => (
-            <SecondarySubNavListItem {...props} link={link} />
+export default ({ pillar, showSecondaryNav }) => (
+    <SecondarySubNavList showSecondaryNav={showSecondaryNav}>
+        {pillar.links.map(link => (
+            <SecondarySubNavListItem link={link} />
         ))}
     </SecondarySubNavList>
 );
