@@ -17,13 +17,17 @@ if [[ -z $BRANCH_NAME ]]; then
 fi
 
 TARGET_ROOT=target/guui
+ASSETS_ROOT=target/frontend-static
 
 zip -r guui.zip * -x node_modules/**\*
 [ -d target ] && rm -rf target
+mkdir -p $ASSETS_ROOT/moon-javascripts
 mkdir -p $TARGET_ROOT/dist
 mkdir -p $TARGET_ROOT/cfn
 mv guui.zip ./$TARGET_ROOT/dist/guui.zip
 cp __config__/cfn/cloudformation.yml ./$TARGET_ROOT/cfn
+
+touch $ASSETS_ROOT/moon-javascripts/hello.js
 
 cp riff-raff.yaml target
 
