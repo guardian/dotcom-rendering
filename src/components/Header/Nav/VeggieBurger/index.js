@@ -42,6 +42,7 @@ const VeggieBurger = styled('span')(({ showSubNav }) => {
 
     return styles;
 });
+VeggieBurger.displayName = 'VeggieBurger';
 
 const beforeAfterStyles = {
     content: '""',
@@ -84,6 +85,7 @@ const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
 
     return styles;
 });
+VeggieBurgerIcon.displayName = 'VeggieBurgerIcon';
 
 export default ({ toggleSubNav, showSubNav }) => (
     <VeggieBurger onClick={() => toggleSubNav()} showSubNav={showSubNav}>
