@@ -6,9 +6,11 @@ import { hydrate as hydrateCSS } from 'emotion';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
 
+import Page from 'components/Page';
+
 // will be replaced by string-replace-loader in webpack.config.js
 // eslint-disable-next-line import/no-extraneous-dependencies,import/no-unresolved,import/extensions
-import Page from '__PAGE__ENTRY__POINT__';
+import PageType from '__PAGE__ENTRY__POINT__';
 
 const { data, cssIDs } = window.gu.app;
 
@@ -20,7 +22,9 @@ if (module.hot) {
 hydrateCSS(cssIDs);
 render(
     <Provider store={createStore(data)}>
-        <Page />
+        <Page>
+            <PageType />
+        </Page>
     </Provider>,
     document.getElementById('app'),
     document.getElementById('app').lastElementChild,
