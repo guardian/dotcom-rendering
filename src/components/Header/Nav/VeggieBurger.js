@@ -53,7 +53,7 @@ const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
         position: 'absolute',
         width: 20,
     };
-    
+
     const styles = {
         top: '50%',
         marginTop: -1,
