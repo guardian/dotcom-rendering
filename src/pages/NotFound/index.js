@@ -5,13 +5,41 @@ import styled from 'preact-emotion';
 import { egyptian } from 'pasteup/fonts';
 import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
 import { screenReaderOnly } from 'pasteup/mixins';
-import GuardianLogo from './GuardianLogo';
-import NotFoundLogo from './NotFoundLogo';
+
+import TheGuardianLogoSVG from 'images/the-guardian-logo.svg';
+import NotFoundSvg from './notfound.svg';
 import BackToGuardianButton from './BackToGuardianButton';
 
 const beaconUrl = '//beacon.gu-web.net';
 
 const VisuallyHidden = styled('span')(screenReaderOnly);
+
+const GuardianLogo = styled(TheGuardianLogoSVG)({
+    display: 'block',
+    height: 'auto',
+    width: '100%',
+});
+
+const NotFoundLogo = styled(NotFoundSvg)({
+    display: 'block',
+    height: '80%',
+    maxWidth: '350px',
+    width: '100%',
+
+    [tablet]: {
+        height: 'auto',
+        maxWidth: '100%',
+        width: '350px',
+    },
+
+    [desktop]: {
+        width: '378px',
+    },
+
+    [leftCol]: {
+        width: '567px',
+    },
+});
 
 const NotFoundWrapper = styled('div')({
     content: '',
