@@ -57,7 +57,7 @@ const appBrowserConfig = {
         [
             'emotion',
             {
-                'sourceMap': process.env.NODE_ENV !== 'production',
+                sourceMap: process.env.NODE_ENV !== 'production',
             },
         ],
         ...universalPlugins,
