@@ -1,5 +1,6 @@
 // @flow
 import styled from 'preact-emotion';
+import { connect } from 'unistore/preact';
 
 import { headline } from 'pasteup/fonts';
 import { pillars } from 'pasteup/palette';
@@ -63,20 +64,22 @@ const SubNavButton = styled('button')(
 );
 SubNavButton.displayName = 'SubNavButton';
 
-export default ({
-    pillar,
-    isLastIndex,
-    showSecondaryNav,
-    toggleSecondaryNav,
-}) => (
-    <SubNavButton
-        pillar={pillar.pillar}
-        isLastIndex={isLastIndex}
-        showSecondaryNav={showSecondaryNav}
-        onClick={() => {
-            toggleSecondaryNav();
-        }}
-    >
-        {pillar.label}
-    </SubNavButton>
+export default connect('header')(
+    ({ header, pillar, showSecondaryNav, toggleSecondaryNav }) => {
+        const isLastIndex =
+            pillar === header.pillars[header.pillars.length - 1];
+
+        return (
+            <SubNavButton
+                pillar={pillar.pillar}
+                isLastIndex={isLastIndex}
+                showSecondaryNav={showSecondaryNav}
+                onClick={() => {
+                    toggleSecondaryNav();
+                }}
+            >
+                {pillar.label}
+            </SubNavButton>
+        );
+    },
 );

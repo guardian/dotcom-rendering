@@ -28,13 +28,8 @@ SubNavList.displayName = 'SubNavList';
 
 export default connect('header')(({ header }) => (
     <SubNavList>
-        {header.pillars.map((pillar, i) => (
-            <SubNavListItem
-                pillar={pillar}
-                // index={i}
-                // isLastIndex={i === header.pillars.length - 1}
-                key={pillar.label}
-            />
+        {header.pillars.map(pillar => (
+            <SubNavListItem pillar={pillar} key={pillar.label} />
         ))}
     </SubNavList>
 ));

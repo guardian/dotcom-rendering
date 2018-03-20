@@ -29,8 +29,6 @@ SecondarySubNavList.displayName = 'SecondarySubNavList';
 
 export default ({ pillar, showSecondaryNav }) => (
     <SecondarySubNavList showSecondaryNav={showSecondaryNav}>
-        {pillar.links.map(link => (
-            <SecondarySubNavListItem link={link} />
-        ))}
+        {pillar.links.map(link => <SecondarySubNavListItem link={link} />)}
     </SecondarySubNavList>
 );
