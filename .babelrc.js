@@ -55,12 +55,12 @@ const appBrowserConfig = {
     plugins: [
         '@babel/plugin-syntax-dynamic-import',
         [
-            "emotion",
+            'emotion',
             {
-                "sourceMap": process.env.NODE_ENV !== 'production',
-            }
+                'sourceMap': process.env.NODE_ENV !== 'production',
+            },
         ],
-        ...universalPlugins
+        ...universalPlugins,
     ],
     presets: [
         [
