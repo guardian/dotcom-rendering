@@ -17,7 +17,7 @@ export default ({
     data?: {},
     jsNonBlocking?: string,
 }) => {
-    const bundle = hashedAsset(`${data.page.toLowerCase()}.js`);
+    const bundle = hashedAsset(`${data.page}.js`);
     const vendor = hashedAsset('vendor.js');
 
     return `
