@@ -36,6 +36,10 @@ const config = ({ platform }) => ({
                     options: { envName: `app:${platform}` },
                 },
             },
+            {
+                test: /\.svg$/,
+                use: ['desvg-loader/preact', 'svg-loader'],
+            },
         ],
     },
     resolve: {
