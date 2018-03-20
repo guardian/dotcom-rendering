@@ -4,7 +4,6 @@ const universalPlugins = [
     'babel-plugin-preval',
     ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
     '@babel/plugin-proposal-class-properties',
-    'babel-plugin-inline-react-svg',
     [
         'babel-plugin-module-resolver',
         {
