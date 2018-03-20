@@ -44,16 +44,16 @@ const VeggieBurger = styled('span')(({ showSubNav }) => {
 });
 VeggieBurger.displayName = 'VeggieBurger';
 
-const beforeAfterStyles = {
-    content: '""',
-    backgroundColor: 'currentColor',
-    height: 2,
-    left: 0,
-    position: 'absolute',
-    width: 20,
-};
-
 const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
+    const beforeAfterStyles = {
+        content: '""',
+        backgroundColor: 'currentColor',
+        height: 2,
+        left: 0,
+        position: 'absolute',
+        width: 20,
+    };
+    
     const styles = {
         top: '50%',
         marginTop: -1,
