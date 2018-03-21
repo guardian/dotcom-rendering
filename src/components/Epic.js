@@ -5,9 +5,6 @@ import { headline } from 'pasteup/fonts';
 
 import SiteMessage from 'components/SiteMessage';
 
-const yellow = pallete.yellow.medium;
-const black = pallete.neutral[2];
-
 const Content = styled('div')({
     fontFamily: headline,
     lineHeight: 1.3,
@@ -20,7 +17,10 @@ const Content = styled('div')({
 
 export default function Epic({ children }) {
     return (
-        <SiteMessage foregroundColor={black} backgroundColor={yellow}>
+        <SiteMessage
+            foregroundColor={pallete.neutral[2]}
+            backgroundColor={pallete.yellow.medium}
+        >
             <Content>{children}</Content>
         </SiteMessage>
     );
