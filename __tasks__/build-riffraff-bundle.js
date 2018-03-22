@@ -1,11 +1,10 @@
 // @flow
 
+const execa = require('execa');
 const path = require('path');
 const cpy = require('cpy');
 const fs = require('fs');
-const { promisify } = require('util');
 const { warn, log } = require('./log');
-const exec = promisify(require('child_process').execFile);
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
@@ -50,7 +49,7 @@ function copyRiffRaff(root = 'target') {
 }
 
 function zipBundle(root = 'target') {
-    return exec('zip', ['-r', 'guui.zip', '*', '-x', 'node_modules/**\\*'], {
+    return execa('zip', ['-r', 'guui.zip', '*', '-x', 'node_modules/**\\*'], {
         shell: true,
     })
         .then(() => {
