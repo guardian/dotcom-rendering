@@ -13,7 +13,7 @@ clean-dist:
 	@rm -rf dist
 	@rm -rf target
 
-riffraff-bundle: clean-dist
+riffraff-bundle: clean-dist build
 	$(call log, "copying assets into riffraff bundle")
 	@node ./__tasks__/build-riffraff-bundle.js
 
