@@ -1,7 +1,7 @@
 // @flow
 
 import resetCSS from './reset-css';
-import hashedAsset from './asset-path';
+import { hashedPath, staticPath } from './asset-path';
 
 export default ({
     title = 'The Guardian',
@@ -17,9 +17,9 @@ export default ({
     data?: {},
     jsNonBlocking?: string,
 }) => {
-    const bundle = hashedAsset(`${data.page}.js`);
-    const vendor = hashedAsset('vendor.js');
-
+    const bundle = hashedPath('javascript', `${data.page}.js`);
+    const vendor = hashedPath('javascript', 'vendor.js');
+    const fonts  = staticPath('css', 'fonts.css')
     return `
     <!doctype html>
     <html>
@@ -28,7 +28,7 @@ export default ({
             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
             <link rel="preload" href="${vendor}" as="script">
             <link rel="preload" href="${bundle}" as="script">
-            <link rel="stylesheet" href="//assets.guim.co.uk/guui/static/css/fonts.css" media="nope!" onload="this.media='all'">
+            <link rel="stylesheet" href="${fonts}" media="nope!" onload="this.media='all'">
             <style>${resetCSS}${css}</style>
         </head>
         <body>

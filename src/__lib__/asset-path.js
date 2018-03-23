@@ -9,12 +9,18 @@ try {
     // do nothing
 }
 
-const prefix = (name) => {
+const prefix = (type, name) => {
     if(process.env.NODE_ENV === "production"){
-        return `https:\/\/assets.guim.co.uk/javascript/${name}`;
+        return `https:\/\/assets.guim.co.uk/guui/${type}/${name}`;
     } else {
-        return `/assets/javascript/${name}`;
+        return `/${type}/${name}`;
     }
 }
 
-export default name => prefix(assetHash[name] || name);
+export function hashedPath(type, name){
+    return prefix(`assets/${type}`, assetHash[name] || name);
+}
+
+export function staticPath(type, name){
+    return prefix(`static/${type}`, assetHash[name] || name);
+}
