@@ -4,7 +4,10 @@ const execa = require('execa');
 const path = require('path');
 const cpy = require('cpy');
 const fs = require('fs');
+const { promisify } = require('util');
 const { warn, log } = require('./log');
+
+const root = 'target';
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
@@ -24,34 +27,29 @@ const { warn, log } = require('./log');
 //     └── dist
 //         └── guui.zip
 
-function copyCss(root = 'target') {
-    return cpy(
+const copyCss = () =>
+    cpy(
         ['src/static/css/*'],
         path.resolve(root, 'frontend-static', 'guui', 'static', 'css'),
     ).then(() => {
         log('Finished copying css');
     });
-}
 
-function copyJavascript(root = 'target') {
-    return cpy(
+const copyJavascript = () =>
+    cpy(
         ['dist/*.js'],
         path.resolve(root, 'frontend-static', 'guui', 'assets', 'javascript'),
     ).then(() => {
         log('Finished copying javascript');
     });
-}
 
-function copyRiffRaff(root = 'target') {
-    return cpy(['riff-raff.yaml'], root, {
-        nodir: true,
-    }).then(() => {
+const copyRiffRaff = () =>
+    cpy(['riff-raff.yaml'], root).then(() => {
         log('Finished copying riffraff yaml');
     });
-}
 
-function zipBundle(root = 'target') {
-    return execa('zip', ['-r', 'guui.zip', '*', '-x', 'node_modules/**\\*'], {
+const zipBundle = () =>
+    execa('zip', ['-r', 'guui.zip', '*', '-x', 'node_modules/**\\*'], {
         shell: true,
     })
         .then(() => {
@@ -60,9 +58,8 @@ function zipBundle(root = 'target') {
         .then(() => {
             log('Finished zipping bundle');
         });
-}
 
-function createBuildConfig(root = 'target') {
+const createBuildConfig = () => {
     const env = (p, dflt) => process.env[p] || dflt;
 
     const buildConfig = {
@@ -74,21 +71,15 @@ function createBuildConfig(root = 'target') {
         branch: env('BRANCH_NAME', 'unknown'),
     };
 
-    return new Promise(resolve => {
-        fs.writeFile(
-            path.resolve(root, 'build.json'),
-            JSON.stringify(buildConfig),
-            err => {
-                if (err) {
-                    warn(err);
-                }
-            },
-        );
-        resolve();
-    }).then(() => {
+    const writeFile = promisify(fs.writeFile);
+
+    return writeFile(
+        path.resolve(root, 'build.json'),
+        JSON.stringify(buildConfig),
+    ).then(() => {
         log('Finished building build.json');
     });
-}
+};
 
 (async () => {
     copyCss()
