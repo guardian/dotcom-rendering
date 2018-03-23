@@ -18,8 +18,8 @@ const prefix = (path: string, name: string): string => {
 
 type FileType = 'javascript' | 'css';
 
-export const hashedPath = (fileType: FileType, name: string) =>
+export const hashedPath = (fileType: FileType, name: string): string =>
     prefix(`assets/${fileType}`, assetHash[name] || name);
 
-export const staticPath = (fileType: FileType, name: string) =>
+export const staticPath = (fileType: FileType, name: string): string =>
     prefix(`static/${fileType}`, assetHash[name] || name);
