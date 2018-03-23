@@ -9,18 +9,22 @@ const { warn, log } = require('./log');
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
 //
-// target/
-// ├── riffraff.yaml
+// target
 // ├── build.json
-// ├── guui/
-// │   └── dist/
-// │       └── guui.zip
-// └── frontend-static/
-//     ├── javascripts/
-//     │   ├── ...js
-//     │   └── manifest.json
-//     └── stylesheets/
-//         └── ...css
+// ├── riff-raff.yaml
+// ├── frontend-static
+// │   └── guui
+// │       ├── assets
+// │       │   └── javascript
+// │       │       └── ...js
+// │       └── static
+// │           └── css
+// │               └── ...css
+// └── guui
+//     └── dist
+//         └── guui.zip
+
+
 
 function copyCss(root = 'target') {
     return cpy(
