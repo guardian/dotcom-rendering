@@ -10,17 +10,16 @@ try {
 }
 
 const prefix = (type, name) => {
-    if(process.env.NODE_ENV === "production"){
-        return `https:\/\/assets.guim.co.uk/guui/${type}/${name}`;
-    } else {
-        return `/${type}/${name}`;
+    if (process.env.NODE_ENV === 'production') {
+        return `https://assets.guim.co.uk/guui/${type}/${name}`;
     }
-}
+    return `/${type}/${name}`;
+};
 
-export function hashedPath(type, name){
+export function hashedPath(type, name) {
     return prefix(`assets/${type}`, assetHash[name] || name);
 }
 
-export function staticPath(type, name){
+export function staticPath(type, name) {
     return prefix(`static/${type}`, assetHash[name] || name);
 }

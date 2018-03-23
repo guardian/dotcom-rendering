@@ -15,7 +15,7 @@ const { warn, log } = require('./log');
 // ├── guui/
 // │   └── dist/
 // │       └── guui.zip
-// ├── frontend-static/
+// └── frontend-static/
 //     ├── javascripts/
 //     │   ├── ...js
 //     │   └── manifest.json
@@ -25,7 +25,7 @@ const { warn, log } = require('./log');
 function copyCss(root = 'target') {
     return cpy(
         ['src/static/css/*'],
-        path.resolve(root, 'frontend-static', 'stylesheets'),
+        path.resolve(root, 'frontend-static', 'guui', 'static', 'css'),
     ).then(() => {
         log('Finished copying css');
     });
@@ -33,8 +33,8 @@ function copyCss(root = 'target') {
 
 function copyJavascript(root = 'target') {
     return cpy(
-        ['dist/*.js', 'dist/manifest.json'],
-        path.resolve(root, 'frontend-static', 'javascripts'),
+        ['dist/*.js'],
+        path.resolve(root, 'frontend-static', 'guui', 'assets', 'javascript'),
     ).then(() => {
         log('Finished copying javascript');
     });
@@ -89,15 +89,14 @@ function createBuildConfig(root = 'target') {
 }
 
 (async () => {
-    try {
-        await copyCss()
-            .then(copyJavascript)
-            .then(copyRiffRaff)
-            .then(zipBundle)
-            .then(createBuildConfig)
-            .then(() => log('Finished creating riff-raff bundle'));
-    } catch (e) {
-        warn('Failed to generate riffraff bundle');
-        throw e;
-    }
+    copyCss()
+        .then(copyJavascript)
+        .then(copyRiffRaff)
+        .then(zipBundle)
+        .then(createBuildConfig)
+        .then(() => log('Finished creating riff-raff bundle'))
+        .catch(err => {
+            warn(err);
+            process.exit(1);
+        });
 })();

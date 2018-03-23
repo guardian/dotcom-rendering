@@ -19,7 +19,7 @@ export default ({
 }) => {
     const bundle = hashedPath('javascript', `${data.page}.js`);
     const vendor = hashedPath('javascript', 'vendor.js');
-    const fonts  = staticPath('css', 'fonts.css')
+    const fonts = staticPath('css', 'fonts.css');
     return `
     <!doctype html>
     <html>

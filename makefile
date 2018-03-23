@@ -52,7 +52,7 @@ flow: install
 
 fix: clear install
 	$(call log, "attempting to fix lint errors")
-	@env eslint . --fix --quiet
+	@env eslint . --fix
 
 lint: install
 	$(call log, "checking for lint errors")
