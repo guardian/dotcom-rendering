@@ -27,37 +27,38 @@ const root = 'target';
 //     └── dist
 //         └── guui.zip
 
-const copyCss = () =>
-    cpy(
-        ['src/static/css/*'],
-        path.resolve(root, 'frontend-static', 'guui', 'static', 'css'),
-    ).then(() => {
-        log('Finished copying css');
-    });
 
-const copyJavascript = () =>
-    cpy(
-        ['dist/*.js'],
-        path.resolve(root, 'frontend-static', 'guui', 'assets', 'javascript'),
-    ).then(() => {
-        log('Finished copying javascript');
-    });
+const copyCss = () => cpy(
+    ['src/static/css/*'],
+    path.resolve(root, 'frontend-static', 'guui', 'static', 'css'),
+).then(() => {
+    log('Finished copying css');
+});
 
-const copyRiffRaff = () =>
-    cpy(['riff-raff.yaml'], root).then(() => {
-        log('Finished copying riffraff yaml');
-    });
+const copyJavascript = () => cpy(
+    ['dist/*.js'],
+    path.resolve(root, 'frontend-static', 'guui', 'assets', 'javascript'),
+).then(() => {
+    log('Finished copying javascript');
+});
 
-const zipBundle = () =>
-    execa('zip', ['-r', 'guui.zip', '*', '-x', 'node_modules/**\\*'], {
+const copyRiffRaff = () => cpy(
+    ['riff-raff.yaml'],
+    root,
+).then(() => {
+    log('Finished copying riffraff yaml');
+});
+
+const zipBundle = () => execa(
+    'zip', ['-r', 'guui.zip', '*', '-x', 'node_modules/**\\*'], {
         shell: true,
     })
-        .then(() => {
-            cpy(['guui.zip'], path.resolve(root, 'guui', 'dist'));
-        })
-        .then(() => {
-            log('Finished zipping bundle');
-        });
+    .then(() => {
+        cpy(['guui.zip'], path.resolve(root, 'guui', 'dist'));
+    })
+    .then(() => {
+        log('Finished zipping bundle');
+    });
 
 const createBuildConfig = () => {
     const env = (p, dflt) => process.env[p] || dflt;
@@ -89,7 +90,7 @@ const createBuildConfig = () => {
         .then(createBuildConfig)
         .then(() => log('Finished creating riff-raff bundle'))
         .catch(err => {
-            warn(err);
+            warn(err.stack);
             process.exit(1);
         });
 })();
