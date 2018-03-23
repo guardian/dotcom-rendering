@@ -13,18 +13,16 @@ const { warn, log } = require('./log');
 // ├── build.json
 // ├── riff-raff.yaml
 // ├── frontend-static
-// │   └── guui
-// │       ├── assets
-// │       │   └── javascript
-// │       │       └── ...js
-// │       └── static
-// │           └── css
-// │               └── ...css
+// │   └── guui
+// │       ├── assets
+// │       │   └── javascript
+// │       │       └── ...js
+// │       └── static
+// │           └── css
+// │               └── ...css
 // └── guui
-//     └── dist
-//         └── guui.zip
-
-
+//     └── dist
+//         └── guui.zip
 
 function copyCss(root = 'target') {
     return cpy(
