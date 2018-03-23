@@ -11,6 +11,15 @@ endef
 clean-dist:
 	$(call log, "deleting old artefacts")
 	@rm -rf dist
+	@rm -rf target
+
+riffraff-bundle: clean-dist build
+	$(call log, "copying assets into riffraff bundle")
+	@node ./__tasks__/build-riffraff-bundle.js
+
+riffraff-publish: riffraff-bundle
+	$(call log, "publishing riff-raff bundle")
+	@env ./__tasks__/publish-assets.sh
 
 build: clear install clean-dist
 	$(call log, "building production bundles")
