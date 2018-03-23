@@ -30,6 +30,4 @@ app.use((err, req, res, next) => {
     res.status(500).send(err.stack);
 });
 
-app.listen(9000, () => {
-    console.log('Server listening on port 9000');
-});
+app.listen(9000);
