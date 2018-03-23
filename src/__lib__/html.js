@@ -28,7 +28,7 @@ export default ({
             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
             <link rel="preload" href="${vendor}" as="script">
             <link rel="preload" href="${bundle}" as="script">
-            <link rel="stylesheet" href="/static/css/fonts.css" media="nope!" onload="this.media='all'">
+            <link rel="stylesheet" href="//assets.guim.co.uk/guui/static/css/fonts.css" media="nope!" onload="this.media='all'">
             <style>${resetCSS}${css}</style>
         </head>
         <body>

@@ -9,4 +9,12 @@ try {
     // do nothing
 }
 
-export default name => `/assets/javascript/${assetHash[name] || name}`;
+const prefix = (name) => {
+    if(process.env.NODE_ENV === "production"){
+        return `https:\/\/assets.guim.co.uk/javascript/${name}`;
+    } else {
+        return `/assets/javascript/${name}`;
+    }
+}
+
+export default name => prefix(assetHash[name] || name);
