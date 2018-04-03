@@ -7,6 +7,7 @@ import { extractCritical } from 'emotion-server';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
 
+import Page from 'components/Page';
 import doc from '__lib__/html';
 import parseCapi from '../__tools__/parse-capi';
 
@@ -23,12 +24,14 @@ const renderPage = async (req, res) => {
         };
 
         const module = await import(`./pages/${page}`);
-        const Page = module.default;
+        const PageType = module.default;
 
         const { html, ids: cssIDs, css } = extractCritical(
             renderToString(
                 <Provider store={createStore(data)}>
-                    <Page />
+                    <Page>
+                        <PageType />
+                    </Page>
                 </Provider>,
             ),
         );

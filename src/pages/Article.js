@@ -7,38 +7,7 @@ import { connect } from 'unistore/preact';
 
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
-import {
-    mobileLandscape,
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-} from 'pasteup/breakpoints';
 import { clearFix } from 'pasteup/mixins';
-
-import Header from 'components/Header';
-
-const Article = styled('article')({
-    margin: 'auto',
-    paddingLeft: 4,
-    paddingRight: 4,
-    [mobileLandscape]: {
-        paddingLeft: 24,
-        paddingRight: 24,
-    },
-    [tablet]: {
-        maxWidth: '740px',
-    },
-    [desktop]: {
-        maxWidth: '980px',
-    },
-    [leftCol]: {
-        maxWidth: '1140px',
-    },
-    [wide]: {
-        maxWidth: '1300px',
-    },
-});
 
 const Headline = styled('h1')({
     fontFamily: headline,
@@ -50,7 +19,7 @@ const Headline = styled('h1')({
     paddingTop: 3,
 });
 
-const ArticleBody = styled('section')({
+const Body = styled('section')({
     p: {
         fontFamily: textEgyptian,
         lineHeight: 1.4,
@@ -101,7 +70,7 @@ const Standfirst = styled('p')({
     },
 });
 
-const ArticleLabels = styled('div')({ ...clearFix, paddingTop: 6 });
+const Labels = styled('div')({ ...clearFix, paddingTop: 6 });
 
 const SectionLabel = styled('div')({
     color: palette.red.dark,
@@ -117,32 +86,27 @@ const SeriesLabel = styled(SectionLabel)({
 });
 
 export default connect('content')(({ content }) => (
-    <div>
-        <Header />
-        <Article>
-            <ArticleLabels>
-                <SectionLabel>The NSA files</SectionLabel>
-                <SeriesLabel>
-                    Glenn Greenwald on security and liberty
-                </SeriesLabel>
-            </ArticleLabels>
-            <Headline>{content.headline}</Headline>
-            <Standfirst
-                dangerouslySetInnerHTML={{
-                    __html: content.standfirst,
-                }}
-            />
+    <article>
+        <Labels>
+            <SectionLabel>The NSA files</SectionLabel>
+            <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
+        </Labels>
+        <Headline>{content.headline}</Headline>
+        <Standfirst
+            dangerouslySetInnerHTML={{
+                __html: content.standfirst,
+            }}
+        />
 
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: content.main,
-                }}
-            />
-            <ArticleBody
-                dangerouslySetInnerHTML={{
-                    __html: content.body,
-                }}
-            />
-        </Article>
-    </div>
+        <div
+            dangerouslySetInnerHTML={{
+                __html: content.main,
+            }}
+        />
+        <Body
+            dangerouslySetInnerHTML={{
+                __html: content.body,
+            }}
+        />
+    </article>
 ));

@@ -23,6 +23,7 @@
         "jsdom": "^11.6.2",
         "node-fetch": "^2.1.1",
         "pm2": "^2.10.1",
+        "polished": "^1.9.2",
         "preact": "^8.2.7",
         "preact-emotion": "^9.0.2",
         "preact-render-to-string": "^3.7.0",
