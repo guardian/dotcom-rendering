@@ -2,7 +2,7 @@
 import { Component } from 'preact';
 import styled from 'preact-emotion';
 
-const MostViewed = styled('div')({});
+const MostViewed = styled('div');
 
 MostViewed.displayName = 'MostViewed';
 
