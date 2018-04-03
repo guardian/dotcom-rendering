@@ -9,8 +9,6 @@ import Pillar from './Pillar';
 const Pillars = styled('ul')({
     clear: 'right',
     margin: 0,
-    paddingTop: 10,
-    paddingBottom: 10,
     listStyle: 'none',
     listStyleImage: 'none',
     [mobileLandscape]: {

@@ -1,5 +1,7 @@
 // @flow
+
 import styled from 'preact-emotion';
+import { Component } from 'preact';
 
 import { clearFix } from 'pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
@@ -7,8 +9,11 @@ import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
 import Logo from './Logo';
 import Links from './Links';
 import Pillars from './Pillars';
+import SubNavLink from './SubNavLink';
+import SubNav from './SubNav';
+import VeggieBurger from './VeggieBurger';
 
-const Nav = styled('nav')(
+const NavStyled = styled('nav')(
     {
         [tablet]: {
             maxWidth: '740px',
@@ -27,31 +32,41 @@ const Nav = styled('nav')(
     },
     clearFix,
 );
-Nav.displayName = 'Nav';
 
-export default () => (
-    <Nav>
-        <Logo href="/" />
-        <Links />
-        <Pillars />
-    </Nav>
-);
+NavStyled.displayName = 'Nav';
 
-// const MenuLabel = styled('label')({
-//     [until.desktop]: {
-//         position: 'absolute',
-//         right: '5px',
-//         top: '24px',
-//     },
-//     [from.mobileMedium.until.desktop]: {
-//         bottom: '-6px',
-//         top: 'auto',
-//     },
-//     [from.mobileLandscape.until.desktop]: {
-//         right: '46px',
-//     },
-//     ':focus': {
-//         outline: 0,
-//     },
-// });
-// <MenuLabel htmlFor="main-menu-toggle" />
+export default class Nav extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showSubNav: false,
+        };
+    }
+
+    toggleSubNav() {
+        this.setState({
+            showSubNav: !this.state.showSubNav,
+        });
+    }
+
+    render() {
+        const toggleSubNav = () => {
+            this.toggleSubNav();
+        };
+
+        return (
+            <NavStyled>
+                <Logo href="/" />
+                <Links />
+                <Pillars />
+                <VeggieBurger
+                    showSubNav={this.state.showSubNav}
+                    toggleSubNav={toggleSubNav}
+                />
+                <SubNavLink toggleSubNav={toggleSubNav} />
+                <SubNav showSubNav={this.state.showSubNav} />
+            </NavStyled>
+        );
+    }
+}
