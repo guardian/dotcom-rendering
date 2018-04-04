@@ -1,0 +1,41 @@
+.headline-column--desktop {
+    column-fill: balance;
+}
+
+@media (min-width: 1300px) {
+    .headline-column--desktop {
+        column-width: 600px;
+    }
+}
+
+.headline-column--desktop__item {
+    height: 100%;
+    display: inline-block;
+    width: 100%;
+}
+
+.headline-list__item {
+    padding-top: 0.1875rem;
+    padding-bottom: 0;
+    min-height: 4.5rem;
+}
+
+.headline-list__link .inline-numbers {
+    float: left;
+}
+
+.headline-list__link .headline-list__text {
+    margin-left: 4.375rem;
+}
+
+.fc-item__title--quoted .inline-garnett-quote__svg {
+    height: 1rem;
+    width: 0.54rem;
+    margin-right: 0.5rem;
+    transform: translateY(-0.0625rem);
+}
+
+.fc-item__link .headline-list__body {
+    color: #121212;
+    font-family: "Guardian Text Egyptian Web",Georgia,serif;
+}

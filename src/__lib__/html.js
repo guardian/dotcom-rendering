@@ -20,6 +20,7 @@ export default ({
     const bundle = hashedPath('javascript', `${data.page}.js`);
     const vendor = hashedPath('javascript', 'vendor.js');
     const fonts = staticPath('css', 'fonts.css');
+    const mostViewed = staticPath('css', 'most-viewed.css');
     return `
     <!doctype html>
     <html>
@@ -28,6 +29,7 @@ export default ({
             <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
             <link rel="preload" href="${vendor}" as="script">
             <link rel="preload" href="${bundle}" as="script">
+            <link rel="stylesheet" href="${mostViewed}">
             <link rel="stylesheet" href="${fonts}" media="nope!" onload="this.media='all'">
             <style>${resetCSS}${css}</style>
         </head>
