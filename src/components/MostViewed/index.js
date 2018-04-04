@@ -1,12 +1,7 @@
 // @flow
 import { Component } from 'preact';
-import styled from 'preact-emotion';
 
-const MostViewed = styled('div');
-
-MostViewed.displayName = 'MostViewed';
-
-export default class MostViewedComp extends Component {
+export default class MostViewed extends Component {
     constructor() {
         super();
         this.setState({
@@ -26,10 +21,10 @@ export default class MostViewedComp extends Component {
 
     render() {
         return (
-            <MostViewed>
+            <div>
                 <h1>Most Viewed</h1>
                 <div dangerouslySetInnerHTML={{ __html: this.state.html }} />
-            </MostViewed>
+            </div>
         );
     }
 }
