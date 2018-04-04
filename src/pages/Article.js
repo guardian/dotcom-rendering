@@ -9,6 +9,9 @@ import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { clearFix } from 'pasteup/mixins';
 
+import Header from 'components/Header';
+import Epic from 'components/Epic';
+
 const Headline = styled('h1')({
     fontFamily: headline,
     fontSize: 34,
@@ -87,6 +90,7 @@ const SeriesLabel = styled(SectionLabel)({
 
 export default connect('content')(({ content }) => (
     <article>
+        <Header />
         <Labels>
             <SectionLabel>The NSA files</SectionLabel>
             <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
@@ -108,5 +112,19 @@ export default connect('content')(({ content }) => (
                 __html: content.body,
             }}
         />
+        <Epic>
+            <strong>
+                Unlike many news organisations, we haven’t put up a paywall – we
+                want to keep our journalism as open as we can.
+            </strong>{' '}
+            The Guardian’s independent, investigative journalism takes a lot of
+            time, money and hard work to produce. But the revenue we get from
+            advertising is falling, so we increasingly need our readers to fund
+            us. If everyone who reads our reporting, who likes it, helps fund
+            it, our future would be much more secure.{' '}
+            <strong>
+                Support The Guardian for just 17p a day or £5 a month.
+            </strong>
+        </Epic>
     </article>
 ));
