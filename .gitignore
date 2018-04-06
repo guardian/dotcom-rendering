@@ -13,6 +13,7 @@ node_modules
 .yarn-integrity
 
 # IDE files
+.idea
 .vscode
 
 # System files
