@@ -36,10 +36,16 @@ export default ({
             <script>
             window.gu = ${JSON.stringify({
                 app: {
-                    data,
+                    data: {
+                        ...data,
+                        content: {
+                            ...data.content,
+                            headline: `document.querySelector('[data-content-headline]').innerHTML`
+                        }
+                    },
                     cssIDs,
                 },
-            })};
+            }).replace(/"(document.*?innerHTML)"/g, '$1')};
             </script>
             <script src="${vendor}"></script>
             <script src="${bundle}"></script>
