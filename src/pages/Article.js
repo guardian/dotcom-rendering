@@ -76,7 +76,7 @@ const StandfirstStyled = styled('p')({
         lineHeight: 0.8,
     },
 });
-const Standfirst = serverSideOnlyComponent(StandfirstStyled, 'standfirst'); 
+const Standfirst = serverSideOnlyComponent(StandfirstStyled, 'standfirst');
 
 const Labels = styled('div')({ ...clearFix, paddingTop: 6 });
 

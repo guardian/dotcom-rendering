@@ -1,38 +1,60 @@
+// @flow
 import { Component } from 'preact';
 import { connect } from 'unistore/preact';
 
 const contentReferences = [];
 
-const serverSideOnlyComponent = (MyComponent, contentReference) => class extends Component {
-    constructor(props) {
-        super(props);
+const serverSideOnlyComponent = (MyComponent, contentReference) =>
+    class extends Component {
+        constructor(props) {
+            super(props);
 
-        this.props[`data-content-${contentReference}`] = true;
+            this.selector = `data-content-${contentReference}`;
+            this.props[this.selector] = true;
 
-        if (!contentReferences.includes(contentReference)) {
-            contentReferences.push(contentReference);
+            if (!contentReferences.includes(contentReference)) {
+                contentReferences.push(contentReference);
+            }
         }
-    }
 
-    shouldComponentUpdate (nextProps, nextState) {
-        return false;
-    }
+        shouldComponentUpdate() {
+            return false;
+        }
 
-    render () {
-        const Component = connect('content')(({ content }) => (
-            <MyComponent 
-                {...this.props}
-                dangerouslySetInnerHTML={{
-                    __html: content[contentReference],
-                }}
-            />
-        ));
+        getExistingHtml() {
+            if (typeof document === 'undefined') {
+                return;
+            }
 
-        return <Component />;
-    }
-};
+            const node = document.querySelector(`[${this.selector}]`);
 
-export {
-    contentReferences,
-    serverSideOnlyComponent
-}
+            return node && node.innerHTML;
+        }
+
+        getComponent(html) {
+            return (
+                <MyComponent
+                    {...this.props}
+                    dangerouslySetInnerHTML={{
+                        __html: html,
+                    }}
+                />
+            );
+        }
+
+        render() {
+            const html = this.getExistingHtml();
+
+            if (html) {
+                return this.getComponent(html);
+            }
+
+            const ContentComponent = connect('content')(({ content }) =>
+                this.getComponent(content[contentReference]),
+            );
+
+            return <ContentComponent />;
+        }
+    };
+
+export { contentReferences, serverSideOnlyComponent };

@@ -1,8 +1,8 @@
 // @flow
 
+import { contentReferences } from './serverSideOnlyComponent';
 import resetCSS from './reset-css';
 import { hashedPath, staticPath } from './asset-path';
-import { contentReferences } from '__lib__/serverSideOnlyComponent';
 
 export default ({
     title = 'The Guardian',
@@ -35,19 +35,22 @@ export default ({
         <body>
             <div id='app'>${html}</div>
             <script>
-            console.log('***', ${JSON.stringify(contentReferences)});
-
             window.gu = ${JSON.stringify({
                 app: {
                     data: {
                         ...data,
                         content: {
                             ...data.content,
-                            ...contentReferences.reduce((acc, contentReference) => {
-                                acc[contentReference] = `document.querySelector('[data-content-${contentReference}]').innerHTML`;
-                                return acc;
-                            }, {})
-                        }
+                            ...contentReferences.reduce(
+                                (acc, contentReference) => {
+                                    acc[
+                                        contentReference
+                                    ] = `document.querySelector('[data-content-${contentReference}]').innerHTML`;
+                                    return acc;
+                                },
+                                {},
+                            ),
+                        },
                     },
                     cssIDs,
                 },
