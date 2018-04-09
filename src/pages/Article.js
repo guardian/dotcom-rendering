@@ -8,12 +8,13 @@ import { connect } from 'unistore/preact';
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { clearFix } from 'pasteup/mixins';
+import { serverSideOnlyComponent } from '__lib__/serverSideOnlyComponent';
 
 import MostViewed from 'components/MostViewed';
 import Header from 'components/Header';
 import Epic from 'components/Epic';
 
-const Headline = styled('h1')({
+const HeadlineStyled = styled('h1')({
     fontFamily: headline,
     fontSize: 34,
     lineHeight: 1.1,
@@ -22,9 +23,9 @@ const Headline = styled('h1')({
     paddingBottom: 36,
     paddingTop: 3,
 });
-Headline.prototype.shouldComponentUpdate = () => false;
+const Headline = serverSideOnlyComponent(HeadlineStyled, 'headline');
 
-const Body = styled('section')({
+const BodyStyled = styled('section')({
     p: {
         fontFamily: textEgyptian,
         lineHeight: 1.4,
@@ -44,9 +45,9 @@ const Body = styled('section')({
         maxWidth: '100%',
     },
 });
-Body.prototype.shouldComponentUpdate = () => false;
+const Body = serverSideOnlyComponent(BodyStyled, 'body');
 
-const Standfirst = styled('p')({
+const StandfirstStyled = styled('p')({
     color: palette.neutral[1],
     fontFamily: textEgyptian,
     fontSize: 20,
@@ -75,7 +76,7 @@ const Standfirst = styled('p')({
         lineHeight: 0.8,
     },
 });
-Standfirst.prototype.shouldComponentUpdate = () => false;
+const Standfirst = serverSideOnlyComponent(StandfirstStyled, 'standfirst'); 
 
 const Labels = styled('div')({ ...clearFix, paddingTop: 6 });
 
@@ -99,25 +100,15 @@ export default connect('content')(({ content }) => (
             <SectionLabel>The NSA files</SectionLabel>
             <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
         </Labels>
-        <Headline data-content-headline>{content.headline}</Headline>
-        <Standfirst
-            data-content-standfirst
-            dangerouslySetInnerHTML={{
-                __html: content.standfirst,
-            }}
-        />
+        <Headline />
+        <Standfirst />
         <div
             data-content-main
             dangerouslySetInnerHTML={{
                 __html: content.main,
             }}
         />
-        <Body
-            data-content-body
-            dangerouslySetInnerHTML={{
-                __html: content.body,
-            }}
-        />
+        <Body />
         <MostViewed />
         <Epic>
             <strong>
