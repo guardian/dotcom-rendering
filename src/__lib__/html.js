@@ -38,10 +38,13 @@ export default ({
                 app: {
                     data: {
                         ...data,
-                        content: {
-                            ...data.content,
-                            headline: `document.querySelector('[data-content-headline]').innerHTML`
-                        }
+                        content: Object.entries(data.content).reduce(
+                            (content, [key]) => ({
+                                [key]: `document.querySelector('[data-content-${key}]').innerHTML`,
+                                ...content,
+                            }),
+                            {},
+                        ),
                     },
                     cssIDs,
                 },

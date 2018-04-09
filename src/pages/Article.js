@@ -4,7 +4,6 @@
 
 import styled from 'preact-emotion';
 import { connect } from 'unistore/preact';
-import { Component } from 'preact';
 
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
@@ -14,7 +13,7 @@ import MostViewed from 'components/MostViewed';
 import Header from 'components/Header';
 import Epic from 'components/Epic';
 
-const HeadlineStyled = styled('h1')({
+const Headline = styled('h1')({
     fontFamily: headline,
     fontSize: 34,
     lineHeight: 1.1,
@@ -23,22 +22,7 @@ const HeadlineStyled = styled('h1')({
     paddingBottom: 36,
     paddingTop: 3,
 });
-
-class Headline extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <HeadlineStyled data-content-headline>{ this.props.children }</HeadlineStyled>
-        );
-    }
-}
+Headline.prototype.shouldComponentUpdate = () => false;
 
 const Body = styled('section')({
     p: {
@@ -60,6 +44,7 @@ const Body = styled('section')({
         maxWidth: '100%',
     },
 });
+Body.prototype.shouldComponentUpdate = () => false;
 
 const Standfirst = styled('p')({
     color: palette.neutral[1],
@@ -90,6 +75,7 @@ const Standfirst = styled('p')({
         lineHeight: 0.8,
     },
 });
+Standfirst.prototype.shouldComponentUpdate = () => false;
 
 const Labels = styled('div')({ ...clearFix, paddingTop: 6 });
 
@@ -113,19 +99,21 @@ export default connect('content')(({ content }) => (
             <SectionLabel>The NSA files</SectionLabel>
             <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
         </Labels>
-        <Headline>{content.headline}</Headline>
+        <Headline data-content-headline>{content.headline}</Headline>
         <Standfirst
+            data-content-standfirst
             dangerouslySetInnerHTML={{
                 __html: content.standfirst,
             }}
         />
-
         <div
+            data-content-main
             dangerouslySetInnerHTML={{
                 __html: content.main,
             }}
         />
         <Body
+            data-content-body
             dangerouslySetInnerHTML={{
                 __html: content.body,
             }}
