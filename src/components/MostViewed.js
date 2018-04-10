@@ -4,6 +4,7 @@ import styled from 'preact-emotion';
 import { headline, textEgyptian } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { desktop } from 'pasteup/breakpoints';
+import Numbers from 'pasteup/numberSVGs';
 
 const Heading = styled('h2')({
     fontFamily: headline,
@@ -54,16 +55,16 @@ export default class MostViewed extends Component {
     constructor() {
         super();
         this.setState({
-            html: 'Placeholder text',
+            json: { trails: [] },
         });
     }
 
     componentDidMount() {
-        fetch('https://api.nextgen.guardianapps.co.uk/most-read-geo.json')
+        fetch('https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui')
             .then(resp => resp.json())
-            .then(({ html }) => {
+            .then(json => {
                 this.setState({
-                    html,
+                    json,
                 });
             });
     }
@@ -72,7 +73,45 @@ export default class MostViewed extends Component {
         return (
             <div>
                 <Heading>Most Viewed</Heading>
-                <Main dangerouslySetInnerHTML={{ __html: this.state.html }} />
+                <Main>
+                    <ul>
+                        {this.state.json.trails.map((trail, i) => (
+                            <li className="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular fc-item--pillar-news">
+                                <div
+                                    className="headline-list__link"
+                                    data-link-name="2 | text"
+                                >
+                                    <span
+                                        className={`most-popular__number-${i}`}
+                                    >
+                                        <span
+                                            className={`inline-number-${i +
+                                                1} inline-numbers`}
+                                        >
+                                            <Numbers index={i + 1} />
+                                        </span>
+                                    </span>
+
+                                    <div className="headline-list__text">
+                                        <h2 className="fc-item__title">
+                                            <a
+                                                href={trail.url}
+                                                className="fc-item__link"
+                                                data-link-name="article"
+                                            >
+                                                <span className="headline-list__body fc-item__headline">
+                                                    <span className="js-headline-text">
+                                                        {trail.linkText}
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </Main>
             </div>
         );
     }
