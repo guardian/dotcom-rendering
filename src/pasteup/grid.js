@@ -1,6 +1,8 @@
 import {Component} from 'preact';
 import styled from 'preact-emotion';
 import {
+    tablet as tabletMq,
+    desktop as desktopMq,
     leftCol as leftColMq,
     wide as wideMq,
 } from './breakpoints';
@@ -28,39 +30,39 @@ const columns = {
     },
 };
 
+const breakpointMqs = {
+    tablet: tabletMq,
+    desktop: desktopMq,
+    leftCol: leftColMq,
+    wide: wideMq,
+};
+
+const gridStyles = (breakpoint, columnCount) => ({
+    [breakpointMqs[breakpoint]]: {
+        float: 'left',
+        width: (columnCount * columns[breakpoint].width) +
+            ((columnCount - 1) * columns[breakpoint].gutter),
+        paddingRight: columns[breakpoint].gutter,
+        ':last-of-type': {
+            paddingRight: 0,
+        }
+    },
+});
+
 const GridStyled = styled('div')();
 const RowStyled = styled('div')();
-const ColStyled = styled('div')(({ wide, leftCol }) => {
-    console.log(wide)
-    const leftColStyles = leftCol ? {
-        [leftColMq]: {
-            float: 'left',
-            width: (leftCol * columns.leftCol.width) +
-            ((leftCol - 1) * columns.leftCol.gutter),
-            paddingRight: columns.leftCol.gutter,
-            ':last-of-type': {
-                paddingRight: 0,
-            }
-        },
-    } : {};
-    const wideStyles = wide ? {
-        [wideMq]: {
-            float: 'left',
-            width: (wide * columns.wide.width) +
-                ((wide - 1) * columns.wide.gutter),
-            paddingRight: columns.wide.gutter,
-            ':last-of-type': {
-                paddingRight: 0,
-            }
-        },
-    } : {};
+const ColStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
+    const tabletStyles = tablet ? gridStyles('tablet', tablet) : {};
+    const desktopStyles = desktop ? gridStyles('desktop', desktop) : {};
+    const leftColStyles = leftCol ? gridStyles('leftCol', leftCol) : {};
+    const wideStyles = wide ? gridStyles('wide', wide) : {};
 
-    const styles = {
+    return {
+        ...tabletStyles,
+        ...desktopStyles,
         ...leftColStyles,
         ...wideStyles,
     };
-
-    return styles;
 });
 
 
@@ -100,8 +102,10 @@ export class Col extends Component {
     render() {
         return (
             <ColStyled
-                wide={this.props.wide}
+                tablet={this.props.tablet}
+                desktop={this.props.desktop}
                 leftCol={this.props.leftCol}
+                wide={this.props.wide}
             >
                 {this.props.children}
             </ColStyled>
