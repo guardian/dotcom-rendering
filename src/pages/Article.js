@@ -9,6 +9,7 @@ import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { clearFix } from 'pasteup/mixins';
 
+import MostViewed from 'components/MostViewed';
 import Header from 'components/Header';
 import Epic from 'components/Epic';
 
@@ -112,6 +113,7 @@ export default connect('content')(({ content }) => (
                 __html: content.body,
             }}
         />
+        <MostViewed />
         <Epic>
             <strong>
                 Unlike many news organisations, we haven’t put up a paywall – we
