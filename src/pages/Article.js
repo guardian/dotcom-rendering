@@ -98,7 +98,9 @@ export default connect('content')(({ content }) => (
                 <Col wide={4} leftCol={4}>
                     <Labels>
                         <SectionLabel>The NSA files</SectionLabel>
-                        <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
+                        <SeriesLabel>
+                            Glenn Greenwald on security and liberty
+                        </SeriesLabel>
                     </Labels>
                 </Col>
                 <Col wide={12} leftCol={10}>

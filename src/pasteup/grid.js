@@ -1,4 +1,4 @@
-import {Component} from 'preact';
+// @flow
 import styled from 'preact-emotion';
 import {
     tablet as tabletMq,
@@ -40,12 +40,13 @@ const breakpointMqs = {
 const gridStyles = (breakpoint, columnCount) => ({
     [breakpointMqs[breakpoint]]: {
         float: 'left',
-        width: (columnCount * columns[breakpoint].width) +
-            ((columnCount - 1) * columns[breakpoint].gutter),
+        width:
+            columnCount * columns[breakpoint].width +
+            (columnCount - 1) * columns[breakpoint].gutter,
         paddingRight: columns[breakpoint].gutter,
         ':last-of-type': {
             paddingRight: 0,
-        }
+        },
     },
 });
 
@@ -65,51 +66,10 @@ const ColStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
     };
 });
 
-
-export class Grid extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <GridStyled>
-                {this.props.children}
-            </GridStyled>
-        );
-    }
-}
-
-export class Row extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <RowStyled>
-                {this.props.children}
-            </RowStyled>
-        );
-    }
-}
-
-export class Col extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <ColStyled
-                tablet={this.props.tablet}
-                desktop={this.props.desktop}
-                leftCol={this.props.leftCol}
-                wide={this.props.wide}
-            >
-                {this.props.children}
-            </ColStyled>
-        );
-    }
-
-}
+export const Grid = ({ children }) => <GridStyled>{children}</GridStyled>;
+export const Row = ({ children }) => <RowStyled>{children}</RowStyled>;
+export const Col = ({ tablet, desktop, leftCol, wide, children }) => (
+    <ColStyled tablet={tablet} desktop={desktop} leftCol={leftCol} wide={wide}>
+        {children}
+    </ColStyled>
+);
