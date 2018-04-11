@@ -4,7 +4,7 @@ import { connect } from 'unistore/preact';
 
 const contentReferences = [];
 
-const ServerSideOnlyComponent = (MyComponent, contentReference) =>
+const serverSideOnlyComponent = (MyComponent, contentReference) =>
     class extends Component {
         constructor(props) {
             super(props);
@@ -57,4 +57,4 @@ const ServerSideOnlyComponent = (MyComponent, contentReference) =>
         }
     };
 
-export { contentReferences, ServerSideOnlyComponent };
+export { contentReferences, serverSideOnlyComponent };
