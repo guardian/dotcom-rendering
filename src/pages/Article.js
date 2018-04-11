@@ -3,6 +3,7 @@
 /* eslint-disable react/no-danger */
 
 import styled from 'preact-emotion';
+import { connect } from 'unistore/preact';
 
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
@@ -92,16 +93,30 @@ const SeriesLabel = styled(SectionLabel)({
     fontWeight: 500,
 });
 
-export default () => (
+export default connect('content')(({ content }) => (
     <article>
         <Header />
         <Labels>
             <SectionLabel>The NSA files</SectionLabel>
             <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
         </Labels>
-        <Headline />
-        <Standfirst />
-        <Body />
+        <Headline>{content.headline}</Headline>
+        <Standfirst
+            dangerouslySetInnerHTML={{
+                __html: content.standfirst,
+            }}
+        />
+
+        <div
+            dangerouslySetInnerHTML={{
+                __html: content.main,
+            }}
+        />
+        <Body
+            dangerouslySetInnerHTML={{
+                __html: content.body,
+            }}
+        />
         <MostViewed />
         <Epic>
             <strong>
@@ -118,4 +133,4 @@ export default () => (
             </strong>
         </Epic>
     </article>
-);
+));

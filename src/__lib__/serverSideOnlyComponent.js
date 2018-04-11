@@ -1,6 +1,5 @@
 // @flow
 import { Component } from 'preact';
-import { connect } from 'unistore/preact';
 
 const contentReferences = [];
 
@@ -23,19 +22,6 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
         }
 
         render() {
-            if (contentReference) {
-                const ContentComponent = connect('content')(({ content }) => (
-                    <MyComponent
-                        {...this.props}
-                        dangerouslySetInnerHTML={{
-                            __html: content[contentReference],
-                        }}
-                    />
-                ));
-
-                return <ContentComponent />;
-            }
-
             return <MyComponent {...this.props} />;
         }
     };
