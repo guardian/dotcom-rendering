@@ -18,7 +18,7 @@ const header = {
     pillars: [
         {
             label: 'News',
-            href: 'http://m.thegulocal.com/uk',
+            href: '/uk',
             pillar: 'news',
             links: [
                 {
@@ -29,7 +29,7 @@ const header = {
         },
         {
             label: 'Opinion',
-            href: 'http://m.thegulocal.com/uk/commentisfree',
+            href: '/uk/commentisfree',
             pillar: 'opinion',
             links: [
                 {
@@ -40,7 +40,7 @@ const header = {
         },
         {
             label: 'Sport',
-            href: 'http://m.thegulocal.com/uk/sport',
+            href: '/uk/sport',
             pillar: 'sport',
             links: [
                 {
@@ -51,7 +51,7 @@ const header = {
         },
         {
             label: 'Culture',
-            href: 'http://m.thegulocal.com/uk/culture',
+            href: '/uk/culture',
             pillar: 'culture',
             links: [
                 {
@@ -62,7 +62,7 @@ const header = {
         },
         {
             label: 'Lifestyle',
-            href: 'http://m.thegulocal.com/uk/lifeandstyle',
+            href: '/uk/lifeandstyle',
             pillar: 'lifestyle',
             links: [
                 {
