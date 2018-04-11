@@ -9,10 +9,12 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
         constructor(props) {
             super(props);
 
-            this.props[`data-content-${contentReference}`] = true;
+            if (contentReference) {
+                this.props[`data-content-${contentReference}`] = true;
 
-            if (!contentReferences.includes(contentReference)) {
-                contentReferences.push(contentReference);
+                if (!contentReferences.includes(contentReference)) {
+                    contentReferences.push(contentReference);
+                }
             }
         }
 
@@ -21,16 +23,20 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
         }
 
         render() {
-            const ContentComponent = connect('content')(({ content }) => (
-                <MyComponent
-                    {...this.props}
-                    dangerouslySetInnerHTML={{
-                        __html: content[contentReference],
-                    }}
-                />
-            ));
+            if (contentReference) {
+                const ContentComponent = connect('content')(({ content }) => (
+                    <MyComponent
+                        {...this.props}
+                        dangerouslySetInnerHTML={{
+                            __html: content[contentReference],
+                        }}
+                    />
+                ));
 
-            return <ContentComponent />;
+                return <ContentComponent />;
+            }
+
+            return <MyComponent {...this.props} />;
         }
     };
 
