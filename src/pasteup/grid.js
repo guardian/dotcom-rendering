@@ -40,14 +40,13 @@ const gridStyles = (breakpoint, columnCount) => ({
         width:
             columnCount * columns[breakpoint].width +
             (columnCount - 1) * gutter,
-        paddingRight: gutter,
-        ':last-of-type': {
-            paddingRight: 0,
-        },
+        paddingLeft: gutter,
     },
 });
 
-const RowStyled = styled('div')();
+const RowStyled = styled('div')({
+    marginLeft: -gutter,
+});
 const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
     const tabletStyles = tablet ? gridStyles('tablet', tablet) : {};
     const desktopStyles = desktop ? gridStyles('desktop', desktop) : {};
