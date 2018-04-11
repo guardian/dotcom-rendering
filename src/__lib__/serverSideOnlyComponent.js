@@ -9,8 +9,7 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
         constructor(props) {
             super(props);
 
-            this.identifier = `data-content-${contentReference}`;
-            this.props[this.identifier] = true;
+            this.props[`data-content-${contentReference}`] = true;
 
             if (!contentReferences.includes(contentReference)) {
                 contentReferences.push(contentReference);
@@ -21,37 +20,15 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
             return false;
         }
 
-        getExistingHtml() {
-            if (typeof document === 'undefined') {
-                return;
-            }
-
-            const node = document.querySelector(`[${this.identifier}]`);
-
-            return node && node.innerHTML;
-        }
-
-        getComponent(html) {
-            return (
+        render() {
+            const ContentComponent = connect('content')(({ content }) => (
                 <MyComponent
                     {...this.props}
                     dangerouslySetInnerHTML={{
-                        __html: html,
+                        __html: content[contentReference],
                     }}
                 />
-            );
-        }
-
-        render() {
-            const html = this.getExistingHtml();
-
-            if (html) {
-                return this.getComponent(html);
-            }
-
-            const ContentComponent = connect('content')(({ content }) =>
-                this.getComponent(content[contentReference]),
-            );
+            ));
 
             return <ContentComponent />;
         }

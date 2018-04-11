@@ -3,7 +3,6 @@
 /* eslint-disable react/no-danger */
 
 import styled from 'preact-emotion';
-import { connect } from 'unistore/preact';
 
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
@@ -93,7 +92,7 @@ const SeriesLabel = styled(SectionLabel)({
     fontWeight: 500,
 });
 
-export default connect('content')(({ content }) => (
+export default () => (
     <article>
         <Header />
         <Labels>
@@ -119,4 +118,4 @@ export default connect('content')(({ content }) => (
             </strong>
         </Epic>
     </article>
-));
+);
