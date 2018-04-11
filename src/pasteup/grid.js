@@ -6,6 +6,8 @@ import {
     leftCol as leftColMq,
     wide as wideMq,
 } from './breakpoints';
+import { clearFix } from './mixins';
+
 
 const gutter = 20;
 const columns = {
@@ -45,6 +47,7 @@ const gridStyles = (breakpoint, columnCount) => ({
 });
 
 const RowStyled = styled('div')({
+    ...clearFix,
     marginLeft: -gutter,
 });
 const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
