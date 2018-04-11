@@ -7,26 +7,23 @@ import {
     wide as wideMq,
 } from './breakpoints';
 
+const gutter = 20;
 const columns = {
     tablet: {
         max: 12,
         width: 40,
-        gutter: 20,
     },
     desktop: {
         max: 12,
         width: 60,
-        gutter: 20,
     },
     leftCol: {
         max: 14,
         width: 60,
-        gutter: 20,
     },
     wide: {
         max: 16,
         width: 60,
-        gutter: 20,
     },
 };
 
@@ -42,8 +39,8 @@ const gridStyles = (breakpoint, columnCount) => ({
         float: 'left',
         width:
             columnCount * columns[breakpoint].width +
-            (columnCount - 1) * columns[breakpoint].gutter,
-        paddingRight: columns[breakpoint].gutter,
+            (columnCount - 1) * gutter,
+        paddingRight: gutter,
         ':last-of-type': {
             paddingRight: 0,
         },
