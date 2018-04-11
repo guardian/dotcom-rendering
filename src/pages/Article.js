@@ -8,7 +8,7 @@ import { connect } from 'unistore/preact';
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { clearFix } from 'pasteup/mixins';
-import { Row, Col } from 'pasteup/grid';
+import { Row, Cols } from 'pasteup/grid';
 
 import MostViewed from 'components/MostViewed';
 import Header from 'components/Header';
@@ -94,22 +94,22 @@ export default connect('content')(({ content }) => (
     <article>
         <Header />
         <Row>
-            <Col wide={4} leftCol={4}>
+            <Cols wide={4} leftCol={4}>
                 <Labels>
                     <SectionLabel>The NSA files</SectionLabel>
                     <SeriesLabel>
                         Glenn Greenwald on security and liberty
                     </SeriesLabel>
                 </Labels>
-            </Col>
-            <Col wide={12} leftCol={10}>
+            </Cols>
+            <Cols wide={12} leftCol={10}>
                 <Headline>{content.headline}</Headline>
                 <Standfirst
                     dangerouslySetInnerHTML={{
                         __html: content.standfirst,
                     }}
                 />
-            </Col>
+            </Cols>
         </Row>
         <div
             dangerouslySetInnerHTML={{

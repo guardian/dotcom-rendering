@@ -51,7 +51,7 @@ const gridStyles = (breakpoint, columnCount) => ({
 });
 
 const RowStyled = styled('div')();
-const ColStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
+const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
     const tabletStyles = tablet ? gridStyles('tablet', tablet) : {};
     const desktopStyles = desktop ? gridStyles('desktop', desktop) : {};
     const leftColStyles = leftCol ? gridStyles('leftCol', leftCol) : {};
@@ -66,8 +66,8 @@ const ColStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
 });
 
 export const Row = ({ children }) => <RowStyled>{children}</RowStyled>;
-export const Col = ({ tablet, desktop, leftCol, wide, children }) => (
-    <ColStyled tablet={tablet} desktop={desktop} leftCol={leftCol} wide={wide}>
+export const Cols = ({ tablet, desktop, leftCol, wide, children }) => (
+    <ColsStyled tablet={tablet} desktop={desktop} leftCol={leftCol} wide={wide}>
         {children}
-    </ColStyled>
+    </ColsStyled>
 );
