@@ -8,7 +8,6 @@ import {
 } from './breakpoints';
 import { clearFix } from './mixins';
 
-
 const gutter = 20;
 const columns = {
     tablet: {
@@ -36,12 +35,13 @@ const breakpointMqs = {
     wide: wideMq,
 };
 
-const gridStyles = (breakpoint, columnCount) => ({
+const width = (breakpoint, colspan) =>
+    colspan * columns[breakpoint].width + colspan * gutter;
+
+const gridStyles = (breakpoint, [colspan]) => ({
     [breakpointMqs[breakpoint]]: {
         float: 'left',
-        width:
-            columnCount * columns[breakpoint].width +
-            (columnCount - 1) * gutter,
+        width: width(breakpoint, colspan),
         paddingLeft: gutter,
     },
 });
@@ -51,10 +51,10 @@ const RowStyled = styled('div')({
     marginLeft: -gutter,
 });
 const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
-    const tabletStyles = tablet ? gridStyles('tablet', tablet) : {};
-    const desktopStyles = desktop ? gridStyles('desktop', desktop) : {};
-    const leftColStyles = leftCol ? gridStyles('leftCol', leftCol) : {};
-    const wideStyles = wide ? gridStyles('wide', wide) : {};
+    const tabletStyles = gridStyles('tablet', tablet);
+    const desktopStyles = gridStyles('desktop', desktop);
+    const leftColStyles = gridStyles('leftCol', leftCol);
+    const wideStyles = gridStyles('wide', wide);
 
     return {
         ...tabletStyles,
@@ -64,9 +64,32 @@ const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
     };
 });
 
+const normaliseProps = prop => {
+    if (Array.isArray(prop)) {
+        if (prop.length === 1) {
+            return [...prop, {}];
+        }
+
+        return prop;
+    } else if (typeof prop === 'number') {
+        return [prop, {}];
+    }
+};
+
 export const Row = ({ children }) => <RowStyled>{children}</RowStyled>;
-export const Cols = ({ tablet, desktop, leftCol, wide, children }) => (
-    <ColsStyled tablet={tablet} desktop={desktop} leftCol={leftCol} wide={wide}>
+export const Cols = ({
+    tablet = [columns.tablet.max, {}],
+    desktop = [columns.desktop.max, {}],
+    leftCol = [columns.leftCol.max, {}],
+    wide = [columns.wide.max, {}],
+    children,
+}) => (
+    <ColsStyled
+        tablet={normaliseProps(tablet)}
+        desktop={normaliseProps(desktop)}
+        leftCol={normaliseProps(leftCol)}
+        wide={normaliseProps(wide)}
+    >
         {children}
     </ColsStyled>
 );
