@@ -106,7 +106,6 @@ export default connect('content')(({ content }) => (
                 __html: content.standfirst,
             }}
         />
-
         <div
             dangerouslySetInnerHTML={{
                 __html: content.main,
