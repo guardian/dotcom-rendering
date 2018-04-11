@@ -8,7 +8,7 @@ import { connect } from 'unistore/preact';
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { clearFix } from 'pasteup/mixins';
-import { serverSideOnlyComponent } from '__lib__/serverSideOnlyComponent';
+import { ServerSideOnlyComponent } from '__lib__/serverSideOnlyComponent';
 
 import MostViewed from 'components/MostViewed';
 import Header from 'components/Header';
@@ -23,7 +23,7 @@ const HeadlineStyled = styled('h1')({
     paddingBottom: 36,
     paddingTop: 3,
 });
-const Headline = serverSideOnlyComponent(HeadlineStyled, 'headline');
+const Headline = ServerSideOnlyComponent(HeadlineStyled, 'headline');
 
 const BodyStyled = styled('section')({
     p: {
@@ -45,7 +45,7 @@ const BodyStyled = styled('section')({
         maxWidth: '100%',
     },
 });
-const Body = serverSideOnlyComponent(BodyStyled, 'body');
+const Body = ServerSideOnlyComponent(BodyStyled, 'body');
 
 const StandfirstStyled = styled('p')({
     color: palette.neutral[1],
@@ -76,7 +76,7 @@ const StandfirstStyled = styled('p')({
         lineHeight: 0.8,
     },
 });
-const Standfirst = serverSideOnlyComponent(StandfirstStyled, 'standfirst');
+const Standfirst = ServerSideOnlyComponent(StandfirstStyled, 'standfirst');
 
 const Labels = styled('div')({ ...clearFix, paddingTop: 6 });
 
@@ -102,12 +102,6 @@ export default connect('content')(({ content }) => (
         </Labels>
         <Headline />
         <Standfirst />
-        <div
-            data-content-main
-            dangerouslySetInnerHTML={{
-                __html: content.main,
-            }}
-        />
         <Body />
         <MostViewed />
         <Epic>

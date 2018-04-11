@@ -4,13 +4,13 @@ import { connect } from 'unistore/preact';
 
 const contentReferences = [];
 
-const serverSideOnlyComponent = (MyComponent, contentReference) =>
+const ServerSideOnlyComponent = (MyComponent, contentReference) =>
     class extends Component {
         constructor(props) {
             super(props);
 
-            this.selector = `data-content-${contentReference}`;
-            this.props[this.selector] = true;
+            this.identifier = `data-content-${contentReference}`;
+            this.props[this.identifier] = true;
 
             if (!contentReferences.includes(contentReference)) {
                 contentReferences.push(contentReference);
@@ -26,7 +26,7 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
                 return;
             }
 
-            const node = document.querySelector(`[${this.selector}]`);
+            const node = document.querySelector(`[${this.identifier}]`);
 
             return node && node.innerHTML;
         }
@@ -57,4 +57,4 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
         }
     };
 
-export { contentReferences, serverSideOnlyComponent };
+export { contentReferences, ServerSideOnlyComponent };
