@@ -33,11 +33,11 @@ const Number = styled('span')({
     float: 'left',
 });
 
-const Headline = styled('div')({
+const Headline = styled('h2')({
     marginLeft: '4.375rem',
 });
 
-const HeadlineBody = styled('span')({
+const HeadlineBody = styled('a')({
     color: palette.neutral[2],
     fontFamily: textEgyptian,
 });
@@ -51,9 +51,9 @@ export default class MostViewed extends Component {
     componentDidMount() {
         fetch('https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui')
             .then(resp => resp.json())
-            .then(json => {
+            .then(({ trails }) => {
                 this.setState({
-                    trails: json.trails,
+                    trails,
                 });
             });
     }
@@ -70,13 +70,9 @@ export default class MostViewed extends Component {
                             </Number>
 
                             <Headline>
-                                <h2>
-                                    <a href={trail.url}>
-                                        <HeadlineBody>
-                                            {trail.linkText}
-                                        </HeadlineBody>
-                                    </a>
-                                </h2>
+                                <HeadlineBody href={trail.url}>
+                                    {trail.linkText}
+                                </HeadlineBody>
                             </Headline>
                         </ListItem>
                     ))}
