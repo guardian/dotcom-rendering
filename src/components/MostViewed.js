@@ -4,7 +4,7 @@ import styled from 'preact-emotion';
 import { headline, textEgyptian } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { desktop } from 'pasteup/breakpoints';
-import Numbers from 'pasteup/numberSVGs';
+import Numbers from 'pasteup/big-numbers/index';
 
 const Heading = styled('h2')({
     fontFamily: headline,
@@ -62,29 +62,25 @@ export default class MostViewed extends Component {
         return (
             <div>
                 <Heading>Most Viewed</Heading>
-                <div>
-                    <ul>
-                        {this.state.trails.map((trail, i) => (
-                            <ListItem>
-                                <div>
-                                    <Number>
-                                        <Numbers index={i + 1} />
-                                    </Number>
+                <ul>
+                    {this.state.trails.map((trail, i) => (
+                        <ListItem>
+                            <Number>
+                                <Numbers index={i + 1} />
+                            </Number>
 
-                                    <Headline>
-                                        <h2>
-                                            <a href={trail.url}>
-                                                <HeadlineBody>
-                                                    {trail.linkText}
-                                                </HeadlineBody>
-                                            </a>
-                                        </h2>
-                                    </Headline>
-                                </div>
-                            </ListItem>
-                        ))}
-                    </ul>
-                </div>
+                            <Headline>
+                                <h2>
+                                    <a href={trail.url}>
+                                        <HeadlineBody>
+                                            {trail.linkText}
+                                        </HeadlineBody>
+                                    </a>
+                                </h2>
+                            </Headline>
+                        </ListItem>
+                    ))}
+                </ul>
             </div>
         );
     }
