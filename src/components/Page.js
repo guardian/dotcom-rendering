@@ -1,33 +1,22 @@
 // @flow
 import styled from 'preact-emotion';
 
-import {
-    mobileLandscape,
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-} from 'pasteup/breakpoints';
+import { tablet, desktop, leftCol, wide } from 'pasteup/breakpoints';
+import { calculateWidth } from 'pasteup/grid';
 
 const PageWrapper = styled('div')({
     margin: 'auto',
-    paddingLeft: 4,
-    paddingRight: 4,
-    [mobileLandscape]: {
-        paddingLeft: 24,
-        paddingRight: 24,
-    },
     [tablet]: {
-        maxWidth: '740px',
+        maxWidth: calculateWidth('tablet'),
     },
     [desktop]: {
-        maxWidth: '980px',
+        maxWidth: calculateWidth('desktop'),
     },
     [leftCol]: {
-        maxWidth: '1140px',
+        maxWidth: calculateWidth('leftCol'),
     },
     [wide]: {
-        maxWidth: '1300px',
+        maxWidth: calculateWidth('wide'),
     },
 });
 

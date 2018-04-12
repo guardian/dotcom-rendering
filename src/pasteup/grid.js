@@ -35,13 +35,20 @@ const breakpointMqs = {
     wide: wideMq,
 };
 
-const width = (breakpoint, colspan) =>
-    colspan * columns[breakpoint].width + colspan * gutter;
+export const calculateWidth = (breakpoint, colspan) => {
+    let colspanOrMax = colspan;
+
+    if (!colspanOrMax) {
+        colspanOrMax = columns[breakpoint].max;
+    }
+
+    return colspanOrMax * columns[breakpoint].width + (colspanOrMax - 1) * gutter;
+}
 
 const gridStyles = (breakpoint, [colspan]) => ({
     [breakpointMqs[breakpoint]]: {
         float: 'left',
-        width: width(breakpoint, colspan),
+        width: calculateWidth(breakpoint, colspan) + gutter,
         paddingLeft: gutter,
     },
 });
