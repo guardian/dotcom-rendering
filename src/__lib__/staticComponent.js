@@ -3,7 +3,7 @@ import { Component } from 'preact';
 
 const contentReferences = [];
 
-const serverSideOnlyComponent = (MyComponent, contentReference) =>
+const staticComponent = (MyComponent, contentReference) =>
     class extends Component {
         constructor(props) {
             super(props);
@@ -26,4 +26,4 @@ const serverSideOnlyComponent = (MyComponent, contentReference) =>
         }
     };
 
-export { contentReferences, serverSideOnlyComponent };
+export { contentReferences, staticComponent };
