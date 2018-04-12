@@ -94,7 +94,7 @@ export default connect('content')(({ content }) => (
     <article>
         <Header />
         <Row>
-            <Cols wide={4} leftCol={4}>
+            <Cols wide={4} leftCol={2}>
                 <Labels>
                     <SectionLabel>The NSA files</SectionLabel>
                     <SeriesLabel>
@@ -102,7 +102,7 @@ export default connect('content')(({ content }) => (
                     </SeriesLabel>
                 </Labels>
             </Cols>
-            <Cols wide={12} leftCol={10}>
+            <Cols wide={12} leftCol={12}>
                 <Headline>{content.headline}</Headline>
                 <Standfirst
                     dangerouslySetInnerHTML={{
