@@ -42,31 +42,27 @@ export const CapiComponent = (MyComponent, contentReference) => {
 
         render() {
             // return html if we've already looked this up from DOM once
-            const storedHtml = htmlStore[contentReference];
+            const storedCapiContent = htmlStore[contentReference];
 
-            if (storedHtml) {
-                return getComponent(MyComponent, this.props, storedHtml);
+            if (storedCapiContent) {
+                return getComponent(MyComponent, this.props, storedCapiContent);
             }
 
             const ContentComponent = connect('content')(({ content }) => {
-                const storedContent = content[contentReference];
-
-                // if the content is available in the store use that
-                if (storedContent) {
-                    return getComponent(MyComponent, this.props, storedContent);
-                }
-
-                // if content isn't available in store it must be in the DOM so look it up
-                const html = getExistingHtml(identifier);
-
-                if (html) {
-                    // store html to save future DOM look ups
-                    htmlStore[contentReference] = html;
-                    return getComponent(MyComponent, this.props, html);
+                const capiContent = content[contentReference] || getExistingHtml(identifier);
+                
+                if (capiContent) {
+                    htmlStore[contentReference] = capiContent;
+                    return getComponent(MyComponent, this.props, capiContent);
                 }
             });
 
-            return <ContentComponent />;
+            if (ContentComponent) {
+                return <ContentComponent />;
+            }
+
+            // if no CAPI data found return original component
+            return <MyComponent {...this.props} />;
         }
     };
 };
