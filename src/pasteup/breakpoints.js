@@ -136,4 +136,5 @@ export const from = {
             wide: minWidthMaxWidth(breakpoints.leftCol, breakpoints.wide),
         },
     },
+    wide: minWidth(breakpoints.wide),
 };

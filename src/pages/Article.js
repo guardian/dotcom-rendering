@@ -8,6 +8,7 @@ import { connect } from 'unistore/preact';
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { clearFix } from 'pasteup/mixins';
+import { Row, Cols } from 'pasteup/grid';
 
 import MostViewed from 'components/MostViewed';
 import Header from 'components/Header';
@@ -92,17 +93,24 @@ const SeriesLabel = styled(SectionLabel)({
 export default connect('content')(({ content }) => (
     <article>
         <Header />
-        <Labels>
-            <SectionLabel>The NSA files</SectionLabel>
-            <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
-        </Labels>
-        <Headline>{content.headline}</Headline>
-        <Standfirst
-            dangerouslySetInnerHTML={{
-                __html: content.standfirst,
-            }}
-        />
-
+        <Row>
+            <Cols wide={4} leftCol={2}>
+                <Labels>
+                    <SectionLabel>The NSA files</SectionLabel>
+                    <SeriesLabel>
+                        Glenn Greenwald on security and liberty
+                    </SeriesLabel>
+                </Labels>
+            </Cols>
+            <Cols wide={12} leftCol={12}>
+                <Headline>{content.headline}</Headline>
+                <Standfirst
+                    dangerouslySetInnerHTML={{
+                        __html: content.standfirst,
+                    }}
+                />
+            </Cols>
+        </Row>
         <div
             dangerouslySetInnerHTML={{
                 __html: content.main,
