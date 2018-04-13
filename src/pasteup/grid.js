@@ -47,17 +47,27 @@ export const calculateWidth = (breakpoint, colspan) => {
     );
 };
 
-const gridStyles = (breakpoint, [colspan]) => ({
-    [breakpointMqs[breakpoint]]: {
-        float: 'left',
-        width: calculateWidth(breakpoint, colspan) + gutter,
-        paddingLeft: gutter,
-    },
-});
+const gridStyles = (breakpoint, [colspan]) => {
+    let basis;
+
+    if (typeof colspan === 'number') {
+        basis = `${calculateWidth(breakpoint, colspan) + gutter}px`;
+    } else if (colspan === 'auto') {
+        basis = 'auto';
+    }
+
+    return {
+        [breakpointMqs[breakpoint]]: {
+            flex: `0 1 ${basis}`,
+            paddingLeft: gutter,
+        },
+    };
+};
 
 const RowStyled = styled('div')({
     ...clearFix,
     marginLeft: -gutter,
+    display: 'flex',
 });
 const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
     const tabletStyles = gridStyles('tablet', tablet);
@@ -80,7 +90,7 @@ const normaliseProps = prop => {
         }
 
         return prop;
-    } else if (typeof prop === 'number') {
+    } else if (typeof prop === 'number' || typeof prop === 'string') {
         return [prop, {}];
     }
 };

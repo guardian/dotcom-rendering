@@ -102,7 +102,7 @@ export default connect('content')(({ content }) => (
                     </SeriesLabel>
                 </Labels>
             </Cols>
-            <Cols wide={12} leftCol={12}>
+            <Cols wide={'auto'} leftCol={12}>
                 <Headline>{content.headline}</Headline>
                 <Standfirst
                     dangerouslySetInnerHTML={{
