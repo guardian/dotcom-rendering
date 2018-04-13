@@ -42,8 +42,10 @@ export const calculateWidth = (breakpoint, colspan) => {
         colspanOrMax = columns[breakpoint].max;
     }
 
-    return colspanOrMax * columns[breakpoint].width + (colspanOrMax - 1) * gutter;
-}
+    return (
+        colspanOrMax * columns[breakpoint].width + (colspanOrMax - 1) * gutter
+    );
+};
 
 const gridStyles = (breakpoint, [colspan]) => ({
     [breakpointMqs[breakpoint]]: {
