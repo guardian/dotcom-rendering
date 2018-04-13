@@ -3,12 +3,11 @@
 /* eslint-disable react/no-danger */
 
 import styled from 'preact-emotion';
-import { connect } from 'unistore/preact';
 
 import { textEgyptian, headline } from 'pasteup/fonts';
 import palette from 'pasteup/palette';
 import { clearFix } from 'pasteup/mixins';
-import { staticComponent } from '__lib__/staticComponent';
+import { CapiComponent } from '__lib__/CapiComponent';
 
 import MostViewed from 'components/MostViewed';
 import Header from 'components/Header';
@@ -23,7 +22,7 @@ const HeadlineStyled = styled('h1')({
     paddingBottom: 36,
     paddingTop: 3,
 });
-const Headline = staticComponent(HeadlineStyled, 'headline');
+const Headline = CapiComponent(HeadlineStyled, 'headline');
 
 const BodyStyled = styled('section')({
     p: {
@@ -45,7 +44,7 @@ const BodyStyled = styled('section')({
         maxWidth: '100%',
     },
 });
-const Body = staticComponent(BodyStyled, 'body');
+const Body = CapiComponent(BodyStyled, 'body');
 
 const StandfirstStyled = styled('p')({
     color: palette.neutral[1],
@@ -76,7 +75,7 @@ const StandfirstStyled = styled('p')({
         lineHeight: 0.8,
     },
 });
-const Standfirst = staticComponent(StandfirstStyled, 'standfirst');
+const Standfirst = CapiComponent(StandfirstStyled, 'standfirst');
 
 const Labels = styled('div')({ ...clearFix, paddingTop: 6 });
 
@@ -93,29 +92,16 @@ const SeriesLabel = styled(SectionLabel)({
     fontWeight: 500,
 });
 
-export default connect('content')(({ content }) => (
+export default () => (
     <article>
         <Header />
         <Labels>
             <SectionLabel>The NSA files</SectionLabel>
             <SeriesLabel>Glenn Greenwald on security and liberty</SeriesLabel>
         </Labels>
-        <Headline>{content.headline}</Headline>
-        <Standfirst
-            dangerouslySetInnerHTML={{
-                __html: content.standfirst,
-            }}
-        />
-        <div
-            dangerouslySetInnerHTML={{
-                __html: content.main,
-            }}
-        />
-        <Body
-            dangerouslySetInnerHTML={{
-                __html: content.body,
-            }}
-        />
+        <Headline />
+        <Standfirst />
+        <Body />
         <MostViewed />
         <Epic>
             <strong>
@@ -132,4 +118,4 @@ export default connect('content')(({ content }) => (
             </strong>
         </Epic>
     </article>
-));
+);

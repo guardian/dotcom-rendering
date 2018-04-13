@@ -1,6 +1,6 @@
 // @flow
 
-import { contentReferences } from './staticComponent';
+import { registeredCapiComponents } from './CapiComponent';
 import resetCSS from './reset-css';
 import { hashedPath, staticPath } from './asset-path';
 
@@ -21,7 +21,8 @@ export default ({
     const bundle = hashedPath('javascript', `${data.page}.js`);
     const vendor = hashedPath('javascript', 'vendor.js');
     const fonts = staticPath('css', 'fonts.css');
-    const sanitiseDomRefs = jsString => jsString.replace(/"(document.*?innerHTML)"/g, '$1');
+    const sanitiseDomRefs = jsString =>
+        jsString.replace(/"(document.*?innerHTML)"/g, '$1');
     return `
     <!doctype html>
     <html>
@@ -36,26 +37,24 @@ export default ({
         <body>
             <div id='app'>${html}</div>
             <script>
-            window.gu = ${sanitiseDomRefs(JSON.stringify({
-                app: {
-                    data: {
-                        ...data,
-                        content: {
-                            ...data.content,
-                            ...contentReferences.reduce(
-                                (acc, contentReference) => {
-                                    acc[
-                                        contentReference
-                                    ] = `document.querySelector('[data-content-${contentReference}]').innerHTML`;
+            window.gu = ${sanitiseDomRefs(
+                JSON.stringify({
+                    app: {
+                        data: {
+                            ...data,
+                            content: {
+                                ...Object.keys(data.content).reduce((acc, key) => {
+                                    if (!registeredCapiComponents.has(key)) {
+                                        acc[key] = data.content[key]
+                                    }
                                     return acc;
-                                },
-                                {},
-                            ),
+                                }, {})
+                            },
                         },
+                        cssIDs,
                     },
-                    cssIDs,
-                },
-            }))};
+                }),
+            )};
             </script>
             <script src="${vendor}"></script>
             <script src="${bundle}"></script>
