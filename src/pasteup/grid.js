@@ -48,17 +48,10 @@ export const calculateWidth = (breakpoint, colspan) => {
 };
 
 const gridStyles = (breakpoint, [colspan]) => {
-    let basis;
-
-    if (typeof colspan === 'number') {
-        basis = `${calculateWidth(breakpoint, colspan) + gutter}px`;
-    } else if (colspan === 'auto') {
-        basis = 'auto';
-    }
-
     return {
         [breakpointMqs[breakpoint]]: {
-            flex: `0 1 ${basis}`,
+            float: 'left',
+            width: calculateWidth(breakpoint, colspan) + gutter,
             paddingLeft: gutter,
         },
     };
@@ -67,7 +60,6 @@ const gridStyles = (breakpoint, [colspan]) => {
 const RowStyled = styled('div')({
     ...clearFix,
     marginLeft: -gutter,
-    display: 'flex',
 });
 const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
     const tabletStyles = gridStyles('tablet', tablet);
@@ -95,7 +87,41 @@ const normaliseProps = prop => {
     }
 };
 
-export const Row = ({ children }) => <RowStyled>{children}</RowStyled>;
+const calculateAutoWidths = cols => cols.reduce((autoWidths, col) => {
+    return Object.keys(autoWidths).reduce((acc, viewportSize) => {
+        if (typeof col.attributes[viewportSize] === 'number') {
+            acc[viewportSize] -= col.attributes[viewportSize];
+        }
+
+        return acc;
+    }, autoWidths);
+}, {
+    tablet: columns.tablet.max,
+    desktop: columns.desktop.max,
+    leftCol: columns.leftCol.max,
+    wide: columns.wide.max,
+});
+
+export const Row = ({ children }) => {
+    const autoWidths = calculateAutoWidths(children);
+
+    Object.keys(autoWidths).forEach(autoWidth => {
+        if (autoWidths[autoWidth] > 0) {
+            const autoWidthCol = children.filter(child =>
+                child.attributes[autoWidth] === 'auto'
+            );
+
+            if (autoWidthCol.length) {
+                autoWidthCol[0].attributes[autoWidth] = autoWidths[autoWidth];
+            }
+        }
+    });
+
+    return (
+        <RowStyled>{children}</RowStyled>
+    );
+};
+
 export const Cols = ({
     tablet = [columns.tablet.max, {}],
     desktop = [columns.desktop.max, {}],
