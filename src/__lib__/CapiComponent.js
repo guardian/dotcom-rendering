@@ -2,67 +2,52 @@
 import { Component } from 'preact';
 import { connect } from 'unistore/preact';
 
-const getExistingHtml = identifier => {
+const getExistingHtml = id => {
     if (typeof document === 'undefined') {
         return;
     }
 
-    const node = document.querySelector(`[${identifier}]`);
+    const node = document.getElementById(id);
 
     return node && node.innerHTML;
-}
+};
 
-const getComponent = (Component, props, html) => (
-    <Component
-        {...props}
-        dangerouslySetInnerHTML={{
-            __html: html,
-        }}
-    />
-);
+const componentRegister = {};
 
-const htmlStore = {};
+export const registeredCapiKeys = new Set();
 
-export const registeredCapiComponents = new Set();
-
-export const CapiComponent = (MyComponent, contentReference) => {
-    const identifier = `data-content-${contentReference}`;
-    
-    registeredCapiComponents.add(contentReference);
+export const CapiComponent = (MyComponent, capiKey) => {
+    registeredCapiKeys.add(capiKey);
 
     return class extends Component {
-        constructor(props) {
-            super(props);
-            this.props[identifier] = true;
-        }
-
         shouldComponentUpdate() {
             return false;
         }
 
         render() {
-            // return html if we've already looked this up from DOM once
-            const storedCapiContent = htmlStore[contentReference];
-
-            if (storedCapiContent) {
-                return getComponent(MyComponent, this.props, storedCapiContent);
-            }
-
             const ContentComponent = connect('content')(({ content }) => {
-                const capiContent = content[contentReference] || getExistingHtml(identifier);
-                
-                if (capiContent) {
-                    htmlStore[contentReference] = capiContent;
-                    return getComponent(MyComponent, this.props, capiContent);
-                }
+                const iterator =
+                    typeof componentRegister[capiKey] !== 'undefined'
+                        ? componentRegister[capiKey] + 1
+                        : 0;
+                const identifier = `capi-content-${capiKey}-${iterator}`;
+                const capiContent =
+                    content[capiKey] || getExistingHtml(identifier);
+
+                componentRegister[capiKey] = iterator;
+
+                return (
+                    <MyComponent
+                        {...this.props}
+                        id={identifier}
+                        dangerouslySetInnerHTML={{
+                            __html: capiContent,
+                        }}
+                    />
+                );
             });
 
-            if (ContentComponent) {
-                return <ContentComponent />;
-            }
-
-            // if no CAPI data found return original component
-            return <MyComponent {...this.props} />;
+            return <ContentComponent />;
         }
     };
 };

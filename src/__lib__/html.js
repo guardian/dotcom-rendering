@@ -1,6 +1,6 @@
 // @flow
 
-import { registeredCapiComponents } from './CapiComponent';
+import { registeredCapiKeys } from './CapiComponent';
 import resetCSS from './reset-css';
 import { hashedPath, staticPath } from './asset-path';
 
@@ -43,12 +43,15 @@ export default ({
                         data: {
                             ...data,
                             content: {
-                                ...Object.keys(data.content).reduce((acc, key) => {
-                                    if (!registeredCapiComponents.has(key)) {
-                                        acc[key] = data.content[key]
-                                    }
-                                    return acc;
-                                }, {})
+                                ...Object.keys(data.content).reduce(
+                                    (acc, key) => {
+                                        if (!registeredCapiKeys.has(key)) {
+                                            acc[key] = data.content[key];
+                                        }
+                                        return acc;
+                                    },
+                                    {},
+                                ),
                             },
                         },
                         cssIDs,
