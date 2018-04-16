@@ -5,6 +5,7 @@ import { render } from 'preact';
 import { hydrate as hydrateCSS } from 'emotion';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
+import Context from 'preact-context-provider';
 
 import Page from 'components/Page';
 
@@ -22,9 +23,11 @@ if (module.hot) {
 hydrateCSS(cssIDs);
 render(
     <Provider store={createStore(data)}>
-        <Page>
-            <PageType />
-        </Page>
+        <Context CapiComponentRegister={{}}>
+            <Page>
+                <PageType />
+            </Page>
+        </Context>
     </Provider>,
     document.getElementById('app'),
     document.getElementById('app').lastElementChild,

@@ -12,8 +12,6 @@ const getExistingHtml = id => {
     return node && node.innerHTML;
 };
 
-const componentRegister = {};
-
 export const registeredCapiKeys = new Set();
 
 export const CapiComponent = (MyComponent, capiKey) => {
@@ -27,14 +25,14 @@ export const CapiComponent = (MyComponent, capiKey) => {
         render() {
             const ContentComponent = connect('content')(({ content }) => {
                 const iterator =
-                    typeof componentRegister[capiKey] !== 'undefined'
-                        ? componentRegister[capiKey] + 1
+                    typeof this.context.CapiComponentRegister[capiKey] !== 'undefined'
+                        ? this.context.CapiComponentRegister[capiKey] + 1
                         : 0;
                 const identifier = `capi-content-${capiKey}-${iterator}`;
                 const capiContent =
                     content[capiKey] || getExistingHtml(identifier);
 
-                componentRegister[capiKey] = iterator;
+                this.context.CapiComponentRegister[capiKey] = iterator;
 
                 return (
                     <MyComponent
