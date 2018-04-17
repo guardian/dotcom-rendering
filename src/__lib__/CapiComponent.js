@@ -25,14 +25,14 @@ export const CapiComponent = (MyComponent, capiKey) => {
         render() {
             const ContentComponent = connect('content')(({ content }) => {
                 const iterator =
-                    typeof this.context.CapiComponentRegister[capiKey] !== 'undefined'
-                        ? this.context.CapiComponentRegister[capiKey] + 1
-                        : 0;
+                    this.context.capiComponentRegister[capiKey]
+                        ? this.context.capiComponentRegister[capiKey] + 1
+                        : 1;
                 const identifier = `capi-content-${capiKey}-${iterator}`;
                 const capiContent =
                     content[capiKey] || getExistingHtml(identifier);
 
-                this.context.CapiComponentRegister[capiKey] = iterator;
+                this.context.capiComponentRegister[capiKey] = iterator;
 
                 return (
                     <MyComponent

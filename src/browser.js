@@ -23,7 +23,7 @@ if (module.hot) {
 hydrateCSS(cssIDs);
 render(
     <Provider store={createStore(data)}>
-        <Context CapiComponentRegister={{}}>
+        <Context capiComponentRegister={{}}>
             <Page>
                 <PageType />
             </Page>

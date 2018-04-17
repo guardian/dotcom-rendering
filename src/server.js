@@ -30,7 +30,7 @@ const renderPage = async (req, res) => {
         const { html, ids: cssIDs, css } = extractCritical(
             renderToString(
                 <Provider store={createStore(data)}>
-                    <Context CapiComponentRegister={{}}>
+                    <Context capiComponentRegister={{}}>
                         <Page>
                             <PageType />
                         </Page>
