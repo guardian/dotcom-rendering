@@ -1,6 +1,6 @@
 // @flow
 
-import { registeredCapiKeys } from './CapiComponent';
+import { keyRegister } from './CapiComponent';
 import resetCSS from './reset-css';
 import { hashedPath, staticPath } from './asset-path';
 
@@ -45,9 +45,14 @@ export default ({
                             content: {
                                 ...Object.keys(data.content).reduce(
                                     (acc, key) => {
-                                        if (!registeredCapiKeys.has(key)) {
+                                        if (keyRegister.has(key)) {
+                                            acc[
+                                                key
+                                            ] = `document.getElementById('capi-content-${key}-1').innerHTML`;
+                                        } else {
                                             acc[key] = data.content[key];
                                         }
+
                                         return acc;
                                     },
                                     {},

@@ -12,27 +12,36 @@ const getExistingHtml = id => {
     return node && node.innerHTML;
 };
 
-export const registeredCapiKeys = new Set();
+export const keyRegister = new Set();
 
-export const CapiComponent = (MyComponent, capiKey) => {
-    registeredCapiKeys.add(capiKey);
-
-    return class extends Component {
+export const CapiComponent = (MyComponent, capiKey) =>
+    class extends Component {
         shouldComponentUpdate() {
             return false;
         }
 
         render() {
             const ContentComponent = connect('content')(({ content }) => {
-                const iterator =
-                    this.context.capiComponentRegister[capiKey]
-                        ? this.context.capiComponentRegister[capiKey] + 1
-                        : 1;
+                const iterator = this.context.capiComponentRegister[capiKey]
+                    ? this.context.capiComponentRegister[capiKey] + 1
+                    : 1;
                 const identifier = `capi-content-${capiKey}-${iterator}`;
                 const capiContent =
                     content[capiKey] || getExistingHtml(identifier);
 
                 this.context.capiComponentRegister[capiKey] = iterator;
+
+                /**
+                 * on the server keys from previous render contexts will
+                 * persist in the keyRegister, we must therefore clean the
+                 * keyRegister of keys not used in the current render context
+                 */
+                keyRegister.forEach(key => {
+                    if (!this.context.capiComponentRegister[key]) {
+                        keyRegister.delete(key);
+                    }
+                });
+                keyRegister.add(capiKey);
 
                 return (
                     <MyComponent
@@ -48,4 +57,3 @@ export const CapiComponent = (MyComponent, capiKey) => {
             return <ContentComponent />;
         }
     };
-};
