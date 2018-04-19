@@ -1,0 +1,16 @@
+{
+  "name": "@guardian/rendering-service",
+  "version": "0.1.0-alpha.1",
+  "description": "Guardian rendering service",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@guardian/guui": "0.1.0-alpha.1",
+    "express": "^4.16.3",
+    "glob": "^7.1.2",
+    "pm2": "^2.10.2"
+  }
+}
