@@ -32,6 +32,7 @@
         "eslint-plugin-react": "^7.4.0",
         "flow-bin": "^0.68.0",
         "flow-typed": "^2.4.0",
+        "friendly-errors-webpack-plugin": "^1.7.0",
         "prettier": "^1.7.4",
         "string-replace-loader": "^2.1.1",
         "webpack": "^4.5.0",
@@ -43,5 +44,9 @@
         "webpack-merge": "^4.1.2",
         "webpack-node-externals": "^1.7.2",
         "webpack-sources": "^1.1.0"
+    },
+    "dependencies": {
+        "chalk": "^2.4.0",
+        "inquirer": "^5.2.0"
     }
 }

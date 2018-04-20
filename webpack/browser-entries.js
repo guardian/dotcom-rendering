@@ -1,10 +1,9 @@
 // create individual entries for each page in each site
 
+const entryPage = require.resolve('@guardian/rendering-service/browser');
 const { getSites, getPagesForSite } = require('../config');
 
-const name = (site, page) => `${site}.${page.toLowerCase()}`;
-
-const entryPage = require.resolve('@guardian/rendering-service/browser');
+const bundleName = (site, page) => `${site}.${page.toLowerCase()}`;
 
 // inject a ref to the page component
 const entry = ({ page, site }) =>
@@ -21,7 +20,7 @@ module.exports = async () => {
         const pages = await getPagesForSite(site);
         return pages.reduce(
             (entries, page) => ({
-                [name(site, page)]: [entry({ site, page })],
+                [bundleName(site, page)]: [entry({ site, page })],
                 ...entries,
             }),
             {},

@@ -6,7 +6,8 @@ export PATH := node_modules/.bin:$(PATH)
 export SHELL := /usr/bin/env bash
 
 define log
-    @node packages/guui/lib/log $(1)
+	@echo $(1)
+    # @node packages/guui/lib/log $(1)
 endef
 
 flow-typed: yarn.lock
@@ -20,8 +21,8 @@ flow-typed: yarn.lock
 install: package.json yarn.lock
 	@yarn install
 
-dev: clear install clean-dist
-	@NODE_ENV=development node dev-server
+dev: install clear clean-dist
+	@NODE_ENV=development node dev-server $(site)
 
 build: install clean-dist
 	@NODE_ENV=production webpack --config webpack --color --progress
@@ -30,10 +31,11 @@ clean-dist:
 	@rm -rf dist
 	@rm -rf target
 
-start: #stop build
+start:
 ifndef site
 	$(call log, "You must provide an app to run e.g. make start site=xyz")
 else
+	@make stop build
 	@NODE_ENV=production pm2 start dist/$(site).server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running at http://localhost:9000")

@@ -47,14 +47,13 @@ const common = ({ platform }) => ({
     },
 });
 
-module.exports = () =>
-    Promise.all(
-        ['browser'].map(async platform =>
-            merge(
-                common({
-                    platform,
-                }),
-                await require(`./${platform}`)(),
-            ),
+module.exports = Promise.all(
+    ['browser', 'server'].map(async platform =>
+        merge(
+            common({
+                platform,
+            }),
+            await require(`./${platform}`)(),
         ),
-    );
+    ),
+);

@@ -1,16 +1,21 @@
 // create individual entries for each page in each site
 
-const entry = require('@guardian/rendering-service/server');
+const entryPage = require.resolve('@guardian/rendering-service/server');
 const { getSites } = require('../config');
 
-const bundleName = page =>
-    page.replace(/sites\/(\w+)/, (match, siteName) => `${siteName}.server.js`);
+const bundleName = site => `${site}.server`;
+
+const entry = ({ site }) =>
+    [
+        `string-replace-loader?search=__SITE__&replace=${site}&flags=g`,
+        entryPage,
+    ].join('!');
 
 module.exports = async () => {
     const sites = await getSites();
     return sites.reduce(
         (entries, site) => ({
-            [bundleName(site)]: [entry(site)],
+            [bundleName(site)]: [entry({ site })],
             ...entries,
         }),
         {},

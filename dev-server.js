@@ -1,41 +1,45 @@
-/* eslint-disable global-require,import/no-extraneous-dependencies */
-
-const { log } = require('util');
+/* eslint-disable global-require,import/no-extraneous-dependencies,no-console */
 
 const path = require('path');
 const express = require('express');
+const fetch = require('node-fetch');
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const inquirer = require('inquirer');
+const chalk = require('chalk');
 
-const { getPages } = require('./config');
+const { getSites, getPagesForSite, root } = require('./config');
 
-(async () => {
-    const webpackConfig = await require('./webpack')();
+const pickSite = async () => {
+    const sites = await getSites();
+    if (sites.length === 1) return sites[0];
+    return inquirer
+        .prompt([
+            {
+                type: 'list',
+                message: 'Which site do you want to run?',
+                choices: [...sites, 'blah'],
+                name: 'site',
+            },
+        ])
+        .then(({ site }) => {
+            console.log(`Starting DEV server for ${chalk.cyan(site)}...`);
+            return site;
+        });
+};
 
-    const fetch = require('node-fetch');
+const go = async site => {
+    const webpackConfig = await require('./webpack');
+    const compiler = await webpack(webpackConfig);
 
-    const compiler = webpack(webpackConfig);
     const app = express();
-
-    // const getRemoteData = express.Router();
-    // getRemoteData.get('/:site/:page', (req, res, next) => {
-    //     async (req, res, next) => {
-    //         const { html, ...config } = await fetch(
-    //             `${req.query.url ||
-    //                 'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json?guui`,
-    //         ).then(article => article.json());
-
-    //         req.body = config;
-    //         next();
-    //     }
-    // });
 
     app.use(
         '/static',
-        express.static(path.join(__dirname, '..', 'src', 'static')),
+        express.static(path.join(root, 'sites', site, 'static')),
     );
 
     app.use(
@@ -43,6 +47,7 @@ const { getPages } = require('./config');
             serverSideRender: true,
             logLevel: 'silent',
             publicPath: '/assets/javascript/',
+            ignored: [/node_modules([\\]+|\/)+(?!@guardian)/],
         }),
     );
 
@@ -57,8 +62,8 @@ const { getPages } = require('./config');
     );
 
     app.get(
-        '/:site/:page',
-        () => async (req, res, next) => {
+        `/${site}/:page`,
+        async (req, res, next) => {
             const { html, ...config } = await fetch(
                 `${req.query.url ||
                     'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json?guui`,
@@ -68,31 +73,29 @@ const { getPages } = require('./config');
             next();
         },
         webpackHotServerMiddleware(compiler, {
-            chunkName: 'server',
+            chunkName: `${site}.server`,
         }),
     );
 
-    app.get('/', () => async (req, res) => {
-        try {
-            const pages = await getPages();
-            res.send(`
+    app.get(`/${site}`, async (req, res) => {
+        const pages = await getPagesForSite(site);
+        const pageList = pages.map(
+            page =>
+                `<li><a href="${site}/${page}"><code>${page}</code></a></li>`,
+        );
+        res.send(`
         <!DOCTYPE html>
         <html>
         <body>
-            <ul>
-            ${pages
-                .map(page => {
-                    const target = page.replace(/sites\/|pages\/|.js$/g, '');
-                    return `<li><a href="${target}">${target}</a></li>`;
-                })
-                .join('')}
-            </ul>
+            <pre>Pages for ${site}:</pre>
+            ${pageList.join('\n')}
         </body>
         </html>
         `);
-        } catch (e) {
-            log(e);
-        }
+    });
+
+    app.get('*', (req, res) => {
+        res.redirect(`/${site}`);
     });
 
     // eslint-disable-next-line no-unused-vars
@@ -101,4 +104,6 @@ const { getPages } = require('./config');
     });
 
     app.listen(3000);
-})();
+};
+
+pickSite().then(go);

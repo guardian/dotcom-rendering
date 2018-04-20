@@ -1,7 +1,7 @@
-module.exports = () => ({
-    entry: {
-        server: [require.resolve('@guardian/render-service/server')],
-    },
+const getEntries = require('./server-entries');
+
+module.exports = async () => ({
+    entry: await getEntries(),
     output: {
         filename: `[name].js`,
         chunkFilename: `[name].js`,

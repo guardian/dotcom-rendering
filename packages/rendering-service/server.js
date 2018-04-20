@@ -2,25 +2,25 @@
 /* eslint-disable global-require */
 
 import path from 'path';
+import express from 'express';
 import defaultDocument from '@guardian/guui/document';
 
-import express from 'express';
 import type { $Request, $Response } from 'express';
 
-import { dist } from '../../config';
+import { dist, getPagesForSite } from '../../config';
 
 const render = async ({ params, body }: $Request, res: $Response) => {
     try {
-        const { site, page } = params;
+        const { page } = params;
         const data = {
-            site,
+            site: '__SITE__',
             page,
             body,
         };
 
         const [{ default: Page }, document] = await Promise.all([
-            import(`../sites/${site}/pages/${page}`),
-            import(`../sites/${site}/document`)
+            import(`../../sites/__SITE__/pages/${page}.js`),
+            import(`../../sites/__SITE__/document.js`)
                 .then(module => module.default)
                 .catch(() => defaultDocument),
         ]);
@@ -28,7 +28,7 @@ const render = async ({ params, body }: $Request, res: $Response) => {
         const pageSrc = await document({ Page, data });
         res.status(200).send(pageSrc);
     } catch (e) {
-        res.status(500).send(e.stack);
+        res.status(500).send(`<pre>${e.stack}</pre>`);
     }
 };
 
@@ -41,14 +41,35 @@ if (process.env.NODE_ENV === 'production') {
         express.static(path.join(__dirname, '..', 'src', 'static')),
     );
     app.use('/assets/javascript', express.static(dist));
-    app.use(':page', render);
+    app.use('/:page', render);
+
+    app.get('/', async (req, res) => {
+        try {
+            const pages = await getPagesForSite('__SITE__');
+            res.send(`
+        <!DOCTYPE html>
+        <html>
+        <body>
+            <ul>
+            ${pages
+                .map(page => `<li><a href="/${page}">${page}</a></li>`)
+                .join('')}
+            </ul>
+        </body>
+        </html>
+        `);
+        } catch (e) {
+            res.status(500).send(`<pre>${e.stack}</pre>`);
+        }
+    });
 
     // express requires all 4 args here:
     // eslint-disable-next-line no-unused-vars
     app.use((err, req, res, next) => {
-        res.status(500).send(err.stack);
+        res.status(500).send(`<pre>${err.stack}</pre>`);
     });
     app.listen(9000);
 }
 
-export default render;
+// this export is the function used by webpackHotServerMiddleware in /dev-server.js
+export default () => render;
