@@ -5,11 +5,13 @@
 import { styled } from '@guardian/guui';
 import { connect } from 'unistore/preact';
 
+import { Row, Cols } from '@guardian/guui/grid';
 import { textEgyptian, headline } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { clearFix } from '@guardian/pasteup/mixins';
 
 import Page from '../components/Page';
+import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Epic from '../components/Epic';
 
@@ -93,19 +95,24 @@ export default connect('CAPI')(({ CAPI = {} }) => (
     <Page>
         <article>
             <Header />
-            <Labels>
-                <SectionLabel>The NSA files</SectionLabel>
-                <SeriesLabel>
-                    Glenn Greenwald on security and liberty
-                </SeriesLabel>
-            </Labels>
-            <Headline>{CAPI.headline}</Headline>
-            <Standfirst
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.standfirst,
-                }}
-            />
-
+            <Row>
+                <Cols wide={4} leftCol={2}>
+                    <Labels>
+                        <SectionLabel>The NSA files</SectionLabel>
+                        <SeriesLabel>
+                            Glenn Greenwald on security and liberty
+                        </SeriesLabel>
+                    </Labels>
+                </Cols>
+                <Cols wide={12} leftCol={12}>
+                    <Headline>{CAPI.headline}</Headline>
+                    <Standfirst
+                        dangerouslySetInnerHTML={{
+                            __html: CAPI.standfirst,
+                        }}
+                    />
+                </Cols>
+            </Row>
             <div
                 dangerouslySetInnerHTML={{
                     __html: CAPI.main,
@@ -116,6 +123,7 @@ export default connect('CAPI')(({ CAPI = {} }) => (
                     __html: CAPI.body,
                 }}
             />
+            <MostViewed />
             <Epic>
                 <strong>
                     Unlike many news organisations, we haven’t put up a paywall
