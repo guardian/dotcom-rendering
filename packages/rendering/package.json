@@ -1,5 +1,5 @@
 {
-  "name": "@guardian/rendering-service",
+  "name": "@guardian/rendering",
   "version": "0.1.0-alpha.1",
   "description": "Guardian rendering service",
   "main": "index.js",

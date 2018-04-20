@@ -1,6 +1,6 @@
 // create individual entries for each page in each site
 
-const entryPage = require.resolve('@guardian/rendering-service/server');
+const entryPage = require.resolve('@guardian/rendering/server');
 const { getSites } = require('../config');
 
 const bundleName = site => `${site}.server`;

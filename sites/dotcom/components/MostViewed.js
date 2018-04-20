@@ -3,7 +3,7 @@ import { Component, styled } from '@guardian/guui';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
-import Numbers from '@guardian/pasteup/big-numbers';
+import Numbers from '@guardian/guui/big-numbers';
 
 const Heading = styled('h2')({
     fontFamily: headline,
