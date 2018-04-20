@@ -39,11 +39,12 @@ module.exports = {
             },
         },
         {
-            files: ['webpack/**/*.js', 'config.js'],
+            files: ['webpack/*', 'config.js', 'lib/*'],
             rules: {
                 'global-require': 'off',
                 'import/no-dynamic-require': 'off',
                 'import/no-extraneous-dependencies': 'off',
+                'no-console': 'off',
             },
         },
     ],

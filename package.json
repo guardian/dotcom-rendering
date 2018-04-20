@@ -47,6 +47,8 @@
     },
     "dependencies": {
         "chalk": "^2.4.0",
+        "cpy": "^6.0.0",
+        "execa": "^0.10.0",
         "inquirer": "^5.2.0"
     }
 }
