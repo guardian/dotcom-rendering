@@ -31,7 +31,7 @@ deploy:
 # prod #########################################
 
 build: install clean-dist
-	@NODE_ENV=production webpack --config webpack --color --progress
+	@NODE_ENV=production webpack --config webpack
 
 start:
 ifndef site

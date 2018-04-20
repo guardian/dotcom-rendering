@@ -1,4 +1,9 @@
+const path = require('path');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const getEntries = require('./server-entries');
+const { dist } = require('../config');
+
+const prod = process.env.NODE_ENV === 'production';
 
 module.exports = async () => ({
     entry: await getEntries(),
@@ -23,4 +28,13 @@ module.exports = async () => ({
                 ? callback(null, `commonjs ${request}`)
                 : callback(),
     ],
+    plugins: [
+        prod &&
+            new BundleAnalyzerPlugin({
+                reportFilename: path.join(dist, 'server-bundles.html'),
+                analyzerMode: 'static',
+                openAnalyzer: false,
+                logLevel: 'warn',
+            }),
+    ].filter(Boolean),
 });

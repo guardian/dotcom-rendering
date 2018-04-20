@@ -34,9 +34,11 @@
         "flow-typed": "^2.4.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "prettier": "^1.7.4",
+        "simple-progress-webpack-plugin": "^1.1.2",
         "string-replace-loader": "^2.1.1",
         "webpack": "^4.5.0",
         "webpack-assets-manifest": "^3.0.1",
+        "webpack-bundle-analyzer": "^2.11.1",
         "webpack-cli": "^2.0.14",
         "webpack-dev-middleware": "^3.1.2",
         "webpack-hot-middleware": "^2.22.0",
@@ -47,8 +49,11 @@
     },
     "dependencies": {
         "chalk": "^2.4.0",
+        "columnify": "^1.5.4",
         "cpy": "^6.0.0",
         "execa": "^0.10.0",
-        "inquirer": "^5.2.0"
+        "filesizegzip": "^2.0.0",
+        "inquirer": "^5.2.0",
+        "pretty-bytes": "^4.0.2"
     }
 }
