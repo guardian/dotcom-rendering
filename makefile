@@ -55,7 +55,7 @@ monitor:
 # dev #########################################
 
 dev: clear install clean-dist
-	$(call log, "starting DEV server...")
+	$(call log, "starting DEV server")
 	@NODE_ENV=development node dev-server $(site)
 
 # quality #########################################

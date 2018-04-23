@@ -6,10 +6,10 @@ const ReportBundleSize = require('../lib/report-bundle-size');
 const Progress = require('../lib/webpack-progress');
 const { root, dist } = require('../config');
 
+const prod = process.env.NODE_ENV === 'production';
+
 const reportBundleSize = new ReportBundleSize({ configCount: 2 });
 const progress = new Progress();
-
-const prod = process.env.NODE_ENV === 'production';
 
 const common = ({ platform }) => ({
     name: platform,
@@ -58,7 +58,7 @@ const common = ({ platform }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
-        prod && !process.env.CI && progress(platform),
+        !process.env.CI && progress(platform),
         prod && !process.env.HIDE_BUNDLES && reportBundleSize,
         prod &&
             new BundleAnalyzerPlugin({
