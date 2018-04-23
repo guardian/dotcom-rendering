@@ -1,11 +1,8 @@
-const path = require('path');
 const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const chalk = require('chalk');
 const getEntries = require('./browser-entries');
-const { dist } = require('../config');
 
 const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
@@ -62,13 +59,6 @@ module.exports = async () => {
         },
         plugins: [
             prod && new AssetsManifest({ writeToDisk: true }),
-            prod &&
-                new BundleAnalyzerPlugin({
-                    reportFilename: path.join(dist, 'browser-bundles.html'),
-                    analyzerMode: 'static',
-                    openAnalyzer: false,
-                    logLevel: 'warn',
-                }),
             dev && new webpack.HotModuleReplacementPlugin(),
             dev && new webpack.NamedModulesPlugin(),
             dev && friendlyErrorsWebpackPlugin,

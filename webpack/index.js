@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const { smart: merge } = require('webpack-merge');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../lib/report-bundle-size');
 const Progress = require('../lib/webpack-progress');
-const { root } = require('../config');
+const { root, dist } = require('../config');
 
 const reportBundleSize = new ReportBundleSize({ configCount: 2 });
 const progress = new Progress();
@@ -15,7 +16,7 @@ const common = ({ platform }) => ({
     mode: process.env.NODE_ENV,
     output: {
         publicPath: '/assets/javascript/',
-        path: require('../config').dist,
+        path: dist,
     },
     stats: 'errors-only',
     devtool:
@@ -59,6 +60,13 @@ const common = ({ platform }) => ({
         }),
         prod && !process.env.CI && progress(platform),
         prod && !process.env.HIDE_BUNDLES && reportBundleSize,
+        prod &&
+            new BundleAnalyzerPlugin({
+                reportFilename: path.join(dist, `${platform}-bundles.html`),
+                analyzerMode: 'static',
+                openAnalyzer: false,
+                logLevel: 'warn',
+            }),
     ].filter(Boolean),
     resolve: {
         alias: {
