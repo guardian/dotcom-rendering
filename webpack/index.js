@@ -58,7 +58,7 @@ const common = ({ platform }) => ({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
         prod && !process.env.CI && progress(platform),
-        prod && reportBundleSize,
+        prod && !process.env.HIDE_BUNDLES && reportBundleSize,
     ].filter(Boolean),
     resolve: {
         alias: {

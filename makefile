@@ -101,7 +101,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@CI=true NODE_ENV=production webpack --config webpack >/dev/null
+	@HIDE_BUNDLES=true NODE_ENV=production webpack --config webpack
 
 check-env: # private
 	$(call log, "checking environment")
