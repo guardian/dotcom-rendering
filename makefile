@@ -51,7 +51,7 @@ monitor:
 
 # dev #########################################
 
-dev: install clear clean-dist
+dev: clear install clean-dist
 	@NODE_ENV=development node dev-server $(site)
 
 # quality #########################################
@@ -80,7 +80,6 @@ validate-ci: clear install flow lint test
 # helpers #########################################
 
 clean-dist:
-	$(call log, "deleting old artefacts")
 	@rm -rf dist
 	@rm -rf target
 
