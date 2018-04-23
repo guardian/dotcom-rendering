@@ -1,10 +1,11 @@
 // @flow
 import { styled } from '@guardian/guui';
-import { connect } from 'unistore/preact';
 
 import { headline } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
+
+import pillarConfig from '../../../Pillars/__config__';
 
 const SubNavButton = styled('button')(
     ({ pillar, isLastIndex, showSecondaryNav }) => ({
@@ -58,22 +59,19 @@ const SubNavButton = styled('button')(
 );
 SubNavButton.displayName = 'SubNavButton';
 
-export default connect('header')(
-    ({ header, pillar, showSecondaryNav, toggleSecondaryNav }) => {
-        const isLastIndex =
-            pillar === header.pillars[header.pillars.length - 1];
+export default ({ pillar, showSecondaryNav, toggleSecondaryNav }) => {
+    const isLastIndex = pillar === pillarConfig[pillarConfig.length - 1];
 
-        return (
-            <SubNavButton
-                pillar={pillar.pillar}
-                isLastIndex={isLastIndex}
-                showSecondaryNav={showSecondaryNav}
-                onClick={() => {
-                    toggleSecondaryNav();
-                }}
-            >
-                {pillar.label}
-            </SubNavButton>
-        );
-    },
-);
+    return (
+        <SubNavButton
+            pillar={pillar.pillar}
+            isLastIndex={isLastIndex}
+            showSecondaryNav={showSecondaryNav}
+            onClick={() => {
+                toggleSecondaryNav();
+            }}
+        >
+            {pillar.label}
+        </SubNavButton>
+    );
+};

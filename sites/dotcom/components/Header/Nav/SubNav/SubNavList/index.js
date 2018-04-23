@@ -1,10 +1,10 @@
 // @flow
 import { styled } from '@guardian/guui';
-import { connect } from 'unistore/preact';
 
 import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
 import SubNavListItem from './SubNavListItem';
+import pillars from '../../Pillars/__config__';
 
 const SubNavList = styled('ul')({
     boxSizing: 'border-box',
@@ -26,10 +26,10 @@ const SubNavList = styled('ul')({
 });
 SubNavList.displayName = 'SubNavList';
 
-export default connect('header')(({ header = { pillars: [] } }) => (
+export default () => (
     <SubNavList>
-        {header.pillars.map(pillar => (
+        {pillars.map(pillar => (
             <SubNavListItem pillar={pillar} key={pillar.label} />
         ))}
     </SubNavList>
-));
+);
