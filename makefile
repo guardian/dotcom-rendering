@@ -32,7 +32,6 @@ deploy:
 
 build: clear install clean-dist
 	$(call log, "building production bundles")
-	@echo '' # just a spacer
 	@NODE_ENV=production webpack --config webpack
 
 start:

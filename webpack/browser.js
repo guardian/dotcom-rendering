@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const Progress = require('simple-progress-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const chalk = require('chalk');
 const getEntries = require('./browser-entries');
@@ -69,11 +68,6 @@ module.exports = async () => {
                     analyzerMode: 'static',
                     openAnalyzer: false,
                     logLevel: 'warn',
-                }),
-            prod &&
-                !process.env.CI &&
-                new Progress({
-                    format: 'compact',
                 }),
             dev && new webpack.HotModuleReplacementPlugin(),
             dev && new webpack.NamedModulesPlugin(),

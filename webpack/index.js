@@ -2,9 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const { smart: merge } = require('webpack-merge');
 const ReportBundleSize = require('../lib/report-bundle-size');
+const Progress = require('../lib/webpack-progress');
 const { root } = require('../config');
 
 const reportBundleSize = new ReportBundleSize({ configCount: 2 });
+const progress = new Progress();
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -55,6 +57,11 @@ const common = ({ platform }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
+        prod &&
+            !process.env.CI &&
+            progress({
+                platform,
+            }),
         prod && reportBundleSize,
     ].filter(Boolean),
     resolve: {
