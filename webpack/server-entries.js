@@ -1,4 +1,4 @@
-// create individual entries for each page in each site
+// create individual entries for each site
 
 const entryPage = require.resolve('@guardian/rendering/server');
 const { getSites } = require('../config');
