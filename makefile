@@ -30,7 +30,9 @@ deploy:
 
 # prod #########################################
 
-build: install clean-dist
+build: clear install clean-dist
+	$(call log, "building production bundles")
+	@echo '' # just a spacer
 	@NODE_ENV=production webpack --config webpack
 
 start:
@@ -38,6 +40,8 @@ ifndef site
 	$(call warn, "You need to specifiy which app to run e.g. make start site=xyz")
 else
 	@make stop build
+	$(call log, "starting PROD server for $(site)...")
+	@echo '' # just a spacer
 	@NODE_ENV=production pm2 start dist/$(site).server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running at http://localhost:9000")
@@ -52,6 +56,7 @@ monitor:
 # dev #########################################
 
 dev: clear install clean-dist
+	$(call log, "starting DEV server...")
 	@NODE_ENV=development node dev-server $(site)
 
 # quality #########################################
