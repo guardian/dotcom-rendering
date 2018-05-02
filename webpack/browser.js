@@ -14,8 +14,8 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     },
 });
 
-const prod = process.env.NODE_ENV === 'production';
-const dev = process.env.NODE_ENV === 'development';
+const PROD = process.env.NODE_ENV === 'production';
+const DEV = process.env.NODE_ENV === 'development';
 
 const hotReload = entries =>
     Object.entries(entries).reduce(
@@ -30,18 +30,11 @@ const hotReload = entries =>
     );
 
 module.exports = async () => {
-    const name =
-        process.env.NODE_ENV === 'production'
-            ? `[name].[chunkhash].js`
-            : `[name].js`;
-
+    const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
     const entries = await getEntries();
 
     return {
-        entry:
-            process.env.NODE_ENV === 'development'
-                ? hotReload(entries)
-                : entries,
+        entry: DEV ? hotReload(entries) : entries,
         output: {
             filename: name,
             chunkFilename: name,
@@ -58,10 +51,10 @@ module.exports = async () => {
             },
         },
         plugins: [
-            prod && new AssetsManifest({ writeToDisk: true }),
-            dev && new webpack.HotModuleReplacementPlugin(),
-            dev && new webpack.NamedModulesPlugin(),
-            dev && friendlyErrorsWebpackPlugin,
+            PROD && new AssetsManifest({ writeToDisk: true }),
+            DEV && new webpack.HotModuleReplacementPlugin(),
+            DEV && new webpack.NamedModulesPlugin(),
+            DEV && friendlyErrorsWebpackPlugin,
         ].filter(Boolean),
     };
 };
