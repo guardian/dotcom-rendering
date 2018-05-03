@@ -47,11 +47,14 @@ export const calculateWidth = (breakpoint, colspan) => {
     );
 };
 
-const gridStyles = (breakpoint, [colspan]) => ({
+const gridStyles = (breakpoint, [colspan, options]) => ({
     [breakpointMqs[breakpoint]]: {
         float: 'left',
         width: calculateWidth(breakpoint, colspan) + gutter,
         paddingLeft: gutter,
+        marginLeft: options.inset
+            ? calculateWidth(breakpoint, options.inset) + gutter
+            : 0,
     },
 });
 
