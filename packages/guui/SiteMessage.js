@@ -2,8 +2,8 @@
 import { styled, Component } from '@guardian/guui';
 import { transparentize } from 'polished';
 
-import pallete from 'pasteup/palette';
-import CloseButton from 'components/buttons/Close';
+import pallete from '@guardian/pasteup/palette';
+import CloseButton from '@guardian/guui/buttons/Close';
 
 const duration = 100;
 
@@ -69,4 +69,3 @@ export default class SiteMessage extends Component {
         );
     }
 }
-
