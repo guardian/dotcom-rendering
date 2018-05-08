@@ -1,6 +1,8 @@
 // @flow
 /* eslint-disable global-require */
 
+// __SITE__ string is replaced by string-replace-loader in webpack.config.js
+
 import path from 'path';
 import express from 'express';
 import defaultDocument from '@guardian/guui/document';
@@ -47,17 +49,17 @@ if (process.env.NODE_ENV === 'production') {
         try {
             const pages = await getPagesForSite('__SITE__');
             res.send(`
-        <!DOCTYPE html>
-        <html>
-        <body>
-            <ul>
-            ${pages
-                .map(page => `<li><a href="/${page}">${page}</a></li>`)
-                .join('')}
-            </ul>
-        </body>
-        </html>
-        `);
+                <!DOCTYPE html>
+                <html>
+                <body>
+                    <ul>
+                    ${pages
+                        .map(page => `<li><a href="/${page}">${page}</a></li>`)
+                        .join('')}
+                    </ul>
+                </body>
+                </html>
+            `);
         } catch (e) {
             res.status(500).send(`<pre>${e.stack}</pre>`);
         }
