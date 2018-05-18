@@ -19,14 +19,14 @@ endef
 
 riffraff-bundle: clean-dist build
 	$(call log, "copying assets into riffraff bundle")
-	@node ./deploy/build-riffraff-bundle.js
+	@node ./lib/deploy/build-riffraff-bundle.js
 
 riffraff-publish: riffraff-bundle
 	$(call log, "publishing riff-raff bundle")
 	@./lib/publish-assets.sh
 
 deploy:
-	@env ./deploy/build-riffraff-artifact.sh
+	@env ./lib/deploy/build-riffraff-artifact.sh
 
 # prod #########################################
 
