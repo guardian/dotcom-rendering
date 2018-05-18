@@ -8,9 +8,14 @@ const getPagesForSite = (site = '*') =>
         paths.map(path => path.replace(/\.[^/.]+$/, '')),
     );
 
+const root = __dirname;
+const dist = resolve(root, 'dist');
+const target = resolve(root, 'target');
+
 module.exports = {
-    dist: resolve(__dirname, 'dist'),
-    root: __dirname,
+    dist,
+    root,
+    target,
     getPagesForSite,
     getSites,
 };
