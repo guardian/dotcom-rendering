@@ -180,7 +180,7 @@ Resources:
           export TERM=xterm-256color
 
           nvm install
-          make build start
+          make start site=dotcom
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
