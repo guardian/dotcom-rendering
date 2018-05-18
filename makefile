@@ -38,7 +38,7 @@ start:
 ifndef site
 	$(call warn, "You need to specifiy which app to run e.g. make start site=xyz")
 else
-	@make stop build
+	@make stop
 	$(call log, "starting PROD server for $(site)...")
 	@echo '' # just a spacer
 	@NODE_ENV=production pm2 start dist/$(site).server.js
