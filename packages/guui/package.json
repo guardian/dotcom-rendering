@@ -1,0 +1,30 @@
+{
+  "name": "@guardian/guui",
+  "version": "2.0.0-alpha.1",
+  "description": "Guardian rendering framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@guardian/guui": "2.0.0-alpha.1",
+    "@guardian/pasteup": "0.1.0-alpha.1",
+    "emotion": "^9.1.1",
+    "emotion-server": "^9.1.1",
+    "polished": "^1.9.2",
+    "preact": "^8.2.7",
+    "preact-emotion": "^9.1.1",
+    "preact-render-to-string": "^3.7.0",
+    "prop-types": "^15.6.1",
+    "reset-css": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.0.0-beta.44",
+    "babel-plugin-preval": "^1.6.4",
+    "css-loader": "^0.28.11",
+    "desvg-loader": "^0.1.0",
+    "svg-loader": "^0.0.2",
+    "to-string-loader": "^1.1.5"
+  }
+}

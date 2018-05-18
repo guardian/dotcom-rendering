@@ -1,0 +1,16 @@
+{
+  "name": "@guardian/pasteup",
+  "version": "0.1.0-alpha.1",
+  "description": "Guardian design tokens",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.44",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
+    "@babel/preset-flow": "^7.0.0-beta.44"
+  }
+}

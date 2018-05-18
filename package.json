@@ -1,172 +1,61 @@
 {
     "name": "@guardian/guui",
-    "version": "2.0.0-alpha",
-    "description": "Frontend rendering framework",
-    "main": "dist/app.server.js",
-    "repository": "git+https://github.com/guardian/guui.git",
-    "keywords": [],
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/guardian/guui/issues"
-    },
-    "homepage": "https://github.com/guardian/guui#readme",
-    "dependencies": {
-        "compose-function": "^3.0.3",
-        "cpy": "^6.0.0",
-        "curlyquotes": "^1.3.2",
-        "dompurify": "^1.0.3",
-        "emotion": "^9.0.2",
-        "emotion-server": "^9.0.2",
-        "execa": "^0.10.0",
-        "express": "^4.16.2",
-        "html-minifier": "^3.5.10",
-        "jsdom": "^11.6.2",
-        "node-fetch": "^2.1.1",
-        "pm2": "^2.10.1",
-        "polished": "^1.9.2",
-        "preact": "^8.2.7",
-        "preact-emotion": "^9.0.2",
-        "preact-render-to-string": "^3.7.0",
-        "prop-types": "^15.6.0",
-        "reset-css": "^3.0.0",
-        "unistore": "^3.0.4"
+    "version": "0.1.0-alpha",
+    "private": true,
+    "workspaces": [
+        "sites/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "lint": "eslint .",
+        "flow": "flow"
     },
     "devDependencies": {
-        "@babel/core": "^7.0.0-beta.40",
-        "@babel/plugin-external-helpers": "^7.0.0-beta.40",
-        "@babel/plugin-proposal-class-properties": "^7.0.0-beta.40",
-        "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
-        "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.40",
-        "@babel/plugin-transform-runtime": "^7.0.0-beta.40",
-        "@babel/preset-env": "^7.0.0-beta.40",
-        "@babel/preset-flow": "^7.0.0-beta.40",
-        "@babel/preset-react": "^7.0.0-beta.40",
-        "@babel/runtime": "^7.0.0-beta.40",
+        "@babel/core": "^7.0.0-beta.44",
+        "@babel/plugin-proposal-class-properties": "^7.0.0-beta.44",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
+        "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.44",
+        "@babel/preset-env": "^7.0.0-beta.44",
+        "@babel/preset-flow": "^7.0.0-beta.44",
+        "@guardian/rendering": "0.1.0-alpha.1",
         "babel-eslint": "^8.2.1",
-        "babel-loader": "^8.0.0-beta.0",
+        "babel-loader": "^8.0.0-beta.2",
         "babel-plugin-dynamic-import-node": "^1.2.0",
-        "babel-plugin-emotion": "^9.0.1",
-        "babel-plugin-module-resolver": "^3.1.0",
-        "babel-plugin-preval": "^1.6.3",
-        "chalk": "^2.3.0",
-        "columnify": "^1.5.4",
-        "decamelize": "^2.0.0",
-        "desvg-loader": "^0.1.0",
         "eslint": "^4.18.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.6.0",
-        "eslint-import-resolver-babel-module": "^4.0.0",
         "eslint-plugin-flow-header": "^0.2.0",
         "eslint-plugin-flowtype": "^2.45.0",
         "eslint-plugin-import": "^2.7.0",
         "eslint-plugin-jsx-a11y": "^6.0.2",
         "eslint-plugin-prettier": "^2.6.0",
         "eslint-plugin-react": "^7.4.0",
-        "filesizegzip": "^2.0.0",
         "flow-bin": "^0.68.0",
+        "flow-typed": "^2.4.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
+        "log-update": "^2.3.0",
         "prettier": "^1.7.4",
-        "pretty-bytes": "^4.0.2",
-        "semver": "^5.5.0",
-        "simple-progress-webpack-plugin": "^1.1.0",
+        "simple-progress-webpack-plugin": "^1.1.2",
         "string-replace-loader": "^2.1.1",
-        "svg-loader": "^0.0.2",
-        "webpack": "^4.1.1",
-        "webpack-assets-manifest": "^2.0.0",
-        "webpack-bundle-analyzer": "^2.10.0",
-        "webpack-cli": "^2.0.12",
-        "webpack-dev-middleware": "^3.0.1",
-        "webpack-dev-server": "^3.1.1",
-        "webpack-hot-middleware": "^2.21.0",
+        "term-size": "^1.2.0",
+        "webpack": "^4.5.0",
+        "webpack-assets-manifest": "^3.0.1",
+        "webpack-bundle-analyzer": "^2.11.1",
+        "webpack-cli": "^2.0.14",
+        "webpack-dev-middleware": "^3.1.2",
+        "webpack-hot-middleware": "^2.22.0",
         "webpack-hot-server-middleware": "^0.5.0",
-        "webpack-merge": "^4.1.1",
-        "webpack-node-externals": "^1.6.0"
+        "webpack-merge": "^4.1.2",
+        "webpack-node-externals": "^1.7.2",
+        "webpack-sources": "^1.1.0"
     },
-    "prettier": {
-        "tabWidth": 4,
-        "trailingComma": "all",
-        "singleQuote": true,
-        "bracketSpacing": true
-    },
-    "eslintConfig": {
-        "parser": "babel-eslint",
-        "globals": {},
-        "parserOptions": {
-            "ecmaVersion": "2017",
-            "sourceType": "module",
-            "ecmaFeatures": {
-                "jsx": true
-            }
-        },
-        "extends": [
-            "airbnb",
-            "prettier",
-            "plugin:flowtype/recommended",
-            "prettier/flowtype",
-            "prettier/react"
-        ],
-        "settings": {
-            "import/resolver": {
-                "babel-module": {
-                    "root": [
-                        "./src"
-                    ]
-                }
-            }
-        },
-        "plugins": [
-            "flow-header",
-            "flowtype",
-            "react",
-            "prettier"
-        ],
-        "rules": {
-            "prettier/prettier": [
-                "error"
-            ],
-            "flow-header/flow-header": "error",
-            "consistent-return": "off",
-            "react/react-in-jsx-scope": "off",
-            "react/prop-types": "off",
-            "react/jsx-filename-extension": [
-                1,
-                {
-                    "extensions": [
-                        ".js",
-                        ".jsx"
-                    ]
-                }
-            ]
-        },
-        "overrides": [
-            {
-                "files": [
-                    "src/**/*.demo.js",
-                    "lib/*.js"
-                ],
-                "rules": {
-                    "import/prefer-default-export": "off"
-                }
-            },
-            {
-                "files": [
-                    "__tasks__/**/*.js"
-                ],
-                "rules": {
-                    "global-require": "off",
-                    "no-console": "off"
-                }
-            }
-        ],
-        "env": {
-            "browser": true
-        }
-    },
-    "eslintIgnore": [
-        "!.eslint.js",
-        "!.babelrc.js",
-        "!.data",
-        "dist",
-        "flow-typed"
-    ]
+    "dependencies": {
+        "chalk": "^2.4.0",
+        "columnify": "^1.5.4",
+        "cpy": "^6.0.0",
+        "execa": "^0.10.0",
+        "filesizegzip": "^2.0.0",
+        "inquirer": "^5.2.0",
+        "pretty-bytes": "^4.0.2"
+    }
 }

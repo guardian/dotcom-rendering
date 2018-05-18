@@ -1,62 +1,76 @@
-# this means you can run the binaries in node_modules
-# like so: `env BINARY_NAME`
+.PHONY: flow-typed install dev build clean-dist start stop monitor clear
+
+# these means you can run the binaries in node_modules
+# like with npm scripts
 export PATH := node_modules/.bin:$(PATH)
+export SHELL := /usr/bin/env bash
+
+# messaging #########################################
 
 define log
-    @node __tasks__/log.js $(1)
+    @node lib/log $(1)
 endef
 
-# app #########################################
+define warn
+    @node lib/log $(1) warn
+endef
 
-clean-dist:
-	$(call log, "deleting old artefacts")
-	@rm -rf dist
-	@rm -rf target
+# deployment #########################################
 
 riffraff-bundle: clean-dist build
 	$(call log, "copying assets into riffraff bundle")
-	@node ./__tasks__/build-riffraff-bundle.js
+	@node ./lib/build-riffraff-bundle.js
 
 riffraff-publish: riffraff-bundle
 	$(call log, "publishing riff-raff bundle")
-	@env ./__tasks__/publish-assets.sh
+	@./lib/publish-assets.sh
+
+deploy:
+	@env ./lib/build-riffraff-artifact.sh
+
+# prod #########################################
 
 build: clear install clean-dist
 	$(call log, "building production bundles")
+	@NODE_ENV=production webpack --config webpack
+
+start:
+ifndef site
+	$(call warn, "You need to specifiy which app to run e.g. make start site=xyz")
+else
+	@make stop build
+	$(call log, "starting PROD server for $(site)...")
 	@echo '' # just a spacer
-	@NODE_ENV=production webpack --bail --color --config __config__/webpack/webpack.config.js
-
-dev: clear install clean-dist
-	$(call log, "starting DEV server...")
-	@NODE_ENV=development node __server__/development.js
-
-start: stop
-	@NODE_ENV=production pm2 start __server__/production.js
+	@NODE_ENV=production pm2 start dist/$(site).server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running at http://localhost:9000")
+endif
 
 stop:
-	@env pm2 kill
+	@pm2 kill
 
 monitor:
-	@env pm2 monit
+	@pm2 monit
 
-deploy:
-	@env ./__tasks__/build-riffraff-artifact.sh
+# dev #########################################
+
+dev: clear install clean-dist
+	$(call log, "starting DEV server")
+	@NODE_ENV=development node dev-server $(site)
 
 # quality #########################################
 
 flow: install
 	$(call log, "checking for type errors")
-	@env flow >/dev/null # we'll still get errors
+	@flow >/dev/null # we'll still get errors
 
 fix: clear install
 	$(call log, "attempting to fix lint errors")
-	@env eslint . --fix --quiet
+	@eslint . --fix --quiet
 
 lint: install
 	$(call log, "checking for lint errors")
-	@env eslint . --quiet
+	@eslint . --quiet
 
 test: clear install
 	$(call log, "there are no tests!")
@@ -69,26 +83,37 @@ validate-ci: clear install flow lint test
 
 # helpers #########################################
 
+clean-dist:
+	@rm -rf dist
+	@rm -rf target
+
+clean-deps:
+	$(call log, "trashing dependencies")
+	@rm -rf node_modules
+
 install: check-env
 	$(call log, "refreshing dependencies")
 	@yarn >/dev/null
 
-clean-modules:
-	$(call log, "trashing dependencies")
-	@rm -rf node_modules
-
-reinstall: clear clean-modules install
+reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
 
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@CI=true NODE_ENV=production webpack --config __config__/webpack/webpack.config.js >/dev/null
+	@HIDE_BUNDLES=true NODE_ENV=production webpack --config webpack
 
 check-env: # private
 	$(call log, "checking environment")
-	@node __tasks__/check-node.js
-	@node __tasks__/check-yarn.js
+	@node lib/check-node.js
+	@node lib/check-yarn.js
 
 clear: # private
 	@clear
+
+flow-typed: yarn.lock
+	@rm -rf flow-typed/npm
+	@cd sites/dotcom && ../../node_modules/.bin/flow-typed install -p ../../
+	@cd packages/guui && ../../node_modules/.bin/flow-typed install -p ../../
+	@cd packages/pasteup && ../../node_modules/.bin/flow-typed install -p ../../
+	@flow-typed install
