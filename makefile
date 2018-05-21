@@ -23,7 +23,7 @@ riffraff-bundle: clean-dist build
 
 riffraff-publish: riffraff-bundle
 	$(call log, "publishing riff-raff bundle")
-	@./lib/publish-assets.sh
+	@./lib/deploy/publish-assets.sh
 
 deploy:
 	@env ./lib/deploy/build-riffraff-artifact.sh
@@ -93,7 +93,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn >/dev/null
+	@yarn --silent
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
