@@ -98,6 +98,19 @@ Resources:
           Action:
           - sts:AssumeRole
       Path: /
+      Policies:
+      - PolicyName: instance-policy
+        PolicyDocument:
+          Statement:
+          # grant access to the distribution bucket in S3
+          - Effect: Allow
+            Action: s3:GetObject
+            Resource: arn:aws:s3:::aws-frontend-artifacts/*
+          - Effect: Allow
+            Action:
+            - cloudwatch:*
+            - logs:*
+            Resource: '*'
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -113,7 +126,7 @@ Resources:
       - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
       CrossZone: true
       HealthCheck:
-        Target: HTTP:9000/healthcheck
+        Target: TCP:9000
         HealthyThreshold: 2
         UnhealthyThreshold: 10
         Interval: 30
@@ -174,12 +187,14 @@ Resources:
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-          git clone https://github.com/guardian/guui.git
+          aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/PROD/guui/dist/guui.zip ./
+          unzip guui.zip -d guui
           cd guui
 
           export TERM=xterm-256color
 
           nvm install
+          yarn install
           make start site=dotcom
 
   AutoscalingGroup:
