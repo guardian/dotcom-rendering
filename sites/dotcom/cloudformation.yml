@@ -98,19 +98,6 @@ Resources:
           Action:
           - sts:AssumeRole
       Path: /
-      Policies:
-      - PolicyName: instance-policy
-        PolicyDocument:
-          Statement:
-          # grant access to the distribution bucket in S3
-          - Effect: Allow
-            Action: s3:GetObject
-            Resource: arn:aws:s3:::aws-frontend-artifacts/*
-          - Effect: Allow
-            Action:
-            - cloudwatch:*
-            - logs:*
-            Resource: '*'
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -126,7 +113,7 @@ Resources:
       - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
       CrossZone: true
       HealthCheck:
-        Target: TCP:9000
+        Target: HTTP:9000/healthcheck
         HealthyThreshold: 2
         UnhealthyThreshold: 10
         Interval: 30
@@ -169,34 +156,31 @@ Resources:
         Ref: InstanceProfile
       AssociatePublicIpAddress: true
       UserData:
-        'Fn::Base64':
-          !Sub |
-              #!/bin/bash -ev
+        'Fn::Base64': |
+          #!/bin/bash -ev
 
-              cd /home/ubuntu
+          cd /home/ubuntu
 
-              curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-              curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-              echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-              apt-get update
-              apt-get install -y nodejs
-              apt-get install -y yarn
+          apt-get update
+          apt-get install -y nodejs
+          apt-get install -y yarn
 
-              # nvm
-              curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-              export NVM_DIR="$HOME/.nvm"
-              [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          # nvm
+          curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-              aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/guui/dist/guui.zip ./
-              unzip guui.zip -d guui
-              cd guui
+          git clone https://github.com/guardian/guui.git
+          cd guui
 
-              export TERM=xterm-256color
+          export TERM=xterm-256color
 
-              nvm install
-              yarn install
-              make start site=dotcom
+          nvm install
+          make start site=dotcom
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
