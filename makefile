@@ -34,7 +34,7 @@ build: clear install clean-dist
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config webpack
 
-start:
+start: install
 ifndef site
 	$(call warn, "You need to specifiy which app to run e.g. make start site=xyz")
 else

@@ -195,7 +195,6 @@ Resources:
               export TERM=xterm-256color
 
               nvm install
-              yarn install
               make start site=dotcom
 
   AutoscalingGroup:
