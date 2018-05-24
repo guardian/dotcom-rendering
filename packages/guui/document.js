@@ -2,7 +2,7 @@
 
 import { renderToString } from '@guardian/guui';
 import resetCSS from './lib/reset-css';
-import { hashedPath, staticPath } from './lib/asset-path';
+import assets from './lib/assets';
 
 export default ({
     title = 'The Guardian',
@@ -15,12 +15,11 @@ export default ({
     data: { page: string, site: string },
     nonBlockingJS?: string,
 }) => {
-    const bundle = hashedPath(
-        'javascript',
-        `${data.site}.${data.page.toLowerCase()}.js`,
+    const bundle = assets.dist(
+        `javascript/${data.site}.${data.page.toLowerCase()}.js`,
     );
-    const vendor = hashedPath('javascript', 'vendor.js');
-    const fonts = staticPath('css', 'fonts.css');
+    const vendor = assets.dist('javascript/vendor.js');
+    const fonts = assets.static('css/fonts.css');
 
     const { html, css, ids: cssIDs } = renderToString(<Page />);
 
