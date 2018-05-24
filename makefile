@@ -18,7 +18,7 @@ endef
 # deployment #########################################
 
 riffraff-bundle: clean-dist build
-	$(call log, "copying assets into riffraff bundle")
+	$(call log, "creating riffraff bundle")
 	@node ./lib/deploy/build-riffraff-bundle.js
 
 riffraff-publish: riffraff-bundle
