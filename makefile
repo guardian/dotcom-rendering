@@ -86,6 +86,7 @@ validate-ci: clear install flow lint test
 clean-dist:
 	@rm -rf dist
 	@rm -rf target
+	@rm -f guui.zip
 
 clean-deps:
 	$(call log, "trashing dependencies")
