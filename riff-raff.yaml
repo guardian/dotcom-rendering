@@ -1,6 +1,12 @@
 stacks: [frontend]
 regions: [eu-west-1]
 deployments:
+  frontend-cfn:
+    type: cloud-formation
+    parameters:
+      templatePath: cloudformation.yml
+      cloudFormationStackByTags: false
+      cloudFormationStackName: rendering
   guui:
     type: autoscaling    
     parameters:

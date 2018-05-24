@@ -113,7 +113,7 @@ Resources:
       - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
       CrossZone: true
       HealthCheck:
-        Target: HTTP:9000/healthcheck
+        Target: HTTP:9000/_healthcheck
         HealthyThreshold: 2
         UnhealthyThreshold: 10
         Interval: 30
