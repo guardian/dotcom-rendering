@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
         '/static',
         express.static(path.join(__dirname, '..', 'src', 'static')),
     );
-    app.use('/assets/javascript', express.static(dist));
+    app.use('/assets', express.static(dist));
     app.use('/:page', render);
 
     app.get('/', async (req, res) => {

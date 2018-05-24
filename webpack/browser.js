@@ -30,7 +30,9 @@ const hotReload = entries =>
     );
 
 module.exports = async () => {
-    const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
+    const name = PROD
+        ? `javascript/[name].[chunkhash].js`
+        : `javascript/[name].js`;
     const entries = await getEntries();
 
     return {
