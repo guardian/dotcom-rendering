@@ -16,8 +16,6 @@ export const CapiComponent = (MyComponent, capiKey) =>
 
                 keyRegister.add(capiKey);
 
-                console.log('keyRegister --->', keyRegister);
-
                 return (
                     <MyComponent
                         {...this.props}
