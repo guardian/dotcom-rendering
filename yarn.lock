@@ -5950,9 +5950,9 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
 
-preact-context-provider@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/preact-context-provider/-/preact-context-provider-1.1.1.tgz#15d48f10352c919557f49b798efdb68f2fccc9ed"
+preact-context@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/preact-context/-/preact-context-1.0.0.tgz#431dca63c15a2df29915a195084b71bf12d28741"
 
 preact-emotion@^9.0.2:
   version "9.0.2"

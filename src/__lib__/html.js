@@ -48,7 +48,7 @@ export default ({
                                         if (keyRegister.has(key)) {
                                             acc[
                                                 key
-                                            ] = `document.getElementById('capi-content-${key}-1').innerHTML`;
+                                            ] = `document.querySelector('[data-capi-key=${key}]').innerHTML`;
                                         } else {
                                             acc[key] = data.content[key];
                                         }

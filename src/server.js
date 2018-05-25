@@ -6,7 +6,6 @@ import renderToString from 'preact-render-to-string';
 import { extractCritical } from 'emotion-server';
 import createStore from 'unistore';
 import { Provider } from 'unistore/preact';
-import Context from 'preact-context-provider';
 
 import Page from 'components/Page';
 import doc from '__lib__/html';
@@ -30,11 +29,9 @@ const renderPage = async (req, res) => {
         const { html, ids: cssIDs, css } = extractCritical(
             renderToString(
                 <Provider store={createStore(data)}>
-                    <Context capiComponentRegister={{}}>
-                        <Page>
-                            <PageType />
-                        </Page>
-                    </Context>
+                    <Page>
+                        <PageType />
+                    </Page>
                 </Provider>,
             ),
         );
