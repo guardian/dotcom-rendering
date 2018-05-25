@@ -41,7 +41,7 @@ else
 	@make stop
 	$(call log, "starting PROD server for $(site)...")
 	@echo '' # just a spacer
-	@NODE_ENV=production pm2 start dist/$(site).server.js
+	@NODE_ENV=production pm2 start dist/javascript/$(site).server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running at http://localhost:9000")
 endif
