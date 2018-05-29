@@ -7,8 +7,13 @@ deployments:
       templatePath: cloudformation.yml
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
+      amiParametersToTags:
+        AMI:
+          Recipe: frontend-base
+          BuiltBy: amigo
+          AmigoStage: PROD
   guui:
-    type: autoscaling    
+    type: autoscaling
     parameters:
       bucket: aws-frontend-artifacts
     dependencies:
