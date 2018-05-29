@@ -9,7 +9,15 @@ try {
     // do nothing
 }
 
-const CDN = process.env.GU_PUBLIC ? '//assets.guim.co.uk/guui/' : '/';
+// GU_STAGE is set in sites/dotcom/cloudformation.yml, so will be undefined locally
+const stage =
+    typeof process.env.GU_STAGE === 'string'
+        ? process.env.GU_STAGE.toUpperCase()
+        : process.env.GU_STAGE;
+
+const CDN = stage
+    ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/guui/`
+    : '/';
 
 export default {
     dist: (path: string): string => `${CDN}assets/${assetHash[path] || path}`,

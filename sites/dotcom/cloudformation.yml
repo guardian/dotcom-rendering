@@ -194,8 +194,7 @@ Resources:
 
               export TERM=xterm-256color
 
-              # used to distinguish PROD when running locally
-              export GU_PUBLIC=true
+              export GU_STAGE=${Stage}
 
               nvm install
               make start site=dotcom
