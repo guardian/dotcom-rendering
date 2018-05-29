@@ -30,7 +30,7 @@ deploy:
 
 # prod #########################################
 
-build: clear install clean-dist
+build: clear clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config webpack
 
@@ -41,7 +41,7 @@ else
 	@make stop
 	$(call log, "starting PROD server for $(site)...")
 	@echo '' # just a spacer
-	@NODE_ENV=production pm2 start dist/javascript/$(site).server.js
+	@NODE_ENV=production pm2 start dist/$(site).server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running at http://localhost:9000")
 endif
@@ -54,28 +54,28 @@ monitor:
 
 # dev #########################################
 
-dev: clear install clean-dist
+dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development node dev-server $(site)
 
 # quality #########################################
 
-flow: install
+flow: clean-dist install
 	$(call log, "checking for type errors")
 	@flow >/dev/null # we'll still get errors
 
-fix: clear install
+fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
 	@eslint . --fix --quiet
 
-lint: install
+lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@eslint . --quiet
 
-test: clear install
+test: clear clean-dist install
 	$(call log, "there are no tests!")
 
-validate: clear install flow lint test validate-build
+validate: clear clean-dist install flow lint test validate-build
 	$(call log, "everything seems 👌")
 
 validate-ci: clear install flow lint test
