@@ -1,13 +1,7 @@
 // @flow
 import { styled } from '@guardian/guui';
 
-import {
-    mobileLandscape,
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-} from '@guardian/pasteup/breakpoints';
+import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
 const Page = styled('main')({
     margin: 'auto',
