@@ -32,7 +32,7 @@ Mappings:
     Stack:
       Value: frontend
     App:
-      Value: guui
+      Value: rendering
 
 Resources:
   LoadBalancerSecurityGroup:
