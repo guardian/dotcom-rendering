@@ -185,8 +185,7 @@ Resources:
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      AvailabilityZones:
-        - eu-west-1a
+      AvailabilityZones: !GetAZs ''
       VPCZoneIdentifier:
         Ref: Subnets
       LaunchConfigurationName:
