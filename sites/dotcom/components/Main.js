@@ -3,7 +3,7 @@ import { styled } from '@guardian/guui';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
-const Page = styled('main')({
+const Main = styled('main')({
     margin: 'auto',
     [tablet]: {
         maxWidth: '740px',
@@ -19,4 +19,4 @@ const Page = styled('main')({
     },
 });
 
-export default Page;
+export default Main;
