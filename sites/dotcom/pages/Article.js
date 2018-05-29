@@ -11,6 +11,7 @@ import palette from '@guardian/pasteup/palette';
 import { clearFix } from '@guardian/pasteup/mixins';
 
 import Page from '../components/Page';
+import Main from '../components/Main';
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Epic from '../components/Epic';
@@ -93,51 +94,53 @@ const SeriesLabel = styled(SectionLabel)({
 
 export default connect('CAPI')(({ CAPI = {} }) => (
     <Page>
-        <article>
-            <Header />
-            <Row>
-                <Cols wide={4} leftCol={2}>
-                    <Labels>
-                        <SectionLabel>The NSA files</SectionLabel>
-                        <SeriesLabel>
-                            Glenn Greenwald on security and liberty
-                        </SeriesLabel>
-                    </Labels>
-                </Cols>
-                <Cols wide={12} leftCol={12}>
-                    <Headline>{CAPI.headline}</Headline>
-                    <Standfirst
-                        dangerouslySetInnerHTML={{
-                            __html: CAPI.standfirst,
-                        }}
-                    />
-                </Cols>
-            </Row>
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.main,
-                }}
-            />
-            <Body
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.body,
-                }}
-            />
-            <MostViewed />
-            <Epic>
-                <strong>
-                    Unlike many news organisations, we haven’t put up a paywall
-                    – we want to keep our journalism as open as we can.
-                </strong>{' '}
-                The Guardian’s independent, investigative journalism takes a lot
-                of time, money and hard work to produce. But the revenue we get
-                from advertising is falling, so we increasingly need our readers
-                to fund us. If everyone who reads our reporting, who likes it,
-                helps fund it, our future would be much more secure.{' '}
-                <strong>
-                    Support The Guardian for just 17p a day or £5 a month.
-                </strong>
-            </Epic>
-        </article>
+        <Header />
+        <Main>
+            <article>
+                <Row>
+                    <Cols wide={3} leftCol={2}>
+                        <Labels>
+                            <SectionLabel>The NSA files</SectionLabel>
+                            <SeriesLabel>
+                                Glenn Greenwald on security and liberty
+                            </SeriesLabel>
+                        </Labels>
+                    </Cols>
+                    <Cols wide={13} leftCol={12}>
+                        <Headline>{CAPI.headline}</Headline>
+                        <Standfirst
+                            dangerouslySetInnerHTML={{
+                                __html: CAPI.standfirst,
+                            }}
+                        />
+                    </Cols>
+                </Row>
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: CAPI.main,
+                    }}
+                />
+                <Body
+                    dangerouslySetInnerHTML={{
+                        __html: CAPI.body,
+                    }}
+                />
+                <MostViewed />
+                <Epic>
+                    <strong>
+                        Unlike many news organisations, we haven’t put up a paywall
+                        – we want to keep our journalism as open as we can.
+                    </strong>{' '}
+                    The Guardian’s independent, investigative journalism takes a lot
+                    of time, money and hard work to produce. But the revenue we get
+                    from advertising is falling, so we increasingly need our readers
+                    to fund us. If everyone who reads our reporting, who likes it,
+                    helps fund it, our future would be much more secure.{' '}
+                    <strong>
+                        Support The Guardian for just 17p a day or £5 a month.
+                    </strong>
+                </Epic>
+            </article>
+        </Main>
     </Page>
 ));

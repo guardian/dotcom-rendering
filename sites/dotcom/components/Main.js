@@ -1,0 +1,28 @@
+// @flow
+import { styled } from '@guardian/guui';
+
+import {
+    mobileLandscape,
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+} from '@guardian/pasteup/breakpoints';
+
+const Page = styled('main')({
+    margin: 'auto',
+    [tablet]: {
+        maxWidth: '740px',
+    },
+    [desktop]: {
+        maxWidth: '980px',
+    },
+    [leftCol]: {
+        maxWidth: '1140px',
+    },
+    [wide]: {
+        maxWidth: '1300px',
+    },
+});
+
+export default Page;
