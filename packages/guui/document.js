@@ -15,10 +15,8 @@ export default ({
     data: { page: string, site: string },
     nonBlockingJS?: string,
 }) => {
-    const bundle = assets.dist(
-        `javascript/${data.site}.${data.page.toLowerCase()}.js`,
-    );
-    const vendor = assets.dist('javascript/vendor.js');
+    const bundle = assets.dist(`${data.site}.${data.page.toLowerCase()}.js`);
+    const vendor = assets.dist('vendor.js');
     const fonts = assets.static('css/fonts.css');
 
     const { html, css, ids: cssIDs } = renderToString(<Page />);

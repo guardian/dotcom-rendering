@@ -3,8 +3,8 @@ const getEntries = require('./server-entries');
 module.exports = async () => ({
     entry: await getEntries(),
     output: {
-        filename: `javascript/[name].js`,
-        chunkFilename: `javascript/[name].js`,
+        filename: `[name].js`,
+        chunkFilename: `[name].js`,
         libraryTarget: 'commonjs2',
         pathinfo: true,
     },
