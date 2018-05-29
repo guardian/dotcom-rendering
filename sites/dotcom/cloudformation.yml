@@ -11,7 +11,7 @@ Parameters:
   App:
     Description: Application name
     Type: String
-    Default: guui
+    Default: rendering
   Stage:
     Description: Stage name
     Type: String
