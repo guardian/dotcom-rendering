@@ -3,7 +3,6 @@
 /* eslint-disable react/no-danger */
 
 import { styled } from '@guardian/guui';
-import { connect } from 'unistore/preact';
 
 import { Row, Cols } from '@guardian/guui/grid';
 import { textEgyptian, headline } from '@guardian/pasteup/fonts';

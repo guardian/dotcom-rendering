@@ -1,8 +1,9 @@
+// @flow
 import resetCSS from './lib/reset-css';
 import { hashedPath, staticPath } from './lib/asset-path';
 
-export default ({ 
-    title = 'The Guardian', 
+export default ({
+    title = 'The Guardian',
     vendor = ['javascript', 'vendor.js'],
     fonts = ['css', 'fonts.css'],
     bundle,
@@ -10,7 +11,20 @@ export default ({
     html,
     data,
     cssIDs,
-    nonBlockingJS = ''
+    nonBlockingJS = '',
+}: {
+    title?: string,
+    vendor?: Array<string>,
+    fonts?: Array<string>,
+    bundle: Array<string>,
+    css: string,
+    html: string,
+    data: {
+        page: string,
+        site: string,
+    },
+    cssIDs: Array<string>,
+    nonBlockingJS?: string,
 }) => {
     const vendorPath = hashedPath(...vendor);
     const fontsPath = staticPath(...fonts);
@@ -31,12 +45,14 @@ export default ({
             <body>
                 <div id='app'>${html}</div>
                 <script>
-                window.gu = ${sanitiseDomRefs(JSON.stringify({
-                    app: {
-                        data,
-                        cssIDs,
-                    },
-                }))};
+                window.gu = ${sanitiseDomRefs(
+                    JSON.stringify({
+                        app: {
+                            data,
+                            cssIDs,
+                        },
+                    }),
+                )};
                 </script>
                 <script src="${vendorPath}"></script>
                 <script src="${bundlePath}"></script>

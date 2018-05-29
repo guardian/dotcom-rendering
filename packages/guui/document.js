@@ -10,13 +10,10 @@ export default ({
     Page: React.ComponentType<{}>,
     data: { page: string, site: string },
 }) => {
-    const bundle = [
-        'javascript',
-        `${data.site}.${data.page.toLowerCase()}.js`,
-    ];
+    const bundle = ['javascript', `${data.site}.${data.page.toLowerCase()}.js`];
     const { html, css, ids: cssIDs } = renderToString(<Page />);
 
-    return htmlTemplate({ 
+    return htmlTemplate({
         bundle,
         css,
         html,

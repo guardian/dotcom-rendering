@@ -24,27 +24,29 @@ export default ({ Page, data: { body, ...data } }: Props) => {
     ];
     const MyPage = () => <App data={{ ...cleanedData }} Page={Page} />;
     const { html, css, ids: cssIDs } = renderToString(<MyPage />);
-    const CAPI = Object.keys(cleanedData.CAPI).reduce(
-        (acc, key) => {
-            if (keyRegister.has(key)) {
-                acc[
-                    key
-                ] = `document.querySelector('[data-capi-key=${key}]').innerHTML`;
-            } else {
-                acc[key] = cleanedData.CAPI[key];
-            }
-            return acc;
-        },
-        {},
-    );
+    /**
+     * To save sending CAPI data twice (in the HEAD and BODY)
+     * we replace any keys present in the CapiComponent keyRegister
+     * with document.querySelectors, therefore sending the data in the BODY only
+     * */
+    const CAPI = Object.keys(cleanedData.CAPI).reduce((acc, key) => {
+        if (keyRegister.has(key)) {
+            acc[
+                key
+            ] = `document.querySelector('[data-capi-key=${key}]').innerHTML`;
+        } else {
+            acc[key] = cleanedData.CAPI[key];
+        }
+        return acc;
+    }, {});
 
-    return htmlTemplate({ 
+    return htmlTemplate({
         bundle,
         css,
         html,
         data: {
             ...cleanedData,
-            CAPI
+            CAPI,
         },
         cssIDs,
     });

@@ -1,5 +1,5 @@
 // @flow
-import { Component } from 'preact';
+import { Component } from '@guardian/guui';
 import { connect } from 'unistore/preact';
 
 export const keyRegister = new Set();
@@ -21,7 +21,7 @@ export const CapiComponent = (MyComponent, capiKey) =>
                         {...this.props}
                         data-capi-key={capiKey}
                         dangerouslySetInnerHTML={{
-                        __html: capiContent,
+                            __html: capiContent,
                         }}
                     />
                 );
