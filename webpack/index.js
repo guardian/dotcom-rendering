@@ -98,6 +98,7 @@ module.exports = getSites().then(sites =>
     sites.reduce(async (configs, site) => {
         const pages = await getPagesForSite(site);
         return [
+            // server bundle config
             merge(
                 {
                     entry: {
@@ -112,6 +113,8 @@ module.exports = getSites().then(sites =>
                     site,
                 }),
             ),
+
+            // browser bundle configs
             ...pages.map(page =>
                 merge(
                     {
@@ -131,6 +134,8 @@ module.exports = getSites().then(sites =>
                     }),
                 ),
             ),
+
+            // previously created configs
             ...configs,
         ];
     }, []),
