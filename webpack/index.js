@@ -16,7 +16,7 @@ const common = ({ platform, site, page = '' }) => ({
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
-        publicPath: '/assets/',
+        publicPath: '/assets/javascript',
         path: dist,
     },
     stats: 'errors-only',
