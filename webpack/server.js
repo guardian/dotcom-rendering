@@ -1,7 +1,4 @@
-const getEntries = require('./server-entries');
-
-module.exports = async () => ({
-    entry: await getEntries(),
+module.exports = {
     output: {
         filename: `[name].js`,
         chunkFilename: `[name].js`,
@@ -23,4 +20,4 @@ module.exports = async () => ({
                 ? callback(null, `commonjs ${request}`)
                 : callback(),
     ],
-});
+};

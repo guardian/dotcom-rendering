@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
-const getEntries = require('./browser-entries');
 
 const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
@@ -17,44 +16,28 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 
-const hotReload = entries =>
-    Object.entries(entries).reduce(
-        (hotReloadEntries, [entry, bundles]) => ({
-            [entry]: [
-                'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-                ...bundles,
-            ],
-            ...hotReloadEntries,
-        }),
-        {},
-    );
+const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
 
-module.exports = async () => {
-    const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
-    const entries = await getEntries();
-
-    return {
-        entry: DEV ? hotReload(entries) : entries,
-        output: {
-            filename: name,
-            chunkFilename: name,
-        },
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    commons: {
-                        test: /node_modules/,
-                        name: 'vendor',
-                        chunks: 'all',
-                    },
+module.exports = {
+    output: {
+        filename: name,
+        chunkFilename: name,
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /node_modules/,
+                    name: 'vendor',
+                    chunks: 'all',
                 },
             },
         },
-        plugins: [
-            PROD && new AssetsManifest({ writeToDisk: true }),
-            DEV && new webpack.HotModuleReplacementPlugin(),
-            DEV && new webpack.NamedModulesPlugin(),
-            DEV && friendlyErrorsWebpackPlugin,
-        ].filter(Boolean),
-    };
+    },
+    plugins: [
+        PROD && new AssetsManifest({ writeToDisk: true }),
+        DEV && new webpack.HotModuleReplacementPlugin(),
+        DEV && new webpack.NamedModulesPlugin(),
+        DEV && friendlyErrorsWebpackPlugin,
+    ].filter(Boolean),
 };
