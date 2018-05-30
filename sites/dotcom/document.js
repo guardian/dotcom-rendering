@@ -22,8 +22,7 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         'javascript',
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
     ];
-    const MyPage = () => <App data={{ ...cleanedData }} Page={Page} />;
-    const { html, css, ids: cssIDs } = renderToString(<MyPage />);
+    const { html, css, ids: cssIDs } = renderToString(<App data={{ ...cleanedData }} Page={Page} />);
     /**
      * To save sending CAPI data twice (in the HEAD and BODY)
      * we replace any keys present in the CapiComponent keyRegister
