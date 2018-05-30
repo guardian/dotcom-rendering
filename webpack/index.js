@@ -4,18 +4,19 @@ const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../lib/report-bundle-size');
 const Progress = require('../lib/webpack-progress');
-const { root, dist } = require('../config');
+const { root, dist, getSites, getPagesForSite } = require('../config');
 
 const PROD = process.env.NODE_ENV === 'production';
+const DEV = process.env.NODE_ENV === 'development';
 
 const reportBundleSize = new ReportBundleSize({ configCount: 2 });
 const progress = new Progress();
 
-const common = ({ platform }) => ({
+const common = ({ platform, site, page = '' }) => ({
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
-        publicPath: '/assets/javascript/',
+        publicPath: '/assets/',
         path: dist,
     },
     stats: 'errors-only',
@@ -28,9 +29,26 @@ const common = ({ platform }) => ({
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                },
+                use: [
+                    'babel-loader',
+                    {
+                        loader: 'string-replace-loader',
+                        options: {
+                            multiple: [
+                                {
+                                    search: '__SITE__',
+                                    replace: site,
+                                    flags: 'g',
+                                },
+                                {
+                                    search: '__PAGE__',
+                                    replace: page,
+                                    flags: 'g',
+                                },
+                            ],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.css$/,
@@ -76,13 +94,44 @@ const common = ({ platform }) => ({
     },
 });
 
-module.exports = Promise.all(
-    ['browser', 'server'].map(async platform =>
-        merge(
-            await require(`./${platform}`)(),
-            common({
-                platform,
-            }),
-        ),
-    ),
+module.exports = getSites().then(sites =>
+    sites.reduce(async (configs, site) => {
+        const pages = await getPagesForSite(site);
+        return [
+            merge(
+                {
+                    entry: {
+                        [`${site}.server`]: require.resolve(
+                            `@guardian/rendering/server`,
+                        ),
+                    },
+                },
+                require(`./server`),
+                common({
+                    platform: 'server',
+                    site,
+                }),
+            ),
+            ...pages.map(page =>
+                merge(
+                    {
+                        entry: {
+                            [`${site}.${page.toLowerCase()}`]: [
+                                DEV &&
+                                    'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
+                                require.resolve(`@guardian/rendering/browser`),
+                            ].filter(Boolean),
+                        },
+                    },
+                    require(`./browser`),
+                    common({
+                        platform: 'browser',
+                        site,
+                        page,
+                    }),
+                ),
+            ),
+            ...configs,
+        ];
+    }, []),
 );
