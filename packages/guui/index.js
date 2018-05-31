@@ -8,7 +8,11 @@ import { hydrate as hydrateCSS } from 'emotion';
 import styled from 'preact-emotion';
 import { extractCritical } from 'emotion-server';
 
-type renderToStringResult = { html: string, css: string, ids: [] };
+type renderToStringResult = {
+    html: string,
+    css: string,
+    ids: Array<string>
+};
 
 const renderToString = (ComponentToRender: React.Node): renderToStringResult =>
     extractCritical(preactRenderToString(ComponentToRender));

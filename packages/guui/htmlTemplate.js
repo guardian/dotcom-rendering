@@ -16,7 +16,7 @@ export default ({
     title?: string,
     vendor?: string,
     fonts?: string,
-    bundle?: string,
+    bundle: string,
     css: string,
     html: string,
     data: {
