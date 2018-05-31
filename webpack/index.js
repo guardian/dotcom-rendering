@@ -75,7 +75,7 @@ const common = ({ platform, site, page = '' }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
-        !process.env.CI && progress(platform),
+        !process.env.TEAMCITY && progress(platform),
         PROD && !process.env.HIDE_BUNDLES && reportBundleSize,
         PROD &&
             new BundleAnalyzerPlugin({
