@@ -5,6 +5,12 @@ import { transparentize } from 'polished';
 import pallete from '@guardian/pasteup/palette';
 import CloseButton from '@guardian/guui/buttons/Close';
 
+type SiteMessageProps = {
+    foregroundColor: string,
+    backgroundColor: string,
+    children?: React.Node,
+};
+
 const duration = 100;
 
 const Overlay = styled('div')(
@@ -25,13 +31,13 @@ const Overlay = styled('div')(
     }),
 );
 
-export default class SiteMessage extends Component {
-    static defaultProps = {
+export default class SiteMessage extends Component<SiteMessageProps, *> {
+    static defaultProps: SiteMessageProps = {
         foregroundColor: 'white',
         backgroundColor: pallete.neutral[1],
     };
 
-    constructor(props) {
+    constructor(props: SiteMessageProps) {
         super(props);
 
         this.state = { closed: false, close: false };

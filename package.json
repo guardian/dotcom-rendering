@@ -30,7 +30,7 @@
         "eslint-plugin-jsx-a11y": "^6.0.2",
         "eslint-plugin-prettier": "^2.6.0",
         "eslint-plugin-react": "^7.4.0",
-        "flow-bin": "^0.68.0",
+        "flow-bin": "^0.73.0",
         "flow-typed": "^2.4.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "log-update": "^2.3.0",
