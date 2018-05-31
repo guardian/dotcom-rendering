@@ -18,7 +18,14 @@ const DEV = process.env.NODE_ENV === 'development';
 
 const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
 
-module.exports = {
+module.exports = ({ site, page }) => ({
+    entry: {
+        [`${site}.${page.toLowerCase()}`]: [
+            DEV &&
+                'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
+            require.resolve(`@guardian/rendering/browser`),
+        ].filter(Boolean),
+    },
     output: {
         filename: name,
         chunkFilename: name,
@@ -40,4 +47,4 @@ module.exports = {
         DEV && new webpack.NamedModulesPlugin(),
         DEV && friendlyErrorsWebpackPlugin,
     ].filter(Boolean),
-};
+});

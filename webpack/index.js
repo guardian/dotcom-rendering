@@ -7,7 +7,6 @@ const Progress = require('../lib/webpack-progress');
 const { root, dist, getSites, getPagesForSite } = require('../config');
 
 const PROD = process.env.NODE_ENV === 'production';
-const DEV = process.env.NODE_ENV === 'development';
 
 const reportBundleSize = new ReportBundleSize({ configCount: 2 });
 const progress = new Progress();
@@ -98,32 +97,19 @@ module.exports = getSites().then(sites =>
     sites.reduce(async (configs, site) => {
         const pages = await getPagesForSite(site);
         return [
+            // server bundle config
             merge(
-                {
-                    entry: {
-                        [`${site}.server`]: require.resolve(
-                            `@guardian/rendering/server`,
-                        ),
-                    },
-                },
-                require(`./server`),
+                require(`./server`)({ site }),
                 common({
                     platform: 'server',
                     site,
                 }),
             ),
+
+            // browser bundle configs
             ...pages.map(page =>
                 merge(
-                    {
-                        entry: {
-                            [`${site}.${page.toLowerCase()}`]: [
-                                DEV &&
-                                    'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-                                require.resolve(`@guardian/rendering/browser`),
-                            ].filter(Boolean),
-                        },
-                    },
-                    require(`./browser`),
+                    require(`./browser`)({ site, page }),
                     common({
                         platform: 'browser',
                         site,
@@ -131,6 +117,8 @@ module.exports = getSites().then(sites =>
                     }),
                 ),
             ),
+
+            // previously created configs
             ...configs,
         ];
     }, []),

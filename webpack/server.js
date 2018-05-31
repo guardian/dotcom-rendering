@@ -1,4 +1,9 @@
-module.exports = {
+const entryFile = require.resolve('@guardian/rendering/server');
+
+module.exports = ({ site }) => ({
+    entry: {
+        [`${site}.server`]: entryFile,
+    },
     output: {
         filename: `[name].js`,
         chunkFilename: `[name].js`,
@@ -20,4 +25,4 @@ module.exports = {
                 ? callback(null, `commonjs ${request}`)
                 : callback(),
     ],
-};
+});
