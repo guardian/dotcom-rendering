@@ -11,18 +11,18 @@ import Number8 from './8.svg';
 import Number9 from './9.svg';
 import Number10 from './10.svg';
 
-export default ({ index }) => {
+export default ({ index }: { index: number }) => {
     const numbers = {
-        1: <Number1 />,
-        2: <Number2 />,
-        3: <Number3 />,
-        4: <Number4 />,
-        5: <Number5 />,
-        6: <Number6 />,
-        7: <Number7 />,
-        8: <Number8 />,
-        9: <Number9 />,
-        10: <Number10 />,
+        '1': <Number1 />,
+        '2': <Number2 />,
+        '3': <Number3 />,
+        '4': <Number4 />,
+        '5': <Number5 />,
+        '6': <Number6 />,
+        '7': <Number7 />,
+        '8': <Number8 />,
+        '9': <Number9 />,
+        '10': <Number10 />,
     };
 
     return numbers[index];

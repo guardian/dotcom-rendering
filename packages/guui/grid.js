@@ -8,8 +8,24 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { clearFix } from '@guardian/pasteup/mixins';
 
+type Breakpoint = 'tablet' | 'desktop' | 'leftCol' | 'wide';
+type GridSize = {
+    max: number,
+    width: number,
+};
+type GridSizes = {
+    [Breakpoint]: GridSize,
+};
+type BreakpointOptions = {
+    inset?: number,
+};
+type BreakpointProps = [number, BreakpointOptions];
+type MQStyles = {
+    [mediaQuery: string]: {},
+};
+
 const gutter = 20;
-const columns = {
+const columns: GridSizes = {
     tablet: {
         max: 12,
         width: 40,
@@ -35,7 +51,10 @@ const breakpointMqs = {
     wide: wideMq,
 };
 
-export const calculateWidth = (breakpoint, colspan) => {
+export const calculateWidth = (
+    breakpoint: Breakpoint,
+    colspan: number,
+): number => {
     let colspanOrMax = colspan;
 
     if (!colspanOrMax) {
@@ -47,7 +66,10 @@ export const calculateWidth = (breakpoint, colspan) => {
     );
 };
 
-const gridStyles = (breakpoint, [colspan, options]) => ({
+const gridStyles = (
+    breakpoint: Breakpoint,
+    [colspan, options]: BreakpointProps,
+): MQStyles => ({
     [breakpointMqs[breakpoint]]: {
         float: 'left',
         width: calculateWidth(breakpoint, colspan) + gutter,
@@ -62,45 +84,53 @@ const RowStyled = styled('div')({
     ...clearFix,
     marginLeft: -gutter,
 });
-const ColsStyled = styled('div')(({ tablet, desktop, leftCol, wide }) => {
-    const tabletStyles = gridStyles('tablet', tablet);
-    const desktopStyles = gridStyles('desktop', desktop);
-    const leftColStyles = gridStyles('leftCol', leftCol);
-    const wideStyles = gridStyles('wide', wide);
 
-    return {
-        ...tabletStyles,
-        ...desktopStyles,
-        ...leftColStyles,
-        ...wideStyles,
-    };
-});
+const ColsStyled = styled('div')(
+    ({ tablet, desktop, leftCol, wide }): MQStyles => {
+        const tabletStyles = gridStyles('tablet', tablet);
+        const desktopStyles = gridStyles('desktop', desktop);
+        const leftColStyles = gridStyles('leftCol', leftCol);
+        const wideStyles = gridStyles('wide', wide);
 
-const normaliseProps = prop => {
-    if (Array.isArray(prop)) {
-        if (prop.length === 1) {
-            return [...prop, {}];
+        return {
+            ...tabletStyles,
+            ...desktopStyles,
+            ...leftColStyles,
+            ...wideStyles,
+        };
+    },
+);
+
+const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
+    if (Array.isArray(props)) {
+        if (props.length === 1) {
+            return [props[0], {}];
         }
-        return prop;
-    } else if (typeof prop === 'number') {
-        return [prop, {}];
+        return props;
+    } else if (typeof props === 'number') {
+        return [props, {}];
     }
-    return prop;
+    return props;
 };
 
-export const Row = ({ children }) => <RowStyled>{children}</RowStyled>;
+export const Row = ({ children }: { children: React.Node }) => (
+    <RowStyled>{children}</RowStyled>
+);
 export const Cols = ({
-    tablet = [columns.tablet.max, {}],
-    desktop = [columns.desktop.max, {}],
-    leftCol = [columns.leftCol.max, {}],
-    wide = [columns.wide.max, {}],
+    tablet,
+    desktop,
+    leftCol,
+    wide,
     children,
+}: {
+    [Breakpoint]: BreakpointProps | number,
+    children: React.Node,
 }) => (
     <ColsStyled
-        tablet={normaliseProps(tablet)}
-        desktop={normaliseProps(desktop)}
-        leftCol={normaliseProps(leftCol)}
-        wide={normaliseProps(wide)}
+        tablet={normaliseProps(tablet || [columns.tablet.max, {}])}
+        desktop={normaliseProps(desktop || [columns.desktop.max, {}])}
+        leftCol={normaliseProps(leftCol || [columns.leftCol.max, {}])}
+        wide={normaliseProps(wide || [columns.wide.max, {}])}
     >
         {children}
     </ColsStyled>
