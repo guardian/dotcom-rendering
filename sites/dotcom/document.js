@@ -1,6 +1,7 @@
 // @flow
 
 import { renderToString } from '@guardian/guui';
+import assets from '@guardian/guui/lib/assets';
 import htmlTemplate from '@guardian/guui/htmlTemplate';
 
 import parseCAPI from './lib/parse-capi';
@@ -18,10 +19,9 @@ type Props = {
 
 export default ({ Page, data: { body, ...data } }: Props) => {
     const cleanedData = { ...parseCAPI(body), ...data };
-    const bundle = [
-        'javascript',
+    const bundle = assets.dist(
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
-    ];
+    );
     const { html, css, ids: cssIDs } = renderToString(
         <App data={{ ...cleanedData }} Page={Page} />,
     );

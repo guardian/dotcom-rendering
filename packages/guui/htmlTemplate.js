@@ -1,11 +1,11 @@
 // @flow
 import resetCSS from './lib/reset-css';
-import { hashedPath, staticPath } from './lib/asset-path';
+import assets from './lib/assets';
 
 export default ({
     title = 'The Guardian',
-    vendor = ['javascript', 'vendor.js'],
-    fonts = ['css', 'fonts.css'],
+    vendor = assets.dist('vendor.js'),
+    fonts = assets.static('css/fonts.css'),
     bundle,
     css,
     html,
@@ -14,9 +14,9 @@ export default ({
     nonBlockingJS = '',
 }: {
     title?: string,
-    vendor?: Array<string>,
-    fonts?: Array<string>,
-    bundle: Array<string>,
+    vendor?: string,
+    fonts?: string,
+    bundle?: string,
     css: string,
     html: string,
     data: {
@@ -26,9 +26,6 @@ export default ({
     cssIDs: Array<string>,
     nonBlockingJS?: string,
 }) => {
-    const vendorPath = hashedPath(...vendor);
-    const fontsPath = staticPath(...fonts);
-    const bundlePath = hashedPath(...bundle);
     const sanitiseDomRefs = jsString =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
 
@@ -37,9 +34,9 @@ export default ({
             <head>
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <link rel="preload" href="${vendorPath}" as="script">
-                <link rel="preload" href="${bundlePath}" as="script">
-                <link rel="stylesheet" href="${fontsPath}" media="nope!" onload="this.media='all'">
+                <link rel="preload" href="${vendor}" as="script">
+                <link rel="preload" href="${bundle}" as="script">
+                <link rel="stylesheet" href="${fonts}" media="nope!" onload="this.media='all'">
                 <style>${resetCSS}${css}</style>
             </head>
             <body>
@@ -54,8 +51,8 @@ export default ({
                     }),
                 )};
                 </script>
-                <script src="${vendorPath}"></script>
-                <script src="${bundlePath}"></script>
+                <script src="${vendor}"></script>
+                <script src="${bundle}"></script>
                 <script>${nonBlockingJS}</script>
             </body>
         </html>`;

@@ -9,7 +9,7 @@ import defaultDocument from '@guardian/guui/document';
 
 import type { $Request, $Response } from 'express';
 
-import { dist, getPagesForSite } from '../../config';
+import { dist, getPagesForSite, root } from '../../config';
 
 const render = async ({ params, body }: $Request, res: $Response) => {
     try {
@@ -34,15 +34,30 @@ const render = async ({ params, body }: $Request, res: $Response) => {
     }
 };
 
+// this export is the function used by webpackHotServerMiddleware in /dev-server.js
+export default () => render;
+
+// this is the actual production server
 if (process.env.NODE_ENV === 'production') {
     const app = express();
 
     app.use(express.json({ limit: '50mb' }));
-    app.use(
-        '/static',
-        express.static(path.join(__dirname, '..', 'src', 'static')),
-    );
-    app.use('/assets/javascript', express.static(dist));
+
+    // if running prod server locally, serve local assets
+    if (!process.env.GU_PUBLIC) {
+        app.use(
+            '/static/:site',
+            express.static(
+                path.relative(
+                    __dirname,
+                    path.resolve(root, 'sites', '__SITE__', 'static'),
+                ),
+            ),
+        );
+
+        app.use('/assets', express.static(path.relative(__dirname, dist)));
+    }
+
     app.use('/:page', render);
 
     app.get('/', async (req, res) => {
@@ -72,6 +87,3 @@ if (process.env.NODE_ENV === 'production') {
     });
     app.listen(9000);
 }
-
-// this export is the function used by webpackHotServerMiddleware in /dev-server.js
-export default () => render;
