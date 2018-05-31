@@ -38,7 +38,7 @@ const go = async site => {
     const app = express();
 
     app.use(
-        '/static',
+        '/static/:site',
         express.static(path.join(root, 'sites', site, 'static')),
     );
 
