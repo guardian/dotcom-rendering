@@ -64,7 +64,7 @@ SubNavButton.displayName = 'SubNavButton';
 type Props = {
     pillar: PillarType,
     showSecondaryNav: boolean,
-    toggleSecondaryNav: Function,
+    toggleSecondaryNav: () => void,
 };
 
 export default ({ pillar, showSecondaryNav, toggleSecondaryNav }: Props) => {
