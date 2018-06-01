@@ -62,7 +62,8 @@ dev: clear clean-dist install
 
 flow: clean-dist install
 	$(call log, "checking for type errors")
-	@flow >/dev/null # we'll still get errors
+	@flow stop --quiet
+	@flow --quiet
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
