@@ -11,7 +11,7 @@ Parameters:
   App:
     Description: Application name
     Type: String
-    Default: guui
+    Default: rendering
   Stage:
     Description: Stage name
     Type: String
@@ -32,7 +32,7 @@ Mappings:
     Stack:
       Value: frontend
     App:
-      Value: guui
+      Value: rendering
 
 Resources:
   LoadBalancerSecurityGroup:
@@ -126,7 +126,7 @@ Resources:
       - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
       CrossZone: true
       HealthCheck:
-        Target: TCP:9000
+        Target: HTTP:9000/_healthcheck
         HealthyThreshold: 2
         UnhealthyThreshold: 10
         Interval: 30
@@ -202,8 +202,7 @@ Resources:
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      AvailabilityZones:
-        - eu-west-1a
+      AvailabilityZones: !GetAZs ''
       VPCZoneIdentifier:
         Ref: Subnets
       LaunchConfigurationName:

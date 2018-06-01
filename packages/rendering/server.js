@@ -43,6 +43,10 @@ if (process.env.NODE_ENV === 'production') {
 
     app.use(express.json({ limit: '50mb' }));
 
+    app.get('/_healthcheck', (req, res) => {
+        res.status(200).send('OKAY');
+    });
+
     // if running prod server locally, serve local assets
     if (!process.env.GU_PUBLIC) {
         app.use(
