@@ -1,5 +1,5 @@
 {
-    "name": "@guardian/guui",
+    "name": "@guardian/dotcom-rendering",
     "version": "0.1.0-alpha",
     "private": true,
     "workspaces": [
