@@ -114,7 +114,7 @@ clear: # private
 
 flow-typed: yarn.lock
 	@rm -rf flow-typed/npm
-	@cd sites/dotcom && ../../node_modules/.bin/flow-typed install -p ../../
+	@cd sites/frontend && ../../node_modules/.bin/flow-typed install -p ../../
 	@cd packages/guui && ../../node_modules/.bin/flow-typed install -p ../../
 	@cd packages/pasteup && ../../node_modules/.bin/flow-typed install -p ../../
 	@flow-typed install

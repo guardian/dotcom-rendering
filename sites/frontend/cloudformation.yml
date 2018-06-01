@@ -197,7 +197,7 @@ Resources:
               export GU_STAGE=${Stage}
 
               nvm install
-              make start site=dotcom
+              make start site=frontend
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
