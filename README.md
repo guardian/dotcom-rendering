@@ -6,7 +6,7 @@ Frontend rendering framework for theguardian.com. It uses [preact](https://preac
 
 _Any/all of these could change before we reach `2.0.0`._
 
-Slack channel: [#dotcom-future](https://theguardian.slack.com/messages/C0JES5PEV)
+Chat room: [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI)
 
 ## Setup
 ### Node
@@ -41,7 +41,7 @@ If you get lint errors, `make fix` will attempt to automatically fix them for yo
 
 See [the makefile](https://github.com/guardian/guui/blob/master/makefile) for the full list.
 
-## IDE setup 
+## IDE setup
 
 ### VSCode
 We use [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver) to allow us to import things cleanly. If you're using VSCode, adding the following to a `./jsconfig.json` file will help it resolve modules usefully:

@@ -3,7 +3,6 @@
 /* eslint-disable react/no-danger */
 
 import { styled } from '@guardian/guui';
-import { connect } from 'unistore/preact';
 
 import { Row, Cols } from '@guardian/guui/grid';
 import { textEgyptian, headline } from '@guardian/pasteup/fonts';
@@ -11,11 +10,13 @@ import palette from '@guardian/pasteup/palette';
 import { clearFix } from '@guardian/pasteup/mixins';
 
 import Page from '../components/Page';
+import Main from '../components/Main';
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Epic from '../components/Epic';
+import { CapiComponent } from '../components/CapiComponent';
 
-const Headline = styled('h1')({
+const HeadlineStyled = styled('h1')({
     fontFamily: headline,
     fontSize: 34,
     lineHeight: 1.1,
@@ -24,8 +25,9 @@ const Headline = styled('h1')({
     paddingBottom: 36,
     paddingTop: 3,
 });
+const Headline = CapiComponent(HeadlineStyled, 'headline');
 
-const Body = styled('section')({
+const BodyStyled = styled('section')({
     p: {
         fontFamily: textEgyptian,
         lineHeight: 1.4,
@@ -45,8 +47,9 @@ const Body = styled('section')({
         maxWidth: '100%',
     },
 });
+const Body = CapiComponent(BodyStyled, 'body');
 
-const Standfirst = styled('p')({
+const StandfirstStyled = styled('p')({
     color: palette.neutral[1],
     fontFamily: textEgyptian,
     fontSize: 20,
@@ -75,6 +78,7 @@ const Standfirst = styled('p')({
         lineHeight: 0.8,
     },
 });
+const Standfirst = CapiComponent(StandfirstStyled, 'standfirst');
 
 const Labels = styled('div')({ ...clearFix, paddingTop: 6 });
 
@@ -91,53 +95,44 @@ const SeriesLabel = styled(SectionLabel)({
     fontWeight: 500,
 });
 
-export default connect('CAPI')(({ CAPI = {} }) => (
+export default () => (
     <Page>
-        <article>
-            <Header />
-            <Row>
-                <Cols wide={4} leftCol={2}>
-                    <Labels>
-                        <SectionLabel>The NSA files</SectionLabel>
-                        <SeriesLabel>
-                            Glenn Greenwald on security and liberty
-                        </SeriesLabel>
-                    </Labels>
-                </Cols>
-                <Cols wide={12} leftCol={12}>
-                    <Headline>{CAPI.headline}</Headline>
-                    <Standfirst
-                        dangerouslySetInnerHTML={{
-                            __html: CAPI.standfirst,
-                        }}
-                    />
-                </Cols>
-            </Row>
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.main,
-                }}
-            />
-            <Body
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.body,
-                }}
-            />
-            <MostViewed />
-            <Epic>
-                <strong>
-                    Unlike many news organisations, we haven’t put up a paywall
-                    – we want to keep our journalism as open as we can.
-                </strong>{' '}
-                The Guardian’s independent, investigative journalism takes a lot
-                of time, money and hard work to produce. But the revenue we get
-                from advertising is falling, so we increasingly need our readers
-                to fund us. If everyone who reads our reporting, who likes it,
-                helps fund it, our future would be much more secure.{' '}
-                <strong>
-                    Support The Guardian for just 17p a day or £5 a month.
-                </strong>
-            </Epic>
-        </article>
+        <Header />
+        <Main>
+            <article>
+                <Row>
+                    <Cols wide={3} leftCol={2}>
+                        <Labels>
+                            <SectionLabel>The NSA files</SectionLabel>
+                            <SeriesLabel>
+                                Glenn Greenwald on security and liberty
+                            </SeriesLabel>
+                        </Labels>
+                    </Cols>
+                    <Cols wide={13} leftCol={12}>
+                        <Headline />
+                        <Standfirst />
+                    </Cols>
+                </Row>
+                <Body />
+                <MostViewed />
+                <Epic>
+                    <strong>
+                        Unlike many news organisations, we haven’t put up a
+                        paywall – we want to keep our journalism as open as we
+                        can.
+                    </strong>{' '}
+                    The Guardian’s independent, investigative journalism takes a
+                    lot of time, money and hard work to produce. But the revenue
+                    we get from advertising is falling, so we increasingly need
+                    our readers to fund us. If everyone who reads our reporting,
+                    who likes it, helps fund it, our future would be much more
+                    secure.{' '}
+                    <strong>
+                        Support The Guardian for just 17p a day or £5 a month.
+                    </strong>
+                </Epic>
+            </article>
+        </Main>
     </Page>
-));
+);

@@ -2,7 +2,7 @@
 
 set -e
 
-PROJECT=dotcom:guui
+PROJECT=dotcom:rendering
 
 if [[ -z $BUILD_NUMBER ]]; then
   BUILD_NUMBER=0
