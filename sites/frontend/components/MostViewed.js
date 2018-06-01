@@ -41,7 +41,7 @@ const HeadlineBody = styled('a')({
     fontFamily: textEgyptian,
 });
 
-export default class MostViewed extends Component {
+export default class MostViewed extends Component<{}, { trails: [] }> {
     constructor() {
         super();
         this.state = { trails: [] };

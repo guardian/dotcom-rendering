@@ -2,10 +2,13 @@
 import { Component } from '@guardian/guui';
 import { connect } from 'unistore/preact';
 
-export const keyRegister = new Set();
+export const keyRegister: Set<string> = new Set();
 
-export const CapiComponent = (MyComponent, capiKey) =>
-    class extends Component {
+export const CapiComponent = (
+    MyComponent: React.ComponentType<{}>,
+    capiKey: string,
+) =>
+    class extends Component<{}, {}> {
         shouldComponentUpdate() {
             return false;
         }

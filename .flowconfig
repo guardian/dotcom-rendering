@@ -4,7 +4,7 @@
 <PROJECT_ROOT>/lib/.*
 <PROJECT_ROOT>/packages/pasteup/.*
 <PROJECT_ROOT>/packages/rendering/.*
-<PROJECT_ROOT>/sites/.*
+
 
 [include]
 
