@@ -25,7 +25,7 @@ export default function Epic({ children }: Props) {
             foregroundColor={pallete.neutral[2]}
             backgroundColor={pallete.yellow.medium}
         >
-            <Content>{children}</Content>
+            <Content>this should appear on prod {children}</Content>
         </SiteMessage>
     );
 }
