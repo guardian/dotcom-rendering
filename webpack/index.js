@@ -55,7 +55,7 @@ const common = ({ platform, site, page = '' }) => ({
             },
             {
                 test: /\.svg$/,
-                use: ['desvg-loader/preact', 'svg-loader'],
+                use: ['desvg-loader/react', 'svg-loader'],
             },
             {
                 // make sure webpack tree-shakes this stuff
@@ -70,7 +70,7 @@ const common = ({ platform, site, page = '' }) => ({
     },
     plugins: [
         new webpack.ProvidePlugin({
-            h: ['preact', 'h'],
+            "React": "react",
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -85,12 +85,6 @@ const common = ({ platform, site, page = '' }) => ({
                 logLevel: 'warn',
             }),
     ].filter(Boolean),
-    resolve: {
-        alias: {
-            // for libs that expect React
-            react: 'preact',
-        },
-    },
 });
 
 module.exports = getSites()

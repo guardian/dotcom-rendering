@@ -1,6 +1,6 @@
 // @flow
 import { styled } from '@guardian/guui';
-import { connect } from 'unistore/preact';
+import { connect } from 'unistore/react';
 
 import SupportTheGuardian from './SupportTheGuardian';
 import Link from './Link';

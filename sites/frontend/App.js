@@ -1,6 +1,6 @@
 // @flow
 import createStore from 'unistore';
-import { Provider } from 'unistore/preact';
+import { Provider } from 'unistore/react';
 
 type Props = {
     data: {},

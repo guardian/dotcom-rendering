@@ -3,7 +3,6 @@
 /* eslint-disable react/no-danger */
 
 import { styled } from '@guardian/guui';
-
 import { Row, Cols } from '@guardian/guui/grid';
 import { textEgyptian, headline } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
@@ -98,7 +97,7 @@ const SeriesLabel = styled(SectionLabel)({
 export default () => (
     <Page>
         <Header />
-        <Main>
+        {/* <Main>
             <article>
                 <Row>
                     <Cols wide={3} leftCol={2}>
@@ -133,6 +132,6 @@ export default () => (
                     </strong>
                 </Epic>
             </article>
-        </Main>
+        </Main> */}
     </Page>
 );
