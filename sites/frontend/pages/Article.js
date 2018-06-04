@@ -97,7 +97,7 @@ const SeriesLabel = styled(SectionLabel)({
 export default () => (
     <Page>
         <Header />
-        {/* <Main>
+        <Main>
             <article>
                 <Row>
                     <Cols wide={3} leftCol={2}>
@@ -132,6 +132,6 @@ export default () => (
                     </strong>
                 </Epic>
             </article>
-        </Main> */}
+        </Main>
     </Page>
 );

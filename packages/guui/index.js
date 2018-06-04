@@ -2,25 +2,15 @@
 
 // provide a consistent wrapper around the libs guui depends on.
 
-import { 
-    hydrate as hydrateCSS 
-} from 'emotion';
+import { hydrate as hydrateCSS } from 'emotion';
 
-import { 
-    extractCritical 
-} from 'emotion-server';
+import { extractCritical } from 'emotion-server';
 
-import { 
-    Component
-} from 'react';
+import { Component } from 'react';
 
-import { 
-    hydrate as hydrateApp
-} from 'react-dom';
+import { hydrate as hydrateApp } from 'react-dom';
 
-import { 
-    renderToString as reactRenderToString,
-} from 'react-dom/server';
+import { renderToString as reactRenderToString } from 'react-dom/server';
 
 import styled from 'react-emotion';
 
@@ -33,10 +23,4 @@ type renderToStringResult = {
 const renderToString = (ComponentToRender: React.Node): renderToStringResult =>
     extractCritical(reactRenderToString(ComponentToRender));
 
-export { 
-    hydrateApp,
-    renderToString,
-    hydrateCSS,
-    styled,
-    Component
-};
+export { hydrateApp, renderToString, hydrateCSS, styled, Component };

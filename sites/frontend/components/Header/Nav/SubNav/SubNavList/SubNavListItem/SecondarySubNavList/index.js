@@ -33,6 +33,8 @@ type Props = { pillar: PillarType, showSecondaryNav: boolean };
 
 export default ({ pillar, showSecondaryNav }: Props) => (
     <SecondarySubNavList showSecondaryNav={showSecondaryNav}>
-        {pillar.links.map(link => <SecondarySubNavListItem link={link} key={link.label}/>)}
+        {pillar.links.map(link => (
+            <SecondarySubNavListItem link={link} key={link.label} />
+        ))}
     </SecondarySubNavList>
 );

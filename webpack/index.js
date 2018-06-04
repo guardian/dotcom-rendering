@@ -70,7 +70,7 @@ const common = ({ platform, site, page = '' }) => ({
     },
     plugins: [
         new webpack.ProvidePlugin({
-            "React": "react",
+            React: 'react',
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),

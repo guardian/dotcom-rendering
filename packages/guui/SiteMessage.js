@@ -6,15 +6,15 @@ import pallete from '@guardian/pasteup/palette';
 import CloseButton from '@guardian/guui/buttons/Close';
 
 type SiteMessageProps = {
-    foregroundColor: string,
-    backgroundColor: string,
+    foregroundcolor: string,
+    backgroundcolor: string,
     children?: React.Node,
 };
 
 const duration = 100;
 
 const Overlay = styled('div')(
-    ({ foregroundColor, backgroundColor, close }) => ({
+    ({ foregroundcolor: foregroundColor, backgroundcolor: backgroundColor, close }) => ({
         backgroundColor: transparentize(0.03, backgroundColor),
         color: foregroundColor,
         fill: foregroundColor,
@@ -33,8 +33,8 @@ const Overlay = styled('div')(
 
 export default class SiteMessage extends Component<SiteMessageProps, *> {
     static defaultProps: SiteMessageProps = {
-        foregroundColor: 'white',
-        backgroundColor: pallete.neutral[1],
+        foregroundcolor: 'white',
+        backgroundcolor: pallete.neutral[1],
     };
 
     constructor(props: SiteMessageProps) {
@@ -59,15 +59,15 @@ export default class SiteMessage extends Component<SiteMessageProps, *> {
         return (
             renderOverlay && (
                 <Overlay
-                    foregroundColor={this.props.foregroundColor}
-                    backgroundColor={this.props.backgroundColor}
+                    foregroundcolor={this.props.foregroundcolor}
+                    backgroundcolor={this.props.backgroundcolor}
                     close={this.state.close}
                     {...this.props}
                 >
                     {this.props.children}
                     <CloseButton
-                        foregroundColor={this.props.foregroundColor}
-                        backgroundColor={this.props.backgroundColor}
+                        foregroundcolor={this.props.foregroundcolor}
+                        backgroundcolor={this.props.backgroundcolor}
                         onClick={this.close}
                     />
                 </Overlay>

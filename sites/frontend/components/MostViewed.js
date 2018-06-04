@@ -63,7 +63,7 @@ export default class MostViewed extends Component {
                 <Heading>Most Viewed</Heading>
                 <ul>
                     {this.state.trails.map((trail, i) => (
-                        <ListItem>
+                        <ListItem key={trail.url}>
                             <Number>
                                 <Numbers index={i + 1} />
                             </Number>
