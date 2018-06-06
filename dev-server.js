@@ -25,10 +25,7 @@ const pickSite = async () => {
                 name: 'site',
             },
         ])
-        .then(({ site }) => {
-            console.log(`Starting DEV server for ${chalk.cyan(site)}...`);
-            return site;
-        });
+        .then(({ site }) => site);
 };
 
 const go = async site => {
