@@ -9,7 +9,6 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const inquirer = require('inquirer');
-const chalk = require('chalk');
 
 const { getSites, getPagesForSite, root } = require('./config');
 
@@ -21,14 +20,11 @@ const pickSite = async () => {
             {
                 type: 'list',
                 message: 'Which site do you want to run?',
-                choices: [...sites, 'blah'],
+                choices: sites,
                 name: 'site',
             },
         ])
-        .then(({ site }) => {
-            console.log(`Starting DEV server for ${chalk.cyan(site)}...`);
-            return site;
-        });
+        .then(({ site }) => site);
 };
 
 const go = async site => {
