@@ -9,7 +9,6 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const inquirer = require('inquirer');
-const chalk = require('chalk');
 
 const { getSites, getPagesForSite, root } = require('./config');
 
