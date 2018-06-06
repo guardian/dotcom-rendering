@@ -166,7 +166,7 @@ Resources:
         Ref: AMI
       SecurityGroups:
       - Ref: InstanceSecurityGroup
-      InstanceType: c4.large
+      InstanceType: t2.medium
       IamInstanceProfile:
         Ref: InstanceProfile
       AssociatePublicIpAddress: true
