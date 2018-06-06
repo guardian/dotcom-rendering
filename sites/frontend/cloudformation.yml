@@ -3,15 +3,15 @@ Description: Frontend rendering service
 
 Parameters:
   Subnets:
-    Description: The subnets where guui instances will run
+    Description: The subnets where rendering instances will run
     Type: List<AWS::EC2::Subnet::Id>
   VpcId:
-    Description: The VPC in which guui instances will run
+    Description: The VPC in which rendering instances will run
     Type: AWS::EC2::VPC::Id
   App:
     Description: Application name
     Type: String
-    Default: guui
+    Default: rendering
   Stage:
     Description: Stage name
     Type: String
@@ -32,7 +32,7 @@ Mappings:
     Stack:
       Value: frontend
     App:
-      Value: guui
+      Value: rendering
 
 Resources:
   LoadBalancerSecurityGroup:
@@ -60,7 +60,7 @@ Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: guui instance
+      GroupDescription: rendering instance
       VpcId:
         Ref: VpcId
       SecurityGroupIngress:
@@ -126,7 +126,7 @@ Resources:
       - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
       CrossZone: true
       HealthCheck:
-        Target: TCP:9000
+        Target: HTTP:9000/_healthcheck
         HealthyThreshold: 2
         UnhealthyThreshold: 10
         Interval: 30
@@ -188,9 +188,9 @@ Resources:
               export NVM_DIR="$HOME/.nvm"
               [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-              aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/guui/dist/guui.zip ./
-              unzip guui.zip -d guui
-              cd guui
+              aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
+              unzip ${App}.zip -d ${App}
+              cd ${App}
 
               export TERM=xterm-256color
 
@@ -202,8 +202,7 @@ Resources:
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      AvailabilityZones:
-        - eu-west-1a
+      AvailabilityZones: !GetAZs ''
       VPCZoneIdentifier:
         Ref: Subnets
       LaunchConfigurationName:
