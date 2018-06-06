@@ -18,6 +18,9 @@ const DEV = process.env.NODE_ENV === 'development';
 
 const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
 
+// used to stop multiple compilers overwriting other compiler's data
+const manifestData = {};
+
 module.exports = ({ site, page }) => ({
     entry: {
         [`${site}.${page.toLowerCase()}`]: [
@@ -42,7 +45,11 @@ module.exports = ({ site, page }) => ({
         },
     },
     plugins: [
-        PROD && new AssetsManifest({ writeToDisk: true }),
+        PROD &&
+            new AssetsManifest({
+                writeToDisk: true,
+                assets: manifestData,
+            }),
         DEV && new webpack.HotModuleReplacementPlugin(),
         DEV && new webpack.NamedModulesPlugin(),
         DEV && friendlyErrorsWebpackPlugin,

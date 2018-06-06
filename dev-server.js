@@ -21,7 +21,7 @@ const pickSite = async () => {
             {
                 type: 'list',
                 message: 'Which site do you want to run?',
-                choices: [...sites, 'blah'],
+                choices: sites,
                 name: 'site',
             },
         ])
