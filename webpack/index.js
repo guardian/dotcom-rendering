@@ -94,32 +94,31 @@ const common = ({ platform, site, page = '' }) => ({
 });
 
 module.exports = getSites().then(sites =>
-    sites.reduce(async (configs, site) => {
-        const pages = await getPagesForSite(site);
-        return [
-            // server bundle config
-            merge(
-                require(`./server`)({ site }),
-                common({
-                    platform: 'server',
-                    site,
-                }),
-            ),
-
-            // browser bundle configs
-            ...pages.map(page =>
+    Promise.all(
+        sites.map(async site => {
+            const pages = await getPagesForSite(site);
+            return [
+                // server bundle config
                 merge(
-                    require(`./browser`)({ site, page }),
+                    require(`./server`)({ site }),
                     common({
-                        platform: 'browser',
+                        platform: 'server',
                         site,
-                        page,
                     }),
                 ),
-            ),
 
-            // previously created configs
-            ...(await configs),
-        ];
-    }, []),
+                // browser bundle configs
+                ...pages.map(page =>
+                    merge(
+                        require(`./browser`)({ site, page }),
+                        common({
+                            platform: 'browser',
+                            site,
+                            page,
+                        }),
+                    ),
+                ),
+            ];
+        }),
+    ).then(configs => [].concat(...configs)),
 );
