@@ -1,8 +1,19 @@
 stacks: [frontend]
 regions: [eu-west-1]
 deployments:
-  guui:
-    type: autoscaling    
+  frontend-cfn:
+    type: cloud-formation
+    parameters:
+      templatePath: cloudformation.yml
+      cloudFormationStackByTags: false
+      cloudFormationStackName: rendering
+      amiParametersToTags:
+        AMI:
+          Recipe: frontend-base
+          BuiltBy: amigo
+          AmigoStage: PROD
+  rendering:
+    type: autoscaling
     parameters:
       bucket: aws-frontend-artifacts
     dependencies:
