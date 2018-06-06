@@ -119,7 +119,7 @@ module.exports = getSites().then(sites =>
             ),
 
             // previously created configs
-            ...configs,
+            ...(await configs),
         ];
     }, []),
 );
