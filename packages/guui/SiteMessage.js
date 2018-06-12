@@ -14,7 +14,11 @@ type SiteMessageProps = {
 const duration = 100;
 
 const Overlay = styled('div')(
-    ({ foregroundcolor: foregroundColor, backgroundcolor: backgroundColor, close }) => ({
+    ({
+        foregroundcolor: foregroundColor,
+        backgroundcolor: backgroundColor,
+        close,
+    }) => ({
         backgroundColor: transparentize(0.03, backgroundColor),
         color: foregroundColor,
         fill: foregroundColor,
