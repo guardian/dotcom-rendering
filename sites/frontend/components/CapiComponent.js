@@ -1,6 +1,6 @@
 // @flow
 import { Component } from '@guardian/guui';
-import { connect } from 'unistore/preact';
+import { connect } from 'unistore/react';
 
 export const keyRegister = new Set();
 

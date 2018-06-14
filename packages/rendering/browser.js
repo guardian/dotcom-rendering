@@ -14,14 +14,11 @@ const { data, cssIDs } = window.gu.app;
 
 if (module.hot) {
     module.hot.accept();
-    require('preact/debug'); // eslint-disable-line global-require,import/no-extraneous-dependencies
 }
 
 const container = document.getElementById('app');
+
 if (container) {
-    const replacer = container.lastElementChild;
-    if (replacer) {
-        hydrateCSS(cssIDs);
-        hydrateApp(<App Page={Page} data={data} />, container, replacer);
-    }
+    hydrateCSS(cssIDs);
+    hydrateApp(<App Page={Page} data={data} />, container);
 }

@@ -19,12 +19,15 @@ type Props = {
 
 export default ({ Page, data: { body, ...data } }: Props) => {
     const cleanedData = { ...parseCAPI(body), ...data };
+
     const bundle = assets.dist(
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
     );
+
     const { html, css, ids: cssIDs } = renderToString(
         <App data={{ ...cleanedData }} Page={Page} />,
     );
+
     /**
      * To save sending CAPI data twice (in the HEAD and BODY)
      * we replace any keys present in the CapiComponent keyRegister

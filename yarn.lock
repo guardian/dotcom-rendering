@@ -605,9 +605,23 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@emotion/is-prop-valid@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.5.2.tgz#4f47717c2bcce8759e11997520e6bcb14326f54a"
+"@emotion/hash@^0.6.2":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.6.3.tgz#0e7a5604626fc6c6d4ac4061a2f5ac80d50262a4"
+
+"@emotion/is-prop-valid@^0.6.1":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.6.2.tgz#a76a16b174ff03f8e3a27faf6259bacd21a02adc"
+  dependencies:
+    "@emotion/memoize" "^0.6.2"
+
+"@emotion/memoize@^0.6.1", "@emotion/memoize@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.6.2.tgz#138e00b332d519b4e307bded6159e5ba48aba3ae"
+
+"@emotion/stylis@^0.6.5":
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/@emotion/stylis/-/stylis-0.6.8.tgz#6ad4e8d32b19b440efa4481bbbcb98a8c12765bb"
 
 "@guardian/guui@0.1.0-alpha.1":
   version "0.1.0-alpha.1"
@@ -1162,6 +1176,22 @@ babel-plugin-emotion@^9.1.0:
     babel-plugin-syntax-jsx "^6.18.0"
     convert-source-map "^1.5.0"
     emotion-utils "^9.1.0"
+    find-root "^1.1.0"
+    mkdirp "^0.5.1"
+    source-map "^0.5.7"
+    touch "^1.0.0"
+
+babel-plugin-emotion@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-9.1.2.tgz#e26b313fa0fecd0f2cc07b1e4ef05da167e4f740"
+  dependencies:
+    "@babel/helper-module-imports" "7.0.0-beta.32"
+    "@emotion/hash" "^0.6.2"
+    "@emotion/memoize" "^0.6.1"
+    "@emotion/stylis" "^0.6.5"
+    babel-plugin-macros "^2.0.0"
+    babel-plugin-syntax-jsx "^6.18.0"
+    convert-source-map "^1.5.0"
     find-root "^1.1.0"
     mkdirp "^0.5.1"
     source-map "^0.5.7"
@@ -2414,12 +2444,11 @@ create-emotion-server@^9.1.1:
     multipipe "^1.0.2"
     through "^2.3.8"
 
-create-emotion-styled@^9.1.1:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/create-emotion-styled/-/create-emotion-styled-9.1.1.tgz#872911dde3d38871703be632580becd05e636f10"
+create-emotion-styled@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/create-emotion-styled/-/create-emotion-styled-9.1.2.tgz#1528d9ff5ecc7e3abdf9986510a85ad2a9d73648"
   dependencies:
-    "@emotion/is-prop-valid" "^0.5.2"
-    emotion-utils "^9.1.0"
+    "@emotion/is-prop-valid" "^0.6.1"
 
 create-emotion@^9.1.1:
   version "9.1.1"
@@ -4959,7 +4988,7 @@ loglevelnext@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/loglevelnext/-/loglevelnext-1.0.4.tgz#0d991d9998180991dac8bd81e73a596a8720a645"
 
-loose-envify@^1.0.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
   dependencies:
@@ -6175,23 +6204,6 @@ postcss@^6.0.1:
     source-map "^0.6.1"
     supports-color "^5.3.0"
 
-preact-emotion@^9.1.1:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/preact-emotion/-/preact-emotion-9.1.1.tgz#e6b4de65a6c14162a85c856f00bf56bbbf99bd93"
-  dependencies:
-    babel-plugin-emotion "^9.1.0"
-    create-emotion-styled "^9.1.1"
-
-preact-render-to-string@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-3.7.0.tgz#7db4177454bc01395e0d01d6ac07bc5e838e31ee"
-  dependencies:
-    pretty-format "^3.5.1"
-
-preact@^8.2.7:
-  version "8.2.7"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-8.2.7.tgz#316249fb678cd5e93e7cee63cea7bfb62dbd6814"
-
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -6222,10 +6234,6 @@ pretty-bytes@^1.0.0:
 pretty-bytes@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
-
-pretty-format@^3.5.1:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
 
 private@^0.1.6, private@^0.1.7, private@~0.1.5:
   version "0.1.8"
@@ -6399,6 +6407,31 @@ rc@^1.1.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-dom@^16.4.0:
+  version "16.4.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.0.tgz#099f067dd5827ce36a29eaf9a6cdc7cbf6216b1e"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+
+react-emotion@^9.1.3:
+  version "9.1.3"
+  resolved "https://registry.yarnpkg.com/react-emotion/-/react-emotion-9.1.3.tgz#299c29731d12d6236e33277845f5692ec8ba92d6"
+  dependencies:
+    babel-plugin-emotion "^9.1.2"
+    create-emotion-styled "^9.1.2"
+
+react@^16.4.0:
+  version "16.4.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.4.0.tgz#402c2db83335336fba1962c08b98c6272617d585"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 read-chunk@^2.1.0:
   version "2.1.0"

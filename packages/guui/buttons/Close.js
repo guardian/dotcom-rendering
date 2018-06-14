@@ -3,7 +3,7 @@ import { styled } from '@guardian/guui';
 import CloseIcon from '@guardian/pasteup/icons/x.svg';
 
 const CloseButton = styled(CloseIcon)(
-    ({ backgroundColor, foregroundColor }) => ({
+    ({ foregroundcolor: foregroundColor, backgroundColor }) => ({
         borderColor: foregroundColor,
         fill: foregroundColor,
         borderWidth: 1,

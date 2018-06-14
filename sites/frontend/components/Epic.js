@@ -22,8 +22,8 @@ type Props = {
 export default function Epic({ children }: Props) {
     return (
         <SiteMessage
-            foregroundColor={pallete.neutral[2]}
-            backgroundColor={pallete.yellow.medium}
+            foregroundcolor={pallete.neutral[2]}
+            backgroundcolor={pallete.yellow.medium}
         >
             <Content>{children}</Content>
         </SiteMessage>
