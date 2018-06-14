@@ -1,6 +1,6 @@
 {
     "name": "@guardian/dotcom-rendering",
-    "version": "0.1.0-alpha",
+    "version": "3.0.0-alpha.1",
     "private": true,
     "workspaces": [
         "sites/*",
