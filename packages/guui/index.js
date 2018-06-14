@@ -3,15 +3,10 @@
 // provide a consistent wrapper around the libs guui depends on.
 
 import { hydrate as hydrateCSS } from 'emotion';
-
 import { extractCritical } from 'emotion-server';
-
 import { Component } from 'react';
-
 import { hydrate as hydrateApp } from 'react-dom';
-
 import { renderToString as reactRenderToString } from 'react-dom/server';
-
 import styled from 'react-emotion';
 
 type renderToStringResult = {
