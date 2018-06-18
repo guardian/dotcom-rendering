@@ -55,16 +55,16 @@ export default class Nav extends Component<{}, { showSubNav: boolean }> {
         };
 
         return (
-            <NavStyled>
+            <NavStyled role='navigation' aria-label='Guardian sections'>
                 <Logo href="/" />
-                <Links />
+                {/* <Links /> */}
                 <Pillars />
-                <VeggieBurger
+                {/* <VeggieBurger
                     showSubNav={this.state.showSubNav}
                     toggleSubNav={toggleSubNav}
-                />
-                <SubNavLink toggleSubNav={toggleSubNav} />
-                <SubNav showSubNav={this.state.showSubNav} />
+                /> */}
+                <SubNavLink toggleSubNav={toggleSubNav} ariaControls='main-menu'/>
+                <SubNav showSubNav={this.state.showSubNav} id='main-menu'/>
             </NavStyled>
         );
     }

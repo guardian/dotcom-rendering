@@ -27,7 +27,7 @@ const SubNavList = styled('ul')({
 SubNavList.displayName = 'SubNavList';
 
 export default () => (
-    <SubNavList>
+    <SubNavList role='menubar' tabindex='-1'>
         {pillars.map(pillar => (
             <SubNavListItem pillar={pillar} key={pillar.label} />
         ))}

@@ -70,6 +70,9 @@ export default ({ pillar, showSecondaryNav, toggleSecondaryNav }) => {
             onClick={() => {
                 toggleSecondaryNav();
             }}
+            aria-haspopup='true'
+            role='menuitem'
+            aria-expanded={showSecondaryNav}
         >
             {pillar.label}
         </SubNavButton>

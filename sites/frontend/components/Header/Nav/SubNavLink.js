@@ -1,5 +1,5 @@
 // @flow
-import { styled } from '@guardian/guui';
+import { styled, Component } from '@guardian/guui';
 
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -9,8 +9,7 @@ const ScreenReadable = styled('span')(screenReaderOnly);
 
 const navPrimaryColour = '#121212';
 const navSecondaryColour = '#5d5f5f';
-
-const SubNavLink = styled('div')({
+const openSubNavStyles = {
     display: 'none',
     fontFamily: headline,
     fontWeight: 400,
@@ -20,7 +19,9 @@ const SubNavLink = styled('div')({
     lineHeight: 1,
     position: 'relative',
     overflow: 'hidden',
+    border: 0,
     borderLeft: '1px solid #abc2c9',
+    backgroundColor: 'transparent',
     fontSize: 22,
     height: 48,
     paddingTop: 0,
@@ -36,6 +37,34 @@ const SubNavLink = styled('div')({
     ':focus': {
         color: navPrimaryColour,
     },
+};
+
+const OpenSubNavCheckbox = styled('input')({
+    ...screenReaderOnly,
+    ':checked': {
+        '+ div': {
+            display: 'block'
+        }
+    }
+});
+OpenSubNavCheckbox.displayName = 'OpenSubNavCheckbox';
+
+const OpenSubNavLabel = styled('label')({
+    ...openSubNavStyles,
+    [desktop]: {
+        display: 'inline-block',
+    },
+});
+OpenSubNavLabel.displayName = 'OpenSubNav';
+
+const OpenSubNavButton = styled('button')({
+    ...openSubNavStyles
+});
+OpenSubNavButton.displayName = 'OpenSubNav';
+
+const OpenSubNavText = styled('span')({
+    display: 'block',
+    height: '100%',
     ':after': {
         content: '""',
         border: '2px solid currentColor',
@@ -53,15 +82,46 @@ const SubNavLink = styled('div')({
         transform: 'translateY(0) rotate(45deg)',
     },
 });
-SubNavLink.displayName = 'SubNavLink';
 
 type Props = {
     toggleSubNav: Function,
 };
 
-export default ({ toggleSubNav }: Props) => (
-    <SubNavLink onClick={() => toggleSubNav()}>
-        <ScreenReadable>Show</ScreenReadable>
-        More
-    </SubNavLink>
-);
+class SubNavLink extends Component<{}, { showSubNav: boolean }> {
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            enhanceCheckbox: false,
+        };
+    }
+
+    componentDidMount() {
+        this.setState({
+            enhanceCheckbox: true
+        });    
+    }
+
+    render() {
+        const { toggleSubNav, ariaControls } = this.props;
+
+        if (this.state.enhanceCheckbox) {
+            return (
+                <OpenSubNavButton onClick={() => toggleSubNav()} aria-controls={ariaControls}>
+                    <ScreenReadable>Show</ScreenReadable>
+                    <OpenSubNavText>More</OpenSubNavText>
+                </OpenSubNavButton>
+            );
+        }
+
+        return [
+            <OpenSubNavLabel htmlFor='main-menu-toggle' tabindex='0'>
+                <ScreenReadable>Show</ScreenReadable>
+                <OpenSubNavText>More</OpenSubNavText>
+            </OpenSubNavLabel>,
+            <OpenSubNavCheckbox type='checkbox' id='main-menu-toggle' aria-controls={ariaControls} tabindex='-1'/>,
+        ];
+    }
+}
+
+export default SubNavLink;
