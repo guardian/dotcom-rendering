@@ -54,12 +54,8 @@ const SVG = styled(TheGuardianLogoSVG)({
     },
 });
 
-type Props = {
-    href: string,
-};
-
 export default () => (
-    <Link href='/'>
+    <Link href="/">
         <ScreenReaderText>The Guardian - Back to home</ScreenReaderText>
         <SVG />
     </Link>

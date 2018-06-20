@@ -31,8 +31,13 @@ SecondarySubNavList.displayName = 'SecondarySubNavList';
 
 type Props = { pillar: PillarType, showSecondaryNav: boolean };
 
-export default ({ pillar, showSecondaryNav }: Props) => (
-    <SecondarySubNavList showSecondaryNav={showSecondaryNav} role='menu'>
+export default ({ pillar, showSecondaryNav, id }: Props) => (
+    <SecondarySubNavList
+        showSecondaryNav={showSecondaryNav}
+        aria-expanded={showSecondaryNav}
+        role="menu"
+        id={id}
+    >
         {pillar.links.map(link => (
             <SecondarySubNavListItem link={link} key={link.label} />
         ))}

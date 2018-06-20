@@ -59,7 +59,12 @@ const SubNavButton = styled('button')(
 );
 SubNavButton.displayName = 'SubNavButton';
 
-export default ({ pillar, showSecondaryNav, toggleSecondaryNav }) => {
+export default ({
+    pillar,
+    showSecondaryNav,
+    toggleSecondaryNav,
+    ariaControls,
+}) => {
     const isLastIndex = pillar === pillarConfig[pillarConfig.length - 1];
 
     return (
@@ -70,9 +75,9 @@ export default ({ pillar, showSecondaryNav, toggleSecondaryNav }) => {
             onClick={() => {
                 toggleSecondaryNav();
             }}
-            aria-haspopup='true'
-            role='menuitem'
-            aria-expanded={showSecondaryNav}
+            aria-haspopup="true"
+            aria-controls={ariaControls}
+            role="menuitem"
         >
             {pillar.label}
         </SubNavButton>

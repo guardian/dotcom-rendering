@@ -14,7 +14,7 @@ SecondarySubNavListItem.displayName = 'SecondarySubNavListItem';
 type Props = { link: { href: string, label: string } };
 
 export default ({ link }: Props) => (
-    <SecondarySubNavListItem role='none'>
+    <SecondarySubNavListItem role="none">
         <SubNavTitle link={link} />
     </SecondarySubNavListItem>
 );

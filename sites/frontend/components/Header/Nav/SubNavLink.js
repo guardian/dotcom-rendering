@@ -5,6 +5,8 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/fonts';
 
+import VeggieBurger from './VeggieBurger';
+
 const ScreenReadable = styled('span')(screenReaderOnly);
 
 const navPrimaryColour = '#121212';
@@ -43,9 +45,9 @@ const OpenSubNavCheckbox = styled('input')({
     ...screenReaderOnly,
     ':checked': {
         '+ div': {
-            display: 'block'
-        }
-    }
+            display: 'block',
+        },
+    },
 });
 OpenSubNavCheckbox.displayName = 'OpenSubNavCheckbox';
 
@@ -58,7 +60,7 @@ const OpenSubNavLabel = styled('label')({
 OpenSubNavLabel.displayName = 'OpenSubNav';
 
 const OpenSubNavButton = styled('button')({
-    ...openSubNavStyles
+    ...openSubNavStyles,
 });
 OpenSubNavButton.displayName = 'OpenSubNav';
 
@@ -85,9 +87,11 @@ const OpenSubNavText = styled('span')({
 
 type Props = {
     toggleSubNav: Function,
+    showSubNav: boolean,
+    ariaControls: string,
 };
 
-class SubNavLink extends Component<{}, { showSubNav: boolean }> {
+class SubNavLink extends Component<Props, { enhanceCheckbox: boolean }> {
     constructor(props: Props) {
         super(props);
 
@@ -97,29 +101,68 @@ class SubNavLink extends Component<{}, { showSubNav: boolean }> {
     }
 
     componentDidMount() {
+        /**
+            componentDidMount is only executed in the browser therefore if
+            enhanceCheckbox is set to true it indicates that JS is running 
+            in the browser and we should re-render without the NO JS fallback.
+            Overriding eslint as you can call setState in componentDidMount:
+            https://reactjs.org/docs/react-component.html#componentdidmount
+        * */
+        // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
-            enhanceCheckbox: true
-        });    
+            enhanceCheckbox: true,
+        });
     }
 
     render() {
-        const { toggleSubNav, ariaControls } = this.props;
+        const { toggleSubNav, ariaControls, showSubNav } = this.props;
+        const { enhanceCheckbox } = this.state;
+        const CHECKBOX_ID = 'main-menu-toggle';
 
-        if (this.state.enhanceCheckbox) {
-            return (
-                <OpenSubNavButton onClick={() => toggleSubNav()} aria-controls={ariaControls}>
+        if (enhanceCheckbox) {
+            return [
+                <VeggieBurger
+                    showSubNav={showSubNav}
+                    toggleSubNav={toggleSubNav}
+                    enhanceCheckbox={enhanceCheckbox}
+                    htmlFor={CHECKBOX_ID}
+                    key="VeggieBurger"
+                />,
+                <OpenSubNavButton
+                    onClick={() => toggleSubNav()}
+                    aria-controls={ariaControls}
+                    key="OpenSubNavButton"
+                >
                     <ScreenReadable>Show</ScreenReadable>
                     <OpenSubNavText>More</OpenSubNavText>
-                </OpenSubNavButton>
-            );
+                </OpenSubNavButton>,
+            ];
         }
 
         return [
-            <OpenSubNavLabel htmlFor='main-menu-toggle' tabindex='0'>
+            <VeggieBurger
+                showSubNav={showSubNav}
+                toggleSubNav={toggleSubNav}
+                enhanceCheckbox={enhanceCheckbox}
+                htmlFor={CHECKBOX_ID}
+                key="VeggieBurger"
+            />,
+            <OpenSubNavLabel
+                htmlFor={CHECKBOX_ID}
+                tabindex="0"
+                key="OpenSubNavLabel"
+            >
                 <ScreenReadable>Show</ScreenReadable>
                 <OpenSubNavText>More</OpenSubNavText>
             </OpenSubNavLabel>,
-            <OpenSubNavCheckbox type='checkbox' id='main-menu-toggle' aria-controls={ariaControls} tabindex='-1'/>,
+            <OpenSubNavCheckbox
+                type="checkbox"
+                id={CHECKBOX_ID}
+                aria-controls={ariaControls}
+                tabindex="-1"
+                key="OpenSubNavCheckbox"
+                role="menuitemcheckbox"
+            />,
         ];
     }
 }

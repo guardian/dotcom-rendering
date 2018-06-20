@@ -54,13 +54,14 @@ const SubNav = styled('div')(({ showSubNav }) => ({
             width: '100vw',
             marginLeft: '-50vw',
             marginRight: '-50vw',
-        }
+        },
     },
 }));
 SubNav.displayName = 'SubNav';
 
 type Props = {
     showSubNav: boolean,
+    id: string,
 };
 
 export default ({ showSubNav, id }: Props) => (

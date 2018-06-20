@@ -6,11 +6,10 @@ import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
 import Logo from './Logo';
-import Links from './Links';
+// import Links from './Links';
 import Pillars from './Pillars';
 import SubNavLink from './SubNavLink';
 import SubNav from './SubNav';
-import VeggieBurger from './VeggieBurger';
 
 const NavStyled = styled('nav')(
     {
@@ -31,7 +30,6 @@ const NavStyled = styled('nav')(
     },
     clearFix,
 );
-
 NavStyled.displayName = 'Nav';
 
 export default class Nav extends Component<{}, { showSubNav: boolean }> {
@@ -53,18 +51,19 @@ export default class Nav extends Component<{}, { showSubNav: boolean }> {
         const toggleSubNav = () => {
             this.toggleSubNav();
         };
+        const { showSubNav } = this.state;
 
         return (
-            <NavStyled role='navigation' aria-label='Guardian sections'>
+            <NavStyled role="navigation" aria-label="Guardian sections">
                 <Logo />
                 {/* <Links /> */}
                 <Pillars />
-                {/* <VeggieBurger
-                    showSubNav={this.state.showSubNav}
+                <SubNavLink
+                    showSubNav={showSubNav}
                     toggleSubNav={toggleSubNav}
-                /> */}
-                <SubNavLink toggleSubNav={toggleSubNav} ariaControls='main-menu'/>
-                <SubNav showSubNav={this.state.showSubNav} id='main-menu'/>
+                    ariaControls="main-menu"
+                />
+                <SubNav showSubNav={showSubNav} id="main-menu" />
             </NavStyled>
         );
     }

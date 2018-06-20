@@ -8,7 +8,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-const VeggieBurger = styled('span')(({ showSubNav }) => {
+const VeggieBurgerStyles = ({ showSubNav }) => {
     const styles = {
         backgroundColor: '#121212',
         top: 24,
@@ -41,8 +41,13 @@ const VeggieBurger = styled('span')(({ showSubNav }) => {
     };
 
     return styles;
-});
-VeggieBurger.displayName = 'VeggieBurger';
+};
+
+const VeggieBurgerLabel = styled('label')(VeggieBurgerStyles);
+VeggieBurgerLabel.displayName = 'VeggieBurger';
+
+const VeggieBurgerButton = styled('label')(VeggieBurgerStyles);
+VeggieBurgerButton.displayName = 'VeggieBurger';
 
 const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
     const beforeAfterStyles = {
@@ -90,10 +95,38 @@ VeggieBurgerIcon.displayName = 'VeggieBurgerIcon';
 type Props = {
     toggleSubNav: Function,
     showSubNav: boolean,
+    enhanceCheckbox: boolean,
+    htmlFor: string,
+    ariaControls: string,
 };
 
-export default ({ toggleSubNav, showSubNav }: Props) => (
-    <VeggieBurger onClick={() => toggleSubNav()} showSubNav={showSubNav}>
-        <VeggieBurgerIcon showSubNav={showSubNav} />
-    </VeggieBurger>
-);
+export default ({
+    toggleSubNav,
+    showSubNav,
+    enhanceCheckbox,
+    htmlFor,
+    ariaControls,
+}: Props) => {
+    if (enhanceCheckbox) {
+        return (
+            <VeggieBurgerButton
+                onClick={() => toggleSubNav()}
+                showSubNav={showSubNav}
+                aria-controls={ariaControls}
+            >
+                <VeggieBurgerIcon showSubNav={showSubNav} />
+            </VeggieBurgerButton>
+        );
+    }
+
+    return (
+        <VeggieBurgerLabel
+            onClick={() => toggleSubNav()}
+            showSubNav={showSubNav}
+            htmlFor={htmlFor}
+            tabindex="0"
+        >
+            <VeggieBurgerIcon showSubNav={showSubNav} />
+        </VeggieBurgerLabel>
+    );
+};

@@ -43,5 +43,7 @@ SubNavTitle.displayName = 'SubNavTitle';
 type Props = { link: { href: string, label: string } };
 
 export default ({ link }: Props) => (
-    <SubNavTitle href={link.href} role='menuitem'>{link.label}</SubNavTitle>
+    <SubNavTitle href={link.href} role="menuitem">
+        {link.label}
+    </SubNavTitle>
 );
