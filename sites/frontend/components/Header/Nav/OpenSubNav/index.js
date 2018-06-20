@@ -91,7 +91,7 @@ type Props = {
     ariaControls: string,
 };
 
-class SubNavLink extends Component<Props, { enhanceCheckbox: boolean }> {
+class OpenSubNav extends Component<Props, { enhanceCheckbox: boolean }> {
     constructor(props: Props) {
         super(props);
 
@@ -169,4 +169,4 @@ class SubNavLink extends Component<Props, { enhanceCheckbox: boolean }> {
     }
 }
 
-export default SubNavLink;
+export default OpenSubNav;
