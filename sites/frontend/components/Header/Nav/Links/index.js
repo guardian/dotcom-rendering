@@ -15,13 +15,14 @@ const Links = styled('div')({
 });
 Links.displayName = 'Links';
 
-type Props = {
-    isPayingMember: boolean,
-    isRecentContributor: boolean,
-};
-
 export default connect('header')(
-    ({ isPayingMember, isRecentContributor }: Props) => (
+    ({
+        isPayingMember,
+        isRecentContributor,
+    }: {
+        isPayingMember: boolean,
+        isRecentContributor: boolean,
+    }) => (
         <Links>
             {isPayingMember ||
                 isRecentContributor || (
@@ -30,7 +31,7 @@ export default connect('header')(
                     </SupportTheGuardian>
                 )}
             {links.map(({ href, text }, i) => (
-                <Link href={href} key={text} showAtTablet={i < 2}> 
+                <Link href={href} key={text} showAtTablet={i < 2}>
                     {text}
                 </Link>
             ))}
