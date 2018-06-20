@@ -4,8 +4,8 @@
 
 import { hydrate as hydrateCSS } from 'emotion';
 import { extractCritical } from 'emotion-server';
-import { Component } from 'react';
-import { hydrate as hydrateApp } from 'react-dom';
+import React, { Component } from 'react';
+import { hydrate as hydrateApp, render } from 'react-dom';
 import { renderToString as reactRenderToString } from 'react-dom/server';
 import styled from 'react-emotion';
 
@@ -15,7 +15,15 @@ type renderToStringResult = {
     ids: Array<string>,
 };
 
-const renderToString = (ComponentToRender: React.Node): renderToStringResult =>
+const renderToString = (ComponentToRender: React$Node): renderToStringResult =>
     extractCritical(reactRenderToString(ComponentToRender));
 
-export { hydrateApp, renderToString, hydrateCSS, styled, Component };
+export {
+    React,
+    hydrateApp,
+    render,
+    renderToString,
+    hydrateCSS,
+    styled,
+    Component,
+};
