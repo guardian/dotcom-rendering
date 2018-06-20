@@ -67,8 +67,8 @@ export type PillarType = {
 
 type Props = {
     children: React.Node,
-    index: number,
     pillar: PillarType,
+    index: number,
 };
 
 export default ({ children, pillar, index }: Props) => (

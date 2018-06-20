@@ -29,7 +29,7 @@ const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
 }));
 SecondarySubNavList.displayName = 'SecondarySubNavList';
 
-type Props = { pillar: PillarType, showSecondaryNav: boolean };
+type Props = { pillar: PillarType, showSecondaryNav: boolean, id: string };
 
 export default ({ pillar, showSecondaryNav, id }: Props) => (
     <SecondarySubNavList

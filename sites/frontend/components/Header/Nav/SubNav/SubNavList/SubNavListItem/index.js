@@ -45,8 +45,6 @@ export default class SubNavListItem extends Component<
         const { pillar } = this.props;
         const subNavId = `${pillar.label.toLowerCase()}SubNav`;
 
-        console.log('***', pillar);
-
         return (
             <SubNavListItemStyled role="none">
                 <SubNavButton

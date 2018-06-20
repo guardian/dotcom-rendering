@@ -7,6 +7,8 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 
 import pillarConfig from '../../../Pillars/__config__';
 
+import type { PillarType } from '../../../Pillars/Pillar';
+
 const SubNavButton = styled('button')(
     ({ pillar, isLastIndex, showSecondaryNav }) => ({
         backgroundColor: 'transparent',
@@ -59,12 +61,19 @@ const SubNavButton = styled('button')(
 );
 SubNavButton.displayName = 'SubNavButton';
 
+type Props = {
+    pillar: PillarType,
+    showSecondaryNav: boolean,
+    toggleSecondaryNav: Function,
+    ariaControls: string,
+};
+
 export default ({
     pillar,
     showSecondaryNav,
     toggleSecondaryNav,
     ariaControls,
-}) => {
+}: Props) => {
     const isLastIndex = pillar === pillarConfig[pillarConfig.length - 1];
 
     return (
