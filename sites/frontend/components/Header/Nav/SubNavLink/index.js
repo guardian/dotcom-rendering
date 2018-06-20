@@ -86,7 +86,7 @@ const OpenSubNavText = styled('span')({
 });
 
 type Props = {
-    toggleSubNav: Function,
+    toggleSubNav: () => void,
     showSubNav: boolean,
     ariaControls: string,
 };

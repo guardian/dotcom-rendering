@@ -93,7 +93,7 @@ const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
 VeggieBurgerIcon.displayName = 'VeggieBurgerIcon';
 
 type Props = {
-    toggleSubNav: Function,
+    toggleSubNav: () => void,
     showSubNav: boolean,
     enhanceCheckbox: boolean,
     htmlFor: string,
