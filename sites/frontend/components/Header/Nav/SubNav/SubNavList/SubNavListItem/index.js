@@ -42,17 +42,19 @@ export default class SubNavListItem extends Component<
 
     render() {
         const { showSecondaryNav } = this.state;
+        const { pillar } = this.props;
+
         return (
-            <SubNavListItemStyled>
+            <SubNavListItemStyled role='none'>
                 <SubNavButton
-                    pillar={this.props.pillar}
+                    pillar={pillar}
                     showSecondaryNav={showSecondaryNav}
                     toggleSecondaryNav={() => {
                         this.toggleSecondaryNav();
                     }}
                 />
                 <SecondarySubNavList
-                    pillar={this.props.pillar}
+                    pillar={pillar}
                     showSecondaryNav={showSecondaryNav}                 
                 />
             </SubNavListItemStyled>

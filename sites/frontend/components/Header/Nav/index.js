@@ -56,7 +56,7 @@ export default class Nav extends Component<{}, { showSubNav: boolean }> {
 
         return (
             <NavStyled role='navigation' aria-label='Guardian sections'>
-                <Logo href="/" />
+                <Logo />
                 {/* <Links /> */}
                 <Pillars />
                 {/* <VeggieBurger
