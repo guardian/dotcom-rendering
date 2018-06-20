@@ -126,6 +126,7 @@ class SubNavLink extends Component<Props, { enhanceCheckbox: boolean }> {
                     toggleSubNav={toggleSubNav}
                     enhanceCheckbox={enhanceCheckbox}
                     htmlFor={CHECKBOX_ID}
+                    ariaControls={ariaControls}
                     key="VeggieBurger"
                 />,
                 <OpenSubNavButton
@@ -145,6 +146,7 @@ class SubNavLink extends Component<Props, { enhanceCheckbox: boolean }> {
                 toggleSubNav={toggleSubNav}
                 enhanceCheckbox={enhanceCheckbox}
                 htmlFor={CHECKBOX_ID}
+                ariaControls={ariaControls}
                 key="VeggieBurger"
             />,
             <OpenSubNavLabel
