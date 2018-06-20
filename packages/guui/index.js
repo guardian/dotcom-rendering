@@ -18,4 +18,12 @@ type renderToStringResult = {
 const renderToString = (ComponentToRender: React$Node): renderToStringResult =>
     extractCritical(reactRenderToString(ComponentToRender));
 
-export { React, hydrateApp, render, renderToString, hydrateCSS, styled, Component };
+export {
+    React,
+    hydrateApp,
+    render,
+    renderToString,
+    hydrateCSS,
+    styled,
+    Component,
+};
