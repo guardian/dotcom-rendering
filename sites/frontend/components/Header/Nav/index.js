@@ -6,7 +6,7 @@ import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
 import Logo from './Logo';
-// import Links from './Links';
+import Links from './Links';
 import Pillars from './Pillars';
 import SubNavLink from './SubNavLink';
 import SubNav from './SubNav';
@@ -56,7 +56,7 @@ export default class Nav extends Component<{}, { showSubNav: boolean }> {
         return (
             <NavStyled role="navigation" aria-label="Guardian sections">
                 <Logo />
-                {/* <Links /> */}
+                <Links />
                 <Pillars />
                 <SubNavLink
                     showSubNav={showSubNav}
