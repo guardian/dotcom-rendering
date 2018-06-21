@@ -18,13 +18,15 @@ const MainMenuPillarLinks = styled('ul')(({ showPillarLinks }) => ({
     position: 'relative',
     backgroundColor: '#d9e4e7',
     [desktop]: {
+        marginTop: -20,
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'nowrap',
         order: 1,
         paddingBottom: 0,
         backgroundColor: 'transparent',
         width: '100%',
+        padding: '0 5px',
     },
 }));
 MainMenuPillarLinks.displayName = 'MainMenuPillarLinks';

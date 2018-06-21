@@ -22,7 +22,6 @@ const openMainMenuStyles = {
     position: 'relative',
     overflow: 'hidden',
     border: 0,
-    borderLeft: '1px solid #abc2c9',
     backgroundColor: 'transparent',
     fontSize: 22,
     height: 48,

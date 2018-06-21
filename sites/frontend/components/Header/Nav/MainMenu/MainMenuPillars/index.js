@@ -16,6 +16,7 @@ const MainMenuPillars = styled('ul')({
         padding: '0 20px',
         position: 'relative',
         margin: '0 auto',
+        display: 'flex',
     },
     [leftCol]: {
         maxWidth: 1140,

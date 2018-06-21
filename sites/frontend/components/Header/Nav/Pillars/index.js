@@ -19,8 +19,8 @@ Pillars.displayName = 'Pillars';
 
 export default () => (
     <Pillars>
-        {pillars.map((pillar, i) => (
-            <Pillar pillar={pillar} index={i} key={pillar.label}>
+        {pillars.map(pillar => (
+            <Pillar pillar={pillar} key={pillar.label}>
                 {pillar.label}
             </Pillar>
         ))}

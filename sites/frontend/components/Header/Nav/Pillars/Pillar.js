@@ -8,11 +8,22 @@ import { headline } from '@guardian/pasteup/fonts';
 const Pillar = styled('li')({
     float: 'left',
     [desktop]: {
-        width: 118,
+        width: 140,
+        position: 'relative',
+        ':after': {
+            content: '""',
+            display: 'block',
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: 1,
+            backgroundColor: '#abc2c9',
+        },
     },
 });
 
-const Link = styled('a')(({ pillar, index }) => ({
+const Link = styled('a')(({ pillar }) => ({
     fontFamily: headline,
     fontWeight: 600,
     textDecoration: 'none',
@@ -25,7 +36,6 @@ const Link = styled('a')(({ pillar, index }) => ({
     padding: '0 4px',
     position: 'relative',
     overflow: 'hidden',
-    borderLeft: index > 0 ? '1px solid #abc2c9' : 'none',
     [tablet]: {
         fontSize: '22px',
         height: '42px',
@@ -57,23 +67,20 @@ export type PillarType = {
     label: string,
     href: string,
     pillar: string,
-    links: [
-        {
-            label: string,
-            href: string,
-        },
-    ],
+    links: Array<{
+        label: string,
+        href: string,
+    }>,
 };
 
 type Props = {
     children: React.Node,
     pillar: PillarType,
-    index: number,
 };
 
-export default ({ children, pillar, index }: Props) => (
+export default ({ children, pillar }: Props) => (
     <Pillar>
-        <Link href={pillar.href} pillar={pillar.pillar} index={index}>
+        <Link href={pillar.href} pillar={pillar.pillar}>
             {children}
         </Link>
     </Pillar>

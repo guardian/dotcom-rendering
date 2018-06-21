@@ -14,8 +14,19 @@ const MainMenuPillarStyled = styled('li')({
     margin: 0,
     padding: '0 0 12px',
     [desktop]: {
-        width: 118,
+        width: 140,
         float: 'left',
+        position: 'relative',
+        ':after': {
+            content: '""',
+            display: 'block',
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: 1,
+            backgroundColor: '#abc2c9',
+        },
     },
 });
 MainMenuPillarStyled.displayName = 'MainMenuPillarStyled';

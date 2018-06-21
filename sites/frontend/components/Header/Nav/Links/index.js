@@ -15,24 +15,19 @@ const Links = styled('div')({
 });
 Links.displayName = 'Links';
 
-export default connect('header')(
-    ({
-        isPayingMember,
-        isRecentContributor,
-    }) => (
-        <Links>
-            {isPayingMember ||
-                isRecentContributor || (
-                    <SupportTheGuardian href="/">
-                        Support The Guardian
-                    </SupportTheGuardian>
-                )}
-            {links.map(({ href, text }, i) => (
-                <Link href={href} key={text} showAtTablet={i < 2}>
-                    {text}
-                </Link>
-            ))}
-            <Search href="/">Search</Search>
-        </Links>
-    ),
-);
+export default connect('header')(({ isPayingMember, isRecentContributor }) => (
+    <Links>
+        {isPayingMember ||
+            isRecentContributor || (
+                <SupportTheGuardian href="/">
+                    Support The Guardian
+                </SupportTheGuardian>
+            )}
+        {links.map(({ href, text }, i) => (
+            <Link href={href} key={text} showAtTablet={i < 2}>
+                {text}
+            </Link>
+        ))}
+        <Search href="/">Search</Search>
+    </Links>
+));
