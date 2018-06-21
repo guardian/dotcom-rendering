@@ -19,9 +19,6 @@ export default connect('header')(
     ({
         isPayingMember,
         isRecentContributor,
-    }: {
-        isPayingMember: boolean,
-        isRecentContributor: boolean,
     }) => (
         <Links>
             {isPayingMember ||

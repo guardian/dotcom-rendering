@@ -3,13 +3,13 @@ import { styled } from '@guardian/guui';
 
 import { desktop } from '@guardian/pasteup/breakpoints';
 
-import SecondarySubNavListItem from './SecondarySubNavListItem';
+import MainMenuPillarLink from './MainMenuPillarLink';
 
 import type { PillarType } from '../../../../Pillars/Pillar';
 
-const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
+const MainMenuPillarLinks = styled('ul')(({ showPillarLinks }) => ({
     boxSizing: 'border-box',
-    display: showSecondaryNav ? 'flex' : 'none',
+    display: showPillarLinks ? 'flex' : 'none',
     fontSize: 18,
     flexWrap: 'wrap',
     listStyle: 'none',
@@ -27,19 +27,19 @@ const SecondarySubNavList = styled('ul')(({ showSecondaryNav }) => ({
         width: '100%',
     },
 }));
-SecondarySubNavList.displayName = 'SecondarySubNavList';
+MainMenuPillarLinks.displayName = 'MainMenuPillarLinks';
 
-type Props = { pillar: PillarType, showSecondaryNav: boolean, id: string };
+type Props = { pillar: PillarType, showPillarLinks: boolean, id: string };
 
-export default ({ pillar, showSecondaryNav, id }: Props) => (
-    <SecondarySubNavList
-        showSecondaryNav={showSecondaryNav}
-        aria-expanded={showSecondaryNav}
+export default ({ pillar, showPillarLinks, id }: Props) => (
+    <MainMenuPillarLinks
+        showPillarLinks={showPillarLinks}
+        aria-expanded={showPillarLinks}
         role="menu"
         id={id}
     >
         {pillar.links.map(link => (
-            <SecondarySubNavListItem link={link} key={link.label} />
+            <MainMenuPillarLink link={link} key={link.label} />
         ))}
-    </SecondarySubNavList>
+    </MainMenuPillarLinks>
 );

@@ -8,7 +8,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-const VeggieBurgerStyles = ({ showSubNav }) => {
+const VeggieBurgerStyles = ({ showMainMenu }) => {
     const styles = {
         backgroundColor: '#121212',
         top: 24,
@@ -22,7 +22,7 @@ const VeggieBurgerStyles = ({ showSubNav }) => {
         borderRadius: '50%',
         outline: 'none',
         right: 5,
-        zIndex: showSubNav ? 1071 : 0,
+        zIndex: showMainMenu ? 1071 : 0,
         [mobileMedium]: {
             bottom: -6,
             height: 48,
@@ -49,7 +49,7 @@ VeggieBurgerLabel.displayName = 'VeggieBurger';
 const VeggieBurgerButton = styled('label')(VeggieBurgerStyles);
 VeggieBurgerButton.displayName = 'VeggieBurger';
 
-const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
+const VeggieBurgerIcon = styled('span')(({ showMainMenu }) => {
     const beforeAfterStyles = {
         content: '""',
         backgroundColor: 'currentColor',
@@ -76,7 +76,7 @@ const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
         },
     };
 
-    if (showSubNav) {
+    if (showMainMenu) {
         styles[':before'] = Object.assign({}, styles[':before'], {
             top: 0,
             transform: 'rotate(-45deg)',
@@ -93,16 +93,16 @@ const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
 VeggieBurgerIcon.displayName = 'VeggieBurgerIcon';
 
 type Props = {
-    toggleSubNav: () => void,
-    showSubNav: boolean,
+    toggleMainMenu: () => void,
+    showMainMenu: boolean,
     enhanceCheckbox: boolean,
     htmlFor: string,
     ariaControls: string,
 };
 
 export default ({
-    toggleSubNav,
-    showSubNav,
+    toggleMainMenu,
+    showMainMenu,
     enhanceCheckbox,
     htmlFor,
     ariaControls,
@@ -110,23 +110,23 @@ export default ({
     if (enhanceCheckbox) {
         return (
             <VeggieBurgerButton
-                onClick={() => toggleSubNav()}
-                showSubNav={showSubNav}
+                onClick={() => toggleMainMenu()}
+                showMainMenu={showMainMenu}
                 aria-controls={ariaControls}
             >
-                <VeggieBurgerIcon showSubNav={showSubNav} />
+                <VeggieBurgerIcon showMainMenu={showMainMenu} />
             </VeggieBurgerButton>
         );
     }
 
     return (
         <VeggieBurgerLabel
-            onClick={() => toggleSubNav()}
-            showSubNav={showSubNav}
+            onClick={() => toggleMainMenu()}
+            showMainMenu={showMainMenu}
             htmlFor={htmlFor}
             tabindex="0"
         >
-            <VeggieBurgerIcon showSubNav={showSubNav} />
+            <VeggieBurgerIcon showMainMenu={showMainMenu} />
         </VeggieBurgerLabel>
     );
 };

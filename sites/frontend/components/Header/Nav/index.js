@@ -8,8 +8,8 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import Logo from './Logo';
 import Links from './Links';
 import Pillars from './Pillars';
-import OpenSubNav from './OpenSubNav';
-import SubNav from './SubNav';
+import OpenMainMenu from './OpenMainMenu';
+import MainMenu from './MainMenu';
 
 const NavStyled = styled('nav')(
     {
@@ -32,38 +32,39 @@ const NavStyled = styled('nav')(
 );
 NavStyled.displayName = 'Nav';
 
-export default class Nav extends Component<{}, { showSubNav: boolean }> {
+export default class Nav extends Component<{}, { showMainMenu: boolean }> {
     constructor(props: {}) {
         super(props);
 
         this.state = {
-            showSubNav: false,
+            showMainMenu: false,
         };
     }
 
-    toggleSubNav() {
+    toggleMainMenu() {
         this.setState({
-            showSubNav: !this.state.showSubNav,
+            showMainMenu: !this.state.showMainMenu,
         });
     }
 
     render() {
-        const toggleSubNav = () => {
-            this.toggleSubNav();
+        const toggleMainMenu = () => {
+            this.toggleMainMenu();
         };
-        const { showSubNav } = this.state;
+        const { showMainMenu } = this.state;
+        const mainMenuId = 'main-menu';
 
         return (
             <NavStyled role="navigation" aria-label="Guardian sections">
                 <Logo />
                 <Links />
                 <Pillars />
-                <OpenSubNav
-                    showSubNav={showSubNav}
-                    toggleSubNav={toggleSubNav}
-                    ariaControls="main-menu"
+                <OpenMainMenu
+                    showMainMenu={showMainMenu}
+                    toggleMainMenu={toggleMainMenu}
+                    ariaControls={mainMenuId}
                 />
-                <SubNav showSubNav={showSubNav} id="main-menu" />
+                <MainMenu showMainMenu={showMainMenu} id={mainMenuId} />
             </NavStyled>
         );
     }

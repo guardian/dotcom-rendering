@@ -9,8 +9,8 @@ import pillarConfig from '../../../Pillars/__config__';
 
 import type { PillarType } from '../../../Pillars/Pillar';
 
-const SubNavButton = styled('button')(
-    ({ pillar, isLastIndex, showSecondaryNav }) => ({
+const MainMenuPillarButton = styled('button')(
+    ({ pillar, isLastIndex, showPillarLinks }) => ({
         backgroundColor: 'transparent',
         border: 0,
         boxSizing: 'border-box',
@@ -31,7 +31,7 @@ const SubNavButton = styled('button')(
         },
         textTransform: 'capitalize',
         ':before': {
-            marginTop: showSecondaryNav ? 8 : 4,
+            marginTop: showPillarLinks ? 8 : 4,
             color: '#5d5f5f',
             left: 25,
             position: 'absolute',
@@ -41,7 +41,7 @@ const SubNavButton = styled('button')(
             content: '""',
             display: 'inline-block',
             height: 10,
-            transform: showSecondaryNav ? 'rotate(-135deg)' : 'rotate(45deg)',
+            transform: showPillarLinks ? 'rotate(-135deg)' : 'rotate(45deg)',
             width: 10,
         },
         [desktop]: {
@@ -51,7 +51,7 @@ const SubNavButton = styled('button')(
             backgroundColor: '#abc2c9',
             bottom: 0,
             content: '""',
-            display: !showSecondaryNav && !isLastIndex ? 'block' : 'none',
+            display: !showPillarLinks && !isLastIndex ? 'block' : 'none',
             height: 1,
             left: 50,
             position: 'absolute',
@@ -59,36 +59,36 @@ const SubNavButton = styled('button')(
         },
     }),
 );
-SubNavButton.displayName = 'SubNavButton';
+MainMenuPillarButton.displayName = 'MainMenuPillarButton';
 
 type Props = {
     pillar: PillarType,
-    showSecondaryNav: boolean,
-    toggleSecondaryNav: () => void,
+    showPillarLinks: boolean,
+    togglePillarLinks: () => void,
     ariaControls: string,
 };
 
 export default ({
     pillar,
-    showSecondaryNav,
-    toggleSecondaryNav,
+    showPillarLinks,
+    togglePillarLinks,
     ariaControls,
 }: Props) => {
     const isLastIndex = pillar === pillarConfig[pillarConfig.length - 1];
 
     return (
-        <SubNavButton
+        <MainMenuPillarButton
             pillar={pillar.pillar}
             isLastIndex={isLastIndex}
-            showSecondaryNav={showSecondaryNav}
+            showPillarLinks={showPillarLinks}
             onClick={() => {
-                toggleSecondaryNav();
+                togglePillarLinks();
             }}
             aria-haspopup="true"
             aria-controls={ariaControls}
             role="menuitem"
         >
             {pillar.label}
-        </SubNavButton>
+        </MainMenuPillarButton>
     );
 };

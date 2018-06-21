@@ -11,7 +11,7 @@ const ScreenReadable = styled('span')(screenReaderOnly);
 
 const navPrimaryColour = '#121212';
 const navSecondaryColour = '#5d5f5f';
-const openSubNavStyles = {
+const openMainMenuStyles = {
     display: 'none',
     fontFamily: headline,
     fontWeight: 400,
@@ -41,7 +41,7 @@ const openSubNavStyles = {
     },
 };
 
-const OpenSubNavCheckbox = styled('input')({
+const OpenMainMenuCheckbox = styled('input')({
     ...screenReaderOnly,
     ':checked': {
         '+ div': {
@@ -49,22 +49,22 @@ const OpenSubNavCheckbox = styled('input')({
         },
     },
 });
-OpenSubNavCheckbox.displayName = 'OpenSubNavCheckbox';
+OpenMainMenuCheckbox.displayName = 'OpenMainMenuCheckbox';
 
-const OpenSubNavLabel = styled('label')({
-    ...openSubNavStyles,
+const OpenMainMenuLabel = styled('label')({
+    ...openMainMenuStyles,
     [desktop]: {
         display: 'inline-block',
     },
 });
-OpenSubNavLabel.displayName = 'OpenSubNav';
+OpenMainMenuLabel.displayName = 'OpenMainMenu';
 
-const OpenSubNavButton = styled('button')({
-    ...openSubNavStyles,
+const OpenMainMenuButton = styled('button')({
+    ...openMainMenuStyles,
 });
-OpenSubNavButton.displayName = 'OpenSubNav';
+OpenMainMenuButton.displayName = 'OpenMainMenu';
 
-const OpenSubNavText = styled('span')({
+const OpenMainMenuText = styled('span')({
     display: 'block',
     height: '100%',
     ':after': {
@@ -86,12 +86,12 @@ const OpenSubNavText = styled('span')({
 });
 
 type Props = {
-    toggleSubNav: () => void,
-    showSubNav: boolean,
+    toggleMainMenu: () => void,
+    showMainMenu: boolean,
     ariaControls: string,
 };
 
-class OpenSubNav extends Component<Props, { enhanceCheckbox: boolean }> {
+class OpenMainMenu extends Component<Props, { enhanceCheckbox: boolean }> {
     constructor(props: Props) {
         super(props);
 
@@ -115,58 +115,58 @@ class OpenSubNav extends Component<Props, { enhanceCheckbox: boolean }> {
     }
 
     render() {
-        const { toggleSubNav, ariaControls, showSubNav } = this.props;
+        const { toggleMainMenu, ariaControls, showMainMenu } = this.props;
         const { enhanceCheckbox } = this.state;
         const CHECKBOX_ID = 'main-menu-toggle';
 
         if (enhanceCheckbox) {
             return [
                 <VeggieBurger
-                    showSubNav={showSubNav}
-                    toggleSubNav={toggleSubNav}
+                    showMainMenu={showMainMenu}
+                    toggleMainMenu={toggleMainMenu}
                     enhanceCheckbox={enhanceCheckbox}
                     htmlFor={CHECKBOX_ID}
                     ariaControls={ariaControls}
                     key="VeggieBurger"
                 />,
-                <OpenSubNavButton
-                    onClick={() => toggleSubNav()}
+                <OpenMainMenuButton
+                    onClick={() => toggleMainMenu()}
                     aria-controls={ariaControls}
-                    key="OpenSubNavButton"
+                    key="OpenMainMenuButton"
                 >
                     <ScreenReadable>Show</ScreenReadable>
-                    <OpenSubNavText>More</OpenSubNavText>
-                </OpenSubNavButton>,
+                    <OpenMainMenuText>More</OpenMainMenuText>
+                </OpenMainMenuButton>,
             ];
         }
 
         return [
             <VeggieBurger
-                showSubNav={showSubNav}
-                toggleSubNav={toggleSubNav}
+                showMainMenu={showMainMenu}
+                toggleMainMenu={toggleMainMenu}
                 enhanceCheckbox={enhanceCheckbox}
                 htmlFor={CHECKBOX_ID}
                 ariaControls={ariaControls}
                 key="VeggieBurger"
             />,
-            <OpenSubNavLabel
+            <OpenMainMenuLabel
                 htmlFor={CHECKBOX_ID}
                 tabindex="0"
-                key="OpenSubNavLabel"
+                key="OpenMainMenuLabel"
             >
                 <ScreenReadable>Show</ScreenReadable>
-                <OpenSubNavText>More</OpenSubNavText>
-            </OpenSubNavLabel>,
-            <OpenSubNavCheckbox
+                <OpenMainMenuText>More</OpenMainMenuText>
+            </OpenMainMenuLabel>,
+            <OpenMainMenuCheckbox
                 type="checkbox"
                 id={CHECKBOX_ID}
                 aria-controls={ariaControls}
                 tabindex="-1"
-                key="OpenSubNavCheckbox"
+                key="OpenMainMenuCheckbox"
                 role="menuitemcheckbox"
             />,
         ];
     }
 }
 
-export default OpenSubNav;
+export default OpenMainMenu;

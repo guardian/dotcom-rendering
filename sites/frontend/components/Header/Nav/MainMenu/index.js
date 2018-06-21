@@ -8,9 +8,9 @@ import {
     desktop,
 } from '@guardian/pasteup/breakpoints';
 
-import SubNavList from './SubNavList';
+import MainMenuPillars from './MainMenuPillars';
 
-const SubNav = styled('div')(({ showSubNav }) => ({
+const MainMenu = styled('div')(({ showMainMenu }) => ({
     backgroundColor: '#e9eff1',
     boxSizing: 'border-box',
     fontSize: 20,
@@ -21,7 +21,7 @@ const SubNav = styled('div')(({ showSubNav }) => ({
     top: 0,
     zIndex: 1070,
     [until.desktop]: {
-        transform: showSubNav ? 'translateX(0%)' : 'translateX(-110%)',
+        transform: showMainMenu ? 'translateX(0%)' : 'translateX(-110%)',
         transition: 'transform .4s cubic-bezier(.23, 1, .32, 1)',
         boxShadow: '3px 0 16px rgba(0, 0, 0, .4)',
         bottom: 0,
@@ -39,7 +39,7 @@ const SubNav = styled('div')(({ showSubNav }) => ({
         marginRight: 70,
     },
     [desktop]: {
-        display: showSubNav ? 'block' : 'none',
+        display: showMainMenu ? 'block' : 'none',
         position: 'absolute',
         paddingBottom: 0,
         paddingTop: 0,
@@ -57,15 +57,15 @@ const SubNav = styled('div')(({ showSubNav }) => ({
         },
     },
 }));
-SubNav.displayName = 'SubNav';
+MainMenu.displayName = 'MainMenu';
 
 type Props = {
-    showSubNav: boolean,
+    showMainMenu: boolean,
     id: string,
 };
 
-export default ({ showSubNav, id }: Props) => (
-    <SubNav showSubNav={showSubNav} aria-hidden={!showSubNav} id={id}>
-        <SubNavList />
-    </SubNav>
+export default ({ showMainMenu, id }: Props) => (
+    <MainMenu showMainMenu={showMainMenu} aria-hidden={!showMainMenu} id={id}>
+        <MainMenuPillars />
+    </MainMenu>
 );
