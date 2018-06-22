@@ -5,6 +5,8 @@ import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 import { pillars } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
 
+import type { PillarType } from '../../Nav/__config__';
+
 const Pillar = styled('li')({
     float: 'left',
     [desktop]: {
@@ -63,16 +65,6 @@ const Link = styled('a')(({ pillar }) => ({
     },
 }));
 
-export type PillarType = {
-    label: string,
-    href: string,
-    pillar: string,
-    links: Array<{
-        label: string,
-        href: string,
-    }>,
-};
-
 type Props = {
     children: React.Node,
     pillar: PillarType,
@@ -80,7 +72,7 @@ type Props = {
 
 export default ({ children, pillar }: Props) => (
     <Pillar>
-        <Link href={pillar.href} pillar={pillar.pillar}>
+        <Link href={pillar.href} pillar={pillar.id}>
             {children}
         </Link>
     </Pillar>

@@ -8,7 +8,7 @@ import {
     desktop,
 } from '@guardian/pasteup/breakpoints';
 
-import MainMenuPillars from './MainMenuPillars';
+import MainMenuColumns from './MainMenuColumns';
 
 const MainMenu = styled('div')(({ showMainMenu }) => ({
     backgroundColor: '#e9eff1',
@@ -40,6 +40,7 @@ const MainMenu = styled('div')(({ showMainMenu }) => ({
     },
     [desktop]: {
         display: showMainMenu ? 'block' : 'none',
+        marginTop: -20,
         position: 'absolute',
         paddingBottom: 0,
         paddingTop: 0,
@@ -66,6 +67,6 @@ type Props = {
 
 export default ({ showMainMenu, id }: Props) => (
     <MainMenu showMainMenu={showMainMenu} aria-hidden={!showMainMenu} id={id}>
-        <MainMenuPillars />
+        <MainMenuColumns />
     </MainMenu>
 );

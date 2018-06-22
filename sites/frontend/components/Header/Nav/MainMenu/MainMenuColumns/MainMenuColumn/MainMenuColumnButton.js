@@ -5,12 +5,12 @@ import { headline } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
 
-import pillarConfig from '../../../Pillars/__config__';
+import { columnsConfig } from '../../../../Nav/__config__';
 
-import type { PillarType } from '../../../Pillars/Pillar';
+import type { ColumnType } from '../../../../Nav/__config__';
 
-const MainMenuPillarButton = styled('button')(
-    ({ pillar, isLastIndex, showPillarLinks }) => ({
+const MainMenuColumnButton = styled('button')(
+    ({ pillar, isLastIndex, showColumnLinks }) => ({
         backgroundColor: 'transparent',
         border: 0,
         boxSizing: 'border-box',
@@ -31,7 +31,7 @@ const MainMenuPillarButton = styled('button')(
         },
         textTransform: 'capitalize',
         ':before': {
-            marginTop: showPillarLinks ? 8 : 4,
+            marginTop: showColumnLinks ? 8 : 4,
             color: '#5d5f5f',
             left: 25,
             position: 'absolute',
@@ -41,7 +41,7 @@ const MainMenuPillarButton = styled('button')(
             content: '""',
             display: 'inline-block',
             height: 10,
-            transform: showPillarLinks ? 'rotate(-135deg)' : 'rotate(45deg)',
+            transform: showColumnLinks ? 'rotate(-135deg)' : 'rotate(45deg)',
             width: 10,
         },
         [desktop]: {
@@ -51,7 +51,7 @@ const MainMenuPillarButton = styled('button')(
             backgroundColor: '#abc2c9',
             bottom: 0,
             content: '""',
-            display: !showPillarLinks && !isLastIndex ? 'block' : 'none',
+            display: !showColumnLinks && !isLastIndex ? 'block' : 'none',
             height: 1,
             left: 50,
             position: 'absolute',
@@ -59,36 +59,37 @@ const MainMenuPillarButton = styled('button')(
         },
     }),
 );
-MainMenuPillarButton.displayName = 'MainMenuPillarButton';
+MainMenuColumnButton.displayName = 'MainMenuColumnButton';
 
 type Props = {
-    pillar: PillarType,
-    showPillarLinks: boolean,
-    togglePillarLinks: () => void,
+    column: ColumnType,
+    showColumnLinks: boolean,
+    toggleColumnLinks: () => void,
     ariaControls: string,
 };
 
 export default ({
-    pillar,
-    showPillarLinks,
-    togglePillarLinks,
+    column,
+    showColumnLinks,
+    toggleColumnLinks,
     ariaControls,
 }: Props) => {
-    const isLastIndex = pillar === pillarConfig[pillarConfig.length - 1];
+    const pillarColumns = columnsConfig.filter(column => !!column.pillar);
+    const isLastIndex = column === pillarColumns[pillarColumns.length - 1];
 
     return (
-        <MainMenuPillarButton
-            pillar={pillar.pillar}
+        <MainMenuColumnButton
+            pillar={column.pillar}
             isLastIndex={isLastIndex}
-            showPillarLinks={showPillarLinks}
+            showColumnLinks={showColumnLinks}
             onClick={() => {
-                togglePillarLinks();
+                toggleColumnLinks();
             }}
             aria-haspopup="true"
             aria-controls={ariaControls}
             role="menuitem"
         >
-            {pillar.label}
-        </MainMenuPillarButton>
+            {column.label}
+        </MainMenuColumnButton>
     );
 };

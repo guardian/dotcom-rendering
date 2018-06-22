@@ -4,7 +4,7 @@ import { styled } from '@guardian/guui';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
-const MainMenuPillarLinkTitle = styled('a')({
+const MainMenuColumnLinkTitle = styled('a')({
     backgroundColor: 'transparent',
     textDecoration: 'none',
     border: 0,
@@ -38,12 +38,12 @@ const MainMenuPillarLinkTitle = styled('a')({
         pointerEvents: 'none',
     },
 });
-MainMenuPillarLinkTitle.displayName = 'MainMenuPillarLinkTitle';
+MainMenuColumnLinkTitle.displayName = 'MainMenuColumnLinkTitle';
 
 type Props = { link: { href: string, label: string } };
 
 export default ({ link }: Props) => (
-    <MainMenuPillarLinkTitle href={link.href} role="menuitem">
+    <MainMenuColumnLinkTitle href={link.href} role="menuitem">
         {link.label}
-    </MainMenuPillarLinkTitle>
+    </MainMenuColumnLinkTitle>
 );
