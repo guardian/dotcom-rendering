@@ -3,8 +3,11 @@ import { styled } from '@guardian/guui';
 
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
+import { pillars } from '@guardian/pasteup/palette';
 
-const MainMenuColumnLinkTitle = styled('a')({
+import type { ColumnType } from '../../../../Nav/__config__';
+
+const MainMenuColumnLinkTitle = styled('a')(({ column, isPillar }) => ({
     backgroundColor: 'transparent',
     textDecoration: 'none',
     border: 0,
@@ -29,21 +32,28 @@ const MainMenuColumnLinkTitle = styled('a')({
         padding: '6px 0',
     },
     ':hover': {
-        color: '#5d5f5f',
+        color: isPillar ? pillars[column.pillar] : '#5d5f5f',
+        textDecoration: 'underline',
     },
     ':focus': {
-        color: '#5d5f5f',
+        color: isPillar ? pillars[column.pillar] : '#5d5f5f',
+        textDecoration: 'underline',
     },
     '> *': {
         pointerEvents: 'none',
     },
-});
+}));
+
 MainMenuColumnLinkTitle.displayName = 'MainMenuColumnLinkTitle';
 
-type Props = { link: { href: string, label: string } };
+type Props = { 
+    column: ColumnType,
+    isPillar: boolean,
+    link: { href: string, label: string } 
+};
 
-export default ({ link }: Props) => (
-    <MainMenuColumnLinkTitle href={link.href} role="menuitem">
+export default ({ link, column, isPillar }: Props) => (
+    <MainMenuColumnLinkTitle href={link.href} role="menuitem" link={link} column={column} isPillar={isPillar}>
         {link.label}
     </MainMenuColumnLinkTitle>
 );

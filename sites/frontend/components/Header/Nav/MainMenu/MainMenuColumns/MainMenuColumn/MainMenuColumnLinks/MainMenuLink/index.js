@@ -3,6 +3,8 @@ import { styled } from '@guardian/guui';
 
 import MainMenuLinkTitle from './MainMenuLinkTitle';
 
+import type { ColumnType } from '../../../../../Nav/__config__';
+
 const MainMenuLink = styled('li')({
     boxSizing: 'border-box',
     overflow: 'hidden',
@@ -11,10 +13,14 @@ const MainMenuLink = styled('li')({
 });
 MainMenuLink.displayName = 'MainMenuLink';
 
-type Props = { link: { href: string, label: string } };
+type Props = { 
+    column: ColumnType,
+    isPillar: boolean,
+    link: { href: string, label: string } 
+};
 
-export default ({ link }: Props) => (
+export default ({ link, column, isPillar }: Props) => (
     <MainMenuLink role="none">
-        <MainMenuLinkTitle link={link} />
+        <MainMenuLinkTitle link={link} column={column} isPillar={isPillar}/>
     </MainMenuLink>
 );

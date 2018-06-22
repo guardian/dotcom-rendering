@@ -41,7 +41,7 @@ export default ({ column, showColumnLinks, isPillar, id }: Props) => (
         id={id}
     >
         {column.links.map(link => (
-            <MainMenuLink link={link} key={link.label} />
+            <MainMenuLink link={link} key={link.label} column={column} isPillar={isPillar} />
         ))}
     </MainMenuColumnLinks>
 );
