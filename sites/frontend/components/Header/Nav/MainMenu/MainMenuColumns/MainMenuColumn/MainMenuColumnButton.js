@@ -74,7 +74,9 @@ export default ({
     toggleColumnLinks,
     ariaControls,
 }: Props) => {
-    const pillarColumns = columnsConfig.filter(column => !!column.pillar);
+    const pillarColumns = columnsConfig.filter(
+        columnConfig => !!columnConfig.pillar,
+    );
     const isLastIndex = column === pillarColumns[pillarColumns.length - 1];
 
     return (

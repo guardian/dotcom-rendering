@@ -30,7 +30,12 @@ const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
 }));
 MainMenuColumnLinks.displayName = 'MainMenuColumnLinks';
 
-type Props = { column: ColumnType, showColumnLinks: boolean, id: string, isPillar: boolean };
+type Props = {
+    column: ColumnType,
+    showColumnLinks: boolean,
+    id: string,
+    isPillar: boolean,
+};
 
 export default ({ column, showColumnLinks, isPillar, id }: Props) => (
     <MainMenuColumnLinks
@@ -41,7 +46,12 @@ export default ({ column, showColumnLinks, isPillar, id }: Props) => (
         id={id}
     >
         {column.links.map(link => (
-            <MainMenuLink link={link} key={link.label} column={column} isPillar={isPillar} />
+            <MainMenuLink
+                link={link}
+                key={link.label}
+                column={column}
+                isPillar={isPillar}
+            />
         ))}
     </MainMenuColumnLinks>
 );

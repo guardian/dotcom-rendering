@@ -18,7 +18,7 @@ const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
             width: 140,
             float: 'left',
             position: 'relative',
-        }
+        },
     };
 
     if (isPillar) {
@@ -66,27 +66,29 @@ export default class MainMenuColumn extends Component<
         const subNavId = `${column.id}Links`;
         const ColumnButton = () => {
             if (isPillar) {
-                return (<MainMenuColumnButton
-                    column={column}
-                    showColumnLinks={showColumnLinks}
-                    toggleColumnLinks={() => {
-                        this.toggleColumnLinks();
-                    }}
-                    ariaControls={subNavId}
-                />);
+                return (
+                    <MainMenuColumnButton
+                        column={column}
+                        showColumnLinks={showColumnLinks}
+                        toggleColumnLinks={() => {
+                            this.toggleColumnLinks();
+                        }}
+                        ariaControls={subNavId}
+                    />
+                );
             }
             return '';
         };
 
         return (
             <MainMenuColumnStyled role="none" isPillar={isPillar}>
-            <ColumnButton />
-            <MainMenuColumnLinks
-                column={column}
-                showColumnLinks={showColumnLinks}
-                id={subNavId}
-                isPillar={isPillar}
-            />
+                <ColumnButton />
+                <MainMenuColumnLinks
+                    column={column}
+                    showColumnLinks={showColumnLinks}
+                    id={subNavId}
+                    isPillar={isPillar}
+                />
             </MainMenuColumnStyled>
         );
     }
