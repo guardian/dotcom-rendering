@@ -1,7 +1,7 @@
 // @flow
 import { styled } from '@guardian/guui';
 
-import { tablet, desktop } from '@guardian/pasteup/breakpoints';
+import { tablet, desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import { pillars } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
 
@@ -10,7 +10,7 @@ import type { PillarType } from '../../Nav/__config__';
 const Pillar = styled('li')({
     float: 'left',
     [desktop]: {
-        width: 140,
+        width: 118,
         position: 'relative',
         ':after': {
             content: '""',
@@ -23,6 +23,9 @@ const Pillar = styled('li')({
             backgroundColor: '#abc2c9',
         },
     },
+    [leftCol]: {
+        width: 140,
+    },
 });
 
 const Link = styled('a')(({ pillar }) => ({
@@ -32,20 +35,20 @@ const Link = styled('a')(({ pillar }) => ({
     color: pillars[pillar],
     cursor: 'pointer',
     display: 'block',
-    fontSize: '15.4px',
+    fontSize: 15.4,
     height: 30,
     lineHeight: 1,
     padding: '0 4px',
     position: 'relative',
     overflow: 'hidden',
     [tablet]: {
-        fontSize: '22px',
-        height: '42px',
-        paddingRight: '20px',
-        paddingLeft: '5px',
+        fontSize: 22,
+        height: 42,
+        paddingRight: 20,
+        paddingLeft: 5,
     },
     [desktop]: {
-        height: '48px',
+        height: 48,
     },
     ':after': {
         content: '""',
@@ -54,7 +57,7 @@ const Link = styled('a')(({ pillar }) => ({
         position: 'absolute',
         borderBottom: '4px solid currentColor',
         right: 0,
-        bottom: '-4px',
+        bottom: -4,
         transition: 'transform 150ms ease-out',
     },
     ':focus:after': {

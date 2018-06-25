@@ -1,7 +1,7 @@
 // @flow
 import { styled, Component } from '@guardian/guui';
 
-import { desktop } from '@guardian/pasteup/breakpoints';
+import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 
 import MainMenuColumnButton from './MainMenuColumnButton';
 import MainMenuColumnLinks from './MainMenuColumnLinks';
@@ -15,9 +15,12 @@ const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
         margin: 0,
         padding: '0 0 12px',
         [desktop]: {
-            width: 140,
+            width: 118,
             float: 'left',
             position: 'relative',
+        },
+        [leftCol]: {
+            width: 140,
         },
     };
 
