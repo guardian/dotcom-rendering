@@ -8,7 +8,7 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import Logo from './Logo';
 import Links from './Links';
 import Pillars from './Pillars';
-import OpenMainMenu from './OpenMainMenu';
+import MainMenuToggle from './MainMenuToggle';
 import MainMenu from './MainMenu';
 
 const NavStyled = styled('nav')(
@@ -59,7 +59,7 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
                 <Logo />
                 <Links />
                 <Pillars />
-                <OpenMainMenu
+                <MainMenuToggle
                     showMainMenu={showMainMenu}
                     toggleMainMenu={toggleMainMenu}
                     ariaControls={mainMenuId}

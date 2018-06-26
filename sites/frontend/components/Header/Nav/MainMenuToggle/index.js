@@ -90,7 +90,7 @@ type Props = {
     ariaControls: string,
 };
 
-class OpenMainMenu extends Component<Props, { enhanceCheckbox: boolean }> {
+class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
     constructor(props: Props) {
         super(props);
 
@@ -168,4 +168,4 @@ class OpenMainMenu extends Component<Props, { enhanceCheckbox: boolean }> {
     }
 }
 
-export default OpenMainMenu;
+export default MainMenuToggle;
