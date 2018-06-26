@@ -113,25 +113,47 @@ const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     return props;
 };
 
-export const Row = ({ children }: { children: React.Node }) => (
-    <RowStyled>{children}</RowStyled>
-);
+export const Row = ({
+    htmlTag,
+    children,
+}: {
+    htmlTag?: string,
+    children: React.Node,
+}) => {
+    const GridRow = RowStyled.withComponent(htmlTag);
+
+    return <GridRow>{children}</GridRow>;
+};
+
+Row.defaultProps = {
+    htmlTag: 'div',
+};
+
 export const Cols = ({
+    htmlTag,
     tablet,
     desktop,
     leftCol,
     wide,
     children,
 }: {
+    htmlTag?: string,
     [Breakpoint]: BreakpointProps | number,
     children: React.Node,
-}) => (
-    <ColsStyled
-        tablet={normaliseProps(tablet || [columns.tablet.max, {}])}
-        desktop={normaliseProps(desktop || [columns.desktop.max, {}])}
-        leftCol={normaliseProps(leftCol || [columns.leftCol.max, {}])}
-        wide={normaliseProps(wide || [columns.wide.max, {}])}
-    >
-        {children}
-    </ColsStyled>
-);
+}) => {
+    const GridCol = ColsStyled.withComponent(htmlTag);
+    return (
+        <GridCol
+            tablet={normaliseProps(tablet || [columns.tablet.max, {}])}
+            desktop={normaliseProps(desktop || [columns.desktop.max, {}])}
+            leftCol={normaliseProps(leftCol || [columns.leftCol.max, {}])}
+            wide={normaliseProps(wide || [columns.wide.max, {}])}
+        >
+            {children}
+        </GridCol>
+    );
+};
+
+Cols.defaultProps = {
+    htmlTag: 'div',
+};
