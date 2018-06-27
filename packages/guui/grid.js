@@ -118,7 +118,7 @@ export const Row = ({
     children,
 }: {
     htmlTag?: string,
-    children: React.Node,
+    children: React$Node,
 }) => {
     const GridRow = RowStyled.withComponent(htmlTag);
 
@@ -139,7 +139,7 @@ export const Cols = ({
 }: {
     htmlTag?: string,
     [Breakpoint]: BreakpointProps | number,
-    children: React.Node,
+    children: React$Node,
 }) => {
     const GridCol = ColsStyled.withComponent(htmlTag);
     return (

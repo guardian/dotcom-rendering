@@ -8,7 +8,7 @@ import CloseButton from '@guardian/guui/buttons/Close';
 type SiteMessageProps = {
     foregroundcolor: string,
     backgroundcolor: string,
-    children?: React.Node,
+    children?: React$Node,
 };
 
 const duration = 100;

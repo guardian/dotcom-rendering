@@ -69,7 +69,7 @@ const Link = styled('a')(({ pillar }) => ({
 }));
 
 type Props = {
-    children: React.Node,
+    children: React$Node,
     pillar: PillarType,
 };
 
