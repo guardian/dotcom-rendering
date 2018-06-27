@@ -144,10 +144,10 @@ export const Cols = ({
     const GridCol = ColsStyled.withComponent(htmlTag);
     return (
         <GridCol
-            tablet={normaliseProps(tablet || [columns.tablet.max, {}])}
-            desktop={normaliseProps(desktop || [columns.desktop.max, {}])}
-            leftCol={normaliseProps(leftCol || [columns.leftCol.max, {}])}
-            wide={normaliseProps(wide || [columns.wide.max, {}])}
+            tablet={normaliseProps(tablet)}
+            desktop={normaliseProps(desktop)}
+            leftCol={normaliseProps(leftCol)}
+            wide={normaliseProps(wide)}
         >
             {children}
         </GridCol>
@@ -156,4 +156,8 @@ export const Cols = ({
 
 Cols.defaultProps = {
     htmlTag: 'div',
-};
+    tablet: [columns.tablet.max, {}],
+    desktop: [columns.desktop.max, {}],
+    leftCol: [columns.leftCol.max, {}],
+    wide: [columns.wide.max, {}],
+}
