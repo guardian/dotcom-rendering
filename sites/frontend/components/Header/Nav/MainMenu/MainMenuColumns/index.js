@@ -24,7 +24,6 @@ const MainMenuColumns = styled('ul')({
         maxWidth: 1300,
     },
 });
-MainMenuColumns.displayName = 'MainMenuColumns';
 
 export default () => (
     <MainMenuColumns role="menubar" tabindex="-1">

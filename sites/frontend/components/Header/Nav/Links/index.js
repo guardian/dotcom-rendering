@@ -13,7 +13,6 @@ const Links = styled('div')({
     top: 0,
     position: 'absolute',
 });
-Links.displayName = 'Links';
 
 export default connect('header')(({ isPayingMember, isRecentContributor }) => (
     <Links>

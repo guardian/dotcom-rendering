@@ -59,7 +59,6 @@ const MainMenuColumnButton = styled('button')(
         },
     }),
 );
-MainMenuColumnButton.displayName = 'MainMenuColumnButton';
 
 type Props = {
     column: ColumnType,

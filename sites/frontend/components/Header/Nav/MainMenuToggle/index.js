@@ -48,7 +48,6 @@ const OpenMainMenuCheckbox = styled('input')({
         },
     },
 });
-OpenMainMenuCheckbox.displayName = 'OpenMainMenuCheckbox';
 
 const OpenMainMenuLabel = styled('label')({
     ...openMainMenuStyles,
@@ -56,12 +55,10 @@ const OpenMainMenuLabel = styled('label')({
         display: 'inline-block',
     },
 });
-OpenMainMenuLabel.displayName = 'OpenMainMenu';
 
 const OpenMainMenuButton = styled('button')({
     ...openMainMenuStyles,
 });
-OpenMainMenuButton.displayName = 'OpenMainMenu';
 
 const OpenMainMenuText = styled('span')({
     display: 'block',

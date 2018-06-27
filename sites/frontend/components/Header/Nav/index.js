@@ -30,7 +30,6 @@ const NavStyled = styled('nav')(
     },
     clearFix,
 );
-NavStyled.displayName = 'Nav';
 
 export default class Nav extends Component<{}, { showMainMenu: boolean }> {
     constructor(props: {}) {

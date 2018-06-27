@@ -44,8 +44,6 @@ const MainMenuColumnLinkTitle = styled('a')(({ column, isPillar }) => ({
     },
 }));
 
-MainMenuColumnLinkTitle.displayName = 'MainMenuColumnLinkTitle';
-
 type Props = {
     column: ColumnType,
     isPillar: boolean,

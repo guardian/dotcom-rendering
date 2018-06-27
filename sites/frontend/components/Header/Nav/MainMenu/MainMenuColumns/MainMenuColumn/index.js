@@ -40,8 +40,6 @@ const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
     return styles;
 });
 
-MainMenuColumnStyled.displayName = 'MainMenuColumnStyled';
-
 type Props = { column: ColumnType };
 
 export default class MainMenuColumn extends Component<

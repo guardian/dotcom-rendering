@@ -28,7 +28,6 @@ const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
         padding: '0 5px',
     },
 }));
-MainMenuColumnLinks.displayName = 'MainMenuColumnLinks';
 
 type Props = {
     column: ColumnType,
