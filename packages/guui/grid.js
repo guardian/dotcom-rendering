@@ -160,4 +160,4 @@ Cols.defaultProps = {
     desktop: [columns.desktop.max, {}],
     leftCol: [columns.leftCol.max, {}],
     wide: [columns.wide.max, {}],
-}
+};
