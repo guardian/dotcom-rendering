@@ -16,7 +16,7 @@ const Content = styled('div')({
 });
 
 type Props = {
-    children: React.Node,
+    children: React$Node,
 };
 
 export default function Epic({ children }: Props) {

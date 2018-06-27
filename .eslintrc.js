@@ -29,6 +29,7 @@ module.exports = {
                 extensions: ['.js'],
             },
         ],
+        'react/default-props-match-prop-types': 'off',
     },
     overrides: [
         {
