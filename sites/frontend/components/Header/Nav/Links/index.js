@@ -15,10 +15,10 @@ const Links = styled('div')({
 });
 Links.displayName = 'Links';
 
-export default connect('header')(props => (
+export default connect('header')(({ isPayingMember, isRecentContributor }) => (
     <Links>
-        {props.isPayingMember ||
-            props.isRecentContributor || (
+        {isPayingMember ||
+            isRecentContributor || (
                 <SupportTheGuardian href="/">
                     Support The Guardian
                 </SupportTheGuardian>

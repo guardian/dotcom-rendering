@@ -8,9 +8,9 @@ import {
     desktop,
 } from '@guardian/pasteup/breakpoints';
 
-import SubNavList from './SubNavList';
+import MainMenuColumns from './MainMenuColumns';
 
-const SubNav = styled('div')(props => ({
+const MainMenu = styled('div')(({ showMainMenu }) => ({
     backgroundColor: '#e9eff1',
     boxSizing: 'border-box',
     fontSize: 20,
@@ -21,7 +21,7 @@ const SubNav = styled('div')(props => ({
     top: 0,
     zIndex: 1070,
     [until.desktop]: {
-        transform: props.showSubNav ? 'translateX(0%)' : 'translateX(-110%)',
+        transform: showMainMenu ? 'translateX(0%)' : 'translateX(-110%)',
         transition: 'transform .4s cubic-bezier(.23, 1, .32, 1)',
         boxShadow: '3px 0 16px rgba(0, 0, 0, .4)',
         bottom: 0,
@@ -39,33 +39,34 @@ const SubNav = styled('div')(props => ({
         marginRight: 70,
     },
     [desktop]: {
-        display: props.showSubNav ? 'block' : 'none',
+        display: showMainMenu ? 'block' : 'none',
+        marginTop: -20,
         position: 'absolute',
         paddingBottom: 0,
         paddingTop: 0,
         top: '100%',
-        // left: 0,
-        // right: 0,
-        // width: '100%',
+        left: 0,
+        right: 0,
+        width: '100%',
         borderBottom: '1px solid #abc2c9',
-        // commented out pending feedback https://github.com/emotion-js/emotion/issues/593
-        // '@supports (width: 100vw)': {
-        left: '50%',
-        right: '50%',
-        width: '100vw',
-        marginLeft: '-50vw',
-        marginRight: '-50vw',
-        // }
+        '@supports (width: 100vw)': {
+            left: '50%',
+            right: '50%',
+            width: '100vw',
+            marginLeft: '-50vw',
+            marginRight: '-50vw',
+        },
     },
 }));
-SubNav.displayName = 'SubNav';
+MainMenu.displayName = 'MainMenu';
 
 type Props = {
-    showSubNav: boolean,
+    showMainMenu: boolean,
+    id: string,
 };
 
-export default ({ showSubNav }: Props) => (
-    <SubNav showSubNav={showSubNav}>
-        <SubNavList />
-    </SubNav>
+export default ({ showMainMenu, id }: Props) => (
+    <MainMenu showMainMenu={showMainMenu} aria-hidden={!showMainMenu} id={id}>
+        <MainMenuColumns />
+    </MainMenu>
 );

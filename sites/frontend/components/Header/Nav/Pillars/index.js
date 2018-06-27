@@ -4,7 +4,7 @@ import { styled } from '@guardian/guui';
 import { mobileLandscape } from '@guardian/pasteup/breakpoints';
 
 import Pillar from './Pillar';
-import pillars from './__config__';
+import { pillarsConfig } from '../__config__';
 
 const Pillars = styled('ul')({
     clear: 'right',
@@ -19,8 +19,8 @@ Pillars.displayName = 'Pillars';
 
 export default () => (
     <Pillars>
-        {pillars.map((pillar, i) => (
-            <Pillar pillar={pillar} index={i} key={pillar.label}>
+        {pillarsConfig.map(pillar => (
+            <Pillar pillar={pillar} key={pillar.label}>
                 {pillar.label}
             </Pillar>
         ))}

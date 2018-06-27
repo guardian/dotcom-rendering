@@ -3,19 +3,19 @@ import { styled } from '@guardian/guui';
 
 import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
-import SubNavListItem from './SubNavListItem';
-import pillars from '../../Pillars/__config__';
+import MainMenuColumn from './MainMenuColumn';
+import { columnsConfig } from '../../../Nav/__config__';
 
-const SubNavList = styled('ul')({
+const MainMenuColumns = styled('ul')({
     boxSizing: 'border-box',
     maxWidth: 'none',
     [desktop]: {
         maxWidth: 980,
         backgroundColor: '#e9eff1',
-        marginTop: -20,
         padding: '0 20px',
         position: 'relative',
         margin: '0 auto',
+        display: 'flex',
     },
     [leftCol]: {
         maxWidth: 1140,
@@ -24,12 +24,12 @@ const SubNavList = styled('ul')({
         maxWidth: 1300,
     },
 });
-SubNavList.displayName = 'SubNavList';
+MainMenuColumns.displayName = 'MainMenuColumns';
 
 export default () => (
-    <SubNavList>
-        {pillars.map(pillar => (
-            <SubNavListItem pillar={pillar} key={pillar.label} />
+    <MainMenuColumns role="menubar" tabindex="-1">
+        {columnsConfig.map(column => (
+            <MainMenuColumn column={column} key={column.id} />
         ))}
-    </SubNavList>
+    </MainMenuColumns>
 );

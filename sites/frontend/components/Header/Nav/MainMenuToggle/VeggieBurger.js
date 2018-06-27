@@ -8,7 +8,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-const VeggieBurger = styled('span')(({ showSubNav }) => {
+const VeggieBurgerStyles = ({ showMainMenu }) => {
     const styles = {
         backgroundColor: '#121212',
         top: 24,
@@ -22,7 +22,7 @@ const VeggieBurger = styled('span')(({ showSubNav }) => {
         borderRadius: '50%',
         outline: 'none',
         right: 5,
-        zIndex: showSubNav ? 1071 : 0,
+        zIndex: showMainMenu ? 1071 : 0,
         [mobileMedium]: {
             bottom: -6,
             height: 48,
@@ -41,10 +41,15 @@ const VeggieBurger = styled('span')(({ showSubNav }) => {
     };
 
     return styles;
-});
-VeggieBurger.displayName = 'VeggieBurger';
+};
 
-const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
+const VeggieBurgerLabel = styled('label')(VeggieBurgerStyles);
+VeggieBurgerLabel.displayName = 'VeggieBurger';
+
+const VeggieBurgerButton = styled('label')(VeggieBurgerStyles);
+VeggieBurgerButton.displayName = 'VeggieBurger';
+
+const VeggieBurgerIcon = styled('span')(({ showMainMenu }) => {
     const beforeAfterStyles = {
         content: '""',
         backgroundColor: 'currentColor',
@@ -71,7 +76,7 @@ const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
         },
     };
 
-    if (showSubNav) {
+    if (showMainMenu) {
         styles[':before'] = Object.assign({}, styles[':before'], {
             top: 0,
             transform: 'rotate(-45deg)',
@@ -88,12 +93,40 @@ const VeggieBurgerIcon = styled('span')(({ showSubNav }) => {
 VeggieBurgerIcon.displayName = 'VeggieBurgerIcon';
 
 type Props = {
-    toggleSubNav: Function,
-    showSubNav: boolean,
+    toggleMainMenu: () => void,
+    showMainMenu: boolean,
+    enhanceCheckbox: boolean,
+    htmlFor: string,
+    ariaControls: string,
 };
 
-export default ({ toggleSubNav, showSubNav }: Props) => (
-    <VeggieBurger onClick={() => toggleSubNav()} showSubNav={showSubNav}>
-        <VeggieBurgerIcon showSubNav={showSubNav} />
-    </VeggieBurger>
-);
+export default ({
+    toggleMainMenu,
+    showMainMenu,
+    enhanceCheckbox,
+    htmlFor,
+    ariaControls,
+}: Props) => {
+    if (enhanceCheckbox) {
+        return (
+            <VeggieBurgerButton
+                onClick={() => toggleMainMenu()}
+                showMainMenu={showMainMenu}
+                aria-controls={ariaControls}
+            >
+                <VeggieBurgerIcon showMainMenu={showMainMenu} />
+            </VeggieBurgerButton>
+        );
+    }
+
+    return (
+        <VeggieBurgerLabel
+            onClick={() => toggleMainMenu()}
+            showMainMenu={showMainMenu}
+            htmlFor={htmlFor}
+            tabindex="0"
+        >
+            <VeggieBurgerIcon showMainMenu={showMainMenu} />
+        </VeggieBurgerLabel>
+    );
+};
