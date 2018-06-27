@@ -58,7 +58,6 @@ const MainMenu = styled('div')(({ showMainMenu }) => ({
         },
     },
 }));
-MainMenu.displayName = 'MainMenu';
 
 type Props = {
     showMainMenu: boolean,

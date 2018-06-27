@@ -11,7 +11,6 @@ const MainMenuLink = styled('li')({
     position: 'relative',
     width: '100%',
 });
-MainMenuLink.displayName = 'MainMenuLink';
 
 type Props = {
     column: ColumnType,

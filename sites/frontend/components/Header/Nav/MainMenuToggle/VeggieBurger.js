@@ -44,10 +44,8 @@ const VeggieBurgerStyles = ({ showMainMenu }) => {
 };
 
 const VeggieBurgerLabel = styled('label')(VeggieBurgerStyles);
-VeggieBurgerLabel.displayName = 'VeggieBurger';
 
 const VeggieBurgerButton = styled('label')(VeggieBurgerStyles);
-VeggieBurgerButton.displayName = 'VeggieBurger';
 
 const VeggieBurgerIcon = styled('span')(({ showMainMenu }) => {
     const beforeAfterStyles = {
@@ -90,7 +88,6 @@ const VeggieBurgerIcon = styled('span')(({ showMainMenu }) => {
 
     return styles;
 });
-VeggieBurgerIcon.displayName = 'VeggieBurgerIcon';
 
 type Props = {
     toggleMainMenu: () => void,
