@@ -28,7 +28,7 @@ const Pillar = styled('li')({
     },
 });
 
-const Link = styled('a')(({ pillar }) => ({
+const Link = styled('a')(({ showMainMenu, pillar }) => ({
     fontFamily: headline,
     fontWeight: 600,
     textDecoration: 'none',
@@ -49,6 +49,9 @@ const Link = styled('a')(({ pillar }) => ({
     },
     [desktop]: {
         height: 48,
+    },
+    ':hover': {
+        textDecoration: showMainMenu ? 'underline' : 'none',
     },
     ':after': {
         content: '""',
@@ -71,11 +74,12 @@ const Link = styled('a')(({ pillar }) => ({
 type Props = {
     children: React$Node,
     pillar: PillarType,
+    showMainMenu: boolean,
 };
 
-export default ({ children, pillar }: Props) => (
+export default ({ children, pillar, showMainMenu }: Props) => (
     <Pillar>
-        <Link href={pillar.href} pillar={pillar.id}>
+        <Link href={pillar.href} pillar={pillar.id} showMainMenu={showMainMenu}>
             {children}
         </Link>
     </Pillar>
