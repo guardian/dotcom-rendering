@@ -60,7 +60,7 @@ const OpenMainMenuButton = styled('button')({
     ...openMainMenuStyles,
 });
 
-const OpenMainMenuText = styled('span')({
+const OpenMainMenuText = styled('span')(({ showMainMenu }) => ({
     display: 'block',
     height: '100%',
     ':after': {
@@ -71,15 +71,19 @@ const OpenMainMenuText = styled('span')({
         display: 'inline-block',
         height: 8,
         marginLeft: 6,
-        transform: 'translateY(-3px) rotate(45deg)',
+        transform: showMainMenu
+            ? 'translateY(1px) rotate(-135deg)'
+            : 'translateY(-3px) rotate(45deg)',
         transition: 'transform 250ms ease-out',
         verticalAlign: 'middle',
         width: 8,
     },
     ':hover:after': {
-        transform: 'translateY(0) rotate(45deg)',
+        transform: showMainMenu
+            ? 'translateY(-2px) rotate(-135deg)'
+            : 'translateY(0) rotate(45deg)',
     },
-});
+}));
 
 type Props = {
     toggleMainMenu: () => void,
@@ -131,7 +135,9 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                     key="OpenMainMenuButton"
                 >
                     <ScreenReadable>Show</ScreenReadable>
-                    <OpenMainMenuText>More</OpenMainMenuText>
+                    <OpenMainMenuText showMainMenu={showMainMenu}>
+                        More
+                    </OpenMainMenuText>
                 </OpenMainMenuButton>,
             ];
         }
