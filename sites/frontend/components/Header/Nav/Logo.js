@@ -32,37 +32,6 @@ const Link = styled('a')({
     },
 });
 
-
-// margin-bottom: $gs-baseline + $gs-baseline / 4;
-//     margin-right: $gs-gutter / 4 + $veggie-burger-small;
-//     margin-top: $gs-baseline / 4;
-
-//     @include mq(mobileMedium) {
-//         margin-right: $gs-gutter / 4;
-//     }
-
-//     @include mq(mobileLandscape) {
-//         margin-right: $gs-gutter - 3;
-//     }
-
-//     @include mq(desktop) {
-//         margin-bottom: -34px;
-//         margin-top: 5px;
-//         position: relative;
-//         z-index: $zindex-main-menu + 1;
-//     }
-
-//     body:not(.has-page-skin) & {
-//         @include mq(leftCol) {
-//             margin-bottom: -40px;
-//         }
-
-//         @include mq(wide) {
-//             margin-right: 96px;
-//         }
-//     }
-
-
 const ScreenReaderText = styled('span')(screenReaderOnly);
 
 const SVG = styled(TheGuardianLogoSVG)({
