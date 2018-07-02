@@ -1,8 +1,11 @@
 {
   "name": "@guardian/pasteup",
-  "version": "0.1.0-alpha.1",
+  "version": "1.0.0-alpha.1",
   "description": "Guardian design tokens",
-  "main": "index.js",
+  "repository": { 
+    "type" : "git",
+    "url" : "https://github.com/guardian/dotcom-rendering"
+  },
   "scripts": {
     "test": "jest"
   },
