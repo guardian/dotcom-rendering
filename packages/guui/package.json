@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@guardian/guui": "2.0.0-alpha.1",
-    "@guardian/pasteup": "0.1.0-alpha.1",
+    "@guardian/pasteup": "1.0.0-alpha.1",
     "emotion": "^9.1.1",
     "emotion-server": "^9.1.1",
     "polished": "^1.9.2",
