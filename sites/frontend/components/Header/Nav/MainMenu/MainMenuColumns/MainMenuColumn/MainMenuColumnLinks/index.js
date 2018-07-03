@@ -5,7 +5,9 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 
 import MainMenuLink from './MainMenuLink';
 
-import type { ColumnType } from '../../../../../Nav/__config__';
+import { brandExtenstionsConfig } from '../../../../../Nav/__config__';
+
+import type { MainMenuColumnType } from '../../../../../Nav/__config__';
 
 const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
     boxSizing: 'border-box',
@@ -30,27 +32,34 @@ const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
 }));
 
 type Props = {
-    column: ColumnType,
+    column: MainMenuColumnType,
     showColumnLinks: boolean,
     id: string,
-    isPillar: boolean,
 };
 
-export default ({ column, showColumnLinks, isPillar, id }: Props) => (
-    <MainMenuColumnLinks
-        showColumnLinks={showColumnLinks}
-        isPillar={isPillar}
-        aria-expanded={showColumnLinks}
-        role="menu"
-        id={id}
-    >
-        {column.links.map(link => (
-            <MainMenuLink
-                link={link}
-                key={link.label}
-                column={column}
-                isPillar={isPillar}
-            />
-        ))}
-    </MainMenuColumnLinks>
-);
+export default ({ column, showColumnLinks, id }: Props) => {
+    const links =
+        column.id === 'more'
+            ? [
+                  ...brandExtenstionsConfig.map(brandExtenstion => ({
+                      ...brandExtenstion,
+                      mobileOnly: true,
+                  })),
+                  ...column.links,
+              ]
+            : column.links;
+
+    return (
+        <MainMenuColumnLinks
+            showColumnLinks={showColumnLinks}
+            isPillar={column.isPillar}
+            aria-expanded={showColumnLinks}
+            role="menu"
+            id={id}
+        >
+            {links.map(link => (
+                <MainMenuLink link={link} key={link.label} column={column} />
+            ))}
+        </MainMenuColumnLinks>
+    );
+};

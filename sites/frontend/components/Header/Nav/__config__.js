@@ -5,14 +5,18 @@ export type PillarType = {
     href: string,
 };
 
-export type ColumnType = {
+export type LinkType = {
+    label: string,
+    href: string,
+    mobileOnly?: boolean,
+};
+
+export type MainMenuColumnType = {
     id: string,
     label?: string,
-    pillar?: string,
-    links: Array<{
-        label: string,
-        href: string,
-    }>,
+    href?: string,
+    links: Array<LinkType>,
+    isPillar: boolean,
 };
 
 export const pillarsConfig: Array<PillarType> = [
@@ -43,11 +47,37 @@ export const pillarsConfig: Array<PillarType> = [
     },
 ];
 
-export const columnsConfig: Array<ColumnType> = [
+export const brandExtenstionsConfig: Array<LinkType> = [
+    {
+        label: 'Jobs',
+        href: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader',
+    },
+    {
+        label: 'Dating',
+        href:
+            'https://soulmates.theguardian.com?INTCMP=soulmates_uk_web_newheader',
+    },
+    {
+        label: 'Holidays',
+        href:
+            'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+    },
+    {
+        label: 'Masterclasses',
+        href:
+            'https://membership.theguardian.com/masterclasses?INTCMP=masterclasses_uk_web_newheader',
+    },
+    {
+        label: 'Digital Archive',
+        href: 'https://theguardian.newspapers.com',
+    },
+];
+
+export const columnsConfig: Array<MainMenuColumnType> = [
     {
         id: 'news',
         label: 'News',
-        pillar: 'news',
+        isPillar: true,
         links: [
             {
                 label: 'UK news',
@@ -105,8 +135,8 @@ export const columnsConfig: Array<ColumnType> = [
     },
     {
         id: 'opinion',
-        pillar: 'opinion',
         label: 'Opinion',
+        isPillar: true,
         links: [
             {
                 label: 'The Guardian view',
@@ -133,8 +163,8 @@ export const columnsConfig: Array<ColumnType> = [
     },
     {
         id: 'sport',
-        pillar: 'sport',
         label: 'Sport',
+        isPillar: true,
         links: [
             {
                 label: 'World Cup 2018',
@@ -188,8 +218,8 @@ export const columnsConfig: Array<ColumnType> = [
     },
     {
         id: 'culture',
-        pillar: 'culture',
         label: 'Culture',
+        isPillar: true,
         links: [
             {
                 label: 'Film',
@@ -228,8 +258,8 @@ export const columnsConfig: Array<ColumnType> = [
     },
     {
         id: 'lifestyle',
-        pillar: 'lifestyle',
         label: 'Lifestyle',
+        isPillar: true,
         links: [
             {
                 label: 'Fashion',
@@ -281,6 +311,7 @@ export const columnsConfig: Array<ColumnType> = [
     },
     {
         id: 'more',
+        isPillar: false,
         links: [
             {
                 label: 'Video',

@@ -57,7 +57,7 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
             <NavStyled role="navigation" aria-label="Guardian sections">
                 <Logo />
                 <Links />
-                <Pillars showMainMenu={showMainMenu}/>
+                <Pillars showMainMenu={showMainMenu} />
                 <MainMenuToggle
                     showMainMenu={showMainMenu}
                     toggleMainMenu={toggleMainMenu}

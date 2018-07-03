@@ -17,13 +17,17 @@ const Pillars = styled('ul')({
 });
 
 type Props = {
-    showMainMenu: boolean
+    showMainMenu: boolean,
 };
 
 export default ({ showMainMenu }: Props) => (
     <Pillars>
         {pillarsConfig.map(pillar => (
-            <Pillar showMainMenu={showMainMenu} pillar={pillar} key={pillar.label}>
+            <Pillar
+                showMainMenu={showMainMenu}
+                pillar={pillar}
+                key={pillar.label}
+            >
                 {pillar.label}
             </Pillar>
         ))}
