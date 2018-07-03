@@ -119,3 +119,12 @@ flow-typed: yarn.lock
 	@cd packages/guui && ../../node_modules/.bin/flow-typed install -p ../../
 	@cd packages/pasteup && ../../node_modules/.bin/flow-typed install -p ../../
 	@flow-typed install
+
+# packages #########################################
+
+clean-dist-pasteup:
+	@rm -rf packages/pasteup/dist
+
+build-pasteup: clear clean-dist-pasteup install
+	$(call log, "building pasteup")
+	@NODE_ENV=production webpack --config webpack/pasteup
