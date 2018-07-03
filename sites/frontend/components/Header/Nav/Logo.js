@@ -7,6 +7,7 @@ import {
     desktop,
     leftCol,
     from,
+    wide,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
@@ -25,10 +26,15 @@ const Link = styled('a')({
     },
     [desktop]: {
         marginBottom: -34,
-        marginRight: 17,
         marginTop: 5,
         position: 'relative',
         zIndex: 1071,
+    },
+    [leftCol]: {
+        marginBottom: -40,
+    },
+    [wide]: {
+        marginRight: 96,
     },
 });
 
