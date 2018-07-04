@@ -110,7 +110,7 @@ export default () => (
         <BrandExtensionColumn role="none">
             <BrandExtensionList role="menu">
                 {brandExtenstionsConfig.map(brandExtension => (
-                    <BrandExtensionListItem>
+                    <BrandExtensionListItem key={brandExtension.label}>
                         <BrandExtensionLink
                             href={brandExtension.href}
                             key={brandExtension.label}
