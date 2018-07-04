@@ -42,6 +42,7 @@ const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
 
 type Props = {
     column: MainMenuColumnType,
+    isLastIndex: boolean,
 };
 
 export default class MainMenuColumn extends Component<
@@ -64,7 +65,7 @@ export default class MainMenuColumn extends Component<
 
     render() {
         const { showColumnLinks } = this.state;
-        const { column } = this.props;
+        const { column, isLastIndex } = this.props;
         const subNavId = `${column.id}Links`;
         const ColumnButton = () => {
             if (column.isPillar) {
@@ -76,6 +77,7 @@ export default class MainMenuColumn extends Component<
                             this.toggleColumnLinks();
                         }}
                         ariaControls={subNavId}
+                        isLastIndex={isLastIndex}
                     />
                 );
             }

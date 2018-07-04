@@ -100,8 +100,12 @@ const BrandExtensionLink = styled('a')({
 
 export default () => (
     <MainMenuColumns role="menubar" tabindex="-1">
-        {columnsConfig.map(column => (
-            <MainMenuColumn column={column} key={column.id} />
+        {columnsConfig.map((column, i) => (
+            <MainMenuColumn
+                column={column}
+                key={column.id}
+                isLastIndex={i === columnsConfig.length - 1}
+            />
         ))}
         <BrandExtensionColumn role="none">
             <BrandExtensionList role="menu">

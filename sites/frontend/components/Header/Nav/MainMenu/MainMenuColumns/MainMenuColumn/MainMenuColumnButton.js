@@ -5,8 +5,6 @@ import { headline } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
 
-import { pillarsConfig } from '../../../../Nav/__config__';
-
 import type { MainMenuColumnType } from '../../../../Nav/__config__';
 
 const MainMenuColumnButton = styled('button')(
@@ -65,6 +63,7 @@ type Props = {
     showColumnLinks: boolean,
     toggleColumnLinks: () => void,
     ariaControls: string,
+    isLastIndex: boolean,
 };
 
 export default ({
@@ -72,22 +71,19 @@ export default ({
     showColumnLinks,
     toggleColumnLinks,
     ariaControls,
-}: Props) => {
-    const isLastIndex = column === pillarsConfig[pillarsConfig.length - 1];
-
-    return (
-        <MainMenuColumnButton
-            pillar={column.id}
-            isLastIndex={isLastIndex}
-            showColumnLinks={showColumnLinks}
-            onClick={() => {
-                toggleColumnLinks();
-            }}
-            aria-haspopup="true"
-            aria-controls={ariaControls}
-            role="menuitem"
-        >
-            {column.label}
-        </MainMenuColumnButton>
-    );
-};
+    isLastIndex,
+}: Props) => (
+    <MainMenuColumnButton
+        pillar={column.id}
+        isLastIndex={isLastIndex}
+        showColumnLinks={showColumnLinks}
+        onClick={() => {
+            toggleColumnLinks();
+        }}
+        aria-haspopup="true"
+        aria-controls={ariaControls}
+        role="menuitem"
+    >
+        {column.label}
+    </MainMenuColumnButton>
+);
