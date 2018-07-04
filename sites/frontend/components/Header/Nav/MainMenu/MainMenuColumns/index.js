@@ -103,13 +103,14 @@ export default () => (
         {columnsConfig.map(column => (
             <MainMenuColumn column={column} key={column.id} />
         ))}
-        <BrandExtensionColumn>
-            <BrandExtensionList>
+        <BrandExtensionColumn role="none">
+            <BrandExtensionList role="menu">
                 {brandExtenstionsConfig.map(brandExtension => (
                     <BrandExtensionListItem>
                         <BrandExtensionLink
                             href={brandExtension.href}
                             key={brandExtension.label}
+                            role="menuitem"
                         >
                             {brandExtension.label}
                         </BrandExtensionLink>
