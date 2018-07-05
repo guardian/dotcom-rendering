@@ -24,3 +24,6 @@ dist
 jsconfig.json
 target
 guui.zip
+
+# publishable files
+packages/pasteup/src
