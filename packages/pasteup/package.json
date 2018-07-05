@@ -15,7 +15,9 @@
     "logos"
   ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "cd ../.. && make pre-publish-pasteup",
+    "postpublish": "cd ../.. && make post-publish-pasteup"
   },
   "license": "Apache-2.0"
 }

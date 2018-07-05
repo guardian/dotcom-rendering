@@ -132,12 +132,10 @@ pre-publish-pasteup:
 	@mv packages/pasteup/*.js packages/pasteup/src
 	@mv packages/pasteup/dist/*.js packages/pasteup
 
-publish-pasteup-private:
-	$(call log, "publishing pasteup")
-	# Boop
-
 post-publish-pasteup:
 	$(call log, "clean up after publishing pasteup")
 	@mv packages/pasteup/src/*.js packages/pasteup
 
-publish-pasteup: clear clean-pasteup install pre-publish-pasteup publish-pasteup-private post-publish-pasteup
+publish-pasteup: clear clean-pasteup install
+	$(call log, "publishing pasteup")
+	@cd packages/pasteup && yarn pack
