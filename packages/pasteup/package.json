@@ -6,6 +6,14 @@
     "type": "git",
     "url": "https://github.com/guardian/dotcom-rendering"
   },
+  "files": [
+    "breakpoints.js",
+    "fonts.js",
+    "mixins.js",
+    "palette.js",
+    "icons",
+    "logos"
+  ],
   "scripts": {
     "test": "jest"
   },
