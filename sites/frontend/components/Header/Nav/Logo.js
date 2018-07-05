@@ -7,6 +7,7 @@ import {
     desktop,
     leftCol,
     from,
+    wide,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
@@ -14,20 +15,26 @@ import TheGuardianLogoSVG from '@guardian/pasteup/logos/the-guardian.svg';
 
 const Link = styled('a')({
     float: 'right',
-    marginBottom: '15px',
-    marginRight: '45px',
-    marginTop: '5px',
+    marginBottom: 15,
+    marginRight: 45,
+    marginTop: 3,
     [mobileMedium]: {
-        marginRight: '5px',
+        marginRight: 5,
     },
     [mobileLandscape]: {
-        marginRight: '17px',
+        marginRight: 17,
     },
     [desktop]: {
-        marginBottom: '-34px',
-        marginTop: '5px',
+        marginBottom: -34,
+        marginTop: 5,
         position: 'relative',
         zIndex: 1071,
+    },
+    [leftCol]: {
+        marginBottom: -40,
+    },
+    [wide]: {
+        marginRight: 96,
     },
 });
 

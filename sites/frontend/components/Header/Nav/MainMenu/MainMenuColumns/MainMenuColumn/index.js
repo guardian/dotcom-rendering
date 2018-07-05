@@ -6,7 +6,7 @@ import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import MainMenuColumnButton from './MainMenuColumnButton';
 import MainMenuColumnLinks from './MainMenuColumnLinks';
 
-import type { ColumnType } from '../../../../Nav/__config__';
+import type { MainMenuColumnType } from '../../../../Nav/__config__';
 
 const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
     const styles = {
@@ -40,7 +40,10 @@ const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
     return styles;
 });
 
-type Props = { column: ColumnType };
+type Props = {
+    column: MainMenuColumnType,
+    isLastIndex: boolean,
+};
 
 export default class MainMenuColumn extends Component<
     Props,
@@ -62,11 +65,10 @@ export default class MainMenuColumn extends Component<
 
     render() {
         const { showColumnLinks } = this.state;
-        const { column } = this.props;
-        const isPillar = !!column.pillar;
+        const { column, isLastIndex } = this.props;
         const subNavId = `${column.id}Links`;
         const ColumnButton = () => {
-            if (isPillar) {
+            if (column.isPillar) {
                 return (
                     <MainMenuColumnButton
                         column={column}
@@ -75,6 +77,7 @@ export default class MainMenuColumn extends Component<
                             this.toggleColumnLinks();
                         }}
                         ariaControls={subNavId}
+                        isLastIndex={isLastIndex}
                     />
                 );
             }
@@ -82,13 +85,12 @@ export default class MainMenuColumn extends Component<
         };
 
         return (
-            <MainMenuColumnStyled role="none" isPillar={isPillar}>
+            <MainMenuColumnStyled role="none" isPillar={column.isPillar}>
                 <ColumnButton />
                 <MainMenuColumnLinks
                     column={column}
                     showColumnLinks={showColumnLinks}
                     id={subNavId}
-                    isPillar={isPillar}
                 />
             </MainMenuColumnStyled>
         );
