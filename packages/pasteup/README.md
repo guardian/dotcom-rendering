@@ -3,7 +3,8 @@
 Guardian design tokens. These tokens are intended to be used in conjunction with a CSS-in-JS library
 such as [Emotion](https://emotion.sh).
 
-*Alpha package - under construction 🚧*
+**Alpha package - under construction 🚧**
+
 This package is still under heavy construction, please do not install this in applications intended for
 use in production. The API may change significantly before it is out of alpha. If you enjoy working on shifting sands and wish to use this package in your application, please talk to the Platform team, or email dotcom.platform.
 
