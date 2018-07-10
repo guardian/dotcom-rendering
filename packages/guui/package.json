@@ -4,7 +4,9 @@
   "description": "Guardian rendering framework",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "cd ../.. && make pre-publish-guui",
+    "postpublish": "cd ../.. && make post-publish-guui"
   },
   "license": "Apache-2.0",
   "dependencies": {

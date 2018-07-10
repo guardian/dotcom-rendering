@@ -3,7 +3,7 @@ import { styled, Component } from '@guardian/guui';
 import { transparentize } from 'polished';
 
 import pallete from '@guardian/pasteup/palette';
-import CloseButton from '@guardian/guui/buttons/Close';
+import CloseButton from '@guardian/guui/components/buttons/Close';
 
 type SiteMessageProps = {
     foregroundcolor: string,
