@@ -10,6 +10,10 @@ const commonConfig = {
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
+            {
+                test: /\.svg$/,
+                use: ['desvg-loader/react', 'svg-loader'],
+            },
         ],
     },
     plugins: [
@@ -45,4 +49,18 @@ const libConfig = Object.assign({}, commonConfig, {
     },
 });
 
-module.exports = [rootConfig, libConfig];
+const componentConfig = Object.assign({}, commonConfig, {
+    entry: {
+        Close: './packages/guui/components/buttons/Close.js',
+        Number: './packages/guui/components/Number/index.js',
+        SiteMessage: './packages/guui/components/SiteMessage.js',
+    },
+    output: {
+        filename: '[name].js',
+        path: path.join(__dirname, '..', 'packages', 'guui', 'dist', 'components'),
+        library: 'guui',
+        libraryTarget: 'commonjs2',
+    },
+});
+
+module.exports = [rootConfig, libConfig, componentConfig];
