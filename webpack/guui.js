@@ -1,7 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
 
-module.exports = {
-    mode: 'production',
+const rootConfig = {
     entry: {
         document: './packages/guui/document.js',
         grid: './packages/guui/grid.js',
@@ -14,6 +14,11 @@ module.exports = {
         library: 'guui',
         libraryTarget: 'commonjs2',
     },
+};
+
+module.exports = {
+    mode: 'production',
+    ...rootConfig,
     module: {
         rules: [
             {
@@ -23,4 +28,7 @@ module.exports = {
             },
         ],
     },
+    plugins: [
+        new webpack.IgnorePlugin(/.\/manifest.json/),
+    ]
 };
