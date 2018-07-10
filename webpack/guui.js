@@ -16,9 +16,7 @@ const commonConfig = {
             },
         ],
     },
-    plugins: [
-        new webpack.IgnorePlugin(/.\/manifest.json/),
-    ]
+    plugins: [new webpack.IgnorePlugin(/.\/manifest.json/)],
 };
 
 const rootConfig = Object.assign({}, commonConfig, {
@@ -57,7 +55,14 @@ const componentConfig = Object.assign({}, commonConfig, {
     },
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, '..', 'packages', 'guui', 'dist', 'components'),
+        path: path.join(
+            __dirname,
+            '..',
+            'packages',
+            'guui',
+            'dist',
+            'components',
+        ),
         library: 'guui',
         libraryTarget: 'commonjs2',
     },
