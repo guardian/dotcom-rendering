@@ -8,6 +8,12 @@
     "prepublish": "cd ../.. && make pre-publish-guui",
     "postpublish": "cd ../.. && make post-publish-guui"
   },
+  "files": [
+    "document.js",
+    "grid.js",
+    "htmlTemplate.js",
+    "index.js"
+  ],
   "license": "Apache-2.0",
   "dependencies": {
     "@guardian/guui": "2.0.0-alpha.1",
