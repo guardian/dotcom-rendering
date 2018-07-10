@@ -59,6 +59,12 @@ The following extensions will life easier:
 - [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) (esp. with [`autoFixOnSave`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint#user-content-settings-options) enabled)
 - [Flow Language Support](https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode)
 
+You will want to disable Typescript checking for the project workspace to avoid the copious false errors it will produce. To do this,
+
+    View->Extensions
+
+Search for: `@builtin typescript` and select 'Disable (workspace)' from the cog options.
+
 Also:
 
 - [css-in-js autocomplete/conversion](https://marketplace.visualstudio.com/items?itemName=paulmolluzzo.convert-css-in-js)
