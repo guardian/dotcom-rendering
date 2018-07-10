@@ -128,13 +128,17 @@ clean-guui:
 pre-publish-guui:
 	$(call log, "building guui")
 	@mkdir packages/guui/src
+	@mkdir packages/guui/src/lib
 	@NODE_ENV=production webpack --config webpack/guui
 	@mv packages/guui/*.js packages/guui/src
+	@mv packages/guui/lib/*.js packages/guui/src/lib
 	@mv packages/guui/dist/*.js packages/guui
+	@mv packages/guui/dist/lib/*.js packages/guui/lib
 
 post-publish-guui:
 	$(call log, "clean up after publishing guui")
 	@mv packages/guui/src/*.js packages/guui
+	@mv packages/guui/src/lib/*.js packages/guui/lib
 
 publish-guui: clear clean-guui install
 	$(call log, "publishing guui")
