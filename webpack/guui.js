@@ -66,6 +66,9 @@ const componentConfig = Object.assign({}, commonConfig, {
         library: 'guui',
         libraryTarget: 'commonjs2',
     },
+    externals: {
+        'react': 'commonjs react' // use the React dependency of App importing guui components
+    }
 });
 
 module.exports = [rootConfig, libConfig, componentConfig];
