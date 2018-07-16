@@ -5,10 +5,7 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 
 import MainMenuLinkTitle from './MainMenuLinkTitle';
 
-// import type {
-//     MainMenuColumnType,
-//     LinkType,
-// } from '../../../../../../Nav/__config__';
+import type { LinkType } from '../../../../../../Nav/__config__';
 
 const MainMenuLink = styled('li')(({ mobileOnly }) => ({
     boxSizing: 'border-box',
@@ -21,8 +18,8 @@ const MainMenuLink = styled('li')(({ mobileOnly }) => ({
 }));
 
 type Props = {
-    column: object, // TODO fixme
-    link: object, // TODO fixme
+    column: LinkType,
+    link: LinkType,
 };
 
 export default ({ link, column }: Props) => (

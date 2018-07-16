@@ -4,7 +4,8 @@ import { styled } from '@guardian/guui';
 import { mobileLandscape } from '@guardian/pasteup/breakpoints';
 
 import Pillar from './Pillar';
-// import { pillarsConfig } from '../__config__';
+
+import type { LinkType } from '../__config__';
 
 const Pillars = styled('ul')({
     clear: 'right',
@@ -18,12 +19,12 @@ const Pillars = styled('ul')({
 
 type Props = {
     showMainMenu: boolean,
-    pillars: object, // TODO make specific
+    pillars: Array<LinkType>,
 };
 
 export default ({ showMainMenu, pillars }: Props) => (
     <Pillars>
-        {pillars.map(pillar => (
+        {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (
             <Pillar
                 showMainMenu={showMainMenu}
                 pillar={pillar}

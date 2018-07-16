@@ -10,6 +10,8 @@ import {
 
 import MainMenuColumns from './MainMenuColumns';
 
+import type { NavType } from '../__config__';
+
 const MainMenu = styled('div')(({ showMainMenu }) => ({
     backgroundColor: '#e9eff1',
     boxSizing: 'border-box',
@@ -62,7 +64,7 @@ const MainMenu = styled('div')(({ showMainMenu }) => ({
 type Props = {
     showMainMenu: boolean,
     id: string,
-    nav: object, // TODO define better
+    nav: NavType,
 };
 
 export default ({ showMainMenu, id, nav }: Props) => (

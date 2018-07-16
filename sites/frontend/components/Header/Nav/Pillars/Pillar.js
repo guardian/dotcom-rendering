@@ -5,7 +5,7 @@ import { tablet, desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import { pillars } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
 
-import type { PillarType } from '../../Nav/__config__';
+import type { LinkType } from '../../Nav/__config__';
 
 const Pillar = styled('li')({
     float: 'left',
@@ -73,7 +73,7 @@ const Link = styled('a')(({ showMainMenu, pillar }) => ({
 
 type Props = {
     children: React$Node,
-    pillar: PillarType,
+    pillar: LinkType,
     showMainMenu: boolean,
 };
 

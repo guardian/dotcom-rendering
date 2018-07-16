@@ -5,7 +5,7 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
 import MainMenuColumn from './MainMenuColumn';
-// import { columnsConfig, brandExtenstionsConfig } from '../../../Nav/__config__';
+import type { LinkType } from '../../../Nav/__config__';
 
 const MainMenuColumns = styled('ul')({
     boxSizing: 'border-box',
@@ -99,9 +99,8 @@ const BrandExtensionLink = styled('a')({
 });
 
 type Props = {
-    // TODO make specific
-    columns: array,
-    brandExtensions: array,
+    columns: Array<LinkType>,
+    brandExtensions: Array<LinkType>,
 };
 
 export default ({ columns, brandExtensions }: Props) => (
@@ -111,12 +110,13 @@ export default ({ columns, brandExtensions }: Props) => (
                 column={column}
                 key={column.title.toLowerCase()}
                 isLastIndex={i === columns.length - 1}
+                brandExtensions={brandExtensions}
             />
         ))}
         <BrandExtensionColumn role="none">
             <BrandExtensionList role="menu">
                 {brandExtensions.map(brandExtension => (
-                    <BrandExtensionListItem key={brandExtension.label}>
+                    <BrandExtensionListItem key={brandExtension.title}>
                         <BrandExtensionLink
                             href={brandExtension.url}
                             key={brandExtension.title}
