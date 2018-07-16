@@ -66,8 +66,11 @@ const componentConfig = Object.assign({}, commonConfig, {
         library: 'guui',
         libraryTarget: 'commonjs2',
     },
+    // use the dependencies of consumer project importing guui components
     externals: {
-        'react': 'commonjs react' // use the React dependency of App importing guui components
+        'react': 'react',
+        'react-dom': 'react-dom',
+        'react-emotion': 'react-emotion',
     }
 });
 
