@@ -92,8 +92,6 @@ export default ({ headline }) => (
 
 #### Stateful component
 
-`guui` also exposes 
-
 ```js
 import { React, Component } from '@guardian/guui';
 
@@ -118,7 +116,7 @@ You can import [EMOTION](https://emotion.sh/docs/introduction) from `guui` for w
 import { styled } from '@guardian/guui';
 
 const RedHeadline = styled('h1')({
-    color: red
+    color: 'red'
 });
 
 export default ({ headline }) => (
@@ -127,6 +125,8 @@ export default ({ headline }) => (
 ```
 
 ### Server side rendering guui components
+
+
 
 ## Contribute
 
