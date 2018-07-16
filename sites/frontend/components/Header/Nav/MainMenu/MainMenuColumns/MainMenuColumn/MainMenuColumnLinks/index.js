@@ -5,9 +5,9 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 
 import MainMenuLink from './MainMenuLink';
 
-import { brandExtenstionsConfig } from '../../../../../Nav/__config__';
+// import { brandExtenstionsConfig } from '../../../../../Nav/__config__';
 
-import type { MainMenuColumnType } from '../../../../../Nav/__config__';
+// import type { MainMenuColumnType } from '../../../../../Nav/__config__';
 
 const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
     boxSizing: 'border-box',

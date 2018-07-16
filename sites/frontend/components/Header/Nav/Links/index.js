@@ -6,13 +6,26 @@ import SupportTheGuardian from './SupportTheGuardian';
 import Link from './Link';
 import Search from './Search';
 
-import links from './__config__';
-
 const Links = styled('div')({
     left: 0,
     top: 0,
     position: 'absolute',
 });
+
+const userLinks = [
+    {
+        text: 'Subscribe',
+        href: '/',
+    },
+    {
+        text: 'Find a job',
+        href: '/',
+    },
+    {
+        text: 'Sign in',
+        href: '/',
+    },
+];
 
 export default connect('header')(({ isPayingMember, isRecentContributor }) => (
     <Links>
@@ -22,7 +35,7 @@ export default connect('header')(({ isPayingMember, isRecentContributor }) => (
                     Support The Guardian
                 </SupportTheGuardian>
             )}
-        {links.map(({ href, text }, i) => (
+        {userLinks.map(({ href, text }, i) => (
             <Link href={href} key={text} showAtTablet={i < 2}>
                 {text}
             </Link>
