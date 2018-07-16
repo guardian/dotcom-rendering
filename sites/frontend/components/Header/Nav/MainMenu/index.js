@@ -62,10 +62,16 @@ const MainMenu = styled('div')(({ showMainMenu }) => ({
 type Props = {
     showMainMenu: boolean,
     id: string,
+    nav: object, // TODO define better
 };
 
-export default ({ showMainMenu, id }: Props) => (
+export default ({ showMainMenu, id, nav }: Props) => (
+    // console.log(nav);
+
     <MainMenu showMainMenu={showMainMenu} aria-hidden={!showMainMenu} id={id}>
-        <MainMenuColumns />
+        <MainMenuColumns
+            columns={nav.pillars}
+            brandExtensions={nav.brandExtensions}
+        />
     </MainMenu>
 );

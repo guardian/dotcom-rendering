@@ -11,6 +11,8 @@ import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle';
 import MainMenu from './MainMenu';
 
+import { connect } from 'unistore/react';
+
 const NavStyled = styled('nav')(
     {
         [tablet]: {
@@ -53,18 +55,27 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
         const { showMainMenu } = this.state;
         const mainMenuId = 'main-menu';
 
-        return (
+        const NavComponent = connect('NAV')(({ NAV = {} }) => (
             <NavStyled role="navigation" aria-label="Guardian sections">
                 <Logo />
                 <Links />
-                <Pillars showMainMenu={showMainMenu} />
+                <Pillars
+                    showMainMenu={showMainMenu}
+                    pillars={NAV.pillars || []}
+                />
                 <MainMenuToggle
                     showMainMenu={showMainMenu}
                     toggleMainMenu={toggleMainMenu}
                     ariaControls={mainMenuId}
                 />
-                <MainMenu showMainMenu={showMainMenu} id={mainMenuId} />
+                <MainMenu
+                    showMainMenu={showMainMenu}
+                    id={mainMenuId}
+                    nav={NAV}
+                />
             </NavStyled>
-        );
+        ));
+
+        return <NavComponent />;
     }
 }

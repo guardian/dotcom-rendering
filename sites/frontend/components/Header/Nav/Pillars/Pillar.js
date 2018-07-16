@@ -79,7 +79,11 @@ type Props = {
 
 export default ({ children, pillar, showMainMenu }: Props) => (
     <Pillar>
-        <Link href={pillar.href} pillar={pillar.id} showMainMenu={showMainMenu}>
+        <Link
+            href={pillar.url}
+            pillar={pillar.title.toLowerCase()}
+            showMainMenu={showMainMenu}
+        >
             {children}
         </Link>
     </Pillar>

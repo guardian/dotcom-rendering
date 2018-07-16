@@ -19,6 +19,11 @@ type props = {
 
 const defaultArgs = { config: {}, contentFields: {} };
 
+// TODO: we shouldn't do any cleaning or data transformation here, but
+// instead pass through the required data exactly. Dotcom Rendering
+// should be just that - a rendering layer only.
+//
+// We *should* however validate the data we receive at this point.
 export default ({ contentFields, config }: props = defaultArgs) => ({
     // here we create our own object of CAPI content on the 'CAPI' key
     CAPI: {
@@ -32,4 +37,5 @@ export default ({ contentFields, config }: props = defaultArgs) => ({
                 .join(''),
         ),
     },
+    NAV: config.nav,
 });

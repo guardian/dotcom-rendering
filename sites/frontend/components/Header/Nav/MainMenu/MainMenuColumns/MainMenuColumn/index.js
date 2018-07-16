@@ -41,7 +41,7 @@ const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
 });
 
 type Props = {
-    column: MainMenuColumnType,
+    column: object, // TODO fixme
     isLastIndex: boolean,
 };
 

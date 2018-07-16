@@ -32,12 +32,14 @@ const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
 }));
 
 type Props = {
-    column: MainMenuColumnType,
+    column: object, // TODO fixme
     showColumnLinks: boolean,
     id: string,
 };
 
 export default ({ column, showColumnLinks, id }: Props) => {
+    console.log(column);
+
     const links =
         column.id === 'more'
             ? [
@@ -45,9 +47,9 @@ export default ({ column, showColumnLinks, id }: Props) => {
                       ...brandExtenstion,
                       mobileOnly: true,
                   })),
-                  ...column.links,
+                  ...column.children,
               ]
-            : column.links;
+            : column.children;
 
     return (
         <MainMenuColumnLinks
@@ -58,7 +60,11 @@ export default ({ column, showColumnLinks, id }: Props) => {
             id={id}
         >
             {links.map(link => (
-                <MainMenuLink link={link} key={link.label} column={column} />
+                <MainMenuLink
+                    link={link}
+                    key={link.title.toLowerCase()}
+                    column={column}
+                />
             ))}
         </MainMenuColumnLinks>
     );

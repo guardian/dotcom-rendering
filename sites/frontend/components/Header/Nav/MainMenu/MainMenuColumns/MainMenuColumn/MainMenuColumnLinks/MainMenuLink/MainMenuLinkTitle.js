@@ -5,7 +5,7 @@ import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 
-import type { MainMenuColumnType } from '../../../../../../Nav/__config__';
+// import type { MainMenuColumnType } from '../../../../../../Nav/__config__';
 
 const MainMenuColumnLinkTitle = styled('a')(({ column }) => ({
     backgroundColor: 'transparent',
@@ -45,17 +45,17 @@ const MainMenuColumnLinkTitle = styled('a')(({ column }) => ({
 }));
 
 type Props = {
-    column: MainMenuColumnType,
-    link: { href: string, label: string },
+    column: object, // TODO fixme
+    link: { url: string, title: string },
 };
 
 export default ({ link, column }: Props) => (
     <MainMenuColumnLinkTitle
-        href={link.href}
+        href={link.url}
         role="menuitem"
         link={link}
         column={column}
     >
-        {link.label}
+        {link.title}
     </MainMenuColumnLinkTitle>
 );
