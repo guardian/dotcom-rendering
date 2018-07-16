@@ -14,6 +14,10 @@
     "htmlTemplate.js",
     "index.js"
   ],
+  "directories": {
+    "lib": "./lib",
+    "components": "./components"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "@guardian/guui": "2.0.0-alpha.1",
