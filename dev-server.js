@@ -8,26 +8,12 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const inquirer = require('inquirer');
 
-const { getSites, getPagesForSite, root } = require('./config');
+const { getPagesForSite, root } = require('./config');
 
-const pickSite = async () => {
-    const sites = await getSites();
-    if (sites.length === 1) return sites[0];
-    return inquirer
-        .prompt([
-            {
-                type: 'list',
-                message: 'Which site do you want to run?',
-                choices: sites,
-                name: 'site',
-            },
-        ])
-        .then(({ site }) => site);
-};
+const go = async () => {
+    const site = 'frontend';
 
-const go = async site => {
     const webpackConfig = await require('./webpack');
     const compiler = await webpack(webpackConfig);
 
@@ -73,7 +59,7 @@ const go = async site => {
         }),
     );
 
-    app.get(`/${site}`, async (req, res) => {
+    app.get('/frontend', async (req, res) => {
         const pages = await getPagesForSite(site);
         const pageList = pages.map(
             page =>
@@ -102,4 +88,4 @@ const go = async site => {
     app.listen(3000);
 };
 
-pickSite().then(go);
+go();
