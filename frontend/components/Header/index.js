@@ -16,7 +16,6 @@ const Header = styled('header')({
 
 export default () => (
     <Header>
-        Foobar
         <Nav />
     </Header>
 );

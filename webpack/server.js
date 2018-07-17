@@ -1,4 +1,6 @@
-const entryFile = require.resolve('@guardian/rendering/server');
+const entryFile = require.resolve(
+    '@guardian/frontend-rendering/rendering/server',
+);
 
 module.exports = ({ site }) => ({
     entry: {
