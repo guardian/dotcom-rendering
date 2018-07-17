@@ -133,6 +133,7 @@ On the server import `renderToString` and pass it the root component of the `Rea
 
 ```js
 // Server.js
+
 import { renderToString } from '@guardian/guui';
 
 const { 
@@ -160,6 +161,7 @@ If server side rendering you can use `htmlTemplate.js` as the template of a full
 
 ```js
 // Browser.js
+
 import { hydrateCSS } from '@guardian/guui';
 
 const { cssIDs } = window.gu.app;
