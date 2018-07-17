@@ -19,10 +19,7 @@ const go = async () => {
 
     const app = express();
 
-    app.use(
-        '/static/:site',
-        express.static(path.join(root, 'sites', site, 'static')),
-    );
+    app.use('/static/:site', express.static(path.join(root, site, 'static')));
 
     app.use(
         webpackDevMiddleware(compiler, {
