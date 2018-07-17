@@ -142,7 +142,7 @@ const {
 } = renderToString(<App />);
 ```
 
-If server side rendering you can use `htmlTemplate.js` for as the template of a full html page. This template includes the following placeholders: 
+If server side rendering you can use `htmlTemplate.js` as the template of a full html page. This template includes the following placeholders: 
 
 - `title`: used in the `<title>`.
 - `vendor`: a path to your bundled vendor script.
