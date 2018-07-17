@@ -13,4 +13,8 @@ export type NavType = {
     pillars: Array<LinkType>,
     otherLinks: Array<LinkType>,
     brandExtensions: Array<LinkType>,
+    subNavSections: {
+        parent: LinkType,
+        links: Array<LinkType>,
+    },
 };

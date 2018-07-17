@@ -1,7 +1,8 @@
 // @flow
 
 import { styled, Component } from '@guardian/guui';
-
+import { connect } from 'unistore/react';
+import { Row, Cols } from '@guardian/guui/grid';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
@@ -10,10 +11,9 @@ import Links from './Links';
 import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle';
 import MainMenu from './MainMenu';
+import SubNav from './SubNav';
 
 import type { NavType } from './__config__';
-
-import { connect } from 'unistore/react';
 
 const NavStyled = styled('nav')(
     {
@@ -60,25 +60,37 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
         const NavComponent = connect('NAV')(({ NAV = {} }) => {
             const nav = ((NAV: any): NavType); // have to cast here for now
 
+            // TODO push subnav into nav for now as really part of it
+            // also separate PR to do centering stuff!
             return (
-                <NavStyled role="navigation" aria-label="Guardian sections">
-                    <Logo />
-                    <Links />
-                    <Pillars
-                        showMainMenu={showMainMenu}
-                        pillars={nav.pillars || []}
-                    />
-                    <MainMenuToggle
-                        showMainMenu={showMainMenu}
-                        toggleMainMenu={toggleMainMenu}
-                        ariaControls={mainMenuId}
-                    />
-                    <MainMenu
-                        showMainMenu={showMainMenu}
-                        id={mainMenuId}
-                        nav={nav}
-                    />
-                </NavStyled>
+                <div>
+                    <NavStyled role="navigation" aria-label="Guardian sections">
+                        <Logo />
+                        <Links />
+                        <Pillars
+                            showMainMenu={showMainMenu}
+                            pillars={nav.pillars || []}
+                        />
+                        <MainMenuToggle
+                            showMainMenu={showMainMenu}
+                            toggleMainMenu={toggleMainMenu}
+                            ariaControls={mainMenuId}
+                        />
+                        <MainMenu
+                            showMainMenu={showMainMenu}
+                            id={mainMenuId}
+                            nav={nav}
+                        />
+                    </NavStyled>
+                    <Row>
+                        <Cols wide={16} leftCol={16}>
+                            <SubNav
+                                parent={nav.subNavSections.parent}
+                                links={nav.subNavSections.links}
+                            />
+                        </Cols>
+                    </Row>
+                </div>
             );
         });
 
