@@ -1,6 +1,6 @@
 // @flow
 
-import { renderToString } from '@guardian/guui';
+import { renderToString } from './index';
 import assets from './lib/assets';
 import htmlTemplate from './htmlTemplate';
 

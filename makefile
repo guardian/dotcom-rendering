@@ -119,3 +119,32 @@ flow-typed: yarn.lock
 	@cd packages/guui && ../../node_modules/.bin/flow-typed install -p ../../
 	@cd packages/pasteup && ../../node_modules/.bin/flow-typed install -p ../../
 	@flow-typed install
+
+# packages #########################################
+
+clean-guui:
+	@rm -rf packages/guui/dist packages/guui/src
+
+pre-publish-guui:
+	$(call log, "building guui")
+	@mkdir packages/guui/src
+	@mkdir packages/guui/src/lib
+	@mkdir packages/guui/src/components	
+	@NODE_ENV=production webpack --config webpack/guui
+	@mv packages/guui/*.js packages/guui/src
+	@mv packages/guui/dist/*.js packages/guui
+	@mv packages/guui/lib/*.js packages/guui/src/lib
+	@mv packages/guui/dist/lib/*.js packages/guui/lib
+	@mv packages/guui/components/* packages/guui/src/components
+	@mv packages/guui/dist/components/*.js packages/guui/components
+
+post-publish-guui:
+	$(call log, "clean up after publishing guui")
+	@mv packages/guui/src/*.js packages/guui
+	@mv packages/guui/src/lib/*.js packages/guui/lib
+	@rm -rf packages/guui/components/*
+	@mv packages/guui/src/components/* packages/guui/components
+
+publish-guui: clear clean-guui install
+	$(call log, "publishing guui")
+	@cd packages/guui && yarn pack

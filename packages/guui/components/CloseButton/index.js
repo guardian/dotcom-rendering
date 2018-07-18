@@ -1,9 +1,13 @@
 // @flow
-import { styled } from '@guardian/guui';
+import styled from 'react-emotion';
+
 import CloseIcon from '@guardian/pasteup/icons/x.svg';
 
 const CloseButton = styled(CloseIcon)(
-    ({ foregroundcolor: foregroundColor, backgroundColor }) => ({
+    ({
+        foregroundcolor: foregroundColor,
+        backgroundcolor: backgroundColor,
+    }) => ({
         borderColor: foregroundColor,
         fill: foregroundColor,
         borderWidth: 1,
