@@ -16,11 +16,11 @@ const stage =
         : process.env.GU_STAGE;
 
 const CDN = stage
-    ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/guui/`
-    : '/';
+    ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/guui`
+    : '';
 
 export default {
     dist: (path: string): string => `${CDN}assets/${assetHash[path] || path}`,
     static: (path: string): string =>
-        `${CDN}static/__SITE__/${assetHash[path] || path}`,
+        `${CDN}/static/frontend/${assetHash[path] || path}`,
 };

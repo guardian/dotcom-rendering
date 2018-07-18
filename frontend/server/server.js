@@ -1,8 +1,6 @@
 // @flow
 /* eslint-disable global-require */
 
-// __SITE__ string is replaced by string-replace-loader in webpack.config.js
-
 import path from 'path';
 import express from 'express';
 import defaultDocument from '@guardian/guui/document';
@@ -15,14 +13,13 @@ const render = async ({ params, body }: $Request, res: $Response) => {
     try {
         const { page } = params;
         const data = {
-            site: '__SITE__',
             page,
             body,
         };
 
         const [{ default: Page }, document] = await Promise.all([
-            import(`../../sites/__SITE__/pages/${page}.js`),
-            import(`../../sites/__SITE__/document.js`)
+            import(`../../frontend/pages/${page}.js`),
+            import(`../../frontend/document.js`)
                 .then(module => module.default)
                 .catch(() => defaultDocument),
         ]);
@@ -50,11 +47,11 @@ if (process.env.NODE_ENV === 'production') {
     // if running prod server locally, serve local assets
     if (!process.env.GU_PUBLIC) {
         app.use(
-            '/static/:site',
+            '/static',
             express.static(
                 path.relative(
                     __dirname,
-                    path.resolve(root, 'sites', '__SITE__', 'static'),
+                    path.resolve(root, 'frontend', 'static'),
                 ),
             ),
         );
@@ -66,7 +63,7 @@ if (process.env.NODE_ENV === 'production') {
 
     app.get('/', async (req, res) => {
         try {
-            const pages = await getPagesForSite('__SITE__');
+            const pages = await getPagesForSite('frontend');
             res.send(`
                 <!DOCTYPE html>
                 <html>
