@@ -46,7 +46,7 @@ const SubNav = ({ parent, links }: Props) => {
 
     lis = lis.concat(
         links.map(link => (
-            <li>
+            <li key={link.url}>
                 <a href={link.url}>{link.title}</a>
             </li>
         )),

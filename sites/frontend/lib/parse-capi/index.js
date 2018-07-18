@@ -26,11 +26,13 @@ const defaultArgs = { config: {}, contentFields: {} };
 // We *should* however validate the data we receive at this point.
 export default ({ contentFields, config }: props = defaultArgs) => {
     const nav = get(config, 'nav', []);
-    const pillars = nav.pillars.map(link => {
-        const l = link;
-        l.isPillar = true;
-        return l;
-    });
+    const pillars = nav.pillars
+        ? nav.pillars.map(link => {
+              const l = link;
+              l.isPillar = true;
+              return l;
+          })
+        : [];
 
     pillars.push({
         url: '', // unused
