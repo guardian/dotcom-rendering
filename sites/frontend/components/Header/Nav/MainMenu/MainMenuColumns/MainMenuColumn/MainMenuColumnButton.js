@@ -5,7 +5,7 @@ import { headline } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
 
-import type { MainMenuColumnType } from '../../../../Nav/__config__';
+import type { LinkType } from '../../../../Nav/__config__';
 
 const MainMenuColumnButton = styled('button')(
     ({ pillar, isLastIndex, showColumnLinks }) => ({
@@ -59,7 +59,7 @@ const MainMenuColumnButton = styled('button')(
 );
 
 type Props = {
-    column: MainMenuColumnType,
+    column: LinkType,
     showColumnLinks: boolean,
     toggleColumnLinks: () => void,
     ariaControls: string,
@@ -74,7 +74,7 @@ export default ({
     isLastIndex,
 }: Props) => (
     <MainMenuColumnButton
-        pillar={column.id}
+        pillar={column.title.toLowerCase()}
         isLastIndex={isLastIndex}
         showColumnLinks={showColumnLinks}
         onClick={() => {
@@ -84,6 +84,6 @@ export default ({
         aria-controls={ariaControls}
         role="menuitem"
     >
-        {column.label}
+        {column.title}
     </MainMenuColumnButton>
 );

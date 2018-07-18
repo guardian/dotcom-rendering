@@ -5,9 +5,7 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 
 import MainMenuLink from './MainMenuLink';
 
-import { brandExtenstionsConfig } from '../../../../../Nav/__config__';
-
-import type { MainMenuColumnType } from '../../../../../Nav/__config__';
+import type { LinkType } from '../../../../../Nav/__config__';
 
 const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
     boxSizing: 'border-box',
@@ -32,22 +30,23 @@ const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
 }));
 
 type Props = {
-    column: MainMenuColumnType,
+    column: LinkType,
+    brandExtensions: Array<LinkType>,
     showColumnLinks: boolean,
     id: string,
 };
 
-export default ({ column, showColumnLinks, id }: Props) => {
+export default ({ column, showColumnLinks, id, brandExtensions }: Props) => {
     const links =
-        column.id === 'more'
+        column.title.toLowerCase() === 'more'
             ? [
-                  ...brandExtenstionsConfig.map(brandExtenstion => ({
-                      ...brandExtenstion,
+                  ...brandExtensions.map(brandExtension => ({
+                      ...brandExtension,
                       mobileOnly: true,
                   })),
-                  ...column.links,
+                  ...(column.children || []),
               ]
-            : column.links;
+            : column.children || [];
 
     return (
         <MainMenuColumnLinks
@@ -58,7 +57,11 @@ export default ({ column, showColumnLinks, id }: Props) => {
             id={id}
         >
             {links.map(link => (
-                <MainMenuLink link={link} key={link.label} column={column} />
+                <MainMenuLink
+                    link={link}
+                    key={link.title.toLowerCase()}
+                    column={column}
+                />
             ))}
         </MainMenuColumnLinks>
     );

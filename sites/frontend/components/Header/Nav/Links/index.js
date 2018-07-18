@@ -6,13 +6,31 @@ import SupportTheGuardian from './SupportTheGuardian';
 import Link from './Link';
 import Search from './Search';
 
-import links from './__config__';
+import type { LinkType } from '../__config__';
 
 const Links = styled('div')({
     left: 0,
     top: 0,
     position: 'absolute',
 });
+
+const userLinks: Array<LinkType> = [
+    {
+        title: 'Subscribe',
+        longTitle: 'Subscribe',
+        url: '/',
+    },
+    {
+        title: 'Find a job',
+        longTitle: 'Find a job',
+        url: '/',
+    },
+    {
+        title: 'Sign in',
+        longTitle: 'Sign in',
+        url: '/',
+    },
+];
 
 export default connect('header')(({ isPayingMember, isRecentContributor }) => (
     <Links>
@@ -22,9 +40,9 @@ export default connect('header')(({ isPayingMember, isRecentContributor }) => (
                     Support The Guardian
                 </SupportTheGuardian>
             )}
-        {links.map(({ href, text }, i) => (
-            <Link href={href} key={text} showAtTablet={i < 2}>
-                {text}
+        {userLinks.map(({ url, title }, i) => (
+            <Link href={url} key={title} showAtTablet={i < 2}>
+                {title}
             </Link>
         ))}
         <Search href="/">Search</Search>

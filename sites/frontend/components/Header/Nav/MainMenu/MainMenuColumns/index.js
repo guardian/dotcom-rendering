@@ -5,7 +5,7 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
 import MainMenuColumn from './MainMenuColumn';
-import { columnsConfig, brandExtenstionsConfig } from '../../../Nav/__config__';
+import type { LinkType } from '../../../Nav/__config__';
 
 const MainMenuColumns = styled('ul')({
     boxSizing: 'border-box',
@@ -98,25 +98,31 @@ const BrandExtensionLink = styled('a')({
     },
 });
 
-export default () => (
+type Props = {
+    columns: Array<LinkType>,
+    brandExtensions: Array<LinkType>,
+};
+
+export default ({ columns, brandExtensions }: Props) => (
     <MainMenuColumns role="menubar" tabindex="-1">
-        {columnsConfig.map((column, i) => (
+        {columns.map((column, i) => (
             <MainMenuColumn
                 column={column}
-                key={column.id}
-                isLastIndex={i === columnsConfig.length - 1}
+                key={column.title.toLowerCase()}
+                isLastIndex={i === columns.length - 1}
+                brandExtensions={brandExtensions}
             />
         ))}
         <BrandExtensionColumn role="none">
             <BrandExtensionList role="menu">
-                {brandExtenstionsConfig.map(brandExtension => (
-                    <BrandExtensionListItem key={brandExtension.label}>
+                {brandExtensions.map(brandExtension => (
+                    <BrandExtensionListItem key={brandExtension.title}>
                         <BrandExtensionLink
-                            href={brandExtension.href}
-                            key={brandExtension.label}
+                            href={brandExtension.url}
+                            key={brandExtension.title}
                             role="menuitem"
                         >
-                            {brandExtension.label}
+                            {brandExtension.longTitle || brandExtension.title}
                         </BrandExtensionLink>
                     </BrandExtensionListItem>
                 ))}

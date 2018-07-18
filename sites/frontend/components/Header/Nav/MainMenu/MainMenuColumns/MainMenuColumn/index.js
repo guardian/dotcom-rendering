@@ -6,7 +6,7 @@ import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import MainMenuColumnButton from './MainMenuColumnButton';
 import MainMenuColumnLinks from './MainMenuColumnLinks';
 
-import type { MainMenuColumnType } from '../../../../Nav/__config__';
+import type { LinkType } from '../../../../Nav/__config__';
 
 const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
     const styles = {
@@ -41,8 +41,9 @@ const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
 });
 
 type Props = {
-    column: MainMenuColumnType,
+    column: LinkType,
     isLastIndex: boolean,
+    brandExtensions: Array<LinkType>,
 };
 
 export default class MainMenuColumn extends Component<
@@ -65,8 +66,8 @@ export default class MainMenuColumn extends Component<
 
     render() {
         const { showColumnLinks } = this.state;
-        const { column, isLastIndex } = this.props;
-        const subNavId = `${column.id}Links`;
+        const { column, isLastIndex, brandExtensions } = this.props;
+        const subNavId = `${column.title.toLowerCase()}Links`;
         const ColumnButton = () => {
             if (column.isPillar) {
                 return (
@@ -78,6 +79,7 @@ export default class MainMenuColumn extends Component<
                         }}
                         ariaControls={subNavId}
                         isLastIndex={isLastIndex}
+                        brandExtensions={brandExtensions}
                     />
                 );
             }
@@ -91,6 +93,7 @@ export default class MainMenuColumn extends Component<
                     column={column}
                     showColumnLinks={showColumnLinks}
                     id={subNavId}
+                    brandExtensions={brandExtensions}
                 />
             </MainMenuColumnStyled>
         );

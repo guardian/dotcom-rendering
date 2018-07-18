@@ -10,6 +10,8 @@ import {
 
 import MainMenuColumns from './MainMenuColumns';
 
+import type { NavType } from '../__config__';
+
 const MainMenu = styled('div')(({ showMainMenu }) => ({
     backgroundColor: '#e9eff1',
     boxSizing: 'border-box',
@@ -62,10 +64,14 @@ const MainMenu = styled('div')(({ showMainMenu }) => ({
 type Props = {
     showMainMenu: boolean,
     id: string,
+    nav: NavType,
 };
 
-export default ({ showMainMenu, id }: Props) => (
+export default ({ showMainMenu, id, nav }: Props) => (
     <MainMenu showMainMenu={showMainMenu} aria-hidden={!showMainMenu} id={id}>
-        <MainMenuColumns />
+        <MainMenuColumns
+            columns={nav.pillars}
+            brandExtensions={nav.brandExtensions}
+        />
     </MainMenu>
 );

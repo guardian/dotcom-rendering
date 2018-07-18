@@ -5,7 +5,7 @@ import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 
-import type { MainMenuColumnType } from '../../../../../../Nav/__config__';
+import type { LinkType } from '../../../../../../Nav/__config__';
 
 const MainMenuColumnLinkTitle = styled('a')(({ column }) => ({
     backgroundColor: 'transparent',
@@ -32,11 +32,15 @@ const MainMenuColumnLinkTitle = styled('a')(({ column }) => ({
         padding: '6px 0',
     },
     ':hover': {
-        color: column.isPillar ? pillars[column.id] : '#5d5f5f',
+        color: column.isPillar
+            ? pillars[column.title.toLowerCase()]
+            : '#5d5f5f',
         textDecoration: 'underline',
     },
     ':focus': {
-        color: column.isPillar ? pillars[column.id] : '#5d5f5f',
+        color: column.isPillar
+            ? pillars[column.title.toLowerCase()]
+            : '#5d5f5f',
         textDecoration: 'underline',
     },
     '> *': {
@@ -45,17 +49,17 @@ const MainMenuColumnLinkTitle = styled('a')(({ column }) => ({
 }));
 
 type Props = {
-    column: MainMenuColumnType,
-    link: { href: string, label: string },
+    column: LinkType,
+    link: LinkType,
 };
 
 export default ({ link, column }: Props) => (
     <MainMenuColumnLinkTitle
-        href={link.href}
+        href={link.url}
         role="menuitem"
         link={link}
         column={column}
     >
-        {link.label}
+        {link.title}
     </MainMenuColumnLinkTitle>
 );
