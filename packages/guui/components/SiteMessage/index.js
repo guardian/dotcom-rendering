@@ -1,5 +1,6 @@
 // @flow
-import { styled, Component } from '../../index';
+import { Component } from 'react';
+import styled from 'react-emotion';
 import { transparentize } from 'polished';
 
 import pallete from '@guardian/pasteup';

@@ -1,5 +1,6 @@
 // @flow
-import { styled } from '../../index';
+import styled from 'react-emotion';
+
 import CloseIcon from '@guardian/pasteup/icons/x.svg';
 
 const CloseButton = styled(CloseIcon)(
