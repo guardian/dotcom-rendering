@@ -1,7 +1,5 @@
 // @flow
 
-// __SITE__ and __PAGE__ strings are replaced by string-replace-loader in webpack.config.js
-
 import { hydrateApp, hydrateCSS } from '@guardian/guui';
 
 // $FlowFixMe: shut up, flow
