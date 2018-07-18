@@ -22,23 +22,11 @@ declare module '@guardian/guui' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module '@guardian/guui/components/buttons/Close' {
+declare module '@guardian/guui/big-numbers/index' {
   declare module.exports: any;
 }
 
-declare module '@guardian/guui/components/Number/index' {
-  declare module.exports: any;
-}
-
-declare module '@guardian/guui/components/SiteMessage' {
-  declare module.exports: any;
-}
-
-declare module '@guardian/guui/lib/assets' {
-  declare module.exports: any;
-}
-
-declare module '@guardian/guui/lib/reset-css' {
+declare module '@guardian/guui/buttons/Close' {
   declare module.exports: any;
 }
 
@@ -50,45 +38,43 @@ declare module '@guardian/guui/grid' {
   declare module.exports: any;
 }
 
-declare module '@guardian/guui/htmlTemplate' {
+declare module '@guardian/guui/lib/asset-path' {
   declare module.exports: any;
 }
 
-declare module '@guardian/guui/index' {
+declare module '@guardian/guui/lib/reset-css' {
+  declare module.exports: any;
+}
+
+declare module '@guardian/guui/SiteMessage' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module '@guardian/guui/components/buttons/Close.js' {
-  declare module.exports: $Exports<'@guardian/guui/components/buttons/Close'>;
+declare module '@guardian/guui/big-numbers/index.js' {
+  declare module.exports: $Exports<'@guardian/guui/big-numbers/index'>;
 }
-
-declare module '@guardian/guui/components/Number/index.js' {
-  declare module.exports: $Exports<'@guardian/guui/components/Number/index'>;
+declare module '@guardian/guui/buttons/Close.js' {
+  declare module.exports: $Exports<'@guardian/guui/buttons/Close'>;
 }
-
-declare module '@guardian/guui/components/SiteMessage.js' {
-  declare module.exports: $Exports<'@guardian/guui/components/SiteMessage'>;
-}
-
-declare module '@guardian/guui/lib/assets.js' {
-  declare module.exports: $Exports<'@guardian/guui/lib/assets'>;
-}
-
-declare module '@guardian/guui/lib/reset-css.js' {
-  declare module.exports: $Exports<'@guardian/guui/lib/reset-css'>;
-}
-
 declare module '@guardian/guui/document.js' {
   declare module.exports: $Exports<'@guardian/guui/document'>;
 }
 declare module '@guardian/guui/grid.js' {
   declare module.exports: $Exports<'@guardian/guui/grid'>;
 }
-declare module '@guardian/guui/htmlTemplate' {
-  declare module.exports: $Exports<'@guardian/guui/htmlTemplate'>;
+declare module '@guardian/guui/index' {
+  declare module.exports: $Exports<'@guardian/guui'>;
 }
 declare module '@guardian/guui/index.js' {
   declare module.exports: $Exports<'@guardian/guui'>;
 }
-
+declare module '@guardian/guui/lib/asset-path.js' {
+  declare module.exports: $Exports<'@guardian/guui/lib/asset-path'>;
+}
+declare module '@guardian/guui/lib/reset-css.js' {
+  declare module.exports: $Exports<'@guardian/guui/lib/reset-css'>;
+}
+declare module '@guardian/guui/SiteMessage.js' {
+  declare module.exports: $Exports<'@guardian/guui/SiteMessage'>;
+}

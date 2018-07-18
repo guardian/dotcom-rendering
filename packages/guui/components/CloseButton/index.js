@@ -1,5 +1,5 @@
 // @flow
-import { styled } from '@guardian/guui';
+import { styled } from '../../index';
 import CloseIcon from '@guardian/pasteup/icons/x.svg';
 
 const CloseButton = styled(CloseIcon)(

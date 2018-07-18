@@ -49,9 +49,9 @@ const libConfig = Object.assign({}, commonConfig, {
 
 const componentConfig = Object.assign({}, commonConfig, {
     entry: {
-        Close: './packages/guui/components/buttons/Close.js',
+        CloseButton: './packages/guui/components/CloseButton/index.js',
         Number: './packages/guui/components/Number/index.js',
-        SiteMessage: './packages/guui/components/SiteMessage.js',
+        SiteMessage: './packages/guui/components/SiteMessage/index.js',
     },
     output: {
         filename: '[name].js',

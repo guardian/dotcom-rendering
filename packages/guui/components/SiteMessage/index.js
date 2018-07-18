@@ -1,9 +1,9 @@
 // @flow
-import { styled, Component } from '@guardian/guui';
+import { styled, Component } from '../../index';
 import { transparentize } from 'polished';
 
-import pallete from '@guardian/pasteup/palette';
-import CloseButton from '@guardian/guui/components/buttons/Close';
+import pallete from '@guardian/pasteup';
+import CloseButton from '../CloseButton';
 
 type SiteMessageProps = {
     foregroundcolor: string,
