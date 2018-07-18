@@ -68,10 +68,10 @@ const componentConfig = Object.assign({}, commonConfig, {
     },
     // use the dependencies of consumer project importing guui components
     externals: {
-        'react': 'react',
+        react: 'react',
         'react-dom': 'react-dom',
         'react-emotion': 'react-emotion',
-    }
+    },
 });
 
 module.exports = [rootConfig, libConfig, componentConfig];
