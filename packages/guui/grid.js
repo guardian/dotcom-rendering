@@ -1,5 +1,5 @@
 // @flow
-import { styled } from '@guardian/guui';
+import { styled } from './index';
 import {
     tablet as tabletMq,
     desktop as desktopMq,
