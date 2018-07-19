@@ -123,18 +123,18 @@ flow-typed: yarn.lock
 # packages #########################################
 
 clean-pasteup:
-	@rm -rf packages/pasteup/dist packages/pasteup/src
+	@rm -rf packages/pasteup/dist packages/pasteup/tmp
 
 pre-publish-pasteup:
 	$(call log, "building pasteup")
-	@mkdir packages/pasteup/src
+	@mkdir packages/pasteup/tmp
 	@NODE_ENV=production webpack --config webpack/pasteup
-	@mv packages/pasteup/*.js packages/pasteup/src
+	@mv packages/pasteup/*.js packages/pasteup/tmp
 	@mv packages/pasteup/dist/*.js packages/pasteup
 
 post-publish-pasteup:
 	$(call log, "clean up after publishing pasteup")
-	@mv packages/pasteup/src/*.js packages/pasteup
+	@mv packages/pasteup/tmp/*.js packages/pasteup
 
 publish-pasteup: clear clean-pasteup install
 	$(call log, "publishing pasteup")

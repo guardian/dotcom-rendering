@@ -26,4 +26,4 @@ target
 guui.zip
 
 # publishable files
-packages/pasteup/src
+packages/pasteup/tmp
