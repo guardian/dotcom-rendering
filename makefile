@@ -138,4 +138,4 @@ post-publish-pasteup:
 
 publish-pasteup: clear clean-pasteup install
 	$(call log, "publishing pasteup")
-	@cd packages/pasteup && yarn pack
+	@cd packages/pasteup && yarn publish
