@@ -1,6 +1,8 @@
 // @flow
 
-import { renderToString } from '@guardian/guui';
+import { extractCritical } from 'emotion-server';
+import { renderToString } from 'react-dom/server';
+
 import assets from '@guardian/guui/lib/assets';
 import htmlTemplate from '@guardian/guui/htmlTemplate';
 
@@ -17,16 +19,23 @@ type Props = {
     Page: React.ComponentType<{}>,
 };
 
+type renderToStringResult = {
+    html: string,
+    css: string,
+    ids: Array<string>,
+};
+
 export default ({ Page, data: { body, ...data } }: Props) => {
+    // const renderToStringWithStyles = (ComponentToRender: React$Node): renderToStringResult =>
+            // extractCritical(renderToString(ComponentToRender));
+    
     const cleanedData = { ...parseCAPI(body), ...data };
 
     const bundle = assets.dist(
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
     );
 
-    const { html, css, ids: cssIDs } = renderToString(
-        <App data={{ ...cleanedData }} Page={Page} />,
-    );
+    const { html, css, ids: cssIDs } = extractCritical(renderToString(<App data={{ ...cleanedData }} Page={Page} />));
 
     /**
      * To save sending CAPI data twice (in the HEAD and BODY)

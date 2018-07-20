@@ -1,5 +1,6 @@
 // @flow
-import { styled, Component } from '@guardian/guui';
+import styled from 'react-emotion';
+import { Component } from 'react';
 
 import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 

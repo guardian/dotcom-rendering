@@ -1,5 +1,5 @@
 // @flow
-import { Component } from '@guardian/guui';
+import { Component } from 'react';
 import { connect } from 'unistore/react';
 
 type CapiKey = string;

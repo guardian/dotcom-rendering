@@ -1,5 +1,5 @@
 // @flow
-import { styled } from '@guardian/guui';
+import styled from 'react-emotion';
 
 import { tablet, desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import { pillars } from '@guardian/pasteup/palette';
