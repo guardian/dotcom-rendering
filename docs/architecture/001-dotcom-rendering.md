@@ -21,6 +21,8 @@ This solution has the disadvantages of introducing duplication (feature X may ne
 minimum deliverable. However it has the advantage of producing value even without 100% migration, as any page it serves is clean. Also this solution
 "fails fast": it can be assessed and potentially rejected comparatively early on.
 
+Node.js offers an excellent debugging experience, fast feedback and a vast community to draw on.
+
 ## Status
 
 Approved
