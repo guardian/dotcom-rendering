@@ -7,5 +7,5 @@ import SiteMessage from './components/SiteMessage';
 export {
     CloseButton,
     Number,
-    SiteMessage
+    SiteMessage,
 };

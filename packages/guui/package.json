@@ -2,7 +2,8 @@
   "name": "@guardian/guui",
   "version": "2.0.0-alpha.1",
   "description": "Guardian rendering framework",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "./index.js",
   "scripts": {
     "test": "jest",
     "prepublish": "cd ../.. && make pre-publish-guui",
