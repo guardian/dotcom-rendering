@@ -26,9 +26,6 @@ type renderToStringResult = {
 };
 
 export default ({ Page, data: { body, ...data } }: Props) => {
-    // const renderToStringWithStyles = (ComponentToRender: React$Node): renderToStringResult =>
-            // extractCritical(renderToString(ComponentToRender));
-    
     const cleanedData = { ...parseCAPI(body), ...data };
 
     const bundle = assets.dist(

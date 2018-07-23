@@ -2,7 +2,8 @@
 
 // __SITE__ and __PAGE__ strings are replaced by string-replace-loader in webpack.config.js
 
-import { hydrateApp, hydrateCSS } from '@guardian/guui';
+import { hydrate as hydrateCSS } from 'emotion';
+import { hydrate as hydrateApp } from 'react-dom';
 
 // $FlowFixMe: shut up, flow
 import Page from '../../sites/__SITE__/pages/__PAGE__'; // eslint-disable-line import/no-unresolved,import/extensions

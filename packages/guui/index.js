@@ -1,29 +1,11 @@
 // @flow
 
-// provide a consistent wrapper around the libs guui depends on.
-
-import { hydrate as hydrateCSS } from 'emotion';
-import { extractCritical } from 'emotion-server';
-import React, { Component } from 'react';
-import { hydrate as hydrateApp, render } from 'react-dom';
-import { renderToString as reactRenderToString } from 'react-dom/server';
-import styled from 'react-emotion';
-
-type renderToStringResult = {
-    html: string,
-    css: string,
-    ids: Array<string>,
-};
-
-const renderToString = (ComponentToRender: React$Node): renderToStringResult =>
-    extractCritical(reactRenderToString(ComponentToRender));
+import CloseButton from './components/CloseButton';
+import Number from './components/Number';
+import SiteMessage from './components/SiteMessage';
 
 export {
-    React,
-    hydrateApp,
-    render,
-    renderToString,
-    hydrateCSS,
-    styled,
-    Component,
+    CloseButton,
+    Number,
+    SiteMessage
 };

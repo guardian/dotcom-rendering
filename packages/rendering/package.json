@@ -10,7 +10,9 @@
   "dependencies": {
     "@guardian/guui": "0.1.0-alpha.1",
     "express": "^4.16.3",
+    "emotion": "^9.1.1",
     "glob": "^7.1.2",
-    "pm2": "^2.10.2"
+    "pm2": "^2.10.2",
+    "react-dom": "^16.4.0"
   }
 }

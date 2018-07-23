@@ -1,14 +1,13 @@
 // @flow
+import styled from 'react-emotion';
+
 import {
     tablet as tabletMq,
     desktop as desktopMq,
     leftCol as leftColMq,
     wide as wideMq,
 } from '@guardian/pasteup/breakpoints';
-
 import { clearFix } from '@guardian/pasteup/mixins';
-
-import { styled } from './index';
 
 type Breakpoint = 'tablet' | 'desktop' | 'leftCol' | 'wide';
 type GridSize = {
