@@ -13,6 +13,7 @@ export default () => {
         {
             url: 'foo',
             title: 'UK Edition',
+            isActive: true,
         },
         {
             url: 'foo',

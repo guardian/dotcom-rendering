@@ -10,6 +10,7 @@ import { textSans } from '@guardian/pasteup/fonts';
 type Link = {
     url: string,
     title: string,
+    isActive: boolean,
 };
 
 type Props = {
@@ -75,6 +76,10 @@ const Div = styled('div')({
     'a:hover': {
         backgroundColor: '#ededed',
     },
+
+    'a.active': {
+        fontWeight: 'bold',
+    },
 });
 
 // TODOs:
@@ -104,7 +109,10 @@ export default class Dropdown extends Component<Props> {
                 {this.state.isExpanded && (
                     <ul>
                         {links.map(link => (
-                            <li key={link.title}>
+                            <li
+                                key={link.title}
+                                className={link.isActive ? 'active' : ''}
+                            >
                                 <a href={link.url}>{link.title}</a>
                             </li>
                         ))}
