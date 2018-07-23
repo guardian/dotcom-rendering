@@ -3,7 +3,7 @@
  * A dropdown component
  */
 
-import { styled } from '@guardian/guui';
+import { styled, Component } from '@guardian/guui';
 
 type Link = {
     url: string,
@@ -11,20 +11,46 @@ type Link = {
 };
 
 type Props = {
+    label: string,
     links: Array<Link>,
 };
 
-const Ul = styled('ul')({
-    position: 'absolute',
-    right: '15px',
-});
+const Div = styled('div')({});
 
-export default ({ links }: Props) => (
-    <Ul>
-        {links.map(link => (
-            <li>
-                <a href={link.url}>{link.title}</a>
-            </li>
-        ))}
-    </Ul>
-);
+// TODOs:
+// - add parent link
+// - toggle display
+// - accessibility stuff (navigate with keyboard, ESC, etc., tags?)
+
+export default class Dropdown extends Component<Props> {
+    constructor(props: Props) {
+        super(props);
+        this.state = { isExpanded: false };
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState(prevState => ({
+            isExpanded: !prevState.isExpanded,
+        }));
+    }
+
+    render() {
+        const { label, links } = this.props;
+
+        return (
+            <Div>
+                <button onClick={this.toggle}>{label}</button>
+                {this.state.isExpanded && (
+                    <ul>
+                        {links.map(link => (
+                            <li key={link.title}>
+                                <a href={link.url}>{link.title}</a>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </Div>
+        );
+    }
+}

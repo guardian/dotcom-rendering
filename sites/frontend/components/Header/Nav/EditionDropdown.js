@@ -1,6 +1,12 @@
 // @flow
-// import styled from '@guardian/guui';
 import Dropdown from '@guardian/guui/dropdown';
+
+import { styled } from '@guardian/guui';
+
+const EditionDropdown = styled('div')({
+    position: 'absolute',
+    right: '15px',
+});
 
 export default () => {
     const links = [
@@ -17,5 +23,10 @@ export default () => {
             title: 'bar3',
         },
     ];
-    return <Dropdown links={links} />;
+
+    return (
+        <EditionDropdown>
+            <Dropdown label="edition" links={links} />
+        </EditionDropdown>
+    );
 };
