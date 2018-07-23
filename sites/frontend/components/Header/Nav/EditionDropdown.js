@@ -12,21 +12,25 @@ export default () => {
     const links = [
         {
             url: 'foo',
-            title: 'bar1',
+            title: 'UK Edition',
         },
         {
             url: 'foo',
-            title: 'bar2',
+            title: 'US Edition',
         },
         {
             url: 'foo',
-            title: 'bar3',
+            title: 'Australian Edition',
+        },
+        {
+            url: 'foo',
+            title: 'International Edition',
         },
     ];
 
     return (
         <EditionDropdown>
-            <Dropdown label="edition" links={links} />
+            <Dropdown label="UK Edition" links={links} />
         </EditionDropdown>
     );
 };
