@@ -38,7 +38,26 @@ const Div = styled('div')({
         ':focus': {
             textDecoration: 'underline',
         },
+
+        ':after': {
+            content: '""',
+            display: 'inline-block',
+            width: '0.25rem',
+            height: '0.25rem',
+            transform: 'translateY(-0.125rem) rotate(45deg)',
+            border: '0.0625rem solid currentColor',
+            borderLeft: 'transparent',
+            borderTop: 'transparent',
+            marginLeft: '6px',
+            verticalAlign: 'middle',
+            transition: 'transform 250ms ease-out',
+        },
     },
+
+    'button.expanded:after': {
+        transform: 'translateY(0.0625rem) rotate(-135deg)',
+    },
+
     ul: {
         listStyle: 'none',
         backgroundColor: 'white',
@@ -52,18 +71,18 @@ const Div = styled('div')({
     },
     'li a': {
         display: 'block',
-        padding: '0.4375rem 1.25rem 0.9375rem 1.875rem',
+        padding: '10px 18px 15px 30px',
     },
 
     a: {
-        fontSize: 14,
+        fontSize: '15px',
         fontFamily: textSans,
         color: palette.neutral['1'],
         lineHeight: 1.2,
         position: 'relative',
         transition: 'color 80ms ease-out',
         padding: '6px 10px',
-        margin: '1px 0 0',
+        margin: '-1px 0 0 0',
         textDecoration: 'none',
         ':hover': {
             textDecoration: 'underline',
@@ -71,14 +90,39 @@ const Div = styled('div')({
         ':focus': {
             textDecoration: 'underline',
         },
+
+        ':before': {
+            content: '""',
+            borderTop: '0.0625rem solid #ededed',
+            display: 'block',
+            position: 'absolute',
+            top: 0,
+            left: '1.875rem',
+            right: 0,
+        },
     },
 
     'a:hover': {
         backgroundColor: '#ededed',
+        textDecoration: 'none',
     },
 
     'a.active': {
         fontWeight: 'bold',
+        backgroundColor: '#ededed',
+
+        ':after': {
+            content: '""',
+            border: '0.125rem solid #c70000',
+            borderTop: 0,
+            borderRight: 0,
+            position: 'absolute',
+            top: '14px',
+            left: '10px',
+            width: '10px',
+            height: '4px',
+            transform: 'rotate(-45deg)',
+        },
     },
 });
 
@@ -105,15 +149,22 @@ export default class Dropdown extends Component<Props> {
 
         return (
             <Div>
-                <button onClick={this.toggle}>{label}</button>
+                <button
+                    onClick={this.toggle}
+                    className={this.state.isExpanded ? 'expanded' : ''}
+                >
+                    {label}
+                </button>
                 {this.state.isExpanded && (
                     <ul>
                         {links.map(link => (
-                            <li
-                                key={link.title}
-                                className={link.isActive ? 'active' : ''}
-                            >
-                                <a href={link.url}>{link.title}</a>
+                            <li key={link.title}>
+                                <a
+                                    href={link.url}
+                                    className={link.isActive ? 'active' : ''}
+                                >
+                                    {link.title}
+                                </a>
                             </li>
                         ))}
                     </ul>
