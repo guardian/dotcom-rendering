@@ -7,6 +7,7 @@ import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
 import Logo from './Logo';
+import EditionDropdown from './EditionDropdown';
 import Links from './Links';
 import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle';
@@ -65,6 +66,7 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
             return (
                 <div>
                     <NavStyled role="navigation" aria-label="Guardian sections">
+                        <EditionDropdown />
                         <Logo />
                         <Links />
                         <Pillars
