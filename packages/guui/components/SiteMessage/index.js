@@ -2,8 +2,8 @@
 import { Component } from 'react';
 import styled from 'react-emotion';
 import { transparentize } from 'polished';
+import pallete from '@guardian/pasteup';
 
-import pallete from '@guardian/pasteup/palette';
 import CloseButton from '../CloseButton';
 
 type SiteMessageProps = {
