@@ -59,6 +59,7 @@ const Div = styled('div')({
     },
 
     ul: {
+        zIndex: 1072,
         listStyle: 'none',
         backgroundColor: 'white',
         padding: '0.375rem 0',
@@ -67,7 +68,6 @@ const Div = styled('div')({
         position: 'absolute',
         right: '0',
         width: '12.5rem',
-        zIndex: 1072,
     },
     'li a': {
         display: 'block',
@@ -109,7 +109,6 @@ const Div = styled('div')({
 
     'a.active': {
         fontWeight: 'bold',
-        backgroundColor: '#ededed',
 
         ':after': {
             content: '""',

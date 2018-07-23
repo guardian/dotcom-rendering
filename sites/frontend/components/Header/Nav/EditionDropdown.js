@@ -6,6 +6,7 @@ import { styled } from '@guardian/guui';
 const EditionDropdown = styled('div')({
     position: 'absolute',
     right: '15px',
+    zIndex: 1072,
 });
 
 export default () => {
