@@ -131,14 +131,13 @@ const Div = styled('div')({
 });
 
 // TODOs:
-// - add parent link
-// - toggle display
+// - handle select by passing to parent
 // - accessibility stuff (navigate with keyboard, ESC, etc., tags?)
 
 export default class Dropdown extends Component<Props> {
     constructor(props: Props) {
         super(props);
-        this.state = { isExpanded: true };
+        this.state = { isExpanded: false };
         this.toggle = this.toggle.bind(this);
     }
 
