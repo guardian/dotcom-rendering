@@ -1,7 +1,9 @@
 // @flow
 import { styled } from '@guardian/guui';
 
-// import { tablet } from '@guardian/pasteup/breakpoints';
+import { leftCol, tablet } from '@guardian/pasteup/breakpoints';
+
+import Main from '../Main';
 
 type Link = {
     title: string,
@@ -117,6 +119,31 @@ const Footer = styled('footer')({
         flexWrap: 'wrap',
         flexDirection: 'row',
     },
+
+    ul: {
+        width: '50%',
+
+        [tablet]: {
+            margin: '0 10px 36px 0',
+            flex: '1 0 0',
+        },
+
+        borderLeft: '1px solid #434343',
+        paddingLeft: '10px',
+    },
+
+    '.email-sub__iframe': {
+        [leftCol]: {
+            float: 'left',
+            width: '300px',
+            marginRight: '180px',
+        },
+    },
+
+    '.footer-inner': {
+        paddingTop: '12px',
+        paddingBottom: '6px',
+    },
 });
 
 type Props = {
@@ -139,10 +166,24 @@ const FooterLinks = ({ links }: Props) => {
 
 export default () => (
     <Footer>
-        <FooterLinks links={footerLinks} />
-        <div>
-            © 2018 Guardian News and Media Limited or its affiliated companies.
-            All rights reserved.
-        </div>
+        <Main className="footer-inner">
+            <iframe
+                title="Guardian Email Sign-up Form"
+                src="https://www.theguardian.com/email/form/footer/today-uk"
+                scrolling="no"
+                seamless=""
+                id="footer__email-form"
+                className="iframed--overflow-hidden email-sub__iframe js-email-sub__iframe"
+                data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
+                data-node-uid="2"
+                height="86px"
+                frameBorder="0"
+            />
+            <FooterLinks links={footerLinks} />
+            <div>
+                © 2018 Guardian News and Media Limited or its affiliated
+                companies. All rights reserved.
+            </div>
+        </Main>
     </Footer>
 );
