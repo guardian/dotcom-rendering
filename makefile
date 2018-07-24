@@ -123,28 +123,28 @@ flow-typed: yarn.lock
 # packages #########################################
 
 clean-guui:
-	@rm -rf packages/guui/dist packages/guui/src
+	# @rm -rf packages/guui/dist packages/guui/tmp
 
 pre-publish-guui:
 	$(call log, "building guui")
-	@mkdir packages/guui/src
-	@mkdir packages/guui/src/lib
-	@mkdir packages/guui/src/components	
+	# @mkdir packages/guui/tmp
+	# @mkdir packages/guui/tmp/lib
+	# @mkdir packages/guui/tmp/components	
 	@NODE_ENV=production webpack --config webpack/guui
-	@mv packages/guui/*.js packages/guui/src
-	@mv packages/guui/dist/*.js packages/guui
-	@mv packages/guui/lib/*.js packages/guui/src/lib
-	@mv packages/guui/dist/lib/*.js packages/guui/lib
-	@mv packages/guui/components/* packages/guui/src/components
-	@mv packages/guui/dist/components/*.js packages/guui/components
+	# @mv packages/guui/*.js packages/guui/src
+	# @mv packages/guui/dist/*.js packages/guui
+	# @mv packages/guui/lib/*.js packages/guui/src/lib
+	# @mv packages/guui/dist/lib/*.js packages/guui/lib
+	# @mv packages/guui/components/* packages/guui/src/components
+	# @mv packages/guui/dist/components/*.js packages/guui/components
 
 post-publish-guui:
-	$(call log, "clean up after publishing guui")
-	@mv packages/guui/src/*.js packages/guui
-	@mv packages/guui/src/lib/*.js packages/guui/lib
-	@rm -rf packages/guui/components/*
-	@mv packages/guui/src/components/* packages/guui/components
+	# $(call log, "clean up after publishing guui")
+	# @mv packages/guui/tmp/*.js packages/guui
+	# @mv packages/guui/tmp/lib/*.js packages/guui/lib
+	# @rm -rf packages/guui/components/*
+	# @mv packages/guui/tmp/components/* packages/guui/components
 
 publish-guui: clear clean-guui install
 	$(call log, "publishing guui")
-	@cd packages/guui && yarn pack
+	# @cd packages/guui && yarn pack

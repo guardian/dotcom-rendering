@@ -26,4 +26,4 @@ target
 guui.zip
 
 # publishable files
-packages/guui/src
+# packages/guui/tmp

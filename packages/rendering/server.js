@@ -5,7 +5,7 @@
 
 import path from 'path';
 import express from 'express';
-import defaultDocument from '@guardian/guui/document';
+// import defaultDocument from '@guardian/guui/document';
 
 import type { $Request, $Response } from 'express';
 
@@ -22,9 +22,10 @@ const render = async ({ params, body }: $Request, res: $Response) => {
 
         const [{ default: Page }, document] = await Promise.all([
             import(`../../sites/__SITE__/pages/${page}.js`),
-            import(`../../sites/__SITE__/document.js`)
-                .then(module => module.default)
-                .catch(() => defaultDocument),
+            import(`../../sites/__SITE__/document.js`).then(
+                module => module.default,
+            ),
+            // .catch(() => defaultDocument),
         ]);
 
         const pageSrc = await document({ Page, data });

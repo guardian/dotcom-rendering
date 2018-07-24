@@ -3,8 +3,8 @@
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 
-import assets from '@guardian/guui/lib/assets';
-import htmlTemplate from '@guardian/guui/htmlTemplate';
+import assets from './lib/assets';
+import htmlTemplate from './htmlTemplate';
 
 import parseCAPI from './lib/parse-capi';
 import App from './App';
@@ -32,7 +32,9 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
     );
 
-    const { html, css, ids: cssIDs } = extractCritical(renderToString(<App data={{ ...cleanedData }} Page={Page} />));
+    const { html, css, ids: cssIDs }: renderToStringResult = extractCritical(
+        renderToString(<App data={{ ...cleanedData }} Page={Page} />),
+    );
 
     /**
      * To save sending CAPI data twice (in the HEAD and BODY)
