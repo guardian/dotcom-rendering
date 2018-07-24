@@ -42,10 +42,10 @@ const Div = styled('div')({
         ':after': {
             content: '""',
             display: 'inline-block',
-            width: '0.25rem',
-            height: '0.25rem',
-            transform: 'translateY(-0.125rem) rotate(45deg)',
-            border: '0.0625rem solid currentColor',
+            width: '4px',
+            height: '4px',
+            transform: 'translateY(2px) rotate(45deg)',
+            border: '1px solid currentColor',
             borderLeft: 'transparent',
             borderTop: 'transparent',
             marginLeft: '6px',
@@ -55,19 +55,19 @@ const Div = styled('div')({
     },
 
     'button.expanded:after': {
-        transform: 'translateY(0.0625rem) rotate(-135deg)',
+        transform: 'translateY(1px) rotate(-135deg)',
     },
 
     ul: {
         zIndex: 1072,
         listStyle: 'none',
         backgroundColor: 'white',
-        padding: '0.375rem 0',
-        boxShadow: '0 0 0 0.0625rem rgba(0,0,0,0.1)',
-        borderRadius: '0.1875rem',
+        padding: '6px 0',
+        boxShadow: '0 0 0 1px rgba(0,0,0,0.1)',
+        borderRadius: '3px',
         position: 'absolute',
         right: '0',
-        width: '12.5rem',
+        width: '200px',
     },
     'li a': {
         display: 'block',
@@ -93,11 +93,11 @@ const Div = styled('div')({
 
         ':before': {
             content: '""',
-            borderTop: '0.0625rem solid #ededed',
+            borderTop: '1px solid #ededed',
             display: 'block',
             position: 'absolute',
             top: 0,
-            left: '1.875rem',
+            left: '30px',
             right: 0,
         },
     },
@@ -117,7 +117,7 @@ const Div = styled('div')({
 
         ':after': {
             content: '""',
-            border: '0.125rem solid #c70000',
+            border: '2px solid #c70000',
             borderTop: 0,
             borderRight: 0,
             position: 'absolute',
