@@ -1276,7 +1276,7 @@ babel-plugin-emotion@^9.1.2:
     source-map "^0.5.7"
     touch "^1.0.0"
 
-babel-plugin-emotion@~9.2.6:
+babel-plugin-emotion@^9.2.6:
   version "9.2.6"
   resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-9.2.6.tgz#992d48f316c20610c28a95ae90e6bd193014eec5"
   dependencies:
