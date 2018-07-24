@@ -19,6 +19,8 @@ if (module.hot) {
 const container = document.getElementById('app');
 
 if (container) {
-    hydrateCSS(cssIDs);
+    if (process.env.NODE_ENV !== 'development') {
+        hydrateCSS(cssIDs);
+    }
     hydrateApp(<App Page={Page} data={data} />, container);
 }
