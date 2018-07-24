@@ -1,4 +1,4 @@
-# To extract the rendering layer of frontend into a new service
+# Frontend rendering layer as a service
 
 ## Context
 

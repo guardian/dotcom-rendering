@@ -1,4 +1,4 @@
-# To use Emotion
+# Emotion
 
 ## Context
 

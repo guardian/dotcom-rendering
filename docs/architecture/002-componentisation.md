@@ -1,4 +1,4 @@
-# To structure our view layer as components
+# Componentisation
 
 ## Context
 

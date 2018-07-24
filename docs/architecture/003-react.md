@@ -1,4 +1,4 @@
-# To use React
+# React
 
 ## Context
 
