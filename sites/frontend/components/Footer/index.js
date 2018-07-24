@@ -118,6 +118,11 @@ const Footer = styled('footer')({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
+        borderTop: '1px solid #434343',
+
+        [tablet]: {
+            borderTop: 'none',
+        },
     },
 
     ul: {
