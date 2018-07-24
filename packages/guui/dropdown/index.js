@@ -102,6 +102,11 @@ const Div = styled('div')({
         },
     },
 
+    // no top border for first item
+    'li:first-child a:before': {
+        content: 'none',
+    },
+
     'a:hover': {
         backgroundColor: '#ededed',
         textDecoration: 'none',
