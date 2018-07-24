@@ -1,7 +1,8 @@
 // @flow
 import { styled } from '@guardian/guui';
 
-import { leftCol, tablet } from '@guardian/pasteup/breakpoints';
+import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
+import { textSans } from '@guardian/pasteup/fonts';
 
 import Main from '../Main';
 
@@ -108,6 +109,8 @@ const footerLinks: Array<Array<Link>> = [
 const Footer = styled('footer')({
     backgroundColor: '#333',
     color: '#dcdcdc',
+    fontFamily: textSans,
+    fontSize: '14px',
 
     a: {
         color: '#dcdcdc',
@@ -123,21 +126,49 @@ const Footer = styled('footer')({
         [tablet]: {
             borderTop: 'none',
         },
-    },
 
-    ul: {
-        width: '50%',
-
-        [tablet]: {
-            margin: '0 10px 36px 0',
-            flex: '1 0 0',
+        a: {
+            paddingBottom: '12px',
+            display: 'block',
         },
 
-        borderLeft: '1px solid #434343',
-        paddingLeft: '10px',
+        ul: {
+            width: '50%',
+            borderLeft: '1px solid #434343',
+
+            [until.tablet]: {
+                ':nth-child(odd)': {
+                    borderLeft: 0,
+                    paddingLeft: 0,
+                },
+
+                ':nth-child(3)': {
+                    paddingTop: 0,
+                },
+                ':nth-child(4)': {
+                    paddingTop: 0,
+                },
+            },
+
+            [until.leftCol]: {
+                ':nth-child(1)': {
+                    borderLeft: 0,
+                    paddingLeft: 0,
+                },
+            },
+
+            [tablet]: {
+                margin: '0 10px 36px 0',
+                flex: '1 0 0',
+            },
+
+            padding: '12px 0 0 10px',
+        },
     },
 
     '.email-sub__iframe': {
+        paddingTop: '12px',
+
         [leftCol]: {
             float: 'left',
             width: '300px',
@@ -146,8 +177,14 @@ const Footer = styled('footer')({
     },
 
     '.footer-inner': {
-        paddingTop: '12px',
         paddingBottom: '6px',
+    },
+
+    '.copyright': {
+        fontSize: '12px',
+        padding: '6px 0 18px',
+        borderTop: '1px solid #434343',
+        marginTop: '12px',
     },
 });
 
@@ -181,11 +218,11 @@ export default () => (
                 className="iframed--overflow-hidden email-sub__iframe js-email-sub__iframe"
                 data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
                 data-node-uid="2"
-                height="86px"
+                height="100px"
                 frameBorder="0"
             />
             <FooterLinks links={footerLinks} />
-            <div>
+            <div className="copyright">
                 © 2018 Guardian News and Media Limited or its affiliated
                 companies. All rights reserved.
             </div>
