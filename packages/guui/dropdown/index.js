@@ -202,6 +202,7 @@ export default class Dropdown extends Component<Props> {
                             aria-expanded={
                                 this.state.isExpanded ? 'true' : 'false'
                             }
+                            tabindex="0"
                         >
                             {label}
                         </label>,
