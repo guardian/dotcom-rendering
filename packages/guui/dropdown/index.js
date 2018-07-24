@@ -142,6 +142,20 @@ export default class Dropdown extends Component<Props> {
         this.toggle = this.toggle.bind(this);
     }
 
+    // hide on ESC key
+    componentDidMount() {
+        const dismiss = event => {
+            const escKey = 27;
+            if (event.keyCode === escKey) {
+                this.setState(() => ({
+                    isExpanded: false,
+                }));
+            }
+        };
+
+        document.addEventListener('keydown', dismiss, false);
+    }
+
     toggle() {
         this.setState(prevState => ({
             isExpanded: !prevState.isExpanded,
