@@ -17,8 +17,9 @@ module.exports = {
         'prettier',
         'prettier/flowtype',
         'prettier/react',
+        'plugin:jsx-a11y/strict',
     ],
-    plugins: ['flowtype', 'react', 'prettier'],
+    plugins: ['flowtype', 'react', 'prettier', 'jsx-a11y'],
     rules: {
         'prettier/prettier': ['error'],
         'react/react-in-jsx-scope': 'off',
