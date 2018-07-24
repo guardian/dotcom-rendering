@@ -1,4 +1,4 @@
-# To Adopt the Lightweight Architectural Design Decision Format
+# Lightweight Architectural Design Decision Format
 
 ## Context
 
