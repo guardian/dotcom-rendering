@@ -12,20 +12,20 @@ const EditionDropdown = styled('div')({
 export default () => {
     const links = [
         {
-            url: 'foo',
+            url: '/preference/edition/uk',
             title: 'UK Edition',
             isActive: true,
         },
         {
-            url: 'foo',
+            url: '/preference/edition/us',
             title: 'US Edition',
         },
         {
-            url: 'foo',
+            url: '/preference/edition/au',
             title: 'Australian Edition',
         },
         {
-            url: 'foo',
+            url: '/preference/edition/int',
             title: 'International Edition',
         },
     ];
