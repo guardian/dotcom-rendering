@@ -6,6 +6,7 @@
 import { styled, Component } from '@guardian/guui';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 type Link = {
     url: string,
@@ -19,10 +20,12 @@ type Props = {
 };
 
 const Div = styled('div')({
-    button: {
+    'button, label': {
+        display: 'block',
         cursor: 'pointer',
         background: 'none',
         border: 'none',
+        lineHeight: 1.2,
 
         fontSize: 14,
         fontFamily: textSans,
@@ -54,7 +57,7 @@ const Div = styled('div')({
         },
     },
 
-    'button.expanded:after': {
+    'button.expanded:after, label.expanded:after': {
         transform: 'translateY(1px) rotate(-135deg)',
     },
 
@@ -68,7 +71,13 @@ const Div = styled('div')({
         position: 'absolute',
         right: '0',
         width: '200px',
+        display: 'none',
     },
+
+    'ul.expanded': {
+        display: 'block',
+    },
+
     'li a': {
         display: 'block',
         padding: '10px 18px 15px 30px',
@@ -130,6 +139,13 @@ const Div = styled('div')({
     },
 });
 
+const NoJSCheckbox = styled('input')({
+    ...screenReaderOnly,
+    ':checked + ul': {
+        display: 'block',
+    },
+});
+
 // TODOs:
 // - handle select by passing to parent
 // - accessibility stuff (navigate with keyboard, ESC, etc., tags?)
@@ -137,7 +153,7 @@ const Div = styled('div')({
 export default class Dropdown extends Component<Props> {
     constructor(props: Props) {
         super(props);
-        this.state = { isExpanded: false };
+        this.state = { isExpanded: false, noJS: true };
         this.toggle = this.toggle.bind(this);
     }
 
@@ -153,6 +169,12 @@ export default class Dropdown extends Component<Props> {
         };
 
         document.addEventListener('keydown', dismiss, false);
+
+        // If componentDidMount runs we know client-side JS is enabled
+        // eslint-disable-next-line react/no-did-mount-set-state
+        this.setState({
+            noJS: false,
+        });
     }
 
     toggle() {
@@ -166,32 +188,58 @@ export default class Dropdown extends Component<Props> {
 
         // needs to be unique to allow multiple dropdowns on same page
         // this should be unique because JS is single-threaded
-        const id = `id-${Date.now()}`;
+        const dropdownID = `dropbox-id-${Date.now()}`;
+        const checkboxID = `checkbox-id-${Date.now()}`;
 
         return (
             <Div>
-                <button
-                    onClick={this.toggle}
-                    className={this.state.isExpanded ? 'expanded' : ''}
-                    aria-controls={id}
-                    aria-expanded={this.state.isExpanded ? 'true' : 'false'}
-                >
-                    {label}
-                </button>
-                {this.state.isExpanded && (
-                    <ul id={id}>
-                        {links.map(link => (
-                            <li key={link.title}>
-                                <a
-                                    href={link.url}
-                                    className={link.isActive ? 'active' : ''}
-                                >
-                                    {link.title}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+                {this.state.noJS ? (
+                    [
+                        <label
+                            htmlFor={checkboxID}
+                            className={this.state.isExpanded ? 'expanded' : ''}
+                            aria-controls={dropdownID}
+                            aria-expanded={
+                                this.state.isExpanded ? 'true' : 'false'
+                            }
+                        >
+                            {label}
+                        </label>,
+                        <NoJSCheckbox
+                            type="checkbox"
+                            id={checkboxID}
+                            aria-controls={dropdownID}
+                            tabIndex="-1"
+                            key="OpenMainMenuCheckbox"
+                            role="menuitemcheckbox"
+                        />,
+                    ]
+                ) : (
+                    <button
+                        onClick={this.toggle}
+                        className={this.state.isExpanded ? 'expanded' : ''}
+                        aria-controls={dropdownID}
+                        aria-expanded={this.state.isExpanded ? 'true' : 'false'}
+                    >
+                        {label}
+                    </button>
                 )}
+
+                <ul
+                    id={dropdownID}
+                    className={this.state.isExpanded ? 'expanded' : ''}
+                >
+                    {links.map(link => (
+                        <li key={link.title}>
+                            <a
+                                href={link.url}
+                                className={link.isActive ? 'active' : ''}
+                            >
+                                {link.title}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
             </Div>
         );
     }
