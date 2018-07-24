@@ -145,10 +145,6 @@ const NoJSCheckbox = styled('input')({
     },
 });
 
-// TODOs:
-// - handle select by passing to parent
-// - accessibility stuff (navigate with keyboard, ESC, etc., tags?)
-
 export default class Dropdown extends Component<Props> {
     constructor(props: Props) {
         super(props);
