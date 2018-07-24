@@ -30,7 +30,6 @@ const Div = styled('div')({
         fontSize: 14,
         fontFamily: textSans,
         color: palette.neutral['1'],
-        lineHeight: 1.2,
         transition: 'color 80ms ease-out',
         padding: '6px 10px',
         margin: '1px 0 0',
@@ -202,7 +201,7 @@ export default class Dropdown extends Component<Props> {
                             aria-expanded={
                                 this.state.isExpanded ? 'true' : 'false'
                             }
-                            tabindex="0"
+                            tabIndex="0"
                         >
                             {label}
                         </label>,
