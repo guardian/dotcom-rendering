@@ -17,22 +17,19 @@ If you change or delete some styles, it’s difficult to know the extent to whic
 
 ## Decision
 
-The componentisation approach ensures that only CSS that is used on a page is generated and included in the resultant HTML. This large reduction in CSS ensures:
+We will build our rendering layer using components, ensuring that only CSS that is used on a page is generated and included in the resultant HTML. 
 
-- critical resources reach the browser faster
-- can be parsed quicker
-- render tree constructed earlier
-- content displayed much sooner
+We will colocate markup, styles and logic in the same file. 
 
-With componentisation, all CSS is scoped to a particular component. Nothing leaks out into the wider application. 
+We will annotate our logic with types.
 
-A componentisation approach allows us to colocate markup, styles and logic in the same file. It becomes easier for developers to find the code they are looking for.
+## Consequences
 
-It’s easier to see how a component works because everything needed to understand the component, from a presentational point of view, is all in one place.
+All CSS is scoped to a particular component. Nothing should leak out into the wider application. 
 
-Because components are self-contained, developers can be clearer about the consequences of changing some code. Nothing leaks out into the wider application.
+It should be easy for developers to find the code they are looking for. Everything needed to understand the component will be all in one place. Developers will be clearer about the consequences of changing some code.
 
-If we annotate our logic with types, it’s easy to understand components from a data presentation perspective too.
+ Types should to make it easy to understand components from a data presentation perspective.
 
 ## Status
 

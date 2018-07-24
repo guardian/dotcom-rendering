@@ -10,7 +10,7 @@ Having multiple repos expresses the intention that parts of our code can be used
 
 We will keep all the code for componentisation solution in one repo makes the dotcom frontend easy to setup. The code shares code style rules, keeping it consistent.
 
-We will organise the code as a monorepo, expressing the intention that some of our code (GUUI and Pasteup) should remain decoupled from the dotcom frontend website. Changes to these libraries can be published separately.
+We will organise the code as a monorepo, expressing the intention that some of our code (GUUI and Pasteup) should remain decoupled from the dotcom frontend website. Changes to these libraries will be published separately.
 
 ## Status
 

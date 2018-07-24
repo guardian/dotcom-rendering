@@ -10,7 +10,7 @@ Styled Components and Emotion support more complex features and have a similar A
 
 ## Decision
 
-To use Emotion as our CSS-in-JS library.
+We will Emotion as our CSS-in-JS library.
 
 ## Status
 
