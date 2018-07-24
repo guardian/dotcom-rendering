@@ -44,7 +44,7 @@ const Div = styled('div')({
             display: 'inline-block',
             width: '4px',
             height: '4px',
-            transform: 'translateY(2px) rotate(45deg)',
+            transform: 'translateY(-2px) rotate(45deg)',
             border: '1px solid currentColor',
             borderLeft: 'transparent',
             borderTop: 'transparent',
@@ -164,16 +164,22 @@ export default class Dropdown extends Component<Props> {
     render() {
         const { label, links } = this.props;
 
+        // needs to be unique to allow multiple dropdowns on same page
+        // this should be unique because JS is single-threaded
+        const id = `id-${Date.now()}`;
+
         return (
             <Div>
                 <button
                     onClick={this.toggle}
                     className={this.state.isExpanded ? 'expanded' : ''}
+                    aria-controls={id}
+                    aria-expanded={this.state.isExpanded ? 'true' : 'false'}
                 >
                     {label}
                 </button>
                 {this.state.isExpanded && (
-                    <ul>
+                    <ul id={id}>
                         {links.map(link => (
                             <li key={link.title}>
                                 <a
