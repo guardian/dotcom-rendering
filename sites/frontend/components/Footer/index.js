@@ -199,7 +199,7 @@ type Props = {
 const FooterLinks = ({ links }: Props) => {
     const linkGroups = links.map(linkGroup => {
         const ls = linkGroup.map(l => (
-            <li>
+            <li key={l.url}>
                 <a href={l.url}>{l.title}</a>
             </li>
         ));
