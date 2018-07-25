@@ -4,13 +4,14 @@
 import path from 'path';
 import express from 'express';
 import type { $Request, $Response } from 'express';
-
+import recordBaselineCloudWatchMetrics from './lib/metrics-baseline';
 import document from '../../frontend/document';
 import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
 
 const render = async ({ params, body }: $Request, res: $Response) => {
     try {
+
         const { page } = params;
         const data = {
             site: 'frontend',
@@ -30,6 +31,7 @@ export default () => render;
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
+
     const app = express();
 
     app.use(express.json({ limit: '50mb' }));
@@ -80,5 +82,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use((err, req, res, next) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
+
+    setInterval(() => {
+        recordBaselineCloudWatchMetrics()
+    }, 10 * 1000);
+
     app.listen(9000);
 }
