@@ -21,8 +21,8 @@ const container = document.getElementById('app');
 if (container) {
     /**
      * TODO: Remove conditional when Emotion's issue is resolved.
-     * We're having to prevent emotion hydrating styles in the browser 
-     * in development mode to retain the sourceMap info. As detailed 
+     * We're having to prevent emotion hydrating styles in the browser
+     * in development mode to retain the sourceMap info. As detailed
      * in the issue raised here https://github.com/emotion-js/emotion/issues/487
      */
     if (process.env.NODE_ENV !== 'development') {
