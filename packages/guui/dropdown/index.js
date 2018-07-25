@@ -190,6 +190,7 @@ export default class Dropdown extends Component<Props> {
             <Div>
                 {this.state.noJS ? (
                     [
+                        // eslint-disable-next-line jsx-a11y/label-has-for
                         <label
                             htmlFor={checkboxID}
                             className={this.state.isExpanded ? 'expanded' : ''}
@@ -197,7 +198,6 @@ export default class Dropdown extends Component<Props> {
                             aria-expanded={
                                 this.state.isExpanded ? 'true' : 'false'
                             }
-                            tabIndex="0"
                         >
                             {label}
                         </label>,
