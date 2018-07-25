@@ -20,4 +20,12 @@ module.exports = {
             },
         ],
     ],
+    env: {
+        production: {
+            plugins: [['emotion', { sourceMap: false }]],
+        },
+        development: {
+            plugins: [['emotion', { sourceMap: true }]],
+        },
+    },
 };
