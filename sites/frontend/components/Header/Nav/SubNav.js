@@ -34,7 +34,7 @@ const SubNav = ({ parent, links }: Props) => {
 
     if (parent) {
         const parentLink = (
-            <li>
+            <li key={parent.url}>
                 <a className="parent" href={parent.url}>
                     {parent.title}
                 </a>
