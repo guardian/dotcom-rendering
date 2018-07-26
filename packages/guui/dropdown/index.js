@@ -8,10 +8,10 @@ import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
-type Link = {
+export type Link = {
     url: string,
     title: string,
-    isActive: boolean,
+    isActive?: boolean,
 };
 
 type Props = {
@@ -145,16 +145,18 @@ const NoJSCheckbox = styled('input')({
     },
 });
 
-export default class Dropdown extends Component<Props> {
+export default class Dropdown extends Component<
+    Props,
+    { isExpanded: boolean, noJS: boolean },
+> {
     constructor(props: Props) {
         super(props);
         this.state = { isExpanded: false, noJS: true };
         this.toggle = this.toggle.bind(this);
     }
 
-    // hide on ESC key
     componentDidMount() {
-        const dismiss = event => {
+        const dismiss = (event: KeyboardEvent) => {
             const escKey = 27;
             if (event.keyCode === escKey) {
                 this.setState(() => ({
@@ -172,6 +174,7 @@ export default class Dropdown extends Component<Props> {
         });
     }
 
+    toggle: () => void; // indicate method writable for flow so can bind in constructor
     toggle() {
         this.setState(prevState => ({
             isExpanded: !prevState.isExpanded,

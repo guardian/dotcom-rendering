@@ -1,5 +1,6 @@
 // @flow
 import Dropdown from '@guardian/guui/dropdown';
+import type { Link } from '@guardian/guui/dropdown';
 
 import { styled } from '@guardian/guui';
 
@@ -10,7 +11,7 @@ const EditionDropdown = styled('div')({
 });
 
 export default () => {
-    const links = [
+    const links: Array<Link> = [
         {
             url: '/preference/edition/uk',
             title: 'UK Edition',
