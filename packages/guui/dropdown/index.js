@@ -15,6 +15,7 @@ export type Link = {
 };
 
 type Props = {
+    id: string,
     label: string,
     links: Array<Link>,
 };
@@ -186,14 +187,13 @@ export default class Dropdown extends Component<
 
         // needs to be unique to allow multiple dropdowns on same page
         // this should be unique because JS is single-threaded
-        const dropdownID = `dropbox-id-${Date.now()}`;
-        const checkboxID = `checkbox-id-${Date.now()}`;
+        const dropdownID = `dropbox-id-${this.props.id}`;
+        const checkboxID = `checkbox-id-${this.props.id}`;
 
         return (
             <Div>
                 {this.state.noJS ? (
                     [
-                        // eslint-disable-next-line jsx-a11y/label-has-for
                         <label
                             htmlFor={checkboxID}
                             className={this.state.isExpanded ? 'expanded' : ''}

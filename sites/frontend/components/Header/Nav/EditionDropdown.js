@@ -33,7 +33,7 @@ export default () => {
 
     return (
         <EditionDropdown>
-            <Dropdown label="UK Edition" links={links} />
+            <Dropdown label="UK Edition" links={links} id="edition" />
         </EditionDropdown>
     );
 };
