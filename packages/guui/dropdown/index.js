@@ -153,7 +153,8 @@ export default class Dropdown extends Component<
     constructor(props: Props) {
         super(props);
         this.state = { isExpanded: false, noJS: true };
-        this.toggle = this.toggle.bind(this);
+        // eslint-disable-next-line no-underscore-dangle
+        this.toggle_ = this.toggle.bind(this);
     }
 
     componentDidMount() {
@@ -175,7 +176,8 @@ export default class Dropdown extends Component<
         });
     }
 
-    toggle: () => void; // indicate method writable for flow so can bind in constructor
+    toggle_: () => void;
+
     toggle() {
         this.setState(prevState => ({
             isExpanded: !prevState.isExpanded,
@@ -216,7 +218,7 @@ export default class Dropdown extends Component<
                     ]
                 ) : (
                     <button
-                        onClick={this.toggle}
+                        onClick={this.toggle_}
                         className={this.state.isExpanded ? 'expanded' : ''}
                         aria-controls={dropdownID}
                         aria-expanded={this.state.isExpanded ? 'true' : 'false'}
