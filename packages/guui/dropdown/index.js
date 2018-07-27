@@ -57,6 +57,13 @@ const Div = styled('div')({
         },
     },
 
+    input: {
+        ...screenReaderOnly,
+        ':checked + ul': {
+            display: 'block',
+        },
+    },
+
     'button.expanded:after, label.expanded:after': {
         transform: 'translateY(1px) rotate(-135deg)',
     },
@@ -139,13 +146,6 @@ const Div = styled('div')({
     },
 });
 
-const NoJSCheckbox = styled('input')({
-    ...screenReaderOnly,
-    ':checked + ul': {
-        display: 'block',
-    },
-});
-
 export default class Dropdown extends Component<
     Props,
     { isExpanded: boolean, noJS: boolean },
@@ -202,16 +202,17 @@ export default class Dropdown extends Component<
                                 this.state.isExpanded ? 'true' : 'false'
                             }
                         >
+                            <input
+                                type="checkbox"
+                                id={checkboxID}
+                                aria-controls={dropdownID}
+                                aria-checked="false"
+                                tabIndex="-1"
+                                key="OpenMainMenuCheckbox"
+                                role="menuitemcheckbox"
+                            />
                             {label}
                         </label>,
-                        <NoJSCheckbox
-                            type="checkbox"
-                            id={checkboxID}
-                            aria-controls={dropdownID}
-                            tabIndex="-1"
-                            key="OpenMainMenuCheckbox"
-                            role="menuitemcheckbox"
-                        />,
                     ]
                 ) : (
                     <button
