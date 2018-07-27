@@ -153,7 +153,6 @@ export default class Dropdown extends Component<
     constructor(props: Props) {
         super(props);
         this.state = { isExpanded: false, noJS: true };
-        // eslint-disable-next-line no-underscore-dangle
         this.toggle_ = this.toggle.bind(this);
     }
 
