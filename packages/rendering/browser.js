@@ -4,7 +4,7 @@
 
 import { hydrateApp, hydrateCSS } from '@guardian/guui';
 
-import 'ophan-tracker-js/build/ophan.ng';
+import 'ophan-tracker-js';
 
 // $FlowFixMe: shut up, flow
 import Page from '../../sites/__SITE__/pages/__PAGE__'; // eslint-disable-line import/no-unresolved,import/extensions
