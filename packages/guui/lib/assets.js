@@ -22,5 +22,5 @@ const CDN = stage
 export default {
     dist: (path: string): string => `${CDN}assets/${assetHash[path] || path}`,
     static: (path: string): string =>
-        `${CDN}static/__SITE__/${assetHash[path] || path}`,
+        `${CDN}static/frontend/${assetHash[path] || path}`,
 };

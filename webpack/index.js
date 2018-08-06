@@ -35,11 +35,6 @@ const common = ({ platform, site, page = '' }) => ({
                         options: {
                             multiple: [
                                 {
-                                    search: '__SITE__',
-                                    replace: site,
-                                    flags: 'g',
-                                },
-                                {
                                     search: '__PAGE__',
                                     replace: page,
                                     flags: 'g',
