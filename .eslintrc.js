@@ -21,6 +21,7 @@ module.exports = {
     ],
     plugins: ['flowtype', 'react', 'prettier', 'jsx-a11y'],
     rules: {
+        'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
         'react/react-in-jsx-scope': 'off',
         'react/prop-types': 'off',
