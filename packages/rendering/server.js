@@ -5,8 +5,8 @@ import path from 'path';
 import express from 'express';
 import type { $Request, $Response } from 'express';
 
-import document from '../../sites/frontend/document';
-import Article from '../../sites/frontend/pages/Article';
+import document from '../../frontend/document';
+import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
 
 const render = async ({ params, body }: $Request, res: $Response) => {
@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
             express.static(
                 path.relative(
                     __dirname,
-                    path.resolve(root, 'sites', 'frontend', 'static'),
+                    path.resolve(root, 'frontend', 'static'),
                 ),
             ),
         );

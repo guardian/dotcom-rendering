@@ -5,10 +5,10 @@
 import { hydrateApp, hydrateCSS } from '@guardian/guui';
 
 // $FlowFixMe: shut up, flow
-import Page from '../../sites/frontend/pages/__PAGE__'; // eslint-disable-line import/no-unresolved,import/extensions
+import Page from '../../frontend/pages/__PAGE__'; // eslint-disable-line import/no-unresolved,import/extensions
 
 // $FlowFixMe: shut up, flow
-import App from '../../sites/frontend/App'; // eslint-disable-line import/no-unresolved,import/extensions
+import App from '../../frontend/App'; // eslint-disable-line import/no-unresolved,import/extensions
 
 const { data, cssIDs } = window.gu.app;
 

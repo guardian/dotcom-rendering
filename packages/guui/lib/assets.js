@@ -9,7 +9,7 @@ try {
     // do nothing
 }
 
-// GU_STAGE is set in sites/frontend/cloudformation.yml, so will be undefined locally
+// GU_STAGE is set in frontend/cloudformation.yml, so will be undefined locally
 const stage =
     typeof process.env.GU_STAGE === 'string'
         ? process.env.GU_STAGE.toUpperCase()

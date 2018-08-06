@@ -82,35 +82,32 @@ const common = ({ platform, site, page = '' }) => ({
     ].filter(Boolean),
 });
 
-module.exports = getSites()
-    .then(sites =>
-        Promise.all(
-            sites.map(site =>
-                getPagesForSite(site).then(pages => [
-                    // server bundle config
-                    merge(
-                        require(`./server`)({ site }),
-                        common({
-                            platform: 'server',
-                            site,
-                        }),
-                    ),
-
-                    // browser bundle configs
-                    ...pages.map(page =>
-                        merge(
-                            require(`./browser`)({ site, page }),
-                            common({
-                                platform: 'browser',
-                                site,
-                                page,
-                            }),
-                        ),
-                    ),
-                ]),
+module.exports = Promise.all(
+    getSites.map(site =>
+        getPagesForSite(site).then(pages => [
+            // server bundle config
+            merge(
+                require(`./server`)({ site }),
+                common({
+                    platform: 'server',
+                    site,
+                }),
             ),
-        ),
-    )
+
+            // browser bundle configs
+            ...pages.map(page =>
+                merge(
+                    require(`./browser`)({ site, page }),
+                    common({
+                        platform: 'browser',
+                        site,
+                        page,
+                    }),
+                ),
+            ),
+        ]),
+    ),
+)
     // flatten the nested page configs:
     // [site, [page1]] => [site, page1]
     .then(configs => [].concat(...configs));

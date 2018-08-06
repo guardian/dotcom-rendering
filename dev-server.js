@@ -13,7 +13,7 @@ const inquirer = require('inquirer');
 const { getSites, getPagesForSite, root } = require('./config');
 
 const pickSite = async () => {
-    const sites = await getSites();
+    const sites = getSites;
     if (sites.length === 1) return sites[0];
     return inquirer
         .prompt([
@@ -33,10 +33,7 @@ const go = async site => {
 
     const app = express();
 
-    app.use(
-        '/static/:site',
-        express.static(path.join(root, 'sites', site, 'static')),
-    );
+    app.use('/static/:site', express.static(path.join(root, site, 'static')));
 
     app.use(
         webpackDevMiddleware(compiler, {
