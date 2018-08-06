@@ -158,8 +158,8 @@ export default class Dropdown extends Component<
 
     componentDidMount() {
         const dismiss = (event: KeyboardEvent) => {
-            const escKey = 27;
-            if (event.keyCode === escKey) {
+            const escKey = 'Escape';
+            if (event.code === escKey) {
                 this.setState(() => ({
                     isExpanded: false,
                 }));
