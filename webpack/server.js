@@ -1,8 +1,9 @@
 const entryFile = require.resolve('@guardian/rendering/server');
+const { siteName } = require('../config');
 
-module.exports = ({ site }) => ({
+module.exports = () => ({
     entry: {
-        [`${site}.server`]: entryFile,
+        [`${siteName}.server`]: entryFile,
     },
     output: {
         filename: `[name].js`,

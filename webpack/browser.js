@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
+const { siteName } = require('../config');
 
 const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
@@ -21,9 +22,9 @@ const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
 // used to stop multiple compilers overwriting other compiler's data
 const manifestData = {};
 
-module.exports = ({ site, page }) => ({
+module.exports = ({ page }) => ({
     entry: {
-        [`${site}.${page.toLowerCase()}`]: [
+        [`${siteName}.${page.toLowerCase()}`]: [
             DEV &&
                 'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
             require.resolve(`@guardian/rendering/browser`),

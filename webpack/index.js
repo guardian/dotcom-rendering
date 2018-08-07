@@ -4,14 +4,14 @@ const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../lib/report-bundle-size');
 const Progress = require('../lib/webpack-progress');
-const { root, dist, sites, getPagesForSite } = require('../config');
+const { root, dist, siteName, getPagesForSite } = require('../config');
 
 const PROD = process.env.NODE_ENV === 'production';
 
 const reportBundleSize = new ReportBundleSize();
 const progress = new Progress();
 
-const common = ({ platform, site, page = '' }) => ({
+const common = ({ platform, page = '' }) => ({
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
@@ -70,7 +70,7 @@ const common = ({ platform, site, page = '' }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
-        !process.env.TEAMCITY && progress(`${site}.${platform}.${page}`),
+        !process.env.TEAMCITY && progress(`${siteName}.${platform}.${page}`),
         PROD && !process.env.HIDE_BUNDLES && reportBundleSize,
         PROD &&
             new BundleAnalyzerPlugin({
@@ -82,32 +82,27 @@ const common = ({ platform, site, page = '' }) => ({
     ].filter(Boolean),
 });
 
-module.exports = Promise.all(
-    sites.map(site =>
-        getPagesForSite(site).then(pages => [
-            // server bundle config
+module.exports = getPagesForSite()
+    .then(pages => [
+        // server bundle config
+        merge(
+            require(`./server`)(),
+            common({
+                platform: 'server',
+            }),
+        ),
+
+        // browser bundle configs
+        ...pages.map(page =>
             merge(
-                require(`./server`)({ site }),
+                require(`./browser`)({ page }),
                 common({
-                    platform: 'server',
-                    site,
+                    platform: 'browser',
+                    page,
                 }),
             ),
-
-            // browser bundle configs
-            ...pages.map(page =>
-                merge(
-                    require(`./browser`)({ site, page }),
-                    common({
-                        platform: 'browser',
-                        site,
-                        page,
-                    }),
-                ),
-            ),
-        ]),
-    ),
-)
+        ),
+    ])
     // flatten the nested page configs:
     // [site, [page1]] => [site, page1]
     .then(configs => [].concat(...configs));

@@ -9,16 +9,18 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const { sites, getPagesForSite, root } = require('./config');
+const { siteName, getPagesForSite, root } = require('./config');
 
 const go = async () => {
-    const site = sites[0];
     const webpackConfig = await require('./webpack');
     const compiler = await webpack(webpackConfig);
 
     const app = express();
 
-    app.use('/static/:site', express.static(path.join(root, site, 'static')));
+    app.use(
+        `/static/${siteName}`,
+        express.static(path.join(root, siteName, 'static')),
+    );
 
     app.use(
         webpackDevMiddleware(compiler, {
@@ -40,7 +42,7 @@ const go = async () => {
     );
 
     app.get(
-        `/${site}/:page`,
+        `/${siteName}/:page`,
         async (req, res, next) => {
             const { html, ...config } = await fetch(
                 `${req.query.url ||
@@ -51,21 +53,21 @@ const go = async () => {
             next();
         },
         webpackHotServerMiddleware(compiler, {
-            chunkName: `${site}.server`,
+            chunkName: `${siteName}.server`,
         }),
     );
 
-    app.get(`/${site}`, async (req, res) => {
-        const pages = await getPagesForSite(site);
+    app.get(`/${siteName}`, async (req, res) => {
+        const pages = await getPagesForSite();
         const pageList = pages.map(
             page =>
-                `<li><a href="${site}/${page}"><code>${page}</code></a></li>`,
+                `<li><a href="${siteName}/${page}"><code>${page}</code></a></li>`,
         );
         res.send(`
         <!DOCTYPE html>
         <html>
         <body>
-            <pre>Pages for ${site}:</pre>
+            <pre>Pages for ${siteName}:</pre>
             ${pageList.join('\n')}
         </body>
         </html>
@@ -73,7 +75,7 @@ const go = async () => {
     });
 
     app.get('*', (req, res) => {
-        res.redirect(`/${site}`);
+        res.redirect(`/${siteName}`);
     });
 
     // eslint-disable-next-line no-unused-vars

@@ -2,9 +2,9 @@ const { resolve } = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
 
-const sites = ['frontend'];
-const getPagesForSite = (site = '*') =>
-    glob('*.js', { cwd: `${site}/pages` }).then(paths =>
+const siteName = 'frontend';
+const getPagesForSite = () =>
+    glob('*.js', { cwd: `${siteName}/pages` }).then(paths =>
         paths.map(path => path.replace(/\.[^/.]+$/, '')),
     );
 
@@ -17,5 +17,5 @@ module.exports = {
     root,
     target,
     getPagesForSite,
-    sites,
+    siteName,
 };
