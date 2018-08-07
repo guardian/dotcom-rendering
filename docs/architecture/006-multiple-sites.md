@@ -20,4 +20,5 @@ If this complexity cannot be contained, or if it adds too much friction to dotco
 
 ## Status
 
-Proposed
+Superseded by
+[007-multiple-sites-revisited.md](007-multiple-sites-revisited.md).
