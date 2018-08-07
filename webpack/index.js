@@ -4,7 +4,7 @@ const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../lib/report-bundle-size');
 const Progress = require('../lib/webpack-progress');
-const { root, dist, getSites, getPagesForSite } = require('../config');
+const { root, dist, sites, getPagesForSite } = require('../config');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -83,7 +83,7 @@ const common = ({ platform, site, page = '' }) => ({
 });
 
 module.exports = Promise.all(
-    getSites.map(site =>
+    sites.map(site =>
         getPagesForSite(site).then(pages => [
             // server bundle config
             merge(

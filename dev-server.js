@@ -9,10 +9,10 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const { getSites, getPagesForSite, root } = require('./config');
+const { sites, getPagesForSite, root } = require('./config');
 
 const go = async () => {
-    const site = getSites[0];
+    const site = sites[0];
     const webpackConfig = await require('./webpack');
     const compiler = await webpack(webpackConfig);
 
