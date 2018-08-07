@@ -9,7 +9,7 @@ try {
     // do nothing
 }
 
-// GU_STAGE is set in sites/frontend/cloudformation.yml, so will be undefined locally
+// GU_STAGE is set in frontend/cloudformation.yml, so will be undefined locally
 const stage =
     typeof process.env.GU_STAGE === 'string'
         ? process.env.GU_STAGE.toUpperCase()
@@ -22,5 +22,5 @@ const CDN = stage
 export default {
     dist: (path: string): string => `${CDN}assets/${assetHash[path] || path}`,
     static: (path: string): string =>
-        `${CDN}static/__SITE__/${assetHash[path] || path}`,
+        `${CDN}static/frontend/${assetHash[path] || path}`,
 };

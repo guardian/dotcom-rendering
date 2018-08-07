@@ -4,7 +4,7 @@ const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../lib/report-bundle-size');
 const Progress = require('../lib/webpack-progress');
-const { root, dist, getSites, getPagesForSite } = require('../config');
+const { root, dist, sites, getPagesForSite } = require('../config');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -34,11 +34,6 @@ const common = ({ platform, site, page = '' }) => ({
                         loader: 'string-replace-loader',
                         options: {
                             multiple: [
-                                {
-                                    search: '__SITE__',
-                                    replace: site,
-                                    flags: 'g',
-                                },
                                 {
                                     search: '__PAGE__',
                                     replace: page,
@@ -87,35 +82,32 @@ const common = ({ platform, site, page = '' }) => ({
     ].filter(Boolean),
 });
 
-module.exports = getSites()
-    .then(sites =>
-        Promise.all(
-            sites.map(site =>
-                getPagesForSite(site).then(pages => [
-                    // server bundle config
-                    merge(
-                        require(`./server`)({ site }),
-                        common({
-                            platform: 'server',
-                            site,
-                        }),
-                    ),
-
-                    // browser bundle configs
-                    ...pages.map(page =>
-                        merge(
-                            require(`./browser`)({ site, page }),
-                            common({
-                                platform: 'browser',
-                                site,
-                                page,
-                            }),
-                        ),
-                    ),
-                ]),
+module.exports = Promise.all(
+    sites.map(site =>
+        getPagesForSite(site).then(pages => [
+            // server bundle config
+            merge(
+                require(`./server`)({ site }),
+                common({
+                    platform: 'server',
+                    site,
+                }),
             ),
-        ),
-    )
+
+            // browser bundle configs
+            ...pages.map(page =>
+                merge(
+                    require(`./browser`)({ site, page }),
+                    common({
+                        platform: 'browser',
+                        site,
+                        page,
+                    }),
+                ),
+            ),
+        ]),
+    ),
+)
     // flatten the nested page configs:
     // [site, [page1]] => [site, page1]
     .then(configs => [].concat(...configs));

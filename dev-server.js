@@ -8,35 +8,17 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const inquirer = require('inquirer');
 
-const { getSites, getPagesForSite, root } = require('./config');
+const { sites, getPagesForSite, root } = require('./config');
 
-const pickSite = async () => {
-    const sites = await getSites();
-    if (sites.length === 1) return sites[0];
-    return inquirer
-        .prompt([
-            {
-                type: 'list',
-                message: 'Which site do you want to run?',
-                choices: sites,
-                name: 'site',
-            },
-        ])
-        .then(({ site }) => site);
-};
-
-const go = async site => {
+const go = async () => {
+    const site = sites[0];
     const webpackConfig = await require('./webpack');
     const compiler = await webpack(webpackConfig);
 
     const app = express();
 
-    app.use(
-        '/static/:site',
-        express.static(path.join(root, 'sites', site, 'static')),
-    );
+    app.use('/static/:site', express.static(path.join(root, site, 'static')));
 
     app.use(
         webpackDevMiddleware(compiler, {
@@ -102,4 +84,4 @@ const go = async site => {
     app.listen(3000);
 };
 
-pickSite().then(go);
+go();
