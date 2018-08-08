@@ -7,7 +7,7 @@ import { extractCritical } from 'emotion-server';
 import React, { Component } from 'react';
 import { hydrate as hydrateApp, render } from 'react-dom';
 import { renderToString as reactRenderToString } from 'react-dom/server';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 
 type renderToStringResult = {
     html: string,
@@ -25,5 +25,6 @@ export {
     renderToString,
     hydrateCSS,
     styled,
+    css,
     Component,
 };
