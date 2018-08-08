@@ -4,10 +4,10 @@
  */
 
 import { Component } from 'react';
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+// import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 export type Link = {
     url: string,
@@ -21,131 +21,139 @@ type Props = {
     links: Array<Link>,
 };
 
-const Div = styled('div')({
-    'button, label': {
-        display: 'block',
-        cursor: 'pointer',
-        background: 'none',
-        border: 'none',
-        lineHeight: 1.2,
+const input = css`
+    // TODO re-add screen-reader only mixin
+    :checked + ul {
+        display: block;
+    }
+`;
 
-        fontSize: 14,
-        fontFamily: textSans,
-        color: palette.neutral['1'],
-        transition: 'color 80ms ease-out',
-        padding: '6px 10px',
-        margin: '1px 0 0',
-        textDecoration: 'none',
-        ':hover': {
-            textDecoration: 'underline',
-        },
-        ':focus': {
-            textDecoration: 'underline',
-        },
+const ul = css`
+    z-index: 1072;
+    list-style: none;
+    background-color: white;
+    padding: 6px 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    position: absolute;
+    right: 0;
+    width: 200px;
+    display: none;
+`;
 
-        ':after': {
-            content: '""',
-            display: 'inline-block',
-            width: '4px',
-            height: '4px',
-            transform: 'translateY(-2px) rotate(45deg)',
-            border: '1px solid currentColor',
-            borderLeft: 'transparent',
-            borderTop: 'transparent',
-            marginLeft: '6px',
-            verticalAlign: 'middle',
-            transition: 'transform 250ms ease-out',
-        },
-    },
+const ulExpanded = css`
+    ${ul};
+    display: block;
+`;
 
-    input: {
-        ...screenReaderOnly,
-        ':checked + ul': {
-            display: 'block',
-        },
-    },
+const link = css`
+    font-size: 15px;
+    font-family: ${textSans};
+    color: ${palette.neutral['1']};
+    line-height: 1.2;
+    position: relative;
+    transition: color 80ms ease-out;
+    padding: 6px 10px;
+    margin: -1px 0 0 0;
+    text-decoration: none;
 
-    'button.expanded:after, label.expanded:after': {
-        transform: 'translateY(1px) rotate(-135deg)',
-    },
+    display: block;
+    padding: 10px 18px 15px 30px;
 
-    ul: {
-        zIndex: 1072,
-        listStyle: 'none',
-        backgroundColor: 'white',
-        padding: '6px 0',
-        boxShadow: '0 0 0 1px rgba(0,0,0,0.1)',
-        borderRadius: '3px',
-        position: 'absolute',
-        right: '0',
-        width: '200px',
-        display: 'none',
-    },
+    :hover {
+        text-decoration: underline;
+        background-color: #ededed;
+        text-decoration: none;
+    }
 
-    'ul.expanded': {
-        display: 'block',
-    },
+    :focus {
+        text-decoration: underline;
+    }
 
-    'li a': {
-        display: 'block',
-        padding: '10px 18px 15px 30px',
-    },
+    :before {
+        content: '';
+        border-top: 1px solid #ededed;
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 30px;
+        right: 0px;
+    }
+`;
 
-    a: {
-        fontSize: '15px',
-        fontFamily: textSans,
-        color: palette.neutral['1'],
-        lineHeight: 1.2,
-        position: 'relative',
-        transition: 'color 80ms ease-out',
-        padding: '6px 10px',
-        margin: '-1px 0 0 0',
-        textDecoration: 'none',
-        ':hover': {
-            textDecoration: 'underline',
-        },
-        ':focus': {
-            textDecoration: 'underline',
-        },
+const linkActive = css`
+    ${link};
 
-        ':before': {
-            content: '""',
-            borderTop: '1px solid #ededed',
-            display: 'block',
-            position: 'absolute',
-            top: 0,
-            left: '30px',
-            right: 0,
-        },
-    },
+    font-weight: bold;
 
-    // no top border for first item
-    'li:first-child a:before': {
-        content: 'none',
-    },
+    :after {
+        content: '';
+        border: 2px solid #c70000;
+        border-top: 0px;
+        border-right: 0px;
+        position: absolute;
+        top: 14px;
+        left: 10px;
+        width: 10px;
+        height: 4px;
+        transform: rotate(-45deg);
+    }
+`;
 
-    'a:hover': {
-        backgroundColor: '#ededed',
-        textDecoration: 'none',
-    },
+const linkFirst = css`
+    :before {
+        content: none;
+    }
+`;
 
-    'a.active': {
-        fontWeight: 'bold',
+const button = css`
+    display: block;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1.2;
+    font-size: 14px;
+    font-family: ${textSans};
+    color: ${palette.neutral['1']};
+    transition: color 80ms ease-out;
+    padding: 6px 10px;
+    margin: 1px 0 0;
+    text-decoration: none;
 
-        ':after': {
-            content: '""',
-            border: '2px solid #c70000',
-            borderTop: 0,
-            borderRight: 0,
-            position: 'absolute',
-            top: '14px',
-            left: '10px',
-            width: '10px',
-            height: '4px',
-            transform: 'rotate(-45deg)',
-        },
-    },
-});
+    :hover {
+        text-decoration: underline;
+    }
+
+    :focus {
+        text-decoration: underline;
+    }
+
+    :after {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        transform: translateY(-2px) rotate(45deg);
+        border: 1px solid currentColor;
+        border-left: transparent;
+        border-top: transparent;
+        margin-left: 6px;
+        vertical-align: middle;
+        transition: transform 250ms ease-out;
+    }
+
+    .expanded:after,
+    .expanded:after {
+        transform: translateY(1px) rotate(-135deg);
+    }
+`;
+
+const buttonExpanded = css`
+    ${button};
+    :after {
+        transform: translateY(1px) rotate(-135deg);
+    }
+`;
 
 export default class Dropdown extends Component<
     Props,
@@ -193,18 +201,21 @@ export default class Dropdown extends Component<
         const checkboxID = `checkbox-id-${this.props.id}`;
 
         return (
-            <Div>
+            <div>
                 {this.state.noJS ? (
                     [
                         <label
                             htmlFor={checkboxID}
-                            className={this.state.isExpanded ? 'expanded' : ''}
+                            className={
+                                this.state.isExpanded ? buttonExpanded : button
+                            }
                             aria-controls={dropdownID}
                             aria-expanded={
                                 this.state.isExpanded ? 'true' : 'false'
                             }
                         >
                             <input
+                                className={input}
                                 type="checkbox"
                                 id={checkboxID}
                                 aria-controls={dropdownID}
@@ -219,7 +230,9 @@ export default class Dropdown extends Component<
                 ) : (
                     <button
                         onClick={this.toggle_}
-                        className={this.state.isExpanded ? 'expanded' : ''}
+                        className={
+                            this.state.isExpanded ? buttonExpanded : button
+                        }
                         aria-controls={dropdownID}
                         aria-expanded={this.state.isExpanded ? 'true' : 'false'}
                     >
@@ -229,20 +242,22 @@ export default class Dropdown extends Component<
 
                 <ul
                     id={dropdownID}
-                    className={this.state.isExpanded ? 'expanded' : ''}
+                    className={this.state.isExpanded ? ulExpanded : ul}
                 >
-                    {links.map(link => (
-                        <li key={link.title}>
+                    {links.map((l, index) => (
+                        <li key={l.title}>
                             <a
-                                href={link.url}
-                                className={link.isActive ? 'active' : ''}
+                                href={l.url}
+                                className={`${l.isActive ? linkActive : link} ${
+                                    index === 0 ? linkFirst : ''
+                                }`}
                             >
-                                {link.title}
+                                {l.title}
                             </a>
                         </li>
                     ))}
                 </ul>
-            </Div>
+            </div>
         );
     }
 }
