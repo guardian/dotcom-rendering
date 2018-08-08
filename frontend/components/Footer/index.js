@@ -1,5 +1,5 @@
 // @flow
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
@@ -184,13 +184,20 @@ const Footer = styled('footer')({
         paddingBottom: '6px',
     },
 
-    '.copyright': {
-        fontSize: '12px',
-        padding: '6px 0 18px',
-        borderTop: '1px solid #434343',
-        marginTop: '12px',
-    },
+    // '.copyright': {
+    //     fontSize: '12px',
+    //     padding: '6px 0 18px',
+    //     borderTop: '1px solid #434343',
+    //     marginTop: '12px',
+    // },
 });
+
+const copyright = css`
+    font-size: 12px;
+    padding: 6px 0 18px;
+    border-top: 1px solid #434343;
+    margin-top: 12px;
+`;
 
 type Props = {
     links: Array<Array<Link>>,
@@ -226,7 +233,7 @@ export default () => (
                 frameBorder="0"
             />
             <FooterLinks links={footerLinks} />
-            <div className="copyright">
+            <div className={copyright}>
                 © 2018 Guardian News and Media Limited or its affiliated
                 companies. All rights reserved.
             </div>
