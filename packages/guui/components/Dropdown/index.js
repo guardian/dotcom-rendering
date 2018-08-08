@@ -3,7 +3,8 @@
  * A dropdown component
  */
 
-import { styled, Component } from '@guardian/guui';
+import { Component } from 'react';
+import styled from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';

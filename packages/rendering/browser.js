@@ -2,7 +2,8 @@
 
 // __PAGE__ string is replaced by string-replace-loader in webpack.config.js
 
-import { hydrateApp, hydrateCSS } from '@guardian/guui';
+import { hydrate as hydrateCSS } from 'emotion';
+import { hydrate as hydrateApp } from 'react-dom';
 
 import 'ophan-tracker-js';
 

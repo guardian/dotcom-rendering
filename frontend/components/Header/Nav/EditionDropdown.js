@@ -1,6 +1,6 @@
 // @flow
-import Dropdown from '@guardian/guui/dropdown';
-import type { Link } from '@guardian/guui/dropdown';
+import Dropdown from '@guardian/guui/components/Dropdown';
+import type { Link } from '@guardian/guui/components/Dropdown';
 
 import styled from 'react-emotion';
 

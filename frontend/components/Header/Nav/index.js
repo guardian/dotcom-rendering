@@ -3,7 +3,7 @@
 import { Component } from 'react';
 import styled from 'react-emotion';
 import { connect } from 'unistore/react';
-import { Row, Cols } from '@guardian/guui/grid';
+import { Row, Cols } from '@guardian/guui/components/Grid';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 

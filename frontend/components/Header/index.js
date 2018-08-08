@@ -1,6 +1,5 @@
 // @flow
 import styled from 'react-emotion';
-
 import { tablet } from '@guardian/pasteup/breakpoints';
 
 import Nav from './Nav';

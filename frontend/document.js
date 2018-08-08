@@ -3,8 +3,8 @@
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 
-import assets from '@guardian/guui/lib/assets';
-import htmlTemplate from '@guardian/guui/htmlTemplate';
+import assets from './lib/assets';
+import htmlTemplate from './htmlTemplate';
 
 import parseCAPI from './lib/parse-capi';
 import App from './App';
