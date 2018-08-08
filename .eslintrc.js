@@ -35,7 +35,7 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['packages/**/*.js', 'sites/**/*.js', 'src/**/*.js'],
+            files: ['packages/**/*.js', 'frontend/**/*.js', 'src/**/*.js'],
             plugins: ['flow-header'],
             rules: {
                 'flow-header/flow-header': 'error',

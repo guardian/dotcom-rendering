@@ -35,16 +35,12 @@ build: clear clean-dist install
 	@NODE_ENV=production webpack --config webpack
 
 start: install
-ifndef site
-	$(call warn, "You need to specifiy which app to run e.g. make start site=xyz")
-else
 	@make stop
-	$(call log, "starting PROD server for $(site)...")
+	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	@NODE_ENV=production pm2 start dist/$(site).server.js
+	@NODE_ENV=production pm2 start dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running at http://localhost:9000")
-endif
 
 stop:
 	@pm2 kill
@@ -56,7 +52,7 @@ monitor:
 
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development node dev-server $(site)
+	@NODE_ENV=development node dev-server frontend
 
 # quality #########################################
 

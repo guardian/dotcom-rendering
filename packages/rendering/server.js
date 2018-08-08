@@ -57,7 +57,7 @@ if (process.env.NODE_ENV === 'production') {
 
     app.get('/', async (req, res) => {
         try {
-            const pages = await getPagesForSite('__SITE__');
+            const pages = await getPagesForSite();
             res.send(`
                 <!DOCTYPE html>
                 <html>
