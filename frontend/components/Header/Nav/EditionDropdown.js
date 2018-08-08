@@ -2,7 +2,7 @@
 import Dropdown from '@guardian/guui/dropdown';
 import type { Link } from '@guardian/guui/dropdown';
 
-import { styled } from '@guardian/guui';
+import styled from 'react-emotion';
 
 const EditionDropdown = styled('div')({
     position: 'absolute',

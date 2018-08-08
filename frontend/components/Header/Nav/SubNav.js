@@ -1,6 +1,6 @@
 // @flow
 
-import { styled } from '@guardian/guui';
+import styled from 'react-emotion';
 import type { LinkType } from './__config__';
 
 type Props = {
