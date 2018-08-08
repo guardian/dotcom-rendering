@@ -1,5 +1,5 @@
 // @flow
-import { styled } from '@guardian/guui';
+import styled from 'react-emotion';
 
 import { headline } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';

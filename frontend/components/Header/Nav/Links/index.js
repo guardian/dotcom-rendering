@@ -1,5 +1,5 @@
 // @flow
-import { styled } from '@guardian/guui';
+import styled from 'react-emotion';
 import { connect } from 'unistore/react';
 
 import SupportTheGuardian from './SupportTheGuardian';

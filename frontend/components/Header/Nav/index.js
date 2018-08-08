@@ -1,6 +1,7 @@
 // @flow
 
-import { styled, Component } from '@guardian/guui';
+import { Component } from 'react';
+import styled from 'react-emotion';
 import { connect } from 'unistore/react';
 import { Row, Cols } from '@guardian/guui/grid';
 import { clearFix } from '@guardian/pasteup/mixins';

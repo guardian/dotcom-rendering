@@ -1,5 +1,6 @@
 // @flow
-import { styled, Component } from '@guardian/guui';
+import { Component } from 'react';
+import styled from 'react-emotion';
 
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';

@@ -1,6 +1,8 @@
 // @flow
 
-import { renderToString } from '@guardian/guui';
+import { extractCritical } from 'emotion-server';
+import { renderToString } from 'react-dom/server';
+
 import assets from '@guardian/guui/lib/assets';
 import htmlTemplate from '@guardian/guui/htmlTemplate';
 
@@ -17,6 +19,12 @@ type Props = {
     Page: React.ComponentType<{}>,
 };
 
+type renderToStringResult = {
+    html: string,
+    css: string,
+    ids: Array<string>,
+};
+
 export default ({ Page, data: { body, ...data } }: Props) => {
     const cleanedData = { ...parseCAPI(body), ...data };
 
@@ -24,8 +32,8 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
     );
 
-    const { html, css, ids: cssIDs } = renderToString(
-        <App data={{ ...cleanedData }} Page={Page} />,
+    const { html, css, ids: cssIDs }: renderToStringResult = extractCritical(
+        renderToString(<App data={{ ...cleanedData }} Page={Page} />),
     );
 
     /**
