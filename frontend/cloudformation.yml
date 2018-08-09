@@ -229,6 +229,22 @@ Resources:
           Fn::FindInMap: [ Constants, App, Value ]
         PropagateAtLaunch: true
 
+  ScaleDownPolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AdjustmentType: ChangeInCapacity
+      AutoScalingGroupName: !Ref AutoscalingGroup
+      Cooldown: '1200'
+      ScalingAdjustment: '-1'
+
+  ScaleUpPolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AdjustmentType: PercentChangeInCapacity
+      AutoScalingGroupName: !Ref AutoscalingGroup
+      Cooldown: '600'
+      ScalingAdjustment: '100'
+
 Outputs:
   LoadBalancerUrl:
     Value:
