@@ -42,6 +42,9 @@ Parameters:
     Type: String
     Description: (Optional) Number of periods over which the latency is compared to the threshold before to send a notification
     Default: '5'
+    
+Conditions:
+    HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
 
 Mappings:
   Constants:
@@ -262,6 +265,7 @@ Resources:
       ScalingAdjustment: '100'
 
   LatencyScalingAlarm:
+    Condition: HasLatencyScalingAlarm
     Properties:
       AlarmDescription: !Sub |
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
