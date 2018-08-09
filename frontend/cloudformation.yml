@@ -26,6 +26,22 @@ Parameters:
   AMI:
     Description: AMI to use for instances
     Type: AWS::EC2::Image::Id
+  LatencyAlarmThreshold:
+    Type: String
+    Description: (Optional) Latency Threshold
+    Default: '0.5'
+  LatencyAlarmPeriod:
+    Type: String
+    Description: (Optional) Duration in seconds over which the latency is applied
+    Default: '60'
+  LatencyScalingEvaluationPeriods:
+    Type: String
+    Description: (Optional) Number of periods over which the latency is compared to the threshold before to scale up
+    Default: '1'
+  LatencyNotificationEvaluationPeriods:
+    Type: String
+    Description: (Optional) Number of periods over which the latency is compared to the threshold before to send a notification
+    Default: '5'
 
 Mappings:
   Constants:
@@ -244,6 +260,27 @@ Resources:
       AutoScalingGroupName: !Ref AutoscalingGroup
       Cooldown: '600'
       ScalingAdjustment: '100'
+      
+  LatencyScalingAlarm:
+    Condition: HasLatencyScalingAlarm
+    Properties:
+      AlarmDescription: !Sub |
+        Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
+      Dimensions:
+      - Name: LoadBalancerName
+        Value: !Ref Elb
+      EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
+      MetricName: Latency
+      Namespace: AWS/ELB
+      Period: !Ref LatencyAlarmPeriod
+      Statistic: Average
+      Threshold: !Ref LatencyAlarmThreshold
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      OKActions:
+      - !Ref ScaleDownPolicy
+      AlarmActions:
+      - !Ref ScaleUpPolicy
+    Type: AWS::CloudWatch::Alarm
 
 Outputs:
   LoadBalancerUrl:
