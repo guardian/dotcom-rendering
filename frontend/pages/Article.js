@@ -9,7 +9,7 @@ import palette from '@guardian/pasteup/palette';
 import { clearFix } from '@guardian/pasteup/mixins';
 
 import Page from '../components/Page';
-import Main from '../components/Main';
+import container from '../components/container';
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -98,7 +98,7 @@ const SeriesLabel = styled(SectionLabel)({
 export default () => (
     <Page>
         <Header />
-        <Main>
+        <main className={container}>
             <article>
                 <Row>
                     <Cols wide={3} leftCol={2}>
@@ -133,7 +133,7 @@ export default () => (
                     </strong>
                 </Epic>
             </article>
-        </Main>
+        </main>
         <Footer />
     </Page>
 );
