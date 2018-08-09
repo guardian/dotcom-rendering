@@ -1,7 +1,7 @@
 // @flow
 
 import { Component } from 'react';
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import { connect } from 'unistore/react';
 import { Row, Cols } from '@guardian/guui/components/Grid';
 import { clearFix } from '@guardian/pasteup/mixins';
@@ -17,25 +17,25 @@ import SubNav from './SubNav';
 
 import type { NavType } from './__config__';
 
-const NavStyled = styled('nav')(
-    {
-        [tablet]: {
-            maxWidth: '740px',
-        },
-        [desktop]: {
-            maxWidth: '980px',
-        },
-        [leftCol]: {
-            maxWidth: '1140px',
-        },
-        [wide]: {
-            maxWidth: '1300px',
-        },
-        position: 'relative',
-        margin: '0 auto',
-    },
-    clearFix,
-);
+const navStyles = css`
+     {
+        ${tablet} {
+            max-width: 740px;
+        };
+        ${desktop} {
+            max-width: 980px;
+        };
+        ${leftCol} {
+            max-width: 1140px;
+        };
+        ${wide} {
+            max-width: 1300px;
+        };
+        position: relative;
+        margin: 0 auto;
+    }
+    ${clearFix};
+`;
 
 export default class Nav extends Component<{}, { showMainMenu: boolean }> {
     constructor(props: {}) {
@@ -66,7 +66,11 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
             // also separate PR to do centering stuff!
             return (
                 <div>
-                    <NavStyled role="navigation" aria-label="Guardian sections">
+                    <nav
+                        className={navStyles}
+                        role="navigation"
+                        aria-label="Guardian sections"
+                    >
                         <EditionDropdown />
                         <Logo />
                         <Links />
@@ -84,7 +88,7 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
                             id={mainMenuId}
                             nav={nav}
                         />
-                    </NavStyled>
+                    </nav>
                     {nav.subNavSections &&
                         nav.subNavSections.parent &&
                         nav.subNavSections.links && (
@@ -97,6 +101,7 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
                                 </Cols>
                             </Row>
                         )}
+ 
                 </div>
             );
         });

@@ -1,20 +1,21 @@
 // @flow
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
+
 import { tablet } from '@guardian/pasteup/breakpoints';
 
 import Nav from './Nav';
 
-const Header = styled('header')({
-    marginBottom: 0,
-    backgroundColor: '#e9eff1',
-    position: 'relative',
-    [tablet]: {
-        display: 'block',
-    },
-});
+const header = css`
+    margin-bottom: 0;
+    background-color: #e9eff1;
+    position: relative;
+    ${tablet} {
+        display: block;
+    }
+`;
 
 export default () => (
-    <Header>
+    <header className={header}>
         <Nav />
-    </Header>
+    </header>
 );

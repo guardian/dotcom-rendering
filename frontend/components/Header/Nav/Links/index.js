@@ -1,5 +1,5 @@
 // @flow
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import { connect } from 'unistore/react';
 
 import SupportTheGuardian from './SupportTheGuardian';
@@ -8,11 +8,11 @@ import Search from './Search';
 
 import type { LinkType } from '../__config__';
 
-const Links = styled('div')({
-    left: 0,
-    top: 0,
-    position: 'absolute',
-});
+const links = css`
+    left: 0;
+    top: 0;
+    position: absolute;
+`;
 
 const userLinks: Array<LinkType> = [
     {
@@ -33,7 +33,7 @@ const userLinks: Array<LinkType> = [
 ];
 
 export default connect('header')(({ isPayingMember, isRecentContributor }) => (
-    <Links>
+    <div className={links}>
         {isPayingMember ||
             isRecentContributor || (
                 <SupportTheGuardian href="/">
@@ -46,5 +46,5 @@ export default connect('header')(({ isPayingMember, isRecentContributor }) => (
             </Link>
         ))}
         <Search href="/">Search</Search>
-    </Links>
+    </div>
 ));
