@@ -28,7 +28,7 @@ Parameters:
     Type: AWS::EC2::Image::Id
   LatencyAlarmThreshold:
     Type: String
-    Description: (Optional) Latency Threshold
+    Description: (Optional) Latency Threshold in seconds
     Default: '0.5'
   LatencyAlarmPeriod:
     Type: String
