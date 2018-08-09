@@ -260,14 +260,14 @@ Resources:
       AutoScalingGroupName: !Ref AutoscalingGroup
       Cooldown: '600'
       ScalingAdjustment: '100'
-      
+
   LatencyScalingAlarm:
     Properties:
       AlarmDescription: !Sub |
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
       Dimensions:
       - Name: LoadBalancerName
-        Value: !Ref Elb
+        Value: !Ref LoadBalancer
       EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
       MetricName: Latency
       Namespace: AWS/ELB
