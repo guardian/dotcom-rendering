@@ -8,15 +8,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@guardian/guui": "2.0.0-alpha.1",
     "@guardian/pasteup": "1.0.0-alpha.1",
-    "emotion": "^9.1.1",
-    "emotion-server": "^9.1.1",
     "polished": "^1.9.2",
     "prop-types": "^15.6.1",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "react-emotion": "^9.1.3",
     "reset-css": "^3.0.0"
   },
   "devDependencies": {
@@ -24,7 +18,15 @@
     "babel-plugin-preval": "^1.6.4",
     "css-loader": "^0.28.11",
     "desvg-loader": "^0.1.0",
+    "emotion": "^9.1.1",
+    "react": "^16.4.0",
+    "react-emotion": "^9.1.3",
     "svg-loader": "^0.0.2",
     "to-string-loader": "^1.1.5"
+  },
+  "peerDependencies": {
+    "emotion": "^9.1.1",
+    "react": "^16.4.0",
+    "react-emotion": "^9.1.3"
   }
 }

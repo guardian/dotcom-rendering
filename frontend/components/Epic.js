@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import pallete from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
 
-import SiteMessage from '@guardian/guui/SiteMessage';
+import SiteMessage from '@guardian/guui/components/SiteMessage';
 
 const Content = styled('div')({
     fontFamily: headline,
