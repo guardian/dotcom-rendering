@@ -4,7 +4,7 @@ import { css } from 'react-emotion';
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
 
-import Main from '../Main';
+import Main from './Main';
 
 type Link = {
     title: string,
