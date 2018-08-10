@@ -85,14 +85,18 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
                             nav={nav}
                         />
                     </NavStyled>
-                    <Row>
-                        <Cols wide={16} leftCol={16}>
-                            <SubNav
-                                parent={nav.subNavSections.parent}
-                                links={nav.subNavSections.links}
-                            />
-                        </Cols>
-                    </Row>
+                    {nav.subNavSections &&
+                        nav.subNavSections.parent &&
+                        nav.subNavSections.links && (
+                            <Row>
+                                <Cols wide={16} leftCol={16}>
+                                    <SubNav
+                                        parent={nav.subNavSections.parent}
+                                        links={nav.subNavSections.links}
+                                    />
+                                </Cols>
+                            </Row>
+                        )}
                 </div>
             );
         });
