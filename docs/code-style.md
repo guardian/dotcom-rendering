@@ -83,7 +83,11 @@ const MyComponent = ({ fontColor }) =>
 
 ### Define CSS using template literals rather than objects
 
-> Why? The CSS looks more like CSS, more people will be familiar with the syntax
+> Why? The CSS looks more like CSS, more people will be familiar with the syntax.
+- We can use traditional 'kebab-case' CSS property names
+- We can copy and paste CSS from a CSS file or our browser's dev tools directly into our JS file
+- We don't have to wrap all values in quotes
+- JS objects afford developers a lot of power in how they are constructed and manipulated that can make the CSS harder to understand
 
 ```js
 // bad
