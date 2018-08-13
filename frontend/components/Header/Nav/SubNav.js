@@ -10,24 +10,44 @@ type Props = {
 
 const subnav = css`
     list-style: none;
+    padding: 0 16px;
 
     li {
         float: left;
     }
+`;
 
-    a {
-        display: block;
-        font-weight: 400;
-        color: #121212;
-        padding: 0 0.3125rem;
-        font-size: 1rem;
-        height: 2.625rem;
-        line-height: 2.625rem;
-        text-decoration: none;
+const linkStyle = css`
+    display: inline-block;
+    font-family: 'Guardian Egyptian Web', Georgia, serif;
+    font-weight: 400;
+    color: #121212;
+    padding: 0 0.3125rem;
+    font-size: 16px;
+    height: 2.625rem;
+    line-height: 2.625rem;
+    text-decoration: none;
+
+    :hover {
+        text-decoration: underline;
     }
+`;
 
-    a.parent {
-        font-weight: bold;
+const parentLinkStyle = css`
+    ${linkStyle};
+    font-weight: 700;
+`;
+
+const parentStyle = css`
+    :after {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 10px solid #121212;
+        margin-left: 2px;
     }
 `;
 
@@ -36,8 +56,8 @@ const SubNav = ({ parent, links }: Props) => {
 
     if (parent) {
         const parentLink = (
-            <li key={parent.url}>
-                <a className="parent" href={parent.url}>
+            <li key={parent.url} className={parentStyle}>
+                <a className={parentLinkStyle} href={parent.url}>
                     {parent.title}
                 </a>
             </li>
@@ -49,7 +69,9 @@ const SubNav = ({ parent, links }: Props) => {
     lis = lis.concat(
         links.map(link => (
             <li key={link.url}>
-                <a href={link.url}>{link.title}</a>
+                <a className={linkStyle} href={link.url}>
+                    {link.title}
+                </a>
             </li>
         )),
     );
