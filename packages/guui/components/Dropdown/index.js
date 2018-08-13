@@ -61,7 +61,6 @@ const link = css`
     padding: 10px 18px 15px 30px;
 
     :hover {
-        text-decoration: underline;
         background-color: #ededed;
         text-decoration: none;
     }
