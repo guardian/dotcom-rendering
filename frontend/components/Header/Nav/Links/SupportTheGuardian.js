@@ -1,37 +1,48 @@
 // @flow
-import styled from 'react-emotion';
 
 import palette, { pillars } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
+import { cx, css } from 'react-emotion';
 
-export default styled('a')(() => ({
-    color: palette.neutral.header,
-    fontFamily: headline,
-    fontSize: 14,
-    fontWeight: 500,
-    textDecoration: 'none',
-    position: 'relative',
-    width: 135,
-    display: 'block',
-    textAlign: 'center',
-    paddingTop: 6,
-    zIndex: 0,
-    float: 'left',
-    ':before': {
-        backgroundColor: palette.neutral['1'],
-        borderRadius: '50%',
-        top: -85,
-        left: 0,
-        right: 0,
-        paddingTop: '100%',
-        content: '""',
-        display: 'block',
-        position: 'absolute',
-        transition: 'background-color 250ms ease-out, transform 250ms ease-out',
-        zIndex: -1,
-    },
-    ':hover:before': {
-        backgroundColor: pillars.news,
-        transform: 'scale(1.05)',
-    },
-}));
+const style = css` color: ${palette.neutral.header};
+font-family: ${headline};
+font-size: 14px;
+font-weight: 500;
+text-decoration: none;
+position: relative;
+width: 135px;
+display: block;
+text-align: center;
+padding-top: 6px;
+z-index: 0;
+float: left;
+:before {
+    background-color: ${palette.neutral['1']};
+    border-radius: 50%;
+    top: -85px;
+    left: 0;
+    right: 0;
+    padding-top: 100%;
+    content: "";
+    display: block;
+    position: absolute;
+    transition: background-color 250ms ease-out; transform 250ms ease-out;
+    z-index: -1;
+};
+:hover:before {
+    backgroundcolor: ${pillars.news};
+    transform: scale(1.05);
+};`;
+
+export default ({
+    className,
+    children,
+    ...props
+}: {
+    className?: string,
+    children: React.Node,
+}) => (
+    <a className={cx(style, className)} {...props}>
+        {children}
+    </a>
+);
