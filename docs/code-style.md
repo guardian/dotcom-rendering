@@ -130,3 +130,36 @@ render(
     </ul>
 );
 ```
+
+### Prefer [`cx`](https://emotion.sh/docs/cx) for style composition
+
+> Why? `cx` composes given CSS in the most performant way in _most_ cases. It is more likely to reduce duplication of output CSS. It is also more readable, avoiding tricky syntax such as nested ternaries. However, there are cases in which it is more performant to use [`classNames`](https://github.com/JedWatson/classnames), notably if there are a large number of elements of a particular Component that use different combinations of classes.
+
+```js
+// bad
+const link = css`
+    color: blue;
+    font-weight: 700;
+`;
+const activeLink = css`
+    ${link};
+    color: red;
+`;
+const MyLink = ({ isActive }) =>
+    <a className={isActive ? activeLink : link}>Click me</a>;
+
+// good
+const link = css`
+    color: blue;
+    font-weight: 700;
+`;
+const activeLink = css`
+    color: red;
+`;
+const MyLink = ({ isActive }) =>
+    <a className={cx({
+        activeLink: isActive,
+        link: true
+    )}}>Click Me</a>;
+
+```
