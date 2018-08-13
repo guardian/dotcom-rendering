@@ -1,6 +1,6 @@
 // @flow
 
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import type { LinkType } from './__config__';
 
 type Props = {
@@ -8,26 +8,28 @@ type Props = {
     links: Array<LinkType>,
 };
 
-const UlStyled = styled('ul')({
-    listStyle: 'none',
-    li: {
-        float: 'left',
-    },
-    a: {
-        display: 'block',
-        fontWeight: 400,
-        color: '#121212',
-        padding: '0 0.3125rem',
-        fontSize: '1rem',
-        height: '2.625rem',
-        lineHeight: '2.625rem',
-        textDecoration: 'none',
-    },
+const subnav = css`
+    list-style: none;
 
-    'a.parent': {
-        fontWeight: 'bold',
-    },
-});
+    li {
+        float: left;
+    }
+
+    a {
+        display: block;
+        font-weight: 400;
+        color: #121212;
+        padding: 0 0.3125rem;
+        font-size: 1rem;
+        height: 2.625rem;
+        line-height: 2.625rem;
+        text-decoration: none;
+    }
+
+    a.parent {
+        font-weight: bold;
+    }
+`;
 
 const SubNav = ({ parent, links }: Props) => {
     let lis = [];
@@ -52,7 +54,7 @@ const SubNav = ({ parent, links }: Props) => {
         )),
     );
 
-    return <UlStyled>{lis}</UlStyled>;
+    return <ul className={subnav}>{lis}</ul>;
 };
 
 SubNav.defaultProps = {
