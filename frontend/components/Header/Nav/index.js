@@ -21,16 +21,16 @@ const navStyles = css`
      {
         ${tablet} {
             max-width: 740px;
-        };
+        }
         ${desktop} {
             max-width: 980px;
-        };
+        }
         ${leftCol} {
             max-width: 1140px;
-        };
+        }
         ${wide} {
             max-width: 1300px;
-        };
+        }
         position: relative;
         margin: 0 auto;
     }
@@ -101,7 +101,6 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
                                 </Cols>
                             </Row>
                         )}
- 
                 </div>
             );
         });

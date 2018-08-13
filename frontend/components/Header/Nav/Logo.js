@@ -20,23 +20,23 @@ const link = css`
     margin-top: 3px;
     ${mobileMedium} {
         margin-right: 5px;
-    };
-    
+    }
+
     ${mobileLandscape} {
         margin-right: 17px;
     }
-    
+
     ${desktop} {
         margin-bottom: -34px;
         margin-top: 5px;
         position: relative;
         zindex: 1071;
     }
-    
+
     ${leftCol} {
         margin-bottom: -40px;
     }
-    
+
     ${wide} {
         margin-right: 96px;
     }

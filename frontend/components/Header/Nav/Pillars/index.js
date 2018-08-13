@@ -68,7 +68,7 @@ const link = ({ showMainMenu, pillar }) => css`
         text-decoration: ${showMainMenu ? 'underline' : 'none'};
     }
     :after {
-        content: "";
+        content: '';
         display: block;
         left: 0;
         position: absolute;
