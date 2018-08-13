@@ -12,7 +12,7 @@ guide](https://github.com/airbnb/javascript) is a good place to look.
 
 We use [React](https://reactjs.org/) for our components, and [Emotion](https://emotion.sh/) for our CSS in JS.
 
-- Use Emotion's [`css`](https://emotion.sh/docs/css) function to build a class name from styles
+### Use Emotion's [`css`](https://emotion.sh/docs/css) function to build a class name from styles
 
 > Why? It decouples our CSS declaration from specific components
 
@@ -41,7 +41,7 @@ render(
 );
 ```
 
-- Extract CSS into a variable rather than defining it inline in a component
+### Extract CSS into a variable rather than defining it inline in a component
 
 > Why? It keeps the JSX tidy
 
@@ -62,7 +62,7 @@ render(
 );
 ```
 
-- Extract dynamic styles into a function that takes `props`
+### Extract dynamic styles into a function that takes `props`
 
 > Why? It avoids defining styles inline in a component, so keeps the JSX tidy
 
@@ -81,7 +81,7 @@ const MyComponent = ({ fontColor }) =>
     <div className={myComponent(fontColor)} />;
 ```
 
-- Define CSS using template literals rather than objects
+### Define CSS using template literals rather than objects
 
 > Why? The CSS looks more like CSS, more people will be familiar with the syntax
 
@@ -97,7 +97,7 @@ const myComponent = css`
 `;
 ```
 
-- Never define styles with more than one level of nesting
+### Never define styles with more than one level of nesting
 
 > Why? Excessive nesting is bad for performance and the added specificity makes the CSS harder to work with
 
