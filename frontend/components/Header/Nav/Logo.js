@@ -42,30 +42,28 @@ const link = css`
     }
 `;
 
-const SVG = () => (
-    <TheGuardianLogoSVG
-        className={css`
-            height: 51px;
-            width: 159px;
-            ${from.mobileMedium.until.tablet} {
-                height: 56px;
-                width: 175px;
-            }
-            ${from.tablet.until.desktop} {
-                height: 72px;
-                width: 224px;
-            }
-            ${from.desktop.until.leftCol} {
-                height: 80px;
-                width: 249px;
-            }
-            ${leftCol} {
-                height: 95px;
-                width: 295px;
-            }
-        `}
-    />
-);
+const style = css`
+    height: 51px;
+    width: 159px;
+    ${from.mobileMedium.until.tablet} {
+        height: 56px;
+        width: 175px;
+    }
+    ${from.tablet.until.desktop} {
+        height: 72px;
+        width: 224px;
+    }
+    ${from.desktop.until.leftCol} {
+        height: 80px;
+        width: 249px;
+    }
+    ${leftCol} {
+        height: 95px;
+        width: 295px;
+    }
+`;
+
+const SVG = () => <TheGuardianLogoSVG className={style} />;
 
 export default () => (
     <a className={link} href="/">
