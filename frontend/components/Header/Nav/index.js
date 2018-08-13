@@ -1,9 +1,8 @@
 // @flow
 
 import { Component } from 'react';
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import { connect } from 'unistore/react';
-import { Row, Cols } from '@guardian/guui/components/Grid';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
@@ -17,25 +16,28 @@ import SubNav from './SubNav';
 
 import type { NavType } from './__config__';
 
-const NavStyled = styled('nav')(
-    {
-        [tablet]: {
-            maxWidth: '740px',
-        },
-        [desktop]: {
-            maxWidth: '980px',
-        },
-        [leftCol]: {
-            maxWidth: '1140px',
-        },
-        [wide]: {
-            maxWidth: '1300px',
-        },
-        position: 'relative',
-        margin: '0 auto',
-    },
-    clearFix,
-);
+const centered = css`
+    ${tablet} {
+        max-width: 740px;
+    }
+    ${desktop} {
+        max-width: 980px;
+    }
+    ${leftCol} {
+        max-width: 1140px;
+    }
+    ${wide} {
+        max-width: 1300px;
+    }
+    position: relative;
+    margin: 0 auto;
+    ${clearFix};
+`;
+
+const subnav = css`
+    background-color: white;
+    border-top: 0.0625rem solid #bbcdd3;
+`;
 
 export default class Nav extends Component<{}, { showMainMenu: boolean }> {
     constructor(props: {}) {
@@ -66,7 +68,11 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
             // also separate PR to do centering stuff!
             return (
                 <div>
-                    <NavStyled role="navigation" aria-label="Guardian sections">
+                    <nav
+                        className={centered}
+                        role="navigation"
+                        aria-label="Guardian sections"
+                    >
                         <EditionDropdown />
                         <Logo />
                         <Links />
@@ -84,18 +90,18 @@ export default class Nav extends Component<{}, { showMainMenu: boolean }> {
                             id={mainMenuId}
                             nav={nav}
                         />
-                    </NavStyled>
+                    </nav>
                     {nav.subNavSections &&
                         nav.subNavSections.parent &&
                         nav.subNavSections.links && (
-                            <Row>
-                                <Cols wide={16} leftCol={16}>
+                            <div className={subnav}>
+                                <div className={centered}>
                                     <SubNav
                                         parent={nav.subNavSections.parent}
                                         links={nav.subNavSections.links}
                                     />
-                                </Cols>
-                            </Row>
+                                </div>
+                            </div>
                         )}
                 </div>
             );
