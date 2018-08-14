@@ -7,7 +7,6 @@ import { Component } from 'react';
 import { css } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
-// import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 export type Link = {
     url: string,
