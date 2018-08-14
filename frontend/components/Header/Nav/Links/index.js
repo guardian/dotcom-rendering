@@ -1,18 +1,99 @@
 // @flow
-import styled from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import { connect } from 'unistore/react';
-
-import SupportTheGuardian from './SupportTheGuardian';
-import Link from './Link';
-import Search from './Search';
-
+import palette from '@guardian/pasteup/palette';
+import { textSans } from '@guardian/pasteup/fonts';
+import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 import type { LinkType } from '../__config__';
 
-const Links = styled('div')({
-    left: 0,
-    top: 0,
-    position: 'absolute',
-});
+import SupportTheGuardian from './SupportTheGuardian';
+
+const link = css`
+    font-size: 14px;
+    font-family: ${textSans};
+    color: ${palette.neutral['1']};
+    float: left;
+    line-height: 1.2;
+    position: relative;
+    transition: color 80ms ease-out;
+    padding: 6px 10px;
+    margin: 1px 0 0;
+    text-decoration: none;
+    display: none;
+    :hover {
+        text-decoration: underline;
+    }
+    :focus {
+        text-decoration: underline;
+    }
+    ${desktop} {
+        display: block;
+    }
+`;
+
+const showAtTabletStyle = css`
+    ${tablet} {
+        display: block;
+    }
+`;
+
+const search = css`
+    :after {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        transform: translateY(-2px) rotate(45deg);
+        border-width: 1px;
+        border-style: solid;
+        border-color: currentColor;
+        border-left: none;
+        border-top: none;
+        margin-left: 4px;
+        vertical-align: middle;
+        backface-visibility: hidden;
+        transition: transform 250ms ease-out;
+    }
+    :hover:after {
+        transform: translateY(0) rotate(45deg);
+    }
+`;
+const Link = ({
+    showAtTablet,
+    className,
+    children,
+    ...props
+}: {
+    showAtTablet: boolean,
+    children: React.Node,
+    className?: string,
+}) => (
+    <a
+        className={cx(link, showAtTablet && showAtTabletStyle, className)}
+        {...props}
+    >
+        {children}
+    </a>
+);
+
+const Search = ({
+    className,
+    children,
+    ...props
+}: {
+    children: React.Node,
+    className?: string,
+}) => (
+    <Link className={cx(search, className)} showAtTablet {...props}>
+        {children}
+    </Link>
+);
+
+const links = css`
+    left: 0;
+    top: 0;
+    position: absolute;
+`;
 
 const userLinks: Array<LinkType> = [
     {
@@ -32,8 +113,8 @@ const userLinks: Array<LinkType> = [
     },
 ];
 
-export default connect('header')(({ isPayingMember, isRecentContributor }) => (
-    <Links>
+const Links = connect('header')(({ isPayingMember, isRecentContributor }) => (
+    <div className={links}>
         {isPayingMember ||
             isRecentContributor || (
                 <SupportTheGuardian href="/">
@@ -46,5 +127,7 @@ export default connect('header')(({ isPayingMember, isRecentContributor }) => (
             </Link>
         ))}
         <Search href="/">Search</Search>
-    </Links>
+    </div>
 ));
+
+export default Links;
