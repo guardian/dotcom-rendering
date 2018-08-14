@@ -78,7 +78,7 @@ bundlesize: clear clean-dist install build
 validate: clear clean-dist install flow lint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: clear install flow lint test
+validate-ci: clear install flow lint test bundlesize
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
