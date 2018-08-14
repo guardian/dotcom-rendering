@@ -10,6 +10,13 @@
         "lint": "eslint .",
         "flow": "flow"
     },
+    "bundlesize": [{
+        "path": "./dist/frontend.article.*.js",
+        "maxSize": "20 kB"
+    }, {
+        "path": "./dist/vendor.*.js",
+        "maxSize": "100 kB"
+    }],
     "devDependencies": {
         "@babel/core": "^7.0.0-beta.44",
         "@babel/plugin-proposal-class-properties": "^7.0.0-beta.44",
@@ -22,6 +29,7 @@
         "babel-loader": "^8.0.0-beta.2",
         "babel-plugin-dynamic-import-node": "^1.2.0",
         "babel-plugin-emotion": "^9.2.6",
+        "bundlesize": "^0.17.0",
         "eslint": "^4.18.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-config-prettier": "^2.6.0",
