@@ -1,5 +1,5 @@
 // @flow
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 
 import {
     tablet,
@@ -8,10 +8,17 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-import { pillars as pillarColours } from '@guardian/pasteup/palette';
+import { pillars as pillarPalette } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
 import type { LinkType } from '../__config__';
 
+const pillarColours = Object.entries(pillarPalette)
+    .map(([pillar, colour]) => ({
+        [pillar]: css`
+            color: ${colour};
+        `,
+    }))
+    .reduce((c, a) => ({ ...c, ...a }), {});
 const pillarsStyles = css`
     clear: right;
     margin: 0;
@@ -41,12 +48,24 @@ const pillarsStyles = css`
         }
     }
 `;
+const showMenuUnderline = (() => {
+    const show = css`
+        :hover {
+            text-decoration: underline;
+        }
+    `;
+    const hide = css`
+        :hover {
+            text-decoration: none;
+        }
+    `;
+    return shouldShow => (shouldShow ? show : hide);
+})();
 
-const link = ({ showMainMenu, pillar }) => css`
+const linkStyle = css`
     font-family: ${headline};
     font-weight: 600;
     text-decoration: none;
-    color: ${pillarColours[pillar]};
     cursor: pointer;
     display: block;
     font-size: 15.4px;
@@ -63,9 +82,6 @@ const link = ({ showMainMenu, pillar }) => css`
     }
     ${desktop} {
         height: 48px;
-    }
-    :hover {
-        text-decoration: ${showMainMenu ? 'underline' : 'none'};
     }
     :after {
         content: '';
@@ -90,15 +106,16 @@ type Props = {
     pillars: Array<LinkType>,
 };
 
-export default ({ showMainMenu, pillars }: Props) => (
+const Pillars = ({ showMainMenu, pillars }: Props) => (
     <ul className={pillarsStyles}>
         {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (
             <li key={pillar.title}>
                 <a
-                    className={link({
-                        pillar: pillar.title.toLowerCase(),
-                        showMainMenu,
-                    })}
+                    className={cx(
+                        linkStyle,
+                        showMenuUnderline(showMainMenu),
+                        pillarColours[pillar.title.toLowerCase()],
+                    )}
                     href={pillar.url}
                 >
                     {pillar.title}
@@ -107,3 +124,4 @@ export default ({ showMainMenu, pillars }: Props) => (
         ))}
     </ul>
 );
+export default Pillars;
