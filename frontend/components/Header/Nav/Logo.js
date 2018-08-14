@@ -65,7 +65,7 @@ const style = css`
 
 const SVG = () => <TheGuardianLogoSVG className={style} />;
 
-export default () => (
+const Logo = () => (
     <a className={link} href="/">
         <span className={css(screenReaderOnly)}>
             The Guardian - Back to home
@@ -73,3 +73,4 @@ export default () => (
         <SVG />
     </a>
 );
+export default Logo;

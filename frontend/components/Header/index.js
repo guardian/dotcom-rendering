@@ -14,8 +14,10 @@ const header = css`
     }
 `;
 
-export default () => (
+const Header = () => (
     <header className={header}>
         <Nav />
     </header>
 );
+
+export default Header;

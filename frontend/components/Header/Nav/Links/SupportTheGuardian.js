@@ -35,8 +35,7 @@ const style = css`
         transform: scale(1.05);
     }
 `;
-
-export default ({
+const SupportTheGuardian = ({
     className,
     children,
     ...props
@@ -48,3 +47,4 @@ export default ({
         {children}
     </a>
 );
+export default SupportTheGuardian;

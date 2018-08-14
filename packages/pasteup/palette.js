@@ -42,6 +42,7 @@ const palette = {
 };
 
 export default palette;
+
 export const pillars = {
     news: palette.red.medium,
     opinion: palette.orange.medium,

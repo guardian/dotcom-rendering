@@ -113,7 +113,7 @@ const userLinks: Array<LinkType> = [
     },
 ];
 
-export default connect('header')(({ isPayingMember, isRecentContributor }) => (
+const Links = connect('header')(({ isPayingMember, isRecentContributor }) => (
     <div className={links}>
         {isPayingMember ||
             isRecentContributor || (
@@ -129,3 +129,5 @@ export default connect('header')(({ isPayingMember, isRecentContributor }) => (
         <Search href="/">Search</Search>
     </div>
 ));
+
+export default Links;
