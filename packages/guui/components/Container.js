@@ -1,9 +1,9 @@
 // @flow
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
-export default css`
+const container = css`
     margin: auto;
 
     ${tablet} {
@@ -22,3 +22,18 @@ export default css`
         max-width: 1300px;
     }
 `;
+
+const Container = ({
+    className,
+    children,
+    ...props
+}: {
+    className?: string,
+    children: React.Node,
+}) => (
+    <div className={cx(container, className)} {...props}>
+        {children}
+    </div>
+);
+
+export default Container;

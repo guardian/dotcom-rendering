@@ -7,9 +7,9 @@ import { Row, Cols } from '@guardian/guui/components/Grid';
 import { textEgyptian, headline } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { clearFix } from '@guardian/pasteup/mixins';
+import Container from '@guardian/guui/components/Container';
 
 import Page from '../components/Page';
-import container from '../components/container';
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -98,41 +98,44 @@ const SeriesLabel = styled(SectionLabel)({
 export default () => (
     <Page>
         <Header />
-        <main className={container}>
-            <article>
-                <Row>
-                    <Cols wide={3} leftCol={2}>
-                        <Labels>
-                            <SectionLabel>The NSA files</SectionLabel>
-                            <SeriesLabel>
-                                Glenn Greenwald on security and liberty
-                            </SeriesLabel>
-                        </Labels>
-                    </Cols>
-                    <Cols wide={13} leftCol={12}>
-                        <Headline />
-                        <Standfirst />
-                    </Cols>
-                </Row>
-                <Body />
-                <MostViewed />
-                <Epic>
-                    <strong>
-                        Unlike many news organisations, we haven’t put up a
-                        paywall – we want to keep our journalism as open as we
-                        can.
-                    </strong>{' '}
-                    The Guardian’s independent, investigative journalism takes a
-                    lot of time, money and hard work to produce. But the revenue
-                    we get from advertising is falling, so we increasingly need
-                    our readers to fund us. If everyone who reads our reporting,
-                    who likes it, helps fund it, our future would be much more
-                    secure.{' '}
-                    <strong>
-                        Support The Guardian for just 17p a day or £5 a month.
-                    </strong>
-                </Epic>
-            </article>
+        <main>
+            <Container>
+                <article>
+                    <Row>
+                        <Cols wide={3} leftCol={2}>
+                            <Labels>
+                                <SectionLabel>The NSA files</SectionLabel>
+                                <SeriesLabel>
+                                    Glenn Greenwald on security and liberty
+                                </SeriesLabel>
+                            </Labels>
+                        </Cols>
+                        <Cols wide={13} leftCol={12}>
+                            <Headline />
+                            <Standfirst />
+                        </Cols>
+                    </Row>
+                    <Body />
+                    <MostViewed />
+                    <Epic>
+                        <strong>
+                            Unlike many news organisations, we haven’t put up a
+                            paywall – we want to keep our journalism as open as
+                            we can.
+                        </strong>{' '}
+                        The Guardian’s independent, investigative journalism
+                        takes a lot of time, money and hard work to produce. But
+                        the revenue we get from advertising is falling, so we
+                        increasingly need our readers to fund us. If everyone
+                        who reads our reporting, who likes it, helps fund it,
+                        our future would be much more secure.{' '}
+                        <strong>
+                            Support The Guardian for just 17p a day or £5 a
+                            month.
+                        </strong>
+                    </Epic>
+                </article>
+            </Container>
         </main>
         <Footer />
     </Page>

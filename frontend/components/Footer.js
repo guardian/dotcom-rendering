@@ -4,7 +4,7 @@ import { css } from 'react-emotion';
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
 
-import container from './container';
+import Container from '@guardian/guui/components/Container';
 
 type Link = {
     title: string,
@@ -118,7 +118,6 @@ const footer = css`
 `;
 
 const footerInner = css`
-    ${container};
     padding-bottom: 6px;
 `;
 
@@ -215,9 +214,9 @@ const FooterLinks = ({ links }: Props) => {
     return <div className={footerList}>{linkGroups}</div>;
 };
 
-export default () => (
+const Footer = () => (
     <footer className={footer}>
-        <div className={footerInner}>
+        <Container className={footerInner}>
             <iframe
                 title="Guardian Email Sign-up Form"
                 src="https://www.theguardian.com/email/form/footer/today-uk"
@@ -235,6 +234,8 @@ export default () => (
                 © 2018 Guardian News and Media Limited or its affiliated
                 companies. All rights reserved.
             </div>
-        </div>
+        </Container>
     </footer>
 );
+
+export default Footer;
