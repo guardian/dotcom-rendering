@@ -51,7 +51,7 @@ const breakpointMqs = {
     wide: wideMq,
 };
 
-export const calculateWidth = (
+const calculateWidth = (
     breakpoint: Breakpoint,
     colspan: number,
 ): number => {

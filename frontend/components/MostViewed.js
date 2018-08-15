@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
-import Numbers from '@guardian/guui/components/Numbers';
+import { Numbers } from '@guardian/guui';
 
 const Heading = styled('h2')({
     fontFamily: headline,

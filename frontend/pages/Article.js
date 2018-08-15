@@ -3,7 +3,7 @@
 /* eslint-disable react/no-danger */
 
 import styled from 'react-emotion';
-import { Row, Cols } from '@guardian/guui/components/Grid';
+import { GridRow, GridCols } from '@guardian/guui';
 import { textEgyptian, headline } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { clearFix } from '@guardian/pasteup/mixins';
@@ -13,7 +13,6 @@ import Page from '../components/Page';
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Epic from '../components/Epic';
 import { CapiComponent } from '../components/CapiComponent';
 
 const HeadlineStyled = styled('h1')({
@@ -101,39 +100,22 @@ export default () => (
         <main>
             <Container>
                 <article>
-                    <Row>
-                        <Cols wide={3} leftCol={2}>
+                    <GridRow>
+                        <GridCols wide={3} leftCol={2}>
                             <Labels>
                                 <SectionLabel>The NSA files</SectionLabel>
                                 <SeriesLabel>
                                     Glenn Greenwald on security and liberty
                                 </SeriesLabel>
                             </Labels>
-                        </Cols>
-                        <Cols wide={13} leftCol={12}>
+                        </GridCols>
+                        <GridCols wide={13} leftCol={12}>
                             <Headline />
                             <Standfirst />
-                        </Cols>
-                    </Row>
+                        </GridCols>
+                    </GridRow>
                     <Body />
                     <MostViewed />
-                    <Epic>
-                        <strong>
-                            Unlike many news organisations, we haven’t put up a
-                            paywall – we want to keep our journalism as open as
-                            we can.
-                        </strong>{' '}
-                        The Guardian’s independent, investigative journalism
-                        takes a lot of time, money and hard work to produce. But
-                        the revenue we get from advertising is falling, so we
-                        increasingly need our readers to fund us. If everyone
-                        who reads our reporting, who likes it, helps fund it,
-                        our future would be much more secure.{' '}
-                        <strong>
-                            Support The Guardian for just 17p a day or £5 a
-                            month.
-                        </strong>
-                    </Epic>
                 </article>
             </Container>
         </main>
