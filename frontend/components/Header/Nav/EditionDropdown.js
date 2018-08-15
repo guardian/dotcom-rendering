@@ -10,7 +10,7 @@ const editionDropdown = css`
     z-index: 1072;
 `;
 
-export default () => {
+const EditionDropdown = () => {
     const links: Array<Link> = [
         {
             url: '/preference/edition/uk',
@@ -37,3 +37,5 @@ export default () => {
         </div>
     );
 };
+
+export default EditionDropdown;
