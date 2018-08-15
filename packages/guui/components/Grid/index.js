@@ -41,7 +41,9 @@ const columns: GridSizes = {
     },
 };
 
-const breakpointMqs = {
+const breakpointMqs: {
+    [Breakpoint]: string,
+} = {
     tablet: tabletMq,
     desktop: desktopMq,
     leftCol: leftColMq,
@@ -107,7 +109,7 @@ const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     return props;
 };
 
-export const Row = ({ children }: { children: React$Node }) => (
+export const Row = ({ children }: { children: React.Node }) => (
     <div className={row}>{children}</div>
 );
 
@@ -119,7 +121,7 @@ export const Cols = ({
     children,
 }: {
     [Breakpoint]: BreakpointProps | number,
-    children: React$Node,
+    children: React.Node,
 }) => (
     <div
         className={cols({
