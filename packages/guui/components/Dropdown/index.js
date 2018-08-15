@@ -136,11 +136,6 @@ const button = css`
         vertical-align: middle;
         transition: transform 250ms ease-out;
     }
-
-    .expanded:after,
-    .expanded:after {
-        transform: translateY(1px) rotate(-135deg);
-    }
 `;
 
 const buttonExpanded = css`
