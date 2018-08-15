@@ -2,15 +2,15 @@
 import Dropdown from '@guardian/guui/components/Dropdown';
 import type { Link } from '@guardian/guui/components/Dropdown';
 
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 
-const EditionDropdown = styled('div')({
-    position: 'absolute',
-    right: '15px',
-    zIndex: 1072,
-});
+const editionDropdown = css`
+    position: absolute;
+    right: 15px;
+    z-index: 1072;
+`;
 
-export default () => {
+const EditionDropdown = () => {
     const links: Array<Link> = [
         {
             url: '/preference/edition/uk',
@@ -32,8 +32,10 @@ export default () => {
     ];
 
     return (
-        <EditionDropdown>
+        <div className={editionDropdown}>
             <Dropdown label="UK Edition" links={links} id="edition" />
-        </EditionDropdown>
+        </div>
     );
 };
+
+export default EditionDropdown;
