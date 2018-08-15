@@ -51,10 +51,7 @@ const breakpointMqs = {
     wide: wideMq,
 };
 
-const calculateWidth = (
-    breakpoint: Breakpoint,
-    colspan: number,
-): number => {
+const calculateWidth = (breakpoint: Breakpoint, colspan: number): number => {
     let colspanOrMax = colspan;
 
     if (!colspanOrMax) {

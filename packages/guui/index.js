@@ -1,3 +1,4 @@
+// @flow
 // Components
 export { default as CloseButton } from './components/CloseButton';
 export { default as Dropdown } from './components/Dropdown';
