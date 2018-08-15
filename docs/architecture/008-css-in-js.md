@@ -16,7 +16,7 @@ CSS-in-JS is supported by a number of different libraries such as [Emotion](http
 
 CSS Blocks allows developers to define their CSS in `*.css` files and import them into JavaScript. It makes use of familiar CSS syntax, with clever use of attribute selector notation and the [`obj-str`](https://github.com/lukeed/obj-str) library to change styles based on props. The output is highly-efficient atomic CSS. The use of `obj-str` may make a steep learning curve for non-client-side-developers.
 
-### CSS in *.css files imported with custom Webpack CSS loader
+### CSS in `*.css` files imported with custom Webpack CSS loader
 
 It is possible to write a Webpack loader that will load the contents of `*.css` files and manipulate the content to make it usable with CSS-in-JS libraries. This would lock us in to Webpack and may become considerably complex over time. 
 
