@@ -4,7 +4,7 @@
  */
 
 import { Component } from 'react';
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 
@@ -41,7 +41,6 @@ const ul = css`
 `;
 
 const ulExpanded = css`
-    ${ul};
     display: block;
 `;
 
@@ -80,8 +79,6 @@ const link = css`
 `;
 
 const linkActive = css`
-    ${link};
-
     font-weight: bold;
 
     :after {
@@ -147,7 +144,6 @@ const button = css`
 `;
 
 const buttonExpanded = css`
-    ${button};
     :after {
         transform: translateY(1px) rotate(-135deg);
     }
@@ -201,36 +197,34 @@ export default class Dropdown extends Component<
         return (
             <div>
                 {this.state.noJS ? (
-                    [
-                        <label
-                            htmlFor={checkboxID}
-                            className={
-                                this.state.isExpanded ? buttonExpanded : button
-                            }
+                    <label
+                        htmlFor={checkboxID}
+                        className={cx({
+                            [button]: true,
+                            [buttonExpanded]: this.state.isExpanded,
+                        })}
+                        aria-controls={dropdownID}
+                        aria-expanded={this.state.isExpanded ? 'true' : 'false'}
+                    >
+                        <input
+                            className={input}
+                            type="checkbox"
+                            id={checkboxID}
                             aria-controls={dropdownID}
-                            aria-expanded={
-                                this.state.isExpanded ? 'true' : 'false'
-                            }
-                        >
-                            <input
-                                className={input}
-                                type="checkbox"
-                                id={checkboxID}
-                                aria-controls={dropdownID}
-                                aria-checked="false"
-                                tabIndex="-1"
-                                key="OpenMainMenuCheckbox"
-                                role="menuitemcheckbox"
-                            />
-                            {label}
-                        </label>,
-                    ]
+                            aria-checked="false"
+                            tabIndex="-1"
+                            key="OpenMainMenuCheckbox"
+                            role="menuitemcheckbox"
+                        />
+                        {label}
+                    </label>
                 ) : (
                     <button
                         onClick={this.toggle_}
-                        className={
-                            this.state.isExpanded ? buttonExpanded : button
-                        }
+                        className={cx({
+                            [button]: true,
+                            [buttonExpanded]: this.state.isExpanded,
+                        })}
                         aria-controls={dropdownID}
                         aria-expanded={this.state.isExpanded ? 'true' : 'false'}
                     >
@@ -240,15 +234,20 @@ export default class Dropdown extends Component<
 
                 <ul
                     id={dropdownID}
-                    className={this.state.isExpanded ? ulExpanded : ul}
+                    className={cx({
+                        [ul]: true,
+                        [ulExpanded]: this.state.isExpanded,
+                    })}
                 >
                     {links.map((l, index) => (
                         <li key={l.title}>
                             <a
                                 href={l.url}
-                                className={`${l.isActive ? linkActive : link} ${
-                                    index === 0 ? linkFirst : ''
-                                }`}
+                                className={cx({
+                                    [link]: true,
+                                    [linkActive]: l.isActive,
+                                    [linkFirst]: index === 0,
+                                })}
                             >
                                 {l.title}
                             </a>
