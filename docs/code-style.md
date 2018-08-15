@@ -157,9 +157,9 @@ const activeLink = css`
     color: red;
 `;
 const MyLink = ({ isActive }) =>
-    <a className={cx({
-        activeLink: isActive,
-        link: true
-    )}}>Click Me</a>;
+    <a className={cx(
+        { [activeLink]: isActive },
+        link
+    )}>Click Me</a>;
 
 ```
