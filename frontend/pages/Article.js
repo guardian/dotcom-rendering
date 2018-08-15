@@ -93,7 +93,7 @@ const SeriesLabel = styled(SectionLabel)({
     fontWeight: 500,
 });
 
-export default () => (
+const Article = () => (
     <Page>
         <Header />
         <main>
@@ -121,3 +121,5 @@ export default () => (
         <Footer />
     </Page>
 );
+
+export default Article;
