@@ -1,10 +1,10 @@
 // @flow
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
 
-import Main from '../Main';
+import Container from '@guardian/guui/components/Container';
 
 type Link = {
     title: string,
@@ -110,87 +110,89 @@ const footerLinks: Array<Array<Link>> = [
     ],
 ];
 
-const Footer = styled('footer')({
-    backgroundColor: '#333',
-    color: '#dcdcdc',
-    fontFamily: textSans,
-    fontSize: '14px',
+const footer = css`
+    background-color: #333;
+    color: #dcdcdc;
+    font-family: ${textSans};
+    font-size: 14px;
+`;
 
-    a: {
-        color: '#dcdcdc',
-        textDecoration: 'none',
-    },
+const footerInner = css`
+    padding-bottom: 6px;
+`;
 
-    '.footer-links': {
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-        borderTop: '1px solid #434343',
+const emailSignup = css`
+    padding-top: 12px;
 
-        [tablet]: {
-            borderTop: 'none',
-        },
+    ${leftCol} {
+        float: left;
+        width: 300px;
+        margin-right: 180px;
+    }
+`;
 
-        a: {
-            paddingBottom: '12px',
-            display: 'block',
-        },
+const footerLink = css`
+    color: #dcdcdc;
+    text-decoration: none;
+    padding-bottom: 12px;
+    display: block;
 
-        ul: {
-            width: '50%',
-            borderLeft: '1px solid #434343',
+    :hover {
+        text-decoration: underline;
+    }
+`;
 
-            [until.tablet]: {
-                ':nth-child(odd)': {
-                    borderLeft: 0,
-                    paddingLeft: 0,
-                },
+const footerList = css`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border-top: 1px solid #434343;
 
-                ':nth-child(3)': {
-                    paddingTop: 0,
-                },
-                ':nth-child(4)': {
-                    paddingTop: 0,
-                },
-            },
+    ${tablet} {
+        border-top: none;
+    }
 
-            [until.leftCol]: {
-                ':nth-child(1)': {
-                    borderLeft: 0,
-                    paddingLeft: 0,
-                },
-            },
+    ul {
+        width: 50%;
+        border-left: 1px solid #434343;
 
-            [tablet]: {
-                margin: '0 10px 36px 0',
-                flex: '1 0 0',
-            },
+        ${until.tablet} {
+            :nth-child(odd) {
+                border-left: 0px;
+                padding-left: 0px;
+            }
 
-            padding: '12px 0 0 10px',
-        },
-    },
+            :nth-child(3) {
+                padding-top: 0px;
+            }
 
-    '.email-sub__iframe': {
-        paddingTop: '12px',
+            :nth-child(4) {
+                padding-top: 0px;
+            }
+        }
 
-        [leftCol]: {
-            float: 'left',
-            width: '300px',
-            marginRight: '180px',
-        },
-    },
+        ${until.leftCol} {
+            :nth-child(1) {
+                border-left: 0px;
+                padding-left: 0px;
+            }
+        }
 
-    '.footer-inner': {
-        paddingBottom: '6px',
-    },
+        ${tablet} {
+            margin: 0 10px 36px 0;
+            flex: 1 0 0;
+        }
 
-    '.copyright': {
-        fontSize: '12px',
-        padding: '6px 0 18px',
-        borderTop: '1px solid #434343',
-        marginTop: '12px',
-    },
-});
+        padding: 12px 0 0 10px;
+    }
+`;
+
+const copyright = css`
+    font-size: 12px;
+    padding: 6px 0 18px;
+    border-top: 1px solid #434343;
+    margin-top: 12px;
+`;
 
 type Props = {
     links: Array<Array<Link>>,
@@ -200,36 +202,40 @@ const FooterLinks = ({ links }: Props) => {
     const linkGroups = links.map(linkGroup => {
         const ls = linkGroup.map(l => (
             <li key={l.url}>
-                <a href={l.url}>{l.title}</a>
+                <a className={footerLink} href={l.url}>
+                    {l.title}
+                </a>
             </li>
         ));
 
         return <ul>{ls}</ul>;
     });
 
-    return <div className="footer-links">{linkGroups}</div>;
+    return <div className={footerList}>{linkGroups}</div>;
 };
 
-export default () => (
-    <Footer>
-        <Main className="footer-inner">
+const Footer = () => (
+    <footer className={footer}>
+        <Container className={footerInner}>
             <iframe
                 title="Guardian Email Sign-up Form"
                 src="https://www.theguardian.com/email/form/footer/today-uk"
                 scrolling="no"
                 seamless=""
                 id="footer__email-form"
-                className="iframed--overflow-hidden email-sub__iframe js-email-sub__iframe"
+                className={emailSignup}
                 data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
                 data-node-uid="2"
                 height="100px"
                 frameBorder="0"
             />
             <FooterLinks links={footerLinks} />
-            <div className="copyright">
+            <div className={copyright}>
                 © 2018 Guardian News and Media Limited or its affiliated
                 companies. All rights reserved.
             </div>
-        </Main>
-    </Footer>
+        </Container>
+    </footer>
 );
+
+export default Footer;
