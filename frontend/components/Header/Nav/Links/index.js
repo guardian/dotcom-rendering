@@ -1,41 +1,13 @@
 // @flow
 import { css, cx } from 'react-emotion';
 import { connect } from 'unistore/react';
+import Dropdown from '@guardian/guui/components/Dropdown';
+import type { Link as DropdownLink } from '@guardian/guui/components/Dropdown';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
-import type { LinkType } from '../__config__';
 
 import SupportTheGuardian from './SupportTheGuardian';
-
-const link = css`
-    font-size: 14px;
-    font-family: ${textSans};
-    color: ${palette.neutral['1']};
-    float: left;
-    line-height: 1.2;
-    position: relative;
-    transition: color 80ms ease-out;
-    padding: 6px 10px;
-    margin: 1px 0 0;
-    text-decoration: none;
-    display: none;
-    :hover {
-        text-decoration: underline;
-    }
-    :focus {
-        text-decoration: underline;
-    }
-    ${desktop} {
-        display: block;
-    }
-`;
-
-const showAtTabletStyle = css`
-    ${tablet} {
-        display: block;
-    }
-`;
 
 const search = css`
     :after {
@@ -58,23 +30,36 @@ const search = css`
         transform: translateY(0) rotate(45deg);
     }
 `;
-const Link = ({
-    showAtTablet,
-    className,
-    children,
-    ...props
-}: {
-    showAtTablet: boolean,
-    children: React.Node,
-    className?: string,
-}) => (
-    <a
-        className={cx(link, showAtTablet && showAtTabletStyle, className)}
-        {...props}
-    >
-        {children}
-    </a>
-);
+
+const link = ({ showAtTablet }) => css`
+    font-size: 14px;
+    font-family: ${textSans};
+    color: ${palette.neutral['1']};
+    float: left;
+    line-height: 1.2;
+    position: relative;
+    transition: color 80ms ease-out;
+    padding: 6px 10px;
+    margin: 1px 0 0;
+    text-decoration: none;
+    display: none;
+
+    :hover {
+        text-decoration: underline;
+    }
+
+    :focus {
+        text-decoration: underline;
+    }
+
+    ${tablet} {
+        display: ${showAtTablet ? 'block' : 'none'};
+    }
+
+    ${desktop} {
+        display: block;
+    }
+`;
 
 const Search = ({
     className,
@@ -84,9 +69,9 @@ const Search = ({
     children: React.Node,
     className?: string,
 }) => (
-    <Link className={cx(search, className)} showAtTablet {...props}>
+    <a className={cx(search, className)} {...props}>
         {children}
-    </Link>
+    </a>
 );
 
 const links = css`
@@ -95,39 +80,84 @@ const links = css`
     position: absolute;
 `;
 
-const userLinks: Array<LinkType> = [
+const profileSubdomain = 'https://profile.theguardian.com';
+const subscribeUrl =
+    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support_subscribe%22%2C%22referrerPageviewId%22%3A%22jkjutjbkxfh1d8yyadfc%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fuk%22%7D';
+const jobsUrl = 'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader';
+const signInUrl = `${profileSubdomain}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in`;
+
+const identityLinks: Array<DropdownLink> = [
     {
-        title: 'Subscribe',
-        longTitle: 'Subscribe',
-        url: '/',
+        url: `${profileSubdomain}/user/id/123`, // TODO use actual user ID once we have a user model
+        title: 'Comments and replies',
     },
     {
-        title: 'Find a job',
-        longTitle: 'Find a job',
-        url: '/',
+        url: `${profileSubdomain}/public/edit`,
+        title: 'Public profile',
     },
     {
-        title: 'Sign in',
-        longTitle: 'Sign in',
-        url: '/',
+        url: `${profileSubdomain}/account/edit`,
+        title: 'Account details',
+    },
+    {
+        url: `${profileSubdomain}/email-prefs`,
+        title: 'Emails and marketing',
+    },
+    {
+        url: `${profileSubdomain}/membership/edit`,
+        title: 'Membership',
+    },
+    {
+        url: `${profileSubdomain}/contribution/recurring/edit`,
+        title: 'Contributions',
+    },
+    {
+        url: `${profileSubdomain}/digitalpack/edit`,
+        title: 'Digital pack',
+    },
+    {
+        url: `${profileSubdomain}/signout`,
+        title: 'Sign out',
     },
 ];
 
-const Links = connect('header')(({ isPayingMember, isRecentContributor }) => (
-    <div className={links}>
-        {isPayingMember ||
-            isRecentContributor || (
-                <SupportTheGuardian href="/">
-                    Support The Guardian
-                </SupportTheGuardian>
+const Links = connect('header')(
+    ({ isPayingMember, isRecentContributor, isSignedIn }) => (
+        <div className={links}>
+            {isPayingMember ||
+                isRecentContributor || (
+                    <SupportTheGuardian href="/">
+                        Support The Guardian
+                    </SupportTheGuardian>
+                )}
+
+            <a href={subscribeUrl} className={link({ showAtTablet: true })}>
+                Subscribe
+            </a>
+
+            <a href={jobsUrl} className={link({ showAtTablet: true })}>
+                Find a job
+            </a>
+
+            {isSignedIn ? (
+                <div className={link({ showAtTablet: false })}>
+                    <Dropdown
+                        label="My account"
+                        links={identityLinks}
+                        id="my-account"
+                    />
+                </div>
+            ) : (
+                <a className={link({ showAtTablet: false })} href={signInUrl}>
+                    Sign in / Register
+                </a>
             )}
-        {userLinks.map(({ url, title }, i) => (
-            <Link href={url} key={title} showAtTablet={i < 2}>
-                {title}
-            </Link>
-        ))}
-        <Search href="/">Search</Search>
-    </div>
-));
+
+            <Search className={link({ showAtTablet: false })} href="/">
+                Search
+            </Search>
+        </div>
+    ),
+);
 
 export default Links;
