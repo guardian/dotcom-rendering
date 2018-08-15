@@ -1,5 +1,5 @@
 // @flow
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import {
     tablet as tabletMq,
     desktop as desktopMq,
@@ -9,19 +9,16 @@ import {
 import { clearFix } from '@guardian/pasteup/mixins';
 
 type Breakpoint = 'tablet' | 'desktop' | 'leftCol' | 'wide';
+type BreakpointOptions = {
+    inset?: number,
+};
+type BreakpointProps = [number, BreakpointOptions];
 type GridSize = {
     max: number,
     width: number,
 };
 type GridSizes = {
     [Breakpoint]: GridSize,
-};
-type BreakpointOptions = {
-    inset?: number,
-};
-type BreakpointProps = [number, BreakpointOptions];
-type MQStyles = {
-    [mediaQuery: string]: {},
 };
 
 const gutter = 20;
@@ -66,37 +63,37 @@ const calculateWidth = (breakpoint: Breakpoint, colspan: number): number => {
 const gridStyles = (
     breakpoint: Breakpoint,
     [colspan, options]: BreakpointProps,
-): MQStyles => ({
-    [breakpointMqs[breakpoint]]: {
-        float: 'left',
-        width: calculateWidth(breakpoint, colspan) + gutter,
-        paddingLeft: gutter,
-        marginLeft: options.inset
-            ? calculateWidth(breakpoint, options.inset) + gutter
-            : 0,
-    },
-});
+) => `
+    ${breakpointMqs[breakpoint]} {
+        float: left;
+        width: ${calculateWidth(breakpoint, colspan) + gutter}px;
+        padding-left: ${gutter};
+        margin-left: ${
+            options && options.inset
+                ? `${calculateWidth(breakpoint, options.inset) + gutter}px`
+                : 0
+        }
+    }
+`;
 
-const RowStyled = styled('div')({
-    ...clearFix,
-    marginLeft: -gutter,
-});
+const row = css`
+    ${css(clearFix)};
+    margin-left: ${-gutter};
+`;
 
-const ColsStyled = styled('div')(
-    ({ tablet, desktop, leftCol, wide }): MQStyles => {
-        const tabletStyles = gridStyles('tablet', tablet);
-        const desktopStyles = gridStyles('desktop', desktop);
-        const leftColStyles = gridStyles('leftCol', leftCol);
-        const wideStyles = gridStyles('wide', wide);
-
-        return {
-            ...tabletStyles,
-            ...desktopStyles,
-            ...leftColStyles,
-            ...wideStyles,
-        };
-    },
-);
+const cols = ({
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+}: {
+    [Breakpoint]: BreakpointProps,
+}) => css`
+    ${gridStyles('tablet', tablet)};
+    ${gridStyles('desktop', desktop)};
+    ${gridStyles('leftCol', leftCol)};
+    ${gridStyles('wide', wide)};
+`;
 
 const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     if (Array.isArray(props)) {
@@ -110,49 +107,33 @@ const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     return props;
 };
 
-export const Row = ({
-    htmlTag,
-    children,
-}: {
-    htmlTag?: string,
-    children: React$Node,
-}) => {
-    const GridRow = RowStyled.withComponent(htmlTag);
-
-    return <GridRow>{children}</GridRow>;
-};
-
-Row.defaultProps = {
-    htmlTag: 'div',
-};
+export const Row = ({ children }: { children: React$Node }) => (
+    <div className={row}>{children}</div>
+);
 
 export const Cols = ({
-    htmlTag,
     tablet,
     desktop,
     leftCol,
     wide,
     children,
 }: {
-    htmlTag?: string,
     [Breakpoint]: BreakpointProps | number,
     children: React$Node,
-}) => {
-    const GridCol = ColsStyled.withComponent(htmlTag);
-    return (
-        <GridCol
-            tablet={normaliseProps(tablet)}
-            desktop={normaliseProps(desktop)}
-            leftCol={normaliseProps(leftCol)}
-            wide={normaliseProps(wide)}
-        >
-            {children}
-        </GridCol>
-    );
-};
+}) => (
+    <div
+        className={cols({
+            tablet: normaliseProps(tablet),
+            desktop: normaliseProps(desktop),
+            leftCol: normaliseProps(leftCol),
+            wide: normaliseProps(wide),
+        })}
+    >
+        {children}
+    </div>
+);
 
 Cols.defaultProps = {
-    htmlTag: 'div',
     tablet: [columns.tablet.max, {}],
     desktop: [columns.desktop.max, {}],
     leftCol: [columns.leftCol.max, {}],
