@@ -11,7 +11,7 @@ import Number8 from './8.svg';
 import Number9 from './9.svg';
 import Number10 from './10.svg';
 
-export default ({ index }: { index: number }) => {
+const Number = ({ index }: { index: number }) => {
     const numbers = {
         '1': <Number1 />,
         '2': <Number2 />,
@@ -27,3 +27,5 @@ export default ({ index }: { index: number }) => {
 
     return numbers[index];
 };
+
+export default Number;
