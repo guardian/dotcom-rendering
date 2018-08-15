@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
-import { Numbers } from '@guardian/guui';
+import { Number } from '@guardian/guui';
 
 const Heading = styled('h2')({
     fontFamily: headline,
@@ -29,7 +29,7 @@ const ListItem = styled('li')({
     minHeight: '4.5rem',
 });
 
-const Number = styled('span')({
+const NumberStyled = styled('span')({
     float: 'left',
 });
 
@@ -65,9 +65,9 @@ export default class MostViewed extends Component<{}, { trails: [] }> {
                 <ul>
                     {this.state.trails.map((trail, i) => (
                         <ListItem key={trail.url}>
-                            <Number>
-                                <Numbers index={i + 1} />
-                            </Number>
+                            <NumberStyled>
+                                <Number index={i + 1} />
+                            </NumberStyled>
 
                             <Headline>
                                 <HeadlineBody href={trail.url}>
