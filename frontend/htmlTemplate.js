@@ -22,7 +22,7 @@ export default ({
     },
     cssIDs: Array<string>,
     nonBlockingJS?: string,
-    fontFiles?: Array<string>
+    fontFiles?: Array<string>,
 }) => {
     const sanitiseDomRefs = jsString =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
@@ -36,9 +36,12 @@ export default ({
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <link rel="preload" href="${vendorJS}}" as="script">
                 <link rel="preload" href="${bundleJS}" as="script">
-                ${fontFiles.map(fontFile => 
-                    `<link rel="preload" href="https://interactive.guim.co.uk/fonts/guss-webfonts/${fontFile}" as="font" crossorigin>`
-                ).join( '\n')}
+                ${fontFiles
+                    .map(
+                        fontFile =>
+                            `<link rel="preload" href="https://interactive.guim.co.uk/fonts/guss-webfonts/${fontFile}" as="font" crossorigin>`,
+                    )
+                    .join('\n')}
                 <link rel="stylesheet" href="${fontCSS}" media="nope!" onload="this.media='all'">
                 <style>${resetCSS}${css}</style>
             </head>
