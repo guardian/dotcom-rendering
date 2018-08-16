@@ -113,16 +113,19 @@ export const Row = ({
     htmlTag,
     children,
 }: {
-    htmlTag?: string,
+    htmlTag: string,
     children: React.Node,
-}) =>
-    React.createElement(
-        htmlTag,
-        {
-            className: row,
-        },
-        children,
-    );
+}) => (
+    <>
+        {React.createElement(
+            htmlTag,
+            {
+                className: row,
+            },
+            children,
+        )}
+    </>
+);
 
 Row.defaultProps = {
     htmlTag: 'div',
@@ -136,22 +139,25 @@ export const Cols = ({
     wide,
     children,
 }: {
-    htmlTag?: string,
+    htmlTag: string,
     [Breakpoint]: BreakpointProps | number,
     children: React.Node,
-}) =>
-    React.createElement(
-        htmlTag,
-        {
-            className: cols({
-                tablet: normaliseProps(tablet),
-                desktop: normaliseProps(desktop),
-                leftCol: normaliseProps(leftCol),
-                wide: normaliseProps(wide),
-            }),
-        },
-        children,
-    );
+}) => (
+    <>
+        {React.createElement(
+            htmlTag,
+            {
+                className: cols({
+                    tablet: normaliseProps(tablet),
+                    desktop: normaliseProps(desktop),
+                    leftCol: normaliseProps(leftCol),
+                    wide: normaliseProps(wide),
+                }),
+            },
+            children,
+        )}
+    </>
+);
 
 Cols.defaultProps = {
     htmlTag: 'div',
