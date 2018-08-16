@@ -109,33 +109,52 @@ const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     return props;
 };
 
-export const Row = ({ children }: { children: React.Node }) => (
-    <div className={row}>{children}</div>
-);
+export const Row = ({
+    htmlTag,
+    children,
+}: {
+    htmlTag?: string,
+    children: React.Node,
+}) =>
+    React.createElement(
+        htmlTag,
+        {
+            className: row,
+        },
+        children,
+    );
+
+Row.defaultProps = {
+    htmlTag: 'div',
+};
 
 export const Cols = ({
+    htmlTag,
     tablet,
     desktop,
     leftCol,
     wide,
     children,
 }: {
+    htmlTag?: string,
     [Breakpoint]: BreakpointProps | number,
     children: React.Node,
-}) => (
-    <div
-        className={cols({
-            tablet: normaliseProps(tablet),
-            desktop: normaliseProps(desktop),
-            leftCol: normaliseProps(leftCol),
-            wide: normaliseProps(wide),
-        })}
-    >
-        {children}
-    </div>
-);
+}) =>
+    React.createElement(
+        htmlTag,
+        {
+            className: cols({
+                tablet: normaliseProps(tablet),
+                desktop: normaliseProps(desktop),
+                leftCol: normaliseProps(leftCol),
+                wide: normaliseProps(wide),
+            }),
+        },
+        children,
+    );
 
 Cols.defaultProps = {
+    htmlTag: 'div',
     tablet: [columns.tablet.max, {}],
     desktop: [columns.desktop.max, {}],
     leftCol: [columns.leftCol.max, {}],
