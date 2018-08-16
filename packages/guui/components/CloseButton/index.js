@@ -5,7 +5,7 @@ import CloseIcon from '@guardian/pasteup/icons/x.svg';
 const closeButton = (foregroundColor, backgroundColor) => css`
     border-color: ${foregroundColor};
     fill: ${foregroundColor};
-    border-width: 1px,
+    border-width: 1px;
     border-style: solid;
     background-color: ${backgroundColor};
     border-radius: 50%;
