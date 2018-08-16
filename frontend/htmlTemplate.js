@@ -28,6 +28,7 @@ export default ({
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
     const vendorJS = assets.dist('vendor.js');
     const fontCSS = assets.static('css/fonts.css');
+    const fontDomain = 'https://interactive.guim.co.uk/fonts/guss-webfonts/';
 
     return `<!doctype html>
         <html>
@@ -39,7 +40,7 @@ export default ({
                 ${fontFiles
                     .map(
                         fontFile =>
-                            `<link rel="preload" href="https://interactive.guim.co.uk/fonts/guss-webfonts/${fontFile}" as="font" crossorigin>`,
+                            `<link rel="preload" href="${fontDomain}${fontFile}" as="font" crossorigin>`,
                     )
                     .join('\n')}
                 <link rel="stylesheet" href="${fontCSS}" media="nope!" onload="this.media='all'">
