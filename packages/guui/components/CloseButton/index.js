@@ -2,12 +2,12 @@
 import { css } from 'react-emotion';
 import CloseIcon from '@guardian/pasteup/icons/x.svg';
 
-const closeButton = (foregroundColor, backgroundColor) => css`
-    border-color: ${foregroundColor};
-    fill: ${foregroundColor};
+const closeButton = (foregroundColour, backgroundColour) => css`
+    border-color: ${foregroundColour};
+    fill: ${foregroundColour};
     border-width: 1px;
     border-style: solid;
-    background-color: ${backgroundColor};
+    background-color: ${backgroundColour};
     border-radius: 50%;
     height: 32px;
     width: 32px;
@@ -15,18 +15,18 @@ const closeButton = (foregroundColor, backgroundColor) => css`
     padding: 6px;
     cursor: pointer;
     :hover {
-        fill: ${backgroundColor};
-        background-color: ${foregroundColor};
+        fill: ${backgroundColour};
+        background-color: ${foregroundColour};
     }
 `;
 
 type Props = {
-    foregroundColor: string,
-    backgroundColor: string,
+    foregroundColour: string,
+    backgroundColour: string,
 };
 
-const CloseButton = ({ foregroundColor, backgroundColor }: Props) => (
-    <CloseIcon className={closeButton(foregroundColor, backgroundColor)} />
+const CloseButton = ({ foregroundColour, backgroundColour }: Props) => (
+    <CloseIcon className={closeButton(foregroundColour, backgroundColour)} />
 );
 
 export default CloseButton;
