@@ -4,19 +4,16 @@ import assets from './lib/assets';
 
 export default ({
     title = 'The Guardian',
-    vendor = assets.dist('vendor.js'),
-    fonts = assets.static('css/fonts.css'),
-    bundle,
+    bundleJS,
     css,
     html,
     data,
     cssIDs,
     nonBlockingJS = '',
+    fontFiles = [],
 }: {
     title?: string,
-    vendor?: string,
-    fonts?: string,
-    bundle: string,
+    bundleJS: string,
     css: string,
     html: string,
     data: {
@@ -25,18 +22,24 @@ export default ({
     },
     cssIDs: Array<string>,
     nonBlockingJS?: string,
+    fontFiles?: Array<string>
 }) => {
     const sanitiseDomRefs = jsString =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
+    const vendorJS = assets.dist('vendor.js');
+    const fontCSS = assets.static('css/fonts.css');
 
     return `<!doctype html>
         <html>
             <head>
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <link rel="preload" href="${vendor}" as="script">
-                <link rel="preload" href="${bundle}" as="script">
-                <link rel="stylesheet" href="${fonts}" media="nope!" onload="this.media='all'">
+                <link rel="preload" href="${vendorJS}}" as="script">
+                <link rel="preload" href="${bundleJS}" as="script">
+                ${fontFiles.map(fontFile => 
+                    `<link rel="preload" href="https://interactive.guim.co.uk/fonts/guss-webfonts/${fontFile}" as="font" crossorigin>`
+                ).join( '\n')}
+                <link rel="stylesheet" href="${fontCSS}" media="nope!" onload="this.media='all'">
                 <style>${resetCSS}${css}</style>
             </head>
             <body>
@@ -51,8 +54,8 @@ export default ({
                     }),
                 )};
                 </script>
-                <script src="${vendor}"></script>
-                <script src="${bundle}"></script>
+                <script src="${vendorJS}"></script>
+                <script src="${bundleJS}"></script>
                 <script>${nonBlockingJS}</script>
             </body>
         </html>`;
