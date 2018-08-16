@@ -96,6 +96,6 @@ export default ({ Page, data: { body, ...data } }: Props) => {
             CAPI,
         },
         cssIDs,
-        fontFiles
+        fontFiles,
     });
 };
