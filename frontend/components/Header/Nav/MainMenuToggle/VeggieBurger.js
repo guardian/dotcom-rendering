@@ -97,15 +97,13 @@ export default ({
 }: Props) => {
     if (enhanceCheckbox) {
         return (
-            // eslint-disable-next-line jsx-a11y/label-has-for
-            <label
+            <button
                 className={veggieBurger({ showMainMenu })}
                 onClick={() => toggleMainMenu()}
                 aria-controls={ariaControls}
-                htmlFor={htmlFor}
             >
                 <span className={veggieBurgerIcon({ showMainMenu })} />
-            </label>
+            </button>
         );
     }
 
