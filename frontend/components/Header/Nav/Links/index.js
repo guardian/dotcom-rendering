@@ -153,7 +153,10 @@ const Links = connect('header')(
                 </a>
             )}
 
-            <Search className={link({ showAtTablet: false })} href="/">
+            <Search
+                className={link({ showAtTablet: false })}
+                href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+            >
                 Search
             </Search>
         </div>
