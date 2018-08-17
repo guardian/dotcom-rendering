@@ -207,8 +207,9 @@ const FooterLinks = ({ links }: Props) => {
                 </a>
             </li>
         ));
+        const key = linkGroup.reduce((acc, { title }) => `acc-${title}`, '');
 
-        return <ul>{ls}</ul>;
+        return <ul key={key}>{ls}</ul>;
     });
 
     return <div className={footerList}>{linkGroups}</div>;
