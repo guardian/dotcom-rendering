@@ -6,32 +6,42 @@ type CapiKey = string;
 
 export const keyRegister: Set<CapiKey> = new Set();
 
-export const CapiComponent = (
-    MyComponent: React.ComponentType<{}>,
-    capiKey: CapiKey,
-) =>
-    class extends Component<{}, {}> {
-        shouldComponentUpdate() {
-            return false;
-        }
+type Props = {
+    htmlTag: string,
+    className: string,
+    capiKey: string,
+};
 
-        render() {
-            const ContentComponent = connect('CAPI')(({ CAPI = {} }) => {
-                const capiContent = CAPI[capiKey];
+export const CapiComponent = class extends Component<Props> {
+    shouldComponentUpdate() {
+        return false;
+    }
 
-                keyRegister.add(capiKey);
+    render() {
+        const {
+            htmlTag,
+            className,
+            capiKey
+        } = this.props;
 
-                return (
-                    <MyComponent
-                        {...this.props}
-                        data-capi-key={capiKey}
-                        dangerouslySetInnerHTML={{
-                            __html: capiContent,
-                        }}
-                    />
-                );
-            });
+        const ContentComponent = connect('CAPI')(({ CAPI = {} }) => {
+            const capiContent = CAPI[capiKey];
 
-            return <ContentComponent />;
-        }
-    };
+            keyRegister.add(capiKey);
+
+            return (
+                <>
+                    {React.createElement(
+                        htmlTag,
+                        {
+                            className,
+                            dangerouslySetInnerHTML: {__html: capiContent}
+                        },
+                    )}
+                </>
+            );
+        });
+
+        return <ContentComponent />;
+    }
+}
