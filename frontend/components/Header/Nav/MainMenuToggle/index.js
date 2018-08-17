@@ -59,8 +59,8 @@ const text = ({ showMainMenu }) => css`
     :after {
         content: '';
         border: 2px solid currentColor;
-        borderleft: transparent;
-        bordertop: transparent;
+        border-left: transparent;
+        border-top: transparent;
         display: inline-block;
         height: 8px;
         margin-left: 6px;
@@ -69,7 +69,7 @@ const text = ({ showMainMenu }) => css`
             : 'translateY(-3px) rotate(45deg)'};
         transition: transform 250ms ease-out;
         vertical-align: middle;
-        width: 8;
+        width: 8px;
     }
     :hover:after {
         transform: ${showMainMenu
@@ -129,9 +129,7 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                     key="OpenMainMenuButton"
                 >
                     <span className={screenReadable}>Show</span>
-                    <span className={text} showMainMenu={showMainMenu}>
-                        More
-                    </span>
+                    <span className={text({ showMainMenu })}>More</span>
                 </button>,
             ];
         }
@@ -154,7 +152,7 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                 key="OpenMainMenuLabel"
             >
                 <span className={screenReadable}>Show</span>
-                <span className={text}>More</span>
+                <span className={text({ showMainMenu })}>More</span>
             </label>,
             <input
                 type="checkbox"

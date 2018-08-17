@@ -1,5 +1,5 @@
 // @flow
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 
 import {
     tablet,
@@ -8,86 +8,77 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-const VeggieBurgerStyles = ({ showMainMenu }) => {
-    const styles = {
-        backgroundColor: '#121212',
-        top: 24,
-        boxShadow: '0 0 0 1px rgba(0, 0, 0, .08)',
-        color: '#e9eff1',
-        cursor: 'pointer',
-        height: 40,
-        minWidth: 40,
-        position: 'absolute',
-        border: 0,
-        borderRadius: '50%',
-        outline: 'none',
-        right: 5,
-        zIndex: showMainMenu ? 1071 : 0,
-        [mobileMedium]: {
-            bottom: -6,
-            height: 48,
-            minWidth: 48,
-            top: 'auto',
-        },
-        [mobileLandscape]: {
-            right: 51,
-        },
-        [tablet]: {
-            zIndex: 0,
-        },
-        [desktop]: {
-            display: 'none',
-        },
-    };
-
-    return styles;
-};
-
-const VeggieBurgerLabel = styled('label')(VeggieBurgerStyles);
-
-const VeggieBurgerButton = styled('label')(VeggieBurgerStyles);
-
-const VeggieBurgerIcon = styled('span')(({ showMainMenu }) => {
-    const beforeAfterStyles = {
-        content: '""',
-        backgroundColor: 'currentColor',
-        height: 2,
-        left: 0,
-        position: 'absolute',
-        width: 20,
-    };
-
-    const styles = {
-        top: '50%',
-        marginTop: -1,
-        right: 0,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        ...beforeAfterStyles,
-        ':before': {
-            ...beforeAfterStyles,
-            top: -6,
-        },
-        ':after': {
-            ...beforeAfterStyles,
-            bottom: -6,
-        },
-    };
-
-    if (showMainMenu) {
-        styles[':before'] = Object.assign({}, styles[':before'], {
-            top: 0,
-            transform: 'rotate(-45deg)',
-        });
-        styles[':after'] = Object.assign({}, styles[':after'], {
-            bottom: 0,
-            transform: 'rotate(45deg)',
-        });
-        styles.backgroundColor = 'transparent';
+const veggieBurger = ({ showMainMenu }) => css`
+    background-color: #121212;
+    top: 24px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    color: #e9eff1;
+    cursor: pointer;
+    height: 40px;
+    min-width: 40px;
+    position: absolute;
+    border: 0;
+    border-radius: 50%;
+    outline: none;
+    right: 5px;
+    z-index: ${showMainMenu ? 1071 : 0};
+    ${mobileMedium} {
+        bottom: -6px;
+        height: 48px;
+        min-width: 48px;
+        top: auto;
     }
+    ${mobileLandscape} {
+        right: 51px;
+    }
+    ${tablet} {
+        z-index: 0;
+    }
+    ${desktop} {
+        display: none;
+    }
+`;
 
-    return styles;
-});
+const veggieBurgerIcon = ({ showMainMenu }) => {
+    const beforeAfterStyles = css`
+        content: '';
+        background-color: currentColor;
+    `;
+    const lineStyles = css`
+        height: 2px;
+        left: 0;
+        position: absolute;
+        width: 20px;
+    `;
+
+    return css`
+        top: 50%;
+        right: 0;
+        margin-top: -1px;
+        margin-left: auto;
+        margin-right: auto;
+        ${lineStyles};
+        background-color: ${showMainMenu ? 'transparent' : 'currentColor'};
+        :before {
+            ${lineStyles};
+            ${beforeAfterStyles};
+            ${showMainMenu
+                ? `top: 0;
+            transform: rotate(-45deg);
+            `
+                : 'top: -6px;'};
+        }
+        :after {
+            ${lineStyles};
+            ${beforeAfterStyles};
+            ${showMainMenu
+                ? `bottom: 0;
+            transform: rotate(45deg);
+            `
+                : 'bottom: -6px;'};
+        }
+    `;
+};
 
 type Props = {
     toggleMainMenu: () => void,
@@ -106,24 +97,27 @@ export default ({
 }: Props) => {
     if (enhanceCheckbox) {
         return (
-            <VeggieBurgerButton
+            // eslint-disable-next-line jsx-a11y/label-has-for
+            <label
+                className={veggieBurger({ showMainMenu })}
                 onClick={() => toggleMainMenu()}
-                showMainMenu={showMainMenu}
                 aria-controls={ariaControls}
+                htmlFor={htmlFor}
             >
-                <VeggieBurgerIcon showMainMenu={showMainMenu} />
-            </VeggieBurgerButton>
+                <span className={veggieBurgerIcon({ showMainMenu })} />
+            </label>
         );
     }
 
     return (
-        <VeggieBurgerLabel
+        // eslint-disable-next-line jsx-a11y/label-has-for
+        <label
+            className={veggieBurger({ showMainMenu })}
             onClick={() => toggleMainMenu()}
-            showMainMenu={showMainMenu}
             htmlFor={htmlFor}
-            tabindex="0"
+            tabIndex="0"
         >
-            <VeggieBurgerIcon showMainMenu={showMainMenu} />
-        </VeggieBurgerLabel>
+            <span className={veggieBurgerIcon({ showMainMenu })} />
+        </label>
     );
 };
