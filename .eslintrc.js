@@ -52,4 +52,7 @@ module.exports = {
             },
         },
     ],
+    globals: {
+        React: true,
+    },
 };
