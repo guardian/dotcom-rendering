@@ -4,7 +4,7 @@ import { css } from 'react-emotion';
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
 
-import Container from '@guardian/guui/components/Container';
+import { Container } from '@guardian/guui';
 
 type Link = {
     title: string,

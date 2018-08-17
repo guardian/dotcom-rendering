@@ -3,11 +3,10 @@
 /* eslint-disable react/no-danger */
 
 import styled from 'react-emotion';
-import { GridRow, GridCols } from '@guardian/guui';
+import { GridRow, GridCols, Container } from '@guardian/guui';
 import { textEgyptian, headline } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { clearFix } from '@guardian/pasteup/mixins';
-import Container from '@guardian/guui/components/Container';
 
 import Page from '../components/Page';
 import MostViewed from '../components/MostViewed';
