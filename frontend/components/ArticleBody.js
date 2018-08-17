@@ -152,7 +152,11 @@ const ArticleBody = () => {
                 <div className={section}>Section</div>
                 <div className={headline}>
                     <h1 className={headerStyle}>{CAPI.headline}</h1>
-                    <CapiComponent htmlTag={"div"} capiKey={"standfirst"} className={standfirst} />
+                    <CapiComponent
+                        htmlTag="div"
+                        capiKey="standfirst"
+                        className={standfirst}
+                    />
                 </div>
                 <div className={meta}>Meta</div>
                 <div

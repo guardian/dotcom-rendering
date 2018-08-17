@@ -18,11 +18,7 @@ export const CapiComponent = class extends Component<Props> {
     }
 
     render() {
-        const {
-            htmlTag,
-            className,
-            capiKey
-        } = this.props;
+        const { htmlTag, className, capiKey } = this.props;
 
         const ContentComponent = connect('CAPI')(({ CAPI = {} }) => {
             const capiContent = CAPI[capiKey];
@@ -31,17 +27,14 @@ export const CapiComponent = class extends Component<Props> {
 
             return (
                 <>
-                    {React.createElement(
-                        htmlTag,
-                        {
-                            className,
-                            dangerouslySetInnerHTML: {__html: capiContent}
-                        },
-                    )}
+                    {React.createElement(htmlTag, {
+                        className,
+                        dangerouslySetInnerHTML: { __html: capiContent },
+                    })}
                 </>
             );
         });
 
         return <ContentComponent />;
     }
-}
+};
