@@ -42,7 +42,6 @@ const MainMenu = styled('div')(({ showMainMenu }) => ({
     },
     [desktop]: {
         display: showMainMenu ? 'block' : 'none',
-        marginTop: -20,
         position: 'absolute',
         paddingBottom: 0,
         paddingTop: 0,
