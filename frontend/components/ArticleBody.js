@@ -12,6 +12,8 @@ import {
     desktop,
 } from '@guardian/pasteup/breakpoints';
 
+import { CapiComponent } from '../components/CapiComponent';
+
 const wrapper = css`
     padding-top: 6px;
     margin-right: 0;
@@ -150,11 +152,10 @@ const ArticleBody = () => {
                 <div className={section}>Section</div>
                 <div className={headline}>
                     <h1 className={headerStyle}>{CAPI.headline}</h1>
-                    <div
+                    <CapiComponent
+                        htmlTag="div"
+                        capiKey="standfirst"
                         className={standfirst}
-                        dangerouslySetInnerHTML={{
-                            __html: CAPI.standfirst,
-                        }}
                     />
                 </div>
                 <div className={meta}>Meta</div>
