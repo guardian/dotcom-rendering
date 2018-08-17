@@ -1,6 +1,6 @@
 // @flow
 import { Component } from 'react';
-import styled from 'react-emotion';
+import { css, cx } from 'react-emotion';
 
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -8,83 +8,75 @@ import { headline } from '@guardian/pasteup/fonts';
 
 import VeggieBurger from './VeggieBurger';
 
-const ScreenReadable = styled('span')(screenReaderOnly);
-
+const screenReadable = css`
+    ${css(screenReaderOnly)};
+`;
 const navPrimaryColour = '#121212';
 const navSecondaryColour = '#5d5f5f';
-const openMainMenuStyles = {
-    display: 'none',
-    fontFamily: headline,
-    fontWeight: 400,
-    textDecoration: 'none',
-    color: navSecondaryColour,
-    cursor: 'pointer',
-    lineHeight: 1,
-    position: 'relative',
-    overflow: 'hidden',
-    border: 0,
-    backgroundColor: 'transparent',
-    fontSize: 22,
-    height: 48,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingRight: 20,
-    paddingLeft: 5,
-    [desktop]: {
-        display: 'block',
-    },
-    ':hover': {
-        color: navPrimaryColour,
-    },
-    ':focus': {
-        color: navPrimaryColour,
-    },
-};
-
-const OpenMainMenuCheckbox = styled('input')({
-    ...screenReaderOnly,
-    ':checked': {
-        '+ div': {
-            display: 'block',
-        },
-    },
-});
-
-const OpenMainMenuLabel = styled('label')({
-    ...openMainMenuStyles,
-    [desktop]: {
-        display: 'inline-block',
-    },
-});
-
-const OpenMainMenuButton = styled('button')({
-    ...openMainMenuStyles,
-});
-
-const OpenMainMenuText = styled('span')(({ showMainMenu }) => ({
-    display: 'block',
-    height: '100%',
-    ':after': {
-        content: '""',
-        border: '2px solid currentColor',
-        borderLeft: 'transparent',
-        borderTop: 'transparent',
-        display: 'inline-block',
-        height: 8,
-        marginLeft: 6,
-        transform: showMainMenu
+const openMainMenu = css`
+    display: none;
+    font-family: ${headline};
+    font-weight: 400;
+    text-decoration: none;
+    color: ${navSecondaryColour};
+    cursor: pointer;
+    line-height: 1rem;
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    background-color: transparent;
+    font-size: 22px;
+    height: 48px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 20px;
+    padding-left: 5px;
+    ${desktop} {
+        display: block;
+    }
+    :hover {
+        color: ${navPrimaryColour};
+    }
+    :focus {
+        color: ${navPrimaryColour};
+    }
+`;
+const checkbox = css`
+    :checked {
+        + div {
+            display: block;
+        }
+    }
+`;
+const label = css`
+    ${desktop} {
+        display: inline-block;
+    }
+`;
+const text = ({ showMainMenu }) => css`
+    display: block;
+    height: 100%;
+    :after {
+        content: '';
+        border: 2px solid currentColor;
+        borderleft: transparent;
+        bordertop: transparent;
+        display: inline-block;
+        height: 8px;
+        margin-left: 6px;
+        transform: ${showMainMenu
             ? 'translateY(1px) rotate(-135deg)'
-            : 'translateY(-3px) rotate(45deg)',
-        transition: 'transform 250ms ease-out',
-        verticalAlign: 'middle',
-        width: 8,
-    },
-    ':hover:after': {
-        transform: showMainMenu
+            : 'translateY(-3px) rotate(45deg)'};
+        transition: transform 250ms ease-out;
+        vertical-align: middle;
+        width: 8;
+    }
+    :hover:after {
+        transform: ${showMainMenu
             ? 'translateY(-2px) rotate(-135deg)'
-            : 'translateY(0) rotate(45deg)',
-    },
-}));
+            : 'translateY(0) rotate(45deg)'};
+    }
+`;
 
 type Props = {
     toggleMainMenu: () => void,
@@ -130,16 +122,17 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                     ariaControls={ariaControls}
                     key="VeggieBurger"
                 />,
-                <OpenMainMenuButton
+                <button
+                    className={openMainMenu}
                     onClick={() => toggleMainMenu()}
                     aria-controls={ariaControls}
                     key="OpenMainMenuButton"
                 >
-                    <ScreenReadable>Show</ScreenReadable>
-                    <OpenMainMenuText showMainMenu={showMainMenu}>
+                    <span className={screenReadable}>Show</span>
+                    <span className={text} showMainMenu={showMainMenu}>
                         More
-                    </OpenMainMenuText>
-                </OpenMainMenuButton>,
+                    </span>
+                </button>,
             ];
         }
 
@@ -152,21 +145,26 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                 ariaControls={ariaControls}
                 key="VeggieBurger"
             />,
-            <OpenMainMenuLabel
+            // We can't nest the input inside the label because the structure is important for CSS reasons
+            // eslint-disable-next-line jsx-a11y/label-has-for
+            <label
+                className={cx(openMainMenu, label)}
                 htmlFor={CHECKBOX_ID}
-                tabindex="0"
+                tabIndex="0"
                 key="OpenMainMenuLabel"
             >
-                <ScreenReadable>Show</ScreenReadable>
-                <OpenMainMenuText>More</OpenMainMenuText>
-            </OpenMainMenuLabel>,
-            <OpenMainMenuCheckbox
+                <span className={screenReadable}>Show</span>
+                <span className={text}>More</span>
+            </label>,
+            <input
                 type="checkbox"
+                className={cx(screenReadable, checkbox)}
                 id={CHECKBOX_ID}
                 aria-controls={ariaControls}
-                tabindex="-1"
+                tabIndex="-1"
                 key="OpenMainMenuCheckbox"
                 role="menuitemcheckbox"
+                aria-checked="false"
             />,
         ];
     }
