@@ -142,7 +142,7 @@ const bodyStyle = css`
 `;
 
 type Props = {
-    CAPI: CAPIType
+    CAPI: CAPIType,
 };
 
 const ArticleBody = ({ CAPI }: Props) => (
