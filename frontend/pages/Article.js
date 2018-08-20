@@ -2,8 +2,8 @@
 
 /* eslint-disable react/no-danger */
 
+import { Container } from '@guardian/guui';
 import { css } from 'react-emotion';
-import Container from '@guardian/guui/components/Container';
 import palette from '@guardian/pasteup/palette';
 
 import MostViewed from '../components/MostViewed';

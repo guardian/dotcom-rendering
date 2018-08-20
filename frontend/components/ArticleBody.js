@@ -142,11 +142,10 @@ const bodyStyle = css`
 `;
 
 type Props = {
-    CAPI: CAPIType,
+    CAPI: CAPIType
 };
 
 const ArticleBody = ({ CAPI }: Props) => (
-    /* eslint-disable react/no-danger */
     <div className={wrapper}>
         <header>
             <div className={section}>Section</div>
