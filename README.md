@@ -2,7 +2,7 @@
 
 
 
-Frontend rendering framework for theguardian.com. It uses [preact](https://preactjs.com), [emotion](https://emotion.sh) for CSS and [unistore](https://github.com/developit/unistore) for global state.
+Frontend rendering framework for theguardian.com. It uses [react](https://reactjs.org/), [emotion](https://emotion.sh) for CSS.
 
 _Any/all of these could change before we reach `2.0.0`._
 

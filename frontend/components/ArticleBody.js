@@ -1,7 +1,6 @@
 // @flow
 
 import { css } from 'react-emotion';
-import { connect } from 'unistore/react';
 import palette from '@guardian/pasteup/palette';
 
 import {
@@ -10,7 +9,7 @@ import {
     wide,
     leftCol,
     desktop,
-} from '@guardian/pasteup/breakpoints';
+} from '../../packages/pasteup/breakpoints';
 
 const wrapper = css`
     padding-top: 6px;
@@ -142,9 +141,13 @@ const bodyStyle = css`
     }
 `;
 
-const ArticleBody = () => {
+type Props = {
+    CAPI: CAPIType
+};
+
+const ArticleBody = ({ CAPI }: Props) => {
     /* eslint-disable react/no-danger */
-    const Body = connect('CAPI')(({ CAPI = {} }) => (
+    return (
         <div className={wrapper}>
             <header>
                 <div className={section}>Section</div>
@@ -176,9 +179,7 @@ const ArticleBody = () => {
             </div>
             <div className={secondaryColumn} />
         </div>
-    ));
-
-    return <Body />;
+    );
 };
 
 export default ArticleBody;

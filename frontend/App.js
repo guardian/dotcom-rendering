@@ -1,14 +1,12 @@
 // @flow
-import createStore from 'unistore';
-import { Provider } from 'unistore/react';
-
 type Props = {
-    data: {},
+    data: {
+        CAPI: CAPIType,
+        NAV: NavType
+    },
     Page: React.ComponentType<{}>,
 };
 
 export default ({ data, Page }: Props) => (
-    <Provider store={createStore(data)}>
-        <Page />
-    </Provider>
+    <Page data={data} />
 );

@@ -14,7 +14,6 @@ import Container from '@guardian/guui/components/Container';
 import palette from '@guardian/pasteup/palette';
 >>>>>>> Add body skeleton
 
-import Page from '../components/Page';
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -47,19 +46,27 @@ const articleContainer = css`
     padding: 0 20px;
 `;
 
-const Article = () => (
-    <Page>
-        <Header />
+// TODO: TYPE THIS
+type Props = {
+    data: {
+        CAPI: CAPIType,
+        NAV: NavType
+    }
+};
+
+const Article = ({ data }: Props) => (
+    <div>
+        <Header nav={data.NAV}/>
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>
-                    <ArticleBody />
+                    <ArticleBody CAPI={data.CAPI} />
                     <MostViewed />
                 </article>
             </Container>
         </main>
         <Footer />
-    </Page>
+    </div>
 );
 
 export default Article;
