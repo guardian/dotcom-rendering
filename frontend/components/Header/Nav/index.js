@@ -74,6 +74,11 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                 >
                     <EditionDropdown />
                     <Logo />
+                    {/* 
+                        TODO: The properties of the Links component
+                        have been hardcoded to false. At some point 
+                        these need to be dynamic.
+                    */}
                     <Links
                         isPayingMember={false}
                         isRecentContributor={false}
