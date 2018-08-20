@@ -11,6 +11,9 @@
 [libs]
 flow-typed
 
+####### frontend #######
+frontend/__flow__
+
 [options]
 module.file_ext=.js
 module.file_ext=.jsx

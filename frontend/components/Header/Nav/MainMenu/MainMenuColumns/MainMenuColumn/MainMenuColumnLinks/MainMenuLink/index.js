@@ -5,8 +5,6 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 
 import MainMenuLinkTitle from './MainMenuLinkTitle';
 
-import type { LinkType } from '../../../../../../Nav/__config__';
-
 const MainMenuLink = styled('li')(({ mobileOnly }) => ({
     boxSizing: 'border-box',
     overflow: 'hidden',

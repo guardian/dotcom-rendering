@@ -14,9 +14,14 @@ const header = css`
     }
 `;
 
-const Header = () => (
+// TODO: TYPE THIS
+type Props = {
+    nav: NavType,
+};
+
+const Header = ({ nav }: Props) => (
     <header className={header}>
-        <Nav />
+        <Nav nav={nav} />
     </header>
 );
 

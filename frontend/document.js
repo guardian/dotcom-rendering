@@ -8,7 +8,6 @@ import htmlTemplate from './htmlTemplate';
 
 import parseCAPI from './lib/parse-capi';
 import App from './App';
-import { keyRegister } from './components/CapiComponent';
 
 type Props = {
     data: {
@@ -35,22 +34,6 @@ export default ({ Page, data: { body, ...data } }: Props) => {
     const { html, css, ids: cssIDs }: renderToStringResult = extractCritical(
         renderToString(<App data={{ ...cleanedData }} Page={Page} />),
     );
-
-    /**
-     * To save sending CAPI data twice (in the HEAD and BODY)
-     * we replace any keys present in the CapiComponent keyRegister
-     * with document.querySelectors, therefore sending the data in the BODY only
-     * */
-    const CAPI = Object.keys(cleanedData.CAPI).reduce((acc, key) => {
-        if (keyRegister.has(key)) {
-            acc[
-                key
-            ] = `document.querySelector('[data-capi-key=${key}]').innerHTML`;
-        } else {
-            acc[key] = cleanedData.CAPI[key];
-        }
-        return acc;
-    }, {});
 
     /**
      * Preload the following woff2 font files
@@ -91,10 +74,7 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         bundleJS,
         css,
         html,
-        data: {
-            ...cleanedData,
-            CAPI,
-        },
+        data: cleanedData,
         cssIDs,
         fontFiles,
     });

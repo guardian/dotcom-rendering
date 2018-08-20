@@ -1,7 +1,6 @@
 // @flow
 
 import { css } from 'react-emotion';
-import { connect } from 'unistore/react';
 import palette from '@guardian/pasteup/palette';
 
 import {
@@ -142,43 +141,42 @@ const bodyStyle = css`
     }
 `;
 
-const ArticleBody = () => {
-    /* eslint-disable react/no-danger */
-    const Body = connect('CAPI')(({ CAPI = {} }) => (
-        <div className={wrapper}>
-            <header>
-                <div className={section}>Section</div>
-                <div className={headline}>
-                    <h1 className={headerStyle}>{CAPI.headline}</h1>
-                    <div
-                        className={standfirst}
-                        dangerouslySetInnerHTML={{
-                            __html: CAPI.standfirst,
-                        }}
-                    />
-                </div>
-                <div className={meta}>Meta</div>
-                <div
-                    className={mainMedia}
-                    dangerouslySetInnerHTML={{
-                        __html: CAPI.main,
-                    }}
-                />
-            </header>
-            <div>
-                <div
-                    className={bodyStyle}
-                    dangerouslySetInnerHTML={{
-                        __html: CAPI.body,
-                    }}
-                />
-                <div>Submeta</div>
-            </div>
-            <div className={secondaryColumn} />
-        </div>
-    ));
-
-    return <Body />;
+type Props = {
+    CAPI: CAPIType,
 };
+
+const ArticleBody = ({ CAPI }: Props) => (
+    <div className={wrapper}>
+        <header>
+            <div className={section}>Section</div>
+            <div className={headline}>
+                <h1 className={headerStyle}>{CAPI.headline}</h1>
+                <div
+                    className={standfirst}
+                    dangerouslySetInnerHTML={{
+                        __html: CAPI.standfirst,
+                    }}
+                />
+            </div>
+            <div className={meta}>Meta</div>
+            <div
+                className={mainMedia}
+                dangerouslySetInnerHTML={{
+                    __html: CAPI.main,
+                }}
+            />
+        </header>
+        <div>
+            <div
+                className={bodyStyle}
+                dangerouslySetInnerHTML={{
+                    __html: CAPI.body,
+                }}
+            />
+            <div>Submeta</div>
+        </div>
+        <div className={secondaryColumn} />
+    </div>
+);
 
 export default ArticleBody;

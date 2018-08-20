@@ -10,8 +10,6 @@ import {
 
 import MainMenuColumns from './MainMenuColumns';
 
-import type { NavType } from '../__config__';
-
 const MainMenu = styled('div')(({ showMainMenu }) => ({
     backgroundColor: '#e9eff1',
     boxSizing: 'border-box',

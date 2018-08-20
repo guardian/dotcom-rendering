@@ -7,8 +7,6 @@ import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import MainMenuColumnButton from './MainMenuColumnButton';
 import MainMenuColumnLinks from './MainMenuColumnLinks';
 
-import type { LinkType } from '../../../../Nav/__config__';
-
 const MainMenuColumnStyled = styled('li')(({ isPillar }) => {
     const styles = {
         fontSize: 18,

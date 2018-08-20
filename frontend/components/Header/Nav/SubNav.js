@@ -6,8 +6,6 @@ import palette from '@guardian/pasteup/palette';
 import { egyptian } from '@guardian/pasteup/fonts';
 import { desktop } from '@guardian/pasteup/breakpoints';
 
-import type { LinkType } from './__config__';
-
 const wrapperExpanded = css`
     padding: 0 16px;
 `;

@@ -10,7 +10,6 @@ import {
 
 import { pillars as pillarPalette } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
-import type { LinkType } from '../__config__';
 
 const pillarColours = Object.entries(pillarPalette)
     .map(([pillar, colour]) => ({

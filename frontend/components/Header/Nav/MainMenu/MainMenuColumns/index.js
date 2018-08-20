@@ -5,7 +5,6 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
 import MainMenuColumn from './MainMenuColumn';
-import type { LinkType } from '../../../Nav/__config__';
 
 const MainMenuColumns = styled('ul')({
     boxSizing: 'border-box',

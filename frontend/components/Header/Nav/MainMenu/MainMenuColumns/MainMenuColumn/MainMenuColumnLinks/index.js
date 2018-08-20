@@ -5,8 +5,6 @@ import { desktop } from '@guardian/pasteup/breakpoints';
 
 import MainMenuLink from './MainMenuLink';
 
-import type { LinkType } from '../../../../../Nav/__config__';
-
 const MainMenuColumnLinks = styled('ul')(({ showColumnLinks, isPillar }) => ({
     boxSizing: 'border-box',
     display: showColumnLinks || !isPillar ? 'flex' : 'none',
