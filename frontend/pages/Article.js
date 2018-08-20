@@ -5,6 +5,7 @@
 import { Container } from '@guardian/guui';
 import { css } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
+import { desktop } from '@guardian/pasteup/breakpoints';
 
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
@@ -32,6 +33,24 @@ const articleWrapper = css`
     }
 `;
 
+const secondaryColumn = css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 20px;
+    width: 300px;
+    margin-left: 20px;
+    margin-top: 6px;
+
+    background-color: ${palette.neutral[6]};
+    min-height: 300px;
+    display: none;
+
+    ${desktop} {
+        display: block;
+    }
+`;
+
 const articleContainer = css`
     position: relative;
     background-color: ${palette.neutral[8]};
@@ -52,6 +71,8 @@ const Article = ({ data }: Props) => (
             <Container className={articleContainer}>
                 <article>
                     <ArticleBody CAPI={data.CAPI} />
+                    <div className={secondaryColumn} />
+
                     <MostViewed />
                 </article>
             </Container>

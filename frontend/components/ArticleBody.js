@@ -25,6 +25,18 @@ const wrapper = css`
     ${leftCol} {
         margin-left: 150px;
         margin-right: 310px;
+
+        position: relative;
+        :before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            width: 1px;
+            background: #dcdcdc;
+        }
     }
 
     ${wide} {
@@ -56,24 +68,6 @@ const standfirst = css`
     line-height: 22px;
     color: ${palette.neutral[1]};
     margin-bottom: 12px;
-`;
-
-const secondaryColumn = css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 20px;
-    width: 300px;
-    margin-left: 20px;
-    margin-top: 6px;
-
-    background-color: ${palette.neutral[6]};
-    min-height: 300px;
-    display: none;
-
-    ${desktop} {
-        display: block;
-    }
 `;
 
 const section = css`
@@ -175,7 +169,6 @@ const ArticleBody = ({ CAPI }: Props) => (
             />
             <div>Submeta</div>
         </div>
-        <div className={secondaryColumn} />
     </div>
 );
 
