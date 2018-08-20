@@ -23,5 +23,5 @@ declare type CAPIType = {
     headline: string,
     standfirst: string,
     main: string,
-    body: string
+    body: string,
 };
