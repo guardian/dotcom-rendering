@@ -1,7 +1,14 @@
 // @flow
 
 import { css } from 'react-emotion';
-import palette from '@guardian/pasteup/palette';
+import palette, { pillars } from '@guardian/pasteup/palette';
+import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
+import TwitterIcon2 from '@guardian/pasteup/icons/twitter-2.svg';
+import FbIcon from '@guardian/pasteup/icons/facebook.svg';
+import EmailIcon from '@guardian/pasteup/icons/email.svg';
+import ShareIcon from '@guardian/pasteup/icons/share.svg';
+import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import dateformat from 'dateformat';
 
 import {
     from,
@@ -35,7 +42,7 @@ const wrapper = css`
             left: 0;
             height: 100%;
             width: 1px;
-            background: #dcdcdc;
+            background: ${palette.neutral[5]};
         }
     }
 
@@ -80,16 +87,22 @@ const leftColWidth = css`
     }
 `;
 
-const section = css`
+const section = colour => css`
     ${leftColWidth};
 
     grid-template-area: section;
 
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 20px;
     font-family: 'Guardian Egyptian Web', Georgia, serif;
     font-weight: 900;
-    line-height: 20px;
+
+    color: ${colour};
+
+    ${leftCol} {
+        font-size: 22px;
+        line-height: 28px;
+    }
 `;
 
 const headline = css`
@@ -107,16 +120,24 @@ const meta = css`
 
     background-image: repeating-linear-gradient(
         to bottom,
-        #dcdcdc,
-        #dcdcdc 0.0625rem,
-        transparent 0.0625rem,
-        transparent 0.25rem
+        ${palette.neutral[5]},
+        ${palette.neutral[5]} 1px,
+        transparent 1px,
+        transparent 4px
     );
     background-repeat: repeat-x;
     background-position: top;
-    background-size: 0.0625rem 0.8125rem;
-    padding-top: 0.9375rem;
-    margin-bottom: 0.375rem;
+    background-size: 1px 13px;
+    padding-top: 15px;
+    margin-bottom: 6px;
+`;
+
+const captionFont = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
+        'Lucida Grande', sans-serif;
+    color: ${palette.neutral[3]};
 `;
 
 const mainMedia = css`
@@ -139,11 +160,7 @@ const mainMedia = css`
     }
 
     figcaption {
-        font-size: 12px;
-        line-height: 16px;
-        font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica,
-            Arial, 'Lucida Grande', sans-serif;
-        color: ${palette.neutral[3]};
+        ${captionFont};
     }
 `;
 
@@ -153,6 +170,7 @@ const headerStyle = css`
     font-family: 'Guardian Egyptian Web', Georgia, serif;
     font-weight: 400;
     padding-bottom: 24px;
+    padding-top: 3px;
 `;
 
 const bodyStyle = css`
@@ -168,14 +186,132 @@ const bodyStyle = css`
     }
 `;
 
+const profile = colour => css`
+    color: ${colour};
+
+    font-size: 16px;
+    line-height: 20px;
+    font-family: 'Guardian Egyptian Web', Georgia, serif;
+    font-weight: 700;
+    margin-bottom: 4px;
+`;
+
+const shareIcons = css`
+    ${leftCol} {
+        border-bottom: 1px solid ${palette.neutral[5]};
+        padding-bottom: 6px;
+        margin-bottom: 6px;
+    }
+`;
+
+const share = colour => css`
+    border: 1px solid ${palette.neutral[5]};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 32px;
+    max-width: 100%;
+    width: auto;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+
+    fill: ${colour};
+
+    svg {
+        height: 88%;
+        width: 88%;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+    }
+
+    :hover {
+        background-color: ${colour};
+        border-color: ${colour};
+        fill: white;
+    }
+`;
+
+const ageWarning = colour => css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
+        'Lucida Grande', sans-serif;
+    display: inline-block;
+    color: ${colour};
+    margin-bottom: 12px;
+    fill: ${colour};
+`;
+
+const shareCount = css`
+    font-size: 18px;
+    line-height: 18px;
+    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
+        'Lucida Grande', sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    padding-top: 2px;
+    display: block;
+    color: ${palette.neutral[3]};
+`;
+
+const twitterHandle = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
+        'Lucida Grande', sans-serif;
+    font-weight: bold;
+    color: ${palette.neutral[3]};
+
+    padding-right: 10px;
+    display: inline-block;
+
+    svg {
+        height: 10px;
+        max-width: 12px;
+        margin-right: 0px;
+        fill: ${palette.neutral[3]};
+    }
+`;
+
+const dateline = css`
+    ${captionFont};
+
+    padding-top: 2px;
+    margin-bottom: 6px;
+`;
+
+const metaExtras = css`
+    border-top: 1px solid ${palette.neutral[5]};
+    padding-top: 6px;
+    margin-bottom: 6px;
+
+    ${until.desktop} {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+`;
+
 type Props = {
     CAPI: CAPIType,
 };
 
+const pillarColour = pillars.lifestyle; // TODO make dynamic
+
+const dtFormat = date => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
+
+/* eslint-disable react/no-danger */
 const ArticleBody = ({ CAPI }: Props) => (
     <div className={wrapper}>
         <header>
-            <div className={section}>Section</div>
+            <div className={section(pillarColour)}>{CAPI.sectionName}</div>
             <div className={headline}>
                 <h1 className={headerStyle}>{CAPI.headline}</h1>
                 <div
@@ -185,7 +321,41 @@ const ArticleBody = ({ CAPI }: Props) => (
                     }}
                 />
             </div>
-            <div className={meta}>Meta</div>
+            <div className={meta}>
+                <div className={profile(pillarColour)}>{CAPI.author}</div>
+                <div className={twitterHandle}>
+                    {/* TODO - from the contributor type tag */}
+                    <TwitterIcon2 /> @ByRobDavies
+                </div>
+                <div className={dateline}>
+                    {dtFormat(CAPI.webPublicationDate)}
+                </div>
+                <div className={metaExtras}>
+                    <div className={shareIcons}>
+                        <a href="/">
+                            <span className={share(pillarColour)}>
+                                <FbIcon />
+                            </span>
+                        </a>
+                        <a href="/">
+                            <span className={share(pillarColour)}>
+                                <TwitterIcon />
+                            </span>
+                        </a>
+                        <a href="/">
+                            <span className={share(pillarColour)}>
+                                <EmailIcon />
+                            </span>
+                        </a>
+                    </div>
+                    <div className={shareCount}>
+                        <ShareIcon /> 1055
+                    </div>
+                    <div className={ageWarning(pillarColour)}>
+                        <ClockIcon /> This article is over 1 year old.
+                    </div>
+                </div>
+            </div>
             <div
                 className={mainMedia}
                 dangerouslySetInnerHTML={{
