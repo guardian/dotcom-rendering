@@ -70,8 +70,26 @@ const standfirst = css`
     margin-bottom: 12px;
 `;
 
+const leftColWidth = css`
+    ${leftCol} {
+        width: 140px;
+    }
+
+    ${wide} {
+        width: 220px;
+    }
+`;
+
 const section = css`
+    ${leftColWidth};
+
     grid-template-area: section;
+
+    font-size: 22px;
+    line-height: 28px;
+    font-family: 'Guardian Egyptian Web', Georgia, serif;
+    font-weight: 900;
+    line-height: 20px;
 `;
 
 const headline = css`
@@ -79,11 +97,26 @@ const headline = css`
 `;
 
 const meta = css`
+    ${leftColWidth};
+
     grid-template-area: meta;
 
     ${from.tablet.until.leftCol} {
         order: 1;
     }
+
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #dcdcdc,
+        #dcdcdc 0.0625rem,
+        transparent 0.0625rem,
+        transparent 0.25rem
+    );
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: 0.0625rem 0.8125rem;
+    padding-top: 0.9375rem;
+    margin-bottom: 0.375rem;
 `;
 
 const mainMedia = css`
