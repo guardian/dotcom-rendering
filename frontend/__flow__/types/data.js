@@ -13,7 +13,7 @@ declare type NavType = {
     pillars: Array<LinkType>,
     otherLinks: Array<LinkType>,
     brandExtensions: Array<LinkType>,
-    subNavSections: {
+    subNavSections?: {
         parent: LinkType,
         links: Array<LinkType>,
     },
