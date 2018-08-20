@@ -38,7 +38,7 @@ export default ({ Page, data: { body, ...data } }: Props) => {
     /**
      * Preload the following woff2 font files
      * TODO: Identify critical fonts to preload
-    */
+     */
     const fontFiles = [
         'GHGuardianHeadline/GHGuardianHeadline-Bold.woff2',
         'GHGuardianHeadline/GHGuardianHeadline-Regular.woff2',
