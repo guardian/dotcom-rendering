@@ -38,7 +38,6 @@ const articleContainer = css`
     padding: 0 20px;
 `;
 
-// TODO: TYPE THIS
 type Props = {
     data: {
         CAPI: CAPIType,
