@@ -1,5 +1,5 @@
 // @flow
-import styled from 'react-emotion';
+import { css, cx } from 'react-emotion';
 
 import {
     until,
@@ -10,65 +10,82 @@ import {
 
 import MainMenuColumns from './MainMenuColumns';
 
-const MainMenu = styled('div')(({ showMainMenu }) => ({
-    backgroundColor: '#e9eff1',
-    boxSizing: 'border-box',
-    fontSize: 20,
-    left: 0,
-    lineHeight: 1,
-    marginRight: 29,
-    paddingBottom: 24,
-    top: 0,
-    zIndex: 1070,
-    [until.desktop]: {
-        transform: showMainMenu ? 'translateX(0%)' : 'translateX(-110%)',
-        transition: 'transform .4s cubic-bezier(.23, 1, .32, 1)',
-        boxShadow: '3px 0 16px rgba(0, 0, 0, .4)',
-        bottom: 0,
-        height: '100%',
-        overflow: 'auto',
-        paddingTop: 6,
-        position: 'fixed',
-        right: 0,
-        willChange: 'transform',
-    },
-    [mobileMedium]: {
-        marginRight: 29,
-    },
-    [mobileLandscape]: {
-        marginRight: 70,
-    },
-    [desktop]: {
-        display: showMainMenu ? 'block' : 'none',
-        position: 'absolute',
-        paddingBottom: 0,
-        paddingTop: 0,
-        top: '100%',
-        left: 0,
-        right: 0,
-        width: '100%',
-        borderBottom: '1px solid #abc2c9',
-        '@supports (width: 100vw)': {
-            left: '50%',
-            right: '50%',
-            width: '100vw',
-            marginLeft: '-50vw',
-            marginRight: '-50vw',
-        },
-    },
-}));
+import type { NavType } from '../__config__';
 
-type Props = {
+const showMenu = css`
+    ${desktop} {
+        display: block;
+    }
+    ${until.desktop} {
+        transform: translateX(0%);
+    }
+`;
+
+const MainMenu = css`
+    background-color: #e9eff1;
+    box-sizing: border-box;
+    font-size: 20px;
+    left: 0;
+    line-height: 1;
+    margin-right: 29px;
+    padding-bottom: 24px;
+    top: 0;
+    z-index: 1070;
+    ${until.desktop} {
+        transform: translate-x(-110%);
+        transition: transform 0.4s cubic-bezier(.23; 1; .32; 1);
+        box-shadow: 3px 0 16px rgba(0; 0; 0; 0.4);
+        bottom: 0;
+        height: 100%;
+        overflow: auto;
+        padding-top: 6px;
+        position: fixed;
+        right: 0;
+        will-change: transform;
+    }
+    ${mobileMedium} {
+        margin-right: 29px;
+    }
+    ${mobileLandscape} {
+        margin-right: 70;
+    }
+    ${desktop} {
+        display: none;
+        position: absolute;
+        padding-bottom: 0;
+        padding-top: 0;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-bottom: 1px solid #abc2c9;
+        @supports (width: 100vw) : {
+            left: 50%;
+            right: 50%;
+            width: 100vw;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+    }
+`;
+
+export default ({
+    showMainMenu,
+    id,
+    nav,
+}: {
     showMainMenu: boolean,
     id: string,
     nav: NavType,
-};
-
-export default ({ showMainMenu, id, nav }: Props) => (
-    <MainMenu showMainMenu={showMainMenu} aria-hidden={!showMainMenu} id={id}>
+}) => (
+    <div
+        className={cx(MainMenu, { [showMenu]: showMainMenu })}
+        aria-hidden={!showMainMenu}
+        id={id}
+    >
         <MainMenuColumns
             columns={nav.pillars}
             brandExtensions={nav.brandExtensions}
         />
-    </MainMenu>
+    </div>
 );
