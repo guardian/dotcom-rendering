@@ -46,7 +46,7 @@ const go = async () => {
         async (req, res, next) => {
             const { html, ...config } = await fetch(
                 `${req.query.url ||
-                    'https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance'}.json?guui`,
+                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?guui`,
             ).then(article => article.json());
 
             req.body = config;
