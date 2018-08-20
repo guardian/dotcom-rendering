@@ -2,7 +2,6 @@
 
 import { Component } from 'react';
 import { css } from 'react-emotion';
-import { connect } from 'unistore/react';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
@@ -38,7 +37,7 @@ const subnav = css`
 `;
 
 type Props = {
-    nav: NavType
+    nav: NavType,
 };
 
 export default class Nav extends Component<Props, { showMainMenu: boolean }> {
@@ -75,7 +74,11 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                 >
                     <EditionDropdown />
                     <Logo />
-                    <Links />
+                    <Links
+                        isPayingMember={false}
+                        isRecentContributor={false}
+                        isSignedIn={false}
+                    />
                     <Pillars
                         showMainMenu={showMainMenu}
                         pillars={nav.pillars || []}
@@ -105,7 +108,5 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                     )}
             </div>
         );
-
-        return <NavComponent />;
     }
 }

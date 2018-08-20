@@ -2,11 +2,9 @@
 type Props = {
     data: {
         CAPI: CAPIType,
-        NAV: NavType
+        NAV: NavType,
     },
     Page: React.ComponentType<{}>,
 };
 
-export default ({ data, Page }: Props) => (
-    <Page data={data} />
-);
+export default ({ data, Page }: Props) => <Page data={data} />;

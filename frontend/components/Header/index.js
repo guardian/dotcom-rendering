@@ -16,7 +16,7 @@ const header = css`
 
 // TODO: TYPE THIS
 type Props = {
-    NAV: NavType
+    nav: NavType,
 };
 
 const Header = ({ nav }: Props) => (

@@ -2,17 +2,9 @@
 
 /* eslint-disable react/no-danger */
 
-<<<<<<< HEAD
-import styled from 'react-emotion';
-import { GridRow, GridCols, Container } from '@guardian/guui';
-import { textEgyptian, headline } from '@guardian/pasteup/fonts';
-import palette from '@guardian/pasteup/palette';
-import { clearFix } from '@guardian/pasteup/mixins';
-=======
 import { css } from 'react-emotion';
 import Container from '@guardian/guui/components/Container';
 import palette from '@guardian/pasteup/palette';
->>>>>>> Add body skeleton
 
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
@@ -50,13 +42,13 @@ const articleContainer = css`
 type Props = {
     data: {
         CAPI: CAPIType,
-        NAV: NavType
-    }
+        NAV: NavType,
+    },
 };
 
 const Article = ({ data }: Props) => (
     <div>
-        <Header nav={data.NAV}/>
+        <Header nav={data.NAV} />
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>

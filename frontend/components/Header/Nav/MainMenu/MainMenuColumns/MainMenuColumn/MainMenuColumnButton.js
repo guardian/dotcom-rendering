@@ -5,8 +5,6 @@ import { headline } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
 
-import type { LinkType } from '../../../../Nav/__config__';
-
 const MainMenuColumnButton = styled('button')(
     ({ pillar, isLastIndex, showColumnLinks }) => ({
         backgroundColor: 'transparent',

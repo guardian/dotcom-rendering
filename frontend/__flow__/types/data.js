@@ -1,6 +1,6 @@
 // @flow
 
-export type LinkType = {
+declare type LinkType = {
     title: string,
     longTitle: string,
     url: string,
@@ -9,7 +9,7 @@ export type LinkType = {
     isPillar?: boolean,
 };
 
-export type NavType = {
+declare type NavType = {
     pillars: Array<LinkType>,
     otherLinks: Array<LinkType>,
     brandExtensions: Array<LinkType>,
@@ -17,4 +17,11 @@ export type NavType = {
         parent: LinkType,
         links: Array<LinkType>,
     },
+};
+
+declare type CAPIType = {
+    headline: string,
+    standfirst: string,
+    main: string,
+    body: string
 };

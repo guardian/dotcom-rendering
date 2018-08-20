@@ -1,6 +1,5 @@
 // @flow
 import { css, cx } from 'react-emotion';
-import { connect } from 'unistore/react';
 import Dropdown from '@guardian/guui/components/Dropdown';
 import type { Link as DropdownLink } from '@guardian/guui/components/Dropdown';
 import palette from '@guardian/pasteup/palette';
@@ -121,46 +120,47 @@ const identityLinks: Array<DropdownLink> = [
     },
 ];
 
-const Links = connect('header')(
-    ({ isPayingMember, isRecentContributor, isSignedIn }) => (
-        <div className={links}>
-            {isPayingMember ||
-                isRecentContributor || (
-                    <SupportTheGuardian href="/">
-                        Support The Guardian
-                    </SupportTheGuardian>
-                )}
+type Props = {
+    isPayingMember: boolean,
+    isRecentContributor: boolean,
+    isSignedIn: boolean,
+};
 
-            <a href={subscribeUrl} className={link({ showAtTablet: true })}>
-                Subscribe
-            </a>
-
-            <a href={jobsUrl} className={link({ showAtTablet: true })}>
-                Find a job
-            </a>
-
-            {isSignedIn ? (
-                <div className={link({ showAtTablet: false })}>
-                    <Dropdown
-                        label="My account"
-                        links={identityLinks}
-                        id="my-account"
-                    />
-                </div>
-            ) : (
-                <a className={link({ showAtTablet: false })} href={signInUrl}>
-                    Sign in / Register
-                </a>
+const Links = ({ isPayingMember, isRecentContributor, isSignedIn }: Props) => (
+    <div className={links}>
+        {isPayingMember ||
+            isRecentContributor || (
+                <SupportTheGuardian href="/">
+                    Support The Guardian
+                </SupportTheGuardian>
             )}
 
-            <Search
-                className={link({ showAtTablet: false })}
-                href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-            >
-                Search
-            </Search>
-        </div>
-    ),
+        <a href={subscribeUrl} className={link({ showAtTablet: true })}>
+            Subscribe
+        </a>
+
+        <a href={jobsUrl} className={link({ showAtTablet: true })}>
+            Find a job
+        </a>
+
+        {isSignedIn ? (
+            <div className={link({ showAtTablet: false })}>
+                <Dropdown
+                    label="My account"
+                    links={identityLinks}
+                    id="my-account"
+                />
+            </div>
+        ) : (
+            <a className={link({ showAtTablet: false })} href={signInUrl}>
+                Sign in / Register
+            </a>
+        )}
+
+        <Search className={link({ showAtTablet: false })} href="/">
+            Search
+        </Search>
+    </div>
 );
 
 export default Links;

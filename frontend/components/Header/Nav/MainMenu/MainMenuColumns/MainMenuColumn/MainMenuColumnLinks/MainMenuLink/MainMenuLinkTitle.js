@@ -5,8 +5,6 @@ import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 import { pillars } from '@guardian/pasteup/palette';
 
-import type { LinkType } from '../../../../../../Nav/__config__';
-
 const MainMenuColumnLinkTitle = styled('a')(({ column }) => ({
     backgroundColor: 'transparent',
     textDecoration: 'none',
