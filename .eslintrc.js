@@ -33,6 +33,7 @@ module.exports = {
         ],
         'react/default-props-match-prop-types': 'off',
         'react/require-default-props': 'off',
+        'import/prefer-default-export': 'off',
     },
     overrides: [
         {
