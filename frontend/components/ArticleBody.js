@@ -2,13 +2,14 @@
 
 import { css } from 'react-emotion';
 import palette, { pillars } from '@guardian/pasteup/palette';
+import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
-import TwitterIcon2 from '@guardian/pasteup/icons/twitter-2.svg';
-import FbIcon from '@guardian/pasteup/icons/facebook.svg';
+import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
 import EmailIcon from '@guardian/pasteup/icons/email.svg';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import dateformat from 'dateformat';
+import { egyptian, textEgyptian, textSans } from '@guardian/pasteup/fonts';
 
 import {
     from,
@@ -69,7 +70,7 @@ const wrapper = css`
 `;
 
 const standfirst = css`
-    font-family: 'Guardian Text Egyptian Web', Georgia, serif;
+    font-family: ${textEgyptian};
     font-weight: 700;
     font-size: 17px;
     line-height: 22px;
@@ -94,7 +95,7 @@ const section = colour => css`
 
     font-size: 16px;
     line-height: 20px;
-    font-family: 'Guardian Egyptian Web', Georgia, serif;
+    font-family: ${egyptian};
     font-weight: 900;
 
     color: ${colour};
@@ -135,8 +136,7 @@ const meta = css`
 const captionFont = css`
     font-size: 12px;
     line-height: 16px;
-    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
-        'Lucida Grande', sans-serif;
+    font-family: ${textSans}
     color: ${palette.neutral[3]};
 `;
 
@@ -167,7 +167,7 @@ const mainMedia = css`
 const headerStyle = css`
     font-size: 34px;
     line-height: 38px;
-    font-family: 'Guardian Egyptian Web', Georgia, serif;
+    font-family: ${egyptian};
     font-weight: 400;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -181,7 +181,7 @@ const bodyStyle = css`
     p {
         font-size: 16px;
         line-height: 24px;
-        font-family: 'Guardian Text Egyptian Web', Georgia, serif;
+        font-family: ${textEgyptian};
         margin-bottom: 12px;
     }
 `;
@@ -191,7 +191,7 @@ const profile = colour => css`
 
     font-size: 16px;
     line-height: 20px;
-    font-family: 'Guardian Egyptian Web', Georgia, serif;
+    font-family: ${egyptian};
     font-weight: 700;
     margin-bottom: 4px;
 `;
@@ -204,7 +204,7 @@ const shareIcons = css`
     }
 `;
 
-const share = colour => css`
+const shareIcon = colour => css`
     border: 1px solid ${palette.neutral[5]};
     white-space: nowrap;
     overflow: hidden;
@@ -241,8 +241,7 @@ const share = colour => css`
 const ageWarning = colour => css`
     font-size: 12px;
     line-height: 16px;
-    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
-        'Lucida Grande', sans-serif;
+    font-family: ${textSans};
     display: inline-block;
     color: ${colour};
     margin-bottom: 12px;
@@ -252,8 +251,7 @@ const ageWarning = colour => css`
 const shareCount = css`
     font-size: 18px;
     line-height: 18px;
-    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
-        'Lucida Grande', sans-serif;
+    font-family: ${textSans};
     font-weight: bold;
     letter-spacing: -1px;
     padding-top: 2px;
@@ -264,8 +262,7 @@ const shareCount = css`
 const twitterHandle = css`
     font-size: 12px;
     line-height: 16px;
-    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
-        'Lucida Grande', sans-serif;
+    font-family: ${textSans};
     font-weight: bold;
     color: ${palette.neutral[3]};
 
@@ -325,7 +322,7 @@ const ArticleBody = ({ CAPI }: Props) => (
                 <div className={profile(pillarColour)}>{CAPI.author}</div>
                 <div className={twitterHandle}>
                     {/* TODO - from the contributor type tag */}
-                    <TwitterIcon2 /> @ByRobDavies
+                    <TwitterIcon /> @ByRobDavies
                 </div>
                 <div className={dateline}>
                     {dtFormat(CAPI.webPublicationDate)}
@@ -333,17 +330,17 @@ const ArticleBody = ({ CAPI }: Props) => (
                 <div className={metaExtras}>
                     <div className={shareIcons}>
                         <a href="/">
-                            <span className={share(pillarColour)}>
-                                <FbIcon />
+                            <span className={shareIcon(pillarColour)}>
+                                <FacebookIcon />
                             </span>
                         </a>
                         <a href="/">
-                            <span className={share(pillarColour)}>
-                                <TwitterIcon />
+                            <span className={shareIcon(pillarColour)}>
+                                <TwitterIconPadded />
                             </span>
                         </a>
                         <a href="/">
-                            <span className={share(pillarColour)}>
+                            <span className={shareIcon(pillarColour)}>
                                 <EmailIcon />
                             </span>
                         </a>
