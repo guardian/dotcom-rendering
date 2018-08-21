@@ -10,8 +10,6 @@ import {
 
 import { Columns } from './Columns';
 
-import type { NavType } from '../__config__';
-
 const showMenu = css`
     ${desktop} {
         display: block;

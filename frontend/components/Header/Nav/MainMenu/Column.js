@@ -6,8 +6,6 @@ import { css, cx } from 'react-emotion';
 import { pillars } from '@guardian/pasteup/palette';
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
 
-import type { LinkType } from '../../Nav/__config__';
-
 const hideDesktop = css`
     ${desktop} {
         display: none;

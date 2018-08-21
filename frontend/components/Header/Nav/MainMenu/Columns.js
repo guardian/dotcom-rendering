@@ -5,7 +5,6 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
 import { Column } from './Column';
-import type { LinkType } from '../../Nav/__config__';
 
 const ColumnsStyle = css`
     box-sizing: border-box;
