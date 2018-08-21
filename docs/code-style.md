@@ -8,6 +8,29 @@ Running `make fix` after making any changes will fix most things.
 There are some styles the linter can't pick up. If you are unsure of anything, [AirBnB's style
 guide](https://github.com/airbnb/javascript) is a good place to look.
 
+### Always used named exports
+
+> Why? For components, a default export will show as `<Unknown>` in the React dev tools unless explicity declared to a constant first. Also, default exports can lead to confusing situations. (Using the name of the export as a local variable in the file, exporting named and a default)
+
+```js
+//bad
+//MyComponent.js
+export default () => <h1>My component</h1>
+
+//index.js
+import MyComponent from './MyComponent'
+
+```
+
+```js
+//good
+//MyComponent.js
+export const MyComponent = () => <h1>MyComponent</h1>
+
+//index.js
+import {MyComponent} from './MyComponent'
+```
+
 ## Components
 
 We use [React](https://reactjs.org/) for our components, and [Emotion](https://emotion.sh/) for our CSS in JS.
