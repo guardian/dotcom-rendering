@@ -4,9 +4,10 @@ import { css } from 'react-emotion';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
-import MainMenuColumn from './MainMenuColumn';
+import { Column } from './Column';
+import type { LinkType } from '../../Nav/__config__';
 
-const MainMenuColumnsStyle = css`
+const ColumnsStyle = css`
     box-sizing: border-box;
     max-width: none;
     ${desktop} {
@@ -25,18 +26,18 @@ const MainMenuColumnsStyle = css`
     }
 `;
 
-const BrandExtensionColumn = css`
+const desktopBrandExtensionColumn = css`
+    ${desktop} {
+        display: block;
+    }
     display: none;
     position: absolute;
     right: 20px;
     top: 18px;
     bottom: 0px;
-    ${desktop} {
-        display: block;
-    }
 `;
 
-const BrandExtensionList = css`
+const brandExtensionList = css`
     width: 186px;
     box-sizing: border-box;
     font-size: 18px;
@@ -55,13 +56,13 @@ const BrandExtensionList = css`
     }
 `;
 
-const BrandExtensionListItem = css`
+const brandExtensionListItem = css`
     marginright: 0;
     margintop: -6px;
     paddingbottom: 0;
 `;
 
-const BrandExtensionLink = css`
+const brandExtensionLink = css`
     font-size: 24px;
     font-weight: 700;
     line-height: 1.1;
@@ -81,46 +82,47 @@ const BrandExtensionLink = css`
     ${tablet} {
         padding-left: 60px;
     }
-    ${desktop}: {
+    ${desktop} {
         padding: 6px 0;
     }
-    :hover: {
+    :hover {
         color: #5d5f5f;
         text-decoration: underline;
     }
-    :focus: {
+    :focus {
         color: #5d5f5f;
         text-decoration: underline;
     }
-    > *: {
+    > * {
         pointer-events: none;
     }
 `;
 
-type Props = {
+export const Columns = ({
+    columns,
+    brandExtensions,
+}: {
     columns: Array<LinkType>,
     brandExtensions: Array<LinkType>,
-};
-
-export default ({ columns, brandExtensions }: Props) => (
-    <ul className={MainMenuColumnsStyle} role="menubar" tabIndex="-1">
+}) => (
+    <ul className={ColumnsStyle} role="menubar" tabIndex="-1">
         {columns.map((column, i) => (
-            <MainMenuColumn
+            <Column
                 column={column}
                 key={column.title.toLowerCase()}
                 isLastIndex={i === columns.length - 1}
                 brandExtensions={brandExtensions}
             />
         ))}
-        <li className={BrandExtensionColumn} role="none">
-            <ul className={BrandExtensionList} role="menu">
+        <li className={desktopBrandExtensionColumn} role="none">
+            <ul className={brandExtensionList} role="menu">
                 {brandExtensions.map(brandExtension => (
                     <li
-                        className={BrandExtensionListItem}
+                        className={brandExtensionListItem}
                         key={brandExtension.title}
                     >
                         <a
-                            className={BrandExtensionLink}
+                            className={brandExtensionLink}
                             href={brandExtension.url}
                             key={brandExtension.title}
                             role="menuitem"

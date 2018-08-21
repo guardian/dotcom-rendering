@@ -8,7 +8,7 @@ import {
     desktop,
 } from '@guardian/pasteup/breakpoints';
 
-import MainMenuColumns from './MainMenuColumns';
+import { Columns } from './Columns';
 
 import type { NavType } from '../__config__';
 
@@ -21,7 +21,7 @@ const showMenu = css`
     }
 `;
 
-const MainMenu = css`
+const mainMenu = css`
     background-color: #e9eff1;
     box-sizing: border-box;
     font-size: 20px;
@@ -69,7 +69,7 @@ const MainMenu = css`
     }
 `;
 
-export default ({
+export const MainMenu = ({
     showMainMenu,
     id,
     nav,
@@ -79,13 +79,10 @@ export default ({
     nav: NavType,
 }) => (
     <div
-        className={cx(MainMenu, { [showMenu]: showMainMenu })}
+        className={cx(mainMenu, { [showMenu]: showMainMenu })}
         aria-hidden={!showMainMenu}
         id={id}
     >
-        <MainMenuColumns
-            columns={nav.pillars}
-            brandExtensions={nav.brandExtensions}
-        />
+        <Columns columns={nav.pillars} brandExtensions={nav.brandExtensions} />
     </div>
 );
