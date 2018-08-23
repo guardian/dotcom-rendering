@@ -50,9 +50,9 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
     }
 
     toggleMainMenu() {
-        this.setState({
-            showMainMenu: !this.state.showMainMenu,
-        });
+        this.setState(state => ({
+            showMainMenu: !state.showMainMenu,
+        }));
     }
 
     render() {

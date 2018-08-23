@@ -31,9 +31,6 @@ const veggieBurger = ({ showMainMenu }) => css`
     ${mobileLandscape} {
         right: 51px;
     }
-    ${tablet} {
-        z-index: 0;
-    }
     ${desktop} {
         display: none;
     }
