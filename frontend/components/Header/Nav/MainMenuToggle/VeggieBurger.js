@@ -2,7 +2,6 @@
 import { css } from 'react-emotion';
 
 import {
-    tablet,
     desktop,
     mobileMedium,
     mobileLandscape,
