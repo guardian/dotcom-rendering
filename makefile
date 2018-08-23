@@ -69,6 +69,10 @@ lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@eslint . --quiet
 
+stylelint: clean-dist install
+	$(call log, "checking for style lint errors")
+	@stylelint "frontend/**/*.js"
+
 test: clear clean-dist install
 	$(call log, "there are no tests!")
 
