@@ -33,7 +33,7 @@ const desktopBrandExtensionColumn = css`
     position: absolute;
     right: 20px;
     top: 18px;
-    bottom: 0px;
+    bottom: 0;
 `;
 
 const brandExtensionList = css`
@@ -56,9 +56,9 @@ const brandExtensionList = css`
 `;
 
 const brandExtensionListItem = css`
-    marginright: 0;
-    margintop: -6px;
-    paddingbottom: 0;
+    margin-right: 0;
+    margin-top: -6px;
+    padding-bottom: 0;
 `;
 
 const brandExtensionLink = css`
@@ -84,10 +84,7 @@ const brandExtensionLink = css`
     ${desktop} {
         padding: 6px 0;
     }
-    :hover {
-        color: #5d5f5f;
-        text-decoration: underline;
-    }
+    :hover,
     :focus {
         color: #5d5f5f;
         text-decoration: underline;

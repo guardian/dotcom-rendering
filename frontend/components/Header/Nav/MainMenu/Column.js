@@ -28,7 +28,7 @@ const hideAfter = css`
     }
 `;
 
-const colapseColumnButton = css`
+const collapseColumnButton = css`
     background-color: transparent;
     border: 0;
     box-sizing: border-box;
@@ -90,7 +90,7 @@ const ColapseColumnButton = ({
 }) => (
     <button
         className={cx(
-            colapseColumnButton,
+            collapseColumnButton,
             pillarColor(column.title.toLowerCase()),
             {
                 [showColumnLinksStyle]: showColumnLinks,
@@ -133,10 +133,7 @@ const columnLinkTitle = css`
         line-height: 1.2;
         padding: 6px 0;
     }
-    :hover {
-        color: #5d5f5f;
-        text-decoration: underline;
-    }
+    :hover,
     :focus {
         color: #5d5f5f;
         text-decoration: underline;
@@ -163,9 +160,9 @@ const mainMenuLinkStyle = css`
     overflow: hidden;
     position: relative;
     width: 100%;
-    ${desktop}: {
+    ${desktop} {
         display: list-item;
-    };
+    }
 `;
 
 const ColumnLink = ({ link, column }: { column: LinkType, link: LinkType }) => (
