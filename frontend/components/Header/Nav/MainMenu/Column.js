@@ -168,7 +168,7 @@ const mainMenuLinkStyle = css`
 const ColumnLink = ({ link, column }: { column: LinkType, link: LinkType }) => (
     <li
         className={cx(mainMenuLinkStyle, {
-            [hideDesktop]: link.mobileOnly || false,
+            [hideDesktop]: link.mobileOnly,
         })}
         role="none"
     >
