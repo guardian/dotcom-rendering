@@ -71,7 +71,7 @@ lint: clean-dist install
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
-	@stylelint "frontend/**/*.js"
+	@stylelint "packages/guui/**/*.js" "frontend/**/*.js"
 
 test: clear clean-dist install
 	$(call log, "there are no tests!")
@@ -79,10 +79,10 @@ test: clear clean-dist install
 bundlesize: clear clean-dist install build
 	@bundlesize
 
-validate: clear clean-dist install flow lint test validate-build
+validate: clear clean-dist install flow lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: clear install flow lint test bundlesize
+validate-ci: clear install flow lint stylelint test bundlesize
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
