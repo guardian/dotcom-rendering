@@ -10,7 +10,7 @@ import EditionDropdown from './EditionDropdown';
 import Links from './Links';
 import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle';
-import MainMenu from './MainMenu';
+import { MainMenu } from './MainMenu';
 import SubNav from './SubNav';
 
 const centered = css`
