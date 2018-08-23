@@ -57,7 +57,7 @@ const mainMenu = css`
         right: 0;
         width: 100%;
         border-bottom: 1px solid #abc2c9;
-        @supports (width: 100vw) : {
+        @supports (width: 100vw) {
             left: 50%;
             right: 50%;
             width: 100vw;
