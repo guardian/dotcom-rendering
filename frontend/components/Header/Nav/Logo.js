@@ -30,7 +30,7 @@ const link = css`
         margin-bottom: -34px;
         margin-top: 5px;
         position: relative;
-        zindex: 1071;
+        z-index: 1071;
     }
 
     ${leftCol} {
