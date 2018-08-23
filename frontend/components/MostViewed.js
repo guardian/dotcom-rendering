@@ -26,7 +26,7 @@ const listItem = css`
     width: 100%;
     padding-top: 3px;
     padding-bottom: 0;
-    minheight: 288px;
+    min-height: 288px;
 `;
 
 const numberStyled = css`
@@ -34,12 +34,12 @@ const numberStyled = css`
 `;
 
 const headlineStyle = css`
-    marginleft: 70px;
+    margin-left: 70px;
 `;
 
 const headlineBody = css`
     color: ${palette.neutral[2]};
-    fontfamily: ${textEgyptian};
+    font-family: ${textEgyptian};
 `;
 
 export default class MostViewed extends Component<{}, { trails: [] }> {
