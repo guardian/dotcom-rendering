@@ -31,8 +31,8 @@ const mainMenu = css`
     z-index: 1070;
     ${until.desktop} {
         transform: translate-x(-110%);
-        transition: transform 0.4s cubic-bezier(.23; 1; .32; 1);
-        box-shadow: 3px 0 16px rgba(0; 0; 0; 0.4);
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
         bottom: 0;
         height: 100%;
         overflow: auto;

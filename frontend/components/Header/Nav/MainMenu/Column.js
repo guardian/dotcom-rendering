@@ -199,7 +199,6 @@ const columnLinks = css`
         flex-direction: column;
         flex-wrap: nowrap;
         order: 1;
-        padding-bottom: 0;
         background-color: #e9eff1;
         width: 100%;
         padding: 0 5px;
