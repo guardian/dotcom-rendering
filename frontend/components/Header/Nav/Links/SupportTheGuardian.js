@@ -24,14 +24,14 @@ const style = css`
         left: 0;
         right: 0;
         padding-top: 100%;
-        content: "";
+        content: '';
         display: block;
         position: absolute;
-        transition: background-color 250ms ease-out; transform 250ms ease-out;
+        transition: background-color 250ms ease-out;
         z-index: -1;
     }
     :hover:before {
-        backgroundcolor: ${pillars.news};
+        background-color: ${pillars.news};
         transform: scale(1.05);
     }
 `;

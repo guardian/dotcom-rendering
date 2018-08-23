@@ -1,0 +1,11 @@
+{
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-styled-components"
+  ],
+  "rules": {
+    "no-duplicate-selectors": null,
+    "no-descending-specificity": null
+  }
+}

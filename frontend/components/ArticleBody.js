@@ -91,7 +91,7 @@ const leftColWidth = css`
 const section = colour => css`
     ${leftColWidth};
 
-    grid-template-area: section;
+    grid-template-areas: section;
 
     font-size: 16px;
     line-height: 20px;
@@ -107,13 +107,13 @@ const section = colour => css`
 `;
 
 const headline = css`
-    grid-template-area: headline;
+    grid-template-areas: headline;
 `;
 
 const meta = css`
     ${leftColWidth};
 
-    grid-template-area: meta;
+    grid-template-areas: meta;
 
     ${from.tablet.until.leftCol} {
         order: 1;
@@ -136,12 +136,12 @@ const meta = css`
 const captionFont = css`
     font-size: 12px;
     line-height: 16px;
-    font-family: ${textSans}
+    font-family: ${textSans};
     color: ${palette.neutral[3]};
 `;
 
 const mainMedia = css`
-    grid-template-area: main-media;
+    grid-template-areas: main-media;
 
     margin-bottom: 6px;
 
