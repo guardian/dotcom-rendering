@@ -5,28 +5,32 @@ import path from 'path';
 import express from 'express';
 import type { $Request, $Response } from 'express';
 
+import {
+    extractArticleMeta,
+    extractNavMeta,
+} from '../../frontend/lib/parse-capi';
 import document from '../../frontend/document';
-import Article from '../../frontend/pages/Article';
-import { dist, getPagesForSite, root } from '../../config';
+import { dist, root } from '../../config';
 
-const render = async ({ params, body }: $Request, res: $Response) => {
+const renderArticle = async ({ body }: $Request, res: $Response) => {
     try {
-        const { page } = params;
-        const data = {
-            site: 'frontend',
-            page,
-            body,
-        };
+        const resp = document({
+            data: {
+                site: 'frontend',
+                page: 'Article',
+                CAPI: extractArticleMeta(body),
+                NAV: extractNavMeta(body),
+            },
+        });
 
-        const respBody = document({ Page: Article, data });
-        res.status(200).send(respBody);
+        res.status(200).send(resp);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
     }
 };
 
 // this export is the function used by webpackHotServerMiddleware in /dev-server.js
-export default () => render;
+export default () => renderArticle;
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
@@ -53,19 +57,16 @@ if (process.env.NODE_ENV === 'production') {
         app.use('/assets', express.static(path.relative(__dirname, dist)));
     }
 
-    app.use('/:page', render);
+    app.use('/Article', renderArticle);
 
-    app.get('/', async (req, res) => {
+    app.get('/', (req, res) => {
         try {
-            const pages = await getPagesForSite();
             res.send(`
                 <!DOCTYPE html>
                 <html>
                 <body>
                     <ul>
-                    ${pages
-                        .map(page => `<li><a href="/${page}">${page}</a></li>`)
-                        .join('')}
+                        <li><a href="/Article">Article</a></li>
                     </ul>
                 </body>
                 </html>

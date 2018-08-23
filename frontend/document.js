@@ -5,17 +5,15 @@ import { renderToString } from 'react-dom/server';
 
 import assets from './lib/assets';
 import htmlTemplate from './htmlTemplate';
-
-import parseCAPI from './lib/parse-capi';
-import App from './App';
+import Article from './pages/Article';
 
 type Props = {
     data: {
         page: string,
         site: string,
-        body: { config?: {}, contentFields?: {} },
+        CAPI: CAPIType,
+        NAV: NavType,
     },
-    Page: React.ComponentType<{}>,
 };
 
 type renderToStringResult = {
@@ -24,15 +22,11 @@ type renderToStringResult = {
     ids: Array<string>,
 };
 
-export default ({ Page, data: { body, ...data } }: Props) => {
-    const cleanedData = { ...parseCAPI(body), ...data };
-
-    const bundleJS = assets.dist(
-        `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
-    );
-
+export default ({ data }: Props) => {
+    const { page, site, CAPI, NAV } = data;
+    const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
     const { html, css, ids: cssIDs }: renderToStringResult = extractCritical(
-        renderToString(<App data={{ ...cleanedData }} Page={Page} />),
+        renderToString(<Article data={{ CAPI, NAV }} />),
     );
 
     /**
@@ -74,7 +68,7 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         bundleJS,
         css,
         html,
-        data: cleanedData,
+        data,
         cssIDs,
         fontFiles,
     });
