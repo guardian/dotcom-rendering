@@ -60,3 +60,21 @@ declare module '@guardian/pasteup/icons/arrow-right.svg' {
 declare module '@guardian/pasteup/logos/the-guardian.svg' {
     declare module.exports: $Exports<'@guardian/pasteup/logos/the-guardian.svg'>;
 }
+declare module '@guardian/pasteup/icons/clock.svg' {
+    declare module.exports: $Exports<'@guardian/pasteup/icons/clock.svg'>;
+}
+declare module '@guardian/pasteup/icons/email.svg' {
+    declare module.exports: $Exports<'@guardian/pasteup/icons/email.svg'>;
+}
+declare module '@guardian/pasteup/icons/facebook.svg' {
+    declare module.exports: $Exports<'@guardian/pasteup/icons/facebook.svg'>;
+}
+declare module '@guardian/pasteup/icons/share.svg' {
+    declare module.exports: $Exports<'@guardian/pasteup/icons/share.svg'>;
+}
+declare module '@guardian/pasteup/icons/twitter.svg' {
+    declare module.exports: $Exports<'@guardian/pasteup/icons/twitter.svg'>;
+}
+declare module '@guardian/pasteup/icons/twitter-padded.svg' {
+    declare module.exports: $Exports<'@guardian/pasteup/icons/twitter-padded.svg'>;
+}

@@ -24,4 +24,7 @@ declare type CAPIType = {
     standfirst: string,
     main: string,
     body: string,
+    author: string,
+    webPublicationDate: Date,
+    sectionName: string,
 };

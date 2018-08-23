@@ -44,12 +44,19 @@ export default ({ contentFields, config }: props = defaultArgs) => {
 
     nav.pillars = pillars;
 
+    const webPublicationDate = get(config, 'page.webPublicationDate', '');
+
     return {
         // here we create our own object of CAPI content on the 'CAPI' key
         CAPI: {
             headline: headline(get(config, 'page.headline', '')),
             standfirst: standfirst(get(contentFields, 'fields.standfirst', '')),
             main: main(get(contentFields, 'fields.main', '')),
+            author: get(config, 'page.author', ''),
+            webPublicationDate: webPublicationDate
+                ? new Date(webPublicationDate)
+                : webPublicationDate,
+            sectionName: get(config, 'page.sectionName', ''),
             body: body(
                 get(contentFields, 'fields.blocks.body', [])
                     .map(block => block.bodyHtml)
