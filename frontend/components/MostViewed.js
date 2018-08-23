@@ -1,46 +1,46 @@
 // @flow
 import { Component } from 'react';
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { Number } from '@guardian/guui';
 
-const Heading = styled('h2')({
-    fontFamily: headline,
-    color: palette.neutral[1],
-    fontSize: 20,
-    lineHeight: 1.2,
-    fontWeight: 900,
-    marginTop: 27,
-    marginBottom: 1,
-});
+const heading = css`
+    font-family: ${headline};
+    color: ${palette.neutral[1]};
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 900;
+    margin-top: 27px;
+    margin-bottom: 1px;
+`;
 
-const ListItem = styled('li')({
-    columnFill: 'balance',
-    [desktop]: {
-        columnWidth: 600,
-    },
-    height: '100%',
-    display: 'inline-block',
-    width: '100%',
-    paddingTop: '0.1875rem',
-    paddingBottom: 0,
-    minHeight: '4.5rem',
-});
+const listItem = css`
+    column-fill: balance;
+    ${desktop} {
+        column-width: 600px;
+    }
+    height: 100%;
+    display: inline-block;
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 0;
+    min-height: 288px;
+`;
 
-const NumberStyled = styled('span')({
-    float: 'left',
-});
+const numberStyled = css`
+    float: left;
+`;
 
-const Headline = styled('h2')({
-    marginLeft: '4.375rem',
-});
+const headlineStyle = css`
+    margin-left: 70px;
+`;
 
-const HeadlineBody = styled('a')({
-    color: palette.neutral[2],
-    fontFamily: textEgyptian,
-});
+const headlineBody = css`
+    color: ${palette.neutral[2]};
+    font-family: ${textEgyptian};
+`;
 
 export default class MostViewed extends Component<{}, { trails: [] }> {
     constructor() {
@@ -61,20 +61,20 @@ export default class MostViewed extends Component<{}, { trails: [] }> {
     render() {
         return (
             <div>
-                <Heading>Most Viewed</Heading>
+                <h2 className={heading}>Most Viewed</h2>
                 <ul>
                     {this.state.trails.map((trail, i) => (
-                        <ListItem key={trail.url}>
-                            <NumberStyled>
+                        <li className={listItem} key={trail.url}>
+                            <span className={numberStyled}>
                                 <Number index={i + 1} />
-                            </NumberStyled>
+                            </span>
 
-                            <Headline>
-                                <HeadlineBody href={trail.url}>
+                            <h2 className={headlineStyle}>
+                                <a className={headlineBody} href={trail.url}>
                                     {trail.linkText}
-                                </HeadlineBody>
-                            </Headline>
-                        </ListItem>
+                                </a>
+                            </h2>
+                        </li>
                     ))}
                 </ul>
             </div>

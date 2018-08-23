@@ -30,7 +30,7 @@ const mainMenu = css`
     top: 0;
     z-index: 1070;
     ${until.desktop} {
-        transform: translate-x(-110%);
+        transform: translateX(-110%);
         transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
         bottom: 0;
@@ -45,7 +45,7 @@ const mainMenu = css`
         margin-right: 29px;
     }
     ${mobileLandscape} {
-        margin-right: 70;
+        margin-right: 70px;
     }
     ${desktop} {
         display: none;
