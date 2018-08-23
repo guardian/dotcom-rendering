@@ -75,7 +75,7 @@ const collapseColumnButton = css`
     }
 `;
 
-const ColapseColumnButton = ({
+const CollapseColumnButton = ({
     column,
     showColumnLinks,
     toggleColumnLinks,
@@ -332,7 +332,7 @@ export class Column extends Component<
                 role="none"
             >
                 {column.isPillar && (
-                    <ColapseColumnButton
+                    <CollapseColumnButton
                         column={column}
                         showColumnLinks={showColumnLinks}
                         toggleColumnLinks={() => {
