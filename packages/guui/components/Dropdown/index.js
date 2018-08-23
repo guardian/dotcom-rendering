@@ -21,7 +21,7 @@ type Props = {
 };
 
 const input = css`
-    // TODO re-add screen-reader only mixin
+    /* TODO re-add screen-reader only mixin */
     :checked + ul {
         display: block;
     }
@@ -51,7 +51,6 @@ const link = css`
     line-height: 1.2;
     position: relative;
     transition: color 80ms ease-out;
-    padding: 6px 10px;
     margin: -1px 0 0 0;
     text-decoration: none;
 
