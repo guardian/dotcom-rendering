@@ -14,7 +14,6 @@ AWS.config.update({ region: 'eu-west-1' });
 const METRICS_TIME_RESOLUTION = 60 * 1000;
 
 const sendMetric = (m: Array) => {
-
     if (m.length === 0) {
         return;
     }

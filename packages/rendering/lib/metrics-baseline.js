@@ -2,13 +2,21 @@
 
 import os from 'os';
 import disk from 'diskusage';
-import { TimingMetric, BytesMetric, Collector } from './aws-metrics';
+import { BytesMetric, Collector } from './aws-metrics';
 
 const maxHeapMemory = BytesMetric('rendering', 'PROD', 'max-heap-memory');
 const freeDiskSpace = BytesMetric('rendering', 'PROD', 'free-disk-memory');
 const usedHeapMemory = BytesMetric('rendering', 'PROD', 'used-heap-memory');
-const freePhysicalMemory = BytesMetric('rendering', 'PROD', 'free-physical-memory');
-const totalPhysicalMemory = BytesMetric('rendering', 'PROD', 'total-physical-memory');
+const freePhysicalMemory = BytesMetric(
+    'rendering',
+    'PROD',
+    'free-physical-memory',
+);
+const totalPhysicalMemory = BytesMetric(
+    'rendering',
+    'PROD',
+    'total-physical-memory',
+);
 
 // transmits metrics to AWS
 
@@ -17,13 +25,13 @@ Collector(
     usedHeapMemory,
     totalPhysicalMemory,
     freePhysicalMemory,
-    freeDiskSpace
+    freeDiskSpace,
 );
 
 // records system metrics
 
 const recordBaselineCloudWatchMetrics = function recordBaselineCloudWatchMetrics() {
-    disk.check("/", (err, diskinfo) => {
+    disk.check('/', (err, diskinfo) => {
         if (err) {
             console.error(err);
         } else {
@@ -34,6 +42,6 @@ const recordBaselineCloudWatchMetrics = function recordBaselineCloudWatchMetrics
             freeDiskSpace.record(diskinfo.free);
         }
     });
-}
+};
 
 export default recordBaselineCloudWatchMetrics;

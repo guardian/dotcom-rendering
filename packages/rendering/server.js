@@ -11,7 +11,6 @@ import { dist, getPagesForSite, root } from '../../config';
 
 const render = async ({ params, body }: $Request, res: $Response) => {
     try {
-
         const { page } = params;
         const data = {
             site: 'frontend',
@@ -31,7 +30,6 @@ export default () => render;
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
-
     const app = express();
 
     app.use(express.json({ limit: '50mb' }));
@@ -84,7 +82,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 
     setInterval(() => {
-        recordBaselineCloudWatchMetrics()
+        recordBaselineCloudWatchMetrics();
     }, 10 * 1000);
 
     app.listen(9000);
