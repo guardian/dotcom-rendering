@@ -26,7 +26,7 @@ const common = ({ platform, page = '' }) => ({
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.[j|t]sx*$/,
                 exclude: /node_modules/,
                 use: [
                     'babel-loader',
