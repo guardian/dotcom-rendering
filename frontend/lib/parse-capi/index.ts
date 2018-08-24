@@ -24,7 +24,7 @@ const defaultArgs = { config: {}, contentFields: {} };
 // should be just that - a rendering layer only.
 //
 // We *should* however validate the data we receive at this point.
-export default ({ contentFields, config }: props = defaultArgs) => {
+const parse: (p: props) => {CAPI: CAPIType, NAV: NavType} = ({ contentFields, config }: props = defaultArgs) => {
     const nav = get(config, 'nav', []);
     const pillars = nav.pillars
         ? nav.pillars.map(link => {
@@ -67,3 +67,5 @@ export default ({ contentFields, config }: props = defaultArgs) => {
         NAV: nav,
     };
 };
+
+export default parse
