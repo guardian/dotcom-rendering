@@ -1,15 +1,15 @@
 // @flow
 
-declare type LinkType = {
+interface LinkType  {
     title: string,
     longTitle: string,
     url: string,
     children?: Array<LinkType>,
     mobileOnly?: boolean,
     isPillar?: boolean,
-};
+}
 
-declare type NavType = {
+interface NavType  {
     pillars: Array<LinkType>,
     otherLinks: Array<LinkType>,
     brandExtensions: Array<LinkType>,
@@ -17,9 +17,9 @@ declare type NavType = {
         parent: LinkType,
         links: Array<LinkType>,
     },
-};
+}
 
-declare type CAPIType = {
+interface CAPIType  {
     headline: string,
     standfirst: string,
     main: string,
@@ -27,4 +27,4 @@ declare type CAPIType = {
     author: string,
     webPublicationDate: Date,
     sectionName: string,
-};
+}

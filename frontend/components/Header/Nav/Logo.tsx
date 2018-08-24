@@ -1,5 +1,6 @@
 // @flow
 import { css } from 'react-emotion';
+import React from 'react';
 
 import {
     mobileMedium,

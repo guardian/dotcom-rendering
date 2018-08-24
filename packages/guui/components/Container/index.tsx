@@ -1,4 +1,5 @@
 // @flow
+import React from 'react'
 import { css, cx } from 'react-emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
@@ -29,7 +30,7 @@ const Container = ({
     ...props
 }: {
     className?: string,
-    children: React.Node,
+    children: React.ReactNode,
 }) => (
     <div className={cx(container, className)} {...props}>
         {children}

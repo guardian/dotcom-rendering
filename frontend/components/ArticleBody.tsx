@@ -1,5 +1,6 @@
 // @flow
 
+import React from 'react'
 import { css } from 'react-emotion';
 import palette, { pillars } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';

@@ -1,8 +1,9 @@
 // @flow
+import React from 'react';
 import { css } from 'react-emotion';
 import CloseIcon from '@guardian/pasteup/icons/x.svg';
 
-const closeButton = (foregroundColour, backgroundColour) => css`
+const closeButton = (foregroundColour: string, backgroundColour: string) => css`
     border-color: ${foregroundColour};
     fill: ${foregroundColour};
     border-width: 1px;

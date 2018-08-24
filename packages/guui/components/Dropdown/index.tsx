@@ -3,7 +3,7 @@
  * A dropdown component
  */
 
-import { Component } from 'react';
+import React from 'react';
 import { css, cx } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
@@ -143,9 +143,9 @@ const buttonExpanded = css`
     }
 `;
 
-export default class Dropdown extends Component<
+export default class Dropdown extends React.Component<
     Props,
-    { isExpanded: boolean, noJS: boolean },
+    { isExpanded: boolean, noJS: boolean }
 > {
     constructor(props: Props) {
         super(props);
@@ -206,7 +206,7 @@ export default class Dropdown extends Component<
                             id={checkboxID}
                             aria-controls={dropdownID}
                             aria-checked="false"
-                            tabIndex="-1"
+                            tabIndex={-1}
                             key="OpenMainMenuCheckbox"
                             role="menuitemcheckbox"
                         />

@@ -24,7 +24,7 @@ export default ({
     nonBlockingJS?: string,
     fontFiles?: Array<string>,
 }) => {
-    const sanitiseDomRefs = jsString =>
+    const sanitiseDomRefs = (jsString: string ) =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
     const vendorJS = assets.dist('vendor.js');
     const fontCSS = assets.static('css/fonts.css');

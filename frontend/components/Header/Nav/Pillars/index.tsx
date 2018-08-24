@@ -1,5 +1,6 @@
 // @flow
 import { css, cx } from 'react-emotion';
+import React from 'react';
 
 import {
     tablet,

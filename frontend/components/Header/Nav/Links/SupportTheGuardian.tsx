@@ -1,4 +1,5 @@
 // @flow
+import React from 'react'
 
 import palette, { pillars } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
@@ -35,15 +36,14 @@ const style = css`
         transform: scale(1.05);
     }
 `;
-const SupportTheGuardian = ({
+const SupportTheGuardian:React.SFC< {className?: string,
+children: React.ReactChild, href: string}> = ({
     className,
     children,
+    href,
     ...props
-}: {
-    className?: string,
-    children: React.Node,
-}) => (
-    <a className={cx(style, className)} {...props}>
+} ) => (
+    <a className={cx(style, className)} href={href} {...props}>
         {children}
     </a>
 );

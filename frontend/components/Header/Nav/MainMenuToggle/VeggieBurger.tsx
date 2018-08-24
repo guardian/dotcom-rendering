@@ -1,5 +1,6 @@
 // @flow
 import { css } from 'react-emotion';
+import React from 'react';
 
 import {
     desktop,
@@ -109,7 +110,7 @@ export default ({
             className={veggieBurger({ showMainMenu })}
             onClick={() => toggleMainMenu()}
             htmlFor={htmlFor}
-            tabIndex="0"
+            tabIndex={0}
         >
             <span className={veggieBurgerIcon({ showMainMenu })} />
         </label>

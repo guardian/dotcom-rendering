@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable global-require */
 
 import * as path from 'path';
@@ -56,7 +55,7 @@ if (process.env.NODE_ENV === 'production') {
 
     app.get('/', async (req, res) => {
         try {
-            const pages = await getPagesForSite();
+            const pages = await getPagesForSite() as Array<string>;
             res.send(`
                 <!DOCTYPE html>
                 <html>
@@ -76,7 +75,7 @@ if (process.env.NODE_ENV === 'production') {
 
     // express requires all 4 args here:
     // eslint-disable-next-line no-unused-vars
-    app.use((err, req, res, next) => {
+    app.use((err: any , req: any , res:any, next: any) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
     app.listen(9000);

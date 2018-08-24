@@ -1,5 +1,6 @@
 // @flow
 import { css } from 'react-emotion';
+import React from 'react'
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
@@ -101,7 +102,7 @@ export const Columns = ({
     columns: Array<LinkType>,
     brandExtensions: Array<LinkType>,
 }) => (
-    <ul className={ColumnsStyle} role="menubar" tabIndex="-1">
+    <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
         {columns.map((column, i) => (
             <Column
                 column={column}

@@ -1,5 +1,6 @@
 // @flow
 import { css } from 'react-emotion';
+import React from 'react'
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
@@ -222,7 +223,7 @@ const Footer = () => (
                 title="Guardian Email Sign-up Form"
                 src="https://www.theguardian.com/email/form/footer/today-uk"
                 scrolling="no"
-                seamless=""
+                seamless
                 id="footer__email-form"
                 className={emailSignup}
                 data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."

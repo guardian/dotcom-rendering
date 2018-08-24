@@ -1,10 +1,11 @@
 // @flow
 
-import { Component, createRef } from 'react';
+ import { Component, createRef } from 'react';
 import { css } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { egyptian } from '@guardian/pasteup/fonts';
 import { desktop } from '@guardian/pasteup/breakpoints';
+import React from 'react';
 
 const wrapperExpanded = css`
     padding: 0 16px;
@@ -100,12 +101,15 @@ export default class Subnav extends Component<
         showMore: boolean,
         isExpanded: boolean,
         noJS: boolean,
-    },
+    }
 > {
+    private ulRef: React.RefObject<HTMLUListElement>;
+
     constructor(props: Props) {
         super(props);
         this.state = { showMore: false, isExpanded: false, noJS: true };
         this.toggle_ = this.toggle.bind(this);
+        this.ulRef = createRef();
     }
 
     componentDidMount() {
@@ -117,7 +121,7 @@ export default class Subnav extends Component<
         });
     }
 
-    ulRef = createRef();
+   
 
     toggle_: () => void;
 

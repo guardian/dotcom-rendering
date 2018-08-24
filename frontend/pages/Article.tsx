@@ -1,7 +1,7 @@
 // @flow
 
 /* eslint-disable react/no-danger */
-
+import React from 'react'
 import { Container } from '@guardian/guui';
 import { css } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';

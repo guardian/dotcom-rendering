@@ -1,6 +1,7 @@
 // @flow
 import { Component } from 'react';
 import { css, cx } from 'react-emotion';
+import React from 'react';
 
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -148,7 +149,7 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
             <label
                 className={cx(openMainMenu, label)}
                 htmlFor={CHECKBOX_ID}
-                tabIndex="0"
+                tabIndex={0}
                 key="OpenMainMenuLabel"
             >
                 <span className={screenReadable}>Show</span>
@@ -159,7 +160,7 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                 className={cx(screenReadable, checkbox)}
                 id={CHECKBOX_ID}
                 aria-controls={ariaControls}
-                tabIndex="-1"
+                tabIndex={-1}
                 key="OpenMainMenuCheckbox"
                 role="menuitemcheckbox"
                 aria-checked="false"

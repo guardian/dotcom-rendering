@@ -1,5 +1,5 @@
 // @flow
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { headline, egyptian } from '@guardian/pasteup/fonts';
 
 import { css, cx } from 'react-emotion';
@@ -75,18 +75,16 @@ const collapseColumnButton = css`
     }
 `;
 
-const CollapseColumnButton = ({
+const CollapseColumnButton: React.SFC< { column: LinkType,
+showColumnLinks: boolean,
+toggleColumnLinks: () => void,
+ariaControls: string,
+isLastIndex: boolean}> = ({
     column,
     showColumnLinks,
     toggleColumnLinks,
     ariaControls,
     isLastIndex,
-}: {
-    column: LinkType,
-    showColumnLinks: boolean,
-    toggleColumnLinks: () => void,
-    ariaControls: string,
-    isLastIndex: boolean,
 }) => (
     <button
         className={cx(
@@ -302,7 +300,7 @@ type ColumnProps = {
 
 export class Column extends Component<
     ColumnProps,
-    { showColumnLinks: boolean },
+    { showColumnLinks: boolean }
 > {
     constructor(props: ColumnProps) {
         super(props);
@@ -339,7 +337,6 @@ export class Column extends Component<
                         }}
                         ariaControls={subNavId}
                         isLastIndex={isLastIndex}
-                        brandExtensions={brandExtensions}
                     />
                 )}
                 <ColumnLinks
