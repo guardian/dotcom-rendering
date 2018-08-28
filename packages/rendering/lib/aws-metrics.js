@@ -34,7 +34,7 @@ const sendMetric = (m: Array) => {
 
 // handles sending matrics to AWS
 
-const Collector = function collectAndSendAWSMetrics(...metrics: Metric) {
+const collectAndSendAWSMetrics = function(...metrics: Metric) {
     setInterval(() => {
         console.log('Collecting metrics');
         metrics.forEach(m => m.send());
@@ -118,7 +118,7 @@ const BytesMetric = function BytesMetric(
 };
 
 module.exports = {
-    Collector,
+    collectAndSendAWSMetrics,
     BytesMetric,
     TimingMetric,
 };

@@ -2,7 +2,7 @@
 
 import os from 'os';
 import disk from 'diskusage';
-import { BytesMetric, Collector } from './aws-metrics';
+import { BytesMetric, collectAndSendAWSMetrics } from './aws-metrics';
 
 const maxHeapMemory = BytesMetric('rendering', 'PROD', 'max-heap-memory');
 const freeDiskSpace = BytesMetric('rendering', 'PROD', 'free-disk-memory');
@@ -20,7 +20,7 @@ const totalPhysicalMemory = BytesMetric(
 
 // transmits metrics to AWS
 
-Collector(
+collectAndSendAWSMetrics(
     maxHeapMemory,
     usedHeapMemory,
     totalPhysicalMemory,
