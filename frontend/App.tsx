@@ -1,7 +1,9 @@
 import React from 'react'
-type Data = {
+export interface Data  {
     CAPI: CAPIType,
     NAV: NavType,
+    page: string,
+    site: string
 }
 type Props = {
     data: Data,

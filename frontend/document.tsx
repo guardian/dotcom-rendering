@@ -7,7 +7,8 @@ import assets from './lib/assets';
 import htmlTemplate from './htmlTemplate';
 
 import parseCAPI from './lib/parse-capi';
-import App from './App';
+import App, { Data } from './App';
+import { Component } from 'react';
 
 type Props = {
     data: {
@@ -15,7 +16,7 @@ type Props = {
         site: string,
         body: { config?: {}, contentFields?: {} },
     },
-    Page: React.ComponentType<{}>,
+    Page: React.ComponentType<{data: Data}>,
 };
 
 type renderToStringResult = {
@@ -25,14 +26,14 @@ type renderToStringResult = {
 };
 
 export default ({ Page, data: { body, ...data } }: Props) => {
-    const cleanedData = { ...parseCAPI(body), ...data };
+    const cleanedData: Data = { ...parseCAPI(body), ...data };
 
     const bundleJS = assets.dist(
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
     );
 
     const { html, css, ids: cssIDs }: renderToStringResult = extractCritical(
-        renderToString(<App data={{ ...cleanedData }} Page={Page} />),
+        renderToString(<App data={cleanedData} Page={Page} />),
     );
 //     frontend/document.tsx(35,29): error TS2322: 
     /**
