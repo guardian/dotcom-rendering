@@ -12,6 +12,9 @@ const reportBundleSize = new ReportBundleSize();
 const progress = new Progress();
 
 const common = ({ platform, page = '' }) => ({
+    resolve: {
+        extensions: ['js', 'ts', 'tsx', 'jsx'],
+    },
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
@@ -26,7 +29,7 @@ const common = ({ platform, page = '' }) => ({
     module: {
         rules: [
             {
-                test: /\.[j|t]sx*$/,
+                test: /(\.tsx)|(\.js)|(\.ts)$/,
                 exclude: /node_modules/,
                 use: [
                     'babel-loader',

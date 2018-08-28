@@ -1,4 +1,4 @@
-.PHONY: flow-typed install dev build clean-dist start stop monitor clear
+.PHONY: install dev build clean-dist start stop monitor clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -116,12 +116,6 @@ check-env: # private
 clear: # private
 	@clear
 
-flow-typed: yarn.lock
-	@rm -rf flow-typed/npm
-	@cd frontend && ../../node_modules/.bin/flow-typed install -p ../../
-	@cd packages/guui && ../../node_modules/.bin/flow-typed install -p ../../
-	@cd packages/pasteup && ../../node_modules/.bin/flow-typed install -p ../../
-	@flow-typed install
 
 # packages #########################################
 
