@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { css } from 'react-emotion';
 import CloseIcon from '@guardian/pasteup/icons/x.svg';

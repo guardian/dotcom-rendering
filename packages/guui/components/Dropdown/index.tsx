@@ -1,8 +1,3 @@
-// @flow
-/*
- * A dropdown component
- */
-
 import React from 'react';
 import { css, cx } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';

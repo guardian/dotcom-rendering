@@ -31,5 +31,6 @@ if (container) {
     if (process.env.NODE_ENV !== 'development') {
         hydrateCSS(cssIDs);
     }
+    
     hydrateApp(React.createElement(App, { Page, data }), container);
 }

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { css } from 'react-emotion';
 import {
@@ -8,12 +7,8 @@ import {
     wide as wideMq,
 } from '@guardian/pasteup/breakpoints';
 import { clearFix } from '@guardian/pasteup/mixins';
-import { leftCol } from '@guardian/pasteup/breakpoints';
-import { desktop } from '../../../pasteup/breakpoints';
 
 type Breakpoints = 'tablet' | 'desktop' | 'leftCol' | 'wide';
-
- 
 
 type BreakpointOptions = {
     inset?: number,
@@ -22,20 +17,20 @@ type BreakpointOptions = {
 type BreakpointProps = [number, BreakpointOptions];
 
 type BreakpointsWithProps = {
-[K in Breakpoints]: BreakpointProps    
+    [K in Breakpoints]: BreakpointProps    
 }
-
- 
 
 type GridSize = {
     max: number,
     width: number,
 };
+
 type GridSizes = {
     [K in Breakpoints]: GridSize
 };
 
 const gutter = 20;
+
 const columns: GridSizes = {
     tablet: {
         max: 12,
@@ -97,9 +92,6 @@ const row = css`
     margin-left: ${-gutter}px;
 `;
 
-// : ({
-//     [T in keyof Breakpoint]: BreakpointProps,
-// }) => any
 const cols: (props: BreakpointsWithProps) => any = ({
     tablet,
     desktop,
@@ -139,10 +131,6 @@ export const Row: React.SFC<{
     </>
 );
 
-// Row.defaultProps = {
-//     htmlTag: 'div',
-// };
-
 export interface ColsProps  { 
     tablet: BreakpointProps | number;
     desktop: BreakpointProps | number;
@@ -175,11 +163,3 @@ export const Cols: React.SFC<ColsProps> = ({
         )}
     </>
 );
-
-// Cols.defaultProps = {
-//     htmlTag: 'div',
-//     tablet: [columns.tablet.max, {}],
-//     desktop: [columns.desktop.max, {}],
-//     leftCol: [columns.leftCol.max, {}],
-//     wide: [columns.wide.max, {}],
-// };

@@ -1,5 +1,4 @@
-// @flow
-import React from "react"
+import React from "react";
 import Number0 from './0.svg';
 import Number1 from './1.svg';
 import Number2 from './2.svg';
@@ -11,20 +10,21 @@ import Number7 from './7.svg';
 import Number8 from './8.svg';
 import Number9 from './9.svg';
 import Number10 from './10.svg';
-const Number: React.SFC< { index: number }> = ({ index }) => {
+
+const Number = ({ index }: { index: number }) => {
     const numbers= [
-        ,<Number0 />,
-        ,<Number1 />,
-        ,<Number2 />,
-        ,<Number3 />,
-        ,<Number4 />,
-        ,<Number5 />,
-        ,<Number6 />,
-        ,<Number7 />,
-        ,<Number8 />,
-        ,<Number9 />,
-        , <Number10 />
-    ]
+        <Number0 />,
+        <Number1 />,
+        <Number2 />,
+        <Number3 />,
+        <Number4 />,
+        <Number5 />,
+        <Number6 />,
+        <Number7 />,
+        <Number8 />,
+        <Number9 />,
+        <Number10 />,
+    ];
 
     return numbers[index];
 };

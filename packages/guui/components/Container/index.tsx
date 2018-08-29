@@ -1,5 +1,4 @@
-// @flow
-import React from 'react'
+import React from 'react';
 import { css, cx } from 'react-emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
