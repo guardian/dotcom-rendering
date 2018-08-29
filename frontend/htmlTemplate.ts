@@ -1,5 +1,5 @@
 // @flow
-import resetCSS from './lib/reset-css';
+import resetCSS from /* preval */ './lib/reset-css';
 import assets from './lib/assets';
 
 export default ({

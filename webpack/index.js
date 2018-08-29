@@ -12,9 +12,6 @@ const reportBundleSize = new ReportBundleSize();
 const progress = new Progress();
 
 const common = ({ platform, page = '' }) => ({
-    resolve: {
-        extensions: ['js', 'ts', 'tsx', 'jsx'],
-    },
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
@@ -26,6 +23,9 @@ const common = ({ platform, page = '' }) => ({
         process.env.NODE_ENV === 'production'
             ? 'sourcemap'
             : 'cheap-module-eval-source-map',
+    resolve: {
+        extensions: ['.js', '.ts', '.tsx', '.jsx'],
+    },
     module: {
         rules: [
             {

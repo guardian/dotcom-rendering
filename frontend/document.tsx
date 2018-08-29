@@ -8,7 +8,6 @@ import htmlTemplate from './htmlTemplate';
 
 import parseCAPI from './lib/parse-capi';
 import App, { Data } from './App';
-import { Component } from 'react';
 
 type Props = {
     data: {

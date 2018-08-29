@@ -4,8 +4,8 @@
 import path from 'path';
 import express from 'express';
 
-import document from '../../frontend/document.tsx';
-import Article from '../../frontend/pages/Article.tsx';
+import document from '../../frontend/document';
+import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
 
 const render = async ({ params, body }, res) => {
