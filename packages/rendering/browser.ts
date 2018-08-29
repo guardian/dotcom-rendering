@@ -1,7 +1,5 @@
-// @flow
-
 // __PAGE__ string is replaced by string-replace-loader in webpack.config.js
-
+import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 

@@ -27,7 +27,7 @@ module.exports = ({ page }) => ({
         [`${siteName}.${page.toLowerCase()}`]: [
             DEV &&
                 'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-            require.resolve(`@guardian/rendering/browser`),
+            require.resolve(`@guardian/rendering/browser.ts`),
         ].filter(Boolean),
     },
     output: {
