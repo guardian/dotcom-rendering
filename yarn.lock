@@ -783,10 +783,6 @@
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.7.3.tgz#4240c5eee8af86843452af7497ac2808be04a77d"
 
-"@guardian/guui@0.1.0-alpha.1":
-  version "0.1.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@guardian/guui/-/guui-0.1.0-alpha.1.tgz#61886f5a1ebab6369044fef3d2f69930ca9fa688"
-
 "@kossnocorp/desvg@^0.1.1":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@kossnocorp/desvg/-/desvg-0.1.2.tgz#3d120b180d4dbb1f646603c3b9f2c89774c368dc"
