@@ -1,6 +1,4 @@
-// @flow
-
-import React from 'react'
+import React from 'react';
 import { css } from 'react-emotion';
 import palette, { pillars } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
@@ -306,7 +304,7 @@ const pillarColour = pillars.lifestyle; // TODO make dynamic
 const dtFormat = date => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
 
 /* eslint-disable react/no-danger */
-const ArticleBody = ({ CAPI }: Props) => (
+const ArticleBody: React.SFC<Props> = ({ CAPI }: Props) => (
     <div className={wrapper}>
         <header>
             <div className={section(pillarColour)}>{CAPI.sectionName}</div>

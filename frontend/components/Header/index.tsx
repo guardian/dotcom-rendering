@@ -1,6 +1,5 @@
-// @flow
+import React from 'react';
 import { css } from 'react-emotion';
-import React from 'react'
 
 import { tablet } from '@guardian/pasteup/breakpoints';
 
@@ -15,12 +14,11 @@ const header = css`
     }
 `;
 
-// TODO: TYPE THIS
 type Props = {
     nav: NavType,
 };
 
-const Header = ({ nav }: Props) => (
+const Header: React.SFC<Props> = ({ nav }: Props) => (
     <header className={header}>
         <Nav nav={nav} />
     </header>

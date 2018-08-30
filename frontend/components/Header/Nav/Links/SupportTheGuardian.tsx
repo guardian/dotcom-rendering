@@ -1,9 +1,8 @@
-// @flow
-import React from 'react'
+import React from 'react';
+import { cx, css } from 'react-emotion';
 
 import palette, { pillars } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
-import { cx, css } from 'react-emotion';
 
 const style = css`
     color: ${palette.neutral.header};
@@ -36,13 +35,19 @@ const style = css`
         transform: scale(1.05);
     }
 `;
-const SupportTheGuardian:React.SFC< {className?: string,
-children: React.ReactChild, href: string}> = ({
+
+type Props = {
+    className?: string,
+    children: React.ReactChild, 
+    href: string
+};
+
+const SupportTheGuardian: React.SFC<Props> = ({
     className,
     children,
     href,
     ...props
-} ) => (
+}: Props) => (
     <a className={cx(style, className)} href={href} {...props}>
         {children}
     </a>

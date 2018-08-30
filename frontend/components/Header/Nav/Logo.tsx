@@ -1,6 +1,5 @@
-// @flow
-import { css } from 'react-emotion';
 import React from 'react';
+import { css } from 'react-emotion';
 
 import {
     mobileMedium,
@@ -66,7 +65,7 @@ const style = css`
 
 const SVG = () => <TheGuardianLogoSVG className={style} />;
 
-const Logo = () => (
+const Logo: React.SFC = () => (
     <a className={link} href="/">
         <span className={css(screenReaderOnly)}>
             The Guardian - Back to home

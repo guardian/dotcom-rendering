@@ -1,6 +1,5 @@
-// @flow
-import { css } from 'react-emotion';
 import React from 'react'
+import { css } from 'react-emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
@@ -95,13 +94,15 @@ const brandExtensionLink = css`
     }
 `;
 
-export const Columns = ({
-    columns,
-    brandExtensions,
-}: {
+type Props = {
     columns: Array<LinkType>,
     brandExtensions: Array<LinkType>,
-}) => (
+};
+
+export const Columns: React.SFC<Props> = ({
+    columns,
+    brandExtensions,
+}: Props) => (
     <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
         {columns.map((column, i) => (
             <Column

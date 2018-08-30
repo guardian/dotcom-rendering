@@ -34,7 +34,7 @@ export default ({ Page, data: { body, ...data } }: Props) => {
     const { html, css, ids: cssIDs }: renderToStringResult = extractCritical(
         renderToString(<App data={cleanedData} Page={Page} />),
     );
-//     frontend/document.tsx(35,29): error TS2322: 
+
     /**
      * Preload the following woff2 font files
      * TODO: Identify critical fonts to preload

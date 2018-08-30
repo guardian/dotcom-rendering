@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 
 import { Dropdown } from '@guardian/guui';
@@ -12,7 +11,7 @@ const editionDropdown = css`
     z-index: 1072;
 `;
 
-const EditionDropdown = () => {
+const EditionDropdown: React.SFC = () => {
     const links: Array<Link> = [
         {
             url: '/preference/edition/uk',

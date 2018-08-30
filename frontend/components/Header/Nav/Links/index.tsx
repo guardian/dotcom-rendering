@@ -1,6 +1,5 @@
-// @flow
-import { css, cx } from 'react-emotion';
 import React from 'react'
+import { css, cx } from 'react-emotion';
 
 import Dropdown from '@guardian/guui/components/Dropdown';
 import { Link as DropdownLink } from '@guardian/guui/components/Dropdown';
@@ -62,7 +61,7 @@ const link = ({ showAtTablet }) => css`
     }
 `;
 
-const Search:React.SFC<{
+const Search: React.SFC<{
     href: string,
     children: React.ReactChild,
     className?: string,
@@ -130,7 +129,7 @@ type Props = {
     isSignedIn: boolean,
 };
 
-const Links = ({ isPayingMember, isRecentContributor, isSignedIn }: Props) => (
+const Links: React.SFC<Props> = ({ isPayingMember, isRecentContributor, isSignedIn }: Props) => (
     <div className={links}>
         {isPayingMember ||
             isRecentContributor || (

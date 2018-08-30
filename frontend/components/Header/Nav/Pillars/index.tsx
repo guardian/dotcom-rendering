@@ -1,6 +1,5 @@
-// @flow
-import { css, cx } from 'react-emotion';
 import React from 'react';
+import { css, cx } from 'react-emotion';
 
 import {
     tablet,
@@ -106,7 +105,7 @@ type Props = {
     pillars: Array<LinkType>,
 };
 
-const Pillars = ({ showMainMenu, pillars }: Props) => (
+const Pillars: React.SFC<Props> = ({ showMainMenu, pillars }: Props) => (
     <ul className={pillarsStyles}>
         {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (
             <li key={pillar.title}>

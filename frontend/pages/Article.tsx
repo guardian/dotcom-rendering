@@ -64,7 +64,7 @@ type Props = {
     },
 };
 
-const Article = ({ data }: Props) => (
+const Article: React.SFC<Props> = ({ data }: Props) => (
     <div>
         <Header nav={data.NAV} />
         <main className={articleWrapper}>

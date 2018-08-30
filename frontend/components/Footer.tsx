@@ -1,6 +1,5 @@
-// @flow
+import React from 'react';
 import { css } from 'react-emotion';
-import React from 'react'
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
@@ -199,7 +198,7 @@ type Props = {
     links: Array<Array<Link>>,
 };
 
-const FooterLinks = ({ links }: Props) => {
+const FooterLinks: React.SFC<Props> = ({ links }: Props) => {
     const linkGroups = links.map(linkGroup => {
         const ls = linkGroup.map(l => (
             <li key={l.url}>
@@ -216,7 +215,7 @@ const FooterLinks = ({ links }: Props) => {
     return <div className={footerList}>{linkGroups}</div>;
 };
 
-const Footer = () => (
+const Footer: React.SFC = () => (
     <footer className={footer}>
         <Container className={footerInner}>
             <iframe

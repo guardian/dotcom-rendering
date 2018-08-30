@@ -1,7 +1,4 @@
-// @flow
-import React from 'react';
-
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';

@@ -1,4 +1,3 @@
-// @flow
 import resetCSS from /* preval */ './lib/reset-css';
 import assets from './lib/assets';
 

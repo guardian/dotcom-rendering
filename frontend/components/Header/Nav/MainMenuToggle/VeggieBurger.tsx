@@ -1,6 +1,5 @@
-// @flow
-import { css } from 'react-emotion';
 import React from 'react';
+import { css } from 'react-emotion';
 
 import {
     desktop,
@@ -85,7 +84,7 @@ type Props = {
     ariaControls: string,
 };
 
-export default ({
+export const VeggieBurger: React.SFC<Props> = ({
     toggleMainMenu,
     showMainMenu,
     enhanceCheckbox,

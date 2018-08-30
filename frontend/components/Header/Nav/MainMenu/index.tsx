@@ -1,6 +1,5 @@
-// @flow
-import { css, cx } from 'react-emotion';
 import React from 'react'
+import { css, cx } from 'react-emotion';
 
 import {
     until,
@@ -68,15 +67,17 @@ const mainMenu = css`
     }
 `;
 
-export const MainMenu = ({
-    showMainMenu,
-    id,
-    nav,
-}: {
+type Props = {
     showMainMenu: boolean,
     id: string,
     nav: NavType,
-}) => (
+};
+
+export const MainMenu: React.SFC<Props> = ({
+    showMainMenu,
+    id,
+    nav,
+}: Props) => (
     <div
         className={cx(mainMenu, { [showMenu]: showMainMenu })}
         aria-hidden={!showMainMenu}

@@ -1,4 +1,3 @@
-// @flow
 import React, {Component} from 'react';
 import { css } from 'react-emotion';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';

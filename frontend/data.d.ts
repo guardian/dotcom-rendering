@@ -1,6 +1,6 @@
 // @flow
 
-interface LinkType  {
+interface LinkType {
     title: string,
     longTitle: string,
     url: string,
@@ -9,7 +9,7 @@ interface LinkType  {
     isPillar?: boolean,
 }
 
-interface NavType  {
+interface NavType {
     pillars: Array<LinkType>,
     otherLinks: Array<LinkType>,
     brandExtensions: Array<LinkType>,
@@ -19,7 +19,7 @@ interface NavType  {
     },
 }
 
-interface CAPIType  {
+interface CAPIType {
     headline: string,
     standfirst: string,
     main: string,

@@ -1,8 +1,7 @@
-// @flow
 import React, { Component } from 'react';
 import { headline, egyptian } from '@guardian/pasteup/fonts';
-
 import { css, cx } from 'react-emotion';
+
 import { pillars } from '@guardian/pasteup/palette';
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
 
@@ -75,17 +74,21 @@ const collapseColumnButton = css`
     }
 `;
 
-const CollapseColumnButton: React.SFC< { column: LinkType,
-showColumnLinks: boolean,
-toggleColumnLinks: () => void,
-ariaControls: string,
-isLastIndex: boolean}> = ({
+type CollapseColumnButtonProps = {
+    column: LinkType,
+    showColumnLinks: boolean,
+    toggleColumnLinks: () => void,
+    ariaControls: string,
+    isLastIndex: boolean,
+};
+
+const CollapseColumnButton: React.SFC<CollapseColumnButtonProps> = ({
     column,
     showColumnLinks,
     toggleColumnLinks,
     ariaControls,
     isLastIndex,
-}) => (
+}: CollapseColumnButtonProps) => (
     <button
         className={cx(
             collapseColumnButton,
@@ -163,7 +166,12 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const ColumnLink = ({ link, column }: { column: LinkType, link: LinkType }) => (
+type ColumnLinkProps = { 
+    column: LinkType, 
+    link: LinkType,
+};
+
+const ColumnLink: React.SFC<ColumnLinkProps> = ({ link, column }: ColumnLinkProps) => (
     <li
         className={cx(mainMenuLinkStyle, {
             [hideDesktop]: link.mobileOnly,
@@ -228,17 +236,19 @@ const getColumnLinks = (
     return column.children || [];
 };
 
-const ColumnLinks = ({
-    column,
-    showColumnLinks,
-    id,
-    brandExtensions,
-}: {
+type ColumnLinksProps = {
     column: LinkType,
     brandExtensions: Array<LinkType>,
     showColumnLinks: boolean,
     id: string,
-}) => {
+};
+
+const ColumnLinks: React.SFC<ColumnLinksProps> = ({
+    column,
+    showColumnLinks,
+    id,
+    brandExtensions,
+}: ColumnLinksProps) => {
     const links = getColumnLinks(column, brandExtensions);
 
     return (

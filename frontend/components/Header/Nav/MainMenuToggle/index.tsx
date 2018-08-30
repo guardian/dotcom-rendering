@@ -1,13 +1,11 @@
-// @flow
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { css, cx } from 'react-emotion';
-import React from 'react';
 
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/fonts';
 
-import VeggieBurger from './VeggieBurger';
+import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`
     ${css(screenReaderOnly)};

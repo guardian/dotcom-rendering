@@ -1,11 +1,8 @@
-// @flow
-
- import { Component, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import { css } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { egyptian } from '@guardian/pasteup/fonts';
 import { desktop } from '@guardian/pasteup/breakpoints';
-import React from 'react';
 
 const wrapperExpanded = css`
     padding: 0 16px;
