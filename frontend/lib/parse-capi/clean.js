@@ -1,4 +1,3 @@
-// @flow
 import compose from 'compose-function';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';

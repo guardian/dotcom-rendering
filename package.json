@@ -8,7 +8,7 @@
     ],
     "scripts": {
         "lint": "eslint .",
-        "flow": "flow"
+        "tsc": "tsc"
     },
     "bundlesize": [
         {

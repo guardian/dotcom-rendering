@@ -1,9 +1,7 @@
-// @flow
-
 let assetHash = {};
+
 try {
     // path is relative to the server bundle
-    // $FlowFixMe
     assetHash = require('./manifest.json'); // eslint-disable-line global-require,import/no-unresolved
 } catch (e) {
     // do nothing

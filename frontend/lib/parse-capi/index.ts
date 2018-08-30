@@ -1,5 +1,3 @@
-// @flow
-
 import compose from 'compose-function';
 import { string as curly } from 'curlyquotes';
 import get from 'lodash.get';

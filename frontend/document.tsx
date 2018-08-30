@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
@@ -15,7 +14,8 @@ type Props = {
         site: string,
         body: { config?: {}, contentFields?: {} },
     },
-    Page: React.ComponentType<{data: Data}>,
+    Page: React.StatelessComponent<{data: Data}>,
+    // Page: React.ComponentType<{data: Data}>,
 };
 
 type renderToStringResult = {

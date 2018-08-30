@@ -5,11 +5,11 @@ import { hydrate as hydrateApp } from 'react-dom';
 
 import 'ophan-tracker-js';
 
-// $FlowFixMe: shut up, flow
-import Page from '../../frontend/pages/__PAGE__'; // eslint-disable-line import/no-unresolved,import/extensions
+// @ts-ignore
+import Page from '../../frontend/pages/__PAGE__';
 
-// $FlowFixMe: shut up, flow
-import App from '../../frontend/App'; // eslint-disable-line import/no-unresolved,import/extensions
+// @ts-ignore
+import App from '../../frontend/App';
 
 const { data, cssIDs } = window.gu.app;
 

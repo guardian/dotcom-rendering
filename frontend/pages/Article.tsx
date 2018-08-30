@@ -1,5 +1,3 @@
-// @flow
-
 /* eslint-disable react/no-danger */
 import React from 'react'
 import { Container } from '@guardian/guui';
@@ -11,6 +9,7 @@ import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
+import { Data } from '../App';
 
 const articleWrapper = css`
     background-color: rgba(18, 18, 18, 0.05);
@@ -58,10 +57,7 @@ const articleContainer = css`
 `;
 
 type Props = {
-    data: {
-        CAPI: CAPIType,
-        NAV: NavType,
-    },
+    data: Data
 };
 
 const Article: React.SFC<Props> = ({ data }: Props) => (

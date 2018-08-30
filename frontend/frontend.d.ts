@@ -1,5 +1,3 @@
-// @flow
-
 interface LinkType {
     title: string,
     longTitle: string,

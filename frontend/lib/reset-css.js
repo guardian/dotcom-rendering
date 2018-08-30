@@ -1,4 +1,3 @@
-// @flow
 // @preval
 
 // note: this file is intended to imported using babel-plugin-preval

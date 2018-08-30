@@ -15,8 +15,8 @@ const render = async ({ params, body }: express.Request, res: express.Response) 
             page,
             body,
         };
-
         const respBody = document({ Page: Article, data });
+
         res.status(200).send(respBody);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
