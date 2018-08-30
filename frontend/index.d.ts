@@ -1,5 +1,3 @@
-// shared type declarations
-
 interface LinkType {
     title: string,
     longTitle: string,
@@ -27,10 +25,4 @@ interface CAPIType {
     author: string,
     webPublicationDate: Date,
     sectionName: string,
-}
-
-// 3rd party type declarations
-
-declare module "emotion-server" {
-    export const extractCritical: any;
 }
