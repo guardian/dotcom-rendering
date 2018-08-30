@@ -913,6 +913,10 @@
   dependencies:
     "@types/node" "*"
 
+"@types/dateformat@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-1.0.1.tgz#2e5b235c8c55652c4fec284506d2a36fe65fe87e"
+
 "@types/events@*":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
@@ -954,6 +958,13 @@
 "@types/range-parser@*":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.2.tgz#fa8e1ad1d474688a757140c91de6dace6f4abc8d"
+
+"@types/react-dom@^16.0.7":
+  version "16.0.7"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.7.tgz#54d0f867a76b90597e8432030d297982f25c20ba"
+  dependencies:
+    "@types/node" "*"
+    "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.4.11":
   version "16.4.11"

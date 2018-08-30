@@ -10,7 +10,7 @@ const hideDesktop = css`
         display: none;
     }
 `;
-const pillarColor = pillar =>
+const pillarColor = (pillar: string) =>
     css`
         color: ${pillars[pillar]};
     `;
@@ -145,7 +145,7 @@ const columnLinkTitle = css`
     }
 `;
 
-const pillarStyles = pillar => css`
+const pillarStyles = (pillar: string) => css`
     :hover {
         color: ${pillars[pillar]};
         text-decoration: underline;

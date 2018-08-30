@@ -52,7 +52,7 @@ const label = css`
         display: inline-block;
     }
 `;
-const text = ({ showMainMenu }) => css`
+const text = ({ showMainMenu }: { showMainMenu: boolean}) => css`
     display: block;
     height: 100%;
     :after {

@@ -87,7 +87,7 @@ const leftColWidth = css`
     }
 `;
 
-const section = colour => css`
+const section = (colour: string) => css`
     ${leftColWidth};
 
     grid-template-areas: section;
@@ -185,7 +185,7 @@ const bodyStyle = css`
     }
 `;
 
-const profile = colour => css`
+const profile = (colour: string) => css`
     color: ${colour};
 
     font-size: 16px;
@@ -203,7 +203,7 @@ const shareIcons = css`
     }
 `;
 
-const shareIcon = colour => css`
+const shareIcon = (colour: string) => css`
     border: 1px solid ${palette.neutral[5]};
     white-space: nowrap;
     overflow: hidden;
@@ -237,7 +237,7 @@ const shareIcon = colour => css`
     }
 `;
 
-const ageWarning = colour => css`
+const ageWarning = (colour: string) => css`
     font-size: 12px;
     line-height: 16px;
     font-family: ${textSans};
@@ -301,7 +301,7 @@ type Props = {
 
 const pillarColour = pillars.lifestyle; // TODO make dynamic
 
-const dtFormat = date => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
+const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
 
 /* eslint-disable react/no-danger */
 const ArticleBody: React.SFC<Props> = ({ CAPI }: Props) => (

@@ -7,7 +7,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-const veggieBurger = ({ showMainMenu }) => css`
+const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean}) => css`
     background-color: #121212;
     top: 24px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -35,7 +35,7 @@ const veggieBurger = ({ showMainMenu }) => css`
     }
 `;
 
-const veggieBurgerIcon = ({ showMainMenu }) => {
+const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean}) => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;

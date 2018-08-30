@@ -44,9 +44,11 @@ const headlineBody = css`
 type Trails =  Array<{url: string, linkText: string}>
 
 export default class MostViewed extends Component<{}, { trails: Trails }> {
-    constructor(props) {
+    constructor(props: {}) {
         super(props);
-        this.state = { trails: []};
+        this.state = { 
+            trails: []
+        };
     }
 
     componentDidMount() {

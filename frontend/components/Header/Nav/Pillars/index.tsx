@@ -18,6 +18,7 @@ const pillarColours = Object.entries(pillarPalette)
         `,
     }))
     .reduce((c, a) => ({ ...c, ...a }), {});
+
 const pillarsStyles = css`
     clear: right;
     margin: 0;
@@ -47,19 +48,26 @@ const pillarsStyles = css`
         }
     }
 `;
-const showMenuUnderline = (() => {
+
+const showMenuUnderline = (shouldShow: boolean): string => {
     const show = css`
         :hover {
             text-decoration: underline;
         }
     `;
+
     const hide = css`
         :hover {
             text-decoration: none;
         }
     `;
-    return shouldShow => (shouldShow ? show : hide);
-})();
+    
+    if (shouldShow) {
+        return show;
+    }
+
+    return hide;
+};
 
 const linkStyle = css`
     font-family: ${headline};

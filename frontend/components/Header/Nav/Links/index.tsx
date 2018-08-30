@@ -31,7 +31,7 @@ const search = css`
     }
 `;
 
-const link = ({ showAtTablet }) => css`
+const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     font-size: 14px;
     font-family: ${textSans};
     color: ${palette.neutral['1']};
