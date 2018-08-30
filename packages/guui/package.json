@@ -14,6 +14,7 @@
     "reset-css": "^3.0.0"
   },
   "devDependencies": {
+    "@types/react": "^16.4.13",
     "css-loader": "^0.28.11",
     "desvg-loader": "^0.1.0",
     "emotion": "^9.1.1",

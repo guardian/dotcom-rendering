@@ -1,4 +1,8 @@
-let assetHash = {};
+interface AssetHash {
+    [key: string]: string;
+}
+
+let assetHash: AssetHash = {};
 
 try {
     // path is relative to the server bundle
