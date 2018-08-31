@@ -7,7 +7,7 @@ const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
 
 export default compose(
-    s =>
+    (s: string) =>
         minify(s, {
             collapseWhitespace: true,
             removeEmptyElements: true,

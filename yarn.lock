@@ -907,6 +907,14 @@
     "@types/connect" "*"
     "@types/node" "*"
 
+"@types/clean-css@*":
+  version "3.4.30"
+  resolved "https://registry.yarnpkg.com/@types/clean-css/-/clean-css-3.4.30.tgz#0052c136f5248002428e3638b37de4a39818641d"
+
+"@types/compose-function@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/compose-function/-/compose-function-0.0.30.tgz#1fbe97dda4caeb7f5e45a553dee8d46d91e48c5b"
+
 "@types/connect@*":
   version "3.4.32"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.32.tgz#aa0e9616b9435ccad02bc52b5b454ffc2c70ba28"
@@ -916,6 +924,10 @@
 "@types/dateformat@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-1.0.1.tgz#2e5b235c8c55652c4fec284506d2a36fe65fe87e"
+
+"@types/dompurify@^0.0.31":
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/@types/dompurify/-/dompurify-0.0.31.tgz#f152d5a81f2b5625e29f11eb016cd9b301d0d4b4"
 
 "@types/events@*":
   version "1.2.0"
@@ -937,7 +949,30 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/lodash@^4.14.116":
+"@types/html-minifier@^3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@types/html-minifier/-/html-minifier-3.5.2.tgz#f897a13d847a774e9b6fd91497e9b0e0ead71c35"
+  dependencies:
+    "@types/clean-css" "*"
+    "@types/relateurl" "*"
+    "@types/uglify-js" "*"
+
+"@types/jsdom@^11.0.6":
+  version "11.0.6"
+  resolved "https://registry.yarnpkg.com/@types/jsdom/-/jsdom-11.0.6.tgz#20d6e8c83f15fef0b40c39b3faebe8bc7587d86e"
+  dependencies:
+    "@types/events" "*"
+    "@types/node" "*"
+    "@types/tough-cookie" "*"
+    parse5 "^4.0.0"
+
+"@types/lodash.get@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@types/lodash.get/-/lodash.get-4.4.4.tgz#34b67841594e4ddc8853341d65e971a38cb4e2f0"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
   version "4.14.116"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.116.tgz#5ccf215653e3e8c786a58390751033a9adca0eb9"
 
@@ -973,6 +1008,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/relateurl@*":
+  version "0.2.28"
+  resolved "https://registry.yarnpkg.com/@types/relateurl/-/relateurl-0.2.28.tgz#6bda7db8653fa62643f5ee69e9f69c11a392e3a6"
+
 "@types/serve-static@*":
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.2.tgz#f5ac4d7a6420a99a6a45af4719f4dcd8cd907a48"
@@ -983,6 +1022,10 @@
 "@types/tapable@*":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.4.tgz#b4ffc7dc97b498c969b360a41eee247f82616370"
+
+"@types/tough-cookie@*":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.3.tgz#7f226d67d654ec9070e755f46daebf014628e9d9"
 
 "@types/uglify-js@*":
   version "3.0.3"
@@ -6573,7 +6616,7 @@ parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
 
-parse5@4.0.0:
+parse5@4.0.0, parse5@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
 

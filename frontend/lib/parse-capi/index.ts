@@ -25,7 +25,7 @@ const defaultArgs = { config: {}, contentFields: {} };
 const parse: (p: props) => {CAPI: CAPIType, NAV: NavType} = ({ contentFields, config }: props = defaultArgs) => {
     const nav = get(config, 'nav', []);
     const pillars = nav.pillars
-        ? nav.pillars.map(link => {
+        ? nav.pillars.map((link: LinkType) => {
               const l = link;
               l.isPillar = true;
               return l;
@@ -57,7 +57,7 @@ const parse: (p: props) => {CAPI: CAPIType, NAV: NavType} = ({ contentFields, co
             sectionName: get(config, 'page.sectionName', ''),
             body: body(
                 get(contentFields, 'fields.blocks.body', [])
-                    .map(block => block.bodyHtml)
+                    .map((block: { bodyHtml: string }) => block.bodyHtml)
                     .filter(Boolean)
                     .join(''),
             ),
