@@ -1,4 +1,3 @@
-// @flow
 const palette = {
     red: {
         light: '#ff4e36',
@@ -44,14 +43,15 @@ const palette = {
 
 export default palette;
 
-export const pillars = {
+export const pillars: { [s: string]: string; } = {
     news: palette.red.medium,
     opinion: palette.orange.medium,
     sport: palette.blue.medium,
     culture: palette.gold.medium,
     lifestyle: palette.pink.medium,
 };
-export const pillarsHighlight = {
+
+export const pillarsHighlight: { [s: string]: string; } = {
     news: palette.red.light,
     opinion: palette.orange.light,
     sport: palette.blue.light,

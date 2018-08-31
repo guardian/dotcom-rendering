@@ -1,5 +1,3 @@
-// @flow
-
 // https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_screen-reader.scss
 export const screenReaderOnly = {
     position: 'absolute',

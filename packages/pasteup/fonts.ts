@@ -1,5 +1,3 @@
-// @flow
-
 export const textSans = [
     'Guardian Text Sans Web',
     'Helvetica Neue',
