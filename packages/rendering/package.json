@@ -16,6 +16,7 @@
     "react-dom": "^16.4.0"
   },
   "devDependencies": {
-    "@types/express": "^4.16.0"
+    "@types/express": "^4.16.0",
+    "@types/react-dom": "^16.0.7"
   }
 }
