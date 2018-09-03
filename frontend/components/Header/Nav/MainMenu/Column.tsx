@@ -74,21 +74,19 @@ const collapseColumnButton = css`
     }
 `;
 
-type CollapseColumnButtonProps = {
+const CollapseColumnButton: React.SFC<{
     column: LinkType,
     showColumnLinks: boolean,
     toggleColumnLinks: () => void,
     ariaControls: string,
     isLastIndex: boolean,
-};
-
-const CollapseColumnButton: React.SFC<CollapseColumnButtonProps> = ({
+}> = ({
     column,
     showColumnLinks,
     toggleColumnLinks,
     ariaControls,
     isLastIndex,
-}: CollapseColumnButtonProps) => (
+}) => (
     <button
         className={cx(
             collapseColumnButton,
@@ -166,12 +164,10 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-type ColumnLinkProps = { 
+const ColumnLink: React.SFC<{ 
     column: LinkType, 
     link: LinkType,
-};
-
-const ColumnLink: React.SFC<ColumnLinkProps> = ({ link, column }: ColumnLinkProps) => (
+}> = ({ link, column }) => (
     <li
         className={cx(mainMenuLinkStyle, {
             [hideDesktop]: link.mobileOnly,
@@ -236,19 +232,17 @@ const getColumnLinks = (
     return column.children || [];
 };
 
-type ColumnLinksProps = {
+const ColumnLinks: React.SFC<{
     column: LinkType,
     brandExtensions: Array<LinkType>,
     showColumnLinks: boolean,
     id: string,
-};
-
-const ColumnLinks: React.SFC<ColumnLinksProps> = ({
+}> = ({
     column,
     showColumnLinks,
     id,
     brandExtensions,
-}: ColumnLinksProps) => {
+}) => {
     const links = getColumnLinks(column, brandExtensions);
 
     return (

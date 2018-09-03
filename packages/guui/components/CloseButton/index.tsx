@@ -20,12 +20,10 @@ const closeButton = (foregroundColour: string, backgroundColour: string) => css`
     }
 `;
 
-type Props = {
+const CloseButton: React.SFC<{
     foregroundColour: string,
     backgroundColour: string,
-};
-
-const CloseButton: React.SFC<Props> = ({ foregroundColour, backgroundColour }: Props) => (
+}> = ({ foregroundColour, backgroundColour }) => (
     <CloseIcon className={closeButton(foregroundColour, backgroundColour)} />
 );
 

@@ -67,17 +67,15 @@ const mainMenu = css`
     }
 `;
 
-type Props = {
+export const MainMenu: React.SFC<{
     showMainMenu: boolean,
     id: string,
     nav: NavType,
-};
-
-export const MainMenu: React.SFC<Props> = ({
+}> = ({
     showMainMenu,
     id,
     nav,
-}: Props) => (
+}) => (
     <div
         className={cx(mainMenu, { [showMenu]: showMainMenu })}
         aria-hidden={!showMainMenu}

@@ -94,15 +94,13 @@ const brandExtensionLink = css`
     }
 `;
 
-type Props = {
+export const Columns: React.SFC<{
     columns: Array<LinkType>,
     brandExtensions: Array<LinkType>,
-};
-
-export const Columns: React.SFC<Props> = ({
+}> = ({
     columns,
     brandExtensions,
-}: Props) => (
+}) => (
     <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
         {columns.map((column, i) => (
             <Column

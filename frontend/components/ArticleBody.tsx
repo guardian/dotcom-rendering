@@ -295,16 +295,14 @@ const metaExtras = css`
     }
 `;
 
-type Props = {
-    CAPI: CAPIType,
-};
-
 const pillarColour = pillars.lifestyle; // TODO make dynamic
 
 const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
 
 /* eslint-disable react/no-danger */
-const ArticleBody: React.SFC<Props> = ({ CAPI }: Props) => (
+const ArticleBody: React.SFC<{
+    CAPI: CAPIType,
+}> = ({ CAPI }) => (
     <div className={wrapper}>
         <header>
             <div className={section(pillarColour)}>{CAPI.sectionName}</div>

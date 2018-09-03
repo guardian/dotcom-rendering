@@ -7,12 +7,9 @@ export interface Data {
     site: string
 };
 
-type Props = {
+const App: React.SFC<{
     data: Data,
     Page: React.StatelessComponent<{data: Data}>,
-    // Page: React.ComponentType<{data:Data}>
-};
-
-const App: React.SFC<Props>= ({ Page, data }: Props) => <Page data={data}/>
+}> = ({ Page, data }) => <Page data={data}/>
 
 export default App;

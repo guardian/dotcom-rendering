@@ -108,12 +108,10 @@ const linkStyle = css`
     }
 `;
 
-type Props = {
+const Pillars: React.SFC<{
     showMainMenu: boolean,
     pillars: Array<LinkType>,
-};
-
-const Pillars: React.SFC<Props> = ({ showMainMenu, pillars }: Props) => (
+}> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
         {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (
             <li key={pillar.title}>

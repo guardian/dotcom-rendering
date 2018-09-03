@@ -123,13 +123,11 @@ const identityLinks: Array<DropdownLink> = [
     },
 ];
 
-type Props = {
+const Links: React.SFC<{
     isPayingMember: boolean,
     isRecentContributor: boolean,
     isSignedIn: boolean,
-};
-
-const Links: React.SFC<Props> = ({ isPayingMember, isRecentContributor, isSignedIn }: Props) => (
+}> = ({ isPayingMember, isRecentContributor, isSignedIn }) => (
     <div className={links}>
         {isPayingMember ||
             isRecentContributor || (

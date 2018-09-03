@@ -76,21 +76,19 @@ const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean}) => {
     `;
 };
 
-type Props = {
+export const VeggieBurger: React.SFC<{
     toggleMainMenu: () => void,
     showMainMenu: boolean,
     enhanceCheckbox: boolean,
     htmlFor: string,
     ariaControls: string,
-};
-
-export const VeggieBurger: React.SFC<Props> = ({
+}> = ({
     toggleMainMenu,
     showMainMenu,
     enhanceCheckbox,
     htmlFor,
     ariaControls,
-}: Props) => {
+}) => {
     if (enhanceCheckbox) {
         return (
             <button

@@ -23,16 +23,14 @@ const container = css`
     }
 `;
 
-type Props = {
+const Container: React.SFC<{
     className?: string,
     children: React.ReactNode,
-};
-
-const Container: React.SFC<Props> = ({
+}> = ({
     className,
     children,
     ...props
-}: Props) => (
+}) => (
     <div className={cx(container, className)} {...props}>
         {children}
     </div>

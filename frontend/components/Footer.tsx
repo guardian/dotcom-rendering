@@ -194,11 +194,9 @@ const copyright = css`
     margin-top: 12px;
 `;
 
-type Props = {
+const FooterLinks: React.SFC< {
     links: Array<Array<Link>>,
-};
-
-const FooterLinks: React.SFC<Props> = ({ links }: Props) => {
+}> = ({ links }) => {
     const linkGroups = links.map(linkGroup => {
         const ls = linkGroup.map(l => (
             <li key={l.url}>

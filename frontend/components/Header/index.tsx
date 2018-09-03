@@ -14,11 +14,9 @@ const header = css`
     }
 `;
 
-type Props = {
+const Header: React.SFC<{
     nav: NavType,
-};
-
-const Header: React.SFC<Props> = ({ nav }: Props) => (
+}> = ({ nav }) => (
     <header className={header}>
         <Nav nav={nav} />
     </header>

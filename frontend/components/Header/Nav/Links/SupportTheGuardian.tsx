@@ -36,18 +36,16 @@ const style = css`
     }
 `;
 
-type Props = {
+const SupportTheGuardian: React.SFC<{
     className?: string,
     children: React.ReactChild, 
     href: string
-};
-
-const SupportTheGuardian: React.SFC<Props> = ({
+}> = ({
     className,
     children,
     href,
     ...props
-}: Props) => (
+}) => (
     <a className={cx(style, className)} href={href} {...props}>
         {children}
     </a>

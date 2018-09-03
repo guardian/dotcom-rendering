@@ -56,11 +56,9 @@ const articleContainer = css`
     padding: 0 20px;
 `;
 
-type Props = {
+const Article: React.SFC<{
     data: Data
-};
-
-const Article: React.SFC<Props> = ({ data }: Props) => (
+}> = ({ data }) => (
     <div>
         <Header nav={data.NAV} />
         <main className={articleWrapper}>
