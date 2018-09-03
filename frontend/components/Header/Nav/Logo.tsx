@@ -67,7 +67,7 @@ const SVG = () => <TheGuardianLogoSVG className={style} />;
 
 const Logo: React.SFC = () => (
     <a className={link} href="/">
-        <span className={css(screenReaderOnly)}>
+        <span className={css`${screenReaderOnly}`}>
             The Guardian - Back to home
         </span>
         <SVG />

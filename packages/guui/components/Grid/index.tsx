@@ -88,7 +88,7 @@ const gridStyles = (
 `;
 
 const row = css`
-    ${css(clearFix)};
+    ${clearFix};
     margin-left: ${-gutter}px;
 `;
 

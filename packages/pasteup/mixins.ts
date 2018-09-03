@@ -1,20 +1,20 @@
-// https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_screen-reader.scss
-export const screenReaderOnly = {
-    position: 'absolute',
-    width: '1px',
-    height: '1px',
-    padding: '0',
-    overflow: 'hidden',
-    clip: 'rect(0, 0, 0, 0)',
-    whiteSpace: 'nowrap',
-    border: '0',
-};
+import { css } from 'react-emotion';
 
-// https://css-tricks.com/snippets/css/clear-fix/
-export const clearFix = {
-    ':after': {
-        content: '""',
-        display: 'table',
-        clear: 'both',
-    },
-};
+export const screenReaderOnly = css`
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+`;
+
+export const clearFix = css`
+    :after {
+        content: '',
+        display: table,
+        clear: both,
+    }
+`;

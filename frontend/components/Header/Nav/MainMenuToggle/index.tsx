@@ -8,7 +8,7 @@ import { headline } from '@guardian/pasteup/fonts';
 import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`
-    ${css(screenReaderOnly)};
+    ${screenReaderOnly}
 `;
 const navPrimaryColour = '#121212';
 const navSecondaryColour = '#5d5f5f';
