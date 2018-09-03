@@ -94,7 +94,6 @@ module.exports = getPagesForSite()
                 platform: 'server',
             }),
         ),
-
         // browser bundle configs
         ...pages.map(page =>
             merge(

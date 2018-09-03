@@ -3,6 +3,7 @@
 import * as path from 'path';
 import express from 'express';
 
+import recordBaselineCloudWatchMetrics from './lib/metrics-baseline';
 import document from '../../frontend/document';
 import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
@@ -78,5 +79,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use((err: any , req: any , res:any, next: any) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
+
+    setInterval(() => {
+        recordBaselineCloudWatchMetrics();
+    }, 10 * 1000);
+
     app.listen(9000);
 }

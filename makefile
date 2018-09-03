@@ -48,6 +48,9 @@ stop:
 monitor:
 	@pm2 monit
 
+logs:
+	@pm2 logs
+
 # dev #########################################
 
 dev: clear clean-dist install
