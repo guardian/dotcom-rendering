@@ -1,10 +1,10 @@
+import AWS from 'aws-sdk';
+
 type Metric = {
     send: () => void,
 };
 
 process.env.AWS_PROFILE = 'frontend';
-
-const AWS = require('aws-sdk');
 
 AWS.config.update({ region: 'eu-west-1' });
 
@@ -42,9 +42,9 @@ const collectAndSendAWSMetrics = function(...metrics: Metric[]) {
 // to record things like latency
 
 const TimingMetric = function TimingMetric(
-    app: String,
-    stage: String,
-    metricName: String,
+    app: string,
+    stage: string,
+    metricName: string,
 ) {
     const values: Array<number> = [];
 
@@ -80,9 +80,9 @@ const TimingMetric = function TimingMetric(
 // to record memory or file sizes
 
 const BytesMetric = function BytesMetric(
-    app: String,
-    stage: String,
-    metricName: String,
+    app: string,
+    stage: string,
+    metricName: string,
 ) {
     const values: Array<number> = [];
 
@@ -115,7 +115,7 @@ const BytesMetric = function BytesMetric(
     };
 };
 
-module.exports = {
+export {
     collectAndSendAWSMetrics,
     BytesMetric,
     TimingMetric,
