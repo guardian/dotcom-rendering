@@ -2,7 +2,6 @@
   "name": "@guardian/guui",
   "version": "2.0.0-alpha.1",
   "description": "Guardian rendering framework",
-  "main": "index.js",
   "scripts": {
     "test": "jest"
   },
