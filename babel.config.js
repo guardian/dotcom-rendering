@@ -1,4 +1,3 @@
-// @flow
 module.exports = {
     plugins: [
         'babel-plugin-preval',
