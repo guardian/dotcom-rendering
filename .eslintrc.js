@@ -20,6 +20,7 @@ module.exports = {
         'react/default-props-match-prop-types': 'off',
         'react/require-default-props': 'off',
         'import/prefer-default-export': 'off',
+        'import/extensions': 'off'
     },
     overrides: [
         {
@@ -32,4 +33,10 @@ module.exports = {
             },
         },
     ],
+    "settings": {
+        "import/resolver": {
+          "node": true,
+          "eslint-import-resolver-typescript": true
+        }
+      }
 };
