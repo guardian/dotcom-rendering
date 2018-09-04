@@ -3,17 +3,17 @@ import { css, cx } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 
-export type Link = {
+export interface Link {
     url: string,
     title: string,
     isActive?: boolean,
-};
+}
 
-type Props = {
+interface Props {
     id: string,
     label: string,
-    links: Array<Link>,
-};
+    links: Link[],
+}
 
 const input = css`
     /* TODO re-add screen-reader only mixin */
@@ -142,13 +142,15 @@ export default class Dropdown extends React.Component<
     Props,
     { isExpanded: boolean, noJS: boolean }
 > {
+
+    private boundToggle: () => void;
     constructor(props: Props) {
         super(props);
         this.state = { isExpanded: false, noJS: true };
-        this.toggle_ = this.toggle.bind(this);
+        this.boundToggle = this.toggle.bind(this);
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         const dismiss = (event: KeyboardEvent) => {
             const escKey = 'Escape';
             if (event.code === escKey) {
@@ -167,15 +169,13 @@ export default class Dropdown extends React.Component<
         });
     }
 
-    toggle_: () => void;
-
-    toggle() {
+    public toggle() {
         this.setState(prevState => ({
             isExpanded: !prevState.isExpanded,
         }));
     }
 
-    render() {
+    public render() {
         const { label, links } = this.props;
 
         // needs to be unique to allow multiple dropdowns on same page
@@ -194,6 +194,7 @@ export default class Dropdown extends React.Component<
                         })}
                         aria-controls={dropdownID}
                         aria-expanded={this.state.isExpanded ? 'true' : 'false'}
+                        role="button"
                     >
                         <input
                             className={input}
@@ -209,7 +210,7 @@ export default class Dropdown extends React.Component<
                     </label>
                 ) : (
                     <button
-                        onClick={this.toggle_}
+                        onClick={this.boundToggle}
                         className={cx({
                             [button]: true,
                             [buttonExpanded]: this.state.isExpanded,

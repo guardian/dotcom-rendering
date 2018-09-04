@@ -88,7 +88,7 @@ const subscribeUrl =
 const jobsUrl = 'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader';
 const signInUrl = `${profileSubdomain}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in`;
 
-const identityLinks: Array<DropdownLink> = [
+const identityLinks: DropdownLink[] = [
     {
         url: `${profileSubdomain}/user/id/123`, // TODO use actual user ID once we have a user model
         title: 'Comments and replies',

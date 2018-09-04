@@ -36,6 +36,7 @@ const go = async () => {
             compiler.compilers.find(config => config.name === 'browser'),
             {
                 // https://www.npmjs.com/package/friendly-errors-webpack-plugin#turn-off-errors
+                // tslint:disable-next-line:no-empty
                 log: () => {},
             },
         ),

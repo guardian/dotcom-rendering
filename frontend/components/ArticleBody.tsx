@@ -326,17 +326,17 @@ const ArticleBody: React.SFC<{
                 </div>
                 <div className={metaExtras}>
                     <div className={shareIcons}>
-                        <a href="/">
+                        <a href="/" role="button">
                             <span className={shareIcon(pillarColour)}>
                                 <FacebookIcon />
                             </span>
                         </a>
-                        <a href="/">
+                        <a href="/" role="button">
                             <span className={shareIcon(pillarColour)}>
                                 <TwitterIconPadded />
                             </span>
                         </a>
-                        <a href="/">
+                        <a href="/" role="button">
                             <span className={shareIcon(pillarColour)}>
                                 <EmailIcon />
                             </span>

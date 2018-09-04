@@ -12,7 +12,7 @@ const editionDropdown = css`
 `;
 
 const EditionDropdown: React.SFC = () => {
-    const links: Array<Link> = [
+    const links: Link[] = [
         {
             url: '/preference/edition/uk',
             title: 'UK Edition',

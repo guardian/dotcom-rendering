@@ -77,11 +77,11 @@ const text = ({ showMainMenu }: { showMainMenu: boolean}) => css`
     }
 `;
 
-type Props = {
+interface Props {
     toggleMainMenu: () => void,
     showMainMenu: boolean,
     ariaControls: string,
-};
+}
 
 class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
     constructor(props: Props) {
@@ -92,21 +92,21 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
         };
     }
 
-    componentDidMount() {
-        /**
+    public componentDidMount() {
+        /*
             componentDidMount is only executed in the browser therefore if
             enhanceCheckbox is set to true it indicates that JS is running 
             in the browser and we should re-render without the NO JS fallback.
             Overriding eslint as you can call setState in componentDidMount:
             https://reactjs.org/docs/react-component.html#componentdidmount
-        * */
+         */
         // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
             enhanceCheckbox: true,
         });
     }
 
-    render() {
+    public render() {
         const { toggleMainMenu, ariaControls, showMainMenu } = this.props;
         const { enhanceCheckbox } = this.state;
         const CHECKBOX_ID = 'main-menu-toggle';

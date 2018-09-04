@@ -102,12 +102,12 @@ export const VeggieBurger: React.SFC<{
     }
 
     return (
-        // eslint-disable-next-line jsx-a11y/label-has-for
         <label
             className={veggieBurger({ showMainMenu })}
             onClick={() => toggleMainMenu()}
             htmlFor={htmlFor}
             tabIndex={0}
+            role="button"
         >
             <span className={veggieBurgerIcon({ showMainMenu })} />
         </label>

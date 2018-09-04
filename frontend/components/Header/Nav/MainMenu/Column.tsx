@@ -217,8 +217,8 @@ const hide = css`
 
 const getColumnLinks = (
     column: LinkType,
-    brandExtensions: Array<LinkType>,
-): Array<LinkType> => {
+    brandExtensions: LinkType[],
+): LinkType[] => {
     if (column.title.toLowerCase() === 'more') {
         // Add the brand extensions to 'more' on mobile.
         return [
@@ -234,7 +234,7 @@ const getColumnLinks = (
 
 const ColumnLinks: React.SFC<{
     column: LinkType,
-    brandExtensions: Array<LinkType>,
+    brandExtensions: LinkType[],
     showColumnLinks: boolean,
     id: string,
 }> = ({
@@ -296,11 +296,11 @@ const columnStyle = css`
     }
 `;
 
-type ColumnProps = {
+interface ColumnProps {
     column: LinkType,
     isLastIndex: boolean,
-    brandExtensions: Array<LinkType>,
-};
+    brandExtensions: LinkType[],
+}
 
 export class Column extends Component<
     ColumnProps,
@@ -314,13 +314,13 @@ export class Column extends Component<
         };
     }
 
-    toggleColumnLinks() {
+    public toggleColumnLinks() {
         this.setState(state => ({
             showColumnLinks: !state.showColumnLinks,
         }));
     }
 
-    render() {
+    public render() {
         const { showColumnLinks } = this.state;
         const { column, isLastIndex, brandExtensions } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;

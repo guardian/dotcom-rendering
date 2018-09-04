@@ -19,9 +19,9 @@ export default ({
         page: string,
         site: string,
     },
-    cssIDs: Array<string>,
+    cssIDs: string[],
     nonBlockingJS?: string,
-    fontFiles?: Array<string>,
+    fontFiles?: string[],
 }) => {
     const sanitiseDomRefs = (jsString: string ) =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');

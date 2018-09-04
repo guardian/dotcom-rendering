@@ -12,6 +12,9 @@ const breakpoints = {
     wide: 1300,
 };
 
+// tslint:disable:no-shadowed-variable
+// this will need refactoring to fix
+
 const minWidth = (from: number): string => `@media (min-width: ${`${from}px`})`;
 
 const maxWidth = (until: number): string =>

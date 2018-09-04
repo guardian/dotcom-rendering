@@ -95,8 +95,8 @@ const brandExtensionLink = css`
 `;
 
 export const Columns: React.SFC<{
-    columns: Array<LinkType>,
-    brandExtensions: Array<LinkType>,
+    columns: LinkType[],
+    brandExtensions: LinkType[],
 }> = ({
     columns,
     brandExtensions,

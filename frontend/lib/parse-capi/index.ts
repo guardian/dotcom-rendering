@@ -10,11 +10,7 @@ const standfirst = compose(clean, bigBullets);
 const main = clean;
 const body = clean;
 
-type props = {
-    contentFields?: {},
-    config?: {},
-};
-
+ 
 const defaultArgs = { config: {}, contentFields: {} };
 
 // TODO: we shouldn't do any cleaning or data transformation here, but
@@ -22,7 +18,10 @@ const defaultArgs = { config: {}, contentFields: {} };
 // should be just that - a rendering layer only.
 //
 // We *should* however validate the data we receive at this point.
-const parse: (p: props) => {CAPI: CAPIType, NAV: NavType} = ({ contentFields, config }: props = defaultArgs) => {
+const parse: (p: {
+    contentFields?: {},
+    config?: {},
+}) => {CAPI: CAPIType, NAV: NavType} = ({ contentFields, config } = defaultArgs) => {
     const nav = get(config, 'nav', []);
     const pillars = nav.pillars
         ? nav.pillars.map((link: LinkType) => {

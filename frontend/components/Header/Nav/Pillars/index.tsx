@@ -110,7 +110,7 @@ const linkStyle = css`
 
 const Pillars: React.SFC<{
     showMainMenu: boolean,
-    pillars: Array<LinkType>,
+    pillars: LinkType[],
 }> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
         {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (

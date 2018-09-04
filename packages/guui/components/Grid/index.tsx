@@ -10,9 +10,9 @@ import { clearFix } from '@guardian/pasteup/mixins';
 
 type Breakpoints = 'tablet' | 'desktop' | 'leftCol' | 'wide';
 
-type BreakpointOptions = {
+interface BreakpointOptions {
     inset?: number,
-};
+}
 
 type BreakpointProps = [number, BreakpointOptions];
 
@@ -20,10 +20,10 @@ type BreakpointsWithProps = {
     [K in Breakpoints]: BreakpointProps    
 }
 
-type GridSize = {
+interface GridSize {
     max: number,
     width: number,
-};
+}
 
 type GridSizes = {
     [K in Breakpoints]: GridSize

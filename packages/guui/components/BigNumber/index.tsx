@@ -11,7 +11,11 @@ import Number8 from './8.svg';
 import Number9 from './9.svg';
 import Number10 from './10.svg';
 
-const Number = ({ index }: { index: number }) => {
+// tslint:disable:jsx-key
+// This file contains an array of elements, but only exposes one. 
+
+
+const BigNumber = ({ index }: { index: number }) => {
     const numbers= [
         <Number0 />,
         <Number1 />,
@@ -29,4 +33,4 @@ const Number = ({ index }: { index: number }) => {
     return numbers[index];
 };
 
-export default Number;
+export default BigNumber;

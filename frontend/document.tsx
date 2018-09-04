@@ -8,20 +8,20 @@ import htmlTemplate from './htmlTemplate';
 import parseCAPI from './lib/parse-capi';
 import App, { Data } from './App';
 
-type Props = {
+interface Props {
     data: {
         page: string,
         site: string,
         body: { config?: {}, contentFields?: {} },
     },
     Page: React.StatelessComponent<{data: Data}>,
-};
+}
 
-type renderToStringResult = {
+interface RenderToStringResult {
     html: string,
     css: string,
-    ids: Array<string>,
-};
+    ids: string[],
+}
 
 export default ({ Page, data: { body, ...data } }: Props) => {
     const cleanedData: Data = { ...parseCAPI(body), ...data };
@@ -30,7 +30,7 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
     );
 
-    const { html, css, ids: cssIDs }: renderToStringResult = extractCritical(
+    const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(<App data={cleanedData} Page={Page} />),
     );
 
