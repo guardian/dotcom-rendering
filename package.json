@@ -7,7 +7,7 @@
         "packages/*"
     ],
     "scripts": {
-        "lint": "eslint .",
+        "lint": "yarn tslint -s tslint.json -p . -t stylish",
         "tsc": "tsc"
     },
     "bundlesize": [
