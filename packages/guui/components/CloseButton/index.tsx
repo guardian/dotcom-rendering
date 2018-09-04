@@ -21,8 +21,8 @@ const closeButton = (foregroundColour: string, backgroundColour: string) => css`
 `;
 
 const CloseButton: React.SFC<{
-    foregroundColour: string,
-    backgroundColour: string,
+    foregroundColour: string;
+    backgroundColour: string;
 }> = ({ foregroundColour, backgroundColour }) => (
     <CloseIcon className={closeButton(foregroundColour, backgroundColour)} />
 );

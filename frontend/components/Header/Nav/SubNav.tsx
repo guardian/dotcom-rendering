@@ -88,16 +88,16 @@ const parentStyle = css`
 `;
 
 type Props = {
-    parent?: LinkType,
-    links: Array<LinkType>,
+    parentLink?: LinkType;
+    links: Array<LinkType>;
 };
 
 export default class Subnav extends Component<
     Props,
     {
-        showMore: boolean,
-        isExpanded: boolean,
-        noJS: boolean,
+        showMore: boolean;
+        isExpanded: boolean;
+        noJS: boolean;
     }
 > {
     private ulRef: React.RefObject<HTMLUListElement>;
@@ -117,8 +117,6 @@ export default class Subnav extends Component<
             showMore: this.shouldShowMore(),
         });
     }
-
-   
 
     toggle_: () => void;
 
@@ -145,20 +143,20 @@ export default class Subnav extends Component<
     }
 
     render() {
-        const { parent, links } = this.props;
+        const { parentLink, links } = this.props;
 
         let lis = [];
 
-        if (parent) {
-            const parentLink = (
-                <li key={parent.url} className={parentStyle}>
-                    <a className={parentLinkStyle} href={parent.url}>
-                        {parent.title}
+        if (parentLink) {
+            const p = (
+                <li key={parentLink.url} className={parentStyle}>
+                    <a className={parentLinkStyle} href={parentLink.url}>
+                        {parentLink.title}
                     </a>
                 </li>
             );
 
-            lis.unshift(parentLink);
+            lis.unshift(p);
         }
 
         lis = lis.concat(

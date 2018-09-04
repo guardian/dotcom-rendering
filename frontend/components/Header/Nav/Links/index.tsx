@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { css, cx } from 'react-emotion';
 
-import Dropdown from '@guardian/guui/components/Dropdown';
-import { Link as DropdownLink } from '@guardian/guui/components/Dropdown';
+import Dropdown, {
+    Link as DropdownLink,
+} from '@guardian/guui/components/Dropdown';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
@@ -62,15 +63,10 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
 `;
 
 const Search: React.SFC<{
-    href: string,
-    children: React.ReactChild,
-    className?: string,
-}> = ({
-    className,
-    children,
-    href,
-    ...props
-}) => (
+    href: string;
+    children: React.ReactChild;
+    className?: string;
+}> = ({ className, children, href, ...props }) => (
     <a href={href} className={cx(search, className)} {...props}>
         {children}
     </a>
@@ -124,9 +120,9 @@ const identityLinks: Array<DropdownLink> = [
 ];
 
 const Links: React.SFC<{
-    isPayingMember: boolean,
-    isRecentContributor: boolean,
-    isSignedIn: boolean,
+    isPayingMember: boolean;
+    isRecentContributor: boolean;
+    isSignedIn: boolean;
 }> = ({ isPayingMember, isRecentContributor, isSignedIn }) => (
     <div className={links}>
         {isPayingMember ||

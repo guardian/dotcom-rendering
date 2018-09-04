@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk';
 
 type Metric = {
-    send: () => void,
+    send: () => void;
 };
 
 process.env.AWS_PROFILE = 'frontend';
@@ -115,8 +115,4 @@ const BytesMetric = function BytesMetric(
     };
 };
 
-export {
-    collectAndSendAWSMetrics,
-    BytesMetric,
-    TimingMetric,
-};
+export { collectAndSendAWSMetrics, BytesMetric, TimingMetric };

@@ -4,15 +4,15 @@ import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 
 export type Link = {
-    url: string,
-    title: string,
-    isActive?: boolean,
+    url: string;
+    title: string;
+    isActive?: boolean;
 };
 
 type Props = {
-    id: string,
-    label: string,
-    links: Array<Link>,
+    id: string;
+    label: string;
+    links: Array<Link>;
 };
 
 const input = css`
@@ -140,7 +140,7 @@ const buttonExpanded = css`
 
 export default class Dropdown extends React.Component<
     Props,
-    { isExpanded: boolean, noJS: boolean }
+    { isExpanded: boolean; noJS: boolean }
 > {
     constructor(props: Props) {
         super(props);

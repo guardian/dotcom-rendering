@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 
@@ -10,17 +10,17 @@ import App, { Data } from './App';
 
 type Props = {
     data: {
-        page: string,
-        site: string,
-        body: { config?: {}, contentFields?: {} },
-    },
-    Page: React.StatelessComponent<{data: Data}>,
+        page: string;
+        site: string;
+        body: { config?: {}; contentFields?: {} };
+    };
+    Page: React.StatelessComponent<{ data: Data }>;
 };
 
 type renderToStringResult = {
-    html: string,
-    css: string,
-    ids: Array<string>,
+    html: string;
+    css: string;
+    ids: Array<string>;
 };
 
 export default ({ Page, data: { body, ...data } }: Props) => {
