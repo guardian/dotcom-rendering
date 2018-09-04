@@ -88,16 +88,16 @@ const parentStyle = css`
 `;
 
 type Props = {
-    parent?: LinkType,
-    links: Array<LinkType>,
+    parent?: LinkType;
+    links: Array<LinkType>;
 };
 
 export default class Subnav extends Component<
     Props,
     {
-        showMore: boolean,
-        isExpanded: boolean,
-        noJS: boolean,
+        showMore: boolean;
+        isExpanded: boolean;
+        noJS: boolean;
     }
 > {
     private ulRef: React.RefObject<HTMLUListElement>;
@@ -117,8 +117,6 @@ export default class Subnav extends Component<
             showMore: this.shouldShowMore(),
         });
     }
-
-   
 
     toggle_: () => void;
 

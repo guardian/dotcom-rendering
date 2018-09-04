@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
@@ -41,13 +41,13 @@ const headlineBody = css`
     font-family: ${textEgyptian};
 `;
 
-type Trails =  Array<{url: string, linkText: string}>
+type Trails = Array<{ url: string; linkText: string }>;
 
 export default class MostViewed extends Component<{}, { trails: Trails }> {
     constructor(props: {}) {
         super(props);
-        this.state = { 
-            trails: []
+        this.state = {
+            trails: [],
         };
     }
 

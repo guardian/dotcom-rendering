@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Number0 from './0.svg';
 import Number1 from './1.svg';
 import Number2 from './2.svg';
@@ -12,7 +12,7 @@ import Number9 from './9.svg';
 import Number10 from './10.svg';
 
 const Number = ({ index }: { index: number }) => {
-    const numbers= [
+    const numbers = [
         <Number0 />,
         <Number1 />,
         <Number2 />,

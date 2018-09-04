@@ -37,15 +37,10 @@ const style = css`
 `;
 
 const SupportTheGuardian: React.SFC<{
-    className?: string,
-    children: React.ReactChild, 
-    href: string
-}> = ({
-    className,
-    children,
-    href,
-    ...props
-}) => (
+    className?: string;
+    children: React.ReactChild;
+    href: string;
+}> = ({ className, children, href, ...props }) => (
     <a className={cx(style, className)} href={href} {...props}>
         {children}
     </a>

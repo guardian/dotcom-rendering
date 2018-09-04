@@ -3,16 +3,9 @@ module.exports = {
         browser: true,
         node: true,
     },
-    parser: 'babel-eslint',
-    parserOptions: {
-        ecmaVersion: 8,
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true,
-        },
-    },
+    parser: 'typescript-eslint-parser',
     extends: ['airbnb', 'prettier', 'prettier/react', 'plugin:jsx-a11y/strict'],
-    plugins: ['react', 'prettier', 'jsx-a11y'],
+    plugins: ['react', 'prettier', 'jsx-a11y', 'typescript'],
     rules: {
         'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
@@ -21,7 +14,7 @@ module.exports = {
         'react/jsx-filename-extension': [
             1,
             {
-                extensions: ['.js'],
+                extensions: ['.tsx'],
             },
         ],
         'react/default-props-match-prop-types': 'off',

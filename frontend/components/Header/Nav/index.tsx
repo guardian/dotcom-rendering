@@ -35,7 +35,7 @@ const subnav = css`
 `;
 
 type Props = {
-    nav: NavType,
+    nav: NavType;
 };
 
 export default class Nav extends Component<Props, { showMainMenu: boolean }> {
