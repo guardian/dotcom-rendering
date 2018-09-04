@@ -1,4 +1,3 @@
-// @flow
 module.exports = {
     plugins: [
         'babel-plugin-preval',
@@ -7,7 +6,7 @@ module.exports = {
         '@babel/plugin-proposal-class-properties',
     ],
     presets: [
-        '@babel/preset-flow',
+        '@babel/preset-typescript',
         '@babel/preset-react',
         [
             '@babel/preset-env',

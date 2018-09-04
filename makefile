@@ -1,4 +1,4 @@
-.PHONY: flow-typed install dev build clean-dist start stop monitor clear
+.PHONY: install dev build clean-dist start stop monitor clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -59,10 +59,9 @@ dev: clear clean-dist install
 
 # quality #########################################
 
-flow: clean-dist install
+tsc: clean-dist install
 	$(call log, "checking for type errors")
-	@flow stop --quiet
-	@flow --quiet
+	@tsc
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
@@ -82,10 +81,10 @@ test: clear clean-dist install
 bundlesize: clear clean-dist install build
 	@bundlesize
 
-validate: clear clean-dist install flow lint stylelint test validate-build
+validate: clear clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: clear install flow lint stylelint test bundlesize
+validate-ci: clear install tsc lint stylelint test bundlesize
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
@@ -119,12 +118,6 @@ check-env: # private
 clear: # private
 	@clear
 
-flow-typed: yarn.lock
-	@rm -rf flow-typed/npm
-	@cd frontend && ../../node_modules/.bin/flow-typed install -p ../../
-	@cd packages/guui && ../../node_modules/.bin/flow-typed install -p ../../
-	@cd packages/pasteup && ../../node_modules/.bin/flow-typed install -p ../../
-	@flow-typed install
 
 # packages #########################################
 

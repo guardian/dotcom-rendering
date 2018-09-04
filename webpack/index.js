@@ -23,10 +23,13 @@ const common = ({ platform, page = '' }) => ({
         process.env.NODE_ENV === 'production'
             ? 'sourcemap'
             : 'cheap-module-eval-source-map',
+    resolve: {
+        extensions: ['.js', '.ts', '.tsx', '.jsx'],
+    },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /(\.tsx)|(\.js)|(\.ts)$/,
                 exclude: /node_modules/,
                 use: [
                     'babel-loader',
@@ -64,9 +67,6 @@ const common = ({ platform, page = '' }) => ({
         ],
     },
     plugins: [
-        new webpack.ProvidePlugin({
-            React: 'react',
-        }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),

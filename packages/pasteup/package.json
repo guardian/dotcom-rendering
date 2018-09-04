@@ -19,5 +19,8 @@
     "prepublish": "cd ../.. && make pre-publish-pasteup",
     "postpublish": "cd ../.. && make post-publish-pasteup"
   },
+  "dependencies": {
+    "react-emotion": "^9.1.3"
+  },
   "license": "Apache-2.0"
 }

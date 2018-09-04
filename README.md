@@ -35,7 +35,7 @@ You can preview an article from `theguardian.com` by appending the query string 
 
 ### Code quality
 - `make lint`
-- `make flow`
+- `make tsc`
 - `make test`
 
 `make validate` runs all of the above, plus a final `make build`.
@@ -60,13 +60,6 @@ We use [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-mo
 The following extensions will life easier:
 
 - [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) (esp. with [`autoFixOnSave`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint#user-content-settings-options) enabled)
-- [Flow Language Support](https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode)
-
-You will want to disable Typescript checking for the project workspace to avoid the copious false errors it will produce. To do this,
-
-    View->Extensions
-
-Search for: `@builtin typescript` and select 'Disable (workspace)' from the cog options.
 
 Also:
 

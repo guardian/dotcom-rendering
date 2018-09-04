@@ -11,15 +11,8 @@ module.exports = {
             jsx: true,
         },
     },
-    extends: [
-        'airbnb',
-        'plugin:flowtype/recommended',
-        'prettier',
-        'prettier/flowtype',
-        'prettier/react',
-        'plugin:jsx-a11y/strict',
-    ],
-    plugins: ['flowtype', 'react', 'prettier', 'jsx-a11y'],
+    extends: ['airbnb', 'prettier', 'prettier/react', 'plugin:jsx-a11y/strict'],
+    plugins: ['react', 'prettier', 'jsx-a11y'],
     rules: {
         'no-underscore-dangle': 'off',
         'prettier/prettier': ['error'],
@@ -36,13 +29,6 @@ module.exports = {
         'import/prefer-default-export': 'off',
     },
     overrides: [
-        {
-            files: ['packages/**/*.js', 'frontend/**/*.js', 'src/**/*.js'],
-            plugins: ['flow-header'],
-            rules: {
-                'flow-header/flow-header': 'error',
-            },
-        },
         {
             files: ['webpack/*', 'config.js', 'lib/*'],
             rules: {
