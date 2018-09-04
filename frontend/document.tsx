@@ -15,7 +15,6 @@ type Props = {
         body: { config?: {}, contentFields?: {} },
     },
     Page: React.StatelessComponent<{data: Data}>,
-    // Page: React.ComponentType<{data: Data}>,
 };
 
 type renderToStringResult = {
