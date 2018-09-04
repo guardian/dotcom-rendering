@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk';
 
 interface Metric {
-    send: () => void,
+    send: () => void;
 }
 
 process.env.AWS_PROFILE = 'frontend';
@@ -43,11 +43,7 @@ const collectAndSendAWSMetrics = (...metrics: Metric[]) => {
 
 // to record things like latency
 
-const TimingMetric = (
-    app: string,
-    stage: string,
-    metricName: string,
-) => {
+const TimingMetric = (app: string, stage: string, metricName: string) => {
     const values: number[] = [];
 
     return {
@@ -81,11 +77,7 @@ const TimingMetric = (
 
 // to record memory or file sizes
 
-const BytesMetric = (
-    app: string,
-    stage: string,
-    metricName: string,
-) => {
+const BytesMetric = (app: string, stage: string, metricName: string) => {
     const values: number[] = [];
 
     return {
@@ -117,8 +109,4 @@ const BytesMetric = (
     };
 };
 
-export {
-    collectAndSendAWSMetrics,
-    BytesMetric,
-    TimingMetric,
-};
+export { collectAndSendAWSMetrics, BytesMetric, TimingMetric };

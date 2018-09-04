@@ -301,7 +301,7 @@ const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
 
 /* eslint-disable react/no-danger */
 const ArticleBody: React.SFC<{
-    CAPI: CAPIType,
+    CAPI: CAPIType;
 }> = ({ CAPI }) => (
     <div className={wrapper}>
         <header>

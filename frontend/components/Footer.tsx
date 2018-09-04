@@ -7,8 +7,8 @@ import { textSans } from '@guardian/pasteup/fonts';
 import { Container } from '@guardian/guui';
 
 interface Link {
-    title: string,
-    url: string,
+    title: string;
+    url: string;
 }
 
 const footerLinks: Link[][] = [
@@ -194,8 +194,8 @@ const copyright = css`
     margin-top: 12px;
 `;
 
-const FooterLinks: React.SFC< {
-    links: Link[][],
+const FooterLinks: React.SFC<{
+    links: Link[][];
 }> = ({ links }) => {
     const linkGroups = links.map(linkGroup => {
         const ls = linkGroup.map(l => (

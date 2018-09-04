@@ -75,11 +75,11 @@ const collapseColumnButton = css`
 `;
 
 const CollapseColumnButton: React.SFC<{
-    column: LinkType,
-    showColumnLinks: boolean,
-    toggleColumnLinks: () => void,
-    ariaControls: string,
-    isLastIndex: boolean,
+    column: LinkType;
+    showColumnLinks: boolean;
+    toggleColumnLinks: () => void;
+    ariaControls: string;
+    isLastIndex: boolean;
 }> = ({
     column,
     showColumnLinks,
@@ -164,9 +164,9 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const ColumnLink: React.SFC<{ 
-    column: LinkType, 
-    link: LinkType,
+const ColumnLink: React.SFC<{
+    column: LinkType;
+    link: LinkType;
 }> = ({ link, column }) => (
     <li
         className={cx(mainMenuLinkStyle, {
@@ -233,16 +233,11 @@ const getColumnLinks = (
 };
 
 const ColumnLinks: React.SFC<{
-    column: LinkType,
-    brandExtensions: LinkType[],
-    showColumnLinks: boolean,
-    id: string,
-}> = ({
-    column,
-    showColumnLinks,
-    id,
-    brandExtensions,
-}) => {
+    column: LinkType;
+    brandExtensions: LinkType[];
+    showColumnLinks: boolean;
+    id: string;
+}> = ({ column, showColumnLinks, id, brandExtensions }) => {
     const links = getColumnLinks(column, brandExtensions);
 
     return (
@@ -297,9 +292,9 @@ const columnStyle = css`
 `;
 
 interface ColumnProps {
-    column: LinkType,
-    isLastIndex: boolean,
-    brandExtensions: LinkType[],
+    column: LinkType;
+    isLastIndex: boolean;
+    brandExtensions: LinkType[];
 }
 
 export class Column extends Component<

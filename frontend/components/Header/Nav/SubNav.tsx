@@ -88,21 +88,18 @@ const parentStyle = css`
 `;
 
 interface Props {
-    parent?: LinkType,
-    links: LinkType[],
+    parent?: LinkType;
+    links: LinkType[];
 }
 
 export default class Subnav extends Component<
     Props,
     {
-        showMore: boolean,
-        isExpanded: boolean,
-        noJS: boolean,
+        showMore: boolean;
+        isExpanded: boolean;
+        noJS: boolean;
     }
 > {
-
-   
-
     private boundToggle: () => void;
     private ulRef: React.RefObject<HTMLUListElement>;
 

@@ -61,7 +61,7 @@ const showMenuUnderline = (shouldShow: boolean): string => {
             text-decoration: none;
         }
     `;
-    
+
     if (shouldShow) {
         return show;
     }
@@ -109,8 +109,8 @@ const linkStyle = css`
 `;
 
 const Pillars: React.SFC<{
-    showMainMenu: boolean,
-    pillars: LinkType[],
+    showMainMenu: boolean;
+    pillars: LinkType[];
 }> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
         {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (

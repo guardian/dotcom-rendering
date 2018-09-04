@@ -8,7 +8,10 @@ import document from '../../frontend/document';
 import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
 
-const render = async ({ params, body }: express.Request, res: express.Response) => {
+const render = async (
+    { params, body }: express.Request,
+    res: express.Response,
+) => {
     try {
         const { page } = params;
         const data = {
@@ -56,7 +59,7 @@ if (process.env.NODE_ENV === 'production') {
 
     app.get('/', async (req, res) => {
         try {
-            const pages = await getPagesForSite() as string[];
+            const pages = (await getPagesForSite()) as string[];
             res.send(`
                 <!DOCTYPE html>
                 <html>
@@ -76,7 +79,7 @@ if (process.env.NODE_ENV === 'production') {
 
     // express requires all 4 args here:
     // eslint-disable-next-line no-unused-vars
-    app.use((err: any , req: any , res:any, next: any) => {
+    app.use((err: any, req: any, res: any, next: any) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
 

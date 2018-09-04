@@ -4,6 +4,7 @@
         "tslint:recommended",
         "tslint-react",
         "tslint-react-a11y",
+        "tslint-plugin-prettier",
         "tslint-config-prettier"
     ],
     "jsRules": {
@@ -14,7 +15,8 @@
         "object-literal-sort-keys": false,
         "ordered-imports": false,
         "jsx-no-lambda": false,
-        "interface-name": false
+        "interface-name": false,
+        "prettier": true
     },
     "rulesDirectory": []
 }

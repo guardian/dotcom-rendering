@@ -8,7 +8,7 @@ import { headline } from '@guardian/pasteup/fonts';
 import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`
-    ${screenReaderOnly}
+    ${screenReaderOnly};
 `;
 const navPrimaryColour = '#121212';
 const navSecondaryColour = '#5d5f5f';
@@ -52,7 +52,7 @@ const label = css`
         display: inline-block;
     }
 `;
-const text = ({ showMainMenu }: { showMainMenu: boolean}) => css`
+const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     display: block;
     height: 100%;
     :after {
@@ -78,9 +78,9 @@ const text = ({ showMainMenu }: { showMainMenu: boolean}) => css`
 `;
 
 interface Props {
-    toggleMainMenu: () => void,
-    showMainMenu: boolean,
-    ariaControls: string,
+    toggleMainMenu: () => void;
+    showMainMenu: boolean;
+    ariaControls: string;
 }
 
 class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
