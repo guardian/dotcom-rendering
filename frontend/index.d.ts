@@ -12,7 +12,7 @@ interface NavType {
     otherLinks: Array<LinkType>;
     brandExtensions: Array<LinkType>;
     subNavSections?: {
-        parent: LinkType;
+        parentLink: LinkType;
         links: Array<LinkType>;
     };
 }

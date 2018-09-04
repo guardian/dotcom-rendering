@@ -88,7 +88,7 @@ const parentStyle = css`
 `;
 
 type Props = {
-    parent?: LinkType;
+    parentLink?: LinkType;
     links: Array<LinkType>;
 };
 
@@ -143,20 +143,20 @@ export default class Subnav extends Component<
     }
 
     render() {
-        const { parent, links } = this.props;
+        const { parentLink, links } = this.props;
 
         let lis = [];
 
-        if (parent) {
-            const parentLink = (
-                <li key={parent.url} className={parentStyle}>
-                    <a className={parentLinkStyle} href={parent.url}>
-                        {parent.title}
+        if (parentLink) {
+            const p = (
+                <li key={parentLink.url} className={parentStyle}>
+                    <a className={parentLinkStyle} href={parentLink.url}>
+                        {parentLink.title}
                     </a>
                 </li>
             );
 
-            lis.unshift(parentLink);
+            lis.unshift(p);
         }
 
         lis = lis.concat(

@@ -1,8 +1,9 @@
 import React from 'react';
 import { css, cx } from 'react-emotion';
 
-import Dropdown from '@guardian/guui/components/Dropdown';
-import { Link as DropdownLink } from '@guardian/guui/components/Dropdown';
+import Dropdown, {
+    Link as DropdownLink,
+} from '@guardian/guui/components/Dropdown';
 import palette from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';

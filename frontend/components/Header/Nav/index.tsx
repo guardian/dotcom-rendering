@@ -98,12 +98,12 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                     />
                 </nav>
                 {nav.subNavSections &&
-                    nav.subNavSections.parent &&
+                    nav.subNavSections.parentLink &&
                     nav.subNavSections.links && (
                         <div className={subnav}>
                             <div className={centered}>
                                 <SubNav
-                                    parent={nav.subNavSections.parent}
+                                    parentLink={nav.subNavSections.parentLink}
                                     links={nav.subNavSections.links}
                                 />
                             </div>

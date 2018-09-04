@@ -24,6 +24,8 @@
 
         /* Strict Type-Checking Options */
         "strict": true  /* Enable all strict type-checking options. */,
+        // "noUnusedParameters": true, We can turn this on to get full no-unused-vars 
+        // "noUnusedLocals": true,     BUT WE CAN'T DISABLE IT  
         // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
         // "strictNullChecks": true,              /* Enable strict null checks. */
         // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
