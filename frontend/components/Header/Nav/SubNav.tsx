@@ -112,7 +112,6 @@ export default class Subnav extends Component<
 
     public componentDidMount() {
         // If componentDidMount runs we know client-side JS is enabled
-        // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
             noJS: false,
             showMore: this.shouldShowMore(),

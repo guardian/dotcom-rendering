@@ -162,7 +162,6 @@ export default class Dropdown extends React.Component<
         document.addEventListener('keydown', dismiss, false);
 
         // If componentDidMount runs we know client-side JS is enabled
-        // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
             noJS: false,
         });

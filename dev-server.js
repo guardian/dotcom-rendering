@@ -1,5 +1,3 @@
-/* eslint-disable global-require,import/no-extraneous-dependencies,no-console */
-
 const path = require('path');
 const express = require('express');
 const fetch = require('node-fetch');
@@ -79,7 +77,6 @@ const go = async () => {
         res.redirect(`/${siteName}`);
     });
 
-    // eslint-disable-next-line no-unused-vars
     app.use((err, req, res, next) => {
         res.status(500).send(err.stack);
     });

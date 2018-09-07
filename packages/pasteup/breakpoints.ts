@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 
 // underscored names to avoid clashing with the `from` shorthand exports
 const breakpoints = {
