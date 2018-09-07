@@ -33,9 +33,10 @@
             "allow-pascal-case",
             "allow-trailing-underscore"
         ],
-        "no-default-export": {
-            "severity": "warning"
-        },
+        // "no-default-export": {
+        //     "severity": "warning"
+        // },
+        "react-no-dangerous-html":true,
         "prettier": true
     },
     "rulesDirectory": []
