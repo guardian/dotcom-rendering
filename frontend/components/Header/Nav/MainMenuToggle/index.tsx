@@ -97,10 +97,9 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
             componentDidMount is only executed in the browser therefore if
             enhanceCheckbox is set to true it indicates that JS is running 
             in the browser and we should re-render without the NO JS fallback.
-            Overriding eslint as you can call setState in componentDidMount:
             https://reactjs.org/docs/react-component.html#componentdidmount
+
          */
-        // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
             enhanceCheckbox: true,
         });
