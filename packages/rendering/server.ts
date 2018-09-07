@@ -15,11 +15,11 @@ const render = async (
     try {
         const { page } = params;
         const data = {
-            site: 'frontend',
             page,
             body,
+            site: 'frontend',
         };
-        const respBody = document({ Page: Article, data });
+        const respBody = document({ data, Page: Article });
 
         res.status(200).send(respBody);
     } catch (e) {

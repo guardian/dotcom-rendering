@@ -101,9 +101,12 @@ const cols: (props: BreakpointsWithProps) => any = ({
 const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     if (Array.isArray(props)) {
         return props;
-    } else if (typeof props === 'number') {
+    }
+
+    if (typeof props === 'number') {
         return [props, {}];
     }
+
     return props;
 };
 

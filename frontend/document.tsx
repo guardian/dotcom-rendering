@@ -73,8 +73,8 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         bundleJS,
         css,
         html,
-        data: cleanedData,
         cssIDs,
         fontFiles,
+        data: cleanedData,
     });
 };

@@ -4,6 +4,7 @@
         "tslint:recommended",
         "tslint-react",
         "tslint-react-a11y",
+        "tslint-config-airbnb",
         "tslint-plugin-prettier",
         "tslint-config-prettier"
     ],
@@ -16,6 +17,8 @@
         "ordered-imports": false,
         "jsx-no-lambda": false,
         "interface-name": false,
+        "import-name": false,
+        "variable-name": [true, "allow-pascal-case","allow-trailing-underscore"],
         "prettier": true
     },
     "rulesDirectory": []

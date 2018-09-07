@@ -41,9 +41,12 @@ const headlineBody = css`
     font-family: ${textEgyptian};
 `;
 
-type Trails = Array<{ url: string; linkText: string }>;
+interface Trail {
+    url: string;
+    linkText: string;
+}
 
-export default class MostViewed extends Component<{}, { trails: Trails }> {
+export default class MostViewed extends Component<{}, { trails: Trail[] }> {
     constructor(props: {}) {
         super(props);
         this.state = {
