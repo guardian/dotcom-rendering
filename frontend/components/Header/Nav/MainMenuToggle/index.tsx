@@ -142,7 +142,6 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                 key="VeggieBurger"
             />,
             // We can't nest the input inside the label because the structure is important for CSS reasons
-            // eslint-disable-next-line jsx-a11y/label-has-for
             <label
                 className={cx(openMainMenu, label)}
                 htmlFor={CHECKBOX_ID}
