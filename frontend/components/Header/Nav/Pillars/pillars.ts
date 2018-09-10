@@ -24,4 +24,4 @@ export const pillarMap: pillarMapType = f => ({
     sport: f('sport'),
     culture: f('culture'),
     lifestyle: f('lifestyle'),
-}); // If you can think of a better way to do this that keeps they types, please help.
+}); // We could do this with an Object.assign, but that would need weirdness in ts and is less readable.
