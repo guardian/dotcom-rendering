@@ -1,8 +1,6 @@
-// @flow
+import AWS from 'aws-sdk';
 
 process.env.AWS_PROFILE = 'frontend';
-
-const AWS = require('aws-sdk');
 
 AWS.config.update({ region: 'eu-west-1' });
 
@@ -13,7 +11,7 @@ const ssm = new AWS.SSM();
 // gets params from AWS parameter store. This is a PAGED api, the token
 // indicates the next set of results to get (or undefined for the first call)
 
-const getParams = function getAWSParameterStoreParameters(stage: string, token=undefined) {
+const getParams = function getAWSParameterStoreParameters(stage: string, token: string|undefined=undefined) {
 
     const params = {
         Path: `/${STACK}/${stage}/`,
@@ -28,7 +26,7 @@ const getParams = function getAWSParameterStoreParameters(stage: string, token=u
 
 // a recursive function to retrieve all pages of guardian configuration
 
-const getAllParams = function getGuardianConfigurationRecursiveStep(stage: string, params=[], token=undefined) {
+const getAllParams = function getGuardianConfigurationRecursiveStep(stage: string, params=[], token:string|undefined=undefined) {
     return getParams(stage, token).then((response)=>{
         if (!response.NextToken) {
             return params;
@@ -62,6 +60,4 @@ const getGuardianConfiguration = function(stage: string) {
     })
 };
 
-module.exports = {
-    getGuardianConfiguration
-};
+export { getGuardianConfiguration };
