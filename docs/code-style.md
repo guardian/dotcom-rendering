@@ -5,8 +5,8 @@
 We use TSlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style. 
 Running `make fix` after making any changes will fix most things.
 
-There are some styles the linter can't pick up. If you are unsure of anything, [AirBnB's style
-guide](https://github.com/airbnb/javascript) is a good place to look.
+There are some styles the linter can't pick up. If you are unsure of anything, [Excel Micro's fork of AirBnB's style
+guide](https://github.com/excelmicro/typescript) is a good place to look.
 
 ### Always used named exports
 
@@ -14,20 +14,20 @@ guide](https://github.com/airbnb/javascript) is a good place to look.
 
 ```js
 //bad
-//MyComponent.js
+//MyComponent.tsx
 export default () => <h1>My component</h1>
 
-//index.js
+//index.tsx
 import MyComponent from './MyComponent'
 
 ```
 
 ```js
 //good
-//MyComponent.js
+//MyComponent.tsx
 export const MyComponent = () => <h1>MyComponent</h1>
 
-//index.js
+//index.tsx
 import {MyComponent} from './MyComponent'
 ```
 
