@@ -1,6 +1,6 @@
 # Code style
 
-## JavaScript
+## TypeScript
 
 We use TSlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style. 
 Running `make fix` after making any changes will fix most things.
