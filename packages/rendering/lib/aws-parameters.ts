@@ -8,11 +8,28 @@ const STACK = 'frontend';
 
 const ssm = new AWS.SSM();
 
+interface AWSParameter {
+    Name: string,
+    Value: string,
+}
+
+interface ConfigMap {
+    [key: string]: string;
+}
+
+interface GuardianConfiguration {
+    getParameter: (key: string) => string,
+    getAllParameters: () => any,
+    size: () => number,
+}
+
 // gets params from AWS parameter store. This is a PAGED api, the token
 // indicates the next set of results to get (or undefined for the first call)
 
-const getParams = function getAWSParameterStoreParameters(stage: string, token: string|undefined=undefined) {
-
+const getParams = function getAWSParameterStoreParameters (
+    stage: string,
+    token: string | undefined = undefined,
+): Promise<any> {
     const params = {
         Path: `/${STACK}/${stage}/`,
         Recursive: true,
@@ -21,20 +38,23 @@ const getParams = function getAWSParameterStoreParameters(stage: string, token: 
     };
 
     return ssm.getParametersByPath(params).promise();
-
 };
 
 // a recursive function to retrieve all pages of guardian configuration
 
-const getAllParams = function getGuardianConfigurationRecursiveStep(stage: string, params=[], token:string|undefined=undefined) {
-    return getParams(stage, token).then((response)=>{
+const getAllParams = function getGuardianConfigurationRecursiveStep(
+    stage: string,
+    params = [],
+    token: string | undefined = undefined,
+): Promise<AWSParameter[]> {
+    return getParams(stage, token).then(response => {
         if (!response.NextToken) {
             return params;
         } else {
             return getAllParams(
                 stage,
                 params.concat(response.Parameters),
-                response.NextToken === "" ? undefined : response.NextToken
+                response.NextToken === '' ? undefined : response.NextToken,
             );
         }
     });
@@ -42,22 +62,23 @@ const getAllParams = function getGuardianConfigurationRecursiveStep(stage: strin
 
 // returns a configuration object
 
-const getGuardianConfiguration = function(stage: string) {
-    return getAllParams(stage).then((params)=>{
+const getGuardianConfiguration = (stage: string): Promise<GuardianConfiguration> => {
 
-        const configuration = params.reduce(function(map, p) {
+    return getAllParams(stage).then(params => {
+
+        const configuration: ConfigMap = params.reduce((map: ConfigMap, p) => {
             const newMap = map;
             newMap[p.Name] = p.Value;
             return map;
         }, {});
 
         return {
-            getParameter: (key) => configuration[`/${STACK}/${stage}/${key}`],
+            getParameter: (key: string) => configuration[`/${STACK}/${stage}/${key}`],
             getAllParameters: () => configuration,
             size: () => params.length,
         };
+    });
 
-    })
 };
 
-export { getGuardianConfiguration };
+export { getGuardianConfiguration, GuardianConfiguration };
