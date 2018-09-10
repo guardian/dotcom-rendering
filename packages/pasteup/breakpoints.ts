@@ -1,4 +1,3 @@
-
 // underscored names to avoid clashing with the `from` shorthand exports
 const breakpoints = {
     mobile: 320,
