@@ -10,12 +10,12 @@ import {
 
 import { palette, PillarColours } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
-import { pillarMap } from './pillars';
+import { pillarMap, pillarPalette } from './pillars';
 
 const pillarColours = pillarMap(
-    (_, c) =>
+    pillar =>
         css`
-            color: ${c.main};
+            color: ${pillarPalette[pillar].main};
         `,
 );
 

@@ -16,14 +16,12 @@ export const pillarPalette: { [K in Pillar]: PillarColours } = {
     lifestyle: palette.lifestyle,
 };
 
-type pillarMapType = <T>(
-    f: (name: Pillar, colours: PillarColours) => T,
-) => { [K in Pillar]: T };
+type pillarMapType = <T>(f: (name: Pillar) => T) => { [K in Pillar]: T };
 
 export const pillarMap: pillarMapType = f => ({
-    news: f('news', pillarPalette.news),
-    opinion: f('opinion', pillarPalette.opinion),
-    sport: f('sport', pillarPalette.sport),
-    culture: f('culture', pillarPalette.culture),
-    lifestyle: f('lifestyle', pillarPalette.lifestyle),
+    news: f('news'),
+    opinion: f('opinion'),
+    sport: f('sport'),
+    culture: f('culture'),
+    lifestyle: f('lifestyle'),
 }); // If you can think of a better way to do this that keeps they types, please help.

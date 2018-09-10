@@ -3,7 +3,7 @@ import { headline, egyptian } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
-import { pillarMap } from '../Pillars/pillars';
+import { pillarMap, pillarPalette } from '../Pillars/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
 const hideDesktop = css`
@@ -13,9 +13,9 @@ const hideDesktop = css`
 `;
 
 const pillarColours = pillarMap(
-    (_, c) =>
+    pillar =>
         css`
-            color: ${c.main};
+            color: ${pillarPalette[pillar].main};
         `,
 );
 
@@ -148,13 +148,13 @@ const columnLinkTitle = css`
 `;
 
 const pillarStyles = pillarMap(
-    (_, c) => css`
+    pillar => css`
         :hover {
-            color: ${c.main};
+            color: ${pillarPalette[pillar].main};
             text-decoration: underline;
         }
         :focus {
-            color: ${c.main};
+            color: ${pillarPalette[pillar].main};
             text-decoration: underline;
         }
     `,
