@@ -4,17 +4,17 @@ import { renderToString } from 'react-dom/server';
 
 import assets from './lib/assets';
 import htmlTemplate from './htmlTemplate';
+import Article from './pages/Article';
 
-import parseCAPI from './lib/parse-capi';
-import App, { Data } from './App';
+// import App, { Data } from './App';
 
 interface Props {
     data: {
         page: string;
         site: string;
-        body: { config?: {}; contentFields?: {} };
+        CAPI: CAPIType;
+        NAV: NavType;
     };
-    Page: React.StatelessComponent<{ data: Data }>;
 }
 
 interface RenderToStringResult {
@@ -23,15 +23,12 @@ interface RenderToStringResult {
     ids: string[];
 }
 
-export default ({ Page, data: { body, ...data } }: Props) => {
-    const cleanedData: Data = { ...parseCAPI(body), ...data };
-
-    const bundleJS = assets.dist(
-        `${cleanedData.site}.${cleanedData.page.toLowerCase()}.js`,
-    );
+export default ({ data }: Props) => {
+    const { page, site, CAPI, NAV } = data;
+    const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
 
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
-        renderToString(<App data={cleanedData} Page={Page} />),
+        renderToString(<Article data={{ CAPI, NAV }} />),
     );
 
     /**
@@ -75,6 +72,6 @@ export default ({ Page, data: { body, ...data } }: Props) => {
         html,
         cssIDs,
         fontFiles,
-        data: cleanedData,
+        data,
     });
 };

@@ -18,61 +18,132 @@ const body = clean;
 
 const defaultArgs = { config: {}, contentFields: {} };
 
-// TODO: we shouldn't do any cleaning or data transformation here, but
-// instead pass through the required data exactly. Dotcom Rendering
-// should be just that - a rendering layer only.
-//
-// We *should* however validate the data we receive at this point.
-const parse: (
-    p: {
-        contentFields?: {};
-        config?: {};
-    },
-) => { CAPI: CAPIType; NAV: NavType } = ({
-    contentFields,
-    config,
-} = defaultArgs) => {
-    const nav = get(config, 'nav', []);
-    const pillars = nav.pillars
-        ? nav.pillars.map((link: LinkType) => {
-              const l = link;
-              l.isPillar = true;
-              return l;
-          })
-        : [];
+// tslint:disable:prefer-array-literal
+const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
+    return fns.reduce((acc, fn) => fn(acc), input);
+};
+
+const getString = (obj: object, selector: string): string => {
+    const found = get(obj, selector);
+    if (typeof found === 'string') {
+        return found;
+    }
+
+    throw new Error(
+        `expected string at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
+
+const getNumber = (obj: object, selector: string): number => {
+    const found = get(obj, selector);
+    if (typeof found === 'number') {
+        return found;
+    }
+
+    throw new Error(
+        `expected number at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
+
+const getNonEmptyString = (obj: object, selector: string): string => {
+    const found = get(obj, selector);
+    if (typeof found === 'string' && found.length > 0) {
+        return found;
+    }
+
+    throw new Error(
+        `expected non-empty string at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
+
+const getArray = (obj: object, selector: string): any[] => {
+    const found = get(obj, selector);
+    if (Array.isArray(found)) {
+        return found;
+    }
+
+    throw new Error(
+        `expected array at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
+
+const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
+    isPillar,
+    title: getNonEmptyString(data, 'title'),
+    longTitle: getString(data, 'longTitle'),
+    url: getNonEmptyString(data, 'url'),
+    children: getArray(data, 'children').map(
+        l => getLink(l, { isPillar: false }), // children are never pillars
+    ),
+    mobileOnly: false,
+});
+
+// TODO really it would be nice if we passed just the data we needed and
+// didn't have to do the transforms/lookups below. (While preserving the
+// validation on types.)
+export const extractArticleMeta = (data: {}): CAPIType => ({
+    headline: apply(
+        getNonEmptyString(data, 'config.page.headline'),
+        clean,
+        curly,
+    ),
+    standfirst: apply(
+        getNonEmptyString(data, 'contentFields.fields.standfirst'),
+        clean,
+        bigBullets,
+    ),
+    main: apply(getNonEmptyString(data, 'contentFields.fields.main'), clean),
+    body: getArray(data, 'contentFields.fields.blocks.body')
+        .map(block => block.bodyHtml)
+        .filter(Boolean)
+        .join(''),
+    author: getNonEmptyString(data, 'config.page.author'),
+    webPublicationDate: new Date(
+        getNumber(data, 'config.page.webPublicationDate'),
+    ),
+    sectionName: getNonEmptyString(data, 'config.page.section'),
+});
+
+export const extractNavMeta = (data: {}): NavType => {
+    let pillars = getArray(data, 'config.nav.pillars');
+
+    pillars = pillars.map(link => getLink(link, { isPillar: true }));
 
     pillars.push({
         url: '', // unused
         title: 'More',
         longTitle: 'More',
         isPillar: false,
-        children: nav.otherLinks,
+        children: getArray(data, 'config.nav.otherLinks').map(l =>
+            getLink(l, { isPillar: false }),
+        ),
     });
 
-    nav.pillars = pillars;
-
-    const webPublicationDate = get(config, 'page.webPublicationDate', '');
+    const subnav = get(data, 'config.nav.subNavSections');
 
     return {
-        // here we create our own object of CAPI content on the 'CAPI' key
-        CAPI: {
-            headline: headline(get(config, 'page.headline', '')),
-            standfirst: standfirst(get(contentFields, 'fields.standfirst', '')),
-            main: main(get(contentFields, 'fields.main', '')),
-            author: get(config, 'page.author', ''),
-            webPublicationDate: webPublicationDate
-                ? new Date(webPublicationDate)
-                : webPublicationDate,
-            sectionName: get(config, 'page.sectionName', ''),
-            body: body(
-                get(contentFields, 'fields.blocks.body', [])
-                    .map((block: { bodyHtml: string }) => block.bodyHtml)
-                    .filter(Boolean)
-                    .join(''),
-            ),
-        },
-        NAV: nav,
+        pillars,
+        otherLinks: getArray(data, 'config.nav.otherLinks').map(l =>
+            getLink(l, { isPillar: false }),
+        ),
+        brandExtensions: getArray(data, 'config.nav.brandExtensions').map(l =>
+            getLink(l, { isPillar: false }),
+        ),
+        subNavSections: subnav
+            ? {
+                  parent: getLink(subnav.parent, { isPillar: false }),
+                  links: getArray(subnav, 'links').map(l =>
+                      getLink(l, { isPillar: false }),
+                  ),
+              }
+            : undefined,
     };
 };
-
-export default parse;
