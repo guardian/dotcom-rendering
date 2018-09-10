@@ -56,19 +56,16 @@ if (process.env.NODE_ENV === 'production') {
         app.use('/assets', express.static(path.relative(__dirname, dist)));
     }
 
-    app.use('/:page', renderArticle);
+    app.use('/Article', renderArticle);
 
-    app.get('/', async (req, res) => {
+    app.get('/', (req, res) => {
         try {
-            const pages = (await getPagesForSite()) as string[];
             res.send(`
                 <!DOCTYPE html>
                 <html>
                 <body>
                     <ul>
-                    ${pages
-                        .map(page => `<li><a href="/${page}">${page}</a></li>`)
-                        .join('')}
+                        <li><a href="/Article">Article</a></li>
                     </ul>
                 </body>
                 </html>
