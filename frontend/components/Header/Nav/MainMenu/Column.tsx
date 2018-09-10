@@ -4,6 +4,7 @@ import { css, cx } from 'react-emotion';
 
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
 import { pillarMap } from '../Pillars/pillars';
+import { palette } from '@guardian/pasteup/palette';
 
 const hideDesktop = css`
     ${desktop} {
@@ -116,7 +117,7 @@ const columnLinkTitle = css`
     text-decoration: none;
     border: 0;
     box-sizing: border-box;
-    color: #121212;
+    color: ${palette.neutral[7]};
     cursor: pointer;
     display: inline-block;
     font-size: 20px;
@@ -200,13 +201,13 @@ const columnLinks = css`
     margin: 0;
     padding: 0 0 12px;
     position: relative;
-    background-color: #e9eff1;
+    background-color: ${palette.nav.faded};
     ${desktop} {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         order: 1;
-        background-color: #e9eff1;
+        background-color: ${palette.nav.faded};
         width: 100%;
         padding: 0 5px;
     }

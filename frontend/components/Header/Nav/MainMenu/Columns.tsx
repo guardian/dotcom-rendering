@@ -5,13 +5,14 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
 import { Column } from './Column';
+import { palette } from '@guardian/pasteup/palette';
 
 const ColumnsStyle = css`
     box-sizing: border-box;
     max-width: none;
     ${desktop} {
         max-width: 980px;
-        background-color: #e9eff1;
+        background-color: ${palette.nav.faded};
         padding: 0 20px;
         position: relative;
         margin: 0 auto;

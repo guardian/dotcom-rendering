@@ -7,8 +7,8 @@ import {
     mobileLandscape,
     desktop,
 } from '@guardian/pasteup/breakpoints';
-
 import { Columns } from './Columns';
+import { palette } from '@guardian/pasteup/palette';
 
 const showMenu = css`
     ${desktop} {
@@ -20,7 +20,7 @@ const showMenu = css`
 `;
 
 const mainMenu = css`
-    background-color: #e9eff1;
+    background-color: ${palette.nav.faded};
     box-sizing: border-box;
     font-size: 20px;
     left: 0;

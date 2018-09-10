@@ -6,11 +6,12 @@ import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/fonts';
 
 import { VeggieBurger } from './VeggieBurger';
+import { palette } from '@guardian/pasteup/palette';
 
 const screenReadable = css`
     ${screenReaderOnly};
 `;
-const navPrimaryColour = '#121212';
+const navPrimaryColour = palette.neutral[7];
 const navSecondaryColour = '#5d5f5f';
 const openMainMenu = css`
     display: none;
@@ -95,7 +96,7 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
     public componentDidMount() {
         /*
             componentDidMount is only executed in the browser therefore if
-            enhanceCheckbox is set to true it indicates that JS is running 
+            enhanceCheckbox is set to true it indicates that JS is running
             in the browser and we should re-render without the NO JS fallback.
             https://reactjs.org/docs/react-component.html#componentdidmount
 
