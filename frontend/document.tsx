@@ -6,8 +6,6 @@ import assets from './lib/assets';
 import htmlTemplate from './htmlTemplate';
 import Article from './pages/Article';
 
-// import App, { Data } from './App';
-
 interface Props {
     data: {
         page: string;

@@ -8,7 +8,6 @@ import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
-// import { Data } from '../App';
 
 interface Props {
     CAPI: CAPIType;
