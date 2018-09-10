@@ -16,9 +16,9 @@ export const pillarPalette: { [K in Pillar]: PillarColours } = {
     lifestyle: palette.lifestyle,
 };
 
-type pillarMapType = <T>(f: (name: Pillar) => T) => { [K in Pillar]: T };
-
-export const pillarMap: pillarMapType = f => ({
+export const pillarMap: <T>(
+    f: (name: Pillar) => T,
+) => { [K in Pillar]: T } = f => ({
     news: f('news'),
     opinion: f('opinion'),
     sport: f('sport'),
