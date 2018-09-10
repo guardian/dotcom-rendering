@@ -5,15 +5,16 @@ import get from 'lodash.get';
 import clean from './clean';
 import bigBullets from './big-bullets';
 
-const headline = compose(clean, curly);
-const standfirst = compose(clean, bigBullets);
+const headline = compose(
+    clean,
+    curly,
+);
+const standfirst = compose(
+    clean,
+    bigBullets,
+);
 const main = clean;
 const body = clean;
-
-type props = {
-    contentFields?: {},
-    config?: {},
-};
 
 const defaultArgs = { config: {}, contentFields: {} };
 
@@ -22,7 +23,15 @@ const defaultArgs = { config: {}, contentFields: {} };
 // should be just that - a rendering layer only.
 //
 // We *should* however validate the data we receive at this point.
-const parse: (p: props) => {CAPI: CAPIType, NAV: NavType} = ({ contentFields, config }: props = defaultArgs) => {
+const parse: (
+    p: {
+        contentFields?: {};
+        config?: {};
+    },
+) => { CAPI: CAPIType; NAV: NavType } = ({
+    contentFields,
+    config,
+} = defaultArgs) => {
     const nav = get(config, 'nav', []);
     const pillars = nav.pillars
         ? nav.pillars.map((link: LinkType) => {
@@ -66,4 +75,4 @@ const parse: (p: props) => {CAPI: CAPIType, NAV: NavType} = ({ contentFields, co
     };
 };
 
-export default parse
+export default parse;

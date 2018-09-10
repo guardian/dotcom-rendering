@@ -1,0 +1,43 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-react",
+        "tslint-react-a11y",
+        "tslint-config-airbnb",
+        "tslint-plugin-prettier",
+        "tslint-config-prettier"
+    ],
+    "jsRules": {
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "import-name": false,
+        "variable-name": [
+            true,
+            "allow-pascal-case",
+            "allow-trailing-underscore"
+        ],
+        "prettier": true,
+        "no-default-export": {
+            "severity": "warning"
+        }
+    },
+    "rules": {
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "jsx-no-lambda": false,
+        "interface-name": false,
+        "import-name": false,
+        "variable-name": [
+            true,
+            "allow-pascal-case",
+            "allow-trailing-underscore"
+        ],
+        // "no-default-export": {
+        //     "severity": "warning"
+        // },
+        "react-no-dangerous-html":true,
+        "prettier": true
+    },
+    "rulesDirectory": []
+}

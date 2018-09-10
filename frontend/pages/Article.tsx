@@ -1,5 +1,4 @@
-/* eslint-disable react/no-danger */
-import React from 'react'
+import React from 'react';
 import { Container } from '@guardian/guui';
 import { css } from 'react-emotion';
 import palette from '@guardian/pasteup/palette';
@@ -57,7 +56,7 @@ const articleContainer = css`
 `;
 
 const Article: React.SFC<{
-    data: Data
+    data: Data;
 }> = ({ data }) => (
     <div>
         <Header nav={data.NAV} />

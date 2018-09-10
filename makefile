@@ -65,11 +65,11 @@ tsc: clean-dist install
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
-	@eslint . --fix --quiet
+	@yarn lint --fix 
 
 lint: clean-dist install
 	$(call log, "checking for lint errors")
-	@eslint . --quiet
+	@yarn lint
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")

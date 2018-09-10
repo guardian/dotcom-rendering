@@ -8,7 +8,7 @@ import { headline } from '@guardian/pasteup/fonts';
 import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`
-    ${screenReaderOnly}
+    ${screenReaderOnly};
 `;
 const navPrimaryColour = '#121212';
 const navSecondaryColour = '#5d5f5f';
@@ -52,7 +52,7 @@ const label = css`
         display: inline-block;
     }
 `;
-const text = ({ showMainMenu }: { showMainMenu: boolean}) => css`
+const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     display: block;
     height: 100%;
     :after {
@@ -77,11 +77,11 @@ const text = ({ showMainMenu }: { showMainMenu: boolean}) => css`
     }
 `;
 
-type Props = {
-    toggleMainMenu: () => void,
-    showMainMenu: boolean,
-    ariaControls: string,
-};
+interface Props {
+    toggleMainMenu: () => void;
+    showMainMenu: boolean;
+    ariaControls: string;
+}
 
 class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
     constructor(props: Props) {
@@ -92,21 +92,20 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
         };
     }
 
-    componentDidMount() {
-        /**
+    public componentDidMount() {
+        /*
             componentDidMount is only executed in the browser therefore if
             enhanceCheckbox is set to true it indicates that JS is running 
             in the browser and we should re-render without the NO JS fallback.
-            Overriding eslint as you can call setState in componentDidMount:
             https://reactjs.org/docs/react-component.html#componentdidmount
-        * */
-        // eslint-disable-next-line react/no-did-mount-set-state
+
+         */
         this.setState({
             enhanceCheckbox: true,
         });
     }
 
-    render() {
+    public render() {
         const { toggleMainMenu, ariaControls, showMainMenu } = this.props;
         const { enhanceCheckbox } = this.state;
         const CHECKBOX_ID = 'main-menu-toggle';
@@ -143,7 +142,6 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
                 key="VeggieBurger"
             />,
             // We can't nest the input inside the label because the structure is important for CSS reasons
-            // eslint-disable-next-line jsx-a11y/label-has-for
             <label
                 className={cx(openMainMenu, label)}
                 htmlFor={CHECKBOX_ID}

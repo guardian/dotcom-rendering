@@ -43,7 +43,7 @@ const palette = {
 
 export default palette;
 
-export const pillars: { [s: string]: string; } = {
+export const pillars: { [s: string]: string } = {
     news: palette.red.medium,
     opinion: palette.orange.medium,
     sport: palette.blue.medium,
@@ -51,7 +51,7 @@ export const pillars: { [s: string]: string; } = {
     lifestyle: palette.pink.medium,
 };
 
-export const pillarsHighlight: { [s: string]: string; } = {
+export const pillarsHighlight: { [s: string]: string } = {
     news: palette.red.light,
     opinion: palette.orange.light,
     sport: palette.blue.light,

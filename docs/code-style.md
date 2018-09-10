@@ -1,8 +1,8 @@
 # Code style
 
-## JavaScript
+## TypeScript
 
-We use [ESlint](https://eslint.org/) and [Prettier](https://prettier.io/) to enforce our JavaScript code style. 
+We use TSlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style. 
 Running `make fix` after making any changes will fix most things.
 
 There are some styles the linter can't pick up. If you are unsure of anything, [AirBnB's style

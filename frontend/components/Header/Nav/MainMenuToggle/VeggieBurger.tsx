@@ -7,7 +7,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean}) => css`
+const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     background-color: #121212;
     top: 24px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -35,7 +35,7 @@ const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean}) => css`
     }
 `;
 
-const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean}) => {
+const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean }) => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;
@@ -77,11 +77,11 @@ const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean}) => {
 };
 
 export const VeggieBurger: React.SFC<{
-    toggleMainMenu: () => void,
-    showMainMenu: boolean,
-    enhanceCheckbox: boolean,
-    htmlFor: string,
-    ariaControls: string,
+    toggleMainMenu: () => void;
+    showMainMenu: boolean;
+    enhanceCheckbox: boolean;
+    htmlFor: string;
+    ariaControls: string;
 }> = ({
     toggleMainMenu,
     showMainMenu,
@@ -102,12 +102,12 @@ export const VeggieBurger: React.SFC<{
     }
 
     return (
-        // eslint-disable-next-line jsx-a11y/label-has-for
         <label
             className={veggieBurger({ showMainMenu })}
             onClick={() => toggleMainMenu()}
             htmlFor={htmlFor}
             tabIndex={0}
+            role="button"
         >
             <span className={veggieBurgerIcon({ showMainMenu })} />
         </label>

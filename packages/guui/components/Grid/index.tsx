@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { css } from 'react-emotion';
 import {
     tablet as tabletMq,
@@ -10,24 +10,20 @@ import { clearFix } from '@guardian/pasteup/mixins';
 
 type Breakpoints = 'tablet' | 'desktop' | 'leftCol' | 'wide';
 
-type BreakpointOptions = {
-    inset?: number,
-};
+interface BreakpointOptions {
+    inset?: number;
+}
 
 type BreakpointProps = [number, BreakpointOptions];
 
-type BreakpointsWithProps = {
-    [K in Breakpoints]: BreakpointProps    
+type BreakpointsWithProps = { [K in Breakpoints]: BreakpointProps };
+
+interface GridSize {
+    max: number;
+    width: number;
 }
 
-type GridSize = {
-    max: number,
-    width: number,
-};
-
-type GridSizes = {
-    [K in Breakpoints]: GridSize
-};
+type GridSizes = { [K in Breakpoints]: GridSize };
 
 const gutter = 20;
 
@@ -50,9 +46,7 @@ const columns: GridSizes = {
     },
 };
 
-const breakpointMqs: {
-    [K in Breakpoints]: string
-} = {
+const breakpointMqs: { [K in Breakpoints]: string } = {
     tablet: tabletMq,
     desktop: desktopMq,
     leftCol: leftColMq,
@@ -96,7 +90,7 @@ const cols: (props: BreakpointsWithProps) => any = ({
     tablet,
     desktop,
     leftCol,
-    wide
+    wide,
 }) => css`
     ${gridStyles('tablet', tablet)};
     ${gridStyles('desktop', desktop)};
@@ -107,19 +101,19 @@ const cols: (props: BreakpointsWithProps) => any = ({
 const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     if (Array.isArray(props)) {
         return props;
-    } else if (typeof props === 'number') {
+    }
+
+    if (typeof props === 'number') {
         return [props, {}];
     }
+
     return props;
 };
 
 export const Row: React.SFC<{
-    htmlTag: string,
-    children: React.ReactNode,
-}> = ({
-    htmlTag,
-    children,
-}) => (
+    htmlTag: string;
+    children: React.ReactNode;
+}> = ({ htmlTag, children }) => (
     <>
         {React.createElement(
             htmlTag,
@@ -131,7 +125,7 @@ export const Row: React.SFC<{
     </>
 );
 
-export interface ColsProps  { 
+export interface ColsProps {
     tablet: BreakpointProps | number;
     desktop: BreakpointProps | number;
     leftCol: BreakpointProps | number;
@@ -143,9 +137,9 @@ export interface ColsProps  {
 export const Cols: React.SFC<ColsProps> = ({
     htmlTag = 'div',
     tablet = columns.tablet.max,
-    desktop = columns.desktop.max, 
-    leftCol = columns.leftCol.max, 
-    wide =    columns.wide.max   , 
+    desktop = columns.desktop.max,
+    leftCol = columns.leftCol.max,
+    wide = columns.wide.max,
     children,
 }) => (
     <>

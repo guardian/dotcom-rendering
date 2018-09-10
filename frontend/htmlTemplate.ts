@@ -11,19 +11,19 @@ export default ({
     nonBlockingJS = '',
     fontFiles = [],
 }: {
-    title?: string,
-    bundleJS: string,
-    css: string,
-    html: string,
+    title?: string;
+    bundleJS: string;
+    css: string;
+    html: string;
     data: {
-        page: string,
-        site: string,
-    },
-    cssIDs: Array<string>,
-    nonBlockingJS?: string,
-    fontFiles?: Array<string>,
+        page: string;
+        site: string;
+    };
+    cssIDs: string[];
+    nonBlockingJS?: string;
+    fontFiles?: string[];
 }) => {
-    const sanitiseDomRefs = (jsString: string ) =>
+    const sanitiseDomRefs = (jsString: string) =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
     const vendorJS = assets.dist('vendor.js');
     const fontCSS = assets.static('css/fonts.css');

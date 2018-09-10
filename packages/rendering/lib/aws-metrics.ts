@@ -1,8 +1,8 @@
 import AWS from 'aws-sdk';
 
-type Metric = {
-    send: () => void,
-};
+interface Metric {
+    send: () => void;
+}
 
 process.env.AWS_PROFILE = 'frontend';
 
@@ -11,7 +11,7 @@ AWS.config.update({ region: 'eu-west-1' });
 // how frequently we send metrics to aws in ms
 const METRICS_TIME_RESOLUTION = 60 * 1000;
 
-const sendMetric = (m: Array<any>) => {
+const sendMetric = (m: any[]) => {
     if (m.length === 0) {
         return;
     }
@@ -25,6 +25,7 @@ const sendMetric = (m: Array<any>) => {
 
     cloudWatchClient.putMetricData(params, err => {
         if (err) {
+            // tslint:disable-next-line:no-console
             console.error(err, err.stack);
         }
     });
@@ -32,8 +33,9 @@ const sendMetric = (m: Array<any>) => {
 
 // handles sending matrics to AWS
 
-const collectAndSendAWSMetrics = function(...metrics: Metric[]) {
+const collectAndSendAWSMetrics = (...metrics: Metric[]) => {
     setInterval(() => {
+        // tslint:disable-next-line:no-console
         console.log('Collecting metrics');
         metrics.forEach(m => m.send());
     }, METRICS_TIME_RESOLUTION);
@@ -41,12 +43,8 @@ const collectAndSendAWSMetrics = function(...metrics: Metric[]) {
 
 // to record things like latency
 
-const TimingMetric = function TimingMetric(
-    app: string,
-    stage: string,
-    metricName: string,
-) {
-    const values: Array<number> = [];
+const TimingMetric = (app: string, stage: string, metricName: string) => {
+    const values: number[] = [];
 
     return {
         recordDuration: (n: number) => {
@@ -79,12 +77,8 @@ const TimingMetric = function TimingMetric(
 
 // to record memory or file sizes
 
-const BytesMetric = function BytesMetric(
-    app: string,
-    stage: string,
-    metricName: string,
-) {
-    const values: Array<number> = [];
+const BytesMetric = (app: string, stage: string, metricName: string) => {
+    const values: number[] = [];
 
     return {
         record: (n: number) => {
@@ -115,8 +109,4 @@ const BytesMetric = function BytesMetric(
     };
 };
 
-export {
-    collectAndSendAWSMetrics,
-    BytesMetric,
-    TimingMetric,
-};
+export { collectAndSendAWSMetrics, BytesMetric, TimingMetric };

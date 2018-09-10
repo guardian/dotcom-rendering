@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Dropdown } from '@guardian/guui';
-import  { Link } from '@guardian/guui/components/Dropdown';
+import { Link } from '@guardian/guui/components/Dropdown';
 
 import { css } from 'react-emotion';
 
@@ -12,7 +12,7 @@ const editionDropdown = css`
 `;
 
 const EditionDropdown: React.SFC = () => {
-    const links: Array<Link> = [
+    const links: Link[] = [
         {
             url: '/preference/edition/uk',
             title: 'UK Edition',

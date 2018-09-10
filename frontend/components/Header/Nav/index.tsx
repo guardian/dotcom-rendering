@@ -34,9 +34,9 @@ const subnav = css`
     border-top: 0.0625rem solid #bbcdd3;
 `;
 
-type Props = {
-    nav: NavType,
-};
+interface Props {
+    nav: NavType;
+}
 
 export default class Nav extends Component<Props, { showMainMenu: boolean }> {
     constructor(props: Props) {
@@ -47,13 +47,13 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
         };
     }
 
-    toggleMainMenu() {
+    public toggleMainMenu() {
         this.setState(state => ({
             showMainMenu: !state.showMainMenu,
         }));
     }
 
-    render() {
+    public render() {
         const { nav } = this.props;
         const toggleMainMenu = () => {
             this.toggleMainMenu();

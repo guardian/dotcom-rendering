@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Number0 from './0.svg';
 import Number1 from './1.svg';
 import Number2 from './2.svg';
@@ -11,8 +11,11 @@ import Number8 from './8.svg';
 import Number9 from './9.svg';
 import Number10 from './10.svg';
 
-const Number = ({ index }: { index: number }) => {
-    const numbers= [
+// tslint:disable:jsx-key
+// This file contains an array of elements, but only exposes one.
+
+const BigNumber = ({ index }: { index: number }) => {
+    const numbers = [
         <Number0 />,
         <Number1 />,
         <Number2 />,
@@ -29,4 +32,4 @@ const Number = ({ index }: { index: number }) => {
     return numbers[index];
 };
 
-export default Number;
+export default BigNumber;

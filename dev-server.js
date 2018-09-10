@@ -1,5 +1,3 @@
-/* eslint-disable global-require,import/no-extraneous-dependencies,no-console */
-
 const path = require('path');
 const express = require('express');
 const fetch = require('node-fetch');
@@ -36,6 +34,7 @@ const go = async () => {
             compiler.compilers.find(config => config.name === 'browser'),
             {
                 // https://www.npmjs.com/package/friendly-errors-webpack-plugin#turn-off-errors
+                // tslint:disable-next-line:no-empty
                 log: () => {},
             },
         ),
@@ -78,7 +77,6 @@ const go = async () => {
         res.redirect(`/${siteName}`);
     });
 
-    // eslint-disable-next-line no-unused-vars
     app.use((err, req, res, next) => {
         res.status(500).send(err.stack);
     });

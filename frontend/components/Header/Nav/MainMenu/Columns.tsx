@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { css } from 'react-emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
@@ -95,12 +95,9 @@ const brandExtensionLink = css`
 `;
 
 export const Columns: React.SFC<{
-    columns: Array<LinkType>,
-    brandExtensions: Array<LinkType>,
-}> = ({
-    columns,
-    brandExtensions,
-}) => (
+    columns: LinkType[];
+    brandExtensions: LinkType[];
+}> = ({ columns, brandExtensions }) => (
     <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
         {columns.map((column, i) => (
             <Column

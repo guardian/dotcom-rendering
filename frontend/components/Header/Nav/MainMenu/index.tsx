@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { css, cx } from 'react-emotion';
 
 import {
@@ -68,14 +68,10 @@ const mainMenu = css`
 `;
 
 export const MainMenu: React.SFC<{
-    showMainMenu: boolean,
-    id: string,
-    nav: NavType,
-}> = ({
-    showMainMenu,
-    id,
-    nav,
-}) => (
+    showMainMenu: boolean;
+    id: string;
+    nav: NavType;
+}> = ({ showMainMenu, id, nav }) => (
     <div
         className={cx(mainMenu, { [showMenu]: showMainMenu })}
         aria-hidden={!showMainMenu}

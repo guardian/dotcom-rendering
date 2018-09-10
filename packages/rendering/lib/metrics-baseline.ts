@@ -28,9 +28,10 @@ collectAndSendAWSMetrics(
 
 // records system metrics
 
-const recordBaselineCloudWatchMetrics = function recordBaselineCloudWatchMetrics() {
+const recordBaselineCloudWatchMetrics = () => {
     disk.check('/', (err, diskinfo) => {
         if (err) {
+            // tslint:disable-next-line:no-console
             console.error(err);
         } else {
             maxHeapMemory.record(process.memoryUsage().heapTotal);

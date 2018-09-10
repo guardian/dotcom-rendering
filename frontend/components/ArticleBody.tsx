@@ -10,6 +10,8 @@ import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import dateformat from 'dateformat';
 import { egyptian, textEgyptian, textSans } from '@guardian/pasteup/fonts';
 
+// tslint:disable:react-no-dangerous-html
+
 import {
     from,
     until,
@@ -299,9 +301,8 @@ const pillarColour = pillars.lifestyle; // TODO make dynamic
 
 const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
 
-/* eslint-disable react/no-danger */
 const ArticleBody: React.SFC<{
-    CAPI: CAPIType,
+    CAPI: CAPIType;
 }> = ({ CAPI }) => (
     <div className={wrapper}>
         <header>
@@ -326,17 +327,17 @@ const ArticleBody: React.SFC<{
                 </div>
                 <div className={metaExtras}>
                     <div className={shareIcons}>
-                        <a href="/">
+                        <a href="/" role="button">
                             <span className={shareIcon(pillarColour)}>
                                 <FacebookIcon />
                             </span>
                         </a>
-                        <a href="/">
+                        <a href="/" role="button">
                             <span className={shareIcon(pillarColour)}>
                                 <TwitterIconPadded />
                             </span>
                         </a>
-                        <a href="/">
+                        <a href="/" role="button">
                             <span className={shareIcon(pillarColour)}>
                                 <EmailIcon />
                             </span>

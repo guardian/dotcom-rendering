@@ -87,48 +87,44 @@ const parentStyle = css`
     }
 `;
 
-type Props = {
-    parent?: LinkType,
-    links: Array<LinkType>,
-};
+interface Props {
+    parent?: LinkType;
+    links: LinkType[];
+}
 
 export default class Subnav extends Component<
     Props,
     {
-        showMore: boolean,
-        isExpanded: boolean,
-        noJS: boolean,
+        showMore: boolean;
+        isExpanded: boolean;
+        noJS: boolean;
     }
 > {
+    private boundToggle: () => void;
     private ulRef: React.RefObject<HTMLUListElement>;
 
     constructor(props: Props) {
         super(props);
         this.state = { showMore: false, isExpanded: false, noJS: true };
-        this.toggle_ = this.toggle.bind(this);
+        this.boundToggle = this.toggle.bind(this);
         this.ulRef = createRef();
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         // If componentDidMount runs we know client-side JS is enabled
-        // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
             noJS: false,
             showMore: this.shouldShowMore(),
         });
     }
 
-   
-
-    toggle_: () => void;
-
-    toggle() {
+    public toggle() {
         this.setState(prevState => ({
             isExpanded: !prevState.isExpanded,
         }));
     }
 
-    shouldShowMore() {
+    public shouldShowMore() {
         // get ul ref
         const ul = this.ulRef.current;
         if (!ul) {
@@ -144,7 +140,7 @@ export default class Subnav extends Component<
         return ulTop !== liTop;
     }
 
-    render() {
+    public render() {
         const { parent, links } = this.props;
 
         let lis = [];
@@ -187,7 +183,7 @@ export default class Subnav extends Component<
                     <ul ref={this.ulRef} className={subnavExpanded}>
                         {lis}
                     </ul>
-                    <button onClick={this.toggle_} className={moreStyle}>
+                    <button onClick={this.boundToggle} className={moreStyle}>
                         Less
                     </button>
                 </div>
@@ -198,7 +194,7 @@ export default class Subnav extends Component<
                     <ul ref={this.ulRef} className={subnavCollapsed}>
                         {lis}
                     </ul>
-                    <button onClick={this.toggle_} className={moreStyle}>
+                    <button onClick={this.boundToggle} className={moreStyle}>
                         More
                     </button>
                 </div>

@@ -6,12 +6,12 @@ import { textSans } from '@guardian/pasteup/fonts';
 
 import { Container } from '@guardian/guui';
 
-type Link = {
-    title: string,
-    url: string,
-};
+interface Link {
+    title: string;
+    url: string;
+}
 
-const footerLinks: Array<Array<Link>> = [
+const footerLinks: Link[][] = [
     [
         {
             title: 'Jobs',
@@ -194,8 +194,8 @@ const copyright = css`
     margin-top: 12px;
 `;
 
-const FooterLinks: React.SFC< {
-    links: Array<Array<Link>>,
+const FooterLinks: React.SFC<{
+    links: Link[][];
 }> = ({ links }) => {
     const linkGroups = links.map(linkGroup => {
         const ls = linkGroup.map(l => (
@@ -220,7 +220,7 @@ const Footer: React.SFC = () => (
                 title="Guardian Email Sign-up Form"
                 src="https://www.theguardian.com/email/form/footer/today-uk"
                 scrolling="no"
-                seamless
+                seamless={true}
                 id="footer__email-form"
                 className={emailSignup}
                 data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."

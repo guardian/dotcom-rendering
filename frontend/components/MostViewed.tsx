@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';
 import palette from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
-import { Number } from '@guardian/guui';
+import { BigNumber } from '@guardian/guui';
 
 const heading = css`
     font-family: ${headline};
@@ -41,17 +41,20 @@ const headlineBody = css`
     font-family: ${textEgyptian};
 `;
 
-type Trails =  Array<{url: string, linkText: string}>
+interface Trail {
+    url: string;
+    linkText: string;
+}
 
-export default class MostViewed extends Component<{}, { trails: Trails }> {
+export default class MostViewed extends Component<{}, { trails: Trail[] }> {
     constructor(props: {}) {
         super(props);
-        this.state = { 
-            trails: []
+        this.state = {
+            trails: [],
         };
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         fetch('https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui')
             .then(resp => resp.json())
             .then(({ trails }) => {
@@ -61,7 +64,7 @@ export default class MostViewed extends Component<{}, { trails: Trails }> {
             });
     }
 
-    render() {
+    public render() {
         return (
             <div>
                 <h2 className={heading}>Most Viewed</h2>
@@ -69,7 +72,7 @@ export default class MostViewed extends Component<{}, { trails: Trails }> {
                     {this.state.trails.map((trail, i) => (
                         <li className={listItem} key={trail.url}>
                             <span className={numberStyled}>
-                                <Number index={i + 1} />
+                                <BigNumber index={i + 1} />
                             </span>
 
                             <h2 className={headlineStyle}>

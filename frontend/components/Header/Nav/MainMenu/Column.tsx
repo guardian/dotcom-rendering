@@ -75,11 +75,11 @@ const collapseColumnButton = css`
 `;
 
 const CollapseColumnButton: React.SFC<{
-    column: LinkType,
-    showColumnLinks: boolean,
-    toggleColumnLinks: () => void,
-    ariaControls: string,
-    isLastIndex: boolean,
+    column: LinkType;
+    showColumnLinks: boolean;
+    toggleColumnLinks: () => void;
+    ariaControls: string;
+    isLastIndex: boolean;
 }> = ({
     column,
     showColumnLinks,
@@ -164,9 +164,9 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const ColumnLink: React.SFC<{ 
-    column: LinkType, 
-    link: LinkType,
+const ColumnLink: React.SFC<{
+    column: LinkType;
+    link: LinkType;
 }> = ({ link, column }) => (
     <li
         className={cx(mainMenuLinkStyle, {
@@ -217,8 +217,8 @@ const hide = css`
 
 const getColumnLinks = (
     column: LinkType,
-    brandExtensions: Array<LinkType>,
-): Array<LinkType> => {
+    brandExtensions: LinkType[],
+): LinkType[] => {
     if (column.title.toLowerCase() === 'more') {
         // Add the brand extensions to 'more' on mobile.
         return [
@@ -233,16 +233,11 @@ const getColumnLinks = (
 };
 
 const ColumnLinks: React.SFC<{
-    column: LinkType,
-    brandExtensions: Array<LinkType>,
-    showColumnLinks: boolean,
-    id: string,
-}> = ({
-    column,
-    showColumnLinks,
-    id,
-    brandExtensions,
-}) => {
+    column: LinkType;
+    brandExtensions: LinkType[];
+    showColumnLinks: boolean;
+    id: string;
+}> = ({ column, showColumnLinks, id, brandExtensions }) => {
     const links = getColumnLinks(column, brandExtensions);
 
     return (
@@ -296,11 +291,11 @@ const columnStyle = css`
     }
 `;
 
-type ColumnProps = {
-    column: LinkType,
-    isLastIndex: boolean,
-    brandExtensions: Array<LinkType>,
-};
+interface ColumnProps {
+    column: LinkType;
+    isLastIndex: boolean;
+    brandExtensions: LinkType[];
+}
 
 export class Column extends Component<
     ColumnProps,
@@ -314,13 +309,13 @@ export class Column extends Component<
         };
     }
 
-    toggleColumnLinks() {
+    public toggleColumnLinks() {
         this.setState(state => ({
             showColumnLinks: !state.showColumnLinks,
         }));
     }
 
-    render() {
+    public render() {
         const { showColumnLinks } = this.state;
         const { column, isLastIndex, brandExtensions } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;

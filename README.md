@@ -59,9 +59,9 @@ We use [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-mo
 
 The following extensions will life easier:
 
-- [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) (esp. with [`autoFixOnSave`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint#user-content-settings-options) enabled)
+- [tslint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint) (esp. with `tslint.autoFixOnSave` enabled)
 
 Also:
 
-- [css-in-js autocomplete/conversion](https://marketplace.visualstudio.com/items?itemName=paulmolluzzo.convert-css-in-js)
+- [css-in-js syntax highlighting](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components)
 - [colour highlighting in JS](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)

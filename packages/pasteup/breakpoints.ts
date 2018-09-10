@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 // underscored names to avoid clashing with the `from` shorthand exports
 const breakpoints = {
     mobile: 320,
@@ -11,6 +9,9 @@ const breakpoints = {
     leftCol: 1140,
     wide: 1300,
 };
+
+// tslint:disable:no-shadowed-variable
+// this will need refactoring to fix
 
 const minWidth = (from: number): string => `@media (min-width: ${`${from}px`})`;
 
