@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import { headline, egyptian } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 
-import { pillars } from '@guardian/pasteup/palette';
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
+import { pillarMap } from '../Pillars/pillars';
 
 const hideDesktop = css`
     ${desktop} {
         display: none;
     }
 `;
-const pillarColor = (pillar: string) =>
-    css`
-        color: ${pillars[pillar]};
-    `;
+
+const pillarColours = pillarMap(
+    (_, c) =>
+        css`
+            color: ${c.main};
+        `,
+);
 
 const showColumnLinksStyle = css`
     :before {
@@ -90,7 +93,7 @@ const CollapseColumnButton: React.SFC<{
     <button
         className={cx(
             collapseColumnButton,
-            pillarColor(column.title.toLowerCase()),
+            pillarColours[column.pillar as Pillar], // also not great
             {
                 [showColumnLinksStyle]: showColumnLinks,
                 [hideAfter]: !(isLastIndex || showColumnLinks),
@@ -143,16 +146,18 @@ const columnLinkTitle = css`
     }
 `;
 
-const pillarStyles = (pillar: string) => css`
-    :hover {
-        color: ${pillars[pillar]};
-        text-decoration: underline;
-    }
-    :focus {
-        color: ${pillars[pillar]};
-        text-decoration: underline;
-    }
-`;
+const pillarStyles = pillarMap(
+    (_, c) => css`
+        :hover {
+            color: ${c.main};
+            text-decoration: underline;
+        }
+        :focus {
+            color: ${c.main};
+            text-decoration: underline;
+        }
+    `,
+);
 
 const mainMenuLinkStyle = css`
     box-sizing: border-box;
@@ -176,7 +181,7 @@ const ColumnLink: React.SFC<{
     >
         <a
             className={cx(columnLinkTitle, {
-                [pillarStyles(column.title.toLowerCase())]: column.isPillar,
+                [pillarStyles[column.pillar as Pillar]]: column.pillar !== null,
             })}
             href={link.url}
             role="menuitem"
@@ -239,12 +244,13 @@ const ColumnLinks: React.SFC<{
     id: string;
 }> = ({ column, showColumnLinks, id, brandExtensions }) => {
     const links = getColumnLinks(column, brandExtensions);
+    const isPillar = column.pillar !== null;
 
     return (
         <ul
             className={cx(columnLinks, {
-                [hide]: column.isPillar && !showColumnLinks,
-                [isPillarStyle]: column.isPillar,
+                [hide]: !isPillar && !showColumnLinks,
+                [isPillarStyle]: isPillar,
             })}
             aria-expanded={showColumnLinks}
             role="menu"
@@ -319,15 +325,15 @@ export class Column extends Component<
         const { showColumnLinks } = this.state;
         const { column, isLastIndex, brandExtensions } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;
-
+        const isPillar = column.pillar !== null;
         return (
             <li
                 className={cx(columnStyle, {
-                    [columnPillar]: column.isPillar,
+                    [columnPillar]: isPillar,
                 })}
                 role="none"
             >
-                {column.isPillar && (
+                {isPillar && (
                     <CollapseColumnButton
                         column={column}
                         showColumnLinks={showColumnLinks}

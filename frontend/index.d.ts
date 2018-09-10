@@ -1,3 +1,6 @@
+type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+
+
 // shared type declarations
 interface LinkType {
     title: string,
@@ -5,10 +8,15 @@ interface LinkType {
     url: string,
     children?: Array<LinkType>,
     mobileOnly?: boolean,
-    isPillar?: boolean,
+    pillar?: Pillar,
 }
+
+interface PillarType extends LinkType {
+    pillar: Pillar
+}
+
 interface NavType {
-    pillars: Array<LinkType>,
+    pillars: Array<PillarType>,
     otherLinks: Array<LinkType>,
     brandExtensions: Array<LinkType>,
     subNavSections?: {

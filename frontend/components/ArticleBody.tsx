@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'react-emotion';
-import palette, { pillars } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
@@ -44,7 +44,7 @@ const wrapper = css`
             left: 0;
             height: 100%;
             width: 1px;
-            background: ${palette.neutral[5]};
+            background: ${palette.neutral[86]};
         }
     }
 
@@ -75,7 +75,7 @@ const standfirst = css`
     font-weight: 700;
     font-size: 17px;
     line-height: 22px;
-    color: ${palette.neutral[1]};
+    color: ${palette.neutral[7]};
     margin-bottom: 12px;
 `;
 
@@ -122,8 +122,8 @@ const meta = css`
 
     background-image: repeating-linear-gradient(
         to bottom,
-        ${palette.neutral[5]},
-        ${palette.neutral[5]} 1px,
+        ${palette.neutral[86]},
+        ${palette.neutral[86]} 1px,
         transparent 1px,
         transparent 4px
     );
@@ -138,7 +138,7 @@ const captionFont = css`
     font-size: 12px;
     line-height: 16px;
     font-family: ${textSans};
-    color: ${palette.neutral[3]};
+    color: ${palette.neutral[46]};
 `;
 
 const mainMedia = css`
@@ -199,14 +199,14 @@ const profile = (colour: string) => css`
 
 const shareIcons = css`
     ${leftCol} {
-        border-bottom: 1px solid ${palette.neutral[5]};
+        border-bottom: 1px solid ${palette.neutral[86]};
         padding-bottom: 6px;
         margin-bottom: 6px;
     }
 `;
 
 const shareIcon = (colour: string) => css`
-    border: 1px solid ${palette.neutral[5]};
+    border: 1px solid ${palette.neutral[86]};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -257,7 +257,7 @@ const shareCount = css`
     letter-spacing: -1px;
     padding-top: 2px;
     display: block;
-    color: ${palette.neutral[3]};
+    color: ${palette.neutral[46]};
 `;
 
 const twitterHandle = css`
@@ -265,7 +265,7 @@ const twitterHandle = css`
     line-height: 16px;
     font-family: ${textSans};
     font-weight: bold;
-    color: ${palette.neutral[3]};
+    color: ${palette.neutral[46]};
 
     padding-right: 10px;
     display: inline-block;
@@ -274,7 +274,7 @@ const twitterHandle = css`
         height: 10px;
         max-width: 12px;
         margin-right: 0px;
-        fill: ${palette.neutral[3]};
+        fill: ${palette.neutral[46]};
     }
 `;
 
@@ -286,7 +286,7 @@ const dateline = css`
 `;
 
 const metaExtras = css`
-    border-top: 1px solid ${palette.neutral[5]};
+    border-top: 1px solid ${palette.neutral[86]};
     padding-top: 6px;
     margin-bottom: 6px;
 
@@ -297,7 +297,7 @@ const metaExtras = css`
     }
 `;
 
-const pillarColour = pillars.lifestyle; // TODO make dynamic
+const pillarColour = palette.lifestyle.main; // TODO make dynamic
 
 const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
 

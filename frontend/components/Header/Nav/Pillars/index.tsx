@@ -8,16 +8,16 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-import { pillars as pillarPalette } from '@guardian/pasteup/palette';
+import { palette, PillarColours } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
+import { pillarMap } from './pillars';
 
-const pillarColours = Object.entries(pillarPalette)
-    .map(([pillar, colour]) => ({
-        [pillar]: css`
-            color: ${colour};
+const pillarColours = pillarMap(
+    (_, c) =>
+        css`
+            color: ${c.main};
         `,
-    }))
-    .reduce((c, a) => ({ ...c, ...a }), {});
+);
 
 const pillarsStyles = css`
     clear: right;
@@ -113,20 +113,22 @@ const Pillars: React.SFC<{
     pillars: LinkType[];
 }> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
-        {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (
-            <li key={pillar.title}>
-                <a
-                    className={cx(
-                        linkStyle,
-                        showMenuUnderline(showMainMenu),
-                        pillarColours[pillar.title.toLowerCase()],
-                    )}
-                    href={pillar.url}
-                >
-                    {pillar.title}
-                </a>
-            </li>
-        ))}
+        {pillars
+            .filter(pillar => pillar.title !== 'More' && pillar.pillar !== null)
+            .map(pillar => (
+                <li key={pillar.title}>
+                    <a
+                        className={cx(
+                            linkStyle,
+                            showMenuUnderline(showMainMenu),
+                            pillarColours[pillar.pillar as Pillar], // don't like this casting
+                        )}
+                        href={pillar.url}
+                    >
+                        {pillar.title}
+                    </a>
+                </li>
+            ))}
     </ul>
 );
 export default Pillars;
