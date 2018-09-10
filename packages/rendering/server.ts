@@ -2,10 +2,14 @@ import * as path from 'path';
 import express from 'express';
 
 import recordBaselineCloudWatchMetrics from './lib/metrics-baseline';
-import { getGuardianConfiguration, GuardianConfiguration } from './lib/aws-parameters';
+import {
+    getGuardianConfiguration,
+    GuardianConfiguration,
+} from './lib/aws-parameters';
 import document from '../../frontend/document';
 import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
+import { log, warn } from '../../lib/log';
 
 const render = async (
     { params, body }: express.Request,
@@ -32,12 +36,12 @@ export default () => render;
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
     getGuardianConfiguration('prod')
-        .then((config:GuardianConfiguration) => {
-            console.log(`loaded ${config.size()} configuration parameters`);
+        .then((config: GuardianConfiguration) => {
+            log(`loaded ${config.size()} configuration parameters`);
         })
         .catch((err: any) => {
-            console.error('Failed to get configuration. Bad AWS credentials?');
-            console.error(err);
+            warn('Failed to get configuration. Bad AWS credentials?');
+            warn(err);
         });
 
     const app = express();

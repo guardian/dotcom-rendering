@@ -9,8 +9,8 @@ const STACK = 'frontend';
 const ssm = new AWS.SSM();
 
 interface AWSParameter {
-    Name: string,
-    Value: string,
+    Name: string;
+    Value: string;
 }
 
 interface ConfigMap {
@@ -18,15 +18,15 @@ interface ConfigMap {
 }
 
 interface GuardianConfiguration {
-    getParameter: (key: string) => string,
-    getAllParameters: () => any,
-    size: () => number,
+    getParameter: (key: string) => string;
+    getAllParameters: () => any;
+    size: () => number;
 }
 
 // gets params from AWS parameter store. This is a PAGED api, the token
 // indicates the next set of results to get (or undefined for the first call)
 
-const getParams = function getAWSParameterStoreParameters (
+const getParams = function getAWSParameterStoreParameters(
     stage: string,
     token: string | undefined = undefined,
 ): Promise<any> {
@@ -50,22 +50,21 @@ const getAllParams = function getGuardianConfigurationRecursiveStep(
     return getParams(stage, token).then(response => {
         if (!response.NextToken) {
             return params;
-        } else {
-            return getAllParams(
-                stage,
-                params.concat(response.Parameters),
-                response.NextToken === '' ? undefined : response.NextToken,
-            );
         }
+        return getAllParams(
+            stage,
+            params.concat(response.Parameters),
+            response.NextToken === '' ? undefined : response.NextToken,
+        );
     });
 };
 
 // returns a configuration object
 
-const getGuardianConfiguration = (stage: string): Promise<GuardianConfiguration> => {
-
+const getGuardianConfiguration = (
+    stage: string,
+): Promise<GuardianConfiguration> => {
     return getAllParams(stage).then(params => {
-
         const configuration: ConfigMap = params.reduce((map: ConfigMap, p) => {
             const newMap = map;
             newMap[p.Name] = p.Value;
@@ -73,12 +72,12 @@ const getGuardianConfiguration = (stage: string): Promise<GuardianConfiguration>
         }, {});
 
         return {
-            getParameter: (key: string) => configuration[`/${STACK}/${stage}/${key}`],
+            getParameter: (key: string) =>
+                configuration[`/${STACK}/${stage}/${key}`],
             getAllParameters: () => configuration,
             size: () => params.length,
         };
     });
-
 };
 
 export { getGuardianConfiguration, GuardianConfiguration };
