@@ -6,27 +6,30 @@ import document from '../../frontend/document';
 import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
 
-const render = async (
-    { params, body }: express.Request,
-    res: express.Response,
-) => {
-    try {
-        const { page } = params;
-        const data = {
-            page,
-            body,
-            site: 'frontend',
-        };
-        const respBody = document({ data, Page: Article });
+import {
+    extractArticleMeta,
+    extractNavMeta,
+} from '../../frontend/lib/parse-capi';
 
-        res.status(200).send(respBody);
+const renderArticle = ({ body }: express.Request, res: express.Response) => {
+    try {
+        const resp = document({
+            data: {
+                site: 'frontend',
+                page: 'Article',
+                CAPI: extractArticleMeta(body),
+                NAV: extractNavMeta(body),
+            },
+        });
+
+        res.status(200).send(resp);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
     }
 };
 
 // this export is the function used by webpackHotServerMiddleware in /dev-server.js
-export default () => render;
+export default () => renderArticle;
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
@@ -53,19 +56,16 @@ if (process.env.NODE_ENV === 'production') {
         app.use('/assets', express.static(path.relative(__dirname, dist)));
     }
 
-    app.use('/:page', render);
+    app.use('/Article', renderArticle);
 
-    app.get('/', async (req, res) => {
+    app.get('/', (req, res) => {
         try {
-            const pages = (await getPagesForSite()) as string[];
             res.send(`
                 <!DOCTYPE html>
                 <html>
                 <body>
                     <ul>
-                    ${pages
-                        .map(page => `<li><a href="/${page}">${page}</a></li>`)
-                        .join('')}
+                        <li><a href="/Article">Article</a></li>
                     </ul>
                 </body>
                 </html>

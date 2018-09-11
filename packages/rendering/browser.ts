@@ -1,4 +1,3 @@
-// __PAGE__ string is replaced by string-replace-loader in webpack.config.js
 import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
@@ -6,10 +5,7 @@ import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
 
 // @ts-ignore
-import Page from '../../frontend/pages/__PAGE__';
-
-// @ts-ignore
-import App from '../../frontend/App';
+import Article from '../../frontend/pages/Article';
 
 const { data, cssIDs } = window.gu.app;
 
@@ -30,5 +26,5 @@ if (container) {
         hydrateCSS(cssIDs);
     }
 
-    hydrateApp(React.createElement(App, { Page, data }), container);
+    hydrateApp(React.createElement(Article, { data }), container);
 }

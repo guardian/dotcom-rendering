@@ -7,7 +7,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const { siteName, getPagesForSite, root } = require('./config');
+const { siteName, root } = require('./config');
 
 const go = async () => {
     const webpackConfig = await require('./webpack');
@@ -41,7 +41,7 @@ const go = async () => {
     );
 
     app.get(
-        `/${siteName}/:page`,
+        '/Article',
         async (req, res, next) => {
             const { html, ...config } = await fetch(
                 `${req.query.url ||
@@ -56,25 +56,21 @@ const go = async () => {
         }),
     );
 
-    app.get(`/${siteName}`, async (req, res) => {
-        const pages = await getPagesForSite();
-        const pageList = pages.map(
-            page =>
-                `<li><a href="${siteName}/${page}"><code>${page}</code></a></li>`,
-        );
+    app.get('/', (req, res) => {
         res.send(`
-        <!DOCTYPE html>
-        <html>
-        <body>
-            <pre>Pages for ${siteName}:</pre>
-            ${pageList.join('\n')}
-        </body>
-        </html>
+            <!DOCTYPE html>
+            <html>
+            <body>
+                <ul>
+                    <li><a href="/Article">Article</a></li>
+                </ul>
+            </body>
+            </html>
         `);
     });
 
     app.get('*', (req, res) => {
-        res.redirect(`/${siteName}`);
+        res.redirect('/');
     });
 
     app.use((err, req, res, next) => {

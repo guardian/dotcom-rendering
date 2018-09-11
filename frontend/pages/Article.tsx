@@ -8,7 +8,11 @@ import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
-import { Data } from '../App';
+
+interface Props {
+    CAPI: CAPIType;
+    NAV: NavType;
+}
 
 const articleWrapper = css`
     background-color: rgba(18, 18, 18, 0.05);
@@ -56,7 +60,7 @@ const articleContainer = css`
 `;
 
 const Article: React.SFC<{
-    data: Data;
+    data: Props;
 }> = ({ data }) => (
     <div>
         <Header nav={data.NAV} />
