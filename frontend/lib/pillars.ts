@@ -28,4 +28,10 @@ export const pillarMap: <T>(
     sport: f('sport'),
     culture: f('culture'),
     lifestyle: f('lifestyle'),
-}); // We could do this with an Object.assign, but that would need weirdness in ts and is less readable.
+});
+/*
+Further notes on this function:
+    - It maps by hand because it's easy to lose track of types when you use Object.assign()
+    - Where the function parameter f returns type T, pillarMap will return an object with
+      a key for each Pillar and values of type T.
+ */

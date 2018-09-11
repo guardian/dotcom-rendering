@@ -4,7 +4,7 @@ import get from 'lodash.get';
 
 import clean from './clean';
 import bigBullets from './big-bullets';
-import { pillarNames } from '../../components/Header/Nav/Pillars/pillars';
+import { pillarNames } from '../pillars';
 
 const headline = compose(
     clean,

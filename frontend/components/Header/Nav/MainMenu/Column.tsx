@@ -3,7 +3,7 @@ import { headline, egyptian } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
-import { pillarMap, pillarPalette } from '../Pillars/pillars';
+import { pillarMap, pillarPalette } from '../../../../lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
 const hideDesktop = css`

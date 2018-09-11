@@ -8,9 +8,8 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-import { palette, PillarColours } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
-import { pillarMap, pillarPalette } from './pillars';
+import { pillarMap, pillarPalette } from '../../../../lib/pillars';
 
 const pillarColours = pillarMap(
     pillar =>
@@ -49,25 +48,11 @@ const pillarsStyles = css`
     }
 `;
 
-const showMenuUnderline = (shouldShow: boolean): string => {
-    const show = css`
-        :hover {
-            text-decoration: underline;
-        }
-    `;
-
-    const hide = css`
-        :hover {
-            text-decoration: none;
-        }
-    `;
-
-    if (shouldShow) {
-        return show;
+const showMenuUnderline = css`
+    :hover {
+        text-decoration: underline;
     }
-
-    return hide;
-};
+`;
 
 const linkStyle = css`
     font-family: ${headline};
@@ -103,6 +88,9 @@ const linkStyle = css`
     :focus:after {
         transform: translateY(-4px);
     }
+    :hover {
+        text-decoration: none;
+    }
     :hover:after {
         transform: translateY(-4px);
     }
@@ -120,7 +108,7 @@ const Pillars: React.SFC<{
                     <a
                         className={cx(
                             linkStyle,
-                            showMenuUnderline(showMainMenu),
+                            { showMenuUnderline: showMainMenu },
                             pillarColours[pillar.pillar as Pillar], // don't like this casting
                         )}
                         href={pillar.url}
