@@ -2,9 +2,14 @@ import * as path from 'path';
 import express from 'express';
 
 import recordBaselineCloudWatchMetrics from './lib/metrics-baseline';
+import {
+    getGuardianConfiguration,
+    GuardianConfiguration,
+} from './lib/aws-parameters';
 import document from '../../frontend/document';
 import Article from '../../frontend/pages/Article';
 import { dist, getPagesForSite, root } from '../../config';
+import { log, warn } from '../../lib/log';
 
 import {
     extractArticleMeta,
@@ -33,6 +38,15 @@ export default () => renderArticle;
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
+    getGuardianConfiguration('prod')
+        .then((config: GuardianConfiguration) => {
+            log(`loaded ${config.size()} configuration parameters`);
+        })
+        .catch((err: any) => {
+            warn('Failed to get configuration. Bad AWS credentials?');
+            warn(err);
+        });
+
     const app = express();
 
     app.use(express.json({ limit: '50mb' }));
