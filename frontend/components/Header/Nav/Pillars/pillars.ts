@@ -6,6 +6,7 @@ export const pillarNames: Pillar[] = [
     'sport',
     'culture',
     'lifestyle',
+    'more',
 ];
 
 export const pillarPalette: { [K in Pillar]: PillarColours } = {
@@ -14,6 +15,13 @@ export const pillarPalette: { [K in Pillar]: PillarColours } = {
     sport: palette.sport,
     culture: palette.culture,
     lifestyle: palette.lifestyle,
+    more: {
+        main: 'pink',
+        dark: 'green',
+        pastel: 'red',
+        bright: 'purple',
+        faded: 'white',
+    },
 };
 
 /*
@@ -28,6 +36,7 @@ export const pillarMap: <T>(
     sport: f('sport'),
     culture: f('culture'),
     lifestyle: f('lifestyle'),
+    more: f('more'),
 });
 /*
 Further notes on this function:

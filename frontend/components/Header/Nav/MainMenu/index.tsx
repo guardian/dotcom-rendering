@@ -77,6 +77,6 @@ export const MainMenu: React.SFC<{
         aria-hidden={!showMainMenu}
         id={id}
     >
-        <Columns columns={nav.pillars} brandExtensions={nav.brandExtensions} />
+        <Columns nav={nav} />
     </div>
 );

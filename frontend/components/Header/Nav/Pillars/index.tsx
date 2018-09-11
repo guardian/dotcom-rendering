@@ -9,7 +9,7 @@ import {
 } from '@guardian/pasteup/breakpoints';
 
 import { headline } from '@guardian/pasteup/fonts';
-import { pillarMap, pillarPalette } from '../../../../lib/pillars';
+import { pillarMap, pillarPalette } from '../pillars/pillars';
 
 const pillarColours = pillarMap(
     pillar =>
@@ -98,25 +98,21 @@ const linkStyle = css`
 
 const Pillars: React.SFC<{
     showMainMenu: boolean;
-    pillars: LinkType[];
+    pillars: PillarType[];
 }> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
-        {pillars
-            .filter(pillar => pillar.title !== 'More' && pillar.pillar !== null)
-            .map(pillar => (
-                <li key={pillar.title}>
-                    <a
-                        className={cx(
-                            linkStyle,
-                            { showMenuUnderline: showMainMenu },
-                            pillarColours[pillar.pillar as Pillar], // don't like this casting
-                        )}
-                        href={pillar.url}
-                    >
-                        {pillar.title}
-                    </a>
-                </li>
-            ))}
+        {pillars.filter(pillar => pillar.pillar !== 'more').map(pillar => (
+            <li key={pillar.title}>
+                <a
+                    className={cx(linkStyle, pillarColours[pillar.pillar], {
+                        showMenuUnderline: showMainMenu,
+                    })}
+                    href={pillar.url}
+                >
+                    {pillar.title}
+                </a>
+            </li>
+        ))}
     </ul>
 );
 export default Pillars;

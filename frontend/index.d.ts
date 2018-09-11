@@ -1,4 +1,4 @@
-type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' | 'more';
 
 
 // shared type declarations
@@ -15,9 +15,13 @@ interface PillarType extends LinkType {
     pillar: Pillar
 }
 
+interface MoreType extends PillarType {
+    pillar: 'more'
+}
+
 interface NavType {
     pillars: Array<PillarType>,
-    otherLinks: Array<LinkType>,
+    otherLinks: MoreType,
     brandExtensions: Array<LinkType>,
     subNavSections?: {
         parent: LinkType,

@@ -3,7 +3,7 @@ import { headline, egyptian } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
-import { pillarMap, pillarPalette } from '../../../../lib/pillars';
+import { pillarMap, pillarPalette } from '../pillars/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
 const hideDesktop = css`
@@ -79,7 +79,7 @@ const collapseColumnButton = css`
 `;
 
 const CollapseColumnButton: React.SFC<{
-    column: LinkType;
+    column: PillarType;
     showColumnLinks: boolean;
     toggleColumnLinks: () => void;
     ariaControls: string;
@@ -94,7 +94,7 @@ const CollapseColumnButton: React.SFC<{
     <button
         className={cx(
             collapseColumnButton,
-            pillarColours[column.pillar as Pillar], // also not great
+            pillarColours[column.pillar], // also not great
             {
                 [showColumnLinksStyle]: showColumnLinks,
                 [hideAfter]: !(isLastIndex || showColumnLinks),
@@ -221,43 +221,23 @@ const hide = css`
     display: none;
 `;
 
-const getColumnLinks = (
-    column: LinkType,
-    brandExtensions: LinkType[],
-): LinkType[] => {
-    if (column.title.toLowerCase() === 'more') {
-        // Add the brand extensions to 'more' on mobile.
-        return [
-            ...brandExtensions.map(brandExtension => ({
-                ...brandExtension,
-                mobileOnly: true,
-            })),
-            ...(column.children || []),
-        ];
-    }
-    return column.children || [];
-};
-
 const ColumnLinks: React.SFC<{
     column: LinkType;
-    brandExtensions: LinkType[];
     showColumnLinks: boolean;
     id: string;
-}> = ({ column, showColumnLinks, id, brandExtensions }) => {
-    const links = getColumnLinks(column, brandExtensions);
-    const isPillar = column.pillar !== null;
-
+    isPillar: boolean;
+}> = ({ column, showColumnLinks, id, isPillar }) => {
     return (
         <ul
             className={cx(columnLinks, {
-                [hide]: !isPillar && !showColumnLinks,
+                [hide]: !showColumnLinks,
                 [isPillarStyle]: isPillar,
             })}
             aria-expanded={showColumnLinks}
             role="menu"
             id={id}
         >
-            {links.map(link => (
+            {(column.children || []).map(link => (
                 <ColumnLink
                     link={link}
                     key={link.title.toLowerCase()}
@@ -299,20 +279,21 @@ const columnStyle = css`
 `;
 
 interface ColumnProps {
-    column: LinkType;
-    isLastIndex: boolean;
-    brandExtensions: LinkType[];
+    column: PillarType;
+    isLastIndex?: boolean;
 }
 
 export class Column extends Component<
     ColumnProps,
     { showColumnLinks: boolean }
 > {
+    private isPillar: boolean;
     constructor(props: ColumnProps) {
         super(props);
+        this.isPillar = props.column.pillar !== 'more';
 
         this.state = {
-            showColumnLinks: false,
+            showColumnLinks: !this.isPillar,
         };
     }
 
@@ -324,9 +305,10 @@ export class Column extends Component<
 
     public render() {
         const { showColumnLinks } = this.state;
-        const { column, isLastIndex, brandExtensions } = this.props;
+        const { column, isLastIndex } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;
-        const isPillar = column.pillar !== null;
+        const isPillar = this.isPillar;
+
         return (
             <li
                 className={cx(columnStyle, {
@@ -342,14 +324,14 @@ export class Column extends Component<
                             this.toggleColumnLinks();
                         }}
                         ariaControls={subNavId}
-                        isLastIndex={isLastIndex}
+                        isLastIndex={isLastIndex || false}
                     />
                 )}
                 <ColumnLinks
                     column={column}
                     showColumnLinks={showColumnLinks}
                     id={subNavId}
-                    brandExtensions={brandExtensions}
+                    isPillar={isPillar}
                 />
             </li>
         );

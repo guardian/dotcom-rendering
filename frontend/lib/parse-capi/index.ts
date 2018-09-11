@@ -4,7 +4,7 @@ import get from 'lodash.get';
 
 import clean from './clean';
 import bigBullets from './big-bullets';
-import { pillarNames } from '../pillars';
+import { pillarNames } from '../../components/Header/Nav/pillars/pillars';
 
 const headline = compose(
     clean,
@@ -76,11 +76,16 @@ const getArray = (obj: object, selector: string): any[] => {
     );
 };
 
+const findPillar: (name: string) => Pillar | undefined = name => {
+    const pillar: string = name.toLowerCase();
+    return pillarNames.find(_ => _ === pillar);
+};
+
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
-    isPillar,
     title: getNonEmptyString(data, 'title'),
     longTitle: getString(data, 'longTitle'),
     url: getNonEmptyString(data, 'url'),
+    pillar: isPillar ? findPillar(getNonEmptyString(data, 'title')) : undefined,
     children: getArray(data, 'children').map(
         l => getLink(l, { isPillar: false }), // children are never pillars
     ),
@@ -118,23 +123,19 @@ export const extractNavMeta = (data: {}): NavType => {
 
     pillars = pillars.map(link => getLink(link, { isPillar: true }));
 
-    pillars.push({
-        url: '', // unused
-        title: 'More',
-        longTitle: 'More',
-        isPillar: false,
-        children: getArray(data, 'config.nav.otherLinks').map(l =>
-            getLink(l, { isPillar: false }),
-        ),
-    });
-
     const subnav = get(data, 'config.nav.subNavSections');
 
     return {
         pillars,
-        otherLinks: getArray(data, 'config.nav.otherLinks').map(l =>
-            getLink(l, { isPillar: false }),
-        ),
+        otherLinks: {
+            url: '', // unused
+            title: 'More',
+            longTitle: 'More',
+            pillar: 'more',
+            children: getArray(data, 'config.nav.otherLinks').map(l =>
+                getLink(l, { isPillar: false }),
+            ),
+        },
         brandExtensions: getArray(data, 'config.nav.brandExtensions').map(l =>
             getLink(l, { isPillar: false }),
         ),

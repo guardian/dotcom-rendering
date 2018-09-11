@@ -94,23 +94,36 @@ const brandExtensionLink = css`
         pointer-events: none;
     }
 `;
+// Add the brand extensions to 'more' on mobile.
+const enhanceMore = (
+    more: MoreType,
+    brandExtensions: LinkType[],
+): MoreType => ({
+    ...more,
+    children: [
+        ...brandExtensions.map(brandExtension => ({
+            ...brandExtension,
+            mobileOnly: true,
+        })),
+        ...(more.children || []),
+    ],
+});
 
 export const Columns: React.SFC<{
-    columns: LinkType[];
-    brandExtensions: LinkType[];
-}> = ({ columns, brandExtensions }) => (
+    nav: NavType;
+}> = ({ nav }) => (
     <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
-        {columns.map((column, i) => (
-            <Column
-                column={column}
-                key={column.title.toLowerCase()}
-                isLastIndex={i === columns.length - 1}
-                brandExtensions={brandExtensions}
-            />
+        {nav.pillars.map((column, i) => (
+            <Column column={column} key={column.title.toLowerCase()} />
         ))}
+        <Column
+            column={enhanceMore(nav.otherLinks, nav.brandExtensions)}
+            key="more"
+            isLastIndex={true}
+        />
         <li className={desktopBrandExtensionColumn} role="none">
             <ul className={brandExtensionList} role="menu">
-                {brandExtensions.map(brandExtension => (
+                {nav.brandExtensions.map(brandExtension => (
                     <li
                         className={brandExtensionListItem}
                         key={brandExtension.title}
