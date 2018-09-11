@@ -18,7 +18,6 @@ interface PillarType extends LinkType {
 }
 
 interface MoreType extends LinkType {
-    pillar: undefined,
     more: true
 }
 

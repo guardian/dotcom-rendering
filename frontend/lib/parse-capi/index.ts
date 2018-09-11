@@ -131,7 +131,7 @@ export const extractNavMeta = (data: {}): NavType => {
             url: '', // unused
             title: 'More',
             longTitle: 'More',
-            pillar: 'more',
+            more: true,
             children: getArray(data, 'config.nav.otherLinks').map(l =>
                 getLink(l, { isPillar: false }),
             ),
