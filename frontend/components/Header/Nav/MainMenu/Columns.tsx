@@ -4,7 +4,7 @@ import { css } from 'react-emotion';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
-import { Column } from './Column';
+import { Column, More } from './Column';
 import { palette } from '@guardian/pasteup/palette';
 
 const ColumnsStyle = css`
@@ -94,20 +94,6 @@ const brandExtensionLink = css`
         pointer-events: none;
     }
 `;
-// Add the brand extensions to 'more' on mobile.
-const enhanceMore = (
-    more: MoreType,
-    brandExtensions: LinkType[],
-): MoreType => ({
-    ...more,
-    children: [
-        ...brandExtensions.map(brandExtension => ({
-            ...brandExtension,
-            mobileOnly: true,
-        })),
-        ...(more.children || []),
-    ],
-});
 
 export const Columns: React.SFC<{
     nav: NavType;
@@ -116,10 +102,10 @@ export const Columns: React.SFC<{
         {nav.pillars.map((column, i) => (
             <Column column={column} key={column.title.toLowerCase()} />
         ))}
-        <Column
-            column={enhanceMore(nav.otherLinks, nav.brandExtensions)}
+        <More
+            column={nav.otherLinks}
+            brandExtensions={nav.brandExtensions}
             key="more"
-            isLastIndex={true}
         />
         <li className={desktopBrandExtensionColumn} role="none">
             <ul className={brandExtensionList} role="menu">

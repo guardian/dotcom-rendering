@@ -101,7 +101,7 @@ const Pillars: React.SFC<{
     pillars: PillarType[];
 }> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
-        {pillars.filter(pillar => pillar.pillar !== 'more').map(pillar => (
+        {pillars.map(pillar => (
             <li key={pillar.title}>
                 <a
                     className={cx(linkStyle, pillarColours[pillar.pillar], {

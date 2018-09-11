@@ -85,7 +85,7 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                     />
                     <Pillars
                         showMainMenu={showMainMenu}
-                        pillars={nav.pillars || []}
+                        pillars={nav.pillars}
                     />
                     <MainMenuToggle
                         showMainMenu={showMainMenu}
