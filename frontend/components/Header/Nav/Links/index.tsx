@@ -4,7 +4,7 @@ import { css, cx } from 'react-emotion';
 import Dropdown, {
     Link as DropdownLink,
 } from '@guardian/guui/components/Dropdown';
-import palette from '@guardian/pasteup/palette';
+import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 
@@ -35,7 +35,7 @@ const search = css`
 const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     font-size: 14px;
     font-family: ${textSans};
-    color: ${palette.neutral['1']};
+    color: ${palette.neutral[7]};
     float: left;
     line-height: 1.2;
     position: relative;

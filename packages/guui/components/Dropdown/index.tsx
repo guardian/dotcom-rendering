@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'react-emotion';
-import palette from '@guardian/pasteup/palette';
+import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/fonts';
 
 export interface Link {
@@ -42,7 +42,7 @@ const ulExpanded = css`
 const link = css`
     font-size: 15px;
     font-family: ${textSans};
-    color: ${palette.neutral['1']};
+    color: ${palette.neutral[7]};
     line-height: 1.2;
     position: relative;
     transition: color 80ms ease-out;
@@ -53,7 +53,7 @@ const link = css`
     padding: 10px 18px 15px 30px;
 
     :hover {
-        background-color: #ededed;
+        background-color: ${palette.neutral[93]};
         text-decoration: none;
     }
 
@@ -63,7 +63,7 @@ const link = css`
 
     :before {
         content: '';
-        border-top: 1px solid #ededed;
+        border-top: 1px solid ${palette.neutral[93]};
         display: block;
         position: absolute;
         top: 0px;
@@ -77,7 +77,7 @@ const linkActive = css`
 
     :after {
         content: '';
-        border: 2px solid #c70000;
+        border: 2px solid ${palette.news.main};
         border-top: 0px;
         border-right: 0px;
         position: absolute;
@@ -103,7 +103,7 @@ const button = css`
     line-height: 1.2;
     font-size: 14px;
     font-family: ${textSans};
-    color: ${palette.neutral['1']};
+    color: ${palette.neutral[7]};
     transition: color 80ms ease-out;
     padding: 6px 10px;
     margin: 1px 0 0;

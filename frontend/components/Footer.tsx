@@ -5,6 +5,7 @@ import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/fonts';
 
 import { Container } from '@guardian/guui';
+import { palette } from '@guardian/pasteup/palette';
 
 interface Link {
     title: string;
@@ -111,8 +112,8 @@ const footerLinks: Link[][] = [
 ];
 
 const footer = css`
-    background-color: #333;
-    color: #dcdcdc;
+    background-color: ${palette.neutral[20]};
+    color: ${palette.neutral[86]};
     font-family: ${textSans};
     font-size: 14px;
 `;
@@ -132,7 +133,7 @@ const emailSignup = css`
 `;
 
 const footerLink = css`
-    color: #dcdcdc;
+    color: ${palette.neutral[86]};
     text-decoration: none;
     padding-bottom: 12px;
     display: block;

@@ -8,16 +8,15 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-import { pillars as pillarPalette } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/fonts';
+import { pillarMap, pillarPalette } from '../../../../pillars';
 
-const pillarColours = Object.entries(pillarPalette)
-    .map(([pillar, colour]) => ({
-        [pillar]: css`
-            color: ${colour};
+const pillarColours = pillarMap(
+    pillar =>
+        css`
+            color: ${pillarPalette[pillar].main};
         `,
-    }))
-    .reduce((c, a) => ({ ...c, ...a }), {});
+);
 
 const pillarsStyles = css`
     clear: right;
@@ -49,25 +48,11 @@ const pillarsStyles = css`
     }
 `;
 
-const showMenuUnderline = (shouldShow: boolean): string => {
-    const show = css`
-        :hover {
-            text-decoration: underline;
-        }
-    `;
-
-    const hide = css`
-        :hover {
-            text-decoration: none;
-        }
-    `;
-
-    if (shouldShow) {
-        return show;
+const showMenuUnderline = css`
+    :hover {
+        text-decoration: underline;
     }
-
-    return hide;
-};
+`;
 
 const linkStyle = css`
     font-family: ${headline};
@@ -103,6 +88,9 @@ const linkStyle = css`
     :focus:after {
         transform: translateY(-4px);
     }
+    :hover {
+        text-decoration: none;
+    }
     :hover:after {
         transform: translateY(-4px);
     }
@@ -110,17 +98,15 @@ const linkStyle = css`
 
 const Pillars: React.SFC<{
     showMainMenu: boolean;
-    pillars: LinkType[];
+    pillars: PillarType[];
 }> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
-        {pillars.filter(pillar => pillar.title !== 'More').map(pillar => (
+        {pillars.map(pillar => (
             <li key={pillar.title}>
                 <a
-                    className={cx(
-                        linkStyle,
-                        showMenuUnderline(showMainMenu),
-                        pillarColours[pillar.title.toLowerCase()],
-                    )}
+                    className={cx(linkStyle, pillarColours[pillar.pillar], {
+                        showMenuUnderline: showMainMenu,
+                    })}
                     href={pillar.url}
                 >
                     {pillar.title}

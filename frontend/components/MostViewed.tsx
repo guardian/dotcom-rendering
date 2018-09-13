@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { headline, textEgyptian } from '@guardian/pasteup/fonts';
-import palette from '@guardian/pasteup/palette';
+import { palette } from '@guardian/pasteup/palette';
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { BigNumber } from '@guardian/guui';
 
 const heading = css`
     font-family: ${headline};
-    color: ${palette.neutral[1]};
+    color: ${palette.neutral[7]};
     font-size: 20px;
     line-height: 1.2;
     font-weight: 900;
@@ -37,7 +37,7 @@ const headlineStyle = css`
 `;
 
 const headlineBody = css`
-    color: ${palette.neutral[2]};
+    color: ${palette.neutral[20]};
     font-family: ${textEgyptian};
 `;
 

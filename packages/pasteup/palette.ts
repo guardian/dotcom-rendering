@@ -1,60 +1,95 @@
-const palette = {
-    red: {
-        light: '#ff4e36',
-        medium: '#c70000',
-        dark: '#ad0006',
+export type colour = string;
+export interface PillarColours {
+    dark: colour;
+    main: colour;
+    bright: colour;
+    pastel: colour;
+    faded: colour;
+}
+export interface AllPillarColours {
+    news: PillarColours;
+    opinion: PillarColours;
+    sport: PillarColours;
+    culture: PillarColours;
+    lifestyle: PillarColours;
+}
+export interface OtherColours {
+    highlight: { main: colour; dark: colour };
+    neutral: {
+        7: colour;
+        20: colour;
+        46: colour;
+        60: colour;
+        86: colour;
+        93: colour;
+        97: colour;
+        100: colour;
+    };
+    nav: { dark: colour; main: colour; faded: colour };
+    specialReport: { dark: colour };
+    labs: { dark: colour; main: colour };
+    green: { dark: colour; main: colour };
+}
+
+export const palette: AllPillarColours & OtherColours = {
+    news: {
+        dark: '#ab0613',
+        main: '#c70000',
+        bright: '#ff4e36',
+        pastel: '#ffbac8',
+        faded: '#fff4f2',
     },
-    orange: {
-        light: '#f5be2c',
-        medium: '#ff7f0f',
-        dark: '#ed6300',
+    opinion: {
+        dark: '#bd5318',
+        main: '#e05e00',
+        bright: '#ff7f0f',
+        pastel: '#f9b376',
+        faded: '#fef9f5',
     },
-    blue: {
-        light: '#00b2ff',
-        medium: '#0084c6',
+    sport: {
         dark: '#005689',
+        main: '#0084c6',
+        bright: '#00b2ff',
+        pastel: '#90dcff',
+        faded: '#f1f8fc',
     },
-    gold: {
-        light: '#eacca0',
-        medium: '#ab8958',
+    culture: {
         dark: '#6b5840',
+        main: '#a1845c',
+        bright: '#eacca0',
+        pastel: '#e7d4b9',
+        faded: '#fbf6ef',
     },
-    pink: {
-        light: '#ffabdb',
-        medium: '#bb3b80',
+    lifestyle: {
         dark: '#7d0068',
+        main: '#bb3b80',
+        bright: '#ffabdb',
+        pastel: '#fec8d3',
+        faded: '#feeef7',
     },
-    yellow: {
-        medium: '#ffe500',
-        dark: '#edd600',
+    highlight: {
+        main: '#ffe500',
+        dark: '#ffbb50',
     },
     neutral: {
-        header: '#e9eff1',
-        '1': '#121212',
-        '2': '#333333',
-        '3': '#767676',
-        '4': '#999999',
-        '5': '#dcdcdc',
-        '6': '#ececec',
-        '7': '#f6f6f6',
-        '8': '#ffffff',
+        7: '#121212',
+        20: '#333333',
+        46: '#767676',
+        60: '#999999',
+        86: '#dcdcdc',
+        93: '#ededed',
+        97: '#f6f6f6',
+        100: '#ffffff',
     },
-};
-
-export default palette;
-
-export const pillars: { [s: string]: string } = {
-    news: palette.red.medium,
-    opinion: palette.orange.medium,
-    sport: palette.blue.medium,
-    culture: palette.gold.medium,
-    lifestyle: palette.pink.medium,
-};
-
-export const pillarsHighlight: { [s: string]: string } = {
-    news: palette.red.light,
-    opinion: palette.orange.light,
-    sport: palette.blue.light,
-    culture: palette.gold.light,
-    lifestyle: palette.pink.light,
+    nav: {
+        dark: '#bbcdd3',
+        main: '#dae4e7',
+        faded: '#e9eff1',
+    },
+    specialReport: { dark: '#3f464a' },
+    labs: {
+        dark: '#65a897',
+        main: '#69d1ca',
+    },
+    green: { dark: '#236925', main: '#3db540' },
 };

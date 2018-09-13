@@ -4,14 +4,15 @@ import { css } from 'react-emotion';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { egyptian } from '@guardian/pasteup/fonts';
 
-import { Column } from './Column';
+import { Column, More } from './Column';
+import { palette } from '@guardian/pasteup/palette';
 
 const ColumnsStyle = css`
     box-sizing: border-box;
     max-width: none;
     ${desktop} {
         max-width: 980px;
-        background-color: #e9eff1;
+        background-color: ${palette.nav.faded};
         padding: 0 20px;
         position: relative;
         margin: 0 auto;
@@ -95,21 +96,20 @@ const brandExtensionLink = css`
 `;
 
 export const Columns: React.SFC<{
-    columns: LinkType[];
-    brandExtensions: LinkType[];
-}> = ({ columns, brandExtensions }) => (
+    nav: NavType;
+}> = ({ nav }) => (
     <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
-        {columns.map((column, i) => (
-            <Column
-                column={column}
-                key={column.title.toLowerCase()}
-                isLastIndex={i === columns.length - 1}
-                brandExtensions={brandExtensions}
-            />
+        {nav.pillars.map((column, i) => (
+            <Column column={column} key={column.title.toLowerCase()} />
         ))}
+        <More
+            column={nav.otherLinks}
+            brandExtensions={nav.brandExtensions}
+            key="more"
+        />
         <li className={desktopBrandExtensionColumn} role="none">
             <ul className={brandExtensionList} role="menu">
-                {brandExtensions.map(brandExtension => (
+                {nav.brandExtensions.map(brandExtension => (
                     <li
                         className={brandExtensionListItem}
                         key={brandExtension.title}

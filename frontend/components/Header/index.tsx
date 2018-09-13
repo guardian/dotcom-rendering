@@ -4,10 +4,11 @@ import { css } from 'react-emotion';
 import { tablet } from '@guardian/pasteup/breakpoints';
 
 import Nav from './Nav';
+import { palette } from '@guardian/pasteup/palette';
 
 const header = css`
     margin-bottom: 0;
-    background-color: #e9eff1;
+    background-color: ${palette.nav.faded};
     position: relative;
     ${tablet} {
         display: block;

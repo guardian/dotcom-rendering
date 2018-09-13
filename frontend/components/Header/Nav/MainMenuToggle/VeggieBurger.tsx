@@ -6,12 +6,13 @@ import {
     mobileMedium,
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
+import { palette } from '@guardian/pasteup/palette';
 
 const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
-    background-color: #121212;
+    background-color: ${palette.neutral[7]};
     top: 24px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
-    color: #e9eff1;
+    color: ${palette.nav.faded};
     cursor: pointer;
     height: 40px;
     min-width: 40px;

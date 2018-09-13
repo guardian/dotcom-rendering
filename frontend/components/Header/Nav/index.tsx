@@ -10,6 +10,7 @@ import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle';
 import { MainMenu } from './MainMenu';
 import SubNav from './SubNav';
+import { palette } from '@guardian/pasteup/palette';
 
 const centered = css`
     ${tablet} {
@@ -31,7 +32,7 @@ const centered = css`
 
 const subnav = css`
     background-color: white;
-    border-top: 0.0625rem solid #bbcdd3;
+    border-top: 0.0625rem solid ${palette.nav.dark};
 `;
 
 interface Props {
@@ -72,9 +73,9 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                 >
                     <EditionDropdown />
                     <Logo />
-                    {/* 
+                    {/*
                         TODO: The properties of the Links component
-                        have been hardcoded to false. At some point 
+                        have been hardcoded to false. At some point
                         these need to be dynamic.
                     */}
                     <Links
@@ -84,7 +85,7 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                     />
                     <Pillars
                         showMainMenu={showMainMenu}
-                        pillars={nav.pillars || []}
+                        pillars={nav.pillars}
                     />
                     <MainMenuToggle
                         showMainMenu={showMainMenu}

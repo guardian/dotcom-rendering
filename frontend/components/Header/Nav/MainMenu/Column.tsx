@@ -1,111 +1,47 @@
 import React, { Component } from 'react';
-import { headline, egyptian } from '@guardian/pasteup/fonts';
+import { egyptian } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 
-import { pillars } from '@guardian/pasteup/palette';
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
+import { pillarMap, pillarPalette } from '../../../../pillars';
+import { palette } from '@guardian/pasteup/palette';
+import { CollapseColumnButton } from './CollapseColumnButton';
 
-const hideDesktop = css`
+export const hideDesktop = css`
     ${desktop} {
         display: none;
     }
 `;
-const pillarColor = (pillar: string) =>
-    css`
-        color: ${pillars[pillar]};
-    `;
 
-const showColumnLinksStyle = css`
-    :before {
-        margin-top: 8px;
-        transform: rotate(-135deg);
-    }
-`;
-const hideAfter = css`
-    :after {
-        display: none;
-    }
-`;
-
-const collapseColumnButton = css`
-    background-color: transparent;
-    border: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: block;
-    font-family: ${headline};
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1;
-    outline: none;
-    padding: 6px 34px 18px 50px;
-    position: relative;
-    text-align: left;
-    width: 100%;
-    > * {
-        pointer-events: none;
-    }
-    text-transform: capitalize;
-    :before {
-        margin-top: 4px;
-        color: #5d5f5f;
-        left: 25px;
-        position: absolute;
-        border: 2px solid currentColor;
-        border-top: 0;
-        border-left: 0;
-        content: '';
-        display: inline-block;
-        height: 10px;
-
-        transform: rotate(45deg);
-        width: 10px;
-    }
-
-    :after {
-        background-color: #abc2c9;
-        bottom: 0;
-        content: '';
-        display: block;
-        height: 1;
-        left: 50;
-        position: absolute;
-        width: 100%;
-    }
-`;
-
-const CollapseColumnButton: React.SFC<{
-    column: LinkType;
-    showColumnLinks: boolean;
-    toggleColumnLinks: () => void;
-    ariaControls: string;
-    isLastIndex: boolean;
-}> = ({
-    column,
-    showColumnLinks,
-    toggleColumnLinks,
-    ariaControls,
-    isLastIndex,
-}) => (
-    <button
-        className={cx(
-            collapseColumnButton,
-            pillarColor(column.title.toLowerCase()),
-            {
-                [showColumnLinksStyle]: showColumnLinks,
-                [hideAfter]: !(isLastIndex || showColumnLinks),
-            },
-            hideDesktop,
-        )}
-        onClick={() => {
-            toggleColumnLinks();
-        }}
-        aria-haspopup="true"
-        aria-controls={ariaControls}
-        role="menuitem"
-    >
-        {column.title}
-    </button>
+const perPillarStyles = pillarMap(
+    pillar => css`
+        ul {
+            background-color: #d9e4e7;
+        }
+        button {
+            color: ${pillarPalette[pillar].main};
+        }
+        a:hover {
+            color: ${pillarPalette[pillar].main};
+            text-decoration: underline;
+        }
+        a:focus {
+            color: ${pillarPalette[pillar].main};
+            text-decoration: underline;
+        }
+        ${desktop} {
+            :after {
+                content: '';
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 1px;
+                background-color: #abc2c9;
+            }
+        }
+    `,
 );
 
 const columnLinkTitle = css`
@@ -113,7 +49,7 @@ const columnLinkTitle = css`
     text-decoration: none;
     border: 0;
     box-sizing: border-box;
-    color: #121212;
+    color: ${palette.neutral[7]};
     cursor: pointer;
     display: inline-block;
     font-size: 20px;
@@ -143,17 +79,6 @@ const columnLinkTitle = css`
     }
 `;
 
-const pillarStyles = (pillar: string) => css`
-    :hover {
-        color: ${pillars[pillar]};
-        text-decoration: underline;
-    }
-    :focus {
-        color: ${pillars[pillar]};
-        text-decoration: underline;
-    }
-`;
-
 const mainMenuLinkStyle = css`
     box-sizing: border-box;
     overflow: hidden;
@@ -165,22 +90,15 @@ const mainMenuLinkStyle = css`
 `;
 
 const ColumnLink: React.SFC<{
-    column: LinkType;
     link: LinkType;
-}> = ({ link, column }) => (
+}> = ({ link }) => (
     <li
         className={cx(mainMenuLinkStyle, {
             [hideDesktop]: link.mobileOnly,
         })}
         role="none"
     >
-        <a
-            className={cx(columnLinkTitle, {
-                [pillarStyles(column.title.toLowerCase())]: column.isPillar,
-            })}
-            href={link.url}
-            role="menuitem"
-        >
+        <a className={cx(columnLinkTitle)} href={link.url} role="menuitem">
             {link.title}
         </a>
     </li>
@@ -195,13 +113,13 @@ const columnLinks = css`
     margin: 0;
     padding: 0 0 12px;
     position: relative;
-    background-color: #e9eff1;
+    background-color: ${palette.nav.faded};
     ${desktop} {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         order: 1;
-        background-color: #e9eff1;
+        background-color: ${palette.nav.faded};
         width: 100%;
         padding: 0 5px;
     }
@@ -215,66 +133,26 @@ const hide = css`
     display: none;
 `;
 
-const getColumnLinks = (
-    column: LinkType,
-    brandExtensions: LinkType[],
-): LinkType[] => {
-    if (column.title.toLowerCase() === 'more') {
-        // Add the brand extensions to 'more' on mobile.
-        return [
-            ...brandExtensions.map(brandExtension => ({
-                ...brandExtension,
-                mobileOnly: true,
-            })),
-            ...(column.children || []),
-        ];
-    }
-    return column.children || [];
-};
-
 const ColumnLinks: React.SFC<{
     column: LinkType;
-    brandExtensions: LinkType[];
     showColumnLinks: boolean;
     id: string;
-}> = ({ column, showColumnLinks, id, brandExtensions }) => {
-    const links = getColumnLinks(column, brandExtensions);
-
+}> = ({ column, showColumnLinks, id }) => {
     return (
         <ul
             className={cx(columnLinks, {
-                [hide]: column.isPillar && !showColumnLinks,
-                [isPillarStyle]: column.isPillar,
+                [hide]: !showColumnLinks,
             })}
             aria-expanded={showColumnLinks}
             role="menu"
             id={id}
         >
-            {links.map(link => (
-                <ColumnLink
-                    link={link}
-                    key={link.title.toLowerCase()}
-                    column={column}
-                />
+            {(column.children || []).map(link => (
+                <ColumnLink link={link} key={link.title.toLowerCase()} />
             ))}
         </ul>
     );
 };
-
-const columnPillar = css`
-    ${desktop} {
-        :after {
-            content: '';
-            display: block;
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background-color: #abc2c9;
-        }
-    }
-`;
 
 const columnStyle = css`
     font-size: 18px;
@@ -291,23 +169,36 @@ const columnStyle = css`
     }
 `;
 
-interface ColumnProps {
+export const More: React.SFC<{
     column: LinkType;
-    isLastIndex: boolean;
     brandExtensions: LinkType[];
-}
+}> = ({ column, brandExtensions }) => {
+    const subNavId = `${column.title.toLowerCase()}Links`;
+    // Add the brand extensions to 'more' on mobile.
+    const more = {
+        ...column,
+        children: [
+            ...brandExtensions.map(brandExtension => ({
+                ...brandExtension,
+                mobileOnly: true,
+            })),
+            ...(column.children || []),
+        ],
+    };
+    return (
+        <li className={cx(columnStyle)} role="none">
+            <ColumnLinks column={more} showColumnLinks={true} id={subNavId} />
+        </li>
+    );
+};
 
 export class Column extends Component<
-    ColumnProps,
+    { column: PillarType },
     { showColumnLinks: boolean }
 > {
-    constructor(props: ColumnProps) {
-        super(props);
-
-        this.state = {
-            showColumnLinks: false,
-        };
-    }
+    public state = {
+        showColumnLinks: false,
+    };
 
     public toggleColumnLinks() {
         this.setState(state => ({
@@ -317,32 +208,27 @@ export class Column extends Component<
 
     public render() {
         const { showColumnLinks } = this.state;
-        const { column, isLastIndex, brandExtensions } = this.props;
+        const { column } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;
 
         return (
             <li
-                className={cx(columnStyle, {
-                    [columnPillar]: column.isPillar,
-                })}
+                className={cx(columnStyle, perPillarStyles[column.pillar])}
                 role="none"
             >
-                {column.isPillar && (
-                    <CollapseColumnButton
-                        column={column}
-                        showColumnLinks={showColumnLinks}
-                        toggleColumnLinks={() => {
-                            this.toggleColumnLinks();
-                        }}
-                        ariaControls={subNavId}
-                        isLastIndex={isLastIndex}
-                    />
-                )}
+                <CollapseColumnButton
+                    title={column.title}
+                    showColumnLinks={showColumnLinks}
+                    toggleColumnLinks={() => {
+                        this.toggleColumnLinks();
+                    }}
+                    ariaControls={subNavId}
+                />
+
                 <ColumnLinks
                     column={column}
                     showColumnLinks={showColumnLinks}
                     id={subNavId}
-                    brandExtensions={brandExtensions}
                 />
             </li>
         );

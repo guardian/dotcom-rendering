@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { css } from 'react-emotion';
-import palette from '@guardian/pasteup/palette';
+import { palette } from '@guardian/pasteup/palette';
 import { egyptian } from '@guardian/pasteup/fonts';
 import { desktop } from '@guardian/pasteup/breakpoints';
 
@@ -35,7 +35,7 @@ const subnavCollapsed = css`
 const fontStyle = css`
     font-family: ${egyptian};
     font-weight: 400;
-    color: ${palette.neutral[1]};
+    color: ${palette.neutral[7]};
     padding: 0 6px;
     font-size: 16px;
     height: 42px;
@@ -58,10 +58,10 @@ const moreStyle = css`
     cursor: pointer;
     border: none;
     background-color: transparent;
-    color: ${palette.neutral[3]};
+    color: ${palette.neutral[46]};
 
     :hover {
-        color: ${palette.red.medium};
+        color: ${palette.news.main};
     }
 
     ${desktop} {
@@ -82,7 +82,7 @@ const parentStyle = css`
         height: 0;
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
-        border-left: 10px solid ${palette.neutral[1]};
+        border-left: 10px solid ${palette.neutral[7]};
         margin-left: 2px;
     }
 `;
