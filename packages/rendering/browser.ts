@@ -2,8 +2,6 @@ import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 
-import 'ophan-tracker-js';
-
 // @ts-ignore
 import Article from '../../frontend/pages/Article';
 
@@ -28,3 +26,10 @@ if (container) {
 
     hydrateApp(React.createElement(Article, { data }), container);
 }
+
+// tslint:disable-next-line:no-console
+import('ophan-tracker-js').then(() => console.log('ophan!'));
+
+import('../../frontend/lib/tracking/ga').then(({ init }) =>
+    init({ tracker: { name: '', id: '', sampleRate: 0 }, pillar: 'news' }),
+);
