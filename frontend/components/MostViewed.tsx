@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { headline, egyptian } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
-import { desktop, mobileLandscape, tablet, leftCol } from '@guardian/pasteup/breakpoints';
+import {
+    desktop,
+    mobileLandscape,
+    tablet,
+    leftCol,
+} from '@guardian/pasteup/breakpoints';
 import { BigNumber } from '@guardian/guui';
 
 const container = css`
@@ -56,7 +61,7 @@ const list = css`
         column-width: 300px;
         column-gap: 20px;
         column-fill: balance;
-        column-count: 2; 
+        column-count: 2;
     }
 
     ${leftCol} {
