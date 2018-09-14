@@ -24,7 +24,7 @@ That's it – everything else should be installed for you on demand.
 `make dev` starts the development server.
 
 ### Change preview article
-You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3000/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
+You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3003/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
 
 ## Production
  - `make build` creates production-ready bundles.

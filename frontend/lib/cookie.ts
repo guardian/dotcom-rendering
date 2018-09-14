@@ -19,7 +19,7 @@ const getDomainAttribute = (isCrossSubdomain = false): string => {
     return shortDomain === 'localhost' ? '' : ` domain=${shortDomain};`;
 };
 
-const removeCookie = (
+export const removeCookie = (
     name: string,
     currentDomainOnly: boolean = false,
 ): void => {
@@ -34,7 +34,7 @@ const removeCookie = (
     }
 };
 
-const addCookie = (
+export const addCookie = (
     name: string,
     value: string,
     daysToLive?: number,
@@ -58,13 +58,13 @@ const addCookie = (
     )}`;
 };
 
-const cleanUp = (names: string[]): void => {
+export const cleanUp = (names: string[]): void => {
     names.forEach(name => {
         removeCookie(name);
     });
 };
 
-const addForMinutes = (
+export const addForMinutes = (
     name: string,
     value: string,
     minutesToLive: number,
@@ -79,7 +79,7 @@ const addForMinutes = (
     document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()};${getDomainAttribute()}`;
 };
 
-const addSessionCookie = (name: string, value: string): void => {
+export const addSessionCookie = (name: string, value: string): void => {
     if (!isValidCookieValue(name) || !isValidCookieValue(value)) {
         throw new Error(`${ERR_INVALID_COOKIE_NAME} .${name}=${value}`);
     }
@@ -103,24 +103,11 @@ const getCookieValues = (name: string): string[] => {
     }, []);
 };
 
-const getCookie = (name: string): string | null => {
+export const getCookie = (name: string): string | null => {
     const cookieVal = getCookieValues(name);
 
     if (cookieVal.length > 0) {
         return cookieVal[0];
     }
     return null;
-};
-
-export const _ = {
-    isValidCookieValue,
-};
-
-export {
-    cleanUp,
-    addCookie,
-    addSessionCookie,
-    addForMinutes,
-    removeCookie,
-    getCookie,
 };
