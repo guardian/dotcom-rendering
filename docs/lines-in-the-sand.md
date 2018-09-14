@@ -6,4 +6,4 @@
 
 ## Scripts will not block rendering
 
-Any script added to dotcom-rendering must must not block first paint or cause a dramatic repaint. Third party scripts should have an `async` or `defer` attribute, or be added at the bottom of the document body.
+Any script added to dotcom-rendering must must not block first paint or cause a dramatic repaint. Third party scripts should have an `async` or `defer` attribute, be loaded programmatically from within our application JavaScript, or be added at the bottom of the document body.
