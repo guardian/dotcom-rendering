@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@guardian/guui';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { desktop } from '@guardian/pasteup/breakpoints';
+import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
 
 import MostViewed from '../components/MostViewed';
 import Header from '../components/Header';
@@ -57,7 +57,11 @@ const secondaryColumn = css`
 const articleContainer = css`
     position: relative;
     background-color: ${palette.neutral[100]};
-    padding: 0 20px;
+    padding: 0 10px;
+
+    ${mobileLandscape} {
+        padding: 0 20px;
+    }
 `;
 
 const Article: React.SFC<{
@@ -70,9 +74,8 @@ const Article: React.SFC<{
                 <article>
                     <ArticleBody CAPI={data.CAPI} />
                     <div className={secondaryColumn} />
-
-                    <MostViewed />
                 </article>
+                <MostViewed />
             </Container>
         </main>
         <Footer />
