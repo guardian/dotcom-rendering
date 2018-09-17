@@ -11,7 +11,7 @@ import {
 import { BigNumber } from '@guardian/guui';
 
 const container = css`
-    border-top: 1px solid #dcdcdc;
+    border-top: 1px solid ${palette.neutral[86]};
     padding-top: 3px;
 
     ${desktop} {
@@ -40,7 +40,7 @@ const heading = css`
             position: absolute;
             height: 30px;
             width: 1px;
-            background-color: #dcdcdc;
+            background-color: ${palette.neutral[86]};
             right: -11px;
             top: -6px;
         }
@@ -55,7 +55,7 @@ const list = css`
     margin-top: 12px;
 
     ${desktop} {
-        border-top: 1px solid #dcdcdc;
+        border-top: 1px solid ${palette.neutral[86]};
         width: 620px;
         min-height: 300px;
         column-width: 300px;
@@ -88,7 +88,7 @@ const listItem = css`
         display: block;
         width: 100%;
         height: 1px;
-        background-color: #dcdcdc;
+        background-color: ${palette.neutral[86]};
     }
 
     :first-child {
@@ -125,7 +125,7 @@ const listItem = css`
 const bigNumber = css`
     float: left;
     margin-top: 3px;
-    fill: #121212;
+    fill: ${palette.neutral[7]};
 `;
 
 const headlineHeader = css`
@@ -139,7 +139,7 @@ const headlineHeader = css`
 
 const headlineLink = css`
     text-decoration: none;
-    color: #121212;
+    color: ${palette.neutral[7]};
     font-family: ${egyptian};
     font-size: 16px;
     line-height: 1.2;
