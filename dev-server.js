@@ -77,7 +77,7 @@ const go = async () => {
         res.status(500).send(err.stack);
     });
 
-    app.listen(3000);
+    app.listen(3001);
 };
 
 go();

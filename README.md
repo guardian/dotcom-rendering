@@ -20,11 +20,15 @@ check the [.nvmrc](https://github.com/guardian/guui/blob/master/.nvmrc) for the 
 
 That's it – everything else should be installed for you on demand.
 
+### Nginx
+
+Add `127.0.0.1   r.thegulocal.com` to the end of your hosts file. Follow the installation steps in [identity-platform/nginx](https://github.com/guardian/identity-platform/tree/master/nginx) and then run `./setup.sh` in `nginx`. This will allow you to access dotcom-rendering through https://r.thegulocal.com which will allow local identity cookies to be read.
+
 ## Development
 `make dev` starts the development server.
 
 ### Change preview article
-You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3003/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
+You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3001/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
 
 ## Production
  - `make build` creates production-ready bundles.
