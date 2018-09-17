@@ -26,23 +26,34 @@ export default ({
     const sanitiseDomRefs = (jsString: string) =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
     const vendorJS = assets.dist('vendor.js');
-    const fontCSS = assets.static('css/fonts.css');
-    const fontDomain = 'https://interactive.guim.co.uk/fonts/guss-webfonts/';
+
+    const fontCSS = [
+        assets.static('fonts/guardian-headline/full-not-hinted/fonts.css'),
+        assets.static('fonts/guardian-textegyptian/full-not-hinted/fonts.css'),
+        assets.static('fonts/guardian-textsans/full-not-hinted/fonts.css'),
+    ];
 
     return `<!doctype html>
         <html>
             <head>
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <link rel="preload" href="${vendorJS}}" as="script">
+                <link rel="preload" href="${vendorJS}" as="script">
                 <link rel="preload" href="${bundleJS}" as="script">
                 ${fontFiles
                     .map(
                         fontFile =>
-                            `<link rel="preload" href="${fontDomain}${fontFile}" as="font" crossorigin>`,
+                            `<link rel="preload" href="${assets.static(
+                                fontFile,
+                            )}" as="font" crossorigin>`,
                     )
                     .join('\n')}
-                <link rel="stylesheet" href="${fontCSS}" media="nope!" onload="this.media='all'">
+                ${fontCSS
+                    .map(
+                        fontFile =>
+                            `<link rel="stylesheet" href="${fontFile}" media="nope!" onload="this.media='all'">`,
+                    )
+                    .join('\n')}
                 <style>${resetCSS}${css}</style>
             </head>
             <body>
