@@ -1,5 +1,5 @@
 export const textSans = [
-    'Guardian Text Sans Web',
+    'GuardianTextSans',
     'Helvetica Neue',
     'Helvetica',
     'Arial',
