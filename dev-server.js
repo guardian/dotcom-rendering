@@ -56,6 +56,16 @@ const go = async () => {
         }),
     );
 
+    app.get(
+        '/static/frontend',
+        express.static(
+            path.relative(
+                __dirname,
+                path.resolve(root, 'frontend', 'static'),
+            ),
+        ),
+    );
+
     app.get('/', (req, res) => {
         res.send(`
             <!DOCTYPE html>
