@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { egyptian } from '@guardian/pasteup/fonts';
+import { headline } from '@guardian/pasteup/fonts';
 import { desktop } from '@guardian/pasteup/breakpoints';
 
 const wrapperExpanded = css`
@@ -33,7 +33,7 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    font-family: ${egyptian};
+    font-family: ${headline};
     font-weight: 400;
     color: ${palette.neutral[7]};
     padding: 0 6px;

@@ -52,16 +52,6 @@ export default ({ data }: Props) => {
         // 'GuardianTextSansWeb/GuardianTextSansWeb-BoldItalic.woff2',
         // 'GuardianTextSansWeb/GuardianTextSansWeb-Black.woff2',
         // 'GuardianTextSansWeb/GuardianTextSansWeb-BlackItalic.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-Light.woff2',
-        'GuardianEgyptianWeb/GuardianEgyptianWeb-Regular.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-RegularItalic.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-Semibold.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-SemiboldItalic.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-Medium.woff2',
-        'GuardianEgyptianWeb/GuardianEgyptianWeb-Bold.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-BoldItalic.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-BoldItalic.woff2',
-        // 'GuardianEgyptianWeb/GuardianEgyptianWeb-Bold.woff2',
     ];
 
     return htmlTemplate({

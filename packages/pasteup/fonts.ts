@@ -7,12 +7,8 @@ export const textSans = [
     'sans-serif',
 ].join(',');
 
-export const egyptian = ['Guardian Egyptian Web', 'Georgia', 'serif'].join(',');
-
-export const textEgyptian = [
-    'Guardian Text Egyptian Web',
-    'Georgia',
-    'serif',
-].join(',');
+export const textEgyptian = ['GuardianTextEgyptian', 'Georgia', 'serif'].join(
+    ',',
+);
 
 export const headline = ['GH Guardian Headline', 'Georgia', 'serif'].join(',');
