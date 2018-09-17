@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { headline, egyptian } from '@guardian/pasteup/fonts';
+import { headline } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 import { hideDesktop } from './Column';
 import { palette } from '@guardian/pasteup/palette';
