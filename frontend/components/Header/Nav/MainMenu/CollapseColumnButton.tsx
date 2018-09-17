@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { headline, egyptian } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 import { hideDesktop } from './Column';
+import { palette } from '@guardian/pasteup/palette';
+
 const showColumnLinksStyle = css`
     :before {
         margin-top: 8px;
@@ -29,7 +31,7 @@ const collapseColumnButton = css`
     text-transform: capitalize;
     :before {
         margin-top: 4px;
-        color: #5d5f5f;
+        color: ${palette.neutral[20]};
         left: 25px;
         position: absolute;
         border: 2px solid currentColor;
@@ -44,7 +46,7 @@ const collapseColumnButton = css`
     }
 
     :after {
-        background-color: #abc2c9;
+        background-color: ${palette.neutral[86]};
         bottom: 0;
         content: '';
         display: block;

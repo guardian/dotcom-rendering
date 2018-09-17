@@ -15,9 +15,6 @@ export const hideDesktop = css`
 
 const perPillarStyles = pillarMap(
     pillar => css`
-        ul {
-            background-color: #d9e4e7;
-        }
         button {
             color: ${pillarPalette[pillar].main};
         }
@@ -38,7 +35,7 @@ const perPillarStyles = pillarMap(
                 top: 0;
                 bottom: 0;
                 width: 1px;
-                background-color: #abc2c9;
+                background-color: ${palette.neutral[86]};
             }
         }
     `,
@@ -70,7 +67,7 @@ const columnLinkTitle = css`
     }
     :hover,
     :focus {
-        color: #5d5f5f;
+        color: ${palette.neutral[20]};
         text-decoration: underline;
     }
 
@@ -113,20 +110,20 @@ const columnLinks = css`
     margin: 0;
     padding: 0 0 12px;
     position: relative;
-    background-color: ${palette.nav.faded};
+    background-color: ${palette.neutral[97]};
     ${desktop} {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         order: 1;
-        background-color: ${palette.nav.faded};
+        background-color: ${palette.neutral[97]};
         width: 100%;
         padding: 0 5px;
     }
 `;
 
 const isPillarStyle = css`
-    background-color: #d9e4e7;
+    background-color: ${palette.neutral[93]};
 `;
 
 const hide = css`

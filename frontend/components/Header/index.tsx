@@ -8,7 +8,7 @@ import { palette } from '@guardian/pasteup/palette';
 
 const header = css`
     margin-bottom: 0;
-    background-color: ${palette.nav.faded};
+    background-color: ${palette.neutral[97]};
     position: relative;
     ${tablet} {
         display: block;

@@ -12,7 +12,7 @@ const screenReadable = css`
     ${screenReaderOnly};
 `;
 const navPrimaryColour = palette.neutral[7];
-const navSecondaryColour = '#5d5f5f';
+const navSecondaryColour = palette.neutral[20];
 const openMainMenu = css`
     display: none;
     font-family: ${headline};
