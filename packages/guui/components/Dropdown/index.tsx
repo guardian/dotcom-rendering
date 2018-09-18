@@ -105,8 +105,7 @@ const button = css`
     font-family: ${sans.body};
     color: ${palette.neutral[7]};
     transition: color 80ms ease-out;
-    padding: 6px 10px;
-    margin: 1px 0 0;
+    padding: 0;
     text-decoration: none;
 
     :hover {
@@ -182,7 +181,7 @@ export default class Dropdown extends React.Component<
         const checkboxID = `checkbox-id-${this.props.id}`;
 
         return (
-            <div>
+            <>
                 {this.state.noJS ? (
                     <label
                         htmlFor={checkboxID}
@@ -242,7 +241,7 @@ export default class Dropdown extends React.Component<
                         </li>
                     ))}
                 </ul>
-            </div>
+            </>
         );
     }
 }
