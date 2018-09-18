@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { css } from 'react-emotion';
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
@@ -9,6 +9,7 @@ import {
     leftCol,
 } from '@guardian/pasteup/breakpoints';
 import { BigNumber } from '@guardian/guui';
+import { ClientComponent } from './ClientComponent';
 
 const container = css`
     border-top: 1px solid ${palette.neutral[86]};
@@ -151,30 +152,19 @@ interface Trail {
     linkText: string;
 }
 
-export default class MostViewed extends Component<{}, { trails: Trail[] }> {
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            trails: [],
-        };
-    }
-
-    public componentDidMount() {
-        fetch('https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui')
-            .then(resp => resp.json())
-            .then(({ trails }) => {
-                this.setState({
-                    trails,
-                });
-            });
-    }
-
-    public render() {
-        return (
-            <div className={container}>
-                <h2 className={heading}>Most Viewed</h2>
+const fetchTrails = async () => {
+    const resp = await fetch(
+        'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui',
+    );
+    return resp.json() as Promise<Trail[]>;
+};
+export const MostViewed: React.SFC = () => (
+    <div className={container}>
+        <h2 className={heading}>Most Viewed</h2>
+        <ClientComponent f={fetchTrails}>
+            {({ data }) => (
                 <ul className={list}>
-                    {this.state.trails.map((trail, i) => (
+                    {(data || ([] as Trail[])).map((trail, i) => (
                         <li className={listItem} key={trail.url}>
                             <span className={bigNumber}>
                                 <BigNumber index={i + 1} />
@@ -187,7 +177,7 @@ export default class MostViewed extends Component<{}, { trails: Trail[] }> {
                         </li>
                     ))}
                 </ul>
-            </div>
-        );
-    }
-}
+            )}
+        </ClientComponent>
+    </div>
+);
