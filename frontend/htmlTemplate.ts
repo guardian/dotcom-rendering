@@ -28,9 +28,11 @@ export default ({
     const vendorJS = assets.dist('vendor.js');
 
     const fontCSS = [
-        assets.static('fonts/guardian-headline/full-not-hinted/fonts.css'),
-        assets.static('fonts/guardian-textegyptian/full-not-hinted/fonts.css'),
-        assets.static('fonts/guardian-textsans/full-not-hinted/fonts.css'),
+        assets.static('fonts/guardian-headline/noalts-not-hinted/fonts.css'),
+        assets.static(
+            'fonts/guardian-textegyptian/noalts-not-hinted/fonts.css',
+        ),
+        assets.static('fonts/guardian-textsans/noalts-not-hinted/fonts.css'),
     ];
 
     return `<!doctype html>
