@@ -19,6 +19,7 @@ import {
     leftCol,
     desktop,
 } from '@guardian/pasteup/breakpoints';
+import { ClientComponent } from './ClientComponent';
 
 const wrapper = css`
     padding-top: 6px;
@@ -300,7 +301,6 @@ const metaExtras = css`
 const pillarColour = palette.lifestyle.main; // TODO make dynamic
 
 const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
-
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
 }> = ({ CAPI }) => (
@@ -309,6 +309,11 @@ const ArticleBody: React.SFC<{
             <div className={section(pillarColour)}>{CAPI.sectionName}</div>
             <div className={headline}>
                 <h1 className={headerStyle}>{CAPI.headline}</h1>
+                {/* demo code ahoy */}
+                <ClientComponent f={async () => 'hello'}>
+                    {({ data }) => <h1>{data || 'no'}</h1>}
+                </ClientComponent>
+                {/* demo code over */}
                 <div
                     className={standfirst}
                     dangerouslySetInnerHTML={{
