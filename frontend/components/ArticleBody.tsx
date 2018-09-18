@@ -9,6 +9,7 @@ import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import dateformat from 'dateformat';
 import { sans, serif } from '@guardian/pasteup/fonts';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -34,7 +35,6 @@ const wrapper = css`
     ${leftCol} {
         margin-left: 150px;
         margin-right: 310px;
-
         position: relative;
         :before {
             content: '';
@@ -91,29 +91,33 @@ const leftColWidth = css`
 
 const section = (colour: string) => css`
     ${leftColWidth};
-
     grid-template-areas: section;
-
     font-size: 16px;
     line-height: 20px;
     font-family: ${serif.headline};
     font-weight: 900;
-
     color: ${colour};
 
     ${leftCol} {
         font-size: 22px;
         line-height: 28px;
     }
+
+    ${until.phablet} {
+        padding: 0 10px;
+    }
 `;
 
 const headline = css`
     grid-template-areas: headline;
+
+    ${until.phablet} {
+        padding: 0 10px;
+    }
 `;
 
 const meta = css`
     ${leftColWidth};
-
     grid-template-areas: meta;
 
     ${from.tablet.until.leftCol} {
@@ -132,6 +136,11 @@ const meta = css`
     background-size: 1px 13px;
     padding-top: 15px;
     margin-bottom: 6px;
+
+    ${until.phablet} {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 `;
 
 const captionFont = css`
@@ -143,11 +152,10 @@ const captionFont = css`
 
 const mainMedia = css`
     grid-template-areas: main-media;
-
     margin-bottom: 6px;
 
     ${until.tablet} {
-        margin: 0 -20px;
+        margin: 0;
         order: -1;
 
         figcaption {
@@ -189,7 +197,6 @@ const bodyStyle = css`
 
 const profile = (colour: string) => css`
     color: ${colour};
-
     font-size: 16px;
     line-height: 20px;
     font-family: ${serif.headline};
@@ -197,12 +204,17 @@ const profile = (colour: string) => css`
     margin-bottom: 4px;
 `;
 
-const shareIcons = css`
-    ${leftCol} {
-        border-bottom: 1px solid ${palette.neutral[86]};
-        padding-bottom: 6px;
-        margin-bottom: 6px;
+const shareIconList = css`
+    ${wide} {
+        flex: auto;
     }
+`;
+
+const shareIconsListItem = css`
+    padding: 0 3px 6px 0;
+    float: left;
+    min-width: 32px;
+    cursor: pointer;
 `;
 
 const shareIcon = (colour: string) => css`
@@ -218,8 +230,8 @@ const shareIcon = (colour: string) => css`
     display: inline-block;
     vertical-align: middle;
     position: relative;
-
     fill: ${colour};
+    box-sizing: content-box;
 
     svg {
         height: 88%;
@@ -239,6 +251,46 @@ const shareIcon = (colour: string) => css`
     }
 `;
 
+const shareCount = css`
+    font-size: 18px;
+    line-height: 18px;
+    font-family: ${textSans};
+    font-weight: bold;
+    color: ${palette.neutral[46]};
+
+    ${leftCol} {
+        border-top: 1px solid ${palette.neutral[86]};
+        width: 100%;
+        padding-top: 6px;
+    }
+
+    ${wide} {
+        flex: 1;
+        border: 0;
+        padding-top: 0;
+        text-align: right;
+    }
+`;
+
+const shareCountContainer = css`
+    ${leftCol} {
+        display: inline-block;
+    }
+`;
+
+const shareCountHeader = css`
+    position: relative;
+    height: 15px;
+    margin: 0;
+`;
+
+const shareCountIcon = css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    fill: ${palette.neutral[46]};
+`;
+
 const ageWarning = (colour: string) => css`
     font-size: 12px;
     line-height: 16px;
@@ -247,17 +299,11 @@ const ageWarning = (colour: string) => css`
     color: ${colour};
     margin-bottom: 12px;
     fill: ${colour};
-`;
+    width: 100%;
 
-const shareCount = css`
-    font-size: 18px;
-    line-height: 18px;
-    font-family: ${sans.body};
-    font-weight: bold;
-    letter-spacing: -1px;
-    padding-top: 2px;
-    display: block;
-    color: ${palette.neutral[46]};
+    ${leftCol} {
+        margin-top: 6px;
+    }
 `;
 
 const twitterHandle = css`
@@ -289,22 +335,33 @@ const metaExtras = css`
     border-top: 1px solid ${palette.neutral[86]};
     padding-top: 6px;
     margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
-    ${until.desktop} {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+    ${until.phablet} {
+        margin-left: -10px;
+        margin-right: -10px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 `;
 
 const pillarColour = palette.lifestyle.main; // TODO make dynamic
 
 const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
+
+const header = css`
+    ${until.phablet} {
+        margin: 0 -10px;
+    }
+`;
+
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
 }> = ({ CAPI }) => (
     <div className={wrapper}>
-        <header>
+        <header className={header}>
             <div className={section(pillarColour)}>{CAPI.sectionName}</div>
             <div className={headline}>
                 <h1 className={headerStyle}>{CAPI.headline}</h1>
@@ -325,25 +382,43 @@ const ArticleBody: React.SFC<{
                     {dtFormat(CAPI.webPublicationDate)}
                 </div>
                 <div className={metaExtras}>
-                    <div className={shareIcons}>
-                        <a href="/" role="button">
-                            <span className={shareIcon(pillarColour)}>
-                                <FacebookIcon />
-                            </span>
-                        </a>
-                        <a href="/" role="button">
-                            <span className={shareIcon(pillarColour)}>
-                                <TwitterIconPadded />
-                            </span>
-                        </a>
-                        <a href="/" role="button">
-                            <span className={shareIcon(pillarColour)}>
-                                <EmailIcon />
-                            </span>
-                        </a>
-                    </div>
+                    <ul className={shareIconList}>
+                        <li className={shareIconsListItem}>
+                            <a href="/" role="button">
+                                <span className={shareIcon(pillarColour)}>
+                                    <FacebookIcon />
+                                </span>
+                            </a>
+                        </li>
+                        <li className={shareIconsListItem}>
+                            <a href="/" role="button">
+                                <span className={shareIcon(pillarColour)}>
+                                    <TwitterIconPadded />
+                                </span>
+                            </a>
+                        </li>
+                        <li className={shareIconsListItem}>
+                            <a href="/" role="button">
+                                <span className={shareIcon(pillarColour)}>
+                                    <EmailIcon />
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
                     <div className={shareCount}>
-                        <ShareIcon /> 1055
+                        <div className={shareCountContainer}>
+                            <h3 className={shareCountHeader}>
+                                <ShareIcon className={shareCountIcon} />
+                                <span
+                                    className={css`
+                                        ${screenReaderOnly};
+                                    `}
+                                >
+                                    Shares
+                                </span>
+                            </h3>
+                            <div>1055</div>
+                        </div>
                     </div>
                     <div className={ageWarning(pillarColour)}>
                         <ClockIcon /> This article is over 1 year old.
