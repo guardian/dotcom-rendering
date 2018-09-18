@@ -13,8 +13,8 @@ export const screenReaderOnly = css`
 
 export const clearFix = css`
     :after {
-        content: '',
-        display: table,
-        clear: both,
+        content: '';
+        display: table;
+        clear: both;
     }
 `;

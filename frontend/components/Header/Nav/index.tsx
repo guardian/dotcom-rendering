@@ -32,7 +32,7 @@ const centered = css`
 
 const subnav = css`
     background-color: white;
-    border-top: 0.0625rem solid ${palette.nav.dark};
+    border-top: 0.0625rem solid ${palette.neutral[86]};
 `;
 
 interface Props {

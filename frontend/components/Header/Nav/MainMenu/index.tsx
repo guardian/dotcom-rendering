@@ -20,7 +20,7 @@ const showMenu = css`
 `;
 
 const mainMenu = css`
-    background-color: ${palette.nav.faded};
+    background-color: ${palette.neutral[97]};
     box-sizing: border-box;
     font-size: 20px;
     left: 0;
@@ -56,7 +56,7 @@ const mainMenu = css`
         left: 0;
         right: 0;
         width: 100%;
-        border-bottom: 1px solid #abc2c9;
+        border-bottom: 1px solid ${palette.neutral[86]};
         @supports (width: 100vw) {
             left: 50%;
             right: 50%;

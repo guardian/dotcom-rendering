@@ -4,7 +4,7 @@ import { cx, css } from 'react-emotion';
 import { headline } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 const style = css`
-    color: ${palette.nav.faded};
+    color: ${palette.neutral[97]};
     font-family: ${headline};
     font-size: 14px;
     font-weight: 500;

@@ -12,7 +12,7 @@ const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     background-color: ${palette.neutral[7]};
     top: 24px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
-    color: ${palette.nav.faded};
+    color: ${palette.neutral[97]};
     cursor: pointer;
     height: 40px;
     min-width: 40px;

@@ -25,7 +25,6 @@ export interface OtherColours {
         97: colour;
         100: colour;
     };
-    nav: { dark: colour; main: colour; faded: colour };
     specialReport: { dark: colour };
     labs: { dark: colour; main: colour };
     green: { dark: colour; main: colour };
@@ -80,11 +79,6 @@ export const palette: AllPillarColours & OtherColours = {
         93: '#ededed',
         97: '#f6f6f6',
         100: '#ffffff',
-    },
-    nav: {
-        dark: '#bbcdd3',
-        main: '#dae4e7',
-        faded: '#e9eff1',
     },
     specialReport: { dark: '#3f464a' },
     labs: {

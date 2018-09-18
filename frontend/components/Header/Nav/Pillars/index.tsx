@@ -10,6 +10,7 @@ import {
 
 import { headline } from '@guardian/pasteup/fonts';
 import { pillarMap, pillarPalette } from '../../../../pillars';
+import { palette } from '@guardian/pasteup/palette';
 
 const pillarColours = pillarMap(
     pillar =>
@@ -39,7 +40,7 @@ const pillarsStyles = css`
                 top: 0;
                 bottom: 0;
                 width: 1px;
-                background-color: #abc2c9;
+                background-color: ${palette.neutral[86]};
             }
         }
         ${leftCol} {

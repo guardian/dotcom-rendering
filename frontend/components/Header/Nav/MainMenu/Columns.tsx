@@ -12,7 +12,7 @@ const ColumnsStyle = css`
     max-width: none;
     ${desktop} {
         max-width: 980px;
-        background-color: ${palette.nav.faded};
+        background-color: ${palette.neutral[97]};
         padding: 0 20px;
         position: relative;
         margin: 0 auto;
@@ -69,7 +69,7 @@ const brandExtensionLink = css`
     background-color: transparent;
     border: 0;
     box-sizing: border-box;
-    color: #121212;
+    color: ${palette.neutral[7]};
     cursor: pointer;
     display: inline-block;
     font-family: ${egyptian};
@@ -87,7 +87,7 @@ const brandExtensionLink = css`
     }
     :hover,
     :focus {
-        color: #5d5f5f;
+        color: ${palette.neutral[20]};
         text-decoration: underline;
     }
     > * {
