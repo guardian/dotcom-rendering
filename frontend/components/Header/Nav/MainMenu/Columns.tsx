@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
-import { egyptian } from '@guardian/pasteup/fonts';
+import { headline } from '@guardian/pasteup/fonts';
 
 import { Column, More } from './Column';
 import { palette } from '@guardian/pasteup/palette';
@@ -72,7 +72,7 @@ const brandExtensionLink = css`
     color: ${palette.neutral[7]};
     cursor: pointer;
     display: inline-block;
-    font-family: ${egyptian};
+    font-family: ${headline};
     outline: none;
     padding: 8px 34px 8px 50px;
     position: relative;

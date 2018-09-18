@@ -8,7 +8,11 @@ import EmailIcon from '@guardian/pasteup/icons/email.svg';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import dateformat from 'dateformat';
-import { egyptian, textEgyptian, textSans } from '@guardian/pasteup/fonts';
+import {
+    headline as headlineFont,
+    textEgyptian,
+    textSans,
+} from '@guardian/pasteup/fonts';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -96,7 +100,7 @@ const section = (colour: string) => css`
 
     font-size: 16px;
     line-height: 20px;
-    font-family: ${egyptian};
+    font-family: ${headlineFont};
     font-weight: 900;
 
     color: ${colour};
@@ -168,7 +172,7 @@ const mainMedia = css`
 const headerStyle = css`
     font-size: 34px;
     line-height: 38px;
-    font-family: ${egyptian};
+    font-family: ${headlineFont};
     font-weight: 400;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -192,7 +196,7 @@ const profile = (colour: string) => css`
 
     font-size: 16px;
     line-height: 20px;
-    font-family: ${egyptian};
+    font-family: ${headlineFont};
     font-weight: 700;
     margin-bottom: 4px;
 `;

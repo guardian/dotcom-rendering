@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'react-emotion';
-import { headline, egyptian } from '@guardian/pasteup/fonts';
+import { headline } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import {
     desktop,
@@ -140,7 +140,7 @@ const headlineHeader = css`
 const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
-    font-family: ${egyptian};
+    font-family: ${headline};
     font-size: 16px;
     line-height: 1.2;
     font-weight: 500;
