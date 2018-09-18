@@ -250,6 +250,46 @@ const shareIcon = (colour: string) => css`
     }
 `;
 
+const shareCount = css`
+    font-size: 18px;
+    line-height: 18px;
+    font-family: ${textSans};
+    font-weight: bold;
+    color: ${palette.neutral[46]};
+
+    ${leftCol} {
+        border-top: 1px solid ${palette.neutral[86]};
+        width: 100%;
+        padding-top: 6px;
+    }
+
+    ${wide} {
+        flex: 1;
+        border: 0;
+        padding-top: 0;
+        text-align: right;
+    }
+`;
+
+const shareCountContainer = css`
+    ${leftCol} {
+        display: inline-block;
+    }
+`;
+
+const shareCountHeader = css`
+    position: relative;
+    height: 15px;
+    margin: 0;
+`;
+
+const shareCountIcon = css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    fill: ${palette.neutral[46]};
+`;
+
 const ageWarning = (colour: string) => css`
     font-size: 12px;
     line-height: 16px;
