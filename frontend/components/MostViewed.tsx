@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'react-emotion';
-import { headline } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import {
     desktop,
@@ -20,7 +20,7 @@ const container = css`
 `;
 
 const heading = css`
-    font-family: ${headline};
+    font-family: ${serif.headline};
     color: ${palette.neutral[7]};
     font-size: 24px;
     font-weight: 900;
@@ -140,7 +140,7 @@ const headlineHeader = css`
 const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
-    font-family: ${headline};
+    font-family: ${serif.headline};
     font-size: 16px;
     line-height: 1.2;
     font-weight: 500;

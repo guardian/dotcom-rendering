@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { headline } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
@@ -50,7 +50,7 @@ const columnLinkTitle = css`
     cursor: pointer;
     display: inline-block;
     font-size: 20px;
-    font-family: ${headline};
+    font-family: ${serif.headline};
     font-weight: 400;
     outline: none;
     padding: 8px 34px 8px 50px;

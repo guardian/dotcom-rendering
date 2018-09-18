@@ -5,7 +5,7 @@ import Dropdown, {
     Link as DropdownLink,
 } from '@guardian/guui/components/Dropdown';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/fonts';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 
 import SupportTheGuardian from './SupportTheGuardian';
@@ -34,7 +34,7 @@ const search = css`
 
 const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     font-size: 14px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     color: ${palette.neutral[7]};
     float: left;
     line-height: 1.2;

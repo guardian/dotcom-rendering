@@ -1,14 +1,15 @@
-export const textSans = [
-    'GuardianTextSans',
-    'Helvetica Neue',
-    'Helvetica',
-    'Arial',
-    'Lucida Grande',
-    'sans-serif',
-].join(',');
+export const serif = {
+    headline: ['GH Guardian Headline', 'Georgia', 'serif'].join(','),
+    body: ['GuardianTextEgyptian', 'Georgia', 'serif'].join(','),
+};
 
-export const textEgyptian = ['GuardianTextEgyptian', 'Georgia', 'serif'].join(
-    ',',
-);
-
-export const headline = ['GH Guardian Headline', 'Georgia', 'serif'].join(',');
+export const sans = {
+    body: [
+        'GuardianTextSans',
+        'Helvetica Neue',
+        'Helvetica',
+        'Arial',
+        'Lucida Grande',
+        'sans-serif',
+    ].join(','),
+};

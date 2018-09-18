@@ -3,7 +3,7 @@ import { css, cx } from 'react-emotion';
 
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/fonts';
 
 import { VeggieBurger } from './VeggieBurger';
 import { palette } from '@guardian/pasteup/palette';
@@ -15,7 +15,7 @@ const navPrimaryColour = palette.neutral[7];
 const navSecondaryColour = palette.neutral[20];
 const openMainMenu = css`
     display: none;
-    font-family: ${headline};
+    font-family: ${serif.headline};
     font-weight: 400;
     text-decoration: none;
     color: ${navSecondaryColour};

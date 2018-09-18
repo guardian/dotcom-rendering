@@ -8,11 +8,7 @@ import EmailIcon from '@guardian/pasteup/icons/email.svg';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import dateformat from 'dateformat';
-import {
-    headline as headlineFont,
-    textEgyptian,
-    textSans,
-} from '@guardian/pasteup/fonts';
+import { sans, serif } from '@guardian/pasteup/fonts';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -75,7 +71,7 @@ const wrapper = css`
 `;
 
 const standfirst = css`
-    font-family: ${textEgyptian};
+    font-family: ${serif.body};
     font-weight: 700;
     font-size: 17px;
     line-height: 22px;
@@ -100,7 +96,7 @@ const section = (colour: string) => css`
 
     font-size: 16px;
     line-height: 20px;
-    font-family: ${headlineFont};
+    font-family: ${serif.headline};
     font-weight: 900;
 
     color: ${colour};
@@ -141,7 +137,7 @@ const meta = css`
 const captionFont = css`
     font-size: 12px;
     line-height: 16px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     color: ${palette.neutral[46]};
 `;
 
@@ -172,7 +168,7 @@ const mainMedia = css`
 const headerStyle = css`
     font-size: 34px;
     line-height: 38px;
-    font-family: ${headlineFont};
+    font-family: ${serif.headline};
     font-weight: 400;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -186,7 +182,7 @@ const bodyStyle = css`
     p {
         font-size: 16px;
         line-height: 24px;
-        font-family: ${textEgyptian};
+        font-family: ${serif.body};
         margin-bottom: 12px;
     }
 `;
@@ -196,7 +192,7 @@ const profile = (colour: string) => css`
 
     font-size: 16px;
     line-height: 20px;
-    font-family: ${headlineFont};
+    font-family: ${serif.headline};
     font-weight: 700;
     margin-bottom: 4px;
 `;
@@ -246,7 +242,7 @@ const shareIcon = (colour: string) => css`
 const ageWarning = (colour: string) => css`
     font-size: 12px;
     line-height: 16px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     display: inline-block;
     color: ${colour};
     margin-bottom: 12px;
@@ -256,7 +252,7 @@ const ageWarning = (colour: string) => css`
 const shareCount = css`
     font-size: 18px;
     line-height: 18px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     font-weight: bold;
     letter-spacing: -1px;
     padding-top: 2px;
@@ -267,7 +263,7 @@ const shareCount = css`
 const twitterHandle = css`
     font-size: 12px;
     line-height: 16px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     font-weight: bold;
     color: ${palette.neutral[46]};
 

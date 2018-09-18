@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
-import { textSans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/fonts';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
@@ -114,7 +114,7 @@ const footerLinks: Link[][] = [
 const footer = css`
     background-color: ${palette.neutral[20]};
     color: ${palette.neutral[86]};
-    font-family: ${textSans};
+    font-family: ${sans.body};
     font-size: 14px;
 `;
 
