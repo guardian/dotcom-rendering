@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/fonts';
 
 export interface Link {
     url: string;
@@ -41,7 +41,7 @@ const ulExpanded = css`
 
 const link = css`
     font-size: 15px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     color: ${palette.neutral[7]};
     line-height: 1.2;
     position: relative;
@@ -102,7 +102,7 @@ const button = css`
     border: none;
     line-height: 1.2;
     font-size: 14px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     color: ${palette.neutral[7]};
     transition: color 80ms ease-out;
     padding: 6px 10px;

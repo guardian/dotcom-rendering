@@ -8,7 +8,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-import { headline } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/fonts';
 import { pillarMap, pillarPalette } from '../../../../pillars';
 import { palette } from '@guardian/pasteup/palette';
 
@@ -56,7 +56,7 @@ const showMenuUnderline = css`
 `;
 
 const linkStyle = css`
-    font-family: ${headline};
+    font-family: ${serif.headline};
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;
