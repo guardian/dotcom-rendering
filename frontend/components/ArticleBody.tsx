@@ -19,7 +19,6 @@ import {
     leftCol,
     desktop,
 } from '@guardian/pasteup/breakpoints';
-import { ClientComponent } from './ClientComponent';
 
 const wrapper = css`
     padding-top: 6px;

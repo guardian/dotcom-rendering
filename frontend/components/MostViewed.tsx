@@ -9,7 +9,7 @@ import {
     leftCol,
 } from '@guardian/pasteup/breakpoints';
 import { BigNumber } from '@guardian/guui';
-import { ClientComponent } from './ClientComponent';
+import { AsyncClientComponent } from './lib/AsyncClientComponent';
 
 const container = css`
     border-top: 1px solid ${palette.neutral[86]};
@@ -163,7 +163,7 @@ const fetchTrails = async () => {
 export const MostViewed: React.SFC = () => (
     <div className={container}>
         <h2 className={heading}>Most Viewed</h2>
-        <ClientComponent f={fetchTrails}>
+        <AsyncClientComponent f={fetchTrails}>
             {({ data }) => (
                 <ul>
                     {(data || []).map((trail, i) => (
@@ -180,6 +180,6 @@ export const MostViewed: React.SFC = () => (
                     ))}
                 </ul>
             )}
-        </ClientComponent>
+        </AsyncClientComponent>
     </div>
 );

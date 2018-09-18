@@ -5,7 +5,7 @@ export interface ClientComponentProps<T> {
     children: React.SFC<{ data: T | undefined }>;
 }
 
-export class ClientComponent<T> extends React.Component<
+export class AsyncClientComponent<T> extends React.Component<
     ClientComponentProps<T>,
     { data: T | undefined }
 > {
