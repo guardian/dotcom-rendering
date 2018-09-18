@@ -309,11 +309,6 @@ const ArticleBody: React.SFC<{
             <div className={section(pillarColour)}>{CAPI.sectionName}</div>
             <div className={headline}>
                 <h1 className={headerStyle}>{CAPI.headline}</h1>
-                {/* demo code ahoy */}
-                <ClientComponent f={async () => 'hello'}>
-                    {({ data }) => <h1>{data || 'no'}</h1>}
-                </ClientComponent>
-                {/* demo code over */}
                 <div
                     className={standfirst}
                     dangerouslySetInnerHTML={{
