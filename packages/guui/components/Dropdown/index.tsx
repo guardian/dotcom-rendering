@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { sans } from '@guardian/pasteup/fonts';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 export interface Link {
     url: string;
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const input = css`
-    /* TODO re-add screen-reader only mixin */
+    ${screenReaderOnly};
     :checked + ul {
         display: block;
     }
