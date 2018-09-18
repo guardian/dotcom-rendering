@@ -115,7 +115,7 @@ export const extractArticleMeta = (data: {}): CAPIType => ({
     webPublicationDate: new Date(
         getNumber(data, 'config.page.webPublicationDate'),
     ),
-    sectionName: getNonEmptyString(data, 'config.page.section'),
+    sectionName: getNonEmptyString(data, 'config.page.sectionName'),
 });
 
 export const extractNavMeta = (data: {}): NavType => {
