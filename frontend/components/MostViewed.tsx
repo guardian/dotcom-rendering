@@ -156,15 +156,17 @@ const fetchTrails = async () => {
     const resp = await fetch(
         'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui',
     );
-    return resp.json() as Promise<Trail[]>;
+    const j = await resp.json();
+    return j.trails as Promise<Trail[]>;
 };
+
 export const MostViewed: React.SFC = () => (
     <div className={container}>
         <h2 className={heading}>Most Viewed</h2>
         <ClientComponent f={fetchTrails}>
             {({ data }) => (
-                <ul className={list}>
-                    {(data || ([] as Trail[])).map((trail, i) => (
+                <ul>
+                    {(data || []).map((trail, i) => (
                         <li className={listItem} key={trail.url}>
                             <span className={bigNumber}>
                                 <BigNumber index={i + 1} />
