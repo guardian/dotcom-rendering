@@ -184,8 +184,8 @@ export default class Dropdown extends React.Component<
                     this.setState(() => ({
                         isExpanded: false,
                     }));
+                    removeListeners();
                 }
-                removeListeners();
             };
 
             document.addEventListener('keydown', dismissOnEsc, false);
