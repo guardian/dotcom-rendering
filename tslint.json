@@ -39,5 +39,10 @@
         "react-no-dangerous-html":true,
         "prettier": true
     },
-    "rulesDirectory": []
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": [
+            "packages/*/dist/**/*.js"
+        ]
+    }
 }
