@@ -3,14 +3,14 @@ import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { textSans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/fonts';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '../lib/formatters';
 
 const shareCount = css`
     font-size: 18px;
     line-height: 18px;
-    font-family: ${textSans};
+    font-family: ${sans.body};
     font-weight: bold;
     color: ${palette.neutral[46]};
 
