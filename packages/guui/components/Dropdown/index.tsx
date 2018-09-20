@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { sans } from '@guardian/pasteup/fonts';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 export interface Link {
     url: string;
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const input = css`
-    /* TODO re-add screen-reader only mixin */
+    ${screenReaderOnly};
     :checked + ul {
         display: block;
     }
@@ -150,17 +151,6 @@ export default class Dropdown extends React.Component<
     }
 
     public componentDidMount() {
-        const dismiss = (event: KeyboardEvent) => {
-            const escKey = 'Escape';
-            if (event.code === escKey) {
-                this.setState(() => ({
-                    isExpanded: false,
-                }));
-            }
-        };
-
-        document.addEventListener('keydown', dismiss, false);
-
         // If componentDidMount runs we know client-side JS is enabled
         this.setState({
             noJS: false,
@@ -176,13 +166,40 @@ export default class Dropdown extends React.Component<
     public render() {
         const { label, links } = this.props;
 
+        if (this.state.isExpanded) {
+            const removeListeners = () => {
+                document.removeEventListener('keydown', dismissOnEsc);
+                document.removeEventListener('click', dismissOnClick);
+            };
+            const dismissOnClick = (event: MouseEvent) => {
+                event.stopPropagation();
+                this.setState(() => ({
+                    isExpanded: false,
+                }));
+                removeListeners();
+            };
+            const dismissOnEsc = (event: KeyboardEvent) => {
+                const escKey = 'Escape';
+
+                if (event.code === escKey) {
+                    this.setState(() => ({
+                        isExpanded: false,
+                    }));
+                    removeListeners();
+                }
+            };
+
+            document.addEventListener('keydown', dismissOnEsc, false);
+            document.addEventListener('click', dismissOnClick, false);
+        }
+
         // needs to be unique to allow multiple dropdowns on same page
         // this should be unique because JS is single-threaded
         const dropdownID = `dropbox-id-${this.props.id}`;
         const checkboxID = `checkbox-id-${this.props.id}`;
 
         return (
-            <div>
+            <>
                 {this.state.noJS ? (
                     <label
                         htmlFor={checkboxID}
@@ -242,7 +259,7 @@ export default class Dropdown extends React.Component<
                         </li>
                     ))}
                 </ul>
-            </div>
+            </>
         );
     }
 }

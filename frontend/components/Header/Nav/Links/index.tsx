@@ -40,8 +40,6 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     line-height: 1.2;
     position: relative;
     transition: color 80ms ease-out;
-    padding: 6px 10px;
-    margin: 1px 0 0;
     text-decoration: none;
     display: none;
 
@@ -60,6 +58,11 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     ${desktop} {
         display: block;
     }
+`;
+
+const paddedLink = css`
+    padding: 6px 10px;
+    margin: 1px 0 0;
 `;
 
 const Search: React.SFC<{
@@ -134,11 +137,17 @@ const Links: React.SFC<{
                 </SupportTheGuardian>
             )}
 
-        <a href={subscribeUrl} className={link({ showAtTablet: true })}>
+        <a
+            href={subscribeUrl}
+            className={cx(link({ showAtTablet: true }), paddedLink)}
+        >
             Subscribe
         </a>
 
-        <a href={jobsUrl} className={link({ showAtTablet: true })}>
+        <a
+            href={jobsUrl}
+            className={cx(link({ showAtTablet: true }), paddedLink)}
+        >
             Find a job
         </a>
 
@@ -155,12 +164,18 @@ const Links: React.SFC<{
                 />
             </div>
         ) : (
-            <a className={link({ showAtTablet: false })} href={signInUrl}>
+            <a
+                className={cx(link({ showAtTablet: false }), paddedLink)}
+                href={signInUrl}
+            >
                 Sign in / Register
             </a>
         )}
 
-        <Search className={link({ showAtTablet: false })} href="/">
+        <Search
+            className={cx(link({ showAtTablet: false }), paddedLink)}
+            href="/"
+        >
             Search
         </Search>
     </div>
