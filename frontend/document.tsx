@@ -12,6 +12,7 @@ interface Props {
         site: string;
         CAPI: CAPIType;
         NAV: NavType;
+        config: ConfigType;
     };
 }
 
@@ -22,12 +23,11 @@ interface RenderToStringResult {
 }
 
 export default ({ data }: Props) => {
-    const { page, site, CAPI, NAV } = data;
-    const title = `${CAPI.headline} | ${CAPI.sectionName} | The Guardian`;
+    const { page, site, CAPI, NAV, config } = data;
     const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
 
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
-        renderToString(<Article data={{ CAPI, NAV }} />),
+        renderToString(<Article data={{ CAPI, NAV, config }} />),
     );
 
     /**

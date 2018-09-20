@@ -12,6 +12,7 @@ import ArticleBody from '../components/ArticleBody';
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    config: ConfigType;
 }
 
 // TODO: find a better of setting opacity
@@ -72,7 +73,7 @@ const Article: React.SFC<{
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>
-                    <ArticleBody CAPI={data.CAPI} />
+                    <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn} />
                 </article>
                 <MostViewed />

@@ -5,11 +5,10 @@ import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
 import EmailIcon from '@guardian/pasteup/icons/email.svg';
-import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import dateformat from 'dateformat';
 import { sans, serif } from '@guardian/pasteup/fonts';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import ShareCount from './ShareCount';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -251,46 +250,6 @@ const shareIcon = (colour: string) => css`
     }
 `;
 
-const shareCount = css`
-    font-size: 18px;
-    line-height: 18px;
-    font-family: ${textSans};
-    font-weight: bold;
-    color: ${palette.neutral[46]};
-
-    ${leftCol} {
-        border-top: 1px solid ${palette.neutral[86]};
-        width: 100%;
-        padding-top: 6px;
-    }
-
-    ${wide} {
-        flex: 1;
-        border: 0;
-        padding-top: 0;
-        text-align: right;
-    }
-`;
-
-const shareCountContainer = css`
-    ${leftCol} {
-        display: inline-block;
-    }
-`;
-
-const shareCountHeader = css`
-    position: relative;
-    height: 15px;
-    margin: 0;
-`;
-
-const shareCountIcon = css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    fill: ${palette.neutral[46]};
-`;
-
 const ageWarning = (colour: string) => css`
     font-size: 12px;
     line-height: 16px;
@@ -359,7 +318,8 @@ const header = css`
 
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
-}> = ({ CAPI }) => (
+    config: ConfigType;
+}> = ({ CAPI, config }) => (
     <div className={wrapper}>
         <header className={header}>
             <div className={section(pillarColour)}>{CAPI.sectionName}</div>
@@ -405,21 +365,7 @@ const ArticleBody: React.SFC<{
                             </a>
                         </li>
                     </ul>
-                    <div className={shareCount}>
-                        <div className={shareCountContainer}>
-                            <h3 className={shareCountHeader}>
-                                <ShareIcon className={shareCountIcon} />
-                                <span
-                                    className={css`
-                                        ${screenReaderOnly};
-                                    `}
-                                >
-                                    Shares
-                                </span>
-                            </h3>
-                            <div>1055</div>
-                        </div>
-                    </div>
+                    <ShareCount config={config} CAPI={CAPI} />
                     <div className={ageWarning(pillarColour)}>
                         <ClockIcon /> This article is over 1 year old.
                     </div>
