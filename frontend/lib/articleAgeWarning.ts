@@ -1,4 +1,4 @@
-export const getMessage = (webPublicationDate: Date): string => {
+export const getAgeWarning = (webPublicationDate: Date): string => {
     const warnLimitDays = 30;
     const currentDate = new Date();
     const dateThreshold = new Date();
