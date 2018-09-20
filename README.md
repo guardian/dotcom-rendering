@@ -24,8 +24,12 @@ That's it – everything else should be installed for you on demand.
 `make dev` starts the development server.
 
 ### Running alongside identity
+You may want local identity cookies to be available in dotcom-rendering. To enable this:
 
-Add `127.0.0.1   r.thegulocal.com` to the end of your hosts file. Follow the installation steps in [identity-platform/nginx](https://github.com/guardian/identity-platform/tree/master/nginx) and then run `./setup.sh` in `nginx`. This will allow you to access dotcom-rendering through https://r.thegulocal.com which will allow local identity cookies to be read.
+1. Add `127.0.0.1   r.thegulocal.com` to the end of your hosts file
+2. Follow the installation steps in [identity-platform/nginx](https://github.com/guardian/identity-platform/tree/master/nginx) 
+3. run `./nginx/setup.sh`
+4. access dotcom-rendering through https://r.thegulocal.com
 
 ### Change preview article
 You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3001/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
