@@ -106,7 +106,8 @@ const button = css`
     font-family: ${sans.body};
     color: ${palette.neutral[7]};
     transition: color 80ms ease-out;
-    padding: 0;
+    padding: 6px 10px;
+    margin: 1px 0 0;
     text-decoration: none;
 
     :hover {
