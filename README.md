@@ -32,7 +32,7 @@ You may want local identity cookies to be available in dotcom-rendering. To enab
 4. access dotcom-rendering through https://r.thegulocal.com
 
 ### Change preview article
-You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3001/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
+You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3030/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
 
 ## Production
  - `make build` creates production-ready bundles.

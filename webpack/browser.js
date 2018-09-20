@@ -8,7 +8,7 @@ const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
         messages: [
             `DEV server running at ${chalk.blue.underline(
-                'http://localhost:3001',
+                'http://localhost:3030',
             )}`,
         ],
     },
