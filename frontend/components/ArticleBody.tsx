@@ -9,7 +9,6 @@ import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import dateformat from 'dateformat';
 import { sans, serif } from '@guardian/pasteup/fonts';
 import ShareCount from './ShareCount';
-import { getAgeWarning } from '../lib/articleAgeWarning';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -317,22 +316,6 @@ const header = css`
     }
 `;
 
-const ArticleAgeWarning: React.SFC<{
-    webPublicationDate: Date;
-}> = ({ webPublicationDate }) => {
-    const ageWarningMessage = getAgeWarning(webPublicationDate);
-
-    if (ageWarningMessage) {
-        return (
-            <>
-                <ClockIcon /> {ageWarningMessage}
-            </>
-        );
-    }
-
-    return <>''</>;
-};
-
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
@@ -385,9 +368,11 @@ const ArticleBody: React.SFC<{
                     <ShareCount config={config} CAPI={CAPI} />
 
                     <div className={ageWarning(pillarColour)}>
-                        <ArticleAgeWarning
-                            webPublicationDate={CAPI.webPublicationDate}
-                        />
+                        {CAPI.ageWarning && (
+                            <>
+                                <ClockIcon /> {CAPI.ageWarning}
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
