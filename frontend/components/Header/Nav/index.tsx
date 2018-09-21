@@ -70,7 +70,7 @@ export default class Nav extends Component<
         const toggleMainMenu = () => {
             this.toggleMainMenu();
         };
-        const { showMainMenu } = this.state;
+        const { showMainMenu, isSignedIn } = this.state;
         const mainMenuId = 'main-menu';
 
         // TODO push subnav into nav for now as really part of it
@@ -92,7 +92,7 @@ export default class Nav extends Component<
                     <Links
                         isPayingMember={false}
                         isRecentContributor={false}
-                        isSignedIn={this.state.isSignedIn}
+                        isSignedIn={isSignedIn}
                     />
                     <Pillars
                         showMainMenu={showMainMenu}
