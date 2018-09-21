@@ -366,14 +366,11 @@ const ArticleBody: React.SFC<{
                         </li>
                     </ul>
                     <ShareCount config={config} CAPI={CAPI} />
-
-                    <div className={ageWarning(pillarColour)}>
-                        {CAPI.ageWarning && (
-                            <>
-                                <ClockIcon /> {CAPI.ageWarning}
-                            </>
-                        )}
-                    </div>
+                    {CAPI.ageWarning && (
+                        <div className={ageWarning(pillarColour)}>
+                            <ClockIcon /> {CAPI.ageWarning}
+                        </div>
+                    )}
                 </div>
             </div>
             <div
