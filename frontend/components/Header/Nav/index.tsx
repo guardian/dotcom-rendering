@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
+import { palette } from '@guardian/pasteup/palette';
 
 import Logo from './Logo';
 import EditionDropdown from './EditionDropdown';
@@ -10,7 +11,7 @@ import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle';
 import { MainMenu } from './MainMenu';
 import SubNav from './SubNav';
-import { palette } from '@guardian/pasteup/palette';
+import { getCookie } from '../../../lib/cookie';
 
 const centered = css`
     ${tablet} {
@@ -39,13 +40,23 @@ interface Props {
     nav: NavType;
 }
 
-export default class Nav extends Component<Props, { showMainMenu: boolean }> {
+export default class Nav extends Component<
+    Props,
+    { showMainMenu: boolean; isSignedIn: boolean }
+> {
     constructor(props: Props) {
         super(props);
 
         this.state = {
             showMainMenu: false,
+            isSignedIn: false,
         };
+    }
+
+    public componentDidMount() {
+        this.setState({
+            isSignedIn: !!getCookie('GU_U'),
+        });
     }
 
     public toggleMainMenu() {
@@ -59,7 +70,7 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
         const toggleMainMenu = () => {
             this.toggleMainMenu();
         };
-        const { showMainMenu } = this.state;
+        const { showMainMenu, isSignedIn } = this.state;
         const mainMenuId = 'main-menu';
 
         // TODO push subnav into nav for now as really part of it
@@ -81,7 +92,7 @@ export default class Nav extends Component<Props, { showMainMenu: boolean }> {
                     <Links
                         isPayingMember={false}
                         isRecentContributor={false}
-                        isSignedIn={false}
+                        isSignedIn={isSignedIn}
                     />
                     <Pillars
                         showMainMenu={showMainMenu}
