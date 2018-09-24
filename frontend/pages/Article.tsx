@@ -8,6 +8,7 @@ import { MostViewed } from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
+import BackToTop from '../components/BackToTop';
 
 interface Props {
     CAPI: CAPIType;
@@ -79,6 +80,7 @@ const Article: React.SFC<{
                 <MostViewed />
             </Container>
         </main>
+        <BackToTop />
         <Footer />
     </div>
 );
