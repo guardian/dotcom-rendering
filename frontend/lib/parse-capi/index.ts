@@ -132,6 +132,66 @@ const getAgeWarning = (webPublicationDate: Date): string | void => {
     }
 };
 
+export type PlatformName = 'facebook';
+
+const getSharingUrls: (
+    data: any,
+) => { [K in PlatformName]?: string } = data => {
+    const platforms: {
+        [K in PlatformName]: {
+            shortCampaignCode: string;
+            longCampaignCode: string;
+            getShareUrl: (href: string) => string;
+        }
+    } = {
+        facebook: {
+            shortCampaignCode: 'sfb',
+            longCampaignCode: 'share_btn_fb',
+            getShareUrl: href => {
+                const params: {
+                    [key: string]: string;
+                } = {
+                    href,
+                    app_id: '202314643182694',
+                };
+
+                const baseURL = 'https://www.facebook.com/dialog/share?';
+
+                return Object.keys(params).reduce(
+                    (shareUrl: string, param: string, i: number) => {
+                        const seperator = i > 0 ? '&amp;' : '';
+
+                        return `${shareUrl}${seperator}${encodeURIComponent(
+                            param,
+                        )}=${encodeURIComponent(params[param])}`;
+                    },
+                    baseURL,
+                );
+            },
+        },
+    };
+    const siteURL = 'https://www.theguardian.com';
+    const webUrl = `${siteURL}/${getNonEmptyString(
+        data,
+        'config.page.pageId',
+    )}`;
+    const getHref = (platform: PlatformName): string =>
+        `${webUrl}?CMP=${platforms[platform].longCampaignCode}`;
+
+    return Object.keys(platforms).reduce((shareUrls, platform) => {
+        const href = getHref(platform as PlatformName);
+
+        return Object.assign(
+            {
+                [platform]: platforms[platform as PlatformName].getShareUrl(
+                    href,
+                ),
+            },
+            shareUrls,
+        );
+    }, {});
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -170,6 +230,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     if (ageWarning) {
         articleMeta.ageWarning = ageWarning;
     }
+
+    console.log(getSharingUrls(data));
 
     return articleMeta;
 };
