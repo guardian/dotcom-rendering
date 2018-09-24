@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
@@ -19,6 +19,7 @@ import {
     leftCol,
     desktop,
 } from '@guardian/pasteup/breakpoints';
+import { pillarMap, pillarPalette } from '../pillars';
 
 const wrapper = css`
     padding-top: 6px;
@@ -68,6 +69,18 @@ const wrapper = css`
         }
     }
 `;
+const pillarColours = pillarMap(
+    pillar =>
+        css`
+            color: ${pillarPalette[pillar].main};
+        `,
+);
+const pillarFill = pillarMap(
+    pillar =>
+        css`
+            fill: ${pillarPalette[pillar].main};
+        `,
+);
 
 const standfirst = css`
     font-family: ${serif.body};
@@ -88,14 +101,13 @@ const leftColWidth = css`
     }
 `;
 
-const section = (colour: string) => css`
+const section = css`
     ${leftColWidth};
     grid-template-areas: section;
     font-size: 16px;
     line-height: 20px;
     font-family: ${serif.headline};
     font-weight: 900;
-    color: ${colour};
 
     ${leftCol} {
         font-size: 22px;
@@ -194,8 +206,7 @@ const bodyStyle = css`
     }
 `;
 
-const profile = (colour: string) => css`
-    color: ${colour};
+const profile = css`
     font-size: 16px;
     line-height: 20px;
     font-family: ${serif.headline};
@@ -216,7 +227,7 @@ const shareIconsListItem = css`
     cursor: pointer;
 `;
 
-const shareIcon = (colour: string) => css`
+const shareIcon = css`
     border: 1px solid ${palette.neutral[86]};
     white-space: nowrap;
     overflow: hidden;
@@ -229,7 +240,6 @@ const shareIcon = (colour: string) => css`
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    fill: ${colour};
     box-sizing: content-box;
 
     svg {
@@ -242,22 +252,23 @@ const shareIcon = (colour: string) => css`
         margin: auto;
         position: absolute;
     }
-
-    :hover {
-        background-color: ${colour};
-        border-color: ${colour};
-        fill: white;
-    }
 `;
-
-const ageWarning = (colour: string) => css`
+const pillarHover = pillarMap(
+    pillar =>
+        css`
+            :hover {
+                background-color: ${pillarPalette[pillar].main};
+                border-color: ${pillarPalette[pillar].main};
+                fill: white;
+            }
+        `,
+);
+const ageWarning = css`
     font-size: 12px;
     line-height: 16px;
     font-family: ${sans.body};
     display: inline-block;
-    color: ${colour};
     margin-bottom: 12px;
-    fill: ${colour};
     width: 100%;
 
     ${leftCol} {
@@ -306,8 +317,6 @@ const metaExtras = css`
     }
 `;
 
-const pillarColour = palette.lifestyle.main; // TODO make dynamic
-
 const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
 
 const header = css`
@@ -322,7 +331,9 @@ const ArticleBody: React.SFC<{
 }> = ({ CAPI, config }) => (
     <div className={wrapper}>
         <header className={header}>
-            <div className={section(pillarColour)}>{CAPI.sectionName}</div>
+            <div className={cx(section, pillarColours[CAPI.pillar])}>
+                {CAPI.sectionName}
+            </div>
             <div className={headline}>
                 <h1 className={headerStyle}>{CAPI.headline}</h1>
                 <div
@@ -333,7 +344,9 @@ const ArticleBody: React.SFC<{
                 />
             </div>
             <div className={meta}>
-                <div className={profile(pillarColour)}>{CAPI.author}</div>
+                <div className={cx(profile, pillarColours[CAPI.pillar])}>
+                    {CAPI.author}
+                </div>
                 <div className={twitterHandle}>
                     {/* TODO - from the contributor type tag */}
                     <TwitterIcon /> @ByRobDavies
@@ -345,21 +358,36 @@ const ArticleBody: React.SFC<{
                     <ul className={shareIconList}>
                         <li className={shareIconsListItem}>
                             <a href="/" role="button">
-                                <span className={shareIcon(pillarColour)}>
+                                <span
+                                    className={cx(
+                                        shareIcon,
+                                        pillarFill[CAPI.pillar],
+                                    )}
+                                >
                                     <FacebookIcon />
                                 </span>
                             </a>
                         </li>
                         <li className={shareIconsListItem}>
                             <a href="/" role="button">
-                                <span className={shareIcon(pillarColour)}>
+                                <span
+                                    className={cx(
+                                        shareIcon,
+                                        pillarFill[CAPI.pillar],
+                                    )}
+                                >
                                     <TwitterIconPadded />
                                 </span>
                             </a>
                         </li>
                         <li className={shareIconsListItem}>
                             <a href="/" role="button">
-                                <span className={shareIcon(pillarColour)}>
+                                <span
+                                    className={cx(
+                                        shareIcon,
+                                        pillarFill[CAPI.pillar],
+                                    )}
+                                >
                                     <EmailIcon />
                                 </span>
                             </a>
@@ -367,7 +395,12 @@ const ArticleBody: React.SFC<{
                     </ul>
                     <ShareCount config={config} CAPI={CAPI} />
                     {CAPI.ageWarning && (
-                        <div className={ageWarning(pillarColour)}>
+                        <div
+                            className={cx(
+                                ageWarning,
+                                pillarColours[CAPI.pillar],
+                            )}
+                        >
                             <ClockIcon /> {CAPI.ageWarning}
                         </div>
                     )}
