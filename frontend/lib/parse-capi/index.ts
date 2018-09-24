@@ -24,7 +24,11 @@ const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
     return fns.reduce((acc, fn) => fn(acc), input);
 };
 
-const getString = (obj: object, selector: string, fallbackValue?: string): string => {
+const getString = (
+    obj: object,
+    selector: string,
+    fallbackValue?: string,
+): string => {
     const found = get(obj, selector);
     if (typeof found === 'string') {
         return found;
@@ -66,7 +70,11 @@ const getNonEmptyString = (obj: object, selector: string): string => {
     );
 };
 
-const getArray = (obj: object, selector: string, fallbackValue?: any[]): any[] => {
+const getArray = (
+    obj: object,
+    selector: string,
+    fallbackValue?: any[],
+): any[] => {
     const found = get(obj, selector);
     if (Array.isArray(found)) {
         return found;
@@ -142,8 +150,8 @@ export const extractNavMeta = (data: {}): NavType => {
                 getLink(l, { isPillar: false }),
             ),
         },
-        brandExtensions: getArray(data, 'config.nav.brandExtensions', []).map(l =>
-            getLink(l, { isPillar: false }),
+        brandExtensions: getArray(data, 'config.nav.brandExtensions', []).map(
+            l => getLink(l, { isPillar: false }),
         ),
         subNavSections: subnav
             ? {
