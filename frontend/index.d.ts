@@ -47,12 +47,13 @@ interface CAPIType {
             userMessage: string;
         }
     },
+    pillar: Pillar
 }
 
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
- * constructed in frontend and passed to dotcom-rendering 
+ * constructed in frontend and passed to dotcom-rendering
  * this data could eventually be defined in dotcom-rendering
  */
 interface ConfigType {

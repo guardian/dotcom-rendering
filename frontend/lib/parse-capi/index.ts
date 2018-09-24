@@ -177,6 +177,9 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
+        pillar:
+            findPillar(getNonEmptyString(data, 'config.page.sectionName')) ||
+            'news',
     };
 
     const ageWarning = getAgeWarning(webPublicationDate);
