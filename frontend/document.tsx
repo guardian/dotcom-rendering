@@ -24,6 +24,7 @@ interface RenderToStringResult {
 
 export default ({ data }: Props) => {
     const { page, site, CAPI, NAV, config } = data;
+    const title = `${CAPI.headline} | ${CAPI.sectionName} | The Guardian`;
     const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
 
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
