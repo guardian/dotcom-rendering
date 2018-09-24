@@ -38,8 +38,18 @@ interface CAPIType {
     author: string,
     webPublicationDate: Date,
     sectionName: string,
+    pageId: string
 }
 
+/**
+ * the config model will contain useful app/site
+ * level data. Although currently derived from the config model
+ * constructed in frontend and passed to dotcom-rendering 
+ * this data could eventually be defined in dotcom-rendering
+ */
+interface ConfigType {
+    ajaxUrl: string
+}
 
 // 3rd party type declarations
 declare module "emotion-server" {
