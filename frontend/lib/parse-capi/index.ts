@@ -82,10 +82,10 @@ const findPillar: (name: string) => Pillar | undefined = name => {
 };
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
-    title: getNonEmptyString(data, 'title'),
+    title: getString(data, 'title'),
     longTitle: getString(data, 'longTitle'),
-    url: getNonEmptyString(data, 'url'),
-    pillar: isPillar ? findPillar(getNonEmptyString(data, 'title')) : undefined,
+    url: getString(data, 'url'),
+    pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
     children: getArray(data, 'children').map(
         l => getLink(l, { isPillar: false }), // children are never pillars
     ),
@@ -102,7 +102,7 @@ export const extractArticleMeta = (data: {}): CAPIType => ({
         curly,
     ),
     standfirst: apply(
-        getNonEmptyString(data, 'contentFields.fields.standfirst'),
+        getString(data, 'contentFields.fields.standfirst'),
         clean,
         bigBullets,
     ),
@@ -111,7 +111,7 @@ export const extractArticleMeta = (data: {}): CAPIType => ({
         .map(block => block.bodyHtml)
         .filter(Boolean)
         .join(''),
-    author: getNonEmptyString(data, 'config.page.author'),
+    author: getString(data, 'config.page.author'),
     webPublicationDate: new Date(
         getNumber(data, 'config.page.webPublicationDate'),
     ),
