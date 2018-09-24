@@ -300,7 +300,6 @@ const metaExtras = css`
 const pillarColour = palette.lifestyle.main; // TODO make dynamic
 
 const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
-
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
 }> = ({ CAPI }) => (
