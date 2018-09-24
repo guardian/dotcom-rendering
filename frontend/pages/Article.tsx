@@ -9,7 +9,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
 
-interface Props {
+interface ArticleProps {
     CAPI: CAPIType;
     NAV: NavType;
     config: ConfigType;
@@ -66,7 +66,7 @@ const articleContainer = css`
 `;
 
 const Article: React.SFC<{
-    data: Props;
+    data: ArticleProps;
 }> = ({ data }) => (
     <div>
         <Header nav={data.NAV} />

@@ -163,6 +163,9 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         author: getNonEmptyString(data, 'config.page.author'),
         sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
+        pillar:
+            findPillar(getNonEmptyString(data, 'config.page.sectionName')) ||
+            'news',
     };
 
     const ageWarning = getAgeWarning(webPublicationDate);
