@@ -174,7 +174,7 @@ const Links: React.SFC<{
 
         <Search
             className={cx(link({ showAtTablet: false }), paddedLink)}
-            href="/"
+            href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
         >
             Search
         </Search>
