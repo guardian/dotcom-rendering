@@ -151,14 +151,21 @@ interface Trail {
     url: string;
     linkText: string;
 }
-
-const fetchTrails = async () => {
-    const resp = await fetch(
-        'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui',
-    );
-    const j = await resp.json();
-    return j.trails as Promise<Trail[]>;
-};
+const fetchTrails: () => Promise<Trail[]> = () =>
+    new Promise((resolve, reject) => {
+        fetch('https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui')
+            .then(response => {
+                if (!response.ok) {
+                    resolve([]);
+                }
+                return response.json();
+            })
+            .then(mostRead => {
+                if ('trails' in mostRead) return mostRead.trails as Trail[];
+                return [];
+            })
+            .catch(_ => resolve([]));
+    });
 
 export const MostViewed: React.SFC = () => (
     <div className={container}>
