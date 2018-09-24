@@ -92,7 +92,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
     mobileOnly: false,
 });
 
-const getAgeWarning = (webPublicationDate: Date): string | void => {
+const getAgeWarning = (webPublicationDate: Date): string | undefined => {
     const warnLimitDays = 30;
     const currentDate = new Date();
     const dateThreshold = new Date();
@@ -130,6 +130,7 @@ const getAgeWarning = (webPublicationDate: Date): string | void => {
             return `${message} 1 month old`;
         }
     }
+    return undefined;
 };
 
 // TODO really it would be nice if we passed just the data we needed and
@@ -140,7 +141,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         getNumber(data, 'config.page.webPublicationDate'),
     );
 
-    const articleMeta: CAPIType = {
+    return {
         webPublicationDate,
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
@@ -166,15 +167,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         pillar:
             findPillar(getNonEmptyString(data, 'config.page.sectionName')) ||
             'news',
+        ageWarning: getAgeWarning(webPublicationDate),
     };
-
-    const ageWarning = getAgeWarning(webPublicationDate);
-
-    if (ageWarning) {
-        articleMeta.ageWarning = ageWarning;
-    }
-
-    return articleMeta;
 };
 
 export const extractNavMeta = (data: {}): NavType => {
