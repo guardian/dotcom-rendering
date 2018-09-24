@@ -38,7 +38,8 @@ interface CAPIType {
     author: string,
     webPublicationDate: Date,
     sectionName: string,
-    pageId: string
+    pageId: string,
+    ageWarning?: string 
 }
 
 /**
