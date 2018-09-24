@@ -24,10 +24,13 @@ const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
     return fns.reduce((acc, fn) => fn(acc), input);
 };
 
-const getString = (obj: object, selector: string): string => {
+const getString = (obj: object, selector: string, fallbackValue?: string): string => {
     const found = get(obj, selector);
     if (typeof found === 'string') {
         return found;
+    }
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
     }
 
     throw new Error(
@@ -63,10 +66,13 @@ const getNonEmptyString = (obj: object, selector: string): string => {
     );
 };
 
-const getArray = (obj: object, selector: string): any[] => {
+const getArray = (obj: object, selector: string, fallbackValue?: any[]): any[] => {
     const found = get(obj, selector);
     if (Array.isArray(found)) {
         return found;
+    }
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
     }
 
     throw new Error(
@@ -82,11 +88,11 @@ const findPillar: (name: string) => Pillar | undefined = name => {
 };
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
-    title: getString(data, 'title'),
-    longTitle: getString(data, 'longTitle'),
-    url: getString(data, 'url'),
-    pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
-    children: getArray(data, 'children').map(
+    title: getString(data, 'title', ''),
+    longTitle: getString(data, 'longTitle', ''),
+    url: getString(data, 'url', ''),
+    pillar: isPillar ? findPillar(getString(data, 'title', '')) : undefined,
+    children: getArray(data, 'children', []).map(
         l => getLink(l, { isPillar: false }), // children are never pillars
     ),
     mobileOnly: false,
@@ -102,11 +108,11 @@ export const extractArticleMeta = (data: {}): CAPIType => ({
         curly,
     ),
     standfirst: apply(
-        getString(data, 'contentFields.fields.standfirst'),
+        getString(data, 'contentFields.fields.standfirst', ''),
         clean,
         bigBullets,
     ),
-    main: apply(getNonEmptyString(data, 'contentFields.fields.main'), clean),
+    main: apply(getString(data, 'contentFields.fields.main', ''), clean),
     body: getArray(data, 'contentFields.fields.blocks.body')
         .map(block => block.bodyHtml)
         .filter(Boolean)
@@ -132,11 +138,11 @@ export const extractNavMeta = (data: {}): NavType => {
             title: 'More',
             longTitle: 'More',
             more: true,
-            children: getArray(data, 'config.nav.otherLinks').map(l =>
+            children: getArray(data, 'config.nav.otherLinks', []).map(l =>
                 getLink(l, { isPillar: false }),
             ),
         },
-        brandExtensions: getArray(data, 'config.nav.brandExtensions').map(l =>
+        brandExtensions: getArray(data, 'config.nav.brandExtensions', []).map(l =>
             getLink(l, { isPillar: false }),
         ),
         subNavSections: subnav
