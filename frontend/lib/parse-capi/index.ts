@@ -166,10 +166,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             clean,
             bigBullets,
         ),
-        main: apply(
-            getString(data, 'contentFields.fields.main', ''),
-            clean,
-        ),
+        main: apply(getString(data, 'contentFields.fields.main', ''), clean),
         body: getArray<any>(data, 'contentFields.fields.blocks.body')
             .map(block => block.bodyHtml)
             .filter(Boolean)
