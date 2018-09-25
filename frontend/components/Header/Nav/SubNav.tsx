@@ -36,10 +36,10 @@ const fontStyle = css`
     font-family: ${serif.headline};
     font-weight: 400;
     color: ${palette.neutral[7]};
-    padding: 0 6px;
-    font-size: 16px;
-    height: 42px;
-    line-height: 42px;
+    padding: 0 5px;
+    font-size: 15px;
+    height: 36px;
+    line-height: 36px;
 `;
 
 const linkStyle = css`
