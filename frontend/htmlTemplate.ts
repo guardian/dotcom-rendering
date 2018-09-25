@@ -61,7 +61,7 @@ export default ({
             <body>
                 <div id='app'>${html}</div>
                 <script>
-                window.gu = ${sanitiseDomRefs(
+                window.guardian = ${sanitiseDomRefs(
                     JSON.stringify({
                         app: {
                             data,

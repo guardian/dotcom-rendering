@@ -3,7 +3,7 @@ declare global {
      *~ existing declarations in the global namespace
      */
     interface Window { 
-        gu: {
+        guardian: {
             app: {
                 data: any,
                 cssIDs: Array<string>
