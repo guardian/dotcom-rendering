@@ -176,7 +176,7 @@ const headerStyle = css`
     font-size: 34px;
     line-height: 38px;
     font-family: ${serif.headline};
-    font-weight: 400;
+    font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
 `;
@@ -187,7 +187,7 @@ const bodyStyle = css`
     }
 
     p {
-        font-size: 16px;
+        font-size: 17px;
         line-height: 24px;
         font-family: ${serif.body};
         margin-bottom: 12px;
