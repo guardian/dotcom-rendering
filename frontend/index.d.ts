@@ -1,6 +1,6 @@
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' ;
 
-type SharePlatform = 'facebook' | 'twitter' | 'email' | 'googlePlus' | 'whatsApp';
+type SharePlatform = 'facebook' | 'twitter' | 'email' | 'googlePlus' | 'whatsApp' | 'pinterest' | 'linkedIn' | 'messenger';
 
 // shared type declarations
 interface LinkType {

@@ -1,6 +1,6 @@
 import { getNonEmptyString } from './';
 
-const appendParamsToUrl: (
+const appendParamsToBaseUrl: (
     baseUrl: string,
     params: {
         [key: string]: string;
@@ -30,90 +30,94 @@ export const getSharingUrls: (
     const platforms: {
         [K in SharePlatform]: {
             userMessage: string;
-            getShareUrl: () => string;
+            params: {
+                [key: string]: string;
+            };
+            baseUrl: string;
         }
     } = {
         facebook: {
             userMessage: 'Share on Facebook',
-            getShareUrl: () => {
-                const params: {
-                    [key: string]: string;
-                } = {
-                    app_id: '202314643182694',
-                    href: articleUrl,
-                    CMP: 'share_btn_fb',
-                };
-                const baseUrl = 'https://twitter.com/intent/tweet';
-
-                return appendParamsToUrl(baseUrl, params);
+            params: {
+                app_id: '202314643182694',
+                href: articleUrl,
+                CMP: 'share_btn_fb',
             },
+            baseUrl: 'https://twitter.com/intent/tweet',
         },
         twitter: {
             userMessage: 'Share on Twitter',
-            getShareUrl: () => {
-                const regex = /Leave.EU/gi;
-                const params: {
-                    [key: string]: string;
-                } = {
-                    text: title.replace(regex, 'Leave. EU'),
-                    url: articleUrl,
-                    CMP: 'share_btn_tw',
-                };
-                const baseUrl = 'https://www.facebook.com/dialog/share';
-
-                return appendParamsToUrl(baseUrl, params);
+            params: {
+                text: title.replace(/Leave.EU/gi, 'Leave. EU'),
+                url: articleUrl,
+                CMP: 'share_btn_tw',
             },
+            baseUrl: 'https://www.facebook.com/dialog/share',
         },
         email: {
             userMessage: 'Share via Email',
-            getShareUrl: () => {
-                const params: {
-                    [key: string]: string;
-                } = {
-                    subject: title,
-                    body: articleUrl,
-                    CMP: 'share_btn_link',
-                };
-                const baseUrl = 'mailto:';
-
-                return appendParamsToUrl(baseUrl, params);
+            params: {
+                subject: title,
+                body: articleUrl,
+                CMP: 'share_btn_link',
             },
+            baseUrl: 'mailto:',
         },
         googlePlus: {
             userMessage: 'Share on Google+',
-            getShareUrl: () => {
-                const params = {
-                    url: articleUrl,
-                    hl: 'en-GB',
-                    wwc: '1',
-                    CMP: 'share_btn_gp',
-                };
-                const baseUrl = 'https://plus.google.com/share';
-
-                return appendParamsToUrl(baseUrl, params);
+            params: {
+                url: articleUrl,
+                hl: 'en-GB',
+                wwc: '1',
+                CMP: 'share_btn_gp',
             },
+            baseUrl: 'https://plus.google.com/share',
         },
         whatsApp: {
             userMessage: 'Share on WhatsApp',
-            getShareUrl: () => {
-                const params = {
-                    text: `"${title}" ${articleUrl}`,
-                    CMP: 'share_btn_wa',
-                };
-                const baseUrl = 'whatsapp://send';
-
-                return appendParamsToUrl(baseUrl, params);
+            params: {
+                text: `"${title}" ${articleUrl}`,
+                CMP: 'share_btn_wa',
             },
+            baseUrl: 'whatsapp://send',
+        },
+        pinterest: {
+            userMessage: 'Share on Pinterest',
+            params: {
+                url: articleUrl,
+            },
+            baseUrl: 'http://www.pinterest.com/pin/find/',
+        },
+        linkedIn: {
+            userMessage: 'Share on LinkedIn',
+            params: {
+                title,
+                mini: 'true',
+                url: articleUrl,
+            },
+            baseUrl: 'http://www.linkedin.com/shareArticle',
+        },
+        messenger: {
+            userMessage: 'Share on Messenger',
+            params: {
+                link: articleUrl,
+                app_id: '180444840287',
+                CMP: 'share_btn_me',
+            },
+            baseUrl: 'fb-messenger://share',
         },
     };
 
     return Object.keys(platforms).reduce((shareUrls, platform) => {
+        const { userMessage, baseUrl, params } = platforms[
+            platform as SharePlatform
+        ];
+
         return Object.assign(
             {
                 [platform]: {
-                    url: platforms[platform as SharePlatform].getShareUrl(),
-                    userMessage:
-                        platforms[platform as SharePlatform].userMessage,
+                    userMessage,
+                    url: appendParamsToBaseUrl(baseUrl, params),
                 },
             },
             shareUrls,
