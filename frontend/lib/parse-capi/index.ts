@@ -96,10 +96,10 @@ const findPillar: (name: string) => Pillar | undefined = name => {
 };
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
-    title: getString(data, 'title', ''),
-    longTitle: getString(data, 'longTitle', ''),
-    url: getString(data, 'url', ''),
-    pillar: isPillar ? findPillar(getString(data, 'title', '')) : undefined,
+    title: getString(data, 'title'),
+    longTitle: getString(data, 'longTitle'),
+    url: getString(data, 'url'),
+    pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
     children: getArray(data, 'children', []).map(
         l => getLink(l, { isPillar: false }), // children are never pillars
     ),
@@ -155,7 +155,7 @@ export const extractNavMeta = (data: {}): NavType => {
         ),
         subNavSections: subnav
             ? {
-                  parent: getLink(subnav.parent, { isPillar: false }),
+                  parent: subnav.parent ? getLink(subnav.parent, { isPillar: false }) : undefined,
                   links: getArray(subnav, 'links').map(l =>
                       getLink(l, { isPillar: false }),
                   ),
