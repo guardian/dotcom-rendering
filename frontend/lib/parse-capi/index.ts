@@ -106,31 +106,87 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
     mobileOnly: false,
 });
 
+const getAgeWarning = (webPublicationDate: Date): string | void => {
+    const warnLimitDays = 30;
+    const currentDate = new Date();
+    const dateThreshold = new Date();
+
+    dateThreshold.setDate(currentDate.getDate() - warnLimitDays);
+
+    const publicationDate = new Date(webPublicationDate);
+
+    // if the publication date is before the date threshold generate message
+    if (publicationDate < dateThreshold) {
+        // Unary + coerces dates to numbers for TypeScript
+        const diffMilliseconds = +currentDate - +publicationDate;
+        const diffSeconds = Math.floor(diffMilliseconds / 1000);
+        const diffMinutes = diffSeconds / 60;
+        const diffHours = diffMinutes / 60;
+        const diffDays = diffHours / 24;
+        const diffMonths = diffDays / 31;
+        const diffYears = diffDays / 365;
+
+        const message = 'This article is over';
+
+        if (diffYears >= 2) {
+            return `${message} ${Math.floor(diffYears)} years old`;
+        }
+
+        if (diffYears > 1) {
+            return `${message} 1 year old`;
+        }
+
+        if (diffMonths >= 2) {
+            return `${message} ${Math.floor(diffMonths)} months old`;
+        }
+
+        if (diffMonths > 1) {
+            return `${message} 1 month old`;
+        }
+    }
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
-export const extractArticleMeta = (data: {}): CAPIType => ({
-    headline: apply(
-        getNonEmptyString(data, 'config.page.headline'),
-        clean,
-        curly,
-    ),
-    standfirst: apply(
-        getString(data, 'contentFields.fields.standfirst', ''),
-        clean,
-        bigBullets,
-    ),
-    main: apply(getString(data, 'contentFields.fields.main', ''), clean),
-    body: getArray<any>(data, 'contentFields.fields.blocks.body')
-        .map(block => block.bodyHtml)
-        .filter(Boolean)
-        .join(''),
-    author: getString(data, 'config.page.author'),
-    webPublicationDate: new Date(
+export const extractArticleMeta = (data: {}): CAPIType => {
+    const webPublicationDate = new Date(
         getNumber(data, 'config.page.webPublicationDate'),
-    ),
-    sectionName: getNonEmptyString(data, 'config.page.section'),
-});
+    );
+
+    const articleMeta: CAPIType = {
+        webPublicationDate,
+        headline: apply(
+            getNonEmptyString(data, 'config.page.headline'),
+            clean,
+            curly,
+        ),
+        standfirst: apply(
+            getString(data, 'contentFields.fields.standfirst', ''),
+            clean,
+            bigBullets,
+        ),
+        main: apply(
+            getString(data, 'contentFields.fields.main', ''),
+            clean,
+        ),
+        body: getArray<any>(data, 'contentFields.fields.blocks.body')
+            .map(block => block.bodyHtml)
+            .filter(Boolean)
+            .join(''),
+        author: getString(data, 'config.page.author'),
+        sectionName: getNonEmptyString(data, 'config.page.section'),
+        pageId: getNonEmptyString(data, 'config.page.pageId'),
+    };
+
+    const ageWarning = getAgeWarning(webPublicationDate);
+
+    if (ageWarning) {
+        articleMeta.ageWarning = ageWarning;
+    }
+
+    return articleMeta;
+};
 
 export const extractNavMeta = (data: {}): NavType => {
     let pillars = getArray<any>(data, 'config.nav.pillars');
@@ -165,5 +221,11 @@ export const extractNavMeta = (data: {}): NavType => {
                   ),
               }
             : undefined,
+    };
+};
+
+export const extractConfigMeta = (data: {}): ConfigType => {
+    return {
+        ajaxUrl: getNonEmptyString(data, 'config.page.ajaxUrl'),
     };
 };

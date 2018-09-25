@@ -4,14 +4,16 @@ import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
 
-import MostViewed from '../components/MostViewed';
+import { MostViewed } from '../components/MostViewed';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
+import BackToTop from '../components/BackToTop';
 
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    config: ConfigType;
 }
 
 // TODO: find a better of setting opacity
@@ -72,12 +74,13 @@ const Article: React.SFC<{
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>
-                    <ArticleBody CAPI={data.CAPI} />
+                    <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn} />
                 </article>
                 <MostViewed />
             </Container>
         </main>
+        <BackToTop />
         <Footer />
     </div>
 );

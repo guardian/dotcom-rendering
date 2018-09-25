@@ -7,13 +7,13 @@ import {
     GuardianConfiguration,
 } from './lib/aws-parameters';
 import document from '../../frontend/document';
-import Article from '../../frontend/pages/Article';
-import { dist, getPagesForSite, root } from '../../config';
+import { dist, root } from '../../config';
 import { log, warn } from '../../lib/log';
 
 import {
     extractArticleMeta,
     extractNavMeta,
+    extractConfigMeta,
 } from '../../frontend/lib/parse-capi';
 
 const renderArticle = ({ body }: express.Request, res: express.Response) => {
@@ -24,6 +24,7 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
                 page: 'Article',
                 CAPI: extractArticleMeta(body),
                 NAV: extractNavMeta(body),
+                config: extractConfigMeta(body),
             },
         });
 

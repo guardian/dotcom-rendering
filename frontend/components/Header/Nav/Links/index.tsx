@@ -40,8 +40,6 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     line-height: 1.2;
     position: relative;
     transition: color 80ms ease-out;
-    padding: 6px 10px;
-    margin: 1px 0 0;
     text-decoration: none;
     display: none;
 
@@ -60,6 +58,11 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     ${desktop} {
         display: block;
     }
+`;
+
+const paddedLink = css`
+    padding: 6px 10px;
+    margin: 1px 0 0;
 `;
 
 const Search: React.SFC<{
@@ -82,6 +85,8 @@ const profileSubdomain = 'https://profile.theguardian.com';
 const subscribeUrl =
     'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support_subscribe%22%2C%22referrerPageviewId%22%3A%22jkjutjbkxfh1d8yyadfc%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fuk%22%7D';
 const jobsUrl = 'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader';
+const datingUrl =
+    'https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader';
 const signInUrl = `${profileSubdomain}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in`;
 
 const identityLinks: DropdownLink[] = [
@@ -132,12 +137,22 @@ const Links: React.SFC<{
                 </SupportTheGuardian>
             )}
 
-        <a href={subscribeUrl} className={link({ showAtTablet: true })}>
+        <a
+            href={subscribeUrl}
+            className={cx(link({ showAtTablet: true }), paddedLink)}
+        >
             Subscribe
         </a>
 
-        <a href={jobsUrl} className={link({ showAtTablet: true })}>
+        <a
+            href={jobsUrl}
+            className={cx(link({ showAtTablet: true }), paddedLink)}
+        >
             Find a job
+        </a>
+
+        <a href={datingUrl} className={link({ showAtTablet: false })}>
+            Dating
         </a>
 
         {isSignedIn ? (
@@ -149,12 +164,18 @@ const Links: React.SFC<{
                 />
             </div>
         ) : (
-            <a className={link({ showAtTablet: false })} href={signInUrl}>
+            <a
+                className={cx(link({ showAtTablet: false }), paddedLink)}
+                href={signInUrl}
+            >
                 Sign in / Register
             </a>
         )}
 
-        <Search className={link({ showAtTablet: false })} href="/">
+        <Search
+            className={cx(link({ showAtTablet: false }), paddedLink)}
+            href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+        >
             Search
         </Search>
     </div>
