@@ -10,7 +10,7 @@ declare global {
             },
             config: {
                 ophan: {
-                    pageViewId: number,
+                    browserId: string,
                 }
             }
         }; 
