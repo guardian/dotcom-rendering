@@ -7,6 +7,11 @@ declare global {
             app: {
                 data: any,
                 cssIDs: Array<string>
+            },
+            config: {
+                ophan: {
+                    pageViewId: number,
+                }
             }
         }; 
     }
