@@ -22,22 +22,26 @@ export const getSharingUrls: (
         userMessage: string;
     }
 } = data => {
+    const articleUrl = `https://www.theguardian.com/${getNonEmptyString(
+        data,
+        'config.page.pageId',
+    )}`;
+    const title = getNonEmptyString(data, 'config.page.webTitle');
     const platforms: {
         [K in SharePlatform]: {
-            campaignCode: string;
             userMessage: string;
-            getShareUrl: (href: string, title: string) => string;
+            getShareUrl: () => string;
         }
     } = {
         facebook: {
-            campaignCode: 'share_btn_fb',
             userMessage: 'Share on Facebook',
-            getShareUrl: href => {
+            getShareUrl: () => {
                 const params: {
                     [key: string]: string;
                 } = {
-                    href,
                     app_id: '202314643182694',
+                    href: articleUrl,
+                    CMP: 'share_btn_fb',
                 };
                 const baseUrl = 'https://twitter.com/intent/tweet';
 
@@ -45,15 +49,15 @@ export const getSharingUrls: (
             },
         },
         twitter: {
-            campaignCode: 'share_btn_tw',
             userMessage: 'Share on Twitter',
-            getShareUrl: (href, title) => {
+            getShareUrl: () => {
                 const regex = /Leave.EU/gi;
                 const params: {
                     [key: string]: string;
                 } = {
                     text: title.replace(regex, 'Leave. EU'),
-                    url: href,
+                    url: articleUrl,
+                    CMP: 'share_btn_tw',
                 };
                 const baseUrl = 'https://www.facebook.com/dialog/share';
 
@@ -61,14 +65,14 @@ export const getSharingUrls: (
             },
         },
         email: {
-            campaignCode: 'share_btn_link',
             userMessage: 'Share via Email',
-            getShareUrl: (href, title) => {
+            getShareUrl: () => {
                 const params: {
                     [key: string]: string;
                 } = {
                     subject: title,
-                    body: href,
+                    body: articleUrl,
+                    CMP: 'share_btn_link',
                 };
                 const baseUrl = 'mailto:';
 
@@ -76,13 +80,13 @@ export const getSharingUrls: (
             },
         },
         googlePlus: {
-            campaignCode: 'share_btn_gp',
             userMessage: 'Share on Google+',
-            getShareUrl: href => {
+            getShareUrl: () => {
                 const params = {
-                    url: href,
+                    url: articleUrl,
                     hl: 'en-GB',
                     wwc: '1',
+                    CMP: 'share_btn_gp',
                 };
                 const baseUrl = 'https://plus.google.com/share';
 
@@ -90,11 +94,11 @@ export const getSharingUrls: (
             },
         },
         whatsApp: {
-            campaignCode: 'share_btn_wa',
             userMessage: 'Share on WhatsApp',
-            getShareUrl: (href, title) => {
+            getShareUrl: () => {
                 const params = {
-                    text: `"${title}" ${href}`,
+                    text: `"${title}" ${articleUrl}`,
+                    CMP: 'share_btn_wa',
                 };
                 const baseUrl = 'whatsapp://send';
 
@@ -102,25 +106,12 @@ export const getSharingUrls: (
             },
         },
     };
-    const siteURL = 'https://www.theguardian.com';
-    const webUrl = `${siteURL}/${getNonEmptyString(
-        data,
-        'config.page.pageId',
-    )}`;
-    const getHref = (platform: SharePlatform): string =>
-        `${webUrl}?CMP=${platforms[platform].campaignCode}`;
 
     return Object.keys(platforms).reduce((shareUrls, platform) => {
-        const href = getHref(platform as SharePlatform);
-        const title = getNonEmptyString(data, 'config.page.webTitle');
-
         return Object.assign(
             {
                 [platform]: {
-                    url: platforms[platform as SharePlatform].getShareUrl(
-                        href,
-                        title,
-                    ),
+                    url: platforms[platform as SharePlatform].getShareUrl(),
                     userMessage:
                         platforms[platform as SharePlatform].userMessage,
                 },
