@@ -74,7 +74,6 @@ export default ({
                 )};
 
                 (function (window, document) {
-
                     function getCookieValue(name) {
                         var nameEq = name + "=",
                             cookies = document.cookie.split(';'),
@@ -89,8 +88,6 @@ export default ({
                         });
                         return value;
                     }
-                
-                
                     window.guardian.config.ophan.browserId = getCookieValue('bwid');
                 })(window, document);
                 </script>
