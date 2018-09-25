@@ -5,6 +5,7 @@ import get from 'lodash.get';
 import clean from './clean';
 import bigBullets from './big-bullets';
 import { pillarNames } from '../../pillars';
+import { getSharingUrls } from './sharing-urls';
 
 const headline = compose(
     clean,
@@ -50,7 +51,8 @@ const getNumber = (obj: object, selector: string): number => {
     );
 };
 
-const getNonEmptyString = (obj: object, selector: string): string => {
+// TODO temporary export we should move all validation functions into their own module
+export const getNonEmptyString = (obj: object, selector: string): string => {
     const found = get(obj, selector);
     if (typeof found === 'string' && found.length > 0) {
         return found;
@@ -132,103 +134,6 @@ const getAgeWarning = (webPublicationDate: Date): string | void => {
     }
 };
 
-export type PlatformName = 'facebook' | 'twitter' | 'email';
-
-const appendParamsToUrl: (
-    baseUrl: string,
-    params: {
-        [key: string]: string;
-    },
-) => string = (baseUrl, params) =>
-    Object.keys(params).reduce((shareUrl: string, param: string, i: number) => {
-        const seperator = i > 0 ? '&amp;' : '?';
-
-        return `${shareUrl}${seperator}${encodeURIComponent(
-            param,
-        )}=${encodeURIComponent(params[param])}`;
-    }, baseUrl);
-
-const getSharingUrls: (
-    data: any,
-) => { [K in PlatformName]?: string } = data => {
-    const platforms: {
-        [K in PlatformName]: {
-            campaignCode: string;
-            userMessage: string;
-            getShareUrl: (href: string, title: string) => string;
-        }
-    } = {
-        facebook: {
-            campaignCode: 'share_btn_fb',
-            userMessage: 'Share on Facebook',
-            getShareUrl: (href, title) => {
-                const params: {
-                    [key: string]: string;
-                } = {
-                    href,
-                    app_id: '202314643182694',
-                };
-                const baseUrl = 'https://twitter.com/intent/tweet';
-
-                return appendParamsToUrl(baseUrl, params);
-            },
-        },
-        twitter: {
-            campaignCode: 'share_btn_tw',
-            userMessage: 'Share on Twitter',
-            getShareUrl: (href, title) => {
-                const regex = /Leave.EU/gi;
-                const params: {
-                    [key: string]: string;
-                } = {
-                    text: title.replace(regex, 'Leave. EU'),
-                    url: href,
-                };
-                const baseUrl = 'https://www.facebook.com/dialog/share';
-
-                return appendParamsToUrl(baseUrl, params);
-            },
-        },
-        email: {
-            campaignCode: 'share_btn_link',
-            userMessage: 'Share via Email',
-            getShareUrl: (href, title) => {
-                const params: {
-                    [key: string]: string;
-                } = {
-                    subject: title,
-                    body: href,
-                };
-                const baseUrl = 'mailto:';
-
-                return appendParamsToUrl(baseUrl, params);
-            },
-        },
-    };
-    const siteURL = 'https://www.theguardian.com';
-    const webUrl = `${siteURL}/${getNonEmptyString(
-        data,
-        'config.page.pageId',
-    )}`;
-    const getHref = (platform: PlatformName): string =>
-        `${webUrl}?CMP=${platforms[platform].campaignCode}`;
-
-    return Object.keys(platforms).reduce((shareUrls, platform) => {
-        const href = getHref(platform as PlatformName);
-        const title = getNonEmptyString(data, 'config.page.webTitle');
-
-        return Object.assign(
-            {
-                [platform]: platforms[platform as PlatformName].getShareUrl(
-                    href,
-                    title,
-                ),
-            },
-            shareUrls,
-        );
-    }, {});
-};
-
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -260,6 +165,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         author: getNonEmptyString(data, 'config.page.author'),
         sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
+        sharingUrls: getSharingUrls(data),
     };
 
     const ageWarning = getAgeWarning(webPublicationDate);
@@ -267,8 +173,6 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     if (ageWarning) {
         articleMeta.ageWarning = ageWarning;
     }
-
-    console.log(getSharingUrls(data));
 
     return articleMeta;
 };
