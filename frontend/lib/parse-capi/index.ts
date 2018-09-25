@@ -146,17 +146,21 @@ export const extractNavMeta = (data: {}): NavType => {
             title: 'More',
             longTitle: 'More',
             more: true,
-            children: getArray<Object>(data, 'config.nav.otherLinks', []).map(l =>
-                getLink(l, { isPillar: false }),
+            children: getArray<object>(data, 'config.nav.otherLinks', []).map(
+                l => getLink(l, { isPillar: false }),
             ),
         },
-        brandExtensions: getArray<Object>(data, 'config.nav.brandExtensions', []).map(
-            l => getLink(l, { isPillar: false }),
-        ),
+        brandExtensions: getArray<object>(
+            data,
+            'config.nav.brandExtensions',
+            [],
+        ).map(l => getLink(l, { isPillar: false })),
         subNavSections: subnav
             ? {
-                  parent: subnav.parent ? getLink(subnav.parent, { isPillar: false }) : undefined,
-                  links: getArray<any>(subnav, 'links').map(l =>
+                  parent: subnav.parent
+                      ? getLink(subnav.parent, { isPillar: false })
+                      : undefined,
+                  links: getArray<object>(subnav, 'links').map(l =>
                       getLink(l, { isPillar: false }),
                   ),
               }
