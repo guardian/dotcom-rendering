@@ -24,10 +24,17 @@ const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
     return fns.reduce((acc, fn) => fn(acc), input);
 };
 
-const getString = (obj: object, selector: string): string => {
+const getString = (
+    obj: object,
+    selector: string,
+    fallbackValue?: string,
+): string => {
     const found = get(obj, selector);
     if (typeof found === 'string') {
         return found;
+    }
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
     }
 
     throw new Error(
@@ -63,10 +70,17 @@ const getNonEmptyString = (obj: object, selector: string): string => {
     );
 };
 
-const getArray = (obj: object, selector: string): any[] => {
+const getArray = <T>(
+    obj: object,
+    selector: string,
+    fallbackValue?: T[],
+): T[] => {
     const found = get(obj, selector);
     if (Array.isArray(found)) {
         return found;
+    }
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
     }
 
     throw new Error(
@@ -82,11 +96,11 @@ const findPillar: (name: string) => Pillar | undefined = name => {
 };
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
-    title: getNonEmptyString(data, 'title'),
+    title: getString(data, 'title'),
     longTitle: getString(data, 'longTitle'),
-    url: getNonEmptyString(data, 'url'),
-    pillar: isPillar ? findPillar(getNonEmptyString(data, 'title')) : undefined,
-    children: getArray(data, 'children').map(
+    url: getString(data, 'url'),
+    pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
+    children: getArray<object>(data, 'children', []).map(
         l => getLink(l, { isPillar: false }), // children are never pillars
     ),
     mobileOnly: false,
@@ -148,19 +162,16 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             curly,
         ),
         standfirst: apply(
-            getNonEmptyString(data, 'contentFields.fields.standfirst'),
+            getString(data, 'contentFields.fields.standfirst', ''),
             clean,
             bigBullets,
         ),
-        main: apply(
-            getNonEmptyString(data, 'contentFields.fields.main'),
-            clean,
-        ),
-        body: getArray(data, 'contentFields.fields.blocks.body')
+        main: apply(getString(data, 'contentFields.fields.main', ''), clean),
+        body: getArray<any>(data, 'contentFields.fields.blocks.body')
             .map(block => block.bodyHtml)
             .filter(Boolean)
             .join(''),
-        author: getNonEmptyString(data, 'config.page.author'),
+        author: getString(data, 'config.page.author'),
         sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
     };
@@ -175,7 +186,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
 };
 
 export const extractNavMeta = (data: {}): NavType => {
-    let pillars = getArray(data, 'config.nav.pillars');
+    let pillars = getArray<any>(data, 'config.nav.pillars');
 
     pillars = pillars.map(link => getLink(link, { isPillar: true }));
 
@@ -188,17 +199,21 @@ export const extractNavMeta = (data: {}): NavType => {
             title: 'More',
             longTitle: 'More',
             more: true,
-            children: getArray(data, 'config.nav.otherLinks').map(l =>
-                getLink(l, { isPillar: false }),
+            children: getArray<object>(data, 'config.nav.otherLinks', []).map(
+                l => getLink(l, { isPillar: false }),
             ),
         },
-        brandExtensions: getArray(data, 'config.nav.brandExtensions').map(l =>
-            getLink(l, { isPillar: false }),
-        ),
+        brandExtensions: getArray<object>(
+            data,
+            'config.nav.brandExtensions',
+            [],
+        ).map(l => getLink(l, { isPillar: false })),
         subNavSections: subnav
             ? {
-                  parent: getLink(subnav.parent, { isPillar: false }),
-                  links: getArray(subnav, 'links').map(l =>
+                  parent: subnav.parent
+                      ? getLink(subnav.parent, { isPillar: false })
+                      : undefined,
+                  links: getArray<object>(subnav, 'links').map(l =>
                       getLink(l, { isPillar: false }),
                   ),
               }

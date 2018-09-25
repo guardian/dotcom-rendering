@@ -26,7 +26,7 @@ interface NavType {
     otherLinks: MoreType,
     brandExtensions: Array<LinkType>,
     subNavSections?: {
-        parent: LinkType,
+        parent?: LinkType,
         links: Array<LinkType>,
     },
 }

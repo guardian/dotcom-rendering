@@ -110,7 +110,6 @@ export default class Nav extends Component<
                     />
                 </nav>
                 {nav.subNavSections &&
-                    nav.subNavSections.parent &&
                     nav.subNavSections.links && (
                         <div className={subnav}>
                             <div className={centered}>
