@@ -79,7 +79,7 @@ export const SharingIcons: React.SFC<{
 
     const shareList = displayIcons.reduce((list: ShareListItemType[], id) => {
         const icon = icons[id];
-        const sharingUrl = sharingUrls[id as SharePlatform];
+        const sharingUrl = sharingUrls[id];
 
         if (icon && sharingUrl) {
             const listItem: ShareListItemType = Object.assign(
