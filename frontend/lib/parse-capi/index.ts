@@ -70,11 +70,11 @@ const getNonEmptyString = (obj: object, selector: string): string => {
     );
 };
 
-const getArray = (
+const getArray = <T>(
     obj: object,
     selector: string,
-    fallbackValue?: any[],
-): any[] => {
+    fallbackValue?: T[],
+): T[] => {
     const found = get(obj, selector);
     if (Array.isArray(found)) {
         return found;
@@ -100,7 +100,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
     longTitle: getString(data, 'longTitle'),
     url: getString(data, 'url'),
     pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
-    children: getArray(data, 'children', []).map(
+    children: getArray<object>(data, 'children', []).map(
         l => getLink(l, { isPillar: false }), // children are never pillars
     ),
     mobileOnly: false,
@@ -121,7 +121,7 @@ export const extractArticleMeta = (data: {}): CAPIType => ({
         bigBullets,
     ),
     main: apply(getString(data, 'contentFields.fields.main', ''), clean),
-    body: getArray(data, 'contentFields.fields.blocks.body')
+    body: getArray<any>(data, 'contentFields.fields.blocks.body')
         .map(block => block.bodyHtml)
         .filter(Boolean)
         .join(''),
@@ -133,7 +133,7 @@ export const extractArticleMeta = (data: {}): CAPIType => ({
 });
 
 export const extractNavMeta = (data: {}): NavType => {
-    let pillars = getArray(data, 'config.nav.pillars');
+    let pillars = getArray<any>(data, 'config.nav.pillars');
 
     pillars = pillars.map(link => getLink(link, { isPillar: true }));
 
@@ -146,17 +146,17 @@ export const extractNavMeta = (data: {}): NavType => {
             title: 'More',
             longTitle: 'More',
             more: true,
-            children: getArray(data, 'config.nav.otherLinks', []).map(l =>
+            children: getArray<Object>(data, 'config.nav.otherLinks', []).map(l =>
                 getLink(l, { isPillar: false }),
             ),
         },
-        brandExtensions: getArray(data, 'config.nav.brandExtensions', []).map(
+        brandExtensions: getArray<Object>(data, 'config.nav.brandExtensions', []).map(
             l => getLink(l, { isPillar: false }),
         ),
         subNavSections: subnav
             ? {
                   parent: subnav.parent ? getLink(subnav.parent, { isPillar: false }) : undefined,
-                  links: getArray(subnav, 'links').map(l =>
+                  links: getArray<any>(subnav, 'links').map(l =>
                       getLink(l, { isPillar: false }),
                   ),
               }
