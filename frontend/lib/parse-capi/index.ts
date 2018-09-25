@@ -132,41 +132,76 @@ const getAgeWarning = (webPublicationDate: Date): string | void => {
     }
 };
 
-export type PlatformName = 'facebook';
+export type PlatformName = 'facebook' | 'twitter' | 'email';
+
+const appendParamsToUrl: (
+    baseUrl: string,
+    params: {
+        [key: string]: string;
+    },
+) => string = (baseUrl, params) =>
+    Object.keys(params).reduce((shareUrl: string, param: string, i: number) => {
+        const seperator = i > 0 ? '&amp;' : '?';
+
+        return `${shareUrl}${seperator}${encodeURIComponent(
+            param,
+        )}=${encodeURIComponent(params[param])}`;
+    }, baseUrl);
 
 const getSharingUrls: (
     data: any,
 ) => { [K in PlatformName]?: string } = data => {
     const platforms: {
         [K in PlatformName]: {
-            shortCampaignCode: string;
-            longCampaignCode: string;
-            getShareUrl: (href: string) => string;
+            campaignCode: string;
+            userMessage: string;
+            getShareUrl: (href: string, title: string) => string;
         }
     } = {
         facebook: {
-            shortCampaignCode: 'sfb',
-            longCampaignCode: 'share_btn_fb',
-            getShareUrl: href => {
+            campaignCode: 'share_btn_fb',
+            userMessage: 'Share on Facebook',
+            getShareUrl: (href, title) => {
                 const params: {
                     [key: string]: string;
                 } = {
                     href,
                     app_id: '202314643182694',
                 };
+                const baseUrl = 'https://twitter.com/intent/tweet';
 
-                const baseURL = 'https://www.facebook.com/dialog/share?';
+                return appendParamsToUrl(baseUrl, params);
+            },
+        },
+        twitter: {
+            campaignCode: 'share_btn_tw',
+            userMessage: 'Share on Twitter',
+            getShareUrl: (href, title) => {
+                const regex = /Leave.EU/gi;
+                const params: {
+                    [key: string]: string;
+                } = {
+                    text: title.replace(regex, 'Leave. EU'),
+                    url: href,
+                };
+                const baseUrl = 'https://www.facebook.com/dialog/share';
 
-                return Object.keys(params).reduce(
-                    (shareUrl: string, param: string, i: number) => {
-                        const seperator = i > 0 ? '&amp;' : '';
+                return appendParamsToUrl(baseUrl, params);
+            },
+        },
+        email: {
+            campaignCode: 'share_btn_link',
+            userMessage: 'Share via Email',
+            getShareUrl: (href, title) => {
+                const params: {
+                    [key: string]: string;
+                } = {
+                    subject: title,
+                    body: href,
+                };
+                const baseUrl = 'mailto:';
 
-                        return `${shareUrl}${seperator}${encodeURIComponent(
-                            param,
-                        )}=${encodeURIComponent(params[param])}`;
-                    },
-                    baseURL,
-                );
+                return appendParamsToUrl(baseUrl, params);
             },
         },
     };
@@ -176,15 +211,17 @@ const getSharingUrls: (
         'config.page.pageId',
     )}`;
     const getHref = (platform: PlatformName): string =>
-        `${webUrl}?CMP=${platforms[platform].longCampaignCode}`;
+        `${webUrl}?CMP=${platforms[platform].campaignCode}`;
 
     return Object.keys(platforms).reduce((shareUrls, platform) => {
         const href = getHref(platform as PlatformName);
+        const title = getNonEmptyString(data, 'config.page.webTitle');
 
         return Object.assign(
             {
                 [platform]: platforms[platform as PlatformName].getShareUrl(
                     href,
+                    title,
                 ),
             },
             shareUrls,
