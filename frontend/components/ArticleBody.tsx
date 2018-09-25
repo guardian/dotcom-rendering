@@ -296,6 +296,7 @@ const ArticleBody: React.SFC<{
                     <SharingIcons
                         sharingUrls={CAPI.sharingUrls}
                         pillarColour={pillarColour}
+                        displayIcons={['facebook', 'twitter', 'email']}
                     />
                     <ShareCount config={config} CAPI={CAPI} />
                     {CAPI.ageWarning && (

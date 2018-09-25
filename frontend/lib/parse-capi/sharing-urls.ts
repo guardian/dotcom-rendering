@@ -43,7 +43,7 @@ export const getSharingUrls: (
                 href: articleUrl,
                 CMP: 'share_btn_fb',
             },
-            baseUrl: 'https://twitter.com/intent/tweet',
+            baseUrl: 'https://www.facebook.com/dialog/share',
         },
         twitter: {
             userMessage: 'Share on Twitter',
@@ -52,7 +52,7 @@ export const getSharingUrls: (
                 url: articleUrl,
                 CMP: 'share_btn_tw',
             },
-            baseUrl: 'https://www.facebook.com/dialog/share',
+            baseUrl: 'https://twitter.com/intent/tweet',
         },
         email: {
             userMessage: 'Share via Email',
