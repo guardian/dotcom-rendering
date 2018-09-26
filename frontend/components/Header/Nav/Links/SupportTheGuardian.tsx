@@ -5,6 +5,7 @@ import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import { getCookie } from '../../../../lib/cookie';
 import { AsyncClientComponent } from '../../../lib/AsyncClientComponent';
+
 const style = css`
     color: ${palette.neutral[97]};
     font-family: ${serif.headline};
@@ -56,9 +57,8 @@ const SupportTheGuardian: React.SFC<{
 );
 
 const shouldShow: () => Promise<boolean> = () =>
-    new Promise((resolve, reject) => {
-        resolve(!(isRecentContributor() || isPayingMember()));
-    });
+    Promise.resolve(!(isRecentContributor() || isPayingMember()));
+
 const isRecentContributor: () => boolean = () => {
     const value = getCookie('gu.contributions.contrib-timestamp');
 
@@ -72,6 +72,7 @@ const isRecentContributor: () => boolean = () => {
 
     return diffDays <= 180;
 };
+
 const isPayingMember: () => boolean = () => {
     return getCookie('gu_paying_member') === 'true';
 };
