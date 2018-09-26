@@ -94,7 +94,7 @@ const section = (colour: string) => css`
     font-size: 16px;
     line-height: 20px;
     font-family: ${serif.headline};
-    font-weight: 900;
+    font-weight: 700;
     color: ${colour};
 
     ${leftCol} {
