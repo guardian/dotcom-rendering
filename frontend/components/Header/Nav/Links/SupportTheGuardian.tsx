@@ -3,6 +3,9 @@ import { cx, css } from 'react-emotion';
 
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
+import { getCookie } from '../../../../lib/cookie';
+import { AsyncClientComponent } from '../../../lib/AsyncClientComponent';
+
 const style = css`
     color: ${palette.neutral[97]};
     font-family: ${serif.headline};
@@ -40,8 +43,38 @@ const SupportTheGuardian: React.SFC<{
     children: React.ReactChild;
     href: string;
 }> = ({ className, children, href, ...props }) => (
-    <a className={cx(style, className)} href={href} {...props}>
-        {children}
-    </a>
+    <AsyncClientComponent f={shouldShow}>
+        {({ data }) => (
+            <>
+                {data && (
+                    <a className={cx(style, className)} href={href} {...props}>
+                        {children}
+                    </a>
+                )}
+            </>
+        )}
+    </AsyncClientComponent>
 );
+
+const shouldShow: () => Promise<boolean> = () =>
+    Promise.resolve(!(isRecentContributor() || isPayingMember()));
+
+const isRecentContributor: () => boolean = () => {
+    const value = getCookie('gu.contributions.contrib-timestamp');
+
+    if (!value) {
+        return false;
+    }
+
+    const now = new Date().getTime();
+    const lastContribution = new Date(value).getTime();
+    const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
+
+    return diffDays <= 180;
+};
+
+const isPayingMember: () => boolean = () => {
+    return getCookie('gu_paying_member') === 'true';
+};
+
 export default SupportTheGuardian;
