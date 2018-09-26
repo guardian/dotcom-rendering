@@ -161,8 +161,11 @@ const fetchTrails: () => Promise<Trail[]> = () =>
                 return response.json();
             })
             .then(mostRead => {
-                if ('trails' in mostRead) return mostRead.trails as Trail[];
-                return [];
+                if ('trails' in mostRead) {
+                    resolve(mostRead.trails as Trail[]);
+                }
+
+                resolve([]);
             })
             .catch(_ => resolve([]));
     });
@@ -172,7 +175,7 @@ export const MostViewed: React.SFC = () => (
         <h2 className={heading}>Most Viewed</h2>
         <AsyncClientComponent f={fetchTrails}>
             {({ data }) => (
-                <ul>
+                <ul className={list}>
                     {(data || []).map((trail, i) => (
                         <li className={listItem} key={trail.url}>
                             <span className={bigNumber}>
