@@ -9,10 +9,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-const wrapperExpanded = css``;
-
 const wrapperCollapsed = css`
-    ${wrapperExpanded};
     height: 36px;
     overflow: hidden;
 
@@ -205,7 +202,7 @@ export default class Subnav extends Component<
             );
         } else if (this.state.isExpanded) {
             el = (
-                <div className={wrapperExpanded}>
+                <div>
                     <ul ref={this.ulRef} className={subnavExpanded}>
                         {lis}
                     </ul>
