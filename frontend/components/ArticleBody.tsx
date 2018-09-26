@@ -134,6 +134,13 @@ const meta = css`
         order: 1;
     }
 
+    ${until.phablet} {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+`;
+
+const guardianLines = css`
     background-image: repeating-linear-gradient(
         to bottom,
         ${palette.neutral[86]},
@@ -146,11 +153,6 @@ const meta = css`
     background-size: 1px 13px;
     padding-top: 15px;
     margin-bottom: 6px;
-
-    ${until.phablet} {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
 `;
 
 const captionFont = css`
@@ -289,6 +291,145 @@ const header = css`
     }
 `;
 
+const subMeta = css`
+    margin-top: 12px;
+    padding-top: 18px;
+`;
+
+const subMetaLabel = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    display: block;
+    color: ${palette.neutral[60]};
+`;
+
+const subMetaLink = css`
+    display: inline-block;
+    font-family: ${serif.body};
+    a {
+        position: relative;
+        display: block;
+        padding: 0 5px;
+        text-decoration: none;
+    }
+    a::after {
+        content: '/';
+        font-size: 16px;
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        right: -3px;
+        color: ${palette.neutral[86]};
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+`;
+
+const hideSlash = css`
+    a::after {
+        content: '';
+    }
+`;
+
+// @mixin trailing-slash-item {
+//     display: inline-block;
+
+//     &:last-of-type > a:after {
+//         content: '';
+//     }
+// }
+
+// @mixin trailing-slash-link {
+//     position: relative;
+//     display: block;
+//     padding-left: .3em;
+//     padding-right: .35em;
+// }
+
+// @mixin trailing-slash {
+//     content: '/';
+//     font-size: 1em;
+//     position: absolute;
+//     pointer-events: none;
+
+//     //optically aligns slashes
+//     top: 0;
+//     right: -.19em;
+// }
+
+const SubMetaLink: React.SFC<{
+    text: string;
+    url: string;
+    isLastIndex: boolean;
+}> = ({ text, url, isLastIndex }) => (
+    <>
+        <li className={cx(subMetaLink, { [hideSlash]: isLastIndex })}>
+            <a href={url}>{text}</a>
+        </li>
+    </>
+);
+
+const subMetaLinks = css`
+    list-style: none;
+    margin-left: -5px;
+`;
+
+interface SubMetaLink {
+    url: string;
+    text: string;
+}
+
+const SubMetaLinks: React.SFC<{
+    CAPI: CAPIType;
+}> = ({ CAPI }) => {
+    const links: SubMetaLink[] = [];
+    const { isImmersive, tags } = CAPI;
+    const isArticle =
+        tags &&
+        tags.some(tag => tag.id === 'type/article' && tag.type === 'Type');
+
+    if (tags && !(isImmersive && isArticle)) {
+        const keyWordTag = tags.find(tag => tag.type === 'Keyword');
+
+        if (keyWordTag) {
+            links.push({
+                url: keyWordTag.id,
+                text: keyWordTag.title,
+            });
+        }
+
+        const blogOrSeriesTags = tags.filter(
+            tag => tag.type === 'Blog' || tag.type === 'Series',
+        );
+
+        blogOrSeriesTags.forEach(tag => {
+            links.push({
+                url: tag.id,
+                text: tag.title,
+            });
+        });
+    }
+
+    if (links.length) {
+        return (
+            <ul className={subMetaLinks}>
+                {links.map((link, i) => (
+                    <SubMetaLink
+                        text={link.text}
+                        url={link.url}
+                        key={link.url}
+                        isLastIndex={i === links.length - 1}
+                    />
+                ))}
+            </ul>
+        );
+    }
+
+    return <></>;
+};
+
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
@@ -307,7 +448,7 @@ const ArticleBody: React.SFC<{
                     }}
                 />
             </div>
-            <div className={meta}>
+            <div className={cx(meta, guardianLines)}>
                 <div className={cx(profile, pillarColours[CAPI.pillar])}>
                     {CAPI.author}
                 </div>
@@ -352,7 +493,10 @@ const ArticleBody: React.SFC<{
                     __html: CAPI.body,
                 }}
             />
-            <div>Submeta</div>
+            <div className={cx(subMeta, guardianLines)}>
+                <span className={subMetaLabel}>Topics</span>
+                <SubMetaLinks CAPI={CAPI} />
+            </div>
         </div>
     </div>
 );

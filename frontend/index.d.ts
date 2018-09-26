@@ -22,6 +22,12 @@ interface MoreType extends LinkType {
     more: true
 }
 
+interface TagType {
+    id: string,
+    type: string,
+    title: string,
+}
+
 interface NavType {
     pillars: Array<PillarType>,
     otherLinks: MoreType,
@@ -47,7 +53,9 @@ interface CAPIType {
             userMessage: string;
         }
     },
-    pillar: Pillar
+    pillar: Pillar,
+    tags?: TagType[],
+    isImmersive: boolean
 }
 
 /**

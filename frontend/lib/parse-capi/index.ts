@@ -149,6 +149,38 @@ const getAgeWarning = (webPublicationDate: Date): string | undefined => {
     return undefined;
 };
 
+const getBoolean = (
+    obj: object,
+    selector: string,
+    fallbackValue?: boolean,
+): boolean => {
+    const found = get(obj, selector);
+
+    if (typeof found === 'boolean') {
+        return found;
+    }
+
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
+    }
+
+    throw new Error(
+        `expected boolean  at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
+
+const getTags: (data: any) => TagType[] = data => {
+    const tags = getArray<any>(data, 'tags.tags');
+
+    return tags.map(tag => ({
+        id: getNonEmptyString(tag, 'properties.id'),
+        type: getNonEmptyString(tag, 'properties.tagType'),
+        title: getString(tag, 'properties.webTitle', ''),
+    }));
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -181,6 +213,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         pillar:
             findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
         ageWarning: getAgeWarning(webPublicationDate),
+        tags: getTags(data),
+        isImmersive: getBoolean(data, 'config.page.isImmersive', false),
     };
 };
 
