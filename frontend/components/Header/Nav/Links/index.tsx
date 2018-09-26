@@ -151,7 +151,7 @@ const Links: React.SFC<{
             Find a job
         </a>
 
-        <a href={datingUrl} className={link({ showAtTablet: false })}>
+        <a href={datingUrl} className={cx(link({ showAtTablet: false }))}>
             Dating
         </a>
 
