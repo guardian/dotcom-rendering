@@ -244,21 +244,16 @@ const getSubMetaKeywordLinks: (
         sectionUrl?: string;
     },
 ) => SimpleLinkType[] = data => {
-    const links: SimpleLinkType[] = [];
-    const { tags, sectionLabel, sectionUrl } = data;
-
+    const { tags, sectionLabel } = data;
     const keywordTags = tags
         .filter(tag => tag.type === 'Keyword' && tag.id !== sectionLabel)
         .slice(1, 6);
+    const toneTags = tags.filter(tag => tag.type === 'Tone');
 
-    keywordTags.forEach(tag => {
-        links.push({
-            url: tag.id,
-            title: tag.title,
-        });
-    });
-
-    return links;
+    return [...keywordTags, ...toneTags].map(tag => ({
+        url: tag.id,
+        title: tag.title,
+    }));
 };
 
 // TODO really it would be nice if we passed just the data we needed and
