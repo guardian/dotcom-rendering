@@ -5,14 +5,15 @@ declare global {
     interface Window { 
         guardian: {
             app: {
-                data: any,
-                cssIDs: Array<string>
-            },
+                data: any;
+                cssIDs: Array<string>;
+            };
             config: {
-                ophan: {
-                    browserId: string,
-                }
-            }
+                ophan?: {
+                    browserId?: string;
+                    pageViewId?: string;
+                };
+            };
         }; 
     }
 }
