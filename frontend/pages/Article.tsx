@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
 import BackToTop from '../components/BackToTop';
+import SubNav from '../components/Header/Nav/SubNav';
 
 interface Props {
     CAPI: CAPIType;
@@ -80,7 +81,10 @@ const Article: React.SFC<{
                 <MostViewed />
             </Container>
         </main>
+
+        <SubNav subnav={data.NAV.subNavSections} />
         <BackToTop />
+
         <Footer />
     </div>
 );
