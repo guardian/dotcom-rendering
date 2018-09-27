@@ -237,6 +237,30 @@ const getSubMetaSectionLinks: (
     return links;
 };
 
+const getSubMetaKeywordLinks: (
+    data: {
+        tags: TagType[];
+        sectionLabel?: string;
+        sectionUrl?: string;
+    },
+) => SimpleLinkType[] = data => {
+    const links: SimpleLinkType[] = [];
+    const { tags, sectionLabel, sectionUrl } = data;
+
+    const keywordTags = tags
+        .filter(tag => tag.type === 'Keyword' && tag.id !== sectionLabel)
+        .slice(1, 6);
+
+    keywordTags.forEach(tag => {
+        links.push({
+            url: tag.id,
+            title: tag.title,
+        });
+    });
+
+    return links;
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -283,7 +307,10 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             isArticle,
             ...sectionData,
         }),
-        subMetaKeywordLinks: [],
+        subMetaKeywordLinks: getSubMetaKeywordLinks({
+            tags,
+            ...sectionData,
+        }),
         ...sectionData,
     };
 };

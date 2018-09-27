@@ -380,42 +380,28 @@ const sectionLabelLink = css`
     }
 `;
 
-// const SubMetaKeywordLinks: React.SFC<{
-//     CAPI: CAPIType;
-// }> = ({ CAPI }) => {
-//     const links: SubMetaLink[] = [];
-//     const { tags } = CAPI;
+const SubMetaKeywordLinks: React.SFC<{
+    CAPI: CAPIType;
+}> = ({ CAPI }) => {
+    const { subMetaKeywordLinks } = CAPI;
 
-//     if (tags) {
-//         const keywordTags = tags
-//             .filter(tag => tag.type === 'Keyword')
-//             .slice(1, 6);
+    if (subMetaKeywordLinks.length) {
+        return (
+            <ul className={subMetaLinks}>
+                {subMetaKeywordLinks.map((link, i) => (
+                    <SubMetaLink
+                        text={link.title}
+                        url={link.url}
+                        key={link.url}
+                        isLastIndex={i === subMetaKeywordLinks.length - 1}
+                    />
+                ))}
+            </ul>
+        );
+    }
 
-//         keywordTags.forEach(tag => {
-//             links.push({
-//                 url: tag.id,
-//                 text: tag.title,
-//             });
-//         });
-//     }
-
-//     if (links.length) {
-//         return (
-//             <ul className={subMetaLinks}>
-//                 {links.map((link, i) => (
-//                     <SubMetaLink
-//                         text={link.text}
-//                         url={link.url}
-//                         key={link.url}
-//                         isLastIndex={i === links.length - 1}
-//                     />
-//                 ))}
-//             </ul>
-//         );
-//     }
-
-//     return <></>;
-// };
+    return <></>;
+};
 
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
@@ -497,7 +483,7 @@ const ArticleBody: React.SFC<{
             <div className={cx(subMeta, guardianLines)}>
                 <span className={subMetaLabel}>Topics</span>
                 <SubMetaSectionLinks CAPI={CAPI} />
-                {/* <SubMetaKeywordLinks CAPI={CAPI} /> */}
+                <SubMetaKeywordLinks CAPI={CAPI} />
             </div>
         </div>
     </div>
