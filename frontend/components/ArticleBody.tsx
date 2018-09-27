@@ -319,7 +319,7 @@ const ArticleBody: React.SFC<{
                 <div className={metaExtras}>
                     <SharingIcons
                         sharingUrls={CAPI.sharingUrls}
-                        pillarColour={pillarColours[CAPI.pillar]}
+                        pillar={CAPI.pillar}
                         displayIcons={['facebook', 'twitter', 'email']}
                     />
                     <ShareCount config={config} CAPI={CAPI} />
