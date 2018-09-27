@@ -1,5 +1,6 @@
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' ;
 
+type SharePlatform = 'facebook' | 'twitter' | 'email' | 'googlePlus' | 'whatsApp' | 'pinterest' | 'linkedIn' | 'messenger';
 
 // shared type declarations
 interface LinkType {
@@ -39,7 +40,13 @@ interface CAPIType {
     webPublicationDate: Date,
     sectionName: string,
     pageId: string,
-    ageWarning?: string 
+    ageWarning?: string,
+    sharingUrls: {
+        [K in SharePlatform]?: {
+            url: string;
+            userMessage: string;
+        }
+    },
 }
 
 /**
