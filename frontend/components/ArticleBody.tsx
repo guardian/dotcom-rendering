@@ -67,6 +67,7 @@ const wrapper = css`
         }
     }
 `;
+
 const pillarColours = pillarMap(
     pillar =>
         css`
@@ -204,6 +205,18 @@ const bodyStyle = css`
     }
 `;
 
+const linkColour = (pillar: Pillar) => css`
+    a {
+        text-decoration: none;
+        border-bottom: 1px solid #dcdcdc;
+        ${pillarColours[pillar]};
+
+        :hover {
+            border-bottom: 1px solid ${pillarPalette[pillar].main};
+        }
+    }
+`;
+
 const profile = css`
     font-size: 16px;
     line-height: 20px;
@@ -332,7 +345,7 @@ const ArticleBody: React.SFC<{
         </header>
         <div>
             <div
-                className={bodyStyle}
+                className={cx(bodyStyle, linkColour(CAPI.pillar))}
                 dangerouslySetInnerHTML={{
                     __html: CAPI.body,
                 }}
