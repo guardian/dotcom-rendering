@@ -373,6 +373,14 @@ const hideSlash = css`
     }
 `;
 
+const subMetaSharingIcons = css`
+    :after {
+        content: '';
+        display: block;
+        clear: left;
+    }
+`;
+
 const SubMetaLinksList: React.SFC<{
     links: SimpleLinkType[];
     isSectionLinkList: boolean;
@@ -397,6 +405,7 @@ const SubMetaLinksList: React.SFC<{
                         [hideSlash]: i === links.length - 1,
                     },
                 )}
+                key={link.url}
             >
                 <a className={subMetaLink} href={link.url}>
                     {link.title}
@@ -497,6 +506,21 @@ const ArticleBody: React.SFC<{
                         isSectionLinkList={false}
                     />
                 )}
+                <SharingIcons
+                    className={subMetaSharingIcons}
+                    sharingUrls={CAPI.sharingUrls}
+                    pillarColour={pillarColour}
+                    displayIcons={[
+                        'facebook',
+                        'twitter',
+                        'email',
+                        'linkedIn',
+                        'pinterest',
+                        'googlePlus',
+                        'whatsApp',
+                        'messenger',
+                    ]}
+                />
             </div>
         </div>
     </div>
