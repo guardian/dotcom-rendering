@@ -179,8 +179,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
         pillar:
-            findPillar(getNonEmptyString(data, 'config.page.sectionName')) ||
-            'news',
+            findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
         ageWarning: getAgeWarning(webPublicationDate),
     };
 };
