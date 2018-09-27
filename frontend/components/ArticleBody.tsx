@@ -291,6 +291,13 @@ const header = css`
     }
 `;
 
+const sectionLabelLink = css`
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
 const subMeta = css`
     margin-top: 12px;
     padding-top: 18px;
@@ -304,18 +311,31 @@ const subMetaLabel = css`
     color: ${palette.neutral[60]};
 `;
 
-const subMetaLink = css`
+const subMetaLinksList = css`
+    list-style: none;
+`;
+
+const subMetaSectionLinksList = css`
+    line-height: 24px;
+`;
+
+const subMetaKeywordLinksList = css`
+    padding-bottom: 12px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid ${palette.neutral[86]};
+`;
+
+const subMetaLinksListItem = css`
+    margin-right: 5px;
     display: inline-block;
-    font-family: ${serif.body};
     a {
         position: relative;
         display: block;
-        padding: 0 5px;
+        padding-right: 5px;
         text-decoration: none;
     }
     a::after {
         content: '/';
-        font-size: 16px;
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -327,81 +347,64 @@ const subMetaLink = css`
     }
 `;
 
-const hideSlash = css`
-    a::after {
-        content: '';
-    }
-`;
-
-const SubMetaLink: React.SFC<{
-    text: string;
-    url: string;
-    isLastIndex: boolean;
-}> = ({ text, url, isLastIndex }) => (
-    <>
-        <li className={cx(subMetaLink, { [hideSlash]: isLastIndex })}>
-            <a href={url}>{text}</a>
-        </li>
-    </>
-);
-
-const subMetaLinks = css`
-    list-style: none;
-    margin-left: -5px;
-`;
-
-const SubMetaSectionLinks: React.SFC<{
-    CAPI: CAPIType;
-}> = ({ CAPI }) => {
-    const { subMetaSectionLinks } = CAPI;
-
-    if (subMetaSectionLinks.length) {
-        return (
-            <ul className={subMetaLinks}>
-                {subMetaSectionLinks.map((link, i) => (
-                    <SubMetaLink
-                        text={link.title}
-                        url={link.url}
-                        key={link.url}
-                        isLastIndex={i === subMetaSectionLinks.length - 1}
-                    />
-                ))}
-            </ul>
-        );
-    }
-
-    return <></>;
-};
-
-const sectionLabelLink = css`
+const subMetaLink = css`
+    color: ${pillarColour};
     text-decoration: none;
     :hover {
         text-decoration: underline;
     }
 `;
 
-const SubMetaKeywordLinks: React.SFC<{
-    CAPI: CAPIType;
-}> = ({ CAPI }) => {
-    const { subMetaKeywordLinks } = CAPI;
+const subMetaSectionLink = css`
+    font-size: 16px;
+    line-height: 20px;
+    font-family: ${serif.body};
+`;
 
-    if (subMetaKeywordLinks.length) {
-        return (
-            <ul className={subMetaLinks}>
-                {subMetaKeywordLinks.map((link, i) => (
-                    <SubMetaLink
-                        text={link.title}
-                        url={link.url}
-                        key={link.url}
-                        isLastIndex={i === subMetaKeywordLinks.length - 1}
-                    />
-                ))}
-            </ul>
-        );
+const subMetaKeywordLink = css`
+    font-size: 14px;
+    line-height: 22px;
+    font-family: ${sans.body};
+`;
+
+const hideSlash = css`
+    a::after {
+        content: '';
     }
+`;
 
-    return <></>;
-};
+const SubMetaLinksList: React.SFC<{
+    links: SimpleLinkType[];
+    isSectionLinkList: boolean;
+}> = ({ links, isSectionLinkList }) => (
+    <ul
+        className={cx(subMetaLinksList, [
+            isSectionLinkList
+                ? subMetaSectionLinksList
+                : subMetaKeywordLinksList,
+        ])}
+    >
+        {links.map((link, i) => (
+            <li
+                className={cx(
+                    subMetaLinksListItem,
+                    [
+                        isSectionLinkList
+                            ? subMetaSectionLink
+                            : subMetaKeywordLink,
+                    ],
+                    {
+                        [hideSlash]: i === links.length - 1,
+                    },
+                )}
+            >
+                <a className={subMetaLink} href={link.url}>
+                    {link.title}
+                </a>
+            </li>
+        ))}
+    </ul>
+);
 
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
@@ -482,8 +485,18 @@ const ArticleBody: React.SFC<{
             />
             <div className={cx(subMeta, guardianLines)}>
                 <span className={subMetaLabel}>Topics</span>
-                <SubMetaSectionLinks CAPI={CAPI} />
-                <SubMetaKeywordLinks CAPI={CAPI} />
+                {CAPI.subMetaSectionLinks && (
+                    <SubMetaLinksList
+                        links={CAPI.subMetaSectionLinks}
+                        isSectionLinkList={true}
+                    />
+                )}
+                {CAPI.subMetaKeywordLinks && (
+                    <SubMetaLinksList
+                        links={CAPI.subMetaKeywordLinks}
+                        isSectionLinkList={false}
+                    />
+                )}
             </div>
         </div>
     </div>

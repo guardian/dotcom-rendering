@@ -240,13 +240,20 @@ const getSubMetaSectionLinks: (
 const getSubMetaKeywordLinks: (
     data: {
         tags: TagType[];
+        sectionName: string;
         sectionLabel?: string;
         sectionUrl?: string;
     },
 ) => SimpleLinkType[] = data => {
-    const { tags, sectionLabel } = data;
+    const { tags, sectionName, sectionLabel } = data;
+
     const keywordTags = tags
-        .filter(tag => tag.type === 'Keyword' && tag.id !== sectionLabel)
+        .filter(
+            tag =>
+                tag.type === 'Keyword' &&
+                tag.id !== sectionLabel &&
+                tag.title.toLowerCase() !== sectionName.toLowerCase(),
+        )
         .slice(1, 6);
     const toneTags = tags.filter(tag => tag.type === 'Tone');
 
@@ -269,6 +276,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         tags &&
         tags.some(tag => tag.id === 'type/article' && tag.type === 'Type');
     const sectionData = getSectionData(tags);
+    const sectionName = getNonEmptyString(data, 'config.page.section');
 
     return {
         isArticle,
@@ -304,6 +312,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         }),
         subMetaKeywordLinks: getSubMetaKeywordLinks({
             tags,
+            sectionName,
             ...sectionData,
         }),
         ...sectionData,
