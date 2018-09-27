@@ -5,6 +5,7 @@ import get from 'lodash.get';
 import clean from './clean';
 import bigBullets from './big-bullets';
 import { pillarNames } from '../../pillars';
+import { getSharingUrls } from './sharing-urls';
 
 const headline = compose(
     clean,
@@ -57,7 +58,8 @@ const getNumber = (obj: object, selector: string): number => {
     );
 };
 
-const getNonEmptyString = (obj: object, selector: string): string => {
+// TODO temporary export we should move all validation functions into their own module
+export const getNonEmptyString = (obj: object, selector: string): string => {
     const found = get(obj, selector);
     if (typeof found === 'string' && found.length > 0) {
         return found;
@@ -185,6 +187,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
 
         sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
+        sharingUrls: getSharingUrls(data),
     };
 
     const ageWarning = getAgeWarning(webPublicationDate);

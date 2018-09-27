@@ -16,7 +16,7 @@ const navSecondaryColour = palette.neutral[20];
 const openMainMenu = css`
     display: none;
     font-family: ${serif.headline};
-    font-weight: 400;
+    font-weight: 500;
     text-decoration: none;
     color: ${navSecondaryColour};
     cursor: pointer;

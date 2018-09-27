@@ -68,10 +68,7 @@ interface Props {
     CAPI: CAPIType;
 }
 
-export default class ShareCount extends Component<
-    Props,
-    { shareCount?: number }
-> {
+export class ShareCount extends Component<Props, { shareCount?: number }> {
     constructor(props: Props) {
         super(props);
         this.state = {};
