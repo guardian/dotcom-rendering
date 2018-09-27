@@ -24,6 +24,7 @@ const pillarsStyles = css`
     margin: 0;
     list-style: none;
     list-style-image: none;
+    padding-left: 10px;
     ${mobileLandscape} {
         padding-left: 20px;
     }
@@ -55,9 +56,15 @@ const showMenuUnderline = css`
     }
 `;
 
+const pillarStyle = css`
+    & :first-child > a {
+        padding-left: 0;
+    }
+`;
+
 const linkStyle = css`
     font-family: ${serif.headline};
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     cursor: pointer;
     display: block;
@@ -103,7 +110,7 @@ const Pillars: React.SFC<{
 }> = ({ showMainMenu, pillars }) => (
     <ul className={pillarsStyles}>
         {pillars.map(pillar => (
-            <li key={pillar.title}>
+            <li key={pillar.title} className={pillarStyle}>
                 <a
                     className={cx(linkStyle, pillarColours[pillar.pillar], {
                         showMenuUnderline: showMainMenu,

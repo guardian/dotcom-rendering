@@ -36,8 +36,10 @@ export default ({ data }: Props) => {
      * TODO: Identify critical fonts to preload
      */
     const fontFiles = [
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
         'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Regular.woff2',
+        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Semibold.woff2',
+        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
         'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
         // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
         'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Medium.woff2',
