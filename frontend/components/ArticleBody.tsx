@@ -203,6 +203,18 @@ const profile = (colour: string) => css`
     margin-bottom: 4px;
 `;
 
+const byline = css`
+    font-style: italic;
+`;
+
+const bylineLink = css`
+    font-style: normal;
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
 const shareIconList = css`
     ${wide} {
         flex: auto;
@@ -281,6 +293,11 @@ const twitterHandle = css`
         margin-right: 0px;
         fill: ${palette.neutral[46]};
     }
+
+    a {
+        color: ${palette.neutral[46]};
+        text-decoration: none;
+    }
 `;
 
 const dateline = css`
@@ -308,13 +325,38 @@ const metaExtras = css`
 
 const pillarColour = palette.lifestyle.main; // TODO make dynamic
 
-const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
+const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM Z');
 
 const header = css`
     ${until.phablet} {
         margin: 0 -10px;
     }
 `;
+
+const renderByline = (
+    bylineText: string,
+    contributorTags: TagType[],
+): string => {
+    const tagToBylineMarkup = (
+        tag: TagType,
+    ): string => `<span itemscope="" itemtype="http://schema.org/Person" itemprop="author">
+    <a rel="author" class="${profile(
+        pillarColour,
+    )} ${bylineLink}" itemprop="sameAs" data-link-name="auto tag link"
+      href="//www.theguardian.com/${tag.properties.id}"><span itemprop="name">${
+        tag.properties.webTitle
+    }</span></a></span>`;
+
+    const replaceContributorNamesWithLinks = (
+        text: string,
+        tag: TagType,
+    ): string => text.replace(tag.properties.webTitle, tagToBylineMarkup(tag));
+    const newByline = contributorTags.reduce(
+        replaceContributorNamesWithLinks,
+        bylineText,
+    );
+    return newByline;
+};
 
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
@@ -333,11 +375,26 @@ const ArticleBody: React.SFC<{
                 />
             </div>
             <div className={meta}>
-                <div className={profile(pillarColour)}>{CAPI.author}</div>
-                <div className={twitterHandle}>
-                    {/* TODO - from the contributor type tag */}
-                    <TwitterIcon /> @ByRobDavies
+                <div className={profile(pillarColour)}>
+                    <span
+                        className={byline}
+                        dangerouslySetInnerHTML={{
+                            __html: renderByline(CAPI.author.byline, CAPI.tags),
+                        }}
+                    />
                 </div>
+                {CAPI.author.twitterHandle && (
+                    <div className={twitterHandle}>
+                        <TwitterIcon />{' '}
+                        <a
+                            href={`https://www.twitter.com/${
+                                CAPI.author.twitterHandle
+                            }`}
+                        >
+                            @{CAPI.author.twitterHandle}
+                        </a>
+                    </div>
+                )}
                 <div className={dateline}>
                     {dtFormat(CAPI.webPublicationDate)}
                 </div>

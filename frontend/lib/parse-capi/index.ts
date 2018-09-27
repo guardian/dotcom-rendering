@@ -154,8 +154,14 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         getNumber(data, 'config.page.webPublicationDate'),
     );
 
+    const tags = getArray<TagType>(data, 'tags.tags');
+    const leadContributor = tags.filter(
+        tag => tag.properties.tagType === 'Contributor',
+    )[0];
+
     const articleMeta: CAPIType = {
         webPublicationDate,
+        tags,
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
             clean,
@@ -171,7 +177,12 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             .map(block => block.bodyHtml)
             .filter(Boolean)
             .join(''),
-        author: getString(data, 'config.page.author'),
+        author: {
+            byline: getString(data, 'config.page.byline', ''),
+            twitterHandle: leadContributor.properties.twitterHandle,
+            email: leadContributor.properties.emailAddress,
+        },
+
         sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
     };

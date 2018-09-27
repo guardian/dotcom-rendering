@@ -30,16 +30,45 @@ interface NavType {
         links: Array<LinkType>,
     },
 }
+
+interface AuthorType {
+    byline: string,
+    twitterHandle?: string,
+    email?: string
+}
+
 interface CAPIType {
     headline: string,
     standfirst: string,
     main: string,
     body: string,
-    author: string,
+    author: AuthorType,
     webPublicationDate: Date,
     sectionName: string,
     pageId: string,
-    ageWarning?: string 
+    ageWarning?: string,
+    tags: Array<TagType>
+}
+
+interface TagPropertiesType {
+    id: string,
+    url: string,
+    tagType: string,
+    sectionId: string,
+    sectionName: string,
+    webTitle: string,
+    webUrl: string,
+    twitterHandle?: string,
+    bio?: string,
+    description?: string,
+    emailAddress?: string,
+    contributorLargeImagePath?: string,
+    bylineImageUrl?: string,
+    paidContentType?: string
+}
+
+interface TagType {
+    properties: TagPropertiesType
 }
 
 /**
