@@ -181,6 +181,62 @@ const getTags: (data: any) => TagType[] = data => {
     }));
 };
 
+// TODO this is a simple implementation of section data
+// and should be updated to matcch full implementation available at
+// https://github.com/guardian/frontend/blob/master/common/app/model/content.scala#L202
+const getSectionData: (
+    tags: TagType[],
+) => {
+    sectionLabel?: string;
+    sectionUrl?: string;
+} = tags => {
+    const keyWordTag = tags.find(tag => tag.type === 'Keyword');
+
+    if (keyWordTag) {
+        return {
+            sectionLabel: keyWordTag.title,
+            sectionUrl: keyWordTag.id,
+        };
+    }
+
+    return {};
+};
+
+const getSubMetaSectionLinks: (
+    data: {
+        tags: TagType[];
+        isImmersive: boolean;
+        isArticle: boolean;
+        sectionLabel?: string;
+        sectionUrl?: string;
+    },
+) => SimpleLinkType[] = data => {
+    const links: SimpleLinkType[] = [];
+    const { tags, isImmersive, isArticle, sectionLabel, sectionUrl } = data;
+
+    if (!(isImmersive && isArticle)) {
+        if (sectionLabel && sectionUrl) {
+            links.push({
+                url: sectionUrl,
+                title: sectionLabel,
+            });
+        }
+
+        const blogOrSeriesTags = tags.filter(
+            tag => tag.type === 'Blog' || tag.type === 'Series',
+        );
+
+        blogOrSeriesTags.forEach(tag => {
+            links.push({
+                url: tag.id,
+                title: tag.title,
+            });
+        });
+    }
+
+    return links;
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -188,8 +244,15 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const webPublicationDate = new Date(
         getNumber(data, 'config.page.webPublicationDate'),
     );
+    const tags = getTags(data);
+    const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
+    const isArticle =
+        tags &&
+        tags.some(tag => tag.id === 'type/article' && tag.type === 'Type');
+    const sectionData = getSectionData(tags);
 
     return {
+        isArticle,
         webPublicationDate,
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
@@ -207,7 +270,6 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             .filter(Boolean)
             .join(''),
         author: getString(data, 'config.page.author'),
-        sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
         pillar:
@@ -215,6 +277,14 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         ageWarning: getAgeWarning(webPublicationDate),
         tags: getTags(data),
         isImmersive: getBoolean(data, 'config.page.isImmersive', false),
+        subMetaSectionLinks: getSubMetaSectionLinks({
+            tags,
+            isImmersive,
+            isArticle,
+            ...sectionData,
+        }),
+        subMetaKeywordLinks: [],
+        ...sectionData,
     };
 };
 

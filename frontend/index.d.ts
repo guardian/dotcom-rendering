@@ -3,10 +3,13 @@ type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' ;
 type SharePlatform = 'facebook' | 'twitter' | 'email' | 'googlePlus' | 'whatsApp' | 'pinterest' | 'linkedIn' | 'messenger';
 
 // shared type declarations
-interface LinkType {
-    title: string,
+interface SimpleLinkType {
+    url: string;
+    title: string;
+}
+
+interface LinkType extends SimpleLinkType {
     longTitle: string,
-    url: string,
     children?: Array<LinkType>,
     mobileOnly?: boolean,
     pillar?: Pillar,
@@ -37,6 +40,7 @@ interface NavType {
         links: Array<LinkType>,
     },
 }
+
 interface CAPIType {
     headline: string,
     standfirst: string,
@@ -44,7 +48,6 @@ interface CAPIType {
     body: string,
     author: string,
     webPublicationDate: Date,
-    sectionName: string,
     pageId: string,
     ageWarning?: string,
     sharingUrls: {
@@ -55,7 +58,12 @@ interface CAPIType {
     },
     pillar: Pillar,
     tags?: TagType[],
-    isImmersive: boolean
+    isImmersive: boolean,
+    isArticle: boolean,
+    sectionLabel?: string,
+    sectionUrl?: string,
+    subMetaSectionLinks: SimpleLinkType[],
+    subMetaKeywordLinks: SimpleLinkType[],
 }
 
 /**

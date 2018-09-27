@@ -333,32 +333,6 @@ const hideSlash = css`
     }
 `;
 
-// @mixin trailing-slash-item {
-//     display: inline-block;
-
-//     &:last-of-type > a:after {
-//         content: '';
-//     }
-// }
-
-// @mixin trailing-slash-link {
-//     position: relative;
-//     display: block;
-//     padding-left: .3em;
-//     padding-right: .35em;
-// }
-
-// @mixin trailing-slash {
-//     content: '/';
-//     font-size: 1em;
-//     position: absolute;
-//     pointer-events: none;
-
-//     //optically aligns slashes
-//     top: 0;
-//     right: -.19em;
-// }
-
 const SubMetaLink: React.SFC<{
     text: string;
     url: string;
@@ -376,51 +350,20 @@ const subMetaLinks = css`
     margin-left: -5px;
 `;
 
-interface SubMetaLink {
-    url: string;
-    text: string;
-}
-
-const SubMetaLinks: React.SFC<{
+const SubMetaSectionLinks: React.SFC<{
     CAPI: CAPIType;
 }> = ({ CAPI }) => {
-    const links: SubMetaLink[] = [];
-    const { isImmersive, tags } = CAPI;
-    const isArticle =
-        tags &&
-        tags.some(tag => tag.id === 'type/article' && tag.type === 'Type');
+    const { subMetaSectionLinks } = CAPI;
 
-    if (tags && !(isImmersive && isArticle)) {
-        const keyWordTag = tags.find(tag => tag.type === 'Keyword');
-
-        if (keyWordTag) {
-            links.push({
-                url: keyWordTag.id,
-                text: keyWordTag.title,
-            });
-        }
-
-        const blogOrSeriesTags = tags.filter(
-            tag => tag.type === 'Blog' || tag.type === 'Series',
-        );
-
-        blogOrSeriesTags.forEach(tag => {
-            links.push({
-                url: tag.id,
-                text: tag.title,
-            });
-        });
-    }
-
-    if (links.length) {
+    if (subMetaSectionLinks.length) {
         return (
             <ul className={subMetaLinks}>
-                {links.map((link, i) => (
+                {subMetaSectionLinks.map((link, i) => (
                     <SubMetaLink
-                        text={link.text}
+                        text={link.title}
                         url={link.url}
                         key={link.url}
-                        isLastIndex={i === links.length - 1}
+                        isLastIndex={i === subMetaSectionLinks.length - 1}
                     />
                 ))}
             </ul>
@@ -430,15 +373,73 @@ const SubMetaLinks: React.SFC<{
     return <></>;
 };
 
+const sectionLabelLink = css`
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
+// const SubMetaKeywordLinks: React.SFC<{
+//     CAPI: CAPIType;
+// }> = ({ CAPI }) => {
+//     const links: SubMetaLink[] = [];
+//     const { tags } = CAPI;
+
+//     if (tags) {
+//         const keywordTags = tags
+//             .filter(tag => tag.type === 'Keyword')
+//             .slice(1, 6);
+
+//         keywordTags.forEach(tag => {
+//             links.push({
+//                 url: tag.id,
+//                 text: tag.title,
+//             });
+//         });
+//     }
+
+//     if (links.length) {
+//         return (
+//             <ul className={subMetaLinks}>
+//                 {links.map((link, i) => (
+//                     <SubMetaLink
+//                         text={link.text}
+//                         url={link.url}
+//                         key={link.url}
+//                         isLastIndex={i === links.length - 1}
+//                     />
+//                 ))}
+//             </ul>
+//         );
+//     }
+
+//     return <></>;
+// };
+
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
 }> = ({ CAPI, config }) => (
     <div className={wrapper}>
         <header className={header}>
-            <div className={cx(section, pillarColours[CAPI.pillar])}>
-                {CAPI.sectionName}
-            </div>
+            {CAPI.sectionLabel &&
+                CAPI.sectionUrl && (
+                    <div>
+                        <a
+                            className={cx(
+                                sectionLabelLink,
+                                pillarColours[CAPI.pillar],
+                            )}
+                            href={`https://www.theguardian.com/${
+                                CAPI.sectionUrl
+                            }`}
+                            data-link-name="article section"
+                        >
+                            {CAPI.sectionLabel}
+                        </a>
+                    </div>
+                )}
             <div className={headline}>
                 <h1 className={headerStyle}>{CAPI.headline}</h1>
                 <div
@@ -495,7 +496,8 @@ const ArticleBody: React.SFC<{
             />
             <div className={cx(subMeta, guardianLines)}>
                 <span className={subMetaLabel}>Topics</span>
-                <SubMetaLinks CAPI={CAPI} />
+                <SubMetaSectionLinks CAPI={CAPI} />
+                {/* <SubMetaKeywordLinks CAPI={CAPI} /> */}
             </div>
         </div>
     </div>
