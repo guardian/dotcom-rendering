@@ -29,7 +29,7 @@ const style = css`
         content: '';
         display: block;
         position: absolute;
-        transition: background-color 250ms ease-out;
+        transition: all 250ms ease-out;
         z-index: -1;
     }
     :hover:before {
