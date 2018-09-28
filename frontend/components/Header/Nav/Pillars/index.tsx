@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'react-emotion';
-
+// TODO MAKE THE UNDELINE ACTUALLY WORK
 import {
     tablet,
     desktop,
@@ -48,8 +48,10 @@ const pillarsStyles = css`
         }
     }
 `;
-
-const showMenuUnderline = css`
+const menuUnderline = css`
+    text-decoration: underline;
+`;
+const menuUnderlineHover = css`
     :hover {
         text-decoration: underline;
     }
@@ -100,14 +102,21 @@ const linkStyle = css`
 const Pillars: React.SFC<{
     showMainMenu: boolean;
     pillars: PillarType[];
-}> = ({ showMainMenu, pillars }) => (
+    selectedPillar: Pillar;
+}> = ({ showMainMenu, pillars, selectedPillar }) => (
     <ul className={pillarsStyles}>
         {pillars.map(pillar => (
             <li key={pillar.title}>
                 <a
-                    className={cx(linkStyle, pillarColours[pillar.pillar], {
-                        showMenuUnderline: showMainMenu,
-                    })}
+                    className={cx(
+                        linkStyle,
+                        pillarColours[pillar.pillar],
+                        {
+                            [menuUnderlineHover]: showMainMenu,
+                            [menuUnderline]: selectedPillar === pillar.pillar,
+                        },
+                        // menuUnderline,
+                    )}
                     href={pillar.url}
                 >
                     {pillar.title}

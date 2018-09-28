@@ -38,6 +38,7 @@ const subnav = css`
 
 interface Props {
     nav: NavType;
+    selectedPillar: Pillar;
 }
 
 export default class Nav extends Component<
@@ -66,7 +67,7 @@ export default class Nav extends Component<
     }
 
     public render() {
-        const { nav } = this.props;
+        const { nav, selectedPillar } = this.props;
         const toggleMainMenu = () => {
             this.toggleMainMenu();
         };
@@ -97,6 +98,7 @@ export default class Nav extends Component<
                     <Pillars
                         showMainMenu={showMainMenu}
                         pillars={nav.pillars}
+                        selectedPillar={selectedPillar}
                     />
                     <MainMenuToggle
                         showMainMenu={showMainMenu}

@@ -69,7 +69,7 @@ const Article: React.SFC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
-        <Header nav={data.NAV} />
+        <Header nav={data.NAV} selectedPillar={data.CAPI.pillar} />
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>
