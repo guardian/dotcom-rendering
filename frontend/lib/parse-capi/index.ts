@@ -181,8 +181,12 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             .join(''),
         author: {
             byline: getString(data, 'config.page.byline', ''),
-            twitterHandle: leadContributor? leadContributor.properties.twitterHandle : undefined,
-            email: leadContributor ? leadContributor.properties.emailAddres : undefined,
+            twitterHandle: leadContributor
+                ? leadContributor.properties.twitterHandle
+                : undefined,
+            email: leadContributor
+                ? leadContributor.properties.emailAddress
+                : undefined,
         },
 
         sectionName: getNonEmptyString(data, 'config.page.section'),

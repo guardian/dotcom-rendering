@@ -276,7 +276,8 @@ const metaExtras = css`
 
 const pillarColour = palette.lifestyle.main; // TODO make dynamic
 
-const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM Z');
+const dtFormat = (date: Date): string =>
+    dateformat(date, 'ddd d mmm yyyy HH:MM Z');
 
 const header = css`
     ${until.phablet} {
@@ -336,7 +337,7 @@ const ArticleBody: React.SFC<{
                 </div>
                 {CAPI.author.twitterHandle && (
                     <div className={twitterHandle}>
-                        <TwitterIcon />{' '}
+                        <TwitterIcon />
                         <a
                             href={`https://www.twitter.com/${
                                 CAPI.author.twitterHandle
