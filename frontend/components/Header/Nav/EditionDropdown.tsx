@@ -4,11 +4,15 @@ import { Dropdown } from '@guardian/guui';
 import { Link } from '@guardian/guui/components/Dropdown';
 
 import { css } from 'react-emotion';
+import { until } from '@guardian/pasteup/breakpoints';
 
 const editionDropdown = css`
     position: absolute;
     right: 15px;
     z-index: 1072;
+    ${until.desktop} {
+        display: none;
+    }
 `;
 
 const EditionDropdown: React.SFC = () => {

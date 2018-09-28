@@ -7,7 +7,7 @@ import 'ophan-tracker-js';
 // @ts-ignore
 import Article from '../../frontend/pages/Article';
 
-const { data, cssIDs } = window.gu.app;
+const { data, cssIDs } = window.guardian.app;
 
 if (module.hot) {
     module.hot.accept();

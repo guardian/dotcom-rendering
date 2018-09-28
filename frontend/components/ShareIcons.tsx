@@ -1,11 +1,19 @@
 import React from 'react';
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
 import EmailIcon from '@guardian/pasteup/icons/email.svg';
 import { wide } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import { pillarMap, pillarPalette } from '../pillars';
+
+const pillarFill = pillarMap(
+    pillar =>
+        css`
+            fill: ${pillarPalette[pillar].main};
+        `,
+);
 
 const shareIconList = css`
     ${wide} {
@@ -33,7 +41,6 @@ const shareIcon = (colour: string) => css`
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    fill: ${colour};
     box-sizing: content-box;
 
     svg {
@@ -69,8 +76,8 @@ export const SharingIcons: React.SFC<{
         }
     };
     displayIcons: SharePlatform[];
-    pillarColour: string;
-}> = ({ sharingUrls, displayIcons, pillarColour }) => {
+    pillar: Pillar;
+}> = ({ sharingUrls, displayIcons, pillar }) => {
     const icons: { [K in SharePlatform]?: React.ComponentType } = {
         facebook: FacebookIcon,
         twitter: TwitterIconPadded,
@@ -110,7 +117,12 @@ export const SharingIcons: React.SFC<{
                             >
                                 {userMessage}
                             </span>
-                            <span className={shareIcon(pillarColour)}>
+                            <span
+                                className={cx(
+                                    shareIcon(pillarPalette[pillar].main),
+                                    pillarFill[pillar],
+                                )}
+                            >
                                 <Icon />
                             </span>
                         </a>
