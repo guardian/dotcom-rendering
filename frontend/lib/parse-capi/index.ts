@@ -158,9 +158,9 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     );
 
     const tags = getArray<TagType>(data, 'tags.tags');
-    const leadContributor = tags.filter(
+    const leadContributor: TagType = tags.filter(
         tag => tag.properties.tagType === 'Contributor',
-    );
+    )[0];
 
     return {
         webPublicationDate,

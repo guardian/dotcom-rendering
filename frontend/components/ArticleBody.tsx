@@ -239,7 +239,6 @@ const bylineLink = css`
     }
 `;
 
-
 const ageWarning = css`
     font-size: 12px;
     line-height: 16px;
@@ -304,7 +303,6 @@ const pillarColour = palette.lifestyle.main; // TODO make dynamic
 const dtFormat = (date: Date): string =>
     dateformat(date, 'ddd d mmm yyyy HH:MM Z');
 
-
 const header = css`
     ${until.phablet} {
         margin: 0 -10px;
@@ -314,13 +312,12 @@ const header = css`
 const renderByline = (
     bylineText: string,
     contributorTags: TagType[],
+    pillar: Pillar
 ): string => {
     const tagToBylineMarkup = (
         tag: TagType,
     ): string => `<span itemscope="" itemtype="http://schema.org/Person" itemprop="author">
-    <a rel="author" class="${profile(
-        pillarColour,
-    )} ${bylineLink}" itemprop="sameAs" data-link-name="auto tag link"
+    <a rel="author" class="${cx(section, pillarColours[ pillar])} ${bylineLink}" itemprop="sameAs" data-link-name="auto tag link"
       href="//www.theguardian.com/${tag.properties.id}"><span itemprop="name">${
         tag.properties.webTitle
     }</span></a></span>`;
@@ -359,7 +356,7 @@ const ArticleBody: React.SFC<{
                     <span
                         className={byline}
                         dangerouslySetInnerHTML={{
-                            __html: renderByline(CAPI.author.byline, CAPI.tags),
+                            __html: renderByline(CAPI.author.byline, CAPI.tags, CAPI.pillar),
                         }}
                     />
                 </div>
