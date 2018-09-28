@@ -159,7 +159,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const tags = getArray<TagType>(data, 'tags.tags');
     const leadContributor = tags.filter(
         tag => tag.properties.tagType === 'Contributor',
-    )[0];
+    );
 
     const articleMeta: CAPIType = {
         webPublicationDate,
@@ -181,8 +181,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             .join(''),
         author: {
             byline: getString(data, 'config.page.byline', ''),
-            twitterHandle: leadContributor.properties.twitterHandle,
-            email: leadContributor.properties.emailAddress,
+            twitterHandle: leadContributor? leadContributor.properties.twitterHandle : undefined,
+            email: leadContributor ? leadContributor.properties.emailAddres : undefined,
         },
 
         sectionName: getNonEmptyString(data, 'config.page.section'),
