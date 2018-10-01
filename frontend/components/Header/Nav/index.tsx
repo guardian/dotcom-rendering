@@ -31,11 +31,6 @@ const centered = css`
     ${clearFix};
 `;
 
-const subnav = css`
-    background-color: white;
-    border-top: 0.0625rem solid ${palette.neutral[86]};
-`;
-
 interface Props {
     nav: NavType;
     pillar: Pillar;
@@ -111,17 +106,7 @@ export default class Nav extends Component<
                         nav={nav}
                     />
                 </nav>
-                {nav.subNavSections &&
-                    nav.subNavSections.links && (
-                        <div className={subnav}>
-                            <div className={centered}>
-                                <SubNav
-                                    parent={nav.subNavSections.parent}
-                                    links={nav.subNavSections.links}
-                                />
-                            </div>
-                        </div>
-                    )}
+                <SubNav subnav={nav.subNavSections} />
             </div>
         );
     }

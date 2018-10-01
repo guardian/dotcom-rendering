@@ -9,6 +9,8 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
+import { Container } from '@guardian/guui';
+
 const wrapperCollapsed = css`
     height: 36px;
     overflow: hidden;
@@ -16,6 +18,11 @@ const wrapperCollapsed = css`
     ${tablet} {
         height: 42px;
     }
+`;
+
+const subnavWrapper = css`
+    background-color: white;
+    border-top: 0.0625rem solid ${palette.neutral[86]};
 `;
 
 const subnav = css`
@@ -111,8 +118,10 @@ const parentStyle = css`
 `;
 
 interface Props {
-    parent?: LinkType;
-    links: LinkType[];
+    subnav?: {
+        parent?: LinkType;
+        links: LinkType[];
+    };
 }
 
 export default class Subnav extends Component<
@@ -164,8 +173,22 @@ export default class Subnav extends Component<
     }
 
     public render() {
-        const { parent, links } = this.props;
+        const sn = this.props.subnav;
 
+        if (sn) {
+            return (
+                <div className={subnavWrapper}>
+                    <Container>
+                        {this.renderSubnav(sn.links, sn.parent)}
+                    </Container>
+                </div>
+            );
+        }
+
+        return {};
+    }
+
+    private renderSubnav(links: LinkType[], parent?: LinkType | undefined) {
         let lis = [];
 
         if (parent) {
