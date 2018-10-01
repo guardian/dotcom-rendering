@@ -348,7 +348,6 @@ const subMetaLinksListItem = css`
 `;
 
 const subMetaLink = css`
-    color: ${pillarColour};
     text-decoration: none;
     :hover {
         text-decoration: underline;
@@ -384,7 +383,8 @@ const subMetaSharingIcons = css`
 const SubMetaLinksList: React.SFC<{
     links: SimpleLinkType[];
     isSectionLinkList: boolean;
-}> = ({ links, isSectionLinkList }) => (
+    pillar: string;
+}> = ({ links, isSectionLinkList, pillar }) => (
     <ul
         className={cx(subMetaLinksList, [
             isSectionLinkList
@@ -407,7 +407,7 @@ const SubMetaLinksList: React.SFC<{
                 )}
                 key={link.url}
             >
-                <a className={subMetaLink} href={link.url}>
+                <a className={cx(subMetaLink, pillarColours[pillar])} href={link.url}>
                     {link.title}
                 </a>
             </li>
@@ -498,18 +498,20 @@ const ArticleBody: React.SFC<{
                     <SubMetaLinksList
                         links={CAPI.subMetaSectionLinks}
                         isSectionLinkList={true}
+                        pillar={CAPI.pillar}
                     />
                 )}
                 {CAPI.subMetaKeywordLinks && (
                     <SubMetaLinksList
                         links={CAPI.subMetaKeywordLinks}
                         isSectionLinkList={false}
+                        pillar={CAPI.pillar}
                     />
                 )}
                 <SharingIcons
                     className={subMetaSharingIcons}
                     sharingUrls={CAPI.sharingUrls}
-                    pillarColour={pillarColour}
+                    pillar={CAPI.pillar}
                     displayIcons={[
                         'facebook',
                         'twitter',
