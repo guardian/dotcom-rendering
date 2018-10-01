@@ -383,7 +383,7 @@ const subMetaSharingIcons = css`
 const SubMetaLinksList: React.SFC<{
     links: SimpleLinkType[];
     isSectionLinkList: boolean;
-    pillar: string;
+    pillar: Pillar;
 }> = ({ links, isSectionLinkList, pillar }) => (
     <ul
         className={cx(subMetaLinksList, [
@@ -407,7 +407,10 @@ const SubMetaLinksList: React.SFC<{
                 )}
                 key={link.url}
             >
-                <a className={cx(subMetaLink, pillarColours[pillar])} href={link.url}>
+                <a
+                    className={cx(subMetaLink, pillarColours[pillar])}
+                    href={link.url}
+                >
                     {link.title}
                 </a>
             </li>
