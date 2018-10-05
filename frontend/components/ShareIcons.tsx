@@ -4,7 +4,12 @@ import { palette } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
 import EmailIcon from '@guardian/pasteup/icons/email.svg';
-import { wide } from '@guardian/pasteup/breakpoints';
+import LinkedInIcon from '@guardian/pasteup/icons/linked-in.svg';
+import PinterestIcon from '@guardian/pasteup/icons/pinterest.svg';
+import GooglePlusIcon from '@guardian/pasteup/icons/google-plus.svg';
+import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
+import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
+import { phablet, wide } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { pillarMap, pillarPalette } from '../pillars';
 
@@ -61,11 +66,18 @@ const shareIcon = (colour: string) => css`
     }
 `;
 
+const mobileOnlyShareIconsListItem = css`
+    ${phablet} {
+        display: none;
+    }
+`;
+
 interface ShareListItemType {
     id: SharePlatform;
     Icon: React.ComponentType;
     url: string;
     userMessage: string;
+    mobileOnly: boolean;
 }
 
 export const SharingIcons: React.SFC<{
@@ -77,12 +89,20 @@ export const SharingIcons: React.SFC<{
     };
     displayIcons: SharePlatform[];
     pillar: Pillar;
-}> = ({ sharingUrls, displayIcons, pillar }) => {
+    className?: string;
+}> = ({ sharingUrls, displayIcons, pillar, className }) => {
     const icons: { [K in SharePlatform]?: React.ComponentType } = {
         facebook: FacebookIcon,
         twitter: TwitterIconPadded,
         email: EmailIcon,
+        linkedIn: LinkedInIcon,
+        pinterest: PinterestIcon,
+        googlePlus: GooglePlusIcon,
+        whatsApp: WhatsAppIcon,
+        messenger: MessengerIcon,
     };
+
+    const mobileOnlyIcons: SharePlatform[] = ['whatsApp', 'messenger'];
 
     const shareList = displayIcons.reduce((list: ShareListItemType[], id) => {
         const icon = icons[id];
@@ -93,6 +113,7 @@ export const SharingIcons: React.SFC<{
                 {
                     id,
                     Icon: icon,
+                    mobileOnly: mobileOnlyIcons.includes(id),
                 },
                 sharingUrl,
             );
@@ -103,12 +124,23 @@ export const SharingIcons: React.SFC<{
     }, []);
 
     return (
-        <ul className={shareIconList}>
+        <ul className={cx(shareIconList, [className])}>
             {shareList.map(shareListItem => {
-                const { Icon, id, url, userMessage } = shareListItem;
+                const {
+                    Icon,
+                    id,
+                    url,
+                    userMessage,
+                    mobileOnly,
+                } = shareListItem;
 
                 return (
-                    <li className={shareIconsListItem} key={`${id}Share`}>
+                    <li
+                        className={cx(shareIconsListItem, {
+                            [mobileOnlyShareIconsListItem]: mobileOnly,
+                        })}
+                        key={`${id}Share`}
+                    >
                         <a href={url} role="button">
                             <span
                                 className={css`

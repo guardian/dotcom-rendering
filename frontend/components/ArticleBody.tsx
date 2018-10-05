@@ -7,6 +7,7 @@ import dateformat from 'dateformat';
 import { sans, serif } from '@guardian/pasteup/fonts';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
+import { SubMetaLinksList } from './SubMetaLinksList';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -134,6 +135,13 @@ const meta = css`
         order: 1;
     }
 
+    ${until.phablet} {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+`;
+
+const guardianLines = css`
     background-image: repeating-linear-gradient(
         to bottom,
         ${palette.neutral[86]},
@@ -146,11 +154,6 @@ const meta = css`
     background-size: 1px 13px;
     padding-top: 15px;
     margin-bottom: 6px;
-
-    ${until.phablet} {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
 `;
 
 const captionFont = css`
@@ -289,15 +292,57 @@ const header = css`
     }
 `;
 
+const sectionLabelLink = css`
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
+const subMeta = css`
+    margin-top: 12px;
+    padding-top: 18px;
+`;
+
+const subMetaLabel = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    display: block;
+    color: ${palette.neutral[60]};
+`;
+
+const subMetaSharingIcons = css`
+    :after {
+        content: '';
+        display: block;
+        clear: left;
+    }
+`;
+
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
 }> = ({ CAPI, config }) => (
     <div className={wrapper}>
         <header className={header}>
-            <div className={cx(section, pillarColours[CAPI.pillar])}>
-                {CAPI.sectionName}
-            </div>
+            {CAPI.sectionLabel &&
+                CAPI.sectionUrl && (
+                    <div>
+                        <a
+                            className={cx(
+                                sectionLabelLink,
+                                pillarColours[CAPI.pillar],
+                            )}
+                            href={`https://www.theguardian.com/${
+                                CAPI.sectionUrl
+                            }`}
+                            data-link-name="article section"
+                        >
+                            {CAPI.sectionLabel}
+                        </a>
+                    </div>
+                )}
             <div className={headline}>
                 <h1 className={headerStyle}>{CAPI.headline}</h1>
                 <div
@@ -307,7 +352,7 @@ const ArticleBody: React.SFC<{
                     }}
                 />
             </div>
-            <div className={meta}>
+            <div className={cx(meta, guardianLines)}>
                 <div className={cx(profile, pillarColours[CAPI.pillar])}>
                     {CAPI.author}
                 </div>
@@ -352,7 +397,38 @@ const ArticleBody: React.SFC<{
                     __html: CAPI.body,
                 }}
             />
-            <div>Submeta</div>
+            <div className={cx(subMeta, guardianLines)}>
+                <span className={subMetaLabel}>Topics</span>
+                {CAPI.subMetaSectionLinks && (
+                    <SubMetaLinksList
+                        links={CAPI.subMetaSectionLinks}
+                        isSectionLinkList={true}
+                        pillar={CAPI.pillar}
+                    />
+                )}
+                {CAPI.subMetaKeywordLinks && (
+                    <SubMetaLinksList
+                        links={CAPI.subMetaKeywordLinks}
+                        isSectionLinkList={false}
+                        pillar={CAPI.pillar}
+                    />
+                )}
+                <SharingIcons
+                    className={subMetaSharingIcons}
+                    sharingUrls={CAPI.sharingUrls}
+                    pillar={CAPI.pillar}
+                    displayIcons={[
+                        'facebook',
+                        'twitter',
+                        'email',
+                        'linkedIn',
+                        'pinterest',
+                        'googlePlus',
+                        'whatsApp',
+                        'messenger',
+                    ]}
+                />
+            </div>
         </div>
     </div>
 );
