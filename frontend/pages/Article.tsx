@@ -78,7 +78,7 @@ const Article: React.SFC<{
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn} />
                 </article>
-                <MostViewed />
+                <MostViewed sectionName={data.CAPI.sectionName} />
             </Container>
         </main>
 

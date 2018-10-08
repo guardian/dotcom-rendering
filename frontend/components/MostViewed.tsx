@@ -151,45 +151,65 @@ interface Trail {
     url: string;
     linkText: string;
 }
-const fetchTrails: () => Promise<Trail[]> = () =>
-    new Promise((resolve, reject) => {
-        fetch('https://api.nextgen.guardianapps.co.uk/most-read-geo.json?guui')
-            .then(response => {
-                if (!response.ok) {
+
+export const MostViewed: React.SFC<{
+    sectionName: string;
+}> = ({ sectionName }) => {
+    const fetchTrails: () => Promise<Trail[]> = () => {
+        const sectionsWithoutPopular = ['info', 'global'];
+        const hasSection =
+            sectionName && !sectionsWithoutPopular.includes(sectionName);
+        const endpoint = `/most-read${
+            hasSection ? `/${sectionName}` : ''
+        }.json`;
+
+        console.log('endpoint --->', endpoint);
+
+        return new Promise((resolve, reject) => {
+            fetch(
+                `https://api.nextgen.guardianapps.co.uk${endpoint}?guui`,
+            )
+                .then(response => {
+                    if (!response.ok) {
+                        resolve([]);
+                    }
+                    return response.json();
+                })
+                .then(mostRead => {
+                    if ('trails' in mostRead) {
+                        resolve(mostRead.trails as Trail[]);
+                    }
+
                     resolve([]);
-                }
-                return response.json();
-            })
-            .then(mostRead => {
-                if ('trails' in mostRead) {
-                    resolve(mostRead.trails as Trail[]);
-                }
+                })
+                .catch(_ => resolve([]));
+        });
+    };
 
-                resolve([]);
-            })
-            .catch(_ => resolve([]));
-    });
-
-export const MostViewed: React.SFC = () => (
-    <div className={container}>
-        <h2 className={heading}>Most Viewed</h2>
-        <AsyncClientComponent f={fetchTrails}>
-            {({ data }) => (
-                <ul className={list}>
-                    {(data || []).map((trail, i) => (
-                        <li className={listItem} key={trail.url}>
-                            <span className={bigNumber}>
-                                <BigNumber index={i + 1} />
-                            </span>
-                            <h2 className={headlineHeader}>
-                                <a className={headlineLink} href={trail.url}>
-                                    {trail.linkText}
-                                </a>
-                            </h2>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </AsyncClientComponent>
-    </div>
-);
+    return (
+        <div className={container}>
+            <h2 className={heading}>Most Viewed</h2>
+            <AsyncClientComponent f={fetchTrails}>
+                {({ data }) => (
+                    <ul className={list}>
+                        {(data || []).map((trail, i) => (
+                            <li className={listItem} key={trail.url}>
+                                <span className={bigNumber}>
+                                    <BigNumber index={i + 1} />
+                                </span>
+                                <h2 className={headlineHeader}>
+                                    <a
+                                        className={headlineLink}
+                                        href={trail.url}
+                                    >
+                                        {trail.linkText}
+                                    </a>
+                                </h2>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </AsyncClientComponent>
+        </div>
+    );
+};
