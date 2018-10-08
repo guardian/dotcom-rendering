@@ -172,7 +172,7 @@ const getBoolean = (
 };
 
 const getTags: (data: any) => TagType[] = data => {
-    const tags = getArray<any>(data, 'tags.tags', []);
+    const tags = getArray<any>(data, 'tags.tagsz', []);
 
     return tags.map(tag => ({
         id: getNonEmptyString(tag, 'properties.id'),
