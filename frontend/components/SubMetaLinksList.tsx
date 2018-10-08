@@ -17,6 +17,7 @@ const subMetaLinksList = css`
 `;
 
 const subMetaSectionLinksList = css`
+    font-weight: 500;
     line-height: 24px;
 `;
 
