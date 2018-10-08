@@ -333,7 +333,7 @@ const ArticleBody: React.SFC<{
             <header className={header}>
                 {CAPI.sectionLabel &&
                     CAPI.sectionUrl && (
-                        <div>
+                        <div className={section}>
                             <a
                                 className={cx(
                                     sectionLabelLink,
