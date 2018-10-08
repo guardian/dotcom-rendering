@@ -308,7 +308,6 @@ const subMetaLabel = css`
     font-size: 12px;
     line-height: 16px;
     font-family: ${sans.body};
-    font-weight: 500;
     display: block;
     color: ${palette.neutral[60]};
 `;
