@@ -27,21 +27,9 @@ export const init = (): void => {
         siteSpeedSampleRate: 1,
     };
 
-    // Standard Google Analytics loader script, modified to make it more TypeScript-friendly
-    // TODO: find a better way to load third party scripts
-    /* tslint:disable */
-    const currdate: any = new Date();
-    const gaNewElem: any = {};
-    const gaElems: any = {};
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i.ga=i.ga||function(){
-    (i.ga.q=i.ga.q||[]).push(arguments)},i.ga.l=1*currdate;a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga', gaNewElem, gaElems);
-    /* tslint:enable */
-
     const identityId = getCookie('GU_U');
-    const set = `${tracker.id}.set`;
-    const send = `${tracker.id}.send`;
+    const set = `${tracker.name}.set`;
+    const send = `${tracker.name}.send`;
 
     ga('create', tracker.id, 'auto', tracker.name, {
         sampleRate: tracker.sampleRate,
