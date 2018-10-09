@@ -370,7 +370,8 @@ export const extractConfigMeta = (data: {}): ConfigType => {
     };
 };
 
-// All GA fields are optional, we should not bring down the website if a trackable field is missing!
+// All GA fields should  fall back to default values -
+// we should not bring down the website if a trackable field is missing!
 export const extractGAMeta = (data: {}): GADataType => {
     const edition = getString(
         data,
@@ -395,10 +396,10 @@ export const extractGAMeta = (data: {}): GADataType => {
         contentId: getString(data, 'config.page.contentId', ''),
         authorIds: getString(data, 'config.page.authorIds', ''),
         keywordIds: getString(data, 'config.page.keywordIds', ''),
-        toneIds: getString(data, 'config.page.toneIds'),
-        seriesId: getString(data, 'config.page.seriesId'),
+        toneIds: getString(data, 'config.page.toneIds', ''),
+        seriesId: getString(data, 'config.page.seriesId', ''),
         isHosted: getBoolean(data, 'config.page.isHosted', false).toString(),
         edition: edition === 'int' ? 'international' : edition,
-        beaconUrl: getString(data, 'config.page.beaconUrl'),
+        beaconUrl: getString(data, 'config.page.beaconUrl', ''),
     };
 };
