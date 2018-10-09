@@ -185,7 +185,7 @@ export default class Subnav extends Component<
             );
         }
 
-        return {};
+        return null;
     }
 
     private renderSubnav(links: LinkType[], parent?: LinkType | undefined) {
