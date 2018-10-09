@@ -6,7 +6,6 @@ import { until } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown';
 
 const editionDropdown = css`
-    display: none;
     position: absolute;
     right: 15px;
     z-index: 1072;
