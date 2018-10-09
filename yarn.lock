@@ -768,6 +768,16 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
+"@types/gapi.analytics@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@types/gapi.analytics/-/gapi.analytics-0.0.2.tgz#ac4bebaa7e0837a835996077678a97de1b7b3e59"
+  dependencies:
+    "@types/gapi" "*"
+
+"@types/gapi@*":
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/@types/gapi/-/gapi-0.0.36.tgz#e7fb3d4d4a6fbdbd0a9aef1cbd93d3b115d59a3d"
+
 "@types/google.analytics@^0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/google.analytics/-/google.analytics-0.0.39.tgz#19a952003dbf3c7373d655a5c3203b4726b8b802"

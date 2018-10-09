@@ -6,15 +6,17 @@ declare global {
         guardian: {
             app: {
                 data: any;
-                cssIDs: Array<string>;
+                cssIDs: string[];
             };
             config: {
-                ophan?: {
-                    browserId?: string;
-                    pageViewId?: string;
+                ophan: {
+                    browserId: string;
+                    pageViewId: string;
                 };
             };
-        }; 
+        };
+        GoogleAnalyticsObject: string;
+        ga: UniversalAnalytics.ga;
     }
 }
 /*~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */
