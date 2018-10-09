@@ -219,6 +219,20 @@ const bodyStyle = css`
         line-height: 24px;
     }
 
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    figcaption {
+        ${captionFont};
+    }
+
+    figure {
+        margin-top: 16px;
+        margin-bottom: 12px;
+    }
+
     ul {
         margin-bottom: 16px;
     }
