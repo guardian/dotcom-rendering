@@ -48,7 +48,6 @@ const secondaryColumn = css`
     margin-left: 20px;
     margin-top: 6px;
 
-    background-color: ${palette.neutral[93]};
     min-height: 300px;
     display: none;
 
