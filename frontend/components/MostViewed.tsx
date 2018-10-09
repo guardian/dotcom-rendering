@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import {
@@ -52,6 +52,16 @@ const heading = css`
     }
 `;
 
+const listContainer = css`
+    ${leftCol} {
+        margin-left: 160px;
+    }
+
+    ${leftCol} {
+        margin-left: 240px;
+    }
+`;
+
 const list = css`
     margin-top: 12px;
 
@@ -64,14 +74,10 @@ const list = css`
         column-fill: balance;
         column-count: 2;
     }
+`;
 
-    ${leftCol} {
-        margin-left: 160px;
-    }
-
-    ${leftCol} {
-        margin-left: 240px;
-    }
+const hideList = css`
+    display: none;
 `;
 
 const listItem = css`
@@ -147,15 +153,45 @@ const headlineLink = css`
     font-weight: 500;
 `;
 
+const tabsContainer = css`
+    max-width: 460px;
+`;
+
+const listTab = css`
+    width: 230px;
+    float: left;
+    border-top: 3px solid #ededed;
+`;
+
+const tabLink = css`
+    padding-left: 10px;
+    padding-right: 6px;
+    padding-top: 4px;
+    text-align: left;
+    text-decoration: none;
+    line-height: 20px;
+    font-size: 16px;
+    font-family: ${serif.headline};
+    font-weight: 600;
+    min-height: 36px;
+    display: block;
+    background-color: #ededed;
+`;
+
 interface Trail {
     url: string;
     linkText: string;
 }
 
+interface Tab {
+    heading: string;
+    trails: Trail[];
+}
+
 export const MostViewed: React.SFC<{
     sectionName: string;
 }> = ({ sectionName }) => {
-    const fetchTrails: () => Promise<Trail[]> = () => {
+    const fetchTrails: () => Promise<Tab[]> = () => {
         const sectionsWithoutPopular = ['info', 'global'];
         const hasSection =
             sectionName && !sectionsWithoutPopular.includes(sectionName);
@@ -163,12 +199,8 @@ export const MostViewed: React.SFC<{
             hasSection ? `/${sectionName}` : ''
         }.json`;
 
-        console.log('endpoint --->', endpoint);
-
         return new Promise((resolve, reject) => {
-            fetch(
-                `https://api.nextgen.guardianapps.co.uk${endpoint}?guui`,
-            )
+            fetch(`https://api.nextgen.guardianapps.co.uk${endpoint}?guui`)
                 .then(response => {
                     if (!response.ok) {
                         resolve([]);
@@ -176,8 +208,10 @@ export const MostViewed: React.SFC<{
                     return response.json();
                 })
                 .then(mostRead => {
-                    if ('trails' in mostRead) {
-                        resolve(mostRead.trails as Trail[]);
+                    console.log('mostRead --->', mostRead);
+
+                    if (Array.isArray(mostRead)) {
+                        resolve(mostRead);
                     }
 
                     resolve([]);
@@ -191,23 +225,37 @@ export const MostViewed: React.SFC<{
             <h2 className={heading}>Most Viewed</h2>
             <AsyncClientComponent f={fetchTrails}>
                 {({ data }) => (
-                    <ul className={list}>
-                        {(data || []).map((trail, i) => (
-                            <li className={listItem} key={trail.url}>
-                                <span className={bigNumber}>
-                                    <BigNumber index={i + 1} />
-                                </span>
-                                <h2 className={headlineHeader}>
-                                    <a
-                                        className={headlineLink}
-                                        href={trail.url}
-                                    >
-                                        {trail.linkText}
-                                    </a>
-                                </h2>
-                            </li>
+                    <div className={listContainer}>
+                        {Array.isArray(data) &&
+                            data.length > 1 && (
+                                <ol className={tabsContainer}>
+                                    {(data || []).map((tab, i) => (
+                                        <li className={listTab}>
+                                            <a className={tabLink}>{tab.heading}</a>
+                                        </li>
+                                    ))}
+                                </ol>
+                            )}
+                        {(data || []).map((tab, i) => (
+                            <ul className={cx(list, { [hideList]: i > 0 })}>
+                                {(tab.trails || []).map((trail, i) => (
+                                    <li className={listItem} key={trail.url}>
+                                        <span className={bigNumber}>
+                                            <BigNumber index={i + 1} />
+                                        </span>
+                                        <h2 className={headlineHeader}>
+                                            <a
+                                                className={headlineLink}
+                                                href={trail.url}
+                                            >
+                                                {trail.linkText}
+                                            </a>
+                                        </h2>
+                                    </li>
+                                ))}
+                            </ul>
                         ))}
-                    </ul>
+                    </div>
                 )}
             </AsyncClientComponent>
         </div>
