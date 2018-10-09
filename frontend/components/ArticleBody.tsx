@@ -323,114 +323,121 @@ const subMetaSharingIcons = css`
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
-}> = ({ CAPI, config }) => (
-    <div className={wrapper}>
-        <header className={header}>
-            {CAPI.sectionLabel &&
-                CAPI.sectionUrl && (
-                    <div className={section}>
-                        <a
-                            className={cx(
-                                sectionLabelLink,
-                                pillarColours[CAPI.pillar],
-                            )}
-                            href={`https://www.theguardian.com/${
-                                CAPI.sectionUrl
-                            }`}
-                            data-link-name="article section"
-                        >
-                            {CAPI.sectionLabel}
-                        </a>
-                    </div>
-                )}
-            <div className={headline}>
-                <h1 className={headerStyle}>{CAPI.headline}</h1>
-                <div
-                    className={standfirst}
-                    dangerouslySetInnerHTML={{
-                        __html: CAPI.standfirst,
-                    }}
-                />
-            </div>
-            <div className={cx(meta, guardianLines)}>
-                <div className={cx(profile, pillarColours[CAPI.pillar])}>
-                    {CAPI.author}
-                </div>
-                <div className={twitterHandle}>
-                    {/* TODO - from the contributor type tag */}
-                    <TwitterIcon /> @ByRobDavies
-                </div>
-                <div className={dateline}>
-                    {dtFormat(CAPI.webPublicationDate)}
-                </div>
-                <div className={metaExtras}>
-                    <SharingIcons
-                        sharingUrls={CAPI.sharingUrls}
-                        pillar={CAPI.pillar}
-                        displayIcons={['facebook', 'twitter', 'email']}
-                    />
-                    <ShareCount config={config} CAPI={CAPI} />
-                    {CAPI.ageWarning && (
-                        <div
-                            className={cx(
-                                ageWarning,
-                                pillarColours[CAPI.pillar],
-                                pillarFill[CAPI.pillar],
-                            )}
-                        >
-                            <ClockIcon /> {CAPI.ageWarning}
+}> = ({ CAPI, config }) => {
+    const hasSubMetaSectionLinks = CAPI.subMetaSectionLinks.length > 0;
+    const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
+
+    return (
+        <div className={wrapper}>
+            <header className={header}>
+                {CAPI.sectionLabel &&
+                    CAPI.sectionUrl && (
+                        <div className={section}>
+                            <a
+                                className={cx(
+                                    sectionLabelLink,
+                                    pillarColours[CAPI.pillar],
+                                )}
+                                href={`https://www.theguardian.com/${
+                                    CAPI.sectionUrl
+                                }`}
+                                data-link-name="article section"
+                            >
+                                {CAPI.sectionLabel}
+                            </a>
                         </div>
                     )}
+                <div className={headline}>
+                    <h1 className={headerStyle}>{CAPI.headline}</h1>
+                    <div
+                        className={standfirst}
+                        dangerouslySetInnerHTML={{
+                            __html: CAPI.standfirst,
+                        }}
+                    />
+                </div>
+                <div className={cx(meta, guardianLines)}>
+                    <div className={cx(profile, pillarColours[CAPI.pillar])}>
+                        {CAPI.author}
+                    </div>
+                    <div className={twitterHandle}>
+                        {/* TODO - from the contributor type tag */}
+                        <TwitterIcon /> @ByRobDavies
+                    </div>
+                    <div className={dateline}>
+                        {dtFormat(CAPI.webPublicationDate)}
+                    </div>
+                    <div className={metaExtras}>
+                        <SharingIcons
+                            sharingUrls={CAPI.sharingUrls}
+                            pillar={CAPI.pillar}
+                            displayIcons={['facebook', 'twitter', 'email']}
+                        />
+                        <ShareCount config={config} CAPI={CAPI} />
+                        {CAPI.ageWarning && (
+                            <div
+                                className={cx(
+                                    ageWarning,
+                                    pillarColours[CAPI.pillar],
+                                    pillarFill[CAPI.pillar],
+                                )}
+                            >
+                                <ClockIcon /> {CAPI.ageWarning}
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div
+                    className={mainMedia}
+                    dangerouslySetInnerHTML={{
+                        __html: CAPI.main,
+                    }}
+                />
+            </header>
+            <div>
+                <div
+                    className={cx(bodyStyle, linkColour[CAPI.pillar])}
+                    dangerouslySetInnerHTML={{
+                        __html: CAPI.body,
+                    }}
+                />
+                <div className={cx(subMeta, guardianLines)}>
+                    {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
+                        <span className={subMetaLabel}>Topics</span>
+                    )}
+                    {hasSubMetaSectionLinks && (
+                        <SubMetaLinksList
+                            links={CAPI.subMetaSectionLinks}
+                            isSectionLinkList={true}
+                            pillar={CAPI.pillar}
+                        />
+                    )}
+                    {hasSubMetaKeywordLinks && (
+                        <SubMetaLinksList
+                            links={CAPI.subMetaKeywordLinks}
+                            isSectionLinkList={false}
+                            pillar={CAPI.pillar}
+                        />
+                    )}
+                    <SharingIcons
+                        className={subMetaSharingIcons}
+                        sharingUrls={CAPI.sharingUrls}
+                        pillar={CAPI.pillar}
+                        displayIcons={[
+                            'facebook',
+                            'twitter',
+                            'email',
+                            'linkedIn',
+                            'pinterest',
+                            'googlePlus',
+                            'whatsApp',
+                            'messenger',
+                        ]}
+                    />
                 </div>
             </div>
-            <div
-                className={mainMedia}
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.main,
-                }}
-            />
-        </header>
-        <div>
-            <div
-                className={cx(bodyStyle, linkColour[CAPI.pillar])}
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.body,
-                }}
-            />
-            <div className={cx(subMeta, guardianLines)}>
-                <span className={subMetaLabel}>Topics</span>
-                {CAPI.subMetaSectionLinks && (
-                    <SubMetaLinksList
-                        links={CAPI.subMetaSectionLinks}
-                        isSectionLinkList={true}
-                        pillar={CAPI.pillar}
-                    />
-                )}
-                {CAPI.subMetaKeywordLinks && (
-                    <SubMetaLinksList
-                        links={CAPI.subMetaKeywordLinks}
-                        isSectionLinkList={false}
-                        pillar={CAPI.pillar}
-                    />
-                )}
-                <SharingIcons
-                    className={subMetaSharingIcons}
-                    sharingUrls={CAPI.sharingUrls}
-                    pillar={CAPI.pillar}
-                    displayIcons={[
-                        'facebook',
-                        'twitter',
-                        'email',
-                        'linkedIn',
-                        'pinterest',
-                        'googlePlus',
-                        'whatsApp',
-                        'messenger',
-                    ]}
-                />
-            </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default ArticleBody;
