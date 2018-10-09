@@ -108,7 +108,15 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
     mobileOnly: false,
 });
 
-const getAgeWarning = (webPublicationDate: Date): string | undefined => {
+const getAgeWarning = (
+    tags: TagType[],
+    webPublicationDate: Date,
+): string | undefined => {
+    const isNews = tags.some(t => t.id === 'tone/news');
+    if (!isNews) {
+        return;
+    }
+
     const warnLimitDays = 30;
     const currentDate = new Date();
     const dateThreshold = new Date();
@@ -301,8 +309,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         sharingUrls: getSharingUrls(data),
         pillar:
             findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
-        ageWarning: getAgeWarning(webPublicationDate),
         tags: getTags(data),
+        ageWarning: getAgeWarning(tags, webPublicationDate),
         isImmersive: getBoolean(data, 'config.page.isImmersive', false),
         subMetaSectionLinks: getSubMetaSectionLinks({
             tags,

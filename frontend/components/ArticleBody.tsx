@@ -200,11 +200,60 @@ const bodyStyle = css`
         padding-right: 80px;
     }
 
+    h2 {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        margin-bottom: 0.0625rem;
+        font-family: ${serif.body};
+        font-weight: 900;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
     p {
+        font-family: ${serif.body};
+        margin-bottom: 16px;
         font-size: 17px;
         line-height: 24px;
-        font-family: ${serif.body};
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    figcaption {
+        ${captionFont};
+    }
+
+    figure {
+        margin-top: 16px;
         margin-bottom: 12px;
+    }
+
+    ul {
+        margin-bottom: 16px;
+    }
+
+    li {
+        font-family: ${serif.body};
+        margin-bottom: 6px;
+        padding-left: 20px;
+        font-size: 17px;
+        line-height: 24px;
+    }
+
+    li:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 8px;
+        background-color: ${palette.neutral[86]};
+        margin-left: -20px;
     }
 `;
 
