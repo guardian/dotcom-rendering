@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { css, cx } from 'react-emotion';
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import {
     desktop,
-    mobileLandscape,
     tablet,
     leftCol,
+    phablet,
 } from '@guardian/pasteup/breakpoints';
 import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
@@ -46,26 +46,20 @@ const heading = css`
             top: -6px;
         }
     }
-
-    ${leftCol} {
-        width: 220px;
-    }
 `;
 
 const listContainer = css`
-    ${leftCol} {
-        margin-left: 160px;
-    }
+    max-width: 460px;
 
     ${leftCol} {
-        margin-left: 240px;
+        margin-left: 160px;
     }
 `;
 
 const list = css`
     margin-top: 12px;
 
-    ${desktop} {
+    ${tablet} {
         border-top: 1px solid ${palette.neutral[86]};
         width: 620px;
         min-height: 300px;
@@ -154,13 +148,36 @@ const headlineLink = css`
 `;
 
 const tabsContainer = css`
-    max-width: 460px;
+    border-bottom: 1px solid ${palette.neutral[86]};
+
+    &::after {
+        content: '';
+        display: block;
+        clear: left;
+
+        ${tablet} {
+            display: none;
+        }
+    }
+
+    ${tablet} {
+        border-bottom: 0;
+    }
 `;
 
 const listTab = css`
-    width: 230px;
+    width: 50%;
     float: left;
     border-top: 3px solid #ededed;
+    background-color: #ededed;
+
+    ${phablet} {
+        width: 230px;
+    }
+`;
+
+const selectedListTab = css`
+    background-color: #ffffff;
 `;
 
 const tabLink = css`
@@ -170,12 +187,15 @@ const tabLink = css`
     text-align: left;
     text-decoration: none;
     line-height: 20px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: ${serif.headline};
     font-weight: 600;
     min-height: 36px;
     display: block;
-    background-color: #ededed;
+
+    ${tablet} {
+        font-size: 16px;
+    }
 `;
 
 interface Trail {
@@ -188,17 +208,99 @@ interface Tab {
     trails: Trail[];
 }
 
-export const MostViewed: React.SFC<{
+interface Props {
     sectionName: string;
-}> = ({ sectionName }) => {
-    const fetchTrails: () => Promise<Tab[]> = () => {
+}
+
+export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            selectedTabIndex: 0,
+        };
+    }
+
+    public tabSelected(index: number) {
+        this.setState({
+            selectedTabIndex: index,
+        });
+    }
+
+    public render() {
+        console.log(this.state.selectedTabIndex);
+
+        return (
+            <div className={container}>
+                <h2 className={heading}>Most Viewed</h2>
+                <AsyncClientComponent f={this.fetchTrails}>
+                    {({ data }) => (
+                        <div className={listContainer}>
+                            {Array.isArray(data) &&
+                                data.length > 1 && (
+                                    <ol className={tabsContainer}>
+                                        {(data || []).map((tab, i) => (
+                                            <li
+                                                className={cx(listTab, {
+                                                    [selectedListTab]:
+                                                        i ===
+                                                        this.state
+                                                            .selectedTabIndex,
+                                                })}
+                                            >
+                                                <a
+                                                    className={tabLink}
+                                                    onClick={() =>
+                                                        this.tabSelected(i)
+                                                    }
+                                                >
+                                                    {tab.heading}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ol>
+                                )}
+                            {(data || []).map((tab, i) => (
+                                <ul
+                                    className={cx(list, {
+                                        [hideList]:
+                                            i !== this.state.selectedTabIndex,
+                                    })}
+                                >
+                                    {(tab.trails || []).map((trail, ii) => (
+                                        <li
+                                            className={listItem}
+                                            key={trail.url}
+                                        >
+                                            <span className={bigNumber}>
+                                                <BigNumber index={ii + 1} />
+                                            </span>
+                                            <h2 className={headlineHeader}>
+                                                <a
+                                                    className={headlineLink}
+                                                    href={trail.url}
+                                                >
+                                                    {trail.linkText}
+                                                </a>
+                                            </h2>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ))}
+                        </div>
+                    )}
+                </AsyncClientComponent>
+            </div>
+        );
+    }
+
+    public fetchTrails: () => Promise<Tab[]> = () => {
         const sectionsWithoutPopular = ['info', 'global'];
         const hasSection =
-            sectionName && !sectionsWithoutPopular.includes(sectionName);
+            this.props.sectionName &&
+            !sectionsWithoutPopular.includes(this.props.sectionName);
         const endpoint = `/most-read${
-            hasSection ? `/${sectionName}` : ''
+            hasSection ? `/${this.props.sectionName}` : ''
         }.json`;
-
         return new Promise((resolve, reject) => {
             fetch(`https://api.nextgen.guardianapps.co.uk${endpoint}?guui`)
                 .then(response => {
@@ -208,56 +310,12 @@ export const MostViewed: React.SFC<{
                     return response.json();
                 })
                 .then(mostRead => {
-                    console.log('mostRead --->', mostRead);
-
                     if (Array.isArray(mostRead)) {
                         resolve(mostRead);
                     }
-
                     resolve([]);
                 })
                 .catch(_ => resolve([]));
         });
     };
-
-    return (
-        <div className={container}>
-            <h2 className={heading}>Most Viewed</h2>
-            <AsyncClientComponent f={fetchTrails}>
-                {({ data }) => (
-                    <div className={listContainer}>
-                        {Array.isArray(data) &&
-                            data.length > 1 && (
-                                <ol className={tabsContainer}>
-                                    {(data || []).map((tab, i) => (
-                                        <li className={listTab}>
-                                            <a className={tabLink}>{tab.heading}</a>
-                                        </li>
-                                    ))}
-                                </ol>
-                            )}
-                        {(data || []).map((tab, i) => (
-                            <ul className={cx(list, { [hideList]: i > 0 })}>
-                                {(tab.trails || []).map((trail, i) => (
-                                    <li className={listItem} key={trail.url}>
-                                        <span className={bigNumber}>
-                                            <BigNumber index={i + 1} />
-                                        </span>
-                                        <h2 className={headlineHeader}>
-                                            <a
-                                                className={headlineLink}
-                                                href={trail.url}
-                                            >
-                                                {trail.linkText}
-                                            </a>
-                                        </h2>
-                                    </li>
-                                ))}
-                            </ul>
-                        ))}
-                    </div>
-                )}
-            </AsyncClientComponent>
-        </div>
-    );
-};
+}
