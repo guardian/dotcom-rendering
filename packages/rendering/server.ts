@@ -14,6 +14,7 @@ import {
     extractArticleMeta,
     extractNavMeta,
     extractConfigMeta,
+    extractGAMeta,
 } from '../../frontend/lib/parse-capi';
 
 const renderArticle = ({ body }: express.Request, res: express.Response) => {
@@ -25,6 +26,7 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
                 CAPI: extractArticleMeta(body),
                 NAV: extractNavMeta(body),
                 config: extractConfigMeta(body),
+                GA: extractGAMeta(body),
             },
         });
 

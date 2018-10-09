@@ -74,7 +74,23 @@ interface CAPIType {
  * this data could eventually be defined in dotcom-rendering
  */
 interface ConfigType {
-    ajaxUrl: string
+    ajaxUrl: string;
+}
+
+interface GADataType {
+    pillar: string;
+    webTitle: string;
+    section: string;
+    contentType: string;
+    commissioningDesks: string;
+    contentId: string;
+    authorIds: string;
+    keywordIds: string;
+    toneIds: string;
+    seriesId: string;
+    isHosted: string;
+    edition: string;
+    beaconUrl: string;
 }
 
 // 3rd party type declarations

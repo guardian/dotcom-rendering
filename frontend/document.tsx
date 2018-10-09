@@ -13,6 +13,7 @@ interface Props {
         CAPI: CAPIType;
         NAV: NavType;
         config: ConfigType;
+        GA: GADataType;
     };
 }
 

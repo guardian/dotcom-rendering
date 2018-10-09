@@ -369,3 +369,36 @@ export const extractConfigMeta = (data: {}): ConfigType => {
         ajaxUrl: getNonEmptyString(data, 'config.page.ajaxUrl'),
     };
 };
+
+// All GA fields are optional, we should not bring down the website if a trackable field is missing!
+export const extractGAMeta = (data: {}): GADataType => {
+    const edition = getString(
+        data,
+        'guardian.config.page.edition',
+        '',
+    ).toLowerCase();
+
+    return {
+        webTitle: getString(data, 'config.page.webTitle', ''),
+        pillar:
+            findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
+        section: getString(data, 'config.page.section', ''),
+        contentType: getString(data, 'config.page.contentType', '')
+            .toLowerCase()
+            .split(' ')
+            .join(''),
+        commissioningDesks: getString(
+            data,
+            'config.page.commissioningDesks',
+            '',
+        ),
+        contentId: getString(data, 'config.page.contentId', ''),
+        authorIds: getString(data, 'config.page.authorIds', ''),
+        keywordIds: getString(data, 'config.page.keywordIds', ''),
+        toneIds: getString(data, 'config.page.toneIds'),
+        seriesId: getString(data, 'config.page.seriesId'),
+        isHosted: getBoolean(data, 'config.page.isHosted', false).toString(),
+        edition: edition === 'int' ? 'international' : edition,
+        beaconUrl: getString(data, 'config.page.beaconUrl'),
+    };
+};
