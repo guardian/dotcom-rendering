@@ -30,7 +30,7 @@ const style = css`
         position: absolute;
         transition-timing-function: ease-out;
         transition-duration: 250ms;
-        transition-property: background-color 250ms, transform 250ms;
+        transition-property: background-color, transform;
     }
 
     :hover:before {
