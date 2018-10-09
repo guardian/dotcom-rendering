@@ -105,7 +105,6 @@ export default ({
                 <script src="${vendorJS}"></script>
                 <script src="${bundleJS}"></script>
                 <script>${nonBlockingJS}</script>
-                <script async src='https://www.google-analytics.com/analytics.js'></script>
             </body>
-        </html>`; // We load google analytics asynchronously in the foot, and set up the queue in ga.ts
+        </html>`;
 };
