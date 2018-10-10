@@ -299,11 +299,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             clean,
             bigBullets,
         ),
-        main: apply(getString(data, 'contentFields.fields.main', ''), clean),
-        body: getArray<any>(data, 'contentFields.fields.blocks.body')
-            .map(block => block.bodyHtml)
-            .filter(Boolean)
-            .join(''),
+        main: apply(getString(data, 'contentFields.cleanedMainBlockHtml', ''), clean),
+        body: apply(getString(data, 'contentFields.cleanedBodyHtml', ''), clean),
         author: getString(data, 'config.page.author'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
