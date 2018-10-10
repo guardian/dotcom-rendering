@@ -79,6 +79,7 @@ const links = css`
     left: 0;
     top: 0;
     position: absolute;
+    padding-left: 10px;
 `;
 
 const profileSubdomain = 'https://profile.theguardian.com';
