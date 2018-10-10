@@ -130,12 +130,7 @@ const Links: React.SFC<{
     isSignedIn: boolean;
 }> = ({ isPayingMember, isRecentContributor, isSignedIn }) => (
     <div className={links}>
-        {isPayingMember ||
-            isRecentContributor || (
-                <SupportTheGuardian href="/">
-                    Support The Guardian
-                </SupportTheGuardian>
-            )}
+        {isPayingMember || isRecentContributor || <SupportTheGuardian />}
 
         <a
             href={subscribeUrl}

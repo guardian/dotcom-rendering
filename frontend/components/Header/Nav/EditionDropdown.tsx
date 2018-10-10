@@ -1,10 +1,9 @@
 import React from 'react';
+import { css } from 'react-emotion';
 
 import { Dropdown } from '@guardian/guui';
-import { Link } from '@guardian/guui/components/Dropdown';
-
-import { css } from 'react-emotion';
 import { until } from '@guardian/pasteup/breakpoints';
+import { Link } from '@guardian/guui/components/Dropdown';
 
 const editionDropdown = css`
     position: absolute;
