@@ -240,7 +240,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                         <div className={listContainer}>
                             {Array.isArray(data) &&
                                 data.length > 1 && (
-                                    <ol
+                                    <ul
                                         className={tabsContainer}
                                         role="tablist"
                                     >
@@ -278,10 +278,10 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                 </button>
                                             </li>
                                         ))}
-                                    </ol>
+                                    </ul>
                                 )}
                             {(data || []).map((tab, i) => (
-                                <ul
+                                <ol
                                     className={cx(list, {
                                         [hideList]:
                                             i !== this.state.selectedTabIndex,
@@ -309,7 +309,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                             </h2>
                                         </li>
                                     ))}
-                                </ul>
+                                </ol>
                             ))}
                         </div>
                     )}
