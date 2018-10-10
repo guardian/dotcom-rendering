@@ -8,6 +8,7 @@ import {
     leftCol,
     phablet,
 } from '@guardian/pasteup/breakpoints';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
 
@@ -168,8 +169,8 @@ const tabsContainer = css`
 const listTab = css`
     width: 50%;
     float: left;
-    border-top: 3px solid #ededed;
-    background-color: #ededed;
+    border-top: 3px solid ${palette.neutral[93]};
+    background-color: ${palette.neutral[93]};
 
     ${phablet} {
         width: 230px;
@@ -177,10 +178,13 @@ const listTab = css`
 `;
 
 const selectedListTab = css`
-    background-color: #ffffff;
+    background-color: ${palette.neutral[100]};
 `;
 
-const tabLink = css`
+const tabButton = css`
+    margin: 0;
+    border: 0;
+    background: transparent;
     padding-left: 10px;
     padding-right: 6px;
     padding-top: 4px;
@@ -192,6 +196,7 @@ const tabLink = css`
     font-weight: 600;
     min-height: 36px;
     display: block;
+    width: 100%;
 
     ${tablet} {
         font-size: 16px;
@@ -227,8 +232,6 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
     }
 
     public render() {
-        console.log(this.state.selectedTabIndex);
-
         return (
             <div className={container}>
                 <h2 className={heading}>Most Viewed</h2>
@@ -237,7 +240,10 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                         <div className={listContainer}>
                             {Array.isArray(data) &&
                                 data.length > 1 && (
-                                    <ol className={tabsContainer}>
+                                    <ol
+                                        className={tabsContainer}
+                                        role="tablist"
+                                    >
                                         {(data || []).map((tab, i) => (
                                             <li
                                                 className={cx(listTab, {
@@ -246,15 +252,30 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                         this.state
                                                             .selectedTabIndex,
                                                 })}
+                                                role="tab"
+                                                aria-selected={
+                                                    i ===
+                                                    this.state.selectedTabIndex
+                                                }
+                                                aria-controls={`tabs-popular-${i}`}
+                                                id={`tabs-popular-${i}-tab`}
+                                                key={`tabs-popular-${i}-tab`}
                                             >
-                                                <a
-                                                    className={tabLink}
+                                                <button
+                                                    className={tabButton}
                                                     onClick={() =>
                                                         this.tabSelected(i)
                                                     }
                                                 >
+                                                    <span
+                                                        className={css`
+                                                            ${screenReaderOnly};
+                                                        `}
+                                                    >
+                                                        Most viewed{' '}
+                                                    </span>
                                                     {tab.heading}
-                                                </a>
+                                                </button>
                                             </li>
                                         ))}
                                     </ol>
@@ -265,6 +286,10 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                         [hideList]:
                                             i !== this.state.selectedTabIndex,
                                     })}
+                                    id={`tabs-popular-${i}`}
+                                    key={`tabs-popular-${i}`}
+                                    role="tabpanel"
+                                    aria-labelledby={`tabs-popular-${i}-tab`}
                                 >
                                     {(tab.trails || []).map((trail, ii) => (
                                         <li
