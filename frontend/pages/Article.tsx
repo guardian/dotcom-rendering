@@ -11,7 +11,6 @@ import ArticleBody from '../components/ArticleBody';
 import BackToTop from '../components/BackToTop';
 import SubNav from '../components/Header/Nav/SubNav';
 import CookieBanner from '../components/CookieBanner';
-import { ftruncate } from 'fs';
 
 interface ArticleProps {
     CAPI: CAPIType;
@@ -89,7 +88,7 @@ const Article: React.SFC<{
 
         <Footer />
 
-        {true && <CookieBanner />}
+        <CookieBanner />
     </div>
 );
 

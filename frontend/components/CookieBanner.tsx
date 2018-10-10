@@ -4,6 +4,7 @@ import { palette } from '@guardian/pasteup/palette';
 import { sans, serif } from '@guardian/pasteup/fonts';
 import { Container } from '@guardian/guui';
 import TickIcon from '@guardian/pasteup/icons/tick.svg';
+import { getCookie, addCookie } from '../lib/cookie';
 
 const banner = css`
     position: fixed;
@@ -14,7 +15,7 @@ const banner = css`
 
     p {
         font-family: ${serif.body};
-        font-size: 17;
+        font-size: 17px;
         line-height: 24px;
         margin-top: 0;
         margin-bottom: 8px;
@@ -51,8 +52,6 @@ const more = css`
     margin-left: 12px;
 `;
 
-const p = css``;
-
 const button = css`
     font-size: 16px;
     line-height: 24px;
@@ -87,19 +86,30 @@ const actions = css`
     margin-top: 24px;
 `;
 
+const consentCookie = 'GU_TK';
+
 export default class CookieBanner extends Component<{}, { show: boolean }> {
     constructor(props: {}) {
         super(props);
 
         this.state = {
-            show: true,
+            show: false,
         };
-
-        this.accept = this.accept.bind(this);
     }
 
-    public accept() {
+    public accept = () => {
+        // The value is [1|0].[ms since epoch], where 1 indicates assent to tracking
+        // See: https://github.com/guardian/frontend/blob/master/static/src/javascripts/projects/common/modules/commercial/ad-prefs.lib.js#L26
+        const cookieValue = `1.${Date.now()}`;
+        addCookie(consentCookie, cookieValue, 30 * 18, true);
         this.setState({ show: false });
+    };
+
+    public componentDidMount() {
+        const seenBanner = getCookie(consentCookie);
+        if (!seenBanner) {
+            this.setState({ show: true });
+        }
     }
 
     public render() {
