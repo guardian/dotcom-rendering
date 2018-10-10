@@ -62,6 +62,7 @@ interface CAPIType {
     isArticle: boolean,
     sectionLabel?: string,
     sectionUrl?: string,
+    sectionName: string,
     subMetaSectionLinks: SimpleLinkType[],
     subMetaKeywordLinks: SimpleLinkType[],
 }
