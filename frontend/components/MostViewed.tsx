@@ -6,6 +6,7 @@ import {
     desktop,
     tablet,
     leftCol,
+    wide,
     phablet,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -47,6 +48,10 @@ const heading = css`
             top: -6px;
         }
     }
+
+    ${wide} {
+        width: 210px;
+    }
 `;
 
 const listContainer = css`
@@ -54,6 +59,10 @@ const listContainer = css`
 
     ${leftCol} {
         margin-left: 160px;
+    }
+
+    ${wide} {
+        margin-left: 230px;
     }
 `;
 
@@ -317,7 +326,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                     className={headlineLink}
                                                     href={trail.url}
                                                 >
-                                                    {!trail.isLiveBlog && (
+                                                    {trail.isLiveBlog && (
                                                         <span
                                                             className={
                                                                 liveKicker
