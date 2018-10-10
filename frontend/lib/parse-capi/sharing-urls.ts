@@ -7,9 +7,9 @@ const appendParamsToBaseUrl: (
     },
 ) => string = (baseUrl, params) =>
     Object.keys(params).reduce((shareUrl: string, param: string, i: number) => {
-        const seperator = i > 0 ? '&amp;' : '?';
+        const separator = i > 0 ? '&' : '?';
 
-        return `${shareUrl}${seperator}${encodeURIComponent(
+        return `${shareUrl}${separator}${encodeURIComponent(
             param,
         )}=${encodeURIComponent(params[param])}`;
     }, baseUrl);
