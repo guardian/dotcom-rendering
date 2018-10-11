@@ -6,6 +6,7 @@ import {
     desktop,
     leftCol,
     mobileLandscape,
+    until,
 } from '@guardian/pasteup/breakpoints';
 
 import { serif } from '@guardian/pasteup/fonts';
@@ -30,22 +31,29 @@ const pillarsStyles = css`
     }
     li {
         float: left;
+        position: relative;
+        :after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: ${palette.neutral[86]};
+        }
         ${desktop} {
             width: 118px;
-            position: relative;
-            :after {
-                content: '';
-                display: block;
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                width: 1px;
-                background-color: ${palette.neutral[86]};
-            }
         }
         ${leftCol} {
             width: 140px;
+        }
+    }
+    li:last-of-type {
+        ${until.desktop} {
+            :after {
+                display: none;
+            }
         }
     }
 `;

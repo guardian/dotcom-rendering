@@ -4,6 +4,9 @@ import { cx, css } from 'react-emotion';
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import { mobileLandscape, tablet } from '@guardian/pasteup/breakpoints';
+import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
+
 import { getCookie } from '../../../../lib/cookie';
 import { AsyncClientComponent } from '../../../lib/AsyncClientComponent';
 
@@ -11,7 +14,7 @@ const style = css`
     position: relative;
     display: block;
     float: left;
-    margin-left: -10px;
+    margin-left: -20px;
     text-decoration: none;
 
     ${mobileLandscape} {
@@ -54,17 +57,51 @@ const text = css`
     }
 `;
 
+const mobileSignInContainer = css`
+    display: block;
+    padding-top: 12px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-left: -8px;
+    float: left;
+
+    ${tablet} {
+        display: none;
+    }
+`;
+
+const mobileSignInIcon = css`
+    height: 23px;
+    width: 23px;
+    fill: ${palette.neutral[46]};
+`;
+
 const SupportTheGuardian: React.SFC<{}> = () => (
     <AsyncClientComponent f={shouldShow}>
         {({ data }) => (
             <>
                 {data && (
-                    <a className={style} href="/">
-                        <div className={text}>
-                            Support The
-                            <br /> Guardian
+                    <>
+                        <a className={style} href="/">
+                            <div className={text}>
+                                Support The
+                                <br /> Guardian
+                            </div>
+                        </a>
+                        <div className={mobileSignInContainer}>
+                            <a href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN">
+                                <ProfileIcon className={mobileSignInIcon} />
+                                <span
+                                    className={css`
+                                        ${screenReaderOnly};
+                                    `}
+                                >
+                                    Sign in
+                                </span>
+                            </a>
                         </div>
-                    </a>
+                    </>
                 )}
             </>
         )}
