@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import { Dropdown } from '@guardian/guui';
-import { until } from '@guardian/pasteup/breakpoints';
+import { until, wide } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown';
 
 const editionDropdown = css`
@@ -11,6 +11,10 @@ const editionDropdown = css`
     z-index: 1072;
     ${until.desktop} {
         display: none;
+    }
+
+    ${wide} {
+        margin-right: 90px;
     }
 `;
 
