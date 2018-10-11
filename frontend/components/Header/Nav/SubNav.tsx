@@ -36,7 +36,7 @@ const subnav = css`
 
     li {
         float: left;
-        line-height: 42px;
+        line-height: 48px;
     }
 `;
 
