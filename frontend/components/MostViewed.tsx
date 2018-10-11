@@ -6,6 +6,7 @@ import {
     desktop,
     tablet,
     leftCol,
+    wide,
     phablet,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -47,6 +48,10 @@ const heading = css`
             top: -6px;
         }
     }
+
+    ${wide} {
+        width: 210px;
+    }
 `;
 
 const listContainer = css`
@@ -54,6 +59,10 @@ const listContainer = css`
 
     ${leftCol} {
         margin-left: 160px;
+    }
+
+    ${wide} {
+        margin-left: 230px;
     }
 `;
 
@@ -203,9 +212,22 @@ const tabButton = css`
     }
 `;
 
+const liveKicker = css`
+    color: ${palette.news.main};
+    font-weight: 700;
+
+    &::after {
+        content: '/';
+        display: inline-block;
+        font-weight: 900;
+        margin: 0 4px;
+    }
+`;
+
 interface Trail {
     url: string;
     linkText: string;
+    isLiveBlog: boolean;
 }
 
 interface Tab {
@@ -304,6 +326,15 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                     className={headlineLink}
                                                     href={trail.url}
                                                 >
+                                                    {trail.isLiveBlog && (
+                                                        <span
+                                                            className={
+                                                                liveKicker
+                                                            }
+                                                        >
+                                                            Live
+                                                        </span>
+                                                    )}
                                                     {trail.linkText}
                                                 </a>
                                             </h2>
