@@ -90,9 +90,7 @@ const SupportTheGuardian: React.SFC<{}> = () => (
                             </div>
                         </a>
                         <div className={mobileSignInContainer}>
-                            <a
-                                href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN"
-                            >
+                            <a href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN">
                                 <ProfileIcon className={mobileSignInIcon} />
                                 <span
                                     className={css`
