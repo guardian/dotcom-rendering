@@ -5,6 +5,7 @@ import { renderToString } from 'react-dom/server';
 import assets from './lib/assets';
 import htmlTemplate from './htmlTemplate';
 import Article from './pages/Article';
+import { GADataType } from './lib/parse-capi';
 
 interface Props {
     data: {

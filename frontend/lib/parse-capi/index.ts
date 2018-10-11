@@ -370,6 +370,22 @@ export const extractConfigMeta = (data: {}): ConfigType => {
     };
 };
 
+export interface GADataType {
+    pillar: string;
+    webTitle: string;
+    section: string;
+    contentType: string;
+    commissioningDesks: string;
+    contentId: string;
+    authorIds: string;
+    keywordIds: string;
+    toneIds: string;
+    seriesId: string;
+    isHosted: string;
+    edition: string;
+    beaconUrl: string;
+}
+
 // All GA fields should  fall back to default values -
 // we should not bring down the website if a trackable field is missing!
 export const extractGAMeta = (data: {}): GADataType => {

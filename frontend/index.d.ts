@@ -77,22 +77,6 @@ interface ConfigType {
     ajaxUrl: string;
 }
 
-interface GADataType {
-    pillar: string;
-    webTitle: string;
-    section: string;
-    contentType: string;
-    commissioningDesks: string;
-    contentId: string;
-    authorIds: string;
-    keywordIds: string;
-    toneIds: string;
-    seriesId: string;
-    isHosted: string;
-    edition: string;
-    beaconUrl: string;
-}
-
 // 3rd party type declarations
 declare module "emotion-server" {
     export const extractCritical: any;
