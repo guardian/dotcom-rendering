@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
 import BackToTop from '../components/BackToTop';
 import SubNav from '../components/Header/Nav/SubNav';
+import CookieBanner from '../components/CookieBanner';
 
 interface ArticleProps {
     CAPI: CAPIType;
@@ -85,6 +86,8 @@ const Article: React.SFC<{
         <BackToTop />
 
         <Footer />
+
+        <CookieBanner />
     </div>
 );
 
