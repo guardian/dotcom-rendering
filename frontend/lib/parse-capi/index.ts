@@ -225,7 +225,7 @@ const getSubMetaSectionLinks: (
     if (!(isImmersive && isArticle)) {
         if (sectionLabel && sectionUrl) {
             links.push({
-                url: sectionUrl,
+                url: `/${sectionUrl}`,
                 title: sectionLabel,
             });
         }
@@ -236,7 +236,7 @@ const getSubMetaSectionLinks: (
 
         blogOrSeriesTags.forEach(tag => {
             links.push({
-                url: tag.id,
+                url: `/${tag.id}`,
                 title: tag.title,
             });
         });
@@ -266,7 +266,7 @@ const getSubMetaKeywordLinks: (
     const toneTags = tags.filter(tag => tag.type === 'Tone');
 
     return [...keywordTags, ...toneTags].map(tag => ({
-        url: tag.id,
+        url: `/${tag.id}`,
         title: tag.title,
     }));
 };
