@@ -50,7 +50,7 @@ const heading = css`
     }
 
     ${wide} {
-        width: 210px;
+        width: 220px;
     }
 `;
 

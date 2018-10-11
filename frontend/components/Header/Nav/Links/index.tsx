@@ -132,7 +132,6 @@ const Links: React.SFC<{
 }> = ({ isPayingMember, isRecentContributor, isSignedIn }) => (
     <div className={links}>
         {isPayingMember || isRecentContributor || <SupportTheGuardian />}
-
         <a
             href={subscribeUrl}
             className={cx(link({ showAtTablet: true }), paddedLink)}
