@@ -163,10 +163,10 @@ const Links: React.SFC<{
             </div>
         ) : (
             <a
-                className={cx(link({ showAtTablet: false }), paddedLink)}
+                className={cx(link({ showAtTablet: true }), paddedLink)}
                 href={signInUrl}
             >
-                Sign in / Register
+                Sign in
             </a>
         )}
 
