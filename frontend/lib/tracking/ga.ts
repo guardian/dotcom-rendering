@@ -18,6 +18,7 @@ const getQueryParam = (key: string): string => {
 };
 
 export const init = (): void => {
+    const { ga } = window;
     const { ophan } = window.guardian.config;
     const { GA } = window.guardian.app.data;
     const tracker: TrackerConfig = {
