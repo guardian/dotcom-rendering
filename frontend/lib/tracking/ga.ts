@@ -7,9 +7,11 @@ interface TrackerConfig {
     siteSpeedSampleRate: number;
 }
 
-const getQueryParam = (key: string): string => {
-    const query = window.location.search.substring(1);
-    const params = query.split('&');
+const getQueryParam = (
+    key: string,
+    queryString: string,
+): string | undefined => {
+    const params = queryString.substring(1).split('&');
     const pairs = params.map(x => x.split('='));
 
     return pairs
@@ -60,9 +62,9 @@ export const init = (): void => {
     ga(set, 'dimension11', GA.seriesId);
     ga(set, 'dimension15', identityId);
     ga(set, 'dimension16', !!identityId);
-    ga(set, 'dimension21', getQueryParam('INTCMP')); // internal campaign code
-    ga(set, 'dimension22', getQueryParam('CMP_BUNIT')); // campaign business unit
-    ga(set, 'dimension23', getQueryParam('CMP_TU')); // campaign team
+    ga(set, 'dimension21', getQueryParam('INTCMP', window.location.search)); // internal campaign code
+    ga(set, 'dimension22', getQueryParam('CMP_BUNIT', window.location.search)); // campaign business unit
+    ga(set, 'dimension23', getQueryParam('CMP_TU', window.location.search)); // campaign team
     ga(set, 'dimension26', GA.isHosted);
     ga(set, 'dimension27', navigator.userAgent); // I bet you a pint
     ga(set, 'dimension29', window.location.href); // That both of these are already tracked.
