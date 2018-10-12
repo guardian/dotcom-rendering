@@ -85,6 +85,17 @@ const pillarFill = pillarMap(
             fill: ${pillarPalette[pillar].main};
         `,
 );
+const pillarFigCaptionIconColor = pillarMap(
+    pillar =>
+        css`
+            figcaption {
+                &::before {
+                    border-color: transparent transparent
+                        ${pillarPalette[pillar].main} transparent;
+                }
+            }
+        `,
+);
 
 const standfirst = css`
     font-family: ${serif.body};
@@ -202,6 +213,16 @@ const mainMedia = css`
 
     figcaption {
         ${captionFont};
+
+        &::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 5.5px 10px 5.5px;
+            display: inline-block;
+            margin-right: 2px;
+        }
     }
 `;
 
@@ -456,7 +477,10 @@ const ArticleBody: React.SFC<{
                     </div>
                 </div>
                 <div
-                    className={mainMedia}
+                    className={cx(
+                        mainMedia,
+                        pillarFigCaptionIconColor[CAPI.pillar],
+                    )}
                     dangerouslySetInnerHTML={{
                         __html: CAPI.main,
                     }}
