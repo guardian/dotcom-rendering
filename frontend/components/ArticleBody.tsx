@@ -309,28 +309,63 @@ const header = css`
     }
 `;
 
+// this crazy function aims to split bylines such as
+// 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
+const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
+    const contributorTags = tags
+        .filter(t => t.properties.tagType === 'Contributor')
+        .map(c => c.properties.webTitle);
+    const regex = new RegExp(`(${tags.join('|')})`);
+
+    return bylineText.split(regex);
+};
+
 const renderByline = (
     bylineText: string,
     contributorTags: TagType[],
-    pillar: Pillar
-): string => {
-    const tagToBylineMarkup = (
-        tag: TagType,
-    ): string => `<span itemscope="" itemtype="http://schema.org/Person" itemprop="author">
-    <a rel="author" class="${cx(section, pillarColours[ pillar])} ${bylineLink}" itemprop="sameAs" data-link-name="auto tag link"
-      href="//www.theguardian.com/${tag.properties.id}"><span itemprop="name">${
-        tag.properties.webTitle
-    }</span></a></span>`;
-
-    const replaceContributorNamesWithLinks = (
-        text: string,
-        tag: TagType,
-    ): string => text.replace(tag.properties.webTitle, tagToBylineMarkup(tag));
-    const newByline = contributorTags.reduce(
-        replaceContributorNamesWithLinks,
-        bylineText,
+    pillar: Pillar,
+): JSX.Element[] => {
+    const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
+        token => {
+            const associatedTags = contributorTags.filter(
+                t => t.properties.webTitle === token,
+            );
+            if (associatedTags.length > 0) {
+                return BylineContributor(
+                    token,
+                    associatedTags[0].properties.id,
+                    pillar,
+                );
+            }
+            return <>{token}</>;
+        },
     );
-    return newByline;
+
+    return renderedTokens;
+};
+
+const BylineContributor = (
+    contributor: string,
+    contributorTagId: string,
+    pillar: Pillar,
+) => {
+    return (
+        <span
+            itemscope=""
+            itemtype="http://schema.org/Person"
+            itemprop="author"
+        >
+            <a
+                rel="author"
+                className={cx(section, pillarColours[pillar], bylineLink)}
+                itemprop="sameAs"
+                data-link-name="auto tag link"
+                href={`//www.theguardian.com/${contributorTagId}`}
+            >
+                <span itemprop="name">{contributor}</span>
+            </a>
+        </span>
+    );
 };
 
 const ArticleBody: React.SFC<{
@@ -353,12 +388,13 @@ const ArticleBody: React.SFC<{
             </div>
             <div className={meta}>
                 <div className={cx(profile, pillarColours[CAPI.pillar])}>
-                    <span
-                        className={byline}
-                        dangerouslySetInnerHTML={{
-                            __html: renderByline(CAPI.author.byline, CAPI.tags, CAPI.pillar),
-                        }}
-                    />
+                    <span className={byline}>
+                        {renderByline(
+                            CAPI.author.byline,
+                            CAPI.tags,
+                            CAPI.pillar,
+                        )}
+                    </span>
                 </div>
                 {CAPI.author.twitterHandle && (
                     <div className={twitterHandle}>
