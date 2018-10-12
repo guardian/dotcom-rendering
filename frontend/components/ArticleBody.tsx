@@ -198,7 +198,6 @@ const mainMedia = css`
         flex: 0 0 auto; /* IE */
         width: 100%;
         height: 100%;
-        border-bottom: 1px;
     }
 
     figcaption {
