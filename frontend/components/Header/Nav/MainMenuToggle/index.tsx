@@ -48,11 +48,6 @@ const checkbox = css`
         }
     }
 `;
-const label = css`
-    ${desktop} {
-        display: inline-block;
-    }
-`;
 const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     display: block;
     height: 100%;
@@ -144,7 +139,7 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
             />,
             // We can't nest the input inside the label because the structure is important for CSS reasons
             <label
-                className={cx(openMainMenu, label)}
+                className={openMainMenu}
                 htmlFor={CHECKBOX_ID}
                 tabIndex={0}
                 key="OpenMainMenuLabel"
