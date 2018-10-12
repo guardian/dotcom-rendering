@@ -193,7 +193,7 @@ const mainMedia = css`
             display: none;
         }
     }
-    background: pink;
+
     img {
         flex: 0 0 auto; /* IE */
         width: 100%;
