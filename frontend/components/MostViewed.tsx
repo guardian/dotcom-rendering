@@ -207,6 +207,10 @@ const tabButton = css`
     display: block;
     width: 100%;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     ${tablet} {
         font-size: 16px;
     }
