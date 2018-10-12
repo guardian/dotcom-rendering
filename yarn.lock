@@ -768,6 +768,20 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
+"@types/gapi.analytics@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@types/gapi.analytics/-/gapi.analytics-0.0.2.tgz#ac4bebaa7e0837a835996077678a97de1b7b3e59"
+  dependencies:
+    "@types/gapi" "*"
+
+"@types/gapi@*":
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/@types/gapi/-/gapi-0.0.36.tgz#e7fb3d4d4a6fbdbd0a9aef1cbd93d3b115d59a3d"
+
+"@types/google.analytics@^0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@types/google.analytics/-/google.analytics-0.0.39.tgz#19a952003dbf3c7373d655a5c3203b4726b8b802"
+
 "@types/html-minifier@^3.5.2":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@types/html-minifier/-/html-minifier-3.5.2.tgz#f897a13d847a774e9b6fd91497e9b0e0ead71c35"
@@ -5990,9 +6004,9 @@ opener@^1.4.3:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.5.1.tgz#6d2f0e77f1a0af0032aca716c2c1fbb8e7e8abed"
 
-ophan-tracker-js@^1.3.9:
-  version "1.3.11"
-  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.3.11.tgz#8556420e75920c05e73c83386aac61dc85e09f14"
+ophan-tracker-js@^1.3.13:
+  version "1.3.13"
+  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.3.13.tgz#715aa8655c1ec4c8e45379bae55a95b535522ff6"
 
 optionator@^0.8.1:
   version "0.8.2"

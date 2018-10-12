@@ -74,7 +74,7 @@ interface CAPIType {
  * this data could eventually be defined in dotcom-rendering
  */
 interface ConfigType {
-    ajaxUrl: string
+    ajaxUrl: string;
 }
 
 // 3rd party type declarations

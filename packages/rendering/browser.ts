@@ -1,10 +1,8 @@
 import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
-
 import 'ophan-tracker-js';
 
-// @ts-ignore
 import Article from '../../frontend/pages/Article';
 
 const { data, cssIDs } = window.guardian.app;
@@ -28,3 +26,7 @@ if (container) {
 
     hydrateApp(React.createElement(Article, { data }), container);
 }
+
+import('../../frontend/lib/tracking/ga').then(({ init }) => {
+    init();
+});
