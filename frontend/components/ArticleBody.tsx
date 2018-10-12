@@ -56,15 +56,19 @@ const wrapper = css`
         flex-direction: column;
 
         ${leftCol} {
-            display: grid;
-            grid-template-areas: 'section headline' 'meta main-media';
-            grid-template-columns: 160px 1fr;
-            margin-left: -160px;
+            @supports (display: grid) {
+                display: grid;
+                grid-template-areas: 'section headline' 'meta main-media';
+                grid-template-columns: 160px 1fr;
+                margin-left: -160px;
+            }
         }
 
         ${wide} {
-            grid-template-columns: 240px 1fr;
-            margin-left: -240px;
+            @supports (display: grid) {
+                grid-template-columns: 240px 1fr;
+                margin-left: -240px;
+            }
         }
     }
 `;
@@ -103,7 +107,9 @@ const leftColWidth = css`
 
 const section = css`
     ${leftColWidth};
-    grid-template-areas: section;
+    @supports (display: grid) {
+        grid-template-areas: 'section';
+    }
     font-size: 16px;
     line-height: 20px;
     font-family: ${serif.headline};
@@ -120,8 +126,9 @@ const section = css`
 `;
 
 const headline = css`
-    grid-template-areas: headline;
-
+    @supports (display: grid) {
+        grid-template-areas: 'headline';
+    }
     ${until.phablet} {
         padding: 0 10px;
     }
@@ -129,8 +136,9 @@ const headline = css`
 
 const meta = css`
     ${leftColWidth};
-    grid-template-areas: meta;
-
+    @supports (display: grid) {
+        grid-template-areas: 'meta';
+    }
     ${from.tablet.until.leftCol} {
         order: 1;
     }
@@ -164,7 +172,17 @@ const captionFont = css`
 `;
 
 const mainMedia = css`
-    grid-template-areas: main-media;
+    @supports (display: grid) {
+        grid-template-areas: 'main-media';
+    }
+
+    min-height: 1px;
+    /*
+    Thank you IE11, broken in stasis for all eternity.
+
+    https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
+    */
+
     margin-bottom: 6px;
 
     ${until.tablet} {
@@ -175,10 +193,12 @@ const mainMedia = css`
             display: none;
         }
     }
-
+    background: pink;
     img {
+        flex: 0 0 auto; /* IE */
         width: 100%;
         height: 100%;
+        border-bottom: 1px;
     }
 
     figcaption {
