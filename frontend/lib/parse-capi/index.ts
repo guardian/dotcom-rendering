@@ -253,15 +253,14 @@ const getSubMetaSectionLinks: (
 const getTags: (data: any) => TagType[] = data => {
     const tags = getArray<any>(data, 'tags.tags', []);
     return tags.map(tag => {
-      return ({
-          id: getNonEmptyString(tag, 'properties.id'),
-          type: getNonEmptyString(tag, 'properties.tagType'),
-          title: getString(tag, 'properties.webTitle', ''),
-          twitterHandle: getString(tag, 'properties.twitterHandle', '')
-      })});
-
+        return {
+            id: getNonEmptyString(tag, 'properties.id'),
+            type: getNonEmptyString(tag, 'properties.tagType'),
+            title: getString(tag, 'properties.webTitle', ''),
+            twitterHandle: getString(tag, 'properties.twitterHandle', ''),
+        };
+    });
 };
-
 
 const getSubMetaKeywordLinks: (
     data: {
@@ -296,7 +295,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const webPublicationDate = new Date(
         getNumber(data, 'config.page.webPublicationDate'),
     );
-    const tags =getTags(data);
+    const tags = getTags(data);
     const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
     const isArticle =
         tags &&
@@ -333,7 +332,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             twitterHandle: leadContributor
                 ? leadContributor.twitterHandle
                 : undefined,
-              email: 'none'
+            email: 'none',
         },
 
         sectionName: getNonEmptyString(data, 'config.page.section'),

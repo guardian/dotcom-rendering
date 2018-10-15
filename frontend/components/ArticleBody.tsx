@@ -427,7 +427,6 @@ const metaExtras = css`
     }
 `;
 
-
 const dtFormat = (date: Date): string =>
     dateformat(date, 'ddd d mmm yyyy HH:MM Z');
 
@@ -487,11 +486,7 @@ const renderByline = (
                 t => t.title === token,
             );
             if (associatedTags.length > 0) {
-                return BylineContributor(
-                    token,
-                    associatedTags[0].id,
-                    pillar,
-                );
+                return BylineContributor(token, associatedTags[0].id, pillar);
             }
             return <>{token}</>;
         },
