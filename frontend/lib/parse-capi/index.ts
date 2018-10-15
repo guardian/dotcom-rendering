@@ -235,21 +235,6 @@ const getSubMetaSectionLinks: (
     return links;
 };
 
-// id: string,
-// url: string,
-// type: string,
-// sectionId: string,
-// sectionName: string,
-// title: string,
-// webUrl: string,
-// twitterHandle?: string,
-// bio?: string,
-// description?: string,
-// emailAddress?: string,
-// contributorLargeImagePath?: string,
-// bylineImageUrl?: string,
-// paidContentType?: string
-
 const getTags: (data: any) => TagType[] = data => {
     const tags = getArray<any>(data, 'tags.tags', []);
     return tags.map(tag => {
@@ -334,8 +319,6 @@ export const extractArticleMeta = (data: {}): CAPIType => {
                 : undefined,
             email: 'none',
         },
-
-        sectionName: getNonEmptyString(data, 'config.page.section'),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
         pillar:
