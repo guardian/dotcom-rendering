@@ -427,8 +427,6 @@ const metaExtras = css`
     }
 `;
 
-const pillarColour = palette.lifestyle.main; // TODO make dynamic
-
 const dtFormat = (date: Date): string =>
     dateformat(date, 'ddd d mmm yyyy HH:MM Z');
 
@@ -514,7 +512,7 @@ const BylineContributor = (
                 data-link-name="auto tag link"
                 href={`//www.theguardian.com/${contributorTagId}`}
             >
-                <span>{contributor}</span>
+                {contributor}
             </a>
         </span>
     );
