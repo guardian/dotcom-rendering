@@ -17,6 +17,7 @@ import {
     wide,
     leftCol,
     desktop,
+    tablet,
 } from '@guardian/pasteup/breakpoints';
 import { pillarMap, pillarPalette } from '../pillars';
 
@@ -97,6 +98,31 @@ const pillarFigCaptionIconColor = pillarMap(
         `,
 );
 
+const listStyles = css`
+    li {
+        font-family: ${serif.body};
+        margin-bottom: 6px;
+        padding-left: 20px;
+        font-size: 17px;
+        line-height: 24px;
+
+        p {
+            display: inline;
+        }
+    }
+
+    li:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 8px;
+        background-color: ${palette.neutral[86]};
+        margin-left: -20px;
+    }
+`;
+
 const standfirst = css`
     font-family: ${serif.body};
     font-weight: 700;
@@ -104,7 +130,25 @@ const standfirst = css`
     line-height: 22px;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
+
+    ${listStyles};
+
+    p {
+        margin-bottom: 8px;
+    }
 `;
+
+const standfirstLinks = pillarMap(
+    pillar =>
+        css`
+            a {
+                color: ${pillarPalette[pillar].dark};
+                text-decoration: none;
+                border-bottom: 1px solid ${palette.neutral[86]};
+                transition: border-color 0.15s ease-out;
+            }
+        `,
+);
 
 const leftColWidth = css`
     ${leftCol} {
@@ -233,6 +277,10 @@ const headerStyle = css`
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
+
+    ${tablet} {
+        padding-bottom: 36px;
+    }
 `;
 
 const bodyStyle = css`
@@ -274,27 +322,16 @@ const bodyStyle = css`
     }
 
     ul {
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
-    li {
-        font-family: ${serif.body};
-        margin-bottom: 6px;
-        padding-left: 20px;
-        font-size: 17px;
-        line-height: 24px;
+    ${tablet} {
+        ul {
+            margin-bottom: 16px;
+        }
     }
 
-    li:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
-        background-color: ${palette.neutral[86]};
-        margin-left: -20px;
-    }
+    ${listStyles};
 `;
 
 const linkColour = pillarMap(
@@ -439,7 +476,7 @@ const ArticleBody: React.SFC<{
                 <div className={headline}>
                     <h1 className={headerStyle}>{CAPI.headline}</h1>
                     <div
-                        className={standfirst}
+                        className={cx(standfirst, standfirstLinks[CAPI.pillar])}
                         dangerouslySetInnerHTML={{
                             __html: CAPI.standfirst,
                         }}
