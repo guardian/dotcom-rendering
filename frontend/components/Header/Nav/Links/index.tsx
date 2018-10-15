@@ -79,6 +79,7 @@ const links = css`
     left: 0;
     top: 0;
     position: absolute;
+    padding-left: 10px;
 `;
 
 const profileSubdomain = 'https://profile.theguardian.com';
@@ -130,13 +131,7 @@ const Links: React.SFC<{
     isSignedIn: boolean;
 }> = ({ isPayingMember, isRecentContributor, isSignedIn }) => (
     <div className={links}>
-        {isPayingMember ||
-            isRecentContributor || (
-                <SupportTheGuardian href="/">
-                    Support The Guardian
-                </SupportTheGuardian>
-            )}
-
+        {isPayingMember || isRecentContributor || <SupportTheGuardian />}
         <a
             href={subscribeUrl}
             className={cx(link({ showAtTablet: true }), paddedLink)}
@@ -151,7 +146,10 @@ const Links: React.SFC<{
             Find a job
         </a>
 
-        <a href={datingUrl} className={cx(link({ showAtTablet: false }))}>
+        <a
+            href={datingUrl}
+            className={cx(link({ showAtTablet: false }), paddedLink)}
+        >
             Dating
         </a>
 
@@ -165,10 +163,10 @@ const Links: React.SFC<{
             </div>
         ) : (
             <a
-                className={cx(link({ showAtTablet: false }), paddedLink)}
+                className={cx(link({ showAtTablet: true }), paddedLink)}
                 href={signInUrl}
             >
-                Sign in / Register
+                Sign in
             </a>
         )}
 

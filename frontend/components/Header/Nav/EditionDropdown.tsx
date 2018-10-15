@@ -1,10 +1,9 @@
 import React from 'react';
+import { css } from 'react-emotion';
 
 import { Dropdown } from '@guardian/guui';
+import { until, wide } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown';
-
-import { css } from 'react-emotion';
-import { until } from '@guardian/pasteup/breakpoints';
 
 const editionDropdown = css`
     position: absolute;
@@ -12,6 +11,10 @@ const editionDropdown = css`
     z-index: 1072;
     ${until.desktop} {
         display: none;
+    }
+
+    ${wide} {
+        margin-right: 90px;
     }
 `;
 

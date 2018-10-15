@@ -108,7 +108,15 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
     mobileOnly: false,
 });
 
-const getAgeWarning = (webPublicationDate: Date): string | undefined => {
+const getAgeWarning = (
+    tags: TagType[],
+    webPublicationDate: Date,
+): string | undefined => {
+    const isNews = tags.some(t => t.id === 'tone/news');
+    if (!isNews) {
+        return;
+    }
+
     const warnLimitDays = 30;
     const currentDate = new Date();
     const dateThreshold = new Date();
@@ -149,6 +157,120 @@ const getAgeWarning = (webPublicationDate: Date): string | undefined => {
     return undefined;
 };
 
+const getBoolean = (
+    obj: object,
+    selector: string,
+    fallbackValue?: boolean,
+): boolean => {
+    const found = get(obj, selector);
+
+    if (typeof found === 'boolean') {
+        return found;
+    }
+
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
+    }
+
+    throw new Error(
+        `expected boolean  at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
+
+const getTags: (data: any) => TagType[] = data => {
+    const tags = getArray<any>(data, 'tags.tags', []);
+
+    return tags.map(tag => ({
+        id: getNonEmptyString(tag, 'properties.id'),
+        type: getNonEmptyString(tag, 'properties.tagType'),
+        title: getString(tag, 'properties.webTitle', ''),
+    }));
+};
+
+// TODO this is a simple implementation of section data
+// and should be updated to matcch full implementation available at
+// https://github.com/guardian/frontend/blob/master/common/app/model/content.scala#L202
+const getSectionData: (
+    tags: TagType[],
+) => {
+    sectionLabel?: string;
+    sectionUrl?: string;
+} = tags => {
+    const keyWordTag = tags.find(tag => tag.type === 'Keyword');
+
+    if (keyWordTag) {
+        return {
+            sectionLabel: keyWordTag.title,
+            sectionUrl: keyWordTag.id,
+        };
+    }
+
+    return {};
+};
+
+const getSubMetaSectionLinks: (
+    data: {
+        tags: TagType[];
+        isImmersive: boolean;
+        isArticle: boolean;
+        sectionLabel?: string;
+        sectionUrl?: string;
+    },
+) => SimpleLinkType[] = data => {
+    const links: SimpleLinkType[] = [];
+    const { tags, isImmersive, isArticle, sectionLabel, sectionUrl } = data;
+
+    if (!(isImmersive && isArticle)) {
+        if (sectionLabel && sectionUrl) {
+            links.push({
+                url: `/${sectionUrl}`,
+                title: sectionLabel,
+            });
+        }
+
+        const blogOrSeriesTags = tags.filter(
+            tag => tag.type === 'Blog' || tag.type === 'Series',
+        );
+
+        blogOrSeriesTags.forEach(tag => {
+            links.push({
+                url: `/${tag.id}`,
+                title: tag.title,
+            });
+        });
+    }
+
+    return links;
+};
+
+const getSubMetaKeywordLinks: (
+    data: {
+        tags: TagType[];
+        sectionName: string;
+        sectionLabel?: string;
+        sectionUrl?: string;
+    },
+) => SimpleLinkType[] = data => {
+    const { tags, sectionName, sectionLabel } = data;
+
+    const keywordTags = tags
+        .filter(
+            tag =>
+                tag.type === 'Keyword' &&
+                tag.id !== sectionLabel &&
+                tag.title.toLowerCase() !== sectionName.toLowerCase(),
+        )
+        .slice(1, 6);
+    const toneTags = tags.filter(tag => tag.type === 'Tone');
+
+    return [...keywordTags, ...toneTags].map(tag => ({
+        url: `/${tag.id}`,
+        title: tag.title,
+    }));
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -156,15 +278,24 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const webPublicationDate = new Date(
         getNumber(data, 'config.page.webPublicationDate'),
     );
-
     const tags = getArray<TagType>(data, 'tags.tags');
+    const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
+    const isArticle =
+        tags &&
+        tags.some(tag => tag.id === 'type/article' && tag.type === 'Type');
+    const sectionData = getSectionData(tags);
+    const sectionName = getNonEmptyString(data, 'config.page.section');
+
+
     const leadContributor: TagType = tags.filter(
         tag => tag.properties.tagType === 'Contributor',
     )[0];
 
     return {
+        isArticle,
         webPublicationDate,
         tags,
+        sectionName,
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
             clean,
@@ -195,7 +326,20 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         sharingUrls: getSharingUrls(data),
         pillar:
             findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
-        ageWarning: getAgeWarning(webPublicationDate),
+        ageWarning: getAgeWarning(tags, webPublicationDate),
+        isImmersive: getBoolean(data, 'config.page.isImmersive', false),
+        subMetaSectionLinks: getSubMetaSectionLinks({
+            tags,
+            isImmersive,
+            isArticle,
+            ...sectionData,
+        }),
+        subMetaKeywordLinks: getSubMetaKeywordLinks({
+            tags,
+            sectionName,
+            ...sectionData,
+        }),
+        ...sectionData,
     };
 };
 
@@ -238,5 +382,55 @@ export const extractNavMeta = (data: {}): NavType => {
 export const extractConfigMeta = (data: {}): ConfigType => {
     return {
         ajaxUrl: getNonEmptyString(data, 'config.page.ajaxUrl'),
+    };
+};
+
+export interface GADataType {
+    pillar: string;
+    webTitle: string;
+    section: string;
+    contentType: string;
+    commissioningDesks: string;
+    contentId: string;
+    authorIds: string;
+    keywordIds: string;
+    toneIds: string;
+    seriesId: string;
+    isHosted: string;
+    edition: string;
+    beaconUrl: string;
+}
+
+// All GA fields should  fall back to default values -
+// we should not bring down the website if a trackable field is missing!
+export const extractGAMeta = (data: {}): GADataType => {
+    const edition = getString(
+        data,
+        'guardian.config.page.edition',
+        '',
+    ).toLowerCase();
+
+    return {
+        webTitle: getString(data, 'config.page.webTitle', ''),
+        pillar:
+            findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
+        section: getString(data, 'config.page.section', ''),
+        contentType: getString(data, 'config.page.contentType', '')
+            .toLowerCase()
+            .split(' ')
+            .join(''),
+        commissioningDesks: getString(
+            data,
+            'config.page.commissioningDesks',
+            '',
+        ),
+        contentId: getString(data, 'config.page.contentId', ''),
+        authorIds: getString(data, 'config.page.authorIds', ''),
+        keywordIds: getString(data, 'config.page.keywordIds', ''),
+        toneIds: getString(data, 'config.page.toneIds', ''),
+        seriesId: getString(data, 'config.page.seriesId', ''),
+        isHosted: getBoolean(data, 'config.page.isHosted', false).toString(),
+        edition: edition === 'int' ? 'international' : edition,
+        beaconUrl: getString(data, 'config.page.beaconUrl', ''),
     };
 };

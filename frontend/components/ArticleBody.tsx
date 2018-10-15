@@ -7,6 +7,7 @@ import dateformat from 'dateformat';
 import { sans, serif } from '@guardian/pasteup/fonts';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
+import { SubMetaLinksList } from './SubMetaLinksList';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -16,6 +17,7 @@ import {
     wide,
     leftCol,
     desktop,
+    tablet,
 } from '@guardian/pasteup/breakpoints';
 import { pillarMap, pillarPalette } from '../pillars';
 
@@ -55,15 +57,19 @@ const wrapper = css`
         flex-direction: column;
 
         ${leftCol} {
-            display: grid;
-            grid-template-areas: 'section headline' 'meta main-media';
-            grid-template-columns: 160px 1fr;
-            margin-left: -160px;
+            @supports (display: grid) {
+                display: grid;
+                grid-template-areas: 'section headline' 'meta main-media';
+                grid-template-columns: 160px 1fr;
+                margin-left: -160px;
+            }
         }
 
         ${wide} {
-            grid-template-columns: 240px 1fr;
-            margin-left: -240px;
+            @supports (display: grid) {
+                grid-template-columns: 240px 1fr;
+                margin-left: -240px;
+            }
         }
     }
 `;
@@ -80,6 +86,42 @@ const pillarFill = pillarMap(
             fill: ${pillarPalette[pillar].main};
         `,
 );
+const pillarFigCaptionIconColor = pillarMap(
+    pillar =>
+        css`
+            figcaption {
+                &::before {
+                    border-color: transparent transparent
+                        ${pillarPalette[pillar].main} transparent;
+                }
+            }
+        `,
+);
+
+const listStyles = css`
+    li {
+        font-family: ${serif.body};
+        margin-bottom: 6px;
+        padding-left: 20px;
+        font-size: 17px;
+        line-height: 24px;
+
+        p {
+            display: inline;
+        }
+    }
+
+    li:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 8px;
+        background-color: ${palette.neutral[86]};
+        margin-left: -20px;
+    }
+`;
 
 const standfirst = css`
     font-family: ${serif.body};
@@ -88,7 +130,25 @@ const standfirst = css`
     line-height: 22px;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
+
+    ${listStyles};
+
+    p {
+        margin-bottom: 8px;
+    }
 `;
+
+const standfirstLinks = pillarMap(
+    pillar =>
+        css`
+            a {
+                color: ${pillarPalette[pillar].dark};
+                text-decoration: none;
+                border-bottom: 1px solid ${palette.neutral[86]};
+                transition: border-color 0.15s ease-out;
+            }
+        `,
+);
 
 const leftColWidth = css`
     ${leftCol} {
@@ -102,7 +162,9 @@ const leftColWidth = css`
 
 const section = css`
     ${leftColWidth};
-    grid-template-areas: section;
+    @supports (display: grid) {
+        grid-template-areas: 'section';
+    }
     font-size: 16px;
     line-height: 20px;
     font-family: ${serif.headline};
@@ -119,8 +181,9 @@ const section = css`
 `;
 
 const headline = css`
-    grid-template-areas: headline;
-
+    @supports (display: grid) {
+        grid-template-areas: 'headline';
+    }
     ${until.phablet} {
         padding: 0 10px;
     }
@@ -128,12 +191,20 @@ const headline = css`
 
 const meta = css`
     ${leftColWidth};
-    grid-template-areas: meta;
-
+    @supports (display: grid) {
+        grid-template-areas: 'meta';
+    }
     ${from.tablet.until.leftCol} {
         order: 1;
     }
 
+    ${until.phablet} {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+`;
+
+const guardianLines = css`
     background-image: repeating-linear-gradient(
         to bottom,
         ${palette.neutral[86]},
@@ -146,11 +217,6 @@ const meta = css`
     background-size: 1px 13px;
     padding-top: 15px;
     margin-bottom: 6px;
-
-    ${until.phablet} {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
 `;
 
 const captionFont = css`
@@ -161,7 +227,17 @@ const captionFont = css`
 `;
 
 const mainMedia = css`
-    grid-template-areas: main-media;
+    @supports (display: grid) {
+        grid-template-areas: 'main-media';
+    }
+
+    min-height: 1px;
+    /*
+    Thank you IE11, broken in stasis for all eternity.
+
+    https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
+    */
+
     margin-bottom: 6px;
 
     ${until.tablet} {
@@ -174,12 +250,23 @@ const mainMedia = css`
     }
 
     img {
+        flex: 0 0 auto; /* IE */
         width: 100%;
         height: 100%;
     }
 
     figcaption {
         ${captionFont};
+
+        &::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 5.5px 10px 5.5px;
+            display: inline-block;
+            margin-right: 2px;
+        }
     }
 `;
 
@@ -190,6 +277,10 @@ const headerStyle = css`
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
+
+    ${tablet} {
+        padding-bottom: 36px;
+    }
 `;
 
 const bodyStyle = css`
@@ -197,12 +288,50 @@ const bodyStyle = css`
         padding-right: 80px;
     }
 
+    h2 {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        margin-bottom: 0.0625rem;
+        font-family: ${serif.body};
+        font-weight: 900;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
     p {
+        font-family: ${serif.body};
+        margin-bottom: 16px;
         font-size: 17px;
         line-height: 24px;
-        font-family: ${serif.body};
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    figcaption {
+        ${captionFont};
+    }
+
+    figure {
+        margin-top: 16px;
         margin-bottom: 12px;
     }
+
+    ul {
+        margin-bottom: 12px;
+    }
+
+    ${tablet} {
+        ul {
+            margin-bottom: 16px;
+        }
+    }
+
+    ${listStyles};
 `;
 
 const linkColour = pillarMap(
@@ -309,6 +438,34 @@ const header = css`
     }
 `;
 
+const sectionLabelLink = css`
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
+const subMeta = css`
+    margin-top: 12px;
+    padding-top: 18px;
+`;
+
+const subMetaLabel = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    display: block;
+    color: ${palette.neutral[60]};
+`;
+
+const subMetaSharingIcons = css`
+    :after {
+        content: '';
+        display: block;
+        clear: left;
+    }
+`;
+
 // this crazy function aims to split bylines such as
 // 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
 const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
@@ -363,86 +520,145 @@ const BylineContributor = (
     );
 };
 
+
+
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
-}> = ({ CAPI, config }) => (
-    <div className={wrapper}>
-        <header className={header}>
-            <div className={cx(section, pillarColours[CAPI.pillar])}>
-                {CAPI.sectionName}
-            </div>
-            <div className={headline}>
-                <h1 className={headerStyle}>{CAPI.headline}</h1>
-                <div
-                    className={standfirst}
-                    dangerouslySetInnerHTML={{
-                        __html: CAPI.standfirst,
-                    }}
-                />
-            </div>
-            <div className={meta}>
-                <div className={cx(profile, pillarColours[CAPI.pillar])}>
-                    <span className={byline}>
-                        {renderByline(
-                            CAPI.author.byline,
-                            CAPI.tags,
-                            CAPI.pillar,
-                        )}
-                    </span>
-                </div>
-                {CAPI.author.twitterHandle && (
-                    <div className={twitterHandle}>
-                        <TwitterIcon />
-                        <a
-                            href={`https://www.twitter.com/${
-                                CAPI.author.twitterHandle
-                            }`}
-                        >
-                            @{CAPI.author.twitterHandle}
-                        </a>
-                    </div>
-                )}
-                <div className={dateline}>
-                    {dtFormat(CAPI.webPublicationDate)}
-                </div>
-                <div className={metaExtras}>
-                    <SharingIcons
-                        sharingUrls={CAPI.sharingUrls}
-                        pillar={CAPI.pillar}
-                        displayIcons={['facebook', 'twitter', 'email']}
-                    />
-                    <ShareCount config={config} CAPI={CAPI} />
-                    {CAPI.ageWarning && (
-                        <div
-                            className={cx(
-                                ageWarning,
-                                pillarColours[CAPI.pillar],
-                                pillarFill[CAPI.pillar],
-                            )}
-                        >
-                            <ClockIcon /> {CAPI.ageWarning}
+}> = ({ CAPI, config }) => {
+    const hasSubMetaSectionLinks = CAPI.subMetaSectionLinks.length > 0;
+    const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
+
+    return (
+        <div className={wrapper}>
+            <header className={header}>
+                {CAPI.sectionLabel &&
+                    CAPI.sectionUrl && (
+                        <div className={section}>
+                            <a
+                                className={cx(
+                                    sectionLabelLink,
+                                    pillarColours[CAPI.pillar],
+                                )}
+                                href={`https://www.theguardian.com/${
+                                    CAPI.sectionUrl
+                                }`}
+                                data-link-name="article section"
+                            >
+                                {CAPI.sectionLabel}
+                            </a>
                         </div>
                     )}
+                <div className={headline}>
+                    <h1 className={headerStyle}>{CAPI.headline}</h1>
+                    <div
+                        className={cx(standfirst, standfirstLinks[CAPI.pillar])}
+                        dangerouslySetInnerHTML={{
+                            __html: CAPI.standfirst,
+                        }}
+                    />
+                </div>
+                <div className={cx(meta, guardianLines)}>
+                  <div className={cx(profile, pillarColours[CAPI.pillar])}>
+                      <span className={byline}>
+                          {renderByline(
+                              CAPI.author.byline,
+                              CAPI.tags,
+                              CAPI.pillar,
+                          )}
+                      </span>
+                  </div>
+                  {CAPI.author.twitterHandle && (
+                      <div className={twitterHandle}>
+                          <TwitterIcon />
+                          <a
+                              href={`https://www.twitter.com/${
+                                  CAPI.author.twitterHandle
+                              }`}
+                          >
+                              @{CAPI.author.twitterHandle}
+                          </a>
+                      </div>
+                  )}
+                    <div className={dateline}>
+                        {dtFormat(CAPI.webPublicationDate)}
+                    </div>
+                    <div className={metaExtras}>
+                        <SharingIcons
+                            sharingUrls={CAPI.sharingUrls}
+                            pillar={CAPI.pillar}
+                            displayIcons={['facebook', 'twitter', 'email']}
+                        />
+                        <ShareCount config={config} CAPI={CAPI} />
+                        {CAPI.ageWarning && (
+                            <div
+                                className={cx(
+                                    ageWarning,
+                                    pillarColours[CAPI.pillar],
+                                    pillarFill[CAPI.pillar],
+                                )}
+                            >
+                                <ClockIcon /> {CAPI.ageWarning}
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div
+                    className={cx(
+                        mainMedia,
+                        pillarFigCaptionIconColor[CAPI.pillar],
+                    )}
+                    dangerouslySetInnerHTML={{
+                        __html: CAPI.main,
+                    }}
+                />
+
+            </header>
+
+            <div>
+                <div
+                    className={cx(bodyStyle, linkColour[CAPI.pillar])}
+                    dangerouslySetInnerHTML={{
+                        __html: CAPI.body,
+                    }}
+                />
+                <div className={cx(subMeta, guardianLines)}>
+                    {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
+                        <span className={subMetaLabel}>Topics</span>
+                    )}
+                    {hasSubMetaSectionLinks && (
+                        <SubMetaLinksList
+                            links={CAPI.subMetaSectionLinks}
+                            isSectionLinkList={true}
+                            pillar={CAPI.pillar}
+                        />
+                    )}
+                    {hasSubMetaKeywordLinks && (
+                        <SubMetaLinksList
+                            links={CAPI.subMetaKeywordLinks}
+                            isSectionLinkList={false}
+                            pillar={CAPI.pillar}
+                        />
+                    )}
+                    <SharingIcons
+                        className={subMetaSharingIcons}
+                        sharingUrls={CAPI.sharingUrls}
+                        pillar={CAPI.pillar}
+                        displayIcons={[
+                            'facebook',
+                            'twitter',
+                            'email',
+                            'linkedIn',
+                            'pinterest',
+                            'googlePlus',
+                            'whatsApp',
+                            'messenger',
+                        ]}
+                    />
                 </div>
             </div>
-            <div
-                className={mainMedia}
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.main,
-                }}
-            />
-        </header>
-        <div>
-            <div
-                className={cx(bodyStyle, linkColour[CAPI.pillar])}
-                dangerouslySetInnerHTML={{
-                    __html: CAPI.body,
-                }}
-            />
-            <div>Submeta</div>
         </div>
-    </div>
-);
+    );
+};
 
 export default ArticleBody;

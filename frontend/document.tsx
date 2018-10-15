@@ -5,6 +5,7 @@ import { renderToString } from 'react-dom/server';
 import assets from './lib/assets';
 import htmlTemplate from './htmlTemplate';
 import Article from './pages/Article';
+import { GADataType } from './lib/parse-capi';
 
 interface Props {
     data: {
@@ -13,6 +14,7 @@ interface Props {
         CAPI: CAPIType;
         NAV: NavType;
         config: ConfigType;
+        GA: GADataType;
     };
 }
 
@@ -24,9 +26,8 @@ interface RenderToStringResult {
 
 export default ({ data }: Props) => {
     const { page, site, CAPI, NAV, config } = data;
-    const title = `${CAPI.headline} | ${CAPI.sectionName} | The Guardian`;
+    const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
-
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(<Article data={{ CAPI, NAV, config }} />),
     );

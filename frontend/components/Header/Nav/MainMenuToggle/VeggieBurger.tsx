@@ -5,6 +5,7 @@ import {
     desktop,
     mobileMedium,
     mobileLandscape,
+    tablet,
 } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 
@@ -30,6 +31,9 @@ const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     }
     ${mobileLandscape} {
         right: 51px;
+    }
+    ${tablet} {
+        right: 58px;
     }
     ${desktop} {
         display: none;

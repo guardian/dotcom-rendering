@@ -31,13 +31,9 @@ const centered = css`
     ${clearFix};
 `;
 
-const subnav = css`
-    background-color: white;
-    border-top: 0.0625rem solid ${palette.neutral[86]};
-`;
-
 interface Props {
     nav: NavType;
+    pillar: Pillar;
 }
 
 export default class Nav extends Component<
@@ -66,7 +62,7 @@ export default class Nav extends Component<
     }
 
     public render() {
-        const { nav } = this.props;
+        const { nav, pillar } = this.props;
         const toggleMainMenu = () => {
             this.toggleMainMenu();
         };
@@ -97,6 +93,7 @@ export default class Nav extends Component<
                     <Pillars
                         showMainMenu={showMainMenu}
                         pillars={nav.pillars}
+                        pillar={pillar}
                     />
                     <MainMenuToggle
                         showMainMenu={showMainMenu}
@@ -109,17 +106,7 @@ export default class Nav extends Component<
                         nav={nav}
                     />
                 </nav>
-                {nav.subNavSections &&
-                    nav.subNavSections.links && (
-                        <div className={subnav}>
-                            <div className={centered}>
-                                <SubNav
-                                    parent={nav.subNavSections.parent}
-                                    links={nav.subNavSections.links}
-                                />
-                            </div>
-                        </div>
-                    )}
+                <SubNav subnav={nav.subNavSections} pillar={pillar} />
             </div>
         );
     }

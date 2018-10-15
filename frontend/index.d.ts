@@ -3,10 +3,13 @@ type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' ;
 type SharePlatform = 'facebook' | 'twitter' | 'email' | 'googlePlus' | 'whatsApp' | 'pinterest' | 'linkedIn' | 'messenger';
 
 // shared type declarations
-interface LinkType {
-    title: string,
+interface SimpleLinkType {
+    url: string;
+    title: string;
+}
+
+interface LinkType extends SimpleLinkType {
     longTitle: string,
-    url: string,
     children?: Array<LinkType>,
     mobileOnly?: boolean,
     pillar?: Pillar,
@@ -20,6 +23,12 @@ interface PillarType extends LinkType {
 
 interface MoreType extends LinkType {
     more: true
+}
+
+interface TagType {
+    id: string,
+    type: string,
+    title: string,
 }
 
 interface NavType {
@@ -45,7 +54,6 @@ interface CAPIType {
     body: string,
     author: AuthorType,
     webPublicationDate: Date,
-    sectionName: string,
     pageId: string,
     ageWarning?: string,
     sharingUrls: {
@@ -55,7 +63,14 @@ interface CAPIType {
         }
     },
     tags: Array<TagType>,
-    pillar: Pillar
+    pillar: Pillar,
+    isImmersive: boolean,
+    isArticle: boolean,
+    sectionLabel?: string,
+    sectionUrl?: string,
+    sectionName: string,
+    subMetaSectionLinks: SimpleLinkType[],
+    subMetaKeywordLinks: SimpleLinkType[],
 }
 
 interface TagPropertiesType {
@@ -86,7 +101,7 @@ interface TagType {
  * this data could eventually be defined in dotcom-rendering
  */
 interface ConfigType {
-    ajaxUrl: string
+    ajaxUrl: string;
 }
 
 // 3rd party type declarations

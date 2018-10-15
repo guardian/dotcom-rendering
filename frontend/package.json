@@ -28,6 +28,8 @@
     "@types/compose-function": "^0.0.30",
     "@types/dateformat": "^1.0.1",
     "@types/dompurify": "^0.0.31",
+    "@types/gapi.analytics": "^0.0.2",
+    "@types/google.analytics": "^0.0.39",
     "@types/html-minifier": "^3.5.2",
     "@types/jsdom": "^11.0.6",
     "@types/lodash.get": "^4.4.4",

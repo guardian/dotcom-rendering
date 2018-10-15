@@ -6,6 +6,7 @@ import {
     desktop,
     leftCol,
     mobileLandscape,
+    until,
 } from '@guardian/pasteup/breakpoints';
 
 import { serif } from '@guardian/pasteup/fonts';
@@ -30,22 +31,29 @@ const pillarsStyles = css`
     }
     li {
         float: left;
+        position: relative;
+        :after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: ${palette.neutral[86]};
+        }
         ${desktop} {
             width: 118px;
-            position: relative;
-            :after {
-                content: '';
-                display: block;
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                width: 1px;
-                background-color: ${palette.neutral[86]};
-            }
         }
         ${leftCol} {
             width: 140px;
+        }
+    }
+    li:last-of-type {
+        ${until.desktop} {
+            :after {
+                display: none;
+            }
         }
     }
 `;
@@ -88,7 +96,6 @@ const linkStyle = css`
         display: block;
         left: 0;
         position: absolute;
-        border-bottom: 4px solid currentColor;
         right: 0;
         bottom: -4px;
         transition: transform 150ms ease-out;
@@ -103,21 +110,50 @@ const linkStyle = css`
         transform: translateY(-4px);
     }
 `;
+const pillarUnderline = pillarMap(
+    pillar => css`
+        :after {
+            border-bottom: 4px solid ${pillarPalette[pillar].dark};
+        }
+    `,
+);
+
+const forceUnderline = css`
+    :after {
+        transform: translateY(-4px);
+    }
+    :focus:after {
+        transform: translateY(-4px);
+    }
+    :hover {
+        text-decoration: none;
+    }
+    :hover:after {
+        transform: translateY(-4px);
+    }
+`; // A11Y warning: this styling has no focus state for the selected pillar
 
 const Pillars: React.SFC<{
     showMainMenu: boolean;
     pillars: PillarType[];
-}> = ({ showMainMenu, pillars }) => (
+    pillar: Pillar;
+}> = ({ showMainMenu, pillars, pillar }) => (
     <ul className={pillarsStyles}>
-        {pillars.map(pillar => (
-            <li key={pillar.title} className={pillarStyle}>
+        {pillars.map(p => (
+            <li key={p.title} className={pillarStyle}>
                 <a
-                    className={cx(linkStyle, pillarColours[pillar.pillar], {
-                        showMenuUnderline: showMainMenu,
-                    })}
-                    href={pillar.url}
+                    className={cx(
+                        linkStyle,
+                        pillarColours[p.pillar],
+                        pillarUnderline[p.pillar],
+                        {
+                            [showMenuUnderline]: showMainMenu,
+                            [forceUnderline]: p.pillar === pillar,
+                        },
+                    )}
+                    href={p.url}
                 >
-                    {pillar.title}
+                    {p.title}
                 </a>
             </li>
         ))}

@@ -6,6 +6,7 @@ import {
     mobileMedium,
     mobileLandscape,
     desktop,
+    tablet,
 } from '@guardian/pasteup/breakpoints';
 import { Columns } from './Columns';
 import { palette } from '@guardian/pasteup/palette';
@@ -46,6 +47,9 @@ const mainMenu = css`
     }
     ${mobileLandscape} {
         margin-right: 70px;
+    }
+    ${tablet} {
+        margin-right: 100px;
     }
     ${desktop} {
         display: none;

@@ -8,6 +8,9 @@ import {
     mobileMedium,
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
+import { pillarPalette } from '../../../pillars';
+
+import { Container } from '@guardian/guui';
 
 const wrapperCollapsed = css`
     height: 36px;
@@ -16,6 +19,11 @@ const wrapperCollapsed = css`
     ${tablet} {
         height: 42px;
     }
+`;
+
+const subnavWrapper = css`
+    background-color: white;
+    border-top: 0.0625rem solid ${palette.neutral[86]};
 `;
 
 const subnav = css`
@@ -28,7 +36,7 @@ const subnav = css`
 
     li {
         float: left;
-        line-height: 42px;
+        line-height: 48px;
     }
 `;
 
@@ -97,22 +105,29 @@ const parentLinkStyle = css`
     font-weight: 700;
 `;
 
-const parentStyle = css`
-    :after {
-        content: '';
-        display: inline-block;
-        width: 0;
-        height: 0;
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
-        border-left: 10px solid ${palette.neutral[7]};
-        margin-left: 2px;
-    }
-`;
+const parentStyle = (pillar?: Pillar): string => {
+    const colour = pillar ? pillarPalette[pillar].main : palette.neutral[7];
+
+    return css`
+        :after {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 10px solid ${colour};
+            margin-left: 2px;
+        }
+    `;
+};
 
 interface Props {
-    parent?: LinkType;
-    links: LinkType[];
+    subnav?: {
+        parent?: LinkType;
+        links: LinkType[];
+    };
+    pillar: Pillar;
 }
 
 export default class Subnav extends Component<
@@ -164,13 +179,35 @@ export default class Subnav extends Component<
     }
 
     public render() {
-        const { parent, links } = this.props;
+        const sn = this.props.subnav;
 
+        if (sn) {
+            return (
+                <div className={subnavWrapper}>
+                    <Container>
+                        {this.renderSubnav(
+                            sn.links,
+                            this.props.pillar,
+                            sn.parent,
+                        )}
+                    </Container>
+                </div>
+            );
+        }
+
+        return null;
+    }
+
+    private renderSubnav(
+        links: LinkType[],
+        pillar: Pillar,
+        parent?: LinkType | undefined,
+    ) {
         let lis = [];
 
         if (parent) {
             const parentLink = (
-                <li key={parent.url} className={parentStyle}>
+                <li key={parent.url} className={parentStyle(pillar)}>
                     <a className={parentLinkStyle} href={parent.url}>
                         {parent.title}
                     </a>

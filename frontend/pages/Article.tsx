@@ -9,6 +9,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
 import BackToTop from '../components/BackToTop';
+import SubNav from '../components/Header/Nav/SubNav';
+import CookieBanner from '../components/CookieBanner';
 
 interface ArticleProps {
     CAPI: CAPIType;
@@ -47,7 +49,6 @@ const secondaryColumn = css`
     margin-left: 20px;
     margin-top: 6px;
 
-    background-color: ${palette.neutral[93]};
     min-height: 300px;
     display: none;
 
@@ -70,18 +71,23 @@ const Article: React.SFC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
-        <Header nav={data.NAV} />
+        <Header nav={data.NAV} pillar={data.CAPI.pillar} />
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn} />
                 </article>
-                <MostViewed />
+                <MostViewed sectionName={data.CAPI.sectionName} />
             </Container>
         </main>
+
+        <SubNav subnav={data.NAV.subNavSections} pillar={data.CAPI.pillar} />
         <BackToTop />
+
         <Footer />
+
+        <CookieBanner />
     </div>
 );
 
