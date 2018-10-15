@@ -235,6 +235,34 @@ const getSubMetaSectionLinks: (
     return links;
 };
 
+// id: string,
+// url: string,
+// type: string,
+// sectionId: string,
+// sectionName: string,
+// title: string,
+// webUrl: string,
+// twitterHandle?: string,
+// bio?: string,
+// description?: string,
+// emailAddress?: string,
+// contributorLargeImagePath?: string,
+// bylineImageUrl?: string,
+// paidContentType?: string
+
+const getTags: (data: any) => TagType[] = data => {
+    const tags = getArray<any>(data, 'tags.tags', []);
+    return tags.map(tag => {
+      return ({
+          id: getNonEmptyString(tag, 'properties.id'),
+          type: getNonEmptyString(tag, 'properties.tagType'),
+          title: getString(tag, 'properties.webTitle', ''),
+          twitterHandle: getString(tag, 'properties.twitterHandle', '')
+      })});
+
+};
+
+
 const getSubMetaKeywordLinks: (
     data: {
         tags: TagType[];
@@ -268,7 +296,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const webPublicationDate = new Date(
         getNumber(data, 'config.page.webPublicationDate'),
     );
-    const tags = getArray<TagType>(data, 'tags.tags');
+    const tags =getTags(data);
     const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
     const isArticle =
         tags &&
@@ -277,7 +305,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const sectionName = getNonEmptyString(data, 'config.page.section');
 
     const leadContributor: TagType = tags.filter(
-        tag => tag.properties.tagType === 'Contributor',
+        tag => tag.type === 'Contributor',
     )[0];
 
     return {
@@ -303,11 +331,9 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         author: {
             byline: getString(data, 'config.page.byline', ''),
             twitterHandle: leadContributor
-                ? leadContributor.properties.twitterHandle
+                ? leadContributor.twitterHandle
                 : undefined,
-            email: leadContributor
-                ? leadContributor.properties.emailAddress
-                : undefined,
+              email: 'none'
         },
 
         sectionName: getNonEmptyString(data, 'config.page.section'),

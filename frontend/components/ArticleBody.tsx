@@ -427,6 +427,7 @@ const metaExtras = css`
     }
 `;
 
+
 const dtFormat = (date: Date): string =>
     dateformat(date, 'ddd d mmm yyyy HH:MM Z');
 
@@ -468,8 +469,8 @@ const subMetaSharingIcons = css`
 // 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
 const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
     const contributorTags = tags
-        .filter(t => t.properties.tagType === 'Contributor')
-        .map(c => c.properties.webTitle);
+        .filter(t => t.type === 'Contributor')
+        .map(c => c.title);
     const regex = new RegExp(`(${contributorTags.join('|')})`);
 
     return bylineText.split(regex);
@@ -483,12 +484,12 @@ const renderByline = (
     const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
         token => {
             const associatedTags = contributorTags.filter(
-                t => t.properties.webTitle === token,
+                t => t.title === token,
             );
             if (associatedTags.length > 0) {
                 return BylineContributor(
                     token,
-                    associatedTags[0].properties.id,
+                    associatedTags[0].id,
                     pillar,
                 );
             }

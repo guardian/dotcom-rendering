@@ -25,12 +25,6 @@ interface MoreType extends LinkType {
     more: true
 }
 
-interface TagType {
-    id: string,
-    type: string,
-    title: string,
-}
-
 interface NavType {
     pillars: Array<PillarType>,
     otherLinks: MoreType,
@@ -72,26 +66,11 @@ interface CAPIType {
     subMetaSectionLinks: SimpleLinkType[],
     subMetaKeywordLinks: SimpleLinkType[],
 }
-
-interface TagPropertiesType {
-    id: string,
-    url: string,
-    tagType: string,
-    sectionId: string,
-    sectionName: string,
-    webTitle: string,
-    webUrl: string,
-    twitterHandle?: string,
-    bio?: string,
-    description?: string,
-    emailAddress?: string,
-    contributorLargeImagePath?: string,
-    bylineImageUrl?: string,
-    paidContentType?: string
-}
-
 interface TagType {
-    properties: TagPropertiesType
+  id: string,
+  type: string,
+  title: string,
+  twitterHandle?: string
 }
 
 /**
