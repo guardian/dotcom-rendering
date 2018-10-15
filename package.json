@@ -13,7 +13,7 @@
     "bundlesize": [
         {
             "path": "./dist/frontend.article.*.js",
-            "maxSize": "20 kB"
+            "maxSize": "21 kB"
         },
         {
             "path": "./dist/vendor.*.js",
