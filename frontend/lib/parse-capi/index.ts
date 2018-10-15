@@ -286,7 +286,6 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const sectionData = getSectionData(tags);
     const sectionName = getNonEmptyString(data, 'config.page.section');
 
-
     const leadContributor: TagType = tags.filter(
         tag => tag.properties.tagType === 'Contributor',
     )[0];

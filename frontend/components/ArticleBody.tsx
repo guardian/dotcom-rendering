@@ -520,8 +520,6 @@ const BylineContributor = (
     );
 };
 
-
-
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
@@ -559,27 +557,27 @@ const ArticleBody: React.SFC<{
                     />
                 </div>
                 <div className={cx(meta, guardianLines)}>
-                  <div className={cx(profile, pillarColours[CAPI.pillar])}>
-                      <span className={byline}>
-                          {renderByline(
-                              CAPI.author.byline,
-                              CAPI.tags,
-                              CAPI.pillar,
-                          )}
-                      </span>
-                  </div>
-                  {CAPI.author.twitterHandle && (
-                      <div className={twitterHandle}>
-                          <TwitterIcon />
-                          <a
-                              href={`https://www.twitter.com/${
-                                  CAPI.author.twitterHandle
-                              }`}
-                          >
-                              @{CAPI.author.twitterHandle}
-                          </a>
-                      </div>
-                  )}
+                    <div className={cx(profile, pillarColours[CAPI.pillar])}>
+                        <span className={byline}>
+                            {renderByline(
+                                CAPI.author.byline,
+                                CAPI.tags,
+                                CAPI.pillar,
+                            )}
+                        </span>
+                    </div>
+                    {CAPI.author.twitterHandle && (
+                        <div className={twitterHandle}>
+                            <TwitterIcon />
+                            <a
+                                href={`https://www.twitter.com/${
+                                    CAPI.author.twitterHandle
+                                }`}
+                            >
+                                @{CAPI.author.twitterHandle}
+                            </a>
+                        </div>
+                    )}
                     <div className={dateline}>
                         {dtFormat(CAPI.webPublicationDate)}
                     </div>
@@ -612,7 +610,6 @@ const ArticleBody: React.SFC<{
                         __html: CAPI.main,
                     }}
                 />
-
             </header>
 
             <div>
