@@ -179,16 +179,6 @@ const getBoolean = (
     );
 };
 
-const getTags: (data: any) => TagType[] = data => {
-    const tags = getArray<any>(data, 'tags.tags', []);
-
-    return tags.map(tag => ({
-        id: getNonEmptyString(tag, 'properties.id'),
-        type: getNonEmptyString(tag, 'properties.tagType'),
-        title: getString(tag, 'properties.webTitle', ''),
-    }));
-};
-
 // TODO this is a simple implementation of section data
 // and should be updated to matcch full implementation available at
 // https://github.com/guardian/frontend/blob/master/common/app/model/content.scala#L202
