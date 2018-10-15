@@ -25,12 +25,6 @@ interface MoreType extends LinkType {
     more: true
 }
 
-interface TagType {
-    id: string,
-    type: string,
-    title: string,
-}
-
 interface NavType {
     pillars: Array<PillarType>,
     otherLinks: MoreType,
@@ -41,12 +35,18 @@ interface NavType {
     },
 }
 
+interface AuthorType {
+    byline: string,
+    twitterHandle?: string,
+    email?: string
+}
+
 interface CAPIType {
     headline: string,
     standfirst: string,
     main: string,
     body: string,
-    author: string,
+    author: AuthorType,
     webPublicationDate: Date,
     pageId: string,
     ageWarning?: string,
@@ -56,8 +56,8 @@ interface CAPIType {
             userMessage: string;
         }
     },
+    tags: Array<TagType>,
     pillar: Pillar,
-    tags?: TagType[],
     isImmersive: boolean,
     isArticle: boolean,
     sectionLabel?: string,
@@ -65,6 +65,12 @@ interface CAPIType {
     sectionName: string,
     subMetaSectionLinks: SimpleLinkType[],
     subMetaKeywordLinks: SimpleLinkType[],
+}
+interface TagType {
+  id: string,
+  type: string,
+  title: string,
+  twitterHandle?: string
 }
 
 /**

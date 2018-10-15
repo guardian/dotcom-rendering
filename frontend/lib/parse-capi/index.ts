@@ -179,16 +179,6 @@ const getBoolean = (
     );
 };
 
-const getTags: (data: any) => TagType[] = data => {
-    const tags = getArray<any>(data, 'tags.tags', []);
-
-    return tags.map(tag => ({
-        id: getNonEmptyString(tag, 'properties.id'),
-        type: getNonEmptyString(tag, 'properties.tagType'),
-        title: getString(tag, 'properties.webTitle', ''),
-    }));
-};
-
 // TODO this is a simple implementation of section data
 // and should be updated to matcch full implementation available at
 // https://github.com/guardian/frontend/blob/master/common/app/model/content.scala#L202
@@ -245,6 +235,18 @@ const getSubMetaSectionLinks: (
     return links;
 };
 
+const getTags: (data: any) => TagType[] = data => {
+    const tags = getArray<any>(data, 'tags.tags', []);
+    return tags.map(tag => {
+        return {
+            id: getNonEmptyString(tag, 'properties.id'),
+            type: getNonEmptyString(tag, 'properties.tagType'),
+            title: getString(tag, 'properties.webTitle', ''),
+            twitterHandle: getString(tag, 'properties.twitterHandle', ''),
+        };
+    });
+};
+
 const getSubMetaKeywordLinks: (
     data: {
         tags: TagType[];
@@ -286,9 +288,14 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const sectionData = getSectionData(tags);
     const sectionName = getNonEmptyString(data, 'config.page.section');
 
+    const leadContributor: TagType = tags.filter(
+        tag => tag.type === 'Contributor',
+    )[0];
+
     return {
         isArticle,
         webPublicationDate,
+        tags,
         sectionName,
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
@@ -305,12 +312,17 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             .map(block => block.bodyHtml)
             .filter(Boolean)
             .join(''),
-        author: getString(data, 'config.page.author'),
+        author: {
+            byline: getString(data, 'config.page.byline', ''),
+            twitterHandle: leadContributor
+                ? leadContributor.twitterHandle
+                : undefined,
+            email: 'none',
+        },
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
         pillar:
             findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
-        tags: getTags(data),
         ageWarning: getAgeWarning(tags, webPublicationDate),
         isImmersive: getBoolean(data, 'config.page.isImmersive', false),
         subMetaSectionLinks: getSubMetaSectionLinks({

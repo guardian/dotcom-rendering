@@ -356,6 +356,18 @@ const profile = css`
     margin-bottom: 4px;
 `;
 
+const byline = css`
+    font-style: italic;
+`;
+
+const bylineLink = css`
+    font-style: normal;
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
 const ageWarning = css`
     font-size: 12px;
     line-height: 16px;
@@ -385,6 +397,11 @@ const twitterHandle = css`
         margin-right: 0px;
         fill: ${palette.neutral[46]};
     }
+
+    a {
+        color: ${palette.neutral[46]};
+        text-decoration: none;
+    }
 `;
 
 const dateline = css`
@@ -410,7 +427,8 @@ const metaExtras = css`
     }
 `;
 
-const dtFormat = (date: Date) => dateformat(date, 'ddd d mmm yyyy HH:MM "GMT"');
+const dtFormat = (date: Date): string =>
+    dateformat(date, 'ddd d mmm yyyy HH:MM Z');
 
 const header = css`
     ${until.phablet} {
@@ -445,6 +463,56 @@ const subMetaSharingIcons = css`
         clear: left;
     }
 `;
+
+// this crazy function aims to split bylines such as
+// 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
+const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
+    const contributorTags = tags
+        .filter(t => t.type === 'Contributor')
+        .map(c => c.title);
+    const regex = new RegExp(`(${contributorTags.join('|')})`);
+
+    return bylineText.split(regex);
+};
+
+const renderByline = (
+    bylineText: string,
+    contributorTags: TagType[],
+    pillar: Pillar,
+): JSX.Element[] => {
+    const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
+        token => {
+            const associatedTags = contributorTags.filter(
+                t => t.title === token,
+            );
+            if (associatedTags.length > 0) {
+                return BylineContributor(token, associatedTags[0].id, pillar);
+            }
+            return <>{token}</>;
+        },
+    );
+
+    return renderedTokens;
+};
+
+const BylineContributor = (
+    contributor: string,
+    contributorTagId: string,
+    pillar: Pillar,
+) => {
+    return (
+        <span>
+            <a
+                rel="author"
+                className={cx(section, pillarColours[pillar], bylineLink)}
+                data-link-name="auto tag link"
+                href={`//www.theguardian.com/${contributorTagId}`}
+            >
+                {contributor}
+            </a>
+        </span>
+    );
+};
 
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
@@ -484,12 +552,26 @@ const ArticleBody: React.SFC<{
                 </div>
                 <div className={cx(meta, guardianLines)}>
                     <div className={cx(profile, pillarColours[CAPI.pillar])}>
-                        {CAPI.author}
+                        <span className={byline}>
+                            {renderByline(
+                                CAPI.author.byline,
+                                CAPI.tags,
+                                CAPI.pillar,
+                            )}
+                        </span>
                     </div>
-                    <div className={twitterHandle}>
-                        {/* TODO - from the contributor type tag */}
-                        <TwitterIcon /> @ByRobDavies
-                    </div>
+                    {CAPI.author.twitterHandle && (
+                        <div className={twitterHandle}>
+                            <TwitterIcon />
+                            <a
+                                href={`https://www.twitter.com/${
+                                    CAPI.author.twitterHandle
+                                }`}
+                            >
+                                @{CAPI.author.twitterHandle}
+                            </a>
+                        </div>
+                    )}
                     <div className={dateline}>
                         {dtFormat(CAPI.webPublicationDate)}
                     </div>
@@ -523,6 +605,7 @@ const ArticleBody: React.SFC<{
                     }}
                 />
             </header>
+
             <div>
                 <div
                     className={cx(bodyStyle, linkColour[CAPI.pillar])}

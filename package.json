@@ -13,11 +13,11 @@
     "bundlesize": [
         {
             "path": "./dist/frontend.article.*.js",
-            "maxSize": "20 kB"
+            "maxSize": "50 kB"
         },
         {
             "path": "./dist/vendor.*.js",
-            "maxSize": "100 kB"
+            "maxSize": "70 kB"
         }
     ],
     "devDependencies": {
