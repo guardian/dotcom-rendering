@@ -20,6 +20,7 @@ import {
     tablet,
 } from '@guardian/pasteup/breakpoints';
 import { pillarMap, pillarPalette } from '../pillars';
+import { ArticleRenderer } from './elements/elementRenderer';
 
 const wrapper = css`
     padding-top: 6px;
@@ -610,12 +611,9 @@ const ArticleBody: React.SFC<{
             </header>
 
             <div>
-                <div
-                    className={cx(bodyStyle, linkColour[CAPI.pillar])}
-                    dangerouslySetInnerHTML={{
-                        __html: CAPI.body,
-                    }}
-                />
+                <div className={cx(bodyStyle, linkColour[CAPI.pillar])}>
+                    <ArticleRenderer elements={CAPI.elements} />
+                </div>
                 <div className={cx(subMeta, guardianLines)}>
                     {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
                         <span className={subMetaLabel}>Topics</span>
