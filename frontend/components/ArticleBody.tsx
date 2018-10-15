@@ -315,7 +315,7 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
     const contributorTags = tags
         .filter(t => t.properties.tagType === 'Contributor')
         .map(c => c.properties.webTitle);
-    const regex = new RegExp(`(${tags.join('|')})`);
+    const regex = new RegExp(`(${contributorTags.join('|')})`);
 
     return bylineText.split(regex);
 };
@@ -350,19 +350,14 @@ const BylineContributor = (
     pillar: Pillar,
 ) => {
     return (
-        <span
-            itemscope=""
-            itemtype="http://schema.org/Person"
-            itemprop="author"
-        >
+        <span>
             <a
                 rel="author"
                 className={cx(section, pillarColours[pillar], bylineLink)}
-                itemprop="sameAs"
                 data-link-name="auto tag link"
                 href={`//www.theguardian.com/${contributorTagId}`}
             >
-                <span itemprop="name">{contributor}</span>
+                <span>{contributor}</span>
             </a>
         </span>
     );
