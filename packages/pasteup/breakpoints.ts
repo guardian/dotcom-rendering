@@ -1,5 +1,4 @@
-// underscored names to avoid clashing with the `from` shorthand exports
-const breakpoints = {
+export const breakpoints = {
     mobile: 320,
     mobileMedium: 360,
     mobileLandscape: 480,

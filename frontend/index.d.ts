@@ -47,6 +47,7 @@ interface CAPIType {
     standfirst: string,
     main: string,
     body: string,
+    elements: Array<CAPIElement>,
     author: AuthorType,
     webPublicationDate: Date,
     pageId: string,

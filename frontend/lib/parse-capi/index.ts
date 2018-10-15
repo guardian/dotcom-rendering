@@ -314,6 +314,11 @@ export const extractArticleMeta = (data: {}): CAPIType => {
                 : undefined,
             email: 'none',
         },
+        elements: [].concat(
+            ...getArray<any>(data, 'contentFields.fields.blocks.body')
+                .map(block => block.elements)
+                .filter(Boolean),
+        ),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
         pillar:
