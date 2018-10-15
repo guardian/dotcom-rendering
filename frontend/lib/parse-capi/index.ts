@@ -1,4 +1,3 @@
-import compose from 'compose-function';
 import { string as curly } from 'curlyquotes';
 import get from 'lodash.get';
 
@@ -6,19 +5,6 @@ import clean from './clean';
 import bigBullets from './big-bullets';
 import { pillarNames } from '../../pillars';
 import { getSharingUrls } from './sharing-urls';
-
-const headline = compose(
-    clean,
-    curly,
-);
-const standfirst = compose(
-    clean,
-    bigBullets,
-);
-const main = clean;
-const body = clean;
-
-const defaultArgs = { config: {}, contentFields: {} };
 
 // tslint:disable:prefer-array-literal
 const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
