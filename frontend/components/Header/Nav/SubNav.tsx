@@ -117,7 +117,7 @@ const parentStyle = (pillar?: Pillar): string => {
             border-top: 6px solid transparent;
             border-bottom: 6px solid transparent;
             border-left: 10px solid ${colour};
-            margin-left: 2px;
+            margin-left: 4px;
         }
     `;
 };

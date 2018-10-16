@@ -2,11 +2,12 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import {
+    mobile,
     mobileMedium,
     mobileLandscape,
+    tablet,
     desktop,
     leftCol,
-    from,
     wide,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -15,45 +16,44 @@ import TheGuardianLogoSVG from '@guardian/pasteup/logos/the-guardian.svg';
 
 const link = css`
     float: right;
-    margin-bottom: 15px;
-    margin-right: 45px;
+    margin-bottom: 16px;
+    margin-right: 50px;
     margin-top: 3px;
     ${mobileMedium} {
-        margin-right: 5px;
+        margin-right: 45px;
     }
-
+    ${mobileMedium} {
+        margin-right: 6px;
+    }
     ${mobileLandscape} {
         margin-right: 17px;
     }
-
     ${desktop} {
-        margin-bottom: -34px;
+        margin-bottom: -38px;
         margin-top: 5px;
         position: relative;
         z-index: 1071;
     }
-
     ${leftCol} {
-        margin-bottom: -40px;
+        margin-bottom: -44px;
     }
-
     ${wide} {
         margin-right: 96px;
     }
 `;
 
 const style = css`
-    height: 51px;
-    width: 159px;
-    ${from.mobileMedium.until.tablet} {
+    height: 44px;
+    width: 135px;
+    ${mobileMedium} {
         height: 56px;
         width: 175px;
     }
-    ${from.tablet.until.desktop} {
+    ${tablet} {
         height: 72px;
         width: 224px;
     }
-    ${from.desktop.until.leftCol} {
+    ${desktop} {
         height: 80px;
         width: 249px;
     }

@@ -6,12 +6,12 @@ import {
     mobileMedium,
     mobileLandscape,
     tablet,
+    phablet,
 } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 
 const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     background-color: ${palette.neutral[7]};
-    top: 24px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
     color: ${palette.neutral[97]};
     cursor: pointer;
@@ -21,8 +21,12 @@ const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     border: 0;
     border-radius: 50%;
     outline: none;
-    right: 5px;
     z-index: ${showMainMenu ? 1071 : 0};
+    top: 17px;
+    right: 5px;
+    ${mobileLandscape} {
+        top: 24px;
+    }
     ${mobileMedium} {
         bottom: -6px;
         height: 48px;
@@ -30,10 +34,12 @@ const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
         top: auto;
     }
     ${mobileLandscape} {
-        right: 51px;
+        right: 46px;
     }
     ${tablet} {
         right: 58px;
+        height: 56px;
+        min-width: 56px;
     }
     ${desktop} {
         display: none;
