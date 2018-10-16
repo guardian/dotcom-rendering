@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { serif } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 import { hideDesktop } from './Column';

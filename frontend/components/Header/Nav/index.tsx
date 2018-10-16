@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
-import { palette } from '@guardian/pasteup/palette';
 
 import Logo from './Logo';
 import EditionDropdown from './EditionDropdown';

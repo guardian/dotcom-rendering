@@ -122,10 +122,6 @@ const columnLinks = css`
     }
 `;
 
-const isPillarStyle = css`
-    background-color: ${palette.neutral[93]};
-`;
-
 const hide = css`
     display: none;
 `;
