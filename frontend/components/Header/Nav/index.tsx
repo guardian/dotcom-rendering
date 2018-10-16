@@ -29,6 +29,7 @@ const centered = css`
     position: relative;
     margin: 0 auto;
     ${clearFix};
+    height: 108px;
 `;
 
 interface Props {
@@ -78,8 +79,8 @@ export default class Nav extends Component<
                     role="navigation"
                     aria-label="Guardian sections"
                 >
-                    <EditionDropdown />
-                    <Logo />
+                    {/* <EditionDropdown />
+                    <Logo /> */}
                     {/*
                         TODO: The properties of the Links component
                         have been hardcoded to false. At some point
@@ -90,7 +91,7 @@ export default class Nav extends Component<
                         isRecentContributor={false}
                         isSignedIn={isSignedIn}
                     />
-                    <Pillars
+                    {/* <Pillars
                         showMainMenu={showMainMenu}
                         pillars={nav.pillars}
                         pillar={pillar}
@@ -104,9 +105,9 @@ export default class Nav extends Component<
                         showMainMenu={showMainMenu}
                         id={mainMenuId}
                         nav={nav}
-                    />
+                    /> */}
                 </nav>
-                <SubNav subnav={nav.subNavSections} pillar={pillar} />
+                {/* <SubNav subnav={nav.subNavSections} pillar={pillar} /> */}
             </div>
         );
     }
