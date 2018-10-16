@@ -22,7 +22,7 @@ It is possible to write a Webpack loader that will load the contents of `*.css` 
 
 ### [Stylable](https://stylable.io/)
 
-Similar to CSS Blocks, Styleable allows developers to write `*.css` files that look and feel like CSS, with added syntax that adheres "to the spirit of CSS". It provides access to state using custom pseudo-classes and pseduo-elements and uses a pre-processor to convert files down to vanilla CSS.
+Similar to CSS Blocks, Styleable allows developers to write `*.css` files that look and feel like CSS, with added syntax that adheres "to the spirit of CSS". It provides access to state using custom pseudo-classes and pseudo-elements and uses a pre-processor to convert files down to vanilla CSS.
 
 ## Decision
 
