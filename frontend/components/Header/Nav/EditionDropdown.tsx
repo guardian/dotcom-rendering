@@ -2,18 +2,22 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import { Dropdown } from '@guardian/guui';
-import { until, wide } from '@guardian/pasteup/breakpoints';
+import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown';
 
 const editionDropdown = css`
+    display: none;
     position: absolute;
-    right: 15px;
+    right: 11px;
     z-index: 1072;
-    ${until.desktop} {
-        display: none;
+    ${desktop} {
+        display: block;
     }
-
+    ${leftCol} {
+        right: 24px;
+    }
     ${wide} {
+        right: 14px;
         margin-right: 90px;
     }
 `;
@@ -22,26 +26,26 @@ const EditionDropdown: React.SFC = () => {
     const links: Link[] = [
         {
             url: '/preference/edition/uk',
-            title: 'UK Edition',
+            title: 'UK edition',
             isActive: true,
         },
         {
             url: '/preference/edition/us',
-            title: 'US Edition',
+            title: 'US edition',
         },
         {
             url: '/preference/edition/au',
-            title: 'Australian Edition',
+            title: 'Australian edition',
         },
         {
             url: '/preference/edition/int',
-            title: 'International Edition',
+            title: 'International edition',
         },
     ];
 
     return (
         <div className={editionDropdown}>
-            <Dropdown label="UK Edition" links={links} id="edition" />
+            <Dropdown label="UK edition" links={links} id="edition" />
         </div>
     );
 };
