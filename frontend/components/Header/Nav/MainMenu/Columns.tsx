@@ -100,7 +100,11 @@ export const Columns: React.SFC<{
 }> = ({ nav }) => (
     <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>
         {nav.pillars.map((column, i) => (
-            <Column column={column} key={column.title.toLowerCase()} />
+            <Column
+                column={column}
+                key={column.title.toLowerCase()}
+                index={i}
+            />
         ))}
         <More
             column={nav.otherLinks}

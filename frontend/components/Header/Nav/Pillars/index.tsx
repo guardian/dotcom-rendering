@@ -137,12 +137,10 @@ const Pillars: React.SFC<{
 }> = ({ showMainMenu, pillars, pillar }) => (
     <ul className={pillarsStyles}>
         {pillars.map((p, i) => (
-            <li key={p.title} className={
-                cx(
-                    pillarStyle,
-                    { [pillarDivider]: i > 0 },
-                )
-                }>
+            <li
+                key={p.title}
+                className={cx(pillarStyle, { [pillarDivider]: i > 0 })}
+            >
                 <a
                     className={cx(
                         linkStyle,

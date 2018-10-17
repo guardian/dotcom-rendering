@@ -3,7 +3,11 @@ import { cx, css } from 'react-emotion';
 
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
-import { mobileLandscape, tablet, mobileMedium } from '@guardian/pasteup/breakpoints';
+import {
+    mobileLandscape,
+    tablet,
+    mobileMedium,
+} from '@guardian/pasteup/breakpoints';
 import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 

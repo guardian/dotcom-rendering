@@ -100,11 +100,11 @@ export default class Nav extends Component<
                         toggleMainMenu={toggleMainMenu}
                         ariaControls={mainMenuId}
                     />
-                    {/* <MainMenu
+                    <MainMenu
                         showMainMenu={showMainMenu}
                         id={mainMenuId}
                         nav={nav}
-                    /> */}
+                    />
                 </nav>
                 <SubNav subnav={nav.subNavSections} pillar={pillar} />
             </div>
