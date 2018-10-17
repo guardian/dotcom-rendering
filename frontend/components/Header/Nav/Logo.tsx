@@ -2,7 +2,6 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import {
-    mobile,
     mobileMedium,
     mobileLandscape,
     tablet,
