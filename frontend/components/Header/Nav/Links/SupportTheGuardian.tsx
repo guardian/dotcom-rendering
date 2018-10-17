@@ -3,7 +3,11 @@ import { css } from 'react-emotion';
 
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
-import { mobileLandscape, tablet } from '@guardian/pasteup/breakpoints';
+import {
+    mobileLandscape,
+    tablet,
+    mobileMedium,
+} from '@guardian/pasteup/breakpoints';
 import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
@@ -18,7 +22,7 @@ const style = css`
     text-decoration: none;
 
     ${mobileLandscape} {
-        margin-left: 0;
+        margin-left: -10px;
     }
 
     :before {
@@ -59,12 +63,13 @@ const text = css`
 
 const mobileSignInContainer = css`
     display: block;
-    padding-top: 12px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
+    padding: 10px;
     margin-left: -8px;
     float: left;
+
+    ${mobileMedium} {
+        padding-top: 12px;
+    }
 
     ${tablet} {
         display: none;
@@ -72,8 +77,14 @@ const mobileSignInContainer = css`
 `;
 
 const mobileSignInIcon = css`
-    height: 23px;
-    width: 23px;
+    height: 18px;
+    width: 18px;
+
+    ${mobileMedium} {
+        height: 23px;
+        width: 23px;
+    }
+
     fill: ${palette.neutral[46]};
 `;
 

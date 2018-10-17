@@ -26,20 +26,24 @@ const perPillarStyles = pillarMap(
             color: ${pillarPalette[pillar].main};
             text-decoration: underline;
         }
-        ${desktop} {
-            :after {
-                content: '';
-                display: block;
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                width: 1px;
-                background-color: ${palette.neutral[86]};
-            }
-        }
     `,
 );
+
+const pillarDivider = css`
+    ${desktop} {
+        :before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: -100px;
+            width: 1px;
+            background-color: ${palette.neutral[86]};
+            z-index: 1;
+        }
+    }
+`;
 
 const columnLinkTitle = css`
     background-color: transparent;
@@ -51,7 +55,7 @@ const columnLinkTitle = css`
     display: inline-block;
     font-size: 20px;
     font-family: ${serif.headline};
-    font-weight: 400;
+    font-weight: 500;
     outline: none;
     padding: 8px 34px 8px 50px;
     position: relative;
@@ -133,7 +137,7 @@ const ColumnLinks: React.SFC<{
 }> = ({ column, showColumnLinks, id }) => {
     return (
         <ul
-            className={cx(columnLinks, {
+            className={cx(columnLinks, pillarDivider, {
                 [hide]: !showColumnLinks,
             })}
             aria-expanded={showColumnLinks}
@@ -186,7 +190,10 @@ export const More: React.SFC<{
 };
 
 export class Column extends Component<
-    { column: PillarType },
+    {
+        column: PillarType;
+        index: number;
+    },
     { showColumnLinks: boolean }
 > {
     public state = {
@@ -201,12 +208,14 @@ export class Column extends Component<
 
     public render() {
         const { showColumnLinks } = this.state;
-        const { column } = this.props;
+        const { column, index } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;
 
         return (
             <li
-                className={cx(columnStyle, perPillarStyles[column.pillar])}
+                className={cx(columnStyle, perPillarStyles[column.pillar], {
+                    [pillarDivider]: index > 0,
+                })}
                 role="none"
             >
                 <CollapseColumnButton

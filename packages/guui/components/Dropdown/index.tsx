@@ -106,7 +106,7 @@ const button = css`
     font-family: ${sans.body};
     color: ${palette.neutral[7]};
     transition: color 80ms ease-out;
-    padding: 6px 10px;
+    padding: 5px 10px;
     margin: 1px 0 0;
     text-decoration: none;
 
@@ -121,13 +121,13 @@ const button = css`
     :after {
         content: '';
         display: inline-block;
-        width: 4px;
-        height: 4px;
+        width: 5px;
+        height: 5px;
         transform: translateY(-2px) rotate(45deg);
         border: 1px solid currentColor;
         border-left: transparent;
         border-top: transparent;
-        margin-left: 6px;
+        margin-left: 5px;
         vertical-align: middle;
         transition: transform 250ms ease-out;
     }

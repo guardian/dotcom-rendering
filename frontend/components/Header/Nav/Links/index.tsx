@@ -14,15 +14,15 @@ const search = css`
     :after {
         content: '';
         display: inline-block;
-        width: 4px;
-        height: 4px;
+        width: 5px;
+        height: 5px;
         transform: translateY(-2px) rotate(45deg);
         border-width: 1px;
         border-style: solid;
         border-color: currentColor;
         border-left: none;
         border-top: none;
-        margin-left: 4px;
+        margin-left: 5px;
         vertical-align: middle;
         backface-visibility: hidden;
         transition: transform 250ms ease-out;
@@ -61,7 +61,7 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
 `;
 
 const paddedLink = css`
-    padding: 6px 10px;
+    padding: 5px 10px;
     margin: 1px 0 0;
 `;
 

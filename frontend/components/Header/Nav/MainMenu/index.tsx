@@ -30,6 +30,7 @@ const mainMenu = css`
     padding-bottom: 24px;
     top: 0;
     z-index: 1070;
+    overflow: hidden;
     ${until.desktop} {
         transform: translateX(-110%);
         transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -61,6 +62,7 @@ const mainMenu = css`
         right: 0;
         width: 100%;
         border-bottom: 1px solid ${palette.neutral[86]};
+        margin-top: -20px;
         @supports (width: 100vw) {
             left: 50%;
             right: 50%;

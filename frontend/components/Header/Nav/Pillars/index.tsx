@@ -32,28 +32,11 @@ const pillarsStyles = css`
     li {
         float: left;
         position: relative;
-        :after {
-            content: '';
-            display: block;
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background-color: ${palette.neutral[86]};
-        }
         ${desktop} {
             width: 118px;
         }
         ${leftCol} {
             width: 140px;
-        }
-    }
-    li:last-of-type {
-        ${until.desktop} {
-            :after {
-                display: none;
-            }
         }
     }
 `;
@@ -67,6 +50,19 @@ const showMenuUnderline = css`
 const pillarStyle = css`
     & :first-child > a {
         padding-left: 0;
+    }
+`;
+
+const pillarDivider = css`
+    :before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 4px;
+        bottom: 0;
+        width: 1px;
+        background-color: ${palette.neutral[86]};
     }
 `;
 
@@ -88,8 +84,9 @@ const linkStyle = css`
         padding-right: 20px;
         padding-left: 5px;
     }
-    ${desktop} {
+    ${leftCol} {
         height: 48px;
+        font-size: 24px;
     }
     :after {
         content: '';
@@ -139,8 +136,11 @@ const Pillars: React.SFC<{
     pillar: Pillar;
 }> = ({ showMainMenu, pillars, pillar }) => (
     <ul className={pillarsStyles}>
-        {pillars.map(p => (
-            <li key={p.title} className={pillarStyle}>
+        {pillars.map((p, i) => (
+            <li
+                key={p.title}
+                className={cx(pillarStyle, { [pillarDivider]: i > 0 })}
+            >
                 <a
                     className={cx(
                         linkStyle,

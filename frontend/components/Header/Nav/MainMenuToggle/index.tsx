@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'react-emotion';
 
-import { desktop } from '@guardian/pasteup/breakpoints';
+import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { serif } from '@guardian/pasteup/fonts';
 
@@ -27,18 +27,33 @@ const openMainMenu = css`
     background-color: transparent;
     font-size: 22px;
     height: 48px;
-    padding-top: 0;
     padding-bottom: 0;
     padding-right: 20px;
     padding-left: 5px;
+    padding-top: 9px;
+    margin-top: -6px;
     ${desktop} {
         display: block;
+    }
+    ${leftCol} {
+        margin-top: -5px;
+        font-size: 24px;
     }
     :hover {
         color: ${navPrimaryColour};
     }
     :focus {
         color: ${navPrimaryColour};
+    }
+    :before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 4px;
+        bottom: 0;
+        width: 1px;
+        background-color: ${palette.neutral[86]};
     }
 `;
 const checkbox = css`
