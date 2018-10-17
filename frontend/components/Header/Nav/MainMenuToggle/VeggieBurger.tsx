@@ -6,7 +6,6 @@ import {
     mobileMedium,
     mobileLandscape,
     tablet,
-    phablet,
 } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 

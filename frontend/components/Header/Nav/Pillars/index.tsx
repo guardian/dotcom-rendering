@@ -6,7 +6,6 @@ import {
     desktop,
     leftCol,
     mobileLandscape,
-    until,
 } from '@guardian/pasteup/breakpoints';
 
 import { serif } from '@guardian/pasteup/fonts';
