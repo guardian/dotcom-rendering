@@ -124,6 +124,16 @@ const columnLinks = css`
         width: 100%;
         padding: 0 5px;
     }
+    ${pillarDivider};
+`;
+
+const firstColumn = css`
+    ${desktop} {
+        padding-left: 0;
+        :before {
+            display: none;
+        }
+    }
 `;
 
 const hide = css`
@@ -134,12 +144,17 @@ const ColumnLinks: React.SFC<{
     column: LinkType;
     showColumnLinks: boolean;
     id: string;
-}> = ({ column, showColumnLinks, id }) => {
+    index?: number;
+}> = ({ column, showColumnLinks, id, index }) => {
     return (
         <ul
-            className={cx(columnLinks, pillarDivider, {
-                [hide]: !showColumnLinks,
-            })}
+            className={cx(
+                columnLinks,
+                { [firstColumn]: index === 0 },
+                {
+                    [hide]: !showColumnLinks,
+                },
+            )}
             aria-expanded={showColumnLinks}
             role="menu"
             id={id}
@@ -231,6 +246,7 @@ export class Column extends Component<
                     column={column}
                     showColumnLinks={showColumnLinks}
                     id={subNavId}
+                    index={index}
                 />
             </li>
         );
