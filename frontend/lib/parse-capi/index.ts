@@ -79,7 +79,12 @@ const getArray = <T>(
 };
 
 const findPillar: (name: string) => Pillar | undefined = name => {
-    const pillar: string = name.toLowerCase();
+    let pillar: string = name.toLowerCase();
+    // The pillar name is "arts" in CAPI, but "culture" everywhere else,
+    // therefore we perform this substitution here.
+    if (pillar === 'arts') {
+        pillar = 'culture';
+    }
     return pillarNames.find(_ => _ === pillar);
 };
 
