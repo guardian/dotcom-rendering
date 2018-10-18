@@ -1,5 +1,4 @@
 import React from 'react';
-import ArticleBody from '../components/ArticleBody';
 import { ArticleProps } from './Article';
 import { AMPRenderer } from '../components/elements/elementRenderer';
 
