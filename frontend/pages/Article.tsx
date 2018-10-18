@@ -12,7 +12,7 @@ import BackToTop from '../components/BackToTop';
 import SubNav from '../components/Header/Nav/SubNav/SubNav';
 import CookieBanner from '../components/CookieBanner';
 
-interface ArticleProps {
+export interface ArticleProps {
     CAPI: CAPIType;
     NAV: NavType;
     config: ConfigType;
