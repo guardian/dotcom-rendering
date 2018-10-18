@@ -4,6 +4,8 @@
 
 CAPI provides a representation of content which is strongly typed and like components.
 
+## Decision
+
 ### CAPI Elements as Components
 
 The CAPI Blocks API exposes a suite of strongly typed elements. A component should be made for each element to render it.
@@ -29,9 +31,6 @@ An element should not merely contain an `html` field. Except in the cases where 
 A component must take an element, as described above and render it.
 
 Logic within these components should be kept to an absolute minimum.
-
-## Decision
-
 
 ## Consequences
 
