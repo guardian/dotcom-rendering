@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArticleProps } from './Article';
-import { AMPRenderer } from '../components/elements/elementRenderer';
+import { AMPRenderer } from '../components/elements/AMPRenderer';
 
 export const Amp: React.SFC<{
     data: ArticleProps;
