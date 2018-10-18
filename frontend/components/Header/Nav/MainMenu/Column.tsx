@@ -100,7 +100,7 @@ const ColumnLink: React.SFC<{
         role="none"
     >
         <a className={cx(columnLinkTitle)} href={link.url} role="menuitem">
-            {link.longTitle || link.title}
+            {link.longTitle}
         </a>
     </li>
 );
