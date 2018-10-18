@@ -83,16 +83,20 @@ const findPillar: (name: string) => Pillar | undefined = name => {
     return pillarNames.find(_ => _ === pillar);
 };
 
-const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => ({
-    title: getString(data, 'title'),
-    longTitle: getString(data, 'longTitle'),
-    url: getString(data, 'url'),
-    pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
-    children: getArray<object>(data, 'children', []).map(
-        l => getLink(l, { isPillar: false }), // children are never pillars
-    ),
-    mobileOnly: false,
-});
+const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
+    const title = getString(data, 'title');
+
+    return {
+        title,
+        longTitle: getString(data, 'longTitle') || title,
+        url: getString(data, 'url'),
+        pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
+        children: getArray<object>(data, 'children', []).map(
+            l => getLink(l, { isPillar: false }), // children are never pillars
+        ),
+        mobileOnly: false,
+    };
+};
 
 const getAgeWarning = (
     tags: TagType[],

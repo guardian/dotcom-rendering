@@ -124,7 +124,7 @@ export const Columns: React.SFC<{
                             key={brandExtension.title}
                             role="menuitem"
                         >
-                            {brandExtension.longTitle || brandExtension.title}
+                            {brandExtension.longTitle}
                         </a>
                     </li>
                 ))}
