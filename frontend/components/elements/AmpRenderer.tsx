@@ -1,6 +1,7 @@
 import { RawComponent } from './RawComponent';
 import { ImageBlockComponent } from './ImageBlockComponent/amp';
 import React from 'react';
+import { FailRenderingComponent } from './FailRenderingComponent';
 export const AMPRenderer: React.SFC<{ elements: CAPIElement[] }> = ({
     elements,
 }) => {
@@ -10,7 +11,7 @@ export const AMPRenderer: React.SFC<{ elements: CAPIElement[] }> = ({
                 case 'model.liveblog.TextBlockElement':
                     return <RawComponent key={i} html={element.html} />;
                 case 'model.liveblog.TweetBlockElement':
-                    return <RawComponent key={i} html={element.html} />;
+                    return <FailRenderingComponent element={element} />;
                 case 'model.liveblog.ImageBlockElement':
                     return <ImageBlockComponent key={i} element={element} />;
                 default:
