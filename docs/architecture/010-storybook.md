@@ -21,10 +21,14 @@ Each of these should have an independant storybook, allowing the design system o
 
 ## Decision
 
+DEFERRED
+
+_People are generally in favour, but there doesn't seem like an obvious time to implement it. This should be revisted before we have too many elements._
 
 ## Consequences
 
+Storybook must be installed and set up. All existing components must be added and adding a component to storybook will be required to launch one.
 
 ## Status
 
-Draft
+Proposed
