@@ -37,26 +37,17 @@ export default ({ data }: Props) => {
      * TODO: Identify critical fonts to preload
      */
     const fontFiles = [
-        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Regular.woff2',
+        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
+        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
         'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-        // 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Semibold.woff2',
+        'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
         'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
         'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
         // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-        'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Medium.woff2',
-        // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-MediumItalic.woff2',
-        // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-        // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2',
-        'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Black.woff2',
-        // 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BlackItalic.woff2',
+        'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
         'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
         // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Medium.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-MediumItalic.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Black.woff2',
-        // 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BlackItalic.woff2',
+        'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
     ];
 
     return htmlTemplate({

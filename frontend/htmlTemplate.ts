@@ -27,14 +27,6 @@ export default ({
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
     const vendorJS = assets.dist('vendor.js');
 
-    const fontCSS = [
-        assets.static('fonts/guardian-headline/noalts-not-hinted/fonts.css'),
-        assets.static(
-            'fonts/guardian-textegyptian/noalts-not-hinted/fonts.css',
-        ),
-        assets.static('fonts/guardian-textsans/noalts-not-hinted/fonts.css'),
-    ];
-
     return `<!doctype html>
         <html>
             <head>
@@ -50,12 +42,9 @@ export default ({
                             )}" as="font" crossorigin>`,
                     )
                     .join('\n')}
-                ${fontCSS
-                    .map(
-                        fontFile =>
-                            `<link rel="stylesheet" href="${fontFile}" media="nope!" onload="this.media='all'">`,
-                    )
-                    .join('\n')}
+                <link rel="stylesheet" href="${assets.static(
+                    'css/fonts.css',
+                )}" />
                 <style>${resetCSS}${css}</style>
             </head>
             <body>
