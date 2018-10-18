@@ -34,6 +34,12 @@ You may want local identity cookies to be available in dotcom-rendering. To enab
 ### Change preview article
 You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. EG. `http://localhost:3030/frontend/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance`
 
+### Debugging tools
+
+In order to ease development you may want to install:
+
+- Chrome Extension [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en).
+
 ## Production
  - `make build` creates production-ready bundles.
  - `make start` starts the production server.
