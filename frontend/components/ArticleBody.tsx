@@ -475,44 +475,47 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
     return bylineText.split(regex);
 };
 
-const renderByline = (
-    bylineText: string,
-    contributorTags: TagType[],
-    pillar: Pillar,
-): JSX.Element[] => {
+const RenderByline: React.SFC<{
+    bylineText: string;
+    contributorTags: TagType[];
+    pillar: Pillar;
+}> = ({ bylineText, contributorTags, pillar }) => {
     const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
-        token => {
+        (token, i) => {
             const associatedTags = contributorTags.filter(
                 t => t.title === token,
             );
             if (associatedTags.length > 0) {
-                return BylineContributor(token, associatedTags[0].id, pillar);
+                return (
+                    <BylineContributor
+                        contributor={token}
+                        contributorTagId={associatedTags[0].id}
+                        pillar={pillar}
+                        key={i}
+                    />
+                );
             }
-            return <>{token}</>;
+            return token;
         },
     );
 
-    return renderedTokens;
+    return <>{renderedTokens}</>;
 };
 
-const BylineContributor = (
-    contributor: string,
-    contributorTagId: string,
-    pillar: Pillar,
-) => {
-    return (
-        <span>
-            <a
-                rel="author"
-                className={cx(section, pillarColours[pillar], bylineLink)}
-                data-link-name="auto tag link"
-                href={`//www.theguardian.com/${contributorTagId}`}
-            >
-                {contributor}
-            </a>
-        </span>
-    );
-};
+const BylineContributor: React.SFC<{
+    contributor: string;
+    contributorTagId: string;
+    pillar: Pillar;
+}> = ({ contributor, contributorTagId, pillar }) => (
+    <a
+        rel="author"
+        className={cx(section, pillarColours[pillar], bylineLink)}
+        data-link-name="auto tag link"
+        href={`//www.theguardian.com/${contributorTagId}`}
+    >
+        {contributor}
+    </a>
+);
 
 const ArticleBody: React.SFC<{
     CAPI: CAPIType;
@@ -553,11 +556,11 @@ const ArticleBody: React.SFC<{
                 <div className={cx(meta, guardianLines)}>
                     <div className={cx(profile, pillarColours[CAPI.pillar])}>
                         <span className={byline}>
-                            {renderByline(
-                                CAPI.author.byline,
-                                CAPI.tags,
-                                CAPI.pillar,
-                            )}
+                            <RenderByline
+                                bylineText={CAPI.author.byline}
+                                contributorTags={CAPI.tags}
+                                pillar={CAPI.pillar}
+                            />
                         </span>
                     </div>
                     {CAPI.author.twitterHandle && (

@@ -105,7 +105,11 @@ export default class Nav extends Component<
                         nav={nav}
                     />
                 </nav>
-                <SubNav subnav={nav.subNavSections} pillar={pillar} />
+                <SubNav
+                    subnav={nav.subNavSections}
+                    currentNavLink={nav.currentNavLink}
+                    pillar={pillar}
+                />
             </div>
         );
     }

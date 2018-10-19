@@ -16,6 +16,7 @@ interface Props {
         links: LinkType[];
     };
     pillar: Pillar;
+    currentNavLink: string;
 }
 
 export default class Subnav extends Component<
@@ -84,6 +85,7 @@ export default class Subnav extends Component<
                         expandSubNav={expandSubNav}
                         ulRef={this.ulRef}
                         toggle={this.boundToggle}
+                        currentNavLink={this.props.currentNavLink}
                     />
                 </Container>
             </div>

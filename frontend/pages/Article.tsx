@@ -82,7 +82,11 @@ const Article: React.SFC<{
             </Container>
         </main>
 
-        <SubNav subnav={data.NAV.subNavSections} pillar={data.CAPI.pillar} />
+        <SubNav
+            subnav={data.NAV.subNavSections}
+            pillar={data.CAPI.pillar}
+            currentNavLink={data.NAV.currentNavLink}
+        />
         <BackToTop />
 
         <Footer />
