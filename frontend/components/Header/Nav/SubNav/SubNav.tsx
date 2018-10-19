@@ -26,14 +26,12 @@ export default class Subnav extends Component<
         isExpanded: boolean;
     }
 > {
-    private boundToggle: () => void;
     private ulRef: React.RefObject<HTMLUListElement>;
 
     constructor(props: Props) {
         super(props);
         this.state = { showMore: false, isExpanded: false };
         // More should not be shown without JS
-        this.boundToggle = this.toggle.bind(this);
         this.ulRef = createRef();
     }
 
@@ -44,11 +42,11 @@ export default class Subnav extends Component<
         });
     }
 
-    public toggle() {
+    public toggle = () => {
         this.setState(prevState => ({
             isExpanded: !prevState.isExpanded,
         }));
-    }
+    };
 
     public shouldShowMore() {
         // get ul ref
@@ -84,7 +82,7 @@ export default class Subnav extends Component<
                         collapseWrapper={collapseWrapper}
                         expandSubNav={expandSubNav}
                         ulRef={this.ulRef}
-                        toggle={this.boundToggle}
+                        toggle={this.toggle}
                         currentNavLink={this.props.currentNavLink}
                     />
                 </Container>
