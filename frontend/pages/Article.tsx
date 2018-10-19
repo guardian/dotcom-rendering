@@ -9,7 +9,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ArticleBody from '../components/ArticleBody';
 import BackToTop from '../components/BackToTop';
-import SubNav from '../components/Header/Nav/SubNav';
+import SubNav from '../components/Header/Nav/SubNav/SubNav';
 import CookieBanner from '../components/CookieBanner';
 
 interface ArticleProps {

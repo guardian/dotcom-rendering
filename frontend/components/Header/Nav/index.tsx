@@ -9,7 +9,7 @@ import Links from './Links';
 import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle';
 import { MainMenu } from './MainMenu';
-import SubNav from './SubNav';
+import SubNav from './SubNav/SubNav';
 import { getCookie } from '../../../lib/cookie';
 
 const centered = css`
