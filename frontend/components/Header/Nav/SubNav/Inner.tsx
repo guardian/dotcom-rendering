@@ -7,7 +7,6 @@ import {
     tablet,
     mobileMedium,
     mobileLandscape,
-    phablet,
 } from '@guardian/pasteup/breakpoints';
 import { pillarPalette, pillarMap } from '../../../../pillars';
 
