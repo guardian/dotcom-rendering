@@ -7,8 +7,9 @@ import {
     tablet,
     mobileMedium,
     mobileLandscape,
+    phablet,
 } from '@guardian/pasteup/breakpoints';
-import { pillarPalette } from '../../../../pillars';
+import { pillarPalette, pillarMap } from '../../../../pillars';
 
 const wrapperCollapsed = css`
     height: 36px;
@@ -21,15 +22,18 @@ const wrapperCollapsed = css`
 
 const subnav = css`
     list-style: none;
-    padding: 0 5px;
-
-    ${tablet} {
-        padding: 0 15px;
-    }
 
     li {
         float: left;
-        line-height: 48px;
+        line-height: 40px;
+    }
+    padding: 0 5px;
+
+    ${tablet} {
+        li {
+            line-height: 48px;
+        }
+        padding: 0 15px;
     }
 `;
 
@@ -75,7 +79,9 @@ const linkStyle = css`
         text-decoration: underline;
     }
 `;
-
+const selected = css`
+    font-weight: 700;
+`;
 const moreStyle = css`
     ${fontStyle};
 
@@ -97,26 +103,29 @@ const parentLinkStyle = css`
     ${linkStyle};
     font-weight: 700;
 `;
-
-const parentStyle = (pillar?: Pillar): string => {
-    const colour = pillar ? pillarPalette[pillar].main : palette.neutral[7];
-
-    return css`
+const ps1 = css`
+    :after {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 10px solid ${palette.neutral[7]};
+        margin-left: 4px;
+    }
+`; // I'm not sure what the palette.neutral is for this should always receive a pillar by types.
+const psp = pillarMap(
+    pillar => css`
         :after {
-            content: '';
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-left: 10px solid ${colour};
-            margin-left: 4px;
+            border-left-color: ${pillarPalette[pillar].main};
         }
-    `;
-};
+    `,
+);
 
 export const Inner: React.SFC<{
     links: LinkType[];
+    currentNavLink: string;
     pillar: Pillar;
     parent?: LinkType | undefined;
     showMore: boolean;
@@ -127,6 +136,7 @@ export const Inner: React.SFC<{
     toggle: () => void;
 }> = ({
     links,
+    currentNavLink,
     pillar,
     parent,
     showMore,
@@ -137,7 +147,7 @@ export const Inner: React.SFC<{
     toggle,
 }) => {
     const parentLink = parent && (
-        <li key={parent.url} className={parentStyle(pillar)}>
+        <li key={parent.url} className={cx(ps1, psp[pillar])}>
             <a className={parentLinkStyle} href={parent.url}>
                 {parent.title}
             </a>
@@ -145,7 +155,12 @@ export const Inner: React.SFC<{
     );
     const list = links.map(link => (
         <li key={link.url}>
-            <a className={linkStyle} href={link.url}>
+            <a
+                className={cx(linkStyle, {
+                    [selected]: link.title === currentNavLink,
+                })}
+                href={link.url}
+            >
                 {link.title}
             </a>
         </li>
@@ -165,7 +180,7 @@ export const Inner: React.SFC<{
             </ul>
             {showMore && (
                 <button onClick={toggle} className={moreStyle}>
-                    Less
+                    {isExpanded ? 'Less' : 'More'}
                 </button>
             )}
         </div>
