@@ -396,11 +396,7 @@ export interface GADataType {
 // All GA fields should  fall back to default values -
 // we should not bring down the website if a trackable field is missing!
 export const extractGAMeta = (data: {}): GADataType => {
-    const edition = getString(
-        data,
-        'guardian.config.page.edition',
-        '',
-    ).toLowerCase();
+    const edition = getString(data, 'config.page.edition', '').toLowerCase();
 
     return {
         webTitle: getString(data, 'config.page.webTitle', ''),
