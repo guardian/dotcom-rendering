@@ -44,7 +44,7 @@ export default ({
                     .join('\n')}
                 <link rel="stylesheet" href="${assets.static(
                     'css/fonts.css',
-                )}" />
+                )}" media="nope!" onload="this.media='all'"/>
                 <style>${resetCSS}${css}</style>
             </head>
             <body>
