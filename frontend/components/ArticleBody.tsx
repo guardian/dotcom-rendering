@@ -20,7 +20,7 @@ import {
     tablet,
 } from '@guardian/pasteup/breakpoints';
 import { pillarMap, pillarPalette } from '../pillars';
-import { ArticleRenderer } from './elements/elementRenderer';
+import { ArticleRenderer } from './elements/ElementRenderer';
 
 const wrapper = css`
     padding-top: 6px;
