@@ -43,7 +43,7 @@ export default ({
                             )}" as="font" crossorigin>`,
                     )
                     .join('\n')}
-                <style>${resetCSS}${css}${fontsCSS}</style>
+                <style>${fontsCSS}${resetCSS}${css}</style>
             </head>
             <body>
                 <div id='app'>${html}</div>
