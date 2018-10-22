@@ -36,8 +36,21 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
     }
 };
 
+const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
+    try {
+        const resp = 'hello, world';
+
+        res.status(200).send(resp);
+    } catch (e) {
+        res.status(500).send(`<pre>${e.stack}</pre>`);
+    }
+};
+
 // this export is the function used by webpackHotServerMiddleware in /dev-server.js
-export default () => renderArticle;
+export default (options: any) => {
+    if ('amp' in options) return renderAMPArticle;
+    return renderArticle;
+};
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
@@ -74,6 +87,7 @@ if (process.env.NODE_ENV === 'production') {
     }
 
     app.use('/Article', renderArticle);
+    app.use('/AMPArticle', renderAMPArticle);
 
     app.get('/', (req, res) => {
         try {
@@ -83,6 +97,7 @@ if (process.env.NODE_ENV === 'production') {
                 <body>
                     <ul>
                         <li><a href="/Article">Article</a></li>
+                        <li><a href="/AMPArticle">Article</a></li>
                     </ul>
                 </body>
                 </html>
