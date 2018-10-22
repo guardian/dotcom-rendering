@@ -69,7 +69,7 @@ const go = async () => {
         },
         webpackHotServerMiddleware(compiler, {
             chunkName: `${siteName}.server`,
-            serverRendererOptions:{ amp: true }
+            serverRendererOptions: { amp: true },
         }),
     );
 

@@ -7,6 +7,7 @@ import {
     GuardianConfiguration,
 } from './lib/aws-parameters';
 import document from '../../frontend/document';
+import AMPDocument from '../../frontend/amp/document';
 import { dist, root } from '../../config';
 import { log, warn } from '../../lib/log';
 
@@ -38,7 +39,9 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
 
 const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
-        const resp = 'hello, world';
+        const resp = AMPDocument({
+            bodyHTML: '<h1>This is a valid AMP doc!</h1>',
+        });
 
         res.status(200).send(resp);
     } catch (e) {
