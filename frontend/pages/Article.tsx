@@ -70,7 +70,6 @@ const articleContainer = css`
 const Article: React.SFC<{
     data: ArticleProps;
 }> = ({ data }) => {
-    console.log(data.CAPI.elements);
     return (
         <div>
             <Header nav={data.NAV} pillar={data.CAPI.pillar} />
