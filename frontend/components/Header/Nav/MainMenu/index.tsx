@@ -83,6 +83,6 @@ export const MainMenu: React.SFC<{
         aria-hidden={!showMainMenu}
         id={id}
     >
-        <Columns nav={nav} />
+        {showMainMenu && <Columns nav={nav} />}
     </div>
 );
