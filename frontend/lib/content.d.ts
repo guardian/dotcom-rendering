@@ -6,11 +6,6 @@ interface TextBlockElement {
     html: string;
 }
 
-interface TweetBlockElement {
-    _type: 'model.liveblog.TweetBlockElement';
-    html: string;
-}
-
 interface ImageBlockElement {
     _type: 'model.liveblog.ImageBlockElement';
     media: {allImages: Image[]};
@@ -29,4 +24,4 @@ interface Image{
     url: string
 }
 
-type CAPIElement = TextBlockElement | ImageBlockElement | TweetBlockElement
+type CAPIElement = TextBlockElement | ImageBlockElement
