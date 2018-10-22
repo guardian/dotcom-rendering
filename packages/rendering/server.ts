@@ -18,6 +18,8 @@ import {
     extractGAMeta,
 } from '../../frontend/lib/parse-capi';
 
+declare const __COMMIT_ID__: string;
+
 const renderArticle = ({ body }: express.Request, res: express.Response) => {
     try {
         const resp = document({
@@ -72,6 +74,10 @@ if (process.env.NODE_ENV === 'production') {
 
     app.get('/_healthcheck', (req, res) => {
         res.status(200).send('OKAY');
+    });
+
+    app.get('/_prout', (req, res) => {
+        res.status.send(__COMMIT_ID__);
     });
 
     // if running prod server locally, serve local assets
