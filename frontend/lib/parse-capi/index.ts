@@ -358,6 +358,7 @@ export const extractNavMeta = (data: {}): NavType => {
             'config.nav.brandExtensions',
             [],
         ).map(l => getLink(l, { isPillar: false })),
+        currentNavLink: getString(data, 'config.nav.currentNavLink.title', ''),
         subNavSections: subnav
             ? {
                   parent: subnav.parent

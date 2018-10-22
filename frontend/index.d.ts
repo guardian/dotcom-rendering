@@ -29,6 +29,7 @@ interface NavType {
     pillars: Array<PillarType>,
     otherLinks: MoreType,
     brandExtensions: Array<LinkType>,
+    currentNavLink: string,
     subNavSections?: {
         parent?: LinkType,
         links: Array<LinkType>,
