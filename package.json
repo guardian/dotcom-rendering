@@ -38,6 +38,7 @@
         "bundlesize": "^0.17.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "log-update": "^2.3.0",
+        "minify-css-string": "^1.0.0",
         "prettier": "^1.7.4",
         "simple-progress-webpack-plugin": "^1.1.2",
         "string-replace-loader": "^2.1.1",

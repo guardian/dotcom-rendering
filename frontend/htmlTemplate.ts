@@ -1,4 +1,5 @@
 import resetCSS from /* preval */ './lib/reset-css';
+import fontsCSS from './lib/fonts-css';
 import assets from './lib/assets';
 
 export default ({
@@ -42,10 +43,7 @@ export default ({
                             )}" as="font" crossorigin>`,
                     )
                     .join('\n')}
-                <link rel="stylesheet" href="${assets.static(
-                    'css/fonts.css',
-                )}" media="nope!" onload="this.media='all'"/>
-                <style>${resetCSS}${css}</style>
+                <style>${resetCSS}${css}${fontsCSS}</style>
             </head>
             <body>
                 <div id='app'>${html}</div>
