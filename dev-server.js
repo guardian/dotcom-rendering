@@ -57,6 +57,23 @@ const go = async () => {
     );
 
     app.get(
+        '/AMPArticle',
+        async (req, res, next) => {
+            const { html, ...config } = await fetch(
+                `${req.query.url ||
+                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?guui`,
+            ).then(article => article.json());
+
+            req.body = config;
+            next();
+        },
+        webpackHotServerMiddleware(compiler, {
+            chunkName: `${siteName}.server`,
+            serverRendererOptions: { amp: true },
+        }),
+    );
+
+    app.get(
         '/static/frontend',
         express.static(
             path.relative(__dirname, path.resolve(root, 'frontend', 'static')),
