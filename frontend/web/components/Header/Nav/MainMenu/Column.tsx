@@ -229,11 +229,7 @@ export const More: React.SFC<{
     return (
         <li className={cx(columnStyle)} role="none">
             <MembershipLinks />
-            <ColumnLinks
-                column={more}
-                showColumnLinks={true}
-                id={subNavId}
-            />
+            <ColumnLinks column={more} showColumnLinks={true} id={subNavId} />
         </li>
     );
 };
