@@ -1,7 +1,7 @@
 import document from './document';
 import validator from 'amphtml-validator';
 import React from 'react';
-import Article from './components/Article';
+import Article from './pages/Article';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();

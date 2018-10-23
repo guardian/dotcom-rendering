@@ -9,7 +9,7 @@ import {
 } from './lib/aws-parameters';
 import document from '../../frontend/document';
 import AMPDocument from '../../frontend/amp/document';
-import AMPArticle from '../../frontend/amp/components/Article';
+import AMPArticle from '../../frontend/amp/pages/Article';
 import { dist, root } from '../../config';
 import { log, warn } from '../../lib/log';
 

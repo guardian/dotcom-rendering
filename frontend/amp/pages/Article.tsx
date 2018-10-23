@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from './Footer';
-import Container from './Container';
+import Footer from '../components/Footer';
+import Container from '../components/Container';
 
 const Article: React.SFC = () => (
     <Container>
