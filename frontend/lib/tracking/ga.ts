@@ -21,7 +21,6 @@ const getQueryParam = (
 
 export const init = (): void => {
     const { ga } = window;
-    const { ophan } = window.guardian.config;
     const { GA } = window.guardian.app.data;
     const tracker: TrackerConfig = {
         name: 'allEditorialPropertyTracker',
@@ -45,8 +44,6 @@ export const init = (): void => {
     /***************************************************************************************
      * Custom dimensions common to all platforms across the whole Guardian estate          *
      ***************************************************************************************/
-    ga(set, 'dimension1', ophan.pageViewId);
-    ga(set, 'dimension2', ophan.browserId);
     ga(set, 'dimension3', 'theguardian.com'); /* Platform */
     /***************************************************************************************
      * Custom dimensions for 'editorial' platforms (this site, the mobile apps, etc.)      *

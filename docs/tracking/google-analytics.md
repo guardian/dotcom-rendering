@@ -10,8 +10,8 @@ Dimension   | Value                      | Description                          
 forceSSL    | true                       |                                                                        |
 title       | GA.webTitle                |                                                                        |
 anonymizeIp | true                       |                                                                        |
-dimension1  | ophan.pageViewId           |                                                                        |
-dimension2  | ophan.browserId            |                                                                        |
+~dimension1~|~ophan.pageViewId~          | Inactive due to GDPR                                                   |
+~dimension2~|~ophan.browserId~           | Inactive due to GDPR                                                   |
 dimension3  | 'theguardian.com'          | Platform                                                               |
 dimension4  | GA.section                 |                                                                        |
 dimension5  | GA.contentType             |                                                                        |
