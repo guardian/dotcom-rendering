@@ -2,17 +2,13 @@
 
 ## Context
 
-GUUI intends to be, at some level, a libraty of components.
+GUUI intends to be, at some level, a library of components.
 
 Dotcom rendering will require a mapping of CAPI element to React Component.
-
-### Storybook
 
 Storybook is a widely used library which allows a series of demos and examples to be easily constructed. It also has support for typescript.
 
 ## Decision
-
-#### Individual Storybook
 
 It is possible to envision a split in components:
 
@@ -27,6 +23,6 @@ Storybook must be installed and set up. All existing components must be added an
 
 ## Status
 
-Defered
+Proposed
 
 _People are generally in favour, but there doesn't seem like an obvious time to implement it. This should be revisted before we have too many elements._
