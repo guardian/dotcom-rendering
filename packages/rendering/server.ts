@@ -77,7 +77,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 
     app.get('/_prout', (req, res) => {
-        res.status.send(__COMMIT_ID__);
+        res.status(200).send(__COMMIT_ID__);
     });
 
     // if running prod server locally, serve local assets
