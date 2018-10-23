@@ -8,12 +8,6 @@ declare global {
                 data: any;
                 cssIDs: string[];
             };
-            config: {
-                ophan: {
-                    browserId: string;
-                    pageViewId: string;
-                };
-            };
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
