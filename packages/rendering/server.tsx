@@ -41,7 +41,7 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
 
 const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
-        const resp = AMPDocument({ body: React.createElement(AMPArticle) });
+        const resp = AMPDocument({ body: <AMPArticle /> });
         res.status(200).send(resp);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
