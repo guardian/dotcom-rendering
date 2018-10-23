@@ -69,32 +69,30 @@ const articleContainer = css`
 
 const Article: React.SFC<{
     data: ArticleProps;
-}> = ({ data }) => {
-    return (
-        <div>
-            <Header nav={data.NAV} pillar={data.CAPI.pillar} />
-            <main className={articleWrapper}>
-                <Container className={articleContainer}>
-                    <article>
-                        <ArticleBody CAPI={data.CAPI} config={data.config} />
-                        <div className={secondaryColumn} />
-                    </article>
-                    <MostViewed sectionName={data.CAPI.sectionName} />
-                </Container>
-            </main>
+}> = ({ data }) => (
+    <div>
+        <Header nav={data.NAV} pillar={data.CAPI.pillar} />
+        <main className={articleWrapper}>
+            <Container className={articleContainer}>
+                <article>
+                    <ArticleBody CAPI={data.CAPI} config={data.config} />
+                    <div className={secondaryColumn} />
+                </article>
+                <MostViewed sectionName={data.CAPI.sectionName} />
+            </Container>
+        </main>
 
-            <SubNav
-                subnav={data.NAV.subNavSections}
-                pillar={data.CAPI.pillar}
-                currentNavLink={data.NAV.currentNavLink}
-            />
-            <BackToTop />
+        <SubNav
+            subnav={data.NAV.subNavSections}
+            pillar={data.CAPI.pillar}
+            currentNavLink={data.NAV.currentNavLink}
+        />
+        <BackToTop />
 
-            <Footer />
+        <Footer />
 
-            <CookieBanner />
-        </div>
-    );
-};
+        <CookieBanner />
+    </div>
+);
 
 export default Article;
