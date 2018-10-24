@@ -90,7 +90,7 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const membershipLinks = css`
+const readerRevenueLinksStyle = css`
     background-color: ${palette.neutral[93]};
 `;
 
@@ -185,24 +185,26 @@ const columnStyle = css`
     }
 `;
 
-const MembershipLinks: React.SFC<{}> = () => {
+export const ReaderRevenueLinks: React.SFC<{
+    readerRevenueLinks: ReaderRevenueLinks;
+}> = ({ readerRevenueLinks }) => {
     const links: LinkType[] = [
         {
             longTitle: 'Make a contribution',
             title: 'Make a contribution',
             mobileOnly: true,
-            url: '#',
+            url: readerRevenueLinks.sideMenu.contribute,
         },
         {
             longTitle: 'Subscribe',
             title: 'Subscribe',
             mobileOnly: true,
-            url: '#',
+            url: readerRevenueLinks.sideMenu.subscribe,
         },
     ];
 
     return (
-        <ul className={cx(membershipLinks, hideDesktop)}>
+        <ul className={cx(readerRevenueLinksStyle, hideDesktop)}>
             {(links || []).map(link => (
                 <ColumnLink link={link} key={link.title.toLowerCase()} />
             ))}
@@ -228,7 +230,6 @@ export const More: React.SFC<{
     };
     return (
         <li className={cx(columnStyle)} role="none">
-            <MembershipLinks />
             <ColumnLinks column={more} showColumnLinks={true} id={subNavId} />
         </li>
     );

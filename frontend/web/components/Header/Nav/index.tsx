@@ -88,6 +88,7 @@ export default class Nav extends Component<
                         isPayingMember={false}
                         isRecentContributor={false}
                         isSignedIn={isSignedIn}
+                        readerRevenueLinks={nav.readerRevenueLinks}
                     />
                     <Pillars
                         showMainMenu={showMainMenu}

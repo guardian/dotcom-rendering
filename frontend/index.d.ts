@@ -25,6 +25,21 @@ interface MoreType extends LinkType {
     more: true
 }
 
+interface ReaderRevenueLinks {
+    header: {
+        subscribe: string;
+        support: string;
+    },
+    footer: {
+        subscribe: string;
+        contribute: string;
+    },
+    sideMenu: {
+        subscribe: string;
+        contribute: string;
+    },
+}
+
 interface NavType {
     pillars: Array<PillarType>,
     otherLinks: MoreType,
@@ -34,6 +49,7 @@ interface NavType {
         parent?: LinkType,
         links: Array<LinkType>,
     },
+    readerRevenueLinks: ReaderRevenueLinks
 }
 
 interface AuthorType {
