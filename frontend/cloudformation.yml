@@ -199,7 +199,7 @@ Resources:
               cd /home/dotcom-rendering
 
               aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
-              unzip ${App}.zip -d ${App}
+              unzip -q ${App}.zip -d ${App}
               
               chown -R dotcom-rendering:frontend ${App}
 
