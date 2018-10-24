@@ -19,7 +19,7 @@ import {
     desktop,
     tablet,
 } from '@guardian/pasteup/breakpoints';
-import { pillarMap, pillarPalette } from '../pillars';
+import { pillarMap, pillarPalette } from '../../pillars';
 import { ArticleRenderer } from './lib/ArticleRenderer';
 
 const wrapper = css`

@@ -3,7 +3,7 @@ import { serif } from '@guardian/pasteup/fonts';
 import { css, cx } from 'react-emotion';
 
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
-import { pillarMap, pillarPalette } from '../../../../pillars';
+import { pillarMap, pillarPalette } from '../../../../../pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { CollapseColumnButton } from './CollapseColumnButton';
 

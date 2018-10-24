@@ -4,7 +4,7 @@ const glob = promisify(require('glob'));
 
 const siteName = 'frontend';
 const getPagesForSite = () =>
-    glob('*.ts*(x)', { cwd: `${siteName}/pages` }).then(paths =>
+    glob('*.ts*(x)', { cwd: `${siteName}/web/pages` }).then(paths =>
         paths.map(path => path.replace(/\.[^/.]+$/, '')),
     );
 

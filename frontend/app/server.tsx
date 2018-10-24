@@ -7,7 +7,7 @@ import {
     getGuardianConfiguration,
     GuardianConfiguration,
 } from './lib/aws-parameters';
-import document from '../document';
+import document from '../web/document';
 import AMPDocument from '../amp/document';
 import AMPArticle from '../amp/pages/Article';
 import { dist, root } from '../../config';
