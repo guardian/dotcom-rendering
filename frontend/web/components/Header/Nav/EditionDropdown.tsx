@@ -4,7 +4,7 @@ import { css } from 'react-emotion';
 import { Dropdown } from '@guardian/guui';
 import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown';
-import { getCookie } from '../../../../lib/cookie';
+import { getCookie } from '../../../lib/cookie';
 
 const editionDropdown = css`
     display: none;
