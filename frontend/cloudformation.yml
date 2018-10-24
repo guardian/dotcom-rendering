@@ -57,14 +57,14 @@ Resources:
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: HTTP access to the load balancer from within the Guardian (for now)
+      GroupDescription: Access from within VPC only
       VpcId:
         Ref: VpcId
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: 80
         ToPort: 80
-        CidrIp: 0.0.0.0/0
+        CidrIp: 10.248.136.0/22
       Tags:
       - Key: Stage
         Value:
