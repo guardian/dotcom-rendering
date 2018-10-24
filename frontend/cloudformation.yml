@@ -194,16 +194,22 @@ Resources:
           !Sub |
               #!/bin/bash -ev
 
-              cd /home/ubuntu
+              groupadd frontend
+              useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+              cd /home/dotcom-rendering
 
               aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
               unzip ${App}.zip -d ${App}
+              
+              chown -R dotcom-rendering:frontend ${App}
+
               cd ${App}
 
               export TERM=xterm-256color
-
+              export NODE_ENV=production
               export GU_STAGE=${Stage}
-              make start
+
+              pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
