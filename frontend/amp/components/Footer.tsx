@@ -3,7 +3,7 @@ import { css } from 'react-emotion';
 import { sans } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import InnerContainer from './InnerContainer';
-import { footerLinks, Link } from '../../lib/footerLinks';
+import { footerLinks, Link } from '../../lib/footer-links';
 
 const footer = css`
     background-color: ${palette.neutral[20]};
