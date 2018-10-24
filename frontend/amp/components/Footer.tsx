@@ -6,10 +6,10 @@ import InnerContainer from './InnerContainer';
 import { footerLinks, Link } from '@frontend/lib/footer-links';
 
 const footer = css`
-    background-color: ${palette.neutral[20]};
+    background-color: #052962;
     color: ${palette.neutral[86]};
     font-family: ${sans.body};
-    font-size: 14px;
+    font-size: 16px;
 `;
 
 const footerInner = css`
@@ -17,13 +17,13 @@ const footerInner = css`
 `;
 
 const footerLink = css`
-    color: ${palette.neutral[86]};
+    color: ${palette.neutral[100]};
     text-decoration: none;
     padding-bottom: 12px;
     display: block;
 
     :hover {
-        text-decoration: underline;
+        color: ${palette.highlight.main};
     }
 `;
 
@@ -31,12 +31,10 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    border-top: 1px solid ${palette.neutral[46]};
 
     ul {
         width: 50%;
         border-left: 1px solid ${palette.neutral[46]};
-        margin: 0;
 
         :nth-child(odd) {
             border-left: 0px;
@@ -56,7 +54,8 @@ const footerList = css`
             padding-left: 0px;
         }
 
-        padding: 12px 0 0 10px;
+        padding: 0 0 0 10px;
+        margin-top: 12px;
     }
 `;
 

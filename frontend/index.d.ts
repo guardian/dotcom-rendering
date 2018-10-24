@@ -125,3 +125,14 @@ declare module "minify-css-string" {
     const minifyCSSString: any;
     export default minifyCSSString;
 }
+
+/* AMP types */
+declare namespace JSX {
+	interface IntrinsicElements {
+        'amp-sidebar': any;
+        'amp-accordion': any;
+        'amp-img': any;
+        'amp-list': any;
+        'template': any;
+    }
+}
