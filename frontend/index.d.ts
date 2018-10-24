@@ -97,3 +97,7 @@ declare module "compose-function" {
     const compose: any;
     export default compose;
 }
+declare module "minify-css-string" {
+    const minifyCSSString: any;
+    export default minifyCSSString;
+}
