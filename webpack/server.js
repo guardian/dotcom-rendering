@@ -1,4 +1,4 @@
-const entryFile = require.resolve('@guardian/rendering/server.ts');
+const entryFile = require.resolve('@guardian/rendering/server.tsx');
 const { siteName } = require('../config');
 
 module.exports = () => ({

@@ -1,5 +1,6 @@
 import * as path from 'path';
 import express from 'express';
+import React from 'react';
 
 import recordBaselineCloudWatchMetrics from './lib/metrics-baseline';
 import {
@@ -8,6 +9,7 @@ import {
 } from './lib/aws-parameters';
 import document from '../../frontend/document';
 import AMPDocument from '../../frontend/amp/document';
+import AMPArticle from '../../frontend/amp/pages/Article';
 import { dist, root } from '../../config';
 import { log, warn } from '../../lib/log';
 
@@ -39,10 +41,7 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
 
 const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
-        const resp = AMPDocument({
-            bodyHTML: '<h1>This is a valid AMP doc!</h1>',
-        });
-
+        const resp = AMPDocument({ body: <AMPArticle /> });
         res.status(200).send(resp);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
