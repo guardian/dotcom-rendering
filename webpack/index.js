@@ -5,7 +5,6 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('../lib/report-bundle-size');
 const Progress = require('../lib/webpack-progress');
 const { root, dist, siteName, getPagesForSite } = require('../config');
-const { execSync } = require('child_process');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -70,9 +69,7 @@ const common = ({ platform, page = '' }) => ({
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-            __COMMIT_ID__: JSON.stringify(
-                execSync('git rev-parse HEAD').toString(),
-            ),
+            __COMMIT_ID__: JSON.stringify(process.env.BUILD_VCS_NUMBER),
         }),
         !process.env.TEAMCITY && progress(`${siteName}.${platform}.${page}`),
         PROD && !process.env.HIDE_BUNDLES && reportBundleSize,
