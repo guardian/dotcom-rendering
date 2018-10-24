@@ -31,11 +31,11 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    border-top: 1px solid #434343;
+    border-top: 1px solid ${palette.neutral[46]};
 
     ul {
         width: 50%;
-        border-left: 1px solid #434343;
+        border-left: 1px solid ${palette.neutral[46]};
         margin: 0;
 
         :nth-child(odd) {
@@ -63,7 +63,7 @@ const footerList = css`
 const copyright = css`
     font-size: 12px;
     padding: 6px 0 18px;
-    border-top: 1px solid #434343;
+    border-top: 1px solid ${palette.neutral[46]};
     margin-top: 12px;
 `;
 
