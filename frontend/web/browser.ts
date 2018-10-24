@@ -3,7 +3,7 @@ import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
 
-import Article from '../web/pages/Article';
+import Article from './pages/Article';
 
 const { data, cssIDs } = window.guardian.app;
 
@@ -27,6 +27,6 @@ if (container) {
     hydrateApp(React.createElement(Article, { data }), container);
 }
 
-import('../lib/tracking/ga').then(({ init }) => {
+import('./lib/ga').then(({ init }) => {
     init();
 });

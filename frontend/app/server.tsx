@@ -2,11 +2,11 @@ import * as path from 'path';
 import express from 'express';
 import React from 'react';
 
-import recordBaselineCloudWatchMetrics from './lib/metrics-baseline';
+import recordBaselineCloudWatchMetrics from './aws/metrics-baseline';
 import {
     getGuardianConfiguration,
     GuardianConfiguration,
-} from './lib/aws-parameters';
+} from './aws/aws-parameters';
 import document from '../web/document';
 import AMPDocument from '../amp/document';
 import AMPArticle from '../amp/pages/Article';
