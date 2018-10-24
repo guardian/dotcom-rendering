@@ -70,9 +70,9 @@ const common = ({ platform, page = '' }) => ({
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-            '__COMMIT_ID__': JSON.stringify(
-                execSync('git rev-parse HEAD').toString()
-            )
+            __COMMIT_ID__: JSON.stringify(
+                execSync('git rev-parse HEAD').toString(),
+            ),
         }),
         !process.env.TEAMCITY && progress(`${siteName}.${platform}.${page}`),
         PROD && !process.env.HIDE_BUNDLES && reportBundleSize,
