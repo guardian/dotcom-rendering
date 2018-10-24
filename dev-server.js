@@ -87,6 +87,7 @@ const go = async () => {
             <body>
                 <ul>
                     <li><a href="/Article">Article</a></li>
+                    <li><a href="/AMPArticle">⚡️Article</a></li>
                 </ul>
             </body>
             </html>

@@ -9,7 +9,7 @@ import {
 } from './aws/aws-parameters';
 import document from '../web/document';
 import AMPDocument from '../amp/document';
-import AMPArticle from '../amp/pages/Article';
+import { Article as AMPArticle } from '../amp/pages/Article';
 import { dist, root } from '../../config';
 import { log, warn } from '../../lib/log';
 
@@ -41,7 +41,12 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
 
 const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
-        const resp = AMPDocument({ body: <AMPArticle /> });
+        const data: ArticleProps = {
+            CAPI: extractArticleMeta(body),
+            NAV: extractNavMeta(body),
+            config: extractConfigMeta(body),
+        };
+        const resp = AMPDocument({ body: <AMPArticle data={data} /> });
         res.status(200).send(resp);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
@@ -99,7 +104,7 @@ if (process.env.NODE_ENV === 'production') {
                 <body>
                     <ul>
                         <li><a href="/Article">Article</a></li>
-                        <li><a href="/AMPArticle">Article</a></li>
+                        <li><a href="/AMPArticle">⚡️Article</a></li>
                     </ul>
                 </body>
                 </html>
