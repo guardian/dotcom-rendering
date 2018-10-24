@@ -3,7 +3,7 @@ import get from 'lodash.get';
 
 import clean from './clean';
 import bigBullets from './big-bullets';
-import { pillarNames } from '../../pillars';
+import { pillarNames } from '../pillars';
 import { getSharingUrls } from './sharing-urls';
 
 // tslint:disable:prefer-array-literal
