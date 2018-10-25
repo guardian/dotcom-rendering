@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button It should render correctly 1`] = `
+<button
+  onClick={[Function]}
+>
+  <Component>
+    Clicked 
+    0
+     times
+  </Component>
+</button>
+`;
