@@ -209,7 +209,7 @@ Resources:
               export NODE_ENV=production
               export GU_STAGE=${Stage}
 
-              pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+              /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
