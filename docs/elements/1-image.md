@@ -21,7 +21,7 @@ The assets from the CAPI output are processed by [imageMediaFor](https://github.
 ```html
  <figure class="element element-image" data-media-id="d1c48b0c6ec594b396f786cfd3f6ba6ae0d93516"> <img src="https://media.guim.co.uk/d1c48b0c6ec594b396f786cfd3f6ba6ae0d93516/0_105_2754_1652/1000.jpg" alt="A photo of a cat to show a demo image." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A photo of a cat to show a demo image.
 </figcaption></span> <span class=
- "element-image__credit">Photograph: STR/AFP/Getty Images</span> </figcaption> </figure>
+ "element-image__credit">Photograph: Murdo Macleod</span> </figcaption> </figure>
 ```
 
 ## Article Cleaned HTML
