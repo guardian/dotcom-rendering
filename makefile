@@ -102,9 +102,6 @@ install: check-env
 	$(call log, "refreshing dependencies")
 	@yarn --silent
 
-install-noisy: check-env
-	@yarn
-
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
 
