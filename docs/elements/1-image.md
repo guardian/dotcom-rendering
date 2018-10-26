@@ -73,9 +73,17 @@ The assets from the CAPI output are processed by [imageMediaFor](https://github.
 
 This is run through the [PictureCleaner](https://github.com/guardian/frontend/blob/bb83dabb21aea326c67168d0e0d3f6d4ccef6af5/common/app/views/support/HtmlCleaner.scala#L112) which attempts to find an `ImageMedia` with which it does the following:
 - [Fills out a `<figure>` tag](https://github.com/guardian/frontend/blob/a5be9f80b1d2898b68d89d1035d57aca4f1629bd/common/app/views/fragments/imageFigure.scala.html) imageFigure.scala.html
-- [Builds a `<picture>` tag] (https://github.com/guardian/frontend/blob/48c86c0d3219a71f7f14b83eb7a6956421176f8e/common/app/views/fragments/image.scala.html) image.scala.html
-- Combines the __master__ ImageAsset and [breakpoints](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L17) to generate [srcset](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L240)s.
+- [Builds a `<picture>` tag](https://github.com/guardian/frontend/blob/48c86c0d3219a71f7f14b83eb7a6956421176f8e/common/app/views/fragments/image.scala.html) image.scala.html
+    - Uses [WidthsByBreakpoint](https://github.com/guardian/frontend/blob/91e117429d865936692de60aa2bea6740bde4f75/common/app/layout/WidthsByBreakpoint.scala#L1) to generate a list of _image_ breakpoints to combine with the media into urls.
+    - Combines the __master__ ImageAsset and [breakpoints](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L17) to generate [srcset](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L240)s.
 
 ## AMP Cleaned HTML
 
 This is run through the same cleaners and templates up to `image.scala.html` where it is then rendered using [ampImage](https://github.com/guardian/frontend/blob/f16a4ac50492dc65d7274576840c6993165a2485/common/app/views/fragments/amp/ampImage.scala.html) which uses [getAmpImageUrl](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L298) to get a 620px wide crop.
+
+## Salient points
+
+- Image URLS need to be rewritten from `media.guim` to `i.guim` on the server.
+- These URLS need to have the breakpoint encoded within it.
+- The CAPI response contains many images, we form our urls from the master image if sent, or the largest image.
+- The image breakpoints are [precalculated](https://github.com/guardian/frontend/blob/91e117429d865936692de60aa2bea6740bde4f75/common/app/layout/WidthsByBreakpoint.scala) image sizes for each presentation of an image for each screen breakpoint.
