@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
+import { css, cx } from 'react-emotion';
+
 import { Span } from './Span';
+
+const button = css`
+    font-size: 10px;
+    color: red;
+`;
+
+const focus = css`
+    color: blue;
+`;
 
 interface Props {
     inFocus: boolean;
+    onMouseEnter: () => void;
+    onMouseLeave: () => void;
 }
 
 export class Button extends Component<Props, { count: number }> {
@@ -15,9 +28,17 @@ export class Button extends Component<Props, { count: number }> {
     }
 
     public render() {
+        const { inFocus, onMouseEnter, onMouseLeave } = this.props;
         return (
-            <button onClick={this.handleClick}>
-                <Span>Clicked {this.state.count} times</Span>
+            <button
+                className={cx(button, {
+                    [focus]: inFocus,
+                })}
+                onClick={this.handleClick}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+            >
+                <Span count={this.state.count} />
             </button>
         );
     }

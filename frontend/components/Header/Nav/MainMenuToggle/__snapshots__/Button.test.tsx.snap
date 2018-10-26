@@ -1,13 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button It should render correctly 1`] = `
+exports[`Button snapshots It should render correctly 1`] = `
 <button
+  className="css-168vu8a"
   onClick={[Function]}
+  onMouseEnter={[MockFunction]}
+  onMouseLeave={[MockFunction]}
 >
-  <Component>
-    Clicked 
-    0
-     times
-  </Component>
+  <Component
+    count={0}
+  />
+</button>
+`;
+
+exports[`Button snapshots It should render with correct styles if inFocus is false 1`] = `
+<button
+  className="css-168vu8a"
+  onClick={[Function]}
+  onMouseEnter={[MockFunction]}
+  onMouseLeave={[MockFunction]}
+>
+  <Component
+    count={0}
+  />
+</button>
+`;
+
+exports[`Button snapshots It should render with correct styles if inFocus is true 1`] = `
+<button
+  className="css-vam8e5"
+  onClick={[Function]}
+  onMouseEnter={[MockFunction]}
+  onMouseLeave={[MockFunction]}
+>
+  <Component
+    count={0}
+  />
+</button>
+`;
+
+exports[`Button snapshots It should update when clicked 1`] = `
+<button
+  className="css-168vu8a"
+  onClick={[Function]}
+  onMouseEnter={[MockFunction]}
+  onMouseLeave={[MockFunction]}
+>
+  <Component
+    count={1}
+  />
 </button>
 `;
