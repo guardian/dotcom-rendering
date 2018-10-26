@@ -27,6 +27,14 @@ export class Button extends Component<Props, { count: number }> {
         };
     }
 
+    public doSomethingToState() {
+        const currentCount = this.state.count;
+
+        this.setState({
+            count: currentCount + 1,
+        });
+    }
+
     public render() {
         const { inFocus, onMouseEnter, onMouseLeave } = this.props;
         return (
