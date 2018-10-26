@@ -9,7 +9,7 @@ deployments:
       cloudFormationStackName: rendering
       amiParametersToTags:
         AMI:
-          Recipe: frontend-base
+          Recipe: dotcom-rendering
           BuiltBy: amigo
           AmigoStage: PROD
   rendering:
@@ -18,6 +18,7 @@ deployments:
       bucket: aws-frontend-artifacts
     dependencies:
       - frontend-static
+      - frontend-cfn
   frontend-static:
     type: aws-s3
     parameters:
