@@ -93,7 +93,7 @@ Resources:
       - IpProtocol: tcp
         FromPort: 22
         ToPort: 22
-        CidrIp: 0.0.0.0/0
+        CidrIp: 77.91.248.0/21
       Tags:
       - Key: Stage
         Value:
