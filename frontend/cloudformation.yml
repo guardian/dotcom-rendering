@@ -185,7 +185,7 @@ Resources:
         Ref: AMI
       SecurityGroups:
       - Ref: InstanceSecurityGroup
-      InstanceType: t2.medium
+      InstanceType: t3.medium
       IamInstanceProfile:
         Ref: InstanceProfile
       AssociatePublicIpAddress: true
