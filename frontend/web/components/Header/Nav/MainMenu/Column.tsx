@@ -90,6 +90,10 @@ const mainMenuLinkStyle = css`
     }
 `;
 
+const readerRevenueLinksStyle = css`
+    background-color: ${palette.neutral[93]};
+`;
+
 const ColumnLink: React.SFC<{
     link: LinkType;
 }> = ({ link }) => (
@@ -180,6 +184,33 @@ const columnStyle = css`
         width: 140px;
     }
 `;
+
+export const ReaderRevenueLinks: React.SFC<{
+    readerRevenueLinks: ReaderRevenueLinks;
+}> = ({ readerRevenueLinks }) => {
+    const links: LinkType[] = [
+        {
+            longTitle: 'Make a contribution',
+            title: 'Make a contribution',
+            mobileOnly: true,
+            url: readerRevenueLinks.sideMenu.contribute,
+        },
+        {
+            longTitle: 'Subscribe',
+            title: 'Subscribe',
+            mobileOnly: true,
+            url: readerRevenueLinks.sideMenu.subscribe,
+        },
+    ];
+
+    return (
+        <ul className={cx(readerRevenueLinksStyle, hideDesktop)}>
+            {links.map(link => (
+                <ColumnLink link={link} key={link.title.toLowerCase()} />
+            ))}
+        </ul>
+    );
+};
 
 export const More: React.SFC<{
     column: LinkType;

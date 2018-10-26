@@ -4,7 +4,7 @@ import { css } from 'react-emotion';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 import { serif } from '@guardian/pasteup/fonts';
 
-import { Column, More } from './Column';
+import { Column, More, ReaderRevenueLinks } from './Column';
 import { palette } from '@guardian/pasteup/palette';
 
 const ColumnsStyle = css`
@@ -106,6 +106,7 @@ export const Columns: React.SFC<{
                 index={i}
             />
         ))}
+        <ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
         <More
             column={nav.otherLinks}
             brandExtensions={nav.brandExtensions}

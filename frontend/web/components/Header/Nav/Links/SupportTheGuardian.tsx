@@ -88,13 +88,15 @@ const mobileSignInIcon = css`
     fill: ${palette.neutral[46]};
 `;
 
-const SupportTheGuardian: React.SFC<{}> = () => (
+const SupportTheGuardian: React.SFC<{
+    url: string;
+}> = ({ url }) => (
     <AsyncClientComponent f={shouldShow}>
         {({ data }) => (
             <>
                 {data && (
                     <>
-                        <a className={style} href="/">
+                        <a className={style} href={url}>
                             <div className={text}>
                                 Support The
                                 <br /> Guardian

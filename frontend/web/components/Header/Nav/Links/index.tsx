@@ -83,8 +83,6 @@ const links = css`
 `;
 
 const profileSubdomain = 'https://profile.theguardian.com';
-const subscribeUrl =
-    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support_subscribe%22%2C%22referrerPageviewId%22%3A%22jkjutjbkxfh1d8yyadfc%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fuk%22%7D';
 const jobsUrl = 'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader';
 const datingUrl =
     'https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader';
@@ -129,11 +127,20 @@ const Links: React.SFC<{
     isPayingMember: boolean;
     isRecentContributor: boolean;
     isSignedIn: boolean;
-}> = ({ isPayingMember, isRecentContributor, isSignedIn }) => (
+    readerRevenueLinks: ReaderRevenueLinks;
+}> = ({
+    isPayingMember,
+    isRecentContributor,
+    isSignedIn,
+    readerRevenueLinks,
+}) => (
     <div className={links}>
-        {isPayingMember || isRecentContributor || <SupportTheGuardian />}
+        {isPayingMember ||
+            isRecentContributor || (
+                <SupportTheGuardian url={readerRevenueLinks.header.support} />
+            )}
         <a
-            href={subscribeUrl}
+            href={readerRevenueLinks.header.subscribe}
             className={cx(link({ showAtTablet: true }), paddedLink)}
         >
             Subscribe
