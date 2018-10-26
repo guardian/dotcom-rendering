@@ -9,9 +9,9 @@ deployments:
       cloudFormationStackName: rendering
       amiParametersToTags:
         AMI:
-          Recipe: node-is-the-opium-of-the-people
+          Recipe: dotcom-rendering
           BuiltBy: amigo
-          AmigoStage: CODE
+          AmigoStage: PROD
   rendering:
     type: autoscaling
     parameters:
