@@ -205,7 +205,7 @@ export const ReaderRevenueLinks: React.SFC<{
 
     return (
         <ul className={cx(readerRevenueLinksStyle, hideDesktop)}>
-            {(links || []).map(link => (
+            {links.map(link => (
                 <ColumnLink link={link} key={link.title.toLowerCase()} />
             ))}
         </ul>
