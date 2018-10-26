@@ -1,4 +1,4 @@
-import { getCookie } from '../cookie';
+import { getCookie } from './cookie';
 
 interface TrackerConfig {
     name: string;

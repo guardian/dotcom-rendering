@@ -11,7 +11,7 @@ import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
 import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
 import { phablet, wide } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { pillarMap, pillarPalette } from '../pillars';
+import { pillarMap, pillarPalette } from '../../lib/pillars';
 
 const pillarFill = pillarMap(
     pillar =>

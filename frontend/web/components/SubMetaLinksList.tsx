@@ -3,7 +3,7 @@ import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { sans, serif } from '@guardian/pasteup/fonts';
 
-import { pillarMap, pillarPalette } from '../pillars';
+import { pillarMap, pillarPalette } from '../../lib/pillars';
 
 const pillarColours = pillarMap(
     pillar =>

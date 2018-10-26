@@ -5,7 +5,7 @@ import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { sans } from '@guardian/pasteup/fonts';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
-import { integerCommas } from '../lib/formatters';
+import { integerCommas } from '../../lib/formatters';
 
 const shareCount = css`
     font-size: 18px;
