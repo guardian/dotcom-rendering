@@ -2,9 +2,9 @@ import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 
-import assets from '../lib/assets';
 import htmlTemplate from './htmlTemplate';
 import Article from './pages/Article';
+import assets from '../lib/assets';
 import { GADataType } from '../lib/parse-capi';
 
 interface Props {
@@ -27,7 +27,6 @@ interface RenderToStringResult {
 export default ({ data }: Props) => {
     const { page, site, CAPI, NAV, config } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
-    const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(<Article data={{ CAPI, NAV, config }} />),
     );
@@ -50,8 +49,16 @@ export default ({ data }: Props) => {
         'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
     ];
 
+    /**
+     * The highest priority scripts.
+     * Only scripts critical to application execution may go in here
+     */
+    const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
+    const vendorJS = assets.dist('vendor.js');
+    const priorityScripts = [vendorJS, bundleJS];
+
     return htmlTemplate({
-        bundleJS,
+        priorityScripts,
         css,
         html,
         cssIDs,

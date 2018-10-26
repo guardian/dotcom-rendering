@@ -4,7 +4,7 @@ import assets from '../lib/assets';
 
 export default ({
     title = 'The Guardian',
-    bundleJS,
+    priorityScripts,
     css,
     html,
     data,
@@ -13,7 +13,7 @@ export default ({
     fontFiles = [],
 }: {
     title?: string;
-    bundleJS: string;
+    priorityScripts: string[];
     css: string;
     html: string;
     data: {
@@ -26,15 +26,17 @@ export default ({
 }) => {
     const sanitiseDomRefs = (jsString: string) =>
         jsString.replace(/"(document.*?innerHTML)"/g, '$1');
-    const vendorJS = assets.dist('vendor.js');
 
     return `<!doctype html>
         <html>
             <head>
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <link rel="preload" href="${vendorJS}" as="script">
-                <link rel="preload" href="${bundleJS}" as="script">
+                ${priorityScripts
+                    .map(
+                        url => `<link rel="preload" href="${url}" as="script">`,
+                    )
+                    .join('\n')}
                 ${fontFiles
                     .map(
                         fontFile =>
@@ -44,6 +46,27 @@ export default ({
                     )
                     .join('\n')}
                 <style>${fontsCSS}${resetCSS}${css}</style>
+                <script>
+                (function() {
+                    var firstScript = document.scripts[0];
+                    [${priorityScripts.map(
+                        script => `'${script}'`,
+                    )}].forEach(url => {
+                        if ('async' in firstScript) {
+                            // modern browsers
+                            var script = document.createElement('script');
+                            script.async = false;
+                            script.src = url;
+                            if (document.head) {
+                                document.head.appendChild(script);
+                            }
+                        } else {
+                            // fall back to defer
+                            document.write('<script src="' + url + '" defer></' + 'script>');
+                        }
+                    });
+                })();
+                </script>
             </head>
             <body>
                 <div id='app'>${html}</div>
@@ -62,8 +85,6 @@ export default ({
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
                 </script>
-                <script src="${vendorJS}"></script>
-                <script src="${bundleJS}"></script>
                 <script>${nonBlockingJS}</script>
             </body>
         </html>`;
