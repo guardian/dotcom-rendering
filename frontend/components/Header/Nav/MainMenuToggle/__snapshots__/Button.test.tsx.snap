@@ -1,8 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button snapshots It should render with correct styles if inFocus is false 1`] = `
+.emotion-0 {
+  font-size: 10px;
+  color: red;
+}
+
 <button
-  className="css-168vu8a"
+  className="emotion-0"
   onClick={[Function]}
   onMouseEnter={[MockFunction]}
   onMouseLeave={[MockFunction]}
@@ -14,8 +19,14 @@ exports[`Button snapshots It should render with correct styles if inFocus is fal
 `;
 
 exports[`Button snapshots It should render with correct styles if inFocus is true 1`] = `
+.emotion-0 {
+  font-size: 10px;
+  color: red;
+  color: blue;
+}
+
 <button
-  className="css-vam8e5"
+  className="emotion-0"
   onClick={[Function]}
   onMouseEnter={[MockFunction]}
   onMouseLeave={[MockFunction]}
@@ -27,8 +38,13 @@ exports[`Button snapshots It should render with correct styles if inFocus is tru
 `;
 
 exports[`Button snapshots It should update when clicked 1`] = `
+.emotion-0 {
+  font-size: 10px;
+  color: red;
+}
+
 <button
-  className="css-168vu8a"
+  className="emotion-0"
   onClick={[Function]}
   onMouseEnter={[MockFunction]}
   onMouseLeave={[MockFunction]}
