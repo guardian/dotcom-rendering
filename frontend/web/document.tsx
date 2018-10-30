@@ -51,11 +51,14 @@ export default ({ data }: Props) => {
 
     /**
      * The highest priority scripts.
-     * Only scripts critical to application execution may go in here
+     * Only scripts critical to application execution may go in here.
+     * Scripts will be executed in the order they appear in this array
      */
     const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
     const vendorJS = assets.dist('vendor.js');
-    const priorityScripts = [vendorJS, bundleJS];
+    const polyfillIO =
+        'https://assets.guim.co.uk/polyfill.io/v2/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&unknown=polyfill';
+    const priorityScripts = [polyfillIO, vendorJS, bundleJS];
 
     return htmlTemplate({
         priorityScripts,
