@@ -61,15 +61,12 @@ export default class EditionDropdown extends Component<
         super(props);
         this.state = { edition: defaultEdition };
     }
-
     public componentDidMount() {
         const selectedEdition = getCookie('GU_EDITION');
-
         if (selectedEdition && this.state.edition !== selectedEdition) {
             this.setState({ edition: selectedEdition });
         }
     }
-
     public render() {
         const activeEdition = editions[this.state.edition];
         const links = [uk, us, au, int].filter(

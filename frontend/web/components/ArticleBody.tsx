@@ -3,11 +3,11 @@ import { css, cx } from 'react-emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import dateformat from 'dateformat';
 import { sans, serif } from '@guardian/pasteup/fonts';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';
+import Dateline from './Dateline';
 
 // tslint:disable:react-no-dangerous-html
 
@@ -428,9 +428,6 @@ const metaExtras = css`
     }
 `;
 
-const dtFormat = (date: Date): string =>
-    dateformat(date, 'ddd d mmm yyyy HH:MM Z');
-
 const header = css`
     ${until.phablet} {
         margin: 0 -10px;
@@ -577,7 +574,7 @@ const ArticleBody: React.SFC<{
                         </div>
                     )}
                     <div className={dateline}>
-                        {dtFormat(CAPI.webPublicationDate)}
+                        <Dateline capiDate={CAPI.webPublicationDate} />
                     </div>
                     <div className={metaExtras}>
                         <SharingIcons
