@@ -16,7 +16,7 @@ class Dateline extends Component<
     { capiDate: Date },
     { capiDate: Date; edition: string }
 > {
-    constructor(props: any) {
+    constructor(props: { capiDate: Date }) {
         super(props);
         this.state = { capiDate: this.props.capiDate, edition: defaultEdition };
     }
@@ -30,7 +30,10 @@ class Dateline extends Component<
         }
     }
     public render() {
-        const formattedDatetime: string = dtFormatGU(this.state.capiDate, this.state.edition);
+        const formattedDatetime: string = dtFormatGU(
+            this.state.capiDate,
+            this.state.edition,
+        );
         return formattedDatetime;
     }
 }
