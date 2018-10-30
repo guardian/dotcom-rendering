@@ -30,11 +30,7 @@ class Dateline extends Component<
         }
     }
     public render() {
-        const formattedDatetime: string = dtFormatGU(
-            this.state.capiDate,
-            this.state.edition,
-        );
-        return formattedDatetime;
+        return dtFormatGU(this.state.capiDate, this.state.edition);
     }
 }
 
