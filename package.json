@@ -112,6 +112,6 @@
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
             "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx"
         },
-        "testResultsProcessor": "jest-teamcity-reporter",
+        "testResultsProcessor": "jest-teamcity-reporter"
     }
 }

@@ -5087,6 +5087,10 @@ jest-snapshot@^23.6.0:
     pretty-format "^23.6.0"
     semver "^5.5.0"
 
+jest-teamcity-reporter@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/jest-teamcity-reporter/-/jest-teamcity-reporter-0.9.0.tgz#a9f337a928a14e7e84163817456b930ecf7cbce8"
+
 jest-util@^22.4.3:
   version "22.4.3"
   resolved "http://registry.npmjs.org/jest-util/-/jest-util-22.4.3.tgz#c70fec8eec487c37b10b0809dc064a7ecf6aafac"
