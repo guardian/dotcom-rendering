@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css } from 'react-emotion';
+import { cx, css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -93,7 +93,7 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
 
     public render() {
         if (!this.state.shareCount) {
-            return '';
+            return null;
         }
 
         const displayCount = parseInt(this.state.shareCount.toFixed(0), 10);
@@ -116,8 +116,12 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
                             Shares
                         </span>
                     </h3>
-                    <div className={countFull}>{formattedDisplayCount}</div>
-                    <div className={countShort}>{shortDisplayCount}</div>
+                    <div className={cx('js-countFull', countFull)}>
+                        {formattedDisplayCount}
+                    </div>
+                    <div className={cx('js-countShort', countShort)}>
+                        {shortDisplayCount}
+                    </div>
                 </div>
             </div>
         );

@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CookieBanner snapshots It should render correctly if consentCookie not set 1`] = `
+exports[`CookieBanner snapshots It should not render if consentCookie set 1`] = `""`;
+
+exports[`CookieBanner snapshots It should render if consentCookie not set 1`] = `
 .emotion-5 {
   position: fixed;
   bottom: 0;
@@ -141,5 +143,3 @@ exports[`CookieBanner snapshots It should render correctly if consentCookie not 
   </Container>
 </div>
 `;
-
-exports[`CookieBanner snapshots It should render correctly if consentCookie set 1`] = `""`;

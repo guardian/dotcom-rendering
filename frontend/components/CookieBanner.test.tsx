@@ -27,7 +27,7 @@ describe('CookieBanner', () => {
     });
 
     describe('snapshots', () => {
-        it('It should render correctly if consentCookie not set', () => {
+        it('It should render if consentCookie not set', () => {
             getCookie.mockImplementation(() => false);
 
             const component = shallow(<CookieBanner />);
@@ -35,7 +35,7 @@ describe('CookieBanner', () => {
             expect(component).toMatchSnapshot();
         });
 
-        it('It should render correctly if consentCookie set', () => {
+        it('It should not render if consentCookie set', () => {
             getCookie.mockImplementation(() => true);
 
             const component = shallow(<CookieBanner />);

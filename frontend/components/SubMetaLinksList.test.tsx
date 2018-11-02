@@ -3,24 +3,18 @@ import { shallow } from 'enzyme';
 import { SubMetaLinksList } from './SubMetaLinksList';
 
 describe('SubMetaLinksList', () => {
-    let links: SimpleLinkType[];
-    let isSectionLinkList: boolean;
-    let pillar: Pillar;
-
-    beforeEach(() => {
-        links = [
-            {
-                url: '/test/1',
-                title: 'Test 1',
-            },
-            {
-                url: '/test/2',
-                title: 'Test 2',
-            },
-        ];
-        isSectionLinkList = false;
-        pillar = 'news';
-    });
+    const links: SimpleLinkType[] = [
+        {
+            url: '/test/1',
+            title: 'Test 1',
+        },
+        {
+            url: '/test/2',
+            title: 'Test 2',
+        },
+    ];
+    const isSectionLinkList: boolean = false;
+    const pillar: Pillar = 'news';
 
     describe('snapshots', () => {
         it('It should render correctly if isSectionLinkList true', () => {
