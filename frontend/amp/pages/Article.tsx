@@ -3,9 +3,12 @@ import Footer from '../components/Footer';
 import Container from '../components/Container';
 import { AmpRenderer } from '../components/lib/AMPRenderer';
 
-export const Article: React.SFC<{ data: ArticleProps }> = ({ data }) => (
+export const Article: React.SFC<{
+    pillar: Pillar;
+    elements: CAPIElement[];
+}> = ({ pillar, elements }) => (
     <Container>
-        <AmpRenderer pillar={data.CAPI.pillar} elements={data.CAPI.elements} />
+        <AmpRenderer pillar={pillar} elements={elements} />
         <Footer />
     </Container>
 );

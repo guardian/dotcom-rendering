@@ -41,12 +41,10 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
 
 const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
-        const data: ArticleProps = {
-            CAPI: extractArticleMeta(body),
-            NAV: extractNavMeta(body),
-            config: extractConfigMeta(body),
-        };
-        const resp = AMPDocument({ body: <AMPArticle data={data} /> });
+        const CAPI = extractArticleMeta(body);
+        const resp = AMPDocument({
+            body: <AMPArticle elements={CAPI.elements} pillar={CAPI.pillar} />,
+        });
         res.status(200).send(resp);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);

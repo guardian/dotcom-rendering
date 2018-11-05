@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { pillarPalette } from '../../../pillars';
+import { pillarPalette } from '../../../lib/pillars';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
