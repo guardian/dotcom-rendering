@@ -20,10 +20,12 @@ This is run through the [BodyCleaner](https://github.com/guardian/frontend/blob/
 
 The [InBodyLinkCleaner](https://github.com/guardian/frontend/blob/bb83dabb21aea326c67168d0e0d3f6d4ccef6af5/common/app/views/support/HtmlCleaner.scala#L225) is used to style links and allow in body and supporte links to be tracked using the `data-link-name` attribute.
 
+The [BlockNumberCleaner](https://github.com/guardian/frontend/blob/bb83dabb21aea326c67168d0e0d3f6d4ccef6af5/common/app/views/support/HtmlCleaner.scala#L30) replaces `<!-- Block (\d*) -->` with block numbers. Seems to be an artifact from [R2](https://github.com/search?p=2&q=org%3Aguardian+%22%3C%21--+Block+%28%5Cd%2A%29+--%3E%22&type=Code). It doesn't seem to have been used recently.
+
+[DropCaps](https://github.com/guardian/frontend/blob/bb83dabb21aea326c67168d0e0d3f6d4ccef6af5/common/app/views/support/HtmlCleaner.scala#L539) decides whether the first word character and preceeding punctuation should be a drop cap.
+
 ### Other Cleaners (todo)
 
-- BlockNumberCleaner
-- DropCaps
 - TagLinker
     - Turns specific mentions of tags into links, needs validation that its useful.
 - BlockquoteCleaner
