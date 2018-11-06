@@ -47,10 +47,19 @@ export default ({
                     .join('\n')}
                 <style>${fontsCSS}${resetCSS}${css}</style>
                 <script>
+                // this is a global that's called at the bottom of the pf.io response,
+                // once the polyfills have run. This may be useful for debugging.
+                // mainly to support browsers that don't support async=false or defer
+                function guardianPolyfilled() {
+                    try {
+                        window.guardian.polyfilled = true;
+                        window.guardian.onPolyfilled();
+                    } catch (e) {};
+                }
                 (function() {
                     var firstScript = document.scripts[0];
-                    [${priorityScripts.map(
-                        script => `'${script}'`,
+                    [${priorityScripts.map(script =>
+                        JSON.stringify(script),
                     )}].forEach(url => {
                         if ('async' in firstScript) {
                             // modern browsers
@@ -69,7 +78,7 @@ export default ({
                 </script>
             </head>
             <body>
-                <div id='app'>${html}</div>
+                <div id="app">${html}</div>
                 <script>
                 window.guardian = ${sanitiseDomRefs(
                     JSON.stringify({

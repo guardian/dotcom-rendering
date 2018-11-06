@@ -8,6 +8,8 @@ declare global {
                 data: any;
                 cssIDs: string[];
             };
+            polyfilled: boolean;
+            onPolyfilled: () => void;
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
