@@ -1,7 +1,7 @@
 {
   "name": "@guardian/frontend-rendering",
   "version": "0.1.0-alpha.1",
-  "description": "guardian.com rendering tier",
+  "description": "theguardian.com rendering tier",
   "main": "index.js",
   "scripts": {
     "test": "jest"
