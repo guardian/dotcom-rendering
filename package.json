@@ -106,7 +106,7 @@
         "testMatch": [
           "**/*.test.+(ts|tsx|js)"
         ],
-        "setupTestFrameworkScriptFile": "<rootDir>/test/jest.setupTestFrameworkScriptFiles.ts",
+        "setupTestFrameworkScriptFile": "<rootDir>/test/jest.setup.ts",
         "snapshotSerializers": ["enzyme-to-json/serializer", "jest-emotion/serializer"],
         "moduleNameMapper": {
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
