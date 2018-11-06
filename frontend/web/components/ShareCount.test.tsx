@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ShareCount } from './ShareCount';
-import { CAPI } from '../../test/fixtures/CAPI';
+import { CAPI } from '../../../test/fixtures/CAPI';
 
 const fetchResult: (shareCount: number) => Promise<{}> = shareCount =>
     Promise.resolve({
