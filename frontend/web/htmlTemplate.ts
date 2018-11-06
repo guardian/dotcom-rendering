@@ -49,8 +49,8 @@ export default ({
                 <script>
                 (function() {
                     var firstScript = document.scripts[0];
-                    [${priorityScripts.map(
-                        script => `'${script}'`,
+                    [${priorityScripts.map(script =>
+                        JSON.stringify(script),
                     )}].forEach(url => {
                         if ('async' in firstScript) {
                             // modern browsers
