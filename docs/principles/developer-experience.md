@@ -14,7 +14,7 @@ discrete units whose state does not leak into the wider application. It should b
 easy to delete components when they are no longer needed.
 
 We should provide a process to allow developers to work on their components in isolation. We should provide a clear 
-specification and contract for components (*TODO)
+specification and contract for components (TODO)
 
 ## Fast feedback cycle
 
@@ -41,7 +41,7 @@ system is only delivering assets that the page is using, and that unused code wi
 
 ## Content priorities
 
-We have agreed, documented content priorities e.g. main content > supplemental content (atoms etc) > commercial (*TODO)
+We have agreed, documented content priorities e.g. main content > supplemental content (atoms etc) > commercial (TODO)
 
 ## Independent development, deployment and hosting
 
