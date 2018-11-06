@@ -1,3 +1,9 @@
+interface ArticleProps {
+    CAPI: CAPIType;
+    NAV: NavType;
+    config: ConfigType;
+}
+
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' ;
 
 type SharePlatform = 'facebook' | 'twitter' | 'email' | 'googlePlus' | 'whatsApp' | 'pinterest' | 'linkedIn' | 'messenger';

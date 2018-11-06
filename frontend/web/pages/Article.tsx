@@ -12,12 +12,6 @@ import BackToTop from '../components/BackToTop';
 import SubNav from '../components/Header/Nav/SubNav/SubNav';
 import CookieBanner from '../components/CookieBanner';
 
-interface ArticleProps {
-    CAPI: CAPIType;
-    NAV: NavType;
-    config: ConfigType;
-}
-
 // TODO: find a better of setting opacity
 const articleWrapper = css`
     background-color: rgba(18, 18, 18, 0.05);

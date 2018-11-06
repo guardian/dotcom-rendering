@@ -35,8 +35,6 @@ const sendMetric = (m: any[]) => {
 
 const collectAndSendAWSMetrics = (...metrics: Metric[]) => {
     setInterval(() => {
-        // tslint:disable-next-line:no-console
-        console.log('Collecting metrics');
         metrics.forEach(m => m.send());
     }, METRICS_TIME_RESOLUTION);
 };
