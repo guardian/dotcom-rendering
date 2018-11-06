@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CookieBanner snapshots It should not render if consentCookie set 1`] = `""`;
+exports[`CookieBanner snapshots It should not render if consentCookie set 1`] = `null`;
 
 exports[`CookieBanner snapshots It should render if consentCookie not set 1`] = `
 .emotion-5 {
@@ -29,10 +29,6 @@ exports[`CookieBanner snapshots It should render if consentCookie not set 1`] = 
 
 .emotion-5 a:hover {
   border-color: #ffffff;
-}
-
-.emotion-4 {
-  padding: 0 10px;
 }
 
 .emotion-0 {
@@ -92,14 +88,43 @@ exports[`CookieBanner snapshots It should render if consentCookie not set 1`] = 
   margin-top: 24px;
 }
 
+.emotion-4 {
+  margin: auto;
+  padding: 0 10px;
+}
+
+@media (min-width:740px) {
+  .emotion-4 {
+    max-width: 740px;
+  }
+}
+
+@media (min-width:980px) {
+  .emotion-4 {
+    max-width: 980px;
+  }
+}
+
+@media (min-width:1140px) {
+  .emotion-4 {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width:1300px) {
+  .emotion-4 {
+    max-width: 1300px;
+  }
+}
+
 <div
-  className="emotion-5"
+  class="emotion-5"
 >
-  <Container
-    className="emotion-4"
+  <div
+    class="emotion-4"
   >
     <h1
-      className="emotion-0"
+      class="emotion-0"
     >
       Your privacy
     </h1>
@@ -124,22 +149,20 @@ exports[`CookieBanner snapshots It should render if consentCookie not set 1`] = 
       .
     </p>
     <div
-      className="emotion-3"
+      class="emotion-3"
     >
       <button
-        className="emotion-1"
-        onClick={[Function]}
+        class="emotion-1"
       >
-        <SVG />
         OK
       </button>
       <a
-        className="emotion-2"
+        class="emotion-2"
         href="https://profile.theguardian.com/privacy-settings"
       >
         More information
       </a>
     </div>
-  </Container>
+  </div>
 </div>
 `;

@@ -84,25 +84,23 @@ exports[`SubMetaLinksList snapshots It should render correctly if isSectionLinkL
 }
 
 <ul
-  className="emotion-4"
+  class="emotion-4"
 >
   <li
-    className="emotion-1"
-    key="/test/1"
+    class="emotion-1"
   >
     <a
-      className="emotion-0"
+      class="emotion-0"
       href="/test/1"
     >
       Test 1
     </a>
   </li>
   <li
-    className="emotion-3"
-    key="/test/2"
+    class="emotion-3"
   >
     <a
-      className="emotion-0"
+      class="emotion-0"
       href="/test/2"
     >
       Test 2
@@ -194,25 +192,23 @@ exports[`SubMetaLinksList snapshots It should render correctly if isSectionLinkL
 }
 
 <ul
-  className="emotion-4"
+  class="emotion-4"
 >
   <li
-    className="emotion-1"
-    key="/test/1"
+    class="emotion-1"
   >
     <a
-      className="emotion-0"
+      class="emotion-0"
       href="/test/1"
     >
       Test 1
     </a>
   </li>
   <li
-    className="emotion-3"
-    key="/test/2"
+    class="emotion-3"
   >
     <a
-      className="emotion-0"
+      class="emotion-0"
       href="/test/2"
     >
       Test 2

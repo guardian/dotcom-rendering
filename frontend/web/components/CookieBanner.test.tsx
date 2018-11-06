@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent } from 'react-testing-library';
 import CookieBanner from './CookieBanner';
 import {
     getCookie as getCookie_,
@@ -30,50 +30,46 @@ describe('CookieBanner', () => {
         it('It should render if consentCookie not set', () => {
             getCookie.mockImplementation(() => false);
 
-            const component = shallow(<CookieBanner />);
+            const { container } = render(<CookieBanner />);
 
-            expect(component).toMatchSnapshot();
+            expect(container.firstChild).toMatchSnapshot();
         });
 
         it('It should not render if consentCookie set', () => {
             getCookie.mockImplementation(() => true);
 
-            const component = shallow(<CookieBanner />);
+            const { container } = render(<CookieBanner />);
 
-            expect(component).toMatchSnapshot();
+            expect(container.firstChild).toMatchSnapshot();
         });
     });
 
     it('It should render null if consentCookie set', () => {
         getCookie.mockImplementation(() => true);
 
-        const component = shallow(<CookieBanner />);
+        const { container } = render(<CookieBanner />);
 
-        expect(component.type()).toBeNull();
-        expect(component.state('show')).toBe(false);
+        expect(container.firstChild).toBeNull();
     });
 
     it('It should not render null if consentCookie not set', () => {
         getCookie.mockImplementation(() => false);
 
-        const component = shallow(<CookieBanner />);
+        const { container } = render(<CookieBanner />);
 
-        expect(component.type()).not.toBeNull();
-        expect(component.state('show')).toBe(true);
+        expect(container.firstChild).not.toBeNull();
     });
 
     it('It should add consentCookie on button click', () => {
         getCookie.mockImplementation(() => false);
 
-        const component = shallow(<CookieBanner />);
-        const buttonElem = component.find('button').first();
+        const { container, getByText } = render(<CookieBanner />);
 
-        expect(component.type()).not.toBeNull();
-        expect(component.state('show')).toBe(true);
+        expect(container.firstChild).not.toBeNull();
 
-        buttonElem.simulate('click');
+        fireEvent.click(getByText('OK'));
 
-        expect(component.state('show')).toBe(false);
+        expect(container.firstChild).toBeNull();
         expect(addCookie).toHaveBeenCalled();
     });
 });

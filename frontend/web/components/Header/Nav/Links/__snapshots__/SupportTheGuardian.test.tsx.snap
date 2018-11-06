@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SupportTheGuardian snapshots should not render correctly if paying member 1`] = `null`;
+
+exports[`SupportTheGuardian snapshots should not render if recent contributor 1`] = `null`;
+
+exports[`SupportTheGuardian snapshots should render if neither paying member or recent contributor 1`] = `
+.emotion-1 {
+  position: relative;
+  display: block;
+  float: left;
+  margin-left: -20px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+@media (min-width:480px) {
+  .emotion-1 {
+    margin-left: -10px;
+  }
+}
+
+.emotion-1:before {
+  background-color: #121212;
+  border-radius: 50%;
+  bottom: -12px;
+  left: 0;
+  right: 0;
+  padding-top: 100%;
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  -webkit-transition-duration: 250ms;
+  transition-duration: 250ms;
+  -webkit-transition-property: background-color,-webkit-transform;
+  -webkit-transition-property: background-color,transform;
+  transition-property: background-color,transform;
+}
+
+.emotion-1:hover:before {
+  background-color: #c70000;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.emotion-0 {
+  color: #f6f6f6;
+  font-family: GH Guardian Headline,Georgia,serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  padding: 6px 20px 3px;
+  position: relative;
+}
+
+@media (min-width:740px) {
+  .emotion-0 {
+    font-size: 14px;
+  }
+}
+
+<a
+  class="emotion-1"
+  href="https://www.theguardian.com"
+>
+  <div
+    class="emotion-0"
+  >
+    Support The
+    <br />
+     Guardian
+  </div>
+</a>
+`;

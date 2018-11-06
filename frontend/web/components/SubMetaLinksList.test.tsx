@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'react-testing-library';
 import { SubMetaLinksList } from './SubMetaLinksList';
 
 describe('SubMetaLinksList', () => {
@@ -13,12 +13,11 @@ describe('SubMetaLinksList', () => {
             title: 'Test 2',
         },
     ];
-    const isSectionLinkList: boolean = false;
     const pillar: Pillar = 'news';
 
     describe('snapshots', () => {
         it('It should render correctly if isSectionLinkList true', () => {
-            const component = shallow(
+            const { container } = render(
                 <SubMetaLinksList
                     links={links}
                     isSectionLinkList={true}
@@ -26,11 +25,11 @@ describe('SubMetaLinksList', () => {
                 />,
             );
 
-            expect(component).toMatchSnapshot();
+            expect(container.firstChild).toMatchSnapshot();
         });
 
         it('It should render correctly if isSectionLinkList false', () => {
-            const component = shallow(
+            const { container } = render(
                 <SubMetaLinksList
                     links={links}
                     isSectionLinkList={false}
@@ -38,19 +37,24 @@ describe('SubMetaLinksList', () => {
                 />,
             );
 
-            expect(component).toMatchSnapshot();
+            expect(container.firstChild).toMatchSnapshot();
         });
     });
 
     it('It should render correct amount of links', () => {
-        const component = shallow(
+        const { container, getByText } = render(
             <SubMetaLinksList
                 links={links}
-                isSectionLinkList={isSectionLinkList}
+                isSectionLinkList={false}
                 pillar={pillar}
             />,
         );
 
-        expect(component.find('li').length).toBe(2);
+        const listItems = container.querySelectorAll('li');
+
+        expect(container.firstChild).not.toBeNull();
+        expect(listItems.length).toBe(2);
+        expect(getByText(links[0].title)).toBeInTheDocument();
+        expect(getByText(links[1].title)).toBeInTheDocument();
     });
 });
