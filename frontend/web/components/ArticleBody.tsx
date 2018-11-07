@@ -574,7 +574,9 @@ const ArticleBody: React.SFC<{
                         </div>
                     )}
                     <div className={dateline}>
-                        <Dateline capiDate={CAPI.webPublicationDate} />
+                        <Dateline
+                            dateDisplay={CAPI.webPublicationDateDisplay}
+                        />
                     </div>
                     <div className={metaExtras}>
                         <SharingIcons
