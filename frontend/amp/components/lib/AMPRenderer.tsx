@@ -1,6 +1,7 @@
 import { TextBlockComponent } from '../elements/TextBlockComponent';
 
 import React from 'react';
+import { ImageBlockComponent } from '../elements/ImageBlockComponent';
 
 export const AmpRenderer: React.SFC<{
     elements: CAPIElement[];
@@ -17,6 +18,8 @@ export const AmpRenderer: React.SFC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.liveblog.ImageBlockElement':
+                    return <ImageBlockComponent key={i} element={element} />;
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));
