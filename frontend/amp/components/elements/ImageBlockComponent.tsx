@@ -14,6 +14,7 @@ export const ImageBlockComponent: React.SFC<{ element: ImageBlockElement }> = ({
             attribution={element.data.credit}
             height={image.fields.height}
             width={image.fields.width}
+            layout="responsive"
         />
     );
 };

@@ -1,4 +1,12 @@
 import React from 'react';
+import { AMPCommon } from './primitives';
+
+// tslint:disable-next-line:no-namespace
+declare namespace JSX {
+    interface IntrinsicElements {
+        'amp-img': any;
+    }
+}
 
 export const Img: React.SFC<ImgProps> = props => <amp-img {...props} />;
 
@@ -14,7 +22,7 @@ interface Responsive {
     sizes: Size[];
 }
 
-export type ImgProps = Props & (Src | Responsive);
+export type ImgProps = AMPCommon & Props & (Src | Responsive);
 
 export interface Src {
     src: string;
