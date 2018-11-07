@@ -9,7 +9,7 @@ interface TextBlockElement {
 interface ImageBlockElement {
     _type: 'model.liveblog.ImageBlockElement';
     media: {allImages: Image[]};
-    data: {alt: string, credit: string}
+    data: {alt: string, credit: string, caption?: string}
 }
 
 interface Image{
