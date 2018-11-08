@@ -9,6 +9,8 @@ import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { SharingIcons } from '../../web/components/ShareIcons';
 
+// tslint:disable:react-no-dangerous-html
+
 const byline = css`
     font-style: italic;
 `;
@@ -225,7 +227,8 @@ export const MainBlock: React.SFC<{
             )}
         <div className={headline}>
             <h1 className={headerStyle}>{CAPI.headline}</h1>
-            <div className={cx(standfirst, standfirstLinks[CAPI.pillar])}
+            <div
+                className={cx(standfirst, standfirstLinks[CAPI.pillar])}
                 dangerouslySetInnerHTML={{
                     __html: CAPI.standfirst,
                 }}
@@ -275,4 +278,4 @@ export const MainBlock: React.SFC<{
             </div>
         </div>
     </header>
-)
+);
