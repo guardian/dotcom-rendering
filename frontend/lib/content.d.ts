@@ -2,12 +2,12 @@
 
 
 interface TextBlockElement {
-    _type: 'model.liveblog.TextBlockElement';
+    _type: 'model.pageElements.TextBlockElement';
     html: string;
 }
 
 interface ImageBlockElement {
-    _type: 'model.liveblog.ImageBlockElement';
+    _type: 'model.pageElements.ImageBlockElement';
     media: {allImages: Image[]};
     data: {alt: string, credit: string, caption?: string}
 }
