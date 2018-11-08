@@ -6,6 +6,7 @@ import Header from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'react-emotion';
 import InnerContainer from '@frontend/amp/components/InnerContainer';
+import { MainBlock } from './MainBlock';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -19,11 +20,12 @@ export const Article: React.SFC<{
     pillar: Pillar;
     elements: CAPIElement[];
     nav: NavType;
-}> = ({ pillar, elements, nav }) => (
+}> = ({ pillar, elements, nav, CAPI }) => (
     <div className={backgroundColour}>
         <Container>
             <Header nav={nav} activePillar={pillar} />
             <InnerContainer className={body}>
+                <MainBlock CAPI={CAPI} />
                 <AmpRenderer pillar={pillar} elements={elements} />
             </InnerContainer>
             <Footer />

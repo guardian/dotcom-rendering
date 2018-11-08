@@ -47,6 +47,7 @@ const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
                 <AMPArticle
                     elements={CAPI.elements}
                     pillar={CAPI.pillar}
+                    CAPI={CAPI}
                     nav={extractNavMeta(body)}
                 />
             ),
