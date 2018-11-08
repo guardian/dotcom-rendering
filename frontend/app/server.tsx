@@ -49,6 +49,7 @@ const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
                     pillar={CAPI.pillar}
                     CAPI={CAPI}
                     nav={extractNavMeta(body)}
+                    config={extractConfigMeta(body)}
                 />
             ),
         });

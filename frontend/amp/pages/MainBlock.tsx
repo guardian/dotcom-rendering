@@ -3,17 +3,38 @@ import { css, cx } from 'react-emotion';
 import { sans, serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '../../lib/pillars';
-import {
-    from,
-    until,
-    wide,
-    leftCol,
-    desktop,
-    tablet,
-} from '@guardian/pasteup/breakpoints';
+import Dateline from '../../web/components/Dateline';
+import { ShareCount } from '../../web/components/ShareCount';
+import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
+import { SharingIcons } from '../../web/components/ShareIcons';
 
 const byline = css`
     font-style: italic;
+`;
+
+const guardianLines = css`
+    background-image: repeating-linear-gradient(
+        to bottom,
+        ${palette.neutral[86]},
+        ${palette.neutral[86]} 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: 1px 13px;
+    padding-top: 15px;
+    margin-bottom: 6px;
+`;
+
+const meta = css`
+    @supports (display: grid) {
+        grid-template-areas: 'meta';
+    }
+
+    padding-left: 10px;
+    padding-right: 10px;
 `;
 
 const bylineLink = css`
@@ -31,39 +52,20 @@ const headerStyle = css`
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
-
-    ${tablet} {
-        padding-bottom: 36px;
-    }
 `;
 
 const headline = css`
     @supports (display: grid) {
         grid-template-areas: 'headline';
     }
-    ${until.phablet} {
-        padding: 0 10px;
-    }
+    padding: 0 10px;
 `;
 
 const header = css`
-    ${until.phablet} {
-        margin: 0 -10px;
-    }
-`;
-
-const leftColWidth = css`
-    ${leftCol} {
-        width: 140px;
-    }
-
-    ${wide} {
-        width: 220px;
-    }
+    margin: 0 -10px;
 `;
 
 const section = css`
-    ${leftColWidth};
     @supports (display: grid) {
         grid-template-areas: 'section';
     }
@@ -72,15 +74,17 @@ const section = css`
     font-family: ${serif.headline};
     font-weight: 700;
 
-    ${leftCol} {
-        font-size: 22px;
-        line-height: 28px;
-    }
-
-    ${until.phablet} {
-        padding: 0 10px;
-    }
+    padding: 0 10px;
 `;
+
+const profile = css`
+    font-size: 16px;
+    line-height: 20px;
+    font-family: ${serif.headline};
+    font-weight: 700;
+    margin-bottom: 4px;
+`;
+
 const sectionLabelLink = css`
     text-decoration: none;
     :hover {
@@ -128,6 +132,15 @@ const standfirst = css`
     }
 `;
 
+const ageWarning = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    display: inline-block;
+    margin-bottom: 12px;
+    width: 100%;
+`;
+
 const standfirstLinks = pillarMap(
     pillar =>
         css`
@@ -146,9 +159,54 @@ const pillarColours = pillarMap(
             color: ${pillarPalette[pillar].main};
         `,
 );
+const pillarFill = pillarMap(
+    pillar =>
+        css`
+            fill: ${pillarPalette[pillar].main};
+        `,
+);
+
+const twitterHandle = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    font-weight: bold;
+    color: ${palette.neutral[46]};
+
+    padding-right: 10px;
+    display: inline-block;
+
+    svg {
+        height: 10px;
+        max-width: 12px;
+        margin-right: 0px;
+        fill: ${palette.neutral[46]};
+    }
+
+    a {
+        color: ${palette.neutral[46]};
+        text-decoration: none;
+    }
+`;
+
+const metaExtras = css`
+    border-top: 1px solid ${palette.neutral[86]};
+    padding-top: 6px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+`;
+
 export const MainBlock: React.SFC<{
     CAPI: CAPIType;
-}> = ({CAPI}) => (
+    config: ConfigType;
+}> = ({ CAPI, config }) => (
     <header className={header}>
         {CAPI.sectionLabel &&
             CAPI.sectionUrl && (
@@ -167,12 +225,54 @@ export const MainBlock: React.SFC<{
             )}
         <div className={headline}>
             <h1 className={headerStyle}>{CAPI.headline}</h1>
-            <div
-                className={cx(standfirst, standfirstLinks[CAPI.pillar])}
+            <div className={cx(standfirst, standfirstLinks[CAPI.pillar])}
                 dangerouslySetInnerHTML={{
                     __html: CAPI.standfirst,
                 }}
             />
-    </div>
+        </div>
+        <div className={cx(meta, guardianLines)}>
+            <div className={cx(profile, pillarColours[CAPI.pillar])}>
+                <span className={byline}>
+                    {/* <RenderByline
+                        bylineText={CAPI.author.byline}
+                        contributorTags={CAPI.tags}
+                        pillar={CAPI.pillar}
+                    /> */}
+                </span>
+            </div>
+            {CAPI.author.twitterHandle && (
+                <div className={twitterHandle}>
+                    <TwitterIcon />
+                    <a
+                        href={`https://www.twitter.com/${
+                            CAPI.author.twitterHandle
+                        }`}
+                    >
+                        @{CAPI.author.twitterHandle}
+                    </a>
+                </div>
+            )}
+            <Dateline dateDisplay={CAPI.webPublicationDateDisplay} />
+            <div className={metaExtras}>
+                <SharingIcons
+                    sharingUrls={CAPI.sharingUrls}
+                    pillar={CAPI.pillar}
+                    displayIcons={['facebook', 'twitter', 'email']}
+                />
+                <ShareCount config={config} CAPI={CAPI} />
+                {CAPI.ageWarning && (
+                    <div
+                        className={cx(
+                            ageWarning,
+                            pillarColours[CAPI.pillar],
+                            pillarFill[CAPI.pillar],
+                        )}
+                    >
+                        <ClockIcon /> {CAPI.ageWarning}
+                    </div>
+                )}
+            </div>
+        </div>
     </header>
 )

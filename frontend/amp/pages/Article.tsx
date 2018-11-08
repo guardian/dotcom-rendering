@@ -20,12 +20,14 @@ export const Article: React.SFC<{
     pillar: Pillar;
     elements: CAPIElement[];
     nav: NavType;
-}> = ({ pillar, elements, nav, CAPI }) => (
+    CAPI: CAPIType;
+    config: ConfigType;
+}> = ({ pillar, elements, nav, CAPI, config }) => (
     <div className={backgroundColour}>
         <Container>
             <Header nav={nav} activePillar={pillar} />
             <InnerContainer className={body}>
-                <MainBlock CAPI={CAPI} />
+                <MainBlock CAPI={CAPI} config={config} />
                 <AmpRenderer pillar={pillar} elements={elements} />
             </InnerContainer>
             <Footer />
