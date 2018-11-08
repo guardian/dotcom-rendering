@@ -1,37 +1,29 @@
-import { Component } from 'react';
-import { getCookie } from '../lib/cookie';
-import dateformat from 'dateformat';
+import React from 'react';
 
-const dtFormatGU = (date: Date, edition: string): string => {
-    let datetimeFormatted: string = dateformat(date, 'ddd d mmm yyyy HH:MM Z');
-    if (edition === 'UK') {
-        datetimeFormatted = datetimeFormatted.replace('GMT+0100', 'BST');
-    }
-    return datetimeFormatted;
-};
+import { css } from 'react-emotion';
+import { palette } from '@guardian/pasteup/palette';
+import { sans } from '@guardian/pasteup/fonts';
 
-const defaultEdition = 'UK';
+const captionFont = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    color: ${palette.neutral[46]};
+`;
 
-class Dateline extends Component<
-    { capiDate: Date },
-    { capiDate: Date; edition: string }
-> {
-    constructor(props: { capiDate: Date }) {
-        super(props);
-        this.state = { capiDate: this.props.capiDate, edition: defaultEdition };
-    }
-    public componentDidMount() {
-        const cookieEdition = getCookie('GU_EDITION');
-        if (cookieEdition && this.state.edition !== cookieEdition) {
-            this.setState({
-                capiDate: this.state.capiDate,
-                edition: cookieEdition,
-            });
-        }
-    }
-    public render() {
-        return dtFormatGU(this.state.capiDate, this.state.edition);
-    }
-}
+const dateline = css`
+    ${captionFont};
+
+    padding-top: 2px;
+    margin-bottom: 6px;
+`;
+
+const Dateline: React.SFC<{
+    dateDisplay: string;
+}> = ({ dateDisplay }) => (
+    <>
+        <div className={dateline}>{dateDisplay}</div>
+    </>
+);
 
 export default Dateline;

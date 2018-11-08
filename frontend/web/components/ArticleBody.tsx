@@ -405,13 +405,6 @@ const twitterHandle = css`
     }
 `;
 
-const dateline = css`
-    ${captionFont};
-
-    padding-top: 2px;
-    margin-bottom: 6px;
-`;
-
 const metaExtras = css`
     border-top: 1px solid ${palette.neutral[86]};
     padding-top: 6px;
@@ -573,9 +566,7 @@ const ArticleBody: React.SFC<{
                             </a>
                         </div>
                     )}
-                    <div className={dateline}>
-                        <Dateline capiDate={CAPI.webPublicationDate} />
-                    </div>
+                    <Dateline dateDisplay={CAPI.webPublicationDateDisplay} />
                     <div className={metaExtras}>
                         <SharingIcons
                             sharingUrls={CAPI.sharingUrls}

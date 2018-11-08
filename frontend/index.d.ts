@@ -72,6 +72,7 @@ interface CAPIType {
     elements: Array<CAPIElement>,
     author: AuthorType,
     webPublicationDate: Date,
+    webPublicationDateDisplay: string,
     pageId: string,
     ageWarning?: string,
     sharingUrls: {

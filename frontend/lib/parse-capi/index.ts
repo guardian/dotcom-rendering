@@ -292,6 +292,10 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         webPublicationDate,
         tags,
         sectionName,
+        webPublicationDateDisplay: getNonEmptyString(
+            data,
+            'config.page.webPublicationDateDisplay',
+        ),
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
             clean,
