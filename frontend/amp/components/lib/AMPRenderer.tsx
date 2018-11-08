@@ -19,7 +19,13 @@ export const AmpRenderer: React.SFC<{
                         />
                     );
                 case 'model.liveblog.ImageBlockElement':
-                    return <ImageBlockComponent key={i} element={element} />;
+                    return (
+                        <ImageBlockComponent
+                            key={i}
+                            element={element}
+                            pillar={pillar}
+                        />
+                    );
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));
