@@ -39,14 +39,6 @@ const meta = css`
     padding-right: 10px;
 `;
 
-const bylineLink = css`
-    font-style: normal;
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
-    }
-`;
-
 const headerStyle = css`
     font-size: 34px;
     line-height: 38px;
