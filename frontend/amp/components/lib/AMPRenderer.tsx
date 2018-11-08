@@ -10,7 +10,7 @@ export const AmpRenderer: React.SFC<{
     const output = elements
         .map((element, i) => {
             switch (element._type) {
-                case 'model.pageElements.TextBlockElement':
+                case 'model.liveblog.TextBlockElement':
                     return (
                         <TextBlockComponent
                             key={i}
@@ -18,7 +18,7 @@ export const AmpRenderer: React.SFC<{
                             pillar={pillar}
                         />
                     );
-                case 'model.pageElements.ImageBlockElement':
+                case 'model.liveblog.ImageBlockElement':
                     return (
                         <ImageBlockComponent
                             key={i}
