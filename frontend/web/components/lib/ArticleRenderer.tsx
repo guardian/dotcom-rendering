@@ -8,9 +8,9 @@ export const ArticleRenderer: React.SFC<{ elements: CAPIElement[] }> = ({
     const output = elements
         .map((element, i) => {
             switch (element._type) {
-                case 'model.liveblog.TextBlockElement':
+                case 'model.dotcomrendering.pageElements.TextBlockElement':
                     return <TextBlockComponent key={i} html={element.html} />;
-                case 'model.liveblog.ImageBlockElement':
+                case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return <ImageBlockComponent key={i} element={element} />;
                 default:
                     return null;
