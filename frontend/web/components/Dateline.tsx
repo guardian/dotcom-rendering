@@ -1,16 +1,7 @@
-import { Component } from 'react';
+import React from 'react';
 
-class Dateline extends Component<
-    { dateDisplay: string },
-    { dateDisplay: string }
-> {
-    constructor(props: { dateDisplay: string }) {
-        super(props);
-        this.state = { dateDisplay: this.props.dateDisplay };
-    }
-    public render() {
-        return this.state.dateDisplay;
-    }
-}
+const Dateline: React.SFC<{
+    dateDisplay: string;
+}> = ({dateDisplay}) => ( <>{dateDisplay}</> );
 
 export default Dateline;
