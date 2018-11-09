@@ -74,7 +74,7 @@ interface CAPIType {
     webPublicationDate: Date,
     webPublicationDateDisplay: string,
     editionLongForm: string,
-    editionId: string,
+    editionId: 'UK' | 'US' | 'INT' | 'AU',
     pageId: string,
     ageWarning?: string,
     sharingUrls: {

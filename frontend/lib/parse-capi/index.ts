@@ -292,13 +292,13 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     const editionLongForm = getString(data, 'config.page.edition', '');
 
     // We compute the editionId from the editionLongForm
-    // Possible values for the editionId: "uk", "us", "au", "int"
+    // Possible values for the editionId: "UK", "US", "AU", "INT"
     const editionId = (editionLongForm === ''
         ? ''
         : editionLongForm.split(' ')[0]
     )
-        .replace('australia', 'au')
-        .replace('international', 'int');
+        .replace('Australia', 'AU')
+        .replace('International', 'INT');
 
     return {
         isArticle,
