@@ -79,13 +79,18 @@ const getArray = <T>(
 };
 
 const findPillar: (name: string) => Pillar | undefined = name => {
-    let pillar: string = name.toLowerCase();
+    const pillar: string = name.toLowerCase();
     // The pillar name is "arts" in CAPI, but "culture" everywhere else,
     // therefore we perform this substitution here.
     if (pillar === 'arts') {
-        pillar = 'culture';
+        return 'culture';
     }
     return pillarNames.find(_ => _ === pillar);
+};
+
+const findEdition: (name: string) => Edition | undefined = name => {
+    const editions: Edition[] = ['UK', 'US', 'INT', 'AU'];
+    return editions.find(_ => _ === name);
 };
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
@@ -293,12 +298,13 @@ export const extractArticleMeta = (data: {}): CAPIType => {
 
     // We compute the editionId from the editionLongForm
     // Possible values for the editionId: "UK", "US", "AU", "INT"
-    const editionId = (editionLongForm === ''
-        ? ''
-        : editionLongForm.split(' ')[0]
-    )
-        .replace('Australia', 'AU')
-        .replace('International', 'INT');
+    const editionId = findEdition(
+        (editionLongForm === '' ? '' : editionLongForm.split(' ')[0])
+            .replace('Australia', 'AU')
+            .replace('International', 'INT'),
+    );
+
+    if (editionId === undefined) throw new Error('goodbye');
 
     return {
         isArticle,
