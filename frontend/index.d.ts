@@ -73,6 +73,7 @@ interface CAPIType {
     author: AuthorType,
     webPublicationDate: Date,
     webPublicationDateDisplay: string,
+    editionLongForm: string,
     pageId: string,
     ageWarning?: string,
     sharingUrls: {
