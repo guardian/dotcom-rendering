@@ -287,6 +287,19 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         tag => tag.type === 'Contributor',
     )[0];
 
+    // From the server we get the values: "UK edition", "US edition", "Australia edition", "International edition"
+    // editionLongForm is that value, or empty string.
+    const editionLongForm = getString(data, 'config.page.edition', '');
+
+    // We compute the editionId from the editionLongForm
+    // Possible values for the editionId: "uk", "us", "au", "int"
+    const editionId = (editionLongForm === ''
+        ? ''
+        : editionLongForm.split(' ')[0]
+    )
+        .replace('australia', 'au')
+        .replace('international', 'int');
+
     return {
         isArticle,
         webPublicationDate,
@@ -296,11 +309,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
             data,
             'config.page.webPublicationDateDisplay',
         ),
-        editionLongForm: getString(
-            data,
-            'config.page.edition',
-            '',
-        ).toLowerCase(),
+        editionLongForm,
+        editionId,
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
             clean,
