@@ -1,5 +1,5 @@
 import React from 'react';
-import { Img } from '../primitives/Img';
+import { Img } from '@frontend/amp/components/primitives/Img';
 import { sans } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'react-emotion';

@@ -1,7 +1,7 @@
-import { TextBlockComponent } from '../elements/TextBlockComponent';
+import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
 
 import React from 'react';
-import { ImageBlockComponent } from '../elements/ImageBlockComponent';
+import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
 
 export const AmpRenderer: React.SFC<{
     elements: CAPIElement[];

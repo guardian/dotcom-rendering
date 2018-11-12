@@ -7,18 +7,18 @@ import {
     getGuardianConfiguration,
     GuardianConfiguration,
 } from './aws/aws-parameters';
-import document from '../web/document';
-import AMPDocument from '../amp/document';
-import { Article as AMPArticle } from '../amp/pages/Article';
-import { dist, root } from '../../config';
-import { log, warn } from '../../lib/log';
+import document from '@frontend/web/document';
+import AMPDocument from '@frontend/amp/document';
+import { Article as AMPArticle } from '@frontend/amp/pages/Article';
+import { dist, root } from '@root/config';
+import { log, warn } from '@root/lib/log';
 
 import {
     extractArticleMeta,
     extractNavMeta,
     extractConfigMeta,
     extractGAMeta,
-} from '../lib/parse-capi';
+} from '@frontend/lib/parse-capi';
 
 const renderArticle = ({ body }: express.Request, res: express.Response) => {
     try {

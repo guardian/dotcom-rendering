@@ -9,6 +9,7 @@ module.exports = {
             {
                 root: ['./'],
                 alias: {
+                    '@root': '.',
                     '@frontend': './frontend',
                 },
             },

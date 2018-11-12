@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picture, ImageSource } from '../Picture';
+import { Picture, ImageSource } from '@frontend/web/components/Picture';
 
 const makeSource: (image: Image) => ImageSource = image => {
     return {
