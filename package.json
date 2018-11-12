@@ -107,7 +107,9 @@
         "snapshotSerializers": ["jest-emotion/serializer"],
         "moduleNameMapper": {
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
-            "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx"
+            "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
+            "^@frontend(.*)$": "<rootDir>/frontend$1",
+            "^@root(.*)$": "<rootDir>$1"
         },
         "testResultsProcessor": "jest-teamcity-reporter"
     }
