@@ -65,7 +65,7 @@ tsc: clean-dist install
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
-	@yarn lint --fix 
+	@yarn lint --fix
 
 lint: clean-dist install
 	$(call log, "checking for lint errors")
@@ -76,7 +76,8 @@ stylelint: clean-dist install
 	@stylelint "packages/guui/**/*.js" "frontend/**/*.js"
 
 test: clear clean-dist install
-	$(call log, "there are no tests!")
+	$(call log, "running tests")
+	@yarn test --verbose
 
 bundlesize: clear clean-dist install build
 	@bundlesize

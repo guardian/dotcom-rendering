@@ -93,7 +93,7 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
 
     public render() {
         if (!this.state.shareCount) {
-            return '';
+            return null;
         }
 
         const displayCount = parseInt(this.state.shareCount.toFixed(0), 10);
@@ -116,8 +116,12 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
                             Shares
                         </span>
                     </h3>
-                    <div className={countFull}>{formattedDisplayCount}</div>
-                    <div className={countShort}>{shortDisplayCount}</div>
+                    <div data-testid={'countFull'} className={countFull}>
+                        {formattedDisplayCount}
+                    </div>
+                    <div data-testid={'countShort'} className={countShort}>
+                        {shortDisplayCount}
+                    </div>
                 </div>
             </div>
         );

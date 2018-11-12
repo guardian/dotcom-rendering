@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CookieBanner snapshots It should not render if consentCookie set 1`] = `null`;
+
+exports[`CookieBanner snapshots It should render if consentCookie not set 1`] = `
+.emotion-5 {
+  position: fixed;
+  bottom: 0;
+  background-color: #005689;
+  padding: 10px 0 24px;
+  width: 100%;
+}
+
+.emotion-5 p {
+  font-family: GuardianTextEgyptian,Georgia,serif;
+  font-size: 17px;
+  line-height: 24px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.emotion-5 a {
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-5 a:hover {
+  border-color: #ffffff;
+}
+
+.emotion-0 {
+  font-size: 34px;
+  line-height: 38px;
+  font-weight: bold;
+  padding-bottom: 12px;
+  color: #ffe500;
+}
+
+.emotion-2 {
+  font-size: 14px;
+  line-height: 20px;
+  font-family: GuardianTextSans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  margin-left: 12px;
+}
+
+.emotion-1 {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: GuardianTextSans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  border-radius: 1000px;
+  height: 42px;
+  background: #ffe500;
+  color: #121212;
+  padding: 0 25px 0 46px;
+  display: block;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  border: 0;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.emotion-1 svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 42px;
+  height: 42px;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.emotion-3 {
+  margin-top: 24px;
+}
+
+.emotion-4 {
+  margin: auto;
+  padding: 0 10px;
+}
+
+@media (min-width:740px) {
+  .emotion-4 {
+    max-width: 740px;
+  }
+}
+
+@media (min-width:980px) {
+  .emotion-4 {
+    max-width: 980px;
+  }
+}
+
+@media (min-width:1140px) {
+  .emotion-4 {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width:1300px) {
+  .emotion-4 {
+    max-width: 1300px;
+  }
+}
+
+<div
+  class="emotion-5"
+>
+  <div
+    class="emotion-4"
+  >
+    <h1
+      class="emotion-0"
+    >
+      Your privacy
+    </h1>
+    <p>
+      We use cookies to improve your experience on our site and to show you relevant advertising.
+    </p>
+    <p>
+      To find out more, read our updated
+       
+      <a
+        href="/help/privacy-policy"
+      >
+        privacy policy
+      </a>
+       and
+       
+      <a
+        href="/info/cookies"
+      >
+        cookie policy
+      </a>
+      .
+    </p>
+    <div
+      class="emotion-3"
+    >
+      <button
+        class="emotion-1"
+      >
+        OK
+      </button>
+      <a
+        class="emotion-2"
+        href="https://profile.theguardian.com/privacy-settings"
+      >
+        More information
+      </a>
+    </div>
+  </div>
+</div>
+`;
