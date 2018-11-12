@@ -2,9 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const ReportBundleSize = require('@root/lib/report-bundle-size');
-const Progress = require('@root/lib/webpack-progress');
-const { root, dist, siteName, getPagesForSite } = require('@root/config');
+const ReportBundleSize = require('../lib/report-bundle-size');
+const Progress = require('../lib/webpack-progress');
+const { root, dist, siteName, getPagesForSite } = require('../config');
 
 const PROD = process.env.NODE_ENV === 'production';
 
