@@ -9,7 +9,7 @@ import {
 } from '@guardian/pasteup/breakpoints';
 
 import { serif } from '@guardian/pasteup/fonts';
-import { pillarMap, pillarPalette } from '../../../../../lib/pillars';
+import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
 const pillarColours = pillarMap(

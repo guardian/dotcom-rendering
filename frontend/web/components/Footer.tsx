@@ -6,7 +6,7 @@ import { sans } from '@guardian/pasteup/fonts';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
-import { footerLinks, Link } from '../../lib/footer-links';
+import { footerLinks, Link } from '@frontend/lib/footer-links';
 
 const footer = css`
     background-color: ${palette.neutral[20]};

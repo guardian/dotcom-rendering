@@ -24,6 +24,9 @@ const common = ({ platform, page = '' }) => ({
             ? 'sourcemap'
             : 'cheap-module-eval-source-map',
     resolve: {
+        alias: {
+            '@frontend': path.resolve(__dirname, '..', 'frontend'),
+        },
         extensions: ['.js', '.ts', '.tsx', '.jsx'],
     },
     module: {

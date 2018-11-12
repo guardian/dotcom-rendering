@@ -19,8 +19,8 @@ import {
     desktop,
     tablet,
 } from '@guardian/pasteup/breakpoints';
-import { pillarMap, pillarPalette } from '../../lib/pillars';
-import { ArticleRenderer } from './lib/ArticleRenderer';
+import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 
 const wrapper = css`
     padding-top: 6px;

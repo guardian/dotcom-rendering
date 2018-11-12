@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import Container from '../components/Container';
-import { AmpRenderer } from '../components/lib/AMPRenderer';
+import { AmpRenderer } from '@frontend/amp/components/lib/AMPRenderer';
 
 export const Article: React.SFC<{
     pillar: Pillar;

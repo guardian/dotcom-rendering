@@ -1,7 +1,7 @@
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
-import resetCSS from /* preval */ '../lib/reset-css';
-import fontsCss from '../lib/fonts-css';
+import resetCSS from /* preval */ '@frontend/lib/reset-css';
+import fontsCss from '@frontend/lib/fonts-css';
 
 interface RenderToStringResult {
     html: string;

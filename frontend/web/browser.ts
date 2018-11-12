@@ -29,7 +29,7 @@ const go = () => {
         hydrateApp(React.createElement(Article, { data }), container);
     }
 
-    import('./lib/ga').then(({ init }) => {
+    import('@frontend/web/lib/ga').then(({ init }) => {
         init();
     });
 };

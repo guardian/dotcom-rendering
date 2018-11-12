@@ -4,6 +4,15 @@ module.exports = {
         'babel-plugin-dynamic-import-node',
         ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
         '@babel/plugin-proposal-class-properties',
+        [
+            'module-resolver',
+            {
+                root: ['./'],
+                alias: {
+                    '@frontend': './frontend',
+                },
+            },
+        ],
     ],
     presets: [
         '@babel/preset-typescript',
