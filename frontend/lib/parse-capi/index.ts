@@ -88,14 +88,14 @@ const findPillar: (name: string) => Pillar | undefined = name => {
     return pillarNames.find(_ => _ === pillar);
 };
 
-const findEdition: (name: string) => Edition | undefined = name => {
+const getEditionValue: (name: string) => Edition = name => {
     const editions: Edition[] = ['UK', 'US', 'INT', 'AU'];
-    return editions.find(_ => _ === name);
+    const edition = editions.find(_ => _ === name);
+    return edition === undefined ? 'UK' : edition;
 };
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     const title = getString(data, 'title');
-
     return {
         title,
         longTitle: getString(data, 'longTitle') || title,
@@ -298,10 +298,8 @@ export const extractArticleMeta = (data: {}): CAPIType => {
 
     // We compute the editionId from the editionLongForm
     // Possible values for the editionId: "UK", "US", "AU", "INT"
-    const editionId = findEdition(
-        (editionLongForm === '' ? '' : editionLongForm.split(' ')[0])
-            .replace('Australia', 'AU')
-            .replace('International', 'INT'),
+    const editionId = getEditionValue(
+        getString(data, 'config.page.editionId', ''),
     );
 
     if (editionId === undefined) throw new Error('goodbye');
