@@ -45,8 +45,8 @@ We have agreed, documented content priorities e.g. main content > supplemental c
 
 ## Independent development, deployment and hosting
 
-It is possible to develop on dotcom-rendering without any other dependent applications running on the developer's host machine.
-The application is deployed independently under most circumstances. It is hosted on its own instances.
+It is possible to develop on dotcom-rendering without a network dependency (TODO) or any other dependent applications running on
+the developer's host machine. The application is deployed independently under most circumstances. It is hosted on its own instances.
 
 ## An API that survives internal improvements/upgrades
 
