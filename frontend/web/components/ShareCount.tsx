@@ -65,7 +65,7 @@ const countShort = css`
 
 interface Props {
     config: ConfigType;
-    CAPI: CAPIType;
+    pageId: string;
 }
 
 export class ShareCount extends Component<Props, { shareCount?: number }> {
@@ -75,8 +75,8 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
     }
 
     public componentDidMount() {
-        const { config, CAPI } = this.props;
-        const url = `${config.ajaxUrl}/sharecount/${CAPI.pageId}.json`;
+        const { config, pageId } = this.props;
+        const url = `${config.ajaxUrl}/sharecount/${pageId}.json`;
 
         fetch(url)
             .then(resp => {

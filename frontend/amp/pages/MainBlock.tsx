@@ -9,8 +9,6 @@ import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { SharingIcons } from '../../web/components/ShareIcons';
 
-// tslint:disable:react-no-dangerous-html
-
 const byline = css`
     font-style: italic;
 `;
@@ -48,7 +46,7 @@ const headerStyle = css`
     padding-top: 3px;
 `;
 
-const headline = css`
+const headlineCss = css`
     @supports (display: grid) {
         grid-template-areas: 'headline';
     }
@@ -111,7 +109,7 @@ const listStyles = css`
     }
 `;
 
-const standfirst = css`
+const standfirstCss = css`
     font-family: ${serif.body};
     font-weight: 700;
     font-size: 17px;
@@ -126,7 +124,7 @@ const standfirst = css`
     }
 `;
 
-const ageWarning = css`
+const ageWarningCss = css`
     font-size: 12px;
     line-height: 16px;
     font-family: ${sans.body};
@@ -142,7 +140,6 @@ const standfirstLinks = pillarMap(
                 color: ${pillarPalette[pillar].dark};
                 text-decoration: none;
                 border-bottom: 1px solid ${palette.neutral[86]};
-                transition: border-color 0.15s ease-out;
             }
         `,
 );
@@ -198,73 +195,88 @@ const metaExtras = css`
 `;
 
 export const MainBlock: React.SFC<{
-    CAPI: CAPIType;
     config: ConfigType;
-}> = ({ CAPI, config }) => (
+    pageId: string;
+    pillar: Pillar;
+    sectionLabel?: string;
+    sectionUrl?: string;
+    headline: string;
+    standfirst: string;
+    author: AuthorType;
+    sharingUrls: any;
+    ageWarning?: string;
+    webPublicationDateDisplay: string;
+}> = ({
+    pageId,
+    config,
+    pillar,
+    sectionLabel,
+    sectionUrl,
+    headline,
+    standfirst,
+    author,
+    sharingUrls,
+    ageWarning,
+    webPublicationDateDisplay,
+}) => (
+    // tslint:disable:react-no-dangerous-html
     <header className={header}>
-        {CAPI.sectionLabel &&
-            CAPI.sectionUrl && (
+        {sectionLabel &&
+            sectionUrl && (
                 <div className={section}>
                     <a
-                        className={cx(
-                            sectionLabelLink,
-                            pillarColours[CAPI.pillar],
-                        )}
-                        href={`https://www.theguardian.com/${CAPI.sectionUrl}`}
+                        className={cx(sectionLabelLink, pillarColours[pillar])}
+                        href={`https://www.theguardian.com/${sectionUrl}`}
                         data-link-name="article section"
                     >
-                        {CAPI.sectionLabel}
+                        {sectionLabel}
                     </a>
                 </div>
             )}
-        <div className={headline}>
-            <h1 className={headerStyle}>{CAPI.headline}</h1>
+        <div className={headlineCss}>
+            <h1 className={headerStyle}>{headline}</h1>
             <div
-                className={cx(standfirst, standfirstLinks[CAPI.pillar])}
+                className={cx(standfirstCss, standfirstLinks[pillar])}
                 dangerouslySetInnerHTML={{
-                    __html: CAPI.standfirst,
+                    __html: standfirst,
                 }}
             />
         </div>
         <div className={cx(meta, guardianLines)}>
-            <div className={cx(profile, pillarColours[CAPI.pillar])}>
+            <div className={cx(profile, pillarColours[pillar])}>
                 <span className={byline}>
                     {/* <RenderByline
-                        bylineText={CAPI.author.byline}
-                        contributorTags={CAPI.tags}
-                        pillar={CAPI.pillar}
+                        bylineText={author.byline}
+                        contributorTags={tags}
+                        pillar={pillar}
                     /> */}
                 </span>
             </div>
-            {CAPI.author.twitterHandle && (
+            {author.twitterHandle && (
                 <div className={twitterHandle}>
                     <TwitterIcon />
-                    <a
-                        href={`https://www.twitter.com/${
-                            CAPI.author.twitterHandle
-                        }`}
-                    >
-                        @{CAPI.author.twitterHandle}
+                    <a href={`https://www.twitter.com/${author.twitterHandle}`}>
+                        @{author.twitterHandle}
                     </a>
                 </div>
             )}
-            <Dateline dateDisplay={CAPI.webPublicationDateDisplay} />
+            <Dateline dateDisplay={webPublicationDateDisplay} />
             <div className={metaExtras}>
                 <SharingIcons
-                    sharingUrls={CAPI.sharingUrls}
-                    pillar={CAPI.pillar}
+                    sharingUrls={sharingUrls}
+                    pillar={pillar}
                     displayIcons={['facebook', 'twitter', 'email']}
                 />
-                <ShareCount config={config} CAPI={CAPI} />
-                {CAPI.ageWarning && (
+                <ShareCount config={config} pageId={pageId} />
+                {ageWarning && (
                     <div
                         className={cx(
-                            ageWarning,
-                            pillarColours[CAPI.pillar],
-                            pillarFill[CAPI.pillar],
+                            ageWarningCss,
+                            pillarColours[pillar],
+                            pillarFill[pillar],
                         )}
                     >
-                        <ClockIcon /> {CAPI.ageWarning}
+                        <ClockIcon /> {ageWarning}
                     </div>
                 )}
             </div>

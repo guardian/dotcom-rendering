@@ -17,18 +17,28 @@ const body = css`
 `;
 
 export const Article: React.SFC<{
-    pillar: Pillar;
-    elements: CAPIElement[];
     nav: NavType;
-    CAPI: CAPIType;
+    CAPI: AMPType;
     config: ConfigType;
-}> = ({ pillar, elements, nav, CAPI, config }) => (
+}> = ({ nav, CAPI, config }) => (
     <div className={backgroundColour}>
         <Container>
-            <Header nav={nav} activePillar={pillar} />
+            <Header nav={nav} activePillar={CAPI.pillar} />
             <InnerContainer className={body}>
-                <MainBlock CAPI={CAPI} config={config} />
-                <AmpRenderer pillar={pillar} elements={elements} />
+                <MainBlock
+                    config={config}
+                    pageId={CAPI.pageId}
+                    pillar={CAPI.pillar}
+                    sectionLabel={CAPI.sectionLabel}
+                    sectionUrl={CAPI.sectionUrl}
+                    headline={CAPI.headline}
+                    standfirst={CAPI.standfirst}
+                    author={CAPI.author}
+                    sharingUrls={CAPI.sharingUrls}
+                    webPublicationDateDisplay={CAPI.webPublicationDateDisplay}
+                    ageWarning={CAPI.ageWarning}
+                />
+                <AmpRenderer pillar={CAPI.pillar} elements={CAPI.elements} />
             </InnerContainer>
             <Footer />
         </Container>

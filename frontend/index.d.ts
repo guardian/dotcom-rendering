@@ -95,6 +95,26 @@ interface CAPIType {
     subMetaSectionLinks: SimpleLinkType[],
     subMetaKeywordLinks: SimpleLinkType[],
 }
+
+interface AMPType {
+    headline: string,
+    standfirst: string,
+    elements: Array<CAPIElement>,
+    author: AuthorType,
+    webPublicationDateDisplay: string,
+    pageId: string,
+    ageWarning?: string,
+    sharingUrls: {
+        [K in SharePlatform]?: {
+            url: string;
+            userMessage: string;
+        }
+    },
+    pillar: Pillar,
+    sectionLabel?: string,
+    sectionUrl?: string
+}
+
 interface TagType {
   id: string,
   type: string,
