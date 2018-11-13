@@ -1,11 +1,11 @@
 # Developer experience principles
 
-## No longer than 1 hour to get up and running on a cold machine 
+## No longer than 1 hour to get up and running on a cold machine
 
-The average tenure for a developer at the Guardian is low (~2 years). We frequently have new starters who are unfamiliar
-with our platform and the technology it uses. We also have range of server-side, full-stack and client-side devs, along with 
-designers with some programming experience. We should aim to make the application as fast to get up and running as possible,
-with no assumed prior knowledge of our tech stack.
+Although the average tenure for a developer at the Guardian is relatively high (~3.5 years), we frequently have new starters
+who are unfamiliar with our platform and the technology it uses. We also have range of server-side, full-stack and client-side
+devs, along with designers with some programming experience. We should aim to make the application as fast to get up and running
+as possible, with no assumed prior knowledge of our tech stack.
 
 ## A platform for components, not a website
 
@@ -13,13 +13,13 @@ Rather than a hierarchical website, dotcom-rendering should feel like a platform
 discrete units whose state does not leak into the wider application. It should be
 easy to delete components when they are no longer needed.
 
-We should provide a process to allow developers to work on their components in isolation. We should provide a clear 
+We should provide a process to allow developers to work on their components in isolation. We should provide a clear
 specification and contract for components (TODO)
 
 ## Fast feedback cycle
 
 When developing components, changes should be reflected in the developer's browser within 1 second. Tests against relevant
-(changed) components should run in less than 10 seconds. 
+(changed) components should run in less than 10 seconds.
 
 ## Contract over idiom
 
