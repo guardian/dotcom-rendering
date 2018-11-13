@@ -59,4 +59,5 @@ The application provides a full suite of unit, integration and end-to-end tests.
 
 ## Easily superseded
 
-At end of life, the application can be swapped out by a superior rendering tier.
+At end of life, the dotcom-rendering application (although not the components themselves) can be swapped out for another rendering
+tier. It must be possible to migrate a single content type such as the article within 3 months.
