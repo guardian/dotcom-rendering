@@ -15,32 +15,6 @@ describe('SubMetaLinksList', () => {
     ];
     const pillar: Pillar = 'news';
 
-    describe('snapshots', () => {
-        it('It should render correctly if isSectionLinkList true', () => {
-            const { container } = render(
-                <SubMetaLinksList
-                    links={links}
-                    isSectionLinkList={true}
-                    pillar={pillar}
-                />,
-            );
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-
-        it('It should render correctly if isSectionLinkList false', () => {
-            const { container } = render(
-                <SubMetaLinksList
-                    links={links}
-                    isSectionLinkList={false}
-                    pillar={pillar}
-                />,
-            );
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-    });
-
     it('It should render correct amount of links', () => {
         const { container, getByText } = render(
             <SubMetaLinksList

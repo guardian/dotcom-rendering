@@ -24,60 +24,6 @@ describe('SupportTheGuardian', () => {
         getCookie.mockReset();
     });
 
-    describe('snapshots', () => {
-        it('should not render if recent contributor', async () => {
-            const contributionDate = new Date();
-
-            // set a contribution date of 1 week ago
-            contributionDate.setDate(contributionDate.getDate() - 7);
-
-            getCookie.mockReturnValue(contributionDate);
-
-            const { container } = render(<SupportTheGuardian url={url} />);
-
-            // expect nothing to be rendered
-            await wait(() => expect(container.firstChild).toBeNull());
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-
-        it('should not render correctly if paying member', async () => {
-            const contributionDate = new Date();
-
-            // set a contribution date of 1 year ago
-            contributionDate.setDate(contributionDate.getDate() - 365);
-
-            getCookie
-                .mockReturnValueOnce(contributionDate)
-                .mockReturnValueOnce('true');
-
-            const { container } = render(<SupportTheGuardian url={url} />);
-
-            // expect nothing to be rendered
-            await wait(() => expect(container.firstChild).toBeNull());
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-
-        it('should render if neither paying member or recent contributor', async () => {
-            const contributionDate = new Date();
-
-            // set a contribution date of 1 year ago
-            contributionDate.setDate(contributionDate.getDate() - 365);
-
-            getCookie
-                .mockReturnValueOnce(contributionDate)
-                .mockReturnValueOnce('false');
-
-            const { container } = render(<SupportTheGuardian url={url} />);
-
-            // expect something to be rendered
-            await wait(() => expect(container.firstChild).not.toBeNull());
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-    });
-
     it('should not render if recent contributor', async () => {
         const contributionDate = new Date();
 

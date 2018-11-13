@@ -32,44 +32,6 @@ describe('ShareCount', () => {
         );
     });
 
-    describe('snapshots', () => {
-        it('It should not render if state.shareCount is falsy', async () => {
-            globalAny.fetch = jest.fn(async () => fetchResult(0));
-
-            const { container } = render(
-                <ShareCount config={config} CAPI={CAPI} />,
-            );
-
-            await wait(() => expect(container.firstChild).toBeNull());
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-
-        it('It should render if state.shareCount is truthy', async () => {
-            globalAny.fetch = jest.fn(async () => fetchResult(100));
-
-            const { container, getByTestId } = render(
-                <ShareCount config={config} CAPI={CAPI} />,
-            );
-
-            await waitForElement(() => getByTestId('countFull'));
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-
-        it('It should format long shareCount correctly', async () => {
-            globalAny.fetch = jest.fn(async () => fetchResult(25000));
-
-            const { container, getByTestId } = render(
-                <ShareCount config={config} CAPI={CAPI} />,
-            );
-
-            await waitForElement(() => getByTestId('countFull'));
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-    });
-
     it('It should render null if state.shareCount is falsy', async () => {
         globalAny.fetch = jest.fn(async () => fetchResult(0));
 
