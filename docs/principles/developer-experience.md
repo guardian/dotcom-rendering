@@ -18,7 +18,7 @@ specification and contract for components (TODO)
 
 ## Fast feedback cycle
 
-When developing components, changes should be reflected in the developer's browser within 1 second. Tests against relevant
+When developing components, changes should be reflected in the developer's browser within 5 seconds. Tests against relevant
 (changed) components should run in less than 10 seconds.
 
 ## Contract over idiom
