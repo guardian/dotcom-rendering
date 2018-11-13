@@ -79,13 +79,18 @@ const getArray = <T>(
 };
 
 const findPillar: (name: string) => Pillar | undefined = name => {
-    let pillar: string = name.toLowerCase();
+    const pillar: string = name.toLowerCase();
     // The pillar name is "arts" in CAPI, but "culture" everywhere else,
     // therefore we perform this substitution here.
     if (pillar === 'arts') {
-        pillar = 'culture';
+        return 'culture';
     }
     return pillarNames.find(_ => _ === pillar);
+};
+
+const findEdition: (name: string) => Edition | undefined = name => {
+    const editions: Edition[] = ['UK', 'US', 'INT', 'AU'];
+    return editions.find(_ => _ === name);
 };
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
@@ -287,20 +292,31 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         tag => tag.type === 'Contributor',
     )[0];
 
+    // From the server we get the values: "UK edition", "US edition", "Australia edition", "International edition"
+    // editionLongForm is that value, or empty string.
+    const editionLongForm = getString(data, 'config.page.edition', '');
+
+    // We compute the editionId from the editionLongForm
+    // Possible values for the editionId: "UK", "US", "AU", "INT"
+    const editionId = findEdition(
+        (editionLongForm === '' ? '' : editionLongForm.split(' ')[0])
+            .replace('Australia', 'AU')
+            .replace('International', 'INT'),
+    );
+
+    if (editionId === undefined) throw new Error('goodbye');
+
     return {
         isArticle,
         webPublicationDate,
         tags,
         sectionName,
+        editionLongForm,
+        editionId,
         webPublicationDateDisplay: getNonEmptyString(
             data,
             'config.page.webPublicationDateDisplay',
         ),
-        editionLongForm: getString(
-            data,
-            'config.page.edition',
-            '',
-        ).toLowerCase(),
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
             clean,

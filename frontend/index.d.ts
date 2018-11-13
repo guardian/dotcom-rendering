@@ -6,6 +6,8 @@ interface ArticleProps {
 
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' ;
 
+type Edition = 'UK' | 'US' | 'INT' | 'AU'
+
 type SharePlatform = 'facebook' | 'twitter' | 'email' | 'googlePlus' | 'whatsApp' | 'pinterest' | 'linkedIn' | 'messenger';
 
 // shared type declarations
@@ -74,6 +76,7 @@ interface CAPIType {
     webPublicationDate: Date,
     webPublicationDateDisplay: string,
     editionLongForm: string,
+    editionId: Edition,
     pageId: string,
     ageWarning?: string,
     sharingUrls: {
