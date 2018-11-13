@@ -9,8 +9,8 @@ import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 
 const headerStyles = css`
-    border-bottom: 1px solid #dcdcdc;
-    background-color: #052962;
+    border-bottom: 1px solid ${palette.neutral[86]};
+    background-color: ${palette.brand.blue};
 `;
 
 const row = css`
@@ -58,7 +58,7 @@ const logoStyles = css`
     margin-bottom: 35px;
 
     path {
-        fill: white;
+        fill: ${palette.neutral[100]};
     }
 `;
 
@@ -101,7 +101,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     height: 36px;
     line-height: 1;
     padding: 4px 4px;
-    color: white;
+    color: ${palette.neutral[100]};
     position: relative;
     overflow: hidden;
 
@@ -150,7 +150,7 @@ const lineStyles = css`
     height: 2px;
     position: absolute;
     width: 20px;
-    background-color: black;
+    background-color: ${palette.neutral[7]};
 `;
 
 const pattyStyles = css`
