@@ -4,12 +4,12 @@ import SupportTheGuardian from './SupportTheGuardian';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,
-} from '../../../../lib/cookie';
+} from '@frontend/web/lib/cookie';
 
 const getCookie: any = getCookie_;
 const addCookie: any = addCookie_;
 
-jest.mock('../../../../lib/cookie', () => ({
+jest.mock('@frontend/web/lib/cookie', () => ({
     getCookie: jest.fn(() => null),
     addCookie: jest.fn(() => null),
 }));

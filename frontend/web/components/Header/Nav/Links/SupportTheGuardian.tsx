@@ -11,8 +11,8 @@ import {
 import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
-import { getCookie } from '../../../../lib/cookie';
-import { AsyncClientComponent } from '../../../lib/AsyncClientComponent';
+import { getCookie } from '@frontend/web/lib/cookie';
+import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
 const style = css`
     position: relative;

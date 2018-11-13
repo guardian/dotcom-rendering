@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, wait, waitForElement } from 'react-testing-library';
 import { ShareCount } from './ShareCount';
-import { CAPI } from '../../../test/fixtures/CAPI';
+import { CAPI } from '@root/test/fixtures/CAPI';
 
 const fetchResult: (
     shareCount: number,

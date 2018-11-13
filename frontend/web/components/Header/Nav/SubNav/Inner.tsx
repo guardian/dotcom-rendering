@@ -8,7 +8,7 @@ import {
     mobileMedium,
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
-import { pillarPalette, pillarMap } from '../../../../../lib/pillars';
+import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
 const wrapperCollapsed = css`
     height: 36px;

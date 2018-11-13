@@ -1,6 +1,6 @@
-import resetCSS from /* preval */ '../lib/reset-css';
-import fontsCSS from '../lib/fonts-css';
-import assets from '../lib/assets';
+import resetCSS from /* preval */ '@frontend/lib/reset-css';
+import fontsCSS from '@frontend/lib/fonts-css';
+import assets from '@frontend/lib/assets';
 
 export default ({
     title = 'The Guardian',

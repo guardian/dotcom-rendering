@@ -4,8 +4,8 @@ import { renderToString } from 'react-dom/server';
 
 import htmlTemplate from './htmlTemplate';
 import Article from './pages/Article';
-import assets from '../lib/assets';
-import { GADataType } from '../lib/parse-capi';
+import assets from '@frontend/lib/assets';
+import { GADataType } from '@frontend/lib/parse-capi';
 
 interface Props {
     data: {

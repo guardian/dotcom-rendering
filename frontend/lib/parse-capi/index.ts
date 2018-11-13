@@ -3,8 +3,8 @@ import get from 'lodash.get';
 
 import clean from './clean';
 import bigBullets from './big-bullets';
-import { pillarNames } from '../pillars';
-import { getSharingUrls } from './sharing-urls';
+import { pillarNames } from '@frontend/lib/pillars';
+import { getSharingUrls } from '@frontend/lib/parse-capi/sharing-urls';
 
 // tslint:disable:prefer-array-literal
 const apply = (input: string, ...fns: Array<(_: string) => string>): string => {

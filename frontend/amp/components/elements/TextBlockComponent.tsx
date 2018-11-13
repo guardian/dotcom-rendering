@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { pillarPalette } from '../../../lib/pillars';
+import { pillarPalette } from '@frontend/lib/pillars';
 import { serif } from '@guardian/pasteup/fonts';
 
 // tslint:disable:react-no-dangerous-html

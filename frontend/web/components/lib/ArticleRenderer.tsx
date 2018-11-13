@@ -1,5 +1,5 @@
-import { TextBlockComponent } from '../elements/TextBlockComponent';
-import { ImageBlockComponent } from '../elements/ImageBlockComponent';
+import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
+import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import React from 'react';
 
 export const ArticleRenderer: React.SFC<{ elements: CAPIElement[] }> = ({
