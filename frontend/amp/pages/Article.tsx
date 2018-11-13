@@ -6,7 +6,7 @@ import Header from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'react-emotion';
 import InnerContainer from '@frontend/amp/components/InnerContainer';
-import { MainBlock } from './MainBlock';
+import { MainBlock } from '@frontend/amp/components/MainBlock';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
