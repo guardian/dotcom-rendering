@@ -8,6 +8,7 @@ import { ShareCount } from '../../web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { SharingIcons } from '@frontend/web/components/ShareIcons';
+import { ArticleModel } from '../pages/Article';
 
 const byline = css`
     font-style: italic;
@@ -196,53 +197,40 @@ const metaExtras = css`
 
 export const MainBlock: React.SFC<{
     config: ConfigType;
-    pageId: string;
-    pillar: Pillar;
-    sectionLabel?: string;
-    sectionUrl?: string;
-    headline: string;
-    standfirst: string;
-    author: AuthorType;
-    sharingUrls: any;
-    ageWarning?: string;
-    webPublicationDateDisplay: string;
-}> = ({
-    pageId,
-    config,
-    pillar,
-    sectionLabel,
-    sectionUrl,
-    headline,
-    standfirst,
-    author,
-    sharingUrls,
-    ageWarning,
-    webPublicationDateDisplay,
-}) => (
+    articleData: ArticleModel;
+}> = ({ config, articleData }) => (
     <header className={header}>
-        {sectionLabel &&
-            sectionUrl && (
+        {articleData.sectionLabel &&
+            articleData.sectionUrl && (
                 <div className={section}>
                     <a
-                        className={cx(sectionLabelLink, pillarColours[pillar])}
-                        href={`https://www.theguardian.com/${sectionUrl}`}
+                        className={cx(
+                            sectionLabelLink,
+                            pillarColours[articleData.pillar],
+                        )}
+                        href={`https://www.theguardian.com/${
+                            articleData.sectionUrl
+                        }`}
                         data-link-name="article section"
                     >
-                        {sectionLabel}
+                        {articleData.sectionLabel}
                     </a>
                 </div>
             )}
         <div className={headlineCss}>
-            <h1 className={headerStyle}>{headline}</h1>
+            <h1 className={headerStyle}>{articleData.headline}</h1>
             <div // tslint:disable-line:react-no-dangerous-html
-                className={cx(standfirstCss, standfirstLinks[pillar])}
+                className={cx(
+                    standfirstCss,
+                    standfirstLinks[articleData.pillar],
+                )}
                 dangerouslySetInnerHTML={{
-                    __html: standfirst,
+                    __html: articleData.standfirst,
                 }}
             />
         </div>
         <div className={cx(meta, guardianLines)}>
-            <div className={cx(profile, pillarColours[pillar])}>
+            <div className={cx(profile, pillarColours[articleData.pillar])}>
                 <span className={byline}>
                     {/* <RenderByline
                         bylineText={author.byline}
@@ -251,31 +239,35 @@ export const MainBlock: React.SFC<{
                     /> */}
                 </span>
             </div>
-            {author.twitterHandle && (
+            {articleData.author.twitterHandle && (
                 <div className={twitterHandle}>
                     <TwitterIcon />
-                    <a href={`https://www.twitter.com/${author.twitterHandle}`}>
-                        @{author.twitterHandle}
+                    <a
+                        href={`https://www.twitter.com/${
+                            articleData.author.twitterHandle
+                        }`}
+                    >
+                        @{articleData.author.twitterHandle}
                     </a>
                 </div>
             )}
-            <Dateline dateDisplay={webPublicationDateDisplay} />
+            <Dateline dateDisplay={articleData.webPublicationDateDisplay} />
             <div className={metaExtras}>
                 <SharingIcons
-                    sharingUrls={sharingUrls}
-                    pillar={pillar}
+                    sharingUrls={articleData.sharingUrls}
+                    pillar={articleData.pillar}
                     displayIcons={['facebook', 'twitter', 'email']}
                 />
-                <ShareCount config={config} pageId={pageId} />
-                {ageWarning && (
+                <ShareCount config={config} pageId={articleData.pageId} />
+                {articleData.ageWarning && (
                     <div
                         className={cx(
                             ageWarningCss,
-                            pillarColours[pillar],
-                            pillarFill[pillar],
+                            pillarColours[articleData.pillar],
+                            pillarFill[articleData.pillar],
                         )}
                     >
-                        <ClockIcon /> {ageWarning}
+                        <ClockIcon /> {articleData.ageWarning}
                     </div>
                 )}
             </div>

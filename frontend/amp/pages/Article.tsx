@@ -16,29 +16,39 @@ const body = css`
     background-color: white;
 `;
 
+export interface ArticleModel {
+    headline: string;
+    standfirst: string;
+    elements: CAPIElement[];
+    author: AuthorType;
+    webPublicationDateDisplay: string;
+    pageId: string;
+    ageWarning?: string;
+    sharingUrls: {
+        [K in SharePlatform]?: {
+            url: string;
+            userMessage: string;
+        }
+    };
+    pillar: Pillar;
+    sectionLabel?: string;
+    sectionUrl?: string;
+}
+
 export const Article: React.SFC<{
     nav: NavType;
-    CAPI: AMPType;
+    articleData: ArticleModel;
     config: ConfigType;
-}> = ({ nav, CAPI, config }) => (
+}> = ({ nav, articleData, config }) => (
     <div className={backgroundColour}>
         <Container>
-            <Header nav={nav} activePillar={CAPI.pillar} />
+            <Header nav={nav} activePillar={articleData.pillar} />
             <InnerContainer className={body}>
-                <MainBlock
-                    config={config}
-                    pageId={CAPI.pageId}
-                    pillar={CAPI.pillar}
-                    sectionLabel={CAPI.sectionLabel}
-                    sectionUrl={CAPI.sectionUrl}
-                    headline={CAPI.headline}
-                    standfirst={CAPI.standfirst}
-                    author={CAPI.author}
-                    sharingUrls={CAPI.sharingUrls}
-                    webPublicationDateDisplay={CAPI.webPublicationDateDisplay}
-                    ageWarning={CAPI.ageWarning}
+                <MainBlock config={config} articleData={articleData} />
+                <AmpRenderer
+                    pillar={articleData.pillar}
+                    elements={articleData.elements}
                 />
-                <AmpRenderer pillar={CAPI.pillar} elements={CAPI.elements} />
             </InnerContainer>
             <Footer />
         </Container>

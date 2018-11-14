@@ -45,7 +45,7 @@ const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
         const resp = AMPDocument({
             body: (
                 <AMPArticle
-                    CAPI={CAPI}
+                    articleData={CAPI}
                     nav={extractNavMeta(body)}
                     config={extractConfigMeta(body)}
                 />
