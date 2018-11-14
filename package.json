@@ -44,7 +44,6 @@
         "friendly-errors-webpack-plugin": "^1.7.0",
         "jest": "^23.6.0",
         "jest-dom": "^2.1.0",
-        "jest-emotion": "^9.2.11",
         "jest-teamcity-reporter": "^0.9.0",
         "log-update": "^2.3.0",
         "node-fetch": "^2.2.1",
@@ -104,7 +103,6 @@
           "**/*.test.+(ts|tsx|js)"
         ],
         "setupTestFrameworkScriptFile": "<rootDir>/test/jest.setup.ts",
-        "snapshotSerializers": ["jest-emotion/serializer"],
         "moduleNameMapper": {
             "^@root(.*)$": "<rootDir>$1",
             "^@frontend(.*)$": "<rootDir>/frontend$1",

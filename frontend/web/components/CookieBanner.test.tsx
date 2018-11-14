@@ -26,24 +26,6 @@ describe('CookieBanner', () => {
         expect(getCookie).toHaveBeenCalledWith(consentCookie);
     });
 
-    describe('snapshots', () => {
-        it('It should render if consentCookie not set', () => {
-            getCookie.mockImplementation(() => false);
-
-            const { container } = render(<CookieBanner />);
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-
-        it('It should not render if consentCookie set', () => {
-            getCookie.mockImplementation(() => true);
-
-            const { container } = render(<CookieBanner />);
-
-            expect(container.firstChild).toMatchSnapshot();
-        });
-    });
-
     it('It should render null if consentCookie set', () => {
         getCookie.mockImplementation(() => true);
 

@@ -42,22 +42,13 @@ Tests that require you to duplicate the application code exactly. These tests wi
 
 Don't assert against behaviours covered by the library code. EG. Testing types of properties passed to the component, this is unnecessary.
 
-#### Snapshots
+### Snapshots
 
 Jest [Snapshot](https://jestjs.io/docs/en/snapshot-testing) tests make sure the rendered output of a UI Component does not change unexpectedly.
 
-Jest creates a snapshot file the first time a test with a `.toMatchSnapshot();` assertion is run. The snapshot artifact should be committed alongside code changes, and reviewed as part of the code review process.
+We will **not** be writing snaphot test Components for the following reasons:
 
-##### What if a Snapshot test fails?
-
-A snapshot test will fail when the snapshot for our updated component no longer matches the snapshot artifact for the test case. In this event you should check the failed tests output to see whether the difference between the snapshot and the artifact is intended or not. If it is intended we will need to update our snapshot artifact. You can run `yarn test` with a flag `--updateSnapshot` that will tell it to re-generate snapshots:
-
-```bash
- yarn test --updateSnapshot --testNamePattern [TestSuiteName]
-```
-
-##### Things to be aware of with Snapshots
-
-Snapshots immortalize a component’s current markup as the True Markup, regardless of whether or not the component is correct. If you record a snapshot with a bug in your component the snapshot will believe it to be expected.
-
-It's easy to fix failing snapshot tests without diagnosing the cause by running  `yarn test --updateSnapshot`, you should be sure you've not introduced a regression before updating a snapshot.
+- Snapshots immortalize a Component’s current markup as the true markup, regardless of whether or not the component is correct.
+- Too easy to fix tests without fixing underlying bugs simplu by running `jest --u` override command.
+- Increased risk of false negatives and false positives - If the tests fail when there are no bugs, that is a false negative. If the tests pass when there are bugs present, that is a false positive.
+- Developer time required to check snapshot test failures when simple non-breaking changes introduced, plus developer time required to review snapshot output in Pull Requests.
