@@ -7,8 +7,7 @@ import { serif } from '@guardian/pasteup/fonts';
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
     p {
-        margin: 0 0 12px;
-        padding: 0;
+        padding: 0 0 12px;
         font-size: 16px;
         font-weight: 300;
         word-wrap: break-word;

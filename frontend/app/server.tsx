@@ -43,8 +43,15 @@ const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
         const CAPI = extractArticleMeta(body);
         const resp = AMPDocument({
-            body: <AMPArticle elements={CAPI.elements} pillar={CAPI.pillar} />,
+            body: (
+                <AMPArticle
+                    elements={CAPI.elements}
+                    pillar={CAPI.pillar}
+                    nav={extractNavMeta(body)}
+                />
+            ),
         });
+
         res.status(200).send(resp);
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
@@ -103,6 +110,7 @@ if (process.env.NODE_ENV === 'production') {
                     <ul>
                         <li><a href="/Article">Article</a></li>
                         <li><a href="/AMPArticle">⚡️Article</a></li>
+
                     </ul>
                 </body>
                 </html>
