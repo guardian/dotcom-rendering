@@ -1,8 +1,7 @@
 const pillar: Pillar = 'lifestyle';
-
 const editionId: Edition = 'UK';
 
-export const CAPI = {
+export const CAPI: CAPIType = {
     pillar,
     editionId,
     isArticle: true,

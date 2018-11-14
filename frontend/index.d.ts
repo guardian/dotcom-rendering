@@ -136,6 +136,7 @@ declare namespace JSX {
         'amp-accordion': any;
         'amp-img': any;
         'amp-list': any;
+        'amp-instagram':any;
         'template': any;
     }
 }
