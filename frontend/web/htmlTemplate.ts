@@ -23,11 +23,7 @@ export default ({
     cssIDs: string[];
     nonBlockingJS?: string;
     fontFiles?: string[];
-}) => {
-    const sanitiseDomRefs = (jsString: string) =>
-        jsString.replace(/"(document.*?innerHTML)"/g, '$1');
-
-    return `<!doctype html>
+}) => `<!doctype html>
         <html>
             <head>
                 <title>${title}</title>
@@ -47,6 +43,13 @@ export default ({
                     .join('\n')}
                 <style>${fontsCSS}${resetCSS}${css}</style>
                 <script>
+                window.guardian = ${JSON.stringify({
+                    app: {
+                        data,
+                        cssIDs,
+                    },
+                    config: {},
+                })};
                 // this is a global that's called at the bottom of the pf.io response,
                 // once the polyfills have run. This may be useful for debugging.
                 // mainly to support browsers that don't support async=false or defer
@@ -80,15 +83,6 @@ export default ({
             <body>
                 <div id="app">${html}</div>
                 <script>
-                window.guardian = ${sanitiseDomRefs(
-                    JSON.stringify({
-                        app: {
-                            data,
-                            cssIDs,
-                        },
-                        config: {},
-                    }),
-                )};
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -97,4 +91,3 @@ export default ({
                 <script>${nonBlockingJS}</script>
             </body>
         </html>`;
-};
