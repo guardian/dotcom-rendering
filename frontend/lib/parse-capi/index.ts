@@ -296,7 +296,6 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     // editionLongForm is that value, or empty string.
     const editionLongForm = getString(data, 'config.page.edition', '');
 
-    // We compute the editionId from the editionLongForm
     // Possible values for the editionId: "UK", "US", "AU", "INT"
     const editionId = getEditionValue(
         getString(data, 'config.page.editionId', ''),
