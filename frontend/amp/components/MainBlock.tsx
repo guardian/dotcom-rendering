@@ -219,7 +219,6 @@ export const MainBlock: React.SFC<{
     ageWarning,
     webPublicationDateDisplay,
 }) => (
-    // tslint:disable:react-no-dangerous-html
     <header className={header}>
         {sectionLabel &&
             sectionUrl && (
@@ -235,7 +234,7 @@ export const MainBlock: React.SFC<{
             )}
         <div className={headlineCss}>
             <h1 className={headerStyle}>{headline}</h1>
-            <div
+            <div // tslint:disable-line:react-no-dangerous-html
                 className={cx(standfirstCss, standfirstLinks[pillar])}
                 dangerouslySetInnerHTML={{
                     __html: standfirst,
