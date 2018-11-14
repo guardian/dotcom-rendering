@@ -14,8 +14,8 @@ export const InstagramBlockComponent: React.SFC<{
     const shortcode = getShortcode(element.url);
     return (
         <amp-instagram
-            width="7" // Magic numbers, we don't track aspect ratio
-            height="8" // And if you remove them it'll fill the whole screen
+            width="1" // Magic numbers, we don't track aspect ratio and instagrams brand is somewhat square based
+            height="1" // And if you remove them it'll fill the whole screen
             data-shortcode={shortcode}
             data-captioned={element.hasCaption}
             layout="responsive"
