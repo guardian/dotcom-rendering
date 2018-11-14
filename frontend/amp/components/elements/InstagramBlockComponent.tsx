@@ -31,7 +31,7 @@ export const InstagramBlockComponent: React.SFC<{
             width="1"
             height={element.hasCaption ? '2' : '1.5'}
             data-shortcode={shortcode}
-            data-captioned={element.hasCaption}
+            data-captioned={element.hasCaption} // Not convinced this has an effect.
             layout="responsive"
         />
     );
