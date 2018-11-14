@@ -7,7 +7,7 @@ import Dateline from '../../web/components/Dateline';
 import { ShareCount } from '../../web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
-import { SharingIcons } from '../../web/components/ShareIcons';
+import { SharingIcons } from '@frontend/web/components/ShareIcons';
 
 const byline = css`
     font-style: italic;

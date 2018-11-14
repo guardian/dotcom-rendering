@@ -36,7 +36,7 @@ describe('ShareCount', () => {
         globalAny.fetch = jest.fn(async () => fetchResult(0));
 
         const { container } = render(
-            <ShareCount config={config} CAPI={CAPI} />,
+            <ShareCount config={config} pageId={CAPI.pageId} />,
         );
 
         await wait(() => expect(container.firstChild).toBeNull());
@@ -46,7 +46,7 @@ describe('ShareCount', () => {
         globalAny.fetch = jest.fn(async () => fetchResult(100));
 
         const { container, getByTestId } = render(
-            <ShareCount config={config} CAPI={CAPI} />,
+            <ShareCount config={config} pageId={CAPI.pageId} />,
         );
 
         await waitForElement(() => getByTestId('countFull'));
@@ -60,7 +60,7 @@ describe('ShareCount', () => {
         globalAny.fetch = jest.fn(async () => fetchResult(25000));
 
         const { container, getByTestId } = render(
-            <ShareCount config={config} CAPI={CAPI} />,
+            <ShareCount config={config} pageId={CAPI.pageId} />,
         );
 
         await waitForElement(() => getByTestId('countFull'));
