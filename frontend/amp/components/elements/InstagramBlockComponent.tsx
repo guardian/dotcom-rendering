@@ -7,21 +7,6 @@ const getShortcode: (url: string) => string = url => {
     }
     return match[1];
 };
-
-export const InstagramBlockComponent: React.SFC<{
-    element: InstagramBlockElement;
-}> = ({ element }) => {
-    const shortcode = getShortcode(element.url);
-    return (
-        <amp-instagram
-            width="1" // Magic numbers, we don't track aspect ratio and instagrams brand is somewhat square based
-            height="1" // And if you remove them it'll fill the whole screen
-            data-shortcode={shortcode}
-            data-captioned={false}
-            layout="responsive"
-        />
-    );
-};
 /*
 About width and height.
 
@@ -32,6 +17,22 @@ the total initial space made available for the element.
 
 This space is used intially for the image, and then for the load in of the ig chrome.
 
-The ig chrome is about 200px tall
+The ig chrome is about 250px tall on a piece with caption excluding the text.
+
+So the aspect ratio is either going to be 1.5:1 or 2:1. With hope it reduces jank?
 
 */
+export const InstagramBlockComponent: React.SFC<{
+    element: InstagramBlockElement;
+}> = ({ element }) => {
+    const shortcode = getShortcode(element.url);
+    return (
+        <amp-instagram
+            width="1"
+            height={element.hasCaption ? '2' : '1.5'}
+            data-shortcode={shortcode}
+            data-captioned={element.hasCaption}
+            layout="responsive"
+        />
+    );
+};
