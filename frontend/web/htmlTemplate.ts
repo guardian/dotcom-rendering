@@ -23,11 +23,7 @@ export default ({
     cssIDs: string[];
     nonBlockingJS?: string;
     fontFiles?: string[];
-}) => {
-    const sanitiseDomRefs = (jsString: string) =>
-        jsString.replace(/"(document.*?innerHTML)"/g, '$1');
-
-    return `<!doctype html>
+}) => `<!doctype html>
         <html>
             <head>
                 <title>${title}</title>
@@ -47,15 +43,13 @@ export default ({
                     .join('\n')}
                 <style>${fontsCSS}${resetCSS}${css}</style>
                 <script>
-                window.guardian = ${sanitiseDomRefs(
-                    JSON.stringify({
-                        app: {
-                            data,
-                            cssIDs,
-                        },
-                        config: {},
-                    }),
-                )};
+                window.guardian = ${JSON.stringify({
+                    app: {
+                        data,
+                        cssIDs,
+                    },
+                    config: {},
+                })};
                 // this is a global that's called at the bottom of the pf.io response,
                 // once the polyfills have run. This may be useful for debugging.
                 // mainly to support browsers that don't support async=false or defer
@@ -97,4 +91,3 @@ export default ({
                 <script>${nonBlockingJS}</script>
             </body>
         </html>`;
-};
