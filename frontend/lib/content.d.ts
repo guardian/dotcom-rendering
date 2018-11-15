@@ -34,4 +34,8 @@ interface Image {
     url: string;
 }
 
-type CAPIElement = TextBlockElement | ImageBlockElement | InstagramBlockElement;
+type CAPIElement =
+    | TextBlockElement
+    | ImageBlockElement
+    | InstagramBlockElement
+    | TweetBlockElement;

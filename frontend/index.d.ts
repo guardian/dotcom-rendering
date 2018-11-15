@@ -145,6 +145,7 @@ declare namespace JSX {
         'amp-sidebar': any;
         'amp-accordion': any;
         'amp-img': any;
+        'amp-twitter': any;
         'amp-list': any;
         'amp-instagram': any;
         template: any;
