@@ -1,19 +1,13 @@
 import React from 'react';
 import Footer from '@frontend/amp/components/Footer';
 import Container from '@frontend/amp/components/Container';
-import { AmpRenderer } from '@frontend/amp/components/lib/AMPRenderer';
+import Body from '@frontend/amp/components/Body';
 import Header from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'react-emotion';
-import InnerContainer from '@frontend/amp/components/InnerContainer';
-import { MainBlock } from '@frontend/amp/components/MainBlock';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
-`;
-
-const body = css`
-    background-color: white;
 `;
 
 export interface ArticleModel {
@@ -43,14 +37,14 @@ export const Article: React.SFC<{
     <div className={backgroundColour}>
         <Container>
             <Header nav={nav} activePillar={articleData.pillar} />
-            <InnerContainer className={body}>
-                <MainBlock config={config} articleData={articleData} />
-                <AmpRenderer
-                    pillar={articleData.pillar}
-                    elements={articleData.elements}
-                />
-            </InnerContainer>
+            <Body
+                pillar={articleData.pillar}
+                data={articleData}
+                config={config}
+            />
             <Footer />
         </Container>
     </div>
 );
+
+export default Article;

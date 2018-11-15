@@ -4,7 +4,7 @@ import React from 'react';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '../elements/InstagramBlockComponent';
 
-export const AmpRenderer: React.SFC<{
+export const Elements: React.SFC<{
     elements: CAPIElement[];
     pillar: Pillar;
 }> = ({ elements, pillar }) => {
