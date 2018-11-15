@@ -5,25 +5,6 @@ An element which represents an intstagram element.
 ## CAPI representation
 
 This has an `ElementType` of [INSTAGRAM](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L131) with fields described by [InstagramElementFields](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L633).
-```
-    1: required string originalUrl
-
-    2: required string title
-
-    3: required string source
-
-    4: required string authorUrl
-
-    5: required string authorUsername
-
-    6: optional string html
-
-    7: optional i32 width
-
-    8: optional string alt
-
-    9: optional string caption
-```
 
 ## Frontend Liveblog Representation
 
