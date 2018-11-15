@@ -2,7 +2,8 @@ import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockC
 
 import React from 'react';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
-import { InstagramBlockComponent } from '../elements/InstagramBlockComponent';
+import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
+import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
@@ -29,6 +30,8 @@ export const Elements: React.SFC<{
                     );
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return <InstagramBlockComponent element={element} />;
+                case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                    return <TweetBlockComponent element={element} />;
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));
