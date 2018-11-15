@@ -5,7 +5,9 @@ import React from 'react';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
-    const result = v.validateString(document({ body: <img alt="foo" /> }));
+    const result = v.validateString(
+        document({ scripts: [''], body: <img alt="foo" /> }),
+    );
     expect(result.errors.length > 0).toBe(true);
 });
 

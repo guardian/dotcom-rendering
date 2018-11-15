@@ -19,6 +19,7 @@ import {
     extractConfigMeta,
     extractGAMeta,
 } from '@frontend/lib/parse-capi';
+import { extractScripts } from '@frontend/amp/components/lib/AMPScripts';
 
 const renderArticle = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -43,6 +44,7 @@ const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
         const CAPI = extractArticleMeta(body);
         const resp = AMPDocument({
+            scripts: extractScripts(CAPI.elements),
             body: (
                 <AMPArticle
                     articleData={CAPI}

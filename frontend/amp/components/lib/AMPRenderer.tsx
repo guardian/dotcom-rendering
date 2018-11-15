@@ -2,6 +2,7 @@ import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockC
 
 import React from 'react';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
+import { InstagramBlockComponent } from '../elements/InstagramBlockComponent';
 
 export const AmpRenderer: React.SFC<{
     elements: CAPIElement[];
@@ -26,6 +27,8 @@ export const AmpRenderer: React.SFC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.InstagramBlockElement':
+                    return <InstagramBlockComponent element={element} />;
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));
