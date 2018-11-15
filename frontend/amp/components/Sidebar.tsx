@@ -22,7 +22,7 @@ const sidebarStyles = css`
     }
 `;
 
-const group = css`
+const menuGroup = css`
     padding-bottom: 0.75rem;
 `;
 
@@ -106,7 +106,7 @@ const membershipLinks = css`
     }
 `;
 
-const menuItem = css`
+const pillar = css`
     position: relative;
 
     :not(:last-child):after {
@@ -122,9 +122,9 @@ const menuItem = css`
 `;
 
 const template = `
-<ul class=${group}>
+<ul class=${menuGroup}>
 {{ #topLevelSections }}
-    <li class=${menuItem}>
+    <li class=${pillar}>
         <amp-accordion>
             <section>
                 <h2 class=${pillarLink}
@@ -171,7 +171,7 @@ const template = `
 </li>
 </ul>
 
-<ul class=${cx(otherLinks, group)}>
+<ul class=${cx(otherLinks, menuGroup)}>
 {{ #secondarySections }}
     <li>
         <a href="{{ url }}"
