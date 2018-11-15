@@ -19,7 +19,7 @@ import {
     extractConfigMeta,
     extractGAMeta,
 } from '@frontend/lib/parse-capi';
-import { extractScripts } from '../amp/components/lib/AMPScripts';
+import { extractScripts } from '@frontend/amp/components/lib/AMPScripts';
 
 const renderArticle = ({ body }: express.Request, res: express.Response) => {
     try {
