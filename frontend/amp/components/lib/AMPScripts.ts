@@ -6,6 +6,8 @@ export const extractScripts: (
     return [...new Set(elements.map(e => e._type))]
         .map(t => {
             switch (t) {
+                case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                    return `<script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>`;
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return `<script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>`;
                 default:
