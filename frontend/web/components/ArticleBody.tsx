@@ -573,7 +573,7 @@ const ArticleBody: React.SFC<{
                             pillar={CAPI.pillar}
                             displayIcons={['facebook', 'twitter', 'email']}
                         />
-                        <ShareCount config={config} CAPI={CAPI} />
+                        <ShareCount config={config} pageId={CAPI.pageId} />
                         {CAPI.ageWarning && (
                             <div
                                 className={cx(

@@ -1,0 +1,276 @@
+import React from 'react';
+import { css, cx } from 'react-emotion';
+import { sans, serif } from '@guardian/pasteup/fonts';
+import { palette } from '@guardian/pasteup/palette';
+import { pillarMap, pillarPalette } from '../../lib/pillars';
+import Dateline from '../../web/components/Dateline';
+import { ShareCount } from '../../web/components/ShareCount';
+import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
+import { SharingIcons } from '@frontend/web/components/ShareIcons';
+import { ArticleModel } from '../pages/Article';
+
+const byline = css`
+    font-style: italic;
+`;
+
+const guardianLines = css`
+    background-image: repeating-linear-gradient(
+        to bottom,
+        ${palette.neutral[86]},
+        ${palette.neutral[86]} 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: 1px 13px;
+    padding-top: 15px;
+    margin-bottom: 6px;
+`;
+
+const meta = css`
+    @supports (display: grid) {
+        grid-template-areas: 'meta';
+    }
+
+    padding-left: 10px;
+    padding-right: 10px;
+`;
+
+const headerStyle = css`
+    font-size: 34px;
+    line-height: 38px;
+    font-family: ${serif.headline};
+    font-weight: 500;
+    padding-bottom: 24px;
+    padding-top: 3px;
+`;
+
+const headlineCss = css`
+    @supports (display: grid) {
+        grid-template-areas: 'headline';
+    }
+    padding: 0 10px;
+`;
+
+const header = css`
+    margin: 0 -10px;
+`;
+
+const section = css`
+    @supports (display: grid) {
+        grid-template-areas: 'section';
+    }
+    font-size: 16px;
+    line-height: 20px;
+    font-family: ${serif.headline};
+    font-weight: 700;
+
+    padding: 0 10px;
+`;
+
+const profile = css`
+    font-size: 16px;
+    line-height: 20px;
+    font-family: ${serif.headline};
+    font-weight: 700;
+    margin-bottom: 4px;
+`;
+
+const sectionLabelLink = css`
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
+const listStyles = css`
+    li {
+        font-family: ${serif.body};
+        margin-bottom: 6px;
+        padding-left: 20px;
+        font-size: 17px;
+        line-height: 24px;
+
+        p {
+            display: inline;
+        }
+    }
+
+    li:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 8px;
+        background-color: ${palette.neutral[86]};
+        margin-left: -20px;
+    }
+`;
+
+const standfirstCss = css`
+    font-family: ${serif.body};
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 22px;
+    color: ${palette.neutral[7]};
+    margin-bottom: 12px;
+
+    ${listStyles};
+
+    p {
+        margin-bottom: 8px;
+    }
+`;
+
+const ageWarningCss = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    display: inline-block;
+    margin-bottom: 12px;
+    width: 100%;
+`;
+
+const standfirstLinks = pillarMap(
+    pillar =>
+        css`
+            a {
+                color: ${pillarPalette[pillar].dark};
+                text-decoration: none;
+                border-bottom: 1px solid ${palette.neutral[86]};
+            }
+        `,
+);
+
+const pillarColours = pillarMap(
+    pillar =>
+        css`
+            color: ${pillarPalette[pillar].main};
+        `,
+);
+const pillarFill = pillarMap(
+    pillar =>
+        css`
+            fill: ${pillarPalette[pillar].main};
+        `,
+);
+
+const twitterHandle = css`
+    font-size: 12px;
+    line-height: 16px;
+    font-family: ${sans.body};
+    font-weight: bold;
+    color: ${palette.neutral[46]};
+
+    padding-right: 10px;
+    display: inline-block;
+
+    svg {
+        height: 10px;
+        max-width: 12px;
+        margin-right: 0px;
+        fill: ${palette.neutral[46]};
+    }
+
+    a {
+        color: ${palette.neutral[46]};
+        text-decoration: none;
+    }
+`;
+
+const metaExtras = css`
+    border-top: 1px solid ${palette.neutral[86]};
+    padding-top: 6px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+`;
+
+export const MainBlock: React.SFC<{
+    config: ConfigType;
+    articleData: ArticleModel;
+}> = ({ config, articleData }) => (
+    <header className={header}>
+        {articleData.sectionLabel &&
+            articleData.sectionUrl && (
+                <div className={section}>
+                    <a
+                        className={cx(
+                            sectionLabelLink,
+                            pillarColours[articleData.pillar],
+                        )}
+                        href={`https://www.theguardian.com/${
+                            articleData.sectionUrl
+                        }`}
+                        data-link-name="article section"
+                    >
+                        {articleData.sectionLabel}
+                    </a>
+                </div>
+            )}
+        <div className={headlineCss}>
+            <h1 className={headerStyle}>{articleData.headline}</h1>
+            <div // tslint:disable-line:react-no-dangerous-html
+                className={cx(
+                    standfirstCss,
+                    standfirstLinks[articleData.pillar],
+                )}
+                dangerouslySetInnerHTML={{
+                    __html: articleData.standfirst,
+                }}
+            />
+        </div>
+        <div className={cx(meta, guardianLines)}>
+            <div className={cx(profile, pillarColours[articleData.pillar])}>
+                <span className={byline}>
+                    {/* <RenderByline
+                        bylineText={author.byline}
+                        contributorTags={tags}
+                        pillar={pillar}
+                    /> */}
+                </span>
+            </div>
+            {articleData.author.twitterHandle && (
+                <div className={twitterHandle}>
+                    <TwitterIcon />
+                    <a
+                        href={`https://www.twitter.com/${
+                            articleData.author.twitterHandle
+                        }`}
+                    >
+                        @{articleData.author.twitterHandle}
+                    </a>
+                </div>
+            )}
+            <Dateline dateDisplay={articleData.webPublicationDateDisplay} />
+            <div className={metaExtras}>
+                <SharingIcons
+                    sharingUrls={articleData.sharingUrls}
+                    pillar={articleData.pillar}
+                    displayIcons={['facebook', 'twitter', 'email']}
+                />
+                <ShareCount config={config} pageId={articleData.pageId} />
+                {articleData.ageWarning && (
+                    <div
+                        className={cx(
+                            ageWarningCss,
+                            pillarColours[articleData.pillar],
+                            pillarFill[articleData.pillar],
+                        )}
+                    >
+                        <ClockIcon /> {articleData.ageWarning}
+                    </div>
+                )}
+            </div>
+        </div>
+    </header>
+);

@@ -95,6 +95,7 @@ interface CAPIType {
     subMetaSectionLinks: SimpleLinkType[],
     subMetaKeywordLinks: SimpleLinkType[],
 }
+
 interface TagType {
   id: string,
   type: string,
