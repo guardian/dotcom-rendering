@@ -1,10 +1,10 @@
- interface TextBlockElement {
+interface TextBlockElement {
     _type: 'model.dotcomrendering.pageElements.TextBlockElement';
     html: string;
 }
 
 interface ImageBlockElement {
-    _type: 'model.dotcomrendering.pageElements.ImageBlockElement' ;
+    _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
     data: { alt: string; credit: string; caption?: string };
 }
@@ -15,7 +15,13 @@ interface InstagramBlockElement {
     url: string;
     hasCaption: boolean;
 }
-
+interface TweetBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TweetBlockElement';
+    html: string;
+    url: string;
+    id: string;
+    hasMedia: boolean;
+}
 interface Image {
     index: number;
     fields: {
@@ -29,4 +35,3 @@ interface Image {
 }
 
 type CAPIElement = TextBlockElement | ImageBlockElement | InstagramBlockElement;
-
