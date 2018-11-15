@@ -65,7 +65,11 @@ const Article: React.SFC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
-        <Header nav={data.NAV} pillar={data.CAPI.pillar} />
+        <Header
+            nav={data.NAV}
+            pillar={data.CAPI.pillar}
+            edition={data.CAPI.editionId}
+        />
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>

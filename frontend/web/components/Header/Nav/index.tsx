@@ -33,6 +33,7 @@ const centered = css`
 interface Props {
     nav: NavType;
     pillar: Pillar;
+    edition: Edition;
 }
 
 export default class Nav extends Component<
@@ -77,7 +78,7 @@ export default class Nav extends Component<
                     role="navigation"
                     aria-label="Guardian sections"
                 >
-                    <EditionDropdown />
+                    <EditionDropdown edition={this.props.edition} />
                     <Logo />
                     {/*
                         TODO: The properties of the Links component

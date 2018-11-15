@@ -18,9 +18,10 @@ const header = css`
 const Header: React.SFC<{
     nav: NavType;
     pillar: Pillar;
-}> = ({ nav, pillar }) => (
+    edition: Edition;
+}> = ({ nav, pillar, edition }) => (
     <header className={header}>
-        <Nav nav={nav} pillar={pillar} />
+        <Nav nav={nav} pillar={pillar} edition={edition} />
     </header>
 );
 
