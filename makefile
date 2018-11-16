@@ -54,8 +54,8 @@ logs:
 # dev #########################################
 
 dev: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development node dev-server frontend
+	$(call log, "starting frontend DEV server")
+	@NODE_ENV=development node frontend/dev-server
 
 # quality #########################################
 

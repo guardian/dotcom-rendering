@@ -7,17 +7,17 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const { siteName, root } = require('./config');
+const { siteName, root, devServerPort } = require('../config');
 
 const go = async () => {
-    const webpackConfig = await require('./webpack');
+    const webpackConfig = await require('../../webpack');
     const compiler = await webpack(webpackConfig);
 
     const app = express();
 
     app.use(
         `/static/${siteName}`,
-        express.static(path.join(root, siteName, 'static')),
+        express.static(path.join(root, 'static')),
     );
 
     app.use(
@@ -73,13 +73,6 @@ const go = async () => {
         }),
     );
 
-    app.get(
-        '/static/frontend',
-        express.static(
-            path.relative(__dirname, path.resolve(root, 'frontend', 'static')),
-        ),
-    );
-
     app.get('/', (req, res) => {
         res.send(`
             <!DOCTYPE html>
@@ -102,7 +95,7 @@ const go = async () => {
         res.status(500).send(err.stack);
     });
 
-    app.listen(3030);
+    app.listen(devServerPort);
 };
 
 go();

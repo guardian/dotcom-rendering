@@ -10,7 +10,7 @@ import {
 import document from '@frontend/web/document';
 import AMPDocument from '@frontend/amp/document';
 import AMPArticle from '@frontend/amp/pages/Article';
-import { dist, root } from '@root/config';
+import { dist, root, prodPort, siteName } from '@frontend/config';
 import { log, warn } from '@root/lib/log';
 
 import {
@@ -25,7 +25,7 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
     try {
         const resp = document({
             data: {
-                site: 'frontend',
+                site: siteName,
                 page: 'Article',
                 CAPI: extractArticleMeta(body),
                 NAV: extractNavMeta(body),
@@ -92,7 +92,7 @@ if (process.env.NODE_ENV === 'production') {
             express.static(
                 path.relative(
                     __dirname,
-                    path.resolve(root, 'frontend', 'static'),
+                    path.resolve(root, siteName, 'static'),
                 ),
             ),
         );
@@ -131,5 +131,5 @@ if (process.env.NODE_ENV === 'production') {
         recordBaselineCloudWatchMetrics();
     }, 10 * 1000);
 
-    app.listen(9000);
+    app.listen(prodPort);
 }

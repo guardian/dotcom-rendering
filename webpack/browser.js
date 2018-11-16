@@ -2,13 +2,13 @@ const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
-const { siteName } = require('../config');
+const { siteName, devServerPort } = require('../frontend/config');
 
 const friendlyErrorsWebpackPlugin = new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
         messages: [
             `DEV server running at ${chalk.blue.underline(
-                'http://localhost:3030',
+                `http://localhost:${devServerPort}`,
             )}`,
         ],
     },
@@ -27,7 +27,7 @@ module.exports = ({ page }) => ({
         [`${siteName}.${page.toLowerCase()}`]: [
             DEV &&
                 'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-            './frontend/web/browser.ts',
+            `./${siteName}/web/browser.ts`,
         ].filter(Boolean),
     },
     output: {

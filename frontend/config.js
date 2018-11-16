@@ -11,6 +11,8 @@ const getPagesForSite = () =>
 const root = __dirname;
 const dist = resolve(root, 'dist');
 const target = resolve(root, 'target');
+const prodPort = 9000;
+const devServerPort = 3030;
 
 module.exports = {
     dist,
@@ -18,4 +20,6 @@ module.exports = {
     target,
     getPagesForSite,
     siteName,
+    prodPort,
+    devServerPort,
 };
