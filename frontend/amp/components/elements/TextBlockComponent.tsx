@@ -12,6 +12,7 @@ const style = (pillar: Pillar) => css`
         font-weight: 300;
         word-wrap: break-word;
         color: ${palette.neutral[7]};
+        line-height: 1.5;
     }
     a {
         color: ${pillarPalette[pillar].main};
