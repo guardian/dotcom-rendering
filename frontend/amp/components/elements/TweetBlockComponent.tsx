@@ -1,5 +1,6 @@
 import React from 'react';
 import { JSDOM } from 'jsdom';
+import { AMPCommon } from '../primitives/primitives';
 
 const makePlaceholder = (html: string): string | null => {
     const { window } = new JSDOM(html);
@@ -8,6 +9,8 @@ const makePlaceholder = (html: string): string | null => {
     const q = blockquotes[0];
     return q.innerHTML;
 };
+
+const DivAmp = (props: AMPCommon) => React.createElement('div', props);
 
 // tslint:disable:react-no-dangerous-html
 export const TweetBlockComponent: React.SFC<{
@@ -22,10 +25,11 @@ export const TweetBlockComponent: React.SFC<{
             data-tweetid={element.id}
         >
             {placeholderHTML && (
-                <blockquote
-                    placeholder="true"
-                    dangerouslySetInnerHTML={{ __html: placeholderHTML }}
-                />
+                <DivAmp fallback={true}>
+                    <blockquote
+                        dangerouslySetInnerHTML={{ __html: placeholderHTML }}
+                    />
+                </DivAmp>
             )}
         </amp-twitter>
     );
