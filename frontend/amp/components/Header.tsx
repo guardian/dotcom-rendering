@@ -62,14 +62,6 @@ const logoStyles = css`
     }
 `;
 
-const pillarUnderline = pillarMap(
-    pillar => css`
-        :after {
-            transform: translateY(4px);
-        }
-    `,
-);
-
 const pillarListStyles = css`
     list-style: none;
     line-height: 0;
@@ -79,10 +71,8 @@ const pillarListItemStyle = css`
     display: inline-block;
 
     :first-child {
-        margin-left: 20px;
-
         a {
-            padding-left: 0;
+            padding-left: 20px;
 
             :before {
                 display: none;
@@ -105,10 +95,6 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     position: relative;
     overflow: hidden;
 
-    :hover {
-        ${pillarUnderline[pillar]};
-    }
-
     :before {
         border-left: 1px solid rgba(255, 255, 255, 0.3);
         top: 0;
@@ -123,7 +109,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     :after {
         content: '';
         display: block;
-        top: -4px;
+        top: 0;
         left: 0;
         right: 0;
         position: absolute;
@@ -182,13 +168,7 @@ const pillarLinks = (pillars: PillarType[], activePillar: Pillar) => (
         <ul className={pillarListStyles}>
             {pillars.map((p, i) => (
                 <li className={pillarListItemStyle} key={p.title}>
-                    <a
-                        className={cx(pillarLinkStyle(p.pillar), {
-                            [pillarUnderline[p.pillar]]:
-                                p.pillar === activePillar,
-                        })}
-                        href={p.url}
-                    >
+                    <a className={pillarLinkStyle(p.pillar)} href={p.url}>
                         {p.title}
                     </a>
                 </li>
