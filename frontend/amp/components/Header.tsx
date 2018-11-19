@@ -87,10 +87,10 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     text-decoration: none;
     cursor: pointer;
     display: block;
-    font-size: 20px;
+    font-size: 17px;
     height: 36px;
     line-height: 1;
-    padding: 4px 4px;
+    padding: 9px 4px;
     color: ${palette.neutral[100]};
     position: relative;
     overflow: hidden;
