@@ -4,7 +4,7 @@ const writeFile = promisify(require('fs').writeFile);
 const execa = require('execa');
 const path = require('path');
 const cpy = require('cpy');
-const { warn, log } = require('../log');
+const { warn, log } = require('../env/log');
 const { siteName, root, dist, target } = require('../../config');
 
 // This task generates the riff-raff bundle. It creates the following

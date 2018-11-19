@@ -7,10 +7,10 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const { siteName, root } = require('./config');
+const { siteName, root } = require('../../config');
 
 const go = async () => {
-    const webpackConfig = await require('./webpack');
+    const webpackConfig = await require('../webpack');
     const compiler = await webpack(webpackConfig);
 
     const app = express();
@@ -71,13 +71,6 @@ const go = async () => {
             chunkName: `${siteName}.server`,
             serverRendererOptions: { amp: true },
         }),
-    );
-
-    app.get(
-        '/static/frontend',
-        express.static(
-            path.relative(__dirname, path.resolve(root, 'frontend', 'static')),
-        ),
     );
 
     app.get('/', (req, res) => {

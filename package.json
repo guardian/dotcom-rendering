@@ -105,7 +105,7 @@
         "testMatch": [
           "**/*.test.+(ts|tsx|js)"
         ],
-        "setupTestFrameworkScriptFile": "<rootDir>/test/jest.setup.ts",
+        "setupTestFrameworkScriptFile": "<rootDir>/scripts/jest/setup.ts",
         "moduleNameMapper": {
             "^@root(.*)$": "<rootDir>$1",
             "^@frontend(.*)$": "<rootDir>/frontend$1",

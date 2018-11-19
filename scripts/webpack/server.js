@@ -1,4 +1,4 @@
-const { siteName } = require('../config');
+const { siteName } = require('../../config');
 
 module.exports = () => ({
     entry: {

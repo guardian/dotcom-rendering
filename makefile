@@ -8,31 +8,31 @@ export SHELL := /usr/bin/env bash
 # messaging #########################################
 
 define log
-    @node lib/log $(1)
+    @node scripts/env/log $(1)
 endef
 
 define warn
-    @node lib/log $(1) warn
+    @node scripts/env/log $(1) warn
 endef
 
 # deployment #########################################
 
 riffraff-bundle: clean-dist build
 	$(call log, "creating riffraff bundle")
-	@node ./lib/deploy/build-riffraff-bundle.js
+	@node ./scripts/deploy/build-riffraff-bundle.js
 
 riffraff-publish: riffraff-bundle
 	$(call log, "publishing riff-raff bundle")
-	@./lib/deploy/publish-assets.sh
+	@./scripts/deploy/publish-assets.sh
 
 deploy:
-	@env ./lib/deploy/build-riffraff-artifact.sh
+	@env ./scripts/deploy/build-riffraff-artifact.sh
 
 # prod #########################################
 
 build: clear clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config webpack
+	@NODE_ENV=production webpack --config scripts/webpack
 
 start: install
 	@make stop
@@ -54,8 +54,8 @@ logs:
 # dev #########################################
 
 dev: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development node dev-server frontend
+	$(call log, "starting frontend DEV server")
+	@NODE_ENV=development node scripts/frontend-dev-server
 
 # quality #########################################
 
@@ -109,12 +109,12 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@HIDE_BUNDLES=true NODE_ENV=production webpack --config webpack
+	@HIDE_BUNDLES=true NODE_ENV=production webpack --config scripts/webpack
 
 check-env: # private
 	$(call log, "checking environment")
-	@node lib/check-node.js
-	@node lib/check-yarn.js
+	@node scripts/env/check-node.js
+	@node scripts/env/check-yarn.js
 
 clear: # private
 	@clear
@@ -128,7 +128,7 @@ clean-pasteup:
 pre-publish-pasteup:
 	$(call log, "building pasteup")
 	@mkdir packages/pasteup/tmp
-	@NODE_ENV=production webpack --config webpack/pasteup
+	@NODE_ENV=production webpack --config scripts/webpack/pasteup
 	@mv packages/pasteup/*.js packages/pasteup/tmp
 	@mv packages/pasteup/dist/*.js packages/pasteup
 

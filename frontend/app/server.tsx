@@ -11,7 +11,7 @@ import document from '@frontend/web/document';
 import AMPDocument from '@frontend/amp/document';
 import AMPArticle from '@frontend/amp/pages/Article';
 import { dist, root } from '@root/config';
-import { log, warn } from '@root/lib/log';
+import { log, warn } from '@root/scripts/env/log';
 
 import {
     extractArticleMeta,
@@ -60,7 +60,7 @@ const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     }
 };
 
-// this export is the function used by webpackHotServerMiddleware in /dev-server.js
+// this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
 export default (options: any) => {
     if ('amp' in options) return renderAMPArticle;
     return renderArticle;
