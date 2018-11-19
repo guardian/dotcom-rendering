@@ -5,6 +5,10 @@ import 'ophan-tracker-js';
 
 import Article from './pages/Article';
 
+import { init } from '@sentry/browser';
+
+init({});
+
 // kick off the app
 const go = () => {
     const { data, cssIDs } = window.guardian.app;

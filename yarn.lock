@@ -836,6 +836,47 @@
     eventemitter2 "^4.1.0"
     ws "^3.0.0"
 
+"@sentry/browser@^4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-4.3.2.tgz#430b83583c5c25d33041dd80bf6ed19216086f70"
+  dependencies:
+    "@sentry/core" "4.3.2"
+    "@sentry/types" "4.3.2"
+    "@sentry/utils" "4.3.2"
+
+"@sentry/core@4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.3.2.tgz#e8a2850a11316d865ed7d3030ee2c4a1608bb1d8"
+  dependencies:
+    "@sentry/hub" "4.3.2"
+    "@sentry/minimal" "4.3.2"
+    "@sentry/types" "4.3.2"
+    "@sentry/utils" "4.3.2"
+
+"@sentry/hub@4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.3.2.tgz#1ea10038e2080035d2bc09f5f26829cd106a1516"
+  dependencies:
+    "@sentry/types" "4.3.2"
+    "@sentry/utils" "4.3.2"
+
+"@sentry/minimal@4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.3.2.tgz#c0958e5858b2105a6a0b523787e459a03af603cc"
+  dependencies:
+    "@sentry/hub" "4.3.2"
+    "@sentry/types" "4.3.2"
+
+"@sentry/types@4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-4.3.2.tgz#28b143979482fcbc9f9e520250482dde015b13fa"
+
+"@sentry/utils@4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.3.2.tgz#de14046eba972af9d62508f78cd998b0352d634a"
+  dependencies:
+    "@sentry/types" "4.3.2"
+
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
