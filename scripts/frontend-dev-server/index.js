@@ -17,7 +17,7 @@ const go = async () => {
 
     app.use(
         `/static/${siteName}`,
-        express.static(path.join(root, siteName, 'static')),
+        express.static(path.join(root, 'packages', siteName, 'static')),
     );
 
     app.use(

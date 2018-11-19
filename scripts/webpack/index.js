@@ -26,7 +26,7 @@ const common = ({ platform, page = '' }) => ({
     resolve: {
         alias: {
             '@root': path.resolve(__dirname, '.'),
-            '@frontend': path.resolve(__dirname, '..', 'frontend'),
+            '@frontend': path.resolve(__dirname, 'packages', 'frontend'),
         },
         extensions: ['.js', '.ts', '.tsx', '.jsx'],
     },

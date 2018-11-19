@@ -2,7 +2,7 @@ const { siteName } = require('../../config');
 
 module.exports = () => ({
     entry: {
-        [`${siteName}.server`]: './frontend/app/server.tsx',
+        [`${siteName}.server`]: './packages/frontend/app/server.tsx',
     },
     output: {
         filename: `[name].js`,

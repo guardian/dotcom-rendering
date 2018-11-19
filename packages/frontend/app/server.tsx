@@ -92,7 +92,7 @@ if (process.env.NODE_ENV === 'production') {
             express.static(
                 path.relative(
                     __dirname,
-                    path.resolve(root, 'frontend', 'static'),
+                    path.resolve(root, 'packages', 'frontend', 'static'),
                 ),
             ),
         );
