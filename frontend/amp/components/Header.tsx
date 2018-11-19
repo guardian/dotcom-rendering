@@ -113,7 +113,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
         left: 0;
         right: 0;
         position: absolute;
-        border-top: 4px solid ${pillarPalette[pillar].dark};
+        border-top: 4px solid ${pillarPalette[pillar].bright};
         transition: transform 0.3s ease-in-out;
     }
 `;
