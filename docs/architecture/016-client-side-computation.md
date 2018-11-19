@@ -8,8 +8,9 @@ In the interest of the user, we should avoid postponing computation to the clien
 
 ## Decision
 
-Favour server side computation over client side computation.
+- Favour computation in frontend over computation in dotcom-rendering
+- Favour computation on dotcom-rendering server than computation on the client
 
 ## Status
 
-
+Approved
