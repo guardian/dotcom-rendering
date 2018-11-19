@@ -7,10 +7,6 @@ const sidebarStyles = css`
     width: 80vh;
     background-color: ${palette.brand.blue};
 
-    a {
-        color: ${palette.neutral[100]};
-    }
-
     [aria-expanded='true'] {
         i {
             margin-top: 0px;
@@ -158,9 +154,9 @@ const template = `
 {{ /topLevelSections }}
 </ul>
 
-<ul class=${cx(otherLinks, membershipLinks)}>
+<ul class=${otherLinks}>
 {{ #readerRevenueLinks }}
-    <li
+    <li class=${membershipLinks}
         role="menuitem">
 
         <a
