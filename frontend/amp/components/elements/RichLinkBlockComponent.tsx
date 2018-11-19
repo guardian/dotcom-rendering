@@ -22,7 +22,7 @@ export const RichLinkBlockComponent: React.SFC<{
 
 const style = css`
     float: left;
-    width: 130px;
+    width: 140px;
     padding: 4px;
     padding-bottom: 18px;
 
@@ -33,8 +33,8 @@ const style = css`
 `;
 const linkStyle = (pillar: Pillar) => css`
     color: ${pillarPalette[pillar].main};
-    font-family: ${serif.body};
-    font-weight: 700;
+    font-family: ${serif.headline};
+    font-weight: 500;
     border: 0;
     text-decoration: none;
     font-size: 14px;
@@ -50,6 +50,6 @@ const linkStyle = (pillar: Pillar) => css`
         font-size: 12px;
         line-height: 16px;
         font-family: ${sans.body};
-        font-weight: 300;
+        font-weight: 400;
     }
 `;
