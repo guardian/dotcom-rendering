@@ -3,6 +3,14 @@ interface TextBlockElement {
     html: string;
 }
 
+interface RichLinkBlockElement {
+    _type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
+    url: string;
+    text: string;
+    prefix: string;
+    sponsorship: string;
+}
+
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
@@ -38,4 +46,5 @@ type CAPIElement =
     | TextBlockElement
     | ImageBlockElement
     | InstagramBlockElement
-    | TweetBlockElement;
+    | TweetBlockElement
+    | RichLinkBlockElement;
