@@ -7,13 +7,9 @@ const sidebarStyles = css`
     width: 80vh;
     background-color: ${palette.brand.blue};
 
-    a {
-        color: ${palette.neutral[100]};
-    }
-
     [aria-expanded='true'] {
         i {
-            margin-top: 2px;
+            margin-top: 0px;
         }
 
         i:before {
@@ -24,6 +20,26 @@ const sidebarStyles = css`
 
 const menuGroup = css`
     padding-bottom: 0.75rem;
+`;
+
+const toggle = css`
+    i {
+        margin-top: -4px;
+        left: 25px;
+        position: absolute;
+
+        :before {
+            border: 2px solid #fff;
+            border-top: 0;
+            border-left: 0;
+            content: '';
+            display: inline-block;
+            height: 8px;
+            transform: rotate(45deg);
+            width: 8px;
+            color: ${palette.neutral[100]};
+        }
+    }
 `;
 
 const pillarLink = css`
@@ -48,23 +64,7 @@ const pillarLink = css`
     color: ${palette.neutral[100]};
     font-family: ${serif.headline};
 
-    i {
-        margin-top: -4px;
-        left: 25px;
-        position: absolute;
-
-        :before {
-            border: 2px solid #fff;
-            border-top: 0;
-            border-left: 0;
-            content: '';
-            display: inline-block;
-            height: 8px;
-            transform: rotate(45deg);
-            width: 8px;
-            color: ${palette.neutral[100]};
-        }
-    }
+    ${toggle};
 `;
 
 const link = css`
@@ -121,6 +121,10 @@ const pillar = css`
     }
 `;
 
+const editionLink = css`
+    ${toggle};
+`;
+
 const template = `
 <ul class=${menuGroup}>
 {{ #topLevelSections }}
@@ -150,9 +154,9 @@ const template = `
 {{ /topLevelSections }}
 </ul>
 
-<ul class=${cx(otherLinks, membershipLinks)}>
+<ul class=${otherLinks}>
 {{ #readerRevenueLinks }}
-    <li
+    <li class=${membershipLinks}
         role="menuitem">
 
         <a
@@ -170,6 +174,26 @@ const template = `
     </a>
 </li>
 </ul>
+
+<amp-accordion>
+<section>
+    <h2 class=${cx(link, editionLink)}>
+        <i></i>
+        Switch edition
+    </h2>
+
+    <ul class=${subLinks}>
+    {{ #editions }}
+        <li>
+            <a data-link-name="amp : nav : edition-picker : {{ id }}"
+            href="{{ optInLink }}">
+               {{ displayName }}
+            </a>
+        </li>
+    {{ /editions }}
+    </ul>
+</section>
+</amp-accordion>
 
 <ul class=${cx(otherLinks, menuGroup)}>
 {{ #secondarySections }}
