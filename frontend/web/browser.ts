@@ -7,7 +7,11 @@ import Article from './pages/Article';
 
 import * as Sentry from '@sentry/browser';
 
-Sentry.init({});
+Sentry.init({
+    dsn: 'https://e0dc552730fa45e7a3b8e250618ea3d0@sentry.io/35463',
+    maxBreadcrumbs: 50,
+    debug: true,
+});
 // Sentry.captureMessage('Hello, world!');
 
 // kick off the app
