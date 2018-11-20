@@ -2,18 +2,23 @@ import cloneDeep from 'lodash.clonedeep';
 import { string as curly_ } from 'curlyquotes';
 import clean_ from './clean';
 import bigBullets_ from './big-bullets';
+import { getSharingUrls as getSharingUrls_ } from '@frontend/lib/parse-capi/sharing-urls';
 import { extractArticleMeta } from './';
 import { data } from '@root/test/fixtures/article';
 
 const curly: any = curly_;
 const clean: any = clean_;
 const bigBullets: any = bigBullets_;
+const getSharingUrls: any = getSharingUrls_;
 
 jest.mock('curlyquotes', () => ({
     string: jest.fn(),
 }));
 jest.mock('./clean', () => jest.fn());
 jest.mock('./big-bullets', () => jest.fn());
+jest.mock('@frontend/lib/parse-capi/sharing-urls', () => ({
+    getSharingUrls: jest.fn(),
+}));
 
 describe('parse-capi', () => {
     let testData: any;
@@ -23,12 +28,14 @@ describe('parse-capi', () => {
         clean.mockImplementation((_: string) => _);
         curly.mockImplementation((_: string) => _);
         bigBullets.mockImplementation((_: string) => _);
+        getSharingUrls.mockImplementation((_: string) => _);
     });
 
     afterEach(() => {
         curly.mockReset();
         clean.mockReset();
         bigBullets.mockReset();
+        getSharingUrls.mockReset();
     });
 
     describe('extractArticleMeta', () => {
@@ -327,6 +334,94 @@ describe('parse-capi', () => {
             const { author } = extractArticleMeta(testData);
 
             expect(author.twitterHandle).toBe(testTwitterHandle);
+        });
+
+        it('returns body elements if body available', () => {
+            testData.contentFields.fields.blocks.body = [
+                {
+                    elements: [
+                        {
+                            html: '<p>html test 1</p>',
+                        },
+                        {
+                            html: '<p>html test 2</p>',
+                        },
+                    ],
+                },
+                {
+                    elements: [
+                        {
+                            html: '<p>html test 3</p>',
+                        },
+                        {
+                            html: '<p>html test 4</p>',
+                        },
+                    ],
+                },
+            ];
+
+            const { elements } = extractArticleMeta(testData);
+
+            expect(elements.length).toBe(4);
+        });
+
+        it('returns pageId if available', () => {
+            const testPageId = 'Test12345';
+
+            testData.config.page.pageId = testPageId;
+
+            const { pageId } = extractArticleMeta(testData);
+
+            expect(pageId).toBe(testPageId);
+        });
+
+        it('throws error if pageId missing', () => {
+            testData.config.page.pageId = null;
+
+            expect(() => {
+                extractArticleMeta(testData);
+            }).toThrow();
+        });
+
+        it('returns sharingUrls if available', () => {
+            const { sharingUrls } = extractArticleMeta(testData);
+
+            expect(sharingUrls).toBeDefined();
+            expect(getSharingUrls).toHaveBeenCalledWith(testData);
+        });
+
+        it('returns pillar if available', () => {
+            const testPillar = 'sport';
+
+            testData.config.page.pillar = testPillar;
+
+            const { pillar } = extractArticleMeta(testData);
+
+            expect(pillar).toBe(testPillar);
+        });
+
+        it('defaults pillar to "news" if not valid', () => {
+            testData.config.page.pillar = 'foo';
+
+            const { pillar } = extractArticleMeta(testData);
+
+            expect(pillar).toBe('news');
+        });
+
+        it('rewrites pillar to "culture" from "arts"', () => {
+            testData.config.page.pillar = 'arts';
+
+            const { pillar } = extractArticleMeta(testData);
+
+            expect(pillar).toBe('culture');
+        });
+
+        it('throws error if pillar missing', () => {
+            testData.config.page.pillar = null;
+
+            expect(() => {
+                extractArticleMeta(testData);
+            }).toThrow();
         });
     });
 });

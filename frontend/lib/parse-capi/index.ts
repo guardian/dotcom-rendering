@@ -336,16 +336,16 @@ export const extractArticleMeta = (data: {}): CAPIType => {
                 : undefined,
             email: 'none',
         },
-        // elements: [].concat(
-        //     ...getArray<any>(data, 'contentFields.fields.blocks.body')
-        //         .map(block => block.elements)
-        //         .filter(Boolean),
-        // ),
-        // pageId: getNonEmptyString(data, 'config.page.pageId'),
-        // sharingUrls: getSharingUrls(data),
-        // pillar:
-        //     findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
-        // ageWarning: getAgeWarning(tags, webPublicationDate),
+        elements: [].concat(
+            ...getArray<any>(data, 'contentFields.fields.blocks.body')
+                .map(block => block.elements)
+                .filter(Boolean),
+        ),
+        pageId: getNonEmptyString(data, 'config.page.pageId'),
+        sharingUrls: getSharingUrls(data),
+        pillar:
+            findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
+        ageWarning: getAgeWarning(tags, webPublicationDate),
         // subMetaSectionLinks: getSubMetaSectionLinks({
         //     tags,
         //     isImmersive,
