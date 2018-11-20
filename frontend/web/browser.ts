@@ -12,7 +12,6 @@ Sentry.init({
     maxBreadcrumbs: 50,
     debug: true,
 });
-// Sentry.captureMessage('Hello, world!');
 
 // kick off the app
 const go = () => {

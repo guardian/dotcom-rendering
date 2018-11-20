@@ -4,6 +4,8 @@ import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { sans } from '@guardian/pasteup/fonts';
 
+import * as Sentry from '@sentry/browser';
+
 const captionFont = css`
     font-size: 12px;
     line-height: 16px;
@@ -17,6 +19,8 @@ const dateline = css`
     padding-top: 2px;
     margin-bottom: 6px;
 `;
+
+Sentry.captureMessage('Hello, world!');
 
 const Dateline: React.SFC<{
     dateDisplay: string;
