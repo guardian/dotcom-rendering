@@ -6,7 +6,6 @@ import { InstagramBlockComponent } from '@frontend/amp/components/elements/Insta
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
 import { RichLinkBlockComponent } from '../elements/RichLinkBlockComponent';
 
-
 export const Elements: React.SFC<{
     elements: CAPIElement[];
     pillar: Pillar;
