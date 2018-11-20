@@ -930,6 +930,12 @@
     "@types/tough-cookie" "*"
     parse5 "^4.0.0"
 
+"@types/lodash.clonedeep@^4.5.4":
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/@types/lodash.clonedeep/-/lodash.clonedeep-4.5.4.tgz#2515c5f08bc95afebfb597711871b0497f5d7da7"
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.get@^4.4.4":
   version "4.4.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.get/-/lodash.get-4.4.4.tgz#34b67841594e4ddc8853341d65e971a38cb4e2f0"
@@ -5246,6 +5252,10 @@ locate-path@^3.0.0:
 lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
 
 lodash.debounce@^4.0.8:
   version "4.0.8"

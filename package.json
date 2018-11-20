@@ -30,6 +30,7 @@
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.0.0",
         "@types/jest": "^23.3.5",
+        "@types/lodash.clonedeep": "^4.5.4",
         "@types/react-test-renderer": "^16.0.3",
         "@types/webpack": "^4.4.11",
         "@types/webpack-env": "^1.13.6",
@@ -45,6 +46,7 @@
         "jest": "^23.6.0",
         "jest-dom": "^2.1.0",
         "jest-teamcity-reporter": "^0.9.0",
+        "lodash.clonedeep": "^4.5.0",
         "log-update": "^2.3.0",
         "node-fetch": "^2.2.1",
         "prettier": "^1.7.4",
@@ -92,10 +94,11 @@
           "js"
         ],
         "transform": {
-          "^.+\\.(ts|tsx)$": "ts-jest"
+            "^.+\\.(ts|tsx)$": "ts-jest"
         },
         "globals": {
           "ts-jest": {
+            "diagnostics": false,
             "tsConfigFile": "tsconfig.json"
           }
         },

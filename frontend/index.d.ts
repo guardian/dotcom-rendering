@@ -92,16 +92,15 @@ interface CAPIType {
             url: string;
             userMessage: string;
         }
-    };
-    tags: TagType[];
-    pillar: Pillar;
-    isImmersive: boolean;
-    isArticle: boolean;
-    sectionLabel?: string;
-    sectionUrl?: string;
-    sectionName: string;
-    subMetaSectionLinks: SimpleLinkType[];
-    subMetaKeywordLinks: SimpleLinkType[];
+    },
+    tags: Array<TagType>,
+    pillar: Pillar,
+    isImmersive: boolean,
+    sectionLabel?: string,
+    sectionUrl?: string,
+    sectionName: string,
+    subMetaSectionLinks: SimpleLinkType[],
+    subMetaKeywordLinks: SimpleLinkType[],
 }
 
 interface TagType {

@@ -304,12 +304,12 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     if (editionId === undefined) throw new Error('goodbye');
 
     return {
-        isArticle,
         webPublicationDate,
         tags,
         sectionName,
         editionLongForm,
         editionId,
+        isImmersive,
         webPublicationDateDisplay: getNonEmptyString(
             data,
             'config.page.webPublicationDateDisplay',
@@ -336,29 +336,28 @@ export const extractArticleMeta = (data: {}): CAPIType => {
                 : undefined,
             email: 'none',
         },
-        elements: [].concat(
-            ...getArray<any>(data, 'contentFields.fields.blocks.body')
-                .map(block => block.elements)
-                .filter(Boolean),
-        ),
-        pageId: getNonEmptyString(data, 'config.page.pageId'),
-        sharingUrls: getSharingUrls(data),
-        pillar:
-            findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
-        ageWarning: getAgeWarning(tags, webPublicationDate),
-        isImmersive: getBoolean(data, 'config.page.isImmersive', false),
-        subMetaSectionLinks: getSubMetaSectionLinks({
-            tags,
-            isImmersive,
-            isArticle,
-            ...sectionData,
-        }),
-        subMetaKeywordLinks: getSubMetaKeywordLinks({
-            tags,
-            sectionName,
-            ...sectionData,
-        }),
-        ...sectionData,
+        // elements: [].concat(
+        //     ...getArray<any>(data, 'contentFields.fields.blocks.body')
+        //         .map(block => block.elements)
+        //         .filter(Boolean),
+        // ),
+        // pageId: getNonEmptyString(data, 'config.page.pageId'),
+        // sharingUrls: getSharingUrls(data),
+        // pillar:
+        //     findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
+        // ageWarning: getAgeWarning(tags, webPublicationDate),
+        // subMetaSectionLinks: getSubMetaSectionLinks({
+        //     tags,
+        //     isImmersive,
+        //     isArticle,
+        //     ...sectionData,
+        // }),
+        // subMetaKeywordLinks: getSubMetaKeywordLinks({
+        //     tags,
+        //     sectionName,
+        //     ...sectionData,
+        // }),
+        // ...sectionData,
     };
 };
 
