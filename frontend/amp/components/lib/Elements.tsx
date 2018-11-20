@@ -3,6 +3,7 @@ import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockC
 import React from 'react';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '../elements/InstagramBlockComponent';
+import { RichLinkBlockComponent } from '../elements/RichLinkBlockComponent';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
@@ -29,6 +30,13 @@ export const Elements: React.SFC<{
                     );
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return <InstagramBlockComponent element={element} />;
+                case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+                    return (
+                        <RichLinkBlockComponent
+                            element={element}
+                            pillar={pillar}
+                        />
+                    );
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));

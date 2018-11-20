@@ -1,10 +1,18 @@
- interface TextBlockElement {
+interface TextBlockElement {
     _type: 'model.dotcomrendering.pageElements.TextBlockElement';
     html: string;
 }
 
+interface RichLinkBlockElement {
+    _type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
+    url: string;
+    text: string;
+    prefix: string;
+    sponsorship: string;
+}
+
 interface ImageBlockElement {
-    _type: 'model.dotcomrendering.pageElements.ImageBlockElement' ;
+    _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
     data: { alt: string; credit: string; caption?: string };
 }
@@ -28,5 +36,8 @@ interface Image {
     url: string;
 }
 
-type CAPIElement = TextBlockElement | ImageBlockElement | InstagramBlockElement;
-
+type CAPIElement =
+    | TextBlockElement
+    | ImageBlockElement
+    | InstagramBlockElement
+    | RichLinkBlockElement;
