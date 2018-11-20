@@ -8,7 +8,7 @@ import Article from './pages/Article';
 import * as Sentry from '@sentry/browser';
 
 Sentry.init({});
-//Sentry.captureMessage('Hello, world!');
+// Sentry.captureMessage('Hello, world!');
 
 // kick off the app
 const go = () => {
