@@ -4,9 +4,11 @@ An element which contains a tweet.
 
 ## CAPI representation
 
-This has an `ElementType` of [TWEET](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L95) with fields described by [TweetElementFields](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L389) containing a single field `optional string html`.
+This has an `ElementType` of [TWEET](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L95) with fields described by [TweetElementFields](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L389).
 
 This also has an asset type [TWEET](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L204). Tweets stored in CAPI also have some data about their associated imagery stored.
+
+You can search for tweets in CAPI with `CAPI/search?show-elements=tweet`
 
 ## Frontend Representation
 

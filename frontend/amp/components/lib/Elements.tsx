@@ -2,8 +2,10 @@ import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockC
 
 import React from 'react';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
-import { InstagramBlockComponent } from '../elements/InstagramBlockComponent';
+import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
+import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
 import { RichLinkBlockComponent } from '../elements/RichLinkBlockComponent';
+
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
@@ -30,6 +32,8 @@ export const Elements: React.SFC<{
                     );
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return <InstagramBlockComponent element={element} />;
+                case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                    return <TweetBlockComponent element={element} />;
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                     return (
                         <RichLinkBlockComponent

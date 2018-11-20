@@ -1,3 +1,5 @@
+import { HTMLAttributes } from 'react';
+
 interface AMPCommonBase {
     layout?:
         | 'nodisplay'
@@ -13,7 +15,7 @@ interface AMPCommonBase {
     noloading?: true;
     on?: string;
     placeholder?: true;
-    sizes: 'string';
+    sizes?: 'string';
     fallback?: true;
 }
 interface Sized {
@@ -26,4 +28,5 @@ interface FixedHeight {
     height: string;
     width: undefined;
 }
-export type AMPCommon = AMPCommonBase | Sized | FixedHeight;
+export type AMPCommon = (AMPCommonBase | Sized | FixedHeight) &
+    HTMLAttributes<HTMLElement>;

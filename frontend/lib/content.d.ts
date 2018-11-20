@@ -23,7 +23,13 @@ interface InstagramBlockElement {
     url: string;
     hasCaption: boolean;
 }
-
+interface TweetBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TweetBlockElement';
+    html: string;
+    url: string;
+    id: string;
+    hasMedia: boolean;
+}
 interface Image {
     index: number;
     fields: {
@@ -40,4 +46,5 @@ type CAPIElement =
     | TextBlockElement
     | ImageBlockElement
     | InstagramBlockElement
+    | TweetBlockElement
     | RichLinkBlockElement;
