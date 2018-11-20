@@ -1,0 +1,7 @@
+setup:
+  ansible: .prbuilds/setup.playbook.yml
+teardown:
+  ansible: .prbuilds/cleanup.playbook.yml
+checks:
+  lighthouse:
+    url: http://localhost:9000/Article
