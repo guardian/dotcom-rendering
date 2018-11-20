@@ -5,9 +5,10 @@ import 'ophan-tracker-js';
 
 import Article from './pages/Article';
 
-import { init } from '@sentry/browser';
+import * as Sentry from '@sentry/browser';
 
-init({});
+Sentry.init({});
+Sentry.captureMessage('Hello, world!');
 
 // kick off the app
 const go = () => {
