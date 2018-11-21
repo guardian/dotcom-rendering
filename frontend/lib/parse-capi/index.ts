@@ -108,13 +108,11 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     };
 };
 
-const getAgeWarning = (
-    tags: TagType[],
-    webPublicationDate: Date,
-): string | undefined => {
+const getAgeWarning = (tags: TagType[], webPublicationDate: Date): string => {
     const isNews = tags.some(t => t.id === 'tone/news');
+
     if (!isNews) {
-        return;
+        return '';
     }
 
     const warnLimitDays = 30;
@@ -154,7 +152,8 @@ const getAgeWarning = (
             return `${message} 1 month old`;
         }
     }
-    return undefined;
+
+    return '';
 };
 
 const getBoolean = (
@@ -346,18 +345,18 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         pillar:
             findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
-        // subMetaSectionLinks: getSubMetaSectionLinks({
-        //     tags,
-        //     isImmersive,
-        //     isArticle,
-        //     ...sectionData,
-        // }),
-        // subMetaKeywordLinks: getSubMetaKeywordLinks({
-        //     tags,
-        //     sectionName,
-        //     ...sectionData,
-        // }),
-        // ...sectionData,
+        subMetaSectionLinks: getSubMetaSectionLinks({
+            tags,
+            isImmersive,
+            isArticle,
+            ...sectionData,
+        }),
+        subMetaKeywordLinks: getSubMetaKeywordLinks({
+            tags,
+            sectionName,
+            ...sectionData,
+        }),
+        ...sectionData,
     };
 };
 

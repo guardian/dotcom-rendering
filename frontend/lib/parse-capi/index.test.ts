@@ -423,5 +423,120 @@ describe('parse-capi', () => {
                 extractArticleMeta(testData);
             }).toThrow();
         });
+
+        it('returns ageWarning as empty string if article not in tone/news', () => {
+            testData.tags.tags = [
+                {
+                    properties: {
+                        id: 'tone/sport',
+                        tagType: 'Tone',
+                        webTitle: 'Sport',
+                    },
+                },
+            ];
+
+            const { ageWarning } = extractArticleMeta(testData);
+
+            expect(ageWarning).toBe('');
+        });
+
+        describe('ageWarning', () => {
+            let publicationDate: Date;
+
+            beforeEach(() => {
+                publicationDate = new Date();
+
+                testData.tags.tags = [
+                    {
+                        properties: {
+                            id: 'tone/news',
+                            tagType: 'Tone',
+                            webTitle: 'News',
+                        },
+                    },
+                ];
+            });
+
+            it('returns correct ageWarning if article over 2 years old', () => {
+                // set a publication date of 2 years ago
+                publicationDate.setDate(publicationDate.getDate() - 365 * 2);
+
+                testData.config.page.webPublicationDate = publicationDate.getTime();
+
+                const { ageWarning } = extractArticleMeta(testData);
+
+                expect(ageWarning).toBe('This article is over 2 years old');
+            });
+
+            it('returns correct ageWarning if article over 1 year old', () => {
+                // set a publication date of 500 days ago
+                publicationDate.setDate(publicationDate.getDate() - 500);
+
+                testData.config.page.webPublicationDate = publicationDate.getTime();
+
+                const { ageWarning } = extractArticleMeta(testData);
+
+                expect(ageWarning).toBe('This article is over 1 year old');
+            });
+
+            it('returns correct ageWarning if article over 2 months old', () => {
+                // set a publication date of 90 days ago
+                publicationDate.setDate(publicationDate.getDate() - 90);
+
+                testData.config.page.webPublicationDate = publicationDate.getTime();
+
+                const { ageWarning } = extractArticleMeta(testData);
+
+                expect(ageWarning).toBe('This article is over 2 months old');
+            });
+
+            it('returns correct ageWarning if article over 1 month old', () => {
+                // set a publication date of 35 days ago
+                publicationDate.setDate(publicationDate.getDate() - 35);
+
+                testData.config.page.webPublicationDate = publicationDate.getTime();
+
+                const { ageWarning } = extractArticleMeta(testData);
+
+                expect(ageWarning).toBe('This article is over 1 month old');
+            });
+
+            it('returns no ageWarning if article is 1 week old', () => {
+                // set a publication date of 7 days ago
+                publicationDate.setDate(publicationDate.getDate() - 7);
+
+                testData.config.page.webPublicationDate = publicationDate.getTime();
+
+                const { ageWarning } = extractArticleMeta(testData);
+
+                expect(ageWarning).toBe('');
+            });
+        });
+
+        it('returns sectionData if keyword tag available', () => {
+            testData.tags.tags = [
+                {
+                    properties: {
+                        id: 'money/money',
+                        tagType: 'Keyword',
+                        webTitle: 'Money',
+                    },
+                },
+            ];
+
+            const { sectionLabel, sectionUrl } = extractArticleMeta(testData);
+
+            expect(sectionLabel).toEqual('Money');
+            expect(sectionUrl).toEqual('money/money');
+        });
+
+        it('returns no sectionData if keyword tag unavailable', () => {
+            testData.tags.tags = [];
+
+            const { sectionLabel, sectionUrl } = extractArticleMeta(testData);
+
+            expect(sectionLabel).toBeUndefined();
+            expect(sectionUrl).toBeUndefined();
+        });
     });
 });

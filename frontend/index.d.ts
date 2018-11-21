@@ -75,6 +75,7 @@ interface AuthorType {
 }
 
 interface CAPIType {
+<<<<<<< HEAD
     headline: string;
     standfirst: string;
     main: string;
@@ -87,6 +88,20 @@ interface CAPIType {
     editionId: Edition;
     pageId: string;
     ageWarning?: string;
+=======
+    headline: string,
+    standfirst: string,
+    main: string,
+    body: string,
+    elements: Array<CAPIElement>,
+    author: AuthorType,
+    webPublicationDate: Date,
+    webPublicationDateDisplay: string,
+    editionLongForm: string,
+    editionId: Edition,
+    pageId: string,
+    ageWarning: string,
+>>>>>>> getAgeWarning tests
     sharingUrls: {
         [K in SharePlatform]?: {
             url: string;
