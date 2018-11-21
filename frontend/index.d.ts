@@ -92,7 +92,7 @@ interface CAPIType {
             url: string;
             userMessage: string;
         }
-    },
+    };
     tags: TagType[];
     pillar: Pillar;
     isImmersive: boolean;
