@@ -77,7 +77,7 @@ stylelint: clean-dist install
 
 test: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose
+	@yarn test --verbose  --runInBand
 
 bundlesize: clear clean-dist install build
 	@bundlesize

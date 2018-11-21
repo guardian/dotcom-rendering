@@ -113,6 +113,7 @@ const getAgeWarning = (
     webPublicationDate: Date,
 ): string | undefined => {
     const isNews = tags.some(t => t.id === 'tone/news');
+
     if (!isNews) {
         return;
     }
@@ -154,7 +155,8 @@ const getAgeWarning = (
             return `${message} 1 month old`;
         }
     }
-    return undefined;
+
+    return;
 };
 
 const getBoolean = (
@@ -304,12 +306,12 @@ export const extractArticleMeta = (data: {}): CAPIType => {
     if (editionId === undefined) throw new Error('goodbye');
 
     return {
-        isArticle,
         webPublicationDate,
         tags,
         sectionName,
         editionLongForm,
         editionId,
+        isImmersive,
         webPublicationDateDisplay: getNonEmptyString(
             data,
             'config.page.webPublicationDateDisplay',
@@ -346,7 +348,6 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         pillar:
             findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
-        isImmersive: getBoolean(data, 'config.page.isImmersive', false),
         subMetaSectionLinks: getSubMetaSectionLinks({
             tags,
             isImmersive,
