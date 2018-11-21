@@ -108,11 +108,14 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     };
 };
 
-const getAgeWarning = (tags: TagType[], webPublicationDate: Date): string => {
+const getAgeWarning = (
+    tags: TagType[],
+    webPublicationDate: Date,
+): string | undefined => {
     const isNews = tags.some(t => t.id === 'tone/news');
 
     if (!isNews) {
-        return '';
+        return;
     }
 
     const warnLimitDays = 30;
@@ -153,7 +156,7 @@ const getAgeWarning = (tags: TagType[], webPublicationDate: Date): string => {
         }
     }
 
-    return '';
+    return;
 };
 
 const getBoolean = (

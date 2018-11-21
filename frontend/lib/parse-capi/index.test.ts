@@ -424,7 +424,7 @@ describe('parse-capi', () => {
             }).toThrow();
         });
 
-        it('returns ageWarning as empty string if article not in tone/news', () => {
+        it('returns ageWarning as undefined if article not in tone/news', () => {
             testData.tags.tags = [
                 {
                     properties: {
@@ -437,7 +437,7 @@ describe('parse-capi', () => {
 
             const { ageWarning } = extractArticleMeta(testData);
 
-            expect(ageWarning).toBe('');
+            expect(ageWarning).toBeUndefined();
         });
 
         describe('ageWarning', () => {
@@ -509,7 +509,7 @@ describe('parse-capi', () => {
 
                 const { ageWarning } = extractArticleMeta(testData);
 
-                expect(ageWarning).toBe('');
+                expect(ageWarning).toBeUndefined();
             });
         });
 
