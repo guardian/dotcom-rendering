@@ -93,14 +93,14 @@ interface CAPIType {
             userMessage: string;
         }
     },
-    tags: Array<TagType>,
-    pillar: Pillar,
-    isImmersive: boolean,
-    sectionLabel?: string,
-    sectionUrl?: string,
-    sectionName: string,
-    subMetaSectionLinks: SimpleLinkType[],
-    subMetaKeywordLinks: SimpleLinkType[],
+    tags: TagType[];
+    pillar: Pillar;
+    isImmersive: boolean;
+    sectionLabel?: string;
+    sectionUrl?: string;
+    sectionName: string;
+    subMetaSectionLinks: SimpleLinkType[];
+    subMetaKeywordLinks: SimpleLinkType[];
 }
 
 interface TagType {
