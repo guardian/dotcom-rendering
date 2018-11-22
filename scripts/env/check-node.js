@@ -10,7 +10,7 @@ const ensure = require('./ensure');
 
         const nodeVersion = process.version.match(/^v(\d+\.\d+\.\d+)/)[1];
         const nvmrcVersion = (await readFile(
-            join(__dirname, '../', '.nvmrc'),
+            join(__dirname, '..', '..', '.nvmrc'),
             'utf8',
         )).trim();
 

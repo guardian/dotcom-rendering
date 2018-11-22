@@ -28,7 +28,7 @@ You may want local identity cookies to be available in dotcom-rendering. To enab
 
 1. Add `127.0.0.1   r.thegulocal.com` to the end of your hosts file
 2. Follow the installation steps in [identity-platform/nginx](https://github.com/guardian/identity-platform/tree/master/nginx) 
-3. run `./nginx/setup.sh`
+3. run `./scripts/nginx/setup.sh`
 4. access dotcom-rendering through https://r.thegulocal.com
 
 ### Change preview article

@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, '..', 'packages', 'pasteup', 'dist'),
+        path: path.join(__dirname, '..', '..', 'packages', 'pasteup', 'dist'),
         library: 'pasteup',
         libraryTarget: 'commonjs2',
     },

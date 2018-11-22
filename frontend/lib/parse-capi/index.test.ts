@@ -4,7 +4,7 @@ import clean_ from './clean';
 import bigBullets_ from './big-bullets';
 import { getSharingUrls as getSharingUrls_ } from '@frontend/lib/parse-capi/sharing-urls';
 import { extractArticleMeta } from './';
-import { data } from '@root/test/fixtures/article';
+import { data } from '@root/fixtures/article';
 
 const curly: any = curly_;
 const clean: any = clean_;
