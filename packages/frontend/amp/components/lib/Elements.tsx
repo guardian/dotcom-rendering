@@ -4,7 +4,8 @@ import React from 'react';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
-import { RichLinkBlockComponent } from '../elements/RichLinkBlockComponent';
+import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
+import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
@@ -40,6 +41,8 @@ export const Elements: React.SFC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.CommentBlockElement':
+                    return <CommentBlockComponent element={element} />;
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));
