@@ -416,14 +416,6 @@ describe('parse-capi', () => {
             expect(pillar).toBe('culture');
         });
 
-        it('throws error if pillar missing', () => {
-            testData.config.page.pillar = null;
-
-            expect(() => {
-                extractArticleMeta(testData);
-            }).toThrow();
-        });
-
         it('returns ageWarning as undefined if article not in tone/news', () => {
             testData.tags.tags = [
                 {
