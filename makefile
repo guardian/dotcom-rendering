@@ -89,7 +89,7 @@ bundlesize: clear clean-dist install build
 validate: clear clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: clear install tsc lint stylelint test-cli bundlesize
+validate-ci: clear install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
