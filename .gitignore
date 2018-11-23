@@ -27,3 +27,6 @@ guui.zip
 
 # publishable files
 packages/pasteup/tmp
+
+# test coverage reports
+coverage

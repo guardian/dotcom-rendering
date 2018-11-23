@@ -79,13 +79,17 @@ test: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test --verbose  --runInBand
 
+test-ci: clear clean-dist install
+	$(call log, "running tests")
+	@yarn test --verbose  --runInBand --collectCoverage --coverageReporters=teamcity
+
 bundlesize: clear clean-dist install build
 	@bundlesize
 
 validate: clear clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: clear install tsc lint stylelint test bundlesize
+validate-ci: clear install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
