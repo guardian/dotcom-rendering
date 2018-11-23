@@ -81,7 +81,7 @@ test: clear clean-dist install
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose  --runInBand --collectCoverage --coverageReporters=teamcity
+	@yarn test --verbose  --runInBand --collectCoverage --coverageReporters=lcov
 
 bundlesize: clear clean-dist install build
 	@bundlesize
