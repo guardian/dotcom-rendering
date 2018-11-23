@@ -73,7 +73,7 @@ lint: clean-dist install
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
-	@stylelint "packages/guui/**/*.js" "frontend/**/*.js"
+	@stylelint "packages/guui/**/*.js" "packages/frontend/**/*.js"
 
 test: clear clean-dist install
 	$(call log, "running tests")

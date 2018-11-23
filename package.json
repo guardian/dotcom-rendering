@@ -3,7 +3,6 @@
     "version": "0.1.0-alpha",
     "private": true,
     "workspaces": [
-        "frontend",
         "packages/*"
     ],
     "scripts": {
@@ -108,7 +107,7 @@
         "setupTestFrameworkScriptFile": "<rootDir>/scripts/jest/setup.ts",
         "moduleNameMapper": {
             "^@root(.*)$": "<rootDir>$1",
-            "^@frontend(.*)$": "<rootDir>/frontend$1",
+            "^@frontend(.*)$": "<rootDir>/packages/frontend$1",
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
             "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx"
         },
