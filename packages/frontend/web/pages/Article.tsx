@@ -5,7 +5,7 @@ import { palette } from '@guardian/pasteup/palette';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
 
 import { MostViewed } from '@frontend/web/components/MostViewed';
-import Header from '@root/packages/frontend/web/components/Header/Header';
+import Header from '@frontend/web/components/Header/Header';
 import Footer from '@frontend/web/components/Footer';
 import ArticleBody from '@frontend/web/components/ArticleBody';
 import BackToTop from '@frontend/web/components/BackToTop';
