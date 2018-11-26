@@ -17,7 +17,7 @@ guide](https://github.com/excelmicro/typescript) is a good place to look.
 // MyComponent.tsx
 export default () => <h1>My component</h1>;
 
-//index.tsx
+//Parent.tsx
 import MyComponent from './MyComponent';
 
 ```
@@ -27,7 +27,7 @@ import MyComponent from './MyComponent';
 // MyComponent.tsx
 export const MyComponent = () => <h1>MyComponent</h1>;
 
-// index.tsx
+// Parent.tsx
 import {MyComponent} from './MyComponent';
 ```
 
