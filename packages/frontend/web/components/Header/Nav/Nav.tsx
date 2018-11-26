@@ -5,10 +5,10 @@ import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
 import Logo from './Logo';
 import EditionDropdown from './EditionDropdown';
-import Links from './Links';
+import Links from './Links/Links';
 import Pillars from './Pillars';
-import MainMenuToggle from './MainMenuToggle';
-import { MainMenu } from './MainMenu';
+import MainMenuToggle from './MainMenuToggle/MainMenuToggle';
+import { MainMenu } from './MainMenu/MainMenu';
 import SubNav from './SubNav/SubNav';
 import { getCookie } from '@frontend/web/lib/cookie';
 

@@ -3,7 +3,7 @@ import { css } from 'react-emotion';
 
 import { tablet } from '@guardian/pasteup/breakpoints';
 
-import Nav from './Nav';
+import Nav from './Nav/Nav';
 import { palette } from '@guardian/pasteup/palette';
 
 const header = css`
