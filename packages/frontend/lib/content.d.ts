@@ -15,6 +15,7 @@ interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
     data: { alt: string; credit: string; caption?: string };
+    imageSources: ImageSource[];
 }
 
 interface InstagramBlockElement {
@@ -42,6 +43,16 @@ interface Image {
     mediaType: string;
     mimeType: string;
     url: string;
+}
+
+interface ImageSource {
+    weighting: string;
+    srcSet: SrcSet[];
+}
+
+interface SrcSet {
+    src: string;
+    width: number;
 }
 
 interface CommentBlockElement {
