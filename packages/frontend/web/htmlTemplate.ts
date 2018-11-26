@@ -5,6 +5,7 @@ import assets from '@frontend/lib/assets';
 export default ({
     title = 'The Guardian',
     priorityScripts,
+    lowPriorityScripts,
     css,
     html,
     data,
@@ -14,6 +15,7 @@ export default ({
 }: {
     title?: string;
     priorityScripts: string[];
+    lowPriorityScripts: string[];
     css: string;
     html: string;
     data: {
@@ -82,7 +84,9 @@ export default ({
             </head>
             <body>
                 <div id="app">${html}</div>
-                <script async src='https://www.google-analytics.com/analytics.js'></script>
+                ${lowPriorityScripts
+                    .map(script => `<script async src="${script}"></script>`)
+                    .join('\n')}
                 <script>${nonBlockingJS}</script>
             </body>
         </html>`;

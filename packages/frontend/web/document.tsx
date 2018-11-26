@@ -60,8 +60,18 @@ export default ({ data }: Props) => {
         'https://assets.guim.co.uk/polyfill.io/v2/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
     const priorityScripts = [polyfillIO, vendorJS, bundleJS];
 
+    /**
+     * Low priority scripts.
+     * These scripts will be requested asynchronously after the main
+     * HTML has been parsed. Execution order is not guaranteed.
+     */
+    const lowPriorityScripts = [
+        'https://www.google-analytics.com/analytics.js',
+    ];
+
     return htmlTemplate({
         priorityScripts,
+        lowPriorityScripts,
         css,
         html,
         cssIDs,
