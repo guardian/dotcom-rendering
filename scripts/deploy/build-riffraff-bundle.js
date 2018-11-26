@@ -5,7 +5,7 @@ const execa = require('execa');
 const path = require('path');
 const cpy = require('cpy');
 const { warn, log } = require('../env/log');
-const { siteName, root, dist, target } = require('../../config');
+const { siteName, root, dist, target } = require('../frontend/config');
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/

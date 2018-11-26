@@ -10,7 +10,7 @@ import {
 import document from '@frontend/web/document';
 import AMPDocument from '@frontend/amp/document';
 import AMPArticle from '@frontend/amp/pages/Article';
-import { dist, root } from '@root/config';
+import { dist, root } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 
 import {
