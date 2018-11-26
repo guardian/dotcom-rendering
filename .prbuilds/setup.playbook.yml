@@ -15,7 +15,7 @@
         executable: /bin/bash
     
     - name: run make dev
-      command: screen -S trousers-build -d -m make dev
+      command: screen -S trousers-build -d -m bash -c '. ~/.nvm/nvm.sh; nvm use; make dev'
       args:
         chdir: ~/workspace/dotcom-rendering
         
