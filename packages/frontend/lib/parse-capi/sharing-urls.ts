@@ -1,4 +1,4 @@
-import { getNonEmptyString } from './';
+import { getNonEmptyString } from './validators';
 
 const appendParamsToBaseUrl: (
     baseUrl: string,
