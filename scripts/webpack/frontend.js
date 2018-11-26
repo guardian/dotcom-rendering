@@ -90,7 +90,7 @@ const common = ({ platform, page = '' }) => ({
 
 const getPagesForSite = () =>
     glob('*.ts*(x)', { cwd: `packages/frontend/web/pages` }).then(paths =>
-        paths.map(path => path.replace(/\.[^/.]+$/, '')),
+        paths.map(p => p.replace(/\.[^/.]+$/, '')),
     );
 
 module.exports = getPagesForSite()
