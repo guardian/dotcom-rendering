@@ -102,7 +102,7 @@
           }
         },
         "testMatch": [
-          "**/*.test.+(ts|tsx|js)"
+            "**/*.test.+(ts|tsx|js)"
         ],
         "setupTestFrameworkScriptFile": "<rootDir>/scripts/jest/setup.ts",
         "moduleNameMapper": {
@@ -113,7 +113,7 @@
         },
         "testResultsProcessor": "jest-teamcity-reporter",
         "collectCoverageFrom": [
-            "{packages,frontend}/**/*.{ts,tsx}"
+            "packages/**/*.{ts,tsx}"
         ]
     }
 }

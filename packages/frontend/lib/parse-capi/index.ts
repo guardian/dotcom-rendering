@@ -3,86 +3,22 @@ import get from 'lodash.get';
 
 import clean from './clean';
 import bigBullets from './big-bullets';
+import {
+    getString,
+    getNumber,
+    getNonEmptyString,
+    getBoolean,
+    getArray,
+} from './validators';
+import { getSharingUrls } from './sharing-urls';
 import { pillarNames } from '@frontend/lib/pillars';
-import { getSharingUrls } from '@frontend/lib/parse-capi/sharing-urls';
 
 // tslint:disable:prefer-array-literal
 const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
     return fns.reduce((acc, fn) => fn(acc), input);
 };
 
-const getString = (
-    obj: object,
-    selector: string,
-    fallbackValue?: string,
-): string => {
-    const found = get(obj, selector);
-    if (typeof found === 'string') {
-        return found;
-    }
-    if (fallbackValue !== undefined) {
-        return fallbackValue;
-    }
-
-    throw new Error(
-        `expected string at '${selector}', got '${found}', in '${JSON.stringify(
-            obj,
-        )}'`,
-    );
-};
-
-const getNumber = (obj: object, selector: string): number => {
-    const found = get(obj, selector);
-    if (typeof found === 'number') {
-        return found;
-    }
-
-    throw new Error(
-        `expected number at '${selector}', got '${found}', in '${JSON.stringify(
-            obj,
-        )}'`,
-    );
-};
-
-// TODO temporary export we should move all validation functions into their own module
-export const getNonEmptyString = (obj: object, selector: string): string => {
-    const found = get(obj, selector);
-    if (typeof found === 'string' && found.length > 0) {
-        return found;
-    }
-
-    throw new Error(
-        `expected non-empty string at '${selector}', got '${found}', in '${JSON.stringify(
-            obj,
-        )}'`,
-    );
-};
-
-const getArray = <T>(
-    obj: object,
-    selector: string,
-    fallbackValue?: T[],
-): T[] => {
-    const found = get(obj, selector);
-    if (Array.isArray(found)) {
-        return found;
-    }
-    if (fallbackValue !== undefined) {
-        return fallbackValue;
-    }
-
-    throw new Error(
-        `expected array at '${selector}', got '${found}', in '${JSON.stringify(
-            obj,
-        )}'`,
-    );
-};
-
-const findPillar: (name?: string) => Pillar | undefined = name => {
-    if (!name) {
-        return undefined;
-    }
-
+const findPillar: (name: string) => Pillar | undefined = name => {
     const pillar: string = name.toLowerCase();
     // The pillar name is "arts" in CAPI, but "culture" everywhere else,
     // therefore we perform this substitution here.
@@ -161,28 +97,6 @@ const getAgeWarning = (
     }
 
     return;
-};
-
-const getBoolean = (
-    obj: object,
-    selector: string,
-    fallbackValue?: boolean,
-): boolean => {
-    const found = get(obj, selector);
-
-    if (typeof found === 'boolean') {
-        return found;
-    }
-
-    if (fallbackValue !== undefined) {
-        return fallbackValue;
-    }
-
-    throw new Error(
-        `expected boolean  at '${selector}', got '${found}', in '${JSON.stringify(
-            obj,
-        )}'`,
-    );
 };
 
 // TODO this is a simple implementation of section data
