@@ -4,6 +4,7 @@ import { Elements } from '@frontend/amp/components/lib/Elements';
 import { css } from 'react-emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainBlock } from '@frontend/amp/components/MainBlock';
+import Submeta from '@frontend/amp/components/Submeta';
 
 const body = css`
     background-color: white;
@@ -17,6 +18,7 @@ const Body: React.SFC<{
     <InnerContainer className={body}>
         <MainBlock config={config} articleData={data} />
         <Elements pillar={pillar} elements={data.elements} />
+        <Submeta tags={data.tags} pillar={pillar} />
     </InnerContainer>
 );
 
