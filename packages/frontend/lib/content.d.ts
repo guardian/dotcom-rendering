@@ -23,6 +23,7 @@ interface InstagramBlockElement {
     url: string;
     hasCaption: boolean;
 }
+
 interface TweetBlockElement {
     _type: 'model.dotcomrendering.pageElements.TweetBlockElement';
     html: string;
@@ -30,6 +31,7 @@ interface TweetBlockElement {
     id: string;
     hasMedia: boolean;
 }
+
 interface Image {
     index: number;
     fields: {
@@ -42,9 +44,20 @@ interface Image {
     url: string;
 }
 
+interface CommentBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CommentBlockElement';
+    body: string;
+    avatarURL: string;
+    profileURL: string;
+    profileName: string;
+    permalink: string;
+    dateTime: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | ImageBlockElement
     | InstagramBlockElement
     | TweetBlockElement
-    | RichLinkBlockElement;
+    | RichLinkBlockElement
+    | CommentBlockElement;

@@ -18,6 +18,7 @@ const captionStyle = css`
 `;
 const getFallback: (images: Image[]) => Image = images =>
     images.find(_ => _.fields.isMaster === 'true') || images[0];
+
 export const ImageBlockComponent: React.SFC<{
     element: ImageBlockElement;
     pillar: Pillar;

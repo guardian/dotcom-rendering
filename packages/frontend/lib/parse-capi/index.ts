@@ -78,7 +78,11 @@ const getArray = <T>(
     );
 };
 
-const findPillar: (name: string) => Pillar | undefined = name => {
+const findPillar: (name?: string) => Pillar | undefined = name => {
+    if (!name) {
+        return undefined;
+    }
+
     const pillar: string = name.toLowerCase();
     // The pillar name is "arts" in CAPI, but "culture" everywhere else,
     // therefore we perform this substitution here.
@@ -345,8 +349,7 @@ export const extractArticleMeta = (data: {}): CAPIType => {
         ),
         pageId: getNonEmptyString(data, 'config.page.pageId'),
         sharingUrls: getSharingUrls(data),
-        pillar:
-            findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
+        pillar: findPillar(getString(data, 'config.page.pillar', '')) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
         subMetaSectionLinks: getSubMetaSectionLinks({
             tags,
@@ -450,8 +453,7 @@ export const extractGAMeta = (data: {}): GADataType => {
 
     return {
         webTitle: getString(data, 'config.page.webTitle', ''),
-        pillar:
-            findPillar(getNonEmptyString(data, 'config.page.pillar')) || 'news',
+        pillar: findPillar(getString(data, 'config.page.pillar', '')) || 'news',
         section: getString(data, 'config.page.section', ''),
         contentType: getString(data, 'config.page.contentType', '')
             .toLowerCase()
