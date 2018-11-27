@@ -11,7 +11,7 @@
  */
 
 interface Extension {
-    do: (el: HTMLElement) => void;
+    do: (el: Element) => void;
 }
 
 const extensions: Map<string, Extension> = new Map();
@@ -22,7 +22,12 @@ const extensions: Map<string, Extension> = new Map();
  * Instructs extension elements to execute. Eventually this will do clever
  * things like buffer and batch.
  */
-const render = () => undefined;
+const render = () => {
+    extensions.forEach((extension, tag) => {
+        const tags = document.getElementsByTagName(tag);
+        Array.prototype.forEach.call(tags, (el: Element) => extension.do(el));
+    });
+};
 
 window.GAP = {
     registerElement: (tag: string, extension: Extension) => {

@@ -4,9 +4,14 @@
  */
 
 const GapList: Extension = {
-    do: (el: HTMLElement): void =>
+    do: (el: Element): void => {
+        if (el === null) return;
+        const src = el.attributes.getNamedItem('data-src');
+
+        if (src === null) return;
         // tslint:disable-next-line:no-console
-        console.log(`Calling gap-list do on element: ${el.id}`),
+        console.log(`Calling gap-list do on element: ${src.value}`);
+    },
 };
 
 window.GAP.registerElement('gap-list', GapList);
