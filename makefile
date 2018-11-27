@@ -145,8 +145,9 @@ publish-pasteup: clear clean-pasteup install
 	@cd packages/pasteup && yarn publish
 
 clean-gap:
-	@rm -rf packages/gap/dist packages/gap/tmp
+	@rm -rf packages/gap/dist
 
 publish-gap: clear clean-gap install
 	$(call log, "publishing gap")
-	@NODE_ENV=production webpack --config scripts/webpack/gap.js
+	webpack --mode=production --config scripts/webpack/gap.js
+	@./scripts/deploy/publish-gap.sh
