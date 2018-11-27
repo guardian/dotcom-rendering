@@ -4,14 +4,20 @@
  */
 
 const GapList: Extension = {
-    do: (el: Element): void => {
-        if (el === null) return;
+    do: async (el: Element): Promise<void> => {
         const src = el.attributes.getNamedItem('data-src');
 
         if (src === null) return;
-        // tslint:disable-next-line:no-console
-        console.log(`Calling gap-list do on element: ${src.value}`);
+        const res = await fetch(src.value);
+        const json = await res.json();
+
+        el.innerHTML = `<div>${json.foo}</div>`;
+        return;
     },
 };
 
-window.GAP.registerElement('gap-list', GapList);
+export default GapList;
+
+if (window.GAP) {
+    window.GAP.registerElement('gap-list', GapList);
+}

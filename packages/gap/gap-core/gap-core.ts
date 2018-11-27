@@ -11,7 +11,7 @@
  */
 
 interface Extension {
-    do: (el: Element) => void;
+    do: (el: Element) => Promise<void>;
 }
 
 const extensions: Map<string, Extension> = new Map();
@@ -29,9 +29,11 @@ const render = () => {
     });
 };
 
-window.GAP = {
+const GAP = {
     registerElement: (tag: string, extension: Extension) => {
         extensions.set(tag, extension);
         render();
     },
 };
+
+window.GAP = GAP;
