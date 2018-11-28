@@ -1,0 +1,10 @@
+{
+    "name": "gap",
+    "version": "0.1.0-alpha.1",
+    "description": "Guardian Accelerated Pages",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@types/mustache": "^0.8.32",
+        "mustache": "^3.0.1"
+    }
+}

@@ -4,6 +4,10 @@
     <script async src="https://s3-eu-west-1.amazonaws.com/com-gu-gap/v0/gap-list.js"></script>
 </head>
 <body>
-    <gap-list data-src="https://amp.theguardian.com/editionalised-nav.json" />
+    <gap-list data-src="https://amp.theguardian.com/editionalised-nav.json">
+        <template>
+            {{ refreshStatus }}
+        </template>
+    </gap-list>
 </body>
 </html>
