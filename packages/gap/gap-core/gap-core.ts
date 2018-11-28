@@ -1,3 +1,5 @@
+import Mustache from 'mustache';
+
 /**
  * This is the main loader for Gap.
  *
@@ -10,9 +12,19 @@
  * extension class.
  */
 
-interface Extension {
-    do: (el: Element) => Promise<void>;
+export interface GAPHelpers {
+    renderTemplate: (tpl: string, data: any) => string;
 }
+
+export interface Extension {
+    do: (el: Element, helpers: GAPHelpers) => Promise<void>;
+}
+
+export const defaultHelpers = {
+    renderTemplate: (tpl: string, data: any) => {
+        return Mustache.render(tpl, data);
+    },
+};
 
 const extensions: Map<string, Extension> = new Map();
 
@@ -26,7 +38,9 @@ const render = () => {
     // caching and throttling
     extensions.forEach((extension, tag) => {
         const tags = document.getElementsByTagName(tag);
-        Array.prototype.forEach.call(tags, (el: Element) => extension.do(el));
+        Array.prototype.forEach.call(tags, (el: Element) =>
+            extension.do(el, defaultHelpers),
+        );
     });
 };
 

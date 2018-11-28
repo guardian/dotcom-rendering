@@ -1,4 +1,4 @@
-import Mustache from 'mustache';
+import { Extension, GAPHelpers } from '../gap-core/gap-core';
 
 /**
  * Loads JSON content from a CORS endpoint and renders it through a provided
@@ -6,7 +6,7 @@ import Mustache from 'mustache';
  */
 
 const GapList: Extension = {
-    do: async (el: Element): Promise<void> => {
+    do: async (el: Element, helpers: GAPHelpers): Promise<void> => {
         const src = el.attributes.getNamedItem('data-src');
         if (src === null) return;
 
@@ -15,7 +15,7 @@ const GapList: Extension = {
 
         const res = await fetch(src.value);
         const json = await res.json();
-        const html = Mustache.render(tpl.innerHTML, json);
+        const html = helpers.renderTemplate(tpl.innerHTML, json);
 
         el.innerHTML = html;
     },
