@@ -25,9 +25,4 @@ module.exports = () => ({
         ]
     },
     target: 'web',
-    optimization: {
-        minimize: false,
-        namedModules: true,
-        runtimeChunk: false,
-    },
 });
