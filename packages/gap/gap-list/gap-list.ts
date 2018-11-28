@@ -11,7 +11,7 @@ const GapList: Extension = {
         const res = await fetch(src.value);
         const json = await res.json();
 
-        el.innerHTML = `<div>${json.foo}</div>`;
+        el.innerHTML = `<div>${JSON.stringify(json)}</div>`;
         return;
     },
 };

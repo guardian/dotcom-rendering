@@ -23,6 +23,7 @@ const extensions: Map<string, Extension> = new Map();
  * things like buffer and batch.
  */
 const render = () => {
+    // caching and throttling
     extensions.forEach((extension, tag) => {
         const tags = document.getElementsByTagName(tag);
         Array.prototype.forEach.call(tags, (el: Element) => extension.do(el));
