@@ -23,7 +23,12 @@ module.exports = () => ({
                 use: 'babel-loader',
                 exclude: /node_modules/
             }
-        ]
+        ],
     },
+    devServer: {
+        contentBase: resolve(__dirname, '../../packages/gap/dist/'),
+        compress: false,
+        port: 3040
+    },    
     target: 'web',
 });

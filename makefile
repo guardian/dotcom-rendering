@@ -151,3 +151,7 @@ publish-gap: clear clean-gap install
 	$(call log, "publishing gap")
 	webpack --mode=production --config scripts/webpack/gap.js
 	@./scripts/deploy/publish-gap.sh
+
+dev-gap: clear clean-gap install
+	$(call log, "starting gap dev server...")
+	webpack-dev-server --mode=development --config scripts/webpack/gap.js

@@ -71,6 +71,7 @@
         "webpack-bundle-analyzer": "^2.11.1",
         "webpack-cli": "^3.1.1",
         "webpack-dev-middleware": "^3.1.2",
+        "webpack-dev-server": "^3.1.10",
         "webpack-hot-middleware": "^2.22.0",
         "webpack-hot-server-middleware": "^0.5.0",
         "webpack-merge": "^4.1.2",
@@ -88,18 +89,18 @@
     },
     "jest": {
         "moduleFileExtensions": [
-          "ts",
-          "tsx",
-          "js"
+            "ts",
+            "tsx",
+            "js"
         ],
         "transform": {
             "^.+\\.(ts|tsx)$": "ts-jest"
         },
         "globals": {
-          "ts-jest": {
-            "diagnostics": false,
-            "tsConfigFile": "tsconfig.json"
-          }
+            "ts-jest": {
+                "diagnostics": false,
+                "tsConfigFile": "tsconfig.json"
+            }
         },
         "testMatch": [
             "**/*.test.+(ts|tsx|js)"
