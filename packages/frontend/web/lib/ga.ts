@@ -7,6 +7,13 @@ interface TrackerConfig {
     siteSpeedSampleRate: number;
 }
 
+const tracker: TrackerConfig = {
+    name: 'allEditorialPropertyTracker',
+    id: 'UA-78705427-1',
+    sampleRate: 100,
+    siteSpeedSampleRate: 1,
+};
+
 const getQueryParam = (
     key: string,
     queryString: string,
@@ -20,24 +27,28 @@ const getQueryParam = (
 };
 
 export const init = (): void => {
-    const { ga } = window;
-    const { GA } = window.guardian.app.data;
-    const tracker: TrackerConfig = {
-        name: 'allEditorialPropertyTracker',
-        id: 'UA-78705427-1',
-        sampleRate: 100,
-        siteSpeedSampleRate: 1,
+    const coldQueue = (...args: any[]) => {
+        (ga.q = ga.q || []).push(args);
     };
-
+    const ga = window.ga || (coldQueue as UniversalAnalytics.ga);
     const identityId = getCookie('GU_U');
-    const set = `${tracker.name}.set`;
-    const send = `${tracker.name}.send`;
+
+    window.GoogleAnalyticsObject = 'ga';
+    ga.l = +new Date();
 
     ga('create', tracker.id, 'auto', tracker.name, {
         sampleRate: tracker.sampleRate,
         siteSpeedSampleRate: tracker.siteSpeedSampleRate,
         userId: identityId,
     });
+};
+
+export const sendPageView = (): void => {
+    const { GA } = window.guardian.app.data;
+    const set = `${tracker.name}.set`;
+    const send = `${tracker.name}.send`;
+    const identityId = getCookie('GU_U');
+
     ga(set, 'forceSSL', true);
     ga(set, 'title', GA.webTitle);
     ga(set, 'anonymizeIp', true);
