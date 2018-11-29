@@ -3,7 +3,7 @@ import { css } from 'react-emotion';
 
 import { Dropdown } from '@guardian/guui';
 import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
-import { Link } from '@guardian/guui/components/Dropdown';
+import { Link } from '@guardian/guui/components/Dropdown/Dropdown';
 
 const editionDropdown = css`
     display: none;
