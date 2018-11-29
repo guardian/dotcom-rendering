@@ -10,7 +10,7 @@ const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const { siteName, root } = require('./config');
 
 const go = async () => {
-    const webpackConfig = await require('../webpack');
+    const webpackConfig = await require('../webpack/frontend');
     const compiler = await webpack(webpackConfig);
 
     const app = express();
