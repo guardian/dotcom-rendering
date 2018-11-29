@@ -13,7 +13,7 @@ const GapList: Extension = {
         const tpl = el.querySelector('template');
         if (tpl === null) return;
 
-        const res = await fetch(src.value);
+        const res = await helpers.fetchWithProxy(src.value);
         const json = await res.json();
         const html = helpers.renderTemplate(tpl.innerHTML, json);
 
