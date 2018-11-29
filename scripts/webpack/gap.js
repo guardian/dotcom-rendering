@@ -4,6 +4,7 @@ module.exports = () => ({
     entry: {
         'gap-core': './packages/gap/gap-core/gap-core.ts',
         'gap-list': './packages/gap/gap-list/gap-list.ts',
+        'gap-proxy': './packages/gap/gap-proxy/gap-proxy.ts',
     },
     output: {
         path: resolve(__dirname, `../../packages/gap/dist/`),
