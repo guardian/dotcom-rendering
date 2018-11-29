@@ -16,12 +16,16 @@ const extensions: Map<string, Extension> = new Map();
 
 let proxy: GAPProxy | null = null;
 
+/**
+ * A collection of GAP utilities. It is expected that extensions use these for
+ * associated functionality. GAP is then free to optimise these over time, for
+ * example to batch or cache API calls.
+ *
+ * But it is also useful to stub or mock these for testing purposes.
+ */
 export interface GAPHelpers {
     renderTemplate: (tpl: string, data: any) => string;
-    fetchWithProxy(
-        input?: Request | string,
-        init?: RequestInit,
-    ): Promise<Response>;
+    fetch(input?: Request | string, init?: RequestInit): Promise<Response>;
 }
 
 /**
@@ -56,7 +60,7 @@ export const defaultHelpers = {
     renderTemplate: (tpl: string, data: any) => {
         return Mustache.render(tpl, data, null, ['[[', ']]']);
     },
-    fetchWithProxy: (
+    fetch: (
         input?: Request | string,
         init?: RequestInit,
     ): Promise<Response> => {
