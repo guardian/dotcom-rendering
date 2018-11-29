@@ -3,7 +3,10 @@ import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
 
-import { init as initGa } from '@frontend/web/lib/ga';
+import {
+    init as initGa,
+    sendPageView as sendGaPageView,
+} from '@frontend/web/lib/ga';
 import Article from './pages/Article';
 
 // kick off the app
@@ -13,6 +16,8 @@ const go = () => {
     if (module.hot) {
         module.hot.accept();
     }
+
+    initGa();
 
     const container = document.getElementById('app');
 
@@ -29,7 +34,8 @@ const go = () => {
 
         hydrateApp(React.createElement(Article, { data }), container);
     }
-    initGa();
+
+    sendGaPageView();
 };
 
 // make sure we've patched the env before running the app

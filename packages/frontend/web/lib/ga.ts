@@ -7,6 +7,13 @@ interface TrackerConfig {
     siteSpeedSampleRate: number;
 }
 
+const tracker: TrackerConfig = {
+    name: 'allEditorialPropertyTracker',
+    id: 'UA-78705427-1',
+    sampleRate: 100,
+    siteSpeedSampleRate: 1,
+};
+
 const getQueryParam = (
     key: string,
     queryString: string,
@@ -24,16 +31,7 @@ export const init = (): void => {
         (ga.q = ga.q || []).push(args);
     };
     const ga = window.ga || (coldQueue as UniversalAnalytics.ga);
-    const { GA } = window.guardian.app.data;
-    const tracker: TrackerConfig = {
-        name: 'allEditorialPropertyTracker',
-        id: 'UA-78705427-1',
-        sampleRate: 100,
-        siteSpeedSampleRate: 1,
-    };
     const identityId = getCookie('GU_U');
-    const set = `${tracker.name}.set`;
-    const send = `${tracker.name}.send`;
 
     window.GoogleAnalyticsObject = 'ga';
     ga.l = +new Date();
@@ -43,6 +41,14 @@ export const init = (): void => {
         siteSpeedSampleRate: tracker.siteSpeedSampleRate,
         userId: identityId,
     });
+};
+
+export const sendPageView = (): void => {
+    const { GA } = window.guardian.app.data;
+    const set = `${tracker.name}.set`;
+    const send = `${tracker.name}.send`;
+    const identityId = getCookie('GU_U');
+
     ga(set, 'forceSSL', true);
     ga(set, 'title', GA.webTitle);
     ga(set, 'anonymizeIp', true);
