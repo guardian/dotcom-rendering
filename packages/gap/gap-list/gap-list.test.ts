@@ -9,7 +9,7 @@ describe('gap-list', () => {
             json: () => ({ foo: 1 }),
         };
         globalAny.fetch = jest.fn(async () => resp);
-        document.body.innerHTML = `<gap-list id='test' data-src='example.json'><template>{{ foo }}</template></gap-list>`;
+        document.body.innerHTML = `<gap-list id='test' data-src='example.json'><template>[[ foo ]]</template></gap-list>`;
         const el = document.getElementById('test');
 
         if (el === null) {

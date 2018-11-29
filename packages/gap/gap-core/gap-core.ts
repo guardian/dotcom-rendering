@@ -54,7 +54,7 @@ export interface Extension {
 
 export const defaultHelpers = {
     renderTemplate: (tpl: string, data: any) => {
-        return Mustache.render(tpl, data);
+        return Mustache.render(tpl, data, null, ['[[', ']]']);
     },
     fetchWithProxy: (
         input?: Request | string,
