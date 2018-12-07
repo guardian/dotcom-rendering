@@ -1,11 +1,12 @@
-import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
-
 import React from 'react';
+
+import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
 import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
+import { SoundcloudBlockComponent } from '../elements/SoundcloudBlockComponent';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
@@ -43,9 +44,12 @@ export const Elements: React.SFC<{
                     );
                 case 'model.dotcomrendering.pageElements.CommentBlockElement':
                     return <CommentBlockComponent element={element} />;
+                case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
+                    return <SoundcloudBlockComponent element={element} />;
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));
+
                     return null;
             }
         })
