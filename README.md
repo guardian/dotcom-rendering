@@ -66,15 +66,17 @@ See [the makefile](https://github.com/guardian/guui/blob/master/makefile) for th
 
 ### VSCode
 
-We recommend using the Visual Studio Code (VSCode) IDE. VSCode includes built in TypeScript language support and has a rich library of extensions which let you add formatters, debuggers,and tools to your installation to support your development workflow.
+We recommend using the [VSCode](https://code.visualstudio.com/) IDE. VSCode includes built in TypeScript language support and has a rich library of extensions which let you add formatters, debuggers and tools to your installation to support your development workflow.
 
-You can download VSCode from [https://code.visualstudio.com/](https://code.visualstudio.com/)
-
-Recommended VSCode extensions are listed in `.vscode/extensions.json` and VSCode should prompt you to install these when you open the project. You can also find these extensions Command Palette (shift + cmd + P) and typing the 'Extensions: Show Recommended Extensions command' or by searching for '@recommended' in the extensions pane.
+Recommended VSCode extensions are listed in `.vscode/extensions.json` and VSCode should prompt you to install these when you open the project. You can also find these extensions using Command Palette (shift + cmd + P) and typing the 'Extensions: Show Recommended Extensions command' or by searching for '@recommended' in the extensions pane.
 
 #### Auto fix on save
 
-We recommend you update your workspace setting to auto fix prettier errors on save. You can use the Command Palette (shift + cmd + P) to open user or workspace settings, just type in `Preferences: Open Workspace Settings`. You can then search for 'tslint.autoFixOnSave'. In your `settings.json` then set:
+We recommend you update your workspace settings to automatically fix formatting errors on save. Follow these steps to do this:
+
+1. Open the Command Palette (shift + cmd + P) and type `Preferences: Open Workspace Settings`.
+2. Search for 'tslint.autoFixOnSave'.
+3. Update your `settings.json` with:
 
 ```json
     "tslint.autoFixOnSave": true,
