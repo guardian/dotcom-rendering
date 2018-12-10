@@ -14,7 +14,8 @@ node_modules
 
 # IDE files
 .idea
-.vscode
+.vscode/*
+!.vscode/extensions.json
 
 # System files
 .DS_Store
