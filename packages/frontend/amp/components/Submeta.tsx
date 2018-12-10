@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'react-emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { serif } from '@guardian/pasteup/fonts';
+import { serif, sans } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 
@@ -94,6 +94,15 @@ const labelStyle = css`
     margin-bottom: -0.1875rem;
 `;
 
+const siteLinkStyle = css`
+    font-size: 0.8125rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: ${palette.neutral[7]};
+    font-family: ${sans.body};
+    line-height: 2.25rem;
+`;
+
 const Submeta: React.SFC<{
     pillar: Pillar;
     sections: SimpleLinkType[];
@@ -104,7 +113,8 @@ const Submeta: React.SFC<{
             userMessage: string;
         }
     };
-}> = ({ pillar, sections, keywords, sharingURLs }) => {
+    pageID: string;
+}> = ({ pillar, sections, keywords, sharingURLs, pageID }) => {
     const sectionListItems = sections.map(link => (
         <li className={itemStyle} key={link.url}>
             <a
@@ -148,6 +158,12 @@ const Submeta: React.SFC<{
                     'messenger',
                 ]}
             />
+            {/* TODO link to actual (non-AMP) site here. Also handle comment count behaviour. */}
+            <div className={guardianLines}>
+                <a className={siteLinkStyle} href={`/${pageID}`}>
+                    View on theguardian.com
+                </a>
+            </div>
         </>
     );
 };

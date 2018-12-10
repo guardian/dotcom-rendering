@@ -23,6 +23,7 @@ const Body: React.SFC<{
             keywords={data.subMetaKeywordLinks}
             pillar={pillar}
             sharingURLs={data.sharingUrls}
+            pageID={data.pageId}
         />
     </InnerContainer>
 );
