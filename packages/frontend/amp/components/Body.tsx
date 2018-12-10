@@ -18,7 +18,11 @@ const Body: React.SFC<{
     <InnerContainer className={body}>
         <MainBlock config={config} articleData={data} />
         <Elements pillar={pillar} elements={data.elements} />
-        <Submeta tags={data.tags} pillar={pillar} />
+        <Submeta
+            sections={data.subMetaSectionLinks}
+            keywords={data.subMetaKeywordLinks}
+            pillar={pillar}
+        />
     </InnerContainer>
 );
 
