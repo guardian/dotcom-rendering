@@ -7,8 +7,7 @@ import Dropdown, {
 import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/typography';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
-
-import SupportTheGuardian from './SupportTheGuardian';
+// import ReaderRevenueLinks from './ReaderRevenueLinks';
 
 const search = css`
     :after {
@@ -74,10 +73,21 @@ const Search: React.SFC<{
 );
 
 const links = css`
-    left: 0;
-    top: 0;
     position: absolute;
-    padding-left: 10px;
+    left: 10px;
+
+    ${mobileLandscape} {
+        left: 20px;
+    }
+
+    ${tablet} {
+        left: auto;
+        right: 205px;
+    }
+
+    ${desktop} {
+        right: 266px;
+    }
 `;
 
 const profileSubdomain = 'https://profile.theguardian.com';
@@ -122,28 +132,9 @@ const identityLinks: DropdownLink[] = [
 ];
 
 const Links: React.SFC<{
-    isPayingMember: boolean;
-    isRecentContributor: boolean;
     isSignedIn: boolean;
-    readerRevenueLinks: ReaderRevenueLinks;
-}> = ({
-    isPayingMember,
-    isRecentContributor,
-    isSignedIn,
-    readerRevenueLinks,
-}) => (
+}> = ({ isSignedIn }) => (
     <div className={links}>
-        {isPayingMember ||
-            isRecentContributor || (
-                <SupportTheGuardian url={readerRevenueLinks.header.support} />
-            )}
-        <a
-            href={readerRevenueLinks.header.subscribe}
-            className={cx(link({ showAtTablet: true }), paddedLink)}
-        >
-            Subscribe
-        </a>
-
         <a
             href={jobsUrl}
             className={cx(link({ showAtTablet: true }), paddedLink)}

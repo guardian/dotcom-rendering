@@ -10,6 +10,7 @@ import Pillars from './Pillars';
 import MainMenuToggle from './MainMenuToggle/MainMenuToggle';
 import { MainMenu } from './MainMenu/MainMenu';
 import SubNav from './SubNav/SubNav';
+import ReaderRevenueLinks from './ReaderRevenueLinks';
 import { getCookie } from '@frontend/web/lib/cookie';
 
 const centered = css`
@@ -62,7 +63,7 @@ export default class Nav extends Component<
     }
 
     public render() {
-        const { nav, pillar } = this.props;
+        const { nav, pillar, edition } = this.props;
         const toggleMainMenu = () => {
             this.toggleMainMenu();
         };
@@ -78,18 +79,23 @@ export default class Nav extends Component<
                     role="navigation"
                     aria-label="Guardian sections"
                 >
-                    <EditionDropdown edition={this.props.edition} />
+                    <EditionDropdown edition={edition} />
                     <Logo />
                     {/*
                         TODO: The properties of the Links component
                         have been hardcoded to false. At some point
                         these need to be dynamic.
                     */}
+
+                    <ReaderRevenueLinks
+                        urls={nav.readerRevenueLinks.header}
+                        edition={edition}
+                    />
                     <Links
-                        isPayingMember={false}
-                        isRecentContributor={false}
+                        // isPayingMember={false}
+                        // isRecentContributor={false}
                         isSignedIn={isSignedIn}
-                        readerRevenueLinks={nav.readerRevenueLinks}
+                        // readerRevenueLinks={nav.readerRevenueLinks}
                     />
                     <Pillars
                         showMainMenu={showMainMenu}
