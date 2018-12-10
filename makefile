@@ -40,7 +40,7 @@ start: install
 	@echo '' # just a spacer
 	@NODE_ENV=production pm2 start dist/frontend.server.js
 	@echo '' # just a spacer
-	$(call log, "PROD server is running at http://localhost:9000")
+	$(call log, "PROD server is running")
 
 stop:
 	@pm2 kill
@@ -55,7 +55,7 @@ logs:
 
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
-	@NODE_ENV=development node scripts/frontend-dev-server/start
+	@NODE_ENV=development node scripts/frontend/dev-server
 
 # quality #########################################
 

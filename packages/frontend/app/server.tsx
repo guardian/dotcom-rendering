@@ -10,7 +10,7 @@ import {
 import document from '@frontend/web/document';
 import AMPDocument from '@frontend/amp/document';
 import AMPArticle from '@frontend/amp/pages/Article';
-import { dist, root } from '@root/config';
+import { dist, root, port } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 
 import {
@@ -131,5 +131,5 @@ if (process.env.NODE_ENV === 'production') {
         recordBaselineCloudWatchMetrics();
     }, 10 * 1000);
 
-    app.listen(9000);
+    app.listen(port);
 }
