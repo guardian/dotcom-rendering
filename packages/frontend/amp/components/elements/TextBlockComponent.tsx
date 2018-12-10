@@ -6,6 +6,13 @@ import { serif } from '@guardian/pasteup/fonts';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
+    strong {
+        font-weight: 700;
+    }
+    h2 {
+        margin-top: 24px;
+        font-size: 18px;
+    }
     p {
         padding: 0 0 12px;
         font-size: 16px;
