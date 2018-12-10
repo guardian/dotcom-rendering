@@ -5,7 +5,6 @@ import { css } from 'react-emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainBlock } from '@frontend/amp/components/MainBlock';
 import Submeta from '@frontend/amp/components/Submeta';
-import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 
 const body = css`
     background-color: white;
@@ -23,20 +22,7 @@ const Body: React.SFC<{
             sections={data.subMetaSectionLinks}
             keywords={data.subMetaKeywordLinks}
             pillar={pillar}
-        />
-        <ShareIcons
-            sharingUrls={data.sharingUrls}
-            pillar={data.pillar}
-            displayIcons={[
-                'facebook',
-                'twitter',
-                'email',
-                'linkedIn',
-                'pinterest',
-                'googlePlus',
-                'whatsApp',
-                'messenger',
-            ]}
+            sharingURLs={data.sharingUrls}
         />
     </InnerContainer>
 );

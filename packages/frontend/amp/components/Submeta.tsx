@@ -3,6 +3,7 @@ import { css } from 'react-emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { serif } from '@guardian/pasteup/fonts';
 import { palette } from '@guardian/pasteup/palette';
+import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 
 const guardianLines = css`
     background-image: repeating-linear-gradient(
@@ -97,7 +98,13 @@ const Submeta: React.SFC<{
     pillar: Pillar;
     sections: SimpleLinkType[];
     keywords: SimpleLinkType[];
-}> = ({ pillar, sections, keywords }) => {
+    sharingURLs: {
+        [K in SharePlatform]?: {
+            url: string;
+            userMessage: string;
+        }
+    };
+}> = ({ pillar, sections, keywords, sharingURLs }) => {
     const sectionListItems = sections.map(link => (
         <li className={itemStyle} key={link.url}>
             <a
@@ -121,11 +128,27 @@ const Submeta: React.SFC<{
     ));
 
     return (
-        <div className={guardianLines}>
-            <span className={labelStyle}>Topics</span>
-            <ul className={sectionListStyle}>{sectionListItems}</ul>
-            <ul className={keywordListStyle}>{keywordListItems}</ul>
-        </div>
+        <>
+            <div className={guardianLines}>
+                <span className={labelStyle}>Topics</span>
+                <ul className={sectionListStyle}>{sectionListItems}</ul>
+                <ul className={keywordListStyle}>{keywordListItems}</ul>
+            </div>
+            <ShareIcons
+                sharingUrls={sharingURLs}
+                pillar={pillar}
+                displayIcons={[
+                    'facebook',
+                    'twitter',
+                    'email',
+                    'linkedIn',
+                    'pinterest',
+                    'googlePlus',
+                    'whatsApp',
+                    'messenger',
+                ]}
+            />
+        </>
     );
 };
 
