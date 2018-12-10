@@ -18,28 +18,27 @@ const guardianLines = css`
     background-size: 1px 13px;
     padding-top: 18px;
     margin-bottom: 6px;
-
-    margin-top: 0.75rem;
+    margin-top: 12px;
 `;
 
 const linkStyle = (pillar: Pillar) => css`
     position: relative;
-    padding-left: 0.3rem;
-    padding-right: 0.35rem;
+    padding-left: 5px;
+    padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
     font-family: ${serif.body};
     font-size: 15px;
-    line-height: 1.5rem;
+    line-height: 24px;
 
     :after {
         content: '/';
-        font-size: 1em;
+        font-size: 16px;
         position: absolute;
         pointer-events: none;
         top: 0;
-        right: -0.19em;
-        color: #767676;
+        right: -3px;
+        color: ${palette.neutral[46]};
     }
 `;
 
@@ -53,54 +52,55 @@ const itemStyle = css`
 
 const keywordListStyle = css`
     display: block;
-    margin-left: -0.35rem;
-    padding-top: 0.375rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 0.0625rem solid #dcdcdc;
-    margin-bottom: 0.375rem;
+    margin-left: -6px;
+    padding-top: 6px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid ${palette.neutral[86]};
+    margin-bottom: 6px;
 `;
 
 const sectionLinkStyle = (pillar: Pillar) => css`
     position: relative;
-    padding-left: 0.3rem;
-    padding-right: 0.35rem;
+    padding-left: 5px;
+    padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
     font-family: ${serif.body};
     font-size: 16px;
-    line-height: 1.375rem;
+    line-height: 22px;
 
     :after {
         content: '/';
-        font-size: 1em;
+        font-size: 16px;
         position: absolute;
         pointer-events: none;
         top: 0;
-        right: -0.19em;
-        color: #767676;
+        right: -3px;
+        color: ${palette.neutral[46]};
     }
 `;
 
 const sectionListStyle = css`
     display: block;
-    margin-left: -0.35rem;
+    margin-left: -6px;
 `;
 
 const labelStyle = css`
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color: #767676;
+    font-size: 12px;
+    line-height: 16px;
+    color: ${palette.neutral[46]};
     display: block;
-    margin-bottom: -0.1875rem;
+    margin-bottom: -3px;
+    font-family: ${sans.body};
 `;
 
 const siteLinkStyle = css`
-    font-size: 0.8125rem;
+    font-size: 13px;
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};
     font-family: ${sans.body};
-    line-height: 2.25rem;
+    line-height: 36px;
 `;
 
 const Submeta: React.SFC<{
