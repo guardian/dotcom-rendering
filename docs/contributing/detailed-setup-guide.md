@@ -62,7 +62,7 @@ $ make test
 
 If you get lint errors, `make fix` will attempt to automatically fix them for you.
 
-See [the makefile](https://github.com/guardian/guui/blob/master/makefile) for the full list.
+See [the makefile](https://github.com/guardian/dotcom-rendering/blob/master/makefile) for the full list.
 
 ## IDE setup
 
