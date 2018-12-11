@@ -20,7 +20,7 @@ We recommend using [nvm](https://github.com/creationix/nvm) (especially combined
 
 ### Setup
 
-```bash
+```
 $ git clone git@github.com:guardian/dotcom-rendering.git
 $ cd dotcom-rendering
 $ make dev
@@ -32,7 +32,7 @@ This will start the development server.
 
 You can ensure your code passes code quality tests by running:
 
-```bash
+```
 $ make validate
 ``` 
 
@@ -40,7 +40,7 @@ This runs our linting tool, the TypeScript compiler and our tests, before finall
 
 You can also run these tasks individually:
 
-```bash
+```
 $ make lint
 $ make tsc
 $ make test
@@ -48,7 +48,7 @@ $ make test
 
 If you get lint errors, you can attempt to automatically fix them with:
 
-```bash
+```
 $ make fix
 ```
 
