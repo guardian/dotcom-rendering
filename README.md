@@ -4,19 +4,19 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 ## Chat
 
-Chat room: [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI)
+Feel free to check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat (ask the Dotcom Platform team for an invite).
 
 ## Quick start
 
 This guide will help you get the dotcom-rendering application running on your development machine.
 
-If you're new to JavaScript projects or prefer to take things slow, have a look at the [detailed installation steps](docs/contributing/detailed-installation-steps.md).
+If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
 
-### Node
+### Install Node.js
 
-The only thing you need to make sure you have installed before you get going is Node.
+The only thing you need to make sure you have installed before you get going is [Node.js](https://nodejs.org).
 
-We recommend [nvm](https://github.com/creationix/nvm) (especially combined with [this handy gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)). It is great at managing multiple versions of Node on one machine.
+We recommend using [nvm](https://github.com/creationix/nvm) (especially combined with [this handy gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)). It is great at managing multiple versions of Node.js on one machine.
 
 ### Development
 
@@ -50,14 +50,14 @@ We recommend using [VSCode](https://code.visualstudio.com/).
 
 VSCode should prompt you to install our recommended extensions these when you open the project. 
 
-You can also find these extensions by searching for '@recommended' in the extensions pane.
+You can also find these extensions by searching for `@recommended` in the extensions pane.
 
 ### Auto fix on save
 
 We recommend you update your workspace settings to automatically fix formatting errors on save:
 
-1. Open the Command Palette (shift + cmd + P) and type `Preferences: Open Workspace Settings`
-2. Search for 'tslint.autoFixOnSave'
+1. Open the Command Palette (`shift + cmd + P`) and type `Preferences: Open Workspace Settings`
+2. Search for `tslint.autoFixOnSave`
 3. Update your `settings.json` with:
 
 ```json
