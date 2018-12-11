@@ -1,48 +1,43 @@
 import cloneDeep from 'lodash.clonedeep';
 import { string as curly_ } from 'curlyquotes';
 import clean_ from './clean';
-import bigBullets_ from './big-bullets';
-import { getSharingUrls as getSharingUrls_ } from '@frontend/lib/parse-capi/sharing-urls';
-import { extractArticleMeta } from './';
+import { getSharingUrls as getSharingUrls_ } from './sharing-urls';
+import { extract } from './extract-capi';
 import { data } from '@root/fixtures/article';
 
 const curly: any = curly_;
 const clean: any = clean_;
-const bigBullets: any = bigBullets_;
 const getSharingUrls: any = getSharingUrls_;
 
 jest.mock('curlyquotes', () => ({
     string: jest.fn(),
 }));
 jest.mock('./clean', () => jest.fn());
-jest.mock('./big-bullets', () => jest.fn());
-jest.mock('@frontend/lib/parse-capi/sharing-urls', () => ({
+jest.mock('./sharing-urls', () => ({
     getSharingUrls: jest.fn(),
 }));
 
-describe('parse-capi', () => {
+describe('extract-capi', () => {
     let testData: any;
 
     beforeEach(() => {
         testData = cloneDeep(data);
         clean.mockImplementation((_: string) => _);
         curly.mockImplementation((_: string) => _);
-        bigBullets.mockImplementation((_: string) => _);
         getSharingUrls.mockImplementation((_: string) => _);
     });
 
     afterEach(() => {
         curly.mockReset();
         clean.mockReset();
-        bigBullets.mockReset();
         getSharingUrls.mockReset();
     });
 
-    describe('extractArticleMeta', () => {
+    describe('extract', () => {
         it('returns webPublicationDate if available', () => {
             testData.config.page.webPublicationDate = 1489173305000;
 
-            const { webPublicationDate } = extractArticleMeta(testData);
+            const { webPublicationDate } = extract(testData);
 
             expect(webPublicationDate.getTime()).toBe(
                 new Date(1489173305000).getTime(),
@@ -53,7 +48,7 @@ describe('parse-capi', () => {
             testData.config.page.webPublicationDate = null;
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
@@ -75,7 +70,7 @@ describe('parse-capi', () => {
                 },
             ];
 
-            const { tags } = extractArticleMeta(testData);
+            const { tags } = extract(testData);
 
             expect(tags.length).toBe(2);
             expect(tags[0]).toEqual({
@@ -103,7 +98,7 @@ describe('parse-capi', () => {
             ];
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
@@ -118,7 +113,7 @@ describe('parse-capi', () => {
             ];
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
@@ -127,7 +122,7 @@ describe('parse-capi', () => {
 
             testData.config.page.section = testSection;
 
-            const { sectionName } = extractArticleMeta(testData);
+            const { sectionName } = extract(testData);
 
             expect(sectionName).toBe(testSection);
         });
@@ -136,7 +131,7 @@ describe('parse-capi', () => {
             testData.config.page.section = null;
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
@@ -145,7 +140,7 @@ describe('parse-capi', () => {
 
             testData.config.page.edition = testEditionLongForm;
 
-            const { editionLongForm } = extractArticleMeta(testData);
+            const { editionLongForm } = extract(testData);
 
             expect(editionLongForm).toBe(testEditionLongForm);
         });
@@ -153,7 +148,7 @@ describe('parse-capi', () => {
         it('returns editionLongForm as empty string if edition not available', () => {
             testData.config.page.edition = null;
 
-            const { editionLongForm } = extractArticleMeta(testData);
+            const { editionLongForm } = extract(testData);
 
             expect(editionLongForm).toBe('');
         });
@@ -163,7 +158,7 @@ describe('parse-capi', () => {
 
             testData.config.page.editionId = testEdition;
 
-            const { editionId } = extractArticleMeta(testData);
+            const { editionId } = extract(testData);
 
             expect(editionId).toBe(testEdition);
         });
@@ -171,7 +166,7 @@ describe('parse-capi', () => {
         it('returns editionId as UK if edition not available', () => {
             testData.config.page.editionId = null;
 
-            const { editionId } = extractArticleMeta(testData);
+            const { editionId } = extract(testData);
 
             expect(editionId).toBe('UK');
         });
@@ -179,7 +174,7 @@ describe('parse-capi', () => {
         it('returns isImmersive as true if immersive', () => {
             testData.config.page.isImmersive = true;
 
-            const { isImmersive } = extractArticleMeta(testData);
+            const { isImmersive } = extract(testData);
 
             expect(isImmersive).toBe(true);
         });
@@ -187,7 +182,7 @@ describe('parse-capi', () => {
         it('returns isImmersive as false if not immersive', () => {
             testData.config.page.isImmersive = false;
 
-            const { isImmersive } = extractArticleMeta(testData);
+            const { isImmersive } = extract(testData);
 
             expect(isImmersive).toBe(false);
         });
@@ -197,7 +192,7 @@ describe('parse-capi', () => {
 
             testData.config.page.webPublicationDateDisplay = testWebPublicationDateDisplay;
 
-            const { webPublicationDateDisplay } = extractArticleMeta(testData);
+            const { webPublicationDateDisplay } = extract(testData);
 
             expect(webPublicationDateDisplay).toBe(
                 testWebPublicationDateDisplay,
@@ -208,7 +203,7 @@ describe('parse-capi', () => {
             testData.config.page.webPublicationDateDisplay = null;
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
@@ -217,7 +212,7 @@ describe('parse-capi', () => {
 
             testData.config.page.headline = testHeadline;
 
-            const { headline } = extractArticleMeta(testData);
+            const { headline } = extract(testData);
 
             expect(headline).toBe(testHeadline);
             expect(clean).toHaveBeenCalledWith(testHeadline);
@@ -228,27 +223,28 @@ describe('parse-capi', () => {
             testData.config.page.headline = null;
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
         it('returns standfirst if standfirst available', () => {
             const testStandfirst =
-                '<p>Waldo Jeffers had reached his limit.</p>';
+                '<p>• Waldo Jeffers had reached his limit.</p>';
 
             testData.contentFields.fields.standfirst = testStandfirst;
 
-            const { standfirst } = extractArticleMeta(testData);
+            const { standfirst } = extract(testData);
 
-            expect(standfirst).toBe(testStandfirst);
             expect(clean).toHaveBeenCalledWith(testStandfirst);
-            expect(bigBullets).toHaveBeenCalledWith(testStandfirst);
+            expect(standfirst).toBe(
+                '<p><span class="bullet">&bull;</span> Waldo Jeffers had reached his limit.</p>',
+            );
         });
 
         it('returns standfirst as empty string if standfirst not available', () => {
             testData.contentFields.fields.standfirst = null;
 
-            const { standfirst } = extractArticleMeta(testData);
+            const { standfirst } = extract(testData);
 
             expect(standfirst).toBe('');
         });
@@ -258,7 +254,7 @@ describe('parse-capi', () => {
 
             testData.contentFields.fields.main = testMain;
 
-            const { main } = extractArticleMeta(testData);
+            const { main } = extract(testData);
 
             expect(main).toBe(testMain);
             expect(clean).toHaveBeenCalledWith(testMain);
@@ -267,7 +263,7 @@ describe('parse-capi', () => {
         it('returns main as empty string if main not available', () => {
             testData.contentFields.fields.main = null;
 
-            const { main } = extractArticleMeta(testData);
+            const { main } = extract(testData);
 
             expect(main).toBe('');
         });
@@ -277,7 +273,7 @@ describe('parse-capi', () => {
 
             testData.contentFields.fields.main = testMain;
 
-            const { main } = extractArticleMeta(testData);
+            const { main } = extract(testData);
 
             expect(main).toBe(testMain);
             expect(clean).toHaveBeenCalledWith(testMain);
@@ -295,7 +291,7 @@ describe('parse-capi', () => {
                 },
             ];
 
-            const { body } = extractArticleMeta(testData);
+            const { body } = extract(testData);
 
             expect(body).toBe([testBody, testBody].join(''));
         });
@@ -304,7 +300,7 @@ describe('parse-capi', () => {
             testData.contentFields.fields.blocks.body = null;
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
@@ -313,7 +309,7 @@ describe('parse-capi', () => {
 
             testData.config.page.byline = testAuthor;
 
-            const { author } = extractArticleMeta(testData);
+            const { author } = extract(testData);
 
             expect(author.byline).toBe(testAuthor);
         });
@@ -331,7 +327,7 @@ describe('parse-capi', () => {
                 },
             ];
 
-            const { author } = extractArticleMeta(testData);
+            const { author } = extract(testData);
 
             expect(author.twitterHandle).toBe(testTwitterHandle);
         });
@@ -360,7 +356,7 @@ describe('parse-capi', () => {
                 },
             ];
 
-            const { elements } = extractArticleMeta(testData);
+            const { elements } = extract(testData);
 
             expect(elements.length).toBe(4);
         });
@@ -370,7 +366,7 @@ describe('parse-capi', () => {
 
             testData.config.page.pageId = testPageId;
 
-            const { pageId } = extractArticleMeta(testData);
+            const { pageId } = extract(testData);
 
             expect(pageId).toBe(testPageId);
         });
@@ -379,12 +375,12 @@ describe('parse-capi', () => {
             testData.config.page.pageId = null;
 
             expect(() => {
-                extractArticleMeta(testData);
+                extract(testData);
             }).toThrow();
         });
 
         it('returns sharingUrls if available', () => {
-            const { sharingUrls } = extractArticleMeta(testData);
+            const { sharingUrls } = extract(testData);
 
             expect(sharingUrls).toBeDefined();
             expect(getSharingUrls).toHaveBeenCalledWith(testData);
@@ -395,7 +391,7 @@ describe('parse-capi', () => {
 
             testData.config.page.pillar = testPillar;
 
-            const { pillar } = extractArticleMeta(testData);
+            const { pillar } = extract(testData);
 
             expect(pillar).toBe(testPillar);
         });
@@ -403,7 +399,7 @@ describe('parse-capi', () => {
         it('defaults pillar to "news" if not valid', () => {
             testData.config.page.pillar = 'foo';
 
-            const { pillar } = extractArticleMeta(testData);
+            const { pillar } = extract(testData);
 
             expect(pillar).toBe('news');
         });
@@ -411,7 +407,7 @@ describe('parse-capi', () => {
         it('rewrites pillar to "culture" from "arts"', () => {
             testData.config.page.pillar = 'arts';
 
-            const { pillar } = extractArticleMeta(testData);
+            const { pillar } = extract(testData);
 
             expect(pillar).toBe('culture');
         });
@@ -427,7 +423,7 @@ describe('parse-capi', () => {
                 },
             ];
 
-            const { ageWarning } = extractArticleMeta(testData);
+            const { ageWarning } = extract(testData);
 
             expect(ageWarning).toBeUndefined();
         });
@@ -455,7 +451,7 @@ describe('parse-capi', () => {
 
                 testData.config.page.webPublicationDate = publicationDate.getTime();
 
-                const { ageWarning } = extractArticleMeta(testData);
+                const { ageWarning } = extract(testData);
 
                 expect(ageWarning).toBe('This article is over 2 years old');
             });
@@ -466,7 +462,7 @@ describe('parse-capi', () => {
 
                 testData.config.page.webPublicationDate = publicationDate.getTime();
 
-                const { ageWarning } = extractArticleMeta(testData);
+                const { ageWarning } = extract(testData);
 
                 expect(ageWarning).toBe('This article is over 1 year old');
             });
@@ -477,7 +473,7 @@ describe('parse-capi', () => {
 
                 testData.config.page.webPublicationDate = publicationDate.getTime();
 
-                const { ageWarning } = extractArticleMeta(testData);
+                const { ageWarning } = extract(testData);
 
                 expect(ageWarning).toBe('This article is over 2 months old');
             });
@@ -488,7 +484,7 @@ describe('parse-capi', () => {
 
                 testData.config.page.webPublicationDate = publicationDate.getTime();
 
-                const { ageWarning } = extractArticleMeta(testData);
+                const { ageWarning } = extract(testData);
 
                 expect(ageWarning).toBe('This article is over 1 month old');
             });
@@ -499,7 +495,7 @@ describe('parse-capi', () => {
 
                 testData.config.page.webPublicationDate = publicationDate.getTime();
 
-                const { ageWarning } = extractArticleMeta(testData);
+                const { ageWarning } = extract(testData);
 
                 expect(ageWarning).toBeUndefined();
             });
@@ -516,7 +512,7 @@ describe('parse-capi', () => {
                 },
             ];
 
-            const { sectionLabel, sectionUrl } = extractArticleMeta(testData);
+            const { sectionLabel, sectionUrl } = extract(testData);
 
             expect(sectionLabel).toEqual('Money');
             expect(sectionUrl).toEqual('money/money');
@@ -525,7 +521,7 @@ describe('parse-capi', () => {
         it('returns no sectionData if keyword tag unavailable', () => {
             testData.tags.tags = [];
 
-            const { sectionLabel, sectionUrl } = extractArticleMeta(testData);
+            const { sectionLabel, sectionUrl } = extract(testData);
 
             expect(sectionLabel).toBeUndefined();
             expect(sectionUrl).toBeUndefined();
