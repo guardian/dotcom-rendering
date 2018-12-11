@@ -50,7 +50,7 @@ We recommend using [VSCode](https://code.visualstudio.com/).
 
 VSCode should prompt you to install our recommended extensions these when you open the project. 
 
-You can also find these extensions using Command Palette (shift + cmd + P) and typing the 'Extensions: Show Recommended Extensions command' or by searching for '@recommended' in the extensions pane.
+You can also find these extensions by searching for '@recommended' in the extensions pane.
 
 ### Auto fix on save
 
