@@ -4,11 +4,11 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 ## Chat
 
-Feel free to check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat (please ask the Dotcom Platform team for an invite).
+Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
 
 ## Quick start
 
-This guide will help you get the dotcom-rendering application running on your development machine.
+This guide will help you get the `dotcom-rendering` application running on your development machine.
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
 
