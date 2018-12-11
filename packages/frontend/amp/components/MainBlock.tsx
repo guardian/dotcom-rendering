@@ -7,7 +7,7 @@ import Dateline from '../../web/components/Dateline';
 import { ShareCount } from '../../web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
-import { SharingIcons } from '@frontend/web/components/ShareIcons';
+import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '../pages/Article';
 
 const byline = css`
@@ -253,7 +253,7 @@ export const MainBlock: React.SFC<{
             )}
             <Dateline dateDisplay={articleData.webPublicationDateDisplay} />
             <div className={metaExtras}>
-                <SharingIcons
+                <ShareIcons
                     sharingUrls={articleData.sharingUrls}
                     pillar={articleData.pillar}
                     displayIcons={['facebook', 'twitter', 'email']}

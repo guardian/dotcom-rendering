@@ -27,6 +27,9 @@ export interface ArticleModel {
     pillar: Pillar;
     sectionLabel?: string;
     sectionUrl?: string;
+    tags: TagType[];
+    subMetaSectionLinks: SimpleLinkType[];
+    subMetaKeywordLinks: SimpleLinkType[];
 }
 
 export const Article: React.SFC<{
