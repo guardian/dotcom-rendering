@@ -4,7 +4,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 ## Chat
 
-Feel free to check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat (ask the Dotcom Platform team for an invite).
+Feel free to check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat (please ask the Dotcom Platform team for an invite).
 
 ## Quick start
 
@@ -18,27 +18,39 @@ The only thing you need to make sure you have installed before you get going is 
 
 We recommend using [nvm](https://github.com/creationix/nvm) (especially combined with [this handy gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)). It is great at managing multiple versions of Node.js on one machine.
 
-### Development
+### Setup
 
-`make dev` starts the development server.
+```bash
+$ git clone git@github.com:guardian/dotcom-rendering.git
+$ cd dotcom-rendering
+$ make dev
+```
 
-### Production
-
--   `make build` creates production-ready bundles.
--   `make start` starts the production server.
--   `make stop` stops the production server.
+This will start the development server.
 
 ## Other tasks
 
-### Code quality
+You can ensure your code passes code quality tests by running:
 
--   `make lint`
--   `make tsc`
--   `make test`
+```bash
+$ make validate
+``` 
 
-`make validate` runs all of the above, plus a final `make build`.
+This runs our linting tool, the TypeScript compiler and our tests, before finally building the bundles.
 
-If you get lint errors, `make fix` will attempt to automatically fix them for you.
+You can also run these tasks individually:
+
+```bash
+$ make lint
+$ make tsc
+$ make test
+```
+
+If you get lint errors, you can attempt to automatically fix them with:
+
+```bash
+$ make fix
+```
 
 See [the makefile](https://github.com/guardian/guui/blob/master/makefile) for the full list.
 
