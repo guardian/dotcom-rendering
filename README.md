@@ -1,4 +1,4 @@
-# dotcom-rendering [![GitHub version](https://badge.fury.io/gh/guardian%2Fguui.svg)](https://badge.fury.io/gh/guardian%2Fguui) [![Build Status](https://travis-ci.org/guardian/guui.svg?branch=master)](https://travis-ci.org/guardian/guui) [![Known Vulnerabilities](https://snyk.io/test/github/guardian/guui/badge.svg?targetFile=package.json)](https://snyk.io/test/github/guardian/guui?targetFile=package.json)
+# dotcom-rendering [![Known Vulnerabilities](https://snyk.io/test/github/guardian/dotcom-rendering/badge.svg)](https://snyk.io/test/github/guardian/dotcom-rendering)
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
 
