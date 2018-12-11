@@ -1,6 +1,7 @@
 import cloneDeep from 'lodash.clonedeep';
 import { string as curly_ } from 'curlyquotes';
 import clean_ from './clean';
+import { findPillar as findPillar_ } from './find-pillar';
 import { getSharingUrls as getSharingUrls_ } from './sharing-urls';
 import { extract } from './extract-capi';
 import { data } from '@root/fixtures/article';
@@ -8,7 +9,11 @@ import { data } from '@root/fixtures/article';
 const curly: any = curly_;
 const clean: any = clean_;
 const getSharingUrls: any = getSharingUrls_;
+const findPillar: any = findPillar_;
 
+jest.mock('./find-pillar', () => ({
+    findPillar: jest.fn(),
+}));
 jest.mock('curlyquotes', () => ({
     string: jest.fn(),
 }));
@@ -25,12 +30,14 @@ describe('extract-capi', () => {
         clean.mockImplementation((_: string) => _);
         curly.mockImplementation((_: string) => _);
         getSharingUrls.mockImplementation((_: string) => _);
+        findPillar.mockImplementation((_: string) => _);
     });
 
     afterEach(() => {
         curly.mockReset();
         clean.mockReset();
         getSharingUrls.mockReset();
+        findPillar.mockReset();
     });
 
     describe('extract', () => {
@@ -44,7 +51,7 @@ describe('extract-capi', () => {
             );
         });
 
-        it('throws error if webPublicationDate if available', () => {
+        it('throws error if webPublicationDate missing', () => {
             testData.config.page.webPublicationDate = null;
 
             expect(() => {
@@ -391,25 +398,25 @@ describe('extract-capi', () => {
 
             testData.config.page.pillar = testPillar;
 
+            findPillar.mockReturnValueOnce(testPillar);
+
             const { pillar } = extract(testData);
 
             expect(pillar).toBe(testPillar);
+            expect(findPillar).toHaveBeenCalledWith(testPillar);
         });
 
         it('defaults pillar to "news" if not valid', () => {
-            testData.config.page.pillar = 'foo';
+            const testPillar = 'foo';
+
+            testData.config.page.pillar = testPillar;
+
+            findPillar.mockReturnValueOnce(undefined);
 
             const { pillar } = extract(testData);
 
             expect(pillar).toBe('news');
-        });
-
-        it('rewrites pillar to "culture" from "arts"', () => {
-            testData.config.page.pillar = 'arts';
-
-            const { pillar } = extract(testData);
-
-            expect(pillar).toBe('culture');
+            expect(findPillar).toHaveBeenCalledWith(testPillar);
         });
 
         it('returns ageWarning as undefined if article not in tone/news', () => {
