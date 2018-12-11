@@ -1,6 +1,18 @@
-# Detailed installation steps
+# Detailed setup guide
 
-## Node.js
+- [Chat](#chat)
+- [Developing](#developing)
+- [Production](#production)
+- [Other tasks](#other-tasks)
+- [IDE setup](#ide-setup)
+
+## Chat
+
+Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
+
+## Developing
+
+### Setup
 
 The only thing you need to make sure you have installed before you get going is Node.
 
@@ -11,7 +23,7 @@ check the [.nvmrc](https://github.com/guardian/dotcom-rendering/blob/master/.nvm
 
 That's it – everything else should be installed for you on demand.
 
-## Development
+### Start
 
 Start the development server:
 
