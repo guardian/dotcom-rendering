@@ -9,23 +9,21 @@ describe('extract-config', () => {
         testData = cloneDeep(data);
     });
 
-    describe('extract', () => {
-        it('returns ajaxUrl if available', () => {
-            const testAjaxUrl = 'https://fetchMeSomething.com';
+    it('returns ajaxUrl if available', () => {
+        const testAjaxUrl = 'https://fetchMeSomething.com';
 
-            testData.config.page.ajaxUrl = testAjaxUrl;
+        testData.config.page.ajaxUrl = testAjaxUrl;
 
-            const { ajaxUrl } = extract(testData);
+        const { ajaxUrl } = extract(testData);
 
-            expect(ajaxUrl).toBe(testAjaxUrl);
-        });
+        expect(ajaxUrl).toBe(testAjaxUrl);
+    });
 
-        it('throws error if ajaxUrl unavailable', () => {
-            testData.config.page.ajaxUrl = null;
+    it('throws error if ajaxUrl unavailable', () => {
+        testData.config.page.ajaxUrl = null;
 
-            expect(() => {
-                extract(testData);
-            }).toThrow();
-        });
+        expect(() => {
+            extract(testData);
+        }).toThrow();
     });
 });

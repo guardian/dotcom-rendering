@@ -20,249 +20,248 @@ describe('extract-capi', () => {
     afterEach(() => {
         findPillar.mockReset();
     });
-    describe('extract', () => {
-        it('returns webTitle if available', () => {
-            const testWebTitle = 'Waldo Jeffers had reached his limit';
 
-            testData.config.page.webTitle = testWebTitle;
+    it('returns webTitle if available', () => {
+        const testWebTitle = 'Waldo Jeffers had reached his limit';
 
-            const { webTitle } = extract(testData);
+        testData.config.page.webTitle = testWebTitle;
 
-            expect(webTitle).toBe(testWebTitle);
-        });
+        const { webTitle } = extract(testData);
 
-        it('returns webTitle as empty string if missing', () => {
-            testData.config.page.webTitle = null;
+        expect(webTitle).toBe(testWebTitle);
+    });
 
-            const { webTitle } = extract(testData);
+    it('returns webTitle as empty string if missing', () => {
+        testData.config.page.webTitle = null;
 
-            expect(webTitle).toBe('');
-        });
+        const { webTitle } = extract(testData);
 
-        it('returns pillar if available', () => {
-            const testPillar = 'sport';
+        expect(webTitle).toBe('');
+    });
 
-            testData.config.page.pillar = testPillar;
+    it('returns pillar if available', () => {
+        const testPillar = 'sport';
 
-            findPillar.mockReturnValueOnce(testPillar);
+        testData.config.page.pillar = testPillar;
 
-            const { pillar } = extract(testData);
+        findPillar.mockReturnValueOnce(testPillar);
 
-            expect(pillar).toBe(testPillar);
-            expect(findPillar).toHaveBeenCalledWith(testPillar);
-        });
+        const { pillar } = extract(testData);
 
-        it('defaults pillar to "news" if not valid', () => {
-            const testPillar = 'foo';
+        expect(pillar).toBe(testPillar);
+        expect(findPillar).toHaveBeenCalledWith(testPillar);
+    });
 
-            testData.config.page.pillar = testPillar;
+    it('defaults pillar to "news" if not valid', () => {
+        const testPillar = 'foo';
 
-            findPillar.mockReturnValueOnce(undefined);
+        testData.config.page.pillar = testPillar;
 
-            const { pillar } = extract(testData);
+        findPillar.mockReturnValueOnce(undefined);
 
-            expect(pillar).toBe('news');
-            expect(findPillar).toHaveBeenCalledWith(testPillar);
-        });
+        const { pillar } = extract(testData);
 
-        it('returns section if section available', () => {
-            const testSection = 'money';
+        expect(pillar).toBe('news');
+        expect(findPillar).toHaveBeenCalledWith(testPillar);
+    });
 
-            testData.config.page.section = testSection;
+    it('returns section if section available', () => {
+        const testSection = 'money';
 
-            const { section } = extract(testData);
+        testData.config.page.section = testSection;
 
-            expect(section).toBe(testSection);
-        });
+        const { section } = extract(testData);
 
-        it('returns section as empty string if missing', () => {
-            testData.config.page.section = null;
+        expect(section).toBe(testSection);
+    });
 
-            const { section } = extract(testData);
+    it('returns section as empty string if missing', () => {
+        testData.config.page.section = null;
 
-            expect(section).toBe('');
-        });
+        const { section } = extract(testData);
 
-        it('returns contentType if contentType available', () => {
-            testData.config.page.contentType = 'Video Article';
+        expect(section).toBe('');
+    });
 
-            const { contentType } = extract(testData);
+    it('returns contentType if contentType available', () => {
+        testData.config.page.contentType = 'Video Article';
 
-            expect(contentType).toBe('videoarticle');
-        });
+        const { contentType } = extract(testData);
 
-        it('returns contentType as empty string if missing', () => {
-            testData.config.page.contentType = null;
+        expect(contentType).toBe('videoarticle');
+    });
 
-            const { contentType } = extract(testData);
+    it('returns contentType as empty string if missing', () => {
+        testData.config.page.contentType = null;
 
-            expect(contentType).toBe('');
-        });
+        const { contentType } = extract(testData);
 
-        it('returns commissioningDesks if commissioningDesks available', () => {
-            const testCommissioningDesks = 'Observer New Review';
+        expect(contentType).toBe('');
+    });
 
-            testData.config.page.commissioningDesks = testCommissioningDesks;
+    it('returns commissioningDesks if commissioningDesks available', () => {
+        const testCommissioningDesks = 'Observer New Review';
 
-            const { commissioningDesks } = extract(testData);
+        testData.config.page.commissioningDesks = testCommissioningDesks;
 
-            expect(commissioningDesks).toBe(testCommissioningDesks);
-        });
+        const { commissioningDesks } = extract(testData);
 
-        it('returns commissioningDesks as empty string if missing', () => {
-            testData.config.page.commissioningDesks = null;
+        expect(commissioningDesks).toBe(testCommissioningDesks);
+    });
 
-            const { commissioningDesks } = extract(testData);
+    it('returns commissioningDesks as empty string if missing', () => {
+        testData.config.page.commissioningDesks = null;
 
-            expect(commissioningDesks).toBe('');
-        });
+        const { commissioningDesks } = extract(testData);
 
-        it('returns contentId if contentId available', () => {
-            const testContentId = 'waldo-jeffers/has-reached-his-limit';
+        expect(commissioningDesks).toBe('');
+    });
 
-            testData.config.page.contentId = testContentId;
+    it('returns contentId if contentId available', () => {
+        const testContentId = 'waldo-jeffers/has-reached-his-limit';
 
-            const { contentId } = extract(testData);
+        testData.config.page.contentId = testContentId;
 
-            expect(contentId).toBe(testContentId);
-        });
+        const { contentId } = extract(testData);
 
-        it('returns contentId as empty string if missing', () => {
-            testData.config.page.contentId = null;
+        expect(contentId).toBe(testContentId);
+    });
 
-            const { contentId } = extract(testData);
+    it('returns contentId as empty string if missing', () => {
+        testData.config.page.contentId = null;
 
-            expect(contentId).toBe('');
-        });
+        const { contentId } = extract(testData);
 
-        it('returns authorIds if authorIds available', () => {
-            const testAuthorIds = 'profile/waldo-jeffers';
+        expect(contentId).toBe('');
+    });
 
-            testData.config.page.authorIds = testAuthorIds;
+    it('returns authorIds if authorIds available', () => {
+        const testAuthorIds = 'profile/waldo-jeffers';
 
-            const { authorIds } = extract(testData);
+        testData.config.page.authorIds = testAuthorIds;
 
-            expect(authorIds).toBe(testAuthorIds);
-        });
+        const { authorIds } = extract(testData);
 
-        it('returns authorIds as empty string if missing', () => {
-            testData.config.page.authorIds = null;
+        expect(authorIds).toBe(testAuthorIds);
+    });
 
-            const { authorIds } = extract(testData);
+    it('returns authorIds as empty string if missing', () => {
+        testData.config.page.authorIds = null;
 
-            expect(authorIds).toBe('');
-        });
+        const { authorIds } = extract(testData);
 
-        it('returns keywordIds if keywordIds available', () => {
-            const testKeywordIds = 'waldo-jeffers,marsha-bronson';
+        expect(authorIds).toBe('');
+    });
 
-            testData.config.page.keywordIds = testKeywordIds;
+    it('returns keywordIds if keywordIds available', () => {
+        const testKeywordIds = 'waldo-jeffers,marsha-bronson';
 
-            const { keywordIds } = extract(testData);
+        testData.config.page.keywordIds = testKeywordIds;
 
-            expect(keywordIds).toBe(testKeywordIds);
-        });
+        const { keywordIds } = extract(testData);
 
-        it('returns keywordIds as empty string if missing', () => {
-            testData.config.page.keywordIds = null;
+        expect(keywordIds).toBe(testKeywordIds);
+    });
 
-            const { keywordIds } = extract(testData);
+    it('returns keywordIds as empty string if missing', () => {
+        testData.config.page.keywordIds = null;
 
-            expect(keywordIds).toBe('');
-        });
+        const { keywordIds } = extract(testData);
 
-        it('returns toneIds if toneIds available', () => {
-            const testToneIds = 'waldo-jeffers,marsha-bronson';
+        expect(keywordIds).toBe('');
+    });
 
-            testData.config.page.toneIds = testToneIds;
+    it('returns toneIds if toneIds available', () => {
+        const testToneIds = 'waldo-jeffers,marsha-bronson';
 
-            const { toneIds } = extract(testData);
+        testData.config.page.toneIds = testToneIds;
 
-            expect(toneIds).toBe(testToneIds);
-        });
+        const { toneIds } = extract(testData);
 
-        it('returns toneIds as empty string if missing', () => {
-            testData.config.page.toneIds = null;
+        expect(toneIds).toBe(testToneIds);
+    });
 
-            const { toneIds } = extract(testData);
+    it('returns toneIds as empty string if missing', () => {
+        testData.config.page.toneIds = null;
 
-            expect(toneIds).toBe('');
-        });
+        const { toneIds } = extract(testData);
 
-        it('returns seriesId if seriesId available', () => {
-            const testSeriesId = 'waldo-jeffers';
+        expect(toneIds).toBe('');
+    });
 
-            testData.config.page.seriesId = testSeriesId;
+    it('returns seriesId if seriesId available', () => {
+        const testSeriesId = 'waldo-jeffers';
 
-            const { seriesId } = extract(testData);
+        testData.config.page.seriesId = testSeriesId;
 
-            expect(seriesId).toBe(testSeriesId);
-        });
+        const { seriesId } = extract(testData);
 
-        it('returns seriesId as empty string if missing', () => {
-            testData.config.page.seriesId = null;
+        expect(seriesId).toBe(testSeriesId);
+    });
 
-            const { seriesId } = extract(testData);
+    it('returns seriesId as empty string if missing', () => {
+        testData.config.page.seriesId = null;
 
-            expect(seriesId).toBe('');
-        });
+        const { seriesId } = extract(testData);
 
-        it('returns isHosted if isHosted available', () => {
-            testData.config.page.isHosted = true;
+        expect(seriesId).toBe('');
+    });
 
-            const { isHosted } = extract(testData);
+    it('returns isHosted if isHosted available', () => {
+        testData.config.page.isHosted = true;
 
-            expect(isHosted).toBe('true');
-        });
+        const { isHosted } = extract(testData);
 
-        it('returns isHosted as "false" if missing', () => {
-            testData.config.page.isHosted = null;
+        expect(isHosted).toBe('true');
+    });
 
-            const { isHosted } = extract(testData);
+    it('returns isHosted as "false" if missing', () => {
+        testData.config.page.isHosted = null;
 
-            expect(isHosted).toBe('false');
-        });
+        const { isHosted } = extract(testData);
 
-        it('returns edition if edition available', () => {
-            testData.config.page.edition = 'UK';
+        expect(isHosted).toBe('false');
+    });
 
-            const { edition } = extract(testData);
+    it('returns edition if edition available', () => {
+        testData.config.page.edition = 'UK';
 
-            expect(edition).toBe('uk');
-        });
+        const { edition } = extract(testData);
 
-        it('returns edition as "international" if edition is "int"', () => {
-            testData.config.page.edition = 'int';
+        expect(edition).toBe('uk');
+    });
 
-            const { edition } = extract(testData);
+    it('returns edition as "international" if edition is "int"', () => {
+        testData.config.page.edition = 'int';
 
-            expect(edition).toBe('international');
-        });
+        const { edition } = extract(testData);
 
-        it('returns edition as empty string if edition is missing', () => {
-            testData.config.page.edition = null;
+        expect(edition).toBe('international');
+    });
 
-            const { edition } = extract(testData);
+    it('returns edition as empty string if edition is missing', () => {
+        testData.config.page.edition = null;
 
-            expect(edition).toBe('');
-        });
+        const { edition } = extract(testData);
 
-        it('returns beaconUrl if beaconUrl available', () => {
-            const testBeaconUrl = 'waldo-jeffers';
+        expect(edition).toBe('');
+    });
 
-            testData.config.page.beaconUrl = testBeaconUrl;
+    it('returns beaconUrl if beaconUrl available', () => {
+        const testBeaconUrl = 'waldo-jeffers';
 
-            const { beaconUrl } = extract(testData);
+        testData.config.page.beaconUrl = testBeaconUrl;
 
-            expect(beaconUrl).toBe(testBeaconUrl);
-        });
+        const { beaconUrl } = extract(testData);
 
-        it('returns beaconUrl as empty string if missing', () => {
-            testData.config.page.beaconUrl = null;
+        expect(beaconUrl).toBe(testBeaconUrl);
+    });
 
-            const { beaconUrl } = extract(testData);
+    it('returns beaconUrl as empty string if missing', () => {
+        testData.config.page.beaconUrl = null;
 
-            expect(beaconUrl).toBe('');
-        });
+        const { beaconUrl } = extract(testData);
+
+        expect(beaconUrl).toBe('');
     });
 });
