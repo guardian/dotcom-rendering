@@ -1,0 +1,64 @@
+# Where should my code live?
+
+## Scripts
+
+Externally hosted third party scripts should always be loaded asynchronously. If possible, they should be loaded conditionally using JavaScript by injecting a script element into the head of the document.
+
+If a third party script needs to be loaded on every page, there are two ways it could be categorised: **low priority** or **high priority**.
+
+### Low priority scripts
+
+In the first instance, consider adding the script as a low priority script. These scripts are added to the bottom of the document `<body>` and loaded asynchronously. They will probably run after the main application JavaScript bundle, _but this is not guaranteed._
+
+An example is the [Google Analytics tracking script](https://developers.google.com/analytics/devguides/collection/analyticsjs/).
+
+They can be added to the `lowPriorityScripts` array in the [`packages/frontend/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/packages/frontend/web/document.tsx) module.
+
+### High priority scripts
+
+High priority scripts are injected by JavaScript running in the `<head>` of the document. They are loaded asynchronously and executed in the order they are requested. 
+
+Examples include the [polyfill.io](https://polyfill.io) response and the main application JavaScript bundles.
+
+⚠️ **High priority scripts should be added sparingly.**
+
+They can be added to the `priorityScripts` array in the [`packages/frontend/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/packages/frontend/web/document.tsx) module.
+
+## Data extraction
+
+`dotcom-rendering` receives most of its data from CAPI, via the [`DotcomponentsDataModel`](https://github.com/guardian/frontend/blob/master/article/app/model/dotcomponents/DotcomponentsDataModel.scala) in `frontend`.
+
+The data received from CAPI is probably not in an immediately useful form, and some data extraction or parsing logic is needed. When contemplating where to put this logic, consider the following axioms, in order of importance.
+
+### Axiom 1
+
+**If CAPI data needs to be parsed or extracted for presentation, this logic should live in `frontend`**
+
+Since `dotcom-rendering` shares content data with `frontend`, it makes sense for `frontend` to be the source of truth for content data. The parsed data should be added to the `DotcomponentsDataModel` and sent to `dotcom-rendering`.
+
+### Axiom 2
+
+**Favour computation on the rendering server over computation on the client**
+
+Sometimes data extraction logic does not need to be shared between `frontend` and `dotcom-rendering`. If logic needs to be executed in `dotcom-rendering`, it is preferable to execute this on the server, in `packages/frontend/model`. Logic on the server is heavily cached by Fastly, reducing the burden on the client.
+
+**Note:** Not all logic can be cached on the server, for instance logic involving geolocation or user data. Take care not to split the cache without due consideration.
+
+### Axiom 3
+
+**Minimise data over the wire**
+
+Data is passed between `frontend` and `dotcom-rendering` via a network request, adding latency to the application. It follows that reducing data reduces latency. If executing some data extraction logic on `frontend` significantly increases the amount of data sent over the wire, consider sending the unprocessed data and moving the logic to `dotcom-rendering`.
+
+### Architecture Decision Records
+
+- [New elements models in frontend](../architecture/013-new-elements-models-in-frontend.md)
+- [Client side computation](../architecture/016-client-side-computation.md)
+
+## Components
+
+Frontend-specific components live in `packages/frontend`. 
+
+Note that [Frontend Web](../../packages/frontend/web) and [Frontend AMP](../../packages/frontend/amp) are separate applications that do not share code, including components. If you build a new component for the web, consider whether you need to build an analogous component for AMP too.
+
+If a component is generic enough that it may have value outside of a Frontend context (i.e. it could feasibly be shared with other React applications), consider adding it to [GUUI](../../packages/guui), our shared component library.
