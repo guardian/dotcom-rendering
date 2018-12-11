@@ -13,10 +13,10 @@ import AMPArticle from '@frontend/amp/pages/Article';
 import { dist, root, port } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 
-import { extract as extractCAPI } from '@frontend/lib/parse-capi/extract-capi';
-import { extract as extractNAV } from '@frontend/lib/parse-capi/extract-nav';
-import { extract as extractGA } from '@frontend/lib/parse-capi/extract-ga';
-import { extract as extractConfig } from '@frontend/lib/parse-capi/extract-config';
+import { extract as extractCAPI } from '@frontend/lib/model/extract-capi';
+import { extract as extractNAV } from '@frontend/lib/model/extract-nav';
+import { extract as extractGA } from '@frontend/lib/model/extract-ga';
+import { extract as extractConfig } from '@frontend/lib/model/extract-config';
 
 import { extractScripts } from '@frontend/amp/components/lib/AMPScripts';
 
