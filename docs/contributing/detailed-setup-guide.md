@@ -48,6 +48,13 @@ You can preview an article from `theguardian.com` by appending the query string 
 http://localhost:3030/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 ```
 
+You can use this technique to integrate with a locally running instance of `frontend`. This is especially useful for testing changes to the data model:
+
+```
+http://localhost:3030/Article?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+```
+
+
 ### Debugging tools
 
 For ease of development you may want to install:
