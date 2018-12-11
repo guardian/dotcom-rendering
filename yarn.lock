@@ -5315,7 +5315,7 @@ log-symbols@^2.0.0:
   dependencies:
     chalk "^2.0.1"
 
-log-update@2.3.x, log-update@^2.3.0:
+log-update@2.3.x:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/log-update/-/log-update-2.3.0.tgz#88328fd7d1ce7938b29283746f0b1bc126b24708"
   dependencies:
@@ -8111,12 +8111,6 @@ tar@^4:
     mkdirp "^0.5.0"
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
-
-term-size@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/term-size/-/term-size-1.2.0.tgz#458b83887f288fc56d6fffbfad262e26638efa69"
-  dependencies:
-    execa "^0.7.0"
 
 test-exclude@^4.2.1:
   version "4.2.3"

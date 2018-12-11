@@ -5,13 +5,11 @@ const glob = promisify(require('glob'));
 const { smart: merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('./plugins/report-bundle-size');
-const Progress = require('./plugins/progress');
 const { root, dist, siteName } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
 
 const reportBundleSize = new ReportBundleSize();
-const progress = new Progress();
 
 const common = ({ platform, page = '' }) => ({
     name: platform,
@@ -76,7 +74,6 @@ const common = ({ platform, page = '' }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
-        !process.env.TEAMCITY && progress(`${siteName}.${platform}.${page}`),
         PROD && !process.env.HIDE_BUNDLES && reportBundleSize,
         PROD &&
             new BundleAnalyzerPlugin({
