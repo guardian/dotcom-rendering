@@ -13,12 +13,11 @@ import AMPArticle from '@frontend/amp/pages/Article';
 import { dist, root, port } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 
-import {
-    extractArticleMeta,
-    extractNavMeta,
-    extractConfigMeta,
-    extractGAMeta,
-} from '@frontend/lib/parse-capi';
+import { extract as extractCAPI } from '@frontend/lib/model/extract-capi';
+import { extract as extractNAV } from '@frontend/lib/model/extract-nav';
+import { extract as extractGA } from '@frontend/lib/model/extract-ga';
+import { extract as extractConfig } from '@frontend/lib/model/extract-config';
+
 import { extractScripts } from '@frontend/amp/components/lib/AMPScripts';
 
 const renderArticle = ({ body }: express.Request, res: express.Response) => {
@@ -27,10 +26,10 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
             data: {
                 site: 'frontend',
                 page: 'Article',
-                CAPI: extractArticleMeta(body),
-                NAV: extractNavMeta(body),
-                config: extractConfigMeta(body),
-                GA: extractGAMeta(body),
+                CAPI: extractCAPI(body),
+                NAV: extractNAV(body),
+                config: extractConfig(body),
+                GA: extractGA(body),
             },
         });
 
@@ -42,14 +41,14 @@ const renderArticle = ({ body }: express.Request, res: express.Response) => {
 
 const renderAMPArticle = ({ body }: express.Request, res: express.Response) => {
     try {
-        const CAPI = extractArticleMeta(body);
+        const CAPI = extractCAPI(body);
         const resp = AMPDocument({
             scripts: extractScripts(CAPI.elements),
             body: (
                 <AMPArticle
                     articleData={CAPI}
-                    nav={extractNavMeta(body)}
-                    config={extractConfigMeta(body)}
+                    nav={extractNAV(body)}
+                    config={extractConfig(body)}
                 />
             ),
         });
