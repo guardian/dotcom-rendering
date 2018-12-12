@@ -63,7 +63,7 @@ We recommend using [VSCode](https://code.visualstudio.com/).
 
 ### Extensions
 
-VSCode should prompt you to install our recommended extensions these when you open the project. 
+VSCode should prompt you to install our recommended extensions when you open the project. 
 
 You can also find these extensions by searching for `@recommended` in the extensions pane.
 
