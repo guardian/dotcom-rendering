@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { Section, Tag, tag } from './primitives/moustache';
+import {
+    MoustacheSection,
+    MoustacheVariable,
+    MoustacheTemplate,
+    moustacheVariable,
+} from './primitives/moustache';
 import { serif } from '@guardian/pasteup/fonts';
 
 import VideoIcon from '@guardian/pasteup/icons/video-icon.svg';
@@ -77,26 +82,26 @@ export const Onwards: React.SFC<{ path: string }> = ({ path }) => (
         src={path}
         credentials="include"
     >
-        <template type="amp-mustache">
-            <Section name="showContent">
+        <MoustacheTemplate>
+            <MoustacheSection name="showContent">
                 <div className={inner}>
                     <div className={header}>
-                        <Tag name="displayName" />
+                        <MoustacheVariable name="displayName" />
                     </div>
-                    <Section name="description">
+                    <MoustacheSection name="description">
                         {/*  Don't show if there is not description WHAT STYLES HERE */}
                         <div>
-                            <Tag name="description" />
+                            <MoustacheVariable name="description" />
                         </div>
-                    </Section>
+                    </MoustacheSection>
 
-                    <Section name="content">
-                        <Section name="headline">
+                    <MoustacheSection name="content">
+                        <MoustacheSection name="headline">
                             {/* Don't show if headline is empty */}
                             <div className={item}>
                                 <div className={imageContainer}>
                                     <amp-img
-                                        src={tag('thumbnail')}
+                                        src={moustacheVariable('thumbnail')}
                                         layout="fixed"
                                         width="126"
                                         height="75"
@@ -106,36 +111,36 @@ export const Onwards: React.SFC<{ path: string }> = ({ path }) => (
                                     <div>
                                         <h2 className={headline}>
                                             <span>
-                                                <Section name="isVideo">
+                                                <MoustacheSection name="isVideo">
                                                     <VideoIcon />
-                                                </Section>
-                                                <Section name="isGallery">
+                                                </MoustacheSection>
+                                                <MoustacheSection name="isGallery">
                                                     <Camera />
-                                                </Section>
-                                                <Section name="isAudio">
+                                                </MoustacheSection>
+                                                <MoustacheSection name="isAudio">
                                                     <VolumeHigh />
-                                                </Section>
-                                                <Section name="isComment">
+                                                </MoustacheSection>
+                                                <MoustacheSection name="isComment">
                                                     <Quote />
-                                                </Section>
+                                                </MoustacheSection>
                                             </span>
-                                            <Tag name="headline" />
+                                            <MoustacheVariable name="headline" />
                                         </h2>
-                                        <Section name="isComment">
+                                        <MoustacheSection name="isComment">
                                             <div>
-                                                <Tag name="byline" />
+                                                <MoustacheVariable name="byline" />
                                             </div>
-                                        </Section>
+                                        </MoustacheSection>
                                     </div>
                                     <aside>
                                         <time>
-                                            <Section name="showWebPublicationDate">
+                                            <MoustacheSection name="showWebPublicationDate">
                                                 <Clock />
                                                 <span>
                                                     <span>Published: </span>
-                                                    <Tag name="webPublicationDate" />
+                                                    <MoustacheVariable name="webPublicationDate" />
                                                 </span>
-                                            </Section>
+                                            </MoustacheSection>
                                         </time>
                                     </aside>
                                 </div>
@@ -143,17 +148,17 @@ export const Onwards: React.SFC<{ path: string }> = ({ path }) => (
                             <a
                                 className={link}
                                 // tslint:disable-line:react-a11y-anchors
-                                href={`https://www.theguardian.com${tag(
+                                href={`https://www.theguardian.com${moustacheVariable(
                                     'url',
                                 )}`}
                             >
-                                <Tag name="headline" />
+                                <MoustacheVariable name="headline" />
                             </a>
-                        </Section>
-                    </Section>
+                        </MoustacheSection>
+                    </MoustacheSection>
                 </div>
-            </Section>
-        </template>
+            </MoustacheSection>
+        </MoustacheTemplate>
         {/* <div overflow={true}>
             <Plus />
         </div> */}
