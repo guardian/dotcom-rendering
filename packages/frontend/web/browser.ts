@@ -2,7 +2,7 @@ import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
-
+import { init as initRaven } from '@frontend/lib/raven';
 import {
     init as initGa,
     sendPageView as sendGaPageView,
@@ -18,6 +18,7 @@ const go = () => {
     }
 
     initGa();
+    initRaven(data);
 
     const container = document.getElementById('app');
 
