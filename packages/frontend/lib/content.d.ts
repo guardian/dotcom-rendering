@@ -57,8 +57,8 @@ interface CommentBlockElement {
 interface SoundcloudBlockElement {
     _type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
     html: string;
-    track: string | null;
-    playlist: string | null;
+    id: string;
+    isTrack: boolean;
     isMandatory: boolean;
 }
 

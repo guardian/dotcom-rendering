@@ -6,7 +6,7 @@ import { InstagramBlockComponent } from '@frontend/amp/components/elements/Insta
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
 import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
-import { SoundcloudBlockComponent } from '../elements/SoundcloudBlockComponent';
+import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
@@ -49,7 +49,6 @@ export const Elements: React.SFC<{
                 default:
                     // tslint:disable-next-line:no-console
                     console.log('Unsupported Element', JSON.stringify(element));
-
                     return null;
             }
         })
