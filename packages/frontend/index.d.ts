@@ -101,6 +101,8 @@ interface CAPIType {
     sectionName: string;
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];
+    shouldHideAds: boolean;
+    webURL: string;
 }
 
 interface TagType {
@@ -149,6 +151,7 @@ declare namespace JSX {
         'amp-list': any;
         'amp-instagram': any;
         'amp-soundcloud': any;
+        'amp-iframe': any;
         template: any;
     }
 }
