@@ -15,4 +15,6 @@ try {
 }
 
 // TC doesn't want them, but everyone else does
-if (process.env.TEAMCITY !== 'true') fs.symlinkSync(src, target);
+if (process.env.TEAMCITY !== 'true') {
+    fs.symlinkSync(src, target);
+}
