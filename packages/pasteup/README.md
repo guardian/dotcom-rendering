@@ -58,7 +58,7 @@ export const breakpoints = {
 };
 ```
 
-1. Values: `mobile`, `mobileMedium`, `mobileLandscape`, `phablet`, `tablet`, `desktop`, `leftCol`, `wide`. Where, for instance, `mobile` is repalced by
+1. Values: `mobile`, `mobileMedium`, `mobileLandscape`, `phablet`, `tablet`, `desktop`, `leftCol`, `wide`. Where, for instance, `mobile` is replaced by
 
 	```
 	@media (min-width: 980px)
