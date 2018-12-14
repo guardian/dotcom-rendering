@@ -20,7 +20,7 @@ High priority scripts are injected by JavaScript running in the `<head>` of the 
 
 Examples include the [polyfill.io](https://polyfill.io) response and the main application JavaScript bundles.
 
-⚠️ **High priority scripts should be added sparingly.**
+⚠️ **High priority scripts have a considerable impact on site performance and should be added sparingly. Please get approval from at least 2 members of the dotcom platform team before adding a new script here.**
 
 They can be added to the `priorityScripts` array in the [`packages/frontend/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/packages/frontend/web/document.tsx) module.
 
