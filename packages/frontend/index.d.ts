@@ -147,6 +147,7 @@ declare namespace JSX {
         'amp-twitter': any;
         'amp-list': any;
         'amp-instagram': any;
+        'amp-soundcloud': any;
         template: any;
     }
 }

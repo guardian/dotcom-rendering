@@ -54,10 +54,19 @@ interface CommentBlockElement {
     dateTime: string;
 }
 
+interface SoundcloudBlockElement {
+    _type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
+    html: string;
+    id: string;
+    isTrack: boolean;
+    isMandatory: boolean;
+}
+
 type CAPIElement =
     | TextBlockElement
     | ImageBlockElement
     | InstagramBlockElement
     | TweetBlockElement
     | RichLinkBlockElement
-    | CommentBlockElement;
+    | CommentBlockElement
+    | SoundcloudBlockElement;
