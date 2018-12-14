@@ -108,6 +108,7 @@ interface TagType {
     type: string;
     title: string;
     twitterHandle?: string;
+    paidContentType?: string;
 }
 
 /**
