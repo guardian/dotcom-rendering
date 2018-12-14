@@ -43,32 +43,32 @@ Where `desktop` will be replaced by
 
 The starting point is the base mapping (breakpoints)
 
-TODO: replace this by a table
+| name            |  size  |
+|:----------------|-------:|
+| mobile          |  320px |
+| mobileMedium    |  360px |
+| mobileLandscape |  480px |
+| phablet         |  660px |
+| tablet          |  740px |
+| desktop         |  980px |
+| leftCol         | 1140px |
+| wide            | 1300px |
 
-```
-export const breakpoints = {
-    mobile: 320,
-    mobileMedium: 360,
-    mobileLandscape: 480,
-    phablet: 660,
-    tablet: 740,
-    desktop: 980,
-    leftCol: 1140,
-    wide: 1300,
-};
-```
+The API exposes the following values:
 
-1. Values: `mobile`, `mobileMedium`, `mobileLandscape`, `phablet`, `tablet`, `desktop`, `leftCol`, `wide`. Where, for instance, `mobile` is replaced by
+1. `mobile`, `mobileMedium`, `mobileLandscape`, `phablet`, `tablet`, `desktop`, `leftCol` and `wide`. For instance, `mobile` is replaced by
 
 	```
 	@media (min-width: 980px)
 	```
-1. Values: `until.[symbol]`, where `symbol` ranges over the constants in subsection 1). For instance, `until.desktop` is replace by
+
+1. `until.[symbol]`, where `symbol` ranges over the constants in subsection 1). For instance, `until.desktop` is replace by
 
 	```
 	@media (max-width: 979px)
 	```
-1. Values: `from.[symbol1].until.[symbol2]`, where `symbol` ranges over the constants in subsection 1). For instance `from.tablet.until.desktop` is replaced by
+
+1. `from.[symbol1].until.[symbol2]`, where `symbol` ranges over the constants in subsection 1). For instance, `from.tablet.until.desktop` is replaced by
 
 	```
 	@media (min-width: 740px) and (max-width: 979px)
