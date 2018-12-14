@@ -4,7 +4,7 @@ The Guardian Design Tokens are intended to be used in conjunction with a CSS-in-
 
 **Under construction 🚧**
 
-This file documents the current version of Pasteup, and the dotcom-rendering use of it, but note that this package is still under heavy construction.
+This file documents the current version of Pasteup. This package is still under heavy construction, please do not install this in applications intended for use in production. The API may change significantly before it is out of alpha. 
 
 ## Motivation
 
