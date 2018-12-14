@@ -5,7 +5,7 @@ import { css } from 'react-emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainBlock } from '@frontend/amp/components/MainBlock';
 import Submeta from '@frontend/amp/components/Submeta';
-import { Onwards } from './Onwards';
+import { Onwards } from '@frontend/amp/components/Onwards';
 
 const body = css`
     background-color: white;
