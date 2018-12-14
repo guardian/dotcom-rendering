@@ -63,7 +63,7 @@ export const breakpoints = {
 	```
 	@media (min-width: 980px)
 	```
-1. Values: `until.[symbol]`, where `symbol` ranges over the constants in subsection 1). For instance, `until.desktop` means
+1. Values: `until.[symbol]`, where `symbol` ranges over the constants in subsection 1). For instance, `until.desktop` is replace by
 
 	```
 	@media (max-width: 979px)
