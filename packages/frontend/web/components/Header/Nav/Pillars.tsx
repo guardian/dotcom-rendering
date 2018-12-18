@@ -6,18 +6,14 @@ import {
     desktop,
     leftCol,
     mobileLandscape,
+    mobileMedium,
+    wide,
+    until,
 } from '@guardian/pasteup/breakpoints';
 
 import { headline } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
-
-const pillarColours = pillarMap(
-    pillar =>
-        css`
-            color: ${pillarPalette[pillar].main};
-        `,
-);
 
 const pillarsStyles = css`
     clear: right;
@@ -30,12 +26,31 @@ const pillarsStyles = css`
     }
     li {
         float: left;
+        display: block;
         position: relative;
         ${desktop} {
-            width: 118px;
+            width: 134px;
         }
         ${leftCol} {
-            width: 140px;
+            width: 160px;
+        }
+    }
+
+    :after {
+        content: '';
+        border-top: 1px solid ${palette.brand.pastel};
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 37px;
+        ${tablet} {
+            height: 49px;
+            border: 1px solid ${palette.brand.pastel};
+            border-bottom: 0;
+        }
+        ${desktop} {
+            height: 43px;
         }
     }
 `;
@@ -47,8 +62,23 @@ const showMenuUnderline = css`
 `;
 
 const pillarStyle = css`
-    & :first-child > a {
-        padding-left: 0;
+    :first-child {
+        margin-left: -20px;
+        ${desktop} {
+            width: 144px;
+        }
+        ${leftCol} {
+            width: 171px;
+        }
+        a {
+            padding-left: 20px;
+        }
+    }
+
+    :last-child a:before {
+        ${until.desktop} {
+            content: none;
+        }
     }
 `;
 
@@ -57,73 +87,96 @@ const pillarDivider = css`
         content: '';
         display: block;
         position: absolute;
-        left: 0;
-        top: 4px;
+        right: 0;
+        top: 0;
         bottom: 0;
         width: 1px;
-        background-color: ${palette.neutral[86]};
+        background-color: ${palette.brand.pastel};
+
+        ${tablet} {
+            bottom: 17px;
+        }
+
+        ${desktop} {
+            bottom: .6em;
+        }
     }
 `;
 
 const linkStyle = css`
-    ${headline(2)};
-    font-weight: 700;
-    text-decoration: none;
+    ${headline(2)}
+    box-sizing: border-box;
+    font-weight: 900;
+    color: ${palette.neutral[100]};
     cursor: pointer;
     display: block;
-    height: 30px;
-    padding: 0 4px;
+    font-size: 15.4px;
+    height: 36px;
+    line-height: 1;
+    padding: 9px 5px 0;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
+    z-index: 1;
+    ${mobileMedium} {
+        font-size: 15.7px;
+        padding: 9px 4px 0;
+    }
+    ${mobileLandscape} {
+        font-size: 18px;
+        padding: 7px 4px 0;
+    }
     ${tablet} {
-        ${headline(3)};
-        height: 42px;
-        padding-right: 20px;
-        padding-left: 5px;
-    }
-    ${leftCol} {
+        font-size: 22px;
+        padding-top: 11px;
         height: 48px;
-        ${headline(4)};
+        padding-right: 20px;
+        padding-left: 9px;
     }
-    :after {
-        content: '';
-        display: block;
-        left: 0;
-        position: absolute;
-        right: 0;
-        bottom: -4px;
-        transition: transform 150ms ease-out;
+    ${desktop} {
+        padding-top: 7px;
+        height: 42px;
+    }
+    ${wide} {
+        font-size: 24px;
     }
     :focus:after {
-        transform: translateY(-4px);
+        transform: translateY(4px);
     }
     :hover {
         text-decoration: none;
     }
     :hover:after {
-        transform: translateY(-4px);
+        transform: translateY(4px);
     }
 `;
 const pillarUnderline = pillarMap(
     pillar => css`
         :after {
-            border-bottom: 4px solid ${pillarPalette[pillar].dark};
+            border-top: 4px solid ${pillarPalette[pillar].bright};
+            left: 0;
+            right: 1px;
+            top: -4px;
+            content: '';
+            display: block;
+            position: absolute;
+            transition: transform .3s ease-in-out;
         }
     `,
 );
 
 const forceUnderline = css`
     :after {
-        transform: translateY(-4px);
+        transform: translateY(4px);
     }
     :focus:after {
-        transform: translateY(-4px);
+        transform: translateY(4px);
     }
     :hover {
         text-decoration: none;
     }
     :hover:after {
-        transform: translateY(-4px);
+        transform: translateY(4px);
     }
 `; // A11Y warning: this styling has no focus state for the selected pillar
 
@@ -136,12 +189,12 @@ const Pillars: React.SFC<{
         {pillars.map((p, i) => (
             <li
                 key={p.title}
-                className={cx(pillarStyle, { [pillarDivider]: i > 0 })}
+                className={pillarStyle}
             >
                 <a
                     className={cx(
+                        pillarDivider,
                         linkStyle,
-                        pillarColours[p.pillar],
                         pillarUnderline[p.pillar],
                         {
                             [showMenuUnderline]: showMainMenu,

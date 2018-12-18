@@ -12,11 +12,12 @@ const ColumnsStyle = css`
     max-width: none;
     ${desktop} {
         max-width: 980px;
-        background-color: ${palette.neutral[97]};
         padding: 0 20px;
         position: relative;
         margin: 0 auto;
         display: flex;
+        border-left: 1px solid ${palette.brand.pastel};
+        border-right: 1px solid ${palette.brand.pastel};
     }
     ${leftCol} {
         max-width: 1140px;
@@ -33,7 +34,7 @@ const desktopBrandExtensionColumn = css`
     display: none;
     position: absolute;
     right: 20px;
-    top: 18px;
+    top: 6px;
     bottom: 0;
 `;
 
@@ -49,7 +50,7 @@ const brandExtensionList = css`
     flex-direction: column;
     padding-bottom: 0;
     ${leftCol} {
-        width: 220px;
+        width: 140px;
     }
     ${wide} {
         width: 300px;
@@ -63,12 +64,12 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
-    ${headline(4)};
+    ${headline(3)};
     font-weight: 700;
     background-color: transparent;
     border: 0;
     box-sizing: border-box;
-    color: ${palette.neutral[7]};
+    color: ${palette.neutral[100]};
     cursor: pointer;
     display: inline-block;
     outline: none;
@@ -83,10 +84,12 @@ const brandExtensionLink = css`
     ${desktop} {
         padding: 6px 0;
     }
+    ${wide} {
+        font-size: 24px;
+    }
     :hover,
     :focus {
-        color: ${palette.neutral[20]};
-        text-decoration: underline;
+        color: ${palette.highlight.main};
     }
     > * {
         pointer-events: none;

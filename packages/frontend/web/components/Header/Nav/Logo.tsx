@@ -6,35 +6,30 @@ import {
     mobileLandscape,
     tablet,
     desktop,
-    leftCol,
     wide,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
+import { palette } from '@guardian/pasteup/palette';
 import TheGuardianLogoSVG from '@guardian/pasteup/logos/the-guardian.svg';
 
 const link = css`
     float: right;
-    margin-bottom: 16px;
-    margin-right: 50px;
-    margin-top: 3px;
+    margin-top: 10px;
+    margin-right: 54px;
+    margin-bottom: 21px;
+
     ${mobileMedium} {
-        margin-right: 45px;
-    }
-    ${mobileMedium} {
-        margin-right: 6px;
+        margin-right: 10px;
     }
     ${mobileLandscape} {
-        margin-right: 17px;
+        margin-right: 20px;
     }
     ${desktop} {
-        margin-bottom: -38px;
         margin-top: 5px;
+        margin-bottom: 15px;
         position: relative;
         z-index: 1071;
-    }
-    ${leftCol} {
-        margin-bottom: -44px;
     }
     ${wide} {
         margin-right: 96px;
@@ -53,12 +48,12 @@ const style = css`
         width: 224px;
     }
     ${desktop} {
-        height: 80px;
-        width: 249px;
-    }
-    ${leftCol} {
         height: 95px;
         width: 295px;
+    }
+
+    path {
+        fill: ${palette.neutral[100]};
     }
 `;
 

@@ -1,13 +1,11 @@
 import React, { Component, createRef } from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
 
 import { Container } from '@guardian/guui';
 import { Inner } from './Inner';
 
 const subnavWrapper = css`
     background-color: white;
-    border-top: 0.0625rem solid ${palette.neutral[86]};
 `;
 
 interface Props {

@@ -10,35 +10,27 @@ import {
 import { palette } from '@guardian/pasteup/palette';
 
 const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
-    background-color: ${palette.neutral[7]};
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
-    color: ${palette.neutral[97]};
+    background-color: ${palette.highlight.main};
+    color: ${palette.neutral[7]};
     cursor: pointer;
-    height: 40px;
-    min-width: 40px;
+    height: 42px;
+    min-width: 42px;
     position: absolute;
     border: 0;
     border-radius: 50%;
     outline: none;
     z-index: ${showMainMenu ? 1071 : 0};
-    top: 17px;
     right: 5px;
-    ${mobileLandscape} {
-        top: 24px;
-    }
+    bottom: 48px;
     ${mobileMedium} {
-        bottom: -6px;
-        height: 48px;
-        min-width: 48px;
-        top: auto;
+        bottom: -3px;
+        right: 5px;
     }
     ${mobileLandscape} {
-        right: 46px;
+        right: 18px;
     }
     ${tablet} {
-        right: 58px;
-        height: 56px;
-        min-width: 56px;
+        bottom: 3px;
     }
     ${desktop} {
         display: none;

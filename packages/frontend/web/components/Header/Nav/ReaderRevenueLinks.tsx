@@ -6,25 +6,34 @@ import { palette } from '@guardian/pasteup/palette';
 import {
     mobileLandscape,
     tablet,
+    desktop,
     mobileMedium,
     until,
+    leftCol,
 } from '@guardian/pasteup/breakpoints';
 
 import { getCookie } from '@frontend/web/lib/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
 const message = css`
-    color: ${palette.neutral[97]};
+    color: ${palette.highlight.main};
+    display: none;
     font-family: ${serif.headline};
-    font-size: 13px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.2;
-    padding: 6px 20px 3px;
-    position: relative;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    padding: 3px 0 12px;
 
     ${tablet} {
-        font-size: 14px;
+        display: block;
+    }
+
+    ${desktop} {
+        font-size: 26px;
+    }
+
+    ${leftCol} {
+        font-size: 32px;
     }
 `;
 
@@ -48,6 +57,12 @@ const hidden = css`
     display: none;
 `;
 
+const readerRevenueLinks = css`
+    position: absolute;
+    left: 20px;
+    top: 40px;
+`;
+
 const ReaderRevenueLinks: React.SFC<{
     edition: Edition;
     urls: {
@@ -63,35 +78,37 @@ const ReaderRevenueLinks: React.SFC<{
                 <>
                     {data && (
                         <>
-                            <div className={message}>Support The Guardian</div>
-                            <a
-                                className={cx(link, hiddenUntilTablet)}
-                                href={urls.contribute}
-                            >
-                                Contribute
-                            </a>
-                            <a
-                                className={cx(link, hiddenUntilTablet)}
-                                href={urls.subscribe}
-                            >
-                                Subscribe
-                            </a>
-                            <a
-                                className={cx(link, hiddenFromTablet, {
-                                    [hidden]: edition !== 'UK',
-                                })}
-                                href={urls.support}
-                            >
-                                Support us
-                            </a>
-                            <a
-                                className={cx(link, hiddenFromTablet, {
-                                    [hidden]: edition === 'UK',
-                                })}
-                                href={urls.contribute}
-                            >
-                                Contribute
-                            </a>
+                            <div className={readerRevenueLinks}>
+                                <div className={message}>Support The Guardian</div>
+                                <a
+                                    className={cx(link, hiddenUntilTablet)}
+                                    href={urls.contribute}
+                                >
+                                    Contribute
+                                </a>
+                                <a
+                                    className={cx(link, hiddenUntilTablet)}
+                                    href={urls.subscribe}
+                                >
+                                    Subscribe
+                                </a>
+                                <a
+                                    className={cx(link, hiddenFromTablet, {
+                                        [hidden]: edition !== 'UK',
+                                    })}
+                                    href={urls.support}
+                                >
+                                    Support us
+                                </a>
+                                <a
+                                    className={cx(link, hiddenFromTablet, {
+                                        [hidden]: edition === 'UK',
+                                    })}
+                                    href={urls.contribute}
+                                >
+                                    Contribute
+                                </a>
+                            </div>
                         </>
                     )}
                 </>

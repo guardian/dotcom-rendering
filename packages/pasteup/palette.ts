@@ -28,7 +28,7 @@ export interface OtherColours {
     specialReport: { dark: colour };
     labs: { dark: colour; main: colour };
     green: { dark: colour; main: colour };
-    brand: { dark: colour; main: colour; pastel: colour;};
+    brand: { dark: colour; main: colour; pastel: colour };
 }
 
 export const palette: AllPillarColours & OtherColours = {

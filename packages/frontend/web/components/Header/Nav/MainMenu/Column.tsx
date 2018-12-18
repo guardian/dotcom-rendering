@@ -34,11 +34,11 @@ const pillarDivider = css`
             content: '';
             display: block;
             position: absolute;
-            left: 0;
+            right: 0;
             top: 0;
             bottom: -100px;
             width: 1px;
-            background-color: ${palette.neutral[86]};
+            background-color: ${palette.brand.pastel};
             z-index: 1;
         }
     }
@@ -50,7 +50,7 @@ const columnLinkTitle = css`
     text-decoration: none;
     border: 0;
     box-sizing: border-box;
-    color: ${palette.neutral[7]};
+    color: ${palette.neutral[100]};
     cursor: pointer;
     display: inline-block;
     font-weight: 500;
@@ -63,12 +63,13 @@ const columnLinkTitle = css`
         padding-left: 60px;
     }
     ${desktop} {
-        ${headline(1)};
+        font-size: 16px;
+        line-height: 1.2;
         padding: 6px 0;
     }
     :hover,
     :focus {
-        color: ${palette.neutral[20]};
+        color: ${palette.highlight.main};
         text-decoration: underline;
     }
 
@@ -107,7 +108,7 @@ const ColumnLink: React.SFC<{
 );
 
 const columnLinks = css`
-    ${textSans(6)};
+    ${textSans(5)};
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -115,15 +116,13 @@ const columnLinks = css`
     margin: 0;
     padding: 0 0 12px;
     position: relative;
-    background-color: ${palette.neutral[97]};
     ${desktop} {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         order: 1;
-        background-color: ${palette.neutral[97]};
         width: 100%;
-        padding: 0 5px;
+        padding: 0 9px;
     }
     ${pillarDivider};
 `;
@@ -131,9 +130,6 @@ const columnLinks = css`
 const firstColumn = css`
     ${desktop} {
         padding-left: 0;
-        :before {
-            display: none;
-        }
     }
 `;
 
@@ -178,7 +174,11 @@ const columnStyle = css`
         position: relative;
     }
     ${leftCol} {
-        width: 140px;
+        width: 160px;
+
+        :first-child {
+            width: 150px;
+        }
     }
 `;
 

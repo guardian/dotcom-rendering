@@ -4,9 +4,17 @@ import { css, cx } from 'emotion';
 import Dropdown, {
     Link as DropdownLink,
 } from '@guardian/guui/components/Dropdown/Dropdown';
+import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
+import SearchIcon from '@guardian/pasteup/icons/search.svg';
 import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/typography';
-import { tablet, desktop } from '@guardian/pasteup/breakpoints';
+import {
+    tablet,
+    desktop,
+    mobileLandscape,
+    wide,
+} from '@guardian/pasteup/breakpoints';
+
 // import ReaderRevenueLinks from './ReaderRevenueLinks';
 
 const search = css`
@@ -31,21 +39,26 @@ const search = css`
     }
 `;
 
+const seperatorLink = css`
+    border-left: 1px solid ${palette.brand.pastel};
+    float: left;
+    height: 24px;
+    margin: 0 -2px 0 10px;
+`;
+
 const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
-    ${textSans(3)};
-    color: ${palette.neutral[7]};
+    ${textSans(5)};
+    color: ${palette.neutral[100]};
     float: left;
     position: relative;
     transition: color 80ms ease-out;
     text-decoration: none;
     display: none;
+    z-index: 1072;
 
-    :hover {
-        text-decoration: underline;
-    }
-
+    :hover,
     :focus {
-        text-decoration: underline;
+        color: ${palette.highlight.main};
     }
 
     ${tablet} {
@@ -55,11 +68,18 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     ${desktop} {
         display: block;
     }
+
+    svg {
+        fill: currentColor;
+        float: left;
+        height: 18px;
+        width: 18px;
+        margin: 1px 4px 0 0;
+    }
 `;
 
 const paddedLink = css`
-    padding: 5px 10px;
-    margin: 1px 0 0;
+    padding: 7px 7px;
 `;
 
 const Search: React.SFC<{
@@ -75,6 +95,7 @@ const Search: React.SFC<{
 const links = css`
     position: absolute;
     left: 10px;
+    top: 0;
 
     ${mobileLandscape} {
         left: 20px;
@@ -87,6 +108,10 @@ const links = css`
 
     ${desktop} {
         right: 266px;
+    }
+
+    ${wide} {
+        right: 342px;
     }
 `;
 
@@ -135,11 +160,12 @@ const Links: React.SFC<{
     isSignedIn: boolean;
 }> = ({ isSignedIn }) => (
     <div className={links}>
+        <div className={cx(link({ showAtTablet: false }), seperatorLink)} />
         <a
             href={jobsUrl}
-            className={cx(link({ showAtTablet: true }), paddedLink)}
+            className={cx(link({ showAtTablet: false }), paddedLink)}
         >
-            Find a job
+            Search jobs
         </a>
 
         <a
@@ -148,9 +174,10 @@ const Links: React.SFC<{
         >
             Dating
         </a>
-
+        <div className={seperatorLink} />
         {isSignedIn ? (
-            <div className={link({ showAtTablet: false })}>
+            <div className={link}>
+                <ProfileIcon />
                 <Dropdown
                     label="My account"
                     links={identityLinks}
@@ -162,7 +189,7 @@ const Links: React.SFC<{
                 className={cx(link({ showAtTablet: true }), paddedLink)}
                 href={signInUrl}
             >
-                Sign in
+                <ProfileIcon /> Sign in
             </a>
         )}
 
@@ -170,7 +197,7 @@ const Links: React.SFC<{
             className={cx(link({ showAtTablet: false }), paddedLink)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
         >
-            Search
+            <SearchIcon /> Search
         </Search>
     </div>
 );

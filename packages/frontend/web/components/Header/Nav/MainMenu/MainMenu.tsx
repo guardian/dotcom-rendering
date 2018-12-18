@@ -22,7 +22,7 @@ const showMenu = css`
 `;
 
 const mainMenu = css`
-    background-color: ${palette.neutral[97]};
+    background-color: ${palette.brand.main};
     box-sizing: border-box;
     ${textSans(7)};
     left: 0;
@@ -61,8 +61,6 @@ const mainMenu = css`
         left: 0;
         right: 0;
         width: 100%;
-        border-bottom: 1px solid ${palette.neutral[86]};
-        margin-top: -20px;
         @supports (width: 100vw) {
             left: 50%;
             right: 50%;
