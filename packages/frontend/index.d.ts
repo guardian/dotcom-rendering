@@ -103,6 +103,7 @@ interface CAPIType {
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
     webURL: string;
+    guardianBaseURL: string;
 }
 
 interface TagType {
