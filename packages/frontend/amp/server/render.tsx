@@ -3,9 +3,9 @@ import express from 'express';
 import AMPDocument from '@frontend/amp/server/document';
 import AMPArticle from '@frontend/amp/pages/Article';
 import { extractScripts } from '@frontend/amp/components/lib/AMPScripts';
-import { extract as extractCAPI } from '@frontend/lib/model/extract-capi';
-import { extract as extractNAV } from '@frontend/lib/model/extract-nav';
-import { extract as extractConfig } from '@frontend/lib/model/extract-config';
+import { extract as extractCAPI } from '@frontend/model/extract-capi';
+import { extract as extractNAV } from '@frontend/model/extract-nav';
+import { extract as extractConfig } from '@frontend/model/extract-config';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {

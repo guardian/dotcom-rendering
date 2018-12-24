@@ -1,10 +1,10 @@
 import express from 'express';
 
 import document from '@frontend/web/server/document';
-import { extract as extractCAPI } from '@frontend/lib/model/extract-capi';
-import { extract as extractNAV } from '@frontend/lib/model/extract-nav';
-import { extract as extractGA } from '@frontend/lib/model/extract-ga';
-import { extract as extractConfig } from '@frontend/lib/model/extract-config';
+import { extract as extractCAPI } from '@frontend/model/extract-capi';
+import { extract as extractNAV } from '@frontend/model/extract-nav';
+import { extract as extractGA } from '@frontend/model/extract-ga';
+import { extract as extractConfig } from '@frontend/model/extract-config';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
