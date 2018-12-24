@@ -14,6 +14,7 @@ const backgroundColour = css`
 export interface ArticleModel {
     headline: string;
     standfirst: string;
+    mainMediaElements: ImageBlockElement[];
     elements: CAPIElement[];
     author: AuthorType;
     webPublicationDateDisplay: string;
