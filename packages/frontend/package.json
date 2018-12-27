@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
+    "@emotion/core": "^10.0.5",
     "@guardian/guui": "2.0.0-alpha.1",
     "@guardian/pasteup": "1.0.0-alpha.1",
     "aws-sdk": "^2.340.0",
