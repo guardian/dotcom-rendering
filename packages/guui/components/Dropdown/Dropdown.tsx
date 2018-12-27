@@ -250,7 +250,7 @@ export default class Dropdown extends React.Component<
                                 href={l.url}
                                 className={cx({
                                     [link]: true,
-                                    [linkActive]: l.isActive,
+                                    [linkActive]: !!l.isActive,
                                     [linkFirst]: index === 0,
                                 })}
                             >

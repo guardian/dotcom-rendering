@@ -99,7 +99,7 @@ const ColumnLink: React.SFC<{
 }> = ({ link }) => (
     <li
         className={cx(mainMenuLinkStyle, {
-            [hideDesktop]: link.mobileOnly,
+            [hideDesktop]: !!link.mobileOnly,
         })}
         role="none"
     >
