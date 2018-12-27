@@ -1,6 +1,4 @@
-import { css } from 'react-emotion';
-
-export const screenReaderOnly = css`
+export const screenReaderOnly = `
     position: absolute;
     width: 1px;
     height: 1px;
@@ -11,7 +9,7 @@ export const screenReaderOnly = css`
     border: 0;
 `;
 
-export const clearFix = css`
+export const clearFix = `
     :after {
         content: '';
         display: table;

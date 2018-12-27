@@ -752,12 +752,6 @@
   version "0.6.5"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.6.5.tgz#097729b84a5164f71f9acd2570ecfd1354d7b360"
 
-"@emotion/is-prop-valid@^0.6.1":
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.6.7.tgz#1767d39c29ba786b7afc3d8d727a2896995f01eb"
-  dependencies:
-    "@emotion/memoize" "^0.6.5"
-
 "@emotion/memoize@0.7.1":
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.1.tgz#e93c13942592cf5ef01aa8297444dc192beee52f"
@@ -1661,7 +1655,7 @@ babel-plugin-emotion@^10.0.5:
     find-root "^1.1.0"
     source-map "^0.5.7"
 
-babel-plugin-emotion@^9.2.6, babel-plugin-emotion@^9.2.8:
+babel-plugin-emotion@^9.2.6:
   version "9.2.8"
   resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-9.2.8.tgz#4df55ef10625c391f25b031f7e3006abac359e09"
   dependencies:
@@ -2632,12 +2626,6 @@ create-emotion-server@10.0.0:
     html-tokenize "^2.0.0"
     multipipe "^1.0.2"
     through "^2.3.8"
-
-create-emotion-styled@^9.2.8:
-  version "9.2.8"
-  resolved "https://registry.yarnpkg.com/create-emotion-styled/-/create-emotion-styled-9.2.8.tgz#c0050e768ba439609bec108600467adf2de67cc3"
-  dependencies:
-    "@emotion/is-prop-valid" "^0.6.1"
 
 create-emotion@^10.0.5:
   version "10.0.5"
@@ -7108,13 +7096,6 @@ react-dom@^16.4.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-
-react-emotion@^9.1.3:
-  version "9.2.8"
-  resolved "https://registry.yarnpkg.com/react-emotion/-/react-emotion-9.2.8.tgz#e4e24540bdcb7daacf87c405760ed619bddbb61b"
-  dependencies:
-    babel-plugin-emotion "^9.2.8"
-    create-emotion-styled "^9.2.8"
 
 react-testing-library@^5.2.3:
   version "5.2.3"
