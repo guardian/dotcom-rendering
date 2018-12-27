@@ -1,7 +1,7 @@
 import React from 'react';
 import InnerContainer from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/lib/Elements';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainBlock } from '@frontend/amp/components/MainBlock';
 import Submeta from '@frontend/amp/components/Submeta';

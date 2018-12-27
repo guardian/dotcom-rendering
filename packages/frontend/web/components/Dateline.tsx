@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { sans } from '@guardian/pasteup/typography';
 

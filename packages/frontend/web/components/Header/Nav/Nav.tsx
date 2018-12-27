@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 

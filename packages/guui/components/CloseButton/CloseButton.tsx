@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import CloseIcon from '@guardian/pasteup/icons/x.svg';
 
 const closeButton = (foregroundColour: string, backgroundColour: string) => css`

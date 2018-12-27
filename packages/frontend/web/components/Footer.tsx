@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { sans } from '@guardian/pasteup/typography';
