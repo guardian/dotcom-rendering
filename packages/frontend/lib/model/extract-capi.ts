@@ -83,8 +83,6 @@ const getAgeWarning = (
             return `${message} 1 month old`;
         }
     }
-
-    return;
 };
 
 // TODO this is a simple implementation of section data
