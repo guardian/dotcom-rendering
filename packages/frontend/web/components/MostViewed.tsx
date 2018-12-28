@@ -258,6 +258,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
     }
 
     public render() {
+        const nonBreakingSpaceChar = String.fromCharCode(160);
         return (
             <div className={container}>
                 <h2 className={heading}>Most viewed</h2>
@@ -300,7 +301,9 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                     >
                                                         Most viewed{' '}
                                                     </span>
-                                                    {tab.heading}
+                                                    {i === 0
+                                                        ? `Across The${nonBreakingSpaceChar}Guardian`
+                                                        : tab.heading}
                                                 </button>
                                             </li>
                                         ))}
