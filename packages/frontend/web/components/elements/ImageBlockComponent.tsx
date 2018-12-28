@@ -1,25 +1,42 @@
 import React from 'react';
 import { Picture, PictureSource } from '@frontend/web/components/Picture';
 
+const widths = [660, 480, 0];
+
+const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
+    const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
+
+    return sorted.reduce((best, current) => {
+        if (current.width < best.width && current.width >= desiredWidth) {
+            return current;
+        }
+
+        return best;
+    });
+};
 const makeSources = (imageSources: ImageSource[]): PictureSource[] => {
     const inlineSrcSets = imageSources.filter(
         ({ weighting }) => weighting === 'inline',
     )[0].srcSet;
     const sources: PictureSource[] = [];
 
-    inlineSrcSets.forEach(srcSet => {
-        sources.push(makeSource(true, srcSet));
-        sources.push(makeSource(false, srcSet));
+    widths.forEach(width => {
+        sources.push(makeSource(true, width, bestFor(width, inlineSrcSets)));
+        sources.push(makeSource(false, width, bestFor(width, inlineSrcSets)));
     });
 
     return sources;
 };
 
-const makeSource = (hidpi: boolean, srcSet: SrcSet): PictureSource => {
+const makeSource = (
+    hidpi: boolean,
+    minWidth: number,
+    srcSet: SrcSet,
+): PictureSource => {
     return {
         hidpi,
+        minWidth,
         width: srcSet.width,
-        minWidth: srcSet.width < 320 ? 320 : srcSet.width,
         srcset: `${srcSet.src} ${hidpi ? srcSet.width * 2 : srcSet.width}w`,
     };
 };
