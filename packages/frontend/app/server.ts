@@ -6,34 +6,10 @@ import {
     getGuardianConfiguration,
     GuardianConfiguration,
 } from './aws/aws-parameters';
-import document from '@frontend/web/document';
 import { dist, root, port } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
-
-import { extract as extractCAPI } from '@frontend/lib/model/extract-capi';
-import { extract as extractNAV } from '@frontend/lib/model/extract-nav';
-import { extract as extractGA } from '@frontend/lib/model/extract-ga';
-import { extract as extractConfig } from '@frontend/lib/model/extract-config';
 import { render as renderAMPArticle } from '@frontend/amp/server/render';
-
-const renderArticle = ({ body }: express.Request, res: express.Response) => {
-    try {
-        const resp = document({
-            data: {
-                site: 'frontend',
-                page: 'Article',
-                CAPI: extractCAPI(body),
-                NAV: extractNAV(body),
-                config: extractConfig(body),
-                GA: extractGA(body),
-            },
-        });
-
-        res.status(200).send(resp);
-    } catch (e) {
-        res.status(500).send(`<pre>${e.stack}</pre>`);
-    }
-};
+import { render as renderArticle } from '@frontend/web/server/render';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
 export default (options: any) => {

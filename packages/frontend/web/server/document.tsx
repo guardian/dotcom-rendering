@@ -3,7 +3,7 @@ import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 
 import htmlTemplate from './htmlTemplate';
-import Article from './pages/Article';
+import Article from '../pages/Article';
 import assets from '@frontend/lib/assets';
 import { GADataType } from '@frontend/lib/model/extract-ga';
 
