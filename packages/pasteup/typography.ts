@@ -41,6 +41,12 @@ const fontScaleMapping: any = {
     },
 };
 
+export const fontSize = (typex: string, level: number) =>
+    fontScaleMapping[typex][level].fontSize.toString();
+
+export const lineHeight = (typex: string, level: number) =>
+    fontScaleMapping[typex][level].lineHeight.toString();
+
 // (font-size: 14, line-height: 18)
 export const fontScale = (typex: string, level: number): string =>
     `
