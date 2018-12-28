@@ -20,6 +20,10 @@ const makeSources = (imageSources: ImageSource[]): PictureSource[] => {
     )[0].srcSet;
     const sources: PictureSource[] = [];
 
+    // TODO: ideally the imageSources array will come from frontend with prebaked URLs for
+    // hidpi images.
+    // Until that happens, here we're manually injecting (inadequate) <source> elements for
+    // those images, albeit without the necessary query params for hidpi images :(
     widths.forEach(width => {
         sources.push(makeSource(true, width, bestFor(width, inlineSrcSets)));
         sources.push(makeSource(false, width, bestFor(width, inlineSrcSets)));
