@@ -1,13 +1,26 @@
 import React from 'react';
-import { Picture, ImageSource } from '@frontend/web/components/Picture';
+import { Picture, PictureSource } from '@frontend/web/components/Picture';
 
-const makeSource: (image: Image) => ImageSource = image => {
+const makeSources = (imageSources: ImageSource[]): PictureSource[] => {
+    const inlineSrcSets = imageSources.filter(
+        ({ weighting }) => weighting === 'inline',
+    )[0].srcSet;
+    const sources: PictureSource[] = [];
+
+    inlineSrcSets.forEach(srcSet => {
+        sources.push(makeSource(true, srcSet));
+        sources.push(makeSource(false, srcSet));
+    });
+
+    return sources;
+};
+
+const makeSource = (hidpi: boolean, srcSet: SrcSet): PictureSource => {
     return {
-        width: image.fields.width,
-        minWidth:
-            parseFloat(image.fields.width) < 320 ? '320' : image.fields.width,
-        srcset: `${image.url} ${image.fields.width}w`,
-        hidpi: false,
+        hidpi,
+        width: srcSet.width,
+        minWidth: srcSet.width < 320 ? 320 : srcSet.width,
+        srcset: `${srcSet.src} ${hidpi ? srcSet.width * 2 : srcSet.width}w`,
     };
 };
 
@@ -17,9 +30,11 @@ const getFallback: (images: Image[]) => string = images =>
 export const ImageBlockComponent: React.SFC<{ element: ImageBlockElement }> = ({
     element,
 }) => {
+    const sources = makeSources(element.imageSources);
+
     return (
         <Picture
-            sources={element.media.allImages.map(makeSource)}
+            sources={sources}
             alt={element.data.alt}
             src={getFallback(element.media.allImages)}
         />
