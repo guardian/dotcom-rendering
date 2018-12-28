@@ -8,7 +8,8 @@
     "scripts": {
         "lint": "yarn tslint --project tsconfig.json -p . -t stylish",
         "tsc": "tsc",
-        "test": "jest"
+        "test": "jest",
+        "postinstall": "./scripts/git-hooks/install.js"
     },
     "bundlesize": [
         {
@@ -50,6 +51,7 @@
         "prettier": "^1.7.4",
         "react-testing-library": "^5.2.3",
         "regenerator-runtime": "^0.12.1",
+        "rimraf": "^2.6.2",
         "simple-progress-webpack-plugin": "^1.1.2",
         "string-replace-loader": "^2.1.1",
         "stylelint": "^9.5.0",
