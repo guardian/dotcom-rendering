@@ -41,14 +41,18 @@ const fontScaleMapping: any = {
     },
 };
 
-export const fontSize = (typex: string, level: number) =>
-    fontScaleMapping[typex][level].fontSize.toString();
+export const fontSizeNumber = (category: string, level: number): number =>
+    fontScaleMapping[category][level].fontSize;
 
-export const lineHeight = (typex: string, level: number) =>
-    fontScaleMapping[typex][level].lineHeight.toString();
+export const lineHeightNumber = (category: string, level: number): number =>
+    fontScaleMapping[category][level].lineHeight;
+
+export const fontSizeCss = (category: string, level: number): string =>
+    'font-size: ${fontSizeNumber(category, level)}';
+
+export const lineHeightCss = (category: string, level: number): string =>
+    'font-size: ${lineHeightNumber(category, level)}';
 
 // (font-size: 14, line-height: 18)
-export const fontScale = (typex: string, level: number): string =>
-    `
-font-size: ${fontScaleMapping[typex][level].fontSize}, 
-line-height: ${fontScaleMapping[typex][level].lineHeight}`;
+export const fontScaling = (category: string, level: number): string =>
+    `(${fontSizeCss(category, level)}, ${lineHeightCss(category, level)})`;
