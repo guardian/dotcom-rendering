@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'react-emotion';
-import { sans, fontSizeCss } from '@guardian/pasteup/typography';
+import { fontCss } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import InnerContainer from './InnerContainer';
 import { Link, footerLinksNew } from '@frontend/lib/footer-links';
@@ -8,8 +8,7 @@ import { Link, footerLinksNew } from '@frontend/lib/footer-links';
 const footer = css`
     background-color: ${palette.brand.blue};
     color: ${palette.neutral[86]};
-    font-family: ${sans.body};
-    ${fontSizeCss('textSans', 5)};
+    ${fontCss('body', 2)};
     margin-top: 20px;
 `;
 
