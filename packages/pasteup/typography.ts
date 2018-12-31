@@ -1,3 +1,5 @@
+type Category = 'headline' | 'body' | 'textSans';
+
 export const serif = {
     headline: ['GH Guardian Headline', 'Georgia', 'serif'].join(','),
     body: ['GuardianTextEgyptian', 'Georgia', 'serif'].join(','),
@@ -41,18 +43,18 @@ const fontScaleMapping: any = {
     },
 };
 
-export const fontSizeNumber = (category: string, level: number): number =>
+export const fontSizeNumber = (category: Category, level: number): number =>
     fontScaleMapping[category][level].fontSize;
 
-export const lineHeightNumber = (category: string, level: number): number =>
+export const lineHeightNumber = (category: Category, level: number): number =>
     fontScaleMapping[category][level].lineHeight;
 
-export const fontSizeCss = (category: string, level: number): string =>
+export const fontSizeCss = (category: Category, level: number): string =>
     'font-size: ${fontSizeNumber(category, level)}';
 
-export const lineHeightCss = (category: string, level: number): string =>
+export const lineHeightCss = (category: Category, level: number): string =>
     'font-size: ${lineHeightNumber(category, level)}';
 
 // (font-size: 14, line-height: 18)
-export const fontScaling = (category: string, level: number): string =>
+export const fontScaling = (category: Category, level: number): string =>
     `(${fontSizeCss(category, level)}, ${lineHeightCss(category, level)})`;
