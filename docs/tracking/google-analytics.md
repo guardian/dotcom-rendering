@@ -3,7 +3,7 @@
 ## Page view
 
 The following data is tracked in Google Analytics on page view. The data is
-extracted from the request body in [`model`](../../frontend/lib/model/index.ts)
+extracted from the request body in [`model`](../../frontend/model/index.ts)
 
 | Dimension    | Value                      | Description                                                |
 | ------------ | -------------------------- | ---------------------------------------------------------- |
