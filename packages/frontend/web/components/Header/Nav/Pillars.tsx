@@ -8,7 +8,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-import { serif } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 

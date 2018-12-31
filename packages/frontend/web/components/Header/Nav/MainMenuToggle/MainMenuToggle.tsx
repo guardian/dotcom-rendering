@@ -3,7 +3,7 @@ import { css, cx } from 'react-emotion';
 
 import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { serif } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/typography';
 
 import { VeggieBurger } from './VeggieBurger';
 import { palette } from '@guardian/pasteup/palette';

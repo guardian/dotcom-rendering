@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@guardian/guui';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 
 const iconContainer = css`
     position: relative;

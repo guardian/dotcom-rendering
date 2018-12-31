@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { serif, sans } from '@guardian/pasteup/fonts';
+import { serif, sans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 const richLinkContainer = css`

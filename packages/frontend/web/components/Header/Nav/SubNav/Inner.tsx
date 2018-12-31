@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { serif } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/typography';
 import {
     desktop,
     tablet,
