@@ -3,7 +3,7 @@ import { css, cx } from 'react-emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import { sans, serif } from '@guardian/pasteup/fonts';
+import { sans, serif } from '@guardian/pasteup/typography';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';

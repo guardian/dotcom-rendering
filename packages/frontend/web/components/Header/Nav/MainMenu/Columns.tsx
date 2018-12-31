@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
-import { serif } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/typography';
 
 import { Column, More, ReaderRevenueLinks } from './Column';
 import { palette } from '@guardian/pasteup/palette';

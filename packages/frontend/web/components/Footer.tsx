@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'react-emotion';
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';

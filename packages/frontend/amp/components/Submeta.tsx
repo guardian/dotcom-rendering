@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'react-emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { serif, sans } from '@guardian/pasteup/fonts';
+import { serif, sans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 

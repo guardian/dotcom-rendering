@@ -1,6 +1,6 @@
 import React from 'react';
 import { Img } from '@frontend/amp/components/primitives/Img';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'react-emotion';
 import { pillarPalette } from '@frontend/lib/pillars';

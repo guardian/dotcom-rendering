@@ -6,7 +6,7 @@ import {
     MoustacheTemplate,
     moustacheVariable,
 } from './primitives/moustache';
-import { serif } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/typography';
 
 import VideoIcon from '@guardian/pasteup/icons/video-icon.svg';
 import Camera from '@guardian/pasteup/icons/camera.svg';

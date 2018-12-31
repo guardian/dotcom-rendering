@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 export interface Link {

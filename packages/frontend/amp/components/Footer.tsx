@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'react-emotion';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import InnerContainer from './InnerContainer';
 import { Link, footerLinksNew } from '@frontend/lib/footer-links';

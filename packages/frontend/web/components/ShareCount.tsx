@@ -3,7 +3,7 @@ import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';
 

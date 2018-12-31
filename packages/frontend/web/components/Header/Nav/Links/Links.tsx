@@ -5,7 +5,7 @@ import Dropdown, {
     Link as DropdownLink,
 } from '@guardian/guui/components/Dropdown/Dropdown';
 import { palette } from '@guardian/pasteup/palette';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 import { tablet, desktop } from '@guardian/pasteup/breakpoints';
 
 import SupportTheGuardian from './SupportTheGuardian';

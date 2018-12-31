@@ -77,7 +77,7 @@ The API exposes the following values:
 ### Fonts
 
 ```js
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 
 const footer = css`
     font-family: ${sans.body};
