@@ -36,11 +36,10 @@ const supportStyles = css`
 const supportLinkStyles = css`
     position: relative;
     color: ${palette.neutral[7]};
-    font-size: 16px;
+    ${fs('textSans', 5)};
     font-weight: 700;
     display: block;
     text-decoration: none;
-    font-family: ${serif.body};
     padding-right: 20px;
 
     svg {
@@ -82,14 +81,12 @@ const pillarListItemStyle = css`
 `;
 
 const pillarLinkStyle = (pillar: Pillar) => css`
-    font-family: ${serif.headline};
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
     display: block;
-    font-size: 17px;
+    ${fs('textSans', 5)};
     height: 36px;
-    line-height: 1;
     padding: 9px 4px;
     color: ${palette.neutral[100]};
     position: relative;

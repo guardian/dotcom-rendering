@@ -20,23 +20,19 @@ const pillarColour = (pillar: Pillar) => css`
 `;
 
 const richLink = css`
-    font-family: ${serif.headline};
     font-weight: 500;
     border: 0;
     text-decoration: none;
-    font-size: 14px;
-    line-height: 16px;
+    ${fs('headline', 1)};
     word-wrap: break-word;
     :hover {
         text-decoration: underline;
     }
     ::before {
+        ${fs('textSans', 1)};
         content: 'More on this topic';
         display: block;
         color: ${palette.neutral[46]};
-        font-size: 12px;
-        line-height: 16px;
-        font-family: ${sans.body};
         font-weight: 400;
     }
 `;

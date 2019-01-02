@@ -11,21 +11,19 @@ const style = (pillar: Pillar) => css`
     }
     h2 {
         margin-top: 24px;
-        font-size: 18px;
+        ${fs('textSans', 6)};
     }
     p {
         padding: 0 0 12px;
-        font-size: 16px;
+        ${fs('textSans', 5)};
         font-weight: 300;
         word-wrap: break-word;
         color: ${palette.neutral[7]};
-        line-height: 1.5;
     }
     a {
         color: ${pillarPalette[pillar].main};
         text-decoration: none;
         border-bottom: 1px solid #dcdcdc;
-
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].main};
         }

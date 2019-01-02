@@ -16,10 +16,8 @@ const collapseColumnButton = css`
     box-sizing: border-box;
     cursor: pointer;
     display: block;
-    font-family: ${serif.headline};
-    font-size: 24px;
+    ${fs('headline', 4)};
     font-weight: 700;
-    line-height: 1;
     outline: none;
     padding: 6px 34px 18px 50px;
     position: relative;

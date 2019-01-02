@@ -23,12 +23,9 @@ const inner = css`
     margin-top: 24px;
 `;
 const header = css`
-    font-family: ${serif.headline};
-
     font-weight: 500;
     position: relative;
-    font-size: 22px;
-    line-height: 28px;
+    ${fs('headline', 3)};
 `;
 const item = css`
     background-color: #ededed;
@@ -64,16 +61,10 @@ const link = css`
 `;
 const headline = css`
     padding: 0;
-
     margin: 1px 0 0;
-
-    font-family: ${serif.headline};
     font-weight: 500;
     word-wrap: break-word;
-
-    font-size: 14px;
-
-    line-height: 18px;
+    ${fs('headline', 1)};
 `;
 export const Onwards: React.SFC<{ path: string }> = ({ path }) => (
     <amp-list

@@ -64,7 +64,7 @@ const copyrightContainer = css`
 `;
 
 const copyright = css`
-    font-size: 12px;
+    ${fs('textSans', 1)};
 `;
 
 const iconContainer = css`

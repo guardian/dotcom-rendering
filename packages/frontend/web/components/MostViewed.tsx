@@ -23,17 +23,14 @@ const container = css`
 `;
 
 const heading = css`
-    font-family: ${serif.headline};
+    ${fs('headline', 4)};
     color: ${palette.neutral[7]};
-    font-size: 24px;
     font-weight: 900;
-    line-height: 1;
     padding-right: 5px;
     padding-bottom: 4px;
 
     ${leftCol} {
-        font-size: 20px;
-        line-height: 1.2;
+        ${fs('headline', 3)};
         width: 140px;
         position: relative;
 
@@ -151,10 +148,8 @@ const headlineHeader = css`
 const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
-    font-family: ${serif.headline};
-    font-size: 16px;
-    line-height: 1.2;
     font-weight: 500;
+    ${fs('headline', 2)};
 `;
 
 const tabsContainer = css`
@@ -191,6 +186,7 @@ const selectedListTab = css`
 `;
 
 const tabButton = css`
+    ${fs('headline', 1)};
     margin: 0;
     border: 0;
     background: transparent;
@@ -199,9 +195,6 @@ const tabButton = css`
     padding-top: 4px;
     text-align: left;
     text-decoration: none;
-    line-height: 20px;
-    font-size: 14px;
-    font-family: ${serif.headline};
     font-weight: 600;
     min-height: 36px;
     display: block;
@@ -212,7 +205,7 @@ const tabButton = css`
     }
 
     ${tablet} {
-        font-size: 16px;
+        ${fs('headline', 2)};
     }
 `;
 

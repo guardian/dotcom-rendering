@@ -27,13 +27,10 @@ const linkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    font-family: ${serif.body};
-    font-size: 15px;
-    line-height: 24px;
-
+    ${fs('textSans', 4)};
     :after {
         content: '/';
-        font-size: 16px;
+        ${fs('textSans', 5)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -65,13 +62,10 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    font-family: ${serif.body};
-    font-size: 16px;
-    line-height: 22px;
-
+    ${fs('textSans', 5)};
     :after {
         content: '/';
-        font-size: 16px;
+        ${fs('textSans', 7)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -86,20 +80,17 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-    font-size: 12px;
-    line-height: 16px;
+    ${fs('textSans', 1)};
     color: ${palette.neutral[46]};
     display: block;
     margin-bottom: -3px;
-    font-family: ${sans.body};
 `;
 
 const siteLinkStyle = css`
-    font-size: 13px;
+    ${fs('textSans', 2)};
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};
-    font-family: ${sans.body};
     line-height: 36px;
 `;
 

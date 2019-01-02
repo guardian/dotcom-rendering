@@ -5,9 +5,7 @@ import { palette } from '@guardian/pasteup/palette';
 import { sans } from '@guardian/pasteup/typography';
 
 const captionFont = css`
-    font-size: 12px;
-    line-height: 16px;
-    font-family: ${sans.body};
+    ${fs('textSans', 1)};
     color: ${palette.neutral[46]};
 `;
 

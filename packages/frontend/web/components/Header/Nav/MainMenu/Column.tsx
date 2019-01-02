@@ -46,6 +46,7 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
+    ${fs('headline', 3)};
     background-color: transparent;
     text-decoration: none;
     border: 0;
@@ -53,8 +54,6 @@ const columnLinkTitle = css`
     color: ${palette.neutral[7]};
     cursor: pointer;
     display: inline-block;
-    font-size: 20px;
-    font-family: ${serif.headline};
     font-weight: 500;
     outline: none;
     padding: 8px 34px 8px 50px;
@@ -65,8 +64,7 @@ const columnLinkTitle = css`
         padding-left: 60px;
     }
     ${desktop} {
-        font-size: 15px;
-        line-height: 1.2;
+        ${fs('headline', 1)};
         padding: 6px 0;
     }
     :hover,
@@ -110,9 +108,9 @@ const ColumnLink: React.SFC<{
 );
 
 const columnLinks = css`
+    ${fs('textSans', 6)};
     box-sizing: border-box;
     display: flex;
-    font-size: 18px;
     flex-wrap: wrap;
     list-style: none;
     margin: 0;
@@ -171,7 +169,7 @@ const ColumnLinks: React.SFC<{
 };
 
 const columnStyle = css`
-    font-size: 18px;
+    ${fs('textSans', 6)};
     list-style: none;
     margin: 0;
     padding: 0 0 12px;

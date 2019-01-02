@@ -23,9 +23,8 @@ const showMenu = css`
 const mainMenu = css`
     background-color: ${palette.neutral[97]};
     box-sizing: border-box;
-    font-size: 20px;
+    ${fs('textSans', 7)};
     left: 0;
-    line-height: 1;
     margin-right: 29px;
     padding-bottom: 24px;
     top: 0;

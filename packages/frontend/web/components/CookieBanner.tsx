@@ -14,9 +14,7 @@ const banner = css`
     width: 100%;
 
     p {
-        font-family: ${serif.body};
-        font-size: 17px;
-        line-height: 24px;
+        ${fs('textSans', 5)};
         margin-top: 0;
         margin-bottom: 8px;
         color: ${palette.neutral[100]};
@@ -38,24 +36,19 @@ const inner = css`
 `;
 
 const header = css`
-    font-size: 34px;
-    line-height: 38px;
+    ${fs('headline', 6)};
     font-weight: bold;
     padding-bottom: 12px;
     color: ${palette.highlight.main};
 `;
 
 const more = css`
-    font-size: 14px;
-    line-height: 20px;
-    font-family: ${sans.body};
     margin-left: 12px;
+    ${fs('textSans', 3)};
 `;
 
 const button = css`
-    font-size: 16px;
-    line-height: 24px;
-    font-family: ${sans.body};
+    ${fs('textSans', 5)};
     border-radius: 1000px;
     height: 42px;
     background: ${palette.highlight.main};

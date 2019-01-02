@@ -14,18 +14,16 @@ const screenReadable = css`
 const navPrimaryColour = palette.neutral[7];
 const navSecondaryColour = palette.neutral[20];
 const openMainMenu = css`
+    ${fs('headline', 3)};
     display: none;
-    font-family: ${serif.headline};
     font-weight: 500;
     text-decoration: none;
     color: ${navSecondaryColour};
     cursor: pointer;
-    line-height: 1rem;
     position: relative;
     overflow: hidden;
     border: 0;
     background-color: transparent;
-    font-size: 22px;
     height: 48px;
     padding-bottom: 0;
     padding-right: 20px;
@@ -37,7 +35,7 @@ const openMainMenu = css`
     }
     ${leftCol} {
         margin-top: -5px;
-        font-size: 24px;
+        ${fs('headline', 4)};
     }
     :hover {
         color: ${navPrimaryColour};

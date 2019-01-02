@@ -40,6 +40,7 @@ const fontScaleMapping: any = {
         4: { fontSize: 14, lineHeight: 22 },
         5: { fontSize: 16, lineHeight: 22 },
         6: { fontSize: 18, lineHeight: 18 },
+        7: { fontSize: 20, lineHeight: 20 },
     },
 };
 

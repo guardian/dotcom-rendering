@@ -66,26 +66,24 @@ const pillarDivider = css`
 `;
 
 const linkStyle = css`
-    font-family: ${serif.headline};
+    ${fs('headline', 2)};
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
     display: block;
-    font-size: 15.4px;
     height: 30px;
-    line-height: 1;
     padding: 0 4px;
     position: relative;
     overflow: hidden;
     ${tablet} {
-        font-size: 22px;
+        ${fs('headline', 3)};
         height: 42px;
         padding-right: 20px;
         padding-left: 5px;
     }
     ${leftCol} {
         height: 48px;
-        font-size: 24px;
+        ${fs('headline', 4)};
     }
     :after {
         content: '';

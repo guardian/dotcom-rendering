@@ -50,22 +50,18 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    font-family: ${serif.headline};
+    ${fs('headline', 1)};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;
-    font-size: 14px;
     height: 36px;
-    line-height: 36px;
-
     ${mobileMedium} {
-        font-size: 15px;
+        ${fs('headline', 2)};
     }
 
     ${tablet} {
-        font-size: 16px;
+        ${fs('headline', 2)};
         height: 42px;
-        line-height: 42px;
     }
 `;
 

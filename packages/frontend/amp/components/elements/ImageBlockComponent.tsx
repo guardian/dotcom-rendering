@@ -14,10 +14,8 @@ const figureStyle = css`
 `;
 const captionStyle = css`
     padding-top: 8px;
-    font-size: 12px;
-    font-family: ${sans.body};
+    ${fs('textSans', 1)};
     word-wrap: break-word;
-    line-height: 16px;
     color: ${palette.neutral[46]};
 `;
 

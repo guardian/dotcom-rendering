@@ -8,9 +8,7 @@ import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';
 
 const shareCount = css`
-    font-size: 18px;
-    line-height: 18px;
-    font-family: ${sans.body};
+    ${fs('textSans', 6)};
     font-weight: bold;
     color: ${palette.neutral[46]};
 

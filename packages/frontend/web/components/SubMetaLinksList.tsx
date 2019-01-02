@@ -57,15 +57,11 @@ const subMetaLink = css`
 `;
 
 const subMetaSectionLink = css`
-    font-size: 16px;
-    line-height: 20px;
-    font-family: ${serif.body};
+    ${fs('body', 2)};
 `;
 
 const subMetaKeywordLink = css`
-    font-size: 14px;
-    line-height: 22px;
-    font-family: ${sans.body};
+    ${fs('textSans', 3)};
 `;
 
 const hideSlash = css`

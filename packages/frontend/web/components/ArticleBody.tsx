@@ -101,11 +101,9 @@ const pillarFigCaptionIconColor = pillarMap(
 
 const listStyles = css`
     li {
-        font-family: ${serif.body};
+        ${fs('textSans', 5)};
         margin-bottom: 6px;
         padding-left: 20px;
-        font-size: 17px;
-        line-height: 24px;
 
         p {
             display: inline;
@@ -125,10 +123,8 @@ const listStyles = css`
 `;
 
 const standfirst = css`
-    font-family: ${serif.body};
+    ${fs('textSans', 1)};
     font-weight: 700;
-    font-size: 17px;
-    line-height: 22px;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
 
@@ -166,13 +162,11 @@ const section = css`
     @supports (display: grid) {
         grid-template-areas: 'section';
     }
-    font-size: 16px;
-    line-height: 20px;
-    font-family: ${serif.headline};
+    ${fs('headline', 2)};
     font-weight: 700;
 
     ${leftCol} {
-        font-size: 22px;
+        ${fs('headline', 3)};
         line-height: 28px;
     }
 
@@ -221,9 +215,7 @@ const guardianLines = css`
 `;
 
 const captionFont = css`
-    font-size: 12px;
-    line-height: 16px;
-    font-family: ${sans.body};
+    ${fs('textSans', 1)};
     color: ${palette.neutral[46]};
 `;
 
@@ -272,9 +264,7 @@ const mainMedia = css`
 `;
 
 const headerStyle = css`
-    font-size: 34px;
-    line-height: 38px;
-    font-family: ${serif.headline};
+    ${fs('headline', 7)};
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -290,10 +280,8 @@ const bodyStyle = css`
     }
 
     h2 {
-        font-size: 1.25rem;
-        line-height: 1.5rem;
+        ${fs('textSans', 6)};
         margin-bottom: 0.0625rem;
-        font-family: ${serif.body};
         font-weight: 900;
     }
 
@@ -302,10 +290,8 @@ const bodyStyle = css`
     }
 
     p {
-        font-family: ${serif.body};
         margin-bottom: 16px;
-        font-size: 17px;
-        line-height: 24px;
+        ${fs('textSans', 5)};
     }
 
     img {
@@ -350,9 +336,7 @@ const linkColour = pillarMap(
 );
 
 const profile = css`
-    font-size: 16px;
-    line-height: 20px;
-    font-family: ${serif.headline};
+    ${fs('headline', 2)};
     font-weight: 700;
     margin-bottom: 4px;
 `;
@@ -370,9 +354,7 @@ const bylineLink = css`
 `;
 
 const ageWarning = css`
-    font-size: 12px;
-    line-height: 16px;
-    font-family: ${sans.body};
+    ${fs('textSans', 1)};
     display: inline-block;
     margin-bottom: 12px;
     width: 100%;
@@ -383,9 +365,7 @@ const ageWarning = css`
 `;
 
 const twitterHandle = css`
-    font-size: 12px;
-    line-height: 16px;
-    font-family: ${sans.body};
+    ${fs('textSans', 1)};
     font-weight: bold;
     color: ${palette.neutral[46]};
 
@@ -440,9 +420,7 @@ const subMeta = css`
 `;
 
 const subMetaLabel = css`
-    font-size: 12px;
-    line-height: 16px;
-    font-family: ${sans.body};
+    ${fs('textSans', 1)};
     display: block;
     color: ${palette.neutral[60]};
 `;

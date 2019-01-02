@@ -33,11 +33,9 @@ const search = css`
 `;
 
 const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
-    font-size: 14px;
-    font-family: ${sans.body};
+    ${fs('textSans', 3)};
     color: ${palette.neutral[7]};
     float: left;
-    line-height: 1.2;
     position: relative;
     transition: color 80ms ease-out;
     text-decoration: none;

@@ -48,8 +48,7 @@ const style = css`
 
 const text = css`
     color: ${palette.neutral[97]};
-    font-family: ${serif.headline};
-    font-size: 13px;
+    ${fs('headline', 1)};
     font-weight: 700;
     text-align: center;
     line-height: 1.2;
@@ -57,7 +56,7 @@ const text = css`
     position: relative;
 
     ${tablet} {
-        font-size: 14px;
+        ${fs('headline', 1)};
     }
 `;
 
