@@ -258,7 +258,6 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
     }
 
     public render() {
-        const nonBreakingSpaceChar = String.fromCharCode(160);
         return (
             <div className={container}>
                 <h2 className={heading}>Most viewed</h2>
@@ -301,9 +300,12 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                     >
                                                         Most viewed{' '}
                                                     </span>
-                                                    {i === 0
-                                                        ? `Across The${nonBreakingSpaceChar}Guardian`
-                                                        : tab.heading}
+                                                    <span // tslint:disable-line:react-no-dangerous-html
+                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: tab.heading,
+                                                        }}
+                                                    />
                                                 </button>
                                             </li>
                                         ))}
