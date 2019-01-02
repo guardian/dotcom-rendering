@@ -103,7 +103,11 @@ interface CAPIType {
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
     webURL: string;
+
+    // AMP specific (for now)
     guardianBaseURL: string;
+    hasRelated: boolean;
+    hasStoryPackage: boolean;
 }
 
 interface TagType {
