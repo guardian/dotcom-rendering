@@ -56,20 +56,12 @@ const lineHeightCss = (category: Category, level: number): string =>
     `line-height: ${lineHeightNumber(category, level)}px`;
 
 const fontFamily = (category: Category): string => {
-    switch (category) {
-        case 'headline': {
-            return serif.headline;
-            break;
-        }
-        case 'body': {
-            return serif.body;
-            break;
-        }
-        default: {
-            return sans.body;
-            break;
-        }
-    }
+    const families: { [cat in Category]: string } = {
+        headline: serif.headline,
+        body: serif.body,
+        textSans: sans.body,
+    };
+    return families[category];
 };
 
 const fontfamilyCss = (category: Category): string =>
