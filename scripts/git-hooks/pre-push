@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+/* eslint-disable no-console */
+
+const execa = require('execa')
+
+const typeScriptBuild = () =>
+    execa(
+        'tsc',
+        [],
+        {
+            stdio: 'inherit',
+        }
+    );
+
+typeScriptBuild();
+
+
