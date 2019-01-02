@@ -31,6 +31,8 @@ Start the development server:
 $ make dev
 ```
 
+This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
+
 ### Running alongside identity
 
 You may want local identity cookies to be available in `dotcom-rendering`. To enable this:
