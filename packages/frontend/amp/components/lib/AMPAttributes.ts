@@ -7,6 +7,6 @@ import _ from 'react';
 declare module 'react' {
     interface HTMLAttributes<T> extends DOMAttributes<T> {
         on?: string;
-        overflow?: boolean;
+        overflow?: string;
     }
 }

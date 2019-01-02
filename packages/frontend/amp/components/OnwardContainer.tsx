@@ -20,11 +20,10 @@ const inner = css`
     padding-top: 3px;
     overflow: hidden;
     position: relative;
-    margin-top: 24px;
 `;
 const header = css`
     font-family: ${serif.headline};
-
+    padding-bottom: 0.75rem;
     font-weight: 500;
     position: relative;
     font-size: 22px;
@@ -41,7 +40,6 @@ const item = css`
 `;
 const imageContainer = css`
     position: absolute;
-
     left: 0;
 `;
 const itemContent = css`
@@ -75,10 +73,13 @@ const headline = css`
 
     line-height: 18px;
 `;
-export const Onwards: React.SFC<{ path: string }> = ({ path }) => (
+export const OnwardContainer: React.SFC<{
+    guardianBaseURL: string;
+    path: string;
+}> = ({ guardianBaseURL, path }) => (
     <amp-list
         layout="fixed-height"
-        height="493"
+        height="470"
         src={path}
         credentials="include"
     >
@@ -148,9 +149,9 @@ export const Onwards: React.SFC<{ path: string }> = ({ path }) => (
                             <a
                                 className={link}
                                 // tslint:disable-line:react-a11y-anchors
-                                href={`https://www.theguardian.com${moustacheVariable(
-                                    'url',
-                                )}`}
+                                href={
+                                    guardianBaseURL + moustacheVariable('url')
+                                }
                             >
                                 <MoustacheVariable name="headline" />
                             </a>

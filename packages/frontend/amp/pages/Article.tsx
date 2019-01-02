@@ -5,6 +5,7 @@ import Body from '@frontend/amp/components/Body';
 import Header from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'react-emotion';
+import { Onward } from '@frontend/amp/components/Onward';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -30,6 +31,9 @@ export interface ArticleModel {
     tags: TagType[];
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];
+    webURL: string;
+    shouldHideAds: boolean;
+    guardianBaseURL: string;
 }
 
 export const Article: React.SFC<{
@@ -44,6 +48,12 @@ export const Article: React.SFC<{
                 pillar={articleData.pillar}
                 data={articleData}
                 config={config}
+            />
+            <Onward
+                shouldHideAds={articleData.shouldHideAds}
+                webURL={articleData.webURL}
+                onwardURLs={['https://amp.theguardian.com/most-read-mf2.json']}
+                guardianBaseURL={articleData.guardianBaseURL}
             />
             <Footer />
         </Container>
