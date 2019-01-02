@@ -83,8 +83,6 @@ const getAgeWarning = (
             return `${message} 1 month old`;
         }
     }
-
-    return;
 };
 
 // TODO this is a simple implementation of section data
@@ -253,5 +251,9 @@ export const extract = (data: {}): CAPIType => {
             ...sectionData,
         }),
         ...sectionData,
+        shouldHideAds: getBoolean(data, 'config.page.shouldHideAds'),
+        webURL: getNonEmptyString(data, 'config.page.webURL'),
+        guardianBaseURL: getNonEmptyString(data, 'config.page.guardianBaseURL'),
+        contentType: getString(data, 'config.page.contentType'),
     };
 };

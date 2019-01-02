@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'react-emotion';
 import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { serif } from '@guardian/pasteup/fonts';
+import { serif } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
 import Sidebar from './Sidebar';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';

@@ -1,9 +1,13 @@
 import React from 'react';
 import { Img } from '@frontend/amp/components/primitives/Img';
-import { sans } from '@guardian/pasteup/fonts';
+import { sans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'react-emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
+import {
+    bestFitImage,
+    heightEstimate,
+} from '@frontend/amp/components/lib/GetImage';
 const figureStyle = css`
     margin-top: 16px;
     margin-bottom: 8px;
@@ -16,25 +20,33 @@ const captionStyle = css`
     line-height: 16px;
     color: ${palette.neutral[46]};
 `;
-const getFallback: (images: Image[]) => Image = images =>
-    images.find(_ => _.fields.isMaster === 'true') || images[0];
 
 export const ImageBlockComponent: React.SFC<{
     element: ImageBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
-    const image = getFallback(element.media.allImages);
+    const containerWidth = 600;
+    const image: SrcSet = bestFitImage(element.imageSources, containerWidth);
+    const height: number = heightEstimate(
+        element.media.allImages[0],
+        image.width,
+    );
     const fill = css`
         fill: ${pillarPalette[pillar].main};
     `;
+
+    if (!image) {
+        return null;
+    }
+
     return (
         <figure className={figureStyle}>
             <Img
-                src={image.url}
+                src={image.src}
                 alt={element.data.alt}
                 attribution={element.data.credit}
-                height={image.fields.height}
-                width={image.fields.width}
+                height={height.toString()}
+                width={image.width.toString()}
                 layout="responsive"
             />
             {element.data.caption && (

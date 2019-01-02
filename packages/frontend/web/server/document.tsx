@@ -3,9 +3,9 @@ import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 
 import htmlTemplate from './htmlTemplate';
-import Article from './pages/Article';
+import Article from '../pages/Article';
 import assets from '@frontend/lib/assets';
-import { GADataType } from '@frontend/lib/model/extract-ga';
+import { GADataType } from '@frontend/model/extract-ga';
 
 interface Props {
     data: {
@@ -51,7 +51,9 @@ export default ({ data }: Props) => {
 
     /**
      * The highest priority scripts.
+     * These scripts have a considerable impact on site performance.
      * Only scripts critical to application execution may go in here.
+     * Please talk to the dotcom platform team before adding more.
      * Scripts will be executed in the order they appear in this array
      */
     const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);

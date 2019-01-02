@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { sans, serif } from '@guardian/pasteup/fonts';
+import { sans, serif } from '@guardian/pasteup/typography';
 import { Container } from '@guardian/guui';
 import TickIcon from '@guardian/pasteup/icons/tick.svg';
 import { getCookie, addCookie } from '@frontend/web/lib/cookie';

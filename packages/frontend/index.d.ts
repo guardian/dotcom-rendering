@@ -101,6 +101,10 @@ interface CAPIType {
     sectionName: string;
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];
+    shouldHideAds: boolean;
+    webURL: string;
+    guardianBaseURL: string;
+    contentType: string;
 }
 
 interface TagType {
@@ -108,6 +112,7 @@ interface TagType {
     type: string;
     title: string;
     twitterHandle?: string;
+    paidContentType?: string;
 }
 
 /**
@@ -118,6 +123,10 @@ interface TagType {
  */
 interface ConfigType {
     ajaxUrl: string;
+    sentryPublicApiKey: string;
+    sentryHost: string;
+    isDev: boolean;
+    switches: { [key: string]: boolean };
 }
 
 // 3rd party type declarations
@@ -147,6 +156,8 @@ declare namespace JSX {
         'amp-twitter': any;
         'amp-list': any;
         'amp-instagram': any;
+        'amp-soundcloud': any;
+        'amp-iframe': any;
         template: any;
     }
 }

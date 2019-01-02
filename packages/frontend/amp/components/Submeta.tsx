@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'react-emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { serif, sans } from '@guardian/pasteup/fonts';
+import { serif, sans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 
@@ -17,7 +17,6 @@ const guardianLines = css`
     background-position: top;
     background-size: 1px 13px;
     padding-top: 18px;
-    margin-bottom: 6px;
     margin-top: 12px;
 `;
 

@@ -50,7 +50,6 @@ export default ({
                         data,
                         cssIDs,
                     },
-                    config: {},
                 })};
                 // this is a global that's called at the bottom of the pf.io response,
                 // once the polyfills have run. This may be useful for debugging.

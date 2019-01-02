@@ -10,6 +10,8 @@ export const extractScripts: (
                     return `<script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>`;
                 case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                     return `<script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>`;
+                case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
+                    return `<script async custom-element="amp-soundcloud" src="https://cdn.ampproject.org/v0/amp-soundcloud-0.1.js"></script>`;
                 default:
                     return null;
             }

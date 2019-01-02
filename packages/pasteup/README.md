@@ -1,91 +1,111 @@
 # Pasteup
 
-Guardian design tokens. These tokens are intended to be used in conjunction with a CSS-in-JS library
-such as [Emotion](https://emotion.sh).
+The Guardian Design Tokens are intended to be used in conjunction with a CSS-in-JS library such as [Emotion](https://emotion.sh). 
 
-**Alpha package - under construction 🚧**
+**Under construction 🚧**
 
-This package is still under heavy construction, please do not install this in applications intended for
-use in production. The API may change significantly before it is out of alpha. If you enjoy working on shifting sands and wish to use this package in your application, please talk to the Platform team, or email dotcom.platform.
+This file documents the current version of Pasteup. This package is still under heavy construction, please do not install this in applications intended for use in production. The API may change significantly before it is out of alpha. 
 
-## Install
+## Motivation
 
-```bash
-$ npm install @guardian/pasteup
-```
+For an introduction to the origins of Pasteup, see [Motivation](Motivation.md).
 
-```bash
-$ yarn add @guardian/pasteup
-```
 
 ## Usage
 
+This section gives examples of the current usage of Pasteup
+
 ### Breakpoints
+
+#### Example
 
 ```js
 import {
-    mobile,
-    from
-} from '@guardian/pasteup/breakpoints'
+    desktop
+} from '@guardian/pasteup/breakpoints';
 
-const MyComponent = styled('div')({
-    [mobile]: {
-        width: '150px',
-    },
-    [from.mobileMedium.until.tablet]: {
-        width: '175px',
-    },
-    [from.tablet.until.desktop]: {
-        width: '224px',
-    },
-    [from.desktop.until.leftCol]: {
-        width: '249px',
-    },
-})
+const wrapper = css`
+    ${desktop} {
+        max-width: 620px;
+        margin-right: 310px;
+        padding-left: 10px;
+    }
+`
 ```
+
+Where `desktop` will be replaced by
+
+```
+@media (min-width: 980px)
+```
+
+#### Reference
+
+The starting point is the base mapping (breakpoints)
+
+| name            |  size  |
+|:----------------|-------:|
+| mobile          |  320px |
+| mobileMedium    |  360px |
+| mobileLandscape |  480px |
+| phablet         |  660px |
+| tablet          |  740px |
+| desktop         |  980px |
+| leftCol         | 1140px |
+| wide            | 1300px |
+
+The API exposes the following values:
+
+1. `mobile`, `mobileMedium`, `mobileLandscape`, `phablet`, `tablet`, `desktop`, `leftCol` and `wide`. For instance, `mobile` is replaced by
+
+	```
+	@media (min-width: 980px)
+	```
+
+1. `until.[symbol]`, where `symbol` ranges over the constants in subsection 1). For instance, `until.desktop` is replace by
+
+	```
+	@media (max-width: 979px)
+	```
+
+1. `from.[symbol1].until.[symbol2]`, where `symbol` ranges over the constants in subsection 1). For instance, `from.tablet.until.desktop` is replaced by
+
+	```
+	@media (min-width: 740px) and (max-width: 979px)
+	```
 
 ### Fonts
 
 ```js
-import { headline } from '@guardian/pasteup/fonts'
+import { sans } from '@guardian/pasteup/typography';
 
-const MyComponent = styled('div')({
-    fontFamily: headline,
-})
+const footer = css`
+    font-family: ${sans.body};
+    font-size: 16px;
+    margin-top: 20px;
+`;
 ```
 
 ### Mixins
 
 ```js
-import { screenReaderOnly } from '@guardian/pasteup/mixins'
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
-const ScreenReaderText = styled('span')(screenReaderOnly)
+css`
+    ${screenReaderOnly};
+`
 ```
 
 ### Palette
 
 ```js
-import palette from '@guardian/pasteup/palette'
+import { palette } from '@guardian/pasteup/palette';
 
-const MyComponent = styled('div')({
-    color: palette.neutral.header,
-    backgroundColor: palette.neutral['1'],
-})
-```
+const footerLink = css`
+    color: ${palette.neutral[100]};
+    :hover {
+        color: ${palette.highlight.main};
+    }
+`;
 
-## Contribute
-
-### Publish
-
-From the root directory of the `dotcom-rendering` project, run:
-
-```bash
-$ make publish-pasteup
-```
-
-Note: if publishing fails, the pasteup directory will be left in a strange state. To correct this,
-manually run:
-
-```bash
-$ make post-publish-pasteup
 ```
