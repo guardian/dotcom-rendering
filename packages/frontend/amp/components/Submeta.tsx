@@ -17,7 +17,6 @@ const guardianLines = css`
     background-position: top;
     background-size: 1px 13px;
     padding-top: 18px;
-    margin-bottom: 6px;
     margin-top: 12px;
 `;
 

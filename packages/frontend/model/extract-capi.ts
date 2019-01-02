@@ -251,5 +251,8 @@ export const extract = (data: {}): CAPIType => {
             ...sectionData,
         }),
         ...sectionData,
+        shouldHideAds: getBoolean(data, 'config.page.shouldHideAds'),
+        webURL: getNonEmptyString(data, 'config.page.webURL'),
+        guardianBaseURL: getNonEmptyString(data, 'config.page.guardianBaseURL'),
     };
 };
