@@ -13,13 +13,15 @@ import Camera from '@guardian/pasteup/icons/camera.svg';
 import VolumeHigh from '@guardian/pasteup/icons/volume-high.svg';
 import Quote from '@guardian/pasteup/icons/quote.svg';
 import Clock from '@guardian/pasteup/icons/clock.svg';
-
+import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
 
 const inner = css`
     padding-top: 3px;
     overflow: hidden;
     position: relative;
+    border-top: 1px solid ${palette.neutral[86]};
+    padding-bottom: 24px;
 `;
 const header = css`
     font-family: ${serif.headline};
@@ -79,7 +81,7 @@ export const OnwardContainer: React.SFC<{
 }> = ({ guardianBaseURL, path }) => (
     <amp-list
         layout="fixed-height"
-        height="470"
+        height="184"
         src={path}
         credentials="include"
     >
