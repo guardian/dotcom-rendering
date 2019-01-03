@@ -300,7 +300,12 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                     >
                                                         Most viewed{' '}
                                                     </span>
-                                                    {tab.heading}
+                                                    <span // tslint:disable-line:react-no-dangerous-html
+                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: tab.heading,
+                                                        }}
+                                                    />
                                                 </button>
                                             </li>
                                         ))}
