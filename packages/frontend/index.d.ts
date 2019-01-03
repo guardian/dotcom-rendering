@@ -41,19 +41,16 @@ interface MoreType extends LinkType {
     more: true;
 }
 
+interface ReaderRevenueLink {
+    contribute: string;
+    subscribe: string;
+    support: string;
+}
+
 interface ReaderRevenueLinks {
-    header: {
-        subscribe: string;
-        support: string;
-    };
-    footer: {
-        subscribe: string;
-        contribute: string;
-    };
-    sideMenu: {
-        subscribe: string;
-        contribute: string;
-    };
+    header: ReaderRevenueLink;
+    footer: ReaderRevenueLink;
+    sideMenu: ReaderRevenueLink;
 }
 
 interface NavType {
