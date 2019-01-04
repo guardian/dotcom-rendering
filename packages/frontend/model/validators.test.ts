@@ -4,6 +4,7 @@ import {
     getNonEmptyString,
     getBoolean,
     getArray,
+    getObject,
 } from './validators';
 
 describe('validators', () => {
@@ -207,6 +208,54 @@ describe('validators', () => {
 
             expect(() => {
                 getArray(data, 'config.prop');
+            }).toThrow();
+        });
+    });
+
+    describe('getObject', () => {
+        it('returns object successfully if defined', () => {
+            const data = {
+                config: {
+                    prop: {
+                        foo: 'bar',
+                    },
+                },
+            };
+
+            expect(getObject(data, 'config.prop').foo).toBe('bar');
+        });
+
+        it('returns fallback value if not type object', () => {
+            const data = {
+                config: ['foo', 'bar'],
+            };
+
+            expect(
+                getObject(data, 'config.prop', {
+                    foo: 'bar',
+                }).foo,
+            ).toBe('bar');
+        });
+
+        it('returns fallback value if undefined', () => {
+            const data = {
+                config: {},
+            };
+
+            expect(
+                getObject(data, 'config.prop', {
+                    foo: 'bar',
+                }).foo,
+            ).toBe('bar');
+        });
+
+        it('throws error if undefined and no fallback', () => {
+            const data = {
+                config: {},
+            };
+
+            expect(() => {
+                getObject(data, 'config.prop');
             }).toThrow();
         });
     });

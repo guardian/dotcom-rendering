@@ -103,6 +103,7 @@ interface CAPIType {
 
     // AMP specific (for now)
     guardianBaseURL: string;
+    contentType: string;
     hasRelated: boolean;
     hasStoryPackage: boolean;
 }
@@ -123,6 +124,10 @@ interface TagType {
  */
 interface ConfigType {
     ajaxUrl: string;
+    sentryPublicApiKey: string;
+    sentryHost: string;
+    isDev: boolean;
+    switches: { [key: string]: boolean };
 }
 
 // 3rd party type declarations

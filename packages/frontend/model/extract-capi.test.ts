@@ -529,4 +529,21 @@ describe('extract-capi', () => {
         expect(sectionLabel).toBeUndefined();
         expect(sectionUrl).toBeUndefined();
     });
+
+    it('returns contentType if contentType available', () => {
+        const testContentType = 'Video Article';
+        testData.config.page.contentType = testContentType;
+
+        const { contentType } = extract(testData);
+
+        expect(contentType).toBe(testContentType);
+    });
+
+    it('throws error if contentType missing', () => {
+        testData.config.page.contentType = null;
+
+        expect(() => {
+            extract(testData);
+        }).toThrow();
+    });
 });

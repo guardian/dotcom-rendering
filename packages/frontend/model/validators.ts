@@ -88,3 +88,24 @@ export const getArray = <T>(
         )}'`,
     );
 };
+
+export const getObject = (
+    obj: object,
+    selector: string,
+    fallbackValue?: {},
+): any => {
+    const found = get(obj, selector);
+
+    if (typeof found === 'object' && found !== null) {
+        return found;
+    }
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
+    }
+
+    throw new Error(
+        `expected object at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};

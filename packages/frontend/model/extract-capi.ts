@@ -254,6 +254,7 @@ export const extract = (data: {}): CAPIType => {
         shouldHideAds: getBoolean(data, 'config.page.shouldHideAds', false),
         webURL: getNonEmptyString(data, 'config.page.webURL'),
         guardianBaseURL: getNonEmptyString(data, 'config.page.guardianBaseURL'),
+        contentType: getString(data, 'config.page.contentType'),
         hasRelated: getBoolean(data, 'config.page.hasRelated', false),
         hasStoryPackage: getBoolean(data, 'config.page.hasStoryPackage', false),
     };

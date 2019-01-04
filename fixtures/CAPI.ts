@@ -172,6 +172,7 @@ export const CAPI: CAPIType = {
     webURL:
         'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
     guardianBaseURL: 'https://www.theguardian.com',
+    contentType: 'Article',
     hasRelated: false,
     hasStoryPackage: false,
 };
