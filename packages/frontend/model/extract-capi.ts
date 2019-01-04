@@ -230,7 +230,7 @@ export const extract = (data: {}): CAPIType => {
                 : undefined,
             email: 'none',
         },
-        mainMediaElements: getArray<ImageBlockElement>(
+        mainMediaElements: getArray<CAPIElement>(
             data,
             'contentFields.fields.blocks.main.elements',
             [],

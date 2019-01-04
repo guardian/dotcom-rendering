@@ -74,7 +74,7 @@ interface AuthorType {
 interface CAPIType {
     headline: string;
     standfirst: string;
-    mainMediaElements: ImageBlockElement[];
+    mainMediaElements: CAPIElement[];
     main: string;
     body: string;
     elements: CAPIElement[];
