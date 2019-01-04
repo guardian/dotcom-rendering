@@ -230,6 +230,11 @@ export const extract = (data: {}): CAPIType => {
                 : undefined,
             email: 'none',
         },
+        mainMediaElements: getArray<CAPIElement>(
+            data,
+            'contentFields.fields.blocks.main.elements',
+            [],
+        ),
         elements: [].concat(
             ...getArray<any>(data, 'contentFields.fields.blocks.body')
                 .map(block => block.elements)
@@ -251,8 +256,11 @@ export const extract = (data: {}): CAPIType => {
             ...sectionData,
         }),
         ...sectionData,
-        shouldHideAds: getBoolean(data, 'config.page.shouldHideAds'),
+        shouldHideAds: getBoolean(data, 'config.page.shouldHideAds', false),
         webURL: getNonEmptyString(data, 'config.page.webURL'),
         guardianBaseURL: getNonEmptyString(data, 'config.page.guardianBaseURL'),
+        contentType: getString(data, 'config.page.contentType'),
+        hasRelated: getBoolean(data, 'config.page.hasRelated', false),
+        hasStoryPackage: getBoolean(data, 'config.page.hasStoryPackage', false),
     };
 };

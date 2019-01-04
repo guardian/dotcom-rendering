@@ -21,6 +21,10 @@ describe('ShareCount', () => {
     const globalAny: any = global;
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+        sentryHost: '',
+        sentryPublicApiKey: '',
+        isDev: false,
+        switches: {},
     };
 
     afterEach(() => {

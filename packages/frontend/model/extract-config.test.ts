@@ -26,4 +26,68 @@ describe('extract-config', () => {
             extract(testData);
         }).toThrow();
     });
+
+    it('returns sentryPublicApiKey if sentryPublicApiKey available', () => {
+        const testSentryPublicApiKey = '12345';
+
+        testData.config.page.sentryPublicApiKey = testSentryPublicApiKey;
+
+        const { sentryPublicApiKey } = extract(testData);
+
+        expect(sentryPublicApiKey).toBe(testSentryPublicApiKey);
+    });
+
+    it('returns sentryPublicApiKey as empty string if edition not available', () => {
+        testData.config.page.sentryPublicApiKey = null;
+
+        const { sentryPublicApiKey } = extract(testData);
+
+        expect(sentryPublicApiKey).toBe('');
+    });
+
+    it('returns sentryHost if sentryHost available', () => {
+        const testSentryHost = 'foo';
+
+        testData.config.page.sentryHost = testSentryHost;
+
+        const { sentryHost } = extract(testData);
+
+        expect(sentryHost).toBe(testSentryHost);
+    });
+
+    it('returns sentryHost as empty string if edition not available', () => {
+        testData.config.page.sentryHost = null;
+
+        const { sentryHost } = extract(testData);
+
+        expect(sentryHost).toBe('');
+    });
+
+    describe('isDev', () => {
+        const OLD_ENV = process.env;
+
+        beforeEach(() => {
+            process.env = { ...OLD_ENV };
+        });
+
+        afterEach(() => {
+            process.env = OLD_ENV;
+        });
+
+        it('returns isDev as true if process.env.NODE_ENV is "development"', () => {
+            process.env.NODE_ENV = 'development';
+
+            const { isDev } = extract(testData);
+
+            expect(isDev).toBe(true);
+        });
+
+        it('returns isDev as false if process.env.NODE_ENV is "production"', () => {
+            process.env.NODE_ENV = 'production';
+
+            const { isDev } = extract(testData);
+
+            expect(isDev).toBe(false);
+        });
+    });
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { fs } from '@guardian/pasteup/typography';
 import { Container } from '@guardian/guui';

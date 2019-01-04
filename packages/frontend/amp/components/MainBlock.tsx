@@ -1,6 +1,6 @@
 import React from 'react';
-import { css, cx } from 'react-emotion';
 import { fs } from '@guardian/pasteup/typography';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '../../lib/pillars';
 import Dateline from '../../web/components/Dateline';
@@ -9,6 +9,7 @@ import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '../pages/Article';
+import { Elements } from '@frontend/amp/components/lib/Elements';
 
 const byline = css`
     font-style: italic;
@@ -200,6 +201,10 @@ export const MainBlock: React.SFC<{
                     </a>
                 </div>
             )}
+        <Elements
+            pillar={articleData.pillar}
+            elements={articleData.mainMediaElements}
+        />
         <div className={headlineCss}>
             <h1 className={headerStyle}>{articleData.headline}</h1>
             <div // tslint:disable-line:react-no-dangerous-html

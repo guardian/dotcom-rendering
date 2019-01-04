@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css, cx } from 'react-emotion';
+import { css, cx } from 'emotion';
 
 import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';

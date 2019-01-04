@@ -41,19 +41,16 @@ interface MoreType extends LinkType {
     more: true;
 }
 
+interface ReaderRevenueLink {
+    contribute: string;
+    subscribe: string;
+    support: string;
+}
+
 interface ReaderRevenueLinks {
-    header: {
-        subscribe: string;
-        support: string;
-    };
-    footer: {
-        subscribe: string;
-        contribute: string;
-    };
-    sideMenu: {
-        subscribe: string;
-        contribute: string;
-    };
+    header: ReaderRevenueLink;
+    footer: ReaderRevenueLink;
+    sideMenu: ReaderRevenueLink;
 }
 
 interface NavType {
@@ -77,6 +74,7 @@ interface AuthorType {
 interface CAPIType {
     headline: string;
     standfirst: string;
+    mainMediaElements: CAPIElement[];
     main: string;
     body: string;
     elements: CAPIElement[];
@@ -103,7 +101,12 @@ interface CAPIType {
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
     webURL: string;
+
+    // AMP specific (for now)
     guardianBaseURL: string;
+    contentType: string;
+    hasRelated: boolean;
+    hasStoryPackage: boolean;
 }
 
 interface TagType {
@@ -122,6 +125,10 @@ interface TagType {
  */
 interface ConfigType {
     ajaxUrl: string;
+    sentryPublicApiKey: string;
+    sentryHost: string;
+    isDev: boolean;
+    switches: { [key: string]: boolean };
 }
 
 // 3rd party type declarations

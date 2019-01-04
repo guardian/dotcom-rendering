@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '@guardian/guui';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
 
