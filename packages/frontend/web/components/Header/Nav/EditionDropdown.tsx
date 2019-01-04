@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 import { Dropdown } from '@guardian/guui';
 import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';

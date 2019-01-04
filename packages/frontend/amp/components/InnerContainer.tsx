@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'react-emotion';
+import { css, cx } from 'emotion';
 
 const style = css`
     padding-left: 20px;

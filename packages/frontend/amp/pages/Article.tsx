@@ -4,8 +4,8 @@ import Container from '@frontend/amp/components/Container';
 import Body from '@frontend/amp/components/Body';
 import Header from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
-import { css } from 'react-emotion';
 import { Onward } from '@frontend/amp/components/Onward';
+import { css } from 'emotion';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'react-emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
