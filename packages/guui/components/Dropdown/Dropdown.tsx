@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'react-emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { sans } from '@guardian/pasteup/typography';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -250,7 +250,7 @@ export default class Dropdown extends React.Component<
                                 href={l.url}
                                 className={cx({
                                     [link]: true,
-                                    [linkActive]: l.isActive,
+                                    [linkActive]: !!l.isActive,
                                     [linkFirst]: index === 0,
                                 })}
                             >

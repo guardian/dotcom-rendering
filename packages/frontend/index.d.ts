@@ -41,19 +41,16 @@ interface MoreType extends LinkType {
     more: true;
 }
 
+interface ReaderRevenueLink {
+    contribute: string;
+    subscribe: string;
+    support: string;
+}
+
 interface ReaderRevenueLinks {
-    header: {
-        subscribe: string;
-        support: string;
-    };
-    footer: {
-        subscribe: string;
-        contribute: string;
-    };
-    sideMenu: {
-        subscribe: string;
-        contribute: string;
-    };
+    header: ReaderRevenueLink;
+    footer: ReaderRevenueLink;
+    sideMenu: ReaderRevenueLink;
 }
 
 interface NavType {
@@ -103,8 +100,12 @@ interface CAPIType {
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
     webURL: string;
+
+    // AMP specific (for now)
     guardianBaseURL: string;
     contentType: string;
+    hasRelated: boolean;
+    hasStoryPackage: boolean;
 }
 
 interface TagType {

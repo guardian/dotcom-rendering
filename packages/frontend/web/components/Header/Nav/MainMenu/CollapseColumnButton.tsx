@@ -1,6 +1,6 @@
 import React from 'react';
 import { serif } from '@guardian/pasteup/typography';
-import { css, cx } from 'react-emotion';
+import { css, cx } from 'emotion';
 import { hideDesktop } from './Column';
 import { palette } from '@guardian/pasteup/palette';
 

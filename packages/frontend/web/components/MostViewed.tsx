@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { css, cx } from 'react-emotion';
 import { serif } from '@guardian/pasteup/typography';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import {
     desktop,
@@ -300,7 +300,12 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                     >
                                                         Most viewed{' '}
                                                     </span>
-                                                    {tab.heading}
+                                                    <span // tslint:disable-line:react-no-dangerous-html
+                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: tab.heading,
+                                                        }}
+                                                    />
                                                 </button>
                                             </li>
                                         ))}

@@ -1,5 +1,8 @@
+import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
+import { CacheProvider } from '@emotion/core';
+import { cache } from 'emotion';
 import resetCSS from /* preval */ '@frontend/lib/reset-css';
 import fontsCss from '@frontend/lib/fonts-css';
 
@@ -16,7 +19,8 @@ export default ({
     scripts: string[];
 }) => {
     const { html, css }: RenderToStringResult = extractCritical(
-        renderToString(body),
+        // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
+        renderToString(<CacheProvider value={cache}>{body}</CacheProvider>),
     );
 
     return `<!doctype html>

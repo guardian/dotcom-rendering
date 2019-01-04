@@ -1,6 +1,8 @@
 import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
+import { cache } from 'emotion';
+import { CacheProvider } from '@emotion/core';
 
 import htmlTemplate from './htmlTemplate';
 import Article from '../pages/Article';
@@ -28,7 +30,12 @@ export default ({ data }: Props) => {
     const { page, site, CAPI, NAV, config } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
-        renderToString(<Article data={{ CAPI, NAV, config }} />),
+        renderToString(
+            // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
+            <CacheProvider value={cache}>
+                <Article data={{ CAPI, NAV, config }} />
+            </CacheProvider>,
+        ),
     );
 
     /**

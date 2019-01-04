@@ -4,8 +4,8 @@ import Container from '@frontend/amp/components/Container';
 import Body from '@frontend/amp/components/Body';
 import Header from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
-import { css } from 'react-emotion';
 import { Onward } from '@frontend/amp/components/Onward';
+import { css } from 'emotion';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -34,7 +34,18 @@ export interface ArticleModel {
     webURL: string;
     shouldHideAds: boolean;
     guardianBaseURL: string;
+    hasRelated: boolean;
+    hasStoryPackage: boolean;
 }
+
+// TODO move somewhere better
+const tagsOfType = (tags: TagType[], tagType: string): TagType[] => {
+    return tags.filter(
+        tag =>
+            tag.type === tagType ||
+            (tag.type === 'PaidContent' && tag.paidContentType === tagType),
+    );
+};
 
 export const Article: React.SFC<{
     nav: NavType;
@@ -51,9 +62,13 @@ export const Article: React.SFC<{
             />
             <Onward
                 shouldHideAds={articleData.shouldHideAds}
+                pageID={articleData.pageId}
                 webURL={articleData.webURL}
-                onwardURLs={['https://amp.theguardian.com/most-read-mf2.json']}
-                guardianBaseURL={articleData.guardianBaseURL}
+                sectionID={articleData.sectionUrl}
+                hasRelated={false}
+                hasStoryPackage={false}
+                seriesTags={tagsOfType(articleData.tags, 'Series')}
+                guardianBaseURL={'https://amp.theguardian.com'}
             />
             <Footer />
         </Container>

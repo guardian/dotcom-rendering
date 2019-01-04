@@ -10,18 +10,13 @@ Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswl
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.
 
-After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup 
-questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
-
-If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
-
 ### Install Node.js
 
 The only thing you need to make sure you have installed before you get going is [Node.js](https://nodejs.org).
 
 We recommend using [nvm](https://github.com/creationix/nvm) (especially combined with [this handy gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)). It is great at managing multiple versions of Node.js on one machine.
 
-### Setup
+### Running instructions
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
@@ -29,7 +24,19 @@ $ cd dotcom-rendering
 $ make dev
 ```
 
-This will start the development server.
+This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030). 
+
+### Detailed Setup
+
+If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
+
+### Feedback
+
+After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup 
+questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
+
+
+
 
 ## Other tasks
 
