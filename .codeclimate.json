@@ -50,11 +50,11 @@
         "config": {
           "threshold": null
         }
-      },
-      "exclude_patterns": [
-        "**/*.d.ts",
-        "**/*.test.ts",
-        "fixtures/"
-      ]
-    }
+      }
+    },
+    "exclude_patterns": [
+      "**/*.d.ts",
+      "**/*.test.ts",
+      "fixtures/"
+    ]
   }
