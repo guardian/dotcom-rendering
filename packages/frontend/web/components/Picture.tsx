@@ -2,14 +2,14 @@ import React from 'react';
 // tslint:disable:react-no-dangerous-html
 // IE 9 needs this workaround as per https://scottjehl.github.io/picturefill/
 
-export interface ImageSource {
-    width: string;
-    minWidth: string;
+export interface PictureSource {
+    width: number;
+    minWidth: number;
     srcset: string;
     hidpi: boolean;
 }
 
-const mq: (source: ImageSource) => string = source =>
+const mq: (source: PictureSource) => string = source =>
     source.hidpi
         ? `(min-width: ${
               source.minWidth
@@ -18,13 +18,13 @@ const mq: (source: ImageSource) => string = source =>
           }px) and (min-resolution: 120dpi)"`
         : `(min-width: ${source.minWidth}px)"`;
 
-const forSource: (source: ImageSource) => string = source =>
-    ` <source media="${mq(source)}" sizes="${source.width}" srcset="${
+const forSource: (source: PictureSource) => string = source =>
+    ` <source media="${mq(source)}" sizes="${source.width}px" srcset="${
         source.srcset
     }" />`;
 
 export const Picture: React.SFC<{
-    sources: ImageSource[];
+    sources: PictureSource[];
     alt: string;
     src: string;
 }> = ({ sources, alt, src }) => (
