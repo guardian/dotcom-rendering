@@ -230,6 +230,11 @@ export const extract = (data: {}): CAPIType => {
                 : undefined,
             email: 'none',
         },
+        mainMediaElements: getArray<CAPIElement>(
+            data,
+            'contentFields.fields.blocks.main.elements',
+            [],
+        ),
         elements: [].concat(
             ...getArray<any>(data, 'contentFields.fields.blocks.body')
                 .map(block => block.elements)
