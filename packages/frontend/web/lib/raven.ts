@@ -26,15 +26,11 @@ export const getRaven: () => RavenStatic = () => {
         },
         ignoreErrors: [
             "Can't execute code from a freed script",
-            /There is no space left matching rules from/gi,
-            'Top comments failed to load:',
-            'Comments failed to load:',
             /InvalidStateError/gi,
             /Fetch error:/gi,
             'Network request failed',
             'This video is no longer available.',
             'UnknownError',
-            'Fetch error while requesting https://api.nextgen.guardianapps.co.uk/weatherapi/city.json:',
         ],
         dataCallback(data: {
             culprit: string | undefined;

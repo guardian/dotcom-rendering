@@ -4,7 +4,7 @@ export const appData = window.guardian.app.data;
 
 // get allows you to safely get items from window.guardian.app.data using a query of
 // dot or bracket notation, with optional default fallback
-export const get = (path: string = '', defaultValue?: any): any => {
+export const get = <T>(path: string = '', defaultValue?: T): T | undefined => {
     const value = path
         .replace(/\[(.+?)\]/g, '.$1')
         .split('.')
