@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import { fs } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';
@@ -101,7 +101,7 @@ const pillarFigCaptionIconColor = pillarMap(
 
 const listStyles = css`
     li {
-        ${fs('textSans', 5)};
+        ${textSans(5)};
         margin-bottom: 6px;
         padding-left: 20px;
 
@@ -123,7 +123,7 @@ const listStyles = css`
 `;
 
 const standfirst = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
@@ -162,11 +162,11 @@ const section = css`
     @supports (display: grid) {
         grid-template-areas: 'section';
     }
-    ${fs('headline', 2)};
+    ${headline(2)};
     font-weight: 700;
 
     ${leftCol} {
-        ${fs('headline', 3)};
+        ${headline(3)};
         line-height: 28px;
     }
 
@@ -175,7 +175,7 @@ const section = css`
     }
 `;
 
-const headline = css`
+const headlineCSS = css`
     @supports (display: grid) {
         grid-template-areas: 'headline';
     }
@@ -215,7 +215,7 @@ const guardianLines = css`
 `;
 
 const captionFont = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     color: ${palette.neutral[46]};
 `;
 
@@ -264,7 +264,7 @@ const mainMedia = css`
 `;
 
 const headerStyle = css`
-    ${fs('headline', 7)};
+    ${headline(7)};
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -280,7 +280,7 @@ const bodyStyle = css`
     }
 
     h2 {
-        ${fs('textSans', 6)};
+        ${textSans(6)};
         margin-bottom: 0.0625rem;
         font-weight: 900;
     }
@@ -291,7 +291,7 @@ const bodyStyle = css`
 
     p {
         margin-bottom: 16px;
-        ${fs('textSans', 5)};
+        ${textSans(5)};
     }
 
     img {
@@ -336,7 +336,7 @@ const linkColour = pillarMap(
 );
 
 const profile = css`
-    ${fs('headline', 2)};
+    ${headline(2)};
     font-weight: 700;
     margin-bottom: 4px;
 `;
@@ -354,7 +354,7 @@ const bylineLink = css`
 `;
 
 const ageWarning = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     display: inline-block;
     margin-bottom: 12px;
     width: 100%;
@@ -365,7 +365,7 @@ const ageWarning = css`
 `;
 
 const twitterHandle = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     font-weight: bold;
     color: ${palette.neutral[46]};
 
@@ -420,7 +420,7 @@ const subMeta = css`
 `;
 
 const subMetaLabel = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     display: block;
     color: ${palette.neutral[60]};
 `;
@@ -513,7 +513,7 @@ const ArticleBody: React.SFC<{
                             </a>
                         </div>
                     )}
-                <div className={headline}>
+                <div className={headlineCSS}>
                     <h1 className={headerStyle}>{CAPI.headline}</h1>
                     <div
                         className={cx(standfirst, standfirstLinks[CAPI.pillar])}

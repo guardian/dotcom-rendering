@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { fs } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import {
     mobileLandscape,
@@ -48,7 +48,7 @@ const style = css`
 
 const text = css`
     color: ${palette.neutral[97]};
-    ${fs('headline', 1)};
+    ${headline(1)};
     font-weight: 700;
     text-align: center;
     line-height: 1.2;
@@ -56,7 +56,7 @@ const text = css`
     position: relative;
 
     ${tablet} {
-        ${fs('headline', 1)};
+        ${headline(1)};
     }
 `;
 

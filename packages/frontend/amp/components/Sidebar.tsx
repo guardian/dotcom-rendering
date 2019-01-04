@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { fs } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 
 const sidebarStyles = css`
     width: 80vh;
@@ -47,7 +47,7 @@ const pillarLink = css`
     border: 0;
     box-sizing: border-box;
     display: block;
-    ${fs('headline', 4)};
+    ${headline(4)};
     outline: none;
     padding: 8px 10px 8px 50px;
     padding-top: 8px;
@@ -69,7 +69,7 @@ const link = css`
     color: ${palette.neutral[100]};
     text-decoration: none;
     display: block;
-    ${fs('textSans', 7)};
+    ${textSans(7)};
     font-weight: 400;
     outline: none;
     padding: 8px 10px 8px 50px;

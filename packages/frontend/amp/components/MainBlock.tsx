@@ -1,5 +1,5 @@
 import React from 'react';
-import { fs } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '../../lib/pillars';
@@ -40,7 +40,7 @@ const meta = css`
 `;
 
 const headerStyle = css`
-    ${fs('headline', 6)};
+    ${headline(6)};
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -61,14 +61,14 @@ const section = css`
     @supports (display: grid) {
         grid-template-areas: 'section';
     }
-    ${fs('headline', 2)};
+    ${headline(2)};
     font-weight: 700;
 
     padding: 0 10px;
 `;
 
 const profile = css`
-    ${fs('headline', 2)};
+    ${headline(2)};
     font-weight: 700;
     margin-bottom: 4px;
 `;
@@ -84,7 +84,7 @@ const listStyles = css`
     li {
         margin-bottom: 6px;
         padding-left: 20px;
-        ${fs('headline', 2)};
+        ${headline(2)};
         p {
             display: inline;
         }
@@ -103,7 +103,7 @@ const listStyles = css`
 `;
 
 const standfirstCss = css`
-    ${fs('textSans', 5)};
+    ${textSans(5)};
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
@@ -114,7 +114,7 @@ const standfirstCss = css`
 `;
 
 const ageWarningCss = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     display: inline-block;
     margin-bottom: 12px;
     width: 100%;
@@ -145,7 +145,7 @@ const pillarFill = pillarMap(
 );
 
 const twitterHandle = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     font-weight: bold;
     color: ${palette.neutral[46]};
 

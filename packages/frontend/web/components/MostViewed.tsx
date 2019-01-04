@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { fs } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import {
     desktop,
@@ -23,14 +23,14 @@ const container = css`
 `;
 
 const heading = css`
-    ${fs('headline', 4)};
+    ${headline(4)};
     color: ${palette.neutral[7]};
     font-weight: 900;
     padding-right: 5px;
     padding-bottom: 4px;
 
     ${leftCol} {
-        ${fs('headline', 3)};
+        ${headline(3)};
         width: 140px;
         position: relative;
 
@@ -149,7 +149,7 @@ const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
     font-weight: 500;
-    ${fs('headline', 2)};
+    ${headline(2)};
 `;
 
 const tabsContainer = css`
@@ -186,7 +186,7 @@ const selectedListTab = css`
 `;
 
 const tabButton = css`
-    ${fs('headline', 1)};
+    ${headline(1)};
     margin: 0;
     border: 0;
     background: transparent;
@@ -205,7 +205,7 @@ const tabButton = css`
     }
 
     ${tablet} {
-        ${fs('headline', 2)};
+        ${headline(2)};
     }
 `;
 

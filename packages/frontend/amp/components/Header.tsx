@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { fs } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
 import Sidebar from './Sidebar';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
@@ -36,7 +36,7 @@ const supportStyles = css`
 const supportLinkStyles = css`
     position: relative;
     color: ${palette.neutral[7]};
-    ${fs('textSans', 5)};
+    ${textSans(5)};
     font-weight: 700;
     display: block;
     text-decoration: none;
@@ -85,7 +85,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     text-decoration: none;
     cursor: pointer;
     display: block;
-    ${fs('textSans', 5)};
+    ${textSans(5)};
     height: 36px;
     padding: 9px 4px;
     color: ${palette.neutral[100]};

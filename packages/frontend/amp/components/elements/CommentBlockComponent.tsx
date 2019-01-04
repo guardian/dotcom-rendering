@@ -1,14 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { fs } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 
 const wrapper = css`
     overflow: hidden;
     position: relative;
     margin-bottom: 12px;
     padding-top: 12px;
-    ${fs('textSans', 3)};
+    ${textSans(3)};
     padding-left: 20px;
     border-left: 8px solid ${palette.neutral[86]};
     clear: left;
@@ -24,14 +24,14 @@ const metaLink = css`
     border-bottom: 1px solid ${palette.neutral[86]};
     color: ${palette.news.main};
     text-decoration: none;
-    ${fs('textSans', 1)};
+    ${textSans(1)};
 `;
 
-const body = css`
+const bodyCSS = css`
     clear: left;
 
     p {
-        ${fs('textSans', 5)};
+        ${textSans(5)};
         font-weight: 300;
         margin-top: 0;
         margin-bottom: 8px;
@@ -62,7 +62,7 @@ export const CommentBlockComponent: React.SFC<{
         </div>
 
         <div // tslint:disable-line:react-no-dangerous-html
-            className={body}
+            className={bodyCSS}
             dangerouslySetInnerHTML={{ __html: element.body }}
         />
     </div>

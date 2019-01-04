@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fs } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
@@ -45,7 +45,7 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
-    ${fs('headline', 3)};
+    ${headline(3)};
     background-color: transparent;
     text-decoration: none;
     border: 0;
@@ -63,7 +63,7 @@ const columnLinkTitle = css`
         padding-left: 60px;
     }
     ${desktop} {
-        ${fs('headline', 1)};
+        ${headline(1)};
         padding: 6px 0;
     }
     :hover,
@@ -107,7 +107,7 @@ const ColumnLink: React.SFC<{
 );
 
 const columnLinks = css`
-    ${fs('textSans', 6)};
+    ${textSans(6)};
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -168,7 +168,7 @@ const ColumnLinks: React.SFC<{
 };
 
 const columnStyle = css`
-    ${fs('textSans', 6)};
+    ${textSans(6)};
     list-style: none;
     margin: 0;
     padding: 0 0 12px;

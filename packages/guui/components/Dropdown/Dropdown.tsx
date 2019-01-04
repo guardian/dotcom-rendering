@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { fs } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 export interface Link {
@@ -41,7 +41,7 @@ const ulExpanded = css`
 `;
 
 const link = css`
-    ${fs('textSans', 3)};
+    ${textSans(3)};
     color: ${palette.neutral[7]};
     position: relative;
     transition: color 80ms ease-out;
@@ -95,7 +95,7 @@ const linkFirst = css`
 `;
 
 const button = css`
-    ${fs('textSans', 3)};
+    ${textSans(3)};
     display: block;
     cursor: pointer;
     background: none;

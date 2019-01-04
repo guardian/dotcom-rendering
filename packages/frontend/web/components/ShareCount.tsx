@@ -3,12 +3,12 @@ import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { fs } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';
 
 const shareCount = css`
-    ${fs('textSans', 6)};
+    ${textSans(6)};
     font-weight: bold;
     color: ${palette.neutral[46]};
 

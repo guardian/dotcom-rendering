@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { fs } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 
@@ -26,10 +26,10 @@ const linkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    ${fs('textSans', 4)};
+    ${textSans(4)};
     :after {
         content: '/';
-        ${fs('textSans', 5)};
+        ${textSans(5)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -61,10 +61,10 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    ${fs('textSans', 5)};
+    ${textSans(5)};
     :after {
         content: '/';
-        ${fs('textSans', 7)};
+        ${textSans(7)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -79,14 +79,14 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     color: ${palette.neutral[46]};
     display: block;
     margin-bottom: -3px;
 `;
 
 const siteLinkStyle = css`
-    ${fs('textSans', 2)};
+    ${textSans(2)};
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};

@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { fs } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 
 import { VeggieBurger } from './VeggieBurger';
 import { palette } from '@guardian/pasteup/palette';
@@ -14,7 +14,7 @@ const screenReadable = css`
 const navPrimaryColour = palette.neutral[7];
 const navSecondaryColour = palette.neutral[20];
 const openMainMenu = css`
-    ${fs('headline', 3)};
+    ${headline(3)};
     display: none;
     font-weight: 500;
     text-decoration: none;
@@ -35,7 +35,7 @@ const openMainMenu = css`
     }
     ${leftCol} {
         margin-top: -5px;
-        ${fs('headline', 4)};
+        ${headline(4)};
     }
     :hover {
         color: ${navPrimaryColour};

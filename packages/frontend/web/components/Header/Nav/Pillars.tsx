@@ -8,7 +8,7 @@ import {
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 
-import { fs } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
@@ -66,7 +66,7 @@ const pillarDivider = css`
 `;
 
 const linkStyle = css`
-    ${fs('headline', 2)};
+    ${headline(2)};
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
@@ -76,14 +76,14 @@ const linkStyle = css`
     position: relative;
     overflow: hidden;
     ${tablet} {
-        ${fs('headline', 3)};
+        ${headline(3)};
         height: 42px;
         padding-right: 20px;
         padding-left: 5px;
     }
     ${leftCol} {
         height: 48px;
-        ${fs('headline', 4)};
+        ${headline(4)};
     }
     :after {
         content: '';

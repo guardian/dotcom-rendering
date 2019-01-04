@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { fs } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import {
     desktop,
     tablet,
@@ -50,17 +50,17 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${fs('headline', 1)};
+    ${headline(1)};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;
     height: 36px;
     ${mobileMedium} {
-        ${fs('headline', 2)};
+        ${headline(2)};
     }
 
     ${tablet} {
-        ${fs('headline', 2)};
+        ${headline(2)};
         height: 42px;
     }
 `;

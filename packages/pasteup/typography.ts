@@ -69,9 +69,13 @@ const fontfamilyCss = (category: Category): string =>
     `font-family: ${fontFamily(category)}`;
 
 // fs('headline', 2) = 'font-size: 16px; line-height: 20px; font-family: GH Guardian Headline, Georgia, serif';
-export const fs = (category: Category, level: number): string =>
+const fs = (category: Category, level: number): string =>
     [
         fontSizeCss(category, level),
         lineHeightCss(category, level),
         fontfamilyCss(category),
     ].join('; ');
+
+export const headline = (level: number): string => fs('headline', level);
+export const body = (level: number): string => fs('body', level);
+export const textSans = (level: number): string => fs('textSans', level);

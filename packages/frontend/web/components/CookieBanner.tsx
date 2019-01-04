@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { fs } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { Container } from '@guardian/guui';
 import TickIcon from '@guardian/pasteup/icons/tick.svg';
 import { getCookie, addCookie } from '@frontend/web/lib/cookie';
@@ -14,7 +14,7 @@ const banner = css`
     width: 100%;
 
     p {
-        ${fs('textSans', 5)};
+        ${textSans(5)};
         margin-top: 0;
         margin-bottom: 8px;
         color: ${palette.neutral[100]};
@@ -36,7 +36,7 @@ const inner = css`
 `;
 
 const header = css`
-    ${fs('headline', 6)};
+    ${headline(6)};
     font-weight: bold;
     padding-bottom: 12px;
     color: ${palette.highlight.main};
@@ -44,11 +44,11 @@ const header = css`
 
 const more = css`
     margin-left: 12px;
-    ${fs('textSans', 3)};
+    ${textSans(3)};
 `;
 
 const button = css`
-    ${fs('textSans', 5)};
+    ${textSans(5)};
     border-radius: 1000px;
     height: 42px;
     background: ${palette.highlight.main};

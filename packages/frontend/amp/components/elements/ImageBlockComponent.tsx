@@ -1,6 +1,6 @@
 import React from 'react';
 import { Img } from '@frontend/amp/components/primitives/Img';
-import { fs } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
@@ -14,7 +14,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
     padding-top: 8px;
-    ${fs('textSans', 1)};
+    ${textSans(1)};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
 `;
