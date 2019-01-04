@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { serif } from '@guardian/pasteup/typography';
+import { fs } from '@guardian/pasteup/typography';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
@@ -28,7 +28,7 @@ const style = (pillar: Pillar) => css`
             border-bottom: 1px solid ${pillarPalette[pillar].main};
         }
     }
-    font-family: ${serif.body};
+    ${fs('textSans', 5)};
 `;
 export const TextBlockComponent: React.SFC<{
     html: string;

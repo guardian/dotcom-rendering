@@ -10,6 +10,7 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { Columns } from './Columns';
 import { palette } from '@guardian/pasteup/palette';
+import { fs } from '@guardian/pasteup/typography';
 
 const showMenu = css`
     ${desktop} {

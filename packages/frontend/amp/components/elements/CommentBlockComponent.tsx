@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'react-emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { sans } from '@guardian/pasteup/typography';
+import { fs } from '@guardian/pasteup/typography';
 
 const wrapper = css`
     overflow: hidden;

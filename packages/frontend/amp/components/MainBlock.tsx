@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'react-emotion';
-import { sans, serif } from '@guardian/pasteup/typography';
+import { fs } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '../../lib/pillars';
 import Dateline from '../../web/components/Dateline';
@@ -102,7 +102,7 @@ const listStyles = css`
 `;
 
 const standfirstCss = css`
-    ${fs('textSans', 5)}
+    ${fs('textSans', 5)};
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
