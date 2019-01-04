@@ -42,14 +42,10 @@
         }
       },
       "similar-code": {
-        "config": {
-          "threshold": null
-        }
+        "enabled": false
       },
       "identical-code": {
-        "config": {
-          "threshold": null
-        }
+        "enabled": false
       }
     },
     "exclude_patterns": [
