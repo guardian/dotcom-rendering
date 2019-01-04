@@ -8,8 +8,10 @@ export const getRaven: () => RavenStatic = () => {
         return ravenConfig;
     }
 
-    const { sentryPublicApiKey, sentryHost, isDev, switches } = get('config');
-    const { editionLongForm, contentType } = get('CAPI');
+    const { sentryPublicApiKey, sentryHost, isDev, switches } = get(
+        'config',
+    ) as ConfigType;
+    const { editionLongForm, contentType } = get('CAPI') as CAPIType;
 
     const sentryUrl = `https://${sentryPublicApiKey}@${sentryHost}`;
     const sentryOptions = {
