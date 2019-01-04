@@ -22,6 +22,7 @@ const inner = css`
     position: relative;
 `;
 const header = css`
+    padding-bottom: 0.75rem;
     font-weight: 500;
     position: relative;
     ${fs('headline', 3)};

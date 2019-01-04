@@ -102,7 +102,7 @@ const listStyles = css`
 `;
 
 const standfirstCss = css`
-    ${fs('textSans', 16)}
+    ${fs('textSans', 5)}
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
