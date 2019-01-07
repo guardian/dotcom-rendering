@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { sans, serif } from '@guardian/pasteup/typography';
+import { body, textSans } from '@guardian/pasteup/typography';
 
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
@@ -57,15 +57,11 @@ const subMetaLink = css`
 `;
 
 const subMetaSectionLink = css`
-    font-size: 16px;
-    line-height: 20px;
-    font-family: ${serif.body};
+    ${body(2)};
 `;
 
 const subMetaKeywordLink = css`
-    font-size: 14px;
-    line-height: 22px;
-    font-family: ${sans.body};
+    ${textSans(3)};
 `;
 
 const hideSlash = css`

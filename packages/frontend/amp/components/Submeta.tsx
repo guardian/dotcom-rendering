@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { serif, sans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 
@@ -26,13 +26,10 @@ const linkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    font-family: ${serif.body};
-    font-size: 15px;
-    line-height: 24px;
-
+    ${textSans(4)};
     :after {
         content: '/';
-        font-size: 16px;
+        ${textSans(5)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -64,13 +61,10 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    font-family: ${serif.body};
-    font-size: 16px;
-    line-height: 22px;
-
+    ${textSans(5)};
     :after {
         content: '/';
-        font-size: 16px;
+        ${textSans(7)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -85,20 +79,17 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-    font-size: 12px;
-    line-height: 16px;
+    ${textSans(1)};
     color: ${palette.neutral[46]};
     display: block;
     margin-bottom: -3px;
-    font-family: ${sans.body};
 `;
 
 const siteLinkStyle = css`
-    font-size: 13px;
+    ${textSans(2)};
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};
-    font-family: ${sans.body};
     line-height: 36px;
 `;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { serif } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import {
     mobileLandscape,
@@ -48,8 +48,7 @@ const style = css`
 
 const text = css`
     color: ${palette.neutral[97]};
-    font-family: ${serif.headline};
-    font-size: 13px;
+    ${headline(1)};
     font-weight: 700;
     text-align: center;
     line-height: 1.2;
@@ -57,7 +56,7 @@ const text = css`
     position: relative;
 
     ${tablet} {
-        font-size: 14px;
+        ${headline(1)};
     }
 `;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
-import { serif } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 
 import { Column, More, ReaderRevenueLinks } from './Column';
 import { palette } from '@guardian/pasteup/palette';
@@ -40,7 +40,7 @@ const desktopBrandExtensionColumn = css`
 const brandExtensionList = css`
     width: 186px;
     box-sizing: border-box;
-    font-size: 18px;
+    ${textSans(6)};
     flex-wrap: wrap;
     list-style: none;
     margin: 0;
@@ -63,16 +63,14 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
-    font-size: 24px;
+    ${headline(4)};
     font-weight: 700;
-    line-height: 1.1;
     background-color: transparent;
     border: 0;
     box-sizing: border-box;
     color: ${palette.neutral[7]};
     cursor: pointer;
     display: inline-block;
-    font-family: ${serif.headline};
     outline: none;
     padding: 8px 34px 8px 50px;
     position: relative;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { sans, serif } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '../../lib/pillars';
@@ -40,9 +40,7 @@ const meta = css`
 `;
 
 const headerStyle = css`
-    font-size: 34px;
-    line-height: 38px;
-    font-family: ${serif.headline};
+    ${headline(6)};
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -63,18 +61,14 @@ const section = css`
     @supports (display: grid) {
         grid-template-areas: 'section';
     }
-    font-size: 16px;
-    line-height: 20px;
-    font-family: ${serif.headline};
+    ${headline(2)};
     font-weight: 700;
 
     padding: 0 10px;
 `;
 
 const profile = css`
-    font-size: 16px;
-    line-height: 20px;
-    font-family: ${serif.headline};
+    ${headline(2)};
     font-weight: 700;
     margin-bottom: 4px;
 `;
@@ -88,12 +82,9 @@ const sectionLabelLink = css`
 
 const listStyles = css`
     li {
-        font-family: ${serif.body};
         margin-bottom: 6px;
         padding-left: 20px;
-        font-size: 17px;
-        line-height: 24px;
-
+        ${headline(2)};
         p {
             display: inline;
         }
@@ -112,24 +103,18 @@ const listStyles = css`
 `;
 
 const standfirstCss = css`
-    font-family: ${serif.body};
+    ${textSans(5)};
     font-weight: 700;
-    font-size: 17px;
-    line-height: 22px;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
-
     ${listStyles};
-
     p {
         margin-bottom: 8px;
     }
 `;
 
 const ageWarningCss = css`
-    font-size: 12px;
-    line-height: 16px;
-    font-family: ${sans.body};
+    ${textSans(1)};
     display: inline-block;
     margin-bottom: 12px;
     width: 100%;
@@ -160,9 +145,7 @@ const pillarFill = pillarMap(
 );
 
 const twitterHandle = css`
-    font-size: 12px;
-    line-height: 16px;
-    font-family: ${sans.body};
+    ${textSans(1)};
     font-weight: bold;
     color: ${palette.neutral[46]};
 

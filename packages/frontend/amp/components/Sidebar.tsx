@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { serif } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 
 const sidebarStyles = css`
     width: 80vh;
@@ -47,9 +47,7 @@ const pillarLink = css`
     border: 0;
     box-sizing: border-box;
     display: block;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 20px;
+    ${headline(4)};
     outline: none;
     padding: 8px 10px 8px 50px;
     padding-top: 8px;
@@ -58,12 +56,9 @@ const pillarLink = css`
     text-align: left;
     width: 100%;
     font-weight: 500;
-    font-size: 24px;
     padding-bottom: 16px;
     padding-top: 6px;
     color: ${palette.neutral[100]};
-    font-family: ${serif.headline};
-
     ${toggle};
 `;
 
@@ -74,15 +69,13 @@ const link = css`
     color: ${palette.neutral[100]};
     text-decoration: none;
     display: block;
-    font-size: 20px;
+    ${textSans(7)};
     font-weight: 400;
-    line-height: 20px;
     outline: none;
     padding: 8px 10px 8px 50px;
     position: relative;
     text-align: left;
     width: 100%;
-    font-family: ${serif.body};
 `;
 
 const subLinks = css`

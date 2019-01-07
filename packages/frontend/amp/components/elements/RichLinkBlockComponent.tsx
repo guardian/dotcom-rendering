@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { serif, sans } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 const richLinkContainer = css`
@@ -20,23 +20,19 @@ const pillarColour = (pillar: Pillar) => css`
 `;
 
 const richLink = css`
-    font-family: ${serif.headline};
     font-weight: 500;
     border: 0;
     text-decoration: none;
-    font-size: 14px;
-    line-height: 16px;
+    ${headline(1)};
     word-wrap: break-word;
     :hover {
         text-decoration: underline;
     }
     ::before {
+        ${textSans(1)};
         content: 'More on this topic';
         display: block;
         color: ${palette.neutral[46]};
-        font-size: 12px;
-        line-height: 16px;
-        font-family: ${sans.body};
         font-weight: 400;
     }
 `;

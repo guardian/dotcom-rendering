@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
-import { sans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
@@ -11,8 +11,7 @@ import { footerLinks, Link } from '@frontend/lib/footer-links';
 const footer = css`
     background-color: ${palette.neutral[20]};
     color: ${palette.neutral[86]};
-    font-family: ${sans.body};
-    font-size: 14px;
+    ${textSans(3)};
 `;
 
 const footerInner = css`
@@ -86,7 +85,7 @@ const footerList = css`
 `;
 
 const copyright = css`
-    font-size: 12px;
+    ${textSans(1)};
     padding: 6px 0 18px;
     border-top: 1px solid ${palette.neutral[20]};
     margin-top: 12px;

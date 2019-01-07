@@ -77,14 +77,63 @@ The API exposes the following values:
 ### Fonts
 
 ```js
-import { sans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 
 const footer = css`
-    font-family: ${sans.body};
-    font-size: 16px;
+    ${textSans(6)}
     margin-top: 20px;
 `;
 ```
+
+Note the use of the function `textSans` imported from `typography`.
+
+`typography` exposes three functions: `headline`, `body` and `textSans`, all taking a number/integer and returning a CSS string. For instance
+
+```
+textSans(2) =
+font-size: 13px; line-height: 18px; font-family: GuardianTextSans, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif
+```
+The current mapping is hardcoded in the code of `typography` and is:
+
+```
+const fontScaleMapping: any = {
+    headline: {
+        1: { fontSize: 14, lineHeight: 18 },
+        2: { fontSize: 16, lineHeight: 20 },
+        3: { fontSize: 20, lineHeight: 24 },
+        4: { fontSize: 24, lineHeight: 28 },
+        5: { fontSize: 28, lineHeight: 32 },
+        6: { fontSize: 32, lineHeight: 36 },
+        7: { fontSize: 36, lineHeight: 40 },
+        8: { fontSize: 40, lineHeight: 44 },
+        9: { fontSize: 44, lineHeight: 48 },
+    },
+    body: {
+        1: { fontSize: 14, lineHeight: 20 },
+        2: { fontSize: 16, lineHeight: 24 },
+        3: { fontSize: 18, lineHeight: 28 },
+    },
+    textSans: {
+        1: { fontSize: 12, lineHeight: 16 },
+        2: { fontSize: 13, lineHeight: 18 },
+        3: { fontSize: 14, lineHeight: 20 },
+        4: { fontSize: 14, lineHeight: 22 },
+        5: { fontSize: 16, lineHeight: 22 },
+        6: { fontSize: 18, lineHeight: 18 },
+        7: { fontSize: 20, lineHeight: 20 },
+    },
+};
+
+// together with
+
+serif.headline: GH Guardian Headline, Georgia, serif
+serif.body: GuardianTextEgyptian, Georgia, serif
+sans.body: GuardianTextSans, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif
+
+```
+
+This mapping may see adjustements in the future.
+
 
 ### Mixins
 

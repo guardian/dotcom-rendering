@@ -6,7 +6,7 @@ import {
     MoustacheTemplate,
     moustacheVariable,
 } from './primitives/moustache';
-import { serif } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 
 import VideoIcon from '@guardian/pasteup/icons/video-icon.svg';
 import Camera from '@guardian/pasteup/icons/camera.svg';
@@ -24,12 +24,10 @@ const inner = css`
     padding-bottom: 24px;
 `;
 const header = css`
-    font-family: ${serif.headline};
     padding-bottom: 0.75rem;
     font-weight: 500;
     position: relative;
-    font-size: 22px;
-    line-height: 28px;
+    ${headline(3)};
 `;
 const item = css`
     background-color: #ededed;
@@ -62,18 +60,12 @@ const link = css`
     white-space: nowrap;
     background: transparent;
 `;
-const headline = css`
+const headlineCSS = css`
     padding: 0;
-
     margin: 1px 0 0;
-
-    font-family: ${serif.headline};
     font-weight: 500;
     word-wrap: break-word;
-
-    font-size: 14px;
-
-    line-height: 18px;
+    ${headline(1)};
 `;
 export const OnwardContainer: React.SFC<{
     guardianBaseURL: string;
@@ -112,7 +104,7 @@ export const OnwardContainer: React.SFC<{
                                 </div>
                                 <div className={itemContent}>
                                     <div>
-                                        <h2 className={headline}>
+                                        <h2 className={headlineCSS}>
                                             <span>
                                                 <MoustacheSection name="isVideo">
                                                     <VideoIcon />

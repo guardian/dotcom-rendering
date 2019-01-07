@@ -1,6 +1,8 @@
+type Category = 'headline' | 'body' | 'textSans';
+
 export const serif = {
-    headline: ['GH Guardian Headline', 'Georgia', 'serif'].join(','),
-    body: ['GuardianTextEgyptian', 'Georgia', 'serif'].join(','),
+    headline: ['GH Guardian Headline', 'Georgia', 'serif'].join(', '),
+    body: ['GuardianTextEgyptian', 'Georgia', 'serif'].join(', '),
 };
 
 export const sans = {
@@ -11,7 +13,7 @@ export const sans = {
         'Arial',
         'Lucida Grande',
         'sans-serif',
-    ].join(','),
+    ].join(', '),
 };
 
 const fontScaleMapping: any = {
@@ -38,17 +40,42 @@ const fontScaleMapping: any = {
         4: { fontSize: 14, lineHeight: 22 },
         5: { fontSize: 16, lineHeight: 22 },
         6: { fontSize: 18, lineHeight: 18 },
+        7: { fontSize: 20, lineHeight: 20 },
     },
 };
 
-export const fontSize = (typex: string, level: number) =>
-    fontScaleMapping[typex][level].fontSize.toString();
+const fontSizeNumber = (category: Category, level: number): number =>
+    fontScaleMapping[category][level].fontSize;
 
-export const lineHeight = (typex: string, level: number) =>
-    fontScaleMapping[typex][level].lineHeight.toString();
+const lineHeightNumber = (category: Category, level: number): number =>
+    fontScaleMapping[category][level].lineHeight;
 
-// (font-size: 14, line-height: 18)
-export const fontScale = (typex: string, level: number): string =>
-    `
-font-size: ${fontScaleMapping[typex][level].fontSize}, 
-line-height: ${fontScaleMapping[typex][level].lineHeight}`;
+const fontSizeCss = (category: Category, level: number): string =>
+    `font-size: ${fontSizeNumber(category, level)}px`;
+
+const lineHeightCss = (category: Category, level: number): string =>
+    `line-height: ${lineHeightNumber(category, level)}px`;
+
+const fontFamily = (category: Category): string => {
+    const families: { [cat in Category]: string } = {
+        headline: serif.headline,
+        body: serif.body,
+        textSans: sans.body,
+    };
+    return families[category];
+};
+
+const fontfamilyCss = (category: Category): string =>
+    `font-family: ${fontFamily(category)}`;
+
+// fs('headline', 2) = 'font-size: 16px; line-height: 20px; font-family: GH Guardian Headline, Georgia, serif';
+const fs = (category: Category, level: number): string =>
+    [
+        fontSizeCss(category, level),
+        lineHeightCss(category, level),
+        fontfamilyCss(category),
+    ].join('; ');
+
+export const headline = (level: number): string => fs('headline', level);
+export const body = (level: number): string => fs('body', level);
+export const textSans = (level: number): string => fs('textSans', level);
