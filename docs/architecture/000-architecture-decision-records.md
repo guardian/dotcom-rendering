@@ -14,4 +14,4 @@ For all architectural decisions in this project, an architectural decision recor
 
 ## Status
 
-Proposed
+Approved
