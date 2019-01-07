@@ -161,5 +161,6 @@ declare namespace JSX {
         'amp-soundcloud': any;
         'amp-iframe': any;
         template: any;
+        'amp-fallback': React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & { fallback?: string };
     }
 }

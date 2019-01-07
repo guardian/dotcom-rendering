@@ -8,6 +8,5 @@ declare module 'react' {
     interface HTMLAttributes<T> extends DOMAttributes<T> {
         on?: string;
         overflow?: string;
-        fallback?: string;
     }
 }

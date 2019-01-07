@@ -23,11 +23,11 @@ export const TweetBlockComponent: React.SFC<{
             data-tweetid={element.id}
         >
             {fallbackHTML && (
-                <div fallback={'true'}>
+                <amp-fallback fallback={'true'}>
                     <blockquote
                         dangerouslySetInnerHTML={{ __html: fallbackHTML }}
                     />
-                </div>
+                </amp-fallback>
             )}
         </amp-twitter>
     );
