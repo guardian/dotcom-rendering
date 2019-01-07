@@ -4,10 +4,7 @@ import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import {
-    bestFitImage,
-    heightEstimate,
-} from '@frontend/amp/components/lib/GetImage';
+import { bestFitImage, heightEstimate } from '@frontend/amp/lib/GetImage';
 const figureStyle = css`
     margin-top: 16px;
     margin-bottom: 8px;
