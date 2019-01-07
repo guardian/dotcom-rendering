@@ -28,15 +28,16 @@ const getQueryParam = (
 
 export const init = (): void => {
     const coldQueue = (...args: any[]) => {
-        (ga.q = ga.q || []).push(args);
+        (window.ga.q = window.ga.q || []).push(args);
     };
-    const ga = window.ga || (coldQueue as UniversalAnalytics.ga);
+
+    window.ga = window.ga || (coldQueue as UniversalAnalytics.ga);
     const identityId = getCookie('GU_U');
 
     window.GoogleAnalyticsObject = 'ga';
-    ga.l = +new Date();
+    window.ga.l = +new Date();
 
-    ga('create', tracker.id, 'auto', tracker.name, {
+    window.ga('create', tracker.id, 'auto', tracker.name, {
         sampleRate: tracker.sampleRate,
         siteSpeedSampleRate: tracker.siteSpeedSampleRate,
         userId: identityId,
@@ -48,6 +49,7 @@ export const sendPageView = (): void => {
     const set = `${tracker.name}.set`;
     const send = `${tracker.name}.send`;
     const identityId = getCookie('GU_U');
+    const ga = window.ga;
 
     ga(set, 'forceSSL', true);
     ga(set, 'title', GA.webTitle);
