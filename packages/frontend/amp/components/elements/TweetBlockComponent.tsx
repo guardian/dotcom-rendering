@@ -25,11 +25,11 @@ export const TweetBlockComponent: React.SFC<{
             data-tweetid={element.id}
         >
             {placeholderHTML && (
-                <DivAmp fallback={true}>
+                <div fallback={true}>
                     <blockquote
                         dangerouslySetInnerHTML={{ __html: placeholderHTML }}
                     />
-                </DivAmp>
+                </div>
             )}
         </amp-twitter>
     );
