@@ -9,19 +9,6 @@ const makeFallback = (html: string): string | null => {
     return q.innerHTML;
 };
 
-declare module 'react' {
-    interface HTMLAttributes<T> {
-        fallback?: string;
-    }
-
-    interface ReactHTML {
-        div: DetailedHTMLFactory<
-            HTMLAttributes<HTMLDivElement>,
-            HTMLDivElement
-        >;
-    }
-}
-
 // tslint:disable:react-no-dangerous-html
 export const TweetBlockComponent: React.SFC<{
     element: TweetBlockElement;
