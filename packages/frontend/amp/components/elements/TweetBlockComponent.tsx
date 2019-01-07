@@ -1,7 +1,7 @@
 import React from 'react';
 import { JSDOM } from 'jsdom';
 
-const makePlaceholder = (html: string): string | null => {
+const makeFallback = (html: string): string | null => {
     const { window } = new JSDOM(html);
     const blockquotes = window.document.getElementsByTagName('blockquote');
     if (blockquotes.length !== 1) return null;
@@ -26,7 +26,7 @@ declare module 'react' {
 export const TweetBlockComponent: React.SFC<{
     element: TweetBlockElement;
 }> = ({ element }) => {
-    const placeholderHTML = makePlaceholder(element.html);
+    const fallbackHTML = makeFallback(element.html);
 
     return (
         <amp-twitter
@@ -35,10 +35,10 @@ export const TweetBlockComponent: React.SFC<{
             layout="responsive"
             data-tweetid={element.id}
         >
-            {placeholderHTML && (
+            {fallbackHTML && (
                 <div fallback={'true'}>
                     <blockquote
-                        dangerouslySetInnerHTML={{ __html: placeholderHTML }}
+                        dangerouslySetInnerHTML={{ __html: fallbackHTML }}
                     />
                 </div>
             )}
