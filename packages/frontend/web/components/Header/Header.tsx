@@ -9,7 +9,6 @@ import { palette } from '@guardian/pasteup/palette';
 const header = css`
     margin-bottom: 0;
     background-color: ${palette.brand.main};
-    border-top: 1px solid white; // TEMPORARY FOR TESTING
     position: relative;
     ${tablet} {
         display: block;

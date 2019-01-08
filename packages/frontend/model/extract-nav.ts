@@ -52,21 +52,12 @@ export const extract = (data: {}): NavType => {
             : undefined,
         readerRevenueLinks: {
             header: {
-                contribute: getString(
-                    data,
-                    'config.readerRevenueLinks.header.contribute',
-                    '',
-                ),
-                subscribe: getString(
-                    data,
-                    'config.readerRevenueLinks.header.subscribe',
-                    '',
-                ),
-                support: getString(
-                    data,
-                    'config.readerRevenueLinks.header.support',
-                    '',
-                ),
+                subscribe:
+                    'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&amp;acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support_subscribe%22%2C%22referrerPageviewId%22%3A%22jnmzvcxd5o7u2p94r35e%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fuk%22%7D',
+                support:
+                    'https://support.theguardian.com/?INTCMP=header_support&amp;acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support%22%2C%22referrerPageviewId%22%3A%22jnmzvcxd5o7u2p94r35e%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fuk%22%7D',
+                contribute:
+                    'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_support_contribute%22%2C%22referrerPageviewId%22%3A%22jqgns357yj8sr94jkda0%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Fwww.theguardian.com%2Fuk%22%7D',
             },
             footer: {
                 contribute: getString(

@@ -10,29 +10,31 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
+const inner = css`
+`;
+
 const wrapperCollapsed = css`
     height: 36px;
     overflow: hidden;
 
     ${tablet} {
+        border-left: 1px solid ${palette.neutral[86]};
+        border-right: 1px solid ${palette.neutral[86]};
         height: 42px;
     }
 `;
 
 const subnav = css`
     list-style: none;
+    padding: 0 5px;
+
+    ${mobileLandscape} {
+        padding: 0 15px;
+    }
 
     li {
         float: left;
-        line-height: 40px;
-    }
-    padding: 0 5px;
-
-    ${tablet} {
-        li {
-            line-height: 48px;
-        }
-        padding: 0 15px;
+        display: block;
     }
 `;
 
@@ -104,7 +106,12 @@ const ps1 = css`
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
         border-left: 10px solid ${palette.neutral[7]};
-        margin-left: 4px;
+        margin-top: 12px;
+        margin-left: 2px;
+
+        ${tablet} {
+            margin-top: 16px;
+        }
     }
 `; // I'm not sure what the palette.neutral is for this should always receive a pillar by types.
 const psp = pillarMap(
@@ -159,7 +166,7 @@ export const Inner: React.SFC<{
     ));
 
     return (
-        <div className={cx({ [wrapperCollapsed]: collapseWrapper })}>
+        <div className={cx(inner, { [wrapperCollapsed]: collapseWrapper })}>
             <ul
                 ref={ulRef}
                 className={cx({

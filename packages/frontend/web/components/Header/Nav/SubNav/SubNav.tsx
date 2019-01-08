@@ -2,10 +2,36 @@ import React, { Component, createRef } from 'react';
 import { css } from 'emotion';
 
 import { Container } from '@guardian/guui';
+import { palette } from '@guardian/pasteup/palette';
+import { tablet } from '@guardian/pasteup/breakpoints';
 import { Inner } from './Inner';
 
 const subnavWrapper = css`
     background-color: white;
+`;
+
+const multiLine = css`
+    content: '';
+    background-image: repeating-linear-gradient(
+        to bottom,
+        ${palette.neutral[86]},
+        ${palette.neutral[86]} 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: 1px 13px;
+    background-color: ${palette.neutral[100]};
+    content: '';
+    clear: left;
+    display: block;
+    height: 13px;
+
+    ${tablet} {
+        border-left: 1px solid ${palette.neutral[86]};
+        border-right: 1px solid ${palette.neutral[86]};
+    }
 `;
 
 interface Props {
@@ -83,6 +109,7 @@ export default class Subnav extends Component<
                         toggle={this.toggle}
                         currentNavLink={this.props.currentNavLink}
                     />
+                    <div className={multiLine} />
                 </Container>
             </div>
         );

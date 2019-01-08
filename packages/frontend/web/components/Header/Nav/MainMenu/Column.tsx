@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
-import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+
+import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
@@ -11,22 +11,6 @@ export const hideDesktop = css`
         display: none;
     }
 `;
-
-const perPillarStyles = pillarMap(
-    pillar => css`
-        button {
-            color: ${pillarPalette[pillar].main};
-        }
-        a:hover {
-            color: ${pillarPalette[pillar].main};
-            text-decoration: underline;
-        }
-        a:focus {
-            color: ${pillarPalette[pillar].main};
-            text-decoration: underline;
-        }
-    `,
-);
 
 const pillarDivider = css`
     ${desktop} {
@@ -88,10 +72,6 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const readerRevenueLinksStyle = css`
-    background-color: ${palette.neutral[93]};
-`;
-
 const ColumnLink: React.SFC<{
     link: LinkType;
 }> = ({ link }) => (
@@ -127,9 +107,21 @@ const columnLinks = css`
     ${pillarDivider};
 `;
 
-const firstColumn = css`
+const firstColumnLinks = css`
     ${desktop} {
         padding-left: 0;
+    }
+`;
+
+const pillarColumnLinks = css`
+    ${until.tablet} {
+        background: ${palette.brand.dark};
+    }
+`;
+
+const firstColumn = css`
+    :after {
+        content: none;
     }
 `;
 
@@ -147,7 +139,8 @@ const ColumnLinks: React.SFC<{
         <ul
             className={cx(
                 columnLinks,
-                { [firstColumn]: index === 0 },
+                { [firstColumnLinks]: index === 0 },
+                { [pillarColumnLinks]: column.pillar },
                 {
                     [hide]: !showColumnLinks,
                 },
@@ -167,11 +160,27 @@ const columnStyle = css`
     ${textSans(6)};
     list-style: none;
     margin: 0;
-    padding: 0 0 12px;
+    position: relative;
+
+    :after {
+        background-color: ${palette.brand.pastel};
+        top: 0;
+        content: '';
+        display: block;
+        height: 1px;
+        left: 50px;
+        position: absolute;
+        right: 0;
+    }
+
     ${desktop} {
         width: 118px;
         float: left;
         position: relative;
+
+        :after {
+            content: none;
+        }
     }
     ${leftCol} {
         width: 160px;
@@ -201,7 +210,7 @@ export const ReaderRevenueLinks: React.SFC<{
     ];
 
     return (
-        <ul className={cx(readerRevenueLinksStyle, hideDesktop)}>
+        <ul className={cx(hideDesktop)}>
             {links.map(link => (
                 <ColumnLink link={link} key={link.title.toLowerCase()} />
             ))}
@@ -253,12 +262,11 @@ export class Column extends Component<
         const { showColumnLinks } = this.state;
         const { column, index } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;
-
         return (
             <li
-                className={cx(columnStyle, perPillarStyles[column.pillar], {
+                className={cx(columnStyle, {
                     [pillarDivider]: index > 0,
-                })}
+                }, { [firstColumn]: index === 0 })}
                 role="none"
             >
                 <CollapseColumnButton

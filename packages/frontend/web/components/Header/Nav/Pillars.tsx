@@ -45,9 +45,9 @@ const pillarsStyles = css`
         right: 0;
         height: 37px;
         ${tablet} {
-            height: 49px;
             border: 1px solid ${palette.brand.pastel};
             border-bottom: 0;
+            height: 49px;
         }
         ${desktop} {
             height: 43px;
@@ -56,6 +56,12 @@ const pillarsStyles = css`
 `;
 
 const showMenuUnderline = css`
+    ${desktop} {
+        :before {
+            bottom: 0;
+        }
+    }
+
     :hover {
         text-decoration: underline;
     }

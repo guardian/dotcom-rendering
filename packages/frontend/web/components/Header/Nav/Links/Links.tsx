@@ -39,34 +39,23 @@ const search = css`
     }
 `;
 
-const seperatorLink = css`
-    border-left: 1px solid ${palette.brand.pastel};
-    float: left;
-    height: 24px;
-    margin: 0 -2px 0 10px;
-`;
-
-const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
+const link = css`
     ${textSans(5)};
     color: ${palette.neutral[100]};
     float: left;
     position: relative;
     transition: color 80ms ease-out;
     text-decoration: none;
-    display: none;
+    padding: 7px 0;
     z-index: 1072;
+
+    ${tablet} {
+        padding: 7px 7px;
+    }
 
     :hover,
     :focus {
         color: ${palette.highlight.main};
-    }
-
-    ${tablet} {
-        display: ${showAtTablet ? 'block' : 'none'};
-    }
-
-    ${desktop} {
-        display: block;
     }
 
     svg {
@@ -78,8 +67,40 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     }
 `;
 
-const paddedLink = css`
-    padding: 7px 7px;
+const linkTablet = ({ showAtTablet }: { showAtTablet: boolean }) => css`
+    display: none;
+
+    ${tablet} {
+        display: ${showAtTablet ? 'block' : 'none'};
+    }
+
+    ${desktop} {
+        display: block;
+    }
+`;
+
+const seperator = css`
+    border-left: 1px solid ${palette.brand.pastel};
+    float: left;
+    height: 24px;
+    margin: 0 -2px 0 10px;
+    display: none;
+
+    ${desktop} {
+        display: block;
+    }
+`;
+
+const seperatorHide = css`
+    border-left: 1px solid ${palette.brand.pastel};
+    float: left;
+    height: 24px;
+    margin: 0 -2px 0 10px;
+    display: none;
+
+    ${tablet} {
+        display: block;
+    }
 `;
 
 const Search: React.SFC<{
@@ -160,21 +181,21 @@ const Links: React.SFC<{
     isSignedIn: boolean;
 }> = ({ isSignedIn }) => (
     <div className={links}>
-        <div className={cx(link({ showAtTablet: false }), seperatorLink)} />
+        <div className={seperator} />
         <a
             href={jobsUrl}
-            className={cx(link({ showAtTablet: false }), paddedLink)}
+            className={cx(linkTablet({ showAtTablet: false }), link)}
         >
             Search jobs
         </a>
 
         <a
             href={datingUrl}
-            className={cx(link({ showAtTablet: false }), paddedLink)}
+            className={cx(linkTablet({ showAtTablet: false }), link)}
         >
             Dating
         </a>
-        <div className={seperatorLink} />
+        <div className={seperatorHide} />
         {isSignedIn ? (
             <div className={link}>
                 <ProfileIcon />
@@ -186,7 +207,7 @@ const Links: React.SFC<{
             </div>
         ) : (
             <a
-                className={cx(link({ showAtTablet: true }), paddedLink)}
+                className={link}
                 href={signInUrl}
             >
                 <ProfileIcon /> Sign in
@@ -194,7 +215,7 @@ const Links: React.SFC<{
         )}
 
         <Search
-            className={cx(link({ showAtTablet: false }), paddedLink)}
+            className={cx(linkTablet({ showAtTablet: false }), link)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
         >
             <SearchIcon /> Search

@@ -15,6 +15,7 @@ const collapseColumnButton = css`
     border: 0;
     box-sizing: border-box;
     cursor: pointer;
+    color: ${palette.neutral[100]};
     display: block;
     ${headline(4)};
     font-weight: 700;
@@ -29,7 +30,6 @@ const collapseColumnButton = css`
     text-transform: capitalize;
     :before {
         margin-top: 4px;
-        color: ${palette.neutral[20]};
         left: 25px;
         position: absolute;
         border: 2px solid currentColor;
@@ -38,20 +38,8 @@ const collapseColumnButton = css`
         content: '';
         display: inline-block;
         height: 10px;
-
         transform: rotate(45deg);
         width: 10px;
-    }
-
-    :after {
-        background-color: ${palette.neutral[86]};
-        bottom: 0;
-        content: '';
-        display: block;
-        height: 1;
-        left: 50;
-        position: absolute;
-        width: 100%;
     }
 `;
 
