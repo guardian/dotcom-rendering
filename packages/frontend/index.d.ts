@@ -107,6 +107,7 @@ interface CAPIType {
     contentType: string;
     hasRelated: boolean;
     hasStoryPackage: boolean;
+    beaconURL: string;
 }
 
 interface TagType {

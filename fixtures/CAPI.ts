@@ -399,4 +399,5 @@ export const CAPI: CAPIType = {
     contentType: 'Article',
     hasRelated: false,
     hasStoryPackage: false,
+    beaconURL: '//fake.url',
 };

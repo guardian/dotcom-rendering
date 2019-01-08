@@ -195,7 +195,7 @@ export const extract = (data: {}): CAPIType => {
         getString(data, 'config.page.editionId', ''),
     );
 
-    if (editionId === undefined) throw new Error('goodbye');
+    if (editionId === undefined) throw new Error('edition id is undefined');
 
     return {
         webPublicationDate,
@@ -262,5 +262,6 @@ export const extract = (data: {}): CAPIType => {
         contentType: getString(data, 'config.page.contentType'),
         hasRelated: getBoolean(data, 'config.page.hasRelated', false),
         hasStoryPackage: getBoolean(data, 'config.page.hasStoryPackage', false),
+        beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
     };
 };
