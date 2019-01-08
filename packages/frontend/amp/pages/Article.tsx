@@ -75,5 +75,3 @@ export const Article: React.SFC<{
         </Container>
     </div>
 );
-
-export default Article;
