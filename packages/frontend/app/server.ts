@@ -1,5 +1,6 @@
 import * as path from 'path';
 import express from 'express';
+import compression from 'compression';
 
 import recordBaselineCloudWatchMetrics from './aws/metrics-baseline';
 import {
@@ -31,6 +32,7 @@ if (process.env.NODE_ENV === 'production') {
     const app = express();
 
     app.use(express.json({ limit: '50mb' }));
+    app.use(compression());
 
     app.get('/_healthcheck', (req, res) => {
         res.status(200).send('OKAY');
