@@ -11,7 +11,7 @@ import {
 import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
-import { getCookie } from '@frontend/web/lib/cookie';
+import { getCookie } from '@frontend/web/client/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
 const style = css`

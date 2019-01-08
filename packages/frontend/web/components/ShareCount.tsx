@@ -6,6 +6,7 @@ import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { textSans } from '@guardian/pasteup/typography';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';
+import { reportError } from '@frontend/web/client/reportError';
 
 const shareCount = css`
     ${textSans(6)};
@@ -85,6 +86,11 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
             .then(data => {
                 this.setState({
                     shareCount: data.share_count,
+                });
+            })
+            .catch(err => {
+                reportError(err, {
+                    feature: 'share-count',
                 });
             });
     }

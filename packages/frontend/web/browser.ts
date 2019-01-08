@@ -2,13 +2,11 @@ import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
-import { getRaven } from '@frontend/web/lib/raven';
+import { getRaven } from '@frontend/web/client/raven';
 import {
     init as initGa,
     sendPageView as sendGaPageView,
-} from '@frontend/web/lib/ga';
-import { isAdBlockInUse } from '@frontend/web/lib/detectAdBlocker';
-import { appData as data } from '@frontend/web/lib/appData';
+} from '@frontend/web/client/ga';
 import Article from './pages/Article';
 
 if (module.hot) {
@@ -18,7 +16,7 @@ if (module.hot) {
 // kick off the app
 const go = () => {
     const hydrate = () => {
-        const { cssIDs } = window.guardian.app;
+        const { cssIDs, data } = window.guardian.app;
 
         initGa();
 
@@ -41,22 +39,18 @@ const go = () => {
         sendGaPageView();
     };
 
-    isAdBlockInUse()
-        .then((adBlockInUse: boolean) => {
-            if (adBlockInUse) {
-                hydrate();
-            } else {
-                getRaven().context(
-                    {
-                        tags: {
-                            feature: 'dotcom-rendering',
-                        },
+    getRaven()
+        .then(raven => {
+            raven.context(
+                {
+                    tags: {
+                        feature: 'hydrate',
                     },
-                    hydrate,
-                );
-            }
+                },
+                hydrate,
+            );
         })
-        .catch(() => {
+        .catch(err => {
             hydrate();
         });
 };
