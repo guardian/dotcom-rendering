@@ -7,51 +7,56 @@ import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBloc
 import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
+import { findAdSlots } from '../elements/find-adslots';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
     pillar: Pillar;
 }> = ({ elements, pillar }) => {
-    const output = elements
-        .map((element, i) => {
-            switch (element._type) {
-                case 'model.dotcomrendering.pageElements.TextBlockElement':
-                    return (
-                        <TextBlockComponent
-                            key={i}
-                            html={element.html}
-                            pillar={pillar}
-                        />
-                    );
-                case 'model.dotcomrendering.pageElements.ImageBlockElement':
-                    return (
-                        <ImageBlockComponent
-                            key={i}
-                            element={element}
-                            pillar={pillar}
-                        />
-                    );
-                case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-                    return <InstagramBlockComponent element={element} />;
-                case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                    return <TweetBlockComponent element={element} />;
-                case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return (
-                        <RichLinkBlockComponent
-                            element={element}
-                            pillar={pillar}
-                        />
-                    );
-                case 'model.dotcomrendering.pageElements.CommentBlockElement':
-                    return <CommentBlockComponent element={element} />;
-                case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-                    return <SoundcloudBlockComponent element={element} />;
-                default:
-                    // tslint:disable-next-line:no-console
-                    console.log('Unsupported Element', JSON.stringify(element));
-                    return null;
-            }
-        })
-        .filter(_ => _ != null);
-    return <>{output}</>;
+    const output = elements.map((element, i) => {
+        switch (element._type) {
+            case 'model.dotcomrendering.pageElements.TextBlockElement':
+                return (
+                    <TextBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.ImageBlockElement':
+                return (
+                    <ImageBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.InstagramBlockElement':
+                return <InstagramBlockComponent element={element} />;
+            case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                return <TweetBlockComponent element={element} />;
+            case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+                return (
+                    <RichLinkBlockComponent element={element} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.CommentBlockElement':
+                return <CommentBlockComponent element={element} />;
+            case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
+                return <SoundcloudBlockComponent element={element} />;
+            default:
+                // tslint:disable-next-line:no-console
+                console.log('Unsupported Element', JSON.stringify(element));
+                return null;
+        }
+    });
+
+    // insert advert placeholder text
+    const slotIndexes = findAdSlots(elements);
+    const elementsWithAdverts = output.map((e, i) => (
+        <>
+            {e}
+            {slotIndexes.includes(i) ? 'ADVERT' : null}
+        </>
+    ));
+    return <>{elementsWithAdverts}</>;
 };
