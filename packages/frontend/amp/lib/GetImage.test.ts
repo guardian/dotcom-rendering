@@ -3,7 +3,7 @@ import { bestFitImage, heightEstimate } from './GetImage';
 test('chooses smallest image that is still greater than column width', async () => {
     const images = [
         {
-            weighting: 'inline',
+            weighting: 'inline' as Weighting,
             srcSet: [
                 {
                     src:
@@ -23,7 +23,7 @@ test('chooses smallest image that is still greater than column width', async () 
             ],
         },
         {
-            weighting: 'thumbnail',
+            weighting: 'thumbnail' as Weighting,
             srcSet: [
                 {
                     src:
@@ -49,7 +49,7 @@ test('chooses smallest image that is still greater than column width', async () 
 test('if no image is greater than column width, just return the biggest available', async () => {
     const images = [
         {
-            weighting: 'thumbnail',
+            weighting: 'thumbnail' as Weighting,
             srcSet: [
                 {
                     src:
