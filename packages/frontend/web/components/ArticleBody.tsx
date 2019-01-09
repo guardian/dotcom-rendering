@@ -565,10 +565,9 @@ const ArticleBody: React.SFC<{
                         mainMedia,
                         pillarFigCaptionIconColor[CAPI.pillar],
                     )}
-                    dangerouslySetInnerHTML={{
-                        __html: CAPI.main,
-                    }}
-                />
+                >
+                    <ArticleRenderer elements={CAPI.mainMediaElements} />
+                </div>
             </header>
 
             <div>
