@@ -52,7 +52,7 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${textSans(5)}
+    ${textSans(5)};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;
@@ -61,6 +61,7 @@ const fontStyle = css`
 
     ${tablet} {
         height: 42px;
+        line-height: 42px;
     }
 `;
 

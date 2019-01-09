@@ -29,7 +29,7 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
-    ${headline(3)};
+    ${textSans(5)};
     background-color: transparent;
     text-decoration: none;
     border: 0;
