@@ -67,7 +67,12 @@ export default ({ data }: Props) => {
     const vendorJS = assets.dist('vendor.js');
     const polyfillIO =
         'https://assets.guim.co.uk/polyfill.io/v2/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
-    const priorityScripts = [polyfillIO, vendorJS, bundleJS];
+    const priorityScripts = [
+        polyfillIO,
+        'http://localhost:9000/assets/javascripts/graun.standard.js',
+        // vendorJS,
+        // bundleJS
+    ];
 
     /**
      * Low priority scripts.
