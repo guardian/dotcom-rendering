@@ -14,10 +14,16 @@ const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
         return best;
     });
 };
+
+const getSrcSetsForWeighting = (
+    imageSources: ImageSource[],
+    forWeighting: Weighting,
+): SrcSet[] =>
+    imageSources.filter(({ weighting }) => weighting === forWeighting)[0]
+        .srcSet;
+
 const makeSources = (imageSources: ImageSource[]): PictureSource[] => {
-    const inlineSrcSets = imageSources.filter(
-        ({ weighting }) => weighting === 'inline',
-    )[0].srcSet;
+    const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
     const sources: PictureSource[] = [];
 
     // TODO: ideally the imageSources array will come from frontend with prebaked URLs for
@@ -45,8 +51,11 @@ const makeSource = (
     };
 };
 
-const getFallback: (images: Image[]) => string = images =>
-    (images.find(_ => _.fields.isMaster === 'true') || images[0]).url;
+const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
+    const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
+
+    return bestFor(300, inlineSrcSets).src;
+};
 
 export const ImageBlockComponent: React.SFC<{ element: ImageBlockElement }> = ({
     element,
@@ -57,7 +66,7 @@ export const ImageBlockComponent: React.SFC<{ element: ImageBlockElement }> = ({
         <Picture
             sources={sources}
             alt={element.data.alt}
-            src={getFallback(element.media.allImages)}
+            src={getFallback(element.imageSources)}
         />
     );
 };
