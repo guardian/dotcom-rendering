@@ -6,7 +6,7 @@ import InnerContainer from './InnerContainer';
 import { Link, footerLinksNew } from '@frontend/lib/footer-links';
 
 const footer = css`
-    background-color: ${palette.brand.blue};
+    background-color: ${palette.brand.main};
     color: ${palette.neutral[86]};
     ${body(2)};
     margin-top: 20px;

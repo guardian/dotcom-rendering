@@ -5,7 +5,6 @@ import { textSans } from '@guardian/pasteup/typography';
 import {
     desktop,
     tablet,
-    mobileMedium,
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';

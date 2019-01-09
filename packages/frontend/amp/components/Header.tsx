@@ -10,7 +10,7 @@ import { palette } from '@guardian/pasteup/palette';
 
 const headerStyles = css`
     border-bottom: 1px solid ${palette.neutral[86]};
-    background-color: ${palette.brand.blue};
+    background-color: ${palette.brand.main};
 `;
 
 const row = css`
