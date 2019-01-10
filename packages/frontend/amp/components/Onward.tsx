@@ -97,7 +97,7 @@ export const Onward: React.SFC<{
     );
 
     const storyPackage = hasStoryPackage
-        ? [container(`${guardianBaseURL}/story-package/${pageID}.json`)]
+        ? [container(`${guardianBaseURL}/story-package-mf2/${pageID}.json`)]
         : [];
 
     const series = seriesTags.map(tag =>
