@@ -8,7 +8,7 @@ it('headline evaluates correctly', () => {
 
 it('body evaluates correctly', () => {
     expect(body(2)).toBe(
-        'font-size: 16px; line-height: 24px; font-family: GuardianTextEgyptian, Georgia, serif',
+        'font-size: 17px; line-height: 24px; font-family: GuardianTextEgyptian, Georgia, serif',
     );
 });
 
