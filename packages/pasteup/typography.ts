@@ -33,7 +33,7 @@ const fontScaleMapping: any = {
     },
     body: {
         1: { fontSize: 14, lineHeight: 20 },
-        2: { fontSize: 16, lineHeight: 24 },
+        2: { fontSize: 17, lineHeight: 24 },
         3: { fontSize: 18, lineHeight: 28 },
     },
     textSans: {

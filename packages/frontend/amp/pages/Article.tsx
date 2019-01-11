@@ -66,8 +66,8 @@ export const Article: React.SFC<{
                 pageID={articleData.pageId}
                 webURL={articleData.webURL}
                 sectionID={articleData.sectionUrl}
-                hasRelated={false}
-                hasStoryPackage={false}
+                hasRelated={articleData.hasRelated}
+                hasStoryPackage={articleData.hasStoryPackage}
                 seriesTags={tagsOfType(articleData.tags, 'Series')}
                 guardianBaseURL={'https://amp.theguardian.com'}
             />

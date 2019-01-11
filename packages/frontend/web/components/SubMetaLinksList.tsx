@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { body, textSans } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
@@ -17,11 +17,11 @@ const subMetaLinksList = css`
 `;
 
 const subMetaSectionLinksList = css`
-    font-weight: 500;
     line-height: 24px;
 `;
 
 const subMetaKeywordLinksList = css`
+    line-height: 24px;
     padding-bottom: 12px;
     margin-bottom: 6px;
     border-bottom: 1px solid ${palette.neutral[86]};
@@ -57,11 +57,11 @@ const subMetaLink = css`
 `;
 
 const subMetaSectionLink = css`
-    ${body(2)};
+    ${headline(2)};
 `;
 
 const subMetaKeywordLink = css`
-    ${textSans(3)};
+    ${textSans(4)};
 `;
 
 const hideSlash = css`

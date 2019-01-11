@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';
@@ -123,7 +123,7 @@ const listStyles = css`
 `;
 
 const standfirst = css`
-    ${textSans(1)};
+    ${body(2)};
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
@@ -287,11 +287,6 @@ const bodyStyle = css`
 
     strong {
         font-weight: bold;
-    }
-
-    p {
-        margin-bottom: 16px;
-        ${textSans(5)};
     }
 
     img {
