@@ -9,8 +9,6 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
-const inner = css``;
-
 const wrapperCollapsed = css`
     height: 36px;
     overflow: hidden;
@@ -165,7 +163,7 @@ export const Inner: React.SFC<{
     ));
 
     return (
-        <div className={cx(inner, { [wrapperCollapsed]: collapseWrapper })}>
+        <div className={cx({ [wrapperCollapsed]: collapseWrapper })}>
             <ul
                 ref={ulRef}
                 className={cx({
