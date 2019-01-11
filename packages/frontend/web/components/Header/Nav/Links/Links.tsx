@@ -15,8 +15,6 @@ import {
     wide,
 } from '@guardian/pasteup/breakpoints';
 
-// import ReaderRevenueLinks from './ReaderRevenueLinks';
-
 const search = css`
     :after {
         content: '';
@@ -105,7 +103,6 @@ const seperatorHide = css`
 
 const Search: React.SFC<{
     href: string;
-    children: React.ReactChild;
     className?: string;
 }> = ({ className, children, href, ...props }) => (
     <a href={href} className={cx(search, className)} {...props}>
@@ -206,10 +203,7 @@ const Links: React.SFC<{
                 />
             </div>
         ) : (
-            <a
-                className={link}
-                href={signInUrl}
-            >
+            <a className={link} href={signInUrl}>
                 <ProfileIcon /> Sign in
             </a>
         )}

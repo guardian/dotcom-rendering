@@ -140,7 +140,7 @@ const ColumnLinks: React.SFC<{
             className={cx(
                 columnLinks,
                 { [firstColumnLinks]: index === 0 },
-                { [pillarColumnLinks]: column.pillar },
+                { [pillarColumnLinks]: !!column.pillar },
                 {
                     [hide]: !showColumnLinks,
                 },
@@ -264,9 +264,13 @@ export class Column extends Component<
         const subNavId = `${column.title.toLowerCase()}Links`;
         return (
             <li
-                className={cx(columnStyle, {
-                    [pillarDivider]: index > 0,
-                }, { [firstColumn]: index === 0 })}
+                className={cx(
+                    columnStyle,
+                    {
+                        [pillarDivider]: index > 0,
+                    },
+                    { [firstColumn]: index === 0 },
+                )}
                 role="none"
             >
                 <CollapseColumnButton

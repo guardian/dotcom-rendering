@@ -9,8 +9,7 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
-const inner = css`
-`;
+const inner = css``;
 
 const wrapperCollapsed = css`
     height: 36px;

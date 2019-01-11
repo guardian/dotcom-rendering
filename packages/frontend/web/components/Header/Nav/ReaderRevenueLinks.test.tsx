@@ -17,7 +17,12 @@ jest.mock('@frontend/web/lib/cookie', () => ({
 describe('ReaderRevenueLinks', () => {
     const contributionsCookie = 'gu.contributions.contrib-timestamp';
     const payingMemberCookie = 'gu_paying_member';
-    const url = 'https://www.theguardian.com';
+    const urls = {
+        contribute: 'https://www.theguardian.com/contribute',
+        subscribe: 'https://www.theguardian.com/subscribe',
+        support: 'https://www.theguardian.com/support',
+    };
+    const edition: Edition = 'UK';
 
     beforeEach(() => {
         addCookie.mockReset();
@@ -32,7 +37,9 @@ describe('ReaderRevenueLinks', () => {
 
         getCookie.mockReturnValue(contributionDate);
 
-        const { container } = render(<ReaderRevenueLinks url={url} />);
+        const { container } = render(
+            <ReaderRevenueLinks urls={urls} edition={edition} />,
+        );
 
         // expect nothing to be rendered
         await wait(() => expect(container.firstChild).toBeNull());
@@ -51,7 +58,9 @@ describe('ReaderRevenueLinks', () => {
             .mockReturnValueOnce(contributionDate)
             .mockReturnValueOnce('true');
 
-        const { container } = render(<ReaderRevenueLinks url={url} />);
+        const { container } = render(
+            <ReaderRevenueLinks urls={urls} edition={edition} />,
+        );
 
         // expect nothing to be rendered
         await wait(() => expect(container.firstChild).toBeNull());
@@ -72,7 +81,7 @@ describe('ReaderRevenueLinks', () => {
             .mockReturnValueOnce('false');
 
         const { container, getByText } = render(
-            <ReaderRevenueLinks url={url} />,
+            <ReaderRevenueLinks urls={urls} edition={edition} />,
         );
 
         // expect something to be rendered

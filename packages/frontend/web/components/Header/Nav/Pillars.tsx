@@ -104,7 +104,7 @@ const pillarDivider = css`
         }
 
         ${desktop} {
-            bottom: .6em;
+            bottom: 0.6em;
         }
     }
 `;
@@ -166,7 +166,7 @@ const pillarUnderline = pillarMap(
             content: '';
             display: block;
             position: absolute;
-            transition: transform .3s ease-in-out;
+            transition: transform 0.3s ease-in-out;
         }
     `,
 );
@@ -193,10 +193,7 @@ const Pillars: React.SFC<{
 }> = ({ showMainMenu, pillars, pillar }) => (
     <ul className={pillarsStyles}>
         {pillars.map((p, i) => (
-            <li
-                key={p.title}
-                className={pillarStyle}
-            >
+            <li key={p.title} className={pillarStyle}>
                 <a
                     className={cx(
                         pillarDivider,

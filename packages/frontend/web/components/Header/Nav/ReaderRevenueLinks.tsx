@@ -116,7 +116,6 @@ const ReaderRevenueLinks: React.SFC<{
         contribute: string;
     };
 }> = ({ edition, urls }) => {
-    console.log('*****', edition);
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (
@@ -124,7 +123,9 @@ const ReaderRevenueLinks: React.SFC<{
                     {data && (
                         <>
                             <div className={readerRevenueLinks}>
-                                <div className={message}>Support The Guardian</div>
+                                <div className={message}>
+                                    Support The Guardian
+                                </div>
                                 <a
                                     className={cx(link, hiddenUntilTablet)}
                                     href={urls.contribute}

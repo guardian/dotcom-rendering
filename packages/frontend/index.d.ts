@@ -48,19 +48,9 @@ interface ReaderRevenueLink {
 }
 
 interface ReaderRevenueLinks {
-    header: {
-        subscribe: string;
-        support: string;
-        contribute: string;
-    };
-    footer: {
-        subscribe: string;
-        contribute: string;
-    };
-    sideMenu: {
-        subscribe: string;
-        contribute: string;
-    };
+    header: ReaderRevenueLink;
+    footer: ReaderRevenueLink;
+    sideMenu: ReaderRevenueLink;
 }
 
 interface NavType {

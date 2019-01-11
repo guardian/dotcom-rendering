@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Dropdown } from '@guardian/guui';
-import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
+import { desktop, wide } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown/Dropdown';
 import { palette } from '@guardian/pasteup/palette';
 
