@@ -57,27 +57,10 @@ const header = css`
     margin: 0 -10px;
 `;
 
-const section = css`
-    @supports (display: grid) {
-        grid-template-areas: 'section';
-    }
-    ${headline(2)};
-    font-weight: 700;
-
-    padding: 0 10px;
-`;
-
 const profile = css`
     ${headline(2)};
     font-weight: 700;
     margin-bottom: 4px;
-`;
-
-const sectionLabelLink = css`
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
-    }
 `;
 
 const listStyles = css`
@@ -197,23 +180,6 @@ export const MainBlock: React.SFC<{
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (
     <header className={header}>
-        {articleData.sectionLabel &&
-            articleData.sectionUrl && (
-                <div className={section}>
-                    <a
-                        className={cx(
-                            sectionLabelLink,
-                            pillarColours[articleData.pillar],
-                        )}
-                        href={`https:// www.theguardian.com/${
-                            articleData.sectionUrl
-                        }`}
-                        data-link-name="article section"
-                    >
-                        {articleData.sectionLabel}
-                    </a>
-                </div>
-            )}
         <Elements
             pillar={articleData.pillar}
             elements={articleData.mainMediaElements}
