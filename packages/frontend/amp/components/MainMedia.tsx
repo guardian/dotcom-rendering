@@ -7,7 +7,7 @@ import InfoIcon from '@guardian/pasteup/icons/info.svg';
 import { palette } from '@guardian/pasteup/palette';
 
 const figureStyle = css`
-    margin: 0 -10px;
+    margin: 0 0;
     position: relative;
 
     input:checked ~ figcaption {

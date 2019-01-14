@@ -63,7 +63,24 @@ const profile = css`
     margin-bottom: 4px;
 `;
 
-const listStyles = css`
+const listStyles = (pillar: Pillar) => css`
+    .bullet {
+        color: transparent;
+        font-size: 1px;
+    }
+
+    .bullet:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 2px;
+        background-color: ${pillarPalette[pillar].main};
+        margin-left: 0px;
+    }
+
+    // TODO - unclear if we need the list styles as well here
     li {
         margin-bottom: 6px;
         padding-left: 20px;
@@ -85,16 +102,18 @@ const listStyles = css`
     }
 `;
 
-const standfirstCss = css`
-    ${body(2)};
-    font-weight: 700;
-    color: ${palette.neutral[7]};
-    margin-bottom: 12px;
-    ${listStyles};
-    p {
-        margin-bottom: 8px;
-    }
-`;
+const standfirstCss = pillarMap(
+    pillar => css`
+        ${body(2)};
+        font-weight: 700;
+        color: ${palette.neutral[7]};
+        margin-bottom: 12px;
+        ${listStyles(pillar)};
+        p {
+            margin-bottom: 8px;
+        }
+    `,
+);
 
 const ageWarningCss = css`
     ${textSans(1)};
@@ -194,7 +213,7 @@ export const MainBlock: React.SFC<{
             </h1>
             <div // tslint:disable-line:react-no-dangerous-html
                 className={cx(
-                    standfirstCss,
+                    standfirstCss[articleData.pillar],
                     standfirstLinks[articleData.pillar],
                 )}
                 dangerouslySetInnerHTML={{
