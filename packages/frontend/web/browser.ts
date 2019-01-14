@@ -2,11 +2,11 @@ import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
-import { getRaven } from '@frontend/web/client/raven';
+import { getRaven } from '@frontend/web/browser/raven';
 import {
     init as initGa,
     sendPageView as sendGaPageView,
-} from '@frontend/web/client/ga';
+} from '@frontend/web/browser/ga';
 import Article from './pages/Article';
 
 if (module.hot) {

@@ -2,7 +2,7 @@
    Report errors to Sentry with optional tags metadata
 */
 
-import { getRaven } from '@frontend/web/client/raven';
+import { getRaven } from '@frontend/web/browser/raven';
 
 type ReportedError = Error & {
     reported?: boolean;

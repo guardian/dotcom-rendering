@@ -6,7 +6,7 @@ import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { textSans } from '@guardian/pasteup/typography';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';
-import { reportError } from '@frontend/web/client/reportError';
+import { reportError } from '@frontend/web/browser/reportError';
 
 const shareCount = css`
     ${textSans(6)};

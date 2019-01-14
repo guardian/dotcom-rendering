@@ -11,7 +11,7 @@ import MainMenuToggle from './MainMenuToggle/MainMenuToggle';
 import { MainMenu } from './MainMenu/MainMenu';
 import SubNav from './SubNav/SubNav';
 import ReaderRevenueLinks from './ReaderRevenueLinks';
-import { getCookie } from '@frontend/web/client/cookie';
+import { getCookie } from '@frontend/web/browser/cookie';
 
 const centered = css`
     ${tablet} {

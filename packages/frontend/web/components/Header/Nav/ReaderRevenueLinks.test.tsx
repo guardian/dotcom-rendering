@@ -4,12 +4,12 @@ import ReaderRevenueLinks from './ReaderRevenueLinks';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,
-} from '@frontend/web/client/cookie';
+} from '@frontend/web/browser/cookie';
 
 const getCookie: any = getCookie_;
 const addCookie: any = addCookie_;
 
-jest.mock('@frontend/web/client/cookie', () => ({
+jest.mock('@frontend/web/browser/cookie', () => ({
     getCookie: jest.fn(() => null),
     addCookie: jest.fn(() => null),
 }));
