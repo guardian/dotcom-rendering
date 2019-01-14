@@ -13,6 +13,7 @@ import SubNav from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import CookieBanner from '@frontend/web/components/CookieBanner';
 
 // TODO: find a better of setting opacity
+
 const articleWrapper = css`
     background-color: rgba(18, 18, 18, 0.05);
 
@@ -64,6 +65,7 @@ const articleContainer = css`
 const Article: React.SFC<{
     data: ArticleProps;
 }> = ({ data }) => (
+    /*
     <div>
         <div>Pascal[3]</div>
         <div
@@ -75,8 +77,8 @@ const Article: React.SFC<{
             aria-hidden="true"
         />
     </div>
+    */
 
-    /*
     <div>
         <Header
             nav={data.NAV}
@@ -104,7 +106,6 @@ const Article: React.SFC<{
 
         <CookieBanner />
     </div>
-    */
 );
 
 export default Article;

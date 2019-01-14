@@ -577,7 +577,13 @@ const ArticleBody: React.SFC<{
             </header>
 
             <div>
-                <div className={cx(bodyStyle, linkColour[CAPI.pillar])}>
+                <div
+                    className={cx(
+                        bodyStyle,
+                        linkColour[CAPI.pillar],
+                        'js-article__body',
+                    )}
+                >
                     <ArticleRenderer elements={CAPI.elements} />
                 </div>
                 <div className={cx(subMeta, guardianLines)}>
