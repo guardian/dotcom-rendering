@@ -2,13 +2,13 @@ import React from 'react';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { pillarMap, pillarPalette } from '../../lib/pillars';
-import Dateline from '../../web/components/Dateline';
-import { ShareCount } from '../../web/components/ShareCount';
+import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import Dateline from '@frontend/web/components/Dateline';
+import { ShareCount } from '@frontend/web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
-import { ArticleModel } from '../pages/Article';
+import { ArticleModel } from '@frontend/amp/pages/Article';
 import { Elements } from '@frontend/amp/components/lib/Elements';
 
 const byline = css`
@@ -40,7 +40,7 @@ const meta = css`
 `;
 
 const headerStyle = css`
-    ${headline(6)};
+    ${headline(5)};
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -131,12 +131,25 @@ const standfirstLinks = pillarMap(
         `,
 );
 
+const headlinePillarColours = pillarMap(pillar => {
+    if (pillar === 'news') {
+        return css`
+            color: ${palette.neutral[7]};
+        `;
+    }
+
+    return css`
+        color: ${pillarPalette[pillar].main};
+    `;
+});
+
 const pillarColours = pillarMap(
     pillar =>
         css`
             color: ${pillarPalette[pillar].main};
         `,
 );
+
 const pillarFill = pillarMap(
     pillar =>
         css`
@@ -192,7 +205,7 @@ export const MainBlock: React.SFC<{
                             sectionLabelLink,
                             pillarColours[articleData.pillar],
                         )}
-                        href={`https://www.theguardian.com/${
+                        href={`https:// www.theguardian.com/${
                             articleData.sectionUrl
                         }`}
                         data-link-name="article section"
@@ -206,7 +219,14 @@ export const MainBlock: React.SFC<{
             elements={articleData.mainMediaElements}
         />
         <div className={headlineCss}>
-            <h1 className={headerStyle}>{articleData.headline}</h1>
+            <h1
+                className={cx(
+                    headerStyle,
+                    headlinePillarColours[articleData.pillar],
+                )}
+            >
+                {articleData.headline}
+            </h1>
             <div // tslint:disable-line:react-no-dangerous-html
                 className={cx(
                     standfirstCss,
@@ -231,7 +251,7 @@ export const MainBlock: React.SFC<{
                 <div className={twitterHandle}>
                     <TwitterIcon />
                     <a
-                        href={`https://www.twitter.com/${
+                        href={`https:// www.twitter.com/${
                             articleData.author.twitterHandle
                         }`}
                     >
