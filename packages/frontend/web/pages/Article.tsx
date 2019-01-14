@@ -65,20 +65,6 @@ const articleContainer = css`
 const Article: React.SFC<{
     data: ArticleProps;
 }> = ({ data }) => (
-    /*
-    <div>
-        <div>Pascal[3]</div>
-        <div
-            id="dfp-ad--right"
-            className="js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad js-sticky-mpu"
-            data-link-name="ad slot right"
-            data-name="right"
-            data-mobile="1,1|2,2|300,250|300,274|300,600|fluid"
-            aria-hidden="true"
-        />
-    </div>
-    */
-
     <div>
         <Header
             nav={data.NAV}
