@@ -2,13 +2,13 @@ import React from 'react';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { pillarMap, pillarPalette } from '../../lib/pillars';
-import Dateline from '../../web/components/Dateline';
-import { ShareCount } from '../../web/components/ShareCount';
+import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import Dateline from '@frontend/web/components/Dateline';
+import { ShareCount } from '@frontend/web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
-import { ArticleModel } from '../pages/Article';
+import { ArticleModel } from '@frontend/amp/pages/Article';
 import { Elements } from '@frontend/amp/components/lib/Elements';
 
 const byline = css`
