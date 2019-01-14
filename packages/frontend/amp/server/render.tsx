@@ -28,6 +28,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         ];
         const resp = document({
             scripts,
+            title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
             body: (
                 <Article
                     articleData={CAPI}
