@@ -112,6 +112,8 @@ const backToTopText = css`
     padding-top: 3px;
 `;
 
+const year = new Date().getFullYear();
+
 const FooterLinks: React.SFC<{
     links: Link[][];
 }> = ({ links }) => {
@@ -146,7 +148,7 @@ const Footer: React.SFC = () => (
                 </span>
             </a>
             <div className={copyright}>
-                © 2018 Guardian News and Media Limited or its affiliated
+                © {year} Guardian News and Media Limited or its affiliated
                 companies. All rights reserved.
             </div>
         </InnerContainer>
