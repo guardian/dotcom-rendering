@@ -1,5 +1,5 @@
 import React from 'react';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '../../lib/pillars';
@@ -103,7 +103,7 @@ const listStyles = css`
 `;
 
 const standfirstCss = css`
-    ${textSans(5)};
+    ${body(2)};
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
