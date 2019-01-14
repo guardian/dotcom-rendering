@@ -1,16 +1,10 @@
+// tslint:disable:react-no-dangerous-html
+
 import React from 'react';
 import { css, cx } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import { headline, textSans, body } from '@guardian/pasteup/typography';
-import { ShareCount } from './ShareCount';
-import { SharingIcons } from './ShareIcons';
-import { SubMetaLinksList } from './SubMetaLinksList';
-import Dateline from './Dateline';
-
-// tslint:disable:react-no-dangerous-html
-
 import {
     from,
     until,
@@ -19,8 +13,15 @@ import {
     desktop,
     tablet,
 } from '@guardian/pasteup/breakpoints';
+import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
+import { ShareCount } from './ShareCount';
+import { SharingIcons } from './ShareIcons';
+import { SubMetaLinksList } from './SubMetaLinksList';
+import Dateline from './Dateline';
+
+import { MainMedia } from './MainMedia';
 
 const wrapper = css`
     padding-top: 6px;
@@ -566,7 +567,9 @@ const ArticleBody: React.SFC<{
                         pillarFigCaptionIconColor[CAPI.pillar],
                     )}
                 >
-                    <ArticleRenderer elements={CAPI.mainMediaElements} />
+                    {CAPI.mainMediaElements.map((element, i) => (
+                        <MainMedia element={element} key={i} />
+                    ))}
                 </div>
             </header>
 
