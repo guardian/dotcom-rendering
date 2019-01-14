@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans, body } from '@guardian/pasteup/typography';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
@@ -15,7 +15,7 @@ const style = (pillar: Pillar) => css`
     }
     p {
         padding: 0 0 12px;
-        ${textSans(5)};
+        ${body(2)};
         font-weight: 300;
         word-wrap: break-word;
         color: ${palette.neutral[7]};
