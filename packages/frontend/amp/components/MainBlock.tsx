@@ -9,7 +9,7 @@ import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { Elements } from '@frontend/amp/components/lib/Elements';
+import { MainMedia } from '@frontend/amp/components/MainMedia';
 
 const byline = css`
     font-style: italic;
@@ -180,10 +180,9 @@ export const MainBlock: React.SFC<{
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (
     <header className={header}>
-        <Elements
-            pillar={articleData.pillar}
-            elements={articleData.mainMediaElements}
-        />
+        {articleData.mainMediaElements.map(element => (
+            <MainMedia element={element} />
+        ))}
         <div className={headlineCss}>
             <h1
                 className={cx(
