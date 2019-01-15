@@ -25,7 +25,7 @@ const linkStyle = (pillar: Pillar) => css`
     padding-left: 5px;
     padding-right: 6px;
     text-decoration: none;
-    color: ${pillarPalette[pillar].main};
+    color: ${pillarPalette[pillar].dark};
     ${textSans(4)};
     :after {
         content: '/';
@@ -60,7 +60,7 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     padding-left: 5px;
     padding-right: 6px;
     text-decoration: none;
-    color: ${pillarPalette[pillar].main};
+    color: ${pillarPalette[pillar].dark};
     ${textSans(5)};
     :after {
         content: '/';

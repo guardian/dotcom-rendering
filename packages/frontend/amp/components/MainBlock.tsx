@@ -141,7 +141,7 @@ const headlinePillarColours = pillarMap(pillar => {
     }
 
     return css`
-        color: ${pillarPalette[pillar].main};
+        color: ${pillarPalette[pillar].dark};
     `;
 });
 

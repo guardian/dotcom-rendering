@@ -16,7 +16,7 @@ const richLinkContainer = css`
 `;
 
 const pillarColour = (pillar: Pillar) => css`
-    color: ${pillarPalette[pillar].main};
+    color: ${pillarPalette[pillar].dark};
 `;
 
 const richLink = css`
