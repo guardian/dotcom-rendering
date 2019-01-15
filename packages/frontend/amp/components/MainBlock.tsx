@@ -141,16 +141,12 @@ const pillarFill = pillarMap(
 
 const metaExtras = css`
     border-top: 1px solid ${palette.neutral[86]};
+    border-bottom: 1px solid ${palette.neutral[86]};
     padding-top: 6px;
     margin-bottom: 6px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
-    margin-left: -10px;
-    margin-right: -10px;
-    padding-left: 10px;
-    padding-right: 10px;
 `;
 
 export const MainBlock: React.SFC<{
