@@ -5,6 +5,8 @@ export const AdSlot: React.SFC<{ id: string }> = ({ id }) => (
         suppressHydrationWarning={true}
         id={id}
         className="js-ad"
-        dangerouslySetInnerHTML={{ __html: '<h1>This is rendered by react.</h1>' }}
+        dangerouslySetInnerHTML={{
+            __html: '<h1>This is rendered by react.</h1>',
+        }}
     />
 );

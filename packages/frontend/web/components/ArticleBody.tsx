@@ -575,7 +575,7 @@ const ArticleBody: React.SFC<{
 
             <div>
                 <div className={cx(bodyStyle, linkColour[CAPI.pillar])}>
-                    <Fun initial={{ n: [0,1,2,3,5,6] }}>
+                    <Fun initial={{ n: [0, 1, 2, 3, 5, 6] }}>
                         {({ data }) => (
                             <ArticleRenderer
                                 elements={CAPI.elements}
