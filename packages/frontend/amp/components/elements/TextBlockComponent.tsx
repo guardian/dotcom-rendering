@@ -21,11 +21,11 @@ const style = (pillar: Pillar) => css`
         color: ${palette.neutral[7]};
     }
     a {
-        color: ${pillarPalette[pillar].main};
+        color: ${pillarPalette[pillar].dark};
         text-decoration: none;
         border-bottom: 1px solid #dcdcdc;
         :hover {
-            border-bottom: 1px solid ${pillarPalette[pillar].main};
+            border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
     }
     ${textSans(5)};
