@@ -257,53 +257,48 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                 <AsyncClientComponent f={this.fetchTrails}>
                     {({ data }) => (
                         <div className={listContainer}>
-                            {Array.isArray(data) &&
-                                data.length > 1 && (
-                                    <ul
-                                        className={tabsContainer}
-                                        role="tablist"
-                                    >
-                                        {(data || []).map((tab, i) => (
-                                            <li
-                                                className={cx(listTab, {
-                                                    [selectedListTab]:
-                                                        i ===
-                                                        this.state
-                                                            .selectedTabIndex,
-                                                })}
-                                                role="tab"
-                                                aria-selected={
+                            {Array.isArray(data) && data.length > 1 && (
+                                <ul className={tabsContainer} role="tablist">
+                                    {(data || []).map((tab, i) => (
+                                        <li
+                                            className={cx(listTab, {
+                                                [selectedListTab]:
                                                     i ===
-                                                    this.state.selectedTabIndex
+                                                    this.state.selectedTabIndex,
+                                            })}
+                                            role="tab"
+                                            aria-selected={
+                                                i ===
+                                                this.state.selectedTabIndex
+                                            }
+                                            aria-controls={`tabs-popular-${i}`}
+                                            id={`tabs-popular-${i}-tab`}
+                                            key={`tabs-popular-${i}-tab`}
+                                        >
+                                            <button
+                                                className={tabButton}
+                                                onClick={() =>
+                                                    this.tabSelected(i)
                                                 }
-                                                aria-controls={`tabs-popular-${i}`}
-                                                id={`tabs-popular-${i}-tab`}
-                                                key={`tabs-popular-${i}-tab`}
                                             >
-                                                <button
-                                                    className={tabButton}
-                                                    onClick={() =>
-                                                        this.tabSelected(i)
-                                                    }
+                                                <span
+                                                    className={css`
+                                                        ${screenReaderOnly};
+                                                    `}
                                                 >
-                                                    <span
-                                                        className={css`
-                                                            ${screenReaderOnly};
-                                                        `}
-                                                    >
-                                                        Most viewed{' '}
-                                                    </span>
-                                                    <span // tslint:disable-line:react-no-dangerous-html
-                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: tab.heading,
-                                                        }}
-                                                    />
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                                                    Most viewed{' '}
+                                                </span>
+                                                <span // tslint:disable-line:react-no-dangerous-html
+                                                    // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: tab.heading,
+                                                    }}
+                                                />
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                             {(data || []).map((tab, i) => (
                                 <ol
                                     className={cx(list, {
