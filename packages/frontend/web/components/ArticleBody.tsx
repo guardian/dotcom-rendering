@@ -22,6 +22,8 @@ import {
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 
+import { Fun } from '../../amp/components/lib/Fun';
+
 const wrapper = css`
     padding-top: 6px;
     margin-right: 0;
@@ -573,7 +575,14 @@ const ArticleBody: React.SFC<{
 
             <div>
                 <div className={cx(bodyStyle, linkColour[CAPI.pillar])}>
-                    <ArticleRenderer elements={CAPI.elements} />
+                    <Fun initial={{ n: [0,1,2,3,5,6] }}>
+                        {({ data }) => (
+                            <ArticleRenderer
+                                elements={CAPI.elements}
+                                n={data.n}
+                            />
+                        )}
+                    </Fun>
                 </div>
                 <div className={cx(subMeta, guardianLines)}>
                     {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (

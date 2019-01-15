@@ -1,10 +1,13 @@
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import React from 'react';
+import { interlace } from '../../lib/interlace';
+import { AdSlot } from '../Adslot';
 
-export const ArticleRenderer: React.SFC<{ elements: CAPIElement[] }> = ({
-    elements,
-}) => {
+export const ArticleRenderer: React.SFC<{
+    elements: CAPIElement[];
+    n: number[];
+}> = ({ elements, n }) => {
     const output = elements
         .map((element, i) => {
             switch (element._type) {
@@ -17,5 +20,9 @@ export const ArticleRenderer: React.SFC<{ elements: CAPIElement[] }> = ({
             }
         })
         .filter(_ => _ != null);
-    return <>{output}</>;
+
+    const outputWithAds = interlace(output, n, x => (
+        <AdSlot key={`ad${x}`} id={`ad-div-${x}`} />
+    ));
+    return <>{outputWithAds}</>;
 };

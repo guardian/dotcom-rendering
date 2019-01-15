@@ -36,7 +36,7 @@
         // "no-default-export": {
         //     "severity": "warning"
         // },
-        "react-no-dangerous-html":true,
+        "react-no-dangerous-html":false,
         "prettier": true
     },
     "rulesDirectory": [],

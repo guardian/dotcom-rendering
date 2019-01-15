@@ -61,6 +61,13 @@ const go = () => {
         });
 };
 
+document
+    .querySelectorAll('.js-ad')
+    .forEach(
+        _ =>
+            (_.innerHTML = '<img src="/static/frontend/cat.jpg" alt="A CAT"/>'),
+    );
+
 // make sure we've patched the env before running the app
 if (window.guardian.polyfilled) {
     go();

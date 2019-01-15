@@ -2,8 +2,9 @@ declare global {
     /*~ Here, declare things that go in the global namespace, or augment
      *~ existing declarations in the global namespace
      */
-    interface Window { 
+    interface Window {
         guardian: {
+            update: any;
             app: {
                 data: any;
                 cssIDs: string[];
