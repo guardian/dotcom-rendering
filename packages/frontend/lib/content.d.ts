@@ -1,3 +1,10 @@
+type Weighting =
+    | 'inline'
+    | 'thumbnail'
+    | 'supporting'
+    | 'showcase'
+    | 'halfwidth'
+    | 'immersive';
 interface TextBlockElement {
     _type: 'model.dotcomrendering.pageElements.TextBlockElement';
     html: string;
@@ -48,7 +55,7 @@ interface Image {
 }
 
 interface ImageSource {
-    weighting: string;
+    weighting: Weighting;
     srcSet: SrcSet[];
 }
 
