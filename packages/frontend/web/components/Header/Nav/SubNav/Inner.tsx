@@ -1,11 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { headline } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import {
     desktop,
     tablet,
-    mobileMedium,
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
@@ -15,24 +14,23 @@ const wrapperCollapsed = css`
     overflow: hidden;
 
     ${tablet} {
+        border-left: 1px solid ${palette.neutral[86]};
+        border-right: 1px solid ${palette.neutral[86]};
         height: 42px;
     }
 `;
 
 const subnav = css`
     list-style: none;
+    padding: 0 5px;
+
+    ${mobileLandscape} {
+        padding: 0 15px;
+    }
 
     li {
         float: left;
-        line-height: 40px;
-    }
-    padding: 0 5px;
-
-    ${tablet} {
-        li {
-            line-height: 48px;
-        }
-        padding: 0 15px;
+        display: block;
     }
 `;
 
@@ -50,18 +48,16 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${headline(1)};
+    ${textSans(5)};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;
     height: 36px;
-    ${mobileMedium} {
-        ${headline(2)};
-    }
+    line-height: 36px;
 
     ${tablet} {
-        ${headline(2)};
         height: 42px;
+        line-height: 42px;
     }
 `;
 
@@ -107,7 +103,12 @@ const ps1 = css`
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
         border-left: 10px solid ${palette.neutral[7]};
-        margin-left: 4px;
+        margin-top: 12px;
+        margin-left: 2px;
+
+        ${tablet} {
+            margin-top: 16px;
+        }
     }
 `; // I'm not sure what the palette.neutral is for this should always receive a pillar by types.
 const psp = pillarMap(

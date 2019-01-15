@@ -5,7 +5,7 @@ import { headline, textSans } from '@guardian/pasteup/typography';
 
 const sidebarStyles = css`
     width: 80vh;
-    background-color: ${palette.brand.blue};
+    background-color: ${palette.brand.main};
 
     [aria-expanded='true'] {
         i {

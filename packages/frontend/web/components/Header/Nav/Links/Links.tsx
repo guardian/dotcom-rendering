@@ -4,11 +4,16 @@ import { css, cx } from 'emotion';
 import Dropdown, {
     Link as DropdownLink,
 } from '@guardian/guui/components/Dropdown/Dropdown';
+import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
+import SearchIcon from '@guardian/pasteup/icons/search.svg';
 import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/typography';
-import { tablet, desktop } from '@guardian/pasteup/breakpoints';
-
-import SupportTheGuardian from './SupportTheGuardian';
+import {
+    tablet,
+    desktop,
+    mobileLandscape,
+    wide,
+} from '@guardian/pasteup/breakpoints';
 
 const search = css`
     :after {
@@ -32,22 +37,36 @@ const search = css`
     }
 `;
 
-const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
-    ${textSans(3)};
-    color: ${palette.neutral[7]};
+const link = css`
+    ${textSans(5)};
+    color: ${palette.neutral[100]};
     float: left;
     position: relative;
     transition: color 80ms ease-out;
     text-decoration: none;
-    display: none;
+    padding: 7px 0;
+    z-index: 1072;
 
-    :hover {
-        text-decoration: underline;
+    ${tablet} {
+        padding: 7px 7px;
     }
 
+    :hover,
     :focus {
-        text-decoration: underline;
+        color: ${palette.highlight.main};
     }
+
+    svg {
+        fill: currentColor;
+        float: left;
+        height: 18px;
+        width: 18px;
+        margin: 1px 4px 0 0;
+    }
+`;
+
+const linkTablet = ({ showAtTablet }: { showAtTablet: boolean }) => css`
+    display: none;
 
     ${tablet} {
         display: ${showAtTablet ? 'block' : 'none'};
@@ -58,14 +77,32 @@ const link = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     }
 `;
 
-const paddedLink = css`
-    padding: 5px 10px;
-    margin: 1px 0 0;
+const seperator = css`
+    border-left: 1px solid ${palette.brand.pastel};
+    float: left;
+    height: 24px;
+    margin: 0 -2px 0 10px;
+    display: none;
+
+    ${desktop} {
+        display: block;
+    }
+`;
+
+const seperatorHide = css`
+    border-left: 1px solid ${palette.brand.pastel};
+    float: left;
+    height: 24px;
+    margin: 0 -2px 0 10px;
+    display: none;
+
+    ${tablet} {
+        display: block;
+    }
 `;
 
 const Search: React.SFC<{
     href: string;
-    children: React.ReactChild;
     className?: string;
 }> = ({ className, children, href, ...props }) => (
     <a href={href} className={cx(search, className)} {...props}>
@@ -74,10 +111,26 @@ const Search: React.SFC<{
 );
 
 const links = css`
-    left: 0;
-    top: 0;
     position: absolute;
-    padding-left: 10px;
+    left: 10px;
+    top: 0;
+
+    ${mobileLandscape} {
+        left: 20px;
+    }
+
+    ${tablet} {
+        left: auto;
+        right: 205px;
+    }
+
+    ${desktop} {
+        right: 266px;
+    }
+
+    ${wide} {
+        right: 342px;
+    }
 `;
 
 const profileSubdomain = 'https://profile.theguardian.com';
@@ -122,44 +175,27 @@ const identityLinks: DropdownLink[] = [
 ];
 
 const Links: React.SFC<{
-    isPayingMember: boolean;
-    isRecentContributor: boolean;
     isSignedIn: boolean;
-    readerRevenueLinks: ReaderRevenueLinks;
-}> = ({
-    isPayingMember,
-    isRecentContributor,
-    isSignedIn,
-    readerRevenueLinks,
-}) => (
+}> = ({ isSignedIn }) => (
     <div className={links}>
-        {isPayingMember ||
-            isRecentContributor || (
-                <SupportTheGuardian url={readerRevenueLinks.header.support} />
-            )}
-        <a
-            href={readerRevenueLinks.header.subscribe}
-            className={cx(link({ showAtTablet: true }), paddedLink)}
-        >
-            Subscribe
-        </a>
-
+        <div className={seperator} />
         <a
             href={jobsUrl}
-            className={cx(link({ showAtTablet: true }), paddedLink)}
+            className={cx(linkTablet({ showAtTablet: false }), link)}
         >
-            Find a job
+            Search jobs
         </a>
 
         <a
             href={datingUrl}
-            className={cx(link({ showAtTablet: false }), paddedLink)}
+            className={cx(linkTablet({ showAtTablet: false }), link)}
         >
             Dating
         </a>
-
+        <div className={seperatorHide} />
         {isSignedIn ? (
-            <div className={link({ showAtTablet: false })}>
+            <div className={link}>
+                <ProfileIcon />
                 <Dropdown
                     label="My account"
                     links={identityLinks}
@@ -167,19 +203,16 @@ const Links: React.SFC<{
                 />
             </div>
         ) : (
-            <a
-                className={cx(link({ showAtTablet: true }), paddedLink)}
-                href={signInUrl}
-            >
-                Sign in
+            <a className={link} href={signInUrl}>
+                <ProfileIcon /> Sign in
             </a>
         )}
 
         <Search
-            className={cx(link({ showAtTablet: false }), paddedLink)}
+            className={cx(linkTablet({ showAtTablet: false }), link)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
         >
-            Search
+            <SearchIcon /> Search
         </Search>
     </div>
 );

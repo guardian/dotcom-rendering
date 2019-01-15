@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
-import { desktop, tablet, leftCol } from '@guardian/pasteup/breakpoints';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+
+import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
@@ -12,45 +12,29 @@ export const hideDesktop = css`
     }
 `;
 
-const perPillarStyles = pillarMap(
-    pillar => css`
-        button {
-            color: ${pillarPalette[pillar].main};
-        }
-        a:hover {
-            color: ${pillarPalette[pillar].main};
-            text-decoration: underline;
-        }
-        a:focus {
-            color: ${pillarPalette[pillar].main};
-            text-decoration: underline;
-        }
-    `,
-);
-
 const pillarDivider = css`
     ${desktop} {
         :before {
             content: '';
             display: block;
             position: absolute;
-            left: 0;
+            right: 0;
             top: 0;
             bottom: -100px;
             width: 1px;
-            background-color: ${palette.neutral[86]};
+            background-color: ${palette.brand.pastel};
             z-index: 1;
         }
     }
 `;
 
 const columnLinkTitle = css`
-    ${headline(3)};
+    ${textSans(5)};
     background-color: transparent;
     text-decoration: none;
     border: 0;
     box-sizing: border-box;
-    color: ${palette.neutral[7]};
+    color: ${palette.neutral[100]};
     cursor: pointer;
     display: inline-block;
     font-weight: 500;
@@ -63,12 +47,13 @@ const columnLinkTitle = css`
         padding-left: 60px;
     }
     ${desktop} {
-        ${headline(1)};
+        font-size: 16px;
+        line-height: 1.2;
         padding: 6px 0;
     }
     :hover,
     :focus {
-        color: ${palette.neutral[20]};
+        color: ${palette.highlight.main};
         text-decoration: underline;
     }
 
@@ -87,10 +72,6 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const readerRevenueLinksStyle = css`
-    background-color: ${palette.neutral[93]};
-`;
-
 const ColumnLink: React.SFC<{
     link: LinkType;
 }> = ({ link }) => (
@@ -107,7 +88,7 @@ const ColumnLink: React.SFC<{
 );
 
 const columnLinks = css`
-    ${textSans(6)};
+    ${textSans(5)};
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -115,25 +96,32 @@ const columnLinks = css`
     margin: 0;
     padding: 0 0 12px;
     position: relative;
-    background-color: ${palette.neutral[97]};
     ${desktop} {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         order: 1;
-        background-color: ${palette.neutral[97]};
         width: 100%;
-        padding: 0 5px;
+        padding: 0 9px;
     }
     ${pillarDivider};
 `;
 
-const firstColumn = css`
+const firstColumnLinks = css`
     ${desktop} {
         padding-left: 0;
-        :before {
-            display: none;
-        }
+    }
+`;
+
+const pillarColumnLinks = css`
+    ${until.tablet} {
+        background: ${palette.brand.dark};
+    }
+`;
+
+const firstColumn = css`
+    :after {
+        content: none;
     }
 `;
 
@@ -151,7 +139,8 @@ const ColumnLinks: React.SFC<{
         <ul
             className={cx(
                 columnLinks,
-                { [firstColumn]: index === 0 },
+                { [firstColumnLinks]: index === 0 },
+                { [pillarColumnLinks]: !!column.pillar },
                 {
                     [hide]: !showColumnLinks,
                 },
@@ -171,14 +160,34 @@ const columnStyle = css`
     ${textSans(6)};
     list-style: none;
     margin: 0;
-    padding: 0 0 12px;
+    position: relative;
+
+    :after {
+        background-color: ${palette.brand.pastel};
+        top: 0;
+        content: '';
+        display: block;
+        height: 1px;
+        left: 50px;
+        position: absolute;
+        right: 0;
+    }
+
     ${desktop} {
         width: 118px;
         float: left;
         position: relative;
+
+        :after {
+            content: none;
+        }
     }
     ${leftCol} {
-        width: 140px;
+        width: 160px;
+
+        :first-child {
+            width: 150px;
+        }
     }
 `;
 
@@ -201,7 +210,7 @@ export const ReaderRevenueLinks: React.SFC<{
     ];
 
     return (
-        <ul className={cx(readerRevenueLinksStyle, hideDesktop)}>
+        <ul className={cx(hideDesktop)}>
             {links.map(link => (
                 <ColumnLink link={link} key={link.title.toLowerCase()} />
             ))}
@@ -253,12 +262,15 @@ export class Column extends Component<
         const { showColumnLinks } = this.state;
         const { column, index } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;
-
         return (
             <li
-                className={cx(columnStyle, perPillarStyles[column.pillar], {
-                    [pillarDivider]: index > 0,
-                })}
+                className={cx(
+                    columnStyle,
+                    {
+                        [pillarDivider]: index > 0,
+                    },
+                    { [firstColumn]: index === 0 },
+                )}
                 role="none"
             >
                 <CollapseColumnButton

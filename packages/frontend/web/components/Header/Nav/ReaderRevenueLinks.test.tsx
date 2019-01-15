@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, wait } from 'react-testing-library';
-import SupportTheGuardian from './SupportTheGuardian';
+import ReaderRevenueLinks from './ReaderRevenueLinks';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,
@@ -14,10 +14,15 @@ jest.mock('@frontend/web/lib/cookie', () => ({
     addCookie: jest.fn(() => null),
 }));
 
-describe('SupportTheGuardian', () => {
+describe('ReaderRevenueLinks', () => {
     const contributionsCookie = 'gu.contributions.contrib-timestamp';
     const payingMemberCookie = 'gu_paying_member';
-    const url = 'https://www.theguardian.com';
+    const urls = {
+        contribute: 'https://www.theguardian.com/contribute',
+        subscribe: 'https://www.theguardian.com/subscribe',
+        support: 'https://www.theguardian.com/support',
+    };
+    const edition: Edition = 'UK';
 
     beforeEach(() => {
         addCookie.mockReset();
@@ -32,7 +37,9 @@ describe('SupportTheGuardian', () => {
 
         getCookie.mockReturnValue(contributionDate);
 
-        const { container } = render(<SupportTheGuardian url={url} />);
+        const { container } = render(
+            <ReaderRevenueLinks urls={urls} edition={edition} />,
+        );
 
         // expect nothing to be rendered
         await wait(() => expect(container.firstChild).toBeNull());
@@ -51,7 +58,9 @@ describe('SupportTheGuardian', () => {
             .mockReturnValueOnce(contributionDate)
             .mockReturnValueOnce('true');
 
-        const { container } = render(<SupportTheGuardian url={url} />);
+        const { container } = render(
+            <ReaderRevenueLinks urls={urls} edition={edition} />,
+        );
 
         // expect nothing to be rendered
         await wait(() => expect(container.firstChild).toBeNull());
@@ -72,7 +81,7 @@ describe('SupportTheGuardian', () => {
             .mockReturnValueOnce('false');
 
         const { container, getByText } = render(
-            <SupportTheGuardian url={url} />,
+            <ReaderRevenueLinks urls={urls} edition={edition} />,
         );
 
         // expect something to be rendered

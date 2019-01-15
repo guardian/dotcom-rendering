@@ -6,7 +6,7 @@ import InnerContainer from './InnerContainer';
 import { Link, footerLinksNew } from '@frontend/lib/footer-links';
 
 const footer = css`
-    background-color: ${palette.brand.blue};
+    background-color: ${palette.brand.main};
     color: ${palette.neutral[86]};
     ${body(2)};
     margin-top: 20px;
@@ -86,7 +86,7 @@ const icon = css`
         left: 0;
         right: 0;
         margin: auto;
-        border: 2px solid ${palette.brand.blue};
+        border: 2px solid ${palette.brand.main};
         border-bottom: 0;
         border-right: 0;
         content: '';
@@ -98,7 +98,7 @@ const icon = css`
 
 const backToTopLink = css`
     position: absolute;
-    background-color: ${palette.brand.blue};
+    background-color: ${palette.brand.main};
     color: ${palette.neutral[100]};
     font-weight: 700;
     top: -14px;

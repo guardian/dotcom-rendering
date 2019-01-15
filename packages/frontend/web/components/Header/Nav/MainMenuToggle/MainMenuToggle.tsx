@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { desktop, leftCol } from '@guardian/pasteup/breakpoints';
+import { desktop, wide } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/typography';
 import { VeggieBurger } from './VeggieBurger';
@@ -9,47 +9,34 @@ import { palette } from '@guardian/pasteup/palette';
 const screenReadable = css`
     ${screenReaderOnly};
 `;
-const navPrimaryColour = palette.neutral[7];
-const navSecondaryColour = palette.neutral[20];
 const openMainMenu = css`
     ${headline(3)};
-    display: none;
-    font-weight: 500;
-    text-decoration: none;
-    color: ${navSecondaryColour};
+    font-weight: 300;
+    color: ${palette.neutral[100]};
     cursor: pointer;
+    display: none;
     position: relative;
     overflow: hidden;
     border: 0;
     background-color: transparent;
     height: 48px;
-    padding-bottom: 0;
+    padding-left: 9px;
     padding-right: 20px;
-    padding-left: 5px;
-    padding-top: 9px;
-    margin-top: -6px;
+    line-height: 1;
     ${desktop} {
         display: block;
+        padding-top: 7px;
+        height: 42px;
     }
-    ${leftCol} {
-        margin-top: -5px;
+    ${wide} {
         ${headline(4)};
+        line-height: 1;
     }
     :hover {
-        color: ${navPrimaryColour};
+        color: ${palette.highlight.main};
     }
     :focus {
-        color: ${navPrimaryColour};
-    }
-    :before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 4px;
-        bottom: 0;
-        width: 1px;
-        background-color: ${palette.neutral[86]};
+        color: ${palette.highlight.main};
     }
 `;
 const checkbox = css`
@@ -64,7 +51,7 @@ const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     height: 100%;
     :after {
         content: '';
-        border: 2px solid currentColor;
+        border: 1px solid currentColor;
         border-left: transparent;
         border-top: transparent;
         display: inline-block;

@@ -2,23 +2,33 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Dropdown } from '@guardian/guui';
-import { desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
+import { desktop, wide } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown/Dropdown';
+import { palette } from '@guardian/pasteup/palette';
 
 const editionDropdown = css`
     display: none;
     position: absolute;
     right: 11px;
     z-index: 1072;
+    transform: translateX(100%);
+
+    :before {
+        content: '';
+        border-left: 1px solid ${palette.brand.pastel};
+        display: block;
+        float: left;
+        height: 24px;
+    }
+
     ${desktop} {
         display: block;
-    }
-    ${leftCol} {
-        right: 24px;
+        right: 121px;
+        width: 110px;
     }
     ${wide} {
-        right: 14px;
-        margin-right: 90px;
+        right: 198px;
+        width: 197px;
     }
 `;
 

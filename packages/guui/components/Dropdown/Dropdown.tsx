@@ -47,7 +47,6 @@ const link = css`
     transition: color 80ms ease-out;
     margin: -1px 0 0 0;
     text-decoration: none;
-
     display: block;
     padding: 10px 18px 15px 30px;
 
@@ -95,23 +94,24 @@ const linkFirst = css`
 `;
 
 const button = css`
-    ${textSans(3)};
+    ${textSans(5)};
     display: block;
     cursor: pointer;
     background: none;
     border: none;
-    color: ${palette.neutral[7]};
+    line-height: 1.2;
+    color: ${palette.neutral[100]};
     transition: color 80ms ease-out;
-    padding: 5px 10px;
+    padding: 6px 10px 6px 5px;
     margin: 1px 0 0;
     text-decoration: none;
 
     :hover {
-        text-decoration: underline;
-    }
+        color: ${palette.highlight.main};
 
-    :focus {
-        text-decoration: underline;
+        :after {
+            transform: translateY(0) rotate(45deg);
+        }
     }
 
     :after {
@@ -130,6 +130,9 @@ const button = css`
 `;
 
 const buttonExpanded = css`
+    :hover:after {
+        transform: translateY(-1px) rotate(-135deg);
+    }
     :after {
         transform: translateY(1px) rotate(-135deg);
     }

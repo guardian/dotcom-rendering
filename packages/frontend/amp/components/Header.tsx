@@ -9,7 +9,8 @@ import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 
 const headerStyles = css`
-    background-color: ${palette.brand.blue};
+    border-bottom: 1px solid ${palette.neutral[86]};
+    background-color: ${palette.brand.main};
 `;
 
 const row = css`
