@@ -1,15 +1,15 @@
 import React from 'react';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { pillarMap, pillarPalette } from '../../lib/pillars';
-import Dateline from '../../web/components/Dateline';
-import { ShareCount } from '../../web/components/ShareCount';
+import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import Dateline from '@frontend/web/components/Dateline';
+import { ShareCount } from '@frontend/web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
-import { ArticleModel } from '../pages/Article';
-import { Elements } from '@frontend/amp/components/lib/Elements';
+import { ArticleModel } from '@frontend/amp/pages/Article';
+import { MainMedia } from '@frontend/amp/components/MainMedia';
 
 const byline = css`
     font-style: italic;
@@ -40,7 +40,7 @@ const meta = css`
 `;
 
 const headerStyle = css`
-    ${headline(6)};
+    ${headline(5)};
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -57,30 +57,30 @@ const header = css`
     margin: 0 -10px;
 `;
 
-const section = css`
-    @supports (display: grid) {
-        grid-template-areas: 'section';
-    }
-    ${headline(2)};
-    font-weight: 700;
-
-    padding: 0 10px;
-`;
-
 const profile = css`
     ${headline(2)};
     font-weight: 700;
     margin-bottom: 4px;
 `;
 
-const sectionLabelLink = css`
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
+const listStyles = (pillar: Pillar) => css`
+    .bullet {
+        color: transparent;
+        font-size: 1px;
     }
-`;
 
-const listStyles = css`
+    .bullet:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 2px;
+        background-color: ${pillarPalette[pillar].main};
+        margin-left: 0px;
+    }
+
+    // TODO - unclear if we need the list styles as well here
     li {
         margin-bottom: 6px;
         padding-left: 20px;
@@ -102,16 +102,18 @@ const listStyles = css`
     }
 `;
 
-const standfirstCss = css`
-    ${textSans(5)};
-    font-weight: 700;
-    color: ${palette.neutral[7]};
-    margin-bottom: 12px;
-    ${listStyles};
-    p {
-        margin-bottom: 8px;
-    }
-`;
+const standfirstCss = pillarMap(
+    pillar => css`
+        ${body(2)};
+        font-weight: 700;
+        color: ${palette.neutral[7]};
+        margin-bottom: 12px;
+        ${listStyles(pillar)};
+        p {
+            margin-bottom: 8px;
+        }
+    `,
+);
 
 const ageWarningCss = css`
     ${textSans(1)};
@@ -131,12 +133,25 @@ const standfirstLinks = pillarMap(
         `,
 );
 
+const headlinePillarColours = pillarMap(pillar => {
+    if (pillar === 'news') {
+        return css`
+            color: ${palette.neutral[7]};
+        `;
+    }
+
+    return css`
+        color: ${pillarPalette[pillar].main};
+    `;
+});
+
 const pillarColours = pillarMap(
     pillar =>
         css`
             color: ${pillarPalette[pillar].main};
         `,
 );
+
 const pillarFill = pillarMap(
     pillar =>
         css`
@@ -184,32 +199,21 @@ export const MainBlock: React.SFC<{
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (
     <header className={header}>
-        {articleData.sectionLabel &&
-            articleData.sectionUrl && (
-                <div className={section}>
-                    <a
-                        className={cx(
-                            sectionLabelLink,
-                            pillarColours[articleData.pillar],
-                        )}
-                        href={`https://www.theguardian.com/${
-                            articleData.sectionUrl
-                        }`}
-                        data-link-name="article section"
-                    >
-                        {articleData.sectionLabel}
-                    </a>
-                </div>
-            )}
-        <Elements
-            pillar={articleData.pillar}
-            elements={articleData.mainMediaElements}
-        />
+        {articleData.mainMediaElements.map(element => (
+            <MainMedia element={element} />
+        ))}
         <div className={headlineCss}>
-            <h1 className={headerStyle}>{articleData.headline}</h1>
+            <h1
+                className={cx(
+                    headerStyle,
+                    headlinePillarColours[articleData.pillar],
+                )}
+            >
+                {articleData.headline}
+            </h1>
             <div // tslint:disable-line:react-no-dangerous-html
                 className={cx(
-                    standfirstCss,
+                    standfirstCss[articleData.pillar],
                     standfirstLinks[articleData.pillar],
                 )}
                 dangerouslySetInnerHTML={{
@@ -231,7 +235,7 @@ export const MainBlock: React.SFC<{
                 <div className={twitterHandle}>
                     <TwitterIcon />
                     <a
-                        href={`https://www.twitter.com/${
+                        href={`https:// www.twitter.com/${
                             articleData.author.twitterHandle
                         }`}
                     >
