@@ -17,9 +17,9 @@
  * around the ad and it can be placed.
  */
 
-const AD_LIMIT = 8;
-const SMALL_PARA_CHARS = 50;
-const MIN_CHAR_BUFFER = 700;
+export const AD_LIMIT = 8;
+export const SMALL_PARA_CHARS = 50;
+export const MIN_CHAR_BUFFER = 700;
 const IMG_BUFFER_FWD = 300; // really any non-p element type
 const IMG_BUFFER_BWD = 200;
 
@@ -68,7 +68,7 @@ const hasBackwardBuffer = (
     index: number,
     textSinceLastAd: number,
 ): boolean => {
-    const backwardsElements = elements.slice(0, index).reverse();
+    const backwardsElements = elements.slice(0, index + 1).reverse();
     const meetsThreshold =
         getLengthOfFollowingTextElements(backwardsElements) >= IMG_BUFFER_BWD;
     const noBackwardsEmbeds =
