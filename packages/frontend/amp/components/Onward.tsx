@@ -73,7 +73,7 @@ export const Onward: React.SFC<{
     shouldHideAds: boolean;
     pageID: string;
     webURL: string;
-    sectionID?: string;
+    sectionID: string;
     hasStoryPackage: boolean;
     hasRelated: boolean;
     seriesTags: TagType[];
@@ -114,7 +114,7 @@ export const Onward: React.SFC<{
     const hasSectionMostViewed = sectionID && sectionHasMostViewed(sectionID);
     const sectionMostViewed = hasSectionMostViewed
         ? container(
-              `${guardianBaseURL}/container/count/3/offset/0/${sectionID}/mf2.json`,
+              `${guardianBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
           )
         : container(`${guardianBaseURL}/container/count/1/offset/0/mf2.json`);
 
