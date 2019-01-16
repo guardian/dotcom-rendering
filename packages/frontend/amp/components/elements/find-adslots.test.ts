@@ -25,6 +25,12 @@ describe('ampadslots', () => {
         const tenCharTextBlock = getTextBlockElement(10);
         const fiveHundredCharTextBlock = getTextBlockElement(500);
 
+        it('should have these values for ad spacing (or tests other than this one need updating)', () => {
+            expect(AD_LIMIT).toEqual(8);
+            expect(SMALL_PARA_CHARS).toEqual(50);
+            expect(MIN_CHAR_BUFFER).toEqual(700);
+        });
+
         it('adds an advert after 700 chars', () => {
             const data: CAPIElement[] = [
                 {
@@ -48,12 +54,6 @@ describe('ampadslots', () => {
             const data = [getTextBlockElement(699), getTextBlockElement(700)];
 
             expect(findAdSlots(data)).toEqual([]);
-        });
-
-        it('should have these values for ad spacing (or tests other than this one need updating)', () => {
-            expect(AD_LIMIT).toEqual(8);
-            expect(SMALL_PARA_CHARS).toEqual(50);
-            expect(MIN_CHAR_BUFFER).toEqual(700);
         });
 
         it('should not add more than 8 adverts', () => {

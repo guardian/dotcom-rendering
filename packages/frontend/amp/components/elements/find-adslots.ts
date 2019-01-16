@@ -17,6 +17,11 @@
  * around the ad and it can be placed.
  */
 
+interface ElementWithLength {
+    element: CAPIElement;
+    length: number;
+}
+
 export const AD_LIMIT = 8;
 export const SMALL_PARA_CHARS = 50;
 export const MIN_CHAR_BUFFER = 700;
@@ -36,11 +41,15 @@ const getElementLength = (element: CAPIElement): number => {
     }
 };
 
-const getLengthOfFollowingTextElements = (elements: CAPIElement[]): number => {
-    const firstNonTextIndex = elements.findIndex(e => !isTextElement(e));
+const getLengthOfFollowingTextElements = (
+    elements: ElementWithLength[],
+): number => {
+    const firstNonTextIndex = elements.findIndex(
+        e => !isTextElement(e.element),
+    );
     return elements
         .slice(0, firstNonTextIndex)
-        .map(getElementLength)
+        .map(e => e.length)
         .reduce((a, b) => a + b, 0);
 };
 
@@ -48,23 +57,27 @@ const suitableAdNeighbour = (e: CAPIElement): boolean => {
     return isTextElement(e) && getElementLength(e) > SMALL_PARA_CHARS;
 };
 
-const hasForwardBuffer = (elements: CAPIElement[], index: number): boolean => {
+const hasForwardBuffer = (
+    elements: ElementWithLength[],
+    index: number,
+): boolean => {
     const forwardElements = elements.slice(-1 * index);
     const meetsThreshold =
         getLengthOfFollowingTextElements(forwardElements) >= IMG_BUFFER_FWD;
     const noForwardsEmbeds =
-        forwardElements.filter(isTextElement).length === forwardElements.length;
+        forwardElements.filter(e => isTextElement(e.element)).length ===
+        forwardElements.length;
 
     const enoughCharsForward = meetsThreshold || noForwardsEmbeds;
 
     const neighbourSuitable = elements[index + 1]
-        ? suitableAdNeighbour(elements[index + 1])
+        ? suitableAdNeighbour(elements[index + 1].element)
         : false;
     return enoughCharsForward && neighbourSuitable;
 };
 
 const hasBackwardBuffer = (
-    elements: CAPIElement[],
+    elements: ElementWithLength[],
     index: number,
     textSinceLastAd: number,
 ): boolean => {
@@ -72,13 +85,13 @@ const hasBackwardBuffer = (
     const meetsThreshold =
         getLengthOfFollowingTextElements(backwardsElements) >= IMG_BUFFER_BWD;
     const noBackwardsEmbeds =
-        backwardsElements.filter(isTextElement).length ===
+        backwardsElements.filter(e => isTextElement(e.element)).length ===
         backwardsElements.length;
 
     const enoughCharsBackward = meetsThreshold || noBackwardsEmbeds;
 
     return (
-        suitableAdNeighbour(elements[index]) &&
+        suitableAdNeighbour(elements[index].element) &&
         textSinceLastAd >= MIN_CHAR_BUFFER &&
         enoughCharsBackward
     );
@@ -89,14 +102,25 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
     const adSlots = [];
     let adCount = 0;
 
-    for (let i = 0; i < elements.length; i = i + 1) {
+    const elementsWithLength: ElementWithLength[] = elements.map(e => {
+        return {
+            element: e,
+            length: getElementLength(e),
+        };
+    });
+
+    for (let i = 0; i < elementsWithLength.length; i = i + 1) {
         if (adCount < AD_LIMIT) {
             if (isTextElement(elements[i])) {
                 charsScannedSinceLastAd += getElementLength(elements[i]);
 
                 if (
-                    hasBackwardBuffer(elements, i, charsScannedSinceLastAd) &&
-                    hasForwardBuffer(elements, i)
+                    hasBackwardBuffer(
+                        elementsWithLength,
+                        i,
+                        charsScannedSinceLastAd,
+                    ) &&
+                    hasForwardBuffer(elementsWithLength, i)
                 ) {
                     adSlots.push(i);
                     charsScannedSinceLastAd = 0;
