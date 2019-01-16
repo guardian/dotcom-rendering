@@ -41,6 +41,17 @@ const getElementLength = (element: CAPIElement): number => {
     }
 };
 
+const getElementsWithLength = (
+    elements: CAPIElement[],
+): ElementWithLength[] => {
+    return elements.map(e => {
+        return {
+            element: e,
+            length: getElementLength(e),
+        };
+    });
+};
+
 const getLengthOfFollowingTextElements = (
     elements: ElementWithLength[],
 ): number => {
@@ -53,8 +64,8 @@ const getLengthOfFollowingTextElements = (
         .reduce((a, b) => a + b, 0);
 };
 
-const suitableAdNeighbour = (e: CAPIElement): boolean => {
-    return isTextElement(e) && getElementLength(e) > SMALL_PARA_CHARS;
+const suitableAdNeighbour = (e: ElementWithLength): boolean => {
+    return isTextElement(e.element) && e.length > SMALL_PARA_CHARS;
 };
 
 const hasForwardBuffer = (
@@ -71,7 +82,7 @@ const hasForwardBuffer = (
     const enoughCharsForward = meetsThreshold || noForwardsEmbeds;
 
     const neighbourSuitable = elements[index + 1]
-        ? suitableAdNeighbour(elements[index + 1].element)
+        ? suitableAdNeighbour(elements[index + 1])
         : false;
     return enoughCharsForward && neighbourSuitable;
 };
@@ -91,9 +102,20 @@ const hasBackwardBuffer = (
     const enoughCharsBackward = meetsThreshold || noBackwardsEmbeds;
 
     return (
-        suitableAdNeighbour(elements[index].element) &&
+        suitableAdNeighbour(elements[index]) &&
         textSinceLastAd >= MIN_CHAR_BUFFER &&
         enoughCharsBackward
+    );
+};
+
+const hasSpaceForAd = (
+    elements: ElementWithLength[],
+    index: number,
+    charsScannedSinceLastAd: number,
+): boolean => {
+    return (
+        hasBackwardBuffer(elements, index, charsScannedSinceLastAd) &&
+        hasForwardBuffer(elements, index)
     );
 };
 
@@ -102,30 +124,16 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
     const adSlots = [];
     let adCount = 0;
 
-    const elementsWithLength: ElementWithLength[] = elements.map(e => {
-        return {
-            element: e,
-            length: getElementLength(e),
-        };
-    });
+    const elementsWithLength = getElementsWithLength(elements);
 
     for (let i = 0; i < elementsWithLength.length; i = i + 1) {
-        if (adCount < AD_LIMIT) {
-            if (isTextElement(elements[i])) {
-                charsScannedSinceLastAd += getElementLength(elements[i]);
+        if (adCount < AD_LIMIT && isTextElement(elements[i])) {
+            charsScannedSinceLastAd += elementsWithLength[i].length;
 
-                if (
-                    hasBackwardBuffer(
-                        elementsWithLength,
-                        i,
-                        charsScannedSinceLastAd,
-                    ) &&
-                    hasForwardBuffer(elementsWithLength, i)
-                ) {
-                    adSlots.push(i);
-                    charsScannedSinceLastAd = 0;
-                    adCount += 1;
-                }
+            if (hasSpaceForAd(elementsWithLength, i, charsScannedSinceLastAd)) {
+                adSlots.push(i);
+                charsScannedSinceLastAd = 0;
+                adCount += 1;
             }
         }
     }
