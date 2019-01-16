@@ -29,6 +29,7 @@ export interface ArticleModel {
     pillar: Pillar;
     sectionLabel?: string;
     sectionUrl?: string;
+    sectionName: string;
     tags: TagType[];
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];
@@ -65,7 +66,7 @@ export const Article: React.SFC<{
                 shouldHideAds={articleData.shouldHideAds}
                 pageID={articleData.pageId}
                 webURL={articleData.webURL}
-                sectionID={articleData.sectionUrl}
+                sectionID={articleData.sectionName}
                 hasRelated={articleData.hasRelated}
                 hasStoryPackage={articleData.hasStoryPackage}
                 seriesTags={tagsOfType(articleData.tags, 'Series')}
