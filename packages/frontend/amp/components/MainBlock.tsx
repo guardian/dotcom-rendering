@@ -6,28 +6,14 @@ import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import Dateline from '@frontend/web/components/Dateline';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 
 const byline = css`
     font-style: italic;
-`;
-
-const guardianLines = css`
-    background-image: repeating-linear-gradient(
-        to bottom,
-        ${palette.neutral[86]},
-        ${palette.neutral[86]} 1px,
-        transparent 1px,
-        transparent 4px
-    );
-    background-repeat: repeat-x;
-    background-position: top;
-    background-size: 1px 13px;
-    padding-top: 15px;
-    margin-bottom: 6px;
+    font-weight: bold;
+    ${body(1)};
 `;
 
 const meta = css`
@@ -55,12 +41,6 @@ const headlineCss = css`
 
 const header = css`
     margin: 0 -10px;
-`;
-
-const profile = css`
-    ${headline(2)};
-    font-weight: 700;
-    margin-bottom: 4px;
 `;
 
 const listStyles = (pillar: Pillar) => css`
@@ -159,39 +139,14 @@ const pillarFill = pillarMap(
         `,
 );
 
-const twitterHandle = css`
-    ${textSans(1)};
-    font-weight: bold;
-    color: ${palette.neutral[46]};
-
-    padding-right: 10px;
-    display: inline-block;
-
-    svg {
-        height: 10px;
-        max-width: 12px;
-        margin-right: 0px;
-        fill: ${palette.neutral[46]};
-    }
-
-    a {
-        color: ${palette.neutral[46]};
-        text-decoration: none;
-    }
-`;
-
 const metaExtras = css`
     border-top: 1px solid ${palette.neutral[86]};
+    border-bottom: 1px solid ${palette.neutral[86]};
     padding-top: 6px;
     margin-bottom: 6px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
-    margin-left: -10px;
-    margin-right: -10px;
-    padding-left: 10px;
-    padding-right: 10px;
 `;
 
 export const MainBlock: React.SFC<{
@@ -221,28 +176,8 @@ export const MainBlock: React.SFC<{
                 }}
             />
         </div>
-        <div className={cx(meta, guardianLines)}>
-            <div className={cx(profile, pillarColours[articleData.pillar])}>
-                <span className={byline}>
-                    {/* <RenderByline
-                        bylineText={author.byline}
-                        contributorTags={tags}
-                        pillar={pillar}
-                    /> */}
-                </span>
-            </div>
-            {articleData.author.twitterHandle && (
-                <div className={twitterHandle}>
-                    <TwitterIcon />
-                    <a
-                        href={`https:// www.twitter.com/${
-                            articleData.author.twitterHandle
-                        }`}
-                    >
-                        @{articleData.author.twitterHandle}
-                    </a>
-                </div>
-            )}
+        <div className={meta}>
+            <div className={byline}>{articleData.author.byline}</div>
             <Dateline dateDisplay={articleData.webPublicationDateDisplay} />
             <div className={metaExtras}>
                 <ShareIcons
