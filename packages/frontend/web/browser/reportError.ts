@@ -4,7 +4,7 @@
 
 import { getRaven } from '@frontend/web/browser/raven';
 
-type ReportedError = Error & {
+export type ReportedError = Error & {
     reported?: boolean;
 };
 

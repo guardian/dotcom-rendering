@@ -8,6 +8,7 @@ import {
     sendPageView as sendGaPageView,
 } from '@frontend/web/browser/ga';
 import Article from './pages/Article';
+import { ReportedError } from '@frontend/web/browser/reportError';
 
 if (module.hot) {
     module.hot.accept();
@@ -40,7 +41,45 @@ const go = () => {
     };
 
     getRaven()
+        .catch(err => {
+            hydrate();
+        })
         .then(raven => {
+            if (!raven) {
+                return;
+            }
+
+            const oldOnError = window.onerror;
+
+            window.onerror = (
+                message,
+                filename,
+                lineno,
+                colno,
+                error: ReportedError | undefined,
+            ) => {
+                // Not all browsers pass the error object
+                if (!error || !error.reported) {
+                    oldOnError(message, filename, lineno, colno, error);
+                }
+            };
+
+            // Report unhandled promise rejections
+            // https://github.com/cujojs/when/blob/master/docs/debug-api.md#browser-window-events
+            window.addEventListener('unhandledrejection', event => {
+                // Prevent error output on the console:
+                event.preventDefault();
+
+                // having to typecast Event to PromiseRejectionEvent
+                const promiseRejectionEvent = event as PromiseRejectionEvent;
+
+                const error = promiseRejectionEvent.reason;
+
+                if (error && !error.reported) {
+                    raven.captureException(error);
+                }
+            });
+
             raven.context(
                 {
                     tags: {
@@ -49,9 +88,6 @@ const go = () => {
                 },
                 hydrate,
             );
-        })
-        .catch(err => {
-            hydrate();
         });
 };
 
