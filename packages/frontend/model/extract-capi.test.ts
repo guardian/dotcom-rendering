@@ -504,30 +504,50 @@ describe('extract-capi', () => {
         });
     });
 
-    it('returns sectionData if keyword tag available', () => {
-        testData.tags.tags = [
+    it('returns submeta section labels if available', () => {
+        testData.config.page.subMetaLinks.sectionLabels = [
             {
-                properties: {
-                    id: 'money/money',
-                    tagType: 'Keyword',
-                    webTitle: 'Money',
-                },
+                link: '/football/chelsea',
+                text: 'Chelsea',
+                dataLinkName: 'article section',
             },
         ];
 
-        const { sectionLabel, sectionUrl } = extract(testData);
+        const { subMetaSectionLinks } = extract(testData);
+        const firstLink: SimpleLinkType = subMetaSectionLinks[0];
 
-        expect(sectionLabel).toEqual('Money');
-        expect(sectionUrl).toEqual('money/money');
+        expect(firstLink.url).toEqual('/football/chelsea');
+        expect(firstLink.title).toEqual('Chelsea');
     });
 
-    it('returns no sectionData if keyword tag unavailable', () => {
-        testData.tags.tags = [];
+    it('returns submeta keywords if available', () => {
+        testData.config.page.subMetaLinks.keywords = [
+            {
+                link: '/football/footballviolence',
+                text: 'Football violence',
+                dataLinkName: 'keyword: football/footballviolence',
+            },
+            {
+                link: '/world/race',
+                text: 'Race',
+                dataLinkName: 'keyword: world/race',
+            },
+            {
+                link: '/tone/news',
+                text: 'news',
+                dataLinkName: 'tone: news',
+            },
+        ];
 
-        const { sectionLabel, sectionUrl } = extract(testData);
+        const { subMetaKeywordLinks } = extract(testData);
+        const [firstLink, secondLink, thirdLink] = subMetaKeywordLinks;
 
-        expect(sectionLabel).toBeUndefined();
-        expect(sectionUrl).toBeUndefined();
+        expect(firstLink.url).toEqual('/football/footballviolence');
+        expect(firstLink.title).toEqual('Football violence');
+        expect(secondLink.url).toEqual('/world/race');
+        expect(secondLink.title).toEqual('Race');
+        expect(thirdLink.url).toEqual('/tone/news');
+        expect(thirdLink.title).toEqual('news');
     });
 
     it('returns contentType if contentType available', () => {

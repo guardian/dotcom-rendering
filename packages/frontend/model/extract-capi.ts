@@ -85,27 +85,6 @@ const getAgeWarning = (
     }
 };
 
-// TODO this is a simple implementation of section data
-// and should be updated to matcch full implementation available at
-// https://github.com/guardian/frontend/blob/master/common/app/model/content.scala#L202
-const getSectionData: (
-    tags: TagType[],
-) => {
-    sectionLabel?: string;
-    sectionUrl?: string;
-} = tags => {
-    const keyWordTag = tags.find(tag => tag.type === 'Keyword');
-
-    if (keyWordTag) {
-        return {
-            sectionLabel: keyWordTag.title,
-            sectionUrl: keyWordTag.id,
-        };
-    }
-
-    return {};
-};
-
 const getSubMetaSectionLinks: (data: {}) => SimpleLinkType[] = data => {
     const subMetaSectionLinks = getArray<any>(
         data,
@@ -141,7 +120,6 @@ export const extract = (data: {}): CAPIType => {
     );
     const tags = getTags(data);
     const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
-    const sectionData = getSectionData(tags);
     const sectionName = getNonEmptyString(data, 'config.page.section');
 
     const leadContributor: TagType = tags.filter(
@@ -208,7 +186,6 @@ export const extract = (data: {}): CAPIType => {
         ageWarning: getAgeWarning(tags, webPublicationDate),
         subMetaSectionLinks: getSubMetaSectionLinks(data),
         subMetaKeywordLinks: getSubMetaKeywordLinks(data),
-        ...sectionData,
         shouldHideAds: getBoolean(data, 'config.page.shouldHideAds', false),
         webURL: getNonEmptyString(data, 'config.page.webURL'),
         guardianBaseURL: getNonEmptyString(data, 'config.page.guardianBaseURL'),
