@@ -1,8 +1,6 @@
 let adBlockInUse: boolean;
 
 export const isAdBlockInUse: () => Promise<boolean> = () => {
-    return Promise.reject('xxx');
-
     if (adBlockInUse !== undefined) {
         return Promise.resolve(adBlockInUse);
     }
