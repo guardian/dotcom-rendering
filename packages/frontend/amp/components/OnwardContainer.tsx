@@ -67,6 +67,12 @@ const headlineCSS = css`
     word-wrap: break-word;
     ${headline(1)};
 `;
+const iconCSS = css`
+    svg {
+        fill: ${palette.neutral[7]};
+        padding-right: 2px;
+    }
+`;
 export const OnwardContainer: React.SFC<{
     guardianBaseURL: string;
     path: string;
@@ -105,7 +111,7 @@ export const OnwardContainer: React.SFC<{
                                 <div className={itemContent}>
                                     <div>
                                         <h2 className={headlineCSS}>
-                                            <span>
+                                            <span className={iconCSS}>
                                                 <MoustacheSection name="isVideo">
                                                     <VideoIcon />
                                                 </MoustacheSection>
