@@ -5,6 +5,8 @@ import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/GetImage';
+import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
+
 const figureStyle = css`
     margin-top: 16px;
     margin-bottom: 8px;
@@ -47,9 +49,7 @@ export const ImageBlockComponent: React.SFC<{
             {element.data.caption && (
                 <figcaption className={captionStyle}>
                     <span className={fill}>
-                        <svg width="11" height="10" viewBox="0 0 11 10">
-                            <path fill-rule="evenodd" d="M5.5 0L11 10H0z" />
-                        </svg>
+                        <TriangleIcon />
                     </span>
                     {element.data.caption}
                 </figcaption>
