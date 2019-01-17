@@ -58,10 +58,10 @@ http://localhost:3030/Article?url=http://localhost:9000/world/2013/jun/09/edward
 
 ### Previewing AMP on local
 
-You can preview an AMP page similarly to an article, but by replacing `www` by `amp`, as in
+You can preview an AMP page similarly to an article, as follows
 
 ```
-http://localhost:3030/Article?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+http://localhost:3030/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 ```
 
 ### Debugging tools
