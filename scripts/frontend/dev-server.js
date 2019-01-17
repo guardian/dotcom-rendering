@@ -40,7 +40,7 @@ const go = async () => {
         ),
     );
 
-    app.get(
+    app.use(
         '/Article',
         async (req, res, next) => {
             const { html, ...config } = await fetch(

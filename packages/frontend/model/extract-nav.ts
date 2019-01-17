@@ -17,11 +17,11 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
 };
 
 export const extract = (data: {}): NavType => {
-    let pillars = getArray<any>(data, 'config.nav.pillars');
+    let pillars = getArray<any>(data, 'site.nav.pillars');
 
     pillars = pillars.map(link => getLink(link, { isPillar: true }));
 
-    const subnav = get(data, 'config.nav.subNavSections');
+    const subnav = get(data, 'site.nav.subNavSections');
 
     return {
         pillars,
@@ -30,16 +30,16 @@ export const extract = (data: {}): NavType => {
             title: 'More',
             longTitle: 'More',
             more: true,
-            children: getArray<object>(data, 'config.nav.otherLinks', []).map(
+            children: getArray<object>(data, 'site.nav.otherLinks', []).map(
                 l => getLink(l, { isPillar: false }),
             ),
         },
         brandExtensions: getArray<object>(
             data,
-            'config.nav.brandExtensions',
+            'site.nav.brandExtensions',
             [],
         ).map(l => getLink(l, { isPillar: false })),
-        currentNavLink: getString(data, 'config.nav.currentNavLink.title', ''),
+        currentNavLink: getString(data, 'site.nav.currentNavLink.title', ''),
         subNavSections: subnav
             ? {
                   parent: subnav.parent
@@ -54,51 +54,51 @@ export const extract = (data: {}): NavType => {
             header: {
                 contribute: getString(
                     data,
-                    'config.readerRevenueLinks.header.contribute',
+                    'site.readerRevenueLinks.header.contribute',
                     '',
                 ),
                 subscribe: getString(
                     data,
-                    'config.readerRevenueLinks.header.subscribe',
+                    'site.readerRevenueLinks.header.subscribe',
                     '',
                 ),
                 support: getString(
                     data,
-                    'config.readerRevenueLinks.header.support',
+                    'site.readerRevenueLinks.header.support',
                     '',
                 ),
             },
             footer: {
                 contribute: getString(
                     data,
-                    'config.readerRevenueLinks.footer.contribute',
+                    'site.readerRevenueLinks.footer.contribute',
                     '',
                 ),
                 subscribe: getString(
                     data,
-                    'config.readerRevenueLinks.footer.subscribe',
+                    'site.readerRevenueLinks.footer.subscribe',
                     '',
                 ),
                 support: getString(
                     data,
-                    'config.readerRevenueLinks.footer.support',
+                    'site.readerRevenueLinks.footer.support',
                     '',
                 ),
             },
             sideMenu: {
                 contribute: getString(
                     data,
-                    'config.readerRevenueLinks.sideMenu.contribute',
+                    'site.readerRevenueLinks.sideMenu.contribute',
                     '',
                 ),
                 subscribe: getString(
                     data,
-                    'config.readerRevenueLinks.sideMenu.subscribe',
+                    'site.readerRevenueLinks.sideMenu.subscribe',
                     '',
                 ),
                 support: getString(
                     data,
-                    'config.readerRevenueLinks.sideMenu.support',
+                    'site.readerRevenueLinks.sideMenu.support',
                     '',
                 ),
             },

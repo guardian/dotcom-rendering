@@ -41,7 +41,7 @@ describe('extract-capi', () => {
     });
 
     it('returns webPublicationDate if available', () => {
-        testData.config.page.webPublicationDate = 1489173305000;
+        testData.content.webPublicationDate = 1489173305000;
 
         const { webPublicationDate } = extract(testData);
 
@@ -51,7 +51,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if webPublicationDate missing', () => {
-        testData.config.page.webPublicationDate = null;
+        testData.content.webPublicationDate = null;
 
         expect(() => {
             extract(testData);
@@ -59,7 +59,7 @@ describe('extract-capi', () => {
     });
 
     it('returns tags if available', () => {
-        testData.tags.tags = [
+        testData.content.tags.all = [
             {
                 properties: {
                     id: 'money/ticket-prices',
@@ -94,7 +94,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if tags missing id', () => {
-        testData.tags.tags = [
+        testData.content.tags.all = [
             {
                 properties: {
                     tagType: 'Keyword',
@@ -109,7 +109,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if tags missing tagType', () => {
-        testData.tags.tags = [
+        testData.content.tags.all = [
             {
                 properties: {
                     id: 'money/consumer-affairs',
@@ -126,7 +126,7 @@ describe('extract-capi', () => {
     it('returns sectionName if section available', () => {
         const testSection = 'money';
 
-        testData.config.page.section = testSection;
+        testData.content.section = testSection;
 
         const { sectionName } = extract(testData);
 
@@ -134,7 +134,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if section missing', () => {
-        testData.config.page.section = null;
+        testData.content.section = null;
 
         expect(() => {
             extract(testData);
@@ -144,7 +144,7 @@ describe('extract-capi', () => {
     it('returns editionLongForm if edition available', () => {
         const testEditionLongForm = 'UK edition';
 
-        testData.config.page.edition = testEditionLongForm;
+        testData.content.edition = testEditionLongForm;
 
         const { editionLongForm } = extract(testData);
 
@@ -152,7 +152,7 @@ describe('extract-capi', () => {
     });
 
     it('returns editionLongForm as empty string if edition not available', () => {
-        testData.config.page.edition = null;
+        testData.content.edition = null;
 
         const { editionLongForm } = extract(testData);
 
@@ -162,7 +162,7 @@ describe('extract-capi', () => {
     it('returns editionId if editionId available', () => {
         const testEdition = 'UK';
 
-        testData.config.page.editionId = testEdition;
+        testData.content.editionId = testEdition;
 
         const { editionId } = extract(testData);
 
@@ -170,7 +170,7 @@ describe('extract-capi', () => {
     });
 
     it('returns editionId as UK if edition not available', () => {
-        testData.config.page.editionId = null;
+        testData.content.editionId = null;
 
         const { editionId } = extract(testData);
 
@@ -178,7 +178,7 @@ describe('extract-capi', () => {
     });
 
     it('returns isImmersive as true if immersive', () => {
-        testData.config.page.isImmersive = true;
+        testData.content.meta.isImmersive = true;
 
         const { isImmersive } = extract(testData);
 
@@ -186,7 +186,7 @@ describe('extract-capi', () => {
     });
 
     it('returns isImmersive as false if not immersive', () => {
-        testData.config.page.isImmersive = false;
+        testData.content.meta.isImmersive = false;
 
         const { isImmersive } = extract(testData);
 
@@ -196,7 +196,7 @@ describe('extract-capi', () => {
     it('returns webPublicationDateDisplay if webPublicationDateDisplay available', () => {
         const testWebPublicationDateDisplay = 'Fri 10 Mar 2017 19.15 GMT';
 
-        testData.config.page.webPublicationDateDisplay = testWebPublicationDateDisplay;
+        testData.content.webPublicationDateDisplay = testWebPublicationDateDisplay;
 
         const { webPublicationDateDisplay } = extract(testData);
 
@@ -204,7 +204,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if webPublicationDateDisplay missing', () => {
-        testData.config.page.webPublicationDateDisplay = null;
+        testData.content.webPublicationDateDisplay = null;
 
         expect(() => {
             extract(testData);
@@ -214,7 +214,7 @@ describe('extract-capi', () => {
     it('returns headline if headline available', () => {
         const testHeadline = 'Hello Waldo';
 
-        testData.config.page.headline = testHeadline;
+        testData.content.headline = testHeadline;
 
         const { headline } = extract(testData);
 
@@ -224,7 +224,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if headline missing', () => {
-        testData.config.page.headline = null;
+        testData.content.headline = null;
 
         expect(() => {
             extract(testData);
@@ -234,7 +234,7 @@ describe('extract-capi', () => {
     it('returns standfirst if standfirst available', () => {
         const testStandfirst = '<p>• Waldo Jeffers had reached his limit.</p>';
 
-        testData.contentFields.fields.standfirst = testStandfirst;
+        testData.content.standfirst = testStandfirst;
 
         const { standfirst } = extract(testData);
 
@@ -245,7 +245,7 @@ describe('extract-capi', () => {
     });
 
     it('returns standfirst as empty string if standfirst not available', () => {
-        testData.contentFields.fields.standfirst = null;
+        testData.content.standfirst = null;
 
         const { standfirst } = extract(testData);
 
@@ -255,7 +255,7 @@ describe('extract-capi', () => {
     it('returns main if main available', () => {
         const testMain = '<p>Waldo Jeffers had reached his limit.</p>';
 
-        testData.contentFields.fields.main = testMain;
+        testData.content.main = testMain;
 
         const { main } = extract(testData);
 
@@ -264,7 +264,7 @@ describe('extract-capi', () => {
     });
 
     it('returns main as empty string if main not available', () => {
-        testData.contentFields.fields.main = null;
+        testData.content.main = null;
 
         const { main } = extract(testData);
 
@@ -274,7 +274,7 @@ describe('extract-capi', () => {
     it('returns main if main available', () => {
         const testMain = '<p>Waldo Jeffers had reached his limit.</p>';
 
-        testData.contentFields.fields.main = testMain;
+        testData.content.main = testMain;
 
         const { main } = extract(testData);
 
@@ -285,7 +285,7 @@ describe('extract-capi', () => {
     it('returns body if bodyHtml available', () => {
         const testBody = '<p>Waldo Jeffers had reached his limit.</p>';
 
-        testData.contentFields.fields.blocks.body = [
+        testData.content.blocks.body = [
             {
                 bodyHtml: testBody,
             },
@@ -300,7 +300,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if body missing', () => {
-        testData.contentFields.fields.blocks.body = null;
+        testData.content.blocks.body = null;
 
         expect(() => {
             extract(testData);
@@ -310,7 +310,7 @@ describe('extract-capi', () => {
     it('returns author.byline if byline available', () => {
         const testAuthor = 'Waldo Jeffers';
 
-        testData.config.page.byline = testAuthor;
+        testData.content.byline = testAuthor;
 
         const { author } = extract(testData);
 
@@ -320,7 +320,7 @@ describe('extract-capi', () => {
     it('returns author.twitterHandle if available', () => {
         const testTwitterHandle = 'WaldoJeffers';
 
-        testData.tags.tags = [
+        testData.content.tags.all = [
             {
                 properties: {
                     id: 'profile/waldo-jeffers',
@@ -336,7 +336,7 @@ describe('extract-capi', () => {
     });
 
     it('returns body elements if body available', () => {
-        testData.contentFields.fields.blocks.body = [
+        testData.content.blocks.body = [
             {
                 elements: [
                     {
@@ -367,7 +367,7 @@ describe('extract-capi', () => {
     it('returns pageId if available', () => {
         const testPageId = 'Test12345';
 
-        testData.config.page.pageId = testPageId;
+        testData.content.pageId = testPageId;
 
         const { pageId } = extract(testData);
 
@@ -375,7 +375,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if pageId missing', () => {
-        testData.config.page.pageId = null;
+        testData.content.pageId = null;
 
         expect(() => {
             extract(testData);
@@ -392,7 +392,7 @@ describe('extract-capi', () => {
     it('returns pillar if available', () => {
         const testPillar = 'sport';
 
-        testData.config.page.pillar = testPillar;
+        testData.content.pillar = testPillar;
 
         findPillar.mockReturnValueOnce(testPillar);
 
@@ -405,7 +405,7 @@ describe('extract-capi', () => {
     it('defaults pillar to "news" if not valid', () => {
         const testPillar = 'foo';
 
-        testData.config.page.pillar = testPillar;
+        testData.content.pillar = testPillar;
 
         findPillar.mockReturnValueOnce(undefined);
 
@@ -416,7 +416,7 @@ describe('extract-capi', () => {
     });
 
     it('returns ageWarning as undefined if article not in tone/news', () => {
-        testData.tags.tags = [
+        testData.content.tags.all = [
             {
                 properties: {
                     id: 'tone/sport',
@@ -437,7 +437,7 @@ describe('extract-capi', () => {
         beforeEach(() => {
             publicationDate = new Date();
 
-            testData.tags.tags = [
+            testData.content.tags.all = [
                 {
                     properties: {
                         id: 'tone/news',
@@ -452,7 +452,7 @@ describe('extract-capi', () => {
             // set a publication date of 2 years ago
             publicationDate.setDate(publicationDate.getDate() - 365 * 2);
 
-            testData.config.page.webPublicationDate = publicationDate.getTime();
+            testData.content.webPublicationDate = publicationDate.getTime();
 
             const { ageWarning } = extract(testData);
 
@@ -463,7 +463,7 @@ describe('extract-capi', () => {
             // set a publication date of 500 days ago
             publicationDate.setDate(publicationDate.getDate() - 500);
 
-            testData.config.page.webPublicationDate = publicationDate.getTime();
+            testData.content.webPublicationDate = publicationDate.getTime();
 
             const { ageWarning } = extract(testData);
 
@@ -474,7 +474,7 @@ describe('extract-capi', () => {
             // set a publication date of 90 days ago
             publicationDate.setDate(publicationDate.getDate() - 90);
 
-            testData.config.page.webPublicationDate = publicationDate.getTime();
+            testData.content.webPublicationDate = publicationDate.getTime();
 
             const { ageWarning } = extract(testData);
 
@@ -485,7 +485,7 @@ describe('extract-capi', () => {
             // set a publication date of 35 days ago
             publicationDate.setDate(publicationDate.getDate() - 35);
 
-            testData.config.page.webPublicationDate = publicationDate.getTime();
+            testData.content.webPublicationDate = publicationDate.getTime();
 
             const { ageWarning } = extract(testData);
 
@@ -496,7 +496,7 @@ describe('extract-capi', () => {
             // set a publication date of 7 days ago
             publicationDate.setDate(publicationDate.getDate() - 7);
 
-            testData.config.page.webPublicationDate = publicationDate.getTime();
+            testData.content.webPublicationDate = publicationDate.getTime();
 
             const { ageWarning } = extract(testData);
 
@@ -505,7 +505,7 @@ describe('extract-capi', () => {
     });
 
     it('returns sectionData if keyword tag available', () => {
-        testData.tags.tags = [
+        testData.content.tags.all = [
             {
                 properties: {
                     id: 'money/money',
@@ -522,7 +522,7 @@ describe('extract-capi', () => {
     });
 
     it('returns no sectionData if keyword tag unavailable', () => {
-        testData.tags.tags = [];
+        testData.content.tags.all = [];
 
         const { sectionLabel, sectionUrl } = extract(testData);
 
@@ -532,7 +532,7 @@ describe('extract-capi', () => {
 
     it('returns contentType if contentType available', () => {
         const testContentType = 'Video Article';
-        testData.config.page.contentType = testContentType;
+        testData.content.contentType = testContentType;
 
         const { contentType } = extract(testData);
 
@@ -540,7 +540,7 @@ describe('extract-capi', () => {
     });
 
     it('throws error if contentType missing', () => {
-        testData.config.page.contentType = null;
+        testData.content.contentType = null;
 
         expect(() => {
             extract(testData);
