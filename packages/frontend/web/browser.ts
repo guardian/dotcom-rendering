@@ -51,6 +51,11 @@ const go = () => {
 
             const oldOnError = window.onerror;
 
+            /**
+             * Make sure global onerror doesn't report errors
+             * already manually reported via reportError module
+             * by checking for 'reported' property
+             */
             window.onerror = (
                 message,
                 filename,
