@@ -42,7 +42,7 @@ You may want local identity cookies to be available in `dotcom-rendering`. To en
 3. run `./scripts/nginx/setup.sh`
 4. access `dotcom-rendering` through https://r.thegulocal.com
 
-### Change preview article
+### Previewing article on local
 
 You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. For example:
 
@@ -56,6 +56,13 @@ You can use this technique to integrate with a locally running instance of `fron
 http://localhost:3030/Article?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 ```
 
+### Previewing AMP on local
+
+You can preview an AMP page similarly to an article, but by replacing `www` by `amp`, as in
+
+```
+http://localhost:3030/Article?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+```
 
 ### Debugging tools
 
