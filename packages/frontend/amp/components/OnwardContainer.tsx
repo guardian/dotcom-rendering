@@ -6,9 +6,10 @@ import {
     MoustacheTemplate,
     moustacheVariable,
 } from './primitives/moustache';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 
 import VideoIcon from '@guardian/pasteup/icons/video-icon.svg';
+import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 import Camera from '@guardian/pasteup/icons/camera.svg';
 import VolumeHigh from '@guardian/pasteup/icons/volume-high.svg';
 import Quote from '@guardian/pasteup/icons/quote.svg';
@@ -21,17 +22,18 @@ const inner = css`
     overflow: hidden;
     position: relative;
     border-top: 1px solid ${palette.neutral[86]};
-    padding-bottom: 24px;
+    margin-top: 24px;
 `;
 const header = css`
-    padding-bottom: 0.75rem;
+    padding-bottom: 12px;
     font-weight: 500;
     position: relative;
     ${headline(3)};
+    text-transform: capitalize;
 `;
 const item = css`
-    background-color: #ededed;
-    border-top: 1px solid #dcdcdc;
+    background-color: ${palette.neutral[93]};
+    border-top: 1px solid ${palette.neutral[93]};
     padding-left: 126px;
     position: relative;
     height: 75px;
@@ -67,21 +69,62 @@ const headlineCSS = css`
     word-wrap: break-word;
     ${headline(1)};
 `;
+
 const iconCSS = css`
     svg {
         fill: ${palette.neutral[7]};
         padding-right: 2px;
     }
 `;
+
+const onward = css`
+    .show-more[overflow] {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: ${palette.neutral[7]};
+        background-color: ${palette.neutral[100]};
+        padding: 0 10px;
+        ${textSans(2)};
+        line-height: 34px;
+        height: 36px;
+        font-weight: bold;
+
+        svg {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            margin-top: -2px;
+            fill: ${palette.neutral[46]};
+            padding-right: 4px;
+        }
+
+        :after {
+            content: '';
+            background-color: ${palette.neutral[86]};
+            border-radius: 18px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 140px;
+            z-index: -1;
+            color: ${palette.neutral[100]};
+        }
+    }
+`;
+
 export const OnwardContainer: React.SFC<{
     guardianBaseURL: string;
     path: string;
 }> = ({ guardianBaseURL, path }) => (
     <amp-list
         layout="fixed-height"
-        height="184"
+        height="184px"
         src={path}
         credentials="include"
+        class={onward}
     >
         <MoustacheTemplate>
             <MoustacheSection name="showContent">
@@ -160,8 +203,9 @@ export const OnwardContainer: React.SFC<{
                 </div>
             </MoustacheSection>
         </MoustacheTemplate>
-        {/* <div overflow={true}>
-            <Plus />
-        </div> */}
+        <div className="show-more" overflow="">
+            <PlusIcon />
+            Show more
+        </div>
     </amp-list>
 );
