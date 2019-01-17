@@ -106,64 +106,29 @@ const getSectionData: (
     return {};
 };
 
-const getSubMetaSectionLinks: (
-    data: {
-        tags: TagType[];
-        isImmersive: boolean;
-        isArticle: boolean;
-        sectionLabel?: string;
-        sectionUrl?: string;
-    },
-) => SimpleLinkType[] = data => {
-    const links: SimpleLinkType[] = [];
-    const { tags, isImmersive, isArticle, sectionLabel, sectionUrl } = data;
+const getSubMetaSectionLinks: (data: {}) => SimpleLinkType[] = data => {
+    const subMetaSectionLinks = getArray<any>(
+        data,
+        'config.page.subMetaLinks.sectionLabels',
+        [],
+    );
 
-    if (!(isImmersive && isArticle)) {
-        if (sectionLabel && sectionUrl) {
-            links.push({
-                url: `/${sectionUrl}`,
-                title: sectionLabel,
-            });
-        }
-
-        const blogOrSeriesTags = tags.filter(
-            tag => tag.type === 'Blog' || tag.type === 'Series',
-        );
-
-        blogOrSeriesTags.forEach(tag => {
-            links.push({
-                url: `/${tag.id}`,
-                title: tag.title,
-            });
-        });
-    }
-
-    return links;
+    return subMetaSectionLinks.map(({ link, text }) => ({
+        url: link,
+        title: text,
+    }));
 };
 
-const getSubMetaKeywordLinks: (
-    data: {
-        tags: TagType[];
-        sectionName: string;
-        sectionLabel?: string;
-        sectionUrl?: string;
-    },
-) => SimpleLinkType[] = data => {
-    const { tags, sectionName, sectionLabel } = data;
+const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
+    const subMetaKeywordLinks = getArray<any>(
+        data,
+        'config.page.subMetaLinks.keywords',
+        [],
+    );
 
-    const keywordTags = tags
-        .filter(
-            tag =>
-                tag.type === 'Keyword' &&
-                tag.id !== sectionLabel &&
-                tag.title.toLowerCase() !== sectionName.toLowerCase(),
-        )
-        .slice(1, 6);
-    const toneTags = tags.filter(tag => tag.type === 'Tone');
-
-    return [...keywordTags, ...toneTags].map(tag => ({
-        url: `/${tag.id}`,
-        title: tag.title,
+    return subMetaKeywordLinks.map(({ link, text }) => ({
+        url: link,
+        title: text,
     }));
 };
 
@@ -244,17 +209,8 @@ export const extract = (data: {}): CAPIType => {
         sharingUrls: getSharingUrls(data),
         pillar: findPillar(getString(data, 'config.page.pillar', '')) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
-        subMetaSectionLinks: getSubMetaSectionLinks({
-            tags,
-            isImmersive,
-            isArticle,
-            ...sectionData,
-        }),
-        subMetaKeywordLinks: getSubMetaKeywordLinks({
-            tags,
-            sectionName,
-            ...sectionData,
-        }),
+        subMetaSectionLinks: getSubMetaSectionLinks(data),
+        subMetaKeywordLinks: getSubMetaKeywordLinks(data),
         ...sectionData,
         shouldHideAds: getBoolean(data, 'config.page.shouldHideAds', false),
         webURL: getNonEmptyString(data, 'config.page.webURL'),
