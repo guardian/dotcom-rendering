@@ -13,7 +13,7 @@ import {
     leftCol,
 } from '@guardian/pasteup/breakpoints';
 
-import { getCookie } from '@frontend/web/lib/cookie';
+import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
 const message = css`
