@@ -141,9 +141,6 @@ export const extract = (data: {}): CAPIType => {
     );
     const tags = getTags(data);
     const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
-    const isArticle =
-        tags &&
-        tags.some(tag => tag.id === 'type/article' && tag.type === 'Type');
     const sectionData = getSectionData(tags);
     const sectionName = getNonEmptyString(data, 'config.page.section');
 
