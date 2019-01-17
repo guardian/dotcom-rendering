@@ -22,7 +22,7 @@ yarn test ShareCount
 
 ## Writing tests
 
-Tests should be colocated with the module/Component under test and should end with the suffix `.test.ts`, `.test.tsx`. For example: `components/ShareCount.tsx`/`components/ShareCount.test.tsx` and `lib/cookie.ts`/`lib/cookie.test.tsx`.
+Tests should be colocated with the module/Component under test and should end with the suffix `.test.ts`, `.test.tsx`. For example: `components/ShareCount.tsx`/`components/ShareCount.test.tsx` and `lib/cookie.ts`/`lib/cookie.test.ts`.
 
 ### Testing Components
 

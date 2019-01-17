@@ -492,23 +492,22 @@ const ArticleBody: React.SFC<{
     return (
         <div className={wrapper}>
             <header className={header}>
-                {CAPI.sectionLabel &&
-                    CAPI.sectionUrl && (
-                        <div className={section}>
-                            <a
-                                className={cx(
-                                    sectionLabelLink,
-                                    pillarColours[CAPI.pillar],
-                                )}
-                                href={`https://www.theguardian.com/${
-                                    CAPI.sectionUrl
-                                }`}
-                                data-link-name="article section"
-                            >
-                                {CAPI.sectionLabel}
-                            </a>
-                        </div>
-                    )}
+                {CAPI.sectionLabel && CAPI.sectionUrl && (
+                    <div className={section}>
+                        <a
+                            className={cx(
+                                sectionLabelLink,
+                                pillarColours[CAPI.pillar],
+                            )}
+                            href={`https://www.theguardian.com/${
+                                CAPI.sectionUrl
+                            }`}
+                            data-link-name="article section"
+                        >
+                            {CAPI.sectionLabel}
+                        </a>
+                    </div>
+                )}
                 <div className={headlineCSS}>
                     <h1 className={headerStyle}>{CAPI.headline}</h1>
                     <div
