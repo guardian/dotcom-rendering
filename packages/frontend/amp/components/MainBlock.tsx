@@ -154,8 +154,8 @@ export const MainBlock: React.SFC<{
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (
     <header className={header}>
-        {articleData.mainMediaElements.map(element => (
-            <MainMedia element={element} />
+        {articleData.mainMediaElements.map((element, i) => (
+            <MainMedia key={i} element={element} />
         ))}
         <div className={headlineCss}>
             <h1
