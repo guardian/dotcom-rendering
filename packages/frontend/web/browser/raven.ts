@@ -40,48 +40,50 @@ const dataCallback: (
     return resp;
 };
 
+interface ShouldSendCallbackData {
+    tags: {
+        ignored: boolean | undefined;
+    };
+}
+
+const shouldSendCallback: (
+    data: ShouldSendCallbackData,
+    adBlockInUse: boolean,
+) => boolean = (data, adBlockInUse) => {
+    const { isDev, switches } = window.guardian.app.data.config;
+    const isIgnored =
+        typeof data.tags.ignored !== 'undefined' && data.tags.ignored;
+    const isInSample = Math.random() < 0.1;
+    if (isDev && !isIgnored) {
+        // Some environments don't support or don't always expose the console Object
+        if (window.console && window.console.warn) {
+            window.console.warn('Raven captured error.', data);
+        }
+    }
+    return (
+        switches.enableSentryReporting &&
+        isInSample &&
+        !isIgnored &&
+        !adBlockInUse &&
+        !isDev
+    );
+};
+
 const setUpRaven: (
     adBlockInUse: boolean,
 ) => Promise<RavenStatic> = adBlockInUse => {
-    const {
-        sentryPublicApiKey,
-        sentryHost,
-        isDev,
-        switches,
-    } = window.guardian.app.data.config;
+    const { sentryPublicApiKey, sentryHost } = window.guardian.app.data.config;
     const { editionLongForm, contentType } = window.guardian.app.data.CAPI;
     const sentryUrl = `https://${sentryPublicApiKey}@${sentryHost}`;
     const sentryOptions = {
         dataCallback,
         whitelistUrls,
         ignoreErrors,
+        shouldSendCallback: (data: ShouldSendCallbackData) =>
+            shouldSendCallback(data, adBlockInUse),
         tags: {
             contentType,
             edition: editionLongForm,
-        },
-        shouldSendCallback(data: {
-            tags: {
-                ignored: boolean | undefined;
-            };
-        }): boolean {
-            const isIgnored =
-                typeof data.tags.ignored !== 'undefined' && data.tags.ignored;
-            const isInSample = Math.random() < 0.1;
-
-            if (isDev && !isIgnored) {
-                // Some environments don't support or don't always expose the console Object
-                if (window.console && window.console.warn) {
-                    window.console.warn('Raven captured error.', data);
-                }
-            }
-
-            return (
-                switches.enableSentryReporting &&
-                isInSample &&
-                !isIgnored &&
-                !adBlockInUse &&
-                !isDev
-            );
         },
     };
 

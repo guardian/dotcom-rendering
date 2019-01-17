@@ -14,7 +14,7 @@ if (module.hot) {
     module.hot.accept();
 }
 
-// kick off the app
+// Kick off the app
 const go = () => {
     const hydrate = () => {
         const { cssIDs, data } = window.guardian.app;
@@ -65,19 +65,14 @@ const go = () => {
             };
 
             // Report unhandled promise rejections
-            // https://github.com/cujojs/when/blob/master/docs/debug-api.md#browser-window-events
             window.addEventListener('unhandledrejection', event => {
                 // Prevent error output on the console:
                 event.preventDefault();
 
-                // having to typecast Event to PromiseRejectionEvent
-                const promiseRejectionEvent = event as PromiseRejectionEvent;
+                // Typecast Event to PromiseRejectionEvent for TypeScript
+                const { reason } = event as PromiseRejectionEvent;
 
-                const error = promiseRejectionEvent.reason;
-
-                if (error && !error.reported) {
-                    raven.captureException(error);
-                }
+                raven.captureException(reason);
             });
 
             raven.context(
@@ -88,10 +83,17 @@ const go = () => {
                 },
                 hydrate,
             );
+        })
+        .catch(() => {
+            /**
+             * Raven will have reported any unhandled promise
+             * rejections from this chain so return here.
+             */
+            return;
         });
 };
 
-// make sure we've patched the env before running the app
+// Make sure we've patched the env before running the app
 if (window.guardian.polyfilled) {
     go();
 } else {
