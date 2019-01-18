@@ -51,6 +51,8 @@ interface ReaderRevenueLinks {
     header: ReaderRevenueLink;
     footer: ReaderRevenueLink;
     sideMenu: ReaderRevenueLink;
+    ampHeader: string;
+    ampFooter: string;
 }
 
 interface NavType {
