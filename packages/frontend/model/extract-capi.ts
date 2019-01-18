@@ -85,85 +85,29 @@ const getAgeWarning = (
     }
 };
 
-// TODO this is a simple implementation of section data
-// and should be updated to matcch full implementation available at
-// https://github.com/guardian/frontend/blob/master/common/app/model/content.scala#L202
-const getSectionData: (
-    tags: TagType[],
-) => {
-    sectionLabel?: string;
-    sectionUrl?: string;
-} = tags => {
-    const keyWordTag = tags.find(tag => tag.type === 'Keyword');
+const getSubMetaSectionLinks: (data: {}) => SimpleLinkType[] = data => {
+    const subMetaSectionLinks = getArray<any>(
+        data,
+        'config.page.subMetaLinks.sectionLabels',
+        [],
+    );
 
-    if (keyWordTag) {
-        return {
-            sectionLabel: keyWordTag.title,
-            sectionUrl: keyWordTag.id,
-        };
-    }
-
-    return {};
+    return subMetaSectionLinks.map(({ link, text }) => ({
+        url: link,
+        title: text,
+    }));
 };
 
-const getSubMetaSectionLinks: (
-    data: {
-        tags: TagType[];
-        isImmersive: boolean;
-        isArticle: boolean;
-        sectionLabel?: string;
-        sectionUrl?: string;
-    },
-) => SimpleLinkType[] = data => {
-    const links: SimpleLinkType[] = [];
-    const { tags, isImmersive, isArticle, sectionLabel, sectionUrl } = data;
+const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
+    const subMetaKeywordLinks = getArray<any>(
+        data,
+        'config.page.subMetaLinks.keywords',
+        [],
+    );
 
-    if (!(isImmersive && isArticle)) {
-        if (sectionLabel && sectionUrl) {
-            links.push({
-                url: `/${sectionUrl}`,
-                title: sectionLabel,
-            });
-        }
-
-        const blogOrSeriesTags = tags.filter(
-            tag => tag.type === 'Blog' || tag.type === 'Series',
-        );
-
-        blogOrSeriesTags.forEach(tag => {
-            links.push({
-                url: `/${tag.id}`,
-                title: tag.title,
-            });
-        });
-    }
-
-    return links;
-};
-
-const getSubMetaKeywordLinks: (
-    data: {
-        tags: TagType[];
-        sectionName: string;
-        sectionLabel?: string;
-        sectionUrl?: string;
-    },
-) => SimpleLinkType[] = data => {
-    const { tags, sectionName, sectionLabel } = data;
-
-    const keywordTags = tags
-        .filter(
-            tag =>
-                tag.type === 'Keyword' &&
-                tag.id !== sectionLabel &&
-                tag.title.toLowerCase() !== sectionName.toLowerCase(),
-        )
-        .slice(1, 6);
-    const toneTags = tags.filter(tag => tag.type === 'Tone');
-
-    return [...keywordTags, ...toneTags].map(tag => ({
-        url: `/${tag.id}`,
-        title: tag.title,
+    return subMetaKeywordLinks.map(({ link, text }) => ({
+        url: link,
+        title: text,
     }));
 };
 
@@ -176,10 +120,6 @@ export const extract = (data: {}): CAPIType => {
     );
     const tags = getTags(data);
     const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
-    const isArticle =
-        tags &&
-        tags.some(tag => tag.id === 'type/article' && tag.type === 'Type');
-    const sectionData = getSectionData(tags);
     const sectionName = getNonEmptyString(data, 'config.page.section');
 
     const leadContributor: TagType = tags.filter(
@@ -244,18 +184,8 @@ export const extract = (data: {}): CAPIType => {
         sharingUrls: getSharingUrls(data),
         pillar: findPillar(getString(data, 'config.page.pillar', '')) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
-        subMetaSectionLinks: getSubMetaSectionLinks({
-            tags,
-            isImmersive,
-            isArticle,
-            ...sectionData,
-        }),
-        subMetaKeywordLinks: getSubMetaKeywordLinks({
-            tags,
-            sectionName,
-            ...sectionData,
-        }),
-        ...sectionData,
+        subMetaSectionLinks: getSubMetaSectionLinks(data),
+        subMetaKeywordLinks: getSubMetaKeywordLinks(data),
         shouldHideAds: getBoolean(data, 'config.page.shouldHideAds', false),
         webURL: getNonEmptyString(data, 'config.page.webURL'),
         guardianBaseURL: getNonEmptyString(data, 'config.page.guardianBaseURL'),
