@@ -102,6 +102,40 @@ export const extract = (data: {}): NavType => {
                     '',
                 ),
             },
+            ampHeader: {
+                contribute: getString(
+                    data,
+                    'config.readerRevenueLinks.ampHeader.contribute',
+                    '',
+                ),
+                subscribe: getString(
+                    data,
+                    'config.readerRevenueLinks.ampHeader.subscribe',
+                    '',
+                ),
+                support: getString(
+                    data,
+                    'config.readerRevenueLinks.ampHeader.support',
+                    '',
+                ),
+            },
+            ampFooter: {
+                contribute: getString(
+                    data,
+                    'config.readerRevenueLinks.ampFooter.contribute',
+                    '',
+                ),
+                subscribe: getString(
+                    data,
+                    'config.readerRevenueLinks.ampFooter.subscribe',
+                    '',
+                ),
+                support: getString(
+                    data,
+                    'config.readerRevenueLinks.ampFooter.support',
+                    '',
+                ),
+            },
         },
     };
 };
