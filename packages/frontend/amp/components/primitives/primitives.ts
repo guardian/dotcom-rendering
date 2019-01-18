@@ -26,7 +26,8 @@ interface Sized {
 interface FixedHeight {
     layout: 'fixed-height';
     height: string;
-    width: undefined;
+    width?: undefined;
 }
-export type AMPCommon = (AMPCommonBase | Sized | FixedHeight) &
+export type AMPCommon = AMPCommonBase &
+    (Sized | FixedHeight) &
     HTMLAttributes<HTMLElement>;

@@ -6,8 +6,6 @@ export const Img: React.SFC<ImgProps> = props => <amp-img {...props} />;
 interface Props {
     alt: string;
     attribution: string;
-    height: string;
-    width: string;
 }
 
 interface Responsive {
