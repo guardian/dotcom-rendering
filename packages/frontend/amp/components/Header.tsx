@@ -4,7 +4,6 @@ import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
-import Sidebar from './Sidebar';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 
@@ -203,12 +202,12 @@ const Header: React.SFC<{
         <div className={cx(row, navRow)}>
             {pillarLinks(nav.pillars, activePillar)}
 
+            {/* Note, the actual sidebar lives directly in the body as AMP requires this :( */}
             <button className={veggieStyles} on="tap:sidebar1.toggle">
                 <span className={pattyStyles} />
             </button>
         </div>
 
-        <Sidebar nav={nav} />
     </header>
 );
 
