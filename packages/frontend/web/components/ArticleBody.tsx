@@ -492,8 +492,8 @@ const ArticleBody: React.SFC<{
     return (
         <div className={wrapper}>
             <header className={header}>
-                {CAPI.sectionLabel && CAPI.sectionUrl && (
-                    <div className={section}>
+                <div className={section}>
+                    {CAPI.sectionLabel && CAPI.sectionUrl && (
                         <a
                             className={cx(
                                 sectionLabelLink,
@@ -506,8 +506,8 @@ const ArticleBody: React.SFC<{
                         >
                             {CAPI.sectionLabel}
                         </a>
-                    </div>
-                )}
+                    )}
+                </div>
                 <div className={headlineCSS}>
                     <h1 className={headerStyle}>{CAPI.headline}</h1>
                     <div
