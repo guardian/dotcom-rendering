@@ -1,4 +1,4 @@
-import { bestFitImage, heightEstimate } from './GetImage';
+import { bestFitImage, heightEstimate } from './image-fit';
 
 test('chooses smallest image that is still greater than column width', async () => {
     const images = [
