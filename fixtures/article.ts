@@ -1956,6 +1956,144 @@ export const data = {
                                 credit: 'Photograph: Kirsty Wigglesworth/AP',
                             },
                             displayCredit: true,
+                            role: 'inline',
+                            imageSources: [
+                                {
+                                    weighting: 'inline',
+                                    srcSet: [
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=620&quality=85&auto=format&fit=max&s=1bcb12104405d365e4176d25f9bff704',
+                                            width: 620,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=605&quality=85&auto=format&fit=max&s=2c0e6978b4b165ca97f03f8a816529a8',
+                                            width: 605,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=445&quality=85&auto=format&fit=max&s=516527f4ac7bdcab733dbcb0f13c25bd',
+                                            width: 445,
+                                        },
+                                    ],
+                                },
+                                {
+                                    weighting: 'thumbnail',
+                                    srcSet: [
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=140&quality=85&auto=format&fit=max&s=47fa9641d01f7b562c1407c999bd9da0',
+                                            width: 140,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=120&quality=85&auto=format&fit=max&s=0aec1c40ad08585352196ba9cbbe712e',
+                                            width: 120,
+                                        },
+                                    ],
+                                },
+                                {
+                                    weighting: 'supporting',
+                                    srcSet: [
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=380&quality=85&auto=format&fit=max&s=6bf99684d34d7e640b42e77de94d2369',
+                                            width: 380,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=300&quality=85&auto=format&fit=max&s=4e8c8811000fc54bea72dedd69ab13d6',
+                                            width: 300,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=620&quality=85&auto=format&fit=max&s=1bcb12104405d365e4176d25f9bff704',
+                                            width: 620,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=605&quality=85&auto=format&fit=max&s=2c0e6978b4b165ca97f03f8a816529a8',
+                                            width: 605,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=445&quality=85&auto=format&fit=max&s=516527f4ac7bdcab733dbcb0f13c25bd',
+                                            width: 445,
+                                        },
+                                    ],
+                                },
+                                {
+                                    weighting: 'showcase',
+                                    srcSet: [
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=860&quality=85&auto=format&fit=max&s=16f69557a812fa0f97f386567be954d6',
+                                            width: 860,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=780&quality=85&auto=format&fit=max&s=ce247f6cf701cb7c91cc6243a0b52bbe',
+                                            width: 780,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=620&quality=85&auto=format&fit=max&s=1bcb12104405d365e4176d25f9bff704',
+                                            width: 620,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=605&quality=85&auto=format&fit=max&s=2c0e6978b4b165ca97f03f8a816529a8',
+                                            width: 605,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=445&quality=85&auto=format&fit=max&s=516527f4ac7bdcab733dbcb0f13c25bd',
+                                            width: 445,
+                                        },
+                                    ],
+                                },
+                                {
+                                    weighting: 'halfwidth',
+                                    srcSet: [
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=620&quality=85&auto=format&fit=max&s=1bcb12104405d365e4176d25f9bff704',
+                                            width: 620,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=605&quality=85&auto=format&fit=max&s=2c0e6978b4b165ca97f03f8a816529a8',
+                                            width: 605,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=445&quality=85&auto=format&fit=max&s=516527f4ac7bdcab733dbcb0f13c25bd',
+                                            width: 445,
+                                        },
+                                    ],
+                                },
+                                {
+                                    weighting: 'immersive',
+                                    srcSet: [
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=620&quality=85&auto=format&fit=max&s=1bcb12104405d365e4176d25f9bff704',
+                                            width: 620,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=605&quality=85&auto=format&fit=max&s=2c0e6978b4b165ca97f03f8a816529a8',
+                                            width: 605,
+                                        },
+                                        {
+                                            src:
+                                                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=445&quality=85&auto=format&fit=max&s=516527f4ac7bdcab733dbcb0f13c25bd',
+                                            width: 445,
+                                        },
+                                    ],
+                                },
+                            ],
                             _type:
                                 'model.dotcomrendering.pageElements.ImageBlockElement',
                         },

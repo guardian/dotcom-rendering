@@ -6,6 +6,7 @@ import Header from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
 import { Onward } from '@frontend/amp/components/Onward';
 import { css } from 'emotion';
+import Sidebar from '@frontend/amp/components/Sidebar';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -54,25 +55,31 @@ export const Article: React.SFC<{
     articleData: ArticleModel;
     config: ConfigType;
 }> = ({ nav, articleData, config }) => (
-    <div className={backgroundColour}>
-        <Container>
-            <Header nav={nav} activePillar={articleData.pillar} />
-            <Body
-                pillar={articleData.pillar}
-                data={articleData}
-                config={config}
-            />
-            <Onward
-                shouldHideAds={articleData.shouldHideAds}
-                pageID={articleData.pageId}
-                webURL={articleData.webURL}
-                sectionID={articleData.sectionName}
-                hasRelated={articleData.hasRelated}
-                hasStoryPackage={articleData.hasStoryPackage}
-                seriesTags={tagsOfType(articleData.tags, 'Series')}
-                guardianBaseURL={'https://amp.theguardian.com'}
-            />
-            <Footer />
-        </Container>
-    </div>
+    <>
+        <div key="main" className={backgroundColour}>
+            <Container>
+                <Header nav={nav} activePillar={articleData.pillar} />
+                <Body
+                    pillar={articleData.pillar}
+                    data={articleData}
+                    config={config}
+                />
+                <Onward
+                    shouldHideAds={articleData.shouldHideAds}
+                    pageID={articleData.pageId}
+                    webURL={articleData.webURL}
+                    sectionID={articleData.sectionName}
+                    hasRelated={articleData.hasRelated}
+                    hasStoryPackage={articleData.hasStoryPackage}
+                    seriesTags={tagsOfType(articleData.tags, 'Series')}
+                    guardianBaseURL={'https://amp.theguardian.com'}
+                />
+                <Footer />
+            </Container>
+        </div>
+
+        {/* The sidebar has to live here unfortunately to be valid AMP
+            but note the click handler lives in the Header. */}
+        <Sidebar key="sidebar" nav={nav} />
+    </>
 );
