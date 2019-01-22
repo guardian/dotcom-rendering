@@ -7,7 +7,7 @@ import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBloc
 import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
-import { findAdSlots } from '../elements/find-adslots';
+import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
