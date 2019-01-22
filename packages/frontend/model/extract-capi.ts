@@ -184,6 +184,8 @@ export const extract = (data: {}): CAPIType => {
         sharingUrls: getSharingUrls(data),
         pillar: findPillar(getString(data, 'config.page.pillar', '')) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
+        sectionLabel: getString(data, 'config.page.sectionLabel'),
+        sectionUrl: getString(data, 'config.page.sectionUrl'),
         subMetaSectionLinks: getSubMetaSectionLinks(data),
         subMetaKeywordLinks: getSubMetaKeywordLinks(data),
         shouldHideAds: getBoolean(data, 'config.page.shouldHideAds', false),
