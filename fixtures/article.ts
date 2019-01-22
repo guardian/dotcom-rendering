@@ -10,6 +10,8 @@ export const data = {
             webPublicationDate: 1489173305000,
             webPublicationDateDisplay: 'Fri 10 Mar 2017 19.15 GMT',
             section: 'money',
+            sectionLabel: 'Ticket prices',
+            sectionUrl: 'money/ticket-prices',
             headline:
                 "Ticket touts face unlimited fines for using 'bots' to buy in bulk",
             webTitle:
