@@ -94,8 +94,8 @@ interface CAPIType {
     tags: TagType[];
     pillar: Pillar;
     isImmersive: boolean;
-    sectionLabel?: string;
-    sectionUrl?: string;
+    sectionLabel: string;
+    sectionUrl: string;
     sectionName: string;
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];
