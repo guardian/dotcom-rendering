@@ -207,7 +207,6 @@ const Header: React.SFC<{
                 <span className={pattyStyles} />
             </button>
         </div>
-
     </header>
 );
 
