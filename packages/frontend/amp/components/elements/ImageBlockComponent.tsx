@@ -4,7 +4,7 @@ import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { bestFitImage, heightEstimate } from '@frontend/amp/lib/GetImage';
+import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
 
 const figureStyle = css`

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Img } from '@frontend/amp/components/primitives/Img';
-import { bestFitImage, heightEstimate } from '@frontend/amp/lib/GetImage';
+import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import { css } from 'emotion';
 import { textSans } from '@guardian/pasteup/typography';
 import InfoIcon from '@guardian/pasteup/icons/info.svg';
