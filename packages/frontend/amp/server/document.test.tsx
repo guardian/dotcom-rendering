@@ -6,6 +6,7 @@ import { Article } from '@frontend/amp/pages/Article';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractModel } from '@frontend/model/extract-capi';
+import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
@@ -28,7 +29,27 @@ test('produces valid AMP doc', async () => {
     const model = extractModel(data);
     const linkedData = {};
 
-    const body = <Article nav={nav} articleData={model} config={config} />;
+    const analytics: AnalyticsModel = {
+        gaTracker: 'UA-XXXXXXX-X',
+        title: 'Foo',
+        fbPixelaccount: 'XXXXXXXXXX',
+        comscoreID: 'XXXXXXX',
+        section: model.sectionName,
+        contentType: model.contentType,
+        id: model.pageId,
+        beacon: `${model.beaconURL}/count/pv.gif`,
+        neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
+        domain: 'amp.theguardian.com',
+    };
+
+    const body = (
+        <Article
+            nav={nav}
+            articleData={model}
+            config={config}
+            analytics={analytics}
+        />
+    );
     const result = v.validateString(
         document({
             body,

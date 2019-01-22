@@ -7,29 +7,27 @@ import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
-import { analytics } from '../lib/analytics';
+import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
         const CAPI = extractCAPI(body);
-
         const linkedData = extractLinkedData(body);
+        const scripts = [...extractScripts(CAPI.elements)];
 
-        const scripts = [
-            ...extractScripts(CAPI.elements),
-            ...analytics({
-                gaTracker: 'UA-78705427-1',
-                title: CAPI.headline,
-                fbPixelaccount: '279880532344561',
-                comscoreID: '6035250',
-                section: CAPI.sectionName,
-                contentType: CAPI.contentType,
-                id: CAPI.pageId,
-                beacon: `${CAPI.beaconURL}/count/pv.gif`,
-                neilsenAPIID: '66BEC53C-9890-477C-B639-60879EC4F762',
-                domain: 'amp.theguardian.com',
-            }),
-        ];
+        const analytics: AnalyticsModel = {
+            gaTracker: 'UA-78705427-1',
+            title: CAPI.headline,
+            fbPixelaccount: '279880532344561',
+            comscoreID: '6035250',
+            section: CAPI.sectionName,
+            contentType: CAPI.contentType,
+            id: CAPI.pageId,
+            beacon: `${CAPI.beaconURL}/count/pv.gif`,
+            neilsenAPIID: '66BEC53C-9890-477C-B639-60879EC4F762',
+            domain: 'amp.theguardian.com',
+        };
+
         const resp = document({
             linkedData,
             scripts,
@@ -39,6 +37,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     articleData={CAPI}
                     nav={extractNAV(body)}
                     config={extractConfig(body)}
+                    analytics={analytics}
                 />
             ),
         });

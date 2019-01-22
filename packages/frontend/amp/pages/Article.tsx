@@ -7,6 +7,7 @@ import { palette } from '@guardian/pasteup/palette';
 import { Onward } from '@frontend/amp/components/Onward';
 import { css } from 'emotion';
 import Sidebar from '@frontend/amp/components/Sidebar';
+import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -54,8 +55,11 @@ export const Article: React.SFC<{
     nav: NavType;
     articleData: ArticleModel;
     config: ConfigType;
-}> = ({ nav, articleData, config }) => (
+    analytics: AnalyticsModel;
+}> = ({ nav, articleData, config, analytics }) => (
     <>
+        <Analytics key="analytics" analytics={analytics} />
+
         <div key="main" className={backgroundColour}>
             <Container>
                 <Header nav={nav} activePillar={articleData.pillar} />

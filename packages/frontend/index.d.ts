@@ -161,6 +161,8 @@ declare namespace JSX {
         'amp-instagram': any;
         'amp-soundcloud': any;
         'amp-iframe': any;
+        'amp-analytics': any;
+        'amp-pixel': any;
         template: any;
     }
 }
