@@ -8,6 +8,7 @@ import { CommentBlockComponent } from '@frontend/amp/components/elements/Comment
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
+import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
 
 export const Elements: React.SFC<{
     elements: CAPIElement[];
@@ -43,9 +44,16 @@ export const Elements: React.SFC<{
                 return <CommentBlockComponent element={element} />;
             case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                 return <SoundcloudBlockComponent element={element} />;
+            case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+                return <EmbedBlockComponent element={element} />;
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
+                if ((element as { isMandatory?: boolean }).isMandatory) {
+                    throw new Error(
+                        'This page cannot be rendered due to incompatible content that is marked as mandatory.',
+                    );
+                }
                 return null;
         }
     });

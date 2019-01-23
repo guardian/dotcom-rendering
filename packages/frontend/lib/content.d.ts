@@ -82,6 +82,14 @@ interface SoundcloudBlockElement {
     isMandatory: boolean;
 }
 
+interface EmbedBlockElement {
+    _type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
+    safe?: boolean;
+    alt?: string;
+    html: string;
+    isMandatory: boolean;
+}
+
 type CAPIElement =
     | TextBlockElement
     | ImageBlockElement
@@ -89,4 +97,5 @@ type CAPIElement =
     | TweetBlockElement
     | RichLinkBlockElement
     | CommentBlockElement
-    | SoundcloudBlockElement;
+    | SoundcloudBlockElement
+    | EmbedBlockElement;
