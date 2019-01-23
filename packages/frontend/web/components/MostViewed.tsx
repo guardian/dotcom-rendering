@@ -12,6 +12,7 @@ import {
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
+import { reportError } from '@frontend/web/browser/reportError';
 
 const container = css`
     border-top: 1px solid ${palette.neutral[86]};
@@ -368,7 +369,13 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                     }
                     resolve([]);
                 })
-                .catch(_ => resolve([]));
+                .catch(err => {
+                    reportError(err, {
+                        feature: 'most-viewed',
+                    });
+
+                    return resolve([]);
+                });
         });
     };
 }

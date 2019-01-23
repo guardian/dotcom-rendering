@@ -4,7 +4,7 @@ import { palette } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { Container } from '@guardian/guui';
 import TickIcon from '@guardian/pasteup/icons/tick.svg';
-import { getCookie, addCookie } from '@frontend/web/lib/cookie';
+import { getCookie, addCookie } from '@frontend/web/browser/cookie';
 
 const banner = css`
     position: fixed;
