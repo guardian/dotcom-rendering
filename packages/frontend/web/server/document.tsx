@@ -8,6 +8,7 @@ import htmlTemplate from './htmlTemplate';
 import Article from '../pages/Article';
 import assets from '@frontend/lib/assets';
 import { GADataType } from '@frontend/model/extract-ga';
+import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 
 interface Props {
     data: {
@@ -37,6 +38,8 @@ export default ({ data }: Props) => {
             </CacheProvider>,
         ),
     );
+
+    const linkedData = extractLinkedData(data);
 
     /**
      * Preload the following woff2 font files
@@ -79,6 +82,7 @@ export default ({ data }: Props) => {
     ];
 
     return htmlTemplate({
+        linkedData,
         priorityScripts,
         lowPriorityScripts,
         css,
