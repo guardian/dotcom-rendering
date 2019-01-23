@@ -62,7 +62,11 @@ export const Article: React.SFC<{
 
         <div key="main" className={backgroundColour}>
             <Container>
-                <Header nav={nav} activePillar={articleData.pillar} config={config} />
+                <Header
+                    nav={nav}
+                    activePillar={articleData.pillar}
+                    config={config}
+                />
                 <Body
                     pillar={articleData.pillar}
                     data={articleData}
