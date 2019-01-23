@@ -6,6 +6,7 @@ import { headline, textSans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
+import { AmpSubscriptionGoogle } from '@frontend/amp/components/elements/AmpSubscriptionGoogle';
 
 const headerStyles = css`
     background-color: ${palette.brand.main};
@@ -174,10 +175,11 @@ const pillarLinks = (pillars: PillarType[], activePillar: Pillar) => (
 const supportLink =
     'https://support.theguardian.com/?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D';
 
-const Header: React.SFC<{
+const Header: React.FunctionComponent<{
     nav: NavType;
     activePillar: Pillar;
-}> = ({ nav, activePillar }) => (
+    config: ConfigType;
+}> = ({ nav, activePillar, config }) => (
     <header className={headerStyles}>
         <div className={row}>
             <div className={supportStyles}>
@@ -186,6 +188,8 @@ const Header: React.SFC<{
                     <ArrowRight />
                 </a>
             </div>
+
+            {config.switches.subscribeWithGoogle && <AmpSubscriptionGoogle />}
 
             <a className={logoStyles} href="/">
                 <span

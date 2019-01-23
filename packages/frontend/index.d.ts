@@ -128,6 +128,7 @@ interface ConfigType {
     ajaxUrl: string;
     sentryPublicApiKey: string;
     sentryHost: string;
+    subscribeWithGoogleApiUrl: string;
     isDev: boolean;
     switches: { [key: string]: boolean };
 }
