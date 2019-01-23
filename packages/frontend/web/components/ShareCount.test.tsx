@@ -23,6 +23,7 @@ describe('ShareCount', () => {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         sentryHost: '',
         sentryPublicApiKey: '',
+        subscribeWithGoogleApiUrl: '',
         isDev: false,
         switches: {},
     };

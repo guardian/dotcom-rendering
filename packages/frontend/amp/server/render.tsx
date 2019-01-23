@@ -8,12 +8,23 @@ import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
+import { getSubscribeWithGoogleExtensionScripts } from '@frontend/amp/lib/subscribe-with-google';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
         const CAPI = extractCAPI(body);
         const linkedData = extractLinkedData(body);
-        const scripts = [...extractScripts(CAPI.elements)];
+
+        const config = extractConfig(body);
+
+        const scripts = [
+            ...extractScripts(CAPI.elements),
+            ...(config.switches.subscribeWithGoogle
+                ? getSubscribeWithGoogleExtensionScripts(
+                      config.subscribeWithGoogleApiUrl,
+                  )
+                : []),
+        ];
 
         const analytics: AnalyticsModel = {
             gaTracker: 'UA-78705427-1',
@@ -36,8 +47,8 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                 <Article
                     articleData={CAPI}
                     nav={extractNAV(body)}
-                    config={extractConfig(body)}
                     analytics={analytics}
+                    config={config}
                 />
             ),
         });
