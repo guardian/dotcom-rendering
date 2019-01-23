@@ -4,6 +4,7 @@ import assets from '@frontend/lib/assets';
 
 export default ({
     title = 'The Guardian',
+    linkedData,
     priorityScripts,
     lowPriorityScripts,
     css,
@@ -14,6 +15,7 @@ export default ({
     fontFiles = [],
 }: {
     title?: string;
+    linkedData: object;
     priorityScripts: string[];
     lowPriorityScripts: string[];
     css: string;
@@ -30,6 +32,10 @@ export default ({
             <head>
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                <script type="application/ld+json">
+                    ${JSON.stringify(linkedData)}
+                </script>
+                
                 ${priorityScripts
                     .map(
                         url => `<link rel="preload" href="${url}" as="script">`,

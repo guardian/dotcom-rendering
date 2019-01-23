@@ -9,8 +9,14 @@ import { extract as extractModel } from '@frontend/model/extract-capi';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
+    const linkedData = {};
     const result = v.validateString(
-        document({ title: 'foo', scripts: [''], body: <img alt="foo" /> }),
+        document({
+            linkedData,
+            title: 'foo',
+            scripts: [''],
+            body: <img alt="foo" />,
+        }),
     );
     expect(result.errors.length > 0).toBe(true);
 });
@@ -20,10 +26,16 @@ test('produces valid AMP doc', async () => {
     const config = extractConfig(data);
     const nav = extractNAV(data);
     const model = extractModel(data);
+    const linkedData = {};
 
     const body = <Article nav={nav} articleData={model} config={config} />;
     const result = v.validateString(
-        document({ body, title: 'foo', scripts: [] }),
+        document({
+            body,
+            linkedData,
+            title: 'foo',
+            scripts: [],
+        }),
     );
 
     if (result.errors.length > 0) {

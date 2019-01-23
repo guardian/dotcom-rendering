@@ -6,11 +6,15 @@ import { extractScripts } from '@root/packages/frontend/amp/lib/scripts';
 import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
+import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { analytics } from '../lib/analytics';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
         const CAPI = extractCAPI(body);
+
+        const linkedData = extractLinkedData(body);
+
         const scripts = [
             ...extractScripts(CAPI.elements),
             ...analytics({
@@ -27,6 +31,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             }),
         ];
         const resp = document({
+            linkedData,
             scripts,
             title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
             body: (
