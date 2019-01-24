@@ -8,7 +8,6 @@ import htmlTemplate from './htmlTemplate';
 import Article from '../pages/Article';
 import assets from '@frontend/lib/assets';
 import { GADataType } from '@frontend/model/extract-ga';
-import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 
 interface Props {
     data: {
@@ -18,6 +17,7 @@ interface Props {
         NAV: NavType;
         config: ConfigType;
         GA: GADataType;
+        linkedData: object;
     };
 }
 
@@ -28,7 +28,7 @@ interface RenderToStringResult {
 }
 
 export default ({ data }: Props) => {
-    const { page, site, CAPI, NAV, config } = data;
+    const { page, site, CAPI, NAV, config, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
@@ -38,8 +38,6 @@ export default ({ data }: Props) => {
             </CacheProvider>,
         ),
     );
-
-    const linkedData = extractLinkedData(data);
 
     /**
      * Preload the following woff2 font files
