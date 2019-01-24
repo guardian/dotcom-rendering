@@ -18,13 +18,11 @@ describe('linked data', () => {
         });
     });
 
-    it('throws if it cannot find data from config.page.linkedData', () => {
-        const invaldInput = {
+    it('returns empty object if it cannot find data from config.page.linkedData', () => {
+        const invalidInput = {
             config: {},
         };
 
-        expect(() => {
-            extractLinkedData(invaldInput);
-        }).toThrow();
+        expect(extractLinkedData(invaldInput)).toEqual({});
     });
 });
