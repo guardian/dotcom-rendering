@@ -23,6 +23,6 @@ describe('linked data', () => {
             config: {},
         };
 
-        expect(extractLinkedData(invaldInput)).toEqual({});
+        expect(extractLinkedData(invalidInput)).toEqual({});
     });
 });
