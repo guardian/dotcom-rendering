@@ -11,6 +11,7 @@ import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { BackToTop } from '@frontend/web/components/BackToTop';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
+import { Freeze } from '@frontend/web/components/lib/Freeze';
 
 // TODO: find a better of setting opacity
 const articleWrapper = css`
@@ -53,10 +54,13 @@ export const Article: React.SFC<{
             pillar={data.CAPI.pillar}
             edition={data.CAPI.editionId}
         />
+
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <article>
-                    <ArticleBody CAPI={data.CAPI} config={data.config} />
+                    <Freeze>
+                        <ArticleBody CAPI={data.CAPI} config={data.config} />
+                    </Freeze>
                     <div className={secondaryColumn} />
                 </article>
                 <MostViewed sectionName={data.CAPI.sectionName} />
@@ -68,10 +72,11 @@ export const Article: React.SFC<{
             pillar={data.CAPI.pillar}
             currentNavLink={data.NAV.currentNavLink}
         />
-        <BackToTop />
 
-        <Footer />
-
-        <CookieBanner />
+        <Freeze>
+            <BackToTop />
+            <Footer />
+            <CookieBanner />
+        </Freeze>
     </div>
 );

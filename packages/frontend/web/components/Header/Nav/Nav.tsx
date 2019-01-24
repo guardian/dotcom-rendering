@@ -12,6 +12,7 @@ import { MainMenu } from './MainMenu/MainMenu';
 import { SubNav } from './SubNav/SubNav';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { getCookie } from '@frontend/web/browser/cookie';
+import { Freeze } from '@frontend/web/components/lib/Freeze';
 
 const centered = css`
     ${tablet} {
@@ -80,13 +81,14 @@ export class Nav extends Component<
                     aria-label="Guardian sections"
                 >
                     <EditionDropdown edition={edition} />
-                    <Logo />
+                    <Freeze>
+                        <Logo />
+                    </Freeze>
                     {/*
                         TODO: The properties of the Links component
                         have been hardcoded to false. At some point
                         these need to be dynamic.
                     */}
-
                     <ReaderRevenueLinks
                         urls={nav.readerRevenueLinks.header}
                         edition={edition}
@@ -108,11 +110,13 @@ export class Nav extends Component<
                         nav={nav}
                     />
                 </nav>
-                <SubNav
-                    subnav={nav.subNavSections}
-                    currentNavLink={nav.currentNavLink}
-                    pillar={pillar}
-                />
+                <Freeze>
+                    <SubNav
+                        subnav={nav.subNavSections}
+                        currentNavLink={nav.currentNavLink}
+                        pillar={pillar}
+                    />
+                </Freeze>
             </div>
         );
     }
