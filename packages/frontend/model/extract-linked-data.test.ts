@@ -17,12 +17,4 @@ describe('linked data', () => {
             '@type': 'NewsArticle',
         });
     });
-
-    it('returns empty object if it cannot find data from config.page.linkedData', () => {
-        const invalidInput = {
-            config: {},
-        };
-
-        expect(extractLinkedData(invalidInput)).toEqual({});
-    });
 });
