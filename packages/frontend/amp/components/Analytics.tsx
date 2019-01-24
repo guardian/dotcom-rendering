@@ -79,5 +79,5 @@ export const Analytics: React.SFC<{
     ];
 
     // tslint:disable-next-line:react-no-dangerous-html
-    return <div dangerouslySetInnerHTML={{ __html: scripts.join() }} />;
+    return <div dangerouslySetInnerHTML={{ __html: scripts.join('') }} />;
 };
