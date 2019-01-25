@@ -23,8 +23,8 @@ const CDN = stage
     ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/guui/`
     : '/';
 
-export default {
-    dist: (path: string): string => `${CDN}assets/${assetHash[path] || path}`,
-    static: (path: string): string =>
-        `${CDN}static/frontend/${assetHash[path] || path}`,
-};
+export const getDist = (path: string): string =>
+    `${CDN}assets/${assetHash[path] || path}`;
+
+export const getStatic = (path: string): string =>
+    `${CDN}static/frontend/${assetHash[path] || path}`;

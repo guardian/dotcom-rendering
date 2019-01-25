@@ -138,7 +138,7 @@ const buttonExpanded = css`
     }
 `;
 
-export default class Dropdown extends React.Component<
+export class Dropdown extends React.Component<
     Props,
     { isExpanded: boolean; noJS: boolean }
 > {

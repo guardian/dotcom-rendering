@@ -19,7 +19,7 @@ import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';
-import Dateline from './Dateline';
+import { Dateline } from './Dateline';
 
 import { MainMedia } from './MainMedia';
 
@@ -482,7 +482,7 @@ const BylineContributor: React.SFC<{
     </a>
 );
 
-const ArticleBody: React.SFC<{
+export const ArticleBody: React.SFC<{
     CAPI: CAPIType;
     config: ConfigType;
 }> = ({ CAPI, config }) => {
@@ -614,5 +614,3 @@ const ArticleBody: React.SFC<{
         </div>
     );
 };
-
-export default ArticleBody;

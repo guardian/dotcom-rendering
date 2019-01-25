@@ -6,7 +6,7 @@ const container = css`
     max-width: 600px;
 `;
 
-const Container: React.SFC<{
+export const Container: React.SFC<{
     className?: string;
     children: React.ReactNode;
 }> = ({ className, children, ...props }) => (
@@ -14,5 +14,3 @@ const Container: React.SFC<{
         {children}
     </div>
 );
-
-export default Container;

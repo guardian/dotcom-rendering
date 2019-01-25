@@ -93,7 +93,7 @@ const siteLinkStyle = css`
     line-height: 36px;
 `;
 
-const Submeta: React.SFC<{
+export const Submeta: React.SFC<{
     pillar: Pillar;
     sections: SimpleLinkType[];
     keywords: SimpleLinkType[];
@@ -157,5 +157,3 @@ const Submeta: React.SFC<{
         </>
     );
 };
-
-export default Submeta;

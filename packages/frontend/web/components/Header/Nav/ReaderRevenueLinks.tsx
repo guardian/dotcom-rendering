@@ -108,7 +108,7 @@ const readerRevenueLinks = css`
     }
 `;
 
-const ReaderRevenueLinks: React.SFC<{
+export const ReaderRevenueLinks: React.SFC<{
     edition: Edition;
     urls: {
         subscribe: string;
@@ -183,5 +183,3 @@ const isRecentContributor: () => boolean = () => {
 const isPayingMember: () => boolean = () => {
     return getCookie('gu_paying_member') === 'true';
 };
-
-export default ReaderRevenueLinks;

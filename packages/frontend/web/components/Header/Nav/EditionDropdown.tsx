@@ -63,7 +63,7 @@ const lookUpEditionLink = (edition: Edition): Link => {
     return mapping[edition];
 };
 
-const EditionDropdown: React.SFC<{
+export const EditionDropdown: React.SFC<{
     edition: Edition;
 }> = ({ edition }) => {
     const activeEditionLink = lookUpEditionLink(edition);
@@ -84,5 +84,3 @@ const EditionDropdown: React.SFC<{
         </div>
     );
 };
-
-export default EditionDropdown;

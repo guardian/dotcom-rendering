@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { tablet } from '@guardian/pasteup/breakpoints';
 
-import Nav from './Nav/Nav';
+import { Nav } from './Nav/Nav';
 import { palette } from '@guardian/pasteup/palette';
 
 const header = css`
@@ -15,7 +15,7 @@ const header = css`
     }
 `;
 
-const Header: React.SFC<{
+export const Header: React.SFC<{
     nav: NavType;
     pillar: Pillar;
     edition: Edition;
@@ -24,5 +24,3 @@ const Header: React.SFC<{
         <Nav nav={nav} pillar={pillar} edition={edition} />
     </header>
 );
-
-export default Header;

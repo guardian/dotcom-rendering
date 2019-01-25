@@ -6,7 +6,7 @@ import { minify } from 'html-minifier';
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
 
-export default compose(
+export const clean = compose(
     (s: string) =>
         minify(s, {
             collapseWhitespace: true,

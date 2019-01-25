@@ -3,7 +3,7 @@ import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import Dateline from '@frontend/web/components/Dateline';
+import { Dateline } from '@frontend/web/components/Dateline';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';

@@ -43,7 +43,7 @@ interface Props {
     currentNavLink: string;
 }
 
-export default class Subnav extends Component<
+export class SubNav extends Component<
     Props,
     {
         showMore: boolean;

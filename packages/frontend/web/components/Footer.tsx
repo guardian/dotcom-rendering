@@ -110,7 +110,7 @@ const FooterLinks: React.SFC<{
     return <div className={footerList}>{linkGroups}</div>;
 };
 
-const Footer: React.SFC = () => (
+export const Footer: React.SFC = () => (
     <footer className={footer}>
         <Container className={footerInner}>
             <iframe
@@ -133,5 +133,3 @@ const Footer: React.SFC = () => (
         </Container>
     </footer>
 );
-
-export default Footer;

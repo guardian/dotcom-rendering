@@ -1,5 +1,5 @@
 import { default as minifyCssString } from 'minify-css-string';
-import assets from './assets';
+import { getStatic } from './assets';
 
 type FontFamily =
     | 'GH Guardian Headline'
@@ -151,9 +151,9 @@ const template: (_: FontDisplay) => string = ({
 }) => `
     @font-face {
         font-family: "${family}";
-        src: url(${assets.static(woff2)}) format("woff2"),
-                url(${assets.static(woff)}) format("woff"),
-                url(${assets.static(ttf)}) format("truetype");
+        src: url(${getStatic(woff2)}) format("woff2"),
+                url(${getStatic(woff)}) format("woff"),
+                url(${getStatic(ttf)}) format("truetype");
         font-weight: ${weight};
         font-style: ${style};
         font-display: swap;
@@ -167,4 +167,4 @@ const getStyleString: () => string = () => {
     );
 };
 
-export default minifyCssString(getStyleString());
+export const getFontsCss = () => minifyCssString(getStyleString());

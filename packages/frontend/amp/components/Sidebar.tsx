@@ -201,7 +201,7 @@ const template = `
 `;
 
 // tslint:disable:react-no-dangerous-html
-const Sidebar: React.SFC<{ nav: NavType }> = ({ nav }) => (
+export const Sidebar: React.SFC<{ nav: NavType }> = ({ nav }) => (
     <amp-sidebar class={sidebarStyles} layout="nodisplay" id="sidebar1">
         <amp-list
             layout="fill"
@@ -213,5 +213,3 @@ const Sidebar: React.SFC<{ nav: NavType }> = ({ nav }) => (
         </amp-list>
     </amp-sidebar>
 );
-
-export default Sidebar;

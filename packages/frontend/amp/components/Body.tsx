@@ -1,16 +1,16 @@
 import React from 'react';
-import InnerContainer from '@frontend/amp/components/InnerContainer';
+import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/lib/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainBlock } from '@frontend/amp/components/MainBlock';
-import Submeta from '@frontend/amp/components/Submeta';
+import { Submeta } from '@frontend/amp/components/Submeta';
 
 const body = css`
     background-color: white;
 `;
 
-const Body: React.SFC<{
+export const Body: React.SFC<{
     pillar: Pillar;
     data: ArticleModel;
     config: ConfigType;
@@ -27,5 +27,3 @@ const Body: React.SFC<{
         />
     </InnerContainer>
 );
-
-export default Body;

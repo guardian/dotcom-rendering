@@ -77,7 +77,10 @@ interface Props {
     ariaControls: string;
 }
 
-class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
+export class MainMenuToggle extends Component<
+    Props,
+    { enhanceCheckbox: boolean }
+> {
     constructor(props: Props) {
         super(props);
 
@@ -158,5 +161,3 @@ class MainMenuToggle extends Component<Props, { enhanceCheckbox: boolean }> {
         ];
     }
 }
-
-export default MainMenuToggle;

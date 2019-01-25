@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { body, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import InnerContainer from './InnerContainer';
+import { InnerContainer } from './InnerContainer';
 import { Link, footerLinksNew } from '@frontend/lib/footer-links';
 
 const footer = css`
@@ -133,7 +133,7 @@ const FooterLinks: React.SFC<{
     return <div className={footerList}>{linkGroups}</div>;
 };
 
-const Footer: React.SFC = () => (
+export const Footer: React.SFC = () => (
     <footer className={footer}>
         <InnerContainer>
             <div className={footerInner}>
@@ -154,5 +154,3 @@ const Footer: React.SFC = () => (
         </InnerContainer>
     </footer>
 );
-
-export default Footer;

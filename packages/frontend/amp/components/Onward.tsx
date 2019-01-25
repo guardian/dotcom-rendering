@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import Plus from '@guardian/pasteup/icons/plus.svg';
-import InnerContainer from '@frontend/amp/components/InnerContainer';
+import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { OnwardContainer } from '@frontend/amp/components/OnwardContainer';
 
 const wrapper = css`
