@@ -57,12 +57,12 @@ export const Article: React.SFC<{
 
         <main className={articleWrapper}>
             <Container className={articleContainer}>
-                <article>
-                    <Freeze>
+                <Freeze>
+                    <article>
                         <ArticleBody CAPI={data.CAPI} config={data.config} />
-                    </Freeze>
-                    <div className={secondaryColumn} />
-                </article>
+                        <div className={secondaryColumn} />
+                    </article>
+                </Freeze>
                 <MostViewed sectionName={data.CAPI.sectionName} />
             </Container>
         </main>
