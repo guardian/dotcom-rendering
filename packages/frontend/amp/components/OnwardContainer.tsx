@@ -77,6 +77,13 @@ const iconCSS = css`
     }
 `;
 
+const quoteIconCSS = css`
+    svg {
+        fill: ${palette.neutral[60]};
+        padding-right: 2px;
+    }
+`;
+
 const onward = css`
     .show-more[overflow] {
         position: absolute;
@@ -164,6 +171,11 @@ export const OnwardContainer: React.SFC<{
                                                 <MoustacheSection name="isAudio">
                                                     <VolumeHigh />
                                                 </MoustacheSection>
+                                                {/* <MoustacheSection name="isComment">
+                                                    <Quote />
+                                                </MoustacheSection> */}
+                                            </span>
+                                            <span className={quoteIconCSS}>
                                                 <MoustacheSection name="isComment">
                                                     <Quote />
                                                 </MoustacheSection>
