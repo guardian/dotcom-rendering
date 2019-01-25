@@ -21,5 +21,3 @@ export class Freeze extends React.Component<Props> {
         );
     }
 }
-
-export default Freeze;
