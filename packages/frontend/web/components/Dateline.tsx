@@ -16,12 +16,10 @@ const dateline = css`
     margin-bottom: 6px;
 `;
 
-const Dateline: React.SFC<{
+export const Dateline: React.SFC<{
     dateDisplay: string;
 }> = ({ dateDisplay }) => (
     <>
         <div className={dateline}>{dateDisplay}</div>
     </>
 );
-
-export default Dateline;

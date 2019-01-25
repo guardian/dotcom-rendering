@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, wait } from 'react-testing-library';
-import ReaderRevenueLinks from './ReaderRevenueLinks';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,

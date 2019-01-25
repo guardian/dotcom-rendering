@@ -5,12 +5,12 @@ import { palette } from '@guardian/pasteup/palette';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
 
 import { MostViewed } from '@frontend/web/components/MostViewed';
-import Header from '@frontend/web/components/Header/Header';
-import Footer from '@frontend/web/components/Footer';
-import ArticleBody from '@frontend/web/components/ArticleBody';
-import BackToTop from '@frontend/web/components/BackToTop';
-import SubNav from '@frontend/web/components/Header/Nav/SubNav/SubNav';
-import CookieBanner from '@frontend/web/components/CookieBanner';
+import { Header } from '@frontend/web/components/Header/Header';
+import { Footer } from '@frontend/web/components/Footer';
+import { ArticleBody } from '@frontend/web/components/ArticleBody';
+import { BackToTop } from '@frontend/web/components/BackToTop';
+import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
+import { CookieBanner } from '@frontend/web/components/CookieBanner';
 
 // TODO: find a better of setting opacity
 const articleWrapper = css`
@@ -44,7 +44,7 @@ const articleContainer = css`
     }
 `;
 
-const Article: React.SFC<{
+export const Article: React.SFC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
@@ -75,5 +75,3 @@ const Article: React.SFC<{
         <CookieBanner />
     </div>
 );
-
-export default Article;

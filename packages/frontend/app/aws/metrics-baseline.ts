@@ -28,7 +28,7 @@ collectAndSendAWSMetrics(
 
 // records system metrics
 
-const recordBaselineCloudWatchMetrics = () => {
+export const recordBaselineCloudWatchMetrics = () => {
     disk.check('/', (err, diskinfo) => {
         if (err) {
             // tslint:disable-next-line:no-console
@@ -42,5 +42,3 @@ const recordBaselineCloudWatchMetrics = () => {
         }
     });
 };
-
-export default recordBaselineCloudWatchMetrics;

@@ -2,7 +2,7 @@ import * as path from 'path';
 import express from 'express';
 import compression from 'compression';
 
-import recordBaselineCloudWatchMetrics from './aws/metrics-baseline';
+import { recordBaselineCloudWatchMetrics } from './aws/metrics-baseline';
 import {
     getGuardianConfiguration,
     GuardianConfiguration,
@@ -13,6 +13,7 @@ import { render as renderAMPArticle } from '@frontend/amp/server/render';
 import { render as renderArticle } from '@frontend/web/server/render';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
+// tslint:disable-next-line:no-default-export
 export default (options: any) => {
     if ('amp' in options) return renderAMPArticle;
     return renderArticle;

@@ -7,7 +7,7 @@ import {
     init as initGa,
     sendPageView as sendGaPageView,
 } from '@frontend/web/browser/ga';
-import Article from './pages/Article';
+import { Article } from './pages/Article';
 import { ReportedError } from '@frontend/web/browser/reportError';
 
 if (module.hot) {

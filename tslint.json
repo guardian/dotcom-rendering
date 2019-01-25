@@ -33,16 +33,12 @@
             "allow-pascal-case",
             "allow-trailing-underscore"
         ],
-        // "no-default-export": {
-        //     "severity": "warning"
-        // },
-        "react-no-dangerous-html":true,
+        "no-default-export": true,
+        "react-no-dangerous-html": true,
         "prettier": true
     },
     "rulesDirectory": [],
     "linterOptions": {
-        "exclude": [
-            "packages/*/dist/**/*.js"
-        ]
+        "exclude": ["packages/*/dist/**/*.js"]
     }
 }

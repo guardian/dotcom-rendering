@@ -1,12 +1,12 @@
 import React from 'react';
-import Footer from '@frontend/amp/components/Footer';
-import Container from '@frontend/amp/components/Container';
-import Body from '@frontend/amp/components/Body';
-import Header from '@frontend/amp/components/Header';
+import { Footer } from '@frontend/amp/components/Footer';
+import { Container } from '@frontend/amp/components/Container';
+import { Body } from '@frontend/amp/components/Body';
+import { Header } from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
 import { Onward } from '@frontend/amp/components/Onward';
 import { css } from 'emotion';
-import Sidebar from '@frontend/amp/components/Sidebar';
+import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
 
 const backgroundColour = css`

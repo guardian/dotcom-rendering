@@ -59,7 +59,7 @@ const style = css`
 
 const SVG = () => <TheGuardianLogoSVG className={style} />;
 
-const Logo: React.SFC = () => (
+export const Logo: React.SFC = () => (
     <a className={link} href="/">
         <span
             className={css`
@@ -71,4 +71,3 @@ const Logo: React.SFC = () => (
         <SVG />
     </a>
 );
-export default Logo;

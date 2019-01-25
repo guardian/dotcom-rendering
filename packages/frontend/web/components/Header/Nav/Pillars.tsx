@@ -186,7 +186,7 @@ const forceUnderline = css`
     }
 `; // A11Y warning: this styling has no focus state for the selected pillar
 
-const Pillars: React.SFC<{
+export const Pillars: React.SFC<{
     showMainMenu: boolean;
     pillars: PillarType[];
     pillar: Pillar;
@@ -212,4 +212,3 @@ const Pillars: React.SFC<{
         ))}
     </ul>
 );
-export default Pillars;

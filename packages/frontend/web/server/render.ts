@@ -1,6 +1,6 @@
 import express from 'express';
 
-import document from '@frontend/web/server/document';
+import { document } from '@frontend/web/server/document';
 import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractGA } from '@frontend/model/extract-ga';

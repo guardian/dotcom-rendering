@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import Dropdown, {
+import {
+    Dropdown,
     Link as DropdownLink,
 } from '@guardian/guui/components/Dropdown/Dropdown';
 import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
@@ -174,7 +175,7 @@ const identityLinks: DropdownLink[] = [
     },
 ];
 
-const Links: React.SFC<{
+export const Links: React.SFC<{
     isSignedIn: boolean;
 }> = ({ isSignedIn }) => (
     <div className={links}>
@@ -216,5 +217,3 @@ const Links: React.SFC<{
         </Search>
     </div>
 );
-
-export default Links;

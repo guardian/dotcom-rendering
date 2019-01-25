@@ -53,7 +53,7 @@ const link = css`
     color: ${palette.neutral[7]};
 `;
 
-const BackToTop: React.SFC = () => (
+export const BackToTop: React.SFC = () => (
     <a className={link} href="#top">
         <div className={outerWrapper}>
             <Container className={innerWrapper}>
@@ -65,5 +65,3 @@ const BackToTop: React.SFC = () => (
         </div>
     </a>
 );
-
-export default BackToTop;

@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { CacheProvider } from '@emotion/core';
 import { cache } from 'emotion';
 import resetCSS from /* preval */ '@frontend/lib/reset-css';
-import fontsCss from '@frontend/lib/fonts-css';
+import { getFontsCss } from '@frontend/lib/fonts-css';
 
 interface RenderToStringResult {
     html: string;
@@ -33,7 +33,7 @@ export const document = ({
     <title>${title}</title>
     <link rel="canonical" href="self.html" />
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    
+
     <script type="application/ld+json">
         ${JSON.stringify(linkedData)}
     </script>
@@ -52,7 +52,7 @@ export const document = ({
     <!-- AMP elements that are optional dependending on content -->
     ${scripts.join(' ')}
 
-    <style amp-custom>${fontsCss}${resetCSS}${css}</style>
+    <style amp-custom>${getFontsCss()}${resetCSS}${css}</style>
     </head>
     <body>
     ${html}

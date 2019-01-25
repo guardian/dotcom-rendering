@@ -6,7 +6,7 @@ import {
     getBoolean,
     getArray,
 } from './validators';
-import clean from './clean';
+import { clean } from './clean';
 import { getSharingUrls } from './sharing-urls';
 import { findPillar } from './find-pillar';
 

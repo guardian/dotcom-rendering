@@ -81,7 +81,7 @@ const actions = css`
 
 const consentCookie = 'GU_TK';
 
-export default class CookieBanner extends Component<{}, { show: boolean }> {
+export class CookieBanner extends Component<{}, { show: boolean }> {
     constructor(props: {}) {
         super(props);
 

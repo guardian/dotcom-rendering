@@ -87,7 +87,7 @@ const mobileSignInIcon = css`
     fill: ${palette.neutral[46]};
 `;
 
-const SupportTheGuardian: React.SFC<{
+export const SupportTheGuardian: React.SFC<{
     url: string;
 }> = ({ url }) => (
     <AsyncClientComponent f={shouldShow}>
@@ -140,5 +140,3 @@ const isRecentContributor: () => boolean = () => {
 const isPayingMember: () => boolean = () => {
     return getCookie('gu_paying_member') === 'true';
 };
-
-export default SupportTheGuardian;

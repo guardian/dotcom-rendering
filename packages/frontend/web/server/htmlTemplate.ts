@@ -1,8 +1,8 @@
 import resetCSS from /* preval */ '@frontend/lib/reset-css';
-import fontsCSS from '@frontend/lib/fonts-css';
-import assets from '@frontend/lib/assets';
+import { getFontsCss } from '@frontend/lib/fonts-css';
+import { getStatic } from '@frontend/lib/assets';
 
-export default ({
+export const htmlTemplate = ({
     title = 'The Guardian',
     linkedData,
     priorityScripts,
@@ -35,7 +35,7 @@ export default ({
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
                 </script>
-                
+
                 ${priorityScripts
                     .map(
                         url => `<link rel="preload" href="${url}" as="script">`,
@@ -44,12 +44,12 @@ export default ({
                 ${fontFiles
                     .map(
                         fontFile =>
-                            `<link rel="preload" href="${assets.static(
+                            `<link rel="preload" href="${getStatic(
                                 fontFile,
                             )}" as="font" crossorigin>`,
                     )
                     .join('\n')}
-                <style>${fontsCSS}${resetCSS}${css}</style>
+                <style>${getFontsCss()}${resetCSS}${css}</style>
                 <script>
                 window.guardian = ${JSON.stringify({
                     app: {

@@ -1,6 +1,6 @@
 // Components
-export { default as CloseButton } from './components/CloseButton/CloseButton';
-export { default as Dropdown } from './components/Dropdown/Dropdown';
-export { default as BigNumber } from './components/BigNumber/BigNumber';
-export { default as Container } from './components/Container/Container';
+export { CloseButton } from './components/CloseButton/CloseButton';
+export { Dropdown } from './components/Dropdown/Dropdown';
+export { BigNumber } from './components/BigNumber/BigNumber';
+export { Container } from './components/Container/Container';
 export { Cols as GridCols, Row as GridRow } from './components/Grid/Grid';

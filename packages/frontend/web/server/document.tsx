@@ -4,9 +4,9 @@ import { renderToString } from 'react-dom/server';
 import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
-import htmlTemplate from './htmlTemplate';
-import Article from '../pages/Article';
-import assets from '@frontend/lib/assets';
+import { htmlTemplate } from './htmlTemplate';
+import { Article } from '../pages/Article';
+import { getDist } from '@frontend/lib/assets';
 import { GADataType } from '@frontend/model/extract-ga';
 
 interface Props {
@@ -27,7 +27,7 @@ interface RenderToStringResult {
     ids: string[];
 }
 
-export default ({ data }: Props) => {
+export const document = ({ data }: Props) => {
     const { page, site, CAPI, NAV, config, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
@@ -64,8 +64,8 @@ export default ({ data }: Props) => {
      * Please talk to the dotcom platform team before adding more.
      * Scripts will be executed in the order they appear in this array
      */
-    const bundleJS = assets.dist(`${site}.${page.toLowerCase()}.js`);
-    const vendorJS = assets.dist('vendor.js');
+    const bundleJS = getDist(`${site}.${page.toLowerCase()}.js`);
+    const vendorJS = getDist('vendor.js');
     const polyfillIO =
         'https://assets.guim.co.uk/polyfill.io/v2/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
     const priorityScripts = [polyfillIO, vendorJS, bundleJS];

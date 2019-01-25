@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash.clonedeep';
 import { string as curly_ } from 'curlyquotes';
-import clean_ from './clean';
+import { clean as clean_ } from './clean';
 import { findPillar as findPillar_ } from './find-pillar';
 import { getSharingUrls as getSharingUrls_ } from './sharing-urls';
 import { extract } from './extract-capi';
@@ -17,7 +17,9 @@ jest.mock('./find-pillar', () => ({
 jest.mock('curlyquotes', () => ({
     string: jest.fn(),
 }));
-jest.mock('./clean', () => jest.fn());
+jest.mock('./clean', () => ({
+    clean: jest.fn(),
+}));
 jest.mock('./sharing-urls', () => ({
     getSharingUrls: jest.fn(),
 }));

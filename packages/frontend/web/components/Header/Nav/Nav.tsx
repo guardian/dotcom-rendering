@@ -3,14 +3,14 @@ import { css } from 'emotion';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
 
-import Logo from './Logo';
-import EditionDropdown from './EditionDropdown';
-import Links from './Links/Links';
-import Pillars from './Pillars';
-import MainMenuToggle from './MainMenuToggle/MainMenuToggle';
+import { Logo } from './Logo';
+import { EditionDropdown } from './EditionDropdown';
+import { Links } from './Links/Links';
+import { Pillars } from './Pillars';
+import { MainMenuToggle } from './MainMenuToggle/MainMenuToggle';
 import { MainMenu } from './MainMenu/MainMenu';
-import SubNav from './SubNav/SubNav';
-import ReaderRevenueLinks from './ReaderRevenueLinks';
+import { SubNav } from './SubNav/SubNav';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { getCookie } from '@frontend/web/browser/cookie';
 
 const centered = css`
@@ -37,7 +37,7 @@ interface Props {
     edition: Edition;
 }
 
-export default class Nav extends Component<
+export class Nav extends Component<
     Props,
     { showMainMenu: boolean; isSignedIn: boolean }
 > {
