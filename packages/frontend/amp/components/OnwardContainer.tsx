@@ -74,6 +74,17 @@ const iconCSS = css`
     svg {
         fill: ${palette.neutral[7]};
         padding-right: 2px;
+        height: 13px;
+        width: 16px;
+    }
+`;
+
+const quoteIconCSS = css`
+    svg {
+        fill: ${palette.neutral[60]};
+        padding-right: 2px;
+        height: 13px;
+        width: 16px;
     }
 `;
 
@@ -164,6 +175,8 @@ export const OnwardContainer: React.SFC<{
                                                 <MoustacheSection name="isAudio">
                                                     <VolumeHigh />
                                                 </MoustacheSection>
+                                            </span>
+                                            <span className={quoteIconCSS}>
                                                 <MoustacheSection name="isComment">
                                                     <Quote />
                                                 </MoustacheSection>
