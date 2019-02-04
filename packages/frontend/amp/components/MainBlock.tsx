@@ -10,10 +10,10 @@ import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 
-const byline = css`
-    font-style: italic;
-    font-weight: bold;
-    ${body(1)};
+const byline = (pillar: Pillar) => css`
+    font-weight: 700;
+    ${headline(2)};
+    color: ${pillarPalette[pillar].main};
 `;
 
 const meta = css`
@@ -30,6 +30,7 @@ const headerStyle = css`
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
+    color: ${palette.neutral[7]};
 `;
 
 const headlineCss = css`
@@ -113,18 +114,6 @@ const standfirstLinks = pillarMap(
         `,
 );
 
-const headlinePillarColours = pillarMap(pillar => {
-    if (pillar === 'news') {
-        return css`
-            color: ${palette.neutral[7]};
-        `;
-    }
-
-    return css`
-        color: ${pillarPalette[pillar].dark};
-    `;
-});
-
 const pillarColours = pillarMap(
     pillar =>
         css`
@@ -158,14 +147,7 @@ export const MainBlock: React.SFC<{
             <MainMedia key={i} element={element} />
         ))}
         <div className={headlineCss}>
-            <h1
-                className={cx(
-                    headerStyle,
-                    headlinePillarColours[articleData.pillar],
-                )}
-            >
-                {articleData.headline}
-            </h1>
+            <h1 className={cx(headerStyle)}>{articleData.headline}</h1>
             <div // tslint:disable-line:react-no-dangerous-html
                 className={cx(
                     standfirstCss[articleData.pillar],
@@ -177,7 +159,9 @@ export const MainBlock: React.SFC<{
             />
         </div>
         <div className={meta}>
-            <div className={byline}>{articleData.author.byline}</div>
+            <div className={byline(articleData.pillar)}>
+                {articleData.author.byline}
+            </div>
             <Dateline dateDisplay={articleData.webPublicationDateDisplay} />
             <div className={metaExtras}>
                 <ShareIcons

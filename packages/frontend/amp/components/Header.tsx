@@ -7,6 +7,7 @@ import { pillarPalette } from '../../lib/pillars';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 import { AmpSubscriptionGoogle } from '@frontend/amp/components/elements/AmpSubscriptionGoogle';
+import { mobileLandscape } from '@guardian/pasteup/breakpoints';
 
 const headerStyles = css`
     background-color: ${palette.brand.main};
@@ -89,6 +90,14 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     color: ${palette.neutral[100]};
     position: relative;
     overflow: hidden;
+
+    font-weight: 900;
+    font-size: 15.4px;
+
+    ${mobileLandscape} {
+        font-size: 18px;
+        padding: 7px 4px 0;
+    }
 
     :before {
         border-left: 1px solid rgba(255, 255, 255, 0.3);
