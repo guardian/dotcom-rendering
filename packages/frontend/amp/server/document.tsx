@@ -33,6 +33,7 @@ export const document = ({
     <title>${title}</title>
     <link rel="canonical" href="self.html" />
     <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <link rel="icon" href="https://static.guim.co.uk/images/amp-favicon-32x32.ico">
 
     <script type="application/ld+json">
         ${JSON.stringify(linkedData)}
