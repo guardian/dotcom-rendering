@@ -55,7 +55,7 @@ const pillarLink = css`
     position: relative;
     text-align: left;
     width: 100%;
-    font-weight: 500;
+    font-weight: 700;
     padding-bottom: 16px;
     padding-top: 6px;
     color: ${palette.neutral[100]};
@@ -95,6 +95,7 @@ const otherLinks = css`
 
 const membershipLinks = css`
     a {
+        font-weight: 700;
         color: #ffe500;
     }
 `;
