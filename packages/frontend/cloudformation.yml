@@ -244,7 +244,7 @@ Resources:
     Properties:
       AdjustmentType: ChangeInCapacity
       AutoScalingGroupName: !Ref AutoscalingGroup
-      Cooldown: '1200'
+      Cooldown: '120'
       ScalingAdjustment: '-1'
 
   ScaleUpPolicy:
