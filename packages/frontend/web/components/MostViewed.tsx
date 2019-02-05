@@ -100,7 +100,7 @@ const listItem = css`
         background-color: ${palette.neutral[86]};
     }
 
-    :first-child {
+    :first-of-type {
         &:before {
             display: none;
         }
@@ -123,7 +123,7 @@ const listItem = css`
         display: inline-block;
         width: 100%;
 
-        :nth-child(6) {
+        :nth-of-type(6) {
             &:before {
                 display: none;
             }

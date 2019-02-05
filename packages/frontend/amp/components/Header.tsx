@@ -69,7 +69,7 @@ const pillarListStyles = css`
 const pillarListItemStyle = css`
     display: inline-block;
 
-    :first-child {
+    :first-of-type {
         a {
             padding-left: 20px;
 
