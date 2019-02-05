@@ -26,9 +26,9 @@ const buildRRLinkCategories = (
     data: {},
     el: string,
     rrCategories: string[],
-): ReaderRevenueLink =>
+): ReaderRevenueCategories =>
     rrCategories.reduce(
-        (prevObj: ReaderRevenueLink, category: string) => ({
+        (prevObj: ReaderRevenueCategories, category: string) => ({
             ...prevObj,
             [category]: getString(
                 data,
@@ -36,7 +36,7 @@ const buildRRLinkCategories = (
                 '',
             ),
         }),
-        {} as ReaderRevenueLink,
+        {} as ReaderRevenueCategories,
     );
 
 const buildRRLinkModel = (
