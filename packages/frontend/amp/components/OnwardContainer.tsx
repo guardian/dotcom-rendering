@@ -201,16 +201,17 @@ export const OnwardContainer: React.SFC<{
                                         </time>
                                     </aside>
                                 </div>
+                                <a
+                                    className={link}
+                                    // tslint:disable-line:react-a11y-anchors
+                                    href={
+                                        guardianBaseURL +
+                                        moustacheVariable('url')
+                                    }
+                                >
+                                    <MoustacheVariable name="headline" />
+                                </a>
                             </div>
-                            <a
-                                className={link}
-                                // tslint:disable-line:react-a11y-anchors
-                                href={
-                                    guardianBaseURL + moustacheVariable('url')
-                                }
-                            >
-                                <MoustacheVariable name="headline" />
-                            </a>
                         </MoustacheSection>
                     </MoustacheSection>
                 </div>
