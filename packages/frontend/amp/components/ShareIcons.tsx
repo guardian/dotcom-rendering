@@ -6,7 +6,6 @@ import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
 import EmailIcon from '@guardian/pasteup/icons/email.svg';
 import LinkedInIcon from '@guardian/pasteup/icons/linked-in.svg';
 import PinterestIcon from '@guardian/pasteup/icons/pinterest.svg';
-import GooglePlusIcon from '@guardian/pasteup/icons/google-plus.svg';
 import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
 import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
@@ -87,7 +86,6 @@ export const ShareIcons: React.SFC<{
         email: EmailIcon,
         linkedIn: LinkedInIcon,
         pinterest: PinterestIcon,
-        googlePlus: GooglePlusIcon,
         whatsApp: WhatsAppIcon,
         messenger: MessengerIcon,
     };

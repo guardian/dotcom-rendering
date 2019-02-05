@@ -343,11 +343,6 @@ export const CAPI: CAPIType = {
             url:
                 "whatsapp://send?text=%22Ticket%20touts%20face%20unlimited%20fines%20for%20using%20'bots'%20to%20buy%20in%20bulk%22%20https%3A%2F%2Fwww.theguardian.com%2Fmoney%2F2017%2Fmar%2F10%2Fministers-to-criminalise-use-of-ticket-tout-harvesting-software&CMP=share_btn_wa",
         },
-        googlePlus: {
-            userMessage: 'Share on Google+',
-            url:
-                'https://plus.google.com/share?url=https%3A%2F%2Fwww.theguardian.com%2Fmoney%2F2017%2Fmar%2F10%2Fministers-to-criminalise-use-of-ticket-tout-harvesting-software&hl=en-GB&wwc=1&CMP=share_btn_gp',
-        },
         email: {
             userMessage: 'Share via Email',
             url:

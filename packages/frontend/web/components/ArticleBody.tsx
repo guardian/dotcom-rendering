@@ -604,7 +604,6 @@ export const ArticleBody: React.SFC<{
                             'email',
                             'linkedIn',
                             'pinterest',
-                            'googlePlus',
                             'whatsApp',
                             'messenger',
                         ]}
