@@ -24,6 +24,7 @@ export const Body: React.SFC<{
             pillar={pillar}
             sharingURLs={data.sharingUrls}
             pageID={data.pageId}
+            isCommentable={data.isCommentable}
         />
     </InnerContainer>
 );

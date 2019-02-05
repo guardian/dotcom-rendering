@@ -1,9 +1,10 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
+import CommentIcon from '@guardian/pasteup/icons/comment.svg';
 
 const guardianLines = css`
     background-image: repeating-linear-gradient(
@@ -85,12 +86,23 @@ const labelStyle = css`
     margin-bottom: -3px;
 `;
 
+const siteLinks = css`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const siteLinkStyle = css`
     ${textSans(2)};
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};
     line-height: 36px;
+    text-align: right;
+`;
+
+const commentIcon = css`
+    vertical-align: middle;
+    margin-bottom: -5px;
 `;
 
 const shareIcons = css`
@@ -108,7 +120,8 @@ export const Submeta: React.SFC<{
         }
     };
     pageID: string;
-}> = ({ pillar, sections, keywords, sharingURLs, pageID }) => {
+    isCommentable: boolean;
+}> = ({ pillar, sections, keywords, sharingURLs, pageID, isCommentable }) => {
     const sectionListItems = sections.map(link => (
         <li className={itemStyle} key={link.url}>
             <a
@@ -153,7 +166,12 @@ export const Submeta: React.SFC<{
                 ]}
             />
             {/* TODO link to actual (non-AMP) site here. Also handle comment count behaviour. */}
-            <div className={guardianLines}>
+            <div className={cx(guardianLines, siteLinks)}>
+                {isCommentable && (
+                    <a className={siteLinkStyle} href={`/${pageID}#comments`}>
+                        <CommentIcon className={commentIcon} /> View comments
+                    </a>
+                )}
                 <a className={siteLinkStyle} href={`/${pageID}`}>
                     View on theguardian.com
                 </a>

@@ -107,6 +107,7 @@ interface CAPIType {
     hasRelated: boolean;
     hasStoryPackage: boolean;
     beaconURL: string;
+    isCommentable: boolean;
 }
 
 interface TagType {
