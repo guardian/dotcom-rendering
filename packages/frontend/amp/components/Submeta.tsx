@@ -143,7 +143,6 @@ export const Submeta: React.SFC<{
                     'email',
                     'linkedIn',
                     'pinterest',
-                    'googlePlus',
                     'whatsApp',
                     'messenger',
                 ]}

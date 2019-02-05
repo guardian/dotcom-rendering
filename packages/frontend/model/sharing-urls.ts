@@ -63,16 +63,6 @@ export const getSharingUrls: (
             },
             baseUrl: 'mailto:',
         },
-        googlePlus: {
-            userMessage: 'Share on Google+',
-            params: {
-                url: articleUrl,
-                hl: 'en-GB',
-                wwc: '1',
-                CMP: 'share_btn_gp',
-            },
-            baseUrl: 'https://plus.google.com/share',
-        },
         whatsApp: {
             userMessage: 'Share on WhatsApp',
             params: {

@@ -12,7 +12,6 @@ type SharePlatform =
     | 'facebook'
     | 'twitter'
     | 'email'
-    | 'googlePlus'
     | 'whatsApp'
     | 'pinterest'
     | 'linkedIn'
