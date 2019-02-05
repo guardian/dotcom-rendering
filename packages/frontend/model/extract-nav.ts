@@ -28,14 +28,14 @@ const buildRRLinkCategories = (
     rrCategories: string[],
 ): ReaderRevenueLink =>
     rrCategories.reduce(
-        (prevObj: ReaderRevenueLink, category: string) =>
-            Object.assign(prevObj, {
-                [category]: getString(
-                    data,
-                    `config.readerRevenueLinks.${el}.${category}`,
-                    '',
-                ),
-            }),
+        (prevObj: ReaderRevenueLink, category: string) => ({
+            ...prevObj,
+            [category]: getString(
+                data,
+                `config.readerRevenueLinks.${el}.${category}`,
+                '',
+            ),
+        }),
         {} as ReaderRevenueLink,
     );
 
