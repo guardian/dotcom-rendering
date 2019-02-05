@@ -3,9 +3,9 @@ import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { Dateline } from '@frontend/web/components/Dateline';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
@@ -14,6 +14,7 @@ const byline = (pillar: Pillar) => css`
     font-weight: 700;
     ${headline(2)};
     color: ${pillarPalette[pillar].main};
+    padding-bottom: 8px;
 `;
 
 const meta = css`
@@ -138,11 +139,19 @@ const metaExtras = css`
     flex-wrap: wrap;
 `;
 
-const dateline = css`
+const bylineExtras = css`
     ${textSans(1)};
     color: ${palette.neutral[46]};
     padding-top: 2px;
     margin-bottom: 6px;
+    text-decoration: none;
+`;
+
+const twitterIcon = css`
+    fill: ${palette.neutral[46]};
+    height: 12px;
+    margin-bottom: -2px;
+    width: 12px;
 `;
 
 export const MainBlock: React.SFC<{
@@ -170,7 +179,18 @@ export const MainBlock: React.SFC<{
                 {articleData.author.byline}
             </div>
             <div />
-            <div className={dateline}>
+            {articleData.author.twitterHandle && (
+                <a
+                    className={bylineExtras}
+                    href={`https://twitter.com/${
+                        articleData.author.twitterHandle
+                    }`}
+                >
+                    <TwitterIcon className={twitterIcon} /> @
+                    {articleData.author.twitterHandle}
+                </a>
+            )}
+            <div className={bylineExtras}>
                 {articleData.webPublicationDateDisplay}
             </div>
             <div className={metaExtras}>
