@@ -28,6 +28,9 @@ const defaults = `
         background-color: white;
         color: #121212;
     }
+    em {
+        font-style: italic;
+    }
 `;
 
 module.exports = [resetCSS, defaults].join('').replace(/\s/g, '');
