@@ -2,12 +2,6 @@ import get from 'lodash.get';
 import { getString, getArray } from './validators';
 import { findPillar } from './find-pillar';
 
-// Reader revenue link name
-const readerRevenueConfig = {
-    rrElements: ['header', 'footer', 'sideMenu', 'ampHeader', 'ampFooter'],
-    rrCategories: ['contribute', 'subscribe', 'support'],
-};
-
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     const title = getString(data, 'title');
     return {
@@ -22,42 +16,23 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     };
 };
 
+const rrLinkConfig = 'config.readerRevenueLinks';
 const buildRRLinkCategories = (
     data: {},
     el: string,
-    rrCategories: string[],
-): ReaderRevenueCategories =>
-    rrCategories.reduce(
-        (prevObj: ReaderRevenueCategories, category: string) => ({
-            ...prevObj,
-            [category]: getString(
-                data,
-                `config.readerRevenueLinks.${el}.${category}`,
-                '',
-            ),
-        }),
-        {} as ReaderRevenueCategories,
-    );
+): ReaderRevenueCategories => ({
+    subscribe: getString(data, `${rrLinkConfig}.${el}.subscribe`, ''),
+    support: getString(data, `${rrLinkConfig}.${el}.support`, ''),
+    contribute: getString(data, `${rrLinkConfig}.${el}.contribute`, ''),
+});
 
-const buildRRLinkModel = (
-    data: {},
-    rrELementNames: string[],
-    rrCategoryNames: string[],
-): ReaderRevenueLinks =>
-    rrELementNames.reduce(
-        (prevObj: ReaderRevenueLinks, el: string) => ({
-            ...prevObj,
-            [el]: buildRRLinkCategories(data, el, rrCategoryNames),
-        }),
-        {} as ReaderRevenueLinks,
-    );
-
-const buildReaderRevenueLinks = (data: {}) =>
-    buildRRLinkModel(
-        data,
-        readerRevenueConfig.rrElements,
-        readerRevenueConfig.rrCategories,
-    );
+const buildRRLinkModel = (data: {}): ReaderRevenueLinks => ({
+    header: buildRRLinkCategories(data, 'header'),
+    footer: buildRRLinkCategories(data, 'footer'),
+    sideMenu: buildRRLinkCategories(data, 'sideMenu'),
+    ampHeader: buildRRLinkCategories(data, 'ampHeader'),
+    ampFooter: buildRRLinkCategories(data, 'ampFooter'),
+});
 
 export const extract = (data: {}): NavType => {
     let pillars = getArray<any>(data, 'config.nav.pillars');
@@ -93,6 +68,6 @@ export const extract = (data: {}): NavType => {
                   ),
               }
             : undefined,
-        readerRevenueLinks: buildReaderRevenueLinks(data),
+        readerRevenueLinks: buildRRLinkModel(data),
     };
 };
