@@ -68,7 +68,7 @@ const showMenuUnderline = css`
 `;
 
 const pillarStyle = css`
-    :first-child {
+    :first-of-type {
         margin-left: -20px;
         ${desktop} {
             width: 144px;

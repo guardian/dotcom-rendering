@@ -185,7 +185,7 @@ const columnStyle = css`
     ${leftCol} {
         width: 160px;
 
-        :first-child {
+        :first-of-type {
             width: 150px;
         }
     }

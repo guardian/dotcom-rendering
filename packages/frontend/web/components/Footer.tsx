@@ -54,22 +54,22 @@ const footerList = css`
         border-left: 1px solid ${palette.neutral[20]};
 
         ${until.tablet} {
-            :nth-child(odd) {
+            :nth-of-type(odd) {
                 border-left: 0px;
                 padding-left: 0px;
             }
 
-            :nth-child(3) {
+            :nth-of-type(3) {
                 padding-top: 0px;
             }
 
-            :nth-child(4) {
+            :nth-of-type(4) {
                 padding-top: 0px;
             }
         }
 
         ${until.leftCol} {
-            :nth-child(1) {
+            :nth-of-type(1) {
                 border-left: 0px;
                 padding-left: 0px;
             }
