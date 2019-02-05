@@ -138,6 +138,13 @@ const metaExtras = css`
     flex-wrap: wrap;
 `;
 
+const dateline = css`
+    ${textSans(1)};
+    color: ${palette.neutral[46]};
+    padding-top: 2px;
+    margin-bottom: 6px;
+`;
+
 export const MainBlock: React.SFC<{
     config: ConfigType;
     articleData: ArticleModel;
@@ -162,7 +169,10 @@ export const MainBlock: React.SFC<{
             <div className={byline(articleData.pillar)}>
                 {articleData.author.byline}
             </div>
-            <Dateline dateDisplay={articleData.webPublicationDateDisplay} />
+            <div />
+            <div className={dateline}>
+                {articleData.webPublicationDateDisplay}
+            </div>
             <div className={metaExtras}>
                 <ShareIcons
                     sharingUrls={articleData.sharingUrls}
