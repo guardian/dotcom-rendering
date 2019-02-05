@@ -33,19 +33,23 @@ export const Elements: React.SFC<{
                     />
                 );
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-                return <InstagramBlockComponent element={element} />;
+                return <InstagramBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                return <TweetBlockComponent element={element} />;
+                return <TweetBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                 return (
-                    <RichLinkBlockComponent element={element} pillar={pillar} />
+                    <RichLinkBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
                 );
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
-                return <CommentBlockComponent element={element} />;
+                return <CommentBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-                return <SoundcloudBlockComponent element={element} />;
+                return <SoundcloudBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-                return <EmbedBlockComponent element={element} />;
+                return <EmbedBlockComponent key={i} element={element} />;
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
