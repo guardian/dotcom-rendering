@@ -28,8 +28,9 @@ export const ImageBlockComponent: React.SFC<{
         element.media.allImages[0],
         image.width,
     );
-    const fill = css`
+    const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
+        padding-right: 3px;
     `;
 
     if (!image) {
@@ -48,7 +49,7 @@ export const ImageBlockComponent: React.SFC<{
             />
             {element.data.caption && (
                 <figcaption className={captionStyle}>
-                    <span className={fill}>
+                    <span className={iconStyle}>
                         <TriangleIcon />
                     </span>
                     {element.data.caption}
