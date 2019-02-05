@@ -2,6 +2,12 @@ import get from 'lodash.get';
 import { getString, getArray } from './validators';
 import { findPillar } from './find-pillar';
 
+// Reader revenue link name
+const readerRevenueConfig = {
+    rrElements: ['header', 'footer', 'sideMenu', 'ampHeader', 'ampFooter'],
+    rrCategories: ['contribute', 'subscribe', 'support'],
+};
+
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     const title = getString(data, 'title');
     return {
@@ -15,6 +21,43 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
         mobileOnly: false,
     };
 };
+
+const buildRRLinkCategories = (
+    data: {},
+    el: string,
+    rrCategories: string[],
+): ReaderRevenueLink =>
+    rrCategories.reduce(
+        (prevObj: ReaderRevenueLink, category: string) =>
+            Object.assign(prevObj, {
+                [category]: getString(
+                    data,
+                    `config.readerRevenueLinks.${el}.${category}`,
+                    '',
+                ),
+            }),
+        {} as ReaderRevenueLink,
+    );
+
+const buildRRLinkModel = (
+    data: {},
+    rrELementNames: string[],
+    rrCategoryNames: string[],
+): ReaderRevenueLinks =>
+    rrELementNames.reduce(
+        (prevObj: ReaderRevenueLinks, el: string) => ({
+            ...prevObj,
+            [el]: buildRRLinkCategories(data, el, rrCategoryNames),
+        }),
+        {} as ReaderRevenueLinks,
+    );
+
+const buildReaderRevenueLinks = (data: {}) =>
+    buildRRLinkModel(
+        data,
+        readerRevenueConfig.rrElements,
+        readerRevenueConfig.rrCategories,
+    );
 
 export const extract = (data: {}): NavType => {
     let pillars = getArray<any>(data, 'config.nav.pillars');
@@ -50,92 +93,6 @@ export const extract = (data: {}): NavType => {
                   ),
               }
             : undefined,
-        readerRevenueLinks: {
-            header: {
-                contribute: getString(
-                    data,
-                    'config.readerRevenueLinks.header.contribute',
-                    '',
-                ),
-                subscribe: getString(
-                    data,
-                    'config.readerRevenueLinks.header.subscribe',
-                    '',
-                ),
-                support: getString(
-                    data,
-                    'config.readerRevenueLinks.header.support',
-                    '',
-                ),
-            },
-            footer: {
-                contribute: getString(
-                    data,
-                    'config.readerRevenueLinks.footer.contribute',
-                    '',
-                ),
-                subscribe: getString(
-                    data,
-                    'config.readerRevenueLinks.footer.subscribe',
-                    '',
-                ),
-                support: getString(
-                    data,
-                    'config.readerRevenueLinks.footer.support',
-                    '',
-                ),
-            },
-            sideMenu: {
-                contribute: getString(
-                    data,
-                    'config.readerRevenueLinks.sideMenu.contribute',
-                    '',
-                ),
-                subscribe: getString(
-                    data,
-                    'config.readerRevenueLinks.sideMenu.subscribe',
-                    '',
-                ),
-                support: getString(
-                    data,
-                    'config.readerRevenueLinks.sideMenu.support',
-                    '',
-                ),
-            },
-            ampHeader: {
-                contribute: getString(
-                    data,
-                    'config.readerRevenueLinks.ampHeader.contribute',
-                    '',
-                ),
-                subscribe: getString(
-                    data,
-                    'config.readerRevenueLinks.ampHeader.subscribe',
-                    '',
-                ),
-                support: getString(
-                    data,
-                    'config.readerRevenueLinks.ampHeader.support',
-                    '',
-                ),
-            },
-            ampFooter: {
-                contribute: getString(
-                    data,
-                    'config.readerRevenueLinks.ampFooter.contribute',
-                    '',
-                ),
-                subscribe: getString(
-                    data,
-                    'config.readerRevenueLinks.ampFooter.subscribe',
-                    '',
-                ),
-                support: getString(
-                    data,
-                    'config.readerRevenueLinks.ampFooter.support',
-                    '',
-                ),
-            },
-        },
+        readerRevenueLinks: buildReaderRevenueLinks(data),
     };
 };
