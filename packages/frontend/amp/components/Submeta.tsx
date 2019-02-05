@@ -93,6 +93,10 @@ const siteLinkStyle = css`
     line-height: 36px;
 `;
 
+const shareIcons = css`
+    padding-bottom: 30px;
+`;
+
 export const Submeta: React.SFC<{
     pillar: Pillar;
     sections: SimpleLinkType[];
@@ -135,6 +139,7 @@ export const Submeta: React.SFC<{
                 <ul className={keywordListStyle}>{keywordListItems}</ul>
             </div>
             <ShareIcons
+                className={shareIcons}
                 sharingUrls={sharingURLs}
                 pillar={pillar}
                 displayIcons={[

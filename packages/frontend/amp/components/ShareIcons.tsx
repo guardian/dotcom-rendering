@@ -57,10 +57,6 @@ const shareIcon = (colour: string) => css`
     }
 `;
 
-const shareIconsList = css`
-    padding-bottom: 30px;
-`;
-
 interface ShareListItemType {
     id: SharePlatform;
     Icon: React.ComponentType;
@@ -112,7 +108,7 @@ export const ShareIcons: React.SFC<{
     }, []);
 
     return (
-        <ul className={cx(shareIconsList, [className])}>
+        <ul className={className}>
             {shareList.map(shareListItem => {
                 const { Icon, id, url, userMessage } = shareListItem;
 
