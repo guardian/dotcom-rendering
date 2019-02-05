@@ -40,6 +40,7 @@ export interface ArticleModel {
     guardianBaseURL: string;
     hasRelated: boolean;
     hasStoryPackage: boolean;
+    isCommentable: boolean;
 }
 
 // TODO move somewhere better

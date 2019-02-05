@@ -195,5 +195,6 @@ export const extract = (data: {}): CAPIType => {
         hasRelated: getBoolean(data, 'config.page.hasRelated', false),
         hasStoryPackage: getBoolean(data, 'config.page.hasStoryPackage', false),
         beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
+        isCommentable: getBoolean(data, 'config.page.isCommentable', false),
     };
 };
