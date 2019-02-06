@@ -1,14 +1,15 @@
 import React from 'react';
 import { css } from 'emotion';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans, body } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { InnerContainer } from './InnerContainer';
 import { Link, footerLinksNew } from '@frontend/lib/footer-links';
+import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
 
 const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[86]};
-    ${textSans(5)};
+    ${textSans(3)};
     margin-top: 20px;
 `;
 
@@ -45,12 +46,12 @@ const footerList = css`
         display: block;
         background-color: rgba(255, 255, 255, 0.3);
     }
+`;
 
-    ul {
-        margin-right: 10px;
-        width: calc(50% - 10px);
-        margin-top: 0;
-    }
+const footerListBlock = css`
+    margin-right: 10px;
+    width: calc(50% - 10px);
+    margin-top: 0;
 `;
 
 const copyrightContainer = css`
@@ -112,11 +113,18 @@ const backToTopText = css`
     padding-top: 3px;
 `;
 
+const supportLink = css`
+    color: ${palette.highlight.main};
+    ${body(3)};
+    padding-bottom: 0.375rem;
+`;
+
 const year = new Date().getFullYear();
 
 const FooterLinks: React.FC<{
     links: Link[][];
-}> = ({ links }) => {
+    nav: NavType;
+}> = ({ links, nav }) => {
     const linkGroups = links.map(linkGroup => {
         const ls = linkGroup.map(l => (
             <li key={l.url}>
@@ -127,17 +135,38 @@ const FooterLinks: React.FC<{
         ));
         const key = linkGroup.reduce((acc, { title }) => `acc-${title}`, '');
 
-        return <ul key={key}>{ls}</ul>;
+        return (
+            <ul key={key} className={footerListBlock}>
+                {ls}
+            </ul>
+        );
     });
 
-    return <div className={footerList}>{linkGroups}</div>;
+    return (
+        <div className={footerList}>
+            {linkGroups}
+            <div className={footerListBlock}>
+                <div className={supportLink}>Support The&nbsp;Guardian</div>
+                <ReaderRevenueButton
+                    nav={nav}
+                    rrLink={'ampFooter'}
+                    rrCategory={'contribute'}
+                />
+                <ReaderRevenueButton
+                    nav={nav}
+                    rrLink={'ampFooter'}
+                    rrCategory={'subscribe'}
+                />
+            </div>
+        </div>
+    );
 };
 
-export const Footer: React.FC = () => (
+export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => (
     <footer className={footer}>
         <InnerContainer>
             <div className={footerInner}>
-                <FooterLinks links={footerLinksNew} />
+                <FooterLinks links={footerLinksNew} nav={nav} />
             </div>
         </InnerContainer>
         <InnerContainer className={copyrightContainer}>
