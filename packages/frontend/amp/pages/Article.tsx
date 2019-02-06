@@ -86,7 +86,7 @@ export const Article: React.FC<{
                     seriesTags={tagsOfType(articleData.tags, 'Series')}
                     guardianBaseURL={'https://amp.theguardian.com'}
                 />
-                <Footer />
+                <Footer nav={nav} />
             </Container>
         </div>
 

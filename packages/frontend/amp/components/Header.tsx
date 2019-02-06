@@ -2,10 +2,10 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
-import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
+import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
 import { AmpSubscriptionGoogle } from '@frontend/amp/components/elements/AmpSubscriptionGoogle';
 import { mobileLandscape } from '@guardian/pasteup/breakpoints';
 
@@ -17,35 +17,6 @@ const row = css`
     display: flex;
     justify-content: space-between;
     position: relative;
-`;
-
-const supportStyles = css`
-    align-self: flex-start;
-    position: relative;
-    margin-left: 20px;
-    margin-top: 20px;
-    background-color: ${palette.highlight.main};
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 15px;
-    min-height: 30px;
-`;
-
-const supportLinkStyles = css`
-    position: relative;
-    color: ${palette.neutral[7]};
-    ${textSans(5)};
-    font-weight: 700;
-    display: block;
-    text-decoration: none;
-    padding-right: 20px;
-
-    svg {
-        position: absolute;
-        top: -6px;
-    }
 `;
 
 const logoStyles = css`
@@ -181,9 +152,6 @@ const pillarLinks = (pillars: PillarType[], activePillar: Pillar) => (
     </nav>
 );
 
-const supportLink =
-    'https://support.theguardian.com/?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D';
-
 export const Header: React.FC<{
     nav: NavType;
     activePillar: Pillar;
@@ -191,12 +159,11 @@ export const Header: React.FC<{
 }> = ({ nav, activePillar, config }) => (
     <header className={headerStyles}>
         <div className={row}>
-            <div className={supportStyles}>
-                <a className={supportLinkStyles} href={supportLink}>
-                    Support us
-                    <ArrowRight />
-                </a>
-            </div>
+            <ReaderRevenueButton
+                nav={nav}
+                rrLink={'ampHeader'}
+                rrCategory={'support'}
+            />
 
             {config.switches.subscribeWithGoogle && <AmpSubscriptionGoogle />}
 
