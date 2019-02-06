@@ -61,6 +61,7 @@ interface ReaderRevenueCategories {
     support: string;
 }
 
+type ReaderRevenueCategoryNames = 'contribute' | 'subscribe' | 'support';
 interface ReaderRevenueLinks {
     header: ReaderRevenueCategories;
     footer: ReaderRevenueCategories;
@@ -68,6 +69,13 @@ interface ReaderRevenueLinks {
     ampHeader: ReaderRevenueCategories;
     ampFooter: ReaderRevenueCategories;
 }
+
+type ReaderRevenueLinkNames =
+    | 'header'
+    | 'footer'
+    | 'sideMenu'
+    | 'ampHeader'
+    | 'ampFooter';
 
 interface NavType {
     pillars: PillarType[];

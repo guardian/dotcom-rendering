@@ -19,7 +19,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
 const rrLinkConfig = 'config.readerRevenueLinks';
 const buildRRLinkCategories = (
     data: {},
-    el: string,
+    el: ReaderRevenueLinkNames,
 ): ReaderRevenueCategories => ({
     subscribe: getString(data, `${rrLinkConfig}.${el}.subscribe`, ''),
     support: getString(data, `${rrLinkConfig}.${el}.support`, ''),
