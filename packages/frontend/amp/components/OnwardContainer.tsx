@@ -64,7 +64,7 @@ const link = css`
 `;
 const headlineCSS = css`
     padding: 0;
-    margin: 1px 0 0;
+    margin: 1px 0 4px;
     font-weight: 500;
     word-wrap: break-word;
     ${headline(1)};
@@ -86,6 +86,12 @@ const quoteIconCSS = css`
         height: 13px;
         width: 16px;
     }
+`;
+
+const ageWarning = css`
+    color: ${palette.neutral[20]};
+    fill: ${palette.neutral[20]};
+    ${textSans(1)};
 `;
 
 const onward = css`
@@ -189,14 +195,11 @@ export const OnwardContainer: React.SFC<{
                                             </div>
                                         </MoustacheSection>
                                     </div>
-                                    <aside>
+                                    <aside className={ageWarning}>
                                         <time>
                                             <MoustacheSection name="showWebPublicationDate">
-                                                <Clock />
-                                                <span>
-                                                    <span>Published: </span>
-                                                    <MoustacheVariable name="webPublicationDate" />
-                                                </span>
+                                                <Clock />{' '}
+                                                <MoustacheVariable name="webPublicationDate" />
                                             </MoustacheSection>
                                         </time>
                                     </aside>
