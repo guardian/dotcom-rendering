@@ -70,6 +70,11 @@ const headlineCSS = css`
     ${headline(1)};
 `;
 
+const description = css`
+    ${headline(2)};
+    margin-bottom: 16px;
+`;
+
 const iconCSS = css`
     svg {
         fill: ${palette.neutral[7]};
@@ -151,7 +156,7 @@ export const OnwardContainer: React.SFC<{
                     </div>
                     <MoustacheSection name="description">
                         {/*  Don't show if there is not description WHAT STYLES HERE */}
-                        <div>
+                        <div className={description}>
                             <MoustacheVariable name="description" />
                         </div>
                     </MoustacheSection>
