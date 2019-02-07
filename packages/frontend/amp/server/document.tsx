@@ -26,6 +26,12 @@ export const document = ({
         // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
         renderToString(<CacheProvider value={cache}>{body}</CacheProvider>),
     );
+
+    const favicon =
+        process.env.NODE_ENV === 'prod'
+            ? 'amp-favicon-32x32.ico'
+            : 'favicon-32x32-dev-yellow.ico';
+
     return `<!doctype html>
 <html ⚡>
     <head>
@@ -33,7 +39,7 @@ export const document = ({
     <title>${title}</title>
     <link rel="canonical" href="self.html" />
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <link rel="icon" href="https://static.guim.co.uk/images/amp-favicon-32x32.ico">
+    <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
     <script type="application/ld+json">
         ${JSON.stringify(linkedData)}
