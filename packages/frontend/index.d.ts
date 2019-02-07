@@ -183,6 +183,7 @@ declare namespace JSX {
         'amp-iframe': any;
         'amp-analytics': any;
         'amp-pixel': any;
+        'amp-ad': any;
         template: any;
     }
 }

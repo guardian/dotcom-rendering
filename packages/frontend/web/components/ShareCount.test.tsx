@@ -26,6 +26,7 @@ describe('ShareCount', () => {
         subscribeWithGoogleApiUrl: '',
         isDev: false,
         switches: {},
+        dfpAccountId: '',
     };
 
     afterEach(() => {

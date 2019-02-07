@@ -41,13 +41,14 @@ const ampData = (
     }
     return `/${dfpAccountId2}/${dfpAdUnitRoot}/amp`;
 };
-const getPlacementId = (edition): number => {
+const getPlacementId = (edition: Edition): number => {
     if (edition === 'US') {
         return 7;
     }
     if (edition === 'AU') {
         return 6;
     }
+
     return 4;
 };
 
