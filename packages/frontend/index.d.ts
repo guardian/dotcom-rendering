@@ -23,6 +23,21 @@ interface SimpleLinkType {
     title: string;
 }
 
+
+interface AdTargetParam {
+    name: string;
+    values: string[];
+}
+
+interface EditionAdTargeting {
+    edition: Edition;
+    paramSet: AdTargetParam[];
+}
+
+interface CommercialProperties {
+    editionAdTargeting: EditionAdTargeting[];
+}
+
 interface LinkType extends SimpleLinkType {
     longTitle: string;
     children?: LinkType[];
@@ -110,6 +125,7 @@ interface CAPIType {
     hasStoryPackage: boolean;
     beaconURL: string;
     isCommentable: boolean;
+    commercialProperties: CommercialProperties;
 }
 
 interface TagType {
@@ -133,6 +149,7 @@ interface ConfigType {
     subscribeWithGoogleApiUrl: string;
     isDev: boolean;
     switches: { [key: string]: boolean };
+    dfpAccountId: string;
 }
 
 // 3rd party type declarations
