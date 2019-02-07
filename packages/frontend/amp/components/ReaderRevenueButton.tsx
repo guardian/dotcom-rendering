@@ -53,15 +53,11 @@ const rightAlignedIcon = css`
 
 export const ReaderRevenueButton: React.SFC<{
     nav: NavType;
+    linkLabel: string;
     rrLink: ReaderRevenueLinkNames;
     rrCategory: ReaderRevenueCategoryNames;
     rightAlignIcon?: boolean;
-}> = ({ nav, rrLink, rrCategory, rightAlignIcon }) => {
-    const linkLabel =
-        (rrCategory.toString() === 'support' && 'Support Us') ||
-        (rrCategory.toString() === 'subscribe' && 'Subscribe') ||
-        (rrCategory.toString() === 'contribute' && 'Contribute');
-
+}> = ({ nav, linkLabel, rrLink, rrCategory, rightAlignIcon }) => {
     const url = nav.readerRevenueLinks[rrLink][rrCategory];
 
     if (url === '') {

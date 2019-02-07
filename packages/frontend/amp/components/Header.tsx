@@ -163,6 +163,7 @@ export const Header: React.FC<{
                 nav={nav}
                 rrLink={'ampHeader'}
                 rrCategory={'support'}
+                linkLabel={'Support Us'}
             />
 
             {config.switches.subscribeWithGoogle && <AmpSubscriptionGoogle />}
