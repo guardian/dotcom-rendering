@@ -152,12 +152,14 @@ const FooterLinks: React.FC<{
                     rrLink={'ampFooter'}
                     rrCategory={'contribute'}
                     rightAlignIcon={true}
+                    linkLabel={'Contribute'}
                 />
                 <ReaderRevenueButton
                     nav={nav}
                     rrLink={'ampFooter'}
                     rrCategory={'subscribe'}
                     rightAlignIcon={true}
+                    linkLabel={'Subscribe'}
                 />
             </div>
         </div>
