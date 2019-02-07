@@ -35,6 +35,7 @@ const supportLinkStyles = css`
     line-height: 20px;
     text-decoration: none;
     padding-right: 20px;
+    width: 100%;
 
     svg {
         position: absolute;
@@ -42,11 +43,20 @@ const supportLinkStyles = css`
     }
 `;
 
+const rightAlignedIcon = css`
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 0;
+    top: 0;
+`;
+
 export const ReaderRevenueButton: React.SFC<{
     nav: NavType;
     rrLink: ReaderRevenueLinkNames;
     rrCategory: ReaderRevenueCategoryNames;
-}> = ({ nav, rrLink, rrCategory }) => {
+    rightAlignIcon?: boolean;
+}> = ({ nav, rrLink, rrCategory, rightAlignIcon }) => {
     const linkLabel =
         (rrCategory.toString() === 'support' && 'Support Us') ||
         (rrCategory.toString() === 'subscribe' && 'Subscribe') ||
@@ -68,7 +78,9 @@ export const ReaderRevenueButton: React.SFC<{
         >
             <a className={supportLinkStyles} href={url}>
                 {linkLabel}
-                <ArrowRight />
+                <span className={rightAlignIcon ? rightAlignedIcon : ''}>
+                    <ArrowRight />
+                </span>
             </a>
         </div>
     );
