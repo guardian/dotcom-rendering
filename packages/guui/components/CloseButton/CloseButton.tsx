@@ -20,7 +20,7 @@ const closeButton = (foregroundColour: string, backgroundColour: string) => css`
     }
 `;
 
-export const CloseButton: React.SFC<{
+export const CloseButton: React.FC<{
     foregroundColour: string;
     backgroundColour: string;
 }> = ({ foregroundColour, backgroundColour }) => (

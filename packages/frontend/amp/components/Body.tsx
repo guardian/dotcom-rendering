@@ -10,7 +10,7 @@ const body = css`
     background-color: white;
 `;
 
-export const Body: React.SFC<{
+export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
     config: ConfigType;

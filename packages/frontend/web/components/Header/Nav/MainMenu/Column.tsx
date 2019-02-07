@@ -72,7 +72,7 @@ const mainMenuLinkStyle = css`
     }
 `;
 
-const ColumnLink: React.SFC<{
+const ColumnLink: React.FC<{
     link: LinkType;
 }> = ({ link }) => (
     <li
@@ -129,7 +129,7 @@ const hide = css`
     display: none;
 `;
 
-const ColumnLinks: React.SFC<{
+const ColumnLinks: React.FC<{
     column: LinkType;
     showColumnLinks: boolean;
     id: string;
@@ -191,7 +191,7 @@ const columnStyle = css`
     }
 `;
 
-export const ReaderRevenueLinks: React.SFC<{
+export const ReaderRevenueLinks: React.FC<{
     readerRevenueLinks: ReaderRevenueLinks;
 }> = ({ readerRevenueLinks }) => {
     const links: LinkType[] = [
@@ -218,7 +218,7 @@ export const ReaderRevenueLinks: React.SFC<{
     );
 };
 
-export const More: React.SFC<{
+export const More: React.FC<{
     column: LinkType;
     brandExtensions: LinkType[];
 }> = ({ column, brandExtensions }) => {

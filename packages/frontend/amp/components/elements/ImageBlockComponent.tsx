@@ -18,7 +18,7 @@ const captionStyle = css`
     color: ${palette.neutral[46]};
 `;
 
-export const ImageBlockComponent: React.SFC<{
+export const ImageBlockComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {

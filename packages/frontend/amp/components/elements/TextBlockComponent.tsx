@@ -30,7 +30,7 @@ const style = (pillar: Pillar) => css`
     }
     ${textSans(5)};
 `;
-export const TextBlockComponent: React.SFC<{
+export const TextBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (

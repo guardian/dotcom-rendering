@@ -108,7 +108,7 @@ const readerRevenueLinks = css`
     }
 `;
 
-export const ReaderRevenueLinks: React.SFC<{
+export const ReaderRevenueLinks: React.FC<{
     edition: Edition;
     urls: {
         subscribe: string;

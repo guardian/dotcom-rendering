@@ -119,7 +119,7 @@ const psp = pillarMap(
     `,
 );
 
-export const Inner: React.SFC<{
+export const Inner: React.FC<{
     links: LinkType[];
     currentNavLink: string;
     pillar: Pillar;

@@ -23,7 +23,7 @@ const forSource: (source: PictureSource) => string = source =>
         source.srcset
     }" />`;
 
-export const Picture: React.SFC<{
+export const Picture: React.FC<{
     sources: PictureSource[];
     alt: string;
     src: string;

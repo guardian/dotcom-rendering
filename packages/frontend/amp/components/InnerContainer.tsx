@@ -6,7 +6,7 @@ const style = css`
     padding-right: 10px;
 `;
 
-export const InnerContainer: React.SFC<{
+export const InnerContainer: React.FC<{
     className?: string;
     children: React.ReactNode;
 }> = ({ className, children, ...props }) => (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const SoundcloudBlockComponent: React.SFC<{
+export const SoundcloudBlockComponent: React.FC<{
     element: SoundcloudBlockElement;
 }> = ({ element }) => {
     return element.isTrack ? (

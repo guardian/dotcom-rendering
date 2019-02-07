@@ -15,7 +15,7 @@ const header = css`
     }
 `;
 
-export const Header: React.SFC<{
+export const Header: React.FC<{
     nav: NavType;
     pillar: Pillar;
     edition: Edition;

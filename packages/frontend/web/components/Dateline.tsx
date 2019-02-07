@@ -16,7 +16,7 @@ const dateline = css`
     margin-bottom: 6px;
 `;
 
-export const Dateline: React.SFC<{
+export const Dateline: React.FC<{
     dateDisplay: string;
 }> = ({ dateDisplay }) => (
     <>

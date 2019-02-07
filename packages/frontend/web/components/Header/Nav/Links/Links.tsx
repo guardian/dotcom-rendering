@@ -102,7 +102,7 @@ const seperatorHide = css`
     }
 `;
 
-const Search: React.SFC<{
+const Search: React.FC<{
     href: string;
     className?: string;
 }> = ({ className, children, href, ...props }) => (
@@ -175,7 +175,7 @@ const identityLinks: DropdownLink[] = [
     },
 ];
 
-export const Links: React.SFC<{
+export const Links: React.FC<{
     isSignedIn: boolean;
 }> = ({ isSignedIn }) => (
     <div className={links}>

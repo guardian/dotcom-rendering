@@ -13,7 +13,7 @@ export interface AnalyticsModel {
     domain: string;
 }
 
-export const Analytics: React.SFC<{
+export const Analytics: React.FC<{
     analytics: AnalyticsModel;
 }> = ({
     analytics: {

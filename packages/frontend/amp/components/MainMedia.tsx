@@ -104,7 +104,7 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
     );
 };
 
-export const MainMedia: React.SFC<{
+export const MainMedia: React.FC<{
     element: CAPIElement;
 }> = ({ element }) => {
     switch (element._type) {

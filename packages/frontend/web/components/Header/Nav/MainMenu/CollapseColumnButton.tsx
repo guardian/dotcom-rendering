@@ -43,7 +43,7 @@ const collapseColumnButton = css`
     }
 `;
 
-export const CollapseColumnButton: React.SFC<{
+export const CollapseColumnButton: React.FC<{
     title: string;
     showColumnLinks: boolean;
     toggleColumnLinks: () => void;

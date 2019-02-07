@@ -78,7 +78,7 @@ const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean }) => {
     `;
 };
 
-export const VeggieBurger: React.SFC<{
+export const VeggieBurger: React.FC<{
     toggleMainMenu: () => void;
     showMainMenu: boolean;
     enhanceCheckbox: boolean;

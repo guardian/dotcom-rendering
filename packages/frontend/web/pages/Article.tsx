@@ -44,7 +44,7 @@ const articleContainer = css`
     }
 `;
 
-export const Article: React.SFC<{
+export const Article: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
