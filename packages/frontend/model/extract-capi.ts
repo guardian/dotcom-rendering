@@ -5,6 +5,7 @@ import {
     getNonEmptyString,
     getBoolean,
     getArray,
+    getObject,
 } from './validators';
 import { clean } from './clean';
 import { getSharingUrls } from './sharing-urls';
@@ -111,6 +112,32 @@ const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
     }));
 };
 
+const getCommercialProperties = (data: {}): CommercialProperties => {
+    const properties = getObject(data, 'config.page.commercialProperties', {});
+    const targeting = getArray<any>(properties, 'editionAdTargetings', []);
+    const editionAdTargeting: EditionAdTargeting[] = targeting.map(t => {
+        return {
+            edition: getEditionValue(getString(t, 'edition.id')),
+            paramSet: getArray<any>(t, 'paramSet', []).map(param => {
+                if (Array.isArray(param.value)) {
+                    return {
+                        name: param.name,
+                        values: param.value,
+                    };
+                }
+                return {
+                    name: param.name,
+                    values: [param.value],
+                };
+            }),
+        };
+    });
+
+    return {
+        editionAdTargeting,
+    };
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -196,5 +223,6 @@ export const extract = (data: {}): CAPIType => {
         hasStoryPackage: getBoolean(data, 'config.page.hasStoryPackage', false),
         beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
         isCommentable: getBoolean(data, 'config.page.isCommentable', false),
+        commercialProperties: getCommercialProperties(data),
     };
 };

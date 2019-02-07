@@ -41,6 +41,9 @@ export interface ArticleModel {
     hasRelated: boolean;
     hasStoryPackage: boolean;
     isCommentable: boolean;
+    editionId: Edition;
+    contentType: string;
+    commercialProperties: CommercialProperties;
 }
 
 // TODO move somewhere better

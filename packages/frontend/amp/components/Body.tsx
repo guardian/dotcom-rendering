@@ -17,7 +17,17 @@ export const Body: React.FC<{
 }> = ({ pillar, data, config }) => (
     <InnerContainer className={body}>
         <TopMeta config={config} articleData={data} />
-        <Elements pillar={pillar} elements={data.elements} />
+        <Elements
+            pillar={pillar}
+            elements={data.elements}
+            // stuff for ads
+            edition={data.editionId}
+            section={data.sectionName}
+            dfpAccountId={config.dfpAccountId}
+            contentType={data.contentType}
+            switches={config.switches}
+            commercialProperties={data.commercialProperties}
+        />
         <SubMeta
             sections={data.subMetaSectionLinks}
             keywords={data.subMetaKeywordLinks}

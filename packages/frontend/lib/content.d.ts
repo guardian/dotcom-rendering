@@ -1,3 +1,5 @@
+type Switches = { [key: string]: boolean }
+
 type Weighting =
     | 'inline'
     | 'thumbnail'

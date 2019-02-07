@@ -7,13 +7,29 @@ import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBloc
 import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
-import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
+import { findAdSlots } from '@frontend/amp/lib/find-adslots';
+import { AdComponent } from '@frontend/amp/components/elements/AdComponent';
 
 export const Elements: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
-}> = ({ elements, pillar }) => {
+    edition: Edition;
+    dfpAccountId: string;
+    section: string;
+    contentType: string;
+    switches: Switches;
+    commercialProperties: CommercialProperties;
+}> = ({
+    elements,
+    pillar,
+    edition,
+    dfpAccountId,
+    section,
+    contentType,
+    switches,
+    commercialProperties,
+}) => {
     const output = elements.map((element, i) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.TextBlockElement':
@@ -67,8 +83,26 @@ export const Elements: React.FC<{
     const elementsWithAdverts = output.map((e, i) => (
         <>
             {e}
-            {slotIndexes.includes(i) ? 'ADVERT' : null}
+            {slotIndexes.includes(i) ? (
+                <AdComponent
+                    edition={edition}
+                    dfpAccountId={dfpAccountId}
+                    section={section}
+                    contentType={contentType}
+                    switches={switches}
+                    commercialProperties={commercialProperties}
+                />
+            ) : null}
         </>
     ));
-    return <>{elementsWithAdverts}</>;
+    return (
+        <>
+            {elementsWithAdverts}
+            <script
+                async={true}
+                custom-element="amp-ad"
+                src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"
+            />
+        </>
+    );
 };
