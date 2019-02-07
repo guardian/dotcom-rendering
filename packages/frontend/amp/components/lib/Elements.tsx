@@ -80,9 +80,9 @@ export const Elements: React.FC<{
 
     // insert advert placeholder text
     const slotIndexes = findAdSlots(elements);
-    const elementsWithAdverts = output.map((e, i) => (
+    const elementsWithAdverts = output.map((element, i) => (
         <>
-            {e}
+            {element}
             {slotIndexes.includes(i) ? (
                 <AdComponent
                     edition={edition}
@@ -95,14 +95,6 @@ export const Elements: React.FC<{
             ) : null}
         </>
     ));
-    return (
-        <>
-            {elementsWithAdverts}
-            <script
-                async={true}
-                custom-element="amp-ad"
-                src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"
-            />
-        </>
-    );
+
+    return <>{elementsWithAdverts}</>;
 };
