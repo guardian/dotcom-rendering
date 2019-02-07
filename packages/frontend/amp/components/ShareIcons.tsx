@@ -65,7 +65,7 @@ interface ShareListItemType {
     mobileOnly: boolean;
 }
 
-export const ShareIcons: React.SFC<{
+export const ShareIcons: React.FC<{
     sharingUrls: {
         [K in SharePlatform]?: {
             url: string;

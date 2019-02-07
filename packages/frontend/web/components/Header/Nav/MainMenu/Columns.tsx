@@ -96,7 +96,7 @@ const brandExtensionLink = css`
     }
 `;
 
-export const Columns: React.SFC<{
+export const Columns: React.FC<{
     nav: NavType;
 }> = ({ nav }) => (
     <ul className={ColumnsStyle} role="menubar" tabIndex={-1}>

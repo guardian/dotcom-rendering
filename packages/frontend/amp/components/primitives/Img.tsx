@@ -1,7 +1,7 @@
 import React from 'react';
 import { AMPCommon } from './primitives';
 
-export const Img: React.SFC<ImgProps> = props => <amp-img {...props} />;
+export const Img: React.FC<ImgProps> = props => <amp-img {...props} />;
 
 interface Props {
     alt: string;

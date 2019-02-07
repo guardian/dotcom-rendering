@@ -137,7 +137,7 @@ const onward = css`
     }
 `;
 
-export const OnwardContainer: React.SFC<{
+export const OnwardContainer: React.FC<{
     guardianBaseURL: string;
     path: string;
 }> = ({ guardianBaseURL, path }) => (

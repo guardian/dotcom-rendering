@@ -10,7 +10,7 @@ const para = css`
     }
 `;
 
-export const TextBlockComponent: React.SFC<{ html: string }> = ({ html }) => (
+export const TextBlockComponent: React.FC<{ html: string }> = ({ html }) => (
     <span
         className={para}
         dangerouslySetInnerHTML={{

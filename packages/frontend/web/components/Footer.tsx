@@ -91,7 +91,7 @@ const copyright = css`
     margin-top: 12px;
 `;
 
-const FooterLinks: React.SFC<{
+const FooterLinks: React.FC<{
     links: Link[][];
 }> = ({ links }) => {
     const linkGroups = links.map(linkGroup => {
@@ -110,7 +110,7 @@ const FooterLinks: React.SFC<{
     return <div className={footerList}>{linkGroups}</div>;
 };
 
-export const Footer: React.SFC = () => (
+export const Footer: React.FC = () => (
     <footer className={footer}>
         <Container className={footerInner}>
             <iframe

@@ -38,7 +38,7 @@ const bodyCSS = css`
     }
 `;
 
-export const CommentBlockComponent: React.SFC<{
+export const CommentBlockComponent: React.FC<{
     element: CommentBlockElement;
 }> = ({ element }) => (
     <div className={wrapper}>

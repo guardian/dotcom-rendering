@@ -6,7 +6,7 @@ const container = css`
     max-width: 600px;
 `;
 
-export const Container: React.SFC<{
+export const Container: React.FC<{
     className?: string;
     children: React.ReactNode;
 }> = ({ className, children, ...props }) => (

@@ -2,7 +2,7 @@ import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockC
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import React from 'react';
 
-export const ArticleRenderer: React.SFC<{ elements: CAPIElement[] }> = ({
+export const ArticleRenderer: React.FC<{ elements: CAPIElement[] }> = ({
     elements,
 }) => {
     const output = elements

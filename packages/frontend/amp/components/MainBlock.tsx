@@ -154,7 +154,7 @@ const twitterIcon = css`
     width: 12px;
 `;
 
-export const MainBlock: React.SFC<{
+export const MainBlock: React.FC<{
     config: ConfigType;
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (

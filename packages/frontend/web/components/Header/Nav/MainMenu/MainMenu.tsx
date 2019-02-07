@@ -71,7 +71,7 @@ const mainMenu = css`
     }
 `;
 
-export const MainMenu: React.SFC<{
+export const MainMenu: React.FC<{
     showMainMenu: boolean;
     id: string;
     nav: NavType;

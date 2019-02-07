@@ -110,7 +110,7 @@ const normaliseProps = (props: BreakpointProps | number): BreakpointProps => {
     return props;
 };
 
-export const Row: React.SFC<{
+export const Row: React.FC<{
     htmlTag: string;
     children: React.ReactNode;
 }> = ({ htmlTag, children }) => (
@@ -134,7 +134,7 @@ export interface ColsProps {
     children: React.ReactNode;
 }
 
-export const Cols: React.SFC<ColsProps> = ({
+export const Cols: React.FC<ColsProps> = ({
     htmlTag = 'div',
     tablet = columns.tablet.max,
     desktop = columns.desktop.max,

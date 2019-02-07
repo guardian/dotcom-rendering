@@ -52,7 +52,7 @@ const tagsOfType = (tags: TagType[], tagType: string): TagType[] => {
     );
 };
 
-export const Article: React.SFC<{
+export const Article: React.FC<{
     nav: NavType;
     articleData: ArticleModel;
     config: ConfigType;

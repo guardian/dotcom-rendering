@@ -10,7 +10,7 @@ import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/Soun
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
 
-export const Elements: React.SFC<{
+export const Elements: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
 }> = ({ elements, pillar }) => {

@@ -63,7 +63,7 @@ const lookUpEditionLink = (edition: Edition): Link => {
     return mapping[edition];
 };
 
-export const EditionDropdown: React.SFC<{
+export const EditionDropdown: React.FC<{
     edition: Edition;
 }> = ({ edition }) => {
     const activeEditionLink = lookUpEditionLink(edition);

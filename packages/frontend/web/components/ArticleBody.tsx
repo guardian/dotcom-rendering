@@ -440,7 +440,7 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
     return bylineText.split(regex);
 };
 
-const RenderByline: React.SFC<{
+const RenderByline: React.FC<{
     bylineText: string;
     contributorTags: TagType[];
     pillar: Pillar;
@@ -467,7 +467,7 @@ const RenderByline: React.SFC<{
     return <>{renderedTokens}</>;
 };
 
-const BylineContributor: React.SFC<{
+const BylineContributor: React.FC<{
     contributor: string;
     contributorTagId: string;
     pillar: Pillar;
@@ -482,7 +482,7 @@ const BylineContributor: React.SFC<{
     </a>
 );
 
-export const ArticleBody: React.SFC<{
+export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     config: ConfigType;
 }> = ({ CAPI, config }) => {

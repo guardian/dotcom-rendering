@@ -59,7 +59,7 @@ const style = css`
 
 const SVG = () => <TheGuardianLogoSVG className={style} />;
 
-export const Logo: React.SFC = () => (
+export const Logo: React.FC = () => (
     <a className={link} href="/">
         <span
             className={css`

@@ -70,7 +70,7 @@ const hideSlash = css`
     }
 `;
 
-export const SubMetaLinksList: React.SFC<{
+export const SubMetaLinksList: React.FC<{
     links: SimpleLinkType[];
     isSectionLinkList: boolean;
     pillar: Pillar;

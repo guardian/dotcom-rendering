@@ -10,7 +10,7 @@ const makeFallback = (html: string): string | null => {
 };
 
 // tslint:disable:react-no-dangerous-html
-export const TweetBlockComponent: React.SFC<{
+export const TweetBlockComponent: React.FC<{
     element: TweetBlockElement;
 }> = ({ element }) => {
     const fallbackHTML = makeFallback(element.html);

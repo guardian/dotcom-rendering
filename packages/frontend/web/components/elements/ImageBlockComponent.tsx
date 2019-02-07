@@ -57,7 +57,7 @@ const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
     return bestFor(300, inlineSrcSets).src;
 };
 
-export const ImageBlockComponent: React.SFC<{ element: ImageBlockElement }> = ({
+export const ImageBlockComponent: React.FC<{ element: ImageBlockElement }> = ({
     element,
 }) => {
     const sources = makeSources(element.imageSources);

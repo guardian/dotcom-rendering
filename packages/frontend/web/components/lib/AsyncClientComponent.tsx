@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface ClientComponentProps<T> {
     f: () => Promise<T>;
-    children: React.SFC<{ data: T | undefined }>;
+    children: React.FC<{ data: T | undefined }>;
 }
 
 export class AsyncClientComponent<T> extends React.Component<

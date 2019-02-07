@@ -114,7 +114,7 @@ const backToTopText = css`
 
 const year = new Date().getFullYear();
 
-const FooterLinks: React.SFC<{
+const FooterLinks: React.FC<{
     links: Link[][];
 }> = ({ links }) => {
     const linkGroups = links.map(linkGroup => {
@@ -133,7 +133,7 @@ const FooterLinks: React.SFC<{
     return <div className={footerList}>{linkGroups}</div>;
 };
 
-export const Footer: React.SFC = () => (
+export const Footer: React.FC = () => (
     <footer className={footer}>
         <InnerContainer>
             <div className={footerInner}>

@@ -69,7 +69,7 @@ const sectionHasMostViewed = (sectionID: string): boolean => {
     return whitelist.has(sectionID);
 };
 
-export const Onward: React.SFC<{
+export const Onward: React.FC<{
     shouldHideAds: boolean;
     pageID: string;
     webURL: string;

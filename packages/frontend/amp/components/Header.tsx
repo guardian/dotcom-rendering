@@ -184,7 +184,7 @@ const pillarLinks = (pillars: PillarType[], activePillar: Pillar) => (
 const supportLink =
     'https://support.theguardian.com/?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D';
 
-export const Header: React.FunctionComponent<{
+export const Header: React.FC<{
     nav: NavType;
     activePillar: Pillar;
     config: ConfigType;
