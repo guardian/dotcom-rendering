@@ -10,6 +10,11 @@ import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/Soun
 import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { AdComponent } from '@frontend/amp/components/elements/AdComponent';
+import { css } from 'emotion';
+
+const clear = css`
+    clear: both;
+`;
 
 export const Elements: React.FC<{
     elements: CAPIElement[];
@@ -96,5 +101,10 @@ export const Elements: React.FC<{
         </>
     ));
 
-    return <>{elementsWithAdverts}</>;
+    return (
+        <>
+            {elementsWithAdverts}
+            <div className={clear} />
+        </>
+    );
 };

@@ -1,30 +1,43 @@
 import React from 'react';
+import { css } from 'emotion';
+import { until } from '@guardian/pasteup/breakpoints';
+import { palette } from '@guardian/pasteup/palette';
+import { adJson } from '@frontend/amp/lib/ad-json';
+
+const adStyle = css`
+    background: ${palette.neutral[93]};
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…AsMy45LTAuOCw3LjMtMi40LDEwLjNDODEsNjIuNSw4Niw1MS42LDg2LDM5LjYiLz48L3N2Zz4=);
+    background-size: 105px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top: 1px solid ${palette.neutral[86]};
+    float: right;
+    height: 272px;
+    width: 300px;
+    margin: 4px 0 12px 20px;
+
+    ${until.phablet} {
+        clear: both;
+        float: none;
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    :before {
+        content: 'Advertisement';
+        display: block;
+        font-size: 12px;
+        line-height: 16px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+            sans-serif;
+        padding: 3px 10px;
+        color: ${palette.neutral[46]};
+        text-align: right;
+    }
+`;
 
 const dfpAdUnitRoot = 'theguardian.com';
-
-const ampJson = (
-    edition: Edition,
-    uri: string,
-    editionAdTargetings: EditionAdTargeting[],
-): string => {
-    const targeting = editionAdTargetings
-        .filter(t => t.edition === edition)
-        .map(t =>
-            t.paramSet.map(p => {
-                console.log('param', p);
-                return {
-                    name: p.name,
-                    values: p.values.join(','),
-                };
-            }),
-        );
-
-    targeting.push([{ name: 'p', values: 'amp' }]);
-
-    console.log(targeting);
-
-    return '{"targeting":""}';
-};
 
 // type AdRegion =  'US' | 'ROW' | 'AU';
 
@@ -93,16 +106,18 @@ export const AdComponent: React.SFC<{
     switches,
     commercialProperties,
 }) => (
-    <amp-ad
-        width={300}
-        height={250}
-        data-npa-on-unknown-consent={true}
-        data-loading-strategy={'prefer-viewability-over-views'}
-        // data-slot={AmpAdDataSlot(article).toString()}
-        layout={'responsive'}
-        type={'doubleclick'}
-        json={ampJson(edition, 'todo', commercialProperties.editionAdTargeting)}
-        data-slot={ampData(section, dfpAccountId, contentType)}
-        rtc-config={realTimeConfig('test', edition, false, switches)}
-    />
+    <div className={adStyle}>
+        <amp-ad
+            width={300}
+            height={250}
+            data-npa-on-unknown-consent={true}
+            data-loading-strategy={'prefer-viewability-over-views'}
+            // data-slot={AmpAdDataSlot(article).toString()}
+            layout={'responsive'}
+            type={'doubleclick'}
+            json={adJson(edition, commercialProperties.editionAdTargeting)}
+            data-slot={ampData(section, dfpAccountId, contentType)}
+            rtc-config={realTimeConfig('test', edition, false, switches)}
+        />
+    </div>
 );
