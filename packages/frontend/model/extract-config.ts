@@ -11,4 +11,5 @@ export const extract = (data: {}): ConfigType => ({
     ),
     isDev: process.env.NODE_ENV === 'development',
     switches: getObject(data, 'config.page.switches', {}),
+    dfpAccountId: getObject(data, 'config.page.dfpAccountId', ''), // TODO check and fix
 });

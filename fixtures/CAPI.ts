@@ -396,4 +396,7 @@ export const CAPI: CAPIType = {
     hasStoryPackage: false,
     beaconURL: '//fake.url',
     isCommentable: false,
+    commercialProperties: {
+        editionAdTargeting: [],
+    },
 };
