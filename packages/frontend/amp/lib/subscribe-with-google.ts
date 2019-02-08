@@ -2,7 +2,6 @@ const getServices = (apiUrl: string) => ({
     services: [
         {
             authorizationUrl: `${apiUrl}/oauth`,
-            pingbackUrl: `${apiUrl}/pingback`,
             actions: {
                 login: `${apiUrl}/login`,
                 subscribe: `${apiUrl}/subscribe#viewerUrl=https://google.com`,
