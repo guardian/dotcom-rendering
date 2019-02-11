@@ -19,11 +19,11 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
 const rrLinkConfig = 'config.readerRevenueLinks';
 const buildRRLinkCategories = (
     data: {},
-    el: ReaderRevenueLinkNames,
+    position: ReaderRevenuePosition,
 ): ReaderRevenueCategories => ({
-    subscribe: getString(data, `${rrLinkConfig}.${el}.subscribe`, ''),
-    support: getString(data, `${rrLinkConfig}.${el}.support`, ''),
-    contribute: getString(data, `${rrLinkConfig}.${el}.contribute`, ''),
+    subscribe: getString(data, `${rrLinkConfig}.${position}.subscribe`, ''),
+    support: getString(data, `${rrLinkConfig}.${position}.support`, ''),
+    contribute: getString(data, `${rrLinkConfig}.${position}.contribute`, ''),
 });
 
 const buildRRLinkModel = (data: {}): ReaderRevenueLinks => ({

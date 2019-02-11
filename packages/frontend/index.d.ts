@@ -70,7 +70,7 @@ interface ReaderRevenueLinks {
     ampFooter: ReaderRevenueCategories;
 }
 
-type ReaderRevenueLinkNames =
+type ReaderRevenuePosition =
     | 'header'
     | 'footer'
     | 'sideMenu'
