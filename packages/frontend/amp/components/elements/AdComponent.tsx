@@ -54,15 +54,16 @@ const ampData = (
     }
     return `/${dfpAccountId2}/${dfpAdUnitRoot}/amp`;
 };
-const getPlacementId = (edition: Edition): number => {
-    if (edition === 'US') {
-        return 7;
-    }
-    if (edition === 'AU') {
-        return 6;
-    }
 
-    return 4;
+const getPlacementId = (edition: Edition): number => {
+    switch (edition) {
+        case 'US':
+            return 7;
+        case 'AU':
+            return 6;
+        default:
+            return 4;
+    }
 };
 
 const realTimeConfig = (
