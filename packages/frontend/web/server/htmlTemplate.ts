@@ -27,11 +27,19 @@ export const htmlTemplate = ({
     cssIDs: string[];
     nonBlockingJS?: string;
     fontFiles?: string[];
-}) => `<!doctype html>
+}) => {
+    const favicon =
+        process.env.NODE_ENV === 'prod'
+            ? 'favicon-32x32.ico'
+            : 'favicon-32x32-dev-yellow.ico';
+
+    return `<!doctype html>
         <html>
             <head>
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
                 </script>
@@ -100,3 +108,4 @@ export const htmlTemplate = ({
                 <script>${nonBlockingJS}</script>
             </body>
         </html>`;
+};

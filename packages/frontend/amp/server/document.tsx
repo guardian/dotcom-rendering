@@ -29,7 +29,7 @@ export const document = ({
 
     const favicon =
         process.env.NODE_ENV === 'prod'
-            ? 'amp-favicon-32x32.ico'
+            ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
 
     return `<!doctype html>
