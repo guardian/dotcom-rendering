@@ -145,7 +145,7 @@ const FooterLinks: React.FC<{
     return (
         <div className={footerList}>
             {linkGroups}
-            <div className={footerListBlock}>
+            <div key="rrblock" className={footerListBlock}>
                 <div className={supportLink}>Support The&nbsp;Guardian</div>
                 <ReaderRevenueButton
                     nav={nav}
