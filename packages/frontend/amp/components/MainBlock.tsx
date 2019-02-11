@@ -9,12 +9,20 @@ import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
+import { bylineTokens } from '@frontend/amp/lib/byline-tokens';
 
-const byline = (pillar: Pillar) => css`
-    font-weight: 700;
+const bylineStyle = (pillar: Pillar) => css`
     ${headline(2)};
     color: ${pillarPalette[pillar].main};
     padding-bottom: 8px;
+    font-style: italic;
+
+    a {
+        font-weight: 700;
+        color: ${pillarPalette[pillar].main};
+        text-decoration: none;
+        font-style: normal;
+    }
 `;
 
 const meta = css`
@@ -172,6 +180,31 @@ const Headline: React.FC<{
     );
 };
 
+const Byline: React.FC<{
+    byline: string;
+    tags: TagType[];
+    pillar: Pillar;
+}> = ({ byline, tags, pillar }) => {
+    const contributorTags = tags.filter(tag => tag.type === 'Contributor');
+    const tokens = bylineTokens(byline, contributorTags);
+
+    const linkedByline = tokens.map(token => {
+        const matchedTag = contributorTags.find(tag => tag.title === token);
+
+        if (matchedTag) {
+            return (
+                <a href={`https://www.theguardian.com/${matchedTag.id}`}>
+                    {matchedTag.title}
+                </a>
+            );
+        }
+
+        return token;
+    });
+
+    return <div className={bylineStyle(pillar)}>{linkedByline}</div>;
+};
+
 export const MainBlock: React.FC<{
     config: ConfigType;
     articleData: ArticleModel;
@@ -188,9 +221,11 @@ export const MainBlock: React.FC<{
         />
 
         <div className={meta}>
-            <div className={byline(articleData.pillar)}>
-                {articleData.author.byline}
-            </div>
+            <Byline
+                byline={articleData.author.byline}
+                tags={articleData.tags}
+                pillar={articleData.pillar}
+            />
 
             {articleData.author.twitterHandle && (
                 <a
