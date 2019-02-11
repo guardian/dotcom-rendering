@@ -81,8 +81,11 @@ export const Elements: React.FC<{
         }
     });
 
-    // insert advert placeholder text
     const slotIndexes = findAdSlots(elements);
+    const commercialConfig = {
+        useKrux: switches.krux,
+        usePrebid: switches['amp-prebid'],
+    };
     const elementsWithAdverts = output.map((element, i) => (
         <>
             {element}
@@ -91,7 +94,7 @@ export const Elements: React.FC<{
                     edition={edition}
                     section={section}
                     contentType={contentType}
-                    switches={switches}
+                    config={commercialConfig}
                     commercialProperties={commercialProperties}
                 />
             ) : null}
