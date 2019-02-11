@@ -20,7 +20,6 @@ export const Elements: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
     edition: Edition;
-    dfpAccountId: string;
     section: string;
     contentType: string;
     switches: Switches;
@@ -29,7 +28,6 @@ export const Elements: React.FC<{
     elements,
     pillar,
     edition,
-    dfpAccountId,
     section,
     contentType,
     switches,
@@ -91,7 +89,6 @@ export const Elements: React.FC<{
             {slotIndexes.includes(i) ? (
                 <AdComponent
                     edition={edition}
-                    dfpAccountId={dfpAccountId}
                     section={section}
                     contentType={contentType}
                     switches={switches}
