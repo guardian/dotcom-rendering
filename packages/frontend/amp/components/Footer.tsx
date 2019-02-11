@@ -9,7 +9,7 @@ import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/Read
 const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[86]};
-    ${textSans(3)};
+    ${textSans(5)};
     margin-top: 20px;
 `;
 
