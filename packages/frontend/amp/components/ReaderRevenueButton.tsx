@@ -54,8 +54,8 @@ const rightAlignedIcon = css`
 export const ReaderRevenueButton: React.SFC<{
     nav: NavType;
     linkLabel: string;
-    rrLink: ReaderRevenueLinkNames;
-    rrCategory: ReaderRevenueCategoryNames;
+    rrLink: ReaderRevenuePosition;
+    rrCategory: ReaderRevenueCategory;
     rightAlignIcon?: boolean;
 }> = ({ nav, linkLabel, rrLink, rrCategory, rightAlignIcon }) => {
     const url = nav.readerRevenueLinks[rrLink][rrCategory];

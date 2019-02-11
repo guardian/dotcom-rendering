@@ -61,8 +61,8 @@ interface ReaderRevenueCategories {
     support: string;
 }
 
-type ReaderRevenueCategoryNames = 'contribute' | 'subscribe' | 'support';
-interface ReaderRevenueLinks {
+type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
+interface ReaderRevenuePositions {
     header: ReaderRevenueCategories;
     footer: ReaderRevenueCategories;
     sideMenu: ReaderRevenueCategories;
@@ -86,7 +86,7 @@ interface NavType {
         parent?: LinkType;
         links: LinkType[];
     };
-    readerRevenueLinks: ReaderRevenueLinks;
+    readerRevenueLinks: ReaderRevenuePositions;
 }
 
 interface AuthorType {
