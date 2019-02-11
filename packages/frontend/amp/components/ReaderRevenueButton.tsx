@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/pasteup/typography';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
@@ -64,17 +64,21 @@ export const ReaderRevenueButton: React.SFC<{
         return null;
     }
 
+    const isAmpHeader = rrLink === 'ampHeader';
+
     return (
         <div
-            className={
-                rrLink === 'ampHeader'
-                    ? supportHeaderStyles
-                    : supportFooterStyles
-            }
+            className={cx([
+                isAmpHeader ? supportHeaderStyles : supportFooterStyles,
+            ])}
         >
             <a className={supportLinkStyles} href={url}>
                 {linkLabel}
-                <span className={rightAlignIcon ? rightAlignedIcon : ''}>
+                <span
+                    className={cx({
+                        [rightAlignedIcon]: !!rightAlignIcon,
+                    })}
+                >
                     <ArrowRight />
                 </span>
             </a>
