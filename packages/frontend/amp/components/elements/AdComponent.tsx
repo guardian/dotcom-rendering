@@ -43,16 +43,14 @@ const dfpAdUnitRoot = 'theguardian.com';
 
 // const editionToAdRegion(edition: Edition): AdRegion
 
-const ampData = (
-    section: string,
-    dfpAccountId: string,
-    contentType: string,
-): string => {
-    const dfpAccountId2 = '59666047';
+const ampData = (section: string, contentType: string): string => {
+    const dfpAccountId = '59666047';
+
     if (section !== '') {
-        return `/${dfpAccountId2}/${dfpAdUnitRoot}/${section}/${contentType.toLowerCase()}/amp`;
+        return `/${dfpAccountId}/${dfpAdUnitRoot}/${section}/${contentType.toLowerCase()}/amp`;
     }
-    return `/${dfpAccountId2}/${dfpAdUnitRoot}/amp`;
+
+    return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
 const getPlacementId = (edition: Edition): number => {
@@ -95,18 +93,10 @@ const realTimeConfig = (
 export const AdComponent: React.SFC<{
     edition: Edition;
     section: string;
-    dfpAccountId: string;
     contentType: string;
     switches: Switches;
     commercialProperties: CommercialProperties;
-}> = ({
-    edition,
-    section,
-    dfpAccountId,
-    contentType,
-    switches,
-    commercialProperties,
-}) => (
+}> = ({ edition, section, contentType, switches, commercialProperties }) => (
     <div className={adStyle}>
         <amp-ad
             width={300}
@@ -117,7 +107,7 @@ export const AdComponent: React.SFC<{
             layout={'responsive'}
             type={'doubleclick'}
             json={adJson(edition, commercialProperties.editionAdTargeting)}
-            data-slot={ampData(section, dfpAccountId, contentType)}
+            data-slot={ampData(section, contentType)}
             rtc-config={realTimeConfig('test', edition, false, switches)}
         />
     </div>

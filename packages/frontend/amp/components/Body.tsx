@@ -23,7 +23,6 @@ export const Body: React.FC<{
             // stuff for ads
             edition={data.editionId}
             section={data.sectionName}
-            dfpAccountId={config.dfpAccountId}
             contentType={data.contentType}
             switches={config.switches}
             commercialProperties={data.commercialProperties}
