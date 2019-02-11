@@ -154,6 +154,24 @@ const twitterIcon = css`
     width: 12px;
 `;
 
+const Headline: React.FC<{
+    headlineText: string;
+    standfirst: string;
+    pillar: Pillar;
+}> = ({ headlineText, standfirst, pillar }) => {
+    return (
+        <div className={headlineCss}>
+            <h1 className={cx(headerStyle)}>{headlineText}</h1>
+            <div // tslint:disable-line:react-no-dangerous-html
+                className={cx(standfirstCss[pillar], standfirstLinks[pillar])}
+                dangerouslySetInnerHTML={{
+                    __html: standfirst,
+                }}
+            />
+        </div>
+    );
+};
+
 export const MainBlock: React.FC<{
     config: ConfigType;
     articleData: ArticleModel;
@@ -162,23 +180,18 @@ export const MainBlock: React.FC<{
         {articleData.mainMediaElements.map((element, i) => (
             <MainMedia key={i} element={element} />
         ))}
-        <div className={headlineCss}>
-            <h1 className={cx(headerStyle)}>{articleData.headline}</h1>
-            <div // tslint:disable-line:react-no-dangerous-html
-                className={cx(
-                    standfirstCss[articleData.pillar],
-                    standfirstLinks[articleData.pillar],
-                )}
-                dangerouslySetInnerHTML={{
-                    __html: articleData.standfirst,
-                }}
-            />
-        </div>
+
+        <Headline
+            headlineText={articleData.headline}
+            standfirst={articleData.standfirst}
+            pillar={articleData.pillar}
+        />
+
         <div className={meta}>
             <div className={byline(articleData.pillar)}>
                 {articleData.author.byline}
             </div>
-            <div />
+
             {articleData.author.twitterHandle && (
                 <a
                     className={bylineExtras}
@@ -190,9 +203,11 @@ export const MainBlock: React.FC<{
                     {articleData.author.twitterHandle}
                 </a>
             )}
+
             <div className={bylineExtras}>
                 {articleData.webPublicationDateDisplay}
             </div>
+
             <div className={metaExtras}>
                 <ShareIcons
                     sharingUrls={articleData.sharingUrls}
