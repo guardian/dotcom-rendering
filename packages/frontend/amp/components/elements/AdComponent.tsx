@@ -61,38 +61,51 @@ const getPlacementId = (edition: Edition): number => {
 };
 
 const realTimeConfig = (
-    preBidServerUrl: string,
     edition: Edition,
-    debug: boolean,
-    switches: { [key: string]: boolean },
+    useKrux: boolean,
+    usePrebid: boolean,
 ): any => {
-    const kruxUrl =
+    const placementID = getPlacementId(edition);
+    const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
+    const kruxURL =
         'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
 
-    const prebidBaseUrl = `${preBidServerUrl}/openrtb2/amp?tag_id=${getPlacementId(
-        edition,
-    )}&w=ATTR(width)&h=ATTR(height)
-            &ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)
-            &slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF}`;
-    const ampPrebidUrl = debug ? `${prebidBaseUrl}&debug=1` : prebidBaseUrl;
+    const prebidURL = [
+        `${preBidServerPrefix}?tag_id=${placementID}`,
+        'w=ATTR(width)',
+        'h=ATTR(height)',
+        'ow=ATTR(data-override-width)',
+        'oh=ATTR(data-override-height)',
+        'ms=ATTR(data-multi-size)',
+        'slot=ATTR(data-slot)',
+        'targeting=TGT',
+        'curl=CANONICAL_URL',
+        'timeout=TIMEOUT',
+        'adcid=ADCID',
+        'purl=HREF',
+    ].join('&');
 
-    const lol = {
-        urls: [
-            switches.krux ? kruxUrl : '',
-            switches['amp-prebid'] ? ampPrebidUrl : '',
-        ].filter(url => url),
+    const data = {
+        urls: [useKrux ? kruxURL : '', usePrebid ? prebidURL : ''].filter(
+            url => url,
+        ),
     };
 
-    return JSON.stringify(lol);
+    return JSON.stringify(data);
 };
+
+interface CommercialConfig {
+    useKrux: boolean;
+    usePrebid: boolean;
+}
 
 export const AdComponent: React.SFC<{
     edition: Edition;
     section: string;
     contentType: string;
-    switches: Switches;
+    config: CommercialConfig;
     commercialProperties: CommercialProperties;
-}> = ({ edition, section, contentType, switches, commercialProperties }) => (
+}> = ({ edition, section, contentType, config, commercialProperties }) => (
     <div className={adStyle}>
         <amp-ad
             width={300}
@@ -103,7 +116,11 @@ export const AdComponent: React.SFC<{
             type={'doubleclick'}
             json={adJson(edition, commercialProperties.editionAdTargeting)}
             data-slot={ampData(section, contentType)}
-            rtc-config={realTimeConfig('test', edition, false, switches)}
+            rtc-config={realTimeConfig(
+                edition,
+                config.useKrux,
+                config.usePrebid,
+            )}
         />
     </div>
 );
