@@ -73,4 +73,18 @@ describe('ampadslots', () => {
 
         expect(p.value).toBe('amp');
     });
+
+    it('should set values to a comma-separated string', () => {
+        const edition = 'UK';
+        const targetings: EditionAdTargeting = {
+            paramSet,
+            edition: 'UK',
+        };
+        const res = adJson(edition, [targetings]);
+        const p = res.targeting.find(param => param.name === 'su');
+        if (p === undefined) {
+            return fail();
+        }
+        expect(p.value).toBe('4,5,1,2,3');
+    });
 });
