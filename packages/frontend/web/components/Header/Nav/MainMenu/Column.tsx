@@ -192,7 +192,7 @@ const columnStyle = css`
 `;
 
 export const ReaderRevenueLinks: React.FC<{
-    readerRevenueLinks: ReaderRevenueLinks;
+    readerRevenueLinks: ReaderRevenuePositions;
 }> = ({ readerRevenueLinks }) => {
     const links: LinkType[] = [
         {
