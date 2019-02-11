@@ -109,7 +109,7 @@ const shareIcons = css`
     padding-bottom: 30px;
 `;
 
-export const Submeta: React.FC<{
+export const SubMeta: React.FC<{
     pillar: Pillar;
     sections: SimpleLinkType[];
     keywords: SimpleLinkType[];
