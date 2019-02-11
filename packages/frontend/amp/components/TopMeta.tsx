@@ -205,7 +205,7 @@ const Byline: React.FC<{
     return <div className={bylineStyle(pillar)}>{linkedByline}</div>;
 };
 
-export const MainBlock: React.FC<{
+export const TopMeta: React.FC<{
     config: ConfigType;
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (

@@ -3,8 +3,8 @@ import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/lib/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { MainBlock } from '@frontend/amp/components/MainBlock';
-import { Submeta } from '@frontend/amp/components/Submeta';
+import { TopMeta } from '@frontend/amp/components/TopMeta';
+import { SubMeta } from '@frontend/amp/components/SubMeta';
 
 const body = css`
     background-color: white;
@@ -16,9 +16,9 @@ export const Body: React.FC<{
     config: ConfigType;
 }> = ({ pillar, data, config }) => (
     <InnerContainer className={body}>
-        <MainBlock config={config} articleData={data} />
+        <TopMeta config={config} articleData={data} />
         <Elements pillar={pillar} elements={data.elements} />
-        <Submeta
+        <SubMeta
             sections={data.subMetaSectionLinks}
             keywords={data.subMetaKeywordLinks}
             pillar={pillar}
