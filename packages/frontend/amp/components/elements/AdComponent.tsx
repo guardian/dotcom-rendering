@@ -39,10 +39,6 @@ const adStyle = css`
 
 const dfpAdUnitRoot = 'theguardian.com';
 
-// type AdRegion =  'US' | 'ROW' | 'AU';
-
-// const editionToAdRegion(edition: Edition): AdRegion
-
 const ampData = (section: string, contentType: string): string => {
     const dfpAccountId = '59666047';
 
@@ -103,7 +99,6 @@ export const AdComponent: React.SFC<{
             height={250}
             data-npa-on-unknown-consent={true}
             data-loading-strategy={'prefer-viewability-over-views'}
-            // data-slot={AmpAdDataSlot(article).toString()}
             layout={'responsive'}
             type={'doubleclick'}
             json={adJson(edition, commercialProperties.editionAdTargeting)}
