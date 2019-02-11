@@ -26,7 +26,7 @@ const buildRRLinkCategories = (
     contribute: getString(data, `${rrLinkConfig}.${position}.contribute`, ''),
 });
 
-const buildRRLinkModel = (data: {}): ReaderRevenueLinks => ({
+const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
     header: buildRRLinkCategories(data, 'header'),
     footer: buildRRLinkCategories(data, 'footer'),
     sideMenu: buildRRLinkCategories(data, 'sideMenu'),
