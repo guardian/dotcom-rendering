@@ -121,12 +121,21 @@ export const SubMeta: React.FC<{
     };
     pageID: string;
     isCommentable: boolean;
-}> = ({ pillar, sections, keywords, sharingURLs, pageID, isCommentable }) => {
+    guardianBaseURL: string;
+}> = ({
+    pillar,
+    sections,
+    keywords,
+    sharingURLs,
+    pageID,
+    isCommentable,
+    guardianBaseURL,
+}) => {
     const sectionListItems = sections.map(link => (
         <li className={itemStyle} key={link.url}>
             <a
                 className={sectionLinkStyle(pillar)}
-                href={`https://www.theguardian.com/${link.url}`}
+                href={`${guardianBaseURL}/${link.url}`}
             >
                 {link.title}
             </a>
@@ -137,7 +146,7 @@ export const SubMeta: React.FC<{
         <li className={itemStyle} key={link.url}>
             <a
                 className={linkStyle(pillar)}
-                href={`https://www.theguardian.com/${link.url}`}
+                href={`${guardianBaseURL}/${link.url}`}
             >
                 {link.title}
             </a>

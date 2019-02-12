@@ -34,6 +34,7 @@ export const Body: React.FC<{
             sharingURLs={data.sharingUrls}
             pageID={data.pageId}
             isCommentable={data.isCommentable}
+            guardianBaseURL={data.guardianBaseURL}
         />
     </InnerContainer>
 );
