@@ -143,7 +143,10 @@ const pillarLinks = (pillars: PillarType[], activePillar: Pillar) => (
         <ul className={pillarListStyles}>
             {pillars.map((p, i) => (
                 <li className={pillarListItemStyle} key={p.title}>
-                    <a className={pillarLinkStyle(p.pillar)} href={p.url}>
+                    <a
+                        className={pillarLinkStyle(p.pillar)}
+                        href={`https://www.theguardian.com/${p.url}`}
+                    >
                         {p.title}
                     </a>
                 </li>
