@@ -184,7 +184,8 @@ const Byline: React.FC<{
     byline: string;
     tags: TagType[];
     pillar: Pillar;
-}> = ({ byline, tags, pillar }) => {
+    guardianBaseURL: string;
+}> = ({ byline, tags, pillar, guardianBaseURL }) => {
     const contributorTags = tags.filter(tag => tag.type === 'Contributor');
     const tokens = bylineTokens(byline, contributorTags);
 
@@ -193,7 +194,7 @@ const Byline: React.FC<{
 
         if (matchedTag) {
             return (
-                <a href={`https://www.theguardian.com/${matchedTag.id}`}>
+                <a href={`${guardianBaseURL}/${matchedTag.id}`}>
                     {matchedTag.title}
                 </a>
             );
@@ -225,6 +226,7 @@ export const TopMeta: React.FC<{
                 byline={articleData.author.byline}
                 tags={articleData.tags}
                 pillar={articleData.pillar}
+                guardianBaseURL={articleData.guardianBaseURL}
             />
 
             {articleData.author.twitterHandle && (
