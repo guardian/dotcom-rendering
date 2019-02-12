@@ -29,7 +29,7 @@ export const htmlTemplate = ({
     fontFiles?: string[];
 }) => {
     const favicon =
-        process.env.NODE_ENV === 'prod'
+        process.env.NODE_ENV === 'production'
             ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
 
