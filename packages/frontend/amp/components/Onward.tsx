@@ -88,6 +88,8 @@ export const Onward: React.FC<{
     seriesTags,
     guardianBaseURL,
 }) => {
+    const ampBaseURL = 'https://amp.theguardian.com';
+
     const container = (path: string) => (
         <OnwardContainer
             key={path}
@@ -97,29 +99,29 @@ export const Onward: React.FC<{
     );
 
     const storyPackage = hasStoryPackage
-        ? [container(`${guardianBaseURL}/story-package-mf2/${pageID}.json`)]
+        ? [container(`${ampBaseURL}/story-package-mf2/${pageID}.json`)]
         : [];
 
     const series = seriesTags.map(tag =>
-        container(`${guardianBaseURL}/series-mf2/${tag.id}.json`),
+        container(`${ampBaseURL}/series-mf2/${tag.id}.json`),
     );
 
     const related =
         hasRelated && series.length < 1
-            ? [container(`${guardianBaseURL}/related-mf2/${pageID}.json`)]
+            ? [container(`${ampBaseURL}/related-mf2/${pageID}.json`)]
             : [];
 
-    const mostRead = container(`${guardianBaseURL}/most-read-mf2.json`);
+    const mostRead = container(`${ampBaseURL}/most-read-mf2.json`);
 
     const hasSectionMostViewed = sectionID && sectionHasMostViewed(sectionID);
     const sectionMostViewed = hasSectionMostViewed
         ? container(
-              `${guardianBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
+              `${ampBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
           )
-        : container(`${guardianBaseURL}/container/count/1/offset/0/mf2.json`);
+        : container(`${ampBaseURL}/container/count/1/offset/0/mf2.json`);
 
     const headlines = container(
-        `${guardianBaseURL}/container/count/3/offset/${
+        `${ampBaseURL}/container/count/3/offset/${
             hasSectionMostViewed ? 0 : 1 // TODO not entirely sure why this is needed
         }/mf2.json`,
     );
