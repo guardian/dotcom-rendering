@@ -11,6 +11,7 @@ import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 import Star from '@guardian/pasteup/icons/star.svg';
 import { Byline } from '@frontend/amp/components/Byline';
+import { string as curly } from 'curlyquotes';
 
 const meta = css`
     @supports (display: grid) {
@@ -40,24 +41,8 @@ const header = css`
     margin: 0 -10px;
 `;
 
+// TODO - unclear if we need the list styles as well here
 const listStyles = (pillar: Pillar) => css`
-    .bullet {
-        color: transparent;
-        font-size: 1px;
-    }
-
-    .bullet:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 2px;
-        background-color: ${pillarPalette[pillar].main};
-        margin-left: 0px;
-    }
-
-    // TODO - unclear if we need the list styles as well here
     li {
         margin-bottom: 6px;
         padding-left: 20px;
@@ -186,7 +171,7 @@ const Headline: React.FC<{
 
     return (
         <div className={headlineCss}>
-            <h1 className={cx(headerStyle)}>{headlineText}</h1>
+            <h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
 
             {starRating !== undefined && (
                 <div className={ratingsWrapper}>{stars(starRating)}</div>

@@ -234,16 +234,14 @@ describe('extract-capi', () => {
     });
 
     it('returns standfirst if standfirst available', () => {
-        const testStandfirst = '<p>• Waldo Jeffers had reached his limit.</p>';
+        const testStandfirst = '<p>Waldo Jeffers had reached his limit.</p>';
 
         testData.contentFields.fields.standfirst = testStandfirst;
 
         const { standfirst } = extract(testData);
 
         expect(clean).toHaveBeenCalledWith(testStandfirst);
-        expect(standfirst).toBe(
-            '<p><span class="bullet">&bull;</span> Waldo Jeffers had reached his limit.</p>',
-        );
+        expect(standfirst).toBe('<p>Waldo Jeffers had reached his limit.</p>');
     });
 
     it('returns standfirst as empty string if standfirst not available', () => {

@@ -5,9 +5,30 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
+import { pillarPalette } from '../../lib/pillars';
 
-const body = css`
+const body = (pillar: Pillar) => css`
     background-color: white;
+
+    ${bulletStyle(pillar)}
+`;
+
+const bulletStyle = (pillar: Pillar) => css`
+    .bullet {
+        color: transparent;
+        font-size: 1px;
+    }
+
+    .bullet:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 2px;
+        background-color: ${pillarPalette[pillar].main};
+        margin-left: 0px;
+    }
 `;
 
 export const Body: React.FC<{
@@ -15,7 +36,7 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => (
-    <InnerContainer className={body}>
+    <InnerContainer className={body(pillar)}>
         <TopMeta config={config} articleData={data} />
         <Elements
             pillar={pillar}
