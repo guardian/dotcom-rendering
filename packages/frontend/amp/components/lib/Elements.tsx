@@ -12,6 +12,7 @@ import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { AdComponent } from '@frontend/amp/components/elements/AdComponent';
 import { css } from 'emotion';
 import { DisclaimerBlockComponent } from '@frontend/amp/components/elements/DisclaimerBlockComponent';
+import { clean } from '@frontend/model/clean';
 
 const clear = css`
     clear: both;
@@ -34,7 +35,10 @@ export const Elements: React.FC<{
     switches,
     commercialProperties,
 }) => {
-    const output = elements.map((element, i) => {
+    const cleanedElements = elements.map(element =>
+        'html' in element ? { ...element, html: clean(element.html) } : element,
+    );
+    const output = cleanedElements.map((element, i) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.TextBlockElement':
                 return (

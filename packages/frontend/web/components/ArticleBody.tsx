@@ -23,6 +23,8 @@ import { Dateline } from './Dateline';
 
 import { MainMedia } from './MainMedia';
 
+const curly = (x: any) => x;
+
 const wrapper = css`
     padding-top: 6px;
     margin-right: 0;
@@ -509,7 +511,7 @@ export const ArticleBody: React.FC<{
                     )}
                 </div>
                 <div className={headlineCSS}>
-                    <h1 className={headerStyle}>{CAPI.headline}</h1>
+                    <h1 className={headerStyle}>{curly(CAPI.headline)}</h1>
                     <div
                         className={cx(standfirst, standfirstLinks[CAPI.pillar])}
                         dangerouslySetInnerHTML={{

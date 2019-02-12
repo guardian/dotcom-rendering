@@ -39,6 +39,6 @@
     },
     "rulesDirectory": [],
     "linterOptions": {
-        "exclude": ["packages/*/dist/**/*.js"]
+        "exclude": ["packages/*/dist/**/*.js","coverage/*"]
     }
 }
