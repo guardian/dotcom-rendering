@@ -219,8 +219,8 @@ Resources:
         Ref: Subnets
       LaunchConfigurationName:
         Ref: LaunchConfig
-      MinSize: 1
-      MaxSize: 2
+      MinSize: 3
+      MaxSize: 12
       HealthCheckType: ELB
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
