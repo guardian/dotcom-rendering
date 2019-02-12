@@ -70,6 +70,7 @@ export const Article: React.FC<{
                     nav={nav}
                     activePillar={articleData.pillar}
                     config={config}
+                    guardianBaseURL={articleData.guardianBaseURL}
                 />
                 <Body
                     pillar={articleData.pillar}
@@ -84,7 +85,7 @@ export const Article: React.FC<{
                     hasRelated={articleData.hasRelated}
                     hasStoryPackage={articleData.hasStoryPackage}
                     seriesTags={tagsOfType(articleData.tags, 'Series')}
-                    guardianBaseURL={'https://amp.theguardian.com'}
+                    guardianBaseURL={articleData.guardianBaseURL}
                 />
                 <Footer nav={nav} />
             </Container>

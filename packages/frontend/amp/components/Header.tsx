@@ -138,14 +138,14 @@ const navRow = css`
     border-top: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
-const pillarLinks = (pillars: PillarType[], activePillar: Pillar) => (
+const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
     <nav>
         <ul className={pillarListStyles}>
             {pillars.map((p, i) => (
                 <li className={pillarListItemStyle} key={p.title}>
                     <a
                         className={pillarLinkStyle(p.pillar)}
-                        href={`https://www.theguardian.com/${p.url}`}
+                        href={`${guardianBaseURL}/${p.url}`}
                     >
                         {p.title}
                     </a>
@@ -159,7 +159,8 @@ export const Header: React.FC<{
     nav: NavType;
     activePillar: Pillar;
     config: ConfigType;
-}> = ({ nav, activePillar, config }) => (
+    guardianBaseURL: string;
+}> = ({ nav, activePillar, config, guardianBaseURL }) => (
     <header className={headerStyles}>
         <div className={row}>
             <ReaderRevenueButton
@@ -184,7 +185,7 @@ export const Header: React.FC<{
         </div>
 
         <div className={cx(row, navRow)}>
-            {pillarLinks(nav.pillars, activePillar)}
+            {pillarLinks(nav.pillars, guardianBaseURL)}
 
             {/* Note, the actual sidebar lives directly in the body as AMP requires this :( */}
             <button className={veggieStyles} on="tap:sidebar1.toggle">
