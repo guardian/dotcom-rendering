@@ -10,12 +10,12 @@ const style = (pillar: Pillar) => css`
         font-weight: 700;
     }
     h2 {
-        margin-top: 24px;
-        ${textSans(6)};
+        ${body(3)};
+        font-weight: 600;
     }
     p {
         padding: 0 0 12px;
-        ${body(2)};
+        ${body(1)};
         font-weight: 300;
         word-wrap: break-word;
         color: ${palette.neutral[7]};
