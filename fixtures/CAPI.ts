@@ -399,4 +399,5 @@ export const CAPI: CAPIType = {
     commercialProperties: {
         editionAdTargeting: [],
     },
+    starRating: 2,
 };

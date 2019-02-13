@@ -10,6 +10,7 @@ import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 import { bylineTokens } from '@frontend/amp/lib/byline-tokens';
+import Star from '@guardian/pasteup/icons/star.svg';
 
 const bylineStyle = (pillar: Pillar) => css`
     ${headline(2)};
@@ -162,14 +163,39 @@ const twitterIcon = css`
     width: 12px;
 `;
 
+const ratingsWrapper = css`
+    background-color: ${palette.highlight.main};
+    display: inline-block;
+    padding: 6px 10px 0;
+    margin: 0 0 6px -10px;
+    line-height: 24px;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+`;
+
 const Headline: React.FC<{
     headlineText: string;
     standfirst: string;
     pillar: Pillar;
-}> = ({ headlineText, standfirst, pillar }) => {
+    starRating?: number;
+}> = ({ headlineText, standfirst, pillar, starRating }) => {
+    const stars = (n: number) => {
+        return Array(n)
+            .fill(0)
+            .map(i => <Star key={i} />);
+    };
+
     return (
         <div className={headlineCss}>
             <h1 className={cx(headerStyle)}>{headlineText}</h1>
+
+            {starRating && starRating > 0 && (
+                <div className={ratingsWrapper}>{stars(starRating)}</div>
+            )}
+
             <div // tslint:disable-line:react-no-dangerous-html
                 className={cx(standfirstCss[pillar], standfirstLinks[pillar])}
                 dangerouslySetInnerHTML={{
@@ -219,6 +245,7 @@ export const TopMeta: React.FC<{
             headlineText={articleData.headline}
             standfirst={articleData.standfirst}
             pillar={articleData.pillar}
+            starRating={articleData.starRating}
         />
 
         <div className={meta}>
