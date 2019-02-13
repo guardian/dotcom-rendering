@@ -11,6 +11,7 @@ import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBloc
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { AdComponent } from '@frontend/amp/components/elements/AdComponent';
 import { css } from 'emotion';
+import { DisclaimerBlockComponent } from '@frontend/amp/components/elements/DisclaimerBlockComponent';
 
 const clear = css`
     clear: both;
@@ -69,6 +70,14 @@ export const Elements: React.FC<{
                 return <SoundcloudBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                 return <EmbedBlockComponent key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
+                return (
+                    <DisclaimerBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                    />
+                );
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
@@ -86,6 +95,7 @@ export const Elements: React.FC<{
         useKrux: switches.krux,
         usePrebid: switches['amp-prebid'],
     };
+
     const elementsWithAdverts = output.map((element, i) => (
         <>
             {element}

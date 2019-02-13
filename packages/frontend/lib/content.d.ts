@@ -7,6 +7,7 @@ type Weighting =
     | 'showcase'
     | 'halfwidth'
     | 'immersive';
+
 interface TextBlockElement {
     _type: 'model.dotcomrendering.pageElements.TextBlockElement';
     html: string;
@@ -92,6 +93,11 @@ interface EmbedBlockElement {
     isMandatory: boolean;
 }
 
+interface DisclaimerBlockElement {
+    _type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement';
+    html: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | ImageBlockElement
@@ -100,4 +106,5 @@ type CAPIElement =
     | RichLinkBlockElement
     | CommentBlockElement
     | SoundcloudBlockElement
-    | EmbedBlockElement;
+    | EmbedBlockElement
+    | DisclaimerBlockElement;
