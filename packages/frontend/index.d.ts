@@ -134,6 +134,7 @@ interface CAPIType {
     beaconURL: string;
     isCommentable: boolean;
     commercialProperties: CommercialProperties;
+    starRating?: number;
 }
 
 interface TagType {

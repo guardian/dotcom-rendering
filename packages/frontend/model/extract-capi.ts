@@ -224,5 +224,6 @@ export const extract = (data: {}): CAPIType => {
         beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
         isCommentable: getBoolean(data, 'config.page.isCommentable', false),
         commercialProperties: getCommercialProperties(data),
+        starRating: getNumber(data, 'config.page.starRating', -1),
     };
 };
