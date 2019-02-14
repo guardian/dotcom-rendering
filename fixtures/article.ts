@@ -1858,6 +1858,7 @@ export const data = {
                 ],
             },
         },
+        commercialURL: 'xxx',
     },
     contentFields: {
         fields: {

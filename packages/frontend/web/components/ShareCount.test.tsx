@@ -25,6 +25,7 @@ describe('ShareCount', () => {
         sentryPublicApiKey: '',
         isDev: false,
         switches: {},
+        commercialURL: '',
     };
 
     afterEach(() => {
