@@ -23,7 +23,7 @@ export const TweetBlockComponent: React.FC<{
             data-tweetid={element.id}
         >
             {fallbackHTML && (
-                <div fallback={'true'}>
+                <div fallback={''}>
                     <blockquote
                         dangerouslySetInnerHTML={{ __html: fallbackHTML }}
                     />
