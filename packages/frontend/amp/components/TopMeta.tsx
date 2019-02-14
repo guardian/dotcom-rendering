@@ -162,6 +162,11 @@ const ratingsWrapper = css`
     }
 `;
 
+const emptyStar = css`
+    fill: transparent;
+    stroke: ${palette.neutral[7]};
+`;
+
 const Headline: React.FC<{
     headlineText: string;
     standfirst: string;
@@ -169,16 +174,21 @@ const Headline: React.FC<{
     starRating?: number;
 }> = ({ headlineText, standfirst, pillar, starRating }) => {
     const stars = (n: number) => {
-        return Array(n)
+        return Array(5)
             .fill(0)
-            .map(i => <Star key={i} />);
+            .map((el, i) => {
+                if (i < n) {
+                    return <Star key={i} />;
+                }
+                return <Star className={emptyStar} key={i} />;
+            });
     };
 
     return (
         <div className={headlineCss}>
             <h1 className={cx(headerStyle)}>{headlineText}</h1>
 
-            {starRating && starRating > 0 && (
+            {starRating !== undefined && (
                 <div className={ratingsWrapper}>{stars(starRating)}</div>
             )}
 
