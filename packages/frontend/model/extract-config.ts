@@ -6,4 +6,5 @@ export const extract = (data: {}): ConfigType => ({
     sentryHost: getString(data, 'config.page.sentryHost', ''),
     isDev: process.env.NODE_ENV === 'development',
     switches: getObject(data, 'config.page.switches', {}),
+    commercialURL: getNonEmptyString(data, 'config.commercialURL'),
 });

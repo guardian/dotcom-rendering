@@ -29,6 +29,7 @@ interface RenderToStringResult {
 export default ({ data }: Props) => {
     // const { page, site, CAPI, NAV, config } = data;
     const { CAPI, NAV, config } = data;
+    const { commercialURL } = config;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
@@ -70,7 +71,7 @@ export default ({ data }: Props) => {
         'https://assets.guim.co.uk/polyfill.io/v2/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
     const priorityScripts = [
         polyfillIO,
-        'http://localhost:9000/assets/javascripts/graun.standard.js',
+        commercialURL,
         // vendorJS,
         // bundleJS
     ];

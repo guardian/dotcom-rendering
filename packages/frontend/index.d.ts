@@ -130,6 +130,7 @@ interface ConfigType {
     sentryHost: string;
     isDev: boolean;
     switches: { [key: string]: boolean };
+    commercialURL: string;
 }
 
 // 3rd party type declarations
