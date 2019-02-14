@@ -145,7 +145,7 @@ const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
                 <li className={pillarListItemStyle} key={p.title}>
                     <a
                         className={pillarLinkStyle(p.pillar)}
-                        href={`${guardianBaseURL}/${p.url}`}
+                        href={`${guardianBaseURL}${p.url}`}
                     >
                         {p.title}
                     </a>
@@ -172,7 +172,7 @@ export const Header: React.FC<{
 
             {config.switches.subscribeWithGoogle && <AmpSubscriptionGoogle />}
 
-            <a className={logoStyles} href="/">
+            <a className={logoStyles} href={guardianBaseURL}>
                 <span
                     className={css`
                         ${screenReaderOnly};
