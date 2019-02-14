@@ -41,6 +41,14 @@ export const getNumber = (
     );
 };
 
+export const optional = <T extends {}>(f: () => T): T | undefined => {
+    try {
+        return f();
+    } catch (e) {
+        return undefined;
+    }
+};
+
 export const getNonEmptyString = (obj: object, selector: string): string => {
     const found = get(obj, selector);
     if (typeof found === 'string' && found.length > 0) {
