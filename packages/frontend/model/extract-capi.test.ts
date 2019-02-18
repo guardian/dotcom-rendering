@@ -180,7 +180,7 @@ describe('extract-capi', () => {
     });
 
     it('returns isImmersive as true if immersive', () => {
-        testData.config.page.isImmersive = true;
+        testData.config.isImmersive = true;
 
         const { isImmersive } = extract(testData);
 
