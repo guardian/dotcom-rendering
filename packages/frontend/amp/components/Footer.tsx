@@ -181,7 +181,7 @@ export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => (
                 </span>
             </a>
             <div className={copyright}>
-                © {year} Guardian News and Media Limited or its affiliated
+                © {year} Guardian News & Media Limited or its affiliated
                 companies. All rights reserved.
             </div>
         </InnerContainer>
