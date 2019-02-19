@@ -105,10 +105,15 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
     );
 };
 
-export const MainMedia: React.FC<{
-    element: CAPIElement;
-    pillar: Pillar;
-}> = ({ element, pillar }) => {
+// used to break out of the inner container margin
+const expanded = css`
+    margin: 0 -10px;
+`;
+
+const asComponent = (
+    element: CAPIElement,
+    pillar: Pillar,
+): JSX.Element | null => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return mainImage(element);
@@ -117,4 +122,11 @@ export const MainMedia: React.FC<{
         default:
             return null;
     }
+};
+
+export const MainMedia: React.FC<{
+    element: CAPIElement;
+    pillar: Pillar;
+}> = ({ element, pillar }) => {
+    return <div className={expanded}>{asComponent(element, pillar)}</div>;
 };

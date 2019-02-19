@@ -1,31 +1,37 @@
 import React from 'react';
 import { bylineTokens } from '@frontend/amp/lib/byline-tokens';
 import { css } from 'emotion';
-import { headline } from '@guardian/pasteup/typography';
-import { pillarPalette } from '@frontend/lib/pillars';
 
-const bylineStyle = (pillar: Pillar) => css`
-    ${headline(2)};
-    color: ${pillarPalette[pillar].main};
-    padding-bottom: 8px;
-    font-style: italic;
+const profileImageStyle = css``;
 
-    a {
-        font-weight: 700;
-        color: ${pillarPalette[pillar].main};
-        text-decoration: none;
-        font-style: normal;
+const profileImage = (contributorTag: TagType) => {
+    const url = contributorTag.bylineImageUrl;
+
+    if (url) {
+        return (
+            <amp-img
+                className={profileImageStyle}
+                src={url}
+                alt={contributorTag.title}
+                width="180"
+                height="150"
+            />
+        );
     }
-`;
+
+    return null;
+};
 
 export const Byline: React.FC<{
     byline: string;
     tags: TagType[];
     pillar: Pillar;
     guardianBaseURL: string;
-}> = ({ byline, tags, pillar, guardianBaseURL }) => {
+    className?: string;
+}> = ({ byline, tags, guardianBaseURL, className }) => {
     const contributorTags = tags.filter(tag => tag.type === 'Contributor');
     const tokens = bylineTokens(byline, contributorTags);
+    const mainContributor = contributorTags[0];
 
     const linkedByline = tokens.map(token => {
         const matchedTag = contributorTags.find(tag => tag.title === token);
@@ -41,5 +47,10 @@ export const Byline: React.FC<{
         return token;
     });
 
-    return <div className={bylineStyle(pillar)}>{linkedByline}</div>;
+    return (
+        <div className={className}>
+            {linkedByline}
+            {mainContributor && profileImage(mainContributor)}
+        </div>
+    );
 };

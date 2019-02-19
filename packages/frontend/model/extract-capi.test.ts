@@ -82,12 +82,14 @@ describe('extract-capi', () => {
 
         expect(tags.length).toBe(2);
         expect(tags[0]).toEqual({
+            bylineImageUrl: '',
             id: 'money/ticket-prices',
             type: 'Keyword',
             title: 'Ticket prices',
             twitterHandle: '',
         });
         expect(tags[1]).toEqual({
+            bylineImageUrl: '',
             id: 'money/consumer-affairs',
             type: 'Keyword',
             title: 'Consumer affairs',
