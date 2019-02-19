@@ -86,7 +86,10 @@ export const palette: AllPillarColours & OtherColours = {
         dark: '#65a897',
         main: '#69d1ca',
     },
-    green: { dark: '#236925', main: '#3db540' },
+    green: {
+        dark: '#185E36',
+        main: '#22874D',
+    },
     brand: {
         dark: '#041f4a',
         main: '#052962',
