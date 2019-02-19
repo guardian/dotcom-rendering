@@ -740,6 +740,9 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+"@guardian/pasteup@1.0.0-alpha.5":
+  version "1.0.0-alpha.5"
+
 "@kossnocorp/desvg@^0.1.1":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@kossnocorp/desvg/-/desvg-0.1.2.tgz#3d120b180d4dbb1f646603c3b9f2c89774c368dc"

@@ -7,7 +7,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@guardian/pasteup": "1.0.0-alpha.1",
+    "@guardian/pasteup": "1.0.0-alpha.5",
     "polished": "^1.9.2",
     "prop-types": "^15.6.1",
     "reset-css": "^3.0.0"

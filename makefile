@@ -139,6 +139,8 @@ pre-publish-pasteup:
 post-publish-pasteup:
 	$(call log, "clean up after publishing pasteup")
 	@mv packages/pasteup/tmp/*.ts packages/pasteup
+	@mv packages/pasteup/*.js packages/pasteup/tmp
+	@make clean-pasteup
 
 publish-pasteup: clear clean-pasteup install
 	$(call log, "publishing pasteup")
