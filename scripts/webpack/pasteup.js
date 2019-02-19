@@ -3,10 +3,10 @@ const path = require('path');
 module.exports = {
     mode: 'production',
     entry: {
-        breakpoints: './packages/pasteup/breakpoints.js',
-        fonts: './packages/pasteup/fonts.js',
-        mixins: './packages/pasteup/mixins.js',
-        palette: './packages/pasteup/palette.js',
+        breakpoints: './packages/pasteup/breakpoints.ts',
+        typography: './packages/pasteup/typography.ts',
+        mixins: './packages/pasteup/mixins.ts',
+        palette: './packages/pasteup/palette.ts',
     },
     output: {
         filename: '[name].js',
@@ -17,7 +17,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.ts$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
