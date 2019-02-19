@@ -1,6 +1,6 @@
 import React from 'react';
 import { extractCritical } from 'emotion-server';
-import { renderToString } from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { CacheProvider } from '@emotion/core';
 import { cache } from 'emotion';
 import resetCSS from /* preval */ '@frontend/lib/reset-css';
@@ -24,7 +24,9 @@ export const document = ({
 }) => {
     const { html, css }: RenderToStringResult = extractCritical(
         // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
-        renderToString(<CacheProvider value={cache}>{body}</CacheProvider>),
+        renderToStaticMarkup(
+            <CacheProvider value={cache}>{body}</CacheProvider>,
+        ),
     );
 
     const favicon =
