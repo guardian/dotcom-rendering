@@ -156,6 +156,7 @@ interface TagType {
     title: string;
     twitterHandle?: string;
     paidContentType?: string;
+    bylineImageUrl?: string;
 }
 
 /**

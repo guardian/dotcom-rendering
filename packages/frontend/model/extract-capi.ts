@@ -33,6 +33,7 @@ const getTags: (data: any) => TagType[] = data => {
             type: getNonEmptyString(tag, 'properties.tagType'),
             title: getString(tag, 'properties.webTitle', ''),
             twitterHandle: getString(tag, 'properties.twitterHandle', ''),
+            bylineImageUrl: getString(tag, 'properties.bylineImageUrl', ''),
         };
     });
 };
