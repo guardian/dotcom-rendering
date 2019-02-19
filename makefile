@@ -133,12 +133,12 @@ pre-publish-pasteup:
 	$(call log, "building pasteup")
 	@mkdir packages/pasteup/tmp
 	@NODE_ENV=production webpack --config scripts/webpack/pasteup
-	@mv packages/pasteup/*.js packages/pasteup/tmp
+	@mv packages/pasteup/*.ts packages/pasteup/tmp
 	@mv packages/pasteup/dist/*.js packages/pasteup
 
 post-publish-pasteup:
 	$(call log, "clean up after publishing pasteup")
-	@mv packages/pasteup/tmp/*.js packages/pasteup
+	@mv packages/pasteup/tmp/*.ts packages/pasteup
 
 publish-pasteup: clear clean-pasteup install
 	$(call log, "publishing pasteup")
