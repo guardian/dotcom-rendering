@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { textSans, body } from '@guardian/pasteup/typography';
+import { body, headline } from '@guardian/pasteup/typography';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
@@ -12,7 +12,7 @@ const style = (pillar: Pillar) => css`
     h2 {
         margin-top: 24px;
         margin-bottom: 10px;
-        ${textSans(7)};
+        ${headline(3)};
     }
     p {
         padding: 0 0 12px;
@@ -29,7 +29,7 @@ const style = (pillar: Pillar) => css`
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
     }
-    ${textSans(5)};
+    ${body(3)};
 `;
 export const TextBlockComponent: React.FC<{
     html: string;
