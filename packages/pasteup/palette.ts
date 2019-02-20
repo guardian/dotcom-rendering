@@ -32,9 +32,19 @@ export interface OtherColours {
     brand: { dark: colour; main: colour; pastel: colour };
 }
 
-const news: PillarColours = {
+const green = {
+    dark: '#185E36',
+    main: '#22874D',
+};
+
+const red = {
     dark: '#ab0613',
     main: '#c70000',
+};
+
+const news: PillarColours = {
+    dark: red.dark,
+    main: red.main,
     bright: '#ff4e36',
     pastel: '#ffbac8',
     faded: '#fff4f2',
@@ -72,11 +82,6 @@ const lifestyle: PillarColours = {
     faded: '#feeef7',
 };
 
-const green = {
-    dark: '#185E36',
-    main: '#22874D',
-};
-
 const brand = {
     dark: '#041f4a',
     main: '#052962',
@@ -85,7 +90,7 @@ const brand = {
 
 const state = {
     success: green.main,
-    error: news.main,
+    error: red.main,
 };
 
 const highlight = {
