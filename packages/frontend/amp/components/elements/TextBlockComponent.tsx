@@ -11,7 +11,8 @@ const style = (pillar: Pillar) => css`
     }
     h2 {
         margin-top: 24px;
-        ${textSans(6)};
+        margin-bottom: 10px;
+        ${textSans(7)};
     }
     p {
         padding: 0 0 12px;
