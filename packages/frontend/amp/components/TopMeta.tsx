@@ -67,12 +67,14 @@ const listStyles = (pillar: Pillar) => css`
 const standfirstCss = pillarMap(
     pillar => css`
         ${body(2)};
-        font-weight: 700;
         color: ${palette.neutral[7]};
         margin-bottom: 12px;
         ${listStyles(pillar)};
         p {
             margin-bottom: 8px;
+        }
+        strong {
+            font-weight: 700;
         }
     `,
 );
