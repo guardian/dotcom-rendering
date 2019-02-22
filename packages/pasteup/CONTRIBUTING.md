@@ -12,7 +12,7 @@ This will ask you to up the version of pasteup. We use (semver)[https://semver.o
 
 That's it! Pasteup is now in [NPM](https://www.npmjs.com/package/@guardian/pasteup). There's a couple loose ends we need to deal with to tidy everything up:
 
-Your branch witll have a commit with a change to pasteup's `package.json` reflecting the new version. Right now we use alpha versions so you have to update the dependency version in `package.json` in `guui` and `frontend` too. With that done, push your changes to the packages & merge.
+Your branch will have a commit with a change to pasteup's `package.json` reflecting the new version. Right now we use alpha versions so you have to update the dependency version in `package.json` in `guui` and `frontend` too. With that done, push your changes to the packages & merge.
 
 Your changes will ripple to dotcom-rendering immediately. For other projects you must notify other consumers of the library of the updated version. At the moment that includes:
 
@@ -23,7 +23,7 @@ TBD: Should we release via riffraff or travis? What are the downsides? How hard 
 
 
 # Versioning rules of thumb
-Given the cross-cutting nature of this project are committed to avoid breaking changes as that would erode trust from potential consumers:
+Given the cross-cutting nature of this project, we are committed to avoiding breaking changes as that would erode trust from potential consumers:
 - PATCH for anything that tweaks the current value of a token (use common sense! If we rebrand green tomorrow that is bigger than a patch)
 - MINOR version for anything that adds a new token or function. 
 - MAJOR version for anything that will “break” the library in a way that will require consumers to do bigger changes than just upping the version, this includes severely changing metrics
