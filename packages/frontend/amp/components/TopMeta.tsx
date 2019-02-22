@@ -18,8 +18,8 @@ const meta = css`
         grid-template-areas: 'meta';
     }
 
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 `;
 
 const headerStyle = css`
@@ -34,11 +34,11 @@ const headlineCss = css`
     @supports (display: grid) {
         grid-template-areas: 'headline';
     }
-    padding: 0 10px;
+    padding: 0 20px;
 `;
 
 const header = css`
-    margin: 0 -10px;
+    margin: 0 -20px;
 `;
 
 // TODO - unclear if we need the list styles as well here
@@ -140,7 +140,7 @@ const ratingsWrapper = css`
     background-color: ${palette.highlight.main};
     display: inline-block;
     padding: 6px 10px 0;
-    margin: 0 0 6px -10px;
+    margin: 0 0 6px -20px;
     line-height: 24px;
 
     svg {

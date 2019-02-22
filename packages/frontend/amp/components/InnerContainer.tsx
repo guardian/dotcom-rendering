@@ -2,8 +2,8 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 const style = css`
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 `;
 
 export const InnerContainer: React.FC<{

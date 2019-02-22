@@ -107,7 +107,7 @@ const onward = css`
         right: 0;
         color: ${palette.neutral[7]};
         background-color: ${palette.neutral[100]};
-        padding: 0 10px;
+        padding: 0 20px;
         ${textSans(2)};
         line-height: 34px;
         height: 36px;
