@@ -54,7 +54,7 @@ export const Analytics: React.FC<{
                        "contentId": "${id}",
                        "isHostedFlag": "true",
                        "fullRequestUrl": "${domain}/${id}",
-                       "experience": "dotcom-platform"
+                       "experience": "dotcom-rendering"
                      }
                    }
                  }
