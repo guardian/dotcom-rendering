@@ -7,7 +7,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.5",
     "@guardian/guui": "2.0.0-alpha.1",
-    "@guardian/pasteup": "1.0.0-alpha.1",
+    "@guardian/pasteup": "1.0.0-alpha.7",
     "aws-sdk": "^2.340.0",
     "compose-function": "^3.0.3",
     "compression": "^1.7.3",

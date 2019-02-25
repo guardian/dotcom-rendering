@@ -37,7 +37,7 @@ export const Analytics: React.FC<{
              <script type="application/json">
                {
                  "requests": {
-                   "pageviewWithCustomDims": "\${pageview}&cd3=\${platform}&cd4=\${sectionId}&cd5=\${contentType}&cd6=\${commissioningDesks}&cd7=\${contentId}&cd8=\${contributorIds}&cd9=\${keywordIds}&cd10=\${toneIds}&cd11=\${seriesId}&cd26=\${isHostedFlag}&cd29=\${fullRequestUrl}"
+                   "pageviewWithCustomDims": "\${pageview}&cd3=\${platform}&cd4=\${sectionId}&cd5=\${contentType}&cd6=\${commissioningDesks}&cd7=\${contentId}&cd8=\${contributorIds}&cd9=\${keywordIds}&cd10=\${toneIds}&cd11=\${seriesId}&cd26=\${isHostedFlag}&cd29=\${fullRequestUrl}&cd43=\${experience}"
                  },
                  "vars": {
                    "account": "${gaTracker}"
@@ -53,7 +53,8 @@ export const Analytics: React.FC<{
                        "contentType": "${contentType}",
                        "contentId": "${id}",
                        "isHostedFlag": "true",
-                       "fullRequestUrl": "${domain}/${id}"
+                       "fullRequestUrl": "${domain}/${id}",
+                       "experience": "dotcom-rendering"
                      }
                    }
                  }

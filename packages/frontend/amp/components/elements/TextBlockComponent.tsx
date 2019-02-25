@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { textSans, body, headline } from '@guardian/pasteup/typography';
+import { body, headline } from '@guardian/pasteup/typography';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
@@ -11,8 +11,8 @@ const style = (pillar: Pillar) => css`
     }
     h2 {
         margin-top: 24px;
-        ${body(3)};
-        font-weight: 600;
+        margin-bottom: 10px;
+        ${headline(3)};
     }
     p {
         padding: 0 0 12px;
@@ -29,7 +29,7 @@ const style = (pillar: Pillar) => css`
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
     }
-    ${textSans(5)};
+    ${body(3)};
 `;
 
 const immersiveBodyStyle = css`

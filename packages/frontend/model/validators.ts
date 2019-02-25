@@ -20,10 +20,18 @@ export const getString = (
     );
 };
 
-export const getNumber = (obj: object, selector: string): number => {
+export const getNumber = (
+    obj: object,
+    selector: string,
+    fallbackValue?: number,
+): number => {
     const found = get(obj, selector);
     if (typeof found === 'number') {
         return found;
+    }
+
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
     }
 
     throw new Error(
@@ -31,6 +39,14 @@ export const getNumber = (obj: object, selector: string): number => {
             obj,
         )}'`,
     );
+};
+
+export const optional = <T extends {}>(f: () => T): T | undefined => {
+    try {
+        return f();
+    } catch (e) {
+        return undefined;
+    }
 };
 
 export const getNonEmptyString = (obj: object, selector: string): string => {

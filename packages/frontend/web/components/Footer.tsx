@@ -110,6 +110,8 @@ const FooterLinks: React.FC<{
     return <div className={footerList}>{linkGroups}</div>;
 };
 
+const year = new Date().getFullYear();
+
 export const Footer: React.FC = () => (
     <footer className={footer}>
         <Container className={footerInner}>
@@ -127,7 +129,7 @@ export const Footer: React.FC = () => (
             />
             <FooterLinks links={footerLinks} />
             <div className={copyright}>
-                © 2018 Guardian News and Media Limited or its affiliated
+                © {year} Guardian News & Media Limited or its affiliated
                 companies. All rights reserved.
             </div>
         </Container>

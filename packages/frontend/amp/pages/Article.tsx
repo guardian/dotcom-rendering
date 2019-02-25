@@ -45,6 +45,7 @@ export interface ArticleModel {
     contentType: string;
     commercialProperties: CommercialProperties;
     isImmersive: boolean;
+    starRating?: number;
 }
 
 // TODO move somewhere better

@@ -1,4 +1,3 @@
-import { string as curly } from 'curlyquotes';
 import {
     getString,
     getNumber,
@@ -6,13 +5,13 @@ import {
     getBoolean,
     getArray,
     getObject,
+    optional,
 } from './validators';
 import { clean } from './clean';
+import { string as curly } from 'curlyquotes';
+
 import { getSharingUrls } from './sharing-urls';
 import { findPillar } from './find-pillar';
-
-const bigBullets = (s: string) =>
-    s.replace(/•/g, '<span class="bullet">&bull;</span>');
 
 // tslint:disable:prefer-array-literal
 const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
@@ -177,13 +176,12 @@ export const extract = (data: {}): CAPIType => {
         ),
         headline: apply(
             getNonEmptyString(data, 'config.page.headline'),
-            clean,
             curly,
+            clean,
         ),
         standfirst: apply(
             getString(data, 'contentFields.fields.standfirst', ''),
             clean,
-            bigBullets,
         ),
         main: apply(getString(data, 'contentFields.fields.main', ''), clean),
         body: getArray<any>(data, 'contentFields.fields.blocks.body')
@@ -224,5 +222,8 @@ export const extract = (data: {}): CAPIType => {
         beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
         isCommentable: getBoolean(data, 'config.page.isCommentable', false),
         commercialProperties: getCommercialProperties(data),
+        starRating: optional(
+            getNumber.bind(null, data, 'config.page.starRating'),
+        ),
     };
 };

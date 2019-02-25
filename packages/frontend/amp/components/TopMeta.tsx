@@ -9,21 +9,9 @@ import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
-import { bylineTokens } from '@frontend/amp/lib/byline-tokens';
-
-const bylineStyle = (pillar: Pillar) => css`
-    ${headline(2)};
-    color: ${pillarPalette[pillar].main};
-    padding-bottom: 8px;
-    font-style: italic;
-
-    a {
-        font-weight: 700;
-        color: ${pillarPalette[pillar].main};
-        text-decoration: none;
-        font-style: normal;
-    }
-`;
+import Star from '@guardian/pasteup/icons/star.svg';
+import { Byline } from '@frontend/amp/components/Byline';
+import { string as curly } from 'curlyquotes';
 
 const meta = css`
     @supports (display: grid) {
@@ -53,24 +41,8 @@ const header = css`
     margin: 0 -10px;
 `;
 
+// TODO - unclear if we need the list styles as well here
 const listStyles = (pillar: Pillar) => css`
-    .bullet {
-        color: transparent;
-        font-size: 1px;
-    }
-
-    .bullet:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 2px;
-        background-color: ${pillarPalette[pillar].main};
-        margin-left: 0px;
-    }
-
-    // TODO - unclear if we need the list styles as well here
     li {
         margin-bottom: 6px;
         padding-left: 20px;
@@ -95,12 +67,14 @@ const listStyles = (pillar: Pillar) => css`
 const standfirstCss = pillarMap(
     pillar => css`
         ${body(2)};
-        font-weight: 700;
         color: ${palette.neutral[7]};
         margin-bottom: 12px;
         ${listStyles(pillar)};
         p {
             margin-bottom: 8px;
+        }
+        strong {
+            font-weight: 700;
         }
     `,
 );
@@ -162,14 +136,49 @@ const twitterIcon = css`
     width: 12px;
 `;
 
+const ratingsWrapper = css`
+    background-color: ${palette.highlight.main};
+    display: inline-block;
+    padding: 6px 10px 0;
+    margin: 0 0 6px -10px;
+    line-height: 24px;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+`;
+
+const emptyStar = css`
+    fill: transparent;
+    stroke: ${palette.neutral[7]};
+`;
+
 const Headline: React.FC<{
     headlineText: string;
     standfirst: string;
     pillar: Pillar;
-}> = ({ headlineText, standfirst, pillar }) => {
+    starRating?: number;
+}> = ({ headlineText, standfirst, pillar, starRating }) => {
+    const stars = (n: number) => {
+        return Array(5)
+            .fill(0)
+            .map((el, i) => {
+                if (i < n) {
+                    return <Star key={i} />;
+                }
+                return <Star className={emptyStar} key={i} />;
+            });
+    };
+
     return (
         <div className={headlineCss}>
-            <h1 className={cx(headerStyle)}>{headlineText}</h1>
+            <h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
+
+            {starRating !== undefined && (
+                <div className={ratingsWrapper}>{stars(starRating)}</div>
+            )}
+
             <div // tslint:disable-line:react-no-dangerous-html
                 className={cx(standfirstCss[pillar], standfirstLinks[pillar])}
                 dangerouslySetInnerHTML={{
@@ -178,32 +187,6 @@ const Headline: React.FC<{
             />
         </div>
     );
-};
-
-const Byline: React.FC<{
-    byline: string;
-    tags: TagType[];
-    pillar: Pillar;
-    guardianBaseURL: string;
-}> = ({ byline, tags, pillar, guardianBaseURL }) => {
-    const contributorTags = tags.filter(tag => tag.type === 'Contributor');
-    const tokens = bylineTokens(byline, contributorTags);
-
-    const linkedByline = tokens.map(token => {
-        const matchedTag = contributorTags.find(tag => tag.title === token);
-
-        if (matchedTag) {
-            return (
-                <a href={`${guardianBaseURL}/${matchedTag.id}`}>
-                    {matchedTag.title}
-                </a>
-            );
-        }
-
-        return token;
-    });
-
-    return <div className={bylineStyle(pillar)}>{linkedByline}</div>;
 };
 
 export const TopMeta: React.FC<{
@@ -219,6 +202,7 @@ export const TopMeta: React.FC<{
             headlineText={articleData.headline}
             standfirst={articleData.standfirst}
             pillar={articleData.pillar}
+            starRating={articleData.starRating}
         />
 
         <div className={meta}>
