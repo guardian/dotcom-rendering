@@ -1,8 +1,8 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { textSans, body } from '@guardian/pasteup/typography';
+import { textSans, body, headline } from '@guardian/pasteup/typography';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
@@ -11,7 +11,8 @@ const style = (pillar: Pillar) => css`
     }
     h2 {
         margin-top: 24px;
-        ${textSans(6)};
+        ${body(3)};
+        font-weight: 600;
     }
     p {
         padding: 0 0 12px;
@@ -30,12 +31,21 @@ const style = (pillar: Pillar) => css`
     }
     ${textSans(5)};
 `;
+
+const immersiveBodyStyle = css`
+    h2 {
+        ${headline(7)};
+        font-weight: 200;
+    }
+`;
+
 export const TextBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
-}> = ({ html, pillar }) => (
+    isImmersive: boolean;
+}> = ({ html, pillar, isImmersive }) => (
     <span
-        className={style(pillar)}
+        className={cx(style(pillar), { [immersiveBodyStyle]: isImmersive })}
         dangerouslySetInnerHTML={{
             __html: html,
         }}

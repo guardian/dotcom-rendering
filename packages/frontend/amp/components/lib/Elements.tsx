@@ -24,6 +24,7 @@ export const Elements: React.FC<{
     contentType: string;
     switches: Switches;
     commercialProperties: CommercialProperties;
+    isImmersive: boolean;
 }> = ({
     elements,
     pillar,
@@ -32,6 +33,7 @@ export const Elements: React.FC<{
     contentType,
     switches,
     commercialProperties,
+    isImmersive,
 }) => {
     const output = elements.map((element, i) => {
         switch (element._type) {
@@ -41,6 +43,7 @@ export const Elements: React.FC<{
                         key={i}
                         html={element.html}
                         pillar={pillar}
+                        isImmersive={isImmersive}
                     />
                 );
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
