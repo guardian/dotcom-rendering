@@ -135,6 +135,7 @@ interface CAPIType {
     isCommentable: boolean;
     commercialProperties: CommercialProperties;
     starRating?: number;
+    trailText: string;
 }
 
 interface TagType {

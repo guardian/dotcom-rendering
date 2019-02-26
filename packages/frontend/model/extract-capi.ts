@@ -225,5 +225,6 @@ export const extract = (data: {}): CAPIType => {
         starRating: optional(
             getNumber.bind(null, data, 'config.page.starRating'),
         ),
+        trailText: getString(data, 'config.page.trailText', ''),
     };
 };

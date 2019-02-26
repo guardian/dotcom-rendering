@@ -10,10 +10,12 @@ import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
-    const linkedData = {};
+    const linkedData = [{}];
+    const metadata = { description: '', canonicalURL: '' };
     const result = v.validateString(
         document({
             linkedData,
+            metadata,
             title: 'foo',
             scripts: [''],
             body: <img alt="foo" />,
@@ -27,7 +29,11 @@ test('produces valid AMP doc', async () => {
     const config = extractConfig(data);
     const nav = extractNAV(data);
     const model = extractModel(data);
-    const linkedData = {};
+    const linkedData = [{}];
+    const metadata = {
+        description: model.trailText,
+        canonicalURL: model.webURL,
+    };
 
     const analytics: AnalyticsModel = {
         gaTracker: 'UA-XXXXXXX-X',
@@ -54,6 +60,7 @@ test('produces valid AMP doc', async () => {
         document({
             body,
             linkedData,
+            metadata,
             title: 'foo',
             scripts: [],
         }),
