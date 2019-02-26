@@ -74,6 +74,22 @@ describe('ampadslots', () => {
         expect(p.value).toBe('amp');
     });
 
+    it('should set rendering platform to dotcom-rendering', () => {
+        const edition = 'UK';
+        const targetings: EditionAdTargeting = {
+            paramSet,
+            edition,
+        };
+        const res = adJson(edition, [targetings]);
+        const renderingPlatform = res.targeting.find(
+            param => param.name === 'rp',
+        );
+        if (renderingPlatform === undefined) {
+            return fail();
+        }
+        expect(renderingPlatform.value).toBe('dotcom-rendering');
+    });
+
     it('should set values to a comma-separated string', () => {
         const edition = 'UK';
         const targetings: EditionAdTargeting = {
