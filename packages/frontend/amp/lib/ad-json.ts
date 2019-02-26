@@ -25,6 +25,7 @@ export const adJson = (
 
     json = json.filter(p => p.name !== 'p');
     json.push({ name: 'p', value: 'amp' });
+    json.push({ name: 'rp', value: 'dotcom-rendering' });
 
     return { targeting: json };
 };
