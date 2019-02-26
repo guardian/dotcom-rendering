@@ -47,6 +47,7 @@ export const Body: React.FC<{
             contentType={data.contentType}
             switches={config.switches}
             commercialProperties={data.commercialProperties}
+            isImmersive={data.isImmersive}
         />
         <SubMeta
             sections={data.subMetaSectionLinks}

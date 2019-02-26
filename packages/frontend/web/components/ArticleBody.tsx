@@ -283,7 +283,7 @@ const bodyStyle = css`
     }
 
     h2 {
-        ${textSans(6)};
+        ${body(3)};
         margin-bottom: 0.0625rem;
         font-weight: 900;
     }
@@ -317,6 +317,13 @@ const bodyStyle = css`
     }
 
     ${listStyles};
+`;
+
+const immersiveBodyStyle = css`
+    h2 {
+        ${headline(7)};
+        font-weight: 200;
+    }
 `;
 
 const linkColour = pillarMap(
@@ -575,7 +582,11 @@ export const ArticleBody: React.FC<{
             </header>
 
             <div>
-                <div className={cx(bodyStyle, linkColour[CAPI.pillar])}>
+                <div
+                    className={cx(bodyStyle, linkColour[CAPI.pillar], {
+                        [immersiveBodyStyle]: CAPI.isImmersive,
+                    })}
+                >
                     <ArticleRenderer elements={CAPI.elements} />
                 </div>
                 <div className={cx(subMeta, guardianLines)}>

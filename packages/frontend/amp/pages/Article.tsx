@@ -44,6 +44,7 @@ export interface ArticleModel {
     editionId: Edition;
     contentType: string;
     commercialProperties: CommercialProperties;
+    isImmersive: boolean;
     starRating?: number;
 }
 

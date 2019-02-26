@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { body, headline } from '@guardian/pasteup/typography';
@@ -31,12 +31,21 @@ const style = (pillar: Pillar) => css`
     }
     ${body(3)};
 `;
+
+const immersiveBodyStyle = css`
+    h2 {
+        ${headline(7)};
+        font-weight: 200;
+    }
+`;
+
 export const TextBlockComponent: React.FC<{
     html: string;
     pillar: Pillar;
-}> = ({ html, pillar }) => (
+    isImmersive: boolean;
+}> = ({ html, pillar, isImmersive }) => (
     <span
-        className={style(pillar)}
+        className={cx(style(pillar), { [immersiveBodyStyle]: isImmersive })}
         dangerouslySetInnerHTML={{
             __html: html,
         }}

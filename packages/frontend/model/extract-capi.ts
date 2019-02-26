@@ -145,7 +145,7 @@ export const extract = (data: {}): CAPIType => {
         getNumber(data, 'config.page.webPublicationDate'),
     );
     const tags = getTags(data);
-    const isImmersive = getBoolean(data, 'config.page.isImmersive', false);
+    const isImmersive = getBoolean(data, 'config.isImmersive', false);
     const sectionName = getNonEmptyString(data, 'config.page.section');
 
     const leadContributor: TagType = tags.filter(

@@ -26,6 +26,7 @@ export const Elements: React.FC<{
     contentType: string;
     switches: Switches;
     commercialProperties: CommercialProperties;
+    isImmersive: boolean;
 }> = ({
     elements,
     pillar,
@@ -34,6 +35,7 @@ export const Elements: React.FC<{
     contentType,
     switches,
     commercialProperties,
+    isImmersive,
 }) => {
     const cleanedElements = elements.map(element =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -46,6 +48,7 @@ export const Elements: React.FC<{
                         key={i}
                         html={element.html}
                         pillar={pillar}
+                        isImmersive={isImmersive}
                     />
                 );
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
