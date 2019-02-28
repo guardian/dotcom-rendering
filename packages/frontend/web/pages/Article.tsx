@@ -3,6 +3,7 @@ import { Container } from '@guardian/guui';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
+import Loadable from 'react-loadable';
 
 import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
@@ -11,6 +12,8 @@ import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { BackToTop } from '@frontend/web/components/BackToTop';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
+import ClientComponent from '@frontend/web/components/ClientComponent';
+import { Island } from '../components/lib/Island';
 
 // TODO: find a better of setting opacity
 const articleWrapper = css`
@@ -55,6 +58,11 @@ export const Article: React.FC<{
         />
         <main className={articleWrapper}>
             <Container className={articleContainer}>
+                <Island
+                    c="@frontend/web/components/ClientComponent"
+                    s={data => <ClientComponent />}
+                    data={{ hello: 'world' }}
+                />
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn} />

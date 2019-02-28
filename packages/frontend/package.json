@@ -28,7 +28,8 @@
     "polished": "^1.9.2",
     "raven-js": "3.19.1",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "react-loadable": "^5.5.0"
   },
   "devDependencies": {
     "@types/amphtml-validator": "^1.0.0",
@@ -46,6 +47,7 @@
     "@types/raven-js": "^3.10.0",
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
+    "@types/react-loadable": "^5.5.0",
     "amphtml-validator": "^1.0.23"
   }
 }

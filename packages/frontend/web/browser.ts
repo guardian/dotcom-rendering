@@ -7,7 +7,7 @@ import {
     init as initGa,
     sendPageView as sendGaPageView,
 } from '@frontend/web/browser/ga';
-import { Article } from './pages/Article';
+// import { Article } from './pages/Article';
 import { ReportedError } from '@frontend/web/browser/reportError';
 
 if (module.hot) {
@@ -17,7 +17,7 @@ if (module.hot) {
 // Kick off the app
 const go = () => {
     const hydrate = () => {
-        const { cssIDs, data } = window.guardian.app;
+        // const { cssIDs, data } = window.guardian.app;
 
         initGa();
 
@@ -30,11 +30,29 @@ const go = () => {
              * in development mode to retain the sourceMap info. As detailed
              * in the issue raised here https://github.com/emotion-js/emotion/issues/487
              */
-            if (process.env.NODE_ENV !== 'development') {
-                hydrateCSS(cssIDs);
-            }
-
-            hydrateApp(React.createElement(Article, { data }), container);
+            // if (process.env.NODE_ENV !== 'development') {
+            //     hydrateCSS(cssIDs);
+            // }
+            // hydrateApp(React.createElement(Article, { data }), container);
+            // import('@frontend/web/components/ClientComponent').then(c => {
+            //     console.log('hello', c);
+            //     const hello = document.getElementById('hello');
+            //     hydrateApp(React.createElement(c.default, {}), hello);
+            // });
+            const islands = document.querySelectorAll('.js-island');
+            // tslint:disable-next-line:no-unused-expression
+            [].forEach.call(islands,island => {
+                const script = island.querySelector('script');
+                const path = island.dataset.island;
+                const d = JSON.parse(script.text);
+                island.removeChild(script);
+                import(path).then(component => {
+                    hydrateApp(
+                        React.createElement(component.default, d),
+                        island,
+                    );
+                });
+            });
         }
 
         sendGaPageView();
@@ -104,3 +122,5 @@ if (window.guardian.polyfilled) {
 } else {
     window.guardian.onPolyfilled = go;
 }
+
+console.log('HELLO IM RUNNIGN');
