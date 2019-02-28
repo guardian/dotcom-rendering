@@ -59,7 +59,7 @@ export const Article: React.FC<{
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <Island
-                    c="@frontend/web/components/ClientComponent"
+                    c="ClientComponent"
                     s={data => <ClientComponent />}
                     data={{ hello: 'world' }}
                 />

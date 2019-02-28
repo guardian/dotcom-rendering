@@ -14,12 +14,8 @@ export const Island: React.FC<{ s: React.Component; c: string; data: any }> = ({
         },
     });
     return (
-        <div class="js-island" data-island={c}>
-            <script
-                type="application/json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-            />
-            <L />
+        <div className="js-island" data-island={c} data-data={JSON.stringify(data)}>
+            {s(data)}
         </div>
     );
 };

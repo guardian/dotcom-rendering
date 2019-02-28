@@ -42,11 +42,12 @@ const go = () => {
             const islands = document.querySelectorAll('.js-island');
             // tslint:disable-next-line:no-unused-expression
             [].forEach.call(islands,island => {
-                const script = island.querySelector('script');
+                console.log(island)
                 const path = island.dataset.island;
-                const d = JSON.parse(script.text);
-                island.removeChild(script);
-                import(path).then(component => {
+                const d = JSON.parse(island.dataset.data);
+
+                // can't really use the @frontend/web/ syntax in the browser
+                import('./components/' +  path).then(component => {
                     hydrateApp(
                         React.createElement(component.default, d),
                         island,
