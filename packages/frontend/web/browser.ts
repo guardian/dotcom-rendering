@@ -39,9 +39,10 @@ const go = () => {
             //     const hello = document.getElementById('hello');
             //     hydrateApp(React.createElement(c.default, {}), hello);
             // });
-            const islands = document.querySelectorAll('.js-island');
+            const islands = [...document.querySelectorAll('.js-island')];
+            const parentIslands = islands.filter(node => node.parentNode.closest('.js-island') === null)
             // tslint:disable-next-line:no-unused-expression
-            [].forEach.call(islands,island => {
+            parentIslands.map(island => {
                 console.log(island)
                 const path = island.dataset.island;
                 const d = JSON.parse(island.dataset.data);
