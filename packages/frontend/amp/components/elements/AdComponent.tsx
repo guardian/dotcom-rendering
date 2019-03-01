@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { until } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
-import { adJson } from '@frontend/amp/lib/ad-json';
+import { adJson, stringify } from '@frontend/amp/lib/ad-json';
 
 const adStyle = css`
     background: ${palette.neutral[93]};
@@ -114,7 +114,9 @@ export const AdComponent: React.SFC<{
             data-loading-strategy={'prefer-viewability-over-views'}
             layout={'responsive'}
             type={'doubleclick'}
-            json={adJson(edition, commercialProperties.editionAdTargeting)}
+            json={stringify(
+                adJson(edition, commercialProperties.editionAdTargeting),
+            )}
             data-slot={ampData(section, contentType)}
             rtc-config={realTimeConfig(
                 edition,
