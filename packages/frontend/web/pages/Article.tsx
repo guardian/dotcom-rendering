@@ -59,8 +59,8 @@ export const Article: React.FC<{
         <main className={articleWrapper}>
             <Container className={articleContainer}>
                 <Island
-                    c="ClientComponent"
-                    s={data => <ClientComponent />}
+                    from="ClientComponent"
+                    component={ClientComponent}
                     data={{ hello: 'world' }}
                 />
                 <article>

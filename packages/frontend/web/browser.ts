@@ -40,15 +40,17 @@ const go = () => {
             //     hydrateApp(React.createElement(c.default, {}), hello);
             // });
             const islands = [...document.querySelectorAll('.js-island')];
-            const parentIslands = islands.filter(node => node.parentNode.closest('.js-island') === null)
+            const parentIslands = islands.filter(
+                node => node.parentNode.closest('.js-island') === null,
+            );
             // tslint:disable-next-line:no-unused-expression
             parentIslands.map(island => {
-                console.log(island)
+                console.log(island);
                 const path = island.dataset.island;
                 const d = JSON.parse(island.dataset.data);
 
                 // can't really use the @frontend/web/ syntax in the browser
-                import('./components/' +  path).then(component => {
+                import('./components/' + path).then(component => {
                     hydrateApp(
                         React.createElement(component.default, d),
                         island,
