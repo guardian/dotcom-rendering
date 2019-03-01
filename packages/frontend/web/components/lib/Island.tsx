@@ -5,7 +5,6 @@ interface IslandProps<P> {
     component: React.ComponentType<P>;
     from: string;
     data: P;
-    children: never;
 }
 
 /**

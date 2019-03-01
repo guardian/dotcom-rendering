@@ -1,5 +1,5 @@
-import compose from 'compose-function';
-import createDOMPurify from 'dompurify';
+// import compose from 'compose-function';
+// import createDOMPurify from 'dompurify';
 // import { JSDOM } from 'jsdom';
 // import { minify } from 'html-minifier';
 
@@ -11,7 +11,7 @@ export const bigBullets = (s: string) =>
 // const { window } = new JSDOM('');
 // const DOMPurify = createDOMPurify(window);
 
-export const clean = s  => s
+export const clean: (s: string) => string = s => s;
 // export const clean = compose(
 //     // bigBullets,
 //     // (s: string) =>

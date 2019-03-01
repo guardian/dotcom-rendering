@@ -3,7 +3,6 @@ import { Container } from '@guardian/guui';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
-import Loadable from 'react-loadable';
 
 import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
