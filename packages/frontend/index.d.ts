@@ -4,6 +4,8 @@ interface ArticleProps {
     config: ConfigType;
 }
 
+type Tone = 'opinion' | 'paid' | 'default';
+
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
@@ -29,6 +31,10 @@ interface AdTargetParam {
     values: string[];
 }
 
+interface EditionCommercialProperties  {
+    adTargeting?: AdTargetParam[];
+    branding?: Branding;
+    }
 
 
 interface EditionCommercialProperties  {

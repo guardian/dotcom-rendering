@@ -7,8 +7,8 @@ import { TopMeta } from '@frontend/amp/components/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { pillarPalette } from '../../lib/pillars';
 
-const body = (pillar: Pillar) => css`
-    background-color: white;
+const body = (pillar: Pillar, tone: Tone) => css`
+    background-color: ${tonePalette[tone]};
 
     ${bulletStyle(pillar)}
 `;
@@ -35,9 +35,15 @@ export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
     config: ConfigType;
-}> = ({ pillar, data, config }) => (
-    <InnerContainer className={body(pillar)}>
-        <TopMeta config={config} articleData={data} />
+    tone: Tone;
+}> = ({ pillar, data, config, tone }) => (
+    <InnerContainer className={body(pillar, tone)}>
+        {tone === 'paid' ? (
+            <PaidTopMeta config={config} articleData={data} />
+        ) : (
+            <TopMeta config={config} articleData={data} />
+        )}
+
         <Elements
             pillar={pillar}
             elements={data.elements}
