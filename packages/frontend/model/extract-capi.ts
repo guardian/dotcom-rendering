@@ -19,10 +19,10 @@ const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
     return fns.reduce((acc, fn) => fn(acc), input);
 };
 
-const getEditionValue: (name: string) => Edition = name => {
+const getEditionValue: (name: string) => Edition | false = name => {
     const editions: Edition[] = ['UK', 'US', 'INT', 'AU'];
     const edition = editions.find(_ => _ === name);
-    return edition === undefined ? 'UK' : edition;
+    return edition === undefined ? false : edition;
 };
 
 const getTags: (data: any) => TagType[] = data => {
@@ -113,29 +113,11 @@ const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
 };
 
 const getCommercialProperties = (data: {}): CommercialProperties => {
-    const properties = getObject(data, 'config.page.commercialProperties', {});
-    const targeting = getArray<any>(properties, 'editionAdTargetings', []);
-    const editionAdTargeting: EditionAdTargeting[] = targeting.map(t => {
-        return {
-            edition: getEditionValue(getString(t, 'edition.id')),
-            paramSet: getArray<any>(t, 'paramSet', []).map(param => {
-                if (Array.isArray(param.value)) {
-                    return {
-                        name: param.name,
-                        values: param.value,
-                    };
-                }
-                return {
-                    name: param.name,
-                    values: [param.value],
-                };
-            }),
-        };
-    });
-
-    return {
-        editionAdTargeting,
-    };
+    return getObject(
+        data,
+        'config.page.editionCommercialProperties',
+        {},
+    ) as CommercialProperties;
 };
 
 // TODO really it would be nice if we passed just the data we needed and
@@ -158,11 +140,8 @@ export const extract = (data: {}): CAPIType => {
     const editionLongForm = getString(data, 'config.page.edition', '');
 
     // Possible values for the editionId: "UK", "US", "AU", "INT"
-    const editionId = getEditionValue(
-        getString(data, 'config.page.editionId', ''),
-    );
-
-    if (editionId === undefined) throw new Error('edition id is undefined');
+    const editionId =
+        getEditionValue(getString(data, 'config.page.editionId', '')) || 'UK';
 
     return {
         webPublicationDate,

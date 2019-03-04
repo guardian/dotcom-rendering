@@ -41,9 +41,6 @@ export const RichLinkBlockComponent: React.FC<{
     element: RichLinkBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
-    if (element.sponsorship) {
-        throw new Error('Sponsored rich links not supported');
-    }
     return (
         <aside className={richLinkContainer}>
             <a
