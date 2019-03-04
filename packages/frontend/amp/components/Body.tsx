@@ -2,7 +2,6 @@ import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/lib/Elements';
 import { css } from 'emotion';
-import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { pillarPalette } from '../../lib/pillars';
@@ -33,7 +32,7 @@ const bulletStyle = (pillar: Pillar) => css`
 
 export const Body: React.FC<{
     pillar: Pillar;
-    data: ArticleModel;
+    data: CAPIType;
     config: ConfigType;
 }> = ({ pillar, data, config }) => (
     <InnerContainer className={body(pillar)}>

@@ -13,41 +13,6 @@ const backgroundColour = css`
     background-color: ${palette.neutral[97]};
 `;
 
-export interface ArticleModel {
-    headline: string;
-    standfirst: string;
-    mainMediaElements: CAPIElement[];
-    elements: CAPIElement[];
-    author: AuthorType;
-    webPublicationDateDisplay: string;
-    pageId: string;
-    ageWarning?: string;
-    sharingUrls: {
-        [K in SharePlatform]?: {
-            url: string;
-            userMessage: string;
-        }
-    };
-    pillar: Pillar;
-    sectionLabel?: string;
-    sectionUrl?: string;
-    sectionName: string;
-    tags: TagType[];
-    subMetaSectionLinks: SimpleLinkType[];
-    subMetaKeywordLinks: SimpleLinkType[];
-    webURL: string;
-    shouldHideAds: boolean;
-    guardianBaseURL: string;
-    hasRelated: boolean;
-    hasStoryPackage: boolean;
-    isCommentable: boolean;
-    editionId: Edition;
-    contentType: string;
-    commercialProperties: CommercialProperties;
-    isImmersive: boolean;
-    starRating?: number;
-}
-
 // TODO move somewhere better
 const tagsOfType = (tags: TagType[], tagType: string): TagType[] => {
     return tags.filter(
@@ -59,7 +24,7 @@ const tagsOfType = (tags: TagType[], tagType: string): TagType[] => {
 
 export const Article: React.FC<{
     nav: NavType;
-    articleData: ArticleModel;
+    articleData: CAPIType;
     config: ConfigType;
     analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics }) => (

@@ -7,7 +7,6 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
-import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 import Star from '@guardian/pasteup/icons/star.svg';
 import { Byline } from '@frontend/amp/components/Byline';
@@ -191,7 +190,7 @@ const Headline: React.FC<{
 
 export const TopMeta: React.FC<{
     config: ConfigType;
-    articleData: ArticleModel;
+    articleData: CAPIType;
 }> = ({ config, articleData }) => (
     <header className={header}>
         {articleData.mainMediaElements.map((element, i) => (
