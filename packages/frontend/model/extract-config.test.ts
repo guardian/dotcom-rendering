@@ -12,7 +12,7 @@ describe('extract-config', () => {
     it('returns ajaxUrl if available', () => {
         const testAjaxUrl = 'https://fetchMeSomething.com';
 
-        testData.config.page.ajaxUrl = testAjaxUrl;
+        testData.site.ajaxUrl = testAjaxUrl;
 
         const { ajaxUrl } = extract(testData);
 
@@ -20,7 +20,7 @@ describe('extract-config', () => {
     });
 
     it('throws error if ajaxUrl unavailable', () => {
-        testData.config.page.ajaxUrl = null;
+        testData.site.ajaxUrl = null;
 
         expect(() => {
             extract(testData);
@@ -30,7 +30,7 @@ describe('extract-config', () => {
     it('returns sentryPublicApiKey if sentryPublicApiKey available', () => {
         const testSentryPublicApiKey = '12345';
 
-        testData.config.page.sentryPublicApiKey = testSentryPublicApiKey;
+        testData.site.sentryPublicApiKey = testSentryPublicApiKey;
 
         const { sentryPublicApiKey } = extract(testData);
 
@@ -38,7 +38,7 @@ describe('extract-config', () => {
     });
 
     it('returns sentryPublicApiKey as empty string if edition not available', () => {
-        testData.config.page.sentryPublicApiKey = null;
+        testData.site.sentryPublicApiKey = null;
 
         const { sentryPublicApiKey } = extract(testData);
 
@@ -48,7 +48,7 @@ describe('extract-config', () => {
     it('returns sentryHost if sentryHost available', () => {
         const testSentryHost = 'foo';
 
-        testData.config.page.sentryHost = testSentryHost;
+        testData.site.sentryHost = testSentryHost;
 
         const { sentryHost } = extract(testData);
 
@@ -56,7 +56,7 @@ describe('extract-config', () => {
     });
 
     it('returns sentryHost as empty string if edition not available', () => {
-        testData.config.page.sentryHost = null;
+        testData.site.sentryHost = null;
 
         const { sentryHost } = extract(testData);
 

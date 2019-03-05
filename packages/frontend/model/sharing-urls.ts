@@ -24,9 +24,9 @@ export const getSharingUrls: (
 } = data => {
     const articleUrl = `https://www.theguardian.com/${getNonEmptyString(
         data,
-        'config.page.pageId',
+        'page.pageId',
     )}`;
-    const title = getNonEmptyString(data, 'config.page.webTitle');
+    const title = getNonEmptyString(data, 'page.webTitle');
     const platforms: {
         [K in SharePlatform]: {
             userMessage: string;
