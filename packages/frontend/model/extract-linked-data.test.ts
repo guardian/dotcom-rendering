@@ -1,16 +1,14 @@
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 
 describe('linked data', () => {
-    it('extracts data from config.page.linkedData', () => {
+    it('extracts data from page.linkedData', () => {
         const input = {
-            config: {
-                page: {
-                    linkedData: [
-                        {
-                            '@type': 'NewsArticle',
-                        },
-                    ],
-                },
+            page: {
+                linkedData: [
+                    {
+                        '@type': 'NewsArticle',
+                    },
+                ],
             },
         };
         const output = extractLinkedData(input);
@@ -22,7 +20,7 @@ describe('linked data', () => {
         ]);
     });
 
-    it('returns empty object if it cannot find data from config.page.linkedData', () => {
+    it('returns empty object if it cannot find data from page.linkedData', () => {
         const invalidInput = {
             config: {},
         };

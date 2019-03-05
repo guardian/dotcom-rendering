@@ -26,7 +26,7 @@ const getEditionValue: (name: string) => Edition = name => {
 };
 
 const getTags: (data: any) => TagType[] = data => {
-    const tags = getArray<any>(data, 'tags.tags', []);
+    const tags = getArray<any>(data, 'page.tags.all', []);
     return tags.map(tag => {
         return {
             id: getNonEmptyString(tag, 'properties.id'),
@@ -89,7 +89,7 @@ const getAgeWarning = (
 const getSubMetaSectionLinks: (data: {}) => SimpleLinkType[] = data => {
     const subMetaSectionLinks = getArray<any>(
         data,
-        'config.page.subMetaLinks.sectionLabels',
+        'page.subMetaLinks.sectionLabels',
         [],
     );
 
@@ -102,7 +102,7 @@ const getSubMetaSectionLinks: (data: {}) => SimpleLinkType[] = data => {
 const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
     const subMetaKeywordLinks = getArray<any>(
         data,
-        'config.page.subMetaLinks.keywords',
+        'page.subMetaLinks.keywords',
         [],
     );
 
@@ -113,7 +113,7 @@ const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
 };
 
 const getCommercialProperties = (data: {}): CommercialProperties => {
-    const properties = getObject(data, 'config.page.commercialProperties', {});
+    const properties = getObject(data, 'page.commercial.commercialProperties', {});
     const targeting = getArray<any>(properties, 'editionAdTargetings', []);
     const editionAdTargeting: EditionAdTargeting[] = targeting.map(t => {
         return {
@@ -143,11 +143,11 @@ const getCommercialProperties = (data: {}): CommercialProperties => {
 // validation on types.)
 export const extract = (data: {}): CAPIType => {
     const webPublicationDate = new Date(
-        getNumber(data, 'config.page.webPublicationDate'),
+        getNumber(data, 'page.webPublicationDate'),
     );
     const tags = getTags(data);
-    const isImmersive = getBoolean(data, 'config.isImmersive', false);
-    const sectionName = getNonEmptyString(data, 'config.page.section');
+    const isImmersive = getBoolean(data, 'page.meta.isImmersive', false);
+    const sectionName = getNonEmptyString(data, 'page.section');
 
     const leadContributor: TagType = tags.filter(
         tag => tag.type === 'Contributor',
@@ -155,12 +155,10 @@ export const extract = (data: {}): CAPIType => {
 
     // From the server we get the values: "UK edition", "US edition", "Australia edition", "International edition"
     // editionLongForm is that value, or empty string.
-    const editionLongForm = getString(data, 'config.page.edition', '');
+    const editionLongForm = getString(data, 'page.edition', '');
 
     // Possible values for the editionId: "UK", "US", "AU", "INT"
-    const editionId = getEditionValue(
-        getString(data, 'config.page.editionId', ''),
-    );
+    const editionId = getEditionValue(getString(data, 'page.editionId', ''));
 
     if (editionId === undefined) throw new Error('edition id is undefined');
 
@@ -173,24 +171,24 @@ export const extract = (data: {}): CAPIType => {
         isImmersive,
         webPublicationDateDisplay: getNonEmptyString(
             data,
-            'config.page.webPublicationDateDisplay',
+            'page.webPublicationDateDisplay',
         ),
         headline: apply(
-            getNonEmptyString(data, 'config.page.headline'),
+            getNonEmptyString(data, 'page.content.headline'),
             curly,
             clean,
         ),
         standfirst: apply(
-            getString(data, 'contentFields.fields.standfirst', ''),
+            getString(data, 'page.content.standfirst', ''),
             clean,
         ),
-        main: apply(getString(data, 'contentFields.fields.main', ''), clean),
-        body: getArray<any>(data, 'contentFields.fields.blocks.body')
+        main: apply(getString(data, 'page.content.main', ''), clean),
+        body: getArray<any>(data, 'page.content.blocks.body')
             .map(block => block.bodyHtml)
             .filter(Boolean)
             .join(''),
         author: {
-            byline: getString(data, 'config.page.byline', ''),
+            byline: getString(data, 'page.content.byline', ''),
             twitterHandle: leadContributor
                 ? leadContributor.twitterHandle
                 : undefined,
@@ -198,36 +196,34 @@ export const extract = (data: {}): CAPIType => {
         },
         mainMediaElements: getArray<CAPIElement>(
             data,
-            'contentFields.fields.blocks.main.elements',
+            'page.content.blocks.main.elements',
             [],
         ),
         elements: [].concat(
-            ...getArray<any>(data, 'contentFields.fields.blocks.body')
+            ...getArray<any>(data, 'page.content.blocks.body')
                 .map(block => block.elements)
                 .filter(Boolean),
         ),
-        pageId: getNonEmptyString(data, 'config.page.pageId'),
+        pageId: getNonEmptyString(data, 'page.pageId'),
         sharingUrls: getSharingUrls(data),
-        pillar: findPillar(getString(data, 'config.page.pillar', '')) || 'news',
+        pillar: findPillar(getString(data, 'page.pillar', '')) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
-        sectionLabel: getString(data, 'config.page.sectionLabel'),
-        sectionUrl: getString(data, 'config.page.sectionUrl'),
+        sectionLabel: getString(data, 'page.sectionLabel'),
+        sectionUrl: getString(data, 'page.sectionUrl'),
         subMetaSectionLinks: getSubMetaSectionLinks(data),
         subMetaKeywordLinks: getSubMetaKeywordLinks(data),
-        shouldHideAds: getBoolean(data, 'config.page.shouldHideAds', false),
-        webURL: getNonEmptyString(data, 'config.page.webURL'),
-        guardianBaseURL: getNonEmptyString(data, 'config.page.guardianBaseURL'),
-        contentType: getString(data, 'config.page.contentType'),
-        hasRelated: getBoolean(data, 'config.page.hasRelated', false),
-        hasStoryPackage: getBoolean(data, 'config.page.hasStoryPackage', false),
-        beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
-        isCommentable: getBoolean(data, 'config.page.isCommentable', false),
+        shouldHideAds: getBoolean(data, 'page.meta.shouldHideAds', false),
+        webURL: getNonEmptyString(data, 'page.webURL'),
+        guardianBaseURL: getNonEmptyString(data, 'site.guardianBaseURL'),
+        contentType: getString(data, 'page.contentType'),
+        hasRelated: getBoolean(data, 'page.meta.hasRelated', false),
+        hasStoryPackage: getBoolean(data, 'page.meta.hasStoryPackage', false),
+        beaconURL: getNonEmptyString(data, 'site.beaconUrl'),
+        isCommentable: getBoolean(data, 'page.meta.isCommentable', false),
         commercialProperties: getCommercialProperties(data),
-        starRating: optional(
-            getNumber.bind(null, data, 'config.page.starRating'),
-        ),
+        starRating: optional(getNumber.bind(null, data, 'page.starRating')),
         trailText: apply(
-            getString(data, 'config.page.trailText', ''),
+            getString(data, 'page.content.trailText', ''),
             stripHTML,
         ),
     };

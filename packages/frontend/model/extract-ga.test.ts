@@ -24,7 +24,7 @@ describe('extract-capi', () => {
     it('returns webTitle if available', () => {
         const testWebTitle = 'Waldo Jeffers had reached his limit';
 
-        testData.config.page.webTitle = testWebTitle;
+        testData.page.webTitle = testWebTitle;
 
         const { webTitle } = extract(testData);
 
@@ -32,7 +32,7 @@ describe('extract-capi', () => {
     });
 
     it('returns webTitle as empty string if missing', () => {
-        testData.config.page.webTitle = null;
+        testData.page.webTitle = null;
 
         const { webTitle } = extract(testData);
 
@@ -42,7 +42,7 @@ describe('extract-capi', () => {
     it('returns pillar if available', () => {
         const testPillar = 'sport';
 
-        testData.config.page.pillar = testPillar;
+        testData.page.pillar = testPillar;
 
         findPillar.mockReturnValueOnce(testPillar);
 
@@ -55,7 +55,7 @@ describe('extract-capi', () => {
     it('defaults pillar to "news" if not valid', () => {
         const testPillar = 'foo';
 
-        testData.config.page.pillar = testPillar;
+        testData.page.pillar = testPillar;
 
         findPillar.mockReturnValueOnce(undefined);
 
@@ -68,7 +68,7 @@ describe('extract-capi', () => {
     it('returns section if section available', () => {
         const testSection = 'money';
 
-        testData.config.page.section = testSection;
+        testData.page.section = testSection;
 
         const { section } = extract(testData);
 
@@ -76,7 +76,7 @@ describe('extract-capi', () => {
     });
 
     it('returns section as empty string if missing', () => {
-        testData.config.page.section = null;
+        testData.page.section = null;
 
         const { section } = extract(testData);
 
@@ -84,7 +84,7 @@ describe('extract-capi', () => {
     });
 
     it('returns contentType if contentType available', () => {
-        testData.config.page.contentType = 'Video Article';
+        testData.page.contentType = 'Video Article';
 
         const { contentType } = extract(testData);
 
@@ -92,7 +92,7 @@ describe('extract-capi', () => {
     });
 
     it('returns contentType as empty string if missing', () => {
-        testData.config.page.contentType = null;
+        testData.page.contentType = null;
 
         const { contentType } = extract(testData);
 
@@ -102,7 +102,7 @@ describe('extract-capi', () => {
     it('returns commissioningDesks if commissioningDesks available', () => {
         const testCommissioningDesks = 'Observer New Review';
 
-        testData.config.page.commissioningDesks = testCommissioningDesks;
+        testData.page.commissioningDesks = testCommissioningDesks;
 
         const { commissioningDesks } = extract(testData);
 
@@ -110,7 +110,7 @@ describe('extract-capi', () => {
     });
 
     it('returns commissioningDesks as empty string if missing', () => {
-        testData.config.page.commissioningDesks = null;
+        testData.page.commissioningDesks = null;
 
         const { commissioningDesks } = extract(testData);
 
@@ -120,7 +120,7 @@ describe('extract-capi', () => {
     it('returns contentId if contentId available', () => {
         const testContentId = 'waldo-jeffers/has-reached-his-limit';
 
-        testData.config.page.contentId = testContentId;
+        testData.page.contentId = testContentId;
 
         const { contentId } = extract(testData);
 
@@ -128,7 +128,7 @@ describe('extract-capi', () => {
     });
 
     it('returns contentId as empty string if missing', () => {
-        testData.config.page.contentId = null;
+        testData.page.contentId = null;
 
         const { contentId } = extract(testData);
 
@@ -138,7 +138,7 @@ describe('extract-capi', () => {
     it('returns authorIds if authorIds available', () => {
         const testAuthorIds = 'profile/waldo-jeffers';
 
-        testData.config.page.authorIds = testAuthorIds;
+        testData.page.authorIds = testAuthorIds;
 
         const { authorIds } = extract(testData);
 
@@ -146,7 +146,7 @@ describe('extract-capi', () => {
     });
 
     it('returns authorIds as empty string if missing', () => {
-        testData.config.page.authorIds = null;
+        testData.page.authorIds = null;
 
         const { authorIds } = extract(testData);
 
@@ -156,7 +156,7 @@ describe('extract-capi', () => {
     it('returns keywordIds if keywordIds available', () => {
         const testKeywordIds = 'waldo-jeffers,marsha-bronson';
 
-        testData.config.page.keywordIds = testKeywordIds;
+        testData.page.keywordIds = testKeywordIds;
 
         const { keywordIds } = extract(testData);
 
@@ -164,7 +164,7 @@ describe('extract-capi', () => {
     });
 
     it('returns keywordIds as empty string if missing', () => {
-        testData.config.page.keywordIds = null;
+        testData.page.keywordIds = null;
 
         const { keywordIds } = extract(testData);
 
@@ -174,7 +174,7 @@ describe('extract-capi', () => {
     it('returns toneIds if toneIds available', () => {
         const testToneIds = 'waldo-jeffers,marsha-bronson';
 
-        testData.config.page.toneIds = testToneIds;
+        testData.page.toneIds = testToneIds;
 
         const { toneIds } = extract(testData);
 
@@ -182,7 +182,7 @@ describe('extract-capi', () => {
     });
 
     it('returns toneIds as empty string if missing', () => {
-        testData.config.page.toneIds = null;
+        testData.page.toneIds = null;
 
         const { toneIds } = extract(testData);
 
@@ -192,7 +192,7 @@ describe('extract-capi', () => {
     it('returns seriesId if seriesId available', () => {
         const testSeriesId = 'waldo-jeffers';
 
-        testData.config.page.seriesId = testSeriesId;
+        testData.page.seriesId = testSeriesId;
 
         const { seriesId } = extract(testData);
 
@@ -200,7 +200,7 @@ describe('extract-capi', () => {
     });
 
     it('returns seriesId as empty string if missing', () => {
-        testData.config.page.seriesId = null;
+        testData.page.seriesId = null;
 
         const { seriesId } = extract(testData);
 
@@ -208,7 +208,7 @@ describe('extract-capi', () => {
     });
 
     it('returns isHosted if isHosted available', () => {
-        testData.config.page.isHosted = true;
+        testData.page.meta.isHosted = true;
 
         const { isHosted } = extract(testData);
 
@@ -216,7 +216,7 @@ describe('extract-capi', () => {
     });
 
     it('returns isHosted as "false" if missing', () => {
-        testData.config.page.isHosted = null;
+        testData.page.meta.isHosted = null;
 
         const { isHosted } = extract(testData);
 
@@ -224,7 +224,7 @@ describe('extract-capi', () => {
     });
 
     it('returns edition if edition available', () => {
-        testData.config.page.edition = 'UK';
+        testData.page.edition = 'UK';
 
         const { edition } = extract(testData);
 
@@ -232,7 +232,7 @@ describe('extract-capi', () => {
     });
 
     it('returns edition as "international" if edition is "int"', () => {
-        testData.config.page.edition = 'int';
+        testData.page.edition = 'int';
 
         const { edition } = extract(testData);
 
@@ -240,7 +240,7 @@ describe('extract-capi', () => {
     });
 
     it('returns edition as empty string if edition is missing', () => {
-        testData.config.page.edition = null;
+        testData.page.edition = null;
 
         const { edition } = extract(testData);
 
@@ -250,7 +250,7 @@ describe('extract-capi', () => {
     it('returns beaconUrl if beaconUrl available', () => {
         const testBeaconUrl = 'waldo-jeffers';
 
-        testData.config.page.beaconUrl = testBeaconUrl;
+        testData.site.beaconUrl = testBeaconUrl;
 
         const { beaconUrl } = extract(testData);
 
@@ -258,7 +258,7 @@ describe('extract-capi', () => {
     });
 
     it('returns beaconUrl as empty string if missing', () => {
-        testData.config.page.beaconUrl = null;
+        testData.site.beaconUrl = null;
 
         const { beaconUrl } = extract(testData);
 

@@ -20,28 +20,24 @@ import { findPillar } from './find-pillar';
 
 // we should not bring down the website if a trackable field is missing!
 export const extract = (data: {}): GADataType => {
-    const edition = getString(data, 'config.page.edition', '').toLowerCase();
+    const edition = getString(data, 'page.edition', '').toLowerCase();
 
     return {
-        webTitle: getString(data, 'config.page.webTitle', ''),
-        pillar: findPillar(getString(data, 'config.page.pillar', '')) || 'news',
-        section: getString(data, 'config.page.section', ''),
-        contentType: getString(data, 'config.page.contentType', '')
+        webTitle: getString(data, 'page.webTitle', ''),
+        pillar: findPillar(getString(data, 'page.pillar', '')) || 'news',
+        section: getString(data, 'page.section', ''),
+        contentType: getString(data, 'page.contentType', '')
             .toLowerCase()
             .split(' ')
             .join(''),
-        commissioningDesks: getString(
-            data,
-            'config.page.commissioningDesks',
-            '',
-        ),
-        contentId: getString(data, 'config.page.contentId', ''),
-        authorIds: getString(data, 'config.page.authorIds', ''),
-        keywordIds: getString(data, 'config.page.keywordIds', ''),
-        toneIds: getString(data, 'config.page.toneIds', ''),
-        seriesId: getString(data, 'config.page.seriesId', ''),
-        isHosted: getBoolean(data, 'config.page.isHosted', false).toString(),
+        commissioningDesks: getString(data, 'page.commissioningDesks', ''),
+        contentId: getString(data, 'page.contentId', ''),
+        authorIds: getString(data, 'page.authorIds', ''),
+        keywordIds: getString(data, 'page.keywordIds', ''),
+        toneIds: getString(data, 'page.toneIds', ''),
+        seriesId: getString(data, 'page.seriesId', ''),
+        isHosted: getBoolean(data, 'page.meta.isHosted', false).toString(),
         edition: edition === 'int' ? 'international' : edition,
-        beaconUrl: getString(data, 'config.page.beaconUrl', ''),
+        beaconUrl: getString(data, 'site.beaconUrl', ''),
     };
 };
