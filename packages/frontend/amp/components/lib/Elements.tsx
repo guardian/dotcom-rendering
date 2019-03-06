@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
+import { SubheadingBlockComponent } from '@frontend/amp/components/elements/SubheadingBlockElement';
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
@@ -51,6 +52,8 @@ export const Elements: React.FC<{
                         isImmersive={isImmersive}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+                return <SubheadingBlockComponent key={i} html={element.html} />;
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
                 return (
                     <ImageBlockComponent
