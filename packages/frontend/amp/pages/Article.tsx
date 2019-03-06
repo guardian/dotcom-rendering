@@ -5,6 +5,7 @@ import { Body } from '@frontend/amp/components/Body';
 import { Header } from '@frontend/amp/components/Header';
 import { palette } from '@guardian/pasteup/palette';
 import { Onward } from '@frontend/amp/components/Onward';
+import { AdConsent } from '@frontend/amp/components/AdConsent';
 import { css } from 'emotion';
 import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
@@ -65,6 +66,7 @@ export const Article: React.FC<{
 }> = ({ nav, articleData, config, analytics }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
+        <AdConsent />
 
         <div key="main" className={backgroundColour}>
             <Container>
