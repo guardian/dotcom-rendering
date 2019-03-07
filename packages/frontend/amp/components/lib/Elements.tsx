@@ -49,11 +49,17 @@ export const Elements: React.FC<{
                         key={i}
                         html={element.html}
                         pillar={pillar}
-                        isImmersive={isImmersive}
                     />
                 );
             case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-                return <SubheadingBlockComponent key={i} html={element.html} />;
+                return (
+                    <SubheadingBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                        isImmersive={isImmersive}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
                 return (
                     <ImageBlockComponent
