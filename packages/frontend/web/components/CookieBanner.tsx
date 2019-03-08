@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { Container } from '@guardian/guui';
 import TickIcon from '@guardian/pasteup/icons/tick.svg';
+import RoundelIcon from '@guardian/pasteup/icons/the-guardian-roundel.svg';
 import { getCookie, addCookie } from '@frontend/web/browser/cookie';
+import { phablet, until } from '@guardian/pasteup/breakpoints';
 
 const banner = css`
     position: fixed;
     bottom: 0;
-    background-color: ${palette.sport.dark};
+    background-color: ${palette.neutral[20]};
     padding: 10px 0 24px;
     width: 100%;
+`;
 
+const inner = css`
+    padding: 0 10px;
+    max-width: 60%;
+    position: relative;
+    margin: 0 20%;
     p {
-        ${textSans(5)};
+        ${body(2)};
         margin-top: 0;
-        margin-bottom: 8px;
         color: ${palette.neutral[100]};
+        margin-bottom: 8px;
     }
 
     a {
@@ -29,22 +37,36 @@ const banner = css`
             border-color: ${palette.neutral[100]};
         }
     }
-`;
-
-const inner = css`
-    padding: 0 10px;
+    ${until.phablet} {
+        max-width: 90%;
+        margin: auto;
+        padding 0;
+        p {
+            ${body(1)};
+        }
+    }
 `;
 
 const header = css`
     ${headline(6)};
     font-weight: bold;
     padding-bottom: 12px;
-    color: ${palette.highlight.main};
+    color: ${palette.neutral[100]};
 `;
 
 const more = css`
     margin-left: 12px;
     ${textSans(3)};
+    font-weight: bold;
+`;
+
+const iconCss = css`
+    max-width: 20%;
+    position: absolute;
+    left: 45px;
+    ${until.phablet} {
+        display: none;
+    }
 `;
 
 const button = css`
@@ -62,6 +84,7 @@ const button = css`
     border: 0;
     white-space: nowrap;
     display: inline-block;
+    font-weight: bold;
 
     svg {
         position: absolute;
@@ -112,27 +135,30 @@ export class CookieBanner extends Component<{}, { show: boolean }> {
 
         return (
             <div className={banner}>
+                <div className={iconCss}>
+                    <RoundelIcon />
+                </div>
                 <Container className={inner}>
                     <h1 className={header}>Your privacy</h1>
                     <p>
                         We use cookies to improve your experience on our site
-                        and to show you relevant advertising.
+                        and to show you personalised advertising.
                     </p>
                     <p>
-                        To find out more, read our updated{' '}
+                        To find out more, read our{' '}
                         <a href="/help/privacy-policy">privacy policy</a> and{' '}
                         <a href="/info/cookies">cookie policy</a>.
                     </p>
                     <div className={actions}>
                         <button className={button} onClick={this.accept}>
                             <TickIcon />
-                            OK
+                            I'm OK with that
                         </button>
                         <a
                             className={more}
                             href="https://profile.theguardian.com/privacy-settings"
                         >
-                            More information
+                            My options
                         </a>
                     </div>
                 </Container>

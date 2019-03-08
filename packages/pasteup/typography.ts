@@ -1,6 +1,6 @@
 type Category = 'headline' | 'body' | 'textSans';
 type HeadlineLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-type BodyLevel = 1 | 2 | 3;
+type BodyLevel = 1 | 2 | 3 | 4;
 type TextSansLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export const serif = {
