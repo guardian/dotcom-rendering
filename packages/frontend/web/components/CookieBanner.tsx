@@ -6,7 +6,7 @@ import { Container } from '@guardian/guui';
 import TickIcon from '@guardian/pasteup/icons/tick.svg';
 import RoundelIcon from '@guardian/pasteup/icons/the-guardian-roundel.svg';
 import { getCookie, addCookie } from '@frontend/web/browser/cookie';
-import { phablet, until } from '@guardian/pasteup/breakpoints';
+import { until } from '@guardian/pasteup/breakpoints';
 
 const banner = css`
     position: fixed;
