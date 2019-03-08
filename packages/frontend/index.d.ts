@@ -4,6 +4,8 @@ interface ArticleProps {
     config: ConfigType;
 }
 
+type tone = 'opinion' | 'paid' | 'default';
+
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

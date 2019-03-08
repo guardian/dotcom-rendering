@@ -78,6 +78,7 @@ export const Article: React.FC<{
                     pillar={articleData.pillar}
                     data={articleData}
                     config={config}
+                    tone={'paid'}
                 />
                 <Onward
                     shouldHideAds={articleData.shouldHideAds}

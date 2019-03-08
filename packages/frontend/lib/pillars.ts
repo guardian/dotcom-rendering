@@ -1,5 +1,7 @@
 import { PillarColours, palette } from '@guardian/pasteup/palette';
 
+export const toneNames: tone[] = ['opinion', 'paid', 'default'];
+
 export const pillarNames: Pillar[] = [
     'news',
     'opinion',
@@ -7,6 +9,12 @@ export const pillarNames: Pillar[] = [
     'culture',
     'lifestyle',
 ];
+
+export const tonePalette: { [K in tone]: string } = {
+    default: palette.neutral[100],
+    opinion: palette.opinion.faded,
+    paid: palette.neutral[86], // this is dcdcdc instead of d9d9d9 (will need approval)
+};
 
 export const pillarPalette: { [K in Pillar]: PillarColours } = {
     news: palette.news,

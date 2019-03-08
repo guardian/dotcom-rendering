@@ -3,12 +3,13 @@ import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/lib/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { TopMeta } from '@frontend/amp/components/TopMeta';
+// import { TopMeta } from '@frontend/amp/components/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { pillarPalette } from '../../lib/pillars';
+import { pillarPalette, tonePalette } from '../../lib/pillars';
+import { PaidTopMeta } from './PaidTopMeta';
 
-const body = (pillar: Pillar) => css`
-    background-color: white;
+const body = (pillar: Pillar, tone: tone) => css`
+    background-color: ${tonePalette[tone]};
 
     ${bulletStyle(pillar)}
 `;
@@ -35,9 +36,11 @@ export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
     config: ConfigType;
-}> = ({ pillar, data, config }) => (
-    <InnerContainer className={body(pillar)}>
-        <TopMeta config={config} articleData={data} />
+    tone: tone;
+}> = ({ pillar, data, config, tone }) => (
+    <InnerContainer className={body(pillar, tone)}>
+        <PaidTopMeta config={config} articleData={data} />
+        {/* <TopMeta config={config} articleData={data} /> */}
         <Elements
             pillar={pillar}
             elements={data.elements}

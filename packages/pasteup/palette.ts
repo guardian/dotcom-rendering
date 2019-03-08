@@ -114,6 +114,7 @@ const specialReport = { dark: '#3f464a' };
 const labs = {
     dark: '#65a897',
     main: '#69d1ca',
+    tone: '#d9d9d9',
 };
 
 export const palette: AllPillarColours & OtherColours = {
