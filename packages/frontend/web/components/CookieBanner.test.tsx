@@ -49,7 +49,7 @@ describe('CookieBanner', () => {
 
         expect(container.firstChild).not.toBeNull();
 
-        fireEvent.click(getByText('OK'));
+        fireEvent.click(getByText("I'm OK with that"));
 
         expect(container.firstChild).toBeNull();
         expect(addCookie).toHaveBeenCalled();
