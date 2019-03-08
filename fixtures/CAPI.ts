@@ -400,4 +400,6 @@ export const CAPI: CAPIType = {
         editionAdTargeting: [],
     },
     starRating: 2,
+    trailText:
+        'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',
 };

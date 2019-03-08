@@ -39,9 +39,15 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             domain: 'amp.theguardian.com',
         };
 
+        const metadata = {
+            description: CAPI.trailText,
+            canonicalURL: CAPI.webURL,
+        };
+
         const resp = document({
             linkedData,
             scripts,
+            metadata,
             title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
             body: (
                 <Article

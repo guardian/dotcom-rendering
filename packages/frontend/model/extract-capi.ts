@@ -8,6 +8,7 @@ import {
     optional,
 } from './validators';
 import { clean } from './clean';
+import { stripHTML } from './strip-html';
 import { string as curly } from 'curlyquotes';
 
 import { getSharingUrls } from './sharing-urls';
@@ -224,6 +225,10 @@ export const extract = (data: {}): CAPIType => {
         commercialProperties: getCommercialProperties(data),
         starRating: optional(
             getNumber.bind(null, data, 'config.page.starRating'),
+        ),
+        trailText: apply(
+            getString(data, 'config.page.trailText', ''),
+            stripHTML,
         ),
     };
 };

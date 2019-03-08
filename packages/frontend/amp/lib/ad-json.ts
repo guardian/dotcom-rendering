@@ -29,3 +29,18 @@ export const adJson = (
 
     return { targeting: json };
 };
+
+export const stringify = (json: AdJson): string => {
+    interface Map {
+        [key: string]: string;
+    }
+    const targeting = json.targeting.reduce(
+        (params, param) => {
+            params[param.name] = param.value;
+            return params;
+        },
+        {} as Map,
+    );
+
+    return JSON.stringify({ targeting });
+};

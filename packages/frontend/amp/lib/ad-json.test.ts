@@ -1,4 +1,4 @@
-import { adJson } from './ad-json';
+import { adJson, stringify } from './ad-json';
 
 const paramSet: AdTargetParam[] = [
     {
@@ -102,5 +102,33 @@ describe('ampadslots', () => {
             return fail();
         }
         expect(p.value).toBe('4,5,1,2,3');
+    });
+});
+
+describe('stringify', () => {
+    it('should generate the correct string value from an AdJson', () => {
+        const edition = 'AU';
+        const targetings: EditionAdTargeting = {
+            paramSet,
+            edition,
+        };
+        const res = adJson(edition, [targetings]);
+        const outputJson = {
+            targeting: {
+                su: '4,5,1,2,3',
+                url:
+                    '/business/2019/feb/07/no-deal-brexit-uk-exporters-risk-being-locked-out-of-world-harbours',
+                tn: 'news',
+                ct: 'article',
+                co: 'richard-partington',
+                k:
+                    'asia-pacific,politics,business,uk/uk,eu,newzealand,world,europe-news,internationaltrade,foreignpolicy,australia-news,eu-referendum,global-economy,japan,economics,south-korea',
+                edition: 'au',
+                sh: 'https://gu.com/p/akj3n',
+                p: 'amp',
+                rp: 'dotcom-rendering',
+            },
+        };
+        expect(stringify(res)).toBe(JSON.stringify(outputJson));
     });
 });

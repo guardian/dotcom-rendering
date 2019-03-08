@@ -13,6 +13,11 @@ interface TextBlockElement {
     html: string;
 }
 
+interface SubheadingBlockElement {
+    _type: 'model.dotcomrendering.pageElements.SubheadingBlockElement';
+    html: string;
+}
+
 interface RichLinkBlockElement {
     _type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
     url: string;
@@ -100,6 +105,7 @@ interface DisclaimerBlockElement {
 
 type CAPIElement =
     | TextBlockElement
+    | SubheadingBlockElement
     | ImageBlockElement
     | InstagramBlockElement
     | TweetBlockElement

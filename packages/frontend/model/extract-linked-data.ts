@@ -1,5 +1,5 @@
-import { getObject } from '@frontend/model/validators';
+import { getArray } from '@frontend/model/validators';
 
-export const extract = (data: {}): object => {
-    return getObject(data, 'config.page.linkedData', {});
+export const extract = (data: {}): object[] => {
+    return getArray(data, 'config.page.linkedData', []);
 };

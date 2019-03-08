@@ -11,16 +11,23 @@ interface RenderToStringResult {
     css: string;
 }
 
+interface Metadata {
+    description: string;
+    canonicalURL: string;
+}
+
 export const document = ({
     linkedData,
     title,
     body,
     scripts,
+    metadata,
 }: {
-    linkedData: object;
+    linkedData: object[];
     title: string;
     body: React.ReactElement<any>;
     scripts: string[];
+    metadata: Metadata;
 }) => {
     const { html, css }: RenderToStringResult = extractCritical(
         // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
@@ -38,8 +45,12 @@ export const document = ({
 <html ⚡>
     <head>
     <meta charset="utf-8">
+
+    <!-- SEO related meta -->
     <title>${title}</title>
-    <link rel="canonical" href="self.html" />
+    <meta name="description" content="${metadata.description}" />
+
+    <link rel="canonical" href="${metadata.canonicalURL}" />
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
