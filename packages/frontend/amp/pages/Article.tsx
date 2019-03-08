@@ -8,7 +8,6 @@ import { Onward } from '@frontend/amp/components/Onward';
 import { css } from 'emotion';
 import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { Brand } from '@frontend/lib/branding';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -47,7 +46,7 @@ export interface ArticleModel {
     commercialProperties: CommercialProperties;
     isImmersive: boolean;
     starRating?: number;
-    brand?: Brand;
+    brand?: Branding;
 }
 
 // TODO move somewhere better
