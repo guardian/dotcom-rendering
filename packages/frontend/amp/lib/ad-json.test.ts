@@ -92,12 +92,7 @@ describe('ampadslots', () => {
 
 describe('stringify', () => {
     it('should generate the correct string value from an AdJson', () => {
-        const edition = 'AU';
-        const targetings: EditionAdTargeting = {
-            paramSet,
-            edition,
-        };
-        const res = adJson(edition, [targetings]);
+        const res = adJson(paramSet);
         const outputJson = {
             targeting: {
                 su: '4,5,1,2,3',
