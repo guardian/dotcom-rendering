@@ -60,7 +60,12 @@ const paramSet: AdTargetParam[] = [
 
 describe('ampadslots', () => {
     it('should set platform to amp', () => {
-        const res = adJson(paramSet);
+        const edition = 'UK';
+        const targetings: EditionAdTargeting = {
+            paramSet,
+            edition: 'UK',
+        };
+        const res = adJson(edition, [targetings]);
         const p = res.targeting.find(param => param.name === 'p');
         if (p === undefined) {
             return fail();
@@ -70,7 +75,12 @@ describe('ampadslots', () => {
     });
 
     it('should set rendering platform to dotcom-rendering', () => {
-        const res = adJson(paramSet);
+        const edition = 'UK';
+        const targetings: EditionAdTargeting = {
+            paramSet,
+            edition,
+        };
+        const res = adJson(edition, [targetings]);
         const renderingPlatform = res.targeting.find(
             param => param.name === 'rp',
         );
@@ -81,7 +91,12 @@ describe('ampadslots', () => {
     });
 
     it('should set values to a comma-separated string', () => {
-        const res = adJson(paramSet);
+        const edition = 'UK';
+        const targetings: EditionAdTargeting = {
+            paramSet,
+            edition: 'UK',
+        };
+        const res = adJson(edition, [targetings]);
         const p = res.targeting.find(param => param.name === 'su');
         if (p === undefined) {
             return fail();
