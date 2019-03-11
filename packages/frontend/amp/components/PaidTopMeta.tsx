@@ -198,123 +198,134 @@ const Headline: React.FC<{
     );
 };
 
-const paidHeaderStyle = `
-                background: #69d1ca;
-                font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-                    sans-serif;
-                font-size: 14px;
-                width: 100%;
-                line-height: 1.5;
-            `;
+const paidHeaderStyle = css`
+    background: #69d1ca;
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-size: 14px;
+    width: 100%;
+    line-height: 1.5;
+`;
+const paidHeaderFlexStyle = css`
+    padding: 0 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+`;
+const flex = css`
+    display: flex;
+`;
+const paidContentStyle = css`
+    padding: 4px 6px;
+    align-items: center;
+    display: flex;
+`;
+const dropDownStyle = css`
+    position: relative;
+    align-items: center;
+    display: flex;
+    input:not(:checked) ~ div {
+        display: none;
+    }
+`;
+const hide = css`
+    display: none;
+`;
+const dropDownLink = css`
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    padding: 19px 10px;
+    ::after {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        transform: translateY(-2px) rotate(45deg);
+        border: 1px solid currentColor;
+        border-left: transparent;
+        border-top: transparent;
+        border-top-color: currentcolor;
+        border-top-style: solid;
+        border-top-width: 1px;
+        border-left-color: currentcolor;
+        border-left-style: solid;
+        border-left-width: 1px;
+        margin-left: 2px;
+        vertical-align: middle;
+    }
+`;
+const dropDownModalStyle = css`
+    position: absolute;
+    background: #121212;
+    font-weight: normal;
+    left: 100px;
+    top: 38px;
+    padding: 16px;
+    color: #ffffff;
+    transform: translate(-50%, 0);
+    width: 234px;
+    border-radius: 4px;
+    z-index: 32000;
+`;
+const modalStyle = css`
+    display: block;
+    margin: 0 0 1em;
+    font-weight: normal;
+    color: #ffffff;
+`;
+const fundingLink = css`
+    color: #69d1ca;
+    display: block;
+    text-decoration: none;
+`;
+const svgStyle = css`
+    display: inline-block;
+    vertical-align: middle;
+    fill: #69d1ca;
+    height: 20px;
+    width: 20px;
+`;
+const logoStyle = css`
+    margin: auto 0;
+`;
+const screenreaderText = css`
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 0.0625rem;
+    margin: -0.0625rem;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 0.0625rem;
+`;
 export const PaidTopMeta: React.FC<{
     config: ConfigType;
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (
     <header className={header}>
-        <div css={paidHeaderStyle}>
-            <div
-                css={`
-                    padding: 0 1.25rem;
-                    display: flex;
-                    justify-content: space-between;
-                    box-sizing: border-box;
-                `}
-            >
-                <div
-                    css={`
-                        display: flex;
-                    `}
-                >
-                    <span
-                        css={`
-                            padding: 4px 6px;
-                            align-items: center;
-                            display: flex;
-                        `}
-                    >
-                        Paid content
-                    </span>
-                    <div
-                        css={`
-                            position: relative;
-                            align-items: center;
-                            display: flex;
-                            input:not(:checked) ~ div {
-                                display: none;
-                            }
-                        `}
-                    >
+        <div className={paidHeaderStyle}>
+            <div className={paidHeaderFlexStyle}>
+                <div className={flex}>
+                    <span className={paidContentStyle}>Paid content</span>
+                    <div className={dropDownStyle}>
                         <input
                             type="checkbox"
                             value="selected"
                             id="paidforAbout"
-                            css={`
-                                display: none;
-                            `}
+                            className={hide}
                         />
-                        <label
-                            css={`
-                                border-left: 1px solid rgba(0, 0, 0, 0.2);
-                                border-right: 1px solid rgba(0, 0, 0, 0.2);
-                                display: inline-block;
-                                padding: 19px 10px;
-                                ::after {
-                                    content: '';
-                                    display: inline-block;
-                                    width: 4px;
-                                    height: 4px;
-                                    transform: translateY(-2px) rotate(45deg);
-                                    border: 1px solid currentColor;
-                                    border-top-color: currentcolor;
-                                    border-top-style: solid;
-                                    border-top-width: 1px;
-                                    border-left-color: currentcolor;
-                                    border-left-style: solid;
-                                    border-left-width: 1px;
-                                    border-left: transparent;
-                                    border-top: transparent;
-                                    margin-left: 2px;
-                                    vertical-align: middle;
-                                }
-                            `}
-                            htmlFor="paidforAbout"
-                        >
+                        <label className={dropDownLink} htmlFor="paidforAbout">
                             About
                         </label>
-                        <div
-                            css={`
-                                position: absolute;
-                                background: #121212;
-                                font-weight: normal;
-                                left: 100px;
-                                top: 38px;
-                                padding: 16px;
-                                color: #ffffff;
-                                transform: translate(-50%, 0);
-                                width: 234px;
-                                border-radius: 4px;
-                                z-index: 32000;
-                            `}
-                        >
-                            <span
-                                css={`
-                                    display: block;
-                                    margin: 0 0 1em;
-                                    font-weight: normal;
-                                    color: #ffffff;
-                                `}
-                            >
+                        <div css={dropDownModalStyle}>
+                            <span className={modalStyle}>
                                 Paid content is paid for and controlled by an
                                 advertiser and produced by the Guardian Labs
                                 team.
                             </span>
                             <a
                                 href="https://www.theguardian.com/content-funding"
-                                css={`
-                                    color: #69d1ca;
-                                    display: block;
-                                    text-decoration: none;
-                                `}
+                                className={fundingLink}
                             >
                                 Learn more about Guardian Labs content
                                 <span>
@@ -322,13 +333,7 @@ export const PaidTopMeta: React.FC<{
                                         width="30"
                                         height="30"
                                         viewBox="0 0 30 30"
-                                        css={`
-                                            display: inline-block;
-                                            vertical-align: middle;
-                                            fill: #69d1ca;
-                                            height: 20px;
-                                            width: 20px;
-                                        `}
+                                        className={svgStyle}
                                     >
                                         <path d="M22.8 14.6L15.2 7l-.7.7 5.5 6.6H6v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9" />
                                     </svg>
@@ -339,9 +344,7 @@ export const PaidTopMeta: React.FC<{
                 </div>
                 <a
                     href="https://www.theguardian.com/guardian-labs"
-                    css={`
-                        margin: auto 0;
-                    `}
+                    className={logoStyle}
                 >
                     <span>
                         <svg width="88.9" height="47">
@@ -349,20 +352,7 @@ export const PaidTopMeta: React.FC<{
                             <path d="M13.9 18.6v-.3l4.5-.8h.5v8.9c0 1.1.5 1.4 1.4 1.4.6 0 1.1-.2 1.5-.7v-8l-1.2-.5v-.4l4.5-.8h.5v10.2l1.2.5v.3l-4.5.6h-.5v-1.3h-.1c-.8.8-2 1.4-3.4 1.4-2.2 0-3.2-1.3-3.2-3.2v-6.8l-1.2-.5zm28.5-1.1h.4v3.3h.1c.5-2.4 1.6-3.3 2.9-3.3l.6.1V21l-.9-.1c-1 0-1.8.2-2.5.5v6.5l1 .6v.4h-6v-.4l1.1-.6V19l-1.2-.4v-.3l4.5-.8zm11.3.2v-3.5l-1.2-.4v-.3l4.6-.8.4.1v15l1.3.5v.4l-4.5.6h-.4v-1.2h-.1a4 4 0 0 1-3 1.3c-2.5 0-4.3-1.9-4.3-5.7 0-4.1 2.1-6.1 5.3-6.1.9-.2 1.6 0 1.9.1zm0 9.6v-9c-.3-.2-.5-.4-1.3-.4-1.2 0-2 1.9-2 5.2 0 3 .5 4.6 2.2 4.6.5 0 .9-.1 1.1-.4zm10-9.8h.4v10.4l1 .6v.4h-5.9v-.4l1.1-.6v-8.8l-1.3-.5v-.3l4.7-.8zm.4-2.9c0 1.1-.9 1.9-2 1.9s-2-.8-2-1.9c0-1.1.9-1.9 2-1.9s2 .8 2 1.9zm13.2 13.3V19l-1.2-.4v-.4l4.5-.8h.5v1.3h.1c1-.9 2.4-1.4 3.9-1.4 2 0 2.8.9 2.8 3v7.6l1.1.6v.4h-6v-.4l1.1-.6v-7.4c0-1.1-.5-1.6-1.4-1.6a3 3 0 0 0-1.6.5v8.5l1 .6v.4h-5.9v-.4l1.1-.6zm-6.4-5.6v-1.5c0-2.2-.5-3-1.9-3h-.5L66 21.1h-.3V18c1.1-.3 2.4-.7 4.1-.7 3 0 4.8.8 4.8 3.4v7.2l1.1.3v.3c-.4.3-1.3.5-2.2.5-1.5 0-2.2-.5-2.5-1.3h-.1c-.6.9-1.5 1.3-2.9 1.3-1.8 0-3-1.1-3-3.1 0-1.9 1.2-2.9 3.5-3.3l2.4-.3zm0 5v-4.5l-.8.1c-1.2.1-1.6.9-1.6 2.5 0 1.8.6 2.3 1.4 2.3.6 0 .8-.1 1-.4zm-38.1-5v-1.5c0-2.2-.5-3-1.9-3h-.5L28 21.3h-.3v-3.1c1.1-.3 2.4-.7 4.1-.7 3 0 4.8.8 4.8 3.4v7.2l1.1.3v.3c-.4.3-1.3.5-2.2.5-1.5 0-2.2-.5-2.5-1.3h-.1c-.6.9-1.5 1.3-2.9 1.3-1.8 0-3-1.1-3-3.1 0-1.9 1.2-2.9 3.5-3.3l2.3-.5zm0 5v-4.5l-.8.1c-1.2.1-1.6.9-1.6 2.5 0 1.8.6 2.3 1.4 2.3.5 0 .8-.1 1-.4zm-12.7 19l1.4-.3V32.4l-1.4-.3v-.4h7.2v.4l-1.5.3v13.9h2.4l3.4-5.3h.4l-.3 5.7H20.1v-.4zM38.6 40v-1.5c0-2.3-.5-3-1.8-3h-.4l-2.8 3.8h-.4l.1-3.5c1.1-.3 2.4-.7 4.2-.7 3.1 0 4.8.8 4.8 3.4v7.4l1.1.3v.3c-.4.3-1.3.5-2.3.5-1.5 0-2.2-.5-2.6-1.3h-.1c-.6.9-1.6 1.4-3 1.4-1.8 0-3.1-1.1-3.1-3.1 0-1.9 1.2-2.9 3.6-3.4l2.7-.6zm0 5.1v-4.6l-.8.1c-1.2.1-1.6.9-1.6 2.6 0 1.8.6 2.3 1.4 2.3.6 0 .8-.1 1-.4zm16.6-4.4c0 4.4-2.5 6.3-6.2 6.3-1.9 0-3.8-.4-4.8-1V31.8l-1.3-.5V31l4.5-.7.5.1v6.1h.1c.6-.7 1.7-1.4 3.3-1.4 2.1 0 3.9 1.5 3.9 5.6zm-4 .4c0-3.4-.7-4.4-2-4.4l-1.2.2v9.3c.3.3.7.4 1.2.4 1.2 0 2-1.4 2-5.5zm13.3 2.1c0 2.3-1.6 3.7-4.7 3.7-1.4 0-2.8-.2-3.9-.6l-.1-3.3h.4l3 3.5.6.1c1.3 0 1.8-.7 1.8-1.7 0-.9-.5-1.3-1.8-1.9l-.7-.3c-2.1-1-3.3-2-3.3-3.9 0-2.3 1.6-3.7 4.4-3.7 1.1 0 2.4.1 3.3.4l.1 3.1h-.4l-2.3-3-.7-.1c-1.1 0-1.6.6-1.6 1.6s.5 1.3 1.9 2l.6.3c2.3.9 3.4 1.7 3.4 3.8z" />
                         </svg>
                     </span>
-                    <span
-                        css={`
-                            border: 0;
-                            clip: rect(0 0 0 0);
-                            height: 0.0625rem;
-                            margin: -0.0625rem;
-                            overflow: hidden;
-                            padding: 0;
-                            position: absolute;
-                            width: 0.0625rem;
-                        `}
-                    >
-                        Guardian Labs
-                    </span>
+                    <span className={screenreaderText}>Guardian Labs</span>
                 </a>
             </div>
         </div>
