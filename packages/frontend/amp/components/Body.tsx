@@ -4,6 +4,8 @@ import { Elements } from '@frontend/amp/components/lib/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
+import { PaidTopMeta } from '@frontend/amp/components/PaidTopMeta';
+
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { pillarPalette, tonePalette } from '@frontend/lib/pillars';
 

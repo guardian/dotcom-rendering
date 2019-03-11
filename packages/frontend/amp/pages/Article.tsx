@@ -46,7 +46,6 @@ export interface ArticleModel {
     commercialProperties: CommercialProperties;
     isImmersive: boolean;
     starRating?: number;
-    brand?: Branding;
 }
 
 // TODO move somewhere better
@@ -79,6 +78,7 @@ export const Article: React.FC<{
                     pillar={articleData.pillar}
                     data={articleData}
                     config={config}
+                    tone="paid" // todo actually see what tone we need
                 />
                 <Onward
                     shouldHideAds={articleData.shouldHideAds}

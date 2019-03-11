@@ -9,15 +9,13 @@ interface AdJson {
 }
 
 export const adJson = (targeting?: AdTargetParam[]): AdJson => {
-    console.log(targeting);
-
     if (!targeting) {
         return { targeting: [] };
     }
 
     let json = targeting.map(p => ({
         name: p.name,
-        value: p.values.join(','),
+        value: Array.isArray(p.value) ? p.value.join(',') : p.value, // Is it an array, or is it a string?
     }));
 
     json = json.filter(p => p.name !== 'p');

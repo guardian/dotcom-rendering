@@ -28,7 +28,7 @@ interface SimpleLinkType {
 
 interface AdTargetParam {
     name: string;
-    values: string[];
+    value: string | string[]; // This is a horrible horrible horrible type.
 }
 
 interface EditionCommercialProperties  {

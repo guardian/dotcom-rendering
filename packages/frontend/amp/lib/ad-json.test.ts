@@ -3,33 +3,33 @@ import { adJson, stringify } from './ad-json';
 const paramSet: AdTargetParam[] = [
     {
         name: 'su',
-        values: ['4', '5', '1', '2', '3'],
+        value: ['4', '5', '1', '2', '3'],
     },
     {
         name: 'url',
-        values: [
+        value: [
             '/business/2019/feb/07/no-deal-brexit-uk-exporters-risk-being-locked-out-of-world-harbours',
         ],
     },
     {
         name: 'tn',
-        values: ['news'],
+        value: ['news'],
     },
     {
         name: 'ct',
-        values: ['article'],
+        value: ['article'],
     },
     {
         name: 'p',
-        values: ['ng'],
+        value: ['ng'],
     },
     {
         name: 'co',
-        values: ['richard-partington'],
+        value: ['richard-partington'],
     },
     {
         name: 'k',
-        values: [
+        value: [
             'asia-pacific',
             'politics',
             'business',
@@ -50,11 +50,11 @@ const paramSet: AdTargetParam[] = [
     },
     {
         name: 'edition',
-        values: ['au'],
+        value: ['au'],
     },
     {
         name: 'sh',
-        values: ['https://gu.com/p/akj3n'],
+        value: ['https://gu.com/p/akj3n'],
     },
 ];
 

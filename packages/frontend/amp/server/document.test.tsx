@@ -65,11 +65,9 @@ test('produces valid AMP doc', async () => {
             scripts: [],
         }),
     );
-
-    if (result.errors.length > 0) {
-        // tslint:disable-next-line:no-console
-        console.log(result.errors);
-    }
+    result.errors.forEach(error => {
+        expect(error).toBeUndefined();
+    });
 
     expect(result.errors.length).toBe(0);
 });

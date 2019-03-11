@@ -1,3 +1,6 @@
+// tslint:disable: react-a11y-role-has-required-aria-props
+// How do we do these input dropdowns?
+
 import React from 'react';
 import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
@@ -24,10 +27,13 @@ const meta = css`
 
 const headerStyle = css`
     ${headline(5)};
-    font-weight: 500;
-    padding-bottom: 24px;
-    padding-top: 3px;
     color: ${palette.neutral[7]};
+    font-size: 1.75rem;
+    line-height: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.02rem;
+    padding-top: 0.375rem;
+    padding-bottom: 1.5rem;
 `;
 
 const headlineCss = css`
@@ -72,6 +78,9 @@ const standfirstCss = pillarMap(
         ${listStyles(pillar)};
         p {
             margin-bottom: 8px;
+            font-weight: 300;
+            margin-top: 0;
+            line-height: 1.25rem;
         }
         strong {
             font-weight: 700;
@@ -149,14 +158,6 @@ const ratingsWrapper = css`
     }
 `;
 
-const paidforBand = css`
-    background: #69d1ca;
-    font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-    font-size: 14px;
-    width: 100%;
-`;
-const paidforMeta = css``;
-
 const emptyStar = css`
     fill: transparent;
     stroke: ${palette.neutral[7]};
@@ -197,42 +198,164 @@ const Headline: React.FC<{
     );
 };
 
-export const TopMeta: React.FC<{
+const paidHeaderStyle = css`
+    background: #69d1ca;
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-size: 14px;
+    width: 100%;
+    line-height: 1.5;
+`;
+const paidHeaderFlexStyle = css`
+    padding: 0 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+`;
+const flex = css`
+    display: flex;
+`;
+const paidContentStyle = css`
+    padding: 4px 6px;
+    align-items: center;
+    display: flex;
+`;
+const dropDownStyle = css`
+    position: relative;
+    align-items: center;
+    display: flex;
+    input:not(:checked) ~ div {
+        display: none;
+    }
+`;
+const hide = css`
+    display: none;
+`;
+const dropDownLink = css`
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    padding: 19px 10px;
+    ::after {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        transform: translateY(-2px) rotate(45deg);
+        border: 1px solid currentColor;
+        border-left: transparent;
+        border-top: transparent;
+        border-top-color: currentcolor;
+        border-top-style: solid;
+        border-top-width: 1px;
+        border-left-color: currentcolor;
+        border-left-style: solid;
+        border-left-width: 1px;
+        margin-left: 2px;
+        vertical-align: middle;
+    }
+`;
+const dropDownModalStyle = css`
+    position: absolute;
+    background: #121212;
+    font-weight: normal;
+    left: 100px;
+    top: 38px;
+    padding: 16px;
+    color: #ffffff;
+    transform: translate(-50%, 0);
+    width: 234px;
+    border-radius: 4px;
+    z-index: 32000;
+`;
+const modalStyle = css`
+    display: block;
+    margin: 0 0 1em;
+    font-weight: normal;
+    color: #ffffff;
+`;
+const fundingLink = css`
+    color: #69d1ca;
+    display: block;
+    text-decoration: none;
+`;
+const svgStyle = css`
+    display: inline-block;
+    vertical-align: middle;
+    fill: #69d1ca;
+    height: 20px;
+    width: 20px;
+`;
+const logoStyle = css`
+    margin: auto 0;
+`;
+const screenreaderText = css`
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 0.0625rem;
+    margin: -0.0625rem;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 0.0625rem;
+`;
+export const PaidTopMeta: React.FC<{
     config: ConfigType;
     articleData: ArticleModel;
 }> = ({ config, articleData }) => (
     <header className={header}>
-        <div>
-            <div>
-                <span class="paidfor-meta__label">Paid content</span>
-                <div class="paidfor-label paidfor-meta__more has-popup">
-                    <input
-                        type="checkbox"
-                        value="selected"
-                        id="paidforAbout"
-                        class="paidfor-input"
-                    />
-                    <label for="paidforAbout" class="tooltip-label">
-                        About
-                    </label>
-                    <div class="popup popup--paidfor">
-                        <span class="popup--paidfor__title">
-                            Paid content is paid for and controlled by an
-                            advertiser and produced by the Guardian Labs team.
-                        </span>
-                        <a
-                            class="popup--paidfor__link"
-                            href={}
-                            // "/*@LinkTo("/content-funding")"
-                        >
-                            Learn more about Guardian Labs content
-                            @inlineSvg("arrow-right", "icon")
-                        </a>
+        <div className={paidHeaderStyle}>
+            <div className={paidHeaderFlexStyle}>
+                <div className={flex}>
+                    <span className={paidContentStyle}>Paid content</span>
+                    <div className={dropDownStyle}>
+                        <input
+                            type="checkbox"
+                            value="selected"
+                            id="paidforAbout"
+                            className={hide}
+                        />
+                        <label className={dropDownLink} htmlFor="paidforAbout">
+                            About
+                        </label>
+                        <div className={dropDownModalStyle}>
+                            <span className={modalStyle}>
+                                Paid content is paid for and controlled by an
+                                advertiser and produced by the Guardian Labs
+                                team.
+                            </span>
+                            <a
+                                href="https://www.theguardian.com/content-funding"
+                                className={fundingLink}
+                            >
+                                Learn more about Guardian Labs content
+                                <span>
+                                    <svg
+                                        width="30"
+                                        height="30"
+                                        viewBox="0 0 30 30"
+                                        className={svgStyle}
+                                    >
+                                        <path d="M22.8 14.6L15.2 7l-.7.7 5.5 6.6H6v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <a
+                    href="https://www.theguardian.com/guardian-labs"
+                    className={logoStyle}
+                >
+                    <span>
+                        <svg width="88.9" height="47">
+                            <path d="M20.2 15.6l1.5-.8V2.6h-1.2l-2.9 3.8h-.3l.2-4.2H30l.2 4.2h-.3l-2.8-3.8h-1.2v12.2l1.6.8v.4h-7.2v-.4zm11.2-.6V1.5L30.2 1V.8l4.4-.8h.4v6.4l.1-.1a6 6 0 0 1 3.7-1.4c1.9 0 2.7 1.1 2.7 3.1v7l1 .6v.4h-5.7v-.4l1-.6V8c0-1.1-.5-1.5-1.4-1.5-.6 0-1.1.2-1.5.5v8l1 .6v.4h-5.7v-.4l1.2-.6zm14.3-4.1c.1 2.2 1.1 4 3.5 4 1.1 0 2-.5 2.7-.9v.4c-.6.8-2.1 1.9-4.2 1.9-3.7 0-5.5-2-5.5-5.6 0-3.5 2.1-5.6 5.4-5.6 3.1 0 4.7 1.6 4.7 5.7v.1h-6.6zm0-.5l3.2-.2c0-2.8-.5-4.6-1.4-4.6-1 0-1.8 2.1-1.8 4.8zM0 21.4c0-5.9 3.9-8 8.2-8 1.8 0 3.6.3 4.5.7l.1 4.1h-.4l-2.5-4C9.5 14 9 14 8.3 14c-2.3 0-3.5 2.7-3.4 7 0 5.2 1 7.6 3.1 7.6l1.3-.2v-5.6L7.8 22v-.5h6.7v.5l-1.4.8v5.5c-1.1.4-3.1.9-5.1.9-4.9 0-8-2.3-8-7.8z" />
+                            <path d="M13.9 18.6v-.3l4.5-.8h.5v8.9c0 1.1.5 1.4 1.4 1.4.6 0 1.1-.2 1.5-.7v-8l-1.2-.5v-.4l4.5-.8h.5v10.2l1.2.5v.3l-4.5.6h-.5v-1.3h-.1c-.8.8-2 1.4-3.4 1.4-2.2 0-3.2-1.3-3.2-3.2v-6.8l-1.2-.5zm28.5-1.1h.4v3.3h.1c.5-2.4 1.6-3.3 2.9-3.3l.6.1V21l-.9-.1c-1 0-1.8.2-2.5.5v6.5l1 .6v.4h-6v-.4l1.1-.6V19l-1.2-.4v-.3l4.5-.8zm11.3.2v-3.5l-1.2-.4v-.3l4.6-.8.4.1v15l1.3.5v.4l-4.5.6h-.4v-1.2h-.1a4 4 0 0 1-3 1.3c-2.5 0-4.3-1.9-4.3-5.7 0-4.1 2.1-6.1 5.3-6.1.9-.2 1.6 0 1.9.1zm0 9.6v-9c-.3-.2-.5-.4-1.3-.4-1.2 0-2 1.9-2 5.2 0 3 .5 4.6 2.2 4.6.5 0 .9-.1 1.1-.4zm10-9.8h.4v10.4l1 .6v.4h-5.9v-.4l1.1-.6v-8.8l-1.3-.5v-.3l4.7-.8zm.4-2.9c0 1.1-.9 1.9-2 1.9s-2-.8-2-1.9c0-1.1.9-1.9 2-1.9s2 .8 2 1.9zm13.2 13.3V19l-1.2-.4v-.4l4.5-.8h.5v1.3h.1c1-.9 2.4-1.4 3.9-1.4 2 0 2.8.9 2.8 3v7.6l1.1.6v.4h-6v-.4l1.1-.6v-7.4c0-1.1-.5-1.6-1.4-1.6a3 3 0 0 0-1.6.5v8.5l1 .6v.4h-5.9v-.4l1.1-.6zm-6.4-5.6v-1.5c0-2.2-.5-3-1.9-3h-.5L66 21.1h-.3V18c1.1-.3 2.4-.7 4.1-.7 3 0 4.8.8 4.8 3.4v7.2l1.1.3v.3c-.4.3-1.3.5-2.2.5-1.5 0-2.2-.5-2.5-1.3h-.1c-.6.9-1.5 1.3-2.9 1.3-1.8 0-3-1.1-3-3.1 0-1.9 1.2-2.9 3.5-3.3l2.4-.3zm0 5v-4.5l-.8.1c-1.2.1-1.6.9-1.6 2.5 0 1.8.6 2.3 1.4 2.3.6 0 .8-.1 1-.4zm-38.1-5v-1.5c0-2.2-.5-3-1.9-3h-.5L28 21.3h-.3v-3.1c1.1-.3 2.4-.7 4.1-.7 3 0 4.8.8 4.8 3.4v7.2l1.1.3v.3c-.4.3-1.3.5-2.2.5-1.5 0-2.2-.5-2.5-1.3h-.1c-.6.9-1.5 1.3-2.9 1.3-1.8 0-3-1.1-3-3.1 0-1.9 1.2-2.9 3.5-3.3l2.3-.5zm0 5v-4.5l-.8.1c-1.2.1-1.6.9-1.6 2.5 0 1.8.6 2.3 1.4 2.3.5 0 .8-.1 1-.4zm-12.7 19l1.4-.3V32.4l-1.4-.3v-.4h7.2v.4l-1.5.3v13.9h2.4l3.4-5.3h.4l-.3 5.7H20.1v-.4zM38.6 40v-1.5c0-2.3-.5-3-1.8-3h-.4l-2.8 3.8h-.4l.1-3.5c1.1-.3 2.4-.7 4.2-.7 3.1 0 4.8.8 4.8 3.4v7.4l1.1.3v.3c-.4.3-1.3.5-2.3.5-1.5 0-2.2-.5-2.6-1.3h-.1c-.6.9-1.6 1.4-3 1.4-1.8 0-3.1-1.1-3.1-3.1 0-1.9 1.2-2.9 3.6-3.4l2.7-.6zm0 5.1v-4.6l-.8.1c-1.2.1-1.6.9-1.6 2.6 0 1.8.6 2.3 1.4 2.3.6 0 .8-.1 1-.4zm16.6-4.4c0 4.4-2.5 6.3-6.2 6.3-1.9 0-3.8-.4-4.8-1V31.8l-1.3-.5V31l4.5-.7.5.1v6.1h.1c.6-.7 1.7-1.4 3.3-1.4 2.1 0 3.9 1.5 3.9 5.6zm-4 .4c0-3.4-.7-4.4-2-4.4l-1.2.2v9.3c.3.3.7.4 1.2.4 1.2 0 2-1.4 2-5.5zm13.3 2.1c0 2.3-1.6 3.7-4.7 3.7-1.4 0-2.8-.2-3.9-.6l-.1-3.3h.4l3 3.5.6.1c1.3 0 1.8-.7 1.8-1.7 0-.9-.5-1.3-1.8-1.9l-.7-.3c-2.1-1-3.3-2-3.3-3.9 0-2.3 1.6-3.7 4.4-3.7 1.1 0 2.4.1 3.3.4l.1 3.1h-.4l-2.3-3-.7-.1c-1.1 0-1.6.6-1.6 1.6s.5 1.3 1.9 2l.6.3c2.3.9 3.4 1.7 3.4 3.8z" />
+                        </svg>
+                    </span>
+                    <span className={screenreaderText}>Guardian Labs</span>
+                </a>
             </div>
         </div>
-
         {articleData.mainMediaElements.map((element, i) => (
             <MainMedia key={i} element={element} />
         ))}
@@ -263,10 +386,6 @@ export const TopMeta: React.FC<{
                     {articleData.author.twitterHandle}
                 </a>
             )}
-
-            <div className={bylineExtras}>
-                {articleData.webPublicationDateDisplay}
-            </div>
 
             <div className={metaExtras}>
                 <ShareIcons
