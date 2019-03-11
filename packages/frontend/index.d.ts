@@ -29,15 +29,13 @@ interface AdTargetParam {
     values: string[];
 }
 
+interface EditionAdTargeting {
+    edition: Edition;
+    paramSet: AdTargetParam[];
+}
 
-
-interface EditionCommercialProperties  {
-    adTargeting?: AdTargetParam[];
-    branding?: Branding;
-    }
-
-type CommercialProperties = {
-    [E in Edition]: EditionCommercialProperties
+interface CommercialProperties {
+    editionAdTargeting: EditionAdTargeting[];
 }
 
 interface LinkType extends SimpleLinkType {
@@ -138,18 +136,6 @@ interface CAPIType {
     commercialProperties: CommercialProperties;
     starRating?: number;
     trailText: string;
-}
-
-  interface Branding {
-    type: 'paid-content';
-    sponsorName: string;
-    logo: {
-        src: string;
-        width: number;
-        height: number;
-        link: string;
-    };
-    aboutThisLink: string;
 }
 
 interface TagType {

@@ -397,10 +397,7 @@ export const CAPI: CAPIType = {
     beaconURL: '//fake.url',
     isCommentable: false,
     commercialProperties: {
-        UK: { adTargeting: [] },
-        US: { adTargeting: [] },
-        AU: { adTargeting: [] },
-        INT: { adTargeting: [] },
+        editionAdTargeting: [],
     },
     starRating: 2,
     trailText:

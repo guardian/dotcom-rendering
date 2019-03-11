@@ -114,7 +114,9 @@ export const AdComponent: React.SFC<{
             data-loading-strategy={'prefer-viewability-over-views'}
             layout={'responsive'}
             type={'doubleclick'}
-            json={stringify(adJson(commercialProperties[edition].adTargeting))}
+            json={stringify(
+                adJson(edition, commercialProperties.editionAdTargeting),
+            )}
             data-slot={ampData(section, contentType)}
             rtc-config={realTimeConfig(
                 edition,
