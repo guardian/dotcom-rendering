@@ -5,7 +5,7 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { pillarPalette } from '../../lib/pillars';
+import { pillarPalette, tonePalette } from '@frontend/lib/pillars';
 
 const body = (pillar: Pillar, tone: Tone) => css`
     background-color: ${tonePalette[tone]};

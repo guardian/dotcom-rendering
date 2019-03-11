@@ -9,6 +9,8 @@ interface AdJson {
 }
 
 export const adJson = (targeting?: AdTargetParam[]): AdJson => {
+    console.log(targeting);
+
     if (!targeting) {
         return { targeting: [] };
     }

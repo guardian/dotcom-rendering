@@ -27,7 +27,7 @@ export interface OtherColours {
     };
     state: { success: colour; error: colour };
     specialReport: { dark: colour };
-    labs: { dark: colour; main: colour };
+    labs: { dark: colour; main: colour; tone: colour };
     green: { dark: colour; main: colour };
     brand: { dark: colour; main: colour; pastel: colour };
 }
@@ -114,6 +114,7 @@ const specialReport = { dark: '#3f464a' };
 const labs = {
     dark: '#65a897',
     main: '#69d1ca',
+    tone: '#d9d9d9',
 };
 
 export const palette: AllPillarColours & OtherColours = {
