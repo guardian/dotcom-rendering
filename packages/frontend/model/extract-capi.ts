@@ -113,7 +113,11 @@ const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
 };
 
 const getCommercialProperties = (data: {}): CommercialProperties => {
-    const properties = getObject(data, 'page.commercial.commercialProperties', {});
+    const properties = getObject(
+        data,
+        'page.commercial.commercialProperties',
+        {},
+    );
     const targeting = getArray<any>(properties, 'editionAdTargetings', []);
     const editionAdTargeting: EditionAdTargeting[] = targeting.map(t => {
         return {
