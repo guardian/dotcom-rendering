@@ -301,7 +301,8 @@ const screenreaderText = css`
 export const PaidTopMeta: React.FC<{
     config: ConfigType;
     articleData: ArticleModel;
-}> = ({ config, articleData }) => (
+    branding: Branding;
+}> = ({ config, articleData, branding }) => (
     <header className={header}>
         <div className={paidHeaderStyle}>
             <div className={paidHeaderFlexStyle}>
@@ -366,6 +367,9 @@ export const PaidTopMeta: React.FC<{
             pillar={articleData.pillar}
             starRating={articleData.starRating}
         />
+        <div>
+            <img src={branding.logo.src} />
+        </div>
 
         <div className={meta}>
             <Byline

@@ -38,33 +38,41 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
     tone: Tone;
-}> = ({ pillar, data, config, tone }) => (
-    <InnerContainer className={body(pillar, tone)}>
-        {tone === 'paid' ? (
-            <PaidTopMeta config={config} articleData={data} />
-        ) : (
-            <TopMeta config={config} articleData={data} />
-        )}
+}> = ({ pillar, data, config, tone }) => {
+    const branding = data.commercialProperties[data.editionId].branding;
+    const displayPaid = branding !== undefined && tone === 'paid';
+    return (
+        <InnerContainer className={body(pillar, tone)}>
+            {displayPaid ? (
+                <PaidTopMeta
+                    config={config}
+                    articleData={data}
+                    branding={branding as Branding}
+                />
+            ) : (
+                <TopMeta config={config} articleData={data} />
+            )}
 
-        <Elements
-            pillar={pillar}
-            elements={data.elements}
-            // stuff for ads
-            edition={data.editionId}
-            section={data.sectionName}
-            contentType={data.contentType}
-            switches={config.switches}
-            commercialProperties={data.commercialProperties}
-            isImmersive={data.isImmersive}
-        />
-        <SubMeta
-            sections={data.subMetaSectionLinks}
-            keywords={data.subMetaKeywordLinks}
-            pillar={pillar}
-            sharingURLs={data.sharingUrls}
-            pageID={data.pageId}
-            isCommentable={data.isCommentable}
-            guardianBaseURL={data.guardianBaseURL}
-        />
-    </InnerContainer>
-);
+            <Elements
+                pillar={pillar}
+                elements={data.elements}
+                // stuff for ads
+                edition={data.editionId}
+                section={data.sectionName}
+                contentType={data.contentType}
+                switches={config.switches}
+                commercialProperties={data.commercialProperties}
+                isImmersive={data.isImmersive}
+            />
+            <SubMeta
+                sections={data.subMetaSectionLinks}
+                keywords={data.subMetaKeywordLinks}
+                pillar={pillar}
+                sharingURLs={data.sharingUrls}
+                pageID={data.pageId}
+                isCommentable={data.isCommentable}
+                guardianBaseURL={data.guardianBaseURL}
+            />
+        </InnerContainer>
+    );
+};
