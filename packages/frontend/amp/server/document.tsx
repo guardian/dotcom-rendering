@@ -23,7 +23,7 @@ export const document = ({
     scripts,
     metadata,
 }: {
-    linkedData: object[];
+    linkedData: object;
     title: string;
     body: React.ReactElement<any>;
     scripts: string[];
