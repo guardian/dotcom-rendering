@@ -5,21 +5,17 @@ describe('linked data', () => {
         const input = {
             config: {
                 page: {
-                    linkedData: [
-                        {
-                            '@type': 'NewsArticle',
-                        },
-                    ],
+                    linkedData: {
+                        '@type': 'NewsArticle',
+                    },
                 },
             },
         };
         const output = extractLinkedData(input);
 
-        expect(output).toEqual([
-            {
-                '@type': 'NewsArticle',
-            },
-        ]);
+        expect(output).toEqual({
+            '@type': 'NewsArticle',
+        });
     });
 
     it('returns empty object if it cannot find data from config.page.linkedData', () => {
@@ -27,6 +23,6 @@ describe('linked data', () => {
             config: {},
         };
 
-        expect(extractLinkedData(invalidInput)).toEqual([]);
+        expect(extractLinkedData(invalidInput)).toEqual({});
     });
 });
