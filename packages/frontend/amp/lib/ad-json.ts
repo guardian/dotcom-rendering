@@ -8,22 +8,17 @@ interface AdJson {
     targeting: KV[];
 }
 
-export const adJson = (
-    edition: Edition,
-    editionAdTargetings: EditionAdTargeting[],
-): AdJson => {
-    const targeting = editionAdTargetings.find(t => t.edition === edition);
-
+export const adJson = (targeting: AdTargetParam[]): AdJson => {
     if (!targeting) {
         return { targeting: [] };
     }
 
-    let json = targeting.paramSet.map(p => ({
-        name: p.name,
-        value: p.values.join(','),
-    }));
-
-    json = json.filter(p => p.name !== 'p');
+    const json = targeting
+        .filter(p => p.name !== 'p')
+        .map(({ name, value }) => ({
+            name,
+            value: Array.isArray(value) ? value.join(',') : value,
+        }));
     json.push({ name: 'p', value: 'amp' });
     json.push({ name: 'rp', value: 'dotcom-rendering' });
 

@@ -26,16 +26,28 @@ interface SimpleLinkType {
 
 interface AdTargetParam {
     name: string;
-    values: string[];
+    value: string | string[];
 }
 
-interface EditionAdTargeting {
-    edition: Edition;
-    paramSet: AdTargetParam[];
+interface EditionCommercialProperties {
+    adTargeting: AdTargetParam[];
+    branding?: Branding;
 }
 
-interface CommercialProperties {
-    editionAdTargeting: EditionAdTargeting[];
+type CommercialProperties = {
+    [E in Edition]: EditionCommercialProperties
+}
+
+interface Branding {
+    type: 'paid-content';
+    sponsorName: string;
+    logo: {
+        src: string;
+        width: number;
+        height: number;
+        link: string;
+    };
+    aboutThisLink: string;
 }
 
 interface LinkType extends SimpleLinkType {

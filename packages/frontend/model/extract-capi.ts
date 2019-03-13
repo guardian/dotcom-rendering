@@ -113,33 +113,11 @@ const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
 };
 
 const getCommercialProperties = (data: {}): CommercialProperties => {
-    const properties = getObject(
+    return getObject(
         data,
-        'page.commercial.commercialProperties',
+        'page.commercial.editionCommercialProperties',
         {},
-    );
-    const targeting = getArray<any>(properties, 'editionAdTargetings', []);
-    const editionAdTargeting: EditionAdTargeting[] = targeting.map(t => {
-        return {
-            edition: getEditionValue(getString(t, 'edition.id')),
-            paramSet: getArray<any>(t, 'paramSet', []).map(param => {
-                if (Array.isArray(param.value)) {
-                    return {
-                        name: param.name,
-                        values: param.value,
-                    };
-                }
-                return {
-                    name: param.name,
-                    values: [param.value],
-                };
-            }),
-        };
-    });
-
-    return {
-        editionAdTargeting,
-    };
+    ) as CommercialProperties;
 };
 
 // TODO really it would be nice if we passed just the data we needed and
