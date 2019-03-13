@@ -1,9 +1,10 @@
 import React from 'react';
 import { AMPJSON } from './AMPJSON';
 import { css, cx } from 'emotion';
+import Tick from '@guardian/pasteup/icons/tick.svg';
 
 const fontFamily =
-    "'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif";
+    'GuardianTextSans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif';
 
 const consentUIStyle = css`
     font-family: ${fontFamily};
@@ -24,6 +25,11 @@ const containerDivStyle = css`
 const h2Style = css`
     margin-bottom: 1em;
     font-size: 1.5em;
+    font-weight: bold;
+`;
+
+const pStyle = css`
+    margin-bottom: 0.5em;
 `;
 
 const aStyle = css`
@@ -100,12 +106,12 @@ export const AdConsent: React.FC<{}> = ({}) => {
                 />
                 <div id="adconsent-ui" className={consentUIStyle}>
                     <div className={containerDivStyle}>
-                        <h2 className={h2Style}>Your pricacy</h2>
-                        <p>
+                        <h2 className={h2Style}>Your privacy</h2>
+                        <p className={pStyle}>
                             We use cookies to improve your experience on our
-                            personalised advertising.
+                            site and to show you personalised advertising.
                         </p>
-                        <p>
+                        <p className={pStyle}>
                             To find out more, read our{' '}
                             <a
                                 className={aStyle}
@@ -126,10 +132,10 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     <div className={cx(actionsStyle, containerDivStyle)}>
                         <button
                             on="tap:the-adconsent-element.accept"
-                            className={cx(buttonStyle, acceptStyle, 'blabla')}
+                            className={cx(buttonStyle, acceptStyle)}
                             role="button"
                         >
-                            I'm OK with that
+                            <Tick /> I'm OK with that
                         </button>
                         <button
                             on="tap:the-adconsent-element.reject"

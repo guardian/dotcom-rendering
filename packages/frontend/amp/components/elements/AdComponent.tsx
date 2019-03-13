@@ -108,6 +108,7 @@ export const AdComponent: React.SFC<{
 }> = ({ edition, section, contentType, config, commercialProperties }) => (
     <div className={adStyle}>
         <amp-ad
+            data-block-on-consent=""
             width={300}
             height={250}
             data-npa-on-unknown-consent={true}
