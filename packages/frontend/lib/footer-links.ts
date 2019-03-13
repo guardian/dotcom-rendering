@@ -1,7 +1,18 @@
+export enum LinkPlatform {
+    Web,
+    Amp,
+}
+
 export interface Link {
     title: string;
-    url: string;
+    url?: string;
+    on?: string;
+    onlyOnPlatform?: LinkPlatform;
 }
+
+export const isOnPlatform = (l: Link, platform: LinkPlatform): boolean => {
+    return !l.onlyOnPlatform || l.onlyOnPlatform === platform;
+};
 
 export const footerLinks: Link[][] = [
     [
@@ -131,6 +142,11 @@ export const footerLinksNew: Link[][] = [
         {
             title: 'Cookie policy',
             url: '/info/cookies',
+        },
+        {
+            title: 'Your privacy',
+            on: 'tap:the-adconsent-element.prompt',
+            onlyOnPlatform: LinkPlatform.Amp,
         },
         {
             title: 'Terms & conditions',

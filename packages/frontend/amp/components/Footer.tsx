@@ -3,7 +3,12 @@ import { css } from 'emotion';
 import { textSans, body } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { InnerContainer } from './InnerContainer';
-import { Link, footerLinksNew } from '@frontend/lib/footer-links';
+import {
+    Link,
+    footerLinksNew,
+    LinkPlatform,
+    isOnPlatform,
+} from '@frontend/lib/footer-links';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
 
 const footer = css`
@@ -126,13 +131,15 @@ const FooterLinks: React.FC<{
     nav: NavType;
 }> = ({ links, nav }) => {
     const linkGroups = links.map(linkGroup => {
-        const ls = linkGroup.map(l => (
-            <li key={l.url}>
-                <a className={footerLink} href={l.url}>
-                    {l.title}
-                </a>
-            </li>
-        ));
+        const ls = linkGroup
+            .filter(l => isOnPlatform(l, LinkPlatform.Amp))
+            .map(l => (
+                <li key={l.url}>
+                    <a className={footerLink} href={l.url} on={l.on}>
+                        {l.title}
+                    </a>
+                </li>
+            ));
         const key = linkGroup.reduce((acc, { title }) => `acc-${title}`, '');
 
         return (

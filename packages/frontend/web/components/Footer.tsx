@@ -6,7 +6,12 @@ import { textSans } from '@guardian/pasteup/typography';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
-import { footerLinks, Link } from '@frontend/lib/footer-links';
+import {
+    footerLinks,
+    Link,
+    LinkPlatform,
+    isOnPlatform,
+} from '@frontend/lib/footer-links';
 
 const footer = css`
     background-color: ${palette.neutral[20]};
@@ -95,13 +100,15 @@ const FooterLinks: React.FC<{
     links: Link[][];
 }> = ({ links }) => {
     const linkGroups = links.map(linkGroup => {
-        const ls = linkGroup.map(l => (
-            <li key={l.url}>
-                <a className={footerLink} href={l.url}>
-                    {l.title}
-                </a>
-            </li>
-        ));
+        const ls = linkGroup
+            .filter(l => isOnPlatform(l, LinkPlatform.Web))
+            .map(l => (
+                <li key={l.url}>
+                    <a className={footerLink} href={l.url}>
+                        {l.title}
+                    </a>
+                </li>
+            ));
         const key = linkGroup.reduce((acc, { title }) => `acc-${title}`, '');
 
         return <ul key={key}>{ls}</ul>;

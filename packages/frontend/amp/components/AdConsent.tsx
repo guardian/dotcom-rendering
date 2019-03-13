@@ -2,8 +2,11 @@ import React from 'react';
 import { AMPJSON } from './AMPJSON';
 import { css, cx } from 'emotion';
 
+const fontFamily =
+    "'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif";
+
 const consentUIStyle = css`
-    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-family: ${fontFamily};
     font-size: 1rem;
     line-height: 1.25rem;
     color: #f6f6f6;
@@ -46,7 +49,7 @@ const buttonStyle = css`
 
 const acceptStyle = css`
     border-radius: 20px;
-    border: .0625rem solid rgba(255, 255, 255, .3);
+    border: 0.0625rem solid rgba(255, 255, 255, 0.3);
     background: #ffe500;
     color: #121212;
     padding: 5px 20px;
@@ -109,8 +112,8 @@ export const AdConsent: React.FC<{}> = ({}) => {
                                 href="https://www.theguardian.com/help/privacy-policy"
                             >
                                 privacy policy
-                            </a>
-                            {' '}and{' '}
+                            </a>{' '}
+                            and{' '}
                             <a
                                 className={aStyle}
                                 href="https://www.theguardian.com/info/cookies"
@@ -123,14 +126,14 @@ export const AdConsent: React.FC<{}> = ({}) => {
                     <div className={cx(actionsStyle, containerDivStyle)}>
                         <button
                             on="tap:the-adconsent-element.accept"
-                            className={cx(buttonStyle,acceptStyle, 'blabla')}
+                            className={cx(buttonStyle, acceptStyle, 'blabla')}
                             role="button"
                         >
                             I'm OK with that
                         </button>
                         <button
                             on="tap:the-adconsent-element.reject"
-                            className={cx(buttonStyle,rejectStyle)}
+                            className={cx(buttonStyle, rejectStyle)}
                             role="button"
                         >
                             I do not want to see personalised ads
