@@ -90,4 +90,22 @@ describe('extract-config', () => {
             expect(isDev).toBe(false);
         });
     });
+
+    it('returns commercialUrl if available', () => {
+        const testCommercialUrl = 'https://fetchMeSomething.com';
+
+        testData.site.commercialUrl = testCommercialUrl;
+
+        const { commercialUrl } = extract(testData);
+
+        expect(commercialUrl).toBe(testCommercialUrl);
+    });
+
+    it('throws error if commercialUrl unavailable', () => {
+        testData.site.commercialUrl = null;
+
+        expect(() => {
+            extract(testData);
+        }).toThrow();
+    });
 });

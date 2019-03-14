@@ -15,52 +15,51 @@ if (module.hot) {
     module.hot.accept();
 }
 
-// ------------------------------
-
-// Kick off the app
-const hydrate = () => {
+const initApp = (): void => {
     const { cssIDs, data } = window.guardian.app;
+    const { commercialUrl } = data.config;
 
-    initGa();
+    const enhanceApp = () => {
+        initGa();
 
-    const container = document.getElementById('app');
+        const container = document.getElementById('app');
 
-    if (container) {
-        /**
-         * TODO: Remove conditional when Emotion's issue is resolved.
-         * We're having to prevent emotion hydrating styles in the browser
-         * in development mode to retain the sourceMap info. As detailed
-         * in the issue raised here https://github.com/emotion-js/emotion/issues/487
-         */
-        if (process.env.NODE_ENV !== 'development') {
-            hydrateCSS(cssIDs);
+        if (container) {
+            /**
+             * TODO: Remove conditional when Emotion's issue is resolved.
+             * We're having to prevent emotion hydrating styles in the browser
+             * in development mode to retain the sourceMap info. As detailed
+             * in the issue raised here https://github.com/emotion-js/emotion/issues/487
+             */
+            if (process.env.NODE_ENV !== 'development') {
+                hydrateCSS(cssIDs);
+            }
+
+            hydrateApp(React.createElement(Article, { data }), container);
         }
 
-        hydrateApp(React.createElement(Article, { data }), container);
-    }
+        sendGaPageView();
+    };
 
-    sendGaPageView();
+    const loadCommercial = (): Promise<void> => {
+        return loadScript(commercialUrl);
+    };
+
+    loadCommercial()
+        .then(() => {
+            enhanceApp();
+        })
+        .catch(err => {
+            // If loadCommercial fails reportError and enhanceApp
+            reportError(err, {}, false);
+            enhanceApp();
+        });
 };
 
-const initApp = () => {
-    const { commercialUrl } = window.guardian.app.data.config;
-    if (commercialUrl) {
-        loadScript(commercialUrl)
-            .then(() => {
-                hydrate();
-            })
-            .catch(err => {
-                reportError(err, {}, false);
-                hydrate();
-            });
-    } else {
-        hydrate();
-    }
-};
-
-const run = () => {
+const run = (): void => {
     getRaven()
         .catch(err => {
+            // If getRaven fails continue to initApp
             initApp();
         })
         .then(raven => {
