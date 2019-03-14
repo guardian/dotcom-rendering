@@ -76,12 +76,9 @@ You can also find these extensions by searching for `@recommended` in the extens
 
 ### Auto fix on save
 
-We recommend you update your workspace settings to automatically fix formatting errors on save:
+We recommend you update your workspace settings to automatically fix formatting errors on save, this prevent your commits from validating later on. Note. The current instruction work with the TSLint plugin `esbenp.prettier-vscode` and has been tested against the latest version of TSCode at the time of this writing
 
-1. Open the Command Palette (`shift + cmd + P`) and type `Preferences: Open Workspace Settings`
-2. Search for `tslint.autoFixOnSave`
-3. Update your `settings.json` with:
+1. Open the Command Palette (`shift + cmd + P`) and type `>Preferences: Open Settings (JSON)`
+2. Add the key value `"tslint.autoFixOnSave": true,`
 
-```json
-    "tslint.autoFixOnSave": true,
-```
+

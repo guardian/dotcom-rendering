@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "ms-vscode.vscode-typescript-tslint-plugin",
+        "esbenp.prettier-vscode",
         "wix.vscode-import-cost",
         "eamodio.gitlens",
         "orta.vscode-jest"
