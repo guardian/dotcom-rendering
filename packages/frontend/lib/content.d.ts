@@ -34,6 +34,13 @@ interface ImageBlockElement {
     displayCredit: boolean;
     role: string;
 }
+interface YoutubeBlockElement {
+    _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
+    id: string;
+    assetId: string;
+    channelId: string;
+    mediaTitle: string;
+}
 
 interface InstagramBlockElement {
     _type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
@@ -107,6 +114,7 @@ type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
     | ImageBlockElement
+    | YoutubeBlockElement
     | InstagramBlockElement
     | TweetBlockElement
     | RichLinkBlockElement

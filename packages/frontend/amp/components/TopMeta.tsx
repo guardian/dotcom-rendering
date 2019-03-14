@@ -195,7 +195,7 @@ export const TopMeta: React.FC<{
 }> = ({ config, articleData }) => (
     <header className={header}>
         {articleData.mainMediaElements.map((element, i) => (
-            <MainMedia key={i} element={element} />
+            <MainMedia key={i} element={element} pillar={articleData.pillar} />
         ))}
 
         <Headline

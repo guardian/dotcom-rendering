@@ -18,7 +18,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const config = extractConfig(body);
 
         const scripts = [
-            ...extractScripts(CAPI.elements),
+            ...extractScripts(CAPI.elements, CAPI.mainMediaElements),
             ...(config.switches.subscribeWithGoogle
                 ? getSubscribeWithGoogleExtensionScripts(
                       config.subscribeWithGoogleApiUrl,

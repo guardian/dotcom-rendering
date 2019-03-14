@@ -5,6 +5,7 @@ import { css } from 'emotion';
 import { textSans } from '@guardian/pasteup/typography';
 import InfoIcon from '@guardian/pasteup/icons/info.svg';
 import { palette } from '@guardian/pasteup/palette';
+import { YoutubeBlockComponent } from '@frontend/amp/components/elements/YoutubeBlockComponent';
 
 const figureStyle = css`
     margin: 0 0;
@@ -106,10 +107,13 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
 
 export const MainMedia: React.FC<{
     element: CAPIElement;
-}> = ({ element }) => {
+    pillar: Pillar;
+}> = ({ element, pillar }) => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return mainImage(element);
+        case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
+            return <YoutubeBlockComponent element={element} pillar={pillar} />;
         default:
             return null;
     }

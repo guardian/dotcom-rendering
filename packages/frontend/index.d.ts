@@ -207,6 +207,7 @@ declare namespace JSX {
         'amp-analytics': any;
         'amp-pixel': any;
         'amp-ad': any;
+        'amp-youtube': any;
         template: any;
     }
 }
