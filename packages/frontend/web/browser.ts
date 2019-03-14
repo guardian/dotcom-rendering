@@ -8,7 +8,7 @@ import {
     sendPageView as sendGaPageView,
 } from '@frontend/web/browser/ga';
 import { Article } from './pages/Article';
-import { ReportedError } from '@frontend/web/browser/reportError';
+import { ReportedError, reportError } from '@frontend/web/browser/reportError';
 import { loadScript } from '@frontend/web/browser/loadScript';
 
 if (module.hot) {
@@ -18,34 +18,50 @@ if (module.hot) {
 // ------------------------------
 
 // Kick off the app
-const initApp = () => {
-    const hydrate = () => {
-        const { cssIDs, data } = window.guardian.app;
+const hydrate = () => {
+    const { cssIDs, data } = window.guardian.app;
 
-        initGa();
+    initGa();
 
-        const container = document.getElementById('app');
+    const container = document.getElementById('app');
 
-        if (container) {
-            /**
-             * TODO: Remove conditional when Emotion's issue is resolved.
-             * We're having to prevent emotion hydrating styles in the browser
-             * in development mode to retain the sourceMap info. As detailed
-             * in the issue raised here https://github.com/emotion-js/emotion/issues/487
-             */
-            if (process.env.NODE_ENV !== 'development') {
-                hydrateCSS(cssIDs);
-            }
-
-            hydrateApp(React.createElement(Article, { data }), container);
+    if (container) {
+        /**
+         * TODO: Remove conditional when Emotion's issue is resolved.
+         * We're having to prevent emotion hydrating styles in the browser
+         * in development mode to retain the sourceMap info. As detailed
+         * in the issue raised here https://github.com/emotion-js/emotion/issues/487
+         */
+        if (process.env.NODE_ENV !== 'development') {
+            hydrateCSS(cssIDs);
         }
 
-        sendGaPageView();
-    };
+        hydrateApp(React.createElement(Article, { data }), container);
+    }
 
+    sendGaPageView();
+};
+
+const initApp = () => {
+    const { commercialUrl } = window.guardian.app.data.config;
+    if (commercialUrl) {
+        loadScript(commercialUrl)
+            .then(() => {
+                hydrate();
+            })
+            .catch(err => {
+                reportError(err, {}, false);
+                hydrate();
+            });
+    } else {
+        hydrate();
+    }
+};
+
+const run = () => {
     getRaven()
         .catch(err => {
-            hydrate();
+            initApp();
         })
         .then(raven => {
             if (!raven) {
@@ -79,17 +95,16 @@ const initApp = () => {
 
                 // Typecast Event to PromiseRejectionEvent for TypeScript
                 const { reason } = event as PromiseRejectionEvent;
-
                 raven.captureException(reason);
             });
 
             raven.context(
                 {
                     tags: {
-                        feature: 'hydrate',
+                        feature: 'initApp',
                     },
                 },
-                hydrate,
+                initApp,
             );
         })
         .catch(() => {
@@ -99,21 +114,6 @@ const initApp = () => {
              */
             return;
         });
-};
-
-const run = () => {
-    const { commercialUrl } = window.guardian.app.data.config;
-    if (commercialUrl) {
-        loadScript(commercialUrl)
-            .then(() => {
-                initApp();
-            })
-            .catch(() => {
-                initApp();
-            });
-    } else {
-        initApp();
-    }
 };
 
 /*
