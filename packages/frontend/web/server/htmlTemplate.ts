@@ -5,6 +5,7 @@ import { getStatic } from '@frontend/lib/assets';
 export const htmlTemplate = ({
     title = 'The Guardian',
     linkedData,
+    preloadScripts,
     priorityScripts,
     lowPriorityScripts,
     css,
@@ -16,6 +17,7 @@ export const htmlTemplate = ({
 }: {
     title?: string;
     linkedData: object;
+    preloadScripts: string[];
     priorityScripts: string[];
     lowPriorityScripts: string[];
     css: string;
@@ -42,7 +44,7 @@ export const htmlTemplate = ({
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
                 </script>
-                ${priorityScripts
+                ${preloadScripts
                     .map(
                         url => `<link rel="preload" href="${url}" as="script">`,
                     )
