@@ -27,6 +27,7 @@ describe('ShareCount', () => {
         isDev: false,
         switches: {},
         dfpAccountId: '',
+        commercialUrl: '',
     };
 
     afterEach(() => {

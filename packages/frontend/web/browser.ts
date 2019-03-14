@@ -9,13 +9,16 @@ import {
 } from '@frontend/web/browser/ga';
 import { Article } from './pages/Article';
 import { ReportedError } from '@frontend/web/browser/reportError';
+import { loadScript } from '@frontend/web/browser/loadScript';
 
 if (module.hot) {
     module.hot.accept();
 }
 
+// ------------------------------
+
 // Kick off the app
-const go = () => {
+const initApp = () => {
     const hydrate = () => {
         const { cssIDs, data } = window.guardian.app;
 
@@ -98,9 +101,29 @@ const go = () => {
         });
 };
 
-// Make sure we've patched the env before running the app
+const run = () => {
+    const { commercialUrl } = window.guardian.app.data.config;
+    if (commercialUrl) {
+        loadScript(commercialUrl)
+            .then(() => {
+                initApp();
+            })
+            .catch(() => {
+                initApp();
+            });
+    } else {
+        initApp();
+    }
+};
+
+/*
+    We want to run `run` only after polyfill.io has initialised
+    By the time this script runs, if `window.guardian.polyfilled` is true,
+    meaning that polyfill.io has initialised, then we run run(), otherwise
+    we stick it in window.guardian.onPolyfilled to be ran later.
+*/
 if (window.guardian.polyfilled) {
-    go();
+    run();
 } else {
-    window.guardian.onPolyfilled = go;
+    window.guardian.onPolyfilled = run;
 }

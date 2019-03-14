@@ -172,6 +172,7 @@ interface ConfigType {
     isDev: boolean;
     switches: { [key: string]: boolean };
     dfpAccountId: string;
+    commercialUrl: string;
 }
 
 // 3rd party type declarations
