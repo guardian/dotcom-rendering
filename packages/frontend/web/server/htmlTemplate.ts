@@ -39,11 +39,9 @@ export const htmlTemplate = ({
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
-
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
                 </script>
-
                 ${priorityScripts
                     .map(
                         url => `<link rel="preload" href="${url}" as="script">`,

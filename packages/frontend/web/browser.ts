@@ -10,6 +10,7 @@ import {
 import { Article } from './pages/Article';
 import { ReportedError, reportError } from '@frontend/web/browser/reportError';
 import { loadScript } from '@frontend/web/browser/loadScript';
+import { RavenStatic } from 'raven-js';
 
 if (module.hot) {
     module.hot.accept();
@@ -56,6 +57,47 @@ const initApp = (): void => {
         });
 };
 
+const initAppWithRaven = (raven: RavenStatic) => {
+    const oldOnError = window.onerror;
+
+    /**
+     * Make sure global onerror doesn't report errors
+     * already manually reported via reportError module
+     * by checking for 'reported' property
+     */
+    window.onerror = (
+        message,
+        filename,
+        lineno,
+        colno,
+        error: ReportedError | undefined,
+    ) => {
+        // Not all browsers pass the error object
+        if (!error || !error.reported) {
+            oldOnError(message, filename, lineno, colno, error);
+        }
+    };
+
+    // Report unhandled promise rejections
+    window.addEventListener('unhandledrejection', event => {
+        // Prevent error output on the console:
+        event.preventDefault();
+
+        // Typecast Event to PromiseRejectionEvent for TypeScript
+        const { reason } = event as PromiseRejectionEvent;
+        raven.captureException(reason);
+    });
+
+    raven.context(
+        {
+            tags: {
+                feature: 'initApp',
+            },
+        },
+        initApp,
+    );
+};
+
 const run = (): void => {
     getRaven()
         .catch(err => {
@@ -67,44 +109,7 @@ const run = (): void => {
                 return;
             }
 
-            const oldOnError = window.onerror;
-
-            /**
-             * Make sure global onerror doesn't report errors
-             * already manually reported via reportError module
-             * by checking for 'reported' property
-             */
-            window.onerror = (
-                message,
-                filename,
-                lineno,
-                colno,
-                error: ReportedError | undefined,
-            ) => {
-                // Not all browsers pass the error object
-                if (!error || !error.reported) {
-                    oldOnError(message, filename, lineno, colno, error);
-                }
-            };
-
-            // Report unhandled promise rejections
-            window.addEventListener('unhandledrejection', event => {
-                // Prevent error output on the console:
-                event.preventDefault();
-
-                // Typecast Event to PromiseRejectionEvent for TypeScript
-                const { reason } = event as PromiseRejectionEvent;
-                raven.captureException(reason);
-            });
-
-            raven.context(
-                {
-                    tags: {
-                        feature: 'initApp',
-                    },
-                },
-                initApp,
-            );
+            initAppWithRaven(raven);
         })
         .catch(() => {
             /**
