@@ -40,18 +40,10 @@ const richLink = css`
 export const RichLinkBlockComponent: React.FC<{
     element: RichLinkBlockElement;
     pillar: Pillar;
-}> = ({ element, pillar }) => {
-    if (element.sponsorship) {
-        throw new Error('Sponsored rich links not supported');
-    }
-    return (
-        <aside className={richLinkContainer}>
-            <a
-                className={cx(richLink, pillarColour(pillar))}
-                href={element.url}
-            >
-                {element.text}
-            </a>
-        </aside>
-    );
-};
+}> = ({ element, pillar }) => (
+    <aside className={richLinkContainer}>
+        <a className={cx(richLink, pillarColour(pillar))} href={element.url}>
+            {element.text}
+        </a>
+    </aside>
+);
