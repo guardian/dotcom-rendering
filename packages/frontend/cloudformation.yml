@@ -45,7 +45,6 @@ Parameters:
   InstanceType:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
-    Default: t3.small
     
 Conditions:
     HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
