@@ -52,7 +52,13 @@ const initApp = (): void => {
         })
         .catch(err => {
             // If loadCommercial fails reportError and enhanceApp
-            reportError(err, {}, false);
+            reportError(
+                err,
+                {
+                    feature: 'commercial',
+                },
+                false,
+            );
             enhanceApp();
         });
 };
