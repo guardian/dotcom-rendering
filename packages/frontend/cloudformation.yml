@@ -42,6 +42,10 @@ Parameters:
     Type: String
     Description: (Optional) Number of periods over which the latency is compared to the threshold before to send a notification
     Default: '5'
+  InstanceType:
+    Type: String
+    Description: EC2 Instance Type to use for dotcom-rendering
+    Default: t3.small
     
 Conditions:
     HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -185,7 +189,7 @@ Resources:
         Ref: AMI
       SecurityGroups:
       - Ref: InstanceSecurityGroup
-      InstanceType: t3.medium
+      InstanceType: !Ref InstanceType
       IamInstanceProfile:
         Ref: InstanceProfile
       AssociatePublicIpAddress: true
