@@ -1,4 +1,4 @@
-const loadScript = (src: string): Promise<void> => {
+const loadScript = (src: string, props?: object): Promise<void> => {
     if (document.querySelector(`script[src="${src}"]`)) {
         return Promise.resolve();
     }
@@ -6,6 +6,9 @@ const loadScript = (src: string): Promise<void> => {
         const ref = document.scripts[0];
         const script = document.createElement('script');
         script.src = src;
+        if (props) {
+            Object.assign(script, props);
+        }
         script.onload = () => {
             resolve();
         };
