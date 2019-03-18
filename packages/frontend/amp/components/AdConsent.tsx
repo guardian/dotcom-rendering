@@ -5,9 +5,6 @@ import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import Tick from '@guardian/pasteup/icons/tick.svg';
 
-const fontFamily =
-    'GuardianTextSans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif';
-
 const consentUIStyle = css`
     font-family: ${textSans(3)};
     font-size: 16px;
