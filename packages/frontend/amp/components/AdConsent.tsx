@@ -1,41 +1,42 @@
 import React from 'react';
-import { AMPJSON } from './AMPJSON';
+import { JsonScript } from './AMPJSON';
 import { css, cx } from 'emotion';
+import { textSans } from '@guardian/pasteup/typography';
+import { palette } from '@guardian/pasteup/palette';
 import Tick from '@guardian/pasteup/icons/tick.svg';
 
 const fontFamily =
     'GuardianTextSans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif';
 
 const consentUIStyle = css`
-    font-family: ${fontFamily};
-    font-size: 1rem;
-    line-height: 1.25rem;
-    color: #f6f6f6;
-    background-color: rgb(51, 51, 51);
-
-    max-width: 37.5rem;
+    font-family: ${textSans(3)};
+    font-size: 16px;
+    line-height: 20px;
+    color: ${palette.neutral[97]};
+    background-color: ${palette.neutral[20]};
+    max-width: 600px;
     margin: 0 auto;
     overflow-x: hidden;
 `;
 
 const containerDivStyle = css`
-    margin: 1em;
+    margin: 16px;
 `;
 
 const h2Style = css`
-    margin-bottom: 1em;
-    font-size: 1.5em;
+    margin-bottom: 16px;
+    font-size: 24px;
     font-weight: bold;
 `;
 
 const pStyle = css`
-    margin-bottom: 0.5em;
+    margin-bottom: 8px;
 `;
 
 const aStyle = css`
-    color: #f6f6f6;
+    color: ${palette.neutral[97]};
     &:hover {
-        text-decoration: 0;
+        text-decoration: none;
     }
 `;
 
@@ -50,14 +51,14 @@ const buttonStyle = css`
     color: inherit;
     display: block;
     width: 100%;
-    margin-top: 1em;
+    margin-top: 16px;
 `;
 
 const acceptStyle = css`
     border-radius: 20px;
-    border: 0.0625rem solid rgba(255, 255, 255, 0.3);
-    background: #ffe500;
-    color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: ${palette.highlight.main};
+    color: ${palette.neutral[7]};
     padding: 5px 20px;
     font-weight: bold;
 `;
@@ -70,7 +71,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
     return (
         <>
             <amp-geo layout="nodisplay">
-                <AMPJSON
+                <JsonScript
                     o={{
                         ISOCountryGroups: {
                             eea: ['preset-eea'],
@@ -85,7 +86,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                 id="the-adconsent-element"
                 style={{ background: 'none' }}
             >
-                <AMPJSON
+                <JsonScript
                     o={{
                         consents: {
                             adconsent: {
