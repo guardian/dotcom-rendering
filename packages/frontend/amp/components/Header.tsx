@@ -7,7 +7,7 @@ import { pillarPalette } from '../../lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
 import { AmpSubscriptionGoogle } from '@frontend/amp/components/elements/AmpSubscriptionGoogle';
-import { mobileLandscape } from '@guardian/pasteup/breakpoints';
+import { mobileLandscape, until } from '@guardian/pasteup/breakpoints';
 
 const headerStyles = css`
     background-color: ${palette.brand.main};
@@ -30,6 +30,14 @@ const logoStyles = css`
     path {
         fill: ${palette.neutral[100]};
     }
+
+    ${until.mobileMedium} {
+        height: 44px;
+        width: 135px;
+        margin-bottom: 24px;
+        margin-right: 52px;
+        margin-top: 9px;
+    }
 `;
 
 const pillarListStyles = css`
@@ -46,6 +54,12 @@ const pillarListItemStyle = css`
 
             :before {
                 display: none;
+            }
+        }
+
+        ${until.mobileLandscape} {
+            a {
+                padding-left: 10px;
             }
         }
     }
@@ -105,6 +119,14 @@ const veggieStyles = css`
     bottom: -3px;
     right: 20px;
     position: absolute;
+
+    ${until.mobileMedium} {
+        bottom: 50px;
+    }
+
+    ${until.mobileLandscape} {
+        right: 5px;
+    }
 `;
 
 const lineStyles = css`
@@ -180,7 +202,7 @@ export const Header: React.FC<{
                 >
                     The Guardian - Back to home
                 </span>
-                <Logo className={logoStyles} />
+                <Logo />
             </a>
         </div>
 

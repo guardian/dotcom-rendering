@@ -19,7 +19,7 @@ const supportHeaderStyles = css`
     ${supportStyles}
     justify-content: center;
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 10px;
 `;
 
 const supportFooterStyles = css`
