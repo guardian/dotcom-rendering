@@ -1,4 +1,3 @@
-// tslint:disable:react-no-dangerous-html
 import React from 'react';
 
 export const JsonScript: React.FC<{ o: any }> = ({ o }) => {
@@ -6,7 +5,7 @@ export const JsonScript: React.FC<{ o: any }> = ({ o }) => {
     return (
         <script
             type="application/json"
-            dangerouslySetInnerHTML={{ __html: JSONString }}
+            dangerouslySetInnerHTML={{ __html: JSONString }} // tslint:disable-line
         />
     );
 };
