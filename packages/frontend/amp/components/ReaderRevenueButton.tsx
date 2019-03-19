@@ -56,7 +56,7 @@ const arrowRight = css`
     display: none;
 
     ${mobileMedium} {
-        display: block;
+        display: inline-block;
     }
 `;
 
