@@ -1,5 +1,5 @@
 import React from 'react';
-import { JsonScript } from './AMPJSON';
+import { JsonScript } from './JsonScript';
 import { css, cx } from 'emotion';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
