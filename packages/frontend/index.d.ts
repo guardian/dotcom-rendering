@@ -207,12 +207,9 @@ declare namespace JSX {
         'amp-analytics': any;
         'amp-pixel': any;
         'amp-ad': any;
-<<<<<<< HEAD
         'amp-youtube': any;
-=======
         'amp-geo': any;
         'amp-consent': any;
->>>>>>> Added standard amp-consent component
         template: any;
     }
 }
