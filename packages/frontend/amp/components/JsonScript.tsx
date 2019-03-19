@@ -5,7 +5,7 @@ export const JsonScript: React.FC<{ o: any }> = ({ o }) => {
     return (
         <script
             type="application/json"
-            // tslint:disable-next-line react-no-dangerous-html
+            // tslint:disable-next-line:react-no-dangerous-html
             dangerouslySetInnerHTML={{ __html: JSONString }}
         />
     );
