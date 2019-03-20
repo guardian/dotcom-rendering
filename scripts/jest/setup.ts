@@ -9,7 +9,7 @@ window.guardian = {
         data: {},
         cssIDs: [],
     },
-    polyfilled: true,
+    polyfilled: false,
     onPolyfilled: () => {
         return undefined;
     },

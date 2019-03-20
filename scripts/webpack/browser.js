@@ -27,7 +27,7 @@ module.exports = ({ page }) => ({
         [`${siteName}.${page.toLowerCase()}`]: [
             DEV &&
                 'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-            './packages/frontend/web/browser.ts',
+            './packages/frontend/web/browser/boot.ts',
         ].filter(Boolean),
     },
     output: {
