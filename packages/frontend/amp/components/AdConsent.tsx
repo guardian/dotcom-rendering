@@ -6,9 +6,7 @@ import { palette } from '@guardian/pasteup/palette';
 import Tick from '@guardian/pasteup/icons/tick.svg';
 
 const consentUIStyle = css`
-    font-family: ${textSans(3)};
-    font-size: 16px;
-    line-height: 20px;
+    ${textSans(5)};
     color: ${palette.neutral[97]};
     background-color: ${palette.neutral[20]};
     max-width: 600px;
