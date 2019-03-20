@@ -7,7 +7,7 @@ import {
     init as initGa,
     sendPageView as sendGaPageView,
 } from '@frontend/web/browser/ga';
-import { Article } from './pages/Article';
+import { Article } from '@frontend/web/pages/Article';
 import { ReportedError, reportError } from '@frontend/web/browser/reportError';
 import { loadScript } from '@frontend/web/browser/loadScript';
 import { RavenStatic } from 'raven-js';
@@ -48,18 +48,18 @@ const initApp = (): void => {
 
     loadCommercial()
         .then(() => {
-            enhanceApp();
+            // enhanceApp();
         })
         .catch(err => {
-            // If loadCommercial fails reportError and enhanceApp
-            reportError(
-                err,
-                {
-                    feature: 'commercial',
-                },
-                false,
-            );
-            enhanceApp();
+            // // If loadCommercial fails reportError and enhanceApp
+            // reportError(
+            //     err,
+            //     {
+            //         feature: 'commercial',
+            //     },
+            //     false,
+            // );
+            // enhanceApp();
         });
 };
 
@@ -86,6 +86,7 @@ const initAppWithRaven = (raven: RavenStatic) => {
 
     // Report unhandled promise rejections
     window.addEventListener('unhandledrejection', event => {
+        console.log('*** WAT ***');
         // Prevent error output on the console:
         event.preventDefault();
 
@@ -104,8 +105,8 @@ const initAppWithRaven = (raven: RavenStatic) => {
     );
 };
 
-const run = (): void => {
-    getRaven()
+const onPolyfilled = (): Promise<void> => {
+    return getRaven()
         .catch(err => {
             // If getRaven fails continue to initApp
             initApp();
@@ -126,14 +127,23 @@ const run = (): void => {
         });
 };
 
-/*
-    We want to run `run` only after polyfill.io has initialised
-    By the time this script runs, if `window.guardian.polyfilled` is true,
-    meaning that polyfill.io has initialised, then we run run(), otherwise
-    we stick it in window.guardian.onPolyfilled to be ran later.
-*/
-if (window.guardian.polyfilled) {
-    run();
-} else {
-    window.guardian.onPolyfilled = run;
-}
+const run = (): void => {
+    /*
+        We want to run `onPolyfilled` only after polyfill.io has initialised
+        By the time this script runs, if `window.guardian.polyfilled` is true,
+        meaning that polyfill.io has initialised, then we run onPolyfilled(), otherwise
+        we stick it in window.guardian.onPolyfilled to be ran later.
+    */
+    if (window.guardian.polyfilled) {
+        onPolyfilled();
+    } else {
+        window.guardian.onPolyfilled = onPolyfilled;
+    }
+};
+
+run();
+
+export const _ = {
+    run,
+    onPolyfilled,
+};
