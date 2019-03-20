@@ -48,7 +48,7 @@ const initApp = (): void => {
 
     loadCommercial()
         .then(() => {
-            // enhanceApp();
+            enhanceApp();
         })
         .catch(err => {
             // // If loadCommercial fails reportError and enhanceApp
