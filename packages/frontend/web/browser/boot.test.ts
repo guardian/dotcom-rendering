@@ -6,8 +6,9 @@ import {
     sendPageView as sendGaPageView_,
 } from '@frontend/web/browser/ga';
 import { hydrate as hydrateCSS_ } from 'emotion';
-import { hydrate as hydrateApp_} from 'react-dom';
+import { hydrate as hydrateApp_ } from 'react-dom';
 import { createElement as createElement_ } from 'react';
+import { reportError as reportError_ } from '@frontend/web/browser/reportError';
 
 const getRaven: any = getRaven_;
 const loadScript: any = loadScript_;
@@ -16,6 +17,7 @@ const sendGaPageView: any = sendGaPageView_;
 const hydrateCSS: any = hydrateCSS_;
 const hydrateApp: any = hydrateApp_;
 const createElement: any = createElement_;
+const reportError: any = reportError_;
 
 jest.mock('ophan-tracker-js', jest.fn());
 jest.mock('@frontend/web/browser/raven', () => ({
@@ -39,6 +41,9 @@ jest.mock('react', () => ({
 }));
 jest.mock('@frontend/web/pages/Article', () => ({
     Article: `<h1>hello world</h1>`,
+}));
+jest.mock('@frontend/web/browser/reportError', () => ({
+    reportError: jest.fn(),
 }));
 
 describe('boot', () => {
@@ -97,6 +102,9 @@ describe('boot', () => {
         loadScript.mockReset();
         initGa.mockReset();
         sendGaPageView.mockReset();
+        hydrateCSS.mockReset();
+        hydrateApp.mockReset();
+        createElement.mockReset();
 
         window.guardian = Object.assign({}, window.guardian, {
             onPolyfilled,
@@ -152,22 +160,50 @@ describe('boot', () => {
         });
     });
 
-    test('if loadCommercial successful enhanceApp', () => {
+    describe('enhances application', () => {
+        let cssIDs: string[];
+        let data: object;
         const container = document.createElement('div');
-        const { cssIDs, data } = window.guardian.app;
         container.id = 'app';
-        document.body.appendChild(container);
-        process.env.NODE_ENV = 'production';
 
-        return _.onPolyfilled().then(() => {
+        beforeEach(() => {
+            cssIDs = window.guardian.app.cssIDs;
+            data = window.guardian.app.data;
+            process.env.NODE_ENV = 'production';
+            document.body.appendChild(container);
+        });
+
+        afterEach(() => {
             expect(initGa).toHaveBeenCalledTimes(1);
             expect(sendGaPageView).toHaveBeenCalledTimes(1);
             expect(hydrateCSS).toHaveBeenCalledTimes(1);
             expect(hydrateCSS).toHaveBeenCalledWith(cssIDs);
             expect(hydrateApp).toHaveBeenCalledTimes(1);
             expect(createElement).toHaveBeenCalledTimes(1);
-            expect(createElement).toHaveBeenCalledWith('<h1>hello world</h1>', { data });
+            expect(createElement).toHaveBeenCalledWith('<h1>hello world</h1>', {
+                data,
+            });
             document.body.removeChild(container);
+        });
+
+        test('if loadCommercial successful enhanceApp', () => {
+            return _.onPolyfilled();
+        });
+
+        test('if loadCommercial unsuccessful reportError and enhanceApp', () => {
+            const errMessage = 'load script fail';
+            loadScript.mockReturnValueOnce(Promise.reject(errMessage));
+
+            return _.onPolyfilled().then(() => {
+                expect(reportError).toHaveBeenCalledTimes(1);
+                expect(reportError).toHaveBeenCalledWith(
+                    errMessage,
+                    {
+                        feature: 'commercial',
+                    },
+                    false,
+                );
+            });
         });
     });
 });

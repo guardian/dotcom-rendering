@@ -51,15 +51,15 @@ const initApp = (): void => {
             enhanceApp();
         })
         .catch(err => {
-            // // If loadCommercial fails reportError and enhanceApp
-            // reportError(
-            //     err,
-            //     {
-            //         feature: 'commercial',
-            //     },
-            //     false,
-            // );
-            // enhanceApp();
+            // If loadCommercial fails reportError and enhanceApp
+            reportError(
+                err,
+                {
+                    feature: 'commercial',
+                },
+                false,
+            );
+            enhanceApp();
         });
 };
 
@@ -86,7 +86,6 @@ const initAppWithRaven = (raven: RavenStatic) => {
 
     // Report unhandled promise rejections
     window.addEventListener('unhandledrejection', event => {
-        console.log('*** WAT ***');
         // Prevent error output on the console:
         event.preventDefault();
 
