@@ -30,6 +30,9 @@ This will start the development server on port 3030: [http://localhost:3030](htt
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
 
+### Note on rebasing
+The dotcom-rendering github account is set up to enforce rebasement on the `master` branch before merging. If you are working on a feature branch and plan to make a PR, please avoid merging from `master` during your work and, instead, always rebase on `master`. The reason is that if you simply merge from `master`, then when the time to rebase on master comes any conflicts you may have had to correct will show up again thereby duplicating your efforts.
+
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup 
