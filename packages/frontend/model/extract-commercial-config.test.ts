@@ -104,4 +104,39 @@ describe('extract-config', () => {
 
         expect(page.commentable).toBe(false);
     });
+
+    it('returns page.contentType if contentType available', () => {
+        const testContentType = 'Video Article';
+        testData.page.contentType = testContentType;
+
+        const { page } = extract(testData);
+
+        expect(page.contentType).toBe(testContentType);
+    });
+
+    it('throws error if contentType missing', () => {
+        testData.page.contentType = null;
+
+        expect(() => {
+            extract(testData);
+        }).toThrow();
+    });
+
+    it('returns page.edition if editionId available', () => {
+        const testEdition = 'UK';
+
+        testData.page.editionId = testEdition;
+
+        const { page } = extract(testData);
+
+        expect(page.edition).toBe(testEdition);
+    });
+
+    it('throws error if editionId missing', () => {
+        testData.page.editionId = null;
+
+        expect(() => {
+            extract(testData);
+        }).toThrow();
+    });
 });

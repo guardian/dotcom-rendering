@@ -193,6 +193,8 @@ interface CommercialConfigType {
     page: {
         ajaxUrl: string;
         commentable: boolean;
+        contentType: string;
+        edition: string;
     };
 }
 

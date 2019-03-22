@@ -26,5 +26,7 @@ export const extract = (data: {}): CommercialConfigType => ({
     page: {
         ajaxUrl: getNonEmptyString(data, 'site.ajaxUrl'),
         commentable: getBoolean(data, 'page.meta.isCommentable', false),
+        contentType: getString(data, 'page.contentType'),
+        edition: getString(data, 'page.editionId'),
     },
 });
