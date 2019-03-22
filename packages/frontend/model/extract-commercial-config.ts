@@ -10,7 +10,7 @@ export const extract = (data: {}): CommercialConfigType => ({
         trackers: {
             editorial: getString(
                 data,
-                'site.googleAnalytics.trackers.editorial'
+                'site.googleAnalytics.trackers.editorial',
             ),
             editorialProd: getString(
                 data,
@@ -24,5 +24,5 @@ export const extract = (data: {}): CommercialConfigType => ({
     },
     page: {
         ajaxUrl: getNonEmptyString(data, 'site.ajaxUrl'),
-    }
+    },
 });
