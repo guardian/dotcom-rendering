@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 
@@ -48,12 +48,6 @@ const paragraph = css`
     ${textSans(5)};
 `;
 
-const template = `
-    <div>
-        <h1 class=${heading}>{{ heading }}</h1>
-        <p class=${paragraph}> {{ paragraphs }}</p>
-    </div>
-`;
 // tslint:disable:react-no-dangerous-html
 export const Epic = () => {
     return (
@@ -68,7 +62,14 @@ export const Epic = () => {
                     >
                         <template type="amp-mustache">
                             <div
-                                dangerouslySetInnerHTML={{ __html: template }}
+                                dangerouslySetInnerHTML={{
+                                    __html: `
+                                        <div>
+                                            <h1 class=${heading}>{{ heading }}</h1>
+                                            <p class=${paragraph}> {{ paragraphs }}</p>
+                                        </div>
+                                    `,
+                                }}
                             />
                         </template>
                     </amp-list>
