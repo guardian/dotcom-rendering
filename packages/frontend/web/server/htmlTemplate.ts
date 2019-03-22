@@ -30,6 +30,7 @@ export const htmlTemplate = ({
     cssIDs: string[];
     nonBlockingJS?: string;
     fontFiles?: string[];
+    commercialConfig: object;
 }) => {
     const favicon =
         process.env.NODE_ENV === 'production'

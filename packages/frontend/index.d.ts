@@ -192,6 +192,7 @@ interface CommercialConfigType {
     };
     page: {
         ajaxUrl: string;
+        commentable: boolean;
     };
 }
 

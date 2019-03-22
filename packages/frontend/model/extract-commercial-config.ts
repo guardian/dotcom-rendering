@@ -1,6 +1,7 @@
 import {
-    // getNonEmptyString,
+    getNonEmptyString,
     getString,
+    getBoolean,
     // getObject
 } from './validators';
 
@@ -24,5 +25,6 @@ export const extract = (data: {}): CommercialConfigType => ({
     },
     page: {
         ajaxUrl: getNonEmptyString(data, 'site.ajaxUrl'),
+        commentable: getBoolean(data, 'page.meta.isCommentable', false),
     },
 });
