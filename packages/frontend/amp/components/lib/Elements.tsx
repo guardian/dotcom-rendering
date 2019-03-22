@@ -14,6 +14,7 @@ import { AdComponent } from '@frontend/amp/components/elements/AdComponent';
 import { css } from 'emotion';
 import { DisclaimerBlockComponent } from '@frontend/amp/components/elements/DisclaimerBlockComponent';
 import { clean } from '@frontend/model/clean';
+import { Epic } from '@frontend/amp/components/Epic';
 
 const clear = css`
     clear: both;
@@ -131,6 +132,7 @@ export const Elements: React.FC<{
         <>
             {elementsWithAdverts}
             <div className={clear} />
+            <Epic />
         </>
     );
 };
