@@ -9,6 +9,7 @@ import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { getSubscribeWithGoogleExtensionScripts } from '@frontend/amp/lib/subscribe-with-google';
+import { getAmpAccessScripts } from '@frontend/amp/components/Epic';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -24,6 +25,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                       config.subscribeWithGoogleApiUrl,
                   )
                 : []),
+            ...getAmpAccessScripts(),
         ];
 
         const analytics: AnalyticsModel = {
