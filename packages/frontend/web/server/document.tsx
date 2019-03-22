@@ -18,6 +18,7 @@ interface Props {
         config: ConfigType;
         GA: GADataType;
         linkedData: object;
+        commercialConfig: CommercialConfigType;
     };
 }
 
@@ -28,7 +29,15 @@ interface RenderToStringResult {
 }
 
 export const document = ({ data }: Props) => {
-    const { page, site, CAPI, NAV, config, linkedData } = data;
+    const {
+        page,
+        site,
+        CAPI,
+        NAV,
+        config,
+        linkedData,
+        commercialConfig,
+    } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
@@ -94,5 +103,6 @@ export const document = ({ data }: Props) => {
         fontFiles,
         data,
         title,
+        commercialConfig,
     });
 };

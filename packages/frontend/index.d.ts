@@ -176,6 +176,22 @@ interface ConfigType {
     commercialUrl: string;
 }
 
+/**
+ * the commercial model will contain config
+ * properties required by dotcom-rendering-commercial.js.
+ * These properies will be exposed on window.guardian.config.
+ */
+interface CommercialConfigType {
+    googleAnalytics: {
+        timingEvents: any[];
+        trackers: {
+            editorial: string;
+            editorialProd: string;
+            editorialTest: string;
+        }
+    }
+}
+
 // 3rd party type declarations
 declare module 'emotion-server' {
     export const extractCritical: any;

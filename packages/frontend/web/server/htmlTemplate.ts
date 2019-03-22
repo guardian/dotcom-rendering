@@ -14,6 +14,7 @@ export const htmlTemplate = ({
     cssIDs,
     nonBlockingJS = '',
     fontFiles = [],
+    commercialConfig,
 }: {
     title?: string;
     linkedData: object;
@@ -34,7 +35,6 @@ export const htmlTemplate = ({
         process.env.NODE_ENV === 'production'
             ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
-
     return `<!doctype html>
         <html>
             <head>
@@ -64,12 +64,17 @@ export const htmlTemplate = ({
                         data,
                         cssIDs,
                     },
-                    config: {
-                        tests: {
-                            renderer: 'new',
+                    config: Object.assign(
+                        {},
+                        {
+                            tests: {
+                                renderer: 'new',
+                            },
                         },
-                    },
+                        commercialConfig,
+                    ),
                 })};
+
                 // this is a global that's called at the bottom of the pf.io response,
                 // once the polyfills have run. This may be useful for debugging.
                 // mainly to support browsers that don't support async=false or defer

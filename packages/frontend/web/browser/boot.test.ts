@@ -187,7 +187,9 @@ describe('boot', () => {
         });
 
         test('if loadCommercial successful enhanceApp', () => {
-            return _.onPolyfilled();
+            return _.onPolyfilled().then(() => {
+                expect(reportError).not.toHaveBeenCalled();
+            });
         });
 
         test('if loadCommercial unsuccessful reportError and enhanceApp', () => {

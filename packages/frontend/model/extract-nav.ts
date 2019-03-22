@@ -16,7 +16,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     };
 };
 
-const rrLinkConfig = 'site.readerRevenueLinks';
+const rrLinkConfig = 'site.enueLinks';
 const buildRRLinkCategories = (
     data: {},
     position: ReaderRevenuePosition,
