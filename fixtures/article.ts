@@ -3013,6 +3013,11 @@ export const data = {
         },
         commercialUrl:
             'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
-    },
+        timingEvents:[],
+        trackers: {
+            editorial: "guardianTestPropertyTracker",
+            editorialProd:"allEditorialPropertyTracker",
+            editorialTest:"guardianTestPropertyTracker",
+        },
     version: 2,
 };

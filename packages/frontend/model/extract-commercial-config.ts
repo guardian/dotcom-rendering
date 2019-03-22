@@ -1,10 +1,17 @@
-import { getNonEmptyString, getString, getObject } from './validators';
+import {
+    // getNonEmptyString,
+    getString,
+    // getObject
+} from './validators';
 
 export const extract = (data: {}): CommercialConfigType => ({
     googleAnalytics: {
         timingEvents: [],
         trackers: {
-            editorial: getString(data, 'site.googleAnalytics.trackers.editorial'),
+            editorial: getString(
+                data,
+                'site.googleAnalytics.trackers.editorial'
+            ),
             editorialProd: getString(
                 data,
                 'site.googleAnalytics.trackers.editorialProd',
@@ -15,4 +22,7 @@ export const extract = (data: {}): CommercialConfigType => ({
             ),
         },
     },
+    page: {
+        ajaxUrl: getNonEmptyString(data, 'site.ajaxUrl'),
+    }
 });
