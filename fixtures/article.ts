@@ -972,8 +972,11 @@ export const data = {
                     },
                 ],
             },
+            hbImpl: 'prebid',
         },
         meta: {
+            isFront: false,
+            hasShowcaseMainElement: false,
             isImmersive: false,
             isHosted: false,
             shouldHideAds: true,

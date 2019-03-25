@@ -28,5 +28,13 @@ export const extract = (data: {}): CommercialConfigType => ({
         commentable: getBoolean(data, 'page.meta.isCommentable', false),
         contentType: getString(data, 'page.contentType'),
         edition: getString(data, 'page.editionId'),
+        hasShowcaseMainElement: getBoolean(
+            data,
+            'page.meta.hasShowcaseMainElement',
+            false,
+        ),
+        hbImpl: getString(data, 'page.commercial.hbImpl'),
+        isDev: process.env.NODE_ENV === 'development',
+        isFront: getBoolean(data, 'page.meta.isFront', false),
     },
 });

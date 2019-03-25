@@ -195,6 +195,10 @@ interface CommercialConfigType {
         commentable: boolean;
         contentType: string;
         edition: string;
+        hasShowcaseMainElement: boolean;
+        hbImpl: string;
+        isDev: boolean;
+        isFront: boolean;
     };
 }
 
