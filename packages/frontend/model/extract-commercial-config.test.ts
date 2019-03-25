@@ -221,4 +221,20 @@ describe('extract-config', () => {
 
         expect(page.isFront).toBe(false);
     });
+
+    it('returns page.isHosted if isHosted available', () => {
+        testData.page.meta.isHosted = true;
+
+        const { page } = extract(testData);
+
+        expect(page.isHosted).toBe(true);
+    });
+
+    it('returns page.isHosted as "false" if missing', () => {
+        testData.page.meta.isHosted = null;
+
+        const { page } = extract(testData);
+
+        expect(page.isHosted).toBe(false);
+    });
 });

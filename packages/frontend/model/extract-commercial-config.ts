@@ -36,5 +36,6 @@ export const extract = (data: {}): CommercialConfigType => ({
         hbImpl: getString(data, 'page.commercial.hbImpl'),
         isDev: process.env.NODE_ENV === 'development',
         isFront: getBoolean(data, 'page.meta.isFront', false),
+        isHosted: getBoolean(data, 'page.meta.isHosted', false),
     },
 });
