@@ -108,4 +108,24 @@ describe('extract-config', () => {
             extract(testData);
         }).toThrow();
     });
+
+    it('returns switches if available', () => {
+        const testSwitches = {
+            foo: true,
+        };
+
+        testData.site.switches = testSwitches;
+
+        const { switches } = extract(testData);
+
+        expect(switches.foo).toBe(true);
+    });
+
+    it('returns empty object if switches unavailable', () => {
+        testData.site.switches = null;
+
+        const { switches } = extract(testData);
+
+        expect(switches).toMatchObject({});
+    });
 });

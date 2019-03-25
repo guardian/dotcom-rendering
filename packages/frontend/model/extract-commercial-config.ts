@@ -2,7 +2,7 @@ import {
     getNonEmptyString,
     getString,
     getBoolean,
-    // getObject
+    getObject,
 } from './validators';
 
 export const extract = (data: {}): CommercialConfigType => ({
@@ -37,5 +37,11 @@ export const extract = (data: {}): CommercialConfigType => ({
         isDev: process.env.NODE_ENV === 'development',
         isFront: getBoolean(data, 'page.meta.isFront', false),
         isHosted: getBoolean(data, 'page.meta.isHosted', false),
+        disableStickyTopBanner: getBoolean(
+            data,
+            'page.commercial.disableStickyTopBanner',
+            false,
+        ),
     },
+    switches: getObject(data, 'site.switches', {}),
 });

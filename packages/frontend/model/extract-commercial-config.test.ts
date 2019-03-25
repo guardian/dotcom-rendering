@@ -237,4 +237,40 @@ describe('extract-config', () => {
 
         expect(page.isHosted).toBe(false);
     });
+
+    it('returns page.disableStickyTopBanner if disableStickyTopBanner available', () => {
+        testData.page.commercial.disableStickyTopBanner = true;
+
+        const { page } = extract(testData);
+
+        expect(page.disableStickyTopBanner).toBe(true);
+    });
+
+    it('returns page.disableStickyTopBanner as "false" if missing', () => {
+        testData.page.commercial.disableStickyTopBanner = null;
+
+        const { page } = extract(testData);
+
+        expect(page.disableStickyTopBanner).toBe(false);
+    });
+
+    it('returns switches if available', () => {
+        const testSwitches = {
+            foo: true,
+        };
+
+        testData.site.switches = testSwitches;
+
+        const { switches } = extract(testData);
+
+        expect(switches.foo).toBe(true);
+    });
+
+    it('returns empty object if switches unavailable', () => {
+        testData.site.switches = null;
+
+        const { switches } = extract(testData);
+
+        expect(switches).toMatchObject({});
+    });
 });

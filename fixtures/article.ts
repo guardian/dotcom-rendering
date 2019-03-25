@@ -973,6 +973,7 @@ export const data = {
                 ],
             },
             hbImpl: 'prebid',
+            disableStickyTopBanner: false,
         },
         meta: {
             isFront: false,

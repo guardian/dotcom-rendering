@@ -200,7 +200,9 @@ interface CommercialConfigType {
         isDev: boolean;
         isFront: boolean;
         isHosted: boolean;
+        disableStickyTopBanner: boolean;
     };
+    switches: { [key: string]: boolean };
 }
 
 // 3rd party type declarations
