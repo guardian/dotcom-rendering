@@ -55,6 +55,13 @@ Mappings:
       Value: frontend
     App:
       Value: rendering
+  StageMap:
+    PROD:
+      MinCapacity: 3
+      MaxCapacity: 6
+    CODE:
+      MinCapacity: 1
+      MaxCapacity: 2
 
 Resources:
   LoadBalancerSecurityGroup:
@@ -222,8 +229,8 @@ Resources:
         Ref: Subnets
       LaunchConfigurationName:
         Ref: LaunchConfig
-      MinSize: 3
-      MaxSize: 12
+      MinSize: !FindInMap [StageMap, !Ref Stage, MinCapacity]
+      MaxSize: !FindInMap [StageMap, !Ref Stage, MaxCapacity]
       HealthCheckType: ELB
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
