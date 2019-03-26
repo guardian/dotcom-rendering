@@ -4,11 +4,13 @@ describe('linked data', () => {
     it('extracts data from page.linkedData', () => {
         const input = {
             page: {
-                linkedData: [
-                    {
-                        '@type': 'NewsArticle',
-                    },
-                ],
+                meta: {
+                    linkedData: [
+                        {
+                            '@type': 'NewsArticle',
+                        },
+                    ],
+                },
             },
         };
         const output = extractLinkedData(input);
