@@ -10,7 +10,7 @@ import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
-    const linkedData = [{}];
+    const linkedData = [{ '@type': 'WebPage' }];
     const metadata = { description: '', canonicalURL: '' };
     const result = v.validateString(
         document({
@@ -29,7 +29,7 @@ test('produces valid AMP doc', async () => {
     const config = extractConfig(data);
     const nav = extractNAV(data);
     const model = extractModel(data);
-    const linkedData = [{}];
+    const linkedData = [{ '@type': 'WebPage' }];
     const metadata = {
         description: model.trailText,
         canonicalURL: model.webURL,
