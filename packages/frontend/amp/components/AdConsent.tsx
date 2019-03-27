@@ -93,8 +93,8 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             default: {
                                 waitFor: { adconsent: [] },
                                 timeout: {
-                                    seconds: 0,
-                                    fallbackAction: 'dismiss',
+                                    seconds: 5,
+                                    fallbackAction: 'reject',
                                 },
                             },
                         },
