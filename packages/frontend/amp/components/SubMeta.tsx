@@ -177,11 +177,17 @@ export const SubMeta: React.FC<{
             {/* TODO link to actual (non-AMP) site here. Also handle comment count behaviour. */}
             <div className={cx(guardianLines, siteLinks)}>
                 {isCommentable && (
-                    <a className={siteLinkStyle} href={`/${pageID}#comments`}>
+                    <a
+                        className={siteLinkStyle}
+                        href={`${guardianBaseURL}/${pageID}#comments`}
+                    >
                         <CommentIcon className={commentIcon} /> View comments
                     </a>
                 )}
-                <a className={siteLinkStyle} href={`/${pageID}`}>
+                <a
+                    className={siteLinkStyle}
+                    href={`${guardianBaseURL}/${pageID}`}
+                >
                     View on theguardian.com
                 </a>
             </div>
