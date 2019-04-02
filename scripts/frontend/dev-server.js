@@ -56,16 +56,58 @@ const go = async () => {
         }),
     );
 
+    // app.get(
+    //     '/AMPArticle',
+    //     async (req, res, next) => {
+    //         const { html, ...config } = await fetch(
+    //             `${req.query.url ||
+    //                 'http://localhost:9000/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?guui`,
+    //         ).then(article => {
+    //             const data = article.json();
+    //             // console.log({data});
+    //             return data
+    //         });
+
+    //         req.body = config;
+    //         // console.log({ html });
+    //         // console.log({ config });
+    //         next();
+    //     },
+    //     webpackHotServerMiddleware(compiler, {
+    //         chunkName: `${siteName}.server`,
+    //         serverRendererOptions: { amp: true },
+    //     }),
+    // );
     app.get(
         '/AMPArticle',
         async (req, res, next) => {
-            const { html, ...config } = await fetch(
-                `${req.query.url ||
-                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?guui`,
-            ).then(article => article.json());
+            try {
 
-            req.body = config;
-            next();
+                const [article, epicContent] = await Promise.all([
+                    fetch(`${req.query.url || 'http://localhost:9000/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?guui`),
+                    fetch(`https://interactive.guim.co.uk/docsdata/1fy0JolB1bf1IEFLHGHfUYWx-niad7vR9K954OpTOvjE.json`)
+                ])
+                
+                const articleJson = await article.json();
+
+                // get result which has been converted to JSON, from epicContent
+                const epicJson = await epicContent.json();
+
+                // pass result (Json) to epic.tsx
+                // add reault to req.body
+                const articleAndEpic = {...articleJson, ...{ epic: epicJson.sheets.control }};
+
+                // combined result
+                // console.log({articleAndEpic});
+
+                // pass data to the render option (renderAMPArticle)
+                req.body = articleAndEpic;
+
+                next();
+            } catch (err) {
+                console.error(err);
+            }
+                
         },
         webpackHotServerMiddleware(compiler, {
             chunkName: `${siteName}.server`,

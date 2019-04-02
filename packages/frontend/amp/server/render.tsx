@@ -57,6 +57,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     nav={extractNAV(body)}
                     analytics={analytics}
                     config={config}
+                    epic={body.epic}
                 />
             ),
         });

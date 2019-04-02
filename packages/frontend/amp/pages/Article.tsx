@@ -63,7 +63,8 @@ export const Article: React.FC<{
     articleData: ArticleModel;
     config: ConfigType;
     analytics: AnalyticsModel;
-}> = ({ nav, articleData, config, analytics }) => (
+    epic: string[];
+}> = ({ nav, articleData, config, analytics, epic }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
         <AdConsent />
@@ -80,6 +81,7 @@ export const Article: React.FC<{
                     pillar={articleData.pillar}
                     data={articleData}
                     config={config}
+                    epic={epic}
                 />
                 <Onward
                     shouldHideAds={articleData.shouldHideAds}
