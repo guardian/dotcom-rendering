@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from 'emotion';
-import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { AmpSubscriptionGoogle } from '@frontend/amp/components/elements/AmpSubscriptionGoogle';
 import { EpicBlockComponent } from '@frontend/amp/components/elements/EpicBlockComponent';

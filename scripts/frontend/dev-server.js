@@ -95,9 +95,9 @@ const go = async () => {
 
                 // pass result (Json) to epic.tsx
                 // add reault to req.body
+                // combined result
                 const articleAndEpic = {...articleJson, ...{ epic: epicJson.sheets.control }};
 
-                // combined result
                 // console.log({articleAndEpic});
 
                 // pass data to the render option (renderAMPArticle)

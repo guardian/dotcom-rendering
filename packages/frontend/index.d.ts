@@ -89,12 +89,14 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
-// tslint:disable-next-line:prefer-array-literal
-type EpicContent = Array<{
+interface EpicElement {
     heading: string;
     paragraphs: string;
     highlightedText: string;
-}>;
+}
+// tslint:disable-next-line:prefer-array-literal
+type EpicContent = Array<EpicElement>;
+
 interface NavType {
     pillars: PillarType[];
     otherLinks: MoreType;

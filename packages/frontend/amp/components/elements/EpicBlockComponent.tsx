@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { headline, textSans } from '@guardian/pasteup/typography';
+import { palette } from '@guardian/pasteup/palette';
 
 const parseHighlightedText = (text: string) => {
     const stringContainingHTMLSource = text
@@ -26,12 +27,12 @@ const paragraph = css`
 
 const highlighted = css`
     ${textSans(5)};
-    background-color: #ffe500;
+    background-color: ${palette.highlight.main};
     padding: 0.125rem;
     font-weight: bold;
 `;
 
-export const EpicBlockComponent = (
+export const EpicBlockComponent: React.FC<EpicElement> = (
     { heading, paragraphs, highlightedText },
     index,
 ) => {
