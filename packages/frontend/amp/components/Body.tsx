@@ -8,7 +8,7 @@ import { TopMetaOpinion } from '@frontend/amp/components/TopMetaOpinion';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { pillarPalette } from '../../lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
-import { Epic, EpicContent } from '@frontend/amp/components/Epic';
+import { Epic } from '@frontend/amp/components/Epic';
 
 const body = (pillar: Pillar, isOpinion: boolean) => css`
     background-color: ${isOpinion ? palette.opinion.faded : 'white'};
