@@ -9,6 +9,7 @@ import { AdConsent } from '@frontend/amp/components/AdConsent';
 import { css } from 'emotion';
 import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
+import { EpicContent } from '@frontend/amp/components/Epic';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
