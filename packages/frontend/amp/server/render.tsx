@@ -9,7 +9,7 @@ import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { getSubscribeWithGoogleExtensionScripts } from '@frontend/amp/lib/subscribe-with-google';
-import { getAmpAccessScripts } from '@frontend/amp/components/Epic';
+import { getAmpAccessScripts } from '@frontend/amp/lib/amp-access-scripts';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
