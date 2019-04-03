@@ -28,10 +28,10 @@ export const getAmpAccessScripts = () => {
     ];
 };
 
-const epicContentUrl =
-    'https://interactive.guim.co.uk/docsdata/1fy0JolB1bf1IEFLHGHfUYWx-niad7vR9K954OpTOvjE.json';
+// const epicContentUrl =
+//     'https://interactive.guim.co.uk/docsdata/1fy0JolB1bf1IEFLHGHfUYWx-niad7vR9K954OpTOvjE.json';
 
-const parseHighlightedText = text => {
+const parseHighlightedText = (text: string) => {
     const stringContainingHTMLSource = text
         .replace('%%CURRENCY_SYMBOL%%', '£')
         .replace('&ndash;', '-');
@@ -41,8 +41,6 @@ const parseHighlightedText = text => {
 };
 
 const container = css`
-    /* width: 100%; */
-    /* height: 815px; */
     position: relative;
     border-top: 0.0625rem solid ${palette.highlight.main};
     background-color: ${palette.neutral[97]};
@@ -68,8 +66,21 @@ const highlighted = css`
     padding: 0.125rem;
     font-weight: bold;
 `;
-// tslint:disable:react-no-dangerous-html
-export const Epic = ({ content }) => {
+
+// export interface EpicContent {
+//     heading: string;
+//     paragraphs: string;
+//     highlightedText: string;
+// }
+
+// tslint:disable-next-line:prefer-array-literal
+export type EpicContent = Array<{
+    heading: string;
+    paragraphs: string;
+    highlightedText: string;
+}>;
+
+export const Epic: React.FC<{ content: EpicContent }> = ({ content }) => {
     return (
         <div amp-access="loggedIn">
             <div>

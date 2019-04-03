@@ -8,7 +8,7 @@ import { TopMetaOpinion } from '@frontend/amp/components/TopMetaOpinion';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { pillarPalette } from '../../lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
-import { Epic } from '@frontend/amp/components/Epic';
+import { Epic, EpicContent } from '@frontend/amp/components/Epic';
 
 const body = (pillar: Pillar, isOpinion: boolean) => css`
     background-color: ${isOpinion ? palette.opinion.faded : 'white'};
@@ -37,7 +37,7 @@ export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
     config: ConfigType;
-    epic: string[];
+    epic: EpicContent;
 }> = ({ pillar, data, config, epic }) => {
     const tone = data.tags.find(tag => tag.type === 'Tone');
     const isOpinion = tone ? tone.id === 'tone/comment' : false;
@@ -62,7 +62,7 @@ export const Body: React.FC<{
                 commercialProperties={data.commercialProperties}
                 isImmersive={data.isImmersive}
             />
-            <Epic content={epic} />
+            {config.switches.subscribeWithGoogle && <Epic content={epic} />}
             <SubMeta
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}
