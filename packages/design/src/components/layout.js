@@ -6,14 +6,13 @@ import "./fonts.css"
 export default ({ children }) => {
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark {
+      allMdx {
         edges {
           node {
             id
             fields {
               slug
             }
-            fileAbsolutePath
             frontmatter {
               title
             }
@@ -34,7 +33,7 @@ export default ({ children }) => {
           <li>
             <h2>Navigation</h2>
           </li>
-          {data.allMarkdownRemark.edges.map(({ node }) => (
+          {data.allMdx.edges.map(({ node }) => (
             <li key={node.id}>
               <Link activeClassName={styles.activeLink} to={node.fields.slug}>
                 {node.frontmatter.title}

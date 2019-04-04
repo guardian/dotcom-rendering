@@ -25,10 +25,10 @@ dist
 jsconfig.json
 target
 guui.zip
-packages/design/gatsby/public
+packages/design/public
 
 # Caches
-packages/design/gatsby/.cache
+packages/design/.cache
 
 # Publishable files
 packages/pasteup/tmp
