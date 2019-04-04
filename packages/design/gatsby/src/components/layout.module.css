@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.base {
+  font-family: "Egyptian", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: flex;
+}
+
+.base > .sidebar {
+  flex: 1 1 auto;
+  min-width: 20em;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.base > main {
+  flex: 1 1 100%;
+  padding: 3rem;
+}
+
+.sidebar {
+  border-right: 1px solid #ededed;
+  font-family: "Text Sans";
+  font-size: 0.9em;
+  color: #333333;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar a {
+  display: block;
+  color: currentColor;
+  padding: 1rem 2rem;
+  text-decoration: none;
+}
+
+.sidebar h2 {
+  font-family: "Text Sans";
+  font-size: 1em;
+  opacity: 0.5;
+  font-weight: 400;
+  padding: 1rem 2rem 1rem;
+}
+
+.sidebar a:hover {
+  background: #f6f6f6;
+}
+
+.sidebar a.activeLink {
+  color: #121212;
+  box-shadow: inset 4px 0 0 0 #ffe500;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Headline;
+}

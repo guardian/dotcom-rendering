@@ -1,0 +1,16 @@
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.md storybook-preview {
+  border: 1px solid #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+}
