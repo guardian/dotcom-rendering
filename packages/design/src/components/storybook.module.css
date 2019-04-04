@@ -1,0 +1,7 @@
+.base {
+  border: 1px solid #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+}

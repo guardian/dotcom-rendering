@@ -10,6 +10,8 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
+    `gatsby-mdx`,
+    `gatsby-plugin-typescript`,
     `gatsby-transformer-remark`,
   ],
 }

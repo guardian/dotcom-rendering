@@ -13,9 +13,17 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "dependencies": {
-    "gatsby": "^2.3.5",
+    "@guardian/guui": "2.0.0-alpha.1",
+    "@guardian/pasteup": "1.0.0-alpha.7",
+    "@mdx-js/mdx": "^0.20.3",
+    "@mdx-js/tag": "^0.20.3",
+    "gatsby": "^2.3.12",
+    "gatsby-mdx": "^0.4.4",
+    "gatsby-plugin-typescript": "^2.0.12",
     "gatsby-source-filesystem": "^2.0.28",
     "gatsby-transformer-remark": "^2.3.8",
+    "install": "^0.12.2",
+    "npm": "^6.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
