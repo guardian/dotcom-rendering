@@ -20,14 +20,18 @@ node_modules
 # System files
 .DS_Store
 
-# built files
+# Built files
 dist
 jsconfig.json
 target
 guui.zip
+packages/design/gatsby/public
 
-# publishable files
+# Caches
+packages/design/gatsby/.cache
+
+# Publishable files
 packages/pasteup/tmp
 
-# test coverage reports
+# Test coverage reports
 coverage
