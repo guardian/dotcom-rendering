@@ -1,0 +1,24 @@
+.base li {
+  list-style: none;
+  position: relative;
+}
+
+.base li:before {
+  content: "";
+  width: 0.9em;
+  height: 0.9em;
+  background: var(--higlight-main);
+  display: inline-block;
+  position: absolute;
+  top: 0.33em;
+  left: -1.5em;
+  border-radius: 100%;
+}
+
+.base li.sad:before {
+  background: #c70000;
+}
+
+.base li.happy:before {
+  background: #3db540;
+}
