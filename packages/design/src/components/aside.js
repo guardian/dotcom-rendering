@@ -3,7 +3,7 @@ import React from "react"
 import styles from "./aside.module.css"
 
 const Aside = ({ children, title }) => (
-  <aside class={styles.base}>
+  <aside className={styles.base}>
     <h2>{title}:</h2>
     <p>{children}</p>
   </aside>
