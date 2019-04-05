@@ -3022,6 +3022,6 @@ export const data = {
             highlightedText:
                 'Support The Guardian from as little as %%CURRENCY_SYMBOL%%1 &ndash; and it only takes a minute. Thank you.',
         },
-    ];
+    ],
     version: 2,
 };
