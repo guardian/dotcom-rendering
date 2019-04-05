@@ -3,8 +3,12 @@ import { graphql } from "gatsby"
 import { Layout } from "../components/layout"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
 import * as figures from "../components/figure"
-import styles from "./page.module.css"
+import * as lists from "../components/list"
+import * as asides from "../components/aside"
+
 import * as guui from "@guardian/guui/index.ts"
+
+import styles from "./page.module.css"
 
 // tslint:disable-next-line:no-default-export
 export default ({ data: { mdx } }) => {
@@ -12,7 +16,12 @@ export default ({ data: { mdx } }) => {
     <Layout>
       <div className={styles.md}>
         <h1>{mdx.frontmatter.title}</h1>
-        <MDXRenderer scope={{ React, ...figures, ...guui }}>
+        <MDXRenderer
+          components={{
+            ul: lists.List,
+          }}
+          scope={{ React, ...asides, ...lists, ...figures, ...guui }}
+        >
           {mdx.code.body}
         </MDXRenderer>
       </div>

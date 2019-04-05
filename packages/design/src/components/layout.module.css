@@ -64,7 +64,6 @@
 .sidebar img {
   padding: 0rem 1.5rem 1.25rem;
 }
-
 .sidebar a:hover {
   text-decoration: underline;
   box-shadow: inset -2px 0 0 0 var(--higlight-main);
