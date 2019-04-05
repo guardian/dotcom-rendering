@@ -44,7 +44,7 @@
   border-top: 1px solid #dcdcdc;
 }
 
-.md > div > li {
+.md > div > * > li {
   margin-bottom: 0.25rem;
 }
 
