@@ -3,14 +3,70 @@
 .md h4,
 .md h5,
 .md h6 {
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+  margin-top: 3rem;
 }
 
-.md storybook-preview {
-  border: 1px solid #ededed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 5rem;
+.md p,
+.md ul,
+.md ol {
+  max-width: 36rem;
+}
+
+.md h1:after {
+  display: block;
+  content: "";
+  background: repeating-linear-gradient(
+    to bottom,
+    #dcdcdc,
+    #dcdcdc 0.0625rem,
+    transparent 0.0625rem,
+    transparent 0.25rem
+  );
+  height: 1rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.md h2 {
+  border-top: 1px solid #dcdcdc;
+}
+
+.md li {
+  margin-bottom: 0.25rem;
+}
+
+.md h1,
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6,
+.md p,
+.md div {
+  margin-bottom: 0.5rem;
+}
+.md ul,
+.md ol {
+  margin-bottom: 1rem;
+}
+
+.md ul {
+  margin-left: 1.5rem;
+}
+
+.md ul li {
+  list-style: none;
+  position: relative;
+}
+
+.md ul li:before {
+  content: "";
+  width: 0.9em;
+  height: 0.9em;
+  background: var(--higlight-main);
+  display: inline-block;
+  position: absolute;
+  top: 0.33em;
+  left: -1.5em;
+  border-radius: 100%;
 }

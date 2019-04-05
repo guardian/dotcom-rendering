@@ -1,0 +1,73 @@
+---
+title: "Dropdowns"
+---
+
+<Figure>
+  <Dropdown label="My account" links={[]} id="my-account" />
+</Figure>
+
+Dropdowns expand to reveal a menu of options. They close themselves when the user clicks out of them.
+
+## Accesibility
+
+If you use this component the following things are already taken care of for you:
+
+- Upon activating a dropdown, focus should shift _inside_ the element.
+- Screen readers should be able to tell an active link from an active link
+- Keyboard input and focus should be trapperd inside the dropdown
+
+You still need to make sure these other things happen:
+
+- Upon dismissing a dropdown, focus should return to where it originally was. (It is safe to assume focus was at the trigger link.)
+- Provide at least one way to close the dropdown using a keyboard. Add a hidden "Close" link at the end
+
+## Common dropdowns
+
+_This list is non inclusive, if you see we are reusing a pattern in 2+ places please add it here_
+
+<FigureTable>
+  <FigureRow
+    name="Account dropdown"
+    usage="Signed in users see this to access their preferences & log out"
+  >
+    <Dropdown label="My account" links={[]} id="my-account" />
+
+  </FigureRow>
+  <FigureRow
+    name="Sharing dropdown"
+    usage="Nobody sees this because it does not exist, I put it here to get 2 rows"
+  >
+    <Dropdown label="Share to" links={[
+      {
+        url:'#',
+        title:'Google+'
+      },
+      {
+        url:'#',
+        title:'MySpace'
+      },
+      {
+        url:'#',
+        title:'LiveJournal'
+      }
+    ]} />
+  </FigureRow>
+</FigureTable>
+
+## Code examples
+
+### Guui
+
+<a href="#">Open in Storybook</a>
+
+### Html
+
+Grab the html & css
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/4n0xNbfJLR8"
+  frameborder="0"
+  allowfullscreen
+/>

@@ -2,15 +2,16 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
-import Storybook, { StoryRow } from "../components/storybook"
+import * as figures from "../components/figure"
 import styles from "./page.module.css"
+import * as guui from "@guardian/guui/index.ts"
 
 export default ({ data: { mdx } }) => {
   return (
     <Layout>
       <div className={styles.md}>
         <h1>{mdx.frontmatter.title}</h1>
-        <MDXRenderer scope={{ Storybook, StoryRow, React }}>
+        <MDXRenderer scope={{ React, ...figures, ...guui }}>
           {mdx.code.body}
         </MDXRenderer>
       </div>
