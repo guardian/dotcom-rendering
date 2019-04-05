@@ -36,7 +36,7 @@ export default ({ children }) => {
       <nav className={styles.sidebar}>
         <ul>
           <li>
-            <img src={roundel} />
+            <img alt="" src={roundel} />
           </li>
           {data.allMdx.edges.map(({ node }) => (
             <li key={node.id}>

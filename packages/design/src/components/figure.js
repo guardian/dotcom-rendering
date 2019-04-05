@@ -3,7 +3,7 @@ import React from "react"
 import styles from "./figure.module.css"
 
 const Figure = ({ children }) => {
-  return <div className={styles.base}>{children}</div>
+  return <figure className={styles.base}>{children}</figure>
 }
 
 const FigureTable = ({ children }) => (

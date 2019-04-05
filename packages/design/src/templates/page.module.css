@@ -1,9 +1,12 @@
+.md h1,
 .md h2,
 .md h3,
 .md h4,
 .md h5,
 .md h6 {
-  margin-top: 3rem;
+  margin-top: 3.75rem;
+  line-height: 1;
+  padding-top: 0.25rem;
 }
 
 .md p,
@@ -24,10 +27,11 @@
   );
   height: 1rem;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
-.md h2 {
+.md h2,
+.md h1 {
   border-top: 1px solid #dcdcdc;
 }
 
@@ -35,14 +39,17 @@
   margin-bottom: 0.25rem;
 }
 
-.md h1,
 .md h2,
 .md h3,
 .md h4,
 .md h5,
-.md h6,
+.md h6 {
+  margin-bottom: 1rem;
+}
+
+.md h1,
 .md p,
-.md div {
+.md figure {
   margin-bottom: 0.5rem;
 }
 .md ul,
@@ -69,4 +76,25 @@
   top: 0.33em;
   left: -1.5em;
   border-radius: 100%;
+}
+
+.md table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "GuardianTextSans";
+  line-height: 1.4;
+  background: #f6f6f6;
+}
+
+.md table td {
+  border: 1px solid #dcdcdc;
+  padding: 1rem;
+}
+
+.md table[data-type="preview"] td {
+  width: 50%;
+}
+
+.md table[data-type="preview"] figure {
+  margin: 0;
 }
