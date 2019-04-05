@@ -6,9 +6,7 @@ import "./vars.css"
 
 import roundel from "./roundel.svg"
 
-console.log(roundel)
-
-export default ({ children }) => {
+export const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query {
       allMdx {

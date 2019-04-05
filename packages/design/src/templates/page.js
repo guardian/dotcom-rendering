@@ -1,11 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
+import { Layout } from "../components/layout"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
 import * as figures from "../components/figure"
 import styles from "./page.module.css"
 import * as guui from "@guardian/guui/index.ts"
 
+// tslint:disable-next-line:no-default-export
 export default ({ data: { mdx } }) => {
   return (
     <Layout>
