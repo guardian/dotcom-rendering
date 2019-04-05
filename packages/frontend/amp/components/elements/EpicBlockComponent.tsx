@@ -3,12 +3,11 @@ import { css } from 'emotion';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 
+// TODO use a better html parser
 const parseHighlightedText = (text: string) => {
     const stringContainingHTMLSource = text
         .replace('%%CURRENCY_SYMBOL%%', '£')
         .replace('&ndash;', '-');
-    // const parser = new DOMParser();
-    // doc = parser.parseFromString(stringContainingHTMLSource, 'text/html');
     return stringContainingHTMLSource;
 };
 

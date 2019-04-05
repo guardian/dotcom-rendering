@@ -192,8 +192,6 @@ export const Header: React.FC<{
                 linkLabel={'Support Us'}
             />
 
-            {/* {config.switches.subscribeWithGoogle && <AmpSubscriptionGoogle />} */}
-
             <a className={logoStyles} href={guardianBaseURL}>
                 <span
                     className={css`

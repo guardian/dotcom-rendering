@@ -7,6 +7,7 @@ import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
+import { extract as extractEpic } from '@frontend/model/extract-epic';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { getSubscribeWithGoogleExtensionScripts } from '@frontend/amp/lib/subscribe-with-google';
 import { getAmpAccessScripts } from '@frontend/amp/lib/amp-access-scripts';
@@ -17,6 +18,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const linkedData = extractLinkedData(body);
 
         const config = extractConfig(body);
+        const epic = extractEpic(body);
 
         const scripts = [
             ...extractScripts(CAPI.elements, CAPI.mainMediaElements),
@@ -57,7 +59,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     nav={extractNAV(body)}
                     analytics={analytics}
                     config={config}
-                    epic={body.epic}
+                    epic={epic}
                 />
             ),
         });
