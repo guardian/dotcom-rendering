@@ -15,25 +15,39 @@
 .base > .sidebar {
   flex: 1 1 auto;
   min-width: 16em;
-  padding: 1.5rem 0;
+  padding: 5rem 0 1.5rem;
 }
 
 .base > main {
   flex: 1 1 100%;
-  padding: 1.5rem 3rem 3rem;
+  padding: 0 3rem 3rem;
+  border-top: 1px solid #dcdcdc;
+  margin-top: calc(5rem - 1px);
 }
 
 .sidebar {
   background: #052962;
   font-family: "GuardianTextSans";
   color: #fff;
+  border-right: 1px solid #052962;
 }
 
 .sidebar ul {
   list-style: none;
 }
 
-.sidebar a {
+.sidebar .topLink {
+  display: block;
+  color: currentColor;
+  padding: 0.25rem 1.5rem 1.5rem;
+  text-decoration: none;
+  position: relative;
+  line-height: 1.2;
+  font-family: Headline;
+  font-size: 1.25em;
+}
+
+.sidebar .link {
   display: block;
   color: currentColor;
   padding: 0.25rem 1.5rem 1.5rem;
@@ -42,7 +56,7 @@
   line-height: 1.2;
 }
 
-.sidebar a:before {
+.sidebar .topLink:before {
   content: "";
   height: 1px;
   position: absolute;
@@ -51,7 +65,8 @@
   top: -1px;
   background: #506991;
 }
-.sidebar a:after {
+
+.sidebar .topLink:after {
   content: "";
   height: 1px;
   position: absolute;
@@ -62,16 +77,20 @@
 }
 
 .sidebar img {
-  padding: 0rem 1.5rem 1.25rem;
+  padding: 1.33rem 1.5rem;
+  position: absolute;
+  top: 0;
+  display: block;
 }
-.sidebar a:hover {
+.sidebar .link:hover,
+.sidebar .topLink:hover {
   text-decoration: underline;
   box-shadow: inset -2px 0 0 0 var(--higlight-main);
 }
 
 .sidebar a.activeLink {
   box-shadow: inset -4px 0 0 0 var(--higlight-main);
-  font-weight: 700;
+  color: var(--higlight-main);
 }
 
 h1,
@@ -83,7 +102,11 @@ h6 {
   font-family: Headline;
 }
 
-.clamp {
-  max-width: 56em;
-  margin: auto;
+.sidebar details ul {
+  background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  padding: 1rem 0 0;
+}
+.sidebar details[open] .topLink:after {
+  display: none;
 }
