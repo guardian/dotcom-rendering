@@ -30,9 +30,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
           }
         }
       `).then(result => {
-        // this is some boilerlate to handle errors
         if (result.errors) {
-          console.error(result.errors)
           reject(result.errors)
         }
         // We'll call `createPage` for each result
