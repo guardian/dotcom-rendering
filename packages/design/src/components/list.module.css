@@ -21,4 +21,7 @@
 
 .base li.happy:before {
   background: #3db540;
+  border-radius: 0;
+  mask-image: url(./thumb.svg);
+  transform: scale(1.5);
 }
