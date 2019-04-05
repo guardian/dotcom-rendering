@@ -1,3 +1,8 @@
+.md {
+  max-width: 56em;
+  margin: auto;
+}
+
 .md > h1,
 .md > div > h2,
 .md > div > h3,
@@ -7,6 +12,10 @@
   margin-top: 3.75rem;
   line-height: 1;
   padding-top: 0.25rem;
+}
+
+.md > h1 {
+  margin: 0;
 }
 
 .md > div > p,
@@ -31,8 +40,7 @@
   margin-top: 3rem;
 }
 
-.md > div > h2,
-.md > h1 {
+.md > div > h2 {
   border-top: 1px solid #dcdcdc;
 }
 
@@ -54,6 +62,11 @@
 .md > div > aside {
   margin-bottom: 0.5rem;
 }
+
+.md > div > aside {
+  margin-top: 1rem;
+}
+
 .md > div > ul,
 .md > div > ol {
   margin-bottom: 1rem;
