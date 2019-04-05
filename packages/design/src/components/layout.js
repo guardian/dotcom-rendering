@@ -2,6 +2,11 @@ import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import styles from "./layout.module.css"
 import "./fonts.css"
+import "./vars.css"
+
+import roundel from "./roundel.svg"
+
+console.log(roundel)
 
 export default ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -31,7 +36,7 @@ export default ({ children }) => {
       <nav className={styles.sidebar}>
         <ul>
           <li>
-            <h2>Navigation</h2>
+            <img src={roundel} />
           </li>
           {data.allMdx.edges.map(({ node }) => (
             <li key={node.id}>
@@ -42,7 +47,9 @@ export default ({ children }) => {
           ))}
         </ul>
       </nav>
-      <main>{children}</main>
+      <main>
+        <div class={styles.clamp}>{children}</div>
+      </main>
     </div>
   )
 }

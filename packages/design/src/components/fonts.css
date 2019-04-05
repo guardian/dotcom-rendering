@@ -7,14 +7,14 @@
 }
 
 @font-face {
-  font-family: "Text Sans";
+  font-family: "GuardianTextSans";
   src: url("https://pasteup.guim.co.uk/webfonts/1.0.0/noalts-not-hinted/GuardianTextSans-Regular.woff")
     format("woff2");
   font-weight: regular;
   font-style: italic;
 }
 @font-face {
-  font-family: "Text Sans";
+  font-family: "GuardianTextSans";
   src: url("https://pasteup.guim.co.uk/webfonts/1.0.0/noalts-not-hinted/GuardianTextSans-Bold.woff")
     format("woff2");
   font-weight: 500;
