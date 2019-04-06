@@ -17,6 +17,9 @@
 
 .base li.sad:before {
   background: #c70000;
+  border-radius: 0;
+  mask-image: url(./thumb.svg);
+  transform: scale(1.5) rotate(180deg);
 }
 
 .base li.happy:before {

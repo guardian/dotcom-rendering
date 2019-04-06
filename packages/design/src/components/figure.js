@@ -2,8 +2,12 @@ import React from "react"
 
 import styles from "./figure.module.css"
 
-const Figure = ({ children }) => {
-  return <figure className={styles.base}>{children}</figure>
+const Figure = ({ children, appearance }) => {
+  return (
+    <figure data-appearance={appearance} className={styles.base}>
+      {children}
+    </figure>
+  )
 }
 
 const FigureTable = ({ children }) => (
@@ -12,11 +16,11 @@ const FigureTable = ({ children }) => (
   </table>
 )
 
-const FigureRow = ({ name, usage, children }) => {
+const FigureRow = ({ name, usage, ...props }) => {
   return (
     <tr>
       <td>
-        <Figure>{children}</Figure>
+        <Figure {...props} />
       </td>
       <td>
         <strong>{name}</strong>
