@@ -50,6 +50,15 @@ export const Layout = ({ children }) => {
       <nav className={styles.sidebar}>
         <img alt="" src={roundel} />
         <ul>
+          <li>
+            <Link
+              className={styles.topLink}
+              activeClassName={styles.activeLink}
+              to={"/"}
+            >
+              Welcome
+            </Link>
+          </li>
           {top.map(({ node }) => (
             <li key={node.id}>
               <Link

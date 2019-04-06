@@ -36,6 +36,7 @@
   list-style: none;
 }
 
+.sidebar .link,
 .sidebar .topLink {
   display: block;
   color: currentColor;
@@ -43,17 +44,17 @@
   text-decoration: none;
   position: relative;
   line-height: 1.2;
-  font-family: Headline;
-  font-size: 1.25em;
+  transition: box-shadow 0.5s;
+}
+.sidebar .link:hover,
+.sidebar .topLink:hover {
+  text-decoration: underline;
+  box-shadow: inset -2px 0 0 0 var(--higlight-main);
 }
 
-.sidebar .link {
-  display: block;
-  color: currentColor;
-  padding: 0.25rem 1.5rem 1.5rem;
-  text-decoration: none;
-  position: relative;
-  line-height: 1.2;
+.sidebar .topLink {
+  font-family: Headline;
+  font-size: 1.25em;
 }
 
 .sidebar .topLink:before {
@@ -82,13 +83,9 @@
   top: 0;
   display: block;
 }
-.sidebar .link:hover,
-.sidebar .topLink:hover {
-  text-decoration: underline;
-  box-shadow: inset -2px 0 0 0 var(--higlight-main);
-}
 
-.sidebar a.activeLink {
+.sidebar a.activeLink,
+.sidebar a.activeLink:hover {
   box-shadow: inset -4px 0 0 0 var(--higlight-main);
   color: var(--higlight-main);
 }
