@@ -1,8 +1,11 @@
 .base {
   border: 1px solid #ededed;
-  background: #121212;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 5rem;
+}
+
+.base[data-appearance="dark"] {
+  background: #052962;
 }
