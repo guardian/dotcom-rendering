@@ -5,8 +5,10 @@ import { Details } from "./details"
 import styles from "./layout.module.css"
 import "./fonts.css"
 import "./vars.css"
-
+import injectCssGlobals from "../helpers/css-globals"
 import roundel from "./roundel.svg"
+
+injectCssGlobals()
 
 export const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`

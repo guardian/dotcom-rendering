@@ -12,6 +12,5 @@ module.exports = {
     },
     `gatsby-mdx`,
     `gatsby-plugin-typescript`,
-    `gatsby-transformer-remark`,
   ],
 }
