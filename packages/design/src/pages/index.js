@@ -2,7 +2,7 @@ import React from "react"
 import { Layout } from "../components/layout"
 import logo from "./tierz.svg"
 import { css } from "emotion"
-
+import "../templates/page"
 export default () => (
   <Layout>
     <div
