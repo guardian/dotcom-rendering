@@ -38,7 +38,9 @@ The dotcom-rendering github account is set up to enforce rebasement on the `mast
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup 
 questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
 
+### Tips and Tricks
 
+- Dotcom Rendering uses [Yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/)
 
 
 ## Other tasks
