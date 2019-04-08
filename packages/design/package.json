@@ -1,7 +1,7 @@
 {
   "name": "@guardian/frontend-design",
   "version": "0.1.0-alpha.1",
-  "description": "theguardian.com design docs",
+  "description": "theguardian.com design docs and storybook component library",
   "license": "Apache-2.0",
   "scripts": {
     "build": "gatsby build",
@@ -9,7 +9,9 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@guardian/guui": "2.0.0-alpha.1",
@@ -26,7 +28,20 @@
     "npm": "^6.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+<<<<<<< HEAD
     "react-live": "^2.0.1"
+=======
+    "@babel/core": "^7.4.3",
+    "@storybook/addon-actions": "^5.0.6",
+    "@storybook/addon-knobs": "^5.0.6",
+    "@storybook/addon-links": "^5.0.6",
+    "@storybook/addons": "^5.0.6",
+    "@storybook/react": "^5.0.6",
+    "@types/storybook__addon-knobs": "^4.0.5",
+    "@types/storybook__react": "^4.0.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "desvg-loader": "^0.1.0"
+>>>>>>> Move storybook to the design workspace
   },
   "devDependencies": {
     "prettier": "^1.16.4"

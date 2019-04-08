@@ -15330,10 +15330,6 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svg-loader@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/svg-loader/-/svg-loader-0.0.2.tgz#601ab2fdaa1dadae3ca9975b550de92a07e1d92b"
-
 svg-tags@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
