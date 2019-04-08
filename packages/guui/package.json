@@ -3,9 +3,7 @@
   "version": "2.0.0-alpha.1",
   "description": "Guardian rendering framework",
   "scripts": {
-    "test": "jest",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "jest"
   },
   "license": "Apache-2.0",
   "dependencies": {
@@ -16,20 +14,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@storybook/addon-actions": "^5.0.6",
-    "@storybook/addon-knobs": "^5.0.6",
-    "@storybook/addon-links": "^5.0.6",
-    "@storybook/addons": "^5.0.6",
-    "@storybook/react": "^5.0.6",
-    "@types/storybook__addon-knobs": "^4.0.5",
-    "@types/storybook__react": "^4.0.1",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.5",
     "css-loader": "^0.28.11",
-    "desvg-loader": "^0.1.0",
     "emotion": "^10.0.5",
     "react": "^16.4.0",
-    "svg-loader": "^0.0.2",
     "to-string-loader": "^1.1.5"
   },
   "peerDependencies": {
