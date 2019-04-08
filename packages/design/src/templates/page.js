@@ -2,11 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Layout } from "../components/layout"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
-import * as figures from "../components/figure"
 import * as lists from "../components/list"
-import * as asides from "../components/aside"
-
-import * as guui from "@guardian/guui/index.ts"
+import scope from "../helpers/mdx-scope"
 
 import styles from "./page.module.css"
 
@@ -20,7 +17,7 @@ export default ({ data: { mdx } }) => {
           components={{
             ul: lists.List,
           }}
-          scope={{ React, ...asides, ...lists, ...figures, ...guui }}
+          scope={{ React, ...scope }}
         >
           {mdx.code.body}
         </MDXRenderer>
