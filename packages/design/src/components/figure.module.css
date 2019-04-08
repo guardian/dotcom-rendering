@@ -8,7 +8,7 @@
 }
 
 .base[data-appearance='dark'] .preview {
-    background: #052962;
+    background: var(--brand-main);
     border: 0;
 }
 
