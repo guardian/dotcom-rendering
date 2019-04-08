@@ -27,26 +27,22 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
                 }
             }
         }
-    `)
-        .then(result => {
-            if (result.errors) {
-                reject(result.errors);
-            }
-            // We'll call `createPage` for each result
-            result.data.allMdx.edges.forEach(({ node }) => {
-                createPage({
-                    // This is the slug we created before
-                    // (or `node.frontmatter.slug`)
-                    path: node.fields.slug,
-                    // This component will wrap our MDX content
-                    component: path.resolve(`./src/templates/page.js`),
-                    // We can use the values in this context in
-                    // our page layout component
-                    context: { id: node.id },
-                });
+    `).then(result => {
+        if (result.errors) {
+            reject(result.errors);
+        }
+        // We'll call `createPage` for each result
+        result.data.allMdx.edges.forEach(({ node }) => {
+            createPage({
+                // This is the slug we created before
+                // (or `node.frontmatter.slug`)
+                path: node.fields.slug,
+                // This component will wrap our MDX content
+                component: path.resolve(`./src/templates/page.js`),
+                // We can use the values in this context in
+                // our page layout component
+                context: { id: node.id },
             });
-        })
-        .catch(err => {
-            console.error(err);
         });
+    });
 };
