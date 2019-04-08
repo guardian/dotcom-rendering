@@ -1,11 +1,36 @@
-.base {
-  border: 1px solid #ededed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 5rem;
+.base .preview {
+    border: 1px solid #ededed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
+    position: relative;
 }
 
-.base[data-appearance="dark"] {
-  background: #052962;
+.base[data-appearance='dark'] .preview {
+    background: #052962;
+    border: 0;
+}
+
+.btn {
+    position: absolute;
+    left: 0.5em;
+    bottom: 0.5em;
+    opacity: 0;
+    font-family: 'GuardianTextSans';
+    background: none;
+    border: none;
+    text-decoration: underline;
+}
+
+.base[data-appearance='dark'] .btn {
+    color: #fff;
+}
+
+.base:hover .btn {
+    opacity: 1;
+}
+
+.code {
+    background: #121221;
 }
