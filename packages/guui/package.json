@@ -13,15 +13,15 @@
     "reset-css": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "babel-loader": "^8.0.5",
     "css-loader": "^0.28.11",
+    "desvg-loader": "^0.1.0",
     "emotion": "^10.0.5",
     "react": "^16.4.0",
+    "svg-loader": "^0.0.2",
     "to-string-loader": "^1.1.5"
   },
   "peerDependencies": {
-    "emotion": "^10.0.5",
-    "react": "^16.4.0"
+    "react": "^16.4.0",
+    "emotion": "^10.0.5"
   }
 }
