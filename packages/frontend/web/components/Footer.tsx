@@ -14,9 +14,9 @@ import {
 } from '@frontend/lib/footer-links';
 
 const footer = css`
-    background-color: ${palette.neutral[20]};
-    color: ${palette.neutral[86]};
-    ${textSans(3)};
+    background-color: ${palette.brand.main};
+    color: ${palette.neutral[100]};
+    ${textSans(5)};
 `;
 
 const footerInner = css`
@@ -34,13 +34,14 @@ const emailSignup = css`
 `;
 
 const footerLink = css`
-    color: ${palette.neutral[86]};
+    color: inherit;
     text-decoration: none;
     padding-bottom: 12px;
     display: block;
 
     :hover {
         text-decoration: underline;
+        color: ${palette.highlight.main};
     }
 `;
 
@@ -48,7 +49,7 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    border-top: 1px solid ${palette.neutral[20]};
+    border-top: 1px solid ${palette.brand.pastel};
 
     ${tablet} {
         border-top: none;
@@ -56,7 +57,7 @@ const footerList = css`
 
     ul {
         width: 50%;
-        border-left: 1px solid ${palette.neutral[20]};
+        border-left: 1px solid ${palette.brand.pastel};
 
         ${until.tablet} {
             :nth-of-type(odd) {
@@ -92,7 +93,7 @@ const footerList = css`
 const copyright = css`
     ${textSans(1)};
     padding: 6px 0 18px;
-    border-top: 1px solid ${palette.neutral[20]};
+    border-top: 1px solid ${palette.brand.pastel};
     margin-top: 12px;
 `;
 
