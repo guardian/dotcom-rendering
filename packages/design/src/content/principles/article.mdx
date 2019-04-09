@@ -1,0 +1,28 @@
+---
+title: 'Article'
+---
+
+Articles are the bread and butter of the Guardian. Every day, More than 8 million people read our award winning journalism on digital platforms.
+
+Here's a quick reference of how all of this comes together. All articles live in `CAPI` but are then rendered on `frontend`, `dotcomponents`, `amp`, `dc-amp`, or `apps`.
+
+## Skeleton of an article
+
+This is the order the parts of an article should flow in the page:
+
+-   Furniture
+-   Content
+-   Atoms
+-   Contributions ask
+-   Comments & sharing
+-   Other content
+
+Our article works across a multitude of platforms, screen sizes, and devices and is read by many types of users. In scenarios where the reader can quickly scan a full page and select what information to read (Meaning screens, not screen readers or smart speakers) it is okay to be more bold with the article, and intersect related content and atoms in the middle.
+
+<ResearchAside>
+    Screen reader users <b>really</b> dislike atoms in the middle of the
+    article. Attempt to condense them at the end of the article using CSS
+    techniques like regions and link to them.
+</ResearchAside>
+
+If you are building a new part of an article try to make sure this order is still preserved and test it with a screen reader.
