@@ -90,7 +90,7 @@ const zipBundle = () => {
 =======
     return execa('zip', ['-r', 'rendering.zip', '.', '-x', '.git/**\\*'], {
         shell: true,
-        maxBuffer: 500 * 1024, // https://github.com/lerna/lerna/pull/442/files#diff-7a504a7fd819b561f543e623ae0949b1R11
+        maxBuffer: 10000000,
     }).then(() => {
 >>>>>>> pettier prettier
         cpy(['rendering.zip'], path.resolve(target, 'rendering', 'dist'));
