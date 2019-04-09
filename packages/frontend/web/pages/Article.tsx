@@ -38,10 +38,6 @@ const articleContainer = css`
     background-color: ${palette.neutral[100]};
     padding: 0 10px;
 
-    ${tablet} {
-        border-left: 1px solid ${palette.neutral[86]};
-        border-right: 1px solid ${palette.neutral[86]};
-    }
     ${mobileLandscape} {
         padding: 0 20px;
     }
@@ -57,13 +53,14 @@ export const Article: React.FC<{
             edition={data.CAPI.editionId}
         />
         <main>
-            <Container className={articleContainer}>
+            <Container borders={true} className={articleContainer}>
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn} />
                 </article>
             </Container>
             <Container
+                borders={true}
                 className={cx(
                     articleContainer,
                     css`
