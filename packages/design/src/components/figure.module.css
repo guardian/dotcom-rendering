@@ -14,20 +14,24 @@
 
 .btn {
     position: absolute;
-    left: 0.5em;
-    bottom: 0.5em;
+    left: 0;
+    bottom: 0;
     opacity: 0;
     font-family: 'GuardianTextSans';
     background: none;
     border: none;
     text-decoration: underline;
+    background: var(--highlight-main);
+    padding: 0.5rem;
+    font-weight: bold;
+    color: var(--neutral-7);
 }
 
-.base[data-appearance='dark'] .btn {
-    color: #fff;
+.preview:hover {
+    box-shadow: 0 0 0 2px var(--highlight-main);
 }
 
-.base:hover .btn {
+.preview:hover .btn {
     opacity: 1;
 }
 

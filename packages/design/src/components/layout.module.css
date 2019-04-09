@@ -22,15 +22,15 @@
 .base > main {
     flex: 1 1 100%;
     padding: 0 3rem 3rem;
-    border-top: 1px solid #dcdcdc;
+    border-top: 1px solid var(--neutral-86);
     margin-top: calc(5rem - 1px);
 }
 
 .sidebar {
-    background: #052962;
+    background: var(--brand-main);
     font-family: 'GuardianTextSans';
-    color: #fff;
-    border-right: 1px solid #052962;
+    color: var(--neutral-100);
+    border-right: 1px solid var(--brand-main);
 }
 
 .sidebar ul {
@@ -41,7 +41,7 @@
 .sidebar .topLink {
     display: block;
     color: currentColor;
-    padding: 1rem 1.5rem 1.1rem;
+    padding: 0.5rem 1.5rem;
     text-decoration: none;
     position: relative;
     line-height: 1.2;
@@ -50,7 +50,6 @@
 .sidebar .link:hover,
 .sidebar .topLink:hover {
     text-decoration: underline;
-    box-shadow: inset -2px 0 0 0 var(--higlight-main);
 }
 
 .sidebar .topLink {
@@ -66,7 +65,7 @@
     right: 0;
     left: 1.5rem;
     top: -1px;
-    background: #506991;
+    background: var(--brand-pastel);
 }
 
 .sidebar .topLink:after {
@@ -76,7 +75,7 @@
     right: 0;
     left: 1.5rem;
     bottom: 0;
-    background: #506991;
+    background: var(--brand-pastel);
 }
 
 .sidebar img {
@@ -102,8 +101,9 @@ h6 {
 }
 
 .sidebar details ul {
-    background: rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    margin-bottom: 1.5rem;
+    margin-top: -0.5rem;
 }
 .sidebar details[open] .topLink:after {
     display: none;
