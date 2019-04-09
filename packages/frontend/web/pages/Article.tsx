@@ -2,11 +2,7 @@ import React from 'react';
 import { Container } from '@guardian/guui';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import {
-    desktop,
-    mobileLandscape,
-    tablet,
-} from '@guardian/pasteup/breakpoints';
+import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
 import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
