@@ -1,34 +1,20 @@
 import React from 'react';
 import { Layout } from '../components/layout';
 import logo from './tierz.svg';
-import { css } from 'emotion';
 import '../templates/page';
+
+import styles from './index.module.css';
 
 // tslint:disable-next-line:no-default-export
 export default () => (
     <Layout>
-        <div
-            className={css`
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            `}
-        >
+        <div className={styles.root}>
             <img
-                className={css`
-                    width: 75%;
-                    margin: 0.5rem auto 2em;
-                `}
+                className={styles.logo}
                 src={logo}
                 alt="Revisiting the rendering tier"
             />
-            <p
-                className={css`
-                    text-align: center;
-                `}
-            >
+            <p className={styles.standfirst}>
                 A guide to digital design at The Guardian
             </p>
         </div>

@@ -57,7 +57,7 @@ export const Layout = ({ children }) => {
     return (
         <div className={styles.base}>
             <nav className={styles.sidebar}>
-                <img alt="" src={roundel} />
+                <img alt="Paper design system" src={roundel} />
                 <ul>
                     <li>
                         <Link
