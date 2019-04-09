@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
-import { tablet } from '@guardian/pasteup/breakpoints';
 import { Inner } from './Inner';
 
 const subnavWrapper = css`
@@ -27,11 +26,6 @@ const multiLine = css`
     clear: left;
     display: block;
     height: 13px;
-
-    ${tablet} {
-        border-left: 1px solid ${palette.neutral[86]};
-        border-right: 1px solid ${palette.neutral[86]};
-    }
 `;
 
 interface Props {
@@ -96,7 +90,7 @@ export class SubNav extends Component<
 
         return (
             <div className={subnavWrapper}>
-                <Container>
+                <Container borders={true}>
                     <Inner
                         links={this.props.subnav.links}
                         pillar={this.props.pillar}
