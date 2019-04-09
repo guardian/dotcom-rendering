@@ -13,10 +13,8 @@ const reqDC = require.context(
 )
 
 function loadStories() {
-  reqGuui
-    .keys()
-    .concat(reqDC.keys())
-    .forEach(req)
+  reqGuui.keys().forEach(reqGuui)
+  reqDC.keys().forEach(reqDC)
 }
 
 configure(loadStories, module)
