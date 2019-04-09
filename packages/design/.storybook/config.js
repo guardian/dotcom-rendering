@@ -1,13 +1,22 @@
-import { configure } from '@storybook/react';
+import { configure } from "@storybook/react"
 // automatically import all files ending in *.stories.tsx
-const req = require.context(
-    '@guardian/guui/components/',
-    true,
-    /\.stories\.tsx$/,
-);
+const reqGuui = require.context(
+  "@guardian/guui/components/",
+  true,
+  /\.stories\.tsx$/
+)
+
+const reqDC = require.context(
+  "@guardian/frontend-rendering/web/components/",
+  true,
+  /\.stories\.tsx$/
+)
 
 function loadStories() {
-    req.keys().forEach(req);
+  reqGuui
+    .keys()
+    .concat(reqDC.keys())
+    .forEach(req)
 }
 
-configure(loadStories, module);
+configure(loadStories, module)

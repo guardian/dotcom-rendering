@@ -14,11 +14,22 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@guardian/frontend-rendering": "0.1.0-alpha.1",
     "@guardian/guui": "2.0.0-alpha.1",
     "@guardian/pasteup": "1.0.0-alpha.7",
     "@mdx-js/mdx": "^0.20.3",
     "@mdx-js/react": "^1.0.0-alpha.12",
     "@mdx-js/tag": "^0.20.3",
+    "@storybook/addon-actions": "^5.0.6",
+    "@storybook/addon-knobs": "^5.0.6",
+    "@storybook/addon-links": "^5.0.6",
+    "@storybook/addons": "^5.0.6",
+    "@storybook/react": "^5.0.6",
+    "@types/storybook__addon-knobs": "^4.0.5",
+    "@types/storybook__react": "^4.0.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "desvg-loader": "^0.1.0",
     "gatsby": "^2.3.12",
     "gatsby-mdx": "^0.4.4",
     "gatsby-plugin-typescript": "^2.0.12",
@@ -28,20 +39,8 @@
     "npm": "^6.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-<<<<<<< HEAD
-    "react-live": "^2.0.1"
-=======
-    "@babel/core": "^7.4.3",
-    "@storybook/addon-actions": "^5.0.6",
-    "@storybook/addon-knobs": "^5.0.6",
-    "@storybook/addon-links": "^5.0.6",
-    "@storybook/addons": "^5.0.6",
-    "@storybook/react": "^5.0.6",
-    "@types/storybook__addon-knobs": "^4.0.5",
-    "@types/storybook__react": "^4.0.1",
-    "awesome-typescript-loader": "^5.2.1",
-    "desvg-loader": "^0.1.0"
->>>>>>> Move storybook to the design workspace
+    "react-live": "^2.0.1",
+    "svg-loader": "^0.0.2"
   },
   "devDependencies": {
     "prettier": "^1.16.4"
