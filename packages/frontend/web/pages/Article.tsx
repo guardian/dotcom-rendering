@@ -2,7 +2,11 @@ import React from 'react';
 import { Container } from '@guardian/guui';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
+import {
+    desktop,
+    mobileLandscape,
+    tablet,
+} from '@guardian/pasteup/breakpoints';
 
 import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
@@ -13,10 +17,6 @@ import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 
 // TODO: find a better of setting opacity
-const articleWrapper = css`
-    background-color: rgba(18, 18, 18, 0.05);
-`;
-
 const secondaryColumn = css`
     position: absolute;
     top: 0;
@@ -38,7 +38,10 @@ const articleContainer = css`
     position: relative;
     background-color: ${palette.neutral[100]};
     padding: 0 10px;
-
+    ${tablet} {
+        border-left: 1px solid ${palette.neutral[86]};
+        border-right: 1px solid ${palette.neutral[86]};
+    }
     ${mobileLandscape} {
         padding: 0 20px;
     }
@@ -53,7 +56,7 @@ export const Article: React.FC<{
             pillar={data.CAPI.pillar}
             edition={data.CAPI.editionId}
         />
-        <main className={articleWrapper}>
+        <main>
             <Container className={articleContainer}>
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
