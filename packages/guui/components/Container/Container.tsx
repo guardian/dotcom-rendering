@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
+import { palette } from '@guardian/pasteup/palette';
 
 const container = css`
     margin: auto;
@@ -23,11 +24,26 @@ const container = css`
     }
 `;
 
+const containerWithBorders = css`
+    ${tablet} {
+        border-left: 1px solid ${palette.neutral[86]};
+        border-right: 1px solid ${palette.neutral[86]};
+    }
+`;
+
 export const Container: React.SFC<{
     className?: string;
+    borders?: boolean;
     children: React.ReactNode;
-}> = ({ className, children, ...props }) => (
-    <div className={cx(container, className)} {...props}>
+}> = ({ className, borders, children, ...props }) => (
+    <div
+        className={cx(
+            container,
+            className,
+            borders ? containerWithBorders : null,
+        )}
+        {...props}
+    >
         {children}
     </div>
 );

@@ -7,7 +7,8 @@ import { sans } from '@guardian/pasteup/typography';
 const iconContainer = css`
     position: relative;
     float: right;
-    margin-top: -6px;
+    margin-top: -3px;
+    margin-right: 4px;
     border-radius: 100%;
     background-color: ${palette.neutral[7]};
     cursor: pointer;
@@ -39,11 +40,6 @@ const text = css`
     padding-right: 10px;
 `;
 
-const outerWrapper = css`
-    border-top: 1px solid ${palette.neutral[86]};
-    background-color: ${palette.neutral[97]};
-`;
-
 const innerWrapper = css`
     text-align: right;
 `;
@@ -55,13 +51,11 @@ const link = css`
 
 export const BackToTop: React.FC = () => (
     <a className={link} href="#top">
-        <div className={outerWrapper}>
-            <Container className={innerWrapper}>
-                <span className={text}>back to top</span>
-                <span className={iconContainer}>
-                    <i className={icon} />
-                </span>
-            </Container>
-        </div>
+        <Container borders={true} className={innerWrapper}>
+            <span className={text}>back to top</span>
+            <span className={iconContainer}>
+                <i className={icon} />
+            </span>
+        </Container>
     </a>
 );
