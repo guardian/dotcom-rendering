@@ -53,7 +53,7 @@ const copyStatic = () => {
 const copyDist = () => {
     log(' - copying dist');
     return cpy(
-        ['**/*.!(html|json)'],
+        ['**/*.!(html|json)', '!**/design'],
         path.resolve(target, `${siteName}-static`, 'guui', 'assets'),
         {
             cwd: path.resolve(dist),
@@ -70,7 +70,6 @@ const copyRiffRaff = () => {
 
 const zipBundle = () => {
     log(' - zipping bundle');
-<<<<<<< HEAD
     return execa(
         'zip',
         [
@@ -87,12 +86,6 @@ const zipBundle = () => {
             shell: true,
         },
     ).then(() => {
-=======
-    return execa('zip', ['-r', 'rendering.zip', '.', '-x', '.git/**\\*'], {
-        shell: true,
-        maxBuffer: 10000000,
-    }).then(() => {
->>>>>>> pettier prettier
         cpy(['rendering.zip'], path.resolve(target, 'rendering', 'dist'));
     });
 };
