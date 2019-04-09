@@ -14,8 +14,6 @@ const wrapperCollapsed = css`
     overflow: hidden;
 
     ${tablet} {
-        border-left: 1px solid ${palette.neutral[86]};
-        border-right: 1px solid ${palette.neutral[86]};
         height: 42px;
     }
 `;
