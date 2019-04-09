@@ -1,13 +1,12 @@
 import React from 'react';
 import { Container } from '@guardian/guui';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import {
     desktop,
     mobileLandscape,
     tablet,
 } from '@guardian/pasteup/breakpoints';
-
 import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
@@ -38,6 +37,7 @@ const articleContainer = css`
     position: relative;
     background-color: ${palette.neutral[100]};
     padding: 0 10px;
+
     ${tablet} {
         border-left: 1px solid ${palette.neutral[86]};
         border-right: 1px solid ${palette.neutral[86]};
@@ -62,6 +62,15 @@ export const Article: React.FC<{
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn} />
                 </article>
+            </Container>
+            <Container
+                className={cx(
+                    articleContainer,
+                    css`
+                        border-top: 1px solid ${palette.neutral[86]};
+                    `,
+                )}
+            >
                 <MostViewed sectionName={data.CAPI.sectionName} />
             </Container>
         </main>

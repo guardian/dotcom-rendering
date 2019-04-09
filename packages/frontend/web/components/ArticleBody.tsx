@@ -13,6 +13,7 @@ import {
     desktop,
     tablet,
 } from '@guardian/pasteup/breakpoints';
+import { clearFix } from '@guardian/pasteup/mixins';
 import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
@@ -29,6 +30,7 @@ const wrapper = css`
     padding-top: 6px;
     margin-right: 0;
     margin-left: 0;
+    ${clearFix}
 
     ${desktop} {
         max-width: 620px;

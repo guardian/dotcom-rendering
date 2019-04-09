@@ -15,7 +15,6 @@ import { AsyncClientComponent } from './lib/AsyncClientComponent';
 import { reportError } from '@frontend/web/browser/reportError';
 
 const container = css`
-    border-top: 1px solid ${palette.neutral[86]};
     padding-top: 3px;
 
     ${desktop} {
