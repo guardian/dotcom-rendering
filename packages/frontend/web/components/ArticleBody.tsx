@@ -550,7 +550,10 @@ export const ArticleBody: React.FC<{
                             </a>
                         </div>
                     )}
-                    <Dateline dateDisplay={CAPI.webPublicationDateDisplay} />
+                    <Dateline
+                        dateDisplay={CAPI.webPublicationDateDisplay}
+                        descriptionText={'Published on'}
+                    />
                     <div className={metaExtras}>
                         <SharingIcons
                             sharingUrls={CAPI.sharingUrls}
