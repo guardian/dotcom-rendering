@@ -14,13 +14,13 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { clearFix } from '@guardian/pasteup/mixins';
 import { headline, textSans, body } from '@guardian/pasteup/typography';
+import { Byline } from '@guardian/guui/components/Byline/Byline';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 import { ShareCount } from './ShareCount';
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';
 import { Dateline } from './Dateline';
-import { Byline } from './Byline';
 
 import { MainMedia } from './MainMedia';
 
