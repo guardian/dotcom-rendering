@@ -80,6 +80,7 @@ const zipBundle = () => {
             '.git/**\\*',
             '**/design/**\\*',
             '**/pasteup/**\\*',
+            '**/guui/**\\*',
         ],
         {
             shell: true,
