@@ -3,15 +3,7 @@ import { css, cx } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { leftCol } from '@guardian/pasteup/breakpoints';
-
-const pillarColours = pillarMap(
-    pillar =>
-        css`
-            color: ${pillarPalette[pillar].main};
-        `,
-);
 
 const profile = css`
     ${headline(2)};
@@ -73,8 +65,8 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
 const RenderByline: React.FC<{
     bylineText: string;
     contributorTags: TagType[];
-    pillar: Pillar;
-}> = ({ bylineText, contributorTags, pillar }) => {
+    className: string;
+}> = ({ bylineText, contributorTags, className }) => {
     const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
         (token, i) => {
             const associatedTags = contributorTags.filter(
@@ -85,7 +77,7 @@ const RenderByline: React.FC<{
                     <BylineContributor
                         contributor={token}
                         contributorTagId={associatedTags[0].id}
-                        pillar={pillar}
+                        className={className}
                         key={i}
                     />
                 );
@@ -100,11 +92,11 @@ const RenderByline: React.FC<{
 const BylineContributor: React.FC<{
     contributor: string;
     contributorTagId: string;
-    pillar: Pillar;
-}> = ({ contributor, contributorTagId, pillar }) => (
+    className: string;
+}> = ({ contributor, contributorTagId, className }) => (
     <a
         rel="author"
-        className={cx(pillarColours[pillar], bylineLink)}
+        className={cx(className, bylineLink)}
         data-link-name="auto tag link"
         href={`//www.theguardian.com/${contributorTagId}`}
     >
@@ -115,15 +107,15 @@ const BylineContributor: React.FC<{
 export const Byline: React.FC<{
     author: AuthorType;
     tags: TagType[];
-    pillar: Pillar;
-}> = ({ author, tags, pillar }) => (
+    className: string;
+}> = ({ author, tags, className }) => (
     <>
-        <div className={cx(profile, pillarColours[pillar])}>
+        <div className={profile}>
             <span className={byline}>
                 <RenderByline
                     bylineText={author.byline}
                     contributorTags={tags}
-                    pillar={pillar}
+                    className={className}
                 />
             </span>
         </div>
