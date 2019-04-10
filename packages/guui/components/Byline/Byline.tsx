@@ -110,7 +110,7 @@ export const Byline: React.FC<{
     className: string;
 }> = ({ author, tags, className }) => (
     <>
-        <div className={profile}>
+        <div className={cx(className, profile)}>
             <span className={byline}>
                 <RenderByline
                     bylineText={author.byline}
