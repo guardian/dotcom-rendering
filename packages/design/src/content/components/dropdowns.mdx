@@ -13,7 +13,7 @@ Dropdowns expand to reveal a menu of options. They close themselves when the use
     option they want may be inside. Are you usre you want to use this pattern?
 </ResearchAside>
 
-## Accesibility
+## Accessibility
 
 If you use this component the following things are already taken care of for you:
 
@@ -22,17 +22,21 @@ If you use this component the following things are already taken care of for you
         Upon activating a dropdown, focus should shift _inside_ the element
     </HappyListItem>
     <HappyListItem>
-        Screen readers should be able to tell an active link from an active link
+        Screen readers should be able to tell an active item from an inactive item
     </HappyListItem>
     <HappyListItem>
-        Keyboard input and focus should be trapperd inside the dropdown
+        Keyboard input and focus should be trapped inside the dropdown
+    </HappyListItem>
+    <HappyListItem>
+        Keyboard users may close the dropdown using the Escape key. 
     </HappyListItem>
 </List>
 
 You still need to make sure these other things happen:
 
--   Upon dismissing a dropdown, focus should return to where it originally was. (It is safe to assume focus was at the trigger link.)
--   Provide at least one way to close the dropdown using a keyboard. Add a hidden "Close" link at the end
+-   Upon dismissing a dropdown, focus should return to where it originally was (it is safe to assume 
+focus was on the trigger link)
+-   Add a hidden "Close" link at the end
 
 ## Common dropdowns
 
