@@ -12,7 +12,10 @@ const options: { [s: string]: string } = {
     Opinion: palette.opinion.main,
 };
 
-const radioOptions: { [s: string]: string } = { News: 'News', Opinion: 'Opinion' };
+const radioOptions: { [s: string]: string } = {
+    News: 'News',
+    Opinion: 'Opinion',
+};
 
 stories.add('Close', () => {
     const color = radios('Variants', radioOptions, 'News');
@@ -21,11 +24,13 @@ stories.add('Close', () => {
         twitterHandle: 'cpscott',
         email: 'cpscott@theguardian.com',
     };
-    const contributorTags: TagType[] = [{
-        id: 'profile/cpscott',
-        title: 'CP Scott',
-        type: 'Contributor',
-    }];
+    const contributorTags: TagType[] = [
+        {
+            id: 'profile/cpscott',
+            title: 'CP Scott',
+            type: 'Contributor',
+        },
+    ];
     const className = css`
         color: ${options[color]};
     `;
