@@ -53,7 +53,7 @@ const copyStatic = () => {
 const copyDist = () => {
     log(' - copying dist');
     return cpy(
-        ['**/*.!(html|json)', '!**/design'],
+        ['**/*.!(html|json)'],
         path.resolve(target, `${siteName}-static`, 'guui', 'assets'),
         {
             cwd: path.resolve(dist),
