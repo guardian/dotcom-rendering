@@ -32,6 +32,13 @@ export interface OtherColours {
     brand: { dark: colour; main: colour; pastel: colour };
 }
 
+export interface Appearances {
+    contrasts: {
+        darkOnLight: { background: colour; foreground: colour };
+        lightOnDark: { background: colour; foreground: colour };
+    };
+}
+
 const green = {
     dark: '#185E36',
     main: '#22874D',
@@ -116,7 +123,12 @@ const labs = {
     main: '#69d1ca',
 };
 
-export const palette: AllPillarColours & OtherColours = {
+const contrasts = {
+    darkOnLight: { background: neutral[97], foreground: neutral[20] },
+    lightOnDark: { background: neutral[20], foreground: neutral[97] },
+};
+
+export const palette: AllPillarColours & OtherColours & Appearances = {
     news,
     opinion,
     sport,
@@ -129,4 +141,5 @@ export const palette: AllPillarColours & OtherColours = {
     green,
     brand,
     state,
+    contrasts,
 };
