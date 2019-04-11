@@ -112,7 +112,7 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
                 aria-label={`${shortDisplayCount} Shares`}
             >
                 <div className={shareCountContainer}>
-                    <div className={shareCountHeader} role="presentation">
+                    <div className={shareCountHeader}>
                         <ShareIcon className={shareCountIcon} />
                     </div>
                     <div
