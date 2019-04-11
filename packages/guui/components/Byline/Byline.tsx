@@ -113,7 +113,7 @@ export const Byline: React.FC<{
     tags: TagType[];
     pillar: Pillar;
 }> = ({ author, tags, pillar }) => (
-    <>
+    <address aria-label="Contributor info">
         <div className={cx(pillarColour(pillar), profile)}>
             <span className={byline}>
                 <RenderByline
@@ -126,10 +126,13 @@ export const Byline: React.FC<{
         {author.twitterHandle && (
             <div className={twitterHandle}>
                 <TwitterIcon />
-                <a href={`https://www.twitter.com/${author.twitterHandle}`}>
+                <a
+                    href={`https://www.twitter.com/${author.twitterHandle}`}
+                    aria-label={`@${author.twitterHandle} on Twitter`}
+                >
                     @{author.twitterHandle}
                 </a>
             </div>
         )}
-    </>
+    </address>
 );
