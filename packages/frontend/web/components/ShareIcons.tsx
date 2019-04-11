@@ -9,7 +9,6 @@ import PinterestIcon from '@guardian/pasteup/icons/pinterest.svg';
 import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
 import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
 import { phablet, wide } from '@guardian/pasteup/breakpoints';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
 const pillarFill = pillarMap(
@@ -139,14 +138,7 @@ export const SharingIcons: React.FC<{
                         })}
                         key={`${id}Share`}
                     >
-                        <a href={url} role="button">
-                            <span
-                                className={css`
-                                    ${screenReaderOnly};
-                                `}
-                            >
-                                {userMessage}
-                            </span>
+                        <a href={url} role="button" aria-label={userMessage}>
                             <span
                                 className={cx(
                                     shareIcon(pillarPalette[pillar].main),

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import ShareIcon from '@guardian/pasteup/icons/share.svg';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { textSans } from '@guardian/pasteup/typography';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';
@@ -108,22 +107,26 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
                 : displayCount;
 
         return (
-            <div className={shareCount}>
+            <div
+                className={shareCount}
+                aria-label={`${shortDisplayCount} Shares`}
+            >
                 <div className={shareCountContainer}>
-                    <h3 className={shareCountHeader}>
+                    <div className={shareCountHeader} role="presentation">
                         <ShareIcon className={shareCountIcon} />
-                        <span
-                            className={css`
-                                ${screenReaderOnly};
-                            `}
-                        >
-                            Shares
-                        </span>
-                    </h3>
-                    <div data-testid={'countFull'} className={countFull}>
+                    </div>
+                    <div
+                        data-testid={'countFull'}
+                        className={countFull}
+                        aria-hidden="true"
+                    >
                         {formattedDisplayCount}
                     </div>
-                    <div data-testid={'countShort'} className={countShort}>
+                    <div
+                        data-testid={'countShort'}
+                        className={countShort}
+                        aria-hidden="true"
+                    >
                         {shortDisplayCount}
                     </div>
                 </div>
