@@ -440,7 +440,7 @@ export const ArticleBody: React.FC<{
                     <Byline
                         author={CAPI.author}
                         tags={CAPI.tags}
-                        className={pillarColours[CAPI.pillar]}
+                        pillar={CAPI.pillar}
                     />
                     <Dateline
                         dateDisplay={CAPI.webPublicationDateDisplay}

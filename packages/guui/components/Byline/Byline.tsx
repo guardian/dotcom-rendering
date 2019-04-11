@@ -11,6 +11,10 @@ const profile = css`
     margin-bottom: 4px;
 `;
 
+const pillarColour = (pillar: Pillar) => css`
+    color: ${palette[pillar].main};
+`;
+
 const byline = css`
     font-style: italic;
 `;
@@ -65,8 +69,8 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
 const RenderByline: React.FC<{
     bylineText: string;
     contributorTags: TagType[];
-    className: string;
-}> = ({ bylineText, contributorTags, className }) => {
+    pillar: Pillar;
+}> = ({ bylineText, contributorTags, pillar }) => {
     const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
         (token, i) => {
             const associatedTags = contributorTags.filter(
@@ -77,7 +81,7 @@ const RenderByline: React.FC<{
                     <BylineContributor
                         contributor={token}
                         contributorTagId={associatedTags[0].id}
-                        className={className}
+                        pillar={pillar}
                         key={i}
                     />
                 );
@@ -92,11 +96,11 @@ const RenderByline: React.FC<{
 const BylineContributor: React.FC<{
     contributor: string;
     contributorTagId: string;
-    className: string;
-}> = ({ contributor, contributorTagId, className }) => (
+    pillar: Pillar;
+}> = ({ contributor, contributorTagId, pillar }) => (
     <a
         rel="author"
-        className={cx(className, bylineLink)}
+        className={cx(pillarColour(pillar), bylineLink)}
         data-link-name="auto tag link"
         href={`//www.theguardian.com/${contributorTagId}`}
     >
@@ -107,15 +111,15 @@ const BylineContributor: React.FC<{
 export const Byline: React.FC<{
     author: AuthorType;
     tags: TagType[];
-    className: string;
-}> = ({ author, tags, className }) => (
+    pillar: Pillar;
+}> = ({ author, tags, pillar }) => (
     <>
-        <div className={cx(className, profile)}>
+        <div className={cx(pillarColour(pillar), profile)}>
             <span className={byline}>
                 <RenderByline
                     bylineText={author.byline}
                     contributorTags={tags}
-                    className={className}
+                    pillar={pillar}
                 />
             </span>
         </div>
