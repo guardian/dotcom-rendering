@@ -67,22 +67,20 @@ const getAgeWarning = (
         const diffMonths = diffDays / 31;
         const diffYears = diffDays / 365;
 
-        const message = 'This article is over';
-
         if (diffYears >= 2) {
-            return `${message} ${Math.floor(diffYears)} years old`;
+            return `${Math.floor(diffYears)} years old`;
         }
 
         if (diffYears > 1) {
-            return `${message} 1 year old`;
+            return '1 year old';
         }
 
         if (diffMonths >= 2) {
-            return `${message} ${Math.floor(diffMonths)} months old`;
+            return `${Math.floor(diffMonths)} months old`;
         }
 
         if (diffMonths > 1) {
-            return `${message} 1 month old`;
+            return '1 month old';
         }
     }
 };
