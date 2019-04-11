@@ -66,22 +66,19 @@ const getAgeWarning = (
         const diffDays = diffHours / 24;
         const diffMonths = diffDays / 31;
         const diffYears = diffDays / 365;
+        let message;
 
         if (diffYears >= 2) {
-            return `${Math.floor(diffYears)} years old`;
+            message = `${Math.floor(diffYears)} years old`;
+        } else if (diffYears > 1) {
+            message = '1 year old';
+        } else if (diffMonths >= 2) {
+            message = `${Math.floor(diffMonths)} months old`;
+        } else if (diffMonths > 1) {
+            message = '1 month old';
         }
 
-        if (diffYears > 1) {
-            return '1 year old';
-        }
-
-        if (diffMonths >= 2) {
-            return `${Math.floor(diffMonths)} months old`;
-        }
-
-        if (diffMonths > 1) {
-            return '1 month old';
-        }
+        return message;
     }
 };
 
