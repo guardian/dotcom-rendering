@@ -15,7 +15,7 @@ const radioOptions: { [s: string]: string } = {
     Opinion: 'Opinion',
 };
 
-stories.add('Close', () => {
+stories.add('Byline', () => {
     const selectedPillar = radios('Variants', radioOptions, 'News');
     const author: AuthorType = {
         byline: 'CP Scott',
