@@ -11,8 +11,9 @@ import {
     leftCol,
     desktop,
     tablet,
+    mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
-import { clearFix } from '@guardian/pasteup/mixins';
+import { clearFix, screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline, textSans, body } from '@guardian/pasteup/typography';
 import { Byline } from '@guardian/guui/components/Byline/Byline';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
@@ -86,12 +87,7 @@ const pillarColours = pillarMap(
             color: ${pillarPalette[pillar].main};
         `,
 );
-const pillarFill = pillarMap(
-    pillar =>
-        css`
-            fill: ${pillarPalette[pillar].main};
-        `,
-);
+
 const pillarFigCaptionIconColor = pillarMap(
     pillar =>
         css`
@@ -343,14 +339,36 @@ const linkColour = pillarMap(
 );
 
 const ageWarning = css`
-    ${textSans(1)};
+    ${textSans(5)};
+    color: ${palette.neutral[7]};
+    background-color: ${palette.highlight.main};
     display: inline-block;
-    margin-bottom: 12px;
-    width: 100%;
+    margin-bottom: 6px;
+
+    > strong {
+        font-weight: bold;
+    }
+
+    padding: 6px 10px;
+    margin-top: 6px;
+    margin-left: -10px;
+
+    ${mobileLandscape} {
+        padding-left: 12px;
+    }
+
+    ${tablet} {
+        margin-left: -20px;
+    }
 
     ${leftCol} {
-        margin-top: 6px;
-    }
+        margin-left: -10px;
+        margin-top: -6px;
+        padding-left: 10px;
+`;
+
+const ageWarningScreenReader = css`
+    ${screenReaderOnly};
 `;
 
 const metaExtras = css`
@@ -428,7 +446,18 @@ export const ArticleBody: React.FC<{
                     )}
                 </div>
                 <div className={headlineCSS}>
+                    {CAPI.ageWarning && (
+                        <div className={ageWarning} aria-hidden="true">
+                            <ClockIcon /> This article is more than{' '}
+                            <strong>{CAPI.ageWarning}</strong>
+                        </div>
+                    )}
                     <h1 className={headerStyle}>{curly(CAPI.headline)}</h1>
+                    {CAPI.ageWarning && (
+                        <div className={ageWarningScreenReader}>
+                            This article is more than {` ${CAPI.ageWarning}`}
+                        </div>
+                    )}
                     <div
                         className={cx(standfirst, standfirstLinks[CAPI.pillar])}
                         dangerouslySetInnerHTML={{
@@ -453,17 +482,6 @@ export const ArticleBody: React.FC<{
                             displayIcons={['facebook', 'twitter', 'email']}
                         />
                         <ShareCount config={config} pageId={CAPI.pageId} />
-                        {CAPI.ageWarning && (
-                            <div
-                                className={cx(
-                                    ageWarning,
-                                    pillarColours[CAPI.pillar],
-                                    pillarFill[CAPI.pillar],
-                                )}
-                            >
-                                <ClockIcon /> {CAPI.ageWarning}
-                            </div>
-                        )}
                     </div>
                 </div>
                 <div
