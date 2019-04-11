@@ -450,7 +450,7 @@ describe('extract-capi', () => {
             ];
         });
 
-        it('returns correct ageWarning if article over 2 years old', () => {
+        it('returns correct ageWarning if article more than 2 years old', () => {
             // set a publication date of 2 years ago
             publicationDate.setDate(publicationDate.getDate() - 365 * 2);
 
@@ -458,10 +458,10 @@ describe('extract-capi', () => {
 
             const { ageWarning } = extract(testData);
 
-            expect(ageWarning).toBe('This article is over 2 years old');
+            expect(ageWarning).toBe('2 years old');
         });
 
-        it('returns correct ageWarning if article over 1 year old', () => {
+        it('returns correct ageWarning if article more than 1 year old', () => {
             // set a publication date of 500 days ago
             publicationDate.setDate(publicationDate.getDate() - 500);
 
@@ -469,10 +469,10 @@ describe('extract-capi', () => {
 
             const { ageWarning } = extract(testData);
 
-            expect(ageWarning).toBe('This article is over 1 year old');
+            expect(ageWarning).toBe('1 year old');
         });
 
-        it('returns correct ageWarning if article over 2 months old', () => {
+        it('returns correct ageWarning if article more than 2 months old', () => {
             // set a publication date of 90 days ago
             publicationDate.setDate(publicationDate.getDate() - 90);
 
@@ -480,10 +480,10 @@ describe('extract-capi', () => {
 
             const { ageWarning } = extract(testData);
 
-            expect(ageWarning).toBe('This article is over 2 months old');
+            expect(ageWarning).toBe('2 months old');
         });
 
-        it('returns correct ageWarning if article over 1 month old', () => {
+        it('returns correct ageWarning if article more than 1 month old', () => {
             // set a publication date of 35 days ago
             publicationDate.setDate(publicationDate.getDate() - 35);
 
@@ -491,7 +491,7 @@ describe('extract-capi', () => {
 
             const { ageWarning } = extract(testData);
 
-            expect(ageWarning).toBe('This article is over 1 month old');
+            expect(ageWarning).toBe('1 month old');
         });
 
         it('returns no ageWarning if article is 1 week old', () => {
