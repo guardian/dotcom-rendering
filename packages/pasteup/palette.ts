@@ -124,8 +124,8 @@ const labs = {
 };
 
 const contrasts = {
-    darkOnLight: { background: neutral[97], foreground: neutral[20] },
-    lightOnDark: { background: neutral[20], foreground: neutral[97] },
+    darkOnLight: { background: neutral[100], foreground: neutral[7] },
+    lightOnDark: { background: neutral[7], foreground: neutral[100] },
 };
 
 export const palette: AllPillarColours & OtherColours & Appearances = {
