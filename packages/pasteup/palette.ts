@@ -34,8 +34,13 @@ export interface OtherColours {
 
 export interface Appearances {
     contrasts: {
-        darkOnLight: { background: colour; foreground: colour };
-        lightOnDark: { background: colour; foreground: colour };
+        darkOnLight: { background: colour; foreground: colour; border: colour };
+        lightOnDark: { background: colour; foreground: colour; border: colour };
+        lightOnBrand: {
+            background: colour;
+            foreground: colour;
+            border: colour;
+        };
     };
 }
 
@@ -124,8 +129,21 @@ const labs = {
 };
 
 const contrasts = {
-    darkOnLight: { background: neutral[100], foreground: neutral[7] },
-    lightOnDark: { background: neutral[7], foreground: neutral[100] },
+    darkOnLight: {
+        background: neutral[100],
+        foreground: neutral[7],
+        border: neutral[86],
+    },
+    lightOnDark: {
+        background: neutral[7],
+        foreground: neutral[100],
+        border: neutral[20],
+    },
+    lightOnBrand: {
+        background: brand.main,
+        foreground: neutral[100],
+        border: brand.pastel,
+    },
 };
 
 export const palette: AllPillarColours & OtherColours & Appearances = {
