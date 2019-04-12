@@ -20,6 +20,17 @@ module.exports = ({ config }) => {
         use: ['desvg-loader/react', 'svg-loader'],
     });
 
+    rules.push({
+        test: /\.stories\.tsx?$/,
+        loaders: [
+            {
+                loader: require.resolve('@storybook/addon-storysource/loader'),
+                options: { parser: 'typescript' },
+            },
+        ],
+        enforce: 'pre',
+    });
+
     config.resolve.extensions.push('.ts', '.tsx');
     return config;
 };
