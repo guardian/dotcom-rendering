@@ -1475,6 +1475,21 @@
     react-inspector "^2.3.0"
     uuid "^3.3.2"
 
+"@storybook/addon-backgrounds@^5.0.6":
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-backgrounds/-/addon-backgrounds-5.0.6.tgz#34c41c2d85de43b96c7b92d935a1321ba91f57e8"
+  dependencies:
+    "@storybook/addons" "5.0.6"
+    "@storybook/client-logger" "5.0.6"
+    "@storybook/components" "5.0.6"
+    "@storybook/core-events" "5.0.6"
+    "@storybook/theming" "5.0.6"
+    core-js "^2.6.5"
+    global "^4.3.2"
+    memoizerific "^1.11.3"
+    react "^16.8.1"
+    util-deprecate "^1.0.2"
+
 "@storybook/addon-knobs@^5.0.6":
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-5.0.6.tgz#f291d7e18d30ef65284dc424d1b7527f114183b6"
