@@ -3,6 +3,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/typography';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 const captionFont = css`
     ${textSans(1)};
@@ -16,6 +17,10 @@ const dateline = css`
     margin-bottom: 6px;
 `;
 
+const description = css`
+    ${screenReaderOnly}
+`;
+
 export const Dateline: React.FC<{
     dateDisplay: string;
     descriptionText: string;
@@ -23,8 +28,10 @@ export const Dateline: React.FC<{
     <>
         <div
             className={dateline}
-            aria-label={`${descriptionText} ${dateDisplay}`}
+            // tslint:disable-next-line:react-a11y-role
+            role="text"
         >
+            <span className={description}>{descriptionText} </span>
             {dateDisplay}
         </div>
     </>
