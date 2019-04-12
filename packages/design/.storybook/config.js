@@ -14,21 +14,12 @@ const reqDC = require.context(
     /\.stories\.tsx$/,
 );
 
-const viewportOptions = {
-    name: 'Responsive',
-    styles: {
-        width: '100%',
-        height: '100%',
-    },
-    type: 'desktop',
-};
-
 function loadStories() {
     reqGuui.keys().forEach(reqGuui);
     reqDC.keys().forEach(reqDC);
 }
 
 addDecorator(withA11y);
-addParameters({ viewport: viewportOptions });
+addParameters({ viewport: {} });
 
 configure(loadStories, module);
