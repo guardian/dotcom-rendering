@@ -43,6 +43,7 @@
     "svg-loader": "^0.0.2"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^5.0.6",
     "prettier": "^1.16.4"
   }
 }
