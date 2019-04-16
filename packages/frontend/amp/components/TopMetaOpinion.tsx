@@ -19,7 +19,6 @@ const headerStyle = css`
 const bylineStyle = (pillar: Pillar) => css`
     ${headline(5)};
     font-weight: 100;
-    padding-bottom: 24px;
     padding-top: 3px;
 
     a {
@@ -36,6 +35,30 @@ const seriesStyle = (pillar: Pillar) => css`
     text-decoration: none;
     margin-top: 10px;
     display: block;
+`;
+
+const bylineImageStyle = css`
+    display: block;
+    margin-right: -18px;
+    flex-shrink: 0;
+`;
+
+const bylineWrapper = css`
+    display: flex;
+    justify-content: space-between;
+
+    background-image: repeating-linear-gradient(
+        to bottom,
+        ${palette.neutral[86]},
+        ${palette.neutral[86]} 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: 1px 29px;
+    margin: 0 -10px;
+    padding: 0 10px;
 `;
 
 const SeriesLink: React.SFC<{
@@ -56,6 +79,25 @@ const SeriesLink: React.SFC<{
     );
 };
 
+const BylineImage: React.SFC<{
+    tags: TagType[];
+}> = ({ tags }) => {
+    const contributor = tags.find(t => t.type === 'Contributor');
+    if (contributor && contributor.bylineImageUrl) {
+        return (
+            <amp-img
+                class={bylineImageStyle}
+                src={contributor.bylineImageUrl}
+                alt={`Contributor image for: ${contributor.title}`}
+                width="180"
+                height="150"
+            />
+        );
+    }
+
+    return null;
+};
+
 export const TopMetaOpinion: React.FC<{
     articleData: ArticleModel;
 }> = ({ articleData }) => (
@@ -72,13 +114,17 @@ export const TopMetaOpinion: React.FC<{
 
         <h1 className={headerStyle}>{articleData.headline}</h1>
 
-        <Byline
-            byline={articleData.author.byline}
-            tags={articleData.tags}
-            pillar={articleData.pillar}
-            guardianBaseURL={articleData.guardianBaseURL}
-            className={bylineStyle(articleData.pillar)}
-        />
+        <div className={bylineWrapper}>
+            <Byline
+                byline={articleData.author.byline}
+                tags={articleData.tags}
+                pillar={articleData.pillar}
+                guardianBaseURL={articleData.guardianBaseURL}
+                className={bylineStyle(articleData.pillar)}
+            />
+
+            <BylineImage tags={articleData.tags} />
+        </div>
 
         <Standfirst text={articleData.standfirst} pillar={articleData.pillar} />
 
