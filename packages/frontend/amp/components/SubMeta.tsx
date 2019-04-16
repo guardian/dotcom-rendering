@@ -135,7 +135,7 @@ export const SubMeta: React.FC<{
         <li className={itemStyle} key={link.url}>
             <a
                 className={sectionLinkStyle(pillar)}
-                href={`${guardianBaseURL}/${link.url}`}
+                href={`${guardianBaseURL}${link.url}`}
             >
                 {link.title}
             </a>
@@ -146,7 +146,7 @@ export const SubMeta: React.FC<{
         <li className={itemStyle} key={link.url}>
             <a
                 className={linkStyle(pillar)}
-                href={`${guardianBaseURL}/${link.url}`}
+                href={`${guardianBaseURL}${link.url}`}
             >
                 {link.title}
             </a>
