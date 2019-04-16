@@ -7,6 +7,7 @@ import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractModel } from '@frontend/model/extract-capi';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
+import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
@@ -29,7 +30,8 @@ test('produces valid AMP doc', async () => {
     const config = extractConfig(data);
     const nav = extractNAV(data);
     const model = extractModel(data);
-    const linkedData = [{}];
+    const linkedData = extractLinkedData(data);
+
     const metadata = {
         description: model.trailText,
         canonicalURL: model.webURL,
