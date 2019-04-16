@@ -1,26 +1,5 @@
 import React from 'react';
 import { bylineTokens } from '@frontend/amp/lib/byline-tokens';
-import { css } from 'emotion';
-
-const profileImageStyle = css``;
-
-const profileImage = (contributorTag: TagType) => {
-    const url = contributorTag.bylineImageUrl;
-
-    if (url) {
-        return (
-            <amp-img
-                className={profileImageStyle}
-                src={url}
-                alt={contributorTag.title}
-                width="180"
-                height="150"
-            />
-        );
-    }
-
-    return null;
-};
 
 export const Byline: React.FC<{
     byline: string;
@@ -47,10 +26,5 @@ export const Byline: React.FC<{
         return token;
     });
 
-    return (
-        <div className={className}>
-            {linkedByline}
-            {mainContributor && profileImage(mainContributor)}
-        </div>
-    );
+    return <div className={className}>{linkedByline}</div>;
 };
