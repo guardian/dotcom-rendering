@@ -9,6 +9,7 @@ import { AdConsent } from '@frontend/amp/components/AdConsent';
 import { css } from 'emotion';
 import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
+import { filterForTagsOfType } from '@frontend/amp/lib/tag-utils';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -49,15 +50,6 @@ export interface ArticleModel {
     starRating?: number;
 }
 
-// TODO move somewhere better
-const tagsOfType = (tags: TagType[], tagType: string): TagType[] => {
-    return tags.filter(
-        tag =>
-            tag.type === tagType ||
-            (tag.type === 'PaidContent' && tag.paidContentType === tagType),
-    );
-};
-
 export const Article: React.FC<{
     nav: NavType;
     articleData: ArticleModel;
@@ -68,6 +60,7 @@ export const Article: React.FC<{
         <Analytics key="analytics" analytics={analytics} />
         <AdConsent />
 
+        {/* /TODO change to gray bgcolor */}
         <div key="main" className={backgroundColour}>
             <Container>
                 <Header
@@ -88,7 +81,7 @@ export const Article: React.FC<{
                     sectionID={articleData.sectionName}
                     hasRelated={articleData.hasRelated}
                     hasStoryPackage={articleData.hasStoryPackage}
-                    seriesTags={tagsOfType(articleData.tags, 'Series')}
+                    seriesTags={filterForTagsOfType(articleData.tags, 'Series')}
                     guardianBaseURL={articleData.guardianBaseURL}
                 />
                 <Footer nav={nav} />
