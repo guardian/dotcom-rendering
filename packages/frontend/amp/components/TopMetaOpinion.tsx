@@ -1,6 +1,6 @@
 import React from 'react';
 import { headline } from '@guardian/pasteup/typography';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
@@ -61,6 +61,10 @@ const bylineWrapper = css`
     padding: 0 10px;
 `;
 
+const bottomPadding = css`
+    padding-bottom: 72px;
+`;
+
 const SeriesLink: React.SFC<{
     baseURL: string;
     tags: TagType[];
@@ -79,23 +83,37 @@ const SeriesLink: React.SFC<{
     );
 };
 
-const BylineImage: React.SFC<{
-    tags: TagType[];
-}> = ({ tags }) => {
-    const contributor = tags.find(t => t.type === 'Contributor');
-    if (contributor && contributor.bylineImageUrl) {
-        return (
-            <amp-img
-                class={bylineImageStyle}
-                src={contributor.bylineImageUrl}
-                alt={`Contributor image for: ${contributor.title}`}
-                width="180"
-                height="150"
-            />
-        );
-    }
+const BylineMeta: React.SFC<{
+    articleData: ArticleModel;
+}> = ({ articleData }) => {
+    const contributorTag = articleData.tags.find(t => t.type === 'Contributor');
+    const bylineImageUrl = contributorTag
+        ? contributorTag.bylineImageUrl
+        : null;
 
-    return null;
+    return (
+        <div className={bylineWrapper}>
+            <Byline
+                byline={articleData.author.byline}
+                tags={articleData.tags}
+                pillar={articleData.pillar}
+                guardianBaseURL={articleData.guardianBaseURL}
+                className={cx(bylineStyle(articleData.pillar), {
+                    [bottomPadding]: !bylineImageUrl,
+                })}
+            />
+
+            {contributorTag && bylineImageUrl && (
+                <amp-img
+                    class={bylineImageStyle}
+                    src={bylineImageUrl}
+                    alt={`Contributor image for: ${contributorTag.title}`}
+                    width="180"
+                    height="150"
+                />
+            )}
+        </div>
+    );
 };
 
 export const TopMetaOpinion: React.FC<{
@@ -114,17 +132,7 @@ export const TopMetaOpinion: React.FC<{
 
         <h1 className={headerStyle}>{articleData.headline}</h1>
 
-        <div className={bylineWrapper}>
-            <Byline
-                byline={articleData.author.byline}
-                tags={articleData.tags}
-                pillar={articleData.pillar}
-                guardianBaseURL={articleData.guardianBaseURL}
-                className={bylineStyle(articleData.pillar)}
-            />
-
-            <BylineImage tags={articleData.tags} />
-        </div>
+        <BylineMeta articleData={articleData} />
 
         <Standfirst text={articleData.standfirst} pillar={articleData.pillar} />
 
