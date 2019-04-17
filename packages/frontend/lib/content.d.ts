@@ -1,4 +1,4 @@
-type Switches = { [key: string]: boolean }
+type Switches = { [key: string]: boolean };
 
 type Weighting =
     | 'inline'
@@ -29,7 +29,7 @@ interface RichLinkBlockElement {
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
-    data: { alt: string; credit: string; caption?: string; copyright?: string; };
+    data: { alt: string; credit: string; caption?: string; copyright?: string };
     imageSources: ImageSource[];
     displayCredit: boolean;
     role: string;
@@ -110,6 +110,12 @@ interface DisclaimerBlockElement {
     html: string;
 }
 
+interface PullquoteBlockElement {
+    _type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
+    html: string;
+    role: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -121,4 +127,5 @@ type CAPIElement =
     | CommentBlockElement
     | SoundcloudBlockElement
     | EmbedBlockElement
-    | DisclaimerBlockElement;
+    | DisclaimerBlockElement
+    | PullquoteBlockElement;

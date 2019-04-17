@@ -9,6 +9,7 @@ import { CommentBlockComponent } from '@frontend/amp/components/elements/Comment
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
 import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
+import { PullquoteBlockComponent } from '@frontend/amp/components/elements/PullquoteBlockComponent';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { AdComponent } from '@frontend/amp/components/elements/AdComponent';
 import { css } from 'emotion';
@@ -89,6 +90,14 @@ export const Elements: React.FC<{
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 return (
                     <DisclaimerBlockComponent
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
+                return (
+                    <PullquoteBlockComponent
                         key={i}
                         html={element.html}
                         pillar={pillar}
