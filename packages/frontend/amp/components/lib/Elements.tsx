@@ -7,7 +7,7 @@ import { InstagramEmbed } from '@root/packages/frontend/amp/components/elements/
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
 import { Comment } from '@root/packages/frontend/amp/components/elements/Comment';
 import { RichLink } from '@root/packages/frontend/amp/components/elements/RichLink';
-import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
+import { SoundcloudEmbed } from '@root/packages/frontend/amp/components/elements/SoundcloudEmbed';
 import { Embed } from '@root/packages/frontend/amp/components/elements/Embed';
 import { PullQuote } from '@root/packages/frontend/amp/components/elements/PullQuote';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
@@ -72,7 +72,7 @@ export const Elements: React.FC<{
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
                 return <Comment key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-                return <SoundcloudBlockComponent key={i} element={element} />;
+                return <SoundcloudEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                 return <Embed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
