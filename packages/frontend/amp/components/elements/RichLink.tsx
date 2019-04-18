@@ -37,7 +37,7 @@ const richLink = css`
     }
 `;
 
-export const RichLinkBlockComponent: React.FC<{
+export const RichLink: React.FC<{
     element: RichLinkBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => (
