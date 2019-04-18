@@ -6,7 +6,7 @@ import { headline } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
-import { AmpSubscriptionGoogle } from '@frontend/amp/components/elements/AmpSubscriptionGoogle';
+import { GoogleSubscribeButton } from '@root/packages/frontend/amp/components/GoogleSubscribeButton';
 import { mobileLandscape, until } from '@guardian/pasteup/breakpoints';
 
 const headerStyles = css`
@@ -192,7 +192,7 @@ export const Header: React.FC<{
                 linkLabel={'Support Us'}
             />
 
-            {config.switches.subscribeWithGoogle && <AmpSubscriptionGoogle />}
+            {config.switches.subscribeWithGoogle && <GoogleSubscribeButton />}
 
             <a className={logoStyles} href={guardianBaseURL}>
                 <span

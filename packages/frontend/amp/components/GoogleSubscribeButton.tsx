@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AmpSubscriptionGoogle: React.FC = () => (
+export const GoogleSubscribeButton: React.FC = () => (
     <section>
         <button
             subscriptions-action="subscribe"
