@@ -27,7 +27,7 @@ const style = (pillar: Pillar) => css`
     ${body(3)};
 `;
 
-export const TextBlockComponent: React.FC<{
+export const Text: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (
