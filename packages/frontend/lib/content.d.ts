@@ -116,6 +116,15 @@ interface PullquoteBlockElement {
     role: string;
 }
 
+interface QABlockElement {
+    _type: 'model.dotcomrendering.pageElements.QABlockElement';
+    id: string;
+    title: string;
+    img?: string;
+    html: string;
+    credit: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -128,4 +137,5 @@ type CAPIElement =
     | SoundcloudBlockElement
     | EmbedBlockElement
     | DisclaimerBlockElement
-    | PullquoteBlockElement;
+    | PullquoteBlockElement
+    | QABlockElement;

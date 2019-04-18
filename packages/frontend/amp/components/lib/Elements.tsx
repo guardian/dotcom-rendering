@@ -15,6 +15,7 @@ import { Ad } from '@frontend/amp/components/Ad';
 import { css } from 'emotion';
 import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
 import { clean } from '@frontend/model/clean';
+import { Expandable } from '@frontend/amp/components/Expandable';
 
 const clear = css`
     clear: both;
@@ -76,6 +77,17 @@ export const Elements: React.FC<{
             case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                 return (
                     <PullQuote key={i} html={element.html} pillar={pillar} />
+                );
+            case 'model.dotcomrendering.pageElements.QABlockElement':
+                return (
+                    <Expandable
+                        id={element.id}
+                        type="Q&A"
+                        title={element.title}
+                        html={element.html}
+                        img={element.img}
+                        credit={element.credit}
+                    />
                 );
             default:
                 // tslint:disable-next-line:no-console
