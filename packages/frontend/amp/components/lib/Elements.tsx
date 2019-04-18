@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
+import { Text } from '@root/packages/frontend/amp/components/elements/Text';
 import { Subheading } from '@root/packages/frontend/amp/components/elements/Subheading';
 import { Image } from '@root/packages/frontend/amp/components/elements/Image';
 import { InstagramEmbed } from '@root/packages/frontend/amp/components/elements/InstagramEmbed';
@@ -45,13 +45,7 @@ export const Elements: React.FC<{
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.TextBlockElement':
-                return (
-                    <TextBlockComponent
-                        key={i}
-                        html={element.html}
-                        pillar={pillar}
-                    />
-                );
+                return <Text key={i} html={element.html} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                 return (
                     <Subheading
