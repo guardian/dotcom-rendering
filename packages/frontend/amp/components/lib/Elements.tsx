@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
-import { SubheadingBlockComponent } from '@frontend/amp/components/elements/SubheadingBlockElement';
+import { Subheading } from '@root/packages/frontend/amp/components/elements/Subheading';
 import { Image } from '@root/packages/frontend/amp/components/elements/Image';
 import { InstagramEmbed } from '@root/packages/frontend/amp/components/elements/InstagramEmbed';
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
@@ -54,7 +54,7 @@ export const Elements: React.FC<{
                 );
             case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                 return (
-                    <SubheadingBlockComponent
+                    <Subheading
                         key={i}
                         html={element.html}
                         pillar={pillar}
