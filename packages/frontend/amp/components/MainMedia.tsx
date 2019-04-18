@@ -5,7 +5,7 @@ import { css } from 'emotion';
 import { textSans } from '@guardian/pasteup/typography';
 import InfoIcon from '@guardian/pasteup/icons/info.svg';
 import { palette } from '@guardian/pasteup/palette';
-import { YoutubeBlockComponent } from '@frontend/amp/components/elements/YoutubeBlockComponent';
+import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
 
 const figureStyle = css`
     margin: 0 0;
@@ -118,7 +118,7 @@ const asComponent = (
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return mainImage(element);
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-            return <YoutubeBlockComponent element={element} pillar={pillar} />;
+            return <YoutubeVideo element={element} pillar={pillar} />;
         default:
             return null;
     }
