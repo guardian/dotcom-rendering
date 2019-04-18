@@ -5,7 +5,7 @@ import { SubheadingBlockComponent } from '@frontend/amp/components/elements/Subh
 import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
-import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
+import { Comment } from '@root/packages/frontend/amp/components/elements/Comment';
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
 import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
@@ -82,7 +82,7 @@ export const Elements: React.FC<{
                     />
                 );
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
-                return <CommentBlockComponent key={i} element={element} />;
+                return <Comment key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
                 return <SoundcloudBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
