@@ -15,7 +15,7 @@ const captionStyle = css`
     color: ${palette.neutral[46]};
 `;
 
-export const YoutubeBlockComponent: React.FC<{
+export const YoutubeVideo: React.FC<{
     element: YoutubeBlockElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
