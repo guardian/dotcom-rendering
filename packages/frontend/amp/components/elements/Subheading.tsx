@@ -30,7 +30,7 @@ const immersiveBodyStyle = css`
     }
 `;
 
-export const SubheadingBlockComponent: React.FC<{
+export const Subheading: React.FC<{
     html: string;
     pillar: Pillar;
     isImmersive: boolean;
