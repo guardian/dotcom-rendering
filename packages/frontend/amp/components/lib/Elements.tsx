@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
 import { SubheadingBlockComponent } from '@frontend/amp/components/elements/SubheadingBlockElement';
-import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
+import { Image } from '@root/packages/frontend/amp/components/elements/Image';
 import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
 import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
 import { Comment } from '@root/packages/frontend/amp/components/elements/Comment';
@@ -62,13 +62,7 @@ export const Elements: React.FC<{
                     />
                 );
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
-                return (
-                    <ImageBlockComponent
-                        key={i}
-                        element={element}
-                        pillar={pillar}
-                    />
-                );
+                return <Image key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
