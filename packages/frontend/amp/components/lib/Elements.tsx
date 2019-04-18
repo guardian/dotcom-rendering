@@ -4,7 +4,7 @@ import { Text } from '@root/packages/frontend/amp/components/elements/Text';
 import { Subheading } from '@root/packages/frontend/amp/components/elements/Subheading';
 import { Image } from '@root/packages/frontend/amp/components/elements/Image';
 import { InstagramEmbed } from '@root/packages/frontend/amp/components/elements/InstagramEmbed';
-import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
+import { TwitterEmbed } from '@root/packages/frontend/amp/components/elements/TwitterEmbed';
 import { Comment } from '@root/packages/frontend/amp/components/elements/Comment';
 import { RichLink } from '@root/packages/frontend/amp/components/elements/RichLink';
 import { SoundcloudEmbed } from '@root/packages/frontend/amp/components/elements/SoundcloudEmbed';
@@ -60,7 +60,7 @@ export const Elements: React.FC<{
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                return <TweetBlockComponent key={i} element={element} />;
+                return <TwitterEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                 return <RichLink key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
