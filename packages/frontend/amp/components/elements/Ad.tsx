@@ -99,7 +99,7 @@ interface CommercialConfig {
     usePrebid: boolean;
 }
 
-export const AdComponent: React.SFC<{
+export const Ad: React.SFC<{
     edition: Edition;
     section: string;
     contentType: string;

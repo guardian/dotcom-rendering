@@ -11,7 +11,7 @@ import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/Soun
 import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
 import { PullquoteBlockComponent } from '@frontend/amp/components/elements/PullquoteBlockComponent';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
-import { AdComponent } from '@frontend/amp/components/elements/AdComponent';
+import { Ad } from '@frontend/amp/components/elements/Ad';
 import { css } from 'emotion';
 import { DisclaimerBlockComponent } from '@frontend/amp/components/elements/DisclaimerBlockComponent';
 import { clean } from '@frontend/model/clean';
@@ -125,7 +125,7 @@ export const Elements: React.FC<{
         <>
             {element}
             {slotIndexes.includes(i) ? (
-                <AdComponent
+                <Ad
                     edition={edition}
                     section={section}
                     contentType={contentType}
