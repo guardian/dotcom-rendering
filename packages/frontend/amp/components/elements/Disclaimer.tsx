@@ -12,7 +12,7 @@ const style = (pillar: Pillar) => css`
     }
 `;
 
-export const DisclaimerBlockComponent: React.FC<{
+export const Disclaimer: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (
