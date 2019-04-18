@@ -9,7 +9,7 @@ import { Comment } from '@root/packages/frontend/amp/components/elements/Comment
 import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
 import { Embed } from '@root/packages/frontend/amp/components/elements/Embed';
-import { PullquoteBlockComponent } from '@frontend/amp/components/elements/PullquoteBlockComponent';
+import { PullQuote } from '@root/packages/frontend/amp/components/elements/PullQuote';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { Ad } from '@frontend/amp/components/elements/Ad';
 import { css } from 'emotion';
@@ -87,11 +87,7 @@ export const Elements: React.FC<{
                 );
             case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                 return (
-                    <PullquoteBlockComponent
-                        key={i}
-                        html={element.html}
-                        pillar={pillar}
-                    />
+                    <PullQuote key={i} html={element.html} pillar={pillar} />
                 );
             default:
                 // tslint:disable-next-line:no-console
