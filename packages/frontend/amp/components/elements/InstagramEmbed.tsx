@@ -22,7 +22,7 @@ The ig chrome is about 250px tall on a piece with caption excluding the text.
 So the aspect ratio is either going to be 1.5:1 or 2:1. With hope it reduces jank?
 
 */
-export const InstagramBlockComponent: React.FC<{
+export const InstagramEmbed: React.FC<{
     element: InstagramBlockElement;
 }> = ({ element }) => {
     const shortcode = getShortcode(element.url);
