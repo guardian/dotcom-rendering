@@ -18,7 +18,7 @@ const styles = (pillar: Pillar) => css`
     }
 `;
 
-export const PullquoteBlockComponent: React.FC<{
+export const PullQuote: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (
