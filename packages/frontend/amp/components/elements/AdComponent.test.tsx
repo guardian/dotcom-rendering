@@ -37,7 +37,19 @@ describe('AdComponent', () => {
             />,
         );
 
-        expect(JSON.parse(container.querySelector('amp-ad').getAttribute('rtc-config')).urls).toMatchObject([kruxURL, prebidURL]);
+        const ampAdElement = container.querySelector('amp-ad');
+
+        expect(ampAdElement).not.toBeNull();
+
+        if(ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+
+            expect(rtcAttribute).not.toBeNull();
+
+            if(rtcAttribute) {
+                expect(JSON.parse(rtcAttribute).urls).toMatchObject([kruxURL, prebidURL]);
+            }
+        }
     });
 
     it('rtc-config returns only the PreBid URL when useKrux flag is set to false and usePrebid flag is set to true', () => {
@@ -53,7 +65,19 @@ describe('AdComponent', () => {
             />,
         );
 
-        expect(JSON.parse(container.querySelector('amp-ad').getAttribute('rtc-config')).urls).toMatchObject([prebidURL]);
+        const ampAdElement = container.querySelector('amp-ad');
+
+        expect(ampAdElement).not.toBeNull();
+
+        if(ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+
+            expect(rtcAttribute).not.toBeNull();
+
+            if(rtcAttribute) {
+                expect(JSON.parse(rtcAttribute).urls).toMatchObject([prebidURL]);
+            }
+        }
     });
 
     it('rtc-config returns only the Krux URL when useKrux flag is set to true and usePrebid flag is set to false', () => {
@@ -69,7 +93,19 @@ describe('AdComponent', () => {
             />,
         );
 
-        expect(JSON.parse(container.querySelector('amp-ad').getAttribute('rtc-config')).urls).toMatchObject([kruxURL]);
+        const ampAdElement = container.querySelector('amp-ad');
+
+        expect(ampAdElement).not.toBeNull();
+
+        if(ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+
+            expect(rtcAttribute).not.toBeNull();
+
+            if(rtcAttribute) {
+                expect(JSON.parse(rtcAttribute).urls).toMatchObject([kruxURL]);
+            }
+        }
     });
 
     it('rtc-config returns no URLs when useKrux and usePrebid flags are set to false', () => {
@@ -86,6 +122,18 @@ describe('AdComponent', () => {
             />,
         );
 
-        expect(JSON.parse(container.querySelector('amp-ad').getAttribute('rtc-config')).urls).toMatchObject([]);
+        const ampAdElement = container.querySelector('amp-ad');
+
+        expect(ampAdElement).not.toBeNull();
+
+        if(ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+
+            expect(rtcAttribute).not.toBeNull();
+
+            if(rtcAttribute) {
+                expect(JSON.parse(rtcAttribute).urls).toMatchObject([]);
+            }
+        }
     });
 });
