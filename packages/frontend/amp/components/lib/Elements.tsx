@@ -13,7 +13,7 @@ import { PullquoteBlockComponent } from '@frontend/amp/components/elements/Pullq
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { Ad } from '@frontend/amp/components/elements/Ad';
 import { css } from 'emotion';
-import { DisclaimerBlockComponent } from '@frontend/amp/components/elements/DisclaimerBlockComponent';
+import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
 import { clean } from '@frontend/model/clean';
 
 const clear = css`
@@ -89,11 +89,7 @@ export const Elements: React.FC<{
                 return <EmbedBlockComponent key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 return (
-                    <DisclaimerBlockComponent
-                        key={i}
-                        html={element.html}
-                        pillar={pillar}
-                    />
+                    <Disclaimer key={i} html={element.html} pillar={pillar} />
                 );
             case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
                 return (
