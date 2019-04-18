@@ -1,8 +1,6 @@
 import React from 'react';
-import {render} from 'react-testing-library';
-import {AdComponent} from './AdComponent';
-
-
+import { render } from 'react-testing-library';
+import { AdComponent } from './AdComponent';
 
 describe('AdComponent', () => {
     const edition = 'UK';
@@ -17,9 +15,11 @@ describe('AdComponent', () => {
         US: { adTargeting: [] },
         AU: { adTargeting: [] },
         INT: { adTargeting: [] },
-    }
-    const kruxURL = 'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
-    const prebidURL = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
+    };
+    const kruxURL =
+        'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
+    const prebidURL =
+        'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
 
     beforeEach(() => {
         commercialConfig.useKrux = true;
@@ -41,13 +41,16 @@ describe('AdComponent', () => {
 
         expect(ampAdElement).not.toBeNull();
 
-        if(ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+        if (ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
 
             expect(rtcAttribute).not.toBeNull();
 
-            if(rtcAttribute) {
-                expect(JSON.parse(rtcAttribute).urls).toMatchObject([kruxURL, prebidURL]);
+            if (rtcAttribute) {
+                expect(JSON.parse(rtcAttribute).urls).toMatchObject([
+                    kruxURL,
+                    prebidURL,
+                ]);
             }
         }
     });
@@ -69,13 +72,15 @@ describe('AdComponent', () => {
 
         expect(ampAdElement).not.toBeNull();
 
-        if(ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+        if (ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
 
             expect(rtcAttribute).not.toBeNull();
 
-            if(rtcAttribute) {
-                expect(JSON.parse(rtcAttribute).urls).toMatchObject([prebidURL]);
+            if (rtcAttribute) {
+                expect(JSON.parse(rtcAttribute).urls).toMatchObject([
+                    prebidURL,
+                ]);
             }
         }
     });
@@ -97,12 +102,12 @@ describe('AdComponent', () => {
 
         expect(ampAdElement).not.toBeNull();
 
-        if(ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+        if (ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
 
             expect(rtcAttribute).not.toBeNull();
 
-            if(rtcAttribute) {
+            if (rtcAttribute) {
                 expect(JSON.parse(rtcAttribute).urls).toMatchObject([kruxURL]);
             }
         }
@@ -126,12 +131,12 @@ describe('AdComponent', () => {
 
         expect(ampAdElement).not.toBeNull();
 
-        if(ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config')
+        if (ampAdElement) {
+            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
 
             expect(rtcAttribute).not.toBeNull();
 
-            if(rtcAttribute) {
+            if (rtcAttribute) {
                 expect(JSON.parse(rtcAttribute).urls).toMatchObject([]);
             }
         }

@@ -118,7 +118,7 @@ export const Elements: React.FC<{
     const slotIndexes = findAdSlots(elements);
     const commercialConfig = {
         useKrux: switches.krux,
-        usePrebid: switches['ampPrebid'],
+        usePrebid: switches.ampPrebid,
     };
 
     const elementsWithAdverts = output.map((element, i) => (
