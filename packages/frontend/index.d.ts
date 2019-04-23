@@ -23,7 +23,6 @@ interface SimpleLinkType {
     title: string;
 }
 
-
 interface AdTargetParam {
     name: string;
     value: string | string[];
@@ -34,9 +33,7 @@ interface EditionCommercialProperties {
     branding?: Branding;
 }
 
-type CommercialProperties = {
-    [E in Edition]: EditionCommercialProperties
-}
+type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
 interface Branding {
     type: 'paid-content';
@@ -202,6 +199,8 @@ declare namespace JSX {
         'amp-img': any;
         'amp-twitter': any;
         'amp-list': any;
+        'amp-vimeo': any;
+        'amp-facebook': any;
         'amp-instagram': any;
         'amp-soundcloud': any;
         'amp-iframe': any;
