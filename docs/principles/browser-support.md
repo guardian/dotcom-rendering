@@ -97,7 +97,3 @@ Edge              | 12          |
 UC Browser        | 11.8        |
 Opera             | 12.1        |
 
-## Screenshots
-
-We collect [regular screenshots of articles](https://docs.google.com/spreadsheets/d/1HaKLaeLoK_iOmFsCG_lnbc0UUY8_tSXxCf4dUtroSwo/edit#gid=0) 
-across various browsers. This might help to identify when a visual regression was introduced.
