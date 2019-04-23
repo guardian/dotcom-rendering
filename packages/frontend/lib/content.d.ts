@@ -143,6 +143,21 @@ interface ProfileBlockElement {
     credit: string;
 }
 
+interface TimelineEvent {
+    title: string;
+    date: string;
+    body?: string;
+    toDate?: string;
+}
+
+interface TimelineBlockElement {
+    _type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
+    id: string;
+    title: string;
+    description?: string;
+    events: TimelineEvent[];
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -158,4 +173,5 @@ type CAPIElement =
     | PullquoteBlockElement
     | QABlockElement
     | GuideBlockElement
-    | ProfileBlockElement;
+    | ProfileBlockElement
+    | TimelineBlockElement;

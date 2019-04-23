@@ -16,6 +16,7 @@ import { css } from 'emotion';
 import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
 import { clean } from '@frontend/model/clean';
 import { Expandable } from '@frontend/amp/components/Expandable';
+import { Timeline } from '@frontend/amp/components/elements/Timeline';
 
 const clear = css`
     clear: both;
@@ -111,6 +112,16 @@ export const Elements: React.FC<{
                         html={element.html}
                         img={element.img}
                         credit={element.credit}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+                return (
+                    <Timeline
+                        id={element.id}
+                        title={element.title}
+                        description={element.description}
+                        events={element.events}
                         pillar={pillar}
                     />
                 );
