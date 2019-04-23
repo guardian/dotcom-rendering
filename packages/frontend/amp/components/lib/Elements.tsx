@@ -1,5 +1,6 @@
 import React from 'react';
 
+<<<<<<< HEAD
 import { Text } from '@root/packages/frontend/amp/components/elements/Text';
 import { Subheading } from '@root/packages/frontend/amp/components/elements/Subheading';
 import { Image } from '@root/packages/frontend/amp/components/elements/Image';
@@ -14,14 +15,31 @@ import { RichLink } from '@root/packages/frontend/amp/components/elements/RichLi
 import { SoundcloudEmbed } from '@root/packages/frontend/amp/components/elements/SoundcloudEmbed';
 import { Embed } from '@root/packages/frontend/amp/components/elements/Embed';
 import { PullQuote } from '@root/packages/frontend/amp/components/elements/PullQuote';
+=======
+import { TextBlockComponent } from '@frontend/amp/components/elements/TextBlockComponent';
+import { SubheadingBlockComponent } from '@frontend/amp/components/elements/SubheadingBlockElement';
+import { ImageBlockComponent } from '@frontend/amp/components/elements/ImageBlockComponent';
+import { VideoYoutubeBlockComponent } from '@frontend/amp/components/elements/VideoYoutubeBlockComponent';
+import { VideoVimeoBlockComponent } from '@frontend/amp/components/elements/VideoVimeoBlockComponent';
+import { VideoFacebookBlockComponent } from '@frontend/amp/components/elements/VideoFacebookBlockComponent';
+import { InstagramBlockComponent } from '@frontend/amp/components/elements/InstagramBlockComponent';
+import { TweetBlockComponent } from '@frontend/amp/components/elements/TweetBlockComponent';
+import { CommentBlockComponent } from '@frontend/amp/components/elements/CommentBlockComponent';
+import { RichLinkBlockComponent } from '@frontend/amp/components/elements/RichLinkBlockComponent';
+import { SoundcloudBlockComponent } from '@frontend/amp/components/elements/SoundcloudBlockComponent';
+import { EmbedBlockComponent } from '@frontend/amp/components/elements/EmbedBlockComponent';
+>>>>>>> Update paths
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { Ad } from '@frontend/amp/components/Ad';
 import { css } from 'emotion';
 import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
 import { clean } from '@frontend/model/clean';
+<<<<<<< HEAD
 import { Expandable } from '@frontend/amp/components/Expandable';
 import { Timeline } from '@frontend/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
+=======
+>>>>>>> Update paths
 
 const clear = css`
     clear: both;
