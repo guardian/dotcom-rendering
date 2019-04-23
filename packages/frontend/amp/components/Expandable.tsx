@@ -7,11 +7,23 @@ import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 import { body, textSans, headline } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 
+// TODO - check if we need to use a palette colour for background (neutral 93 is
+// closest) or incorporate this one into the palette?
 const wrapper = (pillar: Pillar) => css`
-    background: ${palette.neutral[93]};
+    background: #f1f1f1;
     position: relative;
     padding: 0 5px 6px;
     margin: 16px 0 36px;
+
+    border-top: 13px solid ${palette.neutral[7]};
+    border-image: repeating-linear-gradient(
+            to bottom,
+            #dcdcdc,
+            #dcdcdc 1px,
+            transparent 1px,
+            transparent 4px
+        )
+        13;
 
     a {
         color: ${pillarPalette[pillar].dark};
@@ -117,7 +129,7 @@ export const Expandable: React.FC<{
     title: string;
     img?: string;
     html: string;
-    credit: string;
+    credit?: string;
     pillar: Pillar;
 }> = ({ id, type, title, img, html, credit, pillar }) => (
     <aside className={wrapper(pillar)}>
@@ -141,12 +153,14 @@ export const Expandable: React.FC<{
                     __html: html,
                 }}
             />
-            <span className={creditStyle}>
-                <span className={iconStyle}>
-                    <InfoIcon />
-                </span>{' '}
-                {credit}
-            </span>
+            {credit && (
+                <span className={creditStyle}>
+                    <span className={iconStyle}>
+                        <InfoIcon />
+                    </span>{' '}
+                    {credit}
+                </span>
+            )}
         </div>
 
         <button
