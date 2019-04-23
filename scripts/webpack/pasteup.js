@@ -4,6 +4,7 @@ module.exports = {
     mode: 'production',
     entry: {
         breakpoints: './packages/pasteup/breakpoints.ts',
+        metrics: './packages/pasteup/metrics.ts',
         typography: './packages/pasteup/typography.ts',
         mixins: './packages/pasteup/mixins.ts',
         palette: './packages/pasteup/palette.ts',
