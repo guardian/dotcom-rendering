@@ -201,7 +201,10 @@ declare namespace JSX {
         'amp-list': any;
         'amp-vimeo': any;
         'amp-facebook': any;
+<<<<<<< HEAD
         'amp-video': any;
+=======
+>>>>>>> Add Youtube, Vimeo and Facebook Video Block Elements
         'amp-instagram': any;
         'amp-soundcloud': any;
         'amp-iframe': any;
