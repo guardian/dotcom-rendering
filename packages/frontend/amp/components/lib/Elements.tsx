@@ -11,7 +11,7 @@ import { SoundcloudEmbed } from '@root/packages/frontend/amp/components/elements
 import { Embed } from '@root/packages/frontend/amp/components/elements/Embed';
 import { PullQuote } from '@root/packages/frontend/amp/components/elements/PullQuote';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
-import { Ad } from '@frontend/amp/components/elements/Ad';
+import { Ad } from '@frontend/amp/components/Ad';
 import { css } from 'emotion';
 import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
 import { clean } from '@frontend/model/clean';

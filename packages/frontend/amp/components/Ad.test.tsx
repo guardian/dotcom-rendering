@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import { AdComponent } from './AdComponent';
+import { Ad } from '@frontend/amp/components/Ad';
 
 describe('AdComponent', () => {
     const edition = 'UK';
@@ -28,7 +28,7 @@ describe('AdComponent', () => {
 
     it('rtc-config returns Krux and PreBid URLs when useKrux and usePrebid flags are set to true', () => {
         const { container } = render(
-            <AdComponent
+            <Ad
                 edition={edition}
                 section={section}
                 contentType={contentType}
@@ -59,7 +59,7 @@ describe('AdComponent', () => {
         commercialConfig.useKrux = false;
 
         const { container } = render(
-            <AdComponent
+            <Ad
                 edition={edition}
                 section={section}
                 contentType={contentType}
@@ -89,7 +89,7 @@ describe('AdComponent', () => {
         commercialConfig.usePrebid = false;
 
         const { container } = render(
-            <AdComponent
+            <Ad
                 edition={edition}
                 section={section}
                 contentType={contentType}
@@ -118,7 +118,7 @@ describe('AdComponent', () => {
         commercialConfig.usePrebid = false;
 
         const { container } = render(
-            <AdComponent
+            <Ad
                 edition={edition}
                 section={section}
                 contentType={contentType}
