@@ -15,6 +15,12 @@ export const extractScripts: (
                     return `<script async custom-element="amp-soundcloud" src="https://cdn.ampproject.org/v0/amp-soundcloud-0.1.js"></script>`;
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return `<script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>`;
+                case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+                    return `<script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>`;
+                case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
+                    return `<script async custom-element="amp-vimeo" src="https://cdn.ampproject.org/v0/amp-vimeo-0.1.js"></script>`;
+                case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
+                    return `<script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>`;
                 default:
                     return null;
             }
