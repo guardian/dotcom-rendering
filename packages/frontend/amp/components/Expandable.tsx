@@ -17,6 +17,15 @@ const wrapper = (pillar: Pillar) => css`
         color: ${pillarPalette[pillar].dark};
     }
 
+    p {
+        margin-bottom: 0.5rem;
+    }
+
+    b,
+    strong {
+        font-weight: bold;
+    }
+
     ${body(2)};
 `;
 

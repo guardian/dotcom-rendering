@@ -125,6 +125,24 @@ interface QABlockElement {
     credit: string;
 }
 
+interface GuideBlockElement {
+    _type: 'model.dotcomrendering.pageElements.GuideBlockElement';
+    id: string;
+    title: string;
+    img?: string;
+    html: string;
+    credit: string;
+}
+
+interface ProfileBlockElement {
+    _type: 'model.dotcomrendering.pageElements.ProfileBlockElement';
+    id: string;
+    title: string;
+    img?: string;
+    html: string;
+    credit: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -138,4 +156,6 @@ type CAPIElement =
     | EmbedBlockElement
     | DisclaimerBlockElement
     | PullquoteBlockElement
-    | QABlockElement;
+    | QABlockElement
+    | GuideBlockElement
+    | ProfileBlockElement;

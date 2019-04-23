@@ -90,6 +90,30 @@ export const Elements: React.FC<{
                         pillar={pillar}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.GuideBlockElement':
+                return (
+                    <Expandable
+                        id={element.id}
+                        type="Quick Guide"
+                        title={element.title}
+                        html={element.html}
+                        img={element.img}
+                        credit={element.credit}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.ProfileBlockElement':
+                return (
+                    <Expandable
+                        id={element.id}
+                        type="Profile"
+                        title={element.title}
+                        html={element.html}
+                        img={element.img}
+                        credit={element.credit}
+                        pillar={pillar}
+                    />
+                );
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
