@@ -1051,8 +1051,11 @@ export const data = {
                     },
                 },
             ],
-            shouldHideAds: true,
             revisionNumber: '12345',
+            shouldHideAds: true,
+            shouldHideReaderRevenue: false,
+            showNewRecipeDesign: false,
+            showRelatedContent: false,
         },
     },
     site: {

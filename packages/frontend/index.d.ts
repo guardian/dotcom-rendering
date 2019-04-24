@@ -208,6 +208,11 @@ interface CommercialConfigType {
         isSensitive: boolean;
         pageId: string;
         revisionNumber: string;
+        section: string;
+        shouldHideAdverts: boolean;
+        shouldHideReaderRevenue: boolean;
+        showNewRecipeDesign: boolean;
+        showRelatedContent: boolean;
     };
     switches: { [key: string]: boolean };
 }

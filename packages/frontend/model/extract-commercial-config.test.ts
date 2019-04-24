@@ -370,6 +370,87 @@ describe('extract-commercial-config', () => {
         }).toThrow();
     });
 
+    it('returns page.section if section available', () => {
+        const testSection = 'money';
+
+        testData.page.section = testSection;
+
+        const { page } = extract(testData);
+
+        expect(page.section).toBe(testSection);
+    });
+
+    it('throws error if section missing', () => {
+        testData.page.section = null;
+
+        expect(() => {
+            extract(testData);
+        }).toThrow();
+    });
+
+    it('returns page.shouldHideAdverts if shouldHideAds available', () => {
+        testData.page.meta.shouldHideAds = true;
+
+        const { page } = extract(testData);
+
+        expect(page.shouldHideAdverts).toBe(true);
+    });
+
+    it('returns page.shouldHideAdverts as "false" if missing', () => {
+        testData.page.meta.shouldHideAds = null;
+
+        const { page } = extract(testData);
+
+        expect(page.shouldHideAdverts).toBe(false);
+    });
+
+    it('returns page.shouldHideReaderRevenue if shouldHideReaderRevenue available', () => {
+        testData.page.meta.shouldHideReaderRevenue = true;
+
+        const { page } = extract(testData);
+
+        expect(page.shouldHideReaderRevenue).toBe(true);
+    });
+
+    it('returns page.shouldHideReaderRevenue as "false" if missing', () => {
+        testData.page.meta.shouldHideReaderRevenue = null;
+
+        const { page } = extract(testData);
+
+        expect(page.shouldHideReaderRevenue).toBe(false);
+    });
+
+    it('returns page.showNewRecipeDesign if showNewRecipeDesign available', () => {
+        testData.page.meta.showNewRecipeDesign = true;
+
+        const { page } = extract(testData);
+
+        expect(page.showNewRecipeDesign).toBe(true);
+    });
+
+    it('returns page.showNewRecipeDesign as "false" if missing', () => {
+        testData.page.meta.showNewRecipeDesign = null;
+
+        const { page } = extract(testData);
+
+        expect(page.showNewRecipeDesign).toBe(false);
+    });
+
+    it('returns page.showRelatedContent if showRelatedContent available', () => {
+        testData.page.meta.showRelatedContent = true;
+
+        const { page } = extract(testData);
+
+        expect(page.showRelatedContent).toBe(true);
+    });
+
+    it('returns page.showRelatedContent as "false" if missing', () => {
+        testData.page.meta.showRelatedContent = null;
+
+        const { page } = extract(testData);
+
+        expect(page.showRelatedContent).toBe(false);
+    });
 
     it('returns switches if available', () => {
         const testSwitches = {
