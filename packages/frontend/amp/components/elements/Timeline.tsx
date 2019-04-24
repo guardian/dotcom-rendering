@@ -53,7 +53,6 @@ const getHTML = (events: TimelineEvent[], description?: string): string => {
                         __html: e.body || '',
                     }}
                 />
-                <div />
             </div>
         </li>
     ));
