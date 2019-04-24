@@ -35,6 +35,10 @@ const eventIconStyle = css`
     }
 `;
 
+const headingStyle = css`
+    font-weight: bold;
+`;
+
 const getHTML = (events: TimelineEvent[], description?: string): string => {
     // TODO using ternary as && doesn't seem to work here - it prints out undefined
     const eventMarkup = events.map(e => (
@@ -47,7 +51,7 @@ const getHTML = (events: TimelineEvent[], description?: string): string => {
                 </>
             )}
             <div>
-                <b>{e.title}</b>
+                <h3 className={headingStyle}>{e.title}</h3>
                 <div // tslint:disable-line:react-no-dangerous-html
                     dangerouslySetInnerHTML={{
                         __html: e.body || '',

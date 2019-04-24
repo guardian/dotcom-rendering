@@ -6,6 +6,7 @@ import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 
 import { body, textSans, headline } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
+import { TextStyle } from '@frontend/amp/components/elements/Text';
 
 // TODO - check if we need to use a palette colour for background (neutral 93 is
 // closest) or incorporate this one into the palette?
@@ -25,18 +26,7 @@ const wrapper = (pillar: Pillar) => css`
         )
         13;
 
-    a {
-        color: ${pillarPalette[pillar].dark};
-    }
-
-    p {
-        margin-bottom: 0.5rem;
-    }
-
-    b,
-    strong {
-        font-weight: bold;
-    }
+    ${TextStyle(pillar)}
 
     ${body(2)};
 `;
@@ -137,7 +127,7 @@ export const Expandable: React.FC<{
             <span className={cx(headerStyle, pillarColour(pillar))}>
                 {type}
             </span>
-            <h1 className={headerStyle}>{title}</h1>
+            <h2 className={headerStyle}>{title}</h2>
         </div>
 
         <div className={innerStyle} hidden={true} id={id}>
