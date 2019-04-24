@@ -1,6 +1,5 @@
 import {
     getNonEmptyString,
-    getString,
     getBoolean,
     getObject,
 } from './validators';
