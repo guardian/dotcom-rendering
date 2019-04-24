@@ -4,8 +4,13 @@ import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { body } from '@guardian/pasteup/typography';
 
+// Note, this should only apply basic text styling. It is a case where we want
+// to re-use styling, but generally we should avoid this as it couples
+// components. Longer term we should probably put this in GUUI or somewhere else
+// which is easy to discover and re-use.
+
 // tslint:disable:react-no-dangerous-html
-const style = (pillar: Pillar) => css`
+export const TextStyle = (pillar: Pillar) => css`
     strong {
         font-weight: 700;
     }
@@ -32,7 +37,7 @@ export const Text: React.FC<{
     pillar: Pillar;
 }> = ({ html, pillar }) => (
     <span
-        className={style(pillar)}
+        className={TextStyle(pillar)}
         dangerouslySetInnerHTML={{
             __html: html,
         }}
