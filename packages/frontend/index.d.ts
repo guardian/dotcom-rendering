@@ -204,6 +204,10 @@ interface CommercialConfigType {
         isLiveBlog: boolean;
         isMinuteArticle: boolean;
         isPaidContent: boolean;
+        isPreview: boolean;
+        isSensitive: boolean;
+        pageId: string;
+        revisionNumber: string;
     };
     switches: { [key: string]: boolean };
 }

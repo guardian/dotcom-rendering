@@ -986,6 +986,8 @@ export const data = {
             isLiveblog: false,
             isMinuteArticle: false,
             isPaidContent: false,
+            isPreview: false,
+            isSensitive: false,
             linkedData: [
                 {
                     '@type': 'NewsArticle',
@@ -1050,6 +1052,7 @@ export const data = {
                 },
             ],
             shouldHideAds: true,
+            revisionNumber: '12345',
         },
     },
     site: {

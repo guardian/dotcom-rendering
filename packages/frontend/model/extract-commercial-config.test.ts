@@ -302,6 +302,75 @@ describe('extract-commercial-config', () => {
         expect(page.isPaidContent).toBe(false);
     });
 
+    it('returns page.isPreview if isPreview available', () => {
+        testData.page.meta.isPreview = true;
+
+        const { page } = extract(testData);
+
+        expect(page.isPreview).toBe(true);
+    });
+
+    it('returns page.isPreview as "false" if missing', () => {
+        testData.page.meta.isPreview = null;
+
+        const { page } = extract(testData);
+
+        expect(page.isPreview).toBe(false);
+    });
+
+    it('returns page.isSensitive if isSensitive available', () => {
+        testData.page.meta.isSensitive = true;
+
+        const { page } = extract(testData);
+
+        expect(page.isSensitive).toBe(true);
+    });
+
+    it('returns page.isSensitive as "false" if missing', () => {
+        testData.page.meta.isSensitive = null;
+
+        const { page } = extract(testData);
+
+        expect(page.isSensitive).toBe(false);
+    });
+
+    it('returns page.pageId if pageId available', () => {
+        const testPageId = 'Test12345';
+
+        testData.page.pageId = testPageId;
+
+        const { page } = extract(testData);
+
+        expect(page.pageId).toBe(testPageId);
+    });
+
+    it('throws error if pageId missing', () => {
+        testData.page.pageId = null;
+
+        expect(() => {
+            extract(testData);
+        }).toThrow();
+    });
+
+    it('returns page.revisionNumber if revisionNumber available', () => {
+        const testRevisionNumber = 'Test12345';
+
+        testData.page.meta.revisionNumber = testRevisionNumber;
+
+        const { page } = extract(testData);
+
+        expect(page.revisionNumber).toBe(testRevisionNumber);
+    });
+
+    it('throws error if revisionNumber missing', () => {
+        testData.page.meta.revisionNumber = null;
+
+        expect(() => {
+            extract(testData);
+        }).toThrow();
+    });
+
+
     it('returns switches if available', () => {
         const testSwitches = {
             foo: true,
