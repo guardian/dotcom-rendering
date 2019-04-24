@@ -127,27 +127,28 @@ const ampAdElem = (
     section: string,
     contentType: string,
     config: CommercialConfig,
-    commercialProperties: CommercialProperties) => {
-
-    return <amp-ad
-        class={cx(adClass, adRegionClass)}
-        data-block-on-consent=""
-        width={300}
-        height={250}
-        data-npa-on-unknown-consent={true}
-        data-loading-strategy={'prefer-viewability-over-views'}
-        layout={'responsive'}
-        type={'doubleclick'}
-        json={stringify(adJson(commercialProperties[edition].adTargeting))}
-        data-slot={ampData(section, contentType)}
-        rtc-config={realTimeConfig(
-            edition,
-            config.useKrux,
-            config.usePrebid,
-        )}
-    />
-
-}
+    commercialProperties: CommercialProperties,
+) => {
+    return (
+        <amp-ad
+            class={cx(adClass, adRegionClass)}
+            data-block-on-consent=""
+            width={300}
+            height={250}
+            data-npa-on-unknown-consent={true}
+            data-loading-strategy={'prefer-viewability-over-views'}
+            layout={'responsive'}
+            type={'doubleclick'}
+            json={stringify(adJson(commercialProperties[edition].adTargeting))}
+            data-slot={ampData(section, contentType)}
+            rtc-config={realTimeConfig(
+                edition,
+                config.useKrux,
+                config.usePrebid,
+            )}
+        />
+    );
+};
 
 export const Ad: React.SFC<{
     edition: Edition;
@@ -157,8 +158,29 @@ export const Ad: React.SFC<{
     commercialProperties: CommercialProperties;
 }> = ({ edition, section, contentType, config, commercialProperties }) => (
     <div className={adStyle}>
-        {ampAdElem(usAdRegionClass, edition, section, contentType, config, commercialProperties)}
-        {ampAdElem(auAdRegionClass, edition, section, contentType, config, commercialProperties)}
-        {ampAdElem(rowAdRegionClass, edition, section, contentType, config, commercialProperties)}
+        {ampAdElem(
+            usAdRegionClass,
+            edition,
+            section,
+            contentType,
+            config,
+            commercialProperties,
+        )}
+        {ampAdElem(
+            auAdRegionClass,
+            edition,
+            section,
+            contentType,
+            config,
+            commercialProperties,
+        )}
+        {ampAdElem(
+            rowAdRegionClass,
+            edition,
+            section,
+            contentType,
+            config,
+            commercialProperties,
+        )}
     </div>
 );
