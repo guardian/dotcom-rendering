@@ -82,16 +82,19 @@ interface VideoAssets {
 interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     url: string;
+    caption: string;
 }
 
 interface VideoVimeoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
     url: string;
+    caption: string;
 }
 
 interface VideoFacebookBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
     url: string;
+    caption: string;
 }
 
 >>>>>>> Add Youtube, Vimeo and Facebook Video Block Elements
