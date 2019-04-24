@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const VideoYoutubeBlockComponent: React.FC<{
+export const VideoYoutube: React.FC<{
     element: VideoYoutubeBlockElement;
 }> = ({ element }) => {
     const youtubeId = element.url.split('v=').pop();

@@ -3,9 +3,9 @@ import React from 'react';
 import { Text } from '@root/packages/frontend/amp/components/elements/Text';
 import { Subheading } from '@root/packages/frontend/amp/components/elements/Subheading';
 import { Image } from '@root/packages/frontend/amp/components/elements/Image';
-import { VideoYoutubeBlockComponent } from '@root/packages/frontend/amp/components/elements/VideoYoutubeBlockComponent';
-import { VideoVimeoBlockComponent } from '@root/packages/frontend/amp/components/elements/VideoVimeoBlockComponent';
-import { VideoFacebookBlockComponent } from '@root/packages/frontend/amp/components/elements/VideoFacebookBlockComponent';
+import { VideoYoutube } from '@frontend/amp/components/elements/VideoYoutube';
+import { VideoVimeo } from '@frontend/amp/components/elements/VideoVimeo';
+import { VideoFacebook } from '@frontend/amp/components/elements/VideoFacebook';
 import { InstagramEmbed } from '@root/packages/frontend/amp/components/elements/InstagramEmbed';
 import { TwitterEmbed } from '@root/packages/frontend/amp/components/elements/TwitterEmbed';
 import { Comment } from '@root/packages/frontend/amp/components/elements/Comment';
@@ -64,13 +64,11 @@ export const Elements: React.FC<{
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
                 return <Image key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-                return <VideoYoutubeBlockComponent key={i} element={element} />;
+                return <VideoYoutube key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
-                return <VideoVimeoBlockComponent key={i} element={element} />;
+                return <VideoVimeo key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-                return (
-                    <VideoFacebookBlockComponent key={i} element={element} />
-                );
+                return <VideoFacebook key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':

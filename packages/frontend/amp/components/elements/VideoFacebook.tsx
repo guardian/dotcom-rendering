@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const VideoFacebookBlockComponent: React.FC<{
+export const VideoFacebook: React.FC<{
     element: VideoFacebookBlockElement;
 }> = ({ element }) => {
     return (
