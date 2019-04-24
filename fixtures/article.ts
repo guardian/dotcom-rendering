@@ -976,14 +976,16 @@ export const data = {
             disableStickyTopBanner: false,
         },
         meta: {
-            isFront: false,
-            hasShowcaseMainElement: false,
-            isImmersive: false,
-            isHosted: false,
-            shouldHideAds: true,
-            hasStoryPackage: true,
             hasRelated: true,
+            hasShowcaseMainElement: false,
+            hasStoryPackage: true,
             isCommentable: false,
+            isFront: false,
+            isHosted: false,
+            isImmersive: false,
+            isLiveblog: false,
+            isMinuteArticle: false,
+            isPaidContent: false,
             linkedData: [
                 {
                     '@type': 'NewsArticle',
@@ -1047,6 +1049,7 @@ export const data = {
                     },
                 },
             ],
+            shouldHideAds: true,
         },
     },
     site: {

@@ -194,13 +194,16 @@ interface CommercialConfigType {
         ajaxUrl: string;
         commentable: boolean;
         contentType: string;
+        disableStickyTopBanner: boolean;
         edition: string;
         hasShowcaseMainElement: boolean;
         hbImpl: string;
         isDev: boolean;
         isFront: boolean;
         isHosted: boolean;
-        disableStickyTopBanner: boolean;
+        isLiveBlog: boolean;
+        isMinuteArticle: boolean;
+        isPaidContent: boolean;
     };
     switches: { [key: string]: boolean };
 }

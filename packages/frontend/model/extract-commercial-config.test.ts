@@ -2,7 +2,7 @@ import cloneDeep from 'lodash.clonedeep';
 import { extract } from './extract-commercial-config';
 import { data } from '@root/fixtures/article';
 
-describe('extract-config', () => {
+describe('extract-commercial-config', () => {
     let testData: any;
 
     beforeEach(() => {
@@ -122,6 +122,22 @@ describe('extract-config', () => {
         }).toThrow();
     });
 
+    it('returns page.disableStickyTopBanner if disableStickyTopBanner available', () => {
+        testData.page.commercial.disableStickyTopBanner = true;
+
+        const { page } = extract(testData);
+
+        expect(page.disableStickyTopBanner).toBe(true);
+    });
+
+    it('returns page.disableStickyTopBanner as "false" if missing', () => {
+        testData.page.commercial.disableStickyTopBanner = null;
+
+        const { page } = extract(testData);
+
+        expect(page.disableStickyTopBanner).toBe(false);
+    });
+
     it('returns page.edition if editionId available', () => {
         const testEdition = 'UK';
 
@@ -238,20 +254,52 @@ describe('extract-config', () => {
         expect(page.isHosted).toBe(false);
     });
 
-    it('returns page.disableStickyTopBanner if disableStickyTopBanner available', () => {
-        testData.page.commercial.disableStickyTopBanner = true;
+    it('returns page.isLiveBlog if isLiveBlog available', () => {
+        testData.page.meta.isLiveBlog = true;
 
         const { page } = extract(testData);
 
-        expect(page.disableStickyTopBanner).toBe(true);
+        expect(page.isLiveBlog).toBe(true);
     });
 
-    it('returns page.disableStickyTopBanner as "false" if missing', () => {
-        testData.page.commercial.disableStickyTopBanner = null;
+    it('returns page.isLiveBlog as "false" if missing', () => {
+        testData.page.meta.isLiveBlog = null;
 
         const { page } = extract(testData);
 
-        expect(page.disableStickyTopBanner).toBe(false);
+        expect(page.isLiveBlog).toBe(false);
+    });
+
+    it('returns page.isMinuteArticle if isMinuteArticle available', () => {
+        testData.page.meta.isMinuteArticle = true;
+
+        const { page } = extract(testData);
+
+        expect(page.isMinuteArticle).toBe(true);
+    });
+
+    it('returns page.isMinuteArticle as "false" if missing', () => {
+        testData.page.meta.isMinuteArticle = null;
+
+        const { page } = extract(testData);
+
+        expect(page.isMinuteArticle).toBe(false);
+    });
+
+    it('returns page.isPaidContent if isPaidContent available', () => {
+        testData.page.meta.isPaidContent = true;
+
+        const { page } = extract(testData);
+
+        expect(page.isPaidContent).toBe(true);
+    });
+
+    it('returns page.isPaidContent as "false" if missing', () => {
+        testData.page.meta.isPaidContent = null;
+
+        const { page } = extract(testData);
+
+        expect(page.isPaidContent).toBe(false);
     });
 
     it('returns switches if available', () => {
