@@ -83,6 +83,7 @@ export const Elements: React.FC<{
             case 'model.dotcomrendering.pageElements.ImageBlockElement':
                 return <Image key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+<<<<<<< HEAD
                 return <VideoYoutube key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
                 return <VideoVimeo key={i} element={element} />;
@@ -90,6 +91,31 @@ export const Elements: React.FC<{
                 return <VideoFacebook key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 return <VideoGuardian key={i} element={element} />;
+=======
+                return (
+                    <VideoYoutubeBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
+                return (
+                    <VideoVimeoBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
+            case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
+                return (
+                    <VideoFacebookBlockComponent
+                        key={i}
+                        element={element}
+                        pillar={pillar}
+                    />
+                );
+>>>>>>> Add Caption from GUUI to all videos
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
