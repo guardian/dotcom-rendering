@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const VideoVimeo: React.FC<{
-    element: VideoVimeoBlockElement;
+    element: VideoVimeo;
 }> = ({ element }) => {
     const vimeoId = element.url.split('/').pop();
     return (
