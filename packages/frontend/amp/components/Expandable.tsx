@@ -8,10 +8,8 @@ import { body, textSans, headline } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { TextStyle } from '@frontend/amp/components/elements/Text';
 
-// TODO - check if we need to use a palette colour for background (neutral 93 is
-// closest) or incorporate this one into the palette?
 const wrapper = (pillar: Pillar) => css`
-    background: #f1f1f1;
+    background: ${palette.neutral[93]};
     position: relative;
     padding: 0 5px 6px;
     margin: 16px 0 36px;
