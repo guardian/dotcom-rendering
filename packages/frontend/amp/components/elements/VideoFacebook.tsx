@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const VideoFacebook: React.FC<{
-    element: VideoFacebookBlockElement;
+    element: VideoFacebook;
 }> = ({ element }) => {
     return (
         <amp-facebook

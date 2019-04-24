@@ -43,18 +43,18 @@ interface YoutubeBlockElement {
 }
 
 // Note, this is a Video Embed rather than the above Media Atom
-interface VideoYoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
+interface VideoYoutube {
     url: string;
 }
 
-interface VideoVimeoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
+interface VideoVimeo {
     url: string;
 }
 
-interface VideoFacebookBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
+interface VideoFacebook {
     url: string;
 }
 
@@ -179,9 +179,9 @@ type CAPIElement =
     | SubheadingBlockElement
     | ImageBlockElement
     | YoutubeBlockElement
-    | VideoYoutubeBlockElement
-    | VideoVimeoBlockElement
-    | VideoFacebookBlockElement
+    | VideoYoutube
+    | VideoVimeo
+    | VideoFacebook
     | InstagramBlockElement
     | TweetBlockElement
     | RichLinkBlockElement
