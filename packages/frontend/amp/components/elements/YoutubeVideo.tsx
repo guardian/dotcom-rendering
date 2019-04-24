@@ -1,19 +1,5 @@
 import React from 'react';
-import { textSans } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
-import { css } from 'emotion';
-import { pillarPalette } from '@frontend/lib/pillars';
-import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
-
-const figureStyle = css`
-    margin-bottom: 8px;
-`;
-const captionStyle = css`
-    padding: 8px 10px 0;
-    ${textSans(1)};
-    word-wrap: break-word;
-    color: ${palette.neutral[46]};
-`;
+import { Caption } from '@guardian/guui/components/Caption/Caption';
 
 export const YoutubeVideo: React.FC<{
     element: YoutubeBlockElement;
@@ -33,24 +19,13 @@ export const YoutubeVideo: React.FC<{
         'data-param-list': element.channelId, // Use specific channel ID for related videos
     };
 
-    const iconStyle = css`
-        fill: ${pillarPalette[pillar].main};
-        padding-right: 3px;
-    `;
-
     return (
-        <figure className={figureStyle}>
+        <Caption
+            captionText={element.mediaTitle}
+            pillar={pillar}
+            padCaption={true}
+        >
             <amp-youtube {...attributes} />
-            {element.mediaTitle && (
-                <>
-                    <figcaption className={captionStyle}>
-                        <span className={iconStyle}>
-                            <TriangleIcon />
-                        </span>
-                        {element.mediaTitle}
-                    </figcaption>
-                </>
-            )}
-        </figure>
+        </Caption>
     );
 };
