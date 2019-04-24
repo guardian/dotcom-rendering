@@ -40,7 +40,6 @@ const headingStyle = css`
 `;
 
 const getHTML = (events: TimelineEvent[], description?: string): string => {
-    // TODO using ternary as && doesn't seem to work here - it prints out undefined
     const eventMarkup = events.map(e => (
         <li className={eventStyle}>
             <time className={eventIconStyle}>{e.date}</time>
