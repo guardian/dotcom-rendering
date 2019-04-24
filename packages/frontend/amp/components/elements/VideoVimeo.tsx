@@ -8,8 +8,8 @@ export const VideoVimeo: React.FC<{
         <amp-vimeo
             data-videoid={vimeoId}
             layout="responsive"
-            width="5"
-            height="3"
+            width={element.width}
+            height={element.height}
         />
     );
 };

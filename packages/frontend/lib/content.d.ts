@@ -43,21 +43,29 @@ interface YoutubeBlockElement {
 }
 
 // Note, this is a Video Embed rather than the above Media Atom
-    _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
 interface VideoYoutube {
+    _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     url: string;
+    height: number;
+    width: number;
+    caption: string;
 }
 
-    _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
 interface VideoVimeo {
+    _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
     url: string;
+    height: number;
+    width: number;
+    caption: string;
 }
 
-    _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
 interface VideoFacebook {
+    _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
     url: string;
+    height: number;
+    width: number;
+    caption: string;
 }
-
 interface InstagramBlockElement {
     _type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
     html: string;

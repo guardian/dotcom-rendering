@@ -8,8 +8,8 @@ export const VideoFacebook: React.FC<{
             data-href={element.url}
             data-embed-as="video"
             layout="responsive"
-            width="5"
-            height="3"
+            width={element.width}
+            height={element.height}
         />
     );
 };

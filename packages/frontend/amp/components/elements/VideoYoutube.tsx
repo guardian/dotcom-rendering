@@ -8,8 +8,8 @@ export const VideoYoutube: React.FC<{
         <amp-youtube
             data-videoid={youtubeId}
             layout="responsive"
-            width="5"
-            height="3"
+            width={element.width}
+            height={element.height}
         />
     );
 };
