@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { until } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 import { adJson, stringify } from '@frontend/amp/lib/ad-json';
@@ -34,6 +34,28 @@ const adStyle = css`
         padding: 3px 10px;
         color: ${palette.neutral[46]};
         text-align: right;
+    }
+`;
+
+const adClass = css`
+    display: none;
+`;
+
+const usAdRegionClass = css`
+    .amp-geo-group-us & {
+        display: block;
+    }
+`;
+
+const auAdRegionClass = css`
+    .amp-geo-group-au & {
+        display: block;
+    }
+`;
+
+const rowAdRegionClass = css`
+    .amp-geo-group-eea & {
+        display: block;
     }
 `;
 
@@ -99,6 +121,34 @@ interface CommercialConfig {
     usePrebid: boolean;
 }
 
+const ampAdElem = (
+    adRegionClass: string,
+    edition: Edition,
+    section: string,
+    contentType: string,
+    config: CommercialConfig,
+    commercialProperties: CommercialProperties) => {
+
+    return <amp-ad
+        class={cx(adClass, adRegionClass)}
+        data-block-on-consent=""
+        width={300}
+        height={250}
+        data-npa-on-unknown-consent={true}
+        data-loading-strategy={'prefer-viewability-over-views'}
+        layout={'responsive'}
+        type={'doubleclick'}
+        json={stringify(adJson(commercialProperties[edition].adTargeting))}
+        data-slot={ampData(section, contentType)}
+        rtc-config={realTimeConfig(
+            edition,
+            config.useKrux,
+            config.usePrebid,
+        )}
+    />
+
+}
+
 export const Ad: React.SFC<{
     edition: Edition;
     section: string;
@@ -107,21 +157,8 @@ export const Ad: React.SFC<{
     commercialProperties: CommercialProperties;
 }> = ({ edition, section, contentType, config, commercialProperties }) => (
     <div className={adStyle}>
-        <amp-ad
-            data-block-on-consent=""
-            width={300}
-            height={250}
-            data-npa-on-unknown-consent={true}
-            data-loading-strategy={'prefer-viewability-over-views'}
-            layout={'responsive'}
-            type={'doubleclick'}
-            json={stringify(adJson(commercialProperties[edition].adTargeting))}
-            data-slot={ampData(section, contentType)}
-            rtc-config={realTimeConfig(
-                edition,
-                config.useKrux,
-                config.usePrebid,
-            )}
-        />
+        {ampAdElem(usAdRegionClass, edition, section, contentType, config, commercialProperties)}
+        {ampAdElem(auAdRegionClass, edition, section, contentType, config, commercialProperties)}
+        {ampAdElem(rowAdRegionClass, edition, section, contentType, config, commercialProperties)}
     </div>
 );
