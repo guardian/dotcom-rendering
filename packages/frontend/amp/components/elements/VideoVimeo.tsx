@@ -1,9 +1,11 @@
 import React from 'react';
+import { getIdFromUrl } from '@frontend/model/validators';
 
 export const VideoVimeo: React.FC<{
     element: VideoVimeo;
 }> = ({ element }) => {
-    const vimeoId = element.url.split('/').pop();
+    const vimeoId = getIdFromUrl(element.url, '(\\d+)($|\\/)', true);
+
     return (
         <amp-vimeo
             data-videoid={vimeoId}
