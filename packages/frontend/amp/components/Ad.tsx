@@ -59,6 +59,14 @@ const rowAdRegionClass = css`
     }
 `;
 
+const regionClasses = {
+    US: usAdRegionClass,
+    AU: auAdRegionClass,
+    ROW: rowAdRegionClass,
+};
+
+type Region = 'US' | 'AU' | 'ROW';
+
 const dfpAdUnitRoot = 'theguardian.com';
 
 const ampData = (section: string, contentType: string): string => {
@@ -71,8 +79,8 @@ const ampData = (section: string, contentType: string): string => {
     return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
-const getPlacementId = (edition: Edition): number => {
-    switch (edition) {
+const getPlacementId = (adRegion: Region): number => {
+    switch (adRegion) {
         case 'US':
             return 7;
         case 'AU':
@@ -83,11 +91,11 @@ const getPlacementId = (edition: Edition): number => {
 };
 
 const realTimeConfig = (
-    edition: Edition,
+    adRegion: Region,
     useKrux: boolean,
     usePrebid: boolean,
 ): any => {
-    const placementID = getPlacementId(edition);
+    const placementID = getPlacementId(adRegion);
     const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
     const kruxURL =
         'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
@@ -122,7 +130,7 @@ interface CommercialConfig {
 }
 
 const ampAdElem = (
-    adRegionClass: string,
+    adRegion: Region,
     edition: Edition,
     section: string,
     contentType: string,
@@ -131,7 +139,7 @@ const ampAdElem = (
 ) => {
     return (
         <amp-ad
-            class={cx(adClass, adRegionClass)}
+            class={cx(adClass, regionClasses[adRegion])}
             data-block-on-consent=""
             width={300}
             height={250}
@@ -142,7 +150,7 @@ const ampAdElem = (
             json={stringify(adJson(commercialProperties[edition].adTargeting))}
             data-slot={ampData(section, contentType)}
             rtc-config={realTimeConfig(
-                edition,
+                adRegion,
                 config.useKrux,
                 config.usePrebid,
             )}
@@ -159,7 +167,7 @@ export const Ad: React.SFC<{
 }> = ({ edition, section, contentType, config, commercialProperties }) => (
     <div className={adStyle}>
         {ampAdElem(
-            usAdRegionClass,
+            'US',
             edition,
             section,
             contentType,
@@ -167,7 +175,7 @@ export const Ad: React.SFC<{
             commercialProperties,
         )}
         {ampAdElem(
-            auAdRegionClass,
+            'AU',
             edition,
             section,
             contentType,
@@ -175,7 +183,7 @@ export const Ad: React.SFC<{
             commercialProperties,
         )}
         {ampAdElem(
-            rowAdRegionClass,
+            'ROW',
             edition,
             section,
             contentType,
