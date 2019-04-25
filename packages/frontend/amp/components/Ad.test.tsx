@@ -18,7 +18,11 @@ describe('AdComponent', () => {
     };
     const kruxURL =
         'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
-    const prebidURL =
+    const usPrebidURL =
+        'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=7&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
+    const auPrebidURL =
+        'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=6&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
+    const rowPrebidURL =
         'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
 
     beforeEach(() => {
@@ -26,7 +30,7 @@ describe('AdComponent', () => {
         commercialConfig.usePrebid = true;
     });
 
-    it('rtc-config returns Krux and PreBid URLs when useKrux and usePrebid flags are set to true', () => {
+    it('rtc-config returns correctly formed Krux and PreBid URLs when useKrux and usePrebid flags are set to true', () => {
         const { container } = render(
             <Ad
                 edition={edition}
@@ -37,25 +41,41 @@ describe('AdComponent', () => {
             />,
         );
 
-        const ampAdElement = container.querySelector('amp-ad');
+        const ampAdElement = container.querySelectorAll('amp-ad');
 
         expect(ampAdElement).not.toBeNull();
 
         if (ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
+            const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
+            const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
+            const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
 
-            expect(rtcAttribute).not.toBeNull();
+            expect(usRtcAttribute).not.toBeNull();
+            expect(auRtcAttribute).not.toBeNull();
+            expect(rowRtcAttribute).not.toBeNull();
 
-            if (rtcAttribute) {
-                expect(JSON.parse(rtcAttribute).urls).toMatchObject([
+            if (usRtcAttribute) {
+                expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
                     kruxURL,
-                    prebidURL,
+                    usPrebidURL,
+                ]);
+            }
+            if (auRtcAttribute) {
+                expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
+                    kruxURL,
+                    auPrebidURL,
+                ]);
+            }
+            if (rowRtcAttribute) {
+                expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
+                    kruxURL,
+                    rowPrebidURL,
                 ]);
             }
         }
     });
 
-    it('rtc-config returns only the PreBid URL when useKrux flag is set to false and usePrebid flag is set to true', () => {
+    it('rtc-config returns only the correctly formed PreBid URL when useKrux flag is set to false and usePrebid flag is set to true', () => {
         commercialConfig.useKrux = false;
 
         const { container } = render(
@@ -68,18 +88,32 @@ describe('AdComponent', () => {
             />,
         );
 
-        const ampAdElement = container.querySelector('amp-ad');
+        const ampAdElement = container.querySelectorAll('amp-ad');
 
         expect(ampAdElement).not.toBeNull();
 
         if (ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
+            const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
+            const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
+            const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
 
-            expect(rtcAttribute).not.toBeNull();
+            expect(usRtcAttribute).not.toBeNull();
+            expect(auRtcAttribute).not.toBeNull();
+            expect(rowRtcAttribute).not.toBeNull();
 
-            if (rtcAttribute) {
-                expect(JSON.parse(rtcAttribute).urls).toMatchObject([
-                    prebidURL,
+            if (usRtcAttribute) {
+                expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
+                    usPrebidURL,
+                ]);
+            }
+            if (auRtcAttribute) {
+                expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
+                    auPrebidURL,
+                ]);
+            }
+            if (rowRtcAttribute) {
+                expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
+                    rowPrebidURL,
                 ]);
             }
         }
@@ -98,17 +132,33 @@ describe('AdComponent', () => {
             />,
         );
 
-        const ampAdElement = container.querySelector('amp-ad');
+        const ampAdElement = container.querySelectorAll('amp-ad');
 
         expect(ampAdElement).not.toBeNull();
 
         if (ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
+            const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
+            const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
+            const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
 
-            expect(rtcAttribute).not.toBeNull();
+            expect(usRtcAttribute).not.toBeNull();
+            expect(auRtcAttribute).not.toBeNull();
+            expect(rowRtcAttribute).not.toBeNull();
 
-            if (rtcAttribute) {
-                expect(JSON.parse(rtcAttribute).urls).toMatchObject([kruxURL]);
+            if (usRtcAttribute) {
+                expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
+                    kruxURL,
+                ]);
+            }
+            if (auRtcAttribute) {
+                expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
+                    kruxURL,
+                ]);
+            }
+            if (rowRtcAttribute) {
+                expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
+                    kruxURL,
+                ]);
             }
         }
     });
@@ -127,17 +177,27 @@ describe('AdComponent', () => {
             />,
         );
 
-        const ampAdElement = container.querySelector('amp-ad');
+        const ampAdElement = container.querySelectorAll('amp-ad');
 
         expect(ampAdElement).not.toBeNull();
 
         if (ampAdElement) {
-            const rtcAttribute = ampAdElement.getAttribute('rtc-config');
+            const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
+            const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
+            const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
 
-            expect(rtcAttribute).not.toBeNull();
+            expect(usRtcAttribute).not.toBeNull();
+            expect(auRtcAttribute).not.toBeNull();
+            expect(rowRtcAttribute).not.toBeNull();
 
-            if (rtcAttribute) {
-                expect(JSON.parse(rtcAttribute).urls).toMatchObject([]);
+            if (usRtcAttribute) {
+                expect(JSON.parse(usRtcAttribute).urls).toMatchObject([]);
+            }
+            if (auRtcAttribute) {
+                expect(JSON.parse(auRtcAttribute).urls).toMatchObject([]);
+            }
+            if (rowRtcAttribute) {
+                expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([]);
             }
         }
     });

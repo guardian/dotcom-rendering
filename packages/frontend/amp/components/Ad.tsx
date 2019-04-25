@@ -59,13 +59,13 @@ const rowAdRegionClass = css`
     }
 `;
 
-const regionClasses = {
+const adRegionClasses = {
     US: usAdRegionClass,
     AU: auAdRegionClass,
     ROW: rowAdRegionClass,
 };
 
-type Region = 'US' | 'AU' | 'ROW';
+type AdRegion = 'US' | 'AU' | 'ROW';
 
 const dfpAdUnitRoot = 'theguardian.com';
 
@@ -79,7 +79,7 @@ const ampData = (section: string, contentType: string): string => {
     return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
-const getPlacementId = (adRegion: Region): number => {
+const getPlacementId = (adRegion: AdRegion): number => {
     switch (adRegion) {
         case 'US':
             return 7;
@@ -91,7 +91,7 @@ const getPlacementId = (adRegion: Region): number => {
 };
 
 const realTimeConfig = (
-    adRegion: Region,
+    adRegion: AdRegion,
     useKrux: boolean,
     usePrebid: boolean,
 ): any => {
@@ -130,7 +130,7 @@ interface CommercialConfig {
 }
 
 const ampAdElem = (
-    adRegion: Region,
+    adRegion: AdRegion,
     edition: Edition,
     section: string,
     contentType: string,
@@ -139,7 +139,7 @@ const ampAdElem = (
 ) => {
     return (
         <amp-ad
-            class={cx(adClass, regionClasses[adRegion])}
+            class={cx(adClass, adRegionClasses[adRegion])}
             data-block-on-consent=""
             width={300}
             height={250}
