@@ -66,6 +66,17 @@ interface VideoFacebook {
     width: number;
     caption: string;
 }
+
+interface VideoGuardian {
+    _type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
+    assets: VideoAssets[];
+    caption: string;
+}
+
+interface VideoAssets {
+    url: string;
+    mimeType: string;
+}
 interface InstagramBlockElement {
     _type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
     html: string;
@@ -190,6 +201,7 @@ type CAPIElement =
     | VideoYoutube
     | VideoVimeo
     | VideoFacebook
+    | VideoGuardian
     | InstagramBlockElement
     | TweetBlockElement
     | RichLinkBlockElement

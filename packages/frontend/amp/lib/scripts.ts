@@ -21,6 +21,8 @@ export const extractScripts: (
                     return `<script async custom-element="amp-vimeo" src="https://cdn.ampproject.org/v0/amp-vimeo-0.1.js"></script>`;
                 case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
                     return `<script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>`;
+                case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+                    return `<script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>`;
                 default:
                     return null;
             }

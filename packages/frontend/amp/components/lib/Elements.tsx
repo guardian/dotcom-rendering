@@ -6,6 +6,7 @@ import { Image } from '@root/packages/frontend/amp/components/elements/Image';
 import { VideoYoutube } from '@frontend/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@frontend/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@frontend/amp/components/elements/VideoFacebook';
+import { VideoGuardian } from '@frontend/amp/components/elements/VideoGuardian';
 import { InstagramEmbed } from '@root/packages/frontend/amp/components/elements/InstagramEmbed';
 import { TwitterEmbed } from '@root/packages/frontend/amp/components/elements/TwitterEmbed';
 import { Comment } from '@root/packages/frontend/amp/components/elements/Comment';
@@ -69,6 +70,8 @@ export const Elements: React.FC<{
                 return <VideoVimeo key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
                 return <VideoFacebook key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+                return <VideoGuardian key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
