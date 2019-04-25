@@ -17,6 +17,7 @@ import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disc
 import { clean } from '@frontend/model/clean';
 import { Expandable } from '@frontend/amp/components/Expandable';
 import { Timeline } from '@frontend/amp/components/elements/Timeline';
+import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
 
 const clear = css`
     clear: both;
@@ -125,6 +126,8 @@ export const Elements: React.FC<{
                         pillar={pillar}
                     />
                 );
+            case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
+                return <YoutubeVideo element={element} pillar={pillar} />;
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
