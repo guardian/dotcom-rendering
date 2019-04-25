@@ -1,8 +1,4 @@
-import {
-    getNonEmptyString,
-    getBoolean,
-    getObject,
-} from './validators';
+import { getNonEmptyString, getBoolean, getObject } from './validators';
 
 export const extract = (data: {}): CommercialConfigType => ({
     googleAnalytics: {
@@ -50,9 +46,21 @@ export const extract = (data: {}): CommercialConfigType => ({
         revisionNumber: getNonEmptyString(data, 'page.meta.revisionNumber'),
         section: getNonEmptyString(data, 'page.section'),
         shouldHideAdverts: getBoolean(data, 'page.meta.shouldHideAds', false),
-        shouldHideReaderRevenue: getBoolean(data, 'page.meta.shouldHideReaderRevenue', false),
-        showNewRecipeDesign: getBoolean(data, 'page.meta.showNewRecipeDesign', false),
-        showRelatedContent: getBoolean(data, 'page.meta.showRelatedContent', false),
+        shouldHideReaderRevenue: getBoolean(
+            data,
+            'page.meta.shouldHideReaderRevenue',
+            false,
+        ),
+        showNewRecipeDesign: getBoolean(
+            data,
+            'page.meta.showNewRecipeDesign',
+            false,
+        ),
+        showRelatedContent: getBoolean(
+            data,
+            'page.meta.showRelatedContent',
+            false,
+        ),
     },
     switches: getObject(data, 'site.switches', {}),
 });
