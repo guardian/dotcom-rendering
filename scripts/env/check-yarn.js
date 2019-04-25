@@ -3,7 +3,7 @@ const exec = promisify(require('child_process').execFile);
 
 const ensure = require('./ensure');
 
-const YARN_VERSION = '1.9.4';
+const YARN_VERSION = '1.15.2';
 
 (async () => {
     try {
