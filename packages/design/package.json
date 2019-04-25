@@ -17,7 +17,7 @@
     "@babel/core": "^7.4.3",
     "@guardian/frontend-rendering": "0.1.0-alpha.1",
     "@guardian/guui": "2.0.0-alpha.1",
-    "@guardian/pasteup": "1.0.0-alpha.7",
+    "@guardian/pasteup": "1.0.0-alpha.8",
     "@mdx-js/mdx": "^0.20.3",
     "@mdx-js/react": "^1.0.0-alpha.12",
     "@mdx-js/tag": "^0.20.3",
