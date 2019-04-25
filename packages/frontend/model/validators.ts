@@ -134,7 +134,9 @@ export const getIdFromUrl = (
     queryParam?: string,
 ) => {
     const logErr = (actual: string, message: string) => {
-        throw new Error(`validate getIdFromURL error: The URL ${urlString} returned ${actual}. ${message}`);
+        throw new Error(
+            `validate getIdFromURL error: The URL ${urlString} returned ${actual}. ${message}`,
+        );
     };
 
     const url = parse(urlString);
