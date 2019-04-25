@@ -1,6 +1,6 @@
 {
   "name": "@guardian/pasteup",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "Guardian design tokens",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "files": [
     "breakpoints.js",
-    "fonts.js",
+    "typography.js",
     "mixins.js",
     "palette.js",
     "icons",
