@@ -57,6 +57,9 @@ const rowAdRegionClass = css`
     .amp-geo-group-eea & {
         display: block;
     }
+    .amp-geo-no-group & {
+        display: block;
+    }
 `;
 
 const adRegionClasses = {
