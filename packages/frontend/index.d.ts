@@ -201,6 +201,7 @@ declare namespace JSX {
         'amp-list': any;
         'amp-vimeo': any;
         'amp-facebook': any;
+        'amp-video': any;
         'amp-instagram': any;
         'amp-soundcloud': any;
         'amp-iframe': any;
