@@ -5,14 +5,23 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMetaNews } from '@frontend/amp/components/TopMetaNews';
 import { TopMetaOpinion } from '@frontend/amp/components/TopMetaOpinion';
+import { TopMetaPaidContent } from '@frontend/amp/components/TopMetaPaidContent';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { pillarPalette } from '../../lib/pillars';
+import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
+import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
-const body = (pillar: Pillar, isOpinion: boolean) => css`
-    background-color: ${isOpinion ? palette.opinion.faded : 'white'};
-    ${bulletStyle(pillar)}
-`;
+const body = (pillar: Pillar, tone: StyledTone) => {
+    const bgColorMap = {
+        'default-tone': palette.neutral[100],
+        'tone/comment': palette.opinion.faded,
+        'tone/advertisement-features': palette.neutral[100],
+    };
+    return css`
+        background-color: ${bgColorMap[tone]};
+        ${bulletStyle(pillar)}
+    `;
+};
 
 const bulletStyle = (pillar: Pillar) => css`
     .bullet {
@@ -37,18 +46,18 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const tone = data.tags.find(tag => tag.type === 'Tone');
-    const isOpinion = tone ? tone.id === 'tone/comment' : false;
-
-    const topMeta = isOpinion ? (
-        <TopMetaOpinion articleData={data} />
-    ) : (
-        <TopMetaNews articleData={data} />
-    );
+    const tone = getToneType(data.tags);
+    const topMeta = {
+        'default-tone': <TopMetaNews articleData={data} />,
+        'tone/comment': <TopMetaOpinion articleData={data} />,
+        'tone/advertisement-features': (
+            <TopMetaPaidContent articleData={data} />
+        ),
+    };
 
     return (
-        <InnerContainer className={body(pillar, isOpinion)}>
-            {topMeta}
+        <InnerContainer className={body(pillar, tone)}>
+            {topMeta[tone]}
             <Elements
                 pillar={pillar}
                 elements={data.elements}
