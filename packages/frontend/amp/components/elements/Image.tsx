@@ -47,12 +47,12 @@ export const Image: React.FC<{
                 width={image.width.toString()}
                 layout="responsive"
             />
-            {element.data.caption && (
+            {(element.data.caption || element.data.credit) && (
                 <figcaption className={captionStyle}>
                     <span className={iconStyle}>
                         <TriangleIcon />
                     </span>
-                    {element.data.caption}
+                    {element.data.caption} {element.data.credit}
                 </figcaption>
             )}
         </figure>
