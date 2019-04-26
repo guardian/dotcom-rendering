@@ -6,7 +6,11 @@ export const VideoGuardian: React.FC<{
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     return (
+<<<<<<< HEAD
         <Caption captionText={element.caption} pillar={pillar} dirtyHtml={true}>
+=======
+        <Caption captionText={element.caption} pillar={pillar}>
+>>>>>>> Reimplement captions in videos
             <amp-video controls={''} width="16" height="9" layout="responsive">
                 <div fallback={''}>
                     Sorry, your browser is unable to play this video.
