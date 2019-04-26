@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css, cx } from 'emotion';
@@ -24,11 +25,32 @@ export const Caption: React.FC<{
     captionText: string;
     pillar: Pillar;
     padCaption?: boolean;
-}> = ({ captionText, pillar, padCaption = false, children }) => {
+    dirtyHtml?: boolean;
+}> = ({
+    captionText,
+    pillar,
+    padCaption = false,
+    dirtyHtml = false,
+    children,
+}) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
     `;
+
+    const getCaptionHtml = () => {
+        if (dirtyHtml) {
+            return (
+                <span
+                    // tslint:disable-line:react-no-dangerous-html
+                    dangerouslySetInnerHTML={{
+                        __html: captionText,
+                    }}
+                />
+            );
+        }
+        return captionText;
+    };
 
     return (
         <figure className={figureStyle}>
@@ -43,7 +65,7 @@ export const Caption: React.FC<{
                         <span className={iconStyle}>
                             <TriangleIcon />
                         </span>
-                        {captionText}
+                        {getCaptionHtml()}
                     </figcaption>
                 </>
             )}
