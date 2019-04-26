@@ -36,7 +36,6 @@ export const Caption: React.FC<{
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
     `;
-
     const getCaptionHtml = () => {
         if (dirtyHtml) {
             return (
@@ -45,6 +44,7 @@ export const Caption: React.FC<{
                     dangerouslySetInnerHTML={{
                         __html: captionText,
                     }}
+                    key={'caption'}
                 />
             );
         }
