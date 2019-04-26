@@ -51,20 +51,6 @@ export const Caption: React.FC<{
         return captionText;
     };
 
-    const getCaptionHtml = () => {
-        if (dirtyHtml) {
-            return (
-                <span
-                    // tslint:disable-line:react-no-dangerous-html
-                    dangerouslySetInnerHTML={{
-                        __html: captionText,
-                    }}
-                />
-            );
-        }
-        return captionText;
-    };
-
     return (
         <figure className={figureStyle}>
             {children}
