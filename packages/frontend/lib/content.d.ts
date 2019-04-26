@@ -43,7 +43,6 @@ interface YoutubeBlockElement {
 }
 
 // Note, this is a Video Embed rather than the above Media Atom
-<<<<<<< HEAD
 interface VideoYoutube {
     _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
     url: string;
@@ -78,26 +77,6 @@ interface VideoAssets {
     url: string;
     mimeType: string;
 }
-=======
-interface VideoYoutubeBlockElement {
-    _type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
-    url: string;
-    caption: string;
-}
-
-interface VideoVimeoBlockElement {
-    _type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
-    url: string;
-    caption: string;
-}
-
-interface VideoFacebookBlockElement {
-    _type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
-    url: string;
-    caption: string;
-}
-
->>>>>>> Add Youtube, Vimeo and Facebook Video Block Elements
 interface InstagramBlockElement {
     _type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
     html: string;
@@ -219,16 +198,10 @@ type CAPIElement =
     | SubheadingBlockElement
     | ImageBlockElement
     | YoutubeBlockElement
-<<<<<<< HEAD
     | VideoYoutube
     | VideoVimeo
     | VideoFacebook
     | VideoGuardian
-=======
-    | VideoYoutubeBlockElement
-    | VideoVimeoBlockElement
-    | VideoFacebookBlockElement
->>>>>>> Add Youtube, Vimeo and Facebook Video Block Elements
     | InstagramBlockElement
     | TweetBlockElement
     | RichLinkBlockElement
