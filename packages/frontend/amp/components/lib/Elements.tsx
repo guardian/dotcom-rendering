@@ -68,7 +68,6 @@ export const Elements: React.FC<{
                 return (
                     <VideoYoutube key={i} element={element} pillar={pillar} />
                 );
-
             case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
                 return (
                     <VideoGuardian key={i} element={element} pillar={pillar} />
@@ -80,7 +79,6 @@ export const Elements: React.FC<{
                 return (
                     <VideoFacebook key={i} element={element} pillar={pillar} />
                 );
-
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
