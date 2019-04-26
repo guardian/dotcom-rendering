@@ -1,5 +1,4 @@
 import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css, cx } from 'emotion';
