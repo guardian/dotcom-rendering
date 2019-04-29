@@ -97,9 +97,7 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                         <InfoIcon />
                     </label>
                     <figcaption className={captionStyle}>
-                        {element.data.caption}
-                        <br />
-                        {element.data.credit}
+                        {element.data.caption} {element.data.credit}
                     </figcaption>
                 </>
             )}
