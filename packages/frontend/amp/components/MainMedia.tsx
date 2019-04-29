@@ -85,7 +85,8 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                 width={image.width.toString()}
                 layout="responsive"
             />
-            {(element.data.caption || element.data.credit) && (
+            {(element.data.caption ||
+                (element.data.credit && element.displayCredit)) && (
                 <>
                     <input
                         aria-checked={false}
@@ -97,7 +98,8 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                         <InfoIcon />
                     </label>
                     <figcaption className={captionStyle}>
-                        {element.data.caption} {element.data.credit}
+                        {element.data.caption}{' '}
+                        {element.displayCredit && element.data.credit}
                     </figcaption>
                 </>
             )}
