@@ -34,7 +34,7 @@ stories.add('Caption', () => {
             padCaption={padding}
             dirtyHtml={captionValue !== plainCaption}
         >
-            <img src="https://placekitten.com/420/320?image=2" />
+            <img src="https://placekitten.com/420/320?image=2" alt="A kitten" />
         </Caption>
     );
 });
