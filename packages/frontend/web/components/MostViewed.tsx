@@ -233,7 +233,7 @@ interface Tab {
 }
 
 interface Props {
-    sectionName: string;
+    sectionName?: string;
 }
 
 export class MostViewed extends Component<Props, { selectedTabIndex: number }> {

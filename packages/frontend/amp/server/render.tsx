@@ -31,7 +31,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             title: CAPI.headline,
             fbPixelaccount: '279880532344561',
             comscoreID: '6035250',
-            section: CAPI.sectionName,
+            section: CAPI.sectionName || '',
             contentType: CAPI.contentType,
             id: CAPI.pageId,
             beacon: `${CAPI.beaconURL}/count/pv.gif`,

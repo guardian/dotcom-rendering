@@ -31,7 +31,7 @@ export const Elements: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
     edition: Edition;
-    section: string;
+    section?: string;
     contentType: string;
     switches: Switches;
     commercialProperties: CommercialProperties;

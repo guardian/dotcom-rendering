@@ -125,7 +125,7 @@ export const extract = (data: {}): CAPIType => {
     );
     const tags = getTags(data);
     const isImmersive = getBoolean(data, 'page.meta.isImmersive', false);
-    const sectionName = getNonEmptyString(data, 'page.section');
+    const sectionName = getString(data, 'page.section', '');
 
     const leadContributor: TagType = tags.filter(
         tag => tag.type === 'Contributor',

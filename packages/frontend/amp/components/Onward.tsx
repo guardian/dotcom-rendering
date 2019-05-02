@@ -73,7 +73,7 @@ export const Onward: React.FC<{
     shouldHideAds: boolean;
     pageID: string;
     webURL: string;
-    sectionID: string;
+    sectionID?: string;
     hasStoryPackage: boolean;
     hasRelated: boolean;
     seriesTags: TagType[];
