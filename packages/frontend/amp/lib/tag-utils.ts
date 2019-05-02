@@ -15,14 +15,19 @@ export type StyledTone =
     | 'default-tone';
 
 export const getToneType = (tags: TagType[]): StyledTone => {
-    const tone: string = filterForTagsOfType(tags, 'Tone')[0].id;
+    const defaultTone = 'default-tone';
+    const tone = filterForTagsOfType(tags, 'Tone')[0];
 
-    switch (tone) {
+    if (!tone) {
+        return defaultTone;
+    }
+
+    switch (tone.id) {
         case 'tone/advertisement-features':
             return 'tone/advertisement-features';
         case 'tone/comment':
             return 'tone/comment';
         default:
-            return 'default-tone';
+            return defaultTone;
     }
 };
