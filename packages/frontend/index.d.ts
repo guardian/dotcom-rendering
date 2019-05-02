@@ -40,9 +40,9 @@ interface Branding {
     sponsorName: string;
     logo: {
         src: string;
-        width: number;
-        height: number;
         link: string;
+        label: string;
+        dimensions: { width: number, height: number }
     };
     aboutThisLink: string;
 }

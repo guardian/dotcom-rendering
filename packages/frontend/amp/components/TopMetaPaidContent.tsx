@@ -53,8 +53,8 @@ const PaidForByLogo: React.FC<{
             >
                 <amp-img
                     src={logo.src}
-                    width="280px"
-                    height="180px"
+                    width={`${logo.dimensions.width}px`}
+                    height={`${logo.dimensions.height}px`}
                     alt={sponsorName}
                 />
             </a>
