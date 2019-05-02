@@ -33,7 +33,7 @@ export interface ArticleModel {
     pillar: Pillar;
     sectionLabel?: string;
     sectionUrl?: string;
-    sectionName: string;
+    sectionName?: string;
     tags: TagType[];
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];

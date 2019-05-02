@@ -163,7 +163,7 @@ const ampAdElem = (
 
 export const Ad: React.SFC<{
     edition: Edition;
-    section: string;
+    section?: string;
     contentType: string;
     config: CommercialConfig;
     commercialProperties: CommercialProperties;
@@ -172,7 +172,7 @@ export const Ad: React.SFC<{
         {ampAdElem(
             'US',
             edition,
-            section,
+            section || '',
             contentType,
             config,
             commercialProperties,
@@ -180,7 +180,7 @@ export const Ad: React.SFC<{
         {ampAdElem(
             'AU',
             edition,
-            section,
+            section || '',
             contentType,
             config,
             commercialProperties,
@@ -188,7 +188,7 @@ export const Ad: React.SFC<{
         {ampAdElem(
             'ROW',
             edition,
-            section,
+            section || '',
             contentType,
             config,
             commercialProperties,

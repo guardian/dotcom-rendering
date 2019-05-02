@@ -129,7 +129,7 @@ interface CAPIType {
     isImmersive: boolean;
     sectionLabel: string;
     sectionUrl: string;
-    sectionName: string;
+    sectionName?: string;
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
