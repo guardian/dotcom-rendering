@@ -137,12 +137,12 @@ describe('extract-capi', () => {
         expect(sectionName).toBe(testSection);
     });
 
-    it('throws error if section missing', () => {
+    it('returns empty string if section missing', () => {
         testData.page.section = null;
 
-        expect(() => {
-            extract(testData);
-        }).toThrow();
+        const { sectionName } = extract(testData);
+
+        expect(sectionName).toBe('');
     });
 
     it('returns editionLongForm if edition available', () => {
