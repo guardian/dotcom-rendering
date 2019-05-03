@@ -4,7 +4,6 @@ import { bylineTokens } from '@frontend/amp/lib/byline-tokens';
 export const Byline: React.FC<{
     byline: string;
     tags: TagType[];
-    pillar: Pillar;
     guardianBaseURL: string;
     className?: string;
 }> = ({ byline, tags, guardianBaseURL, className }) => {

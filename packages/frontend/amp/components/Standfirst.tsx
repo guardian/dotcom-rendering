@@ -1,15 +1,16 @@
 import React from 'react';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
-// TODO - unclear if we need the list styles as well here
+// listStyles are used in paid content standfirsts, with a fallback for normal pillars
 const listStyles = (pillar: Pillar) => css`
     li {
         margin-bottom: 6px;
         padding-left: 20px;
-        ${headline(2)};
+        ${pillar === 'labs' ? textSans(7) : headline(2)};
+        ${pillar === 'labs' && 'font-weight: 700;'}
         p {
             display: inline;
         }
@@ -22,21 +23,23 @@ const listStyles = (pillar: Pillar) => css`
         height: 12px;
         width: 12px;
         margin-right: 8px;
-        background-color: ${palette.neutral[86]};
+        background-color: ${pillar === 'labs'
+            ? palette.neutral[60]
+            : palette.neutral[86]};
         margin-left: -20px;
     }
 `;
 
 const standfirstCss = pillarMap(
     pillar => css`
-        ${headline(2)};
+        ${pillar === 'labs' ? textSans(7) : headline(2)};
         font-weight: 100;
         color: ${palette.neutral[7]};
         margin-bottom: 12px;
         ${listStyles(pillar)};
         p {
             margin-bottom: 8px;
-            font-weight: 200;
+            ${pillar === 'labs' ? 'font-weight: 700;' : 'font-weight: 200;'}
         }
         strong {
             font-weight: 700;
@@ -48,9 +51,20 @@ const standfirstLinks = pillarMap(
     pillar =>
         css`
             a {
-                color: ${pillarPalette[pillar].dark};
+                color: ${pillar === 'labs'
+                    ? pillarPalette[pillar].main
+                    : pillarPalette[pillar].dark};
                 text-decoration: none;
-                border-bottom: 1px solid ${palette.neutral[86]};
+                border-bottom: 1px solid
+                    ${pillar === 'labs'
+                        ? palette.neutral[60]
+                        : palette.neutral[86]};
+            }
+            a:hover {
+                border-bottom: 1px solid
+                    ${pillar === 'labs'
+                        ? palette.neutral[7]
+                        : palette.neutral[86]};
             }
         `,
 );

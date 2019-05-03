@@ -14,7 +14,7 @@ const headerStyle = css`
     margin: 0 -10px;
     padding: 0 10px;
     height: 58px;
-    background-color: ${palette.labs.main};
+    background-color: ${palette.labs.bright};
 
     ${mobileLandscape} {
         padding: 0 20px;
@@ -84,7 +84,7 @@ const logoStyle = css`
 
 const aStyle = css`
     display: inline-block;
-    color: ${palette.labs.main};
+    color: ${palette.labs.bright};
     text-decoration: none;
     margin-top: 10px;
     &:hover {
@@ -93,7 +93,7 @@ const aStyle = css`
 `;
 
 const iconStyle = css`
-    fill: ${palette.labs.main};
+    fill: ${palette.labs.bright};
     margin: 0 0;
     padding-right: 3px;
     vertical-align: middle;

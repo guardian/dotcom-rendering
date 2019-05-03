@@ -9,19 +9,18 @@ import { Standfirst } from '@frontend/amp/components/Standfirst';
 import { PaidForBand } from '@frontend/amp/components/PaidForBand';
 
 import { palette } from '@guardian/pasteup/palette';
-import { headline, body } from '@guardian/pasteup/typography';
+import { textSans, body } from '@guardian/pasteup/typography';
 
-// TODO typography styling needs to be reviewed -> TextSans?
 const headerStyle = css`
-    ${headline(6)};
-    font-weight: 500;
-    padding-bottom: 24px;
+    ${textSans(8)};
+    font-weight: 400;
     padding-top: 3px;
+    padding-bottom: 40px;
     color: ${palette.neutral[7]};
 `;
 
-const bylineStyle = (pillar: Pillar) => css`
-    ${headline(2)};
+const bylineStyle = css`
+    ${body(2)};
     color: ${palette.neutral[7]};
     padding-bottom: 8px;
     font-style: italic;
@@ -32,18 +31,31 @@ const bylineStyle = (pillar: Pillar) => css`
         text-decoration: none;
         font-style: normal;
     }
+    a:hover {
+        text-decoration: underline;
+    }
 `;
 
 const paidForLogoLabelStyle = css`
-    ${body(1)};
+    ${textSans(2)};
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: ${palette.neutral[46]};
+`;
+const paidForLogoStyle = css`
+    border-top: 1px solid ${palette.neutral[60]};
+    padding-top: 4px;
+    margin-top: 3px;
+    margin-bottom: 12px;
 `;
 
 const PaidForByLogo: React.FC<{
     branding: Branding;
 }> = ({ branding }) => {
     const { logo, sponsorName } = branding;
+
     return (
-        <div>
+        <div className={paidForLogoStyle}>
             <div className={paidForLogoLabelStyle}>Paid for by</div>
             {/* tslint:disable-next-line: react-a11y-anchors */}
             <a
@@ -53,8 +65,8 @@ const PaidForByLogo: React.FC<{
             >
                 <amp-img
                     src={logo.src}
-                    width={`${logo.dimensions.width}px`}
-                    height={`${logo.dimensions.height}px`}
+                    width={`140px`}
+                    height={`90px`}
                     alt={sponsorName}
                 />
             </a>
@@ -77,33 +89,25 @@ export const TopMetaPaidContent: React.FC<{
             <PaidForBand />
 
             {articleData.mainMediaElements.map((element, i) => (
-                <MainMedia
-                    key={i}
-                    element={element}
-                    pillar={articleData.pillar}
-                />
+                <MainMedia key={i} element={element} pillar="labs" />
             ))}
 
             <Headline headlineText={articleData.headline} />
 
             {!!branding && <PaidForByLogo branding={branding} />}
 
-            <Standfirst
-                text={articleData.standfirst}
-                pillar={articleData.pillar}
-            />
+            <Standfirst text={articleData.standfirst} pillar="labs" />
 
             <Byline
                 byline={articleData.author.byline}
                 tags={articleData.tags}
-                pillar={articleData.pillar}
                 guardianBaseURL={articleData.guardianBaseURL}
-                className={bylineStyle(articleData.pillar)}
+                className={bylineStyle}
             />
 
             <TopMetaExtras
                 sharingUrls={articleData.sharingUrls}
-                pillar={articleData.pillar} // pillar  defualt / none == black for paid?
+                pillar="labs" // pillar  defualt / none == black for paid?
                 ageWarning={articleData.ageWarning}
                 webPublicationDate={articleData.webPublicationDateDisplay}
                 twitterHandle={articleData.author.twitterHandle}

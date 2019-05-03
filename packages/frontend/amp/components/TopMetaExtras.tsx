@@ -32,9 +32,11 @@ const metaExtras = css`
     margin-bottom: 6px;
 `;
 
-const borders = css`
-    border-top: 1px solid ${palette.neutral[86]};
-    border-bottom: 1px solid ${palette.neutral[86]};
+const borders = (pillar: Pillar) => css`
+    border-top: 1px solid
+        ${pillar === 'labs' ? palette.neutral[60] : palette.neutral[86]};
+    border-bottom: 1px solid
+        ${pillar === 'labs' ? palette.neutral[60] : palette.neutral[86]};
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -120,7 +122,7 @@ export const TopMetaExtras: React.FC<{
         <TwitterHandle handle={twitterHandle} />
         <WebPublicationDate date={webPublicationDate} />
 
-        <div className={borders}>
+        <div className={borders(pillar)}>
             <ShareIcons
                 sharingUrls={sharingUrls}
                 pillar={pillar}
