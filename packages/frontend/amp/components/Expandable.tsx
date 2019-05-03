@@ -134,6 +134,9 @@ export const Expandable: React.FC<{
                     class={imageStyle}
                     src={img}
                     alt={`Image for ${title} explainer`}
+                    layout="fixed"
+                    width="100"
+                    height="100"
                 />
             )}
             <div // tslint:disable-line:react-no-dangerous-html
