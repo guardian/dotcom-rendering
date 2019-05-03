@@ -3,6 +3,7 @@ import { extractCritical } from 'emotion-server';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { CacheProvider } from '@emotion/core';
 import { cache } from 'emotion';
+import escape from 'lodash.escape';
 import resetCSS from /* preval */ '@frontend/lib/reset-css';
 import { getFontsCss } from '@frontend/lib/fonts-css';
 
@@ -48,7 +49,7 @@ export const document = ({
 
     <!-- SEO related meta -->
     <title>${title}</title>
-    <meta name="description" content="${metadata.description}" />
+    <meta name="description" content="${escape(metadata.description)}" />
 
     <link rel="canonical" href="${metadata.canonicalURL}" />
     <meta name="viewport" content="width=device-width,minimum-scale=1">
