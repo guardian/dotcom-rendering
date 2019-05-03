@@ -14,6 +14,7 @@ export const pillarPalette: { [K in Pillar]: PillarColours } = {
     sport: palette.sport,
     culture: palette.culture,
     lifestyle: palette.lifestyle,
+    labs: palette.labs,
 };
 
 /*
@@ -28,6 +29,7 @@ export const pillarMap: <T>(
     sport: f('sport'),
     culture: f('culture'),
     lifestyle: f('lifestyle'),
+    labs: f('labs'),
 });
 /*
 Further notes on this function:
