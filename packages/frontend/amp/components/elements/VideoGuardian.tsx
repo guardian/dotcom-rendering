@@ -18,7 +18,7 @@ export const VideoGuardian: React.FC<{
                     encoding =>
                         encoding.mimeType.includes('video') && (
                             <source
-                                src={encoding.url}
+                                src={encoding.url.replace('http:', 'https:')} // Force https as CAPI doesn't always send them
                                 type={encoding.mimeType}
                             />
                         ),
