@@ -127,6 +127,7 @@ interface CAPIType {
     tags: TagType[];
     pillar: Pillar;
     isImmersive: boolean;
+    isPaidContent: boolean;
     sectionLabel: string;
     sectionUrl: string;
     sectionName?: string;

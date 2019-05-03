@@ -361,6 +361,7 @@ export const CAPI: CAPIType = {
     },
     ageWarning: 'This article is over 1 year old',
     isImmersive: false,
+    isPaidContent: false,
     subMetaSectionLinks: [
         {
             url: '/money/ticket-prices',

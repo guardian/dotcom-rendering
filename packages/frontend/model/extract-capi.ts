@@ -116,6 +116,11 @@ const getCommercialProperties = (data: {}): CommercialProperties => {
     ) as CommercialProperties;
 };
 
+// TODO do we need to account for (tag.type === 'paid-content')?
+const getIsPaidContent = (tags: TagType[]): boolean => tags.some(
+    tag => tag.type === 'Tone' && tag.id === 'tone/advertisement-features'
+);
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -125,6 +130,7 @@ export const extract = (data: {}): CAPIType => {
     );
     const tags = getTags(data);
     const isImmersive = getBoolean(data, 'page.meta.isImmersive', false);
+    const isPaidContent = getIsPaidContent(tags);
     const sectionName = getString(data, 'page.section', '');
 
     const leadContributor: TagType = tags.filter(
@@ -146,6 +152,7 @@ export const extract = (data: {}): CAPIType => {
         editionLongForm,
         editionId,
         isImmersive,
+        isPaidContent,
         webPublicationDateDisplay: getNonEmptyString(
             data,
             'page.webPublicationDateDisplay',

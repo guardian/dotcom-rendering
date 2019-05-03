@@ -197,6 +197,34 @@ describe('extract-capi', () => {
         expect(isImmersive).toBe(false);
     });
 
+    it('returns isPaidContent as true if paid content', () => {
+        testData.page.tags.all = [
+            {
+                properties: {
+                    id: 'money/ticket-prices',
+                    tagType: 'Keyword',
+                    webTitle: 'Ticket prices',
+                },
+            },
+            {
+                properties: {
+                    id: 'tone/advertisement-features',
+                    tagType: 'Tone',
+                    webTitle: 'Consumer affairs',
+                },
+            },
+        ];
+        const { isPaidContent } = extract(testData);
+
+        expect(isPaidContent).toBe(true);
+    });
+
+    it('returns isPaidContent as false if not paid content', () => {
+        const { isPaidContent } = extract(testData);
+
+        expect(isPaidContent).toBe(false);
+    });
+
     it('returns webPublicationDateDisplay if webPublicationDateDisplay available', () => {
         const testWebPublicationDateDisplay = 'Fri 10 Mar 2017 19.15 GMT';
 
