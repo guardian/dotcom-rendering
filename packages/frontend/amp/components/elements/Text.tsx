@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { body } from '@guardian/pasteup/typography';
+import { sanitise } from '@frontend/amp/lib/sanitise-html';
 
 // Note, this should only apply basic text styling. It is a case where we want
 // to re-use styling, but generally we should avoid this as it couples
@@ -39,7 +40,7 @@ export const Text: React.FC<{
     <span
         className={TextStyle(pillar)}
         dangerouslySetInnerHTML={{
-            __html: html,
+            __html: sanitise(html),
         }}
     />
 );
