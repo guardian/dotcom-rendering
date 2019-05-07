@@ -193,6 +193,19 @@ interface TimelineBlockElement {
     events: TimelineEvent[];
 }
 
+interface InteractiveMarkupBlockElement {
+    _type: 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement';
+    id: string;
+    html?: string;
+    css?: string;
+    js?: string;
+}
+
+interface InteractiveUrlElement {
+    _type: 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement';
+    url: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -213,4 +226,6 @@ type CAPIElement =
     | QABlockElement
     | GuideBlockElement
     | ProfileBlockElement
-    | TimelineBlockElement;
+    | TimelineBlockElement
+    | InteractiveMarkupBlockElement
+    | InteractiveUrlElement;
