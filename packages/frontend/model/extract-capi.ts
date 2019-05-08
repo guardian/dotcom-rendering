@@ -181,7 +181,7 @@ export const extract = (data: {}): CAPIType => {
             .filter(Boolean),
         pageId: getNonEmptyString(data, 'page.pageId'),
         sharingUrls: getSharingUrls(data),
-        pillar: findPillar(getString(data, 'page.pillar', '')) || 'news',
+        pillar: findPillar(getString(data, 'page.pillar', ''), tags) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
         sectionLabel: getString(data, 'page.sectionLabel'),
         sectionUrl: getString(data, 'page.sectionUrl'),

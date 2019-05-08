@@ -398,10 +398,10 @@ describe('extract-capi', () => {
 
         findPillar.mockReturnValueOnce(testPillar);
 
-        const { pillar } = extract(testData);
+        const { tags, pillar } = extract(testData);
 
         expect(pillar).toBe(testPillar);
-        expect(findPillar).toHaveBeenCalledWith(testPillar);
+        expect(findPillar).toHaveBeenCalledWith(testPillar, tags);
     });
 
     it('defaults pillar to "news" if not valid', () => {
@@ -411,10 +411,10 @@ describe('extract-capi', () => {
 
         findPillar.mockReturnValueOnce(undefined);
 
-        const { pillar } = extract(testData);
+        const { tags, pillar } = extract(testData);
 
         expect(pillar).toBe('news');
-        expect(findPillar).toHaveBeenCalledWith(testPillar);
+        expect(findPillar).toHaveBeenCalledWith(testPillar, tags);
     });
 
     it('returns ageWarning as undefined if article not in tone/news', () => {
