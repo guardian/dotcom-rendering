@@ -65,7 +65,7 @@ const link = css`
     color: ${palette.neutral[100]};
     text-decoration: none;
     display: block;
-    ${textSans(7)};
+    ${textSans(8)};
     font-weight: 400;
     outline: none;
     padding: 8px 10px 8px 50px;

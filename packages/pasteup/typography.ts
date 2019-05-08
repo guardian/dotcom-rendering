@@ -1,7 +1,7 @@
 type Category = 'headline' | 'body' | 'textSans';
 type HeadlineLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 type BodyLevel = 1 | 2 | 3 | 4;
-type TextSansLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+type TextSansLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export const serif = {
     headline: ['GH Guardian Headline', 'Georgia', 'serif'].join(', '),
@@ -43,7 +43,9 @@ const fontScaleMapping: any = {
         4: { fontSize: 14, lineHeight: 22 },
         5: { fontSize: 16, lineHeight: 22 },
         6: { fontSize: 18, lineHeight: 18 },
-        7: { fontSize: 20, lineHeight: 20 },
+        7: { fontSize: 19, lineHeight: 27 },
+        8: { fontSize: 20, lineHeight: 22 },
+        9: { fontSize: 38, lineHeight: 42 },
     },
 };
 
