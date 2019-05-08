@@ -10,6 +10,7 @@ import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
 import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 const pillarFill = pillarMap(
     pillar =>
@@ -24,7 +25,7 @@ const shareIconsListItem = css`
     min-width: 32px;
 `;
 
-const shareIcon = (colour: string) => css`
+const shareIcon = (pillar: Pillar) => css`
     border: 1px solid ${palette.neutral[86]};
     white-space: nowrap;
     overflow: hidden;
@@ -51,10 +52,14 @@ const shareIcon = (colour: string) => css`
     }
 
     :hover {
-        background-color: ${colour};
-        border-color: ${colour};
+        background-color: ${pillarPalette[pillar].main};
+        border-color: ${pillarPalette[pillar].main};
         fill: white;
     }
+`;
+
+const shareIconLabs = css`
+    border: 1px solid ${palette.neutral[60]};
 `;
 
 interface ShareListItemType {
@@ -123,9 +128,10 @@ export const ShareIcons: React.FC<{
                                 {userMessage}
                             </span>
                             <span
-                                className={cx(
-                                    shareIcon(pillarPalette[pillar].main),
-                                    pillarFill[pillar],
+                                className={composeLabsCSS(
+                                    pillar,
+                                    cx(shareIcon(pillar), pillarFill[pillar]),
+                                    shareIconLabs,
                                 )}
                             >
                                 <Icon />

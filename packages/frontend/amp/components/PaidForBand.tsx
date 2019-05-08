@@ -14,7 +14,7 @@ const headerStyle = css`
     margin: 0 -10px;
     padding: 0 10px;
     height: 58px;
-    background-color: ${palette.labs.main};
+    background-color: ${palette.labs.bright};
 
     ${mobileLandscape} {
         padding: 0 20px;
@@ -44,8 +44,8 @@ const aboutButtonStyle = css`
     margin-left: 10px;
     padding: 10px;
     border: 0;
-    border-left: solid 1px ${palette.labs.dark};
-    border-right: solid 1px ${palette.labs.dark};
+    border-left: solid 1px ${palette.labs.faded};
+    border-right: solid 1px ${palette.labs.faded};
     background: transparent;
     color: inherit;
     cursor: pointer;
@@ -84,7 +84,7 @@ const logoStyle = css`
 
 const aStyle = css`
     display: inline-block;
-    color: ${palette.labs.main};
+    color: ${palette.labs.bright};
     text-decoration: none;
     margin-top: 10px;
     &:hover {
@@ -93,7 +93,7 @@ const aStyle = css`
 `;
 
 const iconStyle = css`
-    fill: ${palette.labs.main};
+    fill: ${palette.labs.bright};
     margin: 0 0;
     padding-right: 3px;
     vertical-align: middle;
