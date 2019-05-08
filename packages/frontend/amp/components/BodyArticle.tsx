@@ -13,7 +13,7 @@ const body = (pillar: Pillar, tone: StyledTone) => {
     const bgColorMap = {
         'default-tone': palette.neutral[100],
         'tone/comment': palette.opinion.faded,
-        'tone/advertisement-features': palette.neutral[100],
+        'tone/advertisement-features': palette.neutral[85],
     };
     return css`
         background-color: ${bgColorMap[tone]};

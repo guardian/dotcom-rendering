@@ -5,6 +5,7 @@ import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import CommentIcon from '@guardian/pasteup/icons/comment.svg';
+import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 const guardianLines = css`
     background-image: repeating-linear-gradient(
@@ -19,6 +20,17 @@ const guardianLines = css`
     background-size: 1px 13px;
     padding-top: 18px;
     margin-top: 12px;
+`;
+
+// Labs paid content only
+const guardianLinesLabs = css`
+    background-image: repeating-linear-gradient(
+        to bottom,
+        ${palette.neutral[60]},
+        ${palette.neutral[60]} 1px,
+        transparent 1px,
+        transparent 4px
+    );
 `;
 
 const linkStyle = (pillar: Pillar) => css`
@@ -56,6 +68,11 @@ const keywordListStyle = css`
     margin-bottom: 6px;
 `;
 
+// Labs paid content only
+const keywordListStyleLabs = css`
+    border-bottom: 1px solid ${palette.neutral[60]};
+`;
+
 const sectionLinkStyle = (pillar: Pillar) => css`
     position: relative;
     padding-left: 5px;
@@ -65,7 +82,7 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     ${textSans(5)};
     :after {
         content: '/';
-        ${textSans(7)};
+        ${textSans(8)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -155,10 +172,24 @@ export const SubMeta: React.FC<{
 
     return (
         <>
-            <div className={guardianLines}>
+            <div
+                className={composeLabsCSS(
+                    pillar,
+                    guardianLines,
+                    guardianLinesLabs,
+                )}
+            >
                 <span className={labelStyle}>Topics</span>
                 <ul className={sectionListStyle}>{sectionListItems}</ul>
-                <ul className={keywordListStyle}>{keywordListItems}</ul>
+                <ul
+                    className={composeLabsCSS(
+                        pillar,
+                        keywordListStyle,
+                        keywordListStyleLabs,
+                    )}
+                >
+                    {keywordListItems}
+                </ul>
             </div>
             <ShareIcons
                 className={shareIcons}

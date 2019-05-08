@@ -2,8 +2,9 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { body } from '@guardian/pasteup/typography';
 import { sanitise } from '@frontend/amp/lib/sanitise-html';
+import { body, textSans } from '@guardian/pasteup/typography';
+import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';
 
 // Note, this should only apply basic text styling. It is a case where we want
 // to re-use styling, but generally we should avoid this as it couples
@@ -33,12 +34,31 @@ export const TextStyle = (pillar: Pillar) => css`
     ${body(3)};
 `;
 
+// Labs paid content only
+const textStyleLabs = (pillar: Pillar) => css`
+    p {
+        ${textSans(7)}
+    }
+    a {
+        color: ${pillarPalette[pillar].main};
+        border-bottom: 1px solid ${palette.neutral[60]};
+        :hover {
+            border-bottom: 1px solid ${pillarPalette[pillar].main};
+        }
+    }
+    ${textSans(7)}
+`;
+
 export const Text: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (
     <span
-        className={TextStyle(pillar)}
+        className={composeLabsCSS(
+            pillar,
+            TextStyle(pillar),
+            textStyleLabs(pillar),
+        )}
         dangerouslySetInnerHTML={{
             __html: sanitise(html),
         }}
