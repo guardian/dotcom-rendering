@@ -12,6 +12,7 @@ export interface AllPillarColours {
     sport: PillarColours;
     culture: PillarColours;
     lifestyle: PillarColours;
+    labs: PillarColours;
 }
 export interface OtherColours {
     highlight: { main: colour; dark: colour };
@@ -20,6 +21,7 @@ export interface OtherColours {
         20: colour;
         46: colour;
         60: colour;
+        85: colour;
         86: colour;
         93: colour;
         97: colour;
@@ -115,18 +117,22 @@ const neutral = {
     20: '#333333',
     46: '#767676',
     60: '#999999',
+    85: '#d9d9d9',
     86: '#dcdcdc',
     93: '#ededed',
     97: '#f6f6f6',
     100: '#ffffff',
 };
 
-const specialReport = { dark: '#3f464a' };
-
-const labs = {
-    dark: '#65a897',
-    main: '#69d1ca',
+const labs: PillarColours & {} = {
+    dark: neutral[7],
+    main: neutral[7],
+    bright: '#69d1ca', // bright teal
+    pastel: '', // TODO
+    faded: '#65a897', // dark teal
 };
+
+const specialReport = { dark: '#3f464a' };
 
 const contrasts = {
     darkOnLight: {
@@ -152,10 +158,10 @@ export const palette: AllPillarColours & OtherColours & Appearances = {
     sport,
     culture,
     lifestyle,
+    labs,
     highlight,
     neutral,
     specialReport,
-    labs,
     green,
     brand,
     state,

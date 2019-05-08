@@ -4,7 +4,7 @@ interface ArticleProps {
     config: ConfigType;
 }
 
-type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' | 'labs';
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
