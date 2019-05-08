@@ -1,6 +1,17 @@
 import { pillarNames } from '@frontend/lib/pillars';
 
-export const findPillar: (name: string) => Pillar | undefined = name => {
+export const findPillar: (
+    name: string,
+    tags?: TagType[],
+) => Pillar | undefined = (name, tags?) => {
+    // Flag paid content for Labs pillar (for styling purposes)
+    const isPaidContent = (tag: any) =>
+        tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
+
+    if (tags && tags.some(isPaidContent)) {
+        return 'labs';
+    }
+
     const pillar: string = name.toLowerCase();
     // The pillar name is "arts" in CAPI, but "culture" everywhere else,
     // therefore we perform this substitution here.
