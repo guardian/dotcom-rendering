@@ -319,7 +319,7 @@ export const CAPI: CAPIType = {
         twitterHandle: 'ByRobDavies',
         email: 'none',
     },
-    elements: [],
+    blocks: [],
     pageId:
         'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
     sharingUrls: {

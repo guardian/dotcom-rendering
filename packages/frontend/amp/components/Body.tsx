@@ -60,7 +60,7 @@ export const Body: React.FC<{
             {topMeta[tone]}
             <Elements
                 pillar={pillar}
-                elements={data.elements}
+                elements={data.blocks[0] || []}
                 // stuff for ads
                 edition={data.editionId}
                 section={data.sectionName}

@@ -16,9 +16,10 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const linkedData = extractLinkedData(body);
 
         const config = extractConfig(body);
+        const elements = ([] as CAPIElement[]).concat(...CAPI.blocks);
 
         const scripts = [
-            ...extractScripts(CAPI.elements, CAPI.mainMediaElements),
+            ...extractScripts(elements, CAPI.mainMediaElements),
             ...(config.switches.subscribeWithGoogle
                 ? getSubscribeWithGoogleExtensionScripts(
                       config.subscribeWithGoogleApiUrl,

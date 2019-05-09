@@ -337,7 +337,7 @@ describe('extract-capi', () => {
         expect(author.twitterHandle).toBe(testTwitterHandle);
     });
 
-    it('returns body elements if body available', () => {
+    it('returns body blocks if body available', () => {
         testData.page.content.blocks.body = [
             {
                 elements: [
@@ -361,9 +361,9 @@ describe('extract-capi', () => {
             },
         ];
 
-        const { elements } = extract(testData);
-
-        expect(elements.length).toBe(4);
+        const { blocks } = extract(testData);
+        expect(blocks.length).toBe(2);
+        expect(([] as CAPIElement[]).concat(...blocks).length).toBe(4);
     });
 
     it('returns pageId if available', () => {
