@@ -26,7 +26,7 @@ export const TextStyle = (pillar: Pillar) => css`
     a {
         color: ${pillarPalette[pillar].dark};
         text-decoration: none;
-        border-bottom: 1px solid ${palette.neutral[86]};
+        border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
@@ -35,18 +35,10 @@ export const TextStyle = (pillar: Pillar) => css`
 `;
 
 // Labs paid content only
-const textStyleLabs = (pillar: Pillar) => css`
+const textStyleLabs = css`
     p {
         ${textSans(7)}
     }
-    a {
-        color: ${pillarPalette[pillar].main};
-        border-bottom: 1px solid ${palette.neutral[60]};
-        :hover {
-            border-bottom: 1px solid ${pillarPalette[pillar].main};
-        }
-    }
-    ${textSans(7)}
 `;
 
 export const Text: React.FC<{
@@ -54,11 +46,7 @@ export const Text: React.FC<{
     pillar: Pillar;
 }> = ({ html, pillar }) => (
     <span
-        className={composeLabsCSS(
-            pillar,
-            TextStyle(pillar),
-            textStyleLabs(pillar),
-        )}
+        className={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
         dangerouslySetInnerHTML={{
             __html: sanitise(html),
         }}

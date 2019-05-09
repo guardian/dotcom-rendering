@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
 import EmailIcon from '@guardian/pasteup/icons/email.svg';
@@ -10,7 +9,6 @@ import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
 import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 const pillarFill = pillarMap(
     pillar =>
@@ -26,7 +24,7 @@ const shareIconsListItem = css`
 `;
 
 const shareIcon = (pillar: Pillar) => css`
-    border: 1px solid ${palette.neutral[86]};
+    border: 1px solid ${pillarPalette[pillar].neutral.border};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -56,10 +54,6 @@ const shareIcon = (pillar: Pillar) => css`
         border-color: ${pillarPalette[pillar].main};
         fill: white;
     }
-`;
-
-const shareIconLabs = css`
-    border: 1px solid ${palette.neutral[60]};
 `;
 
 interface ShareListItemType {
@@ -128,10 +122,9 @@ export const ShareIcons: React.FC<{
                                 {userMessage}
                             </span>
                             <span
-                                className={composeLabsCSS(
-                                    pillar,
-                                    cx(shareIcon(pillar), pillarFill[pillar]),
-                                    shareIconLabs,
+                                className={cx(
+                                    shareIcon(pillar),
+                                    pillarFill[pillar],
                                 )}
                             >
                                 <Icon />

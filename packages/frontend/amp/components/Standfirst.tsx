@@ -6,7 +6,7 @@ import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 // listStyles are used in paid content standfirsts, with a fallback for normal pillars
-const listStyle = css`
+const listStyle = (pillar: Pillar) => css`
     li {
         margin-bottom: 6px;
         padding-left: 20px;
@@ -23,18 +23,19 @@ const listStyle = css`
         height: 12px;
         width: 12px;
         margin-right: 8px;
-        background-color: ${palette.neutral[86]};
+        background-color: ${pillarPalette[pillar].neutral.border};
         margin-left: -20px;
     }
 `;
 
-const standfirstCss = css`
+const standfirstCss = (pillar: Pillar) => css`
+p,
     ${headline(2)};
     font-weight: 100;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
     margin-bottom: 12px;
-    ${listStyle};
+    ${listStyle(pillar)};
     p {
         margin-bottom: 8px;
         font-weight: 200;
@@ -50,29 +51,20 @@ const standfirstLinks = pillarMap(
             a {
                 color: ${pillarPalette[pillar].dark};
                 text-decoration: none;
-                border-bottom: 1px solid ${palette.neutral[86]};
+                border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
             }
             a:hover {
-                border-bottom: 1px solid ${palette.neutral[86]};
+                border-bottom: 1px solid ${pillarPalette[pillar].dark};
             }
         `,
 );
 
 // Labs paid content only
-const labsStyle = (pillar: Pillar) => css`
+const labsStyle = css`
     p,
     li {
         font-weight: 700;
         ${textSans(8)}
-    }
-    li:before {
-        background-color: ${palette.neutral[60]};
-    }
-    a {
-        border-bottom: 1px solid ${palette.neutral[60]};
-    }
-    a:hover {
-        border-bottom: 1px solid ${pillarPalette[pillar].dark};
     }
 `;
 
@@ -84,8 +76,8 @@ export const Standfirst: React.SFC<{
         <div // tslint:disable-line:react-no-dangerous-html
             className={composeLabsCSS(
                 pillar,
-                cx(standfirstCss, standfirstLinks[pillar]),
-                labsStyle(pillar),
+                cx(standfirstCss(pillar), standfirstLinks[pillar]),
+                labsStyle,
             )}
             dangerouslySetInnerHTML={{
                 __html: text,

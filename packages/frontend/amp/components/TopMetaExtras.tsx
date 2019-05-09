@@ -6,7 +6,6 @@ import { palette } from '@guardian/pasteup/palette';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { textSans } from '@guardian/pasteup/typography';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
-import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';
 
 const pillarColours = pillarMap(
     pillar =>
@@ -33,19 +32,13 @@ const metaExtras = css`
     margin-bottom: 6px;
 `;
 
-const borders = css`
-    border-top: 1px solid ${palette.neutral[86]};
-    border-bottom: 1px solid ${palette.neutral[86]};
+const borders = (pillar: Pillar) => css`
+    border-top: 1px solid ${pillarPalette[pillar].neutral.border};
+    border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding-top: 6px;
-`;
-
-// Labs paid content only
-const bordersLabs = css`
-    border-top: 1px solid ${palette.neutral[60]};
-    border-bottom: 1px solid ${palette.neutral[60]};
 `;
 
 type SharingURLs = {
@@ -127,7 +120,7 @@ export const TopMetaExtras: React.FC<{
         <TwitterHandle handle={twitterHandle} />
         <WebPublicationDate date={webPublicationDate} />
 
-        <div className={composeLabsCSS(pillar, borders, bordersLabs)}>
+        <div className={borders(pillar)}>
             <ShareIcons
                 sharingUrls={sharingUrls}
                 pillar={pillar}
