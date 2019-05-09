@@ -4,6 +4,7 @@ interface ArticleProps {
     config: ConfigType;
 }
 
+// 'labs' is a fake pillar used to identify paid content (Guardian Labs) for rendering styling.
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' | 'labs';
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
