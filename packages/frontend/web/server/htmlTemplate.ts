@@ -36,7 +36,7 @@ export const htmlTemplate = ({
             : 'favicon-32x32-dev-yellow.ico';
 
     return `<!doctype html>
-        <html>
+        <html lang="en">
             <head>
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">

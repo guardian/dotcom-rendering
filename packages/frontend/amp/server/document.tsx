@@ -43,7 +43,7 @@ export const document = ({
             : 'favicon-32x32-dev-yellow.ico';
 
     return `<!doctype html>
-<html ⚡>
+<html ⚡ lang="en">
     <head>
     <meta charset="utf-8">
 
