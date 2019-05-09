@@ -124,7 +124,7 @@ const neutral = {
     100: '#ffffff',
 };
 
-const labs: PillarColours & {} = {
+const labs: PillarColours = {
     dark: neutral[7],
     main: neutral[7],
     bright: '#69d1ca', // bright teal
