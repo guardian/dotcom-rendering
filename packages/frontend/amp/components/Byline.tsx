@@ -16,7 +16,10 @@ export const Byline: React.FC<{
 
         if (matchedTag) {
             return (
-                <a href={`${guardianBaseURL}/${matchedTag.id}`}>
+                <a
+                    key={matchedTag.id}
+                    href={`${guardianBaseURL}/${matchedTag.id}`}
+                >
                     {matchedTag.title}
                 </a>
             );
