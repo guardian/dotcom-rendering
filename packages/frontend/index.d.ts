@@ -42,7 +42,7 @@ interface Branding {
         src: string;
         link: string;
         label: string;
-        dimensions: { width: number, height: number }
+        dimensions: { width: number; height: number };
     };
     aboutThisLink: string;
 }
@@ -110,7 +110,7 @@ interface CAPIType {
     mainMediaElements: CAPIElement[];
     main: string;
     body: string;
-    elements: CAPIElement[];
+    blocks: CAPIElement[][];
     author: AuthorType;
     webPublicationDate: Date;
     webPublicationDateDisplay: string;
