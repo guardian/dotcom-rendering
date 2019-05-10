@@ -126,22 +126,6 @@ clear: # private
 
 # packages #########################################
 
-clean-pasteup:
-	@rm -rf packages/pasteup/dist packages/pasteup/tmp
-
-pre-publish-pasteup:
-	$(call log, "building pasteup")
-	@mkdir packages/pasteup/tmp
-	@NODE_ENV=production webpack --config scripts/webpack/pasteup
-	@mv packages/pasteup/*.ts packages/pasteup/tmp
-	@mv packages/pasteup/dist/*.js packages/pasteup
-
-post-publish-pasteup:
-	$(call log, "clean up after publishing pasteup")
-	@mv packages/pasteup/tmp/*.ts packages/pasteup
-	@mv packages/pasteup/*.js packages/pasteup/tmp
-	@make clean-pasteup
-
-publish-pasteup: clear clean-pasteup install
+publish-pasteup: clear install
 	$(call log, "publishing pasteup")
 	@cd packages/pasteup && yarn publish

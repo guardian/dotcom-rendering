@@ -1,6 +1,6 @@
 {
   "name": "@guardian/pasteup",
-  "version": "1.0.0-alpha.10",
+  "version": "1.0.0-alpha.10.1",
   "description": "Guardian design tokens",
   "repository": {
     "type": "git",
@@ -9,12 +9,13 @@
   "files": [
     "*.js",
     "*.d.ts",
+    "*.js.map",
+    "*.d.ts.map",
     "icons",
     "logos"
   ],
   "scripts": {
     "test": "jest",
-    "postpublish": "rm -rf lib",
     "prepublish": "tsc -p ."
   },
   "dependencies": {},
