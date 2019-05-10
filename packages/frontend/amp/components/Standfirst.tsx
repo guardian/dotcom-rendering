@@ -29,11 +29,9 @@ const listStyle = (pillar: Pillar) => css`
 `;
 
 const standfirstCss = (pillar: Pillar) => css`
-p,
     ${headline(2)};
     font-weight: 100;
     color: ${palette.neutral[7]};
-    margin-bottom: 12px;
     margin-bottom: 12px;
     ${listStyle(pillar)};
     p {
