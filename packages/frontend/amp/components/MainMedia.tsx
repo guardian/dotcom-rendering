@@ -6,6 +6,7 @@ import { textSans } from '@guardian/pasteup/typography';
 import InfoIcon from '@guardian/pasteup/icons/info.svg';
 import { palette } from '@guardian/pasteup/palette';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
+import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 const figureStyle = css`
     margin: 0 0;
@@ -63,6 +64,10 @@ const labelStyle = css`
     }
 `;
 
+const visuallyHidden = css`
+    ${screenReaderOnly}
+`;
+
 const mainImage = (element: ImageBlockElement): JSX.Element | null => {
     const containerWidth = 600;
     const image: SrcSet = bestFitImage(element.imageSources, containerWidth);
@@ -91,10 +96,11 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                     <input
                         aria-checked={false}
                         type="checkbox"
-                        aria-label="show-caption"
+                        id="show-caption"
                         className={inputStyle}
                     />
-                    <label className={labelStyle}>
+                    <label className={labelStyle} htmlFor="show-caption">
+                        <span className={visuallyHidden}>Show caption</span>
                         <InfoIcon />
                     </label>
                     <figcaption className={captionStyle}>
