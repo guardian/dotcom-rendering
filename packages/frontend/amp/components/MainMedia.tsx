@@ -91,10 +91,10 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                     <input
                         aria-checked={false}
                         type="checkbox"
-                        id="show-caption"
+                        aria-label="show-caption"
                         className={inputStyle}
                     />
-                    <label className={labelStyle} htmlFor="show-caption">
+                    <label className={labelStyle}>
                         <InfoIcon />
                     </label>
                     <figcaption className={captionStyle}>
