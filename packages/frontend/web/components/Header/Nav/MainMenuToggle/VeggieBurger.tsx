@@ -97,6 +97,7 @@ export const VeggieBurger: React.FC<{
                 className={veggieBurger({ showMainMenu })}
                 onClick={() => toggleMainMenu()}
                 aria-controls={ariaControls}
+                aria-label="Toggle main menu"
             >
                 <span className={veggieBurgerIcon({ showMainMenu })} />
             </button>
@@ -110,6 +111,7 @@ export const VeggieBurger: React.FC<{
             htmlFor={htmlFor}
             tabIndex={0}
             role="button"
+            aria-label="Toggle main menu"
         >
             <span className={veggieBurgerIcon({ showMainMenu })} />
         </label>
