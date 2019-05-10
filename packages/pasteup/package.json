@@ -1,23 +1,21 @@
 {
   "name": "@guardian/pasteup",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.10",
   "description": "Guardian design tokens",
   "repository": {
     "type": "git",
     "url": "https://github.com/guardian/dotcom-rendering"
   },
   "files": [
-    "breakpoints.js",
-    "typography.js",
-    "mixins.js",
-    "palette.js",
+    "*.js",
+    "*.d.ts",
     "icons",
     "logos"
   ],
   "scripts": {
     "test": "jest",
-    "prepublish": "cd ../.. && make pre-publish-pasteup",
-    "postpublish": "cd ../.. && make post-publish-pasteup"
+    "postpublish": "rm -rf lib",
+    "prepublish": "tsc -p ."
   },
   "dependencies": {},
   "license": "Apache-2.0"
