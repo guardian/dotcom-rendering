@@ -26,11 +26,7 @@ export const Dateline: React.FC<{
     descriptionText: string;
 }> = ({ dateDisplay, descriptionText }) => (
     <>
-        <div
-            className={dateline}
-            // tslint:disable-next-line:react-a11y-role
-            role="text"
-        >
+        <div className={dateline} role="textbox">
             <span className={description}>{descriptionText} </span>
             {dateDisplay}
         </div>
