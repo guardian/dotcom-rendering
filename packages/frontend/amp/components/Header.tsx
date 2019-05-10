@@ -210,7 +210,11 @@ export const Header: React.FC<{
             {pillarLinks(nav.pillars, guardianBaseURL)}
 
             {/* Note, the actual sidebar lives directly in the body as AMP requires this :( */}
-            <button className={veggieStyles} on="tap:sidebar1.toggle">
+            <button
+                className={veggieStyles}
+                aria-label="Toggle main menu"
+                on="tap:sidebar1.toggle"
+            >
                 <span className={pattyStyles} />
             </button>
         </div>
