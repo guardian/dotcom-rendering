@@ -20,6 +20,7 @@ export interface ArticleModel {
     headline: string;
     standfirst: string;
     mainMediaElements: CAPIElement[];
+    keyEvents: Block[]; // liveblog-specific
     blocks: Block[];
     author: AuthorType;
     webPublicationDateDisplay: string;

@@ -405,4 +405,5 @@ export const CAPI: CAPIType = {
     starRating: 2,
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',
+    keyEvents: [],
 };
