@@ -340,6 +340,7 @@ describe('extract-capi', () => {
     it('returns body blocks if body available', () => {
         testData.page.content.blocks.body = [
             {
+                id: 'abc-123',
                 elements: [
                     {
                         html: '<p>html test 1</p>',
@@ -350,6 +351,7 @@ describe('extract-capi', () => {
                 ],
             },
             {
+                id: 'abc-234',
                 elements: [
                     {
                         html: '<p>html test 3</p>',
@@ -363,7 +365,10 @@ describe('extract-capi', () => {
 
         const { blocks } = extract(testData);
         expect(blocks.length).toBe(2);
-        expect(([] as CAPIElement[]).concat(...blocks).length).toBe(4);
+
+        const blockElements = blocks.map(block => block.elements);
+        const elems = ([] as CAPIElement[]).concat(...blockElements);
+        expect(elems.length).toBe(4);
     });
 
     it('returns pageId if available', () => {
