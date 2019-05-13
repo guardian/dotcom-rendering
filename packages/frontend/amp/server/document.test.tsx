@@ -26,7 +26,7 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 });
 
 // TODO failing because fixture still models blocks as nested array of elements
-// rather than a list of Block(s) - that are objects with 'id' and 'elemenmts'
+// rather than a list of Block(s) - that are objects with 'id' and 'elements'
 // fields. This then errors in Elements.tsx.
 test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
