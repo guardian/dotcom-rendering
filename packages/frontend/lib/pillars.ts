@@ -8,7 +8,7 @@ export const pillarNames: Pillar[] = [
     'lifestyle',
 ];
 
-export const pillarPalette: { [K in Pillar]: PillarColours } = {
+export const pillarPalette: Record<Pillar, PillarColours> = {
     news: palette.news,
     opinion: palette.opinion,
     sport: palette.sport,
