@@ -176,6 +176,9 @@ export const extract = (data: {}): CAPIType => {
             'page.content.blocks.main.elements',
             [],
         ),
+        keyEvents: getArray<any>(data, 'page.content.blocks.keyEvents').filter(
+            Boolean,
+        ),
         blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
         pageId: getNonEmptyString(data, 'page.pageId'),
         sharingUrls: getSharingUrls(data),

@@ -8,12 +8,25 @@ import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
+import { KeyEvents } from '@frontend/amp/components/KeyEvents';
+import { headline } from '@guardian/pasteup/typography';
+import { blockLink } from '@frontend/amp/lib/block-link';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
+
+// TODO add styling for ul and blockquote
 const body = (pillar: Pillar, tone: StyledTone) => css`
     background-color: ${palette.neutral[97]};
     ${bulletStyle(pillar)}
+
+    p {
+        font-size: 16px;
+    }
+
+    h2 {
+        ${headline(2)};
+    }
 `;
 
 // TODO move into shared place and also add list styling and blockquote etc.
@@ -53,6 +66,7 @@ const Blocks: React.SFC<{
     contentType: string;
     switches: Switches;
     commercialProperties: CommercialProperties;
+    url: string;
 }> = ({
     blocks,
     pillar,
@@ -61,11 +75,16 @@ const Blocks: React.SFC<{
     contentType,
     switches,
     commercialProperties,
+    url,
 }) => {
     // TODO add last updated for blocks to show here
     const transformedBlocks = blocks.map(block => {
         return (
             <div key={block.id} className={blockStyle(pillar)}>
+                {block.createdOn && (
+                    <a href={blockLink(url, block.id)}>{block.createdOn}</a>
+                )}
+                {block.title && <h2>{block.title}</h2>}
                 <Elements
                     pillar={pillar}
                     elements={block.elements}
@@ -77,6 +96,7 @@ const Blocks: React.SFC<{
                     commercialProperties={commercialProperties}
                     isImmersive={false}
                 />
+                {block.lastUpdate && <span>{block.lastUpdate}</span>}
             </div>
         );
     });
@@ -90,10 +110,12 @@ export const Body: React.FC<{
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
     const tone = getToneType(data.tags);
+    const url = `${data.guardianBaseURL}/${data.pageId}`;
 
     return (
         <InnerContainer className={body(pillar, tone)}>
             <TopMeta tone={tone} data={data} />
+            <KeyEvents events={data.keyEvents} pillar={pillar} url={url} />
             <Blocks
                 pillar={pillar}
                 blocks={data.blocks}
@@ -103,6 +125,7 @@ export const Body: React.FC<{
                 contentType={data.contentType}
                 switches={config.switches}
                 commercialProperties={data.commercialProperties}
+                url={url}
             />
             <SubMeta
                 sections={data.subMetaSectionLinks}
