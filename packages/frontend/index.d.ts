@@ -104,13 +104,18 @@ interface AuthorType {
     email?: string;
 }
 
+interface Block {
+    id: string;
+    elements: CAPIElement[];
+}
+
 interface CAPIType {
     headline: string;
     standfirst: string;
     mainMediaElements: CAPIElement[];
     main: string;
     body: string;
-    blocks: CAPIElement[][];
+    blocks: Block[];
     author: AuthorType;
     webPublicationDate: Date;
     webPublicationDateDisplay: string;

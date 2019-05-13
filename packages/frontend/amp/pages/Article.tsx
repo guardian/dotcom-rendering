@@ -20,7 +20,7 @@ export interface ArticleModel {
     headline: string;
     standfirst: string;
     mainMediaElements: CAPIElement[];
-    blocks: CAPIElement[][];
+    blocks: Block[];
     author: AuthorType;
     webPublicationDateDisplay: string;
     pageId: string;

@@ -502,7 +502,9 @@ export const ArticleBody: React.FC<{
                         [immersiveBodyStyle]: CAPI.isImmersive,
                     })}
                 >
-                    <ArticleRenderer elements={CAPI.blocks[0] || []} />
+                    <ArticleRenderer
+                        elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
+                    />
                 </div>
                 <div className={cx(subMeta, guardianLines)}>
                     {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
