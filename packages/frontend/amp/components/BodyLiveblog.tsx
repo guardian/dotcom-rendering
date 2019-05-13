@@ -9,20 +9,14 @@ import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
-// TODO move into shared place
-const body = (pillar: Pillar, tone: StyledTone) => {
-    const bgColorMap = {
-        'default-tone': palette.neutral[100],
-        'tone/comment': palette.opinion.faded,
-        'tone/advertisement-features': palette.neutral[100],
-    };
-    return css`
-        background-color: ${bgColorMap[tone]};
-        ${bulletStyle(pillar)}
-    `;
-};
+// TODO check if liveblog background colours are more complex - like regular
+// article is
+const body = (pillar: Pillar, tone: StyledTone) => css`
+    background-color: ${palette.neutral[97]};
+    ${bulletStyle(pillar)}
+`;
 
-// TODO move into shared place
+// TODO move into shared place and also add list styling and blockquote etc.
 const bulletStyle = (pillar: Pillar) => css`
     .bullet {
         color: transparent;
@@ -42,15 +36,14 @@ const bulletStyle = (pillar: Pillar) => css`
 `;
 
 const blockStyle = (pillar: Pillar) => css`
-    adding-top: 0.375rem;
-    padding-bottom: 0.75rem;
+    padding: 6px 10px 12px;
     background-color: ${palette.neutral[100]};
-    border-top: 0.0625rem solid ${pillarPalette[pillar].dark};
-    border-top-color: rgb(220, 220, 220);
-    border-bottom: 0.0625rem solid ${palette.neutral[93]};
+    border-top: 1px solid ${pillarPalette[pillar].dark};
+    border-bottom: 1px solid ${palette.neutral[93]};
+    margin-bottom: 12px;
 `;
 
-// TODO add handling (currently done in elements, which is wrong, so let's lift
+// TODO ad handling (currently done in elements, which is wrong, so let's lift
 // that out and have an Ad element type we match against
 const Blocks: React.SFC<{
     blocks: Block[];
