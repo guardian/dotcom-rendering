@@ -50,6 +50,7 @@ const PaidForByLogo: React.FC<{
                 href={logo.link}
                 data-sponsor={sponsorName.toLowerCase()}
                 rel="nofollow"
+                aria-label={`Visit the ${sponsorName} website`}
             >
                 <amp-img
                     src={logo.src}

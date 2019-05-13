@@ -16,7 +16,8 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const linkedData = extractLinkedData(body);
 
         const config = extractConfig(body);
-        const elements = ([] as CAPIElement[]).concat(...CAPI.blocks);
+        const blockElements = CAPI.blocks.map(block => block.elements);
+        const elements = ([] as CAPIElement[]).concat(...blockElements);
 
         const scripts = [
             ...extractScripts(elements, CAPI.mainMediaElements),

@@ -176,9 +176,7 @@ export const extract = (data: {}): CAPIType => {
             'page.content.blocks.main.elements',
             [],
         ),
-        blocks: getArray<any>(data, 'page.content.blocks.body')
-            .map(block => block.elements)
-            .filter(Boolean),
+        blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
         pageId: getNonEmptyString(data, 'page.pageId'),
         sharingUrls: getSharingUrls(data),
         pillar: findPillar(getString(data, 'page.pillar', ''), tags) || 'news',
