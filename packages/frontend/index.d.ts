@@ -113,6 +113,15 @@ interface Block {
     title?: string;
 }
 
+interface Pagination {
+    currentPage: number;
+    totalPages: number;
+    newest?: string;
+    newer?: string;
+    oldest?: string;
+    older?: string;
+}
+
 interface CAPIType {
     headline: string;
     standfirst: string;
@@ -121,6 +130,7 @@ interface CAPIType {
     body: string;
     keyEvents: Block[];
     blocks: Block[];
+    pagination?: Pagination;
     author: AuthorType;
     webPublicationDate: Date;
     webPublicationDateDisplay: string;

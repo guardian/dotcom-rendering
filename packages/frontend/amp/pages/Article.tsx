@@ -22,6 +22,7 @@ export interface ArticleModel {
     standfirst: string;
     mainMediaElements: CAPIElement[];
     keyEvents: Block[]; // liveblog-specific
+    pagination?: Pagination;
     blocks: Block[];
     author: AuthorType;
     webPublicationDateDisplay: string;
