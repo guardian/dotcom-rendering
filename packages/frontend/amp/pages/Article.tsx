@@ -11,6 +11,7 @@ import { css } from 'emotion';
 import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { filterForTagsOfType } from '@frontend/amp/lib/tag-utils';
+import { AdUserSync } from '@root/packages/frontend/amp/components/AdUserSync';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -77,6 +78,7 @@ export const Article: React.FC<{
 }> = ({ nav, articleData, config, analytics }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
+        <AdUserSync />
         <AdConsent />
 
         {/* /TODO change to gray bgcolor */}
