@@ -8,6 +8,7 @@ import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
 import { GoogleSubscribeButton } from '@root/packages/frontend/amp/components/GoogleSubscribeButton';
 import { mobileLandscape, until } from '@guardian/pasteup/breakpoints';
+import { AdUserSync } from '@root/packages/frontend/amp/components/AdUserSync';
 
 const headerStyles = css`
     background-color: ${palette.brand.main};
@@ -200,12 +201,13 @@ export const Header: React.FC<{
                         ${screenReaderOnly};
                     `}
                 >
+                    <AdUserSync />
                     The Guardian - Back to home
                 </span>
+
                 <Logo />
             </a>
         </div>
-
         <div className={cx(row, navRow)}>
             {pillarLinks(nav.pillars, guardianBaseURL)}
 
