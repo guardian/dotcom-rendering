@@ -193,6 +193,7 @@ export const Header: React.FC<{
             />
 
             {config.switches.subscribeWithGoogle && <GoogleSubscribeButton />}
+
             <a className={logoStyles} href={guardianBaseURL}>
                 <span
                     className={css`
@@ -201,7 +202,6 @@ export const Header: React.FC<{
                 >
                     The Guardian - Back to home
                 </span>
-
                 <Logo />
             </a>
         </div>
