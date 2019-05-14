@@ -116,6 +116,16 @@ const getCommercialProperties = (data: {}): CommercialProperties => {
     ) as CommercialProperties;
 };
 
+const getPagination = (data: {}): Pagination | undefined => {
+    const found = optional(getObject.bind(null, data, 'page.pagination'));
+
+    if (found) {
+        return found as Pagination;
+    }
+
+    return undefined;
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -139,6 +149,7 @@ export const extract = (data: {}): CAPIType => {
     const editionId = getEditionValue(getString(data, 'page.editionId', ''));
 
     if (editionId === undefined) throw new Error('edition id is undefined');
+
     return {
         webPublicationDate,
         tags,
@@ -179,6 +190,7 @@ export const extract = (data: {}): CAPIType => {
         keyEvents: getArray<any>(data, 'page.content.blocks.keyEvents').filter(
             Boolean,
         ),
+        pagination: getPagination(data),
         blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
         pageId: getNonEmptyString(data, 'page.pageId'),
         sharingUrls: getSharingUrls(data),

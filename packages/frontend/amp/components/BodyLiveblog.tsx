@@ -104,6 +104,35 @@ const Blocks: React.SFC<{
     return <>{transformedBlocks}</>;
 };
 
+const Pagination: React.SFC<{
+    pagination?: Pagination;
+    guardianURL: string;
+}> = ({ pagination, guardianURL }) => {
+    const link = (url: string, suffix?: string): JSX.Element => {
+        if (!suffix) {
+            return <></>;
+        }
+
+        return <a href={url + suffix}>{suffix}</a>;
+    };
+
+    if (!pagination) {
+        return null;
+    }
+
+    return (
+        <div>
+            {link(guardianURL, pagination.newest)}
+            {link(guardianURL, pagination.newer)}
+            <div>
+                Page {pagination.currentPage} of {pagination.totalPages}
+            </div>
+            {link(guardianURL, pagination.older)}
+            {link(guardianURL, pagination.oldest)}
+        </div>
+    );
+};
+
 export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
@@ -111,11 +140,17 @@ export const Body: React.FC<{
 }> = ({ pillar, data, config }) => {
     const tone = getToneType(data.tags);
     const url = `${data.guardianBaseURL}/${data.pageId}`;
+    const isFirstPage = data.pagination
+        ? data.pagination.currentPage === 1
+        : false;
 
     return (
         <InnerContainer className={body(pillar, tone)}>
             <TopMeta tone={tone} data={data} />
             <KeyEvents events={data.keyEvents} pillar={pillar} url={url} />
+            {!isFirstPage && (
+                <Pagination guardianURL={url} pagination={data.pagination} />
+            )}
             <Blocks
                 pillar={pillar}
                 blocks={data.blocks}
@@ -127,6 +162,7 @@ export const Body: React.FC<{
                 commercialProperties={data.commercialProperties}
                 url={url}
             />
+            <Pagination guardianURL={url} pagination={data.pagination} />
             <SubMeta
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}
