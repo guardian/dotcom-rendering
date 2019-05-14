@@ -205,6 +205,7 @@ export const Header: React.FC<{
                 <Logo />
             </a>
         </div>
+
         <div className={cx(row, navRow)}>
             {pillarLinks(nav.pillars, guardianBaseURL)}
 
