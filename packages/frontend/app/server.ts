@@ -11,10 +11,12 @@ import { dist, root, port } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 import { render as renderAMPArticle } from '@frontend/amp/server/render';
 import { render as renderArticle } from '@frontend/web/server/render';
+import { logger } from './logging';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
 // tslint:disable-next-line:no-default-export
 export default (options: any) => {
+    logger.info('hello!');
     if ('amp' in options) return renderAMPArticle;
     return renderArticle;
 };

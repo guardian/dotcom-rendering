@@ -84,7 +84,8 @@
         "execa": "^0.10.0",
         "filesizegzip": "^2.0.0",
         "inquirer": "^5.2.0",
-        "pretty-bytes": "^4.0.2"
+        "pretty-bytes": "^4.0.2",
+        "log4js": "4.2.0"
     },
     "jest": {
         "moduleFileExtensions": [

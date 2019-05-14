@@ -1,5 +1,6 @@
 import React from 'react';
 import { bylineTokens } from '@frontend/amp/lib/byline-tokens';
+import { logger } from '../../app/logging';
 
 export const Byline: React.FC<{
     byline: string;
@@ -10,6 +11,8 @@ export const Byline: React.FC<{
 }> = ({ byline, tags, guardianBaseURL, className }) => {
     const contributorTags = tags.filter(tag => tag.type === 'Contributor');
     const tokens = bylineTokens(byline, contributorTags);
+
+    logger.error('Byline time!');
 
     const linkedByline = tokens.map(token => {
         const matchedTag = contributorTags.find(tag => tag.title === token);

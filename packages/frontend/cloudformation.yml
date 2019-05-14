@@ -45,6 +45,9 @@ Parameters:
   InstanceType:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
+  ELKStream:
+    Type: String
+    Description: name of the kinesis stream to use to send logs to the central ELK stack
     
 Conditions:
     HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -219,7 +222,12 @@ Resources:
               export NODE_ENV=production
               export GU_STAGE=${Stage}
 
+              mkdir /var/log/dotcom-rendering
+              chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+
               /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+
+              /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} ${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
