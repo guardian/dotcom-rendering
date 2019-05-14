@@ -9,7 +9,7 @@ const preBidImg =
 export const AdUserSync: React.FC<{}> = () => {
     return (
         <amp-iframe
-            data-block-on-consent=""
+            data-block-on-consent="_till_accepted"
             width="1"
             title="User Sync"
             height="1"
