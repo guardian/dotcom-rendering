@@ -8,16 +8,16 @@ const preBidImg =
 
 export const AdUserSync: React.FC<{}> = () => {
     return (
-            <amp-iframe
-                data-block-on-consent=""
-                width="1"
-                title="User Sync"
-                height="1"
-                sandbox="allow-scripts"
-                frameborder="0"
-                src={preBidSrc}
-            >
-                <amp-img layout="fill" src={preBidImg} placeholder="" />
-            </amp-iframe>
+        <amp-iframe
+            data-block-on-consent=""
+            width="1"
+            title="User Sync"
+            height="1"
+            sandbox="allow-scripts"
+            frameborder="0"
+            src={preBidSrc}
+        >
+            <amp-img layout="fill" src={preBidImg} placeholder="" />
+        </amp-iframe>
     );
 };
