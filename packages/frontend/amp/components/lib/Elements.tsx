@@ -22,8 +22,8 @@ import { clean } from '@frontend/model/clean';
 import { Expandable } from '@frontend/amp/components/Expandable';
 import { Timeline } from '@frontend/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
-import { InteractiveIframe } from '@frontend/amp/components/elements/InteractiveIframe';
-import { Interactive } from '@root/packages/frontend/amp/components/elements/Interactive';
+import { InteractiveUrl } from '@frontend/amp/components/elements/InteractiveUrl';
+import { InteractiveMarkup } from '@frontend/amp/components/elements/InteractiveMarkup';
 
 const clear = css`
     clear: both;
@@ -151,14 +151,14 @@ export const Elements: React.FC<{
                 return <YoutubeVideo element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement':
                 return (
-                    <Interactive
+                    <InteractiveMarkup
                         html={element.html}
                         styles={element.css}
                         js={element.js}
                     />
                 );
             case 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement':
-                return <InteractiveIframe url={element.url} />;
+                return <InteractiveUrl url={element.url} />;
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
