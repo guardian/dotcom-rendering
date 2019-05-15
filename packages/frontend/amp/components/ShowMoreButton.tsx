@@ -4,18 +4,8 @@ import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/typography';
 import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 
-const styles = css`
-    margin-top: 16px;
-    margin-bottom: 12px;
-`;
-
 const showMore = css`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     color: ${palette.neutral[7]};
-    background-color: ${palette.neutral[100]};
     padding: 0 10px;
     ${textSans(2)};
     line-height: 34px;
@@ -45,25 +35,9 @@ const showMore = css`
     }
 `;
 
-export const InteractiveIframe: React.SFC<{ url: string }> = ({ url }) => {
-    return (
-        <amp-iframe
-            class={styles}
-            src={url}
-            layout="responsive"
-            sandbox="allow-scripts allow-same-origin"
-            height="1"
-            width="5"
-            resizable=""
-        >
-            <div
-                overflow=""
-                className={showMore}
-                aria-label="Load the full visual"
-            >
-                <PlusIcon />
-                See the full visual
-            </div>
-        </amp-iframe>
-    );
-};
+export const ShowMoreButton: React.SFC<{}> = () => (
+    <div className={showMore} aria-label={'Show more'}>
+        <PlusIcon />
+        Show more
+    </div>
+);

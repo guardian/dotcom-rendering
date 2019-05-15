@@ -1,11 +1,27 @@
 import React from 'react';
+import { ShowMoreButton } from '@frontend/amp/components/ShowMoreButton';
+import { css } from 'emotion';
 
-export const Interactive: React.SFC<{
+const iframeStyle = css`
+    margin-top: 16px;
+    margin-bottom: 12px;
+`;
+
+const showMore = css`
+    &[overflow] {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+`;
+
+export const InteractiveMarkup: React.SFC<{
     html?: string;
     styles?: string;
     js?: string;
 }> = ({ html, styles, js }) => {
-    const css = styles ? `<style>${styles}</style>` : '';
+    const styleTag = styles ? `<style>${styles}</style>` : '';
     const scripts = js ? `<script>${js}</script>` : '';
 
     const body = `
@@ -18,7 +34,7 @@ export const Interactive: React.SFC<{
             content="width=device-width,minimum-scale=1,initial-scale=1"
         />
 
-        ${css}
+        ${styleTag}
     </head>
 
     <body>
@@ -30,14 +46,17 @@ export const Interactive: React.SFC<{
 
     return (
         <amp-iframe
+            class={iframeStyle}
             layout="responsive"
             height="1"
-            width="5"
+            width="8"
             sandbox="allow-scripts"
             srcdoc={body}
             resizable=""
         >
-            <div overflow="">See the full visual</div>
+            <div overflow="" className={showMore}>
+                <ShowMoreButton />
+            </div>
         </amp-iframe>
     );
 };

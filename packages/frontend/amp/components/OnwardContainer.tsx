@@ -9,13 +9,13 @@ import {
 import { headline, textSans } from '@guardian/pasteup/typography';
 
 import VideoIcon from '@guardian/pasteup/icons/video-icon.svg';
-import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 import Camera from '@guardian/pasteup/icons/camera.svg';
 import VolumeHigh from '@guardian/pasteup/icons/volume-high.svg';
 import Quote from '@guardian/pasteup/icons/quote.svg';
 import Clock from '@guardian/pasteup/icons/clock.svg';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
+import { ShowMoreButton } from '@frontend/amp/components/ShowMoreButton';
 
 const inner = css`
     padding-top: 3px;
@@ -99,41 +99,12 @@ const ageWarning = css`
     ${textSans(1)};
 `;
 
-const onward = css`
-    .show-more[overflow] {
+const showMore = css`
+    &[overflow] {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        color: ${palette.neutral[7]};
-        background-color: ${palette.neutral[100]};
-        padding: 0 10px;
-        ${textSans(2)};
-        line-height: 34px;
-        height: 36px;
-        font-weight: bold;
-
-        svg {
-            width: 18px;
-            height: 18px;
-            vertical-align: middle;
-            margin-top: -2px;
-            fill: ${palette.neutral[46]};
-            padding-right: 4px;
-        }
-
-        :after {
-            content: '';
-            background-color: ${palette.neutral[86]};
-            border-radius: 18px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 140px;
-            z-index: -1;
-            color: ${palette.neutral[100]};
-        }
     }
 `;
 
@@ -146,7 +117,6 @@ export const OnwardContainer: React.FC<{
         height="184px"
         src={path}
         credentials="include"
-        class={onward}
     >
         <MoustacheTemplate>
             <MoustacheSection name="showContent">
@@ -225,9 +195,9 @@ export const OnwardContainer: React.FC<{
                 </div>
             </MoustacheSection>
         </MoustacheTemplate>
-        <div className="show-more" overflow="">
-            <PlusIcon />
-            Show more
+
+        <div overflow="" className={showMore}>
+            <ShowMoreButton />
         </div>
     </amp-list>
 );
