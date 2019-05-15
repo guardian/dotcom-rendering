@@ -82,7 +82,9 @@ const Blocks: React.SFC<{
         return (
             <div key={block.id} className={blockStyle(pillar)}>
                 {block.createdOnDisplay && (
-                    <a href={blockLink(url, block.id)}>{block.createdOnDisplay}</a>
+                    <a href={blockLink(url, block.id)}>
+                        {block.createdOnDisplay}
+                    </a>
                 )}
                 {block.title && <h2>{block.title}</h2>}
                 <Elements
@@ -96,7 +98,9 @@ const Blocks: React.SFC<{
                     commercialProperties={commercialProperties}
                     isImmersive={false}
                 />
-                {block.lastUpdatedDisplay && <span>{block.lastUpdatedDisplay}</span>}
+                {block.lastUpdatedDisplay && (
+                    <span>{block.lastUpdatedDisplay}</span>
+                )}
             </div>
         );
     });
