@@ -200,12 +200,14 @@ export const ReaderRevenueLinks: React.FC<{
             title: 'Make a contribution',
             mobileOnly: true,
             url: readerRevenueLinks.sideMenu.contribute,
+            children: [],
         },
         {
             longTitle: 'Subscribe',
             title: 'Subscribe',
             mobileOnly: true,
             url: readerRevenueLinks.sideMenu.subscribe,
+            children: [],
         },
     ];
 

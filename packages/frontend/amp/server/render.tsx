@@ -11,6 +11,35 @@ import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { validateRequestData } from '@frontend/model/validate';
 import { logger } from '@frontend/app/logging';
 
+import {
+    getNavigationData,
+    makeGuardianNavigation,
+} from '@frontend/app/nav/navigation';
+
+const editionToLocalEdition = (edition: string): EditionLong => {
+    switch (edition) {
+        case 'UK':
+            return 'uk';
+        case 'US':
+            return 'us';
+        case 'AU':
+            return 'au';
+        case 'INT':
+            return 'international';
+        default:
+            return 'uk';
+    }
+};
+
+const getStage = (): string =>
+    process.env.NODE_ENV === 'production' ? 'PROD' : 'DEV';
+
+let navData: any = getNavigationData(getStage())
+    .then(data => (navData = data))
+    .catch(() => {
+        throw Error('Failed to get navigation data');
+    });
+
 export const render = (
     { body, path }: express.Request,
     res: express.Response,
@@ -22,6 +51,11 @@ export const render = (
     }
 
     try {
+        if (!navData) {
+            throw Error('Failed to get navigation data before request');
+        }
+
+        const navPos = extractNAV(body);
         const CAPI = extractCAPI(body);
         const linkedData = extractLinkedData(body);
 
@@ -30,6 +64,14 @@ export const render = (
         const elements = ([] as CAPIElement[]).concat(...blockElements);
 
         const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
+
+        const nav = makeGuardianNavigation(
+            navData,
+            editionToLocalEdition(CAPI.editionId),
+            navPos.currentUrl,
+            undefined, // TODO: support custom signposting
+            navPos.readerRevenueLinks,
+        );
 
         const analytics: AnalyticsModel = {
             gaTracker: 'UA-78705427-1',
@@ -57,7 +99,7 @@ export const render = (
             body: (
                 <Article
                     articleData={CAPI}
-                    nav={extractNAV(body)}
+                    nav={nav}
                     analytics={analytics}
                     config={config}
                 />

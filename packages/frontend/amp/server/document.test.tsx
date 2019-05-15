@@ -2,12 +2,14 @@ import { document } from './document';
 import validator from 'amphtml-validator';
 import React from 'react';
 import { data } from '@root/fixtures/article';
+import { navData } from '@root/fixtures/navData';
 import { Article } from '@frontend/amp/pages/Article';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractModel } from '@frontend/model/extract-capi';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
+import { makeGuardianNavigation } from '@frontend/app/nav/navigation';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
@@ -31,7 +33,6 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
     const config = extractConfig(data);
-    const nav = extractNAV(data);
     const model = extractModel(data);
     const linkedData = extractLinkedData(data);
 
@@ -52,6 +53,16 @@ test('produces valid AMP doc', async () => {
         neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
         domain: 'amp.theguardian.com',
     };
+
+    const navPosition = extractNAV(data);
+
+    const nav = makeGuardianNavigation(
+        navData,
+        'uk',
+        navPosition.currentUrl,
+        undefined, // TODO: support custom signposting
+        navPosition.readerRevenueLinks,
+    );
 
     const body = (
         <Article

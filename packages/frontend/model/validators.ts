@@ -50,10 +50,18 @@ export const optional = <T extends {}>(f: () => T): T | undefined => {
     }
 };
 
-export const getNonEmptyString = (obj: object, selector: string): string => {
+export const getNonEmptyString = (
+    obj: object,
+    selector: string,
+    fallbackValue?: string,
+): string => {
     const found = get(obj, selector);
     if (typeof found === 'string' && found.length > 0) {
         return found;
+    }
+
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
     }
 
     throw new Error(

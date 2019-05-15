@@ -9,6 +9,8 @@ type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' | 'labs';
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
+type EditionLong = 'us' | 'uk' | 'au' | 'international';
+
 type SharePlatform =
     | 'facebook'
     | 'twitter'
@@ -55,7 +57,7 @@ interface Branding {
 
 interface LinkType extends SimpleLinkType {
     longTitle: string;
-    children?: LinkType[];
+    children: LinkType[];
     mobileOnly?: boolean;
     pillar?: Pillar;
     more?: boolean;
@@ -92,16 +94,49 @@ type ReaderRevenuePosition =
     | 'ampHeader'
     | 'ampFooter';
 
+interface CurrentNavigationPosition {
+    currentUrl: string;
+    readerRevenueLinks: ReaderRevenuePositions;
+}
+
 interface NavType {
+    currentUrl: string;
     pillars: PillarType[];
     otherLinks: MoreType;
     brandExtensions: LinkType[];
     currentNavLink: string;
+    readerRevenueLinks: ReaderRevenuePositions;
     subNavSections?: {
         parent?: LinkType;
         links: LinkType[];
     };
-    readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface FlatSubnav {
+    links: LinkType[];
+}
+
+interface ParentSubnav {
+    parent: LinkType;
+    links: LinkType[];
+}
+
+interface NavRoot {
+    children: LinkType[];
+    otherLinks: LinkType[];
+    brandExtensions: LinkType[];
+}
+
+interface SectionLink {
+    zone: string;
+    title: string;
+    breadcrumbTitle: string;
+    href: string;
+}
+
+interface NavItem {
+    name: SectionLink;
+    links: SectionLink[];
 }
 
 interface AuthorType {
