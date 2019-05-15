@@ -74,7 +74,7 @@ export const KeyEvents: React.SFC<{
     const lis = events.map(event => (
         <li className={listItemStyle} key={event.id}>
             <a className={eventLinkStyle} href={blockLink(url, event.id)}>
-                <span className={timeStyle}>{event.createdOn}</span>
+                <span className={timeStyle}>{event.createdOnDisplay}</span>
                 <span className={listTitleStyle(pillar)}>
                     {event.title || ''}
                 </span>

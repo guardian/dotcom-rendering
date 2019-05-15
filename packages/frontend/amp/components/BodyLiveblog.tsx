@@ -81,8 +81,8 @@ const Blocks: React.SFC<{
     const transformedBlocks = blocks.map(block => {
         return (
             <div key={block.id} className={blockStyle(pillar)}>
-                {block.createdOn && (
-                    <a href={blockLink(url, block.id)}>{block.createdOn}</a>
+                {block.createdOnDisplay && (
+                    <a href={blockLink(url, block.id)}>{block.createdOnDisplay}</a>
                 )}
                 {block.title && <h2>{block.title}</h2>}
                 <Elements
@@ -96,7 +96,7 @@ const Blocks: React.SFC<{
                     commercialProperties={commercialProperties}
                     isImmersive={false}
                 />
-                {block.lastUpdate && <span>{block.lastUpdate}</span>}
+                {block.lastUpdatedDisplay && <span>{block.lastUpdatedDisplay}</span>}
             </div>
         );
     });
