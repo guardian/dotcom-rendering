@@ -37,6 +37,7 @@ configure({
         },
     },
     categories: { default: { appenders: ['fileAppender'], level: 'info' } },
+    pm2: true,
 });
 
 export const logger = getLogger();
