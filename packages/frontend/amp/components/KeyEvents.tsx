@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { headline } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { pillarPalette } from '@frontend/lib/pillars';
+// import { pillarPalette } from '@frontend/lib/pillars';
 import DownArrow from '@guardian/pasteup/icons/down-arrow.svg';
 import { blockLink } from '@frontend/amp/lib/block-link';
 
@@ -44,7 +44,6 @@ const timeStyle = css`
 `;
 
 const listTitleStyle = (pillar: Pillar) => css`
-    color: ${pillarPalette[pillar].main};
     display: table-cell;
 `;
 
@@ -56,6 +55,10 @@ const wrapper = css`
 const eventLinkStyle = css`
     display: block;
     text-decoration: none;
+    color: #005689;
+    :hover {
+        text-decoration: underline;
+    }
 `;
 
 const listStyle = css`
