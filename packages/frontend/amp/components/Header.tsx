@@ -84,6 +84,10 @@ const pillarLinkStyle = (pillar: Pillar) => css`
         padding: 7px 4px 0;
     }
 
+    :hover {
+        text-decoration: underline;
+    }
+
     :before {
         border-left: 1px solid rgba(255, 255, 255, 0.3);
         top: 0;
