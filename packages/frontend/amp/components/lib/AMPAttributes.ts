@@ -9,5 +9,7 @@ declare module 'react' {
         on?: string;
         overflow?: string;
         fallback?: '';
+        update?: '';
+        items?: '';
     }
 }

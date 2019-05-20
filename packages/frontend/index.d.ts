@@ -231,6 +231,7 @@ declare namespace JSX {
         'amp-youtube': any;
         'amp-geo': any;
         'amp-consent': any;
+        'amp-live-list': any;
         template: any;
     }
 }

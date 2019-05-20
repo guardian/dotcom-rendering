@@ -155,17 +155,28 @@ export const Body: React.FC<{
             {!isFirstPage && (
                 <Pagination guardianURL={url} pagination={data.pagination} />
             )}
-            <Blocks
-                pillar={pillar}
-                blocks={data.blocks}
-                // stuff for ads
-                edition={data.editionId}
-                section={data.sectionName}
-                contentType={data.contentType}
-                switches={config.switches}
-                commercialProperties={data.commercialProperties}
-                url={url}
-            />
+            <amp-live-list
+                id="live-blog-entries"
+                data-poll-interval="15000"
+                data-max-items-per-page="20"
+            >
+                <button update="" on="tap:my-live-list.update">
+                    You have updates
+                </button>
+                <div items="">
+                    <Blocks
+                        pillar={pillar}
+                        blocks={data.blocks}
+                        // stuff for ads
+                        edition={data.editionId}
+                        section={data.sectionName}
+                        contentType={data.contentType}
+                        switches={config.switches}
+                        commercialProperties={data.commercialProperties}
+                        url={url}
+                    />
+                </div>
+            </amp-live-list>
             <Pagination guardianURL={url} pagination={data.pagination} />
             <SubMeta
                 sections={data.subMetaSectionLinks}
