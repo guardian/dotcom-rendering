@@ -162,7 +162,6 @@ export const Body: React.FC<{
             )}
             <amp-live-list
                 id="live-blog-entries-7ea0dbef"
-                data-poll-interval="15000"
                 data-max-items-per-page="20"
             >
                 <button update="" on="tap:my-live-list.update">
