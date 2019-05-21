@@ -26,9 +26,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                       config.subscribeWithGoogleApiUrl,
                   )
                 : []),
-            ...[
-                '<script async custom-element="amp-live-list" src="https://cdn.ampproject.org/v0/amp-live-list-0.1.js"></script>',
-            ],
         ];
 
         const analytics: AnalyticsModel = {
