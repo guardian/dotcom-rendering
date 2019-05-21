@@ -6,7 +6,7 @@
         "packages/*"
     ],
     "scripts": {
-        "lint": "eslint . --ext .ts",
+        "lint": "eslint . --ext .ts,.tsx",
         "tsc": "tsc",
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js"
