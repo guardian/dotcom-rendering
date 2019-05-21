@@ -80,7 +80,12 @@ const Blocks: React.SFC<{
     // TODO add last updated for blocks to show here
     const transformedBlocks = blocks.map(block => {
         return (
-            <div key={block.id} className={blockStyle(pillar)}>
+            <div
+                id={block.id}
+                data-sort-time={block.createdOn}
+                key={block.id}
+                className={blockStyle(pillar)}
+            >
                 {block.createdOnDisplay && (
                     <a href={blockLink(url, block.id)}>
                         {block.createdOnDisplay}
@@ -156,7 +161,7 @@ export const Body: React.FC<{
                 <Pagination guardianURL={url} pagination={data.pagination} />
             )}
             <amp-live-list
-                id="live-blog-entries"
+                id="live-blog-entries-7ea0dbef"
                 data-poll-interval="15000"
                 data-max-items-per-page="20"
             >

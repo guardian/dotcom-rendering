@@ -108,6 +108,7 @@ interface AuthorType {
 interface Block {
     id: string;
     elements: CAPIElement[];
+    createdOn?: number;
     createdOnDisplay?: string;
     lastUpdatedDisplay?: string;
     title?: string;
