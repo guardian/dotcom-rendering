@@ -1,4 +1,6 @@
-type Switches = { [key: string]: boolean };
+interface Switches {
+    [key: string]: boolean;
+}
 
 type Weighting =
     | 'inline'

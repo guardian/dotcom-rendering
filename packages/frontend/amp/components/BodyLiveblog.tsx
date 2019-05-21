@@ -80,7 +80,12 @@ const Blocks: React.SFC<{
     // TODO add last updated for blocks to show here
     const transformedBlocks = blocks.map(block => {
         return (
-            <div key={block.id} className={blockStyle(pillar)}>
+            <div
+                id={block.id}
+                data-sort-time={block.createdOn}
+                key={block.id}
+                className={blockStyle(pillar)}
+            >
                 {block.createdOnDisplay && (
                     <a href={blockLink(url, block.id)}>
                         {block.createdOnDisplay}
@@ -155,17 +160,27 @@ export const Body: React.FC<{
             {!isFirstPage && (
                 <Pagination guardianURL={url} pagination={data.pagination} />
             )}
-            <Blocks
-                pillar={pillar}
-                blocks={data.blocks}
-                // stuff for ads
-                edition={data.editionId}
-                section={data.sectionName}
-                contentType={data.contentType}
-                switches={config.switches}
-                commercialProperties={data.commercialProperties}
-                url={url}
-            />
+            <amp-live-list
+                id="live-blog-entries-7ea0dbef"
+                data-max-items-per-page="20"
+            >
+                <button update="" on="tap:my-live-list.update">
+                    You have updates
+                </button>
+                <div items="">
+                    <Blocks
+                        pillar={pillar}
+                        blocks={data.blocks}
+                        // stuff for ads
+                        edition={data.editionId}
+                        section={data.sectionName}
+                        contentType={data.contentType}
+                        switches={config.switches}
+                        commercialProperties={data.commercialProperties}
+                        url={url}
+                    />
+                </div>
+            </amp-live-list>
             <Pagination guardianURL={url} pagination={data.pagination} />
             <SubMeta
                 sections={data.subMetaSectionLinks}
