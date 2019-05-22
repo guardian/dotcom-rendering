@@ -1,6 +1,6 @@
 import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
-import { Elements } from '@frontend/amp/components/lib/Elements';
+import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
