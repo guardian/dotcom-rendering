@@ -17,8 +17,8 @@ const wrapper = (pillar: Pillar) => css`
     border-top: 13px solid ${palette.neutral[7]};
     border-image: repeating-linear-gradient(
             to bottom,
-            #dcdcdc,
-            #dcdcdc 1px,
+            ${palette.neutral[86]},
+            ${palette.neutral[86]} 1px,
             transparent 1px,
             transparent 4px
         )

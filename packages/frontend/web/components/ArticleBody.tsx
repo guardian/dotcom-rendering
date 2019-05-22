@@ -328,7 +328,7 @@ const linkColour = pillarMap(
     pillar => css`
         a {
             text-decoration: none;
-            border-bottom: 1px solid #dcdcdc;
+            border-bottom: 1px solid ${palette.neutral[86]};
             ${pillarColours[pillar]};
 
             :hover {
