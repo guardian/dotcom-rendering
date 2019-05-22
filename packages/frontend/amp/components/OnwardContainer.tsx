@@ -5,7 +5,7 @@ import {
     MoustacheVariable,
     MoustacheTemplate,
     moustacheVariable,
-} from './primitives/moustache';
+} from '@frontend/amp/components/moustache';
 import { headline, textSans } from '@guardian/pasteup/typography';
 
 import VideoIcon from '@guardian/pasteup/icons/video-icon.svg';
