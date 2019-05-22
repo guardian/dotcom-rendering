@@ -193,7 +193,7 @@ export const Header: React.FC<{
                 nav={nav}
                 rrLink={'ampHeader'}
                 rrCategory={'support'}
-                linkLabel={'Support Us'}
+                linkLabel={'Support us'}
             />
 
             {config.switches.subscribeWithGoogle && <GoogleSubscribeButton />}
