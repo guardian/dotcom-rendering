@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { textSans } from '@guardian/pasteup/typography';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
-import { mobileMedium } from '@guardian/pasteup/breakpoints';
+import { until } from '@guardian/pasteup/breakpoints';
 
 const supportStyles = css`
     align-self: flex-start;
@@ -32,15 +32,23 @@ const supportLinkStyles = css`
     position: relative;
     color: ${palette.neutral[7]};
     ${textSans(5)};
+    font-weight: 700;
     display: block;
     line-height: 20px;
     text-decoration: none;
-    padding-right: 20px;
     width: 100%;
+
+    padding-right: 20px;
+    ${until.mobileMedium} {
+        padding-right: 0px;
+    }
 
     svg {
         position: absolute;
-        top: -6px;
+        top: -5px;
+        ${until.mobileMedium} {
+            display: none;
+        }
     }
 `;
 
@@ -50,14 +58,6 @@ const rightAlignedIcon = css`
     width: 20px;
     right: 0;
     top: 0;
-`;
-
-const arrowRight = css`
-    display: none;
-
-    ${mobileMedium} {
-        display: inline-block;
-    }
 `;
 
 export const ReaderRevenueButton: React.SFC<{
@@ -88,7 +88,7 @@ export const ReaderRevenueButton: React.SFC<{
                         [rightAlignedIcon]: !!rightAlignIcon,
                     })}
                 >
-                    <ArrowRight className={arrowRight} />
+                    <ArrowRight />
                 </span>
             </a>
         </div>
