@@ -49,15 +49,11 @@ const pillarLink = css`
     display: block;
     ${headline(4)};
     outline: none;
-    padding: 8px 10px 8px 50px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 6px 10px 16px 50px;
     position: relative;
     text-align: left;
     width: 100%;
     font-weight: 700;
-    padding-bottom: 16px;
-    padding-top: 6px;
     color: ${palette.neutral[100]};
     ${toggle};
 `;

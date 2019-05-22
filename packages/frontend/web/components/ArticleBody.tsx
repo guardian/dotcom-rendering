@@ -365,6 +365,7 @@ const ageWarning = css`
         margin-left: -10px;
         margin-top: -6px;
         padding-left: 10px;
+    }
 `;
 
 const ageWarningScreenReader = css`

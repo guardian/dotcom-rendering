@@ -40,7 +40,7 @@ const inner = css`
     ${until.phablet} {
         max-width: 90%;
         margin: auto;
-        padding 0;
+        padding: 0;
         p {
             ${body(1)};
         }
@@ -76,7 +76,6 @@ const button = css`
     background: ${palette.highlight.main};
     color: ${palette.neutral[7]};
     padding: 0 25px 0 46px;
-    display: block;
     align-items: flex-start;
     justify-content: space-between;
     cursor: pointer;

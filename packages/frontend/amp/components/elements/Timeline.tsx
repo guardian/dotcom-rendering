@@ -17,13 +17,8 @@ const eventStyle = css`
     padding-bottom: 16px;
 `;
 
-const highlight = css`
-    background-color: ${palette.highlight.main};
-`;
-
 const eventIconStyle = css`
-    ${highlight}
-
+    background-color: ${palette.highlight.main};
     :before {
         content: '';
         width: 16px;
