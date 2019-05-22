@@ -7,6 +7,6 @@
   "rules": {
     "no-duplicate-selectors": null,
     "no-descending-specificity": null,
-    "color-no-hex": true
+    "color-no-hex": [true, { "message": "Please use the pasteup palette variables instead of hex values"}]
   }
 }
