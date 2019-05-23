@@ -29,7 +29,7 @@ const toggle = css`
         position: absolute;
 
         :before {
-            border: 2px solid #fff;
+            border: 2px solid ${palette.neutral[100]};
             border-top: 0;
             border-left: 0;
             content: '';
@@ -75,7 +75,7 @@ const link = css`
 `;
 
 const subLinks = css`
-    background-color: #041f4a;
+    background-color: ${palette.brand.dark};
     padding-bottom: 12px;
 
     a {
@@ -92,7 +92,7 @@ const otherLinks = css`
 const membershipLinks = css`
     a {
         font-weight: 700;
-        color: #ffe500;
+        color: ${palette.highlight.main};
     }
 `;
 

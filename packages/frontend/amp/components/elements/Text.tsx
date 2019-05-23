@@ -25,7 +25,7 @@ export const TextStyle = (pillar: Pillar) => css`
     a {
         color: ${pillarPalette[pillar].dark};
         text-decoration: none;
-        border-bottom: 1px solid #dcdcdc;
+        border-bottom: 1px solid ${palette.neutral[86]};
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }

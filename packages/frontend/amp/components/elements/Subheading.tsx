@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+import { palette } from '@guardian/pasteup/palette';
 import { headline } from '@guardian/pasteup/typography';
 import { pillarPalette } from '@frontend/lib/pillars';
 
@@ -16,7 +17,7 @@ const style = (pillar: Pillar) => css`
     a {
         color: ${pillarPalette[pillar].dark};
         text-decoration: none;
-        border-bottom: 1px solid #dcdcdc;
+        border-bottom: 1px solid ${palette.neutral[86]};
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
