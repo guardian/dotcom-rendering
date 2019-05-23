@@ -10,7 +10,7 @@ const headingStyle = css`
     ${headline(3)};
     background-color: ${palette.neutral[100]};
     padding: 0.375rem 0.625rem;
-
+    font-weight: bold;
     span {
         background-color: ${palette.neutral[46]};
         float: right;
