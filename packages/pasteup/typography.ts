@@ -4,19 +4,13 @@ type BodyLevel = 1 | 2 | 3 | 4;
 type TextSansLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export const serif = {
-    headline: ['GH Guardian Headline', 'Georgia', 'serif'].join(', '),
-    body: ['GuardianTextEgyptian', 'Georgia', 'serif'].join(', '),
+    headline: 'font-family: "GH Guardian Headline", Georgia, serif',
+    body: 'font-family: "GuardianTextEgyptian", Georgia, serif',
 };
 
 export const sans = {
-    body: [
-        'GuardianTextSans',
-        'Helvetica Neue',
-        'Helvetica',
-        'Arial',
-        'Lucida Grande',
-        'sans-serif',
-    ].join(', '),
+    body:
+        'font-family: "GuardianTextSans", Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
 };
 
 const fontScaleMapping: any = {

@@ -19,7 +19,7 @@ import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientCo
 const message = css`
     color: ${palette.highlight.main};
     display: none;
-    font-family: ${serif.headline};
+    ${serif.headline};
     font-size: 20px;
     font-weight: 800;
     line-height: 1;
@@ -45,7 +45,7 @@ const link = css`
     box-sizing: border-box;
     color: ${palette.neutral[7]};
     float: left;
-    font-family: ${sans.body};
+    ${sans.body};
     font-weight: 700;
     height: 32px;
     text-decoration: none;
