@@ -31,6 +31,45 @@ const clear = css`
     clear: both;
 `;
 
+const withAds = (
+    elements: CAPIElement[],
+    components: any[],
+    edition: Edition,
+    contentType: string,
+    commercialProperties: CommercialProperties,
+    switches: Switches,
+    section?: string,
+): JSX.Element => {
+    const slotIndexes = findAdSlots(elements);
+    const commercialConfig = {
+        useKrux: switches.krux,
+        usePrebid: switches.ampPrebid,
+    };
+
+    // TODO lift out of here, and also check if ads required!
+    const elementsWithAdverts = components.map((element, i) => (
+        <>
+            {element}
+            {slotIndexes.includes(i) ? (
+                <Ad
+                    edition={edition}
+                    section={section}
+                    contentType={contentType}
+                    config={commercialConfig}
+                    commercialProperties={commercialProperties}
+                />
+            ) : null}
+        </>
+    ));
+
+    return (
+        <>
+            {elementsWithAdverts}
+            <div className={clear} />
+        </>
+    );
+};
+
 export const Elements: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
@@ -40,6 +79,7 @@ export const Elements: React.FC<{
     switches: Switches;
     commercialProperties: CommercialProperties;
     isImmersive: boolean;
+    shouldHideAds: boolean;
 }> = ({
     elements,
     pillar,
@@ -49,6 +89,7 @@ export const Elements: React.FC<{
     switches,
     commercialProperties,
     isImmersive,
+    shouldHideAds,
 }) => {
     const cleanedElements = elements.map(element =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -175,31 +216,21 @@ export const Elements: React.FC<{
         }
     });
 
-    const slotIndexes = findAdSlots(elements);
-    const commercialConfig = {
-        useKrux: switches.krux,
-        usePrebid: switches.ampPrebid,
-    };
-
-    const elementsWithAdverts = output.map((element, i) => (
-        <>
-            {element}
-            {slotIndexes.includes(i) ? (
-                <Ad
-                    edition={edition}
-                    section={section}
-                    contentType={contentType}
-                    config={commercialConfig}
-                    commercialProperties={commercialProperties}
-                />
-            ) : null}
-        </>
-    ));
+    if (shouldHideAds) {
+        return <>{output}</>;
+    }
 
     return (
         <>
-            {elementsWithAdverts}
-            <div className={clear} />
+            {withAds(
+                elements,
+                output,
+                edition,
+                contentType,
+                commercialProperties,
+                switches,
+                section,
+            )}
         </>
     );
 };
