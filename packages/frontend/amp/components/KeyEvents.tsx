@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 // import { pillarPalette } from '@frontend/lib/pillars';
 import DownArrow from '@guardian/pasteup/icons/down-arrow.svg';
@@ -26,6 +26,7 @@ const headingStyle = css`
 
 const listItemStyle = css`
     display: table;
+    ${textSans(2)};
     width: 100%;
     overflow: hidden;
     min-height: 2.5rem;
@@ -34,16 +35,12 @@ const listItemStyle = css`
 `;
 
 const timeStyle = css`
-    font-size: 0.8125rem;
-    line-height: 1.125rem;
-    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
-        'Lucida Grande', sans-serif;
     display: table-cell;
     width: 6.75rem;
     font-weight: bold;
 `;
 
-const listTitleStyle = (pillar: Pillar) => css`
+const listTitleStyle = css`
     display: table-cell;
 `;
 
@@ -67,9 +64,8 @@ const listStyle = css`
 
 export const KeyEvents: React.SFC<{
     events: Block[];
-    pillar: Pillar;
     url: string;
-}> = ({ events, pillar, url }) => {
+}> = ({ events, url }) => {
     if (!events || events.length < 1) {
         return null;
     }
@@ -78,9 +74,7 @@ export const KeyEvents: React.SFC<{
         <li className={listItemStyle} key={event.id}>
             <a className={eventLinkStyle} href={blockLink(url, event.id)}>
                 <span className={timeStyle}>{event.createdOnDisplay}</span>
-                <span className={listTitleStyle(pillar)}>
-                    {event.title || ''}
-                </span>
+                <span className={listTitleStyle}>{event.title || ''}</span>
             </a>
         </li>
     ));
