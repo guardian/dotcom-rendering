@@ -1,9 +1,6 @@
 import React from 'react';
-import { css } from 'emotion';
-import { clean } from '@frontend/model/clean';
 
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
-import { Ad } from '@frontend/amp/components/Ad';
 import { Expandable } from '@frontend/amp/components/Expandable';
 
 import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
@@ -21,54 +18,18 @@ import { RichLink } from '@root/packages/frontend/amp/components/elements/RichLi
 import { SoundcloudEmbed } from '@root/packages/frontend/amp/components/elements/SoundcloudEmbed';
 import { Embed } from '@root/packages/frontend/amp/components/elements/Embed';
 import { PullQuote } from '@root/packages/frontend/amp/components/elements/PullQuote';
+import { css } from 'emotion';
+import { clean } from '@frontend/model/clean';
 import { Timeline } from '@frontend/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
 import { InteractiveUrl } from '@frontend/amp/components/elements/InteractiveUrl';
 import { InteractiveMarkup } from '@frontend/amp/components/elements/InteractiveMarkup';
 import { MapEmbed } from '@frontend/amp/components/elements/MapEmbed';
+import { WithAds } from '@frontend/amp/components/WithAds';
 
 const clear = css`
     clear: both;
 `;
-
-const withAds = (
-    elements: CAPIElement[],
-    components: any[],
-    edition: Edition,
-    contentType: string,
-    commercialProperties: CommercialProperties,
-    switches: Switches,
-    section?: string,
-): JSX.Element => {
-    const slotIndexes = findAdSlots(elements);
-    const commercialConfig = {
-        useKrux: switches.krux,
-        usePrebid: switches.ampPrebid,
-    };
-
-    // TODO lift out of here, and also check if ads required!
-    const elementsWithAdverts = components.map((element, i) => (
-        <>
-            {element}
-            {slotIndexes.includes(i) ? (
-                <Ad
-                    edition={edition}
-                    section={section}
-                    contentType={contentType}
-                    config={commercialConfig}
-                    commercialProperties={commercialProperties}
-                />
-            ) : null}
-        </>
-    ));
-
-    return (
-        <>
-            {elementsWithAdverts}
-            <div className={clear} />
-        </>
-    );
-};
 
 export const Elements: React.FC<{
     elements: CAPIElement[];
@@ -220,17 +181,24 @@ export const Elements: React.FC<{
         return <>{output}</>;
     }
 
+    const slotIndexes = findAdSlots(elements);
+    const adInfo = {
+        section,
+        edition,
+        contentType,
+        commercialProperties,
+        switches: { krux: switches.krux, ampPrebid: switches.prebid },
+    };
+
     return (
         <>
-            {withAds(
-                elements,
-                output,
-                edition,
-                contentType,
-                commercialProperties,
-                switches,
-                section,
-            )}
+            <WithAds
+                items={output}
+                adSlots={slotIndexes}
+                adClassName={''}
+                adInfo={adInfo}
+            />
+            <div className={clear} />
         </>
     );
 };

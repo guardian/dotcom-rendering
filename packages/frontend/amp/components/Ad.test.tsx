@@ -38,6 +38,7 @@ describe('AdComponent', () => {
                 contentType={contentType}
                 config={commercialConfig}
                 commercialProperties={commercialProperties}
+                className=""
             />,
         );
 
@@ -85,6 +86,7 @@ describe('AdComponent', () => {
                 contentType={contentType}
                 config={commercialConfig}
                 commercialProperties={commercialProperties}
+                className=""
             />,
         );
 
@@ -129,6 +131,7 @@ describe('AdComponent', () => {
                 contentType={contentType}
                 config={commercialConfig}
                 commercialProperties={commercialProperties}
+                className=""
             />,
         );
 
@@ -174,6 +177,7 @@ describe('AdComponent', () => {
                 contentType={contentType}
                 config={commercialConfig}
                 commercialProperties={commercialProperties}
+                className=""
             />,
         );
 

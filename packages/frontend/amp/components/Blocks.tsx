@@ -4,9 +4,9 @@ import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { blockLink } from '@frontend/amp/lib/block-link';
-import { Ad } from '@frontend/amp/components/Ad';
 import { findBlockAdSlots } from '@frontend/amp/lib/find-adslots';
 import { textSans } from '@guardian/pasteup/typography';
+import { WithAds } from '@frontend/amp/components/WithAds';
 
 const blockStyle = (pillar: Pillar) => css`
     padding: 6px 10px 12px;
@@ -33,45 +33,6 @@ const lastUpdatedStyle = css`
     text-align: right;
     padding-right: 15px;
 `;
-
-const withAds = (
-    blocks: JSX.Element[],
-    edition: Edition,
-    contentType: string,
-    commercialProperties: CommercialProperties,
-    switches: Switches,
-    section?: string,
-): JSX.Element[] => {
-    const commercialConfig = {
-        useKrux: switches.krux,
-        usePrebid: switches.ampPrebid,
-    };
-
-    const ad = (
-        <Ad
-            edition={edition}
-            section={section}
-            contentType={contentType}
-            config={commercialConfig}
-            commercialProperties={commercialProperties}
-        />
-    );
-
-    const adSlots = findBlockAdSlots(blocks);
-
-    return blocks.map((block, i) => {
-        if (adSlots.includes(i)) {
-            return (
-                <>
-                    {ad}
-                    {block}
-                </>
-            );
-        }
-
-        return block;
-    });
-};
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
 // that out and have an Ad element type we match against
@@ -124,7 +85,7 @@ export const Blocks: React.SFC<{
                     switches={switches}
                     commercialProperties={commercialProperties}
                     isImmersive={false}
-                    shouldHideAds={false}
+                    shouldHideAds={true}
                 />
                 {block.lastUpdatedDisplay && (
                     <div className={lastUpdatedStyle}>
@@ -139,16 +100,23 @@ export const Blocks: React.SFC<{
         return <>{liveBlogBlocks}</>;
     }
 
+    const slotIndexes = findBlockAdSlots(liveBlogBlocks);
+    const adInfo = {
+        section,
+        edition,
+        contentType,
+        commercialProperties,
+        switches: { krux: switches.krux, ampPrebid: switches.prebid },
+    };
+
     return (
         <>
-            {withAds(
-                liveBlogBlocks,
-                edition,
-                contentType,
-                commercialProperties,
-                switches,
-                section,
-            )}
+            <WithAds
+                items={liveBlogBlocks}
+                adSlots={slotIndexes}
+                adClassName={''}
+                adInfo={adInfo}
+            />
         </>
     );
 };

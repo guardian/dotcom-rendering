@@ -105,7 +105,7 @@ describe('ampadslots', () => {
 
             const slots = findBlockAdSlots(blocks);
 
-            expect(slots).toEqual([5, 10, 15, 20, 25, 30, 35, 40]);
+            expect(slots).toEqual([4, 9, 14, 19, 24, 29, 34, 39]);
         });
     });
 });

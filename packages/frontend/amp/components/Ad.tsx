@@ -141,10 +141,11 @@ const ampAdElem = (
     contentType: string,
     config: CommercialConfig,
     commercialProperties: CommercialProperties,
+    className: string,
 ) => {
     return (
         <amp-ad
-            class={cx(adClass, adRegionClasses[adRegion])}
+            class={cx(adClass, adRegionClasses[adRegion], className)}
             data-block-on-consent=""
             width={300}
             height={250}
@@ -169,7 +170,15 @@ export const Ad: React.SFC<{
     contentType: string;
     config: CommercialConfig;
     commercialProperties: CommercialProperties;
-}> = ({ edition, section, contentType, config, commercialProperties }) => (
+    className: string;
+}> = ({
+    edition,
+    section,
+    contentType,
+    config,
+    commercialProperties,
+    className,
+}) => (
     <div className={adStyle}>
         {ampAdElem(
             'US',
@@ -178,6 +187,7 @@ export const Ad: React.SFC<{
             contentType,
             config,
             commercialProperties,
+            className,
         )}
         {ampAdElem(
             'AU',
@@ -186,6 +196,7 @@ export const Ad: React.SFC<{
             contentType,
             config,
             commercialProperties,
+            className,
         )}
         {ampAdElem(
             'ROW',
@@ -194,6 +205,7 @@ export const Ad: React.SFC<{
             contentType,
             config,
             commercialProperties,
+            className,
         )}
     </div>
 );

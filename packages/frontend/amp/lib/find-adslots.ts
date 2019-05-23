@@ -141,12 +141,13 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
     return adSlots;
 };
 
-// Returns index of items to place ads *before*
+// Returns index of items to place ads *after*
 export const findBlockAdSlots = (blocks: any[]): number[] => {
     const maxAds = 8;
 
     return blocks
         .map((_, i) => i)
         .filter(i => i !== 0 && i % 5 === 0)
+        .map(i => i - 1)
         .slice(0, maxAds);
 };
