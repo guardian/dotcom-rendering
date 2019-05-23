@@ -6,6 +6,7 @@
   ],
   "rules": {
     "no-duplicate-selectors": null,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "property-blacklist": [["font-family"], { "message": "Please use the typography functions from pasteup/typography"}]
   }
 }
