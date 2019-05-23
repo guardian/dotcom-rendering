@@ -6,11 +6,11 @@ import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import CommentIcon from '@guardian/pasteup/icons/comment.svg';
 
-const guardianLines = css`
+const guardianLines = (pillar: Pillar) => css`
     background-image: repeating-linear-gradient(
         to bottom,
-        ${palette.neutral[86]},
-        ${palette.neutral[86]} 1px,
+        ${pillarPalette[pillar].neutral.border},
+        ${pillarPalette[pillar].neutral.border} 1px,
         transparent 1px,
         transparent 4px
     );
@@ -47,12 +47,12 @@ const itemStyle = css`
     }
 `;
 
-const keywordListStyle = css`
+const keywordListStyle = (pillar: Pillar) => css`
     display: block;
     margin-left: -6px;
     padding-top: 6px;
     padding-bottom: 12px;
-    border-bottom: 1px solid ${palette.neutral[86]};
+    border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
     margin-bottom: 6px;
 `;
 
@@ -65,7 +65,7 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     ${textSans(5)};
     :after {
         content: '/';
-        ${textSans(7)};
+        ${textSans(8)};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -155,10 +155,10 @@ export const SubMeta: React.FC<{
 
     return (
         <>
-            <div className={guardianLines}>
+            <div className={guardianLines(pillar)}>
                 <span className={labelStyle}>Topics</span>
                 <ul className={sectionListStyle}>{sectionListItems}</ul>
-                <ul className={keywordListStyle}>{keywordListItems}</ul>
+                <ul className={keywordListStyle(pillar)}>{keywordListItems}</ul>
             </div>
             <ShareIcons
                 className={shareIcons}
@@ -175,7 +175,7 @@ export const SubMeta: React.FC<{
                 ]}
             />
             {/* TODO link to actual (non-AMP) site here. Also handle comment count behaviour. */}
-            <div className={cx(guardianLines, siteLinks)}>
+            <div className={cx(guardianLines(pillar), siteLinks)}>
                 {isCommentable && (
                     <a
                         className={siteLinkStyle}

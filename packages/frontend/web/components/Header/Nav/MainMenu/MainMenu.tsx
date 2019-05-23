@@ -24,7 +24,7 @@ const showMenu = css`
 const mainMenu = css`
     background-color: ${palette.brand.main};
     box-sizing: border-box;
-    ${textSans(7)};
+    ${textSans(8)};
     left: 0;
     margin-right: 29px;
     padding-bottom: 24px;
