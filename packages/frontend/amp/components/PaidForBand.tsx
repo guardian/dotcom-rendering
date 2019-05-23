@@ -49,7 +49,7 @@ const aboutButtonStyle = css`
     background: transparent;
     color: inherit;
     cursor: pointer;
-}`;
+`;
 
 const aboutButtonIcon = css`
     :after {

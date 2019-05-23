@@ -10,7 +10,6 @@ const subnavWrapper = css`
 `;
 
 const multiLine = css`
-    content: '';
     background-image: repeating-linear-gradient(
         to bottom,
         ${palette.neutral[86]},
