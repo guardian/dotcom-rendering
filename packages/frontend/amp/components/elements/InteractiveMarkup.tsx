@@ -24,25 +24,6 @@ export const InteractiveMarkup: React.SFC<{
     const styleTag = styles ? `<style>${styles}</style>` : '';
     const scripts = js ? `<script>${js}</script>` : '';
 
-    const resizeScript = `
-<script>
-    var height = Math.max(
-        body.scrollHeight,
-        body.offsetHeight, 
-        html.clientHeight,
-        html.scrollHeight,
-        html.offsetHeight
-    );
-    
-    window.parent.postMessage({
-        sentinel: 'amp',
-        type: 'embed-size',
-        height: height
-    }, '*');
-    
-    console.log(height);
-</script>`;
-
     const body = `
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +40,6 @@ export const InteractiveMarkup: React.SFC<{
     <body>
         ${html}
         ${scripts}
-        ${resizeScript}
     </body>
     </html>
 `;
