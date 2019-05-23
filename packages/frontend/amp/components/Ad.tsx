@@ -29,6 +29,8 @@ const adStyle = css`
         display: block;
         font-size: 12px;
         line-height: 16px;
+        /* Adverts specifcally don't use the GU font branding. */
+        /* stylelint-disable-next-line property-blacklist */
         font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
             sans-serif;
         padding: 3px 10px;
