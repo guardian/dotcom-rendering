@@ -9,7 +9,7 @@ import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { blockLink } from '@frontend/amp/lib/block-link';
 
 // TODO check if liveblog background colours are more complex - like regular
@@ -91,7 +91,10 @@ const blockCreatedOnStyle = (pillar: Pillar) => css`
 `;
 
 const lastUpdatedStyle = css`
-    font-style: oblique;
+    ${textSans(1)};
+    color: ${palette.neutral[60]};
+    text-align: right;
+    padding-right: 15px;
 `;
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
@@ -145,9 +148,9 @@ const Blocks: React.SFC<{
                     isImmersive={false}
                 />
                 {block.lastUpdatedDisplay && (
-                    <span className={lastUpdatedStyle}>
-                        Last updated: {block.lastUpdatedDisplay}
-                    </span>
+                    <div className={lastUpdatedStyle}>
+                        Updated at {block.lastUpdatedDisplay}
+                    </div>
                 )}
             </div>
         );
