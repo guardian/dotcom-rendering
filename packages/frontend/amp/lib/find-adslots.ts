@@ -25,8 +25,8 @@ interface ElementWithLength {
 export const AD_LIMIT = 8;
 export const SMALL_PARA_CHARS = 50;
 export const MIN_CHAR_BUFFER = 700;
-const IMG_BUFFER_FWD = 300; // really any non-p element type
-const IMG_BUFFER_BWD = 200;
+const NONTEXT_BUFFER_FORWARD = 300;
+const NONTEXT_BUFFER_BACKWARD = 200;
 
 const isTextElement = (e: CAPIElement): boolean => {
     return e._type === 'model.dotcomrendering.pageElements.TextBlockElement';
@@ -35,7 +35,9 @@ const isTextElement = (e: CAPIElement): boolean => {
 const getElementLength = (element: CAPIElement): number => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.TextBlockElement':
-            return element.html.length;
+            // we don't want to count html characters
+            const htmlRegex = /(<([^>]+)>)/gi;
+            return element.html.replace(htmlRegex, '').length;
         default:
             return 0; // for the purposes of ads we don't care how long other elements are
     }
@@ -58,6 +60,7 @@ const getLengthOfFollowingTextElements = (
     const firstNonTextIndex = elements.findIndex(
         e => !isTextElement(e.element),
     );
+
     return elements
         .slice(0, firstNonTextIndex)
         .map(e => e.length)
@@ -72,9 +75,10 @@ const hasForwardBuffer = (
     elements: ElementWithLength[],
     index: number,
 ): boolean => {
-    const forwardElements = elements.slice(-1 * index);
+    const forwardElements = elements.slice(index + 1, elements.length);
     const meetsThreshold =
-        getLengthOfFollowingTextElements(forwardElements) >= IMG_BUFFER_FWD;
+        getLengthOfFollowingTextElements(forwardElements) >=
+        NONTEXT_BUFFER_FORWARD;
     const noForwardsEmbeds =
         forwardElements.filter(e => isTextElement(e.element)).length ===
         forwardElements.length;
@@ -92,9 +96,10 @@ const hasBackwardBuffer = (
     index: number,
     textSinceLastAd: number,
 ): boolean => {
-    const backwardsElements = elements.slice(0, index + 1).reverse();
+    const backwardsElements = elements.slice(0, index).reverse();
     const meetsThreshold =
-        getLengthOfFollowingTextElements(backwardsElements) >= IMG_BUFFER_BWD;
+        getLengthOfFollowingTextElements(backwardsElements) >=
+        NONTEXT_BUFFER_BACKWARD;
     const noBackwardsEmbeds =
         backwardsElements.filter(e => isTextElement(e.element)).length ===
         backwardsElements.length;
@@ -132,7 +137,7 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
             charsScannedSinceLastAd += elementsWithLength[i].length;
 
             if (hasSpaceForAd(elementsWithLength, i, charsScannedSinceLastAd)) {
-                adSlots.push(i);
+                adSlots.push(i - 1);
                 charsScannedSinceLastAd = 0;
                 adCount += 1;
             }
