@@ -26,7 +26,15 @@ const body = (pillar: Pillar, tone: StyledTone) => css`
 
     h2 {
         ${headline(2)};
+        font-size: 1.5em;
+        font-weight: 500;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
     }
+
+    ${listItemStyle(pillar)}
 `;
 
 // TODO move into shared place and also add list styling and blockquote etc.
@@ -48,6 +56,21 @@ const bulletStyle = (pillar: Pillar) => css`
     }
 `;
 
+const listItemStyle = (pillar: Pillar) => css`
+    li {
+        margin-bottom: 0.8em;
+    }
+    li:before {
+        display: inline-block;
+        content: '';
+        border-radius: 0.375rem;
+        height: 0.75rem;
+        width: 0.75rem;
+        margin-right: 0.25rem;
+        background-color: ${palette.neutral[60]};
+    }
+`;
+
 const blockStyle = (pillar: Pillar) => css`
     padding: 6px 10px 12px;
     background-color: ${palette.neutral[100]};
@@ -57,6 +80,18 @@ const blockStyle = (pillar: Pillar) => css`
     blockquote {
         margin-left: 40px;
     }
+`;
+
+const blockCreatedOnStyle = (pillar: Pillar) => css`
+    color: ${palette.neutral[7]};
+    line-height: 2rem;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-weight: bold;
+`;
+
+const lastUpdatedStyle = css`
+    font-style: oblique;
 `;
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
@@ -90,7 +125,10 @@ const Blocks: React.SFC<{
                 className={blockStyle(pillar)}
             >
                 {block.createdOnDisplay && (
-                    <a href={blockLink(url, block.id)}>
+                    <a
+                        className={blockCreatedOnStyle(pillar)}
+                        href={blockLink(url, block.id)}
+                    >
                         {block.createdOnDisplay}
                     </a>
                 )}
@@ -107,7 +145,9 @@ const Blocks: React.SFC<{
                     isImmersive={false}
                 />
                 {block.lastUpdatedDisplay && (
-                    <span>{block.lastUpdatedDisplay}</span>
+                    <span className={lastUpdatedStyle}>
+                        Last updated: {block.lastUpdatedDisplay}
+                    </span>
                 )}
             </div>
         );
