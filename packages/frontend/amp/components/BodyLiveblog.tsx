@@ -34,7 +34,7 @@ const body = (pillar: Pillar, tone: StyledTone) => css`
         margin-inline-end: 0px;
     }
 
-    ${listItemStyle}
+    ${listItemStyle(pillar)}
 `;
 
 // TODO move into shared place and also add list styling and blockquote etc.
@@ -56,7 +56,7 @@ const bulletStyle = (pillar: Pillar) => css`
     }
 `;
 
-const listItemStyle = css`
+const listItemStyle = (pillar: Pillar) => css`
     li {
         margin-bottom: 0.8em;
     }
@@ -67,7 +67,7 @@ const listItemStyle = css`
         height: 0.75rem;
         width: 0.75rem;
         margin-right: 0.25rem;
-        background-color: #dcdcdc;
+        background-color: ${palette.neutral[60]};
     }
 `;
 
@@ -82,8 +82,8 @@ const blockStyle = (pillar: Pillar) => css`
     }
 `;
 
-const blockCreatedOnStyle = css`
-    color: #121212;
+const blockCreatedOnStyle = (pillar: Pillar) => css`
+    color: ${palette.neutral[7]};
     line-height: 2rem;
     margin-bottom: 10px;
     text-decoration: none;
@@ -126,7 +126,7 @@ const Blocks: React.SFC<{
             >
                 {block.createdOnDisplay && (
                     <a
-                        className={blockCreatedOnStyle}
+                        className={blockCreatedOnStyle(pillar)}
                         href={blockLink(url, block.id)}
                     >
                         {block.createdOnDisplay}
