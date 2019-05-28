@@ -1,5 +1,12 @@
 import React from 'react';
+import { css } from 'emotion';
+import { clean } from '@frontend/model/clean';
 
+import { findAdSlots } from '@frontend/amp/lib/find-adslots';
+import { Ad } from '@frontend/amp/components/Ad';
+import { Expandable } from '@frontend/amp/components/Expandable';
+
+import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
 import { Text } from '@root/packages/frontend/amp/components/elements/Text';
 import { Subheading } from '@root/packages/frontend/amp/components/elements/Subheading';
 import { Image } from '@root/packages/frontend/amp/components/elements/Image';
@@ -14,16 +21,11 @@ import { RichLink } from '@root/packages/frontend/amp/components/elements/RichLi
 import { SoundcloudEmbed } from '@root/packages/frontend/amp/components/elements/SoundcloudEmbed';
 import { Embed } from '@root/packages/frontend/amp/components/elements/Embed';
 import { PullQuote } from '@root/packages/frontend/amp/components/elements/PullQuote';
-import { findAdSlots } from '@frontend/amp/lib/find-adslots';
-import { Ad } from '@frontend/amp/components/Ad';
-import { css } from 'emotion';
-import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
-import { clean } from '@frontend/model/clean';
-import { Expandable } from '@frontend/amp/components/Expandable';
 import { Timeline } from '@frontend/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
 import { InteractiveUrl } from '@frontend/amp/components/elements/InteractiveUrl';
 import { InteractiveMarkup } from '@frontend/amp/components/elements/InteractiveMarkup';
+import { MapEmbed } from '@frontend/amp/components/elements/MapEmbed';
 
 const clear = css`
     clear: both;
@@ -93,6 +95,8 @@ export const Elements: React.FC<{
                 return <SoundcloudEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.EmbedBlockElement':
                 return <Embed key={i} element={element} />;
+            case 'model.dotcomrendering.pageElements.MapBlockElement':
+                return <MapEmbed key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
                 return (
                     <Disclaimer key={i} html={element.html} pillar={pillar} />

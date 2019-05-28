@@ -208,6 +208,15 @@ interface InteractiveUrlElement {
     url: string;
 }
 
+interface MapBlockElement {
+    _type: 'model.dotcomrendering.pageElements.MapBlockElement';
+    url: string;
+    originalUrl: string;
+    source: string;
+    caption: string;
+    title: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -230,4 +239,5 @@ type CAPIElement =
     | ProfileBlockElement
     | TimelineBlockElement
     | InteractiveMarkupBlockElement
-    | InteractiveUrlElement;
+    | InteractiveUrlElement
+    | MapBlockElement;
