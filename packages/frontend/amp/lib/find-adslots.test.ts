@@ -2,7 +2,6 @@ import {
     findAdSlots,
     AD_LIMIT,
     SMALL_PARA_CHARS,
-    MIN_CHAR_BUFFER,
     findBlockAdSlots,
 } from './find-adslots';
 
@@ -29,7 +28,6 @@ describe('ampadslots', () => {
         it('should have these values for ad spacing (or tests other than this one need updating)', () => {
             expect(AD_LIMIT).toEqual(8);
             expect(SMALL_PARA_CHARS).toEqual(50);
-            expect(MIN_CHAR_BUFFER).toEqual(700);
         });
 
         it('adds an advert after 700 chars', () => {
