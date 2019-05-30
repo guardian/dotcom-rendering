@@ -31,7 +31,7 @@ const isTextElement = (e: CAPIElement): boolean => {
     return e._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 };
 
-const getElementLength = (element: CAPIElement): number => {
+export const getElementLength = (element: CAPIElement): number => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.TextBlockElement':
             // we don't want to count html characters
@@ -107,15 +107,6 @@ const hasBackwardBuffer = (
     return suitableAdNeighbour(elements[index]) && enoughCharsBackward;
 };
 
-const hasSpaceForAd = (
-    elements: ElementWithLength[],
-    index: number,
-): boolean => {
-    return (
-        hasBackwardBuffer(elements, index) && hasForwardBuffer(elements, index)
-    );
-};
-
 /**
  * There are some magic numbers here - obtained by eyeballing content. Feel free
  * to update them if you notice issues.
@@ -127,6 +118,19 @@ const sufficientSpaceSinceLastAd = (
     return (
         (charsSinceLastAd > 700 && paragraphsSinceLastAd > 1) ||
         charsSinceLastAd > 900
+    );
+};
+
+const hasSpaceForAd = (
+    elements: ElementWithLength[],
+    index: number,
+    charsSinceLastAd: number,
+    paragraphsSinceLastAd: number,
+): boolean => {
+    return (
+        sufficientSpaceSinceLastAd(charsSinceLastAd, paragraphsSinceLastAd) &&
+        hasBackwardBuffer(elements, index) &&
+        hasForwardBuffer(elements, index)
     );
 };
 
@@ -144,11 +148,12 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
             charsSinceLastAd += elementsWithLength[i].length;
 
             if (
-                sufficientSpaceSinceLastAd(
+                hasSpaceForAd(
+                    elementsWithLength,
+                    i,
                     charsSinceLastAd,
                     paragraphsSinceLastAd,
-                ) &&
-                hasSpaceForAd(elementsWithLength, i)
+                )
             ) {
                 adSlots.push(i - 1);
                 charsSinceLastAd = 0;
