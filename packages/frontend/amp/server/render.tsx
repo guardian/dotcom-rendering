@@ -8,7 +8,6 @@ import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { getSubscribeWithGoogleExtensionScripts } from '@frontend/amp/lib/subscribe-with-google';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -19,14 +18,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
         const blockElements = CAPI.blocks.map(block => block.elements);
         const elements = ([] as CAPIElement[]).concat(...blockElements);
 
-        const scripts = [
-            ...extractScripts(elements, CAPI.mainMediaElements),
-            ...(config.switches.subscribeWithGoogle
-                ? getSubscribeWithGoogleExtensionScripts(
-                      config.subscribeWithGoogleApiUrl,
-                  )
-                : []),
-        ];
+        const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
 
         const analytics: AnalyticsModel = {
             gaTracker: 'UA-78705427-1',
