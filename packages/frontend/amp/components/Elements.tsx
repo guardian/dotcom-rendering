@@ -133,7 +133,7 @@ export const Elements: React.FC<{
                 return (
                     <Expandable
                         id={element.id}
-                        type="Profile"
+                        type="Quick Guide"
                         title={element.title}
                         html={element.html}
                         img={element.img}
