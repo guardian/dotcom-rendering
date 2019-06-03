@@ -64,8 +64,9 @@ const listStyle = css`
 
 export const KeyEvents: React.SFC<{
     events: Block[];
+    pillar: Pillar;
     url: string;
-}> = ({ events, url }) => {
+}> = ({ events, pillar, url }) => {
     if (!events || events.length < 1) {
         return null;
     }
