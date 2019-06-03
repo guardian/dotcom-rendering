@@ -1,6 +1,6 @@
 {
     "name": "@guardian/pasteup",
-    "version": "2.0.0-alpha.1",
+    "version": "2.0.0-alpha.2",
     "description": "Guardian design tokens",
     "repository": {
         "type": "git",
