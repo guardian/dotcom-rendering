@@ -1,5 +1,4 @@
 import React from 'react';
-import { Img } from '@frontend/amp/components/primitives/Img';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import { css } from 'emotion';
 import { textSans } from '@guardian/pasteup/typography';
@@ -82,7 +81,7 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
 
     return (
         <figure className={figureStyle}>
-            <Img
+            <amp-img
                 src={image.src}
                 alt={element.data.alt}
                 attribution={element.data.credit}

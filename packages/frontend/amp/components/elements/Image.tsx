@@ -1,5 +1,4 @@
 import React from 'react';
-import { Img } from '@frontend/amp/components/primitives/Img';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
@@ -39,7 +38,7 @@ export const Image: React.FC<{
 
     return (
         <figure className={figureStyle}>
-            <Img
+            <amp-img
                 src={image.src}
                 alt={element.data.alt}
                 attribution={element.data.credit}

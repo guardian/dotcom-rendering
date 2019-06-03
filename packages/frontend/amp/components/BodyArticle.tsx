@@ -1,6 +1,6 @@
 import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
-import { Elements } from '@frontend/amp/components/lib/Elements';
+import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
@@ -13,7 +13,7 @@ const body = (pillar: Pillar, tone: StyledTone) => {
     const bgColorMap = {
         'default-tone': palette.neutral[100],
         'tone/comment': palette.opinion.faded,
-        'tone/advertisement-features': palette.neutral[100],
+        'tone/advertisement-features': palette.neutral[85],
     };
     return css`
         background-color: ${bgColorMap[tone]};

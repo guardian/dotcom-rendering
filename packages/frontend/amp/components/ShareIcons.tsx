@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
 import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
 import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
 import EmailIcon from '@guardian/pasteup/icons/email.svg';
@@ -24,8 +23,8 @@ const shareIconsListItem = css`
     min-width: 32px;
 `;
 
-const shareIcon = (colour: string) => css`
-    border: 1px solid ${palette.neutral[86]};
+const shareIcon = (pillar: Pillar) => css`
+    border: 1px solid ${pillarPalette[pillar].neutral.border};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -51,8 +50,8 @@ const shareIcon = (colour: string) => css`
     }
 
     :hover {
-        background-color: ${colour};
-        border-color: ${colour};
+        background-color: ${pillarPalette[pillar].main};
+        border-color: ${pillarPalette[pillar].main};
         fill: white;
     }
 `;
@@ -124,7 +123,7 @@ export const ShareIcons: React.FC<{
                             </span>
                             <span
                                 className={cx(
-                                    shareIcon(pillarPalette[pillar].main),
+                                    shareIcon(pillar),
                                     pillarFill[pillar],
                                 )}
                             >

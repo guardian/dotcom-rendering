@@ -1077,7 +1077,6 @@ export const data = {
             imrWorldwide: true,
             membershipEngagementBannerBlockUs: false,
             prebidAppnexusInvcode: true,
-            subscribeWithGoogle: false,
             prebidAppnexus: true,
             enableDiscussionSwitch: true,
             enableConsentManagementService: true,
@@ -1150,7 +1149,6 @@ export const data = {
             inizio: true,
         },
         beaconUrl: '//phar.gu-web.net',
-        subscribeWithGoogleApiUrl: 'https://swg.theguardian.com',
         nav: {
             currentUrl: '/money',
             pillars: [

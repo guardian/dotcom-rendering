@@ -1,7 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { headline } from '@guardian/pasteup/typography';
+import { palette } from '@guardian/pasteup/palette';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '@frontend/lib/pillars';
+import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
@@ -16,7 +18,7 @@ const style = (pillar: Pillar) => css`
     a {
         color: ${pillarPalette[pillar].dark};
         text-decoration: none;
-        border-bottom: 1px solid #dcdcdc;
+        border-bottom: 1px solid ${palette.neutral[86]};
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
@@ -30,13 +32,25 @@ const immersiveBodyStyle = css`
     }
 `;
 
+// Labs paid content only
+const subHeadingStyleLabs = css`
+    h2 {
+        font-weight: 700;
+        ${textSans(7)}
+    }
+`;
+
 export const Subheading: React.FC<{
     html: string;
     pillar: Pillar;
     isImmersive: boolean;
 }> = ({ html, pillar, isImmersive }) => (
     <span
-        className={cx(style(pillar), { [immersiveBodyStyle]: isImmersive })}
+        className={composeLabsCSS(
+            pillar,
+            cx(style(pillar), { [immersiveBodyStyle]: isImmersive }),
+            subHeadingStyleLabs,
+        )}
         dangerouslySetInnerHTML={{
             __html: html,
         }}

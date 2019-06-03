@@ -8,5 +8,6 @@
     "no-duplicate-selectors": null,
     "no-descending-specificity": null,
     "property-blacklist": [["font-family"], { "message": "Please use the typography functions from pasteup/typography"}]
+    "color-no-hex": [true, { "message": "Please use the pasteup palette variables instead of hex values"}]
   }
 }

@@ -35,10 +35,11 @@
         ],
         "no-default-export": true,
         "react-no-dangerous-html": true,
-        "prettier": true
+        "prettier": true,
+        "interface-over-type-literal": false
     },
     "rulesDirectory": [],
     "linterOptions": {
-        "exclude": ["packages/*/dist/**/*.js","coverage/*"]
+        "exclude": ["packages/*/dist/**/*.js", "coverage/*"]
     }
 }

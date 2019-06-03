@@ -1,23 +1,23 @@
 {
-  "name": "@guardian/pasteup",
-  "version": "2.0.0-alpha.0",
-  "description": "Guardian design tokens",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/guardian/dotcom-rendering"
-  },
-  "files": [
-    "*.js",
-    "*.d.ts",
-    "*.js.map",
-    "*.d.ts.map",
-    "icons",
-    "logos"
-  ],
-  "scripts": {
-    "test": "jest",
-    "prepublish": "tsc -p ."
-  },
-  "dependencies": {},
-  "license": "Apache-2.0"
+    "name": "@guardian/pasteup",
+    "version": "2.0.0-alpha.1",
+    "description": "Guardian design tokens",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/guardian/dotcom-rendering"
+    },
+    "files": [
+        "*.js",
+        "*.d.ts",
+        "*.js.map",
+        "*.d.ts.map",
+        "icons",
+        "logos"
+    ],
+    "scripts": {
+        "test": "jest",
+        "prepublish": "tsc -p ."
+    },
+    "dependencies": {},
+    "license": "Apache-2.0"
 }

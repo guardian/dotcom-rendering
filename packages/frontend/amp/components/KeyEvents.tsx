@@ -10,9 +10,9 @@ const headingStyle = css`
     ${headline(3)};
     background-color: ${palette.neutral[100]};
     padding: 0.375rem 0.625rem;
-
+    font-weight: bold;
     span {
-        background-color: #767676;
+        background-color: ${palette.neutral[46]};
         float: right;
         position: relative;
     }
@@ -30,7 +30,7 @@ const listItemStyle = css`
     width: 100%;
     overflow: hidden;
     min-height: 2.5rem;
-    border-bottom: 0.0625rem solid #dcdcdc;
+    border-bottom: 0.0625rem solid ${palette.neutral[86]};
     padding: 0.125rem 0 0.375rem;
 `;
 
@@ -52,7 +52,7 @@ const wrapper = css`
 const eventLinkStyle = css`
     display: block;
     text-decoration: none;
-    color: #005689;
+    color: ${palette.sport.dark};
     :hover {
         text-decoration: underline;
     }

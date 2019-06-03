@@ -11,6 +11,7 @@ import { dist, root, port } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 import { render as renderAMPArticle } from '@frontend/amp/server/render';
 import { render as renderArticle } from '@frontend/web/server/render';
+import { logger } from './logging';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
 // tslint:disable-next-line:no-default-export
@@ -21,6 +22,7 @@ export default (options: any) => {
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
+    logger.info('dotcom-rendering is GO.');
     getGuardianConfiguration('prod')
         .then((config: GuardianConfiguration) => {
             log(`loaded ${config.size()} configuration parameters`);
