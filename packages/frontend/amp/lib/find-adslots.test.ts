@@ -3,6 +3,7 @@ import {
     AD_LIMIT,
     SMALL_PARA_CHARS,
     MIN_CHAR_BUFFER,
+    findBlockAdSlots,
 } from './find-adslots';
 
 describe('ampadslots', () => {
@@ -95,6 +96,16 @@ describe('ampadslots', () => {
             ];
 
             expect(findAdSlots(data).length).toEqual(1);
+        });
+    });
+
+    describe('findBlockAdSlots', () => {
+        it('should intersperse ads every 5 blocks up to a maximum of 8', () => {
+            const blocks = Array(100).fill('foo');
+
+            const slots = findBlockAdSlots(blocks);
+
+            expect(slots).toEqual([4, 9, 14, 19, 24, 29, 34, 39]);
         });
     });
 });

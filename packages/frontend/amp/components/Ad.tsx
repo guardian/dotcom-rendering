@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { until } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 import { adJson, stringify } from '@frontend/amp/lib/ad-json';
 
@@ -11,18 +10,11 @@ const adStyle = css`
     background-repeat: no-repeat;
     background-position: center;
     border-top: 1px solid ${palette.neutral[86]};
-    float: right;
     height: 272px;
     width: 300px;
-    margin: 4px 0 12px 20px;
-
-    ${until.phablet} {
-        clear: both;
-        float: none;
-        text-align: center;
-        margin-right: auto;
-        margin-left: auto;
-    }
+    clear: both;
+    text-align: center;
+    margin: 0 auto 12px;
 
     :before {
         content: 'Advertisement';
@@ -141,10 +133,11 @@ const ampAdElem = (
     contentType: string,
     config: CommercialConfig,
     commercialProperties: CommercialProperties,
+    className: string,
 ) => {
     return (
         <amp-ad
-            class={cx(adClass, adRegionClasses[adRegion])}
+            class={cx(adClass, adRegionClasses[adRegion], className)}
             data-block-on-consent=""
             width={300}
             height={250}
@@ -169,7 +162,15 @@ export const Ad: React.SFC<{
     contentType: string;
     config: CommercialConfig;
     commercialProperties: CommercialProperties;
-}> = ({ edition, section, contentType, config, commercialProperties }) => (
+    className: string;
+}> = ({
+    edition,
+    section,
+    contentType,
+    config,
+    commercialProperties,
+    className,
+}) => (
     <div className={adStyle}>
         {ampAdElem(
             'US',
@@ -178,6 +179,7 @@ export const Ad: React.SFC<{
             contentType,
             config,
             commercialProperties,
+            className,
         )}
         {ampAdElem(
             'AU',
@@ -186,6 +188,7 @@ export const Ad: React.SFC<{
             contentType,
             config,
             commercialProperties,
+            className,
         )}
         {ampAdElem(
             'ROW',
@@ -194,6 +197,7 @@ export const Ad: React.SFC<{
             contentType,
             config,
             commercialProperties,
+            className,
         )}
     </div>
 );

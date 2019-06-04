@@ -1,6 +1,5 @@
 import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
-import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
@@ -9,8 +8,8 @@ import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
-import { headline, textSans } from '@guardian/pasteup/typography';
-import { blockLink } from '@frontend/amp/lib/block-link';
+import { headline } from '@guardian/pasteup/typography';
+import { Blocks } from '@frontend/amp/components/Blocks';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
@@ -33,7 +32,7 @@ const body = (pillar: Pillar, tone: StyledTone) => css`
         margin-inline-end: 0px;
     }
 
-    ${listItemStyle(pillar)}
+    ${listItemStyle}
 `;
 
 // TODO move into shared place and also add list styling and blockquote etc.
@@ -55,7 +54,7 @@ const bulletStyle = (pillar: Pillar) => css`
     }
 `;
 
-const listItemStyle = (pillar: Pillar) => css`
+const listItemStyle = css`
     li {
         margin-bottom: 0.8em;
     }
@@ -69,94 +68,6 @@ const listItemStyle = (pillar: Pillar) => css`
         background-color: ${palette.neutral[60]};
     }
 `;
-
-const blockStyle = (pillar: Pillar) => css`
-    padding: 6px 10px 12px;
-    background-color: ${palette.neutral[100]};
-    border-top: 1px solid ${pillarPalette[pillar].dark};
-    border-bottom: 1px solid ${palette.neutral[93]};
-    margin-bottom: 12px;
-    blockquote {
-        margin-left: 40px;
-    }
-`;
-
-const blockCreatedOnStyle = (pillar: Pillar) => css`
-    color: ${palette.neutral[7]};
-    line-height: 2rem;
-    margin-bottom: 10px;
-    text-decoration: none;
-    font-weight: bold;
-`;
-
-const lastUpdatedStyle = css`
-    ${textSans(1)};
-    color: ${palette.neutral[60]};
-    text-align: right;
-    padding-right: 15px;
-`;
-
-// TODO ad handling (currently done in elements, which is wrong, so let's lift
-// that out and have an Ad element type we match against
-const Blocks: React.SFC<{
-    blocks: Block[];
-    pillar: Pillar;
-    edition: Edition;
-    section?: string;
-    contentType: string;
-    switches: Switches;
-    commercialProperties: CommercialProperties;
-    url: string;
-}> = ({
-    blocks,
-    pillar,
-    edition,
-    section,
-    contentType,
-    switches,
-    commercialProperties,
-    url,
-}) => {
-    // TODO add last updated for blocks to show here
-    const transformedBlocks = blocks.map(block => {
-        return (
-            <div
-                id={block.id}
-                data-sort-time={block.createdOn}
-                key={block.id}
-                className={blockStyle(pillar)}
-            >
-                {block.createdOnDisplay && (
-                    <a
-                        className={blockCreatedOnStyle(pillar)}
-                        href={blockLink(url, block.id)}
-                    >
-                        {block.createdOnDisplay}
-                    </a>
-                )}
-                {block.title && <h2>{block.title}</h2>}
-                <Elements
-                    pillar={pillar}
-                    elements={block.elements}
-                    // stuff for ads
-                    edition={edition}
-                    section={section}
-                    contentType={contentType}
-                    switches={switches}
-                    commercialProperties={commercialProperties}
-                    isImmersive={false}
-                />
-                {block.lastUpdatedDisplay && (
-                    <div className={lastUpdatedStyle}>
-                        Updated at {block.lastUpdatedDisplay}
-                    </div>
-                )}
-            </div>
-        );
-    });
-
-    return <>{transformedBlocks}</>;
-};
 
 const Pagination: React.SFC<{
     pagination?: Pagination;
@@ -202,12 +113,14 @@ export const Body: React.FC<{
         <InnerContainer className={body(pillar, tone)}>
             <TopMeta tone={tone} data={data} />
             <KeyEvents events={data.keyEvents} pillar={pillar} url={url} />
+
             {!isFirstPage && (
                 <Pagination guardianURL={url} pagination={data.pagination} />
             )}
+
             <amp-live-list
                 id="live-blog-entries-7ea0dbef"
-                data-max-items-per-page="20"
+                data-max-items-per-page="20" // TODO confirm if this should be dynamic
             >
                 <button update="" on="tap:my-live-list.update">
                     You have updates
@@ -223,10 +136,13 @@ export const Body: React.FC<{
                         switches={config.switches}
                         commercialProperties={data.commercialProperties}
                         url={url}
+                        shouldHideAds={data.shouldHideAds}
                     />
                 </div>
             </amp-live-list>
+
             <Pagination guardianURL={url} pagination={data.pagination} />
+
             <SubMeta
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}

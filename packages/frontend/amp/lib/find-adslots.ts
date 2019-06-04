@@ -119,6 +119,7 @@ const hasSpaceForAd = (
     );
 };
 
+// Returns index of items to place ads *after*
 export const findAdSlots = (elements: CAPIElement[]): number[] => {
     let charsScannedSinceLastAd = 0;
     const adSlots = [];
@@ -138,4 +139,17 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
         }
     }
     return adSlots;
+};
+
+// Returns index of items to place ads *after*
+export const findBlockAdSlots = (blocks: any[]): number[] => {
+    const maxAds = 8;
+
+    // Place slots every five elements, but not at the beginning. Limit to
+    // maxAds.
+    return blocks
+        .map((_, i) => i)
+        .filter(i => i !== 0 && i % 5 === 0)
+        .map(i => i - 1)
+        .slice(0, maxAds);
 };
