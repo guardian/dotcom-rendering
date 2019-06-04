@@ -14,8 +14,10 @@ const blockStyle = (pillar: Pillar) => css`
     border-top: 1px solid ${pillarPalette[pillar].dark};
     border-bottom: 1px solid ${palette.neutral[93]};
     margin-bottom: 12px;
+
     blockquote {
         margin-left: 40px;
+        font-style: italic;
     }
 `;
 
@@ -25,6 +27,7 @@ const blockCreatedOnStyle = css`
     margin-bottom: 10px;
     text-decoration: none;
     font-weight: bold;
+    ${textSans(1)};
 `;
 
 const lastUpdatedStyle = css`
