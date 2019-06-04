@@ -52,7 +52,15 @@ export const Image: React.FC<{
                     <span className={iconStyle}>
                         <TriangleIcon />
                     </span>
-                    {element.data.caption}{' '}
+
+                    <span
+                        // tslint:disable-line:react-no-dangerous-html
+                        dangerouslySetInnerHTML={{
+                            __html: element.data.caption || '',
+                        }}
+                        key={'caption'}
+                    />
+
                     {element.displayCredit && element.data.credit}
                 </figcaption>
             )}
