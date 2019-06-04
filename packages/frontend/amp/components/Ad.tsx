@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { until } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 import { adJson, stringify } from '@frontend/amp/lib/ad-json';
 
@@ -11,18 +10,11 @@ const adStyle = css`
     background-repeat: no-repeat;
     background-position: center;
     border-top: 1px solid ${palette.neutral[86]};
-    float: right;
     height: 272px;
     width: 300px;
-    margin: 4px 0 12px 20px;
-
-    ${until.phablet} {
-        clear: both;
-        float: none;
-        text-align: center;
-        margin-right: auto;
-        margin-left: auto;
-    }
+    clear: both;
+    text-align: center;
+    margin: 0 auto 12px;
 
     :before {
         content: 'Advertisement';
