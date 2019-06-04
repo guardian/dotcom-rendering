@@ -24,24 +24,23 @@ $ cd dotcom-rendering
 $ make dev
 ```
 
-This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030). 
+`make dev` will start the development server on port 3030: [http://localhost:3030](http://localhost:3030). 
 
 ### Detailed Setup
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
 
-### Note on rebasing
-The dotcom-rendering github account is set up to enforce rebasement on the `master` branch before merging. If you are working on a feature branch and plan to make a PR, please avoid merging from `master` during your work and, instead, always rebase on `master`. The reason is that if you simply merge from `master`, then when the time to rebase on master comes any conflicts you may have had to correct will show up again thereby duplicating your efforts.
+### Note on rebasing vs merging
+The dotcom-rendering github account is set up to merge PRs into master instead of rebase. Merge commits are useful to quickly revert things when there is a major incident - whereas with rebase you might have to revert a whole load of commits.
+
+However, if you are working on a feature branch and plan to make a PR, it's still recommended to rebase on `master` to avoid extranous merge commits in branches.
 
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup 
 questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
 
-
-
-
-## Other tasks
+## Code Quality
 
 You can ensure your code passes code quality tests by running:
 
@@ -55,6 +54,7 @@ You can also run these tasks individually:
 
 ```
 $ make lint
+$ make stylelint
 $ make tsc
 $ make test
 ```
@@ -83,5 +83,3 @@ We recommend you update your workspace settings to automatically fix formatting 
 
 1. Open the Command Palette (`shift + cmd + P`) and type `>Preferences: Open Settings (JSON)`
 2. Add the key value `"tslint.autoFixOnSave": true,`
-
-
