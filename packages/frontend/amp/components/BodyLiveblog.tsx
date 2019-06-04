@@ -5,7 +5,6 @@ import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
-import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
 import { headline } from '@guardian/pasteup/typography';
@@ -17,7 +16,6 @@ import { Blocks } from '@frontend/amp/components/Blocks';
 // TODO add styling for ul and blockquote
 const body = (pillar: Pillar, tone: StyledTone) => css`
     background-color: ${palette.neutral[97]};
-    ${bulletStyle(pillar)}
 
     p {
         font-size: 16px;
@@ -30,42 +28,6 @@ const body = (pillar: Pillar, tone: StyledTone) => css`
         margin-block-end: 0.83em;
         margin-inline-start: 0px;
         margin-inline-end: 0px;
-    }
-
-    ${listItemStyle}
-`;
-
-// TODO move into shared place and also add list styling and blockquote etc.
-const bulletStyle = (pillar: Pillar) => css`
-    .bullet {
-        color: transparent;
-        font-size: 1px;
-    }
-
-    .bullet:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 2px;
-        background-color: ${pillarPalette[pillar].main};
-        margin-left: 0px;
-    }
-`;
-
-const listItemStyle = css`
-    li {
-        margin-bottom: 0.8em;
-    }
-    li:before {
-        display: inline-block;
-        content: '';
-        border-radius: 0.375rem;
-        height: 0.75rem;
-        width: 0.75rem;
-        margin-right: 0.25rem;
-        background-color: ${palette.neutral[60]};
     }
 `;
 
