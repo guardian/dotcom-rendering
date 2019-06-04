@@ -27,7 +27,7 @@ const body = (pillar: Pillar, tone: StyledTone) => css`
     }
 
     h2 {
-        ${headline(4)};
+        ${headline(3)};
         font-weight: 500;
         margin-block-start: 0.83em;
         margin-block-end: 0.83em;
