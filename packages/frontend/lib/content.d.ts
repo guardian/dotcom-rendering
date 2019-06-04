@@ -165,6 +165,7 @@ interface QABlockElement {
 interface GuideBlockElement {
     _type: 'model.dotcomrendering.pageElements.GuideBlockElement';
     id: string;
+    label: string;
     title: string;
     img?: string;
     html: string;
@@ -174,6 +175,7 @@ interface GuideBlockElement {
 interface ProfileBlockElement {
     _type: 'model.dotcomrendering.pageElements.ProfileBlockElement';
     id: string;
+    label: string;
     title: string;
     img?: string;
     html: string;

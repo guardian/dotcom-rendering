@@ -123,7 +123,7 @@ export const Elements: React.FC<{
                 return (
                     <Expandable
                         id={element.id}
-                        type="Quick Guide"
+                        type={element.label}
                         title={element.title}
                         html={element.html}
                         img={element.img}
@@ -135,7 +135,7 @@ export const Elements: React.FC<{
                 return (
                     <Expandable
                         id={element.id}
-                        type="Profile"
+                        type={element.label}
                         title={element.title}
                         html={element.html}
                         img={element.img}
