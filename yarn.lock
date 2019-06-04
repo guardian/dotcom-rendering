@@ -1312,11 +1312,6 @@
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
-"@guardian/pasteup@1.0.0-alpha.8":
-  version "1.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@guardian/pasteup/-/pasteup-1.0.0-alpha.8.tgz#340cc86207523adc71b5b6cb1d6693e3afeab217"
-  integrity sha512-ojTYoCRQxUx6axiwCLX26JKGmIah/MJix6AiPGIplQ/DiO4oJXS6RUC+HfYIEZC8V1g3woqXzmVF2lgCfDtyIA==
-
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
