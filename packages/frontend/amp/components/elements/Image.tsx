@@ -52,7 +52,7 @@ export const Image: React.FC<{
                     <span className={iconStyle}>
                         <TriangleIcon />
                     </span>
-// TODO - Move caption handling to use https://github.com/guardian/dotcom-rendering/blob/master/packages/guui/components/Caption/Caption.tsx
+                    {/* TODO - Move caption handling to use https://github.com/guardian/dotcom-rendering/blob/master/packages/guui/components/Caption/Caption.tsx */}
                     <span
                         // tslint:disable-line:react-no-dangerous-html
                         dangerouslySetInnerHTML={{
