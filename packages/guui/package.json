@@ -16,12 +16,12 @@
     "css-loader": "^0.28.11",
     "desvg-loader": "^0.1.0",
     "emotion": "^10.0.5",
-    "react": "^16.4.0",
+    "react": "^16.8.6",
     "svg-loader": "^0.0.2",
     "to-string-loader": "^1.1.5"
   },
   "peerDependencies": {
-    "react": "^16.4.0",
+    "react": "^16.8.6",
     "emotion": "^10.0.5"
   }
 }
