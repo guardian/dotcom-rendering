@@ -1,14 +1,7 @@
 # Detailed setup guide
 
-- [Chat](#chat)
 - [Developing](#developing)
 - [Production](#production)
-- [Other tasks](#other-tasks)
-- [IDE setup](#ide-setup)
-
-## Chat
-
-Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
 
 ## Developing
 
@@ -27,11 +20,38 @@ That's it – everything else should be installed for you on demand.
 
 Start the development server:
 
-```
-$ make dev
+```bash
+make dev
 ```
 
 This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
+
+### Previewing article on local
+
+You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. For example:
+
+http://localhost:3030/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+
+You can use this technique to integrate with a locally running instance of `frontend`. This is especially useful for testing changes to the data model:
+
+http://localhost:3030/Article?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+
+### Previewing AMP on local
+
+You can preview an AMP page similarly to an article, as follows
+
+http://localhost:3030/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+
+### Note on rebasing vs merging
+The dotcom-rendering github account is set up to merge PRs into master instead of rebase. Merge commits are useful to quickly revert things when there is a major incident - whereas with rebase you might have to revert a whole load of commits.
+
+However, if you are working on a feature branch and plan to make a PR, it's still recommended to rebase on `master` to avoid extranous merge commits in branches.
+
+### Debugging tools
+
+For ease of development you may want to install:
+
+- [React Developer Tools](https://github.com/facebook/react-devtools)
 
 ### Running alongside identity
 
@@ -42,38 +62,9 @@ You may want local identity cookies to be available in `dotcom-rendering`. To en
 3. run `./scripts/nginx/setup.sh`
 4. access `dotcom-rendering` through https://r.thegulocal.com
 
-### Previewing article on local
-
-You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. For example:
-
-```
-http://localhost:3030/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
-```
-
-You can use this technique to integrate with a locally running instance of `frontend`. This is especially useful for testing changes to the data model:
-
-```
-http://localhost:3030/Article?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
-```
-
-### Previewing AMP on local
-
-You can preview an AMP page similarly to an article, as follows
-
-```
-http://localhost:3030/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
-```
-
-### Debugging tools
-
-For ease of development you may want to install:
-
-- [React Developer Tools](https://github.com/facebook/react-devtools)
-
 ## Production
 
 - `make build` creates production-ready bundles.
 - `make start` starts the production server.
 - `make stop` stops the production server.
-
 
