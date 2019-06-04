@@ -1,4 +1,4 @@
-# dotcom-rendering [![Known Vulnerabilities](https://snyk.io/test/github/guardian/dotcom-rendering/badge.svg)](https://snyk.io/test/github/guardian/dotcom-rendering)
+# dotcom-rendering
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
 
@@ -24,16 +24,13 @@ $ cd dotcom-rendering
 $ make dev
 ```
 
-`make dev` will start the development server on port 3030: [http://localhost:3030](http://localhost:3030). 
+`make dev` will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
+
+The project uses [Yarn Workspaces](https://yarnpkg.com/en/docs/workspaces) and the code can be found in the `packages/` folder.
 
 ### Detailed Setup
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
-
-### Note on rebasing vs merging
-The dotcom-rendering github account is set up to merge PRs into master instead of rebase. Merge commits are useful to quickly revert things when there is a major incident - whereas with rebase you might have to revert a whole load of commits.
-
-However, if you are working on a feature branch and plan to make a PR, it's still recommended to rebase on `master` to avoid extranous merge commits in branches.
 
 ### Feedback
 
