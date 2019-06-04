@@ -145,6 +145,8 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
 export const findBlockAdSlots = (blocks: any[]): number[] => {
     const maxAds = 8;
 
+    // Place slots every five elements, but not at the beginning. Limit to
+    // maxAds.
     return blocks
         .map((_, i) => i)
         .filter(i => i !== 0 && i % 5 === 0)
