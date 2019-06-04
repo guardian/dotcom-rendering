@@ -25,6 +25,7 @@ const blockCreatedOnStyle = css`
     margin-bottom: 10px;
     text-decoration: none;
     font-weight: bold;
+    ${textSans(1)};
 `;
 
 const lastUpdatedStyle = css`
