@@ -13,7 +13,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-push": "tsc"
+            "pre-push": "make validate"
         }
     },
     "bundlesize": [
