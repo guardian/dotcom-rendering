@@ -47,6 +47,7 @@
         "bundlesize": "^0.17.0",
         "eslint": "^5.16.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
+        "husky": "^2.3.0",
         "jest": "^23.6.0",
         "jest-dom": "^2.1.0",
         "jest-teamcity-reporter": "^0.9.0",
@@ -88,8 +89,8 @@
         "execa": "^0.10.0",
         "filesizegzip": "^2.0.0",
         "inquirer": "^5.2.0",
-        "pretty-bytes": "^4.0.2",
-        "log4js": "4.2.0"
+        "log4js": "4.2.0",
+        "pretty-bytes": "^4.0.2"
     },
     "jest": {
         "moduleFileExtensions": [

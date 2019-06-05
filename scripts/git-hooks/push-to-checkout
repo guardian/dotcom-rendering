@@ -1,0 +1,39 @@
+#!/bin/sh
+# husky
+
+# Hook created by Husky
+#   Version: 2.3.0
+#   At: 6/5/2019, 1:03:02 PM
+#   See: https://github.com/typicode/husky#readme
+
+# From
+#   Directory: /Users/gareth_trufitt/code/dotcom-rendering/node_modules/husky
+#   Homepage: https://github.com/typicode/husky#readme
+
+scriptPath="node_modules/husky/run.js"
+hookName=`basename "$0"`
+gitParams="$*"
+
+debug() {
+  [ "${HUSKY_DEBUG}" = "true" ] || [ "${HUSKY_DEBUG}" = "1" ] && echo "husky:debug $1"
+}
+
+debug "$hookName hook started..."
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "Info: Can't find node in PATH, trying to find a node binary on your system"
+fi
+
+if [ -f "$scriptPath" ]; then
+  # if [ -t 1 ]; then
+  #   exec < /dev/tty
+  # fi
+  if [ -f ~/.huskyrc ]; then
+    debug "source ~/.huskyrc"
+    . ~/.huskyrc
+  fi
+  node_modules/run-node/run-node "$scriptPath" $hookName "$gitParams"
+else
+  echo "Can't find Husky, skipping $hookName hook"
+  echo "You can reinstall it using 'npm install husky --save-dev' or delete this hook"
+fi
