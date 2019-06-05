@@ -2,6 +2,9 @@
 
 The Guardian Design Tokens are intended to be used in conjunction with a CSS-in-JS library such as [Emotion](https://emotion.sh).
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 **Under construction 🚧**
 
 This file documents the current version of Pasteup. This package is still under heavy construction, please do not install this in applications intended for use in production. The API may change significantly before it is out of alpha.

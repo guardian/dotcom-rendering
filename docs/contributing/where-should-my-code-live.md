@@ -1,5 +1,8 @@
 # Where should my code live?
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 ## Scripts
 
 Externally hosted third party scripts should always be loaded asynchronously. If possible, they should be loaded conditionally using JavaScript by injecting a script element into the head of the document.
@@ -16,7 +19,7 @@ They can be added to the `lowPriorityScripts` array in the [`packages/frontend/w
 
 ### High priority scripts
 
-High priority scripts are injected by JavaScript running in the `<head>` of the document. They are loaded asynchronously and executed in the order they are requested. 
+High priority scripts are injected by JavaScript running in the `<head>` of the document. They are loaded asynchronously and executed in the order they are requested.
 
 Examples include the [polyfill.io](https://polyfill.io) response and the main application JavaScript bundles.
 
@@ -52,12 +55,12 @@ Data is passed between `frontend` and `dotcom-rendering` via a network request, 
 
 ### Architecture Decision Records
 
-- [New elements models in frontend](../architecture/013-new-elements-models-in-frontend.md)
-- [Client side computation](../architecture/016-client-side-computation.md)
+-   [New elements models in frontend](../architecture/013-new-elements-models-in-frontend.md)
+-   [Client side computation](../architecture/016-client-side-computation.md)
 
 ## Components
 
-Frontend-specific components live in `packages/frontend`. 
+Frontend-specific components live in `packages/frontend`.
 
 Note that [Frontend Web](../../packages/frontend/web) and [Frontend AMP](../../packages/frontend/amp) are separate applications that do not share code, including components. If you build a new component for the web, consider whether you need to build an analogous component for AMP too.
 

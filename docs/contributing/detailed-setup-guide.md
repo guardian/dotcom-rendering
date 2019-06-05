@@ -57,6 +57,7 @@ For ease of development you may want to install:
 ### Running alongside identity
 
 You may want local identity cookies to be available in `dotcom-rendering`. To enable this:
+
 1. run `./scripts/nginx/setup.sh`
 1. access `dotcom-rendering` through https://r.thegulocal.com
 

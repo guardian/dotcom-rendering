@@ -2,6 +2,9 @@
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 ## Chat
 
 Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
@@ -34,7 +37,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 
 ### Feedback
 
-After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup 
+After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
 questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
 
 ## Code Quality
@@ -43,7 +46,7 @@ You can ensure your code passes code quality tests by running:
 
 ```
 $ make validate
-``` 
+```
 
 This runs our linting tool, the TypeScript compiler and our tests, before finally building the bundles.
 
@@ -70,7 +73,7 @@ We recommend using [VSCode](https://code.visualstudio.com/).
 
 ### Extensions
 
-VSCode should prompt you to install our recommended extensions when you open the project. 
+VSCode should prompt you to install our recommended extensions when you open the project.
 
 You can also find these extensions by searching for `@recommended` in the extensions pane.
 
