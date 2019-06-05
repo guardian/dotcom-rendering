@@ -14,13 +14,20 @@ const supportStyles = css`
     align-items: center;
     padding: 0 15px;
     min-height: 30px;
+    ${until.mobileMedium} {
+        padding: 0 10px;
+        min-height: 24px;
+    }
 `;
 
 const supportHeaderStyles = css`
     ${supportStyles}
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 10px;
+    ${until.mobileMedium} {
+        margin-top: 28px;
+    }
 `;
 
 const supportFooterStyles = css`
@@ -40,14 +47,17 @@ const supportLinkStyles = css`
 
     padding-right: 20px;
     ${until.mobileMedium} {
-        padding-right: 0px;
+        ${textSans(4)};
+        padding-right: 18px;
     }
 
     svg {
         position: absolute;
         top: -5px;
         ${until.mobileMedium} {
-            display: none;
+            top: -2px;
+            width: 26px;
+            height: 26px;
         }
     }
 `;
