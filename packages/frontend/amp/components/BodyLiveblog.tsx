@@ -7,8 +7,9 @@ import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/pasteup/typography';
 import { Blocks } from '@frontend/amp/components/Blocks';
+import RefreshIcon from '@guardian/pasteup/icons/refresh.svg';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
@@ -28,6 +29,39 @@ const body = (pillar: Pillar, tone: StyledTone) => css`
         margin-block-end: 0.83em;
         margin-inline-start: 0px;
         margin-inline-end: 0px;
+    }
+`;
+
+const updateButtonStyle = css`
+    position: fixed;
+    top: 12px;
+    left: 0;
+    z-index: 1015;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    button {
+        border: none;
+        border-radius: 1000px;
+        height: 36px;
+        padding: 0 12px;
+
+        background-color: ${palette.news.main};
+        color: ${palette.neutral[100]};
+        font-weight: bold;
+        ${textSans(1)};
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    svg {
+        height: 20px;
+        width: 20px;
+        margin-right: 6px;
     }
 `;
 
@@ -84,9 +118,12 @@ export const Body: React.FC<{
                 id="live-blog-entries-7ea0dbef"
                 data-max-items-per-page="20" // TODO confirm if this should be dynamic
             >
-                <button update="" on="tap:my-live-list.update">
-                    You have updates
-                </button>
+                <div className={updateButtonStyle}>
+                    <button update="" on="tap:my-live-list.update">
+                        <RefreshIcon />
+                        <span>You have updates</span>
+                    </button>
+                </div>
                 <div items="">
                     <Blocks
                         pillar={pillar}
