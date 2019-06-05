@@ -5,15 +5,18 @@
     "workspaces": [
         "packages/*"
     ],
+    "tocList": "README.md packages/pasteup/README.md packages/pasteup/CONTRIBUTING.md packages/guui/README.md packages/design/CONTRIBUTING.md docs/contributing/**",
     "scripts": {
         "lint": "eslint . --ext .ts,.tsx",
         "tsc": "tsc",
         "test": "jest",
-        "postinstall": "./scripts/git-hooks/install.js"
+        "postinstall": "./scripts/git-hooks/install.js",
+        "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
+        "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update'"
     },
     "husky": {
         "hooks": {
-            "pre-push": "make validate"
+            "pre-push": "make validate && createtoc && addandcommittoc"
         }
     },
     "bundlesize": [
