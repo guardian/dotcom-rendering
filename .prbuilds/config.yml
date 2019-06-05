@@ -4,4 +4,6 @@ teardown:
   ansible: .prbuilds/cleanup.playbook.yml
 checks:
   lighthouse:
-    url: http://localhost:3030/Article
+    url: http://localhost:3030/AMPArticle
+  amp:
+    url: http://localhost:3030/AMPArticle
