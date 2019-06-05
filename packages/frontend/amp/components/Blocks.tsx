@@ -77,8 +77,19 @@ export const Blocks: React.SFC<{
                     </a>
                 )}
                 {block.title && <h2>{block.title}</h2>}
-                {Elements(block.elements, pillar, false)}
-                {/* Some elements float (e.g. rich links) */}
+                <Elements
+                    pillar={pillar}
+                    elements={block.elements}
+                    // stuff for ads
+                    edition={edition}
+                    section={section}
+                    contentType={contentType}
+                    switches={switches}
+                    commercialProperties={commercialProperties}
+                    isImmersive={false}
+                    shouldHideAds={true}
+                />
+                {/* Some elements float (e.g. rich links)  */}
                 <div className={clearBoth} />{' '}
                 {block.lastUpdatedDisplay && (
                     <div className={lastUpdatedStyle}>
