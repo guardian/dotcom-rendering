@@ -11,6 +11,11 @@
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js"
     },
+    "husky": {
+        "hooks": {
+            "pre-push": "tsc"
+        }
+    },
     "bundlesize": [
         {
             "path": "./dist/frontend.article.*.js",
