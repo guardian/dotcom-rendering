@@ -13,7 +13,11 @@
     },
     "husky": {
         "hooks": {
+<<<<<<< HEAD
             "pre-push": "make validate"
+=======
+            "pre-push": "tsc"
+>>>>>>> Move pre-push hook to husky
         }
     },
     "bundlesize": [
