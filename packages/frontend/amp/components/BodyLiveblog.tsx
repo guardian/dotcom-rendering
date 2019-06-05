@@ -118,8 +118,8 @@ export const Body: React.FC<{
                 id="live-blog-entries-7ea0dbef"
                 data-max-items-per-page="20" // TODO confirm if this should be dynamic
             >
-                <div className={updateButtonStyle}>
-                    <button update="" on="tap:my-live-list.update">
+                <div update="" className={updateButtonStyle}>
+                    <button on="tap:my-live-list.update">
                         <RefreshIcon />
                         <span>You have updates</span>
                     </button>
