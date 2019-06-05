@@ -7,7 +7,7 @@
     ],
     "scripts": {
         "lint": "eslint . --ext .ts,.tsx",
-        "tsc": "tsc",
+        "tsc": "tsc && lint",
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js"
     },
