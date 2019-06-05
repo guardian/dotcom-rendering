@@ -1,7 +1,34 @@
 # Detailed setup guide
 
+<<<<<<< HEAD
 -   [Developing](#developing)
 -   [Production](#production)
+=======
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- Automatically created with yarn run createtoc and on push hook -->
+
+- [Chat](#chat)
+- [Developing](#developing)
+  - [Setup](#setup)
+  - [Start](#start)
+  - [Running alongside identity](#running-alongside-identity)
+  - [Previewing article on local](#previewing-article-on-local)
+  - [Previewing AMP on local](#previewing-amp-on-local)
+  - [Debugging tools](#debugging-tools)
+- [Production](#production)
+- [Other tasks](#other-tasks)
+  - [Code quality](#code-quality)
+- [IDE setup](#ide-setup)
+  - [Extensions](#extensions)
+  - [Auto fix on save](#auto-fix-on-save)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Chat
+
+Check out the [Digital/dotcom-rendering](https://chat.google.com/room/AAAA6yBswlI) channel on Chat. If you haven't already done so already, please ask the Dotcom Platform team for an invite.
+>>>>>>> Add TOC update
 
 ## Developing
 

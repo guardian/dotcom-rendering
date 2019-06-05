@@ -2,8 +2,20 @@
 
 The Guardian Design Tokens are intended to be used in conjunction with a CSS-in-JS library such as [Emotion](https://emotion.sh).
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- Automatically created with yarn run createtoc and on push hook -->
+
+- [Motivation](#motivation)
+- [Usage](#usage)
+  - [Breakpoints](#breakpoints)
+    - [Example](#example)
+    - [Reference](#reference)
+  - [Fonts](#fonts)
+  - [Mixins](#mixins)
+  - [Palette](#palette)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 **Under construction 🚧**
 

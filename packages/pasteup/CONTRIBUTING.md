@@ -3,8 +3,15 @@
 Anything that either generates style primitives or can be used to generate style primitives and is plain javascript (including JSON). For the most part this is pretty unambiguous: Colours, sizes, grid, etc all fit the bill. Font mappings are a good candidate too. Do NOT use paste up for components (as of Feb ‘19).
 Think of pasteup as a base foundation you can use to build components with the tech stack of your choice.
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- Automatically created with yarn run createtoc and on push hook -->
+
+- [Releasing pasteup](#releasing-pasteup)
+- [Versioning rules of thumb](#versioning-rules-of-thumb)
+  - [Migrations](#migrations)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Releasing pasteup
 
