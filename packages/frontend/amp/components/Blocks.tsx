@@ -37,6 +37,10 @@ const lastUpdatedStyle = css`
     padding-right: 15px;
 `;
 
+const clearBoth = css`
+    clear: both;
+`;
+
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
 // that out and have an Ad element type we match against
 export const Blocks: React.SFC<{
@@ -90,6 +94,8 @@ export const Blocks: React.SFC<{
                     isImmersive={false}
                     shouldHideAds={true}
                 />
+                {/* Some elements float (e.g. rich links) */}
+                <div className={clearBoth} />{' '}
                 {block.lastUpdatedDisplay && (
                     <div className={lastUpdatedStyle}>
                         Updated at {block.lastUpdatedDisplay}
