@@ -6,7 +6,7 @@ describe('JSON Schema request data validation', () => {
         expect(validateRequestData(articleData, '/AMPArticle')).toBe(true);
     });
 
-    it.skip('throws validation Error if data is invalid', () => {
+    it('throws validation Error if data is invalid', () => {
         const testData = {
             ...articleData,
             page: { content: { headline: 1 } },
