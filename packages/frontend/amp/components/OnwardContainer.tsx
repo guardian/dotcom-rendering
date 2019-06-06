@@ -117,6 +117,8 @@ export const OnwardContainer: React.FC<{
         height="184px"
         src={path}
         credentials="include"
+        class="js-has-click-analytics"
+        data-component={componentName}
     >
         <MoustacheTemplate>
             <MoustacheSection name="showContent">
