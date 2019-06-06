@@ -134,9 +134,6 @@ export const extract = (data: {}): CAPIType => {
         getNumber(data, 'page.webPublicationDate'),
     );
     const tags = getTags(data);
-    const isImmersive = getBoolean(data, 'page.meta.isImmersive', false);
-    const sectionName = getString(data, 'page.section', '');
-
     const leadContributor: TagType = tags.filter(
         tag => tag.type === 'Contributor',
     )[0];
@@ -151,16 +148,19 @@ export const extract = (data: {}): CAPIType => {
     if (editionId === undefined) throw new Error('edition id is undefined');
 
     return {
-        webPublicationDate,
+        // page
         tags,
-        sectionName,
+
         editionLongForm,
         editionId,
-        isImmersive,
+        webPublicationDate,
         webPublicationDateDisplay: getNonEmptyString(
             data,
             'page.webPublicationDateDisplay',
         ),
+        sectionName: getString(data, 'page.section', ''),
+
+        // page.content
         headline: apply(
             getNonEmptyString(data, 'page.content.headline'),
             curly,
@@ -190,29 +190,35 @@ export const extract = (data: {}): CAPIType => {
         keyEvents: getArray<any>(data, 'page.content.blocks.keyEvents').filter(
             Boolean,
         ),
-        pagination: getPagination(data),
         blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
+        trailText: apply(
+            getString(data, 'page.content.trailText', ''),
+            stripHTML,
+        ),
+        // other page derived properties
+        pagination: getPagination(data), // scala option
         pageId: getNonEmptyString(data, 'page.pageId'),
         sharingUrls: getSharingUrls(data),
         pillar: findPillar(getString(data, 'page.pillar', ''), tags) || 'news',
         ageWarning: getAgeWarning(tags, webPublicationDate),
         sectionLabel: getString(data, 'page.sectionLabel'),
         sectionUrl: getString(data, 'page.sectionUrl'),
+        webURL: getNonEmptyString(data, 'page.webURL'),
+        contentType: getString(data, 'page.contentType'),
+        starRating: optional(getNumber.bind(null, data, 'page.starRating')),
+        // page.subMetaLinks
         subMetaSectionLinks: getSubMetaSectionLinks(data),
         subMetaKeywordLinks: getSubMetaKeywordLinks(data),
+        // page.commercial
+        commercialProperties: getCommercialProperties(data),
+        // page.meta
+        isImmersive: getBoolean(data, 'page.meta.isImmersive', false),
         shouldHideAds: getBoolean(data, 'page.meta.shouldHideAds', false),
-        webURL: getNonEmptyString(data, 'page.webURL'),
-        guardianBaseURL: getNonEmptyString(data, 'site.guardianBaseURL'),
-        contentType: getString(data, 'page.contentType'),
         hasRelated: getBoolean(data, 'page.meta.hasRelated', false),
         hasStoryPackage: getBoolean(data, 'page.meta.hasStoryPackage', false),
-        beaconURL: getNonEmptyString(data, 'site.beaconUrl'),
         isCommentable: getBoolean(data, 'page.meta.isCommentable', false),
-        commercialProperties: getCommercialProperties(data),
-        starRating: optional(getNumber.bind(null, data, 'page.starRating')),
-        trailText: apply(
-            getString(data, 'page.content.trailText', ''),
-            stripHTML,
-        ),
+        // site
+        guardianBaseURL: getNonEmptyString(data, 'site.guardianBaseURL'),
+        beaconURL: getNonEmptyString(data, 'site.beaconUrl'),
     };
 };
