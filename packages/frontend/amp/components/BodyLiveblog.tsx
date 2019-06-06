@@ -4,26 +4,22 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
+import { getToneType } from '@frontend/amp/lib/tag-utils';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
-import { headline, textSans } from '@guardian/pasteup/typography';
 import { Blocks } from '@frontend/amp/components/Blocks';
 import RefreshIcon from '@guardian/pasteup/icons/refresh.svg';
+import { Pagination } from '@frontend/amp/components/Pagination';
+import { headline, textSans } from '@guardian/pasteup/typography';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
 
-// TODO add styling for ul and blockquote
-const body = (pillar: Pillar, tone: StyledTone) => css`
+const bodyStyle = css`
     background-color: ${palette.neutral[97]};
 
-    p {
-        font-size: 16px;
-    }
-
     h2 {
-        ${headline(4)};
+        ${headline(3)};
         font-weight: 500;
         margin-block-start: 0.83em;
         margin-block-end: 0.83em;
@@ -65,35 +61,6 @@ const updateButtonStyle = css`
     }
 `;
 
-const Pagination: React.SFC<{
-    pagination?: Pagination;
-    guardianURL: string;
-}> = ({ pagination, guardianURL }) => {
-    const link = (url: string, suffix?: string): JSX.Element => {
-        if (!suffix) {
-            return <></>;
-        }
-
-        return <a href={url + suffix}>{suffix}</a>;
-    };
-
-    if (!pagination) {
-        return null;
-    }
-
-    return (
-        <div>
-            {link(guardianURL, pagination.newest)}
-            {link(guardianURL, pagination.newer)}
-            <div>
-                Page {pagination.currentPage} of {pagination.totalPages}
-            </div>
-            {link(guardianURL, pagination.older)}
-            {link(guardianURL, pagination.oldest)}
-        </div>
-    );
-};
-
 export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
@@ -106,7 +73,7 @@ export const Body: React.FC<{
         : false;
 
     return (
-        <InnerContainer className={body(pillar, tone)}>
+        <InnerContainer className={bodyStyle}>
             <TopMeta tone={tone} data={data} />
             <KeyEvents events={data.keyEvents} pillar={pillar} url={url} />
 

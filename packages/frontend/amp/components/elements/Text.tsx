@@ -23,6 +23,7 @@ export const TextStyle = (pillar: Pillar) => css`
         word-wrap: break-word;
         color: ${palette.neutral[7]};
     }
+
     a {
         color: ${pillarPalette[pillar].dark};
         text-decoration: none;
@@ -31,7 +32,32 @@ export const TextStyle = (pillar: Pillar) => css`
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
     }
-    ${body(3)};
+
+    li {
+        margin-bottom: 6px;
+        padding-left: 20px;
+        p {
+            display: inline;
+        }
+    }
+
+    li:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 8px;
+        background-color: ${pillarPalette[pillar].neutral.border};
+        margin-left: -20px;
+    }
+
+    blockquote {
+        margin-left: 20px;
+        font-style: italic;
+    }
+
+    ${body(2)};
 `;
 
 // Labs paid content only
