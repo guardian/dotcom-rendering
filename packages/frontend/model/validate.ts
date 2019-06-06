@@ -140,6 +140,7 @@ const schema = {
                         'Sport',
                         'Culture',
                         'Lifestyle',
+                        'Arts'
                     ],
                 },
                 pagination: { // scala option / optional
