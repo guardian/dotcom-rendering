@@ -76,7 +76,7 @@ export const Pagination: React.SFC<{
 
     return (
         <div className={paginationStyle}>
-            <span>
+            <p>
                 {link(
                     guardianURL,
                     <ChevronLeftDouble />,
@@ -84,13 +84,13 @@ export const Pagination: React.SFC<{
                     true,
                 )}
                 {link(guardianURL, <ChevronLeftSingle />, pagination.newer)}
-            </span>
+            </p>
 
-            <span>
+            <p>
                 {pagination.currentPage} of {pagination.totalPages}
-            </span>
+            </p>
 
-            <span>
+            <p>
                 {link(
                     guardianURL,
                     <ChevronRightSingle />,
@@ -98,7 +98,7 @@ export const Pagination: React.SFC<{
                     true,
                 )}
                 {link(guardianURL, <ChevronRightDouble />, pagination.oldest)}
-            </span>
+            </p>
         </div>
     );
 };
