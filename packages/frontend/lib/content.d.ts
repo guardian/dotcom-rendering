@@ -217,6 +217,15 @@ interface MapBlockElement {
     title: string;
 }
 
+interface AudioAtomElement {
+    _type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
+    id: string;
+    kicker: string;
+    trackUrl: string;
+    duration: number;
+    coverUrl: string;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -240,4 +249,5 @@ type CAPIElement =
     | TimelineBlockElement
     | InteractiveMarkupBlockElement
     | InteractiveUrlElement
-    | MapBlockElement;
+    | MapBlockElement
+    | AudioAtomElement;

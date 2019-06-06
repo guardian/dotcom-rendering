@@ -232,6 +232,7 @@ declare namespace JSX {
         'amp-geo': any;
         'amp-consent': any;
         'amp-live-list': any;
+        'amp-audio': any;
         template: any;
     }
 }
