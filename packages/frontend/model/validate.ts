@@ -73,7 +73,7 @@ const schema = {
                 editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] },
                 edition: { type: 'string' },
                 webURL: { type: 'string', format: 'uri', minLength: 1 },
-                contentType: { type: 'string', pattern: 'Article' }, // scala option
+                contentType: { type: 'string', enum: ['Article', 'LiveBlog'] }, // scala option
                 starRating: { type: 'integer', minimum: 0, maximum: 5 }, // scala option / optional
                 subMetaLinks: { $ref: '#/definitions/SubMetaLinks' },
                 commercial: { $ref: '#/definitions/Commercial' },
