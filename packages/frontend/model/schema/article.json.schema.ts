@@ -51,18 +51,15 @@ export const schema = {
         },
         site: {
             type: 'object',
-            required: ['beaconUrl', 'guardianBaseURL'],
+            required: ['ajaxUrl', 'beaconUrl', 'guardianBaseURL', 'commercialUrl'],
             properties: {
-                beaconUrl: {
-                    type: 'string',
-                    format: 'uri-reference',
-                    minLength: 1,
-                },
-                guardianBaseURL: {
-                    type: 'string',
-                    format: 'uri',
-                    minLength: 1,
-                },
+                ajaxUrl: { type: 'string', format: 'uri', minLength: 1 }, // extract config
+                beaconUrl: { type: 'string', format: 'uri-reference', minLength: 1 },
+                guardianBaseURL: { type: 'string', format: 'uri', minLength: 1 },
+                sentryPublicApiKey: { type: 'string' }, // config
+                sentryHost: { type: 'string' }, // config
+                switches: { type: 'object' }, // config
+                commercialUrl: { type: 'string', format: 'uri', minLength: 1 }, // extract config
             },
         },
         version: { type: 'integer' },
@@ -180,6 +177,7 @@ export const schema = {
                 'shouldHideAds',
                 'hasStoryPackage',
                 'hasRelated',
+                'linkedData' // extract-linked-data
             ],
             properties: {
                 isCommentable: { type: 'boolean' },
@@ -187,6 +185,7 @@ export const schema = {
                 shouldHideAds: { type: 'boolean' },
                 hasStoryPackage: { type: 'boolean' },
                 hasRelated: { type: 'boolean' },
+                linkedData: { type: 'array' }
             },
         },
     },
