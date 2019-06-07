@@ -6,7 +6,10 @@ export const AudioAtom: React.FC<{
     return (
         <amp-audio src={element.trackUrl} title={element.kicker}>
             <div fallback="">
-                <p>Your browser doesn’t support HTML5 audio</p>
+                <p>
+                    We're unable to serve this media because your browser does
+                    not support HTML 5 audio.
+                </p>
             </div>
         </amp-audio>
     );
