@@ -15,4 +15,14 @@ describe('JSON Schema request data validation', () => {
             validateRequestData(testData, '/AMPArticle');
         }).toThrowError(ValidationError);
     });
+
+    it('throws validation Error if data is missing', () => {
+        const testData = {
+            ...articleData,
+            page: { pillar: undefined },
+        };
+        expect(() => {
+            validateRequestData(testData, '/AMPArticle');
+        }).toThrowError(ValidationError);
+    });
 });
