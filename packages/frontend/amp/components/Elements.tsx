@@ -26,7 +26,7 @@ import { InteractiveUrl } from '@frontend/amp/components/elements/InteractiveUrl
 import { InteractiveMarkup } from '@frontend/amp/components/elements/InteractiveMarkup';
 import { MapEmbed } from '@frontend/amp/components/elements/MapEmbed';
 import { WithAds } from '@frontend/amp/components/WithAds';
-import { AudioAtom } from '@root/packages/frontend/amp/components/elements/AudioAtom';
+import { AudioAtom } from '@frontend/amp/components/elements/AudioAtom';
 
 const clear = css`
     clear: both;
