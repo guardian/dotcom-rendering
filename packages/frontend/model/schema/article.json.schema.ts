@@ -62,7 +62,7 @@ export const schema = {
                 commercialUrl: { type: 'string', format: 'uri', minLength: 1 }, // extract config
             },
         },
-        version: { type: 'integer' },
+        version: { type: 'integer', minimum: 2, maximum: 2 },
     },
     additonalProperties: false,
     definitions: {
