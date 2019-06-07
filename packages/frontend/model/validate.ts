@@ -30,6 +30,7 @@ export const validateRequestData = (data: any, endpoint: string) => {
 };
 
 const schema = {
+    $schema: 'http://json-schema.org/draft-07/schema#',
     title: 'Article',
     description: 'DCR Article Type request data requirements',
     type: 'object',
@@ -57,169 +58,26 @@ const schema = {
                 'meta',
             ],
             properties: {
-                content: {
-                    type: 'object',
-                    required: [
-                        'headline',
-                        'standfirst', // scala option
-                        'main',
-                        'blocks',
-                        'byline',
-                        'trailText',
-                    ],
-                    properties: {
-                        headline: { type: 'string', minLength: 1 },
-                        standfirst: { type: 'string' },
-                        main: { type: 'string' },
-                        body: { type: 'string' },
-                        blocks: {
-                            type: 'object',
-                            required: ['body', 'keyEvents'],
-                            properties: {
-                                body: {
-                                    type: 'array',
-                                    items: {},
-                                },
-                                keyEvents: {
-                                    type: 'array',
-                                },
-                                main: {
-                                    type: 'object',
-                                    items: {},
-                                },
-                            },
-                        },
-                        byline: { type: 'string' },
-                        trailText: { type: 'string' },
-                    },
-                },
-                tags: {
-                    type: 'object',
-                    required: ['all'],
-                    properties: {
-                        all: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                required: ['properties'],
-                                properties: {
-                                    properties: {
-                                        type: 'object',
-                                        required: [
-                                            'id',
-                                            'tagType',
-                                            'webTitle',
-                                        ],
-                                        properties: {
-                                            id: { type: 'string' },
-                                            tagType: { type: 'string' },
-                                            webTitle: { type: 'string' },
-                                            twitterHandle: {
-                                                type: 'string',
-                                            },
-                                            bylineImageUrl: {
-                                                type: 'string',
-                                            },
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-                pageId: {
-                    type: 'string',
-                    format: 'uri-reference',
-                    minLength: 1,
-                },
-                pillar: { // scala option
-                    type: 'string',
-                    enum: [
-                        'News',
-                        'Opinion',
-                        'Sport',
-                        'Culture',
-                        'Lifestyle',
-                        'Arts'
-                    ],
-                },
-                pagination: { // scala option / optional
-                    type: 'object',
-                    required: ['currentPage', 'totalPages'],
-                    properties: {
-                        currentPage: { type: 'integer' },
-                        totalPages: { type: 'integer' },
-                        newest: { type: 'string' },
-                        newer: { type: 'string' },
-                        oldest: { type: 'string' },
-                        older: { type: 'string' },
-                    },
-                },
+                content: { $ref: '#/definitions/Content' },
+                tags: { $ref: '#/definitions/Tags' },
+                pageId: { type: 'string', format: 'uri-reference', minLength: 1 },
+                pillar: { type: 'string', enum: ['News', 'Opinion', 'Sport', 'Culture', 'Lifestyle', 'Arts'] }, // scala option
+                pagination: { $ref: '#/definitions/Pagination' }, // scala option / optional
                 webPublicationDate: { type: 'integer' }, // TODO format?
                 webPublicationDateDisplay: { type: 'string' }, // TODO format?
                 section: { type: 'string', minLength: 1 }, // scala option
-                sectionLabel: { type: 'string' }, //
-                sectionUrl: {
-                    //
-                    type: 'string',
-                    format: 'uri-reference',
-                },
+                sectionLabel: { type: 'string' },
+                sectionUrl: { type: 'string', format: 'uri-reference' },
                 webTitle: { type: 'string', minLength: 1 },
-                contendId: { // scala option
-                    type: 'string',
-                    format: 'uri-reference',
-                    minLength: 1,
-                },
-                editionId: {
-                    type: 'string',
-                    enum: ['UK', 'US', 'AU', 'INTL'],
-                },
+                contendId: { type: 'string', format: 'uri-reference', minLength: 1 }, // scala option
+                editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] },
                 edition: { type: 'string' },
                 webURL: { type: 'string', format: 'uri', minLength: 1 },
                 contentType: { type: 'string', pattern: 'Article' }, // scala option
                 starRating: { type: 'integer', minimum: 0, maximum: 5 }, // scala option / optional
-                subMetaLinks: {
-                    type: 'object',
-                    required: ['sectionLabels', 'keywords'],
-                    properties: {
-                        sectionLabels: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                            },
-                        },
-                        keywords: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                            },
-                        },
-                    },
-                },
-                commercial: {
-                    type: 'object',
-                    required: ['editionCommercialProperties'],
-                    properties: {
-                        editionCommercialProperties: { type: 'object' },
-                    },
-                },
-                meta: {
-                    type: 'object',
-                    required: [
-                        'isCommentable',
-                        'isImmersive',
-                        'shouldHideAds',
-                        'hasStoryPackage',
-                        'hasRelated',
-                    ],
-                    properties: {
-                        isCommentable: { type: 'boolean' },
-                        isImmersive: { type: 'boolean' },
-                        shouldHideAds: { type: 'boolean' },
-                        hasStoryPackage: { type: 'boolean' },
-                        hasRelated: { type: 'boolean' },
-                    },
-                },
+                subMetaLinks: { $ref: '#/definitions/SubMetaLinks' },
+                commercial: { $ref: '#/definitions/Commercial' },
+                meta: { $ref: '#/definitions/Meta' },
             },
         },
         site: {
@@ -238,8 +96,131 @@ const schema = {
                 },
             },
         },
+        version: { type: 'integer' },
     },
-    version: { type: 'integer' },
+    additonalProperties: false,
+    definitions: {
+        Content: {
+            type: 'object',
+            required: [
+                'headline',
+                'standfirst', // scala option
+                'main',
+                'blocks',
+                'byline',
+                'trailText',
+            ],
+            properties: {
+                headline: { type: 'string', minLength: 1 },
+                standfirst: { type: 'string' },
+                main: { type: 'string' },
+                body: { type: 'string' },
+                blocks: {
+                    type: 'object',
+                    required: ['body', 'keyEvents'],
+                    properties: {
+                        body: {
+                            type: 'array',
+                            items: {},
+                        },
+                        keyEvents: {
+                            type: 'array',
+                        },
+                        main: {
+                            type: 'object',
+                            items: {},
+                        },
+                    },
+                },
+                byline: { type: 'string' },
+                trailText: { type: 'string' },
+            },
+        },
+        Tags: {
+            type: 'object',
+            required: ['all'],
+            properties: {
+                all: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        required: ['properties'],
+                        properties: {
+                            properties: {
+                                type: 'object',
+                                required: ['id', 'tagType', 'webTitle'],
+                                properties: {
+                                    id: { type: 'string' },
+                                    tagType: { type: 'string' },
+                                    webTitle: { type: 'string' },
+                                    twitterHandle: {
+                                        type: 'string',
+                                    },
+                                    bylineImageUrl: {
+                                        type: 'string',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        Pagination: {
+            type: 'object',
+            required: ['currentPage', 'totalPages'],
+            properties: {
+                currentPage: { type: 'integer' },
+                totalPages: { type: 'integer' },
+                newest: { type: 'string' },
+                newer: { type: 'string' },
+                oldest: { type: 'string' },
+                older: { type: 'string' },
+            },
+        },
+        SubMetaLinks: {
+            type: 'object',
+            required: ['sectionLabels', 'keywords'],
+            properties: {
+                sectionLabels: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                    },
+                },
+                keywords: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                    },
+                },
+            },
+        },
+        Commercial: {
+            type: 'object',
+            required: ['editionCommercialProperties'],
+            properties: {
+                editionCommercialProperties: { type: 'object' },
+            },
+        },
+        Meta: {
+            type: 'object',
+            required: [
+                'isCommentable',
+                'isImmersive',
+                'shouldHideAds',
+                'hasStoryPackage',
+                'hasRelated',
+            ],
+            properties: {
+                isCommentable: { type: 'boolean' },
+                isImmersive: { type: 'boolean' },
+                shouldHideAds: { type: 'boolean' },
+                hasStoryPackage: { type: 'boolean' },
+                hasRelated: { type: 'boolean' },
+            },
+        },
+    }
 };
 
 
