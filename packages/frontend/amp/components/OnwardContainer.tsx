@@ -122,7 +122,7 @@ export const OnwardContainer: React.FC<{
         <MoustacheTemplate>
             <MoustacheSection name="showContent">
                 <div
-                    className={`${header} js-has-click-event`}
+                    className={`${inner} js-has-click-event`}
                     data-vars-component={componentName}
                 >
                     <div className={header}>
