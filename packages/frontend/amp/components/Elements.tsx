@@ -26,6 +26,7 @@ import { InteractiveUrl } from '@frontend/amp/components/elements/InteractiveUrl
 import { InteractiveMarkup } from '@frontend/amp/components/elements/InteractiveMarkup';
 import { MapEmbed } from '@frontend/amp/components/elements/MapEmbed';
 import { WithAds } from '@frontend/amp/components/WithAds';
+import { AudioAtom } from '@frontend/amp/components/elements/AudioAtom';
 
 const clear = css`
     clear: both;
@@ -165,6 +166,8 @@ export const Elements: React.FC<{
                 );
             case 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement':
                 return <InteractiveUrl url={element.url} />;
+            case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                return <AudioAtom element={element} />;
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
