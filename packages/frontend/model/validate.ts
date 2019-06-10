@@ -10,10 +10,10 @@ export class ValidationError extends Error {
 
 // enpoint can be used to reference matching schema
 export const validateRequestData = (data: any, endpoint: string) => {
-    const options = {
+    const options: Ajv.Options = {
         verbose: true,
         allErrors: true,
-        useDefaults: true, // modifies data in place
+        useDefaults: 'empty', // modifies data in place // TODO add 'empty' to ajv type def
     };
     const ajv = new Ajv(options);
     const isValid = ajv.validate(schema, data);
