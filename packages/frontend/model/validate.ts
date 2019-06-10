@@ -1,6 +1,11 @@
 import Ajv from 'ajv';
 
-export class ValidationError extends Error { }
+class ValidationError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'Validation Error';
+    }
+}
 
 // enpoint can be used to reference matching schema
 export const validateRequestData = (data: any, endpoint: string) => {
@@ -25,10 +30,10 @@ export const validateRequestData = (data: any, endpoint: string) => {
 
     if (!isValid) {
         throw new ValidationError(
-            `Could not validate request from ${endpoint}.\n ${JSON.stringify(
+            `Could not validate request to ${endpoint}.\n ${JSON.stringify(
                 ajv.errors,
                 null,
-                4,
+                2,
             )}`,
         );
     }
