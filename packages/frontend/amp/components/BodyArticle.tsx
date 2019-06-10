@@ -10,6 +10,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { WithAds } from '@frontend/amp/components/WithAds';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
+import { until } from '@guardian/pasteup/breakpoints';
 
 const body = (pillar: Pillar, tone: StyledTone) => {
     const bgColorMap = {
@@ -41,6 +42,16 @@ const bulletStyle = (pillar: Pillar) => css`
     }
 `;
 
+const adStyle = css`
+    float: right;
+    margin: 4px 0 12px 20px;
+
+    ${until.phablet} {
+        float: none;
+        margin: 0 auto 12px;
+    }
+`;
+
 export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
@@ -67,7 +78,7 @@ export const Body: React.FC<{
         <WithAds
             items={elementsWithoutAds}
             adSlots={slotIndexes}
-            adClassName={''}
+            adClassName={adStyle}
             adInfo={adInfo}
         />
     );
