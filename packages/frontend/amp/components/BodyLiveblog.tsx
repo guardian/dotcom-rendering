@@ -75,7 +75,7 @@ export const Body: React.FC<{
     return (
         <InnerContainer className={bodyStyle}>
             <TopMeta tone={tone} data={data} />
-            <KeyEvents events={data.keyEvents} pillar={pillar} url={url} />
+            <KeyEvents events={data.keyEvents} url={url} />
 
             {!isFirstPage && (
                 <Pagination guardianURL={url} pagination={data.pagination} />
