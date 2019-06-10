@@ -1,5 +1,10 @@
 import React from 'react';
 import { Ad } from '@frontend/amp/components/Ad';
+import { css } from 'emotion';
+
+const clear = css`
+    clear: both;
+`;
 
 interface AdInfo {
     edition: Edition;
@@ -47,5 +52,10 @@ export const WithAds: React.SFC<{
         return item;
     });
 
-    return <>{withAds}</>;
+    return (
+        <>
+            {withAds}
+            <div className={clear} />
+        </>
+    );
 };
