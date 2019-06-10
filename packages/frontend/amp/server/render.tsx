@@ -17,7 +17,7 @@ export const render = (
     try {
         validateRequestData(body, path);
     } catch (e) {
-        res.status(400).send(`<pre>${e.stack}</pre>`);
+        // TODO Add logging
     }
 
     try {
