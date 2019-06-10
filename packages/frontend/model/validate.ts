@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-class ValidationError extends Error {
+export class ValidationError extends Error {
     constructor(message: string) {
         super(message);
         this.name = 'Validation Error';
@@ -25,7 +25,12 @@ export const validateRequestData = (data: any, endpoint: string) => {
         },
     };
 
-    const ajv = new Ajv();
+    const options = {
+        verbose: true,
+        allErrors: true,
+    };
+
+    const ajv = new Ajv(options);
     const isValid = ajv.validate(schema, data);
 
     if (!isValid) {
