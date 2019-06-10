@@ -8,6 +8,8 @@ import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
+import { WithAds } from '@frontend/amp/components/WithAds';
+import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 
 const body = (pillar: Pillar, tone: StyledTone) => {
     const bgColorMap = {
@@ -45,22 +47,37 @@ export const Body: React.FC<{
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
     const tone = getToneType(data.tags);
+    const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
+    const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
+    const slotIndexes = findAdSlots(capiElements);
+    const adInfo = {
+        section: data.sectionName,
+        edition: data.editionId,
+        contentType: data.contentType,
+        commercialProperties: data.commercialProperties,
+        switches: {
+            krux: config.switches.krux,
+            ampPrebid: config.switches.prebid,
+        },
+    };
+
+    const elements = data.shouldHideAds ? (
+        <>{elementsWithoutAds}</>
+    ) : (
+        <WithAds
+            items={elementsWithoutAds}
+            adSlots={slotIndexes}
+            adClassName={''}
+            adInfo={adInfo}
+        />
+    );
 
     return (
         <InnerContainer className={body(pillar, tone)}>
             <TopMeta tone={tone} data={data} />
-            <Elements
-                pillar={pillar}
-                elements={data.blocks[0] ? data.blocks[0].elements : []}
-                // stuff for ads
-                edition={data.editionId}
-                section={data.sectionName}
-                contentType={data.contentType}
-                switches={config.switches}
-                commercialProperties={data.commercialProperties}
-                isImmersive={data.isImmersive}
-                shouldHideAds={data.shouldHideAds}
-            />
+
+            {elements}
+
             <SubMeta
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}
