@@ -1,5 +1,5 @@
 import Ajv from 'ajv';
-import { schema } from './schema/article.json.schema'
+import { schema } from './schema/article.json.schema';
 
 export class ValidationError extends Error {
     constructor(message: string) {
@@ -10,12 +10,11 @@ export class ValidationError extends Error {
 
 // enpoint can be used to reference matching schema
 export const validateRequestData = (data: any, endpoint: string) => {
-
     const options = {
         verbose: true,
         allErrors: true,
+        useDefaults: true, // modifies data in place
     };
-
     const ajv = new Ajv(options);
     const isValid = ajv.validate(schema, data);
 
@@ -27,5 +26,6 @@ export const validateRequestData = (data: any, endpoint: string) => {
         );
     }
 
-    return isValid;
+    // Includes fallback values from schema defaults for undefined properties
+    return data;
 };

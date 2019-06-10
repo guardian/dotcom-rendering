@@ -15,17 +15,19 @@ export const render = (
     { body, path }: express.Request,
     res: express.Response,
 ) => {
+    let validatedBody: any;
     try {
-        validateRequestData(body, path);
+        validatedBody = validateRequestData(body, path);
     } catch (err) {
         logger.warn(err);
     }
 
     try {
-        const CAPI = extractCAPI(body);
-        const linkedData = extractLinkedData(body);
+        const NAV = extractNAV(validatedBody);
+        const CAPI = extractCAPI(validatedBody);
+        const linkedData = extractLinkedData(validatedBody);
+        const config = extractConfig(validatedBody);
 
-        const config = extractConfig(body);
         const blockElements = CAPI.blocks.map(block => block.elements);
         const elements = ([] as CAPIElement[]).concat(...blockElements);
 
@@ -57,7 +59,7 @@ export const render = (
             body: (
                 <Article
                     articleData={CAPI}
-                    nav={extractNAV(body)}
+                    nav={NAV}
                     analytics={analytics}
                     config={config}
                 />
