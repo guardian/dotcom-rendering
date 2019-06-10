@@ -10,7 +10,6 @@ import { extract as extractLinkedData } from '@frontend/model/extract-linked-dat
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { validateRequestData } from '@frontend/model/validate';
 import { logger } from '@frontend/app/logging';
-import { warn } from '@root/scripts/env/log';
 
 export const render = (
     { body, path }: express.Request,
@@ -20,7 +19,6 @@ export const render = (
         validateRequestData(body, path);
     } catch (err) {
         logger.warn(err);
-        warn(err);
     }
 
     try {
