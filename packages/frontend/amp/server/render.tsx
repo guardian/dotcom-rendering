@@ -2,13 +2,15 @@ import React from 'react';
 import express from 'express';
 import { document } from '@frontend/amp/server/document';
 import { Article } from '@frontend/amp/pages/Article';
-import { extractScripts } from '@root/packages/frontend/amp/lib/scripts';
+import { extractScripts } from '@frontend/amp/lib/scripts';
 import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { validateRequestData } from '@root/packages/frontend/model/validate';
+import { validateRequestData } from '@frontend/model/validate';
+import { logger } from '@frontend/app/logging';
+import { warn } from '@root/scripts/env/log';
 
 export const render = (
     { body, path }: express.Request,
@@ -16,8 +18,9 @@ export const render = (
 ) => {
     try {
         validateRequestData(body, path);
-    } catch (e) {
-        // TODO Add logging
+    } catch (err) {
+        logger.warn(err);
+        warn(err);
     }
 
     try {
