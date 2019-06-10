@@ -23,13 +23,13 @@ describe('JSON Schema validation of request body', () => {
     });
 
     it('throws Validation Error if required data is missing', () => {
-        testData.page.webURL = undefined;
+        testData.page.contentType = undefined;
         expect(() => {
             validateRequestData(testData, '/AMPArticle');
         }).toThrowError(ValidationError);
     });
 
-    fit('throws Validation Error if required data is null', () => {
+    it('throws Validation Error if required data is null', () => {
         testData.page.edition = null;
         expect(() => {
             validateRequestData(testData, '/AMPArticle');

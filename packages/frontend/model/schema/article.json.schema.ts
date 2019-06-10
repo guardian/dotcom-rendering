@@ -10,18 +10,18 @@ export const schema = {
             required: [
                 'content',
                 'tags',
-                'section', // scala option
+                'section',
                 'edition',
                 'editionId',
                 'pageId',
-                'pillar', // scala option
+                'pillar',
                 'webPublicationDate',
                 'webPublicationDateDisplay',
                 'sectionLabel',
                 'sectionUrl',
                 'webTitle',
                 'webURL',
-                'contentType', // TODO    scala option
+                'contentType', // scala option -> throws error if missing
                 'subMetaLinks',
                 'commercial',
                 'meta',
@@ -45,11 +45,11 @@ export const schema = {
                         'Arts',
                     ],
                     default: '',
-                }, // scala option
-                pagination: { $ref: '#/definitions/Pagination' }, // scala option / optional
+                },
+                pagination: { $ref: '#/definitions/Pagination' }, // optional
                 webPublicationDate: { type: 'integer' }, // TODO format?
                 webPublicationDateDisplay: { type: 'string' }, // TODO format?
-                section: { type: 'string', default: '' }, // scala option
+                section: { type: 'string', default: '' },
                 sectionLabel: { type: 'string' },
                 sectionUrl: { type: 'string', format: 'uri-reference' },
                 webTitle: { type: 'string', minLength: 1 },
@@ -57,12 +57,12 @@ export const schema = {
                     type: 'string',
                     format: 'uri-reference',
                     minLength: 1,
-                }, // scala option
-                editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] }, // throw an error!!
+                },
+                editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] },
                 edition: { type: 'string', default: '' },
                 webURL: { type: 'string', format: 'uri', minLength: 1 },
-                contentType: { type: 'string', enum: ['Article', 'LiveBlog'] }, // scala option
-                starRating: { type: 'integer', minimum: 0, maximum: 5 }, // scala option / optional
+                contentType: { type: 'string', enum: ['Article', 'LiveBlog'] }, // scala option -> validation will fail
+                starRating: { type: 'integer', minimum: 0, maximum: 5 }, //  optional
                 subMetaLinks: { $ref: '#/definitions/SubMetaLinks' },
                 commercial: { $ref: '#/definitions/Commercial' },
                 meta: { $ref: '#/definitions/Meta' },
@@ -77,7 +77,7 @@ export const schema = {
                 'commercialUrl',
             ],
             properties: {
-                ajaxUrl: { type: 'string', format: 'uri', minLength: 1 }, // extract config
+                ajaxUrl: { type: 'string', format: 'uri', minLength: 1 },
                 beaconUrl: {
                     type: 'string',
                     format: 'uri-reference',
@@ -88,27 +88,36 @@ export const schema = {
                     format: 'uri',
                     minLength: 1,
                 },
-                sentryPublicApiKey: { type: 'string', default: '' }, // config
-                sentryHost: { type: 'string', default: '' }, // config
-                switches: { type: 'object', default: {} }, // config
-                commercialUrl: { type: 'string', format: 'uri', minLength: 1 }, // extract config
-                dfpAccountId: { type: 'string', default: '' }, // // TODO check and fix - not currently used
+                sentryPublicApiKey: { type: 'string', default: '' },
+                sentryHost: { type: 'string', default: '' },
+                switches: { type: 'object', default: {} },
+                commercialUrl: { type: 'string', format: 'uri', minLength: 1 },
+                dfpAccountId: { type: 'string', default: '' }, // TODO check and fix - not currently used
             },
         },
         version: { type: 'integer', minimum: 2, maximum: 2 },
     },
     additonalProperties: false,
     definitions: {
+        Block: {
+            type: 'object',
+            required: ['bodyHtml', 'elements'],
+            properties: {
+                id: { type: 'string' },
+                bodyHtml: { type: 'string' },
+                elements: {
+                    type: 'array',
+                    default: [],
+                },
+                createdOn: { type: 'integer' },
+                createdOnDisplay: { type: 'string' },
+                lastUpdatedDisplay: { type: 'string' },
+                title: { type: 'string' },
+            },
+        },
         Content: {
             type: 'object',
-            required: [
-                'headline',
-                'standfirst', // scala option
-                'main',
-                'blocks',
-                'byline',
-                'trailText',
-            ],
+            required: ['headline', 'main', 'blocks', 'byline', 'trailText'],
             properties: {
                 headline: { type: 'string', minLength: 1 },
                 standfirst: { type: 'string', default: '' },
@@ -120,20 +129,14 @@ export const schema = {
                     properties: {
                         body: {
                             type: 'array',
-                            items: {},
+                            items: { $ref: '#/definitions/Block' },
                         },
                         keyEvents: {
                             type: 'array',
+                            items: { $ref: '#/definitions/Block' },
                         },
                         main: {
-                            type: 'object',
-                            required: ['elements'],
-                            properties: {
-                                elements: {
-                                    type: 'array',
-                                    default: [],
-                                },
-                            },
+                            $ref: '#/definitions/Block',
                         },
                     },
                 },
@@ -219,7 +222,7 @@ export const schema = {
                 'shouldHideAds',
                 'hasStoryPackage',
                 'hasRelated',
-                'linkedData', // extract-linked-data
+                'linkedData',
             ],
             properties: {
                 isCommentable: { type: 'boolean', default: false },
@@ -227,7 +230,7 @@ export const schema = {
                 shouldHideAds: { type: 'boolean', default: false },
                 hasStoryPackage: { type: 'boolean', default: false },
                 hasRelated: { type: 'boolean', default: false },
-                linkedData: { type: 'array', default: [] }, // extract-linked-data
+                linkedData: { type: 'array', default: [] },
             },
         },
     },
