@@ -17,6 +17,8 @@ const showMore = css`
         height: 18px;
         vertical-align: middle;
         margin-top: -2px;
+        margin-right: 4px;
+        margin-left: 5px;
         fill: ${palette.neutral[46]};
         padding-right: 4px;
     }
@@ -29,7 +31,7 @@ const showMore = css`
         top: 0;
         left: 0;
         bottom: 0;
-        width: 140px;
+        width: 130px;
         z-index: -1;
         color: ${palette.neutral[100]};
     }
