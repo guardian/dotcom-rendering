@@ -82,11 +82,11 @@ export const Body: React.FC<{
             )}
 
             <amp-live-list
-                id="live-blog-entries-7ea0dbef"
+                id="live-blog-entries-main"
                 data-max-items-per-page="20" // TODO confirm if this should be dynamic
             >
                 <div update="" className={updateButtonStyle}>
-                    <button on="tap:my-live-list.update">
+                    <button on="tap:live-blog-entries-main.update">
                         <RefreshIcon />
                         <span>You have updates</span>
                     </button>
