@@ -39,7 +39,7 @@ configure({
     },
     categories: {
         default: { appenders: ['fileAppender'], level: 'info' },
-        development: { appenders: ['console'], level: 'warn' },
+        development: { appenders: ['console'], level: 'info' },
     },
     pm2: true,
 });
