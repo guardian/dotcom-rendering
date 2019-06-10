@@ -21,7 +21,7 @@ export const schema = {
                 'sectionUrl',
                 'webTitle',
                 'webURL',
-                'contentType', // scala option
+                'contentType', // TODO    scala option
                 'subMetaLinks',
                 'commercial',
                 'meta',
@@ -29,18 +29,37 @@ export const schema = {
             properties: {
                 content: { $ref: '#/definitions/Content' },
                 tags: { $ref: '#/definitions/Tags' },
-                pageId: { type: 'string', format: 'uri-reference', minLength: 1 },
-                pillar: { type: 'string', enum: ['News', 'Opinion', 'Sport', 'Culture', 'Lifestyle', 'Arts'] }, // scala option
+                pageId: {
+                    type: 'string',
+                    format: 'uri-reference',
+                    minLength: 1,
+                },
+                pillar: {
+                    type: 'string',
+                    enum: [
+                        'News',
+                        'Opinion',
+                        'Sport',
+                        'Culture',
+                        'Lifestyle',
+                        'Arts',
+                    ],
+                    default: '',
+                }, // scala option
                 pagination: { $ref: '#/definitions/Pagination' }, // scala option / optional
                 webPublicationDate: { type: 'integer' }, // TODO format?
                 webPublicationDateDisplay: { type: 'string' }, // TODO format?
-                section: { type: 'string', minLength: 1 }, // scala option
+                section: { type: 'string', default: '' }, // scala option
                 sectionLabel: { type: 'string' },
                 sectionUrl: { type: 'string', format: 'uri-reference' },
                 webTitle: { type: 'string', minLength: 1 },
-                contendId: { type: 'string', format: 'uri-reference', minLength: 1 }, // scala option
-                editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] },
-                edition: { type: 'string' },
+                contentId: {
+                    type: 'string',
+                    format: 'uri-reference',
+                    minLength: 1,
+                }, // scala option
+                editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] }, // throw an error!!
+                edition: { type: 'string', default: '' },
                 webURL: { type: 'string', format: 'uri', minLength: 1 },
                 contentType: { type: 'string', enum: ['Article', 'LiveBlog'] }, // scala option
                 starRating: { type: 'integer', minimum: 0, maximum: 5 }, // scala option / optional
@@ -51,15 +70,29 @@ export const schema = {
         },
         site: {
             type: 'object',
-            required: ['ajaxUrl', 'beaconUrl', 'guardianBaseURL', 'commercialUrl'],
+            required: [
+                'ajaxUrl',
+                'beaconUrl',
+                'guardianBaseURL',
+                'commercialUrl',
+            ],
             properties: {
                 ajaxUrl: { type: 'string', format: 'uri', minLength: 1 }, // extract config
-                beaconUrl: { type: 'string', format: 'uri-reference', minLength: 1 },
-                guardianBaseURL: { type: 'string', format: 'uri', minLength: 1 },
-                sentryPublicApiKey: { type: 'string' }, // config
-                sentryHost: { type: 'string' }, // config
-                switches: { type: 'object' }, // config
+                beaconUrl: {
+                    type: 'string',
+                    format: 'uri-reference',
+                    minLength: 1,
+                },
+                guardianBaseURL: {
+                    type: 'string',
+                    format: 'uri',
+                    minLength: 1,
+                },
+                sentryPublicApiKey: { type: 'string', default: '' }, // config
+                sentryHost: { type: 'string', default: '' }, // config
+                switches: { type: 'object', default: {} }, // config
                 commercialUrl: { type: 'string', format: 'uri', minLength: 1 }, // extract config
+                dfpAccountId: { type: 'string', default: '' }, // // TODO check and fix - not currently used
             },
         },
         version: { type: 'integer', minimum: 2, maximum: 2 },
@@ -78,8 +111,8 @@ export const schema = {
             ],
             properties: {
                 headline: { type: 'string', minLength: 1 },
-                standfirst: { type: 'string' },
-                main: { type: 'string' },
+                standfirst: { type: 'string', default: '' },
+                main: { type: 'string', default: '' },
                 body: { type: 'string' },
                 blocks: {
                     type: 'object',
@@ -94,12 +127,18 @@ export const schema = {
                         },
                         main: {
                             type: 'object',
-                            items: {},
+                            required: ['elements'],
+                            properties: {
+                                elements: {
+                                    type: 'array',
+                                    default: [],
+                                },
+                            },
                         },
                     },
                 },
-                byline: { type: 'string' },
-                trailText: { type: 'string' },
+                byline: { type: 'string', default: '' },
+                trailText: { type: 'string', default: '' },
             },
         },
         Tags: {
@@ -108,6 +147,7 @@ export const schema = {
             properties: {
                 all: {
                     type: 'array',
+                    default: [],
                     items: {
                         type: 'object',
                         required: ['properties'],
@@ -150,12 +190,14 @@ export const schema = {
             properties: {
                 sectionLabels: {
                     type: 'array',
+                    default: [],
                     items: {
                         type: 'object',
                     },
                 },
                 keywords: {
                     type: 'array',
+                    default: [],
                     items: {
                         type: 'object',
                     },
@@ -166,7 +208,7 @@ export const schema = {
             type: 'object',
             required: ['editionCommercialProperties'],
             properties: {
-                editionCommercialProperties: { type: 'object' },
+                editionCommercialProperties: { type: 'object', default: {} },
             },
         },
         Meta: {
@@ -177,15 +219,15 @@ export const schema = {
                 'shouldHideAds',
                 'hasStoryPackage',
                 'hasRelated',
-                'linkedData' // extract-linked-data
+                'linkedData', // extract-linked-data
             ],
             properties: {
-                isCommentable: { type: 'boolean' },
-                isImmersive: { type: 'boolean' },
-                shouldHideAds: { type: 'boolean' },
-                hasStoryPackage: { type: 'boolean' },
-                hasRelated: { type: 'boolean' },
-                linkedData: { type: 'array' }
+                isCommentable: { type: 'boolean', default: false },
+                isImmersive: { type: 'boolean', default: false },
+                shouldHideAds: { type: 'boolean', default: false },
+                hasStoryPackage: { type: 'boolean', default: false },
+                hasRelated: { type: 'boolean', default: false },
+                linkedData: { type: 'array', default: [] }, // extract-linked-data
             },
         },
     },
