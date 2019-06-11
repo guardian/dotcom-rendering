@@ -27,6 +27,7 @@ addLayout('json', config => {
 
 configure({
     appenders: {
+        console: { type: 'console' },
         fileAppender: {
             type: 'file',
             filename: logLocation,
@@ -36,9 +37,15 @@ configure({
             layout: { type: 'json', separator: ',' },
         },
     },
-    categories: { default: { appenders: ['fileAppender'], level: 'info' } },
+    categories: {
+        default: { appenders: ['fileAppender'], level: 'info' },
+        development: { appenders: ['console'], level: 'info' },
+    },
     pm2: true,
 });
 
-export const logger = getLogger();
+export const logger =
+    process.env.NODE_ENV === 'development'
+        ? getLogger('development')
+        : getLogger();
 logger.level = 'info';
