@@ -19,7 +19,7 @@ import { findPillar } from './find-pillar';
 const sectionsAPIs: SectionAPIID[] = [
     {
         section: 'Guardian',
-        apiID: '879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53',
+        apiID: '2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53',
         subsections: []
     },
     {
@@ -29,7 +29,7 @@ const sectionsAPIs: SectionAPIID[] = [
     },
     {
         section: 'Business',
-        apiID: '2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53',
+        apiID: '163BF72C-72D0-4702-82A9-17A548A39D79',
         subsections: ['business', 'better-business', 'business-to-business', 'working-in-development']
     },
     {
@@ -244,7 +244,7 @@ const getNielsenAPIID = (subsection: string): string => {
         return APIID.apiID;
     }
 
-    return "";
+    return sectionsAPIs[0].apiID;
 };
 
 

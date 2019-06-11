@@ -582,12 +582,12 @@ describe('extract-capi', () => {
         expect(nielsenAPIID).toBe('4994D04B-4279-4184-A2C5-E8BB1DD50AB9');
     });
 
-    it('returns empty nielsenAPI if section does not exist', () => {
+    it('returns the guardian nielsenAPI if section does not exist', () => {
         testData.page.section = 'invalidSection';
 
         const { nielsenAPIID } = extract(testData);
 
-        expect(nielsenAPIID).toBe('');
+        expect(nielsenAPIID).toBe('2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53');
     });
 
 });
