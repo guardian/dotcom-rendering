@@ -402,6 +402,7 @@ export const CAPI: CAPIType = {
         AU: { adTargeting: [] },
         INT: { adTargeting: [] },
     },
+    nielsenAPIID: 'ABC123',
     starRating: 2,
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',

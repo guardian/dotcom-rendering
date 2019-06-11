@@ -573,4 +573,21 @@ describe('extract-capi', () => {
             extract(testData);
         }).toThrow();
     });
+
+    it('returns nielsenAPI based on section name', () => {
+        testData.page.section = 'books';
+
+        const { nielsenAPIID } = extract(testData);
+
+        expect(nielsenAPIID).toBe('4994D04B-4279-4184-A2C5-E8BB1DD50AB9');
+    });
+
+    it('returns empty nielsenAPI if section does not exist', () => {
+        testData.page.section = 'invalidSection';
+
+        const { nielsenAPIID } = extract(testData);
+
+        expect(nielsenAPIID).toBe('');
+    });
+
 });

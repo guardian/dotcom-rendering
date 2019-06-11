@@ -15,6 +15,118 @@ import { getSharingUrls } from './sharing-urls';
 import { findPillar } from './find-pillar';
 
 // tslint:disable:prefer-array-literal
+
+const sectionsAPIs: SectionAPIID[] = [
+    {
+        section: 'Guardian',
+        apiID: '879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53',
+        subsections: []
+    },
+    {
+        section: 'Books',
+        apiID: '4994D04B-4279-4184-A2C5-E8BB1DD50AB9',
+        subsections: ['books', 'childrens-books-site']
+    },
+    {
+        section: 'Business',
+        apiID: '2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53',
+        subsections: ['business', 'better-business', 'business-to-business', 'working-in-development']
+    },
+    {
+        section: 'CommentIsFree',
+        apiID: 'C962A2C3-C9E1-40DD-9B58-7B1095EDB16E',
+        subsections: ['commentisfree']
+    },
+    {
+        section: 'Culture',
+        apiID: '87C0725C-D478-4567-967B-E3519ECD12E8',
+        subsections: ['culture', 'artanddesign', 'culture-network', 'culture-professionals-network', 'games', 'stage']
+    },{
+        section: 'Education',
+        apiID: 'DD50B111-D493-4D25-8980-2B0752E16ED1',
+        subsections: ['education', 'higher-education-network', 'teacher-network']
+    },
+    {
+        section: 'Environment',
+        apiID: 'FEC0766C-C766-4A77-91B3-74C5525E680F',
+        subsections: ['environment', 'animals-farmed']
+    },
+    {
+        section: 'Fashion',
+        apiID: '1639B19E-B581-491E-94B7-FBACB6823C43',
+        subsections: ['fashion']
+    },
+    {
+        section: 'Film',
+        apiID: 'D5BB97FE-637C-4E9E-B972-C8EA88101CB7',
+        subsections: ['film']
+    },
+    {
+        section: 'LifeStyle',
+        apiID: 'B32533F9-65CF-4261-8BB9-2A707F59712A',
+        subsections: ['lifeandstyle']
+    },
+    {
+        section: 'Media',
+        apiID: '385AA13F-9B64-4927-9536-BE70F9AD54BD',
+        subsections: ['media']
+    },
+    {
+        section: 'Money',
+        apiID: '10BE8096-BF69-4252-AC27-C4127D8631F6',
+        subsections: ['money']
+    },
+    {
+        section: 'Music',
+        apiID: '9D928193-7B5C-45A9-89E4-C47F42B8FB73',
+        subsections: ['music']
+    },
+    {
+        section: 'News',
+        apiID: '66BEC53C-9890-477C-B639-60879EC4F762',
+        subsections: ['news', 'australia-news', 'cardiff', 'cities', 'community', 'edinburgh', 'global-development', 'government-computing-network', 'law', 'leeds', 'local', 'local-government-network', 'media', 'media-network', 'uk-news', 'us-news', 'weather', 'world']
+    },
+    {
+        section: 'Politics',
+        apiID: 'C5C73A36-9E39-4D42-9049-2528DB5E998D',
+        subsections: ['politics']
+    },
+    {
+        section: 'ProfessionalNetwork',
+        apiID: '9DFEFF7E-9D45-4676-82B3-F29A6BF05BE1',
+        subsections: ['guardian-professional', 'global-development-professionals-network', 'small-business-network']
+    },
+    {
+        section: 'Science',
+        apiID: 'F4867E05-4149-49F0-A9DE-9F3496930B8C',
+        subsections: ['science']
+    },
+    {
+        section: 'Society',
+        apiID: '617F9FB9-2D34-4C3A-A2E7-383AE877A35D',
+        subsections: ['society', 'healthcare-network', 'housing-network', 'inequality', 'public-leaders-network', 'social-care-network', 'social-enterprise-network', 'society-professionals', 'women-in-leadership']
+    },
+    {
+        section: 'Sport',
+        apiID: '52A6516F-E323-449F-AA57-6A1B2386F8F6',
+        subsections: ['sport', 'football']
+    },
+    {
+        section: 'Technology',
+        apiID: '4F448B55-305F-4203-B192-8534CB606C12',
+        subsections: ['technology']
+    },
+    {
+        section: 'Travel',
+        apiID: '05A03097-D4CA-46BF-96AD-935252967239',
+        subsections: ['travel', 'travel/offers']
+    },
+    {
+        section: 'TvRadio',
+        apiID: '3277F0D0-9389-4A32-A4D6-516B49D87E45',
+        subsections: ['tv-and-radio']
+    }];
+
 const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
     return fns.reduce((acc, fn) => fn(acc), input);
 };
@@ -126,6 +238,16 @@ const getPagination = (data: {}): Pagination | undefined => {
     return undefined;
 };
 
+const getNielsenAPIID = (subsection: string): string => {
+    const APIID = sectionsAPIs.find(section => section.subsections.some(_ => _ === subsection));
+    if (APIID) {
+        return APIID.apiID;
+    }
+
+    return "";
+};
+
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -214,5 +336,6 @@ export const extract = (data: {}): CAPIType => {
             getString(data, 'page.content.trailText', ''),
             stripHTML,
         ),
+        nielsenAPIID: getNielsenAPIID(sectionName)
     };
 };
