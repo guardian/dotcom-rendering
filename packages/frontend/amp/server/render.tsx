@@ -8,8 +8,18 @@ import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
+import { validateRequestData } from '@root/packages/frontend/model/validate';
 
-export const render = ({ body }: express.Request, res: express.Response) => {
+export const render = (
+    { body, path }: express.Request,
+    res: express.Response,
+) => {
+    try {
+        validateRequestData(body, path);
+    } catch (e) {
+        // TODO Add logging
+    }
+
     try {
         const CAPI = extractCAPI(body);
         const linkedData = extractLinkedData(body);
