@@ -112,6 +112,8 @@ interface Block {
     createdOnDisplay?: string;
     lastUpdatedDisplay?: string;
     title?: string;
+    firstPublished?: number;
+    firstPublishedDisplay?: string;
 }
 
 interface Pagination {

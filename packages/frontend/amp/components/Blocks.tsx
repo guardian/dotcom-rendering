@@ -16,7 +16,7 @@ const blockStyle = (pillar: Pillar) => css`
     margin-bottom: 12px;
 `;
 
-const blockCreatedOnStyle = css`
+const firstPublishedStyle = css`
     color: ${palette.neutral[7]};
     line-height: 2rem;
     margin-bottom: 10px;
@@ -64,16 +64,16 @@ export const Blocks: React.SFC<{
         return (
             <div
                 id={block.id}
-                data-sort-time={block.createdOn}
+                data-sort-time={block.firstPublished}
                 key={block.id}
                 className={blockStyle(pillar)}
             >
-                {block.createdOnDisplay && (
+                {block.firstPublishedDisplay && (
                     <a
-                        className={blockCreatedOnStyle}
+                        className={firstPublishedStyle}
                         href={blockLink(url, block.id)}
                     >
-                        {block.createdOnDisplay}
+                        {block.firstPublishedDisplay}
                     </a>
                 )}
                 {block.title && <h2>{block.title}</h2>}
