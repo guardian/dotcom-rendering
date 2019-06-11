@@ -2,34 +2,34 @@ import {
     findAdSlots,
     AD_LIMIT,
     SMALL_PARA_CHARS,
-    MIN_CHAR_BUFFER,
     findBlockAdSlots,
+    getElementLength,
 } from './find-adslots';
 
+const getTextBlockElement = (length: number): TextBlockElement => {
+    return {
+        _type: 'model.dotcomrendering.pageElements.TextBlockElement',
+        html: `${'.'.repeat(length)}`,
+    };
+};
+
 describe('ampadslots', () => {
+    const imageBlockElement: ImageBlockElement = {
+        _type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+        media: { allImages: [] },
+        data: { alt: 'img', credit: 'nobody' },
+        imageSources: [],
+        displayCredit: false,
+        role: 'lol',
+    };
+
+    const tenCharTextBlock = getTextBlockElement(10);
+    const fiveHundredCharTextBlock = getTextBlockElement(500);
+
     describe('findAdSlots', () => {
-        const getTextBlockElement = (length: number): TextBlockElement => {
-            return {
-                _type: 'model.dotcomrendering.pageElements.TextBlockElement',
-                html: `${'.'.repeat(length)}`,
-            };
-        };
-
-        const imageBlockElement: ImageBlockElement = {
-            _type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-            media: { allImages: [] },
-            data: { alt: 'img', credit: 'nobody' },
-            imageSources: [],
-            displayCredit: false,
-            role: 'lol',
-        };
-        const tenCharTextBlock = getTextBlockElement(10);
-        const fiveHundredCharTextBlock = getTextBlockElement(500);
-
         it('should have these values for ad spacing (or tests other than this one need updating)', () => {
             expect(AD_LIMIT).toEqual(8);
             expect(SMALL_PARA_CHARS).toEqual(50);
-            expect(MIN_CHAR_BUFFER).toEqual(700);
         });
 
         it('adds an advert after 700 chars', () => {
@@ -52,7 +52,7 @@ describe('ampadslots', () => {
         });
 
         it('does not add an advert after 699 chars', () => {
-            const data = [getTextBlockElement(699), getTextBlockElement(700)];
+            const data = [getTextBlockElement(300), getTextBlockElement(399)];
 
             expect(findAdSlots(data)).toEqual([]);
         });
@@ -107,5 +107,13 @@ describe('ampadslots', () => {
 
             expect(slots).toEqual([4, 9, 14, 19, 24, 29, 34, 39]);
         });
+    });
+});
+
+describe('getElementLength', () => {
+    it('should correctly calculate the length of a text block (stripping html chars)', () => {
+        const textBlock = getTextBlockElement(200);
+        textBlock.html = `<p>${textBlock.html}</p>`;
+        expect(getElementLength(textBlock)).toEqual(200);
     });
 });
