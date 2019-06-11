@@ -1,5 +1,6 @@
 import React from 'react';
 import { JSDOM } from 'jsdom';
+import { TextStyle } from '@frontend/amp/components/elements/Text';
 
 const makeFallback = (html: string): string | null => {
     const { window } = new JSDOM(html);
@@ -12,7 +13,8 @@ const makeFallback = (html: string): string | null => {
 // tslint:disable:react-no-dangerous-html
 export const TwitterEmbed: React.FC<{
     element: TweetBlockElement;
-}> = ({ element }) => {
+    pillar: Pillar;
+}> = ({ element, pillar }) => {
     const fallbackHTML = makeFallback(element.html);
 
     return (
@@ -23,7 +25,7 @@ export const TwitterEmbed: React.FC<{
             data-tweetid={element.id}
         >
             {fallbackHTML && (
-                <div fallback={''}>
+                <div placeholder={''} className={TextStyle(pillar)}>
                     <blockquote
                         dangerouslySetInnerHTML={{ __html: fallbackHTML }}
                     />
