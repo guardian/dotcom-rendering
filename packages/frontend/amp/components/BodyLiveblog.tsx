@@ -28,14 +28,17 @@ const bodyStyle = css`
     }
 `;
 
+// To override AMP styles we need to use nested and specific selectors here
+// unfortunately.
 const updateButtonStyle = css`
-    position: fixed;
-    top: 12px;
-    left: 0;
-    z-index: 1015;
+    &.amp-active[update] {
+        position: fixed;
+        left: 0;
+        top: 12px;
+        display: flex;
+        justify-content: center;
+    }
 
-    display: flex;
-    justify-content: center;
     width: 100%;
 
     button {
