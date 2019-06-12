@@ -68,7 +68,7 @@ export const Body: React.FC<{
         commercialProperties: data.commercialProperties,
         switches: {
             krux: config.switches.krux,
-            ampPrebid: config.switches.prebid,
+            ampPrebid: config.switches.ampPrebid,
         },
     };
 
