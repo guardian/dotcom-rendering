@@ -29,10 +29,10 @@ interface AdTargetParam {
     value: string | string[];
 }
 
-interface SectionAPIID {
-    section: string;
-    apiID: string;
+interface ArticleSection {
+    name: string;
     subsections: string[];
+    apiID: string;
 }
 
 interface EditionCommercialProperties {
