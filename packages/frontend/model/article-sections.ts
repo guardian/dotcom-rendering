@@ -154,9 +154,7 @@ const subsections = {
 export const findBySubsection = (subsection: string): SectionNielsenAPI => {
     const section = (<any>subsections)[subsection];
 
-    if (section) {
-        return section;
-    }
+    if (section) return section;
 
     return sections[0];
 };
