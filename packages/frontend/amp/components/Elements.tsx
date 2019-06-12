@@ -65,7 +65,9 @@ export const Elements = (
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                return <TwitterEmbed key={i} element={element} />;
+                return (
+                    <TwitterEmbed key={i} element={element} pillar={pillar} />
+                );
             case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                 return <RichLink key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
