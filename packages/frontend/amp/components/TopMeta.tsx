@@ -9,6 +9,7 @@ export const TopMeta: React.SFC<{ data: ArticleModel; tone: StyledTone }> = ({
     data,
     tone,
 }) => {
+    // Note, liveblogs have a separate top meta - see TopMetaLiveblog
     const topMeta = {
         'default-tone': <TopMetaNews articleData={data} />,
         'tone/comment': <TopMetaOpinion articleData={data} />,
