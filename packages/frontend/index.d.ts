@@ -29,7 +29,7 @@ interface AdTargetParam {
     value: string | string[];
 }
 
-interface ArticleSection {
+interface SectionNielsenAPI {
     name: string;
     apiID: string;
 }
