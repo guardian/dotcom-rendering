@@ -31,7 +31,6 @@ interface AdTargetParam {
 
 interface ArticleSection {
     name: string;
-    subsections: string[];
     apiID: string;
 }
 
