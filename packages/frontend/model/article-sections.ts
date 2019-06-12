@@ -88,8 +88,8 @@ export const sections: SectionNielsenAPI[] = [
     }];
 
 const subsections = {
-  'books' :  sections[1],
-  'childrens-books-site' :  sections[1],
+    'books' :  sections[1],
+    'childrens-books-site' :  sections[1],
     'business': sections[2],
     'better-business': sections[2],
     'business-to-business': sections[2],
