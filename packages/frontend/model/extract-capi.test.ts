@@ -589,5 +589,4 @@ describe('extract-capi', () => {
 
         expect(nielsenAPIID).toBe('2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53');
     });
-
 });

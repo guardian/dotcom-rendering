@@ -132,7 +132,6 @@ const getNielsenAPIID = (subsection: string): string => {
     return findBySubsection(subsection).apiID;
 };
 
-
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -221,6 +220,6 @@ export const extract = (data: {}): CAPIType => {
             getString(data, 'page.content.trailText', ''),
             stripHTML,
         ),
-        nielsenAPIID: getNielsenAPIID(sectionName)
+        nielsenAPIID: getNielsenAPIID(sectionName),
     };
 };
