@@ -36,7 +36,7 @@ export const validateRequestData = (data: any, endpoint: string) => {
     if (!isValid) {
         throw new ValidationError(
             `Could not validate ${endpoint} request for ${
-            data.page.pageId
+                data.page.pageId
             }.\n ${JSON.stringify(ajv.errors, null, 2)}`,
         );
     }

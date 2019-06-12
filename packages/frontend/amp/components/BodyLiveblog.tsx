@@ -2,9 +2,8 @@ import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { TopMeta } from '@frontend/amp/components/TopMeta';
+import { TopMetaLiveblog } from '@frontend/amp/components/TopMetaLiveblog';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { getToneType } from '@frontend/amp/lib/tag-utils';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
 import { Blocks } from '@frontend/amp/components/Blocks';
@@ -69,7 +68,6 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const tone = getToneType(data.tags);
     const url = `${data.guardianBaseURL}/${data.pageId}`;
     const isFirstPage = data.pagination
         ? data.pagination.currentPage === 1
@@ -77,7 +75,7 @@ export const Body: React.FC<{
 
     return (
         <InnerContainer className={bodyStyle}>
-            <TopMeta tone={tone} data={data} />
+            <TopMetaLiveblog articleData={data} />
             <KeyEvents events={data.keyEvents} url={url} />
 
             {!isFirstPage && (
