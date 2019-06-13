@@ -28,15 +28,18 @@ export const WithAds: React.SFC<{
         usePrebid: adInfo.switches.ampPrebid,
     };
 
-    const ad = (
-        <Ad
-            className={adClassName}
-            edition={adInfo.edition}
-            section={adInfo.section}
-            contentType={adInfo.contentType}
-            config={commercialConfig}
-            commercialProperties={adInfo.commercialProperties}
-        />
+    const ad = (id: string): JSX.Element => (
+        // data-sort-time and id needed for amp-live-list validation
+        <div id={id} data-sort-time="1">
+            <Ad
+                className={adClassName}
+                edition={adInfo.edition}
+                section={adInfo.section}
+                contentType={adInfo.contentType}
+                config={commercialConfig}
+                commercialProperties={adInfo.commercialProperties}
+            />
+        </div>
     );
 
     const withAds = items.map((item, i) => {
@@ -44,7 +47,7 @@ export const WithAds: React.SFC<{
             return (
                 <>
                     {item}
-                    {ad}
+                    {ad(`ad-${item.id}`)}
                 </>
             );
         }
@@ -55,7 +58,7 @@ export const WithAds: React.SFC<{
     return (
         <>
             {withAds}
-            <div className={clear} />
+            <div id="clean-blocks" data-sort-time="1" className={clear} />
         </>
     );
 };
