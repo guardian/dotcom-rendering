@@ -29,6 +29,11 @@ interface AdTargetParam {
     value: string | string[];
 }
 
+interface SectionNielsenAPI {
+    name: string;
+    apiID: string;
+}
+
 interface EditionCommercialProperties {
     adTargeting: AdTargetParam[];
     branding?: Branding;
@@ -168,6 +173,7 @@ interface CAPIType {
     commercialProperties: CommercialProperties;
     starRating?: number;
     trailText: string;
+    nielsenAPIID: string;
 }
 
 interface TagType {

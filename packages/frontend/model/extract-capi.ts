@@ -13,8 +13,10 @@ import { string as curly } from 'curlyquotes';
 
 import { getSharingUrls } from './sharing-urls';
 import { findPillar } from './find-pillar';
+import { findBySubsection } from './article-sections';
 
 // tslint:disable:prefer-array-literal
+
 const apply = (input: string, ...fns: Array<(_: string) => string>): string => {
     return fns.reduce((acc, fn) => fn(acc), input);
 };
@@ -126,6 +128,10 @@ const getPagination = (data: {}): Pagination | undefined => {
     return undefined;
 };
 
+const getNielsenAPIID = (subsection: string): string => {
+    return findBySubsection(subsection).apiID;
+};
+
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
@@ -214,5 +220,6 @@ export const extract = (data: {}): CAPIType => {
             getString(data, 'page.content.trailText', ''),
             stripHTML,
         ),
+        nielsenAPIID: getNielsenAPIID(sectionName),
     };
 };

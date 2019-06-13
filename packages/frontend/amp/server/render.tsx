@@ -40,7 +40,7 @@ export const render = (
             contentType: CAPI.contentType,
             id: CAPI.pageId,
             beacon: `${CAPI.beaconURL}/count/pv.gif`,
-            neilsenAPIID: '66BEC53C-9890-477C-B639-60879EC4F762',
+            neilsenAPIID: CAPI.nielsenAPIID,
             domain: 'amp.theguardian.com',
         };
 
