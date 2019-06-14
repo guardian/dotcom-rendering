@@ -5,9 +5,9 @@ import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
-import { Byline } from '@frontend/amp/components/Byline';
-import { TopMetaExtras } from './TopMetaExtras';
-import { Standfirst } from './Standfirst';
+import { Byline } from '@frontend/amp/components/topMeta/Byline';
+import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
+import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 
 const headerStyle = css`
     ${headline(5)};

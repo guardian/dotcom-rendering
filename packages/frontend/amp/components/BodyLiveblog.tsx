@@ -2,7 +2,7 @@ import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { TopMetaLiveblog } from '@frontend/amp/components/TopMetaLiveblog';
+import { TopMetaLiveblog } from '@frontend/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
