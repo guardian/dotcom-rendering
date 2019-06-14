@@ -84,7 +84,35 @@ describe('getToneType', () => {
             {
                 id: 'tone/comment',
                 type: 'Tone',
-                title: 'Advertisement features',
+                title: 'title',
+                twitterHandle: '',
+                bylineImageUrl: '',
+            },
+            {
+                id: 'tracking/commissioningdesk/uk-labs',
+                type: 'Tracking',
+                title: 'UK Labs',
+                twitterHandle: '',
+                bylineImageUrl: '',
+            },
+        ];
+        const tone = getToneType(tags);
+        expect(tone).toEqual('tone/comment');
+    });
+
+    it('should return "tone/comment" for editorial pieces correctly', () => {
+        const tags = [
+            {
+                id: 'tone/editorials',
+                type: 'Tone',
+                title: 'title',
+                twitterHandle: '',
+                bylineImageUrl: '',
+            },
+            {
+                id: 'tone/comment',
+                type: 'Tone',
+                title: 'title',
                 twitterHandle: '',
                 bylineImageUrl: '',
             },
@@ -105,7 +133,7 @@ describe('getToneType', () => {
             {
                 id: 'tone/something-else',
                 type: 'Tone',
-                title: 'Advertisement features',
+                title: 'title',
                 twitterHandle: '',
                 bylineImageUrl: '',
             },
