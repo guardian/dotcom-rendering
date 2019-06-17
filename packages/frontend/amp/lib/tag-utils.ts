@@ -22,17 +22,13 @@ export const getToneType = (tags: TagType[]): StyledTone => {
         return defaultTone;
     }
 
-    // Editorials have two tones - tone/editorials and tone/comment
-    // We defer to tone/comment for styling
-    if (tones.includes('tone/editorials')) {
-        return 'tone/comment';
-    }
-
     switch (tones[0]) {
         case 'tone/advertisement-features':
             return tones[0] as StyledTone;
         case 'tone/comment':
             return tones[0] as StyledTone;
+        case 'tone/editorials':
+            return 'tone/comment'
         default:
             return defaultTone;
     }
