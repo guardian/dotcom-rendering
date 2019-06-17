@@ -29,6 +29,11 @@ interface AdTargetParam {
     value: string | string[];
 }
 
+interface SectionNielsenAPI {
+    name: string;
+    apiID: string;
+}
+
 interface EditionCommercialProperties {
     adTargeting: AdTargetParam[];
     branding?: Branding;
@@ -112,6 +117,8 @@ interface Block {
     createdOnDisplay?: string;
     lastUpdatedDisplay?: string;
     title?: string;
+    firstPublished?: number;
+    firstPublishedDisplay?: string;
 }
 
 interface Pagination {
@@ -166,6 +173,7 @@ interface CAPIType {
     commercialProperties: CommercialProperties;
     starRating?: number;
     trailText: string;
+    nielsenAPIID: string;
 }
 
 interface TagType {
@@ -232,6 +240,7 @@ declare namespace JSX {
         'amp-geo': any;
         'amp-consent': any;
         'amp-live-list': any;
+        'amp-audio': any;
         template: any;
     }
 }

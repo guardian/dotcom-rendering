@@ -12,27 +12,8 @@ import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css
 // which is easy to discover and re-use.
 
 // tslint:disable:react-no-dangerous-html
-export const TextStyle = (pillar: Pillar) => css`
-    strong {
-        font-weight: 700;
-    }
-    p {
-        padding: 0 0 12px;
-        ${body(2)};
-        font-weight: 300;
-        word-wrap: break-word;
-        color: ${palette.neutral[7]};
-    }
 
-    a {
-        color: ${pillarPalette[pillar].dark};
-        text-decoration: none;
-        border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
-        :hover {
-            border-bottom: 1px solid ${pillarPalette[pillar].dark};
-        }
-    }
-
+export const ListStyle = (iconColour: string) => css`
     li {
         margin-bottom: 6px;
         padding-left: 20px;
@@ -48,8 +29,32 @@ export const TextStyle = (pillar: Pillar) => css`
         height: 12px;
         width: 12px;
         margin-right: 8px;
-        background-color: ${pillarPalette[pillar].neutral.border};
+        background-color: ${iconColour};
         margin-left: -20px;
+    }
+`;
+
+export const LinkStyle = (pillar: Pillar) => css`
+    a {
+        color: ${pillarPalette[pillar].dark};
+        text-decoration: none;
+        border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
+        :hover {
+            border-bottom: 1px solid ${pillarPalette[pillar].dark};
+        }
+    }
+`;
+
+export const TextStyle = (pillar: Pillar) => css`
+    strong {
+        font-weight: 700;
+    }
+    p {
+        padding: 0 0 12px;
+        ${body(2)};
+        font-weight: 300;
+        word-wrap: break-word;
+        color: ${palette.neutral[7]};
     }
 
     blockquote {
@@ -58,6 +63,9 @@ export const TextStyle = (pillar: Pillar) => css`
     }
 
     ${body(2)};
+
+    ${LinkStyle(pillar)};
+    ${ListStyle(pillarPalette[pillar].neutral.border)};
 `;
 
 // Labs paid content only

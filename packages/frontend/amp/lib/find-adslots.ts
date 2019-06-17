@@ -6,8 +6,8 @@
  *
  * Ads are placed:
  *
- * * sufficiently far from other ads (MIN_CHAR_BUFFER characters away)
- * * sufficiently far from non-text (p) elements (IMG_BUFFER_[FWD|BWD])
+ * * sufficiently far from other ads (isReadyForAd)
+ * * sufficiently far from non-text elements (NONTEXT_BUFFER_[FWD|BWD])
  * * non adjacent to small (SMALL_PARA_CHARS) paragraphs
  *
  * These tests apply forwards and backwards, though in the case of
@@ -24,18 +24,19 @@ interface ElementWithLength {
 
 export const AD_LIMIT = 8;
 export const SMALL_PARA_CHARS = 50;
-export const MIN_CHAR_BUFFER = 700;
-const IMG_BUFFER_FWD = 300; // really any non-p element type
-const IMG_BUFFER_BWD = 200;
+const NONTEXT_BUFFER_FORWARD = 300;
+const NONTEXT_BUFFER_BACKWARD = 200;
 
 const isTextElement = (e: CAPIElement): boolean => {
     return e._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 };
 
-const getElementLength = (element: CAPIElement): number => {
+export const getElementLength = (element: CAPIElement): number => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.TextBlockElement':
-            return element.html.length;
+            // we don't want to count html characters
+            const htmlRegex = /(<([^>]+)>)/gi;
+            return element.html.replace(htmlRegex, '').length;
         default:
             return 0; // for the purposes of ads we don't care how long other elements are
     }
@@ -58,6 +59,7 @@ const getLengthOfFollowingTextElements = (
     const firstNonTextIndex = elements.findIndex(
         e => !isTextElement(e.element),
     );
+
     return elements
         .slice(0, firstNonTextIndex)
         .map(e => e.length)
@@ -72,17 +74,18 @@ const hasForwardBuffer = (
     elements: ElementWithLength[],
     index: number,
 ): boolean => {
-    const forwardElements = elements.slice(-1 * index);
+    const forwardElements = elements.slice(index + 1, elements.length);
     const meetsThreshold =
-        getLengthOfFollowingTextElements(forwardElements) >= IMG_BUFFER_FWD;
+        getLengthOfFollowingTextElements(forwardElements) >=
+        NONTEXT_BUFFER_FORWARD;
     const noForwardsEmbeds =
         forwardElements.filter(e => isTextElement(e.element)).length ===
         forwardElements.length;
 
     const enoughCharsForward = meetsThreshold || noForwardsEmbeds;
 
-    const neighbourSuitable = elements[index + 1]
-        ? suitableAdNeighbour(elements[index + 1])
+    const neighbourSuitable = elements[index]
+        ? suitableAdNeighbour(elements[index])
         : false;
     return enoughCharsForward && neighbourSuitable;
 };
@@ -90,51 +93,74 @@ const hasForwardBuffer = (
 const hasBackwardBuffer = (
     elements: ElementWithLength[],
     index: number,
-    textSinceLastAd: number,
 ): boolean => {
-    const backwardsElements = elements.slice(0, index + 1).reverse();
+    const backwardsElements = elements.slice(0, index).reverse();
     const meetsThreshold =
-        getLengthOfFollowingTextElements(backwardsElements) >= IMG_BUFFER_BWD;
+        getLengthOfFollowingTextElements(backwardsElements) >=
+        NONTEXT_BUFFER_BACKWARD;
     const noBackwardsEmbeds =
         backwardsElements.filter(e => isTextElement(e.element)).length ===
         backwardsElements.length;
 
     const enoughCharsBackward = meetsThreshold || noBackwardsEmbeds;
 
+    return suitableAdNeighbour(elements[index]) && enoughCharsBackward;
+};
+
+/**
+ * There are some magic numbers here - obtained by eyeballing content. Feel free
+ * to update them if you notice issues.
+ */
+const sufficientSpaceSinceLastAd = (
+    charsSinceLastAd: number,
+    paragraphsSinceLastAd: number,
+): boolean => {
     return (
-        suitableAdNeighbour(elements[index]) &&
-        textSinceLastAd >= MIN_CHAR_BUFFER &&
-        enoughCharsBackward
+        (charsSinceLastAd > 700 && paragraphsSinceLastAd > 1) ||
+        charsSinceLastAd > 900
     );
 };
 
 const hasSpaceForAd = (
     elements: ElementWithLength[],
     index: number,
-    charsScannedSinceLastAd: number,
+    charsSinceLastAd: number,
+    paragraphsSinceLastAd: number,
 ): boolean => {
     return (
-        hasBackwardBuffer(elements, index, charsScannedSinceLastAd) &&
+        sufficientSpaceSinceLastAd(charsSinceLastAd, paragraphsSinceLastAd) &&
+        hasBackwardBuffer(elements, index) &&
         hasForwardBuffer(elements, index)
     );
 };
 
 // Returns index of items to place ads *after*
 export const findAdSlots = (elements: CAPIElement[]): number[] => {
-    let charsScannedSinceLastAd = 0;
-    const adSlots = [];
+    let charsSinceLastAd = 0;
+    let paragraphsSinceLastAd = 0;
     let adCount = 0;
+    const adSlots = [];
 
     const elementsWithLength = getElementsWithLength(elements);
 
     for (let i = 0; i < elementsWithLength.length; i = i + 1) {
         if (adCount < AD_LIMIT && isTextElement(elements[i])) {
-            charsScannedSinceLastAd += elementsWithLength[i].length;
+            charsSinceLastAd += elementsWithLength[i].length;
 
-            if (hasSpaceForAd(elementsWithLength, i, charsScannedSinceLastAd)) {
-                adSlots.push(i);
-                charsScannedSinceLastAd = 0;
+            if (
+                hasSpaceForAd(
+                    elementsWithLength,
+                    i,
+                    charsSinceLastAd,
+                    paragraphsSinceLastAd,
+                )
+            ) {
+                adSlots.push(i - 1);
+                charsSinceLastAd = 0;
+                paragraphsSinceLastAd = 0;
                 adCount += 1;
+            } else {
+                paragraphsSinceLastAd += 1;
             }
         }
     }

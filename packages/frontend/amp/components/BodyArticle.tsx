@@ -8,6 +8,9 @@ import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
+import { WithAds } from '@frontend/amp/components/WithAds';
+import { findAdSlots } from '@frontend/amp/lib/find-adslots';
+import { until } from '@guardian/pasteup/breakpoints';
 
 const body = (pillar: Pillar, tone: StyledTone) => {
     const bgColorMap = {
@@ -39,28 +42,53 @@ const bulletStyle = (pillar: Pillar) => css`
     }
 `;
 
+const adStyle = css`
+    float: right;
+    margin: 4px 0 12px 20px;
+
+    ${until.phablet} {
+        float: none;
+        margin: 0 auto 12px;
+    }
+`;
+
 export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
     const tone = getToneType(data.tags);
+    const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
+    const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
+    const slotIndexes = findAdSlots(capiElements);
+    const adInfo = {
+        section: data.sectionName,
+        edition: data.editionId,
+        contentType: data.contentType,
+        commercialProperties: data.commercialProperties,
+        switches: {
+            krux: config.switches.krux,
+            ampPrebid: config.switches.ampPrebid,
+        },
+    };
+
+    const elements = data.shouldHideAds ? (
+        <>{elementsWithoutAds}</>
+    ) : (
+        <WithAds
+            items={elementsWithoutAds}
+            adSlots={slotIndexes}
+            adClassName={adStyle}
+            adInfo={adInfo}
+        />
+    );
 
     return (
         <InnerContainer className={body(pillar, tone)}>
             <TopMeta tone={tone} data={data} />
-            <Elements
-                pillar={pillar}
-                elements={data.blocks[0] ? data.blocks[0].elements : []}
-                // stuff for ads
-                edition={data.editionId}
-                section={data.sectionName}
-                contentType={data.contentType}
-                switches={config.switches}
-                commercialProperties={data.commercialProperties}
-                isImmersive={data.isImmersive}
-                shouldHideAds={data.shouldHideAds}
-            />
+
+            {elements}
+
             <SubMeta
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}

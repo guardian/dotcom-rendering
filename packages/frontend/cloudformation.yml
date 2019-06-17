@@ -61,10 +61,10 @@ Mappings:
   StageMap:
     PROD:
       MinCapacity: 4
-      MaxCapacity: 12
+      MaxCapacity: 16
     CODE:
       MinCapacity: 1
-      MaxCapacity: 2
+      MaxCapacity: 4
 
 Resources:
   LoadBalancerSecurityGroup:

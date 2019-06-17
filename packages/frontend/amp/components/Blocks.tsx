@@ -16,7 +16,7 @@ const blockStyle = (pillar: Pillar) => css`
     margin-bottom: 12px;
 `;
 
-const blockCreatedOnStyle = css`
+const firstPublishedStyle = css`
     color: ${palette.neutral[7]};
     line-height: 2rem;
     margin-bottom: 10px;
@@ -64,31 +64,20 @@ export const Blocks: React.SFC<{
         return (
             <div
                 id={block.id}
-                data-sort-time={block.createdOn}
+                data-sort-time={block.firstPublished}
                 key={block.id}
                 className={blockStyle(pillar)}
             >
-                {block.createdOnDisplay && (
+                {block.firstPublishedDisplay && (
                     <a
-                        className={blockCreatedOnStyle}
+                        className={firstPublishedStyle}
                         href={blockLink(url, block.id)}
                     >
-                        {block.createdOnDisplay}
+                        {block.firstPublishedDisplay}
                     </a>
                 )}
                 {block.title && <h2>{block.title}</h2>}
-                <Elements
-                    pillar={pillar}
-                    elements={block.elements}
-                    // stuff for ads
-                    edition={edition}
-                    section={section}
-                    contentType={contentType}
-                    switches={switches}
-                    commercialProperties={commercialProperties}
-                    isImmersive={false}
-                    shouldHideAds={true}
-                />
+                {Elements(block.elements, pillar, false)}
                 {/* Some elements float (e.g. rich links) */}
                 <div className={clearBoth} />{' '}
                 {block.lastUpdatedDisplay && (
@@ -110,7 +99,7 @@ export const Blocks: React.SFC<{
         edition,
         contentType,
         commercialProperties,
-        switches: { krux: switches.krux, ampPrebid: switches.prebid },
+        switches: { krux: switches.krux, ampPrebid: switches.ampPrebid },
     };
 
     return (

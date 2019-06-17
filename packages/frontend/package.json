@@ -10,6 +10,7 @@
     "@guardian/pasteup": "2.0.0-alpha.2",
     "@types/lodash.escape": "^4.0.6",
     "@types/sanitize-html": "^1.18.3",
+    "ajv": "^6.10.0",
     "aws-sdk": "^2.340.0",
     "compose-function": "^3.0.3",
     "compression": "^1.7.3",

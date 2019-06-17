@@ -78,6 +78,7 @@ export const document = ({
 
     <!-- AMP element which is specific to the live blog -->
     <script async custom-element="amp-live-list" src="https://cdn.ampproject.org/v0/amp-live-list-0.1.js"></script>
+    <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
 
     <!-- AMP elements that are optional dependending on content -->
     ${scripts.join(' ')}

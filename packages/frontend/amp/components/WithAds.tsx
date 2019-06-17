@@ -1,5 +1,10 @@
 import React from 'react';
 import { Ad } from '@frontend/amp/components/Ad';
+import { css } from 'emotion';
+
+const clear = css`
+    clear: both;
+`;
 
 interface AdInfo {
     edition: Edition;
@@ -23,15 +28,18 @@ export const WithAds: React.SFC<{
         usePrebid: adInfo.switches.ampPrebid,
     };
 
-    const ad = (
-        <Ad
-            className={adClassName}
-            edition={adInfo.edition}
-            section={adInfo.section}
-            contentType={adInfo.contentType}
-            config={commercialConfig}
-            commercialProperties={adInfo.commercialProperties}
-        />
+    const ad = (id: string): JSX.Element => (
+        // data-sort-time and id needed for amp-live-list validation
+        <div id={id} data-sort-time="1">
+            <Ad
+                className={adClassName}
+                edition={adInfo.edition}
+                section={adInfo.section}
+                contentType={adInfo.contentType}
+                config={commercialConfig}
+                commercialProperties={adInfo.commercialProperties}
+            />
+        </div>
     );
 
     const withAds = items.map((item, i) => {
@@ -39,7 +47,7 @@ export const WithAds: React.SFC<{
             return (
                 <>
                     {item}
-                    {ad}
+                    {ad(`ad-${item.id}`)}
                 </>
             );
         }
@@ -47,5 +55,10 @@ export const WithAds: React.SFC<{
         return item;
     });
 
-    return <>{withAds}</>;
+    return (
+        <>
+            {withAds}
+            <div id="clean-blocks" data-sort-time="1" className={clear} />
+        </>
+    );
 };

@@ -1,57 +1,34 @@
 import React from 'react';
 
-import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { Expandable } from '@frontend/amp/components/Expandable';
-
-import { Disclaimer } from '@root/packages/frontend/amp/components/elements/Disclaimer';
-import { Text } from '@root/packages/frontend/amp/components/elements/Text';
-import { Subheading } from '@root/packages/frontend/amp/components/elements/Subheading';
-import { Image } from '@root/packages/frontend/amp/components/elements/Image';
+import { Disclaimer } from '@frontend/amp/components/elements/Disclaimer';
+import { Text } from '@frontend/amp/components/elements/Text';
+import { Subheading } from '@frontend/amp/components/elements/Subheading';
+import { Image } from '@frontend/amp/components/elements/Image';
 import { VideoYoutube } from '@frontend/amp/components/elements/VideoYoutube';
 import { VideoVimeo } from '@frontend/amp/components/elements/VideoVimeo';
 import { VideoFacebook } from '@frontend/amp/components/elements/VideoFacebook';
 import { VideoGuardian } from '@frontend/amp/components/elements/VideoGuardian';
-import { InstagramEmbed } from '@root/packages/frontend/amp/components/elements/InstagramEmbed';
-import { TwitterEmbed } from '@root/packages/frontend/amp/components/elements/TwitterEmbed';
-import { Comment } from '@root/packages/frontend/amp/components/elements/Comment';
-import { RichLink } from '@root/packages/frontend/amp/components/elements/RichLink';
-import { SoundcloudEmbed } from '@root/packages/frontend/amp/components/elements/SoundcloudEmbed';
-import { Embed } from '@root/packages/frontend/amp/components/elements/Embed';
-import { PullQuote } from '@root/packages/frontend/amp/components/elements/PullQuote';
-import { css } from 'emotion';
+import { InstagramEmbed } from '@frontend/amp/components/elements/InstagramEmbed';
+import { TwitterEmbed } from '@frontend/amp/components/elements/TwitterEmbed';
+import { Comment } from '@frontend/amp/components/elements/Comment';
+import { RichLink } from '@frontend/amp/components/elements/RichLink';
+import { SoundcloudEmbed } from '@frontend/amp/components/elements/SoundcloudEmbed';
+import { Embed } from '@frontend/amp/components/elements/Embed';
+import { PullQuote } from '@frontend/amp/components/elements/PullQuote';
 import { clean } from '@frontend/model/clean';
 import { Timeline } from '@frontend/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
 import { InteractiveUrl } from '@frontend/amp/components/elements/InteractiveUrl';
 import { InteractiveMarkup } from '@frontend/amp/components/elements/InteractiveMarkup';
 import { MapEmbed } from '@frontend/amp/components/elements/MapEmbed';
-import { WithAds } from '@frontend/amp/components/WithAds';
+import { AudioAtom } from '@frontend/amp/components/elements/AudioAtom';
 
-const clear = css`
-    clear: both;
-`;
-
-export const Elements: React.FC<{
-    elements: CAPIElement[];
-    pillar: Pillar;
-    edition: Edition;
-    section?: string;
-    contentType: string;
-    switches: Switches;
-    commercialProperties: CommercialProperties;
-    isImmersive: boolean;
-    shouldHideAds: boolean;
-}> = ({
-    elements,
-    pillar,
-    edition,
-    section,
-    contentType,
-    switches,
-    commercialProperties,
-    isImmersive,
-    shouldHideAds,
-}) => {
+export const Elements = (
+    elements: CAPIElement[],
+    pillar: Pillar,
+    isImmersive: boolean,
+): JSX.Element[] => {
     const cleanedElements = elements.map(element =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
     );
@@ -88,7 +65,9 @@ export const Elements: React.FC<{
             case 'model.dotcomrendering.pageElements.InstagramBlockElement':
                 return <InstagramEmbed key={i} element={element} />;
             case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                return <TwitterEmbed key={i} element={element} />;
+                return (
+                    <TwitterEmbed key={i} element={element} pillar={pillar} />
+                );
             case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
                 return <RichLink key={i} element={element} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.CommentBlockElement':
@@ -165,6 +144,8 @@ export const Elements: React.FC<{
                 );
             case 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement':
                 return <InteractiveUrl url={element.url} />;
+            case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
+                return <AudioAtom element={element} />;
             default:
                 // tslint:disable-next-line:no-console
                 console.log('Unsupported Element', JSON.stringify(element));
@@ -177,28 +158,5 @@ export const Elements: React.FC<{
         }
     });
 
-    if (shouldHideAds) {
-        return <>{output}</>;
-    }
-
-    const slotIndexes = findAdSlots(elements);
-    const adInfo = {
-        section,
-        edition,
-        contentType,
-        commercialProperties,
-        switches: { krux: switches.krux, ampPrebid: switches.prebid },
-    };
-
-    return (
-        <>
-            <WithAds
-                items={output}
-                adSlots={slotIndexes}
-                adClassName={''}
-                adInfo={adInfo}
-            />
-            <div className={clear} />
-        </>
-    );
+    return output.filter(el => el !== null) as JSX.Element[];
 };

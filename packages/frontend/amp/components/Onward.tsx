@@ -113,7 +113,7 @@ export const Onward: React.FC<{
     );
 
     const related =
-        hasRelated && series.length < 1
+        hasRelated && !hasStoryPackage && series.length < 1
             ? [
                   container(
                       `${ampBaseURL}/related-mf2/${pageID}.json`,

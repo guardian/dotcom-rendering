@@ -2,9 +2,8 @@ import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { TopMeta } from '@frontend/amp/components/TopMeta';
+import { TopMetaLiveblog } from '@frontend/amp/components/TopMetaLiveblog';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { getToneType } from '@frontend/amp/lib/tag-utils';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
 import { Blocks } from '@frontend/amp/components/Blocks';
@@ -28,14 +27,17 @@ const bodyStyle = css`
     }
 `;
 
+// To override AMP styles we need to use nested and specific selectors here
+// unfortunately.
 const updateButtonStyle = css`
-    position: fixed;
-    top: 12px;
-    left: 0;
-    z-index: 1015;
+    &.amp-active[update] {
+        position: fixed;
+        left: 0;
+        top: 12px;
+        display: flex;
+        justify-content: center;
+    }
 
-    display: flex;
-    justify-content: center;
     width: 100%;
 
     button {
@@ -66,7 +68,6 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const tone = getToneType(data.tags);
     const url = `${data.guardianBaseURL}/${data.pageId}`;
     const isFirstPage = data.pagination
         ? data.pagination.currentPage === 1
@@ -74,19 +75,19 @@ export const Body: React.FC<{
 
     return (
         <InnerContainer className={bodyStyle}>
-            <TopMeta tone={tone} data={data} />
-            <KeyEvents events={data.keyEvents} pillar={pillar} url={url} />
+            <TopMetaLiveblog articleData={data} />
+            <KeyEvents events={data.keyEvents} url={url} />
 
             {!isFirstPage && (
                 <Pagination guardianURL={url} pagination={data.pagination} />
             )}
 
             <amp-live-list
-                id="live-blog-entries-7ea0dbef"
+                id="live-blog-entries-main"
                 data-max-items-per-page="20" // TODO confirm if this should be dynamic
             >
                 <div update="" className={updateButtonStyle}>
-                    <button on="tap:my-live-list.update">
+                    <button on="tap:live-blog-entries-main.update">
                         <RefreshIcon />
                         <span>You have updates</span>
                     </button>

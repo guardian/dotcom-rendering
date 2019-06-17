@@ -2,14 +2,25 @@ import React from 'react';
 import express from 'express';
 import { document } from '@frontend/amp/server/document';
 import { Article } from '@frontend/amp/pages/Article';
-import { extractScripts } from '@root/packages/frontend/amp/lib/scripts';
+import { extractScripts } from '@frontend/amp/lib/scripts';
 import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
+import { validateRequestData } from '@frontend/model/validate';
+import { logger } from '@frontend/app/logging';
 
-export const render = ({ body }: express.Request, res: express.Response) => {
+export const render = (
+    { body, path }: express.Request,
+    res: express.Response,
+) => {
+    try {
+        validateRequestData(body, path);
+    } catch (err) {
+        logger.warn(err);
+    }
+
     try {
         const CAPI = extractCAPI(body);
         const linkedData = extractLinkedData(body);
@@ -29,7 +40,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
             contentType: CAPI.contentType,
             id: CAPI.pageId,
             beacon: `${CAPI.beaconURL}/count/pv.gif`,
-            neilsenAPIID: '66BEC53C-9890-477C-B639-60879EC4F762',
+            neilsenAPIID: CAPI.nielsenAPIID,
             domain: 'amp.theguardian.com',
         };
 

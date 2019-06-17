@@ -100,6 +100,7 @@ const ageWarning = css`
 `;
 
 const showMore = css`
+    background-color: ${palette.neutral[100]};
     &[overflow] {
         position: absolute;
         bottom: 0;
