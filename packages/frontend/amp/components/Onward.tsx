@@ -90,40 +90,60 @@ export const Onward: React.FC<{
 }) => {
     const ampBaseURL = 'https://amp.theguardian.com';
 
-    const container = (path: string) => (
+    const container = (path: string, componentName: string) => (
         <OnwardContainer
             key={path}
+            componentName={componentName}
             guardianBaseURL={guardianBaseURL}
             path={path}
         />
     );
 
     const storyPackage = hasStoryPackage
-        ? [container(`${ampBaseURL}/story-package-mf2/${pageID}.json`)]
+        ? [
+              container(
+                  `${ampBaseURL}/story-package-mf2/${pageID}.json`,
+                  'more-on-this-story',
+              ),
+          ]
         : [];
 
     const series = seriesTags.map(tag =>
-        container(`${ampBaseURL}/series-mf2/${tag.id}.json`),
+        container(`${ampBaseURL}/series-mf2/${tag.id}.json`, 'series'),
     );
 
     const related =
         hasRelated && !hasStoryPackage && series.length < 1
-            ? [container(`${ampBaseURL}/related-mf2/${pageID}.json`)]
+            ? [
+                  container(
+                      `${ampBaseURL}/related-mf2/${pageID}.json`,
+                      'related-stories',
+                  ),
+              ]
             : [];
 
-    const mostRead = container(`${ampBaseURL}/most-read-mf2.json`);
+    // Frontend:
+    const mostRead = container(
+        `${ampBaseURL}/most-read-mf2.json`,
+        'most-popular',
+    );
 
     const hasSectionMostViewed = sectionID && sectionHasMostViewed(sectionID);
     const sectionMostViewed = hasSectionMostViewed
         ? container(
               `${ampBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
+              `most-viewed-in-${sectionID}`,
           )
-        : container(`${ampBaseURL}/container/count/1/offset/0/mf2.json`);
+        : container(
+              `${ampBaseURL}/container/count/1/offset/0/mf2.json`,
+              'most-viewed',
+          );
 
     const headlines = container(
         `${ampBaseURL}/container/count/3/offset/${
             hasSectionMostViewed ? 0 : 1 // TODO not entirely sure why this is needed
         }/mf2.json`,
+        'headlines',
     );
 
     // Outbrain is compliant if it appears in the top 2 containers

@@ -112,7 +112,8 @@ const showMore = css`
 export const OnwardContainer: React.FC<{
     guardianBaseURL: string;
     path: string;
-}> = ({ guardianBaseURL, path }) => (
+    componentName: string;
+}> = ({ guardianBaseURL, path, componentName }) => (
     <amp-list
         layout="fixed-height"
         height="184px"
@@ -121,7 +122,10 @@ export const OnwardContainer: React.FC<{
     >
         <MoustacheTemplate>
             <MoustacheSection name="showContent">
-                <div className={inner}>
+                <div
+                    className={`${inner} js-has-click-event`}
+                    data-vars-component={componentName}
+                >
                     <div className={header}>
                         <MoustacheVariable name="displayName" />
                     </div>
@@ -196,7 +200,6 @@ export const OnwardContainer: React.FC<{
                 </div>
             </MoustacheSection>
         </MoustacheTemplate>
-
         <div overflow="" className={showMore}>
             <ShowMoreButton />
         </div>
