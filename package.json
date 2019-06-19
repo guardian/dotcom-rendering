@@ -44,6 +44,7 @@
         "babel-plugin-emotion": "^9.2.6",
         "babel-plugin-module-resolver": "^3.1.1",
         "babel-plugin-preval": "^3.0.0",
+        "babel-plugin-px-to-rem": "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0",
         "bundlesize": "^0.17.0",
         "eslint": "^5.16.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
@@ -88,8 +89,8 @@
         "execa": "^0.10.0",
         "filesizegzip": "^2.0.0",
         "inquirer": "^5.2.0",
-        "pretty-bytes": "^4.0.2",
-        "log4js": "4.2.0"
+        "log4js": "4.2.0",
+        "pretty-bytes": "^4.0.2"
     },
     "jest": {
         "moduleFileExtensions": [
