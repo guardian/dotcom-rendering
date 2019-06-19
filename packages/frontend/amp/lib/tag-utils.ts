@@ -28,7 +28,7 @@ export const getToneType = (tags: TagType[]): StyledTone => {
         case 'tone/comment':
             return tones[0] as StyledTone;
         case 'tone/editorials':
-            return 'tone/comment'
+            return 'tone/comment';
         default:
             return defaultTone;
     }
