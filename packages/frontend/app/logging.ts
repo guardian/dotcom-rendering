@@ -1,5 +1,5 @@
 import path from 'path';
-import { configure, getLogger, addLayout } from 'log4js';
+import { configure, getLogger, addLayout, shutdown } from 'log4js';
 
 const logLocation =
     process.env.NODE_ENV === 'production'
@@ -44,8 +44,20 @@ configure({
     pm2: true,
 });
 
+// We do this to ensure no memory leaks during development as hot reloading
+// doesn't clear up old listeners.
+if (process.env.NODE_ENV === 'development') {
+    shutdown(e => {
+        if (e) {
+            // tslint:disable-next-line:no-console
+            console.log(e);
+        }
+    });
+}
+
 export const logger =
     process.env.NODE_ENV === 'development'
         ? getLogger('development')
         : getLogger();
+
 logger.level = 'info';
