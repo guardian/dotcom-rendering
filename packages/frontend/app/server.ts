@@ -16,7 +16,10 @@ import { logger } from './logging';
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
 // tslint:disable-next-line:no-default-export
 export default (options: any) => {
-    if ('amp' in options) return renderAMPArticle;
+    if ('amp' in options) {
+        return renderAMPArticle;
+    }
+
     return renderArticle;
 };
 

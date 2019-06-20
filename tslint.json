@@ -17,10 +17,8 @@
             "allow-pascal-case",
             "allow-trailing-underscore"
         ],
-        "prettier": true,
-        "no-default-export": {
-            "severity": "warning"
-        }
+        "no-default-export": true,
+        "prettier": true
     },
     "rules": {
         "object-literal-sort-keys": false,
@@ -36,7 +34,8 @@
         "no-default-export": true,
         "react-no-dangerous-html": true,
         "prettier": true,
-        "interface-over-type-literal": false
+        "interface-over-type-literal": false,
+        "curly": true
     },
     "rulesDirectory": [],
     "linterOptions": {
