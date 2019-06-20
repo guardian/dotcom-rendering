@@ -30,6 +30,7 @@ export interface ArticleModel {
     webPublicationDateDisplay: string;
     pageId: string;
     pillar: Pillar;
+    designType: DesignType;
     sectionLabel?: string;
     sectionUrl?: string;
     sectionName?: string;

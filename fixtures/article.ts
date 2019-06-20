@@ -1044,6 +1044,7 @@ export const data = {
                     },
                 },
             ],
+            designType: 'Comment',
         },
     },
     site: {

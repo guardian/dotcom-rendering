@@ -394,7 +394,23 @@ describe('extract-capi', () => {
         expect(findPillar).toHaveBeenCalledWith(testPillar, tags);
     });
 
-    /*     it('returns ageWarning as undefined if article not in tone/news', () => {
+    it('defaults designType to "Article" if not valid', () => {
+        testData.page.meta.designType = 'invalid';
+
+        const { designType } = extract(testData);
+
+        expect(designType).toBe('Article');
+    });
+
+    it('returns designType from data', () => {
+        testData.page.meta.designType = 'Comment';
+
+        const { designType } = extract(testData);
+
+        expect(designType).toBe('Comment');
+    });
+    /* it('returns ageWarning as undefined if article not in tone/news', () => {
+
         testData.page.tags.all = [
             {
                 properties: {
@@ -409,7 +425,7 @@ describe('extract-capi', () => {
 
         expect(ageWarning).toBeUndefined();
     }); */
-    /* 
+    /*
     describe('ageWarning', () => {
         let publicationDate: Date;
 

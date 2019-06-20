@@ -26,6 +26,28 @@ const getEditionValue: (name: string) => Edition = name => {
     return edition === undefined ? 'UK' : edition;
 };
 
+const getDesignTypeValue: (name: string) => DesignType = name => {
+    const designType: DesignType[] = [
+        'Article',
+        'Immersive',
+        'Media',
+        'Review',
+        'Analysis',
+        'Comment',
+        'Feature',
+        'Live',
+        'SpecialReport',
+        'Recipe',
+        'MatchReport',
+        'Interview',
+        'GuardianView',
+        'GuardianLabs',
+        'Quiz',
+    ];
+
+    return designType.find(_ => _ === name) || 'Article';
+};
+
 const getTags: (data: any) => TagType[] = data => {
     const tags = getArray<any>(data, 'page.tags.all', []);
     return tags.map(tag => {
@@ -113,6 +135,10 @@ export const extract = (data: {}): CAPIType => {
     const navData = getObject(data, 'site.nav');
     navData.readerRevenueLinks = getObject(data, 'site.readerRevenueLinks');
 
+    const designType = getDesignTypeValue(
+        getString(data, 'page.meta.designType', 'Article'),
+    );
+
     return {
         tags,
         sectionName,
@@ -153,6 +179,7 @@ export const extract = (data: {}): CAPIType => {
         blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
         pageId: getNonEmptyString(data, 'page.pageId'),
         pillar: findPillar(getString(data, 'page.pillar', ''), tags) || 'news',
+        designType,
         sectionLabel: getString(data, 'page.sectionLabel'),
         sectionUrl: getString(data, 'page.sectionUrl'),
         subMetaSectionLinks: getSubMetaSectionLinks(data),

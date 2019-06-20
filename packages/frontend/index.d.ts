@@ -7,6 +7,24 @@ interface ArticleProps {
 // 'labs' is a fake pillar used to identify paid content (Guardian Labs) for rendering styling.
 type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' | 'labs';
 
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+type DesignType =
+    | 'Article'
+    | 'Immersive'
+    | 'Media'
+    | 'Review'
+    | 'Analysis'
+    | 'Comment'
+    | 'Feature'
+    | 'Live'
+    | 'SpecialReport'
+    | 'Recipe'
+    | 'MatchReport'
+    | 'Interview'
+    | 'GuardianView'
+    | 'GuardianLabs'
+    | 'Quiz';
+
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
 type SharePlatform =
@@ -153,6 +171,7 @@ interface CAPIType {
     pageId: string;
     tags: TagType[];
     pillar: Pillar;
+    designType: DesignType;
     isImmersive: boolean;
     sectionLabel: string;
     sectionUrl: string;
