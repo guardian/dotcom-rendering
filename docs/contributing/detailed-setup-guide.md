@@ -57,11 +57,8 @@ For ease of development you may want to install:
 ### Running alongside identity
 
 You may want local identity cookies to be available in `dotcom-rendering`. To enable this:
-
-1. Add `127.0.0.1 r.thegulocal.com` to the end of your `/etc/hosts` file
-2. Follow the installation steps in [`identity-platform/nginx`](https://github.com/guardian/identity-platform/tree/master/nginx)
-3. run `./scripts/nginx/setup.sh`
-4. access `dotcom-rendering` through https://r.thegulocal.com
+1. run `./scripts/nginx/setup.sh`
+1. access `dotcom-rendering` through https://r.thegulocal.com
 
 ## Production
 
