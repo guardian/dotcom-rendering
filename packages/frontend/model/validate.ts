@@ -1,4 +1,5 @@
 import Ajv from 'ajv';
+import { schema } from './schema/articleV2.json.schema';
 
 export class ValidationError extends Error {
     constructor(message: string) {
@@ -9,36 +10,23 @@ export class ValidationError extends Error {
 
 // enpoint can be used to reference matching schema
 export const validateRequestData = (data: any, endpoint: string) => {
-    const schema = {
-        properties: {
-            page: {
-                type: 'object',
-                properties: {
-                    content: {
-                        type: 'object',
-                        properties: {
-                            headline: { type: 'string' },
-                        },
-                    },
-                },
-            },
-        },
-    };
-
-    const options = {
+    const options: Ajv.Options = {
         verbose: true,
         allErrors: true,
+        useDefaults: 'empty', // modifies data in place // TODO add 'empty' to ajv type def
     };
-
     const ajv = new Ajv(options);
     const isValid = ajv.validate(schema, data);
 
     if (!isValid) {
         throw new ValidationError(
             `Could not validate ${endpoint} request for ${
-                data.page.pageId
+            data.page.pageId
             }.\n ${JSON.stringify(ajv.errors, null, 2)}`,
         );
     }
-    return isValid;
+
+    // console.log(`Data validated against Article Schema version: ${data.version}`)
+    // Includes fallback values from schema defaults for undefined properties
+    return data;
 };
