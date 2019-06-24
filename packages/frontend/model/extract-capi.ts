@@ -1,12 +1,3 @@
-import {
-    getString,
-    getNumber,
-    getNonEmptyString,
-    getBoolean,
-    getArray,
-    getObject,
-    optional,
-} from './validators';
 import { clean } from './clean';
 import { stripHTML } from './strip-html';
 import { string as curly } from 'curlyquotes';
@@ -27,15 +18,14 @@ const getEditionValue: (name: string) => Edition = name => {
     return edition === undefined ? 'UK' : edition;
 };
 
-const getTags: (data: any) => TagType[] = data => {
-    const tags = getArray<any>(data, 'page.tags.all', []);
-    return tags.map(tag => {
+const getTags: (tags: any) => TagType[] = tags => {
+    return tags.map((tag: any) => {
         return {
-            id: getNonEmptyString(tag, 'properties.id'),
-            type: getNonEmptyString(tag, 'properties.tagType'),
-            title: getString(tag, 'properties.webTitle', ''),
-            twitterHandle: getString(tag, 'properties.twitterHandle', ''),
-            bylineImageUrl: getString(tag, 'properties.bylineImageUrl', ''),
+            id: tag.properties.id,
+            type: tag.properties.tagType,
+            title: tag.properties.webTitle,
+            twitterHandle: tag.properties.twitterHandle,
+            bylineImageUrl: tag.properties.bylineImageUrl,
         };
     });
 };
@@ -84,48 +74,26 @@ const getAgeWarning = (
     }
 };
 
-const getSubMetaSectionLinks: (data: {}) => SimpleLinkType[] = data => {
-    const subMetaSectionLinks = getArray<any>(
-        data,
-        'page.subMetaLinks.sectionLabels',
-        [],
-    );
+const getSubMetaSectionLinks: (data: { page: any }) => SimpleLinkType[] = data => {
+    const subMetaSectionLinks = data.page.subMetaLinks.sectionLabels
 
-    return subMetaSectionLinks.map(({ link, text }) => ({
+    return subMetaSectionLinks.map(({ link, text }: { link: string, text: string }) => ({
         url: link,
         title: text,
     }));
 };
 
-const getSubMetaKeywordLinks: (data: {}) => SimpleLinkType[] = data => {
-    const subMetaKeywordLinks = getArray<any>(
-        data,
-        'page.subMetaLinks.keywords',
-        [],
-    );
+const getSubMetaKeywordLinks: (data: any) => SimpleLinkType[] = data => {
+    const subMetaKeywordLinks = data.page.subMetaLinks.keywords
 
-    return subMetaKeywordLinks.map(({ link, text }) => ({
+    return subMetaKeywordLinks.map(({ link, text }: { link: string, text: string }) => ({
         url: link,
         title: text,
     }));
 };
 
-const getCommercialProperties = (data: {}): CommercialProperties => {
-    return getObject(
-        data,
-        'page.commercial.editionCommercialProperties',
-        {},
-    ) as CommercialProperties;
-};
-
-const getPagination = (data: {}): Pagination | undefined => {
-    const found = optional(getObject.bind(null, data, 'page.pagination'));
-
-    if (found) {
-        return found as Pagination;
-    }
-
-    return undefined;
+const getCommercialProperties = (data: any): CommercialProperties => {
+    return data.page.commercial.editionCommercialProperties as CommercialProperties;
 };
 
 const getNielsenAPIID = (subsection: string): string => {
@@ -135,93 +103,97 @@ const getNielsenAPIID = (subsection: string): string => {
 // TODO really it would be nice if we passed just the data we needed and
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
-export const extract = (data: {}): CAPIType => {
+export const extract = (data: any): CAPIType => {
     const webPublicationDate = new Date(
-        getNumber(data, 'page.webPublicationDate'),
+        data.page.webPublicationDate
     );
-    const tags = getTags(data);
-    const isImmersive = getBoolean(data, 'page.meta.isImmersive', false);
-    const sectionName = getString(data, 'page.section', '');
-
+    const tags = getTags(data.page.tags.all);
     const leadContributor: TagType = tags.filter(
         tag => tag.type === 'Contributor',
     )[0];
+    const sectionName = data.page.section;
 
     // From the server we get the values: "UK edition", "US edition", "Australia edition", "International edition"
     // editionLongForm is that value, or empty string.
-    const editionLongForm = getString(data, 'page.edition', '');
+    const editionLongForm = data.page.edition;
 
     // Possible values for the editionId: "UK", "US", "AU", "INT"
-    const editionId = getEditionValue(getString(data, 'page.editionId', ''));
+    const editionId = getEditionValue(data.page.editionId);
 
     if (editionId === undefined) {
         throw new Error('edition id is undefined');
     }
 
     return {
-        webPublicationDate,
+        // page
         tags,
-        sectionName,
+
         editionLongForm,
         editionId,
-        isImmersive,
-        webPublicationDateDisplay: getNonEmptyString(
-            data,
-            'page.webPublicationDateDisplay',
-        ),
+        webPublicationDate,
+        webPublicationDateDisplay: data.page.webPublicationDateDisplay,
+        sectionName: sectionName,
+
+        // page.content
         headline: apply(
-            getNonEmptyString(data, 'page.content.headline'),
+            data.page.content.headline,
             curly,
             clean,
         ),
         standfirst: apply(
-            getString(data, 'page.content.standfirst', ''),
+            data.page.content.standfirst,
             clean,
         ),
-        main: apply(getString(data, 'page.content.main', ''), clean),
-        body: getArray<any>(data, 'page.content.blocks.body')
-            .map(block => block.bodyHtml)
+        main: apply(data.page.content.main, clean),
+        body: data.page.content.blocks.body
+            .map((block: any) => block.bodyHtml)
             .filter(Boolean)
             .join(''),
         author: {
-            byline: getString(data, 'page.content.byline', ''),
+            byline: data.page.content.byline,
             twitterHandle: leadContributor
                 ? leadContributor.twitterHandle
                 : undefined,
             email: 'none',
         },
-        mainMediaElements: getArray<CAPIElement>(
-            data,
-            'page.content.blocks.main.elements',
-            [],
-        ),
-        keyEvents: getArray<any>(data, 'page.content.blocks.keyEvents').filter(
+        mainMediaElements: data.page.content.blocks.main.elements,
+        keyEvents: data.page.content.blocks.keyEvents.filter(
             Boolean,
         ),
-        pagination: getPagination(data),
-        blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
-        pageId: getNonEmptyString(data, 'page.pageId'),
-        sharingUrls: getSharingUrls(data),
-        pillar: findPillar(getString(data, 'page.pillar', ''), tags) || 'news',
-        ageWarning: getAgeWarning(tags, webPublicationDate),
-        sectionLabel: getString(data, 'page.sectionLabel'),
-        sectionUrl: getString(data, 'page.sectionUrl'),
-        subMetaSectionLinks: getSubMetaSectionLinks(data),
-        subMetaKeywordLinks: getSubMetaKeywordLinks(data),
-        shouldHideAds: getBoolean(data, 'page.meta.shouldHideAds', false),
-        webURL: getNonEmptyString(data, 'page.webURL'),
-        guardianBaseURL: getNonEmptyString(data, 'site.guardianBaseURL'),
-        contentType: getString(data, 'page.contentType'),
-        hasRelated: getBoolean(data, 'page.meta.hasRelated', false),
-        hasStoryPackage: getBoolean(data, 'page.meta.hasStoryPackage', false),
-        beaconURL: getNonEmptyString(data, 'site.beaconUrl'),
-        isCommentable: getBoolean(data, 'page.meta.isCommentable', false),
-        commercialProperties: getCommercialProperties(data),
-        starRating: optional(getNumber.bind(null, data, 'page.starRating')),
+        blocks: data.page.content.blocks.body.filter(Boolean),
         trailText: apply(
-            getString(data, 'page.content.trailText', ''),
+            data.page.content.trailText,
             stripHTML,
         ),
+        // other page derived properties
+        pagination: data.pagination
+            ? data.pagination as Pagination
+            : undefined, // scala option
+        pageId: data.page.pageId,
+        sharingUrls: getSharingUrls(data),
+        pillar: findPillar(data.page.pillar, tags) || 'news',
+        ageWarning: getAgeWarning(tags, webPublicationDate),
+        sectionLabel: data.page.sectionLabel,
+        sectionUrl: data.page.sectionUrl,
+        webURL: data.page.webURL,
+        contentType: data.page.contentType,
+        starRating: data.page.starRating
+            ? data.page.starRating
+            : undefined,
         nielsenAPIID: getNielsenAPIID(sectionName),
+        // page.subMetaLinks
+        subMetaSectionLinks: getSubMetaSectionLinks(data),
+        subMetaKeywordLinks: getSubMetaKeywordLinks(data),
+        // page.commercial
+        commercialProperties: getCommercialProperties(data),
+        // page.meta
+        isImmersive: data.page.meta.isImmersive,
+        shouldHideAds: data.page.meta.shouldHideAds,
+        hasRelated: data.page.meta.hasRelated,
+        hasStoryPackage: data.page.meta.hasStoryPackage,
+        isCommentable: data.page.meta.isCommentable,
+        // site
+        guardianBaseURL: data.site.guardianBaseURL,
+        beaconURL: data.site.beaconUrl,
     };
 };
