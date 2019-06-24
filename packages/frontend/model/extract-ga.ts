@@ -14,30 +14,28 @@ export interface GADataType {
     beaconUrl: string;
 }
 
-// All GA fields should  fall back to default values -
-import { getString, getBoolean } from './validators';
 import { findPillar } from './find-pillar';
 
 // we should not bring down the website if a trackable field is missing!
-export const extract = (data: {}): GADataType => {
-    const edition = getString(data, 'page.edition', '').toLowerCase();
+export const extract = (data: any): GADataType => {
+    const edition = data.page.edition.toLowerCase();
 
     return {
-        webTitle: getString(data, 'page.webTitle', ''),
-        pillar: findPillar(getString(data, 'page.pillar', '')) || 'news',
-        section: getString(data, 'page.section', ''),
-        contentType: getString(data, 'page.contentType', '')
+        webTitle: data.page.webTitle,
+        pillar: findPillar(data.page.pillar) || 'news',
+        section: data.page.section,
+        contentType: data.page.contentType
             .toLowerCase()
             .split(' ')
             .join(''),
-        commissioningDesks: getString(data, 'page.commissioningDesks', ''),
-        contentId: getString(data, 'page.contentId', ''),
-        authorIds: getString(data, 'page.authorIds', ''),
-        keywordIds: getString(data, 'page.keywordIds', ''),
-        toneIds: getString(data, 'page.toneIds', ''),
-        seriesId: getString(data, 'page.seriesId', ''),
-        isHosted: getBoolean(data, 'page.meta.isHosted', false).toString(),
+        commissioningDesks: data.page.tags.commissioningDesks,
+        contentId: data.page.contentId,
+        authorIds: data.page.tags.authorIds,
+        keywordIds: data.page.tags.keywordIds,
+        toneIds: data.page.tags.toneIds,
+        seriesId: data.page.seriesId,
+        isHosted: data.page.meta.isHosted.toString(),
         edition: edition === 'int' ? 'international' : edition,
-        beaconUrl: getString(data, 'site.beaconUrl', ''),
+        beaconUrl: data.site.beaconUrl,
     };
 };
