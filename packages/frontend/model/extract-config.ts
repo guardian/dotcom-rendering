@@ -1,11 +1,9 @@
-import { getNonEmptyString, getString, getObject } from './validators';
-
-export const extract = (data: {}): ConfigType => ({
-    ajaxUrl: getNonEmptyString(data, 'site.ajaxUrl'),
-    sentryPublicApiKey: getString(data, 'site.sentryPublicApiKey', ''),
-    sentryHost: getString(data, 'site.sentryHost', ''),
+export const extract = (data: any): ConfigType => ({
+    ajaxUrl: data.site.ajaxUrl,
+    sentryPublicApiKey: data.site.sentryPublicApiKey,
+    sentryHost: data.site.sentryHost,
     isDev: process.env.NODE_ENV === 'development',
-    switches: getObject(data, 'site.switches', {}),
-    dfpAccountId: getObject(data, 'site.dfpAccountId', ''), // TODO check and fix
-    commercialUrl: getNonEmptyString(data, 'site.commercialUrl'),
+    switches: data.site.switches,
+    dfpAccountId: data.site.dfpAccountId, // TODO check and fix
+    commercialUrl: data.site.commercialUrl,
 });
