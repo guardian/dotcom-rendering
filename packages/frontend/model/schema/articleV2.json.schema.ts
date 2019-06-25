@@ -106,7 +106,7 @@ export const schema = {
             required: ['bodyHtml', 'elements'],
             properties: {
                 id: { type: 'string' },
-                bodyHtml: { type: 'string' },
+                bodyHtml: { type: 'string', default: '' },
                 elements: {
                     type: 'array',
                     default: [],
@@ -127,7 +127,7 @@ export const schema = {
                 body: { type: 'string' },
                 blocks: {
                     type: 'object',
-                    required: ['body', 'keyEvents'],
+                    required: ['body', 'main', 'keyEvents'],
                     properties: {
                         body: {
                             type: 'array',
@@ -139,6 +139,7 @@ export const schema = {
                         },
                         main: {
                             $ref: '#/definitions/Block',
+                            default: { $ref: '#/definitions/Block' },
                         },
                     },
                 },
