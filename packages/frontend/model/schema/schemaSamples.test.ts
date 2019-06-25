@@ -2,7 +2,8 @@
 const glob = require('glob');
 // tslint:disable-next-line:no-var-requires
 const fs = require('fs');
-
+import cloneDeep from 'lodash.clonedeep';
+import { data as fixtureData } from '@root/fixtures/article';
 // JSON Schema validation layer
 import { validateRequestData } from '../validate';
 // NEW extraction functions without validation
@@ -10,7 +11,6 @@ import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { extract as extractGA } from '@frontend/model/extract-ga';
-
 //  OLD data cleaner and extraction functions
 import { extract as oldExtractCAPI } from '@frontend/model/old-extract/extract-capi';
 import { extract as oldExtractConfig } from '@frontend/model/old-extract/extract-config';
@@ -92,8 +92,29 @@ describe('JSON SCHEMA validation layer sample comparison test', () => {
         );
     }
 
-    // it('Should validate Articles with undefined pillar by defualting to ""') - TODO is this behaviour we want?
-    // it('Should validate Articles with '' as pillar)
+    let testData: any;
+    let validatedData: any;
+    beforeEach(() => {
+        testData = cloneDeep(fixtureData);
+        validatedData = undefined;
+    });
+
+    it('should validate Articles with undefined pillar by defaulting to ""', () => {
+        testData.page.pillar = undefined;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.pillar).toBe('');
+    });
+
+    it('should validate Articles with "" pillar', () => {
+        testData.page.pillar = undefined;
+        expect(() => {
+            validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
+        }).not.toThrow();
+        expect(validatedData.page.pillar).toBe('');
+    });
+
     // it('Should validate Articles with undefined pagination)
     // it('Should validate Liveblogs with defined pagination)
 });
