@@ -77,12 +77,20 @@ describe('JSON SCHEMA validation layer sample comparison test', () => {
 
     // NOTE: Run scripts/validation/sampleCollection.js to collect json samples for testing
     const files = glob.sync('scripts/validation/samples/*.json', {})
-    const results = runTest(files)
+    if (files.length > 1) {
+        const results = runTest(files)
 
-    it.each(results)(`test %i of ${files.length}, %s`, (count, name, sample) => {
-        expect(sample.error).toEqual(null)
-        expect(sample.new).toMatchObject(sample.old);
-    })
+        it.each(results)(`test %i of ${files.length}, %s`, (count, name, sample) => {
+            !!sample.error
+                ? expect(sample.error).toEqual(null)
+                : expect(sample.new).toMatchObject(sample.old);
+        })
+    }
+
+    // it('Should validate Articles with undefined pillar by defualting to ""') - TODO is this behaviour we want?
+    // it('Should validate Articles with '' as pillar)
+    // it('Should validate Articles with undefined pagination)
+    // it('Should validate Liveblogs with defined pagination)
 })
 
 

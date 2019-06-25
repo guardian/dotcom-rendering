@@ -43,6 +43,7 @@ export const schema = {
                         'Culture',
                         'Lifestyle',
                         'Arts',
+                        ''
                     ],
                     default: '',
                 }, // scala option
