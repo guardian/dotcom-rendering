@@ -64,7 +64,6 @@ describe('extract-capi', () => {
 
     it('returns tags if available', () => {
         const { tags } = extract(testData);
-     
         expect(tags.length).toBe(12);
         expect(tags[0]).toMatchObject({
             bylineImageUrl: '',
@@ -123,7 +122,6 @@ describe('extract-capi', () => {
     });
 
     it('returns empty string if section missing', () => {
-      
         const { sectionName } = extract(testData);
 
         expect(sectionName).toBe('money');
@@ -140,7 +138,6 @@ describe('extract-capi', () => {
     });
 
     // it('returns editionLongForm as empty string if edition not available', () => {
-        
 
     //     const { editionLongForm } = extract(testData);
 
@@ -572,5 +569,29 @@ describe('extract-capi', () => {
         const { nielsenAPIID } = extract(testData);
 
         expect(nielsenAPIID).toBe('2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53');
+    });
+
+    it('returns pagination if available', () => {
+        testData.page.pagination = {
+            currentPage: 1,
+            totalPages: 3,
+            oldest: '?page=with:block-5d08da798f08263b930f1ced',
+            older: '?page=with:block-5d0922c28f08374cc57909eb',
+        };
+
+        const { pagination } = extract(testData);
+
+        expect(pagination).toMatchObject({
+            currentPage: 1,
+            totalPages: 3,
+            oldest: '?page=with:block-5d08da798f08263b930f1ced',
+            older: '?page=with:block-5d0922c28f08374cc57909eb',
+        });
+    });
+
+    it('returns pagination if available', () => {
+        const { pagination } = extract(testData);
+
+        expect(pagination).toBe(undefined);
     });
 });

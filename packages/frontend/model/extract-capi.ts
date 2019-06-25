@@ -127,12 +127,26 @@ export const extract = (data: any): CAPIType => {
     return {
         // page
         tags,
-
         editionLongForm,
         editionId,
         webPublicationDate,
         webPublicationDateDisplay: data.page.webPublicationDateDisplay,
         sectionName: sectionName,
+        pageId: data.page.pageId,
+        sharingUrls: getSharingUrls(data),
+        pillar: findPillar(data.page.pillar, tags) || 'news',
+        ageWarning: getAgeWarning(tags, webPublicationDate),
+        sectionLabel: data.page.sectionLabel,
+        sectionUrl: data.page.sectionUrl,
+        webURL: data.page.webURL,
+        contentType: data.page.contentType,
+        nielsenAPIID: getNielsenAPIID(sectionName),
+        pagination: data.page.pagination
+            ? data.page.pagination as Pagination
+            : undefined, // scala option
+        starRating: data.page.starRating
+            ? data.page.starRating
+            : undefined,
 
         // page.content
         headline: apply(
@@ -165,22 +179,6 @@ export const extract = (data: any): CAPIType => {
             data.page.content.trailText,
             stripHTML,
         ),
-        // other page derived properties
-        pagination: data.pagination
-            ? data.pagination as Pagination
-            : undefined, // scala option
-        pageId: data.page.pageId,
-        sharingUrls: getSharingUrls(data),
-        pillar: findPillar(data.page.pillar, tags) || 'news',
-        ageWarning: getAgeWarning(tags, webPublicationDate),
-        sectionLabel: data.page.sectionLabel,
-        sectionUrl: data.page.sectionUrl,
-        webURL: data.page.webURL,
-        contentType: data.page.contentType,
-        starRating: data.page.starRating
-            ? data.page.starRating
-            : undefined,
-        nielsenAPIID: getNielsenAPIID(sectionName),
         // page.subMetaLinks
         subMetaSectionLinks: getSubMetaSectionLinks(data),
         subMetaKeywordLinks: getSubMetaKeywordLinks(data),
