@@ -20,7 +20,6 @@ const validateNew = (data: any) => {
     try {
         validatedBody = validateRequestData(data, '/AMPArticle');
     } catch (err) {
-        console.log("validation error", data.content.pageId)
         return err
     }
 
