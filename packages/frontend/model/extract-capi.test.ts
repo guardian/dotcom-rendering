@@ -4,7 +4,8 @@ import { clean as clean_ } from './clean';
 import { findPillar as findPillar_ } from './find-pillar';
 import { getSharingUrls as getSharingUrls_ } from './sharing-urls';
 import { extract } from './extract-capi';
-import { data } from '@root/fixtures/articleValidatedV2';
+import { data } from '@root/fixtures/article';
+import { validateRequestData } from '@root/packages/frontend/model/validate';
 
 const curly: any = curly_;
 const clean: any = clean_;
@@ -25,10 +26,11 @@ jest.mock('./sharing-urls', () => ({
 }));
 
 describe('extract-capi', () => {
+    const validatedData = validateRequestData(data, '')
     let testData: any;
 
     beforeEach(() => {
-        testData = cloneDeep(data);
+        testData = cloneDeep(validatedData);
         clean.mockImplementation((_: string) => _);
         curly.mockImplementation((_: string) => _);
         getSharingUrls.mockImplementation((_: string) => _);

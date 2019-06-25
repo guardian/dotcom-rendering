@@ -1,8 +1,8 @@
 import cloneDeep from 'lodash.clonedeep';
 import { findPillar as findPillar_ } from './find-pillar';
 import { extract } from './extract-ga';
-// import { data } from '@root/fixtures/article';
-import { data } from '@root/fixtures/articleValidatedV2.ts';
+import { data } from '@root/fixtures/article';
+import { validateRequestData } from '@root/packages/frontend/model/validate';
 
 const findPillar: any = findPillar_;
 
@@ -11,10 +11,11 @@ jest.mock('./find-pillar', () => ({
 }));
 
 describe('extract-capi', () => {
+    const validatedData = validateRequestData(data, '')
     let testData: any;
 
     beforeEach(() => {
-        testData = cloneDeep(data);
+        testData = cloneDeep(validatedData);
         findPillar.mockImplementation((_: string) => _);
     });
 

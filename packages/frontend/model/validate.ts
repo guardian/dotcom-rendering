@@ -26,7 +26,6 @@ export const validateRequestData = (data: any, endpoint: string) => {
         );
     }
 
-    // console.log(`Data validated against Article Schema version: ${data.version}`)
     // Includes fallback values from schema defaults for undefined properties
     return data;
 };
