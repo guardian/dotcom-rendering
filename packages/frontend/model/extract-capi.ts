@@ -74,26 +74,33 @@ const getAgeWarning = (
     }
 };
 
-const getSubMetaSectionLinks: (data: { page: any }) => SimpleLinkType[] = data => {
-    const subMetaSectionLinks = data.page.subMetaLinks.sectionLabels
+const getSubMetaSectionLinks: (
+    data: { page: any },
+) => SimpleLinkType[] = data => {
+    const subMetaSectionLinks = data.page.subMetaLinks.sectionLabels;
 
-    return subMetaSectionLinks.map(({ link, text }: { link: string, text: string }) => ({
-        url: link,
-        title: text,
-    }));
+    return subMetaSectionLinks.map(
+        ({ link, text }: { link: string; text: string }) => ({
+            url: link,
+            title: text,
+        }),
+    );
 };
 
 const getSubMetaKeywordLinks: (data: any) => SimpleLinkType[] = data => {
-    const subMetaKeywordLinks = data.page.subMetaLinks.keywords
+    const subMetaKeywordLinks = data.page.subMetaLinks.keywords;
 
-    return subMetaKeywordLinks.map(({ link, text }: { link: string, text: string }) => ({
-        url: link,
-        title: text,
-    }));
+    return subMetaKeywordLinks.map(
+        ({ link, text }: { link: string; text: string }) => ({
+            url: link,
+            title: text,
+        }),
+    );
 };
 
 const getCommercialProperties = (data: any): CommercialProperties => {
-    return data.page.commercial.editionCommercialProperties as CommercialProperties;
+    return data.page.commercial
+        .editionCommercialProperties as CommercialProperties;
 };
 
 const getNielsenAPIID = (subsection: string): string => {
@@ -104,9 +111,7 @@ const getNielsenAPIID = (subsection: string): string => {
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
 export const extract = (data: any): CAPIType => {
-    const webPublicationDate = new Date(
-        data.page.webPublicationDate
-    );
+    const webPublicationDate = new Date(data.page.webPublicationDate);
     const tags = getTags(data.page.tags.all);
     const leadContributor: TagType = tags.filter(
         tag => tag.type === 'Contributor',
@@ -129,9 +134,9 @@ export const extract = (data: any): CAPIType => {
         tags,
         editionLongForm,
         editionId,
+        sectionName,
         webPublicationDate,
         webPublicationDateDisplay: data.page.webPublicationDateDisplay,
-        sectionName: sectionName,
         pageId: data.page.pageId,
         sharingUrls: getSharingUrls(data),
         pillar: findPillar(data.page.pillar, tags) || 'news',
@@ -142,22 +147,13 @@ export const extract = (data: any): CAPIType => {
         contentType: data.page.contentType,
         nielsenAPIID: getNielsenAPIID(sectionName),
         pagination: data.page.pagination
-            ? data.page.pagination as Pagination
+            ? (data.page.pagination as Pagination)
             : undefined, // scala option
-        starRating: data.page.starRating
-            ? data.page.starRating
-            : undefined,
+        starRating: data.page.starRating ? data.page.starRating : undefined,
 
         // page.content
-        headline: apply(
-            data.page.content.headline,
-            curly,
-            clean,
-        ),
-        standfirst: apply(
-            data.page.content.standfirst,
-            clean,
-        ),
+        headline: apply(data.page.content.headline, curly, clean),
+        standfirst: apply(data.page.content.standfirst, clean),
         main: apply(data.page.content.main, clean),
         body: data.page.content.blocks.body
             .map((block: any) => block.bodyHtml)
@@ -171,14 +167,9 @@ export const extract = (data: any): CAPIType => {
             email: 'none',
         },
         mainMediaElements: data.page.content.blocks.main.elements,
-        keyEvents: data.page.content.blocks.keyEvents.filter(
-            Boolean,
-        ),
+        keyEvents: data.page.content.blocks.keyEvents.filter(Boolean),
         blocks: data.page.content.blocks.body.filter(Boolean),
-        trailText: apply(
-            data.page.content.trailText,
-            stripHTML,
-        ),
+        trailText: apply(data.page.content.trailText, stripHTML),
         // page.subMetaLinks
         subMetaSectionLinks: getSubMetaSectionLinks(data),
         subMetaKeywordLinks: getSubMetaKeywordLinks(data),

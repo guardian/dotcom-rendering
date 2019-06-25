@@ -154,7 +154,9 @@ export const extract = (data: {}): CAPIType => {
     // Possible values for the editionId: "UK", "US", "AU", "INT"
     const editionId = getEditionValue(getString(data, 'page.editionId', ''));
 
-    if (editionId === undefined) throw new Error('edition id is undefined');
+    if (editionId === undefined) {
+        throw new Error('edition id is undefined');
+    }
 
     return {
         webPublicationDate,

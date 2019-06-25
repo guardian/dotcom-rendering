@@ -1,4 +1,3 @@
-
 import { getNonEmptyString, getString, getObject } from '../validators';
 
 export const extract = (data: {}): ConfigType => ({

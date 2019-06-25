@@ -1,4 +1,6 @@
+// tslint:disable-next-line:no-var-requires
 const glob = require('glob');
+// tslint:disable-next-line:no-var-requires
 const fs = require('fs');
 
 // JSON Schema validation layer
@@ -20,7 +22,7 @@ const validateNew = (data: any) => {
     try {
         validatedBody = validateRequestData(data, '/AMPArticle');
     } catch (err) {
-        return err
+        return err;
     }
 
     const CAPI = extractCAPI(validatedBody);
@@ -40,7 +42,7 @@ const validateOld = (data: any) => {
     const CAPI = oldExtractCAPI(data);
     const linkedData = oldExtractLinkedData(data);
     const config = oldExtractConfig(data);
-    const ga = oldExtractGA(data);  // WEB ONLY
+    const ga = oldExtractGA(data); // WEB ONLY
 
     return {
         CAPI,
@@ -50,46 +52,48 @@ const validateOld = (data: any) => {
     };
 };
 
-
 const runTest = (samples: string[]) => {
-    let count = 0
-    const rootIndex = __dirname.split('/').indexOf('dotcom-rendering')
-    const root = __dirname.split('/').slice(0, rootIndex + 1).join('/')
+    let count = 0;
+    const rootIndex = __dirname.split('/').indexOf('dotcom-rendering');
+    const root = __dirname
+        .split('/')
+        .slice(0, rootIndex + 1)
+        .join('/');
 
     const results = samples.map((sample: string) => {
-        count = count + 1
-        const path = `${root}/${sample}`
-        const sampleJson = JSON.parse(fs.readFileSync(path, 'utf-8'))
-        const name = sample.split('/').slice(3)
+        count = count + 1;
+        const path = `${root}/${sample}`;
+        const sampleJson = JSON.parse(fs.readFileSync(path, 'utf-8'));
+        const name = sample.split('/').slice(3);
         try {
             const newRes = validateNew(sampleJson);
             const oldRes = validateOld(sampleJson);
-            return [count, name, { new: newRes, old: oldRes, error: null }]
+            return [count, name, { error: null, new: newRes, old: oldRes }];
         } catch (error) {
-            return [count, name, { new: null, old: null, error: error }]
+            return [count, name, { error, new: null, old: null }];
         }
-    })
-    return results
-}
+    });
+    return results;
+};
 
 describe('JSON SCHEMA validation layer sample comparison test', () => {
-
     // NOTE: Run scripts/validation/sampleCollection.js to collect json samples for testing
-    const files = glob.sync('scripts/validation/samples/*.json', {})
+    const files = glob.sync('scripts/validation/samples/*.json', {});
     if (files.length > 1) {
-        const results = runTest(files)
+        const results = runTest(files);
 
-        it.each(results)(`test %i of ${files.length}, %s`, (count, name, sample) => {
-            !!sample.error
-                ? expect(sample.error).toEqual(null)
-                : expect(sample.new).toMatchObject(sample.old);
-        })
+        it.each(results)(
+            `test %i of ${files.length}, %s`,
+            (count, name, sample) => {
+                !!sample.error
+                    ? expect(sample.error).toEqual(null)
+                    : expect(sample.new).toMatchObject(sample.old);
+            },
+        );
     }
 
     // it('Should validate Articles with undefined pillar by defualting to ""') - TODO is this behaviour we want?
     // it('Should validate Articles with '' as pillar)
     // it('Should validate Articles with undefined pagination)
     // it('Should validate Liveblogs with defined pagination)
-})
-
-
+});

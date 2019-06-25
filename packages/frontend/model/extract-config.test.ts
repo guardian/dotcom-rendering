@@ -4,7 +4,7 @@ import { data } from '@root/fixtures/article';
 import { validateRequestData } from '@root/packages/frontend/model/validate';
 
 describe('extract-config', () => {
-    const validatedData = validateRequestData(data, '')
+    const validatedData = validateRequestData(data, '');
     let testData: any;
 
     beforeEach(() => {

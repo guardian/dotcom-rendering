@@ -43,14 +43,14 @@ export const schema = {
                         'Culture',
                         'Lifestyle',
                         'Arts',
-                        ''
+                        '',
                     ],
                     default: '',
                 }, // scala option
                 pagination: { $ref: '#/definitions/Pagination' }, // optional
                 webPublicationDate: { type: 'integer' }, // TODO format?
                 webPublicationDateDisplay: { type: 'string' }, // TODO format?
-                section: { type: 'string', default: '' },  // scala option
+                section: { type: 'string', default: '' }, // scala option
                 sectionLabel: { type: 'string' },
                 sectionUrl: { type: 'string', format: 'uri-reference' },
                 webTitle: { type: 'string', minLength: 1 },
@@ -63,7 +63,10 @@ export const schema = {
                 editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] },
                 edition: { type: 'string', default: '' },
                 webURL: { type: 'string', format: 'uri', minLength: 1 },
-                contentType: { type: 'string', enum: ['Article', 'LiveBlog', ''] }, // TODO ga '' scala option -> validation will fail
+                contentType: {
+                    type: 'string',
+                    enum: ['Article', 'LiveBlog', ''],
+                }, // TODO ga '' scala option -> validation will fail
                 starRating: { type: 'integer', minimum: 0, maximum: 5 }, //  optional
                 subMetaLinks: { $ref: '#/definitions/SubMetaLinks' },
                 commercial: { $ref: '#/definitions/Commercial' },
@@ -91,7 +94,7 @@ export const schema = {
                     minLength: 1,
                 },
                 sentryPublicApiKey: { type: 'string', default: '' }, // scala option
-                sentryHost: { type: 'string', default: '' },  // scala option
+                sentryHost: { type: 'string', default: '' }, // scala option
                 switches: { type: 'object', default: {} },
                 commercialUrl: { type: 'string', format: 'uri', minLength: 1 },
                 dfpAccountId: { type: 'string', default: '' }, // TODO check and fix - not currently used
@@ -122,7 +125,7 @@ export const schema = {
             required: ['headline', 'main', 'blocks', 'byline', 'trailText'],
             properties: {
                 headline: { type: 'string', minLength: 1 },
-                standfirst: { type: 'string', default: '' },  // scala option
+                standfirst: { type: 'string', default: '' }, // scala option
                 main: { type: 'string', default: '' },
                 body: { type: 'string' },
                 blocks: {
@@ -153,19 +156,19 @@ export const schema = {
             properties: {
                 authorIds: {
                     type: 'string',
-                    default: ''
+                    default: '',
                 }, // scala option
                 toneIds: {
                     type: 'string',
-                    default: ''
+                    default: '',
                 }, // scala option
                 keywordId: {
                     type: 'string',
-                    default: ''
+                    default: '',
                 }, // scala option
                 commissioningDesks: {
                     type: 'string',
-                    default: ''
+                    default: '',
                 }, // scala option
                 all: {
                     type: 'array',
@@ -183,11 +186,11 @@ export const schema = {
                                     webTitle: { type: 'string' },
                                     twitterHandle: {
                                         type: 'string',
-                                        default: ''
+                                        default: '',
                                     },
                                     bylineImageUrl: {
                                         type: 'string',
-                                        default: ''
+                                        default: '',
                                     },
                                 },
                             },

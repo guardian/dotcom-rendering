@@ -26,7 +26,7 @@ jest.mock('./sharing-urls', () => ({
 }));
 
 describe('extract-capi', () => {
-    const validatedData = validateRequestData(data, '')
+    const validatedData = validateRequestData(data, '');
     let testData: any;
 
     beforeEach(() => {

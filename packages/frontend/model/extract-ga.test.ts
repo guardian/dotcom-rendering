@@ -11,7 +11,7 @@ jest.mock('./find-pillar', () => ({
 }));
 
 describe('extract-capi', () => {
-    const validatedData = validateRequestData(data, '')
+    const validatedData = validateRequestData(data, '');
     let testData: any;
 
     beforeEach(() => {
