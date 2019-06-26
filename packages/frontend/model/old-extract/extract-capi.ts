@@ -179,10 +179,6 @@ export const extract = (data: {}): CAPIType => {
             clean,
         ),
         main: apply(getString(data, 'page.content.main', ''), clean),
-        body: getArray<any>(data, 'page.content.blocks.body')
-            .map(block => block.bodyHtml)
-            .filter(Boolean)
-            .join(''),
         author: {
             byline: getString(data, 'page.content.byline', ''),
             twitterHandle: leadContributor

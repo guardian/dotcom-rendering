@@ -5,7 +5,7 @@ const fs = require('fs');
 import cloneDeep from 'lodash.clonedeep';
 import { data as fixtureData } from '@root/fixtures/article';
 // JSON Schema validation layer
-import { validateRequestData } from '../validate';
+import { validateRequestData } from '@frontend/model/validate';
 // NEW extraction functions without validation
 import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractConfig } from '@frontend/model/extract-config';

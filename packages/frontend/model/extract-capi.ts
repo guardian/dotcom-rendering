@@ -155,10 +155,6 @@ export const extract = (data: any): CAPIType => {
         headline: apply(data.page.content.headline, curly, clean),
         standfirst: apply(data.page.content.standfirst, clean),
         main: apply(data.page.content.main, clean),
-        body: data.page.content.blocks.body
-            .map((block: any) => block.bodyHtml)
-            .filter(Boolean)
-            .join(''),
         author: {
             byline: data.page.content.byline,
             twitterHandle: leadContributor
