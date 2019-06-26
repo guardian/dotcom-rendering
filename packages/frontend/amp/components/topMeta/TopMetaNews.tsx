@@ -10,6 +10,7 @@ import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
+import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 
 const headerStyle = css`
     ${headline(5)};
@@ -51,39 +52,6 @@ const bylineStyle = (pillar: Pillar) => css`
     }
 `;
 
-const sectionLabelLinkStyle = (pillar: Pillar) => css`
-    color: ${pillarPalette[pillar].main};
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
-    }
-`;
-
-const sectionLabelStyle = css`
-    ${headline(2)};
-    font-weight: 900;
-    padding: 4px 8px 0 0;
-    margin-bottom: 4px;
-`;
-
-const SectionLabel: React.FC<{
-    sectionLabel?: string;
-    sectionUrl?: string;
-    pillar: Pillar;
-}> = ({ sectionLabel, sectionUrl, pillar }) => (
-    <div className={sectionLabelStyle}>
-        {!!sectionLabel && !!sectionUrl && (
-            <a
-                className={sectionLabelLinkStyle(pillar)}
-                href={`https://www.theguardian.com/${sectionUrl}`}
-                data-link-name="article section"
-            >
-                {sectionLabel}
-            </a>
-        )}
-    </div>
-);
-
 const Headline: React.FC<{
     headlineText: string;
     standfirst: string;
@@ -121,10 +89,13 @@ export const TopMetaNews: React.FC<{ articleData: ArticleModel }> = ({
         ))}
 
         {!articleData.isImmersive && (
-            <SectionLabel
+            <SeriesLink
+                baseURL={articleData.guardianBaseURL}
+                tags={articleData.tags}
+                pillar={articleData.pillar}
+                fallbackToSection={true}
                 sectionLabel={articleData.sectionLabel}
                 sectionUrl={articleData.sectionUrl}
-                pillar={articleData.pillar}
             />
         )}
 
