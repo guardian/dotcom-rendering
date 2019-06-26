@@ -53,12 +53,11 @@ export const schema = {
                 section: { type: 'string', default: '' }, // scala option
                 sectionLabel: { type: 'string' },
                 sectionUrl: { type: 'string', format: 'uri-reference' },
-                webTitle: { type: 'string', minLength: 1 },
+                webTitle: { type: 'string', default: '' },
                 seriesId: { type: 'string', default: '' }, // scala option
                 contentId: {
                     type: 'string',
-                    format: 'uri-reference',
-                    minLength: 1,
+                    default: '',
                 }, // scala option
                 editionId: { type: 'string', enum: ['UK', 'US', 'AU', 'INTL'] },
                 edition: { type: 'string', default: '' },
@@ -66,6 +65,7 @@ export const schema = {
                 contentType: {
                     type: 'string',
                     enum: ['Article', 'LiveBlog', ''],
+                    default: '',
                 }, // TODO ga '' scala option -> validation will fail
                 starRating: { type: 'integer', minimum: 0, maximum: 5 }, //  optional
                 subMetaLinks: { $ref: '#/definitions/SubMetaLinks' },
@@ -85,8 +85,7 @@ export const schema = {
                 ajaxUrl: { type: 'string', format: 'uri', minLength: 1 },
                 beaconUrl: {
                     type: 'string',
-                    format: 'uri-reference',
-                    minLength: 1,
+                    default: '',
                 },
                 guardianBaseURL: {
                     type: 'string',
@@ -162,7 +161,7 @@ export const schema = {
                     type: 'string',
                     default: '',
                 }, // scala option
-                keywordId: {
+                keywordIds: {
                     type: 'string',
                     default: '',
                 }, // scala option

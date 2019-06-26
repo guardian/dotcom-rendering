@@ -77,7 +77,7 @@ const runTest = (samples: string[]) => {
 };
 
 describe('JSON SCHEMA validation layer sample comparison test', () => {
-    // NOTE: Run scripts/validation/sampleCollection.js to collect json samples for testing
+    //  NOTE: Run scripts / validation / sampleCollection.js to collect json samples for testing
     const files = glob.sync('scripts/validation/samples/*.json', {});
     if (files.length > 1) {
         const results = runTest(files);
@@ -91,7 +91,9 @@ describe('JSON SCHEMA validation layer sample comparison test', () => {
             },
         );
     }
+})
 
+describe('JSON SCHEMA validation of linkedData', () => {
     let testData: any;
     let validatedData: any;
     beforeEach(() => {
@@ -99,14 +101,148 @@ describe('JSON SCHEMA validation layer sample comparison test', () => {
         validatedData = undefined;
     });
 
-    // // Linked Data
-    it('should validate Articles with undefined page.linkedData by defaulting to []', () => {
+    it('validates Articles with undefined page.linkedData by defaulting to []', () => {
         testData.page.meta.linkedData = undefined;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.meta.linkedData).toEqual([]);
     });
+});
+
+describe('JSON SCHEMA validation of GoogleAnalytics GA', () => {
+    let testData: any;
+    let validatedData: any;
+    beforeEach(() => {
+        testData = cloneDeep(fixtureData);
+        validatedData = undefined;
+    });
+
+    // GA
+    it('validates Articles with missing webTitle by defaulting to ""', () => {
+        testData.page.webTitle = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.webTitle).toEqual('');
+    });
+    it('validates Articles with missing section by defaulting to ""', () => {
+        testData.page.section = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.section).toEqual('');
+    });
+    it('validates Articles with missing contentType by defaulting to ""', () => {
+        testData.page.contentType = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.contentType).toEqual('');
+    });
+    it('validates Articles with missing tags.commissioningDesks by defaulting to ""', () => {
+        testData.page.tags.commissioningDesks = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.tags.commissioningDesks).toEqual('');
+    });
+    it('validates Articles with missing tags.authorIds by defaulting to ""', () => {
+        testData.page.tags.authorIds = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.tags.authorIds).toEqual('');
+    });
+    it('validates Articles with missing tags.keywordIds by defaulting to ""', () => {
+        testData.page.tags.keywordIds = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.tags.keywordIds).toEqual('');
+    });
+    it('validates Articles with missing tags.toneIds by defaulting to ""', () => {
+        testData.page.tags.toneIds = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.tags.toneIds).toEqual('');
+    });
+    it('validates Articles with missing contentId by defaulting to ""', () => {
+        testData.page.contentId = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.contentId).toEqual('');
+    });
+    it('validates Articles with missing seriesId by defaulting to ""', () => {
+        testData.page.seriesId = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.seriesId).toEqual('');
+    });
+    it('validates Articles with missing edition by defaulting to ""', () => {
+        testData.page.edition = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.edition).toEqual('');
+    });
+    it('validates Articles with missing beaconUrl by defaulting to ""', () => {
+        testData.site.beaconUrl = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.site.beaconUrl).toEqual('');
+    });
+    it('validates Articles with missing meta.isHosted value by defaulting to false', () => {
+        testData.page.meta.isHosted = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.meta.isHosted).toEqual(false);
+    });
+});
+
+describe('JSON SCHEMA validation of config', () => {
+    let testData: any;
+    let validatedData: any;
+    beforeEach(() => {
+        testData = cloneDeep(fixtureData);
+        validatedData = undefined;
+    });
+
+    // Edge Cases
+    it('should validate Articles with undefined pillar by defaulting to ""', () => {
+        testData.page.pillar = undefined;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.pillar).toEqual('');
+    });
+
+    it('should validate Articles with "" pillar', () => {
+        testData.page.pillar = undefined;
+        expect(() => {
+            validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
+        }).not.toThrow();
+        expect(validatedData.page.pillar).toEqual('');
+    });
+
+    // it('Should validate Articles with undefined pagination)
+    // it('Should validate Liveblogs with defined pagination)
+});
+
+describe('JSON SCHEMA validation of edge cases', () => {
+    let testData: any;
+    let validatedData: any;
+    beforeEach(() => {
+        testData = cloneDeep(fixtureData);
+        validatedData = undefined;
+    });
+
+    // Edge Cases
     it('should validate Articles with undefined pillar by defaulting to ""', () => {
         testData.page.pillar = undefined;
         expect(() => {

@@ -33,14 +33,6 @@ describe('extract-capi', () => {
         expect(webTitle).toBe(testWebTitle);
     });
 
-    // it('returns webTitle as empty string if missing', () => {
-    //     testData.page.webTitle = null;
-
-    //     const { webTitle } = extract(testData);
-
-    //     expect(webTitle).toBe('');
-    // });
-
     it('returns pillar if available', () => {
         const testPillar = 'sport';
 
@@ -77,14 +69,6 @@ describe('extract-capi', () => {
         expect(section).toBe(testSection);
     });
 
-    // it('returns section as empty string if missing', () => {
-    //     testData.page.section = null;
-
-    //     const { section } = extract(testData);
-
-    //     expect(section).toBe('');
-    // });
-
     it('returns formatted contentType if contentType available', () => {
         testData.page.contentType = 'Video Article';
 
@@ -92,14 +76,6 @@ describe('extract-capi', () => {
 
         expect(contentType).toBe('videoarticle');
     });
-
-    // it('returns contentType as empty string if missing', () => {
-    //     testData.page.contentType = null;
-
-    //     const { contentType } = extract(testData);
-
-    //     expect(contentType).toBe('');
-    // });
 
     it('returns commissioningDesks if commissioningDesks available', () => {
         const testCommissioningDesks = 'Observer New Review';
@@ -111,14 +87,6 @@ describe('extract-capi', () => {
         expect(commissioningDesks).toBe(testCommissioningDesks);
     });
 
-    // it('returns commissioningDesks as empty string if missing', () => {
-    //     testData.page.commissioningDesks = null;
-
-    //     const { commissioningDesks } = extract(testData);
-
-    //     expect(commissioningDesks).toBe('');
-    // });
-
     it('returns contentId if contentId available', () => {
         const testContentId = 'waldo-jeffers/has-reached-his-limit';
 
@@ -129,13 +97,6 @@ describe('extract-capi', () => {
         expect(contentId).toBe(testContentId);
     });
 
-    // it('returns contentId as empty string if missing', () => {
-    //     testData.page.contentId = null;
-
-    //     const { contentId } = extract(testData);
-
-    //     expect(contentId).toBe('');
-    // });
     it('returns authorIds if authorIds available', () => {
         const testAuthorIds = 'profile/waldo-jeffers';
 
@@ -145,14 +106,6 @@ describe('extract-capi', () => {
 
         expect(authorIds).toBe(testAuthorIds);
     });
-
-    // it('returns authorIds as empty string if missing', () => {
-    //     testData.page.authorIds = null;
-
-    //     const { authorIds } = extract(testData);
-
-    //     expect(authorIds).toBe('');
-    // });
 
     it('returns keywordIds if keywordIds available', () => {
         const testKeywordIds = 'waldo-jeffers,marsha-bronson';
@@ -164,14 +117,6 @@ describe('extract-capi', () => {
         expect(keywordIds).toBe(testKeywordIds);
     });
 
-    // it('returns keywordIds as empty string if missing', () => {
-    //     testData.page.keywordIds = null;
-
-    //     const { keywordIds } = extract(testData);
-
-    //     expect(keywordIds).toBe('');
-    // });
-
     it('returns toneIds if toneIds available', () => {
         const testToneIds = 'waldo-jeffers,marsha-bronson';
 
@@ -181,14 +126,6 @@ describe('extract-capi', () => {
 
         expect(toneIds).toBe(testToneIds);
     });
-
-    // it('returns toneIds as empty string if missing', () => {
-    //     testData.page.toneIds = null;
-
-    //     const { toneIds } = extract(testData);
-
-    //     expect(toneIds).toBe('');
-    // });
 
     it('returns seriesId if seriesId available', () => {
         const testSeriesId = 'waldo-jeffers';
@@ -200,14 +137,6 @@ describe('extract-capi', () => {
         expect(seriesId).toBe(testSeriesId);
     });
 
-    // it('returns seriesId as empty string if missing', () => {
-    //     testData.page.seriesId = null;
-
-    //     const { seriesId } = extract(testData);
-
-    //     expect(seriesId).toBe('');
-    // });
-
     it('returns isHosted as string if isHosted available', () => {
         testData.page.meta.isHosted = true;
 
@@ -215,14 +144,6 @@ describe('extract-capi', () => {
 
         expect(isHosted).toBe('true');
     });
-
-    // it('returns isHosted as "false" if missing', () => {
-    //     testData.page.meta.isHosted = null;
-
-    //     const { isHosted } = extract(testData);
-
-    //     expect(isHosted).toBe('false');
-    // });
 
     it('returns edition if edition available', () => {
         testData.page.edition = 'UK';
@@ -240,14 +161,6 @@ describe('extract-capi', () => {
         expect(edition).toBe('international');
     });
 
-    // it('returns edition as empty string if edition is missing', () => {
-    //     testData.page.edition = null;
-
-    //     const { edition } = extract(testData);
-
-    //     expect(edition).toBe('');
-    // });
-
     it('returns beaconUrl if beaconUrl available', () => {
         const testBeaconUrl = 'waldo-jeffers';
 
@@ -257,12 +170,4 @@ describe('extract-capi', () => {
 
         expect(beaconUrl).toBe(testBeaconUrl);
     });
-
-    // it('returns beaconUrl as empty string if missing', () => {
-    //     testData.site.beaconUrl = null;
-
-    //     const { beaconUrl } = extract(testData);
-
-    //     expect(beaconUrl).toBe('');
-    // });
 });
