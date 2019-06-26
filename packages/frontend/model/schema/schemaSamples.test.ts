@@ -91,7 +91,7 @@ describe('JSON SCHEMA validation layer sample comparison test', () => {
             },
         );
     }
-})
+});
 
 describe('JSON SCHEMA validation of linkedData', () => {
     let testData: any;
@@ -118,78 +118,77 @@ describe('JSON SCHEMA validation of GoogleAnalytics GA', () => {
         validatedData = undefined;
     });
 
-    // GA
-    it('validates Articles with missing webTitle by defaulting to ""', () => {
+    it('validates Articles with missing webTitle by defaulting to empty string', () => {
         testData.page.webTitle = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.webTitle).toEqual('');
     });
-    it('validates Articles with missing section by defaulting to ""', () => {
+    it('validates Articles with missing section by defaulting to empty string', () => {
         testData.page.section = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.section).toEqual('');
     });
-    it('validates Articles with missing contentType by defaulting to ""', () => {
+    it('validates Articles with missing contentType by defaulting to empty string', () => {
         testData.page.contentType = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.contentType).toEqual('');
     });
-    it('validates Articles with missing tags.commissioningDesks by defaulting to ""', () => {
+    it('validates Articles with missing tags.commissioningDesks by defaulting to empty string', () => {
         testData.page.tags.commissioningDesks = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.tags.commissioningDesks).toEqual('');
     });
-    it('validates Articles with missing tags.authorIds by defaulting to ""', () => {
+    it('validates Articles with missing tags.authorIds by defaulting to empty string', () => {
         testData.page.tags.authorIds = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.tags.authorIds).toEqual('');
     });
-    it('validates Articles with missing tags.keywordIds by defaulting to ""', () => {
+    it('validates Articles with missing tags.keywordIds by defaulting to empty string', () => {
         testData.page.tags.keywordIds = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.tags.keywordIds).toEqual('');
     });
-    it('validates Articles with missing tags.toneIds by defaulting to ""', () => {
+    it('validates Articles with missing tags.toneIds by defaulting to empty string', () => {
         testData.page.tags.toneIds = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.tags.toneIds).toEqual('');
     });
-    it('validates Articles with missing contentId by defaulting to ""', () => {
+    it('validates Articles with missing contentId by defaulting to empty string', () => {
         testData.page.contentId = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.contentId).toEqual('');
     });
-    it('validates Articles with missing seriesId by defaulting to ""', () => {
+    it('validates Articles with missing seriesId by defaulting to empty string', () => {
         testData.page.seriesId = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.seriesId).toEqual('');
     });
-    it('validates Articles with missing edition by defaulting to ""', () => {
+    it('validates Articles with missing edition by defaulting to empty string', () => {
         testData.page.edition = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.edition).toEqual('');
     });
-    it('validates Articles with missing beaconUrl by defaulting to ""', () => {
+    it('validates Articles with missing site.beaconUrl by defaulting to empty string', () => {
         testData.site.beaconUrl = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
@@ -213,25 +212,35 @@ describe('JSON SCHEMA validation of config', () => {
         validatedData = undefined;
     });
 
-    // Edge Cases
-    it('should validate Articles with undefined pillar by defaulting to ""', () => {
-        testData.page.pillar = undefined;
+    it('throws error if site.ajaxUrl unavailable', () => {
+        testData.site.ajaxUrl = null;
         expect(() => {
             validatedData = validateRequestData(testData, '');
-        }).not.toThrow();
-        expect(validatedData.page.pillar).toEqual('');
+        }).toThrow();
     });
 
-    it('should validate Articles with "" pillar', () => {
-        testData.page.pillar = undefined;
+    it('throws error if site.commercialUrl unavailable', () => {
+        testData.site.commercialUrl = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).toThrow();
+    });
+
+    it('validates Articles with missing site.sentryPublicApiKey value by defaulting to empty string', () => {
+        testData.site.sentryPublicApiKey = null;
         expect(() => {
             validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
         }).not.toThrow();
-        expect(validatedData.page.pillar).toEqual('');
+        expect(validatedData.site.sentryPublicApiKey).toEqual('');
     });
 
-    // it('Should validate Articles with undefined pagination)
-    // it('Should validate Liveblogs with defined pagination)
+    it('validates Articles with missing site.sentryHost value by defaulting to empty string', () => {
+        testData.site.sentryHost = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
+        }).not.toThrow();
+        expect(validatedData.site.sentryHost).toEqual('');
+    });
 });
 
 describe('JSON SCHEMA validation of edge cases', () => {
@@ -243,7 +252,7 @@ describe('JSON SCHEMA validation of edge cases', () => {
     });
 
     // Edge Cases
-    it('should validate Articles with undefined pillar by defaulting to ""', () => {
+    it('should validate Articles with undefined pillar by defaulting to empty string', () => {
         testData.page.pillar = undefined;
         expect(() => {
             validatedData = validateRequestData(testData, '');
@@ -251,7 +260,7 @@ describe('JSON SCHEMA validation of edge cases', () => {
         expect(validatedData.page.pillar).toEqual('');
     });
 
-    it('should validate Articles with "" pillar', () => {
+    it('should validate Articles with empty string pillar', () => {
         testData.page.pillar = undefined;
         expect(() => {
             validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
