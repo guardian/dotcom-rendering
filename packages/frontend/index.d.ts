@@ -135,7 +135,6 @@ interface CAPIType {
     standfirst: string;
     mainMediaElements: CAPIElement[];
     main: string;
-    body: string;
     keyEvents: Block[];
     blocks: Block[];
     pagination?: Pagination;
