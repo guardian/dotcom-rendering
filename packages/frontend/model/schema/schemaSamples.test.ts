@@ -138,13 +138,15 @@ describe('JSON SCHEMA validation of GoogleAnalytics GA', () => {
         }).not.toThrow();
         expect(validatedData.page.section).toEqual('');
     });
-    it('validates Articles with missing contentType by defaulting to empty string', () => {
-        testData.page.contentType = null;
-        expect(() => {
-            validatedData = validateRequestData(testData, '');
-        }).not.toThrow();
-        expect(validatedData.page.contentType).toEqual('');
-    });
+
+    // TODO Conflicts with CAPI requirement to throw
+    // it('validates Articles with missing contentType by defaulting to empty string', () => {
+    //     testData.page.contentType = null;
+    //     expect(() => {
+    //         validatedData = validateRequestData(testData, '');
+    //     }).not.toThrow();
+    //     expect(validatedData.page.contentType).toEqual('');
+    // });
     it('validates Articles with missing tags.commissioningDesks by defaulting to empty string', () => {
         testData.page.tags.commissioningDesks = null;
         expect(() => {
