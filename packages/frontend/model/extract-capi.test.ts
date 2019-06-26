@@ -54,14 +54,6 @@ describe('extract-capi', () => {
         );
     });
 
-    // it('throws error if webPublicationDate missing', () => {
-    //     testData.page.webPublicationDate = null;
-
-    //     expect(() => {
-    //         extract(testData);
-    //     }).toThrow();
-    // });
-
     it('returns tags if available', () => {
         const { tags } = extract(testData);
         expect(tags.length).toBe(12);
@@ -80,36 +72,6 @@ describe('extract-capi', () => {
             twitterHandle: '',
         });
     });
-
-    // it('throws error if tags missing id', () => {
-    //     testData.page.tags.all = [
-    //         {
-    //             properties: {
-    //                 tagType: 'Keyword',
-    //                 webTitle: 'Ticket prices',
-    //             },
-    //         },
-    //     ];
-
-    //     expect(() => {
-    //         extract(testData);
-    //     }).toThrow();
-    // });
-
-    // it('throws error if tags missing tagType', () => {
-    //     testData.page.tags.all = [
-    //         {
-    //             properties: {
-    //                 id: 'money/consumer-affairs',
-    //                 webTitle: 'Ticket prices',
-    //             },
-    //         },
-    //     ];
-
-    //     expect(() => {
-    //         extract(testData);
-    //     }).toThrow();
-    // });
 
     it('returns sectionName if section available', () => {
         const testSection = 'money';
@@ -136,13 +98,6 @@ describe('extract-capi', () => {
 
         expect(editionLongForm).toBe(testEditionLongForm);
     });
-
-    // it('returns editionLongForm as empty string if edition not available', () => {
-
-    //     const { editionLongForm } = extract(testData);
-
-    //     expect(editionLongForm).toBe('');
-    // });
 
     it('returns editionId if editionId available', () => {
         const testEdition = 'UK';
@@ -188,14 +143,6 @@ describe('extract-capi', () => {
         expect(webPublicationDateDisplay).toBe(testWebPublicationDateDisplay);
     });
 
-    // it('throws error if webPublicationDateDisplay missing', () => {
-    //     testData.page.webPublicationDateDisplay = null;
-
-    //     expect(() => {
-    //         extract(testData);
-    //     }).toThrow();
-    // });
-
     it('returns headline if headline available', () => {
         const testHeadline = 'Hello Waldo';
 
@@ -208,14 +155,6 @@ describe('extract-capi', () => {
         expect(curly).toHaveBeenCalledWith(testHeadline);
     });
 
-    // it('throws error if headline missing', () => {
-    //     testData.page.content.headline = null;
-
-    //     expect(() => {
-    //         extract(testData);
-    //     }).toThrow();
-    // });
-
     it('returns standfirst if standfirst available', () => {
         const testStandfirst = '<p>Waldo Jeffers had reached his limit.</p>';
 
@@ -227,14 +166,6 @@ describe('extract-capi', () => {
         expect(standfirst).toBe('<p>Waldo Jeffers had reached his limit.</p>');
     });
 
-    // it('returns standfirst as empty string if standfirst not available', () => {
-    //     testData.page.content.standfirst = null;
-
-    //     const { standfirst } = extract(testData);
-
-    //     expect(standfirst).toBe('');
-    // });
-
     it('returns main if main available', () => {
         const testMain = '<p>Waldo Jeffers had reached his limit.</p>';
 
@@ -245,14 +176,6 @@ describe('extract-capi', () => {
         expect(main).toBe(testMain);
         expect(clean).toHaveBeenCalledWith(testMain);
     });
-
-    // it('returns main as empty string if main not available', () => {
-    //     testData.page.content.main = null;
-
-    //     const { main } = extract(testData);
-
-    //     expect(main).toBe('');
-    // });
 
     it('returns main if main available', () => {
         const testMain = '<p>Waldo Jeffers had reached his limit.</p>';
@@ -336,14 +259,6 @@ describe('extract-capi', () => {
 
         expect(pageId).toBe(testPageId);
     });
-
-    // it('throws error if pageId missing', () => {
-    //     testData.page.pageId = null;
-
-    //     expect(() => {
-    //         extract(testData);
-    //     }).toThrow();
-    // });
 
     it('returns sharingUrls if available', () => {
         const { sharingUrls } = extract(testData);
@@ -521,14 +436,6 @@ describe('extract-capi', () => {
 
         expect(contentType).toBe(testContentType);
     });
-
-    // it('throws error if contentType missing', () => {
-    //     testData.page.contentType = null;
-
-    //     expect(() => {
-    //         extract(testData);
-    //     }).toThrow();
-    // });
 
     it('returns nielsenAPI based on section name', () => {
         testData.page.section = 'books';

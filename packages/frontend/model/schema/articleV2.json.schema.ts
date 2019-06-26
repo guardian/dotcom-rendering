@@ -21,7 +21,7 @@ export const schema = {
                 'sectionUrl',
                 'webTitle',
                 'webURL',
-                'contentType', // scala option -> throws error if missing
+                'contentType',
                 'subMetaLinks',
                 'commercial',
                 'meta',
@@ -48,8 +48,8 @@ export const schema = {
                     default: '',
                 }, // scala option
                 pagination: { $ref: '#/definitions/Pagination' }, // optional
-                webPublicationDate: { type: 'integer' }, // TODO format?
-                webPublicationDateDisplay: { type: 'string' }, // TODO format?
+                webPublicationDate: { type: 'integer' },
+                webPublicationDateDisplay: { type: 'string' },
                 section: { type: 'string', default: '' }, // scala option
                 sectionLabel: { type: 'string' },
                 sectionUrl: { type: 'string', format: 'uri-reference' },
@@ -64,10 +64,9 @@ export const schema = {
                 webURL: { type: 'string', format: 'uri', minLength: 1 },
                 contentType: {
                     type: 'string',
-                    enum: ['Article', 'LiveBlog', ''],
-                    default: '',
-                }, // TODO ga '' scala option -> validation will fail
-                starRating: { type: 'integer', minimum: 0, maximum: 5 }, //  optional
+                    enum: ['Article', 'LiveBlog'],
+                }, // scala option
+                starRating: { type: 'integer', minimum: 0, maximum: 5 }, // optional
                 subMetaLinks: { $ref: '#/definitions/SubMetaLinks' },
                 commercial: { $ref: '#/definitions/Commercial' },
                 meta: { $ref: '#/definitions/Meta' },
@@ -106,8 +105,8 @@ export const schema = {
         Block: {
             type: 'object',
             required: ['bodyHtml', 'elements'],
+            id: { type: 'string' },
             properties: {
-                id: { type: 'string' },
                 bodyHtml: { type: 'string', default: '' },
                 elements: {
                     type: 'array',

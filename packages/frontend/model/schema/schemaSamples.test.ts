@@ -100,6 +100,9 @@ describe('JSON SCHEMA validation of linkedData', () => {
         testData = cloneDeep(fixtureData);
         validatedData = undefined;
     });
+    afterAll(() => {
+        validatedData = undefined;
+    });
 
     it('validates Articles with undefined page.linkedData by defaulting to []', () => {
         testData.page.meta.linkedData = undefined;
@@ -115,6 +118,9 @@ describe('JSON SCHEMA validation of GoogleAnalytics GA', () => {
     let validatedData: any;
     beforeEach(() => {
         testData = cloneDeep(fixtureData);
+        validatedData = undefined;
+    });
+    afterAll(() => {
         validatedData = undefined;
     });
 
@@ -211,6 +217,9 @@ describe('JSON SCHEMA validation of config', () => {
         testData = cloneDeep(fixtureData);
         validatedData = undefined;
     });
+    afterAll(() => {
+        validatedData = undefined;
+    });
 
     it('throws error if site.ajaxUrl unavailable', () => {
         testData.site.ajaxUrl = null;
@@ -240,6 +249,92 @@ describe('JSON SCHEMA validation of config', () => {
             validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
         }).not.toThrow();
         expect(validatedData.site.sentryHost).toEqual('');
+    });
+});
+
+describe('JSON SCHEMA validation of CAPI', () => {
+    let testData: any;
+    let validatedData: any;
+    beforeEach(() => {
+        testData = cloneDeep(fixtureData);
+        validatedData = undefined;
+    });
+
+    it('throws error if webPublicationDate unavailable', () => {
+        testData.page.webPublicationDate = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).toThrow();
+    });
+
+    it('throws error if tags missing id', () => {
+        testData.page.tags.all = [
+            {
+                properties: {
+                    tagType: 'Keyword',
+                    webTitle: 'Ticket prices',
+                },
+            },
+        ];
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).toThrow();
+    });
+    it('throws error if tags missing tagType', () => {
+        testData.page.tags.all = [
+            {
+                properties: {
+                    id: 'Keyword',
+                    webTitle: 'Ticket prices',
+                },
+            },
+        ];
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).toThrow();
+    });
+
+    it('throws error if content.headline unavailable', () => {
+        testData.page.content.headline = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).toThrow();
+    });
+
+    it('throws error if pageId unavailable', () => {
+        testData.page.pageId = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).toThrow();
+    });
+
+    it('throws error if contentType unavailable', () => {
+        testData.page.contentType = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).toThrow();
+    });
+
+    it('validates Articles with missing edition by defaulting to empty string', () => {
+        testData.page.edition = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
+        }).not.toThrow();
+        expect(validatedData.page.edition).toEqual('');
+    });
+    it('validates Articles with missing content.standfirst by defaulting to empty string', () => {
+        testData.page.content.standfirst = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
+        }).not.toThrow();
+        expect(validatedData.page.content.standfirst).toEqual('');
+    });
+    it('validates Articles with missing content.main by defaulting to empty string', () => {
+        testData.page.content.main = null;
+        expect(() => {
+            validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
+        }).not.toThrow();
+        expect(validatedData.page.content.main).toEqual('');
     });
 });
 
