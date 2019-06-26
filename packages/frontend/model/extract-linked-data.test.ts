@@ -22,11 +22,5 @@ describe('linked data', () => {
         ]);
     });
 
-    // it('returns empty object if it cannot find data from page.linkedData', () => {
-    //     const invalidInput = {
-    //         config: {},
-    //     };
 
-    //     expect(extractLinkedData(invalidInput)).toEqual([]);
-    // });
 });

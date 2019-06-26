@@ -99,12 +99,20 @@ describe('JSON SCHEMA validation layer sample comparison test', () => {
         validatedData = undefined;
     });
 
+    // // Linked Data
+    it('should validate Articles with undefined page.linkedData by defaulting to []', () => {
+        testData.page.meta.linkedData = undefined;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.meta.linkedData).toEqual([]);
+    });
     it('should validate Articles with undefined pillar by defaulting to ""', () => {
         testData.page.pillar = undefined;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
-        expect(validatedData.page.pillar).toBe('');
+        expect(validatedData.page.pillar).toEqual('');
     });
 
     it('should validate Articles with "" pillar', () => {
@@ -112,7 +120,7 @@ describe('JSON SCHEMA validation layer sample comparison test', () => {
         expect(() => {
             validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
         }).not.toThrow();
-        expect(validatedData.page.pillar).toBe('');
+        expect(validatedData.page.pillar).toEqual('');
     });
 
     // it('Should validate Articles with undefined pagination)
