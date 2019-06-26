@@ -349,22 +349,33 @@ describe('JSON SCHEMA validation of edge cases', () => {
     });
 
     // Edge Cases
-    it('should validate Articles with undefined pillar by defaulting to empty string', () => {
+    it('validates Articles with undefined pillar by defaulting to empty string', () => {
         testData.page.pillar = undefined;
         expect(() => {
             validatedData = validateRequestData(testData, '');
         }).not.toThrow();
         expect(validatedData.page.pillar).toEqual('');
     });
-
-    it('should validate Articles with empty string pillar', () => {
-        testData.page.pillar = undefined;
+    it('validates Articles with empty string pillar', () => {
+        testData.page.pillar = '';
         expect(() => {
             validatedData = validateRequestData(testData, ''); // TODO can schema default to news?
         }).not.toThrow();
         expect(validatedData.page.pillar).toEqual('');
     });
+    it('validates Articles with undefined pagination', () => {
+        testData.page.pagination = undefined;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+        expect(validatedData.page.paginational).toBe(undefined);
+    });
 
-    // it('Should validate Articles with undefined pagination)
-    // it('Should validate Liveblogs with defined pagination)
+    // Removed articles or 'Corrections and Clarifications'
+    it('validates Articles with missing page.content.blocks.main', () => {
+        testData.page.content.blocks.main = undefined;
+        expect(() => {
+            validatedData = validateRequestData(testData, '');
+        }).not.toThrow();
+    });
 });

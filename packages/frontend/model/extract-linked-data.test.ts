@@ -21,6 +21,4 @@ describe('linked data', () => {
             },
         ]);
     });
-
-
 });
