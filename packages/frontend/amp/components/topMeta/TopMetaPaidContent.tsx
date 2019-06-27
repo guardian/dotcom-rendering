@@ -3,10 +3,10 @@ import { css } from 'emotion';
 
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
-import { Byline } from '@frontend/amp/components/Byline';
-import { TopMetaExtras } from '@frontend/amp/components/TopMetaExtras';
-import { Standfirst } from '@frontend/amp/components/Standfirst';
-import { PaidForBand } from '@frontend/amp/components/PaidForBand';
+import { Byline } from '@frontend/amp/components/topMeta/Byline';
+import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
+import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
+import { PaidForBand } from '@frontend/amp/components/topMeta/PaidForBand';
 
 import { palette } from '@guardian/pasteup/palette';
 import { textSans, body } from '@guardian/pasteup/typography';
