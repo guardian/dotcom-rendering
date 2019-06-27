@@ -13,6 +13,7 @@ export const validateRequestData = (data: any, endpoint: string) => {
     const options = {
         verbose: true,
         allErrors: true,
+        logger: false,
         useDefaults: ('empty' as unknown) as boolean, // TODO add 'empty' to ajv.d.ts - PR pending https://github.com/epoberezkin/ajv/pull/1020
     };
 
