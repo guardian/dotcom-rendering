@@ -18,8 +18,9 @@ export const render = (
     let validatedBody: any;
     try {
         validatedBody = validateRequestData(body, path);
-    } catch (err) {
-        logger.warn(err);
+    } catch (e) {
+        logger.warn(e);
+        res.status(400).send(`<pre>${e.stack}</pre>`);
     }
 
     try {
