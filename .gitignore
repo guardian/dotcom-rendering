@@ -35,7 +35,3 @@ packages/pasteup/tmp
 
 # Test coverage reports
 coverage
-
-# Temp Test Data
-scripts/validation/samples
-
