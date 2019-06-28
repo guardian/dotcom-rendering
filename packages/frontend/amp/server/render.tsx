@@ -9,7 +9,6 @@ import { extract as extractConfig } from '@frontend/model/extract-config';
 import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { validateRequestData } from '@frontend/model/validate';
-import { logger } from '@frontend/app/logging';
 
 export const render = (
     { body, path }: express.Request,
@@ -19,7 +18,6 @@ export const render = (
     try {
         validatedBody = validateRequestData(body, path);
     } catch (e) {
-        logger.warn(e);
         res.status(400).send(`<pre>${e.stack}</pre>`);
     }
 
