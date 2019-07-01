@@ -16,16 +16,18 @@ export type StyledTone =
 
 export const getToneType = (tags: TagType[]): StyledTone => {
     const defaultTone = 'default-tone';
-    const tone = filterForTagsOfType(tags, 'Tone')[0];
+    const tones = filterForTagsOfType(tags, 'Tone').map(tone => tone.id);
 
-    if (!tone) {
+    if (!tones) {
         return defaultTone;
     }
 
-    switch (tone.id) {
+    switch (tones[0]) {
         case 'tone/advertisement-features':
-            return 'tone/advertisement-features';
+            return tones[0] as StyledTone;
         case 'tone/comment':
+            return tones[0] as StyledTone;
+        case 'tone/editorials':
             return 'tone/comment';
         default:
             return defaultTone;

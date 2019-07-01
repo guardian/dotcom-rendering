@@ -5,9 +5,10 @@ import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
-import { Byline } from '@frontend/amp/components/Byline';
-import { TopMetaExtras } from './TopMetaExtras';
-import { Standfirst } from './Standfirst';
+import { Byline } from '@frontend/amp/components/topMeta/Byline';
+import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
+import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
+import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 
 const headerStyle = css`
     ${headline(5)};
@@ -26,15 +27,6 @@ const bylineStyle = (pillar: Pillar) => css`
         text-decoration: none;
         font-style: italic;
     }
-`;
-
-const seriesStyle = (pillar: Pillar) => css`
-    color: ${pillarPalette[pillar].main};
-    ${headline(2)};
-    font-weight: 900;
-    text-decoration: none;
-    margin-top: 10px;
-    display: block;
 `;
 
 const bylineImageStyle = css`
@@ -64,24 +56,6 @@ const bylineWrapper = css`
 const bottomPadding = css`
     padding-bottom: 72px;
 `;
-
-const SeriesLink: React.SFC<{
-    baseURL: string;
-    tags: TagType[];
-    pillar: Pillar;
-}> = ({ baseURL, tags, pillar }) => {
-    const tag = tags.find(t => t.type === 'Blog' || t.type === 'Series');
-
-    if (!tag) {
-        return null;
-    }
-
-    return (
-        <a href={`${baseURL}/${tag.id}`} className={seriesStyle(pillar)}>
-            {tag.title}
-        </a>
-    );
-};
 
 const BylineMeta: React.SFC<{
     articleData: ArticleModel;
@@ -128,6 +102,7 @@ export const TopMetaOpinion: React.FC<{
             baseURL={articleData.guardianBaseURL}
             tags={articleData.tags}
             pillar={articleData.pillar}
+            fallbackToSection={false}
         />
 
         <h1 className={headerStyle}>{articleData.headline}</h1>

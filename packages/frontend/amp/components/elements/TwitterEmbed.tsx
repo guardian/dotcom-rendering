@@ -5,7 +5,11 @@ import { TextStyle } from '@frontend/amp/components/elements/Text';
 const makeFallback = (html: string): string | null => {
     const { window } = new JSDOM(html);
     const blockquotes = window.document.getElementsByTagName('blockquote');
-    if (blockquotes.length !== 1) return null;
+
+    if (blockquotes.length !== 1) {
+        return null;
+    }
+
     const q = blockquotes[0];
     return q.innerHTML;
 };

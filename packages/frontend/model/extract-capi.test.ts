@@ -284,31 +284,6 @@ describe('extract-capi', () => {
         expect(clean).toHaveBeenCalledWith(testMain);
     });
 
-    it('returns body if bodyHtml available', () => {
-        const testBody = '<p>Waldo Jeffers had reached his limit.</p>';
-
-        testData.page.content.blocks.body = [
-            {
-                bodyHtml: testBody,
-            },
-            {
-                bodyHtml: testBody,
-            },
-        ];
-
-        const { body } = extract(testData);
-
-        expect(body).toBe([testBody, testBody].join(''));
-    });
-
-    it('throws error if body missing', () => {
-        testData.page.content.blocks.body = null;
-
-        expect(() => {
-            extract(testData);
-        }).toThrow();
-    });
-
     it('returns author.byline if byline available', () => {
         const testAuthor = 'Waldo Jeffers';
 

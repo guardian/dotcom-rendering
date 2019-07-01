@@ -6,10 +6,11 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 import Star from '@guardian/pasteup/icons/star.svg';
-import { Byline } from '@frontend/amp/components/Byline';
+import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
-import { TopMetaExtras } from './TopMetaExtras';
-import { Standfirst } from './Standfirst';
+import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
+import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
+import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 
 const headerStyle = css`
     ${headline(5)};
@@ -79,13 +80,24 @@ const Headline: React.FC<{
     );
 };
 
-export const TopMetaNews: React.FC<{
-    articleData: ArticleModel;
-}> = ({ articleData }) => (
+export const TopMetaNews: React.FC<{ articleData: ArticleModel }> = ({
+    articleData,
+}) => (
     <header>
         {articleData.mainMediaElements.map((element, i) => (
             <MainMedia key={i} element={element} pillar={articleData.pillar} />
         ))}
+
+        {!articleData.isImmersive && (
+            <SeriesLink
+                baseURL={articleData.guardianBaseURL}
+                tags={articleData.tags}
+                pillar={articleData.pillar}
+                fallbackToSection={true}
+                sectionLabel={articleData.sectionLabel}
+                sectionUrl={articleData.sectionUrl}
+            />
+        )}
 
         <Headline
             headlineText={articleData.headline}

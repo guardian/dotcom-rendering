@@ -154,7 +154,9 @@ export const extract = (data: {}): CAPIType => {
     // Possible values for the editionId: "UK", "US", "AU", "INT"
     const editionId = getEditionValue(getString(data, 'page.editionId', ''));
 
-    if (editionId === undefined) throw new Error('edition id is undefined');
+    if (editionId === undefined) {
+        throw new Error('edition id is undefined');
+    }
 
     return {
         webPublicationDate,
@@ -177,10 +179,6 @@ export const extract = (data: {}): CAPIType => {
             clean,
         ),
         main: apply(getString(data, 'page.content.main', ''), clean),
-        body: getArray<any>(data, 'page.content.blocks.body')
-            .map(block => block.bodyHtml)
-            .filter(Boolean)
-            .join(''),
         author: {
             byline: getString(data, 'page.content.byline', ''),
             twitterHandle: leadContributor

@@ -14,6 +14,7 @@ module.exports = {
                 },
             },
         ],
+        'babel-plugin-px-to-rem',
     ],
     presets: [
         '@babel/preset-typescript',

@@ -2,7 +2,7 @@ import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { TopMetaLiveblog } from '@frontend/amp/components/TopMetaLiveblog';
+import { TopMetaLiveblog } from '@frontend/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { palette } from '@guardian/pasteup/palette';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
@@ -63,6 +63,10 @@ const updateButtonStyle = css`
     }
 `;
 
+// Note, it is possible for liveblog updates to lack styling if a style change
+// to any block content is deployed between a user loading a live blog and the
+// updates happening. This happens because we don't include new styles on block
+// updates, but only on initial page load.
 export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;

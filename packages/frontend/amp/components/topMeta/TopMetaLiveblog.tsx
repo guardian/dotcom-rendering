@@ -5,9 +5,9 @@ import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
-import { Byline } from '@frontend/amp/components/Byline';
+import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
-import { TopMetaExtras } from '@frontend/amp/components/TopMetaExtras';
+import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { ListStyle } from '@frontend/amp/components/elements/Text';
 
 const headerStyle = (pillar: Pillar) => css`

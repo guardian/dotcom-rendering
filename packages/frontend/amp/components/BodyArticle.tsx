@@ -3,7 +3,7 @@ import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
-import { TopMeta } from '@frontend/amp/components/TopMeta';
+import { TopMeta } from '@frontend/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
 import { pillarPalette } from '@frontend/lib/pillars';

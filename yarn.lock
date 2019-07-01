@@ -3399,6 +3399,10 @@ babel-plugin-preval@^3.0.0:
     babel-plugin-macros "^2.2.2"
     require-from-string "^2.0.2"
 
+"babel-plugin-px-to-rem@https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0":
+  version "0.1.0"
+  resolved "https://github.com/guardian/babel-plugin-px-to-rem#548c5f5bfdfdfc317b86103d27565868bd7d381c"
+
 babel-plugin-react-docgen@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-docgen/-/babel-plugin-react-docgen-2.0.2.tgz#3307e27414c370365710576b7fadbcaf8984d862"
