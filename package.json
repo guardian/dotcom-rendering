@@ -11,6 +11,11 @@
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js"
     },
+    "husky": {
+        "hooks": {
+            "pre-push": "make validate"
+        }
+    },
     "bundlesize": [
         {
             "path": "./dist/frontend.article.*.js",
@@ -48,6 +53,7 @@
         "bundlesize": "^0.17.0",
         "eslint": "^5.16.0",
         "friendly-errors-webpack-plugin": "^1.7.0",
+        "husky": "^2.3.0",
         "jest": "^23.6.0",
         "jest-dom": "^2.1.0",
         "jest-teamcity-reporter": "^0.9.0",
