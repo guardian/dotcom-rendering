@@ -35,3 +35,9 @@ packages/pasteup/tmp
 
 # Test coverage reports
 coverage
+
+# .git-hooks
+# Ignore auto generate husky hooks
+scripts/git-hooks/*
+!scripts/git-hooks/post-merge
+!scripts/git-hooks/install.js
