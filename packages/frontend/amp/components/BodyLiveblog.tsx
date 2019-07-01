@@ -63,6 +63,10 @@ const updateButtonStyle = css`
     }
 `;
 
+// Note, it is possible for liveblog updates to lack styling if a style change
+// to any block content is deployed between a user loading a live blog and the
+// updates happening. This happens because we don't include new styles on block
+// updates, but only on initial page load.
 export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
