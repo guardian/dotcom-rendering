@@ -162,6 +162,9 @@ interface CAPIType {
     shouldHideAds: boolean;
     webURL: string;
 
+    linkedData: object[];
+    config: ConfigType;
+
     // AMP specific (for now)
     guardianBaseURL: string;
     contentType: string;

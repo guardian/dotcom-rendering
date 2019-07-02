@@ -14,6 +14,7 @@ import { string as curly } from 'curlyquotes';
 import { getSharingUrls } from './sharing-urls';
 import { findPillar } from './find-pillar';
 import { findBySubsection } from './article-sections';
+import { extract as extractConfig } from '@frontend/model/extract-config';
 
 // tslint:disable:prefer-array-literal
 
@@ -219,5 +220,8 @@ export const extract = (data: {}): CAPIType => {
             stripHTML,
         ),
         nielsenAPIID: getNielsenAPIID(sectionName),
+
+        config: extractConfig(data),
+        linkedData: getArray(data, 'page.meta.linkedData', []),
     };
 };

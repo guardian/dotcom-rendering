@@ -405,4 +405,76 @@ export const CAPI: CAPIType = {
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',
     keyEvents: [],
+    linkedData: [
+        {
+            '@type': 'NewsArticle',
+            '@context': 'https://schema.org',
+            '@id':
+                'https://amp.theguardian.commoney/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+            publisher: {
+                '@type': 'Organization',
+                '@context': 'https://schema.org',
+                '@id': 'https://www.theguardian.com#publisher',
+                name: 'The Guardian',
+                url: 'https://www.theguardian.com/',
+                logo: {
+                    '@type': 'ImageObject',
+                    url:
+                        'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+                    width: 190,
+                    height: 60,
+                },
+                sameAs: [
+                    'https://www.facebook.com/theguardian',
+                    'https://twitter.com/guardian',
+                    'https://www.youtube.com/user/TheGuardian',
+                ],
+            },
+            isAccessibleForFree: true,
+            isPartOf: {
+                '@type': ['CreativeWork', 'Product'],
+                name: 'The Guardian',
+                productID: 'theguardian.com:basic',
+            },
+            image: [
+                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=1200&height=1200&quality=85&auto=format&fit=max&s=81c451031902977f730a5ce8889745f3',
+                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=1200&height=900&quality=85&auto=format&fit=max&s=4bc0fff8555ac350f33d81703e0ac7f4',
+                'https://i.guim.co.uk/img/media/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/master/5015.jpg?width=1200&quality=85&auto=format&fit=max&s=c52c6ee4e127be64398a289551edcbfa',
+            ],
+            author: [
+                {
+                    '@type': 'Person',
+                    name: 'Rob Davies',
+                    sameAs: 'https://www.theguardian.com/profile/rob-davies',
+                },
+            ],
+            datePublished: '2017-03-11T06:15:05.000+11:00',
+            headline:
+                "Ticket touts face unlimited fines for using 'bots' to buy in bulk",
+            dateModified: '2017-11-28T14:55:02.000+11:00',
+            mainEntityOfPage:
+                'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+        },
+        {
+            '@type': 'WebPage',
+            '@context': 'https://schema.org',
+            '@id':
+                'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+            potentialAction: {
+                '@type': 'ViewAction',
+                target:
+                    'android-app://com.guardian/https/www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+            },
+        },
+    ],
+    config: {
+        ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+        sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+        sentryHost: 'app.getsentry.com/35463',
+        isDev: process.env.NODE_ENV === 'development',
+        switches: {},
+        dfpAccountId: '',
+        commercialUrl:
+            'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
+    },
 };

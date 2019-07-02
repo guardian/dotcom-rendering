@@ -38,4 +38,5 @@ module.exports = {
             plugins: [['emotion', { sourceMap: true }]],
         },
     },
+    ignore: ['**/*.json'],
 };

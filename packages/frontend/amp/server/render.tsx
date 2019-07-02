@@ -5,28 +5,24 @@ import { Article } from '@frontend/amp/pages/Article';
 import { extractScripts } from '@frontend/amp/lib/scripts';
 import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
-import { extract as extractConfig } from '@frontend/model/extract-config';
-import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { validateRequestData } from '@frontend/model/validate';
-import { logger } from '@frontend/app/logging';
+import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
 
 export const render = (
     { body, path }: express.Request,
     res: express.Response,
 ) => {
     try {
-        validateRequestData(body, path);
-    } catch (err) {
-        logger.warn(err);
-    }
+        // TODO remove when migrated to v2
+        const CAPI =
+            body.version === '2' ? validateV2(body) : extractCAPI(body);
 
-    try {
-        const CAPI = extractCAPI(body);
-        const linkedData = extractLinkedData(body);
+        const linkedData = CAPI.linkedData;
 
-        const config = extractConfig(body);
+        const config = CAPI.config;
         const blockElements = CAPI.blocks.map(block => block.elements);
+
+        // This is simply to flatten the elements
         const elements = ([] as CAPIElement[]).concat(...blockElements);
 
         const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
@@ -66,6 +62,6 @@ export const render = (
 
         res.status(200).send(resp);
     } catch (e) {
-        res.status(500).send(`<pre>${e.stack}</pre>`);
+        res.status(400).send(`<pre>${e.message}</pre>`);
     }
 };

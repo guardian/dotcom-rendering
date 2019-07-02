@@ -11,7 +11,7 @@ const program = TJS.getProgramFromFiles([
 const schema = TJS.generateSchema(program, 'CAPIType');
 
 fs.writeFile(
-    root + '/packages/frontend/model/json-schema.json',
+    root + '/packages/frontend/modelV2/json-schema.json',
     JSON.stringify(schema, null, 4),
     'utf8',
     function(err) {
