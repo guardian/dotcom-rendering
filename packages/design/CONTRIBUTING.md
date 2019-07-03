@@ -4,6 +4,17 @@ Paper is our design system and the code for its own documentation. We use `Gatsb
 
 All the content is inside `src/content` As we use `markdown` files you are welcome and encouraged to submit pull requests from Github itself to add content to the site.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- Automatically created with yarn run createtoc and on push hook -->
+
+- [Running the docs](#running-the-docs)
+- [Technical decision record](#technical-decision-record)
+  - [Component sharing](#component-sharing)
+  - [CSS Modules](#css-modules)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Running the docs
 
 If you want to run the docs locally, clone this repo. Then inside the `packages/design` directory, run `yarn develop` to run gatsby locally.
