@@ -4,7 +4,7 @@ const editionId: Edition = 'UK';
 export const CAPI: CAPIType = {
     pillar,
     editionId,
-    webPublicationDate: new Date('November 02, 2018 09:45:30'),
+    webPublicationDate: '2018-11-02T09:45:30.000Z',
     webPublicationDateDisplay: 'Fri 02 Mar 2018 09.45 GMT',
     tags: [
         {

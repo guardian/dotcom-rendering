@@ -141,12 +141,17 @@ interface CAPIType {
     blocks: Block[];
     pagination?: Pagination;
     author: AuthorType;
-    webPublicationDate: Date;
+
+    /**
+     * @TJS-format date-time
+     */
+    webPublicationDate: string;
+
     webPublicationDateDisplay: string;
     editionLongForm: string;
     editionId: Edition;
     pageId: string;
-    ageWarning?: string;
+    ageWarning?: string; // TODO remove as we should derive this at point of use
     sharingUrls: {
         [K in SharePlatform]?: {
             url: string;

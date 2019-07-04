@@ -8,7 +8,8 @@ const program = TJS.getProgramFromFiles([
     resolve(root + '/packages/frontend/index.d.ts'),
 ]);
 
-const schema = TJS.generateSchema(program, 'CAPIType');
+const settings = { rejectDateType: true, required: true };
+const schema = TJS.generateSchema(program, 'CAPIType', settings);
 
 fs.writeFile(
     root + '/packages/frontend/modelV2/json-schema.json',

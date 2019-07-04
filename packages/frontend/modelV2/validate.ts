@@ -9,6 +9,7 @@ const options = {
 };
 
 const ajv = new Ajv(options);
+
 const validate = ajv.compile(schema);
 
 export const validateAsCAPIType = (data: any): CAPIType => {

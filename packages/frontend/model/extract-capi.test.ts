@@ -46,10 +46,7 @@ describe('extract-capi', () => {
         testData.page.webPublicationDate = 1489173305000;
 
         const { webPublicationDate } = extract(testData);
-
-        expect(webPublicationDate.getTime()).toBe(
-            new Date(1489173305000).getTime(),
-        );
+        expect(webPublicationDate).toBe('2017-03-10T19:15:05.000Z');
     });
 
     it('throws error if webPublicationDate missing', () => {

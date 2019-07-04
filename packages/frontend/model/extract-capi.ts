@@ -137,12 +137,13 @@ const getNielsenAPIID = (subsection: string): string => {
 // didn't have to do the transforms/lookups below. (While preserving the
 // validation on types.)
 export const extract = (data: {}): CAPIType => {
-    const webPublicationDate = new Date(
-        getNumber(data, 'page.webPublicationDate'),
-    );
     const tags = getTags(data);
     const isImmersive = getBoolean(data, 'page.meta.isImmersive', false);
     const sectionName = getString(data, 'page.section', '');
+
+    const webPublicationDate = new Date(
+        getNumber(data, 'page.webPublicationDate'),
+    );
 
     const leadContributor: TagType = tags.filter(
         tag => tag.type === 'Contributor',
@@ -160,12 +161,12 @@ export const extract = (data: {}): CAPIType => {
     }
 
     return {
-        webPublicationDate,
         tags,
         sectionName,
         editionLongForm,
         editionId,
         isImmersive,
+        webPublicationDate: webPublicationDate.toISOString(),
         webPublicationDateDisplay: getNonEmptyString(
             data,
             'page.webPublicationDateDisplay',
