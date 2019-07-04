@@ -130,6 +130,8 @@ interface Pagination {
     older?: string;
 }
 
+// WARNING: run `gen-schema` task if changing this to update the associated JSON
+// schema definition.
 interface CAPIType {
     headline: string;
     standfirst: string;
