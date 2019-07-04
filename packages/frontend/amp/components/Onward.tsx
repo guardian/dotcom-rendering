@@ -147,10 +147,10 @@ export const Onward: React.FC<{
     );
 
     // Outbrain is compliant if it appears in the top 2 containers
-    const outbrainIsCompliant = storyPackage.concat(series).length > 1;
+    const outbrainIsNotCompliant = storyPackage.concat(series).length > 1;
     const outbrain = shouldHideAds
         ? []
-        : [outbrainContainer(webURL, outbrainIsCompliant)];
+        : [outbrainContainer(webURL, !outbrainIsNotCompliant)];
 
     // Note, if order changes, you may need to recalculate outbrain compliance
     const containers = storyPackage.concat(
