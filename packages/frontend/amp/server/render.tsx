@@ -14,7 +14,7 @@ export const render = (
 ) => {
     try {
         // TODO remove when migrated to v2
-        const CAPI = body.version === 2 ? validateV2(body) : extractCAPI(body);
+        const CAPI = body.version === 3 ? validateV2(body) : extractCAPI(body);
 
         const linkedData = CAPI.linkedData;
 
