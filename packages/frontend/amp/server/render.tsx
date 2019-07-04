@@ -15,9 +15,7 @@ export const render = (
     try {
         // TODO remove when migrated to v2
         const CAPI = body.version === 3 ? validateV2(body) : extractCAPI(body);
-
         const linkedData = CAPI.linkedData;
-
         const config = CAPI.config;
         const blockElements = CAPI.blocks.map(block => block.elements);
 
@@ -61,6 +59,11 @@ export const render = (
 
         res.status(200).send(resp);
     } catch (e) {
-        res.status(400).send(`<pre>${e.message}</pre>`);
+        // a validation error
+        if (e instanceof TypeError) {
+            res.status(400).send(`<pre>${e.message}</pre>`);
+        } else {
+            res.status(500).send(`<pre>${e.message}</pre>`);
+        }
     }
 };
