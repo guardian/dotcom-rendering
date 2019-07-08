@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@guardian/guui';
+import { Container } from '@frontend/web/components/Container';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';

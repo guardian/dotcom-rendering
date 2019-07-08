@@ -1,6 +1,6 @@
 import React from 'react';
 import { getIdFromUrl } from '@frontend/model/validators';
-import { Caption } from '@guardian/guui/components/Caption/Caption';
+import { Caption } from '@frontend/amp/components/Caption';
 
 export const VideoVimeo: React.FC<{
     element: VideoVimeo;

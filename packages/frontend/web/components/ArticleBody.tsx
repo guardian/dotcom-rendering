@@ -15,7 +15,7 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { clearFix, screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline, textSans, body } from '@guardian/pasteup/typography';
-import { Byline } from '@guardian/guui/components/Byline/Byline';
+import { Byline } from '@frontend/web/components/Byline';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 import { ShareCount } from './ShareCount';

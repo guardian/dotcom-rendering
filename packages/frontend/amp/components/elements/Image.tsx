@@ -1,20 +1,11 @@
 import React from 'react';
-import { textSans } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
 import { css } from 'emotion';
-import { pillarPalette } from '@frontend/lib/pillars';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
-import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
+import { Caption } from '@frontend/amp/components/Caption';
 
 const figureStyle = css`
     margin-top: 16px;
     margin-bottom: 8px;
-`;
-const captionStyle = css`
-    padding-top: 8px;
-    ${textSans(1)};
-    word-wrap: break-word;
-    color: ${palette.neutral[46]};
 `;
 
 export const Image: React.FC<{
@@ -27,10 +18,13 @@ export const Image: React.FC<{
         element.media.allImages[0],
         image.width,
     );
-    const iconStyle = css`
-        fill: ${pillarPalette[pillar].main};
-        padding-right: 3px;
-    `;
+
+    const captionText = element.displayCredit
+        ? element.data.caption + element.data.credit
+        : element.data.caption || '';
+
+    const shouldDisplayCaption =
+        element.data.caption || (element.data.credit && element.displayCredit);
 
     if (!image) {
         return null;
@@ -46,23 +40,12 @@ export const Image: React.FC<{
                 width={image.width.toString()}
                 layout="responsive"
             />
-            {(element.data.caption ||
-                (element.data.credit && element.displayCredit)) && (
-                <figcaption className={captionStyle}>
-                    <span className={iconStyle}>
-                        <TriangleIcon />
-                    </span>
-                    {/* TODO - Move caption handling to use https://github.com/guardian/dotcom-rendering/blob/master/packages/guui/components/Caption/Caption.tsx */}
-                    <span
-                        // tslint:disable-line:react-no-dangerous-html
-                        dangerouslySetInnerHTML={{
-                            __html: element.data.caption || '',
-                        }}
-                        key={'caption'}
-                    />
-
-                    {element.displayCredit && element.data.credit}
-                </figcaption>
+            {shouldDisplayCaption && (
+                <Caption
+                    captionText={captionText}
+                    pillar={pillar}
+                    dirtyHtml={true}
+                />
             )}
         </figure>
     );

@@ -10,7 +10,7 @@ import {
     phablet,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { BigNumber } from '@guardian/guui';
+import { BigNumber } from '@frontend/web/components/BigNumber/BigNumber';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
 import { reportError } from '@frontend/web/browser/reportError';
 

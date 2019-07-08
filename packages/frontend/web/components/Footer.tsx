@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/typography';
 
-import { Container } from '@guardian/guui';
+import { Container } from '@frontend/web/components/Container';
 import { palette } from '@guardian/pasteup/palette';
 import {
     footerLinks,

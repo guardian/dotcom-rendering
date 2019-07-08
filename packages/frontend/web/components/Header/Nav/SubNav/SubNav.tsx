@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { css } from 'emotion';
 
-import { Container } from '@guardian/guui';
+import { Container } from '@frontend/web/components/Container';
 import { palette } from '@guardian/pasteup/palette';
 import { Inner } from './Inner';
 
