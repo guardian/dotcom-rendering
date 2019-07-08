@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans, body } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import CommentIcon from '@guardian/pasteup/icons/comment.svg';
@@ -26,16 +26,16 @@ const linkStyle = (pillar: Pillar) => css`
     padding-left: 5px;
     padding-right: 6px;
     text-decoration: none;
-    color: ${pillarPalette[pillar].dark};
-    ${textSans(4)};
+    color: ${pillarPalette[pillar].main};
+    ${textSans(3)};
     :after {
         content: '/';
-        ${textSans(5)};
+        ${textSans(3)};
         position: absolute;
         pointer-events: none;
         top: 0;
         right: -3px;
-        color: ${palette.neutral[46]};
+        color: ${palette.neutral[86]};
     }
 `;
 
@@ -61,16 +61,16 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     padding-left: 5px;
     padding-right: 6px;
     text-decoration: none;
-    color: ${pillarPalette[pillar].dark};
-    ${textSans(5)};
+    color: ${pillarPalette[pillar].main};
+    ${body(3)};
     :after {
         content: '/';
-        ${textSans(8)};
+        ${body(3)};
         position: absolute;
         pointer-events: none;
         top: 0;
         right: -3px;
-        color: ${palette.neutral[46]};
+        color: ${palette.neutral[86]};
     }
 `;
 
