@@ -123,6 +123,8 @@ check-env: # private
 clear: # private
 	@clear
 
+gen-schema:
+	@node scripts/json-schema/gen-schema.js
 
 # packages #########################################
 

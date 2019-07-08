@@ -130,6 +130,8 @@ interface Pagination {
     older?: string;
 }
 
+// WARNING: run `gen-schema` task if changing this to update the associated JSON
+// schema definition.
 interface CAPIType {
     headline: string;
     standfirst: string;
@@ -139,12 +141,17 @@ interface CAPIType {
     blocks: Block[];
     pagination?: Pagination;
     author: AuthorType;
-    webPublicationDate: Date;
+
+    /**
+     * @TJS-format date-time
+     */
+    webPublicationDate: string;
+
     webPublicationDateDisplay: string;
     editionLongForm: string;
     editionId: Edition;
     pageId: string;
-    ageWarning?: string;
+    ageWarning?: string; // TODO remove as we should derive this at point of use
     sharingUrls: {
         [K in SharePlatform]?: {
             url: string;
@@ -161,6 +168,9 @@ interface CAPIType {
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
     webURL: string;
+
+    linkedData: object[];
+    config: ConfigType;
 
     // AMP specific (for now)
     guardianBaseURL: string;

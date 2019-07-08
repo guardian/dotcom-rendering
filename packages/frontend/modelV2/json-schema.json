@@ -1,0 +1,1582 @@
+{
+    "type": "object",
+    "properties": {
+        "headline": {
+            "type": "string"
+        },
+        "standfirst": {
+            "type": "string"
+        },
+        "mainMediaElements": {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/TextBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/SubheadingBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/RichLinkBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/ImageBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/YoutubeBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/VideoYoutube"
+                    },
+                    {
+                        "$ref": "#/definitions/VideoVimeo"
+                    },
+                    {
+                        "$ref": "#/definitions/VideoFacebook"
+                    },
+                    {
+                        "$ref": "#/definitions/VideoGuardian"
+                    },
+                    {
+                        "$ref": "#/definitions/InstagramBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/TweetBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/CommentBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/SoundcloudBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/EmbedBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/DisclaimerBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/PullquoteBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/QABlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/GuideBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/ProfileBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/TimelineBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/InteractiveMarkupBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/InteractiveUrlElement"
+                    },
+                    {
+                        "$ref": "#/definitions/MapBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/AudioAtomElement"
+                    }
+                ]
+            }
+        },
+        "main": {
+            "type": "string"
+        },
+        "keyEvents": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Block"
+            }
+        },
+        "blocks": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Block"
+            }
+        },
+        "pagination": {
+            "$ref": "#/definitions/Pagination"
+        },
+        "author": {
+            "$ref": "#/definitions/AuthorType"
+        },
+        "webPublicationDate": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "webPublicationDateDisplay": {
+            "type": "string"
+        },
+        "editionLongForm": {
+            "type": "string"
+        },
+        "editionId": {
+            "$ref": "#/definitions/Edition"
+        },
+        "pageId": {
+            "type": "string"
+        },
+        "ageWarning": {
+            "type": "string"
+        },
+        "sharingUrls": {
+            "$ref": "#/definitions/{facebook?:{url:string;userMessage:string;};twitter?:{url:string;userMessage:string;};email?:{url:string;userMessage:string;};whatsApp?:{url:string;userMessage:string;};pinterest?:{url:string;userMessage:string;};linkedIn?:{url:string;userMessage:string;};messenger?:{url:string;userMessage:string;};}"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/TagType"
+            }
+        },
+        "pillar": {
+            "$ref": "#/definitions/Pillar"
+        },
+        "isImmersive": {
+            "type": "boolean"
+        },
+        "sectionLabel": {
+            "type": "string"
+        },
+        "sectionUrl": {
+            "type": "string"
+        },
+        "sectionName": {
+            "type": "string"
+        },
+        "subMetaSectionLinks": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/SimpleLinkType"
+            }
+        },
+        "subMetaKeywordLinks": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/SimpleLinkType"
+            }
+        },
+        "shouldHideAds": {
+            "type": "boolean"
+        },
+        "webURL": {
+            "type": "string"
+        },
+        "linkedData": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+            }
+        },
+        "config": {
+            "$ref": "#/definitions/ConfigType"
+        },
+        "guardianBaseURL": {
+            "type": "string"
+        },
+        "contentType": {
+            "type": "string"
+        },
+        "hasRelated": {
+            "type": "boolean"
+        },
+        "hasStoryPackage": {
+            "type": "boolean"
+        },
+        "beaconURL": {
+            "type": "string"
+        },
+        "isCommentable": {
+            "type": "boolean"
+        },
+        "commercialProperties": {
+            "$ref": "#/definitions/CommercialProperties"
+        },
+        "starRating": {
+            "type": "number"
+        },
+        "trailText": {
+            "type": "string"
+        },
+        "nielsenAPIID": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "author",
+        "beaconURL",
+        "blocks",
+        "commercialProperties",
+        "config",
+        "contentType",
+        "editionId",
+        "editionLongForm",
+        "guardianBaseURL",
+        "hasRelated",
+        "hasStoryPackage",
+        "headline",
+        "isCommentable",
+        "isImmersive",
+        "keyEvents",
+        "linkedData",
+        "main",
+        "mainMediaElements",
+        "nielsenAPIID",
+        "pageId",
+        "pillar",
+        "sectionLabel",
+        "sectionUrl",
+        "sharingUrls",
+        "shouldHideAds",
+        "standfirst",
+        "subMetaKeywordLinks",
+        "subMetaSectionLinks",
+        "tags",
+        "trailText",
+        "webPublicationDate",
+        "webPublicationDateDisplay",
+        "webURL"
+    ],
+    "definitions": {
+        "TextBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.TextBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
+            ]
+        },
+        "SubheadingBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.SubheadingBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
+            ]
+        },
+        "RichLinkBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.RichLinkBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "prefix": {
+                    "type": "string"
+                },
+                "sponsorship": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "prefix",
+                "sponsorship",
+                "text",
+                "url"
+            ]
+        },
+        "ImageBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.ImageBlockElement"
+                    ]
+                },
+                "media": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "alt": {
+                            "type": "string"
+                        },
+                        "credit": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        },
+                        "copyright": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "alt",
+                        "credit"
+                    ]
+                },
+                "imageSources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageSource"
+                    }
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "role": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "data",
+                "displayCredit",
+                "imageSources",
+                "media",
+                "role"
+            ]
+        },
+        "Image": {
+            "type": "object",
+            "properties": {
+                "index": {
+                    "type": "number"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "isMaster": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
+                },
+                "mediaType": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fields",
+                "index",
+                "mediaType",
+                "mimeType",
+                "url"
+            ]
+        },
+        "ImageSource": {
+            "type": "object",
+            "properties": {
+                "weighting": {
+                    "$ref": "#/definitions/Weighting"
+                },
+                "srcSet": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SrcSet"
+                    }
+                }
+            },
+            "required": [
+                "srcSet",
+                "weighting"
+            ]
+        },
+        "Weighting": {
+            "enum": [
+                "halfwidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
+        },
+        "SrcSet": {
+            "type": "object",
+            "properties": {
+                "src": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "src",
+                "width"
+            ]
+        },
+        "YoutubeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.YoutubeBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "assetId": {
+                    "type": "string"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "mediaTitle": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "assetId",
+                "channelId",
+                "id",
+                "mediaTitle"
+            ]
+        },
+        "VideoYoutube": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VideoYoutubeBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "caption",
+                "height",
+                "url",
+                "width"
+            ]
+        },
+        "VideoVimeo": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VideoVimeoBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "caption",
+                "height",
+                "url",
+                "width"
+            ]
+        },
+        "VideoFacebook": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VideoFacebookBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "caption",
+                "height",
+                "url",
+                "width"
+            ]
+        },
+        "VideoGuardian": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.GuVideoBlockElement"
+                    ]
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VideoAssets"
+                    }
+                },
+                "caption": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "assets",
+                "caption"
+            ]
+        },
+        "VideoAssets": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "mimeType",
+                "url"
+            ]
+        },
+        "InstagramBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.InstagramBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "hasCaption": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "hasCaption",
+                "html",
+                "url"
+            ]
+        },
+        "TweetBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.TweetBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "hasMedia": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "hasMedia",
+                "html",
+                "id",
+                "url"
+            ]
+        },
+        "CommentBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.CommentBlockElement"
+                    ]
+                },
+                "body": {
+                    "type": "string"
+                },
+                "avatarURL": {
+                    "type": "string"
+                },
+                "profileURL": {
+                    "type": "string"
+                },
+                "profileName": {
+                    "type": "string"
+                },
+                "permalink": {
+                    "type": "string"
+                },
+                "dateTime": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "avatarURL",
+                "body",
+                "dateTime",
+                "permalink",
+                "profileName",
+                "profileURL"
+            ]
+        },
+        "SoundcloudBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.SoundcloudBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "isTrack": {
+                    "type": "boolean"
+                },
+                "isMandatory": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "html",
+                "id",
+                "isMandatory",
+                "isTrack"
+            ]
+        },
+        "EmbedBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.EmbedBlockElement"
+                    ]
+                },
+                "safe": {
+                    "type": "boolean"
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "isMandatory": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "html",
+                "isMandatory"
+            ]
+        },
+        "DisclaimerBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.DisclaimerBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
+            ]
+        },
+        "PullquoteBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.PullquoteBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html",
+                "role"
+            ]
+        },
+        "QABlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.QABlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "credit",
+                "html",
+                "id",
+                "title"
+            ]
+        },
+        "GuideBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.GuideBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "credit",
+                "html",
+                "id",
+                "label",
+                "title"
+            ]
+        },
+        "ProfileBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.ProfileBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "credit",
+                "html",
+                "id",
+                "label",
+                "title"
+            ]
+        },
+        "TimelineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.TimelineBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TimelineEvent"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "events",
+                "id",
+                "title"
+            ]
+        },
+        "TimelineEvent": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                },
+                "toDate": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "date",
+                "title"
+            ]
+        },
+        "InteractiveMarkupBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.InteractiveMarkupBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "css": {
+                    "type": "string"
+                },
+                "js": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "id"
+            ]
+        },
+        "InteractiveUrlElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.InteractiveUrlBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "url"
+            ]
+        },
+        "MapBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.MapBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "caption",
+                "originalUrl",
+                "source",
+                "title",
+                "url"
+            ]
+        },
+        "AudioAtomElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.AudioAtomBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "kicker": {
+                    "type": "string"
+                },
+                "trackUrl": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "coverUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "coverUrl",
+                "duration",
+                "id",
+                "kicker",
+                "trackUrl"
+            ]
+        },
+        "Block": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "elements": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/TextBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/SubheadingBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/RichLinkBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/ImageBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/YoutubeBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/VideoYoutube"
+                            },
+                            {
+                                "$ref": "#/definitions/VideoVimeo"
+                            },
+                            {
+                                "$ref": "#/definitions/VideoFacebook"
+                            },
+                            {
+                                "$ref": "#/definitions/VideoGuardian"
+                            },
+                            {
+                                "$ref": "#/definitions/InstagramBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/TweetBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/CommentBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/SoundcloudBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/EmbedBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/DisclaimerBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/PullquoteBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/QABlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/GuideBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/ProfileBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/TimelineBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/InteractiveMarkupBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/InteractiveUrlElement"
+                            },
+                            {
+                                "$ref": "#/definitions/MapBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/AudioAtomElement"
+                            }
+                        ]
+                    }
+                },
+                "createdOn": {
+                    "type": "number"
+                },
+                "createdOnDisplay": {
+                    "type": "string"
+                },
+                "lastUpdatedDisplay": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "firstPublished": {
+                    "type": "number"
+                },
+                "firstPublishedDisplay": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "elements",
+                "id"
+            ]
+        },
+        "Pagination": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "number"
+                },
+                "totalPages": {
+                    "type": "number"
+                },
+                "newest": {
+                    "type": "string"
+                },
+                "newer": {
+                    "type": "string"
+                },
+                "oldest": {
+                    "type": "string"
+                },
+                "older": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "currentPage",
+                "totalPages"
+            ]
+        },
+        "AuthorType": {
+            "type": "object",
+            "properties": {
+                "byline": {
+                    "type": "string"
+                },
+                "twitterHandle": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "byline"
+            ]
+        },
+        "Edition": {
+            "enum": [
+                "AU",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
+        },
+        "{facebook?:{url:string;userMessage:string;};twitter?:{url:string;userMessage:string;};email?:{url:string;userMessage:string;};whatsApp?:{url:string;userMessage:string;};pinterest?:{url:string;userMessage:string;};linkedIn?:{url:string;userMessage:string;};messenger?:{url:string;userMessage:string;};}": {
+            "type": "object",
+            "properties": {
+                "facebook": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string"
+                        },
+                        "userMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "userMessage"
+                    ]
+                },
+                "twitter": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string"
+                        },
+                        "userMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "userMessage"
+                    ]
+                },
+                "email": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string"
+                        },
+                        "userMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "userMessage"
+                    ]
+                },
+                "whatsApp": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string"
+                        },
+                        "userMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "userMessage"
+                    ]
+                },
+                "pinterest": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string"
+                        },
+                        "userMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "userMessage"
+                    ]
+                },
+                "linkedIn": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string"
+                        },
+                        "userMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "userMessage"
+                    ]
+                },
+                "messenger": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string"
+                        },
+                        "userMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "url",
+                        "userMessage"
+                    ]
+                }
+            }
+        },
+        "TagType": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "twitterHandle": {
+                    "type": "string"
+                },
+                "paidContentType": {
+                    "type": "string"
+                },
+                "bylineImageUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "title",
+                "type"
+            ]
+        },
+        "Pillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
+        },
+        "SimpleLinkType": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "url"
+            ]
+        },
+        "ConfigType": {
+            "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
+            "type": "object",
+            "properties": {
+                "ajaxUrl": {
+                    "type": "string"
+                },
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "sentryHost": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "switches": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "boolean"
+                    }
+                },
+                "dfpAccountId": {
+                    "type": "string"
+                },
+                "commercialUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ajaxUrl",
+                "commercialUrl",
+                "dfpAccountId",
+                "isDev",
+                "sentryHost",
+                "sentryPublicApiKey",
+                "switches"
+            ]
+        },
+        "CommercialProperties": {
+            "type": "object",
+            "properties": {
+                "UK": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "US": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "INT": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "AU": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                }
+            },
+            "required": [
+                "AU",
+                "INT",
+                "UK",
+                "US"
+            ]
+        },
+        "EditionCommercialProperties": {
+            "type": "object",
+            "properties": {
+                "adTargeting": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdTargetParam"
+                    }
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "adTargeting"
+            ]
+        },
+        "AdTargetParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "Branding": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "paid-content"
+                    ]
+                },
+                "sponsorName": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                },
+                "aboutThisLink": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aboutThisLink",
+                "logo",
+                "sponsorName",
+                "type"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
