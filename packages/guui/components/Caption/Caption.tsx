@@ -1,7 +1,7 @@
 import React from 'react';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { css, cx } from 'emotion';
+import { css, cx, injectGlobal } from 'emotion';
 import { pillarPalette } from '@guardian/frontend-rendering/lib/pillars';
 import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
 
@@ -36,6 +36,12 @@ export const Caption: React.FC<{
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
     `;
+
+    injectGlobal`
+    figcaption a {
+        color: ${pillarPalette[pillar].main};
+    }`;
+
     const getCaptionHtml = () => {
         if (dirtyHtml) {
             return (
