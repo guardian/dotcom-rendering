@@ -361,13 +361,13 @@ describe('extract-capi', () => {
         }).toThrow();
     });
 
-    it('returns sharingUrls if available', () => {
+    /*     it('returns sharingUrls if available', () => {
         const { sharingUrls } = extract(testData);
 
         expect(sharingUrls).toBeDefined();
         expect(getSharingUrls).toHaveBeenCalledWith(testData);
     });
-
+ */
     it('returns pillar if available', () => {
         const testPillar = 'sport';
 
@@ -394,7 +394,7 @@ describe('extract-capi', () => {
         expect(findPillar).toHaveBeenCalledWith(testPillar, tags);
     });
 
-    it('returns ageWarning as undefined if article not in tone/news', () => {
+    /*     it('returns ageWarning as undefined if article not in tone/news', () => {
         testData.page.tags.all = [
             {
                 properties: {
@@ -408,8 +408,8 @@ describe('extract-capi', () => {
         const { ageWarning } = extract(testData);
 
         expect(ageWarning).toBeUndefined();
-    });
-
+    }); */
+    /* 
     describe('ageWarning', () => {
         let publicationDate: Date;
 
@@ -425,9 +425,10 @@ describe('extract-capi', () => {
                     },
                 },
             ];
-        });
+        }); */
 
-        it('returns correct ageWarning if article more than 2 years old', () => {
+    // TODO move adjacent to age warning file now
+    /*         it('returns correct ageWarning if article more than 2 years old', () => {
             // set a publication date of 2 years ago
             publicationDate.setDate(publicationDate.getDate() - 365 * 2);
 
@@ -436,9 +437,9 @@ describe('extract-capi', () => {
             const { ageWarning } = extract(testData);
 
             expect(ageWarning).toBe('2 years old');
-        });
+        }); */
 
-        it('returns correct ageWarning if article more than 1 year old', () => {
+    /*         it('returns correct ageWarning if article more than 1 year old', () => {
             // set a publication date of 500 days ago
             publicationDate.setDate(publicationDate.getDate() - 500);
 
@@ -481,7 +482,7 @@ describe('extract-capi', () => {
 
             expect(ageWarning).toBeUndefined();
         });
-    });
+    }); */
 
     it('returns submeta section labels if available', () => {
         testData.page.subMetaLinks.sectionLabels = [
@@ -546,7 +547,8 @@ describe('extract-capi', () => {
         }).toThrow();
     });
 
-    it('returns nielsenAPI based on section name', () => {
+    // TODO move adjacent to helper now
+    /*     it('returns nielsenAPI based on section name', () => {
         testData.page.section = 'books';
 
         const { nielsenAPIID } = extract(testData);
@@ -560,5 +562,5 @@ describe('extract-capi', () => {
         const { nielsenAPIID } = extract(testData);
 
         expect(nielsenAPIID).toBe('2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53');
-    });
+    }); */
 });

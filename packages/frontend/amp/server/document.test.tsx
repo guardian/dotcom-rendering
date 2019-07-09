@@ -31,7 +31,7 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
     const config = extractConfig(data);
-    const nav = extractNAV(data);
+    const nav = extractNAV(data.site.nav);
     const model = extractModel(data);
     const linkedData = extractLinkedData(data);
 

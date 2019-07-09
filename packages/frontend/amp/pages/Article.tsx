@@ -20,20 +20,15 @@ const backgroundColour = css`
 export interface ArticleModel {
     headline: string;
     standfirst: string;
+    webTitle: string;
     mainMediaElements: CAPIElement[];
     keyEvents: Block[]; // liveblog-specific
     pagination?: Pagination;
     blocks: Block[];
     author: AuthorType;
+    webPublicationDate: string;
     webPublicationDateDisplay: string;
     pageId: string;
-    ageWarning?: string;
-    sharingUrls: {
-        [K in SharePlatform]?: {
-            url: string;
-            userMessage: string;
-        }
-    };
     pillar: Pillar;
     sectionLabel?: string;
     sectionUrl?: string;

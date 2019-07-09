@@ -1,5 +1,3 @@
-import { getNonEmptyString } from './validators';
-
 const appendParamsToBaseUrl: (
     baseUrl: string,
     params: {
@@ -14,19 +12,17 @@ const appendParamsToBaseUrl: (
         )}=${encodeURIComponent(params[param])}`;
     }, baseUrl);
 
-export const getSharingUrls: (
-    data: any,
-) => {
+// TODO move to ./lib
+export const getSharingUrls = (
+    pageId: string,
+    title: string,
+): {
     [K in SharePlatform]?: {
         url: string;
         userMessage: string;
     }
-} = data => {
-    const articleUrl = `https://www.theguardian.com/${getNonEmptyString(
-        data,
-        'page.pageId',
-    )}`;
-    const title = getNonEmptyString(data, 'page.webTitle');
+} => {
+    const articleUrl = `https://www.theguardian.com/${pageId}`;
     const platforms: {
         [K in SharePlatform]: {
             userMessage: string;
