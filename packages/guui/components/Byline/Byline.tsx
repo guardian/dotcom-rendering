@@ -69,8 +69,8 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
 const RenderByline: React.FC<{
     bylineText: string;
     contributorTags: TagType[];
-    pillar: Pillar;
-}> = ({ bylineText, contributorTags, pillar }) => {
+    className?: string;
+}> = ({ bylineText, contributorTags, className }) => {
     const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
         (token, i) => {
             const associatedTags = contributorTags.filter(
@@ -81,7 +81,6 @@ const RenderByline: React.FC<{
                     <BylineContributor
                         contributor={token}
                         contributorTagId={associatedTags[0].id}
-                        pillar={pillar}
                         key={i}
                     />
                 );
@@ -90,17 +89,15 @@ const RenderByline: React.FC<{
         },
     );
 
-    return <>{renderedTokens}</>;
+    return <div className={className}>{renderedTokens}</div>;
 };
 
 const BylineContributor: React.FC<{
     contributor: string;
     contributorTagId: string;
-    pillar: Pillar;
-}> = ({ contributor, contributorTagId, pillar }) => (
+}> = ({ contributor, contributorTagId }) => (
     <a
         rel="author"
-        className={cx(pillarColour(pillar), bylineLink)}
         data-link-name="auto tag link"
         href={`//www.theguardian.com/${contributorTagId}`}
     >
@@ -111,18 +108,16 @@ const BylineContributor: React.FC<{
 export const Byline: React.FC<{
     author: AuthorType;
     tags: TagType[];
-    pillar: Pillar;
-}> = ({ author, tags, pillar }) => (
+    className?: string;
+}> = ({ author, tags, className }) => (
     <address aria-label="Contributor info">
-        <div className={cx(pillarColour(pillar), profile)}>
-            <span className={byline}>
-                <RenderByline
-                    bylineText={author.byline}
-                    contributorTags={tags}
-                    pillar={pillar}
-                />
-            </span>
-        </div>
+        <span className={byline}>
+            <RenderByline
+                bylineText={author.byline}
+                contributorTags={tags}
+                className={className}
+            />
+        </span>
         {author.twitterHandle && (
             <div className={twitterHandle}>
                 <TwitterIcon />

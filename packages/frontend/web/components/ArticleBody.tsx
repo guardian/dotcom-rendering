@@ -420,6 +420,20 @@ const subMetaSharingIcons = css`
     }
 `;
 
+const bylineStyle = (pillar: Pillar) => css`
+    ${headline(2)};
+    color: ${pillarPalette[pillar].main};
+    padding-bottom: 8px;
+    font-style: italic;
+
+    a {
+        font-weight: 700;
+        color: ${pillarPalette[pillar].main};
+        text-decoration: none;
+        font-style: normal;
+    }
+`;
+
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     config: ConfigType;
@@ -470,7 +484,7 @@ export const ArticleBody: React.FC<{
                     <Byline
                         author={CAPI.author}
                         tags={CAPI.tags}
-                        pillar={CAPI.pillar}
+                        className={bylineStyle(CAPI.pillar)}
                     />
                     <Dateline
                         dateDisplay={CAPI.webPublicationDateDisplay}
