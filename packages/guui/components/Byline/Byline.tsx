@@ -1,38 +1,9 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { leftCol } from '@guardian/pasteup/breakpoints';
-
-const profile = css`
-    ${headline(2)};
-    font-weight: 700;
-    margin-bottom: 4px;
-`;
-
-const pillarColour = (pillar: Pillar) => css`
-    color: ${palette[pillar].main};
-`;
-
-const byline = css`
-    font-style: italic;
-`;
-
-const bylineLink = css`
-    ${headline(2)};
-    font-style: normal;
-    font-weight: 700;
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
-    }
-
-    ${leftCol} {
-        ${headline(3)};
-        line-height: 28px;
-    }
-`;
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const twitterHandle = css`
     ${textSans(1)};
@@ -55,6 +26,23 @@ const twitterHandle = css`
     }
 `;
 
+const bylineStyle = (pillar: Pillar) => css`
+    ${headline(2)};
+    color: ${pillarPalette[pillar].main};
+    padding-bottom: 8px;
+    font-style: italic;
+
+    a {
+        font-weight: 700;
+        color: ${pillarPalette[pillar].main};
+        text-decoration: none;
+        font-style: normal;
+        :hover {
+            text-decoration: underline;
+        }
+    }
+`;
+
 // this crazy function aims to split bylines such as
 // 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
 const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
@@ -69,8 +57,8 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
 const RenderByline: React.FC<{
     bylineText: string;
     contributorTags: TagType[];
-    className?: string;
-}> = ({ bylineText, contributorTags, className }) => {
+    pillar: Pillar;
+}> = ({ bylineText, contributorTags, pillar }) => {
     const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
         (token, i) => {
             const associatedTags = contributorTags.filter(
@@ -89,7 +77,7 @@ const RenderByline: React.FC<{
         },
     );
 
-    return <div className={className}>{renderedTokens}</div>;
+    return <div className={bylineStyle(pillar)}>{renderedTokens}</div>;
 };
 
 const BylineContributor: React.FC<{
@@ -108,16 +96,14 @@ const BylineContributor: React.FC<{
 export const Byline: React.FC<{
     author: AuthorType;
     tags: TagType[];
-    className?: string;
-}> = ({ author, tags, className }) => (
+    pillar: Pillar;
+}> = ({ author, tags, pillar }) => (
     <address aria-label="Contributor info">
-        <span className={byline}>
-            <RenderByline
-                bylineText={author.byline}
-                contributorTags={tags}
-                className={className}
-            />
-        </span>
+        <RenderByline
+            bylineText={author.byline}
+            contributorTags={tags}
+            pillar={pillar}
+        />
         {author.twitterHandle && (
             <div className={twitterHandle}>
                 <TwitterIcon />
