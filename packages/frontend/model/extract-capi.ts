@@ -110,6 +110,9 @@ export const extract = (data: {}): CAPIType => {
         throw new Error('edition id is undefined');
     }
 
+    const navData = getObject(data, 'site.nav');
+    navData.readerRevenueLinks = getObject(data, 'site.readerRevenueLinks');
+
     return {
         tags,
         sectionName,
@@ -172,6 +175,6 @@ export const extract = (data: {}): CAPIType => {
         config: extractConfig(data),
         linkedData: getArray(data, 'page.meta.linkedData', []),
         webTitle: getString(data, 'page.webTitle'),
-        nav: getObject(data, 'site.nav'),
+        nav: navData,
     };
 };
