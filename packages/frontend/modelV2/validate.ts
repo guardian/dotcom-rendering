@@ -1,11 +1,11 @@
 import Ajv from 'ajv';
 import schema from '@frontend/modelV2/json-schema.json';
 
-const options = {
+const options: Ajv.Options = {
     verbose: true,
     allErrors: true,
-    logger: (false as unknown) as false, // TODO ajv.d.ts
-    useDefaults: ('empty' as unknown) as boolean, // TODO add 'empty' to ajv.d.ts - PR pending https://github.com/epoberezkin/ajv/pull/1020
+    logger: false,
+    useDefaults: 'empty',
 };
 
 const ajv = new Ajv(options);
