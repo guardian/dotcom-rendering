@@ -25,9 +25,8 @@ const headerStyle = css`
 const ratingsWrapper = css`
     background-color: ${palette.highlight.main};
     display: inline-block;
-    padding: 6px 10px 0;
+    padding: 6px 10px;
     margin: 0 0 6px -10px;
-    line-height: 24px;
 
     svg {
         width: 20px;

@@ -24,7 +24,6 @@ const paginationLinkStyle = (isActive: boolean, isMarginRight: boolean) => css`
     color: ${palette.neutral[7]};
     border: 1px solid ${palette.neutral[86]};
     height: 36px;
-    line-height: 38px;
     display: inline-block;
 
     margin-right: ${isMarginRight ? '5px' : '0px'};

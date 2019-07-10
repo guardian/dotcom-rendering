@@ -3,13 +3,13 @@ import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/typography';
 import PlusIcon from '@guardian/pasteup/icons/plus.svg';
+import { centeringHelper } from '@guardian/pasteup/mixins';
 
 const showMore = css`
     color: ${palette.neutral[7]};
     padding: 0 10px;
     ${textSans(2)};
-    line-height: 34px;
-    height: 36px;
+    ${centeringHelper(34)}
     font-weight: bold;
 
     svg {

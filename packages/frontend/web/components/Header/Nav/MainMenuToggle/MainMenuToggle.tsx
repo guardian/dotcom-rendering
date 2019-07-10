@@ -30,7 +30,6 @@ const openMainMenu = css`
     }
     ${wide} {
         ${headline(4)};
-        line-height: 1;
     }
     :hover {
         color: ${palette.highlight.main};

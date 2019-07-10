@@ -51,7 +51,6 @@ const text = css`
     ${headline(1)};
     font-weight: 700;
     text-align: center;
-    line-height: 1.2;
     padding: 6px 20px 3px;
     position: relative;
 
