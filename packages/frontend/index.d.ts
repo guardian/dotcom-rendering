@@ -176,7 +176,7 @@ interface CAPIType {
     starRating?: number;
     trailText: string;
 
-    nav: any;
+    nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
 }
 
 interface TagType {
