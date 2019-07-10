@@ -2,7 +2,7 @@ import Ajv from 'ajv';
 import schema from '@frontend/modelV2/json-schema.json';
 
 const options = {
-    verbose: true,
+    verbose: false,
     allErrors: true,
     logger: (false as unknown) as false, // TODO ajv.d.ts
     useDefaults: ('empty' as unknown) as boolean, // TODO add 'empty' to ajv.d.ts - PR pending https://github.com/epoberezkin/ajv/pull/1020
