@@ -12,7 +12,7 @@
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js",
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
-        "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update'"
+        "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true"
     },
     "husky": {
         "hooks": {
