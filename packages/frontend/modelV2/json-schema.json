@@ -294,15 +294,11 @@
                 },
                 "prefix": {
                     "type": "string"
-                },
-                "sponsorship": {
-                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "prefix",
-                "sponsorship",
                 "text",
                 "url"
             ]

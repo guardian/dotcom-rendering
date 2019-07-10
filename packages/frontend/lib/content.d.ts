@@ -25,7 +25,6 @@ interface RichLinkBlockElement {
     url: string;
     text: string;
     prefix: string;
-    sponsorship: string;
 }
 
 interface ImageBlockElement {
