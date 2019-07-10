@@ -10,6 +10,7 @@ import { Blocks } from '@frontend/amp/components/Blocks';
 import RefreshIcon from '@guardian/pasteup/icons/refresh.svg';
 import { Pagination } from '@frontend/amp/components/Pagination';
 import { headline, textSans } from '@guardian/pasteup/typography';
+import { getSharingUrls } from '@frontend/model/sharing-urls';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
@@ -118,7 +119,7 @@ export const Body: React.FC<{
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}
                 pillar={pillar}
-                sharingURLs={data.sharingUrls}
+                sharingURLs={getSharingUrls(data.pageId, data.webTitle)}
                 pageID={data.pageId}
                 isCommentable={data.isCommentable}
                 guardianBaseURL={data.guardianBaseURL}

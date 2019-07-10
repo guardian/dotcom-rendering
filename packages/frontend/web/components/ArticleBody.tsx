@@ -24,6 +24,8 @@ import { SubMetaLinksList } from './SubMetaLinksList';
 import { Dateline } from './Dateline';
 
 import { MainMedia } from './MainMedia';
+import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getAgeWarning } from '@frontend/model/age-warning';
 
 const curly = (x: any) => x;
 
@@ -338,7 +340,7 @@ const linkColour = pillarMap(
     `,
 );
 
-const ageWarning = css`
+const ageWarningStyle = css`
     ${textSans(5)};
     color: ${palette.neutral[7]};
     background-color: ${palette.highlight.main};
@@ -426,6 +428,8 @@ export const ArticleBody: React.FC<{
 }> = ({ CAPI, config }) => {
     const hasSubMetaSectionLinks = CAPI.subMetaSectionLinks.length > 0;
     const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
+    const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
+    const ageWarning = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
     return (
         <div className={wrapper}>
@@ -447,16 +451,16 @@ export const ArticleBody: React.FC<{
                     )}
                 </div>
                 <div className={headlineCSS}>
-                    {CAPI.ageWarning && (
-                        <div className={ageWarning} aria-hidden="true">
+                    {ageWarning && (
+                        <div className={ageWarningStyle} aria-hidden="true">
                             <ClockIcon /> This article is more than{' '}
-                            <strong>{CAPI.ageWarning}</strong>
+                            <strong>{ageWarning}</strong>
                         </div>
                     )}
                     <h1 className={headerStyle}>{curly(CAPI.headline)}</h1>
-                    {CAPI.ageWarning && (
+                    {ageWarning && (
                         <div className={ageWarningScreenReader}>
-                            This article is more than {` ${CAPI.ageWarning}`}
+                            This article is more than {` ${ageWarning}`}
                         </div>
                     )}
                     <div
@@ -478,7 +482,7 @@ export const ArticleBody: React.FC<{
                     />
                     <div className={metaExtras}>
                         <SharingIcons
-                            sharingUrls={CAPI.sharingUrls}
+                            sharingUrls={sharingUrls}
                             pillar={CAPI.pillar}
                             displayIcons={['facebook', 'twitter', 'email']}
                         />
@@ -527,7 +531,7 @@ export const ArticleBody: React.FC<{
                     )}
                     <SharingIcons
                         className={subMetaSharingIcons}
-                        sharingUrls={CAPI.sharingUrls}
+                        sharingUrls={sharingUrls}
                         pillar={CAPI.pillar}
                         displayIcons={[
                             'facebook',

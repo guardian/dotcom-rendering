@@ -11,9 +11,7 @@ import { clean } from './clean';
 import { stripHTML } from './strip-html';
 import { string as curly } from 'curlyquotes';
 
-import { getSharingUrls } from './sharing-urls';
 import { findPillar } from './find-pillar';
-import { findBySubsection } from './article-sections';
 import { extract as extractConfig } from '@frontend/model/extract-config';
 
 // tslint:disable:prefer-array-literal
@@ -39,50 +37,6 @@ const getTags: (data: any) => TagType[] = data => {
             bylineImageUrl: getString(tag, 'properties.bylineImageUrl', ''),
         };
     });
-};
-
-const getAgeWarning = (
-    tags: TagType[],
-    webPublicationDate: Date,
-): string | undefined => {
-    const isNews = tags.some(t => t.id === 'tone/news');
-
-    if (!isNews) {
-        return;
-    }
-
-    const warnLimitDays = 30;
-    const currentDate = new Date();
-    const dateThreshold = new Date();
-
-    dateThreshold.setDate(currentDate.getDate() - warnLimitDays);
-
-    const publicationDate = new Date(webPublicationDate);
-
-    // if the publication date is before the date threshold generate message
-    if (publicationDate < dateThreshold) {
-        // Unary + coerces dates to numbers for TypeScript
-        const diffMilliseconds = +currentDate - +publicationDate;
-        const diffSeconds = Math.floor(diffMilliseconds / 1000);
-        const diffMinutes = diffSeconds / 60;
-        const diffHours = diffMinutes / 60;
-        const diffDays = diffHours / 24;
-        const diffMonths = diffDays / 31;
-        const diffYears = diffDays / 365;
-        let message;
-
-        if (diffYears >= 2) {
-            message = `${Math.floor(diffYears)} years old`;
-        } else if (diffYears > 1) {
-            message = '1 year old';
-        } else if (diffMonths >= 2) {
-            message = `${Math.floor(diffMonths)} months old`;
-        } else if (diffMonths > 1) {
-            message = '1 month old';
-        }
-
-        return message;
-    }
 };
 
 const getSubMetaSectionLinks: (data: {}) => SimpleLinkType[] = data => {
@@ -127,10 +81,6 @@ const getPagination = (data: {}): Pagination | undefined => {
     }
 
     return undefined;
-};
-
-const getNielsenAPIID = (subsection: string): string => {
-    return findBySubsection(subsection).apiID;
 };
 
 // TODO really it would be nice if we passed just the data we needed and
@@ -199,9 +149,7 @@ export const extract = (data: {}): CAPIType => {
         pagination: getPagination(data),
         blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
         pageId: getNonEmptyString(data, 'page.pageId'),
-        sharingUrls: getSharingUrls(data),
         pillar: findPillar(getString(data, 'page.pillar', ''), tags) || 'news',
-        ageWarning: getAgeWarning(tags, webPublicationDate),
         sectionLabel: getString(data, 'page.sectionLabel'),
         sectionUrl: getString(data, 'page.sectionUrl'),
         subMetaSectionLinks: getSubMetaSectionLinks(data),
@@ -220,9 +168,10 @@ export const extract = (data: {}): CAPIType => {
             getString(data, 'page.content.trailText', ''),
             stripHTML,
         ),
-        nielsenAPIID: getNielsenAPIID(sectionName),
 
         config: extractConfig(data),
         linkedData: getArray(data, 'page.meta.linkedData', []),
+        webTitle: getString(data, 'page.webTitle'),
+        nav: getObject(data, 'site.nav'),
     };
 };

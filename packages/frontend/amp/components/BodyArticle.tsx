@@ -11,6 +11,7 @@ import { palette } from '@guardian/pasteup/palette';
 import { WithAds } from '@frontend/amp/components/WithAds';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { until } from '@guardian/pasteup/breakpoints';
+import { getSharingUrls } from '@frontend/model/sharing-urls';
 
 const body = (pillar: Pillar, tone: StyledTone) => {
     const bgColorMap = {
@@ -93,7 +94,7 @@ export const Body: React.FC<{
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}
                 pillar={pillar}
-                sharingURLs={data.sharingUrls}
+                sharingURLs={getSharingUrls(data.pageId, data.webTitle)}
                 pageID={data.pageId}
                 isCommentable={data.isCommentable}
                 guardianBaseURL={data.guardianBaseURL}
