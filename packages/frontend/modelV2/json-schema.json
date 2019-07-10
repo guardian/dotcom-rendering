@@ -88,6 +88,9 @@
                     },
                     {
                         "$ref": "#/definitions/AudioBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/VideoBlockElement"
                     }
                 ]
             }
@@ -1097,6 +1100,20 @@
                 "_type"
             ]
         },
+        "VideoBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VideoBlockElement"
+                    ]
+                }
+            },
+            "required": [
+                "_type"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1181,6 +1198,9 @@
                             },
                             {
                                 "$ref": "#/definitions/AudioBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/VideoBlockElement"
                             }
                         ]
                     }
