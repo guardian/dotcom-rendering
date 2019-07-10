@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
+import { textSans } from '@guardian/pasteup/typography';
 import { adJson, stringify } from '@frontend/amp/lib/ad-json';
 
 const adStyle = css`
@@ -19,8 +20,7 @@ const adStyle = css`
     :before {
         content: 'Advertisement';
         display: block;
-        font-size: 12px;
-        line-height: 16px;
+        ${textSans(1)};
         /* Adverts specifcally don't use the GU font branding. */
         /* stylelint-disable-next-line property-blacklist */
         font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',

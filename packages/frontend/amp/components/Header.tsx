@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, lineHeight0 } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
@@ -41,7 +41,7 @@ const logoStyles = css`
 
 const pillarListStyles = css`
     list-style: none;
-    line-height: 0;
+    ${lineHeight0}
 `;
 
 const pillarListItemStyle = css`
