@@ -2,22 +2,22 @@ import express from 'express';
 
 import { document } from '@frontend/web/server/document';
 import { extract as extractCAPI } from '@frontend/model/extract-capi';
-import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { extract as extractGA } from '@frontend/model/extract-ga';
-import { extract as extractConfig } from '@frontend/model/extract-config';
-import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
+import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
+        const CAPI = body.version === 3 ? validateV2(body) : extractCAPI(body);
+
         const resp = document({
             data: {
+                CAPI,
                 site: 'frontend',
                 page: 'Article',
-                CAPI: extractCAPI(body),
-                NAV: extractNAV(body),
-                config: extractConfig(body),
-                GA: extractGA(body),
-                linkedData: extractLinkedData(body),
+                NAV: CAPI.nav,
+                config: CAPI.config,
+                GA: extractGA(body), // TODO fixme
+                linkedData: CAPI.linkedData,
             },
         });
 
