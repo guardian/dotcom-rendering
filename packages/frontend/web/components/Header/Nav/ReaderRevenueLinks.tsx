@@ -22,7 +22,6 @@ const message = css`
     ${serif.headline};
     font-size: 20px;
     font-weight: 800;
-    line-height: 1;
     padding-top: 3px;
     margin-bottom: 12px;
 
@@ -52,7 +51,6 @@ const link = css`
     padding: 7px 12px 0 12px;
     position: relative;
     margin-right: 10px;
-    line-height: 16px;
 
     ${mobileMedium} {
         padding-right: 34px;

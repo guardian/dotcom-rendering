@@ -16,12 +16,7 @@ const subMetaLinksList = css`
     list-style: none;
 `;
 
-const subMetaSectionLinksList = css`
-    line-height: 24px;
-`;
-
 const subMetaKeywordLinksList = css`
-    line-height: 24px;
     padding-bottom: 12px;
     margin-bottom: 6px;
     border-bottom: 1px solid ${palette.neutral[86]};
@@ -77,9 +72,7 @@ export const SubMetaLinksList: React.FC<{
 }> = ({ links, isSectionLinkList, pillar }) => (
     <ul
         className={cx(subMetaLinksList, [
-            isSectionLinkList
-                ? subMetaSectionLinksList
-                : subMetaKeywordLinksList,
+            !isSectionLinkList && subMetaKeywordLinksList,
         ])}
     >
         {links.map((link, i) => (
