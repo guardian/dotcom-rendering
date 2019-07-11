@@ -41,6 +41,16 @@ interface EditionCommercialProperties {
 
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
+interface CommercialConfiguration {
+    hasShowcaseMainElement: boolean;
+    isFront: boolean;
+    isLiveblog: boolean;
+    isMinuteArticle: boolean;
+    isPaidContent: boolean;
+    isPreview: boolean;
+    isSensitive: boolean;
+}
+
 interface Branding {
     sponsorName: string;
     logo: {
@@ -174,6 +184,9 @@ interface CAPIType {
     commercialProperties: CommercialProperties;
     starRating?: number;
     trailText: string;
+
+    // Commercial
+    commercialConfiguration: CommercialConfiguration;
 
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
 }

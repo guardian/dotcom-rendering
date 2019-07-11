@@ -362,6 +362,15 @@ export const CAPI: CAPIType = {
         AU: { adTargeting: [] },
         INT: { adTargeting: [] },
     },
+    commercialConfiguration: {
+        hasShowcaseMainElement: false,
+        isFront: false,
+        isLiveblog: false,
+        isMinuteArticle: false,
+        isPaidContent: false,
+        isPreview: false,
+        isSensitive: false,
+    },
     starRating: 2,
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',

@@ -73,6 +73,14 @@ const getCommercialProperties = (data: {}): CommercialProperties => {
     ) as CommercialProperties;
 };
 
+const getCommercialConfiguration = (data: {}): CommercialConfiguration => {
+    return getObject(
+        data,
+        'page.commercialConfiguration',
+        {},
+    ) as CommercialConfiguration;
+};
+
 const getPagination = (data: {}): Pagination | undefined => {
     const found = optional(getObject.bind(null, data, 'page.pagination'));
 
@@ -166,6 +174,7 @@ export const extract = (data: {}): CAPIType => {
         beaconURL: getNonEmptyString(data, 'site.beaconUrl'),
         isCommentable: getBoolean(data, 'page.meta.isCommentable', false),
         commercialProperties: getCommercialProperties(data),
+        commercialConfiguration: getCommercialConfiguration(data),
         starRating: optional(getNumber.bind(null, data, 'page.starRating')),
         trailText: apply(
             getString(data, 'page.content.trailText', ''),
