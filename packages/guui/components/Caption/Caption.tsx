@@ -1,7 +1,7 @@
 import React from 'react';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { css, cx, injectGlobal } from 'emotion';
+import { css, cx } from 'emotion';
 import { pillarPalette } from '@guardian/frontend-rendering/lib/pillars';
 import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
 
@@ -37,16 +37,25 @@ export const Caption: React.FC<{
         padding-right: 3px;
     `;
 
-    injectGlobal`
-    figcaption a {
-        color: ${pillarPalette[pillar].main};
-    }`;
+    const captionLink = css`
+        a {
+            color: ${pillarPalette[pillar].main};
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        strong {
+            font-weight: bold;
+        }
+    `;
 
     const getCaptionHtml = () => {
         if (dirtyHtml) {
             return (
                 <span
                     // tslint:disable-line:react-no-dangerous-html
+                    className={captionLink}
                     dangerouslySetInnerHTML={{
                         __html: captionText,
                     }}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { css, injectGlobal } from 'emotion';
+import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
@@ -32,11 +32,18 @@ export const Image: React.FC<{
         padding-right: 3px;
     `;
 
-    injectGlobal`
-    figcaption a {
-        color: ${pillarPalette[pillar].main};
-    }`;
-
+    const captionLink = css`
+        a {
+            color: ${pillarPalette[pillar].main};
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        strong {
+            font-weight: bold;
+        }
+    `;
 
     if (!image) {
         return null;
@@ -61,6 +68,7 @@ export const Image: React.FC<{
                     {/* TODO - Move caption handling to use https://github.com/guardian/dotcom-rendering/blob/master/packages/guui/components/Caption/Caption.tsx */}
                     <span
                         // tslint:disable-line:react-no-dangerous-html
+                        className={captionLink}
                         dangerouslySetInnerHTML={{
                             __html: element.data.caption || '',
                         }}
