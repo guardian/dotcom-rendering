@@ -36,11 +36,26 @@ export const Caption: React.FC<{
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
     `;
+
+    const captionLink = css`
+        a {
+            color: ${pillarPalette[pillar].main};
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        strong {
+            font-weight: bold;
+        }
+    `;
+
     const getCaptionHtml = () => {
         if (dirtyHtml) {
             return (
                 <span
                     // tslint:disable-line:react-no-dangerous-html
+                    className={captionLink}
                     dangerouslySetInnerHTML={{
                         __html: captionText,
                     }}
