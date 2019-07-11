@@ -339,7 +339,7 @@ describe('extract-capi', () => {
         expect(blocks.length).toBe(2);
 
         const blockElements = blocks.map(block => block.elements);
-        const elems = ([] as CAPIElement[]).concat(...blockElements);
+        const elems = ([] as GenericElement[]).concat(...blockElements);
         expect(elems.length).toBe(4);
     });
 

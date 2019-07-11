@@ -309,7 +309,7 @@ export const CAPI: CAPIType = {
                 },
             ],
             _type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-        },
+        } as GenericElement,
     ],
     editionLongForm: 'uk edition',
     author: {

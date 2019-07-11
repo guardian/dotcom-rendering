@@ -1,10 +1,14 @@
 const notEmpty = (value: string | null): value is string => value !== null;
 
 export const extractScripts: (
-    elements: CAPIElement[],
-    mainMediaElements: CAPIElement[],
+    elements: GenericElement[],
+    mainMediaElements: GenericElement[],
 ) => string[] = (elements, mainMediaElements) => {
-    return [...new Set([...elements, ...mainMediaElements].map(e => e._type))]
+    const capiElements = elements as CAPIElement[];
+
+    return [
+        ...new Set([...capiElements, ...mainMediaElements].map(e => e._type)),
+    ]
         .map(t => {
             switch (t) {
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
@@ -28,6 +32,4 @@ export const extractScripts: (
             }
         })
         .filter(notEmpty) as string[];
-    // I have no idea why the type predicate isn't working here. I think it has something to do with the union type.
-    // It works with simpler arrays of type Array<string | null> but not this one.
 };

@@ -262,3 +262,13 @@ type CAPIElement =
     | AudioAtomElement
     | AudioBlockElement
     | VideoBlockElement;
+
+// This is used at the validation stage as we don't want to fail validation on
+// unknown elements when checking our json-schema. Unfortunately it means we end
+// up casting this as CAPIElement in certain places. This is safe as long as:
+//
+//   a) element 'type' fields are unique (so values map to one interface)
+//   b) any switches include a default case
+interface GenericElement {
+    _type: string;
+}

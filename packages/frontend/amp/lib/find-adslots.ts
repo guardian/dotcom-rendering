@@ -18,7 +18,7 @@
  */
 
 interface ElementWithLength {
-    element: CAPIElement;
+    element: GenericElement;
     length: number;
 }
 
@@ -27,23 +27,25 @@ export const SMALL_PARA_CHARS = 50;
 const NONTEXT_BUFFER_FORWARD = 300;
 const NONTEXT_BUFFER_BACKWARD = 200;
 
-const isTextElement = (e: CAPIElement): boolean => {
+const isTextElement = (e: GenericElement): boolean => {
     return e._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 };
 
-export const getElementLength = (element: CAPIElement): number => {
+export const getElementLength = (element: GenericElement): number => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.TextBlockElement':
             // we don't want to count html characters
             const htmlRegex = /(<([^>]+)>)/gi;
-            return element.html.replace(htmlRegex, '').length;
+            return (element as TextBlockElement).html.replace(htmlRegex, '')
+                .length;
+
         default:
             return 0; // for the purposes of ads we don't care how long other elements are
     }
 };
 
 const getElementsWithLength = (
-    elements: CAPIElement[],
+    elements: GenericElement[],
 ): ElementWithLength[] => {
     return elements.map(e => {
         return {
@@ -135,7 +137,7 @@ const hasSpaceForAd = (
 };
 
 // Returns index of items to place ads *after*
-export const findAdSlots = (elements: CAPIElement[]): number[] => {
+export const findAdSlots = (elements: GenericElement[]): number[] => {
     let charsSinceLastAd = 0;
     let paragraphsSinceLastAd = 0;
     let adCount = 0;

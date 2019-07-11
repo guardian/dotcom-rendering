@@ -25,11 +25,15 @@ import { MapEmbed } from '@frontend/amp/components/elements/MapEmbed';
 import { AudioAtom } from '@frontend/amp/components/elements/AudioAtom';
 
 export const Elements = (
-    elements: CAPIElement[],
+    elements: GenericElement[],
     pillar: Pillar,
     isImmersive: boolean,
 ): JSX.Element[] => {
-    const cleanedElements = elements.map(element =>
+    // This is safe here as long as we have a default in the switch. See
+    // GenericElement definition for the rationale.
+    const capiElements = elements as CAPIElement[];
+
+    const cleanedElements = capiElements.map(element =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
     );
     const output = cleanedElements.map((element, i) => {

@@ -118,21 +118,23 @@ const expanded = css`
 `;
 
 const asComponent = (
-    element: CAPIElement,
+    element: GenericElement,
     pillar: Pillar,
 ): JSX.Element | null => {
-    switch (element._type) {
+    const capiElement = element as CAPIElement;
+
+    switch (capiElement._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
-            return mainImage(element);
+            return mainImage(capiElement);
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-            return <YoutubeVideo element={element} pillar={pillar} />;
+            return <YoutubeVideo element={capiElement} pillar={pillar} />;
         default:
             return null;
     }
 };
 
 export const MainMedia: React.FC<{
-    element: CAPIElement;
+    element: GenericElement;
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     return <div className={expanded}>{asComponent(element, pillar)}</div>;

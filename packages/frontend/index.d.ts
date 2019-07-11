@@ -111,7 +111,7 @@ interface AuthorType {
 
 interface Block {
     id: string;
-    elements: CAPIElement[];
+    elements: GenericElement[];
     createdOn?: number;
     createdOnDisplay?: string;
     lastUpdatedDisplay?: string;
@@ -135,7 +135,7 @@ interface CAPIType {
     headline: string;
     standfirst: string;
     webTitle: string;
-    mainMediaElements: CAPIElement[];
+    mainMediaElements: GenericElement[];
     main: string;
     keyEvents: Block[];
     blocks: Block[];

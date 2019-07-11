@@ -61,7 +61,7 @@ export const Body: React.FC<{
     const tone = getToneType(data.tags);
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
     const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
-    const slotIndexes = findAdSlots(capiElements);
+    const slotIndexes = findAdSlots(capiElements as CAPIElement[]);
     const adInfo = {
         section: data.sectionName,
         edition: data.editionId,

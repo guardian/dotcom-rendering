@@ -20,7 +20,7 @@ export const render = (
         const blockElements = CAPI.blocks.map(block => block.elements);
 
         // This is simply to flatten the elements
-        const elements = ([] as CAPIElement[]).concat(...blockElements);
+        const elements = ([] as GenericElement[]).concat(...blockElements);
 
         const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
 
