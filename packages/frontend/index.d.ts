@@ -42,7 +42,6 @@ interface EditionCommercialProperties {
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
 interface Branding {
-    type: 'paid-content';
     sponsorName: string;
     logo: {
         src: string;

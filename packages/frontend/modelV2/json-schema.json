@@ -85,6 +85,12 @@
                     },
                     {
                         "$ref": "#/definitions/AudioAtomElement"
+                    },
+                    {
+                        "$ref": "#/definitions/AudioBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/VideoBlockElement"
                     }
                 ]
             }
@@ -1080,6 +1086,34 @@
                 "trackUrl"
             ]
         },
+        "AudioBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.AudioBlockElement"
+                    ]
+                }
+            },
+            "required": [
+                "_type"
+            ]
+        },
+        "VideoBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VideoBlockElement"
+                    ]
+                }
+            },
+            "required": [
+                "_type"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1161,6 +1195,12 @@
                             },
                             {
                                 "$ref": "#/definitions/AudioAtomElement"
+                            },
+                            {
+                                "$ref": "#/definitions/AudioBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/VideoBlockElement"
                             }
                         ]
                     }
@@ -1399,12 +1439,6 @@
         "Branding": {
             "type": "object",
             "properties": {
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "paid-content"
-                    ]
-                },
                 "sponsorName": {
                     "type": "string"
                 },
@@ -1450,8 +1484,7 @@
             "required": [
                 "aboutThisLink",
                 "logo",
-                "sponsorName",
-                "type"
+                "sponsorName"
             ]
         }
     },

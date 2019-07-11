@@ -227,6 +227,14 @@ interface AudioAtomElement {
     coverUrl: string;
 }
 
+interface AudioBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AudioBlockElement';
+}
+
+interface VideoBlockElement {
+    _type: 'model.dotcomrendering.pageElements.VideoBlockElement';
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -251,4 +259,6 @@ type CAPIElement =
     | InteractiveMarkupBlockElement
     | InteractiveUrlElement
     | MapBlockElement
-    | AudioAtomElement;
+    | AudioAtomElement
+    | AudioBlockElement
+    | VideoBlockElement;

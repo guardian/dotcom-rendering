@@ -2,7 +2,7 @@ import Ajv from 'ajv';
 import schema from '@frontend/modelV2/json-schema.json';
 
 const options: Ajv.Options = {
-    verbose: true,
+    verbose: false,
     allErrors: true,
     logger: false,
     useDefaults: 'empty',
