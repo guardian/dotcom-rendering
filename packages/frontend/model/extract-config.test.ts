@@ -63,34 +63,6 @@ describe('extract-config', () => {
         expect(sentryHost).toBe('');
     });
 
-    describe('isDev', () => {
-        const OLD_ENV = process.env;
-
-        beforeEach(() => {
-            process.env = { ...OLD_ENV };
-        });
-
-        afterEach(() => {
-            process.env = OLD_ENV;
-        });
-
-        it('returns isDev as true if process.env.NODE_ENV is "development"', () => {
-            process.env.NODE_ENV = 'development';
-
-            const { isDev } = extract(testData);
-
-            expect(isDev).toBe(true);
-        });
-
-        it('returns isDev as false if process.env.NODE_ENV is "production"', () => {
-            process.env.NODE_ENV = 'production';
-
-            const { isDev } = extract(testData);
-
-            expect(isDev).toBe(false);
-        });
-    });
-
     it('returns commercialUrl if available', () => {
         const testCommercialUrl = 'https://fetchMeSomething.com';
 

@@ -7,6 +7,9 @@
         "standfirst": {
             "type": "string"
         },
+        "webTitle": {
+            "type": "string"
+        },
         "mainMediaElements": {
             "type": "array",
             "items": {
@@ -82,6 +85,12 @@
                     },
                     {
                         "$ref": "#/definitions/AudioAtomElement"
+                    },
+                    {
+                        "$ref": "#/definitions/AudioBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/VideoBlockElement"
                     }
                 ]
             }
@@ -122,12 +131,6 @@
         },
         "pageId": {
             "type": "string"
-        },
-        "ageWarning": {
-            "type": "string"
-        },
-        "sharingUrls": {
-            "$ref": "#/definitions/{facebook?:{url:string;userMessage:string;};twitter?:{url:string;userMessage:string;};email?:{url:string;userMessage:string;};whatsApp?:{url:string;userMessage:string;};pinterest?:{url:string;userMessage:string;};linkedIn?:{url:string;userMessage:string;};messenger?:{url:string;userMessage:string;};}"
         },
         "tags": {
             "type": "array",
@@ -206,9 +209,7 @@
         "trailText": {
             "type": "string"
         },
-        "nielsenAPIID": {
-            "type": "string"
-        }
+        "nav": {}
     },
     "required": [
         "author",
@@ -229,12 +230,11 @@
         "linkedData",
         "main",
         "mainMediaElements",
-        "nielsenAPIID",
+        "nav",
         "pageId",
         "pillar",
         "sectionLabel",
         "sectionUrl",
-        "sharingUrls",
         "shouldHideAds",
         "standfirst",
         "subMetaKeywordLinks",
@@ -243,6 +243,7 @@
         "trailText",
         "webPublicationDate",
         "webPublicationDateDisplay",
+        "webTitle",
         "webURL"
     ],
     "definitions": {
@@ -299,15 +300,11 @@
                 },
                 "prefix": {
                     "type": "string"
-                },
-                "sponsorship": {
-                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "prefix",
-                "sponsorship",
                 "text",
                 "url"
             ]
@@ -1089,6 +1086,34 @@
                 "trackUrl"
             ]
         },
+        "AudioBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.AudioBlockElement"
+                    ]
+                }
+            },
+            "required": [
+                "_type"
+            ]
+        },
+        "VideoBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VideoBlockElement"
+                    ]
+                }
+            },
+            "required": [
+                "_type"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1170,6 +1195,12 @@
                             },
                             {
                                 "$ref": "#/definitions/AudioAtomElement"
+                            },
+                            {
+                                "$ref": "#/definitions/AudioBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/VideoBlockElement"
                             }
                         ]
                     }
@@ -1251,116 +1282,6 @@
             ],
             "type": "string"
         },
-        "{facebook?:{url:string;userMessage:string;};twitter?:{url:string;userMessage:string;};email?:{url:string;userMessage:string;};whatsApp?:{url:string;userMessage:string;};pinterest?:{url:string;userMessage:string;};linkedIn?:{url:string;userMessage:string;};messenger?:{url:string;userMessage:string;};}": {
-            "type": "object",
-            "properties": {
-                "facebook": {
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string"
-                        },
-                        "userMessage": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "url",
-                        "userMessage"
-                    ]
-                },
-                "twitter": {
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string"
-                        },
-                        "userMessage": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "url",
-                        "userMessage"
-                    ]
-                },
-                "email": {
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string"
-                        },
-                        "userMessage": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "url",
-                        "userMessage"
-                    ]
-                },
-                "whatsApp": {
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string"
-                        },
-                        "userMessage": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "url",
-                        "userMessage"
-                    ]
-                },
-                "pinterest": {
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string"
-                        },
-                        "userMessage": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "url",
-                        "userMessage"
-                    ]
-                },
-                "linkedIn": {
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string"
-                        },
-                        "userMessage": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "url",
-                        "userMessage"
-                    ]
-                },
-                "messenger": {
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string"
-                        },
-                        "userMessage": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "url",
-                        "userMessage"
-                    ]
-                }
-            }
-        },
         "TagType": {
             "type": "object",
             "properties": {
@@ -1428,9 +1349,6 @@
                 "sentryHost": {
                     "type": "string"
                 },
-                "isDev": {
-                    "type": "boolean"
-                },
                 "switches": {
                     "type": "object",
                     "additionalProperties": {
@@ -1448,7 +1366,6 @@
                 "ajaxUrl",
                 "commercialUrl",
                 "dfpAccountId",
-                "isDev",
                 "sentryHost",
                 "sentryPublicApiKey",
                 "switches"
@@ -1522,12 +1439,6 @@
         "Branding": {
             "type": "object",
             "properties": {
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "paid-content"
-                    ]
-                },
                 "sponsorName": {
                     "type": "string"
                 },
@@ -1573,8 +1484,7 @@
             "required": [
                 "aboutThisLink",
                 "logo",
-                "sponsorName",
-                "type"
+                "sponsorName"
             ]
         }
     },

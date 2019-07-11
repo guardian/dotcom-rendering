@@ -25,7 +25,6 @@ interface RichLinkBlockElement {
     url: string;
     text: string;
     prefix: string;
-    sponsorship: string;
 }
 
 interface ImageBlockElement {
@@ -228,6 +227,14 @@ interface AudioAtomElement {
     coverUrl: string;
 }
 
+interface AudioBlockElement {
+    _type: 'model.dotcomrendering.pageElements.AudioBlockElement';
+}
+
+interface VideoBlockElement {
+    _type: 'model.dotcomrendering.pageElements.VideoBlockElement';
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -252,4 +259,6 @@ type CAPIElement =
     | InteractiveMarkupBlockElement
     | InteractiveUrlElement
     | MapBlockElement
-    | AudioAtomElement;
+    | AudioAtomElement
+    | AudioBlockElement
+    | VideoBlockElement;
