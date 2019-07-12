@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline, lineHeight0 } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
@@ -41,7 +41,9 @@ const logoStyles = css`
 
 const pillarListStyles = css`
     list-style: none;
-    ${lineHeight0}
+    /* Design System: This override is needed because the line height changes the layout*/
+    /* stylelint-disable-next-line property-blacklist */
+    line-height: 0;
 `;
 
 const pillarListItemStyle = css`
