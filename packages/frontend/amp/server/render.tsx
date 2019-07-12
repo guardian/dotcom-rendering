@@ -33,7 +33,7 @@ export const render = (
             contentType: CAPI.contentType,
             id: CAPI.pageId,
             beacon: `${CAPI.beaconURL}/count/pv.gif`,
-            neilsenAPIID: 'FIXME', // TODO fix CAPI.nielsenAPIID,
+            neilsenAPIID: '', // TODO: find the correct value for CAPI.nielsenAPIID,
             domain: 'amp.theguardian.com',
         };
 
