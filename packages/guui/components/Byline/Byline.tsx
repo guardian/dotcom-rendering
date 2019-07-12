@@ -30,7 +30,6 @@ const bylineLink = css`
 
     ${leftCol} {
         ${headline(3)};
-        line-height: 28px;
     }
 `;
 

@@ -22,7 +22,6 @@ const openMainMenu = css`
     height: 48px;
     padding-left: 9px;
     padding-right: 20px;
-    line-height: 1;
     ${desktop} {
         display: block;
         padding-top: 7px;
