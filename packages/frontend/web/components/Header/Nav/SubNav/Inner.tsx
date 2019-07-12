@@ -51,10 +51,14 @@ const fontStyle = css`
     color: ${palette.neutral[7]};
     padding: 0 5px;
     height: 36px;
+    /* Design System: Line height is being used here for centering layout, we need the primitives */
+    /* stylelint-disable-next-line property-blacklist */
     line-height: 36px;
 
     ${tablet} {
         height: 42px;
+        /* Design System: Line height is being used here for centering layout, we need the primitives */
+        /* stylelint-disable-next-line property-blacklist */
         line-height: 42px;
     }
 `;
