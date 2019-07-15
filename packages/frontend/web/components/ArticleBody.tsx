@@ -90,7 +90,7 @@ const pillarColours = pillarMap(
         `,
 );
 
-//TODO refactor  to use in Caption.tsx
+// TODO refactor  to use in Caption.tsx
 // const pillarFigCaptionIconColor = pillarMap(
 //     pillar =>
 //         css`
