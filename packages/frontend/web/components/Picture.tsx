@@ -34,7 +34,7 @@ export const Picture: React.FC<{
                 .map(forSource)
                 .join(
                     '',
-                )}<!--[if IE 9]></video><![endif]--><img itemprop="contentUrl" alt="${alt}" src="${src}/>`,
+                )}<!--[if IE 9]></video><![endif]--><img itemprop="contentUrl" alt="${alt}" src="${src}" />`,
         }}
     />
 );
