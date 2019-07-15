@@ -430,7 +430,6 @@ export const ArticleBody: React.FC<{
     const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
     const ageWarning = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
-
     return (
         <div className={wrapper}>
             <header className={header}>
@@ -496,7 +495,11 @@ export const ArticleBody: React.FC<{
                     )}
                 >
                     {CAPI.mainMediaElements.map((element, i) => (
-                        <MainMedia element={element} key={i} />
+                        <MainMedia
+                            element={element}
+                            key={i}
+                            pillar={CAPI.pillar}
+                        />
                     ))}
                 </div>
             </header>
@@ -509,6 +512,7 @@ export const ArticleBody: React.FC<{
                 >
                     <ArticleRenderer
                         elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
+                        pillar={CAPI.pillar}
                     />
                 </div>
                 <div className={cx(subMeta, guardianLines)}>

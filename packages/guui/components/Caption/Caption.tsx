@@ -21,7 +21,7 @@ const captionPadding = css`
 `;
 
 export const Caption: React.FC<{
-    captionText: string;
+    captionText?: string;
     pillar: Pillar;
     padCaption?: boolean;
     dirtyHtml?: boolean;
@@ -57,7 +57,7 @@ export const Caption: React.FC<{
                     // tslint:disable-line:react-no-dangerous-html
                     className={captionLink}
                     dangerouslySetInnerHTML={{
-                        __html: captionText,
+                        __html: captionText || '',
                     }}
                     key={'caption'}
                 />
