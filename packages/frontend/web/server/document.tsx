@@ -9,7 +9,7 @@ import { Article } from '../pages/Article';
 import { getDist } from '@frontend/lib/assets';
 import { GADataType } from '@frontend/model/extract-ga';
 
-import { makeWindowGuardianObject } from '@frontend/model/window-guardian-object';
+import { makeWindowGuardian } from '@frontend/model/window-guardian';
 
 interface Props {
     data: {
@@ -85,7 +85,7 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
-    const windowGuardianObject = makeWindowGuardianObject(data, cssIDs);
+    const windowGuardian = makeWindowGuardian(data, cssIDs);
 
     return htmlTemplate({
         linkedData,
@@ -98,6 +98,6 @@ export const document = ({ data }: Props) => {
         fontFiles,
         data,
         title,
-        windowGuardianObject,
+        windowGuardian,
     });
 };

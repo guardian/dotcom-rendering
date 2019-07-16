@@ -1,6 +1,6 @@
 // This interface is currently a work in progress.
 // Not all attributes will remain and better types will be given as we go along
-interface WindowGuardianObjectConfig {
+interface ClientSideConfig {
     googleAnalytics: any;
     images: any;
     libs: any;
@@ -15,7 +15,7 @@ interface WindowGuardianObjectConfig {
     };
 }
 
-export interface WindowGuardianObject {
+export interface WindowGuardian {
     app: {
         data: {
             page: string;
@@ -23,7 +23,7 @@ export interface WindowGuardianObject {
         };
         cssIDs: string[];
     };
-    config: WindowGuardianObjectConfig;
+    config: ClientSideConfig;
 }
 
 const config = {
@@ -41,13 +41,13 @@ const config = {
     },
 };
 
-export const makeWindowGuardianObject = (
+export const makeWindowGuardian = (
     pageSite: {
         page: string;
         site: string;
     },
     cssIDs: string[],
-): WindowGuardianObject => {
+): WindowGuardian => {
     return {
         config,
         app: {
