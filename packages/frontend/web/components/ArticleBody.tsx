@@ -90,17 +90,18 @@ const pillarColours = pillarMap(
         `,
 );
 
-const pillarFigCaptionIconColor = pillarMap(
-    pillar =>
-        css`
-            figcaption {
-                &::before {
-                    border-color: transparent transparent
-                        ${pillarPalette[pillar].main} transparent;
-                }
-            }
-        `,
-);
+// TODO refactor  to use in Caption.tsx
+// const pillarFigCaptionIconColor = pillarMap(
+//     pillar =>
+//         css`
+//             figcaption {
+//                 &::before {
+//                     border-color: transparent transparent
+//                         ${pillarPalette[pillar].main} transparent;
+//                 }
+//             }
+//         `,
+// );
 
 const listStyles = css`
     li {
@@ -253,16 +254,6 @@ const mainMedia = css`
 
     figcaption {
         ${captionFont};
-
-        &::before {
-            content: '';
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 5.5px 10px 5.5px;
-            display: inline-block;
-            margin-right: 2px;
-        }
     }
 `;
 
@@ -430,7 +421,6 @@ export const ArticleBody: React.FC<{
     const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
     const ageWarning = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
-
     return (
         <div className={wrapper}>
             <header className={header}>
@@ -489,14 +479,13 @@ export const ArticleBody: React.FC<{
                         <ShareCount config={config} pageId={CAPI.pageId} />
                     </div>
                 </div>
-                <div
-                    className={cx(
-                        mainMedia,
-                        pillarFigCaptionIconColor[CAPI.pillar],
-                    )}
-                >
+                <div className={cx(mainMedia)}>
                     {CAPI.mainMediaElements.map((element, i) => (
-                        <MainMedia element={element} key={i} />
+                        <MainMedia
+                            element={element}
+                            key={i}
+                            pillar={CAPI.pillar}
+                        />
                     ))}
                 </div>
             </header>
@@ -509,6 +498,7 @@ export const ArticleBody: React.FC<{
                 >
                     <ArticleRenderer
                         elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
+                        pillar={CAPI.pillar}
                     />
                 </div>
                 <div className={cx(subMeta, guardianLines)}>
