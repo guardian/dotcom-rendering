@@ -32,7 +32,7 @@ interface ImageBlockElement {
     media: { allImages: Image[] };
     data: { alt: string; credit: string; caption?: string; copyright?: string };
     imageSources: ImageSource[];
-    displayCredit: boolean;
+    displayCredit?: boolean;
     role: string;
 }
 interface YoutubeBlockElement {
