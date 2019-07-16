@@ -2,6 +2,8 @@ import resetCSS from /* preval */ '@frontend/lib/reset-css';
 import { getFontsCss } from '@frontend/lib/fonts-css';
 import { getStatic } from '@frontend/lib/assets';
 
+import { WindowGuardianObject } from '@frontend/model/window-guardian-object';
+
 export const htmlTemplate = ({
     title = 'The Guardian',
     linkedData,
@@ -14,6 +16,7 @@ export const htmlTemplate = ({
     cssIDs,
     nonBlockingJS = '',
     fontFiles = [],
+    windowGuardianObject,
 }: {
     title?: string;
     linkedData: object;
@@ -29,6 +32,7 @@ export const htmlTemplate = ({
     cssIDs: string[];
     nonBlockingJS?: string;
     fontFiles?: string[];
+    windowGuardianObject: WindowGuardianObject;
 }) => {
     const favicon =
         process.env.NODE_ENV === 'production'
@@ -59,17 +63,7 @@ export const htmlTemplate = ({
                     .join('\n')}
                 <style>${getFontsCss()}${resetCSS}${css}</style>
                 <script>
-                window.guardian = ${JSON.stringify({
-                    app: {
-                        data,
-                        cssIDs,
-                    },
-                    config: {
-                        tests: {
-                            renderer: 'new',
-                        },
-                    },
-                })};
+                window.guardian = ${JSON.stringify(windowGuardianObject)};
                 // this is a global that's called at the bottom of the pf.io response,
                 // once the polyfills have run. This may be useful for debugging.
                 // mainly to support browsers that don't support async=false or defer

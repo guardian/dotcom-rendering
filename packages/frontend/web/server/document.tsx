@@ -9,6 +9,8 @@ import { Article } from '../pages/Article';
 import { getDist } from '@frontend/lib/assets';
 import { GADataType } from '@frontend/model/extract-ga';
 
+import { makeWindowGuardianObject } from '@frontend/model/window-guardian-object';
+
 interface Props {
     data: {
         page: string;
@@ -83,6 +85,8 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
+    const windowGuardianObject = makeWindowGuardianObject(data, cssIDs);
+
     return htmlTemplate({
         linkedData,
         preloadScripts,
@@ -94,5 +98,6 @@ export const document = ({ data }: Props) => {
         fontFiles,
         data,
         title,
+        windowGuardianObject,
     });
 };
