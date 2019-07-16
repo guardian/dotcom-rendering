@@ -2,9 +2,10 @@ import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockC
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import React from 'react';
 // import { clean } from '@frontend/model/clean';
-export const ArticleRenderer: React.FC<{ elements: CAPIElement[] }> = ({
-    elements,
-}) => {
+export const ArticleRenderer: React.FC<{
+    elements: CAPIElement[];
+    pillar: Pillar;
+}> = ({ elements, pillar }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -17,7 +18,13 @@ export const ArticleRenderer: React.FC<{ elements: CAPIElement[] }> = ({
                 case 'model.dotcomrendering.pageElements.TextBlockElement':
                     return <TextBlockComponent key={i} html={element.html} />;
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
-                    return <ImageBlockComponent key={i} element={element} />;
+                    return (
+                        <ImageBlockComponent
+                            key={i}
+                            element={element}
+                            pillar={pillar}
+                        />
+                    );
                 default:
                     return null;
             }
