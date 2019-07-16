@@ -30,7 +30,12 @@ interface RichLinkBlockElement {
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
-    data: { alt: string; credit: string; caption?: string; copyright?: string };
+    data: {
+        alt?: string;
+        credit?: string;
+        caption?: string;
+        copyright?: string;
+    };
     imageSources: ImageSource[];
     displayCredit?: boolean;
     role: string;

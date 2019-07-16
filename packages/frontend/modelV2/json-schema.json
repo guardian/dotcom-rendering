@@ -347,11 +347,7 @@
                         "copyright": {
                             "type": "string"
                         }
-                    },
-                    "required": [
-                        "alt",
-                        "credit"
-                    ]
+                    }
                 },
                 "imageSources": {
                     "type": "array",
