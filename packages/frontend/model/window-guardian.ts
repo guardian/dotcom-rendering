@@ -1,6 +1,6 @@
 // This interface is currently a work in progress.
 // Not all attributes will remain and better types will be given as we go along
-interface ClientSideConfig {
+export interface ClientSideConfig {
     googleAnalytics: any;
     images: any;
     libs: any;
@@ -10,23 +10,12 @@ interface ClientSideConfig {
     page: any;
     stylesheets: any;
     switches: any;
-    tests: {
-        renderer: string;
-    };
+    tests: any;
 }
 
-export interface WindowGuardian {
-    app: {
-        data: {
-            page: string;
-            site: string;
-        };
-        cssIDs: string[];
-    };
-    config: ClientSideConfig;
-}
-
-const config = {
+// Temporary
+// Currently exported, but will be replaced by a function call.
+export const clientSideConfig = {
     googleAnalytics: null,
     images: null,
     libs: null,
@@ -36,23 +25,15 @@ const config = {
     page: null,
     stylesheets: null,
     switches: null,
-    tests: {
-        renderer: 'new',
-    },
+    tests: null,
 };
 
+export interface WindowGuardian {
+    config: ClientSideConfig;
+}
+
 export const makeWindowGuardian = (
-    pageSite: {
-        page: string;
-        site: string;
-    },
-    cssIDs: string[],
+    config: ClientSideConfig,
 ): WindowGuardian => {
-    return {
-        config,
-        app: {
-            cssIDs,
-            data: pageSite,
-        },
-    };
+    return { config };
 };
