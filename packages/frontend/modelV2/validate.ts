@@ -16,7 +16,7 @@ export const validateAsCAPIType = (data: any): CAPIType => {
     const isValid = validate(data);
 
     if (!isValid) {
-        const url = data.webUrl || 'unknown url';
+        const url = data.webURL || 'unknown url';
 
         throw new TypeError(
             `Unable to validate request body for url ${url}.\n
