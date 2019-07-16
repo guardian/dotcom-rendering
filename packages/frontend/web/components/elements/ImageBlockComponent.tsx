@@ -68,6 +68,8 @@ export const ImageBlockComponent: React.FC<{
             captionText={element.data.caption}
             pillar={pillar}
             dirtyHtml={true}
+            credit={element.data.credit}
+            displayCredit={true}
         >
             <Picture
                 sources={sources}
