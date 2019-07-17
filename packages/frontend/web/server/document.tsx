@@ -90,6 +90,8 @@ export const document = ({ data }: Props) => {
 
     const windowGuardian = makeWindowGuardian(clientSideConfig);
 
+    const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
+
     return htmlTemplate({
         linkedData,
         preloadScripts,
@@ -100,5 +102,6 @@ export const document = ({ data }: Props) => {
         fontFiles,
         title,
         windowGuardian,
+        ampLink,
     });
 };

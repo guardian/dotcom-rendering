@@ -15,6 +15,7 @@ export const htmlTemplate = ({
     windowGuardian,
     nonBlockingJS = '',
     fontFiles = [],
+    ampLink,
 }: {
     title?: string;
     linkedData: object;
@@ -26,6 +27,7 @@ export const htmlTemplate = ({
     nonBlockingJS?: string;
     fontFiles?: string[];
     windowGuardian: WindowGuardian;
+    ampLink?: string;
 }) => {
     const favicon =
         process.env.NODE_ENV === 'production'
@@ -38,9 +40,11 @@ export const htmlTemplate = ({
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
                 </script>
+
                 ${preloadScripts
                     .map(
                         url => `<link rel="preload" href="${url}" as="script">`,
@@ -54,6 +58,10 @@ export const htmlTemplate = ({
                             )}" as="font" crossorigin>`,
                     )
                     .join('\n')}
+
+                <!-- TODO make this conditional when we support more content types -->
+                ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
+
                 <style>${getFontsCss()}${resetCSS}${css}</style>
                 <script>
                 window.guardian = ${JSON.stringify(windowGuardian)};
