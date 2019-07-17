@@ -3,7 +3,6 @@ import express from 'express';
 import { document } from '@frontend/amp/server/document';
 import { Article } from '@frontend/amp/pages/Article';
 import { extractScripts } from '@frontend/amp/lib/scripts';
-import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
@@ -15,7 +14,7 @@ export const render = (
 ) => {
     try {
         // TODO remove when migrated to v2
-        const CAPI = body.version === 3 ? validateV2(body) : extractCAPI(body);
+        const CAPI = validateV2(body);
         const linkedData = CAPI.linkedData;
         const config = CAPI.config;
         const blockElements = CAPI.blocks.map(block => block.elements);
