@@ -1,9 +1,11 @@
 const pillar: Pillar = 'lifestyle';
 const editionId: Edition = 'UK';
+const designType = 'Article';
 
 export const CAPI: CAPIType = {
     pillar,
     editionId,
+    designType,
     webPublicationDate: '2018-11-02T09:45:30.000Z',
     webPublicationDateDisplay: 'Fri 02 Mar 2018 09.45 GMT',
     tags: [

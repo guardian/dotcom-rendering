@@ -163,6 +163,7 @@ interface CAPIType {
     webURL: string;
     linkedData: object[];
     config: ConfigType;
+    designType: DesignType;
 
     // AMP specific (for now)
     guardianBaseURL: string;
@@ -201,6 +202,24 @@ interface ConfigType {
     dfpAccountId: string;
     commercialUrl: string;
 }
+
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+type DesignType =
+    | 'Article'
+    | 'Immersive'
+    | 'Media'
+    | 'Review'
+    | 'Analysis'
+    | 'Comment'
+    | 'Feature'
+    | 'Live'
+    | 'SpecialReport'
+    | 'Recipe'
+    | 'MatchReport'
+    | 'Interview'
+    | 'GuardianView'
+    | 'GuardianLabs'
+    | 'Quiz';
 
 // 3rd party type declarations
 declare module 'emotion-server' {
