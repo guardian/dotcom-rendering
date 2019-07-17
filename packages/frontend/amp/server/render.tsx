@@ -5,7 +5,7 @@ import { Article } from '@frontend/amp/pages/Article';
 import { extractScripts } from '@frontend/amp/lib/scripts';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
+import { validateAsCAPIType as validateV2 } from '@frontend/model/validate';
 import { findBySubsection } from '@frontend/model/article-sections';
 
 export const render = (

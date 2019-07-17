@@ -1,5 +1,5 @@
 import Ajv from 'ajv';
-import schema from '@frontend/modelV2/json-schema.json';
+import schema from '@frontend/model/json-schema.json';
 
 const options: Ajv.Options = {
     verbose: false,

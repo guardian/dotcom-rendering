@@ -1,12 +1,11 @@
 import express from 'express';
 
 import { document } from '@frontend/web/server/document';
-// import { extract as extractGA } from '@frontend/model/extract-ga';
-import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
+import { validateAsCAPIType } from '@frontend/model/validate';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
-        const CAPI = validateV2(body);
+        const CAPI = validateAsCAPIType(body);
 
         const resp = document({
             data: {
