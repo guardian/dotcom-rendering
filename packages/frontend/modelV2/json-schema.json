@@ -141,6 +141,9 @@
         "pillar": {
             "$ref": "#/definitions/Pillar"
         },
+        "designType": {
+            "$ref": "#/definitions/DesignType"
+        },
         "isImmersive": {
             "type": "boolean"
         },
@@ -218,6 +221,7 @@
         "commercialProperties",
         "config",
         "contentType",
+        "designType",
         "editionId",
         "editionLongForm",
         "guardianBaseURL",
@@ -1317,6 +1321,26 @@
                 "news",
                 "opinion",
                 "sport"
+            ],
+            "type": "string"
+        },
+        "DesignType": {
+            "enum": [
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
             ],
             "type": "string"
         },
