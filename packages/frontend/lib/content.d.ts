@@ -44,7 +44,7 @@ interface YoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
     id: string;
     assetId: string;
-    channelId: string;
+    channelId?: string;
     mediaTitle: string;
 }
 
