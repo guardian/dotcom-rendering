@@ -1,18 +1,13 @@
-import { validateRequestData, ValidationError } from './validate';
-import { data } from '@root/fixtures/article';
+import { validateAsCAPIType } from './validate';
+import { CAPI } from '@root/fixtures/CAPI';
 
-describe('JSON Schema request data validation', () => {
-    it('returns true if data is valid', () => {
-        expect(validateRequestData(data, '/AMPArticle')).toBe(true);
+describe('validate', () => {
+    it('throws on invalid data', () => {
+        const data = { foo: 'bar' };
+        expect(() => validateAsCAPIType(data)).toThrowError(TypeError);
     });
 
-    it('throws validation Error if data is invalid', () => {
-        const testData = {
-            ...data,
-            page: { content: { headline: 1 } },
-        };
-        expect(() => {
-            validateRequestData(testData, '/AMPArticle');
-        }).toThrowError(ValidationError);
+    it('confirm valid data', () => {
+        expect(validateAsCAPIType(CAPI)).toBe(CAPI);
     });
 });

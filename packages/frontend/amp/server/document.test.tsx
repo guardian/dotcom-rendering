@@ -1,13 +1,10 @@
 import { document } from './document';
 import validator from 'amphtml-validator';
 import React from 'react';
-import { data } from '@root/fixtures/article';
+import { CAPI } from '@root/fixtures/CAPI';
 import { Article } from '@frontend/amp/pages/Article';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
-import { extract as extractConfig } from '@frontend/model/extract-config';
-import { extract as extractModel } from '@frontend/model/extract-capi';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
@@ -30,14 +27,13 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 // fields. This then errors in Elements.tsx.
 test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
-    const config = extractConfig(data);
-    const nav = extractNAV(data.site.nav);
-    const model = extractModel(data);
-    const linkedData = extractLinkedData(data);
+    const config = CAPI.config;
+    const nav = extractNAV(CAPI.nav);
+    const linkedData = CAPI.linkedData;
 
     const metadata = {
-        description: model.trailText,
-        canonicalURL: model.webURL,
+        description: CAPI.trailText,
+        canonicalURL: CAPI.webURL,
     };
 
     const analytics: AnalyticsModel = {
@@ -45,10 +41,10 @@ test('produces valid AMP doc', async () => {
         title: 'Foo',
         fbPixelaccount: 'XXXXXXXXXX',
         comscoreID: 'XXXXXXX',
-        section: model.sectionName,
-        contentType: model.contentType,
-        id: model.pageId,
-        beacon: `${model.beaconURL}/count/pv.gif`,
+        section: CAPI.sectionName,
+        contentType: CAPI.contentType,
+        id: CAPI.pageId,
+        beacon: `${CAPI.beaconURL}/count/pv.gif`,
         neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
         domain: 'amp.theguardian.com',
     };
@@ -56,7 +52,7 @@ test('produces valid AMP doc', async () => {
     const body = (
         <Article
             nav={nav}
-            articleData={model}
+            articleData={CAPI}
             config={config}
             analytics={analytics}
         />

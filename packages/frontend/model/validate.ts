@@ -1,44 +1,28 @@
 import Ajv from 'ajv';
+import schema from '@frontend/model/json-schema.json';
 
-export class ValidationError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = 'Validation Error';
-    }
-}
+const options: Ajv.Options = {
+    verbose: false,
+    allErrors: false,
+    logger: false,
+    useDefaults: 'empty',
+};
 
-// enpoint can be used to reference matching schema
-export const validateRequestData = (data: any, endpoint: string) => {
-    const schema = {
-        properties: {
-            page: {
-                type: 'object',
-                properties: {
-                    content: {
-                        type: 'object',
-                        properties: {
-                            headline: { type: 'string' },
-                        },
-                    },
-                },
-            },
-        },
-    };
+const ajv = new Ajv(options);
 
-    const options = {
-        verbose: true,
-        allErrors: true,
-    };
+const validate = ajv.compile(schema);
 
-    const ajv = new Ajv(options);
-    const isValid = ajv.validate(schema, data);
+export const validateAsCAPIType = (data: any): CAPIType => {
+    const isValid = validate(data);
 
     if (!isValid) {
-        throw new ValidationError(
-            `Could not validate ${endpoint} request for ${
-                data.page.pageId
-            }.\n ${JSON.stringify(ajv.errors, null, 2)}`,
+        const url = data.webURL || 'unknown url';
+
+        throw new TypeError(
+            `Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validate.errors, null, 2)}`,
         );
     }
-    return isValid;
+
+    return data as CAPIType;
 };

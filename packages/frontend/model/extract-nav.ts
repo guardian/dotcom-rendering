@@ -1,6 +1,46 @@
 import get from 'lodash.get';
-import { getString, getArray } from './validators';
 import { findPillar } from './find-pillar';
+
+const getString = (
+    obj: object,
+    selector: string,
+    fallbackValue?: string,
+): string => {
+    const found = get(obj, selector);
+    if (typeof found === 'string') {
+        return found;
+    }
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
+    }
+
+    throw new Error(
+        `expected string at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
+
+const getArray = <T>(
+    obj: object,
+    selector: string,
+    fallbackValue?: T[],
+): T[] => {
+    const found = get(obj, selector);
+
+    if (Array.isArray(found)) {
+        return found;
+    }
+    if (fallbackValue !== undefined) {
+        return fallbackValue;
+    }
+
+    throw new Error(
+        `expected array at '${selector}', got '${found}', in '${JSON.stringify(
+            obj,
+        )}'`,
+    );
+};
 
 const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
     const title = getString(data, 'title');
