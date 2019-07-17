@@ -100,6 +100,9 @@ export const htmlTemplate = ({
                     .map(script => `<script async src="${script}"></script>`)
                     .join('\n')}
                 <script>${nonBlockingJS}</script>
+                ${preloadScripts
+                    .map(url => `<script src="${url}"></script>`)
+                    .join('\n')}
             </body>
         </html>`;
 };
