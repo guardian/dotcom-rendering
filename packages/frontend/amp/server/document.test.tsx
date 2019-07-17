@@ -5,7 +5,6 @@ import { CAPI } from '@root/fixtures/CAPI';
 import { Article } from '@frontend/amp/pages/Article';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { extract as extractLinkedData } from '@frontend/model/extract-linked-data';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
@@ -30,7 +29,7 @@ test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
     const config = CAPI.config;
     const nav = extractNAV(CAPI.nav);
-    const linkedData = extractLinkedData(CAPI.linkedData);
+    const linkedData = CAPI.linkedData;
 
     const metadata = {
         description: CAPI.trailText,
