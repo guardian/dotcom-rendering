@@ -65,13 +65,13 @@ export const ImageBlockComponent: React.FC<{
     const sources = makeSources(element.imageSources);
     return (
         <Caption
-            captionText={element.data.caption}
+            captionText={element.data.caption || ''}
             pillar={pillar}
             dirtyHtml={true}
         >
             <Picture
                 sources={sources}
-                alt={element.data.alt}
+                alt={element.data.alt || ''}
                 src={getFallback(element.imageSources)}
             />
         </Caption>
