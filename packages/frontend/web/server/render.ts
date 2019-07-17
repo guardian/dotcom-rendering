@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { document } from '@frontend/web/server/document';
-import { extract as extractGA } from '@frontend/model/extract-ga';
+// import { extract as extractGA } from '@frontend/model/extract-ga';
 import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
@@ -15,7 +15,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                 page: 'Article',
                 NAV: CAPI.nav,
                 config: CAPI.config,
-                GA: extractGA(body), // TODO fixme
+                GA: '', // TODO fixme with extractGA(body)
                 linkedData: CAPI.linkedData,
             },
         });

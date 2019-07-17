@@ -7,7 +7,7 @@ import { CacheProvider } from '@emotion/core';
 import { htmlTemplate } from './htmlTemplate';
 import { Article } from '../pages/Article';
 import { getDist } from '@frontend/lib/assets';
-import { GADataType } from '@frontend/model/extract-ga';
+// import { GADataType } from '@frontend/model/extract-ga';
 
 import {
     clientSideConfig,
@@ -21,7 +21,7 @@ interface Props {
         CAPI: CAPIType;
         NAV: NavType;
         config: ConfigType;
-        GA: GADataType;
+        GA: string; // TODO use GADataType again
         linkedData: object;
     };
 }
