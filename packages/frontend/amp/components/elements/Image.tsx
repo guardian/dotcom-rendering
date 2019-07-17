@@ -32,6 +32,19 @@ export const Image: React.FC<{
         padding-right: 3px;
     `;
 
+    const captionLink = css`
+        a {
+            color: ${pillarPalette[pillar].main};
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        strong {
+            font-weight: bold;
+        }
+    `;
+
     if (!image) {
         return null;
     }
@@ -55,12 +68,12 @@ export const Image: React.FC<{
                     {/* TODO - Move caption handling to use https://github.com/guardian/dotcom-rendering/blob/master/packages/guui/components/Caption/Caption.tsx */}
                     <span
                         // tslint:disable-line:react-no-dangerous-html
+                        className={captionLink}
                         dangerouslySetInnerHTML={{
                             __html: element.data.caption || '',
                         }}
                         key={'caption'}
-                    />
-
+                    />{' '}
                     {element.displayCredit && element.data.credit}
                 </figcaption>
             )}

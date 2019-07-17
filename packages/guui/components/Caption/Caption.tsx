@@ -21,28 +21,47 @@ const captionPadding = css`
 `;
 
 export const Caption: React.FC<{
-    captionText: string;
+    captionText?: string;
     pillar: Pillar;
     padCaption?: boolean;
     dirtyHtml?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
 }> = ({
     captionText,
     pillar,
     padCaption = false,
     dirtyHtml = false,
+    credit,
+    displayCredit = true,
     children,
 }) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
     `;
+
+    const captionLink = css`
+        a {
+            color: ${pillarPalette[pillar].main};
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        strong {
+            font-weight: bold;
+        }
+    `;
+
     const getCaptionHtml = () => {
         if (dirtyHtml) {
             return (
                 <span
                     // tslint:disable-line:react-no-dangerous-html
+                    className={captionLink}
                     dangerouslySetInnerHTML={{
-                        __html: captionText,
+                        __html: captionText || '',
                     }}
                     key={'caption'}
                 />
@@ -64,7 +83,7 @@ export const Caption: React.FC<{
                         <span className={iconStyle}>
                             <TriangleIcon />
                         </span>
-                        {getCaptionHtml()}
+                        {getCaptionHtml()} {displayCredit && credit}
                     </figcaption>
                 </>
             )}

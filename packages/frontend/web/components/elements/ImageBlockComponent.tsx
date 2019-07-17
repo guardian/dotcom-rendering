@@ -1,5 +1,6 @@
 import React from 'react';
 import { Picture, PictureSource } from '@frontend/web/components/Picture';
+import { Caption } from '@guardian/guui/components/Caption/Caption';
 
 const widths = [660, 480, 0];
 
@@ -57,16 +58,24 @@ const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
     return bestFor(300, inlineSrcSets).src;
 };
 
-export const ImageBlockComponent: React.FC<{ element: ImageBlockElement }> = ({
-    element,
-}) => {
+export const ImageBlockComponent: React.FC<{
+    element: ImageBlockElement;
+    pillar: Pillar;
+}> = ({ element, pillar }) => {
     const sources = makeSources(element.imageSources);
-
     return (
-        <Picture
-            sources={sources}
-            alt={element.data.alt}
-            src={getFallback(element.imageSources)}
-        />
+        <Caption
+            captionText={element.data.caption || ''}
+            pillar={pillar}
+            dirtyHtml={true}
+            credit={element.data.credit}
+            displayCredit={true}
+        >
+            <Picture
+                sources={sources}
+                alt={element.data.alt || ''}
+                src={getFallback(element.imageSources)}
+            />
+        </Caption>
     );
 };

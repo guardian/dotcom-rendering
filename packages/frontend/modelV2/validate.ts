@@ -3,7 +3,7 @@ import schema from '@frontend/modelV2/json-schema.json';
 
 const options: Ajv.Options = {
     verbose: false,
-    allErrors: true,
+    allErrors: false,
     logger: false,
     useDefaults: 'empty',
 };
@@ -16,8 +16,10 @@ export const validateAsCAPIType = (data: any): CAPIType => {
     const isValid = validate(data);
 
     if (!isValid) {
+        const url = data.webURL || 'unknown url';
+
         throw new TypeError(
-            `Unable to validate request body.\n
+            `Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validate.errors, null, 2)}`,
         );
     }
