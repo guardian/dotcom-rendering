@@ -25,11 +25,15 @@ export const Caption: React.FC<{
     pillar: Pillar;
     padCaption?: boolean;
     dirtyHtml?: boolean;
+    credit?: string;
+    displayCredit?: boolean;
 }> = ({
     captionText,
     pillar,
     padCaption = false,
     dirtyHtml = false,
+    credit,
+    displayCredit = true,
     children,
 }) => {
     const iconStyle = css`
@@ -79,7 +83,7 @@ export const Caption: React.FC<{
                         <span className={iconStyle}>
                             <TriangleIcon />
                         </span>
-                        {getCaptionHtml()}
+                        {getCaptionHtml()} {displayCredit && credit}
                     </figcaption>
                 </>
             )}
