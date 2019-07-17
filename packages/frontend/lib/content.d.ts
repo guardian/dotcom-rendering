@@ -203,7 +203,7 @@ interface TimelineBlockElement {
 
 interface InteractiveMarkupBlockElement {
     _type: 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement';
-    id: string;
+    id?: string;
     html?: string;
     css?: string;
     js?: string;

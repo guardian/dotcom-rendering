@@ -995,8 +995,7 @@
                 }
             },
             "required": [
-                "_type",
-                "id"
+                "_type"
             ]
         },
         "InteractiveUrlElement": {
