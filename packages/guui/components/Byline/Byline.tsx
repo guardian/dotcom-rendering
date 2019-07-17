@@ -1,38 +1,9 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { leftCol } from '@guardian/pasteup/breakpoints';
-
-const profile = css`
-    ${headline(2)};
-    font-weight: 700;
-    margin-bottom: 4px;
-`;
-
-const pillarColour = (pillar: Pillar) => css`
-    color: ${palette[pillar].main};
-`;
-
-const byline = css`
-    font-style: italic;
-`;
-
-const bylineLink = css`
-    ${headline(2)};
-    font-style: normal;
-    font-weight: 700;
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
-    }
-
-    ${leftCol} {
-        ${headline(3)};
-        line-height: 28px;
-    }
-`;
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const twitterHandle = css`
     ${textSans(1)};
@@ -52,6 +23,23 @@ const twitterHandle = css`
     a {
         color: ${palette.neutral[46]};
         text-decoration: none;
+    }
+`;
+
+const bylineStyle = (pillar: Pillar) => css`
+    ${headline(2)};
+    color: ${pillarPalette[pillar].main};
+    padding-bottom: 8px;
+    font-style: italic;
+
+    a {
+        font-weight: 700;
+        color: ${pillarPalette[pillar].main};
+        text-decoration: none;
+        font-style: normal;
+        :hover {
+            text-decoration: underline;
+        }
     }
 `;
 
@@ -81,7 +69,6 @@ const RenderByline: React.FC<{
                     <BylineContributor
                         contributor={token}
                         contributorTagId={associatedTags[0].id}
-                        pillar={pillar}
                         key={i}
                     />
                 );
@@ -90,17 +77,15 @@ const RenderByline: React.FC<{
         },
     );
 
-    return <>{renderedTokens}</>;
+    return <div className={bylineStyle(pillar)}>{renderedTokens}</div>;
 };
 
 const BylineContributor: React.FC<{
     contributor: string;
     contributorTagId: string;
-    pillar: Pillar;
-}> = ({ contributor, contributorTagId, pillar }) => (
+}> = ({ contributor, contributorTagId }) => (
     <a
         rel="author"
-        className={cx(pillarColour(pillar), bylineLink)}
         data-link-name="auto tag link"
         href={`//www.theguardian.com/${contributorTagId}`}
     >
@@ -114,15 +99,11 @@ export const Byline: React.FC<{
     pillar: Pillar;
 }> = ({ author, tags, pillar }) => (
     <address aria-label="Contributor info">
-        <div className={cx(pillarColour(pillar), profile)}>
-            <span className={byline}>
-                <RenderByline
-                    bylineText={author.byline}
-                    contributorTags={tags}
-                    pillar={pillar}
-                />
-            </span>
-        </div>
+        <RenderByline
+            bylineText={author.byline}
+            contributorTags={tags}
+            pillar={pillar}
+        />
         {author.twitterHandle && (
             <div className={twitterHandle}>
                 <TwitterIcon />
