@@ -35,7 +35,7 @@ interface RenderToStringResult {
 export const document = ({ data }: Props) => {
     const { page, site, CAPI, NAV, config, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
-    const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
+    const { html, css }: RenderToStringResult = extractCritical(
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
@@ -97,9 +97,7 @@ export const document = ({ data }: Props) => {
         lowPriorityScripts,
         css,
         html,
-        cssIDs,
         fontFiles,
-        data,
         title,
         windowGuardian,
     });

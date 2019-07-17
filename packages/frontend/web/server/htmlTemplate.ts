@@ -12,8 +12,6 @@ export const htmlTemplate = ({
     lowPriorityScripts,
     css,
     html,
-    data,
-    cssIDs,
     windowGuardian,
     nonBlockingJS = '',
     fontFiles = [],
@@ -25,11 +23,6 @@ export const htmlTemplate = ({
     lowPriorityScripts: string[];
     css: string;
     html: string;
-    data: {
-        page: string;
-        site: string;
-    };
-    cssIDs: string[];
     nonBlockingJS?: string;
     fontFiles?: string[];
     windowGuardian: WindowGuardian;
