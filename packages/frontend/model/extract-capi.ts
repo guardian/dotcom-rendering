@@ -145,6 +145,7 @@ export const extract = (data: {}): CAPIType => {
         editionLongForm,
         editionId,
         isImmersive,
+        designType,
         webPublicationDate: webPublicationDate.toISOString(),
         webPublicationDateDisplay: getNonEmptyString(
             data,
@@ -179,7 +180,6 @@ export const extract = (data: {}): CAPIType => {
         blocks: getArray<any>(data, 'page.content.blocks.body').filter(Boolean),
         pageId: getNonEmptyString(data, 'page.pageId'),
         pillar: findPillar(getString(data, 'page.pillar', ''), tags) || 'news',
-        designType,
         sectionLabel: getString(data, 'page.sectionLabel'),
         sectionUrl: getString(data, 'page.sectionUrl'),
         subMetaSectionLinks: getSubMetaSectionLinks(data),
