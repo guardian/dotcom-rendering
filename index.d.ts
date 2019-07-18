@@ -1,3 +1,5 @@
+import { WindowGuardianConfig } from '@frontend/model/window-guardian';
+
 declare global {
     /*~ Here, declare things that go in the global namespace, or augment
      *~ existing declarations in the global namespace
@@ -11,6 +13,7 @@ declare global {
             polyfilled: boolean;
             onPolyfilled: () => void;
         };
+        config: WindowGuardianConfig;
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
     }

@@ -10,7 +10,7 @@ import { getDist } from '@frontend/lib/assets';
 // import { GADataType } from '@frontend/model/extract-ga';
 
 import {
-    clientSideConfig,
+    windowGuardianConfig,
     makeWindowGuardian,
 } from '@frontend/model/window-guardian';
 
@@ -88,7 +88,11 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
-    const windowGuardian = makeWindowGuardian(clientSideConfig);
+    const windowGuardian = makeWindowGuardian(
+        windowGuardianConfig,
+        data,
+        cssIDs,
+    );
 
     return htmlTemplate({
         linkedData,
