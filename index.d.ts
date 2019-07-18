@@ -12,8 +12,8 @@ declare global {
             };
             polyfilled: boolean;
             onPolyfilled: () => void;
+            config?: WindowGuardianConfig;
         };
-        config: WindowGuardianConfig;
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
     }

@@ -40,9 +40,9 @@ export interface WindowGuardian {
         data: any;
         cssIDs: string[];
     };
+    config: WindowGuardianConfig;
     polyfilled: boolean;
     onPolyfilled: () => void;
-    config: WindowGuardianConfig;
 }
 
 export const makeWindowGuardian = (
