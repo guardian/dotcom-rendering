@@ -25,7 +25,7 @@ const bylineStyle = (pillar: Pillar) => css`
     padding-top: 3px;
 
     a {
-        color: ${pillarPalette[pillar].main};
+        color: ${pillarPalette['opinion'].main};
         text-decoration: none;
         font-style: italic;
     }
@@ -119,6 +119,7 @@ export const TopMetaOpinion: React.FC<{
                 articleData.webTitle,
             )}
             pillar={articleData.pillar}
+            isCommentDesignType={true}
             ageWarning={getAgeWarning(
                 articleData.tags,
                 articleData.webPublicationDate,
