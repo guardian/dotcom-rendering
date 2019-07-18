@@ -226,6 +226,8 @@ type DesignType =
     | 'Quiz'
     | 'AdvertismentFeature';
 
+type DesignTypesObj = { [key in DesignType]: any };
+
 // ----------------- //
 // General DataTypes //
 // ----------------- //
@@ -247,7 +249,6 @@ interface Props {
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
-
 declare module 'emotion-server' {
     export const extractCritical: any;
 }
