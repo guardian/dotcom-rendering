@@ -26,7 +26,7 @@ export const windowGuardianConfig = {
     stylesheets: null,
     switches: null,
     tests: null,
-};
+} as WindowGuardianConfig;
 
 export interface WindowGuardian {
     app: {

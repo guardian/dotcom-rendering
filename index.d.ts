@@ -12,11 +12,12 @@ declare global {
             };
             polyfilled: boolean;
             onPolyfilled: () => void;
+            config: WindowGuardianConfig;
         };
-        config: WindowGuardianConfig;
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
     }
 }
+
 /*~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */
 export {};
