@@ -14,7 +14,7 @@ export const designTypes: Array<DesignType> = [
     'GuardianView',
     'GuardianLabs',
     'Quiz',
-    'AdvertismentFeature',
+    'AdvertisementFeature',
 ];
 
 // Return an object of all designTypes that uses the defaultVal

@@ -18,7 +18,7 @@ export const TopMeta: React.SFC<{
     const designTypeTopMeta: DesignTypesObj = {
         ...defaultTopMeta,
         Comment: <TopMetaOpinion articleData={data} />,
-        AdvertismentFeature: <TopMetaPaidContent articleData={data} />,
+        AdvertisementFeature: <TopMetaPaidContent articleData={data} />,
     };
 
     return designTypeTopMeta[designType];

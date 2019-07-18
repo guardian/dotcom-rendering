@@ -22,7 +22,7 @@ const body = (pillar: Pillar, designType: DesignType) => {
     const designTypeStyle: DesignTypesObj = {
         ...defaultStyles,
         Comment: palette.opinion.faded,
-        AdvertismentFeature: palette.neutral[85],
+        AdvertisementFeature: palette.neutral[85],
     };
 
     return css`
