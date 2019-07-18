@@ -13,19 +13,19 @@ export interface WindowGuardianConfig {
     tests: any;
 }
 
-// Temporary
-// Currently exported, but will be replaced by a function call.
-export const windowGuardianConfig = {
-    googleAnalytics: null,
-    images: null,
-    libs: null,
-    modules: null,
-    nav: null,
-    ophan: null,
-    page: null,
-    stylesheets: null,
-    switches: null,
-    tests: null,
+const makeWindowGuardianConfig = (): WindowGuardianConfig => {
+    return {
+        googleAnalytics: null,
+        images: null,
+        libs: null,
+        modules: null,
+        nav: null,
+        ophan: null,
+        page: null,
+        stylesheets: null,
+        switches: null,
+        tests: null,
+    } as WindowGuardianConfig;
 };
 
 export interface WindowGuardian {
@@ -39,10 +39,10 @@ export interface WindowGuardian {
 }
 
 export const makeWindowGuardian = (
-    config: WindowGuardianConfig,
     data: any,
     cssIDs: string[],
 ): WindowGuardian => {
+    const config = makeWindowGuardianConfig();
     return {
         config,
         app: {
