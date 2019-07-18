@@ -223,7 +223,8 @@ type DesignType =
     | 'Interview'
     | 'GuardianView'
     | 'GuardianLabs'
-    | 'Quiz';
+    | 'Quiz'
+    | 'AdvertismentFeature';
 
 // ----------------- //
 // General DataTypes //
