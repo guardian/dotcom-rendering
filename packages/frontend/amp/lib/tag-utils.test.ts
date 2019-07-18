@@ -1,4 +1,4 @@
-import { filterForTagsOfType, getToneType } from './tag-utils';
+import { filterForTagsOfType } from './tag-utils';
 
 describe('filterForTagsOfType', () => {
     it('should extract tags of specified type from ArticleModel data', () => {
@@ -54,98 +54,5 @@ describe('filterForTagsOfType', () => {
                 bylineImageUrl: '',
             },
         ]);
-    });
-});
-
-describe('getToneType', () => {
-    it('should return "tone/advertisement-features" correctly', () => {
-        const tags = [
-            {
-                id: 'tone/advertisement-features',
-                type: 'Tone',
-                title: 'Advertisement features',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-            {
-                id: 'tracking/commissioningdesk/uk-labs',
-                type: 'Tracking',
-                title: 'UK Labs',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-        ];
-        const tone = getToneType(tags);
-        expect(tone).toEqual('tone/advertisement-features');
-    });
-
-    it('should return "tone/comment" correctly', () => {
-        const tags = [
-            {
-                id: 'tone/comment',
-                type: 'Tone',
-                title: 'title',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-            {
-                id: 'tracking/commissioningdesk/uk-labs',
-                type: 'Tracking',
-                title: 'UK Labs',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-        ];
-        const tone = getToneType(tags);
-        expect(tone).toEqual('tone/comment');
-    });
-
-    it('should return "tone/comment" for editorial pieces correctly', () => {
-        const tags = [
-            {
-                id: 'tone/editorials',
-                type: 'Tone',
-                title: 'title',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-            {
-                id: 'tone/comment',
-                type: 'Tone',
-                title: 'title',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-            {
-                id: 'tracking/commissioningdesk/uk-labs',
-                type: 'Tracking',
-                title: 'UK Labs',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-        ];
-        const tone = getToneType(tags);
-        expect(tone).toEqual('tone/comment');
-    });
-
-    it('should return "default-tone" correctly', () => {
-        const tags = [
-            {
-                id: 'tone/something-else',
-                type: 'Tone',
-                title: 'title',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-            {
-                id: 'tracking/commissioningdesk/uk-labs',
-                type: 'Tracking',
-                title: 'UK Labs',
-                twitterHandle: '',
-                bylineImageUrl: '',
-            },
-        ];
-        const tone = getToneType(tags);
-        expect(tone).toEqual('default-tone');
     });
 });
