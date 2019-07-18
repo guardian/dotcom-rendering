@@ -219,7 +219,8 @@ type DesignType =
     | 'Interview'
     | 'GuardianView'
     | 'GuardianLabs'
-    | 'Quiz';
+    | 'Quiz'
+    | 'AdvertismentFeature';
 
 // 3rd party type declarations
 declare module 'emotion-server' {
