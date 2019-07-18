@@ -106,12 +106,14 @@ const TwitterHandle: React.FC<{
 export const TopMetaExtras: React.FC<{
     sharingUrls: SharingURLs;
     pillar: Pillar;
+    isCommentDesignType: Boolean;
     webPublicationDate: string;
     ageWarning?: string;
     twitterHandle?: string;
 }> = ({
     sharingUrls,
     pillar,
+    isCommentDesignType,
     webPublicationDate,
     ageWarning,
     twitterHandle,
@@ -125,6 +127,7 @@ export const TopMetaExtras: React.FC<{
                 sharingUrls={sharingUrls}
                 pillar={pillar}
                 displayIcons={['facebook', 'twitter', 'email']}
+                isCommentDesignType={isCommentDesignType}
             />
             <AgeWarning warning={ageWarning} pillar={pillar} />
         </div>

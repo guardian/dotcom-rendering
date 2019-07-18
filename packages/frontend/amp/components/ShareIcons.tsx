@@ -8,14 +8,18 @@ import PinterestIcon from '@guardian/pasteup/icons/pinterest.svg';
 import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
 import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import { pillarPalette } from '@frontend/lib/pillars';
 
-const pillarFill = pillarMap(
-    pillar =>
-        css`
-            fill: ${pillarPalette[pillar].main};
-        `,
-);
+const pillarOverride = (pillar: Pillar, isCommentDesignType: Boolean) => {
+    return isCommentDesignType
+        ? pillarPalette['opinion'].main
+        : pillarPalette[pillar].main;
+};
+
+const pillarFill = (pillar: Pillar, isCommentDesignType: Boolean) =>
+    css`
+        fill: ${pillarOverride(pillar, isCommentDesignType)};
+    `;
 
 const shareIconsListItem = css`
     padding: 0 3px 6px 0;
@@ -73,8 +77,15 @@ export const ShareIcons: React.FC<{
     };
     displayIcons: SharePlatform[];
     pillar: Pillar;
+    isCommentDesignType?: Boolean;
     className?: string;
-}> = ({ sharingUrls, displayIcons, pillar, className }) => {
+}> = ({
+    sharingUrls,
+    displayIcons,
+    pillar,
+    isCommentDesignType,
+    className,
+}) => {
     const icons: { [K in SharePlatform]?: React.ComponentType } = {
         facebook: FacebookIcon,
         twitter: TwitterIconPadded,
@@ -124,7 +135,7 @@ export const ShareIcons: React.FC<{
                             <span
                                 className={cx(
                                     shareIcon(pillar),
-                                    pillarFill[pillar],
+                                    pillarFill(pillar, isCommentDesignType),
                                 )}
                             >
                                 <Icon />
