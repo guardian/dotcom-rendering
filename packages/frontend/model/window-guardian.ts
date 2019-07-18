@@ -1,5 +1,6 @@
 // This interface is currently a work in progress.
 // Not all attributes will remain and better types will be given as we go along
+
 export interface WindowGuardianConfig {
     googleAnalytics: any;
     images: any;
@@ -7,13 +8,16 @@ export interface WindowGuardianConfig {
     modules: any;
     nav: any;
     ophan: any;
-    page: any;
+    page: {
+        sentryHost: string;
+        sentryPublicApiKey: string;
+    };
     stylesheets: any;
     switches: any;
     tests: any;
 }
 
-const makeWindowGuardianConfig = (): WindowGuardianConfig => {
+const makeWindowGuardianConfig = (data: CAPIType): WindowGuardianConfig => {
     return {
         googleAnalytics: null,
         images: null,
@@ -21,7 +25,10 @@ const makeWindowGuardianConfig = (): WindowGuardianConfig => {
         modules: null,
         nav: null,
         ophan: null,
-        page: null,
+        page: {
+            sentryHost: 'app.getsentry.com/35463',
+            sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+        },
         stylesheets: null,
         switches: null,
         tests: null,
@@ -39,10 +46,10 @@ export interface WindowGuardian {
 }
 
 export const makeWindowGuardian = (
-    data: any,
+    data: CAPIType,
     cssIDs: string[],
 ): WindowGuardian => {
-    const config = makeWindowGuardianConfig();
+    const config = makeWindowGuardianConfig(data);
     return {
         config,
         app: {

@@ -85,7 +85,7 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
-    const windowGuardian = makeWindowGuardian(data, cssIDs);
+    const windowGuardian = makeWindowGuardian(data.CAPI, cssIDs);
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 
