@@ -224,7 +224,7 @@ type DesignType =
     | 'GuardianView'
     | 'GuardianLabs'
     | 'Quiz'
-    | 'AdvertismentFeature';
+    | 'AdvertisementFeature';
 
 type DesignTypesObj = { [key in DesignType]: any };
 
