@@ -222,6 +222,8 @@ type DesignType =
     | 'Quiz'
     | 'AdvertismentFeature';
 
+type DesignTypesObj = { [key in DesignType]: any };
+
 // 3rd party type declarations
 declare module 'emotion-server' {
     export const extractCritical: any;
