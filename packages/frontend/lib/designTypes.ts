@@ -1,0 +1,18 @@
+export const designTypes: Array<DesignType> = [
+    'Article',
+    'Immersive',
+    'Media',
+    'Review',
+    'Analysis',
+    'Comment',
+    'Feature',
+    'Live',
+    'SpecialReport',
+    'Recipe',
+    'MatchReport',
+    'Interview',
+    'GuardianView',
+    'GuardianLabs',
+    'Quiz',
+    'AdvertismentFeature',
+];
