@@ -5,8 +5,7 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { getToneType } from '@frontend/amp/lib/tag-utils';
-import { designTypes } from '@frontend/lib/designTypes';
+import { designTypeDefault } from '@frontend/lib/designTypes';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { WithAds } from '@frontend/amp/components/WithAds';
@@ -15,21 +14,16 @@ import { until } from '@guardian/pasteup/breakpoints';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 
 const body = (pillar: Pillar, designType: DesignType) => {
-    type DesignTypeStyle = { [key in DesignType]: string };
-
-    const defaultStyles: DesignTypeStyle = designTypes.reduce(
-        (prev, curr) =>
-            Object.assign({}, prev, {
-                [curr]: palette.neutral[100],
-            }),
-        {} as DesignTypeStyle,
+    const defaultStyles: DesignTypesObj = designTypeDefault(
+        palette.neutral[100],
     );
 
     // Extend defaultStyles with custom styles for some designTypes
-    const designTypeStyle = Object.assign({}, defaultStyles, {
+    const designTypeStyle: DesignTypesObj = {
+        ...defaultStyles,
         Comment: palette.opinion.faded,
         AdvertismentFeature: palette.neutral[85],
-    });
+    };
 
     return css`
         background-color: ${designTypeStyle[designType]};
@@ -70,7 +64,6 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const tone = getToneType(data.tags);
     const designType = data.designType;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
     const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
@@ -99,7 +92,7 @@ export const Body: React.FC<{
 
     return (
         <InnerContainer className={body(pillar, designType)}>
-            <TopMeta designType={designType} tone={tone} data={data} />
+            <TopMeta designType={designType} data={data} />
 
             {elements}
 
