@@ -35,7 +35,7 @@ interface RenderToStringResult {
 export const document = ({ data }: Props) => {
     const { page, site, CAPI, NAV, config, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
-    const { html, css }: RenderToStringResult = extractCritical(
+    const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
@@ -88,7 +88,11 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
-    const windowGuardian = makeWindowGuardian(windowGuardianConfig, data, []);
+    const windowGuardian = makeWindowGuardian(
+        windowGuardianConfig,
+        data,
+        cssIDs,
+    );
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 
