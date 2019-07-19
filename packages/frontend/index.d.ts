@@ -229,16 +229,18 @@ type DesignType =
 // General DataTypes //
 // ----------------- //
 
+interface DCRDocumentData {
+    page: string;
+    site: string;
+    CAPI: CAPIType;
+    NAV: NavType;
+    config: ConfigType;
+    GA: string; // TODO use GADataType again
+    linkedData: object;
+}
+
 interface Props {
-    data: {
-        page: string;
-        site: string;
-        CAPI: CAPIType;
-        NAV: NavType;
-        config: ConfigType;
-        GA: string; // TODO use GADataType again
-        linkedData: object;
-    };
+    data: DCRDocumentData;
 }
 
 // ------------------------------  //
