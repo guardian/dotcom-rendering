@@ -18,6 +18,7 @@ export interface AllPillarColours {
     culture: PillarColours;
     lifestyle: PillarColours;
     labs: PillarColours;
+    commentInNews: PillarColours;
 }
 export interface OtherColours {
     highlight: { main: colour; dark: colour };
@@ -151,6 +152,8 @@ const labs: PillarColours = {
     neutral: darkTheme,
 };
 
+const commentInNews: PillarColours = opinion;
+
 const specialReport = { dark: '#3f464a' };
 
 const contrasts = {
@@ -178,6 +181,7 @@ export const palette: AllPillarColours & OtherColours & Appearances = {
     culture,
     lifestyle,
     labs,
+    commentInNews,
     highlight,
     neutral,
     specialReport,

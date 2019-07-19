@@ -6,6 +6,8 @@ export const pillarNames: Pillar[] = [
     'sport',
     'culture',
     'lifestyle',
+    'labs',
+    'commentInNews',
 ];
 
 export const pillarPalette: Record<Pillar, PillarColours> = {
@@ -15,6 +17,7 @@ export const pillarPalette: Record<Pillar, PillarColours> = {
     culture: palette.culture,
     lifestyle: palette.lifestyle,
     labs: palette.labs,
+    commentInNews: palette.commentInNews,
 };
 
 /*
@@ -30,6 +33,7 @@ export const pillarMap: <T>(
     culture: f('culture'),
     lifestyle: f('lifestyle'),
     labs: f('labs'),
+    commentInNews: f('commentInNews'),
 });
 /*
 Further notes on this function:
@@ -37,3 +41,13 @@ Further notes on this function:
     - Where the function parameter f returns type T, pillarMap will return an object with
       a key for each Pillar and values of type T.
  */
+
+export const getPillar = (pillar: Pillar, designType: DesignType): Pillar => {
+    console.log(designType, 'designType');
+    console.log(pillar, 'pillar');
+    if (designType === 'Comment' && pillar === 'news') {
+        return 'commentInNews';
+    }
+
+    return pillar;
+};
