@@ -243,10 +243,6 @@ interface Props {
     data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
-// ------------------------------  //
-// window.guardian: WindowGuardian //
-// ------------------------------- //
-
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
