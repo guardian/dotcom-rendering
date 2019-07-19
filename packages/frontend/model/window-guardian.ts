@@ -21,8 +21,7 @@ const makeWindowGuardianConfig = (
     dcrDocumentData: DCRDocumentData,
 ): WindowGuardianConfig => {
     return {
-        commercialBundleURL:
-            'http://localhost:9000/assets/javascripts/graun.dotcom-rendering-commercial.js',
+        commercialBundleURL: dcrDocumentData.CAPI.config.commercialUrl,
         googleAnalytics: null,
         images: null,
         libs: null,
