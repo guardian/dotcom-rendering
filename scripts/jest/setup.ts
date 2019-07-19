@@ -6,19 +6,10 @@ import 'react-testing-library/cleanup-after-each';
 import { WindowGuardianConfig } from '@frontend/model/window-guardian';
 
 const windowGuardianConfig = {
-    googleAnalytics: null,
-    images: null,
-    libs: null,
-    modules: null,
-    nav: null,
-    ophan: null,
     page: {
         sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
         sentryHost: 'app.getsentry.com/35463',
     },
-    stylesheets: null,
-    switches: null,
-    tests: null,
 } as WindowGuardianConfig;
 
 const windowGuardian = {
@@ -28,9 +19,7 @@ const windowGuardian = {
     },
     config: windowGuardianConfig,
     polyfilled: false,
-    onPolyfilled: () => {
-        return undefined;
-    },
+    onPolyfilled: () => undefined,
 };
 
 // Stub global Guardian object
