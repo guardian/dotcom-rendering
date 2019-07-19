@@ -36,6 +36,11 @@ export const windowGuardianConfig = {
 
 export interface WindowGuardian {
     app: {
+        // The 'app' attribute of WindowGuardian doesn't exists in the regular frontend
+        // I don't know why it was introduced in dotcom-rendering
+        // I would recommend not to invest in it and to use the config attribute instead
+        // Therefore I will be phasing it out.
+        // -- Pascal
         data: DCRDocumentData;
         cssIDs: string[];
     };
