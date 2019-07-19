@@ -1,3 +1,7 @@
+// ------------------------  //
+// CAPIType and its subtypes //
+// ------------------------- //
+
 interface ArticleProps {
     CAPI: CAPIType;
     NAV: NavType;
@@ -221,7 +225,18 @@ type DesignType =
     | 'GuardianLabs'
     | 'Quiz';
 
-// 3rd party type declarations
+// ----------------- //
+// General DataTypes //
+// ----------------- //
+
+// ------------------------------  //
+// window.guardian: WindowGuardian //
+// ------------------------------- //
+
+// ------------------------------
+// 3rd party type declarations //
+// ------------------------------
+
 declare module 'emotion-server' {
     export const extractCritical: any;
 }
@@ -238,7 +253,10 @@ declare module 'minify-css-string' {
     export default minifyCSSString;
 }
 
-/* AMP types */
+// ------------------------------------- //
+// AMP types                             //
+// ------------------------------------- //
+
 // tslint:disable-next-line no-namespace
 declare namespace JSX {
     interface IntrinsicElements {
