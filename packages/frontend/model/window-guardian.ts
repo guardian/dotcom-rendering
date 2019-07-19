@@ -16,7 +16,9 @@ export interface WindowGuardianConfig {
     tests: any;
 }
 
-const makeWindowGuardianConfig = (): WindowGuardianConfig => {
+const makeWindowGuardianConfig = (
+    dcrDocumentData: DCRDocumentData,
+): WindowGuardianConfig => {
     return {
         googleAnalytics: null,
         images: null,
@@ -25,8 +27,8 @@ const makeWindowGuardianConfig = (): WindowGuardianConfig => {
         nav: null,
         ophan: null,
         page: {
-            sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-            sentryHost: 'app.getsentry.com/35463',
+            sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
+            sentryHost: dcrDocumentData.config.sentryHost,
         },
         stylesheets: null,
         switches: null,
@@ -50,15 +52,15 @@ export interface WindowGuardian {
 }
 
 export const makeWindowGuardian = (
-    data: DCRDocumentData,
+    dcrDocumentData: DCRDocumentData,
     cssIDs: string[],
 ): WindowGuardian => {
     return {
         app: {
-            data,
             cssIDs,
+            data: dcrDocumentData,
         },
-        config: makeWindowGuardianConfig(),
+        config: makeWindowGuardianConfig(dcrDocumentData),
         polyfilled: false,
         onPolyfilled: () => null,
     };
