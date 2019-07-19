@@ -14,18 +14,6 @@ import {
     makeWindowGuardian,
 } from '@frontend/model/window-guardian';
 
-interface Props {
-    data: {
-        page: string;
-        site: string;
-        CAPI: CAPIType;
-        NAV: NavType;
-        config: ConfigType;
-        GA: string; // TODO use GADataType again
-        linkedData: object;
-    };
-}
-
 interface RenderToStringResult {
     html: string;
     css: string;

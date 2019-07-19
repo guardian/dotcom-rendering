@@ -229,6 +229,18 @@ type DesignType =
 // General DataTypes //
 // ----------------- //
 
+interface Props {
+    data: {
+        page: string;
+        site: string;
+        CAPI: CAPIType;
+        NAV: NavType;
+        config: ConfigType;
+        GA: string; // TODO use GADataType again
+        linkedData: object;
+    };
+}
+
 // ------------------------------  //
 // window.guardian: WindowGuardian //
 // ------------------------------- //
