@@ -12,6 +12,7 @@ import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { filterForTagsOfType } from '@frontend/amp/lib/tag-utils';
 import { AdUserSync } from '@root/packages/frontend/amp/components/AdUserSync';
+import { getPillar } from '@frontend/lib/pillars';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -64,7 +65,13 @@ const Body: React.SFC<{
         );
     }
 
-    return <BodyArticle pillar={data.pillar} data={data} config={config} />;
+    return (
+        <BodyArticle
+            pillar={getPillar(data.pillar, data.designType)}
+            data={data}
+            config={config}
+        />
+    );
 };
 
 export const Article: React.FC<{

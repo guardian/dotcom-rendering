@@ -11,6 +11,7 @@ import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
+import { getPillar } from '@frontend/lib/pillars';
 
 const headerStyle = css`
     ${headline(5)};
@@ -66,15 +67,16 @@ const BylineMeta: React.SFC<{
     const bylineImageUrl = contributorTag
         ? contributorTag.bylineImageUrl
         : null;
+    const pillar = getPillar(articleData.pillar, articleData.designType);
 
     return (
         <div className={bylineWrapper}>
             <Byline
                 byline={articleData.author.byline}
                 tags={articleData.tags}
-                pillar={articleData.pillar}
+                pillar={pillar}
                 guardianBaseURL={articleData.guardianBaseURL}
-                className={cx(bylineStyle(articleData.pillar), {
+                className={cx(bylineStyle(pillar), {
                     [bottomPadding]: !bylineImageUrl,
                 })}
             />
@@ -94,37 +96,40 @@ const BylineMeta: React.SFC<{
 
 export const TopMetaOpinion: React.FC<{
     articleData: ArticleModel;
-}> = ({ articleData }) => (
-    <header>
-        {articleData.mainMediaElements.map((element, i) => (
-            <MainMedia key={i} element={element} pillar={articleData.pillar} />
-        ))}
+    pillar: Pillar;
+}> = ({ articleData, pillar }) => {
+    return (
+        <header>
+            {articleData.mainMediaElements.map((element, i) => (
+                <MainMedia key={i} element={element} pillar={pillar} />
+            ))}
 
-        <SeriesLink
-            baseURL={articleData.guardianBaseURL}
-            tags={articleData.tags}
-            pillar={articleData.pillar}
-            fallbackToSection={false}
-        />
+            <SeriesLink
+                baseURL={articleData.guardianBaseURL}
+                tags={articleData.tags}
+                pillar={pillar}
+                fallbackToSection={false}
+            />
 
-        <h1 className={headerStyle}>{articleData.headline}</h1>
+            <h1 className={headerStyle}>{articleData.headline}</h1>
 
-        <BylineMeta articleData={articleData} />
+            <BylineMeta articleData={articleData} />
 
-        <Standfirst text={articleData.standfirst} pillar={articleData.pillar} />
+            <Standfirst text={articleData.standfirst} pillar={pillar} />
 
-        <TopMetaExtras
-            sharingUrls={getSharingUrls(
-                articleData.pageId,
-                articleData.webTitle,
-            )}
-            pillar={articleData.pillar}
-            ageWarning={getAgeWarning(
-                articleData.tags,
-                articleData.webPublicationDate,
-            )}
-            webPublicationDate={articleData.webPublicationDateDisplay}
-            twitterHandle={articleData.author.twitterHandle}
-        />
-    </header>
-);
+            <TopMetaExtras
+                sharingUrls={getSharingUrls(
+                    articleData.pageId,
+                    articleData.webTitle,
+                )}
+                pillar={pillar}
+                ageWarning={getAgeWarning(
+                    articleData.tags,
+                    articleData.webPublicationDate,
+                )}
+                webPublicationDate={articleData.webPublicationDateDisplay}
+                twitterHandle={articleData.author.twitterHandle}
+            />
+        </header>
+    );
+};
