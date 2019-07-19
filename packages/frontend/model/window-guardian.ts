@@ -7,7 +7,10 @@ export interface WindowGuardianConfig {
     modules: any;
     nav: any;
     ophan: any;
-    page: any;
+    page: {
+        sentryHost: string;
+        sentryPublicApiKey: string;
+    };
     stylesheets: any;
     switches: any;
     tests: any;
@@ -22,7 +25,10 @@ export const windowGuardianConfig = {
     modules: null,
     nav: null,
     ophan: null,
-    page: null,
+    page: {
+        sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+        sentryHost: 'app.getsentry.com/35463',
+    },
     stylesheets: null,
     switches: null,
     tests: null,
@@ -33,9 +39,9 @@ export interface WindowGuardian {
         data: any;
         cssIDs: string[];
     };
+    config: WindowGuardianConfig;
     polyfilled: boolean;
     onPolyfilled: () => void;
-    config: WindowGuardianConfig;
 }
 
 export const makeWindowGuardian = (
