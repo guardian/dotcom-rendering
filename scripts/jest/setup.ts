@@ -5,8 +5,7 @@ import 'react-testing-library/cleanup-after-each';
 
 import { windowGuardianConfig } from '@frontend/model/window-guardian';
 
-// Stub global Guardian object
-window.guardian = {
+const windowGuardian = {
     app: {
         data: {},
         cssIDs: [],
@@ -17,3 +16,6 @@ window.guardian = {
         return undefined;
     },
 };
+
+// Stub global Guardian object
+window.guardian = windowGuardian;
