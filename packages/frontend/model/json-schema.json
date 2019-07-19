@@ -1356,13 +1356,13 @@
                 "dfpAccountId": {
                     "type": "string"
                 },
-                "commercialUrl": {
+                "commercialBundleUrl": {
                     "type": "string"
                 }
             },
             "required": [
                 "ajaxUrl",
-                "commercialUrl",
+                "commercialBundleUrl",
                 "dfpAccountId",
                 "sentryHost",
                 "sentryPublicApiKey",
