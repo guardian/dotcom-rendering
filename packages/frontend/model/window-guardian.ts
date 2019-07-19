@@ -36,24 +36,6 @@ const makeWindowGuardianConfig = (
     } as WindowGuardianConfig;
 };
 
-export const makeWindowGuardianConfigForTest = (): WindowGuardianConfig => {
-    return {
-        googleAnalytics: null,
-        images: null,
-        libs: null,
-        modules: null,
-        nav: null,
-        ophan: null,
-        page: {
-            sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-            sentryHost: 'app.getsentry.com/35463',
-        },
-        stylesheets: null,
-        switches: null,
-        tests: null,
-    } as WindowGuardianConfig;
-};
-
 export interface WindowGuardian {
     app: {
         // The 'app' attribute of WindowGuardian doesn't exists in the regular frontend
