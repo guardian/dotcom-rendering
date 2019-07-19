@@ -1,6 +1,7 @@
 export interface WindowGuardianConfig {
     // This interface is currently a work in progress.
     // Not all attributes will remain and better types will be given as we go along
+    commercialBundleURL: string;
     googleAnalytics: any;
     images: any;
     libs: any;
@@ -20,6 +21,8 @@ const makeWindowGuardianConfig = (
     dcrDocumentData: DCRDocumentData,
 ): WindowGuardianConfig => {
     return {
+        commercialBundleURL:
+            'http://localhost:9000/assets/javascripts/graun.dotcom-rendering-commercial.js',
         googleAnalytics: null,
         images: null,
         libs: null,
