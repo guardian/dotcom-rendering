@@ -240,7 +240,7 @@ interface DCRDocumentData {
 }
 
 interface Props {
-    data: DCRDocumentData;
+    data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
 // ------------------------------  //
