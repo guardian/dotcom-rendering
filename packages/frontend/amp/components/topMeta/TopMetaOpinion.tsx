@@ -11,7 +11,6 @@ import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
-import { getPillar } from '@frontend/lib/pillars';
 
 const headerStyle = css`
     ${headline(5)};
@@ -62,12 +61,12 @@ const bottomPadding = css`
 
 const BylineMeta: React.SFC<{
     articleData: ArticleModel;
-}> = ({ articleData }) => {
+    pillar: Pillar;
+}> = ({ articleData, pillar }) => {
     const contributorTag = articleData.tags.find(t => t.type === 'Contributor');
     const bylineImageUrl = contributorTag
         ? contributorTag.bylineImageUrl
         : null;
-    const pillar = getPillar(articleData.pillar, articleData.designType);
 
     return (
         <div className={bylineWrapper}>
@@ -113,7 +112,7 @@ export const TopMetaOpinion: React.FC<{
 
             <h1 className={headerStyle}>{articleData.headline}</h1>
 
-            <BylineMeta articleData={articleData} />
+            <BylineMeta articleData={articleData} pillar={pillar} />
 
             <Standfirst text={articleData.standfirst} pillar={pillar} />
 

@@ -92,7 +92,7 @@ export const Body: React.FC<{
 
     return (
         <InnerContainer className={body(pillar, designType)}>
-            <TopMeta designType={designType} data={data} />
+            <TopMeta designType={designType} pillar={pillar} data={data} />
 
             {elements}
 
