@@ -1,6 +1,6 @@
-// This interface is currently a work in progress.
-// Not all attributes will remain and better types will be given as we go along
 export interface WindowGuardianConfig {
+    // This interface is currently a work in progress.
+    // Not all attributes will remain and better types will be given as we go along
     googleAnalytics: any;
     images: any;
     libs: any;
@@ -16,23 +16,23 @@ export interface WindowGuardianConfig {
     tests: any;
 }
 
-// Temporary
-// Currently exported, but will be replaced by a function call.
-export const windowGuardianConfig = {
-    googleAnalytics: null,
-    images: null,
-    libs: null,
-    modules: null,
-    nav: null,
-    ophan: null,
-    page: {
-        sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-        sentryHost: 'app.getsentry.com/35463',
-    },
-    stylesheets: null,
-    switches: null,
-    tests: null,
-} as WindowGuardianConfig;
+const makeWindowGuardianConfig = (): WindowGuardianConfig => {
+    return {
+        googleAnalytics: null,
+        images: null,
+        libs: null,
+        modules: null,
+        nav: null,
+        ophan: null,
+        page: {
+            sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+            sentryHost: 'app.getsentry.com/35463',
+        },
+        stylesheets: null,
+        switches: null,
+        tests: null,
+    } as WindowGuardianConfig;
+};
 
 export interface WindowGuardian {
     app: {
@@ -50,16 +50,15 @@ export interface WindowGuardian {
 }
 
 export const makeWindowGuardian = (
-    config: WindowGuardianConfig,
     data: DCRDocumentData,
     cssIDs: string[],
 ): WindowGuardian => {
     return {
-        config,
         app: {
             data,
             cssIDs,
         },
+        config: makeWindowGuardianConfig(),
         polyfilled: false,
         onPolyfilled: () => null,
     };
