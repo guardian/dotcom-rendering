@@ -36,7 +36,7 @@ export const windowGuardianConfig = {
 
 export interface WindowGuardian {
     app: {
-        data: any;
+        data: DCRDocumentData;
         cssIDs: string[];
     };
     config: WindowGuardianConfig;
@@ -46,7 +46,7 @@ export interface WindowGuardian {
 
 export const makeWindowGuardian = (
     config: WindowGuardianConfig,
-    data: any,
+    data: DCRDocumentData,
     cssIDs: string[],
 ): WindowGuardian => {
     return {
