@@ -3,7 +3,9 @@ import 'jest-dom/extend-expect';
 // this is basically: afterEach(cleanup)
 import 'react-testing-library/cleanup-after-each';
 
-import { windowGuardianConfig } from '@frontend/model/window-guardian';
+import { makeWindowGuardianConfigForTest } from '@frontend/model/window-guardian';
+
+const windowGuardianConfig = makeWindowGuardianConfigForTest();
 
 const windowGuardian = {
     app: {
