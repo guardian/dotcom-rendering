@@ -43,8 +43,6 @@ Further notes on this function:
  */
 
 export const getPillar = (pillar: Pillar, designType: DesignType): Pillar => {
-    console.log(designType, 'designType');
-    console.log(pillar, 'pillar');
     if (designType === 'Comment' && pillar === 'news') {
         return 'commentInNews';
     }
