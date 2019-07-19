@@ -204,7 +204,7 @@ interface ConfigType {
     sentryHost: string;
     switches: { [key: string]: boolean };
     dfpAccountId: string;
-    commercialUrl: string;
+    commercialBundleUrl: string;
 }
 
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala

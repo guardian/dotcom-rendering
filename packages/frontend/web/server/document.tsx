@@ -58,7 +58,7 @@ export const document = ({ data }: Props) => {
     const vendorJS = getDist('vendor.js');
     const polyfillIO =
         'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
-    const commercialBundle = config.commercialUrl;
+    const commercialBundle = config.commercialBundleUrl;
     const priorityScripts = [polyfillIO, vendorJS, bundleJS];
     const preloadScripts = [
         ...new Set([commercialBundle].concat(priorityScripts)),

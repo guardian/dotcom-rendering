@@ -3010,7 +3010,7 @@ export const data = {
                     'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"footer_support"%7D',
             },
         },
-        commercialUrl:
+        commercialBundleUrl:
             'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
     },
     version: 2,
