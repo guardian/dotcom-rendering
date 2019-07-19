@@ -6,6 +6,7 @@ import 'react-testing-library/cleanup-after-each';
 import { WindowGuardianConfig } from '@frontend/model/window-guardian';
 
 const windowGuardianConfig = {
+    commercialBundleURL: 'http://foo.bar',
     googleAnalytics: null,
     images: null,
     libs: null,
