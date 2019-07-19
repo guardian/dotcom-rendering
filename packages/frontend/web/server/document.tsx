@@ -9,22 +9,7 @@ import { Article } from '../pages/Article';
 import { getDist } from '@frontend/lib/assets';
 // import { GADataType } from '@frontend/model/extract-ga';
 
-import {
-    windowGuardianConfig,
-    makeWindowGuardian,
-} from '@frontend/model/window-guardian';
-
-interface Props {
-    data: {
-        page: string;
-        site: string;
-        CAPI: CAPIType;
-        NAV: NavType;
-        config: ConfigType;
-        GA: string; // TODO use GADataType again
-        linkedData: object;
-    };
-}
+import { makeWindowGuardian } from '@frontend/model/window-guardian';
 
 interface RenderToStringResult {
     html: string;
@@ -88,11 +73,7 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
-    const windowGuardian = makeWindowGuardian(
-        windowGuardianConfig,
-        data,
-        cssIDs,
-    );
+    const windowGuardian = makeWindowGuardian(data, cssIDs);
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 

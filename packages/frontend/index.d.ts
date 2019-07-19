@@ -1,3 +1,7 @@
+// ------------------------  //
+// CAPIType and its subtypes //
+// ------------------------- //
+
 interface ArticleProps {
     CAPI: CAPIType;
     NAV: NavType;
@@ -221,7 +225,28 @@ type DesignType =
     | 'GuardianLabs'
     | 'Quiz';
 
-// 3rd party type declarations
+// ----------------- //
+// General DataTypes //
+// ----------------- //
+
+interface DCRDocumentData {
+    page: string;
+    site: string;
+    CAPI: CAPIType;
+    NAV: NavType;
+    config: ConfigType;
+    GA: string; // TODO use GADataType again
+    linkedData: object;
+}
+
+interface Props {
+    data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
+}
+
+// ------------------------------
+// 3rd party type declarations //
+// ------------------------------
+
 declare module 'emotion-server' {
     export const extractCritical: any;
 }
@@ -238,7 +263,10 @@ declare module 'minify-css-string' {
     export default minifyCSSString;
 }
 
-/* AMP types */
+// ------------------------------------- //
+// AMP types                             //
+// ------------------------------------- //
+
 // tslint:disable-next-line no-namespace
 declare namespace JSX {
     interface IntrinsicElements {
