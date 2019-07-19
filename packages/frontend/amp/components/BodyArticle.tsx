@@ -66,7 +66,12 @@ export const Body: React.FC<{
 }> = ({ pillar, data, config }) => {
     const designType = data.designType;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-    const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
+    const elementsWithoutAds = Elements(
+        capiElements,
+        pillar,
+        data.isImmersive,
+        designType,
+    );
     const slotIndexes = findAdSlots(capiElements);
     const adInfo = {
         section: data.sectionName,
@@ -100,6 +105,7 @@ export const Body: React.FC<{
                 sections={data.subMetaSectionLinks}
                 keywords={data.subMetaKeywordLinks}
                 pillar={pillar}
+                designType={designType}
                 sharingURLs={getSharingUrls(data.pageId, data.webTitle)}
                 pageID={data.pageId}
                 isCommentable={data.isCommentable}

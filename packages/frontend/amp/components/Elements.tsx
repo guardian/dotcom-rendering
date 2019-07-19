@@ -28,6 +28,7 @@ export const Elements = (
     elements: CAPIElement[],
     pillar: Pillar,
     isImmersive: boolean,
+    designType?: MaybeDesignType,
 ): JSX.Element[] => {
     const cleanedElements = elements.map(element =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -35,7 +36,14 @@ export const Elements = (
     const output = cleanedElements.map((element, i) => {
         switch (element._type) {
             case 'model.dotcomrendering.pageElements.TextBlockElement':
-                return <Text key={i} html={element.html} pillar={pillar} />;
+                return (
+                    <Text
+                        key={i}
+                        html={element.html}
+                        pillar={pillar}
+                        designType={designType}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                 return (
                     <Subheading

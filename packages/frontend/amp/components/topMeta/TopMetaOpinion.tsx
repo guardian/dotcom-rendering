@@ -12,6 +12,12 @@ import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
 
+const pillarOverride = (pillar: Pillar, designType?: MaybeDesignType) => {
+    return designType === 'Comment' && pillar === 'news'
+        ? pillarPalette.opinion.main
+        : pillarPalette[pillar].main;
+};
+
 const headerStyle = css`
     ${headline(5)};
     font-weight: 100;
@@ -25,7 +31,7 @@ const bylineStyle = (pillar: Pillar) => css`
     padding-top: 3px;
 
     a {
-        color: ${pillarPalette['opinion'].main};
+        color: ${pillarOverride(pillar, 'Comment')};
         text-decoration: none;
         font-style: italic;
     }
@@ -119,7 +125,7 @@ export const TopMetaOpinion: React.FC<{
                 articleData.webTitle,
             )}
             pillar={articleData.pillar}
-            isCommentDesignType={true}
+            designType={'Comment'}
             ageWarning={getAgeWarning(
                 articleData.tags,
                 articleData.webPublicationDate,

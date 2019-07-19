@@ -10,15 +10,14 @@ import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { pillarPalette } from '@frontend/lib/pillars';
 
-const pillarOverride = (pillar: Pillar, isCommentDesignType: Boolean) => {
-    return isCommentDesignType
-        ? pillarPalette['opinion'].main
+const pillarOverride = (pillar: Pillar, designType?: MaybeDesignType) =>
+    designType && pillar === 'news'
+        ? pillarPalette.opinion.main
         : pillarPalette[pillar].main;
-};
 
-const pillarFill = (pillar: Pillar, isCommentDesignType: Boolean) =>
+const pillarFill = (pillar: Pillar, designType?: DesignType) =>
     css`
-        fill: ${pillarOverride(pillar, isCommentDesignType)};
+        fill: ${pillarOverride(pillar, designType)};
     `;
 
 const shareIconsListItem = css`
@@ -27,7 +26,7 @@ const shareIconsListItem = css`
     min-width: 32px;
 `;
 
-const shareIcon = (pillar: Pillar) => css`
+const shareIcon = (pillar: Pillar, designType?: MaybeDesignType) => css`
     border: 1px solid ${pillarPalette[pillar].neutral.border};
     white-space: nowrap;
     overflow: hidden;
@@ -54,8 +53,8 @@ const shareIcon = (pillar: Pillar) => css`
     }
 
     :hover {
-        background-color: ${pillarPalette[pillar].main};
-        border-color: ${pillarPalette[pillar].main};
+        background-color: ${pillarOverride(pillar, designType)};
+        border-color: ${pillarOverride(pillar, designType)};
         fill: white;
     }
 `;
@@ -77,15 +76,9 @@ export const ShareIcons: React.FC<{
     };
     displayIcons: SharePlatform[];
     pillar: Pillar;
-    isCommentDesignType?: Boolean;
+    designType?: MaybeDesignType;
     className?: string;
-}> = ({
-    sharingUrls,
-    displayIcons,
-    pillar,
-    isCommentDesignType,
-    className,
-}) => {
+}> = ({ sharingUrls, displayIcons, pillar, designType, className }) => {
     const icons: { [K in SharePlatform]?: React.ComponentType } = {
         facebook: FacebookIcon,
         twitter: TwitterIconPadded,
@@ -134,8 +127,8 @@ export const ShareIcons: React.FC<{
                             </span>
                             <span
                                 className={cx(
-                                    shareIcon(pillar),
-                                    pillarFill(pillar, isCommentDesignType),
+                                    shareIcon(pillar, designType),
+                                    pillarFill(pillar, designType),
                                 )}
                             >
                                 <Icon />

@@ -6,6 +6,11 @@ import { palette } from '@guardian/pasteup/palette';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import CommentIcon from '@guardian/pasteup/icons/comment.svg';
 
+const pillarOverride = (pillar: Pillar, designType?: MaybeDesignType) =>
+    designType === 'Comment' && pillar === 'news'
+        ? pillarPalette.opinion.main
+        : pillarPalette[pillar].main;
+
 const guardianLines = (pillar: Pillar) => css`
     background-image: repeating-linear-gradient(
         to bottom,
@@ -21,12 +26,12 @@ const guardianLines = (pillar: Pillar) => css`
     margin-top: 12px;
 `;
 
-const linkStyle = (pillar: Pillar) => css`
+const linkStyle = (pillar: Pillar, designType?: MaybeDesignType) => css`
     position: relative;
     padding-left: 5px;
     padding-right: 6px;
     text-decoration: none;
-    color: ${pillarPalette[pillar].main};
+    color: ${pillarOverride(pillar, designType)};
     ${textSans(3)};
     :after {
         content: '/';
@@ -56,12 +61,12 @@ const keywordListStyle = (pillar: Pillar) => css`
     margin-bottom: 6px;
 `;
 
-const sectionLinkStyle = (pillar: Pillar) => css`
+const sectionLinkStyle = (pillar: Pillar, designType?: MaybeDesignType) => css`
     position: relative;
     padding-left: 5px;
     padding-right: 6px;
     text-decoration: none;
-    color: ${pillarPalette[pillar].main};
+    color: ${pillarOverride(pillar, designType)};
     ${body(3)};
     :after {
         content: '/';
@@ -122,6 +127,7 @@ export const SubMeta: React.FC<{
     pageID: string;
     isCommentable: boolean;
     guardianBaseURL: string;
+    designType?: MaybeDesignType;
 }> = ({
     pillar,
     sections,
@@ -130,11 +136,12 @@ export const SubMeta: React.FC<{
     pageID,
     isCommentable,
     guardianBaseURL,
+    designType,
 }) => {
     const sectionListItems = sections.map(link => (
         <li className={itemStyle} key={link.url}>
             <a
-                className={sectionLinkStyle(pillar)}
+                className={sectionLinkStyle(pillar, designType)}
                 href={`${guardianBaseURL}${link.url}`}
             >
                 {link.title}
@@ -145,7 +152,7 @@ export const SubMeta: React.FC<{
     const keywordListItems = keywords.map(link => (
         <li className={itemStyle} key={link.url}>
             <a
-                className={linkStyle(pillar)}
+                className={linkStyle(pillar, designType)}
                 href={`${guardianBaseURL}${link.url}`}
             >
                 {link.title}
@@ -164,6 +171,7 @@ export const SubMeta: React.FC<{
                 className={shareIcons}
                 sharingUrls={sharingURLs}
                 pillar={pillar}
+                designType={designType}
                 displayIcons={[
                     'facebook',
                     'twitter',

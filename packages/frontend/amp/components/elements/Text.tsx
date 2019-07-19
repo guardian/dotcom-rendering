@@ -13,6 +13,12 @@ import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css
 
 // tslint:disable:react-no-dangerous-html
 
+const pillarOverride = (pillar: Pillar, designType?: MaybeDesignType) => {
+    return designType === 'Comment' && pillar === 'news'
+        ? pillarPalette.opinion.dark
+        : pillarPalette[pillar].dark;
+};
+
 export const ListStyle = (iconColour: string) => css`
     li {
         margin-bottom: 6px;
@@ -34,18 +40,18 @@ export const ListStyle = (iconColour: string) => css`
     }
 `;
 
-export const LinkStyle = (pillar: Pillar) => css`
+export const LinkStyle = (pillar: Pillar, designType?: MaybeDesignType) => css`
     a {
-        color: ${pillarPalette[pillar].dark};
+        color: ${pillarOverride(pillar, designType)};
         text-decoration: none;
         border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
         :hover {
-            border-bottom: 1px solid ${pillarPalette[pillar].dark};
+            border-bottom: 1px solid ${pillarOverride(pillar, designType)};
         }
     }
 `;
 
-export const TextStyle = (pillar: Pillar) => css`
+export const TextStyle = (pillar: Pillar, designType?: MaybeDesignType) => css`
     strong {
         font-weight: 700;
     }
@@ -64,7 +70,7 @@ export const TextStyle = (pillar: Pillar) => css`
 
     ${body(2)};
 
-    ${LinkStyle(pillar)};
+    ${LinkStyle(pillar, designType)};
     ${ListStyle(pillarPalette[pillar].neutral.border)};
 `;
 
@@ -78,9 +84,14 @@ const textStyleLabs = css`
 export const Text: React.FC<{
     html: string;
     pillar: Pillar;
-}> = ({ html, pillar }) => (
+    designType?: MaybeDesignType;
+}> = ({ html, pillar, designType }) => (
     <span
-        className={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
+        className={composeLabsCSS(
+            pillar,
+            TextStyle(pillar, designType),
+            textStyleLabs,
+        )}
         dangerouslySetInnerHTML={{
             __html: sanitise(html),
         }}

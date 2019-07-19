@@ -223,6 +223,7 @@ type DesignType =
     | 'AdvertisementFeature';
 
 type DesignTypesObj = { [key in DesignType]: any };
+type MaybeDesignType = DesignType | undefined;
 
 // 3rd party type declarations
 declare module 'emotion-server' {
