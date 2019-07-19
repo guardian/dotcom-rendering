@@ -1,4 +1,4 @@
-export const designTypes: Array<DesignType> = [
+export const designTypes: DesignType[] = [
     'Article',
     'Immersive',
     'Media',
