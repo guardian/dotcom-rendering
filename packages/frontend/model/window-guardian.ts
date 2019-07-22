@@ -36,6 +36,8 @@ export interface WindowGuardian {
     // Attributes 'polyfilled' and 'onPolyfilled' are positionned at window.guardian used by the client side's boot process.
     polyfilled: boolean;
     onPolyfilled: () => void;
+
+    adBlockers: any;
 }
 
 export const makeWindowGuardian = (
@@ -50,5 +52,9 @@ export const makeWindowGuardian = (
         config: makeWindowGuardianConfig(dcrDocumentData),
         polyfilled: false,
         onPolyfilled: () => null,
+        adBlockers: {
+            active: undefined,
+            onDetect: [],
+        },
     };
 };
