@@ -485,7 +485,6 @@
             "required": [
                 "_type",
                 "assetId",
-                "channelId",
                 "id",
                 "mediaTitle"
             ]
