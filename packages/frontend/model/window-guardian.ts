@@ -3,6 +3,7 @@ export interface WindowGuardianConfig {
         sentryHost: string;
         sentryPublicApiKey: string;
     };
+    switches: { [key: string]: boolean };
 }
 
 const makeWindowGuardianConfig = (
@@ -13,6 +14,7 @@ const makeWindowGuardianConfig = (
             sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
             sentryHost: dcrDocumentData.config.sentryHost,
         },
+        switches: dcrDocumentData.CAPI.config.switches,
     } as WindowGuardianConfig;
 };
 
