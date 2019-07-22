@@ -1,4 +1,5 @@
 export interface WindowGuardianConfig {
+    isDotcomRendering: boolean;
     page: {
         sentryHost: string;
         sentryPublicApiKey: string;
@@ -10,6 +11,8 @@ const makeWindowGuardianConfig = (
     dcrDocumentData: DCRDocumentData,
 ): WindowGuardianConfig => {
     return {
+        // This indicates to the client side code that we are running a dotcom-rendering rendered page.
+        isDotcomRendering: true,
         page: {
             sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
             sentryHost: dcrDocumentData.config.sentryHost,
