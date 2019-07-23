@@ -256,6 +256,10 @@ interface Props {
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
+<<<<<<< HEAD
+=======
+
+>>>>>>> Add new schema
 declare module 'emotion-server' {
     export const extractCritical: any;
 }
