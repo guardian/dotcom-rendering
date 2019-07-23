@@ -12,7 +12,7 @@ interface ArticleProps {
 // RealPillars have Pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
-type FakePillars = 'labs' | 'commentInNews';
+type FakePillars = 'labs';
 type Pillar = RealPillars | FakePillars;
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

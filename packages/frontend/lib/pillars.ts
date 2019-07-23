@@ -33,7 +33,6 @@ export const pillarMap: <T>(
     culture: f('culture'),
     lifestyle: f('lifestyle'),
     labs: f('labs'),
-    commentInNews: f('commentInNews'),
 });
 /*
 Further notes on this function:
@@ -44,7 +43,7 @@ Further notes on this function:
 
 export const getPillar = (pillar: Pillar, designType: DesignType): Pillar => {
     if (designType === 'Comment' && pillar === 'news') {
-        return 'commentInNews';
+        return 'opinion';
     }
 
     return pillar;
