@@ -16,6 +16,7 @@ type FakePillars = 'labs';
 type Pillar = RealPillars | FakePillars;
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
+type EditionLower = 'uk' | 'us' | 'int' | 'au'; // Is there a way to do this in typescript without duplication?
 
 type SharePlatform =
     | 'facebook'
@@ -213,6 +214,22 @@ interface ConfigType {
     isDev: boolean;
 }
 
+interface GADataType {
+    pillar: Pillar;
+    webTitle: string;
+    section: string;
+    contentType: string;
+    commissioningDesks: string;
+    contentId: string;
+    authorIds: string;
+    keywordIds: string;
+    toneIds: string;
+    seriesId: string;
+    isHosted: string;
+    edition: EditionLower;
+    beaconUrl: string;
+}
+
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
 type DesignType =
     | 'Article'
@@ -247,7 +264,7 @@ interface DCRDocumentData {
     CAPI: CAPIType;
     NAV: NavType;
     config: ConfigType;
-    GA: string; // TODO use GADataType again
+    GA: GADataType;
     linkedData: object;
 }
 
