@@ -7,7 +7,6 @@ export const pillarNames: Pillar[] = [
     'culture',
     'lifestyle',
     'labs',
-    'commentInNews',
 ];
 
 export const pillarPalette: Record<Pillar, PillarColours> = {
@@ -17,7 +16,6 @@ export const pillarPalette: Record<Pillar, PillarColours> = {
     culture: palette.culture,
     lifestyle: palette.lifestyle,
     labs: palette.labs,
-    commentInNews: palette.commentInNews,
 };
 
 /*
