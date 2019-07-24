@@ -26,6 +26,7 @@ import { Dateline } from './Dateline';
 import { MainMedia } from './MainMedia';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
+import { SyndicationButton } from './SyndicationButton';
 
 const curly = (x: any) => x;
 
@@ -531,6 +532,10 @@ export const ArticleBody: React.FC<{
                             'whatsApp',
                             'messenger',
                         ]}
+                    />
+                    <SyndicationButton
+                        webUrl={CAPI.webURL}
+                        internalPageCode={CAPI.pageId}
                     />
                 </div>
             </div>
