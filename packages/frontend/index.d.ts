@@ -209,6 +209,7 @@ interface ConfigType {
     switches: { [key: string]: boolean };
     dfpAccountId: string;
     commercialBundleUrl: string;
+    revisionNumber: string;
 }
 
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
