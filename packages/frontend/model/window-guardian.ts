@@ -1,6 +1,9 @@
 export interface WindowGuardianConfig {
     isDotcomRendering: boolean;
     page: {
+        contentType: string;
+        edition: Edition;
+        revisionNumber: string;
         sentryHost: string;
         sentryPublicApiKey: string;
     };
@@ -14,6 +17,9 @@ const makeWindowGuardianConfig = (
         // This indicates to the client side code that we are running a dotcom-rendering rendered page.
         isDotcomRendering: true,
         page: {
+            contentType: dcrDocumentData.CAPI.contentType,
+            edition: dcrDocumentData.CAPI.editionId,
+            revisionNumber: dcrDocumentData.config.revisionNumber,
             sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
             sentryHost: dcrDocumentData.config.sentryHost,
         },
