@@ -519,24 +519,29 @@ export const ArticleBody: React.FC<{
                             pillar={CAPI.pillar}
                         />
                     )}
-                    <SharingIcons
-                        className={subMetaSharingIcons}
-                        sharingUrls={sharingUrls}
-                        pillar={CAPI.pillar}
-                        displayIcons={[
-                            'facebook',
-                            'twitter',
-                            'email',
-                            'linkedIn',
-                            'pinterest',
-                            'whatsApp',
-                            'messenger',
-                        ]}
-                    />
-                    <SyndicationButton
-                        webUrl={CAPI.webURL}
-                        internalPageCode={CAPI.pageId}
-                    />
+                    {CAPI.showBottomSocialButtons && (
+                        <SharingIcons
+                            className={subMetaSharingIcons}
+                            sharingUrls={sharingUrls}
+                            pillar={CAPI.pillar}
+                            displayIcons={[
+                                'facebook',
+                                'twitter',
+                                'email',
+                                'linkedIn',
+                                'pinterest',
+                                'whatsApp',
+                                'messenger',
+                            ]}
+                        />
+                    )}
+                    {CAPI.showBottomSocialButtons && (
+                        <SyndicationButton
+                            webUrl={CAPI.webURL}
+                            internalPageCode={CAPI.pageId}
+                        />
+                    )}
+                    }
                 </div>
             </div>
         </div>

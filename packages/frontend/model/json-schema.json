@@ -10,6 +10,9 @@
         "webTitle": {
             "type": "string"
         },
+        "showBottomSocialButtons": {
+            "type": "boolean"
+        },
         "mainMediaElements": {
             "type": "array",
             "items": {
@@ -248,7 +251,8 @@
         "webPublicationDate",
         "webPublicationDateDisplay",
         "webTitle",
-        "webURL"
+        "webURL",
+        "showBottomSocialButtons"
     ],
     "definitions": {
         "TextBlockElement": {
@@ -264,10 +268,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "html"
-            ]
+            "required": ["_type", "html"]
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -282,10 +283,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "html"
-            ]
+            "required": ["_type", "html"]
         },
         "RichLinkBlockElement": {
             "type": "object",
@@ -306,12 +304,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "prefix",
-                "text",
-                "url"
-            ]
+            "required": ["_type", "prefix", "text", "url"]
         },
         "ImageBlockElement": {
             "type": "object",
@@ -332,9 +325,7 @@
                             }
                         }
                     },
-                    "required": [
-                        "allImages"
-                    ]
+                    "required": ["allImages"]
                 },
                 "data": {
                     "type": "object",
@@ -366,13 +357,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "data",
-                "imageSources",
-                "media",
-                "role"
-            ]
+            "required": ["_type", "data", "imageSources", "media", "role"]
         },
         "Image": {
             "type": "object",
@@ -393,10 +378,7 @@
                             "type": "string"
                         }
                     },
-                    "required": [
-                        "height",
-                        "width"
-                    ]
+                    "required": ["height", "width"]
                 },
                 "mediaType": {
                     "type": "string"
@@ -408,13 +390,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "fields",
-                "index",
-                "mediaType",
-                "mimeType",
-                "url"
-            ]
+            "required": ["fields", "index", "mediaType", "mimeType", "url"]
         },
         "ImageSource": {
             "type": "object",
@@ -429,10 +405,7 @@
                     }
                 }
             },
-            "required": [
-                "srcSet",
-                "weighting"
-            ]
+            "required": ["srcSet", "weighting"]
         },
         "Weighting": {
             "enum": [
@@ -455,10 +428,7 @@
                     "type": "number"
                 }
             },
-            "required": [
-                "src",
-                "width"
-            ]
+            "required": ["src", "width"]
         },
         "YoutubeBlockElement": {
             "type": "object",
@@ -482,12 +452,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "assetId",
-                "id",
-                "mediaTitle"
-            ]
+            "required": ["_type", "assetId", "id", "mediaTitle"]
         },
         "VideoYoutube": {
             "type": "object",
@@ -511,13 +476,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "caption",
-                "height",
-                "url",
-                "width"
-            ]
+            "required": ["_type", "caption", "height", "url", "width"]
         },
         "VideoVimeo": {
             "type": "object",
@@ -541,13 +500,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "caption",
-                "height",
-                "url",
-                "width"
-            ]
+            "required": ["_type", "caption", "height", "url", "width"]
         },
         "VideoFacebook": {
             "type": "object",
@@ -571,13 +524,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "caption",
-                "height",
-                "url",
-                "width"
-            ]
+            "required": ["_type", "caption", "height", "url", "width"]
         },
         "VideoGuardian": {
             "type": "object",
@@ -598,11 +545,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "assets",
-                "caption"
-            ]
+            "required": ["_type", "assets", "caption"]
         },
         "VideoAssets": {
             "type": "object",
@@ -614,10 +557,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "mimeType",
-                "url"
-            ]
+            "required": ["mimeType", "url"]
         },
         "InstagramBlockElement": {
             "type": "object",
@@ -638,12 +578,7 @@
                     "type": "boolean"
                 }
             },
-            "required": [
-                "_type",
-                "hasCaption",
-                "html",
-                "url"
-            ]
+            "required": ["_type", "hasCaption", "html", "url"]
         },
         "TweetBlockElement": {
             "type": "object",
@@ -667,13 +602,7 @@
                     "type": "boolean"
                 }
             },
-            "required": [
-                "_type",
-                "hasMedia",
-                "html",
-                "id",
-                "url"
-            ]
+            "required": ["_type", "hasMedia", "html", "id", "url"]
         },
         "CommentBlockElement": {
             "type": "object",
@@ -735,13 +664,7 @@
                     "type": "boolean"
                 }
             },
-            "required": [
-                "_type",
-                "html",
-                "id",
-                "isMandatory",
-                "isTrack"
-            ]
+            "required": ["_type", "html", "id", "isMandatory", "isTrack"]
         },
         "EmbedBlockElement": {
             "type": "object",
@@ -765,11 +688,7 @@
                     "type": "boolean"
                 }
             },
-            "required": [
-                "_type",
-                "html",
-                "isMandatory"
-            ]
+            "required": ["_type", "html", "isMandatory"]
         },
         "DisclaimerBlockElement": {
             "type": "object",
@@ -784,10 +703,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "html"
-            ]
+            "required": ["_type", "html"]
         },
         "PullquoteBlockElement": {
             "type": "object",
@@ -805,11 +721,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "html",
-                "role"
-            ]
+            "required": ["_type", "html", "role"]
         },
         "QABlockElement": {
             "type": "object",
@@ -836,13 +748,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "credit",
-                "html",
-                "id",
-                "title"
-            ]
+            "required": ["_type", "credit", "html", "id", "title"]
         },
         "GuideBlockElement": {
             "type": "object",
@@ -872,14 +778,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "credit",
-                "html",
-                "id",
-                "label",
-                "title"
-            ]
+            "required": ["_type", "credit", "html", "id", "label", "title"]
         },
         "ProfileBlockElement": {
             "type": "object",
@@ -909,14 +808,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "credit",
-                "html",
-                "id",
-                "label",
-                "title"
-            ]
+            "required": ["_type", "credit", "html", "id", "label", "title"]
         },
         "TimelineBlockElement": {
             "type": "object",
@@ -943,12 +835,7 @@
                     }
                 }
             },
-            "required": [
-                "_type",
-                "events",
-                "id",
-                "title"
-            ]
+            "required": ["_type", "events", "id", "title"]
         },
         "TimelineEvent": {
             "type": "object",
@@ -966,10 +853,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "date",
-                "title"
-            ]
+            "required": ["date", "title"]
         },
         "InteractiveMarkupBlockElement": {
             "type": "object",
@@ -993,9 +877,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type"
-            ]
+            "required": ["_type"]
         },
         "InteractiveUrlElement": {
             "type": "object",
@@ -1010,10 +892,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "_type",
-                "url"
-            ]
+            "required": ["_type", "url"]
         },
         "MapBlockElement": {
             "type": "object",
@@ -1093,9 +972,7 @@
                     ]
                 }
             },
-            "required": [
-                "_type"
-            ]
+            "required": ["_type"]
         },
         "VideoBlockElement": {
             "type": "object",
@@ -1107,9 +984,7 @@
                     ]
                 }
             },
-            "required": [
-                "_type"
-            ]
+            "required": ["_type"]
         },
         "Block": {
             "type": "object",
@@ -1221,10 +1096,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "elements",
-                "id"
-            ]
+            "required": ["elements", "id"]
         },
         "Pagination": {
             "type": "object",
@@ -1248,10 +1120,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "currentPage",
-                "totalPages"
-            ]
+            "required": ["currentPage", "totalPages"]
         },
         "AuthorType": {
             "type": "object",
@@ -1266,17 +1135,10 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "byline"
-            ]
+            "required": ["byline"]
         },
         "Edition": {
-            "enum": [
-                "AU",
-                "INT",
-                "UK",
-                "US"
-            ],
+            "enum": ["AU", "INT", "UK", "US"],
             "type": "string"
         },
         "TagType": {
@@ -1301,11 +1163,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "id",
-                "title",
-                "type"
-            ]
+            "required": ["id", "title", "type"]
         },
         "Pillar": {
             "enum": [
@@ -1328,10 +1186,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "title",
-                "url"
-            ]
+            "required": ["title", "url"]
         },
         "ConfigType": {
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
@@ -1405,12 +1260,7 @@
                     "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
-            "required": [
-                "AU",
-                "INT",
-                "UK",
-                "US"
-            ]
+            "required": ["AU", "INT", "UK", "US"]
         },
         "EditionCommercialProperties": {
             "type": "object",
@@ -1425,9 +1275,7 @@
                     "$ref": "#/definitions/Branding"
                 }
             },
-            "required": [
-                "adTargeting"
-            ]
+            "required": ["adTargeting"]
         },
         "AdTargetParam": {
             "type": "object",
@@ -1449,10 +1297,7 @@
                     ]
                 }
             },
-            "required": [
-                "name",
-                "value"
-            ]
+            "required": ["name", "value"]
         },
         "Branding": {
             "type": "object",
@@ -1482,28 +1327,16 @@
                                     "type": "number"
                                 }
                             },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
+                            "required": ["height", "width"]
                         }
                     },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
+                    "required": ["dimensions", "label", "link", "src"]
                 },
                 "aboutThisLink": {
                     "type": "string"
                 }
             },
-            "required": [
-                "aboutThisLink",
-                "logo",
-                "sponsorName"
-            ]
+            "required": ["aboutThisLink", "logo", "sponsorName"]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

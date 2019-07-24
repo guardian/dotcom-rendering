@@ -172,6 +172,7 @@ interface CAPIType {
     linkedData: object[];
     config: ConfigType;
     designType: DesignType;
+    showBottomSocialButtons: boolean;
 
     // AMP specific (for now)
     guardianBaseURL: string;
