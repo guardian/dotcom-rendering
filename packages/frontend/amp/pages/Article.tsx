@@ -12,6 +12,7 @@ import { Sidebar } from '@frontend/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { filterForTagsOfType } from '@frontend/amp/lib/tag-utils';
 import { AdUserSync } from '@root/packages/frontend/amp/components/AdUserSync';
+import { getPillar } from '@frontend/lib/pillars';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
@@ -52,19 +53,18 @@ export interface ArticleModel {
 
 const Body: React.SFC<{
     data: ArticleModel;
+    pillar: Pillar;
     config: ConfigType;
-}> = ({ data, config }) => {
+}> = ({ data, config, pillar }) => {
     // TODO check if there is a better way to determine if liveblog
     const isLiveBlog =
         data.tags.find(tag => tag.id === 'tone/minutebyminute') !== undefined;
 
     if (isLiveBlog) {
-        return (
-            <BodyLiveblog pillar={data.pillar} data={data} config={config} />
-        );
+        return <BodyLiveblog pillar={pillar} data={data} config={config} />;
     }
 
-    return <BodyArticle pillar={data.pillar} data={data} config={config} />;
+    return <BodyArticle pillar={pillar} data={data} config={config} />;
 };
 
 export const Article: React.FC<{
@@ -87,7 +87,14 @@ export const Article: React.FC<{
                     config={config}
                     guardianBaseURL={articleData.guardianBaseURL}
                 />
-                <Body data={articleData} config={config} />
+                <Body
+                    data={articleData}
+                    pillar={getPillar(
+                        articleData.pillar,
+                        articleData.designType,
+                    )}
+                    config={config}
+                />
                 <Onward
                     shouldHideAds={articleData.shouldHideAds}
                     pageID={articleData.pageId}

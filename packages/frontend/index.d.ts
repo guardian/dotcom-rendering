@@ -8,8 +8,12 @@ interface ArticleProps {
     config: ConfigType;
 }
 
-// 'labs' is a fake pillar used to identify paid content (Guardian Labs) for rendering styling.
-type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' | 'labs';
+// Pillars are used for styling
+// RealPillars have Pillar palette colours
+// FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
+type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+type FakePillars = 'labs';
+type Pillar = RealPillars | FakePillars;
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 

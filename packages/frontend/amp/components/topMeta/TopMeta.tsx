@@ -8,7 +8,8 @@ import { designTypeDefault } from '@frontend/lib/designTypes';
 export const TopMeta: React.SFC<{
     data: ArticleModel;
     designType: DesignType;
-}> = ({ data, designType }) => {
+    pillar: Pillar;
+}> = ({ data, designType, pillar }) => {
     // Note, liveblogs have a separate top meta - see TopMetaLiveblog
     const defaultTopMeta: DesignTypesObj = designTypeDefault(
         <TopMetaNews articleData={data} />,
@@ -17,7 +18,7 @@ export const TopMeta: React.SFC<{
     // Extend defaultTopMeta with custom topMeta for some designTypes
     const designTypeTopMeta: DesignTypesObj = {
         ...defaultTopMeta,
-        Comment: <TopMetaOpinion articleData={data} />,
+        Comment: <TopMetaOpinion articleData={data} pillar={pillar} />,
         AdvertisementFeature: <TopMetaPaidContent articleData={data} />,
     };
 

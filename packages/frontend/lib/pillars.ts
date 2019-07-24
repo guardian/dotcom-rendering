@@ -6,6 +6,7 @@ export const pillarNames: Pillar[] = [
     'sport',
     'culture',
     'lifestyle',
+    'labs',
 ];
 
 export const pillarPalette: Record<Pillar, PillarColours> = {
@@ -37,3 +38,11 @@ Further notes on this function:
     - Where the function parameter f returns type T, pillarMap will return an object with
       a key for each Pillar and values of type T.
  */
+
+export const getPillar = (pillar: Pillar, designType: DesignType): Pillar => {
+    if (designType === 'Comment' && pillar === 'news') {
+        return 'opinion';
+    }
+
+    return pillar;
+};
