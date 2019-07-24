@@ -226,6 +226,9 @@ type DesignType =
     | 'Quiz'
     | 'AdvertisementFeature';
 
+// This is an object that allows you Type defaults of the designTypes.
+// The return type looks like: { Feature: any, Live: any, ...}
+// and can be used to add TypeSafety when needing to override a style in a designType
 type DesignTypesObj = { [key in DesignType]: any };
 
 // ----------------- //
