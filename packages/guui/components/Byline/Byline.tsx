@@ -3,35 +3,6 @@ import { css } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
-import { leftCol } from '@guardian/pasteup/breakpoints';
-
-const profile = css`
-    ${headline(2)};
-    font-weight: 700;
-    margin-bottom: 4px;
-`;
-
-const pillarColour = (pillar: Pillar) => css`
-    color: ${palette[pillar].main};
-`;
-
-const byline = css`
-    font-style: italic;
-`;
-
-const bylineLink = css`
-    ${headline(2)};
-    font-style: normal;
-    font-weight: 700;
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
-    }
-
-    ${leftCol} {
-        ${headline(3)};
-    }
-`;
 
 const twitterHandle = css`
     ${textSans(1)};
