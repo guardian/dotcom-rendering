@@ -5,7 +5,7 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMeta } from '@frontend/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { getToneType, StyledTone } from '@frontend/amp/lib/tag-utils';
+import { designTypeDefault } from '@frontend/lib/designTypes';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { WithAds } from '@frontend/amp/components/WithAds';
@@ -13,14 +13,20 @@ import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { until } from '@guardian/pasteup/breakpoints';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 
-const body = (pillar: Pillar, tone: StyledTone) => {
-    const bgColorMap = {
-        'default-tone': palette.neutral[100],
-        'tone/comment': palette.opinion.faded,
-        'tone/advertisement-features': palette.neutral[85],
+const body = (pillar: Pillar, designType: DesignType) => {
+    const defaultStyles: DesignTypesObj = designTypeDefault(
+        palette.neutral[100],
+    );
+
+    // Extend defaultStyles with custom styles for some designTypes
+    const designTypeStyle: DesignTypesObj = {
+        ...defaultStyles,
+        Comment: palette.opinion.faded,
+        AdvertisementFeature: palette.neutral[85],
     };
+
     return css`
-        background-color: ${bgColorMap[tone]};
+        background-color: ${designTypeStyle[designType]};
         ${bulletStyle(pillar)}
     `;
 };
@@ -58,7 +64,7 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const tone = getToneType(data.tags);
+    const designType = data.designType;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
     const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
     const slotIndexes = findAdSlots(capiElements);
@@ -85,8 +91,8 @@ export const Body: React.FC<{
     );
 
     return (
-        <InnerContainer className={body(pillar, tone)}>
-            <TopMeta tone={tone} data={data} />
+        <InnerContainer className={body(pillar, designType)}>
+            <TopMeta designType={designType} data={data} />
 
             {elements}
 

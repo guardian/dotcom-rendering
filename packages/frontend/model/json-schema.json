@@ -1370,6 +1370,7 @@
         },
         "DesignType": {
             "enum": [
+                "AdvertisementFeature",
                 "Analysis",
                 "Article",
                 "Comment",

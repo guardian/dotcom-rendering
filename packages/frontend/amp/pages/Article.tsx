@@ -47,6 +47,7 @@ export interface ArticleModel {
     commercialProperties: CommercialProperties;
     isImmersive: boolean;
     starRating?: number;
+    designType: DesignType;
 }
 
 const Body: React.SFC<{
