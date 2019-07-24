@@ -541,7 +541,6 @@ export const ArticleBody: React.FC<{
                             internalPageCode={CAPI.pageId}
                         />
                     )}
-                    }
                 </div>
             </div>
         </div>

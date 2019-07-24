@@ -42,7 +42,6 @@ export const SyndicationButton: React.FC<{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        ${textSans(1)};
 
         padding: 0 0.5rem;
         margin-right: 8;
