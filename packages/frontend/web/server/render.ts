@@ -1,13 +1,11 @@
 import express from 'express';
 
 import { document } from '@frontend/web/server/document';
-import { extract as extractCAPI } from '@frontend/model/extract-capi';
-import { extract as extractGA } from '@frontend/model/extract-ga';
-import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
+import { validateAsCAPIType } from '@frontend/model/validate';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
-        const CAPI = body.version === 3 ? validateV2(body) : extractCAPI(body);
+        const CAPI = validateAsCAPIType(body);
 
         const resp = document({
             data: {
@@ -16,7 +14,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                 page: 'Article',
                 NAV: CAPI.nav,
                 config: CAPI.config,
-                GA: extractGA(body), // TODO fixme
+                GA: '', // TODO fixme with extractGA(body)
                 linkedData: CAPI.linkedData,
             },
         });

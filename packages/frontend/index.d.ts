@@ -1,11 +1,19 @@
+// ------------------------  //
+// CAPIType and its subtypes //
+// ------------------------- //
+
 interface ArticleProps {
     CAPI: CAPIType;
     NAV: NavType;
     config: ConfigType;
 }
 
-// 'labs' is a fake pillar used to identify paid content (Guardian Labs) for rendering styling.
-type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle' | 'labs';
+// Pillars are used for styling
+// RealPillars have Pillar palette colours
+// FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
+type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+type FakePillars = 'labs';
+type Pillar = RealPillars | FakePillars;
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
@@ -163,6 +171,7 @@ interface CAPIType {
     webURL: string;
     linkedData: object[];
     config: ConfigType;
+    designType: DesignType;
 
     // AMP specific (for now)
     guardianBaseURL: string;
@@ -199,10 +208,54 @@ interface ConfigType {
     sentryHost: string;
     switches: { [key: string]: boolean };
     dfpAccountId: string;
-    commercialUrl: string;
+    commercialBundleUrl: string;
 }
 
-// 3rd party type declarations
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+type DesignType =
+    | 'Article'
+    | 'Immersive'
+    | 'Media'
+    | 'Review'
+    | 'Analysis'
+    | 'Comment'
+    | 'Feature'
+    | 'Live'
+    | 'SpecialReport'
+    | 'Recipe'
+    | 'MatchReport'
+    | 'Interview'
+    | 'GuardianView'
+    | 'GuardianLabs'
+    | 'Quiz'
+    | 'AdvertisementFeature';
+
+// This is an object that allows you Type defaults of the designTypes.
+// The return type looks like: { Feature: any, Live: any, ...}
+// and can be used to add TypeSafety when needing to override a style in a designType
+type DesignTypesObj = { [key in DesignType]: any };
+
+// ----------------- //
+// General DataTypes //
+// ----------------- //
+
+interface DCRDocumentData {
+    page: string;
+    site: string;
+    CAPI: CAPIType;
+    NAV: NavType;
+    config: ConfigType;
+    GA: string; // TODO use GADataType again
+    linkedData: object;
+}
+
+interface Props {
+    data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
+}
+
+// ------------------------------
+// 3rd party type declarations //
+// ------------------------------
 declare module 'emotion-server' {
     export const extractCritical: any;
 }
@@ -219,7 +272,10 @@ declare module 'minify-css-string' {
     export default minifyCSSString;
 }
 
-/* AMP types */
+// ------------------------------------- //
+// AMP types                             //
+// ------------------------------------- //
+
 // tslint:disable-next-line no-namespace
 declare namespace JSX {
     interface IntrinsicElements {

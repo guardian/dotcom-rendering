@@ -182,6 +182,9 @@
         "config": {
             "$ref": "#/definitions/ConfigType"
         },
+        "designType": {
+            "$ref": "#/definitions/DesignType"
+        },
         "guardianBaseURL": {
             "type": "string"
         },
@@ -218,6 +221,7 @@
         "commercialProperties",
         "config",
         "contentType",
+        "designType",
         "editionId",
         "editionLongForm",
         "guardianBaseURL",
@@ -347,11 +351,7 @@
                         "copyright": {
                             "type": "string"
                         }
-                    },
-                    "required": [
-                        "alt",
-                        "credit"
-                    ]
+                    }
                 },
                 "imageSources": {
                     "type": "array",
@@ -369,7 +369,6 @@
             "required": [
                 "_type",
                 "data",
-                "displayCredit",
                 "imageSources",
                 "media",
                 "role"
@@ -486,7 +485,6 @@
             "required": [
                 "_type",
                 "assetId",
-                "channelId",
                 "id",
                 "mediaTitle"
             ]
@@ -996,8 +994,7 @@
                 }
             },
             "required": [
-                "_type",
-                "id"
+                "_type"
             ]
         },
         "InteractiveUrlElement": {
@@ -1358,18 +1355,39 @@
                 "dfpAccountId": {
                     "type": "string"
                 },
-                "commercialUrl": {
+                "commercialBundleUrl": {
                     "type": "string"
                 }
             },
             "required": [
                 "ajaxUrl",
-                "commercialUrl",
+                "commercialBundleUrl",
                 "dfpAccountId",
                 "sentryHost",
                 "sentryPublicApiKey",
                 "switches"
             ]
+        },
+        "DesignType": {
+            "enum": [
+                "AdvertisementFeature",
+                "Analysis",
+                "Article",
+                "Comment",
+                "Feature",
+                "GuardianLabs",
+                "GuardianView",
+                "Immersive",
+                "Interview",
+                "Live",
+                "MatchReport",
+                "Media",
+                "Quiz",
+                "Recipe",
+                "Review",
+                "SpecialReport"
+            ],
+            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",

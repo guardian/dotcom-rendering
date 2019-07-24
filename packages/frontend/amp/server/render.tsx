@@ -3,10 +3,10 @@ import express from 'express';
 import { document } from '@frontend/amp/server/document';
 import { Article } from '@frontend/amp/pages/Article';
 import { extractScripts } from '@frontend/amp/lib/scripts';
-import { extract as extractCAPI } from '@frontend/model/extract-capi';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
-import { validateAsCAPIType as validateV2 } from '@frontend/modelV2/validate';
+import { validateAsCAPIType as validateV2 } from '@frontend/model/validate';
+import { findBySubsection } from '@frontend/model/article-sections';
 
 export const render = (
     { body, path }: express.Request,
@@ -14,7 +14,7 @@ export const render = (
 ) => {
     try {
         // TODO remove when migrated to v2
-        const CAPI = body.version === 3 ? validateV2(body) : extractCAPI(body);
+        const CAPI = validateV2(body);
         const linkedData = CAPI.linkedData;
         const config = CAPI.config;
         const blockElements = CAPI.blocks.map(block => block.elements);
@@ -24,16 +24,18 @@ export const render = (
 
         const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
 
+        const sectionName = CAPI.sectionName || '';
+
         const analytics: AnalyticsModel = {
             gaTracker: 'UA-78705427-1',
             title: CAPI.headline,
             fbPixelaccount: '279880532344561',
             comscoreID: '6035250',
-            section: CAPI.sectionName || '',
+            section: sectionName,
             contentType: CAPI.contentType,
             id: CAPI.pageId,
             beacon: `${CAPI.beaconURL}/count/pv.gif`,
-            neilsenAPIID: 'FIXME', // TODO fix CAPI.nielsenAPIID,
+            neilsenAPIID: findBySubsection(sectionName).apiID,
             domain: 'amp.theguardian.com',
         };
 

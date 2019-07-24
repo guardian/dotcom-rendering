@@ -21,13 +21,14 @@ const headerStyle = css`
 
 const bylineStyle = (pillar: Pillar) => css`
     ${headline(5)};
+    color: ${pillarPalette[pillar].main};
+    font-style: italic;
     font-weight: 100;
     padding-top: 3px;
 
     a {
         color: ${pillarPalette[pillar].main};
         text-decoration: none;
-        font-style: italic;
     }
 `;
 
@@ -61,7 +62,8 @@ const bottomPadding = css`
 
 const BylineMeta: React.SFC<{
     articleData: ArticleModel;
-}> = ({ articleData }) => {
+    pillar: Pillar;
+}> = ({ articleData, pillar }) => {
     const contributorTag = articleData.tags.find(t => t.type === 'Contributor');
     const bylineImageUrl = contributorTag
         ? contributorTag.bylineImageUrl
@@ -72,9 +74,9 @@ const BylineMeta: React.SFC<{
             <Byline
                 byline={articleData.author.byline}
                 tags={articleData.tags}
-                pillar={articleData.pillar}
+                pillar={pillar}
                 guardianBaseURL={articleData.guardianBaseURL}
-                className={cx(bylineStyle(articleData.pillar), {
+                className={cx(bylineStyle(pillar), {
                     [bottomPadding]: !bylineImageUrl,
                 })}
             />
@@ -94,37 +96,40 @@ const BylineMeta: React.SFC<{
 
 export const TopMetaOpinion: React.FC<{
     articleData: ArticleModel;
-}> = ({ articleData }) => (
-    <header>
-        {articleData.mainMediaElements.map((element, i) => (
-            <MainMedia key={i} element={element} pillar={articleData.pillar} />
-        ))}
+    pillar: Pillar;
+}> = ({ articleData, pillar }) => {
+    return (
+        <header>
+            {articleData.mainMediaElements.map((element, i) => (
+                <MainMedia key={i} element={element} pillar={pillar} />
+            ))}
 
-        <SeriesLink
-            baseURL={articleData.guardianBaseURL}
-            tags={articleData.tags}
-            pillar={articleData.pillar}
-            fallbackToSection={false}
-        />
+            <SeriesLink
+                baseURL={articleData.guardianBaseURL}
+                tags={articleData.tags}
+                pillar={pillar}
+                fallbackToSection={false}
+            />
 
-        <h1 className={headerStyle}>{articleData.headline}</h1>
+            <h1 className={headerStyle}>{articleData.headline}</h1>
 
-        <BylineMeta articleData={articleData} />
+            <BylineMeta articleData={articleData} pillar={pillar} />
 
-        <Standfirst text={articleData.standfirst} pillar={articleData.pillar} />
+            <Standfirst text={articleData.standfirst} pillar={pillar} />
 
-        <TopMetaExtras
-            sharingUrls={getSharingUrls(
-                articleData.pageId,
-                articleData.webTitle,
-            )}
-            pillar={articleData.pillar}
-            ageWarning={getAgeWarning(
-                articleData.tags,
-                articleData.webPublicationDate,
-            )}
-            webPublicationDate={articleData.webPublicationDateDisplay}
-            twitterHandle={articleData.author.twitterHandle}
-        />
-    </header>
-);
+            <TopMetaExtras
+                sharingUrls={getSharingUrls(
+                    articleData.pageId,
+                    articleData.webTitle,
+                )}
+                pillar={pillar}
+                ageWarning={getAgeWarning(
+                    articleData.tags,
+                    articleData.webPublicationDate,
+                )}
+                webPublicationDate={articleData.webPublicationDateDisplay}
+                twitterHandle={articleData.author.twitterHandle}
+            />
+        </header>
+    );
+};

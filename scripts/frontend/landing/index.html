@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html {
+            font-family: Arial, Helvetica, sans-serif;
+            padding-left: 2em;
+        }
+        h2 {
+            margin-top: 1.5em;
+        }
+        a {
+            color: #389ddc;
+        }
+        .test-articles-list span {
+            display: inline-block;
+            width: 8em;
+            line-height: 2em;
+        }
+        .test-article-header span {
+            font-weight: bold;
+        }
+        .test-article>span:nth-child(1), .test-article-header>span:nth-child(1) {
+            width: 14em !important;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Default Endpoints</h2>
+
+    <ul>
+        <li><a href="/Article">Article</a></li>
+        <li><a href="/AMPArticle">⚡️Article</a></li>
+    </ul>
+
+    <h2>Test Articles By Content Type</h2>
+
+    <div id="test-articles-by-content" class="test-articles-list">
+
+        <div class="test-article-header">
+            <span>type</span>
+            <span>local</span>
+            <span>local-amp</span>
+            <span>production</span>
+            <span>production-amp</span>
+        </div>
+
+    </div>
+
+    <h2>Test Articles By Element</h2>
+
+    <div id="test-articles-by-element" class="test-articles-list">
+
+        <div class="test-article-header">
+            <span>type</span>
+            <span>local</span>
+            <span>local-amp</span>
+            <span>production</span>
+            <span>production-amp</span>
+        </div>
+
+    </div>
+
+    <script>
+
+        var testContentTypes = [
+            { name: "Live Blog", article: "https://www.theguardian.com/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live" },
+            { name: "Opinion Piece", article: "https://www.theguardian.com/politics/2019/jul/15/it-will-be-boris-johnson-and-it-will-certainly-be-a-disaster" },
+            { name: "Review", article: "https://www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review"},
+            { name: "Paid Content", article: "https://www.theguardian.com/bank-australia-clean-money/2019/feb/11/three-trillion-reasons-for-australians-to-join-the-clean-money-revolution"}
+        ];
+
+        var testArticles = [
+            { name: "ImageBlockElement", article: "https://www.theguardian.com/environment/2018/dec/21/from-spectacular-orchids-to-towering-trees-2018s-top-new-plant-discoveries" },
+            { name: "ImageBlockElement (left)", article: "https://www.theguardian.com/film/2018/aug/30/damon-herriman-to-play-charles-manson-in-quentin-tarantino-film" },
+            { name: "TweetBlockElement", article: "https://www.theguardian.com/uk-news/reality-check/2015/sep/19/daily-mail-syrian-refugees-story-three-problems" },
+            { name: "RichLinkBlockElement", article: "https://www.theguardian.com/football/2019/jun/04/juventus-interested-paul-pogba-manchester-united" },
+            { name: "PullquoteBlockElement", article: "https://www.theguardian.com/world/2018/dec/28/south-koreas-sexist-sex-education" },
+            { name: "VideoBlockElement", article: "https://www.theguardian.com/us-news/2017/feb/23/los-angeles-police-officer-teen-gun-video-protests" },
+            { name: "AudioBlockElement", article: "https://www.theguardian.com/music/2018/nov/02/the-prodigy-no-tourists-review" },
+            { name: "EmbedBlockElement", article: "https://www.theguardian.com/australia-news/2018/jun/12/shorten-wants-more-aged-care-spending-but-wont-back-royal-commission" },
+            { name: "ContentAtomBlockElement", article: "https://www.theguardian.com/world/2018/jun/18/yemen-crisis-saudi-coalition-demands-houthis-unconditional-withdrawal-from-port" }
+        ];
+
+        var makeTestArticle = (a) => `
+            <div class="test-article">
+                <span>${a.name}</span>
+                <span><a href="/Article?url=${a.article}">example</a></span>
+                <span><a href="/AMPArticle?url=${a.article}">example</a></span>
+                <span><a href="${a.article}">example</a></span>
+                <span><a href="${a.article.replace("www.", "amp.")}">example</a></span>
+            </div>
+        `;
+
+        testArticles.forEach((a)=>{
+            document.getElementById("test-articles-by-element").innerHTML += makeTestArticle(a);
+        });
+
+        testContentTypes.forEach((a)=>{
+            document.getElementById("test-articles-by-content").innerHTML += makeTestArticle(a);
+        });
+
+    </script>
+
+</body>
+</html>

@@ -72,7 +72,7 @@ describe('boot', () => {
     };
     let windowMock: MockWindow;
     let ravenMock: MockRaven;
-    const commercialUrl = 'http://foo.bar';
+    const commercialBundleUrl = 'http://foo.bar';
     const { onPolyfilled, polyfilled, app } = window.guardian;
 
     beforeEach(() => {
@@ -84,11 +84,12 @@ describe('boot', () => {
             app: {
                 data: {
                     config: {
-                        commercialUrl,
+                        commercialBundleUrl,
                     },
                 },
                 cssIDs: ['foo', 'bar'],
             },
+            config: {},
         });
 
         getRaven.mockImplementation(() => Promise.resolve(ravenMock));
@@ -136,7 +137,7 @@ describe('boot', () => {
                 expect.any(Function),
             );
             expect(loadScript).toHaveBeenCalledTimes(1);
-            expect(loadScript).toHaveBeenCalledWith(commercialUrl);
+            expect(loadScript).toHaveBeenCalledWith(commercialBundleUrl);
             expect(windowMock.addEventListener).toHaveBeenCalledTimes(2);
             expect(windowMock.addEventListener).toHaveBeenCalledWith(
                 'error',
@@ -155,7 +156,7 @@ describe('boot', () => {
         return _.onPolyfilled().then(() => {
             expect(ravenMock.context).not.toHaveBeenCalled();
             expect(loadScript).toHaveBeenCalledTimes(1);
-            expect(loadScript).toHaveBeenCalledWith(commercialUrl);
+            expect(loadScript).toHaveBeenCalledWith(commercialBundleUrl);
             expect(windowMock.addEventListener).not.toHaveBeenCalled();
         });
     });

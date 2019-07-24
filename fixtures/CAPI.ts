@@ -1,9 +1,11 @@
 const pillar: Pillar = 'lifestyle';
 const editionId: Edition = 'UK';
+const designType = 'Article';
 
 export const CAPI: CAPIType = {
     pillar,
     editionId,
+    designType,
     webPublicationDate: '2018-11-02T09:45:30.000Z',
     webPublicationDateDisplay: 'Fri 02 Mar 2018 09.45 GMT',
     tags: [
@@ -434,7 +436,7 @@ export const CAPI: CAPIType = {
         sentryHost: 'app.getsentry.com/35463',
         switches: {},
         dfpAccountId: '',
-        commercialUrl:
+        commercialBundleUrl:
             'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
     },
     webTitle: 'Foobar',

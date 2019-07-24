@@ -2,6 +2,8 @@ import resetCSS from /* preval */ '@frontend/lib/reset-css';
 import { getFontsCss } from '@frontend/lib/fonts-css';
 import { getStatic } from '@frontend/lib/assets';
 
+import { WindowGuardian } from '@frontend/model/window-guardian';
+
 export const htmlTemplate = ({
     title = 'The Guardian',
     linkedData,
@@ -10,10 +12,10 @@ export const htmlTemplate = ({
     lowPriorityScripts,
     css,
     html,
-    data,
-    cssIDs,
+    windowGuardian,
     nonBlockingJS = '',
     fontFiles = [],
+    ampLink,
 }: {
     title?: string;
     linkedData: object;
@@ -22,13 +24,10 @@ export const htmlTemplate = ({
     lowPriorityScripts: string[];
     css: string;
     html: string;
-    data: {
-        page: string;
-        site: string;
-    };
-    cssIDs: string[];
     nonBlockingJS?: string;
     fontFiles?: string[];
+    windowGuardian: WindowGuardian;
+    ampLink?: string;
 }) => {
     const favicon =
         process.env.NODE_ENV === 'production'
@@ -41,9 +40,11 @@ export const htmlTemplate = ({
                 <title>${title}</title>
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+
                 <script type="application/ld+json">
                     ${JSON.stringify(linkedData)}
                 </script>
+
                 ${preloadScripts
                     .map(
                         url => `<link rel="preload" href="${url}" as="script">`,
@@ -57,19 +58,13 @@ export const htmlTemplate = ({
                             )}" as="font" crossorigin>`,
                     )
                     .join('\n')}
+
+                <!-- TODO make this conditional when we support more content types -->
+                ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
+
                 <style>${getFontsCss()}${resetCSS}${css}</style>
                 <script>
-                window.guardian = ${JSON.stringify({
-                    app: {
-                        data,
-                        cssIDs,
-                    },
-                    config: {
-                        tests: {
-                            renderer: 'new',
-                        },
-                    },
-                })};
+                window.guardian = ${JSON.stringify(windowGuardian)};
                 // this is a global that's called at the bottom of the pf.io response,
                 // once the polyfills have run. This may be useful for debugging.
                 // mainly to support browsers that don't support async=false or defer

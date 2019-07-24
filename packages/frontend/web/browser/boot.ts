@@ -18,7 +18,7 @@ if (module.hot) {
 
 const initApp = (): void => {
     const { cssIDs, data } = window.guardian.app;
-    const { commercialUrl } = data.config;
+    const commercialBundleUrl = data.config.commercialBundleUrl;
 
     const enhanceApp = () => {
         initGa();
@@ -43,7 +43,7 @@ const initApp = (): void => {
     };
 
     const loadCommercial = (): Promise<void> => {
-        return loadScript(commercialUrl);
+        return loadScript(commercialBundleUrl);
     };
 
     loadCommercial()

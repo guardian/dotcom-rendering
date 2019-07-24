@@ -73,8 +73,7 @@ export const Image: React.FC<{
                             __html: element.data.caption || '',
                         }}
                         key={'caption'}
-                    />
-
+                    />{' '}
                     {element.displayCredit && element.data.credit}
                 </figcaption>
             )}

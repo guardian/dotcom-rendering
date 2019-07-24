@@ -30,16 +30,21 @@ interface RichLinkBlockElement {
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
-    data: { alt: string; credit: string; caption?: string; copyright?: string };
+    data: {
+        alt?: string;
+        credit?: string;
+        caption?: string;
+        copyright?: string;
+    };
     imageSources: ImageSource[];
-    displayCredit: boolean;
+    displayCredit?: boolean;
     role: string;
 }
 interface YoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
     id: string;
     assetId: string;
-    channelId: string;
+    channelId?: string;
     mediaTitle: string;
 }
 
@@ -198,7 +203,7 @@ interface TimelineBlockElement {
 
 interface InteractiveMarkupBlockElement {
     _type: 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement';
-    id: string;
+    id?: string;
     html?: string;
     css?: string;
     js?: string;

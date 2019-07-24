@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
@@ -54,6 +54,23 @@ const twitterHandle = css`
     }
 `;
 
+const bylineStyle = (pillar: Pillar) => css`
+    ${headline(2)};
+    color: ${pillarPalette[pillar].main};
+    padding-bottom: 8px;
+    font-style: italic;
+
+    a {
+        font-weight: 700;
+        color: ${pillarPalette[pillar].main};
+        text-decoration: none;
+        font-style: normal;
+        :hover {
+            text-decoration: underline;
+        }
+    }
+`;
+
 // this crazy function aims to split bylines such as
 // 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
 const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
@@ -80,7 +97,6 @@ const RenderByline: React.FC<{
                     <BylineContributor
                         contributor={token}
                         contributorTagId={associatedTags[0].id}
-                        pillar={pillar}
                         key={i}
                     />
                 );
@@ -89,17 +105,15 @@ const RenderByline: React.FC<{
         },
     );
 
-    return <>{renderedTokens}</>;
+    return <div className={bylineStyle(pillar)}>{renderedTokens}</div>;
 };
 
 const BylineContributor: React.FC<{
     contributor: string;
     contributorTagId: string;
-    pillar: Pillar;
-}> = ({ contributor, contributorTagId, pillar }) => (
+}> = ({ contributor, contributorTagId }) => (
     <a
         rel="author"
-        className={cx(pillarColour(pillar), bylineLink)}
         data-link-name="auto tag link"
         href={`//www.theguardian.com/${contributorTagId}`}
     >
@@ -113,15 +127,11 @@ export const Byline: React.FC<{
     pillar: Pillar;
 }> = ({ author, tags, pillar }) => (
     <address aria-label="Contributor info">
-        <div className={cx(pillarColour(pillar), profile)}>
-            <span className={byline}>
-                <RenderByline
-                    bylineText={author.byline}
-                    contributorTags={tags}
-                    pillar={pillar}
-                />
-            </span>
-        </div>
+        <RenderByline
+            bylineText={author.byline}
+            contributorTags={tags}
+            pillar={pillar}
+        />
         {author.twitterHandle && (
             <div className={twitterHandle}>
                 <TwitterIcon />

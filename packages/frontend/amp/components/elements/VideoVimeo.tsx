@@ -1,5 +1,5 @@
 import React from 'react';
-import { getIdFromUrl } from '@frontend/model/validators';
+import { getIdFromUrl } from '@frontend/amp/lib/get-video-id';
 import { Caption } from '@guardian/guui/components/Caption/Caption';
 
 export const VideoVimeo: React.FC<{

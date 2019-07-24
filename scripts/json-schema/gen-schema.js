@@ -12,7 +12,7 @@ const settings = { rejectDateType: true, required: true };
 const schema = TJS.generateSchema(program, 'CAPIType', settings);
 
 fs.writeFile(
-    root + '/packages/frontend/modelV2/json-schema.json',
+    root + '/packages/frontend/model/json-schema.json',
     JSON.stringify(schema, null, 4),
     'utf8',
     function(err) {

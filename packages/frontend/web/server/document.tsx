@@ -7,19 +7,9 @@ import { CacheProvider } from '@emotion/core';
 import { htmlTemplate } from './htmlTemplate';
 import { Article } from '../pages/Article';
 import { getDist } from '@frontend/lib/assets';
-import { GADataType } from '@frontend/model/extract-ga';
+// import { GADataType } from '@frontend/model/extract-ga';
 
-interface Props {
-    data: {
-        page: string;
-        site: string;
-        CAPI: CAPIType;
-        NAV: NavType;
-        config: ConfigType;
-        GA: GADataType;
-        linkedData: object;
-    };
-}
+import { makeWindowGuardian } from '@frontend/model/window-guardian';
 
 interface RenderToStringResult {
     html: string;
@@ -68,7 +58,7 @@ export const document = ({ data }: Props) => {
     const vendorJS = getDist('vendor.js');
     const polyfillIO =
         'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
-    const commercialBundle = config.commercialUrl;
+    const commercialBundle = config.commercialBundleUrl;
     const priorityScripts = [polyfillIO, vendorJS, bundleJS];
     const preloadScripts = [
         ...new Set([commercialBundle].concat(priorityScripts)),
@@ -83,6 +73,10 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
+    const windowGuardian = makeWindowGuardian(data, cssIDs);
+
+    const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
+
     return htmlTemplate({
         linkedData,
         preloadScripts,
@@ -90,9 +84,9 @@ export const document = ({ data }: Props) => {
         lowPriorityScripts,
         css,
         html,
-        cssIDs,
         fontFiles,
-        data,
         title,
+        windowGuardian,
+        ampLink,
     });
 };

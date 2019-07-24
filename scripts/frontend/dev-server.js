@@ -73,18 +73,8 @@ const go = async () => {
         }),
     );
 
-    app.get('/', (req, res) => {
-        res.send(`
-            <!DOCTYPE html>
-            <html>
-            <body>
-                <ul>
-                    <li><a href="/Article">Article</a></li>
-                    <li><a href="/AMPArticle">⚡️Article</a></li>
-                </ul>
-            </body>
-            </html>
-        `);
+    app.get('/',function(req,res) {
+        res.sendFile(path.join(root, 'scripts', 'frontend', 'landing', 'index.html'));
     });
 
     app.get('*', (req, res) => {

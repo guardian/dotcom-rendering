@@ -3,14 +3,24 @@ import 'jest-dom/extend-expect';
 // this is basically: afterEach(cleanup)
 import 'react-testing-library/cleanup-after-each';
 
-// Stub global Guardian object
-window.guardian = {
+import { WindowGuardianConfig } from '@frontend/model/window-guardian';
+
+const windowGuardianConfig = {
+    page: {
+        sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+        sentryHost: 'app.getsentry.com/35463',
+    },
+} as WindowGuardianConfig;
+
+const windowGuardian = {
     app: {
         data: {},
         cssIDs: [],
     },
+    config: windowGuardianConfig,
     polyfilled: false,
-    onPolyfilled: () => {
-        return undefined;
-    },
+    onPolyfilled: () => undefined,
 };
+
+// Stub global Guardian object
+window.guardian = windowGuardian;
