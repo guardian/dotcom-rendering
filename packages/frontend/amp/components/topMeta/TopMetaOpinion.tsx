@@ -21,13 +21,14 @@ const headerStyle = css`
 
 const bylineStyle = (pillar: Pillar) => css`
     ${headline(5)};
+    color: ${pillarPalette[pillar].main};
+    font-style: italic;
     font-weight: 100;
     padding-top: 3px;
 
     a {
         color: ${pillarPalette[pillar].main};
         text-decoration: none;
-        font-style: italic;
     }
 `;
 
