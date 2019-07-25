@@ -41,7 +41,6 @@ const supportLinkStyles = css`
     ${textSans(5)};
     font-weight: 700;
     display: block;
-    line-height: 20px;
     text-decoration: none;
     width: 100%;
 

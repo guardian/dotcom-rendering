@@ -5,7 +5,6 @@ import { textSans } from '@guardian/pasteup/typography';
 
 const style = (pillar: Pillar) => css`
     ${textSans(2)};
-    line-height: 24px;
 
     a {
         color: ${pillarPalette[pillar].dark};

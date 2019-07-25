@@ -18,7 +18,6 @@ const blockStyle = (pillar: Pillar) => css`
 
 const firstPublishedStyle = css`
     color: ${palette.neutral[7]};
-    line-height: 2rem;
     margin-bottom: 10px;
     text-decoration: none;
     font-weight: bold;

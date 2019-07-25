@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans, headline } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 
 import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
@@ -48,7 +48,7 @@ const columnLinkTitle = css`
     }
     ${desktop} {
         font-size: 16px;
-        line-height: 1.2;
+        ${headline(2)};
         padding: 6px 0;
     }
     :hover,

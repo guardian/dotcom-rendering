@@ -35,7 +35,6 @@ const icon = css`
 `;
 
 const text = css`
-    line-height: 42px;
     ${sans.body};
     padding-right: 10px;
 `;

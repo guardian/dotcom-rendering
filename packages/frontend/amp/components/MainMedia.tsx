@@ -27,7 +27,6 @@ const captionStyle = css`
     padding: 6px 40px 12px 10px;
     max-width: 100%;
     min-height: 46px;
-    line-height: 18px;
     ${textSans(2)};
 `;
 

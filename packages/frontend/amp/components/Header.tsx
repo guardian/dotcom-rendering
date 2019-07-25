@@ -41,6 +41,8 @@ const logoStyles = css`
 
 const pillarListStyles = css`
     list-style: none;
+    /* Design System: This override is needed because the line height changes the layout*/
+    /* stylelint-disable-next-line property-blacklist */
     line-height: 0;
 `;
 

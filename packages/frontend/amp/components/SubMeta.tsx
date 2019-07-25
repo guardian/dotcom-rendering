@@ -96,7 +96,6 @@ const siteLinkStyle = css`
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};
-    line-height: 36px;
     text-align: right;
 `;
 

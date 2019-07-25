@@ -118,7 +118,6 @@ const linkStyle = css`
     display: block;
     font-size: 15.4px;
     height: 36px;
-    line-height: 1;
     padding: 9px 5px 0;
     position: relative;
     overflow: hidden;
