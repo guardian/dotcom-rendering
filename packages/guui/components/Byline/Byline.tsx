@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { palette } from '@guardian/pasteup/palette';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const twitterHandle = css`
     ${textSans(1)};
