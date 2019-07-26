@@ -7,7 +7,7 @@ import {
     init as initGa,
     sendPageView as sendGaPageView,
 } from '@frontend/web/browser/ga';
-import { sendOphanPlatformRecord } from '@frontend/web/browser/ophan.ts';
+import { sendOphanPlatformRecord } from '@frontend/web/browser/ophan';
 import { Article } from '@frontend/web/pages/Article';
 import { ReportedError, reportError } from '@frontend/web/browser/reportError';
 import { loadScript } from '@frontend/web/browser/loadScript';

@@ -5,6 +5,7 @@ import {
     init as initGa_,
     sendPageView as sendGaPageView_,
 } from '@frontend/web/browser/ga';
+import { sendOphanPlatformRecord as sendOphanPlatformRecord_ } from '@frontend/web/browser/ophan';
 import { hydrate as hydrateCSS_ } from 'emotion';
 import { hydrate as hydrateApp_ } from 'react-dom';
 import { createElement as createElement_ } from 'react';
@@ -14,6 +15,7 @@ const getRaven: any = getRaven_;
 const loadScript: any = loadScript_;
 const initGa: any = initGa_;
 const sendGaPageView: any = sendGaPageView_;
+const sendOphanPlatformRecord: any = sendOphanPlatformRecord_;
 const hydrateCSS: any = hydrateCSS_;
 const hydrateApp: any = hydrateApp_;
 const createElement: any = createElement_;
@@ -29,6 +31,9 @@ jest.mock('@frontend/web/browser/loadScript', () => ({
 jest.mock('@frontend/web/browser/ga', () => ({
     init: jest.fn(),
     sendPageView: jest.fn(),
+}));
+jest.mock('@frontend/web/browser/ophan', () => ({
+    sendOphanPlatformRecord: jest.fn(),
 }));
 jest.mock('emotion', () => ({
     hydrate: jest.fn(),
@@ -103,6 +108,7 @@ describe('boot', () => {
         loadScript.mockReset();
         initGa.mockReset();
         sendGaPageView.mockReset();
+        sendOphanPlatformRecord.mockReset();
         hydrateCSS.mockReset();
         hydrateApp.mockReset();
         createElement.mockReset();
@@ -177,6 +183,7 @@ describe('boot', () => {
         afterEach(() => {
             expect(initGa).toHaveBeenCalledTimes(1);
             expect(sendGaPageView).toHaveBeenCalledTimes(1);
+            expect(sendOphanPlatformRecord).toHaveBeenCalledTimes(1);
             expect(hydrateCSS).toHaveBeenCalledTimes(1);
             expect(hydrateCSS).toHaveBeenCalledWith(cssIDs);
             expect(hydrateApp).toHaveBeenCalledTimes(1);
@@ -205,12 +212,6 @@ describe('boot', () => {
                     false,
                 );
             });
-        });
-    });
-
-    describe('Make Ophan requests', () => {
-        test('Ophan page view request contains correct data', () => {
-            return true;
         });
     });
 });
