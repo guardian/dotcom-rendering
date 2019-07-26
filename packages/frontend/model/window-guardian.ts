@@ -51,6 +51,8 @@ export interface WindowGuardian {
     onPolyfilled: () => void;
 
     adBlockers: any;
+
+    ophan: {};
 }
 
 export const makeWindowGuardian = (
@@ -69,5 +71,6 @@ export const makeWindowGuardian = (
             active: undefined,
             onDetect: [],
         },
+        ophan: {},
     };
 };
