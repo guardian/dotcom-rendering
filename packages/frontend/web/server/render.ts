@@ -14,7 +14,12 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                 site: 'frontend',
                 page: 'Article',
                 NAV: extractNAV(CAPI.nav),
-                config: CAPI.config,
+                config: Object.assign(
+                    {},
+                    { isDev: process.env.NODE_ENV !== 'production' },
+                    CAPI.config,
+                ),
+
                 GA: '', // TODO fixme with extractGA(body)
                 linkedData: CAPI.linkedData,
             },

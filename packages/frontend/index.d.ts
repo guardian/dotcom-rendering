@@ -210,6 +210,7 @@ interface ConfigType {
     dfpAccountId: string;
     commercialBundleUrl: string;
     revisionNumber: string;
+    isDev: boolean;
 }
 
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
