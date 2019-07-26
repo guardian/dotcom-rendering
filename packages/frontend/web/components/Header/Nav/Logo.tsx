@@ -60,7 +60,7 @@ const style = css`
 const SVG = () => <TheGuardianLogoSVG className={style} />;
 
 export const Logo: React.FC = () => (
-    <a className={link} href="/">
+    <a className={link} href="/" data-link-name="nav2 : logo">
         <span
             className={css`
                 ${screenReaderOnly};
