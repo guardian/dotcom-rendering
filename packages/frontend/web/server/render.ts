@@ -19,7 +19,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     { isDev: process.env.NODE_ENV !== 'production' },
                     CAPI.config,
                 ),
-
                 GA: '', // TODO fixme with extractGA(body)
                 linkedData: CAPI.linkedData,
             },
