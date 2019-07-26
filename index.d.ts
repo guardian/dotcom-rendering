@@ -13,6 +13,17 @@ declare global {
             polyfilled: boolean;
             onPolyfilled: () => void;
             config: WindowGuardianConfig;
+            ophan: {
+                setEventEmitter: () => void; // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
+                trackComponentAttention: (
+                    name: string,
+                    el: Element,
+                    visiblityThreshold: number,
+                ) => void;
+                record: ({}) => void;
+                viewId: string;
+                pageViewId: string;
+            };
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
