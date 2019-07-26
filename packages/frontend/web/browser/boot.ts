@@ -7,6 +7,7 @@ import {
     init as initGa,
     sendPageView as sendGaPageView,
 } from '@frontend/web/browser/ga';
+import { sendOphanPlatformRecord } from '@frontend/web/browser/ophan.ts';
 import { Article } from '@frontend/web/pages/Article';
 import { ReportedError, reportError } from '@frontend/web/browser/reportError';
 import { loadScript } from '@frontend/web/browser/loadScript';
@@ -40,9 +41,8 @@ const initApp = (): void => {
         }
 
         // Ophan
-
-        // Lets record a 'platformVariant' field so that we can track DCR views in datalake (regardless of A/B test)
-        window.guardian.ophan.record({ platformVariant: 'dotcom-rendering' });
+        // Lets record a 'platformVariant' field so that we can track DCR views in datalake(regardless of A / B test)
+        sendOphanPlatformRecord();
 
         // Google Analytics
         sendGaPageView();

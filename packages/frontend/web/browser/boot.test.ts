@@ -207,4 +207,10 @@ describe('boot', () => {
             });
         });
     });
+
+    describe('Make Ophan requests', () => {
+        test('Ophan page view request contains correct data', () => {
+            return true;
+        });
+    });
 });
