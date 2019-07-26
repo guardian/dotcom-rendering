@@ -1,0 +1,37 @@
+{
+  "name": "apps-rendering",
+  "version": "0.0.1",
+  "description": "Article rendering for The Guardian iOS and Android apps",
+  "main": "server/server.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compileServer": "./node_modules/.bin/babel ./server.ts --extensions '.ts' --out-dir server",
+    "compileClient": "./node_modules/.bin/babel ./src/Counter.tsx --extensions '.tsx' --out-dir dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "ts-node-dev": "^1.0.0-pre.40",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "prettier": "1.18.2",
+    "webpack": "^4.37.0",
+    "webpack-cli": "^3.3.6"
+  }
+}
