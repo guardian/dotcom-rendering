@@ -39,6 +39,12 @@ const initApp = (): void => {
             hydrateApp(React.createElement(Article, { data }), container);
         }
 
+        // Ophan
+
+        // Lets record a 'platformVariant' field so that we can track DCR views in datalake (regardless of A/B test)
+        window.guardian.ophan.record({ platformVariant: 'dotcom-rendering' });
+
+        // Google Analytics
         sendGaPageView();
     };
 
