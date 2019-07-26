@@ -20,6 +20,13 @@ const windowGuardian = {
     config: windowGuardianConfig,
     polyfilled: false,
     onPolyfilled: () => undefined,
+    ophan: {
+        setEventEmitter: () => null,
+        trackComponentAttention: () => null,
+        record: ({  }: {}) => null,
+        viewId: '',
+        pageViewId: '',
+    },
 };
 
 // Stub global Guardian object
