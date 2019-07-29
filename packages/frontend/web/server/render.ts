@@ -1,4 +1,5 @@
 import express from 'express';
+import { extract as extractNAV } from '@frontend/model/extract-nav';
 
 import { document } from '@frontend/web/server/document';
 import { validateAsCAPIType } from '@frontend/model/validate';
@@ -12,7 +13,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                 CAPI,
                 site: 'frontend',
                 page: 'Article',
-                NAV: CAPI.nav,
+                NAV: extractNAV(CAPI.nav),
                 config: CAPI.config,
                 GA: '', // TODO fixme with extractGA(body)
                 linkedData: CAPI.linkedData,
