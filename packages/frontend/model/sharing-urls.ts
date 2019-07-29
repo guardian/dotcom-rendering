@@ -20,7 +20,7 @@ export const getSharingUrls = (
     [K in SharePlatform]?: {
         url: string;
         userMessage: string;
-    }
+    };
 } => {
     const articleUrl = `https://www.theguardian.com/${pageId}`;
     const platforms: {
@@ -30,7 +30,7 @@ export const getSharingUrls = (
                 [key: string]: string;
             };
             baseUrl: string;
-        }
+        };
     } = {
         facebook: {
             userMessage: 'Share on Facebook',

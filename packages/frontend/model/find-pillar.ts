@@ -1,9 +1,9 @@
-import { pillarNames } from '@frontend/lib/pillars';
+import { allPillars } from '@frontend/lib/pillars';
 
-export const findPillar: (
-    name: string,
-    tags?: TagType[],
-) => Pillar | undefined = (name, tags?) => {
+export const findPillar: (name: string, tags?: TagType[]) => Pillar = (
+    name,
+    tags?,
+) => {
     // Flag paid content for Labs pillar (for styling purposes)
     const isPaidContent = (tag: any) =>
         tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
@@ -18,5 +18,5 @@ export const findPillar: (
     if (pillar === 'arts') {
         return 'culture';
     }
-    return pillarNames.find(_ => _ === pillar);
+    return allPillars.find(_ => _ === pillar) || 'news';
 };

@@ -2,12 +2,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, radios, boolean } from '@storybook/addon-knobs';
 import { Caption } from './Caption';
-import { pillarNames } from '@guardian/frontend-rendering/lib/pillars';
+import { allPillars } from '@guardian/frontend-rendering/lib/pillars';
 
 const stories = storiesOf('User Interface', module).addDecorator(withKnobs);
 
 // ['news', ...] -> {news: 'news', ...}
-const radioOptions = pillarNames.reduce(
+const radioOptions = allPillars.reduce(
     (prev, curr) => ({ ...prev, [curr]: curr }),
     {},
 );

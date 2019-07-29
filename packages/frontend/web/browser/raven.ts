@@ -20,14 +20,12 @@ const ignoreErrors = [
     'UnknownError',
 ];
 
-const dataCallback: (
-    data: {
-        culprit: string | undefined;
-        tags: {
-            origin: string;
-        };
-    },
-) => {} = data => {
+const dataCallback: (data: {
+    culprit: string | undefined;
+    tags: {
+        origin: string;
+    };
+}) => {} = data => {
     const { culprit } = data;
     const resp = Object.assign({}, data);
 

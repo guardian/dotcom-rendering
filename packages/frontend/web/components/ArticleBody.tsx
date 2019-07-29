@@ -429,9 +429,7 @@ export const ArticleBody: React.FC<{
                                 sectionLabelLink,
                                 pillarColours[CAPI.pillar],
                             )}
-                            href={`https://www.theguardian.com/${
-                                CAPI.sectionUrl
-                            }`}
+                            href={`https://www.theguardian.com/${CAPI.sectionUrl}`}
                             data-link-name="article section"
                         >
                             {CAPI.sectionLabel}

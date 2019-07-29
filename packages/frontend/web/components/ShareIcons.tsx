@@ -84,7 +84,7 @@ export const SharingIcons: React.FC<{
         [K in SharePlatform]?: {
             url: string;
             userMessage: string;
-        }
+        };
     };
     displayIcons: SharePlatform[];
     pillar: Pillar;
