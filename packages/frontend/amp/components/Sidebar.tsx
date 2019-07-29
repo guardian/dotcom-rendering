@@ -198,15 +198,20 @@ const template = `
 `;
 
 // tslint:disable:react-no-dangerous-html
-export const Sidebar: React.FC<{ nav: NavType }> = ({ nav }) => (
-    <amp-sidebar class={sidebarStyles} layout="nodisplay" id="sidebar1">
-        <amp-list
-            layout="fill"
-            src="https://amp.theguardian.com/editionalised-nav.json"
-        >
-            <template type="amp-mustache">
-                <div dangerouslySetInnerHTML={{ __html: template }} />
-            </template>
-        </amp-list>
-    </amp-sidebar>
-);
+export const Sidebar: React.FC<{ nav: NavType }> = ({ nav }) => {
+    // this next line is necessary cos react has a 'template' object with no 'type' property.
+    // By saying 'as {}' we can pretend we're not adding the 'type' property and thus avoid unhappy type errors
+    const props = { type: 'amp-mustache' } as {};
+    return (
+        <amp-sidebar class={sidebarStyles} layout="nodisplay" id="sidebar1">
+            <amp-list
+                layout="fill"
+                src="https://amp.theguardian.com/editionalised-nav.json"
+            >
+                <template {...props}>
+                    <div dangerouslySetInnerHTML={{ __html: template }} />
+                </template>
+            </amp-list>
+        </amp-sidebar>
+    );
+};

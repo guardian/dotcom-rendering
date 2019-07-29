@@ -80,7 +80,9 @@ const initAppWithRaven = (raven: RavenStatic) => {
     ) => {
         // Not all browsers pass the error object
         if (!error || !error.reported) {
-            oldOnError(message, filename, lineno, colno, error);
+            if (oldOnError) {
+                oldOnError(message, filename, lineno, colno, error);
+            }
         }
     };
 

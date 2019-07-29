@@ -14,6 +14,7 @@ import {
 import { headline } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
+import { findPillar } from '@root/packages/frontend/model/find-pillar';
 
 const pillarsStyles = css`
     clear: right;
@@ -197,10 +198,10 @@ export const Pillars: React.FC<{
                     className={cx(
                         pillarDivider,
                         linkStyle,
-                        pillarUnderline[p.pillar],
+                        pillarUnderline[findPillar(p.title)],
                         {
                             [showMenuUnderline]: showMainMenu,
-                            [forceUnderline]: p.pillar === pillar,
+                            [forceUnderline]: findPillar(p.title) === pillar,
                         },
                     )}
                     href={p.url}

@@ -116,7 +116,7 @@ export const SubMeta: React.FC<{
         [K in SharePlatform]?: {
             url: string;
             userMessage: string;
-        }
+        };
     };
     pageID: string;
     isCommentable: boolean;
