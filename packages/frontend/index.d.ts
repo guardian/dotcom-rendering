@@ -279,9 +279,6 @@ declare module 'minify-css-string' {
 
 // tslint:disable-next-line no-namespace
 declare namespace JSX {
-    interface HTMLTemplateElement extends HTMLElement {
-        type: string;
-    }
     interface IntrinsicElements {
         'amp-sidebar': any;
         'amp-accordion': any;
@@ -302,6 +299,5 @@ declare namespace JSX {
         'amp-consent': any;
         'amp-live-list': any;
         'amp-audio': any;
-        // template: any;
     }
 }
