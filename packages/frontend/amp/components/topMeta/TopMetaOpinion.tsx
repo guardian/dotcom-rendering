@@ -1,5 +1,5 @@
 import React from 'react';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
@@ -11,7 +11,7 @@ import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
-import { LinkStyle } from '../elements/Text';
+import { Branding } from '@frontend/amp/components/topMeta/Branding';
 
 const headerStyle = css`
     ${headline(5)};
@@ -91,54 +91,6 @@ const BylineMeta: React.SFC<{
                     height="150"
                 />
             )}
-        </div>
-    );
-};
-
-const brandingStyle = (pillar: Pillar) => css`
-    padding: 10px 0;
-    ${LinkStyle(pillar)}
-
-    a, a:hover {
-        display: block;
-        border-bottom: none;
-        ${textSans(1)}
-    }
-`;
-
-const brandingLabelStyle = css`
-    ${textSans(1)};
-`;
-
-const brandingLogoStyle = css`
-    padding: 10px 0;
-`;
-
-const Branding: React.FC<{
-    branding: Branding;
-    pillar: Pillar;
-}> = ({ branding, pillar }) => {
-    const { logo, sponsorName } = branding;
-
-    return (
-        <div className={brandingStyle(pillar)}>
-            <div className={brandingLabelStyle}>{branding.logo.label}</div>
-            {/* tslint:disable-next-line: react-a11y-anchors */}
-            <a
-                className={brandingLogoStyle}
-                href={logo.link}
-                data-sponsor={sponsorName.toLowerCase()}
-                rel="nofollow"
-                aria-label={`Visit the ${sponsorName} website`}
-            >
-                <amp-img
-                    src={logo.src}
-                    width={`140px`}
-                    height={`90px`}
-                    alt={sponsorName}
-                />
-            </a>
-            <a href={branding.aboutThisLink}>About this content</a>
         </div>
     );
 };
