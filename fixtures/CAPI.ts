@@ -439,6 +439,7 @@ export const CAPI: CAPIType = {
         commercialBundleUrl:
             'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
         revisionNumber: '62cf0d6e4609276d37e09fd596430fbf8b629418',
+        isDev: false,
     },
     webTitle: 'Foobar',
     nav: {
