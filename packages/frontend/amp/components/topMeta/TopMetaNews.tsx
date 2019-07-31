@@ -13,6 +13,7 @@ import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
+import { Branding } from '@frontend/amp/components/topMeta/Branding';
 
 const headerStyle = css`
     ${headline(5)};
@@ -83,52 +84,68 @@ const Headline: React.FC<{
 
 export const TopMetaNews: React.FC<{ articleData: ArticleModel }> = ({
     articleData,
-}) => (
-    <header>
-        {articleData.mainMediaElements.map((element, i) => (
-            <MainMedia key={i} element={element} pillar={articleData.pillar} />
-        ))}
+}) => {
+    const branding =
+        articleData.commercialProperties[articleData.editionId].branding;
 
-        {!articleData.isImmersive && (
-            <SeriesLink
-                baseURL={articleData.guardianBaseURL}
+    return (
+        <header>
+            {articleData.mainMediaElements.map((element, i) => (
+                <MainMedia
+                    key={i}
+                    element={element}
+                    pillar={articleData.pillar}
+                />
+            ))}
+
+            {!articleData.isImmersive && (
+                <SeriesLink
+                    baseURL={articleData.guardianBaseURL}
+                    tags={articleData.tags}
+                    pillar={articleData.pillar}
+                    fallbackToSection={true}
+                    sectionLabel={articleData.sectionLabel}
+                    sectionUrl={articleData.sectionUrl}
+                />
+            )}
+
+            <Headline
+                headlineText={articleData.headline}
+                standfirst={articleData.standfirst}
+                pillar={articleData.pillar}
+                starRating={articleData.starRating}
+            />
+
+            <Standfirst
+                text={articleData.standfirst}
+                pillar={articleData.pillar}
+            />
+
+            {branding && (
+                <Branding branding={branding} pillar={articleData.pillar} />
+            )}
+
+            <Byline
+                byline={articleData.author.byline}
                 tags={articleData.tags}
                 pillar={articleData.pillar}
-                fallbackToSection={true}
-                sectionLabel={articleData.sectionLabel}
-                sectionUrl={articleData.sectionUrl}
+                guardianBaseURL={articleData.guardianBaseURL}
+                className={bylineStyle(articleData.pillar)}
             />
-        )}
 
-        <Headline
-            headlineText={articleData.headline}
-            standfirst={articleData.standfirst}
-            pillar={articleData.pillar}
-            starRating={articleData.starRating}
-        />
-
-        <Standfirst text={articleData.standfirst} pillar={articleData.pillar} />
-
-        <Byline
-            byline={articleData.author.byline}
-            tags={articleData.tags}
-            pillar={articleData.pillar}
-            guardianBaseURL={articleData.guardianBaseURL}
-            className={bylineStyle(articleData.pillar)}
-        />
-
-        <TopMetaExtras
-            sharingUrls={getSharingUrls(
-                articleData.pageId,
-                articleData.webTitle,
-            )}
-            pillar={articleData.pillar}
-            ageWarning={getAgeWarning(
-                articleData.tags,
-                articleData.webPublicationDate,
-            )}
-            webPublicationDate={articleData.webPublicationDateDisplay}
-            twitterHandle={articleData.author.twitterHandle}
-        />
-    </header>
-);
+            <TopMetaExtras
+                sharingUrls={getSharingUrls(
+                    articleData.pageId,
+                    articleData.webTitle,
+                )}
+                pillar={articleData.pillar}
+                ageWarning={getAgeWarning(
+                    articleData.tags,
+                    articleData.webPublicationDate,
+                )}
+                webPublicationDate={articleData.webPublicationDateDisplay}
+                twitterHandle={articleData.author.twitterHandle}
+            />
+        </header>
+    );
+};

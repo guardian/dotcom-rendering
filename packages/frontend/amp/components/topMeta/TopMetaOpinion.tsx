@@ -11,6 +11,7 @@ import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
+import { Branding } from '@frontend/amp/components/topMeta/Branding';
 
 const headerStyle = css`
     ${headline(5)};
@@ -98,6 +99,9 @@ export const TopMetaOpinion: React.FC<{
     articleData: ArticleModel;
     pillar: Pillar;
 }> = ({ articleData, pillar }) => {
+    const branding =
+        articleData.commercialProperties[articleData.editionId].branding;
+
     return (
         <header>
             {articleData.mainMediaElements.map((element, i) => (
@@ -112,6 +116,8 @@ export const TopMetaOpinion: React.FC<{
             />
 
             <h1 className={headerStyle}>{articleData.headline}</h1>
+
+            {branding && <Branding branding={branding} pillar={pillar} />}
 
             <BylineMeta articleData={articleData} pillar={pillar} />
 
