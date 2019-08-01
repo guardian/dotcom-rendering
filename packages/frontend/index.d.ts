@@ -16,7 +16,6 @@ type FakePillars = 'labs';
 type Pillar = RealPillars | FakePillars;
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
-type EditionLower = 'uk' | 'us' | 'int' | 'au'; // Is there a way to do this in typescript without duplication?
 
 type SharePlatform =
     | 'facebook'
@@ -226,7 +225,7 @@ interface GADataType {
     toneIds: string;
     seriesId: string;
     isHosted: string;
-    edition: EditionLower;
+    edition: Edition;
     beaconUrl: string;
 }
 

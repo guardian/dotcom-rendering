@@ -45,6 +45,6 @@ export const extract = (data: CAPIType): GADataType => ({
     toneIds: filterTags(data.tags, 'Tone'),
     seriesId: filterTags(data.tags, 'Series'),
     isHosted: 'false', // TODO - This is missing from the Frontend Data model
-    edition: data.editionId.toLowerCase() as EditionLower,
+    edition: data.editionId.toLowerCase() as Edition,
     beaconUrl: data.beaconURL,
 });
