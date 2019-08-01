@@ -26,19 +26,19 @@ const getCommissioningDesk = (
     return (tag && tag.title) || '';
 };
 
+const formatStringForGa = (string: string): string =>
+    string
+        .toLowerCase()
+        .split(' ')
+        .join('');
+
 // we should not bring down the website if a trackable field is missing!
 export const extract = (data: CAPIType): GADataType => ({
     webTitle: data.webTitle,
     pillar: findPillar(data.pillar) || 'news',
     section: data.sectionName || '',
-    contentType: data.contentType
-        .toLowerCase()
-        .split(' ')
-        .join(''),
-    commissioningDesks: getCommissioningDesk(data.tags)
-        .toLowerCase()
-        .split(' ')
-        .join('-'),
+    contentType: formatStringForGa(data.contentType),
+    commissioningDesks: formatStringForGa(getCommissioningDesk(data.tags)),
     contentId: data.pageId,
     authorIds: filterTags(data.tags, 'Contributor'),
     keywordIds: filterTags(data.tags, 'Keyword'),
