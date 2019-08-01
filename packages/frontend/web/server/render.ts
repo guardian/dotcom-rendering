@@ -20,7 +20,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     { isDev: process.env.NODE_ENV !== 'production' },
                     CAPI.config,
                 ),
-                GA: extractGA(CAPI),, // TODO fixme with extractGA(body)
+                GA: extractGA(CAPI),
                 linkedData: CAPI.linkedData,
             },
         });
