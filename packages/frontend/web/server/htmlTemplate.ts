@@ -75,6 +75,8 @@ export const htmlTemplate = ({
                     } catch (e) {};
                 }
 
+                // We've got contract's to abide by with the Ophan tracker
+                // Setting pageViewId here ensures we're not getting race-conditions at all
                 window.guardian.config.ophan = {
                     // This is duplicated from
                     // https://github.com/guardian/ophan/blob/master/tracker-js/assets/coffee/ophan/transmit.coffee
