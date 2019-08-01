@@ -81,6 +81,11 @@ export const CAPI: CAPIType = {
             title: 'UK Business',
             twitterHandle: '',
         },
+        {
+            id: 'testseries',
+            type: 'Series',
+            title: 'This Series',
+        },
     ],
     sectionName: 'money',
     headline:
