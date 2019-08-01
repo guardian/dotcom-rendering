@@ -3,6 +3,7 @@ import { extract as extractNAV } from '@frontend/model/extract-nav';
 
 import { document } from '@frontend/web/server/document';
 import { validateAsCAPIType } from '@frontend/model/validate';
+import { extract as extractGA } from '@frontend/model/extract-ga';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
     try {
@@ -19,7 +20,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
                     { isDev: process.env.NODE_ENV !== 'production' },
                     CAPI.config,
                 ),
-                GA: '', // TODO fixme with extractGA(body)
+                GA: extractGA(CAPI),
                 linkedData: CAPI.linkedData,
             },
         });

@@ -35,7 +35,8 @@
         "react-no-dangerous-html": true,
         "prettier": true,
         "interface-over-type-literal": false,
-        "curly": true
+        "curly": true,
+        "prefer-array-literal": [true, { "allow-type-parameters": true }]
     },
     "rulesDirectory": [],
     "linterOptions": {
