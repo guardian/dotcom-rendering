@@ -23,23 +23,4 @@ describe('Google Analytics extracts and formats CAPI response correctly', () => 
     test('GA Extract returns correctly formatted GA response', () => {
         expect(extract(CAPI)).toEqual(base);
     });
-
-    test('GA extractn returns and formats Commissioning Desk from data', () => {
-        const testCAPI = { ...CAPI, ...{} };
-        testCAPI.tags.find(
-            o => o.title === 'UK Business' && (o.title = 'We ARE the Commish'),
-        );
-
-        expect(extract(testCAPI)).toEqual({
-            ...base,
-            ...{ commissioningDesks: 'wearethecommish' },
-        });
-    });
-
-    // TODO (implement)
-    // test('GA extract isHosted from data', () => {
-    //     const testCAPI = { ...CAPI, ...{ isHosted: true } };
-
-    //     expect(extract(testCAPI)).toEqual({ ...base, ...{ isHosted: 'true' } });
-    // });
 });
