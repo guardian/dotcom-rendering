@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { body } from '@guardian/pasteup/typography';
+import { sanitise } from '@frontend/lib/sanitise-html';
 // tslint:disable:react-no-dangerous-html
 
 const para = css`
@@ -10,11 +11,28 @@ const para = css`
     }
 `;
 
+const sanitiserOptions = {
+    // Defaults: https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
+    allowedTags: false, // Leave tags from CAPI alone
+    allowedAttributes: false, // Leave attributes from CAPI alone
+    transformTags: {
+        a: (tagName: string, attribs: {}) => ({
+            tagName, // Just return anchors as is
+            attribs: {
+                ...attribs, // Merge into the existing attributes
+                ...{
+                    'data-link-name': 'in body link', // Add the data-link-name for Ophan to anchors
+                },
+            },
+        }),
+    },
+};
+
 export const TextBlockComponent: React.FC<{ html: string }> = ({ html }) => (
     <span
         className={para}
         dangerouslySetInnerHTML={{
-            __html: html,
+            __html: sanitise(html, sanitiserOptions),
         }}
     />
 );
