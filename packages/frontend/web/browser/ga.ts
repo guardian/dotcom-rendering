@@ -11,7 +11,7 @@ const tracker: TrackerConfig = {
     name: 'allEditorialPropertyTracker',
     id: 'UA-78705427-1',
     sampleRate: 100,
-    siteSpeedSampleRate: 1,
+    siteSpeedSampleRate: 100, // TODO Should be set to 1 when rolling out to wider audience
 };
 
 const getQueryParam = (
