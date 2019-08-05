@@ -1,4 +1,4 @@
-import { sanitise } from '@frontend/amp/lib/sanitise-html';
+import { sanitise } from '@frontend/lib/sanitise-html';
 
 describe('sanitise-html', () => {
     it('Remove rouge attributes', () => {

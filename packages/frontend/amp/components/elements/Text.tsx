@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { sanitise } from '@frontend/amp/lib/sanitise-html';
+import { sanitise } from '@frontend/lib/sanitise-html';
 import { body, textSans } from '@guardian/pasteup/typography';
 import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';
 
