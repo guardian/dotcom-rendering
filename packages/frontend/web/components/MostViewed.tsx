@@ -254,7 +254,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
         return (
             <div
                 className={container}
-                data-link-name={'most-viewed,dotcom-rendering'}
+                data-link-name={'most-viewed'}
                 data-component={'most-viewed'}
             >
                 <h2 className={heading}>Most viewed</h2>
