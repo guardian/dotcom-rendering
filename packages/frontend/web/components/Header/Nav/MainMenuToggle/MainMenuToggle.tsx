@@ -120,6 +120,9 @@ export class MainMenuToggle extends Component<
                     onClick={() => toggleMainMenu()}
                     aria-controls={ariaControls}
                     key="OpenMainMenuButton"
+                    data-link-name={`nav2 : veggie-burger : ${
+                        showMainMenu ? 'show' : 'hide'
+                    }`}
                 >
                     <span className={screenReadable}>Show</span>
                     <span className={text({ showMainMenu })}>More</span>

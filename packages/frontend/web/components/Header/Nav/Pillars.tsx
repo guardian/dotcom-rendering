@@ -204,6 +204,7 @@ export const Pillars: React.FC<{
                         },
                     )}
                     href={p.url}
+                    data-link-name={`nav2 : primary : ${p.title}`}
                 >
                     {p.title}
                 </a>

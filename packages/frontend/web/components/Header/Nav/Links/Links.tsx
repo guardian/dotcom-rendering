@@ -105,8 +105,14 @@ const seperatorHide = css`
 const Search: React.FC<{
     href: string;
     className?: string;
-}> = ({ className, children, href, ...props }) => (
-    <a href={href} className={cx(search, className)} {...props}>
+    dataLinkName: string;
+}> = ({ className, children, href, dataLinkName, ...props }) => (
+    <a
+        href={href}
+        className={cx(search, className)}
+        {...props}
+        data-link-name={dataLinkName}
+    >
         {children}
     </a>
 );
@@ -183,6 +189,7 @@ export const Links: React.FC<{
         <a
             href={jobsUrl}
             className={cx(linkTablet({ showAtTablet: false }), link)}
+            data-link-name="nav2 : job-cta"
         >
             Search jobs
         </a>
@@ -190,6 +197,7 @@ export const Links: React.FC<{
         <a
             href={datingUrl}
             className={cx(linkTablet({ showAtTablet: false }), link)}
+            data-link-name="nav2 : soulmates-cta"
         >
             Dating
         </a>
@@ -201,10 +209,15 @@ export const Links: React.FC<{
                     label="My account"
                     links={identityLinks}
                     id="my-account"
+                    data-link-name="nav2 : topbar: my account"
                 />
             </div>
         ) : (
-            <a className={link} href={signInUrl}>
+            <a
+                className={link}
+                href={signInUrl}
+                data-link-name="nav2 : topbar : signin"
+            >
                 <ProfileIcon /> Sign in
             </a>
         )}
@@ -212,6 +225,7 @@ export const Links: React.FC<{
         <Search
             className={cx(linkTablet({ showAtTablet: false }), link)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+            dataLinkName={'nav2 : search'}
         >
             <SearchIcon /> Search
         </Search>

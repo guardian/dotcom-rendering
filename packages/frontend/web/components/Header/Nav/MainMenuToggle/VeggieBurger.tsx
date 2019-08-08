@@ -98,6 +98,9 @@ export const VeggieBurger: React.FC<{
                 onClick={() => toggleMainMenu()}
                 aria-controls={ariaControls}
                 aria-label="Toggle main menu"
+                data-link-name={`nav2 : veggie-burger : ${
+                    showMainMenu ? 'hide' : 'show'
+                }`}
             >
                 <span className={veggieBurgerIcon({ showMainMenu })} />
             </button>
