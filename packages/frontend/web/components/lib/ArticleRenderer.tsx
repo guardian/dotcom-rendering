@@ -1,5 +1,6 @@
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
+import { TweetBlockComponent } from '@frontend/web/components/elements/TweetBlockComponent';
 import React from 'react';
 // import { clean } from '@frontend/model/clean';
 export const ArticleRenderer: React.FC<{
@@ -20,6 +21,14 @@ export const ArticleRenderer: React.FC<{
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
                         <ImageBlockComponent
+                            key={i}
+                            element={element}
+                            pillar={pillar}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                    return (
+                        <TweetBlockComponent
                             key={i}
                             element={element}
                             pillar={pillar}
