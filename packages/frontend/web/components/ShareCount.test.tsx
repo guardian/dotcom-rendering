@@ -28,6 +28,7 @@ describe('ShareCount', () => {
         commercialBundleUrl: '',
         revisionNumber: '',
         isDev: false,
+        googletagUrl: '',
     };
 
     afterEach(() => {

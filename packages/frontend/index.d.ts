@@ -211,6 +211,7 @@ interface ConfigType {
     commercialBundleUrl: string;
     revisionNumber: string;
     isDev: boolean;
+    googletagUrl: string;
 }
 
 interface GADataType {
