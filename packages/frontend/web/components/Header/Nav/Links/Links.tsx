@@ -217,7 +217,7 @@ export const Links: React.FC<{
                     label="My account"
                     links={identityLinks}
                     id="my-account"
-                    data-link-name="nav2 : topbar: my account"
+                    dataLinkName="nav2 : topbar: my account"
                 />
             </div>
         ) : (
