@@ -8,6 +8,9 @@ export interface WindowGuardianConfig {
         sentryPublicApiKey: string;
         keywordIds: [];
     };
+    libs: {
+        googletag: string;
+    };
     switches: { [key: string]: boolean };
 }
 
@@ -24,6 +27,9 @@ const makeWindowGuardianConfig = (
             sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
             sentryHost: dcrDocumentData.config.sentryHost,
             keywordIds: [],
+        },
+        libs: {
+            googletag: dcrDocumentData.config.googletagUrl,
         },
         switches: dcrDocumentData.CAPI.config.switches,
     } as WindowGuardianConfig;
