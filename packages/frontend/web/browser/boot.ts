@@ -122,7 +122,6 @@ const onPolyfilled = (): Promise<void> => {
             if (!raven) {
                 return;
             }
-
             initAppWithRaven(raven);
         })
         .catch(() => {
