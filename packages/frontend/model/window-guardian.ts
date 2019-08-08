@@ -8,6 +8,7 @@ export interface WindowGuardianConfig {
         sentryPublicApiKey: string;
         keywordIds: [];
         dfpAccountId: string;
+        adUnit: string;
     };
     libs: {
         googletag: string;
@@ -29,6 +30,7 @@ const makeWindowGuardianConfig = (
             sentryHost: dcrDocumentData.config.sentryHost,
             keywordIds: [],
             dfpAccountId: dcrDocumentData.config.dfpAccountId,
+            adUnit: '/59666047/theguardian.com/film/article/ng', // Hard coded for the moment, TODO: read the value from frontend
         },
         libs: {
             googletag: dcrDocumentData.config.googletagUrl,
