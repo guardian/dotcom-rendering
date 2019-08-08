@@ -252,7 +252,11 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
 
     public render() {
         return (
-            <div className={container}>
+            <div
+                className={container}
+                data-link-name={'most-viewed'}
+                data-component={'most-viewed'}
+            >
                 <h2 className={heading}>Most viewed</h2>
                 <AsyncClientComponent f={this.fetchTrails}>
                     {({ data }) => (
@@ -309,11 +313,16 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                     key={`tabs-popular-${i}`}
                                     role="tabpanel"
                                     aria-labelledby={`tabs-popular-${i}-tab`}
+                                    data-link-name={tab.heading}
+                                    data-link-context={`most-read/${
+                                        this.props.sectionName
+                                    }`}
                                 >
                                     {(tab.trails || []).map((trail, ii) => (
                                         <li
                                             className={listItem}
                                             key={trail.url}
+                                            data-link-name={`${ii + 1} | text`}
                                         >
                                             <span className={bigNumber}>
                                                 <BigNumber index={ii + 1} />
@@ -322,6 +331,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                 <a
                                                     className={headlineLink}
                                                     href={trail.url}
+                                                    data-link-name={'article'}
                                                 >
                                                     {trail.isLiveBlog && (
                                                         <span

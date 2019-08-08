@@ -78,6 +78,7 @@ export class Nav extends Component<
                     className={centered}
                     role="navigation"
                     aria-label="Guardian sections"
+                    data-component="nav2"
                 >
                     <EditionDropdown edition={edition} />
                     <Logo />
