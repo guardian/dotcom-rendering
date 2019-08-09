@@ -105,8 +105,14 @@ const seperatorHide = css`
 const Search: React.FC<{
     href: string;
     className?: string;
-}> = ({ className, children, href, ...props }) => (
-    <a href={href} className={cx(search, className)} {...props}>
+    dataLinkName: string;
+}> = ({ className, children, href, dataLinkName, ...props }) => (
+    <a
+        href={href}
+        className={cx(search, className)}
+        {...props}
+        data-link-name={dataLinkName}
+    >
         {children}
     </a>
 );
@@ -144,34 +150,42 @@ const identityLinks: DropdownLink[] = [
     {
         url: `${profileSubdomain}/user/id/123`, // TODO use actual user ID once we have a user model
         title: 'Comments and replies',
+        dataLinkName: 'nav2 : topbar : comment activity',
     },
     {
         url: `${profileSubdomain}/public/edit`,
         title: 'Public profile',
+        dataLinkName: 'nav2 : topbar : edit profile',
     },
     {
         url: `${profileSubdomain}/account/edit`,
         title: 'Account details',
+        dataLinkName: 'nav2 : topbar : account details',
     },
     {
         url: `${profileSubdomain}/email-prefs`,
         title: 'Emails and marketing',
+        dataLinkName: 'nav2 : topbar : email prefs',
     },
     {
         url: `${profileSubdomain}/membership/edit`,
         title: 'Membership',
+        dataLinkName: 'nav2 : topbar : membership',
     },
     {
         url: `${profileSubdomain}/contribution/recurring/edit`,
         title: 'Contributions',
+        dataLinkName: 'nav2 : topbar : contributions',
     },
     {
         url: `${profileSubdomain}/digitalpack/edit`,
         title: 'Digital pack',
+        dataLinkName: 'nav2 : topbar : subscriptions',
     },
     {
         url: `${profileSubdomain}/signout`,
         title: 'Sign out',
+        dataLinkName: 'nav2 : topbar : sign out',
     },
 ];
 
@@ -183,6 +197,7 @@ export const Links: React.FC<{
         <a
             href={jobsUrl}
             className={cx(linkTablet({ showAtTablet: false }), link)}
+            data-link-name="nav2 : job-cta"
         >
             Search jobs
         </a>
@@ -190,6 +205,7 @@ export const Links: React.FC<{
         <a
             href={datingUrl}
             className={cx(linkTablet({ showAtTablet: false }), link)}
+            data-link-name="nav2 : soulmates-cta"
         >
             Dating
         </a>
@@ -201,10 +217,15 @@ export const Links: React.FC<{
                     label="My account"
                     links={identityLinks}
                     id="my-account"
+                    dataLinkName="nav2 : topbar: my account"
                 />
             </div>
         ) : (
-            <a className={link} href={signInUrl}>
+            <a
+                className={link}
+                href={signInUrl}
+                data-link-name="nav2 : topbar : signin"
+            >
                 <ProfileIcon /> Sign in
             </a>
         )}
@@ -212,6 +233,7 @@ export const Links: React.FC<{
         <Search
             className={cx(linkTablet({ showAtTablet: false }), link)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+            dataLinkName={'nav2 : search'}
         >
             <SearchIcon /> Search
         </Search>

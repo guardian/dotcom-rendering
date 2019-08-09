@@ -32,25 +32,31 @@ const editionDropdown = css`
     }
 `;
 
+const editionPickerDataLinkName = 'nav2 : topbar : edition-picker: ';
+
 const ukEditionLink: Link = {
     url: '/preference/edition/uk',
     title: 'UK edition',
     isActive: true,
+    dataLinkName: `${editionPickerDataLinkName}UK`,
 };
 
 const usEditionLink: Link = {
     url: '/preference/edition/us',
     title: 'US edition',
+    dataLinkName: `${editionPickerDataLinkName}US`,
 };
 
 const auEditionLink: Link = {
     url: '/preference/edition/au',
     title: 'Australian edition',
+    dataLinkName: `${editionPickerDataLinkName}AU`,
 };
 
 const intEditionLink: Link = {
     url: '/preference/edition/int',
     title: 'International edition',
+    dataLinkName: `${editionPickerDataLinkName}INT`,
 };
 
 const lookUpEditionLink = (edition: Edition): Link => {
@@ -65,7 +71,8 @@ const lookUpEditionLink = (edition: Edition): Link => {
 
 export const EditionDropdown: React.FC<{
     edition: Edition;
-}> = ({ edition }) => {
+    dataLinkName: string;
+}> = ({ edition, dataLinkName }) => {
     const activeEditionLink = lookUpEditionLink(edition);
     const links = [
         ukEditionLink,
@@ -80,6 +87,7 @@ export const EditionDropdown: React.FC<{
                 label={activeEditionLink.title}
                 links={links}
                 id="edition"
+                dataLinkName={dataLinkName}
             />
         </div>
     );

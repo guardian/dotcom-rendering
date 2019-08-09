@@ -80,7 +80,10 @@ export class Nav extends Component<
                     aria-label="Guardian sections"
                     data-component="nav2"
                 >
-                    <EditionDropdown edition={edition} />
+                    <EditionDropdown
+                        edition={edition}
+                        dataLinkName={'nav2 : topbar : edition-picker: toggle'}
+                    />
                     <Logo />
                     {/*
                         TODO: The properties of the Links component
@@ -91,6 +94,7 @@ export class Nav extends Component<
                     <ReaderRevenueLinks
                         urls={nav.readerRevenueLinks.header}
                         edition={edition}
+                        dataLinkNamePrefix={'nav2 : '}
                     />
                     <Links isSignedIn={isSignedIn} />
                     <Pillars

@@ -158,6 +158,7 @@ export const Inner: React.FC<{
                     [selected]: link.title === currentNavLink,
                 })}
                 href={link.url}
+                data-link-name={`nav2 : subnav : ${link.title}`}
             >
                 {link.title}
             </a>

@@ -81,7 +81,12 @@ const ColumnLink: React.FC<{
         })}
         role="none"
     >
-        <a className={cx(columnLinkTitle)} href={link.url} role="menuitem">
+        <a
+            className={cx(columnLinkTitle)}
+            href={link.url}
+            role="menuitem"
+            data-link-name={`nav2 : secondary : ${link.longTitle}`}
+        >
             {link.longTitle}
         </a>
     </li>

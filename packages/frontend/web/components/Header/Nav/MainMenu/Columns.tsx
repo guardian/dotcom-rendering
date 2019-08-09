@@ -125,6 +125,9 @@ export const Columns: React.FC<{
                             href={brandExtension.url}
                             key={brandExtension.title}
                             role="menuitem"
+                            data-link-name={`nav2 : brand extension : ${
+                                brandExtension.longTitle
+                            }`}
                         >
                             {brandExtension.longTitle}
                         </a>

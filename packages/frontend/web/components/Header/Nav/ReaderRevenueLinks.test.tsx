@@ -38,7 +38,11 @@ describe('ReaderRevenueLinks', () => {
         getCookie.mockReturnValue(contributionDate);
 
         const { container } = render(
-            <ReaderRevenueLinks urls={urls} edition={edition} />,
+            <ReaderRevenueLinks
+                urls={urls}
+                edition={edition}
+                dataLinkNamePrefix={'nav2 : '}
+            />,
         );
 
         // expect nothing to be rendered
@@ -59,7 +63,11 @@ describe('ReaderRevenueLinks', () => {
             .mockReturnValueOnce('true');
 
         const { container } = render(
-            <ReaderRevenueLinks urls={urls} edition={edition} />,
+            <ReaderRevenueLinks
+                urls={urls}
+                edition={edition}
+                dataLinkNamePrefix={'nav2 : '}
+            />,
         );
 
         // expect nothing to be rendered
@@ -81,7 +89,11 @@ describe('ReaderRevenueLinks', () => {
             .mockReturnValueOnce('false');
 
         const { container, getByText } = render(
-            <ReaderRevenueLinks urls={urls} edition={edition} />,
+            <ReaderRevenueLinks
+                urls={urls}
+                edition={edition}
+                dataLinkNamePrefix={'nav2 : '}
+            />,
         );
 
         // expect something to be rendered

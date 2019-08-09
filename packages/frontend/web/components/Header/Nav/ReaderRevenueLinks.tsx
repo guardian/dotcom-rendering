@@ -113,7 +113,8 @@ export const ReaderRevenueLinks: React.FC<{
         support: string;
         contribute: string;
     };
-}> = ({ edition, urls }) => {
+    dataLinkNamePrefix: string;
+}> = ({ edition, urls, dataLinkNamePrefix }) => {
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (
@@ -127,12 +128,14 @@ export const ReaderRevenueLinks: React.FC<{
                                 <a
                                     className={cx(link, hiddenUntilTablet)}
                                     href={urls.contribute}
+                                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                                 >
                                     Contribute <ArrowRightIcon />
                                 </a>
                                 <a
                                     className={cx(link, hiddenUntilTablet)}
                                     href={urls.subscribe}
+                                    data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
                                 >
                                     Subscribe <ArrowRightIcon />
                                 </a>
@@ -141,6 +144,7 @@ export const ReaderRevenueLinks: React.FC<{
                                         [hidden]: edition !== 'UK',
                                     })}
                                     href={urls.support}
+                                    data-link-name={`${dataLinkNamePrefix}support-cta`}
                                 >
                                     Support us <ArrowRightIcon />
                                 </a>
@@ -149,6 +153,7 @@ export const ReaderRevenueLinks: React.FC<{
                                         [hidden]: edition === 'UK',
                                     })}
                                     href={urls.contribute}
+                                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                                 >
                                     Contribute <ArrowRightIcon />
                                 </a>

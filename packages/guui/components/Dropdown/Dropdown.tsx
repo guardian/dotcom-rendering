@@ -8,12 +8,14 @@ export interface Link {
     url: string;
     title: string;
     isActive?: boolean;
+    dataLinkName: string;
 }
 
 interface Props {
     id: string;
     label: string;
     links: Link[];
+    dataLinkName: string;
 }
 
 const input = css`
@@ -233,6 +235,7 @@ export class Dropdown extends React.Component<
                         })}
                         aria-controls={dropdownID}
                         aria-expanded={this.state.isExpanded ? 'true' : 'false'}
+                        data-link-name={this.props.dataLinkName}
                     >
                         {label}
                     </button>
@@ -254,6 +257,7 @@ export class Dropdown extends React.Component<
                                     [linkActive]: !!l.isActive,
                                     [linkFirst]: index === 0,
                                 })}
+                                data-link-name={l.dataLinkName}
                             >
                                 {l.title}
                             </a>
