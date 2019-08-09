@@ -1,4 +1,5 @@
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
+import { SubheadingBlockComponent } from '@frontend/web/components/elements/SubheadingBlockComponent';
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import React from 'react';
 // import { clean } from '@frontend/model/clean';
@@ -17,6 +18,10 @@ export const ArticleRenderer: React.FC<{
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.TextBlockElement':
                     return <TextBlockComponent key={i} html={element.html} />;
+                case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+                    return (
+                        <SubheadingBlockComponent key={i} html={element.html} />
+                    );
                 case 'model.dotcomrendering.pageElements.ImageBlockElement':
                     return (
                         <ImageBlockComponent
