@@ -273,9 +273,7 @@ const bodyStyle = css`
     }
 
     h2 {
-        ${body(3)};
-        margin-bottom: 0.0625rem;
-        font-weight: 900;
+        ${headline(3)};
     }
 
     strong {
