@@ -2,12 +2,40 @@
 
 import React from 'react';
 
+export interface AdSlotInputSizeMappings {
+    [key: string]: string[];
+}
+
+export interface AdSlotInternalSizeMappings {
+    [key: string]: string;
+}
+
+export const makeInternalSizeMappings = (
+    inputSizeMapping: AdSlotInputSizeMappings,
+): AdSlotInternalSizeMappings => {
+    return Object.keys(inputSizeMapping).reduce(
+        (m: { [key: string]: string }, key) => {
+            m[`data-${key}`] = inputSizeMapping[key].join('|');
+            return m;
+        },
+        {},
+    );
+};
+
+export const makeClassNames = (
+    name: string,
+    adTypes: string[],
+    optClassNames: string[],
+): string => {
+    const baseClassNames = ['js-ad-slot', 'ad-slot', `ad-slot--${name}`];
+    const adTypeClassNames = adTypes.map(adType => `ad-slot--${adType}`);
+    return baseClassNames.concat(adTypeClassNames, optClassNames).join(' ');
+};
+
 export const AdSlot: React.FC<{
     name: string;
     adTypes: string[];
-    sizeMapping: {
-        [key: string]: string[];
-    };
+    sizeMapping: AdSlotInputSizeMappings;
     showLabel?: boolean;
     refresh?: boolean;
     outOfPage?: boolean;
@@ -23,43 +51,22 @@ export const AdSlot: React.FC<{
     optId,
     optClassNames,
 }) => {
-    const dataSizeMappings = Object.keys(sizeMapping).reduce(
-        (
-            mappings: {
-                [key: string]: string;
-            },
-            key,
-        ) => {
-            mappings[`data-${key}`] = sizeMapping[key].join('|');
-
-            return mappings;
-        },
-        {},
-    );
-
-    const getClassNames = (): string => {
-        const baseClassNames = ['js-ad-slot', 'ad-slot', `ad-slot--${name}`];
-        const adTypeClassNames = adTypes.map(adType => `ad-slot--${adType}`);
-
-        return baseClassNames
-            .concat(adTypeClassNames, optClassNames || [])
-            .join(' ');
-    };
-
+    // Will export `getOptionalProps` as a function if/when needed - Pascal.
     // const getOptionalProps = (): object => ({
     //     ...(showLabel && { 'data-label': true }),
     //     ...(refresh && { 'data-refresh': true }),
     //     ...(outOfPage && { 'data-out-of-page': true }),
     // });
 
+    const sizeMappings = makeInternalSizeMappings(sizeMapping);
     return (
         <div
             id={`dfp-ad--${optId || name}`}
-            className={getClassNames()}
+            className={makeClassNames(name, adTypes, optClassNames || [])}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
-            {...dataSizeMappings}
+            {...sizeMappings}
             aria-hidden="true"
         />
     );
