@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { serif, sans } from '@guardian/pasteup/typography';
+import { serif, sans, textSans, headline } from '@guardian/pasteup/typography';
 import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 import {
@@ -23,18 +23,18 @@ const message = css`
     font-size: 20px;
     font-weight: 800;
     padding-top: 3px;
-    margin-bottom: 12px;
+    margin-bottom: 3px;
 
     ${tablet} {
         display: block;
     }
 
     ${desktop} {
-        font-size: 26px;
+        ${headline(4)}
     }
 
     ${leftCol} {
-        font-size: 32px;
+        ${headline(6)}
     }
 `;
 
@@ -106,6 +106,12 @@ const readerRevenueLinks = css`
     }
 `;
 
+const subMessage = css`
+    color: ${palette.neutral[100]};
+    ${textSans(5)};
+    margin-bottom: 9px;
+`;
+
 export const ReaderRevenueLinks: React.FC<{
     edition: Edition;
     urls: {
@@ -124,6 +130,14 @@ export const ReaderRevenueLinks: React.FC<{
                             <div className={readerRevenueLinks}>
                                 <div className={message}>
                                     Support The Guardian
+                                </div>
+                                <div
+                                    className={cx(
+                                        subMessage,
+                                        hiddenUntilTablet,
+                                    )}
+                                >
+                                    Available for everyone, funded by readers
                                 </div>
                                 <a
                                     className={cx(link, hiddenUntilTablet)}
