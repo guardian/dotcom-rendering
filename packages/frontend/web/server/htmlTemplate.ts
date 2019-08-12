@@ -63,8 +63,10 @@ export const htmlTemplate = ({
                 ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
 
                 <style>${getFontsCss()}${resetCSS}${css}</style>
+
                 <script>
                 window.guardian = ${JSON.stringify(windowGuardian)};
+
                 // this is a global that's called at the bottom of the pf.io response,
                 // once the polyfills have run. This may be useful for debugging.
                 // mainly to support browsers that don't support async=false or defer
