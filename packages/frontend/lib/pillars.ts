@@ -1,18 +1,13 @@
 import { PillarColours, palette } from '@guardian/pasteup/palette';
 
-// Pillars are used for styling
-// RealPillars have Pillar palette colours
-// FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
-const realPillars = [
+export const pillarNames: Pillar[] = [
     'news',
     'opinion',
     'sport',
     'culture',
     'lifestyle',
-] as const;
-const fakePillars = ['labs'] as const;
-
-export const allPillars = [...realPillars, ...fakePillars];
+    'labs',
+];
 
 export const pillarPalette: Record<Pillar, PillarColours> = {
     news: palette.news,

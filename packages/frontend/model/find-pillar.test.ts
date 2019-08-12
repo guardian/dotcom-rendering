@@ -1,12 +1,16 @@
 import { findPillar } from './find-pillar';
 
+jest.mock('@frontend/lib/pillars', () => ({
+    pillarNames: ['news', 'opinion', 'sport', 'culture', 'lifestyle', 'labs'],
+}));
+
 describe('findPillar', () => {
     it('returns pillar if valid', () => {
         expect(findPillar('News')).toBe('news');
     });
 
-    it('returns news pillar if not valid', () => {
-        expect(findPillar('foo')).toBe('news');
+    it('returns undefined if not valid', () => {
+        expect(findPillar('foo')).toBeUndefined();
     });
 
     it('returns "culture" if "arts"', () => {
