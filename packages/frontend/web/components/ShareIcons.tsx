@@ -19,6 +19,7 @@ const pillarFill = pillarMap(
 );
 
 const shareIconList = css`
+    float: left;
     ${wide} {
         flex: auto;
     }

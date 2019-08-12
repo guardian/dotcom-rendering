@@ -2265,4 +2265,5 @@ export const CAPI: CAPIType = {
             ],
         },
     },
+    showBottomSocialButtons: true,
 };

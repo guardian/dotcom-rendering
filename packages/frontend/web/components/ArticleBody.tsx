@@ -26,6 +26,7 @@ import { Dateline } from './Dateline';
 import { MainMedia } from './MainMedia';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
+import { SyndicationButton } from './SyndicationButton';
 
 const curly = (x: any) => x;
 
@@ -516,20 +517,28 @@ export const ArticleBody: React.FC<{
                             pillar={CAPI.pillar}
                         />
                     )}
-                    <SharingIcons
-                        className={subMetaSharingIcons}
-                        sharingUrls={sharingUrls}
-                        pillar={CAPI.pillar}
-                        displayIcons={[
-                            'facebook',
-                            'twitter',
-                            'email',
-                            'linkedIn',
-                            'pinterest',
-                            'whatsApp',
-                            'messenger',
-                        ]}
-                    />
+                    {CAPI.showBottomSocialButtons && (
+                        <SharingIcons
+                            className={subMetaSharingIcons}
+                            sharingUrls={sharingUrls}
+                            pillar={CAPI.pillar}
+                            displayIcons={[
+                                'facebook',
+                                'twitter',
+                                'email',
+                                'linkedIn',
+                                'pinterest',
+                                'whatsApp',
+                                'messenger',
+                            ]}
+                        />
+                    )}
+                    {CAPI.showBottomSocialButtons && (
+                        <SyndicationButton
+                            webUrl={CAPI.webURL}
+                            internalPageCode={CAPI.pageId}
+                        />
+                    )}
                 </div>
             </div>
         </div>
