@@ -11,11 +11,7 @@ export interface PictureSource {
 
 const mq: (source: PictureSource) => string = source =>
     source.hidpi
-        ? `(min-width: ${
-              source.minWidth
-          }px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${
-              source.minWidth
-          }px) and (min-resolution: 120dpi)"`
+        ? `(min-width: ${source.minWidth}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${source.minWidth}px) and (min-resolution: 120dpi)"`
         : `(min-width: ${source.minWidth}px)"`;
 
 const forSource: (source: PictureSource) => string = source =>

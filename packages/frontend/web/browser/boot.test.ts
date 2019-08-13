@@ -57,7 +57,7 @@ describe('boot', () => {
         removeEventListener: jest.Mock<{}> & typeof window.removeEventListener;
     }
     interface MockRaven {
-        context: jest.Mock<{}>;
+        context: jest.Mock<any>;
         captureException: jest.Mock<{}>;
     }
     const mockWindow = (): MockWindow => {

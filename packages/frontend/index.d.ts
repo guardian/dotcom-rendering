@@ -319,6 +319,5 @@ declare namespace JSX {
         'amp-consent': any;
         'amp-live-list': any;
         'amp-audio': any;
-        template: any;
     }
 }

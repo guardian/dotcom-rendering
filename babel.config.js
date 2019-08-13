@@ -26,6 +26,7 @@ module.exports = {
                     node: 'current',
                 },
                 useBuiltIns: 'usage',
+                corejs: '3.1.4',
                 modules: false,
             },
         ],
@@ -39,4 +40,5 @@ module.exports = {
         },
     },
     ignore: ['**/*.json'],
+    sourceType: 'unambiguous',
 };

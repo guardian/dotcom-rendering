@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait, waitForElement } from 'react-testing-library';
+import { render, wait, waitForElement } from '@testing-library/react';
 import { ShareCount } from './ShareCount';
 import { CAPI } from '@root/fixtures/CAPI';
 

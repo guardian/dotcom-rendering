@@ -45,7 +45,7 @@ type SharingURLs = {
     [K in SharePlatform]?: {
         url: string;
         userMessage: string;
-    }
+    };
 };
 
 const metaStyle = css`
