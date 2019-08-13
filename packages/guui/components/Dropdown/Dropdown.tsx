@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/pasteup/typography';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import { until, tablet } from '@guardian/pasteup/breakpoints';
 
 export interface Link {
     url: string;
@@ -31,11 +32,25 @@ const ul = css`
     background-color: white;
     padding: 6px 0;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
-    position: absolute;
-    right: 0;
-    width: 200px;
     display: none;
+
+    ${until.tablet} {
+        position: fixed;
+        border-radius: 0;
+        top: 32px;
+        left: 0;
+        right: 0;
+        width: auto;
+        max-height: calc(100% - 50px);
+        overflow: auto;
+    }
+
+    ${tablet} {
+        position: absolute;
+        right: 0;
+        width: 200px;
+        border-radius: 3px;
+    }
 `;
 
 const ulExpanded = css`
@@ -106,7 +121,7 @@ const button = css`
     line-height: 1.2;
     color: ${palette.neutral[100]};
     transition: color 80ms ease-out;
-    padding: 6px 10px 6px 5px;
+    padding: 0px 10px 6px 5px;
     margin: 1px 0 0;
     text-decoration: none;
 
