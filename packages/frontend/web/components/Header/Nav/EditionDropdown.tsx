@@ -12,6 +12,7 @@ const editionDropdown = css`
     right: 11px;
     z-index: 1072;
     transform: translateX(100%);
+    padding-top: 7px;
 
     :before {
         content: '';
