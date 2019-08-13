@@ -5,7 +5,6 @@ import { serif, sans, textSans, headline } from '@guardian/pasteup/typography';
 import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 import {
-    mobileLandscape,
     tablet,
     desktop,
     mobileMedium,
@@ -92,20 +91,6 @@ const hidden = css`
     display: none;
 `;
 
-const readerRevenueLinks = css`
-    position: absolute;
-    left: 10px;
-    top: 33px;
-
-    ${mobileLandscape} {
-        left: 20px;
-    }
-
-    ${tablet} {
-        top: 0;
-    }
-`;
-
 const subMessage = css`
     color: ${palette.neutral[100]};
     ${textSans(5)};
@@ -127,51 +112,46 @@ export const ReaderRevenueLinks: React.FC<{
                 <>
                     {data && (
                         <>
-                            <div className={readerRevenueLinks}>
-                                <div className={message}>
-                                    Support The Guardian
-                                </div>
-                                <div
-                                    className={cx(
-                                        subMessage,
-                                        hiddenUntilTablet,
-                                    )}
-                                >
-                                    Available for everyone, funded by readers
-                                </div>
-                                <a
-                                    className={cx(link, hiddenUntilTablet)}
-                                    href={urls.contribute}
-                                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                                >
-                                    Contribute <ArrowRightIcon />
-                                </a>
-                                <a
-                                    className={cx(link, hiddenUntilTablet)}
-                                    href={urls.subscribe}
-                                    data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
-                                >
-                                    Subscribe <ArrowRightIcon />
-                                </a>
-                                <a
-                                    className={cx(link, hiddenFromTablet, {
-                                        [hidden]: edition !== 'UK',
-                                    })}
-                                    href={urls.support}
-                                    data-link-name={`${dataLinkNamePrefix}support-cta`}
-                                >
-                                    Support us <ArrowRightIcon />
-                                </a>
-                                <a
-                                    className={cx(link, hiddenFromTablet, {
-                                        [hidden]: edition === 'UK',
-                                    })}
-                                    href={urls.contribute}
-                                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                                >
-                                    Contribute <ArrowRightIcon />
-                                </a>
+                            {/* <div className={readerRevenueLinks}> */}
+                            <div className={message}>
+                                Support The&nbsp;Guardian
                             </div>
+                            <div className={cx(subMessage, hiddenUntilTablet)}>
+                                Available for everyone, funded by readers
+                            </div>
+                            <a
+                                className={cx(link, hiddenUntilTablet)}
+                                href={urls.contribute}
+                                data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                            >
+                                Contribute <ArrowRightIcon />
+                            </a>
+                            <a
+                                className={cx(link, hiddenUntilTablet)}
+                                href={urls.subscribe}
+                                data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+                            >
+                                Subscribe <ArrowRightIcon />
+                            </a>
+                            <a
+                                className={cx(link, hiddenFromTablet, {
+                                    [hidden]: edition !== 'UK',
+                                })}
+                                href={urls.support}
+                                data-link-name={`${dataLinkNamePrefix}support-cta`}
+                            >
+                                Support us <ArrowRightIcon />
+                            </a>
+                            <a
+                                className={cx(link, hiddenFromTablet, {
+                                    [hidden]: edition === 'UK',
+                                })}
+                                href={urls.contribute}
+                                data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                            >
+                                Contribute <ArrowRightIcon />
+                            </a>
+                            {/* </div> */}
                         </>
                     )}
                 </>
