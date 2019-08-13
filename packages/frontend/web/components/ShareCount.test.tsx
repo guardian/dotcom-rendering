@@ -24,6 +24,7 @@ describe('ShareCount', () => {
         sentryHost: '',
         sentryPublicApiKey: '',
         switches: {},
+        abTests: {},
         dfpAccountId: '',
         commercialBundleUrl: '',
         revisionNumber: '',

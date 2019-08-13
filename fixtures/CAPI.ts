@@ -440,6 +440,7 @@ export const CAPI: CAPIType = {
         sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
         sentryHost: 'app.getsentry.com/35463',
         switches: {},
+        abTests: {},
         dfpAccountId: '',
         commercialBundleUrl:
             'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',

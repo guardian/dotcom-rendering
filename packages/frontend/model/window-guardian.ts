@@ -14,6 +14,7 @@ export interface WindowGuardianConfig {
         googletag: string;
     };
     switches: { [key: string]: boolean };
+    tests?: { [key: string]: string };
 }
 
 const makeWindowGuardianConfig = (
@@ -36,6 +37,7 @@ const makeWindowGuardianConfig = (
             googletag: dcrDocumentData.config.googletagUrl,
         },
         switches: dcrDocumentData.CAPI.config.switches,
+        tests: dcrDocumentData.CAPI.config.abTests || {},
     } as WindowGuardianConfig;
 };
 
