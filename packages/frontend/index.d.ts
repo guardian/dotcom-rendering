@@ -137,6 +137,27 @@ interface Pagination {
     older?: string;
 }
 
+interface FooterLink {
+    text: string;
+    url: string;
+    dataLinkName: string;
+    extraClasses?: string;
+}
+interface FooterType {
+    ukListOne: FooterLink[];
+    ukListTwo: FooterLink[];
+    ukListThree: FooterLink[];
+    usListOne: FooterLink[];
+    usListTwo: FooterLink[];
+    usListThree: FooterLink[];
+    auListOne: FooterLink[];
+    auListTwo: FooterLink[];
+    auListThree: FooterLink[];
+    intListOne: FooterLink[];
+    intListTwo: FooterLink[];
+    intListThree: FooterLink[];
+}
+
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
 interface CAPIType {
@@ -186,6 +207,8 @@ interface CAPIType {
     trailText: string;
 
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
+
+    pageFooter: FooterType;
 }
 
 interface TagType {
