@@ -46,7 +46,6 @@ const link = css`
     transition: color 80ms ease-out;
     text-decoration: none;
     padding: 7px 0;
-    z-index: 1072;
 
     ${tablet} {
         padding: 7px 7px;
