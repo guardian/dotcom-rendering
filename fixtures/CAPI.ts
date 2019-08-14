@@ -2267,4 +2267,508 @@ export const CAPI: CAPIType = {
         },
     },
     showBottomSocialButtons: true,
+    pageFooter: {
+        ukListOne: [
+            {
+                text: 'About us',
+                url: '/about',
+                dataLinkName: 'uk : footer : about us',
+                extraClasses: '',
+            },
+            {
+                text: 'Contact us',
+                url: '/help/contact-us',
+                dataLinkName: 'uk : footer : contact us',
+                extraClasses: '',
+            },
+            {
+                text: 'Complaints &amp; corrections',
+                url: '/info/complaints-and-corrections',
+                dataLinkName: 'complaints',
+                extraClasses: '',
+            },
+            {
+                text: 'SecureDrop',
+                url: 'https://www.theguardian.com/securedrop',
+                dataLinkName: 'securedrop',
+                extraClasses: '',
+            },
+            {
+                text: 'Work for us',
+                url: 'https://workforus.theguardian.com',
+                dataLinkName: 'uk : footer : work for us',
+                extraClasses: '',
+            },
+            {
+                text: 'Privacy policy',
+                url: '/info/privacy',
+                dataLinkName: 'privacy',
+                extraClasses: '',
+            },
+            {
+                text: 'Cookie policy',
+                url: '/info/cookies',
+                dataLinkName: 'cookie',
+                extraClasses: '',
+            },
+            {
+                text: 'Terms &amp; conditions',
+                url: '/help/terms-of-service',
+                dataLinkName: 'terms',
+                extraClasses: '',
+            },
+            {
+                text: 'Help',
+                url: '/help',
+                dataLinkName: 'uk : footer : tech feedback',
+                extraClasses: 'js-tech-feedback-report',
+            },
+        ],
+        ukListTwo: [
+            {
+                text: 'All topics',
+                url: '/index/subjects/a',
+                dataLinkName: 'uk : footer : all topics',
+                extraClasses: '',
+            },
+            {
+                text: 'All writers',
+                url: '/index/contributors',
+                dataLinkName: 'uk : footer : all contributors',
+                extraClasses: '',
+            },
+            {
+                text: 'Modern Slavery Act',
+                url:
+                    '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+                dataLinkName: 'uk : footer : modern slavery act statement',
+                extraClasses: '',
+            },
+            {
+                text: 'Digital newspaper archive',
+                url: 'https://theguardian.newspapers.com',
+                dataLinkName: 'digital newspaper archive',
+                extraClasses: '',
+            },
+            {
+                text: 'Facebook',
+                url: 'https://www.facebook.com/theguardian',
+                dataLinkName: 'uk : footer : facebook',
+                extraClasses: '',
+            },
+            {
+                text: 'Twitter',
+                url: 'https://twitter.com/guardian',
+                dataLinkName: 'uk: footer : twitter',
+                extraClasses: '',
+            },
+        ],
+        ukListThree: [
+            {
+                text: 'Advertise with us',
+                url: 'https://advertising.theguardian.com',
+                dataLinkName: 'uk : footer : advertise with us',
+                extraClasses: '',
+            },
+            {
+                text: 'Guardian Labs',
+                url: '/guardian-labs',
+                dataLinkName: 'uk : footer : guardian labs',
+                extraClasses: '',
+            },
+            {
+                text: 'Search jobs',
+                url:
+                    'https://jobs.theguardian.com/jobs?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+                dataLinkName: 'uk : footer : jobs',
+                extraClasses: '',
+            },
+            {
+                text: 'Dating',
+                url:
+                    'https://soulmates.theguardian.com/?INTCMP=NGW_FOOTER_UK_GU_SOULMATES',
+                dataLinkName: 'uk : footer : soulmates',
+                extraClasses: '',
+            },
+            {
+                text: 'Patrons',
+                url: 'https://patrons.theguardian.com/?INTCMP=footer_patrons',
+                dataLinkName: 'uk : footer : patrons',
+                extraClasses: '',
+            },
+            {
+                text: 'Discount Codes',
+                url: 'https://discountcode.theguardian.com/',
+                dataLinkName: 'uk: footer : discount code',
+                extraClasses: 'js-discount-code-link',
+            },
+        ],
+        usListOne: [
+            {
+                text: 'About us',
+                url: '/info/about-guardian-us',
+                dataLinkName: 'us : footer : about us',
+                extraClasses: '',
+            },
+            {
+                text: 'Contact us',
+                url: '/info/about-guardian-us/contact',
+                dataLinkName: 'us : footer : contact us',
+                extraClasses: '',
+            },
+            {
+                text: 'Complaints &amp; corrections',
+                url: '/info/complaints-and-corrections',
+                dataLinkName: 'complaints',
+                extraClasses: '',
+            },
+            {
+                text: 'SecureDrop',
+                url: 'https://www.theguardian.com/securedrop',
+                dataLinkName: 'securedrop',
+                extraClasses: '',
+            },
+            {
+                text: 'Work for us',
+                url: 'https://workforus.theguardian.com',
+                dataLinkName: 'us : footer : work for us',
+                extraClasses: '',
+            },
+            {
+                text: 'Privacy policy',
+                url: '/info/privacy',
+                dataLinkName: 'privacy',
+                extraClasses: '',
+            },
+            {
+                text: 'Cookie policy',
+                url: '/info/cookies',
+                dataLinkName: 'cookie',
+                extraClasses: '',
+            },
+            {
+                text: 'Terms &amp; conditions',
+                url: '/help/terms-of-service',
+                dataLinkName: 'terms',
+                extraClasses: '',
+            },
+            {
+                text: 'Help',
+                url: '/help',
+                dataLinkName: 'us : footer : tech feedback',
+                extraClasses: 'js-tech-feedback-report',
+            },
+        ],
+        usListTwo: [
+            {
+                text: 'All topics',
+                url: '/index/subjects/a',
+                dataLinkName: 'us : footer : all topics',
+                extraClasses: '',
+            },
+            {
+                text: 'All writers',
+                url: '/index/contributors',
+                dataLinkName: 'us : footer : all contributors',
+                extraClasses: '',
+            },
+            {
+                text: 'Digital newspaper archive',
+                url: 'https://theguardian.newspapers.com',
+                dataLinkName: 'digital newspaper archive',
+                extraClasses: '',
+            },
+            {
+                text: 'Facebook',
+                url: 'https://www.facebook.com/theguardian',
+                dataLinkName: 'us : footer : facebook',
+                extraClasses: '',
+            },
+            {
+                text: 'Twitter',
+                url: 'https://twitter.com/guardian',
+                dataLinkName: 'us: footer : twitter',
+                extraClasses: '',
+            },
+        ],
+        usListThree: [
+            {
+                text: 'Advertise with us',
+                url: 'https://advertising.theguardian.com/us/advertising',
+                dataLinkName: 'us : footer : advertise with us',
+                extraClasses: '',
+            },
+            {
+                text: 'Guardian Labs',
+                url: '/guardian-labs-us',
+                dataLinkName: 'us : footer : guardian labs',
+                extraClasses: '',
+            },
+            {
+                text: 'Search jobs',
+                url:
+                    'https://jobs.theguardian.com/jobs?INTCMP=NGW_FOOTER_US_GU_JOBS',
+                dataLinkName: 'us : footer : jobs',
+                extraClasses: '',
+            },
+            {
+                text: 'Dating',
+                url:
+                    'https://soulmates.theguardian.com/?INTCMP=soulmates_us_web_footer',
+                dataLinkName: 'us : footer : soulmates',
+                extraClasses: '',
+            },
+            {
+                text: 'Discount Codes',
+                url: 'https://discountcode.theguardian.com/',
+                dataLinkName: 'us: footer : discount code',
+                extraClasses: 'js-discount-code-link',
+            },
+        ],
+        auListOne: [
+            {
+                text: 'About us',
+                url: '/info/about-guardian-australia',
+                dataLinkName: 'au : footer : about us',
+                extraClasses: '',
+            },
+            {
+                text: 'Information',
+                url: '/info',
+                dataLinkName: 'au : footer : information',
+                extraClasses: '',
+            },
+            {
+                text: 'Contact us',
+                url: '/info/2013/may/26/contact-guardian-australia',
+                dataLinkName: 'au : footer : contact us',
+                extraClasses: '',
+            },
+            {
+                text: 'SecureDrop',
+                url: 'https://www.theguardian.com/securedrop',
+                dataLinkName: 'securedrop',
+                extraClasses: '',
+            },
+            {
+                text: 'Vacancies',
+                url:
+                    'https://www.theguardian.com/info/2015/aug/04/guardian-australia-job-vacancies',
+                dataLinkName: 'au : footer : vacancies',
+                extraClasses: '',
+            },
+            {
+                text: 'Privacy policy',
+                url: '/info/privacy',
+                dataLinkName: 'privacy',
+                extraClasses: '',
+            },
+            {
+                text: 'Cookie policy',
+                url: '/info/cookies',
+                dataLinkName: 'cookie',
+                extraClasses: '',
+            },
+            {
+                text: 'Terms &amp; conditions',
+                url: '/help/terms-of-service',
+                dataLinkName: 'terms',
+                extraClasses: '',
+            },
+            {
+                text: 'Help',
+                url: '/help',
+                dataLinkName: 'au : footer : tech feedback',
+                extraClasses: 'js-tech-feedback-report',
+            },
+        ],
+        auListTwo: [
+            {
+                text: 'All topics',
+                url: '/index/subjects/a',
+                dataLinkName: 'au : footer : all topics',
+                extraClasses: '',
+            },
+            {
+                text: 'All writers',
+                url: '/index/contributors',
+                dataLinkName: 'au : footer : all contributors',
+                extraClasses: '',
+            },
+            {
+                text: 'Events',
+                url: '/guardian-masterclasses/guardian-masterclasses-australia',
+                dataLinkName: 'au : footer : masterclasses',
+                extraClasses: '',
+            },
+            {
+                text: 'Digital newspaper archive',
+                url: 'https://theguardian.newspapers.com',
+                dataLinkName: 'digital newspaper archive',
+                extraClasses: '',
+            },
+            {
+                text: 'Facebook',
+                url: 'https://www.facebook.com/theguardian',
+                dataLinkName: 'au : footer : facebook',
+                extraClasses: '',
+            },
+            {
+                text: 'Twitter',
+                url: 'https://twitter.com/guardian',
+                dataLinkName: 'au: footer : twitter',
+                extraClasses: '',
+            },
+        ],
+        auListThree: [
+            {
+                text: 'Advertising',
+                url: '/advertising/guardian-australia-advertising',
+                dataLinkName: 'au : footer : advertising',
+                extraClasses: '',
+            },
+            {
+                text: 'Guardian Labs',
+                url: '/guardian-labs-australia',
+                dataLinkName: 'au : footer : guardian labs',
+                extraClasses: '',
+            },
+            {
+                text: 'Advertise with us',
+                url: 'https://advertising.theguardian.com/',
+                dataLinkName: 'au : footer : advertise with us',
+                extraClasses: '',
+            },
+            {
+                text: 'Search UK jobs',
+                url:
+                    'https://jobs.theguardian.com/jobs?INTCMP=NGW_FOOTER_AU_GU_JOBS',
+                dataLinkName: 'au : footer : uk-jobs',
+                extraClasses: '',
+            },
+            {
+                text: 'Dating',
+                url:
+                    'https://soulmates.theguardian.com/?INTCMP=soulmates_au_web_footer',
+                dataLinkName: 'au : footer : soulmates',
+                extraClasses: '',
+            },
+            {
+                text: 'Discount Codes',
+                url: 'https://discountcode.theguardian.com/',
+                dataLinkName: 'au: footer : discount code',
+                extraClasses: 'js-discount-code-link',
+            },
+        ],
+        intListOne: [
+            {
+                text: 'Contact us',
+                url: '/help/contact-us',
+                dataLinkName: 'international : footer : contact us',
+                extraClasses: '',
+            },
+            {
+                text: 'Complaints &amp; corrections',
+                url: '/info/complaints-and-corrections',
+                dataLinkName: 'complaints',
+                extraClasses: '',
+            },
+            {
+                text: 'SecureDrop',
+                url: 'https://www.theguardian.com/securedrop',
+                dataLinkName: 'securedrop',
+                extraClasses: '',
+            },
+            {
+                text: 'Work for us',
+                url: 'https://workforus.theguardian.com',
+                dataLinkName: 'international : footer : work for us',
+                extraClasses: '',
+            },
+            {
+                text: 'Privacy policy',
+                url: '/info/privacy',
+                dataLinkName: 'privacy',
+                extraClasses: '',
+            },
+            {
+                text: 'Cookie policy',
+                url: '/info/cookies',
+                dataLinkName: 'cookie',
+                extraClasses: '',
+            },
+            {
+                text: 'Terms &amp; conditions',
+                url: '/help/terms-of-service',
+                dataLinkName: 'terms',
+                extraClasses: '',
+            },
+            {
+                text: 'Help',
+                url: '/help',
+                dataLinkName: 'international : footer : tech feedback',
+                extraClasses: 'js-tech-feedback-report',
+            },
+        ],
+        intListTwo: [
+            {
+                text: 'All topics',
+                url: '/index/subjects/a',
+                dataLinkName: 'international : footer : all topics',
+                extraClasses: '',
+            },
+            {
+                text: 'All writers',
+                url: '/index/contributors',
+                dataLinkName: 'international : footer : all contributors',
+                extraClasses: '',
+            },
+            {
+                text: 'Digital newspaper archive',
+                url: 'https://theguardian.newspapers.com',
+                dataLinkName: 'digital newspaper archive',
+                extraClasses: '',
+            },
+            {
+                text: 'Facebook',
+                url: 'https://www.facebook.com/theguardian',
+                dataLinkName: 'international : footer : facebook',
+                extraClasses: '',
+            },
+            {
+                text: 'Twitter',
+                url: 'https://twitter.com/guardian',
+                dataLinkName: 'international: footer : twitter',
+                extraClasses: '',
+            },
+        ],
+        intListThree: [
+            {
+                text: 'Advertise with us',
+                url: 'https://advertising.theguardian.com',
+                dataLinkName: 'international : footer : advertise with us',
+                extraClasses: '',
+            },
+            {
+                text: 'Search UK jobs',
+                url:
+                    'https://jobs.theguardian.com/jobs?INTCMP=NGW_FOOTER_INT_GU_JOBS',
+                dataLinkName: 'international : footer : uk-jobs',
+                extraClasses: '',
+            },
+            {
+                text: 'Dating',
+                url:
+                    'https://soulmates.theguardian.com/?INTCMP=soulmates_int_web_footer',
+                dataLinkName: 'international : footer : soulmates',
+                extraClasses: '',
+            },
+            {
+                text: 'Discount Codes',
+                url: 'https://discountcode.theguardian.com/',
+                dataLinkName: 'international: footer : discount code',
+                extraClasses: 'js-discount-code-link',
+            },
+        ],
+    },
 };
