@@ -15,7 +15,7 @@ export const OutbrainWidget: React.FC<{}> = ({}) => {
     );
 };
 
-export const MaybeOutbrainContainer: React.FC<{
+export const OutbrainContainer: React.FC<{
     config: ConfigType;
 }> = ({ config }) => {
     if (shouldDisplayOutbrain(config)) {
