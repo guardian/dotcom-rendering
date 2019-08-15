@@ -92,26 +92,9 @@ const copyright = css`
 `;
 
 const FooterLinks: React.FC<{
-    footerLinks: FooterType;
-    edition: Edition;
-}> = ({ footerLinks, edition }) => {
-    const fl = footerLinks;
-    const editionLinks = (editionId => {
-        switch (editionId) {
-            case 'UK':
-                return [fl.ukListOne, fl.ukListTwo, fl.ukListThree];
-            case 'US':
-                return [fl.usListOne, fl.usListTwo, fl.usListThree];
-            case 'AU':
-                return [fl.auListOne, fl.auListTwo, fl.auListThree];
-            case 'INT':
-                return [fl.intListOne, fl.intListTwo, fl.intListThree];
-            default:
-                return [fl.ukListOne, fl.ukListTwo, fl.ukListThree];
-        }
-    })(edition);
-
-    const linkGroups = editionLinks.map(linkGroup => {
+    pageFooter: FooterType;
+}> = ({ pageFooter }) => {
+    const linkGroups = pageFooter.footerLinks.map(linkGroup => {
         const linkList = linkGroup.map((l: FooterLink) => (
             <li key={l.url}>
                 <a
@@ -133,9 +116,8 @@ const FooterLinks: React.FC<{
 const year = new Date().getFullYear();
 
 export const Footer: React.FC<{
-    footerLinks: FooterType;
-    edition: Edition;
-}> = ({ footerLinks, edition }) => (
+    pageFooter: FooterType;
+}> = ({ pageFooter }) => (
     <footer className={footer}>
         <Container className={footerInner}>
             <iframe
@@ -150,7 +132,7 @@ export const Footer: React.FC<{
                 height="100px"
                 frameBorder="0"
             />
-            <FooterLinks footerLinks={footerLinks} edition={edition} />
+            <FooterLinks pageFooter={pageFooter} />
             <div className={copyright}>
                 © {year} Guardian News & Media Limited or its affiliated
                 companies. All rights reserved.

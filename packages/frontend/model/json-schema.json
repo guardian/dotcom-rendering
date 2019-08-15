@@ -1533,92 +1533,18 @@
         "FooterType": {
             "type": "object",
             "properties": {
-                "ukListOne": {
+                "footerLinks": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "ukListTwo": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "ukListThree": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "usListOne": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "usListTwo": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "usListThree": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "auListOne": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "auListTwo": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "auListThree": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "intListOne": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "intListTwo": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
-                    }
-                },
-                "intListThree": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FooterLink"
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/FooterLink"
+                        }
                     }
                 }
             },
             "required": [
-                "auListOne",
-                "auListThree",
-                "auListTwo",
-                "intListOne",
-                "intListThree",
-                "intListTwo",
-                "ukListOne",
-                "ukListThree",
-                "ukListTwo",
-                "usListOne",
-                "usListThree",
-                "usListTwo"
+                "footerLinks"
             ]
         },
         "FooterLink": {

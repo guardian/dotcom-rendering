@@ -144,18 +144,7 @@ interface FooterLink {
     extraClasses?: string;
 }
 interface FooterType {
-    ukListOne: FooterLink[];
-    ukListTwo: FooterLink[];
-    ukListThree: FooterLink[];
-    usListOne: FooterLink[];
-    usListTwo: FooterLink[];
-    usListThree: FooterLink[];
-    auListOne: FooterLink[];
-    auListTwo: FooterLink[];
-    auListThree: FooterLink[];
-    intListOne: FooterLink[];
-    intListTwo: FooterLink[];
-    intListThree: FooterLink[];
+    footerLinks: FooterLink[][];
 }
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
