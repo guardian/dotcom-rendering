@@ -7,6 +7,7 @@ import {
     until,
     wide,
     desktop,
+    from,
 } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/typography';
 
@@ -127,8 +128,12 @@ const readerRevenueLinks = css`
         border-top: 1px solid ${palette.brand.pastel};
     }
 
-    ${tablet} {
+    ${from.tablet.until.desktop} {
         width: 218px;
+    }
+
+    ${from.desktop.until.leftCol} {
+        width: 458px;
     }
 `;
 
