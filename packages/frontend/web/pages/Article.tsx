@@ -10,6 +10,7 @@ import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { BackToTop } from '@frontend/web/components/BackToTop';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
+import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 
 // TODO: find a better of setting opacity
 const secondaryColumn = css`
@@ -55,6 +56,7 @@ export const Article: React.FC<{
                     <div className={secondaryColumn} />
                 </article>
             </Container>
+            <OutbrainContainer config={data.config} />
             <Container
                 borders={true}
                 className={cx(
