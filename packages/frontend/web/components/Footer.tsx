@@ -50,8 +50,7 @@ const footerInner = css`
 
 const pillarWrap = css`
     ${clearFix}
-    border: 1px solid ${palette.brand.pastel};
-    border-top: 0;
+    border-bottom: 1px solid ${palette.brand.pastel};
 `;
 
 const emailSignup = css`
@@ -86,12 +85,6 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-end;
-    width: 100%;
-
-    ${until.leftCol} {
-        border-top: 1px solid ${palette.brand.pastel};
-    }
 
     ul {
         width: 50%;
