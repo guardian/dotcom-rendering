@@ -81,6 +81,8 @@ export const Article: React.FC<{
             nav={data.NAV}
             edition={data.CAPI.editionId}
             pageFooter={data.CAPI.pageFooter}
+            pillar={data.CAPI.pillar}
+            pillars={data.NAV.pillars}
         />
 
         <CookieBanner />

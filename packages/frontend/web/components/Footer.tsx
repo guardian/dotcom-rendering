@@ -10,8 +10,10 @@ import {
     from,
 } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/typography';
+import { clearFix } from '@guardian/pasteup/mixins';
 
 import { Container } from '@guardian/guui';
+import { Pillars } from './Header/Nav/Pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
 
@@ -42,6 +44,12 @@ const footerInner = css`
 
     padding-bottom: 6px;
     display: block;
+    border: 1px solid ${palette.brand.pastel};
+    border-top: 0;
+`;
+
+const pillarWrap = css`
+    ${clearFix}
     border: 1px solid ${palette.brand.pastel};
     border-top: 0;
 `;
@@ -222,31 +230,38 @@ const FooterLinks: React.FC<{
 const year = new Date().getFullYear();
 
 export const Footer: React.FC<{
+    pillars: PillarType[];
+    pillar: Pillar;
     nav: NavType;
     edition: Edition;
     pageFooter: FooterType;
-}> = ({ nav, edition, pageFooter }) => (
+}> = ({ pillars, pillar, nav, edition, pageFooter }) => (
     <footer className={footer}>
         <Container className={footerInner}>
-            <div className={footerItemContainers}>
-                <iframe
-                    title="Guardian Email Sign-up Form"
-                    src="https://www.theguardian.com/email/form/footer/today-uk"
-                    scrolling="no"
-                    seamless={true}
-                    id="footer__email-form"
-                    className={emailSignup}
-                    data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
-                    data-node-uid="2"
-                    height="100px"
-                    frameBorder="0"
+            <div className={pillarWrap}>
+                <Pillars
+                    showMainMenu={false}
+                    pillars={pillars}
+                    pillar={pillar}
                 />
+            </div>
+            <iframe
+                title="Guardian Email Sign-up Form"
+                src="https://www.theguardian.com/email/form/footer/today-uk"
+                scrolling="no"
+                seamless={true}
+                id="footer__email-form"
+                className={emailSignup}
+                data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
+                data-node-uid="2"
+                height="100px"
+                frameBorder="0"
+            />
 
-                <FooterLinks
-                    nav={nav}
-                    edition={edition}
-                    pageFooter={pageFooter}
-                />
+            <FooterLinks nav={nav} edition={edition} pageFooter={pageFooter} />
+            <div className={copyright}>
+                © {year} Guardian News & Media Limited or its affiliated
+                companies. All rights reserved.
             </div>
         </Container>
         <div className={copyright}>
