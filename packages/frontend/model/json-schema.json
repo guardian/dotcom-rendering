@@ -215,7 +215,10 @@
         "trailText": {
             "type": "string"
         },
-        "nav": {}
+        "nav": {},
+        "pageFooter": {
+            "$ref": "#/definitions/FooterType"
+        }
     },
     "required": [
         "author",
@@ -238,6 +241,7 @@
         "main",
         "mainMediaElements",
         "nav",
+        "pageFooter",
         "pageId",
         "pillar",
         "sectionLabel",
@@ -1524,6 +1528,45 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
+            ]
+        },
+        "FooterType": {
+            "type": "object",
+            "properties": {
+                "footerLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/FooterLink"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "footerLinks"
+            ]
+        },
+        "FooterLink": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dataLinkName": {
+                    "type": "string"
+                },
+                "extraClasses": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataLinkName",
+                "text",
+                "url"
             ]
         }
     },
