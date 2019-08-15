@@ -51,6 +51,11 @@ const footerInner = css`
 const pillarWrap = css`
     ${clearFix}
     border-bottom: 1px solid ${palette.brand.pastel};
+    padding-bottom: 12px;
+
+    > ul {
+        clear: none;
+    }
 `;
 
 const emailSignup = css`
@@ -237,6 +242,7 @@ export const Footer: React.FC<{
                     showMainMenu={false}
                     pillars={pillars}
                     pillar={pillar}
+                    showLastPillarDivider={false}
                 />
             </div>
             <div className={footerItemContainers}>
@@ -258,11 +264,6 @@ export const Footer: React.FC<{
                     edition={edition}
                     pageFooter={pageFooter}
                 />
-            </div>
-
-            <div className={copyright}>
-                © {year} Guardian News & Media Limited or its affiliated
-                companies. All rights reserved.
             </div>
         </Container>
         <div className={copyright}>

@@ -189,20 +189,18 @@ export const Pillars: React.FC<{
     showMainMenu: boolean;
     pillars: PillarType[];
     pillar: Pillar;
-}> = ({ showMainMenu, pillars, pillar }) => (
+    showLastPillarDivider?: boolean;
+}> = ({ showMainMenu, pillars, pillar, showLastPillarDivider = true }) => (
     <ul className={pillarsStyles}>
         {pillars.map((p, i) => (
             <li key={p.title} className={pillarStyle}>
                 <a
-                    className={cx(
-                        pillarDivider,
-                        linkStyle,
-                        pillarUnderline[p.pillar],
-                        {
-                            [showMenuUnderline]: showMainMenu,
-                            [forceUnderline]: p.pillar === pillar,
-                        },
-                    )}
+                    className={cx(linkStyle, pillarUnderline[p.pillar], {
+                        [pillarDivider]:
+                            showLastPillarDivider || i !== pillars.length - 1,
+                        [showMenuUnderline]: showMainMenu,
+                        [forceUnderline]: p.pillar === pillar,
+                    })}
                     href={p.url}
                     data-link-name={`nav2 : primary : ${p.title}`}
                 >
