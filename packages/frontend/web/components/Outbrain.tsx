@@ -18,12 +18,12 @@ export const OutbrainWidget: React.FC<{}> = ({}) => {
 export const OutbrainContainer: React.FC<{
     config: ConfigType;
 }> = ({ config }) => {
-    if (shouldDisplayOutbrain(config)) {
-        return (
-            <Container>
-                <OutbrainWidget />
-            </Container>
-        );
+    if (!shouldDisplayOutbrain(config)) {
+        return null;
     }
-    return <div />;
+    return (
+        <Container>
+            <OutbrainWidget />
+        </Container>
+    );
 };
