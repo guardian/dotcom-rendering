@@ -17,16 +17,11 @@ import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientCo
 
 const message = css`
     color: ${palette.highlight.main};
-    display: none;
     ${serif.headline};
     font-size: 20px;
     font-weight: 800;
     padding-top: 3px;
     margin-bottom: 3px;
-
-    ${tablet} {
-        display: block;
-    }
 
     ${desktop} {
         ${headline(4)}
@@ -50,6 +45,7 @@ const link = css`
     padding: 7px 12px 0 12px;
     position: relative;
     margin-right: 10px;
+    margin-bottom: 6px;
 
     ${mobileMedium} {
         padding-right: 34px;
@@ -87,10 +83,6 @@ const hiddenFromTablet = css`
     }
 `;
 
-const hidden = css`
-    display: none;
-`;
-
 const subMessage = css`
     color: ${palette.neutral[100]};
     ${textSans(5)};
@@ -105,7 +97,10 @@ export const ReaderRevenueLinks: React.FC<{
         contribute: string;
     };
     dataLinkNamePrefix: string;
-}> = ({ edition, urls, dataLinkNamePrefix }) => {
+    noResponsive: boolean;
+}> = ({ edition, urls, dataLinkNamePrefix, noResponsive }) => {
+    const requiredLinkStyle = noResponsive ? link : cx(link, hiddenUntilTablet);
+
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (
@@ -113,44 +108,54 @@ export const ReaderRevenueLinks: React.FC<{
                     {data && (
                         <>
                             {/* <div className={readerRevenueLinks}> */}
-                            <div className={message}>
+                            <div
+                                className={cx(message, {
+                                    [hiddenUntilTablet]: !noResponsive,
+                                })}
+                            >
                                 Support The&nbsp;Guardian
                             </div>
-                            <div className={cx(subMessage, hiddenUntilTablet)}>
+                            <div
+                                className={cx(subMessage, {
+                                    [hiddenUntilTablet]: !noResponsive,
+                                })}
+                            >
                                 Available for everyone, funded by readers
                             </div>
                             <a
-                                className={cx(link, hiddenUntilTablet)}
+                                className={requiredLinkStyle}
                                 href={urls.contribute}
                                 data-link-name={`${dataLinkNamePrefix}contribute-cta`}
                             >
                                 Contribute <ArrowRightIcon />
                             </a>
                             <a
-                                className={cx(link, hiddenUntilTablet)}
+                                className={requiredLinkStyle}
                                 href={urls.subscribe}
                                 data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
                             >
                                 Subscribe <ArrowRightIcon />
                             </a>
-                            <a
-                                className={cx(link, hiddenFromTablet, {
-                                    [hidden]: edition !== 'UK',
-                                })}
-                                href={urls.support}
-                                data-link-name={`${dataLinkNamePrefix}support-cta`}
-                            >
-                                Support us <ArrowRightIcon />
-                            </a>
-                            <a
-                                className={cx(link, hiddenFromTablet, {
-                                    [hidden]: edition === 'UK',
-                                })}
-                                href={urls.contribute}
-                                data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                            >
-                                Contribute <ArrowRightIcon />
-                            </a>
+
+                            {!noResponsive &&
+                                (edition === 'UK' ? (
+                                    <a
+                                        className={cx(link, hiddenFromTablet)}
+                                        href={urls.contribute}
+                                        data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                                    >
+                                        Contribute <ArrowRightIcon />
+                                    </a>
+                                ) : (
+                                    <a
+                                        className={cx(link, hiddenFromTablet)}
+                                        href={urls.support}
+                                        data-link-name={`${dataLinkNamePrefix}support-cta`}
+                                    >
+                                        Support us <ArrowRightIcon />
+                                    </a>
+                                ))}
+
                             {/* </div> */}
                         </>
                     )}

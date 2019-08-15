@@ -115,6 +115,7 @@ export class Nav extends Component<
                             urls={nav.readerRevenueLinks.header}
                             edition={edition}
                             dataLinkNamePrefix={'nav2 : '}
+                            noResponsive={false}
                         />
                     </div>
                     <Links isSignedIn={isSignedIn} />

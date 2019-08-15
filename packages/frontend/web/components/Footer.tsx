@@ -38,9 +38,10 @@ const footerInner = css`
     ${wide} {
         max-width: 1300px;
     }
+
     padding-bottom: 6px;
     display: block;
-    border: 0.0625rem solid ${palette.brand.pastel};
+    border: 1px solid ${palette.brand.pastel};
     border-top: 0;
 `;
 
@@ -77,10 +78,6 @@ const footerList = css`
     flex-wrap: wrap;
     flex-direction: row;
     border-top: 1px solid ${palette.brand.pastel};
-
-    ${tablet} {
-        border-top: none;
-    }
 
     ul {
         width: 50%;
@@ -123,6 +120,16 @@ const readerRevenueLinks = css`
     border-left: 1px solid ${palette.brand.pastel};
     padding: 12px 0 0 10px;
     margin: 0 10px 36px 0;
+
+    width: calc(50% - 10px);
+
+    ${until.tablet} {
+        border-top: 1px solid ${palette.brand.pastel};
+    }
+
+    ${tablet} {
+        width: 218px;
+    }
 `;
 
 const copyright = css`
@@ -150,13 +157,18 @@ const copyright = css`
 `;
 
 const footerItemContainers = css`
-    display: flex;
+    ${leftCol} {
+        display: flex;
+    }
+
     padding: 0 19px;
 `;
 
 const FooterLinks: React.FC<{
+    nav: NavType;
+    edition: Edition;
     pageFooter: FooterType;
-}> = ({ pageFooter }) => {
+}> = ({ pageFooter, nav, edition }) => {
     const linkGroups = pageFooter.footerLinks.map(linkGroup => {
         const linkList = linkGroup.map((l: FooterLink) => (
             <li key={l.url}>
@@ -173,7 +185,23 @@ const FooterLinks: React.FC<{
         return <ul key={key}>{linkList}</ul>;
     });
 
-    return <div className={footerList}>{linkGroups}</div>;
+    const rrLinks = (
+        <div className={readerRevenueLinks}>
+            <ReaderRevenueLinks
+                urls={nav.readerRevenueLinks.footer}
+                edition={edition}
+                dataLinkNamePrefix={'footer : '}
+                noResponsive={true}
+            />
+        </div>
+    );
+
+    return (
+        <div className={footerList}>
+            {linkGroups}
+            {rrLinks}
+        </div>
+    );
 };
 
 const year = new Date().getFullYear();
@@ -198,14 +226,12 @@ export const Footer: React.FC<{
                     height="100px"
                     frameBorder="0"
                 />
-                <FooterLinks pageFooter={pageFooter} />
-                <div className={readerRevenueLinks}>
-                    <ReaderRevenueLinks
-                        urls={nav.readerRevenueLinks.footer}
-                        edition={edition}
-                        dataLinkNamePrefix={'footer : '}
-                    />
-                </div>
+
+                <FooterLinks
+                    nav={nav}
+                    edition={edition}
+                    pageFooter={pageFooter}
+                />
             </div>
         </Container>
         <div className={copyright}>
