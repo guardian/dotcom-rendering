@@ -4,7 +4,7 @@ import React from 'react';
 import { Container } from '@guardian/guui';
 
 export const shouldDisplayOutbrain = (config: ConfigType): boolean => {
-    return config.switches.displayOutbrain;
+    return config.switches.outbrainDCRTest;
 };
 
 export const OutbrainWidget: React.FC<{}> = ({}) => {
