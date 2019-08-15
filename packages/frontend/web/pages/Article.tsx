@@ -75,7 +75,7 @@ export const Article: React.FC<{
         />
         <BackToTop />
 
-        <Footer pageFooter={data.CAPI.pageFooter} />
+        <Footer />
 
         <CookieBanner />
     </div>
