@@ -1,11 +1,17 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/typography';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
+import {
+    footerLinks,
+    Link,
+    LinkPlatform,
+    isOnPlatform,
+} from '@frontend/lib/footer-links';
 
 const footer = css`
     background-color: ${palette.brand.main};
@@ -92,22 +98,21 @@ const copyright = css`
 `;
 
 const FooterLinks: React.FC<{
-    pageFooter: FooterType;
-}> = ({ pageFooter }) => {
-    const linkGroups = pageFooter.footerLinks.map(linkGroup => {
-        const linkList = linkGroup.map((l: FooterLink) => (
-            <li key={l.url}>
-                <a
-                    className={cx(footerLink, l.extraClasses)}
-                    href={l.url}
-                    data-link-name={l.dataLinkName}
-                >
-                    {l.text}
-                </a>
-            </li>
-        ));
-        const key = linkGroup.reduce((acc, { text }) => `acc-${text}`, '');
-        return <ul key={key}>{linkList}</ul>;
+    links: Link[][];
+}> = ({ links }) => {
+    const linkGroups = links.map(linkGroup => {
+        const ls = linkGroup
+            .filter(l => isOnPlatform(l, LinkPlatform.Web))
+            .map(l => (
+                <li key={l.url}>
+                    <a className={footerLink} href={l.url}>
+                        {l.title}
+                    </a>
+                </li>
+            ));
+        const key = linkGroup.reduce((acc, { title }) => `acc-${title}`, '');
+
+        return <ul key={key}>{ls}</ul>;
     });
 
     return <div className={footerList}>{linkGroups}</div>;
@@ -115,9 +120,7 @@ const FooterLinks: React.FC<{
 
 const year = new Date().getFullYear();
 
-export const Footer: React.FC<{
-    pageFooter: FooterType;
-}> = ({ pageFooter }) => (
+export const Footer: React.FC = () => (
     <footer className={footer}>
         <Container className={footerInner}>
             <iframe
@@ -132,7 +135,7 @@ export const Footer: React.FC<{
                 height="100px"
                 frameBorder="0"
             />
-            <FooterLinks pageFooter={pageFooter} />
+            <FooterLinks links={footerLinks} />
             <div className={copyright}>
                 © {year} Guardian News & Media Limited or its affiliated
                 companies. All rights reserved.

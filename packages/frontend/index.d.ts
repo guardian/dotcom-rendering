@@ -137,16 +137,6 @@ interface Pagination {
     older?: string;
 }
 
-interface FooterLink {
-    text: string;
-    url: string;
-    dataLinkName: string;
-    extraClasses?: string;
-}
-interface FooterType {
-    footerLinks: FooterLink[][];
-}
-
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
 interface CAPIType {
@@ -196,8 +186,6 @@ interface CAPIType {
     trailText: string;
 
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
-
-    pageFooter: FooterType;
 }
 
 interface TagType {
