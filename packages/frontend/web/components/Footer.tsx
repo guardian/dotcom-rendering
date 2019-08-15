@@ -51,7 +51,7 @@ const emailSignup = css`
 
     ${leftCol} {
         float: left;
-        width: 300px;
+        width: 258px;
         margin-right: 180px;
     }
 
@@ -78,7 +78,12 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    border-top: 1px solid ${palette.brand.pastel};
+    justify-content: flex-end;
+    width: 100%;
+
+    ${until.leftCol} {
+        border-top: 1px solid ${palette.brand.pastel};
+    }
 
     ul {
         width: 50%;
@@ -110,7 +115,7 @@ const footerList = css`
 
         ${tablet} {
             margin: 0 10px 36px 0;
-            flex: 1 0 0;
+            width: 150px;
         }
 
         padding: 12px 0 0 10px;
@@ -120,11 +125,10 @@ const footerList = css`
 const readerRevenueLinks = css`
     border-left: 1px solid ${palette.brand.pastel};
     padding: 12px 0 0 10px;
-    margin: 0 10px 36px 0;
-
-    width: calc(50% - 10px);
+    margin: 0 0 36px 0;
 
     ${until.tablet} {
+        width: 50%;
         border-top: 1px solid ${palette.brand.pastel};
     }
 
@@ -134,6 +138,10 @@ const readerRevenueLinks = css`
 
     ${from.desktop.until.leftCol} {
         width: 458px;
+    }
+
+    ${leftCol} {
+        width: 300px;
     }
 `;
 
@@ -164,8 +172,10 @@ const copyright = css`
 const footerItemContainers = css`
     ${leftCol} {
         display: flex;
+        border-top: 1px solid ${palette.brand.pastel};
     }
 
+    width: 100%;
     padding: 0 19px;
 `;
 
