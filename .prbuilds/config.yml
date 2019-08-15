@@ -6,4 +6,6 @@ checks:
   lighthouse:
     url: http://localhost:3030/AMPArticle
   amp:
-    url: http://localhost:3030/AMPArticle
+    urls: 
+      - http://localhost:3030/AMPArticle
+      - http://localhost:3030/AMPArticle?url=https://www.theguardian.com/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live
