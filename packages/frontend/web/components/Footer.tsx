@@ -133,7 +133,8 @@ const footerList = css`
 const readerRevenueLinks = css`
     border-left: 1px solid ${palette.brand.pastel};
     padding: 12px 0 0 10px;
-    margin: 0 0 36px 0;
+    margin: 0 10px 36px 0;
+    width: calc(50% - 10px);
 
     ${until.tablet} {
         width: 50%;
@@ -245,20 +246,27 @@ export const Footer: React.FC<{
                     pillar={pillar}
                 />
             </div>
-            <iframe
-                title="Guardian Email Sign-up Form"
-                src="https://www.theguardian.com/email/form/footer/today-uk"
-                scrolling="no"
-                seamless={true}
-                id="footer__email-form"
-                className={emailSignup}
-                data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
-                data-node-uid="2"
-                height="100px"
-                frameBorder="0"
-            />
+            <div className={footerItemContainers}>
+                <iframe
+                    title="Guardian Email Sign-up Form"
+                    src="https://www.theguardian.com/email/form/footer/today-uk"
+                    scrolling="no"
+                    seamless={true}
+                    id="footer__email-form"
+                    className={emailSignup}
+                    data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
+                    data-node-uid="2"
+                    height="100px"
+                    frameBorder="0"
+                />
 
-            <FooterLinks nav={nav} edition={edition} pageFooter={pageFooter} />
+                <FooterLinks
+                    nav={nav}
+                    edition={edition}
+                    pageFooter={pageFooter}
+                />
+            </div>
+
             <div className={copyright}>
                 © {year} Guardian News & Media Limited or its affiliated
                 companies. All rights reserved.
