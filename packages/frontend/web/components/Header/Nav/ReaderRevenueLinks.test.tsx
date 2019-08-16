@@ -42,6 +42,7 @@ describe('ReaderRevenueLinks', () => {
                 urls={urls}
                 edition={edition}
                 dataLinkNamePrefix={'nav2 : '}
+                noResponsive={false}
             />,
         );
 
@@ -67,6 +68,7 @@ describe('ReaderRevenueLinks', () => {
                 urls={urls}
                 edition={edition}
                 dataLinkNamePrefix={'nav2 : '}
+                noResponsive={false}
             />,
         );
 
@@ -93,6 +95,7 @@ describe('ReaderRevenueLinks', () => {
                 urls={urls}
                 edition={edition}
                 dataLinkNamePrefix={'nav2 : '}
+                noResponsive={false}
             />,
         );
 

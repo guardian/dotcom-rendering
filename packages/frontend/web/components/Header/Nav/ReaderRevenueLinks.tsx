@@ -5,7 +5,6 @@ import { serif, sans, textSans, headline } from '@guardian/pasteup/typography';
 import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 import {
-    mobileLandscape,
     tablet,
     desktop,
     mobileMedium,
@@ -18,16 +17,11 @@ import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientCo
 
 const message = css`
     color: ${palette.highlight.main};
-    display: none;
     ${serif.headline};
     font-size: 20px;
     font-weight: 800;
     padding-top: 3px;
     margin-bottom: 3px;
-
-    ${tablet} {
-        display: block;
-    }
 
     ${desktop} {
         ${headline(4)}
@@ -48,9 +42,10 @@ const link = css`
     font-weight: 700;
     height: 32px;
     text-decoration: none;
-    padding: 7px 12px 0 12px;
+    padding: 4px 12px 0 12px;
     position: relative;
     margin-right: 10px;
+    margin-bottom: 6px;
 
     ${mobileMedium} {
         padding-right: 34px;
@@ -76,6 +71,10 @@ const link = css`
     }
 `;
 
+const hidden = css`
+    display: none;
+`;
+
 const hiddenUntilTablet = css`
     ${until.tablet} {
         display: none;
@@ -88,29 +87,28 @@ const hiddenFromTablet = css`
     }
 `;
 
-const hidden = css`
-    display: none;
-`;
-
-const readerRevenueLinks = css`
-    position: absolute;
-    left: 10px;
-    top: 33px;
-
-    ${mobileLandscape} {
-        left: 20px;
-    }
-
-    ${tablet} {
-        top: 0;
-    }
-`;
-
 const subMessage = css`
     color: ${palette.neutral[100]};
     ${textSans(5)};
     margin-bottom: 9px;
 `;
+
+export const RRButton: React.FC<{
+    url: string;
+    dataLinkNamePrefix: string;
+    dataLinkNameSuffix: string;
+    linkText: string;
+}> = ({ url, dataLinkNamePrefix, dataLinkNameSuffix, linkText }) => {
+    return (
+        <a
+            className={link}
+            href={url}
+            data-link-name={`${dataLinkNamePrefix}${dataLinkNameSuffix}`}
+        >
+            {linkText} <ArrowRightIcon />
+        </a>
+    );
+};
 
 export const ReaderRevenueLinks: React.FC<{
     edition: Edition;
@@ -120,57 +118,60 @@ export const ReaderRevenueLinks: React.FC<{
         contribute: string;
     };
     dataLinkNamePrefix: string;
-}> = ({ edition, urls, dataLinkNamePrefix }) => {
+    noResponsive: boolean;
+}> = ({ edition, urls, dataLinkNamePrefix, noResponsive }) => {
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (
                 <>
                     {data && (
                         <>
-                            <div className={readerRevenueLinks}>
+                            <div
+                                className={cx({
+                                    [hiddenUntilTablet]: !noResponsive,
+                                })}
+                            >
                                 <div className={message}>
-                                    Support The Guardian
+                                    Support The&nbsp;Guardian
                                 </div>
-                                <div
-                                    className={cx(
-                                        subMessage,
-                                        hiddenUntilTablet,
-                                    )}
-                                >
+                                <div className={subMessage}>
                                     Available for everyone, funded by readers
                                 </div>
-                                <a
-                                    className={cx(link, hiddenUntilTablet)}
-                                    href={urls.contribute}
-                                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                                >
-                                    Contribute <ArrowRightIcon />
-                                </a>
-                                <a
-                                    className={cx(link, hiddenUntilTablet)}
-                                    href={urls.subscribe}
-                                    data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
-                                >
-                                    Subscribe <ArrowRightIcon />
-                                </a>
-                                <a
-                                    className={cx(link, hiddenFromTablet, {
-                                        [hidden]: edition !== 'UK',
-                                    })}
-                                    href={urls.support}
-                                    data-link-name={`${dataLinkNamePrefix}support-cta`}
-                                >
-                                    Support us <ArrowRightIcon />
-                                </a>
-                                <a
-                                    className={cx(link, hiddenFromTablet, {
-                                        [hidden]: edition === 'UK',
-                                    })}
-                                    href={urls.contribute}
-                                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                                >
-                                    Contribute <ArrowRightIcon />
-                                </a>
+                                <RRButton
+                                    url={urls.contribute}
+                                    dataLinkNamePrefix={dataLinkNamePrefix}
+                                    dataLinkNameSuffix={'contribute-cta'}
+                                    linkText={'Contribute'}
+                                />
+                                <RRButton
+                                    url={urls.subscribe}
+                                    dataLinkNamePrefix={dataLinkNamePrefix}
+                                    dataLinkNameSuffix={'subscribe-cta'}
+                                    linkText={'Subscribe'}
+                                />
+                            </div>
+
+                            <div
+                                className={cx({
+                                    [hiddenFromTablet]: !noResponsive,
+                                    [hidden]: noResponsive,
+                                })}
+                            >
+                                {edition === 'UK' ? (
+                                    <RRButton
+                                        url={urls.contribute}
+                                        dataLinkNamePrefix={dataLinkNamePrefix}
+                                        dataLinkNameSuffix={'contribute-cta'}
+                                        linkText={'Contribute'}
+                                    />
+                                ) : (
+                                    <RRButton
+                                        url={urls.support}
+                                        dataLinkNamePrefix={dataLinkNamePrefix}
+                                        dataLinkNameSuffix={'support-cta'}
+                                        linkText={'Support us'}
+                                    />
+                                )}
                             </div>
                         </>
                     )}

@@ -1,11 +1,19 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { leftCol, tablet, until } from '@guardian/pasteup/breakpoints';
+import {
+    leftCol,
+    tablet,
+    until,
+    wide,
+    desktop,
+    from,
+} from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/typography';
 
 import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
+import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
 
 const footer = css`
     background-color: ${palette.brand.main};
@@ -14,7 +22,28 @@ const footer = css`
 `;
 
 const footerInner = css`
+    margin: auto;
+
+    ${tablet} {
+        max-width: 740px;
+    }
+
+    ${desktop} {
+        max-width: 980px;
+    }
+
+    ${leftCol} {
+        max-width: 1140px;
+    }
+
+    ${wide} {
+        max-width: 1300px;
+    }
+
     padding-bottom: 6px;
+    display: block;
+    border: 1px solid ${palette.brand.pastel};
+    border-top: 0;
 `;
 
 const emailSignup = css`
@@ -22,8 +51,14 @@ const emailSignup = css`
 
     ${leftCol} {
         float: left;
-        width: 300px;
+        width: 258px;
         margin-right: 180px;
+    }
+
+    ${desktop} {
+        margin: 0 10px;
+        display: flex;
+        flex-direction: row;
     }
 `;
 
@@ -43,10 +78,11 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    border-top: 1px solid ${palette.brand.pastel};
+    justify-content: flex-end;
+    width: 100%;
 
-    ${tablet} {
-        border-top: none;
+    ${until.leftCol} {
+        border-top: 1px solid ${palette.brand.pastel};
     }
 
     ul {
@@ -54,6 +90,8 @@ const footerList = css`
         border-left: 1px solid ${palette.brand.pastel};
 
         ${until.tablet} {
+            clear: left;
+
             :nth-of-type(odd) {
                 border-left: 0px;
                 padding-left: 0px;
@@ -77,23 +115,75 @@ const footerList = css`
 
         ${tablet} {
             margin: 0 10px 36px 0;
-            flex: 1 0 0;
+            width: 150px;
         }
 
         padding: 12px 0 0 10px;
     }
 `;
 
+const readerRevenueLinks = css`
+    border-left: 1px solid ${palette.brand.pastel};
+    padding: 12px 0 0 10px;
+    margin: 0 0 36px 0;
+
+    ${until.tablet} {
+        width: 50%;
+        border-top: 1px solid ${palette.brand.pastel};
+    }
+
+    ${from.tablet.until.desktop} {
+        width: 218px;
+    }
+
+    ${from.desktop.until.leftCol} {
+        width: 458px;
+    }
+
+    ${leftCol} {
+        width: 300px;
+    }
+`;
+
 const copyright = css`
     ${textSans(1)};
-    padding: 6px 0 18px;
-    border-top: 1px solid ${palette.brand.pastel};
-    margin-top: 12px;
+    padding: 0 19px 12px;
+    margin: 12px auto 0;
+
+    ${tablet} {
+        max-width: 740px;
+    }
+
+    ${desktop} {
+        max-width: 980px;
+    }
+
+    ${leftCol} {
+        max-width: 1140px;
+    }
+
+    ${wide} {
+        max-width: 1300px;
+    }
+
+    display: block;
+`;
+
+const footerItemContainers = css`
+    ${leftCol} {
+        display: flex;
+        border-top: 1px solid ${palette.brand.pastel};
+    }
+
+    width: 100%;
+    padding: 0 19px;
 `;
 
 const FooterLinks: React.FC<{
+    nav: NavType;
+    edition: Edition;
     pageFooter: FooterType;
-}> = ({ pageFooter }) => {
+}> = ({ pageFooter, nav, edition }) => {
     const linkGroups = pageFooter.footerLinks.map(linkGroup => {
         const linkList = linkGroup.map((l: FooterLink) => (
             <li key={l.url}>
@@ -110,33 +200,58 @@ const FooterLinks: React.FC<{
         return <ul key={key}>{linkList}</ul>;
     });
 
-    return <div className={footerList}>{linkGroups}</div>;
+    const rrLinks = (
+        <div className={readerRevenueLinks}>
+            <ReaderRevenueLinks
+                urls={nav.readerRevenueLinks.footer}
+                edition={edition}
+                dataLinkNamePrefix={'footer : '}
+                noResponsive={true}
+            />
+        </div>
+    );
+
+    return (
+        <div className={footerList}>
+            {linkGroups}
+            {rrLinks}
+        </div>
+    );
 };
 
 const year = new Date().getFullYear();
 
 export const Footer: React.FC<{
+    nav: NavType;
+    edition: Edition;
     pageFooter: FooterType;
-}> = ({ pageFooter }) => (
+}> = ({ nav, edition, pageFooter }) => (
     <footer className={footer}>
         <Container className={footerInner}>
-            <iframe
-                title="Guardian Email Sign-up Form"
-                src="https://www.theguardian.com/email/form/footer/today-uk"
-                scrolling="no"
-                seamless={true}
-                id="footer__email-form"
-                className={emailSignup}
-                data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
-                data-node-uid="2"
-                height="100px"
-                frameBorder="0"
-            />
-            <FooterLinks pageFooter={pageFooter} />
-            <div className={copyright}>
-                © {year} Guardian News & Media Limited or its affiliated
-                companies. All rights reserved.
+            <div className={footerItemContainers}>
+                <iframe
+                    title="Guardian Email Sign-up Form"
+                    src="https://www.theguardian.com/email/form/footer/today-uk"
+                    scrolling="no"
+                    seamless={true}
+                    id="footer__email-form"
+                    className={emailSignup}
+                    data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
+                    data-node-uid="2"
+                    height="100px"
+                    frameBorder="0"
+                />
+
+                <FooterLinks
+                    nav={nav}
+                    edition={edition}
+                    pageFooter={pageFooter}
+                />
             </div>
         </Container>
+        <div className={copyright}>
+            © {year} Guardian News & Media Limited or its affiliated companies.
+            All rights reserved.
+        </div>
     </footer>
 );
