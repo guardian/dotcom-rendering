@@ -20,14 +20,14 @@ const maxWidth = (until: number): string =>
 const minWidthMaxWidth = (from: number, until: number): string =>
     `@media (min-width: ${`${from}px`}) and (max-width: ${`${until - 1}px`})`;
 
-export const mobile = minWidth(breakpoints.mobile);
-export const mobileMedium = minWidth(breakpoints.mobileMedium);
-export const mobileLandscape = minWidth(breakpoints.mobileLandscape);
-export const phablet = minWidth(breakpoints.phablet);
-export const tablet = minWidth(breakpoints.tablet);
-export const desktop = minWidth(breakpoints.desktop);
-export const leftCol = minWidth(breakpoints.leftCol);
-export const wide = minWidth(breakpoints.wide);
+export const mobile = minWidth(breakpoints.mobile); // Mobile breakpoint is 320
+export const mobileMedium = minWidth(breakpoints.mobileMedium); // MobileMedium breakpoint is 360
+export const mobileLandscape = minWidth(breakpoints.mobileLandscape); // MobileLandscape breakpoint is 480
+export const phablet = minWidth(breakpoints.phablet); // Phablet breakpoint is 660
+export const tablet = minWidth(breakpoints.tablet); // Tablet breakpoint is 740
+export const desktop = minWidth(breakpoints.desktop); // Desktop breakpoint is 980
+export const leftCol = minWidth(breakpoints.leftCol); // leftCol breakpoint is 1140
+export const wide = minWidth(breakpoints.wide); // Wide breakpoint is 1300
 
 // e.g. until.*
 export const until = {
