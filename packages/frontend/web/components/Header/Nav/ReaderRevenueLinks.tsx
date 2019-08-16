@@ -89,6 +89,23 @@ const subMessage = css`
     margin-bottom: 9px;
 `;
 
+export const RRButton: React.FC<{
+    url: string;
+    dataLinkNamePrefix: string;
+    dataLinkNameSuffix: string;
+    linkText: string;
+}> = ({ url, dataLinkNamePrefix, dataLinkNameSuffix, linkText }) => {
+    return (
+        <a
+            className={link}
+            href={url}
+            data-link-name={`${dataLinkNamePrefix}${dataLinkNameSuffix}`}
+        >
+            {linkText} <ArrowRightIcon />
+        </a>
+    );
+};
+
 export const ReaderRevenueLinks: React.FC<{
     edition: Edition;
     urls: {
@@ -99,64 +116,54 @@ export const ReaderRevenueLinks: React.FC<{
     dataLinkNamePrefix: string;
     noResponsive: boolean;
 }> = ({ edition, urls, dataLinkNamePrefix, noResponsive }) => {
-    const requiredLinkStyle = noResponsive ? link : cx(link, hiddenUntilTablet);
-
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (
                 <>
                     {data && (
                         <>
-                            {/* <div className={readerRevenueLinks}> */}
                             <div
-                                className={cx(message, {
+                                className={cx({
                                     [hiddenUntilTablet]: !noResponsive,
                                 })}
                             >
-                                Support The&nbsp;Guardian
+                                <div className={message}>
+                                    Support The&nbsp;Guardian
+                                </div>
+                                <div className={subMessage}>
+                                    Available for everyone, funded by readers
+                                </div>
+                                <RRButton
+                                    url={urls.contribute}
+                                    dataLinkNamePrefix={dataLinkNamePrefix}
+                                    dataLinkNameSuffix={'contribute-cta'}
+                                    linkText={'Contribute'}
+                                />
+                                <RRButton
+                                    url={urls.subscribe}
+                                    dataLinkNamePrefix={dataLinkNamePrefix}
+                                    dataLinkNameSuffix={'subscribe-cta'}
+                                    linkText={'Subscribe'}
+                                />
                             </div>
-                            <div
-                                className={cx(subMessage, {
-                                    [hiddenUntilTablet]: !noResponsive,
-                                })}
-                            >
-                                Available for everyone, funded by readers
-                            </div>
-                            <a
-                                className={requiredLinkStyle}
-                                href={urls.contribute}
-                                data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                            >
-                                Contribute <ArrowRightIcon />
-                            </a>
-                            <a
-                                className={requiredLinkStyle}
-                                href={urls.subscribe}
-                                data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
-                            >
-                                Subscribe <ArrowRightIcon />
-                            </a>
 
-                            {!noResponsive &&
-                                (edition === 'UK' ? (
-                                    <a
-                                        className={cx(link, hiddenFromTablet)}
-                                        href={urls.contribute}
-                                        data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-                                    >
-                                        Contribute <ArrowRightIcon />
-                                    </a>
+                            <div className={hiddenFromTablet}>
+                                {edition === 'UK' ? (
+                                    <RRButton
+                                        url={urls.contribute}
+                                        dataLinkNamePrefix={dataLinkNamePrefix}
+                                        dataLinkNameSuffix={'contribute-cta'}
+                                        linkText={'Contribute'}
+                                    />
                                 ) : (
-                                    <a
-                                        className={cx(link, hiddenFromTablet)}
-                                        href={urls.support}
-                                        data-link-name={`${dataLinkNamePrefix}support-cta`}
-                                    >
-                                        Support us <ArrowRightIcon />
-                                    </a>
-                                ))}
-
-                            {/* </div> */}
+                                    <RRButton
+                                        url={urls.support}
+                                        dataLinkNamePrefix={dataLinkNamePrefix}
+                                        dataLinkNameSuffix={'support-cta'}
+                                        linkText={'Support us'}
+                                    />
+                                )}
+                            </div>
                         </>
                     )}
                 </>
