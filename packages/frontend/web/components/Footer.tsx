@@ -147,7 +147,7 @@ const readerRevenueLinks = css`
 
 const copyright = css`
     ${textSans(1)};
-    padding: 0 19px;
+    padding: 0 19px 12px;
     margin: 12px auto 0;
 
     ${tablet} {
