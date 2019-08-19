@@ -190,6 +190,9 @@ const forceUnderline = css`
     }
 `; // A11Y warning: this styling has no focus state for the selected pillar
 
+const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
+    i !== noOfPillars - 1;
+
 export const Pillars: React.FC<{
     showMainMenu: boolean;
     pillars: PillarType[];
@@ -202,7 +205,8 @@ export const Pillars: React.FC<{
                 <a
                     className={cx(linkStyle, pillarUnderline[p.pillar], {
                         [pillarDivider]:
-                            showLastPillarDivider || i !== pillars.length - 1,
+                            showLastPillarDivider ||
+                            isNotLastPillar(i, pillars.length),
                         [showMenuUnderline]: showMainMenu,
                         [forceUnderline]: p.pillar === pillar,
                     })}
