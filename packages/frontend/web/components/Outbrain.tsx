@@ -39,9 +39,8 @@ const getOutbrainSelectors = (): OutbrainSelectors => {
     return getOutbrainSelectorsByType('outbrain');
 };
 
-const OutbrainWidget: React.FC<{
-    selectors: OutbrainSelectors;
-}> = ({ selectors }) => {
+const OutbrainWidget: React.FC<{}> = ({}) => {
+    const selectors = getOutbrainSelectors();
     return (
         <div className={selectors.widget}>
             <div className={selectors.container} />
@@ -55,10 +54,9 @@ export const OutbrainContainer: React.FC<{
     if (!shouldDisplayOutbrain(config)) {
         return null;
     }
-    const outbrainSelectors = getOutbrainSelectors();
     return (
         <Container>
-            <OutbrainWidget selectors={outbrainSelectors} />
+            <OutbrainWidget />
         </Container>
     );
 };
