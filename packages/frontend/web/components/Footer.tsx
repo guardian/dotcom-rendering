@@ -7,7 +7,6 @@ import {
     until,
     wide,
     desktop,
-    from,
 } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/typography';
 import { clearFix } from '@guardian/pasteup/mixins';
@@ -104,53 +103,46 @@ const footerList = css`
     flex-wrap: wrap;
     flex-direction: row;
 
-    ${until.leftCol} {
+    ${until.desktop} {
         border-top: 1px solid ${palette.brand.pastel};
     }
 
     ul {
         width: 50%;
         border-left: 1px solid ${palette.brand.pastel};
+        padding: 12px 0 0 10px;
+
+        :nth-of-type(1) {
+            border-left: 0 none;
+        }
 
         ${until.tablet} {
             clear: left;
 
             :nth-of-type(odd) {
-                border-left: 0px;
-                padding-left: 0px;
+                border-left: 0;
+                padding-left: 0;
             }
 
             :nth-of-type(3) {
-                padding-top: 0px;
+                padding-top: 0;
             }
 
             :nth-of-type(4) {
-                padding-top: 0px;
+                padding-top: 0;
             }
         }
+
         ${tablet} {
             margin: 0 10px 36px 0;
             width: 150px;
-
-            :nth-of-type(1) {
-                border-left: none;
-                margin-left: 0;
-            }
         }
 
-        :nth-of-type(1) {
-            border-left: none;
-            padding-left: 0;
-        }
-
-        ${from.leftCol} {
+        ${desktop} {
             :nth-of-type(1) {
-                padding-left: 10px;
                 border-left: 1px solid ${palette.brand.pastel};
             }
         }
-
-        padding: 12px 0 0 10px;
     }
 `;
 
