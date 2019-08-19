@@ -6,6 +6,7 @@
         "shinnn.stylelint",
         "editorconfig.editorconfig",
         "dbaeumer.vscode-eslint",
-        "stkb.rewrap"
+        "stkb.rewrap",
+        "jpoissonnier.vscode-styled-components"
     ]
 }
