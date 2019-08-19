@@ -18,4 +18,4 @@
   - Jest/React-testing-library?
 
 - Security
-  - NPM/SNYL/GitHub/All?
+  - NPM/Snyk/GitHub/All?
