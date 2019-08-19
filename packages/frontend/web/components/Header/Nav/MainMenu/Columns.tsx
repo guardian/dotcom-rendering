@@ -39,7 +39,7 @@ const desktopBrandExtensionColumn = css`
 `;
 
 const brandExtensionList = css`
-    width: 186px;
+    width: 131px;
     box-sizing: border-box;
     ${textSans(6)};
     flex-wrap: wrap;
@@ -125,7 +125,9 @@ export const Columns: React.FC<{
                             href={brandExtension.url}
                             key={brandExtension.title}
                             role="menuitem"
-                            data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+                            data-link-name={`nav2 : brand extension : ${
+                                brandExtension.longTitle
+                            }`}
                         >
                             {brandExtension.longTitle}
                         </a>

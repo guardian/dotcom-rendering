@@ -19,6 +19,8 @@ import { palette } from '@guardian/pasteup/palette';
 
 export const firstPillarWidth = 171;
 export const pillarWidth = 160;
+export const preLeftColFirstPillarWidth = 144;
+export const preLeftColPillarWidth = 134;
 
 // CSS
 
@@ -35,7 +37,8 @@ const pillarsStyles = css`
         float: left;
         display: block;
         position: relative;
-        ${desktop} {
+        width: ${preLeftColPillarWidth}px;
+        ${leftCol} {
             width: ${pillarWidth}px;
         }
     }
@@ -74,7 +77,8 @@ const showMenuUnderline = css`
 const pillarStyle = css`
     :first-of-type {
         margin-left: -20px;
-        ${desktop} {
+        width: ${preLeftColFirstPillarWidth}px;
+        ${leftCol} {
             width: ${firstPillarWidth}px;
         }
         a {
