@@ -74,6 +74,8 @@ export const document = ({ data }: Props) => {
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 
+    const description = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+
     return htmlTemplate({
         linkedData,
         priorityScripts,
@@ -82,6 +84,7 @@ export const document = ({ data }: Props) => {
         html,
         fontFiles,
         title,
+        description,
         windowGuardian,
         ampLink,
     });

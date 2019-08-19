@@ -6,6 +6,7 @@ import { WindowGuardian } from '@frontend/model/window-guardian';
 
 export const htmlTemplate = ({
     title = 'The Guardian',
+    description,
     linkedData,
     priorityScripts,
     lowPriorityScripts,
@@ -16,6 +17,7 @@ export const htmlTemplate = ({
     ampLink,
 }: {
     title?: string;
+    description: string;
     linkedData: object;
     priorityScripts: string[];
     lowPriorityScripts: string[];
@@ -49,6 +51,8 @@ export const htmlTemplate = ({
         <html lang="en">
             <head>
                 <title>${title}</title>
+                <meta name="description" content="${escape(description)}" />
+
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
