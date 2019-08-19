@@ -42,7 +42,8 @@ const link = css`
     font-weight: 700;
     height: 32px;
     text-decoration: none;
-    padding: 4px 12px 0 12px;
+    padding: 6px 12px 0 12px;
+    line-height: 1;
     position: relative;
     margin-right: 10px;
     margin-bottom: 6px;
