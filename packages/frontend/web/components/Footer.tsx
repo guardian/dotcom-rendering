@@ -13,10 +13,19 @@ import { textSans } from '@guardian/pasteup/typography';
 import { clearFix } from '@guardian/pasteup/mixins';
 
 import { Container } from '@guardian/guui';
-import { Pillars } from './Header/Nav/Pillars';
+import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
 
+// CSS vars
+const emailSignupSideMargins = 10;
+const footerItemContainerPadding = 19;
+const emailSignupWidth =
+    pillarWidth +
+    firstPillarWidth -
+    (emailSignupSideMargins * 2 + footerItemContainerPadding);
+
+// CSS
 const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[100]};
@@ -31,7 +40,7 @@ const footerInner = css`
     }
 
     ${desktop} {
-        max-width: 980px;
+        max-width: 100%;
     }
 
     ${leftCol} {
@@ -61,16 +70,20 @@ const pillarWrap = css`
 const emailSignup = css`
     padding-top: 12px;
 
-    ${leftCol} {
-        float: left;
-        width: 258px;
-        margin-right: 180px;
-    }
-
     ${desktop} {
-        margin: 0 10px;
+        margin: 0 ${emailSignupSideMargins}px;
         display: flex;
         flex-direction: row;
+        float: left;
+        width: ${emailSignupWidth}px;
+    }
+
+    ${wide} {
+        margin-right: ${pillarWidth * 2 +
+            firstPillarWidth -
+            (emailSignupWidth +
+                emailSignupSideMargins +
+                footerItemContainerPadding)}px;
     }
 `;
 
@@ -90,6 +103,10 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+
+    ${until.leftCol} {
+        border-top: 1px solid ${palette.brand.pastel};
+    }
 
     ul {
         width: 50%;
@@ -111,17 +128,26 @@ const footerList = css`
                 padding-top: 0px;
             }
         }
-
-        ${until.leftCol} {
-            :nth-of-type(1) {
-                border-left: 0px;
-                padding-left: 0px;
-            }
-        }
-
         ${tablet} {
             margin: 0 10px 36px 0;
             width: 150px;
+
+            :nth-of-type(1) {
+                border-left: none;
+                margin-left: 0;
+            }
+        }
+
+        :nth-of-type(1) {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        ${from.leftCol} {
+            :nth-of-type(1) {
+                padding-left: 10px;
+                border-left: 1px solid ${palette.brand.pastel};
+            }
         }
 
         padding: 12px 0 0 10px;
@@ -130,6 +156,7 @@ const footerList = css`
 
 const readerRevenueLinks = css`
     border-left: 1px solid ${palette.brand.pastel};
+    flex: 1;
     padding: 12px 0 0 10px;
     margin: 0 10px 36px 0;
     width: calc(50% - 10px);
@@ -137,18 +164,6 @@ const readerRevenueLinks = css`
     ${until.tablet} {
         width: 50%;
         border-top: 1px solid ${palette.brand.pastel};
-    }
-
-    ${from.tablet.until.desktop} {
-        width: 218px;
-    }
-
-    ${from.desktop.until.leftCol} {
-        width: 458px;
-    }
-
-    ${leftCol} {
-        width: 300px;
     }
 `;
 
@@ -179,11 +194,10 @@ const copyright = css`
 const footerItemContainers = css`
     ${leftCol} {
         display: flex;
-        border-top: 1px solid ${palette.brand.pastel};
     }
 
     width: 100%;
-    padding: 0 19px;
+    padding: 0 ${footerItemContainerPadding}px;
 `;
 
 const FooterLinks: React.FC<{

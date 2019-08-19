@@ -15,6 +15,13 @@ import { headline } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
+// CSS Vars
+
+export const firstPillarWidth = 171;
+export const pillarWidth = 160;
+
+// CSS
+
 const pillarsStyles = css`
     clear: right;
     margin: 0;
@@ -29,10 +36,7 @@ const pillarsStyles = css`
         display: block;
         position: relative;
         ${desktop} {
-            width: 134px;
-        }
-        ${leftCol} {
-            width: 160px;
+            width: ${pillarWidth}px;
         }
     }
 
@@ -71,10 +75,7 @@ const pillarStyle = css`
     :first-of-type {
         margin-left: -20px;
         ${desktop} {
-            width: 144px;
-        }
-        ${leftCol} {
-            width: 171px;
+            width: ${firstPillarWidth}px;
         }
         a {
             padding-left: 20px;
