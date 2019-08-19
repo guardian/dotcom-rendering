@@ -7,6 +7,7 @@
   - Work to add dark mode styles in SASS
   - Experience in team
   - Will be closely coupled to components that will make migration to emotion easier
+  - Emotion supports media queries for dark mode https://emotion.sh/docs/media-queries
 
 - Use React for UI components
   - Redux and useReducer probably unnecessary
