@@ -59,16 +59,14 @@ export const document = ({ data }: Props) => {
         'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
     const commercialBundle = config.commercialBundleUrl;
 
-    const priorityScripts = [polyfillIO, vendorJS, bundleJS];
-
-    const preloadScripts = [
-        ...new Set([commercialBundle].concat(priorityScripts)),
-    ];
+    const priorityScripts = [polyfillIO, vendorJS, bundleJS, commercialBundle];
 
     /**
-     * Low priority scripts.
-     * These scripts will be requested asynchronously after the main
-     * HTML has been parsed. Execution order is not guaranteed.
+     * Low priority scripts. These scripts will be requested
+     * asynchronously after the main HTML has been parsed. Execution
+     * order is not guaranteed. It is even possible that these execute
+     * *before* the high priority scripts, although this is very
+     * unlikely.
      */
     const lowPriorityScripts = [
         'https://www.google-analytics.com/analytics.js',
@@ -78,15 +76,17 @@ export const document = ({ data }: Props) => {
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 
+    const description = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+
     return htmlTemplate({
         linkedData,
-        preloadScripts,
         priorityScripts,
         lowPriorityScripts,
         css,
         html,
         fontFiles,
         title,
+        description,
         windowGuardian,
         ampLink,
     });

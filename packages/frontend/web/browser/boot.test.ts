@@ -78,7 +78,7 @@ describe('boot', () => {
     let windowMock: MockWindow;
     let ravenMock: MockRaven;
     const commercialBundleUrl = 'http://foo.bar';
-    const { onPolyfilled, polyfilled, app } = window.guardian;
+    const { app } = window.guardian;
 
     beforeEach(() => {
         windowMock = mockWindow();
@@ -114,21 +114,8 @@ describe('boot', () => {
         createElement.mockReset();
 
         window.guardian = Object.assign({}, window.guardian, {
-            onPolyfilled,
-            polyfilled,
             app,
         });
-    });
-
-    test('does not call onPollyfilled when window.guardian.polyfilled is false', () => {
-        const onPolyfilledMock = jest.fn();
-
-        window.guardian.polyfilled = false;
-        window.guardian.onPolyfilled = onPolyfilledMock;
-
-        _.run();
-
-        expect(onPolyfilledMock).not.toBeCalled();
     });
 
     test('if getRaven successful initAppWithRaven', () => {
@@ -195,7 +182,7 @@ describe('boot', () => {
         });
 
         test('if loadCommercial successful enhanceApp', () => {
-            return _.onPolyfilled();
+            return _.run();
         });
 
         test('if loadCommercial unsuccessful reportError and enhanceApp', () => {

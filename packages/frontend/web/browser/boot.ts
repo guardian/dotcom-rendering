@@ -135,16 +135,15 @@ const onPolyfilled = (): Promise<void> => {
 };
 
 const run = (): void => {
-    /*
-        We want to run `onPolyfilled` only after polyfill.io has initialised
-        By the time this script runs, if `window.guardian.polyfilled` is true,
-        meaning that polyfill.io has initialised, then we run onPolyfilled(), otherwise
-        we stick it in window.guardian.onPolyfilled to be ran later.
-    */
+    // Expects polyfill to have run
     if (window.guardian.polyfilled) {
         onPolyfilled();
     } else {
-        window.guardian.onPolyfilled = onPolyfilled;
+        // (Should never happen)
+        // tslint:disable-next-line:no-console
+        console.log(
+            'Error: attempting to load boot before polyfills have loaded.',
+        );
     }
 };
 
