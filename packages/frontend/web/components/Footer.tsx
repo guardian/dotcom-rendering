@@ -60,6 +60,8 @@ const pillarWrap = css`
     ${clearFix}
     border-bottom: 1px solid ${palette.brand.pastel};
     padding-bottom: 12px;
+    position: relative;
+    height: 43px;
 
     > ul {
         clear: none;
