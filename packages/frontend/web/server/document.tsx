@@ -62,9 +62,11 @@ export const document = ({ data }: Props) => {
     const priorityScripts = [polyfillIO, vendorJS, bundleJS, commercialBundle];
 
     /**
-     * Low priority scripts.
-     * These scripts will be requested asynchronously after the main
-     * HTML has been parsed. Execution order is not guaranteed.
+     * Low priority scripts. These scripts will be requested
+     * asynchronously after the main HTML has been parsed. Execution
+     * order is not guaranteed. It is even possible that these execute
+     * *before* the high priority scripts, although this is very
+     * unlikely.
      */
     const lowPriorityScripts = [
         'https://www.google-analytics.com/analytics.js',
