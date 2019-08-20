@@ -6,13 +6,18 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compileClient": "./node_modules/.bin/babel ./src/Counter.tsx --extensions '.tsx' --out-dir dist"
+    "compileClient": "./node_modules/.bin/babel ./src/ --extensions '.tsx' --out-dir dist"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "@emotion/babel-preset-css-prop": "^10.0.14",
+    "@emotion/core": "^10.0.16",
+    "@emotion/styled": "^10.0.15",
+    "babel-plugin-emotion": "^10.0.16",
     "compression": "^1.7.4",
+    "emotion": "^10.0.14",
     "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

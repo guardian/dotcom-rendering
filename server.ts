@@ -6,11 +6,12 @@ import compression from 'compression';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import Counter from './dist/Counter';
+import HeaderImageCaption from './dist/HeaderImageCaption';
 
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));
+app.use(express.static('public'))
 app.use(compression());
 
 app.get('/', (req, res) => {
@@ -21,7 +22,7 @@ app.get('/', (req, res) => {
               return res.status(500).send('An error occurred')
             }
             
-            const body = renderToString(React.createElement(Counter));
+            const body = renderToString(React.createElement(HeaderImageCaption));
 
             return res.send(
               data.replace(
