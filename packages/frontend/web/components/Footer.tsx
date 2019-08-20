@@ -23,6 +23,7 @@ const emailSignupWidth =
     pillarWidth +
     firstPillarWidth -
     (emailSignupSideMargins * 2 + footerItemContainerPadding);
+const footerBorders = `1px solid ${palette.brand.pastel}`;
 
 // CSS
 const footer = css`
@@ -52,19 +53,23 @@ const footerInner = css`
 
     padding-bottom: 6px;
     display: block;
-    border: 1px solid ${palette.brand.pastel};
     border-top: 0;
 `;
 
 const pillarWrap = css`
     ${clearFix}
-    border-bottom: 1px solid ${palette.brand.pastel};
+    border-left: ${footerBorders};
+    border-right: ${footerBorders};
     padding-bottom: 12px;
     position: relative;
     height: 43px;
 
     > ul {
         clear: none;
+
+        :after {
+            display: none;
+        }
     }
 `;
 
@@ -106,12 +111,12 @@ const footerList = css`
     flex-direction: row;
 
     ${until.desktop} {
-        border-top: 1px solid ${palette.brand.pastel};
+        border-top: ${footerBorders};
     }
 
     ul {
         width: 50%;
-        border-left: 1px solid ${palette.brand.pastel};
+        border-left: ${footerBorders};
         padding: 12px 0 0 10px;
 
         :nth-of-type(1) {
@@ -142,14 +147,14 @@ const footerList = css`
 
         ${desktop} {
             :nth-of-type(1) {
-                border-left: 1px solid ${palette.brand.pastel};
+                border-left: ${footerBorders};
             }
         }
     }
 `;
 
 const readerRevenueLinks = css`
-    border-left: 1px solid ${palette.brand.pastel};
+    border-left: ${footerBorders};
     flex: 1;
     padding: 12px 0 0 10px;
     margin: 0 10px 36px 0;
@@ -157,32 +162,13 @@ const readerRevenueLinks = css`
 
     ${until.tablet} {
         width: 50%;
-        border-top: 1px solid ${palette.brand.pastel};
+        border-top: ${footerBorders};
     }
 `;
 
 const copyright = css`
     ${textSans(1)};
-    padding: 0 19px 12px;
-    margin: 12px auto 0;
-
-    ${tablet} {
-        max-width: 740px;
-    }
-
-    ${desktop} {
-        max-width: 980px;
-    }
-
-    ${leftCol} {
-        max-width: 1140px;
-    }
-
-    ${wide} {
-        max-width: 1300px;
-    }
-
-    display: block;
+    padding: 12px;
 `;
 
 const footerItemContainers = css`
@@ -192,6 +178,7 @@ const footerItemContainers = css`
 
     width: 100%;
     padding: 0 ${footerItemContainerPadding}px;
+    border: ${footerBorders};
 `;
 
 const FooterLinks: React.FC<{
@@ -273,10 +260,10 @@ export const Footer: React.FC<{
                     pageFooter={pageFooter}
                 />
             </div>
+            <div className={copyright}>
+                © {year} Guardian News & Media Limited or its affiliated
+                companies. All rights reserved.
+            </div>
         </Container>
-        <div className={copyright}>
-            © {year} Guardian News & Media Limited or its affiliated companies.
-            All rights reserved.
-        </div>
     </footer>
 );

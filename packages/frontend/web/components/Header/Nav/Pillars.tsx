@@ -21,6 +21,7 @@ export const firstPillarWidth = 171;
 export const pillarWidth = 160;
 export const preLeftColFirstPillarWidth = 144;
 export const preLeftColPillarWidth = 134;
+export const preTabletPillarWidth = 'auto';
 
 // CSS
 
@@ -37,7 +38,10 @@ const pillarsStyles = css`
         float: left;
         display: block;
         position: relative;
-        width: ${preLeftColPillarWidth}px;
+        width: ${preTabletPillarWidth};
+        ${tablet} {
+            width: ${preLeftColPillarWidth};
+        }
         ${leftCol} {
             width: ${pillarWidth}px;
         }
@@ -77,7 +81,12 @@ const showMenuUnderline = css`
 const pillarStyle = css`
     :first-of-type {
         margin-left: -20px;
-        width: ${preLeftColFirstPillarWidth}px;
+        width: ${preTabletPillarWidth};
+
+        ${tablet} {
+            width: ${preLeftColFirstPillarWidth}px;
+        }
+
         ${leftCol} {
             width: ${firstPillarWidth}px;
         }
