@@ -5,6 +5,7 @@ Working on node v8.15.0 (nvm use 8.15.0)
 1. npm i
 2. npm run compileClient
 3. npm run dev
+4. http://localhost:3040
 
 ### Initial architecture discussions 
 
