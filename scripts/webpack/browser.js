@@ -23,33 +23,22 @@ const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
 const manifestData = {};
 
 const scriptPath = package =>
-    `./packages/frontend/web/browserNew/${package}/init.ts`;
+    [
+        `./packages/frontend/web/browserNew/${package}/init.ts`,
+        DEV &&
+            'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
+    ].filter(Boolean);
 
 module.exports = ({ page }) => ({
     entry: {
-        [`${siteName}.${page.toLowerCase()}`]: [
-            DEV &&
-                'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-            './packages/frontend/web/browser/boot.ts',
-        ].filter(Boolean),
-
         raven: scriptPath('raven'),
         ga: scriptPath('ga'),
+        ophan: scriptPath('ophan'),
+        react: scriptPath('react'),
     },
     output: {
         filename: name,
         chunkFilename: name,
-    },
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /node_modules/,
-                    name: 'vendor',
-                    chunks: 'all',
-                },
-            },
-        },
     },
     plugins: [
         PROD &&

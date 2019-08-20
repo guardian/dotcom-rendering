@@ -2,7 +2,6 @@ import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
-import { sendOphanPlatformRecord } from '@frontend/web/browser/ophan';
 import { Article } from '@frontend/web/pages/Article';
 import { loadScript } from '@frontend/web/browser/loadScript';
 
@@ -30,10 +29,6 @@ const initApp = (): void => {
 
             hydrateApp(React.createElement(Article, { data }), container);
         }
-
-        // Ophan
-        // Lets record a 'platformVariant' field so that we can track DCR views in datalake(regardless of A / B test)
-        sendOphanPlatformRecord();
     };
 
     const loadCommercial = (): Promise<void> => {
