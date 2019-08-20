@@ -27,6 +27,7 @@ const windowGuardian = {
         viewId: '',
         pageViewId: '',
     },
+    modules: {},
 };
 
 // Stub global Guardian object

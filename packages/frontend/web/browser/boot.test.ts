@@ -1,4 +1,4 @@
-import { _ } from './boot';
+/* import { _ } from './boot';
 import { getRaven as getRaven_ } from '@frontend/web/browser/raven';
 import { loadScript as loadScript_ } from '@frontend/web/browser/loadScript';
 import {
@@ -202,3 +202,4 @@ describe('boot', () => {
         });
     });
 });
+ */

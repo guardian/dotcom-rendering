@@ -22,6 +22,9 @@ const name = PROD ? `[name].[chunkhash].js` : `[name].js`;
 // used to stop multiple compilers overwriting other compiler's data
 const manifestData = {};
 
+const scriptPath = package =>
+    `./packages/frontend/web/browserNew/${package}/init.ts`;
+
 module.exports = ({ page }) => ({
     entry: {
         [`${siteName}.${page.toLowerCase()}`]: [
@@ -29,6 +32,8 @@ module.exports = ({ page }) => ({
                 'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
             './packages/frontend/web/browser/boot.ts',
         ].filter(Boolean),
+
+        raven: scriptPath('raven'),
     },
     output: {
         filename: name,

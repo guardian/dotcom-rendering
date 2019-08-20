@@ -59,7 +59,21 @@ export const document = ({ data }: Props) => {
         'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
     const commercialBundle = config.commercialBundleUrl;
 
-    const priorityScripts = [polyfillIO, vendorJS, bundleJS, commercialBundle];
+    // polyfills
+    // error-handling (exposing on guardian.raven.)
+    // hydration
+    // commercial
+
+    // ga
+    // commercial
+
+    const priorityScripts = [
+        polyfillIO,
+        getDist('raven.js'),
+        vendorJS,
+        bundleJS,
+        commercialBundle,
+    ];
 
     /**
      * Low priority scripts. These scripts will be requested

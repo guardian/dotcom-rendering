@@ -24,6 +24,15 @@ declare global {
                 viewId: string;
                 pageViewId: string;
             };
+            modules: {
+                raven?: {
+                    reportError: (
+                        err: Error,
+                        tags: { [key: string]: string },
+                        shouldThrow: boolean,
+                    ) => void;
+                };
+            };
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
