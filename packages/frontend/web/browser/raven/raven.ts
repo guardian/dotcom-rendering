@@ -1,5 +1,5 @@
 import raven, { RavenStatic } from 'raven-js';
-import { isAdBlockInUse } from '@frontend/web/browser/detectAdBlocker';
+import { isAdBlockInUse } from './detectAdBlocker';
 
 let ravenConfig: RavenStatic;
 

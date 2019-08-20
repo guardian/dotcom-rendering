@@ -24,7 +24,7 @@ const manifestData = {};
 
 const scriptPath = package =>
     [
-        `./packages/frontend/web/browserNew/${package}/init.ts`,
+        `./packages/frontend/web/browser/${package}/init.ts`,
         DEV &&
             'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
     ].filter(Boolean);
