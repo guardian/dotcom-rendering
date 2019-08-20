@@ -65,6 +65,10 @@ const pillarWrap = css`
 
     > ul {
         clear: none;
+
+        :after {
+            display: none;
+        }
     }
 `;
 
