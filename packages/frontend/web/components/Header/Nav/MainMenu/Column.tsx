@@ -165,6 +165,7 @@ const columnStyle = css`
     ${textSans(6)};
     list-style: none;
     margin: 0;
+    padding-bottom: 10px;
     position: relative;
 
     :after {
