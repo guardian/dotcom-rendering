@@ -47,8 +47,8 @@ const columnLinkTitle = css`
         padding-left: 60px;
     }
     ${desktop} {
+        ${textSans(6)};
         font-size: 16px;
-        ${headline(2)};
         padding: 6px 0;
     }
     :hover,
