@@ -4,10 +4,8 @@
   "description": "Article rendering for The Guardian iOS and Android apps",
   "main": "server/server.ts",
   "scripts": {
-    "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compileServer": "./node_modules/.bin/babel ./server.ts --extensions '.ts' --out-dir server",
     "compileClient": "./node_modules/.bin/babel ./src/Counter.tsx --extensions '.tsx' --out-dir dist"
   },
   "author": "",

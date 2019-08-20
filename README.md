@@ -1,5 +1,11 @@
 # apps-rendering
 
+### Running
+Working on node v8.15.0 (nvm use 8.15.0)
+1. npm i
+2. npm run compileClient
+3. npm run dev
+
 ### Initial architecture discussions 
 
 - Start with SASS files alongside JavaScript components
