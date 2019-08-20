@@ -15,6 +15,15 @@ import { headline } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 
+// CSS Vars
+
+export const firstPillarWidth = 171;
+export const pillarWidth = 160;
+export const preLeftColFirstPillarWidth = 144;
+export const preLeftColPillarWidth = 134;
+
+// CSS
+
 const pillarsStyles = css`
     clear: right;
     margin: 0;
@@ -28,11 +37,9 @@ const pillarsStyles = css`
         float: left;
         display: block;
         position: relative;
-        ${desktop} {
-            width: 134px;
-        }
+        width: ${preLeftColPillarWidth}px;
         ${leftCol} {
-            width: 160px;
+            width: ${pillarWidth}px;
         }
     }
 
@@ -70,11 +77,9 @@ const showMenuUnderline = css`
 const pillarStyle = css`
     :first-of-type {
         margin-left: -20px;
-        ${desktop} {
-            width: 144px;
-        }
+        width: ${preLeftColFirstPillarWidth}px;
         ${leftCol} {
-            width: 171px;
+            width: ${firstPillarWidth}px;
         }
         a {
             padding-left: 20px;
@@ -185,24 +190,26 @@ const forceUnderline = css`
     }
 `; // A11Y warning: this styling has no focus state for the selected pillar
 
+const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
+    i !== noOfPillars - 1;
+
 export const Pillars: React.FC<{
     showMainMenu: boolean;
     pillars: PillarType[];
     pillar: Pillar;
-}> = ({ showMainMenu, pillars, pillar }) => (
+    showLastPillarDivider?: boolean;
+}> = ({ showMainMenu, pillars, pillar, showLastPillarDivider = true }) => (
     <ul className={pillarsStyles}>
         {pillars.map((p, i) => (
             <li key={p.title} className={pillarStyle}>
                 <a
-                    className={cx(
-                        pillarDivider,
-                        linkStyle,
-                        pillarUnderline[p.pillar],
-                        {
-                            [showMenuUnderline]: showMainMenu,
-                            [forceUnderline]: p.pillar === pillar,
-                        },
-                    )}
+                    className={cx(linkStyle, pillarUnderline[p.pillar], {
+                        [pillarDivider]:
+                            showLastPillarDivider ||
+                            isNotLastPillar(i, pillars.length),
+                        [showMenuUnderline]: showMainMenu,
+                        [forceUnderline]: p.pillar === pillar,
+                    })}
                     href={p.url}
                     data-link-name={`nav2 : primary : ${p.title}`}
                 >

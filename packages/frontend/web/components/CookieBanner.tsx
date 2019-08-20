@@ -14,6 +14,7 @@ const banner = css`
     background-color: ${palette.neutral[20]};
     padding: 10px 0 24px;
     width: 100%;
+    z-index: 2;
 `;
 
 const inner = css`

@@ -39,7 +39,7 @@ const desktopBrandExtensionColumn = css`
 `;
 
 const brandExtensionList = css`
-    width: 186px;
+    width: 131px;
     box-sizing: border-box;
     ${textSans(6)};
     flex-wrap: wrap;

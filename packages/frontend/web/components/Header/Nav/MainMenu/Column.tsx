@@ -179,12 +179,16 @@ const columnStyle = css`
     }
 
     ${desktop} {
-        width: 118px;
+        width: 134px;
         float: left;
         position: relative;
 
         :after {
             content: none;
+        }
+
+        :first-of-type {
+            width: 123px;
         }
     }
     ${leftCol} {

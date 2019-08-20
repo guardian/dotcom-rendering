@@ -7,14 +7,24 @@ import {
     until,
     wide,
     desktop,
-    from,
 } from '@guardian/pasteup/breakpoints';
 import { textSans } from '@guardian/pasteup/typography';
+import { clearFix } from '@guardian/pasteup/mixins';
 
 import { Container } from '@guardian/guui';
+import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
 
+// CSS vars
+const emailSignupSideMargins = 10;
+const footerItemContainerPadding = 19;
+const emailSignupWidth =
+    pillarWidth +
+    firstPillarWidth -
+    (emailSignupSideMargins * 2 + footerItemContainerPadding);
+
+// CSS
 const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[100]};
@@ -29,7 +39,7 @@ const footerInner = css`
     }
 
     ${desktop} {
-        max-width: 980px;
+        max-width: 100%;
     }
 
     ${leftCol} {
@@ -46,19 +56,33 @@ const footerInner = css`
     border-top: 0;
 `;
 
+const pillarWrap = css`
+    ${clearFix}
+    border-bottom: 1px solid ${palette.brand.pastel};
+    padding-bottom: 12px;
+
+    > ul {
+        clear: none;
+    }
+`;
+
 const emailSignup = css`
     padding-top: 12px;
 
-    ${leftCol} {
-        float: left;
-        width: 258px;
-        margin-right: 180px;
-    }
-
     ${desktop} {
-        margin: 0 10px;
+        margin: 0 ${emailSignupSideMargins}px;
         display: flex;
         flex-direction: row;
+        float: left;
+        width: ${emailSignupWidth}px;
+    }
+
+    ${wide} {
+        margin-right: ${pillarWidth * 2 +
+            firstPillarWidth -
+            (emailSignupWidth +
+                emailSignupSideMargins +
+                footerItemContainerPadding)}px;
     }
 `;
 
@@ -78,38 +102,34 @@ const footerList = css`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-end;
-    width: 100%;
 
-    ${until.leftCol} {
+    ${until.desktop} {
         border-top: 1px solid ${palette.brand.pastel};
     }
 
     ul {
         width: 50%;
         border-left: 1px solid ${palette.brand.pastel};
+        padding: 12px 0 0 10px;
+
+        :nth-of-type(1) {
+            border-left: 0 none;
+        }
 
         ${until.tablet} {
             clear: left;
 
             :nth-of-type(odd) {
-                border-left: 0px;
-                padding-left: 0px;
+                border-left: 0;
+                padding-left: 0;
             }
 
             :nth-of-type(3) {
-                padding-top: 0px;
+                padding-top: 0;
             }
 
             :nth-of-type(4) {
-                padding-top: 0px;
-            }
-        }
-
-        ${until.leftCol} {
-            :nth-of-type(1) {
-                border-left: 0px;
-                padding-left: 0px;
+                padding-top: 0;
             }
         }
 
@@ -118,30 +138,24 @@ const footerList = css`
             width: 150px;
         }
 
-        padding: 12px 0 0 10px;
+        ${desktop} {
+            :nth-of-type(1) {
+                border-left: 1px solid ${palette.brand.pastel};
+            }
+        }
     }
 `;
 
 const readerRevenueLinks = css`
     border-left: 1px solid ${palette.brand.pastel};
+    flex: 1;
     padding: 12px 0 0 10px;
-    margin: 0 0 36px 0;
+    margin: 0 10px 36px 0;
+    width: calc(50% - 10px);
 
     ${until.tablet} {
         width: 50%;
         border-top: 1px solid ${palette.brand.pastel};
-    }
-
-    ${from.tablet.until.desktop} {
-        width: 218px;
-    }
-
-    ${from.desktop.until.leftCol} {
-        width: 458px;
-    }
-
-    ${leftCol} {
-        width: 300px;
     }
 `;
 
@@ -172,11 +186,10 @@ const copyright = css`
 const footerItemContainers = css`
     ${leftCol} {
         display: flex;
-        border-top: 1px solid ${palette.brand.pastel};
     }
 
     width: 100%;
-    padding: 0 19px;
+    padding: 0 ${footerItemContainerPadding}px;
 `;
 
 const FooterLinks: React.FC<{
@@ -222,12 +235,22 @@ const FooterLinks: React.FC<{
 const year = new Date().getFullYear();
 
 export const Footer: React.FC<{
+    pillars: PillarType[];
+    pillar: Pillar;
     nav: NavType;
     edition: Edition;
     pageFooter: FooterType;
-}> = ({ nav, edition, pageFooter }) => (
+}> = ({ pillars, pillar, nav, edition, pageFooter }) => (
     <footer className={footer}>
         <Container className={footerInner}>
+            <div className={pillarWrap}>
+                <Pillars
+                    showMainMenu={false}
+                    pillars={pillars}
+                    pillar={pillar}
+                    showLastPillarDivider={false}
+                />
+            </div>
             <div className={footerItemContainers}>
                 <iframe
                     title="Guardian Email Sign-up Form"
