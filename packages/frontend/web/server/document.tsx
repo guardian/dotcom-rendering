@@ -73,6 +73,7 @@ export const document = ({ data }: Props) => {
         vendorJS,
         bundleJS,
         commercialBundle,
+        getDist('ga.js'),
     ];
 
     /**

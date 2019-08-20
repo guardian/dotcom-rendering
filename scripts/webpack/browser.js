@@ -34,6 +34,7 @@ module.exports = ({ page }) => ({
         ].filter(Boolean),
 
         raven: scriptPath('raven'),
+        ga: scriptPath('ga'),
     },
     output: {
         filename: name,

@@ -2,10 +2,6 @@ import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import 'ophan-tracker-js';
-import {
-    init as initGa,
-    sendPageView as sendGaPageView,
-} from '@frontend/web/browser/ga';
 import { sendOphanPlatformRecord } from '@frontend/web/browser/ophan';
 import { Article } from '@frontend/web/pages/Article';
 import { loadScript } from '@frontend/web/browser/loadScript';
@@ -19,8 +15,6 @@ const initApp = (): void => {
     const commercialBundleUrl = data.config.commercialBundleUrl;
 
     const enhanceApp = () => {
-        initGa();
-
         const container = document.getElementById('app');
 
         if (container) {
@@ -40,9 +34,6 @@ const initApp = (): void => {
         // Ophan
         // Lets record a 'platformVariant' field so that we can track DCR views in datalake(regardless of A / B test)
         sendOphanPlatformRecord();
-
-        // Google Analytics
-        sendGaPageView();
     };
 
     const loadCommercial = (): Promise<void> => {
