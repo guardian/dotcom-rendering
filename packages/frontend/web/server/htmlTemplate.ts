@@ -74,9 +74,7 @@ export const htmlTemplate = ({
                     // once the polyfills have run. This may be useful for debugging.
                     // mainly to support browsers that don't support async=false or defer
                     function guardianPolyfilled() {
-                        try {
-                            window.guardian.polyfilled = true;
-                        } catch (e) {};
+                        window.guardian.polyfilled = true;
                     }
 
                     // We've got contracts to abide by with the Ophan tracker
