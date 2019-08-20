@@ -45,7 +45,7 @@ const go = async () => {
         async (req, res, next) => {
             const { html, ...config } = await fetch(
                 `${req.query.url ||
-                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?guui`,
+                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?dcr=true`,
             ).then(article => article.json());
 
             req.body = config;
@@ -61,7 +61,7 @@ const go = async () => {
         async (req, res, next) => {
             const { html, ...config } = await fetch(
                 `${req.query.url ||
-                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?guui`,
+                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?dcr=true`,
             ).then(article => article.json());
 
             req.body = config;
@@ -73,8 +73,10 @@ const go = async () => {
         }),
     );
 
-    app.get('/',function(req,res) {
-        res.sendFile(path.join(root, 'scripts', 'frontend', 'landing', 'index.html'));
+    app.get('/', function(req, res) {
+        res.sendFile(
+            path.join(root, 'scripts', 'frontend', 'landing', 'index.html'),
+        );
     });
 
     app.get('*', (req, res) => {

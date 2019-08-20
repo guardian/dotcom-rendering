@@ -363,7 +363,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
             hasSection ? `/${this.props.sectionName}` : ''
         }.json`;
         return new Promise((resolve, reject) => {
-            fetch(`https://api.nextgen.guardianapps.co.uk${endpoint}?guui`)
+            fetch(`https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`)
                 .then(response => {
                     if (!response.ok) {
                         resolve([]);
