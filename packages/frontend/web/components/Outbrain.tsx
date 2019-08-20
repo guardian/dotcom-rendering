@@ -16,16 +16,16 @@ type OutbrainSelectorsType = 'outbrain' | 'merchandising' | 'nonCompliant';
 
 const outbrainSelectorsTypeMapping = {
     outbrain: {
-        widget: '.js-outbrain',
-        container: '.js-outbrain-container',
+        widget: 'js-outbrain',
+        container: 'js-outbrain-container',
     },
     merchandising: {
-        widget: '.js-container--commercial',
-        container: '.js-outbrain-container',
+        widget: 'js-container--commercial',
+        container: 'js-outbrain-container',
     },
     nonCompliant: {
-        widget: '.js-outbrain',
-        container: '.js-outbrain-container',
+        widget: 'js-outbrain',
+        container: 'js-outbrain-container',
     },
 };
 
