@@ -137,12 +137,6 @@ const pillarColumnLinks = css`
     }
 `;
 
-const firstColumn = css`
-    :after {
-        content: none;
-    }
-`;
-
 const hide = css`
     display: none;
 `;

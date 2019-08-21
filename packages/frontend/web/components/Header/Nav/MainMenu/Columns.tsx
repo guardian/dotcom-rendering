@@ -34,7 +34,7 @@ const desktopBrandExtensionColumn = css`
     display: none;
     position: absolute;
     right: 20px;
-    top: -35px;
+    top: 4px;
     bottom: 0;
 `;
 

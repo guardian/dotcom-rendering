@@ -76,6 +76,10 @@ const showMenuUnderline = css`
     :hover {
         text-decoration: underline;
     }
+
+    :after {
+        transform: translateY(4px);
+    }
 `;
 
 const pillarStyle = css`
