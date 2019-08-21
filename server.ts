@@ -6,7 +6,7 @@ import compression from 'compression';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import HeaderImage from './dist/HeaderImage';
+import Article from './dist/Article';
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
               return res.status(500).send('An error occurred')
             }
             
-            const body = renderToString(React.createElement(HeaderImage));
+            const body = renderToString(React.createElement(Article));
 
             return res.send(
               data.replace(

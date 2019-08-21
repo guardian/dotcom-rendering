@@ -15,8 +15,8 @@ const toggleStyle = css`
     height: 32px;
     display: inline-block;
     position: absolute;
-    bottom: 6px;
-    right: 6px;
+    bottom: 12px;
+    right: 12px;
     border-radius: 100%;
     z-index: 2;
     font-size: 1.6rem;
@@ -30,9 +30,8 @@ const toggleStyle = css`
     display: none
   }
 
-  input[type=checkbox]:checked ~ div {    
+  input[type=checkbox]:checked ~ div {
     position: absolute;
-    left: 0;
     display: block;
     min-height: 44px;
     max-height: 999px;
@@ -41,12 +40,11 @@ const toggleStyle = css`
     max-height: 0;
     overflow: hidden;
     position: absolute;
+    left: 0;
     right: 0;
-    bottom: 0;
-    right: 0;
+    bottom: 4px;
     padding-right: 48px;
     z-index: 1;
-    line-height: 1.6rem;
     color: #ffffff;
     font-family: sans-serif;
   }

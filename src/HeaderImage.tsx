@@ -12,7 +12,7 @@ const headerImageStyle = css`
 
 const HeaderImage = () => (
   <div css={headerImageStyle}>
-      <img src="https://i.guim.co.uk/img/media/9c208eaabb211863fef64e56fd610b22df756afb/71_0_722_433/master/722.jpg?width=300&quality=85&auto=format&fit=max&s=66937937dbe5db0acf77da3ec98fb0c2" />
+      <img src="https://i.guim.co.uk/img/media/90870ec12d9cb8af47d20a76457c9538e418ad78/0_0_3500_2101/master/3500.jpg?width=1920&quality=85&auto=format&fit=max&s=c499e394a551496ceef740b6d27bb896" />
       < HeaderImageCaption />
   </div>
 )
