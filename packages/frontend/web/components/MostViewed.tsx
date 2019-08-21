@@ -12,7 +12,6 @@ import {
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
-import { reportError } from '@frontend/web/browser/reportError';
 
 const container = css`
     padding-top: 3px;
@@ -377,9 +376,13 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                     resolve([]);
                 })
                 .catch(err => {
-                    reportError(err, {
-                        feature: 'most-viewed',
-                    });
+                    window.guardian.modules.raven.reportError(
+                        err,
+                        {
+                            feature: 'most-viewed',
+                        },
+                        true,
+                    );
 
                     return resolve([]);
                 });

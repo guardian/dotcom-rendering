@@ -25,7 +25,7 @@ declare global {
                 pageViewId: string;
             };
             modules: {
-                raven?: {
+                raven: {
                     reportError: (
                         err: Error,
                         tags: { [key: string]: string },

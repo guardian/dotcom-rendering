@@ -16,7 +16,7 @@ export interface WindowGuardianConfig {
     switches: { [key: string]: boolean };
     tests?: { [key: string]: string };
     modules: {
-        raven?: {
+        raven: {
             reportError: (
                 err: Error,
                 tags: { [key: string]: string },
