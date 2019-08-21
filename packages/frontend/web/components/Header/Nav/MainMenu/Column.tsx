@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { textSans, headline } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 
 import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
