@@ -1,4 +1,5 @@
 import { getRaven, reportError, setWIndowOnError } from './raven';
+import { startup } from '@frontend/web/browser/startup';
 
 const init = () => {
     return getRaven()
@@ -22,4 +23,4 @@ const init = () => {
         });
 };
 
-init();
+startup('raven', null, init);

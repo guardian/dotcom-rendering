@@ -2,8 +2,9 @@ import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
 import { hydrate as hydrateApp } from 'react-dom';
 import { Article } from '@frontend/web/pages/Article';
+import { startup } from '@frontend/web/browser/startup';
 
-const init = () => {
+const init = (): Promise<void> => {
     const { cssIDs, data } = window.guardian.app;
     const container = document.getElementById('app');
 
@@ -20,6 +21,8 @@ const init = () => {
 
         hydrateApp(React.createElement(Article, { data }), container);
     }
+
+    return Promise.resolve();
 };
 
 // TODO remove this
@@ -27,4 +30,4 @@ if (module.hot) {
     module.hot.accept();
 }
 
-init();
+startup('react', null, init);

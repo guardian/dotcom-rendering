@@ -1,8 +1,10 @@
 import { init as initGa, sendPageView } from './ga';
+import { startup } from '@frontend/web/browser/startup';
 
-const init = () => {
+const init = (): Promise<void> => {
     initGa();
     sendPageView();
+    return Promise.resolve();
 };
 
-init();
+startup('ga', null, init);
