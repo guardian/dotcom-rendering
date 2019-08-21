@@ -12,6 +12,12 @@ export const reportError = (
     tags: { [key: string]: string },
     shouldThrow: boolean = true,
 ): void => {
-    // tslint:disable-next-line: no-console
-    console.log('This is a stub - not for PROD.');
+    if (window.guardian.modules.raven) {
+        window.guardian.modules.raven.reportError(err, tags, shouldThrow);
+    } else {
+        // tslint:disable-next-line: no-console
+        console.log(
+            `Attempting to log error without having registered raven.\nError is: ${err.message}`,
+        );
+    }
 };
