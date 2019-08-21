@@ -40,10 +40,14 @@ const articleContainer = css`
     }
 `;
 
+const overflowHidden = css`
+    overflow: hidden;
+`;
+
 export const Article: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
-    <div>
+    <div className={overflowHidden}>
         <Header
             nav={data.NAV}
             pillar={data.CAPI.pillar}
