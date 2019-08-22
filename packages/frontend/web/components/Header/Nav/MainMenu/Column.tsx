@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { textSans, headline } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
 
 import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
 import { palette } from '@guardian/pasteup/palette';
 import { CollapseColumnButton } from './CollapseColumnButton';
+
+// CSS vars
+const pillarHeight = 42;
+
+// CSS
 
 export const hideDesktop = css`
     ${desktop} {
@@ -20,10 +25,18 @@ const pillarDivider = css`
             position: absolute;
             right: 0;
             top: 0;
-            bottom: -100px;
+            bottom: 0;
             width: 1px;
             background-color: ${palette.brand.pastel};
             z-index: 1;
+        }
+    }
+`;
+
+const pillarDividerExtended = css`
+    ${desktop} {
+        :before {
+            top: -${pillarHeight}px;
         }
     }
 `;
@@ -47,8 +60,8 @@ const columnLinkTitle = css`
         padding-left: 60px;
     }
     ${desktop} {
+        ${textSans(6)};
         font-size: 16px;
-        ${headline(2)};
         padding: 6px 0;
     }
     :hover,
@@ -106,10 +119,10 @@ const columnLinks = css`
         flex-direction: column;
         flex-wrap: nowrap;
         order: 1;
+        height: 100%;
         width: 100%;
         padding: 0 9px;
     }
-    ${pillarDivider};
 `;
 
 const firstColumnLinks = css`
@@ -121,12 +134,6 @@ const firstColumnLinks = css`
 const pillarColumnLinks = css`
     ${until.tablet} {
         background: ${palette.brand.dark};
-    }
-`;
-
-const firstColumn = css`
-    :after {
-        content: none;
     }
 `;
 
@@ -165,6 +172,7 @@ const columnStyle = css`
     ${textSans(6)};
     list-style: none;
     margin: 0;
+    padding-bottom: 10px;
     position: relative;
 
     :after {
@@ -176,6 +184,11 @@ const columnStyle = css`
         left: 50px;
         position: absolute;
         right: 0;
+    }
+
+    /* Remove the border from the top item on mobile */
+    :first-of-type:after {
+        content: none;
     }
 
     ${desktop} {
@@ -244,7 +257,10 @@ export const More: React.FC<{
         ],
     };
     return (
-        <li className={cx(columnStyle)} role="none">
+        <li
+            className={cx(columnStyle, pillarDivider, pillarDividerExtended)}
+            role="none"
+        >
             <ColumnLinks column={more} showColumnLinks={true} id={subNavId} />
         </li>
     );
@@ -272,16 +288,7 @@ export class Column extends Component<
         const { column, index } = this.props;
         const subNavId = `${column.title.toLowerCase()}Links`;
         return (
-            <li
-                className={cx(
-                    columnStyle,
-                    {
-                        [pillarDivider]: index > 0,
-                    },
-                    { [firstColumn]: index === 0 },
-                )}
-                role="none"
-            >
+            <li className={cx(columnStyle, pillarDivider)} role="none">
                 <CollapseColumnButton
                     title={column.title}
                     showColumnLinks={showColumnLinks}

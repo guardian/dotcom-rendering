@@ -21,7 +21,7 @@ export const firstPillarWidth = 171;
 export const pillarWidth = 160;
 export const preLeftColFirstPillarWidth = 144;
 export const preLeftColPillarWidth = 134;
-export const preTabletPillarWidth = 'auto';
+export const preDesktopPillarWidth = 'auto';
 
 // CSS
 
@@ -38,9 +38,9 @@ const pillarsStyles = css`
         float: left;
         display: block;
         position: relative;
-        width: ${preTabletPillarWidth};
-        ${tablet} {
-            width: ${preLeftColPillarWidth};
+        width: ${preDesktopPillarWidth};
+        ${desktop} {
+            width: ${preLeftColPillarWidth}px;
         }
         ${leftCol} {
             width: ${pillarWidth}px;
@@ -76,14 +76,18 @@ const showMenuUnderline = css`
     :hover {
         text-decoration: underline;
     }
+
+    :after {
+        transform: translateY(4px);
+    }
 `;
 
 const pillarStyle = css`
     :first-of-type {
         margin-left: -20px;
-        width: ${preTabletPillarWidth};
+        width: ${preDesktopPillarWidth};
 
-        ${tablet} {
+        ${desktop} {
             width: ${preLeftColFirstPillarWidth}px;
         }
 

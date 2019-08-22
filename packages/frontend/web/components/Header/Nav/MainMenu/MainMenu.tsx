@@ -15,6 +15,7 @@ import { textSans } from '@guardian/pasteup/typography';
 const showMenu = css`
     ${desktop} {
         display: block;
+        overflow: visible;
     }
     ${until.desktop} {
         transform: translateX(0%);
