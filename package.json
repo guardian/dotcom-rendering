@@ -21,12 +21,8 @@
     },
     "bundlesize": [
         {
-            "path": "./dist/frontend.article.*.js",
-            "maxSize": "50 kB"
-        },
-        {
-            "path": "./dist/vendor.*.js",
-            "maxSize": "70 kB"
+            "path": "./dist/ga.*.js",
+            "maxSize": "20 kB"
         }
     ],
     "devDependencies": {

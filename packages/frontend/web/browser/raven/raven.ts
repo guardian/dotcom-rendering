@@ -1,5 +1,5 @@
 import raven, { RavenStatic } from 'raven-js';
-import { isAdBlockInUse } from '@frontend/web/browser/detectAdBlocker';
+import { isAdBlockInUse } from './detectAdBlocker';
 
 let ravenConfig: RavenStatic;
 
@@ -88,6 +88,69 @@ const setUpRaven: (
     ravenConfig = raven.config(sentryUrl, sentryOptions).install();
 
     return Promise.resolve(ravenConfig);
+};
+
+type ReportedError = Error & {
+    reported?: boolean;
+};
+
+export const reportError = (
+    err: ReportedError,
+    tags: { [key: string]: string },
+    shouldThrow: boolean = true,
+): void => {
+    getRaven().then(r => {
+        r.captureException(err, { tags });
+        if (shouldThrow) {
+            // Flag to ensure it is not reported to Sentry again via global handlers
+            const error = err;
+            error.reported = true;
+            throw error;
+        }
+    });
+};
+
+export const setWIndowOnError = (r: RavenStatic) => {
+    const oldOnError = window.onerror;
+
+    /**
+     * Make sure global onerror doesn't report errors
+     * already manually reported via reportError module
+     * by checking for 'reported' property
+     */
+    window.onerror = (
+        message,
+        filename,
+        lineno,
+        colno,
+        error: ReportedError | undefined,
+    ) => {
+        // Not all browsers pass the error object
+        if (!error || !error.reported) {
+            if (oldOnError) {
+                oldOnError(message, filename, lineno, colno, error);
+            }
+        }
+    };
+
+    // Report unhandled promise rejections
+    window.addEventListener('unhandledrejection', event => {
+        // Prevent error output on the console:
+        event.preventDefault();
+
+        // Typecast Event to PromiseRejectionEvent for TypeScript
+        const { reason } = event as PromiseRejectionEvent;
+        r.captureException(reason);
+    });
+
+    // r.context(
+    //     {
+    //         tags: {
+    //             feature: 'initApp',
+    //         },
+    //     },
+    //     initApp,
+    // );
 };
 
 export const getRaven: () => Promise<RavenStatic> = () => {

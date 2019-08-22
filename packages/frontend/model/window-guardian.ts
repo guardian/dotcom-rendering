@@ -15,6 +15,15 @@ export interface WindowGuardianConfig {
     };
     switches: { [key: string]: boolean };
     tests?: { [key: string]: string };
+    modules: {
+        raven: {
+            reportError: (
+                err: Error,
+                tags: { [key: string]: string },
+                shouldThrow: boolean,
+            ) => void;
+        };
+    };
 }
 
 const makeWindowGuardianConfig = (

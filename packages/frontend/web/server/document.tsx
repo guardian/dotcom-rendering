@@ -17,7 +17,7 @@ interface RenderToStringResult {
 }
 
 export const document = ({ data }: Props) => {
-    const { page, site, CAPI, NAV, config, linkedData } = data;
+    const { CAPI, NAV, config, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
@@ -46,6 +46,9 @@ export const document = ({ data }: Props) => {
         'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
     ];
 
+    const polyfillIO =
+        'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
+
     /**
      * The highest priority scripts.
      * These scripts have a considerable impact on site performance.
@@ -53,13 +56,12 @@ export const document = ({ data }: Props) => {
      * Please talk to the dotcom platform team before adding more.
      * Scripts will be executed in the order they appear in this array
      */
-    const bundleJS = getDist(`${site}.${page.toLowerCase()}.js`);
-    const vendorJS = getDist('vendor.js');
-    const polyfillIO =
-        'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
-    const commercialBundle = config.commercialBundleUrl;
-
-    const priorityScripts = [polyfillIO, vendorJS, bundleJS, commercialBundle];
+    const priorityScripts = [
+        polyfillIO,
+        getDist('raven.js'),
+        getDist('react.js'),
+        config.commercialBundleUrl,
+    ];
 
     /**
      * Low priority scripts. These scripts will be requested
@@ -69,6 +71,8 @@ export const document = ({ data }: Props) => {
      * unlikely.
      */
     const lowPriorityScripts = [
+        getDist('ga.js'),
+        getDist('ophan.js'),
         'https://www.google-analytics.com/analytics.js',
     ];
 
