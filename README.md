@@ -3,18 +3,17 @@
 ### Running
 Working on node v8.15.0 (nvm use 8.15.0)
 1. npm i
-2. npm run compileClient
-3. npm run dev
+2. npm run compileClient (watches for changes)
+3. npm run dev (compiles and runs server)
 4. http://localhost:3040
 
 ### Initial architecture discussions 
 
-- Start with SASS files alongside JavaScript components
-  - Existing SASS codebase with mixins
-  - Work to add dark mode styles in SASS
-  - Experience in team
-  - Will be closely coupled to components that will make migration to emotion easier
-  - Emotion supports media queries for dark mode https://emotion.sh/docs/media-queries
+- Emotion styles combined with components
+  - Easy to migrate current SASS styles
+  - JavaScript to replicate variables and mixins
+  - Closely coupled to components
+  - Supports media queries for dark mode styles https://emotion.sh/docs/media-queries
 
 - Use React for UI components
   - Redux and useReducer probably unnecessary

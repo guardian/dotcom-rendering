@@ -7,6 +7,7 @@ const headerImageStyle = css`
     position: relative;
     img {
         width: 100%;
+        display: block;
     }
 `;
 

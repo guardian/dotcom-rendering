@@ -11,7 +11,7 @@ import Article from './dist/Article';
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));
-app.use(express.static('public'))
+app.use("/public", express.static(path.resolve(__dirname, 'public')));
 app.use(compression());
 
 app.get('/', (req, res) => {

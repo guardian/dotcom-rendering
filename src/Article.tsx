@@ -1,12 +1,17 @@
 import React from 'react';
-import { css } from '@emotion/core'
 
 import HeaderImage from './HeaderImage';
+import ArticleTitle from './ArticleTitle';
+import ArticleStandfirst from './ArticleStandfirst';
+import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 
 const Article = () => (
     <div>
         <HeaderImage />
+        <ArticleTitle />
+        <ArticleStandfirst />
+        <ArticleByline />
         <ArticleBody />
     </div>
 )

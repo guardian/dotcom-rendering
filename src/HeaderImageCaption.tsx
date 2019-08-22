@@ -1,5 +1,6 @@
 import React from 'react';
-import { css } from '@emotion/core'
+import { css } from '@emotion/core';
+import { basePx, colours } from './styles';
 
 const toggleStyle = css`
   input[type=checkbox] {
@@ -7,22 +8,23 @@ const toggleStyle = css`
   }
 
   label { 
-    line-height: 30px;
+    line-height: 34px;
     text-align: center;
-    background-color: #ffe500;
-    color: #121212;
-    width: 32px;
-    height: 32px;
+    background-color: ${colours.yellow};
+    color: ${colours.black};
+    width: ${basePx(4)};
+    height: ${basePx(4)};
     display: inline-block;
     position: absolute;
-    bottom: 12px;
-    right: 12px;
+    bottom: ${basePx(1)};
+    right: ${basePx(1)};
     border-radius: 100%;
     z-index: 2;
-    font-size: 1.6rem;
+    font-size: 2.8rem;
   }
 
-  label::selection {
+  label::selection,
+  input[type=checkbox]:checked ~ div span::selection {
     background-color: transparent;
   }
 
@@ -36,17 +38,16 @@ const toggleStyle = css`
     min-height: 44px;
     max-height: 999px;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 6px 12px 12px 12px;
+    padding: ${basePx(1)};
     max-height: 0;
     overflow: hidden;
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 4px;
+    bottom: 0;
     padding-right: 48px;
     z-index: 1;
-    color: #ffffff;
-    font-family: sans-serif;
+    color: ${colours.white};
   }
 `;
 
