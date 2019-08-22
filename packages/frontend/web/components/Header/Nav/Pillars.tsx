@@ -151,18 +151,21 @@ const linkStyle = css`
     }
     ${tablet} {
         font-size: 22px;
-        padding-top: 11px;
+        padding-top: 13px;
         height: 48px;
         padding-right: 20px;
         padding-left: 9px;
     }
     ${desktop} {
-        padding-top: 7px;
+        padding-top: 11px;
         height: 42px;
     }
+
     ${wide} {
+        padding-top: 9px;
         font-size: 24px;
     }
+
     :focus:after {
         transform: translateY(4px);
     }
