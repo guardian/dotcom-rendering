@@ -4,6 +4,7 @@ const BASE_PADDING = 8;
 
 const baseMultiply = (value: number) : number => value * BASE_PADDING;
 
+// should these come from mapi?
 // We should try to standardise these with Design, Android and iOS
 export const colours = {
     black: '#121212',

@@ -2,7 +2,7 @@ import React from 'react';
 import { basePx, sideMargins } from './styles';
 import { css } from '@emotion/core'
 
-const articleTitleCss = css`
+const ArticleHeadlineCss = css`
     padding: ${basePx(1, 0, 4, 0)};
     color: #121212;
     font-weight: 500;
@@ -10,8 +10,8 @@ const articleTitleCss = css`
     line-height: 3.2rem;
 `;
 
-const ArticleTitle = () => (
-    <h1 css={[articleTitleCss, sideMargins]}>Venezuelan leader Nicolas Maduro confirms months of secret US talks</h1>
+const ArticleHeadline = ({ headline }) => (
+    <h1 css={[ArticleHeadlineCss, sideMargins]}>{headline}</h1>
 )
 
-export default ArticleTitle;
+export default ArticleHeadline;

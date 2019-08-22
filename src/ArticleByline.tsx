@@ -26,7 +26,7 @@ const avatarCss = css`
     }
 `;
 
-const ArticleByline = () => (
+const ArticleByline = ({ byline }) => (
     <div>
         <div css={ArticleBylineCss}></div>
         <div css={sideMargins}>
@@ -34,7 +34,7 @@ const ArticleByline = () => (
                 <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
             </div>
             <div>
-                <div>Tom Phillips Latin America correspondent</div>
+                <div>{ byline }</div>
                 <div>01:45 Wednesday, 21 August 2019</div>
                 <div>Follow Tom Phillips</div>
             </div>
