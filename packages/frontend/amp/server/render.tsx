@@ -7,6 +7,7 @@ import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { validateAsCAPIType as validateV2 } from '@frontend/model/validate';
 import { findBySubsection } from '@frontend/model/article-sections';
+import { bodyJSON } from '@frontend/model/exampleBodyJSON';
 
 export const render = (
     { body, path }: express.Request,
@@ -68,4 +69,9 @@ export const render = (
             res.status(500).send(`<pre>${e.message}</pre>`);
         }
     }
+};
+
+export const renderPerfTest = (req: express.Request, res: express.Response) => {
+    req.body = JSON.parse(bodyJSON);
+    render(req, res);
 };
