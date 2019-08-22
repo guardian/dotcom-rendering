@@ -9,6 +9,7 @@ interface OutbrainSelectors {
 }
 
 const shouldDisplayOutbrain = (config: ConfigType): boolean => {
+    return true;
     return config.switches.outbrainDCRTest;
 };
 
