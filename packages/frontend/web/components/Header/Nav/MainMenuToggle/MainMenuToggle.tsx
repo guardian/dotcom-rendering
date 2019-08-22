@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { desktop, wide } from '@guardian/pasteup/breakpoints';
+import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/typography';
 import { VeggieBurger } from './VeggieBurger';
@@ -10,7 +10,7 @@ const screenReadable = css`
     ${screenReaderOnly};
 `;
 const openMainMenu = css`
-    ${headline(3)};
+    ${headline(4)};
     font-weight: 300;
     color: ${palette.neutral[100]};
     cursor: pointer;
@@ -24,11 +24,8 @@ const openMainMenu = css`
     padding-right: 20px;
     ${desktop} {
         display: block;
-        padding-top: 7px;
+        padding-top: 5px;
         height: 42px;
-    }
-    ${wide} {
-        ${headline(4)};
     }
     :hover {
         color: ${palette.highlight.main};
