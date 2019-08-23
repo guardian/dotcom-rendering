@@ -5,6 +5,7 @@ import ArticleHeadline from './ArticleHeadline';
 import ArticleStandfirst from './ArticleStandfirst';
 import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
+import Tags from './Tags';
 
 import { getPillarStyles } from './styles';
 
@@ -19,6 +20,7 @@ const Article = ({ headline, standfirst, byline, body, tags, pillarId }) => {
             <ArticleStandfirst standfirst={standfirst}/>
             <ArticleByline byline={byline} pillarStyles={pillarStyles}/>
             <ArticleBody body={body} pillarStyles={pillarStyles}/>
+            <Tags tags={tags}/>
         </React.Fragment>
     )
 }

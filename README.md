@@ -1,7 +1,7 @@
 # apps-rendering
 
 ### Running
-Working on node v8.15.0 (nvm use 8.15.0)
+Working on node v10.16.3 (nvm use 10.16.3)
 1. npm i
 2. npm run compileClient (watches for changes)
 3. npm run dev (compiles and runs server)
