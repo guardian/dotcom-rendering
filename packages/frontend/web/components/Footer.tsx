@@ -262,7 +262,7 @@ export const Footer: React.FC<{
             </div>
             <div className={copyright}>
                 © {year} Guardian News & Media Limited or its affiliated
-                companies. All rights reserved. (β)
+                companies. All rights reserved. (beta)
             </div>
         </Container>
     </footer>
