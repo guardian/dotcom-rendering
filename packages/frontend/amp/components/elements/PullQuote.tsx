@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import Quote from '@guardian/pasteup/icons/quote.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { body } from '@guardian/pasteup/typography';
 
 const styles = (pillar: Pillar) => css`

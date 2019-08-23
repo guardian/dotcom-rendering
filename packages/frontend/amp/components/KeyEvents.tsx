@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { headline, textSans } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 // import { pillarPalette } from '@frontend/lib/pillars';
 import DownArrow from '@guardian/pasteup/icons/down-arrow.svg';
 import { blockLink } from '@frontend/amp/lib/block-link';

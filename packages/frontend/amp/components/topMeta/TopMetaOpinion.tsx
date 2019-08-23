@@ -1,7 +1,7 @@
 import React from 'react';
 import { headline } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';

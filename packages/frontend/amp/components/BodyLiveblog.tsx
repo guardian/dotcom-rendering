@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMetaLiveblog } from '@frontend/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
 import { Blocks } from '@frontend/amp/components/Blocks';
 import RefreshIcon from '@guardian/pasteup/icons/refresh.svg';

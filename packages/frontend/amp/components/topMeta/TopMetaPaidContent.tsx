@@ -8,7 +8,7 @@ import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { PaidForBand } from '@frontend/amp/components/topMeta/PaidForBand';
 
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/pasteup/typography';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';

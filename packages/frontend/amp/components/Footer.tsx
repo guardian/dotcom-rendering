@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { textSans, body } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { InnerContainer } from './InnerContainer';
 import {
     Link,
@@ -30,7 +30,7 @@ const footerLink = css`
     display: block;
 
     :hover {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
 `;
 
@@ -119,7 +119,7 @@ const backToTopText = css`
 `;
 
 const supportLink = css`
-    color: ${palette.highlight.main};
+    color: ${palette.yellow.main};
     ${body(3)};
     padding-bottom: 0.375rem;
 `;

@@ -13,7 +13,7 @@ import Camera from '@guardian/pasteup/icons/camera.svg';
 import VolumeHigh from '@guardian/pasteup/icons/volume-high.svg';
 import Quote from '@guardian/pasteup/icons/quote.svg';
 import Clock from '@guardian/pasteup/icons/clock.svg';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { css } from 'emotion';
 import { ShowMoreButton } from '@frontend/amp/components/ShowMoreButton';
 

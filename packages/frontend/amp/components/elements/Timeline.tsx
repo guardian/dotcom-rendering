@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Expandable } from '@frontend/amp/components/Expandable';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 
 const eventsWrapper = css`
     margin-left: 8px;
@@ -18,7 +18,7 @@ const eventStyle = css`
 `;
 
 const highlight = css`
-    background-color: ${palette.highlight.main};
+    background-color: ${palette.yellow.main};
 `;
 
 const eventIconStyle = css`

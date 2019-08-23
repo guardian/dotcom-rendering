@@ -4,7 +4,6 @@ import { Container } from '@frontend/amp/components/Container';
 import { Body as BodyArticle } from '@frontend/amp/components/BodyArticle';
 import { Body as BodyLiveblog } from '@frontend/amp/components/BodyLiveblog';
 import { Header } from '@frontend/amp/components/Header';
-import { palette } from '@guardian/pasteup/palette';
 import { Onward } from '@frontend/amp/components/Onward';
 import { AdConsent } from '@frontend/amp/components/AdConsent';
 import { css } from 'emotion';
@@ -13,6 +12,7 @@ import { Analytics, AnalyticsModel } from '@frontend/amp/components/Analytics';
 import { filterForTagsOfType } from '@frontend/amp/lib/tag-utils';
 import { AdUserSync } from '@root/packages/frontend/amp/components/AdUserSync';
 import { getPillar } from '@frontend/lib/pillars';
+import { palette } from '@guardian/src-foundations';
 
 const backgroundColour = css`
     background-color: ${palette.neutral[97]};
