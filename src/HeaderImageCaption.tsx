@@ -51,14 +51,14 @@ const toggleStyle = css`
   }
 `;
 
-const HeaderImageCaption = () => (
+const HeaderImageCaption = ({ caption, credit }) => (
   <div css={toggleStyle}>
     <label htmlFor="captionToggle">+</label>
     <input type="checkbox" id="captionToggle"/>
     <div>
-      <span>Simon Cheng has been detained by mainland Chinese authorities, his girlfriend has said.</span>
+      <span>{caption}</span>
       <span>&nbsp;</span>
-      <span>Photograph: Simon Cheng</span>
+      <span>{credit}</span>
     </div>
   </div>
 )

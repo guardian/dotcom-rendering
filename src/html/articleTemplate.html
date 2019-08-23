@@ -27,8 +27,44 @@
         margin: 0;
       }
     </style>
+    
+    <!-- atom CSS -->
+    <style>
+      .atom__button{display:inline-flex;align-items:center;border:0;margin:0}.atom__button>.icon{fill:currentColor}.atom__button--large{height:2.25em}.atom__button--bordered{border-width:1px;border-style:solid}.atom__button--round{border-radius:100%}.atom__button--rounded{border-radius:100em}.atom__button--rounded-left{border-top-left-radius:100em;border-bottom-left-radius:100em}.atom__button--rounded-right{border-top-right-radius:100em;border-bottom-right-radius:100em}.atom--snippet>summary{outline:none}.atom--snippet>summary::-webkit-details-marker{display:none}.atom--snippet{border-image:repeating-linear-gradient(to bottom, #dcdcdc, #dcdcdc 1px, transparent 1px, transparent 4px) 13;border-top:13px solid black;border-left:0;border-right:0;border-bottom:0;background:#f1f1f1;position:relative;padding:0 5px 6px;margin:16px 0 36px}.atom--snippet a{color:#005689;border-bottom-color:#bdbdbd}.atom--snippet[open] .atom--snippet__handle>:nth-child(1),.atom--snippet:not([open]) .atom--snippet__handle>:nth-child(2){display:none}.atom--snippet__header{margin:0 0 16px;font-weight:bold}.atom--snippet__label{display:block}.garnett--pillar-news .atom--snippet__label,.content--pillar-news .atom--snippet__label{color:#e00000}.garnett--pillar-arts .atom--snippet__label,.content--pillar-arts .atom--snippet__label{color:#ab8958}.garnett--pillar-sport .atom--snippet__label,.content--pillar-sport .atom--snippet__label{color:#0084c6}.garnett--pillar-opinion .atom--snippet__label,.content--pillar-opinion .atom--snippet__label{color:#ed6300}.garnett--pillar-lifestyle .atom--snippet__label,.content--pillar-lifestyle .atom--snippet__label{color:#bb3b80}.atom--snippet__label,.atom--snippet__headline{font-size:18px;line-height:22px;font-family:var(--f-serif-headline)}.atom--snippet__label{font-weight:600}.atom--snippet__headline{font-weight:400}.atom--snippet__handle,.atom--snippet__feedback,.atom--snippet__credit{font-family:var(--f-sans-serif-text)}.atom--snippet__handle{font-size:13px;position:absolute;bottom:0;transform:translate(0, 50%);padding:0 15px 0 7px}.atom--snippet__handle,.atom--snippet__feedback .atom__button{background:#121212;color:#ffffff}.garnett--pillar-news .atom--snippet__feedback .atom__button:hover,.content--pillar-news .atom--snippet__feedback .atom__button:hover,.garnett--pillar-news .atom--snippet__feedback .atom__button:focus,.content--pillar-news .atom--snippet__feedback .atom__button:focus,.garnett--pillar-news .atom--snippet__handle:hover,.content--pillar-news .atom--snippet__handle:hover,.garnett--pillar-news .atom--snippet__handle:focus,.content--pillar-news .atom--snippet__handle:focus{background-color:#e00000}.garnett--pillar-arts .atom--snippet__feedback .atom__button:hover,.content--pillar-arts .atom--snippet__feedback .atom__button:hover,.garnett--pillar-arts .atom--snippet__feedback .atom__button:focus,.content--pillar-arts .atom--snippet__feedback .atom__button:focus,.garnett--pillar-arts .atom--snippet__handle:hover,.content--pillar-arts .atom--snippet__handle:hover,.garnett--pillar-arts .atom--snippet__handle:focus,.content--pillar-arts .atom--snippet__handle:focus{background-color:#ab8958}.garnett--pillar-sport .atom--snippet__feedback .atom__button:hover,.content--pillar-sport .atom--snippet__feedback .atom__button:hover,.garnett--pillar-sport .atom--snippet__feedback .atom__button:focus,.content--pillar-sport .atom--snippet__feedback .atom__button:focus,.garnett--pillar-sport .atom--snippet__handle:hover,.content--pillar-sport .atom--snippet__handle:hover,.garnett--pillar-sport .atom--snippet__handle:focus,.content--pillar-sport .atom--snippet__handle:focus{background-color:#0084c6}.garnett--pillar-opinion .atom--snippet__feedback .atom__button:hover,.content--pillar-opinion .atom--snippet__feedback .atom__button:hover,.garnett--pillar-opinion .atom--snippet__feedback .atom__button:focus,.content--pillar-opinion .atom--snippet__feedback .atom__button:focus,.garnett--pillar-opinion .atom--snippet__handle:hover,.content--pillar-opinion .atom--snippet__handle:hover,.garnett--pillar-opinion .atom--snippet__handle:focus,.content--pillar-opinion .atom--snippet__handle:focus{background-color:#ed6300}.garnett--pillar-lifestyle .atom--snippet__feedback .atom__button:hover,.content--pillar-lifestyle .atom--snippet__feedback .atom__button:hover,.garnett--pillar-lifestyle .atom--snippet__feedback .atom__button:focus,.content--pillar-lifestyle .atom--snippet__feedback .atom__button:focus,.garnett--pillar-lifestyle .atom--snippet__handle:hover,.content--pillar-lifestyle .atom--snippet__handle:hover,.garnett--pillar-lifestyle .atom--snippet__handle:focus,.content--pillar-lifestyle .atom--snippet__handle:focus{background-color:#bb3b80}.atom--snippet__handle span{display:inline-flex;align-items:center}.atom--snippet__handle .icon{fill:white;width:20px;height:20px;margin-right:10px}.atom--snippet__body{overflow:hidden}.atom--snippet__body>p::before{background-color:#197caa}.atom--snippet__footer{font-size:13px;line-height:16px;display:flex;justify-content:flex-end}.atom--snippet__feedback:not([hidden]){display:flex;align-items:center}.atom--snippet__feedback .atom__button{margin:0 0 0 5px;padding:0;width:28px;height:28px}.atom--snippet__feedback .atom__button[value='dislike']{transform:rotate(180deg)}.atom--snippet__feedback .atom__button,.atom--snippet__feedback .icon{display:inline-flex;align-items:center;justify-content:center}.atom--snippet__feedback .icon{width:16px;height:16px}.atom--snippet__feedback path{fill:currentColor}.atom--snippet__image{float:left;margin-right:10px;margin-bottom:6px;width:100px;height:100px;object-fit:cover;border-radius:50%}.atom--snippet__heading{font-family:var(--f-serif-headline);font-weight:500}.atom--snippet__credit{font-size:13px;line-height:16px;margin:12px 0}.atom--snippet__credit>.inline-icon{display:inline-flex;background:#bdbdbd;border-radius:100%;width:16px;height:16px;align-items:center;justify-content:center;margin-right:5px}.atom--snippet__credit>.inline-icon>.icon{height:12px}
+    </style>
 </head>
 <body>
   <div id="root"></div>
+  <script>
+  Array.from(document.querySelectorAll('figure.element-image')).map(figure => {
+    const height = getDesiredImageHeight(figure);
+    figure.querySelector('img').height = height;
+  });
+
+  function getDesiredImageHeight(figure) {
+      const elem = figure.getElementsByTagName('img')[0] || figure.getElementsByClassName('element-image-inner')[0];
+      const imgWidth = elem.getAttribute('width');
+      const imgHeight = elem.getAttribute('height');
+      const figInnerWidth = getElementOffset(figure).width;
+      const scale = figInnerWidth / imgWidth;
+      const newHeight = imgHeight * scale;
+
+      return Math.round(newHeight);
+  }
+
+  function getElementOffset(elem) {
+      const bcr = elem.getBoundingClientRect();
+      const scroll = {
+          x: window.pageXOffset || document.documentElement.scrollLeft,
+          y: window.pageYOffset || document.documentElement.scrollTop
+      }
+      const width = elem.offsetWidth;
+      const height = elem.offsetHeight;
+      const top = bcr.top + scroll.y - Math.max(0, document.body.clientTop);
+      const left = bcr.left + scroll.x - Math.max(0, document.body.clientLeft);
+
+      return { top, left, height, width }
+  }
+  </script>
 </body>
 </html>

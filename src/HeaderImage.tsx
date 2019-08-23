@@ -11,10 +11,10 @@ const headerImageStyle = css`
     }
 `;
 
-const HeaderImage = () => (
+const HeaderImage = ({ image, caption, credit }) => (
   <div css={headerImageStyle}>
-      <img src="https://i.guim.co.uk/img/media/90870ec12d9cb8af47d20a76457c9538e418ad78/0_0_3500_2101/master/3500.jpg?width=1920&quality=85&auto=format&fit=max&s=c499e394a551496ceef740b6d27bb896" />
-      < HeaderImageCaption />
+      <img src={image} />
+      < HeaderImageCaption caption={caption} credit={credit}/>
   </div>
 )
 

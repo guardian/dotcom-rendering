@@ -9,13 +9,13 @@ import Tags from './Tags';
 
 import { getPillarStyles } from './styles';
 
-const Article = ({ headline, standfirst, byline, body, tags, pillarId }) => {
+const Article = ({ headline, standfirst, byline, body, tags, pillarId, displayImages }) => {
     const pillarStyles = getPillarStyles(pillarId);
+    const {urlTemplate, cleanCaption, cleanCredit } = displayImages[0];
     // TODO: use context api to beam pillarStyles down to all components
-
     return (
         <React.Fragment>
-            <HeaderImage />
+            <HeaderImage image={urlTemplate} caption={cleanCaption} credit={cleanCredit}/>
             <ArticleHeadline headline={headline}/>
             <ArticleStandfirst standfirst={standfirst}/>
             <ArticleByline byline={byline} pillarStyles={pillarStyles}/>
