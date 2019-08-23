@@ -5,7 +5,7 @@ import InfoIcon from '@guardian/pasteup/icons/info.svg';
 import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 
 import { body, textSans, headline } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { TextStyle } from '@frontend/amp/components/elements/Text';
 
 const wrapper = (pillar: Pillar) => css`

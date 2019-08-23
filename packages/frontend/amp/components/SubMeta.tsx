@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { textSans, body } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import CommentIcon from '@guardian/pasteup/icons/comment.svg';
 

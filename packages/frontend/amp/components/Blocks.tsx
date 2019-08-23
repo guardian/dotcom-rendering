@@ -2,7 +2,7 @@ import React from 'react';
 import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { blockLink } from '@frontend/amp/lib/block-link';
 import { findBlockAdSlots } from '@frontend/amp/lib/find-adslots';
 import { textSans } from '@guardian/pasteup/typography';

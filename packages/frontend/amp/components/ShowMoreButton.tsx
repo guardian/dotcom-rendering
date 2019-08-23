@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/pasteup/typography';
 import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 

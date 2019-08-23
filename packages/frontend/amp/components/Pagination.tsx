@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import ChevronRightSingle from '@guardian/pasteup/icons/chevron-right-single.svg';
 import ChevronRightDouble from '@guardian/pasteup/icons/chevron-right-double.svg';
 import ChevronLeftSingle from '@guardian/pasteup/icons/chevron-left-single.svg';

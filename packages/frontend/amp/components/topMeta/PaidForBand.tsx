@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/pasteup/typography';
 import { mobileLandscape } from '@guardian/pasteup/breakpoints';
 import LabsLogo from '@guardian/pasteup/logos/the-guardian-labs.svg';
@@ -22,7 +22,7 @@ const headerStyle = css`
 `;
 
 const focusColor = css`
-    outline-color: ${palette.highlight.main};
+    outline-color: ${palette.yellow.main};
 `;
 
 const metaStyle = css`

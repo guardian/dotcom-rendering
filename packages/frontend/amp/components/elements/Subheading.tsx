@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';

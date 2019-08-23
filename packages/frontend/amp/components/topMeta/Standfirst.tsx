@@ -1,7 +1,7 @@
 import React from 'react';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 import { ListStyle, LinkStyle } from '@frontend/amp/components/elements/Text';

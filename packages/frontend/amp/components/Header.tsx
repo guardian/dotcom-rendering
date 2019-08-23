@@ -4,7 +4,7 @@ import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
 import { mobileLandscape, until } from '@guardian/pasteup/breakpoints';
 
@@ -113,7 +113,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
 `;
 
 const veggieStyles = css`
-    background-color: ${palette.highlight.main};
+    background-color: ${palette.yellow.main};
     color: ${palette.neutral[97]};
     height: 42px;
     min-width: 42px;

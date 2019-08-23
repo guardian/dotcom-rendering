@@ -2,7 +2,7 @@ import React from 'react';
 import { JsonScript } from './JsonScript';
 import { css, cx } from 'emotion';
 import { textSans } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import Tick from '@guardian/pasteup/icons/tick.svg';
 
 const consentUIStyle = css`
@@ -52,7 +52,7 @@ const buttonStyle = css`
 const acceptStyle = css`
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    background: ${palette.highlight.main};
+    background: ${palette.yellow.main};
     color: ${palette.neutral[7]};
     padding: 5px 20px;
     font-weight: bold;

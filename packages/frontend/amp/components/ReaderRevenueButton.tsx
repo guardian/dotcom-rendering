@@ -3,12 +3,12 @@ import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/pasteup/typography';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/pasteup/breakpoints';
 
 const supportStyles = css`
     align-self: flex-start;
-    background-color: ${palette.highlight.main};
+    background-color: ${palette.yellow.main};
     border-radius: 20px;
     display: flex;
     align-items: center;
