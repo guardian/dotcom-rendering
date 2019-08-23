@@ -9,10 +9,10 @@ const ArticleBylineCss = css`
     margin-bottom: 4px;
 `;
 
-const avatarCss = css`
+const avatarCss = ({ inverted }) => css`
     width: 68px;
     height: 68px;
-    background-color: #ff4e36;
+    background-color: ${inverted};
     border-radius: 100%;
     float: left;
     margin: 0 12px 12px 0;
@@ -26,11 +26,11 @@ const avatarCss = css`
     }
 `;
 
-const ArticleByline = ({ byline }) => (
-    <div>
+const ArticleByline = ({ byline, pillarStyles }) => (
+    <React.Fragment>
         <div css={ArticleBylineCss}></div>
         <div css={sideMargins}>
-            <div css={avatarCss}>
+            <div css={avatarCss(pillarStyles)}>
                 <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
             </div>
             <div>
@@ -39,7 +39,7 @@ const ArticleByline = ({ byline }) => (
                 <div>Follow Tom Phillips</div>
             </div>
         </div>
-    </div>
+    </React.Fragment>
 )
 
 export default ArticleByline;

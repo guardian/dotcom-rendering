@@ -1,15 +1,15 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { news, sideMargins } from './styles';
+import { sideMargins } from './styles';
 
-const articleBodyCss = css`
+const articleBodyCss = ({ kicker }) => css`
     a {
-        color: red;
+        color: ${kicker};
     }
 `;
 
-const ArticleBody = ({ body }) => (
-    <div css={[articleBodyCss, sideMargins]} dangerouslySetInnerHTML={{__html: body}} />
+const ArticleBody = ({ body, pillarStyles }) => (
+    <div css={[articleBodyCss(pillarStyles), sideMargins]} dangerouslySetInnerHTML={{__html: body}} />
 )
 
 export default ArticleBody;

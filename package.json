@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compileClient": "./node_modules/.bin/babel ./src/ --extensions '.tsx' --watch --out-dir dist && ./node_modules/.bin/babel ./src/ --extensions '.ts' --out-dir dist"
+    "compileClient": "./node_modules/.bin/babel ./src/ --extensions '.tsx','.ts' --watch --out-dir dist"
   },
   "author": "",
   "license": "ISC",

@@ -6,15 +6,20 @@ import ArticleStandfirst from './ArticleStandfirst';
 import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 
+import { getPillarStyles } from './styles';
+
 const Article = ({ headline, standfirst, byline, body, tags, pillarId }) => {
+    const pillarStyles = getPillarStyles(pillarId);
+    // TODO: use context api to beam pillarStyles down to all components
+
     return (
-        <div>
+        <React.Fragment>
             <HeaderImage />
             <ArticleHeadline headline={headline}/>
             <ArticleStandfirst standfirst={standfirst}/>
-            <ArticleByline byline={byline}/>
-            <ArticleBody body={body}/>
-        </div>
+            <ArticleByline byline={byline} pillarStyles={pillarStyles}/>
+            <ArticleBody body={body} pillarStyles={pillarStyles}/>
+        </React.Fragment>
     )
 }
 
