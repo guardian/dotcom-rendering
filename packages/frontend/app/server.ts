@@ -9,8 +9,14 @@ import {
 } from './aws/aws-parameters';
 import { dist, root, port } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
-import { render as renderAMPArticle } from '@frontend/amp/server/render';
-import { render as renderArticle } from '@frontend/web/server/render';
+import {
+    render as renderAMPArticle,
+    renderPerfTest as renderAMPArticlePerfTest,
+} from '@frontend/amp/server/render';
+import {
+    render as renderArticle,
+    renderPerfTest as renderArticlePerfTest,
+} from '@frontend/web/server/render';
 import { logger } from './logging';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
@@ -62,6 +68,9 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/Article', renderArticle);
     app.use('/AMPArticle', renderAMPArticle);
 
+    app.use('/ArticlePerfTest', renderArticlePerfTest);
+    app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
+
     app.get('/', (req, res) => {
         try {
             res.send(`
@@ -71,7 +80,12 @@ if (process.env.NODE_ENV === 'production') {
                     <ul>
                         <li><a href="/Article">Article</a></li>
                         <li><a href="/AMPArticle">⚡️Article</a></li>
-
+                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
+                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
+                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
                     </ul>
                 </body>
                 </html>
