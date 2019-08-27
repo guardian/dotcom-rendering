@@ -5609,26 +5609,26 @@ cosmiconfig@^5.0.0, cosmiconfig@^5.2.0, cosmiconfig@^5.2.1:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cp-file@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/cp-file/-/cp-file-5.0.0.tgz#bc700fd30ca32d24d46c7fb02b992e435fc5a978"
-  integrity sha1-vHAP0wyjLSTUbH+wK5kuQ1/FqXg=
+cp-file@^6.1.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/cp-file/-/cp-file-6.2.0.tgz#40d5ea4a1def2a9acdd07ba5c0b0246ef73dc10d"
+  integrity sha512-fmvV4caBnofhPe8kOcitBwSn2f39QLjnAnGq3gO9dfd75mUytzKNZB1hde6QHunW2Rt+OwuBOMc3i1tNElbszA==
   dependencies:
     graceful-fs "^4.1.2"
-    make-dir "^1.0.0"
+    make-dir "^2.0.0"
     nested-error-stacks "^2.0.0"
-    pify "^3.0.0"
+    pify "^4.0.1"
     safe-buffer "^5.0.1"
 
-cpy@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/cpy/-/cpy-6.0.0.tgz#0b6888e037bb5a7b02a62249551316208a523253"
-  integrity sha512-7uBKHhKOFgjCVx6Vv2gx/LqdrM9F7l0vunzmyS3CdStn3U02H1ehhS1SCpZ1qJFZqPi40IMUWAPkN/nQ4RXAiA==
+cpy@^7.0.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/cpy/-/cpy-7.3.0.tgz#62f2847986b4ff9d029710568a49e9a9ab5a210e"
+  integrity sha512-auvDu6h/J+cO1uqV40ymL/VoPM0+qPpNGaNttTzkYVXO/+GeynuyAK/MwFcWgU/P82ezcZw7RaN34CIIWajKLA==
   dependencies:
     arrify "^1.0.1"
-    cp-file "^5.0.0"
-    globby "^6.0.0"
-    nested-error-stacks "^2.0.0"
+    cp-file "^6.1.0"
+    globby "^9.2.0"
+    nested-error-stacks "^2.1.0"
 
 create-ecdh@^4.0.0:
   version "4.0.3"
@@ -8698,7 +8698,7 @@ globby@8.0.2:
     pify "^3.0.0"
     slash "^1.0.0"
 
-globby@^6.0.0, globby@^6.1.0:
+globby@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/globby/-/globby-6.1.0.tgz#f5a6d70e8395e21c858fb0489d64df02424d506c"
   integrity sha1-9abXDoOV4hyFj7BInWTfAkJNUGw=
@@ -12600,7 +12600,7 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-nested-error-stacks@^2.0.0:
+nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
