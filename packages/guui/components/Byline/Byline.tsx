@@ -97,23 +97,29 @@ export const Byline: React.FC<{
     author: AuthorType;
     tags: TagType[];
     pillar: Pillar;
-}> = ({ author, tags, pillar }) => (
-    <address aria-label="Contributor info">
-        <RenderByline
-            bylineText={author.byline}
-            contributorTags={tags}
-            pillar={pillar}
-        />
-        {author.twitterHandle && (
-            <div className={twitterHandle}>
-                <TwitterIcon />
-                <a
-                    href={`https://www.twitter.com/${author.twitterHandle}`}
-                    aria-label={`@${author.twitterHandle} on Twitter`}
-                >
-                    @{author.twitterHandle}
-                </a>
-            </div>
-        )}
-    </address>
-);
+}> = ({ author, tags, pillar }) => {
+    if (!author.byline) {
+        return null;
+    }
+
+    return (
+        <address aria-label="Contributor info">
+            <RenderByline
+                bylineText={author.byline}
+                contributorTags={tags}
+                pillar={pillar}
+            />
+            {author.twitterHandle && (
+                <div className={twitterHandle}>
+                    <TwitterIcon />
+                    <a
+                        href={`https://www.twitter.com/${author.twitterHandle}`}
+                        aria-label={`@${author.twitterHandle} on Twitter`}
+                    >
+                        @{author.twitterHandle}
+                    </a>
+                </div>
+            )}
+        </address>
+    );
+};

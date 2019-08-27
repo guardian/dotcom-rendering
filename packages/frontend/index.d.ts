@@ -112,7 +112,7 @@ interface NavType {
 }
 
 interface AuthorType {
-    byline: string;
+    byline?: string;
     twitterHandle?: string;
     email?: string;
 }
