@@ -1273,10 +1273,7 @@
                 "email": {
                     "type": "string"
                 }
-            },
-            "required": [
-                "byline"
-            ]
+            }
         },
         "Edition": {
             "enum": [
