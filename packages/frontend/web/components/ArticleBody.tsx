@@ -138,6 +138,10 @@ const standfirst = css`
     p {
         margin-bottom: 8px;
     }
+
+    li {
+        ${headline(2)};
+    }
 `;
 
 const standfirstLinks = pillarMap(
