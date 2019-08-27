@@ -58,3 +58,9 @@ export const pillarColours = {
         liveblogBackground: '#7d0068'
     }
 };
+
+export const textSans = "font-family: 'Guardian Text Sans Web';"
+
+export const headlineLight = "font-family: 'Guardian Headline Light';"
+
+export const icons = "font-family: 'Guardian Icons';"

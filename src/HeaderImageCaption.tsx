@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { basePx, colours } from './styles';
+import { basePx, colours, textSans, icons } from './styles';
 
 const toggleStyle = css`
   input[type=checkbox] {
@@ -8,7 +8,7 @@ const toggleStyle = css`
   }
 
   label { 
-    line-height: 34px;
+    line-height: ${basePx(4)};
     text-align: center;
     background-color: ${colours.yellow};
     color: ${colours.black};
@@ -21,6 +21,12 @@ const toggleStyle = css`
     border-radius: 100%;
     z-index: 2;
     font-size: 2.8rem;
+
+    &::before {
+      ${icons}
+      content: "\\e044";
+      font-size: 16px;
+    }
   }
 
   label::selection,
@@ -39,7 +45,6 @@ const toggleStyle = css`
     max-height: 999px;
     background-color: rgba(0, 0, 0, 0.8);
     padding: ${basePx(1)};
-    max-height: 0;
     overflow: hidden;
     position: absolute;
     left: 0;
@@ -48,12 +53,13 @@ const toggleStyle = css`
     padding-right: 48px;
     z-index: 1;
     color: ${colours.white};
+    ${textSans}
   }
 `;
 
 const HeaderImageCaption = ({ caption, credit }) => (
   <div css={toggleStyle}>
-    <label htmlFor="captionToggle">+</label>
+    <label htmlFor="captionToggle"></label>
     <input type="checkbox" id="captionToggle"/>
     <div>
       <span>{caption}</span>

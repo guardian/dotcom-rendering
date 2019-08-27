@@ -1,11 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins } from './styles';
+import { sideMargins, textSans } from './styles';
 
 const tagsCss = css`
     display: block;
     list-style: none;
     padding: 8px 0 16px 0;
+    ${textSans}
 
     li {
         margin: 8px 8px 4px 0;

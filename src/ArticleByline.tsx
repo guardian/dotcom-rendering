@@ -1,5 +1,5 @@
 import React from 'react';
-import { sideMargins } from './styles';
+import { sideMargins, textSans } from './styles';
 import { css } from '@emotion/core'
 
 const ArticleBylineCss = css`
@@ -26,6 +26,20 @@ const avatarCss = ({ inverted }) => css`
     }
 `;
 
+const ArticleBylineAuthorCss = ({ kicker }) => css`
+    .byline, .follow {
+        color: ${kicker};
+    }
+
+    .date, .follow {
+        ${textSans}
+    }
+
+    .follow {
+        text-decoration: underline;
+    }
+`;
+
 const ArticleByline = ({ byline, pillarStyles }) => (
     <React.Fragment>
         <div css={ArticleBylineCss}></div>
@@ -33,10 +47,10 @@ const ArticleByline = ({ byline, pillarStyles }) => (
             <div css={avatarCss(pillarStyles)}>
                 <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
             </div>
-            <div>
-                <div>{ byline }</div>
-                <div>01:45 Wednesday, 21 August 2019</div>
-                <div>Follow Tom Phillips</div>
+            <div css={ArticleBylineAuthorCss(pillarStyles)}>
+                <div className="byline">{ byline }</div>
+                <div className="date">01:45 Wednesday, 21 August 2019</div>
+                <div className="follow">Follow Tom Phillips</div>
             </div>
         </div>
     </React.Fragment>
