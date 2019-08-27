@@ -13,6 +13,22 @@ module.exports = {
                 lintFile: './tslint.json', // path to tslint.json of your project
             },
         ],
-        'dcr/only-import-below': 1        
+        'dcr/only-import-below': [
+            'warn',            
+            {
+                allowedImports: [
+                    "react",
+                    "emotion",
+                    "jsdom",
+                    "curlyquotes",
+                    "react-dom",
+                    "@guardian/pasteup",
+                    "@frontend/lib/",
+                    "@frontend/amp/lib/",
+                    "@testing-library",
+                    "@root/packages/frontend/amp/lib/"
+                ]
+            }
+        ]
     },
 };
