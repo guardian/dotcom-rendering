@@ -126,6 +126,10 @@ clear: # private
 gen-schema:
 	@node scripts/json-schema/gen-schema.js
 
+perf-test:
+	@command -v fast
+	fast --start-cmd 'make build;make start' --stop-cmd 'make stop' --target-url http://localhost:9000/ArticlePerfTest
+
 # packages #########################################
 
 publish-pasteup: clear install
