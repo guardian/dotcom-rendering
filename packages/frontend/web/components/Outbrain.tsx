@@ -10,7 +10,7 @@ interface OutbrainSelectors {
 }
 
 const shouldDisplayOutbrain = (config: ConfigType): boolean => {
-    return shouldDisplayAdvertisements();
+    return shouldDisplayAdvertisements(config);
 };
 
 type OutbrainSelectorsType = 'outbrain' | 'merchandising' | 'nonCompliant';
