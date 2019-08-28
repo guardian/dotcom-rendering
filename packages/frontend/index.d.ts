@@ -220,7 +220,7 @@ interface ConfigType {
     sentryPublicApiKey: string;
     sentryHost: string;
     switches: { [key: string]: boolean };
-    abTests?: { [key: string]: string };
+    abTests: { [key: string]: string };
     dfpAccountId: string;
     commercialBundleUrl: string;
     revisionNumber: string;

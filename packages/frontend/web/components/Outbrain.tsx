@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Container } from '@guardian/guui';
+import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 
 interface OutbrainSelectors {
     widget: string;
@@ -9,7 +10,7 @@ interface OutbrainSelectors {
 }
 
 const shouldDisplayOutbrain = (config: ConfigType): boolean => {
-    return config.switches.outbrainDCRTest;
+    return shouldDisplayAdvertisements(config);
 };
 
 type OutbrainSelectorsType = 'outbrain' | 'merchandising' | 'nonCompliant';
