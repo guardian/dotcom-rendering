@@ -1,6 +1,20 @@
 // tslint:disable:react-no-dangerous-html
 
 import React from 'react';
+import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
+
+export interface AdSlotParameters {
+    name: string;
+    adTypes: string[];
+    sizeMapping: {
+        [key: string]: string[];
+    };
+    showLabel?: boolean;
+    refresh?: boolean;
+    outOfPage?: boolean;
+    optId?: string;
+    optClassNames?: string[];
+}
 
 export interface AdSlotInputSizeMappings {
     [key: string]: string[];
@@ -32,7 +46,7 @@ export const makeClassNames = (
     return baseClassNames.concat(adTypeClassNames, optClassNames).join(' ');
 };
 
-export const AdSlot: React.FC<{
+export const AdSlotCore: React.FC<{
     name: string;
     adTypes: string[];
     sizeMapping: AdSlotInputSizeMappings;
@@ -68,6 +82,27 @@ export const AdSlot: React.FC<{
             // {...getOptionalProps()}
             {...sizeMappings}
             aria-hidden="true"
+        />
+    );
+};
+
+export const AdSlot: React.FC<{
+    asps: AdSlotParameters;
+    config: ConfigType;
+}> = ({ asps, config }) => {
+    if (!shouldDisplayAdvertisements(config)) {
+        return null;
+    }
+    return (
+        <AdSlotCore
+            name={asps.name}
+            adTypes={asps.adTypes}
+            sizeMapping={asps.sizeMapping}
+            showLabel={asps.showLabel}
+            refresh={asps.refresh}
+            outOfPage={asps.outOfPage}
+            optId={asps.optId}
+            optClassNames={asps.optClassNames}
         />
     );
 };
