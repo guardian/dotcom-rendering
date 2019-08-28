@@ -43,7 +43,7 @@ const copyStatic = () => {
         ['**/*'],
         path.resolve(target, `${siteName}-static`, 'guui', 'static', siteName),
         {
-            cwd: path.resolve(root, siteName, 'static'),
+            cwd: path.resolve(root, 'packages', siteName, 'static'),
             parents: true,
             nodir: true,
         },

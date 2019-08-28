@@ -92,7 +92,7 @@
     "dependencies": {
         "chalk": "^2.4.0",
         "columnify": "^1.5.4",
-        "cpy": "^6.0.0",
+        "cpy": "^7.0.0",
         "execa": "^0.10.0",
         "filesizegzip": "^2.0.0",
         "inquirer": "^5.2.0",
