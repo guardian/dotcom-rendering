@@ -93,16 +93,5 @@ export const AdSlot: React.FC<{
     if (!shouldDisplayAdvertisements(config)) {
         return null;
     }
-    return (
-        <AdSlotCore
-            name={asps.name}
-            adTypes={asps.adTypes}
-            sizeMapping={asps.sizeMapping}
-            showLabel={asps.showLabel}
-            refresh={asps.refresh}
-            outOfPage={asps.outOfPage}
-            optId={asps.optId}
-            optClassNames={asps.optClassNames}
-        />
-    );
+    return <AdSlotCore {...asps} />;
 };
