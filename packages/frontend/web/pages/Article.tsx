@@ -12,7 +12,7 @@ import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { adSlotParameters } from '@frontend/model/advertisement';
-import { AdSlot } from '@frontend//web/components/AdSlot';
+import { AdSlot } from '@frontend/web/components/AdSlot';
 
 // TODO: find a better of setting opacity
 const secondaryColumn = css`

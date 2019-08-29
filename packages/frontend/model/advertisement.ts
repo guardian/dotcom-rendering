@@ -1,4 +1,4 @@
-import { AdSlotParameters } from '@frontend//web/components/AdSlot';
+import { AdSlotParameters } from '@frontend/web/components/AdSlot';
 
 // We are using this function to control the activation of the commercial features
 // Currently it reports that the user has opted in to a 0% AB test.
