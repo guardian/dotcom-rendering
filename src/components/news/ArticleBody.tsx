@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins, textSans, headlineLight, icons } from './styles';
+import { sideMargins, textSans, headlineLight, icons } from '../../styles';
 
 const articleBodyCss = ({ kicker }) => css`
     a {
@@ -68,6 +68,20 @@ const articleBodyCss = ({ kicker }) => css`
             height: 1.2rem;
             border-radius: .6rem;
             display: inline-block;
+        }
+    }
+
+    h2 {
+        margin: 0 0 8px 0;
+
+        & + p {
+            margin-top: 0;
+        }
+    }
+
+    .element-video {
+        iframe {
+            width: 100%
         }
     }
 `;

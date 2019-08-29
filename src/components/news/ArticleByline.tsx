@@ -1,5 +1,5 @@
 import React from 'react';
-import { sideMargins, textSans } from './styles';
+import { sideMargins, textSans } from '../../styles';
 import { css } from '@emotion/core'
 
 const ArticleBylineCss = css`

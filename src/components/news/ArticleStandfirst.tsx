@@ -1,5 +1,5 @@
 import React from 'react';
-import { sideMargins } from './styles';
+import { sideMargins } from '../../styles';
 import { css } from '@emotion/core'
 
 const articleStandfirst = css`

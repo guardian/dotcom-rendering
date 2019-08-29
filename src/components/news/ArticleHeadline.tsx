@@ -1,5 +1,5 @@
 import React from 'react';
-import { basePx, sideMargins } from './styles';
+import { basePx, sideMargins } from '../../styles';
 import { css } from '@emotion/core'
 
 const ArticleHeadlineCss = css`

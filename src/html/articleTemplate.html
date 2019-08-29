@@ -9,26 +9,27 @@
     <style>
       @font-face {
         font-family: "Guardian Egyptian Web";
-        src: url('/public/egyptiantext-regular.otf');
+        src: url('/public/fonts/egyptiantext-regular.otf');
       }
 
       @font-face {
         font-family: "Guardian Text Sans Web";
-        src: url('/public/GuardianSansWeb-Regular.ttf');
+        src: url('/public/fonts/GuardianSansWeb-Regular.ttf');
       }
 
       @font-face {
         font-family: "Guardian Headline Light";
-        src: url('/public/GHGuardianHeadline-Light.ttf');
+        src: url('/public/fonts/GHGuardianHeadline-Light.ttf');
       }
 
       @font-face {
         font-family: "Guardian Icons";
-        src: url('/public/icons.otf');
+        src: url('/public/fonts/icons.otf');
       }
 
       html {
           font-size: 62.5%;
+          background: white;
       }
 
       body {
@@ -52,35 +53,44 @@
   <div id="root"></div>
   <script>
     // common.js
-    Array.from(document.querySelectorAll('figure.element-image')).map(figure => {
-      const height = getDesiredImageHeight(figure);
-      figure.querySelector('img').height = height;
-    });
+    window.addEventListener('resize', formatBodyImages);
 
-    function getDesiredImageHeight(figure) {
-        const elem = figure.getElementsByTagName('img')[0] || figure.getElementsByClassName('element-image-inner')[0];
-        const imgWidth = elem.getAttribute('width');
-        const imgHeight = elem.getAttribute('height');
-        const figInnerWidth = getElementOffset(figure).width;
-        const scale = figInnerWidth / imgWidth;
-        const newHeight = imgHeight * scale;
-
-        return Math.round(newHeight);
-    }
-
-    function getElementOffset(elem) {
-        const bcr = elem.getBoundingClientRect();
-        const scroll = {
-            x: window.pageXOffset || document.documentElement.scrollLeft,
-            y: window.pageYOffset || document.documentElement.scrollTop
+    function formatBodyImages() {
+      Array.from(document.querySelectorAll('figure.element-image img')).map(image => {
+        if (!image.getAttribute('originalHeight')) {
+          image.setAttribute('originalHeight', image.getAttribute('height'));
+          image.setAttribute('originalWidth', image.getAttribute('width'));
         }
-        const width = elem.offsetWidth;
-        const height = elem.offsetHeight;
-        const top = bcr.top + scroll.y - Math.max(0, document.body.clientTop);
-        const left = bcr.left + scroll.x - Math.max(0, document.body.clientLeft);
 
-        return { top, left, height, width }
+        image.height = getDesiredImageHeight(image);
+      });
+
+      function getDesiredImageHeight(img) {
+          const imgWidth = img.getAttribute('originalWidth');
+          const imgHeight = img.getAttribute('originalHeight');
+          const figInnerWidth = getElementOffset(img).width;
+          const scale = figInnerWidth / imgWidth;
+          const newHeight = imgHeight * scale;
+
+          return Math.round(newHeight);
+      }
+
+      function getElementOffset(elem) {
+          const bcr = elem.getBoundingClientRect();
+          const scroll = {
+              x: window.pageXOffset || document.documentElement.scrollLeft,
+              y: window.pageYOffset || document.documentElement.scrollTop
+          }
+          const width = elem.offsetWidth;
+          const height = elem.offsetHeight;
+          const top = bcr.top + scroll.y - Math.max(0, document.body.clientTop);
+          const left = bcr.left + scroll.x - Math.max(0, document.body.clientLeft);
+
+          return { top, left, height, width }
+      }
     }
+
+    formatBodyImages();
   </script>
 </body>
 </html>

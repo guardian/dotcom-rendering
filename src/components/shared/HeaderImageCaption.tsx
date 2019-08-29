@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { basePx, colours, textSans, icons } from './styles';
+import { basePx, colours, textSans, icons } from '../../styles';
 
 const toggleStyle = css`
   input[type=checkbox] {

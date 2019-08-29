@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins, textSans } from './styles';
+import { sideMargins, textSans } from '../../styles';
 
 const tagsCss = css`
     display: block;
