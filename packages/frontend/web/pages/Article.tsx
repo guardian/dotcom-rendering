@@ -10,6 +10,8 @@ import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
+import { adSlotParameters } from '@frontend/model/advertisement';
+import { AdSlot } from '@frontend/web/components/AdSlot';
 
 // TODO: find a better of setting opacity
 const secondaryColumn = css`
@@ -56,7 +58,12 @@ export const Article: React.FC<{
             <Container borders={true} className={articleContainer}>
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
-                    <div className={secondaryColumn} />
+                    <div className={secondaryColumn}>
+                        <AdSlot
+                            asps={adSlotParameters()}
+                            config={data.config}
+                        />
+                    </div>
                 </article>
             </Container>
             <OutbrainContainer config={data.config} />
@@ -72,7 +79,6 @@ export const Article: React.FC<{
                 <MostViewed sectionName={data.CAPI.sectionName} />
             </Container>
         </main>
-
         <SubNav
             subnav={data.NAV.subNavSections}
             pillar={data.CAPI.pillar}
@@ -86,7 +92,6 @@ export const Article: React.FC<{
             pillar={data.CAPI.pillar}
             pillars={data.NAV.pillars}
         />
-
         <CookieBanner />
     </div>
 );

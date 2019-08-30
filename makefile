@@ -126,6 +126,9 @@ clear: # private
 gen-schema:
 	@node scripts/json-schema/gen-schema.js
 
+perf-test:
+	@node scripts/perf/perf-test.js
+
 # packages #########################################
 
 publish-pasteup: clear install
