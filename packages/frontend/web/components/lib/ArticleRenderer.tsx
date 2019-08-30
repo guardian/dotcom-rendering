@@ -32,13 +32,7 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
-                    return (
-                        <TweetBlockComponent
-                            key={i}
-                            element={element}
-                            pillar={pillar}
-                        />
-                    );
+                    return <TweetBlockComponent key={i} element={element} />;
                 default:
                     return null;
             }
