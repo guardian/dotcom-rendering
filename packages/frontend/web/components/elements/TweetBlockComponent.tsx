@@ -3,9 +3,7 @@ import React from 'react';
 // tslint:disable:react-no-dangerous-html
 export const TweetBlockComponent: React.FC<{
     element: TweetBlockElement;
-    pillar: Pillar;
-}> = ({ element, pillar }) => {
-    // return <div dangerouslySetInnerHTML={{ __html: element.html }} />;
+}> = ({ element }) => {
     return (
         <div>
             <div dangerouslySetInnerHTML={{ __html: element.html }} />

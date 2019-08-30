@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { body } from '@guardian/pasteup/typography';
 // tslint:disable:react-no-dangerous-html
 
-export const para = css`
+const para = css`
     p {
         margin-bottom: 16px;
         ${body(2)};
