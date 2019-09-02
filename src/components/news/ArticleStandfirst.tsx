@@ -10,7 +10,12 @@ const articleStandfirst = css`
     }
 `;
 
-const ArticleStandfirst = ({ standfirst, feature }) => (
+interface ArticleStandfirstProps {
+    standfirst: string;
+    feature: boolean;
+}
+
+const ArticleStandfirst = ({ standfirst, feature }: ArticleStandfirstProps) => (
     <div css={[sideMargins, articleStandfirst]} dangerouslySetInnerHTML={{__html: standfirst}}></div>
 )
 

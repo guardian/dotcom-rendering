@@ -11,7 +11,13 @@ const headerImageStyle = css`
     }
 `;
 
-const HeaderImage = ({ image, caption, credit }) => (
+interface HeaderImageProps {
+    image: string;
+    caption: string;
+    credit: string;
+}
+
+const HeaderImage = ({ image, caption, credit }: HeaderImageProps) => (
   <div css={headerImageStyle}>
       <img src={image} />
       < HeaderImageCaption caption={caption} credit={credit}/>

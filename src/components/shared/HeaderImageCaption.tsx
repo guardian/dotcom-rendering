@@ -57,7 +57,12 @@ const toggleStyle = css`
   }
 `;
 
-const HeaderImageCaption = ({ caption, credit }) => (
+interface HeaderImageCaptionProps {
+  caption: string;
+  credit: string;
+}
+
+const HeaderImageCaption = ({ caption, credit }: HeaderImageCaptionProps) => (
   <div css={toggleStyle}>
     <label htmlFor="captionToggle"></label>
     <input type="checkbox" id="captionToggle"/>

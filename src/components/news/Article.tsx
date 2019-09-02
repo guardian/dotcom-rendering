@@ -9,7 +9,33 @@ import Tags from '../shared/Tags';
 
 import { getPillarStyles } from '../../styles';
 
-const Article = ({ headline, standfirst, byline, body, metadata, pillarId, displayImages }) => {
+interface ArticleProps {
+    headline: string;
+    standfirst: string;
+    byline: string;
+    body: string;
+    metadata: Metadata;
+    pillarId: string;
+    displayImages: DisplayImage[];
+};
+
+interface Tag {
+    webUrl: string;
+    webTitle: string;
+}
+
+interface Metadata {
+    feature: boolean;
+    tags: Tag[];
+};
+
+interface DisplayImage {
+    urlTemplate: string;
+    cleanCaption: string;
+    cleanCredit: string;
+};
+
+const Article = ({ headline, standfirst, byline, body, metadata, pillarId, displayImages }: ArticleProps) => {
     const pillarStyles = getPillarStyles(pillarId);
     const { urlTemplate, cleanCaption, cleanCredit } = displayImages[0];
     const { feature, tags } = metadata;

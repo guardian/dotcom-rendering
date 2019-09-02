@@ -25,7 +25,16 @@ const tagsCss = css`
     }
 `;
 
-const Tags = ({ tags }) => (
+interface Tag {
+    webUrl: string;
+    webTitle: string;
+}
+
+interface TagsProps {
+    tags: Tag[];
+}
+
+const Tags = ({ tags }: TagsProps) => (
     <ul css={[tagsCss, sideMargins]}>
         {tags.map((tag, index) => {
             return <li key={index}>

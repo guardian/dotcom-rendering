@@ -1,5 +1,5 @@
 import React from 'react';
-import { sideMargins, textSans } from '../../styles';
+import { sideMargins, textSans, PillarStyles } from '../../styles';
 import { css } from '@emotion/core'
 
 const ArticleBylineCss = css`
@@ -9,7 +9,7 @@ const ArticleBylineCss = css`
     margin-bottom: 4px;
 `;
 
-const avatarCss = ({ inverted }) => css`
+const avatarCss = ({ inverted }: PillarStyles) => css`
     width: 68px;
     height: 68px;
     background-color: ${inverted};
@@ -26,7 +26,7 @@ const avatarCss = ({ inverted }) => css`
     }
 `;
 
-const ArticleBylineAuthorCss = ({ kicker }) => css`
+const ArticleBylineAuthorCss = ({ kicker }: PillarStyles) => css`
     .byline, .follow {
         color: ${kicker};
     }
@@ -40,7 +40,13 @@ const ArticleBylineAuthorCss = ({ kicker }) => css`
     }
 `;
 
-const ArticleByline = ({ byline, pillarStyles, feature }) => (
+interface ArticleBylineProps {
+    byline: string;
+    pillarStyles: PillarStyles;
+    feature: boolean;
+}
+
+const ArticleByline = ({ byline, pillarStyles, feature }: ArticleBylineProps) => (
     <React.Fragment>
         <div css={ArticleBylineCss}></div>
         <div css={sideMargins}>

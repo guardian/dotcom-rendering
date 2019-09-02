@@ -1,8 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins, textSans, headlineLight, icons } from '../../styles';
+import { sideMargins, textSans, headlineLight, icons, PillarStyles } from '../../styles';
 
-const articleBodyCss = ({ kicker }) => css`
+const articleBodyCss = ({ kicker }: PillarStyles) => css`
     a {
         color: ${kicker};
     }
@@ -86,7 +86,13 @@ const articleBodyCss = ({ kicker }) => css`
     }
 `;
 
-const ArticleBody = ({ body, pillarStyles, feature }) => (
+interface ArticleBodyProps {
+    body: string;
+    pillarStyles: PillarStyles;
+    feature: boolean;
+}
+
+const ArticleBody = ({ body, pillarStyles, feature }: ArticleBodyProps) => (
     <div css={[articleBodyCss(pillarStyles), sideMargins]} dangerouslySetInnerHTML={{__html: body}} />
 )
 
