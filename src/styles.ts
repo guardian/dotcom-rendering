@@ -16,7 +16,7 @@ export const sideMargins = {
     margin: basePx(0, 1)
 };
 
-type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
+export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
 
 interface PillarStyles {
     kicker: string;

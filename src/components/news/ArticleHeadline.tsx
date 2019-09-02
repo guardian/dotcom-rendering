@@ -1,13 +1,14 @@
 import React from 'react';
 import { basePx, sideMargins } from '../../styles';
-import { css } from '@emotion/core'
+import styled from '@emotion/styled';
 
-const ArticleHeadlineCss = css`
+const Headline = styled.h1`
     padding: ${basePx(1, 0, 4, 0)};
     color: #121212;
     font-weight: 500;
     font-size: 2.8rem;
     line-height: 3.2rem;
+    ${sideMargins}
 `;
 
 interface ArticleHeadlineProps {
@@ -16,7 +17,7 @@ interface ArticleHeadlineProps {
 }
 
 const ArticleHeadline = ({ headline, feature }: ArticleHeadlineProps) => (
-    <h1 css={[ArticleHeadlineCss, sideMargins]}>{headline}</h1>
+    <Headline>{headline}</Headline>
 )
 
 export default ArticleHeadline;
