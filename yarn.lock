@@ -1175,10 +1175,10 @@
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
-"@guardian/src-foundations@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.0.9.tgz#14946339deb8e0a80f4dc73661087ad22ad92ad4"
-  integrity sha512-6mek0gLh3NlWu+SnozZqnIyZmGKv8ZHDdJxLZG7Nfj2y79ptIR6L0D38uzY4hARKXO4/5fw6GJQ5OMRES8SGnw==
+"@guardian/src-foundations@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.0.13.tgz#c5cd659e9f255712dae091ace091183371ab4a51"
+  integrity sha512-KlqcnMAl4lCMI9x/SkhlPWLuvk/VfBAqtfPsARJaD/7sjwh3JB+YfWLKaKmWJhQuGO2qB7Lwh9m+qcaesJRrAw==
 
 "@hapi/address@2.x.x":
   version "2.0.0"
