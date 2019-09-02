@@ -16,7 +16,7 @@ export const sideMargins = {
     margin: basePx(0, 1)
 };
 
-export const getPillarStyles = (pillarId: string): PillarStyles  => {
+export const getPillarStyles = (pillarId: string) => {
     const pillar = pillarId.replace('pillar/', '');
     return pillarColours[pillar];
 }
@@ -29,7 +29,11 @@ export interface PillarStyles {
     liveblogBackground: string;
 }
 
-export const pillarColours = {
+interface pillarColours {
+    [pillar: string]: object;
+}
+
+export const pillarColours: pillarColours = {
     news: {
         kicker: '#c70000',
         featureHeadline: '#880105',
