@@ -16,12 +16,9 @@ export const sideMargins = {
     margin: basePx(0, 1)
 };
 
-export const getPillarStyles = (pillarId: string) => {
-    const pillar = pillarId.replace('pillar/', '');
-    return pillarColours[pillar];
-}
+type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
 
-export interface PillarStyles {
+interface PillarStyles {
     kicker: string;
     featureHeadline: string;
     soft: string;
@@ -29,11 +26,16 @@ export interface PillarStyles {
     liveblogBackground: string;
 }
 
-interface pillarColours {
-    [pillar: string]: object;
+interface PillarColours {
+    [pillar: string]: PillarStyles;
 }
 
-export const pillarColours: pillarColours = {
+export function getPillarStyles(pillarId: PillarId): PillarStyles {
+    const pillar = pillarId.replace('pillar/', '');
+    return pillarColours[pillar];
+}
+
+export const pillarColours: PillarColours = {
     news: {
         kicker: '#c70000',
         featureHeadline: '#880105',
