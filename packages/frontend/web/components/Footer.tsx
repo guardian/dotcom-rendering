@@ -15,6 +15,7 @@ import { Container } from '@guardian/guui';
 import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
 import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
+import { BackToTop } from './BackToTop';
 
 // CSS vars
 const emailSignupSideMargins = 10;
@@ -169,6 +170,10 @@ const readerRevenueLinks = css`
 const copyright = css`
     ${textSans(1)};
     padding: 12px;
+
+    ${until.tablet} {
+        margin-top: 11px;
+    }
 `;
 
 const footerItemContainers = css`
@@ -178,7 +183,16 @@ const footerItemContainers = css`
 
     width: 100%;
     padding: 0 ${footerItemContainerPadding}px;
+    position: relative;
     border: ${footerBorders};
+`;
+
+const bttPosition = css`
+    background-color: ${palette.brand.main};
+    padding: 0 5px;
+    position: absolute;
+    bottom: -21px;
+    right: 20px;
 `;
 
 const FooterLinks: React.FC<{
@@ -259,6 +273,9 @@ export const Footer: React.FC<{
                     edition={edition}
                     pageFooter={pageFooter}
                 />
+                <div className={bttPosition}>
+                    <BackToTop />
+                </div>
             </div>
             <div className={copyright}>
                 © {year} Guardian News & Media Limited or its affiliated

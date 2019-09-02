@@ -7,7 +7,6 @@ import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { ArticleBody } from '@frontend/web/components/ArticleBody';
-import { BackToTop } from '@frontend/web/components/BackToTop';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
@@ -85,7 +84,7 @@ export const Article: React.FC<{
             pillar={data.CAPI.pillar}
             currentNavLink={data.NAV.currentNavLink}
         />
-        <BackToTop />
+
         <Footer
             nav={data.NAV}
             edition={data.CAPI.editionId}
