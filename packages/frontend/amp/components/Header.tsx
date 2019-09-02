@@ -4,9 +4,8 @@ import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
-import { palette } from '@guardian/src-foundations';
+import { palette, mq } from '@guardian/src-foundations';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
-import { mobileLandscape, until } from '@guardian/pasteup/breakpoints';
 
 const headerStyles = css`
     background-color: ${palette.brand.main};
@@ -30,7 +29,7 @@ const logoStyles = css`
         fill: ${palette.neutral[100]};
     }
 
-    ${until.mobileMedium} {
+    ${mq({ until: 'mobileMedium' })} {
         height: 44px;
         width: 135px;
         margin-bottom: 24px;
@@ -58,7 +57,7 @@ const pillarListItemStyle = css`
             }
         }
 
-        ${until.mobileLandscape} {
+        ${mq({ until: 'mobileLandscape' })} {
             a {
                 padding-left: 10px;
             }
@@ -80,7 +79,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     font-weight: 900;
     font-size: 15.4px;
 
-    ${mobileLandscape} {
+    ${mq({ from: 'mobileLandscape' })} {
         font-size: 18px;
         padding: 7px 4px 0;
     }
@@ -125,11 +124,11 @@ const veggieStyles = css`
     right: 20px;
     position: absolute;
 
-    ${until.mobileMedium} {
+    ${mq({ until: 'mobileMedium' })} {
         bottom: 50px;
     }
 
-    ${until.mobileLandscape} {
+    ${mq({ until: 'mobileLandscape' })} {
         right: 5px;
     }
 `;

@@ -3,8 +3,7 @@ import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/pasteup/typography';
 import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
-import { palette } from '@guardian/src-foundations';
-import { until } from '@guardian/pasteup/breakpoints';
+import { palette, mq } from '@guardian/src-foundations';
 
 const supportStyles = css`
     align-self: flex-start;
@@ -14,7 +13,7 @@ const supportStyles = css`
     align-items: center;
     padding: 0 15px;
     min-height: 30px;
-    ${until.mobileMedium} {
+    ${mq({ until: 'mobileMedium' })} {
         padding: 0 10px;
         min-height: 24px;
     }
@@ -25,7 +24,7 @@ const supportHeaderStyles = css`
     justify-content: center;
     margin-top: 10px;
     margin-left: 10px;
-    ${until.mobileMedium} {
+    ${mq({ until: 'mobileMedium' })} {
         margin-top: 28px;
     }
 `;
@@ -45,7 +44,7 @@ const supportLinkStyles = css`
     width: 100%;
 
     padding-right: 20px;
-    ${until.mobileMedium} {
+    ${mq({ until: 'mobileMedium' })} {
         ${textSans(4)};
         padding-right: 18px;
     }
@@ -53,7 +52,7 @@ const supportLinkStyles = css`
     svg {
         position: absolute;
         top: -5px;
-        ${until.mobileMedium} {
+        ${mq({ until: 'mobileMedium' })} {
             top: -2px;
             width: 26px;
             height: 26px;
