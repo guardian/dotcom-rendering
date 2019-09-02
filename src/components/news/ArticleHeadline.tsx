@@ -10,7 +10,7 @@ const ArticleHeadlineCss = css`
     line-height: 3.2rem;
 `;
 
-const ArticleHeadline = ({ headline }) => (
+const ArticleHeadline = ({ headline, feature }) => (
     <h1 css={[ArticleHeadlineCss, sideMargins]}>{headline}</h1>
 )
 

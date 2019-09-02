@@ -10,7 +10,7 @@ const articleStandfirst = css`
     }
 `;
 
-const ArticleStandfirst = ({ standfirst }) => (
+const ArticleStandfirst = ({ standfirst, feature }) => (
     <div css={[sideMargins, articleStandfirst]} dangerouslySetInnerHTML={{__html: standfirst}}></div>
 )
 

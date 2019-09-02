@@ -86,7 +86,7 @@ const articleBodyCss = ({ kicker }) => css`
     }
 `;
 
-const ArticleBody = ({ body, pillarStyles }) => (
+const ArticleBody = ({ body, pillarStyles, feature }) => (
     <div css={[articleBodyCss(pillarStyles), sideMargins]} dangerouslySetInnerHTML={{__html: body}} />
 )
 

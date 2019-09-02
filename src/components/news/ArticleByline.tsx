@@ -40,7 +40,7 @@ const ArticleBylineAuthorCss = ({ kicker }) => css`
     }
 `;
 
-const ArticleByline = ({ byline, pillarStyles }) => (
+const ArticleByline = ({ byline, pillarStyles, feature }) => (
     <React.Fragment>
         <div css={ArticleBylineCss}></div>
         <div css={sideMargins}>
