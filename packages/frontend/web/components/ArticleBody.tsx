@@ -27,6 +27,7 @@ import { MainMedia } from './MainMedia';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
 import { SyndicationButton } from './SyndicationButton';
+import { SeriesSectionLink } from './SeriesSectionLink';
 
 const curly = (x: any) => x;
 
@@ -163,23 +164,6 @@ const leftColWidth = css`
 
     ${wide} {
         width: 220px;
-    }
-`;
-
-const section = css`
-    ${leftColWidth};
-    @supports (display: grid) {
-        grid-template-areas: 'section';
-    }
-    ${headline(2)};
-    font-weight: 700;
-
-    ${leftCol} {
-        ${headline(3)};
-    }
-
-    ${until.phablet} {
-        padding: 0 10px;
     }
 `;
 
@@ -389,13 +373,6 @@ const header = css`
     }
 `;
 
-const sectionLabelLink = css`
-    text-decoration: none;
-    :hover {
-        text-decoration: underline;
-    }
-`;
-
 const subMeta = css`
     margin-top: 12px;
     padding-top: 18px;
@@ -426,20 +403,7 @@ export const ArticleBody: React.FC<{
     return (
         <div className={wrapper}>
             <header className={header}>
-                <div className={section}>
-                    {CAPI.sectionLabel && CAPI.sectionUrl && (
-                        <a
-                            className={cx(
-                                sectionLabelLink,
-                                pillarColours[CAPI.pillar],
-                            )}
-                            href={`https://www.theguardian.com/${CAPI.sectionUrl}`}
-                            data-link-name="article section"
-                        >
-                            {CAPI.sectionLabel}
-                        </a>
-                    )}
-                </div>
+                <SeriesSectionLink CAPI={CAPI} fallbackToSection={true} />
                 <div className={headlineCSS}>
                     {ageWarning && (
                         <div className={ageWarningStyle} aria-hidden="true">
