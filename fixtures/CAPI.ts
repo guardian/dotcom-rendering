@@ -447,6 +447,7 @@ export const CAPI: CAPIType = {
         revisionNumber: '62cf0d6e4609276d37e09fd596430fbf8b629418',
         isDev: false,
         googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
+        stage: 'DEV',
     },
     webTitle: 'Foobar',
     nav: {

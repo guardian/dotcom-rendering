@@ -226,6 +226,7 @@ interface ConfigType {
     revisionNumber: string;
     isDev?: boolean;
     googletagUrl: string;
+    stage: string;
 }
 
 interface GADataType {
