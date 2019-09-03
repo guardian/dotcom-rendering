@@ -1,11 +1,12 @@
 import React from 'react';
 import { sideMargins, textSans, PillarStyles } from '../../styles';
 import { css } from '@emotion/core'
+import { palette } from '@guardian/src-foundations';
 
 const ArticleBylineCss = css`
     height: 12px;
     width: 100%;
-    background-image: repeating-linear-gradient(#dcdcdc, #dcdcdc 1px, transparent 1px, transparent 3px);
+    background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
     margin-bottom: 4px;
 `;
 
