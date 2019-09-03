@@ -38,10 +38,10 @@ export function getPillarStyles(pillarId: PillarId): PillarStyles {
 export const pillarColours: PillarColours = {
     news: {
         kicker: palette.news.main,
-        featureHeadline: '#880105',
+        featureHeadline: palette.news.dark,
         soft: palette.neutral[97],
         inverted: palette.news.bright,
-        liveblogBackground: '#ae0000'
+        liveblogBackground: palette.news.dark
     },
     opinion: {
         kicker: palette.opinion.main,
@@ -53,21 +53,21 @@ export const pillarColours: PillarColours = {
     sport: {
         kicker: palette.sport.main,
         featureHeadline: palette.sport.dark,
-        soft: '#e6f5ff',
+        soft: palette.sport.faded,
         inverted: palette.sport.bright,
         liveblogBackground: palette.sport.dark
     },
     arts: {
         kicker: palette.culture.main,
         featureHeadline: palette.culture.dark,
-        soft: '#f2ebdc',
+        soft: palette.culture.faded,
         inverted: palette.culture.bright,
         liveblogBackground: palette.culture.dark
     },
     lifestyle: {
         kicker: palette.lifestyle.main,
         featureHeadline: palette.lifestyle.dark,
-        soft: '#ffe6ec',
+        soft: palette.lifestyle.faded,
         inverted: palette.lifestyle.bright,
         liveblogBackground: palette.lifestyle.dark
     }

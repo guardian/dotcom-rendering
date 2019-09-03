@@ -51,8 +51,8 @@ const articleBodyCss = ({ kicker }: PillarStyles) => css`
     }
 
     .element-rich-link, .element-membership {
-        border-top: 1px solid #dcdad5;
-        border-bottom: 1px solid #dcdad5;
+        border-top: 1px solid ${palette.neutral[86]};
+        border-bottom: 1px solid ${palette.neutral[86]};
         float: left;
         clear: left;
         width: 13.75rem;
