@@ -63,7 +63,8 @@ app.get('/', (req, res) => {
             fetch(capiEndpoint)
               .then(resp => resp.json())
               .then(capi => {
-                const body = renderToString(React.createElement(Article, {...capi.response.content.fields, pillarId: capi.response.content.pillarId, ...capiFields}));
+                const articleProps = {...capi.response.content.fields, pillarId: capi.response.content.pillarId, ...capiFields};
+                const body = renderToString(React.createElement(Article, articleProps));
                 return res.send(
                   data.replace(
                     '<div id="root"></div>',
