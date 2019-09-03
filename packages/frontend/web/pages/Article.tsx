@@ -10,7 +10,7 @@ import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
-import { adSlotParameters } from '@frontend/model/advertisement';
+import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot } from '@frontend/web/components/AdSlot';
 
 // TODO: find a better of setting opacity
@@ -49,6 +49,12 @@ export const Article: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div className={overflowHidden}>
+        <div>
+            <AdSlot
+                asps={namedAdSlotParameters('top-above-nav')}
+                config={data.config}
+            />
+        </div>
         <Header
             nav={data.NAV}
             pillar={data.CAPI.pillar}
@@ -60,7 +66,7 @@ export const Article: React.FC<{
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
                         <AdSlot
-                            asps={adSlotParameters()}
+                            asps={namedAdSlotParameters('right')}
                             config={data.config}
                         />
                     </div>
