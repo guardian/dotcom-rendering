@@ -7,7 +7,7 @@ import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 import Tags from '../shared/Tags';
 
-import { getPillarStyles } from '../../styles';
+import { getPillarStyles, PillarId } from '../../styles';
 
 interface ArticleProps {
     headline: string;
@@ -15,7 +15,7 @@ interface ArticleProps {
     byline: string;
     body: string;
     metadata: Metadata;
-    pillarId: string;
+    pillarId: PillarId;
     displayImages: DisplayImage[];
 };
 

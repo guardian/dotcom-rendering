@@ -1,13 +1,15 @@
 import React from 'react';
 import { sideMargins } from '../../styles';
-import { css } from '@emotion/core'
+import styled from '@emotion/styled';
 
-const articleStandfirst = css`
+const Standfirst = styled.div`
     margin-bottom: 6px;
 
     p {
         margin: 0;
     }
+
+    ${sideMargins}
 `;
 
 interface ArticleStandfirstProps {
@@ -16,7 +18,7 @@ interface ArticleStandfirstProps {
 }
 
 const ArticleStandfirst = ({ standfirst, feature }: ArticleStandfirstProps) => (
-    <div css={[sideMargins, articleStandfirst]} dangerouslySetInnerHTML={{__html: standfirst}}></div>
+    <Standfirst dangerouslySetInnerHTML={{__html: standfirst}}></Standfirst>
 )
 
 export default ArticleStandfirst;
