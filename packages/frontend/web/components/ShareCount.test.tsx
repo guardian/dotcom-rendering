@@ -30,6 +30,7 @@ describe('ShareCount', () => {
         revisionNumber: '',
         isDev: false,
         googletagUrl: '',
+        stage: 'DEV',
     };
 
     afterEach(() => {
