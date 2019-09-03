@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/core'
 import { sideMargins, textSans, headlineLight, icons, PillarStyles } from '../../styles';
+import { palette } from '@guardian/src-foundations'
 
 const articleBodyCss = ({ kicker }: PillarStyles) => css`
     a {
@@ -45,13 +46,13 @@ const articleBodyCss = ({ kicker }: PillarStyles) => css`
     figcaption {
         font-size: 1.4rem;
         line-height: 1.8rem;
-        color: #767676;
+        color: ${palette.neutral[46]};
         ${textSans}
     }
 
     .element-rich-link, .element-membership {
-        border-top: 1px solid #dcdad5;
-        border-bottom: 1px solid #dcdad5;
+        border-top: 1px solid ${palette.neutral[86]};
+        border-bottom: 1px solid ${palette.neutral[86]};
         float: left;
         clear: left;
         width: 13.75rem;

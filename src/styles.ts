@@ -1,13 +1,13 @@
+import { palette } from '@guardian/src-foundations'
+
 const BASE_PADDING = 8;
 
 const baseMultiply = (value: number) : number => value * BASE_PADDING;
 
-// should these come from mapi?
-// We should try to standardise these with Design, Android and iOS
 export const colours = {
-    black: '#121212',
-    white: '#ffffff',
-    yellow: '#ffe500'
+    black: palette.neutral[7],
+    white: palette.neutral[100],
+    yellow: palette.yellow.main
 }
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px"
@@ -37,39 +37,39 @@ export function getPillarStyles(pillarId: PillarId): PillarStyles {
 
 export const pillarColours: PillarColours = {
     news: {
-        kicker: '#c70000',
-        featureHeadline: '#880105',
-        soft: '#f6f6f6',
-        inverted: '#ff4e36',
-        liveblogBackground: '#ae0000'
+        kicker: palette.news.main,
+        featureHeadline: palette.news.dark,
+        soft: palette.neutral[97],
+        inverted: palette.news.bright,
+        liveblogBackground: palette.news.dark
     },
     opinion: {
-        kicker: '#e05e00',
-        featureHeadline: '#bd5318',
-        soft: '#fef9f5',
-        inverted: '#ff7f0f',
-        liveblogBackground: '#bd5318'
+        kicker: palette.opinion.main,
+        featureHeadline: palette.opinion.dark,
+        soft: palette.opinion.faded,
+        inverted: palette.opinion.bright,
+        liveblogBackground: palette.opinion.dark
     },
     sport: {
-        kicker: '#0084c6',
-        featureHeadline: '#005689',
-        soft: '#e6f5ff',
-        inverted: '#00b2ff',
-        liveblogBackground: '#005689'
+        kicker: palette.sport.main,
+        featureHeadline: palette.sport.dark,
+        soft: palette.sport.faded,
+        inverted: palette.sport.bright,
+        liveblogBackground: palette.sport.dark
     },
     arts: {
-        kicker: '#a1845c',
-        featureHeadline: '#6b5840',
-        soft: '#f2ebdc',
-        inverted: '#eacca0',
-        liveblogBackground: '#6b5840'
+        kicker: palette.culture.main,
+        featureHeadline: palette.culture.dark,
+        soft: palette.culture.faded,
+        inverted: palette.culture.bright,
+        liveblogBackground: palette.culture.dark
     },
     lifestyle: {
-        kicker: '#bb3b80',
-        featureHeadline: '#7d0068',
-        soft: '#ffe6ec',
-        inverted: '#ffabdb',
-        liveblogBackground: '#7d0068'
+        kicker: palette.lifestyle.main,
+        featureHeadline: palette.lifestyle.dark,
+        soft: palette.lifestyle.faded,
+        inverted: palette.lifestyle.bright,
+        liveblogBackground: palette.lifestyle.dark
     }
 };
 
