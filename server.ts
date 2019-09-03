@@ -19,25 +19,6 @@ const articleId = 'world/2019/sep/03/hong-kong-protests-carrie-lam-denies-she-co
 const capiEndpoint = `https://content.guardianapis.com/${articleId}?format=json&api-key=teleporter-view&show-elements=all&show-atoms=all&show-rights=all&show-fields=all&show-tags=all&show-blocks=all&show-references=all`;
 
 const capiFields = {
- "metadata": {
-    "commentable": true,
-    "commentCount": 196,
-    "feature": true,
-    "tags": [
-      {
-        "webTitle": "Venezuela",
-        "webUrl": "https://www.theguardian.com/world/venezuela"
-      },
-      {
-        "webTitle": "Nicolás Maduro",
-        "webUrl": "https://www.theguardian.com/world/nicolas-maduro"
-      },
-      {
-        "webTitle": "Americas",
-        "webUrl": "https://www.theguardian.com/world/americas"
-      }
-    ]
-  },
   "displayImages": [
     {
       "urlTemplate": "https://i.guim.co.uk/img/media/90870ec12d9cb8af47d20a76457c9538e418ad78/0_0_3500_2101/master/3500.jpg?w=2101&h=3500&q=85&fit=bounds&sig-ignores-params=true&s=c31d8fb40c8a1bcfaf510a6407ba5334",
@@ -63,7 +44,8 @@ app.get('/', (req, res) => {
             fetch(capiEndpoint)
               .then(resp => resp.json())
               .then(capi => {
-                const articleProps = {...capi.response.content.fields, pillarId: capi.response.content.pillarId, ...capiFields};
+                const content = capi.response.content;
+                const articleProps = {...content.fields, pillarId: content.pillarId, tags: content.tags, feature: false, ...capiFields};
                 const body = renderToString(React.createElement(Article, articleProps));
                 return res.send(
                   data.replace(
