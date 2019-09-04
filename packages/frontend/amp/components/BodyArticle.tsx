@@ -7,10 +7,9 @@ import { TopMeta } from '@frontend/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { designTypeDefault } from '@frontend/lib/designTypes';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/src-foundations';
+import { palette, until } from '@guardian/src-foundations';
 import { WithAds } from '@frontend/amp/components/WithAds';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
-import { until } from '@guardian/pasteup/breakpoints';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 
 const body = (pillar: Pillar, designType: DesignType) => {
