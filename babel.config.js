@@ -16,21 +16,7 @@ module.exports = {
         ],
         'babel-plugin-px-to-rem',
     ],
-    presets: [
-        '@babel/preset-typescript',
-        '@babel/preset-react',
-        [
-            '@babel/preset-env',
-            {
-                targets: {
-                    node: 'current',
-                },
-                useBuiltIns: 'usage',
-                corejs: '3.1.4',
-                modules: false,
-            },
-        ],
-    ],
+    presets: ['@babel/preset-typescript', '@babel/preset-react'],
     env: {
         production: {
             plugins: [['emotion', { sourceMap: false }]],
@@ -41,4 +27,5 @@ module.exports = {
     },
     ignore: ['**/*.json'],
     sourceType: 'unambiguous',
+    babelrcRoots: ['.', 'packages/frontend/web/*'],
 };
