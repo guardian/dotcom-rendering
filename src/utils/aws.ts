@@ -1,4 +1,4 @@
-import {CredentialProviderChain, ECSCredentials, SharedIniFileCredentials} from "aws-sdk";
+import {SharedIniFileCredentials, CredentialProviderChain, ECSCredentials} from "aws-sdk/lib/core";
 import {Region} from "./appIdentity";
 import SSM from "aws-sdk/clients/ssm";
 
