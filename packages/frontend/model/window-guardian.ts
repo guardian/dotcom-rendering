@@ -1,5 +1,8 @@
+type stage = 'DEV' | 'CODE' | 'PROD';
+
 export interface WindowGuardianConfig {
     isDotcomRendering: boolean;
+    stage: stage;
     page: {
         contentType: string;
         edition: Edition;
@@ -32,6 +35,7 @@ const makeWindowGuardianConfig = (
     return {
         // This indicates to the client side code that we are running a dotcom-rendering rendered page.
         isDotcomRendering: true,
+        stage: dcrDocumentData.config.stage,
         page: {
             contentType: dcrDocumentData.CAPI.contentType,
             edition: dcrDocumentData.CAPI.editionId,
