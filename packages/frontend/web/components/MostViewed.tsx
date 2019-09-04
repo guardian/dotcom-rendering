@@ -256,7 +256,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                 data-link-name={'most-viewed'}
                 data-component={'most-viewed'}
             >
-                <h2 className={heading}>Most viewed</h2>
+                <h2 className={heading}>Most popular</h2>
                 <AsyncClientComponent f={this.fetchTrails}>
                     {({ data }) => (
                         <div className={listContainer}>
