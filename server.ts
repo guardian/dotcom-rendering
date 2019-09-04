@@ -9,6 +9,8 @@ import fetch from 'node-fetch';
 
 import Article from './dist/components/news/Article';
 
+import { getConfigValue } from './src/utils/ssmConfig';
+
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));
