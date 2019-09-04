@@ -37,7 +37,7 @@ export const htmlTemplate = ({
     );
 
     const lowPriorityScriptTags = lowPriorityScripts.map(
-        src => `<script async src="${src}"></script>`,
+        src => `<script defer src="${src}"></script>`,
     );
 
     const fontPreloadTags = fontFiles.map(
