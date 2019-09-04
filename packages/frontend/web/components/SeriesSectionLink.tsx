@@ -1,28 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { until, wide, leftCol } from '@guardian/pasteup/breakpoints';
+import { leftCol } from '@guardian/pasteup/breakpoints';
 import { headline } from '@guardian/pasteup/typography';
-
-const leftColWidth = css`
-    ${leftCol} {
-        width: 140px;
-    }
-
-    ${wide} {
-        width: 220px;
-    }
-`;
-
-const section = css`
-    ${leftColWidth};
-    @supports (display: grid) {
-        grid-template-areas: 'section';
-    }
-    ${until.phablet} {
-        padding: 0 10px;
-    }
-`;
 
 const sectionLabelLink = css`
     text-decoration: none;
@@ -94,22 +74,20 @@ export const SeriesSectionLink: React.FC<{
 
     if (!tag && (CAPI.sectionLabel && CAPI.sectionUrl)) {
         return (
-            <div className={section}>
-                <TagLink
-                    pillar={CAPI.pillar}
-                    guardianBaseURL={CAPI.guardianBaseURL}
-                    tagTitle={CAPI.sectionLabel}
-                    tagUrl={CAPI.sectionUrl}
-                    dataLinkName="article section"
-                    weightingClass={primaryStyle}
-                />
-            </div>
+            <TagLink
+                pillar={CAPI.pillar}
+                guardianBaseURL={CAPI.guardianBaseURL}
+                tagTitle={CAPI.sectionLabel}
+                tagUrl={CAPI.sectionUrl}
+                dataLinkName="article section"
+                weightingClass={primaryStyle}
+            />
         );
     }
 
     if (tag) {
         return (
-            <div className={section}>
+            <>
                 <TagLink
                     pillar={CAPI.pillar}
                     guardianBaseURL={CAPI.guardianBaseURL}
@@ -123,10 +101,10 @@ export const SeriesSectionLink: React.FC<{
                     guardianBaseURL={CAPI.guardianBaseURL}
                     tagTitle={CAPI.sectionLabel}
                     tagUrl={CAPI.sectionLabel}
-                    dataLinkName="article series"
+                    dataLinkName="article section"
                     weightingClass={secondaryStyle}
                 />
-            </div>
+            </>
         );
     }
 

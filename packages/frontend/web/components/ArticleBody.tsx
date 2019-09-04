@@ -392,6 +392,16 @@ const subMetaSharingIcons = css`
     }
 `;
 
+const section = css`
+    ${leftColWidth};
+    @supports (display: grid) {
+        grid-template-areas: 'section';
+    }
+    ${until.phablet} {
+        padding: 0 10px;
+    }
+`;
+
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     config: ConfigType;
@@ -403,7 +413,9 @@ export const ArticleBody: React.FC<{
     return (
         <div className={wrapper}>
             <header className={header}>
-                <SeriesSectionLink CAPI={CAPI} fallbackToSection={true} />
+                <div className={section}>
+                    <SeriesSectionLink CAPI={CAPI} fallbackToSection={true} />
+                </div>
                 <div className={headlineCSS}>
                     {ageWarning && (
                         <div className={ageWarningStyle} aria-hidden="true">
