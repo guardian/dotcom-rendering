@@ -16,6 +16,7 @@
     "@emotion/core": "^10.0.16",
     "@emotion/styled": "^10.0.15",
     "@guardian/src-foundations": "^0.0.13",
+    "aws-sdk": "^2.522.0",
     "babel-plugin-emotion": "^10.0.16",
     "compression": "^1.7.4",
     "emotion": "^10.0.14",
