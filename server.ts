@@ -17,8 +17,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use("/public", express.static(path.resolve(__dirname, 'public')));
 app.use(compression());
 
-const articleId = 'world/2019/sep/03/hong-kong-protests-carrie-lam-denies-she-considered-resigning';
-const capiEndpoint = `https://content.guardianapis.com/${articleId}?format=json&api-key=teleporter-view&show-elements=all&show-atoms=all&show-rights=all&show-fields=all&show-tags=all&show-blocks=all&show-references=all`;
+const capiEndpoint = (articleId, key) => `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-rights=all&show-fields=all&show-tags=all&show-blocks=all&show-references=all`;
 
 const capiFields = {
   "displayImages": [
@@ -35,15 +34,18 @@ const capiFields = {
   ]
 }
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
     try {
         fs.readFile(path.resolve('./src/html/articleTemplate.html'), 'utf8', (err, data) => {
             if (err) {
               console.error(err)
               return res.status(500).send('An error occurred')
             }
-            
-            fetch(capiEndpoint)
+
+            const articleId = req.params[0] || 'world/2019/sep/03/hong-kong-protests-carrie-lam-denies-she-considered-resigning';
+
+            getConfigValue<string>("capi.key")
+              .then(key => fetch(capiEndpoint(articleId, key)))
               .then(resp => resp.json())
               .then(capi => {
                 const content = capi.response.content;
