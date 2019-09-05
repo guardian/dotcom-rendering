@@ -13,12 +13,13 @@ export const colours = {
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px"
 
 export const sideMargins = {
-    margin: basePx(0, 1)
+    marginLeft: basePx(1),
+    marginRight: basePx(1)
 };
 
 export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
 
-interface PillarStyles {
+export interface PillarStyles {
     kicker: string;
     featureHeadline: string;
     soft: string;
@@ -72,6 +73,44 @@ export const pillarColours: PillarColours = {
         liveblogBackground: palette.lifestyle.dark
     }
 };
+
+export const bulletStyles = (kicker: string): string =>  `
+    .bullet {
+        color: transparent;
+
+        &::before {
+            content: '';
+            background-color: ${kicker};
+            width: 1rem;
+            height: 1rem;
+            border-radius: .5rem;
+            display: inline-block;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+
+        > li {
+            padding-left: 2rem;
+
+            &::before {
+                display: inline-block;
+                content: '';
+                border-radius: 0.5rem;
+                height: 1rem;
+                width: 1rem;
+                margin-right: 1.25rem;
+                background-color: #dcdcdc;
+                margin-left: -2rem;
+            }
+
+            > p:first-child {
+                display: inline;
+            }
+        }
+    }`
 
 export const textSans = "font-family: 'Guardian Text Sans Web';"
 
