@@ -1,9 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { palette, mobileLandscape } from '@guardian/src-foundations';
 import { textSans } from '@guardian/pasteup/typography';
-import { mobileLandscape } from '@guardian/pasteup/breakpoints';
 import LabsLogo from '@guardian/pasteup/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
 
