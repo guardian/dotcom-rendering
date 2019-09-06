@@ -19,7 +19,7 @@ interface ArticleProps {
     feature: boolean;
     pillarId: PillarId;
     mainAssets: Asset[];
-};
+}
 
 interface Asset {
     file: string;

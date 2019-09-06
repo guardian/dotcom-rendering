@@ -1,8 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/core'
 import { sideMargins, textSans } from '../../styles';
+import { palette } from '@guardian/src-foundations';
 
-const tagsCss = css`
+const tagsStyles = css`
     display: block;
     list-style: none;
     padding: 8px 0 16px 0;
@@ -19,10 +20,12 @@ const tagsCss = css`
             border-radius: 30px;
             text-overflow: ellipsis;
             max-width: 18.75rem;
-            color: #121212;
-            background-color: #f6f6f6;
+            color: ${palette.neutral[7]};
+            background-color: ${palette.neutral[97]};
         }
     }
+
+    ${sideMargins}
 `;
 
 interface Tag {
@@ -35,7 +38,7 @@ interface TagsProps {
 }
 
 const Tags = ({ tags }: TagsProps) => (
-    <ul css={[tagsCss, sideMargins]}>
+    <ul css={tagsStyles}>
         {tags.map((tag, index) => {
             return <li key={index}>
                 <a href={tag.webUrl}>

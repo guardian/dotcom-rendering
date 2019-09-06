@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
 
-const headerImageStyle = css`
+const headerImageStyles = css`
     position: relative;
     img {
         width: 100%;
@@ -34,7 +34,7 @@ const HeaderImage = ({ assets }: HeaderImageProps) => {
     const { file, typeData: {caption, credit, altText} } = assets[0];
     // TODO: use fastly images
     return (
-        <div css={headerImageStyle}>
+        <div css={headerImageStyles}>
             <picture>
                 {
                     assets.map(({ file, typeData }, index) => {
