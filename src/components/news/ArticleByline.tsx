@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { sideMargins, textSans, PillarStyles } from '../../styles';
 import { css } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
@@ -28,7 +29,7 @@ const avatarCss = ({ inverted }: PillarStyles) => css`
 `;
 
 const ArticleBylineAuthorCss = ({ kicker }: PillarStyles) => css`
-    .byline, .follow {
+    .byline, .follow, a {
         color: ${kicker};
     }
 
@@ -44,10 +45,17 @@ const ArticleBylineAuthorCss = ({ kicker }: PillarStyles) => css`
 interface ArticleBylineProps {
     byline: string;
     pillarStyles: PillarStyles;
-    feature: boolean;
+    publicationDate: string;
+    contributor?: Contributor;
 }
 
-const ArticleByline = ({ byline, pillarStyles, feature }: ArticleBylineProps) => (
+interface Contributor {
+    webTitle: string;
+    webUrl: string;
+    bylineImageUrl: string;
+}
+
+const ArticleByline = ({ byline, pillarStyles, publicationDate, contributor }: ArticleBylineProps) => (
     <React.Fragment>
         <div css={ArticleBylineCss}></div>
         <div css={sideMargins}>
@@ -55,9 +63,9 @@ const ArticleByline = ({ byline, pillarStyles, feature }: ArticleBylineProps) =>
                 <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
             </div>
             <div css={ArticleBylineAuthorCss(pillarStyles)}>
-                <div className="byline">{ byline }</div>
-                <div className="date">01:45 Wednesday, 21 August 2019</div>
-                <div className="follow">Follow Tom Phillips</div>
+                <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
+                <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
+                {contributor ? <div className="follow">Follow { contributor.webTitle }</div> : null}
             </div>
         </div>
     </React.Fragment>

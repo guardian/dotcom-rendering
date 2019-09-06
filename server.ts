@@ -49,7 +49,8 @@ app.get('/*', (req, res) => {
               .then(resp => resp.json())
               .then(capi => {
                 const content = capi.response.content;
-                const articleProps = {...content.fields, pillarId: content.pillarId, tags: content.tags, feature: false, ...capiFields};
+                if (content.type !== 'article') return res.send(`${content.type} type is not yet supported`);
+                const articleProps = {...content.fields, webPublicationDate: content.webPublicationDate, pillarId: content.pillarId, tags: content.tags, feature: false, ...capiFields};
                 const body = renderToString(React.createElement(Article, articleProps));
                 return res.send(
                   data.replace(
@@ -58,7 +59,6 @@ app.get('/*', (req, res) => {
                   )
                 )
               })
-
           })
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);

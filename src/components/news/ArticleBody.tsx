@@ -1,9 +1,11 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins, textSans, headlineLight, icons, PillarStyles } from '../../styles';
+import { sideMargins, textSans, headlineLight, icons, PillarStyles, bulletStyles } from '../../styles';
 import { palette } from '@guardian/src-foundations'
 
 const articleBodyCss = ({ kicker }: PillarStyles) => css`
+    margin-top: 24px;
+
     a {
         color: ${kicker};
     }
@@ -57,23 +59,29 @@ const articleBodyCss = ({ kicker }: PillarStyles) => css`
         clear: left;
         width: 13.75rem;
         margin: 8px 24px 8px 0;
-    }
 
-    .bullet {
-        color: transparent;
+        span {
+            display: none;
+        }
 
-        &::before {
-            content: '';
-            background-color: ${kicker};
-            width: 1.2rem;
-            height: 1.2rem;
-            border-radius: .6rem;
-            display: inline-block;
+        a {
+            text-decoration: none;
+            &::before {
+                content: 'More on this topic';
+                display: block;
+                color: #121212;
+            }
         }
     }
 
+    ${bulletStyles(kicker)}
+
     h2 {
-        margin: 0 0 8px 0;
+
+        font-size: 2rem;
+        line-height: 2.4rem;
+
+        margin: 8px 0 0 0;
 
         & + p {
             margin-top: 0;
@@ -94,7 +102,7 @@ interface ArticleBodyProps {
 }
 
 const ArticleBody = ({ body, pillarStyles, feature }: ArticleBodyProps) => (
-    <div css={[articleBodyCss(pillarStyles), sideMargins]} dangerouslySetInnerHTML={{__html: body}} />
+    <div css={[articleBodyCss(pillarStyles), sideMargins]} dangerouslySetInnerHTML={{__html: body.replace(/•/g, '<span class="bullet">•</span>')}} />
 )
 
 export default ArticleBody;

@@ -9,6 +9,7 @@ const Headline = styled.h1`
     font-weight: 500;
     font-size: 2.8rem;
     line-height: 3.2rem;
+    margin-top: 0;
     ${sideMargins}
 `;
 

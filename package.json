@@ -21,6 +21,7 @@
     "compression": "^1.7.4",
     "emotion": "^10.0.14",
     "express": "^4.17.1",
+    "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
