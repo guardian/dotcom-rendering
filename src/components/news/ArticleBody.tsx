@@ -80,8 +80,8 @@ const articleBodyCss = ({ kicker }: PillarStyles) => css`
 
         font-size: 2rem;
         line-height: 2.4rem;
-
-        margin: 8px 0 0 0;
+        margin: 8px 0;
+        font-weight: 500;
 
         & + p {
             margin-top: 0;

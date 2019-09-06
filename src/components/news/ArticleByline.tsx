@@ -29,6 +29,11 @@ const avatarCss = ({ inverted }: PillarStyles) => css`
 `;
 
 const ArticleBylineAuthorCss = ({ kicker }: PillarStyles) => css`
+    .byline a {
+        text-decoration: none;
+        font-weight: 500;
+    }
+
     .byline, .follow, a {
         color: ${kicker};
     }
@@ -37,8 +42,10 @@ const ArticleBylineAuthorCss = ({ kicker }: PillarStyles) => css`
         ${textSans}
     }
 
-    .follow {
-        text-decoration: underline;
+    .date {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        color: ${palette.neutral[46]};
     }
 `;
 

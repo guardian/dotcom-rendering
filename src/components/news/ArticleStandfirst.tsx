@@ -4,6 +4,9 @@ import { css } from '@emotion/core'
 
 const StandfirstCss = ({ kicker }: PillarStyles) => css`
     margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2rem;
 
     a {
         color: ${kicker};

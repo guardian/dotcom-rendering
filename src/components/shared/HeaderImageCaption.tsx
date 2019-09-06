@@ -53,6 +53,8 @@ const toggleStyle = css`
     padding-right: 48px;
     z-index: 1;
     color: ${colours.white};
+    line-height: 1.6rem;
+    font-size: 1.4rem;
     ${textSans}
   }
 `;

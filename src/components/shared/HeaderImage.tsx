@@ -29,7 +29,10 @@ interface HeaderImageProps {
 }
 
 const HeaderImage = ({ assets }: HeaderImageProps) => {
+    if (!assets) return null;
+
     const { file, typeData: {caption, credit, altText} } = assets[0];
+    // TODO: use fastly images
     return (
         <div css={headerImageStyle}>
             <picture>
