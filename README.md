@@ -1,13 +1,14 @@
 # apps-rendering
 
 ### Running
-Working on node v10.16.3 (nvm use 10.16.3)
+- Working on node v10.16.3 (nvm use 10.16.3)
+- You will need `mobile` Janus credentials to run this project
 1. npm i
 2. npm run compileClient (watches for changes)
 3. npm run dev (compiles and runs server)
 4. http://localhost:3040
 
-### Initial architecture discussions 
+### Architecture decisions
 
 - Emotion styles combined with components
   - Easy to migrate current SASS styles
@@ -18,10 +19,11 @@ Working on node v10.16.3 (nvm use 10.16.3)
 - Use React for UI components
   - Redux and useReducer probably unnecessary
   - Preference for functional hooks rather than class components
-  - Context API unnecessary for dark mode prop but might be useful to beam device settings down to components
+  - Preference to avoid rehydration of SSR components where possible
+  - Context API can be used to pass pillar styles to all components
 
 - Testing
-  - Jest/React-testing-library?
+  - Jest
 
 - Security
-  - NPM/Snyk/GitHub/All?
+  - NPM, Snyk, GitHub

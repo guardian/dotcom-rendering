@@ -18,8 +18,21 @@ interface ArticleProps {
     tags: Tag[];
     feature: boolean;
     pillarId: PillarId;
-    displayImages: DisplayImage[];
+    mainAssets: Asset[];
 };
+
+interface Asset {
+    file: string;
+    typeData: AssetTypeData;
+}
+
+interface AssetTypeData {
+    altText: string;
+    caption: string;
+    credit: string;
+    width: number;
+    height: number;
+}
 
 interface Tag {
     webUrl: string;
@@ -27,21 +40,14 @@ interface Tag {
     type: string;
 }
 
-interface DisplayImage {
-    urlTemplate: string;
-    cleanCaption: string;
-    cleanCredit: string;
-};
-
-const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, displayImages, tags, feature }: ArticleProps) => {
+const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets }: ArticleProps) => {
     const pillarStyles = getPillarStyles(pillarId);
-    const { urlTemplate, cleanCaption, cleanCredit } = displayImages[0];
-    const contributor = tags.filter(tag => tag.type === 'contributor').pop();
+    const contributor = tags.filter(tag => tag.type === 'contributor').pop() || null;
     // TODO: use context api to beam pillarStyles down to all components
 
     return (
         <React.Fragment>
-            <HeaderImage image={urlTemplate} caption={cleanCaption} credit={cleanCredit}/>
+            <HeaderImage assets={mainAssets}/>
             <ArticleHeadline headline={headline} feature={feature}/>
             <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
             <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} publicationDate={webPublicationDate} contributor={contributor}/>

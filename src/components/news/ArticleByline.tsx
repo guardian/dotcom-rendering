@@ -46,13 +46,13 @@ interface ArticleBylineProps {
     byline: string;
     pillarStyles: PillarStyles;
     publicationDate: string;
-    contributor?: Contributor;
+    contributor: Contributor | null;
 }
 
 interface Contributor {
-    webTitle: string;
-    webUrl: string;
-    bylineImageUrl: string;
+    webTitle?: string;
+    webUrl?: string;
+    bylineImageUrl?: string;
 }
 
 const ArticleByline = ({ byline, pillarStyles, publicationDate, contributor }: ArticleBylineProps) => (

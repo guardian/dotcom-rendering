@@ -19,21 +19,6 @@ app.use(compression());
 
 const capiEndpoint = (articleId, key) => `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-rights=all&show-fields=all&show-tags=all&show-blocks=all&show-references=all`;
 
-const capiFields = {
-  "displayImages": [
-    {
-      "urlTemplate": "https://i.guim.co.uk/img/media/90870ec12d9cb8af47d20a76457c9538e418ad78/0_0_3500_2101/master/3500.jpg?w=2101&h=3500&q=85&fit=bounds&sig-ignores-params=true&s=c31d8fb40c8a1bcfaf510a6407ba5334",
-      "height": 2101,
-      "width": 3500,
-      "caption": "Venezuela’s president Nicolas Maduro with national assembly chief Diosdado Cabello, who has reportedly been speaking to Trump advisers. Photograph: Photograph: Manaure Quintero/Reuters",
-      "credit": "Manaure Quintero/Reuters",
-      "altText": "Venezuela’s president Nicolas Maduro with national assembly chief Diosdado Cabello, who has reportedly been speaking to Trump advisers.",
-      "cleanCaption": "Venezuela’s president Nicolas Maduro with national assembly chief Diosdado Cabello, who has reportedly been speaking to Trump advisers.",
-      "cleanCredit": "Photograph: Manaure Quintero/Reuters"
-    }
-  ]
-}
-
 app.get('/*', (req, res) => {
     try {
         fs.readFile(path.resolve('./src/html/articleTemplate.html'), 'utf8', (err, data) => {
@@ -48,9 +33,15 @@ app.get('/*', (req, res) => {
               .then(key => fetch(capiEndpoint(articleId, key)))
               .then(resp => resp.json())
               .then(capi => {
-                const content = capi.response.content;
-                if (content.type !== 'article') return res.send(`${content.type} type is not yet supported`);
-                const articleProps = {...content.fields, webPublicationDate: content.webPublicationDate, pillarId: content.pillarId, tags: content.tags, feature: false, ...capiFields};
+                const { type, fields, elements } = capi.response.content;
+                const mainAssets = elements.filter(elem => elem.relation === 'main' && elem.type === 'image')[0]['assets'];
+                if (type !== 'article') return res.send(`${type} type is not yet supported`);
+                const articleProps = {
+                  ...fields,
+                  ...capi.response.content,
+                  feature: false,
+                  mainAssets
+                };
                 const body = renderToString(React.createElement(Article, articleProps));
                 return res.send(
                   data.replace(
@@ -59,6 +50,7 @@ app.get('/*', (req, res) => {
                   )
                 )
               })
+              .catch(error => res.send(error))
           })
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
