@@ -4,7 +4,7 @@ import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline } from '@guardian/pasteup/typography';
 import { pillarPalette } from '../../lib/pillars';
-import { palette, mobileLandscape, until } from '@guardian/src-foundations';
+import { palette, from, until } from '@guardian/src-foundations';
 import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`
@@ -79,7 +79,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     font-weight: 900;
     font-size: 15.4px;
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         font-size: 18px;
         padding: 7px 4px 0;
     }

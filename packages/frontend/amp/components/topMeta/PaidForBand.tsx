@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette, mobileLandscape } from '@guardian/src-foundations';
+import { palette, from } from '@guardian/src-foundations';
 import { textSans } from '@guardian/pasteup/typography';
 import LabsLogo from '@guardian/pasteup/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
@@ -15,7 +15,7 @@ const headerStyle = css`
     height: 58px;
     background-color: ${palette.labs.bright};
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         padding: 0 20px;
     }
 `;
