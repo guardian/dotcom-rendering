@@ -31,9 +31,13 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
     }
 
     .authour {
-        .byline a {
-            text-decoration: none;
-            font-weight: 500;
+        .byline {
+            line-height: 2.2rem;
+
+            a {
+                text-decoration: none;
+                font-weight: 500;
+            }
         }
 
         .byline, .follow, a {
@@ -46,7 +50,6 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
 
         .date {
             font-size: 1.4rem;
-            line-height: 1.8rem;
             color: ${palette.neutral[46]};
         }
     }

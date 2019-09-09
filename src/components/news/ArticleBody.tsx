@@ -62,6 +62,10 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
         width: 13.75rem;
         margin: 8px 24px 8px 0;
 
+        p {
+            margin: 8px 0;
+        }
+
         span {
             display: none;
         }
@@ -70,6 +74,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
             text-decoration: none;
             &::before {
                 content: 'More on this topic';
+                font-weight: bold;
                 display: block;
                 color: #121212;
             }
@@ -77,8 +82,8 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
     }
 
     h2 {
-        font-size: 2rem;
-        line-height: 2.4rem;
+        font-size: 1.8rem;
+        line-height: 2.2rem;
         margin: 8px 0;
         font-weight: 500;
 

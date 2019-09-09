@@ -8,7 +8,7 @@ const HeaderImageCaptionStyles = css`
     }
 
     label {
-        line-height: ${basePx(4)};
+        line-height: 30px;
         text-align: center;
         background-color: ${colours.yellow};
         color: ${colours.black};
