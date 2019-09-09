@@ -1,4 +1,4 @@
-import { palette } from '@guardian/src-foundations'
+import { palette } from '@guardian/src-foundations';
 
 const BASE_PADDING = 8;
 
@@ -10,12 +10,12 @@ export const colours = {
     yellow: palette.yellow.main
 }
 
-export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px"
+export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
 export const sideMargins = {
     marginLeft: basePx(1),
     marginRight: basePx(1)
-};
+}
 
 export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
 
@@ -72,7 +72,7 @@ export const pillarColours: PillarColours = {
         inverted: palette.lifestyle.bright,
         liveblogBackground: palette.lifestyle.dark
     }
-};
+}
 
 export const bulletStyles = (kicker: string): string =>  `
     .bullet {
@@ -101,7 +101,7 @@ export const bulletStyles = (kicker: string): string =>  `
                 border-radius: 0.5rem;
                 height: 1rem;
                 width: 1rem;
-                margin-right: 1.25rem;
+                margin-right: 1rem;
                 background-color: #dcdcdc;
                 margin-left: -2rem;
             }
@@ -112,8 +112,8 @@ export const bulletStyles = (kicker: string): string =>  `
         }
     }`
 
-export const textSans = "font-family: 'Guardian Text Sans Web';"
+export const textSans = "font-family: 'Guardian Text Sans Web';";
 
-export const headlineLight = "font-family: 'Guardian Headline Light';"
+export const headlineFont = "font-family: 'Guardian Headline';";
 
-export const icons = "font-family: 'Guardian Icons';"
+export const icons = "font-family: 'Guardian Icons';";

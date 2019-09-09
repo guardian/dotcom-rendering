@@ -1,5 +1,5 @@
 import React from 'react';
-import { basePx, sideMargins } from '../../styles';
+import { basePx, sideMargins, headlineFont } from '../../styles';
 import styled from '@emotion/styled';
 import { palette } from '@guardian/src-foundations'
 
@@ -9,7 +9,9 @@ const Headline = styled.h1`
     font-weight: 500;
     font-size: 2.8rem;
     line-height: 3.2rem;
-    margin-top: 0;
+    margin: 0;
+    font-weight: 500;
+    ${headlineFont}
     ${sideMargins}
 `;
 

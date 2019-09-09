@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
 
-const headerImageStyle = css`
+const headerImageStyles = css`
     position: relative;
     img {
         width: 100%;
@@ -11,17 +11,41 @@ const headerImageStyle = css`
     }
 `;
 
-interface HeaderImageProps {
-    image: string;
-    caption: string;
-    credit: string;
+interface Asset {
+    file: string;
+    typeData: AssetTypeData;
 }
 
-const HeaderImage = ({ image, caption, credit }: HeaderImageProps) => (
-  <div css={headerImageStyle}>
-      <img src={image} />
-      < HeaderImageCaption caption={caption} credit={credit}/>
-  </div>
-)
+interface AssetTypeData {
+    altText: string;
+    caption: string;
+    credit: string;
+    width: number;
+    height: number;
+}
+
+interface HeaderImageProps {
+    assets: Asset[];
+}
+
+const HeaderImage = ({ assets }: HeaderImageProps) => {
+    if (!assets) return null;
+
+    const { file, typeData: {caption, credit, altText} } = assets[0];
+    // TODO: use fastly images
+    return (
+        <div css={headerImageStyles}>
+            <picture>
+                {
+                    assets.map(({ file, typeData }, index) => {
+                        return <source srcSet={file} media={`(max-width: ${typeData.width}px)`} key={index}/>
+                    })
+                }
+                <img src={file} alt={altText}/>
+            </picture>
+            < HeaderImageCaption caption={caption} credit={credit}/>
+        </div>
+    )
+}
 
 export default HeaderImage;
