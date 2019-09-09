@@ -2,14 +2,14 @@ import { AdSlotParameters } from '@frontend/web/components/AdSlot';
 
 // We are using this function to control the activation of the commercial features
 // Currently it reports that the user has opted in to a 0% AB test.
-export const shouldDisplayAdvertisements = (config: ConfigType) => {
+export const shouldDisplayAdvertisements = (config: ConfigType): boolean => {
     return (
-        config.stage === 'DEV' ||
+        process.env.NODE_ENV === 'development' ||
         config.abTests.dotcomRenderingAdvertisementsVariant === 'variant'
     );
 };
 
-type staticAdSlotNames = 'right' | 'top-above-nav';
+type staticAdSlotNames = 'right' | 'top-above-nav' | 'most-popular';
 
 export const namedAdSlotParameters = (
     name: staticAdSlotNames,
@@ -41,6 +41,18 @@ export const namedAdSlotParameters = (
             outOfPage: false,
             optId: undefined,
             optClassNames: [],
+        },
+        'most-popular': {
+            name: 'most-popular',
+            adTypes: ['mpu-banner-ad', 'rendered'],
+            sizeMapping: {
+                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid|300,1050'],
+            },
+            showLabel: true,
+            refresh: false,
+            outOfPage: false,
+            optId: undefined,
+            optClassNames: ['js-sticky-mpu'],
         },
     };
     return mapping[name];
