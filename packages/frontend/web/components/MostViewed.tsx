@@ -12,6 +12,8 @@ import {
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
+import { namedAdSlotParameters } from '@frontend/model/advertisement';
+import { AdSlot } from '@frontend/web/components/AdSlot';
 
 const container = css`
     padding-top: 3px;
@@ -240,6 +242,7 @@ interface Tab {
 
 interface Props {
     sectionName?: string;
+    config: ConfigType;
 }
 
 export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
@@ -365,7 +368,10 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                             </div>
                         )}
                     </AsyncClientComponent>
-                    <div>Foo</div>
+                    <AdSlot
+                        asps={namedAdSlotParameters('most-popular')}
+                        config={this.props.config}
+                    />
                 </div>
             </div>
         );

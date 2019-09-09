@@ -82,7 +82,10 @@ export const Article: React.FC<{
                     `,
                 )}
             >
-                <MostViewed sectionName={data.CAPI.sectionName} />
+                <MostViewed
+                    sectionName={data.CAPI.sectionName}
+                    config={data.config}
+                />
             </Container>
         </main>
         <SubNav
