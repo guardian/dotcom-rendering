@@ -36,7 +36,32 @@ const common = ({ platform, page = '' }) => ({
                 test: /(\.tsx)|(\.js)|(\.ts)$/,
                 exclude: /node_modules/,
                 use: [
-                    'babel-loader',
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-typescript',
+                                '@babel/preset-react',
+                                [
+                                    '@babel/preset-env',
+                                    platform === 'browser'
+                                        ? {
+                                              targets: {
+                                                  ie: '11',
+                                              },
+                                              modules: false,
+                                              debug: true,
+                                          }
+                                        : {
+                                              targets: {
+                                                  node: 'current',
+                                              },
+                                              debug: true,
+                                          },
+                                ],
+                            ],
+                        },
+                    },
                     {
                         loader: 'string-replace-loader',
                         options: {
