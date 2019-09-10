@@ -5,7 +5,7 @@ import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { textSans, palette } from '@guardian/src-foundations';
 
-const labelStyles = css`
+export const labelStyles = css`
     .ad-slot__label {
         ${textSans({ level: 1 })};
         position: relative;
