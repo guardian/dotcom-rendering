@@ -2,6 +2,26 @@
 
 import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
+import { css } from 'emotion';
+import { textSans, palette } from '@guardian/src-foundations';
+
+const labelStyles = css`
+    .ad-slot__label {
+        ${textSans({ level: 1 })};
+        position: relative;
+        height: 24px;
+        background-color: ${palette.neutral[97]};
+        padding: 0 8px;
+        border-top: 1px solid ${palette.neutral[86]};
+        color: ${palette.neutral[46]};
+        text-align: left;
+        box-sizing: border-box;
+    }
+
+    .ad-slot__close-button {
+        display: none;
+    }
+`;
 
 export interface AdSlotParameters {
     name: string;
@@ -55,6 +75,7 @@ export const AdSlotCore: React.FC<{
     outOfPage?: boolean;
     optId?: string;
     optClassNames?: string[];
+    className: string;
 }> = ({
     name,
     adTypes,
@@ -64,6 +85,7 @@ export const AdSlotCore: React.FC<{
     outOfPage = false,
     optId,
     optClassNames,
+    className,
 }) => {
     // Will export `getOptionalProps` as a function if/when needed - Pascal.
     // const getOptionalProps = (): object => ({
@@ -76,7 +98,11 @@ export const AdSlotCore: React.FC<{
     return (
         <div
             id={`dfp-ad--${optId || name}`}
-            className={makeClassNames(name, adTypes, optClassNames || [])}
+            className={`${makeClassNames(
+                name,
+                adTypes,
+                optClassNames || [],
+            )} ${className} ${labelStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
@@ -89,9 +115,10 @@ export const AdSlotCore: React.FC<{
 export const AdSlot: React.FC<{
     asps: AdSlotParameters;
     config: ConfigType;
-}> = ({ asps, config }) => {
+    className: string;
+}> = ({ asps, config, className }) => {
     if (!shouldDisplayAdvertisements(config)) {
         return null;
     }
-    return <AdSlotCore {...asps} />;
+    return <AdSlotCore {...asps} className={className} />;
 };

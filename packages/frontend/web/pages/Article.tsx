@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@guardian/guui';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
+import { palette, until } from '@guardian/src-foundations';
 import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
 import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
@@ -41,34 +41,78 @@ const articleContainer = css`
     }
 `;
 
-const overflowHidden = css`
-    overflow: hidden;
+const adSlotWrapper = css`
+    position: static;
+    height: 1059px;
+`;
+
+const headerWrapper = css`
+    position: static;
+`;
+
+const stickyAdSlot = css`
+    position: sticky;
+    top: 0;
+`;
+
+const headerAdWrapper = css`
+    ${until.tablet} {
+        display: none;
+    }
+
+    margin: 0 auto;
+    min-height: 5.625rem;
+    padding-bottom: 1.125rem;
+    padding-top: 1.125rem;
+    text-align: left;
+    display: table;
+
+    z-index: 1080;
+
+    background-color: white;
+    width: 100%;
+    border-bottom: 0.0625rem solid ${palette.neutral[86]};
+
+    ${stickyAdSlot};
+`;
+
+const headerAd = css`
+    margin: 0 auto;
+    width: 728px;
 `;
 
 export const Article: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
-    <div className={overflowHidden}>
-        <div>
-            <AdSlot
-                asps={namedAdSlotParameters('top-above-nav')}
-                config={data.config}
+    <div>
+        <div className={headerWrapper}>
+            <div className={headerAdWrapper}>
+                <AdSlot
+                    asps={namedAdSlotParameters('top-above-nav')}
+                    config={data.config}
+                    className={headerAd}
+                />
+            </div>
+
+            <Header
+                nav={data.NAV}
+                pillar={data.CAPI.pillar}
+                edition={data.CAPI.editionId}
             />
         </div>
-        <Header
-            nav={data.NAV}
-            pillar={data.CAPI.pillar}
-            edition={data.CAPI.editionId}
-        />
+
         <main>
             <Container borders={true} className={articleContainer}>
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
-                        <AdSlot
-                            asps={namedAdSlotParameters('right')}
-                            config={data.config}
-                        />
+                        <div className={adSlotWrapper}>
+                            <AdSlot
+                                asps={namedAdSlotParameters('right')}
+                                config={data.config}
+                                className={stickyAdSlot}
+                            />
+                        </div>
                     </div>
                 </article>
             </Container>
