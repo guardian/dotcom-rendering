@@ -371,6 +371,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                     <AdSlot
                         asps={namedAdSlotParameters('most-popular')}
                         config={this.props.config}
+                        className={''}
                     />
                 </div>
             </div>

@@ -1,8 +1,13 @@
 import React from 'react';
 import { Container } from '@guardian/guui';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { desktop, mobileLandscape } from '@guardian/pasteup/breakpoints';
+import {
+    palette,
+    until,
+    desktop,
+    mobileLandscape,
+    wide,
+} from '@guardian/src-foundations';
 import { MostViewed } from '@frontend/web/components/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
@@ -11,7 +16,7 @@ import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
-import { AdSlot } from '@frontend/web/components/AdSlot';
+import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 
 // TODO: find a better of setting opacity
 const secondaryColumn = css`
@@ -41,34 +46,103 @@ const articleContainer = css`
     }
 `;
 
-const overflowHidden = css`
-    overflow: hidden;
+const adSlotWrapper = css`
+    position: static;
+    height: 1059px;
+`;
+
+const headerWrapper = css`
+    position: static;
+`;
+
+const stickyAdSlot = css`
+    position: sticky;
+    top: 0;
+`;
+
+const headerAdWrapper = css`
+    ${until.tablet} {
+        display: none;
+    }
+
+    margin: 0 auto;
+    min-height: 5.625rem;
+    padding-bottom: 1.125rem;
+    padding-top: 1.125rem;
+    text-align: left;
+    display: table;
+
+    z-index: 1080;
+
+    background-color: white;
+    width: 100%;
+    border-bottom: 0.0625rem solid ${palette.neutral[86]};
+
+    ${stickyAdSlot};
+`;
+
+const headerAd = css`
+    margin: 0 auto;
+    width: 728px;
+`;
+
+// These are by selector as for dynamically-created ads
+const bodyAdStyles = css`
+    .ad-slot--inline {
+        background-color: ${palette.neutral[97]};
+        width: 320px;
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+
+        ${desktop} {
+            margin: 0;
+            width: auto;
+            float: right;
+            margin-right: -328px;
+        }
+
+        ${wide} {
+            margin-right: -408px;
+        }
+    }
+
+    ${labelStyles};
 `;
 
 export const Article: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
-    <div className={overflowHidden}>
-        <div>
-            <AdSlot
-                asps={namedAdSlotParameters('top-above-nav')}
-                config={data.config}
+    <div>
+        <div className={headerWrapper}>
+            <div className={headerAdWrapper}>
+                <AdSlot
+                    asps={namedAdSlotParameters('top-above-nav')}
+                    config={data.config}
+                    className={headerAd}
+                />
+            </div>
+
+            <Header
+                nav={data.NAV}
+                pillar={data.CAPI.pillar}
+                edition={data.CAPI.editionId}
             />
         </div>
-        <Header
-            nav={data.NAV}
-            pillar={data.CAPI.pillar}
-            edition={data.CAPI.editionId}
-        />
+
         <main>
             <Container borders={true} className={articleContainer}>
-                <article>
+                <article className={bodyAdStyles}>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
-                        <AdSlot
-                            asps={namedAdSlotParameters('right')}
-                            config={data.config}
-                        />
+                        <div className={adSlotWrapper}>
+                            <AdSlot
+                                asps={namedAdSlotParameters('right')}
+                                config={data.config}
+                                className={stickyAdSlot}
+                            />
+                        </div>
                     </div>
                 </article>
             </Container>
