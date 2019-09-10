@@ -50,13 +50,11 @@ const common = ({ platform, page = '' }) => ({
                                                   ie: '11',
                                               },
                                               modules: false,
-                                              debug: true,
                                           }
                                         : {
                                               targets: {
                                                   node: 'current',
                                               },
-                                              debug: true,
                                           },
                                 ],
                             ],
