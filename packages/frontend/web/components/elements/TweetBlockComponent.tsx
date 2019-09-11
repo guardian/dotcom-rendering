@@ -2,17 +2,13 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { body } from '@guardian/pasteup/typography';
+
+// fallback styling for when JS is disabled
 const noJSStyling = css`
     .twitter-tweet :not(.twitter-tweet-rendered) {
-        /* // We're going to style this like the upgraded embed */
         border: 1px solid ${palette.neutral[86]};
         border-radius: 4px;
         padding: 20px;
-        /* End tweet embed styles  */
-
-        display: inline-block;
-        margin: 0;
-        margin-bottom: $gs-baseline;
         width: 100%;
         ${body(1)};
     }
