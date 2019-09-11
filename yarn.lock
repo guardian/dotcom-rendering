@@ -7059,9 +7059,9 @@ eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-"eslint-plugin-dcr@https://github.com/guardian/eslint-plugin-dcr":
+"eslint-plugin-dcr@https://github.com/guardian/eslint-plugin-dcr#v0.1.0":
   version "1.0.0"
-  resolved "https://github.com/guardian/eslint-plugin-dcr#a03d5a05e8f1e1b342ab5c5433fb0809d77e7b26"
+  resolved "https://github.com/guardian/eslint-plugin-dcr#9aff46e4ce196e57ea29e25ee5c0a3eb8d129964"
 
 eslint-plugin-flowtype@^2.46.1:
   version "2.50.3"
