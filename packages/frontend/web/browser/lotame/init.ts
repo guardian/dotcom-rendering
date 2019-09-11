@@ -8,6 +8,8 @@ const shouldServeLotame = (window: Window) => {
     return !['US', 'CA', 'AU', 'NZ'].includes(JSON.parse(geo).value);
 };
 
+// Loads user tracking (ad segment) data, which is then used to 
+// drive personalised ads for our 'Ozone' ads.
 const init = (): Promise<void> => {
     try {
         ((document, window) => {
