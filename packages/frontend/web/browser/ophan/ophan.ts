@@ -13,7 +13,7 @@ export const sendOphanPlatformRecord = () => {
         window.guardian.ophan &&
         window.guardian.ophan.record
     ) {
-        window.guardian.ophan.record({ platformVariant: 'dotcom-rendering' });
+        window.guardian.ophan.record({ experiences: 'dotcom-rendering' });
 
         // Record server-side AB test variants (i.e. control or variant)
         if (window.guardian.config.tests) {
