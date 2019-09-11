@@ -35,6 +35,7 @@ module.exports = ({ page }) => ({
         ga: scriptPath('ga'),
         ophan: scriptPath('ophan'),
         react: scriptPath('react'),
+        lotame: scriptPath('lotame'),
     },
     output: {
         filename: name,

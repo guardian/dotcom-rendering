@@ -73,6 +73,7 @@ export const document = ({ data }: Props) => {
     const lowPriorityScripts = [
         getDist('ga.js'),
         getDist('ophan.js'),
+        getDist('lotame.js'),
         'https://www.google-analytics.com/analytics.js',
     ];
 
