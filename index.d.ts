@@ -13,7 +13,7 @@ declare global {
             mustardCut: boolean;
             polyfilled: boolean;
             onPolyfilled: () => void;
-            queue: Array<(name: string, task: () => Promise<void>) => void>;
+            queue: Array<() => void>;
             config: WindowGuardianConfig;
             ophan: {
                 setEventEmitter: () => void; // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
