@@ -10,11 +10,17 @@ const noJSStyling = css`
         border-radius: 4px;
         padding: 20px;
         width: 100%;
+        margin-bottom: 16px;
         ${body(1)};
     }
 
     .twitter-tweet p {
         padding-bottom: 10px;
+    }
+
+    a {
+        /* stylelint-disable-next-line color-no-hex */
+        color: #2b7bb9;
     }
 `;
 
