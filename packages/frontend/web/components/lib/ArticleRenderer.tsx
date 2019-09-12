@@ -1,6 +1,7 @@
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { SubheadingBlockComponent } from '@frontend/web/components/elements/SubheadingBlockComponent';
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
+import { TweetBlockComponent } from '@frontend/web/components/elements/TweetBlockComponent';
 import React from 'react';
 // import { clean } from '@frontend/model/clean';
 export const ArticleRenderer: React.FC<{
@@ -30,6 +31,8 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.TweetBlockElement':
+                    return <TweetBlockComponent key={i} element={element} />;
                 default:
                     return null;
             }
