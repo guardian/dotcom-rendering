@@ -37,7 +37,7 @@ export const htmlTemplate = ({
     );
 
     const lowPriorityScriptTags = lowPriorityScripts.map(
-        src => `<script defer src="${src}"></script>`,
+        src => `<script async src="${src}"></script>`,
     );
 
     const fontPreloadTags = fontFiles.map(
@@ -67,7 +67,19 @@ export const htmlTemplate = ({
 
                 <script>
                     window.guardian = ${JSON.stringify(windowGuardian)};
+                    window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
                 </script>
+
+                <script type="module">
+                    window.guardian.mustardCut = true;
+                </script>
+
+                <script nomodule>
+                    // Browser fails mustard check
+                    window.guardian.mustardCut = false;
+                </script>
+
+
 
                 <script>
                     // this is a global that's called at the bottom of the pf.io response,
@@ -75,6 +87,9 @@ export const htmlTemplate = ({
                     // mainly to support browsers that don't support async=false or defer
                     function guardianPolyfilled() {
                         window.guardian.polyfilled = true;
+                        if (window.guardian.mustardCut === false) {
+                            window.guardian.queue.forEach(function(startup) { startup() })
+                        }
                     }
 
                     // We've got contracts to abide by with the Ophan tracker

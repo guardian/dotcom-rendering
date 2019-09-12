@@ -18,8 +18,10 @@ const windowGuardian = {
         cssIDs: [],
     },
     config: windowGuardianConfig,
+    mustardCut: false,
     polyfilled: false,
     onPolyfilled: () => undefined,
+    queue: [],
     ophan: {
         setEventEmitter: () => null,
         trackComponentAttention: () => null,

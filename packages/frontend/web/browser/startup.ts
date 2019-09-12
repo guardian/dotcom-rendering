@@ -27,5 +27,12 @@ export const startup = <A>(
     helpers: A,
     task: (helpers: A) => Promise<void>,
 ): void => {
-    measure(name, task.bind(null, helpers));
+    const measureMe = () => {
+        measure(name, task.bind(null, helpers));
+    };
+    if (window.guardian.mustardCut || window.guardian.polyfilled) {
+        measureMe();
+    } else {
+        window.guardian.queue.push(measureMe);
+    }
 };
