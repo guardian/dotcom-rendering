@@ -98,6 +98,11 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
         }
     }
 
+    p {
+        hyphens: auto;
+        overflow-wrap: break-word;
+    }
+
     ${bulletStyles(kicker)}
     ${sideMargins}
 `;
@@ -105,10 +110,9 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
 interface ArticleBodyProps {
     body: string;
     pillarStyles: PillarStyles;
-    feature: boolean;
 }
 
-const ArticleBody = ({ body, pillarStyles, feature }: ArticleBodyProps) => (
+const ArticleBody = ({ body, pillarStyles }: ArticleBodyProps) => (
     <div css={articleBodyStyles(pillarStyles)} dangerouslySetInnerHTML={{__html: transform(body)}} />
 )
 

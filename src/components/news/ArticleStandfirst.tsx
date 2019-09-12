@@ -1,9 +1,18 @@
 import React from 'react';
-import { sideMargins, PillarStyles, bulletStyles } from '../../styles';
+import { sideMargins, PillarStyles, bulletStyles, headlineFont } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
-import { css } from '@emotion/core'
+import { css } from '@emotion/core';
+import { palette } from '@guardian/src-foundations';
 
-const StandfirstCss = ({ kicker }: PillarStyles) => css`
+const StandfirstFeatureStyles = `
+    color: ${palette.neutral[46]};
+    font-family: ${headlineFont}
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+`;
+
+const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles) => css`
     margin-bottom: 6px;
     font-weight: 500;
     font-size: 1.6rem;
@@ -19,6 +28,7 @@ const StandfirstCss = ({ kicker }: PillarStyles) => css`
 
     ${bulletStyles(kicker)}
     ${sideMargins}
+    ${feature ? StandfirstFeatureStyles : null}
 `;
 
 interface ArticleStandfirstProps {
@@ -28,7 +38,7 @@ interface ArticleStandfirstProps {
 }
 
 const ArticleStandfirst = ({ standfirst, pillarStyles, feature }: ArticleStandfirstProps) => (
-    <div css={StandfirstCss(pillarStyles)} dangerouslySetInnerHTML={{__html: transform(standfirst)}}></div>
+    <div css={StandfirstStyles(feature, pillarStyles)} dangerouslySetInnerHTML={{__html: transform(standfirst)}}></div>
 )
 
 export default ArticleStandfirst;

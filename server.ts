@@ -10,6 +10,7 @@ import fetch from 'node-fetch';
 import Article from './dist/components/news/Article';
 
 import { getConfigValue } from './src/utils/ssmConfig';
+import { isFeature } from './src/utils/capi';
 
 const app = express();
 
@@ -42,28 +43,41 @@ app.get('/*', (req, res) => {
 });
 
 const generateArticleHtml = (capi, data): string => {
-    const { type, fields, elements } = capi.response.content;
+    const { type, fields, elements, tags } = capi.response.content;
 
     if (type !== 'article') return `${type} type is not yet supported`;
     if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
     if ('starRating' in fields) return `Reviews not yet supported`;
 
+    const ArticleComponent = getArticleComponent(type);
     const mainImages = elements.filter(elem => elem.relation === 'main' && elem.type === 'image');
     const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
+    const feature = isFeature(tags);
 
     const articleProps = {
       ...fields,
       ...capi.response.content,
-      feature: false,
+      feature,
       mainAssets
     };
 
-    const body = renderToString(React.createElement(Article, articleProps));
+    const body = renderToString(React.createElement(ArticleComponent, articleProps));
 
     return data.replace(
         '<div id="root"></div>',
         `<div id="root">${body}</div>`
       )
+}
+
+const getArticleComponent = (type: String) => {
+  switch(type) {
+    case 'article':
+      return Article;
+    case 'liveblog':
+      return `${type} type is not yet supported`;
+    default:
+      return `${type} type is not yet supported`;
+  }
 }
 
 app.use((err: any, req: any, res: any, next: any) => {
