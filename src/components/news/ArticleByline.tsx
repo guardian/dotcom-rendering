@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { sideMargins, textSans, PillarStyles } from '../../styles';
+import { sidePadding, textSans, PillarStyles } from '../../styles';
 import { css } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
@@ -71,7 +71,7 @@ interface Contributor {
 const ArticleByline = ({ byline, pillarStyles, publicationDate, contributor }: ArticleBylineProps) => (
     <div css={ArticleBylineStyles(pillarStyles)}>
         <div className="keyline"></div>
-        <div css={sideMargins}>
+        <div css={sidePadding}>
             <div className="avatar">
                 <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
             </div>

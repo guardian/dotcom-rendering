@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins, textSans } from '../../styles';
+import { sidePadding, textSans } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
 const tagsStyles = css`
@@ -25,7 +25,7 @@ const tagsStyles = css`
         }
     }
 
-    ${sideMargins}
+    ${sidePadding}
 `;
 
 interface Tag {

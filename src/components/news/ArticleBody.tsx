@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins, textSans, headlineFont, icons, PillarStyles, bulletStyles } from '../../styles';
+import { sidePadding, textSans, headlineFont, icons, PillarStyles, bulletStyles } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
 import { palette } from '@guardian/src-foundations'
 
@@ -104,7 +104,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
     }
 
     ${bulletStyles(kicker)}
-    ${sideMargins}
+    ${sidePadding}
 `;
 
 interface ArticleBodyProps {

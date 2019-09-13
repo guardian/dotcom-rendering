@@ -1,5 +1,5 @@
 import React from 'react';
-import { sideMargins, PillarStyles, bulletStyles, headlineFont } from '../../styles';
+import { sidePadding, PillarStyles, bulletStyles, headlineFont } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
 import { css } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
@@ -27,7 +27,7 @@ const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles) => css`
     }
 
     ${bulletStyles(kicker)}
-    ${sideMargins}
+    ${sidePadding}
     ${feature ? StandfirstFeatureStyles : null}
 `;
 

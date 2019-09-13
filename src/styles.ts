@@ -1,4 +1,5 @@
 import { palette } from '@guardian/src-foundations';
+import { css } from '@emotion/core'
 
 const BASE_PADDING = 8;
 
@@ -12,9 +13,9 @@ export const colours = {
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
-export const sideMargins = {
-    marginLeft: basePx(1),
-    marginRight: basePx(1)
+export const sidePadding = {
+    paddingLeft: basePx(1),
+    paddingRight: basePx(1)
 }
 
 export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
@@ -117,3 +118,13 @@ export const textSans = "font-family: 'Guardian Text Sans Web';";
 export const headlineFont = "font-family: 'Guardian Headline';";
 
 export const icons = "font-family: 'Guardian Icons';";
+
+export const darkModeCss = (styles: TemplateStringsArray, ...placeholders: string[]) => {
+    return css`
+        @media (prefers-color-scheme: dark) {
+            ${styles.map((style, index) => `${style}${placeholders[index]}`)
+                .filter(Boolean)
+                .join('')}
+        }
+    `;
+}
