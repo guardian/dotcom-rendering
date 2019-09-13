@@ -3,6 +3,8 @@
 import React from 'react';
 import { Container } from '@guardian/guui';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
+import { css } from 'emotion';
+import { palette } from '@guardian/pasteup/palette';
 
 interface OutbrainSelectors {
     widget: string;
@@ -49,6 +51,30 @@ const OutbrainWidget: React.FC<{}> = ({}) => {
     );
 };
 
+const outbrainContainer = css`
+    .js-outbrain {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        background-color: ${palette.neutral[97]};
+    }
+
+    .js-outbrain-container {
+        margin: auto;
+        border-left: 1px solid ${palette.neutral[86]};
+        border-right: 1px solid ${palette.neutral[86]};
+        border-top: 1px solid ${palette.neutral[86]};
+        padding: 20px;
+    }
+
+    .ob-rec-text {
+        max-height: fit-content;
+    }
+`;
+
 export const OutbrainContainer: React.FC<{
     config: ConfigType;
 }> = ({ config }) => {
@@ -57,7 +83,9 @@ export const OutbrainContainer: React.FC<{
     }
     return (
         <Container>
-            <OutbrainWidget />
+            <div className={outbrainContainer}>
+                <OutbrainWidget />
+            </div>
         </Container>
     );
 };
