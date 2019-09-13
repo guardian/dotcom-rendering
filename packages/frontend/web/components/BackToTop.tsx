@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { sans } from '@guardian/pasteup/typography';
 
@@ -24,7 +24,7 @@ const link = css`
     :hover {
         color: ${palette.yellow.main};
 
-        .${iconContainer} {
+        .icon-container {
             background-color: ${palette.yellow.main};
         }
     }
@@ -56,7 +56,7 @@ const text = css`
 export const BackToTop: React.FC = () => (
     <a className={link} href="#top">
         <span className={text}>Back to top</span>
-        <span className={iconContainer}>
+        <span className={cx('icon-container', iconContainer)}>
             <i className={icon} />
         </span>
     </a>
