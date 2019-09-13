@@ -32,28 +32,27 @@ function recursivelyFetchConfig(nextToken?: string, currentConfig?: Config): Pro
 
 let state: Option<Config> = null;
 
-function fetchConfig(): Promise<Config> {
+async function fetchConfig(): Promise<Config> {
     if (state == null) {
-        return recursivelyFetchConfig()
-            .then(config => {
-                state = config;
-                return config;
-            })
+        const config = await recursivelyFetchConfig();
+        state = config;
+        return config;
     } else {
         return Promise.resolve(state);
     }
 }
 
-export function getConfigValue<A>(key: string, defaultValue?: A): Promise<A> {
-    return fetchConfig().then(conf => {
-        if (conf[key]) {
-            return conf[key];
-        } else {
-            if (defaultValue) {
-                return defaultValue;
-            } else {
-                throw new Error(`No config value for key: /${App}/${Stage}/${Stack}/${key}`)
-            }
+export async function getConfigValue<A>(key: string, defaultValue?: A): Promise<A> {
+    const conf = await fetchConfig();
+    if (conf[key]) {
+        return conf[key];
+    }
+    else {
+        if (defaultValue) {
+            return defaultValue;
         }
-    });
+        else {
+            throw new Error(`No config value for key: /${App}/${Stage}/${Stack}/${key}`);
+        }
+    }
 }
