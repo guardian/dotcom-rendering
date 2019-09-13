@@ -13,7 +13,7 @@ class Some<A> implements OptionInterface<A> {
 
     value: A;
 
-    withDefault(a: A) {
+    withDefault(a: A): A {
         return this.value;
     }
 
@@ -33,7 +33,7 @@ class Some<A> implements OptionInterface<A> {
 
 class None<A> implements OptionInterface<A> {
 
-    withDefault(a: A) {
+    withDefault(a: A): A {
         return a;
     }
 
