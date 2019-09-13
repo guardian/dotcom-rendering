@@ -61,9 +61,9 @@ const shouldSendCallback: (data: ShouldSendCallbackData) => boolean = data => {
         // Some environments don't support or don't always expose the console Object
         if (window.console && window.console.warn) {
             window.console.warn('Raven would send: ', {
+                isInSample,
                 'switches.enableSentryReporting':
                     switches.enableSentryReporting,
-                isInSample: isInSample,
                 '!isIgnored': !isIgnored,
                 '!adBlockInUse': !adBlockInUse,
                 '!isDev': !isDev,
@@ -119,7 +119,6 @@ export const reportError = (
 
 export const setWIndowOnError = (r: RavenStatic) => {
     const oldOnError = window.onerror;
-    console.log('error set');
     /**
      * Make sure global onerror doesn't report errors
      * already manually reported via reportError module
