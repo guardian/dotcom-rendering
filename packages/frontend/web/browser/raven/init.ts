@@ -13,7 +13,7 @@ const init = () => {
             setWIndowOnError(raven);
 
             // expose core function
-            window.guardian.modules.raven = { reportError };
+            window.guardian.config.modules.raven = { reportError };
         } catch {
             /**
              * Raven will have reported any unhandled promise
