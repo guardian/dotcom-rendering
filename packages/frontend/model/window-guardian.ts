@@ -12,6 +12,7 @@ export interface WindowGuardianConfig {
         keywordIds: [];
         dfpAccountId: string;
         adUnit: string;
+        showRelatedContent: boolean;
     };
     libs: {
         googletag: string;
@@ -48,6 +49,7 @@ const makeWindowGuardianConfig = (
             // ... but the value is not used on the master branch.
             // TODO (Pascal): read the value from frontend.
             adUnit: '/59666047/theguardian.com/film/article/ng',
+            showRelatedContent: true,
         },
         libs: {
             googletag: dcrDocumentData.config.googletagUrl,
