@@ -38,3 +38,49 @@ export const abTestPayload = (tests: {
 
     return { abTestRegister: records };
 };
+
+export const recordPerformance = () => {
+    const performanceAPI = window.performance;
+    const supportsPerformanceProperties =
+        performanceAPI &&
+        'navigation' in performanceAPI &&
+        'timing' in performanceAPI;
+
+    if (!supportsPerformanceProperties) {
+        return;
+    }
+
+    const timing = performanceAPI.timing;
+
+    const allStartedModules = window.guardian.config.modules.started;
+    const marks = window.performance.getEntriesByType('mark').filter(mark => {
+        // We store our module marks as module-start and module-end
+        // and our startedModules as the module name. Lets split it
+        // out so that we can measure ours and only our marks.
+        const ourModuleMark = mark.name.split('-');
+        return (
+            allStartedModules.includes(ourModuleMark && ourModuleMark[0]) ||
+            mark.name.includes('commercial') // Commercial record is in a different format as from Frontend
+        );
+    });
+
+    const performance = {
+        dns: timing.domainLookupEnd - timing.domainLookupStart,
+        connection: timing.connectEnd - timing.connectStart,
+        firstByte: timing.responseStart - timing.connectEnd,
+        lastByte: timing.responseEnd - timing.responseStart,
+        domContentLoadedEvent:
+            timing.domContentLoadedEventStart - timing.responseEnd,
+        loadEvent: timing.loadEventStart - timing.domContentLoadedEventStart,
+        navType: performanceAPI.navigation.type,
+        redirectCount: performanceAPI.navigation.redirectCount,
+        assetsPerformance: marks.map(mark => ({
+            name: mark.name,
+            timing: Math.floor(mark.startTime),
+        })),
+    };
+
+    window.guardian.ophan.record({
+        performance,
+    });
+};

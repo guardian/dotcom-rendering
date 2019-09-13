@@ -6,6 +6,8 @@ export interface Reporter {
     ) => void;
 }
 
+const modulesStarted = window.guardian.config.modules.started;
+
 const measure = (name: string, task: () => Promise<void>): void => {
     const perf = window.performance;
     const start = `${name}-start`;
@@ -16,6 +18,9 @@ const measure = (name: string, task: () => Promise<void>): void => {
     task().finally(() => {
         perf.mark(end);
         perf.measure(name, start, end);
+
+        // Keep track of the module names that have been initialised
+        modulesStarted.push(name);
 
         // tslint:disable-next-line:no-console
         console.log(JSON.stringify(perf.getEntriesByName(name)));
