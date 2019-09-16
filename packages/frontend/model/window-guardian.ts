@@ -56,6 +56,7 @@ const makeWindowGuardianConfig = (
         },
         switches: dcrDocumentData.CAPI.config.switches,
         tests: dcrDocumentData.CAPI.config.abTests || {},
+        modules: {},
     } as WindowGuardianConfig;
 };
 
