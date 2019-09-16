@@ -3,6 +3,7 @@ import { SubheadingBlockComponent } from '@frontend/web/components/elements/Subh
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@frontend/web/components/elements/TweetBlockComponent';
 import { PullQuoteComponent } from '@frontend/web/components/elements/PullQuoteComponent';
+import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -14,7 +15,8 @@ const commercialPosition = css`
 export const ArticleRenderer: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
-}> = ({ elements, pillar }) => {
+    config: ConfigType;
+}> = ({ elements, pillar, config }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -48,6 +50,15 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                             attribution={element.attribution}
                             role={element.role}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+                    return (
+                        <RichLinkComponent
+                            key={i}
+                            element={element}
+                            pillar={pillar}
+                            ajaxEndpoint={config.ajaxUrl}
                         />
                     );
                 default:
