@@ -1,11 +1,11 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sidePadding, textSans, headlineFont, icons, PillarStyles, bulletStyles } from '../../styles';
+import { sidePadding, textSans, headlineFont, icons, PillarStyles, bulletStyles, darkModeCss } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
 import { palette } from '@guardian/src-foundations'
 
 const articleBodyStyles = ({ kicker }: PillarStyles) => css`
-    margin-top: 24px;
+    padding-top: 24px;
 
     a {
         color: ${kicker};
@@ -76,7 +76,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
                 content: 'More on this topic';
                 font-weight: bold;
                 display: block;
-                color: #121212;
+                color: ${palette.neutral[7]};
             }
         }
     }
@@ -107,13 +107,42 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
     ${sidePadding}
 `;
 
+const ArticleBodyDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
+    background: #1a1a1a;
+    color: ${palette.neutral[86]};
+
+    a {
+        color: ${inverted};
+    }
+
+    figcaption {
+        color: ${palette.neutral[60]};
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+        padding-bottom: 1em;
+    }
+
+    .element-rich-link,
+    .element-membership {
+        border-top: 1px solid ${palette.neutral[60]};
+        border-bottom: 1px solid ${palette.neutral[60]};
+        a {
+            &::before {
+                color: ${palette.neutral[60]};
+            }
+        }
+    }
+`;
+
 interface ArticleBodyProps {
     body: string;
     pillarStyles: PillarStyles;
 }
 
 const ArticleBody = ({ body, pillarStyles }: ArticleBodyProps) => (
-    <div css={articleBodyStyles(pillarStyles)} dangerouslySetInnerHTML={{__html: transform(body)}} />
+    <div css={[articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]} dangerouslySetInnerHTML={{__html: transform(body)}} />
 )
 
 export default ArticleBody;

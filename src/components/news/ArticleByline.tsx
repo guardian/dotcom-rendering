@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { sidePadding, textSans, PillarStyles } from '../../styles';
+import { sidePadding, textSans, PillarStyles, darkModeCss } from '../../styles';
 import { css } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
@@ -55,6 +55,25 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
     }
 `;
 
+const ArticleBylineDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
+    background: #1a1a1a;
+    color: ${palette.neutral[86]};
+
+    .keyline {
+        background-image: repeating-linear-gradient(${palette.neutral[20]}, ${palette.neutral[20]} 1px, transparent 1px, transparent 3px);
+    }
+
+    .authour {
+        .byline, .follow, a {
+            color: ${inverted};
+        }
+
+        .date {
+            color: ${palette.neutral[60]};
+        }
+    }
+`;
+
 interface ArticleBylineProps {
     byline: string;
     pillarStyles: PillarStyles;
@@ -69,7 +88,7 @@ interface Contributor {
 }
 
 const ArticleByline = ({ byline, pillarStyles, publicationDate, contributor }: ArticleBylineProps) => (
-    <div css={ArticleBylineStyles(pillarStyles)}>
+    <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
         <div className="keyline"></div>
         <div css={sidePadding}>
             <div className="avatar">

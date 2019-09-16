@@ -16,7 +16,7 @@ const HeadlineStyles = (feature: boolean, { featureHeadline }: PillarStyles) => 
 
 const HeadlineDarkStyles = darkModeCss`
     background: #1a1a1a;
-    color: #dcdcdc;
+    color: ${palette.neutral[86]};
 `;
 
 interface ArticleHeadlineProps {

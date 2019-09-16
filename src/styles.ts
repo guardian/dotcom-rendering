@@ -103,7 +103,7 @@ export const bulletStyles = (kicker: string): string =>  `
                 height: 1rem;
                 width: 1rem;
                 margin-right: 1rem;
-                background-color: #dcdcdc;
+                background-color: ${palette.neutral[86]};
                 margin-left: -2rem;
             }
 
