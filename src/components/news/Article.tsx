@@ -47,10 +47,10 @@ const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, p
     return (
         <React.Fragment>
             <HeaderImage assets={mainAssets}/>
-            <ArticleHeadline headline={headline} feature={feature}/>
+            <ArticleHeadline headline={headline} feature={feature} pillarStyles={pillarStyles}/>
             <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
             <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} publicationDate={webPublicationDate} contributor={contributor}/>
-            <ArticleBody body={body} pillarStyles={pillarStyles} feature={feature}/>
+            <ArticleBody body={body} pillarStyles={pillarStyles}/>
             <Tags tags={tags}/>
         </React.Fragment>
     )
