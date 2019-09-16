@@ -5,7 +5,14 @@ import { Container } from '@guardian/guui';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { tablet, desktop, leftCol, wide } from '@guardian/src-foundations';
+import {
+    body,
+    textSans,
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+} from '@guardian/src-foundations';
 
 interface OutbrainSelectors {
     widget: string;
@@ -87,8 +94,13 @@ const outbrainContainer = css`
         }
     }
 
+    .ob-widget-header {
+        ${body({ level: 2, lineHeight: 'regular', fontWeight: 'bold' })}
+    }
+
     .ob-rec-text {
         max-height: fit-content;
+        ${textSans({ level: 2, lineHeight: 'regular', fontWeight: 'bold' })}
     }
 `;
 
