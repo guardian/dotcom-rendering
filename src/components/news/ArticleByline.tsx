@@ -30,7 +30,7 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
         }
     }
 
-    .authour {
+    .author {
         .byline {
             line-height: 2.2rem;
 
@@ -63,7 +63,7 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
         background-image: repeating-linear-gradient(${palette.neutral[20]}, ${palette.neutral[20]} 1px, transparent 1px, transparent 3px);
     }
 
-    .authour {
+    .author {
         .byline, .follow, a {
             color: ${inverted};
         }
@@ -94,7 +94,7 @@ const ArticleByline = ({ byline, pillarStyles, publicationDate, contributor }: A
             <div className="avatar">
                 <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
             </div>
-            <div className="authour">
+            <div className="author">
                 <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
                 <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
                 {contributor ? <div className="follow">Follow { contributor.webTitle }</div> : null}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { sidePadding, PillarStyles, bulletStyles, headlineFont, darkModeCss, getPillarStyles } from '../../styles';
+import { sidePadding, PillarStyles, bulletStyles, headlineFont, darkModeCss } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
 import { css } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
