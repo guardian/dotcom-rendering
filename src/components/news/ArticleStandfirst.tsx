@@ -6,7 +6,7 @@ import { palette } from '@guardian/src-foundations';
 
 const StandfirstFeatureStyles = `
     color: ${palette.neutral[46]};
-    font-family: ${headlineFont}
+    ${headlineFont}
     font-weight: 400;
     font-size: 1.8rem;
     line-height: 2.4rem;

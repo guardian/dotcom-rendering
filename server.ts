@@ -69,14 +69,14 @@ const generateArticleHtml = (capi, data): string => {
       )
 }
 
-const getArticleComponent = (type: String) => {
+const getArticleComponent = (type: String): React.FunctionComponent<{}> => {
   switch(type) {
     case 'article':
       return Article;
     case 'liveblog':
-      return `${type} type is not yet supported`;
+      return Article;
     default:
-      return `${type} type is not yet supported`;
+      return () => React.createElement('p', null, `${type} not implemented yet`);
   }
 }
 
