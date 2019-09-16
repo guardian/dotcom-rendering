@@ -5,6 +5,7 @@ import { Container } from '@guardian/guui';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
+import { tablet, desktop, leftCol, wide } from '@guardian/src-foundations';
 
 interface OutbrainSelectors {
     widget: string;
@@ -68,6 +69,22 @@ const outbrainContainer = css`
         border-right: 1px solid ${palette.neutral[86]};
         border-top: 1px solid ${palette.neutral[86]};
         padding: 20px;
+
+        ${tablet} {
+            max-width: 740px;
+        }
+
+        ${desktop} {
+            max-width: 980px;
+        }
+
+        ${leftCol} {
+            max-width: 1140px;
+        }
+
+        ${wide} {
+            max-width: 1300px;
+        }
     }
 
     .ob-rec-text {
