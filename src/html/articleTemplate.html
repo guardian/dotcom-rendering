@@ -2,9 +2,9 @@
 <html lang="en-US">
 <head>
     <title>Article</title>
+    <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <script src="https://platform.twitter.com/widgets.js"></script>
     <!-- This to be a shared common css file with fonts. Fonts should probably still be bundled with apps -->
     <style>
       @font-face {
@@ -141,6 +141,21 @@
     }
 
     formatBodyImages();
+
+    function isDarkMode() {
+      if (window.matchMedia) {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      return false;
+    }
+
+    const themeMeta = document.getElementById('twitter-theme');
+
+    if (isDarkMode() && themeMeta) {
+      themeMeta.setAttribute('content', 'dark');
+    }
   </script>
+  <script src="https://platform.twitter.com/widgets.js"></script>
 </body>
 </html>
