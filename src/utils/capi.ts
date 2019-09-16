@@ -1,1 +1,1 @@
-export const isFeature = (tags): boolean => tags.some(tag => tag.id === 'tone/features');
+export const isFeature = (tags: Array<{ id: string }>): boolean => tags.some(tag => tag.id === 'tone/features');
