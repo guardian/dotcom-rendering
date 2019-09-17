@@ -20,7 +20,6 @@ export interface WindowGuardianConfig {
     switches: { [key: string]: boolean };
     tests?: { [key: string]: string };
     modules: {
-        started: string[];
         raven: {
             reportError?: (
                 err: Error,
@@ -58,7 +57,6 @@ const makeWindowGuardianConfig = (
         switches: dcrDocumentData.CAPI.config.switches,
         tests: dcrDocumentData.CAPI.config.abTests || {},
         modules: {
-            started: [],
             raven: {},
         },
     } as WindowGuardianConfig;
