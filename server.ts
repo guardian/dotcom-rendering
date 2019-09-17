@@ -11,6 +11,7 @@ import Article from './dist/components/news/Article';
 
 import { getConfigValue } from './src/utils/ssmConfig';
 import { isFeature } from './src/utils/capi';
+import { Capi } from './src/types/Capi'
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use("/public", express.static(path.resolve(__dirname, 'public')));
 app.use(compression());
 
 // TODO: request less data from capi
-const capiEndpoint = (articleId, key) => `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-fields=all&show-tags=all`;
+const capiEndpoint = (articleId: string, key: string) => `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-fields=all&show-tags=all`;
 
 app.get('/*', (req, res) => {
     try {
@@ -42,7 +43,7 @@ app.get('/*', (req, res) => {
     }
 });
 
-const generateArticleHtml = (capi, data): string => {
+const generateArticleHtml = (capi: Capi, data: string): string => {
     const { type, fields, elements, tags } = capi.response.content;
 
     if (type !== 'article') return `${type} type is not yet supported`;
@@ -54,7 +55,7 @@ const generateArticleHtml = (capi, data): string => {
     const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
     const feature = isFeature(tags);
 
-    const articleProps = {
+    const articleProps: object = {
       ...fields,
       ...capi.response.content,
       feature,
