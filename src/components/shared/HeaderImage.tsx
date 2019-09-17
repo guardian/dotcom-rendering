@@ -38,7 +38,9 @@ const HeaderImage = ({ assets }: HeaderImageProps) => {
             <picture>
                 {
                     assets.map(({ file, typeData }, index) => {
-                        return <source srcSet={file} media={`(max-width: ${typeData.width}px)`} key={index}/>
+                        return index + 1 === assets.length
+                            ? <source srcSet={file} media={`(max-width: ${typeData.width}px), (min-width: ${typeData.width}px)`} key={index}/>
+                            : <source srcSet={file} media={`(max-width: ${typeData.width}px)`} key={index}/>
                     })
                 }
                 <img src={file} alt={altText}/>
