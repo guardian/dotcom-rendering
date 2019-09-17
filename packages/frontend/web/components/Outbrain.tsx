@@ -88,13 +88,22 @@ const outbrainContainer = css`
         }
     }
 
-    .ob-widget-header {
-        ${body(3)};
-    }
+    .ob-widget {
+        div.ob-widget-header {
+            ${body(3)};
+            span,
+            .ob_about_this_content {
+                ${body(1)};
+            }
+        }
+        div.ob-widget-section {
+            margin-top: 0px;
+        }
 
-    .ob-rec-text {
-        max-height: fit-content;
-        ${textSans(5)};
+        span.ob-rec-text {
+            max-height: fit-content;
+            ${textSans(5)};
+        }
     }
 `;
 
