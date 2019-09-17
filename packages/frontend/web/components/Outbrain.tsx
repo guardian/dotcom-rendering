@@ -92,8 +92,11 @@ const outbrainContainer = css`
         div.ob-widget-header {
             ${body(3)};
             span,
-            .ob_about_this_content {
+            .ob_about_this_content a {
                 ${body(1)};
+                text-decoration: none;
+                /* stylelint-disable-next-line color-no-hex */
+                color: #00456e;
             }
         }
         div.ob-widget-section {
