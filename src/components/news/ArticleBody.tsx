@@ -5,8 +5,6 @@ import { transform } from '../../utils/contentTransformations';
 import { palette } from '@guardian/src-foundations'
 
 const articleBodyStyles = ({ kicker }: PillarStyles) => css`
-    padding-top: 24px;
-
     a {
         color: ${kicker};
     }

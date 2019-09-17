@@ -10,7 +10,7 @@ import fetch from 'node-fetch';
 import Article from './dist/components/news/Article';
 
 import { getConfigValue } from './src/utils/ssmConfig';
-import { isFeature } from './src/utils/capi';
+import { isFeature, getContributor } from './src/utils/capi';
 
 const app = express();
 
