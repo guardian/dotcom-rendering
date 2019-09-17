@@ -30,7 +30,7 @@ app.get('/*', (req, res) => {
               return res.status(500).send('An error occurred')
             }
 
-            const articleId = req.params[0] || 'world/2019/sep/03/hong-kong-protests-carrie-lam-denies-she-considered-resigning';
+            const articleId = req.params[0] || 'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
             getConfigValue<string>("capi.key")
               .then(key => fetch(capiEndpoint(articleId, key), {}))
