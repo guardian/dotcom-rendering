@@ -78,29 +78,37 @@ interface ArticleBylineProps {
     byline: string;
     pillarStyles: PillarStyles;
     publicationDate: string;
-    contributor: Contributor | null;
+    contributors: Contributor[]
 }
 
 interface Contributor {
     webTitle?: string;
     webUrl?: string;
-    bylineImageUrl?: string;
+    apiUrl?: string;
+    bylineLargeImageUrl?: string;
 }
 
-const ArticleByline = ({ byline, pillarStyles, publicationDate, contributor }: ArticleBylineProps) => (
-    <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
-        <div className="keyline"></div>
-        <div css={sidePadding}>
-            <div className="avatar">
-                <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
-            </div>
-            <div className="author">
-                <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
-                <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
-                {contributor ? <div className="follow">Follow { contributor.webTitle }</div> : null}
+const ArticleBylineAvatar = (img: string) => (
+    <div className="avatar"><img src={img} /></div>
+)
+
+const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors }: ArticleBylineProps) => {
+    const [contributor] = contributors;
+    const singleContributor = contributors.length === 1;
+    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? ArticleBylineAvatar(contributor.bylineLargeImageUrl) : null;
+    return (
+        <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
+            <div className="keyline"></div>
+            <div css={sidePadding}>
+                { avatar }
+                <div className="author">
+                    <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
+                    <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
+                    {singleContributor && contributor.apiUrl ? <div className="follow">Follow { contributor.webTitle }</div> : null}
+                </div>
             </div>
         </div>
-    </div>
-)
+    )
+}
 
 export default ArticleByline;

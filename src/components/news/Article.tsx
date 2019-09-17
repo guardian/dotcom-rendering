@@ -42,14 +42,14 @@ interface Tag {
 
 const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets }: ArticleProps) => {
     const pillarStyles = getPillarStyles(pillarId);
-    const contributor = tags.filter(tag => tag.type === 'contributor').pop() || null;
+    const contributors = tags.filter(tag => tag.type === 'contributor');
     // TODO: use context api to pass pillarStyles down to all components
     return (
         <React.Fragment>
             <HeaderImage assets={mainAssets}/>
             <ArticleHeadline headline={headline} feature={feature} pillarStyles={pillarStyles}/>
             <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
-            <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} publicationDate={webPublicationDate} contributor={contributor}/>
+            <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} publicationDate={webPublicationDate} contributors={contributors}/>
             <ArticleBody body={body} pillarStyles={pillarStyles}/>
             <Tags tags={tags}/>
         </React.Fragment>
