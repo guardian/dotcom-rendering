@@ -19,15 +19,6 @@ export interface WindowGuardianConfig {
     };
     switches: { [key: string]: boolean };
     tests?: { [key: string]: string };
-    modules: {
-        raven: {
-            reportError?: (
-                err: Error,
-                tags: { [key: string]: string },
-                shouldThrow: boolean,
-            ) => void;
-        };
-    };
 }
 
 const makeWindowGuardianConfig = (
@@ -56,9 +47,6 @@ const makeWindowGuardianConfig = (
         },
         switches: dcrDocumentData.CAPI.config.switches,
         tests: dcrDocumentData.CAPI.config.abTests || {},
-        modules: {
-            raven: {},
-        },
     } as WindowGuardianConfig;
 };
 
@@ -80,6 +68,15 @@ export interface WindowGuardian {
     config: WindowGuardianConfig;
     polyfilled: boolean;
     adBlockers: any;
+    modules: {
+        raven: {
+            reportError?: (
+                err: Error,
+                tags: { [key: string]: string },
+                shouldThrow: boolean,
+            ) => void;
+        };
+    };
 }
 
 export const makeWindowGuardian = (
@@ -96,6 +93,9 @@ export const makeWindowGuardian = (
         adBlockers: {
             active: undefined,
             onDetect: [],
+        },
+        modules: {
+            raven: {},
         },
     };
 };
