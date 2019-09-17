@@ -13,6 +13,7 @@ export interface Capi {
             tags: [{
                 id: string;
             }];
+            atoms?: object[];
         }
     }
 }

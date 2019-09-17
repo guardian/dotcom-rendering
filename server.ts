@@ -30,7 +30,7 @@ app.get('/*', (req, res) => {
               return res.status(500).send('An error occurred')
             }
 
-            const articleId = req.params[0] || 'world/2019/sep/03/hong-kong-protests-carrie-lam-denies-she-considered-resigning';
+            const articleId = req.params[0] || 'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
             getConfigValue<string>("capi.key")
               .then(key => fetch(capiEndpoint(articleId, key), {}))
@@ -44,11 +44,12 @@ app.get('/*', (req, res) => {
 });
 
 const generateArticleHtml = (capi: Capi, data: string): string => {
-    const { type, fields, elements, tags } = capi.response.content;
+    const { type, fields, elements, tags, atoms } = capi.response.content;
 
     if (type !== 'article') return `${type} type is not yet supported`;
     if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
     if ('starRating' in fields) return `Reviews not yet supported`;
+    if (atoms) return `Atoms not yet supported`;
 
     const ArticleComponent = getArticleComponent(type);
     const mainImages = elements.filter(elem => elem.relation === 'main' && elem.type === 'image');
