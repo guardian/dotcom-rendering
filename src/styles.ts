@@ -107,7 +107,7 @@ export const bulletStyles = (kicker: string): string =>  `
                 margin-left: -2rem;
             }
 
-            > p:first-child {
+            > p:first-of-type {
                 display: inline;
             }
         }
