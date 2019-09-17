@@ -1,9 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/core'
-import { sideMargins, textSans } from '../../styles';
+import { sidePadding, textSans, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
 const tagsStyles = css`
+    margin-top: 0;
+    margin-bottom: 0;
+
     display: block;
     list-style: none;
     padding: 8px 0 16px 0;
@@ -25,7 +28,17 @@ const tagsStyles = css`
         }
     }
 
-    ${sideMargins}
+    ${sidePadding}
+`;
+
+const tagsDarkStyles = darkModeCss`
+    background: #1a1a1a;
+    color: ${palette.neutral[86]};
+
+    li a {
+        color: ${palette.neutral[60]};
+        background-color: ${palette.neutral[20]};
+    }
 `;
 
 interface Tag {
@@ -38,7 +51,7 @@ interface TagsProps {
 }
 
 const Tags = ({ tags }: TagsProps) => (
-    <ul css={tagsStyles}>
+    <ul css={[tagsStyles, tagsDarkStyles]}>
         {tags.map((tag, index) => {
             return <li key={index}>
                 <a href={tag.webUrl}>

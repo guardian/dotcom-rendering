@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { sideMargins, textSans, PillarStyles } from '../../styles';
+import { sidePadding, textSans, PillarStyles, darkModeCss } from '../../styles';
 import { css } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
@@ -30,7 +30,7 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
         }
     }
 
-    .authour {
+    .author {
         .byline {
             line-height: 2.2rem;
 
@@ -55,6 +55,25 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
     }
 `;
 
+const ArticleBylineDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
+    background: #1a1a1a;
+    color: ${palette.neutral[86]};
+
+    .keyline {
+        background-image: repeating-linear-gradient(${palette.neutral[20]}, ${palette.neutral[20]} 1px, transparent 1px, transparent 3px);
+    }
+
+    .author {
+        .byline, .follow, a {
+            color: ${inverted};
+        }
+
+        .date {
+            color: ${palette.neutral[60]};
+        }
+    }
+`;
+
 interface ArticleBylineProps {
     byline: string;
     pillarStyles: PillarStyles;
@@ -69,13 +88,13 @@ interface Contributor {
 }
 
 const ArticleByline = ({ byline, pillarStyles, publicationDate, contributor }: ArticleBylineProps) => (
-    <div css={ArticleBylineStyles(pillarStyles)}>
+    <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
         <div className="keyline"></div>
-        <div css={sideMargins}>
+        <div css={sidePadding}>
             <div className="avatar">
                 <img src="https://i.guim.co.uk/img/uploads/2017/10/09/Tom-Phillips,-L.png?w=300&amp;h=180&amp;q=65&amp;fit=bounds&amp;sig-ignores-params=true&amp;s=dcac8b92181c23b7bc21197bcddb99fd" />
             </div>
-            <div className="authour">
+            <div className="author">
                 <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
                 <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
                 {contributor ? <div className="follow">Follow { contributor.webTitle }</div> : null}
