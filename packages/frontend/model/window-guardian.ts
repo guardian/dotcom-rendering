@@ -14,6 +14,7 @@ export interface WindowGuardianConfig {
         dfpAccountId: string;
         adUnit: string;
         showRelatedContent: boolean;
+        ajaxUrl: string;
     };
     libs: {
         googletag: string;
@@ -52,6 +53,7 @@ const makeWindowGuardianConfig = (
             // TODO (Pascal): read the value from frontend.
             adUnit: '/59666047/theguardian.com/film/article/ng',
             showRelatedContent: true,
+            ajaxUrl: dcrDocumentData.config.ajaxUrl,
         },
         libs: {
             googletag: dcrDocumentData.config.googletagUrl,
