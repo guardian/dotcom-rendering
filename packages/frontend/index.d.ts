@@ -227,6 +227,7 @@ interface ConfigType {
     isDev?: boolean;
     googletagUrl: string;
     stage: string;
+    frontendAssetsFullURL: string;
 }
 
 interface GADataType {
