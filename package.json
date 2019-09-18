@@ -3,10 +3,16 @@
   "version": "0.0.1",
   "description": "Article rendering for The Guardian iOS and Android apps",
   "main": "server/server.ts",
+  "browserslist": [
+    "android >= 5",
+    "ios >= 11"
+  ],
   "scripts": {
     "dev": "ts-node-dev --respawn ./server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compileClient": "./node_modules/.bin/babel ./src/ --extensions '.tsx','.ts' --watch --out-dir dist"
+    "compileClient": "./node_modules/.bin/babel ./src/ --extensions '.tsx','.ts' --watch --out-dir dist",
+    "build:server": "webpack --config config/webpack.config.js --config-name server",
+    "build:client": "webpack --config config/webpack.config.js --config-name client"
   },
   "author": "",
   "license": "ISC",
@@ -43,7 +49,9 @@
     "@types/node-fetch": "^2.5.0",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "babel-loader": "^8.0.6",
     "prettier": "1.18.2",
+    "ts-loader": "^6.1.0",
     "webpack": "^4.37.0",
     "webpack-cli": "^3.3.6"
   }

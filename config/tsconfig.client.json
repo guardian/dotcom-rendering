@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.base",
+    "compilerOptions": {
+        // Output latest features; allow babel to handle browser targeting
+        "target": "esnext"
+    },
+    "files": [
+        "../client.ts"
+    ]
+}
