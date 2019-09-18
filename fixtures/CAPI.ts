@@ -448,7 +448,7 @@ export const CAPI: CAPIType = {
         isDev: false,
         googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
         stage: 'DEV',
-        frontendAssetsFullURL: 'http://localhost:9000/assets/',
+        frontendAssetsFullURL: 'https://assets.guim.co.uk/',
     },
     webTitle: 'Foobar',
     nav: {
