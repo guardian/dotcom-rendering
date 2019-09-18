@@ -48,13 +48,12 @@ const generateArticleHtml = (capi: Capi, data: string): string => {
 
     if (type !== 'article') return `${type} type is not yet supported`;
     if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
-    if ('starRating' in fields) return `Reviews not yet supported`;
     if (atoms) return `Atoms not yet supported`;
 
     const ArticleComponent = getArticleComponent(type);
     const mainImages = elements.filter(elem => elem.relation === 'main' && elem.type === 'image');
     const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
-    const feature = isFeature(tags);
+    const feature = isFeature(tags) || 'starRating' in fields;
 
     const articleProps: object = {
       ...fields,
