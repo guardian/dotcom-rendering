@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Article rendering for The Guardian iOS and Android apps",
   "main": "server/server.ts",
+  "browserslist": [
+    "android >= 5",
+    "ios >= 11"
+  ],
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
