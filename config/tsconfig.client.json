@@ -4,7 +4,7 @@
         // Output latest features; allow babel to handle browser targeting
         "target": "esnext"
     },
-	"files": [
-		"../client.ts"
+    "files": [
+        "../client.ts"
     ]
 }
