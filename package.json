@@ -26,7 +26,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "ts-node-dev": "^1.0.0-pre.40",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
