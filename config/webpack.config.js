@@ -3,6 +3,9 @@ const serverConfig = {
     mode: 'development',
     entry: './server.ts',
     target: 'node',
+    node: {
+        __dirname: false,
+    },
     output: {
         filename: 'server.js',
     },
