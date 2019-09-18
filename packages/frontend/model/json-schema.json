@@ -1377,6 +1377,9 @@
                 },
                 "googletagUrl": {
                     "type": "string"
+                },
+                "frontendAssetsFullURL": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1388,7 +1391,8 @@
                 "revisionNumber",
                 "sentryHost",
                 "sentryPublicApiKey",
-                "switches"
+                "switches",
+                "frontendAssetsFullURL"
             ]
         },
         "DesignType": {

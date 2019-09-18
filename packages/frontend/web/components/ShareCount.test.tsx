@@ -31,6 +31,7 @@ describe('ShareCount', () => {
         isDev: false,
         googletagUrl: '',
         stage: 'DEV',
+        frontendAssetsFullURL: 'http://localhost:9000/assets/',
     };
 
     afterEach(() => {
