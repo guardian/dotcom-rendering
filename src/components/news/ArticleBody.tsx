@@ -106,7 +106,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
-    background: #1a1a1a;
+    background: ${palette.neutral[10]};
     color: ${palette.neutral[86]};
 
     a {

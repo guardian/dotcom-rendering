@@ -32,7 +32,7 @@ const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles) => css`
 `;
 
 const StandfirstDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
-    background: #1a1a1a;
+    background: ${palette.neutral[10]};
     color: ${palette.neutral[86]};
 
     a {
