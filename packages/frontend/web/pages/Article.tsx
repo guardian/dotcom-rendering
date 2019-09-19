@@ -102,6 +102,8 @@ const bodyAdStyles = css`
             margin: 0;
             width: auto;
             float: right;
+            margin-top: 4px;
+            margin-left: 20px;
         }
     }
 
