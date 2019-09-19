@@ -15,6 +15,7 @@ export interface WindowGuardianConfig {
         adUnit: string;
         showRelatedContent: boolean;
         ajaxUrl: string;
+        hbImpl: string;
     };
     libs: {
         googletag: string;
@@ -45,6 +46,7 @@ const makeWindowGuardianConfig = (
             adUnit: '/59666047/theguardian.com/film/article/ng',
             showRelatedContent: true,
             ajaxUrl: dcrDocumentData.config.ajaxUrl,
+            hbImpl: 'prebid',
         },
         libs: {
             googletag: dcrDocumentData.config.googletagUrl,
