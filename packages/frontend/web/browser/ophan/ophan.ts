@@ -38,3 +38,33 @@ export const abTestPayload = (tests: {
 
     return { abTestRegister: records };
 };
+
+export const recordPerformance = () => {
+    const performanceAPI = window.performance;
+    const supportsPerformanceProperties =
+        performanceAPI &&
+        'navigation' in performanceAPI &&
+        'timing' in performanceAPI;
+
+    if (!supportsPerformanceProperties) {
+        return;
+    }
+
+    const timing = performanceAPI.timing;
+
+    const performance = {
+        dns: timing.domainLookupEnd - timing.domainLookupStart,
+        connection: timing.connectEnd - timing.connectStart,
+        firstByte: timing.responseStart - timing.connectEnd,
+        lastByte: timing.responseEnd - timing.responseStart,
+        domContentLoadedEvent:
+            timing.domContentLoadedEventStart - timing.responseEnd,
+        loadEvent: timing.loadEventStart - timing.domContentLoadedEventStart,
+        navType: performanceAPI.navigation.type,
+        redirectCount: performanceAPI.navigation.redirectCount,
+    };
+
+    window.guardian.ophan.record({
+        performance,
+    });
+};
