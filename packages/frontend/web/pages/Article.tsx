@@ -66,7 +66,7 @@ const headerAdWrapper = css`
     }
 
     margin: 0 auto;
-    min-height: 151px;
+    height: 151px;
     padding-bottom: 18px;
     padding-top: 18px;
     text-align: left;
