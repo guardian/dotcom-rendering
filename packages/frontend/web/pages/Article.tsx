@@ -88,18 +88,27 @@ const headerAd = css`
 
 // These are by selector as for dynamically-created ads
 const bodyAdStyles = css`
-    .ad-slot--inline {
+    .ad-slot {
         background-color: ${palette.neutral[97]};
         width: 320px;
         margin: 12px auto;
         min-width: 300px;
         min-height: 274px;
         text-align: center;
+    }
 
+    .ad-slot--inline {
         ${desktop} {
             margin: 0;
             width: auto;
             float: right;
+        }
+    }
+
+    .ad-slot--offset-right {
+        ${desktop} {
+            float: right;
+            width: auto;
             margin-right: -328px;
         }
 
