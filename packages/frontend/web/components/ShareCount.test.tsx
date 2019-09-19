@@ -32,6 +32,7 @@ describe('ShareCount', () => {
         googletagUrl: '',
         stage: 'DEV',
         frontendAssetsFullURL: 'http://localhost:9000/assets/',
+        hbImpl: 'prebid',
     };
 
     afterEach(() => {
