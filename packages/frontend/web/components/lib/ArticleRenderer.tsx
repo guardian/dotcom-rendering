@@ -2,6 +2,7 @@ import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockC
 import { SubheadingBlockComponent } from '@frontend/web/components/elements/SubheadingBlockComponent';
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@frontend/web/components/elements/TweetBlockComponent';
+import { PullQuoteComponent } from '@frontend/web/components/elements/PullQuoteComponent';
 import React from 'react';
 // import { clean } from '@frontend/model/clean';
 export const ArticleRenderer: React.FC<{
@@ -33,6 +34,16 @@ export const ArticleRenderer: React.FC<{
                     );
                 case 'model.dotcomrendering.pageElements.TweetBlockElement':
                     return <TweetBlockComponent key={i} element={element} />;
+                case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
+                    return (
+                        <PullQuoteComponent
+                            key={i}
+                            html={element.html}
+                            pillar={pillar}
+                            attribution={element.attribution}
+                            role={element.role}
+                        />
+                    );
                 default:
                     return null;
             }

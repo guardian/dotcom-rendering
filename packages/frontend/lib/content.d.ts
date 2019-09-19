@@ -155,6 +155,7 @@ interface PullquoteBlockElement {
     _type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
     html: string;
     role: string;
+    attribution: string;
 }
 
 interface QABlockElement {
