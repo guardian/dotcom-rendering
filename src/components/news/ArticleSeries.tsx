@@ -15,14 +15,13 @@ const ArticleSeriesStyles = ({ kicker }: PillarStyles) => css`
 
 interface ArticleSeriesProps {
     series: {
-        webTitle: string;
-        webUrl: string;
+        webTitle?: string;
+        webUrl?: string;
     };
     pillarStyles: PillarStyles;
 }
 
-const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps) => (
-    <div css={ArticleSeriesStyles(pillarStyles)}><a href={series.webUrl}>{series.webTitle}</a></div>
-)
+const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps) =>
+    series ? <div css={ArticleSeriesStyles(pillarStyles)}><a href={series.webUrl}>{series.webTitle}</a></div> : null
 
 export default ArticleSeries;

@@ -55,7 +55,7 @@ const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, p
     return (
         <main css={MainStyles}>
             <HeaderImage assets={mainAssets}/>
-            { series ? <ArticleSeries series={series} pillarStyles={pillarStyles}/> : null }
+            <ArticleSeries series={series} pillarStyles={pillarStyles}/>
             <ArticleHeadline headline={headline} feature={feature} rating={starRating} pillarStyles={pillarStyles}/>
             <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
             <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} publicationDate={webPublicationDate} contributors={contributors}/>
