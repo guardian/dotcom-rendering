@@ -9,6 +9,8 @@ const headerImageStyles = css`
         width: 100%;
         display: block;
     }
+
+    margin-bottom: 8px;
 `;
 
 interface Asset {
