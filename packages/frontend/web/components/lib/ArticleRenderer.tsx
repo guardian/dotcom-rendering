@@ -38,5 +38,5 @@ export const ArticleRenderer: React.FC<{
             }
         })
         .filter(_ => _ != null);
-    return <div className="article-body-03f883b8">{output}</div>; // classname that space finder is going to target for in-body ads in DCR
+    return <div className="article-body-commercial-selector">{output}</div>; // classname that space finder is going to target for in-body ads in DCR
 };
