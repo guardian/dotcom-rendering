@@ -92,7 +92,10 @@ export const makeWindowGuardian = (
             cssIDs,
             data: dcrDocumentData,
         },
-        config: makeWindowGuardianConfig(dcrDocumentData),
+        config: Object.assign(
+            dcrDocumentData.config,
+            makeWindowGuardianConfig(dcrDocumentData),
+        ),
         polyfilled: false,
         adBlockers: {
             active: undefined,

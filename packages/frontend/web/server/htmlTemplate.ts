@@ -79,8 +79,6 @@ export const htmlTemplate = ({
                     window.guardian.mustardCut = false;
                 </script>
 
-
-
                 <script>
                     // this is a global that's called at the bottom of the pf.io response,
                     // once the polyfills have run. This may be useful for debugging.
