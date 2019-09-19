@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import jsdom from 'jsdom';
 
-import { Result, Ok, Err } from './types/Result';
+import { Result, Ok, Err, fromUnsafe } from './types/Result';
 import { imageBlock } from './components/blocks/image';
 
 
@@ -67,33 +67,33 @@ function reactFromElement(element: any): Result<string, ReactNode> {
 
     switch (element.type) {
         case 'text':
-            try {
-                const fragment = new Ok<string, DocumentFragment>(JSDOM.fragment(element.textTypeData.html));
-                return fragment.map(textBlock);
-            } catch (_) {
-                return new Err('Failed to parse text element');
-            }
+
+            return fromUnsafe(
+                () => JSDOM.fragment(element.textTypeData.html),
+                'Failed to parse text element',
+            ).map(textBlock);
+
         case 'pullquote':
-            try {
-                const fragment = new Ok<string, DocumentFragment>(JSDOM.fragment(element.pullquoteTypeData.html));
-                return fragment.map(pullquoteBlock);
-            } catch (_) {
-                return new Err('Failed to parse pullquote element');
-            }
+
+            return fromUnsafe(
+                () => JSDOM.fragment(element.pullquoteTypeData.html),
+                'Failed to parse pullquote element',
+            ).map(pullquoteBlock);
+
         case 'rich-link':
-            try {
+
+            return fromUnsafe(() => {
                 const { url, linkText } = element.richLinkTypeData;
-                return new Ok(richLinkBlock(url, linkText));
-            } catch (_) {
-                return new Err('Failed to parse rich link');
-            }
+                return richLinkBlock(url, linkText);
+            }, 'Failed to parse rich link');
+
         case 'image':
-            try {
+
+            return fromUnsafe(() => {
                 const { imageTypeData, assets } = element;
-                return new Ok(imageBlock(imageTypeData, assets));
-            } catch (_) {
-                return new Err('Failed to parse image');
-            }
+                return imageBlock(imageTypeData, assets)
+            }, 'Failed to parse image');
+
         default:
             return new Err(`Unexpected element type: ${element.type}`);
     }
