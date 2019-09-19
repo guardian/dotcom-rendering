@@ -55,6 +55,14 @@ class Err<E, B> implements ResultInterface<E, B> {
 
 type Result<E, A> = Ok<E, A> | Err<E, A>;
 
+function fromUnsafe<A, E>(f: () => A, error: E): Result<E, A> {
+    try {
+        return new Ok(f());
+    } catch (_) {
+        return new Err(error);
+    }
+}
+
 
 // ----- Exports ----- //
 
@@ -62,4 +70,5 @@ export {
     Result,
     Ok,
     Err,
+    fromUnsafe,
 };
