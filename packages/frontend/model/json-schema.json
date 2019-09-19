@@ -1380,6 +1380,9 @@
                 },
                 "frontendAssetsFullURL": {
                     "type": "string"
+                },
+                "hbImpl": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1392,7 +1395,8 @@
                 "sentryHost",
                 "sentryPublicApiKey",
                 "switches",
-                "frontendAssetsFullURL"
+                "frontendAssetsFullURL",
+                "hbImpl"
             ]
         },
         "DesignType": {

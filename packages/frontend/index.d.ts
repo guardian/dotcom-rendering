@@ -228,6 +228,7 @@ interface ConfigType {
     googletagUrl: string;
     stage: string;
     frontendAssetsFullURL: string;
+    hbImpl: string;
 }
 
 interface GADataType {

@@ -449,6 +449,7 @@ export const CAPI: CAPIType = {
         googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
         stage: 'DEV',
         frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+        hbImpl: 'prebid',
     },
     webTitle: 'Foobar',
     nav: {

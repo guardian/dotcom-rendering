@@ -46,7 +46,7 @@ const makeWindowGuardianConfig = (
             adUnit: '/59666047/theguardian.com/film/article/ng',
             showRelatedContent: true,
             ajaxUrl: dcrDocumentData.config.ajaxUrl,
-            hbImpl: 'prebid',
+            hbImpl: dcrDocumentData.config.hbImpl,
         },
         libs: {
             googletag: dcrDocumentData.config.googletagUrl,
