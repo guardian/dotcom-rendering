@@ -32,7 +32,7 @@ const makeWindowGuardianConfig = (
         isDotcomRendering: true,
         stage: dcrDocumentData.config.stage,
         frontendAssetsFullURL: dcrDocumentData.config.frontendAssetsFullURL,
-        page: {
+        page: Object.assign(dcrDocumentData.config, {
             contentType: dcrDocumentData.CAPI.contentType,
             edition: dcrDocumentData.CAPI.editionId,
             revisionNumber: dcrDocumentData.config.revisionNumber,
@@ -47,7 +47,7 @@ const makeWindowGuardianConfig = (
             showRelatedContent: true,
             ajaxUrl: dcrDocumentData.config.ajaxUrl,
             hbImpl: dcrDocumentData.config.hbImpl,
-        },
+        }),
         libs: {
             googletag: dcrDocumentData.config.googletagUrl,
         },
@@ -94,10 +94,7 @@ export const makeWindowGuardian = (
             cssIDs,
             data: dcrDocumentData,
         },
-        config: Object.assign(
-            dcrDocumentData.config,
-            makeWindowGuardianConfig(dcrDocumentData),
-        ),
+        config: makeWindowGuardianConfig(dcrDocumentData),
         polyfilled: false,
         adBlockers: {
             active: undefined,
