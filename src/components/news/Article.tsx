@@ -58,7 +58,7 @@ const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, p
             <ArticleSeries series={series} pillarStyles={pillarStyles}/>
             <ArticleHeadline headline={headline} feature={feature} rating={starRating} pillarStyles={pillarStyles}/>
             <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
-            <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} publicationDate={webPublicationDate} contributors={contributors}/>
+            <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} pillarId={pillarId} publicationDate={webPublicationDate} contributors={contributors}/>
             <ArticleBody body={body} pillarStyles={pillarStyles}/>
             <Tags tags={tags}/>
         </main>

@@ -16,7 +16,7 @@ import { Capi } from './src/types/Capi'
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));
-app.use("/public", express.static(path.resolve(__dirname, '../public')));
+app.use("/public", express.static(path.resolve(__dirname, './public')));
 app.use(compression());
 
 // TODO: request less data from capi
@@ -46,7 +46,6 @@ app.get('/*', (req, res) => {
 const generateArticleHtml = (capi: Capi, data: string): string => {
     const { type, fields, elements, tags, atoms } = capi.response.content;
 
-    if (type !== 'article') return `${type} type is not yet supported`;
     if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
     if (atoms) return `Atoms not yet supported`;
 
