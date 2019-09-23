@@ -128,8 +128,12 @@ const bodyAdStyles = css`
 
     .ad-slot--outstream {
         ${tablet} {
-            margin-left: 35px;
-            margin-right: 35px;
+            margin-left: 0;
+
+            .ad-slot__label {
+                margin-left: 35px;
+                margin-right: 35px;
+            }
         }
     }
 
