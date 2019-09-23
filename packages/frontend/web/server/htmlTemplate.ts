@@ -1,6 +1,7 @@
 import resetCSS from /* preval */ '@frontend/lib/reset-css';
 import { getFontsCss } from '@frontend/lib/fonts-css';
 import { getStatic } from '@frontend/lib/assets';
+import { prepareCmpString } from '@frontend/web/browser/prepareCmp';
 
 import { WindowGuardian } from '@frontend/model/window-guardian';
 
@@ -104,8 +105,9 @@ export const htmlTemplate = ({
                     };
                 </script>
 
-                ${priorityScriptTags.join('\n')}
+                <script>${prepareCmpString}</script>
 
+                ${priorityScriptTags.join('\n')}
                 <style>${getFontsCss()}${resetCSS}${css}</style>
             </head>
 
