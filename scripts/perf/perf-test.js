@@ -6,7 +6,7 @@ const run = async () => {
         await execa('command', ['-v', 'fast']);
         const { stdout } = await execa('fast', [
             '--start-cmd',
-            'make build;make start',
+            'make build;make start;sleep 2',
             '--stop-cmd',
             'make stop',
             '--target-url',
