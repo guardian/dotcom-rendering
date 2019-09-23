@@ -15,7 +15,7 @@ const run = async () => {
 
         log(stdout);
     } catch (e) {
-        warn(err.stack);
+        warn(e.stack);
         process.exit(1);
     }
 };
