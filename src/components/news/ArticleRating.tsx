@@ -39,7 +39,7 @@ interface ArticleRatingProps {
    rating: string;
 }
 
-const ArticleSeries = ({ rating }: ArticleRatingProps) => {
+const ArticleSeries = ({ rating }: ArticleRatingProps): JSX.Element => {
     const numericalRating = parseInt(rating);
     const acceptedRatings = [0, 1, 2, 3, 4, 5];
     if (!acceptedRatings.includes(numericalRating)) return null;

@@ -13,7 +13,7 @@ class Ok<E, B> implements ResultInterface<E, B> {
 
     value: B;
 
-    either<C>(f: (e: E) => C, g: (b: B) => C) {
+    either<C>(f: (e: E) => C, g: (b: B) => C): C {
         return g(this.value);
     }
 
@@ -35,15 +35,15 @@ class Err<E, B> implements ResultInterface<E, B> {
 
     error: E;
 
-    either<C>(f: (e: E) => C, g: (b: B) => C) {
+    either<C>(f: (e: E) => C): C {
         return f(this.error);
     }
 
-    map<C>(f: (a: B) => C): Result<E, C> {
+    map<C>(): Result<E, C> {
         return new Err(this.error);
     }
 
-    andThen<C>(f: (b: B) => Result<E, C>): Result<E, C> {
+    andThen<C>(): Result<E, C> {
         return new Err(this.error);
     }
 

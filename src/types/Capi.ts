@@ -4,7 +4,7 @@ export interface Capi {
             type: string;
             fields: {
                 displayHint: string;
-            }
+            };
             elements: [{
                 relation: string;
                 type: string;
@@ -14,6 +14,6 @@ export interface Capi {
                 id: string;
             }];
             atoms?: object[];
-        }
-    }
+        };
+    };
 }

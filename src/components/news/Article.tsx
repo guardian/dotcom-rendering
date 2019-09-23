@@ -47,7 +47,7 @@ const MainStyles = darkModeCss`
     background: ${palette.neutral[10]};
 `;
 
-const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets, starRating }: ArticleProps) => {
+const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets, starRating }: ArticleProps): JSX.Element => {
     const pillarStyles = getPillarStyles(pillarId);
     const contributors = tags.filter(tag => tag.type === 'contributor');
     const [series] = tags.filter(tag => tag.type === 'series');

@@ -30,7 +30,7 @@ interface HeaderImageProps {
     assets: Asset[];
 }
 
-const HeaderImage = ({ assets }: HeaderImageProps) => {
+const HeaderImage = ({ assets }: HeaderImageProps): JSX.Element | null => {
     if (!assets) return null;
 
     const { file, typeData: {caption, credit, altText} } = assets[0];

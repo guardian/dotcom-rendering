@@ -64,7 +64,7 @@ interface HeaderImageCaptionProps {
 	credit: string;
 }
 
-const HeaderImageCaption = ({ caption, credit }: HeaderImageCaptionProps) => (
+const HeaderImageCaption = ({ caption, credit }: HeaderImageCaptionProps): JSX.Element => (
 	<div css={HeaderImageCaptionStyles}>
 		<label htmlFor="captionToggle"></label>
 		<input type="checkbox" id="captionToggle"/>

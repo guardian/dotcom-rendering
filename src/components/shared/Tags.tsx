@@ -50,7 +50,7 @@ interface TagsProps {
     tags: Tag[];
 }
 
-const Tags = ({ tags }: TagsProps) => (
+const Tags = ({ tags }: TagsProps): JSX.Element => (
     <ul css={[tagsStyles, tagsDarkStyles]}>
         {tags.map((tag, index) => {
             return <li key={index}>

@@ -1,10 +1,10 @@
 import React from 'react';
 import ArticleRating from './ArticleRating';
 import { basePx, sidePadding, PillarStyles, headlineFont, darkModeCss } from '../../styles';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 
-const HeadlineStyles = (feature: boolean, { featureHeadline }: PillarStyles) => css`
+const HeadlineStyles = (feature: boolean, { featureHeadline }: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};
     h1 {
         font-size: 2.8rem;
@@ -29,7 +29,7 @@ interface ArticleHeadlineProps {
     rating: string;
 }
 
-const ArticleHeadline = ({ headline, feature, pillarStyles, rating }: ArticleHeadlineProps) =>
+const ArticleHeadline = ({ headline, feature, pillarStyles, rating }: ArticleHeadlineProps): JSX.Element =>
     <div css={[HeadlineStyles(feature, pillarStyles), HeadlineDarkStyles]}>
         <h1>{headline}</h1>
         { rating ? <ArticleRating rating={rating} /> : null }

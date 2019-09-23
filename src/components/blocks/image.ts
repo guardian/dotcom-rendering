@@ -8,19 +8,19 @@ import React from 'react';
 const h = React.createElement;
 
 interface Image {
-    caption: string,
-    displayCredit: boolean,
-    credit: string,
-    alt: string,
+    caption: string;
+    displayCredit: boolean;
+    credit: string;
+    alt: string;
 }
 
 interface Asset {
-    type: string,
-    file: string,
+    type: string;
+    file: string;
     typeData: {
-        width: number,
-        isMaster?: boolean,
-    }
+        width: number;
+        isMaster?: boolean;
+    };
 }
 
 

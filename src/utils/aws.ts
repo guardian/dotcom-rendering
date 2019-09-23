@@ -4,8 +4,8 @@ import SSM from "aws-sdk/clients/ssm";
 
 
 const credentialProvider = new CredentialProviderChain([
-    function () { return new ECSCredentials(); },
-    function () { return new SharedIniFileCredentials({
+    function (): ECSCredentials { return new ECSCredentials(); },
+    function (): SharedIniFileCredentials{ return new SharedIniFileCredentials({
         profile: "mobile"
     }); }                                                                            
 ]);
