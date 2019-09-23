@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import {
     palette,
     until,
+    tablet,
     desktop,
     mobileLandscape,
     wide,
@@ -122,6 +123,13 @@ const bodyAdStyles = css`
 
         ${wide} {
             margin-right: -408px;
+        }
+    }
+
+    .ad-slot--outstream {
+        ${tablet} {
+            margin-left: 35px;
+            margin-right: 35px;
         }
     }
 
