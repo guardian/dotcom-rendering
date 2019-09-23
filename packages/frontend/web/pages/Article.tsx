@@ -89,12 +89,18 @@ const headerAd = css`
 // These are by selector as for dynamically-created ads
 const bodyAdStyles = css`
     .ad-slot {
-        background-color: ${palette.neutral[97]};
         width: 300px;
         margin: 12px auto;
         min-width: 300px;
         min-height: 274px;
         text-align: center;
+    }
+
+    .ad-slot--most-popular {
+        ${desktop} {
+            margin: 0;
+            width: auto;
+        }
     }
 
     .ad-slot--inline {
@@ -142,9 +148,9 @@ export const Article: React.FC<{
             />
         </div>
 
-        <main>
+        <main className={bodyAdStyles}>
             <Container borders={true} className={articleContainer}>
-                <article className={bodyAdStyles}>
+                <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
                         <div className={adSlotWrapper}>
