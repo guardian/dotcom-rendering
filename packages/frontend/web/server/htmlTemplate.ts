@@ -32,6 +32,10 @@ export const htmlTemplate = ({
             ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
 
+    const scriptPreloadTags = priorityScripts.map(
+        src => `<link rel="preload" href="${src}" as="script" crossorigin >`,
+    );
+
     const priorityScriptTags = priorityScripts.map(
         src => `<script defer src="${src}"></script>`,
     );
@@ -63,6 +67,7 @@ export const htmlTemplate = ({
                 <!-- TODO make this conditional when we support more content types -->
                 ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
 
+                ${scriptPreloadTags.join('\n')}
                 ${fontPreloadTags.join('\n')}
 
                 <script>
