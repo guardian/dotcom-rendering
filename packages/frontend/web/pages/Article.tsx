@@ -90,7 +90,7 @@ const headerAd = css`
 const bodyAdStyles = css`
     .ad-slot {
         background-color: ${palette.neutral[97]};
-        width: 320px;
+        width: 300px;
         margin: 12px auto;
         min-width: 300px;
         min-height: 274px;
