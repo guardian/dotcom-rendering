@@ -4,9 +4,8 @@
 - Working on node v10.16.3 (nvm use 10.16.3)
 - You will need `mobile` Janus credentials to run this project
 1. npm i
-2. npm run compileClient (watches for changes)
-3. npm run dev (compiles and runs server)
-4. http://localhost:3040
+2. npm run build:server (watches for changes)
+3. http://localhost:3040
 
 ### Architecture decisions
 
