@@ -35,7 +35,7 @@ class Err<E, B> implements ResultInterface<E, B> {
 
     error: E;
 
-    either<C>(f: (e: E,) => C, _g: (b: B) => C): C {
+    either<C>(f: (e: E) => C, _g: (b: B) => C): C {
         return f(this.error);
     }
 

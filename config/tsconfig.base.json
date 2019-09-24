@@ -7,8 +7,6 @@
         // Don't transpile jsx (handled by babel w/ emotion)
         "jsx": "preserve",
         // Allows discovery of node_modules packages
-        "moduleResolution": "node",
-        "noUnusedLocals": false,
-        "noUnusedParameters": false
+        "moduleResolution": "node"
     }
 }
