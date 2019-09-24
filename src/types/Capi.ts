@@ -37,7 +37,7 @@ export interface Capi {
                     'publication' |
                     'tracking' |
                     'paid_content' |
-                    'campaign'
+                    'campaign';
             }];
             atoms?: object[];
         };

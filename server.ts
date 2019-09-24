@@ -20,7 +20,44 @@ app.use("/public", express.static(path.resolve(__dirname, './public')));
 app.use(compression());
 
 // TODO: request less data from capi
-const capiEndpoint = (articleId: string, key: string) => `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-fields=all&show-tags=all`;
+const capiEndpoint = (articleId: string, key: string): string => `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-fields=all&show-tags=all`;
+
+const generateArticleHtml = (capi: Capi, data: string): string => {
+  const { type, fields, elements, tags, atoms, webPublicationDate } = capi.response.content;
+
+  if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
+  if (atoms) return `Atoms not yet supported`;
+
+  const mainImages = elements.filter(elem => elem.relation === 'main' && elem.type === 'image');
+  const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
+  const feature = isFeature(tags) || 'starRating' in fields;
+
+  const articleProps = {
+    ...fields,
+    ...capi.response.content,
+    webPublicationDate,
+    feature,
+    mainAssets
+  };
+
+  const getArticleComponent = (type: string): React.ReactElement => {
+    switch(type) {
+      case 'article':
+        return React.createElement(Article, articleProps); 
+      case 'liveblog':
+        return React.createElement(Article, articleProps); 
+      default:
+        return React.createElement('p', null, `${type} not implemented yet`);
+    }
+  }
+
+  const body = renderToString(getArticleComponent(type));
+
+  return data.replace(
+      '<div id="root"></div>',
+      `<div id="root">${body}</div>`
+    )
+}
 
 app.get('/*', (req, res) => {
     try {
@@ -41,47 +78,6 @@ app.get('/*', (req, res) => {
     } catch (e) {
         res.status(500).send(`<pre>${e.stack}</pre>`);
     }
-});
-
-const generateArticleHtml = (capi: Capi, data: string): string => {
-    const { type, fields, elements, tags, atoms, webPublicationDate } = capi.response.content;
-
-    if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
-    if (atoms) return `Atoms not yet supported`;
-
-    const mainImages = elements.filter(elem => elem.relation === 'main' && elem.type === 'image');
-    const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
-    const feature = isFeature(tags) || 'starRating' in fields;
-
-    const articleProps = {
-      ...fields,
-      ...capi.response.content,
-      webPublicationDate,
-      feature,
-      mainAssets
-    };
-
-    const getArticleComponent = (type: String): React.ReactElement => {
-      switch(type) {
-        case 'article':
-          return React.createElement(Article, articleProps); 
-        case 'liveblog':
-          return React.createElement(Article, articleProps); 
-        default:
-          return React.createElement('p', null, `${type} not implemented yet`);
-      }
-    }
-
-    const body = renderToString(getArticleComponent(type));
-
-    return data.replace(
-        '<div id="root"></div>',
-        `<div id="root">${body}</div>`
-      )
-}
-
-app.use((err: any, req: any, res: any, next: any) => {
-    res.status(500).send(`<pre>${err.stack}</pre>`);
 });
 
 app.listen(3040);
