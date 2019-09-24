@@ -1,7 +1,7 @@
 import React from 'react';
 import { sidePadding, PillarStyles, bulletStyles, headlineFont, darkModeCss } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
 const StandfirstFeatureStyles = `
@@ -12,7 +12,7 @@ const StandfirstFeatureStyles = `
     line-height: 2.4rem;
 `;
 
-const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles) => css`
+const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles): SerializedStyles => css`
     padding-bottom: 6px;
     font-weight: 500;
     font-size: 1.6rem;
@@ -31,7 +31,7 @@ const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles) => css`
     ${feature ? StandfirstFeatureStyles : null}
 `;
 
-const StandfirstDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
+const StandfirstDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral[10]};
     color: ${palette.neutral[86]};
 
@@ -46,7 +46,7 @@ interface ArticleStandfirstProps {
     pillarStyles: PillarStyles;
 }
 
-const ArticleStandfirst = ({ standfirst, pillarStyles, feature }: ArticleStandfirstProps) => (
+const ArticleStandfirst = ({ standfirst, pillarStyles, feature }: ArticleStandfirstProps): JSX.Element => (
     <div css={[StandfirstStyles(feature, pillarStyles), StandfirstDarkStyles(pillarStyles)]} dangerouslySetInnerHTML={{__html: transform(standfirst)}}></div>
 )
 

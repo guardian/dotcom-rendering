@@ -1,8 +1,8 @@
 import React from 'react';
 import { sidePadding, PillarStyles } from '../../styles';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 
-const ArticleSeriesStyles = ({ kicker }: PillarStyles) => css`    
+const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     ${sidePadding}
     a {
         font-weight: 900;
@@ -21,7 +21,7 @@ interface ArticleSeriesProps {
     pillarStyles: PillarStyles;
 }
 
-const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps) =>
+const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps): JSX.Element | null =>
     series ? <div css={ArticleSeriesStyles(pillarStyles)}><a href={series.webUrl}>{series.webTitle}</a></div> : null
 
 export default ArticleSeries;

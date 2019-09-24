@@ -17,11 +17,11 @@ const ArticleRatingStyles = css`
         padding: 0 .2rem .4rem;
         font-size: inherit;
 
-        &:nth-child(1) {
+        &:nth-of-type(1) {
             padding-left: .5rem;
         }
 
-        &:nth-child(5) {
+        &:nth-of-type(5) {
             padding-right: .5rem;
         }
     }
@@ -39,7 +39,7 @@ interface ArticleRatingProps {
    rating: string;
 }
 
-const ArticleSeries = ({ rating }: ArticleRatingProps) => {
+const ArticleSeries = ({ rating }: ArticleRatingProps): JSX.Element | null => {
     const numericalRating = parseInt(rating);
     const acceptedRatings = [0, 1, 2, 3, 4, 5];
     if (!acceptedRatings.includes(numericalRating)) return null;
@@ -47,10 +47,10 @@ const ArticleSeries = ({ rating }: ArticleRatingProps) => {
     return (
         <div css={ArticleRatingStyles}>
             {
-                [...Array(5)].map((star, index) => {
+                [...Array(5)].map((_star, index) => {
                     return index + 1 <= numericalRating
-                        ? <span className="filled"></span>
-                        : <span></span>
+                        ? <span key={index} className="filled"></span>
+                        : <span key={index}></span>
                 })
             }
         </div>

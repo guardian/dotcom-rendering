@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
@@ -36,8 +36,8 @@ const KeylineDarkStyles = darkModeCss`
 `;
 
 
-export const Keyline = ({ type }: {type: string}) => {
-    const SelectedKeylineStyles = ((type) => {
+export const Keyline = ({ type }: {type: string}): JSX.Element => {
+    const SelectedKeylineStyles = ((type): SerializedStyles => {
         switch(type) {
             case 'pillar/opinion':
                 return KeylineOpinionStyles;

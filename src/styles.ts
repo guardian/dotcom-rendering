@@ -1,9 +1,9 @@
 import { palette } from '@guardian/src-foundations';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 
 const BASE_PADDING = 8;
 
-const baseMultiply = (value: number) : number => value * BASE_PADDING;
+const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const colours = {
     black: palette.neutral[7],
@@ -30,11 +30,6 @@ export interface PillarStyles {
 
 interface PillarColours {
     [pillar: string]: PillarStyles;
-}
-
-export function getPillarStyles(pillarId: PillarId): PillarStyles {
-    const pillar = pillarId.replace('pillar/', '');
-    return pillarColours[pillar];
 }
 
 export const pillarColours: PillarColours = {
@@ -73,6 +68,11 @@ export const pillarColours: PillarColours = {
         inverted: palette.lifestyle.bright,
         liveblogBackground: palette.lifestyle.dark
     }
+}
+
+export function getPillarStyles(pillarId: PillarId): PillarStyles {
+    const pillar = pillarId.replace('pillar/', '');
+    return pillarColours[pillar];
 }
 
 export const bulletStyles = (kicker: string): string =>  `
@@ -119,7 +119,7 @@ export const headlineFont = "font-family: 'Guardian Headline';";
 
 export const icons = "font-family: 'Guardian Icons';";
 
-export const darkModeCss = (styles: TemplateStringsArray, ...placeholders: string[]) => {
+export const darkModeCss = (styles: TemplateStringsArray, ...placeholders: string[]): SerializedStyles => {
     return css`
         @media (prefers-color-scheme: dark) {
             ${styles.map((style, index) => `${style}${placeholders[index]}`)

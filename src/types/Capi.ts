@@ -15,7 +15,7 @@ export interface Capi {
                 displayHint: string;
                 body: string;
                 starRating?: string;
-            }
+            };
             elements: [{
                 relation: string;
                 type: string;
@@ -37,9 +37,9 @@ export interface Capi {
                     'publication' |
                     'tracking' |
                     'paid_content' |
-                    'campaign'
+                    'campaign';
             }];
             atoms?: object[];
-        }
-    }
+        };
+    };
 }

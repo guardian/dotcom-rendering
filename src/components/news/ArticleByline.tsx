@@ -4,11 +4,11 @@ import { sidePadding, textSans, PillarStyles, PillarId, darkModeCss } from '../.
 
 import { Keyline } from '../shared/Keyline';
 
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
 
-const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
+const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyles => css`
     .avatar {
         width: 68px;
         height: 68px;
@@ -51,7 +51,7 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles) => css`
     }
 `;
 
-const ArticleBylineDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
+const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral[10]};
     color: ${palette.neutral[86]};
 
@@ -81,11 +81,11 @@ interface Contributor {
     bylineLargeImageUrl?: string;
 }
 
-const ArticleBylineAvatar = (img: string) => (
+const ArticleBylineAvatar = (img: string): JSX.Element => (
     <div className="avatar"><img src={img} /></div>
 )
 
-const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: ArticleBylineProps) => {
+const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: ArticleBylineProps): JSX.Element => {
     const [contributor] = contributors;
     const singleContributor = contributors.length === 1;
     const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? ArticleBylineAvatar(contributor.bylineLargeImageUrl) : null;

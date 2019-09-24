@@ -1,10 +1,10 @@
 import React from 'react';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, headlineFont, icons, PillarStyles, bulletStyles, darkModeCss } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
 import { palette } from '@guardian/src-foundations'
 
-const articleBodyStyles = ({ kicker }: PillarStyles) => css`
+const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     a {
         color: ${kicker};
     }
@@ -105,7 +105,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles) => css`
     ${sidePadding}
 `;
 
-const ArticleBodyDarkStyles = ({ inverted }: PillarStyles) => darkModeCss`
+const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral[10]};
     color: ${palette.neutral[86]};
 
@@ -139,7 +139,7 @@ interface ArticleBodyProps {
     pillarStyles: PillarStyles;
 }
 
-const ArticleBody = ({ body, pillarStyles }: ArticleBodyProps) => (
+const ArticleBody = ({ body, pillarStyles }: ArticleBodyProps): JSX.Element => (
     <div css={[articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]} dangerouslySetInnerHTML={{__html: transform(body)}} />
 )
 

@@ -11,8 +11,15 @@ import { imageBlock } from './components/blocks/image';
 // ----- Setup ----- //
 
 type ReactNode = React.ReactNode;
-type ParsedReact = { errors: string[], nodes: ReactNode[] };
-type Rendered = { errors: string[], html: string };
+type ParsedReact = { 
+    errors: string[];
+    nodes: ReactNode[];
+};
+
+type Rendered = { 
+    errors: string[];
+    html: string;
+};
 
 const { JSDOM } = jsdom;
 const h = React.createElement;
@@ -20,7 +27,7 @@ const h = React.createElement;
 
 // ----- Functions ----- //
 
-function getAttrs(node: Element) {
+function getAttrs(node: Element): {} {
     return Array.from(node.attributes).reduce((attrs, attr) => {
         return { ...attrs, [attr.name]: attr.value };
     }, {});
@@ -63,6 +70,7 @@ const richLinkBlock = (url: string, linkText: string): ReactNode =>
         h('a', { href: url }, 'Read more'),
     ]);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function reactFromElement(element: any): Result<string, ReactNode> {
 
     switch (element.type) {
@@ -100,8 +108,9 @@ function reactFromElement(element: any): Result<string, ReactNode> {
 
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function elementsToReact(elements: any[]): ParsedReact {
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any 
     const elementToReact = ({ errors, nodes }: ParsedReact, element: any): ParsedReact =>
         reactFromElement(element).either(
             error => ({ errors: [ ...errors, error ], nodes }),
@@ -112,6 +121,7 @@ function elementsToReact(elements: any[]): ParsedReact {
 
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function parseCapi(capiResponse: string): Result<string, any> {
     try {
         return new Ok(JSON.parse(capiResponse));
@@ -120,6 +130,7 @@ function parseCapi(capiResponse: string): Result<string, any> {
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function getElements(capi: any): Result<string, any> {
     try {
         return capi.response.content.blocks.body[0].elements;

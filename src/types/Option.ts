@@ -13,7 +13,7 @@ class Some<A> implements OptionInterface<A> {
 
     value: A;
 
-    withDefault(a: A): A {
+    withDefault(_a: A): A {
         return this.value;
     }
 
@@ -37,11 +37,11 @@ class None<A> implements OptionInterface<A> {
         return a;
     }
 
-    map<B>(f: (a: A) => B): Option<B> {
+    map<B>(_f: (a: A) => B): Option<B> {
         return new None();
     }
 
-    andThen<B>(f: (a: A) => Option<B>): Option<B> {
+    andThen<B>(_f: (a: A) => Option<B>): Option<B> {
         return new None();
     }
 
