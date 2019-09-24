@@ -34,7 +34,7 @@ const commonStyles = (pillar: Pillar) =>
         position: absolute;
         background-color: ${palette.neutral[97]};
     }
-    
+
     cite,
     svg {
         color: ${pillarPalette[pillar].main};
@@ -51,15 +51,15 @@ const supportingStyles = (pillar: Pillar) =>
         clear: left;
         float: left;
         ${body(4)};
-    
+
         ${leftCol} {
             margin-left: -${gutter / 2 + gsSpan(3) / 2}px;
         }
-    
+
         :after {
             left: ${gutter / 2};
             border-radius: 0 0 ${quoteTail}px;
-    
+
             ${leftCol} {
                 border-radius: 0 0 0 ${quoteTail}px;
                 left: 0rem;
@@ -75,7 +75,7 @@ const inlineStyles = (pillar: Pillar) =>
         margin-left: 0rem;
         display: block;
         ${body(4)};
-    
+
         ${mobileLandscape} {
             margin-left: -${gutter}px;
         }
@@ -85,11 +85,11 @@ const inlineStyles = (pillar: Pillar) =>
         ${leftCol} {
             margin-left: -3.5rem;
         }
-    
+
         :after {
             left: 0rem;
             border-radius: 0 0 ${quoteTail}px;
-    
+
             ${mobileLandscape} {
                 left: ${gutter}px;
             }
@@ -115,8 +115,8 @@ function getStyles(role: string, pillar: Pillar) {
 export const PullQuoteComponent: React.FC<{
     html: string;
     pillar: Pillar;
-    attribution: string;
     role: string;
+    attribution?: string;
 }> = ({ html, pillar, attribution, role }) => (
     <aside className={getStyles(role, pillar)}>
         <Quote />{' '}
