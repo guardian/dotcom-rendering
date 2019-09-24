@@ -7,7 +7,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
-import Article from './dist/components/news/Article';
+import Article from './src/components/news/Article';
 
 import { getConfigValue } from './src/utils/ssmConfig';
 import { isFeature } from './src/utils/capi';
@@ -44,40 +44,40 @@ app.get('/*', (req, res) => {
 });
 
 const generateArticleHtml = (capi: Capi, data: string): string => {
-    const { type, fields, elements, tags, atoms } = capi.response.content;
+    const { type, fields, elements, tags, atoms, webPublicationDate } = capi.response.content;
 
     if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
     if (atoms) return `Atoms not yet supported`;
 
-    const ArticleComponent = getArticleComponent(type);
     const mainImages = elements.filter(elem => elem.relation === 'main' && elem.type === 'image');
     const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
     const feature = isFeature(tags) || 'starRating' in fields;
 
-    const articleProps: object = {
+    const articleProps = {
       ...fields,
       ...capi.response.content,
+      webPublicationDate,
       feature,
       mainAssets
     };
 
-    const body = renderToString(React.createElement(ArticleComponent, articleProps));
+    const getArticleComponent = (type: String): React.ReactElement => {
+      switch(type) {
+        case 'article':
+          return React.createElement(Article, articleProps); 
+        case 'liveblog':
+          return React.createElement(Article, articleProps); 
+        default:
+          return React.createElement('p', null, `${type} not implemented yet`);
+      }
+    }
+
+    const body = renderToString(getArticleComponent(type));
 
     return data.replace(
         '<div id="root"></div>',
         `<div id="root">${body}</div>`
       )
-}
-
-const getArticleComponent = (type: String): React.FunctionComponent<{}> => {
-  switch(type) {
-    case 'article':
-      return Article;
-    case 'liveblog':
-      return Article;
-    default:
-      return () => React.createElement('p', null, `${type} not implemented yet`);
-  }
 }
 
 app.use((err: any, req: any, res: any, next: any) => {
