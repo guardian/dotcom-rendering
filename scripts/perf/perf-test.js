@@ -11,6 +11,7 @@ const run = async () => {
             'make stop',
             '--target-url',
             'http://localhost:9000/ArticlePerfTest',
+            '--append',
         ]);
 
         log(stdout);
