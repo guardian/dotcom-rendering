@@ -178,6 +178,7 @@ interface CAPIType {
     subMetaSectionLinks: SimpleLinkType[];
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
+    isAdFreeUser: boolean;
     webURL: string;
     linkedData: object[];
     config: ConfigType;
