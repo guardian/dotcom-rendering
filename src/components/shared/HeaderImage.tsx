@@ -13,7 +13,7 @@ const headerImageStyles = css`
     margin-bottom: 8px;
 `;
 
-interface Asset {
+export interface Asset {
     file: string;
     typeData: AssetTypeData;
 }
@@ -27,7 +27,7 @@ interface AssetTypeData {
 }
 
 interface HeaderImageProps {
-    assets: Asset[];
+    assets: Asset[] | null;
 }
 
 const HeaderImage = ({ assets }: HeaderImageProps): JSX.Element | null => {

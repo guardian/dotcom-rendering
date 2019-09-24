@@ -1,3 +1,21 @@
+const { fork } = require('child_process');
+
+class LaunchServerPlugin {
+    apply(compiler) {
+        compiler.hooks.afterEmit.tap('LaunchServerPlugin', () => {
+            console.log('Server starting...');
+            this.server = fork('./dist/server.js');
+            this.server.on('close', () => console.log('Server stopping...'));
+        });
+
+        compiler.hooks.watchRun.tap('LaunchServerPlugin', () => {
+            if (this.server) {
+                this.server.kill();
+            }
+        });
+    }
+}
+
 const serverConfig = {
     name: 'server',
     mode: 'development',
@@ -12,6 +30,11 @@ const serverConfig = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
     },
+    watch: true,
+    watchOptions: {
+        ignored: /node_modules/,
+    },
+    plugins: [new LaunchServerPlugin()],
     module: {
         rules: [
             {

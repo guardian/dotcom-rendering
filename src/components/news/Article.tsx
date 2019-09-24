@@ -20,8 +20,8 @@ interface ArticleProps {
     tags: Tag[];
     feature: boolean;
     pillarId: PillarId;
-    mainAssets: Asset[];
-    starRating: string;
+    mainAssets: Asset[] | null;
+    starRating?: string;
 }
 
 interface Asset {
