@@ -35,15 +35,15 @@ class Err<E, B> implements ResultInterface<E, B> {
 
     error: E;
 
-    either<C>(f: (e: E) => C): C {
+    either<C>(f: (e: E,) => C, _g: (b: B) => C): C {
         return f(this.error);
     }
 
-    map<C>(): Result<E, C> {
+    map<C>(_f: (a: B) => C): Result<E, C> {
         return new Err(this.error);
     }
 
-    andThen<C>(): Result<E, C> {
+    andThen<C>(_f: (b: B) => Result<E, C>): Result<E, C> {
         return new Err(this.error);
     }
 
