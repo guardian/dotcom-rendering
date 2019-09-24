@@ -26,7 +26,7 @@ interface ArticleHeadlineProps {
     headline: string;
     feature: boolean;
     pillarStyles: PillarStyles;
-    rating: string;
+    rating?: string;
 }
 
 const ArticleHeadline = ({ headline, feature, pillarStyles, rating }: ArticleHeadlineProps) =>

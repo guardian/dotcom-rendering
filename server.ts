@@ -44,7 +44,7 @@ app.get('/*', (req, res) => {
 });
 
 const generateArticleHtml = (capi: Capi, data: string): string => {
-    const { type, fields, elements, tags, atoms } = capi.response.content;
+    const { type, fields, elements, tags, atoms, webPublicationDate } = capi.response.content;
 
     if (type !== 'article') return `${type} type is not yet supported`;
     if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
@@ -54,9 +54,10 @@ const generateArticleHtml = (capi: Capi, data: string): string => {
     const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
     const feature = isFeature(tags) || 'starRating' in fields;
 
-    const articleProps: object = {
+    const articleProps = {
       ...fields,
       ...capi.response.content,
+      webPublicationDate,
       feature,
       mainAssets
     };

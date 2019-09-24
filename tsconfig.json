@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         // Enable strictest settings like strictNullChecks & noImplicitAny.
-        // "strict": true,
+        "strict": true,
         // Import non-ES modules as default imports.
         "esModuleInterop": true,
         // Don't transpile jsx (handled by babel w/ emotion)
