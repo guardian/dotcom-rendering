@@ -66,6 +66,14 @@ const headerAdWrapper = css`
         display: none;
     }
 
+    z-index: 1080;
+    width: 100%;
+    background-color: white;
+
+    ${stickyAdSlot};
+`;
+
+const headerAd = css`
     margin: 0 auto;
     height: 151px;
     padding-bottom: 18px;
@@ -73,17 +81,8 @@ const headerAdWrapper = css`
     text-align: left;
     display: table;
 
-    z-index: 1080;
-
-    background-color: white;
-    width: 100%;
     border-bottom: 0.0625rem solid ${palette.neutral[86]};
 
-    ${stickyAdSlot};
-`;
-
-const headerAd = css`
-    margin: 0 auto;
     width: 728px;
 `;
 
