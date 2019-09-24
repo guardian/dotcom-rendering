@@ -4,7 +4,13 @@ import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBloc
 import { TweetBlockComponent } from '@frontend/web/components/elements/TweetBlockComponent';
 import { PullQuoteComponent } from '@frontend/web/components/elements/PullQuoteComponent';
 import React from 'react';
-// import { clean } from '@frontend/model/clean';
+import { css } from 'emotion';
+
+// This is required for spacefinder to work!
+const commercialPosition = css`
+    position: relative;
+`;
+
 export const ArticleRenderer: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
@@ -49,5 +55,12 @@ export const ArticleRenderer: React.FC<{
             }
         })
         .filter(_ => _ != null);
-    return <div className="article-body-commercial-selector">{output}</div>; // classname that space finder is going to target for in-body ads in DCR
+
+    return (
+        <div
+            className={`article-body-commercial-selector ${commercialPosition}`}
+        >
+            {output}
+        </div>
+    ); // classname that space finder is going to target for in-body ads in DCR
 };
