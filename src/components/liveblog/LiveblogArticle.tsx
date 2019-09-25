@@ -11,6 +11,12 @@ import Tags from '../shared/Tags';
 
 import { PillarStyles, PillarId } from '../../styles';
 import { Series, Tag, Asset, Contributor } from '../../types/Capi';
+import { css, SerializedStyles } from '@emotion/core'
+import { palette } from '@guardian/src-foundations'
+
+const LiveblogArticleStyles: SerializedStyles = css`
+    background: ${palette.neutral[97]};
+`;
 
 interface LiveblogArticleProps {
     headline: string;
@@ -28,13 +34,15 @@ interface LiveblogArticleProps {
 
 const LiveblogArticle = ({ headline, standfirst, bylineHtml, webPublicationDate, pillarId, tags, mainAssets, pillarStyles, contributors, series }: LiveblogArticleProps): JSX.Element => {
     return (
-        <main>
+        <main css={LiveblogArticleStyles}>
             <LiveblogSeries series={series} pillarStyles={pillarStyles}/>
             <LiveblogHeadline headline={headline} pillarStyles={pillarStyles}/>
             <LiveblogStandfirst standfirst={standfirst} pillarStyles={pillarStyles}/>
             <LiveblogByline byline={bylineHtml} pillarStyles={pillarStyles} pillarId={pillarId} publicationDate={webPublicationDate} contributors={contributors}/>
             <HeaderImage assets={mainAssets}/>
             <LiveblogKeyEvents />
+            <LiveblogBlock />
+            <LiveblogBlock />
             <LiveblogBlock />
             <Tags tags={tags}/>
         </main>
