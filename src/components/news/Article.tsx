@@ -8,7 +8,8 @@ import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 import Tags from '../shared/Tags';
 
-import { getPillarStyles, PillarId, darkModeCss } from '../../styles';
+import { Series, Tag, Asset, Contributor } from '../../types/Capi';
+import { PillarId, PillarStyles, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
 interface ArticleProps {
@@ -22,36 +23,16 @@ interface ArticleProps {
     pillarId: PillarId;
     mainAssets: Asset[] | null;
     starRating?: string;
-}
-
-interface Asset {
-    file: string;
-    typeData: AssetTypeData;
-}
-
-interface AssetTypeData {
-    altText: string;
-    caption: string;
-    credit: string;
-    width: number;
-    height: number;
-}
-
-interface Tag {
-    webUrl: string;
-    webTitle: string;
-    type: string;
+    pillarStyles: PillarStyles;
+    contributors: Contributor[];
+    series: Series;
 }
 
 const MainStyles = darkModeCss`
     background: ${palette.neutral[10]};
 `;
 
-const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets, starRating }: ArticleProps): JSX.Element => {
-    const pillarStyles = getPillarStyles(pillarId);
-    const contributors = tags.filter(tag => tag.type === 'contributor');
-    const [series] = tags.filter(tag => tag.type === 'series');
-    // TODO: use context api to pass pillarStyles down to all components
+const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets, starRating, pillarStyles, contributors, series }: ArticleProps): JSX.Element => {
     return (
         <main css={MainStyles}>
             <HeaderImage assets={mainAssets}/>

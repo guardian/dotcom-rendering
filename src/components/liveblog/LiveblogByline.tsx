@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { sidePadding, textSans, PillarStyles, PillarId, darkModeCss } from '../../styles';
+import { sidePadding, textSans, PillarStyles, PillarId } from '../../styles';
 
 import { Keyline } from '../shared/Keyline';
 
@@ -9,7 +9,8 @@ import { palette } from '@guardian/src-foundations';
 import { Contributor } from '../../types/Capi';
 
 
-const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyles => css`
+const LiveblogBylineStyles = ({ inverted, liveblogBackground }: PillarStyles): SerializedStyles => css`
+    background: ${liveblogBackground};
     .avatar {
         width: 68px;
         height: 68px;
@@ -28,6 +29,7 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyl
     }
 
     .author {
+        padding-bottom: 4px;
         .byline {
             line-height: 2.2rem;
 
@@ -38,7 +40,7 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyl
         }
 
         .byline, .follow, a {
-            color: ${kicker};
+            color: ${palette.neutral[93]};
         }
 
         .date, .follow {
@@ -47,27 +49,12 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyl
 
         .date {
             font-size: 1.4rem;
-            color: ${palette.neutral[46]};
+            color: ${palette.neutral[93]};
         }
     }
 `;
 
-const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${palette.neutral[10]};
-    color: ${palette.neutral[86]};
-
-    .author {
-        .byline, .follow, a {
-            color: ${inverted};
-        }
-
-        .date {
-            color: ${palette.neutral[60]};
-        }
-    }
-`;
-
-interface ArticleBylineProps {
+interface LiveblogBylineProps {
     byline: string;
     pillarStyles: PillarStyles;
     publicationDate: string;
@@ -75,16 +62,16 @@ interface ArticleBylineProps {
     pillarId: PillarId;
 }
 
-const ArticleBylineAvatar = (img: string): JSX.Element => (
+const LiveblogBylineAvatar = (img: string): JSX.Element => (
     <div className="avatar"><img src={img} /></div>
 )
 
-const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: ArticleBylineProps): JSX.Element => {
+const LiveblogByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: LiveblogBylineProps): JSX.Element => {
     const [contributor] = contributors;
     const singleContributor = contributors.length === 1;
-    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? ArticleBylineAvatar(contributor.bylineLargeImageUrl) : null;
+    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? LiveblogBylineAvatar(contributor.bylineLargeImageUrl) : null;
     return (
-        <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
+        <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline type={pillarId} />
             <div css={sidePadding}>
                 { avatar }
@@ -98,4 +85,4 @@ const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pi
     )
 }
 
-export default ArticleByline;
+export default LiveblogByline;

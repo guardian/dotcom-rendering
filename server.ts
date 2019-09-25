@@ -8,6 +8,9 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import Article from './src/components/news/Article';
+import LiveblogArticle from './src/components/liveblog/LiveblogArticle';
+
+import { getPillarStyles } from './src/styles';
 
 import { getConfigValue } from './src/utils/ssmConfig';
 import { isFeature } from './src/utils/capi';
@@ -23,7 +26,7 @@ app.use(compression());
 const capiEndpoint = (articleId: string, key: string): string => `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-fields=all&show-tags=all`;
 
 const generateArticleHtml = (capi: Capi, data: string): string => {
-  const { type, fields, elements, tags, atoms, webPublicationDate } = capi.response.content;
+  const { type, fields, elements, tags, atoms, webPublicationDate, pillarId } = capi.response.content;
 
   if (fields.displayHint === 'immersive') return `Immersive displayHint is not yet supported`;
   if (atoms) return `Atoms not yet supported`;
@@ -31,21 +34,20 @@ const generateArticleHtml = (capi: Capi, data: string): string => {
   const mainImages = elements.filter(elem => elem.relation === 'main' && elem.type === 'image');
   const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
   const feature = isFeature(tags) || 'starRating' in fields;
-
-  const articleProps = {
-    ...fields,
-    ...capi.response.content,
-    webPublicationDate,
-    feature,
-    mainAssets
-  };
+  // TODO: use context api to pass pillarStyles down to all components
+  const pillarStyles = getPillarStyles(pillarId);
+  const contributors = tags.filter(tag => tag.type === 'contributor');
+  const [series] = tags.filter(tag => tag.type === 'series');
 
   const getArticleComponent = (type: string): React.ReactElement => {
+    const sharedProps = {...fields, ...capi.response.content, webPublicationDate, mainAssets, pillarStyles, contributors, series };
     switch(type) {
       case 'article':
+        const articleProps = { ...sharedProps, feature };
         return React.createElement(Article, articleProps); 
       case 'liveblog':
-        return React.createElement(Article, articleProps); 
+        const liveblogProps = { ...sharedProps, isLive: true };
+        return React.createElement(LiveblogArticle, liveblogProps);
       default:
         return React.createElement('p', null, `${type} not implemented yet`);
     }

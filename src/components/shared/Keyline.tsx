@@ -7,6 +7,7 @@ const BaseStyles = css`
     height: 12px;
     width: 100%;
     margin-bottom: 4px;
+    opacity: .5;
 `;
 
 const KeylineNewsStyles = css`
