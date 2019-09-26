@@ -1,8 +1,8 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, headlineFont, icons, PillarStyles, bulletStyles, darkModeCss } from '../../styles';
-import { transform } from '../../utils/contentTransformations';
 import { palette } from '@guardian/src-foundations'
+import { render } from "../../renderBlocks";
 
 const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     a {
@@ -137,10 +137,15 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 interface ArticleBodyProps {
     body: string;
     pillarStyles: PillarStyles;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    bodyElements: any;
 }
 
-const ArticleBody = ({ body, pillarStyles }: ArticleBodyProps): JSX.Element => (
-    <div css={[articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]} dangerouslySetInnerHTML={{__html: transform(body)}} />
-)
+const ArticleBody = ({ bodyElements, pillarStyles }: ArticleBodyProps): JSX.Element =>
+    React.createElement(
+        'article',
+        { css: [articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)] },
+        render(bodyElements).html,
+    )
 
 export default ArticleBody;

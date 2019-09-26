@@ -11,7 +11,7 @@ import Tags from '../shared/Tags';
 import { getPillarStyles, PillarId, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
-interface ArticleProps {
+export interface ArticleProps {
     headline: string;
     standfirst: string;
     bylineHtml: string;
@@ -22,6 +22,8 @@ interface ArticleProps {
     pillarId: PillarId;
     mainAssets: Asset[] | null;
     starRating?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    bodyElements: any;
 }
 
 interface Asset {
@@ -47,7 +49,7 @@ const MainStyles = darkModeCss`
     background: ${palette.neutral[10]};
 `;
 
-const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets, starRating }: ArticleProps): JSX.Element => {
+const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, pillarId, tags, feature, mainAssets, starRating, bodyElements }: ArticleProps): JSX.Element => {
     const pillarStyles = getPillarStyles(pillarId);
     const contributors = tags.filter(tag => tag.type === 'contributor');
     const [series] = tags.filter(tag => tag.type === 'series');
@@ -59,7 +61,7 @@ const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, body, p
             <ArticleHeadline headline={headline} feature={feature} rating={starRating} pillarStyles={pillarStyles}/>
             <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
             <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} pillarId={pillarId} publicationDate={webPublicationDate} contributors={contributors}/>
-            <ArticleBody body={body} pillarStyles={pillarStyles}/>
+            <ArticleBody body={body} pillarStyles={pillarStyles} bodyElements={bodyElements}/>
             <Tags tags={tags}/>
         </main>
     )
