@@ -1,14 +1,13 @@
 import React from 'react';
-import { sidePadding, PillarStyles } from '../../styles';
+import { PillarStyles } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
-    ${sidePadding}
     background: ${palette.neutral[100]};
     padding: 8px;
     margin: 8px;
-    border-top: solid 1px ${highlighted ? palette.neutral[86] : kicker};
+    border-top: solid 1px ${highlighted ? kicker : palette.neutral[86]};
     border-bottom: solid 2px ${palette.neutral[93]};
 `;
 
@@ -20,7 +19,7 @@ interface LiveblogBlockProps {
 const LiveblogBlock = ({ pillarStyles, highlighted }: LiveblogBlockProps): JSX.Element => {
     return (
         <div css={LiveblogBlockStyles(pillarStyles, highlighted)}>
-            <h1>Block</h1>
+            <h3>Block</h3>
         </div>
     )
 }

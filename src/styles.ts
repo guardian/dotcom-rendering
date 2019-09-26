@@ -89,6 +89,7 @@ export const bulletStyles = (kicker: string, opacity: number = 1): string =>  `
 
         > li {
             padding-left: 2rem;
+            line-height: 2.2rem;
 
             &::before {
                 display: inline-block;

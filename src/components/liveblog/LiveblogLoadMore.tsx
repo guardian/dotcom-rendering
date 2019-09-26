@@ -1,5 +1,5 @@
 import React from 'react';
-import { sidePadding, PillarStyles, icons } from '../../styles';
+import { sidePadding, PillarStyles, icons, textSans } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 
@@ -14,6 +14,7 @@ const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => c
         border-radius: 30px;
         text-overflow: ellipsis;
         max-width: 18.75rem;
+        ${textSans}
 
         &::before {
             ${icons}

@@ -21,7 +21,7 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
         color: ${palette.neutral[93]};
     }
 
-    ${bulletStyles(liveblogBackground, .8)}
+    ${bulletStyles(liveblogBackground, .4)}
     ${sidePadding}
 `;
 

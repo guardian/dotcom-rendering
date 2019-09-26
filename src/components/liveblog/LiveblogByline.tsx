@@ -11,13 +11,15 @@ import { Contributor } from '../../types/Capi';
 
 const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
+    padding-bottom: 8px;
+
     .avatar {
         width: 68px;
         height: 68px;
         background-color: ${featureHeadline};
         border-radius: 100%;
         float: left;
-        margin: 0 12px 0 0;
+        margin: 0 8px 0 0;
         overflow: hidden;
 
         img {
@@ -30,12 +32,14 @@ const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarSty
 
     .author {
         padding-bottom: 4px;
-        .byline {
-            line-height: 2.2rem;
+        line-height: 2.2rem;
 
+        .byline {
             a {
                 text-decoration: none;
                 font-weight: 500;
+                padding-top: 4px;
+                display: block;
             }
         }
 
@@ -79,7 +83,7 @@ const LiveblogByline = ({ byline, pillarStyles, publicationDate, contributors, p
                 <div className="author">
                     <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
                     <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
-                    {singleContributor && contributor.apiUrl ? <div className="follow">Follow { contributor.webTitle }</div> : null}
+                    <div className="follow">Get alerts on this story</div>
                 </div>
             </div>
         </div>
