@@ -77,7 +77,7 @@ const LiveblogByline = ({ byline, pillarStyles, publicationDate, contributors, p
     const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? LiveblogBylineAvatar(contributor.bylineLargeImageUrl) : null;
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
-            <Keyline type={pillarId} />
+            <Keyline pillar={pillarId} type={'liveblog'}/>
             <div css={sidePadding}>
                 { avatar }
                 <div className="author">

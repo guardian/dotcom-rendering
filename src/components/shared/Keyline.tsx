@@ -7,6 +7,10 @@ const BaseStyles = css`
     height: 12px;
     width: 100%;
     margin-bottom: 4px;
+`;
+
+const KeylineLiveblogStyles = css`
+    background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
     opacity: .5;
 `;
 
@@ -37,9 +41,10 @@ const KeylineDarkStyles = darkModeCss`
 `;
 
 
-export const Keyline = ({ type }: {type: string}): JSX.Element => {
-    const SelectedKeylineStyles = ((type): SerializedStyles => {
-        switch(type) {
+export const Keyline = ({ pillar, type }: {pillar: string; type: string}): JSX.Element => {
+    const SelectedKeylineStyles = ((pillar, type): SerializedStyles => {
+        if (type === 'liveblog') return KeylineLiveblogStyles;
+        switch(pillar) {
             case 'pillar/opinion':
                 return KeylineOpinionStyles;
             case 'pillar/arts':
@@ -50,7 +55,7 @@ export const Keyline = ({ type }: {type: string}): JSX.Element => {
                 return KeylineSportStyles;
             default:
                 return KeylineNewsStyles;
-        }})(type);
+        }})(pillar, type);
     
     return <div css={[BaseStyles, SelectedKeylineStyles, KeylineDarkStyles]}></div>
 }

@@ -85,7 +85,7 @@ const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pi
     const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? ArticleBylineAvatar(contributor.bylineLargeImageUrl) : null;
     return (
         <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
-            <Keyline type={pillarId} />
+            <Keyline pillar={pillarId} type={'article'}/>
             <div css={sidePadding}>
                 { avatar }
                 <div className="author">
