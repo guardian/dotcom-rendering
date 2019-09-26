@@ -252,12 +252,14 @@ const AgeWarning: React.FC<{
         return <></>;
     }
     return (
-        <div className={oldArticleMessage}>
-            <span className={oldClockWrapper}>
-                <ClockIcon />
-            </span>
-            This article is more than{' '}
-            <span className="embolden">{ageWarning} old</span>
+        <div>
+            <div className={oldArticleMessage}>
+                <span className={oldClockWrapper}>
+                    <ClockIcon />
+                </span>
+                This article is more than{' '}
+                <span className="embolden">{ageWarning} old</span>
+            </div>
         </div>
     );
 };
