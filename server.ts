@@ -9,7 +9,7 @@ import fetch from 'node-fetch';
 import Article, { ArticleProps } from './src/components/news/Article';
 import { getConfigValue } from './src/utils/ssmConfig';
 import { isFeature, parseCapi } from './src/utils/capi';
-import { fromUnsafe, Result } from './src/types/Result';
+import { fromUnsafe, Result, Ok, Err } from './src/types/Result';
 
 const app = express();
 
@@ -26,40 +26,59 @@ interface CapiFields {
   articleProps: ArticleProps;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function fieldsFromCapi(capi: any): CapiFields {
+const id = <A>(a: A): A => a;
 
-  const { type, fields, elements, tags, atoms, webPublicationDate } = capi.response.content;
-  const bodyElements = capi.response.content.blocks.body[0].elements;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function checkForUnsupportedContent(capi: any): Result<string, void> {
+
+  const { fields, atoms } = capi.response.content;
 
   if (fields.displayHint === 'immersive') {
-    throw 'Immersive displayHint is not yet supported';
+    return new Err('Immersive displayHint is not yet supported');
   }
-  
+
   if (atoms) {
-    throw 'Atoms not yet supported';
+    return new Err('Atoms not yet supported');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const mainImages = elements.filter((elem: any) => elem.relation === 'main' && elem.type === 'image');
-  const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
-  const feature = isFeature(tags) || 'starRating' in fields;
-
-  return {
-    type,
-    articleProps: {
-      ...fields,
-      ...capi.response.content,
-      webPublicationDate,
-      feature,
-      mainAssets,
-      bodyElements,
-    },
-  };
+  return new Ok(undefined);
 
 }
 
-const id = <A>(a: A): A => a;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const capiFields = (capi: any): Result<string, CapiFields> =>
+  fromUnsafe(() => {
+
+    const { type, fields, elements, tags, webPublicationDate } = capi.response.content;
+    const bodyElements = capi.response.content.blocks.body[0].elements;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mainImages = elements.filter((elem: any) => elem.relation === 'main' && elem.type === 'image');
+    const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
+    const feature = isFeature(tags) || 'starRating' in fields;
+
+    return {
+      type,
+      articleProps: {
+        ...fields,
+        ...capi.response.content,
+        webPublicationDate,
+        feature,
+        mainAssets,
+        bodyElements,
+      },
+    };
+  }, 'Unexpected CAPI response structure');
+
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function fieldsFromCapi(capi: any): Result<string, CapiFields> {
+
+  return fromUnsafe(() => checkForUnsupportedContent(capi), 'Unexpected CAPI response structure')
+    .andThen(id)
+    .andThen(() => capiFields(capi));
+
+}
 
 const getArticleComponent = (capiFields: CapiFields): React.ReactElement => {
   switch (capiFields.type) {
@@ -72,13 +91,9 @@ const getArticleComponent = (capiFields: CapiFields): React.ReactElement => {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parseCapiFields = (capi: any): Result<string, CapiFields> =>
-  fromUnsafe(() => fieldsFromCapi(capi), 'Unexpected CAPI response structure');
-
 const generateArticleHtml = (capiResponse: string, data: string): string =>
   parseCapi(capiResponse)
-    .andThen(parseCapiFields)
+    .andThen(fieldsFromCapi)
     .map(getArticleComponent)
     .map(renderToString)
     .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
