@@ -11,7 +11,7 @@ const BaseStyles = css`
 
 const KeylineLiveblogStyles = css`
     background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
-    opacity: .5;
+    opacity: .4;
 `;
 
 const KeylineNewsStyles = css`

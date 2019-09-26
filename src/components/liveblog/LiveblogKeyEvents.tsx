@@ -8,18 +8,102 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
     margin-top: -8px;
     margin-bottom: 32px;
     border-bottom: solid 2px ${palette.neutral[93]};
-    padding: 8px;
+    padding: 8px 8px 0 8px;
 
     h3 {
         color: ${kicker};
         margin: 0;
     }
+
+    ul {
+        padding-left: 0;
+        padding-left: 5px;
+        list-style: none;
+
+        li {
+            position: relative;
+            padding: 0px 0px 0px 16px;
+            transition: color .6s;
+            width: 90%;
+            padding-bottom: 16px;
+
+            div {
+                font-weight: bold;
+                margin-bottom: 4px;
+            }
+
+            &::before {
+                background: ${palette.neutral[86]};
+                border-radius: 50%;
+                content: '';
+                display: block;
+                height: 10px;
+                left: -5px;
+                position: absolute;
+                top: 8px;
+                width: 10px;
+            }
+
+            &::after {
+                background: ${palette.neutral[86]};
+                content: '';
+                height: 100%;
+                left: -1px;
+                position: absolute;
+                top: 12px;
+                width: 1px;
+            }
+
+            &:first-of-type {
+                &::before {
+                    height: 1px;
+                    left: -1px;
+                    top: 12px;
+                    width: 8px;
+                    border-radius: 0;
+                }
+            }
+
+            &:last-of-type {
+                padding-bottom: 0;
+
+                &::before {
+                    height: 1px;
+                    left: -1px;
+                    top: 12px;
+                    width: 8px;
+                    border-radius: 0;
+                }
+
+                &::after {
+                    height: 9px;
+                    top: 0;
+                }
+            }
+        }
+    }
 `;
+
+const placeholderEvents = [
+    'One',
+    'Two',
+    'Three',
+    'Four',
+    'Five'
+]
 
 const LiveblogKeyEvents = ({ pillarStyles }: { pillarStyles: PillarStyles }): JSX.Element => {
     return (
         <div css={LiveblogKeyEventsStyles(pillarStyles)}>
             <h3>Key events (7)</h3>
+            <ul>
+                {placeholderEvents.map(event => {
+                    return <li>
+                        <div>15m ago</div>
+                        {event}
+                    </li>
+                })}
+            </ul>
         </div>
     )
 }
