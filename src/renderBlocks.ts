@@ -1,10 +1,9 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
 import jsdom from 'jsdom';
 
-import { Result, Ok, Err, fromUnsafe } from './types/Result';
+import { Result, Err, fromUnsafe } from './types/Result';
 import { imageBlock } from './components/blocks/image';
 
 
@@ -18,7 +17,7 @@ type ParsedReact = {
 
 type Rendered = { 
     errors: string[];
-    html: string;
+    html: ReactNode;
 };
 
 const { JSDOM } = jsdom;
@@ -27,17 +26,30 @@ const h = React.createElement;
 
 // ----- Functions ----- //
 
-function getAttrs(node: Element): {} {
-    return Array.from(node.attributes).reduce((attrs, attr) => {
-        return { ...attrs, [attr.name]: attr.value };
-    }, {});
+// The nodeType for ELEMENT_NODE has the value 1.
+function isElement(node: Node): node is Element {
+    return node.nodeType === 1;
 }
 
-function textElement(node: Element): ReactNode {
+function getAttrs(node: Node): {} {
+    if (isElement(node)) {
+        return Array.from(node.attributes).reduce((attrs, attr) => {
+            return { ...attrs, [attr.name]: attr.value };
+        }, {});
+    } else {
+        return {};
+    }
+}
+
+function textElement(node: Node, idx: number): ReactNode {
 
     switch (node.nodeName) {
         case 'P':
-            return h('p', null, Array.from(node.childNodes).map(textElement));
+            return h(
+                'p',
+                { key: idx },
+                ...Array.from(node.childNodes).map(textElement),
+            );
         case '#text':
             return node.textContent;
         case 'A':
@@ -46,8 +58,8 @@ function textElement(node: Element): ReactNode {
             // Fallback to handle any element
             return h(
                 node.nodeName.toLocaleLowerCase(),
-                null,
-                Array.from(node.childNodes).map(textElement),
+                { key: idx },
+                ...Array.from(node.childNodes).map(textElement),
             );
     }
 
@@ -65,10 +77,10 @@ const pullquoteBlock = (fragment: DocumentFragment): ReactNode =>
     );
 
 const richLinkBlock = (url: string, linkText: string): ReactNode =>
-    h('aside', null, [
+    h('aside', { className: 'rich-link' },
         h('h1', null, linkText),
         h('a', { href: url }, 'Read more'),
-    ]);
+    );
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function reactFromElement(element: any): Result<string, ReactNode> {
@@ -109,7 +121,7 @@ function reactFromElement(element: any): Result<string, ReactNode> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
-function elementsToReact(elements: any[]): ParsedReact {
+function elementsToReact(elements: any): ParsedReact {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any 
     const elementToReact = ({ errors, nodes }: ParsedReact, element: any): ParsedReact =>
         reactFromElement(element).either(
@@ -121,39 +133,16 @@ function elementsToReact(elements: any[]): ParsedReact {
 
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any 
-function parseCapi(capiResponse: string): Result<string, any> {
-    try {
-        return new Ok(JSON.parse(capiResponse));
-    } catch (_) {
-        return new Err('Could not parse the CAPI response');
-    }
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function render(bodyElements: any): Rendered {
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any 
-function getElements(capi: any): Result<string, any> {
-    try {
-        return capi.response.content.blocks.body[0].elements;
-    } catch (_) {
-        return new Err('Unexpected CAPI response structure');
-    }
-}
+    const reactNodes = elementsToReact(bodyElements);
+    const main = h('article', null, ...reactNodes.nodes);
 
-function render(capiResponse: string): Result<string, Rendered> {
-
-    return parseCapi(capiResponse)
-        .andThen(getElements)
-        .map(elements => {
-
-            const reactNodes = elementsToReact(elements);
-            const main = h('article', null, reactNodes.nodes);
-
-            return {
-                errors: reactNodes.errors,
-                html: ReactDOMServer.renderToString(main),
-            };
-    
-    });
+    return {
+        errors: reactNodes.errors,
+        html: main,
+    };
 
 }
 

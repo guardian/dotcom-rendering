@@ -1,15 +1,15 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, headlineFont, icons, PillarStyles, bulletStyles, darkModeCss } from '../../styles';
-import { transform } from '../../utils/contentTransformations';
 import { palette } from '@guardian/src-foundations'
+import { render } from "../../renderBlocks";
 
 const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     a {
         color: ${kicker};
     }
 
-    .element-image img {
+    .image img {
         width: calc(100% + 16px);
         margin: 0 -8px;
     }
@@ -51,7 +51,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
         ${textSans}
     }
 
-    .element-rich-link,
+    .rich-link,
     .element-membership {
         border-top: 1px solid ${palette.neutral[86]};
         border-bottom: 1px solid ${palette.neutral[86]};
@@ -70,12 +70,6 @@ const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
         a {
             text-decoration: none;
-            &::before {
-                content: 'More on this topic';
-                font-weight: bold;
-                display: block;
-                color: ${palette.neutral[7]};
-            }
         }
     }
 
@@ -122,7 +116,7 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
         padding-bottom: 1em;
     }
 
-    .element-rich-link,
+    .rich-link,
     .element-membership {
         border-top: 1px solid ${palette.neutral[60]};
         border-bottom: 1px solid ${palette.neutral[60]};
@@ -135,12 +129,14 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 `;
 
 interface ArticleBodyProps {
-    body: string;
     pillarStyles: PillarStyles;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    bodyElements: any;
 }
 
-const ArticleBody = ({ body, pillarStyles }: ArticleBodyProps): JSX.Element => (
-    <div css={[articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]} dangerouslySetInnerHTML={{__html: transform(body)}} />
-)
+const ArticleBody = ({ bodyElements, pillarStyles }: ArticleBodyProps): JSX.Element =>
+    <article css={[articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]}>
+        {render(bodyElements).html}
+    </article>
 
 export default ArticleBody;

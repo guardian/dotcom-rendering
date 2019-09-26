@@ -35,7 +35,7 @@ const srcSet = (assets: Asset[]): string =>
 const imageElement = (image: Image, assets: Asset[]): React.ReactNode =>
     h('img', {
         sizes: '100%',
-        srcset: srcSet(assets),
+        srcSet: srcSet(assets),
         alt: image.alt,
         src: assets[0].file,
     });
@@ -44,10 +44,10 @@ function imageBlock(image: Image, assets: Asset[]): React.ReactNode {
 
     const caption = image.displayCredit ? `${image.caption} ${image.credit}` : image.caption;
 
-    return h('figure', null, [
+    return h('figure', { className: 'image' },
         imageElement(image, assets),
         h('figcaption', null, caption),
-    ]);
+    );
 }
 
 

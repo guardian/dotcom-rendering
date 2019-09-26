@@ -13,7 +13,7 @@ class Ok<E, B> implements ResultInterface<E, B> {
 
     value: B;
 
-    either<C>(f: (e: E) => C, g: (b: B) => C): C {
+    either<C>(_f: (e: E) => C, g: (b: B) => C): C {
         return g(this.value);
     }
 
