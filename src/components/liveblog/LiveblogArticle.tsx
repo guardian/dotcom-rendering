@@ -46,7 +46,7 @@ const LiveblogArticle = ({ headline, standfirst, bylineHtml, webPublicationDate,
             <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
             <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
             <LiveblogLoadMore pillarStyles={pillarStyles}/>
-            <Tags tags={tags}/>
+            <Tags tags={tags} background={palette.neutral[93]}/>
         </main>
     )    
 }
