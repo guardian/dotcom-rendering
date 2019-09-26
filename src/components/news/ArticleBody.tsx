@@ -9,7 +9,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
         color: ${kicker};
     }
 
-    .element-image img {
+    .image img {
         width: calc(100% + 16px);
         margin: 0 -8px;
     }
@@ -51,7 +51,7 @@ const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
         ${textSans}
     }
 
-    .element-rich-link,
+    .rich-link,
     .element-membership {
         border-top: 1px solid ${palette.neutral[86]};
         border-bottom: 1px solid ${palette.neutral[86]};
@@ -70,12 +70,6 @@ const articleBodyStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
         a {
             text-decoration: none;
-            &::before {
-                content: 'More on this topic';
-                font-weight: bold;
-                display: block;
-                color: ${palette.neutral[7]};
-            }
         }
     }
 
@@ -122,7 +116,7 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
         padding-bottom: 1em;
     }
 
-    .element-rich-link,
+    .rich-link,
     .element-membership {
         border-top: 1px solid ${palette.neutral[60]};
         border-bottom: 1px solid ${palette.neutral[60]};

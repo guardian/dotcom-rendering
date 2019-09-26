@@ -77,7 +77,7 @@ const pullquoteBlock = (fragment: DocumentFragment): ReactNode =>
     );
 
 const richLinkBlock = (url: string, linkText: string): ReactNode =>
-    h('aside', null,
+    h('aside', { className: 'rich-link' },
         h('h1', null, linkText),
         h('a', { href: url }, 'Read more'),
     );
