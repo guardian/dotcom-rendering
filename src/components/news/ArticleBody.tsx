@@ -135,7 +135,6 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 `;
 
 interface ArticleBodyProps {
-    body: string;
     pillarStyles: PillarStyles;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     bodyElements: any;
