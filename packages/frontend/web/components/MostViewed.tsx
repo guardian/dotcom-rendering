@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { headline } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
+import { textSans, headline, palette } from '@guardian/src-foundations';
 import {
     desktop,
     tablet,
@@ -31,14 +30,13 @@ const mostPopularBody = css`
 `;
 
 const heading = css`
-    ${headline(4)};
+    ${headline({ level: 2 })};
     color: ${palette.neutral[7]};
     font-weight: 900;
     padding-right: 5px;
     padding-bottom: 4px;
 
     ${leftCol} {
-        ${headline(3)};
         width: 140px;
         position: relative;
 
@@ -157,7 +155,7 @@ const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
     font-weight: 500;
-    ${headline(2)};
+    ${headline({ level: 1 })};
 `;
 
 const tabsContainer = css`
@@ -194,7 +192,7 @@ const selectedListTab = css`
 `;
 
 const tabButton = css`
-    ${headline(1)};
+    ${headline({ level: 1 })};
     margin: 0;
     border: 0;
     background: transparent;
@@ -210,10 +208,6 @@ const tabButton = css`
 
     &:hover {
         cursor: pointer;
-    }
-
-    ${tablet} {
-        ${headline(2)};
     }
 `;
 
