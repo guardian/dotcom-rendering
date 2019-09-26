@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { headline } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
+import { textSans, headline, palette } from '@guardian/src-foundations';
 import {
     desktop,
     tablet,
@@ -14,6 +13,7 @@ import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot } from '@frontend/web/components/AdSlot';
+import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 
 const container = css`
     padding-top: 3px;
@@ -31,14 +31,13 @@ const mostPopularBody = css`
 `;
 
 const heading = css`
-    ${headline(4)};
+    ${headline({ level: 2 })};
     color: ${palette.neutral[7]};
     font-weight: 900;
     padding-right: 5px;
     padding-bottom: 4px;
 
     ${leftCol} {
-        ${headline(3)};
         width: 140px;
         position: relative;
 
@@ -157,7 +156,7 @@ const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
     font-weight: 500;
-    ${headline(2)};
+    ${headline({ level: 1 })};
 `;
 
 const tabsContainer = css`
@@ -194,7 +193,7 @@ const selectedListTab = css`
 `;
 
 const tabButton = css`
-    ${headline(1)};
+    ${headline({ level: 1 })};
     margin: 0;
     border: 0;
     background: transparent;
@@ -211,10 +210,6 @@ const tabButton = css`
     &:hover {
         cursor: pointer;
     }
-
-    ${tablet} {
-        ${headline(2)};
-    }
 `;
 
 const liveKicker = css`
@@ -229,10 +224,51 @@ const liveKicker = css`
     }
 `;
 
+const oldArticleMessage = css`
+    ${textSans({ level: 1 })}
+    background: ${palette.yellow.main};
+    display: inline-block;
+    color: ${palette.neutral[7]};
+    margin: 4px 0 6px;
+    padding: 3px 5px;
+
+    svg {
+        fill: currentColor;
+    }
+
+    .embolden {
+        font-weight: bold;
+    }
+`;
+
+const oldClockWrapper = css`
+    margin-right: 3px;
+`;
+
+const AgeWarning: React.FC<{
+    ageWarning?: string;
+}> = ({ ageWarning }) => {
+    if (!ageWarning) {
+        return <></>;
+    }
+    return (
+        <div>
+            <div className={oldArticleMessage}>
+                <span className={oldClockWrapper}>
+                    <ClockIcon />
+                </span>
+                This article is more than{' '}
+                <span className="embolden">{ageWarning} old</span>
+            </div>
+        </div>
+    );
+};
+
 interface Trail {
     url: string;
     linkText: string;
     isLiveBlog: boolean;
+    ageWarning: string;
 }
 
 interface Tab {
@@ -359,6 +395,11 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                             </span>
                                                         )}
                                                         {trail.linkText}
+                                                        <AgeWarning
+                                                            ageWarning={
+                                                                trail.ageWarning
+                                                            }
+                                                        />
                                                     </a>
                                                 </h2>
                                             </li>
