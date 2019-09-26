@@ -142,10 +142,8 @@ interface ArticleBodyProps {
 }
 
 const ArticleBody = ({ bodyElements, pillarStyles }: ArticleBodyProps): JSX.Element =>
-    React.createElement(
-        'article',
-        { css: [articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)] },
-        render(bodyElements).html,
-    )
+    <article css={[articleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]}>
+        {render(bodyElements).html}
+    </article>
 
 export default ArticleBody;
