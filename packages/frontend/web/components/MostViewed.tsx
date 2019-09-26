@@ -13,6 +13,7 @@ import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot } from '@frontend/web/components/AdSlot';
+import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 
 const container = css`
     padding-top: 3px;
@@ -223,10 +224,49 @@ const liveKicker = css`
     }
 `;
 
+const oldArticleMessage = css`
+    ${textSans({ level: 1 })}
+    background: ${palette.yellow.main};
+    display: inline-block;
+    color: ${palette.neutral[7]};
+    margin: 4px 0 6px;
+    padding: 3px 5px;
+
+    svg {
+        fill: currentColor;
+    }
+
+    .embolden {
+        font-weight: bold;
+    }
+`;
+
+const oldClockWrapper = css`
+    margin-right: 3px;
+`;
+
+const AgeWarning: React.FC<{
+    ageWarning?: string;
+}> = ({ ageWarning }) => {
+    if (!ageWarning) {
+        return <></>;
+    }
+    return (
+        <div className={oldArticleMessage}>
+            <span className={oldClockWrapper}>
+                <ClockIcon />
+            </span>
+            This article is more than{' '}
+            <span className="embolden">{ageWarning} old</span>
+        </div>
+    );
+};
+
 interface Trail {
     url: string;
     linkText: string;
     isLiveBlog: boolean;
+    ageWarning: string;
 }
 
 interface Tab {
@@ -353,6 +393,11 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                             </span>
                                                         )}
                                                         {trail.linkText}
+                                                        <AgeWarning
+                                                            ageWarning={
+                                                                trail.ageWarning
+                                                            }
+                                                        />
                                                     </a>
                                                 </h2>
                                             </li>
