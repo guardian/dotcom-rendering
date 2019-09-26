@@ -12,7 +12,7 @@ const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css
         font-weight: 900;
         font-size: 1.6rem;
         line-height: 2.4rem;
-        color: ${palette.neutral[93]};
+        color: ${palette.neutral[100]};
         text-decoration: none;
     }
 `;

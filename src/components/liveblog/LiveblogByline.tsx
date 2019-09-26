@@ -9,15 +9,15 @@ import { palette } from '@guardian/src-foundations';
 import { Contributor } from '../../types/Capi';
 
 
-const LiveblogBylineStyles = ({ inverted, liveblogBackground }: PillarStyles): SerializedStyles => css`
+const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
     .avatar {
         width: 68px;
         height: 68px;
-        background-color: ${inverted};
+        background-color: ${featureHeadline};
         border-radius: 100%;
         float: left;
-        margin: 0 12px 12px 0;
+        margin: 0 12px 0 0;
         overflow: hidden;
 
         img {
@@ -40,7 +40,7 @@ const LiveblogBylineStyles = ({ inverted, liveblogBackground }: PillarStyles): S
         }
 
         .byline, .follow, a {
-            color: ${palette.neutral[93]};
+            color: ${palette.neutral[100]};
         }
 
         .date, .follow {
@@ -50,6 +50,7 @@ const LiveblogBylineStyles = ({ inverted, liveblogBackground }: PillarStyles): S
         .date {
             font-size: 1.4rem;
             color: ${palette.neutral[93]};
+            opacity: .8;
         }
     }
 `;

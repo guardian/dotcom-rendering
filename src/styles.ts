@@ -5,12 +5,6 @@ const BASE_PADDING = 8;
 
 const baseMultiply = (value: number): number => value * BASE_PADDING;
 
-export const colours = {
-    black: palette.neutral[7],
-    white: palette.neutral[100],
-    yellow: palette.yellow.main
-}
-
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
 export const sidePadding = {
@@ -75,7 +69,7 @@ export function getPillarStyles(pillarId: PillarId): PillarStyles {
     return pillarColours[pillar];
 }
 
-export const bulletStyles = (kicker: string): string =>  `
+export const bulletStyles = (kicker: string, opacity: number = 1): string =>  `
     .bullet {
         color: transparent;
 
@@ -105,6 +99,7 @@ export const bulletStyles = (kicker: string): string =>  `
                 margin-right: 1rem;
                 background-color: ${palette.neutral[86]};
                 margin-left: -2rem;
+                opacity: ${opacity}
             }
 
             > p:first-of-type {

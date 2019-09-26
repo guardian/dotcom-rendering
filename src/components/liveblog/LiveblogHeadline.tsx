@@ -13,7 +13,7 @@ const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => c
         ${headlineFont}
         ${sidePadding}
         font-weight: 500;
-        color: ${palette.neutral[93]};
+        color: ${palette.neutral[100]};
     }
 `;
 

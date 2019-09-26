@@ -6,6 +6,7 @@ import LiveblogStandfirst from './LiveblogStandfirst';
 import LiveblogByline from './LiveblogByline';
 import LiveblogKeyEvents from './LiveblogKeyEvents';
 import LiveblogBlock from './LiveblogBlock';
+import LiveblogLoadMore from './LiveblogLoadMore';
 import HeaderImage from '../shared/HeaderImage';
 import Tags from '../shared/Tags';
 
@@ -40,10 +41,11 @@ const LiveblogArticle = ({ headline, standfirst, bylineHtml, webPublicationDate,
             <LiveblogStandfirst standfirst={standfirst} pillarStyles={pillarStyles}/>
             <LiveblogByline byline={bylineHtml} pillarStyles={pillarStyles} pillarId={pillarId} publicationDate={webPublicationDate} contributors={contributors}/>
             <HeaderImage assets={mainAssets}/>
-            <LiveblogKeyEvents />
-            <LiveblogBlock />
-            <LiveblogBlock />
-            <LiveblogBlock />
+            <LiveblogKeyEvents pillarStyles={pillarStyles}/>
+            <LiveblogBlock pillarStyles={pillarStyles} highlighted={true}/>
+            <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
+            <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
+            <LiveblogLoadMore pillarStyles={pillarStyles}/>
             <Tags tags={tags}/>
         </main>
     )    

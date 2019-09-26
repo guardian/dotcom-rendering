@@ -10,7 +10,7 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
     font-size: 1.6rem;
     line-height: 2rem;
     background: ${liveblogBackground};
-    color: ${palette.neutral[93]};
+    color: ${palette.neutral[97]};
     padding: ${basePx(1, 0, 4, 0)};
 
     p, ul {
@@ -21,7 +21,7 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
         color: ${palette.neutral[93]};
     }
 
-    ${bulletStyles(liveblogBackground)}
+    ${bulletStyles(liveblogBackground, .8)}
     ${sidePadding}
 `;
 
