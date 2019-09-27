@@ -28,8 +28,9 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyl
     }
 
     .author {
-        .byline {
+        address {
             line-height: 2.2rem;
+            font-style: inherit;
 
             a {
                 text-decoration: none;
@@ -37,7 +38,7 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyl
             }
         }
 
-        .byline, .follow, a {
+        address, .follow, a {
             color: ${kicker};
         }
 
@@ -57,7 +58,7 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
     color: ${palette.neutral[86]};
 
     .author {
-        .byline, .follow, a {
+        address, .follow, a {
             color: ${inverted};
         }
 
@@ -89,7 +90,7 @@ const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pi
             <div css={sidePadding}>
                 { avatar }
                 <div className="author">
-                    <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
+                    <address dangerouslySetInnerHTML={{__html: byline}}></address>
                     <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
                     {singleContributor && contributor.apiUrl ? <div className="follow">Follow { contributor.webTitle }</div> : null}
                 </div>

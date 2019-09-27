@@ -34,7 +34,8 @@ const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarSty
         padding-bottom: 4px;
         line-height: 2.2rem;
 
-        .byline {
+        address {
+            font-style: inherit;
             a {
                 text-decoration: none;
                 font-weight: 500;
@@ -43,7 +44,7 @@ const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarSty
             }
         }
 
-        .byline, .follow, a {
+        address, .follow, a {
             color: ${palette.neutral[100]};
         }
 
@@ -81,7 +82,7 @@ const LiveblogByline = ({ byline, pillarStyles, publicationDate, contributors, p
             <div css={sidePadding}>
                 { avatar }
                 <div className="author">
-                    <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
+                    <address dangerouslySetInnerHTML={{__html: byline}}></address>
                     <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
                     <div className="follow">Get alerts on this story</div>
                 </div>
