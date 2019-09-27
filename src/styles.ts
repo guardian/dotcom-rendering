@@ -69,7 +69,7 @@ export function getPillarStyles(pillarId: PillarId): PillarStyles {
     return pillarColours[pillar];
 }
 
-export const bulletStyles = (kicker: string, opacity: number = 1): string =>  `
+export const bulletStyles = (kicker: string, opacity = 1): string =>  `
     .bullet {
         color: transparent;
 

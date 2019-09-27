@@ -1,9 +1,9 @@
 import React from 'react';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
-const tagsStyles = (background: string = palette.neutral[97]) => css`
+const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles => css`
     margin-top: 0;
     margin-bottom: 0;
 

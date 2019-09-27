@@ -13,7 +13,7 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
 
 interface LiveblogBlockProps {
     pillarStyles: PillarStyles;
-    highlighted: boolean
+    highlighted: boolean;
 }
 
 const LiveblogBlock = ({ pillarStyles, highlighted }: LiveblogBlockProps): JSX.Element => {
