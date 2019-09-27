@@ -109,7 +109,7 @@ const placeholderEvents = [
 
 const LiveblogKeyEvents = ({ pillarStyles }: { pillarStyles: PillarStyles }): JSX.Element => {
     return (
-        <div css={LiveblogKeyEventsStyles(pillarStyles)}>
+        <section css={LiveblogKeyEventsStyles(pillarStyles)}>
             <h3>Key events (7)</h3>
             <div className="open"></div>
             <ul>
@@ -120,7 +120,7 @@ const LiveblogKeyEvents = ({ pillarStyles }: { pillarStyles: PillarStyles }): JS
                     </li>
                 })}
             </ul>
-        </div>
+        </section>
     )
 }
 

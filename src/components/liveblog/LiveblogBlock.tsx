@@ -18,9 +18,9 @@ interface LiveblogBlockProps {
 
 const LiveblogBlock = ({ pillarStyles, highlighted }: LiveblogBlockProps): JSX.Element => {
     return (
-        <div css={LiveblogBlockStyles(pillarStyles, highlighted)}>
+        <article css={LiveblogBlockStyles(pillarStyles, highlighted)}>
             <h3>Block</h3>
-        </div>
+        </article>
     )
 }
 
