@@ -97,3 +97,5 @@ We recommend you update your workspace settings to automatically fix formatting 
 
 1. Open the Command Palette (`shift + cmd + P`) and type `>Preferences: Open Settings (JSON)`
 2. Add the key value `"tslint.autoFixOnSave": true,`
+
+boop
