@@ -1,4 +1,5 @@
 const { fork } = require('child_process');
+const webpack = require('webpack');
 
 class LaunchServerPlugin {
     apply(compiler) {
@@ -34,7 +35,13 @@ const serverConfig = {
     watchOptions: {
         ignored: /node_modules/,
     },
-    plugins: [new LaunchServerPlugin()],
+    plugins: [
+        // Reloads the server on change.
+        new LaunchServerPlugin(),
+        // Does not try to require the 'canvas' package,
+        // an optional dependency of jsdom that we aren't using.
+        new webpack.IgnorePlugin(/^canvas$/),
+    ],
     module: {
         rules: [
             {
