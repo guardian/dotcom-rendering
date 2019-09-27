@@ -9,10 +9,21 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
     margin-bottom: 32px;
     border-bottom: solid 2px ${palette.neutral[93]};
     padding: 8px 8px 0 8px;
+    position: relative;
 
     h3 {
         color: ${kicker};
         margin: 0;
+    }
+
+    .open {
+        border: 1px solid ${palette.neutral[86]};
+        border-radius: 50%;
+        height: 32px;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        width: 32px;
     }
 
     ul {
@@ -30,6 +41,10 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
             div {
                 font-weight: bold;
                 margin-bottom: 4px;
+            }
+
+            a {
+                color: ${kicker};
             }
 
             &::before {
@@ -96,11 +111,12 @@ const LiveblogKeyEvents = ({ pillarStyles }: { pillarStyles: PillarStyles }): JS
     return (
         <div css={LiveblogKeyEventsStyles(pillarStyles)}>
             <h3>Key events (7)</h3>
+            <div className="open"></div>
             <ul>
-                {placeholderEvents.map(event => {
-                    return <li>
+                {placeholderEvents.map((event, index) => {
+                    return <li key={index}>
                         <div>15m ago</div>
-                        {event}
+                        <a>{event}</a>
                     </li>
                 })}
             </ul>
