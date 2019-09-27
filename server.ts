@@ -7,9 +7,14 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import Article, { ArticleProps } from './src/components/news/Article';
+import LiveblogArticle from './src/components/liveblog/LiveblogArticle';
+
+import { getPillarStyles } from './src/styles';
+
 import { getConfigValue } from './src/utils/ssmConfig';
 import { isFeature, parseCapi } from './src/utils/capi';
 import { fromUnsafe, Result, Ok, Err } from './src/types/Result';
+import { Tag } from './src/types/Capi';
 
 const app = express();
 
@@ -49,13 +54,16 @@ function checkForUnsupportedContent(capi: any): Result<string, void> {
 const capiFields = (capi: any): Result<string, CapiFields> =>
   fromUnsafe(() => {
 
-    const { type, fields, elements, tags, webPublicationDate } = capi.response.content;
+    const { type, fields, elements, tags, webPublicationDate, pillarId } = capi.response.content;
     const bodyElements = capi.response.content.blocks.body[0].elements;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mainImages = elements.filter((elem: any) => elem.relation === 'main' && elem.type === 'image');
     const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
     const feature = isFeature(tags) || 'starRating' in fields;
+    const pillarStyles = getPillarStyles(pillarId);
+    const contributors = tags.filter((tag: Tag) => tag.type === 'contributor');
+    const [series] = tags.filter((tag: Tag) => tag.type === 'series');
 
     return {
       type,
@@ -66,6 +74,9 @@ const capiFields = (capi: any): Result<string, CapiFields> =>
         feature,
         mainAssets,
         bodyElements,
+        pillarStyles,
+        contributors,
+        series
       },
     };
   }, 'Unexpected CAPI response structure');
@@ -85,7 +96,7 @@ const getArticleComponent = (capiFields: CapiFields): React.ReactElement => {
     case 'article':
       return React.createElement(Article, capiFields.articleProps);
     case 'liveblog':
-      return React.createElement(Article, capiFields.articleProps);
+      return React.createElement(LiveblogArticle, {...capiFields.articleProps, isLive: true});
     default:
       return React.createElement('p', null, `${capiFields.type} not implemented yet`);
   }

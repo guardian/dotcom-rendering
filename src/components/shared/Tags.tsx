@@ -1,9 +1,9 @@
 import React from 'react';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
-const tagsStyles = css`
+const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles => css`
     margin-top: 0;
     margin-bottom: 0;
 
@@ -24,7 +24,7 @@ const tagsStyles = css`
             text-overflow: ellipsis;
             max-width: 18.75rem;
             color: ${palette.neutral[7]};
-            background-color: ${palette.neutral[97]};
+            background-color: ${background};
         }
     }
 
@@ -48,10 +48,11 @@ interface Tag {
 
 interface TagsProps {
     tags: Tag[];
+    background?: string;
 }
 
-const Tags = ({ tags }: TagsProps): JSX.Element => (
-    <ul css={[tagsStyles, tagsDarkStyles]}>
+const Tags = ({ tags, background }: TagsProps): JSX.Element => (
+    <ul css={[tagsStyles(background), tagsDarkStyles]}>
         {tags.map((tag, index) => {
             return <li key={index}>
                 <a href={tag.webUrl}>

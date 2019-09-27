@@ -43,3 +43,34 @@ export interface Capi {
         };
     };
 }
+
+export interface Series {
+    webTitle?: string;
+    webUrl?: string;
+}
+
+export interface Asset {
+    file: string;
+    typeData: AssetTypeData;
+}
+
+export interface AssetTypeData {
+    altText: string;
+    caption: string;
+    credit: string;
+    width: number;
+    height: number;
+}
+
+export interface Tag {
+    webUrl: string;
+    webTitle: string;
+    type: string;
+}
+
+export interface Contributor {
+    webTitle?: string;
+    webUrl?: string;
+    apiUrl?: string;
+    bylineLargeImageUrl?: string;
+}

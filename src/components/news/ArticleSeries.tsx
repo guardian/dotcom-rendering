@@ -1,23 +1,22 @@
 import React from 'react';
-import { sidePadding, PillarStyles } from '../../styles';
+import { sidePadding, PillarStyles, headlineFont } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
+import { Series } from '../../types/Capi';
 
 const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     ${sidePadding}
     a {
-        font-weight: 900;
+        font-weight: 700;
         font-size: 1.6rem;
         line-height: 2.4rem;
         color: ${kicker};
         text-decoration: none;
+        ${headlineFont}
     }
 `;
 
 interface ArticleSeriesProps {
-    series: {
-        webTitle?: string;
-        webUrl?: string;
-    };
+    series: Series;
     pillarStyles: PillarStyles;
 }
 
