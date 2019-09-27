@@ -34,7 +34,8 @@ const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarSty
         padding-bottom: 4px;
         line-height: 2.2rem;
 
-        .byline {
+        address {
+            font-style: inherit;
             a {
                 text-decoration: none;
                 font-weight: 500;
@@ -43,7 +44,7 @@ const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarSty
             }
         }
 
-        .byline, .follow, a {
+        address, .follow, a {
             color: ${palette.neutral[100]};
         }
 
@@ -67,22 +68,22 @@ interface LiveblogBylineProps {
     pillarId: PillarId;
 }
 
-const LiveblogBylineAvatar = (img: string): JSX.Element => (
-    <div className="avatar"><img src={img} /></div>
+const LiveblogBylineAvatar = ({ bylineLargeImageUrl, webTitle }: Contributor): JSX.Element => (
+    <div className="avatar"><img src={bylineLargeImageUrl} alt={webTitle}/></div>
 )
 
 const LiveblogByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: LiveblogBylineProps): JSX.Element => {
     const [contributor] = contributors;
     const singleContributor = contributors.length === 1;
-    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? LiveblogBylineAvatar(contributor.bylineLargeImageUrl) : null;
+    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? LiveblogBylineAvatar(contributor) : null;
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline pillar={pillarId} type={'liveblog'}/>
             <div css={sidePadding}>
                 { avatar }
                 <div className="author">
-                    <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
-                    <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
+                    <address dangerouslySetInnerHTML={{__html: byline}}></address>
+                    <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
                     <div className="follow">Get alerts on this story</div>
                 </div>
             </div>

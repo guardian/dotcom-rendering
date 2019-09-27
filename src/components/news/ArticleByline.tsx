@@ -28,8 +28,9 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyl
     }
 
     .author {
-        .byline {
+        address {
             line-height: 2.2rem;
+            font-style: inherit;
 
             a {
                 text-decoration: none;
@@ -37,7 +38,7 @@ const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyl
             }
         }
 
-        .byline, .follow, a {
+        address, .follow, a {
             color: ${kicker};
         }
 
@@ -57,7 +58,7 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
     color: ${palette.neutral[86]};
 
     .author {
-        .byline, .follow, a {
+        address, .follow, a {
             color: ${inverted};
         }
 
@@ -75,22 +76,22 @@ interface ArticleBylineProps {
     pillarId: PillarId;
 }
 
-const ArticleBylineAvatar = (img: string): JSX.Element => (
-    <div className="avatar"><img src={img} /></div>
+const ArticleBylineAvatar = ({ bylineLargeImageUrl, webTitle }: Contributor): JSX.Element => (
+    <div className="avatar"><img src={bylineLargeImageUrl} alt={webTitle}/></div>
 )
 
 const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: ArticleBylineProps): JSX.Element => {
     const [contributor] = contributors;
     const singleContributor = contributors.length === 1;
-    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? ArticleBylineAvatar(contributor.bylineLargeImageUrl) : null;
+    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? ArticleBylineAvatar(contributor) : null;
     return (
         <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
             <Keyline pillar={pillarId} type={'article'}/>
             <div css={sidePadding}>
                 { avatar }
                 <div className="author">
-                    <div className="byline" dangerouslySetInnerHTML={{__html: byline}}></div>
-                    <div className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</div>
+                    <address dangerouslySetInnerHTML={{__html: byline}}></address>
+                    <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
                     {singleContributor && contributor.apiUrl ? <div className="follow">Follow { contributor.webTitle }</div> : null}
                 </div>
             </div>

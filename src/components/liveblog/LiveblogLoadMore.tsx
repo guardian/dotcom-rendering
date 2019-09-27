@@ -4,6 +4,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 
 const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
+    all: unset;
     ${sidePadding}
     color: ${palette.neutral[100]};
     margin: 32px 0 24px 0;
@@ -28,9 +29,9 @@ const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => c
 
 const LiveblogLoadMore = ({ pillarStyles }: { pillarStyles: PillarStyles }): JSX.Element => {
     return (
-        <div css={LiveblogLoadMoreStyles(pillarStyles)}>
+        <button css={LiveblogLoadMoreStyles(pillarStyles)}>
             <span>View more updates</span>
-        </div>
+        </button>
     )
 }
 
