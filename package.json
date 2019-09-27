@@ -10,8 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
-    "build:server": "webpack --config config/webpack.config.js --config-name server",
-    "build:client": "webpack --config config/webpack.config.js --config-name client"
+    "build:server": "webpack --config webpack.config.js --config-name server",
+    "build:client": "webpack --config webpack.config.js --config-name client"
   },
   "author": "",
   "license": "ISC",

@@ -6,15 +6,15 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
-import Article, { ArticleProps } from './src/components/news/Article';
-import LiveblogArticle from './src/components/liveblog/LiveblogArticle';
+import Article, { ArticleProps } from 'components/news/Article';
+import LiveblogArticle from 'components/liveblog/LiveblogArticle';
 
-import { getPillarStyles } from './src/styles';
+import { getPillarStyles } from 'styles';
 
-import { getConfigValue } from './src/utils/ssmConfig';
-import { isFeature, parseCapi } from './src/utils/capi';
-import { fromUnsafe, Result, Ok, Err } from './src/types/Result';
-import { Tag } from './src/types/Capi';
+import { getConfigValue } from 'utils/ssmConfig';
+import { isFeature, parseCapi } from 'utils/capi';
+import { fromUnsafe, Result, Ok, Err } from 'types/Result';
+import { Tag } from 'types/Capi';
 
 const app = express();
 

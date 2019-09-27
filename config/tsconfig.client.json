@@ -5,6 +5,6 @@
         "target": "esnext"
     },
     "files": [
-        "../client.ts"
+        "../src/client.ts"
     ]
 }

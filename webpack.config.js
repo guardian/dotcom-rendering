@@ -1,5 +1,11 @@
+// ----- Imports ----- //
+
 const { fork } = require('child_process');
 const webpack = require('webpack');
+const path = require('path');
+
+
+// ----- Plugins ----- //
 
 class LaunchServerPlugin {
     apply(compiler) {
@@ -17,10 +23,24 @@ class LaunchServerPlugin {
     }
 }
 
+
+// ----- Shared Config ----- //
+
+const resolve = {
+    extensions: ['.ts', '.tsx', '.js'],
+    modules: [
+        path.resolve(__dirname, 'src'),
+        'node_modules',
+    ],
+};
+
+
+// ----- Configs ----- //
+
 const serverConfig = {
     name: 'server',
     mode: 'development',
-    entry: './server.ts',
+    entry: 'server.ts',
     target: 'node',
     node: {
         __dirname: false,
@@ -28,9 +48,7 @@ const serverConfig = {
     output: {
         filename: 'server.js',
     },
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
-    },
+    resolve,
     watch: true,
     watchOptions: {
         ignored: /node_modules/,
@@ -69,14 +87,12 @@ const serverConfig = {
 const clientConfig = {
     name: 'client',
     mode: 'development',
-    entry: './client.ts',
+    entry: 'client.ts',
     target: 'web',
     output: {
         filename: 'client.js',
     },
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
-    },
+    resolve,
     module: {
         rules: [
             {
