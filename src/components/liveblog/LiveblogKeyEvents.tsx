@@ -2,6 +2,8 @@ import React from 'react';
 import { PillarStyles, icons, basePx } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations/palette';
+import { Block } from 'types/Capi';
+import { makeRelativeDate } from 'utils/date';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -136,27 +138,25 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 	}
 `;
 
-const placeholderEvents = [
-    'One',
-    'Two',
-    'Three',
-    'Four',
-    'Five'
-]
+interface LiveblogKeyEventsProps {
+    pillarStyles: PillarStyles;
+    bodyElements: [Block];
+}
 
-const LiveblogKeyEvents = ({ pillarStyles }: { pillarStyles: PillarStyles }): JSX.Element => {
+const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProps): JSX.Element => {
+    const keyEvents = bodyElements.filter(elem => elem.attributes.keyEvent as boolean).slice(0, 7);
     return (
         <section css={LiveblogKeyEventsStyles(pillarStyles)}>
-            <h3>Key events (7)</h3>
+            <h3>Key events ({keyEvents.length})</h3>
             <div>
                 <input id="collapsible" type="checkbox"/>
                 <label htmlFor="collapsible"></label>
                 <div>
                     <ul>
-                        {placeholderEvents.map((event, index) => {
+                        {keyEvents.map((event, index) => {
                             return <li key={index}>
-                                <div>15m ago</div>
-                                <a>{event}</a>
+                                <div>{makeRelativeDate(event.firstPublishedDate)}</div>
+                                <a>{event.title}</a>
                             </li>
                         })}
                     </ul>

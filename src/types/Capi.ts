@@ -74,3 +74,17 @@ export interface Contributor {
     apiUrl?: string;
     bylineLargeImageUrl?: string;
 }
+
+export interface Block {
+    id: string;
+    title: string;
+    attributes: {
+        keyEvent?: boolean;
+    };
+    firstPublishedDate: Date;
+    elements: {
+        type: string;
+        assets: [];
+        textTypeData: {};
+    };
+}

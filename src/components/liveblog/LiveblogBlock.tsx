@@ -14,12 +14,26 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
 interface LiveblogBlockProps {
     pillarStyles: PillarStyles;
     highlighted: boolean;
+    title: string;
+    children: JSX.Element;
 }
 
-const LiveblogBlock = ({ pillarStyles, highlighted }: LiveblogBlockProps): JSX.Element => {
+const Title = ({ title, highlighted }: { title: string; highlighted: boolean }): JSX.Element => {
+    const TitleStyles = css`
+        display: inline-block;
+        background-color: ${palette.yellow.main};
+    `
+    return highlighted
+        ? <h3 css={TitleStyles}>{title}</h3>
+        : <h3>{title}</h3>
+}
+
+const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {
+    const { pillarStyles, highlighted, title, children } = props;
     return (
         <article css={LiveblogBlockStyles(pillarStyles, highlighted)}>
-            <h3>Block</h3>
+            <Title highlighted={highlighted} title={title} />
+            { children }
         </article>
     )
 }
