@@ -6,7 +6,9 @@ import { Keyline } from '../shared/Keyline';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { Contributor } from '../../types/Capi';
+import { Contributor } from 'types/Capi';
+import Avatar from 'components/shared/Avatar';
+import Follow from 'components/shared/Follow';
 
 
 const ArticleBylineStyles = ({ inverted, kicker }: PillarStyles): SerializedStyles => css`
@@ -74,36 +76,6 @@ interface ArticleBylineProps {
     publicationDate: string;
     contributors: Contributor[];
     pillarId: PillarId;
-}
-
-const isSingleContributor = (contributors: Contributor[]): boolean => contributors.length === 1;
-
-const Avatar = (props: { contributors: Contributor[] }): JSX.Element | null => {
-
-    const [contributor] = props.contributors;
-
-    if (isSingleContributor(props.contributors) && contributor.bylineLargeImageUrl) {
-        return (
-            <div className="avatar">
-                <img src={contributor.bylineLargeImageUrl} alt={contributor.webTitle}/>
-            </div>
-        );
-    }
-
-    return null;
-    
-}
-
-const Follow = (props: { contributors: Contributor[] }): JSX.Element | null => {
-
-    const [contributor] = props.contributors;
-
-    if (isSingleContributor(props.contributors) && contributor.apiUrl) {
-        return <div className="follow">Follow { contributor.webTitle }</div>;
-    }
-
-    return null;
-
 }
 
 const ArticleByline = ({

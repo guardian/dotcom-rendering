@@ -7,6 +7,7 @@ import { Keyline } from '../shared/Keyline';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { Contributor } from '../../types/Capi';
+import Avatar from 'components/shared/Avatar';
 
 
 const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarStyles): SerializedStyles => css`
@@ -66,23 +67,6 @@ interface LiveblogBylineProps {
     publicationDate: string;
     contributors: Contributor[];
     pillarId: PillarId;
-}
-
-const Avatar = (props: { contributors: Contributor[] }): JSX.Element | null => {
-
-    const [contributor] = props.contributors;
-    const singleContributor = props.contributors.length === 1;
-
-    if (singleContributor && contributor.bylineLargeImageUrl) {
-        return (
-            <div className="avatar">
-                <img src={contributor.bylineLargeImageUrl} alt={contributor.webTitle}/>
-            </div>
-        );
-    }
-    
-    return null;
-
 }
 
 const LiveblogByline = ({
