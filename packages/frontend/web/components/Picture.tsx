@@ -24,7 +24,6 @@ export const Picture: React.FC<{
     alt: string;
     src: string;
 }> = ({ sources, alt, src }) => {
-    console.log('sources ', sources);
     return (
         <picture
             dangerouslySetInnerHTML={{

@@ -203,7 +203,7 @@ interface CAPIType {
 
 interface TagType {
     id: string;
-    tagType: string;
+    type: string;
     title: string;
     twitterHandle?: string;
     paidContentType?: string;

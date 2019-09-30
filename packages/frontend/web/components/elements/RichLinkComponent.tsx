@@ -1,13 +1,12 @@
 import React from 'react';
 import { AsyncClientComponent } from '../lib/AsyncClientComponent';
 import { css, cx } from 'emotion';
-
-import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
+import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@guardian/pasteup/icons/arrow-in-circle.svg';
 import Quote from '@guardian/pasteup/icons/quote.svg';
 import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
-import { StarRating } from '@root/packages/frontend/amp/components/StarRating';
+import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 
 interface RichLink {
     cardStyle: string;
@@ -22,13 +21,44 @@ interface RichLink {
     contributorImage?: string;
 }
 
+const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
+    if (pillar) {
+        return pillarPalette[pillar].main;
+    }
+    return pillarPalette.news.main;
+};
+
 const richLinkContainer = css`
     width: 8.125rem;
     float: left;
     margin-right: 20px;
-    margin-bottom: 10px;
-    margin-top: 5px;
+    margin-bottom: 5px;
 `;
+
+const richLinkTopBorder: (pillar: Pillar) => colour = pillar => {
+    return css`
+        border-top: 1px;
+        border-top-style: solid;
+        border-top-color: ${richLinkPillarColour(pillar)};
+    `;
+};
+
+const richLinkLink = css`
+    text-decoration: none;
+`;
+
+const richLinkElements = css`
+    padding: 4px 5px 5px 7px;
+`;
+
+const quote: (pillar: Pillar) => colour = pillar => {
+    return css`
+        fill: ${richLinkPillarColour(pillar)};
+        float: left;
+        padding-top: 4px;
+        padding-right: 2px;
+    `;
+};
 
 const richLinkTitle = css`
     ${headline(1)};
@@ -37,24 +67,11 @@ const richLinkTitle = css`
     padding-bottom: 1px;
 `;
 
-const richLinkLink = css`
-    text-decoration: none;
-`;
-
 const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
     return css`
         fill: ${richLinkPillarColour(pillar)};
         color: ${richLinkPillarColour(pillar)};
         padding-top: 2px;
-    `;
-};
-
-const quote: (pillar: Pillar) => colour = pillar => {
-    return css`
-        fill: ${richLinkPillarColour(pillar)};
-        float: left;
-        padding-top: 4px;
-        padding-right: 2px;
     `;
 };
 
@@ -69,26 +86,24 @@ const readMoreTextStyle = css`
     text-decoration: none;
 `;
 
-const starRatingWrapper = css`
-    padding: 2px;
-    margin-bottom: 5px;
-`;
-
-const richLinkElements = css`
-    /* margin-left: 5px; */
-    padding: 4px 5px 5px 7px;
-`;
-
-const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
-    if (pillar) {
-        return pillarPalette[pillar].main;
-    }
-    return pillarPalette.news.main;
-};
-
 const byline = css`
     ${headline(1)};
     font-style: italic;
+`;
+
+// !important is used here to override the default inline body image styling
+const contributorImage = css`
+    border-radius: 100%;
+    object-fit: cover;
+    width: 100%;
+    height: 100% !important ;
+`;
+
+const contributorImageWrapper = css`
+    width: 5rem;
+    height: 5rem;
+    margin-left: auto;
+    margin-right: 0.3rem;
 `;
 
 const neutralBackground = css`
@@ -137,22 +152,7 @@ const getMainContributor: (tags: TagType[]) => string = tags => {
     return contributorTags.length > 0 ? contributorTags[0].title : '';
 };
 
-const contributorImage = css`
-    border-radius: 100%;
-    object-fit: cover;
-    width: 100%;
-    height: 100% !important ;
-`;
-
-const contributorImageWrapper = css`
-    width: 5rem;
-    height: 5rem;
-    margin-left: auto;
-    margin-right: 0.3rem;
-`;
-
 const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
-    console.log('rich link yayayay', richLink);
     const linkText =
         richLink.cardStyle === 'letters'
             ? `${richLink.headline} | Letters `
@@ -169,7 +169,8 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
     const isOpinion = richLink.cardStyle === 'comment';
     const mainContributor = getMainContributor(richLink.tags);
     return (
-        <a className={richLinkLink} href={richLink.url}>
+        <a className={cx(richLinkLink)} href={richLink.url}>
+            <div className={richLinkTopBorder(richLink.pillar)} />
             {showImage && (
                 <div>
                     <img
@@ -191,9 +192,10 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                     </div>
                 )}
                 {richLink.starRating && (
-                    <div className={starRatingWrapper}>
-                        <StarRating rating={richLink.starRating} />
-                    </div>
+                    <StarRating
+                        rating={richLink.starRating}
+                        location={'richLink'}
+                    />
                 )}
                 {isPaidContent && richLink.sponsorName && (
                     <div className={paidForBranding}>
@@ -250,10 +252,8 @@ const fetchContent: (
     const path = new URL(element.url).pathname;
     return fetch(`${ajaxUrl}/embed/card${path}.json?dcr=true`)
         .then(res => res.json())
-        .then(r => {
-            return r;
-        })
         .catch(err => {
+            console.error('Failed to fetch rich link data', err);
             return {};
         });
 };
