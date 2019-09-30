@@ -33,22 +33,36 @@ interface LiveblogArticleProps {
     series: Series;
 }
 
-const LiveblogArticle = ({ headline, standfirst, bylineHtml, webPublicationDate, pillarId, tags, mainAssets, pillarStyles, contributors, series }: LiveblogArticleProps): JSX.Element => {
-    return (
-        <main css={LiveblogArticleStyles}>
-            <LiveblogSeries series={series} pillarStyles={pillarStyles}/>
-            <LiveblogHeadline headline={headline} pillarStyles={pillarStyles}/>
-            <LiveblogStandfirst standfirst={standfirst} pillarStyles={pillarStyles}/>
-            <LiveblogByline byline={bylineHtml} pillarStyles={pillarStyles} pillarId={pillarId} publicationDate={webPublicationDate} contributors={contributors}/>
-            <HeaderImage assets={mainAssets}/>
-            <LiveblogKeyEvents pillarStyles={pillarStyles}/>
-            <LiveblogBlock pillarStyles={pillarStyles} highlighted={true}/>
-            <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
-            <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
-            <LiveblogLoadMore pillarStyles={pillarStyles}/>
-            <Tags tags={tags} background={palette.neutral[93]}/>
-        </main>
-    )    
-}
+const LiveblogArticle = ({
+    headline,
+    standfirst,
+    bylineHtml,
+    webPublicationDate,
+    pillarId,
+    tags,
+    mainAssets,
+    pillarStyles,
+    contributors,
+    series,
+}: LiveblogArticleProps): JSX.Element =>
+    <main css={LiveblogArticleStyles}>
+        <LiveblogSeries series={series} pillarStyles={pillarStyles}/>
+        <LiveblogHeadline headline={headline} pillarStyles={pillarStyles}/>
+        <LiveblogStandfirst standfirst={standfirst} pillarStyles={pillarStyles}/>
+        <LiveblogByline
+            byline={bylineHtml}
+            pillarStyles={pillarStyles}
+            pillarId={pillarId}
+            publicationDate={webPublicationDate}
+            contributors={contributors}
+        />
+        <HeaderImage assets={mainAssets}/>
+        <LiveblogKeyEvents pillarStyles={pillarStyles}/>
+        <LiveblogBlock pillarStyles={pillarStyles} highlighted={true}/>
+        <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
+        <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
+        <LiveblogLoadMore pillarStyles={pillarStyles}/>
+        <Tags tags={tags} background={palette.neutral[93]}/>
+    </main>
 
 export default LiveblogArticle;

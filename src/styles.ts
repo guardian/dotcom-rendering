@@ -115,12 +115,14 @@ export const headlineFont = "font-family: 'Guardian Headline';";
 
 export const icons = "font-family: 'Guardian Icons';";
 
-export const darkModeCss = (styles: TemplateStringsArray, ...placeholders: string[]): SerializedStyles => {
-    return css`
+export const darkModeCss = (
+    styles: TemplateStringsArray,
+    ...placeholders: string[]
+): SerializedStyles =>
+    css`
         @media (prefers-color-scheme: dark) {
             ${styles.map((style, index) => `${style}${placeholders[index]}`)
                 .filter(Boolean)
                 .join('')}
         }
-    `;
-}
+    `

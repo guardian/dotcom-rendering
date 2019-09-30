@@ -34,18 +34,40 @@ const MainStyles = darkModeCss`
     background: ${palette.neutral[10]};
 `;
 
-const Article = ({ headline, standfirst, bylineHtml, webPublicationDate, pillarId, tags, feature, mainAssets, starRating, bodyElements, pillarStyles, contributors, series }: ArticleProps): JSX.Element => {
-    return (
-        <main css={MainStyles}>
-            <HeaderImage assets={mainAssets}/>
-            <ArticleSeries series={series} pillarStyles={pillarStyles}/>
-            <ArticleHeadline headline={headline} feature={feature} rating={starRating} pillarStyles={pillarStyles}/>
-            <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
-            <ArticleByline byline={bylineHtml} pillarStyles={pillarStyles} pillarId={pillarId} publicationDate={webPublicationDate} contributors={contributors}/>
-            <ArticleBody pillarStyles={pillarStyles} bodyElements={bodyElements}/>
-            <Tags tags={tags}/>
-        </main>
-    )
-}
+const Article = ({
+    headline,
+    standfirst,
+    bylineHtml,
+    webPublicationDate,
+    pillarId,
+    tags,
+    feature,
+    mainAssets,
+    starRating,
+    bodyElements,
+    pillarStyles,
+    contributors,
+    series,
+}: ArticleProps): JSX.Element =>
+    <main css={MainStyles}>
+        <HeaderImage assets={mainAssets}/>
+        <ArticleSeries series={series} pillarStyles={pillarStyles}/>
+        <ArticleHeadline
+            headline={headline}
+            feature={feature}
+            rating={starRating}
+            pillarStyles={pillarStyles}
+        />
+        <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
+        <ArticleByline
+            byline={bylineHtml}
+            pillarStyles={pillarStyles}
+            pillarId={pillarId}
+            publicationDate={webPublicationDate}
+            contributors={contributors}
+        />
+        <ArticleBody pillarStyles={pillarStyles} bodyElements={bodyElements}/>
+        <Tags tags={tags}/>
+    </main>
 
 export default Article;

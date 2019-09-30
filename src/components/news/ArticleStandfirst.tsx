@@ -46,8 +46,14 @@ interface ArticleStandfirstProps {
     pillarStyles: PillarStyles;
 }
 
-const ArticleStandfirst = ({ standfirst, pillarStyles, feature }: ArticleStandfirstProps): JSX.Element => (
-    <div css={[StandfirstStyles(feature, pillarStyles), StandfirstDarkStyles(pillarStyles)]} dangerouslySetInnerHTML={{__html: transform(standfirst)}}></div>
-)
+const ArticleStandfirst = ({
+    standfirst,
+    pillarStyles,
+    feature,
+}: ArticleStandfirstProps): JSX.Element =>
+    <div
+        css={[StandfirstStyles(feature, pillarStyles), StandfirstDarkStyles(pillarStyles)]}
+        dangerouslySetInnerHTML={{__html: transform(standfirst)}}
+    />
 
 export default ArticleStandfirst;

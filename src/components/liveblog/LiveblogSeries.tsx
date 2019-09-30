@@ -23,7 +23,18 @@ interface LiveblogSeriesProps {
     pillarStyles: PillarStyles;
 }
 
-const LiveblogSeries = ({ series, pillarStyles }: LiveblogSeriesProps): JSX.Element | null =>
-    series ? <div css={LiveblogSeriesStyles(pillarStyles)}><a href={series.webUrl}>{series.webTitle}</a></div> : null
+const LiveblogSeries = ({ series, pillarStyles }: LiveblogSeriesProps): JSX.Element | null => {
+
+    if (series) {
+        return (
+            <div css={LiveblogSeriesStyles(pillarStyles)}>
+                <a href={series.webUrl}>{series.webTitle}</a>
+            </div>
+        )
+    }
+
+    return null;
+
+}
 
 export default LiveblogSeries;
