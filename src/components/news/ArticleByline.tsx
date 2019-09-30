@@ -76,27 +76,53 @@ interface ArticleBylineProps {
     pillarId: PillarId;
 }
 
-const ArticleBylineAvatar = ({ bylineLargeImageUrl, webTitle }: Contributor): JSX.Element => (
-    <div className="avatar"><img src={bylineLargeImageUrl} alt={webTitle}/></div>
-)
+const isSingleContributor = (contributors: Contributor[]): boolean => contributors.length === 1;
 
-const ArticleByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: ArticleBylineProps): JSX.Element => {
-    const [contributor] = contributors;
-    const singleContributor = contributors.length === 1;
-    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? ArticleBylineAvatar(contributor) : null;
-    return (
-        <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
-            <Keyline pillar={pillarId} type={'article'}/>
-            <div css={sidePadding}>
-                { avatar }
-                <div className="author">
-                    <address dangerouslySetInnerHTML={{__html: byline}}></address>
-                    <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
-                    {singleContributor && contributor.apiUrl ? <div className="follow">Follow { contributor.webTitle }</div> : null}
-                </div>
+const Avatar = (props: { contributors: Contributor[] }): JSX.Element | null => {
+
+    const [contributor] = props.contributors;
+
+    if (isSingleContributor(props.contributors) && contributor.bylineLargeImageUrl) {
+        return (
+            <div className="avatar">
+                <img src={contributor.bylineLargeImageUrl} alt={contributor.webTitle}/>
+            </div>
+        );
+    }
+
+    return null;
+    
+}
+
+const Follow = (props: { contributors: Contributor[] }): JSX.Element | null => {
+
+    const [contributor] = props.contributors;
+
+    if (isSingleContributor(props.contributors) && contributor.apiUrl) {
+        return <div className="follow">Follow { contributor.webTitle }</div>;
+    }
+
+    return null;
+
+}
+
+const ArticleByline = ({
+    byline,
+    pillarStyles,
+    publicationDate,
+    contributors,
+    pillarId,
+}: ArticleBylineProps): JSX.Element =>
+    <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
+        <Keyline pillar={pillarId} type={'article'}/>
+        <div css={sidePadding}>
+            <Avatar contributors={contributors} />
+            <div className="author">
+                <address dangerouslySetInnerHTML={{__html: byline}}></address>
+                <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
+                <Follow contributors={contributors} />
             </div>
         </div>
-    )
-}
+    </div>
 
 export default ArticleByline;

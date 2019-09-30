@@ -30,8 +30,10 @@ interface LiveblogStandfirstProps {
     pillarStyles: PillarStyles;
 }
 
-const LiveblogStandfirst = ({ standfirst, pillarStyles }: LiveblogStandfirstProps): JSX.Element => {
-    return <div css={StandfirstStyles(pillarStyles)} dangerouslySetInnerHTML={{__html: transform(standfirst)}}></div>
-}
+const LiveblogStandfirst = ({ standfirst, pillarStyles }: LiveblogStandfirstProps): JSX.Element =>
+    <div
+        css={StandfirstStyles(pillarStyles)}
+        dangerouslySetInnerHTML={{ __html: transform(standfirst) }}
+    />
 
 export default LiveblogStandfirst;

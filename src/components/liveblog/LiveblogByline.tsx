@@ -68,19 +68,36 @@ interface LiveblogBylineProps {
     pillarId: PillarId;
 }
 
-const LiveblogBylineAvatar = ({ bylineLargeImageUrl, webTitle }: Contributor): JSX.Element => (
-    <div className="avatar"><img src={bylineLargeImageUrl} alt={webTitle}/></div>
-)
+const Avatar = (props: { contributors: Contributor[] }): JSX.Element | null => {
 
-const LiveblogByline = ({ byline, pillarStyles, publicationDate, contributors, pillarId }: LiveblogBylineProps): JSX.Element => {
-    const [contributor] = contributors;
-    const singleContributor = contributors.length === 1;
-    const avatar = (singleContributor && contributor.bylineLargeImageUrl) ? LiveblogBylineAvatar(contributor) : null;
+    const [contributor] = props.contributors;
+    const singleContributor = props.contributors.length === 1;
+
+    if (singleContributor && contributor.bylineLargeImageUrl) {
+        return (
+            <div className="avatar">
+                <img src={contributor.bylineLargeImageUrl} alt={contributor.webTitle}/>
+            </div>
+        );
+    }
+    
+    return null;
+
+}
+
+const LiveblogByline = ({
+    byline,
+    pillarStyles,
+    publicationDate,
+    contributors,
+    pillarId,
+}: LiveblogBylineProps): JSX.Element => {
+    
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline pillar={pillarId} type={'liveblog'}/>
             <div css={sidePadding}>
-                { avatar }
+                <Avatar contributors={contributors} />
                 <div className="author">
                     <address dangerouslySetInnerHTML={{__html: byline}}></address>
                     <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>

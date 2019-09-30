@@ -29,7 +29,12 @@ interface ArticleHeadlineProps {
     rating?: string;
 }
 
-const ArticleHeadline = ({ headline, feature, pillarStyles, rating }: ArticleHeadlineProps): JSX.Element =>
+const ArticleHeadline = ({
+    headline,
+    feature,
+    pillarStyles,
+    rating,
+}: ArticleHeadlineProps): JSX.Element =>
     <div css={[HeadlineStyles(feature, pillarStyles), HeadlineDarkStyles]}>
         <h1>{headline}</h1>
         { rating ? <ArticleRating rating={rating} /> : null }

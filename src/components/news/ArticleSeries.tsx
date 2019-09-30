@@ -20,7 +20,18 @@ interface ArticleSeriesProps {
     pillarStyles: PillarStyles;
 }
 
-const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps): JSX.Element | null =>
-    series ? <div css={ArticleSeriesStyles(pillarStyles)}><a href={series.webUrl}>{series.webTitle}</a></div> : null
+const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps): JSX.Element | null => {
+
+    if (series) {
+        return (
+            <div css={ArticleSeriesStyles(pillarStyles)}>
+                <a href={series.webUrl}>{series.webTitle}</a>
+            </div>
+        )
+    }
+
+    return null;
+
+}
 
 export default ArticleSeries;
