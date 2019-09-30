@@ -33,8 +33,8 @@ const richLinkContainer = css`
 const richLinkTitle = css`
     ${headline(1)};
     font-weight: 400;
-    padding-top: 4px;
-    padding-bottom: 7px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 `;
 
 const richLinkLink = css`
@@ -45,6 +45,7 @@ const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
     return css`
         fill: ${richLinkPillarColour(pillar)};
         color: ${richLinkPillarColour(pillar)};
+        padding-top: 2px;
     `;
 };
 
@@ -86,6 +87,7 @@ const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
 };
 
 const byline = css`
+    ${headline(1)};
     font-style: italic;
 `;
 
@@ -102,6 +104,12 @@ const neutralBackground = css`
 const pillarBackground: (pillar: Pillar) => colour = pillar => {
     return css`
         background-color: ${richLinkPillarColour(pillar)};
+    `;
+};
+
+const textColour: (pillar: Pillar) => colour = pillar => {
+    return css`
+        color: ${richLinkPillarColour(pillar)};
     `;
 };
 
@@ -126,7 +134,6 @@ const readMoreText: (contentType: string) => string = contentType => {
 
 const getMainContributor: (tags: TagType[]) => string = tags => {
     const contributorTags = tags.filter(t => t.type === 'Contributor');
-    console.log(contributorTags);
     return contributorTags.length > 0 ? contributorTags[0].title : '';
 };
 
@@ -134,7 +141,7 @@ const contributorImage = css`
     border-radius: 100%;
     object-fit: cover;
     width: 100%;
-    height: auto;
+    height: 100% !important ;
 `;
 
 const contributorImageWrapper = css`
@@ -178,7 +185,11 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                     </div>
                 )}
                 <div className={richLinkTitle}>{linkText}</div>
-                {isOpinion && <div className={byline}>{mainContributor}</div>}
+                {isOpinion && (
+                    <div className={cx(byline, textColour(richLink.pillar))}>
+                        {mainContributor}
+                    </div>
+                )}
                 {richLink.starRating && (
                     <div className={starRatingWrapper}>
                         <StarRating rating={richLink.starRating} />
