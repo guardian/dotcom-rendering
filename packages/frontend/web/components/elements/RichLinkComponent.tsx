@@ -253,7 +253,6 @@ const fetchContent: (
     return fetch(`${ajaxUrl}/embed/card${path}.json?dcr=true`)
         .then(res => res.json())
         .catch(err => {
-            console.error('Failed to fetch rich link data', err);
             return {};
         });
 };
