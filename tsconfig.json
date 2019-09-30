@@ -10,6 +10,6 @@
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "baseUrl": "src"
+        "baseUrl": "src/"
     }
 }
