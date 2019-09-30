@@ -40,7 +40,6 @@ const HeaderImageCaptionStyles = css`
 	}
 
 	input[type=checkbox]:checked ~ div {
-		position: absolute;
 		display: block;
 		min-height: 44px;
 		max-height: 999px;
