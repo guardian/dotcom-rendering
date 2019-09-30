@@ -5,7 +5,7 @@
     "workspaces": [
         "packages/*"
     ],
-    "tocList": "README.md packages/pasteup/README.md packages/pasteup/CONTRIBUTING.md packages/guui/README.md packages/design/CONTRIBUTING.md docs/contributing/**",
+    "tocList": "README.md packages/pasteup/README.md packages/pasteup/CONTRIBUTING.md packages/guui/README.md docs/contributing/**",
     "scripts": {
         "lint": "eslint . --ext .ts,.tsx",
         "tsc": "tsc",
