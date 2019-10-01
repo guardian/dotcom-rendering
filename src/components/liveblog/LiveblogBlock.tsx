@@ -2,6 +2,7 @@ import React from 'react';
 import { PillarStyles } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
+import { makeRelativeDate, formatDate } from 'utils/date';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -14,6 +15,8 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
 interface LiveblogBlockProps {
     pillarStyles: PillarStyles;
     highlighted: boolean;
+    firstPublishedDate: Date;
+    lastModifiedDate: Date;
     title: string;
     children: JSX.Element;
 }
@@ -27,11 +30,13 @@ const Title = ({ title, highlighted }: { title: string; highlighted: boolean }):
 }
 
 const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {
-    const { pillarStyles, highlighted, title, children } = props;
+    const { pillarStyles, highlighted, title, children, firstPublishedDate, lastModifiedDate } = props;
     return (
         <article css={LiveblogBlockStyles(pillarStyles, highlighted)}>
+            <p>{makeRelativeDate(firstPublishedDate)}</p>
             <Title highlighted={highlighted} title={title} />
             { children }
+            <p>Last updated: { formatDate(lastModifiedDate) }</p>
         </article>
     )
 }

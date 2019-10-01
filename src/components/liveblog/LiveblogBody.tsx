@@ -24,7 +24,9 @@ const LiveblogBody= ({ pillarStyles, bodyElements }: LiveblogBodyProps): JSX.Ele
                         key={block.id}
                         pillarStyles={pillarStyles} 
                         highlighted={!!block.attributes.keyEvent}
-                        title={block.title}>
+                        title={block.title}
+                        firstPublishedDate={block.firstPublishedDate}
+                        lastModifiedDate={block.lastModifiedDate}>
                             <>{render(block.elements).html}</>
                         </LiveblogBlock>
                 })

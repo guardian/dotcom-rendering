@@ -82,6 +82,7 @@ export interface Block {
         keyEvent?: boolean;
     };
     firstPublishedDate: Date;
+    lastModifiedDate: Date;
     elements: {
         type: string;
         assets: [];

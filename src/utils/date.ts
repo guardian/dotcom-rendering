@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 function isToday(date: Date): boolean {
     const today = new Date();
     return (date.toDateString() === today.toDateString());
@@ -60,4 +62,8 @@ export function makeRelativeDate(date: Date): string | null {
         const yearsAgo = Math.round(delta / 3600 / 24 / 7 / 52);
         return `${yearsAgo}y ago`;
     }
+}
+
+export function formatDate(date: Date) : string {
+    return moment(date).format('HH:mm dddd, D MMMM YYYY');
 }
