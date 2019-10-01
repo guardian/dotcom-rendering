@@ -27,7 +27,7 @@ function isValidDate(date: Date): boolean {
     return !isNaN(date.getTime());
 }
 
-export function makeRelativeDate(date: Date): string | null {
+export function makeRelativeDate(date: Date): Option<string> {
     const then: Date = new Date(date);
     const now: Date = new Date();
 
