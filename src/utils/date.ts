@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { Option, Some, None } from 'types/Option'; 
 
 function isToday(date: Date): boolean {
     const today = new Date();
@@ -32,35 +33,35 @@ export function makeRelativeDate(date: Date): Option<string> {
     const now: Date = new Date();
 
     if (!isValidDate(then)) {
-        return null;
+        return new None();
     }
 
     const delta: number = parseInt(`${(now.valueOf() - then.valueOf()) / 1000}`, 10);
 
     if (delta < 0) {
-        return null;
+        return new None();
     } else if (delta < 55) {
-        return `${delta}s`;
+        return new Some(`${delta}s`);
     } else if (delta < (55 * 60)) {
         const minutesAgo = Math.round(delta / 60);
 
         if (minutesAgo === 1) {
-            return 'Now';
+            return new Some('Now');
         } else {
-            return `${minutesAgo}m ago`;
+            return new Some(`${minutesAgo}m ago`);
         }
     } else if (isToday(then) || isWithin24Hours(then)) {
         const hoursAgo = Math.round(delta / 3600);
-        return `${hoursAgo}h ago`;
+        return new Some(`${hoursAgo}h ago`);
     } else if (isWithinPastWeek(then)) {
         const daysAgo = Math.round(delta / 3600 / 24);
-        return `${daysAgo}d ago`;
+        return new Some(`${daysAgo}d ago`);
     } else if (isWithinPastYear(then)) {
         const weeksAgo = Math.round(delta / 3600 / 24 / 7);
-        return `${weeksAgo}w ago`;
+        return new Some(`${weeksAgo}w ago`);
     } else {
         const yearsAgo = Math.round(delta / 3600 / 24 / 7 / 52);
-        return `${yearsAgo}y ago`;
+        return new Some(`${yearsAgo}y ago`);
     }
 }
 
