@@ -33,7 +33,7 @@ const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {
     const { pillarStyles, highlighted, title, children, firstPublishedDate, lastModifiedDate } = props;
     return (
         <article css={LiveblogBlockStyles(pillarStyles, highlighted)}>
-            <p>{makeRelativeDate(firstPublishedDate)}</p>
+            {makeRelativeDate(firstPublishedDate).map(date => <p>{date}</p>).withDefault(null)}
             <Title highlighted={highlighted} title={title} />
             { children }
             <p>Last updated: { formatDate(lastModifiedDate) }</p>
