@@ -140,7 +140,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 
 interface LiveblogKeyEventsProps {
     pillarStyles: PillarStyles;
-    bodyElements: [Block];
+    bodyElements: Block[];
 }
 
 const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProps): JSX.Element => {

@@ -23,9 +23,7 @@ const Title = ({ title, highlighted }: { title: string; highlighted: boolean }):
         display: inline-block;
         background-color: ${palette.yellow.main};
     `
-    return highlighted
-        ? <h3 css={TitleStyles}>{title}</h3>
-        : <h3>{title}</h3>
+    return <h3 css={highlighted ? TitleStyles : null}>{title}</h3>
 }
 
 const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {

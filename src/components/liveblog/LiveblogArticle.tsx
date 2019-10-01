@@ -30,7 +30,8 @@ interface LiveblogArticleProps {
     pillarStyles: PillarStyles;
     contributors: Contributor[];
     series: Series;
-    bodyElements: [Block];
+    bodyElements: Block[];
+    isLive: boolean;
 }
 
 const LiveblogArticle = ({

@@ -7,12 +7,12 @@ import { Block } from 'types/Capi';
 
 interface LiveblogBodyProps {
     pillarStyles: PillarStyles;
-    bodyElements: [Block];
+    bodyElements: Block[];
 }
 
 const LiveblogBody= ({ pillarStyles, bodyElements }: LiveblogBodyProps): JSX.Element => {
     const initialBlocks = bodyElements.slice(0, 10);
-    const LoadMore = (props: {}): JSX.Element | null => bodyElements.length > 10 
+    const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 10
         ? <LiveblogLoadMore pillarStyles={pillarStyles}/> 
         : null;
 
@@ -23,15 +23,13 @@ const LiveblogBody= ({ pillarStyles, bodyElements }: LiveblogBodyProps): JSX.Ele
                     return <LiveblogBlock
                         key={block.id}
                         pillarStyles={pillarStyles} 
-                        highlighted={block.attributes.keyEvent as boolean} 
+                        highlighted={!!block.attributes.keyEvent}
                         title={block.title}>
-                            <React.Fragment>
-                                {render(block.elements).html}
-                            </React.Fragment>
+                            <>{render(block.elements).html}</>
                         </LiveblogBlock>
                 })
             }
-            <LoadMore />
+            <LoadMore total={bodyElements.length}/>
         </article>
     )
 }

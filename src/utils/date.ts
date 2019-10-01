@@ -1,42 +1,42 @@
-function isToday(date: Date) {
+function isToday(date: Date): boolean {
     const today = new Date();
     return (date.toDateString() === today.toDateString());
 }
 
-function isWithin24Hours(date: Date) {
+function isWithin24Hours(date: Date): boolean {
     const today = new Date();
     return (date.valueOf() > (today.valueOf() - (24 * 60 * 60 * 1000)));
 }
 
-function isWithinPastWeek(date: Date) {
+function isWithinPastWeek(date: Date): boolean {
     const daysAgo = new Date().valueOf() - (7 * 24 * 60 * 60 * 1000);
     return date.valueOf() >= daysAgo;
 }
 
-function isWithinPastYear(date: Date) {
+function isWithinPastYear(date: Date): boolean {
     const weeksAgo = new Date().valueOf() - (52 * 7 * 24 * 60 * 60 * 1000);
     return date.valueOf() >= weeksAgo;
 }
 
-function isValidDate(date: Date) {
+function isValidDate(date: Date): boolean {
     if (Object.prototype.toString.call(date) !== '[object Date]') {
         return false;
     }
     return !isNaN(date.getTime());
 }
 
-export function makeRelativeDate(date: Date) {
+export function makeRelativeDate(date: Date): string | null {
     const then: Date = new Date(date);
     const now: Date = new Date();
 
     if (!isValidDate(then)) {
-        return false;
+        return null;
     }
 
-    const delta: number = parseInt((now - then) / 1000, 10);
+    const delta: number = parseInt(`${(now.valueOf() - then.valueOf()) / 1000}`, 10);
 
     if (delta < 0) {
-        return false;
+        return null;
     } else if (delta < 55) {
         return `${delta}s`;
     } else if (delta < (55 * 60)) {
