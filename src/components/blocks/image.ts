@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 
 import React from 'react';
+import { assetsToSrcset, assetToUrl } from 'utils/imageResizer';
+import { Asset } from 'types/Capi';
 
 
 // ----- Setup ----- //
@@ -14,30 +16,15 @@ interface Image {
     alt: string;
 }
 
-interface Asset {
-    type: string;
-    file: string;
-    typeData: {
-        width: number;
-        isMaster?: boolean;
-    };
-}
-
 
 // ----- Functions ----- //
-
-const srcSet = (assets: Asset[]): string =>
-    assets
-        .filter(a => !a.typeData.isMaster)
-        .map(a => `${a.file} ${a.typeData.width}w`)
-        .join(', ');
 
 const imageElement = (image: Image, assets: Asset[]): React.ReactNode =>
     h('img', {
         sizes: '100%',
-        srcSet: srcSet(assets),
+        srcSet: assetsToSrcset(assets).withDefault(''),
         alt: image.alt,
-        src: assets[0].file,
+        src: assetToUrl(assets[0]),
     });
 
 function imageBlock(image: Image, assets: Asset[]): React.ReactNode {

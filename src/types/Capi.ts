@@ -60,6 +60,7 @@ export interface AssetTypeData {
     credit: string;
     width: number;
     height: number;
+    isMaster?: boolean;
 }
 
 export interface Tag {
