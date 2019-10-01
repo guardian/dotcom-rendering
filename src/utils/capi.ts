@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { Result, Ok, Err } from "../types/Result";
+import { Contributor } from 'types/Capi';
 
 
 // ----- Functions ----- //
@@ -17,10 +18,14 @@ function parseCapi(capiResponse: string): Result<string, any> {
     }
 }
 
+const isSingleContributor = (contributors: Contributor[]): boolean =>
+    contributors.length === 1;
+
 
 // ----- Exports ----- //
 
 export {
     isFeature,
     parseCapi,
+    isSingleContributor,
 };
