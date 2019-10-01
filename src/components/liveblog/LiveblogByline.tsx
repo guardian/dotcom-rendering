@@ -10,26 +10,9 @@ import { Contributor } from '../../types/Capi';
 import Avatar from 'components/shared/Avatar';
 
 
-const LiveblogBylineStyles = ({ featureHeadline, liveblogBackground }: PillarStyles): SerializedStyles => css`
+const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
     padding-bottom: 8px;
-
-    .avatar {
-        width: 68px;
-        height: 68px;
-        background-color: ${featureHeadline};
-        border-radius: 100%;
-        float: left;
-        margin: 0 8px 0 0;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-            height: auto;
-            transform-origin: top center;
-            transform: scale(1.6) translate(-1px, -1px);
-        }
-    }
 
     .author {
         padding-bottom: 4px;
@@ -81,7 +64,7 @@ const LiveblogByline = ({
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline pillar={pillarId} type={'liveblog'}/>
             <div css={sidePadding}>
-                <Avatar contributors={contributors} />
+                <Avatar contributors={contributors} bgColour={pillarStyles.featureHeadline} />
                 <div className="author">
                     <address dangerouslySetInnerHTML={{__html: byline}}></address>
                     <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
