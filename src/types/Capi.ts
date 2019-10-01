@@ -1,5 +1,5 @@
 import { PillarId } from "../styles";
-import { Asset } from "../components/shared/HeaderImage";
+import { Asset } from 'utils/Asset';
 
 export interface Capi {
     response: {
@@ -47,20 +47,6 @@ export interface Capi {
 export interface Series {
     webTitle?: string;
     webUrl?: string;
-}
-
-export interface Asset {
-    file: string;
-    typeData: AssetTypeData;
-}
-
-export interface AssetTypeData {
-    altText: string;
-    caption: string;
-    credit: string;
-    width: number;
-    height: number;
-    isMaster?: boolean;
 }
 
 export interface Tag {

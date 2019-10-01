@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { assetsToSrcset, assetToUrl } from 'utils/imageResizer';
-import { Asset } from 'types/Capi';
+import * as Asset from 'utils/Asset';
 
 
 // ----- Setup ----- //
@@ -19,15 +18,15 @@ interface Image {
 
 // ----- Functions ----- //
 
-const imageElement = (image: Image, assets: Asset[]): React.ReactNode =>
+const imageElement = (image: Image, assets: Asset.Asset[]): React.ReactNode =>
     h('img', {
         sizes: '100%',
-        srcSet: assetsToSrcset(assets).withDefault(''),
+        srcSet: Asset.toSrcset(assets).withDefault(''),
         alt: image.alt,
-        src: assetToUrl(assets[0]),
+        src: Asset.toUrl(assets[0]),
     });
 
-function imageBlock(image: Image, assets: Asset[]): React.ReactNode {
+function imageBlock(image: Image, assets: Asset.Asset[]): React.ReactNode {
 
     const caption = image.displayCredit ? `${image.caption} ${image.credit}` : image.caption;
 

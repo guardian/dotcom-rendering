@@ -1,7 +1,25 @@
 // ----- Imports ----- //
 
-import { Asset } from 'types/Capi';
 import { Option, None, Some } from 'types/Option';
+
+
+// ----- Types ----- //
+
+interface AssetTypeData {
+    altText: string;
+    caption: string;
+    credit: string;
+    width: number;
+    height: number;
+    isMaster?: boolean;
+}
+
+interface Asset {
+    file: string;
+    typeData: AssetTypeData;
+}
+
+type Url = string;
 
 
 // ----- Setup ----- //
@@ -11,8 +29,6 @@ const imageResizer = 'https://i.guim.co.uk/img';
 
 // Percentage.
 const defaultQuality = 85;
-
-type Url = string;
 
 
 // ----- Functions ----- //
@@ -79,7 +95,7 @@ function getMasterUrl(assets: Asset[]): Option<Url> {
  * @param assets A list of image assets, typically supplied by CAPI.
  * @returns An option of an image srcset.
  */
-const assetsToSrcset = (assets: Asset[]): Option<string> =>
+const toSrcset = (assets: Asset[]): Option<string> =>
     getMasterUrl(assets).map(srcset(assets))
 
 /**
@@ -90,13 +106,14 @@ const assetsToSrcset = (assets: Asset[]): Option<string> =>
  * @param asset An image asset, typically supplied by CAPI.
  * @returns A URL to retrieve a given image from the image resizer.
  */
-const assetToUrl: (asset: Asset) => Url =
+const toUrl: (asset: Asset) => Url =
     toResizerUrl
 
 
 // ----- Exports ----- //
 
 export {
-    assetsToSrcset,
-    assetToUrl,
+    Asset,
+    toSrcset,
+    toUrl,
 };

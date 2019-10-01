@@ -11,7 +11,8 @@ import HeaderImage from '../shared/HeaderImage';
 import Tags from '../shared/Tags';
 
 import { PillarStyles, PillarId } from '../../styles';
-import { Series, Tag, Asset, Contributor } from '../../types/Capi';
+import { Series, Tag, Contributor } from '../../types/Capi';
+import { Asset } from 'utils/Asset';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 
