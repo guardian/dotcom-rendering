@@ -55,7 +55,6 @@ const quote: (pillar: Pillar) => colour = pillar => {
     return css`
         fill: ${richLinkPillarColour(pillar)};
         float: left;
-        padding-top: 4px;
         padding-right: 2px;
     `;
 };
@@ -180,12 +179,14 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                 </div>
             )}
             <div className={richLinkElements}>
-                {isOpinion && (
-                    <div className={quote(richLink.pillar)}>
-                        <Quote />
-                    </div>
-                )}
-                <div className={richLinkTitle}>{linkText}</div>
+                <div className={richLinkTitle}>
+                    {isOpinion && (
+                        <div className={quote(richLink.pillar)}>
+                            <Quote />
+                        </div>
+                    )}
+                    {linkText}
+                </div>
                 {isOpinion && (
                     <div className={cx(byline, textColour(richLink.pillar))}>
                         {mainContributor}
