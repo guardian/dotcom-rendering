@@ -155,7 +155,7 @@ const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProp
                     <ul>
                         {keyEvents.map((event, index) => {
                             return <li key={index}>
-                                <div>{makeRelativeDate(event.firstPublishedDate)}</div>
+                                {makeRelativeDate(event.firstPublishedDate).map(date => <div>{date}</div>).withDefault(null)}
                                 <a>{event.title}</a>
                             </li>
                         })}
