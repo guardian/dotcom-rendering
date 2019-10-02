@@ -230,6 +230,7 @@ interface ConfigType {
     stage: string;
     frontendAssetsFullURL: string;
     hbImpl: string;
+    adUnit: string;
 }
 
 interface GADataType {

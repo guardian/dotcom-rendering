@@ -40,10 +40,7 @@ const makeWindowGuardianConfig = (
             sentryHost: dcrDocumentData.config.sentryHost,
             keywordIds: [],
             dfpAccountId: dcrDocumentData.config.dfpAccountId,
-            // adUnit is currently present for consistency,
-            // ... but the value is not used on the master branch.
-            // TODO (Pascal): read the value from frontend.
-            adUnit: '/59666047/theguardian.com/film/article/ng',
+            adUnit: dcrDocumentData.config.adUnit,
             showRelatedContent: true,
             ajaxUrl: dcrDocumentData.config.ajaxUrl,
             hbImpl: dcrDocumentData.config.hbImpl,
