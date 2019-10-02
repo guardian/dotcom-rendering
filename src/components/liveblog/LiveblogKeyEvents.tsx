@@ -135,7 +135,11 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 		overflow: hidden;
         z-index: 1;
         transition-duration: .2s;
-	}
+    }
+
+    a {
+        display: block;
+    }
 `;
 
 interface LiveblogKeyEventsProps {
@@ -154,8 +158,10 @@ const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProp
                 <div>
                     <ul>
                         {keyEvents.map((event, index) => {
+                            const relativeDate = makeRelativeDate(event.firstPublishedDate);
+                            const time = relativeDate ? <time>{relativeDate}</time> : null;
                             return <li key={index}>
-                                {makeRelativeDate(event.firstPublishedDate).map(date => <div>{date}</div>).withDefault(null)}
+                                { time }
                                 <a>{event.title}</a>
                             </li>
                         })}

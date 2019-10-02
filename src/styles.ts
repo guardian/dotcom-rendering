@@ -126,3 +126,99 @@ export const darkModeCss = (
                 .join('')}
         }
     `
+
+// Styles shared across article types
+export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+    a {
+        color: ${kicker};
+    }
+
+    .image img {
+        width: calc(100% + 16px);
+        margin: 0 -8px;
+    }
+
+    blockquote {
+        font-weight: 200;
+        font-size: 2.2rem;
+        line-height: 1.3;
+        color: ${kicker};
+        ${headlineFont}
+        margin: 0;
+
+        p {
+            margin: 1em 0;
+
+            &::before {
+                ${icons}
+                font-size: 2.2rem;
+                content: '\\e11c';
+                display: inline-block;
+                margin-right: 8px;
+            }
+        }
+
+        footer {
+            font-size: 1.8rem;
+            margin-top: 4px;
+
+            cite {
+                font-style: normal;
+            }
+        }
+    }
+
+    figcaption {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        color: ${palette.neutral[46]};
+        ${textSans}
+    }
+
+    .rich-link,
+    .element-membership {
+        background: ${palette.neutral[97]};
+        padding: 8px;
+
+        h1 {
+            margin: 0;
+        }
+
+        p {
+            margin: 8px 0;
+        }
+
+        span {
+            display: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+        margin: 8px 0;
+        font-weight: 500;
+
+        & + p {
+            margin-top: 0;
+        }
+    }
+
+    .element-video {
+        iframe {
+            width: 100%
+        }
+    }
+
+    p {
+        hyphens: auto;
+        overflow-wrap: break-word;
+    }
+
+    ${bulletStyles(kicker)}
+    ${sidePadding}
+`;

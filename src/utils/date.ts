@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { Option, Some, None } from 'types/Option'; 
 
 function isToday(date: Date): boolean {
     const today = new Date();
@@ -28,43 +27,43 @@ function isValidDate(date: Date): boolean {
     return !isNaN(date.getTime());
 }
 
-export function makeRelativeDate(date: Date): Option<string> {
+export function makeRelativeDate(date: Date): string | null {
     const then: Date = new Date(date);
     const now: Date = new Date();
 
     if (!isValidDate(then)) {
-        return new None();
+        return null;
     }
 
     const delta: number = parseInt(`${(now.valueOf() - then.valueOf()) / 1000}`, 10);
 
     if (delta < 0) {
-        return new None();
+        return null;
     } else if (delta < 55) {
-        return new Some(`${delta}s`);
+        return `${delta}s`;
     } else if (delta < (55 * 60)) {
         const minutesAgo = Math.round(delta / 60);
 
         if (minutesAgo === 1) {
-            return new Some('Now');
+            return 'Now';
         } else {
-            return new Some(`${minutesAgo}m ago`);
+            return `${minutesAgo}m ago`;
         }
     } else if (isToday(then) || isWithin24Hours(then)) {
         const hoursAgo = Math.round(delta / 3600);
-        return new Some(`${hoursAgo}h ago`);
+        return `${hoursAgo}h ago`;
     } else if (isWithinPastWeek(then)) {
         const daysAgo = Math.round(delta / 3600 / 24);
-        return new Some(`${daysAgo}d ago`);
+        return `${daysAgo}d ago`;
     } else if (isWithinPastYear(then)) {
         const weeksAgo = Math.round(delta / 3600 / 24 / 7);
-        return new Some(`${weeksAgo}w ago`);
+        return `${weeksAgo}w ago`;
     } else {
         const yearsAgo = Math.round(delta / 3600 / 24 / 7 / 52);
-        return new Some(`${yearsAgo}y ago`);
+        return `${yearsAgo}y ago`;
     }
 }
 
-export function formatDate(date: Date) : string {
+export function formatDate(date: Date): string {
     return moment(date).format('HH:mm dddd, D MMMM YYYY');
 }

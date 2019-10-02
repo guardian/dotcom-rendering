@@ -15,11 +15,15 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
         color: ${palette.neutral[46]};
         ${textSans}
         display: inline-block;
-        padding: 12px 0px;
+        margin: 0;
     }
 
-    h3 {
-        margin: 0;
+    time:first-of-type {
+        margin-bottom: 1em;
+    }
+
+    time:last-of-type {
+        margin-top: 1em;
     }
 `;
 
@@ -41,10 +45,19 @@ const Title = ({ title, highlighted }: { title: string; highlighted: boolean }):
 }
 
 const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {
-    const { pillarStyles, highlighted, title, children, firstPublishedDate, lastModifiedDate } = props;
+    const {
+        pillarStyles,
+        highlighted,
+        title,
+        children,
+        firstPublishedDate,
+        lastModifiedDate
+    } = props;
+    const relativeDate = makeRelativeDate(firstPublishedDate);
+    const timeAgo = relativeDate ? <time>{relativeDate}</time> : null;
     return (
         <article css={LiveblogBlockStyles(pillarStyles, highlighted)}>
-            {makeRelativeDate(firstPublishedDate).map(date => <time>{date}</time>).withDefault(null)}
+            { timeAgo }
             <Title highlighted={highlighted} title={title} />
             { children }
             <time>Last updated: { formatDate(lastModifiedDate) }</time>

@@ -28,12 +28,12 @@ const AvatarStyles = (bgColour: string): SerializedStyles => css`
 
 // ----- Component ----- //
 
-interface Props {
+interface AvatarProps {
     contributors: Contributor[];
-    bgColour: string,
+    bgColour: string;
 }
 
-function Avatar({ contributors, bgColour }: Props): JSX.Element | null {
+function Avatar({ contributors, bgColour }: AvatarProps): JSX.Element | null {
 
     const [contributor] = contributors;
 

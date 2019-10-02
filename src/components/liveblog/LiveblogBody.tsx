@@ -1,9 +1,21 @@
 import React from 'react';
-import { PillarStyles } from '../../styles';
+import { PillarStyles, bulletStyles, commonArticleStyles } from '../../styles';
 import LiveblogBlock from './LiveblogBlock';
 import LiveblogLoadMore from './LiveblogLoadMore';
 import { render } from 'renderBlocks';
 import { Block } from 'types/Capi';
+import { css, SerializedStyles } from '@emotion/core'
+
+const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
+    .rich-link,
+    .element-membership {
+        width: calc(100% - 16px);
+        margin: 1em 0;
+    }
+
+    ${commonArticleStyles(pillarStyles)}
+    ${bulletStyles(pillarStyles.kicker)}
+`;
 
 interface LiveblogBodyProps {
     pillarStyles: PillarStyles;
@@ -17,7 +29,7 @@ const LiveblogBody= ({ pillarStyles, bodyElements }: LiveblogBodyProps): JSX.Ele
         : null;
 
     return (
-        <article>
+        <article css={LiveBodyStyles(pillarStyles)}>
             {
                 initialBlocks.map((block: Block) => {
                     return <LiveblogBlock
