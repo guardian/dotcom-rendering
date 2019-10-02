@@ -23,7 +23,7 @@ interface LiveblogBodyProps {
 }
 
 const LiveblogBody= ({ pillarStyles, bodyElements }: LiveblogBodyProps): JSX.Element => {
-    const initialBlocks = bodyElements.slice(0, 100);
+    const initialBlocks = bodyElements.slice(0, 7);
     const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 10
         ? <LiveblogLoadMore pillarStyles={pillarStyles}/> 
         : null;
