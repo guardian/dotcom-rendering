@@ -451,6 +451,7 @@ export const CAPI: CAPIType = {
         stage: 'DEV',
         frontendAssetsFullURL: 'https://assets.guim.co.uk/',
         hbImpl: 'prebid',
+        adUnit: '/59666047/theguardian.com/film/article/ng',
     },
     webTitle: 'Foobar',
     nav: {

@@ -33,6 +33,7 @@ describe('ShareCount', () => {
         stage: 'DEV',
         frontendAssetsFullURL: 'http://localhost:9000/assets/',
         hbImpl: 'prebid',
+        adUnit: '/59666047/theguardian.com/film/article/ng',
     };
 
     afterEach(() => {
