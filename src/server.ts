@@ -26,6 +26,8 @@ app.use(compression());
 const capiEndpoint = (articleId: string, key: string): string =>
   `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-fields=all&show-tags=all&show-blocks=all`;
 
+const defaultId = 'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
+
 interface CapiFields {
   type: string;
   articleProps: ArticleProps;
@@ -83,13 +85,10 @@ const capiFields = (capi: any): Result<string, CapiFields> =>
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function fieldsFromCapi(capi: any): Result<string, CapiFields> {
-
-  return fromUnsafe(() => checkForUnsupportedContent(capi), 'Unexpected CAPI response structure')
+const fieldsFromCapi = (capi: any): Result<string, CapiFields> =>
+  fromUnsafe(() => checkForUnsupportedContent(capi), 'Unexpected CAPI response structure')
     .andThen(id)
     .andThen(() => capiFields(capi));
-
-}
 
 const getArticleComponent = (capiFields: CapiFields): React.ReactElement => {
   switch (capiFields.type) {
@@ -102,33 +101,52 @@ const getArticleComponent = (capiFields: CapiFields): React.ReactElement => {
   }
 }
 
-const generateArticleHtml = (capiResponse: string, data: string): string =>
+const generateArticleHtml = (capiResponse: string) => (data: string): Result<string, string> =>
   parseCapi(capiResponse)
     .andThen(fieldsFromCapi)
     .map(getArticleComponent)
     .map(renderToString)
     .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
-    .either(id, id);
 
-app.get('/*', (req, res) => {
+const readFileP = (file: string, encoding: string): Promise<string> =>
+  new Promise((res, rej): void => {
+    fs.readFile(file, encoding, (err, data) => err ? rej(err) : res(data));
+  });
+
+async function readTemplate(): Promise<Result<string, string>> {
   try {
-    fs.readFile(path.resolve('./src/html/articleTemplate.html'), 'utf8', (err, data) => {
-      if (err) {
-        console.error(err)
-        return res.status(500).send('An error occurred')
-      }
-
-      const articleId = req.params[0] || 'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
-
-      getConfigValue<string>("capi.key")
-        .then(key => fetch(capiEndpoint(articleId, key), {}))
-        .then(resp => resp.text())
-        .then(capi => res.send(generateArticleHtml(capi, data)))
-        .catch(error => res.send(`<pre>${error}</pre>`))
-    })
-  } catch (e) {
-    res.status(500).send(`<pre>${e.stack}</pre>`);
+    const data = await readFileP(path.resolve('./src/html/articleTemplate.html'), 'utf8');
+    return new Ok(data);
+  } catch (_) {
+    return new Err('Could not read template file');
   }
+}
+
+app.get('/*', async (req, res) => {
+
+  try {
+
+    const articleId = req.params[0] || defaultId;
+
+    const template = await readTemplate();
+    const key = await getConfigValue<string>("capi.key");
+    const resp = await fetch(capiEndpoint(articleId, key), {});
+    const capi = await resp.text();
+
+    template
+      .andThen(generateArticleHtml(capi))
+      .either(
+        err => { throw err },
+        data => res.send(data),
+      );
+
+  } catch (e) {
+
+    console.error(e);
+    res.status(500).send('An error occurred, check the console');
+
+  }
+
 });
 
 app.listen(3040);
