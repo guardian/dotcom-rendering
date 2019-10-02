@@ -11,7 +11,7 @@
         "tsc": "tsc",
         "test": "jest",
         "cypress:open": "cypress open",
-        "cypress:run": "percy exec -- cypress run",
+        "cypress:run": "cypress run",
         "postinstall": "./scripts/git-hooks/install.js",
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
         "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true"
