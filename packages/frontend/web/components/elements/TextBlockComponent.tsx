@@ -27,15 +27,18 @@ export const TextBlockComponent: React.FC<{ html: string }> = ({ html }) => {
     // paras to be top-level.
     if (html.startsWith(prefix) && html.endsWith(suffix)) {
         return (
-            <p
-                className={para}
-                dangerouslySetInnerHTML={{
-                    __html: html.slice(
-                        prefix.length,
-                        html.length - suffix.length,
-                    ),
-                }}
-            />
+            <>
+                <div>This should fail visual testing</div>
+                <p
+                    className={para}
+                    dangerouslySetInnerHTML={{
+                        __html: html.slice(
+                            prefix.length,
+                            html.length - suffix.length,
+                        ),
+                    }}
+                />
+            </>
         );
     }
 
