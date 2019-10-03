@@ -26,7 +26,6 @@ type Url = string;
 
 // ----- Setup ----- //
 
-// TODO: move to config
 const imageResizer = 'https://i.guim.co.uk/img';
 
 const widths = [
