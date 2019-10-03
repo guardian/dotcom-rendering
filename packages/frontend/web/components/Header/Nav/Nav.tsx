@@ -54,7 +54,6 @@ const readerRevenueLinks = css`
 interface Props {
     nav: NavType;
     pillar: Pillar;
-    edition: Edition;
 }
 
 export class Nav extends Component<
@@ -83,7 +82,7 @@ export class Nav extends Component<
     }
 
     public render() {
-        const { nav, pillar, edition } = this.props;
+        const { nav, pillar } = this.props;
         const toggleMainMenu = () => {
             this.toggleMainMenu();
         };
@@ -101,7 +100,6 @@ export class Nav extends Component<
                     data-component="nav2"
                 >
                     <EditionDropdown
-                        edition={edition}
                         dataLinkName={'nav2 : topbar : edition-picker: toggle'}
                     />
                     <Logo />

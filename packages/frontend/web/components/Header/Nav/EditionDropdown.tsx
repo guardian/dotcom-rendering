@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { css } from 'emotion';
 
 import { Dropdown } from '@guardian/guui';
 import { desktop, wide } from '@guardian/pasteup/breakpoints';
 import { Link } from '@guardian/guui/components/Dropdown/Dropdown';
 import { palette } from '@guardian/pasteup/palette';
+import { EditionContext } from '@frontend/web/context/EditionContext';
 
 const editionDropdown = css`
     display: none;
@@ -71,9 +72,9 @@ const lookUpEditionLink = (edition: Edition): Link => {
 };
 
 export const EditionDropdown: React.FC<{
-    edition: Edition;
     dataLinkName: string;
-}> = ({ edition, dataLinkName }) => {
+}> = ({ dataLinkName }) => {
+    const edition = useContext(EditionContext);
     const activeEditionLink = lookUpEditionLink(edition);
     const links = [
         ukEditionLink,
