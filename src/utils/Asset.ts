@@ -29,6 +29,14 @@ type Url = string;
 // TODO: move to config
 const imageResizer = 'https://i.guim.co.uk/img';
 
+const widths = [
+    140,
+    500,
+    1000,
+    1500,
+    2000,
+];
+
 // Percentage.
 const defaultQuality = 85;
 
@@ -41,14 +49,13 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex')    
 
-function transformUrl(input: Url, width: number, height: number, salt: string): Url {
+function transformUrl(salt: string, input: Url, width: number): Url {
 
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
     const params = new URLSearchParams({
         w: width.toString(),
-        h: height.toString(),
         q: defaultQuality.toString(),
         fit: 'bounds',
         'sig-ignores-params': 'true',
@@ -59,24 +66,9 @@ function transformUrl(input: Url, width: number, height: number, salt: string): 
 
 }
 
-const toResizerUrl = (salt: string, asset: Asset, baseUrl: Option<Url> = new None()): Url => {
-
-    const { typeData: { width, height }, file } = asset;
-    const url = baseUrl.withDefault(file);
-
-    return transformUrl(url, width, height, salt);
-
-}
-
-const srcString = (salt: string, url: Url) => (asset: Asset): string => {
-    const { typeData: { width } } = asset;
-    return `${toResizerUrl(salt, asset, new Some(url))} ${width}w`;
-}
-
-const srcset = (salt: string, assets: Asset[]) => (url: Url): string =>
-    assets
-        .filter(asset => !asset.typeData.isMaster)
-        .map(srcString(salt, url))
+const srcset = (salt: string) => (url: Url): string =>
+    widths
+        .map(width => `${transformUrl(salt, url, width)} ${width}w`)
         .join(', ')
 
 function getMasterUrl(assets: Asset[]): Option<Url> {
@@ -101,7 +93,7 @@ function getMasterUrl(assets: Asset[]): Option<Url> {
  * @returns An option of an image srcset.
  */
 const toSrcset = (salt: string, assets: Asset[]): Option<string> =>
-    getMasterUrl(assets).map(srcset(salt, assets))
+    getMasterUrl(assets).map(srcset(salt))
 
 /**
  * Transforms an image asset from a CAPI response, which contains URLs in
@@ -112,8 +104,8 @@ const toSrcset = (salt: string, assets: Asset[]): Option<string> =>
  * @param asset An image asset, typically supplied by CAPI.
  * @returns A URL to retrieve a given image from the image resizer.
  */
-const toUrl: (salt: string, asset: Asset) => Url =
-    toResizerUrl
+const toUrl = (salt: string, asset: Asset): Url =>
+    transformUrl(salt, asset.file, asset.typeData.width)
 
 
 // ----- Exports ----- //
