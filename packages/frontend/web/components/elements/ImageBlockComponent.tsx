@@ -139,6 +139,9 @@ const decidePosition = (role: RoleType) => {
                 }
             `;
             break;
+        case 'half-width':
+            return css``; // TODO
+            break;
         default:
             return css``;
     }
