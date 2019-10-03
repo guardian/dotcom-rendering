@@ -29,6 +29,7 @@ export interface ArticleProps {
     series: Series;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     bodyElements: any;
+    imageSalt: string;
 }
 
 const MainStyles = darkModeCss`
@@ -49,6 +50,7 @@ const Article = ({
     pillarStyles,
     contributors,
     series,
+    imageSalt,
 }: ArticleProps): JSX.Element =>
     <main css={MainStyles}>
         <HeaderImage assets={mainAssets}/>
@@ -67,7 +69,11 @@ const Article = ({
             publicationDate={webPublicationDate}
             contributors={contributors}
         />
-        <ArticleBody pillarStyles={pillarStyles} bodyElements={bodyElements}/>
+        <ArticleBody
+            pillarStyles={pillarStyles}
+            bodyElements={bodyElements}
+            imageSalt={imageSalt}
+        />
         <Tags tags={tags}/>
     </main>
 

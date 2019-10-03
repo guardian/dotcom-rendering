@@ -83,7 +83,7 @@ const richLinkBlock = (url: string, linkText: string): ReactNode =>
     );
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
-function reactFromElement(element: any): Result<string, ReactNode> {
+function reactFromElement(element: any, imageSalt: string): Result<string, ReactNode> {
 
     switch (element.type) {
         case 'text':
@@ -111,7 +111,7 @@ function reactFromElement(element: any): Result<string, ReactNode> {
 
             return fromUnsafe(() => {
                 const { imageTypeData, assets } = element;
-                return imageBlock(imageTypeData, assets)
+                return imageBlock(imageTypeData, assets, imageSalt)
             }, 'Failed to parse image');
 
         default:
@@ -121,10 +121,10 @@ function reactFromElement(element: any): Result<string, ReactNode> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
-function elementsToReact(elements: any): ParsedReact {
+function elementsToReact(elements: any, imageSalt: string): ParsedReact {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any 
     const elementToReact = ({ errors, nodes }: ParsedReact, element: any): ParsedReact =>
-        reactFromElement(element).either(
+        reactFromElement(element, imageSalt).either(
             error => ({ errors: [ ...errors, error ], nodes }),
             node => ({ errors, nodes: [ ...nodes, node ] }),
         );
@@ -134,9 +134,9 @@ function elementsToReact(elements: any): ParsedReact {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function render(bodyElements: any): Rendered {
+function render(bodyElements: any, imageSalt: string): Rendered {
 
-    const reactNodes = elementsToReact(bodyElements);
+    const reactNodes = elementsToReact(bodyElements, imageSalt);
     const main = h('article', null, ...reactNodes.nodes);
 
     return {

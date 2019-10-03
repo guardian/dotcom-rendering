@@ -90,23 +90,25 @@ const fieldsFromCapi = (capi: any): Result<string, CapiFields> =>
     .andThen(id)
     .andThen(() => capiFields(capi));
 
-const getArticleComponent = (capiFields: CapiFields): React.ReactElement => {
-  switch (capiFields.type) {
-    case 'article':
-      return React.createElement(Article, capiFields.articleProps);
-    case 'liveblog':
-      return React.createElement(LiveblogArticle, {...capiFields.articleProps, isLive: true});
-    default:
-      return React.createElement('p', null, `${capiFields.type} not implemented yet`);
+const getArticleComponent = (imageSalt: string) =>
+  function ArticleComponent(capiFields: CapiFields): React.ReactElement {
+    switch (capiFields.type) {
+      case 'article':
+        return React.createElement(Article, { ...capiFields.articleProps, imageSalt });
+      case 'liveblog':
+        return React.createElement(LiveblogArticle, {...capiFields.articleProps, isLive: true});
+      default:
+        return React.createElement('p', null, `${capiFields.type} not implemented yet`);
+    }
   }
-}
 
-const generateArticleHtml = (capiResponse: string) => (data: string): Result<string, string> =>
-  parseCapi(capiResponse)
-    .andThen(fieldsFromCapi)
-    .map(getArticleComponent)
-    .map(renderToString)
-    .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
+const generateArticleHtml = (capiResponse: string, imageSalt: string) =>
+  (data: string): Result<string, string> =>
+    parseCapi(capiResponse)
+      .andThen(fieldsFromCapi)
+      .map(getArticleComponent(imageSalt))
+      .map(renderToString)
+      .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
 
 const readFileP = (file: string, encoding: string): Promise<string> =>
   new Promise((res, rej): void => {
@@ -130,11 +132,12 @@ app.get('/*', async (req, res) => {
 
     const template = await readTemplate();
     const key = await getConfigValue<string>("capi.key");
+    const imageSalt = await getConfigValue<string>('apis.img.salt');
     const resp = await fetch(capiEndpoint(articleId, key), {});
     const capi = await resp.text();
 
     template
-      .andThen(generateArticleHtml(capi))
+      .andThen(generateArticleHtml(capi, imageSalt))
       .either(
         err => { throw err },
         data => res.send(data),
