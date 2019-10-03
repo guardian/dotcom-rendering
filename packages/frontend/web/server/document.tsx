@@ -5,6 +5,7 @@ import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
 import { htmlTemplate } from './htmlTemplate';
+import { EditionContext } from '@frontend/web/context/EditionContext';
 import { Article } from '../pages/Article';
 import { getDist } from '@frontend/lib/assets';
 
@@ -23,7 +24,9 @@ export const document = ({ data }: Props) => {
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <Article data={{ CAPI, NAV, config }} />
+                <EditionContext.Provider value={data.CAPI.editionId}>
+                    <Article data={{ CAPI, NAV, config }} />
+                </EditionContext.Provider>
             </CacheProvider>,
         ),
     );

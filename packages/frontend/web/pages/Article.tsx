@@ -162,11 +162,7 @@ export const Article: React.FC<{
                 />
             </div>
 
-            <Header
-                nav={data.NAV}
-                pillar={data.CAPI.pillar}
-                edition={data.CAPI.editionId}
-            />
+            <Header nav={data.NAV} pillar={data.CAPI.pillar} />
         </div>
 
         <main className={bodyAdStyles}>
@@ -208,7 +204,6 @@ export const Article: React.FC<{
 
         <Footer
             nav={data.NAV}
-            edition={data.CAPI.editionId}
             pageFooter={data.CAPI.pageFooter}
             pillar={data.CAPI.pillar}
             pillars={data.NAV.pillars}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { css, cx } from 'emotion';
 
 import { serif, sans, textSans, headline } from '@guardian/pasteup/typography';
@@ -14,6 +14,7 @@ import {
 
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
+import { EditionContext } from '@frontend/web/context/EditionContext';
 
 const message = css`
     color: ${palette.highlight.main};
@@ -112,7 +113,6 @@ export const RRButton: React.FC<{
 };
 
 export const ReaderRevenueLinks: React.FC<{
-    edition: Edition;
     urls: {
         subscribe: string;
         support: string;
@@ -120,7 +120,9 @@ export const ReaderRevenueLinks: React.FC<{
     };
     dataLinkNamePrefix: string;
     noResponsive: boolean;
-}> = ({ edition, urls, dataLinkNamePrefix, noResponsive }) => {
+}> = ({ urls, dataLinkNamePrefix, noResponsive }) => {
+    const edition = useContext(EditionContext);
+
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (

@@ -113,7 +113,6 @@ export class Nav extends Component<
                     <div className={readerRevenueLinks}>
                         <ReaderRevenueLinks
                             urls={nav.readerRevenueLinks.header}
-                            edition={edition}
                             dataLinkNamePrefix={'nav2 : '}
                             noResponsive={false}
                         />

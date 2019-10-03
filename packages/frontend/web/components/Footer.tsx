@@ -197,9 +197,8 @@ const bttPosition = css`
 
 const FooterLinks: React.FC<{
     nav: NavType;
-    edition: Edition;
     pageFooter: FooterType;
-}> = ({ pageFooter, nav, edition }) => {
+}> = ({ pageFooter, nav }) => {
     const linkGroups = pageFooter.footerLinks.map(linkGroup => {
         const linkList = linkGroup.map((l: FooterLink, index: number) => (
             <li key={`${l.url}${index}`}>
@@ -220,7 +219,6 @@ const FooterLinks: React.FC<{
         <div className={readerRevenueLinks}>
             <ReaderRevenueLinks
                 urls={nav.readerRevenueLinks.footer}
-                edition={edition}
                 dataLinkNamePrefix={'footer : '}
                 noResponsive={true}
             />
@@ -241,9 +239,8 @@ export const Footer: React.FC<{
     pillars: PillarType[];
     pillar: Pillar;
     nav: NavType;
-    edition: Edition;
     pageFooter: FooterType;
-}> = ({ pillars, pillar, nav, edition, pageFooter }) => (
+}> = ({ pillars, pillar, nav, pageFooter }) => (
     <footer className={footer}>
         <Container className={footerInner}>
             <div className={pillarWrap}>
@@ -268,11 +265,7 @@ export const Footer: React.FC<{
                     frameBorder="0"
                 />
 
-                <FooterLinks
-                    nav={nav}
-                    edition={edition}
-                    pageFooter={pageFooter}
-                />
+                <FooterLinks nav={nav} pageFooter={pageFooter} />
                 <div className={bttPosition}>
                     <BackToTop />
                 </div>

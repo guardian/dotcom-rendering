@@ -5,6 +5,7 @@ import {
     getCookie as getCookie_,
     addCookie as addCookie_,
 } from '@frontend/web/browser/cookie';
+import { EditionContext } from '@frontend/web/context/EditionContext';
 
 const getCookie: any = getCookie_;
 const addCookie: any = addCookie_;
@@ -22,7 +23,6 @@ describe('ReaderRevenueLinks', () => {
         subscribe: 'https://www.theguardian.com/subscribe',
         support: 'https://www.theguardian.com/support',
     };
-    const edition: Edition = 'UK';
 
     beforeEach(() => {
         addCookie.mockReset();
@@ -38,12 +38,13 @@ describe('ReaderRevenueLinks', () => {
         getCookie.mockReturnValue(contributionDate);
 
         const { container } = render(
-            <ReaderRevenueLinks
-                urls={urls}
-                edition={edition}
-                dataLinkNamePrefix={'nav2 : '}
-                noResponsive={false}
-            />,
+            <EditionContext.Provider value={'UK'}>
+                <ReaderRevenueLinks
+                    urls={urls}
+                    dataLinkNamePrefix={'nav2 : '}
+                    noResponsive={false}
+                />
+            </EditionContext.Provider>,
         );
 
         // expect nothing to be rendered
@@ -64,12 +65,13 @@ describe('ReaderRevenueLinks', () => {
             .mockReturnValueOnce('true');
 
         const { container } = render(
-            <ReaderRevenueLinks
-                urls={urls}
-                edition={edition}
-                dataLinkNamePrefix={'nav2 : '}
-                noResponsive={false}
-            />,
+            <EditionContext.Provider value={'UK'}>
+                <ReaderRevenueLinks
+                    urls={urls}
+                    dataLinkNamePrefix={'nav2 : '}
+                    noResponsive={false}
+                />
+            </EditionContext.Provider>,
         );
 
         // expect nothing to be rendered
@@ -91,12 +93,13 @@ describe('ReaderRevenueLinks', () => {
             .mockReturnValueOnce('false');
 
         const { container, getByText } = render(
-            <ReaderRevenueLinks
-                urls={urls}
-                edition={edition}
-                dataLinkNamePrefix={'nav2 : '}
-                noResponsive={false}
-            />,
+            <EditionContext.Provider value={'UK'}>
+                <ReaderRevenueLinks
+                    urls={urls}
+                    dataLinkNamePrefix={'nav2 : '}
+                    noResponsive={false}
+                />
+            </EditionContext.Provider>,
         );
 
         // expect something to be rendered
