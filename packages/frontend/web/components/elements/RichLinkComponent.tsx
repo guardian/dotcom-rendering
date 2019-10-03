@@ -8,11 +8,26 @@ import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 
+type CardStyle =
+    | 'special-report'
+    | 'live'
+    | 'dead'
+    | 'feature'
+    | 'editorial'
+    | 'comment'
+    | 'podcast'
+    | 'media'
+    | 'analysis'
+    | 'review'
+    | 'letters'
+    | 'external'
+    | 'news';
+
 interface RichLink {
-    cardStyle: string;
+    cardStyle: CardStyle;
     thumbnailUrl: string;
     headline: string;
-    contentType: string;
+    contentType: ContentType;
     url: string;
     starRating?: number;
     pillar: Pillar;
@@ -192,11 +207,8 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                         {mainContributor}
                     </div>
                 )}
-                {richLink.starRating && (
-                    <StarRating
-                        rating={richLink.starRating}
-                        location={'richLink'}
-                    />
+                {richLink.starRating && richLink.starRating > 0 && (
+                    <StarRating rating={richLink.starRating} size={'small'} />
                 )}
                 {isPaidContent && richLink.sponsorName && (
                     <div className={paidForBranding}>

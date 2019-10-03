@@ -147,6 +147,23 @@ interface FooterType {
     footerLinks: FooterLink[][];
 }
 
+type ContentType =
+    | 'article'
+    | 'network'
+    | 'section'
+    | 'imageContent'
+    | 'interactive'
+    | 'gallery'
+    | 'video'
+    | 'audio'
+    | 'liveBlog'
+    | 'tag'
+    | 'index'
+    | 'crossword'
+    | 'survey'
+    | 'signup'
+    | 'userid';
+
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
 interface CAPIType {

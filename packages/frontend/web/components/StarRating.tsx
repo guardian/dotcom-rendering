@@ -8,16 +8,15 @@ const ratingsWrapper = css`
     display: inline-block;
 `;
 
-const topMetaSize = css`
+const largeSize = css`
     padding: 6px 10px;
-    margin: 0 0 6px -10px;
     svg {
         width: 20px;
         height: 20px;
     }
 `;
 
-const richLinkSize = css`
+const smallSize = css`
     padding: 2px;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -34,9 +33,9 @@ const emptyStar = css`
 
 export const StarRating: React.FC<{
     rating: number;
-    location: string;
-}> = ({ rating, location }) => {
-    const sizeClass = location === 'topMeta' ? topMetaSize : richLinkSize;
+    size: string;
+}> = ({ rating, size }) => {
+    const sizeClass = size === 'largeSize' ? largeSize : smallSize;
     const stars = (n: number) => {
         return Array(5)
             .fill(0)

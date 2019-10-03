@@ -36,6 +36,10 @@ const bylineStyle = (pillar: Pillar) => css`
     }
 `;
 
+const starRatingWrapper = css`
+    margin: 0 0 6px -10px;
+`;
+
 const Headline: React.FC<{
     headlineText: string;
     standfirst: string;
@@ -47,7 +51,9 @@ const Headline: React.FC<{
             <h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
 
             {starRating !== undefined && (
-                <StarRating rating={starRating} location={'topMeta'} />
+                <div className={starRatingWrapper}>
+                    <StarRating rating={starRating} size={'large'} />
+                </div>
             )}
         </div>
     );
