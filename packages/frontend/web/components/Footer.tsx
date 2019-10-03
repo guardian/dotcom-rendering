@@ -201,8 +201,8 @@ const FooterLinks: React.FC<{
     pageFooter: FooterType;
 }> = ({ pageFooter, nav, edition }) => {
     const linkGroups = pageFooter.footerLinks.map(linkGroup => {
-        const linkList = linkGroup.map((l: FooterLink) => (
-            <li key={l.url}>
+        const linkList = linkGroup.map((l: FooterLink, index: number) => (
+            <li key={`${l.url}${index}`}>
                 <a
                     className={cx(footerLink, l.extraClasses)}
                     href={l.url}
