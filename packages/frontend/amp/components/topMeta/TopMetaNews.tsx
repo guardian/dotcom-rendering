@@ -5,7 +5,6 @@ import { palette } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
-import Star from '@guardian/pasteup/icons/star.svg';
 import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
@@ -14,6 +13,7 @@ import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/model/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
 import { Branding } from '@frontend/amp/components/topMeta/Branding';
+import { StarRating } from '../StarRating';
 
 const headerStyle = css`
     ${headline(5)};
@@ -22,24 +22,6 @@ const headerStyle = css`
     padding-top: 3px;
     color: ${palette.neutral[7]};
 `;
-
-const ratingsWrapper = css`
-    background-color: ${palette.yellow.main};
-    display: inline-block;
-    padding: 6px 10px;
-    margin: 0 0 6px -10px;
-
-    svg {
-        width: 20px;
-        height: 20px;
-    }
-`;
-
-const emptyStar = css`
-    fill: transparent;
-    stroke: ${palette.neutral[7]};
-`;
-
 const bylineStyle = (pillar: Pillar) => css`
     ${headline(2)};
     color: ${pillarPalette[pillar].main};
@@ -54,29 +36,24 @@ const bylineStyle = (pillar: Pillar) => css`
     }
 `;
 
+const starRatingWrapper = css`
+    margin: 0 0 6px -10px;
+`;
+
 const Headline: React.FC<{
     headlineText: string;
     standfirst: string;
     pillar: Pillar;
     starRating?: number;
 }> = ({ headlineText, standfirst, pillar, starRating }) => {
-    const stars = (n: number) => {
-        return Array(5)
-            .fill(0)
-            .map((el, i) => {
-                if (i < n) {
-                    return <Star key={i} />;
-                }
-                return <Star className={emptyStar} key={i} />;
-            });
-    };
-
     return (
         <div>
             <h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
 
             {starRating !== undefined && (
-                <div className={ratingsWrapper}>{stars(starRating)}</div>
+                <div className={starRatingWrapper}>
+                    <StarRating rating={starRating} size={'large'} />
+                </div>
             )}
         </div>
     );
