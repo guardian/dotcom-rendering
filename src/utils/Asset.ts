@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 
-import { Option, None, Some } from 'types/Option';
+import { Option, fromNullable } from 'types/Option';
 
 
 // ----- Types ----- //
@@ -71,18 +71,6 @@ const srcset = (salt: string) => (url: Url): string =>
         .map(width => `${transformUrl(salt, url, width)} ${width}w`)
         .join(', ')
 
-function getMasterUrl(assets: Asset[]): Option<Url> {
-    if (assets.length === 0) {
-        return new None();
-    }
-
-    if (assets[0].typeData.isMaster) {
-        return new Some(assets[0].file);
-    }
-
-    return getMasterUrl(assets.slice(1));
-}
-
 /**
  * Produces a srcset as a string, with the asset URLs transformed into image
  * resizer URLs. The resulting srcset can be used with the `<img>` and
@@ -93,7 +81,9 @@ function getMasterUrl(assets: Asset[]): Option<Url> {
  * @returns An option of an image srcset.
  */
 const toSrcset = (salt: string, assets: Asset[]): Option<string> =>
-    getMasterUrl(assets).map(srcset(salt))
+    fromNullable(assets.find(asset => asset.typeData.isMaster))
+        .map(asset => asset.file)
+        .map(srcset(salt))
 
 /**
  * Transforms an image asset from a CAPI response, which contains URLs in
