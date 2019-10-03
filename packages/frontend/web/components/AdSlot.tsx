@@ -4,6 +4,7 @@ import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { textSans, palette } from '@guardian/src-foundations';
+import { Container } from '@guardian/guui';
 
 export const labelStyles = css`
     .ad-slot__label {
@@ -121,4 +122,19 @@ export const AdSlot: React.FC<{
         return null;
     }
     return <AdSlotCore {...asps} className={className} />;
+};
+
+export const AdSlotInContainer: React.FC<{
+    asps: AdSlotParameters;
+    config: ConfigType;
+    className: string;
+}> = ({ asps, config, className }) => {
+    if (!shouldDisplayAdvertisements(config)) {
+        return null;
+    }
+    return (
+        <Container>
+            <AdSlotCore {...asps} className={className} />
+        </Container>
+    );
 };
