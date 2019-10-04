@@ -50,11 +50,12 @@ interface ArticleBodyProps {
     pillarStyles: PillarStyles;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     bodyElements: any;
+    imageSalt: string;
 }
 
-const ArticleBody = ({ bodyElements, pillarStyles }: ArticleBodyProps): JSX.Element =>
+const ArticleBody = ({ bodyElements, pillarStyles, imageSalt }: ArticleBodyProps): JSX.Element =>
     <article css={[ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]}>
-        {render(bodyElements).html}
+        {render(bodyElements, imageSalt).html}
     </article>
 
 export default ArticleBody;

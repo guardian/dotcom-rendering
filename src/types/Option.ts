@@ -50,10 +50,17 @@ class None<A> implements OptionInterface<A> {
 type Option<A> = Some<A> | None<A>;
 
 
+// ----- Constructors ----- //
+
+const fromNullable = <A>(a: A | null | undefined): Option<A> =>
+    a === null || a === undefined ? new None() : new Some(a);
+
+
 // ----- Exports ----- //
 
 export {
     Option,
     Some,
     None,
+    fromNullable,
 };
