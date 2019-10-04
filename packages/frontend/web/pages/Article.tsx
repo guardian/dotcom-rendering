@@ -17,7 +17,11 @@ import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
-import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
+import {
+    AdSlot,
+    AdSlotInContainer,
+    labelStyles,
+} from '@frontend/web/components/AdSlot';
 
 // TODO: find a better of setting opacity
 const secondaryColumn = css`
@@ -184,6 +188,11 @@ export const Article: React.FC<{
                     </div>
                 </article>
             </Container>
+            <AdSlotInContainer
+                asps={namedAdSlotParameters('merchandising-high')}
+                config={data.config}
+                className={''}
+            />
             <OutbrainContainer config={data.config} />
             <Container
                 borders={true}

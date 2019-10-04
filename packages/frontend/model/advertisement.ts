@@ -9,7 +9,11 @@ export const shouldDisplayAdvertisements = (config: ConfigType): boolean => {
     );
 };
 
-type staticAdSlotNames = 'right' | 'top-above-nav' | 'most-popular';
+type staticAdSlotNames =
+    | 'right'
+    | 'top-above-nav'
+    | 'most-popular'
+    | 'merchandising-high';
 
 export const namedAdSlotParameters = (
     name: staticAdSlotNames,
@@ -53,6 +57,18 @@ export const namedAdSlotParameters = (
             outOfPage: false,
             optId: undefined,
             optClassNames: ['js-sticky-mpu'],
+        },
+        'merchandising-high': {
+            name: 'merchandising-high',
+            adTypes: [],
+            sizeMapping: {
+                mobile: ['1,1|2,2|88,87|fluid'],
+            },
+            showLabel: false,
+            refresh: false,
+            outOfPage: false,
+            optId: undefined,
+            optClassNames: [],
         },
     };
     return mapping[name];
