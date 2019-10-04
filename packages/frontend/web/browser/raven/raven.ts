@@ -88,6 +88,9 @@ const setUpRaven: () => RavenStatic = () => {
             contentType,
             edition: editionLongForm,
         },
+        autoBreadcrumbs: {
+            console: false,
+        },
     };
 
     ravenConfig = raven.config(sentryUrl, sentryOptions).install();
