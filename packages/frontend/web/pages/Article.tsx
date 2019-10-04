@@ -94,8 +94,7 @@ const headerAd = css`
     width: 728px;
 `;
 
-// These are by selector as for dynamically-created ads
-const bodyAdStyles = css`
+const articleBodyAdStyles = css`
     .ad-slot {
         width: 300px;
         margin: 12px auto;
@@ -143,8 +142,34 @@ const bodyAdStyles = css`
             }
         }
     }
-
     ${labelStyles};
+`;
+
+const mostPopularAdStyle = css`
+    .ad-slot {
+        width: 300px;
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
+
+    .ad-slot--most-popular {
+        ${desktop} {
+            margin: 0;
+            width: auto;
+        }
+    }
+    ${labelStyles};
+`;
+
+const merchandisingHigh = css`
+    .ad-slot {
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
 `;
 
 export const Article: React.FC<{
@@ -172,43 +197,45 @@ export const Article: React.FC<{
                 edition={data.CAPI.editionId}
             />
         </div>
-
-        <main className={bodyAdStyles}>
-            <Container borders={true} className={articleContainer}>
-                <article>
-                    <ArticleBody CAPI={data.CAPI} config={data.config} />
-                    <div className={secondaryColumn}>
-                        <div className={adSlotWrapper}>
-                            <AdSlot
-                                asps={namedAdSlotParameters('right')}
-                                config={data.config}
-                                className={stickyAdSlot}
-                            />
-                        </div>
+        <Container
+            borders={true}
+            className={cx(articleContainer, articleBodyAdStyles)}
+        >
+            <article>
+                <ArticleBody CAPI={data.CAPI} config={data.config} />
+                <div className={secondaryColumn}>
+                    <div className={adSlotWrapper}>
+                        <AdSlot
+                            asps={namedAdSlotParameters('right')}
+                            config={data.config}
+                            className={stickyAdSlot}
+                        />
                     </div>
-                </article>
-            </Container>
-            <AdSlotInContainer
-                asps={namedAdSlotParameters('merchandising-high')}
+                </div>
+            </article>
+        </Container>
+        <AdSlotInContainer
+            asps={namedAdSlotParameters('merchandising-high')}
+            config={data.config}
+            className={merchandisingHigh}
+        />
+        <OutbrainContainer config={data.config} />
+        <Container
+            borders={true}
+            className={cx(
+                articleContainer,
+                mostPopularAdStyle,
+                css`
+                    border-top: 1px solid ${palette.neutral[86]};
+                `,
+            )}
+        >
+            <MostViewed
+                sectionName={data.CAPI.sectionName}
                 config={data.config}
-                className={''}
             />
-            <OutbrainContainer config={data.config} />
-            <Container
-                borders={true}
-                className={cx(
-                    articleContainer,
-                    css`
-                        border-top: 1px solid ${palette.neutral[86]};
-                    `,
-                )}
-            >
-                <MostViewed
-                    sectionName={data.CAPI.sectionName}
-                    config={data.config}
-                />
-            </Container>
-        </main>
+        </Container>
+
         <SubNav
             subnav={data.NAV.subNavSections}
             pillar={data.CAPI.pillar}
