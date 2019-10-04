@@ -3,6 +3,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles } from '../../styles';
 import { palette } from '@guardian/src-foundations'
 import { render } from "../../renderBlocks";
+import { Block } from 'types/Capi';
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,
@@ -48,8 +49,7 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 
 interface ArticleBodyProps {
     pillarStyles: PillarStyles;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    bodyElements: any;
+    bodyElements: Block[];
     imageSalt: string;
 }
 

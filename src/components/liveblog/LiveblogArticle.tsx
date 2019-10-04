@@ -33,6 +33,7 @@ interface LiveblogArticleProps {
     series: Series;
     bodyElements: Block[];
     isLive: boolean;
+    imageSalt: string;
 }
 
 const LiveblogArticle = ({
@@ -46,7 +47,8 @@ const LiveblogArticle = ({
     pillarStyles,
     contributors,
     series,
-    bodyElements
+    bodyElements,
+    imageSalt
 }: LiveblogArticleProps): JSX.Element =>
     <main css={LiveblogArticleStyles}>
         <LiveblogSeries series={series} pillarStyles={pillarStyles}/>
@@ -61,7 +63,11 @@ const LiveblogArticle = ({
         />
         <HeaderImage assets={mainAssets}/>
         <LiveblogKeyEvents bodyElements={bodyElements} pillarStyles={pillarStyles}/>
-        <LiveblogBody bodyElements={bodyElements} pillarStyles={pillarStyles}/>
+        <LiveblogBody
+            bodyElements={bodyElements}
+            pillarStyles={pillarStyles}
+            imageSalt={imageSalt}
+        />
         <Tags tags={tags} background={palette.neutral[93]}/>
     </main>
 

@@ -99,7 +99,10 @@ const getArticleComponent = (imageSalt: string) =>
       case 'article':
         return React.createElement(Article, { ...capiFields.articleProps, imageSalt });
       case 'liveblog':
-        return React.createElement(LiveblogArticle, {...capiFields.articleProps, isLive: true});
+        return React.createElement(
+          LiveblogArticle,
+          { ...capiFields.articleProps, isLive: true, imageSalt }
+        );
       default:
         return React.createElement('p', null, `${capiFields.type} not implemented yet`);
     }
