@@ -5,13 +5,12 @@ import LiveblogHeadline from './LiveblogHeadline';
 import LiveblogStandfirst from './LiveblogStandfirst';
 import LiveblogByline from './LiveblogByline';
 import LiveblogKeyEvents from './LiveblogKeyEvents';
-import LiveblogBlock from './LiveblogBlock';
-import LiveblogLoadMore from './LiveblogLoadMore';
+import LiveblogBody from './LiveblogBody';
 import HeaderImage from '../shared/HeaderImage';
 import Tags from '../shared/Tags';
 
 import { PillarStyles, PillarId } from '../../styles';
-import { Series, Tag, Contributor } from '../../types/Capi';
+import { Series, Tag, Contributor, Block } from '../../types/Capi';
 import { Asset } from 'utils/Asset';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
@@ -32,6 +31,8 @@ interface LiveblogArticleProps {
     pillarStyles: PillarStyles;
     contributors: Contributor[];
     series: Series;
+    bodyElements: Block[];
+    isLive: boolean;
 }
 
 const LiveblogArticle = ({
@@ -45,6 +46,7 @@ const LiveblogArticle = ({
     pillarStyles,
     contributors,
     series,
+    bodyElements
 }: LiveblogArticleProps): JSX.Element =>
     <main css={LiveblogArticleStyles}>
         <LiveblogSeries series={series} pillarStyles={pillarStyles}/>
@@ -58,11 +60,8 @@ const LiveblogArticle = ({
             contributors={contributors}
         />
         <HeaderImage assets={mainAssets}/>
-        <LiveblogKeyEvents pillarStyles={pillarStyles}/>
-        <LiveblogBlock pillarStyles={pillarStyles} highlighted={true}/>
-        <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
-        <LiveblogBlock pillarStyles={pillarStyles} highlighted={false}/>
-        <LiveblogLoadMore pillarStyles={pillarStyles}/>
+        <LiveblogKeyEvents bodyElements={bodyElements} pillarStyles={pillarStyles}/>
+        <LiveblogBody bodyElements={bodyElements} pillarStyles={pillarStyles}/>
         <Tags tags={tags} background={palette.neutral[93]}/>
     </main>
 

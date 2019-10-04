@@ -1,15 +1,14 @@
 import React from 'react';
-import moment from 'moment';
 import { sidePadding, textSans, PillarStyles, PillarId, darkModeCss } from '../../styles';
 
 import { Keyline } from '../shared/Keyline';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
+import { formatDate } from 'utils/date';
 import { Contributor } from 'types/Capi';
 import Avatar from 'components/shared/Avatar';
 import Follow from 'components/shared/Follow';
-
 
 const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {
@@ -74,7 +73,7 @@ const ArticleByline = ({
             <Avatar contributors={contributors} bgColour={pillarStyles.inverted} />
             <div className="author">
                 <address dangerouslySetInnerHTML={{__html: byline}}></address>
-                <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
+                <time className="date">{ formatDate(new Date(publicationDate)) }</time>
                 <Follow contributors={contributors} />
             </div>
         </div>

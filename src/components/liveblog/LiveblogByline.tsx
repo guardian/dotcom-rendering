@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { sidePadding, textSans, PillarStyles, PillarId } from '../../styles';
 
 import { Keyline } from '../shared/Keyline';
@@ -7,8 +6,8 @@ import { Keyline } from '../shared/Keyline';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { Contributor } from '../../types/Capi';
+import { formatDate } from 'utils/date';
 import Avatar from 'components/shared/Avatar';
-
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -67,7 +66,7 @@ const LiveblogByline = ({
                 <Avatar contributors={contributors} bgColour={pillarStyles.featureHeadline} />
                 <div className="author">
                     <address dangerouslySetInnerHTML={{__html: byline}}></address>
-                    <time className="date">{moment(publicationDate).format('HH:mm dddd, D MMMM YYYY')}</time>
+                    <time className="date">{ formatDate(new Date(publicationDate)) }</time>
                     <div className="follow">Get alerts on this story</div>
                 </div>
             </div>

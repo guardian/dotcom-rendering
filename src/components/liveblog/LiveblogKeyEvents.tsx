@@ -2,6 +2,8 @@ import React from 'react';
 import { PillarStyles, icons, basePx } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations/palette';
+import { Block } from 'types/Capi';
+import { makeRelativeDate } from 'utils/date';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -133,30 +135,34 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 		overflow: hidden;
         z-index: 1;
         transition-duration: .2s;
-	}
+    }
+
+    a {
+        display: block;
+    }
 `;
 
-const placeholderEvents = [
-    'One',
-    'Two',
-    'Three',
-    'Four',
-    'Five'
-]
+interface LiveblogKeyEventsProps {
+    pillarStyles: PillarStyles;
+    bodyElements: Block[];
+}
 
-const LiveblogKeyEvents = ({ pillarStyles }: { pillarStyles: PillarStyles }): JSX.Element => {
+const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProps): JSX.Element => {
+    const keyEvents = bodyElements.filter(elem => elem.attributes.keyEvent as boolean).slice(0, 7);
     return (
         <section css={LiveblogKeyEventsStyles(pillarStyles)}>
-            <h3>Key events (7)</h3>
+            <h3>Key events ({keyEvents.length})</h3>
             <div>
                 <input id="collapsible" type="checkbox"/>
                 <label htmlFor="collapsible"></label>
                 <div>
                     <ul>
-                        {placeholderEvents.map((event, index) => {
+                        {keyEvents.map((event, index) => {
+                            const relativeDate = makeRelativeDate(event.firstPublishedDate);
+                            const time = relativeDate ? <time>{relativeDate}</time> : null;
                             return <li key={index}>
-                                <div>15m ago</div>
-                                <a>{event}</a>
+                                { time }
+                                <a>{event.title}</a>
                             </li>
                         })}
                     </ul>

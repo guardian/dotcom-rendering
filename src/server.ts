@@ -58,7 +58,9 @@ const capiFields = (capi: any): Result<string, CapiFields> =>
   fromUnsafe(() => {
 
     const { type, fields, elements, tags, webPublicationDate, pillarId } = capi.response.content;
-    const bodyElements = capi.response.content.blocks.body[0].elements;
+    const bodyElements = type === 'liveblog'
+      ? capi.response.content.blocks.body
+      : capi.response.content.blocks.body[0].elements;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mainImages = elements.filter((elem: any) => elem.relation === 'main' && elem.type === 'image');
