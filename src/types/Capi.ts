@@ -70,9 +70,9 @@ export interface Block {
     };
     firstPublishedDate: Date;
     lastModifiedDate: Date;
-    elements: {
+    elements: [{
         type: string;
         assets: [];
         textTypeData: {};
-    };
+    }];
 }

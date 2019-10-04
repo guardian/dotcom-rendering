@@ -20,9 +20,10 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 interface LiveblogBodyProps {
     pillarStyles: PillarStyles;
     bodyElements: Block[];
+    imageSalt: string;
 }
 
-const LiveblogBody= ({ pillarStyles, bodyElements }: LiveblogBodyProps): JSX.Element => {
+const LiveblogBody= ({ pillarStyles, bodyElements, imageSalt }: LiveblogBodyProps): JSX.Element => {
     const initialBlocks = bodyElements.slice(0, 7);
     const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 10
         ? <LiveblogLoadMore pillarStyles={pillarStyles}/> 
@@ -39,7 +40,7 @@ const LiveblogBody= ({ pillarStyles, bodyElements }: LiveblogBodyProps): JSX.Ele
                         title={block.title}
                         firstPublishedDate={block.firstPublishedDate}
                         lastModifiedDate={block.lastModifiedDate}>
-                            <>{render(block.elements).html}</>
+                            <>{render(block.elements, imageSalt).html}</>
                         </LiveblogBlock>
                 })
             }
