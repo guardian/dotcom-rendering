@@ -54,8 +54,8 @@ function transformUrl(salt: string, input: Url, width: number): Url {
     const service = getSubdomain(url.hostname);
 
     const params = new URLSearchParams({
-        w: width.toString(),
-        q: defaultQuality.toString(),
+        width: width.toString(),
+        quality: defaultQuality.toString(),
         fit: 'bounds',
         'sig-ignores-params': 'true',
         s: sign(salt, url.pathname),
