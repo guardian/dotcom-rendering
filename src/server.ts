@@ -1,40 +1,55 @@
+// ----- Imports ----- //
+
 import path from 'path';
 import fs from 'fs';
+import { promisify } from 'util';
 import express from 'express';
 import compression from 'compression';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
-import { promisify } from 'util';
 
-import Article, { ArticleProps } from 'components/news/Article';
-import LiveblogArticle from 'components/liveblog/LiveblogArticle';
-
-import { getPillarStyles } from 'styles';
-
-import { getConfigValue } from 'utils/ssmConfig';
-import { isFeature, parseCapi } from 'utils/capi';
 import { fromUnsafe, Result, Ok, Err } from 'types/Result';
 import { Tag } from 'types/Capi';
+import Article, { ArticleProps } from 'components/news/Article';
+import LiveblogArticle from 'components/liveblog/LiveblogArticle';
+import { getPillarStyles } from 'styles';
+import { getConfigValue } from 'utils/ssmConfig';
+import { isFeature, parseCapi } from 'utils/capi';
 
-const app = express();
 
-app.use(express.json({ limit: '50mb' }));
-app.use("/public", express.static(path.resolve(__dirname, '../public')));
-app.use(compression());
-
-// TODO: request less data from capi
-const capiEndpoint = (articleId: string, key: string): string =>
-  `https://content.guardianapis.com/${articleId}?format=json&api-key=${key}&show-elements=all&show-atoms=all&show-fields=all&show-tags=all&show-blocks=all`;
-
-const defaultId = 'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
+// ----- Setup ----- //
 
 interface CapiFields {
   type: string;
   articleProps: ArticleProps;
 };
 
+const defaultId =
+  'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
+const readFileP = promisify(fs.readFile);
+
+
+// ----- Functions ----- //
+
 const id = <A>(a: A): A => a;
+
+// TODO: request less data from capi
+const capiEndpoint = (articleId: string, key: string): string => {
+
+  const params = new URLSearchParams({
+    format: 'json',
+    'api-key': key,
+    'show-elements': 'all',
+    'show-atoms': 'all',
+    'show-fields': 'all',
+    'show-tags': 'all',
+    'show-blocks': 'all',
+  })
+
+  return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
+
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function checkForUnsupportedContent(capi: any): Result<string, void> {
@@ -53,6 +68,9 @@ function checkForUnsupportedContent(capi: any): Result<string, void> {
 
 }
 
+const isMainImage = (elem: any) =>
+  elem.relation === 'main' && elem.type === 'image';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const capiFields = (capi: any): Result<string, CapiFields> =>
   fromUnsafe(() => {
@@ -63,7 +81,7 @@ const capiFields = (capi: any): Result<string, CapiFields> =>
       : capi.response.content.blocks.body[0].elements;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mainImages = elements.filter((elem: any) => elem.relation === 'main' && elem.type === 'image');
+    const mainImages = elements.filter(isMainImage);
     const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
     const feature = isFeature(tags) || 'starRating' in fields;
     const pillarStyles = getPillarStyles(pillarId);
@@ -85,7 +103,6 @@ const capiFields = (capi: any): Result<string, CapiFields> =>
       },
     };
   }, 'Unexpected CAPI response structure');
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const fieldsFromCapi = (capi: any): Result<string, CapiFields> =>
@@ -113,8 +130,6 @@ const generateArticleHtml = (capiResponse: string, imageSalt: string) =>
       .map(renderToString)
       .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
 
-const readFileP = promisify(fs.readFile);
-
 async function readTemplate(): Promise<Result<string, string>> {
   try {
     const data = await readFileP(path.resolve('./src/html/articleTemplate.html'), 'utf8');
@@ -123,6 +138,15 @@ async function readTemplate(): Promise<Result<string, string>> {
     return new Err('Could not read template file');
   }
 }
+
+
+// ----- App ----- //
+
+const app = express();
+
+app.use(express.json({ limit: '50mb' }));
+app.use("/public", express.static(path.resolve(__dirname, '../public')));
+app.use(compression());
 
 app.get('/*', async (req, res) => {
 
