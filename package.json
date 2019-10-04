@@ -10,6 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
+    "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "build:server": "webpack --config webpack.config.js --config-name server",
     "build:client": "webpack --config webpack.config.js --config-name client"
   },
