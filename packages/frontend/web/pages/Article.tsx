@@ -81,20 +81,18 @@ const headerAdWrapperHidden = css`
     display: none;
 `;
 
-const headerAd = css`
+const adSlotAboveNav = css`
     margin: 0 auto;
     height: 151px;
     padding-bottom: 18px;
     padding-top: 18px;
     text-align: left;
     display: table;
-
     border-bottom: 0.0625rem solid ${palette.neutral[86]};
-
     width: 728px;
 `;
 
-const articleBodyAdStyles = css`
+const adSlot300px = css`
     .ad-slot {
         width: 300px;
         margin: 12px auto;
@@ -102,14 +100,25 @@ const articleBodyAdStyles = css`
         min-height: 274px;
         text-align: center;
     }
+`;
 
+const adSlotUnspecifiedWidth = css`
+    .ad-slot {
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
+`;
+
+const articleBodyAdStyles = css`
+    ${adSlot300px}
     .ad-slot--most-popular {
         ${desktop} {
             margin: 0;
             width: auto;
         }
     }
-
     .ad-slot--inline {
         ${desktop} {
             margin: 0;
@@ -119,7 +128,6 @@ const articleBodyAdStyles = css`
             margin-left: 20px;
         }
     }
-
     .ad-slot--offset-right {
         ${desktop} {
             float: right;
@@ -131,7 +139,6 @@ const articleBodyAdStyles = css`
             margin-right: -408px;
         }
     }
-
     .ad-slot--outstream {
         ${tablet} {
             margin-left: 0;
@@ -146,14 +153,7 @@ const articleBodyAdStyles = css`
 `;
 
 const mostPopularAdStyle = css`
-    .ad-slot {
-        width: 300px;
-        margin: 12px auto;
-        min-width: 300px;
-        min-height: 274px;
-        text-align: center;
-    }
-
+    ${adSlot300px}
     .ad-slot--most-popular {
         ${desktop} {
             margin: 0;
@@ -161,15 +161,6 @@ const mostPopularAdStyle = css`
         }
     }
     ${labelStyles};
-`;
-
-const merchandisingHigh = css`
-    .ad-slot {
-        margin: 12px auto;
-        min-width: 300px;
-        min-height: 274px;
-        text-align: center;
-    }
 `;
 
 export const Article: React.FC<{
@@ -187,7 +178,7 @@ export const Article: React.FC<{
                 <AdSlot
                     asps={namedAdSlotParameters('top-above-nav')}
                     config={data.config}
-                    className={headerAd}
+                    className={adSlotAboveNav}
                 />
             </div>
 
@@ -217,7 +208,7 @@ export const Article: React.FC<{
         <AdSlotInContainer
             asps={namedAdSlotParameters('merchandising-high')}
             config={data.config}
-            className={merchandisingHigh}
+            className={adSlotUnspecifiedWidth}
         />
         <OutbrainContainer config={data.config} />
         <Container
