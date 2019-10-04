@@ -20,7 +20,7 @@ describe('ampadslots', () => {
         data: { alt: 'img', credit: 'nobody' },
         imageSources: [],
         displayCredit: false,
-        role: 'lol',
+        role: 'inline',
     };
 
     const tenCharTextBlock = getTextBlockElement(10);

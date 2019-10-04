@@ -27,6 +27,14 @@ interface RichLinkBlockElement {
     prefix: string;
 }
 
+type RoleType =
+    | 'immersive'
+    | 'supporting'
+    | 'showcase'
+    | 'inline'
+    | 'thumbnail'
+    | 'half-width';
+
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
     media: { allImages: Image[] };
@@ -38,7 +46,7 @@ interface ImageBlockElement {
     };
     imageSources: ImageSource[];
     displayCredit?: boolean;
-    role: string;
+    role: RoleType;
 }
 interface YoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
