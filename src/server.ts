@@ -5,6 +5,7 @@ import compression from 'compression';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
+import { promisify } from 'util';
 
 import Article, { ArticleProps } from 'components/news/Article';
 import LiveblogArticle from 'components/liveblog/LiveblogArticle';
@@ -110,10 +111,7 @@ const generateArticleHtml = (capiResponse: string, imageSalt: string) =>
       .map(renderToString)
       .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
 
-const readFileP = (file: string, encoding: string): Promise<string> =>
-  new Promise((res, rej): void => {
-    fs.readFile(file, encoding, (err, data) => err ? rej(err) : res(data));
-  });
+const readFileP = promisify(fs.readFile);
 
 async function readTemplate(): Promise<Result<string, string>> {
   try {
