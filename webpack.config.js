@@ -37,7 +37,7 @@ const resolve = {
 
 // ----- Configs ----- //
 
-const serverConfig = {
+const serverConfig = env => ({
     name: 'server',
     mode: 'development',
     entry: 'server.ts',
@@ -49,17 +49,17 @@ const serverConfig = {
         filename: 'server.js',
     },
     resolve,
-    watch: true,
+    watch: env && env.watch,
     watchOptions: {
         ignored: /node_modules/,
     },
     plugins: [
         // Reloads the server on change.
-        new LaunchServerPlugin(),
+        (env && env.watch) ? new LaunchServerPlugin() : null,
         // Does not try to require the 'canvas' package,
         // an optional dependency of jsdom that we aren't using.
         new webpack.IgnorePlugin(/^canvas$/),
-    ],
+    ].filter(p => p !== null),
     module: {
         rules: [
             {
@@ -82,7 +82,7 @@ const serverConfig = {
             },
         ]
     }
-};
+});
 
 const clientConfig = {
     name: 'client',
