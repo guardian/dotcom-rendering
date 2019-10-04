@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import React from 'react';
+import * as Asset from 'utils/Asset';
 
 
 // ----- Setup ----- //
@@ -14,38 +15,23 @@ interface Image {
     alt: string;
 }
 
-interface Asset {
-    type: string;
-    file: string;
-    typeData: {
-        width: number;
-        isMaster?: boolean;
-    };
-}
-
 
 // ----- Functions ----- //
 
-const srcSet = (assets: Asset[]): string =>
-    assets
-        .filter(a => !a.typeData.isMaster)
-        .map(a => `${a.file} ${a.typeData.width}w`)
-        .join(', ');
-
-const imageElement = (image: Image, assets: Asset[]): React.ReactNode =>
+const imageElement = (image: Image, assets: Asset.Asset[], salt: string): React.ReactNode =>
     h('img', {
         sizes: '100%',
-        srcSet: srcSet(assets),
+        srcSet: Asset.toSrcset(salt, assets).withDefault(''),
         alt: image.alt,
-        src: assets[0].file,
+        src: Asset.toUrl(salt, assets[0]),
     });
 
-function imageBlock(image: Image, assets: Asset[]): React.ReactNode {
+function imageBlock(image: Image, assets: Asset.Asset[], salt: string): React.ReactNode {
 
     const caption = image.displayCredit ? `${image.caption} ${image.credit}` : image.caption;
 
     return h('figure', { className: 'image' },
-        imageElement(image, assets),
+        imageElement(image, assets, salt),
         h('figcaption', null, caption),
     );
 }
