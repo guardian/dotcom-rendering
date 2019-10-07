@@ -81,21 +81,27 @@ const headerAdWrapperHidden = css`
     display: none;
 `;
 
-const headerAd = css`
+const adSlotAboveNav = css`
     margin: 0 auto;
     height: 151px;
     padding-bottom: 18px;
     padding-top: 18px;
     text-align: left;
     display: table;
-
     border-bottom: 0.0625rem solid ${palette.neutral[86]};
-
     width: 728px;
 `;
 
-// These are by selector as for dynamically-created ads
-const bodyAdStyles = css`
+const adSlotUnspecifiedWidth = css`
+    .ad-slot {
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
+`;
+
+const articleAdStyles = css`
     .ad-slot {
         width: 300px;
         margin: 12px auto;
@@ -103,14 +109,12 @@ const bodyAdStyles = css`
         min-height: 274px;
         text-align: center;
     }
-
     .ad-slot--most-popular {
         ${desktop} {
             margin: 0;
             width: auto;
         }
     }
-
     .ad-slot--inline {
         ${desktop} {
             margin: 0;
@@ -120,7 +124,6 @@ const bodyAdStyles = css`
             margin-left: 20px;
         }
     }
-
     .ad-slot--offset-right {
         ${desktop} {
             float: right;
@@ -132,7 +135,6 @@ const bodyAdStyles = css`
             margin-right: -408px;
         }
     }
-
     .ad-slot--outstream {
         ${tablet} {
             margin-left: 0;
@@ -143,7 +145,23 @@ const bodyAdStyles = css`
             }
         }
     }
+    ${labelStyles};
+`;
 
+const mostPopularAdStyle = css`
+    .ad-slot {
+        width: 300px;
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
+    .ad-slot--most-popular {
+        ${desktop} {
+            margin: 0;
+            width: auto;
+        }
+    }
     ${labelStyles};
 `;
 
@@ -162,7 +180,7 @@ export const Article: React.FC<{
                 <AdSlot
                     asps={namedAdSlotParameters('top-above-nav')}
                     config={data.config}
-                    className={headerAd}
+                    className={adSlotAboveNav}
                 />
             </div>
 
@@ -172,10 +190,9 @@ export const Article: React.FC<{
                 edition={data.CAPI.editionId}
             />
         </div>
-
-        <main className={bodyAdStyles}>
+        <main>
             <Container borders={true} className={articleContainer}>
-                <article>
+                <article className={articleAdStyles}>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
                         <div className={adSlotWrapper}>
@@ -188,27 +205,29 @@ export const Article: React.FC<{
                     </div>
                 </article>
             </Container>
-            <AdSlotInContainer
-                asps={namedAdSlotParameters('merchandising-high')}
-                config={data.config}
-                className={''}
-            />
-            <OutbrainContainer config={data.config} />
-            <Container
-                borders={true}
-                className={cx(
-                    articleContainer,
-                    css`
-                        border-top: 1px solid ${palette.neutral[86]};
-                    `,
-                )}
-            >
-                <MostViewed
-                    sectionName={data.CAPI.sectionName}
-                    config={data.config}
-                />
-            </Container>
         </main>
+        <AdSlotInContainer
+            asps={namedAdSlotParameters('merchandising-high')}
+            config={data.config}
+            className={adSlotUnspecifiedWidth}
+        />
+        <OutbrainContainer config={data.config} />
+        <Container
+            borders={true}
+            className={cx(
+                articleContainer,
+                mostPopularAdStyle,
+                css`
+                    border-top: 1px solid ${palette.neutral[86]};
+                `,
+            )}
+        >
+            <MostViewed
+                sectionName={data.CAPI.sectionName}
+                config={data.config}
+            />
+        </Container>
+
         <SubNav
             subnav={data.NAV.subNavSections}
             pillar={data.CAPI.pillar}
