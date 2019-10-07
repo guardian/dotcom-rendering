@@ -58,6 +58,7 @@ interface ArticleBylineProps {
     publicationDate: string;
     contributors: Contributor[];
     pillarId: PillarId;
+    imageSalt: string;
 }
 
 const ArticleByline = ({
@@ -66,11 +67,16 @@ const ArticleByline = ({
     publicationDate,
     contributors,
     pillarId,
+    imageSalt
 }: ArticleBylineProps): JSX.Element =>
     <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
         <Keyline pillar={pillarId} type={'article'}/>
         <div css={sidePadding}>
-            <Avatar contributors={contributors} bgColour={pillarStyles.inverted} />
+            <Avatar
+                contributors={contributors}
+                bgColour={pillarStyles.inverted}
+                imageSalt={imageSalt}
+            />
             <div className="author">
                 <address dangerouslySetInnerHTML={{__html: byline}}></address>
                 <time className="date">{ formatDate(new Date(publicationDate)) }</time>
