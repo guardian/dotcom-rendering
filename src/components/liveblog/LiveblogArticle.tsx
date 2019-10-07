@@ -60,8 +60,9 @@ const LiveblogArticle = ({
             pillarId={pillarId}
             publicationDate={webPublicationDate}
             contributors={contributors}
+            imageSalt={imageSalt}
         />
-        <HeaderImage assets={mainAssets}/>
+        <HeaderImage assets={mainAssets} imageSalt={imageSalt}/>
         <LiveblogKeyEvents bodyElements={bodyElements} pillarStyles={pillarStyles}/>
         <LiveblogBody
             bodyElements={bodyElements}

@@ -49,6 +49,7 @@ interface LiveblogBylineProps {
     publicationDate: string;
     contributors: Contributor[];
     pillarId: PillarId;
+    imageSalt: string;
 }
 
 const LiveblogByline = ({
@@ -57,13 +58,18 @@ const LiveblogByline = ({
     publicationDate,
     contributors,
     pillarId,
+    imageSalt
 }: LiveblogBylineProps): JSX.Element => {
     
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline pillar={pillarId} type={'liveblog'}/>
             <div css={sidePadding}>
-                <Avatar contributors={contributors} bgColour={pillarStyles.featureHeadline} />
+                <Avatar
+                    contributors={contributors}
+                    bgColour={pillarStyles.featureHeadline}
+                    imageSalt={imageSalt}
+                />
                 <div className="author">
                     <address dangerouslySetInnerHTML={{__html: byline}}></address>
                     <time className="date">{ formatDate(new Date(publicationDate)) }</time>

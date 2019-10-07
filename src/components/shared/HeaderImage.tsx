@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
+import { imageElement } from 'components/blocks/image';
 
 const headerImageStyles = css`
     position: relative;
@@ -28,25 +29,17 @@ interface AssetTypeData {
 
 interface HeaderImageProps {
     assets: Asset[] | null;
+    imageSalt: string;
 }
 
-const HeaderImage = ({ assets }: HeaderImageProps): JSX.Element | null => {
+const HeaderImage = ({ assets, imageSalt }: HeaderImageProps): JSX.Element | null => {
     if (!assets) return null;
 
-    const { file, typeData: {caption, credit, altText} } = assets[0];
-    // TODO: use fastly images
+    const { typeData: {caption, credit, altText} } = assets[0];
+
     return (
         <div css={headerImageStyles}>
-            <picture>
-                {
-                    assets.map(({ file, typeData }, index) => {
-                        return index + 1 === assets.length
-                            ? <source srcSet={file} media={`(max-width: ${typeData.width}px), (min-width: ${typeData.width}px)`} key={index}/>
-                            : <source srcSet={file} media={`(max-width: ${typeData.width}px)`} key={index}/>
-                    })
-                }
-                <img src={file} alt={altText}/>
-            </picture>
+            { imageElement(altText, assets, imageSalt) }
             < HeaderImageCaption caption={caption} credit={credit}/>
         </div>
     )
