@@ -1,5 +1,4 @@
 import React from 'react';
-import { AsyncClientComponent } from '../lib/AsyncClientComponent';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@guardian/pasteup/icons/arrow-in-circle.svg';
@@ -7,6 +6,7 @@ import Quote from '@guardian/pasteup/icons/quote.svg';
 import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
+import { useApi } from '../lib/api';
 
 type CardStyle =
     | 'special-report'
@@ -243,29 +243,39 @@ export const RichLinkComponent: React.FC<{
     pillar: Pillar;
     ajaxEndpoint: string;
 }> = ({ element, pillar, ajaxEndpoint }) => {
+    const url = buildUrl(element, ajaxEndpoint);
+    const { data, loading, error } = useApi<RichLink>(url);
+
+    if (error) {
+        // Send the error to Sentry and then prevent the element from rendering
+        window.guardian.modules.raven.reportError(
+            error,
+            {
+                feature: 'most-viewed',
+            },
+            true,
+        );
+
+        return null;
+    }
+
+    if (loading) {
+        // Only render once data is available
+        return null;
+    }
     return (
         <div data-link-name={'rich-link'} className={pillarBackground(pillar)}>
             <div className={cx(richLinkContainer, neutralBackground)}>
-                <AsyncClientComponent
-                    f={() => fetchContent(element, ajaxEndpoint)}
-                >
-                    {({ data }) => (
-                        <>{data && <RichLinkBody richLink={data} />}</>
-                    )}
-                </AsyncClientComponent>
+                {data && <RichLinkBody richLink={data} />}
             </div>
         </div>
     );
 };
 
-const fetchContent: (
-    element: RichLinkBlockElement,
-    ajaxUrl: string,
-) => Promise<RichLink> = (element, ajaxUrl) => {
+const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
+    element,
+    ajaxUrl,
+) => {
     const path = new URL(element.url).pathname;
-    return fetch(`${ajaxUrl}/embed/card${path}.json?dcr=true`)
-        .then(res => res.json())
-        .catch(err => {
-            return {};
-        });
+    return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
 };
