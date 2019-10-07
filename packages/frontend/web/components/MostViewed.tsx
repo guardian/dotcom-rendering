@@ -227,9 +227,7 @@ const liveKicker = (colour: string) => css`
 `;
 
 function getColour(pillar: Pillar) {
-    // Default to 'news' for now pending https://github.com/guardian/frontend/pull/21891. After
-    // this PR has been merged, remove this default
-    return pillarPalette[pillar || 'news'].main;
+    return pillarPalette[pillar].main;
 }
 
 const oldArticleMessage = css`
