@@ -9,7 +9,7 @@ import {
     mobileLandscape,
     wide,
 } from '@guardian/src-foundations';
-import { MostViewed } from '@frontend/web/components/MostViewed';
+import { MostViewed } from '@frontend/web/components/MostViewed/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { ArticleBody } from '@frontend/web/components/ArticleBody';
