@@ -6,7 +6,7 @@ import Quote from '@guardian/pasteup/icons/quote.svg';
 import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
-import { useApi } from '../lib/api';
+import { useApi } from '@frontend/web/components/lib/api';
 
 type CardStyle =
     | 'special-report'
