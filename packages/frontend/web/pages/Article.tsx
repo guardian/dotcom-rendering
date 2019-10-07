@@ -101,7 +101,7 @@ const adSlotUnspecifiedWidth = css`
     }
 `;
 
-const articleBodyAdStyles = css`
+const articleAdStyles = css`
     .ad-slot {
         width: 300px;
         margin: 12px auto;
@@ -191,11 +191,8 @@ export const Article: React.FC<{
             />
         </div>
         <main>
-            <Container
-                borders={true}
-                className={cx(articleContainer, articleBodyAdStyles)}
-            >
-                <article>
+            <Container borders={true} className={articleContainer}>
+                <article className={articleAdStyles}>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
                         <div className={adSlotWrapper}>
