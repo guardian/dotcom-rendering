@@ -92,16 +92,6 @@ const adSlotAboveNav = css`
     width: 728px;
 `;
 
-const adSlot300px = css`
-    .ad-slot {
-        width: 300px;
-        margin: 12px auto;
-        min-width: 300px;
-        min-height: 274px;
-        text-align: center;
-    }
-`;
-
 const adSlotUnspecifiedWidth = css`
     .ad-slot {
         margin: 12px auto;
@@ -112,7 +102,13 @@ const adSlotUnspecifiedWidth = css`
 `;
 
 const articleBodyAdStyles = css`
-    ${adSlot300px}
+    .ad-slot {
+        width: 300px;
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
     .ad-slot--most-popular {
         ${desktop} {
             margin: 0;
@@ -153,7 +149,13 @@ const articleBodyAdStyles = css`
 `;
 
 const mostPopularAdStyle = css`
-    ${adSlot300px}
+    .ad-slot {
+        width: 300px;
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
     .ad-slot--most-popular {
         ${desktop} {
             margin: 0;
