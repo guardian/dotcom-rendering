@@ -7,7 +7,6 @@ explicitly passed around; this can lead to 'prop drilling'.
 [This PR](https://github.com/guardian/dotcom-rendering/pull/801) was a spike to demonstrate using
 the react context api to extract the `edition` property to prevent this.
 
-
 ## Decision
 
 -   Our component tree is shallow so we shouldn't implement any 'magic' that
