@@ -188,23 +188,25 @@ export const Article: React.FC<{
                 edition={data.CAPI.editionId}
             />
         </div>
-        <Container
-            borders={true}
-            className={cx(articleContainer, articleBodyAdStyles)}
-        >
-            <article>
-                <ArticleBody CAPI={data.CAPI} config={data.config} />
-                <div className={secondaryColumn}>
-                    <div className={adSlotWrapper}>
-                        <AdSlot
-                            asps={namedAdSlotParameters('right')}
-                            config={data.config}
-                            className={stickyAdSlot}
-                        />
+        <main>
+            <Container
+                borders={true}
+                className={cx(articleContainer, articleBodyAdStyles)}
+            >
+                <article>
+                    <ArticleBody CAPI={data.CAPI} config={data.config} />
+                    <div className={secondaryColumn}>
+                        <div className={adSlotWrapper}>
+                            <AdSlot
+                                asps={namedAdSlotParameters('right')}
+                                config={data.config}
+                                className={stickyAdSlot}
+                            />
+                        </div>
                     </div>
-                </div>
-            </article>
-        </Container>
+                </article>
+            </Container>
+        </main>
         <AdSlotInContainer
             asps={namedAdSlotParameters('merchandising-high')}
             config={data.config}
