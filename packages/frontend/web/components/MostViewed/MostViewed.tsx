@@ -14,6 +14,7 @@ import { AsyncClientComponent } from '../lib/AsyncClientComponent';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot } from '@frontend/web/components/AdSlot';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import { PulsingDot } from '@frontend/web/components/PulsingDot';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@frontend/lib/pillars';
 
@@ -401,6 +402,13 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                                     ),
                                                                 )}
                                                             >
+                                                                <PulsingDot
+                                                                    colour={
+                                                                        palette
+                                                                            .news
+                                                                            .main
+                                                                    }
+                                                                />
                                                                 Live
                                                             </span>
                                                         )}
