@@ -145,14 +145,12 @@ const articleAdStyles = css`
 `;
 
 const mostPopularAdStyle = css`
-    .ad-slot {
+    .ad-slot--most-popular {
         width: 300px;
         margin: 12px auto;
         min-width: 300px;
         min-height: 274px;
         text-align: center;
-    }
-    .ad-slot--most-popular {
         ${desktop} {
             margin: 0;
             width: auto;
