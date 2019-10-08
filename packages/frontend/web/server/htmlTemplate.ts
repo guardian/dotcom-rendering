@@ -4,6 +4,7 @@ import { getStatic } from '@frontend/lib/assets';
 import { prepareCmpString } from '@frontend/web/browser/prepareCmp';
 
 import { WindowGuardian } from '@frontend/model/window-guardian';
+import {until} from "@root/packages/pasteup/breakpoints";
 
 export const htmlTemplate = ({
     title = 'The Guardian',
@@ -118,8 +119,8 @@ export const htmlTemplate = ({
                     margin: 0 auto;
                     right: 0;
                     left: 0;
-                    z-index: $zindex-ads;
-                    @include mq(phablet) {
+                    z-index: 1010;
+                    ${until.phablet} {
                         display: none;
                     }
                 }
@@ -130,15 +131,15 @@ export const htmlTemplate = ({
                     top: 3px;
                     padding: 0;
                     border: 0;
-                    height: $mpu-ad-label-height - 3px;
-                    width: $mpu-ad-label-height - 3px;
+                    height: 21px;
+                    width: 21px;
                     background-color: transparent;
                 }
                 .ad-slot__close-button svg {
-                    height: $mpu-ad-label-height / 2;
-                    width: $mpu-ad-label-height / 2;
-                    stroke: $brightness-7;
-                    fill: $brightness-7;
+                    height: 6px;
+                    width: 6px;
+                    stroke: #121212;
+                    fill: #121212;
                     stroke-linecap: round;
                     stroke-width: 0;
                     text-align: center;
@@ -147,7 +148,7 @@ export const htmlTemplate = ({
                     display: block;
                 }
                 .ad-slot__close-button__x {
-                    stroke: $brightness-7;
+                    stroke: #121212;
                     fill: transparent;
                     stroke-linecap: round;
                     stroke-width: 2;
