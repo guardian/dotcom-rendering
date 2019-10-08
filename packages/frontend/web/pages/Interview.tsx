@@ -1,5 +1,5 @@
 import React from 'react';
-import { MostViewed } from '@frontend/web/components/MostViewed';
+import { MostViewed } from '@frontend/web/components/MostViewed/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { Content } from '@frontend/web/components/Content';
