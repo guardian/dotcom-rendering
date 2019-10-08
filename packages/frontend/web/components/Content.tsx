@@ -1,8 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import { tablet, desktop, wide } from '@guardian/src-foundations';
-
-import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
+import {
+    tablet,
+    desktop,
+    wide,
+    palette,
+    mobileLandscape,
+} from '@guardian/src-foundations';
+import { Container } from '@guardian/guui';
 import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
@@ -33,6 +38,16 @@ const adSlotWrapper = css`
 const stickyAdSlot = css`
     position: sticky;
     top: 0;
+`;
+
+const articleContainerStyles = css`
+    position: relative;
+    background-color: ${palette.neutral[100]};
+    padding: 0 10px;
+
+    ${mobileLandscape} {
+        padding: 0 20px;
+    }
 `;
 
 const articleAdStyles = css`
@@ -89,7 +104,11 @@ interface Props {
 export const Content = ({ CAPI, config }: Props) => {
     return (
         <main>
-            <ArticleContainer showTopBorder={false}>
+            <Container
+                borders={true}
+                showTopBorder={false}
+                className={articleContainerStyles}
+            >
                 <article className={articleAdStyles}>
                     <ArticleBody CAPI={CAPI} config={config} />
                     <div className={secondaryColumn}>
@@ -102,7 +121,7 @@ export const Content = ({ CAPI, config }: Props) => {
                         </div>
                     </div>
                 </article>
-            </ArticleContainer>
+            </Container>
         </main>
     );
 };

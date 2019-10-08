@@ -7,9 +7,10 @@ import {
     leftCol,
     wide,
     phablet,
+    mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
+import { Container } from '@guardian/guui';
 import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
@@ -31,6 +32,16 @@ const mostPopularBody = css`
     ${desktop} {
         display: flex;
         justify-content: space-between;
+    }
+`;
+
+const articleContainerStyles = css`
+    position: relative;
+    background-color: ${palette.neutral[100]};
+    padding: 0 10px;
+
+    ${mobileLandscape} {
+        padding: 0 20px;
     }
 `;
 
@@ -333,7 +344,11 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
         return (
             <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
                 <OutbrainContainer config={config} />
-                <ArticleContainer showTopBorder={true}>
+                <Container
+                    borders={true}
+                    showTopBorder={true}
+                    className={cx(articleContainerStyles)}
+                >
                     <div
                         className={cx(container, mostPopularAdStyle)}
                         data-link-name={'most-viewed'}
@@ -498,7 +513,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                             />
                         </div>
                     </div>
-                </ArticleContainer>
+                </Container>
             </div>
         );
     }
