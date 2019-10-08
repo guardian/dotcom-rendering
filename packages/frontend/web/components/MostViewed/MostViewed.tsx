@@ -10,11 +10,13 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { BigNumber } from '@guardian/guui';
-import { AsyncClientComponent } from './lib/AsyncClientComponent';
+import { AsyncClientComponent } from '../lib/AsyncClientComponent';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot } from '@frontend/web/components/AdSlot';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import { PulsingDot } from './PulsingDot';
+import { PulsingDot } from '@frontend/web/components/PulsingDot';
+import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const container = css`
     padding-top: 3px;
@@ -213,8 +215,8 @@ const tabButton = css`
     }
 `;
 
-const liveKicker = css`
-    color: ${palette.news.main};
+const liveKicker = (colour: string) => css`
+    color: ${colour};
     font-weight: 700;
 
     &::after {
@@ -224,6 +226,10 @@ const liveKicker = css`
         margin: 0 4px;
     }
 `;
+
+function getColour(pillar: Pillar) {
+    return pillarPalette[pillar].main;
+}
 
 const oldArticleMessage = css`
     ${textSans({ level: 1 })}
@@ -270,6 +276,7 @@ interface Trail {
     linkText: string;
     isLiveBlog: boolean;
     ageWarning: string;
+    pillar: Pillar;
 }
 
 interface Tab {
@@ -367,6 +374,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                         aria-labelledby={`tabs-popular-${i}-tab`}
                                         data-link-name={tab.heading}
                                         data-link-context={`most-read/${this.props.sectionName}`}
+                                        data-testid={tab.heading}
                                     >
                                         {(tab.trails || []).map((trail, ii) => (
                                             <li
@@ -388,9 +396,11 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                     >
                                                         {trail.isLiveBlog && (
                                                             <span
-                                                                className={
-                                                                    liveKicker
-                                                                }
+                                                                className={liveKicker(
+                                                                    getColour(
+                                                                        trail.pillar,
+                                                                    ),
+                                                                )}
                                                             >
                                                                 <PulsingDot
                                                                     colour={
@@ -401,6 +411,14 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                                 />
                                                                 Live
                                                             </span>
+                                                        )}
+                                                        {trail.pillar ===
+                                                            'opinion' && (
+                                                            <QuoteIcon
+                                                                colour={getColour(
+                                                                    trail.pillar,
+                                                                )}
+                                                            />
                                                         )}
                                                         {trail.linkText}
                                                         <AgeWarning
