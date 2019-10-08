@@ -1,10 +1,42 @@
 import React from 'react';
-import { css } from 'emotion';
-
-import { tablet } from '@guardian/pasteup/breakpoints';
+import { css, cx } from 'emotion';
+import { palette, until, tablet } from '@guardian/src-foundations';
+import { namedAdSlotParameters } from '@frontend/model/advertisement';
+import { AdSlot } from '@frontend/web/components/AdSlot';
 
 import { Nav } from './Nav/Nav';
-import { palette } from '@guardian/pasteup/palette';
+
+const headerWrapper = css`
+    position: static;
+`;
+
+const headerAdWrapper = css`
+    ${until.tablet} {
+        display: none;
+    }
+
+    z-index: 1080;
+    width: 100%;
+    background-color: white;
+
+    position: sticky;
+    top: 0;
+`;
+
+const headerAdWrapperHidden = css`
+    display: none;
+`;
+
+const adSlotAboveNav = css`
+    margin: 0 auto;
+    height: 151px;
+    padding-bottom: 18px;
+    padding-top: 18px;
+    text-align: left;
+    display: table;
+    border-bottom: 0.0625rem solid ${palette.neutral[86]};
+    width: 728px;
+`;
 
 const header = css`
     margin-bottom: 0;
@@ -19,8 +51,25 @@ export const Header: React.FC<{
     nav: NavType;
     pillar: Pillar;
     edition: Edition;
-}> = ({ nav, pillar, edition }) => (
-    <header className={header}>
-        <Nav nav={nav} pillar={pillar} edition={edition} />
-    </header>
+    config: ConfigType;
+    isAdFreeUser: boolean;
+    shouldHideAds: boolean;
+}> = ({ nav, pillar, edition, config, isAdFreeUser, shouldHideAds }) => (
+    <div className={headerWrapper}>
+        <div
+            className={cx({
+                [headerAdWrapper]: true,
+                [headerAdWrapperHidden]: isAdFreeUser || shouldHideAds,
+            })}
+        >
+            <AdSlot
+                asps={namedAdSlotParameters('top-above-nav')}
+                config={config}
+                className={adSlotAboveNav}
+            />
+        </div>
+        <header className={header}>
+            <Nav nav={nav} pillar={pillar} edition={edition} />
+        </header>
+    </div>
 );

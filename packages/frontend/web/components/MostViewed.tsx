@@ -9,13 +9,15 @@ import {
     phablet,
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { BigNumber } from '@guardian/guui';
 import { AsyncClientComponent } from './lib/AsyncClientComponent';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
-import { AdSlot } from '@frontend/web/components/AdSlot';
+import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@frontend/lib/pillars';
+import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 
 const container = css`
     padding-top: 3px;
@@ -214,6 +216,32 @@ const tabButton = css`
     }
 `;
 
+const adSlotUnspecifiedWidth = css`
+    .ad-slot {
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
+`;
+
+const mostPopularAdStyle = css`
+    .ad-slot {
+        width: 300px;
+        margin: 12px auto;
+        min-width: 300px;
+        min-height: 274px;
+        text-align: center;
+    }
+    .ad-slot--most-popular {
+        ${desktop} {
+            margin: 0;
+            width: auto;
+        }
+    }
+    ${labelStyles};
+`;
+
 const liveKicker = (colour: string) => css`
     color: ${colour};
     font-weight: 700;
@@ -303,135 +331,176 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
     }
 
     public render() {
+        const { config } = this.props;
         return (
-            <div
-                className={container}
-                data-link-name={'most-viewed'}
-                data-component={'most-viewed'}
-            >
-                <h2 className={heading}>Most popular</h2>
-                <div className={mostPopularBody}>
-                    <AsyncClientComponent f={this.fetchTrails}>
-                        {({ data }) => (
-                            <div className={listContainer}>
-                                {Array.isArray(data) && data.length > 1 && (
-                                    <ul
-                                        className={tabsContainer}
-                                        role="tablist"
-                                    >
+            <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+                <OutbrainContainer config={config} />
+                <ArticleContainer showTopBorder={true}>
+                    <div
+                        className={cx(container, mostPopularAdStyle)}
+                        data-link-name={'most-viewed'}
+                        data-component={'most-viewed'}
+                    >
+                        <h2 className={heading}>Most popular</h2>
+                        <div className={mostPopularBody}>
+                            <AsyncClientComponent f={this.fetchTrails}>
+                                {({ data }) => (
+                                    <div className={listContainer}>
+                                        {Array.isArray(data) &&
+                                            data.length > 1 && (
+                                                <ul
+                                                    className={tabsContainer}
+                                                    role="tablist"
+                                                >
+                                                    {(data || []).map(
+                                                        (tab, i) => (
+                                                            <li
+                                                                className={cx(
+                                                                    listTab,
+                                                                    {
+                                                                        [selectedListTab]:
+                                                                            i ===
+                                                                            this
+                                                                                .state
+                                                                                .selectedTabIndex,
+                                                                    },
+                                                                )}
+                                                                role="tab"
+                                                                aria-selected={
+                                                                    i ===
+                                                                    this.state
+                                                                        .selectedTabIndex
+                                                                }
+                                                                aria-controls={`tabs-popular-${i}`}
+                                                                id={`tabs-popular-${i}-tab`}
+                                                                key={`tabs-popular-${i}-tab`}
+                                                            >
+                                                                <button
+                                                                    className={
+                                                                        tabButton
+                                                                    }
+                                                                    onClick={() =>
+                                                                        this.tabSelected(
+                                                                            i,
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <span
+                                                                        className={css`
+                                                                            ${screenReaderOnly};
+                                                                        `}
+                                                                    >
+                                                                        Most
+                                                                        viewed{' '}
+                                                                    </span>
+                                                                    <span // tslint:disable-line:react-no-dangerous-html
+                                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html:
+                                                                                tab.heading,
+                                                                        }}
+                                                                    />
+                                                                </button>
+                                                            </li>
+                                                        ),
+                                                    )}
+                                                </ul>
+                                            )}
                                         {(data || []).map((tab, i) => (
-                                            <li
-                                                className={cx(listTab, {
-                                                    [selectedListTab]:
-                                                        i ===
+                                            <ol
+                                                className={cx(list, {
+                                                    [hideList]:
+                                                        i !==
                                                         this.state
                                                             .selectedTabIndex,
                                                 })}
-                                                role="tab"
-                                                aria-selected={
-                                                    i ===
-                                                    this.state.selectedTabIndex
-                                                }
-                                                aria-controls={`tabs-popular-${i}`}
-                                                id={`tabs-popular-${i}-tab`}
-                                                key={`tabs-popular-${i}-tab`}
+                                                id={`tabs-popular-${i}`}
+                                                key={`tabs-popular-${i}`}
+                                                role="tabpanel"
+                                                aria-labelledby={`tabs-popular-${i}-tab`}
+                                                data-link-name={tab.heading}
+                                                data-link-context={`most-read/${this.props.sectionName}`}
                                             >
-                                                <button
-                                                    className={tabButton}
-                                                    onClick={() =>
-                                                        this.tabSelected(i)
-                                                    }
-                                                >
-                                                    <span
-                                                        className={css`
-                                                            ${screenReaderOnly};
-                                                        `}
-                                                    >
-                                                        Most viewed{' '}
-                                                    </span>
-                                                    <span // tslint:disable-line:react-no-dangerous-html
-                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: tab.heading,
-                                                        }}
-                                                    />
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                                {(data || []).map((tab, i) => (
-                                    <ol
-                                        className={cx(list, {
-                                            [hideList]:
-                                                i !==
-                                                this.state.selectedTabIndex,
-                                        })}
-                                        id={`tabs-popular-${i}`}
-                                        key={`tabs-popular-${i}`}
-                                        role="tabpanel"
-                                        aria-labelledby={`tabs-popular-${i}-tab`}
-                                        data-link-name={tab.heading}
-                                        data-link-context={`most-read/${this.props.sectionName}`}
-                                    >
-                                        {(tab.trails || []).map((trail, ii) => (
-                                            <li
-                                                className={listItem}
-                                                key={trail.url}
-                                                data-link-name={`${ii +
-                                                    1} | text`}
-                                            >
-                                                <span className={bigNumber}>
-                                                    <BigNumber index={ii + 1} />
-                                                </span>
-                                                <h2 className={headlineHeader}>
-                                                    <a
-                                                        className={headlineLink}
-                                                        href={trail.url}
-                                                        data-link-name={
-                                                            'article'
-                                                        }
-                                                    >
-                                                        {trail.isLiveBlog && (
+                                                {(tab.trails || []).map(
+                                                    (trail, ii) => (
+                                                        <li
+                                                            className={listItem}
+                                                            key={trail.url}
+                                                            data-link-name={`${ii +
+                                                                1} | text`}
+                                                        >
                                                             <span
-                                                                className={liveKicker(
-                                                                    getColour(
-                                                                        trail.pillar,
-                                                                    ),
-                                                                )}
+                                                                className={
+                                                                    bigNumber
+                                                                }
                                                             >
-                                                                Live
+                                                                <BigNumber
+                                                                    index={
+                                                                        ii + 1
+                                                                    }
+                                                                />
                                                             </span>
-                                                        )}
-                                                        {trail.pillar ===
-                                                            'opinion' && (
-                                                            <QuoteIcon
-                                                                colour={getColour(
-                                                                    trail.pillar,
-                                                                )}
-                                                            />
-                                                        )}
-                                                        {trail.linkText}
-                                                        <AgeWarning
-                                                            ageWarning={
-                                                                trail.ageWarning
-                                                            }
-                                                        />
-                                                    </a>
-                                                </h2>
-                                            </li>
+                                                            <h2
+                                                                className={
+                                                                    headlineHeader
+                                                                }
+                                                            >
+                                                                <a
+                                                                    className={
+                                                                        headlineLink
+                                                                    }
+                                                                    href={
+                                                                        trail.url
+                                                                    }
+                                                                    data-link-name={
+                                                                        'article'
+                                                                    }
+                                                                >
+                                                                    {trail.isLiveBlog && (
+                                                                        <span
+                                                                            className={liveKicker(
+                                                                                getColour(
+                                                                                    trail.pillar,
+                                                                                ),
+                                                                            )}
+                                                                        >
+                                                                            Live
+                                                                        </span>
+                                                                    )}
+                                                                    {trail.pillar ===
+                                                                        'opinion' && (
+                                                                        <QuoteIcon
+                                                                            colour={getColour(
+                                                                                trail.pillar,
+                                                                            )}
+                                                                        />
+                                                                    )}
+                                                                    {
+                                                                        trail.linkText
+                                                                    }
+                                                                    <AgeWarning
+                                                                        ageWarning={
+                                                                            trail.ageWarning
+                                                                        }
+                                                                    />
+                                                                </a>
+                                                            </h2>
+                                                        </li>
+                                                    ),
+                                                )}
+                                            </ol>
                                         ))}
-                                    </ol>
-                                ))}
-                            </div>
-                        )}
-                    </AsyncClientComponent>
-                    <AdSlot
-                        asps={namedAdSlotParameters('most-popular')}
-                        config={this.props.config}
-                        className={''}
-                    />
-                </div>
+                                    </div>
+                                )}
+                            </AsyncClientComponent>
+                            <AdSlot
+                                asps={namedAdSlotParameters('most-popular')}
+                                config={this.props.config}
+                                className={''}
+                            />
+                        </div>
+                    </div>
+                </ArticleContainer>
             </div>
         );
     }

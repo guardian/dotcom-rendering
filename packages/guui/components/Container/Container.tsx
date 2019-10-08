@@ -31,16 +31,22 @@ const containerWithBorders = css`
     }
 `;
 
+const topBorder = css`
+    border-top: 1px solid ${palette.neutral[86]};
+`;
+
 export const Container: React.SFC<{
     className?: string;
     borders?: boolean;
+    showTopBorder?: boolean;
     children: React.ReactNode;
-}> = ({ className, borders, children, ...props }) => (
+}> = ({ className, borders, showTopBorder, children, ...props }) => (
     <div
         className={cx(
             container,
             className,
-            borders ? containerWithBorders : null,
+            borders && containerWithBorders,
+            showTopBorder && topBorder,
         )}
         {...props}
     >
