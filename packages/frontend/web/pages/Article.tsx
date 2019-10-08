@@ -17,11 +17,7 @@ import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
-import {
-    AdSlot,
-    AdSlotInContainer,
-    labelStyles,
-} from '@frontend/web/components/AdSlot';
+import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 
 // TODO: find a better of setting opacity
 const secondaryColumn = css`
@@ -206,28 +202,24 @@ export const Article: React.FC<{
                 </article>
             </Container>
         </main>
-        <AdSlotInContainer
-            asps={namedAdSlotParameters('merchandising-high')}
-            config={data.config}
-            className={adSlotUnspecifiedWidth}
-        />
-        <OutbrainContainer config={data.config} />
-        <Container
-            borders={true}
-            className={cx(
-                articleContainer,
-                mostPopularAdStyle,
-                css`
-                    border-top: 1px solid ${palette.neutral[86]};
-                `,
-            )}
-        >
-            <MostViewed
-                sectionName={data.CAPI.sectionName}
-                config={data.config}
-            />
-        </Container>
-
+        <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+            <OutbrainContainer config={data.config} />
+            <Container
+                borders={true}
+                className={cx(
+                    articleContainer,
+                    mostPopularAdStyle,
+                    css`
+                        border-top: 1px solid ${palette.neutral[86]};
+                    `,
+                )}
+            >
+                <MostViewed
+                    sectionName={data.CAPI.sectionName}
+                    config={data.config}
+                />
+            </Container>
+        </div>
         <SubNav
             subnav={data.NAV.subNavSections}
             pillar={data.CAPI.pillar}
