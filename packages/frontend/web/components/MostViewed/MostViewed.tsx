@@ -432,6 +432,7 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                 role="tabpanel"
                                                 aria-labelledby={`tabs-popular-${i}-tab`}
                                                 data-link-name={tab.heading}
+                                                data-testid={tab.heading}
                                                 data-link-context={`most-read/${this.props.sectionName}`}
                                             >
                                                 {(tab.trails || []).map(
