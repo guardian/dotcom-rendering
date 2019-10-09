@@ -12,7 +12,6 @@ import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 
-// TODO: find a better of setting opacity
 const secondaryColumn = css`
     position: absolute;
     top: 0;
