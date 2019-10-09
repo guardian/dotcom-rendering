@@ -5,7 +5,7 @@ import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
 import { htmlTemplate } from './htmlTemplate';
-import { Article } from '../pages/Article';
+import { DecidePage } from './DecidePage';
 import { getDist } from '@frontend/lib/assets';
 
 import { makeWindowGuardian } from '@frontend/model/window-guardian';
@@ -23,7 +23,10 @@ export const document = ({ data }: Props) => {
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <Article data={{ CAPI, NAV, config }} />
+                <DecidePage
+                    designType={CAPI.designType}
+                    data={{ CAPI, NAV, config }}
+                />
             </CacheProvider>,
         ),
     );

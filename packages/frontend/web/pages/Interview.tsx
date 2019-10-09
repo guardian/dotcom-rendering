@@ -6,7 +6,7 @@ import { Content } from '@frontend/web/components/Content';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 
-export const Article: React.FC<{
+export const Interview: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
