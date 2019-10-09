@@ -12,8 +12,8 @@ import { clearFix } from '@guardian/pasteup/mixins';
 import { Container } from '@guardian/guui';
 import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { ArticleHeader } from '@frontend/web/components/ArticleHeader';
-import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
-import { namedAdSlotParameters } from '@frontend/model/advertisement';
+import { labelStyles } from '@frontend/web/components/AdSlot';
+import { ArticleAside } from '@frontend/web/components/ArticleAside';
 
 const wrapper = css`
     padding-top: 6px;
@@ -46,33 +46,6 @@ const wrapper = css`
     ${wide} {
         margin-left: 230px;
     }
-`;
-
-const secondaryColumn = css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 20px;
-    width: 300px;
-    margin-left: 20px;
-    margin-top: 6px;
-
-    min-height: 300px;
-    display: none;
-
-    ${desktop} {
-        display: block;
-    }
-`;
-
-const adSlotWrapper = css`
-    position: static;
-    height: 1059px;
-`;
-
-const stickyAdSlot = css`
-    position: sticky;
-    top: 0;
 `;
 
 const articleContainerStyles = css`
@@ -149,15 +122,7 @@ export const Content = ({ CAPI, config }: Props) => {
                         <ArticleHeader CAPI={CAPI} config={config} />
                         <ArticleBody CAPI={CAPI} config={config} />
                     </div>
-                    <div className={secondaryColumn}>
-                        <div className={adSlotWrapper}>
-                            <AdSlot
-                                asps={namedAdSlotParameters('right')}
-                                config={config}
-                                className={stickyAdSlot}
-                            />
-                        </div>
-                    </div>
+                    <ArticleAside config={config} />
                 </article>
             </Container>
         </main>
