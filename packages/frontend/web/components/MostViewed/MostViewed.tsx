@@ -100,7 +100,7 @@ export interface TabType {
 }
 
 interface Props {
-    sectionName: string;
+    sectionName?: string;
     config: ConfigType;
     pillar: Pillar;
 }
