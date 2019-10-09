@@ -284,7 +284,7 @@ export const ArticleHeader = ({ CAPI, config }: Props) => {
                         This article is more than {` ${ageWarning}`}
                     </div>
                 )}
-                <div
+                <div // tslint:disable-line:react-no-dangerous-html
                     className={cx(standfirst, standfirstLinks[CAPI.pillar])}
                     dangerouslySetInnerHTML={{
                         __html: CAPI.standfirst,
