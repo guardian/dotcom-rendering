@@ -4,7 +4,7 @@ import { getStatic } from '@frontend/lib/assets';
 import { prepareCmpString } from '@frontend/web/browser/prepareCmp';
 
 import { WindowGuardian } from '@frontend/model/window-guardian';
-import {until} from "@root/packages/pasteup/breakpoints";
+import { until } from '@root/packages/pasteup/breakpoints';
 
 export const htmlTemplate = ({
     title = 'The Guardian',
