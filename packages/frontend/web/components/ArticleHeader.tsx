@@ -223,13 +223,13 @@ const metaExtras = css`
     }
 `;
 
-const header = css`
+const headerStyles = css`
     ${until.phablet} {
         margin: 0 -10px;
     }
 `;
 
-const section = css`
+const sectionStyles = css`
     ${leftColWidth};
     @supports (display: grid) {
         grid-template-areas: 'section';
@@ -248,8 +248,8 @@ export const ArticleHeader = ({ CAPI, config }: Props) => {
     const ageWarning = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
     return (
-        <header className={header}>
-            <div className={section}>
+        <header className={headerStyles}>
+            <div className={sectionStyles}>
                 <SeriesSectionLink CAPI={CAPI} fallbackToSection={true} />
             </div>
             <div className={headlineCSS}>
