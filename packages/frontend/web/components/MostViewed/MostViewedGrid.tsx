@@ -104,7 +104,7 @@ export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
         <div>
             {Array.isArray(data) && data.length > 1 && (
                 <ul className={tabsContainer} role="tablist">
-                    {(data || []).map((tab: TabType, i: number) => (
+                    {data.map((tab: TabType, i: number) => (
                         <li
                             className={cx(listTab, {
                                 [selectedListTab(pillar)]:
@@ -140,7 +140,7 @@ export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
                     ))}
                 </ul>
             )}
-            {(data || []).map((tab: TabType, i: number) => (
+            {data.map((tab: TabType, i: number) => (
                 <ol
                     className={cx(gridContainer, {
                         [hideList]: i !== selectedTabIndex,
