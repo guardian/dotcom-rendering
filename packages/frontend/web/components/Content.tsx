@@ -15,7 +15,7 @@ import { ArticleHeader } from '@frontend/web/components/ArticleHeader';
 import { labelStyles } from '@frontend/web/components/AdSlot';
 import { ArticleAside } from '@frontend/web/components/ArticleAside';
 
-const wrapper = css`
+const marginStyles = css`
     padding-top: 6px;
     margin-right: 0;
     margin-left: 0;
@@ -118,7 +118,7 @@ export const Content = ({ CAPI, config }: Props) => {
                 className={articleContainerStyles}
             >
                 <article className={articleAdStyles}>
-                    <div className={wrapper}>
+                    <div className={marginStyles}>
                         <ArticleHeader CAPI={CAPI} config={config} />
                         <ArticleBody CAPI={CAPI} config={config} />
                     </div>
