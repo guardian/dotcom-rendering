@@ -111,7 +111,111 @@ describe('MostViewed', () => {
         ).toBeInTheDocument();
     });
 
-    it.todo("should display the text 'Live' for live blogs");
+    it("should display the text 'Live' for live blogs", () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: true,
+                            pillar: 'news',
+                        },
+                    ],
+                },
+            ],
+        });
 
-    it.todo('should show the quote icon for comment articles');
+        const { getByText } = render(
+            <MostViewed config={config} sectionName="Section Name" />,
+        );
+
+        expect(getByText('Live')).toBeInTheDocument();
+    });
+
+    it("should NOT display the text 'Live' when isLiveBlog is false", () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: false,
+                            pillar: 'news',
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const { queryByText } = render(
+            <MostViewed config={config} sectionName="Section Name" />,
+        );
+
+        expect(queryByText('Live')).not.toBeInTheDocument();
+    });
+
+    it('should show the quote icon for comment articles', () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: false,
+                            pillar: 'opinion',
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const { getByTestId } = render(
+            <MostViewed config={config} sectionName="Section Name" />,
+        );
+
+        expect(getByTestId('quote-icon')).toBeInTheDocument();
+    });
+
+    it('should NOT show the quote icon when pillar is not opinion', () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: false,
+                            pillar: 'news',
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const { queryByTestId } = render(
+            <MostViewed config={config} sectionName="Section Name" />,
+        );
+
+        expect(queryByTestId('quote-icon')).not.toBeInTheDocument();
+    });
 });
