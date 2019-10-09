@@ -3,41 +3,49 @@ import { css } from 'emotion';
 import {
     tablet,
     desktop,
+    leftCol,
     wide,
     palette,
     mobileLandscape,
 } from '@guardian/src-foundations';
+import { clearFix } from '@guardian/pasteup/mixins';
 import { Container } from '@guardian/guui';
 import { ArticleBody } from '@frontend/web/components/ArticleBody';
-import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
-import { namedAdSlotParameters } from '@frontend/model/advertisement';
+import { ArticleHeader } from '@frontend/web/components/ArticleHeader';
+import { labelStyles } from '@frontend/web/components/AdSlot';
+import { ArticleAside } from '@frontend/web/components/ArticleAside';
 
-// TODO: find a better of setting opacity
-const secondaryColumn = css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 20px;
-    width: 300px;
-    margin-left: 20px;
-    margin-top: 6px;
-
-    min-height: 300px;
-    display: none;
+const marginStyles = css`
+    padding-top: 6px;
+    margin-right: 0;
+    margin-left: 0;
+    ${clearFix}
 
     ${desktop} {
-        display: block;
+        max-width: 620px;
+        margin-right: 310px;
+        padding-left: 10px;
     }
-`;
 
-const adSlotWrapper = css`
-    position: static;
-    height: 1059px;
-`;
+    ${leftCol} {
+        margin-left: 150px;
+        margin-right: 310px;
+        position: relative;
+        :before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            width: 1px;
+            background: ${palette.neutral[86]};
+        }
+    }
 
-const stickyAdSlot = css`
-    position: sticky;
-    top: 0;
+    ${wide} {
+        margin-left: 230px;
+    }
 `;
 
 const articleContainerStyles = css`
@@ -110,16 +118,11 @@ export const Content = ({ CAPI, config }: Props) => {
                 className={articleContainerStyles}
             >
                 <article className={articleAdStyles}>
-                    <ArticleBody CAPI={CAPI} config={config} />
-                    <div className={secondaryColumn}>
-                        <div className={adSlotWrapper}>
-                            <AdSlot
-                                asps={namedAdSlotParameters('right')}
-                                config={config}
-                                className={stickyAdSlot}
-                            />
-                        </div>
+                    <div className={marginStyles}>
+                        <ArticleHeader CAPI={CAPI} config={config} />
+                        <ArticleBody CAPI={CAPI} config={config} />
                     </div>
+                    <ArticleAside config={config} />
                 </article>
             </Container>
         </main>
