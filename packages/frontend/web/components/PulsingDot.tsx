@@ -29,6 +29,15 @@ interface Props {
     colour: string;
 }
 
-export const PulsingDot = ({ colour }: Props) => (
-    <span className={pulsingDot(colour)} />
-);
+export const PulsingDot = ({ colour }: Props) => {
+    // Respect the accessibility flag set here
+    // https://www.theguardian.com/help/accessibility-help
+    const flashingIsDisabled = !!document.getElementsByClassName(
+        'disable-flashing-elements',
+    ).length;
+    if (flashingIsDisabled) {
+        return null;
+    }
+
+    return <span className={pulsingDot(colour)} />;
+};
