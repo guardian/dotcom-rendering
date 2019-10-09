@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 import { textSans, headline, palette } from '@guardian/src-foundations';
 import {
@@ -11,7 +11,6 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { Container, BigNumber } from '@guardian/guui';
-import { AsyncClientComponent } from '../lib/AsyncClientComponent';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
@@ -19,6 +18,8 @@ import { PulsingDot } from '@frontend/web/components/PulsingDot';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
+
+import { useApi } from '@frontend/web/components/lib/api';
 
 const container = css`
     padding-top: 3px;
@@ -325,238 +326,161 @@ interface Props {
     config: ConfigType;
 }
 
-export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            selectedTabIndex: 0,
-        };
-    }
+function buildSectionUrl(sectionName?: string) {
+    const sectionsWithoutPopular = ['info', 'global'];
+    const hasSection =
+        sectionName && !sectionsWithoutPopular.includes(sectionName);
+    const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
 
-    public tabSelected(index: number) {
-        this.setState({
-            selectedTabIndex: index,
-        });
-    }
+    return `https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`;
+}
 
-    public render() {
-        const { config } = this.props;
-        return (
-            <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
-                <OutbrainContainer config={config} />
-                <Container
-                    borders={true}
-                    showTopBorder={true}
-                    className={cx(articleContainerStyles)}
-                >
-                    <div
-                        className={cx(container, mostPopularAdStyle)}
-                        data-link-name={'most-viewed'}
-                        data-component={'most-viewed'}
-                    >
-                        <h2 className={heading}>Most popular</h2>
-                        <div className={mostPopularBody}>
-                            <AsyncClientComponent f={this.fetchTrails}>
-                                {({ data }) => (
-                                    <div className={listContainer}>
-                                        {Array.isArray(data) &&
-                                            data.length > 1 && (
-                                                <ul
-                                                    className={tabsContainer}
-                                                    role="tablist"
-                                                >
-                                                    {(data || []).map(
-                                                        (tab, i) => (
-                                                            <li
-                                                                className={cx(
-                                                                    listTab,
-                                                                    {
-                                                                        [selectedListTab]:
-                                                                            i ===
-                                                                            this
-                                                                                .state
-                                                                                .selectedTabIndex,
-                                                                    },
-                                                                )}
-                                                                role="tab"
-                                                                aria-selected={
-                                                                    i ===
-                                                                    this.state
-                                                                        .selectedTabIndex
-                                                                }
-                                                                aria-controls={`tabs-popular-${i}`}
-                                                                id={`tabs-popular-${i}-tab`}
-                                                                key={`tabs-popular-${i}-tab`}
-                                                            >
-                                                                <button
-                                                                    className={
-                                                                        tabButton
-                                                                    }
-                                                                    onClick={() =>
-                                                                        this.tabSelected(
-                                                                            i,
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    <span
-                                                                        className={css`
-                                                                            ${screenReaderOnly};
-                                                                        `}
-                                                                    >
-                                                                        Most
-                                                                        viewed{' '}
-                                                                    </span>
-                                                                    <span // tslint:disable-line:react-no-dangerous-html
-                                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
-                                                                        dangerouslySetInnerHTML={{
-                                                                            __html:
-                                                                                tab.heading,
-                                                                        }}
-                                                                    />
-                                                                </button>
-                                                            </li>
-                                                        ),
-                                                    )}
-                                                </ul>
-                                            )}
-                                        {(data || []).map((tab, i) => (
-                                            <ol
-                                                className={cx(list, {
-                                                    [hideList]:
-                                                        i !==
-                                                        this.state
-                                                            .selectedTabIndex,
-                                                })}
-                                                id={`tabs-popular-${i}`}
-                                                key={`tabs-popular-${i}`}
-                                                role="tabpanel"
-                                                aria-labelledby={`tabs-popular-${i}-tab`}
-                                                data-link-name={tab.heading}
-                                                data-testid={tab.heading}
-                                                data-link-context={`most-read/${this.props.sectionName}`}
-                                            >
-                                                {(tab.trails || []).map(
-                                                    (trail, ii) => (
-                                                        <li
-                                                            className={listItem}
-                                                            key={trail.url}
-                                                            data-link-name={`${ii +
-                                                                1} | text`}
-                                                        >
-                                                            <span
-                                                                className={
-                                                                    bigNumber
-                                                                }
-                                                            >
-                                                                <BigNumber
-                                                                    index={
-                                                                        ii + 1
-                                                                    }
-                                                                />
-                                                            </span>
-                                                            <h2
-                                                                className={
-                                                                    headlineHeader
-                                                                }
-                                                            >
-                                                                <a
-                                                                    className={
-                                                                        headlineLink
-                                                                    }
-                                                                    href={
-                                                                        trail.url
-                                                                    }
-                                                                    data-link-name={
-                                                                        'article'
-                                                                    }
-                                                                >
-                                                                    {trail.isLiveBlog && (
-                                                                        <span
-                                                                            className={liveKicker(
-                                                                                getColour(
-                                                                                    trail.pillar,
-                                                                                ),
-                                                                            )}
-                                                                        >
-                                                                            <PulsingDot
-                                                                                colour={getColour(
-                                                                                    trail.pillar,
-                                                                                )}
-                                                                            />
-                                                                            Live
-                                                                        </span>
-                                                                    )}
-                                                                    {trail.pillar ===
-                                                                        'opinion' && (
-                                                                        <QuoteIcon
-                                                                            colour={getColour(
-                                                                                trail.pillar,
-                                                                            )}
-                                                                        />
-                                                                    )}
-                                                                    {
-                                                                        trail.linkText
-                                                                    }
-                                                                    <AgeWarning
-                                                                        ageWarning={
-                                                                            trail.ageWarning
-                                                                        }
-                                                                    />
-                                                                </a>
-                                                            </h2>
-                                                        </li>
-                                                    ),
-                                                )}
-                                            </ol>
-                                        ))}
-                                    </div>
-                                )}
-                            </AsyncClientComponent>
-                            <AdSlot
-                                asps={namedAdSlotParameters('most-popular')}
-                                config={this.props.config}
-                                className={''}
-                            />
-                        </div>
-                    </div>
-                </Container>
-            </div>
+export const MostViewed = ({ config, sectionName }: Props) => {
+    const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
+
+    const url = buildSectionUrl(sectionName);
+    const { data, error } = useApi(url);
+
+    if (error) {
+        window.guardian.modules.raven.reportError(
+            error,
+            {
+                feature: 'most-viewed',
+            },
+            true,
         );
     }
 
-    public fetchTrails: () => Promise<Tab[]> = () => {
-        const sectionsWithoutPopular = ['info', 'global'];
-        const hasSection =
-            this.props.sectionName &&
-            !sectionsWithoutPopular.includes(this.props.sectionName);
-        const endpoint = `/most-read${
-            hasSection ? `/${this.props.sectionName}` : ''
-        }.json`;
-        return new Promise((resolve, reject) => {
-            fetch(`https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`)
-                .then(response => {
-                    if (!response.ok) {
-                        resolve([]);
-                    }
-                    return response.json();
-                })
-                .then(mostRead => {
-                    if (Array.isArray(mostRead)) {
-                        resolve(mostRead);
-                    }
-                    resolve([]);
-                })
-                .catch(err => {
-                    window.guardian.modules.raven.reportError(
-                        err,
-                        {
-                            feature: 'most-viewed',
-                        },
-                        true,
-                    );
-
-                    return resolve([]);
-                });
-        });
-    };
-}
+    return (
+        <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+            <OutbrainContainer config={config} />
+            <Container borders={true} className={cx(articleContainerStyles)}>
+                <div
+                    className={cx(container, mostPopularAdStyle)}
+                    data-link-name={'most-viewed'}
+                    data-component={'most-viewed'}
+                >
+                    <h2 className={heading}>Most popular</h2>
+                    <div className={mostPopularBody}>
+                        <div className={listContainer}>
+                            {Array.isArray(data) && data.length > 1 && (
+                                <ul className={tabsContainer} role="tablist">
+                                    {(data || []).map((tab: Tab, i: number) => (
+                                        <li
+                                            className={cx(listTab, {
+                                                [selectedListTab]:
+                                                    i === selectedTabIndex,
+                                            })}
+                                            role="tab"
+                                            aria-selected={
+                                                i === selectedTabIndex
+                                            }
+                                            aria-controls={`tabs-popular-${i}`}
+                                            id={`tabs-popular-${i}-tab`}
+                                            key={`tabs-popular-${i}-tab`}
+                                        >
+                                            <button
+                                                className={tabButton}
+                                                onClick={() =>
+                                                    setSelectedTabIndex(i)
+                                                }
+                                            >
+                                                <span
+                                                    className={css`
+                                                        ${screenReaderOnly};
+                                                    `}
+                                                >
+                                                    Most viewed{' '}
+                                                </span>
+                                                <span // tslint:disable-line:react-no-dangerous-html
+                                                    // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: tab.heading,
+                                                    }}
+                                                />
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            {(data || []).map((tab, i) => (
+                                <ol
+                                    className={cx(list, {
+                                        [hideList]: i !== selectedTabIndex,
+                                    })}
+                                    id={`tabs-popular-${i}`}
+                                    key={`tabs-popular-${i}`}
+                                    role="tabpanel"
+                                    aria-labelledby={`tabs-popular-${i}-tab`}
+                                    data-link-name={tab.heading}
+                                    data-testid={tab.heading}
+                                    data-link-context={`most-read/${sectionName}`}
+                                >
+                                    {(tab.trails || []).map(
+                                        (trail: Trail, ii: number) => (
+                                            <li
+                                                className={listItem}
+                                                key={trail.url}
+                                                data-link-name={`${ii +
+                                                    1} | text`}
+                                            >
+                                                <span className={bigNumber}>
+                                                    <BigNumber index={ii + 1} />
+                                                </span>
+                                                <h2 className={headlineHeader}>
+                                                    <a
+                                                        className={headlineLink}
+                                                        href={trail.url}
+                                                        data-link-name={
+                                                            'article'
+                                                        }
+                                                    >
+                                                        {trail.isLiveBlog && (
+                                                            <span
+                                                                className={liveKicker(
+                                                                    getColour(
+                                                                        trail.pillar,
+                                                                    ),
+                                                                )}
+                                                            >
+                                                                <PulsingDot
+                                                                    colour={getColour(
+                                                                        trail.pillar,
+                                                                    )}
+                                                                />
+                                                                Live
+                                                            </span>
+                                                        )}
+                                                        {trail.pillar ===
+                                                            'opinion' && (
+                                                            <QuoteIcon
+                                                                colour={getColour(
+                                                                    trail.pillar,
+                                                                )}
+                                                            />
+                                                        )}
+                                                        {trail.linkText}
+                                                        <AgeWarning
+                                                            ageWarning={
+                                                                trail.ageWarning
+                                                            }
+                                                        />
+                                                    </a>
+                                                </h2>
+                                            </li>
+                                        ),
+                                    )}
+                                </ol>
+                            ))}
+                        </div>
+                        <AdSlot
+                            asps={namedAdSlotParameters('most-popular')}
+                            config={config}
+                            className={''}
+                        />
+                    </div>
+                </div>
+            </Container>
+        </div>
+    );
+};
