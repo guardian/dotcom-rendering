@@ -308,7 +308,7 @@ const AgeWarning: React.FC<{
     );
 };
 
-interface Trail {
+interface TrailType {
     url: string;
     linkText: string;
     isLiveBlog: boolean;
@@ -316,9 +316,9 @@ interface Trail {
     pillar: Pillar;
 }
 
-interface Tab {
+interface TabType {
     heading: string;
-    trails: Trail[];
+    trails: TrailType[];
 }
 
 interface Props {
@@ -365,45 +365,47 @@ export const MostViewed = ({ config, sectionName }: Props) => {
                         <div className={listContainer}>
                             {Array.isArray(data) && data.length > 1 && (
                                 <ul className={tabsContainer} role="tablist">
-                                    {(data || []).map((tab: Tab, i: number) => (
-                                        <li
-                                            className={cx(listTab, {
-                                                [selectedListTab]:
-                                                    i === selectedTabIndex,
-                                            })}
-                                            role="tab"
-                                            aria-selected={
-                                                i === selectedTabIndex
-                                            }
-                                            aria-controls={`tabs-popular-${i}`}
-                                            id={`tabs-popular-${i}-tab`}
-                                            key={`tabs-popular-${i}-tab`}
-                                        >
-                                            <button
-                                                className={tabButton}
-                                                onClick={() =>
-                                                    setSelectedTabIndex(i)
+                                    {(data || []).map(
+                                        (tab: TabType, i: number) => (
+                                            <li
+                                                className={cx(listTab, {
+                                                    [selectedListTab]:
+                                                        i === selectedTabIndex,
+                                                })}
+                                                role="tab"
+                                                aria-selected={
+                                                    i === selectedTabIndex
                                                 }
+                                                aria-controls={`tabs-popular-${i}`}
+                                                id={`tabs-popular-${i}-tab`}
+                                                key={`tabs-popular-${i}-tab`}
                                             >
-                                                <span
-                                                    className={css`
-                                                        ${screenReaderOnly};
-                                                    `}
+                                                <button
+                                                    className={tabButton}
+                                                    onClick={() =>
+                                                        setSelectedTabIndex(i)
+                                                    }
                                                 >
-                                                    Most viewed{' '}
-                                                </span>
-                                                <span // tslint:disable-line:react-no-dangerous-html
-                                                    // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: tab.heading,
-                                                    }}
-                                                />
-                                            </button>
-                                        </li>
-                                    ))}
+                                                    <span
+                                                        className={css`
+                                                            ${screenReaderOnly};
+                                                        `}
+                                                    >
+                                                        Most viewed{' '}
+                                                    </span>
+                                                    <span // tslint:disable-line:react-no-dangerous-html
+                                                        // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: tab.heading,
+                                                        }}
+                                                    />
+                                                </button>
+                                            </li>
+                                        ),
+                                    )}
                                 </ul>
                             )}
-                            {(data || []).map((tab, i) => (
+                            {(data || []).map((tab: TabType, i: number) => (
                                 <ol
                                     className={cx(list, {
                                         [hideList]: i !== selectedTabIndex,
@@ -417,7 +419,7 @@ export const MostViewed = ({ config, sectionName }: Props) => {
                                     data-link-context={`most-read/${sectionName}`}
                                 >
                                     {(tab.trails || []).map(
-                                        (trail: Trail, ii: number) => (
+                                        (trail: TrailType, ii: number) => (
                                             <li
                                                 className={listItem}
                                                 key={trail.url}
