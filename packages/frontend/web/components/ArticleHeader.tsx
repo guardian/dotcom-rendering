@@ -227,6 +227,25 @@ const headerStyles = css`
     ${until.phablet} {
         margin: 0 -10px;
     }
+
+    display: flex;
+    flex-direction: column;
+
+    ${leftCol} {
+        @supports (display: grid) {
+            display: grid;
+            grid-template-areas: 'section headline' 'meta main-media';
+            grid-template-columns: 160px 1fr;
+            margin-left: -160px;
+        }
+    }
+
+    ${wide} {
+        @supports (display: grid) {
+            grid-template-columns: 240px 1fr;
+            margin-left: -240px;
+        }
+    }
 `;
 
 const sectionStyles = css`
