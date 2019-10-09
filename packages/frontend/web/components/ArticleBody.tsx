@@ -34,29 +34,6 @@ const pillarColours = pillarMap(
 //         `,
 // );
 
-const listStyles = css`
-    li {
-        ${textSans(5)};
-        margin-bottom: 6px;
-        padding-left: 20px;
-
-        p {
-            display: inline;
-        }
-    }
-
-    li:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
-        background-color: ${palette.neutral[86]};
-        margin-left: -20px;
-    }
-`;
-
 const guardianLines = css`
     background-image: repeating-linear-gradient(
         to bottom,
@@ -114,7 +91,26 @@ const bodyStyle = css`
         }
     }
 
-    ${listStyles};
+    li {
+        ${textSans(5)};
+        margin-bottom: 6px;
+        padding-left: 20px;
+
+        p {
+            display: inline;
+        }
+    }
+
+    li:before {
+        display: inline-block;
+        content: '';
+        border-radius: 6px;
+        height: 12px;
+        width: 12px;
+        margin-right: 8px;
+        background-color: ${palette.neutral[86]};
+        margin-left: -20px;
+    }
 `;
 
 const immersiveBodyStyle = css`

@@ -26,7 +26,12 @@ import { SharingIcons } from './ShareIcons';
 
 const curly = (x: any) => x;
 
-const listStyles = css`
+const standfirst = css`
+    ${body(2)};
+    font-weight: 700;
+    color: ${palette.neutral[7]};
+    margin-bottom: 12px;
+
     li {
         ${textSans(5)};
         margin-bottom: 6px;
@@ -47,15 +52,6 @@ const listStyles = css`
         background-color: ${palette.neutral[86]};
         margin-left: -20px;
     }
-`;
-
-const standfirst = css`
-    ${body(2)};
-    font-weight: 700;
-    color: ${palette.neutral[7]};
-    margin-bottom: 12px;
-
-    ${listStyles};
 
     p {
         margin-bottom: 8px;
