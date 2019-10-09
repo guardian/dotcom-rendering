@@ -4,13 +4,15 @@ import React from 'react';
 import { Contributor } from 'types/Capi';
 import { isSingleContributor } from 'utils/capi';
 import { css, SerializedStyles } from '@emotion/core';
-
+import { transformUrl } from 'utils/Asset';
 
 // ----- Styles ----- //
 
+const imageWidth = 68;
+
 const AvatarStyles = (bgColour: string): SerializedStyles => css`
-    width: 68px;
-    height: 68px;
+    width: ${imageWidth}px;
+    height: ${imageWidth}px;
     background-color: ${bgColour};
     border-radius: 100%;
     float: left;
@@ -31,16 +33,18 @@ const AvatarStyles = (bgColour: string): SerializedStyles => css`
 interface AvatarProps {
     contributors: Contributor[];
     bgColour: string;
+    imageSalt: string;
 }
 
-function Avatar({ contributors, bgColour }: AvatarProps): JSX.Element | null {
+function Avatar({ contributors, bgColour, imageSalt }: AvatarProps): JSX.Element | null {
 
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl) {
+        const imgSrc = transformUrl(imageSalt, contributor.bylineLargeImageUrl, imageWidth*3);
         return (
             <div css={AvatarStyles(bgColour)}>
-                <img src={contributor.bylineLargeImageUrl} alt={contributor.webTitle}/>
+                <img src={imgSrc} alt={contributor.webTitle}/>
             </div>
         );
     }

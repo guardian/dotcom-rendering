@@ -68,7 +68,8 @@ function checkForUnsupportedContent(capi: any): Result<string, void> {
 
 }
 
-const isMainImage = (elem: any) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isMainImage = (elem: any): boolean =>
   elem.relation === 'main' && elem.type === 'image';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
