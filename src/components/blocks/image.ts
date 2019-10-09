@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import * as Asset from 'utils/Asset';
-
+import * as AssetUtils from 'utils/Asset';
+import { Asset } from 'types/v1_types';
 
 // ----- Setup ----- //
 
@@ -18,15 +18,15 @@ interface Image {
 
 // ----- Functions ----- //
 
-const imageElement = (image: Image, assets: Asset.Asset[], salt: string): React.ReactNode =>
+const imageElement = (image: Image, assets: Asset[], salt: string): React.ReactNode =>
     h('img', {
         sizes: '100%',
-        srcSet: Asset.toSrcset(salt, assets).withDefault(''),
+        srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
         alt: image.alt,
-        src: Asset.toUrl(salt, assets[0]),
+        src: AssetUtils.toUrl(salt, assets[0]),
     });
 
-function imageBlock(image: Image, assets: Asset.Asset[], salt: string): React.ReactNode {
+function imageBlock(image: Image, assets: Asset[], salt: string): React.ReactNode {
 
     const caption = image.displayCredit ? `${image.caption} ${image.credit}` : image.caption;
 

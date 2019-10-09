@@ -3,23 +3,9 @@
 import { createHash } from 'crypto';
 
 import { Option, fromNullable } from 'types/Option';
-
+import { Asset } from 'types/v1_types';
 
 // ----- Types ----- //
-
-interface AssetTypeData {
-    altText: string;
-    caption: string;
-    credit: string;
-    width: number;
-    height: number;
-    isMaster?: boolean;
-}
-
-interface Asset {
-    file: string;
-    typeData: AssetTypeData;
-}
 
 type Url = string;
 
@@ -100,7 +86,6 @@ const toUrl = (salt: string, asset: Asset): Url =>
 // ----- Exports ----- //
 
 export {
-    Asset,
     toSrcset,
     toUrl,
 };

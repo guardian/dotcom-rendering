@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
+import { Asset } from 'types/v1_types';
 
 const headerImageStyles = css`
     position: relative;
@@ -12,19 +13,6 @@ const headerImageStyles = css`
 
     margin-bottom: 8px;
 `;
-
-export interface Asset {
-    file: string;
-    typeData: AssetTypeData;
-}
-
-interface AssetTypeData {
-    altText: string;
-    caption: string;
-    credit: string;
-    width: number;
-    height: number;
-}
 
 interface HeaderImageProps {
     assets: Asset[] | null;

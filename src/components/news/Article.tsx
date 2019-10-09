@@ -8,8 +8,8 @@ import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 import Tags from '../shared/Tags';
 
-import { Series, Tag, Contributor, Block } from '../../types/Capi';
-import { Asset } from 'utils/Asset';
+import { Series, Contributor } from '../../types/Capi';
+import { Tag, Asset } from 'types/v1_types';
 import { PillarId, PillarStyles, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
@@ -27,7 +27,7 @@ export interface ArticleProps {
     pillarStyles: PillarStyles;
     contributors: Contributor[];
     series: Series;
-    bodyElements: Block[];
+    bodyElements: any;
     imageSalt: string;
 }
 

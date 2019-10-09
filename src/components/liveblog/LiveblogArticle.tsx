@@ -10,8 +10,8 @@ import HeaderImage from '../shared/HeaderImage';
 import Tags from '../shared/Tags';
 
 import { PillarStyles, PillarId } from '../../styles';
-import { Series, Tag, Contributor, Block } from '../../types/Capi';
-import { Asset } from 'utils/Asset';
+import { Series, Contributor } from '../../types/Capi';
+import { Tag, Asset } from 'types/v1_types';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 
@@ -31,7 +31,7 @@ interface LiveblogArticleProps {
     pillarStyles: PillarStyles;
     contributors: Contributor[];
     series: Series;
-    bodyElements: Block[];
+    bodyElements: any;
     isLive: boolean;
     imageSalt: string;
 }

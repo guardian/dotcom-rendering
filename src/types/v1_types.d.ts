@@ -3,7 +3,24 @@
 //
 // DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 //
+/* tslint:disable */
+/* eslint-disable */
 
+
+export declare enum TagType {
+  CONTRIBUTOR = 'contributor',
+  KEYWORD = 'keyword',
+  SERIES = 'series',
+  NEWSPAPER_BOOK_SECTION = 'newspaper_book_section',
+  NEWSPAPER_BOOK = 'newspaper_book',
+  BLOG = 'blog',
+  TONE = 'tone',
+  TYPE = 'type',
+  PUBLICATION = 'publication',
+  TRACKING = 'tracking',
+  PAID_CONTENT = 'paid_content',
+  CAMPAIGN = 'campaign',
+}
 
 declare enum ContentType {
   ARTICLE = 0,
@@ -39,21 +56,6 @@ declare enum ElementType {
   VINE = 19,
 }
 
-declare enum TagType {
-  CONTRIBUTOR = 0,
-  KEYWORD = 1,
-  SERIES = 2,
-  NEWSPAPER_BOOK_SECTION = 3,
-  NEWSPAPER_BOOK = 4,
-  BLOG = 5,
-  TONE = 6,
-  TYPE = 7,
-  PUBLICATION = 8,
-  TRACKING = 9,
-  PAID_CONTENT = 10,
-  CAMPAIGN = 11,
-}
-
 declare enum CrosswordType {
   QUICK = 0,
   CRYPTIC = 1,
@@ -72,11 +74,11 @@ declare enum Office {
 }
 
 declare enum AssetType {
-  IMAGE = 0,
-  VIDEO = 1,
-  AUDIO = 2,
-  EMBED = 3,
-  TWEET = 4,
+  IMAGE = 'image',
+  VIDEO = 'video',
+  AUDIO = 'audio',
+  EMBED = 'embed',
+  TWEET = 'tweet',
 }
 
 declare enum MembershipTier {
@@ -90,7 +92,7 @@ declare enum SponsorshipType {
   PAID_CONTENT = 2,
 }
 
-declare class CapiDateTime {
+export declare class CapiDateTime {
   dateTime: number;
   iso8601: string;
 
@@ -177,7 +179,7 @@ declare class AssetFields {
     constructor(args?: { aspectRatio?: string; altText?: string; isInappropriateForAdverts?: boolean; caption?: string; credit?: string; embeddable?: boolean; photographer?: string; source?: string; stillImageUrl?: string; width?: number; height?: number; name?: string; secureFile?: string; isMaster?: boolean; sizeInBytes?: number; durationMinutes?: number; durationSeconds?: number; displayCredit?: boolean; thumbnailUrl?: string; role?: string; mediaId?: string; iframeUrl?: string; scriptName?: string; scriptUrl?: string; blockAds?: boolean; html?: string; embedType?: string; explicit?: boolean; clean?: boolean; thumbnailImageUrl?: string; linkText?: string; linkPrefix?: string; shortUrl?: string; imageType?: string; suppliersReference?: string; mediaApiUri?: string; copyright?: string; mimeType?: string; url?: string; originalUrl?: string; id?: string; attribution?: string; description?: string; title?: string; contentAuthSystem?: string; alt?: string; picdarUrn?: string; comment?: string; witnessEmbedType?: string; authorName?: string; authorUsername?: string; authorWitnessProfileUrl?: string; authorGuardianProfileUrl?: string; apiUrl?: string; dateCreated?: CapiDateTime; youtubeUrl?: string; youtubeSource?: string; youtubeTitle?: string; youtubeDescription?: string; youtubeAuthorName?: string; youtubeHtml?: string; venue?: string; location?: string; identifier?: string; price?: string; start?: CapiDateTime; safeEmbedCode?: boolean; });
 }
 
-declare class Asset {
+export declare class Asset {
   type: AssetType;
   mimeType: string;
   file: string;
@@ -498,17 +500,17 @@ declare class User {
     constructor(args?: { email: string; firstName?: string; lastName?: string; });
 }
 
-declare class Block {
+export declare class Block {
   id: string;
   bodyHtml: string;
   bodyTextSummary: string;
   title: string;
   attributes: BlockAttributes;
   published: boolean;
-  createdDate: CapiDateTime;
-  firstPublishedDate: CapiDateTime;
-  publishedDate: CapiDateTime;
-  lastModifiedDate: CapiDateTime;
+  createdDate: Date;
+  firstPublishedDate: Date;
+  publishedDate: Date;
+  lastModifiedDate: Date;
   contributors: string[];
   createdBy: User;
   lastModifiedBy: User;
@@ -677,7 +679,7 @@ declare class Podcast {
     constructor(args?: { linkUrl: string; copyright: string; author: string; subscriptionUrl?: string; explicit: boolean; image?: string; categories?: PodcastCategory[]; podcastType?: string; googlePodcastsUrl?: string; spotifyUrl?: string; });
 }
 
-declare class Tag {
+export declare class Tag {
   id: string;
   type: TagType;
   sectionId: string;

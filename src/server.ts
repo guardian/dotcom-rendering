@@ -10,7 +10,7 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/Result';
-import { Tag } from 'types/Capi';
+import { Tag } from 'types/v1_types';
 import Article, { ArticleProps } from 'components/news/Article';
 import LiveblogArticle from 'components/liveblog/LiveblogArticle';
 import { getPillarStyles } from 'styles';

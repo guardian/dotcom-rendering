@@ -3,7 +3,8 @@ import { PillarStyles, bulletStyles, commonArticleStyles } from '../../styles';
 import LiveblogBlock from './LiveblogBlock';
 import LiveblogLoadMore from './LiveblogLoadMore';
 import { render } from 'renderBlocks';
-import { Block } from 'types/Capi';
+import { Block } from 'types/v1_types';
+
 import { css, SerializedStyles } from '@emotion/core'
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
@@ -19,7 +20,7 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 
 interface LiveblogBodyProps {
     pillarStyles: PillarStyles;
-    bodyElements: Block[];
+    bodyElements: any;
     imageSalt: string;
 }
 
