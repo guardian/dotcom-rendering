@@ -161,7 +161,7 @@ export const ArticleBody: React.FC<{
     const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
     return (
-        <>
+        <div>
             <div
                 className={cx(bodyStyle, linkColour[CAPI.pillar], {
                     [immersiveBodyStyle]: CAPI.isImmersive,
@@ -214,6 +214,6 @@ export const ArticleBody: React.FC<{
                     />
                 )}
             </div>
-        </>
+        </div>
     );
 };
