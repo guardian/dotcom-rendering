@@ -1,57 +1,43 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 import { headline, palette } from '@guardian/src-foundations';
-import { tablet, leftCol, wide, phablet } from '@guardian/pasteup/breakpoints';
+import { tablet, leftCol, phablet } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { TabType, TrailType } from './MostViewed';
 import { MostViewedItem } from './MostViewedItem';
 
-const listContainer = css`
-    max-width: 460px;
-
-    ${leftCol} {
-        margin-left: 160px;
-    }
-
-    ${wide} {
-        margin-left: 230px;
-    }
-`;
-
-const list = css`
-    margin-top: 12px;
-
-    ${tablet} {
-        border-top: 1px solid ${palette.neutral[86]};
-        width: 620px;
-        min-height: 300px;
-        column-width: 300px;
-        column-gap: 20px;
-        column-fill: balance;
-        column-count: 2;
-    }
-`;
+const thinGreySolid = `1px solid ${palette.neutral[86]}`;
 
 const hideList = css`
     display: none;
 `;
 
 const tabsContainer = css`
-    border-bottom: 1px solid ${palette.neutral[86]};
+    display: flex;
+    position: relative;
+    border-top: ${thinGreySolid};
 
-    &::after {
-        content: '';
-        display: block;
-        clear: left;
-
-        ${tablet} {
-            display: none;
-        }
-    }
-
-    ${tablet} {
+    ${leftCol} {
         border-bottom: 0;
+        border-top: 0;
+    }
+`;
+
+const firstTab = css`
+    border-right: ${thinGreySolid};
+`;
+
+const selectedListTab = (pillar: Pillar) => css`
+    /* TODO: Using a pseudo selector here could be faster? */
+    box-shadow: inset 0px 4px 0px 0px ${pillar && palette[pillar].main};
+    transition: box-shadow 0.3s ease-in-out;
+`;
+
+const unselectedListTab = css`
+    &:hover {
+        box-shadow: inset 0px 4px 0px 0px ${palette.neutral[86]};
+        transition: box-shadow 0.3s ease-in-out;
     }
 `;
 
@@ -64,10 +50,6 @@ const listTab = css`
     ${phablet} {
         width: 230px;
     }
-`;
-
-const selectedListTab = css`
-    background-color: ${palette.neutral[100]};
 `;
 
 const tabButton = css`
@@ -90,22 +72,45 @@ const tabButton = css`
     }
 `;
 
+const gridContainer = css`
+    display: grid;
+    grid-auto-flow: column;
+
+    /* One column view */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+
+    /* Two column view */
+    ${tablet} {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
+    }
+
+    /* We set left border on the grid container, and then right border on
+    the gridItems to prevent borders doubling up */
+    border-left: 1px solid ${palette.neutral[86]};
+`;
+
 type Props = {
     data: TabType[];
     sectionName?: string;
+    pillar: Pillar;
 };
 
-export const MostViewedGrid = ({ data, sectionName }: Props) => {
+export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
     const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 
     return (
-        <div className={listContainer}>
+        <div>
             {Array.isArray(data) && data.length > 1 && (
                 <ul className={tabsContainer} role="tablist">
                     {(data || []).map((tab: TabType, i: number) => (
                         <li
                             className={cx(listTab, {
-                                [selectedListTab]: i === selectedTabIndex,
+                                [selectedListTab(pillar)]:
+                                    i === selectedTabIndex,
+                                [unselectedListTab]: i !== selectedTabIndex,
+                                [firstTab]: i === 0,
                             })}
                             role="tab"
                             aria-selected={i === selectedTabIndex}
@@ -137,7 +142,7 @@ export const MostViewedGrid = ({ data, sectionName }: Props) => {
             )}
             {(data || []).map((tab: TabType, i: number) => (
                 <ol
-                    className={cx(list, {
+                    className={cx(gridContainer, {
                         [hideList]: i !== selectedTabIndex,
                     })}
                     id={`tabs-popular-${i}`}

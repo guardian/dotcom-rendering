@@ -15,18 +15,40 @@ import { useApi } from '@frontend/web/components/lib/api';
 
 import { MostViewedGrid } from './MostViewedGrid';
 
-const container = css`
-    padding-top: 3px;
+const stackBelow = (breakpoint: string) => css`
+    display: flex;
+    flex-direction: column;
 
-    ${desktop} {
-        padding-top: 6px;
+    ${breakpoint} {
+        flex-direction: row;
     }
 `;
 
-const mostPopularBody = css`
-    ${desktop} {
-        display: flex;
-        justify-content: space-between;
+const asideWidth = css`
+    ${leftCol} {
+        width: 363px;
+    }
+
+    ${wide} {
+        width: 510px;
+    }
+`;
+
+const headingStyles = css`
+    ${headline({ level: 4 })};
+    color: ${palette.neutral[7]};
+    font-weight: 900;
+    padding-right: 5px;
+    padding-bottom: 14px;
+    padding-top: 3px;
+
+    ${leftCol} {
+        ${headline({ level: 3 })};
+        font-weight: 900;
+    }
+
+    ${wide} {
+        font-weight: 900;
     }
 `;
 
@@ -37,34 +59,6 @@ const articleContainerStyles = css`
 
     ${mobileLandscape} {
         padding: 0 20px;
-    }
-`;
-
-const heading = css`
-    ${headline({ level: 2 })};
-    color: ${palette.neutral[7]};
-    font-weight: 900;
-    padding-right: 5px;
-    padding-bottom: 4px;
-
-    ${leftCol} {
-        width: 140px;
-        position: relative;
-
-        :after {
-            content: '';
-            display: block;
-            position: absolute;
-            height: 30px;
-            width: 1px;
-            background-color: ${palette.neutral[86]};
-            right: -11px;
-            top: -6px;
-        }
-    }
-
-    ${wide} {
-        width: 220px;
     }
 `;
 
@@ -108,6 +102,7 @@ export interface TabType {
 interface Props {
     sectionName: string;
     config: ConfigType;
+    pillar: Pillar;
 }
 
 function buildSectionUrl(sectionName?: string) {
@@ -119,7 +114,7 @@ function buildSectionUrl(sectionName?: string) {
     return `https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`;
 }
 
-export const MostViewed = ({ config, sectionName }: Props) => {
+export const MostViewed = ({ config, sectionName, pillar }: Props) => {
     const url = buildSectionUrl(sectionName);
     const { data, error } = useApi<TabType[]>(url);
 
@@ -139,25 +134,35 @@ export const MostViewed = ({ config, sectionName }: Props) => {
                 <OutbrainContainer config={config} />
                 <Container
                     borders={true}
+                    showTopBorder={true}
                     className={cx(articleContainerStyles)}
                 >
                     <div
-                        className={cx(container, mostPopularAdStyle)}
+                        className={cx(stackBelow(leftCol), mostPopularAdStyle)}
                         data-link-name={'most-viewed'}
                         data-component={'most-viewed'}
                     >
-                        <h2 className={heading}>Most popular</h2>
-                        <div className={mostPopularBody}>
+                        <section className={asideWidth}>
+                            <h2 className={headingStyles}>Most popular</h2>
+                        </section>
+                        <section className={stackBelow(desktop)}>
                             <MostViewedGrid
                                 data={data}
                                 sectionName={sectionName}
+                                pillar={pillar}
                             />
-                            <AdSlot
-                                asps={namedAdSlotParameters('most-popular')}
-                                config={config}
-                                className={''}
-                            />
-                        </div>
+                            <div
+                                className={css`
+                                    margin: 0.375rem 0 0 0.625rem;
+                                `}
+                            >
+                                <AdSlot
+                                    asps={namedAdSlotParameters('most-popular')}
+                                    config={config}
+                                    className={''}
+                                />
+                            </div>
+                        </section>
                     </div>
                 </Container>
             </div>

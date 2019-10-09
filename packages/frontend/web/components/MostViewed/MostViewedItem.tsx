@@ -1,81 +1,50 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import {
-    desktop,
-    tablet,
-    textSans,
-    headline,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, headline, palette, until } from '@guardian/src-foundations';
 import { BigNumber } from '@guardian/guui';
 import { PulsingDot } from '@frontend/web/components/PulsingDot';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
-import { pillarPalette } from '@frontend/lib/pillars';
 
 import { TrailType } from './MostViewed';
 
-const listItem = css`
+const gridItem = (position: number) => css`
     position: relative;
-    box-sizing: border-box;
-    padding-top: 4px;
-    padding-bottom: 24px;
 
-    &:before {
-        position: absolute;
-        top: 0;
-        right: 10px;
-        left: 0;
-        content: '';
-        display: block;
-        width: 100%;
-        height: 1px;
-        background-color: ${palette.neutral[86]};
+    ${until.leftCol} {
+        /* Below leftCol always set top border */
+        border-top: 1px solid ${palette.neutral[86]};
+    }
+    /* Above leftCol, don't apply a top border on the 1st and 6th
+       items to prevent double borders */
+    border-top: ${position !== 1 &&
+        position !== 6 &&
+        `1px solid ${palette.neutral[86]}`};
+
+    /* The left border is set on the container */
+    border-right: 1px solid ${palette.neutral[86]};
+    min-height: 3.25rem;
+
+    &:hover {
+        cursor: pointer;
     }
 
-    :first-of-type {
-        &:before {
-            display: none;
-        }
-    }
-
-    &:after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-
-    ${tablet} {
-        padding-top: 3px;
-        padding-bottom: 0;
-        min-height: 72px;
-    }
-
-    ${desktop} {
-        height: 100%;
-        display: inline-block;
-        width: 100%;
-
-        :nth-of-type(6) {
-            &:before {
-                display: none;
-            }
-        }
+    &:hover,
+    :focus {
+        background: ${palette.neutral[97]};
     }
 `;
 
 const bigNumber = css`
-    float: left;
-    margin-top: 3px;
+    position: absolute;
+    top: 0.375rem;
+    left: 0.625rem;
     fill: ${palette.neutral[7]};
 `;
 
 const headlineHeader = css`
-    margin-top: -4px;
-    margin-left: 70px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding: 0.1875rem 0.625rem 1.125rem 4.6875rem;
     word-wrap: break-word;
     overflow: hidden;
 `;
@@ -100,7 +69,7 @@ const liveKicker = (colour: string) => css`
 `;
 
 function getColour(pillar: Pillar) {
-    return pillarPalette[pillar].main;
+    return palette[pillar].main;
 }
 
 const AgeWarning: React.FC<{
@@ -150,7 +119,10 @@ type Props = {
 
 export const MostViewedItem = ({ trail, position }: Props) => {
     return (
-        <li className={listItem} data-link-name={`${position} | text`}>
+        <li
+            className={gridItem(position)}
+            data-link-name={`${position} | text`}
+        >
             <span className={bigNumber}>
                 <BigNumber index={position} />
             </span>

@@ -11,7 +11,7 @@ jest.mock('../lib/api', () => ({
     useApi: jest.fn(),
 }));
 
-const VISIBLE = 'display: block';
+const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
 describe('MostViewed', () => {
@@ -40,7 +40,11 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         // Calls api once only
@@ -65,7 +69,11 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByTestId, getByText } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         const firstHeading = responseWithTwoTabs.data[0].heading;
@@ -90,7 +98,11 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithOneTab);
 
         const { queryByText } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         expect(
@@ -103,7 +115,11 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         expect(
@@ -132,7 +148,11 @@ describe('MostViewed', () => {
         });
 
         const { getByText } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         expect(getByText('Live')).toBeInTheDocument();
@@ -159,7 +179,11 @@ describe('MostViewed', () => {
         });
 
         const { queryByText } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         expect(queryByText('Live')).not.toBeInTheDocument();
@@ -186,7 +210,11 @@ describe('MostViewed', () => {
         });
 
         const { getByTestId } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         expect(getByTestId('quote-icon')).toBeInTheDocument();
@@ -213,7 +241,11 @@ describe('MostViewed', () => {
         });
 
         const { queryByTestId } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
         expect(queryByTestId('quote-icon')).not.toBeInTheDocument();
