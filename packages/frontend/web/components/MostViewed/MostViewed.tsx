@@ -35,7 +35,7 @@ const asideWidth = css`
 `;
 
 const headingStyles = css`
-    ${headline({ level: 4 })};
+    ${headline({ level: 3 })};
     color: ${palette.neutral[7]};
     font-weight: 900;
     padding-right: 5px;

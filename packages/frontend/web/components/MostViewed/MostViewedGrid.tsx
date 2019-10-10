@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 import { headline, palette } from '@guardian/src-foundations';
-import { tablet, leftCol, phablet } from '@guardian/pasteup/breakpoints';
+import { tablet, until } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { TabType, TrailType } from './MostViewed';
@@ -16,12 +16,25 @@ const hideList = css`
 const tabsContainer = css`
     display: flex;
     position: relative;
-    border-top: ${thinGreySolid};
+    border-left: ${thinGreySolid};
+    border-right: ${thinGreySolid};
+    border-bottom: ${thinGreySolid};
 
-    ${leftCol} {
+    ${until.leftCol} {
+        border-top: ${thinGreySolid};
         border-bottom: 0;
-        border-top: 0;
     }
+`;
+
+const listTab = css`
+    font-weight: 700;
+    line-height: 1.1;
+    background-color: transparent;
+    text-transform: capitalize;
+    padding: 0 0 0;
+    margin-bottom: 16px;
+    width: 240px;
+    height: 28px;
 `;
 
 const firstTab = css`
@@ -30,7 +43,7 @@ const firstTab = css`
 
 const selectedListTab = (pillar: Pillar) => css`
     /* TODO: Using a pseudo selector here could be faster? */
-    box-shadow: inset 0px 4px 0px 0px ${pillar && palette[pillar].main};
+    box-shadow: inset 0px 4px 0px 0px ${pillar && palette[pillar].dark};
     transition: box-shadow 0.3s ease-in-out;
 `;
 
@@ -41,25 +54,13 @@ const unselectedListTab = css`
     }
 `;
 
-const listTab = css`
-    width: 50%;
-    float: left;
-    border-top: 3px solid ${palette.neutral[93]};
-    background-color: ${palette.neutral[93]};
-
-    ${phablet} {
-        width: 230px;
-    }
-`;
-
 const tabButton = css`
     ${headline({ level: 1 })};
     margin: 0;
     border: 0;
     background: transparent;
-    padding-left: 10px;
     padding-right: 6px;
-    padding-top: 4px;
+    padding-top: 6px;
     text-align: left;
     text-decoration: none;
     font-weight: 600;
