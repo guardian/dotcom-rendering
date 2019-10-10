@@ -59,9 +59,10 @@ const Headline: React.FC<{
     );
 };
 
-export const TopMetaNews: React.FC<{ articleData: ArticleModel }> = ({
-    articleData,
-}) => {
+export const TopMetaNews: React.FC<{
+    articleData: ArticleModel;
+    adUnit?: string;
+}> = ({ articleData, adUnit }) => {
     const branding =
         articleData.commercialProperties[articleData.editionId].branding;
 
@@ -72,6 +73,7 @@ export const TopMetaNews: React.FC<{ articleData: ArticleModel }> = ({
                     key={i}
                     element={element}
                     pillar={articleData.pillar}
+                    adUnit={adUnit || ''}
                 />
             ))}
 

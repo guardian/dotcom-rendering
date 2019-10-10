@@ -119,12 +119,19 @@ const expanded = css`
 const asComponent = (
     element: CAPIElement,
     pillar: Pillar,
+    adUnit: string,
 ): JSX.Element | null => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return mainImage(element);
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-            return <YoutubeVideo element={element} pillar={pillar} />;
+            return (
+                <YoutubeVideo
+                    element={element}
+                    pillar={pillar}
+                    adUnit={adUnit}
+                />
+            );
         default:
             return null;
     }
@@ -133,6 +140,9 @@ const asComponent = (
 export const MainMedia: React.FC<{
     element: CAPIElement;
     pillar: Pillar;
-}> = ({ element, pillar }) => {
-    return <div className={expanded}>{asComponent(element, pillar)}</div>;
+    adUnit: string;
+}> = ({ element, pillar, adUnit }) => {
+    return (
+        <div className={expanded}>{asComponent(element, pillar, adUnit)}</div>
+    );
 };

@@ -4,9 +4,12 @@ import { Caption } from '@guardian/guui/components/Caption/Caption';
 export const YoutubeVideo: React.FC<{
     element: YoutubeBlockElement;
     pillar: Pillar;
-}> = ({ element, pillar }) => {
+    adUnit: string;
+}> = ({ element, pillar, adUnit }) => {
     // https://www.ampproject.org/docs/reference/components/amp-youtube
     // https://developers.google.com/youtube/player_parameters
+    const embedConfig = `{"adsConfig": {"adTagParameters":{"iu": ${adUnit}}}}`;
+
     const attributes: any = {
         id: `gu-video-youtube-${element.id}`,
         'data-videoid': element.assetId,
@@ -21,6 +24,7 @@ export const YoutubeVideo: React.FC<{
         attributes['data-param-rel'] = '0';
         attributes['data-param-listType'] = 'playlist';
         attributes['data-param-list'] = element.channelId;
+        attributes['data-param-embed_config'] = embedConfig;
     }
 
     return (

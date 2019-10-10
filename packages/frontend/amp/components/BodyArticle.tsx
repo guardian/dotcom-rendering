@@ -65,9 +65,15 @@ export const Body: React.FC<{
 }> = ({ pillar, data, config }) => {
     const designType = data.designType;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-    const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
+    const elementsWithoutAds = Elements(
+        capiElements,
+        pillar,
+        data.isImmersive,
+        config.adUnit,
+    );
     const slotIndexes = findAdSlots(capiElements);
     const adInfo = {
+        adUnit: config.adUnit,
         section: data.sectionName,
         edition: data.editionId,
         contentType: data.contentType,
@@ -91,7 +97,12 @@ export const Body: React.FC<{
 
     return (
         <InnerContainer className={body(pillar, designType)}>
-            <TopMeta designType={designType} pillar={pillar} data={data} />
+            <TopMeta
+                designType={designType}
+                pillar={pillar}
+                data={data}
+                adUnit={config.adUnit}
+            />
 
             {elements}
 
