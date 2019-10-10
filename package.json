@@ -14,7 +14,7 @@
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
         "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
         "cypress:open": "cypress open",
-        "cypress:run": "cypress run"
+        "cypress:run": "percy exec -- cypress run"
     },
     "husky": {
         "hooks": {
@@ -35,6 +35,7 @@
         "@babel/preset-env": "^7.5.5",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.3.3",
+        "@percy/cypress": "^2.2.0",
         "@testing-library/react": "8.0.7",
         "@types/jest": "^24.0.15",
         "@types/lodash.clonedeep": "^4.5.4",
