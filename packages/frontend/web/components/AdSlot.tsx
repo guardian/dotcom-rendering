@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
-import { css, cx } from 'emotion';
-import { textSans, palette, until } from '@guardian/src-foundations';
+import { css } from 'emotion';
+import { textSans, palette, from } from '@guardian/src-foundations';
 
 export const labelStyles = css`
     .ad-slot__label {
@@ -22,19 +22,16 @@ export const labelStyles = css`
         display: none;
     }
 `;
-
-export const mobileStickyStyles = css`
-    .mobilesticky-container {
-        position: fixed;
-        bottom: 0;
-        width: 320px;
-        margin: 0 auto;
-        right: 0;
-        left: 0;
-        z-index: 1010;
-        ${until.phablet} {
-            display: none;
-        }
+const mobileStickyAdStyles = css`
+    position: fixed;
+    bottom: 0;
+    width: 320px;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    z-index: 1010;
+    ${from.phablet} {
+        display: none;
     }
     .ad-slot__close-button {
         display: none;
@@ -48,8 +45,8 @@ export const mobileStickyStyles = css`
         background-color: transparent;
     }
     .ad-slot__close-button svg {
-        height: 6px;
-        width: 6px;
+        height: 0.75rem;
+        width: 0.75rem;
         stroke: ${palette.neutral[7]};
         fill: ${palette.neutral[7]};
         stroke-linecap: round;
@@ -66,8 +63,20 @@ export const mobileStickyStyles = css`
         stroke-width: 2;
         text-align: center;
     }
+    .ad-slot__label {
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+        position: relative;
+        height: 1.5rem;
+        background-color: ${palette.neutral[97]};
+        padding: 0 0.5rem;
+        border-top: 0.0625rem solid ${palette.neutral[86]};
+        color: ${palette.neutral[60]};
+        text-align: left;
+        box-sizing: border-box;
+        ${textSans({ level: 1 })};
+    }
 `;
-
 export interface AdSlotParameters {
     name: string;
     adTypes: string[];
@@ -169,7 +178,5 @@ export const AdSlot: React.FC<{
 };
 
 export const MobileStickyContainer: React.FC<{}> = ({}) => {
-    return (
-        <div className={`mobilesticky-container ${cx(mobileStickyStyles)}`} />
-    );
+    return <div className={`mobilesticky-container ${mobileStickyAdStyles}`} />;
 };
