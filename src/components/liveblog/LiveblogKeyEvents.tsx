@@ -2,7 +2,7 @@ import React from 'react';
 import { PillarStyles, icons, basePx } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations/palette';
-import { Block } from 'types/Capi';
+import { Block } from 'types/capi-thrift-models';
 import { makeRelativeDate } from 'utils/date';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`

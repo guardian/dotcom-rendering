@@ -8,8 +8,8 @@ import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 import Tags from '../shared/Tags';
 
-import { Series, Tag, Contributor, Block } from '../../types/Capi';
-import { Asset } from 'utils/Asset';
+import { Series, Contributor } from '../../types/Capi';
+import { Tag, Asset, Block } from 'types/capi-thrift-models';
 import { PillarId, PillarStyles, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 

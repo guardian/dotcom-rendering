@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
+import { Asset } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
 
 const headerImageStyles = css`
@@ -13,19 +14,6 @@ const headerImageStyles = css`
 
     margin-bottom: 8px;
 `;
-
-export interface Asset {
-    file: string;
-    typeData: AssetTypeData;
-}
-
-interface AssetTypeData {
-    altText: string;
-    caption: string;
-    credit: string;
-    width: number;
-    height: number;
-}
 
 interface HeaderImageProps {
     assets: Asset[] | null;
