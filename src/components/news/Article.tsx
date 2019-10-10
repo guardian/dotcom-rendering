@@ -9,7 +9,7 @@ import ArticleBody from './ArticleBody';
 import Tags from '../shared/Tags';
 
 import { Series, Contributor } from '../../types/Capi';
-import { Tag, Asset } from 'types/v1_types';
+import { Tag, Asset, Block } from 'types/capi-thrift-models';
 import { PillarId, PillarStyles, darkModeCss } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 
@@ -27,7 +27,7 @@ export interface ArticleProps {
     pillarStyles: PillarStyles;
     contributors: Contributor[];
     series: Series;
-    bodyElements: any;
+    bodyElements: Block[];
     imageSalt: string;
 }
 

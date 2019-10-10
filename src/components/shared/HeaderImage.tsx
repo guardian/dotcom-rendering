@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
-import { Asset } from 'types/v1_types';
+import { Asset } from 'types/capi-thrift-models';
 
 const headerImageStyles = css`
     position: relative;

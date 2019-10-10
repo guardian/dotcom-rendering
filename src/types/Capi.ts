@@ -1,4 +1,4 @@
-import { Content } from 'types/v1_types';
+import { Content } from 'types/capi-thrift-models';
 
 export interface Capi {
     response: {

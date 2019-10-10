@@ -3,7 +3,7 @@
 import { createHash } from 'crypto';
 
 import { Option, fromNullable } from 'types/Option';
-import { Asset } from 'types/v1_types';
+import { Asset } from 'types/capi-thrift-models';
 
 // ----- Types ----- //
 
@@ -86,6 +86,7 @@ const toUrl = (salt: string, asset: Asset): Url =>
 // ----- Exports ----- //
 
 export {
+    Asset,
     toSrcset,
     toUrl,
 };

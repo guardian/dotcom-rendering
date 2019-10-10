@@ -11,7 +11,7 @@ import Tags from '../shared/Tags';
 
 import { PillarStyles, PillarId } from '../../styles';
 import { Series, Contributor } from '../../types/Capi';
-import { Tag, Asset } from 'types/v1_types';
+import { Tag, Asset, Block } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 
@@ -31,7 +31,7 @@ interface LiveblogArticleProps {
     pillarStyles: PillarStyles;
     contributors: Contributor[];
     series: Series;
-    bodyElements: any;
+    bodyElements: Block[];
     isLive: boolean;
     imageSalt: string;
 }

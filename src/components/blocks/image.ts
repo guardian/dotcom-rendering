@@ -2,7 +2,6 @@
 
 import React from 'react';
 import * as AssetUtils from 'utils/Asset';
-import { Asset } from 'types/v1_types';
 
 // ----- Setup ----- //
 
@@ -18,7 +17,7 @@ interface Image {
 
 // ----- Functions ----- //
 
-const imageElement = (image: Image, assets: Asset[], salt: string): React.ReactNode =>
+const imageElement = (image: Image, assets: AssetUtils.Asset[], salt: string): React.ReactNode =>
     h('img', {
         sizes: '100%',
         srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
@@ -26,7 +25,7 @@ const imageElement = (image: Image, assets: Asset[], salt: string): React.ReactN
         src: AssetUtils.toUrl(salt, assets[0]),
     });
 
-function imageBlock(image: Image, assets: Asset[], salt: string): React.ReactNode {
+function imageBlock(image: Image, assets: AssetUtils.Asset[], salt: string): React.ReactNode {
 
     const caption = image.displayCredit ? `${image.caption} ${image.credit}` : image.caption;
 
