@@ -31,7 +31,6 @@ declare global {
                     reportError: (
                         err: Error,
                         tags: { [key: string]: string },
-                        shouldThrow: boolean,
                     ) => void;
                 };
             };

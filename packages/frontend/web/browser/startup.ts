@@ -1,9 +1,5 @@
 export interface Reporter {
-    report: (
-        err: Error,
-        tags: { [key: string]: string },
-        shouldThrow: boolean,
-    ) => void;
+    report: (err: Error, tags: { [key: string]: string }) => void;
 }
 
 const measure = (name: string, task: () => Promise<void>): void => {

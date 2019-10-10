@@ -73,11 +73,7 @@ export interface WindowGuardian {
     adBlockers: any;
     modules: {
         raven: {
-            reportError?: (
-                err: Error,
-                tags: { [key: string]: string },
-                shouldThrow: boolean,
-            ) => void;
+            reportError?: (err: Error, tags: { [key: string]: string }) => void;
         };
     };
 }

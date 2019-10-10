@@ -34,7 +34,6 @@ const windowGuardian = {
             reportError: (
                 err: Error,
                 tags: { [key: string]: string },
-                shouldThrow: boolean,
             ): void => {
                 // tslint:disable-next-line: no-console
                 console.log(

@@ -102,17 +102,10 @@ type ReportedError = Error & {
 export const reportError = (
     err: ReportedError,
     tags: { [key: string]: string },
-    shouldThrow: boolean = true,
 ): void => {
     const rstatic: RavenStatic = getRaven();
     const capture = (r: RavenStatic) => {
         r.captureException(err, { tags });
-        if (shouldThrow) {
-            // Flag to ensure it is not reported to Sentry again via global handlers
-            const error = err;
-            error.reported = true;
-            throw error;
-        }
     };
     capture(rstatic);
 };
