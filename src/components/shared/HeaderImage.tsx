@@ -1,15 +1,28 @@
 import React from 'react';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
 import { Asset } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
+import { until } from '@guardian/src-foundations';
 
 const headerImageStyles = css`
-    position: relative;
+    figure {
+        position: relative;
+        width: 620px;
+
+        ${until.wide} {
+            width: 100%;
+        }
+    }
+
     img {
-        width: 100%;
+        width: 620px;
         display: block;
+
+        ${until.wide} {
+            width: 100%;
+        }
     }
 
     margin-bottom: 8px;
@@ -18,17 +31,20 @@ const headerImageStyles = css`
 interface HeaderImageProps {
     assets: Asset[] | null;
     imageSalt: string;
+    className?: SerializedStyles | null;
 }
 
-const HeaderImage = ({ assets, imageSalt }: HeaderImageProps): JSX.Element | null => {
+const HeaderImage = ({ className, assets, imageSalt }: HeaderImageProps): JSX.Element | null => {
     if (!assets) return null;
 
     const { typeData: {caption, credit, altText} } = assets[0];
 
     return (
-        <div css={headerImageStyles}>
-            { imageElement(altText, assets, imageSalt) }
-            < HeaderImageCaption caption={caption} credit={credit}/>
+        <div css={[className, headerImageStyles]}>
+            <figure>
+                { imageElement(altText, assets, imageSalt) }
+                < HeaderImageCaption caption={caption} credit={credit}/>
+            </figure>
         </div>
     )
 }
