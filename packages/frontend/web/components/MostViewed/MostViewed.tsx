@@ -1,12 +1,14 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { headline, palette } from '@guardian/src-foundations';
 import {
     desktop,
     leftCol,
     wide,
     mobileLandscape,
-} from '@guardian/pasteup/breakpoints';
+    from,
+    headline,
+    palette,
+} from '@guardian/src-foundations';
 import { Container } from '@guardian/guui';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
@@ -25,11 +27,13 @@ const stackBelow = (breakpoint: string) => css`
 `;
 
 const asideWidth = css`
-    ${leftCol} {
+    ${from.leftCol.until.wide} {
+        /* above 1140, below 1300 */
         width: 363px;
     }
 
     ${wide} {
+        /* above 1300 */
         width: 510px;
     }
 `;
