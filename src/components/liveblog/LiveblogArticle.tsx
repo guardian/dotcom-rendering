@@ -29,7 +29,7 @@ const BorderStyles = css`
     }
 `;
 
-const HeaderImageStyles = (pillarStyles: PillarStyles) => css`
+const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     background: ${pillarStyles.liveblogBackground};
     padding-bottom: 12px;
 
@@ -91,7 +91,11 @@ const LiveblogArticle = ({
                 contributors={contributors}
                 imageSalt={imageSalt}
             />
-            <HeaderImage assets={mainAssets} imageSalt={imageSalt} className={HeaderImageStyles(pillarStyles)}/>
+            <HeaderImage
+                assets={mainAssets}
+                imageSalt={imageSalt}
+                className={HeaderImageStyles(pillarStyles)}
+            />
             <LiveblogKeyEvents bodyElements={bodyElements} pillarStyles={pillarStyles}/>
             <LiveblogBody
                 bodyElements={bodyElements}

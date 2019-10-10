@@ -22,9 +22,11 @@ interface LiveblogHeadlineProps {
     pillarStyles: PillarStyles;
 }
 
-export default ({ headline, pillarStyles }: LiveblogHeadlineProps): JSX.Element =>
+const LiveblogHeadline = ({ headline, pillarStyles }: LiveblogHeadlineProps): JSX.Element =>
     <LeftColumn
         columnContent={null}
         mainContent={<h1>{ headline }</h1>}
         className={LiveblogHeadlineStyles(pillarStyles)}
     ></LeftColumn>
+
+export default LiveblogHeadline;

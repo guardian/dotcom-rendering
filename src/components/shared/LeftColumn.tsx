@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 
+import React from 'react';
+
 import { css, SerializedStyles } from '@emotion/core';
 import { until } from '@guardian/src-foundations';
 
@@ -45,14 +47,18 @@ const LeftColumnStyles = css`
 interface LeftColumnProps {
     columnContent: JSX.Element | null;
     mainContent: JSX.Element | null;
-    className?: SerializedStyles | null,
+    className?: SerializedStyles | null;
 };
 
 
 // ----- Component ----- //
 
-export default ({ columnContent, mainContent, className = null }: LeftColumnProps): JSX.Element =>
-    <div css={[className, LeftColumnStyles]}>
-        <div className="column-content">{columnContent}</div>
-        <div className="main-content">{mainContent}</div>
-    </div>
+const LeftColumn =
+    ({ columnContent, mainContent, className = null }: LeftColumnProps): JSX.Element =>
+        <div css={[className, LeftColumnStyles]}>
+            <div className="column-content">{columnContent}</div>
+            <div className="main-content">{mainContent}</div>
+        </div>
+
+
+export default LeftColumn;
