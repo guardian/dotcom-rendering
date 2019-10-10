@@ -2,6 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import { keyframes } from '@emotion/core';
 
+export const DISABLE_FLASHING_ELEMENTS_CLASS = 'disable-flashing-elements';
+
 const livePulse = keyframes`{
     0% {opacity: 1;}
     10% {opacity: .25;}
@@ -29,6 +31,15 @@ interface Props {
     colour: string;
 }
 
-export const PulsingDot = ({ colour }: Props) => (
-    <span className={pulsingDot(colour)} />
-);
+export const PulsingDot = ({ colour }: Props) => {
+    // Respect the accessibility flag set here
+    // https://www.theguardian.com/help/accessibility-help
+    const flashingIsDisabled = !!document.getElementsByClassName(
+        DISABLE_FLASHING_ELEMENTS_CLASS,
+    ).length;
+    if (flashingIsDisabled) {
+        return null;
+    }
+
+    return <span className={pulsingDot(colour)} />;
+};

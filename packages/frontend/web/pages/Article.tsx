@@ -5,6 +5,7 @@ import { Footer } from '@frontend/web/components/Footer';
 import { Content } from '@frontend/web/components/Content';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
+import { MobileStickyContainer } from '@frontend/web/components/AdSlot';
 
 export const Article: React.FC<{
     data: ArticleProps;
@@ -18,21 +19,17 @@ export const Article: React.FC<{
             isAdFreeUser={data.CAPI.isAdFreeUser}
             shouldHideAds={data.CAPI.shouldHideAds}
         />
-
         <Content CAPI={data.CAPI} config={data.config} />
-
         <MostViewed
             sectionName={data.CAPI.sectionName}
             config={data.config}
             pillar={data.CAPI.pillar}
         />
-
         <SubNav
             subnav={data.NAV.subNavSections}
             pillar={data.CAPI.pillar}
             currentNavLink={data.NAV.currentNavLink}
         />
-
         <Footer
             nav={data.NAV}
             edition={data.CAPI.editionId}
@@ -40,7 +37,7 @@ export const Article: React.FC<{
             pillar={data.CAPI.pillar}
             pillars={data.NAV.pillars}
         />
-
         <CookieBanner />
+        <MobileStickyContainer />
     </div>
 );

@@ -109,6 +109,7 @@ export const htmlTemplate = ({
 
                 ${priorityScriptTags.join('\n')}
                 <style>${getFontsCss()}${resetCSS}${css}</style>
+
             </head>
 
             <body>
