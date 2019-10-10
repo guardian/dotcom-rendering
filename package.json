@@ -8,7 +8,7 @@
     "ios >= 11"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "build:server": "webpack --config webpack.config.js --config-name server",
@@ -35,20 +35,24 @@
     "typescript": "^3.6.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/compression": "^1.0.1",
     "@types/express": "^4.17.1",
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
     "@types/node-fetch": "^2.5.0",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "eslint": "^6.4.0",
     "eslint-plugin-react": "^7.14.3",
+    "jest": "^24.9.0",
     "ts-loader": "^6.1.0",
     "webpack": "^4.37.0",
     "webpack-cli": "^3.3.6"
