@@ -89,4 +89,5 @@ export {
     Asset,
     toSrcset,
     toUrl,
+    transformUrl
 };

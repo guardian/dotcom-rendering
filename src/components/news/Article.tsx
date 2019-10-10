@@ -52,7 +52,7 @@ const Article = ({
     imageSalt,
 }: ArticleProps): JSX.Element =>
     <main css={MainStyles}>
-        <HeaderImage assets={mainAssets}/>
+        <HeaderImage assets={mainAssets} imageSalt={imageSalt}/>
         <ArticleSeries series={series} pillarStyles={pillarStyles}/>
         <ArticleHeadline
             headline={headline}
@@ -60,13 +60,18 @@ const Article = ({
             rating={starRating}
             pillarStyles={pillarStyles}
         />
-        <ArticleStandfirst standfirst={standfirst} feature={feature} pillarStyles={pillarStyles}/>
+        <ArticleStandfirst
+            standfirst={standfirst}
+            feature={feature}
+            pillarStyles={pillarStyles}
+        />
         <ArticleByline
             byline={bylineHtml}
             pillarStyles={pillarStyles}
             pillarId={pillarId}
             publicationDate={webPublicationDate}
             contributors={contributors}
+            imageSalt={imageSalt}
         />
         <ArticleBody
             pillarStyles={pillarStyles}
