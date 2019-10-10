@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
-import { css } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { css, cx } from 'emotion';
+import { textSans, palette, until } from '@guardian/src-foundations';
 
 export const labelStyles = css`
     .ad-slot__label {
@@ -20,6 +20,51 @@ export const labelStyles = css`
 
     .ad-slot__close-button {
         display: none;
+    }
+`;
+
+export const mobileStickyStyles = css`
+    .mobilesticky-container {
+        position: fixed;
+        bottom: 0;
+        width: 320px;
+        margin: 0 auto;
+        right: 0;
+        left: 0;
+        z-index: 1010;
+        ${until.phablet} {
+            display: none;
+        }
+    }
+    .ad-slot__close-button {
+        display: none;
+        position: absolute;
+        right: 3px;
+        top: 3px;
+        padding: 0;
+        border: 0;
+        height: 21px;
+        width: 21px;
+        background-color: transparent;
+    }
+    .ad-slot__close-button svg {
+        height: 6px;
+        width: 6px;
+        stroke: ${palette.neutral[7]};
+        fill: ${palette.neutral[7]};
+        stroke-linecap: round;
+        stroke-width: 0;
+        text-align: center;
+    }
+    .ad-slot--mobile-sticky .ad-slot__label .ad-slot__close-button {
+        display: block;
+    }
+    .ad-slot__close-button__x {
+        stroke: ${palette.neutral[7]};
+        fill: transparent;
+        stroke-linecap: round;
+        stroke-width: 2;
+        text-align: center;
     }
 `;
 
@@ -121,4 +166,10 @@ export const AdSlot: React.FC<{
         return null;
     }
     return <AdSlotCore {...asps} className={className} />;
+};
+
+export const MobileStickyContainer: React.FC<{}> = ({}) => {
+    return (
+        <div className={`mobilesticky-container ${cx(mobileStickyStyles)}`} />
+    );
 };
