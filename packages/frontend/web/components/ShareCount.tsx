@@ -87,13 +87,13 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
                 });
             })
             .catch(err => {
-                window.guardian.modules.raven.reportError(
-                    err,
-                    {
-                        feature: 'share-count',
-                    },
-                    true,
-                );
+                // window.guardian.modules.raven.reportError(
+                //     err,
+                //     {
+                //         feature: 'share-count',
+                //     },
+                //     true,
+                // );
             });
     }
 

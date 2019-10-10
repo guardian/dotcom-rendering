@@ -248,13 +248,13 @@ export const RichLinkComponent: React.FC<{
 
     if (error) {
         // Send the error to Sentry and then prevent the element from rendering
-        window.guardian.modules.raven.reportError(
-            error,
-            {
-                feature: 'most-viewed',
-            },
-            true,
-        );
+        // window.guardian.modules.raven.reportError(
+        //     error,
+        //     {
+        //         feature: 'most-viewed',
+        //     },
+        //     true,
+        // );
 
         return null;
     }
