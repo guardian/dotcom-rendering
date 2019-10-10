@@ -57,7 +57,14 @@ dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
 	@NODE_ENV=development node scripts/frontend/dev-server
 
-# quality #########################################
+# cypress #####################################
+
+cypress: clear clean-dist install
+	$(call log, "starting frontend DEV server for Cypress")
+	@NODE_ENV=development PERCY_TOKEN=dd449ac35cb92043db386de8f4ea260042da4e86eb1abd8748411b6218675dea start-server-and-test 'node scripts/frontend/dev-server' 3030 'percy exec -- cypress run'
+	$(call log, "Server started")
+
+# quality #####################################
 
 tsc: clean-dist install
 	$(call log, "checking for type errors")
