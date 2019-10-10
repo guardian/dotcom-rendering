@@ -12,7 +12,9 @@
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js",
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
-        "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true"
+        "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
+        "cypress:open": "cypress open",
+        "cypress:run": "cypress run"
     },
     "husky": {
         "hooks": {
@@ -51,6 +53,7 @@
         "babel-plugin-preval": "^3.0.0",
         "babel-plugin-px-to-rem": "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0",
         "bundlesize": "^0.17.0",
+        "cypress": "^3.4.1",
         "doctoc": "^1.4.0",
         "eslint": "^5.16.0",
         "eslint-plugin-dcr": "https://github.com/guardian/eslint-plugin-dcr#v0.1.0",
