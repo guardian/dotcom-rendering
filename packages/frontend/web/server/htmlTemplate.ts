@@ -2,6 +2,7 @@ import resetCSS from /* preval */ '@frontend/lib/reset-css';
 import { getFontsCss } from '@frontend/lib/fonts-css';
 import { getStatic } from '@frontend/lib/assets';
 import { prepareCmpString } from '@frontend/web/browser/prepareCmp';
+import escape from 'lodash.escape';
 
 import { WindowGuardian } from '@frontend/model/window-guardian';
 
