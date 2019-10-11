@@ -3,7 +3,7 @@
 import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
-import { textSans, palette, from } from '@guardian/src-foundations';
+import { textSans, palette, phablet } from '@guardian/src-foundations';
 
 export const labelStyles = css`
     .ad-slot__label {
@@ -30,7 +30,7 @@ const mobileStickyAdStyles = css`
     right: 0;
     left: 0;
     z-index: 1010;
-    ${from.phablet} {
+    ${phablet} {
         display: none;
     }
     .ad-slot__close-button {
