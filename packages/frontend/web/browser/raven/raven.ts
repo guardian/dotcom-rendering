@@ -1,6 +1,35 @@
 import raven, { RavenStatic } from 'raven-js';
 import { isAdBlockInUse } from './detectAdBlocker';
 
+// Notes on: Migrating from depreciated "raven-js": "3.19.1" client to "@sentry/browser": "^5.7.0"
+
+// Use:
+//         Sentry.init({
+//             dsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+//             release: ?,
+//             environment: ?,
+//             sampleRate: 0.1,
+//             blacklistUrls,
+//             whitelistUrls,
+//         });
+
+// See: https://docs.sentry.io/error-reporting/configuration/?platform=browsernpm#common-options
+
+// Use:
+//         Hooks.beforeSend()
+// with dataCallback function
+// and to decide whether to send or not using isDev / adBlocker / enableSentry
+
+// See: https://docs.sentry.io/error-reporting/configuration/?platform=browsernpm#before-send
+
+// Use:
+//         configureScope()
+// to add tags
+//         - contentType,
+//         - edition: editionLongForm,
+
+// See: https://docs.sentry.io/enriching-error-data/context/?platform=browsernpm#tagging-events
+
 let ravenConfig: RavenStatic;
 let adBlockInUse = false; // Adblock checking is async so we assume adblock is off until we know it's not
 isAdBlockInUse().then(isInUse => (adBlockInUse = isInUse));
