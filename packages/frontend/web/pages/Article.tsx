@@ -5,7 +5,7 @@ import { Footer } from '@frontend/web/components/Footer';
 import { Content } from '@frontend/web/components/Content';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
-// import { MobileStickyContainer } from '@frontend/web/components/AdSlot';
+import { MobileStickyContainer } from '@frontend/web/components/AdSlot';
 
 export const Article: React.FC<{
     data: ArticleProps;
@@ -34,5 +34,6 @@ export const Article: React.FC<{
             pillars={data.NAV.pillars}
         />
         <CookieBanner />
+        <MobileStickyContainer />
     </div>
 );
