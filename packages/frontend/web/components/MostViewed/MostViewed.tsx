@@ -29,12 +29,16 @@ const stackBelow = (breakpoint: string) => css`
 const asideWidth = css`
     ${from.leftCol.until.wide} {
         /* above 1140, below 1300 */
-        width: 363px;
+        flex-basis: 151px;
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     ${wide} {
         /* above 1300 */
-        width: 510px;
+        flex-basis: 230px;
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 `;
 
