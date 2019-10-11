@@ -3,7 +3,7 @@ import { css, SerializedStyles } from '@emotion/core'
 
 const BASE_PADDING = 8;
 
-const baseMultiply = (value: number): number => value * BASE_PADDING;
+export const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
@@ -118,14 +118,14 @@ export const icons = "font-family: 'Guardian Icons';";
 export const darkModeCss = (
     styles: TemplateStringsArray,
     ...placeholders: string[]
-): SerializedStyles =>
-    css`
-        @media (prefers-color-scheme: dark) {
-            ${styles.map((style, index) => `${style}${placeholders[index]}`)
-                .filter(Boolean)
-                .join('')}
+): SerializedStyles => css`
+    @media (prefers-color-scheme: dark) {
+        ${styles
+            .map((style, i) => `${style}${placeholders[i] ? placeholders[i] : ''}`)
+            .join('')
         }
-    `
+    }
+`;
 
 // Styles shared across article types
 export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
