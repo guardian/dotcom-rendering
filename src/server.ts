@@ -35,7 +35,7 @@ const readFileP = promisify(fs.readFile);
 const id = <A>(a: A): A => a;
 
 // TODO: request less data from capi
-const capiEndpoint = (articleId: string, key: string): string => {
+export const capiEndpoint = (articleId: string, key: string): string => {
 
   const params = new URLSearchParams({
     format: 'json',
