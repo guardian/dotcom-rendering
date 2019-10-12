@@ -54,6 +54,7 @@ const init = () => {
                     if (dontSend) return null;
                     return event;
                 },
+                debug: true, // TODO: If you're seeing this debug property, it means it was left in by mistake. Please delete it
             });
 
             Sentry.configureScope(function(scope) {
