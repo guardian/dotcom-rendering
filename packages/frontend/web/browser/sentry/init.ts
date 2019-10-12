@@ -33,6 +33,9 @@ const init = () => {
                 // release: 'release',
                 // environment: 'environment',
                 sampleRate: SAMPLE_RATE,
+            Sentry.configureScope(function(scope) {
+                scope.setTag('edition', editionLongForm);
+                scope.setTag('contentType', contentType);
             });
         } catch {
             /**
