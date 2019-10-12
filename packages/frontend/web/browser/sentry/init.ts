@@ -44,7 +44,6 @@ const init = () => {
                 whitelistUrls,
                 dsn:
                     'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-                // release: 'release',
                 environment: window.guardian.config.stage || 'DEV',
                 sampleRate: SAMPLE_RATE,
                 beforeSend(event) {
@@ -54,7 +53,6 @@ const init = () => {
                     if (dontSend) return null;
                     return event;
                 },
-                debug: true, // TODO: If you're seeing this debug property, it means it was left in by mistake. Please delete it
             });
 
             Sentry.configureScope(function(scope) {
