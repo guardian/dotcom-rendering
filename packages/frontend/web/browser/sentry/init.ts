@@ -45,7 +45,7 @@ const init = () => {
                 dsn:
                     'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
                 // release: 'release',
-                // environment: 'environment',
+                environment: window.guardian.config.stage || 'DEV',
                 sampleRate: SAMPLE_RATE,
                 beforeSend(event) {
                     // Skip sending events in certain situations
