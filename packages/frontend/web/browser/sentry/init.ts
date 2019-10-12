@@ -8,9 +8,9 @@ isAdBlockInUse().then(isInUse => (adBlockInUse = isInUse));
 
 const { editionLongForm, contentType } = window.guardian.app.data.CAPI;
 
-// Only send 10% of errors (this is set to 10% here rather than the normal 1% so we get good
-// feedback early on). TODO: This should be reduced to 1% once the site is fully deployed.
-const SAMPLE_RATE = 0.1;
+// This is set to 100% here rather than the normal 1% so we get good
+// feedback early on. TODO: This should be reduced to 1% once the site is fully deployed.
+const SAMPLE_RATE = 1;
 
 // Only send errors matching these regexes
 const whitelistUrls = [
