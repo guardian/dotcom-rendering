@@ -547,9 +547,9 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                     resolve([]);
                 })
                 .catch(err => {
-                    window.guardian.modules.raven.reportError(err, {
-                        feature: 'most-viewed',
-                    });
+                    // window.guardian.modules.raven.reportError(err, {
+                    //     feature: 'most-viewed',
+                    // });
 
                     return resolve([]);
                 });
