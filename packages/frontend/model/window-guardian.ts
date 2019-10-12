@@ -71,11 +71,6 @@ export interface WindowGuardian {
     config: WindowGuardianConfig;
     polyfilled: boolean;
     adBlockers: any;
-    modules: {
-        raven: {
-            reportError?: (err: Error, tags: { [key: string]: string }) => void;
-        };
-    };
 }
 
 export const makeWindowGuardian = (
@@ -92,9 +87,6 @@ export const makeWindowGuardian = (
         adBlockers: {
             active: undefined,
             onDetect: [],
-        },
-        modules: {
-            raven: {},
         },
     };
 };

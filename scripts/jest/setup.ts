@@ -29,19 +29,6 @@ const windowGuardian = {
         viewId: '',
         pageViewId: '',
     },
-    modules: {
-        raven: {
-            reportError: (
-                err: Error,
-                tags: { [key: string]: string },
-            ): void => {
-                // tslint:disable-next-line: no-console
-                console.log(
-                    `Error: attempting to log error without having registered raven.\nError is: ${err.message}`,
-                );
-            },
-        },
-    },
 };
 
 // Stub global Guardian object

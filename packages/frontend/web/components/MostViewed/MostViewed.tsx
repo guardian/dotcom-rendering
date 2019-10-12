@@ -19,6 +19,7 @@ import { PulsingDot } from '@frontend/web/components/PulsingDot';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
+import * as Sentry from '@sentry/browser';
 
 const container = css`
     padding-top: 3px;
@@ -546,10 +547,11 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                     }
                     resolve([]);
                 })
-                .catch(err => {
-                    // window.guardian.modules.raven.reportError(err, {
-                    //     feature: 'most-viewed',
-                    // });
+                .catch(error => {
+                    Sentry.withScope(scope => {
+                        Sentry.setTag('feature', 'most-viewed');
+                        Sentry.captureException(error);
+                    });
 
                     return resolve([]);
                 });

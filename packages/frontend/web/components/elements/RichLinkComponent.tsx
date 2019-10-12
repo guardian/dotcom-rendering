@@ -7,6 +7,7 @@ import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
+import * as Sentry from '@sentry/browser';
 
 type CardStyle =
     | 'special-report'
@@ -247,10 +248,10 @@ export const RichLinkComponent: React.FC<{
     const { data, loading, error } = useApi<RichLink>(url);
 
     if (error) {
-        // Send the error to Sentry and then prevent the element from rendering
-        // window.guardian.modules.raven.reportError(error, {
-        //     feature: 'most-viewed',
-        // });
+        Sentry.withScope(scope => {
+            Sentry.setTag('feature', 'rich-link');
+            Sentry.captureException(error);
+        });
 
         return null;
     }
