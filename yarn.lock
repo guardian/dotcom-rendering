@@ -1145,7 +1145,7 @@
     "@sentry/types" "5.7.0"
     tslib "^1.9.3"
 
-"@sentry/types@5.7.0":
+"@sentry/types@5.7.0", "@sentry/types@^5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-5.7.0.tgz#e8677e57b40c2c63cad42c02add12b238e647c10"
   integrity sha512-bFRVortg713dE2yJXNFgNe6sNBVVSkpoELLkGPatdVQi0dYc6OggIIX4UZZvkynFx72GwYqO1NOrtUcJY2gmMg==
