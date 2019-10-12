@@ -31,7 +31,7 @@ const scriptPath = package =>
 
 module.exports = ({ page }) => ({
     entry: {
-        raven: scriptPath('raven'),
+        // raven: scriptPath('raven'),
         ga: scriptPath('ga'),
         ophan: scriptPath('ophan'),
         react: scriptPath('react'),

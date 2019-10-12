@@ -61,7 +61,7 @@ export const document = ({ data }: Props) => {
      */
     const priorityScripts = [
         polyfillIO,
-        getDist('raven.js'),
+        // getDist('raven.js'),
         getDist('react.js'),
         config.commercialBundleUrl,
     ];
