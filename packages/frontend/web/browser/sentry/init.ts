@@ -50,12 +50,14 @@ const init = () => {
                     // Skip sending events in certain situations
                     const dontSend =
                         adBlockInUse || isDev || !enableSentryReporting;
-                    if (dontSend) return null;
+                    if (dontSend) {
+                        return null;
+                    }
                     return event;
                 },
             });
 
-            Sentry.configureScope(function(scope) {
+            Sentry.configureScope(scope => {
                 scope.setTag('edition', editionLongForm);
                 scope.setTag('contentType', contentType);
             });
