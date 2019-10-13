@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
-import { headline, palette } from '@guardian/src-foundations';
-import { tablet, until } from '@guardian/pasteup/breakpoints';
+import { headline, palette, tablet, until } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { TabType, TrailType } from './MostViewed';
