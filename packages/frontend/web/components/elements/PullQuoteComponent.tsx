@@ -10,7 +10,7 @@ import {
     phablet,
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
-import { unescapeData } from '@frontend/web/server/escapeData';
+import { unescapeData } from '@frontend/lib/escapeData';
 
 const gutter = 20;
 const quoteTail = 25;

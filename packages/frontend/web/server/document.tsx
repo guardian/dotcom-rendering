@@ -6,7 +6,7 @@ import { CacheProvider } from '@emotion/core';
 
 import { htmlTemplate } from './htmlTemplate';
 import { DecidePage } from './DecidePage';
-import { escapeData } from './escapeData';
+import { escapeData } from '@frontend/lib/escapeData';
 import { getDist } from '@frontend/lib/assets';
 
 import { makeWindowGuardian } from '@frontend/model/window-guardian';
