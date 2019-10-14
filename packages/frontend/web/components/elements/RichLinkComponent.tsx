@@ -7,7 +7,7 @@ import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
-import * as Sentry from '@sentry/browser';
+import { reportError } from '@frontend/web/browser/sentry/sentry';
 
 type CardStyle =
     | 'special-report'
@@ -248,10 +248,7 @@ export const RichLinkComponent: React.FC<{
     const { data, loading, error } = useApi<RichLink>(url);
 
     if (error) {
-        Sentry.withScope(() => {
-            Sentry.setTag('feature', 'rich-link');
-            Sentry.captureException(error);
-        });
+        reportError(error, 'rich-link');
 
         return null;
     }
