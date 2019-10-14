@@ -66,7 +66,7 @@ const articleAdStyles = css`
         min-height: 274px;
         text-align: center;
     }
-    .ad-slot--most-popular {
+    .ad-slot--mostpop {
         ${desktop} {
             margin: 0;
             width: auto;

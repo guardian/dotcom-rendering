@@ -80,7 +80,7 @@ const adSlotUnspecifiedWidth = css`
 `;
 
 const mostPopularAdStyle = css`
-    .ad-slot--most-popular {
+    .ad-slot--mostpop {
         width: 300px;
         margin: 12px auto;
         min-width: 300px;
@@ -165,7 +165,7 @@ export const MostViewed = ({ config, sectionName, pillar }: Props) => {
                                 `}
                             >
                                 <AdSlot
-                                    asps={namedAdSlotParameters('most-popular')}
+                                    asps={namedAdSlotParameters('mostpop')}
                                     config={config}
                                     className={''}
                                 />
