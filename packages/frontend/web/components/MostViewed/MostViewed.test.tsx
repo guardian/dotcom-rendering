@@ -1,18 +1,20 @@
 import React from 'react';
-import { render, fireEvent, waitForElement } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { MostViewed } from './MostViewed';
 import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
 
-const VISIBLE = 'display: block';
+import { useApi as useApi_ } from '../lib/api';
+
+const useApi: any = useApi_;
+
+jest.mock('../lib/api', () => ({
+    useApi: jest.fn(),
+}));
+
+const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
-const mockFetchResponse = (response: any) => ({
-    ok: true,
-    json: () => response,
-});
-
 describe('MostViewed', () => {
-    const globalAny: any = global;
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         sentryHost: '',
@@ -30,25 +32,29 @@ describe('MostViewed', () => {
         adUnit: '',
     };
 
+    beforeEach(() => {
+        useApi.mockReset();
+    });
+
     it('should call the api and render the response as expected', async () => {
-        globalAny.fetch = jest.fn(async () =>
-            mockFetchResponse(responseWithTwoTabs),
-        );
+        useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
-        await waitForElement(() => getByTestId(responseWithTwoTabs[0].heading));
-
         // Calls api once only
-        expect(globalAny.fetch).toHaveBeenCalledTimes(1);
+        expect(useApi).toHaveBeenCalledTimes(1);
 
         // Renders all 20 items
         expect(getAllByText(/LINKTEXT/).length).toBe(20);
 
         // First tab defaults to visible
-        expect(getByTestId(responseWithTwoTabs[0].heading)).toHaveStyle(
+        expect(getByTestId(responseWithTwoTabs.data[0].heading)).toHaveStyle(
             VISIBLE,
         );
 
@@ -60,18 +66,18 @@ describe('MostViewed', () => {
     });
 
     it('should change the items shown when the associated tab is clicked', async () => {
-        globalAny.fetch = jest.fn(async () =>
-            mockFetchResponse(responseWithTwoTabs),
-        );
+        useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByTestId, getByText } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
 
-        await waitForElement(() => getByTestId(responseWithTwoTabs[0].heading));
-
-        const firstHeading = responseWithTwoTabs[0].heading;
-        const secondHeading = responseWithTwoTabs[1].heading;
+        const firstHeading = responseWithTwoTabs.data[0].heading;
+        const secondHeading = responseWithTwoTabs.data[1].heading;
 
         expect(getByTestId(firstHeading)).toHaveStyle(VISIBLE);
         expect(getByTestId(secondHeading)).toHaveStyle(HIDDEN);
@@ -89,35 +95,159 @@ describe('MostViewed', () => {
     });
 
     it('should not show the tab menu when there is only one group of tabs', async () => {
-        globalAny.fetch = jest.fn(async () =>
-            mockFetchResponse(responseWithOneTab),
-        );
+        useApi.mockReturnValue(responseWithOneTab);
 
-        const { queryByText, getByTestId } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+        const { queryByText } = render(
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
-
-        await waitForElement(() => getByTestId(responseWithOneTab[0].heading));
 
         expect(
-            queryByText(responseWithOneTab[0].heading),
+            queryByText(responseWithOneTab.data[0].heading),
         ).not.toBeInTheDocument();
     });
 
     // TODO: Restore this once the component has this feature added to it
     it.skip('should show a byline when this property is set to true', async () => {
-        globalAny.fetch = jest.fn(async () =>
-            mockFetchResponse(responseWithTwoTabs),
-        );
+        useApi.mockReturnValue(responseWithTwoTabs);
 
-        const { getByText, getByTestId } = render(
-            <MostViewed config={config} sectionName="Section Name" />,
+        const { getByText } = render(
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
         );
-
-        await waitForElement(() => getByTestId(responseWithTwoTabs[0].heading));
 
         expect(
-            getByText(responseWithTwoTabs[0].trails[9].byline),
+            getByText(responseWithTwoTabs.data[0].trails[9].byline),
         ).toBeInTheDocument();
+    });
+
+    it("should display the text 'Live' for live blogs", () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: true,
+                            pillar: 'news',
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const { getByText } = render(
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
+        );
+
+        expect(getByText('Live')).toBeInTheDocument();
+    });
+
+    it("should NOT display the text 'Live' when isLiveBlog is false", () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: false,
+                            pillar: 'news',
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const { queryByText } = render(
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
+        );
+
+        expect(queryByText('Live')).not.toBeInTheDocument();
+    });
+
+    it('should show the quote icon for comment articles', () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: false,
+                            pillar: 'opinion',
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const { getByTestId } = render(
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
+        );
+
+        expect(getByTestId('quote-icon')).toBeInTheDocument();
+    });
+
+    it('should NOT show the quote icon when pillar is not opinion', () => {
+        useApi.mockReturnValue({
+            data: [
+                {
+                    heading: 'Section header',
+                    trails: [
+                        {
+                            url: '',
+                            linkText: 'Headline',
+                            showByline: false,
+                            byline: '',
+                            image: '',
+                            isLiveBlog: false,
+                            pillar: 'news',
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const { queryByTestId } = render(
+            <MostViewed
+                config={config}
+                sectionName="Section Name"
+                pillar="news"
+            />,
+        );
+
+        expect(queryByTestId('quote-icon')).not.toBeInTheDocument();
     });
 });
