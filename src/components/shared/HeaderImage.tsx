@@ -4,24 +4,23 @@ import { css, SerializedStyles } from '@emotion/core'
 import HeaderImageCaption from './HeaderImageCaption';
 import { Asset } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
-import { until } from '@guardian/src-foundations';
+import { wide } from '@guardian/src-foundations';
 
 const headerImageStyles = css`
     figure {
         position: relative;
-        width: 620px;
 
-        ${until.wide} {
-            width: 100%;
+        ${wide} {
+            width: 620px;
         }
     }
 
     img {
-        width: 620px;
         display: block;
+        width: 100%;
 
-        ${until.wide} {
-            width: 100%;
+        ${wide} {
+            width: 620px;
         }
     }
 

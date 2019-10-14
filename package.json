@@ -21,7 +21,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.14",
     "@emotion/core": "^10.0.16",
     "@emotion/styled": "^10.0.15",
-    "@guardian/src-foundations": "^0.2.1",
+    "@guardian/src-foundations": "^0.2.2",
     "@types/jsdom": "^12.2.4",
     "aws-sdk": "^2.522.0",
     "compression": "^1.7.4",

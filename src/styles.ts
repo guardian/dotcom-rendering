@@ -1,4 +1,4 @@
-import { palette, until, from } from '@guardian/src-foundations';
+import { palette, until, from, wide, phablet } from '@guardian/src-foundations';
 import { css, SerializedStyles } from '@emotion/core'
 
 const BASE_PADDING = 8;
@@ -8,12 +8,12 @@ const baseMultiply = (value: number): number => value * BASE_PADDING;
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
 export const sidePadding = css`
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: ${basePx(1)};
+    padding-right: ${basePx(1)};
 
-    ${until.wide} {
-        padding-left: ${basePx(1)};
-        padding-right: ${basePx(1)};
+    ${wide} {
+        padding-left: 0;
+        padding-right: 0;
     }
 }`;
 
@@ -243,14 +243,11 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
 `;
 
 export const articleWidthStyles = css`
-    width: 620px;
-    margin: 0 auto;
-
-    ${until.wide} {
-        margin: unset;
+    ${wide} {
+        margin: 0 auto;
     }
 
-    ${until.phablet} {
-        width: unset;
+    ${phablet} {
+        width: 620px;
     }
 `;

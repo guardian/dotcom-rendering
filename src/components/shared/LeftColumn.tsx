@@ -3,40 +3,35 @@
 import React from 'react';
 
 import { css, SerializedStyles } from '@emotion/core';
-import { until } from '@guardian/src-foundations';
+import { phablet, leftCol } from '@guardian/src-foundations';
 
 
 // ----- Styles ----- //
 
 const LeftColumnStyles = css`
-    display: flex;
     padding: 8px;
 
-    ${until.phablet} {
-        display: block;
+    ${phablet} {
+        display: flex;
     }
 
     .column-content {
-        width: 220px;
-
-        ${until.leftCol} {
+        ${phablet} {
             width: 33%;
         }
 
-        ${until.phablet} {
-            width: unset;
+        ${leftCol} {
+            width: 220px;
         }
     }
 
-    .main-content {
-        width: 620px;
-
-        ${until.leftCol} {
+    .main-content {        
+        ${phablet} {
             width: 67%;
         }
 
-        ${until.phablet} {
-            width: unset;
+        ${leftCol} {
+            width: 620px;
         }
     }
 `;
