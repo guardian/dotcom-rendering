@@ -248,7 +248,7 @@ export const RichLinkComponent: React.FC<{
     const { data, loading, error } = useApi<RichLink>(url);
 
     if (error) {
-        Sentry.withScope(scope => {
+        Sentry.withScope(() => {
             Sentry.setTag('feature', 'rich-link');
             Sentry.captureException(error);
         });

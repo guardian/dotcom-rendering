@@ -88,7 +88,7 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
                 });
             })
             .catch(err => {
-                Sentry.withScope(scope => {
+                Sentry.withScope(() => {
                     Sentry.setTag('feature', 'share-count');
                     Sentry.captureException(err);
                 });
