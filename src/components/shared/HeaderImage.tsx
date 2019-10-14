@@ -5,13 +5,14 @@ import HeaderImageCaption from './HeaderImageCaption';
 import { Asset } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
 import { wide } from '@guardian/src-foundations';
+import { wideContentWidth } from 'styles';
 
 const headerImageStyles = css`
     figure {
         position: relative;
 
         ${wide} {
-            width: 620px;
+            width: ${wideContentWidth}px;
         }
     }
 
@@ -20,7 +21,7 @@ const headerImageStyles = css`
         width: 100%;
 
         ${wide} {
-            width: 620px;
+            width: ${wideContentWidth}px;
         }
     }
 

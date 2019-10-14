@@ -3,7 +3,7 @@ import { css, SerializedStyles } from '@emotion/core'
 
 const BASE_PADDING = 8;
 
-const baseMultiply = (value: number): number => value * BASE_PADDING;
+export const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
@@ -144,8 +144,8 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
 
     .image {
         ${from.phablet.until.wide} {
-            padding-left: 8px;
-            padding-right: 8px;
+            padding-left: ${basePx(1)};
+            padding-right: ${basePx(1)};
         }
     }
 
@@ -186,18 +186,18 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         ${textSans}
 
         ${until.phablet} {
-            padding-left: 8px;
-            padding-right: 8px;
+            padding-left: ${basePx(1)};
+            padding-right: ${basePx(1)};
         }
     }
 
     .rich-link,
     .element-membership {
         background: ${palette.neutral[97]};
-        padding: 8px;
+        padding: ${basePx(1)};
         
         ${until.wide} {
-            margin-left: 8px;
+            margin-left: ${basePx(1)};
         }
 
         h1 {
@@ -242,12 +242,15 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     ${bulletStyles(kicker)}
 `;
 
+export const wideContentWidth = 620;
+export const wideColumnWidth = 220;
+
 export const articleWidthStyles = css`
     ${wide} {
         margin: 0 auto;
     }
 
     ${phablet} {
-        width: 620px;
+        width: ${wideContentWidth}px;
     }
 `;

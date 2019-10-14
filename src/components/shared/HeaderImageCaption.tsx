@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { basePx, textSans, icons } from '../../styles';
+import { basePx, textSans, icons, wideContentWidth } from 'styles';
 import { palette, wide } from '@guardian/src-foundations';
 
 const HeaderImageCaptionStyles = css`
@@ -60,7 +60,7 @@ const HeaderImageCaptionStyles = css`
 	bottom: 0;
 	
 	${wide} {
-		width: 620px;
+		width: ${wideContentWidth}px;
 	}
 `;
 

@@ -9,7 +9,7 @@ import LiveblogBody from './LiveblogBody';
 import HeaderImage from '../shared/HeaderImage';
 import Tags from '../shared/Tags';
 
-import { PillarStyles, PillarId } from '../../styles';
+import { PillarStyles, PillarId, wideColumnWidth, baseMultiply } from 'styles';
 import { Series, Contributor } from '../../types/Capi';
 import { Tag, Asset, Block } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
@@ -37,7 +37,7 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         margin: 0;
 
         ${wide} {
-            margin-left: 228px;
+            margin-left: ${wideColumnWidth + baseMultiply(1)}px;
         }
     }
 `;

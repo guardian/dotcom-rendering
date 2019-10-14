@@ -4,6 +4,7 @@ import React from 'react';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { phablet, leftCol } from '@guardian/src-foundations';
+import { wideContentWidth, wideColumnWidth } from 'styles';
 
 
 // ----- Styles ----- //
@@ -21,7 +22,7 @@ const LeftColumnStyles = css`
         }
 
         ${leftCol} {
-            width: 220px;
+            width: ${wideColumnWidth}px;
         }
     }
 
@@ -31,7 +32,7 @@ const LeftColumnStyles = css`
         }
 
         ${leftCol} {
-            width: 620px;
+            width: ${wideContentWidth}px;
         }
     }
 `;
