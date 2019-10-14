@@ -4,7 +4,7 @@ import { Caption } from '@guardian/guui/components/Caption/Caption';
 export const YoutubeVideo: React.FC<{
     element: YoutubeBlockElement;
     pillar: Pillar;
-    adUnit: string;
+    adUnit?: string;
 }> = ({ element, pillar, adUnit }) => {
     // https://www.ampproject.org/docs/reference/components/amp-youtube
     // https://developers.google.com/youtube/player_parameters
@@ -12,7 +12,7 @@ export const YoutubeVideo: React.FC<{
     const embedConfig = {
         adsConfig: {
             adTagParameters: {
-                iu: `${adUnit}`,
+                iu: `${adUnit || ''}`,
             },
         },
     };

@@ -119,7 +119,7 @@ const expanded = css`
 const asComponent = (
     element: CAPIElement,
     pillar: Pillar,
-    adUnit: string,
+    adUnit?: string,
 ): JSX.Element | null => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -140,7 +140,7 @@ const asComponent = (
 export const MainMedia: React.FC<{
     element: CAPIElement;
     pillar: Pillar;
-    adUnit: string;
+    adUnit?: string;
 }> = ({ element, pillar, adUnit }) => {
     return (
         <div className={expanded}>{asComponent(element, pillar, adUnit)}</div>
