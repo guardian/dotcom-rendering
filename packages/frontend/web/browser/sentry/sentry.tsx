@@ -44,7 +44,6 @@ export const initialiseSentry = (adBlockInUse: boolean) => {
             }
             return event;
         },
-        debug: true,
     });
 
     Sentry.configureScope(scope => {
