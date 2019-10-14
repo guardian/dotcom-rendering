@@ -65,15 +65,12 @@ const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {
         <article>
             <LeftColumn
                 columnContent={timeAgo}
-                mainContent={
-                    <>
-                        <Title highlighted={highlighted} title={title} />
-                        { children }
-                        <time>Last updated: { formatDate(lastModifiedDate) }</time>
-                    </>
-                }
                 className={LiveblogBlockStyles(pillarStyles, highlighted)}
-            />
+            >
+                <Title highlighted={highlighted} title={title} />
+                { children }
+                <time>Last updated: { formatDate(lastModifiedDate) }</time>
+            </LeftColumn>
         </article>
     )
 }

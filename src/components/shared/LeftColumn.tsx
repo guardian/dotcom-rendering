@@ -40,8 +40,8 @@ const LeftColumnStyles = css`
 // ----- Props ----- //
 
 interface LeftColumnProps {
-    columnContent: JSX.Element | null;
-    mainContent: JSX.Element | null;
+    children: React.ReactNode;
+    columnContent?: JSX.Element | null;
     className?: SerializedStyles | null;
 };
 
@@ -49,10 +49,10 @@ interface LeftColumnProps {
 // ----- Component ----- //
 
 const LeftColumn =
-    ({ columnContent, mainContent, className = null }: LeftColumnProps): JSX.Element =>
+    ({ children, columnContent = null, className = null }: LeftColumnProps): JSX.Element =>
         <div css={[className, LeftColumnStyles]}>
             <div className="column-content">{columnContent}</div>
-            <div className="main-content">{mainContent}</div>
+            <div className="main-content">{children}</div>
         </div>
 
 
