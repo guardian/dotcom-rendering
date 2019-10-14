@@ -10,6 +10,7 @@ import {
     phablet,
     mobileLandscape,
 } from '@guardian/pasteup/breakpoints';
+import { unescapeData } from '@frontend/web/server/escapeData';
 
 const gutter = 20;
 const quoteTail = 25;
@@ -122,7 +123,7 @@ export const PullQuoteComponent: React.FC<{
         <Quote />{' '}
         <span // tslint:disable-line:react-no-dangerous-html
             dangerouslySetInnerHTML={{
-                __html: html,
+                __html: unescapeData(html),
             }}
         />
         <footer>

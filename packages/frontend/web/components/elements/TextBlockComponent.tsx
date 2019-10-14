@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { body } from '@guardian/pasteup/typography';
+import { unescapeData } from '@frontend/web/server/escapeData';
 // tslint:disable:react-no-dangerous-html
 
 const para = css`
@@ -30,9 +31,8 @@ export const TextBlockComponent: React.FC<{ html: string }> = ({ html }) => {
             <p
                 className={para}
                 dangerouslySetInnerHTML={{
-                    __html: html.slice(
-                        prefix.length,
-                        html.length - suffix.length,
+                    __html: unescapeData(
+                        html.slice(prefix.length, html.length - suffix.length),
                     ),
                 }}
             />
@@ -43,7 +43,7 @@ export const TextBlockComponent: React.FC<{ html: string }> = ({ html }) => {
         <span
             className={innerPara}
             dangerouslySetInnerHTML={{
-                __html: html,
+                __html: unescapeData(html),
             }}
         />
     );
