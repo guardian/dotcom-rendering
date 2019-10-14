@@ -8,7 +8,8 @@
     "ios >= 11"
   ],
   "scripts": {
-    "test": "jest",
+    "test:build": "webpack --config webpack.config.js --config-name tests",
+    "test:run": "npm run test:build && jest dist",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "build:server": "webpack --config webpack.config.js --config-name server",
@@ -38,7 +39,6 @@
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.6.0",
     "@types/compression": "^1.0.1",
     "@types/express": "^4.17.1",
     "@types/jest": "^24.0.18",
@@ -48,7 +48,6 @@
     "@types/react-dom": "^16.9.0",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
-    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "eslint": "^6.4.0",
     "eslint-plugin-react": "^7.14.3",
