@@ -12,6 +12,7 @@
  * TODO: This could be extended
  */
 
+// See: https://stackoverflow.com/a/1144788
 function escapeRegExp(str: string): string {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
 }
