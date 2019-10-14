@@ -1,4 +1,5 @@
 import React from 'react';
+import { unescapeData } from '@frontend/web/server/escapeData';
 // tslint:disable:react-no-dangerous-html
 
 export const SubheadingBlockComponent: React.FC<{ html: string }> = ({
@@ -10,7 +11,7 @@ export const SubheadingBlockComponent: React.FC<{ html: string }> = ({
     // to try to think of a workaround so that our ads will work properly.
     <div
         dangerouslySetInnerHTML={{
-            __html: html,
+            __html: unescapeData(html),
         }}
     />
 );

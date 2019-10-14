@@ -3,8 +3,6 @@ import { getFontsCss } from '@frontend/lib/fonts-css';
 import { getStatic } from '@frontend/lib/assets';
 import { prepareCmpString } from '@frontend/web/browser/prepareCmp';
 
-import { WindowGuardian } from '@frontend/model/window-guardian';
-
 export const htmlTemplate = ({
     title = 'The Guardian',
     description,
@@ -25,7 +23,7 @@ export const htmlTemplate = ({
     css: string;
     html: string;
     fontFiles?: string[];
-    windowGuardian: WindowGuardian;
+    windowGuardian: string;
     ampLink?: string;
 }) => {
     const favicon =
@@ -67,7 +65,7 @@ export const htmlTemplate = ({
                 ${fontPreloadTags.join('\n')}
 
                 <script>
-                    window.guardian = ${JSON.stringify(windowGuardian)};
+                    window.guardian = ${windowGuardian};
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
                 </script>
 
@@ -109,6 +107,7 @@ export const htmlTemplate = ({
 
                 ${priorityScriptTags.join('\n')}
                 <style>${getFontsCss()}${resetCSS}${css}</style>
+
             </head>
 
             <body>
