@@ -1,4 +1,4 @@
-import { palette } from '@guardian/src-foundations';
+import { palette, until, from } from '@guardian/src-foundations';
 import { css, SerializedStyles } from '@emotion/core'
 
 const BASE_PADDING = 8;
@@ -7,10 +7,15 @@ const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
-export const sidePadding = {
-    paddingLeft: basePx(1),
-    paddingRight: basePx(1)
-}
+export const sidePadding = css`
+    padding-left: 0;
+    padding-right: 0;
+
+    ${until.wide} {
+        padding-left: ${basePx(1)};
+        padding-right: ${basePx(1)};
+    }
+}`;
 
 export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
 
@@ -134,8 +139,14 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     }
 
     .image img {
-        width: calc(100% + 16px);
-        margin: 0 -8px;
+        width: 100%; 
+    }
+
+    .image {
+        ${from.phablet.until.wide} {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
     }
 
     blockquote {
@@ -173,12 +184,21 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         line-height: 1.8rem;
         color: ${palette.neutral[46]};
         ${textSans}
+
+        ${until.phablet} {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
     }
 
     .rich-link,
     .element-membership {
         background: ${palette.neutral[97]};
         padding: 8px;
+        
+        ${until.wide} {
+            margin-left: 8px;
+        }
 
         h1 {
             margin: 0;
@@ -220,5 +240,17 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     }
 
     ${bulletStyles(kicker)}
-    ${sidePadding}
+`;
+
+export const articleWidthStyles = css`
+    width: 620px;
+    margin: 0 auto;
+
+    ${until.wide} {
+        margin: unset;
+    }
+
+    ${until.phablet} {
+        width: unset;
+    }
 `;

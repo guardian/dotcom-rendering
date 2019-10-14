@@ -1,17 +1,27 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss } from '../../styles';
-import { palette } from '@guardian/src-foundations';
+import { palette, until } from '@guardian/src-foundations';
 
 const BaseStyles = css`
     height: 12px;
-    width: 100%;
+    width: 620px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 4px;
+
+    ${until.wide} {
+        width: 100%;
+        margin-left: unset;
+        margin-right: unset;
+    }
 `;
 
 const KeylineLiveblogStyles = css`
     background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
     opacity: .4;
+    margin-right: unset;
+    margin-left: 228px;
 `;
 
 const KeylineNewsStyles = css`

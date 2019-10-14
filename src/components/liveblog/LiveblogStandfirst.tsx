@@ -1,8 +1,9 @@
 import React from 'react';
-import { basePx, sidePadding, PillarStyles, bulletStyles } from '../../styles';
+import { PillarStyles, bulletStyles } from '../../styles';
 import { transform } from '../../utils/contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
+import LeftColumn from 'components/shared/LeftColumn';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     padding-bottom: 6px;
@@ -11,7 +12,6 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
     line-height: 2rem;
     background: ${liveblogBackground};
     color: ${palette.neutral[97]};
-    padding: ${basePx(1, 0, 4, 0)};
 
     p, ul {
         margin: 0;
@@ -22,7 +22,6 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
     }
 
     ${bulletStyles(liveblogBackground, .4)}
-    ${sidePadding}
 `;
 
 interface LiveblogStandfirstProps {
@@ -31,9 +30,10 @@ interface LiveblogStandfirstProps {
 }
 
 const LiveblogStandfirst = ({ standfirst, pillarStyles }: LiveblogStandfirstProps): JSX.Element =>
-    <div
-        css={StandfirstStyles(pillarStyles)}
-        dangerouslySetInnerHTML={{ __html: transform(standfirst) }}
+    <LeftColumn
+        columnContent={null}
+        mainContent={<div dangerouslySetInnerHTML={{__html: transform(standfirst)}} />}
+        className={StandfirstStyles(pillarStyles)}
     />
 
 export default LiveblogStandfirst;
