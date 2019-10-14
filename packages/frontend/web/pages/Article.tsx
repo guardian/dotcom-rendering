@@ -20,7 +20,11 @@ export const Article: React.FC<{
             shouldHideAds={data.CAPI.shouldHideAds}
         />
         <Content CAPI={data.CAPI} config={data.config} />
-        <MostViewed sectionName={data.CAPI.sectionName} config={data.config} />
+        <MostViewed
+            sectionName={data.CAPI.sectionName}
+            config={data.config}
+            pillar={data.CAPI.pillar}
+        />
         <SubNav
             subnav={data.NAV.subNavSections}
             pillar={data.CAPI.pillar}
