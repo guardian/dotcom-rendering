@@ -19,6 +19,7 @@ import { PulsingDot } from '@frontend/web/components/PulsingDot';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
+import { unescapeData } from '@frontend/web/server/escapeData';
 
 const container = css`
     padding-top: 3px;
@@ -409,8 +410,9 @@ export class MostViewed extends Component<Props, { selectedTabIndex: number }> {
                                                                     <span // tslint:disable-line:react-no-dangerous-html
                                                                         // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
                                                                         dangerouslySetInnerHTML={{
-                                                                            __html:
+                                                                            __html: unescapeData(
                                                                                 tab.heading,
+                                                                            ),
                                                                         }}
                                                                     />
                                                                 </button>

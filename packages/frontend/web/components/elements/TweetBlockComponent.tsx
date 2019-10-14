@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { body } from '@guardian/pasteup/typography';
+import { unescapeData } from '@frontend/web/server/escapeData';
 
 // fallback styling for when JS is disabled
 const noJSStyling = css`
@@ -32,7 +33,7 @@ export const TweetBlockComponent: React.FC<{
         <div>
             <div
                 className={noJSStyling}
-                dangerouslySetInnerHTML={{ __html: element.html }}
+                dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
             />
             <script
                 async={true}
