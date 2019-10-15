@@ -6,10 +6,8 @@ import {
     leftCol,
     wide,
     palette,
-    mobileLandscape,
 } from '@guardian/src-foundations';
 import { clearFix } from '@guardian/pasteup/mixins';
-import { Container } from '@guardian/guui';
 import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { ArticleHeader } from '@frontend/web/components/ArticleHeader';
 import { labelStyles } from '@frontend/web/components/AdSlot';
@@ -45,16 +43,6 @@ const marginStyles = css`
 
     ${wide} {
         margin-left: 230px;
-    }
-`;
-
-const articleContainerStyles = css`
-    position: relative;
-    background-color: ${palette.neutral[100]};
-    padding: 0 10px;
-
-    ${mobileLandscape} {
-        padding: 0 20px;
     }
 `;
 
@@ -112,19 +100,13 @@ interface Props {
 export const Content = ({ CAPI, config }: Props) => {
     return (
         <main>
-            <Container
-                borders={true}
-                showTopBorder={false}
-                className={articleContainerStyles}
-            >
-                <article className={articleAdStyles}>
-                    <div className={marginStyles}>
-                        <ArticleHeader CAPI={CAPI} config={config} />
-                        <ArticleBody CAPI={CAPI} config={config} />
-                    </div>
-                    <ArticleAside config={config} />
-                </article>
-            </Container>
+            <article className={articleAdStyles}>
+                <div className={marginStyles}>
+                    <ArticleHeader CAPI={CAPI} config={config} />
+                    <ArticleBody CAPI={CAPI} config={config} />
+                </div>
+                <ArticleAside config={config} />
+            </article>
         </main>
     );
 };

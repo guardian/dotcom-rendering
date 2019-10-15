@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import { headline, textSans, body } from '@guardian/pasteup/typography';
-import { Container } from '@guardian/guui';
 import TickIcon from '@guardian/pasteup/icons/tick.svg';
 import RoundelIcon from '@guardian/pasteup/icons/the-guardian-roundel.svg';
 import { getCookie, addCookie } from '@frontend/web/browser/cookie';
@@ -138,7 +137,7 @@ export class CookieBanner extends Component<{}, { show: boolean }> {
                 <div className={iconCss}>
                     <RoundelIcon />
                 </div>
-                <Container className={inner}>
+                <div className={inner}>
                     <h1 className={header}>Your privacy</h1>
                     <p>
                         We use cookies to improve your experience on our site
@@ -161,7 +160,7 @@ export class CookieBanner extends Component<{}, { show: boolean }> {
                             My options
                         </a>
                     </div>
-                </Container>
+                </div>
             </div>
         );
     }

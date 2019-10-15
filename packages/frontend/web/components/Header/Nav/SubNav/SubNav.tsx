@@ -1,7 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { css } from 'emotion';
 
-import { Container } from '@guardian/guui';
 import { palette } from '@guardian/pasteup/palette';
 import { Inner } from './Inner';
 
@@ -92,21 +91,19 @@ export class SubNav extends Component<
 
         return (
             <div className={subnavWrapper}>
-                <Container borders={true}>
-                    <Inner
-                        links={this.props.subnav.links}
-                        pillar={this.props.pillar}
-                        parent={this.props.subnav.parent}
-                        showMore={showMore}
-                        isExpanded={isExpanded}
-                        collapseWrapper={collapseWrapper}
-                        expandSubNav={expandSubNav}
-                        ulRef={this.ulRef}
-                        toggle={this.toggle}
-                        currentNavLink={this.props.currentNavLink}
-                    />
-                    <div className={multiLine} />
-                </Container>
+                <Inner
+                    links={this.props.subnav.links}
+                    pillar={this.props.pillar}
+                    parent={this.props.subnav.parent}
+                    showMore={showMore}
+                    isExpanded={isExpanded}
+                    collapseWrapper={collapseWrapper}
+                    expandSubNav={expandSubNav}
+                    ulRef={this.ulRef}
+                    toggle={this.toggle}
+                    currentNavLink={this.props.currentNavLink}
+                />
+                <div className={multiLine} />
             </div>
         );
     }
