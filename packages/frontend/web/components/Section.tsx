@@ -11,6 +11,7 @@ import {
 } from '@guardian/src-foundations';
 
 const center = css`
+    position: relative;
     margin: auto;
 
     ${tablet} {
