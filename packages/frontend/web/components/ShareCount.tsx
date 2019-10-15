@@ -87,6 +87,8 @@ export const ShareCount = ({ config, pageId }: Props) => {
             },
             true,
         );
+
+        return null;
     }
 
     if (!data || !data.share_count) {
