@@ -7,7 +7,6 @@ import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
-import { reportError } from '@frontend/web/browser/sentry/sentry';
 
 type CardStyle =
     | 'special-report'
@@ -248,7 +247,7 @@ export const RichLinkComponent: React.FC<{
     const { data, loading, error } = useApi<RichLink>(url);
 
     if (error) {
-        reportError(error, 'rich-link');
+        window.guardian.modules.sentry.reportError(error, 'rich-link');
 
         return null;
     }

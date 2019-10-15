@@ -13,7 +13,6 @@ import { Container } from '@guardian/guui';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
-import { reportError } from '@frontend/web/browser/sentry/sentry';
 import { useApi } from '@frontend/web/components/lib/api';
 
 import { MostViewedGrid } from './MostViewedGrid';
@@ -128,7 +127,7 @@ export const MostViewed = ({ config, sectionName, pillar }: Props) => {
     const { data, error } = useApi<TabType[]>(url);
 
     if (error) {
-        reportError(error, 'most-viewed');
+        window.guardian.modules.sentry.reportError(error, 'most-viewed');
     }
 
     if (data) {

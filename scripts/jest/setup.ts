@@ -29,6 +29,16 @@ const windowGuardian = {
         viewId: '',
         pageViewId: '',
     },
+    modules: {
+        sentry: {
+            reportError: (error: Error, feature: string): void => {
+                // tslint:disable-next-line: no-console
+                console.log(
+                    `Error: attempting to log error without having registered sentry.\nError is: ${error.message}`,
+                );
+            },
+        },
+    },
 };
 
 // Stub global Guardian object

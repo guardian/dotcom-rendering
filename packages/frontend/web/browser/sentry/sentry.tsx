@@ -52,7 +52,7 @@ export const initialiseSentry = (adBlockInUse: boolean) => {
     });
 };
 
-export const reportError = (error: any, feature?: string) => {
+export const reportError = (error: any, feature?: string): void => {
     Sentry.withScope(() => {
         if (feature) {
             Sentry.setTag('feature', feature);

@@ -5,7 +5,6 @@ import ShareIcon from '@guardian/pasteup/icons/share.svg';
 import { textSans } from '@guardian/pasteup/typography';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';
-import { reportError } from '@frontend/web/browser/sentry/sentry';
 
 const shareCount = css`
     ${textSans(6)};
@@ -88,7 +87,7 @@ export class ShareCount extends Component<Props, { shareCount?: number }> {
                 });
             })
             .catch(err => {
-                reportError(err, 'share-count');
+                window.guardian.modules.sentry.reportError(err, 'share-count');
             });
     }
 

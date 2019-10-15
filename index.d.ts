@@ -26,6 +26,11 @@ declare global {
                 viewId: string;
                 pageViewId: string;
             };
+            modules: {
+                sentry: {
+                    reportError: (error: Error, feature: string) => void;
+                };
+            };
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
