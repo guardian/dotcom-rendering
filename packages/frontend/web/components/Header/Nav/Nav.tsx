@@ -7,7 +7,8 @@ import {
     leftCol,
     wide,
     mobileLandscape,
-} from '@guardian/pasteup/breakpoints';
+    palette,
+} from '@guardian/src-foundations';
 
 import { Logo } from './Logo';
 import { EditionDropdown } from './EditionDropdown';
@@ -18,6 +19,7 @@ import { MainMenu } from './MainMenu/MainMenu';
 import { SubNav } from './SubNav/SubNav';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { getCookie } from '@frontend/web/browser/cookie';
+import { Section } from '@frontend/web/components/Section';
 
 const centered = css`
     ${tablet} {
@@ -135,11 +137,13 @@ export class Nav extends Component<
                         nav={nav}
                     />
                 </nav>
-                <SubNav
-                    subnav={nav.subNavSections}
-                    currentNavLink={nav.currentNavLink}
-                    pillar={pillar}
-                />
+                <Section backgroundColour={palette.neutral[100]} padded={false}>
+                    <SubNav
+                        subnav={nav.subNavSections}
+                        currentNavLink={nav.currentNavLink}
+                        pillar={pillar}
+                    />
+                </Section>
             </div>
         );
     }
