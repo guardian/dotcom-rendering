@@ -7,7 +7,7 @@ import { Content } from '@frontend/web/components/Content';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
-import { Section } from '@guardian/guui';
+import { Section } from '@frontend/web/components/Section';
 
 export const Article: React.FC<{
     data: ArticleProps;
