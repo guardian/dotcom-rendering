@@ -27,6 +27,7 @@ module.exports = {
                     '@frontend/lib/',
                     '@frontend/amp/lib/',
                     '@testing-library',
+                    '@guardian/frontend/static/',
                 ],
             },
         ],
