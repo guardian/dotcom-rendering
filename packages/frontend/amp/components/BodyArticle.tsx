@@ -2,7 +2,7 @@ import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
-import { ArticleModel } from '@frontend/amp/pages/Article';
+import { ArticleModel } from '@frontend/amp/types/ArticleModel';
 import { TopMeta } from '@frontend/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { designTypeDefault } from '@frontend/lib/designTypes';

@@ -28,6 +28,7 @@ module.exports = {
                     '@frontend/amp/lib/',
                     '@testing-library',
                     '@guardian/frontend/static/',
+                    "@guardian/guui/components"
                 ],
             },
         ],

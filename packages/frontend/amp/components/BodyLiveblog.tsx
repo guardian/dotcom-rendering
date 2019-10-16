@@ -1,7 +1,7 @@
 import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { css } from 'emotion';
-import { ArticleModel } from '@frontend/amp/pages/Article';
+import { ArticleModel } from '@frontend/amp/types/ArticleModel';
 import { TopMetaLiveblog } from '@frontend/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { palette, headline, textSans } from '@guardian/src-foundations';
