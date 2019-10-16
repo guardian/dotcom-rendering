@@ -4,7 +4,7 @@ import { palette } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { sanitise } from '@frontend/amp/lib/sanitise-html';
 import { body, textSans } from '@guardian/pasteup/typography';
-import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';
+import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 // Note, this should only apply basic text styling. It is a case where we want
 // to re-use styling, but generally we should avoid this as it couples
