@@ -7,9 +7,9 @@ Think of pasteup as a base foundation you can use to build components with the t
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
--   [Releasing pasteup](#releasing-pasteup)
--   [Versioning rules of thumb](#versioning-rules-of-thumb)
-    -   [Migrations](#migrations)
+- [Releasing pasteup](#releasing-pasteup)
+- [Versioning rules of thumb](#versioning-rules-of-thumb)
+  - [Migrations](#migrations)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
