@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import Logo from '@guardian/pasteup/logos/the-guardian.svg';
+import Logo from '@frontend/static/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { pillarPalette } from '@frontend/lib/pillars';
 import {

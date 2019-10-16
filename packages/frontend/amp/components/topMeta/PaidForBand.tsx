@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette, mobileLandscape, textSans } from '@guardian/src-foundations';
-import LabsLogo from '@guardian/pasteup/logos/the-guardian-labs.svg';
+import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 
 const headerStyle = css`
