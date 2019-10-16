@@ -9,7 +9,7 @@ import {
     LinkPlatform,
     isOnPlatform,
 } from '@frontend/lib/footer-links';
-import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
+import { ReaderRevenueButton } from '@frontend/amp/components/ReaderRevenueButton';
 
 const footer = css`
     background-color: ${palette.brand.main};
