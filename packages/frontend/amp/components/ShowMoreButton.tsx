@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations';
+import { palette, textSans } from '@guardian/src-foundations';
 import PlusIcon from '@frontend/static/icons/plus.svg';
 
 const showMore = css`

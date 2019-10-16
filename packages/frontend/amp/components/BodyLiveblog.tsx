@@ -4,12 +4,11 @@ import { css } from 'emotion';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { TopMetaLiveblog } from '@frontend/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
-import { palette } from '@guardian/src-foundations';
+import { palette, headline, textSans } from '@guardian/src-foundations';
 import { KeyEvents } from '@frontend/amp/components/KeyEvents';
 import { Blocks } from '@frontend/amp/components/Blocks';
 import RefreshIcon from '@frontend/static/icons/refresh.svg';
 import { Pagination } from '@frontend/amp/components/Pagination';
-import { headline, textSans } from '@guardian/src-foundations';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
 // TODO check if liveblog background colours are more complex - like regular

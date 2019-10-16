@@ -46,7 +46,7 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${textSans({ level: 3})};
+    ${textSans({ level: 3 })};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;

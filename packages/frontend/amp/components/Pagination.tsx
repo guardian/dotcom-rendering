@@ -1,14 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { palette, textSans } from '@guardian/src-foundations';
 import ChevronRightSingle from '@frontend/static/icons/chevron-right-single.svg';
 import ChevronRightDouble from '@frontend/static/icons/chevron-right-double.svg';
 import ChevronLeftSingle from '@frontend/static/icons/chevron-left-single.svg';
 import ChevronLeftDouble from '@frontend/static/icons/chevron-left-double.svg';
-import { textSans } from '@guardian/src-foundations';
 
 const paginationStyle = css`
-    ${textSans({ level: 1})};
+    ${textSans({ level: 1 })};
     font-weight: bold;
 
     display: flex;

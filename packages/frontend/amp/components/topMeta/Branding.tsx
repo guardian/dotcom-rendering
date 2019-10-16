@@ -10,12 +10,12 @@ const brandingStyle = (pillar: Pillar) => css`
     a, a:hover {
         display: block;
         border-bottom: none;
-        ${textSans({ level: 1})}
+        ${textSans({ level: 1 })}
     }
 `;
 
 const brandingLabelStyle = css`
-    ${textSans({ level: 1})};
+    ${textSans({ level: 1 })};
 `;
 
 const brandingLogoStyle = css`

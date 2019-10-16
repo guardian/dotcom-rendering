@@ -2,8 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/src-foundations';
-import { body } from '@guardian/src-foundations';
+import { palette, body } from '@guardian/src-foundations';
 import {
     desktop,
     leftCol,

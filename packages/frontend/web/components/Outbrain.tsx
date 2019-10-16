@@ -4,8 +4,14 @@ import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans, body } from '@guardian/src-foundations';
-import { tablet, desktop, leftCol, wide } from '@guardian/src-foundations';
+import {
+    textSans,
+    body,
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+} from '@guardian/src-foundations';
 
 interface OutbrainSelectors {
     widget: string;

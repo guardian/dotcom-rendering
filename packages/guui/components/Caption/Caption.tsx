@@ -10,7 +10,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
     padding-top: 10px;
-    ${textSans({ level: 1})};
+    ${textSans({ level: 1 })};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
 `;

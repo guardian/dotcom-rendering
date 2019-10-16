@@ -111,7 +111,7 @@ const linkFirst = css`
 `;
 
 const button = css`
-    ${textSans({ level: 3})};
+    ${textSans({ level: 3 })};
     display: block;
     cursor: pointer;
     background: none;

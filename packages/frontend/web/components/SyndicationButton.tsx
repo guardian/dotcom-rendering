@@ -12,7 +12,7 @@ export const SyndicationButton: React.FC<{
         display: none;
 
         ${desktop} {
-            ${textSans({ level: 1})};
+            ${textSans({ level: 1 })};
             display: inline-block;
             float: right;
         }

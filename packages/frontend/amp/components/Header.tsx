@@ -2,9 +2,13 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import Logo from '@guardian/pasteup/logos/the-guardian.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette, mobileLandscape, until } from '@guardian/src-foundations';
+import {
+    headline,
+    palette,
+    mobileLandscape,
+    until,
+} from '@guardian/src-foundations';
 import { ReaderRevenueButton } from '@frontend/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`

@@ -6,7 +6,7 @@ import { textSans } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 const captionFont = css`
-    ${textSans({ level: 1})};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[46]};
 `;
 

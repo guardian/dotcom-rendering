@@ -30,7 +30,7 @@ const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[100]};
     padding-bottom: 6px;
-    ${textSans({ level: 3})};
+    ${textSans({ level: 3 })};
 `;
 
 const pillarWrap = css`
@@ -144,7 +144,7 @@ const readerRevenueLinks = css`
 `;
 
 const copyright = css`
-    ${textSans({ level: 1})};
+    ${textSans({ level: 1 })};
     padding: 12px;
 
     ${until.tablet} {

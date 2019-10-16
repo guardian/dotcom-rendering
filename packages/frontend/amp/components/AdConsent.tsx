@@ -1,8 +1,7 @@
 import React from 'react';
 import { JsonScript } from './JsonScript';
 import { css, cx } from 'emotion';
-import { textSans } from '@guardian/src-foundations';
-import { palette } from '@guardian/src-foundations';
+import { palette, textSans } from '@guardian/src-foundations';
 import Tick from '@frontend/static/icons/tick.svg';
 
 const consentUIStyle = css`
