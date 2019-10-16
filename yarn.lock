@@ -869,11 +869,6 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/pasteup@2.0.0-alpha.2":
-  version "2.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@guardian/pasteup/-/pasteup-2.0.0-alpha.2.tgz#ee73012b19fdc260a4407dcbb7399b82307c3c5e"
-  integrity sha512-V+PlyX9j6jSVs7jDD71wD/iIDC3K2yPletffFDcYHHmiIMuJaE3oqJC+tb8sWjZGtAkfXY8aYdC/GaYpCs6Xgg==
-
 "@guardian/src-foundations@^0.0.14":
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.0.14.tgz#863c5a5fec7e7c30ed387a4d901fb7173de64087"
