@@ -1,7 +1,7 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import { css } from 'emotion';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import InfoIcon from '@guardian/pasteup/icons/info.svg';
 import { palette } from '@guardian/src-foundations';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
@@ -27,7 +27,7 @@ const captionStyle = css`
     padding: 6px 40px 12px 10px;
     max-width: 100%;
     min-height: 46px;
-    ${textSans(2)};
+    ${textSans({ level: 2 })};
 `;
 
 const inputStyle = css`

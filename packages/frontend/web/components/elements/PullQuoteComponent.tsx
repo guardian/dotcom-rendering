@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import Quote from '@guardian/pasteup/icons/quote.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { body } from '@guardian/pasteup/typography';
+import { body } from '@guardian/src-foundations';
 import {
     desktop,
     leftCol,
@@ -51,7 +51,7 @@ const supportingStyles = (pillar: Pillar) =>
         margin-right: 0.6rem;
         clear: left;
         float: left;
-        ${body(4)};
+        ${body({ level: 2 })};
 
         ${leftCol} {
             margin-left: -${gutter / 2 + gsSpan(3) / 2}px;
@@ -75,7 +75,7 @@ const inlineStyles = (pillar: Pillar) =>
         `
         margin-left: 0rem;
         display: block;
-        ${body(4)};
+        ${body({ level: 2 })};
 
         ${mobileLandscape} {
             margin-left: -${gutter}px;

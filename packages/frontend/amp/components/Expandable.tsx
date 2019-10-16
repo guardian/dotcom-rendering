@@ -4,8 +4,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import InfoIcon from '@guardian/pasteup/icons/info.svg';
 import PlusIcon from '@guardian/pasteup/icons/plus.svg';
 
-import { body, textSans, headline } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/src-foundations';
+import { palette, body, textSans, headline } from '@guardian/src-foundations';
 import { TextStyle } from '@frontend/amp/components/elements/Text';
 
 const wrapper = (pillar: Pillar) => css`
@@ -26,7 +25,7 @@ const wrapper = (pillar: Pillar) => css`
 
     ${TextStyle(pillar)}
 
-    ${body(2)};
+    ${body({ level: 2 })};
 `;
 
 const buttonStyles = css`
@@ -35,7 +34,7 @@ const buttonStyles = css`
     border-radius: 1600px;
     color: ${palette.neutral[100]};
     border: none;
-    ${textSans(2)};
+    ${textSans({ level: 2 })};
     font-weight: 700;
     padding: 0 15px 0 7px;
 
@@ -60,11 +59,11 @@ const buttonStyles = css`
 `;
 
 const headerStyle = css`
-    ${headline(3)};
+    ${headline({ level: 2 })};
 `;
 
 const creditStyle = css`
-    ${textSans(2)};
+    ${textSans({ level: 2 })};
     display: block;
     margin: 12px 0;
 `;

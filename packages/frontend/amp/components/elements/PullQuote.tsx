@@ -2,8 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import Quote from '@guardian/pasteup/icons/quote.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/src-foundations';
-import { body } from '@guardian/pasteup/typography';
+import { palette, body } from '@guardian/src-foundations';
 
 const styles = (pillar: Pillar) => css`
     background-color: ${palette.neutral[97]};
@@ -11,7 +10,7 @@ const styles = (pillar: Pillar) => css`
     margin-bottom: 0.75rem;
     display: block;
     color: ${pillarPalette[pillar].dark};
-    ${body(2)};
+    ${body({ level: 2 })};
 
     svg {
         fill: ${pillarPalette[pillar].dark};

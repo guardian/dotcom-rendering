@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { leftCol } from '@guardian/pasteup/breakpoints';
-import { headline } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/src-foundations';
 
 const sectionLabelLink = css`
     text-decoration: none;
@@ -20,15 +20,15 @@ const pillarColours = pillarMap(
 
 const primaryStyle = css`
     font-weight: 700;
-    ${headline(2)};
+    ${headline({ level: 1 })};
 
     ${leftCol} {
-        ${headline(3)};
+        ${headline({ level: 2 })};
     }
 `;
 
 const secondaryStyle = css`
-    ${headline(2)};
+    ${headline({ level: 1 })};
     display: block;
 `;
 

@@ -4,7 +4,7 @@ import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans, body } from '@guardian/pasteup/typography';
+import { textSans, body } from '@guardian/src-foundations';
 import { tablet, desktop, leftCol, wide } from '@guardian/src-foundations';
 
 interface OutbrainSelectors {
@@ -89,10 +89,10 @@ const outbrainContainer = css`
 
     .ob-widget {
         div.ob-widget-header {
-            ${body(3)};
+            ${body({ level: 2 })};
             span,
             .ob_about_this_content a {
-                ${body(1)};
+                ${body({ level: 1 })};
                 text-decoration: none;
                 /* stylelint-disable-next-line color-no-hex */
                 color: #00456e;
@@ -104,7 +104,7 @@ const outbrainContainer = css`
 
         span.ob-rec-text {
             max-height: fit-content;
-            ${textSans(5)};
+            ${textSans({ level: 3 })};
         }
     }
 `;

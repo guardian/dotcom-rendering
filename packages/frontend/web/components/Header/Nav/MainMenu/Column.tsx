@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
 
 import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
@@ -42,7 +42,7 @@ const pillarDividerExtended = css`
 `;
 
 const columnLinkTitle = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     background-color: transparent;
     text-decoration: none;
     border: 0;
@@ -60,7 +60,7 @@ const columnLinkTitle = css`
         padding-left: 60px;
     }
     ${desktop} {
-        ${textSans(6)};
+        ${textSans({ level: 3 })};
         font-size: 16px;
         padding: 6px 0;
     }
@@ -106,7 +106,7 @@ const ColumnLink: React.FC<{
 );
 
 const columnLinks = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -169,7 +169,7 @@ const ColumnLinks: React.FC<{
 };
 
 const columnStyle = css`
-    ${textSans(6)};
+    ${textSans({ level: 3 })};
     list-style: none;
     margin: 0;
     padding-bottom: 10px;

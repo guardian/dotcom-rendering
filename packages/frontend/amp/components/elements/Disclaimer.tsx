@@ -1,10 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 
 const style = (pillar: Pillar) => css`
-    ${textSans(2)};
+    ${textSans({ level: 2 })};
 
     a {
         color: ${pillarPalette[pillar].dark};

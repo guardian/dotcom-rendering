@@ -1,9 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { palette, body, textSans } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { sanitise } from '@frontend/amp/lib/sanitise-html';
-import { body, textSans } from '@guardian/pasteup/typography';
 import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 // Note, this should only apply basic text styling. It is a case where we want
@@ -50,7 +49,7 @@ export const TextStyle = (pillar: Pillar) => css`
     }
     p {
         padding: 0 0 12px;
-        ${body(2)};
+        ${body({ level: 2 })};
         font-weight: 300;
         word-wrap: break-word;
         color: ${palette.neutral[7]};
@@ -61,7 +60,7 @@ export const TextStyle = (pillar: Pillar) => css`
         font-style: italic;
     }
 
-    ${body(2)};
+    ${body({ level: 2 })};
 
     ${LinkStyle(pillar)};
     ${ListStyle(pillarPalette[pillar].neutral.border)};
@@ -70,7 +69,7 @@ export const TextStyle = (pillar: Pillar) => css`
 // Labs paid content only
 const textStyleLabs = css`
     p {
-        ${textSans(7)}
+        ${textSans({ level: 4 })}
     }
 `;
 

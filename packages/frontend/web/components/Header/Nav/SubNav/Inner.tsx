@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import {
     desktop,
     tablet,
@@ -46,7 +46,7 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${textSans(5)};
+    ${textSans({ level: 3})};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;

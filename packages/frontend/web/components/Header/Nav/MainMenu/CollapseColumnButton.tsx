@@ -1,5 +1,5 @@
 import React from 'react';
-import { headline } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
 import { hideDesktop } from './Column';
 import { palette } from '@guardian/pasteup/palette';
@@ -17,7 +17,7 @@ const collapseColumnButton = css`
     cursor: pointer;
     color: ${palette.neutral[100]};
     display: block;
-    ${headline(4)};
+    ${headline({ level: 3 })};
     font-weight: 700;
     outline: none;
     padding: 6px 34px 18px 50px;

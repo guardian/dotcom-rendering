@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkStyle } from '@frontend/amp/components/elements/Text';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import { css } from 'emotion';
 
 const brandingStyle = (pillar: Pillar) => css`
@@ -10,12 +10,12 @@ const brandingStyle = (pillar: Pillar) => css`
     a, a:hover {
         display: block;
         border-bottom: none;
-        ${textSans(1)}
+        ${textSans({ level: 1})}
     }
 `;
 
 const brandingLabelStyle = css`
-    ${textSans(1)};
+    ${textSans({ level: 1})};
 `;
 
 const brandingLogoStyle = css`

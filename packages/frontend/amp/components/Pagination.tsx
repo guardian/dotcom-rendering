@@ -5,10 +5,10 @@ import ChevronRightSingle from '@guardian/pasteup/icons/chevron-right-single.svg
 import ChevronRightDouble from '@guardian/pasteup/icons/chevron-right-double.svg';
 import ChevronLeftSingle from '@guardian/pasteup/icons/chevron-left-single.svg';
 import ChevronLeftDouble from '@guardian/pasteup/icons/chevron-left-double.svg';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 
 const paginationStyle = css`
-    ${textSans(1)};
+    ${textSans({ level: 1})};
     font-weight: bold;
 
     display: flex;

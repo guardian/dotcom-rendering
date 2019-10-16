@@ -7,7 +7,7 @@ import { Byline } from '@frontend/web/components/Byline';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline, textSans, body } from '@guardian/pasteup/typography';
+import { headline, textSans, body } from '@guardian/src-foundations';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import {
     from,
@@ -27,13 +27,13 @@ import { SharingIcons } from './ShareIcons';
 const curly = (x: any) => x;
 
 const standfirst = css`
-    ${body(2)};
+    ${body({ level: 2 })};
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
 
     li {
-        ${textSans(5)};
+        ${textSans({ level: 3 })};
         margin-bottom: 6px;
         padding-left: 20px;
 
@@ -58,7 +58,7 @@ const standfirst = css`
     }
 
     li {
-        ${headline(2)};
+        ${headline({ level: 1 })};
     }
 `;
 
@@ -90,7 +90,7 @@ const guardianLines = css`
 `;
 
 const captionFont = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[46]};
 `;
 
@@ -129,7 +129,7 @@ const mainMedia = css`
 `;
 
 const headerStyle = css`
-    ${headline(7)};
+    ${headline({ level: 5 })};
     font-weight: 500;
     padding-bottom: 24px;
     padding-top: 3px;
@@ -174,7 +174,7 @@ const meta = css`
 `;
 
 const ageWarningStyle = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     color: ${palette.neutral[7]};
     background-color: ${palette.highlight.main};
     display: inline-block;

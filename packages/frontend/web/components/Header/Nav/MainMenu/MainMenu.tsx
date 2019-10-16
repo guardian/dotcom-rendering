@@ -10,7 +10,7 @@ import {
 } from '@guardian/pasteup/breakpoints';
 import { Columns } from './Columns';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 
 const showMenu = css`
     ${desktop} {
@@ -25,7 +25,7 @@ const showMenu = css`
 const mainMenu = css`
     background-color: ${palette.brand.main};
     box-sizing: border-box;
-    ${textSans(8)};
+    ${textSans({ level: 4 })};
     left: 0;
     margin-right: 29px;
     padding-bottom: 24px;

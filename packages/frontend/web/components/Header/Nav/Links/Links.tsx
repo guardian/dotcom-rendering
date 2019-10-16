@@ -8,7 +8,7 @@ import {
 import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
 import SearchIcon from '@guardian/pasteup/icons/search.svg';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import {
     tablet,
     desktop,
@@ -39,7 +39,7 @@ const search = css`
 `;
 
 const link = css`
-    ${textSans(5)};
+    ${textSans({ level: 3})};
     color: ${palette.neutral[100]};
     float: left;
     position: relative;

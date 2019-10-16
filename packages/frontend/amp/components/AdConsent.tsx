@@ -1,12 +1,12 @@
 import React from 'react';
 import { JsonScript } from './JsonScript';
 import { css, cx } from 'emotion';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import { palette } from '@guardian/src-foundations';
 import Tick from '@guardian/pasteup/icons/tick.svg';
 
 const consentUIStyle = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     color: ${palette.neutral[97]};
     background-color: ${palette.neutral[20]};
     max-width: 600px;
