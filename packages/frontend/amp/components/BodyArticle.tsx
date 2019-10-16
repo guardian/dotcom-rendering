@@ -10,7 +10,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import { palette, until } from '@guardian/src-foundations';
 import { WithAds } from '@frontend/amp/components/WithAds';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
 const body = (pillar: Pillar, designType: DesignType) => {
     const defaultStyles: DesignTypesObj = designTypeDefault(

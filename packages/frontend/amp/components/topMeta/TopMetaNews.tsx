@@ -10,7 +10,7 @@ import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
 import { Branding } from '@frontend/amp/components/topMeta/Branding';
 import { StarRating } from '../StarRating';
