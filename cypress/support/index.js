@@ -14,7 +14,29 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+beforeEach(() => {
+    cy.server();
+    // Mock share count
+    cy.route({
+        method: 'GET',
+        url: '/sharecount/**',
+        response: 'fixture:shareCount.json',
+    });
+    // Mock most-read
+    cy.route({
+        method: 'GET',
+        url: '/most-read/**',
+        response: 'fixture:mostRead.json',
+    });
+    // Mock most-read
+    cy.route({
+        method: 'GET',
+        url: '/embed/card/**',
+        response: 'fixture:richLink.json',
+    });
+});

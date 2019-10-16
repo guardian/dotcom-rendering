@@ -1,0 +1,50 @@
+{
+    "tags": [
+        {
+            "id": "football/transfer-window",
+            "type": "Keyword",
+            "title": "Transfer window"
+        },
+        {
+            "id": "football/football",
+            "type": "Keyword",
+            "title": "Football"
+        },
+        {
+            "id": "sport/sport",
+            "type": "Keyword",
+            "title": "Sport"
+        },
+        {
+            "id": "type/interactive",
+            "type": "Type",
+            "title": "Interactive"
+        },
+        {
+            "id": "profile/niall-mcveigh",
+            "type": "Contributor",
+            "title": "Niall McVeigh"
+        },
+        {
+            "id": "profile/marcuschristenson",
+            "type": "Contributor",
+            "title": "Marcus Christenson"
+        },
+        {
+            "id": "profile/garry-blight",
+            "type": "Contributor",
+            "title": "Garry Blight"
+        },
+        {
+            "id": "tracking/commissioningdesk/uk-sport",
+            "type": "Tracking",
+            "title": "UK Sport"
+        }
+    ],
+    "cardStyle": "news",
+    "thumbnailUrl": "https://i.guim.co.uk/img/media/169a4d018cf7d86cbbf9bed80d5215f8dcd8780f/0_10_1008_605/master/1008.jpg?width=460&quality=85&auto=format&fit=max&s=d50247642b8e2fc8f4296de25530ccc9",
+    "headline": "Summer transfer window recap – every deal from Europe's top five leagues",
+    "contentType": "Interactive",
+    "url": "/football/ng-interactive/2019/jun/04/football-transfer-window-2019-every-summer-deal-from-europe-top-five-leagues",
+    "pillar": "sport"
+}
