@@ -43,13 +43,22 @@ const go = async () => {
     app.get(
         '/Article',
         async (req, res, next) => {
-            const { html, ...config } = await fetch(
-                `${req.query.url ||
-                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?dcr=true`,
-            ).then(article => article.json());
+            try {
+                const url = new URL(
+                    req.query.url ||
+                        'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                );
+                const { html, ...config } = await fetch(
+                    // Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
+                    `${url.origin}${url.pathname}.json?dcr=true${url.search}`,
+                ).then(article => article.json());
 
-            req.body = config;
-            next();
+                req.body = config;
+                next();
+            } catch (error) {
+                // eslint-disable-next-line @typescript-eslint/tslint/config
+                console.error(error);
+            }
         },
         webpackHotServerMiddleware(compiler, {
             chunkName: `${siteName}.server`,
@@ -59,13 +68,22 @@ const go = async () => {
     app.get(
         '/AMPArticle',
         async (req, res, next) => {
-            const { html, ...config } = await fetch(
-                `${req.query.url ||
-                    'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'}.json?dcr=true`,
-            ).then(article => article.json());
+            try {
+                const url = new URL(
+                    req.query.url ||
+                        'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                );
+                const { html, ...config } = await fetch(
+                    // Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
+                    `${url.origin}${url.pathname}.json?dcr=true${url.search}`,
+                ).then(article => article.json());
 
-            req.body = config;
-            next();
+                req.body = config;
+                next();
+            } catch (error) {
+                // eslint-disable-next-line @typescript-eslint/tslint/config
+                console.error(error);
+            }
         },
         webpackHotServerMiddleware(compiler, {
             chunkName: `${siteName}.server`,
