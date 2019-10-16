@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test:build": "webpack --config webpack.config.js --config-name tests",
-    "test:run": "npm run test:build && jest dist",
+    "test:run": "npm run test:build && jest --verbose dist",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "build:server": "webpack --config webpack.config.js --config-name server",

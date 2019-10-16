@@ -8,11 +8,17 @@ const fs = require('fs');
 
 // ----- Functions ----- //
 
+const testEntryPoints = (entries, { name, path }) =>
+    name.includes('.test') ? { ...entries, [name]: path } : entries;
+
 const listFiles = (dir) =>
     fs.readdirSync(dir).reduce((list, file) => {
 
         const fullPath = path.join(dir, file);
-        const files = fs.statSync(fullPath).isDirectory() ? listFiles(fullPath) : [file];
+        const isDirectory = fs.statSync(fullPath).isDirectory();
+        const files = isDirectory
+            ? listFiles(fullPath)
+            : [{ name: path.parse(file).name, path: `./${fullPath}` }];
 
         return [ ...list, ...files ];
 
@@ -139,9 +145,9 @@ const clientConfig = {
 const testConfig = {
     name: 'tests',
     mode: 'development',
-    entry: listFiles('./src').filter(f => f.includes('.test.')),
+    entry: listFiles('./src').reduce(testEntryPoints, {}),
     output: {
-        filename: 'all.test.js',
+        filename: '[name].js',
     },
     stats: 'errors-warnings',
     ...nodeConfig,
