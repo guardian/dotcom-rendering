@@ -24,7 +24,6 @@ node_modules
 dist
 jsconfig.json
 target
-guui.zip
 packages/design/public
 
 # Caches

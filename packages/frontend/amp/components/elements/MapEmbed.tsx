@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Caption } from '@guardian/guui/components/Caption/Caption';
+import { Caption } from '@frontend/amp/components/Caption';
 
 const noCaptionStyle = css`
     margin-bottom: 8px;

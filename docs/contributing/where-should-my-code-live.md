@@ -4,15 +4,15 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Scripts](#scripts)
-  - [Low priority scripts](#low-priority-scripts)
-  - [High priority scripts](#high-priority-scripts)
-- [Data extraction](#data-extraction)
-  - [Axiom 1](#axiom-1)
-  - [Axiom 2](#axiom-2)
-  - [Axiom 3](#axiom-3)
-  - [Architecture Decision Records](#architecture-decision-records)
-- [Components](#components)
+-   [Scripts](#scripts)
+    -   [Low priority scripts](#low-priority-scripts)
+    -   [High priority scripts](#high-priority-scripts)
+-   [Data extraction](#data-extraction)
+    -   [Axiom 1](#axiom-1)
+    -   [Axiom 2](#axiom-2)
+    -   [Axiom 3](#axiom-3)
+    -   [Architecture Decision Records](#architecture-decision-records)
+-   [Components](#components)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -76,5 +76,3 @@ Data is passed between `frontend` and `dotcom-rendering` via a network request, 
 Frontend-specific components live in `packages/frontend`.
 
 Note that [Frontend Web](../../packages/frontend/web) and [Frontend AMP](../../packages/frontend/amp) are separate applications that do not share code, including components. If you build a new component for the web, consider whether you need to build an analogous component for AMP too.
-
-If a component is generic enough that it may have value outside of a Frontend context (i.e. it could feasibly be shared with other React applications), consider adding it to [GUUI](../../packages/guui), our shared component library.

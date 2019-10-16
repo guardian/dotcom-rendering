@@ -79,7 +79,7 @@ lint: clean-dist install
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
-	@stylelint "packages/guui/**/*.ts{,x}" "packages/frontend/**/*.ts{,x}"
+	@stylelint "packages/frontend/**/*.ts{,x}"
 
 test: clear clean-dist install
 	$(call log, "running tests")
@@ -103,7 +103,6 @@ validate-ci: clear install tsc lint stylelint test-ci bundlesize
 clean-dist:
 	@rm -rf dist
 	@rm -rf target
-	@rm -f guui.zip
 
 clean-deps:
 	$(call log, "trashing dependencies")

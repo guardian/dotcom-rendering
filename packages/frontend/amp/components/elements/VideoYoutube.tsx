@@ -1,6 +1,6 @@
 import React from 'react';
 import { getIdFromUrl } from '@frontend/amp/lib/get-video-id';
-import { Caption } from '@guardian/guui/components/Caption/Caption';
+import { Caption } from '@frontend/amp/components/Caption';
 
 export const VideoYoutube: React.FC<{
     element: VideoYoutube;

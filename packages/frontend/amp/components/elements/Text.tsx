@@ -8,8 +8,7 @@ import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 // Note, this should only apply basic text styling. It is a case where we want
 // to re-use styling, but generally we should avoid this as it couples
-// components. Longer term we should probably put this in GUUI or somewhere else
-// which is easy to discover and re-use.
+// components.
 
 // tslint:disable:react-no-dangerous-html
 
