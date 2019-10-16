@@ -8,11 +8,11 @@ import {
 } from '@frontend/amp/components/moustache';
 import { headline, textSans } from '@guardian/src-foundations';
 
-import VideoIcon from '@guardian/pasteup/icons/video-icon.svg';
-import Camera from '@guardian/pasteup/icons/camera.svg';
-import VolumeHigh from '@guardian/pasteup/icons/volume-high.svg';
-import Quote from '@guardian/pasteup/icons/quote.svg';
-import Clock from '@guardian/pasteup/icons/clock.svg';
+import VideoIcon from '@frontend/static/icons/video-icon.svg';
+import Camera from '@frontend/static/icons/camera.svg';
+import VolumeHigh from '@frontend/static/icons/volume-high.svg';
+import Quote from '@frontend/static/icons/quote.svg';
+import Clock from '@frontend/static/icons/clock.svg';
 import { palette } from '@guardian/src-foundations';
 import { css } from 'emotion';
 import { ShowMoreButton } from '@frontend/amp/components/ShowMoreButton';

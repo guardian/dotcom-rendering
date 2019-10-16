@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette, textSans, body } from '@guardian/src-foundations';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
-import CommentIcon from '@guardian/pasteup/icons/comment.svg';
+import CommentIcon from '@frontend/static/icons/comment.svg';
 
 const guardianLines = (pillar: Pillar) => css`
     background-image: repeating-linear-gradient(

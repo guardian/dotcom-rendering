@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import Quote from '@guardian/pasteup/icons/quote.svg';
+import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { palette, body } from '@guardian/src-foundations';
 

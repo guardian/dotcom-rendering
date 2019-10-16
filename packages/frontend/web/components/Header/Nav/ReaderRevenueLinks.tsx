@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans, headline } from '@guardian/src-foundations';
-import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
+import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 import {
     tablet,

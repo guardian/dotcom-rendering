@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { palette, mobileLandscape } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations';
 import LabsLogo from '@guardian/pasteup/logos/the-guardian-labs.svg';
-import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
+import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 
 const headerStyle = css`
     display: flex;

@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations';
-import PlusIcon from '@guardian/pasteup/icons/plus.svg';
+import PlusIcon from '@frontend/static/icons/plus.svg';
 
 const showMore = css`
     color: ${palette.neutral[7]};

@@ -2,7 +2,7 @@ import React from 'react';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations';
-import InfoIcon from '@guardian/pasteup/icons/info.svg';
+import InfoIcon from '@frontend/static/icons/info.svg';
 import { palette } from '@guardian/src-foundations';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import InfoIcon from '@guardian/pasteup/icons/info.svg';
-import PlusIcon from '@guardian/pasteup/icons/plus.svg';
+import InfoIcon from '@frontend/static/icons/info.svg';
+import PlusIcon from '@frontend/static/icons/plus.svg';
 
 import { palette, body, textSans, headline } from '@guardian/src-foundations';
 import { TextStyle } from '@frontend/amp/components/elements/Text';

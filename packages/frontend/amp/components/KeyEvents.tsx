@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette, headline, textSans } from '@guardian/src-foundations';
 // import { pillarPalette } from '@frontend/lib/pillars';
-import DownArrow from '@guardian/pasteup/icons/down-arrow.svg';
+import DownArrow from '@frontend/static/icons/down-arrow.svg';
 import { blockLink } from '@frontend/amp/lib/block-link';
 
 const headingStyle = css`

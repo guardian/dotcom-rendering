@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations';
-import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
+import ArrowRight from '@frontend/static/icons/arrow-right.svg';
 import { palette, until } from '@guardian/src-foundations';
 
 const supportStyles = css`

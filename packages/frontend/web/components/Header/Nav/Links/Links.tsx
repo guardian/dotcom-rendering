@@ -5,8 +5,8 @@ import {
     Link as DropdownLink,
     Dropdown,
 } from '@frontend/web/components/Dropdown';
-import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
-import SearchIcon from '@guardian/pasteup/icons/search.svg';
+import ProfileIcon from '@frontend/static/icons/profile.svg';
+import SearchIcon from '@frontend/static/icons/search.svg';
 import { palette } from '@guardian/pasteup/palette';
 import { textSans } from '@guardian/src-foundations';
 import {
@@ -39,7 +39,7 @@ const search = css`
 `;
 
 const link = css`
-    ${textSans({ level: 3})};
+    ${textSans({ level: 3 })};
     color: ${palette.neutral[100]};
     float: left;
     position: relative;
@@ -220,14 +220,14 @@ export const Links: React.FC<{
                 />
             </div>
         ) : (
-            <a
-                className={link}
-                href={signInUrl}
-                data-link-name="nav2 : topbar : signin"
-            >
-                <ProfileIcon /> Sign in
+                <a
+                    className={link}
+                    href={signInUrl}
+                    data-link-name="nav2 : topbar : signin"
+                >
+                    <ProfileIcon /> Sign in
             </a>
-        )}
+            )}
 
         <Search
             className={cx(linkTablet({ showAtTablet: false }), link)}

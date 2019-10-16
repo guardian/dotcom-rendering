@@ -8,7 +8,7 @@ import {
     tablet,
     mobileMedium,
 } from '@guardian/pasteup/breakpoints';
-import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
+import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { getCookie } from '@frontend/web/browser/cookie';

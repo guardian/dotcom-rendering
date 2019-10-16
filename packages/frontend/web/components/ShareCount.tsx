@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import ShareIcon from '@guardian/pasteup/icons/share.svg';
+import ShareIcon from '@frontend/static/icons/share.svg';
 import { textSans } from '@guardian/src-foundations';
 import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
 import { integerCommas } from '@frontend/lib/formatters';

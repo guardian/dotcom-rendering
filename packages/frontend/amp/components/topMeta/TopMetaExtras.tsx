@@ -1,11 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { palette } from '@guardian/src-foundations';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { textSans } from '@guardian/src-foundations';
-import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
+import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
 const pillarColours = pillarMap(
     pillar =>

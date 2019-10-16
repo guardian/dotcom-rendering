@@ -1,8 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import ArrowInCircle from '@guardian/pasteup/icons/arrow-in-circle.svg';
-import Quote from '@guardian/pasteup/icons/quote.svg';
+import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
+import Quote from '@frontend/static/icons/quote.svg';
 import { palette, colour } from '@guardian/pasteup/palette';
 import { headline, textSans } from '@guardian/src-foundations';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';

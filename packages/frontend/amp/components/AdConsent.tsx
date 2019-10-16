@@ -3,7 +3,7 @@ import { JsonScript } from './JsonScript';
 import { css, cx } from 'emotion';
 import { textSans } from '@guardian/src-foundations';
 import { palette } from '@guardian/src-foundations';
-import Tick from '@guardian/pasteup/icons/tick.svg';
+import Tick from '@frontend/static/icons/tick.svg';
 
 const consentUIStyle = css`
     ${textSans({ level: 3 })};
