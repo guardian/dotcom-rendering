@@ -21,6 +21,22 @@ function parseCapi(capiResponse: string): Result<string, any> {
 const isSingleContributor = (contributors: Contributor[]): boolean =>
     contributors.length === 1;
 
+// TODO: request less data from capi
+const capiEndpoint = (articleId: string, key: string): string => {
+
+    const params = new URLSearchParams({
+      format: 'json',
+      'api-key': key,
+      'show-elements': 'all',
+      'show-atoms': 'all',
+      'show-fields': 'all',
+      'show-tags': 'all',
+      'show-blocks': 'all',
+    })
+  
+    return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
+  
+  }
 
 // ----- Exports ----- //
 
@@ -28,4 +44,5 @@ export {
     isFeature,
     parseCapi,
     isSingleContributor,
+    capiEndpoint
 };

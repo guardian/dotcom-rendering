@@ -15,7 +15,7 @@ import Article, { ArticleProps } from 'components/news/Article';
 import LiveblogArticle from 'components/liveblog/LiveblogArticle';
 import { getPillarStyles } from 'styles';
 import { getConfigValue } from 'utils/ssmConfig';
-import { isFeature, parseCapi } from 'utils/capi';
+import { isFeature, parseCapi, capiEndpoint } from 'utils/capi';
 
 
 // ----- Setup ----- //
@@ -33,23 +33,6 @@ const readFileP = promisify(fs.readFile);
 // ----- Functions ----- //
 
 const id = <A>(a: A): A => a;
-
-// TODO: request less data from capi
-export const capiEndpoint = (articleId: string, key: string): string => {
-
-  const params = new URLSearchParams({
-    format: 'json',
-    'api-key': key,
-    'show-elements': 'all',
-    'show-atoms': 'all',
-    'show-fields': 'all',
-    'show-tags': 'all',
-    'show-blocks': 'all',
-  })
-
-  return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
-
-}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function checkForUnsupportedContent(capi: any): Result<string, void> {
