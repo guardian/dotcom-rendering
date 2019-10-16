@@ -13,7 +13,7 @@ import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 import { Branding } from '@frontend/amp/components/topMeta/Branding';
-import { StarRating } from '../StarRating';
+import { StarRating } from '@frontend/amp/components/StarRating';
 
 const headerStyle = css`
     ${headline(5)};
