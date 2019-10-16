@@ -26,8 +26,8 @@ module.exports = {
                     "@frontend/lib/",
                     "@frontend/amp/lib/",
                     "@testing-library",
-                    "@root/packages/frontend/amp/lib/",
-                    "@guardian/src-foundations"
+                    "@guardian/src-foundations",
+                    "@guardian/guui/components"
                 ]
             }
         ]
