@@ -10,7 +10,7 @@ import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { ListStyle } from '@frontend/amp/components/elements/Text';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
-import { getAgeWarning } from '@frontend/model/age-warning';
+import { getAgeWarning } from '@frontend/lib/age-warning';
 
 const headerStyle = (pillar: Pillar) => css`
     ${headline(5)};
