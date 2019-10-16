@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@guardian/pasteup/icons/clock.svg';
 import { Byline } from '@guardian/guui/components/Byline/Byline';
-import { getAgeWarning } from '@frontend/model/age-warning';
+import { getAgeWarning } from '@frontend/lib/age-warning';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline, textSans, body } from '@guardian/pasteup/typography';
