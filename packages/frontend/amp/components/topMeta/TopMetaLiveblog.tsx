@@ -9,7 +9,7 @@ import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { ListStyle } from '@frontend/amp/components/elements/Text';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { getAgeWarning } from '@frontend/model/age-warning';
 
 const headerStyle = (pillar: Pillar) => css`
