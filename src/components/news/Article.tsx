@@ -11,7 +11,7 @@ import Tags from '../shared/Tags';
 import { Series, Contributor } from '../../types/Capi';
 import { Tag, Asset, Block } from 'types/capi-thrift-models';
 import { PillarId, PillarStyles, darkModeCss, articleWidthStyles } from '../../styles';
-import { palette, until } from '@guardian/src-foundations';
+import { palette, wide } from '@guardian/src-foundations';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/Keyline';
 
@@ -42,22 +42,18 @@ const MainDarkStyles = darkModeCss`
 `;
 
 const BorderStyles = css`
-    width: 1300px;
-    margin: 0 auto;
     background: ${palette.neutral[100]};
 
-    ${until.wide} {
-        width: 100%;
-        margin: 0;
+    ${wide} {
+        width: 1300px;
+        margin: 0 auto;
     }
 `;
 
 const HeaderImageStyles = css`
     figure {
-        margin: 0 auto;
-
-        ${until.wide} {
-            margin: unset;
+        ${wide} {
+            margin: 0 auto;
         }
     }
 `;

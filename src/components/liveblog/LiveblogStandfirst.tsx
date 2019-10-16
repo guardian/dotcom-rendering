@@ -30,10 +30,8 @@ interface LiveblogStandfirstProps {
 }
 
 const LiveblogStandfirst = ({ standfirst, pillarStyles }: LiveblogStandfirstProps): JSX.Element =>
-    <LeftColumn
-        columnContent={null}
-        mainContent={<div dangerouslySetInnerHTML={{__html: transform(standfirst)}} />}
-        className={StandfirstStyles(pillarStyles)}
-    />
+    <LeftColumn className={StandfirstStyles(pillarStyles)}>
+        <div dangerouslySetInnerHTML={{__html: transform(standfirst)}} />
+    </LeftColumn>
 
 export default LiveblogStandfirst;

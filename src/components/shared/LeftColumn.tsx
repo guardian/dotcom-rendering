@@ -3,40 +3,36 @@
 import React from 'react';
 
 import { css, SerializedStyles } from '@emotion/core';
-import { until } from '@guardian/src-foundations';
+import { phablet, leftCol } from '@guardian/src-foundations';
+import { wideContentWidth, wideColumnWidth } from 'styles';
 
 
 // ----- Styles ----- //
 
 const LeftColumnStyles = css`
-    display: flex;
     padding: 8px;
 
-    ${until.phablet} {
-        display: block;
+    ${phablet} {
+        display: flex;
     }
 
     .column-content {
-        width: 220px;
-
-        ${until.leftCol} {
+        ${phablet} {
             width: 33%;
         }
 
-        ${until.phablet} {
-            width: unset;
+        ${leftCol} {
+            width: ${wideColumnWidth}px;
         }
     }
 
-    .main-content {
-        width: 620px;
-
-        ${until.leftCol} {
+    .main-content {        
+        ${phablet} {
             width: 67%;
         }
 
-        ${until.phablet} {
-            width: unset;
+        ${leftCol} {
+            width: ${wideContentWidth}px;
         }
     }
 `;
@@ -45,8 +41,8 @@ const LeftColumnStyles = css`
 // ----- Props ----- //
 
 interface LeftColumnProps {
-    columnContent: JSX.Element | null;
-    mainContent: JSX.Element | null;
+    children: React.ReactNode;
+    columnContent?: JSX.Element | null;
     className?: SerializedStyles | null;
 };
 
@@ -54,10 +50,10 @@ interface LeftColumnProps {
 // ----- Component ----- //
 
 const LeftColumn =
-    ({ columnContent, mainContent, className = null }: LeftColumnProps): JSX.Element =>
+    ({ children, columnContent = null, className = null }: LeftColumnProps): JSX.Element =>
         <div css={[className, LeftColumnStyles]}>
             <div className="column-content">{columnContent}</div>
-            <div className="main-content">{mainContent}</div>
+            <div className="main-content">{children}</div>
         </div>
 
 

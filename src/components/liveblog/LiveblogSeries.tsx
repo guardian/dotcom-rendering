@@ -27,11 +27,9 @@ const LiveblogSeries = ({ series, pillarStyles }: LiveblogSeriesProps): JSX.Elem
 
     if (series) {
         return (
-            <LeftColumn
-                columnContent={null}
-                mainContent={<a href={series.webUrl}>{series.webTitle}</a>}
-                className={LiveblogSeriesStyles(pillarStyles)}
-            ></LeftColumn>
+            <LeftColumn className={LiveblogSeriesStyles(pillarStyles)}>
+                <a href={series.webUrl}>{series.webTitle}</a>
+            </LeftColumn>
         );
     }
 

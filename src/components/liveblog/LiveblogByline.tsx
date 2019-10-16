@@ -65,24 +65,18 @@ const LiveblogByline = ({
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline pillar={pillarId} type={'liveblog'}/>
-
-            <LeftColumn
-                columnContent={null}
-                mainContent={
-                    <>
-                        <Avatar
-                            contributors={contributors}
-                            bgColour={pillarStyles.featureHeadline}
-                            imageSalt={imageSalt}
-                        />
-                        <div className="author">
-                            <address dangerouslySetInnerHTML={{__html: byline}}></address>
-                            <time className="date">{ formatDate(new Date(publicationDate)) }</time>
-                            <div className="follow">Get alerts on this story</div>
-                        </div>
-                    </>
-                }
-            />
+            <LeftColumn>
+                <Avatar
+                    contributors={contributors}
+                    bgColour={pillarStyles.featureHeadline}
+                    imageSalt={imageSalt}
+                />
+                <div className="author">
+                    <address dangerouslySetInnerHTML={{__html: byline}}></address>
+                    <time className="date">{ formatDate(new Date(publicationDate)) }</time>
+                    <div className="follow">Get alerts on this story</div>
+                </div>
+            </LeftColumn>
         </div>
     )
 }
