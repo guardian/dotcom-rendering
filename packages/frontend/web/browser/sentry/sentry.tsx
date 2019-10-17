@@ -28,12 +28,13 @@ export const initialiseSentry = (adBlockInUse: boolean) => {
     const {
         isDev,
         switches: { enableSentryReporting },
+        sentryDsn,
     } = window.guardian.app.data.config;
 
     Sentry.init({
         ignoreErrors,
         whitelistUrls,
-        dsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+        dsn: sentryDsn,
         environment: window.guardian.config.stage || 'DEV',
         sampleRate: SAMPLE_RATE,
         beforeSend(event) {

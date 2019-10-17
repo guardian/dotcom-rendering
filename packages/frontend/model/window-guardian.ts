@@ -8,8 +8,7 @@ export interface WindowGuardianConfig {
         contentType: string;
         edition: Edition;
         revisionNumber: string;
-        sentryHost: string;
-        sentryPublicApiKey: string;
+        sentryDsn: string;
         keywordIds: [];
         dfpAccountId: string;
         adUnit: string;
@@ -36,8 +35,7 @@ const makeWindowGuardianConfig = (
             contentType: dcrDocumentData.CAPI.contentType,
             edition: dcrDocumentData.CAPI.editionId,
             revisionNumber: dcrDocumentData.config.revisionNumber,
-            sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
-            sentryHost: dcrDocumentData.config.sentryHost,
+            sentryDsn: dcrDocumentData.config.sentryDsn,
             keywordIds: [],
             dfpAccountId: dcrDocumentData.config.dfpAccountId,
             adUnit: dcrDocumentData.config.adUnit,

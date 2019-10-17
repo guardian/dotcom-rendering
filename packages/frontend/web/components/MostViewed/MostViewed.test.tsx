@@ -17,8 +17,7 @@ const HIDDEN = 'display: none';
 describe('MostViewed', () => {
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-        sentryHost: '',
-        sentryPublicApiKey: '',
+        sentryDsn: '',
         switches: {},
         abTests: {},
         dfpAccountId: '',

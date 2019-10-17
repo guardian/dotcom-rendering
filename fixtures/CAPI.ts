@@ -438,8 +438,7 @@ export const CAPI: CAPIType = {
     ],
     config: {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-        sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-        sentryHost: 'app.getsentry.com/35463',
+        sentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
         switches: {},
         abTests: {},
         dfpAccountId: '',
