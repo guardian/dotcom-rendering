@@ -10,7 +10,7 @@ import { Blocks } from '@frontend/amp/components/Blocks';
 import RefreshIcon from '@guardian/pasteup/icons/refresh.svg';
 import { Pagination } from '@frontend/amp/components/Pagination';
 import { headline, textSans } from '@guardian/pasteup/typography';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is

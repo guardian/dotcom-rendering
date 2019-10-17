@@ -9,13 +9,21 @@ const measure = (name: string, task: () => Promise<void>): void => {
 
     perf.mark(start);
 
-    task().finally(() => {
+    function markEnd() {
         perf.mark(end);
         perf.measure(name, start, end);
 
         // tslint:disable-next-line:no-console
         console.log(JSON.stringify(perf.getEntriesByName(name)));
-    });
+    }
+
+    task()
+        // You could use 'finally' here to prevent this duplication but finally isn't supported
+        // in Chrome 59 which is used by Cypress in headless mode so if you do it will
+        // break the Cypress tests on CI
+        // See: https://github.com/cypress-io/cypress/issues/2651#issuecomment-432698837
+        .then(markEnd)
+        .catch(markEnd);
 };
 
 export const startup = <A>(

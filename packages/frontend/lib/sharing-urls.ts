@@ -12,7 +12,6 @@ const appendParamsToBaseUrl: (
         )}=${encodeURIComponent(params[param])}`;
     }, baseUrl);
 
-// TODO move to ./lib
 export const getSharingUrls = (
     pageId: string,
     title: string,

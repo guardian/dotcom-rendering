@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';
+import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 // tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`

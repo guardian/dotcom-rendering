@@ -8,7 +8,7 @@ import { from, tablet } from '@guardian/pasteup/breakpoints';
 import { headline, textSans } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { unescapeData } from '@frontend/web/server/escapeData';
+import { unescapeData } from '@frontend/lib/escapeData';
 // tslint:disable:react-no-dangerous-html
 
 export const SubheadingBlockComponent: React.FC<{ html: string }> = ({

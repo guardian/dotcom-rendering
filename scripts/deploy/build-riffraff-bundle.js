@@ -41,7 +41,7 @@ const copyStatic = () => {
     log(' - copying static');
     return cpy(
         ['**/*'],
-        path.resolve(target, `${siteName}-static`, 'guui', 'static', siteName),
+        path.resolve(target, `${siteName}-static`, 'static', siteName),
         {
             cwd: path.resolve(root, 'packages', siteName, 'static'),
             parents: true,
@@ -54,7 +54,7 @@ const copyDist = () => {
     log(' - copying dist');
     return cpy(
         ['**/*.!(html|json)'],
-        path.resolve(target, `${siteName}-static`, 'guui', 'assets'),
+        path.resolve(target, `${siteName}-static`, 'assets'),
         {
             cwd: path.resolve(dist),
             parents: true,
@@ -80,7 +80,6 @@ const zipBundle = () => {
             '.git/**\\*',
             '**/design/**\\*',
             '**/pasteup/**\\*',
-            '**/guui/**\\*',
         ],
         {
             shell: true,

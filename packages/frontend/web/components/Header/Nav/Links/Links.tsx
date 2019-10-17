@@ -2,9 +2,9 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import {
-    Dropdown,
     Link as DropdownLink,
-} from '@guardian/guui/components/Dropdown/Dropdown';
+    Dropdown,
+} from '@frontend/web/components/Dropdown';
 import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
 import SearchIcon from '@guardian/pasteup/icons/search.svg';
 import { palette } from '@guardian/pasteup/palette';

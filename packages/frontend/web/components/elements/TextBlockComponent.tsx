@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { body } from '@guardian/pasteup/typography';
-import { unescapeData } from '@frontend/web/server/escapeData';
+import { unescapeData } from '@frontend/lib/escapeData';
 // tslint:disable:react-no-dangerous-html
 
 const para = css`

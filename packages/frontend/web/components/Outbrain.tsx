@@ -1,7 +1,6 @@
 // tslint:disable:react-no-dangerous-html
 
 import React from 'react';
-import { Container } from '@guardian/guui';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
@@ -117,10 +116,8 @@ export const OutbrainContainer: React.FC<{
         return null;
     }
     return (
-        <Container>
-            <div className={outbrainContainer}>
-                <OutbrainWidget />
-            </div>
-        </Container>
+        <div className={outbrainContainer}>
+            <OutbrainWidget />
+        </div>
     );
 };

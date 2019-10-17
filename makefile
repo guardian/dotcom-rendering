@@ -57,6 +57,12 @@ dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
 	@NODE_ENV=development node scripts/frontend/dev-server
 
+# cypress #####################################
+
+cypress: clear clean-dist install
+	$(call log, "starting frontend DEV server for Cypress")
+	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'percy exec -- cypress run'
+
 # quality #########################################
 
 tsc: clean-dist install
@@ -73,7 +79,7 @@ lint: clean-dist install
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
-	@stylelint "packages/guui/**/*.ts{,x}" "packages/frontend/**/*.ts{,x}"
+	@stylelint "packages/frontend/**/*.ts{,x}"
 
 test: clear clean-dist install
 	$(call log, "running tests")
@@ -97,7 +103,6 @@ validate-ci: clear install tsc lint stylelint test-ci bundlesize
 clean-dist:
 	@rm -rf dist
 	@rm -rf target
-	@rm -f guui.zip
 
 clean-deps:
 	$(call log, "trashing dependencies")

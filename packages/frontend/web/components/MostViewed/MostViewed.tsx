@@ -4,15 +4,12 @@ import {
     desktop,
     leftCol,
     wide,
-    mobileLandscape,
     from,
     headline,
     palette,
 } from '@guardian/src-foundations';
-import { Container } from '@guardian/guui';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
-import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { useApi } from '@frontend/web/components/lib/api';
 
 import { MostViewedGrid } from './MostViewedGrid';
@@ -60,16 +57,6 @@ const headingStyles = css`
     }
 `;
 
-const articleContainerStyles = css`
-    position: relative;
-    background-color: ${palette.neutral[100]};
-    padding: 0 10px;
-
-    ${mobileLandscape} {
-        padding: 0 20px;
-    }
-`;
-
 const adSlotUnspecifiedWidth = css`
     .ad-slot {
         margin: 12px auto;
@@ -80,7 +67,7 @@ const adSlotUnspecifiedWidth = css`
 `;
 
 const mostPopularAdStyle = css`
-    .ad-slot--most-popular {
+    .ad-slot--mostpop {
         width: 300px;
         margin: 12px auto;
         min-width: 300px;
@@ -133,40 +120,33 @@ export const MostViewed = ({ config, sectionName, pillar }: Props) => {
     if (data) {
         return (
             <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
-                <OutbrainContainer config={config} />
-                <Container
-                    borders={true}
-                    showTopBorder={true}
-                    className={cx(articleContainerStyles)}
+                <div
+                    className={cx(stackBelow(leftCol), mostPopularAdStyle)}
+                    data-link-name={'most-viewed'}
+                    data-component={'most-viewed'}
                 >
-                    <div
-                        className={cx(stackBelow(leftCol), mostPopularAdStyle)}
-                        data-link-name={'most-viewed'}
-                        data-component={'most-viewed'}
-                    >
-                        <section className={asideWidth}>
-                            <h2 className={headingStyles}>Most popular</h2>
-                        </section>
-                        <section className={stackBelow(desktop)}>
-                            <MostViewedGrid
-                                data={data}
-                                sectionName={sectionName}
-                                pillar={pillar}
+                    <section className={asideWidth}>
+                        <h2 className={headingStyles}>Most popular</h2>
+                    </section>
+                    <section className={stackBelow(desktop)}>
+                        <MostViewedGrid
+                            data={data}
+                            sectionName={sectionName}
+                            pillar={pillar}
+                        />
+                        <div
+                            className={css`
+                                margin: 0.375rem 0 0 0.625rem;
+                            `}
+                        >
+                            <AdSlot
+                                asps={namedAdSlotParameters('mostpop')}
+                                config={config}
+                                className={''}
                             />
-                            <div
-                                className={css`
-                                    margin: 0.375rem 0 0 0.625rem;
-                                `}
-                            >
-                                <AdSlot
-                                    asps={namedAdSlotParameters('most-popular')}
-                                    config={config}
-                                    className={''}
-                                />
-                            </div>
-                        </section>
-                    </div>
-                </Container>
+                        </div>
+                    </section>
+                </div>
             </div>
         );
     }

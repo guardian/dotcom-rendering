@@ -375,7 +375,7 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "type": "string"
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -471,6 +471,17 @@
                 "src",
                 "width"
             ]
+        },
+        "RoleType": {
+            "enum": [
+                "half-width",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "YoutubeBlockElement": {
             "type": "object",
@@ -1390,10 +1401,14 @@
                 },
                 "hbImpl": {
                     "type": "string"
+                },
+                "adUnit": {
+                    "type": "string"
                 }
             },
             "required": [
                 "abTests",
+                "adUnit",
                 "ajaxUrl",
                 "commercialBundleUrl",
                 "dfpAccountId",

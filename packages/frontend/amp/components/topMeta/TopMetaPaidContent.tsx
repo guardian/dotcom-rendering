@@ -10,8 +10,8 @@ import { PaidForBand } from '@frontend/amp/components/topMeta/PaidForBand';
 
 import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/pasteup/typography';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
-import { getAgeWarning } from '@frontend/model/age-warning';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
+import { getAgeWarning } from '@frontend/lib/age-warning';
 
 const headerStyle = css`
     ${textSans(9)};

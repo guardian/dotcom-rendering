@@ -9,8 +9,8 @@ import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
-import { getAgeWarning } from '@frontend/model/age-warning';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
+import { getAgeWarning } from '@frontend/lib/age-warning';
 import { Branding } from '@frontend/amp/components/topMeta/Branding';
 
 const headerStyle = css`

@@ -12,7 +12,7 @@ export const shouldDisplayAdvertisements = (config: ConfigType): boolean => {
 type staticAdSlotNames =
     | 'right'
     | 'top-above-nav'
-    | 'most-popular'
+    | 'mostpop'
     | 'merchandising-high';
 
 export const namedAdSlotParameters = (
@@ -46,8 +46,8 @@ export const namedAdSlotParameters = (
             optId: undefined,
             optClassNames: [],
         },
-        'most-popular': {
-            name: 'most-popular',
+        mostpop: {
+            name: 'mostpop',
             adTypes: ['mpu-banner-ad', 'rendered'],
             sizeMapping: {
                 mobile: ['1,1|2,2|300,250|300,274|300,600|fluid|300,1050'],

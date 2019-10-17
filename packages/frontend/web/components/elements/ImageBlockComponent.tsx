@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Picture, PictureSource } from '@frontend/web/components/Picture';
-import { Caption } from '@guardian/guui/components/Caption/Caption';
+import { Caption } from '@frontend/web/components/Caption';
 
 import { wide, tablet, leftCol } from '@guardian/src-foundations';
 
