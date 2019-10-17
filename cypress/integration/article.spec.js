@@ -9,10 +9,7 @@ describe('Page rendering', function() {
 
     it('should load WEB articles', function() {
         articles.map((article, index) => {
-            cy.visit(
-                `http://localhost:3030/Article?url=${article.url}`,
-                visitOptions,
-            );
+            cy.visit(`Article?url=${article.url}`, visitOptions);
             cy.percySnapshot(
                 `WEB-${article.pillar}-${article.designType}-${index}`,
             );
@@ -21,10 +18,7 @@ describe('Page rendering', function() {
 
     it('should load AMP articles', function() {
         AMPArticles.map((article, index) => {
-            cy.visit(
-                `http://localhost:3030/AMPArticle?url=${article.url}`,
-                visitOptions,
-            );
+            cy.visit(`AMPArticle?url=${article.url}`, visitOptions);
             cy.percySnapshot(
                 `AMP-${article.pillar}-${article.designType}-${index}`,
             );
