@@ -8,7 +8,8 @@ export interface WindowGuardianConfig {
         contentType: string;
         edition: Edition;
         revisionNumber: string;
-        sentryDsn: string;
+        sentryHost: string;
+        sentryPublicApiKey: string;
         keywordIds: [];
         dfpAccountId: string;
         adUnit: string;
@@ -35,7 +36,8 @@ const makeWindowGuardianConfig = (
             contentType: dcrDocumentData.CAPI.contentType,
             edition: dcrDocumentData.CAPI.editionId,
             revisionNumber: dcrDocumentData.config.revisionNumber,
-            sentryDsn: dcrDocumentData.config.sentryDsn,
+            sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
+            sentryHost: dcrDocumentData.config.sentryHost,
             keywordIds: [],
             dfpAccountId: dcrDocumentData.config.dfpAccountId,
             adUnit: dcrDocumentData.config.adUnit,
@@ -70,8 +72,12 @@ export interface WindowGuardian {
     polyfilled: boolean;
     adBlockers: any;
     modules: {
-        sentry: {
-            reportError: (error: Error, feature: string) => void;
+        raven: {
+            reportError?: (
+                err: Error,
+                tags: { [key: string]: string },
+                shouldThrow: boolean,
+            ) => void;
         };
     };
 }
@@ -92,9 +98,7 @@ export const makeWindowGuardian = (
             onDetect: [],
         },
         modules: {
-            sentry: {
-                reportError: () => null,
-            },
+            raven: {},
         },
     };
 };

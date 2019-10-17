@@ -21,7 +21,8 @@ describe('ShareCount', () => {
     const globalAny: any = global;
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-        sentryDsn: '',
+        sentryHost: '',
+        sentryPublicApiKey: '',
         switches: {},
         abTests: {},
         dfpAccountId: '',

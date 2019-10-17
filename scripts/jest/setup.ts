@@ -7,7 +7,8 @@ import { WindowGuardianConfig } from '@frontend/model/window-guardian';
 
 const windowGuardianConfig = {
     page: {
-        sentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+        sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+        sentryHost: 'app.getsentry.com/35463',
     },
 } as WindowGuardianConfig;
 
@@ -29,11 +30,15 @@ const windowGuardian = {
         pageViewId: '',
     },
     modules: {
-        sentry: {
-            reportError: (error: Error, feature: string): void => {
+        raven: {
+            reportError: (
+                err: Error,
+                tags: { [key: string]: string },
+                shouldThrow: boolean,
+            ): void => {
                 // tslint:disable-next-line: no-console
                 console.log(
-                    `Error: attempting to log error without having registered sentry.\nError is: ${error.message}`,
+                    `Error: attempting to log error without having registered raven.\nError is: ${err.message}`,
                 );
             },
         },
