@@ -119,7 +119,7 @@ const expanded = css`
 const asComponent = (
     element: CAPIElement,
     pillar: Pillar,
-    adUnit?: string,
+    adTargeting?: any,
 ): JSX.Element | null => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -129,7 +129,7 @@ const asComponent = (
                 <YoutubeVideo
                     element={element}
                     pillar={pillar}
-                    adUnit={adUnit}
+                    adTargeting={adTargeting}
                 />
             );
         default:
@@ -140,9 +140,11 @@ const asComponent = (
 export const MainMedia: React.FC<{
     element: CAPIElement;
     pillar: Pillar;
-    adUnit?: string;
-}> = ({ element, pillar, adUnit }) => {
+    adTargeting?: any;
+}> = ({ element, pillar, adTargeting }) => {
     return (
-        <div className={expanded}>{asComponent(element, pillar, adUnit)}</div>
+        <div className={expanded}>
+            {asComponent(element, pillar, adTargeting)}
+        </div>
     );
 };

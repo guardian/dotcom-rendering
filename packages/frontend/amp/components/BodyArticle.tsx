@@ -58,6 +58,23 @@ const adStyle = css`
     }
 `;
 
+const buildPageTargeting = (config: any) => {
+    const customParams = {
+        sens: config.isSensitive ? 't' : 'f',
+        si: 'f',
+        vl: config.videoDuration,
+        cc: config.edition,
+        s: config.section,
+        inskin: 'f',
+        ...config.sharedAdTargeting,
+        pa: 'f',
+    };
+    return {
+        customParams,
+        adUnit: config.adUnit,
+    };
+};
+
 export const Body: React.FC<{
     pillar: Pillar;
     data: ArticleModel;
@@ -65,11 +82,12 @@ export const Body: React.FC<{
 }> = ({ pillar, data, config }) => {
     const designType = data.designType;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
+    const adTargeting = buildPageTargeting(config);
     const elementsWithoutAds = Elements(
         capiElements,
         pillar,
         data.isImmersive,
-        config.adUnit,
+        adTargeting,
     );
     const slotIndexes = findAdSlots(capiElements);
     const adInfo = {
@@ -94,14 +112,13 @@ export const Body: React.FC<{
             adInfo={adInfo}
         />
     );
-
     return (
         <InnerContainer className={body(pillar, designType)}>
             <TopMeta
                 designType={designType}
                 pillar={pillar}
                 data={data}
-                adUnit={config.adUnit}
+                adTargeting={adTargeting}
             />
 
             {elements}

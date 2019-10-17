@@ -1,18 +1,20 @@
 import React from 'react';
 import { Caption } from '@guardian/guui/components/Caption/Caption';
+import { constructQuery } from '../../lib/querystring';
 
 export const YoutubeVideo: React.FC<{
     element: YoutubeBlockElement;
     pillar: Pillar;
-    adUnit?: string;
-}> = ({ element, pillar, adUnit }) => {
+    adTargeting?: any;
+}> = ({ element, pillar, adTargeting }) => {
     // https://www.ampproject.org/docs/reference/components/amp-youtube
     // https://developers.google.com/youtube/player_parameters
 
     const embedConfig = {
         adsConfig: {
             adTagParameters: {
-                iu: `${adUnit || ''}`,
+                iu: `${adTargeting.adUnit || ''}`,
+                cust_params: constructQuery(adTargeting.customParams),
             },
         },
     };
