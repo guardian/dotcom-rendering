@@ -7,9 +7,9 @@ import ArticleStandfirst from './ArticleStandfirst';
 import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 import Tags from '../shared/Tags';
-
+import { Option } from 'types/Option';
 import { Series, Contributor } from '../../types/Capi';
-import { Tag, Asset, Block } from 'types/capi-thrift-models';
+import { Tag, Block, BlockElement } from 'types/capi-thrift-models';
 import { PillarId, PillarStyles, darkModeCss, articleWidthStyles } from '../../styles';
 import { palette, wide } from '@guardian/src-foundations';
 import { css } from '@emotion/core';
@@ -24,7 +24,7 @@ export interface ArticleProps {
     tags: Tag[];
     feature: boolean;
     pillarId: PillarId;
-    mainAssets: Asset[] | null;
+    mainImage: Option<BlockElement>;
     starRating?: string;
     pillarStyles: PillarStyles;
     contributors: Contributor[];
@@ -66,7 +66,7 @@ const Article = ({
     pillarId,
     tags,
     feature,
-    mainAssets,
+    mainImage,
     starRating,
     bodyElements,
     pillarStyles,
@@ -76,7 +76,7 @@ const Article = ({
 }: ArticleProps): JSX.Element =>
     <main css={[MainStyles, MainDarkStyles]}>
         <div css={BorderStyles}>
-            <HeaderImage assets={mainAssets} imageSalt={imageSalt} className={HeaderImageStyles}/>
+            <HeaderImage image={mainImage} imageSalt={imageSalt} className={HeaderImageStyles}/>
             <div css={articleWidthStyles}>
                 <ArticleSeries series={series} pillarStyles={pillarStyles}/>
                 <ArticleHeadline
