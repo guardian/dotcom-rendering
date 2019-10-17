@@ -8,10 +8,10 @@ import LiveblogKeyEvents from './LiveblogKeyEvents';
 import LiveblogBody from './LiveblogBody';
 import HeaderImage from '../shared/HeaderImage';
 import Tags from '../shared/Tags';
-
+import { Option } from 'types/Option';
 import { PillarStyles, PillarId, wideColumnWidth, baseMultiply } from 'styles';
 import { Series, Contributor } from '../../types/Capi';
-import { Tag, Asset, Block } from 'types/capi-thrift-models';
+import { Tag, Block, BlockElement } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette, wide } from '@guardian/src-foundations'
 
@@ -50,7 +50,7 @@ interface LiveblogArticleProps {
     body: string;
     tags: Tag[];
     pillarId: PillarId;
-    mainAssets: Asset[] | null;
+    mainImage: Option<BlockElement>;
     pillarStyles: PillarStyles;
     contributors: Contributor[];
     series: Series;
@@ -66,7 +66,7 @@ const LiveblogArticle = ({
     webPublicationDate,
     pillarId,
     tags,
-    mainAssets,
+    mainImage,
     pillarStyles,
     contributors,
     series,
@@ -87,7 +87,7 @@ const LiveblogArticle = ({
                 imageSalt={imageSalt}
             />
             <HeaderImage
-                assets={mainAssets}
+                image={mainImage}
                 imageSalt={imageSalt}
                 className={HeaderImageStyles(pillarStyles)}
             />

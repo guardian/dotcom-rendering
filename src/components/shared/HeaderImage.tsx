@@ -2,10 +2,11 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 
 import HeaderImageCaption from './HeaderImageCaption';
-import { Asset } from 'types/capi-thrift-models';
+import { BlockElement } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
 import { wide } from '@guardian/src-foundations';
 import { wideContentWidth } from 'styles';
+import { Option } from 'types/Option';
 
 const headerImageStyles = css`
     figure {
@@ -29,24 +30,25 @@ const headerImageStyles = css`
 `;
 
 interface HeaderImageProps {
-    assets: Asset[] | null;
+    image: Option<BlockElement>;
     imageSalt: string;
     className?: SerializedStyles | null;
 }
 
-const HeaderImage = ({ className, assets, imageSalt }: HeaderImageProps): JSX.Element | null => {
-    if (!assets) return null;
+const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Element | null => {
 
-    const { typeData: {caption, credit, altText} } = assets[0];
-
-    return (
+    const headerImage: Option<JSX.Element | null> = image.map(({ imageTypeData, assets }) =>
         <div css={[className, headerImageStyles]}>
             <figure>
-                { imageElement(altText, assets, imageSalt) }
-                < HeaderImageCaption caption={caption} credit={credit}/>
+                { imageElement(imageTypeData.alt, assets, imageSalt) }
+                <HeaderImageCaption caption={imageTypeData.caption} credit={imageTypeData.credit}/>
             </figure>
         </div>
-    )
+    );
+
+    // Needed to provide TypeScript with enough type information.
+    return headerImage.withDefault(null);
+
 }
 
 export default HeaderImage;
