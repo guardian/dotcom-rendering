@@ -1,9 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Dropdown } from '@guardian/guui';
+import { Dropdown, Link } from '@frontend/web/components/Dropdown';
 import { desktop, wide } from '@guardian/pasteup/breakpoints';
-import { Link } from '@guardian/guui/components/Dropdown/Dropdown';
 import { palette } from '@guardian/pasteup/palette';
 
 const editionDropdown = css`
