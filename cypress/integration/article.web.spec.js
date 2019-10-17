@@ -1,7 +1,7 @@
 import { getPolyfill } from '../lib/polyfill';
 import { fixTime } from '../lib/time';
 import { visitOptions } from '../lib/config';
-import { articles, AMPArticles } from '../lib/articles.js';
+import { articles } from '../lib/articles.js';
 
 describe('Page rendering', function() {
     beforeEach(getPolyfill);
@@ -12,15 +12,6 @@ describe('Page rendering', function() {
             cy.visit(`Article?url=${article.url}`, visitOptions);
             cy.percySnapshot(
                 `WEB-${article.pillar}-${article.designType}-${index}`,
-            );
-        });
-    });
-
-    it('should load AMP articles', function() {
-        AMPArticles.map((article, index) => {
-            cy.visit(`AMPArticle?url=${article.url}`, visitOptions);
-            cy.percySnapshot(
-                `AMP-${article.pillar}-${article.designType}-${index}`,
             );
         });
     });
