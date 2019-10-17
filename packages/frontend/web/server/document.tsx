@@ -62,7 +62,7 @@ export const document = ({ data }: Props) => {
      */
     const priorityScripts = [
         polyfillIO,
-        getDist('sentry.js'),
+        getDist('raven.js'),
         getDist('react.js'),
         config.commercialBundleUrl,
     ];

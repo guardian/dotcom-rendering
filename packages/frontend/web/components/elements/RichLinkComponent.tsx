@@ -247,7 +247,14 @@ export const RichLinkComponent: React.FC<{
     const { data, loading, error } = useApi<RichLink>(url);
 
     if (error) {
-        window.guardian.modules.sentry.reportError(error, 'rich-link');
+        // Send the error to Sentry and then prevent the element from rendering
+        // window.guardian.modules.raven.reportError(
+        //     error,
+        //     {
+        //         feature: 'most-viewed',
+        //     },
+        //     true,
+        // );
 
         return null;
     }

@@ -235,7 +235,8 @@ interface TagType {
  */
 interface ConfigType {
     ajaxUrl: string;
-    sentryDsn: string;
+    sentryPublicApiKey: string;
+    sentryHost: string;
     switches: { [key: string]: boolean };
     abTests: { [key: string]: string };
     dfpAccountId: string;

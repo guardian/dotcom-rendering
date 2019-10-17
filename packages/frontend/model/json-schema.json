@@ -1363,7 +1363,10 @@
                 "ajaxUrl": {
                     "type": "string"
                 },
-                "sentryDsn": {
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "sentryHost": {
                     "type": "string"
                 },
                 "switches": {
@@ -1416,7 +1419,8 @@
                 "googletagUrl",
                 "hbImpl",
                 "revisionNumber",
-                "sentryDsn",
+                "sentryHost",
+                "sentryPublicApiKey",
                 "stage",
                 "switches"
             ]

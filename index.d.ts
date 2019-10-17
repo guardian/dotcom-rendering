@@ -27,8 +27,12 @@ declare global {
                 pageViewId: string;
             };
             modules: {
-                sentry: {
-                    reportError: (error: Error, feature: string) => void;
+                raven: {
+                    reportError: (
+                        err: Error,
+                        tags: { [key: string]: string },
+                        shouldThrow: boolean,
+                    ) => void;
                 };
             };
         };
