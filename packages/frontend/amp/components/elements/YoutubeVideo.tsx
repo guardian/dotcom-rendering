@@ -14,11 +14,12 @@ export const YoutubeVideo: React.FC<{
         adsConfig: {
             adTagParameters: {
                 iu: `${adTargeting.adUnit || ''}`,
-                cust_params: constructQuery(adTargeting.customParams),
+                cust_params: encodeURIComponent(
+                    constructQuery(adTargeting.customParams),
+                ),
             },
         },
     };
-    const encodedEmbedConfig = encodeURIComponent(JSON.stringify(embedConfig));
 
     const attributes: any = {
         id: `gu-video-youtube-${element.id}`,
@@ -27,6 +28,7 @@ export const YoutubeVideo: React.FC<{
         width: '16',
         height: '9',
         'data-param-modestbranding': true, // Remove YouTube logo
+        'data-param-embed_config': JSON.stringify(embedConfig),
     };
 
     if (element.channelId) {
@@ -34,7 +36,6 @@ export const YoutubeVideo: React.FC<{
         attributes['data-param-rel'] = '0';
         attributes['data-param-listType'] = 'playlist';
         attributes['data-param-list'] = element.channelId;
-        attributes['data-param-embed_config'] = encodedEmbedConfig;
     }
 
     return (
