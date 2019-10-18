@@ -374,6 +374,8 @@ export const CAPI: CAPIType = {
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',
     keyEvents: [],
+    twitterData: {},
+    openGraphData: {},
     linkedData: [
         {
             '@type': 'NewsArticle',
