@@ -51,9 +51,12 @@ export const htmlTemplate = ({
     );
 
     const generateMetaTags = (dataObject: { [key: string]: string }) => {
-        return Object.entries(dataObject)
-            .map(([id, value]) => `<meta name="${id}" content="${value}"/>`)
-            .join('\n');
+        if (dataObject) {
+            return Object.entries(dataObject)
+                .map(([id, value]) => `<meta name="${id}" content="${value}"/>`)
+                .join('\n');
+        }
+        return '';
     };
 
     const openGraphMetaTags = generateMetaTags(openGraphData);
