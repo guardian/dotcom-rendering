@@ -374,8 +374,50 @@ export const CAPI: CAPIType = {
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',
     keyEvents: [],
-    twitterData: {},
-    openGraphData: {},
+    twitterData: {
+        'twitter:app:id:iphone': '409128287',
+        'twitter:app:name:googleplay': 'The Guardian',
+        'twitter:app:name:ipad': 'The Guardian',
+        'twitter:image':
+            'https://i.guim.co.uk/img/media/6787bd3346264fdf786495e079523f9ae7b1a126/1649_294_1820_1092/master/1820.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTgucG5n&s=d3dd838e1b6ef5a72abc846f0fd783a2',
+        'twitter:site': '@guardian',
+        'twitter:app:url:ipad':
+            'gnmguardian://money/2018/jul/05/ticket-touts-face-unlimited-fines-for-using-bots?contenttype=Article&source=twitter',
+        'twitter:card': 'summary_large_image',
+        'twitter:app:name:iphone': 'The Guardian',
+        'twitter:creator': '@ByRobDavies',
+        'twitter:app:id:ipad': '409128287',
+        'twitter:app:id:googleplay': 'com.guardian',
+        'twitter:app:url:googleplay':
+            'guardian://www.theguardian.com/money/2018/jul/05/ticket-touts-face-unlimited-fines-for-using-bots',
+        'twitter:app:url:iphone':
+            'gnmguardian://money/2018/jul/05/ticket-touts-face-unlimited-fines-for-using-bots?contenttype=Article&source=twitter',
+    },
+    openGraphData: {
+        'og:url':
+            'http://www.theguardian.com/money/2018/jul/05/ticket-touts-face-unlimited-fines-for-using-bots',
+        'article:author': 'https://www.theguardian.com/profile/rob-davies',
+        'og:image:height': '720',
+        'og:description':
+            'Music industry groups hails law, part of wider effort to crack down on ‘secondary ticketing’',
+        'og:image:width': '1200',
+        'og:image':
+            'https://i.guim.co.uk/img/media/6787bd3346264fdf786495e079523f9ae7b1a126/1649_294_1820_1092/master/1820.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTgucG5n&enable=upscale&s=a1303790ad17807b9c68053d0226ace4',
+        'al:ios:url':
+            'gnmguardian://money/2018/jul/05/ticket-touts-face-unlimited-fines-for-using-bots?contenttype=Article&source=applinks',
+        'article:publisher': 'https://www.facebook.com/theguardian',
+        'og:type': 'article',
+        'al:ios:app_store_id': '409128287',
+        'article:section': 'Money',
+        'article:published_time': '2018-07-05T05:01:22.000Z',
+        'og:title': 'Ticket touts face unlimited fines for using bots',
+        'fb:app_id': '180444840287',
+        'article:tag':
+            'Ticket prices,Viagogo,Taylor Swift,Consumer affairs,Retail industry,Culture,Money,Ed Sheeran,Music',
+        'al:ios:app_name': 'The Guardian',
+        'og:site_name': 'the Guardian',
+        'article:modified_time': '2018-07-05T17:23:09.000Z',
+    },
     linkedData: [
         {
             '@type': 'NewsArticle',

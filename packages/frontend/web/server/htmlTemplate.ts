@@ -82,10 +82,6 @@ export const htmlTemplate = ({
 
                 ${twitterMetaTags}
 
-                <meta name="twitter:image" content="${
-                    twitterData['twitter:image']
-                }"/>
-
                 <script>
                     window.guardian = ${windowGuardian};
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
