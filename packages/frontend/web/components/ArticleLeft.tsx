@@ -1,8 +1,9 @@
 import React from 'react';
-import { css } from 'emotion';
-import { from, wide, until } from '@guardian/src-foundations';
+import { css, cx } from 'emotion';
+import { from, wide, until, palette } from '@guardian/src-foundations';
 
 const leftWidth = css`
+    padding-right: 10px;
     ${until.leftCol} {
         /* below 1140 */
         display: none;
@@ -23,10 +24,24 @@ const leftWidth = css`
     }
 `;
 
+const rightBorder = (colour: string) => css`
+    border-right: 1px solid ${colour};
+`;
+
 type Props = {
     children: JSX.Element | JSX.Element[];
+    showRightBorder?: boolean;
+    borderColour?: string;
 };
 
-export const ArticleLeft = ({ children }: Props) => (
-    <section className={leftWidth}>{children}</section>
+export const ArticleLeft = ({
+    children,
+    showRightBorder = true,
+    borderColour = palette.neutral[86],
+}: Props) => (
+    <section
+        className={cx(leftWidth, showRightBorder && rightBorder(borderColour))}
+    >
+        {children}
+    </section>
 );
