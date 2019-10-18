@@ -1,6 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { from, until, desktop, wide, tablet } from '@guardian/src-foundations';
+import {
+    phablet,
+    until,
+    desktop,
+    wide,
+    tablet,
+} from '@guardian/src-foundations';
 import { labelStyles } from '@frontend/web/components/AdSlot';
 
 const articleContainer = css`
@@ -10,7 +16,7 @@ const articleContainer = css`
         padding-left: 10px;
     }
 
-    ${from.phablet} {
+    ${phablet} {
         padding-left: 20px;
     }
 
