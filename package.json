@@ -14,7 +14,8 @@
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
         "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
         "cypress:open": "cypress open",
-        "cypress:run": "percy exec -- cypress run"
+        "cypress:run:percy": "percy exec -- cypress run --spec 'cypress/integration/percy/**/*'",
+        "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'"
     },
     "husky": {
         "hooks": {
