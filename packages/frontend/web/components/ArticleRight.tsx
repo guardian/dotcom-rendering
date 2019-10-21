@@ -17,8 +17,9 @@ const hideBelowDesktop = css`
     }
 `;
 
-const topPadding = css`
+const padding = css`
     padding-top: 6px;
+    padding-left: 10px;
 `;
 
 type Props = {
@@ -27,8 +28,6 @@ type Props = {
 
 export const ArticleRight = ({ children }: Props) => {
     return (
-        <section className={cx(hideBelowDesktop, topPadding)}>
-            {children}
-        </section>
+        <section className={cx(hideBelowDesktop, padding)}>{children}</section>
     );
 };
