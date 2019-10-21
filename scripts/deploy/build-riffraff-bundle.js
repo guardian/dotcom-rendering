@@ -16,15 +16,14 @@ const { siteName, root, dist, target } = require('../frontend/config');
 // ├── frontend-cfn
 // |   └── cloudformation.yml
 // ├── frontend-static
-// │   └── guui
-// │       ├── assets
+// │   ├── assets
+// │   │   └── **
+// │   │       └── *
+// │   └── static
+// │       ├── frontend
 // │       │   └── **
 // │       │       └── *
-// │       └── static
-// │           ├── frontend
-// │           │   └── **
-// │           │       └── *
-// │           └── etc
+// │       └── etc
 // └── rendering
 //     └── dist
 //         └── rendering.zip
