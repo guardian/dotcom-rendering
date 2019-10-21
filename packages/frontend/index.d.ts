@@ -355,3 +355,9 @@ declare namespace JSX {
         'amp-audio': any;
     }
 }
+
+// SVG handling
+declare module '*.svg' {
+    const content: any;
+    export default content;
+}
