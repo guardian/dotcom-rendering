@@ -16,6 +16,10 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 
     ${commonArticleStyles(pillarStyles)}
     ${bulletStyles(pillarStyles.kicker)}
+
+    .image, figcaption {
+        padding: 0;
+    }
 `;
 
 interface LiveblogBodyProps {

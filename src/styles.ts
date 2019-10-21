@@ -1,4 +1,4 @@
-import { palette } from '@guardian/src-foundations';
+import { palette, until, from, wide, phablet } from '@guardian/src-foundations';
 import { css, SerializedStyles } from '@emotion/core'
 
 const BASE_PADDING = 8;
@@ -7,10 +7,15 @@ export const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
-export const sidePadding = {
-    paddingLeft: basePx(1),
-    paddingRight: basePx(1)
-}
+export const sidePadding = css`
+    padding-left: ${basePx(1)};
+    padding-right: ${basePx(1)};
+
+    ${wide} {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}`;
 
 export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
 
@@ -134,8 +139,14 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     }
 
     .image img {
-        width: calc(100% + 16px);
-        margin: 0 -8px;
+        width: 100%; 
+    }
+
+    .image {
+        ${from.phablet.until.wide} {
+            padding-left: ${basePx(1)};
+            padding-right: ${basePx(1)};
+        }
     }
 
     blockquote {
@@ -173,12 +184,21 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         line-height: 1.8rem;
         color: ${palette.neutral[46]};
         ${textSans}
+
+        ${until.phablet} {
+            padding-left: ${basePx(1)};
+            padding-right: ${basePx(1)};
+        }
     }
 
     .rich-link,
     .element-membership {
         background: ${palette.neutral[97]};
-        padding: 8px;
+        padding: ${basePx(1)};
+        
+        ${until.wide} {
+            margin-left: ${basePx(1)};
+        }
 
         h1 {
             margin: 0;
@@ -220,5 +240,17 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     }
 
     ${bulletStyles(kicker)}
-    ${sidePadding}
+`;
+
+export const wideContentWidth = 620;
+export const wideColumnWidth = 220;
+
+export const articleWidthStyles = css`
+    ${wide} {
+        margin: 0 auto;
+    }
+
+    ${phablet} {
+        width: ${wideContentWidth}px;
+    }
 `;

@@ -30,26 +30,26 @@ declare enum ContentType {
 }
 
 declare enum ElementType {
-  TEXT = 0,
-  IMAGE = 1,
-  EMBED = 2,
-  FORM = 3,
-  PULLQUOTE = 4,
-  INTERACTIVE = 5,
-  COMMENT = 6,
-  RICH_LINK = 7,
-  TABLE = 8,
-  VIDEO = 9,
-  TWEET = 10,
-  WITNESS = 11,
-  CODE = 12,
-  AUDIO = 13,
-  MAP = 14,
-  DOCUMENT = 15,
-  MEMBERSHIP = 16,
-  INSTAGRAM = 17,
-  CONTENTATOM = 18,
-  VINE = 19,
+  TEXT = 'text',
+  IMAGE = 'image',
+  EMBED = 'embed',
+  FORM = 'form',
+  PULLQUOTE = 'pullquote',
+  INTERACTIVE = 'interactive',
+  COMMENT = 'comment',
+  RICH_LINK = 'rich-link',
+  TABLE = 'table',
+  VIDEO = 'video',
+  TWEET = 'tweet',
+  WITNESS = 'witness',
+  CODE = 'code',
+  AUDIO = 'audio',
+  MAP = 'map',
+  DOCUMENT = 'document',
+  MEMBERSHIP = 'membership',
+  INSTAGRAM = 'instagram',
+  CONTENTATOM = 'contentatom',
+  VINE = 'vine',
 }
 
 declare enum CrosswordType {
@@ -447,7 +447,7 @@ declare class ContentAtomElementFields {
     constructor(args?: { atomId: string; atomType: string; });
 }
 
-declare class BlockElement {
+export declare class BlockElement {
   type: ElementType;
   assets: Asset[];
   textTypeData: TextElementFields;

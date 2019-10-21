@@ -1,7 +1,8 @@
 import React from 'react';
-import { basePx, sidePadding, PillarStyles, headlineFont } from '../../styles';
+import { basePx, PillarStyles, headlineFont } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
+import LeftColumn from 'components/shared/LeftColumn';
 
 const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};
@@ -11,7 +12,6 @@ const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => c
         line-height: 3.2rem;
         margin: 0;
         ${headlineFont}
-        ${sidePadding}
         font-weight: 500;
         color: ${palette.neutral[100]};
     }
@@ -22,12 +22,9 @@ interface LiveblogHeadlineProps {
     pillarStyles: PillarStyles;
 }
 
-const LiveblogHeadline = ({ headline, pillarStyles }: LiveblogHeadlineProps): JSX.Element => {
-    return (
-        <div css={LiveblogHeadlineStyles(pillarStyles)}>
-            <h1>{ headline }</h1>
-        </div>
-    )
-}
+const LiveblogHeadline = ({ headline, pillarStyles }: LiveblogHeadlineProps): JSX.Element =>
+    <LeftColumn className={LiveblogHeadlineStyles(pillarStyles)}>
+        <h1>{ headline }</h1>
+    </LeftColumn>
 
 export default LiveblogHeadline;
