@@ -196,6 +196,8 @@ interface CAPIType {
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
     isAdFreeUser: boolean;
+    openGraphData: { [key: string]: string };
+    twitterData: { [key: string]: string };
     webURL: string;
     linkedData: object[];
     config: ConfigType;

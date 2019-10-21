@@ -14,6 +14,8 @@ export const htmlTemplate = ({
     windowGuardian,
     fontFiles = [],
     ampLink,
+    openGraphData,
+    twitterData,
 }: {
     title?: string;
     description: string;
@@ -25,6 +27,8 @@ export const htmlTemplate = ({
     fontFiles?: string[];
     windowGuardian: string;
     ampLink?: string;
+    openGraphData: { [key: string]: string };
+    twitterData: { [key: string]: string };
 }) => {
     const favicon =
         process.env.NODE_ENV === 'production'
@@ -46,6 +50,19 @@ export const htmlTemplate = ({
             )}" as="font" crossorigin>`,
     );
 
+    const generateMetaTags = (dataObject: { [key: string]: string }) => {
+        if (dataObject) {
+            return Object.entries(dataObject)
+                .map(([id, value]) => `<meta name="${id}" content="${value}"/>`)
+                .join('\n');
+        }
+        return '';
+    };
+
+    const openGraphMetaTags = generateMetaTags(openGraphData);
+
+    const twitterMetaTags = generateMetaTags(twitterData);
+
     return `<!doctype html>
         <html lang="en">
             <head>
@@ -63,6 +80,10 @@ export const htmlTemplate = ({
                 ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
 
                 ${fontPreloadTags.join('\n')}
+
+                ${openGraphMetaTags}
+
+                ${twitterMetaTags}
 
                 <script>
                     window.guardian = ${windowGuardian};

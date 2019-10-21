@@ -93,6 +93,9 @@ export const document = ({ data }: Props) => {
 
     const description = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
 
+    const openGraphData = CAPI.openGraphData;
+    const twitterData = CAPI.twitterData;
+
     return htmlTemplate({
         linkedData,
         priorityScripts,
@@ -104,5 +107,7 @@ export const document = ({ data }: Props) => {
         description,
         windowGuardian,
         ampLink,
+        openGraphData,
+        twitterData,
     });
 };
