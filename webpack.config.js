@@ -3,27 +3,14 @@
 const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
-const fs = require('fs');
+const glob = require("glob");
 
 
 // ----- Functions ----- //
 
-const testEntryPoints = (entries, { name, path }) =>
-    name.includes('.test') ? { ...entries, [name]: path } : entries;
-
-const listFiles = (dir) =>
-    fs.readdirSync(dir).reduce((list, file) => {
-
-        const fullPath = path.join(dir, file);
-        const isDirectory = fs.statSync(fullPath).isDirectory();
-        const files = isDirectory
-            ? listFiles(fullPath)
-            : [{ name: path.parse(file).name, path: `./${fullPath}` }];
-
-        return [ ...list, ...files ];
-
-    }, []);
-
+const testEntryPoints = (entries, current) => ({
+    ...entries, [current.split('/').pop().split('.test.ts')[0]]: current
+})
 
 // ----- Plugins ----- //
 
@@ -145,14 +132,13 @@ const clientConfig = {
 const testConfig = {
     name: 'tests',
     mode: 'development',
-    entry: listFiles('./src').reduce(testEntryPoints, {}),
+    entry: glob.sync("./**/*test.ts", { ignore: './node_modules/**' }).reduce(testEntryPoints, {}),
     output: {
-        filename: '[name].js',
+        filename: '[name].test.js',
     },
     stats: 'errors-warnings',
     ...nodeConfig,
 };
-
 
 // ----- Exports ----- //
 
