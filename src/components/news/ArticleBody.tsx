@@ -14,7 +14,8 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         margin: 8px 24px 8px 0;
     }
 
-    p {
+    p,
+    .interactive {
         ${sidePadding}
     }
 

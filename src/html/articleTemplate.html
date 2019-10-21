@@ -98,6 +98,63 @@
   <div id="root"></div>
   <script>
     // common.js
+
+    // load interactives
+    function boot(el, context, config, mediator) {
+      var iframe;
+      var link = el.querySelector('a[href]');
+
+      function _postMessage(message) {
+          iframe.contentWindow.postMessage(JSON.stringify(message), '*');
+      }
+
+      if (link) {
+          iframe = document.createElement('iframe');
+          iframe.style.width = '100%';
+          iframe.style.border = 'none';
+          iframe.height = '500';
+          iframe.src = link.href;
+
+          window.addEventListener('message', function(event) {
+              if (event.source !== iframe.contentWindow) {
+                  return;
+              }
+
+              var message = JSON.parse(event.data);
+              function _postPositionMessage(subscribe) {
+                  var iframeBox = iframe.getBoundingClientRect();
+                  _postMessage({
+                      'id':           message.id,
+                      'type':         message.type,
+                      'subscribe':    !!subscribe,
+                      'iframeTop':    iframeBox.top,
+                      'iframeRight':  iframeBox.right,
+                      'iframeBottom': iframeBox.bottom,
+                      'iframeLeft':   iframeBox.left,
+                      'innerHeight':  window.innerHeight,
+                      'innerWidth':   window.innerWidth,
+                      'pageYOffset':  window.pageYOffset,
+                  });
+              }
+
+              switch (message.type) {
+                  case 'set-height':
+                      iframe.height = message.value;
+                      break;
+              }
+          }, false);
+
+          el.replaceChild(iframe, link);
+      } else {
+          console.warn('iframe-wrapper applied to element without any link');
+      }
+    }
+
+    const interactives = Array.from(document.getElementsByClassName('interactive'));
+    interactives.forEach(interactive => boot(interactive, document.body));
+
+
+    // correctly size body images
     window.addEventListener('resize', formatBodyImages);
 
     function formatBodyImages() {
@@ -137,6 +194,7 @@
 
     formatBodyImages();
 
+    // dark mode helpers
     function isDarkMode() {
       if (window.matchMedia) {
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
