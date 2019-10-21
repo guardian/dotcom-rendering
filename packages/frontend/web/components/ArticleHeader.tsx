@@ -3,26 +3,18 @@ import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@frontend/static/icons/clock.svg';
-import { Byline } from '@frontend/web/components/Byline';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { headline, textSans, body } from '@guardian/src-foundations';
-import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import {
-    from,
     until,
     leftCol,
     tablet,
     mobileLandscape,
-    wide,
 } from '@guardian/pasteup/breakpoints';
 
-import { ShareCount } from './ShareCount';
-import { Dateline } from './Dateline';
 import { MainMedia } from './MainMedia';
-import { SeriesSectionLink } from './SeriesSectionLink';
-import { SharingIcons } from './ShareIcons';
 
 const curly = (x: any) => x;
 
@@ -73,21 +65,6 @@ const standfirstLinks = pillarMap(
             }
         `,
 );
-
-const guardianLines = css`
-    background-image: repeating-linear-gradient(
-        to bottom,
-        ${palette.neutral[86]},
-        ${palette.neutral[86]} 1px,
-        transparent 1px,
-        transparent 4px
-    );
-    background-repeat: repeat-x;
-    background-position: top;
-    background-size: 1px 13px;
-    padding-top: 15px;
-    margin-bottom: 6px;
-`;
 
 const captionFont = css`
     ${textSans({ level: 1 })};
@@ -140,36 +117,9 @@ const headerStyle = css`
 `;
 
 const headlineCSS = css`
-    @supports (display: grid) {
-        grid-template-areas: 'headline';
-    }
+    max-width: 630px;
     ${until.phablet} {
         padding: 0 10px;
-    }
-`;
-
-const leftColWidth = css`
-    ${leftCol} {
-        width: 140px;
-    }
-
-    ${wide} {
-        width: 220px;
-    }
-`;
-
-const meta = css`
-    ${leftColWidth};
-    @supports (display: grid) {
-        grid-template-areas: 'meta';
-    }
-    ${from.tablet.until.leftCol} {
-        order: 1;
-    }
-
-    ${until.phablet} {
-        padding-left: 10px;
-        padding-right: 10px;
     }
 `;
 
@@ -207,22 +157,6 @@ const ageWarningScreenReader = css`
     ${screenReaderOnly};
 `;
 
-const metaExtras = css`
-    border-top: 1px solid ${palette.neutral[86]};
-    padding-top: 6px;
-    margin-bottom: 6px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
-    ${until.phablet} {
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-`;
-
 const headerStyles = css`
     ${until.phablet} {
         margin: 0 -10px;
@@ -230,32 +164,6 @@ const headerStyles = css`
 
     display: flex;
     flex-direction: column;
-
-    ${leftCol} {
-        @supports (display: grid) {
-            display: grid;
-            grid-template-areas: 'section headline' 'meta main-media';
-            grid-template-columns: 160px 1fr;
-            margin-left: -160px;
-        }
-    }
-
-    ${wide} {
-        @supports (display: grid) {
-            grid-template-columns: 240px 1fr;
-            margin-left: -240px;
-        }
-    }
-`;
-
-const sectionStyles = css`
-    ${leftColWidth};
-    @supports (display: grid) {
-        grid-template-areas: 'section';
-    }
-    ${until.phablet} {
-        padding: 0 10px;
-    }
 `;
 
 type Props = {
@@ -265,12 +173,8 @@ type Props = {
 
 export const ArticleHeader = ({ CAPI, config }: Props) => {
     const ageWarning = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
-    const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
     return (
         <header className={headerStyles}>
-            <div className={sectionStyles}>
-                <SeriesSectionLink CAPI={CAPI} fallbackToSection={true} />
-            </div>
             <div className={headlineCSS}>
                 {ageWarning && (
                     <div className={ageWarningStyle} aria-hidden="true">
@@ -290,25 +194,6 @@ export const ArticleHeader = ({ CAPI, config }: Props) => {
                         __html: CAPI.standfirst,
                     }}
                 />
-            </div>
-            <div className={cx(meta, guardianLines)}>
-                <Byline
-                    author={CAPI.author}
-                    tags={CAPI.tags}
-                    pillar={CAPI.pillar}
-                />
-                <Dateline
-                    dateDisplay={CAPI.webPublicationDateDisplay}
-                    descriptionText={'Published on'}
-                />
-                <div className={metaExtras}>
-                    <SharingIcons
-                        sharingUrls={sharingUrls}
-                        pillar={CAPI.pillar}
-                        displayIcons={['facebook', 'twitter', 'email']}
-                    />
-                    <ShareCount config={config} pageId={CAPI.pageId} />
-                </div>
             </div>
             <div className={cx(mainMedia)}>
                 {CAPI.mainMediaElements.map((element, i) => (

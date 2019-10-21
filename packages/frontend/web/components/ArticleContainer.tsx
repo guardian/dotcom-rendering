@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import {
-    phablet,
+    leftCol,
     until,
     desktop,
     wide,
@@ -10,21 +10,17 @@ import {
 import { labelStyles } from '@frontend/web/components/AdSlot';
 
 const articleContainer = css`
-    padding-right: 20px;
+    ${until.leftCol} {
+        /* below 1140 */
+        padding-left: 0;
+    }
 
-    ${until.phablet} {
+    ${leftCol} {
+        /* above 1140 */
         padding-left: 10px;
     }
 
-    ${phablet} {
-        padding-left: 20px;
-    }
-
     flex-grow: 1;
-`;
-
-const maxWidth = css`
-    max-width: 630px;
 `;
 
 const articleAdStyles = css`
@@ -78,10 +74,10 @@ type Props = {
     children: JSX.Element | JSX.Element[];
 };
 
-export const ArticleMain = ({ children }: Props) => {
+export const ArticleContainer = ({ children }: Props) => {
     return (
         <main className={cx(articleContainer, articleAdStyles)}>
-            <div className={maxWidth}>{children}</div>
+            {children}
         </main>
     );
 };
