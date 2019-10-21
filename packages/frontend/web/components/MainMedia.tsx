@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
+import { MainImageComponent } from '@frontend/web/components/elements/MainImageComponent';
 
 export const MainMedia: React.FC<{ element: CAPIElement; pillar: Pillar }> = ({
     element,
@@ -7,7 +7,7 @@ export const MainMedia: React.FC<{ element: CAPIElement; pillar: Pillar }> = ({
 }) => {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
-            return <ImageBlockComponent element={element} pillar={pillar} />;
+            return <MainImageComponent element={element} pillar={pillar} />;
         default:
             return null;
     }
