@@ -9,6 +9,7 @@ export const Flex = ({ children }: Props) => (
     <div
         className={css`
             display: flex;
+            justify-content: space-between;
         `}
     >
         {children}
