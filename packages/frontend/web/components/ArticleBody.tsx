@@ -153,6 +153,10 @@ const subMetaSharingIcons = css`
     }
 `;
 
+const maxWidth = css`
+    max-width: 630px;
+`;
+
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     config: ConfigType;
@@ -161,7 +165,7 @@ export const ArticleBody: React.FC<{
     const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
     return (
-        <div>
+        <main className={maxWidth}>
             <div
                 className={cx(bodyStyle, linkColour[CAPI.pillar], {
                     [immersiveBodyStyle]: CAPI.isImmersive,
@@ -214,6 +218,6 @@ export const ArticleBody: React.FC<{
                     />
                 )}
             </div>
-        </div>
+        </main>
     );
 };
