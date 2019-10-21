@@ -4,6 +4,10 @@ import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { leftCol } from '@guardian/pasteup/breakpoints';
 import { headline } from '@guardian/src-foundations';
 
+const sectionLabelText = css`
+    font-weight: 700;
+`;
+
 const sectionLabelLink = css`
     text-decoration: none;
     :hover {
@@ -21,7 +25,6 @@ const pillarColours = pillarMap(
 const primaryStyle = css`
     font-weight: 700;
     ${headline({ level: 1 })};
-
     ${leftCol} {
         ${headline({ level: 2 })};
     }
@@ -57,7 +60,7 @@ const TagLink: React.FC<{
             )}
             data-link-name={dataLinkName}
         >
-            {tagTitle}
+            <span className={sectionLabelText}>{tagTitle}</span>
         </a>
     );
 };
