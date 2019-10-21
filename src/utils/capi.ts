@@ -27,7 +27,6 @@ const capiEndpoint = (articleId: string, key: string): string => {
     const params = new URLSearchParams({
       format: 'json',
       'api-key': key,
-      'show-elements': 'all',
       'show-atoms': 'all',
       'show-fields': 'all',
       'show-tags': 'all',
