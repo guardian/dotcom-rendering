@@ -1,13 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/pasteup/typography';
-import PlusIcon from '@guardian/pasteup/icons/plus.svg';
+import { palette, textSans } from '@guardian/src-foundations';
+import PlusIcon from '@frontend/static/icons/plus.svg';
 
 const showMore = css`
     color: ${palette.neutral[7]};
     padding: 0 10px;
-    ${textSans(2)};
+    ${textSans({ level: 2 })};
     /* Design System: Ideally we want a centering primative in pasteup that we can use in these situations */
     /* stylelint-disable-next-line property-blacklist */
     line-height: 34px;

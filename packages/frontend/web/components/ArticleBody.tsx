@@ -5,7 +5,7 @@ import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/pasteup/palette';
 import { from, tablet } from '@guardian/pasteup/breakpoints';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { headline, textSans } from '@guardian/src-foundations';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
@@ -50,7 +50,7 @@ const guardianLines = css`
 `;
 
 const captionFont = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[46]};
 `;
 
@@ -60,7 +60,7 @@ const bodyStyle = css`
     }
 
     h2 {
-        ${headline(3)};
+        ${headline({ level: 2 })};
     }
 
     strong {
@@ -92,7 +92,7 @@ const bodyStyle = css`
     }
 
     li {
-        ${textSans(5)};
+        ${textSans({ level: 3 })};
         margin-bottom: 6px;
         padding-left: 20px;
 
@@ -115,7 +115,7 @@ const bodyStyle = css`
 
 const immersiveBodyStyle = css`
     h2 {
-        ${headline(7)};
+        ${headline({ level: 5 })};
         font-weight: 200;
     }
 `;
@@ -140,7 +140,7 @@ const subMeta = css`
 `;
 
 const subMetaLabel = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     display: block;
     color: ${palette.neutral[60]};
 `;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
-import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import TwitterIcon from '@frontend/static/icons/twitter.svg';
+import { headline, textSans } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 const twitterHandle = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     font-weight: bold;
     color: ${palette.neutral[46]};
 
@@ -27,7 +27,7 @@ const twitterHandle = css`
 `;
 
 const bylineStyle = (pillar: Pillar) => css`
-    ${headline(2)};
+    ${headline({ level: 1 })};
     color: ${pillarPalette[pillar].main};
     padding-bottom: 8px;
     font-style: italic;

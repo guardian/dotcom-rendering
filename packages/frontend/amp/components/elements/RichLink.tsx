@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import { palette, headline, textSans } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 const richLinkContainer = css`
@@ -23,13 +22,13 @@ const richLink = css`
     font-weight: 500;
     border: 0;
     text-decoration: none;
-    ${headline(1)};
+    ${headline({ level: 1 })};
     word-wrap: break-word;
     :hover {
         text-decoration: underline;
     }
     ::before {
-        ${textSans(1)};
+        ${textSans({ level: 1 })};
         content: 'More on this topic';
         display: block;
         color: ${palette.neutral[46]};

@@ -1,10 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette, mobileLandscape } from '@guardian/src-foundations';
-import { textSans } from '@guardian/pasteup/typography';
-import LabsLogo from '@guardian/pasteup/logos/the-guardian-labs.svg';
-import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
+import { palette, mobileLandscape, textSans } from '@guardian/src-foundations';
+import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
+import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 
 const headerStyle = css`
     display: flex;
@@ -26,7 +25,7 @@ const focusColor = css`
 
 const metaStyle = css`
     height: 100%;
-    ${textSans(4)};
+    ${textSans({ level: 2 })};
     font-weight: 700;
 `;
 

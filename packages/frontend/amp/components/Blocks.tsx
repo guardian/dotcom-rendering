@@ -2,10 +2,9 @@ import React from 'react';
 import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/src-foundations';
+import { palette, textSans } from '@guardian/src-foundations';
 import { blockLink } from '@frontend/amp/lib/block-link';
 import { findBlockAdSlots } from '@frontend/amp/lib/find-adslots';
-import { textSans } from '@guardian/pasteup/typography';
 import { WithAds } from '@frontend/amp/components/WithAds';
 
 const blockStyle = (pillar: Pillar) => css`
@@ -21,11 +20,11 @@ const firstPublishedStyle = css`
     margin-bottom: 10px;
     text-decoration: none;
     font-weight: bold;
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
 `;
 
 const lastUpdatedStyle = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[60]};
     text-align: right;
     padding-right: 15px;

@@ -1,11 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
-import { palette } from '@guardian/src-foundations';
+import { palette, textSans } from '@guardian/src-foundations';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { textSans } from '@guardian/pasteup/typography';
-import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
+import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
 const pillarColours = pillarMap(
     pillar =>
@@ -22,7 +21,7 @@ const pillarFill = pillarMap(
 );
 
 const ageWarningCss = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     display: inline-block;
     margin-bottom: 12px;
     width: 100%;
@@ -50,7 +49,7 @@ type SharingURLs = {
 
 const metaStyle = css`
     display: block;
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[46]};
     padding-top: 2px;
     margin-bottom: 6px;

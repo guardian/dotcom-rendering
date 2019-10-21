@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { css, cx } from 'emotion';
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/src-foundations';
 import { VeggieBurger } from './VeggieBurger';
 import { palette } from '@guardian/pasteup/palette';
 
@@ -10,7 +10,7 @@ const screenReadable = css`
     ${screenReaderOnly};
 `;
 const openMainMenu = css`
-    ${headline(4)};
+    ${headline({ level: 3 })};
     font-weight: 300;
     color: ${palette.neutral[100]};
     cursor: pointer;

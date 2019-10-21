@@ -1,14 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { headline } from '@guardian/pasteup/typography';
+import { headline } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 import {
     mobileLandscape,
     tablet,
     mobileMedium,
 } from '@guardian/pasteup/breakpoints';
-import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
+import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { getCookie } from '@frontend/web/browser/cookie';
@@ -48,14 +48,14 @@ const style = css`
 
 const text = css`
     color: ${palette.neutral[97]};
-    ${headline(1)};
+    ${headline({ level: 1 })};
     font-weight: 700;
     text-align: center;
     padding: 6px 20px 3px;
     position: relative;
 
     ${tablet} {
-        ${headline(1)};
+        ${headline({ level: 1 })};
     }
 `;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { desktop } from '@guardian/pasteup/breakpoints';
 import { css } from 'emotion';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 
 export const SyndicationButton: React.FC<{
@@ -12,7 +12,7 @@ export const SyndicationButton: React.FC<{
         display: none;
 
         ${desktop} {
-            ${textSans(1)};
+            ${textSans({ level: 1 })};
             display: inline-block;
             float: right;
         }

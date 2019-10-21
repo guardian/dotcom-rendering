@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { until, tablet } from '@guardian/pasteup/breakpoints';
 
@@ -58,7 +58,7 @@ const ulExpanded = css`
 `;
 
 const link = css`
-    ${textSans(3)};
+    ${textSans({ level: 2 })};
     color: ${palette.neutral[7]};
     position: relative;
     transition: color 80ms ease-out;
@@ -111,7 +111,7 @@ const linkFirst = css`
 `;
 
 const button = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     display: block;
     cursor: pointer;
     background: none;

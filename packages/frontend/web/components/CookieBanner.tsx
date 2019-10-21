@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { headline, textSans, body } from '@guardian/pasteup/typography';
-import TickIcon from '@guardian/pasteup/icons/tick.svg';
-import RoundelIcon from '@guardian/pasteup/icons/the-guardian-roundel.svg';
+import { headline, textSans, body } from '@guardian/src-foundations';
+import TickIcon from '@frontend/static/icons/tick.svg';
+import RoundelIcon from '@frontend/static/icons/the-guardian-roundel.svg';
 import { getCookie, addCookie } from '@frontend/web/browser/cookie';
 import { until } from '@guardian/pasteup/breakpoints';
 
@@ -22,7 +22,7 @@ const inner = css`
     position: relative;
     margin: 0 20%;
     p {
-        ${body(2)};
+        ${body({ level: 2 })};
         margin-top: 0;
         color: ${palette.neutral[100]};
         margin-bottom: 8px;
@@ -42,13 +42,13 @@ const inner = css`
         margin: auto;
         padding: 0;
         p {
-            ${body(1)};
+            ${body({ level: 1 })};
         }
     }
 `;
 
 const header = css`
-    ${headline(6)};
+    ${headline({ level: 5 })};
     font-weight: bold;
     padding-bottom: 12px;
     color: ${palette.neutral[100]};
@@ -56,7 +56,7 @@ const header = css`
 
 const more = css`
     margin-left: 12px;
-    ${textSans(3)};
+    ${textSans({ level: 2 })};
     font-weight: bold;
 `;
 
@@ -70,7 +70,7 @@ const iconCss = css`
 `;
 
 const button = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     border-radius: 1000px;
     height: 42px;
     background: ${palette.highlight.main};

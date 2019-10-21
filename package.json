@@ -129,10 +129,10 @@
             "<rootDir>/scripts/jest/setup.ts"
         ],
         "moduleNameMapper": {
-            "^@root(.*)$": "<rootDir>$1",
-            "^@frontend(.*)$": "<rootDir>/packages/frontend$1",
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
-            "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx"
+            "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
+            "^@root(.*)$": "<rootDir>$1",
+            "^@frontend(.*)$": "<rootDir>/packages/frontend$1"
         },
         "testResultsProcessor": "jest-teamcity-reporter",
         "collectCoverageFrom": [

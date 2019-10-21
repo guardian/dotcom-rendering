@@ -8,13 +8,12 @@ import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { PaidForBand } from '@frontend/amp/components/topMeta/PaidForBand';
 
-import { palette } from '@guardian/src-foundations';
-import { textSans, body } from '@guardian/pasteup/typography';
+import { palette, textSans, body } from '@guardian/src-foundations';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 
 const headerStyle = css`
-    ${textSans(9)};
+    ${textSans({ level: 5 })};
     font-weight: 400;
     padding-top: 3px;
     padding-bottom: 27px;
@@ -22,7 +21,7 @@ const headerStyle = css`
 `;
 
 const bylineStyle = css`
-    ${body(2)};
+    ${body({ level: 2 })};
     color: ${palette.neutral[7]};
     padding-bottom: 8px;
     font-style: italic;
@@ -39,7 +38,7 @@ const bylineStyle = css`
 `;
 
 const paidForLogoLabelStyle = css`
-    ${textSans(2)};
+    ${textSans({ level: 2 })};
     font-weight: 700;
     margin-bottom: 6px;
     color: ${palette.neutral[46]};

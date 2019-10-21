@@ -1,7 +1,6 @@
 import React from 'react';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, palette } from '@guardian/src-foundations';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { ArticleModel } from '@frontend/amp/pages/Article';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
@@ -13,7 +12,7 @@ import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 
 const headerStyle = (pillar: Pillar) => css`
-    ${headline(5)};
+    ${headline({ level: 4 })};
     font-weight: 500;
     padding: 3px 10px 24px;
     color: ${palette.neutral[100]};
@@ -21,7 +20,7 @@ const headerStyle = (pillar: Pillar) => css`
 `;
 
 const bylineStyle = (pillar: Pillar) => css`
-    ${headline(2)};
+    ${headline({ level: 1 })};
     color: ${pillarPalette[pillar].main};
     padding-top: 3px;
     padding-bottom: 8px;
@@ -36,7 +35,7 @@ const bylineStyle = (pillar: Pillar) => css`
 `;
 
 const standfirstStyle = (pillar: Pillar) => css`
-    ${headline(2)};
+    ${headline({ level: 1 })};
     color: ${palette.neutral[100]};
     background-color: ${pillarPalette[pillar].dark};
     font-weight: bold;

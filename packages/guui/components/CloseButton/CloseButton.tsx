@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import CloseIcon from '@guardian/pasteup/icons/x.svg';
+import CloseIcon from '@frontend/static/icons/x.svg';
 import { palette, Appearances } from '@guardian/pasteup/palette';
 
 type contrastKeys = keyof Appearances['contrasts'];

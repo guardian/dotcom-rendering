@@ -2,11 +2,11 @@ import React from 'react';
 
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
+import { textSans } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 const captionFont = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[46]};
 `;
 

@@ -11,7 +11,7 @@ import {
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { palette } from '@guardian/pasteup/palette';
-import TheGuardianLogoSVG from '@guardian/pasteup/logos/the-guardian.svg';
+import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 
 const link = css`
     float: right;

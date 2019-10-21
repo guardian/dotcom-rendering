@@ -1,10 +1,9 @@
 import React from 'react';
-import { textSans } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
 import { css } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
-import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
+import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 const figureStyle = css`
     margin-top: 16px;
@@ -12,7 +11,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
     padding-top: 8px;
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
 `;
