@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { basePx, textSans, icons } from '../../styles';
-import { palette } from '@guardian/src-foundations';
+import { basePx, textSans, icons, wideContentWidth } from 'styles';
+import { palette, wide } from '@guardian/src-foundations';
 
 const HeaderImageCaptionStyles = css`
     input[type=checkbox] {
@@ -46,16 +46,21 @@ const HeaderImageCaptionStyles = css`
 		background-color: rgba(0, 0, 0, 0.8);
 		padding: ${basePx(1)};
 		overflow: hidden;
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
 		padding-right: 48px;
 		z-index: 1;
 		color: ${palette.neutral[100]};
 		line-height: 1.6rem;
 		font-size: 1.4rem;
 		${textSans}
+	}
+
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+	${wide} {
+		width: ${wideContentWidth}px;
 	}
 `;
 

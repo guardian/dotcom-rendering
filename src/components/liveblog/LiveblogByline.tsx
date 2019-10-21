@@ -1,5 +1,5 @@
 import React from 'react';
-import { sidePadding, textSans, PillarStyles, PillarId } from '../../styles';
+import { textSans, PillarStyles, PillarId } from '../../styles';
 
 import { Keyline } from '../shared/Keyline';
 
@@ -8,6 +8,7 @@ import { palette } from '@guardian/src-foundations';
 import { Contributor } from '../../types/Capi';
 import { formatDate } from 'utils/date';
 import Avatar from 'components/shared/Avatar';
+import LeftColumn from 'components/shared/LeftColumn';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -64,7 +65,7 @@ const LiveblogByline = ({
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline pillar={pillarId} type={'liveblog'}/>
-            <div css={sidePadding}>
+            <LeftColumn>
                 <Avatar
                     contributors={contributors}
                     bgColour={pillarStyles.featureHeadline}
@@ -75,7 +76,7 @@ const LiveblogByline = ({
                     <time className="date">{ formatDate(new Date(publicationDate)) }</time>
                     <div className="follow">Get alerts on this story</div>
                 </div>
-            </div>
+            </LeftColumn>
         </div>
     )
 }

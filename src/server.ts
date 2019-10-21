@@ -10,13 +10,13 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/Result';
-import { Tag } from 'types/capi-thrift-models';
+import { Tag, BlockElement } from 'types/capi-thrift-models';
 import Article, { ArticleProps } from 'components/news/Article';
 import LiveblogArticle from 'components/liveblog/LiveblogArticle';
 import { getPillarStyles } from 'styles';
 import { getConfigValue } from 'utils/ssmConfig';
 import { isFeature, parseCapi, capiEndpoint } from 'utils/capi';
-
+import { fromNullable } from 'types/Option';
 
 // ----- Setup ----- //
 
@@ -51,22 +51,17 @@ function checkForUnsupportedContent(capi: any): Result<string, void> {
 
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const isMainImage = (elem: any): boolean =>
-  elem.relation === 'main' && elem.type === 'image';
+const isImage = (elem: BlockElement): boolean =>
+  elem.type === 'image';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const capiFields = (capi: any): Result<string, CapiFields> =>
   fromUnsafe(() => {
 
-    const { type, fields, elements, tags, webPublicationDate, pillarId } = capi.response.content;
-    const bodyElements = type === 'liveblog'
-      ? capi.response.content.blocks.body
-      : capi.response.content.blocks.body[0].elements;
+    const { type, fields, tags, webPublicationDate, pillarId, blocks } = capi.response.content;
+    const bodyElements = type === 'liveblog' ? blocks.body : blocks.body[0].elements;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mainImages = elements.filter(isMainImage);
-    const mainAssets = mainImages.length ? mainImages[0]['assets'] : null;
+    const mainImage = fromNullable(blocks.main.elements.filter(isImage)[0]);
     const feature = isFeature(tags) || 'starRating' in fields;
     const pillarStyles = getPillarStyles(pillarId);
     const contributors = tags.filter((tag: Tag) => tag.type === 'contributor');
@@ -79,7 +74,7 @@ const capiFields = (capi: any): Result<string, CapiFields> =>
         ...capi.response.content,
         webPublicationDate,
         feature,
-        mainAssets,
+        mainImage,
         bodyElements,
         pillarStyles,
         contributors,

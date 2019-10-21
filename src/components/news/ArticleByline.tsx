@@ -1,7 +1,5 @@
 import React from 'react';
-import { sidePadding, textSans, PillarStyles, PillarId, darkModeCss } from '../../styles';
-
-import { Keyline } from '../shared/Keyline';
+import { sidePadding, textSans, PillarStyles, darkModeCss } from '../../styles';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
@@ -57,7 +55,6 @@ interface ArticleBylineProps {
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
-    pillarId: PillarId;
     imageSalt: string;
 }
 
@@ -66,11 +63,9 @@ const ArticleByline = ({
     pillarStyles,
     publicationDate,
     contributors,
-    pillarId,
     imageSalt
 }: ArticleBylineProps): JSX.Element =>
     <div css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
-        <Keyline pillar={pillarId} type={'article'}/>
         <div css={sidePadding}>
             <Avatar
                 contributors={contributors}
