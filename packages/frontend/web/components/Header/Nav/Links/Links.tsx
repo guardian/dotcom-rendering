@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-
 import {
     Link as DropdownLink,
     Dropdown,
