@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/pasteup/palette';
-import ClockIcon from '@guardian/pasteup/icons/clock.svg';
+import ClockIcon from '@frontend/static/icons/clock.svg';
 import { Byline } from '@frontend/web/components/Byline';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';

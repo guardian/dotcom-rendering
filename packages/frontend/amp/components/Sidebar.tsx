@@ -64,7 +64,7 @@ const link = css`
     color: ${palette.neutral[100]};
     text-decoration: none;
     display: block;
-    ${textSans({ level: 4 })};
+    ${textSans({ level: 4, lineHeight: 'tight' })};
     font-weight: 400;
     outline: none;
     padding: 8px 10px 8px 50px;

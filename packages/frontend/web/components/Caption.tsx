@@ -3,7 +3,7 @@ import { textSans } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@guardian/frontend-rendering/lib/pillars';
-import TriangleIcon from '@guardian/pasteup/icons/triangle.svg';
+import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 const figureStyle = css`
     margin-bottom: 8px;

@@ -42,7 +42,7 @@ const pillarDividerExtended = css`
 `;
 
 const columnLinkTitle = css`
-    ${textSans({ level: 3 })};
+    ${textSans({ level: 3, lineHeight: 'tight' })};
     background-color: transparent;
     text-decoration: none;
     border: 0;
@@ -56,14 +56,16 @@ const columnLinkTitle = css`
     position: relative;
     text-align: left;
     width: 100%;
+
     ${tablet} {
         padding-left: 60px;
     }
+
     ${desktop} {
-        ${textSans({ level: 3 })};
         font-size: 16px;
         padding: 6px 0;
     }
+
     :hover,
     :focus {
         color: ${palette.highlight.main};

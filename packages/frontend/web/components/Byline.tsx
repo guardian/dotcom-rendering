@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import TwitterIcon from '@guardian/pasteup/icons/twitter.svg';
+import TwitterIcon from '@frontend/static/icons/twitter.svg';
 import { headline, textSans } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 import { pillarPalette } from '@frontend/lib/pillars';
