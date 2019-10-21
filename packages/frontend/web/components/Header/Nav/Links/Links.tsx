@@ -219,14 +219,14 @@ export const Links: React.FC<{
                 />
             </div>
         ) : (
-                <a
-                    className={link}
-                    href={signInUrl}
-                    data-link-name="nav2 : topbar : signin"
-                >
-                    <ProfileIcon /> Sign in
+            <a
+                className={link}
+                href={signInUrl}
+                data-link-name="nav2 : topbar : signin"
+            >
+                <ProfileIcon /> Sign in
             </a>
-            )}
+        )}
 
         <Search
             className={cx(linkTablet({ showAtTablet: false }), link)}
