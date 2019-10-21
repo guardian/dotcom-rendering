@@ -85,7 +85,7 @@ export const ShareCount = ({ config, pageId }: Props) => {
             {
                 feature: 'share-count',
             },
-            true,
+            false,
         );
 
         return null;
