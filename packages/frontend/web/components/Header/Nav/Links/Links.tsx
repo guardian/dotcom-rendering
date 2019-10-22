@@ -6,13 +6,13 @@ import {
 } from '@frontend/web/components/Dropdown';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
-import { palette } from '@guardian/pasteup/palette';
 import {
     tablet,
     desktop,
     mobileLandscape,
     wide,
     textSans,
+    palette,
 } from '@guardian/src-foundations';
 
 const search = css`
@@ -52,7 +52,7 @@ const link = css`
 
     :hover,
     :focus {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
 
     svg {

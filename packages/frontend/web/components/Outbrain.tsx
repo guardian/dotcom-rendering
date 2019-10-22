@@ -3,7 +3,6 @@
 import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
 import {
     textSans,
     body,
@@ -11,6 +10,7 @@ import {
     desktop,
     leftCol,
     wide,
+    palette,
 } from '@guardian/src-foundations';
 
 interface OutbrainSelectors {

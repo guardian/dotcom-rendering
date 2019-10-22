@@ -1,8 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
 import ShareIcon from '@frontend/static/icons/share.svg';
-import { from, wide, leftCol, textSans } from '@guardian/src-foundations';
+import {
+    from,
+    wide,
+    leftCol,
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 import { integerCommas } from '@frontend/lib/formatters';
 import { useApi } from '@frontend/web/components/lib/api';
 

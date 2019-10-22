@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette, headline, textSans } from '@guardian/src-foundations';
-import { pillarPalette } from '@frontend/lib/pillars';
+import { neutralBorder } from '@frontend/lib/pillars';
 import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 import { ListStyle, LinkStyle } from '@frontend/amp/components/elements/Text';
 
@@ -19,7 +19,7 @@ const standfirstCss = (pillar: Pillar) => css`
         font-weight: 700;
     }
 
-    ${ListStyle(pillarPalette[pillar].neutral.border)};
+    ${ListStyle(neutralBorder(pillar))};
     ${LinkStyle(pillar)};
 `;
 

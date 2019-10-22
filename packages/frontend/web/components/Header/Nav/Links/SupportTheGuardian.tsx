@@ -1,12 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
-
-import { palette } from '@guardian/pasteup/palette';
 import {
     mobileLandscape,
     tablet,
     mobileMedium,
     headline,
+    palette,
 } from '@guardian/src-foundations';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';

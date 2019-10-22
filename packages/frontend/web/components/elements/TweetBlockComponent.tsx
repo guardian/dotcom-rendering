@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { body } from '@guardian/src-foundations';
+import { palette, body } from '@guardian/src-foundations';
 import { unescapeData } from '@frontend/lib/escapeData';
 
 // fallback styling for when JS is disabled

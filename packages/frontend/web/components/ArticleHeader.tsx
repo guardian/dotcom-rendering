@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/pasteup/palette';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
@@ -14,6 +13,7 @@ import {
     headline,
     textSans,
     body,
+    palette,
 } from '@guardian/src-foundations';
 
 import { MainMedia } from './MainMedia';
@@ -128,7 +128,7 @@ const headlineCSS = css`
 const ageWarningStyle = css`
     ${textSans({ level: 3 })};
     color: ${palette.neutral[7]};
-    background-color: ${palette.highlight.main};
+    background-color: ${palette.yellow.main};
     display: inline-block;
     margin-bottom: 6px;
 

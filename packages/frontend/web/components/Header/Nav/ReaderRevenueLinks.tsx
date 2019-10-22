@@ -2,7 +2,6 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
-import { palette } from '@guardian/pasteup/palette';
 import {
     tablet,
     desktop,
@@ -11,13 +10,14 @@ import {
     leftCol,
     textSans,
     headline,
+    palette,
 } from '@guardian/src-foundations';
 
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
 const message = css`
-    color: ${palette.highlight.main};
+    color: ${palette.yellow.main};
     ${headline({ level: 2 })};
     padding-top: 3px;
     margin-bottom: 3px;
@@ -32,7 +32,7 @@ const message = css`
 `;
 
 const link = css`
-    background: ${palette.highlight.main};
+    background: ${palette.yellow.main};
     border-radius: 16px;
     box-sizing: border-box;
     color: ${palette.neutral[7]};

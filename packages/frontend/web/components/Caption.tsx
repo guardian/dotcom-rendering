@@ -1,6 +1,5 @@
 import React from 'react';
-import { textSans } from '@guardian/src-foundations';
-import { palette } from '@guardian/pasteup/palette';
+import { textSans, palette } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@guardian/frontend-rendering/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';

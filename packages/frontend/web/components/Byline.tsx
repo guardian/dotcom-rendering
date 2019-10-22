@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
-import { headline, textSans } from '@guardian/src-foundations';
-import { palette } from '@guardian/pasteup/palette';
+import { headline, textSans, palette } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
 
 const twitterHandle = css`
