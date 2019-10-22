@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { until, desktop } from '@guardian/src-foundations';
 
 const hideBelowDesktop = css`
@@ -17,10 +17,17 @@ const hideBelowDesktop = css`
     }
 `;
 
+const padding = css`
+    padding-top: 6px;
+    padding-left: 10px;
+`;
+
 type Props = {
     children: JSX.Element | JSX.Element[];
 };
 
 export const ArticleRight = ({ children }: Props) => {
-    return <section className={hideBelowDesktop}>{children}</section>;
+    return (
+        <section className={cx(hideBelowDesktop, padding)}>{children}</section>
+    );
 };
