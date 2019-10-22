@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { css } from 'emotion';
-import { palette, textSans } from '@guardian/src-foundations';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import { textSans, visuallyHidden, palette } from '@guardian/src-foundations';
 
 const captionFont = css`
     ${textSans({ level: 1 })};
@@ -17,7 +16,7 @@ const dateline = css`
 `;
 
 const description = css`
-    ${screenReaderOnly}
+    ${visuallyHidden}
 `;
 
 export const Dateline: React.FC<{

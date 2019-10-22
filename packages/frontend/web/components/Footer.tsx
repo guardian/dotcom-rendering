@@ -10,8 +10,8 @@ import {
     textSans,
     palette,
 } from '@guardian/src-foundations';
-import { clearFix } from '@guardian/pasteup/mixins';
 
+import { clearFix } from '@frontend/lib/mixins';
 import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
 import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
 import { BackToTop } from './BackToTop';

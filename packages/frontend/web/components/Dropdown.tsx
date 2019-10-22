@@ -1,7 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { textSans, palette, until, tablet } from '@guardian/src-foundations';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import {
+    textSans,
+    visuallyHidden,
+    palette,
+    until,
+    tablet,
+} from '@guardian/src-foundations';
 
 export interface Link {
     url: string;
@@ -18,7 +23,7 @@ interface Props {
 }
 
 const input = css`
-    ${screenReaderOnly};
+    ${visuallyHidden};
     :checked + ul {
         display: block;
     }
