@@ -1,12 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/src-foundations';
 import {
     desktop,
     tablet,
     mobileLandscape,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+} from '@guardian/src-foundations';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
 const wrapperCollapsed = css`

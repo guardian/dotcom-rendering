@@ -1,9 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/src-foundations';
+import { textSans, until, tablet } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { until, tablet } from '@guardian/pasteup/breakpoints';
 
 export interface Link {
     url: string;

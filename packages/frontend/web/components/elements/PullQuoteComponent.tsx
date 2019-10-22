@@ -2,13 +2,14 @@ import React from 'react';
 import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { palette, body } from '@guardian/src-foundations';
 import {
+    palette,
+    body,
     desktop,
     leftCol,
     phablet,
     mobileLandscape,
-} from '@guardian/pasteup/breakpoints';
+} from '@guardian/src-foundations';
 import { unescapeData } from '@frontend/lib/escapeData';
 
 const gutter = 20;

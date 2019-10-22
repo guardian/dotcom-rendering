@@ -6,7 +6,7 @@ import {
     mobileMedium,
     mobileLandscape,
     tablet,
-} from '@guardian/pasteup/breakpoints';
+} from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 
 const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`

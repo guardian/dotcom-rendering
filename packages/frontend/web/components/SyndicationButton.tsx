@@ -1,7 +1,6 @@
 import React from 'react';
-import { desktop } from '@guardian/pasteup/breakpoints';
+import { desktop, textSans } from '@guardian/src-foundations';
 import { css } from 'emotion';
-import { textSans } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 
 export const SyndicationButton: React.FC<{

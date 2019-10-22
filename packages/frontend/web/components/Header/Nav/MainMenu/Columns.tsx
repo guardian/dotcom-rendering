@@ -1,8 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { tablet, desktop, leftCol, wide } from '@guardian/pasteup/breakpoints';
-import { headline, textSans } from '@guardian/src-foundations';
+import {
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+    headline,
+    textSans,
+} from '@guardian/src-foundations';
 
 import { Column, More, ReaderRevenueLinks } from './Column';
 import { palette } from '@guardian/pasteup/palette';

@@ -1,13 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { headline } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 import {
     mobileLandscape,
     tablet,
     mobileMedium,
-} from '@guardian/pasteup/breakpoints';
+    headline,
+} from '@guardian/src-foundations';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 

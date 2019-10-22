@@ -6,13 +6,15 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline, textSans, body } from '@guardian/src-foundations';
 import {
     until,
     leftCol,
     tablet,
     mobileLandscape,
-} from '@guardian/pasteup/breakpoints';
+    headline,
+    textSans,
+    body,
+} from '@guardian/src-foundations';
 
 import { MainMedia } from './MainMedia';
 

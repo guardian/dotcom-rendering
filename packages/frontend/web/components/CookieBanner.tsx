@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/pasteup/palette';
-import { headline, textSans, body } from '@guardian/src-foundations';
+import { headline, textSans, body, until } from '@guardian/src-foundations';
 import TickIcon from '@frontend/static/icons/tick.svg';
 import RoundelIcon from '@frontend/static/icons/the-guardian-roundel.svg';
 import { getCookie, addCookie } from '@frontend/web/browser/cookie';
-import { until } from '@guardian/pasteup/breakpoints';
 
 const banner = css`
     position: fixed;

@@ -4,8 +4,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/pasteup/palette';
-import { from, tablet } from '@guardian/pasteup/breakpoints';
-import { headline, textSans } from '@guardian/src-foundations';
+import { from, tablet, headline, textSans } from '@guardian/src-foundations';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
