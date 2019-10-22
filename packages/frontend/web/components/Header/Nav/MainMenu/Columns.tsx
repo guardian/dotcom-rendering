@@ -8,10 +8,10 @@ import {
     wide,
     headline,
     textSans,
+    palette,
 } from '@guardian/src-foundations';
 
 import { Column, More, ReaderRevenueLinks } from './Column';
-import { palette } from '@guardian/pasteup/palette';
 
 const ColumnsStyle = css`
     box-sizing: border-box;
@@ -95,7 +95,7 @@ const brandExtensionLink = css`
     }
     :hover,
     :focus {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
     > * {
         pointer-events: none;

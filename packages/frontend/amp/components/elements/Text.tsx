@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette, body, textSans } from '@guardian/src-foundations';
-import { pillarPalette } from '@frontend/lib/pillars';
+import { pillarPalette, neutralBorder } from '@frontend/lib/pillars';
 import { sanitise } from '@frontend/amp/lib/sanitise-html';
 import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
@@ -36,7 +36,7 @@ export const LinkStyle = (pillar: Pillar) => css`
     a {
         color: ${pillarPalette[pillar].dark};
         text-decoration: none;
-        border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
+        border-bottom: 1px solid ${neutralBorder(pillar)};
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
@@ -63,7 +63,7 @@ export const TextStyle = (pillar: Pillar) => css`
     ${body({ level: 2 })};
 
     ${LinkStyle(pillar)};
-    ${ListStyle(pillarPalette[pillar].neutral.border)};
+    ${ListStyle(neutralBorder(pillar))};
 `;
 
 // Labs paid content only

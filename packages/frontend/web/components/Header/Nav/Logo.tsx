@@ -7,10 +7,9 @@ import {
     tablet,
     desktop,
     wide,
+    palette,
 } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-
-import { palette } from '@guardian/pasteup/palette';
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 
 const link = css`

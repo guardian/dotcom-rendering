@@ -3,10 +3,11 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
-import { palette, colour } from '@guardian/pasteup/palette';
-import { headline, textSans } from '@guardian/src-foundations';
+import { headline, textSans, palette } from '@guardian/src-foundations';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
+
+type colour = string;
 
 type CardStyle =
     | 'special-report'

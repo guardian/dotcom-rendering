@@ -8,11 +8,11 @@ import {
     wide,
     desktop,
     textSans,
+    palette,
 } from '@guardian/src-foundations';
 import { clearFix } from '@guardian/pasteup/mixins';
 
 import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
-import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
 import { BackToTop } from './BackToTop';
 
@@ -78,7 +78,7 @@ const footerLink = css`
 
     :hover {
         text-decoration: underline;
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
 `;
 

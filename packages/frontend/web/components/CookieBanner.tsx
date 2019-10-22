@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { headline, textSans, body, until } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+    body,
+    until,
+    palette,
+} from '@guardian/src-foundations';
 import TickIcon from '@frontend/static/icons/tick.svg';
 import RoundelIcon from '@frontend/static/icons/the-guardian-roundel.svg';
 import { getCookie, addCookie } from '@frontend/web/browser/cookie';
@@ -72,7 +77,7 @@ const button = css`
     ${textSans({ level: 3 })};
     border-radius: 1000px;
     height: 42px;
-    background: ${palette.highlight.main};
+    background: ${palette.yellow.main};
     color: ${palette.neutral[7]};
     padding: 0 25px 0 46px;
     align-items: flex-start;

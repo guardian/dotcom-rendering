@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
 import { Inner } from './Inner';
 
 const subnavWrapper = css`

@@ -8,9 +8,9 @@ import {
     desktop,
     tablet,
     textSans,
+    palette,
 } from '@guardian/src-foundations';
 import { Columns } from './Columns';
-import { palette } from '@guardian/pasteup/palette';
 
 const showMenu = css`
     ${desktop} {

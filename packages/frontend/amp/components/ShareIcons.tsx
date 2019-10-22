@@ -8,7 +8,7 @@ import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import { pillarMap, pillarPalette, neutralBorder } from '@frontend/lib/pillars';
 
 const pillarFill = pillarMap(
     pillar =>
@@ -24,7 +24,7 @@ const shareIconsListItem = css`
 `;
 
 const shareIcon = (pillar: Pillar) => css`
-    border: 1px solid ${pillarPalette[pillar].neutral.border};
+    border: 1px solid ${neutralBorder(pillar)};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import { palette, textSans } from '@guardian/src-foundations';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import { pillarMap, pillarPalette, neutralBorder } from '@frontend/lib/pillars';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
 const pillarColours = pillarMap(
@@ -32,8 +32,8 @@ const metaExtras = css`
 `;
 
 const borders = (pillar: Pillar) => css`
-    border-top: 1px solid ${pillarPalette[pillar].neutral.border};
-    border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
+    border-top: 1px solid ${neutralBorder(pillar)};
+    border-bottom: 1px solid ${neutralBorder(pillar)};
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

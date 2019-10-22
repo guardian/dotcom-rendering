@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { desktop, headline } from '@guardian/src-foundations';
+import { desktop, headline, palette } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { VeggieBurger } from './VeggieBurger';
-import { palette } from '@guardian/pasteup/palette';
 
 const screenReadable = css`
     ${screenReaderOnly};
@@ -27,10 +26,10 @@ const openMainMenu = css`
         height: 42px;
     }
     :hover {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
     :focus {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
 `;
 const checkbox = css`

@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/src-foundations';
+import { palette, textSans } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 const captionFont = css`

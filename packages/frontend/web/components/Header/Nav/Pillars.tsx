@@ -10,10 +10,10 @@ import {
     wide,
     until,
     headline,
+    palette,
 } from '@guardian/src-foundations';
 
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/pasteup/palette';
 
 // CSS Vars
 

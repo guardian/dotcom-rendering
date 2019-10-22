@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-
 import {
     desktop,
     tablet,
     leftCol,
     until,
     textSans,
+    palette,
 } from '@guardian/src-foundations';
-import { palette } from '@guardian/pasteup/palette';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS vars
@@ -73,7 +72,7 @@ const columnLinkTitle = css`
 
     :hover,
     :focus {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
         text-decoration: underline;
     }
 

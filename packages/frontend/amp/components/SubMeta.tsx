@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { pillarPalette } from '@frontend/lib/pillars';
+import { pillarPalette, neutralBorder } from '@frontend/lib/pillars';
 import { palette, textSans, body } from '@guardian/src-foundations';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
 import CommentIcon from '@frontend/static/icons/comment.svg';
@@ -8,8 +8,8 @@ import CommentIcon from '@frontend/static/icons/comment.svg';
 const guardianLines = (pillar: Pillar) => css`
     background-image: repeating-linear-gradient(
         to bottom,
-        ${pillarPalette[pillar].neutral.border},
-        ${pillarPalette[pillar].neutral.border} 1px,
+        ${neutralBorder(pillar)},
+        ${neutralBorder(pillar)} 1px,
         transparent 1px,
         transparent 4px
     );
@@ -51,7 +51,7 @@ const keywordListStyle = (pillar: Pillar) => css`
     margin-left: -6px;
     padding-top: 6px;
     padding-bottom: 12px;
-    border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
+    border-bottom: 1px solid ${neutralBorder(pillar)};
     margin-bottom: 6px;
 `;
 

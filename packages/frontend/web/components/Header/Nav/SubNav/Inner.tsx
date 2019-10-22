@@ -1,11 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
 import {
     desktop,
     tablet,
     mobileLandscape,
     textSans,
+    palette,
 } from '@guardian/src-foundations';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 

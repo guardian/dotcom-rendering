@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { textSans, until, tablet } from '@guardian/src-foundations';
+import { textSans, palette, until, tablet } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 export interface Link {
@@ -125,7 +124,7 @@ const button = css`
     text-decoration: none;
 
     :hover {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
 
         :after {
             transform: translateY(0) rotate(45deg);
