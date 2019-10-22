@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { textSans } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
 
-import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
+import {
+    desktop,
+    tablet,
+    leftCol,
+    until,
+    textSans,
+} from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 import { CollapseColumnButton } from './CollapseColumnButton';
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { desktop } from '@guardian/pasteup/breakpoints';
+import { desktop, headline } from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline } from '@guardian/src-foundations';
 import { VeggieBurger } from './VeggieBurger';
 import { palette } from '@guardian/pasteup/palette';
 

@@ -7,13 +7,13 @@ import {
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/src-foundations';
 import {
     tablet,
     desktop,
     mobileLandscape,
     wide,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+} from '@guardian/src-foundations';
 
 const search = css`
     :after {

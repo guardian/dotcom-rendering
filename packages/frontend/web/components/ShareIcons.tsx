@@ -8,7 +8,7 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
-import { phablet, wide } from '@guardian/pasteup/breakpoints';
+import { phablet, wide } from '@guardian/src-foundations';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
 const pillarFill = pillarMap(

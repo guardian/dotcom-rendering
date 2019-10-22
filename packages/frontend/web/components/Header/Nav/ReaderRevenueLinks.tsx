@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { textSans, headline } from '@guardian/src-foundations';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { palette } from '@guardian/pasteup/palette';
 import {
@@ -10,7 +9,9 @@ import {
     mobileMedium,
     until,
     leftCol,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+    headline,
+} from '@guardian/src-foundations';
 
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';

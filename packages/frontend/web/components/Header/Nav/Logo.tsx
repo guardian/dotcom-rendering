@@ -7,7 +7,7 @@ import {
     tablet,
     desktop,
     wide,
-} from '@guardian/pasteup/breakpoints';
+} from '@guardian/src-foundations';
 import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { palette } from '@guardian/pasteup/palette';

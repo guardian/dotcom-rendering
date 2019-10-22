@@ -7,10 +7,10 @@ import {
     mobileLandscape,
     desktop,
     tablet,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+} from '@guardian/src-foundations';
 import { Columns } from './Columns';
 import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/src-foundations';
 
 const showMenu = css`
     ${desktop} {

@@ -9,9 +9,9 @@ import {
     mobileMedium,
     wide,
     until,
-} from '@guardian/pasteup/breakpoints';
+    headline,
+} from '@guardian/src-foundations';
 
-import { headline } from '@guardian/src-foundations';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { palette } from '@guardian/pasteup/palette';
 

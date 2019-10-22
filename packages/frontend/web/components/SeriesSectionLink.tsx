@@ -1,8 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { leftCol } from '@guardian/pasteup/breakpoints';
-import { headline } from '@guardian/src-foundations';
+import { leftCol, headline } from '@guardian/src-foundations';
 
 const sectionLabelText = css`
     font-weight: 700;

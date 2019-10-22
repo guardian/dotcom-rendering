@@ -7,8 +7,8 @@ import {
     until,
     wide,
     desktop,
-} from '@guardian/pasteup/breakpoints';
-import { textSans } from '@guardian/src-foundations';
+    textSans,
+} from '@guardian/src-foundations';
 import { clearFix } from '@guardian/pasteup/mixins';
 
 import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';

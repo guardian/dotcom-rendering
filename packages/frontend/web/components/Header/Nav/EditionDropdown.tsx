@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Dropdown, Link } from '@frontend/web/components/Dropdown';
-import { desktop, wide } from '@guardian/pasteup/breakpoints';
+import { desktop, wide } from '@guardian/src-foundations';
 import { palette } from '@guardian/pasteup/palette';
 
 const editionDropdown = css`
