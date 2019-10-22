@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { palette, headline } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { ArticleModel } from '@frontend/amp/pages/Article';
+import { ArticleModel } from '@frontend/amp/types/ArticleModel';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';

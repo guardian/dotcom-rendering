@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { ArticleModel } from '@frontend/amp/pages/Article';
+import { ArticleModel } from '@frontend/amp/types/ArticleModel';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
