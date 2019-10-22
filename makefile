@@ -137,9 +137,3 @@ gen-schema:
 
 perf-test:
 	@node scripts/perf/perf-test.js
-
-# packages #########################################
-
-publish-pasteup: clear install
-	$(call log, "publishing pasteup")
-	@cd packages/pasteup && yarn publish

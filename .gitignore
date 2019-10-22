@@ -29,9 +29,6 @@ packages/design/public
 # Caches
 packages/design/.cache
 
-# Publishable files
-packages/pasteup/tmp
-
 # Test coverage reports
 coverage
 
