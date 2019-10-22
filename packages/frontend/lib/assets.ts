@@ -20,7 +20,7 @@ const stage =
         : process.env.GU_STAGE;
 
 const CDN = stage
-    ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/guui/`
+    ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
     : '/';
 
 export const getDist = (path: string): string =>
