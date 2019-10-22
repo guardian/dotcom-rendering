@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
-import { headline, palette, tablet, until } from '@guardian/src-foundations';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import {
+    visuallyHidden,
+    headline,
+    palette,
+    tablet,
+    until,
+} from '@guardian/src-foundations';
 
 import { TabType, TrailType } from './MostViewed';
 import { MostViewedItem } from './MostViewedItem';
@@ -124,7 +129,7 @@ export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
                             >
                                 <span
                                     className={css`
-                                        ${screenReaderOnly};
+                                        ${visuallyHidden};
                                     `}
                                 >
                                     Most viewed{' '}

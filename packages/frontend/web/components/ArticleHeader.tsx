@@ -4,7 +4,6 @@ import { css, cx } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import {
     until,
     leftCol,
@@ -14,6 +13,7 @@ import {
     textSans,
     body,
     palette,
+    visuallyHidden,
 } from '@guardian/src-foundations';
 
 import { MainMedia } from './MainMedia';
@@ -156,7 +156,7 @@ const ageWarningStyle = css`
 `;
 
 const ageWarningScreenReader = css`
-    ${screenReaderOnly};
+    ${visuallyHidden};
 `;
 
 const headerStyles = css`

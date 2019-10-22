@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { desktop, headline, palette } from '@guardian/src-foundations';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import {
+    headline,
+    visuallyHidden,
+    desktop,
+    palette,
+} from '@guardian/src-foundations';
 import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`
-    ${screenReaderOnly};
+    ${visuallyHidden};
 `;
 const openMainMenu = css`
     ${headline({ level: 3 })};

@@ -8,8 +8,9 @@ import {
     desktop,
     wide,
     palette,
+    visuallyHidden,
 } from '@guardian/src-foundations';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 
 const link = css`
@@ -62,7 +63,7 @@ export const Logo: React.FC = () => (
     <a className={link} href="/" data-link-name="nav2 : logo">
         <span
             className={css`
-                ${screenReaderOnly};
+                ${visuallyHidden};
             `}
         >
             The Guardian - Back to home

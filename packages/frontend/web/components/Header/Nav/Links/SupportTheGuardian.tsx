@@ -6,9 +6,9 @@ import {
     mobileMedium,
     headline,
     palette,
+    visuallyHidden,
 } from '@guardian/src-foundations';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
@@ -104,7 +104,7 @@ export const SupportTheGuardian: React.FC<{
                                 <ProfileIcon className={mobileSignInIcon} />
                                 <span
                                     className={css`
-                                        ${screenReaderOnly};
+                                        ${visuallyHidden};
                                     `}
                                 >
                                     Sign in

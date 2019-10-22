@@ -1,13 +1,13 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import Logo from '@frontend/static/logos/the-guardian.svg';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
 import { pillarPalette } from '@frontend/lib/pillars';
 import {
     headline,
     palette,
     mobileLandscape,
     until,
+    visuallyHidden,
 } from '@guardian/src-foundations';
 import { ReaderRevenueButton } from '@frontend/amp/components/ReaderRevenueButton';
 
@@ -203,7 +203,7 @@ export const Header: React.FC<{
             <a className={logoStyles} href={guardianBaseURL}>
                 <span
                     className={css`
-                        ${screenReaderOnly};
+                        ${visuallyHidden};
                     `}
                 >
                     The Guardian - Back to home

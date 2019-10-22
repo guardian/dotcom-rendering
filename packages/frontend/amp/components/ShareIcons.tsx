@@ -7,7 +7,7 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+import { visuallyHidden } from '@guardian/src-foundations';
 import { pillarMap, pillarPalette, neutralBorder } from '@frontend/lib/pillars';
 
 const pillarFill = pillarMap(
@@ -116,7 +116,7 @@ export const ShareIcons: React.FC<{
                         <a href={url} role="button">
                             <span
                                 className={css`
-                                    ${screenReaderOnly};
+                                    ${visuallyHidden};
                                 `}
                             >
                                 {userMessage}

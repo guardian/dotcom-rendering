@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import { clearFix } from '@guardian/pasteup/mixins';
+import { clearFix } from '@frontend/lib/mixins';
 import {
     tablet,
     desktop,

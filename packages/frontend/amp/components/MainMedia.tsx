@@ -1,10 +1,9 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import { css } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { textSans, palette, visuallyHidden } from '@guardian/src-foundations';
 import InfoIcon from '@frontend/static/icons/info.svg';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
 
 const figureStyle = css`
     margin: 0 0;
@@ -59,10 +58,6 @@ const labelStyle = css`
         position: absolute;
         fill: ${palette.neutral[100]};
     }
-`;
-
-const visuallyHidden = css`
-    ${screenReaderOnly}
 `;
 
 const mainImage = (element: ImageBlockElement): JSX.Element | null => {
