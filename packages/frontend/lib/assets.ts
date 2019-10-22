@@ -19,7 +19,9 @@ const stage =
         ? process.env.GU_STAGE.toUpperCase()
         : process.env.GU_STAGE;
 
-const CDN = stage ? `//assets.guim.co.uk/` : '/';
+const CDN = stage
+    ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
+    : '/';
 
 export const getDist = (path: string): string =>
     `${CDN}assets/${assetHash[path] || path}`;
