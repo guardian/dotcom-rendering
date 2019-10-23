@@ -5,7 +5,7 @@ import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
 import { htmlTemplate } from './htmlTemplate';
-import { DecidePage } from './DecidePage';
+import { Article } from '../pages/Article';
 import { escapeData } from '@frontend/lib/escapeData';
 import { getDist } from '@frontend/lib/assets';
 
@@ -24,10 +24,7 @@ export const document = ({ data }: Props) => {
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <DecidePage
-                    designType={CAPI.designType}
-                    data={{ CAPI, NAV, config }}
-                />
+                <Article data={{ CAPI, NAV, config }} />
             </CacheProvider>,
         ),
     );
