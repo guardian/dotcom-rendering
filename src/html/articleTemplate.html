@@ -103,24 +103,19 @@
   <div id="root"></div>
   <script>
     // common.js
-    // load interactives
     function boot(iframe) {
-          window.addEventListener('message', function(event) {
-              if (event.source !== iframe.contentWindow) {
-                  return;
-              }
+          window.addEventListener('message', function({ data }) {
+              if (event.source === iframe.contentWindow) {
+                const { type, value } = JSON.parse(data);
 
-              var message = JSON.parse(event.data);
-              switch (message.type) {
-                  case 'set-height':
-                      iframe.height = message.value;
-                      break;
+                if (type === 'set-height') {
+                  iframe.height = value;
+                }
               }
           }, false);
     }
 
-    const interactives = Array.from(document.querySelectorAll('figure.interactive iframe'));
-    interactives.forEach(interactive => boot(interactive, document.body));
+    Array.from(document.querySelectorAll('.interactive iframe')).forEach(boot);
 
 
     // correctly size body images
