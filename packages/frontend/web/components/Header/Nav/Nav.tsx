@@ -20,6 +20,7 @@ import { SubNav } from './SubNav/SubNav';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { getCookie } from '@frontend/web/browser/cookie';
 import { Section } from '@frontend/web/components/Section';
+import { Hide } from '@frontend/web/components/Hide';
 
 const centered = css`
     ${tablet} {
@@ -102,10 +103,14 @@ export class Nav extends Component<
                     aria-label="Guardian sections"
                     data-component="nav2"
                 >
-                    <EditionDropdown
-                        edition={edition}
-                        dataLinkName={'nav2 : topbar : edition-picker: toggle'}
-                    />
+                    <Hide when="below" breakpoint="desktop">
+                        <EditionDropdown
+                            edition={edition}
+                            dataLinkName={
+                                'nav2 : topbar : edition-picker: toggle'
+                            }
+                        />
+                    </Hide>
                     <Logo />
                     {/*
                         TODO: The properties of the Links component
