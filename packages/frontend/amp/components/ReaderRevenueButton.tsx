@@ -66,7 +66,7 @@ const supportLinkStylesNoArrow = css`
     ${until.mobileMedium} {
         padding-right: 0px;
     }
-`
+`;
 
 const rightAlignedIcon = css`
     position: absolute;
@@ -83,7 +83,14 @@ export const ReaderRevenueButton: React.SFC<{
     rrCategory: ReaderRevenueCategory;
     rightAlignIcon?: boolean;
     showArrow?: boolean;
-}> = ({ nav, linkLabel, rrLink, rrCategory, rightAlignIcon, showArrow = true }) => {
+}> = ({
+    nav,
+    linkLabel,
+    rrLink,
+    rrCategory,
+    rightAlignIcon,
+    showArrow = true
+}) => {
     const url = nav.readerRevenueLinks[rrLink][rrCategory];
 
     if (url === '') {
@@ -98,7 +105,12 @@ export const ReaderRevenueButton: React.SFC<{
                 isAmpHeader ? supportHeaderStyles : supportFooterStyles,
             ])}
         >
-            <a className={showArrow ? supportLinkStyles : supportLinkStylesNoArrow} href={url}>
+            <a
+                className={
+                    showArrow ? supportLinkStyles : supportLinkStylesNoArrow
+                }
+                href={url}
+            >
                 {linkLabel}
                 {showArrow && (<span
                     className={cx({
