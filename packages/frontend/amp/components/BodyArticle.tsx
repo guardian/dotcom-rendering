@@ -58,7 +58,7 @@ const adStyle = css`
     }
 `;
 
-const buildPageTargeting = (config: any) => {
+const buildAdTargeting = (config: ConfigType): AdTargeting => {
     const customParams = {
         sens: config.isSensitive ? 't' : 'f',
         si: 'f',
@@ -82,7 +82,7 @@ export const Body: React.FC<{
 }> = ({ pillar, data, config }) => {
     const designType = data.designType;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-    const adTargeting = buildPageTargeting(config);
+    const adTargeting = buildAdTargeting(config);
     const elementsWithoutAds = Elements(
         capiElements,
         pillar,

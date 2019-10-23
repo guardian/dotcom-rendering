@@ -37,6 +37,11 @@ interface AdTargetParam {
     value: string | string[];
 }
 
+interface AdTargeting {
+    adUnit: string;
+    customParams: { [key: string]: any };
+}
+
 interface SectionNielsenAPI {
     name: string;
     apiID: string;
@@ -248,6 +253,11 @@ interface ConfigType {
     frontendAssetsFullURL: string;
     hbImpl: string;
     adUnit: string;
+    isSensitive: string;
+    videoDuration: number;
+    edition: string;
+    section: string;
+    sharedAdTargeting: { [key: string]: any };
 }
 
 interface GADataType {

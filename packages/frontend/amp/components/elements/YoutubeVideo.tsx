@@ -1,16 +1,18 @@
 import React from 'react';
 import { Caption } from '@guardian/guui/components/Caption/Caption';
-import { constructQuery } from '../../lib/querystring';
+import { constructQuery } from '@frontend/amp/lib/querystring';
 
-export const YoutubeVideo: React.FC<{
-    element: YoutubeBlockElement;
-    pillar: Pillar;
-    adTargeting?: any;
-}> = ({ element, pillar, adTargeting }) => {
-    // https://www.ampproject.org/docs/reference/components/amp-youtube
-    // https://developers.google.com/youtube/player_parameters
+interface EmbedConfig {
+    adsConfig: {
+        adTagParameters: {
+            iu: string;
+            cust_params: string;
+        };
+    };
+}
 
-    const embedConfig = {
+const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
+    return {
         adsConfig: {
             adTagParameters: {
                 iu: `${adTargeting.adUnit || ''}`,
@@ -20,7 +22,15 @@ export const YoutubeVideo: React.FC<{
             },
         },
     };
+};
 
+export const YoutubeVideo: React.FC<{
+    element: YoutubeBlockElement;
+    pillar: Pillar;
+    adTargeting?: AdTargeting;
+}> = ({ element, pillar, adTargeting }) => {
+    // https://www.ampproject.org/docs/reference/components/amp-youtube
+    // https://developers.google.com/youtube/player_parameters
     const attributes: any = {
         id: `gu-video-youtube-${element.id}`,
         'data-videoid': element.assetId,
@@ -28,8 +38,13 @@ export const YoutubeVideo: React.FC<{
         width: '16',
         height: '9',
         'data-param-modestbranding': true, // Remove YouTube logo
-        'data-param-embed_config': JSON.stringify(embedConfig),
     };
+
+    if (adTargeting) {
+        attributes['data-param-embed_config'] = JSON.stringify(
+            buildEmbedConfig(adTargeting),
+        );
+    }
 
     if (element.channelId) {
         // related videos metadata
