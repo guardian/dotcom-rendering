@@ -84,7 +84,7 @@ const richLinkBlock = (url: string, linkText: string): ReactNode =>
 
 const interactiveBlock = (url: string): ReactNode =>
     h('figure', { className: "interactive" },
-        h('a', { href: url }, null)
+        h('iframe', { src: url, height: 500 }, null)
     )
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 

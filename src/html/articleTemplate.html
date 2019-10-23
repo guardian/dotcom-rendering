@@ -92,24 +92,19 @@
       .element-audio iframe {
         width: 100%;
       }
+
+      iframe {
+        width: 100%;
+        border: none;
+      }
     </style>
 </head>
 <body>
   <div id="root"></div>
   <script>
     // common.js
-
     // load interactives
-    function boot(el) {
-      const link = el.querySelector('a[href]');
-
-      if (link) {
-          let iframe = document.createElement('iframe');
-          iframe.style.width = '100%';
-          iframe.style.border = 'none';
-          iframe.height = '500';
-          iframe.src = link.href;
-
+    function boot(iframe) {
           window.addEventListener('message', function(event) {
               if (event.source !== iframe.contentWindow) {
                   return;
@@ -122,12 +117,9 @@
                       break;
               }
           }, false);
-
-          el.replaceChild(iframe, link);
-      }
     }
 
-    const interactives = Array.from(document.querySelectorAll('figure.interactive'));
+    const interactives = Array.from(document.querySelectorAll('figure.interactive iframe'));
     interactives.forEach(interactive => boot(interactive, document.body));
 
 
