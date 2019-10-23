@@ -100,16 +100,11 @@
     // common.js
 
     // load interactives
-    function boot(el, context, config, mediator) {
-      var iframe;
-      var link = el.querySelector('a[href]');
-
-      function _postMessage(message) {
-          iframe.contentWindow.postMessage(JSON.stringify(message), '*');
-      }
+    function boot(el) {
+      const link = el.querySelector('a[href]');
 
       if (link) {
-          iframe = document.createElement('iframe');
+          let iframe = document.createElement('iframe');
           iframe.style.width = '100%';
           iframe.style.border = 'none';
           iframe.height = '500';
@@ -121,22 +116,6 @@
               }
 
               var message = JSON.parse(event.data);
-              function _postPositionMessage(subscribe) {
-                  var iframeBox = iframe.getBoundingClientRect();
-                  _postMessage({
-                      'id':           message.id,
-                      'type':         message.type,
-                      'subscribe':    !!subscribe,
-                      'iframeTop':    iframeBox.top,
-                      'iframeRight':  iframeBox.right,
-                      'iframeBottom': iframeBox.bottom,
-                      'iframeLeft':   iframeBox.left,
-                      'innerHeight':  window.innerHeight,
-                      'innerWidth':   window.innerWidth,
-                      'pageYOffset':  window.pageYOffset,
-                  });
-              }
-
               switch (message.type) {
                   case 'set-height':
                       iframe.height = message.value;
@@ -145,12 +124,10 @@
           }, false);
 
           el.replaceChild(iframe, link);
-      } else {
-          console.warn('iframe-wrapper applied to element without any link');
       }
     }
 
-    const interactives = Array.from(document.getElementsByClassName('interactive'));
+    const interactives = Array.from(document.querySelectorAll('figure.interactive'));
     interactives.forEach(interactive => boot(interactive, document.body));
 
 

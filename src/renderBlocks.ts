@@ -83,7 +83,7 @@ const richLinkBlock = (url: string, linkText: string): ReactNode =>
     );
 
 const interactiveBlock = (url: string): ReactNode =>
-    h('figure', { className: "element element-interactive interactive" },
+    h('figure', { className: "interactive" },
         h('a', { href: url }, null)
     )
 
