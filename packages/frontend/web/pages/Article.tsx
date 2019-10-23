@@ -3,11 +3,13 @@ import { palette } from '@guardian/src-foundations';
 import { MostViewed } from '@frontend/web/components/MostViewed/MostViewed';
 import { Header } from '@frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
-import { Content } from '@frontend/web/components/Content';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { Section } from '@frontend/web/components/Section';
+
+import { DecideContent } from './DecideContent';
+import { CAPI } from '@root/fixtures/CAPI';
 
 export const Article: React.FC<{
     data: ArticleProps;
@@ -23,7 +25,11 @@ export const Article: React.FC<{
         />
 
         <Section showTopBorder={false}>
-            <Content CAPI={data.CAPI} config={data.config} />
+            <DecideContent
+                designType={CAPI.designType}
+                CAPI={data.CAPI}
+                config={data.config}
+            />
         </Section>
 
         <Section showTopBorder={false}>
