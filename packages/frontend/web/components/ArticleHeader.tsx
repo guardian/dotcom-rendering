@@ -1,72 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import ClockIcon from '@frontend/static/icons/clock.svg';
-import { getAgeWarning } from '@frontend/lib/age-warning';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import {
-    until,
-    leftCol,
-    tablet,
-    mobileLandscape,
-    headline,
-    textSans,
-    body,
-    palette,
-    visuallyHidden,
-} from '@guardian/src-foundations';
+import { until, textSans, palette } from '@guardian/src-foundations';
 
-import { MainMedia } from './MainMedia';
-
-const curly = (x: any) => x;
-
-const standfirst = css`
-    ${body({ level: 2 })};
-    font-weight: 700;
-    color: ${palette.neutral[7]};
-    margin-bottom: 12px;
-
-    li {
-        ${textSans({ level: 3 })};
-        margin-bottom: 6px;
-        padding-left: 20px;
-
-        p {
-            display: inline;
-        }
-    }
-
-    li:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
-        background-color: ${palette.neutral[86]};
-        margin-left: -20px;
-    }
-
-    p {
-        margin-bottom: 8px;
-    }
-
-    li {
-        ${headline({ level: 1 })};
-    }
-`;
-
-const standfirstLinks = pillarMap(
-    pillar =>
-        css`
-            a {
-                color: ${pillarPalette[pillar].dark};
-                text-decoration: none;
-                border-bottom: 1px solid ${palette.neutral[86]};
-                transition: border-color 0.15s ease-out;
-            }
-        `,
-);
+import { MainMedia } from '@frontend/web/components/MainMedia';
+import { ArticleHeadline } from '@frontend/web/components/ArticleHeadline';
+import { ArticleStandfirst } from '@frontend/web/components/ArticleStandfirst';
 
 const captionFont = css`
     ${textSans({ level: 1 })};
@@ -107,56 +46,11 @@ const mainMedia = css`
     }
 `;
 
-const headerStyle = css`
-    ${headline({ level: 5 })};
-    font-weight: 500;
-    padding-bottom: 24px;
-    padding-top: 3px;
-
-    ${tablet} {
-        padding-bottom: 36px;
-    }
-`;
-
 const headlineCSS = css`
     max-width: 630px;
     ${until.phablet} {
         padding: 0 10px;
     }
-`;
-
-const ageWarningStyle = css`
-    ${textSans({ level: 3 })};
-    color: ${palette.neutral[7]};
-    background-color: ${palette.yellow.main};
-    display: inline-block;
-    margin-bottom: 6px;
-
-    > strong {
-        font-weight: bold;
-    }
-
-    padding: 6px 10px;
-    margin-top: 6px;
-    margin-left: -10px;
-
-    ${mobileLandscape} {
-        padding-left: 12px;
-    }
-
-    ${tablet} {
-        margin-left: -20px;
-    }
-
-    ${leftCol} {
-        margin-left: -10px;
-        margin-top: -6px;
-        padding-left: 10px;
-    }
-`;
-
-const ageWarningScreenReader = css`
-    ${visuallyHidden};
 `;
 
 const headerStyles = css`
@@ -174,32 +68,28 @@ type Props = {
 };
 
 export const ArticleHeader = ({ CAPI, config }: Props) => {
-    const ageWarning = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
+    const {
+        headline,
+        webPublicationDate,
+        tags,
+        pillar,
+        standfirst,
+        mainMediaElements,
+    } = CAPI;
+
     return (
         <header className={headerStyles}>
             <div className={headlineCSS}>
-                {ageWarning && (
-                    <div className={ageWarningStyle} aria-hidden="true">
-                        <ClockIcon /> This article is more than{' '}
-                        <strong>{ageWarning}</strong>
-                    </div>
-                )}
-                <h1 className={headerStyle}>{curly(CAPI.headline)}</h1>
-                {ageWarning && (
-                    <div className={ageWarningScreenReader}>
-                        This article is more than {` ${ageWarning}`}
-                    </div>
-                )}
-                <div // tslint:disable-line:react-no-dangerous-html
-                    className={cx(standfirst, standfirstLinks[CAPI.pillar])}
-                    dangerouslySetInnerHTML={{
-                        __html: CAPI.standfirst,
-                    }}
+                <ArticleHeadline
+                    headlineString={headline}
+                    webPublicationDate={webPublicationDate}
+                    tags={tags}
                 />
+                <ArticleStandfirst pillar={pillar} standfirst={standfirst} />
             </div>
             <div className={cx(mainMedia)}>
-                {CAPI.mainMediaElements.map((element, i) => (
-                    <MainMedia element={element} key={i} pillar={CAPI.pillar} />
+                {mainMediaElements.map((element, i) => (
+                    <MainMedia element={element} key={i} pillar={pillar} />
                 ))}
             </div>
         </header>
