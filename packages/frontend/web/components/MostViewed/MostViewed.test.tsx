@@ -28,6 +28,11 @@ describe('MostViewed', () => {
         frontendAssetsFullURL: '',
         hbImpl: '',
         adUnit: '',
+        isSensitive: '',
+        videoDuration: 0,
+        edition: '',
+        section: '',
+        sharedAdTargeting: {},
     };
 
     it('should call the api and render the response as expected', async () => {

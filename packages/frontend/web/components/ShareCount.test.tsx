@@ -34,6 +34,11 @@ describe('ShareCount', () => {
         frontendAssetsFullURL: 'http://localhost:9000/assets/',
         hbImpl: 'prebid',
         adUnit: '/59666047/theguardian.com/film/article/ng',
+        isSensitive: '',
+        videoDuration: 0,
+        edition: '',
+        section: '',
+        sharedAdTargeting: {},
     };
 
     afterEach(() => {
