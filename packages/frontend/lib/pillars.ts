@@ -1,4 +1,14 @@
-import { PillarColours, palette } from '@guardian/pasteup/palette';
+import { palette } from '@guardian/src-foundations';
+
+type colour = string;
+
+interface PillarColours {
+    dark: colour;
+    main: colour;
+    bright: colour;
+    pastel: colour;
+    faded: colour;
+}
 
 export const pillarNames: Pillar[] = [
     'news',
@@ -9,13 +19,21 @@ export const pillarNames: Pillar[] = [
     'labs',
 ];
 
+export const augmentedLabs: PillarColours = {
+    dark: palette.labs.dark,
+    main: palette.labs.main,
+    bright: '#69d1ca', // bright teal
+    pastel: '', // TODO
+    faded: '#65a897', // dark teal
+};
+
 export const pillarPalette: Record<Pillar, PillarColours> = {
     news: palette.news,
     opinion: palette.opinion,
     sport: palette.sport,
     culture: palette.culture,
     lifestyle: palette.lifestyle,
-    labs: palette.labs,
+    labs: augmentedLabs,
 };
 
 /*
@@ -45,4 +63,13 @@ export const getPillar = (pillar: Pillar, designType: DesignType): Pillar => {
     }
 
     return pillar;
+};
+
+export const neutralBorder = (pillar: Pillar): colour => {
+    switch (pillar) {
+        case 'labs':
+            return palette.neutral[60]; // 'dark' theme
+        default:
+            return palette.neutral[86];
+    }
 };

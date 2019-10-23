@@ -1,44 +1,43 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { serif, sans, textSans, headline } from '@guardian/pasteup/typography';
-import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
-import { palette } from '@guardian/pasteup/palette';
+import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import {
     tablet,
     desktop,
     mobileMedium,
     until,
     leftCol,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+    headline,
+    palette,
+} from '@guardian/src-foundations';
 
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
 const message = css`
-    color: ${palette.highlight.main};
-    ${serif.headline};
-    font-size: 20px;
-    font-weight: 800;
+    color: ${palette.yellow.main};
+    ${headline({ level: 2 })};
     padding-top: 3px;
     margin-bottom: 3px;
 
     ${desktop} {
-        ${headline(4)}
+        ${headline({ level: 3 })}
     }
 
     ${leftCol} {
-        ${headline(6)}
+        ${headline({ level: 5 })}
     }
 `;
 
 const link = css`
-    background: ${palette.highlight.main};
+    background: ${palette.yellow.main};
     border-radius: 16px;
     box-sizing: border-box;
     color: ${palette.neutral[7]};
     float: left;
-    ${sans.body};
+    ${textSans({ level: 2 })};
     font-weight: 700;
     height: 32px;
     text-decoration: none;
@@ -90,7 +89,7 @@ const hiddenFromTablet = css`
 
 const subMessage = css`
     color: ${palette.neutral[100]};
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     margin-bottom: 9px;
 `;
 

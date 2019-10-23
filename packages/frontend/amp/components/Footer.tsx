@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { textSans, body } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/src-foundations';
+import { palette, textSans, body } from '@guardian/src-foundations';
 import { InnerContainer } from './InnerContainer';
 import {
     Link,
@@ -9,12 +8,12 @@ import {
     LinkPlatform,
     isOnPlatform,
 } from '@frontend/lib/footer-links';
-import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
+import { ReaderRevenueButton } from '@frontend/amp/components/ReaderRevenueButton';
 
 const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[86]};
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     margin-top: 20px;
 `;
 
@@ -70,7 +69,7 @@ const copyrightContainer = css`
 `;
 
 const copyright = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
 `;
 
 const iconContainer = css`
@@ -120,7 +119,7 @@ const backToTopText = css`
 
 const supportLink = css`
     color: ${palette.yellow.main};
-    ${body(3)};
+    ${body({ level: 2 })};
     padding-bottom: 0.375rem;
 `;
 

@@ -76,5 +76,3 @@ Data is passed between `frontend` and `dotcom-rendering` via a network request, 
 Frontend-specific components live in `packages/frontend`.
 
 Note that [Frontend Web](../../packages/frontend/web) and [Frontend AMP](../../packages/frontend/amp) are separate applications that do not share code, including components. If you build a new component for the web, consider whether you need to build an analogous component for AMP too.
-
-If a component is generic enough that it may have value outside of a Frontend context (i.e. it could feasibly be shared with other React applications), consider adding it to [GUUI](../../packages/guui), our shared component library.

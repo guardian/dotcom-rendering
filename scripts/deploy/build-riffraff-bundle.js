@@ -16,15 +16,14 @@ const { siteName, root, dist, target } = require('../frontend/config');
 // ├── frontend-cfn
 // |   └── cloudformation.yml
 // ├── frontend-static
-// │   └── guui
-// │       ├── assets
+// │   ├── assets
+// │   │   └── **
+// │   │       └── *
+// │   └── static
+// │       ├── frontend
 // │       │   └── **
 // │       │       └── *
-// │       └── static
-// │           ├── frontend
-// │           │   └── **
-// │           │       └── *
-// │           └── etc
+// │       └── etc
 // └── rendering
 //     └── dist
 //         └── rendering.zip
@@ -41,7 +40,7 @@ const copyStatic = () => {
     log(' - copying static');
     return cpy(
         ['**/*'],
-        path.resolve(target, `${siteName}-static`, 'guui', 'static', siteName),
+        path.resolve(target, `${siteName}-static`, 'static', siteName),
         {
             cwd: path.resolve(root, 'packages', siteName, 'static'),
             parents: true,
@@ -54,7 +53,7 @@ const copyDist = () => {
     log(' - copying dist');
     return cpy(
         ['**/*.!(html|json)'],
-        path.resolve(target, `${siteName}-static`, 'guui', 'assets'),
+        path.resolve(target, `${siteName}-static`, 'assets'),
         {
             cwd: path.resolve(dist),
             parents: true,
@@ -72,16 +71,7 @@ const zipBundle = () => {
     log(' - zipping bundle');
     return execa(
         'zip',
-        [
-            '--recurse-paths',
-            'rendering.zip',
-            '.',
-            '--exclude',
-            '.git/**\\*',
-            '**/design/**\\*',
-            '**/pasteup/**\\*',
-            '**/guui/**\\*',
-        ],
+        ['--recurse-paths', 'rendering.zip', '.', '--exclude', '.git/**\\*'],
         {
             shell: true,
         },

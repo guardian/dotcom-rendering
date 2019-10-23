@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import ShareIcon from '@guardian/pasteup/icons/share.svg';
-import { textSans } from '@guardian/pasteup/typography';
-import { from, wide, leftCol } from '@guardian/pasteup/breakpoints';
+import ShareIcon from '@frontend/static/icons/share.svg';
+import {
+    from,
+    wide,
+    leftCol,
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 import { integerCommas } from '@frontend/lib/formatters';
+import { useApi } from '@frontend/web/components/lib/api';
 
 const shareCount = css`
-    ${textSans(6)};
+    ${textSans({ level: 3 })};
     font-weight: bold;
     color: ${palette.neutral[46]};
 
@@ -65,75 +70,63 @@ interface Props {
     pageId: string;
 }
 
-export class ShareCount extends Component<Props, { shareCount?: number }> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {};
+interface ShareCountType {
+    path: string;
+    share_count: number;
+    refreshStatus: boolean;
+}
+function buildUrl(ajaxUrl: string, pageId: string) {
+    return `${ajaxUrl}/sharecount/${pageId}.json`;
+}
+
+export const ShareCount = ({ config, pageId }: Props) => {
+    const url = buildUrl(config.ajaxUrl, pageId);
+    const { data, error } = useApi<ShareCountType>(url);
+
+    if (error) {
+        window.guardian.modules.raven.reportError(
+            error,
+            {
+                feature: 'share-count',
+            },
+            false,
+        );
+
+        return null;
     }
 
-    public componentDidMount() {
-        const { config, pageId } = this.props;
-        const url = `${config.ajaxUrl}/sharecount/${pageId}.json`;
-
-        fetch(url)
-            .then(resp => {
-                if (resp.ok) {
-                    return resp.json();
-                }
-            })
-            .then(data => {
-                this.setState({
-                    shareCount: data.share_count,
-                });
-            })
-            .catch(err => {
-                // window.guardian.modules.raven.reportError(
-                //     err,
-                //     {
-                //         feature: 'share-count',
-                //     },
-                //     true,
-                // );
-            });
+    if (!data || !data.share_count) {
+        return null;
     }
 
-    public render() {
-        if (!this.state.shareCount) {
-            return null;
-        }
+    const displayCount = parseInt(data.share_count.toFixed(0), 10);
+    const formattedDisplayCount = integerCommas(displayCount);
+    const shortDisplayCount =
+        displayCount > 10000
+            ? `${Math.round(displayCount / 1000)}k`
+            : displayCount;
 
-        const displayCount = parseInt(this.state.shareCount.toFixed(0), 10);
-        const formattedDisplayCount = integerCommas(displayCount);
-        const shortDisplayCount =
-            displayCount > 10000
-                ? `${Math.round(displayCount / 1000)}k`
-                : displayCount;
-
-        return (
-            <div
-                className={shareCount}
-                aria-label={`${shortDisplayCount} Shares`}
-            >
-                <div className={shareCountContainer}>
-                    <div className={shareCountHeader}>
-                        <ShareIcon className={shareCountIcon} />
-                    </div>
-                    <div
-                        data-testid={'countFull'}
-                        className={countFull}
-                        aria-hidden="true"
-                    >
-                        {formattedDisplayCount}
-                    </div>
-                    <div
-                        data-testid={'countShort'}
-                        className={countShort}
-                        aria-hidden="true"
-                    >
-                        {shortDisplayCount}
-                    </div>
+    return (
+        <div className={shareCount} aria-label={`${shortDisplayCount} Shares`}>
+            <div className={shareCountContainer}>
+                <div className={shareCountHeader}>
+                    <ShareIcon className={shareCountIcon} />
+                </div>
+                <div
+                    data-testid={'countFull'}
+                    className={countFull}
+                    aria-hidden="true"
+                >
+                    {formattedDisplayCount}
+                </div>
+                <div
+                    data-testid={'countShort'}
+                    className={countShort}
+                    aria-hidden="true"
+                >
+                    {shortDisplayCount}
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};

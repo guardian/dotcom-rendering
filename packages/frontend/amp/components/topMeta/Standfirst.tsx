@@ -1,13 +1,12 @@
 import React from 'react';
-import { headline, textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
-import { pillarPalette } from '@frontend/lib/pillars';
+import { palette, headline, textSans } from '@guardian/src-foundations';
+import { neutralBorder } from '@frontend/lib/pillars';
 import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 import { ListStyle, LinkStyle } from '@frontend/amp/components/elements/Text';
 
 const standfirstCss = (pillar: Pillar) => css`
-    ${headline(2)};
+    ${headline({ level: 1 })};
     font-weight: 100;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
@@ -20,7 +19,7 @@ const standfirstCss = (pillar: Pillar) => css`
         font-weight: 700;
     }
 
-    ${ListStyle(pillarPalette[pillar].neutral.border)};
+    ${ListStyle(neutralBorder(pillar))};
     ${LinkStyle(pillar)};
 `;
 
@@ -29,7 +28,7 @@ const labsStyle = css`
     p,
     li {
         font-weight: 700;
-        ${textSans(8)}
+        ${textSans({ level: 4 })}
     }
 `;
 

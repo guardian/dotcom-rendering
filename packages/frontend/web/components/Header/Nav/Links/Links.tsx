@@ -1,20 +1,19 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-
 import {
-    Dropdown,
     Link as DropdownLink,
-} from '@guardian/guui/components/Dropdown/Dropdown';
-import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
-import SearchIcon from '@guardian/pasteup/icons/search.svg';
-import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
+    Dropdown,
+} from '@frontend/web/components/Dropdown';
+import ProfileIcon from '@frontend/static/icons/profile.svg';
+import SearchIcon from '@frontend/static/icons/search.svg';
 import {
     tablet,
     desktop,
     mobileLandscape,
     wide,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 
 const search = css`
     :after {
@@ -39,7 +38,7 @@ const search = css`
 `;
 
 const link = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     color: ${palette.neutral[100]};
     float: left;
     position: relative;
@@ -53,7 +52,7 @@ const link = css`
 
     :hover,
     :focus {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
 
     svg {

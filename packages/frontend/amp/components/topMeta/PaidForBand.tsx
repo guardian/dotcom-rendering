@@ -1,10 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette, mobileLandscape } from '@guardian/src-foundations';
-import { textSans } from '@guardian/pasteup/typography';
-import LabsLogo from '@guardian/pasteup/logos/the-guardian-labs.svg';
-import ArrowRightIcon from '@guardian/pasteup/icons/arrow-right.svg';
+import { palette, mobileLandscape, textSans } from '@guardian/src-foundations';
+import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
+import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
+import { augmentedLabs } from '@frontend/lib/pillars';
 
 const headerStyle = css`
     display: flex;
@@ -13,7 +13,7 @@ const headerStyle = css`
     margin: 0 -10px;
     padding: 0 10px;
     height: 58px;
-    background-color: ${palette.labs.bright};
+    background-color: ${augmentedLabs.bright};
 
     ${mobileLandscape} {
         padding: 0 20px;
@@ -26,7 +26,7 @@ const focusColor = css`
 
 const metaStyle = css`
     height: 100%;
-    ${textSans(4)};
+    ${textSans({ level: 2 })};
     font-weight: 700;
 `;
 
@@ -43,8 +43,8 @@ const aboutButtonStyle = css`
     margin-left: 10px;
     padding: 10px;
     border: 0;
-    border-left: solid 1px ${palette.labs.faded};
-    border-right: solid 1px ${palette.labs.faded};
+    border-left: solid 1px ${augmentedLabs.faded};
+    border-right: solid 1px ${augmentedLabs.faded};
     background: transparent;
     color: inherit;
     cursor: pointer;
@@ -83,7 +83,7 @@ const logoStyle = css`
 
 const aStyle = css`
     display: inline-block;
-    color: ${palette.labs.bright};
+    color: ${augmentedLabs.bright};
     text-decoration: none;
     margin-top: 10px;
     &:hover {
@@ -92,7 +92,7 @@ const aStyle = css`
 `;
 
 const iconStyle = css`
-    fill: ${palette.labs.bright};
+    fill: ${augmentedLabs.bright};
     margin: 0 0;
     padding-right: 3px;
     vertical-align: middle;

@@ -6,11 +6,11 @@ import {
     mobileMedium,
     mobileLandscape,
     tablet,
-} from '@guardian/pasteup/breakpoints';
-import { palette } from '@guardian/pasteup/palette';
+    palette,
+} from '@guardian/src-foundations';
 
 const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
-    background-color: ${palette.highlight.main};
+    background-color: ${palette.yellow.main};
     color: ${palette.neutral[7]};
     cursor: pointer;
     height: 42px;

@@ -1,8 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { leftCol } from '@guardian/pasteup/breakpoints';
-import { headline } from '@guardian/pasteup/typography';
+import { leftCol, headline } from '@guardian/src-foundations';
+
+const sectionLabelText = css`
+    font-weight: 700;
+`;
 
 const sectionLabelLink = css`
     text-decoration: none;
@@ -20,15 +23,14 @@ const pillarColours = pillarMap(
 
 const primaryStyle = css`
     font-weight: 700;
-    ${headline(2)};
-
+    ${headline({ level: 1 })};
     ${leftCol} {
-        ${headline(3)};
+        ${headline({ level: 2 })};
     }
 `;
 
 const secondaryStyle = css`
-    ${headline(2)};
+    ${headline({ level: 1 })};
     display: block;
 `;
 
@@ -57,7 +59,7 @@ const TagLink: React.FC<{
             )}
             data-link-name={dataLinkName}
         >
-            {tagTitle}
+            <span className={sectionLabelText}>{tagTitle}</span>
         </a>
     );
 };

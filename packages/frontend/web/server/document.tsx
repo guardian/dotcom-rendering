@@ -5,7 +5,8 @@ import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
 import { htmlTemplate } from './htmlTemplate';
-import { DecidePage } from './DecidePage';
+import { Article } from '../pages/Article';
+import { escapeData } from '@frontend/lib/escapeData';
 import { getDist } from '@frontend/lib/assets';
 
 import { makeWindowGuardian } from '@frontend/model/window-guardian';
@@ -23,10 +24,7 @@ export const document = ({ data }: Props) => {
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <DecidePage
-                    designType={CAPI.designType}
-                    data={{ CAPI, NAV, config }}
-                />
+                <Article data={{ CAPI, NAV, config }} />
             </CacheProvider>,
         ),
     );
@@ -80,11 +78,20 @@ export const document = ({ data }: Props) => {
         'https://www.google-analytics.com/analytics.js',
     ];
 
-    const windowGuardian = makeWindowGuardian(data, cssIDs);
+    /**
+     * We escape windowGuardian here to prevent errors when the data
+     * is placed in a script tag on the page
+     */
+    const windowGuardian = escapeData(
+        JSON.stringify(makeWindowGuardian(data, cssIDs)),
+    );
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
 
     const description = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+
+    const openGraphData = CAPI.openGraphData;
+    const twitterData = CAPI.twitterData;
 
     return htmlTemplate({
         linkedData,
@@ -97,5 +104,7 @@ export const document = ({ data }: Props) => {
         description,
         windowGuardian,
         ampLink,
+        openGraphData,
+        twitterData,
     });
 };

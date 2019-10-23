@@ -82,15 +82,6 @@ const common = ({ platform, page = '' }) => ({
                 test: /\.svg$/,
                 use: ['desvg-loader/react', 'svg-loader'],
             },
-            {
-                // make sure webpack tree-shakes this stuff
-                // https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free
-                include: [
-                    path.resolve(root, 'packages', 'guui'),
-                    path.resolve(root, 'packages', 'pasteup'),
-                ],
-                sideEffects: false,
-            },
         ],
     },
     plugins: [

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Caption } from '@guardian/guui/components/Caption/Caption';
+import { Caption } from '@frontend/amp/components/Caption';
 import { constructQuery } from '@frontend/amp/lib/querystring';
 
 interface EmbedConfig {

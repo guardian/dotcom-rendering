@@ -14,22 +14,24 @@ module.exports = {
             },
         ],
         'dcr/only-import-below': [
-            'warn',            
+            'warn',
             {
                 allowedImports: [
-                    "react",
-                    "emotion",
-                    "jsdom",
-                    "curlyquotes",
-                    "react-dom",
-                    "@guardian/pasteup",
-                    "@frontend/lib/",
-                    "@frontend/amp/lib/",
-                    "@testing-library",
-                    "@root/packages/frontend/amp/lib/",
-                    "@guardian/src-foundations"
-                ]
-            }
-        ]
+                    'react',
+                    'emotion',
+                    'jsdom',
+                    'curlyquotes',
+                    'react-dom',
+                    '@guardian/src-foundations',
+                    '@frontend/lib/',
+                    '@frontend/amp/lib/',
+                    '@frontend/amp/types',
+                    '@frontend/static/icons',
+                    '@testing-library',
+                    '@guardian/frontend/static/',
+                    '@guardian/guui/components',
+                ],
+            },
+        ],
     },
 };

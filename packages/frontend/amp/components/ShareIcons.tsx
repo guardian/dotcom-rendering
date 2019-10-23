@@ -1,14 +1,14 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import TwitterIconPadded from '@guardian/pasteup/icons/twitter-padded.svg';
-import FacebookIcon from '@guardian/pasteup/icons/facebook.svg';
-import EmailIcon from '@guardian/pasteup/icons/email.svg';
-import LinkedInIcon from '@guardian/pasteup/icons/linked-in.svg';
-import PinterestIcon from '@guardian/pasteup/icons/pinterest.svg';
-import WhatsAppIcon from '@guardian/pasteup/icons/whatsapp.svg';
-import MessengerIcon from '@guardian/pasteup/icons/messenger.svg';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
+import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
+import FacebookIcon from '@frontend/static/icons/facebook.svg';
+import EmailIcon from '@frontend/static/icons/email.svg';
+import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
+import PinterestIcon from '@frontend/static/icons/pinterest.svg';
+import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
+import MessengerIcon from '@frontend/static/icons/messenger.svg';
+import { visuallyHidden } from '@guardian/src-foundations';
+import { pillarMap, pillarPalette, neutralBorder } from '@frontend/lib/pillars';
 
 const pillarFill = pillarMap(
     pillar =>
@@ -24,7 +24,7 @@ const shareIconsListItem = css`
 `;
 
 const shareIcon = (pillar: Pillar) => css`
-    border: 1px solid ${pillarPalette[pillar].neutral.border};
+    border: 1px solid ${neutralBorder(pillar)};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -116,7 +116,7 @@ export const ShareIcons: React.FC<{
                         <a href={url} role="button">
                             <span
                                 className={css`
-                                    ${screenReaderOnly};
+                                    ${visuallyHidden};
                                 `}
                             >
                                 {userMessage}

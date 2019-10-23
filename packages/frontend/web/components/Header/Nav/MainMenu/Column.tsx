@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { textSans } from '@guardian/pasteup/typography';
 import { css, cx } from 'emotion';
-
-import { desktop, tablet, leftCol, until } from '@guardian/pasteup/breakpoints';
-import { palette } from '@guardian/pasteup/palette';
+import {
+    desktop,
+    tablet,
+    leftCol,
+    until,
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS vars
@@ -42,7 +46,7 @@ const pillarDividerExtended = css`
 `;
 
 const columnLinkTitle = css`
-    ${textSans(5)};
+    ${textSans({ level: 3, lineHeight: 'tight' })};
     background-color: transparent;
     text-decoration: none;
     border: 0;
@@ -56,17 +60,19 @@ const columnLinkTitle = css`
     position: relative;
     text-align: left;
     width: 100%;
+
     ${tablet} {
         padding-left: 60px;
     }
+
     ${desktop} {
-        ${textSans(6)};
         font-size: 16px;
         padding: 6px 0;
     }
+
     :hover,
     :focus {
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
         text-decoration: underline;
     }
 
@@ -106,7 +112,7 @@ const ColumnLink: React.FC<{
 );
 
 const columnLinks = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -169,7 +175,7 @@ const ColumnLinks: React.FC<{
 };
 
 const columnStyle = css`
-    ${textSans(6)};
+    ${textSans({ level: 3 })};
     list-style: none;
     margin: 0;
     padding-bottom: 10px;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import Star from '@guardian/pasteup/icons/star.svg';
+import Star from '@frontend/static/icons/star.svg';
 import { palette } from '@guardian/src-foundations';
 
 const ratingsWrapper = css`

@@ -1,11 +1,15 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import Logo from '@guardian/pasteup/logos/the-guardian.svg';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
-import { headline } from '@guardian/pasteup/typography';
-import { pillarPalette } from '../../lib/pillars';
-import { palette, mobileLandscape, until } from '@guardian/src-foundations';
-import { ReaderRevenueButton } from '@root/packages/frontend/amp/components/ReaderRevenueButton';
+import Logo from '@frontend/static/logos/the-guardian.svg';
+import { pillarPalette } from '@frontend/lib/pillars';
+import {
+    headline,
+    palette,
+    mobileLandscape,
+    until,
+    visuallyHidden,
+} from '@guardian/src-foundations';
+import { ReaderRevenueButton } from '@frontend/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`
     background-color: ${palette.brand.main};
@@ -69,7 +73,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     text-decoration: none;
     cursor: pointer;
     display: block;
-    ${headline(2)};
+    ${headline({ level: 1 })};
     height: 36px;
     padding: 9px 4px;
     color: ${palette.neutral[100]};
@@ -192,14 +196,15 @@ export const Header: React.FC<{
             <ReaderRevenueButton
                 nav={nav}
                 rrLink={'ampHeader'}
-                rrCategory={'support'}
-                linkLabel={'Support us'}
+                rrCategory={'subscribe'}
+                linkLabel={'Subscribe'}
+                showArrow={false}
             />
 
             <a className={logoStyles} href={guardianBaseURL}>
                 <span
                     className={css`
-                        ${screenReaderOnly};
+                        ${visuallyHidden};
                     `}
                 >
                     The Guardian - Back to home

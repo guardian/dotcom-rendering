@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import { clearFix } from '@guardian/pasteup/mixins';
+import { clearFix } from '@frontend/lib/mixins';
 import {
     tablet,
     desktop,
     leftCol,
     wide,
     mobileLandscape,
-} from '@guardian/pasteup/breakpoints';
+    palette,
+} from '@guardian/src-foundations';
 
 import { Logo } from './Logo';
 import { EditionDropdown } from './EditionDropdown';
@@ -18,6 +19,8 @@ import { MainMenu } from './MainMenu/MainMenu';
 import { SubNav } from './SubNav/SubNav';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { getCookie } from '@frontend/web/browser/cookie';
+import { Section } from '@frontend/web/components/Section';
+import { Hide } from '@frontend/web/components/Hide';
 
 const centered = css`
     ${tablet} {
@@ -100,10 +103,14 @@ export class Nav extends Component<
                     aria-label="Guardian sections"
                     data-component="nav2"
                 >
-                    <EditionDropdown
-                        edition={edition}
-                        dataLinkName={'nav2 : topbar : edition-picker: toggle'}
-                    />
+                    <Hide when="below" breakpoint="desktop">
+                        <EditionDropdown
+                            edition={edition}
+                            dataLinkName={
+                                'nav2 : topbar : edition-picker: toggle'
+                            }
+                        />
+                    </Hide>
                     <Logo />
                     {/*
                         TODO: The properties of the Links component
@@ -135,11 +142,13 @@ export class Nav extends Component<
                         nav={nav}
                     />
                 </nav>
-                <SubNav
-                    subnav={nav.subNavSections}
-                    currentNavLink={nav.currentNavLink}
-                    pillar={pillar}
-                />
+                <Section backgroundColour={palette.neutral[100]} padded={false}>
+                    <SubNav
+                        subnav={nav.subNavSections}
+                        currentNavLink={nav.currentNavLink}
+                        pillar={pillar}
+                    />
+                </Section>
             </div>
         );
     }

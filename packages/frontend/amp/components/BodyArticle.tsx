@@ -2,7 +2,7 @@ import React from 'react';
 import { InnerContainer } from '@frontend/amp/components/InnerContainer';
 import { Elements } from '@frontend/amp/components/Elements';
 import { css } from 'emotion';
-import { ArticleModel } from '@frontend/amp/pages/Article';
+import { ArticleModel } from '@frontend/amp/types/ArticleModel';
 import { TopMeta } from '@frontend/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@frontend/amp/components/SubMeta';
 import { designTypeDefault } from '@frontend/lib/designTypes';
@@ -10,7 +10,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import { palette, until } from '@guardian/src-foundations';
 import { WithAds } from '@frontend/amp/components/WithAds';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
 const body = (pillar: Pillar, designType: DesignType) => {
     const defaultStyles: DesignTypesObj = designTypeDefault(

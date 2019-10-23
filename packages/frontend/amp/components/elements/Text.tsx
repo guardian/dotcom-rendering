@@ -1,15 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
-import { pillarPalette } from '@frontend/lib/pillars';
+import { palette, body, textSans } from '@guardian/src-foundations';
+import { pillarPalette, neutralBorder } from '@frontend/lib/pillars';
 import { sanitise } from '@frontend/amp/lib/sanitise-html';
-import { body, textSans } from '@guardian/pasteup/typography';
-import { composeLabsCSS } from '@root/packages/frontend/amp/lib/compose-labs-css';
+import { composeLabsCSS } from '@frontend/amp/lib/compose-labs-css';
 
 // Note, this should only apply basic text styling. It is a case where we want
 // to re-use styling, but generally we should avoid this as it couples
-// components. Longer term we should probably put this in GUUI or somewhere else
-// which is easy to discover and re-use.
+// components.
 
 // tslint:disable:react-no-dangerous-html
 
@@ -38,7 +36,7 @@ export const LinkStyle = (pillar: Pillar) => css`
     a {
         color: ${pillarPalette[pillar].dark};
         text-decoration: none;
-        border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
+        border-bottom: 1px solid ${neutralBorder(pillar)};
         :hover {
             border-bottom: 1px solid ${pillarPalette[pillar].dark};
         }
@@ -51,7 +49,7 @@ export const TextStyle = (pillar: Pillar) => css`
     }
     p {
         padding: 0 0 12px;
-        ${body(2)};
+        ${body({ level: 2 })};
         font-weight: 300;
         word-wrap: break-word;
         color: ${palette.neutral[7]};
@@ -62,16 +60,16 @@ export const TextStyle = (pillar: Pillar) => css`
         font-style: italic;
     }
 
-    ${body(2)};
+    ${body({ level: 2 })};
 
     ${LinkStyle(pillar)};
-    ${ListStyle(pillarPalette[pillar].neutral.border)};
+    ${ListStyle(neutralBorder(pillar))};
 `;
 
 // Labs paid content only
 const textStyleLabs = css`
     p {
-        ${textSans(7)}
+        ${textSans({ level: 4 })}
     }
 `;
 

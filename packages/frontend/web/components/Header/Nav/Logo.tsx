@@ -7,11 +7,11 @@ import {
     tablet,
     desktop,
     wide,
-} from '@guardian/pasteup/breakpoints';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+    palette,
+    visuallyHidden,
+} from '@guardian/src-foundations';
 
-import { palette } from '@guardian/pasteup/palette';
-import TheGuardianLogoSVG from '@guardian/pasteup/logos/the-guardian.svg';
+import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 
 const link = css`
     float: right;
@@ -63,7 +63,7 @@ export const Logo: React.FC = () => (
     <a className={link} href="/" data-link-name="nav2 : logo">
         <span
             className={css`
-                ${screenReaderOnly};
+                ${visuallyHidden};
             `}
         >
             The Guardian - Back to home

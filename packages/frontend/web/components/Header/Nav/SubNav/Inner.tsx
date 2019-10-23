@@ -1,12 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
 import {
     desktop,
     tablet,
     mobileLandscape,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
 const wrapperCollapsed = css`
@@ -46,7 +46,7 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;

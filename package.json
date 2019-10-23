@@ -5,14 +5,17 @@
     "workspaces": [
         "packages/*"
     ],
-    "tocList": "README.md packages/pasteup/README.md packages/pasteup/CONTRIBUTING.md packages/guui/README.md docs/contributing/**",
+    "tocList": "README.md docs/contributing/**",
     "scripts": {
         "lint": "eslint . --ext .ts,.tsx",
         "tsc": "tsc",
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js",
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
-        "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true"
+        "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
+        "cypress:open": "cypress open",
+        "cypress:run:percy": "percy exec -- cypress run --spec 'cypress/integration/percy/**/*'",
+        "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'"
     },
     "husky": {
         "hooks": {
@@ -33,6 +36,7 @@
         "@babel/preset-env": "^7.5.5",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.3.3",
+        "@percy/cypress": "^2.2.0",
         "@testing-library/react": "8.0.7",
         "@types/jest": "^24.0.15",
         "@types/lodash.clonedeep": "^4.5.4",
@@ -51,6 +55,8 @@
         "babel-plugin-preval": "^3.0.0",
         "babel-plugin-px-to-rem": "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0",
         "bundlesize": "^0.17.0",
+        "cypress": "^3.4.1",
+        "desvg-loader": "^0.1.0",
         "doctoc": "^1.4.0",
         "eslint": "^5.16.0",
         "eslint-plugin-dcr": "https://github.com/guardian/eslint-plugin-dcr#v0.1.0",
@@ -66,11 +72,13 @@
         "regenerator-runtime": "^0.12.1",
         "rimraf": "^2.6.2",
         "simple-progress-webpack-plugin": "^1.1.2",
+        "start-server-and-test": "^1.10.5",
         "string-replace-loader": "^2.1.1",
         "stylelint": "^10.1.0",
         "stylelint-config-standard": "^18.3.0",
         "stylelint-config-styled-components": "^0.1.1",
         "stylelint-processor-styled-components": "^1.8.0",
+        "svg-loader": "^0.0.2",
         "ts-jest": "^24.0.2",
         "tslint": "^5.18.0",
         "tslint-config-airbnb": "^5.11.1",
@@ -123,10 +131,10 @@
             "<rootDir>/scripts/jest/setup.ts"
         ],
         "moduleNameMapper": {
-            "^@root(.*)$": "<rootDir>$1",
-            "^@frontend(.*)$": "<rootDir>/packages/frontend$1",
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
-            "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx"
+            "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
+            "^@root(.*)$": "<rootDir>$1",
+            "^@frontend(.*)$": "<rootDir>/packages/frontend$1"
         },
         "testResultsProcessor": "jest-teamcity-reporter",
         "collectCoverageFrom": [

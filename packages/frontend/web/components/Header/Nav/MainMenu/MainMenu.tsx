@@ -7,10 +7,10 @@ import {
     mobileLandscape,
     desktop,
     tablet,
-} from '@guardian/pasteup/breakpoints';
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 import { Columns } from './Columns';
-import { palette } from '@guardian/pasteup/palette';
-import { textSans } from '@guardian/pasteup/typography';
 
 const showMenu = css`
     ${desktop} {
@@ -25,7 +25,7 @@ const showMenu = css`
 const mainMenu = css`
     background-color: ${palette.brand.main};
     box-sizing: border-box;
-    ${textSans(8)};
+    ${textSans({ level: 4 })};
     left: 0;
     margin-right: 29px;
     padding-bottom: 24px;

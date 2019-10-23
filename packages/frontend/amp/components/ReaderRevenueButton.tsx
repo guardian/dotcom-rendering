@@ -1,9 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { textSans } from '@guardian/pasteup/typography';
-import ArrowRight from '@guardian/pasteup/icons/arrow-right.svg';
-import { palette, until } from '@guardian/src-foundations';
+import ArrowRight from '@frontend/static/icons/arrow-right.svg';
+import { palette, until, textSans } from '@guardian/src-foundations';
 
 const supportStyles = css`
     align-self: flex-start;
@@ -37,7 +36,7 @@ const supportFooterStyles = css`
 const supportLinkStyles = css`
     position: relative;
     color: ${palette.neutral[7]};
-    ${textSans(5)};
+    ${textSans({ level: 3 })};
     font-weight: 700;
     display: block;
     text-decoration: none;
@@ -45,7 +44,7 @@ const supportLinkStyles = css`
 
     padding-right: 20px;
     ${until.mobileMedium} {
-        ${textSans(4)};
+        ${textSans({ level: 2 })};
         padding-right: 18px;
     }
 
@@ -57,6 +56,15 @@ const supportLinkStyles = css`
             width: 26px;
             height: 26px;
         }
+    }
+`;
+
+const supportLinkStylesNoArrow = css`
+    ${supportLinkStyles}
+    padding-right: 0px;
+
+    ${until.mobileMedium} {
+        padding-right: 0px;
     }
 `;
 
@@ -74,7 +82,15 @@ export const ReaderRevenueButton: React.SFC<{
     rrLink: ReaderRevenuePosition;
     rrCategory: ReaderRevenueCategory;
     rightAlignIcon?: boolean;
-}> = ({ nav, linkLabel, rrLink, rrCategory, rightAlignIcon }) => {
+    showArrow?: boolean;
+}> = ({
+    nav,
+    linkLabel,
+    rrLink,
+    rrCategory,
+    rightAlignIcon,
+    showArrow = true,
+}) => {
     const url = nav.readerRevenueLinks[rrLink][rrCategory];
 
     if (url === '') {
@@ -89,15 +105,22 @@ export const ReaderRevenueButton: React.SFC<{
                 isAmpHeader ? supportHeaderStyles : supportFooterStyles,
             ])}
         >
-            <a className={supportLinkStyles} href={url}>
+            <a
+                className={
+                    showArrow ? supportLinkStyles : supportLinkStylesNoArrow
+                }
+                href={url}
+            >
                 {linkLabel}
-                <span
-                    className={cx({
-                        [rightAlignedIcon]: !!rightAlignIcon,
-                    })}
-                >
-                    <ArrowRight />
-                </span>
+                {showArrow && (
+                    <span
+                        className={cx({
+                            [rightAlignedIcon]: !!rightAlignIcon,
+                        })}
+                    >
+                        <ArrowRight />
+                    </span>
+                )}
             </a>
         </div>
     );

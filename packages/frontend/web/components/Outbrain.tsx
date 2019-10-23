@@ -1,12 +1,17 @@
 // tslint:disable:react-no-dangerous-html
 
 import React from 'react';
-import { Container } from '@guardian/guui';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { textSans, body } from '@guardian/pasteup/typography';
-import { tablet, desktop, leftCol, wide } from '@guardian/src-foundations';
+import {
+    textSans,
+    body,
+    tablet,
+    desktop,
+    leftCol,
+    wide,
+    palette,
+} from '@guardian/src-foundations';
 
 interface OutbrainSelectors {
     widget: string;
@@ -90,10 +95,10 @@ const outbrainContainer = css`
 
     .ob-widget {
         div.ob-widget-header {
-            ${body(3)};
+            ${body({ level: 2 })};
             span,
             .ob_about_this_content a {
-                ${body(1)};
+                ${body({ level: 1 })};
                 text-decoration: none;
                 /* stylelint-disable-next-line color-no-hex */
                 color: #00456e;
@@ -105,7 +110,7 @@ const outbrainContainer = css`
 
         span.ob-rec-text {
             max-height: fit-content;
-            ${textSans(5)};
+            ${textSans({ level: 3 })};
         }
     }
 `;
@@ -117,10 +122,8 @@ export const OutbrainContainer: React.FC<{
         return null;
     }
     return (
-        <Container>
-            <div className={outbrainContainer}>
-                <OutbrainWidget />
-            </div>
-        </Container>
+        <div className={outbrainContainer}>
+            <OutbrainWidget />
+        </div>
     );
 };

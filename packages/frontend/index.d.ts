@@ -201,6 +201,8 @@ interface CAPIType {
     subMetaKeywordLinks: SimpleLinkType[];
     shouldHideAds: boolean;
     isAdFreeUser: boolean;
+    openGraphData: { [key: string]: string };
+    twitterData: { [key: string]: string };
     webURL: string;
     linkedData: object[];
     config: ConfigType;
@@ -364,4 +366,10 @@ declare namespace JSX {
         'amp-live-list': any;
         'amp-audio': any;
     }
+}
+
+// SVG handling
+declare module '*.svg' {
+    const content: any;
+    export default content;
 }

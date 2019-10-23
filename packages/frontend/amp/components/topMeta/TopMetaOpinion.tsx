@@ -1,27 +1,26 @@
 import React from 'react';
-import { headline } from '@guardian/pasteup/typography';
+import { headline, palette } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { ArticleModel } from '@frontend/amp/pages/Article';
+import { ArticleModel } from '@frontend/amp/types/ArticleModel';
 import { MainMedia } from '@frontend/amp/components/MainMedia';
 import { Byline } from '@frontend/amp/components/topMeta/Byline';
 import { TopMetaExtras } from '@frontend/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@frontend/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@frontend/amp/components/topMeta/SeriesLink';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
-import { getAgeWarning } from '@frontend/model/age-warning';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
+import { getAgeWarning } from '@frontend/lib/age-warning';
 import { Branding } from '@frontend/amp/components/topMeta/Branding';
 
 const headerStyle = css`
-    ${headline(5)};
+    ${headline({ level: 4 })};
     font-weight: 100;
     padding-top: 3px;
     color: ${palette.neutral[7]};
 `;
 
 const bylineStyle = (pillar: Pillar) => css`
-    ${headline(5)};
+    ${headline({ level: 4 })};
     color: ${pillarPalette[pillar].main};
     font-style: italic;
     font-weight: 100;

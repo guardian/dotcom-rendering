@@ -24,14 +24,10 @@ node_modules
 dist
 jsconfig.json
 target
-guui.zip
 packages/design/public
 
 # Caches
 packages/design/.cache
-
-# Publishable files
-packages/pasteup/tmp
 
 # Test coverage reports
 coverage
@@ -41,3 +37,7 @@ coverage
 scripts/git-hooks/*
 !scripts/git-hooks/post-merge
 !scripts/git-hooks/install.js
+
+# Cypress result files
+/cypress/screenshots/*
+/cypress/videos/*

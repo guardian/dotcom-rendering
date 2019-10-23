@@ -7,13 +7,12 @@ import {
     until,
     wide,
     desktop,
-} from '@guardian/pasteup/breakpoints';
-import { textSans } from '@guardian/pasteup/typography';
-import { clearFix } from '@guardian/pasteup/mixins';
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 
-import { Container } from '@guardian/guui';
+import { clearFix } from '@frontend/lib/mixins';
 import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
-import { palette } from '@guardian/pasteup/palette';
 import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
 import { BackToTop } from './BackToTop';
 
@@ -30,31 +29,8 @@ const footerBorders = `1px solid ${palette.brand.pastel}`;
 const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[100]};
-    ${textSans(5)};
-`;
-
-const footerInner = css`
-    margin: auto;
-
-    ${tablet} {
-        max-width: 740px;
-    }
-
-    ${desktop} {
-        max-width: 100%;
-    }
-
-    ${leftCol} {
-        max-width: 1140px;
-    }
-
-    ${wide} {
-        max-width: 1300px;
-    }
-
     padding-bottom: 6px;
-    display: block;
-    border-top: 0;
+    ${textSans({ level: 3 })};
 `;
 
 const pillarWrap = css`
@@ -102,7 +78,7 @@ const footerLink = css`
 
     :hover {
         text-decoration: underline;
-        color: ${palette.highlight.main};
+        color: ${palette.yellow.main};
     }
 `;
 
@@ -168,7 +144,7 @@ const readerRevenueLinks = css`
 `;
 
 const copyright = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     padding: 12px;
 
     ${until.tablet} {
@@ -245,42 +221,36 @@ export const Footer: React.FC<{
     pageFooter: FooterType;
 }> = ({ pillars, pillar, nav, edition, pageFooter }) => (
     <footer className={footer}>
-        <Container className={footerInner}>
-            <div className={pillarWrap}>
-                <Pillars
-                    showMainMenu={false}
-                    pillars={pillars}
-                    pillar={pillar}
-                    showLastPillarDivider={false}
-                />
-            </div>
-            <div className={footerItemContainers}>
-                <iframe
-                    title="Guardian Email Sign-up Form"
-                    src="https://www.theguardian.com/email/form/footer/today-uk"
-                    scrolling="no"
-                    seamless={true}
-                    id="footer__email-form"
-                    className={emailSignup}
-                    data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
-                    data-node-uid="2"
-                    height="100px"
-                    frameBorder="0"
-                />
+        <div className={pillarWrap}>
+            <Pillars
+                showMainMenu={false}
+                pillars={pillars}
+                pillar={pillar}
+                showLastPillarDivider={false}
+            />
+        </div>
+        <div className={footerItemContainers}>
+            <iframe
+                title="Guardian Email Sign-up Form"
+                src="https://www.theguardian.com/email/form/footer/today-uk"
+                scrolling="no"
+                seamless={true}
+                id="footer__email-form"
+                className={emailSignup}
+                data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
+                data-node-uid="2"
+                height="100px"
+                frameBorder="0"
+            />
 
-                <FooterLinks
-                    nav={nav}
-                    edition={edition}
-                    pageFooter={pageFooter}
-                />
-                <div className={bttPosition}>
-                    <BackToTop />
-                </div>
+            <FooterLinks nav={nav} edition={edition} pageFooter={pageFooter} />
+            <div className={bttPosition}>
+                <BackToTop />
             </div>
-            <div className={copyright}>
-                © {year} Guardian News & Media Limited or its affiliated
-                companies. All rights reserved. (beta)
-            </div>
-        </Container>
+        </div>
+        <div className={copyright}>
+            © {year} Guardian News & Media Limited or its affiliated companies.
+            All rights reserved. (beta)
+        </div>
     </footer>
 );

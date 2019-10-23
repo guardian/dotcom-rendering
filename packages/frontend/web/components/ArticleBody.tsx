@@ -3,12 +3,16 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/pasteup/palette';
-import { from, tablet } from '@guardian/pasteup/breakpoints';
-import { headline, textSans } from '@guardian/pasteup/typography';
+import {
+    from,
+    tablet,
+    headline,
+    textSans,
+    palette,
+} from '@guardian/src-foundations';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
-import { getSharingUrls } from '@frontend/model/sharing-urls';
+import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
 import { SharingIcons } from './ShareIcons';
 import { SubMetaLinksList } from './SubMetaLinksList';
@@ -50,7 +54,7 @@ const guardianLines = css`
 `;
 
 const captionFont = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[46]};
 `;
 
@@ -60,7 +64,7 @@ const bodyStyle = css`
     }
 
     h2 {
-        ${headline(3)};
+        ${headline({ level: 2 })};
     }
 
     strong {
@@ -92,7 +96,7 @@ const bodyStyle = css`
     }
 
     li {
-        ${textSans(5)};
+        ${textSans({ level: 3 })};
         margin-bottom: 6px;
         padding-left: 20px;
 
@@ -115,7 +119,7 @@ const bodyStyle = css`
 
 const immersiveBodyStyle = css`
     h2 {
-        ${headline(7)};
+        ${headline({ level: 5 })};
         font-weight: 200;
     }
 `;
@@ -140,7 +144,7 @@ const subMeta = css`
 `;
 
 const subMetaLabel = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     display: block;
     color: ${palette.neutral[60]};
 `;
@@ -153,6 +157,10 @@ const subMetaSharingIcons = css`
     }
 `;
 
+const maxWidth = css`
+    max-width: 630px;
+`;
+
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     config: ConfigType;
@@ -161,7 +169,7 @@ export const ArticleBody: React.FC<{
     const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
     return (
-        <div>
+        <main className={maxWidth}>
             <div
                 className={cx(bodyStyle, linkColour[CAPI.pillar], {
                     [immersiveBodyStyle]: CAPI.isImmersive,
@@ -214,6 +222,6 @@ export const ArticleBody: React.FC<{
                     />
                 )}
             </div>
-        </div>
+        </main>
     );
 };

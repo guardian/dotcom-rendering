@@ -9,11 +9,11 @@ import {
     mobileMedium,
     wide,
     until,
-} from '@guardian/pasteup/breakpoints';
+    headline,
+    palette,
+} from '@guardian/src-foundations';
 
-import { headline } from '@guardian/pasteup/typography';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { palette } from '@guardian/pasteup/palette';
 
 // CSS Vars
 
@@ -128,7 +128,7 @@ const pillarDivider = css`
 `;
 
 const linkStyle = css`
-    ${headline(2)};
+    ${headline({ level: 1 })};
     box-sizing: border-box;
     font-weight: 900;
     color: ${palette.neutral[100]};

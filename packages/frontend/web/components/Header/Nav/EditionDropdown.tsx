@@ -1,13 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Dropdown } from '@guardian/guui';
-import { desktop, wide } from '@guardian/pasteup/breakpoints';
-import { Link } from '@guardian/guui/components/Dropdown/Dropdown';
-import { palette } from '@guardian/pasteup/palette';
+import { Dropdown, Link } from '@frontend/web/components/Dropdown';
+import { palette, desktop, wide } from '@guardian/src-foundations';
 
 const editionDropdown = css`
-    display: none;
     position: absolute;
     right: 11px;
     z-index: 1072;
@@ -23,7 +20,6 @@ const editionDropdown = css`
     }
 
     ${desktop} {
-        display: block;
         right: 121px;
         width: 110px;
     }

@@ -1,15 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
-
-import { headline } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/pasteup/palette';
 import {
     mobileLandscape,
     tablet,
     mobileMedium,
-} from '@guardian/pasteup/breakpoints';
-import ProfileIcon from '@guardian/pasteup/icons/profile.svg';
-import { screenReaderOnly } from '@guardian/pasteup/mixins';
+    headline,
+    palette,
+    visuallyHidden,
+} from '@guardian/src-foundations';
+import ProfileIcon from '@frontend/static/icons/profile.svg';
 
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
@@ -48,14 +47,14 @@ const style = css`
 
 const text = css`
     color: ${palette.neutral[97]};
-    ${headline(1)};
+    ${headline({ level: 1 })};
     font-weight: 700;
     text-align: center;
     padding: 6px 20px 3px;
     position: relative;
 
     ${tablet} {
-        ${headline(1)};
+        ${headline({ level: 1 })};
     }
 `;
 
@@ -105,7 +104,7 @@ export const SupportTheGuardian: React.FC<{
                                 <ProfileIcon className={mobileSignInIcon} />
                                 <span
                                     className={css`
-                                        ${screenReaderOnly};
+                                        ${visuallyHidden};
                                     `}
                                 >
                                     Sign in

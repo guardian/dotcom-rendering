@@ -1,24 +1,17 @@
 import React from 'react';
-import { render, wait, waitForElement } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { ShareCount } from './ShareCount';
 import { CAPI } from '@root/fixtures/CAPI';
 
-const fetchResult: (
-    shareCount: number,
-) => {
-    ok: boolean;
-    json: () => {
-        share_count: number;
-    };
-} = shareCount => ({
-    ok: true,
-    json: () => ({
-        share_count: shareCount,
-    }),
-});
+import { useApi as useApi_ } from '@frontend/web/components/lib/api';
+
+const useApi: any = useApi_;
+
+jest.mock('@frontend/web/components/lib/api', () => ({
+    useApi: jest.fn(),
+}));
 
 describe('ShareCount', () => {
-    const globalAny: any = global;
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         sentryHost: '',
@@ -41,47 +34,67 @@ describe('ShareCount', () => {
         sharedAdTargeting: {},
     };
 
-    afterEach(() => {
-        const { pageId } = CAPI;
-        const { ajaxUrl } = config;
+    const { pageId } = CAPI;
+    const { ajaxUrl } = config;
 
-        expect(globalAny.fetch).toHaveBeenCalledWith(
-            `${ajaxUrl}/sharecount/${pageId}.json`,
-        );
+    beforeEach(() => {
+        useApi.mockReset();
     });
 
-    it('It should render null if state.shareCount is falsy', async () => {
-        globalAny.fetch = jest.fn(async () => fetchResult(0));
+    it('It should render null if share_count is falsy', () => {
+        useApi.mockReturnValue({ data: { share_count: 0 } });
 
         const { container } = render(
             <ShareCount config={config} pageId={CAPI.pageId} />,
         );
 
-        await wait(() => expect(container.firstChild).toBeNull());
+        expect(useApi).toHaveBeenCalledWith(
+            `${ajaxUrl}/sharecount/${pageId}.json`,
+        );
+
+        expect(container.firstChild).toBeNull();
     });
 
-    it('It should render if state.shareCount is truthy', async () => {
-        globalAny.fetch = jest.fn(async () => fetchResult(100));
+    it('It should render null if there is an error', () => {
+        useApi.mockReturnValue({ error: { message: 'Bad' } });
+
+        const { container } = render(
+            <ShareCount config={config} pageId={CAPI.pageId} />,
+        );
+
+        expect(useApi).toHaveBeenCalledWith(
+            `${ajaxUrl}/sharecount/${pageId}.json`,
+        );
+
+        expect(container.firstChild).toBeNull();
+    });
+
+    it('It should render if share_count is truthy', () => {
+        useApi.mockReturnValue({ data: { share_count: 100 } });
 
         const { container, getByTestId } = render(
             <ShareCount config={config} pageId={CAPI.pageId} />,
         );
 
-        await waitForElement(() => getByTestId('countFull'));
+        expect(useApi).toHaveBeenCalledWith(
+            `${ajaxUrl}/sharecount/${pageId}.json`,
+        );
 
         expect(container.firstChild).not.toBeNull();
         expect(getByTestId('countFull').innerHTML).toBe('100');
         expect(getByTestId('countShort').innerHTML).toBe('100');
     });
 
-    it('It should format long shareCount correctly', async () => {
-        globalAny.fetch = jest.fn(async () => fetchResult(25000));
+    it('It should format long shareCount correctly', () => {
+        useApi.mockReturnValue({ data: { share_count: 25000 } });
 
         const { container, getByTestId } = render(
             <ShareCount config={config} pageId={CAPI.pageId} />,
         );
 
-        await waitForElement(() => getByTestId('countFull'));
+        expect(useApi).toHaveBeenCalledWith(
+            `${ajaxUrl}/sharecount/${pageId}.json`,
+        );
 
         expect(container.firstChild).not.toBeNull();
         expect(getByTestId('countFull').innerHTML).toBe('25,000');

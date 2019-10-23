@@ -1,16 +1,15 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { pillarPalette } from '@frontend/lib/pillars';
-import { textSans, body } from '@guardian/pasteup/typography';
-import { palette } from '@guardian/src-foundations';
+import { pillarPalette, neutralBorder } from '@frontend/lib/pillars';
+import { palette, textSans, body } from '@guardian/src-foundations';
 import { ShareIcons } from '@frontend/amp/components/ShareIcons';
-import CommentIcon from '@guardian/pasteup/icons/comment.svg';
+import CommentIcon from '@frontend/static/icons/comment.svg';
 
 const guardianLines = (pillar: Pillar) => css`
     background-image: repeating-linear-gradient(
         to bottom,
-        ${pillarPalette[pillar].neutral.border},
-        ${pillarPalette[pillar].neutral.border} 1px,
+        ${neutralBorder(pillar)},
+        ${neutralBorder(pillar)} 1px,
         transparent 1px,
         transparent 4px
     );
@@ -27,10 +26,10 @@ const linkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    ${textSans(3)};
+    ${textSans({ level: 2 })};
     :after {
         content: '/';
-        ${textSans(3)};
+        ${textSans({ level: 2 })};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -52,7 +51,7 @@ const keywordListStyle = (pillar: Pillar) => css`
     margin-left: -6px;
     padding-top: 6px;
     padding-bottom: 12px;
-    border-bottom: 1px solid ${pillarPalette[pillar].neutral.border};
+    border-bottom: 1px solid ${neutralBorder(pillar)};
     margin-bottom: 6px;
 `;
 
@@ -62,10 +61,10 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    ${body(3)};
+    ${body({ level: 2 })};
     :after {
         content: '/';
-        ${body(3)};
+        ${body({ level: 2 })};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -80,7 +79,7 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-    ${textSans(1)};
+    ${textSans({ level: 1 })};
     color: ${palette.neutral[46]};
     display: block;
     margin-bottom: -3px;
@@ -92,7 +91,7 @@ const siteLinks = css`
 `;
 
 const siteLinkStyle = css`
-    ${textSans(2)};
+    ${textSans({ level: 2 })};
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};

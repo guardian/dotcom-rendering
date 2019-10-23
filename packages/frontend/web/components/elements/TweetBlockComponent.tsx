@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/pasteup/palette';
-import { body } from '@guardian/pasteup/typography';
+import { palette, body } from '@guardian/src-foundations';
+import { unescapeData } from '@frontend/lib/escapeData';
 
 // fallback styling for when JS is disabled
 const noJSStyling = css`
@@ -11,7 +11,7 @@ const noJSStyling = css`
         padding: 20px;
         width: 100%;
         margin-bottom: 16px;
-        ${body(1)};
+        ${body({ level: 1 })};
     }
 
     .twitter-tweet p {
@@ -32,7 +32,7 @@ export const TweetBlockComponent: React.FC<{
         <div>
             <div
                 className={noJSStyling}
-                dangerouslySetInnerHTML={{ __html: element.html }}
+                dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
             />
             <script
                 async={true}
