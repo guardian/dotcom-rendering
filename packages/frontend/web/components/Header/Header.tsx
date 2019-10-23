@@ -1,8 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette, until, tablet } from '@guardian/src-foundations';
+import { palette, tablet } from '@guardian/src-foundations';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot } from '@frontend/web/components/AdSlot';
+import { Hide } from '@frontend/web/components/Hide';
 
 import { Nav } from './Nav/Nav';
 
@@ -11,10 +12,6 @@ const headerWrapper = css`
 `;
 
 const headerAdWrapper = css`
-    ${until.tablet} {
-        display: none;
-    }
-
     z-index: 1080;
     width: 100%;
     background-color: white;
@@ -56,18 +53,20 @@ export const Header: React.FC<{
     shouldHideAds: boolean;
 }> = ({ nav, pillar, edition, config, isAdFreeUser, shouldHideAds }) => (
     <div className={headerWrapper}>
-        <div
-            className={cx({
-                [headerAdWrapper]: true,
-                [headerAdWrapperHidden]: isAdFreeUser || shouldHideAds,
-            })}
-        >
-            <AdSlot
-                asps={namedAdSlotParameters('top-above-nav')}
-                config={config}
-                className={adSlotAboveNav}
-            />
-        </div>
+        <Hide when="below" breakpoint="tablet">
+            <div
+                className={cx({
+                    [headerAdWrapper]: true,
+                    [headerAdWrapperHidden]: isAdFreeUser || shouldHideAds,
+                })}
+            >
+                <AdSlot
+                    asps={namedAdSlotParameters('top-above-nav')}
+                    config={config}
+                    className={adSlotAboveNav}
+                />
+            </div>
+        </Hide>
         <header className={header}>
             <Nav nav={nav} pillar={pillar} edition={edition} />
         </header>
