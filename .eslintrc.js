@@ -25,6 +25,8 @@ module.exports = {
                     '@guardian/src-foundations',
                     '@frontend/lib/',
                     '@frontend/amp/lib/',
+                    '@frontend/amp/types',
+                    '@frontend/static/icons',
                     '@testing-library',
                     '@guardian/frontend/static/',
                     '@guardian/guui/components',
