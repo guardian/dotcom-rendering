@@ -196,8 +196,9 @@ export const Header: React.FC<{
             <ReaderRevenueButton
                 nav={nav}
                 rrLink={'ampHeader'}
-                rrCategory={'support'}
-                linkLabel={'Support us'}
+                rrCategory={'subscribe'}
+                linkLabel={'Subscribe'}
+                showArrow={false}
             />
 
             <a className={logoStyles} href={guardianBaseURL}>
