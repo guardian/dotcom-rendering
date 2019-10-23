@@ -89,7 +89,7 @@ export const ReaderRevenueButton: React.SFC<{
     rrLink,
     rrCategory,
     rightAlignIcon,
-    showArrow = true
+    showArrow = true,
 }) => {
     const url = nav.readerRevenueLinks[rrLink][rrCategory];
 
@@ -112,13 +112,15 @@ export const ReaderRevenueButton: React.SFC<{
                 href={url}
             >
                 {linkLabel}
-                {showArrow && (<span
-                    className={cx({
-                        [rightAlignedIcon]: !!rightAlignIcon,
-                    })}
-                >
-                    <ArrowRight />
-                </span>)}
+                {showArrow && (
+                    <span
+                        className={cx({
+                            [rightAlignedIcon]: !!rightAlignIcon,
+                        })}
+                    >
+                        <ArrowRight />
+                    </span>
+                )}
             </a>
         </div>
     );
