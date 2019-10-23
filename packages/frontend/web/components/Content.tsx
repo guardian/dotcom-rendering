@@ -51,7 +51,7 @@ export const Content = ({ CAPI, config }: Props) => {
     return (
         <Flex>
             <ArticleLeft>
-                <ArticleTitle CAPI={CAPI} fallbackToSection={true} />
+                <ArticleTitle CAPI={CAPI} />
                 <ArticleMeta CAPI={CAPI} config={config} />
             </ArticleLeft>
             <ArticleContainer>
