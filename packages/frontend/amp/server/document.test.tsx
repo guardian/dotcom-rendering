@@ -6,7 +6,7 @@ import { Article } from '@frontend/amp/pages/Article';
 import { extract as extractNAV } from '@frontend/model/extract-nav';
 import { AnalyticsModel } from '@frontend/amp/components/Analytics';
 
-test.skip('rejects invalid AMP doc (to test validator)', async () => {
+test('rejects invalid AMP doc (to test validator)', async () => {
     const v = await validator.getInstance();
     const linkedData = [{}];
     const metadata = { description: '', canonicalURL: '' };
@@ -25,7 +25,7 @@ test.skip('rejects invalid AMP doc (to test validator)', async () => {
 // TODO failing because fixture still models blocks as nested array of elements
 // rather than a list of Block(s) - that are objects with 'id' and 'elements'
 // fields. This then errors in Elements.tsx.
-test.skip('produces valid AMP doc', async () => {
+test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
     const config = CAPI.config;
     const nav = extractNAV(CAPI.nav);
