@@ -6,7 +6,6 @@
     "license": "Apache-2.0",
     "dependencies": {
         "@emotion/core": "^10.0.5",
-        "@guardian/pasteup": "2.0.0-alpha.2",
         "@guardian/src-foundations": "^0.0.14",
         "@types/ajv": "^1.0.0",
         "@types/lodash.escape": "^4.0.6",

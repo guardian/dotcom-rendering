@@ -71,15 +71,7 @@ const zipBundle = () => {
     log(' - zipping bundle');
     return execa(
         'zip',
-        [
-            '--recurse-paths',
-            'rendering.zip',
-            '.',
-            '--exclude',
-            '.git/**\\*',
-            '**/design/**\\*',
-            '**/pasteup/**\\*',
-        ],
+        ['--recurse-paths', 'rendering.zip', '.', '--exclude', '.git/**\\*'],
         {
             shell: true,
         },
