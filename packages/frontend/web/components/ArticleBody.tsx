@@ -14,9 +14,11 @@ import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
-import { SharingIcons } from './ShareIcons';
-import { SubMetaLinksList } from './SubMetaLinksList';
-import { SyndicationButton } from './SyndicationButton';
+import { SharingIcons } from '@frontend/web/components/ShareIcons';
+import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
+import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
+import { ArticleStandfirst } from '@frontend/web/components/ArticleStandfirst';
+import { Hide } from '@frontend/web/components/Hide';
 
 const pillarColours = pillarMap(
     pillar =>
@@ -164,7 +166,8 @@ const maxWidth = css`
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     config: ConfigType;
-}> = ({ CAPI, config }) => {
+    isShowcase?: boolean;
+}> = ({ CAPI, config, isShowcase }) => {
     const hasSubMetaSectionLinks = CAPI.subMetaSectionLinks.length > 0;
     const hasSubMetaKeywordLinks = CAPI.subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
@@ -175,6 +178,16 @@ export const ArticleBody: React.FC<{
                     [immersiveBodyStyle]: CAPI.isImmersive,
                 })}
             >
+                {isShowcase && (
+                    // For articles with main media set as showcase, the standfirst sometimes
+                    // sits inside here so that the right column advert does not get pushed down
+                    <Hide when="below" breakpoint="leftCol">
+                        <ArticleStandfirst
+                            pillar={CAPI.pillar}
+                            standfirst={CAPI.standfirst}
+                        />
+                    </Hide>
+                )}
                 <ArticleRenderer
                     elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
                     pillar={CAPI.pillar}
