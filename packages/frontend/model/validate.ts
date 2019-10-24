@@ -24,7 +24,7 @@ export const validateAsCAPIType = (data: any): CAPIType => {
             2,
         )}`;
 
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV !== 'production') {
             throw new TypeError(errorMessage);
         } else {
             logger.error(errorMessage);
