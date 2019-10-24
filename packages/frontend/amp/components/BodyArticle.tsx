@@ -11,6 +11,7 @@ import { palette, until } from '@guardian/src-foundations';
 import { WithAds } from '@frontend/amp/components/WithAds';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
+import { buildAdTargeting } from '@frontend/amp/lib/ad-targeting';
 
 const body = (pillar: Pillar, designType: DesignType) => {
     const defaultStyles: DesignTypesObj = designTypeDefault(
@@ -57,23 +58,6 @@ const adStyle = css`
         margin: 0 auto 12px;
     }
 `;
-
-const buildAdTargeting = (config: ConfigType): AdTargeting => {
-    const customParams = {
-        sens: config.isSensitive ? 't' : 'f',
-        si: 'f',
-        vl: config.videoDuration,
-        cc: config.edition,
-        s: config.section,
-        inskin: 'f',
-        ...config.sharedAdTargeting,
-        pa: 'f',
-    };
-    return {
-        customParams,
-        adUnit: config.adUnit,
-    };
-};
 
 export const Body: React.FC<{
     pillar: Pillar;
