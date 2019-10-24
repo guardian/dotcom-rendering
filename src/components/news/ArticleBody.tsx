@@ -19,6 +19,11 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         ${sidePadding}
     }
 
+    iframe {
+        width: 100%;
+        border: none;
+    }
+
     ${commonArticleStyles(pillarStyles)}
 `;
 
