@@ -112,48 +112,6 @@
 
     Array.from(document.querySelectorAll('.interactive iframe')).forEach(boot);
 
-
-    // correctly size body images
-    window.addEventListener('resize', formatBodyImages);
-
-    function formatBodyImages() {
-      Array.from(document.querySelectorAll('figure.element-image img')).map(image => {
-        if (!image.getAttribute('originalHeight')) {
-          image.setAttribute('originalHeight', image.getAttribute('height'));
-          image.setAttribute('originalWidth', image.getAttribute('width'));
-        }
-
-        image.height = getDesiredImageHeight(image);
-      });
-
-      function getDesiredImageHeight(img) {
-          const imgWidth = img.getAttribute('originalWidth');
-          const imgHeight = img.getAttribute('originalHeight');
-          const figInnerWidth = getElementOffset(img).width;
-          const scale = figInnerWidth / imgWidth;
-          const newHeight = imgHeight * scale;
-
-          return Math.round(newHeight);
-      }
-
-      function getElementOffset(elem) {
-          const bcr = elem.getBoundingClientRect();
-          const scroll = {
-              x: window.pageXOffset || document.documentElement.scrollLeft,
-              y: window.pageYOffset || document.documentElement.scrollTop
-          }
-          const width = elem.offsetWidth;
-          const height = elem.offsetHeight;
-          const top = bcr.top + scroll.y - Math.max(0, document.body.clientTop);
-          const left = bcr.left + scroll.x - Math.max(0, document.body.clientLeft);
-
-          return { top, left, height, width }
-      }
-    }
-
-    formatBodyImages();
-
-    // dark mode helpers
     function isDarkMode() {
       if (window.matchMedia) {
         return window.matchMedia('(prefers-color-scheme: dark)').matches;

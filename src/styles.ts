@@ -123,14 +123,14 @@ export const icons = "font-family: 'Guardian Icons';";
 export const darkModeCss = (
     styles: TemplateStringsArray,
     ...placeholders: string[]
-): SerializedStyles =>
-    css`
-        @media (prefers-color-scheme: dark) {
-            ${styles.map((style, index) => `${style}${placeholders[index]}`)
-                .filter(Boolean)
-                .join('')}
+): SerializedStyles => css`
+    @media (prefers-color-scheme: dark) {
+        ${styles
+            .map((style, i) => `${style}${placeholders[i] ? placeholders[i] : ''}`)
+            .join('')
         }
-    `
+    }
+`;
 
 // Styles shared across article types
 export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
