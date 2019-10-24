@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles, basePx } from '../../styles';
-import { palette } from '@guardian/src-foundations'
+import { palette, until } from '@guardian/src-foundations'
 import { render } from "../../renderBlocks";
 import { Block } from 'types/capi-thrift-models';
 
@@ -13,10 +13,12 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         width: 13.75rem;
         margin: 8px 24px 8px 0;
     }
-
-    figure {
-        margin-left: ${basePx(-1)};
-        margin-right: ${basePx(-1)};
+    
+    ${until.wide} {
+        figure {
+            margin-left: ${basePx(-1)};
+            margin-right: ${basePx(-1)};
+        }
     }
 
     ${sidePadding}
