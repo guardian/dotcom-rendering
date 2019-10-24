@@ -52,6 +52,8 @@ const BorderStyles = css`
 
 const HeaderImageStyles = css`
     figure {
+        margin: 0;
+
         ${wide} {
             margin: 0 auto;
         }

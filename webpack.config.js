@@ -3,7 +3,14 @@
 const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
+const glob = require("glob");
 
+
+// ----- Functions ----- //
+
+const testEntryPoints = (entries, current) => ({
+    ...entries, [current.split('/').pop().split('.test.ts')[0]]: current
+})
 
 // ----- Plugins ----- //
 
@@ -34,32 +41,12 @@ const resolve = {
     ],
 };
 
-
-// ----- Configs ----- //
-
-const serverConfig = env => ({
-    name: 'server',
-    mode: 'development',
-    entry: 'server.ts',
+const nodeConfig = {
     target: 'node',
-    node: {
-        __dirname: false,
-    },
-    output: {
-        filename: 'server.js',
-    },
     resolve,
-    watch: env && env.watch,
-    watchOptions: {
-        ignored: /node_modules/,
-    },
-    plugins: [
-        // Reloads the server on change.
-        (env && env.watch) ? new LaunchServerPlugin() : null,
-        // Does not try to require the 'canvas' package,
-        // an optional dependency of jsdom that we aren't using.
-        new webpack.IgnorePlugin(/^canvas$/),
-    ].filter(p => p !== null),
+    // Does not try to require the 'canvas' package,
+    // an optional dependency of jsdom that we aren't using.
+    plugins: [ new webpack.IgnorePlugin(/^canvas$/) ],
     module: {
         rules: [
             {
@@ -81,7 +68,28 @@ const serverConfig = env => ({
                 ],
             },
         ]
-    }
+    },
+};
+
+
+// ----- Configs ----- //
+
+const serverConfig = env => ({
+    name: 'server',
+    mode: 'development',
+    entry: 'server.ts',
+    node: {
+        __dirname: false,
+    },
+    output: {
+        filename: 'server.js',
+    },
+    watch: env && env.watch,
+    watchOptions: {
+        ignored: /node_modules/,
+    },
+    ...nodeConfig,
+    plugins: (env && env.watch) ? [ ...nodeConfig.plugins, new LaunchServerPlugin() ] : nodeConfig.plugins,
 });
 
 const clientConfig = {
@@ -121,4 +129,17 @@ const clientConfig = {
     }
 };
 
-module.exports = [ serverConfig, clientConfig ];
+const testConfig = {
+    name: 'tests',
+    mode: 'development',
+    entry: glob.sync("./**/*test.ts", { ignore: './node_modules/**' }).reduce(testEntryPoints, {}),
+    output: {
+        filename: '[name].test.js',
+    },
+    stats: 'errors-warnings',
+    ...nodeConfig,
+};
+
+// ----- Exports ----- //
+
+module.exports = [ serverConfig, clientConfig, testConfig ];
