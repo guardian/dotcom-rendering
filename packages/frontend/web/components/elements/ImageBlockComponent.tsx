@@ -77,7 +77,7 @@ const imageCss = {
     `,
 
     // TODO:
-    'half-width': css``,
+    halfWidth: css``,
 };
 
 const decidePosition = (role: RoleType) => {
@@ -92,8 +92,8 @@ const decidePosition = (role: RoleType) => {
             return imageCss.showcase;
         case 'thumbnail':
             return imageCss.thumbnail;
-        case 'half-width':
-            return imageCss['half-width'];
+        case 'halfWidth':
+            return imageCss.halfWidth;
         default:
             return imageCss.inline;
     }
