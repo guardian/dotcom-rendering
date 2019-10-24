@@ -14,8 +14,7 @@ export const sidePadding = css`
     ${wide} {
         padding-left: 0;
         padding-right: 0;
-    }
-}`;
+    }`;
 
 export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
 
