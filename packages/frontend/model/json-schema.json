@@ -171,6 +171,18 @@
         "isAdFreeUser": {
             "type": "boolean"
         },
+        "openGraphData": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "twitterData": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
         "webURL": {
             "type": "string"
         },
@@ -245,6 +257,7 @@
         "main",
         "mainMediaElements",
         "nav",
+        "openGraphData",
         "pageFooter",
         "pageId",
         "pillar",
@@ -257,6 +270,7 @@
         "subMetaSectionLinks",
         "tags",
         "trailText",
+        "twitterData",
         "webPublicationDate",
         "webPublicationDateDisplay",
         "webTitle",
@@ -474,7 +488,7 @@
         },
         "RoleType": {
             "enum": [
-                "half-width",
+                "halfWidth",
                 "immersive",
                 "inline",
                 "showcase",

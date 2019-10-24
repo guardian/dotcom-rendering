@@ -33,7 +33,7 @@ type RoleType =
     | 'showcase'
     | 'inline'
     | 'thumbnail'
-    | 'half-width';
+    | 'halfWidth';
 
 interface ImageBlockElement {
     _type: 'model.dotcomrendering.pageElements.ImageBlockElement';
