@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
 import schema from '@frontend/model/json-schema.json';
+import { logger } from '../app/logging';
 
 const options: Ajv.Options = {
     verbose: false,
@@ -18,10 +19,8 @@ export const validateAsCAPIType = (data: any): CAPIType => {
     if (!isValid) {
         const url = data.webURL || 'unknown url';
 
-        throw new TypeError(
-            `Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validate.errors, null, 2)}`,
-        );
+        logger.error(`Unable to validate request body for url ${url}.\n
+        ${JSON.stringify(validate.errors, null, 2)}`);
     }
 
     return data as CAPIType;
