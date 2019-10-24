@@ -234,7 +234,6 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     }
 
     p {
-        hyphens: auto;
         overflow-wrap: break-word;
     }
 
