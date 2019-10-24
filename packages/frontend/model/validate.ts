@@ -18,9 +18,17 @@ export const validateAsCAPIType = (data: any): CAPIType => {
 
     if (!isValid) {
         const url = data.webURL || 'unknown url';
+        const errorMessage = `Unable to validate request body for url ${url}.\n${JSON.stringify(
+            validate.errors,
+            null,
+            2,
+        )}`;
 
-        logger.error(`Unable to validate request body for url ${url}.\n
-        ${JSON.stringify(validate.errors, null, 2)}`);
+        if (process.env.NODE_ENV === 'development') {
+            throw new TypeError(errorMessage);
+        } else {
+            logger.error(errorMessage);
+        }
     }
 
     return data as CAPIType;
