@@ -874,6 +874,11 @@
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.0.14.tgz#863c5a5fec7e7c30ed387a4d901fb7173de64087"
   integrity sha512-bnVnL5Jc34PnrEySP/dmfb6iG1Sx4dXEI27LcLT+OjCjbW7OU13Q4w9BLLIO/t9o4YskWMy6vZLqfippJtUzYw==
 
+"@guardian/src-utilities@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-utilities/-/src-utilities-0.1.1.tgz#68e377ee5323ac2de4c12ecb4f40f0abee375e5a"
+  integrity sha512-BAUMxLXx1Ab00VoLliPmJrFCt/q53yPgz7HZRJQmU5fOYB49nVeJpM3kKuyuLmNxHIfqWsPq5hAsaWqaY4KiTQ==
+
 "@hapi/address@2.x.x":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.2.tgz#1c794cd6dbf2354d1eb1ef10e0303f573e1c7222"
