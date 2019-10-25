@@ -70,8 +70,7 @@ export class Nav extends Component<
         const { showMainMenu, isSignedIn } = this.state;
         const mainMenuId = 'main-menu';
 
-        // TODO push subnav into nav for now as really part of it
-        // also separate PR to do centering stuff!
+        // TODO separate PR to do centering stuff!
         return (
             <div>
                 <nav
