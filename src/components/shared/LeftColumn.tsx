@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { css, SerializedStyles } from '@emotion/core';
-import { phablet, leftCol } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 import { wideContentWidth, wideColumnWidth } from 'styles';
 
 
@@ -12,26 +12,26 @@ import { wideContentWidth, wideColumnWidth } from 'styles';
 const LeftColumnStyles = css`
     padding: 8px;
 
-    ${phablet} {
+    ${from.phablet} {
         display: flex;
     }
 
     .column-content {
-        ${phablet} {
+        ${from.phablet} {
             width: 33%;
         }
 
-        ${leftCol} {
+        ${from.leftCol} {
             width: ${wideColumnWidth}px;
         }
     }
 
     .main-content {        
-        ${phablet} {
+        ${from.phablet} {
             width: 67%;
         }
 
-        ${leftCol} {
+        ${from.leftCol} {
             width: ${wideContentWidth}px;
         }
     }
