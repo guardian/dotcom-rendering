@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { from, wide, until, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from, between, until } from '@guardian/src-utilities';
 
 const leftWidth = css`
     padding-right: 10px;
@@ -9,14 +10,14 @@ const leftWidth = css`
         display: none;
     }
 
-    ${from.leftCol.until.wide} {
+    ${between.leftCol.and.wide} {
         /* above 1140, below 1300 */
         flex-basis: 151px;
         flex-grow: 0;
         flex-shrink: 0;
     }
 
-    ${wide} {
+    ${from.wide} {
         /* above 1300 */
         flex-basis: 230px;
         flex-grow: 0;

@@ -1,37 +1,40 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import {
-    desktop,
-    leftCol,
-    wide,
-    from,
-    headline,
-    palette,
-} from '@guardian/src-foundations';
+import { headline, palette } from '@guardian/src-foundations';
+import { from, between } from '@guardian/src-utilities';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 import { useApi } from '@frontend/web/components/lib/api';
 
 import { MostViewedGrid } from './MostViewedGrid';
 
-const stackBelow = (breakpoint: string) => css`
+type Breakpoint =
+    | 'mobileMedium'
+    | 'mobileLandscape'
+    | 'phablet'
+    | 'tablet'
+    | 'desktop'
+    | 'leftCol'
+    | 'wide';
+
+const stackBelow = (breakpoint: Breakpoint) => css`
     display: flex;
     flex-direction: column;
 
-    ${breakpoint} {
+    ${from[breakpoint]} {
         flex-direction: row;
     }
 `;
 
 const asideWidth = css`
-    ${from.leftCol.until.wide} {
+    ${between.leftCol.and.wide} {
         /* above 1140, below 1300 */
         flex-basis: 151px;
         flex-grow: 0;
         flex-shrink: 0;
     }
 
-    ${wide} {
+    ${from.wide} {
         /* above 1300 */
         flex-basis: 230px;
         flex-grow: 0;
@@ -47,12 +50,12 @@ const headingStyles = css`
     padding-bottom: 14px;
     padding-top: 3px;
 
-    ${leftCol} {
+    ${from.leftCol} {
         ${headline({ level: 3 })};
         font-weight: 900;
     }
 
-    ${wide} {
+    ${from.wide} {
         font-weight: 900;
     }
 `;
@@ -73,7 +76,7 @@ const mostPopularAdStyle = css`
         min-width: 300px;
         min-height: 274px;
         text-align: center;
-        ${desktop} {
+        ${from.desktop} {
             margin: 0;
             width: auto;
         }
@@ -127,14 +130,14 @@ export const MostViewed = ({ config, sectionName, pillar }: Props) => {
         return (
             <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
                 <div
-                    className={cx(stackBelow(leftCol), mostPopularAdStyle)}
+                    className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
                     data-link-name={'most-viewed'}
                     data-component={'most-viewed'}
                 >
                     <section className={asideWidth}>
                         <h2 className={headingStyles}>Most popular</h2>
                     </section>
-                    <section className={stackBelow(desktop)}>
+                    <section className={stackBelow('desktop')}>
                         <MostViewedGrid
                             data={data}
                             sectionName={sectionName}
