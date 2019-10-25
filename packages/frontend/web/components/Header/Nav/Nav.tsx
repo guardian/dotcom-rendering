@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import { clearFix } from '@frontend/lib/mixins';
-import { tablet, desktop, leftCol, wide } from '@guardian/src-foundations';
 
 import { Logo } from './Logo';
 import { EditionDropdown } from './EditionDropdown';
@@ -13,21 +12,7 @@ import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { getCookie } from '@frontend/web/browser/cookie';
 import { Hide } from '@frontend/web/components/Hide';
 
-const centered = css`
-    ${tablet} {
-        max-width: 740px;
-    }
-    ${desktop} {
-        max-width: 980px;
-    }
-    ${leftCol} {
-        max-width: 1140px;
-    }
-    ${wide} {
-        max-width: 1300px;
-    }
-    position: relative;
-    margin: 0 auto;
+const clearFixStyle = css`
     ${clearFix};
 `;
 
@@ -70,11 +55,10 @@ export class Nav extends Component<
         const { showMainMenu, isSignedIn } = this.state;
         const mainMenuId = 'main-menu';
 
-        // TODO separate PR to do centering stuff!
         return (
             <div>
                 <nav
-                    className={centered}
+                    className={clearFixStyle}
                     role="navigation"
                     aria-label="Guardian sections"
                     data-component="nav2"

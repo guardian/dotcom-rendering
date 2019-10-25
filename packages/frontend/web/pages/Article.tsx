@@ -7,6 +7,7 @@ import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { Section } from '@frontend/web/components/Section';
+import { HeaderAdSlot } from '@frontend/web/components/Header/HeaderAdSlot';
 
 import { DecideContent } from './DecideContent';
 import { CAPI } from '@root/fixtures/CAPI';
@@ -15,14 +16,25 @@ export const Article: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
-        <Header
-            nav={data.NAV}
-            pillar={data.CAPI.pillar}
-            edition={data.CAPI.editionId}
-            config={data.config}
-            isAdFreeUser={data.CAPI.isAdFreeUser}
-            shouldHideAds={data.CAPI.shouldHideAds}
-        />
+        <Section showTopBorder={false} showSideBorders={false} padded={false}>
+            <HeaderAdSlot
+                config={data.config}
+                isAdFreeUser={data.CAPI.isAdFreeUser}
+                shouldHideAds={data.CAPI.shouldHideAds}
+            />
+        </Section>
+        <Section
+            showTopBorder={false}
+            showSideBorders={false}
+            padded={false}
+            backgroundColour={palette.brand.main}
+        >
+            <Header
+                nav={data.NAV}
+                pillar={data.CAPI.pillar}
+                edition={data.CAPI.editionId}
+            />
+        </Section>
 
         <Section backgroundColour={palette.neutral[100]} padded={false}>
             <SubNav
