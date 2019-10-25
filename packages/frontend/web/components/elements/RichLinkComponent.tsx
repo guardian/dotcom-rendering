@@ -3,7 +3,12 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
-import { headline, textSans, palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+    palette,
+    desktop,
+} from '@guardian/src-foundations';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
 
@@ -45,10 +50,14 @@ const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkContainer = css`
-    width: 8.125rem;
+    width: 130px;
     float: left;
     margin-right: 20px;
     margin-bottom: 5px;
+    ${desktop} {
+        margin-left: -240px;
+        width: 220px;
+    }
 `;
 
 const richLinkTopBorder: (pillar: Pillar) => colour = pillar => {
@@ -80,6 +89,10 @@ const richLinkTitle = css`
     font-weight: 400;
     padding-top: 1px;
     padding-bottom: 1px;
+    ${desktop} {
+        ${headline({ level: 2 })};
+        padding-bottom: 5px;
+    }
 `;
 
 const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
@@ -104,6 +117,9 @@ const readMoreTextStyle = css`
 const byline = css`
     ${headline({ level: 1 })};
     font-style: italic;
+    ${desktop} {
+        ${headline({ level: 2 })};
+    }
 `;
 
 // !important is used here to override the default inline body image styling
@@ -119,6 +135,10 @@ const contributorImageWrapper = css`
     height: 5rem;
     margin-left: auto;
     margin-right: 0.3rem;
+    ${desktop} {
+        width: 8.5rem;
+        height: 8.5rem;
+    }
 `;
 
 const neutralBackground = css`
