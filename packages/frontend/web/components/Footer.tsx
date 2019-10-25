@@ -12,8 +12,8 @@ import {
 } from '@guardian/src-foundations';
 
 import { clearFix } from '@frontend/lib/mixins';
-import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
-import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
+import { Pillars, pillarWidth, firstPillarWidth } from './Header/Pillars';
+import { ReaderRevenueLinks } from './Header/ReaderRevenueLinks';
 import { BackToTop } from './BackToTop';
 
 // CSS vars

@@ -1,9 +1,9 @@
 import React from 'react';
 import { palette } from '@guardian/src-foundations';
 import { MostViewed } from '@frontend/web/components/MostViewed/MostViewed';
-import { Header } from '@frontend/web/components/Header/Header';
+import { Header } from '@root/packages/frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
-import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
+import { SubNav } from '@root/packages/frontend/web/components/Header/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { Section } from '@frontend/web/components/Section';
