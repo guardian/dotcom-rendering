@@ -6,7 +6,6 @@ import {
     tablet,
     desktop,
     mobileMedium,
-    mobileLandscape,
     until,
     leftCol,
     textSans,
@@ -16,17 +15,10 @@ import {
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
-const readerRevenueLinksStyles = css`
-    position: absolute;
-    left: 10px;
-    top: 33px;
-
-    ${mobileLandscape} {
-        left: 20px;
-    }
-
-    ${tablet} {
-        top: 0;
+const padded = css`
+    padding-left: 20px;
+    ${until.tablet} {
+        padding-top: 33px;
     }
 `;
 
@@ -133,13 +125,14 @@ export const ReaderRevenueLinks: React.FC<{
     };
     dataLinkNamePrefix: string;
     noResponsive: boolean;
-}> = ({ edition, urls, dataLinkNamePrefix, noResponsive }) => {
+    inHeader?: boolean;
+}> = ({ edition, urls, dataLinkNamePrefix, noResponsive, inHeader }) => {
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (
                 <>
                     {data && (
-                        <div className={readerRevenueLinksStyles}>
+                        <div className={cx(inHeader && padded)}>
                             <div
                                 className={cx({
                                     [hiddenUntilTablet]: !noResponsive,

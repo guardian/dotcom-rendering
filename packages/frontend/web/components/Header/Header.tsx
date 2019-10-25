@@ -59,6 +59,7 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
                     edition={edition}
                     dataLinkNamePrefix={'nav2 : '}
                     noResponsive={false}
+                    inHeader={true}
                 />
                 <Links isSignedIn={isSignedIn} />
                 <Nav pillar={pillar} nav={nav} />
