@@ -6,9 +6,9 @@ import {
     headline,
     palette,
     mobileLandscape,
-    until,
     visuallyHidden,
 } from '@guardian/src-foundations';
+import { until } from '@guardian/src-utilities';
 import { ReaderRevenueButton } from '@frontend/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`

@@ -1,12 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import {
-    leftCol,
-    until,
-    desktop,
-    wide,
-    tablet,
-} from '@guardian/src-foundations';
+import { leftCol, desktop, wide, tablet } from '@guardian/src-foundations';
+import { until } from '@guardian/src-utilities';
 import { labelStyles } from '@frontend/web/components/AdSlot';
 
 const articleContainer = css`

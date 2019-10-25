@@ -1,12 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import {
-    textSans,
-    visuallyHidden,
-    palette,
-    until,
-    tablet,
-} from '@guardian/src-foundations';
+import { textSans, palette, tablet } from '@guardian/src-foundations';
+import { until, visuallyHidden } from '@guardian/src-utilities';
 
 export interface Link {
     url: string;

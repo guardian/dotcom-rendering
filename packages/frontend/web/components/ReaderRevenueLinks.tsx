@@ -2,17 +2,9 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
-import {
-    tablet,
-    desktop,
-    mobileMedium,
-    mobileLandscape,
-    until,
-    leftCol,
-    textSans,
-    headline,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, headline, palette } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-utilities';
+
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
@@ -23,7 +15,7 @@ const padded = css`
     ${until.tablet} {
         padding-top: 33px;
     }
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         padding-left: 20px;
     }
 `;
@@ -34,11 +26,11 @@ const message = css`
     padding-top: 3px;
     margin-bottom: 3px;
 
-    ${desktop} {
+    ${from.desktop} {
         ${headline({ level: 3 })}
     }
 
-    ${leftCol} {
+    ${from.leftCol} {
         ${headline({ level: 5 })}
     }
 `;
@@ -59,7 +51,7 @@ const link = css`
     margin-right: 10px;
     margin-bottom: 6px;
 
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         padding-right: 34px;
     }
 
@@ -94,7 +86,7 @@ const hiddenUntilTablet = css`
 `;
 
 const hiddenFromTablet = css`
-    ${tablet} {
+    ${from.tablet} {
         display: none;
     }
 `;

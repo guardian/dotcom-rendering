@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
-import {
-    visuallyHidden,
-    headline,
-    palette,
-    tablet,
-    until,
-} from '@guardian/src-foundations';
+import { headline, palette } from '@guardian/src-foundations';
+import { from, until, visuallyHidden } from '@guardian/src-utilities';
 
 import { TabType, TrailType } from './MostViewed';
 import { MostViewedItem } from './MostViewedItem';
@@ -86,7 +81,7 @@ const gridContainer = css`
     grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
 
     /* Two column view */
-    ${tablet} {
+    ${from.tablet} {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto auto auto auto;
     }

@@ -1,21 +1,14 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-    until,
-    mobileMedium,
-    mobileLandscape,
-    desktop,
-    tablet,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-utilities';
 
 import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
 
 const showExpandedMenuStyles = css`
-    ${desktop} {
+    ${from.desktop} {
         display: block;
         overflow: visible;
     }
@@ -46,16 +39,16 @@ const mainMenu = css`
         right: 0;
         will-change: transform;
     }
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         margin-right: 29px;
     }
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         margin-right: 70px;
     }
-    ${tablet} {
+    ${from.tablet} {
         margin-right: 100px;
     }
-    ${desktop} {
+    ${from.desktop} {
         display: none;
         position: absolute;
         padding-bottom: 0;
