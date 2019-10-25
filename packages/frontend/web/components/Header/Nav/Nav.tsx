@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import { clearFix } from '@frontend/lib/mixins';
-import {
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-    mobileLandscape,
-    palette,
-} from '@guardian/src-foundations';
+import { tablet, desktop, leftCol, wide } from '@guardian/src-foundations';
 
 import { Logo } from './Logo';
 import { EditionDropdown } from './EditionDropdown';
@@ -36,20 +29,6 @@ const centered = css`
     position: relative;
     margin: 0 auto;
     ${clearFix};
-`;
-
-const readerRevenueLinks = css`
-    position: absolute;
-    left: 10px;
-    top: 33px;
-
-    ${mobileLandscape} {
-        left: 20px;
-    }
-
-    ${tablet} {
-        top: 0;
-    }
 `;
 
 interface Props {
@@ -115,14 +94,13 @@ export class Nav extends Component<
                         have been hardcoded to false. At some point
                         these need to be dynamic.
                     */}
-                    <div className={readerRevenueLinks}>
-                        <ReaderRevenueLinks
-                            urls={nav.readerRevenueLinks.header}
-                            edition={edition}
-                            dataLinkNamePrefix={'nav2 : '}
-                            noResponsive={false}
-                        />
-                    </div>
+
+                    <ReaderRevenueLinks
+                        urls={nav.readerRevenueLinks.header}
+                        edition={edition}
+                        dataLinkNamePrefix={'nav2 : '}
+                        noResponsive={false}
+                    />
                     <Links isSignedIn={isSignedIn} />
                     <Pillars
                         showMainMenu={showMainMenu}
