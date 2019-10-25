@@ -136,72 +136,63 @@ export const ReaderRevenueLinks: React.FC<{
     noResponsive: boolean;
 }> = ({ edition, urls, dataLinkNamePrefix, noResponsive }) => {
     return (
-        <div className={readerRevenueLinksStyles}>
-            <AsyncClientComponent f={shouldShow}>
-                {({ data }) => (
-                    <>
-                        {data && (
-                            <>
-                                <div
-                                    className={cx({
-                                        [hiddenUntilTablet]: !noResponsive,
-                                    })}
-                                >
-                                    <div className={message}>
-                                        Support The&nbsp;Guardian
-                                    </div>
-                                    <div className={subMessage}>
-                                        Available for everyone, funded by
-                                        readers
-                                    </div>
+        <AsyncClientComponent f={shouldShow}>
+            {({ data }) => (
+                <>
+                    {data && (
+                        <div className={readerRevenueLinksStyles}>
+                            <div
+                                className={cx({
+                                    [hiddenUntilTablet]: !noResponsive,
+                                })}
+                            >
+                                <div className={message}>
+                                    Support The&nbsp;Guardian
+                                </div>
+                                <div className={subMessage}>
+                                    Available for everyone, funded by readers
+                                </div>
+                                <RRButton
+                                    url={urls.contribute}
+                                    dataLinkNamePrefix={dataLinkNamePrefix}
+                                    dataLinkNameSuffix={'contribute-cta'}
+                                    linkText={'Contribute'}
+                                />
+                                <RRButton
+                                    url={urls.subscribe}
+                                    dataLinkNamePrefix={dataLinkNamePrefix}
+                                    dataLinkNameSuffix={'subscribe-cta'}
+                                    linkText={'Subscribe'}
+                                />
+                            </div>
+
+                            <div
+                                className={cx({
+                                    [hiddenFromTablet]: !noResponsive,
+                                    [hidden]: noResponsive,
+                                })}
+                            >
+                                {edition === 'UK' ? (
                                     <RRButton
                                         url={urls.contribute}
                                         dataLinkNamePrefix={dataLinkNamePrefix}
                                         dataLinkNameSuffix={'contribute-cta'}
                                         linkText={'Contribute'}
                                     />
+                                ) : (
                                     <RRButton
-                                        url={urls.subscribe}
+                                        url={urls.support}
                                         dataLinkNamePrefix={dataLinkNamePrefix}
-                                        dataLinkNameSuffix={'subscribe-cta'}
-                                        linkText={'Subscribe'}
+                                        dataLinkNameSuffix={'support-cta'}
+                                        linkText={'Support us'}
                                     />
-                                </div>
-
-                                <div
-                                    className={cx({
-                                        [hiddenFromTablet]: !noResponsive,
-                                        [hidden]: noResponsive,
-                                    })}
-                                >
-                                    {edition === 'UK' ? (
-                                        <RRButton
-                                            url={urls.contribute}
-                                            dataLinkNamePrefix={
-                                                dataLinkNamePrefix
-                                            }
-                                            dataLinkNameSuffix={
-                                                'contribute-cta'
-                                            }
-                                            linkText={'Contribute'}
-                                        />
-                                    ) : (
-                                        <RRButton
-                                            url={urls.support}
-                                            dataLinkNamePrefix={
-                                                dataLinkNamePrefix
-                                            }
-                                            dataLinkNameSuffix={'support-cta'}
-                                            linkText={'Support us'}
-                                        />
-                                    )}
-                                </div>
-                            </>
-                        )}
-                    </>
-                )}
-            </AsyncClientComponent>
-        </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </>
+            )}
+        </AsyncClientComponent>
     );
 };
 
