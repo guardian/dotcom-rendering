@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { MainMenuToggle } from '../MainMenuToggle/MainMenuToggle';
+import { ExpandedMenuToggle } from '../ExpandedMenuToggle/ExpandedMenuToggle';
 import {
     until,
     mobileMedium,
@@ -13,7 +13,7 @@ import {
 } from '@guardian/src-foundations';
 import { Columns } from './Columns';
 
-const showMenuStyles = css`
+const showExpandedMenuStyles = css`
     ${desktop} {
         display: block;
         overflow: visible;
@@ -73,25 +73,27 @@ const mainMenu = css`
     }
 `;
 
-export const MainMenu: React.FC<{
+export const ExpandedMenu: React.FC<{
     id: string;
     nav: NavType;
-    showMenu: boolean;
-    toggleMenu: (value: boolean) => void;
-}> = ({ id, nav, showMenu, toggleMenu }) => {
+    showExpandedMenu: boolean;
+    toggleExpandedMenu: (value: boolean) => void;
+}> = ({ id, nav, showExpandedMenu, toggleExpandedMenu }) => {
     return (
         <>
-            <MainMenuToggle
-                showMainMenu={showMenu}
-                toggleMainMenu={toggleMenu}
+            <ExpandedMenuToggle
+                showExpandedMenu={showExpandedMenu}
+                toggleExpandedMenu={toggleExpandedMenu}
                 ariaControls={id}
             />
             <div
-                className={cx(mainMenu, { [showMenuStyles]: showMenu })}
-                aria-hidden={!showMenu}
+                className={cx(mainMenu, {
+                    [showExpandedMenuStyles]: showExpandedMenu,
+                })}
+                aria-hidden={!showExpandedMenu}
                 id={id}
             >
-                {showMenu && <Columns nav={nav} />}
+                {showExpandedMenu && <Columns nav={nav} />}
             </div>
         </>
     );

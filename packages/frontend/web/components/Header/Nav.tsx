@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import { Pillars } from '../../Pillars';
-import { MainMenu } from '../MainMenu/MainMenu';
+import { Pillars } from '../Pillars';
+import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 import { clearFix } from '@frontend/lib/mixins';
 
@@ -14,7 +14,7 @@ type Props = {
     nav: NavType;
 };
 export const Nav = ({ pillar, nav }: Props) => {
-    const [showMenu, toggleMenu] = useState<boolean>(false);
+    const [showExpandedMenu, toggleExpandedMenu] = useState<boolean>(false);
     const mainMenuId = 'main-menu';
 
     return (
@@ -25,15 +25,15 @@ export const Nav = ({ pillar, nav }: Props) => {
             data-component="nav2"
         >
             <Pillars
-                mainMenuOpen={showMenu}
+                mainMenuOpen={showExpandedMenu}
                 pillars={nav.pillars}
                 pillar={pillar}
             />
-            <MainMenu
+            <ExpandedMenu
                 id={mainMenuId}
                 nav={nav}
-                showMenu={showMenu}
-                toggleMenu={toggleMenu}
+                showExpandedMenu={showExpandedMenu}
+                toggleExpandedMenu={toggleExpandedMenu}
             />
         </nav>
     );
