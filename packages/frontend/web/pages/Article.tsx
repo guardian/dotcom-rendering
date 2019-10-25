@@ -7,7 +7,7 @@ import { SubNav } from '@root/packages/frontend/web/components/Header/SubNav/Sub
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { Section } from '@frontend/web/components/Section';
-import { HeaderAdSlot } from '@frontend/web/components/Header/HeaderAdSlot';
+import { HeaderAdSlot } from '@root/packages/frontend/web/components/HeaderAdSlot';
 
 import { DecideContent } from './DecideContent';
 import { CAPI } from '@root/fixtures/CAPI';
