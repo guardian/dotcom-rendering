@@ -1,21 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { headline, palette } from '@guardian/src-foundations';
-import { from, between } from '@guardian/src-utilities';
+import { from, between, Breakpoint } from '@guardian/src-utilities';
 import { namedAdSlotParameters } from '@frontend/model/advertisement';
 import { AdSlot, labelStyles } from '@frontend/web/components/AdSlot';
 import { useApi } from '@frontend/web/components/lib/api';
 
 import { MostViewedGrid } from './MostViewedGrid';
-
-type Breakpoint =
-    | 'mobileMedium'
-    | 'mobileLandscape'
-    | 'phablet'
-    | 'tablet'
-    | 'desktop'
-    | 'leftCol'
-    | 'wide';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
     display: flex;
