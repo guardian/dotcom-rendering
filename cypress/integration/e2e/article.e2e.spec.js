@@ -15,11 +15,9 @@ describe('E2E Page rendering', function() {
 
             cy.wait('@getMostRead').then(xhr => {
                 expect(xhr.response.body.length).to.be.at.least(1);
-                expect(xhr.response.body.length).to.be.at.least(2);
                 expect(xhr.status).to.be.equal(200);
 
                 cy.contains('Most popular');
-                cy.contains('Across The');
             });
 
             cy.wait('@getShareCount').then(xhr => {
