@@ -1,4 +1,5 @@
-import { palette, until, from, wide, phablet } from '@guardian/src-foundations';
+import { palette, } from '@guardian/src-foundations';
+import { from, until, between } from '@guardian/src-utilities';
 import { css, SerializedStyles } from '@emotion/core'
 
 const BASE_PADDING = 8;
@@ -11,12 +12,12 @@ export const sidePadding = css`
     padding-left: ${basePx(1)};
     padding-right: ${basePx(1)};
 
-    ${wide} {
+    ${from.wide} {
         padding-left: 0;
         padding-right: 0;
     }`;
 
-export type PillarId = 'pillar/news'|'pillar/opinion'|'pillar/sport'|'pillar/arts'|'pillar/lifestyle';
+export type PillarId = 'pillar/news' | 'pillar/opinion' | 'pillar/sport' | 'pillar/arts' | 'pillar/lifestyle';
 
 export interface PillarStyles {
     kicker: string;
@@ -73,7 +74,7 @@ export function getPillarStyles(pillarId: PillarId): PillarStyles {
     return pillarColours[pillar];
 }
 
-export const bulletStyles = (kicker: string, opacity = 1): string =>  `
+export const bulletStyles = (kicker: string, opacity = 1): string => `
     .bullet {
         color: transparent;
 
@@ -125,9 +126,9 @@ export const darkModeCss = (
 ): SerializedStyles => css`
     @media (prefers-color-scheme: dark) {
         ${styles
-            .map((style, i) => `${style}${placeholders[i] ? placeholders[i] : ''}`)
-            .join('')
-        }
+        .map((style, i) => `${style}${placeholders[i] ? placeholders[i] : ''}`)
+        .join('')
+    }
     }
 `;
 
@@ -142,7 +143,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     }
 
     .image {
-        ${from.phablet.until.wide} {
+        ${between.phablet.and.wide} {
             padding-left: ${basePx(1)};
             padding-right: ${basePx(1)};
         }
@@ -244,11 +245,11 @@ export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
 
 export const articleWidthStyles = css`
-    ${wide} {
+    ${from.wide} {
         margin: 0 auto;
     }
 
-    ${phablet} {
+    ${from.phablet} {
         width: ${wideContentWidth}px;
     }
 `;
