@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles, basePx } from '../../styles';
-import { palette, until } from '@guardian/src-foundations'
+import { palette } from '@guardian/src-foundations'
+import { until } from '@guardian/src-utilities'
 import { render } from "../../renderBlocks";
 import { Block } from 'types/capi-thrift-models';
 

@@ -13,14 +13,15 @@ import { PillarStyles, PillarId, wideColumnWidth, baseMultiply } from 'styles';
 import { Series, Contributor } from '../../types/Capi';
 import { Tag, Block, BlockElement } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette, wide } from '@guardian/src-foundations'
+import { palette } from '@guardian/src-foundations'
+import { from } from '@guardian/src-utilities'
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${palette.neutral[97]};
 `;
 
 const BorderStyles = css`
-    ${wide} {
+    ${from.wide} {
         width: 1200px;
         margin: 0 auto;
     }
@@ -29,14 +30,14 @@ const BorderStyles = css`
 const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     background: ${pillarStyles.liveblogBackground};
 
-    ${wide} {
+    ${from.wide} {
         padding-bottom: 12px;
     }
 
     figure {
         margin: 0;
 
-        ${wide} {
+        ${from.wide} {
             margin-left: ${wideColumnWidth + baseMultiply(1)}px;
         }
     }
@@ -75,9 +76,9 @@ const LiveblogArticle = ({
 }: LiveblogArticleProps): JSX.Element =>
     <main css={LiveblogArticleStyles}>
         <div css={BorderStyles}>
-            <LiveblogSeries series={series} pillarStyles={pillarStyles}/>
-            <LiveblogHeadline headline={headline} pillarStyles={pillarStyles}/>
-            <LiveblogStandfirst standfirst={standfirst} pillarStyles={pillarStyles}/>
+            <LiveblogSeries series={series} pillarStyles={pillarStyles} />
+            <LiveblogHeadline headline={headline} pillarStyles={pillarStyles} />
+            <LiveblogStandfirst standfirst={standfirst} pillarStyles={pillarStyles} />
             <LiveblogByline
                 byline={bylineHtml}
                 pillarStyles={pillarStyles}
@@ -91,13 +92,13 @@ const LiveblogArticle = ({
                 imageSalt={imageSalt}
                 className={HeaderImageStyles(pillarStyles)}
             />
-            <LiveblogKeyEvents bodyElements={bodyElements} pillarStyles={pillarStyles}/>
+            <LiveblogKeyEvents bodyElements={bodyElements} pillarStyles={pillarStyles} />
             <LiveblogBody
                 bodyElements={bodyElements}
                 pillarStyles={pillarStyles}
                 imageSalt={imageSalt}
             />
-            <Tags tags={tags} background={palette.neutral[93]}/>
+            <Tags tags={tags} background={palette.neutral[93]} />
         </div>
     </main>
 
