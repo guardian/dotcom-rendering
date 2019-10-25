@@ -6,6 +6,7 @@ import {
     tablet,
     desktop,
     mobileMedium,
+    mobileLandscape,
     until,
     leftCol,
     textSans,
@@ -16,9 +17,14 @@ import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
 const padded = css`
-    padding-left: 20px;
+    ${until.mobileLandscape} {
+        padding-left: 10px;
+    }
     ${until.tablet} {
         padding-top: 33px;
+    }
+    ${mobileLandscape} {
+        padding-left: 20px;
     }
 `;
 
