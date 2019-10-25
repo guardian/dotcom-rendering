@@ -8,21 +8,8 @@ import { ArticleRight } from '@frontend/web/components/ArticleRight';
 import { ArticleTitle } from '@frontend/web/components/ArticleTitle';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { ArticleMeta } from '@frontend/web/components/ArticleMeta';
-
-function hasShowcase(elements: CAPIElement[]) {
-    function isShowcase(element: CAPIElement) {
-        switch (element._type) {
-            case 'model.dotcomrendering.pageElements.ImageBlockElement':
-                return element.role === 'showcase';
-            default:
-                return false;
-        }
-    }
-
-    // Return true is any element in the array is an ImageBlockElement
-    // with the 'showcase' role
-    return elements.find(isShowcase);
-}
+import { Hide } from '@frontend/web/components/Hide';
+import { hasShowcase } from '@frontend/web/components/lib/layoutHelpers';
 interface Props {
     CAPI: CAPIType;
     config: ConfigType;
@@ -30,20 +17,38 @@ interface Props {
 
 export const Content = ({ CAPI, config }: Props) => {
     if (hasShowcase(CAPI.mainMediaElements)) {
-        // TODO: This layout should be updated to support showcase images
         return (
             <Flex>
                 <ArticleLeft>
-                    <ArticleTitle CAPI={CAPI} fallbackToSection={true} />
+                    <ArticleTitle CAPI={CAPI} />
                     <ArticleMeta CAPI={CAPI} config={config} />
                 </ArticleLeft>
                 <ArticleContainer>
-                    <ArticleHeader CAPI={CAPI} config={config} />
-                    <ArticleBody CAPI={CAPI} config={config} />
+                    {/* When BELOW leftCol we display the header in this position, at the top of the page */}
+                    <Hide when="below" breakpoint="leftCol">
+                        <ArticleHeader
+                            CAPI={CAPI}
+                            config={config}
+                            isShowcase={true}
+                        />
+                    </Hide>
+                    <Flex>
+                        <div>
+                            {/* When ABOVE leftCol we display the header in this position, above the article body, underneath the full width image */}
+                            <Hide when="above" breakpoint="leftCol">
+                                <ArticleHeader CAPI={CAPI} config={config} />
+                            </Hide>
+                            <ArticleBody
+                                CAPI={CAPI}
+                                config={config}
+                                isShowcase={true}
+                            />
+                        </div>
+                        <ArticleRight>
+                            <StickyAd config={config} />
+                        </ArticleRight>
+                    </Flex>
                 </ArticleContainer>
-                <ArticleRight>
-                    <StickyAd config={config} />
-                </ArticleRight>
             </Flex>
         );
     }
@@ -51,7 +56,7 @@ export const Content = ({ CAPI, config }: Props) => {
     return (
         <Flex>
             <ArticleLeft>
-                <ArticleTitle CAPI={CAPI} fallbackToSection={true} />
+                <ArticleTitle CAPI={CAPI} />
                 <ArticleMeta CAPI={CAPI} config={config} />
             </ArticleLeft>
             <ArticleContainer>

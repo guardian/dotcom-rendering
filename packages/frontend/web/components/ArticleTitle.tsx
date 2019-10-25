@@ -10,11 +10,10 @@ const sectionStyles = css`
 
 type Props = {
     CAPI: CAPIType;
-    fallbackToSection: boolean;
 };
 
-export const ArticleTitle = ({ CAPI, fallbackToSection }: Props) => (
+export const ArticleTitle = ({ CAPI }: Props) => (
     <div className={sectionStyles}>
-        <SeriesSectionLink CAPI={CAPI} fallbackToSection={fallbackToSection} />
+        <SeriesSectionLink CAPI={CAPI} fallbackToSection={true} />
     </div>
 );

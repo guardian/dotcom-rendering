@@ -32,9 +32,6 @@ const imageCss = {
     // TODO: immersive is pending review of different article types
     immersive: css``,
 
-    // TODO: showcase is only a partial implementation as sometimes showcase images
-    //       appear differently based on where they appear in the article
-    //       See top image for: https://www.theguardian.com/stage/2019/oct/01/hammed-animashaun-nick-hytner-dream-master-harold-and-the-boys-national-theatre-london
     showcase: css`
         position: relative;
         margin-top: 16px;
