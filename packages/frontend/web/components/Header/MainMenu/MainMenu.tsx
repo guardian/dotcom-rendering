@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
 
 import { MainMenuToggle } from '../MainMenuToggle/MainMenuToggle';
@@ -76,8 +76,9 @@ const mainMenu = css`
 export const MainMenu: React.FC<{
     id: string;
     nav: NavType;
-}> = ({ id, nav }) => {
-    const [showMenu, toggleMenu] = useState<boolean>(false);
+    showMenu: boolean;
+    toggleMenu: (value: boolean) => void;
+}> = ({ id, nav, showMenu, toggleMenu }) => {
     return (
         <>
             <MainMenuToggle

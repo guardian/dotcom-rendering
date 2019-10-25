@@ -223,7 +223,7 @@ export const Footer: React.FC<{
     <footer className={footer}>
         <div className={pillarWrap}>
             <Pillars
-                showMainMenu={false}
+                mainMenuOpen={false}
                 pillars={pillars}
                 pillar={pillar}
                 showLastPillarDivider={false}

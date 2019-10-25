@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 import { Pillars } from '../Pillars';
 import { MainMenu } from '../MainMenu/MainMenu';
@@ -14,8 +14,8 @@ type Props = {
     nav: NavType;
 };
 export const Nav = ({ pillar, nav }: Props) => {
+    const [showMenu, toggleMenu] = useState<boolean>(false);
     const mainMenuId = 'main-menu';
-    const showMainMenu = false;
 
     return (
         <nav
@@ -25,11 +25,16 @@ export const Nav = ({ pillar, nav }: Props) => {
             data-component="nav2"
         >
             <Pillars
-                showMainMenu={showMainMenu}
+                mainMenuOpen={showMenu}
                 pillars={nav.pillars}
                 pillar={pillar}
             />
-            <MainMenu id={mainMenuId} nav={nav} />
+            <MainMenu
+                id={mainMenuId}
+                nav={nav}
+                showMenu={showMenu}
+                toggleMenu={toggleMenu}
+            />
         </nav>
     );
 };
