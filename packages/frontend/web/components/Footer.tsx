@@ -12,7 +12,7 @@ import {
 } from '@guardian/src-foundations';
 
 import { clearFix } from '@frontend/lib/mixins';
-import { Pillars, pillarWidth, firstPillarWidth } from './Header/Pillars';
+import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { ReaderRevenueLinks } from './Header/ReaderRevenueLinks';
 import { BackToTop } from './BackToTop';
 

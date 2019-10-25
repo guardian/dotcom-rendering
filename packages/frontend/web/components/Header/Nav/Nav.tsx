@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import { Pillars } from '../Pillars';
+import { Pillars } from '../../Pillars';
 import { MainMenu } from '../MainMenu/MainMenu';
 
 import { clearFix } from '@frontend/lib/mixins';
