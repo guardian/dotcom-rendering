@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { ExpandedMenuToggle } from '../ExpandedMenuToggle/ExpandedMenuToggle';
+import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import {
     until,
     mobileMedium,

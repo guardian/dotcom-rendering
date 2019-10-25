@@ -69,8 +69,8 @@ const text = ({ showExpandedMenu }: { showExpandedMenu: boolean }) => css`
 `;
 
 interface Props {
-    toggleExpandedMenu: (value: boolean) => void;
     showExpandedMenu: boolean;
+    toggleExpandedMenu: (value: boolean) => void;
     ariaControls: string;
 }
 
