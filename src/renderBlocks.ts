@@ -82,6 +82,11 @@ const richLinkBlock = (url: string, linkText: string): ReactNode =>
         h('a', { href: url }, 'Read more'),
     );
 
+const interactiveBlock = (url: string): ReactNode =>
+    h('figure', { className: "interactive" },
+        h('iframe', { src: url, height: 500 }, null)
+    )
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function reactFromElement(element: any, imageSalt: string): Result<string, ReactNode> {
 
@@ -114,6 +119,13 @@ function reactFromElement(element: any, imageSalt: string): Result<string, React
                 return imageBlock(imageTypeData, assets, imageSalt)
             }, 'Failed to parse image');
 
+        case 'interactive':
+
+            return fromUnsafe(() => {
+                const { interactiveTypeData } = element;
+                return interactiveBlock(interactiveTypeData.iframeUrl)
+            }, 'Failed to parse interactive');
+
         default:
             return new Err(`Unexpected element type: ${element.type}`);
     }
@@ -135,7 +147,6 @@ function elementsToReact(elements: any, imageSalt: string): ParsedReact {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function render(bodyElements: any, imageSalt: string): Rendered {
-
     const reactNodes = elementsToReact(bodyElements, imageSalt);
     const main = h('article', null, ...reactNodes.nodes);
 

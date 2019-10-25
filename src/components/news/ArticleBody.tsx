@@ -14,7 +14,12 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         width: 13.75rem;
         margin: 8px 24px 8px 0;
     }
-    
+
+    iframe {
+        width: 100%;
+        border: none;
+    }
+
     ${until.wide} {
         figure {
             margin-left: ${basePx(-1)};

@@ -98,6 +98,24 @@
   <div id="root"></div>
   <script>
     // common.js
+    function boot(iframe) {
+      window.addEventListener('message', function({ data, source }) {
+        try {
+          if (source === iframe.contentWindow) {
+            const { type, value } = JSON.parse(data);
+
+            if (type === 'set-height') {
+              iframe.height = value;
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }, false);
+    }
+
+    Array.from(document.querySelectorAll('.interactive iframe')).forEach(boot);
+
     function isDarkMode() {
       if (window.matchMedia) {
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
