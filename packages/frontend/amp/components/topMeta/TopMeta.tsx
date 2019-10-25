@@ -9,10 +9,11 @@ export const TopMeta: React.SFC<{
     data: ArticleModel;
     designType: DesignType;
     pillar: Pillar;
-}> = ({ data, designType, pillar }) => {
+    adTargeting?: AdTargeting;
+}> = ({ data, designType, pillar, adTargeting }) => {
     // Note, liveblogs have a separate top meta - see TopMetaLiveblog
     const defaultTopMeta: DesignTypesObj = designTypeDefault(
-        <TopMetaNews articleData={data} />,
+        <TopMetaNews articleData={data} adTargeting={adTargeting} />,
     );
 
     // Extend defaultTopMeta with custom topMeta for some designTypes

@@ -28,6 +28,7 @@ export const Elements = (
     elements: CAPIElement[],
     pillar: Pillar,
     isImmersive: boolean,
+    adTargeting?: AdTargeting,
 ): JSX.Element[] => {
     const cleanedElements = elements.map(element =>
         'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -133,7 +134,13 @@ export const Elements = (
                     />
                 );
             case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-                return <YoutubeVideo element={element} pillar={pillar} />;
+                return (
+                    <YoutubeVideo
+                        element={element}
+                        pillar={pillar}
+                        adTargeting={adTargeting}
+                    />
+                );
             case 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement':
                 return (
                     <InteractiveMarkup

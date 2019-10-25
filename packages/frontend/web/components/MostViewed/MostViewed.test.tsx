@@ -30,6 +30,11 @@ describe('MostViewed', () => {
         frontendAssetsFullURL: '',
         hbImpl: '',
         adUnit: '',
+        isSensitive: '',
+        videoDuration: 0,
+        edition: '',
+        section: '',
+        sharedAdTargeting: {},
     };
 
     beforeEach(() => {

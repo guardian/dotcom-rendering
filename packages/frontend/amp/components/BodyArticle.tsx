@@ -11,6 +11,7 @@ import { palette, until } from '@guardian/src-foundations';
 import { WithAds } from '@frontend/amp/components/WithAds';
 import { findAdSlots } from '@frontend/amp/lib/find-adslots';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
+import { buildAdTargeting } from '@frontend/amp/lib/ad-targeting';
 
 const body = (pillar: Pillar, designType: DesignType) => {
     const defaultStyles: DesignTypesObj = designTypeDefault(
@@ -65,9 +66,16 @@ export const Body: React.FC<{
 }> = ({ pillar, data, config }) => {
     const designType = data.designType;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-    const elementsWithoutAds = Elements(capiElements, pillar, data.isImmersive);
+    const adTargeting = buildAdTargeting(config);
+    const elementsWithoutAds = Elements(
+        capiElements,
+        pillar,
+        data.isImmersive,
+        adTargeting,
+    );
     const slotIndexes = findAdSlots(capiElements);
     const adInfo = {
+        adUnit: config.adUnit,
         section: data.sectionName,
         edition: data.editionId,
         contentType: data.contentType,
@@ -88,10 +96,14 @@ export const Body: React.FC<{
             adInfo={adInfo}
         />
     );
-
     return (
         <InnerContainer className={body(pillar, designType)}>
-            <TopMeta designType={designType} pillar={pillar} data={data} />
+            <TopMeta
+                designType={designType}
+                pillar={pillar}
+                data={data}
+                adTargeting={adTargeting}
+            />
 
             {elements}
 
