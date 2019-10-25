@@ -24,6 +24,14 @@ export const Article: React.FC<{
             shouldHideAds={data.CAPI.shouldHideAds}
         />
 
+        <Section backgroundColour={palette.neutral[100]} padded={false}>
+            <SubNav
+                subnav={data.NAV.subNavSections}
+                currentNavLink={data.NAV.currentNavLink}
+                pillar={data.CAPI.pillar}
+            />
+        </Section>
+
         <Section showTopBorder={false}>
             <DecideContent
                 designType={CAPI.designType}
