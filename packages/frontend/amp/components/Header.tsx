@@ -2,13 +2,8 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import Logo from '@frontend/static/logos/the-guardian.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
-import {
-    headline,
-    palette,
-    mobileLandscape,
-    visuallyHidden,
-} from '@guardian/src-foundations';
-import { until } from '@guardian/src-utilities';
+import { headline, palette } from '@guardian/src-foundations';
+import { from, until, visuallyHidden } from '@guardian/src-utilities';
 import { ReaderRevenueButton } from '@frontend/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`
@@ -83,7 +78,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     font-weight: 900;
     font-size: 15.4px;
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         font-size: 18px;
         padding: 7px 4px 0;
     }

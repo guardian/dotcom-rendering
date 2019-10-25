@@ -7,14 +7,8 @@ import {
 } from '@frontend/web/components/Dropdown';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
-import {
-    tablet,
-    desktop,
-    mobileLandscape,
-    wide,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 const search = css`
     :after {
@@ -47,7 +41,7 @@ const link = css`
     text-decoration: none;
     padding: 7px 0;
 
-    ${tablet} {
+    ${from.tablet} {
         padding: 7px 7px;
     }
 
@@ -68,11 +62,11 @@ const link = css`
 const linkTablet = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     display: none;
 
-    ${tablet} {
+    ${from.tablet} {
         display: ${showAtTablet ? 'block' : 'none'};
     }
 
-    ${desktop} {
+    ${from.desktop} {
         display: block;
     }
 `;
@@ -84,7 +78,7 @@ const seperator = css`
     margin: 0 -2px 0 10px;
     display: none;
 
-    ${desktop} {
+    ${from.desktop} {
         display: block;
     }
 `;
@@ -96,7 +90,7 @@ const seperatorHide = css`
     margin: 0 -2px 0 10px;
     display: none;
 
-    ${tablet} {
+    ${from.tablet} {
         display: block;
     }
 `;
@@ -121,20 +115,20 @@ const links = css`
     left: 10px;
     top: 0;
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         left: 20px;
     }
 
-    ${tablet} {
+    ${from.tablet} {
         left: auto;
         right: 205px;
     }
 
-    ${desktop} {
+    ${from.desktop} {
         right: 266px;
     }
 
-    ${wide} {
+    ${from.wide} {
         right: 342px;
     }
 `;

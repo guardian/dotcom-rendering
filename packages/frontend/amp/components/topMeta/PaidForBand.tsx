@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette, mobileLandscape, textSans } from '@guardian/src-foundations';
+import { palette, textSans } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { augmentedLabs } from '@frontend/lib/pillars';
@@ -15,7 +16,7 @@ const headerStyle = css`
     height: 58px;
     background-color: ${augmentedLabs.bright};
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         padding: 0 20px;
     }
 `;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { leftCol, desktop, wide, tablet } from '@guardian/src-foundations';
-import { until } from '@guardian/src-utilities';
+import { from, until } from '@guardian/src-utilities';
 import { labelStyles } from '@frontend/web/components/AdSlot';
 
 const articleContainer = css`
@@ -10,7 +9,7 @@ const articleContainer = css`
         padding-left: 0;
     }
 
-    ${leftCol} {
+    ${from.leftCol} {
         /* above 1140 */
         padding-left: 10px;
     }
@@ -27,13 +26,13 @@ const articleAdStyles = css`
         text-align: center;
     }
     .ad-slot--mostpop  {
-        ${desktop}  {
+        ${from.desktop}  {
             margin: 0;
             width: auto;
         }
     }
     .ad-slot--inline  {
-        ${desktop}  {
+        ${from.desktop}  {
             margin: 0;
             width: auto;
             float: right;
@@ -42,18 +41,18 @@ const articleAdStyles = css`
         }
     }
     .ad-slot--offset-right  {
-        ${desktop}  {
+        ${from.desktop}  {
             float: right;
             width: auto;
             margin-right: -328px;
         }
 
-        ${wide}  {
+        ${from.wide}  {
             margin-right: -408px;
         }
     }
     .ad-slot--outstream  {
-        ${tablet}  {
+        ${from.tablet}  {
             margin-left: 0;
 
             .ad-slot__label  {

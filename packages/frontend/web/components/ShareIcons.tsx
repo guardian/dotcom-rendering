@@ -7,7 +7,8 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
-import { phablet, wide, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
 const pillarFill = pillarMap(
@@ -19,7 +20,7 @@ const pillarFill = pillarMap(
 
 const shareIconList = css`
     float: left;
-    ${wide} {
+    ${from.wide} {
         flex: auto;
     }
 `;
@@ -65,7 +66,7 @@ const shareIcon = (colour: string) => css`
 `;
 
 const mobileOnlyShareIconsListItem = css`
-    ${phablet} {
+    ${from.phablet} {
         display: none;
     }
 `;

@@ -1,13 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import {
-    desktop,
-    mobileMedium,
-    mobileLandscape,
-    tablet,
-    palette,
-} from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 const veggieBurger = ({
     showExpandedMenu,
@@ -26,17 +21,17 @@ const veggieBurger = ({
     z-index: ${showExpandedMenu ? 1071 : 0};
     right: 5px;
     bottom: 48px;
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         bottom: -3px;
         right: 5px;
     }
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         right: 18px;
     }
-    ${tablet} {
+    ${from.tablet} {
         bottom: 3px;
     }
-    ${desktop} {
+    ${from.desktop} {
         display: none;
     }
 `;

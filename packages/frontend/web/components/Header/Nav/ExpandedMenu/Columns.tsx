@@ -1,22 +1,15 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import {
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-    headline,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
+import { headline, textSans, palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 import { Column, More, ReaderRevenueLinks } from './Column';
 
 const ColumnsStyle = css`
     box-sizing: border-box;
     max-width: none;
-    ${desktop} {
+    ${from.desktop} {
         max-width: 980px;
         padding: 0 20px;
         position: relative;
@@ -25,16 +18,16 @@ const ColumnsStyle = css`
         border-left: 1px solid ${palette.brand.pastel};
         border-right: 1px solid ${palette.brand.pastel};
     }
-    ${leftCol} {
+    ${from.leftCol} {
         max-width: 1140px;
     }
-    ${wide} {
+    ${from.wide} {
         max-width: 1300px;
     }
 `;
 
 const desktopBrandExtensionColumn = css`
-    ${desktop} {
+    ${from.desktop} {
         display: block;
     }
     display: none;
@@ -55,10 +48,10 @@ const brandExtensionList = css`
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
-    ${leftCol} {
+    ${from.leftCol} {
         width: 140px;
     }
-    ${wide} {
+    ${from.wide} {
         width: 300px;
     }
 `;
@@ -84,13 +77,13 @@ const brandExtensionLink = css`
     text-align: left;
     width: 100%;
     text-decoration: none;
-    ${tablet} {
+    ${from.tablet} {
         padding-left: 60px;
     }
-    ${desktop} {
+    ${from.desktop} {
         padding: 6px 0;
     }
-    ${wide} {
+    ${from.wide} {
         font-size: 24px;
     }
     :hover,
