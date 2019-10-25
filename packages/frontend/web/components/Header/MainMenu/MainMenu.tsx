@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 
+import { MainMenuToggle } from '../MainMenuToggle/MainMenuToggle';
 import {
     until,
     mobileMedium,
@@ -12,7 +13,7 @@ import {
 } from '@guardian/src-foundations';
 import { Columns } from './Columns';
 
-const showMenu = css`
+const showMenuStyles = css`
     ${desktop} {
         display: block;
         overflow: visible;
@@ -73,15 +74,24 @@ const mainMenu = css`
 `;
 
 export const MainMenu: React.FC<{
-    showMainMenu: boolean;
     id: string;
     nav: NavType;
-}> = ({ showMainMenu, id, nav }) => (
-    <div
-        className={cx(mainMenu, { [showMenu]: showMainMenu })}
-        aria-hidden={!showMainMenu}
-        id={id}
-    >
-        {showMainMenu && <Columns nav={nav} />}
-    </div>
-);
+}> = ({ id, nav }) => {
+    const [showMenu, toggleMenu] = useState<boolean>(false);
+    return (
+        <>
+            <MainMenuToggle
+                showMainMenu={showMenu}
+                toggleMainMenu={toggleMenu}
+                ariaControls={id}
+            />
+            <div
+                className={cx(mainMenu, { [showMenuStyles]: showMenu })}
+                aria-hidden={!showMenu}
+                id={id}
+            >
+                {showMenu && <Columns nav={nav} />}
+            </div>
+        </>
+    );
+};

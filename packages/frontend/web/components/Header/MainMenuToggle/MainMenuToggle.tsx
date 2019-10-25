@@ -69,7 +69,7 @@ const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
 `;
 
 interface Props {
-    toggleMainMenu: () => void;
+    toggleMainMenu: (value: boolean) => void;
     showMainMenu: boolean;
     ariaControls: string;
 }
@@ -116,7 +116,7 @@ export class MainMenuToggle extends Component<
                 />,
                 <button
                     className={openMainMenu}
-                    onClick={() => toggleMainMenu()}
+                    onClick={() => toggleMainMenu(!showMainMenu)}
                     aria-controls={ariaControls}
                     key="OpenMainMenuButton"
                     data-link-name={`nav2 : veggie-burger : ${

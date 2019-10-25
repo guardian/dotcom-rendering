@@ -79,7 +79,7 @@ const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean }) => {
 };
 
 export const VeggieBurger: React.FC<{
-    toggleMainMenu: () => void;
+    toggleMainMenu: (value: boolean) => void;
     showMainMenu: boolean;
     enhanceCheckbox: boolean;
     htmlFor: string;
@@ -95,7 +95,7 @@ export const VeggieBurger: React.FC<{
         return (
             <button
                 className={veggieBurger({ showMainMenu })}
-                onClick={() => toggleMainMenu()}
+                onClick={() => toggleMainMenu(!showMainMenu)}
                 aria-controls={ariaControls}
                 aria-label="Toggle main menu"
                 data-link-name={`nav2 : veggie-burger : ${
@@ -110,7 +110,7 @@ export const VeggieBurger: React.FC<{
     return (
         <label
             className={veggieBurger({ showMainMenu })}
-            onClick={() => toggleMainMenu()}
+            onClick={() => toggleMainMenu(!showMainMenu)}
             htmlFor={htmlFor}
             tabIndex={0}
             role="button"
