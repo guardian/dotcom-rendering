@@ -10,7 +10,6 @@ import {
     palette,
     visuallyHidden,
 } from '@guardian/src-foundations';
-
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 
 const link = css`

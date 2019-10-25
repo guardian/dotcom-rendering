@@ -13,7 +13,6 @@ import {
     headline,
     palette,
 } from '@guardian/src-foundations';
-
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 

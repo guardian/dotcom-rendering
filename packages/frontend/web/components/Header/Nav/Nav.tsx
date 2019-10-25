@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import { Pillars } from '../../Pillars';
-import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
+import { Pillars } from '@frontend/web/components/Pillars';
 import { clearFix } from '@frontend/lib/mixins';
+
+import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 const clearFixStyle = css`
     ${clearFix};

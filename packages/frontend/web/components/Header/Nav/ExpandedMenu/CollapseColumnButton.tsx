@@ -1,6 +1,8 @@
 import React from 'react';
-import { headline, palette } from '@guardian/src-foundations';
 import { css, cx } from 'emotion';
+
+import { headline, palette } from '@guardian/src-foundations';
+
 import { hideDesktop } from './Column';
 
 const showColumnLinksStyle = css`

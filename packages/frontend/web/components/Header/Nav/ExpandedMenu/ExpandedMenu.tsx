@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import {
     until,
     mobileMedium,
@@ -11,6 +10,8 @@ import {
     textSans,
     palette,
 } from '@guardian/src-foundations';
+
+import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
 
 const showExpandedMenuStyles = css`

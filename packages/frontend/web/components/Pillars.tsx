@@ -12,7 +12,6 @@ import {
     headline,
     palette,
 } from '@guardian/src-foundations';
-
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
 // CSS Vars

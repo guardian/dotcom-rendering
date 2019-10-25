@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
+
 import {
     headline,
     visuallyHidden,
     desktop,
     palette,
 } from '@guardian/src-foundations';
+
 import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`

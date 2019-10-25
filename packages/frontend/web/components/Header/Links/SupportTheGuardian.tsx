@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+
 import {
     mobileLandscape,
     tablet,
@@ -9,7 +10,6 @@ import {
     visuallyHidden,
 } from '@guardian/src-foundations';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
-
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
 
