@@ -3,11 +3,11 @@ import { css } from 'emotion';
 
 import { Hide } from '@frontend/web/components/Hide';
 import { getCookie } from '@frontend/web/browser/cookie';
+import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 
 import { Logo } from './Logo';
 import { EditionDropdown } from './EditionDropdown';
 import { Links } from './Links/Links';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { Nav } from './Nav/Nav';
 
 const headerStyles = css`

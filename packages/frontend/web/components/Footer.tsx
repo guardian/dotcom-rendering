@@ -10,10 +10,10 @@ import {
     textSans,
     palette,
 } from '@guardian/src-foundations';
-
+import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { clearFix } from '@frontend/lib/mixins';
+
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
-import { ReaderRevenueLinks } from './Header/ReaderRevenueLinks';
 import { BackToTop } from './BackToTop';
 
 // CSS vars
