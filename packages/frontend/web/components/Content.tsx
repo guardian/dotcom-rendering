@@ -37,6 +37,7 @@ export const Content = ({ CAPI, config }: Props) => {
                             {/* When ABOVE leftCol we display the header in this position, above the article body, underneath the full width image */}
                             <Hide when="above" breakpoint="leftCol">
                                 <ArticleHeader CAPI={CAPI} config={config} />
+                                <ArticleMeta CAPI={CAPI} config={config} />
                             </Hide>
                             <ArticleBody
                                 CAPI={CAPI}
@@ -61,6 +62,9 @@ export const Content = ({ CAPI, config }: Props) => {
             </ArticleLeft>
             <ArticleContainer>
                 <ArticleHeader CAPI={CAPI} config={config} />
+                <Hide when="above" breakpoint="leftCol">
+                    <ArticleMeta CAPI={CAPI} config={config} />
+                </Hide>
                 <ArticleBody CAPI={CAPI} config={config} />
             </ArticleContainer>
             <ArticleRight>
