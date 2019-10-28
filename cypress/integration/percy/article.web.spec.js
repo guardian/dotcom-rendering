@@ -15,7 +15,9 @@ describe('For WEB', function() {
             // Prevent the Privacy consent banner from obscuring snapshots
             cy.setCookie('GU_TK', 'true');
             cy.visit(`Article?url=${url}`, visitOptions);
-            cy.percySnapshot(`WEB-${pillar}-${designType}-${index}`);
+            cy.percySnapshot(`WEB-${pillar}-${designType}-${index}`, {
+                widths: [739, 979, 1139, 1299, 1400],
+            });
         });
     });
 });
