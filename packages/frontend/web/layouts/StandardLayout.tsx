@@ -2,13 +2,15 @@ import React from 'react';
 import { Flex } from '@frontend/web/components/Flex';
 import { StickyAd } from '@frontend/web/components/StickyAd';
 import { ArticleBody } from '@frontend/web/components/ArticleBody';
-import { ArticleHeader } from '@frontend/web/components/ArticleHeader';
 import { ArticleLeft } from '@frontend/web/components/ArticleLeft';
 import { ArticleRight } from '@frontend/web/components/ArticleRight';
 import { ArticleTitle } from '@frontend/web/components/ArticleTitle';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { ArticleMeta } from '@frontend/web/components/ArticleMeta';
 import { Hide } from '@frontend/web/components/Hide';
+
+import { StandardHeader } from './StandardHeader';
+
 interface Props {
     CAPI: CAPIType;
     config: ConfigType;
@@ -21,7 +23,7 @@ export const StandardLayout = ({ CAPI, config }: Props) => (
             <ArticleMeta CAPI={CAPI} config={config} />
         </ArticleLeft>
         <ArticleContainer>
-            <ArticleHeader CAPI={CAPI} config={config} />
+            <StandardHeader CAPI={CAPI} />
             <Hide when="above" breakpoint="leftCol">
                 <ArticleMeta CAPI={CAPI} config={config} />
             </Hide>
