@@ -6,7 +6,12 @@ function insertAdPlaceholders(reactNodes: React.ReactNode[]): React.ReactNode[] 
     // Insert ad placeholders after the following paragraph tags
     const adIndexes = [3, 9];
 
-    const ad = h('div', { className: 'ad-placeholder' }, "this is an advert. buy now.");
+    const ad = h('div', { className: 'ad-placeholder' },
+        h('div', { className: 'ad-labels' },
+            h('span', null, 'Advertisement'),
+            h('span', { className: 'ad-hide' }, 'Hide')
+        )
+    );
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const flattenedNodes: any = reactNodes

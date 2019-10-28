@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles, basePx } from '../../styles';
+import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles, basePx, icons, textSans } from '../../styles';
 import { palette } from '@guardian/src-foundations'
 import { until } from '@guardian/src-utilities'
 import { render } from "../../renderBlocks";
@@ -20,8 +20,30 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         border: none;
     }
 
+    .ad-placeholder {
+        background: ${palette.neutral[97]};
+
+        .ad-labels {
+            ${textSans}
+            padding: ${basePx(1)};
+            padding-bottom: 250px;
+
+            .ad-hide {
+                float: right;
+
+                &::after {
+                    padding-left: ${basePx(1)};
+                    ${icons}
+                    content: "\\e04F";
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
     ${until.wide} {
-        figure {
+        figure,
+        .ad-placeholder {
             margin-left: ${basePx(-1)};
             margin-right: ${basePx(-1)};
         }
