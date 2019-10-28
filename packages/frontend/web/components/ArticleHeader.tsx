@@ -56,10 +56,6 @@ const positionMainImage = (isShowcase: boolean) => {
 };
 
 const mainMedia = css`
-    @supports (display: grid) {
-        grid-template-areas: 'main-media';
-    }
-
     min-height: 1px;
     /*
     Thank you IE11, broken in stasis for all eternity.
