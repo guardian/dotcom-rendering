@@ -68,6 +68,7 @@ export const htmlTemplate = ({
             <head>
                 <title>${title}</title>
                 <meta name="description" content="${escape(description)}" />
+                <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
