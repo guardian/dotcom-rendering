@@ -10,7 +10,7 @@ import { Section } from '@frontend/web/components/Section';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/packages/frontend/web/components/HeaderAdSlot';
 
-import { DecideContent } from './DecideContent';
+import { DecideLayout } from './DecideLayout';
 import { CAPI } from '@root/fixtures/CAPI';
 
 export const Article: React.FC<{
@@ -56,7 +56,7 @@ export const Article: React.FC<{
         </Section>
 
         <Section showTopBorder={false}>
-            <DecideContent
+            <DecideLayout
                 designType={CAPI.designType}
                 CAPI={data.CAPI}
                 config={data.config}

@@ -8,7 +8,7 @@ type Props = {
     config: ConfigType;
 };
 
-export const DecideContent = ({ designType, CAPI, config }: Props) => {
+export const DecideLayout = ({ designType, CAPI, config }: Props) => {
     const designTypeContent: DesignTypesObj = designTypeDefault(
         <Content CAPI={CAPI} config={config} />,
     );
