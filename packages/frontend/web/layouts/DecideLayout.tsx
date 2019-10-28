@@ -1,6 +1,10 @@
 import React from 'react';
-import { Content } from '@frontend/web/components/Content';
 import { designTypeDefault } from '@frontend/lib/designTypes';
+
+import { StandardLayout } from './StandardLayout';
+import { ShowcaseLayout } from './ShowcaseLayout';
+
+import { hasShowcase } from './layoutHelpers';
 
 type Props = {
     designType: DesignType;
@@ -9,11 +13,14 @@ type Props = {
 };
 
 export const DecideLayout = ({ designType, CAPI, config }: Props) => {
-    const designTypeContent: DesignTypesObj = designTypeDefault(
-        <Content CAPI={CAPI} config={config} />,
-    );
+    if (hasShowcase(CAPI.mainMediaElements)) {
+        return <ShowcaseLayout CAPI={CAPI} config={config} />;
+    }
 
-    designTypeContent.Interview = <Content CAPI={CAPI} config={config} />;
+    // Otherwise, switch based on designType
+    const designTypeContent: DesignTypesObj = designTypeDefault(
+        <StandardLayout CAPI={CAPI} config={config} />,
+    );
 
     return designTypeContent[designType];
 };
