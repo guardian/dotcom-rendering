@@ -6,15 +6,27 @@ import {
     tablet,
     desktop,
     mobileMedium,
+    mobileLandscape,
     until,
     leftCol,
     textSans,
     headline,
     palette,
 } from '@guardian/src-foundations';
-
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
+
+const padded = css`
+    ${until.mobileLandscape} {
+        padding-left: 10px;
+    }
+    ${until.tablet} {
+        padding-top: 33px;
+    }
+    ${mobileLandscape} {
+        padding-left: 20px;
+    }
+`;
 
 const message = css`
     color: ${palette.yellow.main};
@@ -119,13 +131,14 @@ export const ReaderRevenueLinks: React.FC<{
     };
     dataLinkNamePrefix: string;
     noResponsive: boolean;
-}> = ({ edition, urls, dataLinkNamePrefix, noResponsive }) => {
+    inHeader?: boolean;
+}> = ({ edition, urls, dataLinkNamePrefix, noResponsive, inHeader }) => {
     return (
         <AsyncClientComponent f={shouldShow}>
             {({ data }) => (
                 <>
                     {data && (
-                        <>
+                        <div className={cx(inHeader && padded)}>
                             <div
                                 className={cx({
                                     [hiddenUntilTablet]: !noResponsive,
@@ -173,7 +186,7 @@ export const ReaderRevenueLinks: React.FC<{
                                     />
                                 )}
                             </div>
-                        </>
+                        </div>
                     )}
                 </>
             )}

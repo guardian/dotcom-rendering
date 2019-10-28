@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
+
 import {
     headline,
     visuallyHidden,
     desktop,
     palette,
 } from '@guardian/src-foundations';
+
 import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`
     ${visuallyHidden};
 `;
-const openMainMenu = css`
+const openExpandedMenu = css`
     ${headline({ level: 3 })};
     font-weight: 300;
     color: ${palette.neutral[100]};
@@ -43,7 +45,7 @@ const checkbox = css`
         }
     }
 `;
-const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
+const text = ({ showExpandedMenu }: { showExpandedMenu: boolean }) => css`
     display: block;
     height: 100%;
     :after {
@@ -54,7 +56,7 @@ const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
         display: inline-block;
         height: 8px;
         margin-left: 6px;
-        transform: ${showMainMenu
+        transform: ${showExpandedMenu
             ? 'translateY(1px) rotate(-135deg)'
             : 'translateY(-3px) rotate(45deg)'};
         transition: transform 250ms ease-out;
@@ -62,19 +64,19 @@ const text = ({ showMainMenu }: { showMainMenu: boolean }) => css`
         width: 8px;
     }
     :hover:after {
-        transform: ${showMainMenu
+        transform: ${showExpandedMenu
             ? 'translateY(-2px) rotate(-135deg)'
             : 'translateY(0) rotate(45deg)'};
     }
 `;
 
 interface Props {
-    toggleMainMenu: () => void;
-    showMainMenu: boolean;
+    showExpandedMenu: boolean;
+    toggleExpandedMenu: (value: boolean) => void;
     ariaControls: string;
 }
 
-export class MainMenuToggle extends Component<
+export class ExpandedMenuToggle extends Component<
     Props,
     { enhanceCheckbox: boolean }
 > {
@@ -100,39 +102,43 @@ export class MainMenuToggle extends Component<
     }
 
     public render() {
-        const { toggleMainMenu, ariaControls, showMainMenu } = this.props;
+        const {
+            toggleExpandedMenu,
+            ariaControls,
+            showExpandedMenu,
+        } = this.props;
         const { enhanceCheckbox } = this.state;
         const CHECKBOX_ID = 'main-menu-toggle';
 
         if (enhanceCheckbox) {
             return [
                 <VeggieBurger
-                    showMainMenu={showMainMenu}
-                    toggleMainMenu={toggleMainMenu}
+                    showExpandedMenu={showExpandedMenu}
+                    toggleExpandedMenu={toggleExpandedMenu}
                     enhanceCheckbox={enhanceCheckbox}
                     htmlFor={CHECKBOX_ID}
                     ariaControls={ariaControls}
                     key="VeggieBurger"
                 />,
                 <button
-                    className={openMainMenu}
-                    onClick={() => toggleMainMenu()}
+                    className={openExpandedMenu}
+                    onClick={() => toggleExpandedMenu(!showExpandedMenu)}
                     aria-controls={ariaControls}
-                    key="OpenMainMenuButton"
+                    key="OpenExpandedMenuButton"
                     data-link-name={`nav2 : veggie-burger : ${
-                        showMainMenu ? 'show' : 'hide'
+                        showExpandedMenu ? 'show' : 'hide'
                     }`}
                 >
                     <span className={screenReadable}>Show</span>
-                    <span className={text({ showMainMenu })}>More</span>
+                    <span className={text({ showExpandedMenu })}>More</span>
                 </button>,
             ];
         }
 
         return [
             <VeggieBurger
-                showMainMenu={showMainMenu}
-                toggleMainMenu={toggleMainMenu}
+                showExpandedMenu={showExpandedMenu}
+                toggleExpandedMenu={toggleExpandedMenu}
                 enhanceCheckbox={enhanceCheckbox}
                 htmlFor={CHECKBOX_ID}
                 ariaControls={ariaControls}
@@ -140,13 +146,13 @@ export class MainMenuToggle extends Component<
             />,
             // We can't nest the input inside the label because the structure is important for CSS reasons
             <label
-                className={openMainMenu}
+                className={openExpandedMenu}
                 htmlFor={CHECKBOX_ID}
                 tabIndex={0}
-                key="OpenMainMenuLabel"
+                key="OpenExpandedMenuLabel"
             >
                 <span className={screenReadable}>Show</span>
-                <span className={text({ showMainMenu })}>More</span>
+                <span className={text({ showExpandedMenu })}>More</span>
             </label>,
             <input
                 type="checkbox"
@@ -154,7 +160,7 @@ export class MainMenuToggle extends Component<
                 id={CHECKBOX_ID}
                 aria-controls={ariaControls}
                 tabIndex={-1}
-                key="OpenMainMenuCheckbox"
+                key="OpenExpandedMenuCheckbox"
                 role="menuitemcheckbox"
                 aria-checked="false"
             />,

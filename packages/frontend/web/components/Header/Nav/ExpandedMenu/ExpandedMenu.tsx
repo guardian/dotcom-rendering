@@ -10,9 +10,11 @@ import {
     textSans,
     palette,
 } from '@guardian/src-foundations';
+
+import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';
 
-const showMenu = css`
+const showExpandedMenuStyles = css`
     ${desktop} {
         display: block;
         overflow: visible;
@@ -72,16 +74,28 @@ const mainMenu = css`
     }
 `;
 
-export const MainMenu: React.FC<{
-    showMainMenu: boolean;
+export const ExpandedMenu: React.FC<{
     id: string;
     nav: NavType;
-}> = ({ showMainMenu, id, nav }) => (
-    <div
-        className={cx(mainMenu, { [showMenu]: showMainMenu })}
-        aria-hidden={!showMainMenu}
-        id={id}
-    >
-        {showMainMenu && <Columns nav={nav} />}
-    </div>
-);
+    showExpandedMenu: boolean;
+    toggleExpandedMenu: (value: boolean) => void;
+}> = ({ id, nav, showExpandedMenu, toggleExpandedMenu }) => {
+    return (
+        <>
+            <ExpandedMenuToggle
+                showExpandedMenu={showExpandedMenu}
+                toggleExpandedMenu={toggleExpandedMenu}
+                ariaControls={id}
+            />
+            <div
+                className={cx(mainMenu, {
+                    [showExpandedMenuStyles]: showExpandedMenu,
+                })}
+                aria-hidden={!showExpandedMenu}
+                id={id}
+            >
+                {showExpandedMenu && <Columns nav={nav} />}
+            </div>
+        </>
+    );
+};

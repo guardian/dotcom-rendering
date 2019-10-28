@@ -9,7 +9,11 @@ import {
     palette,
 } from '@guardian/src-foundations';
 
-const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
+const veggieBurger = ({
+    showExpandedMenu,
+}: {
+    showExpandedMenu: boolean;
+}) => css`
     background-color: ${palette.yellow.main};
     color: ${palette.neutral[7]};
     cursor: pointer;
@@ -19,7 +23,7 @@ const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     border: 0;
     border-radius: 50%;
     outline: none;
-    z-index: ${showMainMenu ? 1071 : 0};
+    z-index: ${showExpandedMenu ? 1071 : 0};
     right: 5px;
     bottom: 48px;
     ${mobileMedium} {
@@ -37,7 +41,11 @@ const veggieBurger = ({ showMainMenu }: { showMainMenu: boolean }) => css`
     }
 `;
 
-const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean }) => {
+const veggieBurgerIcon = ({
+    showExpandedMenu,
+}: {
+    showExpandedMenu: boolean;
+}) => {
     const beforeAfterStyles = css`
         content: '';
         background-color: currentColor;
@@ -56,11 +64,11 @@ const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean }) => {
         margin-left: auto;
         margin-right: auto;
         ${lineStyles};
-        background-color: ${showMainMenu ? 'transparent' : 'currentColor'};
+        background-color: ${showExpandedMenu ? 'transparent' : 'currentColor'};
         :before {
             ${lineStyles};
             ${beforeAfterStyles};
-            ${showMainMenu
+            ${showExpandedMenu
                 ? `top: 0;
             transform: rotate(-45deg);
             `
@@ -69,7 +77,7 @@ const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean }) => {
         :after {
             ${lineStyles};
             ${beforeAfterStyles};
-            ${showMainMenu
+            ${showExpandedMenu
                 ? `bottom: 0;
             transform: rotate(45deg);
             `
@@ -79,14 +87,14 @@ const veggieBurgerIcon = ({ showMainMenu }: { showMainMenu: boolean }) => {
 };
 
 export const VeggieBurger: React.FC<{
-    toggleMainMenu: () => void;
-    showMainMenu: boolean;
+    toggleExpandedMenu: (value: boolean) => void;
+    showExpandedMenu: boolean;
     enhanceCheckbox: boolean;
     htmlFor: string;
     ariaControls: string;
 }> = ({
-    toggleMainMenu,
-    showMainMenu,
+    toggleExpandedMenu,
+    showExpandedMenu,
     enhanceCheckbox,
     htmlFor,
     ariaControls,
@@ -94,29 +102,29 @@ export const VeggieBurger: React.FC<{
     if (enhanceCheckbox) {
         return (
             <button
-                className={veggieBurger({ showMainMenu })}
-                onClick={() => toggleMainMenu()}
+                className={veggieBurger({ showExpandedMenu })}
+                onClick={() => toggleExpandedMenu(!showExpandedMenu)}
                 aria-controls={ariaControls}
                 aria-label="Toggle main menu"
                 data-link-name={`nav2 : veggie-burger : ${
-                    showMainMenu ? 'hide' : 'show'
+                    showExpandedMenu ? 'hide' : 'show'
                 }`}
             >
-                <span className={veggieBurgerIcon({ showMainMenu })} />
+                <span className={veggieBurgerIcon({ showExpandedMenu })} />
             </button>
         );
     }
 
     return (
         <label
-            className={veggieBurger({ showMainMenu })}
-            onClick={() => toggleMainMenu()}
+            className={veggieBurger({ showExpandedMenu })}
+            onClick={() => toggleExpandedMenu(!showExpandedMenu)}
             htmlFor={htmlFor}
             tabIndex={0}
             role="button"
             aria-label="Toggle main menu"
         >
-            <span className={veggieBurgerIcon({ showMainMenu })} />
+            <span className={veggieBurgerIcon({ showExpandedMenu })} />
         </label>
     );
 };

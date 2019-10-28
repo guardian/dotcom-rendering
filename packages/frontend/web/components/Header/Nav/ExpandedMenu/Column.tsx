@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
+
 import {
     desktop,
     tablet,
@@ -8,6 +9,7 @@ import {
     textSans,
     palette,
 } from '@guardian/src-foundations';
+
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS vars

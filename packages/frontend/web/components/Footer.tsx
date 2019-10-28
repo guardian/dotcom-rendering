@@ -10,10 +10,10 @@ import {
     textSans,
     palette,
 } from '@guardian/src-foundations';
-
+import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { clearFix } from '@frontend/lib/mixins';
-import { Pillars, pillarWidth, firstPillarWidth } from './Header/Nav/Pillars';
-import { ReaderRevenueLinks } from './Header/Nav/ReaderRevenueLinks';
+
+import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 
 // CSS vars
@@ -223,7 +223,7 @@ export const Footer: React.FC<{
     <footer className={footer}>
         <div className={pillarWrap}>
             <Pillars
-                showMainMenu={false}
+                mainMenuOpen={false}
                 pillars={pillars}
                 pillar={pillar}
                 showLastPillarDivider={false}

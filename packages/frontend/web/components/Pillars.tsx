@@ -12,7 +12,6 @@ import {
     headline,
     palette,
 } from '@guardian/src-foundations';
-
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
 // CSS Vars
@@ -210,11 +209,11 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
     i !== noOfPillars - 1;
 
 export const Pillars: React.FC<{
-    showMainMenu: boolean;
+    mainMenuOpen: boolean;
     pillars: PillarType[];
     pillar: Pillar;
     showLastPillarDivider?: boolean;
-}> = ({ showMainMenu, pillars, pillar, showLastPillarDivider = true }) => (
+}> = ({ mainMenuOpen, pillars, pillar, showLastPillarDivider = true }) => (
     <ul className={pillarsStyles}>
         {pillars.map((p, i) => (
             <li key={p.title} className={pillarStyle}>
@@ -223,7 +222,7 @@ export const Pillars: React.FC<{
                         [pillarDivider]:
                             showLastPillarDivider ||
                             isNotLastPillar(i, pillars.length),
-                        [showMenuUnderline]: showMainMenu,
+                        [showMenuUnderline]: mainMenuOpen,
                         [forceUnderline]: p.pillar === pillar,
                     })}
                     href={p.url}
