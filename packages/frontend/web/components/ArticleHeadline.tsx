@@ -4,15 +4,8 @@ import { css } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { getAgeWarning } from '@frontend/lib/age-warning';
 
-import {
-    leftCol,
-    tablet,
-    mobileLandscape,
-    headline,
-    textSans,
-    palette,
-    visuallyHidden,
-} from '@guardian/src-foundations';
+import { headline, textSans, palette } from '@guardian/src-foundations';
+import { from, visuallyHidden } from '@guardian/src-utilities';
 
 const curly = (x: any) => x;
 
@@ -22,7 +15,7 @@ const headerStyle = css`
     padding-bottom: 24px;
     padding-top: 3px;
 
-    ${tablet} {
+    ${from.tablet} {
         padding-bottom: 36px;
     }
 `;
@@ -42,15 +35,15 @@ const ageWarningStyle = css`
     margin-top: 6px;
     margin-left: -10px;
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         padding-left: 12px;
     }
 
-    ${tablet} {
+    ${from.tablet} {
         margin-left: -20px;
     }
 
-    ${leftCol} {
+    ${from.leftCol} {
         margin-left: -10px;
         margin-top: -6px;
         padding-left: 10px;

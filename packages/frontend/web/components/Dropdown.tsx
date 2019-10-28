@@ -1,12 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import {
-    textSans,
-    visuallyHidden,
-    palette,
-    until,
-    tablet,
-} from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
+import { from, until, visuallyHidden } from '@guardian/src-utilities';
 
 export interface Link {
     url: string;
@@ -48,7 +43,7 @@ const ul = css`
         overflow: auto;
     }
 
-    ${tablet} {
+    ${from.tablet} {
         position: absolute;
         right: 0;
         width: 200px;

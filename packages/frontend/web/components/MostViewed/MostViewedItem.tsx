@@ -1,7 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { textSans, headline, palette, until } from '@guardian/src-foundations';
+import { textSans, headline, palette } from '@guardian/src-foundations';
+import { until } from '@guardian/src-utilities';
 import { BigNumber } from '@frontend/web/components/BigNumber/BigNumber';
 import { PulsingDot } from '@frontend/web/components/PulsingDot';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';

@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-
-import {
-    desktop,
-    tablet,
-    leftCol,
-    until,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
-
+import { textSans, palette } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-utilities';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS vars
@@ -18,13 +10,13 @@ const pillarHeight = 42;
 // CSS
 
 export const hideDesktop = css`
-    ${desktop} {
+    ${from.desktop} {
         display: none;
     }
 `;
 
 const pillarDivider = css`
-    ${desktop} {
+    ${from.desktop} {
         :before {
             content: '';
             display: block;
@@ -40,7 +32,7 @@ const pillarDivider = css`
 `;
 
 const pillarDividerExtended = css`
-    ${desktop} {
+    ${from.desktop} {
         :before {
             top: -${pillarHeight}px;
         }
@@ -63,11 +55,11 @@ const columnLinkTitle = css`
     text-align: left;
     width: 100%;
 
-    ${tablet} {
+    ${from.tablet} {
         padding-left: 60px;
     }
 
-    ${desktop} {
+    ${from.desktop} {
         font-size: 16px;
         padding: 6px 0;
     }
@@ -88,7 +80,7 @@ const mainMenuLinkStyle = css`
     overflow: hidden;
     position: relative;
     width: 100%;
-    ${desktop} {
+    ${from.desktop} {
         display: list-item;
     }
 `;
@@ -122,7 +114,7 @@ const columnLinks = css`
     margin: 0;
     padding: 0 0 12px;
     position: relative;
-    ${desktop} {
+    ${from.desktop} {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
@@ -134,7 +126,7 @@ const columnLinks = css`
 `;
 
 const firstColumnLinks = css`
-    ${desktop} {
+    ${from.desktop} {
         padding-left: 0;
     }
 `;
@@ -199,7 +191,7 @@ const columnStyle = css`
         content: none;
     }
 
-    ${desktop} {
+    ${from.desktop} {
         width: 134px;
         float: left;
         position: relative;
@@ -212,7 +204,7 @@ const columnStyle = css`
             width: 123px;
         }
     }
-    ${leftCol} {
+    ${from.leftCol} {
         width: 160px;
 
         :first-of-type {

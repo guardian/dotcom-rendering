@@ -1,19 +1,14 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import {
-    desktop,
-    tablet,
-    mobileLandscape,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 import { pillarPalette, pillarMap } from '@frontend/lib/pillars';
 
 const wrapperCollapsed = css`
     height: 36px;
     overflow: hidden;
 
-    ${tablet} {
+    ${from.tablet} {
         height: 42px;
     }
 `;
@@ -22,7 +17,7 @@ const subnav = css`
     list-style: none;
     padding: 0 5px;
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         padding: 0 15px;
     }
 
@@ -40,7 +35,7 @@ const subnavCollapsed = css`
     ${subnav};
     max-width: calc(100% - 60px);
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         max-width: calc(100% - 70px);
     }
 `;
@@ -55,7 +50,7 @@ const fontStyle = css`
     /* stylelint-disable-next-line property-blacklist */
     line-height: 36px;
 
-    ${tablet} {
+    ${from.tablet} {
         height: 42px;
         /* Design System: Line height is being used here for centering layout, we need the primitives */
         /* stylelint-disable-next-line property-blacklist */
@@ -87,7 +82,7 @@ const moreStyle = css`
         color: ${palette.news.main};
     }
 
-    ${desktop} {
+    ${from.desktop} {
         display: none;
     }
 `;
@@ -108,7 +103,7 @@ const ps1 = css`
         margin-top: 12px;
         margin-left: 2px;
 
-        ${tablet} {
+        ${from.tablet} {
             margin-top: 16px;
         }
     }

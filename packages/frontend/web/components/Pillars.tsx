@@ -1,17 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-    tablet,
-    desktop,
-    leftCol,
-    mobileLandscape,
-    mobileMedium,
-    wide,
-    until,
-    headline,
-    palette,
-} from '@guardian/src-foundations';
+import { headline, palette } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-utilities';
+
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 
 // CSS Vars
@@ -30,7 +22,7 @@ const pillarsStyles = css`
     list-style: none;
     list-style-image: none;
     padding-left: 10px;
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         padding-left: 20px;
     }
     li {
@@ -38,10 +30,10 @@ const pillarsStyles = css`
         display: block;
         position: relative;
         width: ${preDesktopPillarWidth};
-        ${desktop} {
+        ${from.desktop} {
             width: ${preLeftColPillarWidth}px;
         }
-        ${leftCol} {
+        ${from.leftCol} {
             width: ${pillarWidth}px;
         }
     }
@@ -54,19 +46,19 @@ const pillarsStyles = css`
         left: 0;
         right: 0;
         height: 37px;
-        ${tablet} {
+        ${from.tablet} {
             border: 1px solid ${palette.brand.pastel};
             border-bottom: 0;
             height: 49px;
         }
-        ${desktop} {
+        ${from.desktop} {
             height: 43px;
         }
     }
 `;
 
 const showMenuUnderline = css`
-    ${desktop} {
+    ${from.desktop} {
         :before {
             bottom: 0;
         }
@@ -86,11 +78,11 @@ const pillarStyle = css`
         margin-left: -20px;
         width: ${preDesktopPillarWidth};
 
-        ${desktop} {
+        ${from.desktop} {
             width: ${preLeftColFirstPillarWidth}px;
         }
 
-        ${leftCol} {
+        ${from.leftCol} {
             width: ${firstPillarWidth}px;
         }
         a {
@@ -116,11 +108,11 @@ const pillarDivider = css`
         width: 1px;
         background-color: ${palette.brand.pastel};
 
-        ${tablet} {
+        ${from.tablet} {
             bottom: 17px;
         }
 
-        ${desktop} {
+        ${from.desktop} {
             bottom: 0.6em;
         }
     }
@@ -140,27 +132,27 @@ const linkStyle = css`
     overflow: hidden;
     text-decoration: none;
     z-index: 1;
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         font-size: 15.7px;
         padding: 9px 4px 0;
     }
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         font-size: 18px;
         padding: 7px 4px 0;
     }
-    ${tablet} {
+    ${from.tablet} {
         font-size: 22px;
         padding-top: 13px;
         height: 48px;
         padding-right: 20px;
         padding-left: 9px;
     }
-    ${desktop} {
+    ${from.desktop} {
         padding-top: 11px;
         height: 42px;
     }
 
-    ${wide} {
+    ${from.wide} {
         padding-top: 9px;
         font-size: 24px;
     }

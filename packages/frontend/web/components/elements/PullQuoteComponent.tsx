@@ -2,14 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@frontend/lib/pillars';
-import {
-    palette,
-    body,
-    desktop,
-    leftCol,
-    phablet,
-    mobileLandscape,
-} from '@guardian/src-foundations';
+import { palette, body } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 import { unescapeData } from '@frontend/lib/escapeData';
 
 const gutter = 20;
@@ -53,7 +47,7 @@ const supportingStyles = (pillar: Pillar) =>
         float: left;
         ${body({ level: 2 })};
 
-        ${leftCol} {
+        ${from.leftCol} {
             margin-left: -${gutter / 2 + gsSpan(3) / 2}px;
         }
 
@@ -61,7 +55,7 @@ const supportingStyles = (pillar: Pillar) =>
             left: ${gutter / 2};
             border-radius: 0 0 ${quoteTail}px;
 
-            ${leftCol} {
+            ${from.leftCol} {
                 border-radius: 0 0 0 ${quoteTail}px;
                 left: 0rem;
                 margin-left: ${gsSpan(3) / 2 - quoteTail + 1}px;
@@ -77,13 +71,13 @@ const inlineStyles = (pillar: Pillar) =>
         display: block;
         ${body({ level: 2 })};
 
-        ${mobileLandscape} {
+        ${from.mobileLandscape} {
             margin-left: -${gutter}px;
         }
-        ${phablet} {
+        ${from.phablet} {
             margin-left: -${gutter / 2}px;
         }
-        ${leftCol} {
+        ${from.leftCol} {
             margin-left: -3.5rem;
         }
 
@@ -91,16 +85,16 @@ const inlineStyles = (pillar: Pillar) =>
             left: 0rem;
             border-radius: 0 0 ${quoteTail}px;
 
-            ${mobileLandscape} {
+            ${from.mobileLandscape} {
                 left: ${gutter}px;
             }
-            ${phablet} {
+            ${from.phablet} {
                 left: ${gutter / 2}px;
             }
-            ${desktop} {
+            ${from.desktop} {
                 left: 0px;
             }
-            ${leftCol} {
+            ${from.leftCol} {
                 left: ${quoteMark + gutter / 2}px;
             }
         }`,

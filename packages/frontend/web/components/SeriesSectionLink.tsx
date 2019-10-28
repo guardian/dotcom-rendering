@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
-import { leftCol, headline } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 const sectionLabelText = css`
     font-weight: 700;
@@ -24,7 +25,7 @@ const pillarColours = pillarMap(
 const primaryStyle = css`
     font-weight: 700;
     ${headline({ level: 1 })};
-    ${leftCol} {
+    ${from.leftCol} {
         ${headline({ level: 2 })};
     }
 `;

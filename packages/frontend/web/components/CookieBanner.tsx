@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import {
-    headline,
-    textSans,
-    body,
-    until,
-    palette,
-} from '@guardian/src-foundations';
+import { headline, textSans, body, palette } from '@guardian/src-foundations';
+import { until } from '@guardian/src-utilities';
 import TickIcon from '@frontend/static/icons/tick.svg';
 import RoundelIcon from '@frontend/static/icons/the-guardian-roundel.svg';
 import { getCookie, addCookie } from '@frontend/web/browser/cookie';
