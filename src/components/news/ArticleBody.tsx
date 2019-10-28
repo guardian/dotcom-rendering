@@ -2,7 +2,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles, basePx, icons, textSans } from '../../styles';
 import { palette } from '@guardian/src-foundations'
-import { until } from '@guardian/src-utilities'
+import { until, from } from '@guardian/src-utilities'
 import { render } from "../../renderBlocks";
 import { Block } from 'types/capi-thrift-models';
 
@@ -38,11 +38,21 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
                     font-size: 16px;
                 }
             }
+
+            ${until.phablet} {
+                margin-left: ${basePx(-1)};
+                margin-right: ${basePx(-1)};
+            }
+        }
+
+        ${from.desktop} {
+            position: absolute;
+            margin-left: calc(620px + ${basePx(2)});
+            min-width: 300px;
         }
     }
 
     ${until.wide} {
-        .ad-placeholder,
         figure:not(.interactive) {
             margin-left: ${basePx(-1)};
             margin-right: ${basePx(-1)};
