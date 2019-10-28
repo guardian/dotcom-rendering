@@ -69,3 +69,48 @@ describe('Adds short classname correctly', () => {
         expect(fifteenParagrpahsAndTwoAds[10].props.className).toBe('ad-placeholder');
     });
 });
+
+describe('Handles different DOM structures', () => {
+    test('Does not count nested p tags', () => {
+        const nestedParagraphs = [
+            h('p', null, null),
+            h('p', null,
+                h('p', null, null),
+                h('p', null, null),
+                h('p', null, null)
+            ),
+        ]
+
+        const nestedParagraphsWithNoAds = insertAdPlaceholders(nestedParagraphs);
+        expect(nestedParagraphsWithNoAds.length).toBe(2)
+    });
+
+    test('Does not count other tag types', () => {
+        const twoParagraphs = [
+            h('p', null, null),
+            h('p', null, null),
+            h('div', null, null),
+            h('div', null, null),
+            h('div', null, null),
+            h('div', null, null)
+        ]
+
+        const sixTagsWithNoAds = insertAdPlaceholders(twoParagraphs);
+        expect(sixTagsWithNoAds.length).toBe(6)
+    });
+
+    test('Inserts placeholders at correct positions with other types of tags', () => {
+        const threeParagraphs = [
+            h('p', null, null),
+            h('p', null, null),
+            h('section', null, null),
+            h('p', null, null),
+            h('p', null, null),
+            h('div', null, null)
+        ]
+
+        const sixTagsWithOneAd: any = insertAdPlaceholders(threeParagraphs);
+        expect(sixTagsWithOneAd.length).toBe(7);
+        expect(sixTagsWithOneAd[5].props.className === 'ad-placeholder short');
+    });
+});
