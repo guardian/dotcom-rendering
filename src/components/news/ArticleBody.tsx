@@ -42,8 +42,8 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     }
 
     ${until.wide} {
-        figure,
-        .ad-placeholder {
+        .ad-placeholder,
+        figure:not(.interactive) {
             margin-left: ${basePx(-1)};
             margin-right: ${basePx(-1)};
         }
