@@ -8,10 +8,10 @@ import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks'
 import { Logo } from './Logo';
 import { EditionDropdown } from './EditionDropdown';
 import { Links } from './Links/Links';
-import { Nav } from './Nav/Nav';
 
 const headerStyles = css`
-    position: static;
+    /* Ensure header height contains it's children */
+    overflow: auto;
 `;
 
 interface Props {
@@ -36,7 +36,7 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
     }
 
     public render() {
-        const { nav, pillar, edition } = this.props;
+        const { nav, edition } = this.props;
         const { isSignedIn } = this.state;
 
         return (
@@ -62,7 +62,6 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
                     inHeader={true}
                 />
                 <Links isSignedIn={isSignedIn} />
-                <Nav pillar={pillar} nav={nav} />
             </header>
         );
     }

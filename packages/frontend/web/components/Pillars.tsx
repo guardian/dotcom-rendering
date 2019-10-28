@@ -47,7 +47,6 @@ const pillarsStyles = css`
         right: 0;
         height: 37px;
         ${from.tablet} {
-            border: 1px solid ${palette.brand.pastel};
             border-bottom: 0;
             height: 49px;
         }

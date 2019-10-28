@@ -7,6 +7,7 @@ import { SubNav } from '@root/packages/frontend/web/components/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { OutbrainContainer } from '@frontend/web/components/Outbrain';
 import { Section } from '@frontend/web/components/Section';
+import { Nav } from '@frontend/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/packages/frontend/web/components/HeaderAdSlot';
 
 import { DecideContent } from './DecideContent';
@@ -34,6 +35,16 @@ export const Article: React.FC<{
                 pillar={data.CAPI.pillar}
                 edition={data.CAPI.editionId}
             />
+        </Section>
+
+        <Section
+            showSideBorders={true}
+            borderColour={palette.brand.pastel}
+            showTopBorder={false}
+            padded={false}
+            backgroundColour={palette.brand.main}
+        >
+            <Nav pillar={data.CAPI.pillar} nav={data.NAV} />
         </Section>
 
         <Section backgroundColour={palette.neutral[100]} padded={false}>
