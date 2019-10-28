@@ -28,22 +28,18 @@ const padded = css`
     }
 `;
 
-const messageFontWeight = 700;
 const message = css`
     color: ${palette.yellow.main};
-    ${headline({ level: 2 })};
-    font-weight: ${messageFontWeight};
+    ${headline({ level: 2, fontWeight: 'bold' })};
     padding-top: 3px;
     margin-bottom: 3px;
 
     ${desktop} {
-        ${headline({ level: 3 })}
-        font-weight: ${messageFontWeight};
+        ${headline({ level: 3, fontWeight: 'bold' })}
     }
 
     ${leftCol} {
-        ${headline({ level: 5 })}
-        font-weight: ${messageFontWeight};
+        ${headline({ level: 5, fontWeight: 'bold' })}
     }
 `;
 
