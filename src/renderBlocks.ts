@@ -6,6 +6,7 @@ import jsdom from 'jsdom';
 import { Result, Err, fromUnsafe } from './types/Result';
 import { imageBlock } from './components/blocks/image';
 import { insertAdPlaceholders } from './ads';
+import { transform } from 'utils/contentTransformations';
 
 
 // ----- Setup ----- //
@@ -55,6 +56,8 @@ function textElement(node: Node): ReactNode {
             return node.textContent;
         case 'A':
             return h('a', getAttrs(node), node.textContent);
+        case 'SPAN':
+            return h('span', getAttrs(node), node.textContent);
         default:
             // Fallback to handle any element
             return h(
@@ -93,9 +96,8 @@ function reactFromElement(element: any, imageSalt: string): Result<string, React
 
     switch (element.type) {
         case 'text':
-
             return fromUnsafe(
-                () => JSDOM.fragment(element.textTypeData.html),
+                () => JSDOM.fragment(transform(element.textTypeData.html)),
                 'Failed to parse text element',
             ).map(textBlock);
 

@@ -253,3 +253,52 @@ export const articleWidthStyles = css`
         width: ${wideContentWidth}px;
     }
 `;
+
+const adHeight = '250px';
+
+export const adStyles = css`
+    .ad-placeholder {
+        color: ${palette.neutral[46]};
+        background: ${palette.neutral[97]};
+
+        .ad-labels {
+            ${textSans}
+            padding: ${basePx(1)};
+            padding-bottom: ${adHeight};
+
+            .ad-hide {
+                float: right;
+
+                &::after {
+                    padding-left: ${basePx(1)};
+                    ${icons}
+                    content: "\\e04F";
+                    font-size: 16px;
+                }
+            }
+        }
+
+        ${until.phablet} {
+            margin-left: ${basePx(-1)};
+            margin-right: ${basePx(-1)};
+        }
+
+        ${from.desktop} {
+            position: absolute;
+            margin-left: calc(${wideContentWidth}px + ${basePx(2)});
+            min-width: 300px;
+        }
+    }
+
+    .ad-placeholder.short:nth-of-type(1) {
+        ${from.desktop} {
+        top: 0;
+        }
+    }
+
+    .ad-placeholder.short:nth-of-type(2) {
+        ${from.desktop} {
+        top: 300px;
+        }
+    }
+`

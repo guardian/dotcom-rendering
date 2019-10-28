@@ -1,12 +1,21 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles, basePx, icons, textSans } from '../../styles';
+import {
+    sidePadding,
+    PillarStyles,
+    darkModeCss,
+    commonArticleStyles,
+    basePx,
+    adStyles
+} from '../../styles';
 import { palette } from '@guardian/src-foundations'
-import { until, from } from '@guardian/src-utilities'
+import { until } from '@guardian/src-utilities'
 import { render } from "../../renderBlocks";
 import { Block } from 'types/capi-thrift-models';
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
+    position: relative;
+
     .rich-link,
     .element-membership {
         float: left;
@@ -20,38 +29,6 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         border: none;
     }
 
-    .ad-placeholder {
-        background: ${palette.neutral[97]};
-
-        .ad-labels {
-            ${textSans}
-            padding: ${basePx(1)};
-            padding-bottom: 250px;
-
-            .ad-hide {
-                float: right;
-
-                &::after {
-                    padding-left: ${basePx(1)};
-                    ${icons}
-                    content: "\\e04F";
-                    font-size: 16px;
-                }
-            }
-
-            ${until.phablet} {
-                margin-left: ${basePx(-1)};
-                margin-right: ${basePx(-1)};
-            }
-        }
-
-        ${from.desktop} {
-            position: absolute;
-            margin-left: calc(620px + ${basePx(2)});
-            min-width: 300px;
-        }
-    }
-
     ${until.wide} {
         figure:not(.interactive) {
             margin-left: ${basePx(-1)};
@@ -59,6 +36,7 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         }
     }
 
+    ${adStyles}
     ${sidePadding}
     ${commonArticleStyles(pillarStyles)}
 `;
