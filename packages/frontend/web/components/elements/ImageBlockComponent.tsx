@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 
-import { wide, tablet, leftCol } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 const imageCss = {
     inline: css`
@@ -11,7 +11,7 @@ const imageCss = {
     `,
 
     supporting: css`
-        ${tablet} {
+        ${from.tablet} {
             position: relative;
             float: left;
             width: 300px;
@@ -20,10 +20,10 @@ const imageCss = {
             margin-right: 20px;
             line-height: 0;
         }
-        ${leftCol} {
+        ${from.leftCol} {
             margin-left: -160px;
         }
-        ${wide} {
+        ${from.wide} {
             width: 380px;
             margin-left: -240px;
         }
@@ -36,12 +36,12 @@ const imageCss = {
         position: relative;
         margin-top: 16px;
         margin-bottom: 12px;
-        ${leftCol} {
+        ${from.leftCol} {
             position: relative;
             margin-bottom: 16px;
             margin-left: -160px;
         }
-        ${wide} {
+        ${from.wide} {
             margin-left: -240px;
         }
     `,
@@ -53,22 +53,22 @@ const imageCss = {
         width: 120px;
         margin-right: 20px;
         margin-top: 6px;
-        ${tablet} {
+        ${from.tablet} {
             margin-right: 20px;
         }
-        ${wide} {
+        ${from.wide} {
             margin-left: -160px;
         }
-        ${wide} {
+        ${from.wide} {
             margin-left: -240px;
         }
-        ${leftCol} {
+        ${from.leftCol} {
             margin-left: -160px;
         }
-        ${leftCol} {
+        ${from.leftCol} {
             position: relative;
         }
-        ${tablet} {
+        ${from.tablet} {
             width: 140px;
         }
     `,

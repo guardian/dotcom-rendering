@@ -1,13 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 import ShareIcon from '@frontend/static/icons/share.svg';
-import {
-    from,
-    wide,
-    leftCol,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
+import { from, between } from '@guardian/src-utilities';
 import { integerCommas } from '@frontend/lib/formatters';
 import { useApi } from '@frontend/web/components/lib/api';
 
@@ -16,13 +11,13 @@ const shareCount = css`
     font-weight: bold;
     color: ${palette.neutral[46]};
 
-    ${leftCol} {
+    ${from.leftCol} {
         border-top: 1px solid ${palette.neutral[86]};
         width: 100%;
         padding-top: 6px;
     }
 
-    ${wide} {
+    ${from.wide} {
         flex: 1;
         border: 0;
         padding-top: 0;
@@ -31,7 +26,7 @@ const shareCount = css`
 `;
 
 const shareCountContainer = css`
-    ${leftCol} {
+    ${from.leftCol} {
         display: inline-block;
     }
 `;
@@ -52,7 +47,7 @@ const shareCountIcon = css`
 const countFull = css`
     display: block;
 
-    ${from.leftCol.until.wide} {
+    ${between.leftCol.and.wide} {
         display: none;
     }
 `;
@@ -60,7 +55,7 @@ const countFull = css`
 const countShort = css`
     display: none;
 
-    ${from.leftCol.until.wide} {
+    ${between.leftCol.and.wide} {
         display: block;
     }
 `;

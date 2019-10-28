@@ -2,7 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Dropdown, Link } from '@frontend/web/components/Dropdown';
-import { palette, desktop, wide } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 const editionDropdown = css`
     position: absolute;
@@ -19,11 +20,11 @@ const editionDropdown = css`
         height: 24px;
     }
 
-    ${desktop} {
+    ${from.desktop} {
         right: 121px;
         width: 110px;
     }
-    ${wide} {
+    ${from.wide} {
         right: 198px;
         width: 197px;
     }

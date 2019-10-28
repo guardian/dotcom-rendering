@@ -3,15 +3,8 @@
 import React from 'react';
 import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
-import {
-    textSans,
-    body,
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, body, palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 interface OutbrainSelectors {
     widget: string;
@@ -76,19 +69,19 @@ const outbrainContainer = css`
         border-top: 1px solid ${palette.neutral[86]};
         padding: 20px;
 
-        ${tablet} {
+        ${from.tablet} {
             max-width: 740px;
         }
 
-        ${desktop} {
+        ${from.desktop} {
             max-width: 980px;
         }
 
-        ${leftCol} {
+        ${from.leftCol} {
             max-width: 1140px;
         }
 
-        ${wide} {
+        ${from.wide} {
             max-width: 1300px;
         }
     }

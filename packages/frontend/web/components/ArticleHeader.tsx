@@ -1,14 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-    until,
-    from,
-    tablet,
-    leftCol,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
+import { from, until, between } from '@guardian/src-utilities';
 
 import { MainMedia } from '@frontend/web/components/MainMedia';
 import { ArticleHeadline } from '@frontend/web/components/ArticleHeadline';
@@ -37,12 +31,12 @@ const positionMainImage = (isShowcase: boolean) => {
                 order: 0;
             }
 
-            ${from.tablet.until.leftCol} {
+            ${between.tablet.and.leftCol} {
                 order: 4;
             }
 
             /* Move the standfirst above the main image when over 1140px */
-            ${leftCol} {
+            ${from.leftCol} {
                 order: 2;
             }
         `;
@@ -55,17 +49,13 @@ const positionMainImage = (isShowcase: boolean) => {
         }
 
         /* Above tablet, keep the image as the last header item shown */
-        ${tablet} {
+        ${from.tablet} {
             order: 4;
         }
     `;
 };
 
 const mainMedia = css`
-    @supports (display: grid) {
-        grid-template-areas: 'main-media';
-    }
-
     min-height: 1px;
     /*
     Thank you IE11, broken in stasis for all eternity.

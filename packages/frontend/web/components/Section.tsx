@@ -1,32 +1,26 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-    palette,
-    mobileLandscape,
-} from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 const center = css`
     position: relative;
     margin: auto;
 
-    ${tablet} {
+    ${from.tablet} {
         max-width: 740px;
     }
 
-    ${desktop} {
+    ${from.desktop} {
         max-width: 980px;
     }
 
-    ${leftCol} {
+    ${from.leftCol} {
         max-width: 1140px;
     }
 
-    ${wide} {
+    ${from.wide} {
         max-width: 1300px;
     }
 `;
@@ -34,13 +28,13 @@ const center = css`
 const padding = css`
     padding: 0 10px;
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         padding: 0 20px;
     }
 `;
 
 const sideBorders = (colour: string) => css`
-    ${tablet} {
+    ${from.tablet} {
         border-left: 1px solid ${colour};
         border-right: 1px solid ${colour};
     }

@@ -3,13 +3,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-    from,
-    tablet,
-    headline,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
+import { textSans, headline, palette } from '@guardian/src-foundations';
+import { from, between } from '@guardian/src-utilities';
 import { pillarMap, pillarPalette } from '@frontend/lib/pillars';
 import { ArticleRenderer } from '@frontend/web/components/lib/ArticleRenderer';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
@@ -61,7 +56,7 @@ const captionFont = css`
 `;
 
 const bodyStyle = css`
-    ${from.tablet.until.desktop} {
+    ${between.tablet.and.desktop} {
         padding-right: 80px;
     }
 
@@ -91,7 +86,7 @@ const bodyStyle = css`
         margin-bottom: 12px;
     }
 
-    ${tablet} {
+    ${from.tablet} {
         ul {
             margin-bottom: 16px;
         }
