@@ -5,6 +5,7 @@ import jsdom from 'jsdom';
 
 import { Result, Err, fromUnsafe } from './types/Result';
 import { imageBlock } from './components/blocks/image';
+import { insertAdPlaceholders } from './ads';
 
 
 // ----- Setup ----- //
@@ -41,13 +42,13 @@ function getAttrs(node: Node): {} {
     }
 }
 
-function textElement(node: Node, idx: number): ReactNode {
+function textElement(node: Node): ReactNode {
 
     switch (node.nodeName) {
         case 'P':
             return h(
                 'p',
-                { key: idx },
+                null,
                 ...Array.from(node.childNodes).map(textElement),
             );
         case '#text':
@@ -58,7 +59,7 @@ function textElement(node: Node, idx: number): ReactNode {
             // Fallback to handle any element
             return h(
                 node.nodeName.toLocaleLowerCase(),
-                { key: idx },
+                null,
                 ...Array.from(node.childNodes).map(textElement),
             );
     }
@@ -148,7 +149,8 @@ function elementsToReact(elements: any, imageSalt: string): ParsedReact {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function render(bodyElements: any, imageSalt: string): Rendered {
     const reactNodes = elementsToReact(bodyElements, imageSalt);
-    const main = h('article', null, ...reactNodes.nodes);
+    const reactNodesWithAds = insertAdPlaceholders(reactNodes.nodes)
+    const main = h('article', null, ...reactNodesWithAds);
 
     return {
         errors: reactNodes.errors,
