@@ -7,7 +7,10 @@ import {
     headline,
     textSans,
     palette,
-    desktop,
+    until,
+    from,
+    wide,
+    body,
 } from '@guardian/src-foundations';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
@@ -50,11 +53,17 @@ const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkContainer = css`
-    width: 130px;
+    ${until.wide} {
+        width: 130px;
+    }
     float: left;
     margin-right: 20px;
     margin-bottom: 5px;
-    ${desktop} {
+    margin-left: 0px;
+    ${from.leftCol.until.wide} {
+        margin-left: -150px;
+    }
+    ${wide} {
         margin-left: -240px;
         width: 220px;
     }
@@ -85,11 +94,11 @@ const quote: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkTitle = css`
-    ${headline({ level: 1 })};
-    font-weight: 400;
+    ${body({ level: 1 })};
     padding-top: 1px;
     padding-bottom: 1px;
-    ${desktop} {
+    font-weight: 400;
+    ${wide} {
         ${headline({ level: 2 })};
         padding-bottom: 5px;
     }
@@ -104,7 +113,10 @@ const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
 };
 
 const readMoreTextStyle = css`
-    ${headline({ level: 1 })};
+    ${body({ level: 1 })};
+    ${wide} {
+        ${headline({ level: 1 })}
+    }
     display: inline-block;
     height: 30px;
     line-height: 26px;
@@ -115,9 +127,9 @@ const readMoreTextStyle = css`
 `;
 
 const byline = css`
-    ${headline({ level: 1 })};
+    ${body({ level: 1 })};
     font-style: italic;
-    ${desktop} {
+    ${wide} {
         ${headline({ level: 2 })};
     }
 `;
@@ -135,7 +147,7 @@ const contributorImageWrapper = css`
     height: 5rem;
     margin-left: auto;
     margin-right: 0.3rem;
-    ${desktop} {
+    ${wide} {
         width: 8.5rem;
         height: 8.5rem;
     }
