@@ -1,15 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import {
-    mobileMedium,
-    mobileLandscape,
-    tablet,
-    desktop,
-    wide,
-    palette,
-    visuallyHidden,
-} from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from, visuallyHidden } from '@guardian/src-utilities';
+
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 
 const link = css`
@@ -18,19 +12,19 @@ const link = css`
     margin-right: 54px;
     margin-bottom: 21px;
 
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         margin-right: 10px;
     }
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         margin-right: 20px;
     }
-    ${desktop} {
+    ${from.desktop} {
         margin-top: 5px;
         margin-bottom: 15px;
         position: relative;
         z-index: 1071;
     }
-    ${wide} {
+    ${from.wide} {
         margin-right: 96px;
     }
 `;
@@ -38,15 +32,15 @@ const link = css`
 const style = css`
     height: 44px;
     width: 135px;
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         height: 56px;
         width: 175px;
     }
-    ${tablet} {
+    ${from.tablet} {
         height: 72px;
         width: 224px;
     }
-    ${desktop} {
+    ${from.desktop} {
         height: 95px;
         width: 295px;
     }

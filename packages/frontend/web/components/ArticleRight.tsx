@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { until, desktop } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-utilities';
 
 const hideBelowDesktop = css`
     ${until.desktop} {
@@ -8,7 +8,7 @@ const hideBelowDesktop = css`
         display: none;
     }
 
-    ${desktop} {
+    ${from.desktop} {
         /* above 980 */
         display: block;
         flex-basis: 300px;

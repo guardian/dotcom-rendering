@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { from, until, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { between, until } from '@guardian/src-utilities';
 
 import { ShareCount } from './ShareCount';
 import { Dateline } from './Dateline';
@@ -24,7 +25,7 @@ const guardianLines = css`
 `;
 
 const meta = css`
-    ${from.tablet.until.leftCol} {
+    ${between.tablet.and.leftCol} {
         order: 1;
     }
 

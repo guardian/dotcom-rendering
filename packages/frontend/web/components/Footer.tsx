@@ -1,18 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-    leftCol,
-    tablet,
-    until,
-    wide,
-    desktop,
-    textSans,
-    palette,
-} from '@guardian/src-foundations';
-import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { clearFix } from '@frontend/lib/mixins';
+import { textSans, palette } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-utilities';
 
+import { clearFix } from '@frontend/lib/mixins';
+import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 
@@ -53,7 +46,7 @@ const pillarWrap = css`
 const emailSignup = css`
     padding-top: 12px;
 
-    ${desktop} {
+    ${from.desktop} {
         margin: 0 ${emailSignupSideMargins}px;
         display: flex;
         flex-direction: row;
@@ -61,7 +54,7 @@ const emailSignup = css`
         width: ${emailSignupWidth}px;
     }
 
-    ${wide} {
+    ${from.wide} {
         margin-right: ${pillarWidth * 2 +
             firstPillarWidth -
             (emailSignupWidth +
@@ -117,12 +110,12 @@ const footerList = css`
             }
         }
 
-        ${tablet} {
+        ${from.tablet} {
             margin: 0 10px 36px 0;
             width: 150px;
         }
 
-        ${desktop} {
+        ${from.desktop} {
             :nth-of-type(1) {
                 border-left: ${footerBorders};
             }
@@ -153,7 +146,7 @@ const copyright = css`
 `;
 
 const footerItemContainers = css`
-    ${leftCol} {
+    ${from.leftCol} {
         display: flex;
     }
 

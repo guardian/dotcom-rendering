@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { until } from '@guardian/src-foundations';
+import { until } from '@guardian/src-utilities';
 
 const maxWidth = css`
     max-width: 630px;

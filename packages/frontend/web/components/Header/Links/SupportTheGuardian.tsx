@@ -1,14 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-
-import {
-    mobileLandscape,
-    tablet,
-    mobileMedium,
-    headline,
-    palette,
-    visuallyHidden,
-} from '@guardian/src-foundations';
+import { headline, palette } from '@guardian/src-foundations';
+import { from, visuallyHidden } from '@guardian/src-utilities';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { getCookie } from '@frontend/web/browser/cookie';
 import { AsyncClientComponent } from '@frontend/web/components/lib/AsyncClientComponent';
@@ -20,7 +13,7 @@ const style = css`
     margin-left: -20px;
     text-decoration: none;
 
-    ${mobileLandscape} {
+    ${from.mobileLandscape} {
         margin-left: -10px;
     }
 
@@ -53,7 +46,7 @@ const text = css`
     padding: 6px 20px 3px;
     position: relative;
 
-    ${tablet} {
+    ${from.tablet} {
         ${headline({ level: 1 })};
     }
 `;
@@ -64,11 +57,11 @@ const mobileSignInContainer = css`
     margin-left: -8px;
     float: left;
 
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         padding-top: 12px;
     }
 
-    ${tablet} {
+    ${from.tablet} {
         display: none;
     }
 `;
@@ -77,7 +70,7 @@ const mobileSignInIcon = css`
     height: 18px;
     width: 18px;
 
-    ${mobileMedium} {
+    ${from.mobileMedium} {
         height: 23px;
         width: 23px;
     }

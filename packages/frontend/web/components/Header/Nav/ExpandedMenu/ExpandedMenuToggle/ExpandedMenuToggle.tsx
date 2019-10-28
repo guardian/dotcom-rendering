@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-
-import {
-    headline,
-    visuallyHidden,
-    desktop,
-    palette,
-} from '@guardian/src-foundations';
-
+import { headline, palette } from '@guardian/src-foundations';
+import { from, visuallyHidden } from '@guardian/src-utilities';
 import { VeggieBurger } from './VeggieBurger';
 
 const screenReadable = css`
@@ -26,7 +20,7 @@ const openExpandedMenu = css`
     height: 48px;
     padding-left: 9px;
     padding-right: 20px;
-    ${desktop} {
+    ${from.desktop} {
         display: block;
         padding-top: 5px;
         height: 42px;

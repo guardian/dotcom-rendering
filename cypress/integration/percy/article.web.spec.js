@@ -12,6 +12,8 @@ describe('For WEB', function() {
     articles.map((article, index) => {
         const { url, pillar, designType } = article;
         it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
+            // Prevent the Privacy consent banner from obscuring snapshots
+            cy.setCookie('GU_TK', 'true');
             cy.visit(`Article?url=${url}`, visitOptions);
             cy.percySnapshot(`WEB-${pillar}-${designType}-${index}`);
         });
