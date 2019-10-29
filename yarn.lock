@@ -869,10 +869,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/src-foundations@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.3.2.tgz#8b7b7bfc25fcdaddc10c6f540167e6633c86e948"
-  integrity sha512-+bycGwCoBZYyKgO4+C3v66KdLDcVPHu+E3ZUoyVaNGY84HjFwakh2FVgAfyvthwhLzsgcKF3SiY/xukPZkjTEw==
+"@guardian/src-foundations@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.4.0.tgz#bdf77ed6e7f36d8a4aed0a69dde8351108699325"
+  integrity sha512-E19YNqyPlQG9RZW+uEIx51GJdlrC36ZaEvjFsRC98uh9FPFLu6tJj4fWoIB0/kbSZopouW21pb4kqva5iy1mlA==
 
 "@guardian/src-utilities@^0.1.5":
   version "0.1.5"
