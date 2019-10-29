@@ -195,10 +195,6 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     .element-membership {
         background: ${palette.neutral[97]};
         padding: ${basePx(1)};
-        
-        ${until.wide} {
-            margin-left: ${basePx(1)};
-        }
 
         h1 {
             margin: 0;
@@ -260,6 +256,7 @@ export const adStyles = css`
     .ad-placeholder {
         color: ${palette.neutral[46]};
         background: ${palette.neutral[97]};
+        clear: both;
 
         .ad-labels {
             ${textSans}
