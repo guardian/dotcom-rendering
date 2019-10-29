@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { css } from 'emotion';
 
 import { Hide } from '@frontend/web/components/Hide';
+import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
 import { getCookie } from '@frontend/web/browser/cookie';
 
 import { Logo } from './Logo';
@@ -39,7 +40,14 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
         return (
             <header className={headerStyles}>
                 <Hide when="below" breakpoint="desktop">
-                    <div id="edition-dropdown-portal" />
+                    <div id="edition-root">
+                        <EditionDropdown
+                            edition={this.props.edition}
+                            dataLinkName={
+                                'nav2 : topbar : edition-picker: toggle'
+                            }
+                        />
+                    </div>
                 </Hide>
                 <Logo />
                 {/*

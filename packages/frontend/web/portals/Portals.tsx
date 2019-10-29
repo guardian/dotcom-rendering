@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import { MostViewedPortal } from '@frontend/web/portals/MostViewedPortal';
-import { EditionDropdownPortal } from '@frontend/web/portals/EditionDropdownPortal';
 import { ShareCountPortal } from '@frontend/web/portals/ShareCountPortal';
 import { RichLinkPortals } from '@root/packages/frontend/web/portals/RichLinksPortals';
 import { HeaderRevenueLinksPortal } from '@root/packages/frontend/web/portals/HeaderRevenueLinksPortal';
@@ -15,7 +14,6 @@ export const renderPortals = (CAPI: CAPIType, config: ConfigType) => {
         render(
             <>
                 <MostViewedPortal CAPI={CAPI} config={config} />
-                <EditionDropdownPortal CAPI={CAPI} />
                 <ShareCountPortal CAPI={CAPI} config={config} />
                 <RichLinkPortals CAPI={CAPI} config={config} />
                 <HeaderRevenueLinksPortal CAPI={CAPI} />
