@@ -1,37 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
-import {
-    until,
-    mobileMedium,
-    mobileLandscape,
-    phablet,
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-} from '@guardian/src-foundations';
-
-const breakpoints = {
-    mobileMedium,
-    mobileLandscape,
-    phablet,
-    tablet,
-    desktop,
-    leftCol,
-    wide,
-};
+import { until, from, Breakpoint } from '@guardian/src-utilities';
 
 type Props = {
     children: JSX.Element | JSX.Element[];
     when: 'above' | 'below';
-    breakpoint:
-        | 'mobileMedium'
-        | 'mobileLandscape'
-        | 'phablet'
-        | 'tablet'
-        | 'desktop'
-        | 'leftCol'
-        | 'wide';
+    breakpoint: Breakpoint;
 };
 
 export const Hide = ({ children, when, breakpoint }: Props) => {
@@ -44,7 +18,7 @@ export const Hide = ({ children, when, breakpoint }: Props) => {
         `;
     } else {
         whenToHide = css`
-            ${breakpoints[breakpoint]} {
+            ${from[breakpoint]} {
                 display: none;
             }
         `;
