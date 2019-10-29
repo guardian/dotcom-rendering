@@ -1,35 +1,36 @@
-import React from 'react';
+import { createElement, ReactNode } from 'react';
 
-const h = React.createElement;
+const h = createElement;
 
-function insertAdPlaceholders(reactNodes: React.ReactNode[]): React.ReactNode[] {
-    // Insert ad placeholders after the following paragraph tags
-    const adIndexes = [3, 9];
+function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
+    const adIndices = [3, 9];
+    const flattenedNodes = reactNodes.flat();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const flattenedNodes: any = reactNodes
-        .flat()
-        .map((node: { type: string }, index: number) => ({ ...node, index }));
+    const isPara = (node: { type: string }) => node.type === 'p';
+    const numParas = flattenedNodes.filter(isPara).length;
 
-    const paragraphs = flattenedNodes.filter((node: { type: string }) => node.type === 'p');
-    const className = paragraphs.length < 15 ? 'ad-placeholder short' : 'ad-placeholder';
+    const className = numParas < 15 ? 'ad-placeholder short' : 'ad-placeholder';
 
-    const ad = h('div', { className  },
+    const ad = h('aside', { className },
         h('div', { className: 'ad-labels' },
-            h('span', null, 'Advertisement'),
-            h('span', { className: 'ad-hide' }, 'Hide')
+            h('h1', null, 'Advertisement'),
+            h('button', { className: 'ad-hide' }, 'Hide')
         )
     );
-    
-    paragraphs.forEach((p: { index: number }, i: number) => {
-        adIndexes.forEach((adIndex, idx) => {
-            if (i === adIndex) {
-                flattenedNodes.splice(p.index + idx, 0, ad);
-            }
-        })
-    });
 
-    return flattenedNodes;
+    const insertAd = (para: number, nodes: ReactNode[]) =>
+        adIndices.includes(para) ? [...nodes, ad] : nodes;
+
+    return flattenedNodes
+        .reduce(([paraNum, prevNodes], node) => {
+            const nodes = [ ...prevNodes, node ];
+            if (isPara(node)) {
+                const newParaNum = paraNum + 1;
+                return [ newParaNum, insertAd(newParaNum, nodes) ];
+            }
+            return [ paraNum, nodes ];
+        }, [0, []])
+        .pop();
 }
 
 export { insertAdPlaceholders }

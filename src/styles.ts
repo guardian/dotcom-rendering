@@ -263,8 +263,16 @@ export const adStyles = css`
             padding: ${basePx(1)};
             padding-bottom: ${adHeight};
 
+            h1 {
+                margin: 0;
+                float: left;
+            }
+
             .ad-hide {
                 float: right;
+                background: none;
+                border: none;
+                font-size: 16px;
 
                 &::after {
                     padding-left: ${basePx(1)};

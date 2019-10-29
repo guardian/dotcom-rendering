@@ -7,10 +7,10 @@ import {
     commonArticleStyles,
     basePx,
     adStyles
-} from '../../styles';
+} from 'styles';
 import { palette } from '@guardian/src-foundations'
 import { until } from '@guardian/src-utilities'
-import { render } from "../../renderBlocks";
+import { render } from "renderBlocks";
 import { Block } from 'types/capi-thrift-models';
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
