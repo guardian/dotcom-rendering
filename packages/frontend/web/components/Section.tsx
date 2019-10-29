@@ -49,15 +49,17 @@ const setBackgroundColour = (colour: string) => css`
 `;
 
 type Props = {
+    id?: string;
     showSideBorders?: boolean;
     showTopBorder?: boolean;
     padded?: boolean;
     backgroundColour?: string;
     borderColour?: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 export const Section = ({
+    id,
     showSideBorders = true,
     showTopBorder = true,
     padded = true,
@@ -71,6 +73,7 @@ export const Section = ({
         )}
     >
         <div
+            id={id}
             className={cx(
                 center,
                 showSideBorders && sideBorders(borderColour),
@@ -78,7 +81,7 @@ export const Section = ({
                 padded && padding,
             )}
         >
-            {children}
+            {children && children}
         </div>
     </section>
 );

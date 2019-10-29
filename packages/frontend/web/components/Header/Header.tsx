@@ -3,10 +3,8 @@ import { css } from 'emotion';
 
 import { Hide } from '@frontend/web/components/Hide';
 import { getCookie } from '@frontend/web/browser/cookie';
-import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 
 import { Logo } from './Logo';
-import { EditionDropdown } from './EditionDropdown';
 import { Links } from './Links/Links';
 
 const headerStyles = css`
@@ -36,31 +34,20 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
     }
 
     public render() {
-        const { nav, edition } = this.props;
         const { isSignedIn } = this.state;
 
         return (
             <header className={headerStyles}>
                 <Hide when="below" breakpoint="desktop">
-                    <EditionDropdown
-                        edition={edition}
-                        dataLinkName={'nav2 : topbar : edition-picker: toggle'}
-                    />
+                    <div id="edition-dropdown-portal" />
                 </Hide>
                 <Logo />
                 {/*
-                        TODO: The properties of the Links component
-                        have been hardcoded to false. At some point
-                        these need to be dynamic.
-                    */}
-
-                <ReaderRevenueLinks
-                    urls={nav.readerRevenueLinks.header}
-                    edition={edition}
-                    dataLinkNamePrefix={'nav2 : '}
-                    noResponsive={false}
-                    inHeader={true}
-                />
+                    TODO: The properties of the Links component
+                    have been hardcoded to false. At some point
+                    these need to be dynamic.
+                */}
+                <div id="reader-revenue-links-portal" />
                 <Links isSignedIn={isSignedIn} />
             </header>
         );

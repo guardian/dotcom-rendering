@@ -1,6 +1,5 @@
 import React from 'react';
 import { palette } from '@guardian/src-foundations';
-import { MostViewed } from '@frontend/web/components/MostViewed/MostViewed';
 import { Header } from '@root/packages/frontend/web/components/Header/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { SubNav } from '@root/packages/frontend/web/components/SubNav/SubNav';
@@ -38,6 +37,7 @@ export const Article: React.FC<{
         </Section>
 
         <Section
+            id="nav-root"
             showSideBorders={true}
             borderColour={palette.brand.pastel}
             showTopBorder={false}
@@ -67,13 +67,7 @@ export const Article: React.FC<{
             <OutbrainContainer config={data.config} />
         </Section>
 
-        <Section>
-            <MostViewed
-                sectionName={data.CAPI.sectionName}
-                config={data.config}
-                pillar={data.CAPI.pillar}
-            />
-        </Section>
+        <Section id="most-viewed-portal" />
 
         <Section padded={false}>
             <SubNav

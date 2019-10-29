@@ -3,7 +3,6 @@ import { SubheadingBlockComponent } from '@frontend/web/components/elements/Subh
 import { ImageBlockComponent } from '@frontend/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@frontend/web/components/elements/TweetBlockComponent';
 import { PullQuoteComponent } from '@frontend/web/components/elements/PullQuoteComponent';
-import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -53,14 +52,7 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return (
-                        <RichLinkComponent
-                            key={i}
-                            element={element}
-                            pillar={pillar}
-                            ajaxEndpoint={config.ajaxUrl}
-                        />
-                    );
+                    return <div id={`rich-link-${i}-portal`} />;
                 default:
                     return null;
             }

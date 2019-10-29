@@ -1,26 +1,27 @@
-import React from 'react';
 import { hydrate as hydrateCSS } from 'emotion';
-import { hydrate as hydrateApp } from 'react-dom';
-import { Article } from '@frontend/web/pages/Article';
 import { startup } from '@frontend/web/browser/startup';
 
+import { renderPortals } from '@frontend/web/portals/Portals';
+import { hydrateIslands } from '@frontend/web/islands/islands';
+
 const init = (): Promise<void> => {
-    const { cssIDs, data } = window.guardian.app;
-    const container = document.getElementById('app');
+    const {
+        cssIDs,
+        data: { CAPI, config, NAV },
+    } = window.guardian.app;
 
-    if (container) {
-        /**
-         * TODO: Remove conditional when Emotion's issue is resolved.
-         * We're having to prevent emotion hydrating styles in the browser
-         * in development mode to retain the sourceMap info. As detailed
-         * in the issue raised here https://github.com/emotion-js/emotion/issues/487
-         */
-        if (process.env.NODE_ENV !== 'development') {
-            hydrateCSS(cssIDs);
-        }
-
-        hydrateApp(React.createElement(Article, { data }), container);
+    /**
+     * TODO: Remove conditional when Emotion's issue is resolved.
+     * We're having to prevent emotion hydrating styles in the browser
+     * in development mode to retain the sourceMap info. As detailed
+     * in the issue raised here https://github.com/emotion-js/emotion/issues/487
+     */
+    if (process.env.NODE_ENV !== 'development') {
+        hydrateCSS(cssIDs);
     }
+
+    renderPortals(CAPI, config);
+    hydrateIslands(CAPI, config, NAV);
 
     return Promise.resolve();
 };

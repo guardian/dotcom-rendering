@@ -133,7 +133,8 @@ export const htmlTemplate = ({
             </head>
 
             <body>
-                <div id="app">${html}</div>
+                <div id="portalRoot" style="display: none;" hidden></div>
+                ${html}
                 ${lowPriorityScriptTags.join('\n')}
             </body>
         </html>`;
