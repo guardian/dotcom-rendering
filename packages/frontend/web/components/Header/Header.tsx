@@ -47,7 +47,7 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
                     have been hardcoded to false. At some point
                     these need to be dynamic.
                 */}
-                <div id="reader-revenue-links-portal" />
+                <div id="reader-revenue-links-header-portal" />
                 <Links isSignedIn={isSignedIn} />
             </header>
         );

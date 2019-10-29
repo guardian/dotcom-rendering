@@ -5,7 +5,8 @@ import { MostViewedPortal } from '@frontend/web/portals/MostViewedPortal';
 import { EditionDropdownPortal } from '@frontend/web/portals/EditionDropdownPortal';
 import { ShareCountPortal } from '@frontend/web/portals/ShareCountPortal';
 import { RichLinkPortals } from '@root/packages/frontend/web/portals/RichLinksPortals';
-import { ReaderRevenueLinksPortal } from '@frontend/web/portals/ReaderRevenueLinksPortal';
+import { HeaderRevenueLinksPortal } from '@root/packages/frontend/web/portals/HeaderRevenueLinksPortal';
+import { FooterRevenueLinksPortal } from '@root/packages/frontend/web/portals/FooterRevenueLinksPortal';
 
 export const renderPortals = (CAPI: CAPIType, config: ConfigType) => {
     const portalRoot = document.getElementById('portalRoot');
@@ -17,7 +18,8 @@ export const renderPortals = (CAPI: CAPIType, config: ConfigType) => {
                 <EditionDropdownPortal CAPI={CAPI} />
                 <ShareCountPortal CAPI={CAPI} config={config} />
                 <RichLinkPortals CAPI={CAPI} config={config} />
-                <ReaderRevenueLinksPortal CAPI={CAPI} />
+                <HeaderRevenueLinksPortal CAPI={CAPI} />
+                <FooterRevenueLinksPortal CAPI={CAPI} />
             </>,
             portalRoot,
         );

@@ -3,13 +3,13 @@ import { createPortal } from 'react-dom';
 
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 
-export const ReaderRevenueLinksPortal = ({
+export const HeaderRevenueLinksPortal = ({
     CAPI,
 }: {
     CAPI: CAPIType;
 }): React.ReactPortal | null => {
     const ReaderRevenueLinksRoot = document.getElementById(
-        'reader-revenue-links-portal',
+        'reader-revenue-links-header-portal',
     );
     if (!ReaderRevenueLinksRoot) {
         return null;
