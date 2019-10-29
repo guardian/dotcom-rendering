@@ -1236,7 +1236,7 @@
                 "sentryHost": {
                     "type": "string"
                 },
-                "sentryDsn": {
+                "dcrSentryDsn": {
                     "type": "string"
                 },
                 "switches": {
@@ -1291,6 +1291,7 @@
                 "revisionNumber",
                 "sentryHost",
                 "sentryPublicApiKey",
+                "dcrSentryDsn",
                 "stage",
                 "switches"
             ]

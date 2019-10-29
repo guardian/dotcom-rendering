@@ -244,7 +244,7 @@ interface ConfigType {
     ajaxUrl: string;
     sentryPublicApiKey: string;
     sentryHost: string;
-    sentryDsn: string;
+    dcrSentryDsn: string;
     switches: { [key: string]: boolean };
     abTests: { [key: string]: string };
     dfpAccountId: string;
