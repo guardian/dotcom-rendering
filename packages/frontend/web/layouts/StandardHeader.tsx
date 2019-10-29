@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { from, until } from '@guardian/src-utilities';
 
@@ -38,6 +38,10 @@ const headerStyles = css`
     flex-direction: column;
 `;
 
+const maxWidth = css`
+    max-width: 620px;
+`;
+
 type Props = {
     CAPI: CAPIType;
 };
@@ -69,7 +73,7 @@ export const StandardHeader = ({ CAPI }: Props) => {
             <HeaderItem order={3}>
                 <ArticleStandfirst pillar={pillar} standfirst={standfirst} />
             </HeaderItem>
-            <div className={positionMainImage}>
+            <div className={cx(positionMainImage, maxWidth)}>
                 <MainMedia elements={mainMediaElements} pillar={pillar} />
             </div>
         </header>
