@@ -20,6 +20,7 @@ export const ReaderRevenueLinksPortal = ({
             edition={CAPI.editionId}
             dataLinkNamePrefix={'nav2 : '}
             noResponsive={false}
+            inHeader={true}
         />,
         ReaderRevenueLinksRoot,
     );
