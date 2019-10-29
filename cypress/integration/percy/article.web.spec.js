@@ -15,10 +15,7 @@ describe('For WEB', function() {
             // Prevent the Privacy consent banner from obscuring snapshots
             cy.setCookie('GU_TK', 'true');
             // Fix the location to UK (for edition)
-            cy.setCookie(
-                'gu.geolocation',
-                '{"value":"GB","expires":1973231535750}',
-            );
+            cy.setCookie('GU_EDITION', 'UK');
             cy.visit(`Article?url=${url}`, visitOptions);
             cy.percySnapshot(`WEB-${pillar}-${designType}-${index}`, {
                 widths: [739, 979, 1139, 1299, 1400],
