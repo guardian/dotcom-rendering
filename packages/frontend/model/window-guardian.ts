@@ -75,12 +75,8 @@ export interface WindowGuardian {
     polyfilled: boolean;
     adBlockers: any;
     modules: {
-        raven: {
-            reportError?: (
-                err: Error,
-                tags: { [key: string]: string },
-                shouldThrow: boolean,
-            ) => void;
+        sentry: {
+            reportError: (error: Error, feature: string) => void;
         };
     };
 }
@@ -101,7 +97,9 @@ export const makeWindowGuardian = (
             onDetect: [],
         },
         modules: {
-            raven: {},
+            sentry: {
+                reportError: () => null,
+            },
         },
     };
 };

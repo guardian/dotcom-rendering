@@ -19,6 +19,7 @@ describe('MostViewed', () => {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         sentryHost: '',
         sentryPublicApiKey: '',
+        sentryDsn: '',
         switches: {},
         abTests: {},
         dfpAccountId: '',

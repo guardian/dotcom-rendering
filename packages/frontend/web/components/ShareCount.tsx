@@ -79,13 +79,7 @@ export const ShareCount = ({ config, pageId }: Props) => {
     const { data, error } = useApi<ShareCountType>(url);
 
     if (error) {
-        window.guardian.modules.raven.reportError(
-            error,
-            {
-                feature: 'share-count',
-            },
-            false,
-        );
+        window.guardian.modules.sentry.reportError(error, 'share-count');
 
         return null;
     }

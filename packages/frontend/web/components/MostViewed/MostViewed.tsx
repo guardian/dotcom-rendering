@@ -108,13 +108,9 @@ export const MostViewed = ({ config, sectionName, pillar }: Props) => {
     const { data, error } = useApi<TabType[]>(url);
 
     if (error) {
-        window.guardian.modules.raven.reportError(
-            error,
-            {
-                feature: 'most-viewed',
-            },
-            true,
-        );
+        window.guardian.modules.sentry.reportError(error, 'most-viewed');
+
+        return null;
     }
 
     if (data) {
