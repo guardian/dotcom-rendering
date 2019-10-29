@@ -5,6 +5,7 @@ import { headline, textSans, body, palette } from '@guardian/src-foundations';
 
 const standfirstStyles = css`
     ${body({ level: 2 })};
+    max-width: 550px;
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
