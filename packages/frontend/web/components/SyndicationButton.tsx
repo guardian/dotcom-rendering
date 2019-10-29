@@ -23,7 +23,7 @@ export const SyndicationButton: React.FC<{
     const syndicationButton = css`
         color: ${palette.neutral[46]};
         background-color: transparent;
-        border-color: ${palette.neutral[85]};
+        border-color: ${palette.neutral[86]};
         border-radius: 62.5rem;
         border-width: 0.0625rem;
         border-style: solid;
