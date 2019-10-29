@@ -869,15 +869,15 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/src-foundations@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.2.4.tgz#a2dc8267be6efb19c684b1bb27099ad58d887c3b"
-  integrity sha512-SYijZJndBv6bvoFHaWgAo2iOSkZgi4pLQWKB2GYOf5wzN1R/DOl3UUjNUHSF7vKVDzNnsChfiopl4WSx2gIH8g==
+"@guardian/src-foundations@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.3.2.tgz#8b7b7bfc25fcdaddc10c6f540167e6633c86e948"
+  integrity sha512-+bycGwCoBZYyKgO4+C3v66KdLDcVPHu+E3ZUoyVaNGY84HjFwakh2FVgAfyvthwhLzsgcKF3SiY/xukPZkjTEw==
 
-"@guardian/src-utilities@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@guardian/src-utilities/-/src-utilities-0.1.2.tgz#7647e9aef7cd1f0b69e9fa436ec2e211d70580c8"
-  integrity sha512-vCyQrFaa/TtwUtzw6rpl005Un+2GfrJVYxLAqJQsblxX2mNGcDvdQl97+PAE1LYMPdvLezrcR7poD7gT0+/hxw==
+"@guardian/src-utilities@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@guardian/src-utilities/-/src-utilities-0.1.5.tgz#80c9b4353999b239d49461441cc975a275fc2759"
+  integrity sha512-BtcgblFxBdkEHw8d5Fcs73MP9Mrr7UNgSTb/+iTGr5lfJpKh6uvyZTjDis/jQeY121zZ/ETT2e4OFrgF1qu57w==
 
 "@hapi/address@2.x.x":
   version "2.1.2"

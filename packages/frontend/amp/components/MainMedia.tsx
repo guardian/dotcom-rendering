@@ -1,7 +1,8 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@frontend/amp/lib/image-fit';
 import { css } from 'emotion';
-import { textSans, palette, visuallyHidden } from '@guardian/src-foundations';
+import { textSans, palette } from '@guardian/src-foundations';
+import { visuallyHidden } from '@guardian/src-utilities';
 import InfoIcon from '@frontend/static/icons/info.svg';
 import { YoutubeVideo } from '@frontend/amp/components/elements/YoutubeVideo';
 
