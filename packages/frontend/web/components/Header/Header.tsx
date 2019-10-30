@@ -40,7 +40,7 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
         return (
             <header className={headerStyles}>
                 <Hide when="below" breakpoint="desktop">
-                    <div id="edition-root">
+                    <div data-island="edition-root">
                         <EditionDropdown
                             edition={this.props.edition}
                             dataLinkName={
@@ -55,7 +55,7 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
                     have been hardcoded to false. At some point
                     these need to be dynamic.
                 */}
-                <div id="reader-revenue-links-header" />
+                <div data-island="reader-revenue-links-header" />
                 <Links isSignedIn={isSignedIn} />
             </header>
         );

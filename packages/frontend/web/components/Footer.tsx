@@ -186,7 +186,7 @@ const FooterLinks: React.FC<{
 
     const rrLinks = (
         <div className={readerRevenueLinks}>
-            <div id="reader-revenue-links-footer" />
+            <div data-island="reader-revenue-links-footer" />
         </div>
     );
 

@@ -37,7 +37,7 @@ export const Article: React.FC<{
         </Section>
 
         <Section
-            id="nav-root"
+            islandId="nav-root"
             showSideBorders={true}
             borderColour={palette.brand.pastel}
             showTopBorder={false}
@@ -67,7 +67,7 @@ export const Article: React.FC<{
             <OutbrainContainer config={data.config} />
         </Section>
 
-        <Section id="most-viewed" />
+        <Section islandId="most-viewed" />
 
         <Section padded={false}>
             <SubNav

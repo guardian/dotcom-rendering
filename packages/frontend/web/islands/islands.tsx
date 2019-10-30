@@ -150,9 +150,12 @@ export const hydrateIslands = (
             root: string;
         } = island;
 
-        const islandRoot = document.getElementById(root);
-        if (islandRoot) {
+        const islandRoots = document.querySelectorAll(
+            `[data-island='${root}']`,
+        );
+
+        islandRoots.forEach(islandRoot => {
             hydrate(React.createElement(component, props), islandRoot);
-        }
+        });
     });
 };

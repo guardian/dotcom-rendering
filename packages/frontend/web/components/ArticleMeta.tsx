@@ -75,7 +75,7 @@ export const ArticleMeta = ({ CAPI, config }: Props) => {
                     pillar={CAPI.pillar}
                     displayIcons={['facebook', 'twitter', 'email']}
                 />
-                <div id="share-count" />
+                <div data-island="share-count" />
             </div>
         </div>
     );

@@ -49,7 +49,7 @@ const setBackgroundColour = (colour: string) => css`
 `;
 
 type Props = {
-    id?: string;
+    islandId?: string;
     showSideBorders?: boolean;
     showTopBorder?: boolean;
     padded?: boolean;
@@ -59,7 +59,7 @@ type Props = {
 };
 
 export const Section = ({
-    id,
+    islandId,
     showSideBorders = true,
     showTopBorder = true,
     padded = true,
@@ -73,7 +73,7 @@ export const Section = ({
         )}
     >
         <div
-            id={id}
+            data-island={islandId}
             className={cx(
                 center,
                 showSideBorders && sideBorders(borderColour),
