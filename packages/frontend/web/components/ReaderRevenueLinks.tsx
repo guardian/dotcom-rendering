@@ -22,16 +22,16 @@ const padded = css`
 
 const message = css`
     color: ${palette.yellow.main};
-    ${headline({ level: 2 })};
+    ${headline({ level: 2, fontWeight: 'bold' })};
     padding-top: 3px;
     margin-bottom: 3px;
 
     ${from.desktop} {
-        ${headline({ level: 3 })}
+        ${headline({ level: 3, fontWeight: 'bold' })}
     }
 
     ${from.leftCol} {
-        ${headline({ level: 5 })}
+        ${headline({ level: 5, fontWeight: 'bold' })}
     }
 `;
 
