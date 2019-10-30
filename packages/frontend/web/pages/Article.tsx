@@ -67,7 +67,7 @@ export const Article: React.FC<{
             <OutbrainContainer config={data.config} />
         </Section>
 
-        <Section id="most-viewed-portal" />
+        <Section id="most-viewed" />
 
         <Section padded={false}>
             <SubNav

@@ -1,7 +1,6 @@
 import { hydrate as hydrateCSS } from 'emotion';
 import { startup } from '@frontend/web/browser/startup';
 
-import { renderPortals } from '@frontend/web/portals/Portals';
 import { hydrateIslands } from '@frontend/web/islands/islands';
 
 const init = (): Promise<void> => {
@@ -20,7 +19,6 @@ const init = (): Promise<void> => {
         hydrateCSS(cssIDs);
     }
 
-    renderPortals(CAPI, config);
     hydrateIslands(CAPI, config, NAV);
 
     return Promise.resolve();

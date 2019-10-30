@@ -52,7 +52,7 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return <div id={`rich-link-${i}-portal`} />;
+                    return <div id={`rich-link-${i}`} />;
                 default:
                     return null;
             }
