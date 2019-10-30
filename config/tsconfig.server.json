@@ -1,8 +1,7 @@
 {
     "extends": "../tsconfig",
     "compilerOptions": {
-        // Supported by Node.js 10.16.3 (with the exception of tail recursion)
-        "target": "es2018"
+        "target": "es2019"
     },
     "files": [
         "../src/server.ts"

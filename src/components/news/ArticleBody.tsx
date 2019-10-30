@@ -1,12 +1,21 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { sidePadding, PillarStyles, darkModeCss, commonArticleStyles, basePx } from '../../styles';
+import {
+    sidePadding,
+    PillarStyles,
+    darkModeCss,
+    commonArticleStyles,
+    basePx,
+    adStyles
+} from 'styles';
 import { palette } from '@guardian/src-foundations'
 import { until } from '@guardian/src-utilities'
-import { render } from "../../renderBlocks";
+import { render } from "renderBlocks";
 import { Block } from 'types/capi-thrift-models';
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
+    position: relative;
+
     .rich-link,
     .element-membership {
         float: left;
@@ -27,6 +36,7 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         }
     }
 
+    ${adStyles}
     ${sidePadding}
     ${commonArticleStyles(pillarStyles)}
 `;
