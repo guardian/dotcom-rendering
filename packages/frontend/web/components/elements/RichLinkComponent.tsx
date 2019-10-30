@@ -10,7 +10,6 @@ import {
     until,
     from,
     wide,
-    body,
 } from '@guardian/src-foundations';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
@@ -94,7 +93,8 @@ const quote: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkTitle = css`
-    ${body({ level: 1 })};
+    ${headline({ level: 1 })};
+    font-size: 14px;
     padding-top: 1px;
     padding-bottom: 1px;
     font-weight: 400;
@@ -113,7 +113,8 @@ const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
 };
 
 const readMoreTextStyle = css`
-    ${body({ level: 1 })};
+    ${headline({ level: 1 })};
+    font-size: 14px;
     ${wide} {
         ${headline({ level: 1 })}
     }
@@ -127,7 +128,8 @@ const readMoreTextStyle = css`
 `;
 
 const byline = css`
-    ${body({ level: 1 })};
+    ${headline({ level: 1 })};
+    font-size: 14px;
     font-style: italic;
     ${wide} {
         ${headline({ level: 2 })};
