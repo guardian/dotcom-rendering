@@ -44,6 +44,7 @@ type IslandProps =
       };
 
 type IslandType = {
+    key?: number;
     component: any;
     props: IslandProps;
     root: string;
@@ -122,6 +123,7 @@ export const hydrateIslands = (
             'model.dotcomrendering.pageElements.RichLinkBlockElement'
         ) {
             islands.push({
+                key: i,
                 component: RichLinkComponent,
                 props: {
                     element,
