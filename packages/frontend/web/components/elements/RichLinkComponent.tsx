@@ -3,14 +3,8 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
-import {
-    headline,
-    textSans,
-    palette,
-    until,
-    from,
-    wide,
-} from '@guardian/src-foundations';
+import { headline, textSans, palette } from '@guardian/src-foundations';
+import { from, until, between } from '@guardian/src-utilities';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
 
@@ -53,16 +47,16 @@ const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
 
 const richLinkContainer = css`
     ${until.wide} {
-        width: 130px;
+        width: 140px;
     }
     float: left;
     margin-right: 20px;
     margin-bottom: 5px;
     margin-left: 0px;
-    ${from.leftCol.until.wide} {
-        margin-left: -150px;
+    ${between.leftCol.and.wide} {
+        margin-left: -160px;
     }
-    ${wide} {
+    ${from.wide} {
         margin-left: -240px;
         width: 220px;
     }
@@ -98,7 +92,7 @@ const richLinkTitle = css`
     padding-top: 1px;
     padding-bottom: 1px;
     font-weight: 400;
-    ${wide} {
+    ${from.wide} {
         ${headline({ level: 2 })};
         padding-bottom: 5px;
     }
@@ -115,7 +109,7 @@ const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
 const readMoreTextStyle = css`
     ${headline({ level: 1 })};
     font-size: 14px;
-    ${wide} {
+    ${from.wide} {
         ${headline({ level: 1 })}
     }
     display: inline-block;
@@ -131,7 +125,7 @@ const byline = css`
     ${headline({ level: 1 })};
     font-size: 14px;
     font-style: italic;
-    ${wide} {
+    ${from.wide} {
         ${headline({ level: 2 })};
     }
 `;
@@ -149,7 +143,7 @@ const contributorImageWrapper = css`
     height: 5rem;
     margin-left: auto;
     margin-right: 0.3rem;
-    ${wide} {
+    ${from.wide} {
         width: 8.5rem;
         height: 8.5rem;
     }

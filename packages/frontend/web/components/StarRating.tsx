@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import Star from '@frontend/static/icons/star.svg';
-import { palette, wide } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-utilities';
 
 const ratingsWrapper = css`
     background-color: ${palette.yellow.main};
@@ -25,7 +26,7 @@ const smallSize = css`
         height: 15px;
     }
 
-    ${wide} {
+    ${from.wide} {
         padding: 2px;
         svg {
             width: 23px;
