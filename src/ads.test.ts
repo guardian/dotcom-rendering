@@ -21,16 +21,10 @@ describe('Adds the correct number of ad placeholders', () => {
         expect(fiveParagraphsAndOneAd.length).toBe(6)
     });
 
-    test('Adds one placeholders for 9 paragraphs', () => {
+    test('Adds two placeholders for 9 paragraphs', () => {
         const nineParagraphs = createParagraphs(9)
-        const nineParagraphsAndOneAd = insertAdPlaceholders(nineParagraphs);
-        expect(nineParagraphsAndOneAd.length).toBe(10)
-    });
-
-    test('Adds two placeholders for 10 paragraphs', () => {
-        const tenParagraphs = createParagraphs(10)
-        const tenParagraphsAndTwoAd = insertAdPlaceholders(tenParagraphs);
-        expect(tenParagraphsAndTwoAd.length).toBe(12)
+        const nineParagraphsAndTwoAds = insertAdPlaceholders(nineParagraphs);
+        expect(nineParagraphsAndTwoAds.length).toBe(11)
     });
 
     test('Adds two placeholders for 50 paragraphs', () => {
@@ -44,13 +38,13 @@ describe('Adds placholders at the correct indexes', () => {
     test('Adds first placeholder after 3rd paragraph', () => {
         const fiveParagraphs = createParagraphs(5)
         const fiveParagraphsAndOneAd: any = insertAdPlaceholders(fiveParagraphs);
-        expect(fiveParagraphsAndOneAd[3].type).toBe('div');
+        expect(fiveParagraphsAndOneAd[3].type).toBe('aside');
     });
 
     test('Adds second placeholder after 9th paragraph', () => {
         const tenParagraphs = createParagraphs(10)
         const tenParagraphsAndTwoAds: any = insertAdPlaceholders(tenParagraphs);
-        expect(tenParagraphsAndTwoAds[10].type).toBe('div');
+        expect(tenParagraphsAndTwoAds[10].type).toBe('aside');
     });
 });
 
