@@ -273,6 +273,8 @@ export const adStyles = css`
                 background: none;
                 border: none;
                 font-size: 16px;
+                color: ${palette.neutral[46]};
+                margin-top: -4px;
 
                 &::after {
                     padding-left: ${basePx(1)};
