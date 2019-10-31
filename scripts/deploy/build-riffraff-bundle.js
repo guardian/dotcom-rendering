@@ -30,10 +30,7 @@ const { siteName, root, dist, target } = require('../frontend/config');
 
 const copyCfn = () => {
     log(' - copying cloudformation config');
-    return cpy(
-        [`src/cloudformation.yml`],
-        path.resolve(target, `${siteName}-cfn`),
-    );
+    return cpy([`cloudformation.yml`], path.resolve(target, `${siteName}-cfn`));
 };
 
 const copyStatic = () => {
