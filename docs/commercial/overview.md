@@ -16,20 +16,11 @@ Among other tasks performed by the commercial modules we have
 - Populate ad slots (dynamic and static ones)
 - Load tracking scripts (such as Lotame)
 
-## The AB test
-
-Currently, to activate the ad stack in Dotcom Rendering, you need to have opted in the corresponding AB test. 
-
-- Opt In: [https://www.theguardian.com/opt/in/dotcom-rendering-advertisements](https://www.theguardian.com/opt/in/dotcom-rendering-advertisements)
-- Out Out: [https://www.theguardian.com/opt/out/dotcom-rendering-advertisements](https://www.theguardian.com/opt/out/dotcom-rendering-advertisements)
-
-Note that when working on local (meaning when you run the dotcom-rendering on local), then you do not need to opt-in as the stack will activate automatically. 
-
 ## Working within Frontend, shared libraries
 
-As a result of architectural decision, dotcom-rendering currently makes use of frontend existing commercial modules. This means that when modifying any of those libraries it is important to check that your changes have not broken anything in Dotcom Rendering (see section "Development change checklist" for some pointers). 
+As a result of architectural decision, dotcom-rendering currently makes use of frontend existing commercial modules. This means that when modifying any of those libraries it is important to check that your changes have not broken anything in Dotcom Rendering (see section "Development change checklist" for some pointers).
 
-That having been said, and when needed, once can make slight adjustement to an existing library to customise the code depending on whether it is working on Frontend or Dotcom Rendering by testing the value of `window.guardian.isDotcomRendering`. For this call 
+That having been said, and when needed, once can make slight adjustement to an existing library to customise the code depending on whether it is working on Frontend or Dotcom Rendering by testing the value of `window.guardian.isDotcomRendering`. For this call
 
 ```
 import config from 'lib/config';
@@ -45,15 +36,14 @@ Dotcom rendering has components for the following ad types
 - Outbrain
 - Mechandising slots (such as masterclass below-content onward component) [in progress...]
 
-The components responsible for the rendering of the above are 
+The components responsible for the rendering of the above are
 
-- `AdSlot.tsx`, for static and dynamic ads. 
+- `AdSlot.tsx`, for static and dynamic ads.
 - `Outbrain.tsx`, for the Outbrain widget.
 
-The file `advertisements.ts` is where we locate utility functions supporting the ad rendering. Important functions are 
+The file `advertisements.ts` is where we locate utility functions supporting the ad rendering. Important functions are
 
-- `shouldDisplayAdvertisements`, which decides whether or not ads are rendered (we currently switch the entire ad stack on or off). 
-- `shouldDisplayAdvertisements`, which provides static ads with hard coded parameters. (Note that this is the case now, but we are soon going to try and take those parameters from the corresponding pieces of code in frontend).
+- `namedAdSlotParameters`, which provides static ads with hard coded parameters. (Note that this is the case now, but we are soon going to try and take those parameters from the corresponding pieces of code in frontend).
 
 ## The Guardian advertizing eco-system
 
@@ -72,7 +62,7 @@ There are several more trackers on the site. A good way to visualise these is: [
 
 ## Development change checklist
 
-Currently we do not have good automated tests covering the commercial stack in dotcom-rdnering. Once your change is ready, and depending on the nature of the change, here are the things you might want to have a look at. 
+Currently we do not have good automated tests covering the commercial stack in dotcom-rdnering. Once your change is ready, and depending on the nature of the change, here are the things you might want to have a look at.
 
 - Are the ad slots loading normaly when visually checking a page. Check the static slots as well as the inbody dynamic ones.
 - Are there any obvious console errors?

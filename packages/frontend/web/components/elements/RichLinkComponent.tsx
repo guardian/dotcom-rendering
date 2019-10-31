@@ -4,6 +4,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
 import { headline, textSans, palette } from '@guardian/src-foundations';
+import { from, until, between } from '@guardian/src-utilities';
 import { StarRating } from '@root/packages/frontend/web/components/StarRating';
 import { useApi } from '@frontend/web/components/lib/api';
 
@@ -45,10 +46,20 @@ const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkContainer = css`
-    width: 8.125rem;
+    ${until.wide} {
+        width: 140px;
+    }
     float: left;
     margin-right: 20px;
     margin-bottom: 5px;
+    margin-left: 0px;
+    ${between.leftCol.and.wide} {
+        margin-left: -160px;
+    }
+    ${from.wide} {
+        margin-left: -240px;
+        width: 220px;
+    }
 `;
 
 const richLinkTopBorder: (pillar: Pillar) => colour = pillar => {
@@ -77,9 +88,14 @@ const quote: (pillar: Pillar) => colour = pillar => {
 
 const richLinkTitle = css`
     ${headline({ level: 1 })};
-    font-weight: 400;
+    font-size: 14px;
     padding-top: 1px;
     padding-bottom: 1px;
+    font-weight: 400;
+    ${from.wide} {
+        ${headline({ level: 2 })};
+        padding-bottom: 5px;
+    }
 `;
 
 const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
@@ -92,6 +108,10 @@ const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
 
 const readMoreTextStyle = css`
     ${headline({ level: 1 })};
+    font-size: 14px;
+    ${from.wide} {
+        ${headline({ level: 1 })}
+    }
     display: inline-block;
     height: 30px;
     line-height: 26px;
@@ -103,7 +123,11 @@ const readMoreTextStyle = css`
 
 const byline = css`
     ${headline({ level: 1 })};
+    font-size: 14px;
     font-style: italic;
+    ${from.wide} {
+        ${headline({ level: 2 })};
+    }
 `;
 
 // !important is used here to override the default inline body image styling
@@ -119,6 +143,10 @@ const contributorImageWrapper = css`
     height: 5rem;
     margin-left: auto;
     margin-right: 0.3rem;
+    ${from.wide} {
+        width: 8.5rem;
+        height: 8.5rem;
+    }
 `;
 
 const neutralBackground = css`
@@ -249,13 +277,7 @@ export const RichLinkComponent: React.FC<{
 
     if (error) {
         // Send the error to Sentry and then prevent the element from rendering
-        // window.guardian.modules.raven.reportError(
-        //     error,
-        //     {
-        //         feature: 'most-viewed',
-        //     },
-        //     true,
-        // );
+        window.guardian.modules.sentry.reportError(error, 'rich-link');
 
         return null;
     }

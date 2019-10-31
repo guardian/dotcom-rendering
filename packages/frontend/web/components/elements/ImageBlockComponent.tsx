@@ -99,11 +99,16 @@ const decidePosition = (role: RoleType) => {
 export const ImageBlockComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
-}> = ({ element, pillar }) => {
+    hideCaption?: boolean;
+}> = ({ element, pillar, hideCaption }) => {
     const { role } = element;
     return (
         <div className={decidePosition(role)}>
-            <ImageComponent element={element} pillar={pillar} />
+            <ImageComponent
+                element={element}
+                pillar={pillar}
+                hideCaption={hideCaption}
+            />
         </div>
     );
 };

@@ -1,14 +1,5 @@
 import { AdSlotParameters } from '@frontend/web/components/AdSlot';
 
-// We are using this function to control the activation of the commercial features
-// Currently it reports that the user has opted in to a 0% AB test.
-export const shouldDisplayAdvertisements = (config: ConfigType): boolean => {
-    return (
-        process.env.NODE_ENV === 'development' ||
-        config.abTests.dotcomRenderingAdvertisementsVariant === 'variant'
-    );
-};
-
 type staticAdSlotNames =
     | 'right'
     | 'top-above-nav'

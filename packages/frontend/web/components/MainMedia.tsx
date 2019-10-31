@@ -39,11 +39,21 @@ const mainMedia = css`
     }
 `;
 
-function renderElement(element: CAPIElement, pillar: Pillar, i: number) {
+function renderElement(
+    element: CAPIElement,
+    pillar: Pillar,
+    i: number,
+    hideCaption?: boolean,
+) {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return (
-                <MainImageComponent key={i} element={element} pillar={pillar} />
+                <MainImageComponent
+                    key={i}
+                    element={element}
+                    pillar={pillar}
+                    hideCaption={hideCaption}
+                />
             );
         default:
             return null;
@@ -53,8 +63,11 @@ function renderElement(element: CAPIElement, pillar: Pillar, i: number) {
 export const MainMedia: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
-}> = ({ elements, pillar }) => (
+    hideCaption?: boolean;
+}> = ({ elements, pillar, hideCaption }) => (
     <div className={mainMedia}>
-        {elements.map((element, i) => renderElement(element, pillar, i))}
+        {elements.map((element, i) =>
+            renderElement(element, pillar, i, hideCaption),
+        )}
     </div>
 );

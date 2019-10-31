@@ -1,7 +1,6 @@
 // tslint:disable:react-no-dangerous-html
 
 import React from 'react';
-import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { textSans, body, palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-utilities';
@@ -10,10 +9,6 @@ interface OutbrainSelectors {
     widget: string;
     container: string;
 }
-
-const shouldDisplayOutbrain = (config: ConfigType): boolean => {
-    return shouldDisplayAdvertisements(config);
-};
 
 type OutbrainSelectorsType = 'outbrain' | 'merchandising' | 'nonCompliant';
 
@@ -111,9 +106,6 @@ const outbrainContainer = css`
 export const OutbrainContainer: React.FC<{
     config: ConfigType;
 }> = ({ config }) => {
-    if (!shouldDisplayOutbrain(config)) {
-        return null;
-    }
     return (
         <div className={outbrainContainer}>
             <OutbrainWidget />

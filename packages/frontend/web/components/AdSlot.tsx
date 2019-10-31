@@ -1,7 +1,6 @@
 // tslint:disable:react-no-dangerous-html
 
 import React from 'react';
-import { shouldDisplayAdvertisements } from '@frontend/model/advertisement';
 import { css } from 'emotion';
 import { textSans, palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-utilities';
@@ -172,9 +171,6 @@ export const AdSlot: React.FC<{
     config: ConfigType;
     className: string;
 }> = ({ asps, config, className }) => {
-    if (!shouldDisplayAdvertisements(config)) {
-        return null;
-    }
     return <AdSlotCore {...asps} className={className} />;
 };
 

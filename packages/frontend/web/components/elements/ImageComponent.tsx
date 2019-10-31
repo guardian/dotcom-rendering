@@ -61,8 +61,18 @@ const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
 export const ImageComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
-}> = ({ element, pillar }) => {
+    hideCaption?: boolean;
+}> = ({ element, pillar, hideCaption }) => {
     const sources = makeSources(element.imageSources);
+    if (hideCaption) {
+        return (
+            <Picture
+                sources={sources}
+                alt={element.data.alt || ''}
+                src={getFallback(element.imageSources)}
+            />
+        );
+    }
     return (
         <Caption
             captionText={element.data.caption || ''}
