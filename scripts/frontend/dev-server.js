@@ -7,7 +7,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const { siteName, statik, root } = require('./config');
+const { siteName, root } = require('./config');
 
 function buildUrl(req) {
     const DEFAULT_URL =
@@ -30,7 +30,7 @@ const go = async () => {
 
     app.use(
         `/static/${siteName}`,
-        express.static(path.relative(__dirname, statik)),
+        express.static(path.join(root, 'src', 'static')),
     );
 
     app.use(
