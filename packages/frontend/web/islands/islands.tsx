@@ -59,38 +59,7 @@ export const hydrateIslands = (
 
     // Define the list of islands we intend to hydrate. Each island should have a
     // corresponding root element that exists on the DOM with the id value equal to the root property
-    const islands: IslandType[] = [
-        {
-            component: Nav,
-            props: { pillar, nav: NAV },
-            root: 'nav-root',
-        },
-        {
-            component: EditionDropdown,
-            props: {
-                dataLinkName: 'nav2 : topbar : edition-picker: toggle',
-                edition: editionId,
-            },
-            root: 'edition-root',
-        },
-
-        {
-            component: MostViewed,
-            props: {
-                config,
-                pillar,
-                sectionName,
-            },
-            root: 'most-viewed',
-        },
-        {
-            component: ShareCount,
-            props: {
-                config,
-                pageId,
-            },
-            root: 'share-count',
-        },
+    const highPriorityIslands: IslandType[] = [
         {
             component: ReaderRevenueLinks,
             props: {
@@ -101,6 +70,39 @@ export const hydrateIslands = (
                 inHeader: true,
             },
             root: 'reader-revenue-links-header',
+        },
+        {
+            component: Nav,
+            props: { pillar, nav: NAV },
+            root: 'nav-root',
+        },
+    ];
+
+    const lowPriorityIslands: IslandType[] = [
+        {
+            component: EditionDropdown,
+            props: {
+                dataLinkName: 'nav2 : topbar : edition-picker: toggle',
+                edition: editionId,
+            },
+            root: 'edition-root',
+        },
+        {
+            component: ShareCount,
+            props: {
+                config,
+                pageId,
+            },
+            root: 'share-count',
+        },
+        {
+            component: MostViewed,
+            props: {
+                config,
+                pillar,
+                sectionName,
+            },
+            root: 'most-viewed',
         },
         {
             component: ReaderRevenueLinks,
@@ -116,13 +118,14 @@ export const hydrateIslands = (
     ];
 
     // Add an island for each rich link
+    const richLinkIslands: IslandType[] = [];
     const elements = CAPI.blocks[0] ? CAPI.blocks[0].elements : [];
     elements.forEach((element, i) => {
         if (
             element._type ===
             'model.dotcomrendering.pageElements.RichLinkBlockElement'
         ) {
-            islands.push({
+            richLinkIslands.push({
                 key: i,
                 component: RichLinkComponent,
                 props: {
@@ -134,6 +137,12 @@ export const hydrateIslands = (
             });
         }
     });
+
+    const islands: IslandType[] = [
+        ...highPriorityIslands,
+        ...richLinkIslands,
+        ...lowPriorityIslands,
+    ];
 
     // Hydrate each island in the DOM
     islands.map((island: IslandType) => {
@@ -150,12 +159,12 @@ export const hydrateIslands = (
             root: string;
         } = island;
 
-        const islandRoots = document.querySelectorAll(
-            `[data-island='${root}']`,
-        );
-
-        islandRoots.forEach(islandRoot => {
-            hydrate(React.createElement(component, props), islandRoot);
-        });
+        // Find each root on the dom for this island (rich links can have multiple) and
+        // hydrate it
+        document
+            .querySelectorAll(`[data-island='${root}']`)
+            .forEach(islandRoot => {
+                hydrate(React.createElement(component, props), islandRoot);
+            });
     });
 };
