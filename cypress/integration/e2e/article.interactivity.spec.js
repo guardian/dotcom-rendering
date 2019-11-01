@@ -1,3 +1,5 @@
+import { mockApi } from '../../lib/mocks';
+
 const READER_REVENUE_TITLE_TEXT = 'Support The';
 const articleUrl =
     'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
@@ -36,13 +38,16 @@ describe('Interactivity', function() {
                 .should('be', 2);
         });
 
-        it('should change the list of most viewed items when a tab is clicked', function() {
-            cy.visit(`/Article?url=${articleUrl}`);
-            cy.get('[data-cy=tab-body-0]').should('be.visible');
-            cy.get('[data-cy=tab-body-1]').should('not.be.visible');
-            cy.get('[data-cy=tab-heading-1]').click();
-            cy.get('[data-cy=tab-body-0]').should('not.be.visible');
-            cy.get('[data-cy=tab-body-1]').should('be.visible');
+        describe('When most viewed is mocked', function() {
+            before(mockApi);
+            it.only('should change the list of most viewed items when a tab is clicked', function() {
+                cy.visit(`/Article?url=${articleUrl}`);
+                cy.get('[data-cy=tab-body-0]').should('be.visible');
+                cy.get('[data-cy=tab-body-1]').should('not.be.visible');
+                cy.get('[data-cy=tab-heading-1]').click();
+                cy.get('[data-cy=tab-body-0]').should('not.be.visible');
+                cy.get('[data-cy=tab-body-1]').should('be.visible');
+            });
         });
 
         it('should render the reader revenue links in the header and footer', function() {
