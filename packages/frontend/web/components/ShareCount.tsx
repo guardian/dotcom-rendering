@@ -96,7 +96,11 @@ export const ShareCount = ({ config, pageId }: Props) => {
             : displayCount;
 
     return (
-        <div className={shareCount} aria-label={`${shortDisplayCount} Shares`}>
+        <div
+            className={shareCount}
+            aria-label={`${shortDisplayCount} Shares`}
+            data-cy="share-count"
+        >
             <div className={shareCountContainer}>
                 <div className={shareCountHeader}>
                     <ShareIcon className={shareCountIcon} />
