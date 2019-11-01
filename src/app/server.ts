@@ -7,7 +7,7 @@ import {
     getGuardianConfiguration,
     GuardianConfiguration,
 } from './aws/aws-parameters';
-import { dist, root, port } from '@root/scripts/frontend/config';
+import { dist, port, siteName, statik } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 import {
     render as renderAMPArticle,
@@ -53,13 +53,8 @@ if (process.env.NODE_ENV === 'production') {
     // if running prod server locally, serve local assets
     if (!process.env.GU_PUBLIC) {
         app.use(
-            '/static/:site',
-            express.static(
-                path.relative(
-                    __dirname,
-                    path.resolve(root, 'packages', 'frontend', 'static'),
-                ),
-            ),
+            `/static/${siteName}`,
+            express.static(path.relative(__dirname, statik)),
         );
 
         app.use('/assets', express.static(path.relative(__dirname, dist)));

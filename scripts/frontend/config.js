@@ -3,6 +3,7 @@ const { resolve } = require('path');
 const root = resolve(__dirname, '..', '..');
 const dist = resolve(root, 'dist');
 const target = resolve(root, 'target');
+const statik = resolve(root, 'src', 'static');
 
 const siteName = 'frontend';
 
@@ -16,5 +17,6 @@ module.exports = {
     root,
     target,
     siteName,
+    statik,
     port,
 };
