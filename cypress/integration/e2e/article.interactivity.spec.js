@@ -40,7 +40,7 @@ describe('Interactivity', function() {
 
         describe('When most viewed is mocked', function() {
             before(mockApi);
-            it.only('should change the list of most viewed items when a tab is clicked', function() {
+            it('should change the list of most viewed items when a tab is clicked', function() {
                 cy.visit(`/Article?url=${articleUrl}`);
                 cy.get('[data-cy=tab-body-0]').should('be.visible');
                 cy.get('[data-cy=tab-body-1]').should('not.be.visible');
