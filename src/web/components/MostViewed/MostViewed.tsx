@@ -98,7 +98,7 @@ function buildSectionUrl(sectionName?: string) {
     const sectionsWithoutPopular = ['info', 'global'];
     const hasSection =
         sectionName && !sectionsWithoutPopular.includes(sectionName);
-    const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
+    const endpoint = `/c${hasSection ? `/${sectionName}` : ''}.json`;
 
     return `https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`;
 }
