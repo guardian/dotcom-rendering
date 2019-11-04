@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette, body } from '@guardian/src-foundations';
-import { from } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const gutter = 20;

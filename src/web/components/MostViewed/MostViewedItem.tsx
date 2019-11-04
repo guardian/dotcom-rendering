@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { textSans, headline, palette } from '@guardian/src-foundations';
-import { until } from '@guardian/src-utilities';
+import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';

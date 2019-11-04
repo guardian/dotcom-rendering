@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
-import { from } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
 
 const imageCss = {
     inline: css`

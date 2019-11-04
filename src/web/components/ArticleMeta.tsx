@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import { between, until } from '@guardian/src-utilities';
+import { between, until } from '@guardian/src-foundations/mq';
 
 import { ShareCount } from './ShareCount';
 import { Dateline } from './Dateline';

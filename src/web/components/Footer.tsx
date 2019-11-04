@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans, palette } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-utilities';
+import { from, until } from '@guardian/src-foundations/mq';
 
 import { clearFix } from '@root/src/lib/mixins';
 import { ReaderRevenueLinks } from '@root/src/web/components/ReaderRevenueLinks';

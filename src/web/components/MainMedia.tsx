@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { textSans, palette } from '@guardian/src-foundations';
-import { until } from '@guardian/src-utilities';
+import { until } from '@guardian/src-foundations/mq';
 import { MainImageComponent } from '@root/src/web/components/elements/MainImageComponent';
 
 const captionFont = css`

@@ -4,7 +4,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans, headline, palette } from '@guardian/src-foundations';
-import { from, between } from '@guardian/src-utilities';
+import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/components/lib/ArticleRenderer';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import { from, between, until } from '@guardian/src-utilities';
+import { from, between, until } from '@guardian/src-foundations/mq';
 
 const leftWidth = css`
     padding-right: 10px;
