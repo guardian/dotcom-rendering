@@ -19,14 +19,14 @@ export declare enum TagType {
 }
 
 declare enum ContentType {
-  ARTICLE = 0,
-  LIVEBLOG = 1,
-  GALLERY = 2,
-  INTERACTIVE = 3,
-  PICTURE = 4,
-  VIDEO = 5,
-  CROSSWORD = 6,
-  AUDIO = 7,
+  ARTICLE = 'article',
+  LIVEBLOG = 'liveblog',
+  GALLERY = 'gallery',
+  INTERACTIVE = 'interactive',
+  PICTURE = 'picture',
+  VIDEO = 'video',
+  CROSSWORD = 'crossword',
+  AUDIO = 'audio',
 }
 
 declare enum ElementType {
@@ -760,7 +760,7 @@ export declare class Content {
   type: ContentType;
   sectionId: string;
   sectionName: string;
-  webPublicationDate: CapiDateTime;
+  webPublicationDate: string;
   webTitle: string;
   webUrl: string;
   apiUrl: string;
@@ -772,6 +772,7 @@ export declare class Content {
   blocks: Blocks;
   rights: Rights;
   crossword: Crossword;
+  atoms: any;
   stats: ContentStats;
   section: Section;
   debug: Debug;

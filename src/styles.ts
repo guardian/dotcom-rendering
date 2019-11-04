@@ -1,6 +1,7 @@
 import { palette, } from '@guardian/src-foundations';
 import { from, until, between } from '@guardian/src-utilities';
 import { css, SerializedStyles } from '@emotion/core'
+import { compose } from 'utils/lib';
 
 const BASE_PADDING = 8;
 
@@ -17,7 +18,13 @@ export const sidePadding = css`
         padding-right: 0;
     }`;
 
-export type PillarId = 'pillar/news' | 'pillar/opinion' | 'pillar/sport' | 'pillar/arts' | 'pillar/lifestyle';
+export enum PillarId {
+    news = 'pillar/news',
+    opinion = 'pillar/opinion',
+    sport = 'pillar/sport',
+    arts = 'pillar/arts',
+    lifestyle = 'pillar/lifestyle',
+}
 
 export interface PillarStyles {
     kicker: string;
@@ -69,10 +76,19 @@ export const pillarColours: PillarColours = {
     }
 }
 
+function isPillarId(pillarId: string): pillarId is PillarId {
+    return pillarId in PillarId;
+}
+
 export function getPillarStyles(pillarId: PillarId): PillarStyles {
     const pillar = pillarId.replace('pillar/', '');
     return pillarColours[pillar];
 }
+
+export const pillarIdFromString = (pillarId: string): PillarId =>
+    isPillarId(pillarId) ? pillarId : PillarId.news;
+
+export const pillarStylesFromString = compose(getPillarStyles, pillarIdFromString)
 
 export const bulletStyles = (kicker: string, opacity = 1): string => `
     .bullet {

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Result, Ok, Err } from "../types/Result";
-import { Contributor } from 'types/Capi';
+import { Contributor, Capi } from 'types/Capi';
 
 
 // ----- Functions ----- //
@@ -10,7 +10,7 @@ const isFeature = (tags: Array<{ id: string }>): boolean =>
     tags.some(tag => tag.id === 'tone/features');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
-function parseCapi(capiResponse: string): Result<string, any> {
+function parseCapi(capiResponse: string): Result<string, Capi> {
     try {
         return new Ok(JSON.parse(capiResponse));
     } catch (_) {
