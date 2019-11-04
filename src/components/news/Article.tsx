@@ -7,14 +7,12 @@ import ArticleStandfirst from './ArticleStandfirst';
 import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 import Tags from 'components/shared/Tags';
-import { fromNullable } from 'types/Option';
-import { Tag, Content } from 'types/capi-thrift-models';
+import { Content } from 'types/capi-thrift-models';
 import { darkModeCss, articleWidthStyles, pillarStylesFromString } from 'styles';
 import { palette, wide } from '@guardian/src-foundations';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/Keyline';
-import { isFeature } from 'utils/capi';
-import { isImage } from 'components/blocks/image';
+import { isFeature, articleSeries, articleContributors, articleMainImage } from 'utils/capi';
 
 export interface ArticleProps {
     capi: Content;
@@ -51,12 +49,12 @@ const HeaderImageStyles = css`
 const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
 
     const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
-    const [series] = tags.filter((tag: Tag) => tag.type === 'series');
-    const feature = isFeature(tags) || 'starRating' in fields;
+    const series = articleSeries(capi);
+    const feature = isFeature(capi) || 'starRating' in fields;
     const pillarStyles = pillarStylesFromString(pillarId);
-    const contributors = tags.filter((tag: Tag) => tag.type === 'contributor');
+    const contributors = articleContributors(capi);
     const bodyElements = blocks.body[0].elements;
-    const mainImage = fromNullable(blocks.main.elements.filter(isImage)[0]);
+    const mainImage = articleMainImage(capi);
 
     return (
         <main css={[MainStyles, MainDarkStyles]}>

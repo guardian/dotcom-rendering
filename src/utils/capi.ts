@@ -2,12 +2,15 @@
 
 import { Result, Ok, Err } from "../types/Result";
 import { Contributor, Capi } from 'types/Capi';
+import { Content, Tag, BlockElement } from 'types/capi-thrift-models';
+import { Option, fromNullable } from 'types/Option';
+import { isImage } from 'components/blocks/image';
 
 
 // ----- Functions ----- //
 
-const isFeature = (tags: Array<{ id: string }>): boolean =>
-    tags.some(tag => tag.id === 'tone/features');
+const isFeature = (content: Content): boolean =>
+    content.tags.some(tag => tag.id === 'tone/features');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function parseCapi(capiResponse: string): Result<string, Capi> {
@@ -35,7 +38,17 @@ const capiEndpoint = (articleId: string, key: string): string => {
   
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
   
-  }
+}
+
+const articleSeries = (content: Content): Tag =>
+    content.tags.filter((tag: Tag) => tag.type === 'series')[0];
+
+const articleContributors = (content: Content): Tag[] =>
+    content.tags.filter((tag: Tag) => tag.type === 'contributor');
+
+const articleMainImage = (content: Content): Option<BlockElement> =>
+    fromNullable(content.blocks.main.elements.filter(isImage)[0]);
+
 
 // ----- Exports ----- //
 
@@ -43,5 +56,8 @@ export {
     isFeature,
     parseCapi,
     isSingleContributor,
-    capiEndpoint
+    capiEndpoint,
+    articleSeries,
+    articleContributors,
+    articleMainImage,
 };

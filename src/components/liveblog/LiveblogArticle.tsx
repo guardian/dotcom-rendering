@@ -8,13 +8,12 @@ import LiveblogKeyEvents from './LiveblogKeyEvents';
 import LiveblogBody from './LiveblogBody';
 import HeaderImage from '../shared/HeaderImage';
 import Tags from '../shared/Tags';
-import { fromNullable } from 'types/Option';
 import { PillarStyles, wideColumnWidth, baseMultiply, pillarStylesFromString, pillarIdFromString } from 'styles';
-import { Tag, Content } from 'types/capi-thrift-models';
+import { Content } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import { from } from '@guardian/src-utilities'
-import { isImage } from 'components/blocks/image';
+import { articleMainImage, articleSeries, articleContributors } from 'utils/capi';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${palette.neutral[97]};
@@ -51,12 +50,12 @@ interface LiveblogArticleProps {
 const LiveblogArticle = ({ capi, imageSalt }: LiveblogArticleProps): JSX.Element => {
 
     const { fields, tags, webPublicationDate, pillarId: pillarIdStr, blocks } = capi;
-    const [series] = tags.filter((tag: Tag) => tag.type === 'series');
+    const series = articleSeries(capi);
     const pillarStyles = pillarStylesFromString(pillarIdStr);
     const pillarId = pillarIdFromString(pillarIdStr);
-    const contributors = tags.filter((tag: Tag) => tag.type === 'contributor');
+    const contributors = articleContributors(capi);
     const bodyElements = blocks.body;
-    const image = fromNullable(blocks.main.elements.filter(isImage)[0]);
+    const image = articleMainImage(capi);
 
     return (
         <main css={LiveblogArticleStyles}>
