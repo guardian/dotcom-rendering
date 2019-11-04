@@ -24,10 +24,6 @@ node_modules
 dist
 jsconfig.json
 target
-packages/design/public
-
-# Caches
-packages/design/.cache
 
 # Test coverage reports
 coverage

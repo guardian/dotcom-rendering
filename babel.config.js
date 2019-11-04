@@ -10,7 +10,7 @@ module.exports = {
                 root: ['./'],
                 alias: {
                     '@root': '.',
-                    '@frontend': './packages/frontend',
+                    '@frontend': './src',
                 },
             },
         ],

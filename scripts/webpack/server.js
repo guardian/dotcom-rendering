@@ -2,7 +2,7 @@ const { siteName } = require('../frontend/config');
 
 module.exports = () => ({
     entry: {
-        [`${siteName}.server`]: './packages/frontend/app/server.ts',
+        [`${siteName}.server`]: './src/app/server.ts',
     },
     output: {
         filename: `[name].js`,

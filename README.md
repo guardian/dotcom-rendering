@@ -43,8 +43,6 @@ $ make dev
 
 `make dev` will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
 
-The project uses [Yarn Workspaces](https://yarnpkg.com/en/docs/workspaces) and the code can be found in the `packages/` folder.
-
 ### Detailed Setup
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).

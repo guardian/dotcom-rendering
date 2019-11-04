@@ -28,7 +28,7 @@ In the first instance, consider adding the script as a low priority script. Thes
 
 An example is the [Google Analytics tracking script](https://developers.google.com/analytics/devguides/collection/analyticsjs/).
 
-They can be added to the `lowPriorityScripts` array in the [`packages/frontend/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/packages/frontend/web/document.tsx) module.
+They can be added to the `lowPriorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/src/web/document.tsx) module.
 
 ### High priority scripts
 
@@ -38,7 +38,7 @@ Examples include the [polyfill.io](https://polyfill.io) response and the main ap
 
 ⚠️ **High priority scripts have a considerable impact on site performance and should be added sparingly. Please get approval from at least 2 members of the dotcom platform team before adding a new script here.**
 
-They can be added to the `priorityScripts` array in the [`packages/frontend/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/packages/frontend/web/document.tsx) module.
+They can be added to the `priorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/master/src/web/document.tsx) module.
 
 ## Data extraction
 
@@ -56,7 +56,7 @@ Since `dotcom-rendering` shares content data with `frontend`, it makes sense for
 
 **Favour computation on the rendering server over computation on the client**
 
-Sometimes data extraction logic does not need to be shared between `frontend` and `dotcom-rendering`. If logic needs to be executed in `dotcom-rendering`, it is preferable to execute this on the server, in `packages/frontend/model`. Logic on the server is heavily cached by Fastly, reducing the burden on the client.
+Sometimes data extraction logic does not need to be shared between `frontend` and `dotcom-rendering`. If logic needs to be executed in `dotcom-rendering`, it is preferable to execute this on the server, in `src/model`. Logic on the server is heavily cached by Fastly, reducing the burden on the client.
 
 **Note:** Not all logic can be cached on the server, for instance logic involving geolocation or user data. Take care not to split the cache without due consideration.
 
@@ -73,6 +73,6 @@ Data is passed between `frontend` and `dotcom-rendering` via a network request, 
 
 ## Components
 
-Frontend-specific components live in `packages/frontend`.
+Frontend-specific components live in `src`.
 
-Note that [Frontend Web](../../packages/frontend/web) and [Frontend AMP](../../packages/frontend/amp) are separate applications that do not share code, including components. If you build a new component for the web, consider whether you need to build an analogous component for AMP too.
+Note that [Frontend Web](../../src/web) and [Frontend AMP](../../src/amp) are separate applications that do not share code, including components. If you build a new component for the web, consider whether you need to build an analogous component for AMP too.

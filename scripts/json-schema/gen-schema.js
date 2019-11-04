@@ -4,15 +4,15 @@ const root = resolve(__dirname, '..', '..');
 const fs = require('fs');
 
 const program = TJS.getProgramFromFiles([
-    resolve(root + '/packages/frontend/lib/content.d.ts'),
-    resolve(root + '/packages/frontend/index.d.ts'),
+    resolve(root + '/src/lib/content.d.ts'),
+    resolve(root + '/src/index.d.ts'),
 ]);
 
 const settings = { rejectDateType: true, required: true };
 const schema = TJS.generateSchema(program, 'CAPIType', settings);
 
 fs.writeFile(
-    root + '/packages/frontend/model/json-schema.json',
+    root + '/src/model/json-schema.json',
     JSON.stringify(schema, null, 4),
     'utf8',
     function(err) {

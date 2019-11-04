@@ -26,7 +26,7 @@ const common = ({ platform, page = '' }) => ({
     resolve: {
         alias: {
             '@root': path.resolve(__dirname, '.'),
-            '@frontend': path.resolve(__dirname, 'packages', 'frontend'),
+            '@frontend': path.resolve(__dirname, 'src'),
         },
         extensions: ['.js', '.ts', '.tsx', '.jsx'],
     },
@@ -100,7 +100,7 @@ const common = ({ platform, page = '' }) => ({
 });
 
 const getPagesForSite = () =>
-    glob('*.ts*(x)', { cwd: `packages/frontend/web/pages` }).then(paths =>
+    glob('*.ts*(x)', { cwd: `src/web/pages` }).then(paths =>
         paths.map(p => p.replace(/\.[^/.]+$/, '')),
     );
 
