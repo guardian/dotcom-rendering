@@ -9,6 +9,9 @@ import { isImage } from 'components/blocks/image';
 
 // ----- Functions ----- //
 
+const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
+    tags.filter((tag: Tag) => tag.type === type_);
+
 const isFeature = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/features');
 
@@ -41,10 +44,10 @@ const capiEndpoint = (articleId: string, key: string): string => {
 }
 
 const articleSeries = (content: Content): Tag =>
-    content.tags.filter((tag: Tag) => tag.type === 'series')[0];
+    tagsOfType('series')(content.tags)[0];
 
 const articleContributors = (content: Content): Tag[] =>
-    content.tags.filter((tag: Tag) => tag.type === 'contributor');
+    tagsOfType('contributor')(content.tags);
 
 const articleMainImage = (content: Content): Option<BlockElement> =>
     fromNullable(content.blocks.main.elements.filter(isImage)[0]);
