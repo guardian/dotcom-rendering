@@ -83,7 +83,7 @@ lint: clean-dist install
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
-	@stylelint "packages/frontend/**/*.ts{,x}"
+	@stylelint "src/**/*.ts{,x}"
 
 test: clear clean-dist install
 	$(call log, "running tests")

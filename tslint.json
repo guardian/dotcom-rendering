@@ -40,6 +40,6 @@
     },
     "rulesDirectory": [],
     "linterOptions": {
-        "exclude": ["packages/*/dist/**/*.js", "coverage/*"]
+        "exclude": ["src/dist/**/*.js", "coverage/*"]
     }
 }
