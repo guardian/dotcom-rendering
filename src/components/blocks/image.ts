@@ -2,6 +2,7 @@
 
 import React from 'react';
 import * as AssetUtils from 'utils/Asset';
+import { BlockElement } from 'types/capi-thrift-models';
 
 // ----- Setup ----- //
 
@@ -16,6 +17,9 @@ interface Image {
 
 
 // ----- Functions ----- //
+
+const isImage = (elem: BlockElement): boolean =>
+  elem.type === 'image';
 
 const imageElement = (alt: string, assets: AssetUtils.Asset[], salt: string): React.ReactNode =>
     h('img', {
@@ -39,6 +43,7 @@ function imageBlock(image: Image, assets: AssetUtils.Asset[], salt: string): Rea
 // ----- Exports ----- //
 
 export {
+    isImage,
     imageBlock,
-    imageElement
+    imageElement,
 };

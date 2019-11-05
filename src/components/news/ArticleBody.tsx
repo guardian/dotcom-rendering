@@ -11,7 +11,7 @@ import {
 import { palette } from '@guardian/src-foundations'
 import { until } from '@guardian/src-utilities'
 import { render } from "renderBlocks";
-import { Block } from 'types/capi-thrift-models';
+import { BlockElement } from 'types/capi-thrift-models';
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     position: relative;
@@ -72,7 +72,7 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 
 interface ArticleBodyProps {
     pillarStyles: PillarStyles;
-    bodyElements: Block[];
+    bodyElements: BlockElement[];
     imageSalt: string;
 }
 

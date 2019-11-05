@@ -10,20 +10,14 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/Result';
-import { Tag, BlockElement } from 'types/capi-thrift-models';
-import Article, { ArticleProps } from 'components/news/Article';
+import { Content } from 'types/capi-thrift-models';
+import Article from 'components/news/Article';
 import LiveblogArticle from 'components/liveblog/LiveblogArticle';
-import { getPillarStyles } from 'styles';
 import { getConfigValue } from 'utils/ssmConfig';
-import { isFeature, parseCapi, capiEndpoint } from 'utils/capi';
-import { fromNullable } from 'types/Option';
+import { parseCapi, capiEndpoint } from 'utils/capi';
+import { Capi } from 'types/Capi';
 
 // ----- Setup ----- //
-
-interface CapiFields {
-  type: string;
-  articleProps: ArticleProps;
-};
 
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
@@ -35,9 +29,10 @@ const readFileP = promisify(fs.readFile);
 const id = <A>(a: A): A => a;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function checkForUnsupportedContent(capi: any): Result<string, void> {
+function getContent(capi: Capi): Result<string, Content> {
 
-  const { fields, atoms } = capi.response.content;
+  const content = capi.response.content;
+  const { fields, atoms } = content;
 
   if (fields.displayHint === 'immersive') {
     return new Err('Immersive displayHint is not yet supported');
@@ -47,67 +42,30 @@ function checkForUnsupportedContent(capi: any): Result<string, void> {
     return new Err('Atoms not yet supported');
   }
 
-  return new Ok(undefined);
+  return new Ok(content);
 
 }
 
-const isImage = (elem: BlockElement): boolean =>
-  elem.type === 'image';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const capiFields = (capi: any): Result<string, CapiFields> =>
-  fromUnsafe(() => {
-
-    const { type, fields, tags, webPublicationDate, pillarId, blocks } = capi.response.content;
-    const bodyElements = type === 'liveblog' ? blocks.body : blocks.body[0].elements;
-
-    const mainImage = fromNullable(blocks.main.elements.filter(isImage)[0]);
-    const feature = isFeature(tags) || 'starRating' in fields;
-    const pillarStyles = getPillarStyles(pillarId);
-    const contributors = tags.filter((tag: Tag) => tag.type === 'contributor');
-    const [series] = tags.filter((tag: Tag) => tag.type === 'series');
-
-    return {
-      type,
-      articleProps: {
-        ...fields,
-        ...capi.response.content,
-        webPublicationDate,
-        feature,
-        mainImage,
-        bodyElements,
-        pillarStyles,
-        contributors,
-        series
-      },
-    };
-  }, 'Unexpected CAPI response structure');
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fieldsFromCapi = (capi: any): Result<string, CapiFields> =>
-  fromUnsafe(() => checkForUnsupportedContent(capi), 'Unexpected CAPI response structure')
-    .andThen(id)
-    .andThen(() => capiFields(capi));
-
 const getArticleComponent = (imageSalt: string) =>
-  function ArticleComponent(capiFields: CapiFields): React.ReactElement {
-    switch (capiFields.type) {
+  function ArticleComponent(capi: Content): React.ReactElement {
+    switch (capi.type) {
       case 'article':
-        return React.createElement(Article, { ...capiFields.articleProps, imageSalt });
+        return React.createElement(Article, { capi, imageSalt });
       case 'liveblog':
         return React.createElement(
           LiveblogArticle,
-          { ...capiFields.articleProps, isLive: true, imageSalt }
+          { capi, isLive: true, imageSalt }
         );
       default:
-        return React.createElement('p', null, `${capiFields.type} not implemented yet`);
+        return React.createElement('p', null, `${capi.type} not implemented yet`);
     }
   }
 
 const generateArticleHtml = (capiResponse: string, imageSalt: string) =>
   (data: string): Result<string, string> =>
     parseCapi(capiResponse)
-      .andThen(fieldsFromCapi)
+      .andThen(capi => fromUnsafe(() => getContent(capi), 'Unexpected CAPI response structure'))
+      .andThen(id)
       .map(getArticleComponent(imageSalt))
       .map(renderToString)
       .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))

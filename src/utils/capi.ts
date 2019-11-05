@@ -1,16 +1,22 @@
 // ----- Imports ----- //
 
 import { Result, Ok, Err } from "../types/Result";
-import { Contributor } from 'types/Capi';
+import { Contributor, Capi } from 'types/Capi';
+import { Content, Tag, BlockElement } from 'types/capi-thrift-models';
+import { Option, fromNullable } from 'types/Option';
+import { isImage } from 'components/blocks/image';
 
 
 // ----- Functions ----- //
 
-const isFeature = (tags: Array<{ id: string }>): boolean =>
-    tags.some(tag => tag.id === 'tone/features');
+const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
+    tags.filter((tag: Tag) => tag.type === type_);
+
+const isFeature = (content: Content): boolean =>
+    content.tags.some(tag => tag.id === 'tone/features');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any 
-function parseCapi(capiResponse: string): Result<string, any> {
+function parseCapi(capiResponse: string): Result<string, Capi> {
     try {
         return new Ok(JSON.parse(capiResponse));
     } catch (_) {
@@ -35,7 +41,17 @@ const capiEndpoint = (articleId: string, key: string): string => {
   
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
   
-  }
+}
+
+const articleSeries = (content: Content): Tag =>
+    tagsOfType('series')(content.tags)[0];
+
+const articleContributors = (content: Content): Tag[] =>
+    tagsOfType('contributor')(content.tags);
+
+const articleMainImage = (content: Content): Option<BlockElement> =>
+    fromNullable(content.blocks.main.elements.filter(isImage)[0]);
+
 
 // ----- Exports ----- //
 
@@ -43,5 +59,8 @@ export {
     isFeature,
     parseCapi,
     isSingleContributor,
-    capiEndpoint
+    capiEndpoint,
+    articleSeries,
+    articleContributors,
+    articleMainImage,
 };
