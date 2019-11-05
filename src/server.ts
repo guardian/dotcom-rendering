@@ -14,7 +14,7 @@ import { Content } from 'types/capi-thrift-models';
 import Article from 'components/news/Article';
 import LiveblogArticle from 'components/liveblog/LiveblogArticle';
 import { getConfigValue } from 'utils/ssmConfig';
-import { parseCapi, capiEndpoint } from 'utils/capi';
+import { parseCapi, capiEndpoint } from 'types/Capi';
 import { Capi } from 'types/Capi';
 
 // ----- Setup ----- //

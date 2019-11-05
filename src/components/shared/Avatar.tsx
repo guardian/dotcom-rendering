@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Contributor } from 'types/Capi';
-import { isSingleContributor } from 'utils/capi';
+import { isSingleContributor } from 'types/Capi';
 import { css, SerializedStyles } from '@emotion/core';
 import { transformUrl } from 'utils/Asset';
 

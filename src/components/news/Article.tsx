@@ -12,7 +12,7 @@ import { darkModeCss, articleWidthStyles, pillarStylesFromString } from 'styles'
 import { palette, wide } from '@guardian/src-foundations';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/Keyline';
-import { isFeature, articleSeries, articleContributors, articleMainImage } from 'utils/capi';
+import { isFeature, articleSeries, articleContributors, articleMainImage } from 'types/Capi';
 
 export interface ArticleProps {
     capi: Content;
