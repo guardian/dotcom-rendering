@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { from, until } from '@guardian/src-utilities';
+import { from, until } from '@guardian/src-foundations/mq';
 
 const hideBelowDesktop = css`
     ${until.desktop} {

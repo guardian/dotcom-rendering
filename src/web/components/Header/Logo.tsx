@@ -2,7 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { from, visuallyHidden } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 

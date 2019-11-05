@@ -1,7 +1,7 @@
 import { configure, addParameters, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 
-import { defaults } from '../src/lib/default-css';
+import { defaults } from './default-css';
 
 import 'reset-css';
 

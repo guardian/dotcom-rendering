@@ -4,7 +4,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans, headline, palette } from '@guardian/src-foundations';
-import { from, between } from '@guardian/src-utilities';
+import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/components/lib/ArticleRenderer';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -13,6 +13,7 @@ import { SharingIcons } from '@root/src/web/components/ShareIcons';
 import { SubMetaLinksList } from '@root/src/web/components/SubMetaLinksList';
 import { SyndicationButton } from '@root/src/web/components/SyndicationButton';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Hide } from '@root/src/web/components/Hide';
 
 const pillarColours = pillarMap(
@@ -34,21 +35,6 @@ const pillarColours = pillarMap(
 //             }
 //         `,
 // );
-
-const guardianLines = css`
-    background-image: repeating-linear-gradient(
-        to bottom,
-        ${palette.neutral[86]},
-        ${palette.neutral[86]} 1px,
-        transparent 1px,
-        transparent 4px
-    );
-    background-repeat: repeat-x;
-    background-position: top;
-    background-size: 1px 13px;
-    padding-top: 15px;
-    margin-bottom: 6px;
-`;
 
 const captionFont = css`
     ${textSans({ level: 1 })};
@@ -135,11 +121,6 @@ const linkColour = pillarMap(
     `,
 );
 
-const subMeta = css`
-    margin-top: 12px;
-    padding-top: 18px;
-`;
-
 const subMetaLabel = css`
     ${textSans({ level: 1 })};
     display: block;
@@ -189,7 +170,8 @@ export const ArticleBody: React.FC<{
                     config={CAPI.config}
                 />
             </div>
-            <div className={cx(subMeta, guardianLines)}>
+            <GuardianLines pillar={CAPI.pillar} />
+            <>
                 {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
                     <span className={subMetaLabel}>Topics</span>
                 )}
@@ -229,7 +211,7 @@ export const ArticleBody: React.FC<{
                         internalPageCode={CAPI.pageId}
                     />
                 )}
-            </div>
+            </>
         </main>
     );
 };

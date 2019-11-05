@@ -9,6 +9,7 @@ const { readFileSync } = require('fs');
 const resetCSSPath = require.resolve('reset-css');
 const resetCSS = readFileSync(resetCSSPath, 'utf-8');
 
+// If you edit this css please copy over changes to ./storybook/default-css.ts
 const defaults = `
     *, *:before, *:after {
         box-sizing: inherit;

@@ -23,7 +23,6 @@ module.exports = {
                     'curlyquotes',
                     'react-dom',
                     '@guardian/src-foundations',
-                    '@guardian/src-utilities',
                     '@frontend/lib/',
                     '@frontend/amp/lib/',
                     '@frontend/amp/types',
