@@ -121,7 +121,7 @@ export const opinion = () => {
                 </ArticleLeft>
                 <ArticleContainer>
                     <ArticleHeadline
-                        headlineString="Elections used to bring us solutions. The 2019 general election won’t"
+                        headlineString="Yes, the billionaire club is one we really need to shut down"
                         webPublicationDate="2014-07-13T18:46:01.933Z"
                         tags={[]}
                         type="opinion"
