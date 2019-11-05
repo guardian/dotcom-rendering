@@ -173,9 +173,6 @@
         "transform": {
             "^.+\\.(ts|tsx)$": "ts-jest"
         },
-        "transformIgnorePatterns": [
-            "node_modules/(?!(@guardian/src-foundations)/)"
-        ],
         "globals": {
             "ts-jest": {
                 "diagnostics": false,
