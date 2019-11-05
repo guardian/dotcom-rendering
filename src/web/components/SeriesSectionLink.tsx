@@ -103,7 +103,7 @@ export const SeriesSectionLink: React.FC<{
                     pillar={CAPI.pillar}
                     guardianBaseURL={CAPI.guardianBaseURL}
                     tagTitle={CAPI.sectionLabel}
-                    tagUrl={CAPI.sectionLabel}
+                    tagUrl={CAPI.sectionUrl}
                     dataLinkName="article section"
                     weightingClass={secondaryStyle}
                 />
