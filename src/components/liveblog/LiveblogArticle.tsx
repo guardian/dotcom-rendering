@@ -13,7 +13,7 @@ import { Content } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import { from } from '@guardian/src-utilities'
-import { articleMainImage, articleSeries, articleContributors } from 'utils/capi';
+import { articleMainImage, articleSeries, articleContributors } from 'types/Capi';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${palette.neutral[97]};
