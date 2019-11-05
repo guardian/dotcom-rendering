@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { textSans, headline, palette } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-utilities';
+import { from, until } from '@guardian/src-foundations/mq';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 import { AsyncClientComponent } from '@root/src/web/components/lib/AsyncClientComponent';

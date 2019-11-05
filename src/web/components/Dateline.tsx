@@ -2,7 +2,7 @@ import React from 'react';
 
 import { css } from 'emotion';
 import { textSans, palette } from '@guardian/src-foundations';
-import { visuallyHidden } from '@guardian/src-utilities';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 const captionFont = css`
     ${textSans({ level: 1 })};

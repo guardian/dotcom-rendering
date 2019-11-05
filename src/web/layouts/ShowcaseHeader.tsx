@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { from, until, between } from '@guardian/src-utilities';
+import { from, until, between } from '@guardian/src-foundations/mq';
 
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
