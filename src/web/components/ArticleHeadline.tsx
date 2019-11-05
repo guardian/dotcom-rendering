@@ -21,8 +21,6 @@ type Props = {
     webPublicationDate: string; // Used for age warning
     tags: TagType[]; // Used for age warning
     colour?: string; // pass in pillar colour for features, etc.
-    byline?: string; // Used for comment pieces
-    authorImage?: string; // Show author image with GuardianLines if present
 };
 
 const curly = (x: any) => x;
@@ -244,8 +242,6 @@ export const ArticleHeadline = ({
     webPublicationDate,
     tags,
     colour,
-    byline,
-    authorImage,
     type = 'basic',
 }: Props) => {
     const ageWarning = getAgeWarning(tags, webPublicationDate);
