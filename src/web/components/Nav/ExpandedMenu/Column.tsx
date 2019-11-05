@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
 import { textSans, palette } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-utilities';
+import { from, until } from '@guardian/src-foundations/mq';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS vars

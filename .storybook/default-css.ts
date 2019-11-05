@@ -1,3 +1,4 @@
+// This css is duplicated from /src/lib/reset-css
 export const defaults = `
     *, *:before, *:after {
         box-sizing: inherit;

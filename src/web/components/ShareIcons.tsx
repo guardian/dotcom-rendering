@@ -8,7 +8,7 @@ import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 import { palette } from '@guardian/src-foundations';
-import { from } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
 const pillarFill = pillarMap(

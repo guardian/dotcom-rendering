@@ -1,7 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 import { headline, palette } from '@guardian/src-foundations';
-import { from, visuallyHidden } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { AsyncClientComponent } from '@root/src/web/components/lib/AsyncClientComponent';

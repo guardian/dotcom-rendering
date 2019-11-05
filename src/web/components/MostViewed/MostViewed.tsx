@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { headline, palette } from '@guardian/src-foundations';
-import { from, between, Breakpoint } from '@guardian/src-utilities';
+import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 import { useApi } from '@root/src/web/components/lib/api';

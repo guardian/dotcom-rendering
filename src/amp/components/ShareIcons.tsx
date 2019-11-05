@@ -7,7 +7,7 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
-import { visuallyHidden } from '@guardian/src-utilities';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 
 const pillarFill = pillarMap(

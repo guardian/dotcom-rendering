@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { until, from, Breakpoint } from '@guardian/src-utilities';
+import { until, from, Breakpoint } from '@guardian/src-foundations/mq';
 
 type Props = {
     children: JSX.Element | JSX.Element[];
