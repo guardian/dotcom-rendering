@@ -60,7 +60,7 @@ export const oldHeadline = () => (
 );
 oldHeadline.story = { name: 'type: basic, with age warning' };
 
-export const Feature = () => (
+export const Bold = () => (
     <Section>
         <Flex>
             <ArticleLeft>
@@ -72,13 +72,13 @@ export const Feature = () => (
                     webPublicationDate="2014-07-13T18:46:01.933Z"
                     tags={[]}
                     colour="#7d0068"
-                    type="feature"
+                    type="bold"
                 />
             </ArticleContainer>
         </Flex>
     </Section>
 );
-Feature.story = { name: 'type: feature, with colour' };
+Bold.story = { name: 'type: bold, with colour' };
 
 export const inverted = () => (
     <Section>
@@ -104,7 +104,7 @@ export const inverted = () => (
 );
 inverted.story = { name: 'type: inverted' };
 
-export const opinion = () => (
+export const light = () => (
     <Section>
         <Flex>
             <ArticleLeft>
@@ -115,13 +115,13 @@ export const opinion = () => (
                     headlineString="Yes, the billionaire club is one we really need to shut down"
                     webPublicationDate="2014-07-13T18:46:01.933Z"
                     tags={[]}
-                    type="opinion"
+                    type="light"
                 />
             </ArticleContainer>
         </Flex>
     </Section>
 );
-opinion.story = { name: 'type: opinion' };
+light.story = { name: 'type: light' };
 
 export const underlined = () => (
     <Section>

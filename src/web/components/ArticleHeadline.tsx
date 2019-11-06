@@ -11,10 +11,10 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 type HeadlineType =
     | 'basic'
     | 'underlined'
-    | 'opinion'
+    | 'light'
     | 'jumbo'
     | 'inverted'
-    | 'feature';
+    | 'bold';
 
 type Props = {
     headlineString: string;
@@ -30,7 +30,7 @@ const standardFont = css`
     ${headline({ level: 5, fontWeight: 'medium' })};
 `;
 
-const featureFont = css`
+const boldFont = css`
     ${headline({ level: 5, fontWeight: 'bold' })};
 `;
 
@@ -39,7 +39,7 @@ const jumboFont = css`
     line-height: 56px;
 `;
 
-const opinionFont = css`
+const lightFont = css`
     font-weight: normal;
     font-weight: 300;
     font-size: 2.125rem;
@@ -54,7 +54,7 @@ const standardPadding = css`
     }
 `;
 
-const featurePadding = css`
+const boldPadding = css`
     padding-bottom: 24px;
     padding-top: 3px;
 `;
@@ -159,8 +159,8 @@ const renderHeadline = (
 ) => {
     switch (type) {
         case 'basic':
-        case 'feature':
-        case 'opinion':
+        case 'bold':
+        case 'light':
         case 'underlined': {
             return (
                 <>
@@ -169,9 +169,9 @@ const renderHeadline = (
                             standardFont,
                             standardPadding,
                             type === 'underlined' && underlinedStyles,
-                            type === 'feature' && featureFont,
-                            type === 'feature' && featurePadding,
-                            type === 'opinion' && opinionFont,
+                            type === 'bold' && boldFont,
+                            type === 'bold' && boldPadding,
+                            type === 'light' && lightFont,
                             options && colourStyles(options.colour),
                         )}
                     >

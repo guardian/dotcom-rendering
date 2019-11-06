@@ -70,7 +70,7 @@ export const ShowcaseHeader = ({ CAPI }: Props) => {
                     headlineString={headline}
                     tags={tags}
                     webPublicationDate={webPublicationDate}
-                    type="feature"
+                    type="bold"
                     colour={pillarPalette[pillar].dark}
                 />
             </HeaderItem>
