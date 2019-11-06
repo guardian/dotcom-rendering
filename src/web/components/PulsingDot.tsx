@@ -11,8 +11,8 @@ const livePulse = keyframes`{
     100% {opacity: 1;}
 }`;
 
-const pulsingDot = (colour: string) => css`
-    color: ${colour};
+const pulsingDot = (colour?: string) => css`
+    color: ${colour && colour};
     ::before {
         border-radius: 62.5rem;
         display: inline-block;
@@ -28,7 +28,7 @@ const pulsingDot = (colour: string) => css`
 `;
 
 interface Props {
-    colour: string;
+    colour?: string;
 }
 
 export const PulsingDot = ({ colour }: Props) => {
