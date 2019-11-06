@@ -15,7 +15,7 @@ describe('helper functions return correct styles', () => {
             kicker: '#c70000',
             featureHeadline: '#ab0613',
             soft: '#f6f6f6',
-            inverted: '#ff4e36',
+            inverted: '#FF5943',
             liveblogBackground: '#ab0613'
         }
         expect(pillarStyles).toEqual(expectedNewsPillarStyles);
