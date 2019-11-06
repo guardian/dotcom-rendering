@@ -39,6 +39,11 @@ const jumboFont = css`
     line-height: 56px;
 `;
 
+const invertedFont = css`
+    ${headline({ level: 5, fontWeight: 'bold' })};
+    line-height: 42px;
+`;
+
 const lightFont = css`
     font-weight: normal;
     font-weight: 300;
@@ -193,7 +198,7 @@ const renderHeadline = (
                 >
                     <h1
                         className={cx(
-                            standardFont,
+                            invertedFont,
                             blackBackground,
                             invertedStyles,
                             displayInline,
@@ -219,11 +224,10 @@ const renderHeadline = (
                 >
                     <h1
                         className={cx(
-                            standardFont,
+                            jumboFont,
                             maxWidth,
                             invertedStyles,
                             displayBlock,
-                            jumboFont,
                             options && colourStyles(options.colour),
                         )}
                     >
