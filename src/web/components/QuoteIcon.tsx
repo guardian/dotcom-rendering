@@ -1,17 +1,17 @@
 import React from 'react';
 import { css } from 'emotion';
 
-const quoteStyles = (colour: string) => css`
+const quoteStyles = (colour?: string) => css`
     height: 1.0625rem;
     width: 0.57375rem;
     margin-right: 12px;
     transform: translateY(-0.0625rem);
     overflow: visible;
-    fill: ${colour};
+    fill: ${colour && colour};
 `;
 
 type Props = {
-    colour: string;
+    colour?: string;
 };
 
 export const QuoteIcon = ({ colour }: Props) => (
