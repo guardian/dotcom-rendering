@@ -99,8 +99,8 @@ const invertedStyles = css`
     color: white;
     display: 'inline';
     white-space: pre-wrap;
-    padding: 5px;
-    padding-left: 0px;
+    padding-bottom: 5px;
+    padding-right: 5px;
     box-shadow: -6px 0 0 black;
 `;
 
