@@ -1,6 +1,6 @@
 import { getPolyfill } from '../../lib/polyfill';
 import { fixTime } from '../../lib/time';
-import { visitOptions } from '../../lib/config';
+import { fetchPolyfill } from '../../lib/config';
 import { AMPArticles } from '../../lib/articles.js';
 import { mockApi } from '../../lib/mocks';
 
@@ -12,7 +12,7 @@ describe('For AMP', function() {
     AMPArticles.map((article, index) => {
         const { url, pillar, designType } = article;
         it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
-            cy.visit(`AMPArticle?url=${url}`, visitOptions);
+            cy.visit(`AMPArticle?url=${url}`, fetchPolyfill);
             cy.percySnapshot(`AMP-${pillar}-${designType}-${index}`, {
                 widths: [375],
             });

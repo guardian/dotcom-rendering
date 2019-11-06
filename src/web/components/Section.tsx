@@ -49,16 +49,18 @@ const setBackgroundColour = (colour: string) => css`
 `;
 
 type Props = {
+    islandId?: string;
     showSideBorders?: boolean;
     showTopBorder?: boolean;
     padded?: boolean;
     backgroundColour?: string;
     borderColour?: string;
+    children?: React.ReactNode;
     shouldCenter?: boolean;
-    children: React.ReactNode;
 };
 
 export const Section = ({
+    islandId,
     showSideBorders = true,
     showTopBorder = true,
     padded = true,
@@ -73,6 +75,7 @@ export const Section = ({
         )}
     >
         <div
+            data-island={islandId}
             className={cx(
                 shouldCenter && center,
                 showSideBorders && sideBorders(borderColour),
@@ -80,7 +83,7 @@ export const Section = ({
                 padded && padding,
             )}
         >
-            {children}
+            {children && children}
         </div>
     </section>
 );

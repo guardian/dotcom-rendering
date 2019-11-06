@@ -5,7 +5,6 @@ import { textSans, palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { clearFix } from '@root/src/lib/mixins';
-import { ReaderRevenueLinks } from '@root/src/web/components/ReaderRevenueLinks';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 
@@ -187,12 +186,7 @@ const FooterLinks: React.FC<{
 
     const rrLinks = (
         <div className={readerRevenueLinks}>
-            <ReaderRevenueLinks
-                urls={nav.readerRevenueLinks.footer}
-                edition={edition}
-                dataLinkNamePrefix={'footer : '}
-                noResponsive={true}
-            />
+            <div data-island="reader-revenue-links-footer" />
         </div>
     );
 

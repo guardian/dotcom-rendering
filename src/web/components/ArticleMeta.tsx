@@ -3,7 +3,6 @@ import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { between, until } from '@guardian/src-foundations/mq';
 
-import { ShareCount } from './ShareCount';
 import { Dateline } from './Dateline';
 import { SharingIcons } from './ShareIcons';
 import { Byline } from '@root/src/web/components/Byline';
@@ -65,7 +64,7 @@ export const ArticleMeta = ({ CAPI, config }: Props) => {
                         pillar={CAPI.pillar}
                         displayIcons={['facebook', 'twitter', 'email']}
                     />
-                    <ShareCount config={config} pageId={CAPI.pageId} />
+                    <div data-island="share-count" />
                 </div>
             </div>
         </>

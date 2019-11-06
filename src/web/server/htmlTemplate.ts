@@ -133,7 +133,7 @@ export const htmlTemplate = ({
             </head>
 
             <body>
-                <div id="app">${html}</div>
+                ${html}
                 ${lowPriorityScriptTags.join('\n')}
             </body>
         </html>`;

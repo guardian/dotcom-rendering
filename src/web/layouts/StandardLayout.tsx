@@ -47,6 +47,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => (
         </Section>
 
         <Section
+            islandId="nav-root"
             showSideBorders={true}
             borderColour={palette.brand.pastel}
             showTopBorder={false}
@@ -87,7 +88,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => (
             <OutbrainContainer config={config} />
         </Section>
 
-        <Section>
+        <Section islandId="most-viewed">
             <MostViewed
                 sectionName={CAPI.sectionName}
                 config={config}

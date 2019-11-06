@@ -117,6 +117,7 @@ export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
                             aria-selected={i === selectedTabIndex}
                             aria-controls={`tabs-popular-${i}`}
                             id={`tabs-popular-${i}-tab`}
+                            data-cy={`tab-heading-${i}`}
                             key={`tabs-popular-${i}-tab`}
                         >
                             <button
@@ -147,6 +148,7 @@ export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
                         [hideList]: i !== selectedTabIndex,
                     })}
                     id={`tabs-popular-${i}`}
+                    data-cy={`tab-body-${i}`}
                     key={`tabs-popular-${i}`}
                     role="tabpanel"
                     aria-labelledby={`tabs-popular-${i}-tab`}
