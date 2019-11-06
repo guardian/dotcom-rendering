@@ -189,6 +189,7 @@ const renderHeadline = (
                 // and a black background (only for the text)
                 <h1
                     className={cx(
+                        invertedFont,
                         invertedWrapper,
                         shiftPosition('down'),
                         maxWidth,
@@ -196,7 +197,6 @@ const renderHeadline = (
                 >
                     <span
                         className={cx(
-                            invertedFont,
                             blackBackground,
                             invertedStyles,
                             displayInline,
