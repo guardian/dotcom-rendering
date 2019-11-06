@@ -27,19 +27,16 @@ type Props = {
 const curly = (x: any) => x;
 
 const standardFont = css`
-    ${headline({ level: 5 })};
-    font-weight: 500;
+    ${headline({ level: 5, fontWeight: 'medium' })};
 `;
 
 const featureFont = css`
-    ${headline({ level: 5 })};
-    font-weight: 700;
+    ${headline({ level: 5, fontWeight: 'bold' })};
 `;
 
 const jumboFont = css`
-    ${headline({ level: 7 })};
+    ${headline({ level: 7, fontWeight: 'bold' })};
     line-height: 56px;
-    font-weight: 700;
 `;
 
 const opinionFont = css`
