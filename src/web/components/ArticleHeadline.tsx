@@ -39,6 +39,11 @@ const jumboFont = css`
     line-height: 56px;
 `;
 
+const invertedFont = css`
+    ${headline({ level: 5, fontWeight: 'bold' })};
+    line-height: 42px;
+`;
+
 const lightFont = css`
     font-weight: normal;
     font-weight: 300;
@@ -94,8 +99,8 @@ const invertedStyles = css`
     color: white;
     display: 'inline';
     white-space: pre-wrap;
-    padding: 5px;
-    padding-left: 0px;
+    padding-bottom: 5px;
+    padding-right: 5px;
     box-shadow: -6px 0 0 black;
 `;
 
@@ -163,37 +168,35 @@ const renderHeadline = (
         case 'light':
         case 'underlined': {
             return (
-                <>
-                    <h1
-                        className={cx(
-                            standardFont,
-                            standardPadding,
-                            type === 'underlined' && underlinedStyles,
-                            type === 'bold' && boldFont,
-                            type === 'bold' && boldPadding,
-                            type === 'light' && lightFont,
-                            options && colourStyles(options.colour),
-                        )}
-                    >
-                        {curly(headlineString)}
-                    </h1>
-                </>
+                <h1
+                    className={cx(
+                        standardFont,
+                        standardPadding,
+                        type === 'underlined' && underlinedStyles,
+                        type === 'bold' && boldFont,
+                        type === 'bold' && boldPadding,
+                        type === 'light' && lightFont,
+                        options && colourStyles(options.colour),
+                    )}
+                >
+                    {curly(headlineString)}
+                </h1>
             );
         }
         case 'inverted': {
             return (
                 // Inverted headlines have a wrapper div for positioning
                 // and a black background (only for the text)
-                <div
+                <h1
                     className={cx(
+                        invertedFont,
                         invertedWrapper,
                         shiftPosition('down'),
                         maxWidth,
                     )}
                 >
-                    <h1
+                    <span
                         className={cx(
-                            standardFont,
                             blackBackground,
                             invertedStyles,
                             displayInline,
@@ -201,15 +204,15 @@ const renderHeadline = (
                         )}
                     >
                         {curly(headlineString)}
-                    </h1>
-                </div>
+                    </span>
+                </h1>
             );
         }
         case 'jumbo': {
             return (
                 // Jumbo headlines are large and inverted and have their black background
                 // extended to the right
-                <div
+                <h1
                     className={cx(
                         invertedWrapper,
                         shiftPosition('up'),
@@ -217,19 +220,18 @@ const renderHeadline = (
                         options && colourStyles(options.colour),
                     )}
                 >
-                    <h1
+                    <span
                         className={cx(
-                            standardFont,
+                            jumboFont,
                             maxWidth,
                             invertedStyles,
                             displayBlock,
-                            jumboFont,
                             options && colourStyles(options.colour),
                         )}
                     >
                         {curly(headlineString)}
-                    </h1>
-                </div>
+                    </span>
+                </h1>
             );
         }
     }
