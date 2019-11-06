@@ -56,6 +56,7 @@ type Props = {
     backgroundColour?: string;
     borderColour?: string;
     children?: React.ReactNode;
+    shouldCenter?: boolean;
 };
 
 export const Section = ({
@@ -65,6 +66,7 @@ export const Section = ({
     padded = true,
     borderColour = palette.neutral[86],
     backgroundColour,
+    shouldCenter = true,
     children,
 }: Props) => (
     <section
@@ -75,7 +77,7 @@ export const Section = ({
         <div
             data-island={islandId}
             className={cx(
-                center,
+                shouldCenter && center,
                 showSideBorders && sideBorders(borderColour),
                 showTopBorder && topBorder(borderColour),
                 padded && padding,
