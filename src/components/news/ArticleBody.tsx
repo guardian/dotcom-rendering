@@ -8,8 +8,8 @@ import {
     basePx,
     adStyles
 } from 'styles';
-import { palette } from '@guardian/src-foundations'
-import { until } from '@guardian/src-utilities'
+import { palette } from '@guardian/src-foundations';
+import { until } from '@guardian/src-foundations/mq';
 import { render } from "renderBlocks";
 import { BlockElement } from 'types/capi-thrift-models';
 
@@ -42,7 +42,7 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${palette.neutral[10]};
+    background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
     a {

@@ -33,7 +33,7 @@ const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles 
 `;
 
 const tagsDarkStyles = darkModeCss`
-    background: ${palette.neutral[10]};
+    background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
     li a {

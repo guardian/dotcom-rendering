@@ -9,7 +9,8 @@ import ArticleBody from './ArticleBody';
 import Tags from 'components/shared/Tags';
 import { Content } from 'types/capi-thrift-models';
 import { darkModeCss, articleWidthStyles, pillarStylesFromString } from 'styles';
-import { palette, wide } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/Keyline';
 import { isFeature, articleSeries, articleContributors, articleMainImage } from 'types/Capi';
@@ -24,14 +25,14 @@ const MainStyles = css`
 `;
 
 const MainDarkStyles = darkModeCss`
-    background: ${palette.neutral[10]};
+    background: ${palette.neutral.darkMode};
 `;
 
 const BorderStyles = css`
     background: ${palette.neutral[100]};
 
-    ${wide} {
-        width: 1300px;
+    ${from.wide} {
+        width: ${breakpoints.wide}px;
         margin: 0 auto;
     }
 `;
@@ -40,7 +41,7 @@ const HeaderImageStyles = css`
     figure {
         margin: 0;
 
-        ${wide} {
+        ${from.wide} {
             margin: 0 auto;
         }
     }

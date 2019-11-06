@@ -1,7 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import { basePx, textSans, icons, wideContentWidth } from 'styles';
-import { palette, wide } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 
 const HeaderImageCaptionStyles = css`
     input[type=checkbox] {
@@ -59,7 +60,7 @@ const HeaderImageCaptionStyles = css`
 	right: 0;
 	bottom: 0;
 	
-	${wide} {
+	${from.wide} {
 		width: ${wideContentWidth}px;
 	}
 `;

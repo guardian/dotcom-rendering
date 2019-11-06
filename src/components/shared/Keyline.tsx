@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss, wideContentWidth, wideColumnWidth, baseMultiply } from 'styles';
-import { palette, wide } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 
 const BaseStyles = css`
     height: 12px;
@@ -9,7 +10,7 @@ const BaseStyles = css`
     margin-top: 0;
     border: none;
 
-    ${wide} {
+    ${from.wide} {
         width: ${wideContentWidth}px;
         margin-left: auto;
         margin-right: auto;
@@ -21,7 +22,7 @@ const KeylineLiveblogStyles = css`
     opacity: .4;
     margin-right: unset;
 
-    ${wide} {
+    ${from.wide} {
         margin-left: ${wideColumnWidth + baseMultiply(1)}px;
     }
 `;

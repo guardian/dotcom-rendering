@@ -36,7 +36,7 @@ const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 `;
 
 const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${palette.neutral[10]};
+    background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
     .author {

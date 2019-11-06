@@ -4,7 +4,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import HeaderImageCaption from './HeaderImageCaption';
 import { BlockElement } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
-import { wide } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { wideContentWidth } from 'styles';
 import { Option } from 'types/Option';
 
@@ -12,7 +12,7 @@ const headerImageStyles = css`
     figure {
         position: relative;
 
-        ${wide} {
+        ${from.wide} {
             width: ${wideContentWidth}px;
         }
     }
@@ -21,7 +21,7 @@ const headerImageStyles = css`
         display: block;
         width: 100%;
 
-        ${wide} {
+        ${from.wide} {
             width: ${wideContentWidth}px;
         }
     }
