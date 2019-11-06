@@ -1,4 +1,6 @@
+import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
+import { visitOptions } from '../../lib/config';
 
 const READER_REVENUE_TITLE_TEXT = 'Support The';
 const articleUrl =
@@ -39,9 +41,10 @@ describe('Interactivity', function() {
         });
 
         describe('When most viewed is mocked', function() {
-            before(mockApi);
+            beforeEach(getPolyfill);
+            beforeEach(mockApi);
             it('should change the list of most viewed items when a tab is clicked', function() {
-                cy.visit(`/Article?url=${articleUrl}`);
+                cy.visit(`/Article?url=${articleUrl}`, visitOptions);
                 cy.get('[data-cy=tab-body-0]').should('be.visible');
                 cy.get('[data-cy=tab-body-1]').should('not.be.visible');
                 cy.get('[data-cy=tab-heading-1]').click();
