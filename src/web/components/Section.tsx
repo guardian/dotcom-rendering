@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { from } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
 
 const center = css`
     position: relative;

@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { Dropdown, Link } from '@root/src/web/components/Dropdown';
 import { palette } from '@guardian/src-foundations';
-import { from } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
 
 const editionDropdown = css`
     position: absolute;

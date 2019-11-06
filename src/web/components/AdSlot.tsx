@@ -3,7 +3,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { textSans, palette } from '@guardian/src-foundations';
-import { from } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
 
 export const labelStyles = css`
     .ad-slot__label {

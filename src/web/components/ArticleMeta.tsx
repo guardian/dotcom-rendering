@@ -1,27 +1,13 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import { between, until } from '@guardian/src-utilities';
+import { between, until } from '@guardian/src-foundations/mq';
 
 import { Dateline } from './Dateline';
 import { SharingIcons } from './ShareIcons';
 import { Byline } from '@root/src/web/components/Byline';
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-
-const guardianLines = css`
-    background-image: repeating-linear-gradient(
-        to bottom,
-        ${palette.neutral[86]},
-        ${palette.neutral[86]} 1px,
-        transparent 1px,
-        transparent 4px
-    );
-    background-repeat: repeat-x;
-    background-position: top;
-    background-size: 1px 13px;
-    padding-top: 15px;
-    margin-bottom: 6px;
-`;
 
 const meta = css`
     ${between.tablet.and.leftCol} {
@@ -32,6 +18,7 @@ const meta = css`
         padding-left: 10px;
         padding-right: 10px;
     }
+    padding-top: 2px;
 `;
 
 const metaExtras = css`
@@ -59,24 +46,27 @@ export const ArticleMeta = ({ CAPI, config }: Props) => {
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
 
     return (
-        <div className={cx(meta, guardianLines)}>
-            <Byline
-                author={CAPI.author}
-                tags={CAPI.tags}
-                pillar={CAPI.pillar}
-            />
-            <Dateline
-                dateDisplay={CAPI.webPublicationDateDisplay}
-                descriptionText={'Published on'}
-            />
-            <div className={metaExtras}>
-                <SharingIcons
-                    sharingUrls={sharingUrls}
+        <>
+            <GuardianLines pillar={CAPI.pillar} />
+            <div className={cx(meta)}>
+                <Byline
+                    author={CAPI.author}
+                    tags={CAPI.tags}
                     pillar={CAPI.pillar}
-                    displayIcons={['facebook', 'twitter', 'email']}
                 />
-                <div data-island="share-count" />
+                <Dateline
+                    dateDisplay={CAPI.webPublicationDateDisplay}
+                    descriptionText={'Published on'}
+                />
+                <div className={metaExtras}>
+                    <SharingIcons
+                        sharingUrls={sharingUrls}
+                        pillar={CAPI.pillar}
+                        displayIcons={['facebook', 'twitter', 'email']}
+                    />
+                    <div data-island="share-count" />
+                </div>
             </div>
-        </div>
+        </>
     );
 };

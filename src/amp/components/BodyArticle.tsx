@@ -8,7 +8,7 @@ import { SubMeta } from '@root/src/amp/components/SubMeta';
 import { designTypeDefault } from '@root/src/lib/designTypes';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { until } from '@guardian/src-utilities';
+import { until } from '@guardian/src-foundations/mq';
 import { WithAds } from '@root/src/amp/components/WithAds';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';

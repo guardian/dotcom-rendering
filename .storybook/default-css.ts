@@ -1,16 +1,5 @@
-// @preval
-
-// note: this file is intended to imported using babel-plugin-preval
-// the easiest way is probably with the import-comment:
-// https://www.npmjs.com/package/babel-plugin-preval#import-comment
-
-const { readFileSync } = require('fs');
-
-const resetCSSPath = require.resolve('reset-css');
-const resetCSS = readFileSync(resetCSSPath, 'utf-8');
-
-// If you edit this css please copy over changes to ./storybook/default-css.ts
-const defaults = `
+// This css is duplicated from /src/lib/reset-css
+export const defaults = `
     *, *:before, *:after {
         box-sizing: inherit;
     }
@@ -33,5 +22,3 @@ const defaults = `
         font-style: italic;
     }
 `;
-
-module.exports = [resetCSS, defaults].join('').replace(/\s/g, '');

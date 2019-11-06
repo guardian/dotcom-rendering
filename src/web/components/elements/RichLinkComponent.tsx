@@ -5,7 +5,7 @@ import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
 import { headline, textSans, palette } from '@guardian/src-foundations';
 import { StarRating } from '@root/src/web/components/StarRating';
-import { from, until, between } from '@guardian/src-utilities';
+import { from, until, between } from '@guardian/src-foundations/mq';
 import { useApi } from '@frontend/web/components/lib/api';
 
 type colour = string;

@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { textSans, palette } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-utilities';
+import { from, until } from '@guardian/src-foundations/mq';
 
 import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
 import { Columns } from './Columns';

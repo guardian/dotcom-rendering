@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import ArrowRight from '@frontend/static/icons/arrow-right.svg';
 import { palette, textSans } from '@guardian/src-foundations';
-import { until } from '@guardian/src-utilities';
+import { until } from '@guardian/src-foundations/mq';
 
 const supportStyles = css`
     align-self: flex-start;

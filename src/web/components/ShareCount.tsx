@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import ShareIcon from '@frontend/static/icons/share.svg';
 import { textSans, palette } from '@guardian/src-foundations';
-import { from, between } from '@guardian/src-utilities';
+import { from, between } from '@guardian/src-foundations/mq';
 import { integerCommas } from '@root/src/lib/formatters';
 import { useApi } from '@root/src/web/components/lib/api';
 
