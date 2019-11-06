@@ -17,172 +17,158 @@ export default {
 };
 /* tslint:enable */
 
-export const defaultStory = () => {
-    return (
-        <Section>
-            <Flex>
-                <ArticleLeft>
-                    <></>
-                </ArticleLeft>
-                <ArticleContainer>
-                    <ArticleHeadline
-                        headlineString="This is how the default headline looks"
-                        webPublicationDate=""
-                        tags={[]}
-                    />
-                </ArticleContainer>
-            </Flex>
-        </Section>
-    );
-};
+export const defaultStory = () => (
+    <Section>
+        <Flex>
+            <ArticleLeft>
+                <></>
+            </ArticleLeft>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is how the default headline looks"
+                    webPublicationDate=""
+                    tags={[]}
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
 defaultStory.story = { name: 'type: basic, with defaults' };
 
-export const oldHeadline = () => {
-    return (
-        <Section>
-            <Flex>
-                <ArticleLeft>
-                    <></>
-                </ArticleLeft>
-                <ArticleContainer>
-                    <ArticleHeadline
-                        headlineString="This is an old headline"
-                        webPublicationDate="2014-07-13T18:46:01.933Z"
-                        tags={[
-                            // Age warnings only show for old articles when the tone/news tag is present
-                            {
-                                id: 'tone/news',
-                                type: '',
-                                title: '',
-                            },
-                        ]}
-                    />
-                </ArticleContainer>
-            </Flex>
-        </Section>
-    );
-};
+export const oldHeadline = () => (
+    <Section>
+        <Flex>
+            <ArticleLeft>
+                <></>
+            </ArticleLeft>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is an old headline"
+                    webPublicationDate="2014-07-13T18:46:01.933Z"
+                    tags={[
+                        // Age warnings only show for old articles when the tone/news tag is present
+                        {
+                            id: 'tone/news',
+                            type: '',
+                            title: '',
+                        },
+                    ]}
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
 oldHeadline.story = { name: 'type: basic, with age warning' };
 
-export const Feature = () => {
-    return (
-        <Section>
-            <Flex>
-                <ArticleLeft>
-                    <></>
-                </ArticleLeft>
-                <ArticleContainer>
-                    <ArticleHeadline
-                        headlineString="This is a bold headline with colour applied"
-                        webPublicationDate="2014-07-13T18:46:01.933Z"
-                        tags={[]}
-                        colour="#7d0068"
-                        type="feature"
-                    />
-                </ArticleContainer>
-            </Flex>
-        </Section>
-    );
-};
+export const Feature = () => (
+    <Section>
+        <Flex>
+            <ArticleLeft>
+                <></>
+            </ArticleLeft>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is a bold headline with colour applied"
+                    webPublicationDate="2014-07-13T18:46:01.933Z"
+                    tags={[]}
+                    colour="#7d0068"
+                    type="feature"
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
 Feature.story = { name: 'type: feature, with colour' };
 
-export const inverted = () => {
-    return (
-        <Section>
-            <Flex>
-                <ArticleLeft>
-                    <></>
-                </ArticleLeft>
-                <ArticleContainer>
-                    <ArticleHeadline
-                        headlineString="This is an inverted headline. It has a black background, white text and overlays the image below it (as a sibling)"
-                        webPublicationDate="2014-07-13T18:46:01.933Z"
-                        tags={[]}
-                        type="inverted"
-                    />
-                    <MainMedia
-                        hideCaption={true}
-                        elements={mainMediaElements}
-                        pillar={'news'}
-                    />
-                </ArticleContainer>
-            </Flex>
-        </Section>
-    );
-};
+export const inverted = () => (
+    <Section>
+        <Flex>
+            <ArticleLeft>
+                <></>
+            </ArticleLeft>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is an inverted headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                    webPublicationDate="2014-07-13T18:46:01.933Z"
+                    tags={[]}
+                    type="inverted"
+                />
+                <MainMedia
+                    hideCaption={true}
+                    elements={mainMediaElements}
+                    pillar={'news'}
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
 inverted.story = { name: 'type: inverted' };
 
-export const opinion = () => {
-    return (
-        <Section>
-            <Flex>
-                <ArticleLeft>
-                    <></>
-                </ArticleLeft>
-                <ArticleContainer>
-                    <ArticleHeadline
-                        headlineString="Yes, the billionaire club is one we really need to shut down"
-                        webPublicationDate="2014-07-13T18:46:01.933Z"
-                        tags={[]}
-                        type="opinion"
-                    />
-                </ArticleContainer>
-            </Flex>
-        </Section>
-    );
-};
+export const opinion = () => (
+    <Section>
+        <Flex>
+            <ArticleLeft>
+                <></>
+            </ArticleLeft>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="Yes, the billionaire club is one we really need to shut down"
+                    webPublicationDate="2014-07-13T18:46:01.933Z"
+                    tags={[]}
+                    type="opinion"
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
 opinion.story = { name: 'type: opinion' };
 
-export const underlined = () => {
-    return (
-        <Section>
+export const underlined = () => (
+    <Section>
+        <Flex>
+            <ArticleLeft>
+                <></>
+            </ArticleLeft>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This headline is underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                    webPublicationDate="2014-07-13T18:46:01.933Z"
+                    tags={[]}
+                    type="underlined"
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+underlined.story = { name: 'type: underlined' };
+
+export const Jumbo = () => (
+    <>
+        <MainMedia
+            hideCaption={true}
+            elements={mainMediaElements}
+            pillar={'news'}
+        />
+        <Section
+            showTopBorder={false}
+            showSideBorders={false}
+            padded={false}
+            shouldCenter={false}
+        >
             <Flex>
-                <ArticleLeft>
+                <ArticleLeft showRightBorder={false}>
                     <></>
                 </ArticleLeft>
                 <ArticleContainer>
                     <ArticleHeadline
-                        headlineString="This headline is underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                        headlineString="Here the headling overlays the image above it, the text is larger and the black background should extend to the right"
                         webPublicationDate="2014-07-13T18:46:01.933Z"
                         tags={[]}
-                        type="underlined"
+                        type="jumbo"
                     />
                 </ArticleContainer>
             </Flex>
         </Section>
-    );
-};
-underlined.story = { name: 'type: underlined' };
-
-export const Jumbo = () => {
-    return (
-        <>
-            <MainMedia
-                hideCaption={true}
-                elements={mainMediaElements}
-                pillar={'news'}
-            />
-            <Section
-                showTopBorder={false}
-                showSideBorders={false}
-                padded={false}
-                shouldCenter={false}
-            >
-                <Flex>
-                    <ArticleLeft showRightBorder={false}>
-                        <></>
-                    </ArticleLeft>
-                    <ArticleContainer>
-                        <ArticleHeadline
-                            headlineString="Here the headling overlays the image above it, the text is larger and the black background should extend to the right"
-                            webPublicationDate="2014-07-13T18:46:01.933Z"
-                            tags={[]}
-                            type="jumbo"
-                        />
-                    </ArticleContainer>
-                </Flex>
-            </Section>
-        </>
-    );
-};
+    </>
+);
 Jumbo.story = { name: 'type: jumbo' };
