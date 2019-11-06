@@ -1,6 +1,6 @@
 import { polyfillFetch } from '../lib/polyfill';
 
-export const visitOptions = {
+export const fetchPolyfill = {
     onBeforeLoad(win) {
         polyfillFetch(win);
     },

@@ -1,5 +1,5 @@
 import { getPolyfill } from '../../lib/polyfill';
-import { visitOptions } from '../../lib/config';
+import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
 import { setupApiRoutes } from '../../lib/apiRoutes.js';
 
@@ -12,7 +12,7 @@ describe('E2E Page rendering', function() {
             const { url, pillar, designType } = article;
 
             it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
-                cy.visit(`Article?url=${url}`, visitOptions);
+                cy.visit(`Article?url=${url}`, fetchPolyfill);
                 cy.contains('Sign in');
 
                 cy.wait('@getMostRead').then(xhr => {
@@ -49,7 +49,7 @@ describe('E2E Page rendering', function() {
                 // Prevent the Privacy consent banner from obscuring snapshots
                 cy.setCookie('GU_TK', 'true');
 
-                cy.visit(`AMPArticle?url=${url}`, visitOptions);
+                cy.visit(`AMPArticle?url=${url}`, fetchPolyfill);
                 cy.contains('Opinion');
             });
         });
