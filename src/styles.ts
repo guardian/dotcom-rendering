@@ -302,8 +302,7 @@ export const adStyles = css`
         }
 
         ${until.phablet} {
-            margin-left: ${basePx(-1)};
-            margin-right: ${basePx(-1)};
+            margin: 1em ${basePx(-1)};
         }
 
         ${from.desktop} {
