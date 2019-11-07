@@ -1,5 +1,5 @@
 import React from 'react';
-import { sidePadding, textSans, PillarStyles, darkModeCss } from '../../styles';
+import { sidePadding, textSans, darkModeCss } from 'styles';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
@@ -7,6 +7,7 @@ import { formatDate } from 'utils/date';
 import { Contributor } from 'types/Capi';
 import Avatar from 'components/shared/Avatar';
 import Follow from 'components/shared/Follow';
+import { PillarStyles } from 'types/Pillar';
 
 const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {

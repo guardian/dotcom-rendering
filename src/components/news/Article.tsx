@@ -8,12 +8,13 @@ import ArticleByline from './ArticleByline';
 import ArticleBody from './ArticleBody';
 import Tags from 'components/shared/Tags';
 import { Content } from 'types/capi-thrift-models';
-import { darkModeCss, articleWidthStyles, pillarStylesFromString } from 'styles';
+import { darkModeCss, articleWidthStyles } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/Keyline';
 import { isFeature, articleSeries, articleContributors, articleMainImage } from 'types/Capi';
+import { getPillarStyles, pillarFromString } from 'types/Pillar';
 
 export interface ArticleProps {
     capi: Content;
@@ -52,7 +53,8 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
     const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
     const series = articleSeries(capi);
     const feature = isFeature(capi) || 'starRating' in fields;
-    const pillarStyles = pillarStylesFromString(pillarId);
+    const pillar = pillarFromString(pillarId);
+    const pillarStyles = getPillarStyles(pillar);
     const contributors = articleContributors(capi);
     const bodyElements = blocks.body[0].elements;
     const mainImage = articleMainImage(capi);
@@ -75,7 +77,7 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
                         pillarStyles={pillarStyles}
                     />
                 </div>
-                <Keyline pillar={pillarId} type={'article'}/>
+                <Keyline pillar={pillar} type={'article'}/>
                 <div css={articleWidthStyles}>
                     <ArticleByline
                         byline={fields.bylineHtml}

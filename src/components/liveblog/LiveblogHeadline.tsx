@@ -1,8 +1,9 @@
 import React from 'react';
-import { basePx, PillarStyles, headlineFont } from '../../styles';
+import { basePx, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import LeftColumn from 'components/shared/LeftColumn';
+import { PillarStyles } from 'types/Pillar';
 
 const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};

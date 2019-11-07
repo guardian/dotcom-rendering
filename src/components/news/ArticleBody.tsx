@@ -2,7 +2,6 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import {
     sidePadding,
-    PillarStyles,
     darkModeCss,
     commonArticleStyles,
     basePx,
@@ -12,6 +11,7 @@ import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { render } from "renderBlocks";
 import { BlockElement } from 'types/capi-thrift-models';
+import { PillarStyles } from 'types/Pillar';
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     position: relative;

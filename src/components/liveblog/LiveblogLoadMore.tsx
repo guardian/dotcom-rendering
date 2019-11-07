@@ -1,7 +1,8 @@
 import React from 'react';
-import { sidePadding, PillarStyles, icons, textSans } from '../../styles';
+import { sidePadding, icons, textSans } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
+import { PillarStyles } from 'types/Pillar';
 
 const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     all: unset;

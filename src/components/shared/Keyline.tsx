@@ -3,6 +3,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss, wideContentWidth, wideColumnWidth, baseMultiply } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
+import { Pillar } from 'types/Pillar';
 
 const BaseStyles = css`
     height: 12px;
@@ -41,11 +42,11 @@ const KeylineDarkStyles = darkModeCss`
 `;
 
 
-export const Keyline = ({ pillar, type }: {pillar: string; type: string}): JSX.Element => {
+export const Keyline = ({ pillar, type }: { pillar: Pillar; type: string }): JSX.Element => {
     const SelectedKeylineStyles = ((pillar, type): SerializedStyles => {
         if (type === 'liveblog') return KeylineLiveblogStyles;
         switch(pillar) {
-            case 'pillar/opinion':
+            case Pillar.opinion:
                 return KeylineOpinionStyles;
             default:
                 return KeylineNewsStyles;
