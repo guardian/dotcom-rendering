@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { css, SerializedStyles } from '@emotion/core';
-import { from } from '@guardian/src-utilities';
+import { from } from '@guardian/src-foundations/mq';
 import { wideContentWidth, wideColumnWidth } from 'styles';
 
 

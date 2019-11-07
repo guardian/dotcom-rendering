@@ -1,5 +1,5 @@
 import { palette, } from '@guardian/src-foundations';
-import { from, until, between } from '@guardian/src-utilities';
+import { from, until, between } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core'
 import { compose } from 'utils/lib';
 

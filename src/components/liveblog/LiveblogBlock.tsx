@@ -1,8 +1,8 @@
 import React from 'react';
 import { PillarStyles, textSans } from '../../styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations'
-import { until } from '@guardian/src-utilities'
+import { palette } from '@guardian/src-foundations';
+import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'utils/date';
 import LeftColumn from 'components/shared/LeftColumn';
 

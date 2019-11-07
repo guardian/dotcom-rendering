@@ -32,7 +32,7 @@ const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles): Serialize
 `;
 
 const StandfirstDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${palette.neutral[10]};
+    background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
     a {

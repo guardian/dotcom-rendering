@@ -11,8 +11,8 @@ import Tags from '../shared/Tags';
 import { PillarStyles, wideColumnWidth, baseMultiply, pillarStylesFromString, pillarIdFromString } from 'styles';
 import { Content } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations'
-import { from } from '@guardian/src-utilities'
+import { palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { articleMainImage, articleSeries, articleContributors } from 'types/Capi';
 
 const LiveblogArticleStyles: SerializedStyles = css`
