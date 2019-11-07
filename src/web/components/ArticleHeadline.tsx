@@ -4,7 +4,8 @@ import { css, cx } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
-import { headline, textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { headline, textSans } from '@guardian/src-foundations/__typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
@@ -27,20 +28,20 @@ type Props = {
 const curly = (x: any) => x;
 
 const standardFont = css`
-    ${headline({ level: 5, fontWeight: 'medium' })};
+    ${headline.medium()};
 `;
 
 const boldFont = css`
-    ${headline({ level: 5, fontWeight: 'bold' })};
+    ${headline.medium({ fontWeight: 'bold' })};
 `;
 
 const jumboFont = css`
-    ${headline({ level: 7, fontWeight: 'bold' })};
+    ${headline.xlarge({ fontWeight: 'bold' })};
     line-height: 56px;
 `;
 
 const invertedFont = css`
-    ${headline({ level: 5, fontWeight: 'bold' })};
+    ${headline.medium({ fontWeight: 'bold' })};
     line-height: 42px;
 `;
 
@@ -122,7 +123,7 @@ const invertedWrapper = css`
 `;
 
 const ageWarningStyle = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     color: ${palette.neutral[7]};
     background-color: ${palette.yellow.main};
     display: inline-block;

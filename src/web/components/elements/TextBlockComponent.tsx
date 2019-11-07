@@ -1,12 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
-import { body } from '@guardian/src-foundations';
+import { body } from '@guardian/src-foundations/__typography';
 import { unescapeData } from '@root/src/lib/escapeData';
 // tslint:disable:react-no-dangerous-html
 
 const para = css`
     margin-bottom: 16px;
-    ${body({ level: 2 })};
+    ${body.medium()};
 `;
 
 const innerPara = css`
