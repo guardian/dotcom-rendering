@@ -1,7 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { textSans, headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    textSans,
+    headline,
+} from '@guardian/src-foundations/__experimental__typography';
 import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
@@ -54,7 +58,7 @@ const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
     font-weight: 500;
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
 `;
 
 const liveKicker = (colour: string) => css`
@@ -93,7 +97,7 @@ const AgeWarning: React.FC<{
 };
 
 const oldArticleMessage = css`
-    ${textSans({ level: 1 })}
+    ${textSans.xsmall()}
     background: ${palette.yellow.main};
     display: inline-block;
     color: ${palette.neutral[7]};

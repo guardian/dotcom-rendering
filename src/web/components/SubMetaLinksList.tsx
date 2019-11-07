@@ -1,6 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { headline, textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
@@ -51,11 +55,11 @@ const subMetaLink = css`
 `;
 
 const subMetaSectionLink = css`
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
 `;
 
 const subMetaKeywordLink = css`
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
 `;
 
 const hideSlash = css`

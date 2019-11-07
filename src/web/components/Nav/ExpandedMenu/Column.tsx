@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
@@ -40,7 +41,7 @@ const pillarDividerExtended = css`
 `;
 
 const columnLinkTitle = css`
-    ${textSans({ level: 3, lineHeight: 'tight' })};
+    ${textSans.medium({ lineHeight: 'tight' })};
     background-color: transparent;
     text-decoration: none;
     border: 0;
@@ -106,7 +107,7 @@ const ColumnLink: React.FC<{
 );
 
 const columnLinks = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -169,7 +170,7 @@ const ColumnLinks: React.FC<{
 };
 
 const columnStyle = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     list-style: none;
     margin: 0;
     padding-bottom: 10px;

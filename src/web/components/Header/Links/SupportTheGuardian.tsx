@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
@@ -41,14 +42,14 @@ const style = css`
 
 const text = css`
     color: ${palette.neutral[97]};
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     font-weight: 700;
     text-align: center;
     padding: 6px 20px 3px;
     position: relative;
 
     ${from.tablet} {
-        ${headline({ level: 1 })};
+        ${headline.tiny()};
     }
 `;
 

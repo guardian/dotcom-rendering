@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { clearFix } from '@root/src/lib/mixins';
@@ -22,7 +23,7 @@ const footer = css`
     background-color: ${palette.brand.main};
     color: ${palette.neutral[100]};
     padding-bottom: 6px;
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
 `;
 
 const pillarWrap = css`
@@ -136,7 +137,7 @@ const readerRevenueLinks = css`
 `;
 
 const copyright = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     padding: 12px;
 
     ${until.tablet} {

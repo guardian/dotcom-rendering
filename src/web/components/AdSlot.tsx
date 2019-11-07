@@ -2,12 +2,13 @@
 
 import React from 'react';
 import { css } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 
 export const labelStyles = css`
     .ad-slot__label {
-        ${textSans({ level: 1 })};
+        ${textSans.xsmall()};
         position: relative;
         height: 24px;
         background-color: ${palette.neutral[97]};
@@ -74,7 +75,7 @@ const mobileStickyAdStyles = css`
         color: ${palette.neutral[60]};
         text-align: left;
         box-sizing: border-box;
-        ${textSans({ level: 1 })};
+        ${textSans.xsmall()};
     }
 `;
 export interface AdSlotParameters {

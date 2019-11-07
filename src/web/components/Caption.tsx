@@ -1,5 +1,6 @@
 import React from 'react';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
@@ -9,7 +10,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
     padding-top: 10px;
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
 `;

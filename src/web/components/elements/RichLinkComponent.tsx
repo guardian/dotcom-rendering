@@ -3,8 +3,12 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
-import { headline, textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
 import { StarRating } from '@root/src/web/components/StarRating';
+import {
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { useApi } from '@frontend/web/components/lib/api';
 
@@ -87,13 +91,13 @@ const quote: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkTitle = css`
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     font-size: 14px;
     padding-top: 1px;
     padding-bottom: 1px;
     font-weight: 400;
     ${from.wide} {
-        ${headline({ level: 2 })};
+        ${headline.xxsmall()};
         padding-bottom: 5px;
     }
 `;
@@ -107,10 +111,10 @@ const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
 };
 
 const readMoreTextStyle = css`
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     font-size: 14px;
     ${from.wide} {
-        ${headline({ level: 1 })}
+        ${headline.tiny()}
     }
     display: inline-block;
     height: 30px;
@@ -122,11 +126,11 @@ const readMoreTextStyle = css`
 `;
 
 const byline = css`
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     font-size: 14px;
     font-style: italic;
     ${from.wide} {
-        ${headline({ level: 2 })};
+        ${headline.xxsmall()};
     }
 `;
 
@@ -172,7 +176,7 @@ const textColour: (pillar: Pillar) => colour = pillar => {
 };
 
 const paidForBranding = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     font-weight: bold;
     color: ${palette.neutral[46]};
 `;

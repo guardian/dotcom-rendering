@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 import { pillarPalette, pillarMap } from '@root/src/lib/pillars';
 
@@ -41,7 +42,7 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     font-weight: 500;
     color: ${palette.neutral[7]};
     padding: 0 5px;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
@@ -20,7 +21,7 @@ const showExpandedMenuStyles = css`
 const mainMenu = css`
     background-color: ${palette.brand.main};
     box-sizing: border-box;
-    ${textSans({ level: 4 })};
+    ${textSans.large()};
     left: 0;
     margin-right: 29px;
     padding-bottom: 24px;

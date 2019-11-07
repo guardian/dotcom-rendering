@@ -2,7 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { palette, body } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { body } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
 
@@ -45,7 +46,7 @@ const supportingStyles = (pillar: Pillar) =>
         margin-right: 0.6rem;
         clear: left;
         float: left;
-        ${body({ level: 2 })};
+        ${body.medium()};
 
         ${from.leftCol} {
             margin-left: -${gutter / 2 + gsSpan(3) / 2}px;
@@ -69,7 +70,7 @@ const inlineStyles = (pillar: Pillar) =>
         `
         margin-left: 0rem;
         display: block;
-        ${body({ level: 2 })};
+        ${body.medium()};
 
         ${from.mobileLandscape} {
             margin-left: -${gutter}px;

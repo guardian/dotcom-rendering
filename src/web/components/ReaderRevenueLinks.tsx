@@ -2,7 +2,11 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
-import { textSans, headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    textSans,
+    headline,
+} from '@guardian/src-foundations/__experimental__typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -22,16 +26,16 @@ const padded = css`
 
 const message = css`
     color: ${palette.yellow.main};
-    ${headline({ level: 2, fontWeight: 'bold' })};
+    ${headline.xxsmall({ fontWeight: 'bold' })};
     padding-top: 3px;
     margin-bottom: 3px;
 
     ${from.desktop} {
-        ${headline({ level: 3, fontWeight: 'bold' })}
+        ${headline.xsmall({ fontWeight: 'bold' })}
     }
 
     ${from.leftCol} {
-        ${headline({ level: 5, fontWeight: 'bold' })}
+        ${headline.medium({ fontWeight: 'bold' })}
     }
 `;
 
@@ -41,7 +45,7 @@ const link = css`
     box-sizing: border-box;
     color: ${palette.neutral[7]};
     float: left;
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     font-weight: 700;
     height: 32px;
     text-decoration: none;
@@ -93,7 +97,7 @@ const hiddenFromTablet = css`
 
 const subMessage = css`
     color: ${palette.neutral[100]};
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     margin-bottom: 9px;
 `;
 

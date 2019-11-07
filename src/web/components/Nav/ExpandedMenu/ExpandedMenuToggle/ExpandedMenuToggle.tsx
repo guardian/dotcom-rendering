@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { VeggieBurger } from './VeggieBurger';
@@ -9,7 +10,7 @@ const screenReadable = css`
     ${visuallyHidden};
 `;
 const openExpandedMenu = css`
-    ${headline({ level: 3 })};
+    ${headline.xsmall()};
     font-weight: 300;
     color: ${palette.neutral[100]};
     cursor: pointer;

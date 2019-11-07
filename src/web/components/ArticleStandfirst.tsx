@@ -1,17 +1,22 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
-import { headline, textSans, body, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    body,
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 
 const standfirstStyles = css`
-    ${body({ level: 2 })};
+    ${body.medium()};
     max-width: 550px;
     font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
 
     li {
-        ${textSans({ level: 3 })};
+        ${textSans.medium()};
         margin-bottom: 6px;
         padding-left: 20px;
 
@@ -36,7 +41,7 @@ const standfirstStyles = css`
     }
 
     li {
-        ${headline({ level: 1 })};
+        ${headline.tiny()};
     }
 `;
 
