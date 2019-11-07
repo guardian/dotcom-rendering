@@ -8,7 +8,6 @@ import { imageBlock } from './components/blocks/image';
 import { insertAdPlaceholders } from './ads';
 import { transform } from 'utils/contentTransformations';
 
-
 // ----- Setup ----- //
 
 type ReactNode = React.ReactNode;
@@ -58,6 +57,8 @@ function textElement(node: Node): ReactNode {
             return h('a', getAttrs(node), node.textContent);
         case 'SPAN':
             return h('span', getAttrs(node), node.textContent);
+        case 'BLOCKQUOTE':
+            return h('blockquote', getAttrs(node), ...Array.from(node.childNodes).map(textElement));
         default:
             // Fallback to handle any element
             return h(
@@ -98,6 +99,12 @@ function reactFromElement(element: any, imageSalt: string): Result<string, React
         case 'text':
             return fromUnsafe(
                 () => JSDOM.fragment(transform(element.textTypeData.html)),
+                'Failed to parse text element',
+            ).map(textBlock);
+
+        case 'tweet':
+            return fromUnsafe(
+                () => JSDOM.fragment(element.tweetTypeData.html),
                 'Failed to parse text element',
             ).map(textBlock);
 
@@ -149,9 +156,9 @@ function elementsToReact(elements: any, imageSalt: string): ParsedReact {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function render(bodyElements: any, imageSalt: string): Rendered {
+function render(bodyElements: any, imageSalt: string, ads: boolean = true): Rendered {
     const reactNodes = elementsToReact(bodyElements, imageSalt);
-    const reactNodesWithAds = insertAdPlaceholders(reactNodes.nodes)
+    const reactNodesWithAds = ads ? insertAdPlaceholders(reactNodes.nodes) : reactNodes.nodes;
     const main = h('article', null, ...reactNodesWithAds);
 
     return {

@@ -33,7 +33,7 @@ const LiveblogBody= ({ pillarStyles, bodyElements, imageSalt }: LiveblogBodyProp
     const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 10
         ? <LiveblogLoadMore pillarStyles={pillarStyles}/> 
         : null;
-
+    const ads = false;
     return (
         <article css={LiveBodyStyles(pillarStyles)}>
             {
@@ -45,7 +45,7 @@ const LiveblogBody= ({ pillarStyles, bodyElements, imageSalt }: LiveblogBodyProp
                         title={block.title}
                         firstPublishedDate={block.firstPublishedDate}
                         lastModifiedDate={block.lastModifiedDate}>
-                            <>{render(block.elements, imageSalt).html}</>
+                            <>{render(block.elements, imageSalt, ads).html}</>
                         </LiveblogBlock>
                 })
             }
