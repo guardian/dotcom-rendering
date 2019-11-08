@@ -3,7 +3,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { textSans, headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    textSans,
+    headline,
+} from '@guardian/src-foundations/__experimental__typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/components/lib/ArticleRenderer';
@@ -37,7 +41,7 @@ const pillarColours = pillarMap(
 // );
 
 const captionFont = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     color: ${palette.neutral[46]};
 `;
 
@@ -47,7 +51,7 @@ const bodyStyle = css`
     }
 
     h2 {
-        ${headline({ level: 2 })};
+        ${headline.xxsmall()};
     }
 
     strong {
@@ -79,7 +83,7 @@ const bodyStyle = css`
     }
 
     li {
-        ${textSans({ level: 3 })};
+        ${textSans.medium()};
         margin-bottom: 6px;
         padding-left: 20px;
 
@@ -102,7 +106,7 @@ const bodyStyle = css`
 
 const immersiveBodyStyle = css`
     h2 {
-        ${headline({ level: 5 })};
+        ${headline.medium()};
         font-weight: 200;
     }
 `;
@@ -122,7 +126,7 @@ const linkColour = pillarMap(
 );
 
 const subMetaLabel = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     display: block;
     color: ${palette.neutral[60]};
 `;

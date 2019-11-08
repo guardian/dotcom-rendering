@@ -1,7 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { headline, textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 
 import { Column, More, ReaderRevenueLinks } from './Column';
@@ -40,7 +44,7 @@ const desktopBrandExtensionColumn = css`
 const brandExtensionList = css`
     width: 131px;
     box-sizing: border-box;
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     flex-wrap: wrap;
     list-style: none;
     margin: 0;
@@ -63,7 +67,7 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
-    ${headline({ level: 2 })};
+    ${headline.xxsmall()};
     font-weight: 700;
     background-color: transparent;
     border: 0;

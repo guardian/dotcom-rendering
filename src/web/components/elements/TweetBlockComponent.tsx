@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette, body } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { body } from '@guardian/src-foundations/__experimental__typography';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 // fallback styling for when JS is disabled
@@ -11,7 +12,7 @@ const noJSStyling = css`
         padding: 20px;
         width: 100%;
         margin-bottom: 16px;
-        ${body({ level: 1 })};
+        ${body.small()};
     }
 
     .twitter-tweet p {

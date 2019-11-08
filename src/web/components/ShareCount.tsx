@@ -1,13 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
 import ShareIcon from '@frontend/static/icons/share.svg';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { integerCommas } from '@root/src/lib/formatters';
 import { useApi } from '@root/src/web/components/lib/api';
 
 const shareCount = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     font-weight: bold;
     color: ${palette.neutral[46]};
 

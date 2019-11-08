@@ -2,7 +2,11 @@
 
 import React from 'react';
 import { css } from 'emotion';
-import { textSans, body, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    textSans,
+    body,
+} from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 
 interface OutbrainSelectors {
@@ -83,10 +87,10 @@ const outbrainContainer = css`
 
     .ob-widget {
         div.ob-widget-header {
-            ${body({ level: 2 })};
+            ${body.medium()};
             span,
             .ob_about_this_content a {
-                ${body({ level: 1 })};
+                ${body.small()};
                 text-decoration: none;
                 /* stylelint-disable-next-line color-no-hex */
                 color: #00456e;
@@ -98,7 +102,7 @@ const outbrainContainer = css`
 
         span.ob-rec-text {
             max-height: fit-content;
-            ${textSans({ level: 3 })};
+            ${textSans.medium()};
         }
     }
 `;

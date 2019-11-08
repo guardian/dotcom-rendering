@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/__experimental__typography';
 
 import { hideDesktop } from './Column';
 
@@ -18,7 +19,7 @@ const collapseColumnButton = css`
     cursor: pointer;
     color: ${palette.neutral[100]};
     display: block;
-    ${headline({ level: 3 })};
+    ${headline.xsmall()};
     font-weight: 700;
     outline: none;
     padding: 6px 34px 18px 50px;

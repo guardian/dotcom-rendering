@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
@@ -57,7 +58,7 @@ const ulExpanded = css`
 `;
 
 const link = css`
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     color: ${palette.neutral[7]};
     position: relative;
     transition: color 80ms ease-out;
@@ -110,7 +111,7 @@ const linkFirst = css`
 `;
 
 const button = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     display: block;
     cursor: pointer;
     background: none;

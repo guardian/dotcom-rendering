@@ -7,7 +7,8 @@ import {
 } from '@root/src/web/components/Dropdown';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 
 const search = css`
@@ -33,7 +34,7 @@ const search = css`
 `;
 
 const link = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     color: ${palette.neutral[100]};
     float: left;
     position: relative;

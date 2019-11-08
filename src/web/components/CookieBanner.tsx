@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import { headline, textSans, body, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+    body,
+} from '@guardian/src-foundations/__experimental__typography';
 import { until } from '@guardian/src-foundations/mq';
 import TickIcon from '@frontend/static/icons/tick.svg';
 import RoundelIcon from '@frontend/static/icons/the-guardian-roundel.svg';
@@ -21,7 +26,7 @@ const inner = css`
     position: relative;
     margin: 0 20%;
     p {
-        ${body({ level: 2 })};
+        ${body.medium()};
         margin-top: 0;
         color: ${palette.neutral[100]};
         margin-bottom: 8px;
@@ -41,13 +46,13 @@ const inner = css`
         margin: auto;
         padding: 0;
         p {
-            ${body({ level: 1 })};
+            ${body.small()};
         }
     }
 `;
 
 const header = css`
-    ${headline({ level: 5 })};
+    ${headline.medium()};
     font-weight: bold;
     padding-bottom: 12px;
     color: ${palette.neutral[100]};
@@ -55,7 +60,7 @@ const header = css`
 
 const more = css`
     margin-left: 12px;
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     font-weight: bold;
 `;
 
@@ -69,7 +74,7 @@ const iconCss = css`
 `;
 
 const button = css`
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     border-radius: 1000px;
     height: 42px;
     background: ${palette.yellow.main};

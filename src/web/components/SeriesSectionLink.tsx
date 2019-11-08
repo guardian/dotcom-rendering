@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
-import { headline } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 
 const sectionLabelText = css`
@@ -24,14 +24,14 @@ const pillarColours = pillarMap(
 
 const primaryStyle = css`
     font-weight: 700;
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     ${from.leftCol} {
-        ${headline({ level: 2 })};
+        ${headline.xxsmall()};
     }
 `;
 
 const secondaryStyle = css`
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     display: block;
 `;
 

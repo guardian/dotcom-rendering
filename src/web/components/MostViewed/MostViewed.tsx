@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/__experimental__typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
@@ -34,7 +35,7 @@ const asideWidth = css`
 `;
 
 const headingStyles = css`
-    ${headline({ level: 3 })};
+    ${headline.xsmall()};
     color: ${palette.neutral[7]};
     font-weight: 900;
     padding-right: 5px;
@@ -42,7 +43,7 @@ const headingStyles = css`
     padding-top: 3px;
 
     ${from.leftCol} {
-        ${headline({ level: 3 })};
+        ${headline.xsmall()};
         font-weight: 900;
     }
 

@@ -1,11 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { until } from '@guardian/src-foundations/mq';
 import { MainImageComponent } from '@root/src/web/components/elements/MainImageComponent';
 
 const captionFont = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     color: ${palette.neutral[46]};
 `;
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
-import { headline, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/__experimental__typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
@@ -55,7 +56,7 @@ const unselectedListTab = css`
 `;
 
 const tabButton = css`
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     margin: 0;
     border: 0;
     background: transparent;

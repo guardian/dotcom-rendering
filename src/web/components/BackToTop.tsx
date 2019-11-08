@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 
 const iconHeight = '42px';
 
@@ -48,7 +49,7 @@ const icon = css`
 `;
 
 const text = css`
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     padding-right: 5px;
 `;
 
