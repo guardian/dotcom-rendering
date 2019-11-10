@@ -93,7 +93,13 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                         className={inputStyle}
                     />
                     <label className={labelStyle} htmlFor="show-caption">
-                        <span className={visuallyHidden}>Show caption</span>
+                        <span
+                            className={css`
+                                ${visuallyHidden}
+                            `}
+                        >
+                            Show caption
+                        </span>
                         <InfoIcon />
                     </label>
                     <figcaption className={captionStyle}>
