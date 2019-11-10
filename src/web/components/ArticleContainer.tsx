@@ -4,6 +4,12 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { labelStyles } from '@root/src/web/components/AdSlot';
 
 const articleContainer = css`
+    /* Set min-width: 0 here to prevent flex children breaking out of the
+    containing parent. This ws happening for embedded tweets which have
+    a width: 500px property.
+    See: https://stackoverflow.com/a/47457331 */
+    min-width: 0;
+
     ${until.leftCol} {
         /* below 1140 */
         padding-left: 0;
