@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { headline } from '@guardian/src-foundations/__experimental__typography';
+import { headline } from '@guardian/src-foundations/typography';
 
 const headlineTagWrapper = css`
     margin-left: 6px;
