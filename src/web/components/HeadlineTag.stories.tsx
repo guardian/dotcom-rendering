@@ -1,11 +1,6 @@
 import React from 'react';
 
-// import { Section } from './Section';
-
 import { HeadlineTag } from './HeadlineTag';
-// import { Flex } from './Flex';
-// import { ArticleLeft } from './ArticleLeft';
-// import { ArticleContainer } from './ArticleContainer';
 
 /* tslint:disable */
 export default {
