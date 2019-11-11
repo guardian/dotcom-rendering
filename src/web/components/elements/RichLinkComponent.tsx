@@ -5,6 +5,7 @@ import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
 import { palette } from '@guardian/src-foundations';
 import { StarRating } from '@root/src/web/components/StarRating';
+import { Avatar } from '@frontend/web/components/Avatar';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { useApi } from '@frontend/web/components/lib/api';
@@ -87,6 +88,10 @@ const quote: (pillar: Pillar) => colour = pillar => {
     `;
 };
 
+const rickLinkHeader = css`
+    padding-bottom: 10px;
+`;
+
 const richLinkTitle = css`
     ${headline.tiny()};
     font-size: 14px;
@@ -128,25 +133,6 @@ const byline = css`
     font-style: italic;
     ${from.wide} {
         ${headline.xxsmall()};
-    }
-`;
-
-// !important is used here to override the default inline body image styling
-const contributorImage = css`
-    border-radius: 100%;
-    object-fit: cover;
-    width: 100%;
-    height: 100% !important ;
-`;
-
-const contributorImageWrapper = css`
-    width: 5rem;
-    height: 5rem;
-    margin-left: auto;
-    margin-right: 0.3rem;
-    ${from.wide} {
-        width: 8.5rem;
-        height: 8.5rem;
     }
 `;
 
@@ -224,38 +210,40 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                 </div>
             )}
             <div className={richLinkElements}>
-                <div className={richLinkTitle}>
+                <div className={rickLinkHeader}>
+                    <div className={richLinkTitle}>
+                        {isOpinion && (
+                            <div className={quote(richLink.pillar)}>
+                                <Quote />
+                            </div>
+                        )}
+                        {linkText}
+                    </div>
                     {isOpinion && (
-                        <div className={quote(richLink.pillar)}>
-                            <Quote />
+                        <div
+                            className={cx(byline, textColour(richLink.pillar))}
+                        >
+                            {mainContributor}
                         </div>
                     )}
-                    {linkText}
-                </div>
-                {isOpinion && (
-                    <div className={cx(byline, textColour(richLink.pillar))}>
-                        {mainContributor}
-                    </div>
-                )}
-                {richLink.starRating && richLink.starRating > 0 && (
-                    <StarRating rating={richLink.starRating} size={'small'} />
-                )}
-                {isPaidContent && richLink.sponsorName && (
-                    <div className={paidForBranding}>
-                        Paid for by {richLink.sponsorName}
-                    </div>
-                )}
-                {isOpinion && richLink.contributorImage && (
-                    <div className={contributorImageWrapper}>
-                        <img
-                            src={richLink.contributorImage}
-                            alt={mainContributor}
-                            className={cx(
-                                pillarBackground(richLink.pillar),
-                                contributorImage,
-                            )}
+                    {richLink.starRating && richLink.starRating > 0 && (
+                        <StarRating
+                            rating={richLink.starRating}
+                            size={'small'}
                         />
-                    </div>
+                    )}
+                    {isPaidContent && richLink.sponsorName && (
+                        <div className={paidForBranding}>
+                            Paid for by {richLink.sponsorName}
+                        </div>
+                    )}
+                </div>
+                {isOpinion && richLink.contributorImage && (
+                    <Avatar
+                        imageSrc={richLink.contributorImage}
+                        imageAlt={mainContributor}
+                        pillarColour={richLinkPillarColour(richLink.pillar)}
+                    />
                 )}
                 <div className={richLinkReadMore(richLink.pillar)}>
                     <ArrowInCircle />
