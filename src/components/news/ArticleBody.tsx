@@ -9,9 +9,11 @@ import {
     adStyles
 } from 'styles';
 import { palette } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { render } from "renderBlocks";
 import { BlockElement } from 'types/capi-thrift-models';
+
+const richLinkWidth = "13.75rem";
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     position: relative;
@@ -20,8 +22,12 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .element-membership {
         float: left;
         clear: left;
-        width: 13.75rem;
+        width: ${richLinkWidth};
         margin: 8px 24px 8px 0;
+
+        ${from.wide} {
+            margin-left: calc(-${richLinkWidth} - 16px - 24px);
+        }
     }
 
     iframe {
