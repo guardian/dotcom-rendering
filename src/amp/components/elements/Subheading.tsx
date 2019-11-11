@@ -1,6 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette, headline, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 
@@ -9,7 +13,7 @@ const style = (pillar: Pillar) => css`
     h2 {
         margin-top: 24px;
         margin-bottom: 10px;
-        ${headline({ level: 2 })};
+        ${headline.xxsmall()};
     }
     strong {
         font-weight: 700;
@@ -26,7 +30,7 @@ const style = (pillar: Pillar) => css`
 
 const immersiveBodyStyle = css`
     h2 {
-        ${headline({ level: 5 })};
+        ${headline.medium()};
         font-weight: 200;
     }
 `;
@@ -35,7 +39,7 @@ const immersiveBodyStyle = css`
 const subHeadingStyleLabs = css`
     h2 {
         font-weight: 700;
-        ${textSans({ level: 4 })}
+        ${textSans.large()}
     }
 `;
 

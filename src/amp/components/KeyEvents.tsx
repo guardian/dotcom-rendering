@@ -1,11 +1,15 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette, headline, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 import DownArrow from '@frontend/static/icons/down-arrow.svg';
 import { blockLink } from '@root/src/amp/lib/block-link';
 
 const headingStyle = css`
-    ${headline({ level: 2 })};
+    ${headline.xxsmall()};
     background-color: ${palette.neutral[100]};
     padding: 0.375rem 0.625rem;
     font-weight: bold;
@@ -24,7 +28,7 @@ const headingStyle = css`
 
 const listItemStyle = css`
     display: table;
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     width: 100%;
     overflow: hidden;
     min-height: 2.5rem;

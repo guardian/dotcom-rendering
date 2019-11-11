@@ -2,7 +2,8 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
-import { palette, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
@@ -21,7 +22,7 @@ const pillarFill = pillarMap(
 );
 
 const ageWarningCss = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     display: inline-block;
     margin-bottom: 12px;
     width: 100%;
@@ -49,7 +50,7 @@ type SharingURLs = {
 
 const metaStyle = css`
     display: block;
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     color: ${palette.neutral[46]};
     padding-top: 2px;
     margin-bottom: 6px;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
@@ -11,7 +12,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
     padding-top: 8px;
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
 `;

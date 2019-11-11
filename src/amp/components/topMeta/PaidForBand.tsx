@@ -1,7 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { from } from '@guardian/src-foundations/mq';
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
@@ -27,7 +28,7 @@ const focusColor = css`
 
 const metaStyle = css`
     height: 100%;
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     font-weight: 700;
 `;
 

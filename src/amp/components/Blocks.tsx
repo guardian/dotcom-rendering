@@ -2,7 +2,8 @@ import React from 'react';
 import { Elements } from '@root/src/amp/components/Elements';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { palette, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
 import { WithAds } from '@root/src/amp/components/WithAds';
@@ -20,11 +21,11 @@ const firstPublishedStyle = css`
     margin-bottom: 10px;
     text-decoration: none;
     font-weight: bold;
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
 `;
 
 const lastUpdatedStyle = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     color: ${palette.neutral[60]};
     text-align: right;
     padding-right: 15px;

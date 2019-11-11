@@ -2,7 +2,8 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRight from '@frontend/static/icons/arrow-right.svg';
-import { palette, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { until } from '@guardian/src-foundations/mq';
 
 const supportStyles = css`
@@ -37,7 +38,7 @@ const supportFooterStyles = css`
 const supportLinkStyles = css`
     position: relative;
     color: ${palette.neutral[7]};
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     font-weight: 700;
     display: block;
     text-decoration: none;
@@ -45,7 +46,7 @@ const supportLinkStyles = css`
 
     padding-right: 20px;
     ${until.mobileMedium} {
-        ${textSans({ level: 2 })};
+        ${textSans.small()};
         padding-right: 18px;
     }
 

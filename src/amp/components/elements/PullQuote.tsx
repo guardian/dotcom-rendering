@@ -2,7 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { palette, body } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { body } from '@guardian/src-foundations/__experimental__typography';
 
 const styles = (pillar: Pillar) => css`
     background-color: ${palette.neutral[97]};
@@ -10,7 +11,7 @@ const styles = (pillar: Pillar) => css`
     margin-bottom: 0.75rem;
     display: block;
     color: ${pillarPalette[pillar].dark};
-    ${body({ level: 2 })};
+    ${body.medium()};
 
     svg {
         fill: ${pillarPalette[pillar].dark};

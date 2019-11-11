@@ -1,12 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import PlusIcon from '@frontend/static/icons/plus.svg';
 
 const showMore = css`
     color: ${palette.neutral[7]};
     padding: 0 10px;
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     /* Design System: Ideally we want a centering primative that we can use in these situations */
     /* stylelint-disable-next-line property-blacklist */
     line-height: 34px;
