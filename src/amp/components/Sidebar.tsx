@@ -1,10 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import {
-    headline,
-    textSans,
-} from '@guardian/src-foundations/__experimental__typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const sidebarStyles = css`
     width: 80vh;

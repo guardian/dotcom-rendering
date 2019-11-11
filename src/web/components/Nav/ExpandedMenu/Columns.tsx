@@ -2,10 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import {
-    headline,
-    textSans,
-} from '@guardian/src-foundations/__experimental__typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
 import { Column, More, ReaderRevenueLinks } from './Column';

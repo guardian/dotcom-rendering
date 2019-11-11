@@ -1,10 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import {
-    textSans,
-    body,
-} from '@guardian/src-foundations/__experimental__typography';
+import { textSans, body } from '@guardian/src-foundations/typography';
 import { InnerContainer } from './InnerContainer';
 import {
     Link,

@@ -5,10 +5,7 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
 import { palette } from '@guardian/src-foundations';
-import {
-    headline,
-    textSans,
-} from '@guardian/src-foundations/__experimental__typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 

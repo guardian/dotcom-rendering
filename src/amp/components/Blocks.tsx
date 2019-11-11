@@ -3,7 +3,7 @@ import { Elements } from '@root/src/amp/components/Elements';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
 import { WithAds } from '@root/src/amp/components/WithAds';

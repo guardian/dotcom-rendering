@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { body } from '@guardian/src-foundations/__experimental__typography';
+import { body } from '@guardian/src-foundations/typography';
 
 const styles = (pillar: Pillar) => css`
     background-color: ${palette.neutral[97]};

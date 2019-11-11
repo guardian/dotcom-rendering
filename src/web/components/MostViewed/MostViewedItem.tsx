@@ -2,10 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import {
-    textSans,
-    headline,
-} from '@guardian/src-foundations/__experimental__typography';
+import { textSans, headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
 import { PulsingDot } from '@root/src/web/components/PulsingDot';

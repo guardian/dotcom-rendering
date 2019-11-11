@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import Logo from '@frontend/static/logos/the-guardian.svg';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { headline } from '@guardian/src-foundations/__experimental__typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';

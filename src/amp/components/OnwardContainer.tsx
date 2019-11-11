@@ -7,10 +7,7 @@ import {
     moustacheVariable,
 } from '@root/src/amp/components/moustache';
 import { palette } from '@guardian/src-foundations';
-import {
-    headline,
-    textSans,
-} from '@guardian/src-foundations/__experimental__typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import VideoIcon from '@frontend/static/icons/video-icon.svg';
 import Camera from '@frontend/static/icons/camera.svg';

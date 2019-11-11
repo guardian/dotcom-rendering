@@ -1,10 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import {
-    body,
-    textSans,
-} from '@guardian/src-foundations/__experimental__typography';
+import { body, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import { sanitise } from '@root/src/amp/lib/sanitise-html';
 import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
