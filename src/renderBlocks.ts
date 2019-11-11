@@ -43,7 +43,6 @@ function getAttrs(node: Node): {} {
 }
 
 function textElement(node: Node): ReactNode {
-
     switch (node.nodeName) {
         case 'P':
             return h(
@@ -57,12 +56,6 @@ function textElement(node: Node): ReactNode {
             return h('a', getAttrs(node), node.textContent);
         case 'SPAN':
             return h('span', getAttrs(node), node.textContent);
-        case 'BLOCKQUOTE':
-            return h(
-                'blockquote',
-                getAttrs(node),
-                ...Array.from(node.childNodes).map(textElement)
-            );
         default:
             // Fallback to handle any element
             return h(
@@ -71,11 +64,23 @@ function textElement(node: Node): ReactNode {
                 ...Array.from(node.childNodes).map(textElement),
             );
     }
-
 }
 
 function textBlock(fragment: DocumentFragment): ReactNode[] {
     return Array.from(fragment.children).map(textElement);
+}
+
+function tweetBlock(fragment: DocumentFragment): ReactNode[] {
+    return Array.from(fragment.children).map(node => {
+        switch (node.nodeName) {
+            case 'BLOCKQUOTE':
+                return h(
+                    'blockquote',
+                    getAttrs(node),
+                    ...Array.from(node.childNodes).map(textElement)
+                );
+        }
+    });
 }
 
 const pullquoteBlock = (fragment: DocumentFragment): ReactNode =>
@@ -110,7 +115,7 @@ function reactFromElement(element: any, imageSalt: string): Result<string, React
             return fromUnsafe(
                 () => JSDOM.fragment(element.tweetTypeData.html),
                 'Failed to parse text element',
-            ).map(textBlock);
+            ).map(tweetBlock);
 
         case 'pullquote':
 
