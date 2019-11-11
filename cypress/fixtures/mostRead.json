@@ -18,7 +18,8 @@
                 "byline": "David Smith in Washington",
                 "image": "https://i.guim.co.uk/img/media/e7636de4a7f92973965f780869ab51a653ce0f6c/0_0_5010_3007/master/5010.jpg?width=300&quality=85&auto=format&fit=max&s=e2f72ae40f776ebbfce3a2dfb8bab428",
                 "isLiveBlog": false,
-                "pillar": "news"
+                "pillar": "news",
+                "ageWarning": "5 months"
             },
             {
                 "url": "https://www.theguardian.com/politics/2019/oct/16/brexit-talks-continue-after-boris-johnson-makes-concessions-on-irish-border",
