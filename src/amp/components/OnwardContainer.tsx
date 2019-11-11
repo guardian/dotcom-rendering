@@ -6,7 +6,11 @@ import {
     MoustacheTemplate,
     moustacheVariable,
 } from '@root/src/amp/components/moustache';
-import { headline, textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 
 import VideoIcon from '@frontend/static/icons/video-icon.svg';
 import Camera from '@frontend/static/icons/camera.svg';
@@ -27,7 +31,7 @@ const header = css`
     padding-bottom: 12px;
     font-weight: 500;
     position: relative;
-    ${headline({ level: 2 })};
+    ${headline.xxsmall()};
     text-transform: capitalize;
 `;
 const item = css`
@@ -66,11 +70,11 @@ const headlineCSS = css`
     margin: 1px 0 4px;
     font-weight: 500;
     word-wrap: break-word;
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
 `;
 
 const description = css`
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     margin-bottom: 16px;
 `;
 
@@ -95,7 +99,7 @@ const quoteIconCSS = css`
 const ageWarning = css`
     color: ${palette.neutral[20]};
     fill: ${palette.neutral[20]};
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
 `;
 
 const showMore = css`

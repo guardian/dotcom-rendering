@@ -1,13 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 
 const wrapper = css`
     overflow: hidden;
     position: relative;
     margin-bottom: 12px;
     padding-top: 12px;
-    ${textSans({ level: 3 })};
+    ${textSans.medium()};
     padding-left: 20px;
     border-left: 8px solid ${palette.neutral[86]};
     clear: left;
@@ -23,14 +24,14 @@ const metaLink = css`
     border-bottom: 1px solid ${palette.neutral[86]};
     color: ${palette.news.main};
     text-decoration: none;
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
 `;
 
 const bodyCSS = css`
     clear: left;
 
     p {
-        ${textSans({ level: 3 })};
+        ${textSans.medium()};
         font-weight: 300;
         margin-top: 0;
         margin-bottom: 8px;

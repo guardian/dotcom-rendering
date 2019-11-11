@@ -1,7 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
-import { palette, textSans, body } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    textSans,
+    body,
+} from '@guardian/src-foundations/__experimental__typography';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
@@ -26,10 +30,10 @@ const linkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     :after {
         content: '/';
-        ${textSans({ level: 2 })};
+        ${textSans.small()};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -61,10 +65,10 @@ const sectionLinkStyle = (pillar: Pillar) => css`
     padding-right: 6px;
     text-decoration: none;
     color: ${pillarPalette[pillar].main};
-    ${body({ level: 2 })};
+    ${body.medium()};
     :after {
         content: '/';
-        ${body({ level: 2 })};
+        ${body.medium()};
         position: absolute;
         pointer-events: none;
         top: 0;
@@ -79,7 +83,7 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-    ${textSans({ level: 1 })};
+    ${textSans.xsmall()};
     color: ${palette.neutral[46]};
     display: block;
     margin-bottom: -3px;
@@ -91,7 +95,7 @@ const siteLinks = css`
 `;
 
 const siteLinkStyle = css`
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
     font-weight: bold;
     text-decoration: none;
     color: ${palette.neutral[7]};

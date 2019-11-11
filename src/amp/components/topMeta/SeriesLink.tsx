@@ -1,11 +1,11 @@
 import React from 'react';
-import { headline } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/__experimental__typography';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 
 const seriesStyle = (pillar: Pillar) => css`
     color: ${pillarPalette[pillar].main};
-    ${headline({ level: 1 })};
+    ${headline.tiny()};
     font-weight: 900;
     text-decoration: none;
     margin-top: 10px;

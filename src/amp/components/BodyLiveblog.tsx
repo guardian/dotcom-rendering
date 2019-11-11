@@ -4,7 +4,11 @@ import { css } from 'emotion';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaLiveblog } from '@root/src/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
-import { palette, headline, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    headline,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 import { KeyEvents } from '@root/src/amp/components/KeyEvents';
 import { Blocks } from '@root/src/amp/components/Blocks';
 import RefreshIcon from '@frontend/static/icons/refresh.svg';
@@ -18,7 +22,7 @@ const bodyStyle = css`
     background-color: ${palette.neutral[97]};
 
     h2 {
-        ${headline({ level: 2 })};
+        ${headline.xxsmall()};
         font-weight: 500;
         margin-block-start: 0.83em;
         margin-block-end: 0.83em;
@@ -49,7 +53,7 @@ const updateButtonStyle = css`
         background-color: ${palette.news.main};
         color: ${palette.neutral[100]};
         font-weight: bold;
-        ${textSans({ level: 1 })};
+        ${textSans.xsmall()};
 
         display: flex;
         justify-content: space-between;

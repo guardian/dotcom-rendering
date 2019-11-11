@@ -1,7 +1,8 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
 import { css } from 'emotion';
-import { textSans, palette } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/__experimental__typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import InfoIcon from '@frontend/static/icons/info.svg';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
@@ -26,7 +27,7 @@ const captionStyle = css`
     padding: 6px 40px 12px 10px;
     max-width: 100%;
     min-height: 46px;
-    ${textSans({ level: 2 })};
+    ${textSans.small()};
 `;
 
 const inputStyle = css`

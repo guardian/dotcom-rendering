@@ -1,6 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette, body, textSans } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
+import {
+    body,
+    textSans,
+} from '@guardian/src-foundations/__experimental__typography';
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import { sanitise } from '@root/src/amp/lib/sanitise-html';
 import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
@@ -49,7 +53,7 @@ export const TextStyle = (pillar: Pillar) => css`
     }
     p {
         padding: 0 0 12px;
-        ${body({ level: 2 })};
+        ${body.medium()};
         font-weight: 300;
         word-wrap: break-word;
         color: ${palette.neutral[7]};
@@ -60,7 +64,7 @@ export const TextStyle = (pillar: Pillar) => css`
         font-style: italic;
     }
 
-    ${body({ level: 2 })};
+    ${body.medium()};
 
     ${LinkStyle(pillar)};
     ${ListStyle(neutralBorder(pillar))};
@@ -69,7 +73,7 @@ export const TextStyle = (pillar: Pillar) => css`
 // Labs paid content only
 const textStyleLabs = css`
     p {
-        ${textSans({ level: 4 })}
+        ${textSans.large()}
     }
 `;
 
