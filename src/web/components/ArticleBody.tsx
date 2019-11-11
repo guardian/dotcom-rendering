@@ -4,10 +4,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import {
-    textSans,
-    headline,
-} from '@guardian/src-foundations/__experimental__typography';
+import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/components/lib/ArticleRenderer';

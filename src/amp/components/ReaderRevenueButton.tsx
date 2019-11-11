@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import ArrowRight from '@frontend/static/icons/arrow-right.svg';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 
 const supportStyles = css`

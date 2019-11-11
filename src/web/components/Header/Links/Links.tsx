@@ -8,7 +8,7 @@ import {
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
 const search = css`

@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkStyle } from '@root/src/amp/components/elements/Text';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 
 const brandingStyle = (pillar: Pillar) => css`

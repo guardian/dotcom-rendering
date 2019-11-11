@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { MainImageComponent } from '@root/src/web/components/elements/MainImageComponent';
 

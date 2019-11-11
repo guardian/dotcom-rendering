@@ -1,6 +1,6 @@
 import React from 'react';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';

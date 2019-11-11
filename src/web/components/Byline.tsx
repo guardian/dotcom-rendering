@@ -2,10 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 import { palette } from '@guardian/src-foundations';
-import {
-    headline,
-    textSans,
-} from '@guardian/src-foundations/__experimental__typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 
 const twitterHandle = css`

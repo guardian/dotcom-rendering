@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import {
-    headline,
-    textSans,
-    body,
-} from '@guardian/src-foundations/__experimental__typography';
+import { headline, textSans, body } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import TickIcon from '@frontend/static/icons/tick.svg';
 import RoundelIcon from '@frontend/static/icons/the-guardian-roundel.svg';

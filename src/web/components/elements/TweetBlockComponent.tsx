@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import { body } from '@guardian/src-foundations/__experimental__typography';
+import { body } from '@guardian/src-foundations/typography';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 // fallback styling for when JS is disabled

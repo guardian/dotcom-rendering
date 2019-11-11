@@ -9,10 +9,7 @@ import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
 import { PaidForBand } from '@root/src/amp/components/topMeta/PaidForBand';
 
 import { palette } from '@guardian/src-foundations';
-import {
-    textSans,
-    body,
-} from '@guardian/src-foundations/__experimental__typography';
+import { textSans, body } from '@guardian/src-foundations/typography';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 

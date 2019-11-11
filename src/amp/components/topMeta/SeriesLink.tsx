@@ -1,5 +1,5 @@
 import React from 'react';
-import { headline } from '@guardian/src-foundations/__experimental__typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 

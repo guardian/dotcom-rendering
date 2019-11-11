@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';

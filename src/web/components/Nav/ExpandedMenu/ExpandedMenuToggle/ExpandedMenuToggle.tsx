@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import { headline } from '@guardian/src-foundations/__experimental__typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { VeggieBurger } from './VeggieBurger';

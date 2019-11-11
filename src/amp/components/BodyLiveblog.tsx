@@ -5,10 +5,7 @@ import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaLiveblog } from '@root/src/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
 import { palette } from '@guardian/src-foundations';
-import {
-    headline,
-    textSans,
-} from '@guardian/src-foundations/__experimental__typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { KeyEvents } from '@root/src/amp/components/KeyEvents';
 import { Blocks } from '@root/src/amp/components/Blocks';
 import RefreshIcon from '@frontend/static/icons/refresh.svg';

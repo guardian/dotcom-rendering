@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { body } from '@guardian/src-foundations/__experimental__typography';
+import { body } from '@guardian/src-foundations/typography';
 import { unescapeData } from '@root/src/lib/escapeData';
 // tslint:disable:react-no-dangerous-html
 

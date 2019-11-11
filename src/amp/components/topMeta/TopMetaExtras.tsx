@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/__experimental__typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
