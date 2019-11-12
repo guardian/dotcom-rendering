@@ -18,7 +18,10 @@ module.exports =  {
         'max-len': [
             "error",
             { code: 100, ignoreStrings: true, ignoreTemplateLiterals: true },
-        ]
+        ],
+        '@typescript-eslint/explicit-function-return-type': 2,
+        'eqeqeq': 2,
+        'prefer-const': 2,
     },
     settings:  {
         react:  {
