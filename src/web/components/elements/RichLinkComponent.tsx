@@ -136,6 +136,23 @@ const byline = css`
     }
 `;
 
+const contributorImageWrapper = css`
+    width: 5rem;
+    height: 5rem;
+    margin-left: auto;
+    margin-right: 0.3rem;
+    ${from.wide} {
+        width: 8.5rem;
+        height: 8.5rem;
+    }
+
+    /* TODO remove the default img styling in ArticleBody.tsx - do we need direct element styling? */
+    img {
+        width: 100%;
+        height: 100%;
+    }
+`;
+
 const neutralBackground = css`
     background-color: ${palette.neutral[97]};
     a {
@@ -239,11 +256,13 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                     )}
                 </div>
                 {isOpinion && richLink.contributorImage && (
-                    <Avatar
-                        imageSrc={richLink.contributorImage}
-                        imageAlt={mainContributor}
-                        pillarColour={richLinkPillarColour(richLink.pillar)}
-                    />
+                    <div className={contributorImageWrapper}>
+                        <Avatar
+                            imageSrc={richLink.contributorImage}
+                            imageAlt={mainContributor}
+                            pillar={richLink.pillar}
+                        />
+                    </div>
                 )}
                 <div className={richLinkReadMore(richLink.pillar)}>
                     <ArrowInCircle />
