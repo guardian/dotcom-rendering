@@ -9,8 +9,6 @@ import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/components/lib/ArticleRenderer';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
-import { SubMeta } from '@root/src/web/components/SubMeta';
 import { Hide } from '@root/src/web/components/Hide';
 
 const pillarColours = pillarMap(
@@ -118,48 +116,32 @@ const linkColour = pillarMap(
     `,
 );
 
-const maxWidth = css`
-    max-width: 630px;
-`;
-
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     config: ConfigType;
     isShowcase?: boolean;
 }> = ({ CAPI, config, isShowcase }) => {
     return (
-        <main className={maxWidth}>
-            <div
-                className={cx(bodyStyle, linkColour[CAPI.pillar], {
-                    [immersiveBodyStyle]: CAPI.isImmersive,
-                })}
-            >
-                {isShowcase && (
-                    // For articles with main media set as showcase, the standfirst sometimes
-                    // sits inside here so that the right column advert does not get pushed down
-                    <Hide when="below" breakpoint="leftCol">
-                        <ArticleStandfirst
-                            pillar={CAPI.pillar}
-                            standfirst={CAPI.standfirst}
-                        />
-                    </Hide>
-                )}
-                <ArticleRenderer
-                    elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
-                    pillar={CAPI.pillar}
-                    config={CAPI.config}
-                />
-            </div>
-            <GuardianLines pillar={CAPI.pillar} />
-            <SubMeta
+        <div
+            className={cx(bodyStyle, linkColour[CAPI.pillar], {
+                [immersiveBodyStyle]: CAPI.isImmersive,
+            })}
+        >
+            {isShowcase && (
+                // For articles with main media set as showcase, the standfirst sometimes
+                // sits inside here so that the right column advert does not get pushed down
+                <Hide when="below" breakpoint="leftCol">
+                    <ArticleStandfirst
+                        pillar={CAPI.pillar}
+                        standfirst={CAPI.standfirst}
+                    />
+                </Hide>
+            )}
+            <ArticleRenderer
+                elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
                 pillar={CAPI.pillar}
-                subMetaKeywordLinks={CAPI.subMetaKeywordLinks}
-                subMetaSectionLinks={CAPI.subMetaSectionLinks}
-                pageId={CAPI.pageId}
-                webUrl={CAPI.webURL}
-                webTitle={CAPI.webTitle}
-                showBottomSocialButtons={CAPI.showBottomSocialButtons}
+                config={CAPI.config}
             />
-        </main>
+        </div>
     );
 };

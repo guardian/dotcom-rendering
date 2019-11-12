@@ -7,6 +7,7 @@ import { palette } from '@guardian/src-foundations';
 import { SharingIcons } from '@frontend/web/components/ShareIcons';
 import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
 import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
+import { Badge } from '@frontend/web/components/Badge';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
 
 const subMetaLabel = css`
@@ -23,6 +24,11 @@ const subMetaSharingIcons = css`
     }
 `;
 
+const badgeWrapper = css`
+    float: right;
+    margin-top: 6px;
+`;
+
 type Props = {
     pillar: Pillar;
     subMetaSectionLinks: SimpleLinkType[];
@@ -31,6 +37,7 @@ type Props = {
     webUrl: string;
     webTitle: string;
     showBottomSocialButtons: boolean;
+    badge?: BadgeType;
 };
 
 export const SubMeta = ({
@@ -41,12 +48,18 @@ export const SubMeta = ({
     webUrl,
     webTitle,
     showBottomSocialButtons,
+    badge,
 }: Props) => {
     const hasSubMetaSectionLinks = subMetaSectionLinks.length > 0;
     const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(pageId, webTitle);
     return (
         <>
+            {badge && (
+                <div className={badgeWrapper}>
+                    <Badge svgSrc={badge.svgSrc} linkTo={badge.linkTo} />
+                </div>
+            )}
             {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
                 <span className={subMetaLabel}>Topics</span>
             )}

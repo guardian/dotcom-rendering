@@ -7,7 +7,7 @@ import { from, until, between } from '@guardian/src-foundations/mq';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
-import { SeriesSectionLink } from '@root/src/web/components/SeriesSectionLink';
+import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { HeaderItem } from '@root/src/web/components/HeaderItem';
 import { Hide } from '@root/src/web/components/Hide';
 
@@ -46,9 +46,10 @@ const headerStyles = css`
 
 type Props = {
     CAPI: CAPIType;
+    badge?: BadgeType;
 };
 
-export const ShowcaseHeader = ({ CAPI }: Props) => {
+export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
     const {
         headline,
         tags,
@@ -62,7 +63,12 @@ export const ShowcaseHeader = ({ CAPI }: Props) => {
         <header className={headerStyles}>
             <HeaderItem order={1}>
                 <Hide when="above" breakpoint="leftCol">
-                    <SeriesSectionLink CAPI={CAPI} fallbackToSection={true} />
+                    <ArticleTitle
+                        CAPI={CAPI}
+                        badge={badge}
+                        inLeftCol={false}
+                        fallbackToSection={true}
+                    />
                 </Hide>
             </HeaderItem>
             <HeaderItem order={2}>
