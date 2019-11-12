@@ -69,15 +69,15 @@ const getPillarStyles = (pillar: Pillar): PillarStyles => pillarColours[pillar];
 
 function pillarFromString(pillar: string): Pillar {
     switch (pillar) {
-        case 'opinion':
+        case 'pillar/opinion':
             return Pillar.opinion;
-        case 'sport':
+        case 'pillar/sport':
             return Pillar.sport;
-        case 'arts':
+        case 'pillar/arts':
             return Pillar.arts;
-        case 'lifestyle':
+        case 'pillar/lifestyle':
             return Pillar.lifestyle;
-        case 'news':
+        case 'pillar/news':
         default:
             return Pillar.news;
     }
