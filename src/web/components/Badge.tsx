@@ -35,7 +35,11 @@ export const Badge = ({ svgSrc: Svg, linkTo }: Props) => {
     if (linkTo) {
         return (
             <div className={badgeWrapper}>
-                <a href={linkTo} className={cx(badgeLink, svgStyles)}>
+                <a
+                    href={linkTo}
+                    className={cx(badgeLink, svgStyles)}
+                    role="button"
+                >
                     <Svg />
                 </a>
             </div>
