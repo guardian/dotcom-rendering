@@ -178,6 +178,12 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         overflow-wrap: break-word;
     }
 
+    ${until.wide} {
+        .twitter-tweet {
+            clear: both;
+        }
+    }
+
     ${bulletStyles(kicker)}
 `;
 
