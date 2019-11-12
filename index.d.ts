@@ -235,8 +235,9 @@ interface TagType {
 }
 
 interface BadgeType {
-    linkUrl: string;
-    imageUrl: string;
+    altText: string;
+    linkTo: string;
+    imgSrc: string;
 }
 
 /**
