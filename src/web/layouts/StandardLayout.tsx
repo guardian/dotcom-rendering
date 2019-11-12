@@ -1,4 +1,6 @@
 import React from 'react';
+import { css } from 'emotion';
+
 import { Flex } from '@root/src/web/components/Flex';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -8,6 +10,8 @@ import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
 import { Hide } from '@root/src/web/components/Hide';
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { SubMeta } from '@root/src/web/components/SubMeta';
 
 import { palette } from '@guardian/src-foundations';
 import { MostViewed } from '@root/src/web/components/MostViewed/MostViewed';
@@ -76,7 +80,25 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => (
                     <Hide when="above" breakpoint="leftCol">
                         <ArticleMeta CAPI={CAPI} config={config} />
                     </Hide>
-                    <ArticleBody CAPI={CAPI} config={config} />
+                    <main
+                        className={css`
+                            max-width: 630px;
+                        `}
+                    >
+                        <ArticleBody CAPI={CAPI} config={config} />
+                        <GuardianLines pillar={CAPI.pillar} />
+                        <SubMeta
+                            pillar={CAPI.pillar}
+                            subMetaKeywordLinks={CAPI.subMetaKeywordLinks}
+                            subMetaSectionLinks={CAPI.subMetaSectionLinks}
+                            pageId={CAPI.pageId}
+                            webUrl={CAPI.webURL}
+                            webTitle={CAPI.webTitle}
+                            showBottomSocialButtons={
+                                CAPI.showBottomSocialButtons
+                            }
+                        />
+                    </main>
                 </ArticleContainer>
                 <ArticleRight>
                     <StickyAd config={config} />
