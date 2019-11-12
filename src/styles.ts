@@ -1,7 +1,7 @@
-import { palette, } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core'
-import { compose } from 'utils/lib';
+import { PillarStyles } from 'types/Pillar';
 
 const BASE_PADDING = 8;
 
@@ -17,78 +17,6 @@ export const sidePadding = css`
         padding-left: 0;
         padding-right: 0;
     }`;
-
-export enum PillarId {
-    news = 'pillar/news',
-    opinion = 'pillar/opinion',
-    sport = 'pillar/sport',
-    arts = 'pillar/arts',
-    lifestyle = 'pillar/lifestyle',
-}
-
-export interface PillarStyles {
-    kicker: string;
-    featureHeadline: string;
-    soft: string;
-    inverted: string;
-    liveblogBackground: string;
-}
-
-interface PillarColours {
-    [pillar: string]: PillarStyles;
-}
-
-export const pillarColours: PillarColours = {
-    news: {
-        kicker: palette.news.main,
-        featureHeadline: palette.news.dark,
-        soft: palette.neutral[97],
-        inverted: palette.news.bright,
-        liveblogBackground: palette.news.dark
-    },
-    opinion: {
-        kicker: palette.opinion.main,
-        featureHeadline: palette.opinion.dark,
-        soft: palette.opinion.faded,
-        inverted: palette.opinion.bright,
-        liveblogBackground: palette.opinion.dark
-    },
-    sport: {
-        kicker: palette.sport.main,
-        featureHeadline: palette.sport.dark,
-        soft: palette.sport.faded,
-        inverted: palette.sport.bright,
-        liveblogBackground: palette.sport.dark
-    },
-    arts: {
-        kicker: palette.culture.main,
-        featureHeadline: palette.culture.dark,
-        soft: palette.culture.faded,
-        inverted: palette.culture.bright,
-        liveblogBackground: palette.culture.dark
-    },
-    lifestyle: {
-        kicker: palette.lifestyle.main,
-        featureHeadline: palette.lifestyle.dark,
-        soft: palette.lifestyle.faded,
-        inverted: palette.lifestyle.bright,
-        liveblogBackground: palette.lifestyle.dark
-    }
-}
-
-function isPillarId(pillarId: string): pillarId is PillarId {
-    return pillarId in PillarId;
-}
-
-export function getPillarStyles(pillarId: PillarId): PillarStyles {
-    const pillar = pillarId.replace('pillar/', '');
-    return pillarColours[pillar];
-}
-
-export const pillarIdFromString = (pillarId: string): PillarId =>
-    isPillarId(pillarId) ? pillarId : PillarId.news;
-
-export const pillarStylesFromString = compose(getPillarStyles, pillarIdFromString)
 
 export const bulletStyles = (kicker: string, opacity = 1): string => `
     .bullet {

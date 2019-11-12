@@ -1,8 +1,9 @@
 import React from 'react';
 import ArticleRating from './ArticleRating';
-import { basePx, sidePadding, PillarStyles, headlineFont, darkModeCss } from '../../styles';
+import { basePx, sidePadding, headlineFont, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
+import { PillarStyles } from 'types/Pillar';
 
 const HeadlineStyles = (feature: boolean, { featureHeadline }: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};

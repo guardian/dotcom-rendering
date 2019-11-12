@@ -1,5 +1,5 @@
 import React from 'react';
-import { textSans, PillarStyles, PillarId } from '../../styles';
+import { textSans } from 'styles';
 
 import { Keyline } from '../shared/Keyline';
 
@@ -9,6 +9,7 @@ import { Contributor } from '../../types/Capi';
 import { formatDate } from 'utils/date';
 import Avatar from 'components/shared/Avatar';
 import LeftColumn from 'components/shared/LeftColumn';
+import { PillarStyles, Pillar } from 'types/Pillar';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -49,7 +50,7 @@ interface LiveblogBylineProps {
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
-    pillarId: PillarId;
+    pillar: Pillar;
     imageSalt: string;
 }
 
@@ -58,13 +59,13 @@ const LiveblogByline = ({
     pillarStyles,
     publicationDate,
     contributors,
-    pillarId,
+    pillar,
     imageSalt
 }: LiveblogBylineProps): JSX.Element => {
     
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
-            <Keyline pillar={pillarId} type={'liveblog'}/>
+            <Keyline pillar={pillar} type={'liveblog'}/>
             <LeftColumn>
                 <Avatar
                     contributors={contributors}
