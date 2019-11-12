@@ -235,9 +235,8 @@ interface TagType {
 }
 
 interface BadgeType {
-    altText: string;
     linkTo: string;
-    imgSrc: string;
+    svgSrc: () => JSX.Element;
 }
 
 /**
