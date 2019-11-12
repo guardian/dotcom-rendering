@@ -3,18 +3,23 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 
+const badgeSizingStyles = css`
+    height: 42px;
+    ${from.wide} {
+        height: 54px;
+    }
+`;
+
 const badgeWrapper = css`
     float: left;
     background-color: ${palette.neutral[100]};
+    ${badgeSizingStyles}
 `;
 
 const badgeImg = css`
     display: block;
     width: auto;
-    height: 42px;
-    ${from.wide} {
-        height: 54px;
-    }
+    ${badgeSizingStyles}
 `;
 
 const badgeLink = css`
