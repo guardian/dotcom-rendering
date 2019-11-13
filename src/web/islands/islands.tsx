@@ -3,7 +3,8 @@ import { hydrate } from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
-import { MostViewed } from '@frontend/web/components/MostViewed/MostViewed';
+import { MostViewedGrid } from '@frontend/web/components/MostViewedGrid/MostViewedGrid';
+import { MostViewedList } from '@frontend/web/components/MostViewedList/MostViewedList';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
@@ -21,8 +22,9 @@ type IslandProps =
           config: ConfigType;
           pillar: Pillar;
           sectionName?: string;
-          geoTargeted?: boolean;
-          layout?: string;
+      }
+    | {
+          limitItems?: number;
       }
     | {
           config: ConfigType;
@@ -98,25 +100,17 @@ export const hydrateIslands = (
             root: 'share-count',
         },
         {
-            component: MostViewed,
+            component: MostViewedGrid,
             props: {
                 config,
                 pillar,
                 sectionName,
-                layout: 'grid',
-                geoTargeted: false,
             },
             root: 'most-viewed-grid',
         },
         {
-            component: MostViewed,
-            props: {
-                config,
-                pillar,
-                sectionName,
-                layout: 'list',
-                geoTargeted: true,
-            },
+            component: MostViewedList,
+            props: {},
             root: 'most-viewed-list',
         },
         {

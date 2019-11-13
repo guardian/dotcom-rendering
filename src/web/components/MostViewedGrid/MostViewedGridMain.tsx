@@ -5,7 +5,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
-import { TabType, TrailType } from './MostViewed';
+import { TabType, TrailType } from './MostViewedGrid';
 import { MostViewedGridItem } from './MostViewedGridItem';
 
 const thinGreySolid = `1px solid ${palette.neutral[86]}`;
@@ -99,7 +99,7 @@ type Props = {
     pillar: Pillar;
 };
 
-export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
+export const MostViewedGridMain = ({ data, sectionName, pillar }: Props) => {
     const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 
     return (

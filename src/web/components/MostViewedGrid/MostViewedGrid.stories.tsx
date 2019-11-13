@@ -3,8 +3,11 @@ import fetchMock from 'fetch-mock';
 
 import { Section } from '@frontend/web/components/Section';
 
-import { MostViewed } from './MostViewed';
-import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
+import { MostViewedGrid } from './MostViewedGrid';
+import {
+    responseWithTwoTabs,
+    responseWithOneTab,
+} from './MostViewedGrid.mocks';
 
 const config: ConfigType = {
     ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
@@ -31,8 +34,8 @@ const config: ConfigType = {
 
 /* tslint:disable */
 export default {
-    component: MostViewed,
-    title: 'Components/MostViewed',
+    component: MostViewedGrid,
+    title: 'Components/MostViewedGrid',
 };
 /* tslint:enable */
 
@@ -44,8 +47,7 @@ export const withTwoTabs = () => {
 
     return (
         <Section>
-            <MostViewed
-                layout="grid"
+            <MostViewedGrid
                 pillar="news"
                 config={config}
                 sectionName="politics"
@@ -64,28 +66,8 @@ export const withOneTabs = () => {
 
     return (
         <Section>
-            <MostViewed layout="grid" pillar="news" config={config} />;
+            <MostViewedGrid pillar="news" config={config} />;
         </Section>
     );
 };
 withOneTabs.story = { name: 'with one tab' };
-
-export const usingListLayout = () => {
-    fetchMock.restore().getOnce('*', {
-        status: 200,
-        body: responseWithOneTab.data,
-    });
-
-    return (
-        <Section>
-            <MostViewed
-                config={config}
-                pillar="news"
-                layout="list"
-                geoTargeted={true}
-            />
-            ;
-        </Section>
-    );
-};
-usingListLayout.story = { name: 'using list layout' };

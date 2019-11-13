@@ -13,7 +13,7 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 
 import { palette } from '@guardian/src-foundations';
-import { MostViewed } from '@root/src/web/components/MostViewed/MostViewed';
+import { MostViewedGrid } from '@root/src/web/components/MostViewedGrid/MostViewedGrid';
 import { Header } from '@root/src/web/components/Header/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -128,9 +128,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
         </Section>
 
         <Section islandId="most-viewed">
-            <MostViewed
-                layout="grid"
-                geoTargeted={false}
+            <MostViewedGrid
                 sectionName={CAPI.sectionName}
                 config={config}
                 pillar={CAPI.pillar}

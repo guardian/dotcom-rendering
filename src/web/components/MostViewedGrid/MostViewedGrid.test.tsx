@@ -1,7 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { MostViewed } from './MostViewed';
-import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
+import { MostViewedGrid } from './MostViewedGrid';
+import {
+    responseWithTwoTabs,
+    responseWithOneTab,
+} from './MostViewedGrid.mocks';
 
 import { useApi as useApi_ } from '../lib/api';
 
@@ -14,7 +17,7 @@ jest.mock('../lib/api', () => ({
 const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
-describe('MostViewed', () => {
+describe('MostViewedGrid', () => {
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         sentryHost: '',
@@ -46,7 +49,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -75,7 +78,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByTestId, getByText } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -104,7 +107,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithOneTab);
 
         const { queryByText } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -121,7 +124,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -154,7 +157,7 @@ describe('MostViewed', () => {
         });
 
         const { getByText } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -185,7 +188,7 @@ describe('MostViewed', () => {
         });
 
         const { queryByText } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -216,7 +219,7 @@ describe('MostViewed', () => {
         });
 
         const { getByTestId } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -247,7 +250,7 @@ describe('MostViewed', () => {
         });
 
         const { queryByTestId } = render(
-            <MostViewed
+            <MostViewedGrid
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
