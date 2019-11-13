@@ -64,13 +64,6 @@ export const articles = [
     },
     {
         url:
-            'https://www.theguardian.com/travel/2019/oct/12/20-best-alps-ski-resorts-by-train-rail-france-switzerland-austria-italy',
-        pillar: 'lifestyle',
-        designType: 'Immersive',
-        hasRichLinks: false,
-    },
-    {
-        url:
             'https://www.theguardian.com/commentisfree/2019/jan/17/the-guardian-view-on-the-brexit-impasse-extend-article-50-now',
         pillar: 'opinion',
         designType: 'GuardianView',
@@ -92,13 +85,6 @@ export const articles = [
     },
     {
         url:
-            'https://www.theguardian.com/food/2019/may/10/anna-jones-chickpea-recipes',
-        pillar: 'lifestyle',
-        designType: 'Recipes',
-        hasRichLinks: false,
-    },
-    {
-        url:
             'https://www.theguardian.com/food/2019/feb/22/seed-recipes-anna-jones-sesame-sunflower-snack-bhaji-raita',
         pillar: 'lifestyle',
         designType: 'Recipes',
@@ -107,13 +93,6 @@ export const articles = [
     {
         url:
             'https://www.theguardian.com/music/2019/jul/29/chance-the-rapper-the-big-day-review',
-        pillar: 'culture',
-        designType: 'Review',
-        hasRichLinks: false,
-    },
-    {
-        url:
-            'https://www.theguardian.com/music/2018/nov/23/laibach-the-sound-of-music-review-glorious-silly-covers-are-bright-as-a-copper-kettle',
         pillar: 'culture',
         designType: 'Review',
         hasRichLinks: false,
