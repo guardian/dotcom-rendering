@@ -26,6 +26,7 @@ export const responseWithTwoTabs = {
                         'https://i.guim.co.uk/img/media/579fd19481e46b9d6ed3c69c2a6992483df84478/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=63a6a5c13a8087e607a44ce5c7da2090',
                     isLiveBlog: false,
                     pillar: 'news',
+                    ageWarning: '4 months',
                 },
                 {
                     url:

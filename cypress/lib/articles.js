@@ -15,6 +15,20 @@ export const articles = [
     },
     {
         url:
+            'https://www.theguardian.com/environment/2018/dec/21/from-spectacular-orchids-to-towering-trees-2018s-top-new-plant-discoveries',
+        pillar: 'news',
+        designType: 'Feature',
+        hasRichLinks: false,
+    },
+    {
+        url:
+            'https://www.theguardian.com/politics/2019/nov/11/uk-parties-struggle-to-turn-whatsapp-into-political-weapon',
+        pillar: 'news',
+        designType: 'Article',
+        hasRichLinks: true,
+    },
+    {
+        url:
             'https://www.theguardian.com/media/2019/sep/18/dorothy-byrne-on-calling-boris-johnson-a-liar-nobody-has-said-that-isnt-true',
         pillar: 'news',
         designType: 'Interview',

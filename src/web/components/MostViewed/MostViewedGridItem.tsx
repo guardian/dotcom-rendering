@@ -2,12 +2,12 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { textSans, headline } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
-import ClockIcon from '@frontend/static/icons/clock.svg';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { TrailType } from './MostViewed';
 
@@ -74,44 +74,10 @@ function getColour(pillar: Pillar) {
     return palette[pillar].main;
 }
 
-const AgeWarning: React.FC<{
-    ageWarning?: string;
-}> = ({ ageWarning }) => {
-    if (!ageWarning) {
-        return <></>;
-    }
-    return (
-        <div>
-            <div className={oldArticleMessage}>
-                <span className={oldClockWrapper}>
-                    <ClockIcon />
-                </span>
-                This article is more than{' '}
-                <span className="embolden">{ageWarning} old</span>
-            </div>
-        </div>
-    );
-};
-
-const oldArticleMessage = css`
-    ${textSans.xsmall()}
-    background: ${palette.yellow.main};
-    display: inline-block;
-    color: ${palette.neutral[7]};
-    margin: 4px 0 6px;
-    padding: 3px 5px;
-
-    svg {
-        fill: currentColor;
-    }
-
-    .embolden {
-        font-weight: bold;
-    }
-`;
-
-const oldClockWrapper = css`
-    margin-right: 3px;
+const ageWarningStyles = css`
+    padding-left: 4.6875rem;
+    margin-top: -16px;
+    margin-bottom: 16px;
 `;
 
 type Props = {
@@ -144,9 +110,13 @@ export const MostViewedGridItem = ({ trail, position }: Props) => {
                         <QuoteIcon colour={getColour(trail.pillar)} />
                     )}
                     {trail.linkText}
-                    <AgeWarning ageWarning={trail.ageWarning} />
                 </a>
             </h2>
+            {trail.ageWarning && (
+                <div className={ageWarningStyles}>
+                    <AgeWarning age={trail.ageWarning} size="small" />
+                </div>
+            )}
         </li>
     );
 };

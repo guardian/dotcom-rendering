@@ -1,13 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import ClockIcon from '@frontend/static/icons/clock.svg';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
-import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
+import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 type HeadlineType =
     | 'basic'
@@ -122,24 +120,10 @@ const invertedWrapper = css`
     margin-left: 6px;
 `;
 
-const ageWarningStyle = css`
-    ${textSans.medium()};
-    color: ${palette.neutral[7]};
-    background-color: ${palette.yellow.main};
-    display: inline-block;
-    margin-bottom: 6px;
-
-    > strong {
-        font-weight: bold;
-    }
-
-    padding: 6px 10px;
-    margin-top: 6px;
+const ageWarningMargins = css`
+    margin-top: 12px;
     margin-left: -10px;
-
-    ${from.mobileLandscape} {
-        padding-left: 12px;
-    }
+    margin-bottom: 6px;
 
     ${from.tablet} {
         margin-left: -20px;
@@ -147,13 +131,8 @@ const ageWarningStyle = css`
 
     ${from.leftCol} {
         margin-left: -10px;
-        margin-top: -6px;
-        padding-left: 10px;
+        margin-top: 0;
     }
-`;
-
-const ageWarningScreenReader = css`
-    ${visuallyHidden};
 `;
 
 const renderHeadline = (
@@ -245,23 +224,18 @@ export const ArticleHeadline = ({
     colour,
     type = 'basic',
 }: Props) => {
-    const ageWarning = getAgeWarning(tags, webPublicationDate);
+    const age = getAgeWarning(tags, webPublicationDate);
     return (
         <>
-            {ageWarning && (
-                <div className={ageWarningStyle} aria-hidden="true">
-                    <ClockIcon /> This article is more than{' '}
-                    <strong>{ageWarning}</strong>
+            {age && (
+                <div className={ageWarningMargins}>
+                    <AgeWarning age={age} />
                 </div>
             )}
             {renderHeadline(type, headlineString, {
                 colour,
             })}
-            {ageWarning && (
-                <div className={ageWarningScreenReader}>
-                    This article is more than {` ${ageWarning}`}
-                </div>
-            )}
+            {age && <AgeWarning age={age} isScreenReader={true} />}
         </>
     );
 };
