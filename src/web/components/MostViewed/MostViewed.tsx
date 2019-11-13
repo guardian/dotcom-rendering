@@ -1,16 +1,7 @@
 import React from 'react';
-// import { css, cx } from 'emotion';
-// import { palette } from '@guardian/src-foundations';
-// import { headline } from '@guardian/src-foundations/typography';
-// import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
-// import { namedAdSlotParameters } from '@root/src/model/advertisement';
-// import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 import { useApi } from '@root/src/web/components/lib/api';
-
-// import { MostViewedGrid } from './MostViewedGrid';
 import { MostViewedLayoutGrid } from './MostViewedLayoutGrid';
 import { MostViewedLayoutList } from './MostViewedLayoutList';
-// import e from 'express';
 
 export interface TrailType {
     url: string;
@@ -19,8 +10,6 @@ export interface TrailType {
     ageWarning: string;
     pillar: Pillar;
     image?: string;
-    byline?: string;
-    showByline: boolean;
 }
 
 export interface TabType {

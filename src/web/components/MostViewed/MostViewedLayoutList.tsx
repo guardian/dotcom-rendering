@@ -38,24 +38,20 @@ export const MostViewedLayoutList = ({
     config,
     sectionName,
     pillar,
-}: Props) => {
-    console.log('=== DATA ===');
-    console.log(data);
-    return (
-        <div className={wrapperStyles}>
-            <GuardianLines count={4} />
-            <h3 className={headingStyles}>most viewed</h3>
-            <div>
-                {(data.trails || [])
-                    .slice(0, 5)
-                    .map((trail: TrailType, ii: number) => (
-                        <MostViewedListItem
-                            key={trail.url}
-                            trail={trail}
-                            position={ii + 1}
-                        />
-                    ))}
-            </div>
+}: Props) => (
+    <div className={wrapperStyles}>
+        <GuardianLines count={4} />
+        <h3 className={headingStyles}>Most viewed</h3>
+        <div>
+            {(data.trails || [])
+                .slice(0, 5)
+                .map((trail: TrailType, ii: number) => (
+                    <MostViewedListItem
+                        key={trail.url}
+                        trail={trail}
+                        position={ii + 1}
+                    />
+                ))}
         </div>
-    );
-};
+    </div>
+);

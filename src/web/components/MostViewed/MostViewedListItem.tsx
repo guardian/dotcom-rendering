@@ -5,75 +5,72 @@ import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
+import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
 import { TrailType } from './MostViewed';
 
 const listItemStyles = css`
-    display: flex;
     list-style: none;
     padding-top: 4px;
     margin-bottom: 12px;
     border-top: 1px solid ${palette.neutral[86]};
+
     &:first-child {
         padding-top: 0;
         border-top: none;
     }
 `;
 
+const linkTagStyles = css`
+    text-decoration: none;
+    font-weight: 500;
+    ${headline.tiny()};
+
+    &:link,
+    &:active {
+        color: ${palette.neutral[7]};
+    }
+
+    &:hover .linkText {
+        text-decoration: underline;
+    }
+
+    &:visited .linkText {
+        color: ${palette.neutral[46]};
+    }
+`;
+
+const textWrapperStyles = css`
+    display: flex;
+`;
+
 const imageWrapperStyles = css`
     width: 72px;
-    min-height: 75px;
+    min-height: 72px;
     padding-top: 3px;
     margin-right: 10px;
     overflow: hidden;
     position: relative;
+    box-sizing: content-box;
     flex-grow: 0;
     flex-shrink: 0;
 `;
 
-const imageStyles = css`
-    border-radius: 50%;
+const imageTagStyles = css`
     position: absolute;
     width: auto;
-    height: 4.5rem;
-    left: -1.5rem;
+    height: 72px;
+    left: -24px;
     clip-path: circle(36% at 50% 50%);
 `;
 
-const linkWrapperStyles = css``;
-
-const articleHeadingStyles = css`
-    word-wrap: break-word;
-    overflow: hidden;
-`;
-
-const articleLinkStyles = css`
-    text-decoration: none;
-    color: ${palette.neutral[7]};
-    font-weight: 500;
-    ${headline.tiny()};
-
-    &:hover {
-        text-decoration: underline;
-    }
-`;
-
-// const bylineStyles = css`
-//     color: ${getColour()}
-// `;
-
-const getBylineStyles = (pillar: Pillar): string => css`
-    display: block;
-    color: ${getColour(pillar)};
+const ageWarningStyles = css`
+    margin-top: 8px;
 `;
 
 const liveKicker = (colour: string) => css`
     color: ${colour};
     font-weight: 700;
-
-    $:hover {
-        text-decoration: none;
-    }
 
     &::after {
         content: '/';
@@ -92,41 +89,35 @@ type Props = {
     position: number;
 };
 
-export const MostViewedListItem = ({ trail, position }: Props) => {
-    console.log('=== TRAIL: ');
-    console.log(trail);
-    return (
-        <li className={listItemStyles}>
-            <div className={imageWrapperStyles}>
-                <img src={trail.image} alt="" className={imageStyles} />
-            </div>
-            <div className={linkWrapperStyles}>
-                <h4 className={articleHeadingStyles}>
-                    <a
-                        className={articleLinkStyles}
-                        href={trail.url}
-                        data-link-name={'article'}
-                    >
-                        {trail.isLiveBlog && (
-                            <span
-                                className={liveKicker(getColour(trail.pillar))}
-                            >
-                                <PulsingDot colour={getColour(trail.pillar)} />
-                                Live
-                            </span>
-                        )}
-                        {trail.pillar === 'opinion' && (
-                            <QuoteIcon colour={getColour(trail.pillar)} />
-                        )}
-                        {trail.linkText}
-                        {trail.showByline && (
-                            <span className={getBylineStyles(trail.pillar)}>
-                                {trail.byline}
-                            </span>
-                        )}
-                    </a>
+export const MostViewedListItem = ({ trail, position }: Props) => (
+    <li className={listItemStyles}>
+        <a
+            className={linkTagStyles}
+            href={trail.url}
+            data-link-name={'article'}
+        >
+            <div className={textWrapperStyles}>
+                <div className={imageWrapperStyles}>
+                    <img src={trail.image} alt="" className={imageTagStyles} />
+                </div>
+                <h4>
+                    {trail.isLiveBlog && (
+                        <span className={liveKicker(getColour(trail.pillar))}>
+                            <PulsingDot colour={getColour(trail.pillar)} />
+                            Live
+                        </span>
+                    )}
+                    {trail.pillar === 'opinion' && (
+                        <QuoteIcon colour={getColour(trail.pillar)} />
+                    )}
+                    <span className="linkText">{trail.linkText}</span>
                 </h4>
             </div>
-        </li>
-    );
-};
+            {trail.ageWarning && (
+                <div className={ageWarningStyles}>
+                    <AgeWarning age={trail.ageWarning} size="small" />
+                </div>
+            )}
+        </a>
+    </li>
+);
