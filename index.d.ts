@@ -234,6 +234,11 @@ interface TagType {
     bylineImageUrl?: string;
 }
 
+interface BadgeType {
+    linkTo: string;
+    svgSrc: () => JSX.Element;
+}
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model

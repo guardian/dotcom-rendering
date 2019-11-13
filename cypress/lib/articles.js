@@ -18,6 +18,15 @@ export const articles = [
             'https://www.theguardian.com/environment/2018/dec/21/from-spectacular-orchids-to-towering-trees-2018s-top-new-plant-discoveries',
         pillar: 'news',
         designType: 'Feature',
+        hasRichLinks: true,
+    },
+    {
+        url:
+          'https://www.theguardian.com/politics/2019/nov/11/uk-parties-struggle-to-turn-whatsapp-into-political-weapon',
+        pillar: 'news',
+        designType: 'Article',
+        hasRichLinks: true,
+      
     },
     {
         url:
