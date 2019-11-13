@@ -68,7 +68,9 @@ const ArticleByline = ({
     imageSalt,
     className,
 }: ArticleBylineProps): JSX.Element =>
-    <div css={[className, ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}>
+    <div
+        css={[className, ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}
+    >
         <div css={sidePadding}>
             <Avatar
                 contributors={contributors}
