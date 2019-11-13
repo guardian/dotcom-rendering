@@ -88,7 +88,7 @@ const quote: (pillar: Pillar) => colour = pillar => {
     `;
 };
 
-const rickLinkHeader = css`
+const richLinkHeader = css`
     padding-bottom: 10px;
 `;
 
@@ -227,7 +227,7 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                 </div>
             )}
             <div className={richLinkElements}>
-                <div className={rickLinkHeader}>
+                <div className={richLinkHeader}>
                     <div className={richLinkTitle}>
                         {isOpinion && (
                             <div className={quote(richLink.pillar)}>
