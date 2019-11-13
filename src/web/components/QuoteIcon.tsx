@@ -2,10 +2,10 @@ import React from 'react';
 import { css } from 'emotion';
 
 const quoteStyles = (colour?: string) => css`
-    height: 1.0625rem;
-    width: 0.57375rem;
+    height: 17px;
+    width: 9px;
     margin-right: 12px;
-    transform: translateY(-0.0625rem);
+    transform: translateY(-1px);
     overflow: visible;
     fill: ${colour && colour};
 `;
@@ -15,31 +15,31 @@ const sizeStyles = (size: 'tiny' | 'xxsmall' | 'xsmall') => {
         case 'tiny':
             return css`
                 svg {
-                    height: 1rem;
-                    width: 0.5rem;
+                    height: 16px;
+                    width: 8px;
                 }
             `;
         case 'xxsmall':
             return css`
-                margin-right: 0.25rem;
+                margin-right: 4px;
                 svg {
-                    height: 1.25rem;
-                    width: 0.675rem;
+                    height: 20px;
+                    width: 11px;
                 }
             `;
         case 'xsmall':
             return css`
-                margin-right: 0.5rem;
+                margin-right: 8px;
                 svg {
-                    height: 1.5rem;
-                    width: 0.81rem;
+                    height: 24px;
+                    width: 13px;
                 }
             `;
         default:
             return css`
                 svg {
-                    height: 1.25rem;
-                    width: 0.675rem;
+                    height: 20px;
+                    width: 11px;
                 }
             `;
     }
