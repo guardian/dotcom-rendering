@@ -78,7 +78,13 @@ export const usingListLayout = () => {
 
     return (
         <Section>
-            <MostViewed layout="list" pillar="news" config={config} />;
+            <MostViewed
+                config={config}
+                pillar="news"
+                layout="list"
+                geoTargeted={true}
+            />
+            ;
         </Section>
     );
 };

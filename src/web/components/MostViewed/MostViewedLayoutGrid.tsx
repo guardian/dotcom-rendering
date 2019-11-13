@@ -100,34 +100,38 @@ export const MostViewedLayoutGrid = ({
     config,
     sectionName,
     pillar,
-}: Props) => (
-    <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
-        <div
-            className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
-            data-link-name={'most-viewed'}
-            data-component={'most-viewed'}
-        >
-            <section className={asideWidth}>
-                <h2 className={headingStyles}>Most popular</h2>
-            </section>
-            <section className={stackBelow('desktop')}>
-                <MostViewedGrid
-                    data={data}
-                    sectionName={sectionName}
-                    pillar={pillar}
-                />
-                <div
-                    className={css`
-                        margin: 0.375rem 0 0 0.625rem;
-                    `}
-                >
-                    <AdSlot
-                        asps={namedAdSlotParameters('mostpop')}
-                        config={config}
-                        className={''}
+}: Props) => {
+    console.log('===> GRID: ');
+    console.log(data);
+    return (
+        <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+            <div
+                className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
+                data-link-name={'most-viewed'}
+                data-component={'most-viewed'}
+            >
+                <section className={asideWidth}>
+                    <h2 className={headingStyles}>Most popular</h2>
+                </section>
+                <section className={stackBelow('desktop')}>
+                    <MostViewedGrid
+                        data={data}
+                        sectionName={sectionName}
+                        pillar={pillar}
                     />
-                </div>
-            </section>
+                    <div
+                        className={css`
+                            margin: 0.375rem 0 0 0.625rem;
+                        `}
+                    >
+                        <AdSlot
+                            asps={namedAdSlotParameters('mostpop')}
+                            config={config}
+                            className={''}
+                        />
+                    </div>
+                </section>
+            </div>
         </div>
-    </div>
-);
+    );
+};

@@ -22,7 +22,7 @@ interface Props {
     sectionName?: string;
     config: ConfigType;
     pillar: Pillar;
-    geoTargeted: boolean;
+    geoTargeted?: boolean;
 }
 
 function buildSectionUrl(sectionName?: string, geoTargeted?: boolean) {
@@ -47,7 +47,7 @@ export const MostViewed = ({
     geoTargeted,
 }: Props) => {
     const url = buildSectionUrl(sectionName, geoTargeted);
-    const { data, error } = useApi<TabType[]>(url);
+    const { data, error } = useApi<any>(url);
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'most-viewed');
