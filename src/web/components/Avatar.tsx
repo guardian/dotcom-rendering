@@ -9,9 +9,10 @@ const contributorImage = css`
     width: 100%;
 `;
 
-const pillarBackground: (pillar: Pillar) => string = pillar => css`
-    background-color: ${pillarPalette[pillar ? pillar : 'opinion'].main};
-`;
+const pillarBackground = (pillar: Pillar = 'opinion') =>
+    css`
+        background-color: ${pillarPalette[pillar].main};
+    `;
 
 export const Avatar: React.FC<{
     imageSrc: string;
