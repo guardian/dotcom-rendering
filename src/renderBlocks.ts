@@ -168,7 +168,7 @@ function elementsToReact(elements: any, imageSalt: string): ParsedReact {
 function render(bodyElements: any, imageSalt: string, ads = true): Rendered {
     const reactNodes = elementsToReact(bodyElements, imageSalt);
     const reactNodesWithAds = ads ? insertAdPlaceholders(reactNodes.nodes) : reactNodes.nodes;
-    const main = h('article', null, ...reactNodesWithAds);
+    const main = h(React.Fragment, null, ...reactNodesWithAds);
 
     return {
         errors: reactNodes.errors,
