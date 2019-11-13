@@ -204,7 +204,7 @@ const adHeight = '250px';
 
 export const adStyles = css`
     .ad-placeholder {
-        color: ${palette.neutral[46]};
+        color: ${palette.neutral[20]};
         background: ${palette.neutral[97]};
         clear: both;
 
@@ -223,7 +223,7 @@ export const adStyles = css`
                 background: none;
                 border: none;
                 font-size: 16px;
-                color: ${palette.neutral[46]};
+                color: ${palette.neutral[20]};
                 margin-top: -4px;
 
                 &::after {
@@ -231,6 +231,10 @@ export const adStyles = css`
                     ${icons}
                     content: "\\e04F";
                     font-size: 16px;
+                }
+
+                &:focus {
+                    text-decoration: underline;
                 }
             }
         }

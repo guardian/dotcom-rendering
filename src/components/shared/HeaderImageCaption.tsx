@@ -4,13 +4,11 @@ import { basePx, textSans, icons, wideContentWidth } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 
-const HeaderImageCaptionStyles = css`
-    input[type=checkbox] {
-        display: none;
-    }
+const captionId = 'header-image-caption';
 
-    label {
-        line-height: 30px;
+const HeaderImageCaptionStyles = css`
+	summary {
+		line-height: 30px;
         text-align: center;
         background-color: ${palette.yellow.main};
         color: ${palette.neutral[7]};
@@ -22,26 +20,26 @@ const HeaderImageCaptionStyles = css`
         right: ${basePx(1)};
         border-radius: 100%;
         z-index: 2;
-        font-size: 2.8rem;
+		font-size: 2.8rem;
+		
+		span {
+			font-size: 0;
+		}
 
 		&::before {
 			${icons}
 			content: "\\e044";
 			font-size: 16px;
+			position: absolute;
+			right: ${basePx(1)};
+		}
+
+		&::-webkit-details-marker {
+			display: none;
 		}
 	}
 
-	label::selection,
-	input[type=checkbox]:checked ~ div span::selection {
-		background-color: transparent;
-	}
-
-	input[type=checkbox] ~ div {
-		display: none
-	}
-
-	input[type=checkbox]:checked ~ div {
-		display: block;
+	details[open] {
 		min-height: 44px;
 		max-height: 999px;
 		background-color: rgba(0, 0, 0, 0.8);
@@ -71,15 +69,16 @@ interface HeaderImageCaptionProps {
 }
 
 const HeaderImageCaption = ({ caption, credit }: HeaderImageCaptionProps): JSX.Element => (
-	<div css={HeaderImageCaptionStyles}>
-		<label htmlFor="captionToggle"></label>
-		<input type="checkbox" id="captionToggle"/>
-		<div>
-			<span>{caption}</span>
-			<span>&nbsp;</span>
-			<span>{credit}</span>
-		</div>
-	</div>
+	<figcaption css={HeaderImageCaptionStyles}>
+		<details>
+			<summary><span>Click to see figure caption</span></summary>
+			<span id={captionId}>{caption}&nbsp;{credit}</span>
+		</details>
+	</figcaption>
 )
 
 export default HeaderImageCaption;
+
+export {
+	captionId,
+};

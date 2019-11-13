@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 
-import HeaderImageCaption from './HeaderImageCaption';
+import HeaderImageCaption, { captionId } from './HeaderImageCaption';
 import { BlockElement } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
 import { from } from '@guardian/src-foundations/mq';
@@ -41,7 +41,7 @@ const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Ele
         // This is not an iterator, ESLint is confused
         // eslint-disable-next-line react/jsx-key
         <div css={[className, headerImageStyles]}>
-            <figure>
+            <figure aria-labelledby={captionId}>
                 { imageElement(imageTypeData.alt, assets, imageSalt) }
                 <HeaderImageCaption caption={imageTypeData.caption} credit={imageTypeData.credit}/>
             </figure>
