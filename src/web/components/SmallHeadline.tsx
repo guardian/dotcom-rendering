@@ -11,10 +11,8 @@ const fontStyles = (size: HeadlineLinkSize) => css`
     ${headline[size]()};
 `;
 
-const hoverStyles = css`
-    :hover {
-        text-decoration: underline;
-    }
+const textDecorationUnderline = css`
+    text-decoration: underline;
 `;
 
 const underlinedStyles = (size: HeadlineLinkSize) => {
@@ -76,7 +74,7 @@ type Props = {
     headlineString: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the prefix (main)
     underlined?: boolean; // Some headlines have an underlined style
-    underlineOnHover?: boolean; // Some headlines have text-decoration underlined
+    showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     prefix?: PrefixType;
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: HeadlineLinkSize;
@@ -87,7 +85,7 @@ export const SmallHeadline = ({
     headlineString,
     pillar,
     underlined = false,
-    underlineOnHover = false,
+    showUnderline = false,
     prefix,
     showQuotes = false,
     size = 'xxsmall',
@@ -111,7 +109,7 @@ export const SmallHeadline = ({
                     className={cx(
                         underlined && underlinedStyles(size),
                         coloured && colourStyles(palette[pillar].dark),
-                        underlineOnHover && hoverStyles,
+                        showUnderline && textDecorationUnderline,
                     )}
                 >
                     {headlineString}
@@ -120,7 +118,7 @@ export const SmallHeadline = ({
                 <span
                     className={cx(
                         coloured && colourStyles(palette[pillar].dark),
-                        underlineOnHover && hoverStyles,
+                        showUnderline && textDecorationUnderline,
                     )}
                 >
                     {headlineString}

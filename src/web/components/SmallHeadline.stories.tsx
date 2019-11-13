@@ -234,19 +234,19 @@ export const Busy = () => (
 );
 Busy.story = { name: 'Lifestyle opinion' };
 
-export const UnderlineOnHover = () => (
+export const InUnderlinedState = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="If you hover me an underline will show"
+            headlineString="This is the underlined state when showUnderline is true"
             pillar="news"
-            underlineOnHover={true}
+            showUnderline={true}
             size="tiny"
             prefix={{
-                text: 'I am not underlined',
+                text: 'I am never underlined',
                 pillar: 'news',
                 showSlash: true,
             }}
         />
     </Section>
 );
-UnderlineOnHover.story = { name: 'Underline on hover' };
+InUnderlinedState.story = { name: 'With showUnderline true' };
