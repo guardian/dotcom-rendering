@@ -136,11 +136,9 @@ const Prefix = ({
 }: PrefixType) => {
     const prefixColour = palette[pillar].main;
     return (
-        <>
-            <span className={prefixStyles(prefixColour)}>
-                {showPulsingDot && <PulsingDot colour={prefixColour} />}
-                <span className={cx(showSlash && slashStyles)}>{text}</span>
-            </span>
-        </>
+        <span className={prefixStyles(prefixColour)}>
+            {showPulsingDot && <PulsingDot colour={prefixColour} />}
+            <span className={cx(showSlash && slashStyles)}>{text}</span>
+        </span>
     );
 };
