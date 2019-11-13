@@ -21,6 +21,8 @@ type IslandProps =
           config: ConfigType;
           pillar: Pillar;
           sectionName?: string;
+          geoTargeted?: boolean;
+          layout?: string;
       }
     | {
           config: ConfigType;
@@ -101,8 +103,21 @@ export const hydrateIslands = (
                 config,
                 pillar,
                 sectionName,
+                layout: 'grid',
+                geoTargeted: false,
             },
-            root: 'most-viewed',
+            root: 'most-viewed-grid',
+        },
+        {
+            component: MostViewed,
+            props: {
+                config,
+                pillar,
+                sectionName,
+                layout: 'list',
+                geoTargeted: true,
+            },
+            root: 'most-viewed-list',
         },
         {
             component: ReaderRevenueLinks,

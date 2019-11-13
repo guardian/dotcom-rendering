@@ -103,6 +103,8 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
 
         <Section islandId="most-viewed">
             <MostViewed
+                layout="grid"
+                geoTargeted={false}
                 sectionName={CAPI.sectionName}
                 config={config}
                 pillar={CAPI.pillar}

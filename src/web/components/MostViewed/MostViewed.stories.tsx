@@ -44,7 +44,13 @@ export const withTwoTabs = () => {
 
     return (
         <Section>
-            <MostViewed pillar="news" config={config} sectionName="politics" />;
+            <MostViewed
+                layout="grid"
+                pillar="news"
+                config={config}
+                sectionName="politics"
+            />
+            ;
         </Section>
     );
 };
@@ -58,8 +64,22 @@ export const withOneTabs = () => {
 
     return (
         <Section>
-            <MostViewed pillar="news" config={config} />;
+            <MostViewed layout="grid" pillar="news" config={config} />;
         </Section>
     );
 };
 withOneTabs.story = { name: 'with one tab' };
+
+export const usingListLayout = () => {
+    fetchMock.restore().getOnce('*', {
+        status: 200,
+        body: responseWithOneTab.data,
+    });
+
+    return (
+        <Section>
+            <MostViewed layout="list" pillar="news" config={config} />;
+        </Section>
+    );
+};
+usingListLayout.story = { name: 'using list layout' };

@@ -6,7 +6,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { TabType, TrailType } from './MostViewed';
-import { MostViewedItem } from './MostViewedItem';
+import { MostViewedGridItem } from './MostViewedGridItem';
 
 const thinGreySolid = `1px solid ${palette.neutral[86]}`;
 
@@ -158,7 +158,7 @@ export const MostViewedGrid = ({ data, sectionName, pillar }: Props) => {
                     data-link-context={`most-read/${sectionName}`}
                 >
                     {(tab.trails || []).map((trail: TrailType, ii: number) => (
-                        <MostViewedItem
+                        <MostViewedGridItem
                             key={trail.url}
                             trail={trail}
                             position={ii + 1}

@@ -119,7 +119,7 @@ type Props = {
     position: number;
 };
 
-export const MostViewedItem = ({ trail, position }: Props) => {
+export const MostViewedGridItem = ({ trail, position }: Props) => {
     return (
         <li
             className={gridItem(position)}

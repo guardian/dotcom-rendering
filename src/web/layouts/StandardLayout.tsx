@@ -80,6 +80,12 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => (
                 </ArticleContainer>
                 <ArticleRight>
                     <StickyAd config={config} />
+                    <Section
+                        showSideBorders={false}
+                        showTopBorder={false}
+                        padded={false}
+                        islandId="most-viewed-list"
+                    ></Section>
                 </ArticleRight>
             </Flex>
         </Section>
@@ -88,13 +94,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => (
             <OutbrainContainer config={config} />
         </Section>
 
-        <Section islandId="most-viewed">
-            <MostViewed
-                sectionName={CAPI.sectionName}
-                config={config}
-                pillar={CAPI.pillar}
-            />
-        </Section>
+        <Section islandId="most-viewed-grid"></Section>
 
         <Section padded={false}>
             <SubNav
