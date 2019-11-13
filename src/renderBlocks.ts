@@ -8,7 +8,6 @@ import { imageBlock } from './components/blocks/image';
 import { insertAdPlaceholders } from './ads';
 import { transform } from 'utils/contentTransformations';
 
-
 // ----- Setup ----- //
 
 type ReactNode = React.ReactNode;
@@ -44,7 +43,6 @@ function getAttrs(node: Node): {} {
 }
 
 function textElement(node: Node): ReactNode {
-
     switch (node.nodeName) {
         case 'P':
             return h(
@@ -66,11 +64,23 @@ function textElement(node: Node): ReactNode {
                 ...Array.from(node.childNodes).map(textElement),
             );
     }
-
 }
 
 function textBlock(fragment: DocumentFragment): ReactNode[] {
     return Array.from(fragment.children).map(textElement);
+}
+
+function tweetBlock(fragment: DocumentFragment): ReactNode[] {
+    return Array.from(fragment.children).map(node => {
+        switch (node.nodeName) {
+            case 'BLOCKQUOTE':
+                return h(
+                    'blockquote',
+                    getAttrs(node),
+                    ...Array.from(node.childNodes).map(textElement)
+                );
+        }
+    });
 }
 
 const pullquoteBlock = (fragment: DocumentFragment): ReactNode =>
@@ -100,6 +110,12 @@ function reactFromElement(element: any, imageSalt: string): Result<string, React
                 () => JSDOM.fragment(transform(element.textTypeData.html)),
                 'Failed to parse text element',
             ).map(textBlock);
+
+        case 'tweet':
+            return fromUnsafe(
+                () => JSDOM.fragment(element.tweetTypeData.html),
+                'Failed to parse text element',
+            ).map(tweetBlock);
 
         case 'pullquote':
 
@@ -149,9 +165,9 @@ function elementsToReact(elements: any, imageSalt: string): ParsedReact {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function render(bodyElements: any, imageSalt: string): Rendered {
+function render(bodyElements: any, imageSalt: string, ads = true): Rendered {
     const reactNodes = elementsToReact(bodyElements, imageSalt);
-    const reactNodesWithAds = insertAdPlaceholders(reactNodes.nodes)
+    const reactNodesWithAds = ads ? insertAdPlaceholders(reactNodes.nodes) : reactNodes.nodes;
     const main = h('article', null, ...reactNodesWithAds);
 
     return {
