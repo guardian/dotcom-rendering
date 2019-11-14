@@ -1,5 +1,5 @@
 import React from 'react';
-import { textSans } from 'styles';
+import { textSans, icons, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -40,6 +40,20 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
 
     blockquote {
         font-style: italic;
+        position: relative;
+        margin-left: 0;
+        padding-left: ${basePx(5)};
+
+        &::before {
+            ${icons}
+            font-style: normal;
+            font-size: 2.5rem;
+            content: '\\e11c';
+            color: ${kicker};
+            position: absolute;
+            left: 0;
+            top: -10px;
+        }
     }
 `;
 
