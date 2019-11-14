@@ -14,7 +14,6 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 
 import { palette } from '@guardian/src-foundations';
-// import { MostViewed } from '@root/src/web/components/MostViewed/MostViewed';
 
 import { Header } from '@root/src/web/components/Header/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -135,7 +134,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                             showTopBorder={false}
                             padded={false}
                             islandId="most-viewed-list"
-                        ></Section>
+                        />
                     </ArticleRight>
                 </Flex>
             </Section>
@@ -144,7 +143,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                 <OutbrainContainer config={config} />
             </Section>
 
-            <Section islandId="most-viewed-grid"></Section>
+            <Section islandId="most-viewed-grid" />
 
             <Section padded={false}>
                 <SubNav

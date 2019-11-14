@@ -11,7 +11,7 @@ export const response = {
                 byline: 'Jennifer Rankin and Daniel Boffey',
                 image:
                     'https://i.guim.co.uk/img/media/85377038aacd71b2c0e55b0a55478165fe6d3014/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=de2cecf52b21492f01daa4520c4f2a97',
-                isLiveBlog: false,
+                isLiveBlog: true,
                 pillar: 'news',
             },
             {
@@ -71,7 +71,7 @@ export const response = {
                 byline: 'Tanya Aldred,  Geoff Lemon  & Jonathan Howcroft',
                 image:
                     'https://i.guim.co.uk/img/media/5792a3b971914e21bd04cb13eed54159463ce90e/0_128_4991_2994/master/4991.jpg?width=300&quality=85&auto=format&fit=max&s=6d4eab73546172d576a1022c29bdbcd2',
-                isLiveBlog: true,
+                isLiveBlog: false,
                 pillar: 'news',
             },
             {

@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
-import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
@@ -73,10 +72,10 @@ const liveKicker = (colour: string) => css`
     font-weight: 700;
 
     &::after {
-        content: '/';
+        content: '';
         display: inline-block;
         font-weight: 900;
-        margin: 0 4px;
+        margin: 0 2px;
     }
 `;
 
@@ -98,12 +97,16 @@ export const MostViewedListItem = ({ trail, position }: Props) => (
         >
             <div className={textWrapperStyles}>
                 <div className={imageWrapperStyles}>
-                    <img src={trail.image} alt="" className={imageTagStyles} />
+                    <img
+                        src={trail.image}
+                        role="presentation"
+                        alt=""
+                        className={imageTagStyles}
+                    />
                 </div>
                 <h4>
                     {trail.isLiveBlog && (
                         <span className={liveKicker(getColour(trail.pillar))}>
-                            <PulsingDot colour={getColour(trail.pillar)} />
                             Live
                         </span>
                     )}

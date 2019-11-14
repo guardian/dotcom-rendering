@@ -1,6 +1,10 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
+import { Flex } from '@root/src/web/components/Flex';
+import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
+import { ArticleRight } from '@root/src/web/components/ArticleRight';
+import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
 
 import { MostViewedList } from './MostViewedList';
@@ -21,7 +25,23 @@ export const defaultStory = () => {
 
     return (
         <Section>
-            <MostViewedList />;
+            <Flex>
+                <ArticleLeft>
+                    <></>
+                </ArticleLeft>
+                <ArticleContainer>
+                    <></>
+                </ArticleContainer>
+                <ArticleRight>
+                    <Section
+                        showSideBorders={false}
+                        showTopBorder={false}
+                        padded={false}
+                    >
+                        <MostViewedList />
+                    </Section>
+                </ArticleRight>
+            </Flex>
         </Section>
     );
 };
@@ -35,8 +55,24 @@ export const limitItemsStory = () => {
 
     return (
         <Section>
-            <MostViewedList limitItems={8} />;
+            <Flex>
+                <ArticleLeft>
+                    <></>
+                </ArticleLeft>
+                <ArticleContainer>
+                    <></>
+                </ArticleContainer>
+                <ArticleRight>
+                    <Section
+                        showSideBorders={false}
+                        showTopBorder={false}
+                        padded={false}
+                    >
+                        <MostViewedList limitItems={8} />
+                    </Section>
+                </ArticleRight>
+            </Flex>
         </Section>
     );
 };
-defaultStory.story = { name: 'with a limit of 8 items' };
+limitItemsStory.story = { name: 'with a limit of 8 items' };

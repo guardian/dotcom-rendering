@@ -46,7 +46,7 @@ export const MostViewedList = ({ limitItems = 5 }: Props) => {
         return (
             <div className={wrapperStyles}>
                 <GuardianLines count={4} />
-                <h3 className={headingStyles}>Most viewed</h3>
+                <h3 className={headingStyles}>most viewed</h3>
                 <div>
                     {(data.trails || [])
                         .slice(0, limitItems)

@@ -12,7 +12,7 @@ jest.mock('../lib/api', () => ({
     useApi: jest.fn(),
 }));
 
-const VISIBLE = 'display: grid';
+// const VISIBLE = 'display: grid';
 // const HIDDEN = 'display: none';
 
 describe('MostViewedList', () => {
@@ -22,23 +22,30 @@ describe('MostViewedList', () => {
     it('should call the api and render the response as expected', async () => {
         useApi.mockReturnValue(response);
 
-        const { getByText, getAllByText, getByTestId } = render(
-            <MostViewedList />,
-        );
+        const { getAllByText } = render(<MostViewedList />);
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);
 
-        // Renders all 20 items
-        expect(getAllByText(/LINKTEXT/).length).toBe(20);
-
-        // First tab defaults to visible
-        expect(getByTestId(response.data.heading)).toHaveStyle(VISIBLE);
+        // Renders no more than 5 items
+        expect(getAllByText(/LINKTEXT/).length).toBe(5);
 
         // Prefixes live articles correctly
         expect(getAllByText(/Live/).length).toBe(1);
+    });
 
-        // Handles &nbsp char
-        expect(getByText('Across The Guardian')).toBeInTheDocument();
+    it('should implement a limit on the number of items', async () => {
+        useApi.mockReturnValue(response);
+
+        const { getAllByText } = render(<MostViewedList limitItems={3} />);
+
+        // Calls api once only
+        expect(useApi).toHaveBeenCalledTimes(1);
+
+        // Renders no more than 3 items
+        expect(getAllByText(/LINKTEXT/).length).toBe(3);
+
+        // Prefixes live articles correctly
+        expect(getAllByText(/Live/).length).toBe(1);
     });
 });
