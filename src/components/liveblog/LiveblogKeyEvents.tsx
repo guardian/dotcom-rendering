@@ -118,6 +118,10 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 			${icons}
 			content: "\\e002";
 			font-size: 16px;
+        }
+        
+        &::-webkit-details-marker {
+			display: none;
 		}
     }
 
