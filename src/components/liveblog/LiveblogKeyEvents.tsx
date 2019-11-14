@@ -1,5 +1,5 @@
 import React from 'react';
-import { icons, basePx } from 'styles';
+import { icons, basePx, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { Block } from 'types/capi-thrift-models';
@@ -15,7 +15,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
     padding: 8px 8px 0 8px;
     position: relative;
 
-    h3 {
+    h2 {
         color: ${kicker};
         margin: 0;
     }
@@ -95,29 +95,29 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
     }
 
     summary {
-        line-height: 30px;
-        text-align: center;
-        border: 1px solid ${palette.neutral[86]};
-        color: ${palette.neutral[7]};
-        width: ${basePx(4)};
-        height: ${basePx(4)};
-        display: inline-block;
-        position: absolute;
-        top: ${basePx(1)};
-        right: ${basePx(1)};
-        border-radius: 100%;
-        z-index: 2;
-        font-size: 2.8rem;
-        transition-duration: .2s;
+        display: block;
 
-        span {
-            font-size: 0;
+        h2 {
+            font-size: 18px;
+            ${headlineFont};
         }
 
-		&::before {
+		&::after {
 			${icons}
 			content: "\\e002";
-			font-size: 16px;
+            font-size: 16px;
+            position: absolute;
+            top: ${basePx(1)};
+            right: ${basePx(1)};
+            width: ${basePx(4)};
+            height: ${basePx(4)};
+            display: inline-block;
+            border-radius: 100%;
+            transition-duration: .2s;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid ${palette.neutral[86]};
+            color: ${palette.neutral[7]};
         }
         
         &::-webkit-details-marker {
@@ -125,7 +125,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 		}
     }
 
-    details[open] summary {
+    details[open] summary::after {
         transform: rotate(180deg);
     }
 
@@ -143,9 +143,8 @@ const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProp
     const keyEvents = bodyElements.filter(elem => elem.attributes.keyEvent as boolean).slice(0, 7);
     return (
         <section css={LiveblogKeyEventsStyles(pillarStyles)}>
-            <h3>Key events ({keyEvents.length})</h3>
             <details>
-                <summary><span>Tap to see key events</span></summary>
+                <summary><h2>Key Events ({keyEvents.length})</h2></summary>
                 <ul>
                     {keyEvents.map((event, index) => {
                         const relativeDate = makeRelativeDate(event.firstPublishedDate);
