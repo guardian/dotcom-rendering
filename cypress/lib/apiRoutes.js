@@ -13,6 +13,11 @@ export const setupApiRoutes = () => {
     // Listen for most-read call
     cy.route({
         method: 'GET',
+        url: '/most-read-geo.json',
+    }).as('getMostReadGeo');
+    // Listen for most-read call
+    cy.route({
+        method: 'GET',
         url: '/embed/card/**',
     }).as('getRichLinks');
 };

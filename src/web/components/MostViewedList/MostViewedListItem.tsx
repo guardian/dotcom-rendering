@@ -3,8 +3,9 @@ import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
-import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
+import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
+import { useHover } from '@root/src/web/components/lib/useHover';
 
 import { TrailType } from './MostViewedList';
 
@@ -67,60 +68,58 @@ const ageWarningStyles = css`
     margin-top: 8px;
 `;
 
-const liveKicker = (colour: string) => css`
-    color: ${colour};
-    font-weight: 700;
-
-    &::after {
-        content: '';
-        display: inline-block;
-        font-weight: 900;
-        margin: 0 2px;
-    }
-`;
-
-function getColour(pillar: Pillar) {
-    return palette[pillar].main;
-}
-
 type Props = {
     trail: TrailType;
     position: number;
 };
 
-export const MostViewedListItem = ({ trail, position }: Props) => (
-    <li className={listItemStyles}>
-        <a
-            className={linkTagStyles}
-            href={trail.url}
-            data-link-name={'article'}
-        >
-            <div className={textWrapperStyles}>
-                <div className={imageWrapperStyles}>
-                    <img
-                        src={trail.image}
-                        role="presentation"
-                        alt=""
-                        className={imageTagStyles}
+type ItemProps = {
+    prefix?: HeadlinePrefix;
+};
+
+export const MostViewedListItem = ({ trail, position }: Props) => {
+    const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
+
+    const itemProps: ItemProps = {};
+    if (trail.isLiveBlog) {
+        itemProps.prefix = {
+            text: 'Live',
+            pillar: trail.pillar,
+            showSlash: false,
+        };
+    }
+
+    return (
+        <li className={listItemStyles}>
+            <a
+                className={linkTagStyles}
+                href={trail.url}
+                data-link-name={'article'}
+                ref={hoverRef}
+            >
+                <div className={textWrapperStyles}>
+                    <div className={imageWrapperStyles}>
+                        <img
+                            src={trail.image}
+                            role="presentation"
+                            alt=""
+                            className={imageTagStyles}
+                        />
+                    </div>
+                    <SmallHeadline
+                        headlineString={trail.linkText}
+                        pillar={trail.pillar}
+                        size="tiny"
+                        showUnderline={isHovered}
+                        {...itemProps}
                     />
                 </div>
-                <h4>
-                    {trail.isLiveBlog && (
-                        <span className={liveKicker(getColour(trail.pillar))}>
-                            Live
-                        </span>
-                    )}
-                    {trail.pillar === 'opinion' && (
-                        <QuoteIcon colour={getColour(trail.pillar)} />
-                    )}
-                    <span className="linkText">{trail.linkText}</span>
-                </h4>
-            </div>
-            {trail.ageWarning && (
-                <div className={ageWarningStyles}>
-                    <AgeWarning age={trail.ageWarning} size="small" />
-                </div>
-            )}
-        </a>
-    </li>
-);
+                {trail.ageWarning && (
+                    <div className={ageWarningStyles}>
+                        <AgeWarning age={trail.ageWarning} size="small" />
+                    </div>
+                )}
+            </a>
+        </li>
+    );
+};
