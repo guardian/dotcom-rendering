@@ -27,7 +27,7 @@ const linkStyles = ({
         background-color: ${backgroundOnHover};
     }
 
-    /* We aboslute position the 1 pixel top bar in
+    /* We absolutely position the 1 pixel top bar in
        the card so this is required here */
     position: relative;
 `;
