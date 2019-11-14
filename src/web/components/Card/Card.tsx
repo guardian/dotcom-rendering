@@ -2,7 +2,6 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-// import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { CardWrapper } from './CardWrapper';
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
