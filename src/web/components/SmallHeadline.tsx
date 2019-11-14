@@ -61,13 +61,6 @@ const slashStyles = css`
     }
 `;
 
-type PrefixType = {
-    text: string;
-    pillar?: Pillar;
-    showPulsingDot?: boolean;
-    showSlash?: boolean;
-};
-
 type HeadlineLinkSize = 'tiny' | 'xxsmall' | 'xsmall';
 
 type Props = {
