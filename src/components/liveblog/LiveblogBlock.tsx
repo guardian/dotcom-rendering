@@ -5,7 +5,7 @@ import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'utils/date';
 import LeftColumn from 'components/shared/LeftColumn';
-import { PillarStyles, getPillarStyles, Pillar } from 'types/Pillar';
+import { PillarStyles } from 'types/Pillar';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -35,7 +35,7 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
     }
 
     .rich-link a {
-        color: ${getPillarStyles(Pillar.news).kicker};
+        color: ${kicker};
     }
 
     blockquote {
