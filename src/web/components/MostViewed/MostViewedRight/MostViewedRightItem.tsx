@@ -25,16 +25,9 @@ const linkTagStyles = css`
     ${headline.tiny()};
 
     &:link,
-    &:active {
+    &:active,
+    &:visited {
         color: ${palette.neutral[7]};
-    }
-
-    &:hover .linkText {
-        text-decoration: underline;
-    }
-
-    &:visited .linkText {
-        color: ${palette.neutral[46]};
     }
 `;
 

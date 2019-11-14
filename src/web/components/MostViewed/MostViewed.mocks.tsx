@@ -23,7 +23,7 @@ export const mockTab1 = {
             image:
                 'https://i.guim.co.uk/img/media/579fd19481e46b9d6ed3c69c2a6992483df84478/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=63a6a5c13a8087e607a44ce5c7da2090',
             isLiveBlog: false,
-            pillar: 'news',
+            pillar: 'opinion',
             ageWarning: '4 months',
         },
         {
@@ -35,8 +35,8 @@ export const mockTab1 = {
             byline: 'Vic Marks at the Oval',
             image:
                 'https://i.guim.co.uk/img/media/0df1fc1a2b78aa1772b4b43c2e5ebfc7f43111a8/0_91_5445_3267/master/5445.jpg?width=300&quality=85&auto=format&fit=max&s=3da9f89b54b0126fec2677117e73487e',
-            isLiveBlog: false,
-            pillar: 'news',
+            isLiveBlog: true,
+            pillar: 'sport',
         },
         {
             url:
@@ -47,8 +47,8 @@ export const mockTab1 = {
             byline: 'Simon Murphy',
             image:
                 'https://i.guim.co.uk/img/media/57a9a1a56c7d319a8f57a9c8767793ae0481db4c/0_95_4950_2970/master/4950.jpg?width=300&quality=85&auto=format&fit=max&s=77949a713212b69499d0dc6b5bdb2faf',
-            isLiveBlog: false,
-            pillar: 'news',
+            isLiveBlog: true,
+            pillar: 'culture',
         },
         {
             url:
@@ -60,7 +60,7 @@ export const mockTab1 = {
             image:
                 'https://i.guim.co.uk/img/media/e05185cce0a0c6953e666276caa98f6ea104c989/0_214_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=188a7a9ed42517b9462ae0788fe96a0a',
             isLiveBlog: false,
-            pillar: 'opinion',
+            pillar: 'lifestyle',
         },
         {
             url:

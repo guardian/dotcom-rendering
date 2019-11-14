@@ -68,7 +68,7 @@ describe('MostViewedFooter', () => {
         );
 
         // Prefixes live articles correctly
-        expect(getAllByText(/Live/).length).toBe(1);
+        expect(getAllByText(/Live/).length).toBe(3);
 
         // Handles &nbsp char
         expect(getByText('Across The Guardian')).toBeInTheDocument();

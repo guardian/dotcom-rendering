@@ -27,7 +27,7 @@ describe('MostViewedList', () => {
         expect(getAllByText(/LINKTEXT/).length).toBe(5);
 
         // Prefixes live articles correctly
-        expect(getAllByText(/Live/).length).toBe(1);
+        expect(getAllByText(/Live/).length).toBe(3);
     });
 
     it('should implement a limit on the number of items', async () => {
@@ -42,6 +42,6 @@ describe('MostViewedList', () => {
         expect(getAllByText(/LINKTEXT/).length).toBe(3);
 
         // Prefixes live articles correctly
-        expect(getAllByText(/Live/).length).toBe(1);
+        expect(getAllByText(/Live/).length).toBe(2);
     });
 });
