@@ -108,6 +108,7 @@ export const ImageBlockComponent: React.FC<{
                 element={element}
                 pillar={pillar}
                 hideCaption={hideCaption}
+                role={element.role}
             />
         </div>
     );
