@@ -26,7 +26,7 @@ describe('E2E Page rendering', function() {
                     expect(xhr.response.body).to.have.property('heading');
                     expect(xhr.status).to.be.equal(200);
 
-                    cy.contains('Most viewed');
+                    cy.contains('most viewed');
                 });
 
                 cy.wait('@getShareCount').then(xhr => {

@@ -7,13 +7,13 @@ import { ArticleRight } from '@root/src/web/components/ArticleRight';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
 
-import { MostViewedList } from './MostViewedList';
-import { response } from './MostViewedList.mocks';
+import { MostViewedRight } from './MostViewedRight';
+import { response } from './MostViewedRight.mocks';
 
 /* tslint:disable */
 export default {
-    component: MostViewedList,
-    title: 'Components/MostViewedList',
+    component: MostViewedRight,
+    title: 'Components/MostViewedRight',
 };
 /* tslint:enable */
 
@@ -38,7 +38,7 @@ export const defaultStory = () => {
                         showTopBorder={false}
                         padded={false}
                     >
-                        <MostViewedList />
+                        <MostViewedRight />
                     </Section>
                 </ArticleRight>
             </Flex>
@@ -68,7 +68,7 @@ export const limitItemsStory = () => {
                         showTopBorder={false}
                         padded={false}
                     >
-                        <MostViewedList limitItems={3} />
+                        <MostViewedRight limitItems={3} />
                     </Section>
                 </ArticleRight>
             </Flex>
@@ -85,7 +85,7 @@ export const outsideContextStory = () => {
 
     return (
         <Section>
-            <MostViewedList />
+            <MostViewedRight />
         </Section>
     );
 };

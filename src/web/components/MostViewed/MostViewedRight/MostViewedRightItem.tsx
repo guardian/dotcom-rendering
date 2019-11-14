@@ -74,7 +74,7 @@ type ItemConditionalProps = {
     prefix?: HeadlinePrefix;
 };
 
-export const MostViewedListItem = ({ trail }: Props) => {
+export const MostViewedRightItem = ({ trail }: Props) => {
     const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
     const itemProps: ItemConditionalProps = {};

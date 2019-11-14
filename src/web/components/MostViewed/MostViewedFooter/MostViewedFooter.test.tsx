@@ -1,23 +1,23 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { MostViewedGrid } from './MostViewedGrid';
+import { MostViewedFooter } from './MostViewedFooter';
 import {
     responseWithTwoTabs,
     responseWithOneTab,
-} from './MostViewedGrid.mocks';
+} from './MostViewedFooter.mocks';
 
-import { useApi as useApi_ } from '../lib/api';
+import { useApi as useApi_ } from '../../lib/api';
 
 const useApi: any = useApi_;
 
-jest.mock('../lib/api', () => ({
+jest.mock('../../lib/api', () => ({
     useApi: jest.fn(),
 }));
 
 const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
-describe('MostViewedGrid', () => {
+describe('MostViewedFooter', () => {
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         sentryHost: '',
@@ -49,7 +49,7 @@ describe('MostViewedGrid', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -78,7 +78,7 @@ describe('MostViewedGrid', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByTestId, getByText } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -107,7 +107,7 @@ describe('MostViewedGrid', () => {
         useApi.mockReturnValue(responseWithOneTab);
 
         const { queryByText } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -124,7 +124,7 @@ describe('MostViewedGrid', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -157,7 +157,7 @@ describe('MostViewedGrid', () => {
         });
 
         const { getByText } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -188,7 +188,7 @@ describe('MostViewedGrid', () => {
         });
 
         const { queryByText } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -219,7 +219,7 @@ describe('MostViewedGrid', () => {
         });
 
         const { getByTestId } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -250,7 +250,7 @@ describe('MostViewedGrid', () => {
         });
 
         const { queryByTestId } = render(
-            <MostViewedGrid
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"

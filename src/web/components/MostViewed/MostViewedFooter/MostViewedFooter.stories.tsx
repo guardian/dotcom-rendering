@@ -3,11 +3,11 @@ import fetchMock from 'fetch-mock';
 
 import { Section } from '@frontend/web/components/Section';
 
-import { MostViewedGrid } from './MostViewedGrid';
+import { MostViewedFooter } from './MostViewedFooter';
 import {
     responseWithTwoTabs,
     responseWithOneTab,
-} from './MostViewedGrid.mocks';
+} from './MostViewedFooter.mocks';
 
 const config: ConfigType = {
     ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
@@ -34,8 +34,8 @@ const config: ConfigType = {
 
 /* tslint:disable */
 export default {
-    component: MostViewedGrid,
-    title: 'Components/MostViewedGrid',
+    component: MostViewedFooter,
+    title: 'Components/MostViewedFooter',
 };
 /* tslint:enable */
 
@@ -47,7 +47,7 @@ export const withTwoTabs = () => {
 
     return (
         <Section>
-            <MostViewedGrid
+            <MostViewedFooter
                 pillar="news"
                 config={config}
                 sectionName="politics"
@@ -66,7 +66,7 @@ export const withOneTabs = () => {
 
     return (
         <Section>
-            <MostViewedGrid pillar="news" config={config} />;
+            <MostViewedFooter pillar="news" config={config} />;
         </Section>
     );
 };

@@ -3,8 +3,8 @@ import { hydrate } from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
-import { MostViewedGrid } from '@frontend/web/components/MostViewedGrid/MostViewedGrid';
-import { MostViewedList } from '@frontend/web/components/MostViewedList/MostViewedList';
+import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
+import { MostViewedRight } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRight';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
@@ -92,7 +92,7 @@ export const hydrateIslands = (
             root: 'edition-root',
         },
         {
-            component: MostViewedList,
+            component: MostViewedRight,
             props: {},
             root: 'most-viewed-list',
         },
@@ -105,7 +105,7 @@ export const hydrateIslands = (
             root: 'share-count',
         },
         {
-            component: MostViewedGrid,
+            component: MostViewedFooter,
             props: {
                 config,
                 pillar,

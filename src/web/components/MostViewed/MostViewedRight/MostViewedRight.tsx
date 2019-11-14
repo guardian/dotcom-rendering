@@ -3,7 +3,7 @@ import { useApi } from '@root/src/web/components/lib/api';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
-import { MostViewedListItem } from './MostViewedListItem';
+import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
     margin-top: 24px;
@@ -18,7 +18,7 @@ interface Props {
     limitItems?: number;
 }
 
-export const MostViewedList = ({ limitItems = 5 }: Props) => {
+export const MostViewedRight = ({ limitItems = 5 }: Props) => {
     const endpointUrl: string =
         'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
     const { data, error } = useApi<any>(endpointUrl);
@@ -37,7 +37,10 @@ export const MostViewedList = ({ limitItems = 5 }: Props) => {
                     {(data.trails || [])
                         .slice(0, limitItems)
                         .map((trail: TrailType, ii: number) => (
-                            <MostViewedListItem key={trail.url} trail={trail} />
+                            <MostViewedRightItem
+                                key={trail.url}
+                                trail={trail}
+                            />
                         ))}
                 </div>
             </div>

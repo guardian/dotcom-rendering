@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { MostViewedList } from './MostViewedList';
-import { response } from './MostViewedList.mocks';
+import { MostViewedRight } from './MostViewedRight';
+import { response } from './MostViewedRight.mocks';
 
-import { useApi as useApi_ } from '../lib/api';
+import { useApi as useApi_ } from '../../lib/api';
 
 const useApi: any = useApi_;
 
-jest.mock('../lib/api', () => ({
+jest.mock('../../lib/api', () => ({
     useApi: jest.fn(),
 }));
 
@@ -18,7 +18,7 @@ describe('MostViewedList', () => {
     it('should call the api and render the response as expected', async () => {
         useApi.mockReturnValue(response);
 
-        const { getAllByText } = render(<MostViewedList />);
+        const { getAllByText } = render(<MostViewedRight />);
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);
@@ -33,7 +33,7 @@ describe('MostViewedList', () => {
     it('should implement a limit on the number of items', async () => {
         useApi.mockReturnValue(response);
 
-        const { getAllByText } = render(<MostViewedList limitItems={3} />);
+        const { getAllByText } = render(<MostViewedRight limitItems={3} />);
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);

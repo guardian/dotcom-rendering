@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
-import { MostViewedGridMain } from './MostViewedGridMain';
+import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
     display: flex;
@@ -97,7 +97,7 @@ function buildSectionUrl(sectionName?: string) {
     return `https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`;
 }
 
-export const MostViewedGrid = ({ config, sectionName, pillar }: Props) => {
+export const MostViewedFooter = ({ config, sectionName, pillar }: Props) => {
     const url = buildSectionUrl(sectionName);
     const { data, error } = useApi<TabType[]>(url);
 
@@ -118,7 +118,7 @@ export const MostViewedGrid = ({ config, sectionName, pillar }: Props) => {
                         <h2 className={headingStyles}>Most popular</h2>
                     </section>
                     <section className={stackBelow('desktop')}>
-                        <MostViewedGridMain
+                        <MostViewedFooterGrid
                             data={data}
                             sectionName={sectionName}
                             pillar={pillar}
