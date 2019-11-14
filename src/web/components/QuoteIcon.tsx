@@ -2,20 +2,56 @@ import React from 'react';
 import { css } from 'emotion';
 
 const quoteStyles = (colour?: string) => css`
-    height: 1.0625rem;
-    width: 0.57375rem;
+    height: 17px;
+    width: 9px;
     margin-right: 12px;
-    transform: translateY(-0.0625rem);
+    transform: translateY(-1px);
     overflow: visible;
     fill: ${colour && colour};
 `;
 
-type Props = {
-    colour?: string;
+const sizeStyles = (size: 'tiny' | 'xxsmall' | 'xsmall') => {
+    switch (size) {
+        case 'tiny':
+            return css`
+                svg {
+                    height: 16px;
+                    width: 8px;
+                }
+            `;
+        case 'xxsmall':
+            return css`
+                margin-right: 4px;
+                svg {
+                    height: 20px;
+                    width: 11px;
+                }
+            `;
+        case 'xsmall':
+            return css`
+                margin-right: 8px;
+                svg {
+                    height: 24px;
+                    width: 13px;
+                }
+            `;
+        default:
+            return css`
+                svg {
+                    height: 20px;
+                    width: 11px;
+                }
+            `;
+    }
 };
 
-export const QuoteIcon = ({ colour }: Props) => (
-    <>
+type Props = {
+    colour?: string;
+    size?: 'tiny' | 'xxsmall' | 'xsmall';
+};
+
+export const QuoteIcon = ({ colour, size = 'xxsmall' }: Props) => (
+    <span className={sizeStyles(size)}>
         <svg
             width="70"
             height="49"
@@ -25,5 +61,5 @@ export const QuoteIcon = ({ colour }: Props) => (
         >
             <path d="M69.587.9c-1.842 15.556-3.89 31.316-4.708 48.1H37.043c3.07-16.784 8.391-32.544 17.602-48.1h14.942zM32.949.9c-2.047 15.556-4.094 31.316-4.912 48.1H.2C3.066 32.216 8.592 16.456 17.598.9h15.35z" />
         </svg>
-    </>
+    </span>
 );
