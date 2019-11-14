@@ -334,6 +334,15 @@ interface HeadlinePrefix {
     showSlash?: boolean;
 }
 
+interface TrailType {
+    url: string;
+    linkText: string;
+    isLiveBlog: boolean;
+    ageWarning: string;
+    image?: string;
+    pillar: Pillar;
+}
+
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------

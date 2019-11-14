@@ -7,8 +7,6 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
 import { useHover } from '@root/src/web/components/lib/useHover';
 
-import { TrailType } from './MostViewedList';
-
 const listItemStyles = css`
     list-style: none;
     padding-top: 4px;
@@ -70,17 +68,16 @@ const ageWarningStyles = css`
 
 type Props = {
     trail: TrailType;
-    position: number;
 };
 
-type ItemProps = {
+type ItemConditionalProps = {
     prefix?: HeadlinePrefix;
 };
 
-export const MostViewedListItem = ({ trail, position }: Props) => {
+export const MostViewedListItem = ({ trail }: Props) => {
     const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
-    const itemProps: ItemProps = {};
+    const itemProps: ItemConditionalProps = {};
     if (trail.isLiveBlog) {
         itemProps.prefix = {
             text: 'Live',

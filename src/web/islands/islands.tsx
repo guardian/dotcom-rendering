@@ -92,6 +92,11 @@ export const hydrateIslands = (
             root: 'edition-root',
         },
         {
+            component: MostViewedList,
+            props: {},
+            root: 'most-viewed-list',
+        },
+        {
             component: ShareCount,
             props: {
                 config,
@@ -107,11 +112,6 @@ export const hydrateIslands = (
                 sectionName,
             },
             root: 'most-viewed-grid',
-        },
-        {
-            component: MostViewedList,
-            props: {},
-            root: 'most-viewed-list',
         },
         {
             component: ReaderRevenueLinks,

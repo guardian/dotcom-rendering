@@ -1,5 +1,4 @@
 import React from 'react';
-// import { render, fireEvent } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import { MostViewedList } from './MostViewedList';
 import { response } from './MostViewedList.mocks';
@@ -11,9 +10,6 @@ const useApi: any = useApi_;
 jest.mock('../lib/api', () => ({
     useApi: jest.fn(),
 }));
-
-// const VISIBLE = 'display: grid';
-// const HIDDEN = 'display: none';
 
 describe('MostViewedList', () => {
     beforeEach(() => {

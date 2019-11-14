@@ -5,7 +5,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
-import { TabType, TrailType } from './MostViewedGrid';
+import { TabType } from './MostViewedGrid';
 import { MostViewedGridItem } from './MostViewedGridItem';
 
 const thinGreySolid = `1px solid ${palette.neutral[86]}`;

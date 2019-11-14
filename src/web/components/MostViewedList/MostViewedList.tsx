@@ -14,20 +14,6 @@ const headingStyles = css`
     margin-bottom: 8px;
 `;
 
-export interface TrailType {
-    url: string;
-    linkText: string;
-    isLiveBlog: boolean;
-    ageWarning: string;
-    image?: string;
-    pillar: Pillar;
-}
-
-export interface TabType {
-    heading: string;
-    trails: TrailType[];
-}
-
 interface Props {
     limitItems?: number;
 }
@@ -51,11 +37,7 @@ export const MostViewedList = ({ limitItems = 5 }: Props) => {
                     {(data.trails || [])
                         .slice(0, limitItems)
                         .map((trail: TrailType, ii: number) => (
-                            <MostViewedListItem
-                                key={trail.url}
-                                trail={trail}
-                                position={ii + 1}
-                            />
+                            <MostViewedListItem key={trail.url} trail={trail} />
                         ))}
                 </div>
             </div>

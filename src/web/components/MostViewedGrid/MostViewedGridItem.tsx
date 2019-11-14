@@ -9,8 +9,6 @@ import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
-import { TrailType } from './MostViewedGrid';
-
 const gridItem = (position: number) => css`
     position: relative;
 

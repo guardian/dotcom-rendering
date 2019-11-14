@@ -75,15 +75,6 @@ const mostPopularAdStyle = css`
     ${labelStyles};
 `;
 
-export interface TrailType {
-    url: string;
-    linkText: string;
-    isLiveBlog: boolean;
-    ageWarning: string;
-    pillar: Pillar;
-    image?: string;
-}
-
 export interface TabType {
     heading: string;
     trails: TrailType[];
