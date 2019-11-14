@@ -10,6 +10,10 @@ const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => c
     color: ${palette.neutral[100]};
     margin: 32px 0 24px 0;
     
+    &:focus {
+        text-decoration: underline;
+    }
+    
     span {
         background: ${kicker};
         padding: 6px 16px;

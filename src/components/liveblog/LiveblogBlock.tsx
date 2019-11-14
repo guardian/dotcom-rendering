@@ -5,7 +5,7 @@ import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'utils/date';
 import LeftColumn from 'components/shared/LeftColumn';
-import { PillarStyles } from 'types/Pillar';
+import { PillarStyles, getPillarStyles, Pillar } from 'types/Pillar';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -33,6 +33,14 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
         margin-left: 8px;
         margin-right: 8px;
     }
+
+    .rich-link a {
+        color: ${getPillarStyles(Pillar.news).kicker};
+    }
+
+    blockquote {
+        font-style: italic;
+    }
 `;
 
 interface LiveblogBlockProps {
@@ -44,12 +52,12 @@ interface LiveblogBlockProps {
     children: JSX.Element;
 }
 
-const Title = ({ title, highlighted }: { title: string; highlighted: boolean }): JSX.Element => {
+const Title = ({ title, highlighted }: { title: string; highlighted: boolean }): JSX.Element | null => {
     const TitleStyles = css`
         padding: 0.5rem 0.125rem;
         background-color: ${palette.yellow.main};
     `
-    return <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3>
+    return title ? <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3> : null;
 }
 
 const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {

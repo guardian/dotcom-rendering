@@ -93,7 +93,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         }
     }
 
-    blockquote {
+    .pullquote {
         font-weight: 200;
         font-size: 2.2rem;
         line-height: 1.3;

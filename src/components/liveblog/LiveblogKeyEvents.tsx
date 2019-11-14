@@ -94,11 +94,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
         }
     }
 
-    input[type=checkbox] {
-        display: none;
-    }
-
-    label {
+    summary {
         line-height: 30px;
         text-align: center;
         border: 1px solid ${palette.neutral[86]};
@@ -114,28 +110,19 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
         font-size: 2.8rem;
         transition-duration: .2s;
 
+        span {
+            font-size: 0;
+        }
+
 		&::before {
 			${icons}
 			content: "\\e002";
 			font-size: 16px;
 		}
-	}
-
-	input[type=checkbox] ~ div {
-        display: none
     }
 
-    input[type=checkbox]:checked + label {
+    details[open] summary {
         transform: rotate(180deg);
-    }
-
-	input[type=checkbox]:checked ~ div {
-		display: block;
-		min-height: 44px;
-		max-height: 999px;
-		overflow: hidden;
-        z-index: 1;
-        transition-duration: .2s;
     }
 
     a {
@@ -153,22 +140,19 @@ const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProp
     return (
         <section css={LiveblogKeyEventsStyles(pillarStyles)}>
             <h3>Key events ({keyEvents.length})</h3>
-            <div>
-                <input id="collapsible" type="checkbox"/>
-                <label htmlFor="collapsible"></label>
-                <div>
-                    <ul>
-                        {keyEvents.map((event, index) => {
-                            const relativeDate = makeRelativeDate(event.firstPublishedDate);
-                            const time = relativeDate ? <time>{relativeDate}</time> : null;
-                            return <li key={index}>
-                                { time }
-                                <a>{event.title}</a>
-                            </li>
-                        })}
-                    </ul>
-                </div>
-            </div>
+            <details>
+                <summary><span>Tap to see key events</span></summary>
+                <ul>
+                    {keyEvents.map((event, index) => {
+                        const relativeDate = makeRelativeDate(event.firstPublishedDate);
+                        const time = relativeDate ? <time>{relativeDate}</time> : null;
+                        return <li key={index}>
+                            { time }
+                            <a>{event.title}</a>
+                        </li>
+                    })}
+                </ul>
+            </details>
         </section>
     )
 }
