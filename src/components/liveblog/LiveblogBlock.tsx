@@ -52,7 +52,12 @@ interface LiveblogBlockProps {
     children: JSX.Element;
 }
 
-const Title = ({ title, highlighted }: { title: string; highlighted: boolean }): JSX.Element | null => {
+interface TitleProps {
+    title: string;
+    highlighted: boolean;
+}
+
+const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
     const TitleStyles = css`
         padding: 0.5rem 0.125rem;
         background-color: ${palette.yellow.main};
