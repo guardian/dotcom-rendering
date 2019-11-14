@@ -68,11 +68,27 @@ export const limitItemsStory = () => {
                         showTopBorder={false}
                         padded={false}
                     >
-                        <MostViewedList limitItems={8} />
+                        <MostViewedList limitItems={3} />
                     </Section>
                 </ArticleRight>
             </Flex>
         </Section>
     );
 };
-limitItemsStory.story = { name: 'with a limit of 8 items' };
+limitItemsStory.story = { name: 'with a limit of 3 items' };
+
+export const outsideContextStory = () => {
+    fetchMock.restore().getOnce('*', {
+        status: 200,
+        body: response.data,
+    });
+
+    return (
+        <Section>
+            <MostViewedList />
+        </Section>
+    );
+};
+outsideContextStory.story = {
+    name: 'inside responsive wrapper',
+};
