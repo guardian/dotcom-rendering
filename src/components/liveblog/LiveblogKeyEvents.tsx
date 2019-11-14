@@ -102,9 +102,9 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
             ${headlineFont};
         }
 
-		&::after {
-			${icons}
-			content: "\\e002";
+        &::after {
+            ${icons}
+            content: "\\e002";
             font-size: 16px;
             position: absolute;
             top: ${basePx(1)};
@@ -121,8 +121,8 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
         }
         
         &::-webkit-details-marker {
-			display: none;
-		}
+            display: none;
+        }
     }
 
     details[open] summary::after {
