@@ -102,7 +102,7 @@ export const MostViewedFooter = ({ config, sectionName, pillar }: Props) => {
     const { data, error } = useApi<TabType[]>(url);
 
     if (error) {
-        window.guardian.modules.sentry.reportError(error, 'most-viewed');
+        window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
         return null;
     }
 

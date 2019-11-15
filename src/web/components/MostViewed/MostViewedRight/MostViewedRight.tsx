@@ -24,7 +24,7 @@ export const MostViewedRight = ({ limitItems = 5 }: Props) => {
     const { data, error } = useApi<any>(endpointUrl);
 
     if (error) {
-        window.guardian.modules.sentry.reportError(error, 'most-viewed');
+        window.guardian.modules.sentry.reportError(error, 'most-viewed-right');
         return null;
     }
 
