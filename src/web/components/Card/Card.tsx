@@ -24,15 +24,27 @@ const linkStyles = ({
         background-color: ${backgroundOnHover};
     }
 
-    /* We absolutely position the 1 pixel top bar in
-       the card so this is required here */
-    position: relative;
+    /* Sometimes a headline contains it's own link so we use the
+       approach described below to deal with nested links
+       See: https://css-tricks.com/nested-links/ */
+    :before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
 `;
 
 const listStyles = css`
     /* Here we ensure the card stretches to fill the containing space */
     flex-basis: 100%;
     display: flex;
+
+    /* We absolutely position the 1 pixel top bar in
+       the card so this is required here */
+    position: relative;
 
     /* Set spacing margins on the li element */
     margin-left: 10px;
