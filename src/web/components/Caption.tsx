@@ -16,7 +16,7 @@ const captionStyle = (role?: RoleType) => css`
     color: ${palette.neutral[46]};
     ${from.leftCol} {
         width: ${role && (role === 'showcase' || role === 'supporting') && '140px'};
-        position: ${role && (role === 'showcase' || role === 'supporting') && 'absolute'}
+        position: ${role && (role === 'showcase' || role === 'supporting') && 'absolute'};
     }
     ${from.wide} {
         width: ${role && (role === 'showcase' || role === 'supporting') && '220px'};
@@ -46,12 +46,12 @@ export const Caption: React.FC<{
     children,
     role,
 }) => {
-    const iconStyle = css`
+        const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
         padding-right: 3px;
     `;
 
-    const captionLink = css`
+        const captionLink = css`
         a {
             color: ${pillarPalette[pillar].main};
             text-decoration: none;
@@ -64,39 +64,39 @@ export const Caption: React.FC<{
         }
     `;
 
-    const getCaptionHtml = () => {
-        if (dirtyHtml) {
-            return (
-                <span
-                    // tslint:disable-line:react-no-dangerous-html
-                    className={captionLink}
-                    dangerouslySetInnerHTML={{
-                        __html: captionText || '',
-                    }}
-                    key={'caption'}
-                />
-            );
-        }
-        return captionText;
-    };
+        const getCaptionHtml = () => {
+            if (dirtyHtml) {
+                return (
+                    <span
+                        // tslint:disable-line:react-no-dangerous-html
+                        className={captionLink}
+                        dangerouslySetInnerHTML={{
+                            __html: captionText || '',
+                        }}
+                        key={'caption'}
+                    />
+                );
+            }
+            return captionText;
+        };
 
-    return (
-        <figure className={figureStyle}>
-            {children}
-            {captionText && (
-                <>
-                    <figcaption
-                        className={cx(captionStyle(role), {
-                            [captionPadding]: padCaption,
-                        })}
-                    >
-                        <span className={iconStyle}>
-                            <TriangleIcon />
-                        </span>
-                        {getCaptionHtml()} {displayCredit && credit}
-                    </figcaption>
-                </>
-            )}
-        </figure>
-    );
-};
+        return (
+            <figure className={figureStyle}>
+                {children}
+                {captionText && (
+                    <>
+                        <figcaption
+                            className={cx(captionStyle(role), {
+                                [captionPadding]: padCaption,
+                            })}
+                        >
+                            <span className={iconStyle}>
+                                <TriangleIcon />
+                            </span>
+                            {getCaptionHtml()} {displayCredit && credit}
+                        </figcaption>
+                    </>
+                )}
+            </figure>
+        );
+    };
