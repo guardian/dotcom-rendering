@@ -333,6 +333,23 @@ interface Props {
     data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
+// Defines a prefix to be used with a headline (e.g. 'Live /')
+interface HeadlinePrefix {
+    text: string;
+    pillar?: Pillar;
+    showPulsingDot?: boolean;
+    showSlash?: boolean;
+}
+
+interface TrailType {
+    url: string;
+    linkText: string;
+    isLiveBlog: boolean;
+    ageWarning: string;
+    image?: string;
+    pillar: Pillar;
+}
+
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------

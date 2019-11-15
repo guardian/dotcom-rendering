@@ -13,7 +13,6 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 
 import { palette } from '@guardian/src-foundations';
-import { MostViewed } from '@root/src/web/components/MostViewed/MostViewed';
 import { Header } from '@root/src/web/components/Header/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -127,13 +126,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
             <OutbrainContainer config={config} />
         </Section>
 
-        <Section islandId="most-viewed">
-            <MostViewed
-                sectionName={CAPI.sectionName}
-                config={config}
-                pillar={CAPI.pillar}
-            />
-        </Section>
+        <Section islandId="most-viewed-footer" />
 
         <Section padded={false}>
             <SubNav

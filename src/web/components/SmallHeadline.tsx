@@ -79,7 +79,7 @@ type Props = {
     pillar: Pillar; // Used to colour the headline (dark) and the prefix (main)
     underlined?: boolean; // Some headlines have an underlined style
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-    prefix?: PrefixType;
+    prefix?: HeadlinePrefix;
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: HeadlineLinkSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
@@ -132,7 +132,7 @@ const Prefix = ({
     pillar = 'news',
     showPulsingDot,
     showSlash = true,
-}: PrefixType) => {
+}: HeadlinePrefix) => {
     const prefixColour = palette[pillar].main;
     return (
         <span className={prefixStyles(prefixColour)}>
