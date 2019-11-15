@@ -16,6 +16,7 @@ const captionStyle = (role?: RoleType) => css`
     color: ${palette.neutral[46]};
     ${from.leftCol} {
         width: ${role && role === 'showcase' && '200px'};
+        position: ${role && (role === 'showcase' || role === 'supporting') && 'absolute'}
     }
 `;
 
