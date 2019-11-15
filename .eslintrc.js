@@ -7,7 +7,6 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended',
         'airbnb-base',
         'plugin:@typescript-eslint/recommended',
         'prettier',
@@ -35,6 +34,8 @@ module.exports = {
                     '@frontend/amp/lib/',
                     '@frontend/amp/types',
                     '@frontend/static/icons',
+                    '@frontend/model',
+                    '@frontend/web/',
                     '@testing-library',
                     '@guardian/frontend/static/',
                 ],
@@ -67,5 +68,8 @@ module.exports = {
                 },
             },
         ],
+    },
+    settings: {
+        'import/resolver': { 'babel-module': { extensions: ['.ts', '.tsx'] } },
     },
 };
