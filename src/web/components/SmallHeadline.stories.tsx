@@ -262,8 +262,57 @@ export const linkStory = () => (
                 showSlash: true,
             }}
             coloured={true}
-            linkTo="some/path/to/link/to"
+            link={{
+                to:
+                    'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+            }}
         />
     </Section>
 );
-linkStory.story = { name: 'With linkTo provided' };
+linkStory.story = { name: 'With a link provided' };
+
+export const visitedLinkStory = () => (
+    <Section showTopBorder={false} showSideBorders={false}>
+        <SmallHeadline
+            headlineString="This is how a headline looks as a link with a different :visited colour"
+            pillar="sport"
+            prefix={{
+                text: 'I am not a link',
+                pillar: 'sport',
+                showSlash: true,
+            }}
+            coloured={true}
+            link={{
+                to:
+                    'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+                visitedColour: 'green',
+            }}
+        />
+    </Section>
+);
+visitedLinkStory.story = {
+    name: 'With a link provided and a custom :visited colour',
+};
+
+export const expandedLinkStory = () => (
+    <Section showTopBorder={false} showSideBorders={false}>
+        <SmallHeadline
+            headlineString="This is how a headline looks as an expanded link"
+            pillar="sport"
+            prefix={{
+                text: 'I am not a link',
+                pillar: 'sport',
+                showSlash: true,
+            }}
+            coloured={true}
+            link={{
+                to:
+                    'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+                expanded: true,
+            }}
+        />
+    </Section>
+);
+expandedLinkStory.story = {
+    name: 'With a link provided and an expanded flag set to true',
+};

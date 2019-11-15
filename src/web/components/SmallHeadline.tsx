@@ -47,6 +47,12 @@ const colourStyles = (colour: string) => css`
     color: ${colour};
 `;
 
+const visitedStyles = (colour: string) => css`
+    :visited {
+        color: ${colour};
+    }
+`;
+
 const prefixStyles = (colour: string) => css`
     color: ${colour};
     font-weight: 700;
@@ -61,18 +67,40 @@ const slashStyles = css`
     }
 `;
 
-const linkStyles = css`
-    position: relative;
-
+const linkStyles = (expanded: boolean = false) => css`
     color: inherit;
 
     text-decoration: none;
     :hover {
         text-decoration: underline;
     }
+
+    ${!expanded &&
+        css`
+            position: relative;
+        `}
+
+    ${expanded &&
+        css`
+            ::before {
+                content: ' ';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                z-index: 2;
+            }
+        `}
 `;
 
 type HeadlineLinkSize = 'tiny' | 'xxsmall' | 'xsmall';
+
+type HeadlineLink = {
+    to: string; // the href for the anchor tag
+    visitedColour?: string; // a custom colour for the :visited state
+    expanded?: boolean; // if true, renders an absolutely positioned pseudo selector, enabling the anchor tag to cover the boundaries of the closest ancestor with position: relative
+};
 
 type Props = {
     headlineString: string; // The text shown
@@ -83,7 +111,7 @@ type Props = {
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: HeadlineLinkSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
-    linkTo?: string; // If provided, this turns the headlineString into an a tag
+    link?: HeadlineLink; // An optional link object tells the component to render the headline using an anchor tag
 };
 
 export const SmallHeadline = ({
@@ -95,9 +123,10 @@ export const SmallHeadline = ({
     showQuotes = false,
     size = 'xxsmall',
     coloured = false,
-    linkTo,
+    link,
 }: Props) => {
-    const Headline = linkTo ? 'a' : 'span';
+    const Headline = link && link.to ? 'a' : 'span';
+
     return (
         <h4 className={fontStyles(size)}>
             {prefix && (
@@ -112,13 +141,17 @@ export const SmallHeadline = ({
                 <QuoteIcon colour={palette[pillar].main} size={size} />
             )}
             <Headline
-                href={linkTo}
+                href={link && link.to ? link.to : undefined}
                 className={cx(
                     // Composed styles - order matters for colours
-                    linkTo && linkStyles,
+                    link && link.to && linkStyles(link && link.expanded),
                     underlined && underlinedStyles(size),
                     showUnderline && textDecorationUnderline,
                     coloured && colourStyles(palette[pillar].dark),
+                    link &&
+                        link.to &&
+                        link.visitedColour &&
+                        visitedStyles(link.visitedColour),
                 )}
             >
                 {headlineString}

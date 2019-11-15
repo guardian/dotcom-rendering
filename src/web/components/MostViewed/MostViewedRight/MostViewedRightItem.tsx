@@ -2,12 +2,13 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { headline } from '@guardian/src-foundations/typography';
+// import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
-import { useHover } from '@root/src/web/components/lib/useHover';
+// import { useHover } from '@root/src/web/components/lib/useHover';
 
 const listItemStyles = css`
+    display: flex;
     list-style: none;
     padding-top: 4px;
     margin-bottom: 12px;
@@ -17,23 +18,25 @@ const listItemStyles = css`
         padding-top: 0;
         border-top: none;
     }
+
+    position: relative;
 `;
 
-const linkTagStyles = css`
-    text-decoration: none;
-    font-weight: 500;
-    ${headline.tiny()};
+// const linkTagStyles = css`
+//     text-decoration: none;
+//     font-weight: 500;
+//     ${headline.tiny()};
 
-    &:link,
-    &:active,
-    &:visited {
-        color: ${palette.neutral[7]};
-    }
-`;
+//     &:link,
+//     &:active,
+//     &:visited {
+//         color: ${palette.neutral[7]};
+//     }
+// `;
 
-const textWrapperStyles = css`
-    display: flex;
-`;
+// const textWrapperStyles = css`
+//     display: flex;
+// `;
 
 const headlineWrapperStyles = css`
     display: flex;
@@ -60,8 +63,6 @@ const imageTagStyles = css`
     clip-path: circle(36% at 50% 50%);
 `;
 
-const ageWarningStyles = css``;
-
 type Props = {
     trail: TrailType;
 };
@@ -71,7 +72,7 @@ type ItemConditionalProps = {
 };
 
 export const MostViewedRightItem = ({ trail }: Props) => {
-    const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
+    // const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
     const itemProps: ItemConditionalProps = {};
     if (trail.isLiveBlog) {
@@ -84,40 +85,30 @@ export const MostViewedRightItem = ({ trail }: Props) => {
 
     return (
         <li className={listItemStyles}>
-            <a
-                className={linkTagStyles}
-                href={trail.url}
-                data-link-name={'article'}
-                ref={hoverRef}
-            >
-                <div className={textWrapperStyles}>
-                    <div className={imageWrapperStyles}>
-                        <img
-                            src={trail.image}
-                            role="presentation"
-                            alt=""
-                            className={imageTagStyles}
-                        />
-                    </div>
-                    <div className={headlineWrapperStyles}>
-                        <SmallHeadline
-                            headlineString={trail.linkText}
-                            pillar={trail.pillar}
-                            size="tiny"
-                            showUnderline={isHovered}
-                            {...itemProps}
-                        />
-                        {trail.ageWarning && (
-                            <div className={ageWarningStyles}>
-                                <AgeWarning
-                                    age={trail.ageWarning}
-                                    size="small"
-                                />
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </a>
+            <div className={imageWrapperStyles}>
+                <img
+                    src={trail.image}
+                    role="presentation"
+                    alt=""
+                    className={imageTagStyles}
+                />
+            </div>
+            <div className={headlineWrapperStyles}>
+                <SmallHeadline
+                    headlineString={trail.linkText}
+                    pillar={trail.pillar}
+                    size="tiny"
+                    link={{
+                        to: trail.url,
+                        visitedColour: palette.neutral[46],
+                        expanded: true,
+                    }}
+                    {...itemProps}
+                />
+                {trail.ageWarning && (
+                    <AgeWarning age={trail.ageWarning} size="small" />
+                )}
+            </div>
         </li>
     );
 };
