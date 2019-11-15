@@ -70,6 +70,8 @@ module.exports = {
         ],
     },
     settings: {
-        'import/resolver': { 'babel-module': { extensions: ['.ts', '.tsx'] } },
+        'import/resolver': {
+            'babel-module': { extensions: ['.ts', '.tsx', '.js'] },
+        },
     },
 };
