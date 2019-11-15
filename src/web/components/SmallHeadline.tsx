@@ -65,9 +65,6 @@ const linkStyles = css`
     position: relative;
 
     color: inherit;
-    :active :hover :visited {
-        color: inherit;
-    }
 
     text-decoration: none;
     :hover {
