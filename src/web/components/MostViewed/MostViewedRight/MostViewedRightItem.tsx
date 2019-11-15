@@ -60,9 +60,7 @@ const imageTagStyles = css`
     clip-path: circle(36% at 50% 50%);
 `;
 
-const ageWarningStyles = css`
-    margin-top: 8px;
-`;
+const ageWarningStyles = css``;
 
 type Props = {
     trail: TrailType;
