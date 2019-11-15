@@ -94,7 +94,7 @@ export const hydrateIslands = (
         {
             component: MostViewedRight,
             props: {},
-            root: 'most-viewed-list',
+            root: 'most-viewed-right',
         },
         {
             component: ShareCount,
@@ -111,7 +111,7 @@ export const hydrateIslands = (
                 pillar,
                 sectionName,
             },
-            root: 'most-viewed-grid',
+            root: 'most-viewed-footer',
         },
         {
             component: ReaderRevenueLinks,

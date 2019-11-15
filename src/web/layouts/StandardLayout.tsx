@@ -137,7 +137,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                 <OutbrainContainer config={config} />
             </Section>
 
-            <Section islandId="most-viewed-grid" />
+            <Section islandId="most-viewed-footer" />
 
             <Section padded={false}>
                 <SubNav
