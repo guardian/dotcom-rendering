@@ -44,6 +44,10 @@ module.exports = {
         ],
         'react/jsx-indent': [2, 4],
         'react/jsx-indent-props': [2, 4],
+        'react/prop-types': [0],
+        'react/jsx-boolean-value': [2, 'always'],
+        'import/prefer-default-export': false,
+        '@typescript-eslint/explicit-function-return-type': 0,
     },
     settings: {
         'import/resolver': {
