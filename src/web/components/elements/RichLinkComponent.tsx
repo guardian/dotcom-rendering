@@ -295,7 +295,7 @@ export const RichLinkComponent: React.FC<{
         return null;
     }
     return (
-        <div data-link-name={'rich-link'} className={pillarBackground(pillar)}>
+        <div data-link-name="rich-link" className={pillarBackground(pillar)}>
             <div className={cx(richLinkContainer, neutralBackground)}>
                 {data && <RichLinkBody richLink={data} />}
             </div>

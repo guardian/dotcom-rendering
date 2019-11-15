@@ -56,7 +56,7 @@ export const ArticleMeta = ({ CAPI, config }: Props) => {
                 />
                 <Dateline
                     dateDisplay={CAPI.webPublicationDateDisplay}
-                    descriptionText={'Published on'}
+                    descriptionText="Published on"
                 />
                 <div className={metaExtras}>
                     <SharingIcons

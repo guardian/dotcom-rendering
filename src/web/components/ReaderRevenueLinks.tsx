@@ -154,14 +154,14 @@ export const ReaderRevenueLinks: React.FC<{
                                 <RRButton
                                     url={urls.contribute}
                                     dataLinkNamePrefix={dataLinkNamePrefix}
-                                    dataLinkNameSuffix={'contribute-cta'}
-                                    linkText={'Contribute'}
+                                    dataLinkNameSuffix="contribute-cta"
+                                    linkText="Contribute"
                                 />
                                 <RRButton
                                     url={urls.subscribe}
                                     dataLinkNamePrefix={dataLinkNamePrefix}
-                                    dataLinkNameSuffix={'subscribe-cta'}
-                                    linkText={'Subscribe'}
+                                    dataLinkNameSuffix="subscribe-cta"
+                                    linkText="Subscribe"
                                 />
                             </div>
 
@@ -175,15 +175,15 @@ export const ReaderRevenueLinks: React.FC<{
                                     <RRButton
                                         url={urls.contribute}
                                         dataLinkNamePrefix={dataLinkNamePrefix}
-                                        dataLinkNameSuffix={'contribute-cta'}
-                                        linkText={'Contribute'}
+                                        dataLinkNameSuffix="contribute-cta"
+                                        linkText="Contribute"
                                     />
                                 ) : (
                                     <RRButton
                                         url={urls.support}
                                         dataLinkNamePrefix={dataLinkNamePrefix}
-                                        dataLinkNameSuffix={'support-cta'}
-                                        linkText={'Support us'}
+                                        dataLinkNameSuffix="support-cta"
+                                        linkText="Support us"
                                     />
                                 )}
                             </div>

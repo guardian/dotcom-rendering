@@ -227,7 +227,7 @@ export const Links: React.FC<{
         <Search
             className={cx(linkTablet({ showAtTablet: false }), link)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-            dataLinkName={'nav2 : search'}
+            dataLinkName="nav2 : search"
         >
             <SearchIcon /> Search
         </Search>

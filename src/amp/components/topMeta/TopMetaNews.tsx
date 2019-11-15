@@ -52,7 +52,7 @@ const Headline: React.FC<{
 
             {starRating !== undefined && (
                 <div className={starRatingWrapper}>
-                    <StarRating rating={starRating} size={'large'} />
+                    <StarRating rating={starRating} size="large" />
                 </div>
             )}
         </div>

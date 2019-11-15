@@ -20,7 +20,7 @@ export const defaultStory = () => (
         <Avatar
             imageSrc={imageSrc173}
             imageAlt="The alt of the image"
-            pillar={'opinion'}
+            pillar="opinion"
         />
     </div>
 );
@@ -31,7 +31,7 @@ export const largeStory = () => (
         <Avatar
             imageSrc={imageSrc300}
             imageAlt="The alt of the image"
-            pillar={'lifestyle'}
+            pillar="lifestyle"
         />
     </div>
 );
@@ -42,7 +42,7 @@ export const largeStoryNews = () => (
         <Avatar
             imageSrc={imageSrc300}
             imageAlt="The alt of the image"
-            pillar={'news'}
+            pillar="news"
         />
     </div>
 );
@@ -53,7 +53,7 @@ export const largeStoryCulture = () => (
         <Avatar
             imageSrc={imageSrc300}
             imageAlt="The alt of the image"
-            pillar={'culture'}
+            pillar="culture"
         />
     </div>
 );
@@ -64,7 +64,7 @@ export const smallStory = () => (
         <Avatar
             imageSrc={imageSrc300Sport}
             imageAlt="The alt of the image"
-            pillar={'sport'}
+            pillar="sport"
         />
     </div>
 );

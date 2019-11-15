@@ -11,7 +11,7 @@ describe('PulsingDot', () => {
 
     it('It should not render pulsing dot if the no flashing class is present in the container', () => {
         document.body.className += `${''} ${DISABLE_FLASHING_ELEMENTS_CLASS}`;
-        const { container } = render(<PulsingDot colour={'green'} />);
+        const { container } = render(<PulsingDot colour="green" />);
         expect(container.firstChild).toBeNull();
     });
 });

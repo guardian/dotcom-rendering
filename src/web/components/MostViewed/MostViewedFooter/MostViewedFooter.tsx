@@ -111,8 +111,8 @@ export const MostViewedFooter = ({ config, sectionName, pillar }: Props) => {
             <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
                 <div
                     className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
-                    data-link-name={'most-viewed'}
-                    data-component={'most-viewed'}
+                    data-link-name="most-viewed"
+                    data-component="most-viewed"
                 >
                     <section className={asideWidth}>
                         <h2 className={headingStyles}>Most popular</h2>
