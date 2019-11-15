@@ -28,6 +28,9 @@ describe('MostViewedList', () => {
 
         // Prefixes live articles correctly
         expect(getAllByText(/Live/).length).toBe(3);
+
+        // Renders appropriate number of age warnins
+        expect(getAllByText(/This article is more than/).length).toBe(2);
     });
 
     it('should implement a limit on the number of items', async () => {
@@ -43,5 +46,8 @@ describe('MostViewedList', () => {
 
         // Prefixes live articles correctly
         expect(getAllByText(/Live/).length).toBe(2);
+
+        // Renders appropriate number of age warnins
+        expect(getAllByText(/This article is more than/).length).toBe(1);
     });
 });

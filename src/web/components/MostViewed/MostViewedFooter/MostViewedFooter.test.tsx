@@ -70,6 +70,9 @@ describe('MostViewedFooter', () => {
         // Prefixes live articles correctly
         expect(getAllByText(/Live/).length).toBe(3);
 
+        // Renders appropriate number of age warnins
+        expect(getAllByText(/This article is more than/).length).toBe(2);
+
         // Handles &nbsp char
         expect(getByText('Across The Guardian')).toBeInTheDocument();
     });
@@ -196,67 +199,5 @@ describe('MostViewedFooter', () => {
         );
 
         expect(queryByText('Live')).not.toBeInTheDocument();
-    });
-
-    it('should show the quote icon for comment articles', () => {
-        useApi.mockReturnValue({
-            data: [
-                {
-                    heading: 'Section header',
-                    trails: [
-                        {
-                            url: '',
-                            linkText: 'Headline',
-                            showByline: false,
-                            byline: '',
-                            image: '',
-                            isLiveBlog: false,
-                            pillar: 'opinion',
-                        },
-                    ],
-                },
-            ],
-        });
-
-        const { getByTestId } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
-        );
-
-        expect(getByTestId('quote-icon')).toBeInTheDocument();
-    });
-
-    it('should NOT show the quote icon when pillar is not opinion', () => {
-        useApi.mockReturnValue({
-            data: [
-                {
-                    heading: 'Section header',
-                    trails: [
-                        {
-                            url: '',
-                            linkText: 'Headline',
-                            showByline: false,
-                            byline: '',
-                            image: '',
-                            isLiveBlog: false,
-                            pillar: 'news',
-                        },
-                    ],
-                },
-            ],
-        });
-
-        const { queryByTestId } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
-        );
-
-        expect(queryByTestId('quote-icon')).not.toBeInTheDocument();
     });
 });

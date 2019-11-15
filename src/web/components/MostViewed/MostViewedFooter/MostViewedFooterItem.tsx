@@ -5,9 +5,9 @@ import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
-import { PulsingDot } from '@root/src/web/components/PulsingDot';
-import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
+
+import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
 
 const gridItem = (position: number) => css`
     position: relative;
@@ -56,22 +56,6 @@ const headlineLink = css`
     ${headline.tiny()};
 `;
 
-const liveKicker = (colour: string) => css`
-    color: ${colour};
-    font-weight: 700;
-
-    &::after {
-        content: '/';
-        display: inline-block;
-        font-weight: 900;
-        margin: 0 4px;
-    }
-`;
-
-function getColour(pillar: Pillar) {
-    return palette[pillar].main;
-}
-
 const ageWarningStyles = css`
     padding-left: 4.6875rem;
     margin-top: -16px;
@@ -83,38 +67,48 @@ type Props = {
     position: number;
 };
 
+type ItemConditionalProps = {
+    prefix?: HeadlinePrefix;
+};
+
 export const MostViewedFooterItem = ({ trail, position }: Props) => {
+    const itemProps: ItemConditionalProps = {};
+    if (trail.isLiveBlog) {
+        itemProps.prefix = {
+            text: 'Live',
+            pillar: trail.pillar,
+            showSlash: false,
+        };
+    }
+
     return (
         <li
             className={gridItem(position)}
             data-link-name={`${position} | text`}
         >
-            <span className={bigNumber}>
-                <BigNumber index={position} />
-            </span>
-            <h2 className={headlineHeader}>
-                <a
-                    className={headlineLink}
-                    href={trail.url}
-                    data-link-name={'article'}
-                >
-                    {trail.isLiveBlog && (
-                        <span className={liveKicker(getColour(trail.pillar))}>
-                            <PulsingDot colour={getColour(trail.pillar)} />
-                            Live
-                        </span>
-                    )}
-                    {trail.pillar === 'opinion' && (
-                        <QuoteIcon colour={getColour(trail.pillar)} />
-                    )}
-                    {trail.linkText}
-                </a>
-            </h2>
-            {trail.ageWarning && (
-                <div className={ageWarningStyles}>
-                    <AgeWarning age={trail.ageWarning} size="small" />
+            {/* tslint:disable-next-line:react-a11y-anchors */}
+            <a
+                className={headlineLink}
+                href={trail.url}
+                data-link-name={'article'}
+            >
+                <span className={bigNumber}>
+                    <BigNumber index={position} />
+                </span>
+                <div className={headlineHeader}>
+                    <SmallHeadline
+                        headlineString={trail.linkText}
+                        pillar={trail.pillar}
+                        size="tiny"
+                        {...itemProps}
+                    />
                 </div>
-            )}
+                {trail.ageWarning && (
+                    <div className={ageWarningStyles}>
+                        <AgeWarning age={trail.ageWarning} size="small" />
+                    </div>
+                )}
+            </a>
         </li>
     );
 };
