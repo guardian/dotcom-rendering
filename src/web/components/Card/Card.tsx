@@ -1,10 +1,11 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 
 import { CardWrapper } from './CardWrapper';
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
+import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 
 const linkStyles = ({
     backgroundColour,
@@ -52,14 +53,52 @@ const listStyles = css`
     margin-bottom: 12px;
 `;
 
+const fullWidthImage = css`
+    img {
+        width: 100%;
+        display: block;
+    }
+`;
+
+const flex = (flexNum: number) =>
+    css`
+        flex: ${flexNum};
+    `;
+
 type Props = {
     linkTo: string;
     pillar: Pillar;
     headlineString: string;
     prefix?: PrefixType;
+    image?: ImageBlockElement;
+    direction?: 'column' | 'row';
 };
 
-export const Card = ({ linkTo, pillar, headlineString, prefix }: Props) => {
+const HorizonalLayout = ({
+    children,
+}: {
+    children: JSX.Element | JSX.Element[];
+}) => (
+    <div
+        className={css`
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+        `}
+    >
+        {children}
+    </div>
+);
+
+export const Card = ({
+    linkTo,
+    pillar,
+    headlineString,
+    prefix,
+    image,
+    direction = 'column',
+}: Props) => {
+    const Layout = direction === 'column' ? 'div' : HorizonalLayout;
     return (
         <li className={listStyles}>
             {/* tslint:disable-next-line:react-a11y-anchors */}
@@ -70,13 +109,28 @@ export const Card = ({ linkTo, pillar, headlineString, prefix }: Props) => {
                     backgroundOnHover: palette.neutral[86],
                 })}
             >
-                <CardWrapper topBarColour={palette[pillar].main}>
-                    <SmallHeadline
-                        pillar={pillar}
-                        headlineString={headlineString}
-                        prefix={prefix}
-                    />
-                </CardWrapper>
+                <Layout>
+                    <>
+                        {image && (
+                            <div className={cx(fullWidthImage, flex(1))}>
+                                <ImageComponent
+                                    element={image}
+                                    pillar={pillar}
+                                    hideCaption={true}
+                                />
+                            </div>
+                        )}
+                        <div className={flex(3)}>
+                            <CardWrapper topBarColour={palette[pillar].main}>
+                                <SmallHeadline
+                                    pillar={pillar}
+                                    headlineString={headlineString}
+                                    prefix={prefix}
+                                />
+                            </CardWrapper>
+                        </div>
+                    </>
+                </Layout>
             </a>
         </li>
     );
