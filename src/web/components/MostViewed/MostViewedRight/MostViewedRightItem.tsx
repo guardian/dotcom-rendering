@@ -35,6 +35,11 @@ const textWrapperStyles = css`
     display: flex;
 `;
 
+const headlineWrapperStyles = css`
+    display: flex;
+    flex-direction: column;
+`;
+
 const imageWrapperStyles = css`
     width: 72px;
     min-height: 72px;
@@ -96,19 +101,24 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                             className={imageTagStyles}
                         />
                     </div>
-                    <SmallHeadline
-                        headlineString={trail.linkText}
-                        pillar={trail.pillar}
-                        size="tiny"
-                        showUnderline={isHovered}
-                        {...itemProps}
-                    />
-                </div>
-                {trail.ageWarning && (
-                    <div className={ageWarningStyles}>
-                        <AgeWarning age={trail.ageWarning} size="small" />
+                    <div className={headlineWrapperStyles}>
+                        <SmallHeadline
+                            headlineString={trail.linkText}
+                            pillar={trail.pillar}
+                            size="tiny"
+                            showUnderline={isHovered}
+                            {...itemProps}
+                        />
+                        {trail.ageWarning && (
+                            <div className={ageWarningStyles}>
+                                <AgeWarning
+                                    age={trail.ageWarning}
+                                    size="small"
+                                />
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
             </a>
         </li>
     );

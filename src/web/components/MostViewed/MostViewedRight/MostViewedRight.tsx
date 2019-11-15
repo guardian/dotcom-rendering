@@ -2,15 +2,16 @@ import React from 'react';
 import { useApi } from '@root/src/web/components/lib/api';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { css } from 'emotion';
-import { textSans } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
     margin-top: 24px;
+    margin-bottom: 24px;
 `;
 
 const headingStyles = css`
-    ${textSans.medium({ fontWeight: 'bold' })}
+    ${headline.tiny({ fontWeight: 'bold' })}
     margin-bottom: 8px;
 `;
 

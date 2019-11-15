@@ -16,15 +16,14 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/us-news/2019/sep/15/brett-kavanaugh-donald-trump-impeachment-supreme-court-justice',
-            linkText:
-                'LINKTEXT Trump blasts calls for impeachment of Brett Kavanaugh after new allegations',
+            linkText: 'LINKTEXT Trump blasts calls for impeachment',
             showByline: false,
             byline: 'Martin Pengelly',
             image:
                 'https://i.guim.co.uk/img/media/579fd19481e46b9d6ed3c69c2a6992483df84478/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=63a6a5c13a8087e607a44ce5c7da2090',
             isLiveBlog: false,
             pillar: 'opinion',
-            ageWarning: '4 months old',
+            ageWarning: '1 year old',
         },
         {
             url:
@@ -61,7 +60,7 @@ export const mockTab1 = {
                 'https://i.guim.co.uk/img/media/e05185cce0a0c6953e666276caa98f6ea104c989/0_214_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=188a7a9ed42517b9462ae0788fe96a0a',
             isLiveBlog: false,
             pillar: 'lifestyle',
-            ageWarning: '300 years old',
+            ageWarning: '4 months old',
         },
         {
             url:
