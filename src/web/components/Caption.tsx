@@ -14,12 +14,15 @@ const captionStyle = (role?: RoleType) => css`
     ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
+`;
+
+const limitedWidth = css`
     ${from.leftCol} {
-        width: ${role && (role === 'showcase' || role === 'supporting') && '140px'};
-        position: ${role && (role === 'showcase' || role === 'supporting') && 'absolute'};
+        width: 140px;
+        position: absolute;
     }
     ${from.wide} {
-        width: ${role && (role === 'showcase' || role === 'supporting') && '220px'};
+        width: 220px;
     }
 `;
 
@@ -80,15 +83,20 @@ export const Caption: React.FC<{
         return captionText;
     };
 
+    const shouldLimitWidth =
+        role && (role === 'showcase' || role === 'supporting');
+
     return (
         <figure className={figureStyle}>
             {children}
             {captionText && (
                 <>
                     <figcaption
-                        className={cx(captionStyle(role), {
-                            [captionPadding]: padCaption,
-                        })}
+                        className={cx(
+                            captionStyle(role),
+                            shouldLimitWidth && limitedWidth,
+                            { [captionPadding]: padCaption },
+                        )}
                     >
                         <span className={iconStyle}>
                             <TriangleIcon />
