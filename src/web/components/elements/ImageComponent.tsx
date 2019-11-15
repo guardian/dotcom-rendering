@@ -62,7 +62,8 @@ export const ImageComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
-}> = ({ element, pillar, hideCaption }) => {
+    role?: RoleType;
+}> = ({ element, pillar, hideCaption, role }) => {
     const sources = makeSources(element.imageSources);
     if (hideCaption) {
         return (
@@ -80,6 +81,7 @@ export const ImageComponent: React.FC<{
             dirtyHtml={true}
             credit={element.data.credit}
             displayCredit={true}
+            role={role}
         >
             <Picture
                 sources={sources}

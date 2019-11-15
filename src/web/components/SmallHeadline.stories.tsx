@@ -250,3 +250,20 @@ export const InUnderlinedState = () => (
     </Section>
 );
 InUnderlinedState.story = { name: 'With showUnderline true' };
+
+export const linkStory = () => (
+    <Section showTopBorder={false} showSideBorders={false}>
+        <SmallHeadline
+            headlineString="This is how a headline looks as a link"
+            pillar="sport"
+            prefix={{
+                text: 'I am not a link',
+                pillar: 'sport',
+                showSlash: true,
+            }}
+            coloured={true}
+            linkTo="some/path/to/link/to"
+        />
+    </Section>
+);
+linkStory.story = { name: 'With linkTo provided' };

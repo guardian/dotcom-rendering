@@ -239,6 +239,13 @@ interface BadgeType {
     svgSrc: () => JSX.Element;
 }
 
+interface PrefixType {
+    text: string;
+    pillar?: Pillar;
+    showPulsingDot?: boolean;
+    showSlash?: boolean;
+}
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
