@@ -15,8 +15,11 @@ const captionStyle = (role?: RoleType) => css`
     word-wrap: break-word;
     color: ${palette.neutral[46]};
     ${from.leftCol} {
-        width: ${role && role === 'showcase' && '200px'};
+        width: ${role && (role === 'showcase' || role === 'supporting') && '140px'};
         position: ${role && (role === 'showcase' || role === 'supporting') && 'absolute'}
+    }
+    ${from.wide} {
+        width: ${role && (role === 'showcase' || role === 'supporting') && '220px'};
     }
 `;
 
