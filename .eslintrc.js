@@ -7,8 +7,9 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
-        'airbnb-typescript',
         'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'airbnb-typescript',
         'prettier',
         'prettier/@typescript-eslint',
     ],
@@ -41,33 +42,8 @@ module.exports = {
                 ],
             },
         ],
-
-        '@typescript-eslint/tslint/config': [
-            'error',
-            {
-                rules: {
-                    'object-literal-sort-keys': false,
-                    'ordered-imports': false,
-                    'jsx-no-lambda': false,
-                    'interface-name': false,
-                    'import-name': false,
-                    'variable-name': [
-                        true,
-                        'allow-pascal-case',
-                        'allow-trailing-underscore',
-                    ],
-                    'no-default-export': true,
-                    'react-no-dangerous-html': true,
-                    prettier: true,
-                    'interface-over-type-literal': false,
-                    curly: true,
-                    'prefer-array-literal': [
-                        true,
-                        { 'allow-type-parameters': true },
-                    ],
-                },
-            },
-        ],
+        'react/jsx-indent': [2, 4],
+        'react/jsx-indent-props': [2, 4],
     },
     settings: {
         'import/resolver': {
