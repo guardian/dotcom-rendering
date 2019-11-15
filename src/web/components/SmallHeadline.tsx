@@ -61,6 +61,20 @@ const slashStyles = css`
     }
 `;
 
+const linkStyles = css`
+    position: relative;
+
+    color: inherit;
+    :active :hover :visited {
+        color: inherit;
+    }
+
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+`;
+
 type HeadlineLinkSize = 'tiny' | 'xxsmall' | 'xsmall';
 
 type Props = {
@@ -72,6 +86,7 @@ type Props = {
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: HeadlineLinkSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
+    linkTo?: string; // If provided, this turns the headlineString into an a tag
 };
 
 export const SmallHeadline = ({
@@ -83,7 +98,9 @@ export const SmallHeadline = ({
     showQuotes = false,
     size = 'xxsmall',
     coloured = false,
+    linkTo,
 }: Props) => {
+    const Headline = linkTo ? 'a' : 'span';
     return (
         <h4 className={fontStyles(size)}>
             {prefix && (
@@ -97,26 +114,18 @@ export const SmallHeadline = ({
             {showQuotes && (
                 <QuoteIcon colour={palette[pillar].main} size={size} />
             )}
-            {underlined ? (
-                <div
-                    className={cx(
-                        underlined && underlinedStyles(size),
-                        coloured && colourStyles(palette[pillar].dark),
-                        showUnderline && textDecorationUnderline,
-                    )}
-                >
-                    {headlineString}
-                </div>
-            ) : (
-                <span
-                    className={cx(
-                        coloured && colourStyles(palette[pillar].dark),
-                        showUnderline && textDecorationUnderline,
-                    )}
-                >
-                    {headlineString}
-                </span>
-            )}
+            <Headline
+                href={linkTo}
+                className={cx(
+                    // Composed styles - order matters for colours
+                    linkTo && linkStyles,
+                    underlined && underlinedStyles(size),
+                    showUnderline && textDecorationUnderline,
+                    coloured && colourStyles(palette[pillar].dark),
+                )}
+            >
+                {headlineString}
+            </Headline>
         </h4>
     );
 };
