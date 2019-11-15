@@ -18,9 +18,6 @@ const linkStyles = ({
     text-decoration: none;
 
     /* The whole card is one link so we card level styles here */
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 12px;
     width: 100%;
     background-color: ${backgroundColour};
     :hover {
@@ -36,6 +33,11 @@ const listStyles = css`
     /* Here we ensure the card stretches to fill the containing space */
     flex-basis: 100%;
     display: flex;
+
+    /* Set spacing margins on the li element */
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 12px;
 `;
 
 type Props = {
