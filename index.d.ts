@@ -246,6 +246,8 @@ interface PrefixType {
     showSlash?: boolean;
 }
 
+type CardSizeType = 'small' | 'medium' | 'large';
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model

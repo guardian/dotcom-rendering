@@ -1,11 +1,13 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 
-import { HeadlinePadding } from './HeadlinePadding';
+import { HeadlineWrapper } from './HeadlineWrapper';
 import { HorizontalLayout } from './HorizontalLayout';
+import { ImageWrapper } from './ImageWrapper';
 import { TopBar } from './TopBar';
+
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 
@@ -57,18 +59,6 @@ const listStyles = css`
     margin-bottom: 12px;
 `;
 
-const imageStyles = css`
-    img {
-        width: 100%;
-        display: block;
-    }
-`;
-
-const flex = (flexNum: number) =>
-    css`
-        flex: ${flexNum};
-    `;
-
 type CardImageType = {
     element: ImageBlockElement;
     position?: 'left' | 'top';
@@ -80,6 +70,7 @@ type Props = {
     headlineString: string;
     prefix?: PrefixType;
     image?: CardImageType;
+    size?: CardSizeType;
 };
 
 export const Card = ({
@@ -88,6 +79,7 @@ export const Card = ({
     headlineString,
     prefix,
     image,
+    size = 'small',
 }: Props) => {
     const Layout =
         image && image.position === 'left' ? HorizontalLayout : 'div';
@@ -104,23 +96,21 @@ export const Card = ({
                     <Layout>
                         <>
                             {image && (
-                                <div className={cx(imageStyles, flex(1))}>
+                                <ImageWrapper size={size}>
                                     <ImageComponent
                                         element={image.element}
                                         pillar={pillar}
                                         hideCaption={true}
                                     />
-                                </div>
+                                </ImageWrapper>
                             )}
-                            <div className={flex(3)}>
-                                <HeadlinePadding>
-                                    <SmallHeadline
-                                        pillar={pillar}
-                                        headlineString={headlineString}
-                                        prefix={prefix}
-                                    />
-                                </HeadlinePadding>
-                            </div>
+                            <HeadlineWrapper size={size}>
+                                <SmallHeadline
+                                    pillar={pillar}
+                                    headlineString={headlineString}
+                                    prefix={prefix}
+                                />
+                            </HeadlineWrapper>
                         </>
                     </Layout>
                 </TopBar>
