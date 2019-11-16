@@ -3,19 +3,13 @@ import { css } from 'emotion';
 
 type Props = {
     children: JSX.Element | JSX.Element[];
-    size: CardSizeType;
+    coverage?: CardCoverageType;
 };
 
-const weights = {
-    small: 3,
-    medium: 2,
-    large: 1,
-};
-
-export const HeadlineWrapper = ({ children, size }: Props) => (
+export const HeadlineWrapper = ({ children, coverage }: Props) => (
     <div
         className={css`
-            flex: ${weights[size]};
+            flex-basis: ${coverage && coverage};
 
             padding-left: 5px;
             padding-right: 5px;

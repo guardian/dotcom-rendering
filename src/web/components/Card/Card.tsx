@@ -29,9 +29,39 @@ const decideLayout = (image?: CardImageType) => {
     }
 };
 
+type CoveragesType = {
+    image: {
+        small: CardCoverageType;
+        medium: CardCoverageType;
+        large: CardCoverageType;
+    };
+    headline: {
+        small: CardCoverageType;
+        medium: CardCoverageType;
+        large: CardCoverageType;
+    };
+};
+
+const coverages: CoveragesType = {
+    // coverages is how we set the image size relative to the space given
+    // to the hedline. These percentages are passed to flex-basis inside the
+    // wrapper components
+    image: {
+        small: '25%',
+        medium: '50%',
+        large: '67%',
+    },
+    headline: {
+        small: '75%',
+        medium: '50%',
+        large: '33%',
+    },
+};
+
 type CardImageType = {
     element: ImageBlockElement;
     position?: 'left' | 'top' | 'right';
+    size?: ImageSizeType;
 };
 
 type Props = {
@@ -40,7 +70,6 @@ type Props = {
     headlineString: string;
     prefix?: PrefixType;
     image?: CardImageType;
-    size?: CardSizeType;
 };
 
 export const Card = ({
@@ -49,9 +78,15 @@ export const Card = ({
     headlineString,
     prefix,
     image,
-    size = 'small',
 }: Props) => {
     const Layout = decideLayout(image);
+
+    // If there was no image given or image size was not set, coverage is null and
+    // no flex-basis property is set in the wrappers so content flows normally
+    const imageCoverage = image && image.size && coverages.image[image.size];
+    const headlineCoverage =
+        image && image.size && coverages.headline[image.size];
+
     return (
         <CardListItem>
             <CardLink
@@ -63,7 +98,7 @@ export const Card = ({
                     <Layout>
                         <>
                             {image && (
-                                <ImageWrapper size={size}>
+                                <ImageWrapper coverage={imageCoverage}>
                                     <ImageComponent
                                         element={image.element}
                                         pillar={pillar}
@@ -71,7 +106,7 @@ export const Card = ({
                                     />
                                 </ImageWrapper>
                             )}
-                            <HeadlineWrapper size={size}>
+                            <HeadlineWrapper coverage={headlineCoverage}>
                                 <SmallHeadline
                                     pillar={pillar}
                                     headlineString={headlineString}

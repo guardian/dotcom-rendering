@@ -200,7 +200,7 @@ export const ImageRight = () => (
                 text: 'World Cup 2019',
                 pillar: 'sport',
             }}
-            image={{ element: imageElement, position: 'right' }}
+            image={{ element: imageElement, position: 'right', size: 'large' }}
         />
         <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -212,18 +212,8 @@ export const ImageRight = () => (
                 showSlash: true,
                 pillar: 'sport',
             }}
-            image={{ element: imageElement, position: 'right' }}
-        />
-        <Card
-            linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-            pillar="sport"
-            headlineString="Johnson ignored on tour"
-            prefix={{
-                text: 'World Cup 2019',
-                pillar: 'sport',
-            }}
-            image={{ element: imageElement, position: 'right' }}
+            image={{ element: imageElement, position: 'right', size: 'large' }}
         />
     </Container>
 );
-ImageRight.story = { name: 'with image to the right' };
+ImageRight.story = { name: 'with large image to the right' };
