@@ -6,13 +6,9 @@ type Props = {
     topBarColour: string;
 };
 
-export const CardWrapper = ({ children, topBarColour }: Props) => (
+export const TopBar = ({ children, topBarColour }: Props) => (
     <div
         className={css`
-            padding-left: 5px;
-            padding-right: 5px;
-            padding-bottom: 8px;
-
             /* Styling for top bar */
             :before {
                 background-color: ${topBarColour};

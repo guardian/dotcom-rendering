@@ -3,7 +3,8 @@ import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 
-import { CardWrapper } from './CardWrapper';
+import { HeadlinePadding } from './HeadlinePadding';
+import { TopBar } from './TopBar';
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 
@@ -113,28 +114,30 @@ export const Card = ({
                     backgroundOnHover: palette.neutral[86],
                 })}
             >
-                <Layout>
-                    <>
-                        {image && (
-                            <div className={cx(imageStyles, flex(1))}>
-                                <ImageComponent
-                                    element={image.element}
-                                    pillar={pillar}
-                                    hideCaption={true}
-                                />
+                <TopBar topBarColour={palette[pillar].main}>
+                    <Layout>
+                        <>
+                            {image && (
+                                <div className={cx(imageStyles, flex(1))}>
+                                    <ImageComponent
+                                        element={image.element}
+                                        pillar={pillar}
+                                        hideCaption={true}
+                                    />
+                                </div>
+                            )}
+                            <div className={flex(3)}>
+                                <HeadlinePadding>
+                                    <SmallHeadline
+                                        pillar={pillar}
+                                        headlineString={headlineString}
+                                        prefix={prefix}
+                                    />
+                                </HeadlinePadding>
                             </div>
-                        )}
-                        <div className={flex(3)}>
-                            <CardWrapper topBarColour={palette[pillar].main}>
-                                <SmallHeadline
-                                    pillar={pillar}
-                                    headlineString={headlineString}
-                                    prefix={prefix}
-                                />
-                            </CardWrapper>
-                        </div>
-                    </>
-                </Layout>
+                        </>
+                    </Layout>
+                </TopBar>
             </a>
         </li>
     );
