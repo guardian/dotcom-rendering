@@ -97,8 +97,8 @@ export const Card = ({
         <CardListItem>
             <CardLink
                 linkTo={linkTo}
-                backgroundColour={palette.neutral[93]}
-                backgroundOnHover={palette.neutral[86]}
+                backgroundColour={palette.neutral[97]}
+                backgroundOnHover={palette.neutral[93]}
             >
                 <TopBar topBarColour={palette[pillar].main}>
                     <Layout>
