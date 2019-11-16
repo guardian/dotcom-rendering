@@ -79,10 +79,11 @@ export const Card = ({
     prefix,
     image,
 }: Props) => {
+    // The choice of layout affects where any image is placed
     const Layout = decideLayout(image);
 
     // If there was no image given or image size was not set, coverage is null and
-    // no flex-basis property is set in the wrappers so content flows normally
+    // no flex-basis property is set in the wrappers, so content flows normally
     const imageCoverage = image && image.size && coverages.image[image.size];
     const headlineCoverage =
         image && image.size && coverages.headline[image.size];
