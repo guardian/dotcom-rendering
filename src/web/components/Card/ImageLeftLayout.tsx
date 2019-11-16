@@ -5,7 +5,7 @@ type Props = {
     children: JSX.Element | JSX.Element[];
 };
 
-export const HorizontalLayout = ({ children }: Props) => (
+export const ImageLeftLayout = ({ children }: Props) => (
     <div
         className={css`
             display: flex;

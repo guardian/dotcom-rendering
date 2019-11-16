@@ -4,7 +4,8 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 
 import { HeadlineWrapper } from './HeadlineWrapper';
-import { HorizontalLayout } from './HorizontalLayout';
+import { ImageLeftLayout } from './ImageLeftLayout';
+import { ImageRightLayout } from './ImageRightLayout';
 import { ImageWrapper } from './ImageWrapper';
 import { TopBar } from './TopBar';
 
@@ -59,9 +60,25 @@ const listStyles = css`
     margin-bottom: 12px;
 `;
 
+const decideLayout = (image?: CardImageType) => {
+    if (!image) {
+        return 'div';
+    }
+    switch (image.position) {
+        case 'top':
+            return 'div';
+        case 'left':
+            return ImageLeftLayout;
+        case 'right':
+            return ImageRightLayout;
+        default:
+            return 'div';
+    }
+};
+
 type CardImageType = {
     element: ImageBlockElement;
-    position?: 'left' | 'top';
+    position?: 'left' | 'top' | 'right';
 };
 
 type Props = {
@@ -81,8 +98,7 @@ export const Card = ({
     image,
     size = 'small',
 }: Props) => {
-    const Layout =
-        image && image.position === 'left' ? HorizontalLayout : 'div';
+    const Layout = decideLayout(image);
     return (
         <li className={listStyles}>
             <a

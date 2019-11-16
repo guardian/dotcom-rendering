@@ -189,3 +189,41 @@ export const ImageLeft = () => (
     </Container>
 );
 ImageLeft.story = { name: 'with image to the left' };
+
+export const ImageRight = () => (
+    <Container direction="row" height="100%">
+        <Card
+            linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
+            pillar="sport"
+            headlineString="Johnson heckled on tour"
+            prefix={{
+                text: 'World Cup 2019',
+                pillar: 'sport',
+            }}
+            image={{ element: imageElement, position: 'right' }}
+        />
+        <Card
+            linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
+            pillar="sport"
+            headlineString="Johnson shouted at on tour"
+            prefix={{
+                text: 'World Cup 2019',
+                showPulsingDot: true,
+                showSlash: true,
+                pillar: 'sport',
+            }}
+            image={{ element: imageElement, position: 'right' }}
+        />
+        <Card
+            linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
+            pillar="sport"
+            headlineString="Johnson ignored on tour"
+            prefix={{
+                text: 'World Cup 2019',
+                pillar: 'sport',
+            }}
+            image={{ element: imageElement, position: 'right' }}
+        />
+    </Container>
+);
+ImageRight.story = { name: 'with image to the right' };
