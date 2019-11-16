@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 
 import { HeadlinePadding } from './HeadlinePadding';
+import { HorizontalLayout } from './HorizontalLayout';
 import { TopBar } from './TopBar';
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
@@ -68,22 +69,6 @@ const flex = (flexNum: number) =>
         flex: ${flexNum};
     `;
 
-const HorizonalLayout = ({
-    children,
-}: {
-    children: JSX.Element | JSX.Element[];
-}) => (
-    <div
-        className={css`
-            display: flex;
-            flex-direction: row;
-            height: 100%;
-        `}
-    >
-        {children}
-    </div>
-);
-
 type CardImageType = {
     element: ImageBlockElement;
     position?: 'left' | 'top';
@@ -104,7 +89,8 @@ export const Card = ({
     prefix,
     image,
 }: Props) => {
-    const Layout = image && image.position === 'left' ? HorizonalLayout : 'div';
+    const Layout =
+        image && image.position === 'left' ? HorizontalLayout : 'div';
     return (
         <li className={listStyles}>
             <a
