@@ -217,3 +217,32 @@ export const ImageRight = () => (
     </Container>
 );
 ImageRight.story = { name: 'with large image to the right' };
+
+export const Standfirst = () => (
+    <Container direction="row" height="100%">
+        <Card
+            linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
+            pillar="sport"
+            headlineString="Johnson heckled on tour"
+            prefix={{
+                text: 'World Cup 2019',
+                pillar: 'sport',
+            }}
+            image={{ element: imageElement, position: 'left', size: 'large' }}
+            standfirst="This is the standfirst text. This is more standfirst text to show how it looks when wrapped"
+        />
+        <Card
+            linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
+            pillar="sport"
+            headlineString="Johnson shouted at on tour"
+            prefix={{
+                text: 'World Cup 2019',
+                showPulsingDot: true,
+                showSlash: true,
+                pillar: 'sport',
+            }}
+            image={{ element: imageElement, position: 'left', size: 'large' }}
+        />
+    </Container>
+);
+Standfirst.story = { name: 'with standfirst' };
