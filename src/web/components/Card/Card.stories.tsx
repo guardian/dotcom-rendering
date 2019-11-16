@@ -19,7 +19,7 @@ const Container = ({
             display: flex;
             flex-direction: ${direction};
             height: ${height};
-            /* border: 3px dashed; */
+            padding: 20px;
         `}
     >
         {children}
@@ -30,15 +30,23 @@ const Container = ({
 export default {
     component: Card,
     title: 'Components/Card',
+    parameters: {
+        viewport: {
+            // This has the effect of turning off the viewports addon by default
+            defaultViewport: 'doesNotExist',
+        },
+    },
 };
 /* tslint:enable */
 
 export const defaultStory = () => (
-    <Card
-        linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
-        pillar="news"
-        headlineString="This is the most basic card view for the news pillar"
-    />
+    <Container height="150px">
+        <Card
+            linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
+            pillar="news"
+            headlineString="This is the most basic card view. Cards expand to fit the height and width of their container."
+        />
+    </Container>
 );
 defaultStory.story = { name: 'default' };
 
@@ -118,7 +126,7 @@ export const ImageAbove = () => (
                 text: 'Election 2019',
                 pillar: 'news',
             }}
-            image={imageElement}
+            image={{ element: imageElement }}
         />
         <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -128,7 +136,7 @@ export const ImageAbove = () => (
                 text: 'Election 2019',
                 pillar: 'news',
             }}
-            image={imageElement}
+            image={{ element: imageElement }}
         />
         <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -138,7 +146,7 @@ export const ImageAbove = () => (
                 text: 'Election 2019',
                 pillar: 'news',
             }}
-            image={imageElement}
+            image={{ element: imageElement }}
         />
     </Container>
 );
@@ -154,8 +162,7 @@ export const ImageLeft = () => (
                 text: 'World Cup 2019',
                 pillar: 'sport',
             }}
-            image={imageElement}
-            direction="row"
+            image={{ element: imageElement, position: 'left' }}
         />
         <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -163,12 +170,13 @@ export const ImageLeft = () => (
             headlineString="Johnson shouted at on tour"
             prefix={{
                 text: 'World Cup 2019',
+                showPulsingDot: true,
+                showSlash: true,
                 pillar: 'sport',
             }}
-            image={imageElement}
-            direction="row"
+            image={{ element: imageElement, position: 'left' }}
         />
-        {/* <Card
+        <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="sport"
             headlineString="Johnson ignored on tour"
@@ -176,9 +184,8 @@ export const ImageLeft = () => (
                 text: 'World Cup 2019',
                 pillar: 'sport',
             }}
-            image={imageElement}
-            direction="row"
-        /> */}
+            image={{ element: imageElement, position: 'left' }}
+        />
     </Container>
 );
 ImageLeft.story = { name: 'with image to the left' };

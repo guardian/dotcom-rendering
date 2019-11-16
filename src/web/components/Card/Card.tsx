@@ -41,6 +41,8 @@ const linkStyles = ({
 const listStyles = css`
     /* Here we ensure the card stretches to fill the containing space */
     flex-basis: 100%;
+    /* display block here prevents that annoying bar at the bottom of the image problem
+    we might be able to remove this if this is already set in global css */
     display: flex;
 
     /* We absolutely position the 1 pixel top bar in
@@ -53,7 +55,7 @@ const listStyles = css`
     margin-bottom: 12px;
 `;
 
-const fullWidthImage = css`
+const imageStyles = css`
     img {
         width: 100%;
         display: block;
@@ -64,15 +66,6 @@ const flex = (flexNum: number) =>
     css`
         flex: ${flexNum};
     `;
-
-type Props = {
-    linkTo: string;
-    pillar: Pillar;
-    headlineString: string;
-    prefix?: PrefixType;
-    image?: ImageBlockElement;
-    direction?: 'column' | 'row';
-};
 
 const HorizonalLayout = ({
     children,
@@ -90,18 +83,29 @@ const HorizonalLayout = ({
     </div>
 );
 
+type CardImageType = {
+    element: ImageBlockElement;
+    position?: 'left' | 'top';
+};
+
+type Props = {
+    linkTo: string;
+    pillar: Pillar;
+    headlineString: string;
+    prefix?: PrefixType;
+    image?: CardImageType;
+};
+
 export const Card = ({
     linkTo,
     pillar,
     headlineString,
     prefix,
     image,
-    direction = 'column',
 }: Props) => {
-    const Layout = direction === 'column' ? 'div' : HorizonalLayout;
+    const Layout = image && image.position === 'left' ? HorizonalLayout : 'div';
     return (
         <li className={listStyles}>
-            {/* tslint:disable-next-line:react-a11y-anchors */}
             <a
                 href={linkTo}
                 className={linkStyles({
@@ -112,9 +116,9 @@ export const Card = ({
                 <Layout>
                     <>
                         {image && (
-                            <div className={cx(fullWidthImage, flex(1))}>
+                            <div className={cx(imageStyles, flex(1))}>
                                 <ImageComponent
-                                    element={image}
+                                    element={image.element}
                                     pillar={pillar}
                                     hideCaption={true}
                                 />
