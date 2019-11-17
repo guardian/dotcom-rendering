@@ -247,7 +247,7 @@ interface PrefixType {
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large';
-type CardCoverageType = '25%' | '33%' | '50%' | '67%' | '75%';
+type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%';
 
 /**
  * the config model will contain useful app/site

@@ -7,8 +7,8 @@ const sizingStyles = css`
     justify-content: space-between;
 `;
 
-const coverageStyles = (coverage: string) => css`
-    flex-basis: ${coverage && coverage};
+const coverageStyles = (percentage: string) => css`
+    flex-basis: ${percentage && percentage};
 `;
 
 const paddingStyles = css`
@@ -23,15 +23,19 @@ const spacingStyles = css`
 
 type Props = {
     children: JSX.Element | JSX.Element[];
-    coverage?: CardCoverageType;
+    percentage?: CardPercentageType;
     spaceContent?: boolean;
 };
 
-export const ContentWrapper = ({ children, coverage, spaceContent }: Props) => (
+export const ContentWrapper = ({
+    children,
+    percentage,
+    spaceContent,
+}: Props) => (
     <div
         className={cx(
             sizingStyles,
-            coverage && coverageStyles(coverage),
+            percentage && coverageStyles(percentage),
             paddingStyles,
             spaceContent && spacingStyles,
         )}

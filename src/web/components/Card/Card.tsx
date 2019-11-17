@@ -36,14 +36,14 @@ const decideLayout = (image?: CardImageType) => {
 
 type CoveragesType = {
     image: {
-        small: CardCoverageType;
-        medium: CardCoverageType;
-        large: CardCoverageType;
+        small: CardPercentageType;
+        medium: CardPercentageType;
+        large: CardPercentageType;
     };
     content: {
-        small: CardCoverageType;
-        medium: CardCoverageType;
-        large: CardCoverageType;
+        small: CardPercentageType;
+        medium: CardPercentageType;
+        large: CardPercentageType;
     };
 };
 
@@ -91,7 +91,7 @@ export const Card = ({
     // The choice of layout affects where any image is placed
     const Layout = decideLayout(image);
 
-    // If there was no image given or image size was not set, coverage is null and
+    // If there was no image given or image size was not set, percentage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
     const imageCoverage =
         (image && image.size && coverages.image[image.size]) || '50%';
@@ -111,7 +111,7 @@ export const Card = ({
                     <Layout>
                         <>
                             {image && (
-                                <ImageWrapper coverage={imageCoverage}>
+                                <ImageWrapper percentage={imageCoverage}>
                                     <ImageComponent
                                         element={image.element}
                                         pillar={pillar}
@@ -120,7 +120,7 @@ export const Card = ({
                                 </ImageWrapper>
                             )}
                             <ContentWrapper
-                                coverage={contentCoverage}
+                                percentage={contentCoverage}
                                 spaceContent={spaceContent}
                             >
                                 <HeadlineWrapper>
