@@ -16,6 +16,7 @@ import { StandfirstWrapper } from './components/StandfirstWrapper';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardListItem } from './components/CardListItem';
+import { CardAge } from './components/CardAge';
 
 const decideLayout = (image?: CardImageType) => {
     if (!image) {
@@ -72,6 +73,7 @@ type Props = {
     linkTo: string;
     pillar: Pillar;
     headlineString: string;
+    webPublicationDate?: string;
     prefix?: PrefixType;
     image?: CardImageType;
     standfirst?: string;
@@ -81,6 +83,7 @@ export const Card = ({
     linkTo,
     pillar,
     headlineString,
+    webPublicationDate,
     prefix,
     image,
     standfirst,
@@ -135,6 +138,13 @@ export const Card = ({
                                                 standfirst={standfirst}
                                             />
                                         </StandfirstWrapper>
+                                    )}
+                                    {webPublicationDate && (
+                                        <CardAge
+                                            webPublicationDate={
+                                                webPublicationDate
+                                            }
+                                        />
                                     )}
                                 </div>
                             </ContentWrapper>

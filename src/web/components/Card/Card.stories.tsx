@@ -45,6 +45,7 @@ export const defaultStory = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="This is the most basic card view. Cards expand to fit the height and width of their container."
+            webPublicationDate="2019-11-16T09:45:30.000Z"
         />
     </Container>
 );
@@ -56,6 +57,7 @@ export const VerticalSpacing = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson heckled on tour"
+            webPublicationDate="2019-11-15T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -65,6 +67,7 @@ export const VerticalSpacing = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson shouted at on tour"
+            webPublicationDate="2019-11-14T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -74,6 +77,7 @@ export const VerticalSpacing = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson ignored on tour"
+            webPublicationDate="2019-11-16T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -89,6 +93,7 @@ export const HorizontalSpacing = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson heckled on tour"
+            webPublicationDate="2019-11-12T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -98,6 +103,7 @@ export const HorizontalSpacing = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson shouted at on tour"
+            webPublicationDate="2019-10-16T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -107,6 +113,7 @@ export const HorizontalSpacing = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson ignored on tour"
+            webPublicationDate="2019-11-16T22:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -122,6 +129,7 @@ export const ImageAbove = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson heckled on tour"
+            webPublicationDate="2019-11-16T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -132,6 +140,7 @@ export const ImageAbove = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson shouted at on tour"
+            webPublicationDate="2019-11-16T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -142,6 +151,7 @@ export const ImageAbove = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
             headlineString="Johnson ignored on tour"
+            webPublicationDate="2019-11-16T09:45:30.000Z"
             prefix={{
                 text: 'Election 2019',
                 pillar: 'news',
@@ -224,6 +234,7 @@ export const Standfirst = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="sport"
             headlineString="Johnson heckled on tour"
+            webPublicationDate="2019-11-16T09:45:30.000Z"
             prefix={{
                 text: 'World Cup 2019',
                 pillar: 'sport',
@@ -235,6 +246,7 @@ export const Standfirst = () => (
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="sport"
             headlineString="Johnson shouted at on tour"
+            webPublicationDate="2019-11-16T09:45:30.000Z"
             prefix={{
                 text: 'World Cup 2019',
                 showPulsingDot: true,
