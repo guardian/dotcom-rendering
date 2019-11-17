@@ -84,7 +84,7 @@ export const VerticalSpacing = () => (
 VerticalSpacing.story = { name: 'with equal height vertically' };
 
 export const HorizontalSpacing = () => (
-    <Container direction="row" height="100px">
+    <Container direction="row" height="100%">
         <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
             pillar="news"
@@ -126,7 +126,7 @@ export const ImageAbove = () => (
                 text: 'Election 2019',
                 pillar: 'news',
             }}
-            image={{ element: imageElement }}
+            image={{ element: imageElement, position: 'top', size: 'large' }}
         />
         <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -136,7 +136,7 @@ export const ImageAbove = () => (
                 text: 'Election 2019',
                 pillar: 'news',
             }}
-            image={{ element: imageElement }}
+            image={{ element: imageElement, position: 'top', size: 'large' }}
         />
         <Card
             linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -146,7 +146,7 @@ export const ImageAbove = () => (
                 text: 'Election 2019',
                 pillar: 'news',
             }}
-            image={{ element: imageElement }}
+            image={{ element: imageElement, position: 'top', size: 'large' }}
         />
     </Container>
 );

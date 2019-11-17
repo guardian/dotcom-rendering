@@ -8,6 +8,7 @@ const linkStyles = ({
     backgroundColour: string;
     backgroundOnHover: string;
 }) => css`
+    display: flex;
     /* a tag specific styles */
     color: inherit;
     text-decoration: none;

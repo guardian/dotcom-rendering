@@ -10,7 +10,6 @@ export const ImageRightLayout = ({ children }: Props) => (
         className={css`
             display: flex;
             flex-direction: row-reverse;
-            height: 100%;
         `}
     >
         {children}

@@ -8,6 +8,7 @@ import { ImageComponent } from '@frontend/web/components/elements/ImageComponent
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
+import { ImageTopLayout } from './components/ImageTopLayout';
 import { ImageLeftLayout } from './components/ImageLeftLayout';
 import { ImageRightLayout } from './components/ImageRightLayout';
 import { ImageWrapper } from './components/ImageWrapper';
@@ -18,17 +19,17 @@ import { CardListItem } from './components/CardListItem';
 
 const decideLayout = (image?: CardImageType) => {
     if (!image) {
-        return 'div';
+        return ImageTopLayout;
     }
     switch (image.position) {
         case 'top':
-            return 'div';
+            return ImageTopLayout;
         case 'left':
             return ImageLeftLayout;
         case 'right':
             return ImageRightLayout;
         default:
-            return 'div';
+            return ImageTopLayout;
     }
 };
 
@@ -89,9 +90,12 @@ export const Card = ({
 
     // If there was no image given or image size was not set, coverage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
-    const imageCoverage = image && image.size && coverages.image[image.size];
+    const imageCoverage =
+        (image && image.size && coverages.image[image.size]) || '50%';
     const contentCoverage =
-        image && image.size && coverages.content[image.size];
+        (image && image.size && coverages.content[image.size]) || '50%';
+
+    const spaceContent = !image || (image && image.position === 'top');
 
     return (
         <CardListItem>
@@ -112,15 +116,18 @@ export const Card = ({
                                     />
                                 </ImageWrapper>
                             )}
-                            <ContentWrapper coverage={contentCoverage}>
-                                <>
-                                    <HeadlineWrapper>
-                                        <SmallHeadline
-                                            pillar={pillar}
-                                            headlineString={headlineString}
-                                            prefix={prefix}
-                                        />
-                                    </HeadlineWrapper>
+                            <ContentWrapper
+                                coverage={contentCoverage}
+                                spaceContent={spaceContent}
+                            >
+                                <HeadlineWrapper>
+                                    <SmallHeadline
+                                        pillar={pillar}
+                                        headlineString={headlineString}
+                                        prefix={prefix}
+                                    />
+                                </HeadlineWrapper>
+                                <div>
                                     {standfirst && (
                                         <StandfirstWrapper>
                                             <Standfirst
@@ -129,7 +136,7 @@ export const Card = ({
                                             />
                                         </StandfirstWrapper>
                                     )}
-                                </>
+                                </div>
                             </ContentWrapper>
                         </>
                     </Layout>
