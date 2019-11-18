@@ -116,7 +116,6 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
                         </div>
                         <ArticleRight>
                             <StickyAd config={config} />
-                            <div data-island="most-viewed-right" />
                         </ArticleRight>
                     </Flex>
                 </ArticleContainer>
