@@ -2,19 +2,19 @@ import React from 'react';
 
 import { palette } from '@guardian/src-foundations';
 
-import { ContentWrapper } from './ContentWrapper';
-import { HeadlineWrapper } from './HeadlineWrapper';
-import { ImageLeftLayout } from './ImageLeftLayout';
-import { ImageRightLayout } from './ImageRightLayout';
-import { ImageWrapper } from './ImageWrapper';
-import { StandfirstWrapper } from './StandfirstWrapper';
-import { TopBar } from './TopBar';
-import { CardLink } from './CardLink';
-import { CardListItem } from './CardListItem';
-
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
 import { Standfirst } from '@frontend/web/components/Standfirst';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
+
+import { ContentWrapper } from './components/ContentWrapper';
+import { HeadlineWrapper } from './components/HeadlineWrapper';
+import { ImageLeftLayout } from './components/ImageLeftLayout';
+import { ImageRightLayout } from './components/ImageRightLayout';
+import { ImageWrapper } from './components/ImageWrapper';
+import { StandfirstWrapper } from './components/StandfirstWrapper';
+import { TopBar } from './components/TopBar';
+import { CardLink } from './components/CardLink';
+import { CardListItem } from './components/CardListItem';
 
 const decideLayout = (image?: CardImageType) => {
     if (!image) {
