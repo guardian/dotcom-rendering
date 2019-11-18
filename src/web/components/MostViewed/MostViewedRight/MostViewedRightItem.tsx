@@ -1,11 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
-
 import { palette } from '@guardian/src-foundations';
-// import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
-// import { useHover } from '@root/src/web/components/lib/useHover';
 
 const listItemStyles = css`
     display: flex;
@@ -21,22 +18,6 @@ const listItemStyles = css`
 
     position: relative;
 `;
-
-// const linkTagStyles = css`
-//     text-decoration: none;
-//     font-weight: 500;
-//     ${headline.tiny()};
-
-//     &:link,
-//     &:active,
-//     &:visited {
-//         color: ${palette.neutral[7]};
-//     }
-// `;
-
-// const textWrapperStyles = css`
-//     display: flex;
-// `;
 
 const headlineWrapperStyles = css`
     display: flex;
@@ -72,8 +53,6 @@ type ItemConditionalProps = {
 };
 
 export const MostViewedRightItem = ({ trail }: Props) => {
-    // const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
-
     const itemProps: ItemConditionalProps = {};
     if (trail.isLiveBlog) {
         itemProps.prefix = {
