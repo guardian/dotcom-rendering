@@ -22,7 +22,7 @@ const spacingStyles = css`
 `;
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
+    children: ChildrenType;
     percentage?: CardPercentageType;
     spaceContent?: boolean;
 };

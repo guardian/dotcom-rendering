@@ -356,6 +356,8 @@ interface Props {
     data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
+type ChildrenType = JSX.Element | JSX.Element[];
+
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------

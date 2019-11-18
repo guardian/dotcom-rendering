@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
+    children: ChildrenType;
 };
 
 export const StandfirstWrapper = ({ children }: Props) => (

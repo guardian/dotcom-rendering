@@ -71,7 +71,7 @@ const articleAdStyles = css`
 `;
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
+    children: ChildrenType;
 };
 
 export const ArticleContainer = ({ children }: Props) => {
