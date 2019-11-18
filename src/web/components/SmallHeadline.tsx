@@ -103,7 +103,7 @@ export const SmallHeadline = ({
     size = 'xxsmall',
     coloured = false,
     linkTo,
-    visitedColour = '',
+    visitedColour,
 }: Props) => {
     const Headline = linkTo ? 'a' : 'span';
     return (
