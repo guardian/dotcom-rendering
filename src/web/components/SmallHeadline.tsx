@@ -70,10 +70,6 @@ const linkStyles = css`
     :hover {
         text-decoration: underline;
     }
-
-    :visited {
-        color: inherit;
-    }
 `;
 
 const visitedStyles = (visitedColour: string) => css`
