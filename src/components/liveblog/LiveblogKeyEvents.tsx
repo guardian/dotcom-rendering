@@ -1,5 +1,5 @@
 import React from 'react';
-import { icons, basePx } from 'styles';
+import { icons, basePx, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { Block } from 'types/capi-thrift-models';
@@ -15,7 +15,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
     padding: 8px 8px 0 8px;
     position: relative;
 
-    h3 {
+    h2 {
         color: ${kicker};
         margin: 0;
     }
@@ -94,48 +94,39 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
         }
     }
 
-    input[type=checkbox] {
-        display: none;
+    summary {
+        display: block;
+
+        h2 {
+            font-size: 18px;
+            ${headlineFont};
+        }
+
+        &::after {
+            ${icons}
+            content: "\\e002";
+            font-size: 16px;
+            position: absolute;
+            top: ${basePx(1)};
+            right: ${basePx(1)};
+            width: ${basePx(4)};
+            height: ${basePx(4)};
+            display: inline-block;
+            border-radius: 100%;
+            transition-duration: .2s;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid ${palette.neutral[86]};
+            color: ${palette.neutral[7]};
+        }
+        
+        &::-webkit-details-marker {
+            display: none;
+        }
     }
 
-    label {
-        line-height: 30px;
-        text-align: center;
-        border: 1px solid ${palette.neutral[86]};
-        color: ${palette.neutral[7]};
-        width: ${basePx(4)};
-        height: ${basePx(4)};
-        display: inline-block;
-        position: absolute;
-        top: ${basePx(1)};
-        right: ${basePx(1)};
-        border-radius: 100%;
-        z-index: 2;
-        font-size: 2.8rem;
-        transition-duration: .2s;
-
-		&::before {
-			${icons}
-			content: "\\e002";
-			font-size: 16px;
-		}
-	}
-
-	input[type=checkbox] ~ div {
-        display: none
-    }
-
-    input[type=checkbox]:checked + label {
+    details[open] summary::after {
         transform: rotate(180deg);
-    }
-
-	input[type=checkbox]:checked ~ div {
-		display: block;
-		min-height: 44px;
-		max-height: 999px;
-		overflow: hidden;
-        z-index: 1;
-        transition-duration: .2s;
     }
 
     a {
@@ -152,23 +143,19 @@ const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProp
     const keyEvents = bodyElements.filter(elem => elem.attributes.keyEvent as boolean).slice(0, 7);
     return (
         <section css={LiveblogKeyEventsStyles(pillarStyles)}>
-            <h3>Key events ({keyEvents.length})</h3>
-            <div>
-                <input id="collapsible" type="checkbox"/>
-                <label htmlFor="collapsible"></label>
-                <div>
-                    <ul>
-                        {keyEvents.map((event, index) => {
-                            const relativeDate = makeRelativeDate(event.firstPublishedDate);
-                            const time = relativeDate ? <time>{relativeDate}</time> : null;
-                            return <li key={index}>
-                                { time }
-                                <a>{event.title}</a>
-                            </li>
-                        })}
-                    </ul>
-                </div>
-            </div>
+            <details>
+                <summary><h2>Key Events ({keyEvents.length})</h2></summary>
+                <ul>
+                    {keyEvents.map((event, index) => {
+                        const relativeDate = makeRelativeDate(event.firstPublishedDate);
+                        const time = relativeDate ? <time>{relativeDate}</time> : null;
+                        return <li key={index}>
+                            { time }
+                            <a>{event.title}</a>
+                        </li>
+                    })}
+                </ul>
+            </details>
         </section>
     )
 }

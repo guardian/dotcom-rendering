@@ -84,7 +84,7 @@ function tweetBlock(fragment: DocumentFragment): ReactNode[] {
 }
 
 const pullquoteBlock = (fragment: DocumentFragment): ReactNode =>
-    h('aside', null,
+    h('aside', { className: 'pullquote' },
         h('blockquote', null,
             h('p', null, fragment.textContent)
         )
