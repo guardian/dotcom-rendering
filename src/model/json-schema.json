@@ -322,11 +322,11 @@
                 "text": {
                     "type": "string"
                 },
-                "prefix": {
+                "kicker": {
                     "type": "string"
                 }
             },
-            "required": ["_type", "prefix", "text", "url"]
+            "required": ["_type", "kicker", "text", "url"]
         },
         "ImageBlockElement": {
             "type": "object",

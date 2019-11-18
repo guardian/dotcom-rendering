@@ -46,23 +46,23 @@ xsmallStory.story = { name: 'Size | xsmall' };
 export const liveStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="This is how a headline with a live prefix looks"
+            headlineString="This is how a headline with a live kicker looks"
             pillar="news"
-            prefix={{
+            kicker={{
                 text: 'Live',
                 pillar: 'news',
             }}
         />
     </Section>
 );
-liveStory.story = { name: 'With Live prefix' };
+liveStory.story = { name: 'With Live kicker' };
 
 export const noSlash = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="This is how a headline with no prefix slash looks"
+            headlineString="This is how a headline with no kicker slash looks"
             pillar="news"
-            prefix={{
+            kicker={{
                 text: 'Live',
                 pillar: 'news',
                 showSlash: false,
@@ -70,14 +70,14 @@ export const noSlash = () => (
         />
     </Section>
 );
-noSlash.story = { name: 'With Live prefix but no slash' };
+noSlash.story = { name: 'With Live kicker but no slash' };
 
 export const pulsingDot = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
             headlineString="This is how a headline with a pulsing dot looks"
             pillar="news"
-            prefix={{
+            kicker={{
                 text: 'Live',
                 pillar: 'news',
                 showPulsingDot: true,
@@ -90,16 +90,16 @@ pulsingDot.story = { name: 'With pulsing dot' };
 export const cultureVariant = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="This is how a headline with a culture prefix looks"
+            headlineString="This is how a headline with a culture kicker looks"
             pillar="news"
-            prefix={{
+            kicker={{
                 text: 'Art and stuff',
                 pillar: 'culture',
             }}
         />
     </Section>
 );
-cultureVariant.story = { name: 'With a culture prefix' };
+cultureVariant.story = { name: 'With a culture kicker' };
 
 export const underlinedTiny = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -184,13 +184,13 @@ export const colouredStory = () => (
 );
 colouredStory.story = { name: 'Coloured' };
 
-export const colouredWithPrefix = () => (
+export const colouredWithKicker = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="Coloured headline with a prefix"
+            headlineString="Coloured headline with a kicker"
             pillar="sport"
             coloured={true}
-            prefix={{
+            kicker={{
                 text: 'England 0 - 8 USA',
                 pillar: 'sport',
                 showPulsingDot: true,
@@ -199,15 +199,15 @@ export const colouredWithPrefix = () => (
         />
     </Section>
 );
-colouredWithPrefix.story = { name: 'Coloured with prefix' };
+colouredWithKicker.story = { name: 'Coloured with kicker' };
 
-export const OpinionPrefix = () => (
+export const OpinionKicker = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="This is how an opinion headline with a prefix looks"
+            headlineString="This is how an opinion headline with a kicker looks"
             pillar="opinion"
             showQuotes={true}
-            prefix={{
+            kicker={{
                 text: 'George Monbiot',
                 pillar: 'opinion',
                 showSlash: true,
@@ -215,7 +215,7 @@ export const OpinionPrefix = () => (
         />
     </Section>
 );
-OpinionPrefix.story = { name: 'With a culture prefix' };
+OpinionKicker.story = { name: 'With a culture kicker' };
 
 export const Busy = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -224,7 +224,7 @@ export const Busy = () => (
             pillar="lifestyle"
             showQuotes={true}
             coloured={true}
-            prefix={{
+            kicker={{
                 text: 'Aerial Yoga',
                 pillar: 'lifestyle',
                 showSlash: true,
@@ -241,7 +241,7 @@ export const InUnderlinedState = () => (
             pillar="news"
             showUnderline={true}
             size="tiny"
-            prefix={{
+            kicker={{
                 text: 'I am never underlined',
                 pillar: 'news',
                 showSlash: true,
@@ -256,7 +256,7 @@ export const linkStory = () => (
         <SmallHeadline
             headlineString="This is how a headline looks as a link"
             pillar="sport"
-            prefix={{
+            kicker={{
                 text: 'I am not a link',
                 pillar: 'sport',
                 showSlash: true,

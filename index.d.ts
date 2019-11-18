@@ -239,7 +239,7 @@ interface BadgeType {
     svgSrc: () => JSX.Element;
 }
 
-interface PrefixType {
+interface KickerType {
     text: string;
     pillar?: Pillar;
     showPulsingDot?: boolean;
@@ -260,7 +260,7 @@ interface CardType {
     headlineString: string;
     headlineSize?: SmallHeadlineSize;
     webPublicationDate?: string;
-    prefix?: PrefixType;
+    kicker?: KickerType;
     image?: CardImageType;
     standfirst?: string;
     percentage?: CardPercentageType;
