@@ -2,15 +2,18 @@ import React from 'react';
 
 import { palette } from '@guardian/src-foundations';
 
+import { ContentWrapper } from './ContentWrapper';
 import { HeadlineWrapper } from './HeadlineWrapper';
 import { ImageLeftLayout } from './ImageLeftLayout';
 import { ImageRightLayout } from './ImageRightLayout';
 import { ImageWrapper } from './ImageWrapper';
+import { StandfirstWrapper } from './StandfirstWrapper';
 import { TopBar } from './TopBar';
 import { CardLink } from './CardLink';
 import { CardListItem } from './CardListItem';
 
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
+import { Standfirst } from '@frontend/web/components/Standfirst';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 
 const decideLayout = (image?: CardImageType) => {
@@ -35,7 +38,7 @@ type CoveragesType = {
         medium: CardCoverageType;
         large: CardCoverageType;
     };
-    headline: {
+    content: {
         small: CardCoverageType;
         medium: CardCoverageType;
         large: CardCoverageType;
@@ -51,7 +54,7 @@ const coverages: CoveragesType = {
         medium: '50%',
         large: '67%',
     },
-    headline: {
+    content: {
         small: '75%',
         medium: '50%',
         large: '33%',
@@ -70,6 +73,7 @@ type Props = {
     headlineString: string;
     prefix?: PrefixType;
     image?: CardImageType;
+    standfirst?: string;
 };
 
 export const Card = ({
@@ -78,6 +82,7 @@ export const Card = ({
     headlineString,
     prefix,
     image,
+    standfirst,
 }: Props) => {
     // The choice of layout affects where any image is placed
     const Layout = decideLayout(image);
@@ -85,8 +90,8 @@ export const Card = ({
     // If there was no image given or image size was not set, coverage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
     const imageCoverage = image && image.size && coverages.image[image.size];
-    const headlineCoverage =
-        image && image.size && coverages.headline[image.size];
+    const contentCoverage =
+        image && image.size && coverages.content[image.size];
 
     return (
         <CardListItem>
@@ -107,13 +112,25 @@ export const Card = ({
                                     />
                                 </ImageWrapper>
                             )}
-                            <HeadlineWrapper coverage={headlineCoverage}>
-                                <SmallHeadline
-                                    pillar={pillar}
-                                    headlineString={headlineString}
-                                    prefix={prefix}
-                                />
-                            </HeadlineWrapper>
+                            <ContentWrapper coverage={contentCoverage}>
+                                <>
+                                    <HeadlineWrapper>
+                                        <SmallHeadline
+                                            pillar={pillar}
+                                            headlineString={headlineString}
+                                            prefix={prefix}
+                                        />
+                                    </HeadlineWrapper>
+                                    {standfirst && (
+                                        <StandfirstWrapper>
+                                            <Standfirst
+                                                pillar={pillar}
+                                                standfirst={standfirst}
+                                            />
+                                        </StandfirstWrapper>
+                                    )}
+                                </>
+                            </ContentWrapper>
                         </>
                     </Layout>
                 </TopBar>

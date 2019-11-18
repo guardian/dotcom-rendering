@@ -2,12 +2,16 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { body, headline, textSans } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
+
+import { Standfirst } from '@frontend/web/components/Standfirst';
 
 const standfirstStyles = css`
-    ${body.medium()};
+    ${headline.tiny({
+        fontWeight: 'bold',
+    })};
+    line-height: 20px;
     max-width: 550px;
-    font-weight: 700;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
 
@@ -55,14 +59,11 @@ const standfirstLinks = pillarMap(
 
 type Props = {
     pillar: Pillar;
-    standfirst: string;
+    standfirst: string; // Can be html
 };
 
 export const ArticleStandfirst = ({ pillar, standfirst }: Props) => (
-    <div // tslint:disable-line:react-no-dangerous-html
-        className={cx(standfirstStyles, standfirstLinks[pillar])}
-        dangerouslySetInnerHTML={{
-            __html: standfirst,
-        }}
-    />
+    <div className={cx(standfirstStyles, standfirstLinks[pillar])}>
+        <Standfirst pillar={pillar} standfirst={standfirst} />
+    </div>
 );
