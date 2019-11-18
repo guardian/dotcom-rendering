@@ -246,8 +246,28 @@ interface PrefixType {
     showSlash?: boolean;
 }
 
-type ImageSizeType = 'small' | 'medium' | 'large';
-type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%';
+type CardImageType = {
+    element: ImageBlockElement;
+    position?: 'left' | 'top' | 'right';
+    size?: ImageSizeType;
+};
+
+type SmallHeadlineSize = 'tiny' | 'xxsmall' | 'xsmall';
+
+interface CardType {
+    linkTo: string;
+    pillar: Pillar;
+    headlineString: string;
+    headlineSize?: SmallHeadlineSize;
+    webPublicationDate?: string;
+    prefix?: PrefixType;
+    image?: CardImageType;
+    standfirst?: string;
+    percentage?: CardPercentageType;
+}
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
+type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
 /**
  * the config model will contain useful app/site

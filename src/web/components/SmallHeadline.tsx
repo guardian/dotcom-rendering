@@ -7,7 +7,7 @@ import { palette } from '@guardian/src-foundations';
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 
-const fontStyles = (size: HeadlineLinkSize) => css`
+const fontStyles = (size: SmallHeadlineSize) => css`
     ${headline[size]()};
 `;
 
@@ -15,7 +15,7 @@ const textDecorationUnderline = css`
     text-decoration: underline;
 `;
 
-const underlinedStyles = (size: HeadlineLinkSize) => {
+const underlinedStyles = (size: SmallHeadlineSize) => {
     function generateUnderlinedCss(baseSize: number) {
         return css`
             display: inline;
@@ -72,8 +72,6 @@ const linkStyles = css`
     }
 `;
 
-type HeadlineLinkSize = 'tiny' | 'xxsmall' | 'xsmall';
-
 type Props = {
     headlineString: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the prefix (main)
@@ -81,7 +79,7 @@ type Props = {
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     prefix?: PrefixType;
     showQuotes?: boolean; // When true the QuoteIcon is shown
-    size?: HeadlineLinkSize;
+    size?: SmallHeadlineSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
     linkTo?: string; // If provided, this turns the headlineString into an a tag
 };
