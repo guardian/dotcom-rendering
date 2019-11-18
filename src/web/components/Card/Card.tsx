@@ -1,83 +1,123 @@
 import React from 'react';
-import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 
-import { CardWrapper } from './CardWrapper';
+import { HeadlineWrapper } from './HeadlineWrapper';
+import { ImageLeftLayout } from './ImageLeftLayout';
+import { ImageRightLayout } from './ImageRightLayout';
+import { ImageWrapper } from './ImageWrapper';
+import { TopBar } from './TopBar';
+import { CardLink } from './CardLink';
+import { CardListItem } from './CardListItem';
+
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
+import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 
-const linkStyles = ({
-    backgroundColour,
-    backgroundOnHover,
-}: {
-    backgroundColour: string;
-    backgroundOnHover: string;
-}) => css`
-    /* a tag specific styles */
-    color: inherit;
-    text-decoration: none;
-
-    /* The whole card is one link so we card level styles here */
-    width: 100%;
-    background-color: ${backgroundColour};
-    :hover {
-        background-color: ${backgroundOnHover};
+const decideLayout = (image?: CardImageType) => {
+    if (!image) {
+        return 'div';
     }
-
-    /* Sometimes a headline contains it's own link so we use the
-       approach described below to deal with nested links
-       See: https://css-tricks.com/nested-links/ */
-    :before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
+    switch (image.position) {
+        case 'top':
+            return 'div';
+        case 'left':
+            return ImageLeftLayout;
+        case 'right':
+            return ImageRightLayout;
+        default:
+            return 'div';
     }
-`;
+};
 
-const listStyles = css`
-    /* Here we ensure the card stretches to fill the containing space */
-    flex-basis: 100%;
-    display: flex;
+type CoveragesType = {
+    image: {
+        small: CardCoverageType;
+        medium: CardCoverageType;
+        large: CardCoverageType;
+    };
+    headline: {
+        small: CardCoverageType;
+        medium: CardCoverageType;
+        large: CardCoverageType;
+    };
+};
 
-    /* We absolutely position the 1 pixel top bar in
-       the card so this is required here */
-    position: relative;
+const coverages: CoveragesType = {
+    // coverages is how we set the image size relative to the space given
+    // to the hedline. These percentages are passed to flex-basis inside the
+    // wrapper components
+    image: {
+        small: '25%',
+        medium: '50%',
+        large: '67%',
+    },
+    headline: {
+        small: '75%',
+        medium: '50%',
+        large: '33%',
+    },
+};
 
-    /* Set spacing margins on the li element */
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 12px;
-`;
+type CardImageType = {
+    element: ImageBlockElement;
+    position?: 'left' | 'top' | 'right';
+    size?: ImageSizeType;
+};
 
 type Props = {
     linkTo: string;
     pillar: Pillar;
     headlineString: string;
     prefix?: PrefixType;
+    image?: CardImageType;
 };
 
-export const Card = ({ linkTo, pillar, headlineString, prefix }: Props) => {
+export const Card = ({
+    linkTo,
+    pillar,
+    headlineString,
+    prefix,
+    image,
+}: Props) => {
+    // The choice of layout affects where any image is placed
+    const Layout = decideLayout(image);
+
+    // If there was no image given or image size was not set, coverage is null and
+    // no flex-basis property is set in the wrappers, so content flows normally
+    const imageCoverage = image && image.size && coverages.image[image.size];
+    const headlineCoverage =
+        image && image.size && coverages.headline[image.size];
+
     return (
-        <li className={listStyles}>
-            {/* tslint:disable-next-line:react-a11y-anchors */}
-            <a
-                href={linkTo}
-                className={linkStyles({
-                    backgroundColour: palette.neutral[93],
-                    backgroundOnHover: palette.neutral[86],
-                })}
+        <CardListItem>
+            <CardLink
+                linkTo={linkTo}
+                backgroundColour={palette.neutral[93]}
+                backgroundOnHover={palette.neutral[86]}
             >
-                <CardWrapper topBarColour={palette[pillar].main}>
-                    <SmallHeadline
-                        pillar={pillar}
-                        headlineString={headlineString}
-                        prefix={prefix}
-                    />
-                </CardWrapper>
-            </a>
-        </li>
+                <TopBar topBarColour={palette[pillar].main}>
+                    <Layout>
+                        <>
+                            {image && (
+                                <ImageWrapper coverage={imageCoverage}>
+                                    <ImageComponent
+                                        element={image.element}
+                                        pillar={pillar}
+                                        hideCaption={true}
+                                    />
+                                </ImageWrapper>
+                            )}
+                            <HeadlineWrapper coverage={headlineCoverage}>
+                                <SmallHeadline
+                                    pillar={pillar}
+                                    headlineString={headlineString}
+                                    prefix={prefix}
+                                />
+                            </HeadlineWrapper>
+                        </>
+                    </Layout>
+                </TopBar>
+            </CardLink>
+        </CardListItem>
     );
 };
