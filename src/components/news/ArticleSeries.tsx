@@ -25,9 +25,9 @@ const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps): JSX.Elemen
 
     if (series) {
         return (
-            <div css={ArticleSeriesStyles(pillarStyles)}>
+            <nav css={ArticleSeriesStyles(pillarStyles)}>
                 <a href={series.webUrl}>{series.webTitle}</a>
-            </div>
+            </nav>
         )
     }
 

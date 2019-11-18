@@ -61,39 +61,47 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
 
     return (
         <main css={[MainStyles, MainDarkStyles]}>
-            <div css={BorderStyles}>
-                <HeaderImage image={mainImage} imageSalt={imageSalt} className={HeaderImageStyles}/>
-                <div css={articleWidthStyles}>
-                    <ArticleSeries series={series} pillarStyles={pillarStyles}/>
-                    <ArticleHeadline
-                        headline={fields.headline}
-                        feature={feature}
-                        rating={String(fields.starRating)}
-                        pillarStyles={pillarStyles}
+            <article css={BorderStyles}>
+                <header>
+                    <HeaderImage
+                        image={mainImage}
+                        imageSalt={imageSalt}
+                        className={HeaderImageStyles}
                     />
-                    <ArticleStandfirst
-                        standfirst={fields.standfirst}
-                        feature={feature}
-                        pillarStyles={pillarStyles}
-                    />
-                </div>
-                <Keyline pillar={pillar} type={'article'}/>
-                <div css={articleWidthStyles}>
+                    <div css={articleWidthStyles}>
+                        <ArticleSeries series={series} pillarStyles={pillarStyles}/>
+                        <ArticleHeadline
+                            headline={fields.headline}
+                            feature={feature}
+                            rating={String(fields.starRating)}
+                            pillarStyles={pillarStyles}
+                        />
+                        <ArticleStandfirst
+                            standfirst={fields.standfirst}
+                            feature={feature}
+                            pillarStyles={pillarStyles}
+                        />
+                    </div>
+                    <Keyline pillar={pillar} type={'article'}/>
                     <ArticleByline
                         byline={fields.bylineHtml}
                         pillarStyles={pillarStyles}
                         publicationDate={webPublicationDate}
                         contributors={contributors}
                         imageSalt={imageSalt}
+                        className={articleWidthStyles}
                     />
-                    <ArticleBody
-                        pillarStyles={pillarStyles}
-                        bodyElements={bodyElements}
-                        imageSalt={imageSalt}
-                    />
+                </header>
+                <ArticleBody
+                    pillarStyles={pillarStyles}
+                    bodyElements={bodyElements}
+                    imageSalt={imageSalt}
+                    className={articleWidthStyles}
+                />
+                <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>
-                </div>
-            </div>
+                </footer>
+            </article>
         </main>
     );
 }

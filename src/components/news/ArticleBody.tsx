@@ -80,11 +80,17 @@ interface ArticleBodyProps {
     pillarStyles: PillarStyles;
     bodyElements: BlockElement[];
     imageSalt: string;
+    className: SerializedStyles;
 }
 
-const ArticleBody = ({ bodyElements, pillarStyles, imageSalt }: ArticleBodyProps): JSX.Element =>
-    <article css={[ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]}>
+const ArticleBody = ({
+    bodyElements,
+    pillarStyles,
+    imageSalt,
+    className,
+}: ArticleBodyProps): JSX.Element =>
+    <div css={[className, ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]}>
         {render(bodyElements, imageSalt).html}
-    </article>
+    </div>
 
 export default ArticleBody;
