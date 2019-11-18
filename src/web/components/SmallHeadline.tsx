@@ -70,6 +70,16 @@ const linkStyles = css`
     :hover {
         text-decoration: underline;
     }
+
+    :visited {
+        color: inherit;
+    }
+`;
+
+const visitedStyles = (visitedColour: string) => css`
+    :visited {
+        color: ${visitedColour};
+    }
 `;
 
 type HeadlineLinkSize = 'tiny' | 'xxsmall' | 'xsmall';
@@ -84,6 +94,7 @@ type Props = {
     size?: HeadlineLinkSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
     linkTo?: string; // If provided, this turns the headlineString into an a tag
+    visitedColour?: string; // When used in conjunction with linkTo, allows a different colour to be used for the :visited state of such link
 };
 
 export const SmallHeadline = ({
@@ -96,6 +107,7 @@ export const SmallHeadline = ({
     size = 'xxsmall',
     coloured = false,
     linkTo,
+    visitedColour = '',
 }: Props) => {
     const Headline = linkTo ? 'a' : 'span';
     return (
@@ -119,6 +131,7 @@ export const SmallHeadline = ({
                     underlined && underlinedStyles(size),
                     showUnderline && textDecorationUnderline,
                     coloured && colourStyles(palette[pillar].dark),
+                    linkTo && visitedColour && visitedStyles(visitedColour),
                 )}
             >
                 {headlineString}
