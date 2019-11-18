@@ -13,7 +13,7 @@ At The Guardian, each SETI is embedded long-term into an existing product team. 
 
 The Guardian website is really relatively simple; although it's made up of a dozen different apps, each app only really has one core transaction which is 'get a web page'. It might be an article, a front, an interactive or whatever, but fundamentally 95% of what we do is just covered by that one transaction. We also only really have one remote dependency/api which is CAPI (although recently we've introduced Dotcom Rendering which probably counts). With so few moving parts or dependencies, there's nothing much that frequently breaks. We're quite different from a team that has to deal with outages occuring because of a myriad number of remote services. 
 
-Because of this, a SETI coming onto the Dotcom team will initially have to some trouble working out how to add the most value, since there's nothing *obviously broken* or frequently failing. Instead, QA for the Dotcom team means finding ways to elevate the quality of the work that the team produces, rather than trying to find and fix what's broken.
+Because of this, a SETI coming onto the Dotcom team will initially have to some trouble working out how to add the most value, since there's nothing *obviously broken* or frequently failing. Instead, QA for the Dotcom team means finding ways to elevate the quality of the work that the team produces as a whole, rather than trying to find and fix what's broken.
 
 In addition to this, with my background as a serverside dev, I've taken a special interest in dealing with guardian site incidents and outages, and I'm frequently the first person on the ground when the site breaks.
 
@@ -22,24 +22,20 @@ Overall, I'd say being a SETI on the Dotcom team for me has involved about 40% t
 ## Examples of SETI work done on the Dotcom team
 
 * I introduced PRBuilds as a way to run various kinds of tests that require a fully running application stack (eg. load tests, a11y tests, amp validation etc) at the PR level, but disconnected from the main teamcity CI build.
-
+* I maintain our alerts and dashboards.
 * I wrote an API that does AMP validation of pages
-
 * I built and maintained the feedpipe service which handles user feedback on the guardian website 
-
 * I've written custom lint rules that force best practices on the Dotcom Rendering project
-
 * I documented best practices with respect to site incidents and how to diagnose production issues
-
 * I've made attempts to load test various guardian apps.
-
 * I was heavily involved with the rollout of the Dotcom Rendering project to the world. Both in terms of overall strategy, and in developing the 'Picker' which allows us to do incremental feature support. In addition I provided most of the stats that the team used to help prioritise Dotcom Rendering work.
 
 ## Getting started on Dotcom
 
-Advice for beginning on Dotcom as a SETI
+Advice for SETI new starters on Dotcom
 
 * Spend the first month or so working on the same dev tasks as everyone else, being a normal engineer.
 * Try and pair as much as possible.
-* Organise your tasks in the same trello as the rest of the team, prioritise them with everyone else.
-* Even on SETI/QA Specific tasks, 
+* Organise your tasks in the same trello as the rest of the team, prioritise them with the team.
+* Organise a voluntary 1to1 with somebody you work with on the team. Your QA line manager is too far disconnected from what you do.
+
