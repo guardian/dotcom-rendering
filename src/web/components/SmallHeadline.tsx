@@ -72,18 +72,6 @@ const linkStyles = css`
     }
 `;
 
-type Props = {
-    headlineString: string; // The text shown
-    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
-    underlined?: boolean; // Some headlines have an underlined style
-    showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-    kicker?: KickerType;
-    showQuotes?: boolean; // When true the QuoteIcon is shown
-    size?: SmallHeadlineSize;
-    coloured?: boolean; // When coloured, the headline takes the dark pillar colour
-    linkTo?: string; // If provided, this turns the headlineString into an a tag
-};
-
 export const SmallHeadline = ({
     headlineString,
     pillar,
@@ -94,7 +82,7 @@ export const SmallHeadline = ({
     size = 'xxsmall',
     coloured = false,
     linkTo,
-}: Props) => {
+}: SmallHeadlineType) => {
     const Headline = linkTo ? 'a' : 'span';
     return (
         <h4 className={fontStyles(size)}>

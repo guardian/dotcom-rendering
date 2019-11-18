@@ -259,10 +259,8 @@ type SmallHeadlineSize = 'tiny' | 'xxsmall' | 'xsmall';
 interface CardType {
     linkTo: string;
     pillar: Pillar;
-    headlineString: string;
-    headlineSize?: SmallHeadlineSize;
+    headline: SmallHeadlineType;
     webPublicationDate?: string;
-    kicker?: KickerType;
     image?: CardImageType;
     standfirst?: string;
     percentage?: CardPercentageType;
@@ -270,6 +268,18 @@ interface CardType {
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
+
+interface SmallHeadlineType {
+    headlineString: string; // The text shown
+    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
+    underlined?: boolean; // Some headlines have an underlined style
+    showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
+    kicker?: KickerType;
+    showQuotes?: boolean; // When true the QuoteIcon is shown
+    size?: SmallHeadlineSize;
+    coloured?: boolean; // When coloured, the headline takes the dark pillar colour
+    linkTo?: string; // If provided, this turns the headlineString into an a tag
+}
 
 /**
  * the config model will contain useful app/site
