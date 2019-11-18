@@ -8,31 +8,13 @@ import { ImageComponent } from '@frontend/web/components/elements/ImageComponent
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
-import { ImageTopLayout } from './components/ImageTopLayout';
-import { ImageLeftLayout } from './components/ImageLeftLayout';
-import { ImageRightLayout } from './components/ImageRightLayout';
+import { CardLayout } from './components/CardLayout';
 import { ImageWrapper } from './components/ImageWrapper';
 import { StandfirstWrapper } from './components/StandfirstWrapper';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardListItem } from './components/CardListItem';
 import { CardAge } from './components/CardAge';
-
-const decideLayout = (image?: CardImageType) => {
-    if (!image) {
-        return ImageTopLayout;
-    }
-    switch (image.position) {
-        case 'top':
-            return ImageTopLayout;
-        case 'left':
-            return ImageLeftLayout;
-        case 'right':
-            return ImageRightLayout;
-        default:
-            return ImageTopLayout;
-    }
-};
 
 type CoveragesType = {
     image: {
@@ -78,9 +60,6 @@ export const Card = ({
     standfirst,
     percentage,
 }: CardType) => {
-    // The choice of layout affects where any image is placed
-    const Layout = decideLayout(image);
-
     // If there was no image given or image size was not set, percentage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
     const imageCoverage =
@@ -98,7 +77,7 @@ export const Card = ({
                 backgroundOnHover={palette.neutral[93]}
             >
                 <TopBar topBarColour={palette[pillar].main}>
-                    <Layout>
+                    <CardLayout imagePosition={image && image.position}>
                         <>
                             {image && (
                                 <ImageWrapper percentage={imageCoverage}>
@@ -140,7 +119,7 @@ export const Card = ({
                                 </div>
                             </ContentWrapper>
                         </>
-                    </Layout>
+                    </CardLayout>
                 </TopBar>
             </CardLink>
         </CardListItem>
