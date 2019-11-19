@@ -25,8 +25,7 @@ const linkTagStyles = css`
     ${headline.tiny()};
 
     &:link,
-    &:active,
-    &:visited {
+    &:active {
         color: ${palette.neutral[7]};
     }
 `;
@@ -106,6 +105,11 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                             size="tiny"
                             showUnderline={isHovered}
                             {...itemProps}
+                            link={{
+                                to: trail.url,
+                                visitedColour: palette.neutral[46],
+                                preventFocus: true,
+                            }}
                         />
                         {trail.ageWarning && (
                             <div className={ageWarningStyles}>
