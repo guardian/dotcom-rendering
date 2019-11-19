@@ -20,6 +20,7 @@ const listItemStyles = css`
 `;
 
 const linkTagStyles = css`
+    display: flex;
     text-decoration: none;
     font-weight: 500;
     ${headline.tiny()};
@@ -30,11 +31,8 @@ const linkTagStyles = css`
     }
 `;
 
-const textWrapperStyles = css`
-    display: flex;
-`;
-
 const headlineWrapperStyles = css`
+    width: calc(100% - 82px);
     display: flex;
     flex-direction: column;
 `;
@@ -58,8 +56,6 @@ const imageTagStyles = css`
     left: -24px;
     clip-path: circle(36% at 50% 50%);
 `;
-
-const ageWarningStyles = css``;
 
 type Props = {
     trail: TrailType;
@@ -89,37 +85,30 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                 data-link-name={'article'}
                 ref={hoverRef}
             >
-                <div className={textWrapperStyles}>
-                    <div className={imageWrapperStyles}>
-                        <img
-                            src={trail.image}
-                            role="presentation"
-                            alt=""
-                            className={imageTagStyles}
-                        />
-                    </div>
-                    <div className={headlineWrapperStyles}>
-                        <SmallHeadline
-                            headlineString={trail.linkText}
-                            pillar={trail.pillar}
-                            size="tiny"
-                            showUnderline={isHovered}
-                            {...itemProps}
-                            link={{
-                                to: trail.url,
-                                visitedColour: palette.neutral[46],
-                                preventFocus: true,
-                            }}
-                        />
-                        {trail.ageWarning && (
-                            <div className={ageWarningStyles}>
-                                <AgeWarning
-                                    age={trail.ageWarning}
-                                    size="small"
-                                />
-                            </div>
-                        )}
-                    </div>
+                <div className={imageWrapperStyles}>
+                    <img
+                        src={trail.image}
+                        role="presentation"
+                        alt=""
+                        className={imageTagStyles}
+                    />
+                </div>
+                <div className={headlineWrapperStyles}>
+                    <SmallHeadline
+                        headlineString={trail.linkText}
+                        pillar={trail.pillar}
+                        size="tiny"
+                        showUnderline={isHovered}
+                        {...itemProps}
+                        link={{
+                            to: trail.url,
+                            visitedColour: palette.neutral[46],
+                            preventFocus: true,
+                        }}
+                    />
+                    {trail.ageWarning && (
+                        <AgeWarning age={trail.ageWarning} size="small" />
+                    )}
                 </div>
             </a>
         </li>
