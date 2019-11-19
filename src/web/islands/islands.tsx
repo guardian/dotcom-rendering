@@ -8,6 +8,7 @@ import { MostViewedRight } from '@frontend/web/components/MostViewed/MostViewedR
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
+import { CookieBanner } from '@frontend/web/components/CookieBanner';
 
 type IslandProps =
     | {
@@ -123,6 +124,11 @@ export const hydrateIslands = (
                 inHeader: false,
             },
             root: 'reader-revenue-links-footer',
+        },
+        {
+            component: CookieBanner,
+            props: {},
+            root: 'cookie-banner',
         },
     ];
 
