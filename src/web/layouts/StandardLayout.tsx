@@ -160,7 +160,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                 />
             </Section>
 
-            <Section islandId="cookie-banner" />
+            <div data-island="cookie-banner" />
         </>
     );
 };
