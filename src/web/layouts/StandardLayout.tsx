@@ -129,6 +129,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                     </ArticleContainer>
                     <ArticleRight>
                         <StickyAd config={config} />
+                        <div data-island="most-viewed-right" />
                     </ArticleRight>
                 </Flex>
             </Section>
