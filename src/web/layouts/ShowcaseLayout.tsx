@@ -16,7 +16,6 @@ import { palette } from '@guardian/src-foundations';
 import { Header } from '@root/src/web/components/Header/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { CookieBanner } from '@root/src/web/components/CookieBanner';
 import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
@@ -151,6 +150,6 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
             />
         </Section>
 
-        <CookieBanner />
+        <div data-island="cookie-banner" />
     </>
 );
