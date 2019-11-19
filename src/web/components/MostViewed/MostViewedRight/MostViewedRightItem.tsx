@@ -20,7 +20,6 @@ const listItemStyles = css`
 `;
 
 const linkTagStyles = css`
-    display: flex;
     text-decoration: none;
     font-weight: 500;
     ${headline.tiny()};
@@ -29,6 +28,10 @@ const linkTagStyles = css`
     &:active {
         color: ${palette.neutral[7]};
     }
+`;
+
+const lineWrapperStyles = css`
+    display: flex;
 `;
 
 const headlineWrapperStyles = css`
@@ -85,30 +88,32 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                 data-link-name={'article'}
                 ref={hoverRef}
             >
-                <div className={imageWrapperStyles}>
-                    <img
-                        src={trail.image}
-                        role="presentation"
-                        alt=""
-                        className={imageTagStyles}
-                    />
-                </div>
-                <div className={headlineWrapperStyles}>
-                    <SmallHeadline
-                        headlineString={trail.linkText}
-                        pillar={trail.pillar}
-                        size="tiny"
-                        showUnderline={isHovered}
-                        {...itemProps}
-                        link={{
-                            to: trail.url,
-                            visitedColour: palette.neutral[46],
-                            preventFocus: true,
-                        }}
-                    />
-                    {trail.ageWarning && (
-                        <AgeWarning age={trail.ageWarning} size="small" />
-                    )}
+                <div className={lineWrapperStyles}>
+                    <div className={imageWrapperStyles}>
+                        <img
+                            src={trail.image}
+                            role="presentation"
+                            alt=""
+                            className={imageTagStyles}
+                        />
+                    </div>
+                    <div className={headlineWrapperStyles}>
+                        <SmallHeadline
+                            headlineString={trail.linkText}
+                            pillar={trail.pillar}
+                            size="tiny"
+                            showUnderline={isHovered}
+                            {...itemProps}
+                            link={{
+                                to: trail.url,
+                                visitedColour: palette.neutral[46],
+                                preventFocus: true,
+                            }}
+                        />
+                        {trail.ageWarning && (
+                            <AgeWarning age={trail.ageWarning} size="small" />
+                        )}
+                    </div>
                 </div>
             </a>
         </li>
