@@ -67,48 +67,39 @@ type Props = {
     position: number;
 };
 
-type ItemConditionalProps = {
-    prefix?: HeadlinePrefix;
-};
-
-export const MostViewedFooterItem = ({ trail, position }: Props) => {
-    const itemProps: ItemConditionalProps = {};
-    if (trail.isLiveBlog) {
-        itemProps.prefix = {
-            text: 'Live',
-            pillar: trail.pillar,
-            showSlash: false,
-        };
-    }
-
-    return (
-        <li
-            className={gridItem(position)}
-            data-link-name={`${position} | text`}
-        >
-            {/* tslint:disable-next-line:react-a11y-anchors */}
-            <a
-                className={headlineLink}
-                href={trail.url}
-                data-link-name={'article'}
-            >
-                <span className={bigNumber}>
-                    <BigNumber index={position} />
-                </span>
-                <div className={headlineHeader}>
+export const MostViewedFooterItem = ({ trail, position }: Props) => (
+    <li className={gridItem(position)} data-link-name={`${position} | text`}>
+        {/* tslint:disable-next-line:react-a11y-anchors */}
+        <a className={headlineLink} href={trail.url} data-link-name={'article'}>
+            <span className={bigNumber}>
+                <BigNumber index={position} />
+            </span>
+            <div className={headlineHeader}>
+                {trail.isLiveBlog ? (
                     <SmallHeadline
                         headlineString={trail.linkText}
                         pillar={trail.pillar}
                         size="tiny"
-                        {...itemProps}
+                        prefix={{
+                            text: 'Live',
+                            pillar: trail.pillar,
+                            showSlash: true,
+                            showPulsingDot: true,
+                        }}
                     />
-                </div>
-                {trail.ageWarning && (
-                    <div className={ageWarningStyles}>
-                        <AgeWarning age={trail.ageWarning} size="small" />
-                    </div>
+                ) : (
+                    <SmallHeadline
+                        headlineString={trail.linkText}
+                        pillar={trail.pillar}
+                        size="tiny"
+                    />
                 )}
-            </a>
-        </li>
-    );
-};
+            </div>
+            {trail.ageWarning && (
+                <div className={ageWarningStyles}>
+                    <AgeWarning age={trail.ageWarning} size="small" />
+                </div>
+            )}
+        </a>
+    </li>
+);
