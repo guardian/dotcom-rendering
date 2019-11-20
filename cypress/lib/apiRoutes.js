@@ -10,6 +10,11 @@ export const setupApiRoutes = () => {
         method: 'GET',
         url: '/most-read/**',
     }).as('getMostRead');
+    // Listen for most-read-geo call
+    cy.route({
+        method: 'GET',
+        url: '**/most-read-geo**',
+    }).as('getMostReadGeo');
     // Listen for most-read call
     cy.route({
         method: 'GET',
