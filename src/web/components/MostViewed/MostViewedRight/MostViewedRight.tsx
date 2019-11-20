@@ -34,7 +34,7 @@ export const MostViewedRight = ({ limitItems = 5 }: Props) => {
             <div className={wrapperStyles}>
                 <GuardianLines count={4} />
                 <h3 className={headingStyles}>most viewed</h3>
-                <div>
+                <ul>
                     {(data.trails || [])
                         .slice(0, limitItems)
                         .map((trail: TrailType, ii: number) => (
@@ -43,7 +43,7 @@ export const MostViewedRight = ({ limitItems = 5 }: Props) => {
                                 trail={trail}
                             />
                         ))}
-                </div>
+                </ul>
             </div>
         );
     }
