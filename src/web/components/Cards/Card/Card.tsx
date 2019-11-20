@@ -53,6 +53,8 @@ export const Card = ({
     linkTo,
     pillar,
     headline,
+    showDivider = false,
+    bottomMargin = false,
     webPublicationDate,
     image,
     standfirst,
@@ -68,7 +70,11 @@ export const Card = ({
     const spaceContent = !image;
 
     return (
-        <CardListItem percentage={percentage}>
+        <CardListItem
+            percentage={percentage}
+            showDivider={showDivider}
+            bottomMargin={bottomMargin}
+        >
             <CardLink
                 linkTo={linkTo}
                 backgroundColour={palette.neutral[97]}

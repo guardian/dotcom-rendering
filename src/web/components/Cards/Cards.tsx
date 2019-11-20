@@ -1,26 +1,28 @@
 import React from 'react';
-import { css } from 'emotion';
 
 import { Card } from './Card/Card';
 
 type Props = {
     cards: CardType[];
-    direction?: 'row' | 'column';
+    inColumn?: boolean;
 };
 
-export const Cards = ({ cards, direction = 'column' }: Props) => {
+export const Cards = ({ cards, inColumn }: Props) => {
     return (
-        <ul
-            className={css`
-                display: flex;
-                flex-direction: ${direction};
-            `}
-        >
-            <>
-                {cards.map((card, index) => (
-                    <Card key={index} {...card} />
-                ))}
-            </>
-        </ul>
+        <>
+            {cards.map((card, index) => {
+                const notLastItem = index < cards.length - 1;
+                const notFirstItem = index > 0;
+
+                return (
+                    <Card
+                        key={index}
+                        showDivider={!inColumn && notFirstItem}
+                        bottomMargin={inColumn && notLastItem}
+                        {...card}
+                    />
+                );
+            })}
+        </>
     );
 };
