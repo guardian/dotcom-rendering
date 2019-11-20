@@ -8,6 +8,7 @@ import { ImageComponent } from '@frontend/web/components/elements/ImageComponent
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
+import { ImageTopLayout } from './components/ImageTopLayout';
 import { ImageLeftLayout } from './components/ImageLeftLayout';
 import { ImageRightLayout } from './components/ImageRightLayout';
 import { ImageWrapper } from './components/ImageWrapper';
@@ -15,20 +16,21 @@ import { StandfirstWrapper } from './components/StandfirstWrapper';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardListItem } from './components/CardListItem';
+import { CardAge } from './components/CardAge';
 
 const decideLayout = (image?: CardImageType) => {
     if (!image) {
-        return 'div';
+        return ImageTopLayout;
     }
     switch (image.position) {
         case 'top':
-            return 'div';
+            return ImageTopLayout;
         case 'left':
             return ImageLeftLayout;
         case 'right':
             return ImageRightLayout;
         default:
-            return 'div';
+            return ImageTopLayout;
     }
 };
 
@@ -71,6 +73,7 @@ type Props = {
     linkTo: string;
     pillar: Pillar;
     headlineString: string;
+    webPublicationDate?: string;
     prefix?: PrefixType;
     image?: CardImageType;
     standfirst?: string;
@@ -80,6 +83,7 @@ export const Card = ({
     linkTo,
     pillar,
     headlineString,
+    webPublicationDate,
     prefix,
     image,
     standfirst,
@@ -89,16 +93,19 @@ export const Card = ({
 
     // If there was no image given or image size was not set, coverage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
-    const imageCoverage = image && image.size && coverages.image[image.size];
+    const imageCoverage =
+        (image && image.size && coverages.image[image.size]) || '50%';
     const contentCoverage =
-        image && image.size && coverages.content[image.size];
+        (image && image.size && coverages.content[image.size]) || '50%';
+
+    const spaceContent = !image || (image && image.position === 'top');
 
     return (
         <CardListItem>
             <CardLink
                 linkTo={linkTo}
-                backgroundColour={palette.neutral[93]}
-                backgroundOnHover={palette.neutral[86]}
+                backgroundColour={palette.neutral[97]}
+                backgroundOnHover={palette.neutral[93]}
             >
                 <TopBar topBarColour={palette[pillar].main}>
                     <Layout>
@@ -112,15 +119,18 @@ export const Card = ({
                                     />
                                 </ImageWrapper>
                             )}
-                            <ContentWrapper coverage={contentCoverage}>
-                                <>
-                                    <HeadlineWrapper>
-                                        <SmallHeadline
-                                            pillar={pillar}
-                                            headlineString={headlineString}
-                                            prefix={prefix}
-                                        />
-                                    </HeadlineWrapper>
+                            <ContentWrapper
+                                coverage={contentCoverage}
+                                spaceContent={spaceContent}
+                            >
+                                <HeadlineWrapper>
+                                    <SmallHeadline
+                                        pillar={pillar}
+                                        headlineString={headlineString}
+                                        prefix={prefix}
+                                    />
+                                </HeadlineWrapper>
+                                <div>
                                     {standfirst && (
                                         <StandfirstWrapper>
                                             <Standfirst
@@ -129,7 +139,14 @@ export const Card = ({
                                             />
                                         </StandfirstWrapper>
                                     )}
-                                </>
+                                    {webPublicationDate && (
+                                        <CardAge
+                                            webPublicationDate={
+                                                webPublicationDate
+                                            }
+                                        />
+                                    )}
+                                </div>
                             </ContentWrapper>
                         </>
                     </Layout>

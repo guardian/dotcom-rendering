@@ -9,6 +9,9 @@ type Props = {
 export const TopBar = ({ children, topBarColour }: Props) => (
     <div
         className={css`
+            display: flex;
+            width: 100%;
+
             /* Styling for top bar */
             :before {
                 background-color: ${topBarColour};
