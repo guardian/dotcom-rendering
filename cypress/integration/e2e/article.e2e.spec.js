@@ -22,12 +22,14 @@ describe('E2E Page rendering', function() {
                     cy.contains('Most popular');
                 });
 
-                cy.wait('@getMostReadGeo').then(xhr => {
-                    expect(xhr.response.body).to.have.property('heading');
-                    expect(xhr.status).to.be.equal(200);
+                if (!article.hideMostViewed) {
+                    cy.wait('@getMostReadGeo').then(xhr => {
+                        expect(xhr.response.body).to.have.property('heading');
+                        expect(xhr.status).to.be.equal(200);
 
-                    cy.contains('most viewed');
-                });
+                        cy.contains('most viewed');
+                    });
+                }
 
                 cy.wait('@getShareCount').then(xhr => {
                     expect(xhr.status).to.be.equal(200);
