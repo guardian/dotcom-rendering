@@ -168,7 +168,7 @@ const navRow = css`
 const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
     <nav>
         <ul className={pillarListStyles}>
-            {pillars.map((p, i) => (
+            {pillars.map(p => (
                 <li className={pillarListItemStyle} key={p.title}>
                     <a
                         className={pillarLinkStyle(p.pillar)}
@@ -184,10 +184,8 @@ const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
 
 export const Header: React.FC<{
     nav: NavType;
-    activePillar: Pillar;
-    config: ConfigType;
     guardianBaseURL: string;
-}> = ({ nav, activePillar, config, guardianBaseURL }) => (
+}> = ({ nav, guardianBaseURL }) => (
     <header className={headerStyles}>
         <div className={row}>
             <ReaderRevenueButton
