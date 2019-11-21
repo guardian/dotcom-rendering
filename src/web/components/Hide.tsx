@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { until, from, Breakpoint } from '@guardian/src-foundations/mq';
 
 type Props = {
-    children: ChildrenType;
+    children: JSXElements;
     when: 'above' | 'below';
     breakpoint: Breakpoint;
 };

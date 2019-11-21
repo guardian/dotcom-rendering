@@ -239,6 +239,7 @@ interface BadgeType {
     svgSrc: () => JSX.Element;
 }
 
+// Defines a prefix to be used with a headline (e.g. 'Live /')
 interface KickerType {
     text: string;
     pillar?: Pillar;
@@ -271,6 +272,12 @@ interface CardType {
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
+type HeadlineLink = {
+    to: string; // the href for the anchor tag
+    visitedColour?: string; // a custom colour for the :visited state
+    preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
+};
+
 interface SmallHeadlineType {
     headlineString: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
@@ -280,7 +287,7 @@ interface SmallHeadlineType {
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: SmallHeadlineSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
-    linkTo?: string; // If provided, this turns the headlineString into an a tag
+    link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
 }
 
 /**
@@ -370,7 +377,16 @@ interface Props {
     data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
-type ChildrenType = JSX.Element | JSX.Element[];
+type JSXElements = JSX.Element | JSX.Element[];
+
+interface TrailType {
+    url: string;
+    linkText: string;
+    isLiveBlog: boolean;
+    ageWarning: string;
+    image?: string;
+    pillar: Pillar;
+}
 
 // ------------------------------
 // 3rd party type declarations //

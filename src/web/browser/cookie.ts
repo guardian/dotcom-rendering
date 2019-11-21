@@ -6,6 +6,11 @@ const isValidCookieValue = (name: string): boolean =>
 
 const getShortDomain = (isCrossSubdomain = false): string => {
     const domain = document.domain || '';
+
+    if (domain === 'localhost') {
+        return domain;
+    }
+
     // Trim any possible subdomain (will be shared with supporter, identity, etc)
     if (isCrossSubdomain) {
         return ['', ...domain.split('.').slice(-2)].join('.');

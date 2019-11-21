@@ -27,7 +27,7 @@ const verticalDivider = css`
 `;
 
 type Props = {
-    children: ChildrenType;
+    children: JSXElements;
     direction?: 'row' | 'column';
     showDivider?: boolean;
     padded?: boolean;

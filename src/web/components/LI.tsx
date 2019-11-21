@@ -28,7 +28,7 @@ const verticalDivider = css`
 `;
 
 type Props = {
-    children: ChildrenType;
+    children: JSXElements;
     percentage?: CardPercentageType;
     showDivider?: boolean;
 };
