@@ -78,24 +78,6 @@ const visitedStyles = (visitedColour: string) => css`
     }
 `;
 
-type HeadlineLink = {
-    to: string; // the href for the anchor tag
-    visitedColour?: string; // a custom colour for the :visited state
-    preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
-};
-
-type Props = {
-    headlineString: string; // The text shown
-    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
-    underlined?: boolean; // Some headlines have an underlined style
-    showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-    kicker?: KickerType;
-    showQuotes?: boolean; // When true the QuoteIcon is shown
-    size?: SmallHeadlineSize;
-    coloured?: boolean; // When coloured, the headline takes the dark pillar colour
-    link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
-};
-
 export const SmallHeadline = ({
     headlineString,
     pillar,
@@ -106,7 +88,7 @@ export const SmallHeadline = ({
     size = 'xxsmall',
     coloured = false,
     link,
-}: Props) => {
+}: SmallHeadlineType) => {
     // Compose object with attributes that are only relevant when rendering a link tag
     const linkAttrs: { href?: string; tabIndex?: number } = {};
 

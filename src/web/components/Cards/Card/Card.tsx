@@ -52,10 +52,8 @@ const coverages: CoveragesType = {
 export const Card = ({
     linkTo,
     pillar,
-    headlineString,
-    headlineSize = 'xxsmall',
+    headline,
     webPublicationDate,
-    kicker,
     image,
     standfirst,
     percentage,
@@ -93,12 +91,7 @@ export const Card = ({
                                 spaceContent={spaceContent}
                             >
                                 <HeadlineWrapper>
-                                    <SmallHeadline
-                                        pillar={pillar}
-                                        headlineString={headlineString}
-                                        kicker={kicker}
-                                        size={headlineSize}
-                                    />
+                                    <SmallHeadline {...headline} />
                                 </HeadlineWrapper>
                                 <div>
                                     {standfirst && (
