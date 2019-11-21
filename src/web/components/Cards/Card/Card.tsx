@@ -61,9 +61,11 @@ export const Card = ({
     // If there was no image given or image size was not set, percentage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
     const imageCoverage =
-        (image && image.size && coverages.image[image.size]) || '50%';
+        (image && image.size && coverages.image[image.size]) ||
+        coverages.image.medium;
     const contentCoverage =
-        (image && image.size && coverages.content[image.size]) || '50%';
+        (image && image.size && coverages.content[image.size]) ||
+        coverages.content.medium;
 
     const spaceContent = !image;
 
