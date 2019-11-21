@@ -140,9 +140,17 @@ export const ReaderRevenueLinks: React.FC<{
                                 <div className={message}>
                                     Support The&nbsp;Guardian
                                 </div>
-                                <div className={subMessage}>
-                                    Available for everyone, funded by readers
-                                </div>
+                                {edition === 'US' ? (
+                                    <div className={subMessage}>
+                                        Support our journalism with a year-end
+                                        gift
+                                    </div>
+                                ) : (
+                                    <div className={subMessage}>
+                                        Available for everyone, funded by
+                                        readers
+                                    </div>
+                                )}
                                 <RRButton
                                     url={urls.contribute}
                                     dataLinkNamePrefix={dataLinkNamePrefix}

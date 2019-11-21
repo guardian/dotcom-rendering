@@ -3,6 +3,7 @@ import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
+import { palette } from '@guardian/src-foundations';
 
 /* tslint:disable */
 export default {
@@ -262,8 +263,53 @@ export const linkStory = () => (
                 showSlash: true,
             }}
             coloured={true}
-            linkTo="some/path/to/link/to"
+            link={{
+                to:
+                    'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+            }}
         />
     </Section>
 );
 linkStory.story = { name: 'With linkTo provided' };
+
+export const visitedLinkStory = () => (
+    <Section showTopBorder={false} showSideBorders={false}>
+        <SmallHeadline
+            headlineString="This a headline link with a custom visited colour"
+            pillar="sport"
+            prefix={{
+                text: 'I am not a link',
+                pillar: 'sport',
+                showSlash: true,
+            }}
+            coloured={true}
+            link={{
+                to:
+                    'https://www.theguardian.com/society/2019/nov/18/revealed-nhs-running-short-of-dozens-of-lifesaving-medicines',
+                visitedColour: palette.neutral[46],
+            }}
+        />
+    </Section>
+);
+visitedLinkStory.story = { name: 'With custom visited link colour' };
+
+export const notFocusableLinkStory = () => (
+    <Section showTopBorder={false} showSideBorders={false}>
+        <SmallHeadline
+            headlineString="This a headline link with a custom visited colour"
+            pillar="sport"
+            prefix={{
+                text: 'I am not a link',
+                pillar: 'sport',
+                showSlash: true,
+            }}
+            coloured={true}
+            link={{
+                to:
+                    'https://www.theguardian.com/society/2019/nov/18/revealed-nhs-running-short-of-dozens-of-lifesaving-medicines',
+                preventFocus: true,
+            }}
+        />
+    </Section>
+);
+notFocusableLinkStory.story = { name: 'With an unfocusable link' };
