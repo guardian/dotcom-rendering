@@ -24,7 +24,7 @@ interface RichLinkBlockElement {
     _type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
     url: string;
     text: string;
-    kicker: string;
+    prefix: string;
 }
 
 type RoleType =

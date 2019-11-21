@@ -10,6 +10,7 @@ import { getCookie, addCookie } from '@root/src/web/browser/cookie';
 const banner = css`
     position: fixed;
     bottom: 0;
+    left: 0;
     background-color: ${palette.neutral[20]};
     padding: 10px 0 24px;
     width: 100%;

@@ -1,20 +1,23 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { MostViewed } from './MostViewed';
-import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
+import { MostViewedFooter } from './MostViewedFooter';
+import {
+    responseWithTwoTabs,
+    responseWithOneTab,
+} from './MostViewedFooter.mocks';
 
-import { useApi as useApi_ } from '../lib/api';
+import { useApi as useApi_ } from '../../lib/api';
 
 const useApi: any = useApi_;
 
-jest.mock('../lib/api', () => ({
+jest.mock('../../lib/api', () => ({
     useApi: jest.fn(),
 }));
 
 const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
-describe('MostViewed', () => {
+describe('MostViewedFooter', () => {
     const config: ConfigType = {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
         sentryHost: '',
@@ -46,7 +49,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewed
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -65,7 +68,10 @@ describe('MostViewed', () => {
         );
 
         // Prefixes live articles correctly
-        expect(getAllByText(/Live/).length).toBe(1);
+        expect(getAllByText(/Live/).length).toBe(3);
+
+        // Renders appropriate number of age warnins
+        expect(getAllByText(/This article is more than/).length).toBe(2);
 
         // Handles &nbsp char
         expect(getByText('Across The Guardian')).toBeInTheDocument();
@@ -75,7 +81,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByTestId, getByText } = render(
-            <MostViewed
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -104,7 +110,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithOneTab);
 
         const { queryByText } = render(
-            <MostViewed
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -121,7 +127,7 @@ describe('MostViewed', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText } = render(
-            <MostViewed
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -154,7 +160,7 @@ describe('MostViewed', () => {
         });
 
         const { getByText } = render(
-            <MostViewed
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -185,7 +191,7 @@ describe('MostViewed', () => {
         });
 
         const { queryByText } = render(
-            <MostViewed
+            <MostViewedFooter
                 config={config}
                 sectionName="Section Name"
                 pillar="news"
@@ -193,67 +199,5 @@ describe('MostViewed', () => {
         );
 
         expect(queryByText('Live')).not.toBeInTheDocument();
-    });
-
-    it('should show the quote icon for comment articles', () => {
-        useApi.mockReturnValue({
-            data: [
-                {
-                    heading: 'Section header',
-                    trails: [
-                        {
-                            url: '',
-                            linkText: 'Headline',
-                            showByline: false,
-                            byline: '',
-                            image: '',
-                            isLiveBlog: false,
-                            pillar: 'opinion',
-                        },
-                    ],
-                },
-            ],
-        });
-
-        const { getByTestId } = render(
-            <MostViewed
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
-        );
-
-        expect(getByTestId('quote-icon')).toBeInTheDocument();
-    });
-
-    it('should NOT show the quote icon when pillar is not opinion', () => {
-        useApi.mockReturnValue({
-            data: [
-                {
-                    heading: 'Section header',
-                    trails: [
-                        {
-                            url: '',
-                            linkText: 'Headline',
-                            showByline: false,
-                            byline: '',
-                            image: '',
-                            isLiveBlog: false,
-                            pillar: 'news',
-                        },
-                    ],
-                },
-            ],
-        });
-
-        const { queryByTestId } = render(
-            <MostViewed
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
-        );
-
-        expect(queryByTestId('quote-icon')).not.toBeInTheDocument();
     });
 });
