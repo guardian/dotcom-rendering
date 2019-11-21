@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 type Props = {
-    children: ChildrenType;
+    children: JSXElements;
 };
 
 export const ImageLeftLayout = ({ children }: Props) => (

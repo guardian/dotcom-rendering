@@ -34,7 +34,7 @@ const linkStyles = ({
 `;
 
 type Props = {
-    children: ChildrenType;
+    children: JSXElements;
     linkTo: string;
     backgroundColour: string;
     backgroundOnHover: string;
