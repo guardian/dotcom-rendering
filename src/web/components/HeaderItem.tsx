@@ -14,7 +14,7 @@ const setOrder = (order: number) => css`
 `;
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
+    children: JSXElements;
     order: number;
 };
 

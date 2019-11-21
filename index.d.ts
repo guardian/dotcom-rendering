@@ -357,6 +357,8 @@ interface Props {
     data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
+type JSXElements = JSX.Element | JSX.Element[];
+
 interface TrailType {
     url: string;
     linkText: string;

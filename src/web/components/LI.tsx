@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
+    children: JSXElements;
     percentage?: CardPercentageType;
 };
 
