@@ -23,6 +23,19 @@ const getSrcSetsForWeighting = (
     imageSources.filter(({ weighting }) => weighting === forWeighting)[0]
         .srcSet;
 
+const makeSource = (
+    hidpi: boolean,
+    minWidth: number,
+    srcSet: SrcSet,
+): PictureSource => {
+    return {
+        hidpi,
+        minWidth,
+        width: srcSet.width,
+        srcset: `${srcSet.src} ${hidpi ? srcSet.width * 2 : srcSet.width}w`,
+    };
+};
+
 const makeSources = (imageSources: ImageSource[]): PictureSource[] => {
     const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
     const sources: PictureSource[] = [];
@@ -37,19 +50,6 @@ const makeSources = (imageSources: ImageSource[]): PictureSource[] => {
     });
 
     return sources;
-};
-
-const makeSource = (
-    hidpi: boolean,
-    minWidth: number,
-    srcSet: SrcSet,
-): PictureSource => {
-    return {
-        hidpi,
-        minWidth,
-        width: srcSet.width,
-        srcset: `${srcSet.src} ${hidpi ? srcSet.width * 2 : srcSet.width}w`,
-    };
 };
 
 const getFallback: (imageSources: ImageSource[]) => string = imageSources => {

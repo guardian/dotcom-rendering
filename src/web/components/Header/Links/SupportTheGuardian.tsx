@@ -80,6 +80,27 @@ const mobileSignInIcon = css`
     fill: ${palette.neutral[46]};
 `;
 
+const isRecentContributor: () => boolean = () => {
+    const value = getCookie('gu.contributions.contrib-timestamp');
+
+    if (!value) {
+        return false;
+    }
+
+    const now = new Date().getTime();
+    const lastContribution = new Date(value).getTime();
+    const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
+
+    return diffDays <= 180;
+};
+
+const isPayingMember: () => boolean = () => {
+    return getCookie('gu_paying_member') === 'true';
+};
+
+const shouldShow: () => Promise<boolean> = () =>
+    Promise.resolve(!(isRecentContributor() || isPayingMember()));
+
 export const SupportTheGuardian: React.FC<{
     url: string;
 }> = ({ url }) => (
@@ -112,24 +133,3 @@ export const SupportTheGuardian: React.FC<{
         )}
     </AsyncClientComponent>
 );
-
-const shouldShow: () => Promise<boolean> = () =>
-    Promise.resolve(!(isRecentContributor() || isPayingMember()));
-
-const isRecentContributor: () => boolean = () => {
-    const value = getCookie('gu.contributions.contrib-timestamp');
-
-    if (!value) {
-        return false;
-    }
-
-    const now = new Date().getTime();
-    const lastContribution = new Date(value).getTime();
-    const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
-
-    return diffDays <= 180;
-};
-
-const isPayingMember: () => boolean = () => {
-    return getCookie('gu_paying_member') === 'true';
-};

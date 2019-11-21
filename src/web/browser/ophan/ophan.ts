@@ -7,6 +7,20 @@ interface ABTestPayload {
     abTestRegister: { [key: string]: ABTestRecord };
 }
 
+export const abTestPayload = (tests: {
+    [key: string]: string;
+}): ABTestPayload => {
+    const records: { [key: string]: ABTestRecord } = {};
+    Object.keys(tests).forEach(testName => {
+        records[`ab${testName}`] = {
+            variantName: tests[testName],
+            complete: false,
+        };
+    });
+
+    return { abTestRegister: records };
+};
+
 export const sendOphanPlatformRecord = () => {
     if (
         window.guardian &&
@@ -23,20 +37,6 @@ export const sendOphanPlatformRecord = () => {
     } else {
         throw new Error("window.guardian.ophan.record doesn't exist");
     }
-};
-
-export const abTestPayload = (tests: {
-    [key: string]: string;
-}): ABTestPayload => {
-    const records: { [key: string]: ABTestRecord } = {};
-    Object.keys(tests).forEach(testName => {
-        records[`ab${testName}`] = {
-            variantName: tests[testName],
-            complete: false,
-        };
-    });
-
-    return { abTestRegister: records };
 };
 
 export const recordPerformance = () => {

@@ -275,6 +275,14 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
     );
 };
 
+const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
+    element,
+    ajaxUrl,
+) => {
+    const path = new URL(element.url).pathname;
+    return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
+};
+
 export const RichLinkComponent: React.FC<{
     element: RichLinkBlockElement;
     pillar: Pillar;
@@ -301,12 +309,4 @@ export const RichLinkComponent: React.FC<{
             </div>
         </div>
     );
-};
-
-const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
-    element,
-    ajaxUrl,
-) => {
-    const path = new URL(element.url).pathname;
-    return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
 };
