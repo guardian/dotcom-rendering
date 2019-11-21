@@ -11,7 +11,7 @@ interface Props {
 }
 
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
-export const MostViewedRightWrapper = ({ ...props }: Props) => {
+export const MostViewedRightWrapper = (props: Props) => {
     const bodyRef = useRef<any>(null);
     const [myHeight, setMyHeight] = useState(0);
 
