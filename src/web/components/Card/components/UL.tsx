@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { verticalDivider } from './lib/verticalDivider';
+import { verticalDivider } from '../lib/verticalDivider';
 
 const ulStyles = (direction?: 'row' | 'column', padded?: boolean) => css`
     position: relative;

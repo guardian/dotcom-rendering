@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { verticalDivider } from './lib/verticalDivider';
+import { verticalDivider } from '../lib/verticalDivider';
 
 const liStyles = (percentage?: CardPercentageType) => css`
     /* This position relative is needed to contain the veritcal divider */
