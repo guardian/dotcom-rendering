@@ -5,6 +5,7 @@ export interface WindowGuardianConfig {
     stage: stage;
     frontendAssetsFullURL: string;
     page: {
+        dcrCouldRender: boolean;
         contentType: string;
         edition: Edition;
         revisionNumber: string;
@@ -34,6 +35,7 @@ const makeWindowGuardianConfig = (
         stage: dcrDocumentData.config.stage,
         frontendAssetsFullURL: dcrDocumentData.config.frontendAssetsFullURL,
         page: Object.assign(dcrDocumentData.config, {
+            dcrCouldRender: true,
             contentType: dcrDocumentData.CAPI.contentType,
             edition: dcrDocumentData.CAPI.editionId,
             revisionNumber: dcrDocumentData.config.revisionNumber,
