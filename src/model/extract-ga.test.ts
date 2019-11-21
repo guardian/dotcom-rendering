@@ -1,5 +1,5 @@
-import { extract } from './extract-ga';
 import { CAPI } from '@root/fixtures/CAPI';
+import { extract } from './extract-ga';
 
 const base = {
     authorIds: 'profile/rob-davies',

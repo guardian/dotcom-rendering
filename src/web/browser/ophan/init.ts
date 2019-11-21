@@ -1,5 +1,5 @@
-import { sendOphanPlatformRecord, recordPerformance } from './ophan';
 import { startup } from '@root/src/web/browser/startup';
+import { sendOphanPlatformRecord, recordPerformance } from './ophan';
 
 // side effect only
 import 'ophan-tracker-js';

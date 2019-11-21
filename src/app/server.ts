@@ -2,11 +2,6 @@ import * as path from 'path';
 import express from 'express';
 import compression from 'compression';
 
-import { recordBaselineCloudWatchMetrics } from './aws/metrics-baseline';
-import {
-    getGuardianConfiguration,
-    GuardianConfiguration,
-} from './aws/aws-parameters';
 import { dist, port, siteName, statik } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 import {
@@ -17,6 +12,11 @@ import {
     render as renderArticle,
     renderPerfTest as renderArticlePerfTest,
 } from '@root/src/web/server/render';
+import {
+    getGuardianConfiguration,
+    GuardianConfiguration,
+} from './aws/aws-parameters';
+import { recordBaselineCloudWatchMetrics } from './aws/metrics-baseline';
 import { logger } from './logging';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server

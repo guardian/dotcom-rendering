@@ -1,5 +1,5 @@
-import { buildAdTargeting } from './ad-targeting';
 import { CAPI } from '@root/fixtures/CAPI';
+import { buildAdTargeting } from './ad-targeting';
 
 describe('buildAdTargeting', () => {
     const expectedAdTargeting = {

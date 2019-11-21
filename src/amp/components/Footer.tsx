@@ -2,7 +2,6 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/src-foundations/typography';
-import { InnerContainer } from './InnerContainer';
 import {
     Link,
     footerLinksNew,
@@ -10,6 +9,7 @@ import {
     isOnPlatform,
 } from '@root/src/lib/footer-links';
 import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';
+import { InnerContainer } from './InnerContainer';
 
 const footer = css`
     background-color: ${palette.brand.main};

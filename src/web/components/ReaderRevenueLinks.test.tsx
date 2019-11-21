@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,
 } from '@root/src/web/browser/cookie';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
 const getCookie: any = getCookie_;
 const addCookie: any = addCookie_;

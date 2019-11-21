@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ShareCount } from './ShareCount';
 import { CAPI } from '@root/fixtures/CAPI';
 
 import { useApi as useApi_ } from '@root/src/web/components/lib/api';
+import { ShareCount } from './ShareCount';
 
 const useApi: any = useApi_;
 
