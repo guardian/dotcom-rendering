@@ -92,6 +92,7 @@ export const document = ({ data }: Props) => {
 
     const openGraphData = CAPI.openGraphData;
     const twitterData = CAPI.twitterData;
+    const { twitterData } = CAPI;
 
     return htmlTemplate({
         linkedData,
