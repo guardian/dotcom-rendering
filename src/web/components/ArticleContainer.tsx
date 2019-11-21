@@ -24,21 +24,21 @@ const articleContainer = css`
 `;
 
 const articleAdStyles = css`
-    .ad-slot  {
+    .ad-slot {
         width: 300px;
         margin: 12px auto;
         min-width: 300px;
         min-height: 274px;
         text-align: center;
     }
-    .ad-slot--mostpop  {
-        ${from.desktop}  {
+    .ad-slot--mostpop {
+        ${from.desktop} {
             margin: 0;
             width: auto;
         }
     }
-    .ad-slot--inline  {
-        ${from.desktop}  {
+    .ad-slot--inline {
+        ${from.desktop} {
             margin: 0;
             width: auto;
             float: right;
@@ -46,8 +46,8 @@ const articleAdStyles = css`
             margin-left: 20px;
         }
     }
-    .ad-slot--offset-right  {
-        ${from.desktop}  {
+    .ad-slot--offset-right {
+        ${from.desktop} {
             float: right;
             width: auto;
             margin-right: -328px;
@@ -57,11 +57,11 @@ const articleAdStyles = css`
             margin-right: -388px;
         }
     }
-    .ad-slot--outstream  {
-        ${from.tablet}  {
+    .ad-slot--outstream {
+        ${from.tablet} {
             margin-left: 0;
 
-            .ad-slot__label  {
+            .ad-slot__label {
                 margin-left: 35px;
                 margin-right: 35px;
             }
