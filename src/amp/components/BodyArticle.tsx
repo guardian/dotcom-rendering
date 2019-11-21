@@ -65,7 +65,7 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const {designType} = data;
+    const { designType } = data;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
     const adTargeting = buildAdTargeting(config);
     const elementsWithoutAds = Elements(
