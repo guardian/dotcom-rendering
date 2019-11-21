@@ -247,9 +247,11 @@ interface KickerType {
     showSlash?: boolean;
 }
 
+type ImagePositionType = 'left' | 'top' | 'right';
+
 type CardImageType = {
     element: ImageBlockElement;
-    position?: 'left' | 'top' | 'right';
+    position?: ImagePositionType;
     size?: ImageSizeType;
 };
 
