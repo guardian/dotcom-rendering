@@ -19,7 +19,7 @@ const listStyles = (percentage?: CardPercentageType) => css`
 `;
 
 type Props = {
-    children: ChildrenType;
+    children: JSXElements;
     percentage?: CardPercentageType;
 };
 

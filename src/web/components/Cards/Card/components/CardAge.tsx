@@ -39,7 +39,7 @@ export const CardAge = ({ webPublicationDate }: Props) => {
     return (
         <span className={ageStyles}>
             <ClockIcon />
-            <span>{displayString}</span>
+            <time dateTime={webPublicationDate}>{displayString}</time>
         </span>
     );
 };

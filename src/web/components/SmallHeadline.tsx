@@ -72,6 +72,12 @@ const linkStyles = css`
     }
 `;
 
+const visitedStyles = (visitedColour: string) => css`
+    :visited {
+        color: ${visitedColour};
+    }
+`;
+
 export const SmallHeadline = ({
     headlineString,
     pillar,
@@ -81,9 +87,23 @@ export const SmallHeadline = ({
     showQuotes = false,
     size = 'xxsmall',
     coloured = false,
-    linkTo,
+    link,
 }: SmallHeadlineType) => {
-    const Headline = linkTo ? 'a' : 'span';
+    // Compose object with attributes that are only relevant when rendering a link tag
+    const linkAttrs: { href?: string; tabIndex?: number } = {};
+
+    // Determine whether to render a link tag or a span
+    const Headline = link && link.to ? 'a' : 'span';
+
+    // Require a 'to' property set on link for the remaining attributes to be considered
+    if (link && link.to) {
+        linkAttrs.href = link.to;
+
+        if (link.preventFocus) {
+            linkAttrs.tabIndex = -1;
+        }
+    }
+
     return (
         <h4 className={fontStyles(size)}>
             {kicker && (
@@ -98,14 +118,18 @@ export const SmallHeadline = ({
                 <QuoteIcon colour={palette[pillar].main} size={size} />
             )}
             <Headline
-                href={linkTo}
                 className={cx(
                     // Composed styles - order matters for colours
-                    linkTo && linkStyles,
+                    link && link.to && linkStyles,
                     underlined && underlinedStyles(size),
                     showUnderline && textDecorationUnderline,
                     coloured && colourStyles(palette[pillar].dark),
+                    link &&
+                        link.to &&
+                        link.visitedColour &&
+                        visitedStyles(link.visitedColour),
                 )}
+                {...linkAttrs}
             >
                 {headlineString}
             </Headline>

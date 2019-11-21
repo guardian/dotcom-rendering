@@ -3,10 +3,12 @@ import { hydrate } from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
-import { MostViewed } from '@frontend/web/components/MostViewed/MostViewed';
+import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
+import { MostViewedRight } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRight';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
+import { CookieBanner } from '@frontend/web/components/CookieBanner';
 
 type IslandProps =
     | {
@@ -21,6 +23,9 @@ type IslandProps =
           config: ConfigType;
           pillar: Pillar;
           sectionName?: string;
+      }
+    | {
+          limitItems?: number;
       }
     | {
           config: ConfigType;
@@ -88,6 +93,11 @@ export const hydrateIslands = (
             root: 'edition-root',
         },
         {
+            component: MostViewedRight,
+            props: {},
+            root: 'most-viewed-right',
+        },
+        {
             component: ShareCount,
             props: {
                 config,
@@ -96,13 +106,13 @@ export const hydrateIslands = (
             root: 'share-count',
         },
         {
-            component: MostViewed,
+            component: MostViewedFooter,
             props: {
                 config,
                 pillar,
                 sectionName,
             },
-            root: 'most-viewed',
+            root: 'most-viewed-footer',
         },
         {
             component: ReaderRevenueLinks,
@@ -114,6 +124,11 @@ export const hydrateIslands = (
                 inHeader: false,
             },
             root: 'reader-revenue-links-footer',
+        },
+        {
+            component: CookieBanner,
+            props: {},
+            root: 'cookie-banner',
         },
     ];
 

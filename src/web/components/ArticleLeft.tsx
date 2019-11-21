@@ -30,7 +30,7 @@ const rightBorder = (colour: string) => css`
 `;
 
 type Props = {
-    children: ChildrenType;
+    children: JSXElements;
     showRightBorder?: boolean;
     borderColour?: string;
 };
