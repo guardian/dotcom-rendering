@@ -5,11 +5,12 @@ type Props = {
     children: JSX.Element | JSX.Element[];
 };
 
-export const ImageLeftLayout = ({ children }: Props) => (
+export const ImageRightLayout = ({ children }: Props) => (
     <div
         className={css`
             display: flex;
-            flex-direction: row;
+            flex-direction: row-reverse;
+            width: 100%;
         `}
     >
         {children}
