@@ -277,7 +277,7 @@ export const visitedLinkStory = () => (
         <SmallHeadline
             headlineString="This a headline link with a custom visited colour"
             pillar="sport"
-            prefix={{
+            kicker={{
                 text: 'I am not a link',
                 pillar: 'sport',
                 showSlash: true,
@@ -298,7 +298,7 @@ export const notFocusableLinkStory = () => (
         <SmallHeadline
             headlineString="This a headline link with a custom visited colour"
             pillar="sport"
-            prefix={{
+            kicker={{
                 text: 'I am not a link',
                 pillar: 'sport',
                 showSlash: true,
