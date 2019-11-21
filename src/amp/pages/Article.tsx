@@ -51,8 +51,6 @@ export const Article: React.FC<{
             <Container>
                 <Header
                     nav={nav}
-                    activePillar={articleData.pillar}
-                    config={config}
                     guardianBaseURL={articleData.guardianBaseURL}
                 />
                 <Body
