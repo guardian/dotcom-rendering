@@ -262,11 +262,9 @@ interface CardType {
     pillar: Pillar;
     headline: SmallHeadlineType;
     showDivider?: boolean;
-    bottomMargin?: boolean;
     webPublicationDate?: string;
     image?: CardImageType;
     standfirst?: string;
-    percentage?: CardPercentageType;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';

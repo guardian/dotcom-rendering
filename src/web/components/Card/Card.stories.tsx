@@ -4,17 +4,16 @@ import { Section } from '@frontend/web/components/Section';
 import { Flex } from '@frontend/web/components/Flex';
 import { ArticleLeft } from '@frontend/web/components/ArticleLeft';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
-import { UL } from '@frontend/web/components/UL';
-import { LI } from '@frontend/web/components/LI';
 
-import { Cards } from './Cards';
-import { Card } from './Card/Card';
-import { imageElements } from './Cards.mocks';
+import { Card } from './Card';
+import { UL } from './components/UL';
+import { LI } from './components/LI';
+import { imageElements } from './Card.mocks';
 
 /* tslint:disable */
 export default {
-    component: Cards,
-    title: 'Components/Cards',
+    component: Card,
+    title: 'Components/Card',
     parameters: {
         viewport: {
             // This has the effect of turning off the viewports addon by default
@@ -31,66 +30,62 @@ export const News = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <UL direction="row">
-                    <Card
-                        bottomMargin={true}
-                        percentage="75%"
-                        {...{
-                            linkTo:
-                                '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
-                            pillar: 'news',
-                            headline: {
-                                headlineString:
-                                    'The Knights Who Say Ni demand a sacrifice',
-                                size: 'xsmall',
+                <UL direction="row" bottomMargin={true}>
+                    <LI percentage="75%" showDivider={false} padSides={true}>
+                        <Card
+                            {...{
+                                linkTo:
+                                    '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
-                                kicker: {
-                                    text: 'Monty Python',
+                                headline: {
+                                    headlineString:
+                                        'The Knights Who Say Ni demand a sacrifice',
+                                    size: 'xsmall',
                                     pillar: 'news',
-                                },
-                            },
-                            image: {
-                                element: imageElements[0],
-                                position: 'right',
-                                size: 'large',
-                            },
-                            standfirst:
-                                "I have to push the pram a lot. I'm not a witch. Shut up! The nose? And this isn't my nose. This is a false one. You don't vote for kings.",
-                        }}
-                    />
-                    <LI percentage="25%" showDivider={true}>
-                        <UL direction="row">
-                            <Cards
-                                cards={[
-                                    {
-                                        linkTo:
-                                            '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+                                    kicker: {
+                                        text: 'Monty Python',
                                         pillar: 'news',
-                                        headline: {
-                                            headlineString:
-                                                "Yes. We're all individuals",
-                                            size: 'xsmall',
-                                            pillar: 'news',
-                                            kicker: {
-                                                text: 'Brian',
-                                                pillar: 'news',
-                                            },
-                                        },
-                                        image: {
-                                            element: imageElements[5],
-                                            position: 'top',
-                                            size: 'small',
-                                        },
-                                        standfirst:
-                                            "Well, obviously it's not meant to be taken literally. It refers to any manufacturer of dairy products",
                                     },
-                                ]}
-                            />
-                        </UL>
+                                },
+                                image: {
+                                    element: imageElements[0],
+                                    position: 'right',
+                                    size: 'large',
+                                },
+                                standfirst:
+                                    "I have to push the pram a lot. I'm not a witch. Shut up! The nose? And this isn't my nose. This is a false one. You don't vote for kings.",
+                            }}
+                        />
+                    </LI>
+                    <LI percentage="25%" showDivider={true} padSides={true}>
+                        <Card
+                            {...{
+                                linkTo:
+                                    '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+                                pillar: 'news',
+                                headline: {
+                                    headlineString:
+                                        "Yes. We're all individuals",
+                                    size: 'xsmall',
+                                    pillar: 'news',
+                                    kicker: {
+                                        text: 'Brian',
+                                        pillar: 'news',
+                                    },
+                                },
+                                image: {
+                                    element: imageElements[5],
+                                    position: 'top',
+                                    size: 'small',
+                                },
+                                standfirst:
+                                    "Well, obviously it's not meant to be taken literally. It refers to any manufacturer of dairy products",
+                            }}
+                        />
                     </LI>
                 </UL>
                 <UL direction="row">
-                    <LI percentage="50%">
+                    <LI percentage="50%" padSides={true}>
                         <Card
                             {...{
                                 linkTo:
@@ -115,12 +110,11 @@ export const News = () => (
                             }}
                         />
                     </LI>
-                    <LI percentage="25%" showDivider={true}>
+                    <LI percentage="25%" showDivider={true} padSides={true}>
                         <UL direction="column">
-                            <Cards
-                                inColumn={true}
-                                cards={[
-                                    {
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
@@ -138,8 +132,12 @@ export const News = () => (
                                             position: 'top',
                                             size: 'small',
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
@@ -149,8 +147,12 @@ export const News = () => (
                                             pillar: 'news',
                                             size: 'tiny',
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={false}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
@@ -164,17 +166,16 @@ export const News = () => (
                                                 pillar: 'news',
                                             },
                                         },
-                                    },
-                                ]}
-                            />
+                                    }}
+                                />
+                            </LI>
                         </UL>
                     </LI>
-                    <LI percentage="25%" showDivider={true}>
+                    <LI percentage="25%" showDivider={true} padSides={true}>
                         <UL direction="column">
-                            <Cards
-                                inColumn={true}
-                                cards={[
-                                    {
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
@@ -188,8 +189,12 @@ export const News = () => (
                                                 pillar: 'sport',
                                             },
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
@@ -203,8 +208,12 @@ export const News = () => (
                                                 pillar: 'news',
                                             },
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
@@ -218,8 +227,12 @@ export const News = () => (
                                                 pillar: 'news',
                                             },
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
@@ -233,8 +246,12 @@ export const News = () => (
                                                 pillar: 'news',
                                             },
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'lifestyle',
@@ -248,8 +265,12 @@ export const News = () => (
                                                 pillar: 'lifestyle',
                                             },
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={false}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
@@ -263,9 +284,9 @@ export const News = () => (
                                                 pillar: 'news',
                                             },
                                         },
-                                    },
-                                ]}
-                            />
+                                    }}
+                                />
+                            </LI>
                         </UL>
                     </LI>
                 </UL>
@@ -283,12 +304,11 @@ export const InDepth = () => (
             </ArticleLeft>
             <ArticleContainer>
                 <UL direction="row">
-                    <LI percentage="50%">
+                    <LI percentage="50%" padSides={true}>
                         <UL direction="column">
-                            <Cards
-                                inColumn={true}
-                                cards={[
-                                    {
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
@@ -307,8 +327,12 @@ export const InDepth = () => (
                                             position: 'left',
                                             size: 'small',
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
@@ -327,8 +351,12 @@ export const InDepth = () => (
                                             position: 'left',
                                             size: 'small',
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
@@ -347,8 +375,12 @@ export const InDepth = () => (
                                             position: 'left',
                                             size: 'small',
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={true}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
@@ -367,8 +399,12 @@ export const InDepth = () => (
                                             position: 'left',
                                             size: 'small',
                                         },
-                                    },
-                                    {
+                                    }}
+                                />
+                            </LI>
+                            <LI bottomMargin={false}>
+                                <Card
+                                    {...{
                                         linkTo:
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
@@ -387,12 +423,12 @@ export const InDepth = () => (
                                             position: 'left',
                                             size: 'small',
                                         },
-                                    },
-                                ]}
-                            />
+                                    }}
+                                />
+                            </LI>
                         </UL>
                     </LI>
-                    <LI percentage="50%" showDivider={true}>
+                    <LI percentage="50%" showDivider={true} padSides={true}>
                         <Card
                             {...{
                                 linkTo:
@@ -430,10 +466,10 @@ export const Related = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <UL direction="row" padded={true}>
-                    <Cards
-                        cards={[
-                            {
+                <UL direction="row" bottomMargin={true}>
+                    <LI padSides={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
@@ -453,8 +489,12 @@ export const Related = () => (
                                     position: 'top',
                                     size: 'small',
                                 },
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
@@ -474,8 +514,12 @@ export const Related = () => (
                                     position: 'top',
                                     size: 'small',
                                 },
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
@@ -495,14 +539,14 @@ export const Related = () => (
                                     position: 'top',
                                     size: 'small',
                                 },
-                            },
-                        ]}
-                    />
+                            }}
+                        />
+                    </LI>
                 </UL>
                 <UL direction="row">
-                    <Cards
-                        cards={[
-                            {
+                    <LI padSides={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
@@ -517,8 +561,12 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
@@ -532,8 +580,12 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
@@ -547,8 +599,12 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
@@ -563,9 +619,9 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            },
-                        ]}
-                    />
+                            }}
+                        />
+                    </LI>
                 </UL>
             </ArticleContainer>
         </Flex>
@@ -617,9 +673,9 @@ export const Quad = () => (
             </ArticleLeft>
             <ArticleContainer>
                 <UL direction="row">
-                    <Cards
-                        cards={[
-                            {
+                    <LI padSides={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
@@ -639,8 +695,12 @@ export const Quad = () => (
                                     position: 'top',
                                     size: 'medium',
                                 },
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
@@ -660,8 +720,12 @@ export const Quad = () => (
                                     position: 'top',
                                     size: 'medium',
                                 },
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
@@ -681,8 +745,12 @@ export const Quad = () => (
                                     position: 'top',
                                     size: 'medium',
                                 },
-                            },
-                            {
+                            }}
+                        />
+                    </LI>
+                    <LI padSides={true} showDivider={true}>
+                        <Card
+                            {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
@@ -702,9 +770,9 @@ export const Quad = () => (
                                     position: 'top',
                                     size: 'medium',
                                 },
-                            },
-                        ]}
-                    />
+                            }}
+                        />
+                    </LI>
                 </UL>
             </ArticleContainer>
         </Flex>
