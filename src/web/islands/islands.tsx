@@ -4,7 +4,7 @@ import { hydrate } from 'react-dom';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { MostViewedRight } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRight';
+import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
@@ -93,7 +93,7 @@ export const hydrateIslands = (
             root: 'edition-root',
         },
         {
-            component: MostViewedRight,
+            component: MostViewedRightWrapper,
             props: {},
             root: 'most-viewed-right',
         },

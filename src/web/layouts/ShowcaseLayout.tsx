@@ -10,6 +10,7 @@ import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
 import { Hide } from '@root/src/web/components/Hide';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 
 import { palette } from '@guardian/src-foundations';
@@ -115,6 +116,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
                         </div>
                         <ArticleRight>
                             <StickyAd config={config} />
+                            <MostViewedRightIsland />
                         </ArticleRight>
                     </Flex>
                 </ArticleContainer>

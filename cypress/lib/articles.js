@@ -5,6 +5,7 @@ export const articles = [
         pillar: 'opinion',
         designType: 'Comment',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -12,6 +13,7 @@ export const articles = [
         pillar: 'sport',
         designType: 'Interview',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -19,6 +21,7 @@ export const articles = [
         pillar: 'news',
         designType: 'Feature',
         hasRichLinks: false,
+        hideMostViewed: false,
     },
     {
         url:
@@ -26,6 +29,7 @@ export const articles = [
         pillar: 'news',
         designType: 'Article',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -33,6 +37,7 @@ export const articles = [
         pillar: 'news',
         designType: 'Interview',
         hasRichLinks: false,
+        hideMostViewed: false,
     },
     {
         url:
@@ -40,6 +45,7 @@ export const articles = [
         pillar: 'culture',
         designType: 'Interview',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -47,6 +53,7 @@ export const articles = [
         pillar: 'sport',
         designType: 'MatchReport',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -54,6 +61,7 @@ export const articles = [
         pillar: 'sport',
         designType: 'MatchReport',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -61,6 +69,7 @@ export const articles = [
         pillar: 'lifestyle',
         designType: 'Feature',
         hasRichLinks: false,
+        hideMostViewed: false,
     },
     {
         url:
@@ -68,6 +77,7 @@ export const articles = [
         pillar: 'opinion',
         designType: 'GuardianView',
         hasRichLinks: false,
+        hideMostViewed: false,
     },
     {
         url:
@@ -75,6 +85,7 @@ export const articles = [
         pillar: 'opinion',
         designType: 'GuardianView',
         hasRichLinks: false,
+        hideMostViewed: false,
     },
     {
         url:
@@ -82,6 +93,7 @@ export const articles = [
         pillar: 'news',
         designType: 'Article',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -89,6 +101,7 @@ export const articles = [
         pillar: 'lifestyle',
         designType: 'Recipes',
         hasRichLinks: false,
+        hideMostViewed: false,
     },
     {
         url:
@@ -96,6 +109,7 @@ export const articles = [
         pillar: 'culture',
         designType: 'Review',
         hasRichLinks: false,
+        hideMostViewed: false,
     },
     {
         url:
@@ -103,6 +117,7 @@ export const articles = [
         pillar: 'news',
         designType: 'Analysis',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -110,6 +125,7 @@ export const articles = [
         pillar: 'sport',
         designType: 'Analysis',
         hasRichLinks: true,
+        hideMostViewed: false,
     },
     {
         url:
@@ -117,6 +133,15 @@ export const articles = [
         pillar: 'sport',
         designType: 'Comment',
         hasRichLinks: true,
+        hideMostViewed: false,
+    },
+    {
+        url:
+            'https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people',
+        pillar: 'news',
+        designType: 'Article',
+        hasRichLinks: false,
+        hideMostViewed: true,
     },
 ];
 
@@ -228,6 +253,12 @@ export const AMPArticles = [
             'https://amp.theguardian.com/football/blog/2019/oct/10/iran-women-watching-football-not-enough-world-cup-qualifer-cambodia',
         pillar: 'sport',
         designType: 'Comment',
+    },
+    {
+        url:
+            'https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people',
+        pillar: 'news',
+        designType: 'Article',
     },
 ];
 
