@@ -239,6 +239,7 @@ interface BadgeType {
     svgSrc: () => JSX.Element;
 }
 
+// Defines a prefix to be used with a headline (e.g. 'Live /')
 interface KickerType {
     text: string;
     pillar?: Pillar;
@@ -357,6 +358,15 @@ interface Props {
 }
 
 type ChildrenType = JSX.Element | JSX.Element[];
+
+interface TrailType {
+    url: string;
+    linkText: string;
+    isLiveBlog: boolean;
+    ageWarning: string;
+    image?: string;
+    pillar: Pillar;
+}
 
 // ------------------------------
 // 3rd party type declarations //

@@ -5,11 +5,9 @@ import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
-import { PulsingDot } from '@root/src/web/components/PulsingDot';
-import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
-import { TrailType } from './MostViewed';
+import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
 
 const gridItem = (position: number) => css`
     position: relative;
@@ -58,22 +56,6 @@ const headlineLink = css`
     ${headline.tiny()};
 `;
 
-const liveKicker = (colour: string) => css`
-    color: ${colour};
-    font-weight: 700;
-
-    &::after {
-        content: '/';
-        display: inline-block;
-        font-weight: 900;
-        margin: 0 4px;
-    }
-`;
-
-function getColour(pillar: Pillar) {
-    return palette[pillar].main;
-}
-
 const ageWarningStyles = css`
     padding-left: 4.6875rem;
     margin-top: -16px;
@@ -85,38 +67,39 @@ type Props = {
     position: number;
 };
 
-export const MostViewedItem = ({ trail, position }: Props) => {
-    return (
-        <li
-            className={gridItem(position)}
-            data-link-name={`${position} | text`}
-        >
+export const MostViewedFooterItem = ({ trail, position }: Props) => (
+    <li className={gridItem(position)} data-link-name={`${position} | text`}>
+        {/* tslint:disable-next-line:react-a11y-anchors */}
+        <a className={headlineLink} href={trail.url} data-link-name={'article'}>
             <span className={bigNumber}>
                 <BigNumber index={position} />
             </span>
-            <h2 className={headlineHeader}>
-                <a
-                    className={headlineLink}
-                    href={trail.url}
-                    data-link-name={'article'}
-                >
-                    {trail.isLiveBlog && (
-                        <span className={liveKicker(getColour(trail.pillar))}>
-                            <PulsingDot colour={getColour(trail.pillar)} />
-                            Live
-                        </span>
-                    )}
-                    {trail.pillar === 'opinion' && (
-                        <QuoteIcon colour={getColour(trail.pillar)} />
-                    )}
-                    {trail.linkText}
-                </a>
-            </h2>
+            <div className={headlineHeader}>
+                {trail.isLiveBlog ? (
+                    <SmallHeadline
+                        headlineString={trail.linkText}
+                        pillar={trail.pillar}
+                        size="tiny"
+                        kicker={{
+                            text: 'Live',
+                            pillar: trail.pillar,
+                            showSlash: true,
+                            showPulsingDot: true,
+                        }}
+                    />
+                ) : (
+                    <SmallHeadline
+                        headlineString={trail.linkText}
+                        pillar={trail.pillar}
+                        size="tiny"
+                    />
+                )}
+            </div>
             {trail.ageWarning && (
                 <div className={ageWarningStyles}>
                     <AgeWarning age={trail.ageWarning} size="small" />
                 </div>
             )}
-        </li>
-    );
-};
+        </a>
+    </li>
+);
