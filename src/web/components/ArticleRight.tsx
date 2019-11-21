@@ -25,7 +25,7 @@ const padding = css`
 `;
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
+    children: JSXElements;
 };
 
 export const ArticleRight = ({ children }: Props) => {

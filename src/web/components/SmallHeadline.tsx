@@ -7,7 +7,7 @@ import { palette } from '@guardian/src-foundations';
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 
-const fontStyles = (size: HeadlineLinkSize) => css`
+const fontStyles = (size: SmallHeadlineSize) => css`
     ${headline[size]()};
 `;
 
@@ -15,7 +15,7 @@ const textDecorationUnderline = css`
     text-decoration: underline;
 `;
 
-const underlinedStyles = (size: HeadlineLinkSize) => {
+const underlinedStyles = (size: SmallHeadlineSize) => {
     function generateUnderlinedCss(baseSize: number) {
         return css`
             display: inline;
@@ -47,7 +47,7 @@ const colourStyles = (colour: string) => css`
     color: ${colour};
 `;
 
-const prefixStyles = (colour: string) => css`
+const kickerStyles = (colour: string) => css`
     color: ${colour};
     font-weight: 700;
     margin-right: 4px;
@@ -78,8 +78,6 @@ const visitedStyles = (visitedColour: string) => css`
     }
 `;
 
-type HeadlineLinkSize = 'tiny' | 'xxsmall' | 'xsmall';
-
 type HeadlineLink = {
     to: string; // the href for the anchor tag
     visitedColour?: string; // a custom colour for the :visited state
@@ -88,12 +86,12 @@ type HeadlineLink = {
 
 type Props = {
     headlineString: string; // The text shown
-    pillar: Pillar; // Used to colour the headline (dark) and the prefix (main)
+    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     underlined?: boolean; // Some headlines have an underlined style
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-    prefix?: HeadlinePrefix;
+    kicker?: KickerType;
     showQuotes?: boolean; // When true the QuoteIcon is shown
-    size?: HeadlineLinkSize;
+    size?: SmallHeadlineSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
     link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
 };
@@ -103,7 +101,7 @@ export const SmallHeadline = ({
     pillar,
     underlined = false,
     showUnderline = false,
-    prefix,
+    kicker,
     showQuotes = false,
     size = 'xxsmall',
     coloured = false,
@@ -126,12 +124,12 @@ export const SmallHeadline = ({
 
     return (
         <h4 className={fontStyles(size)}>
-            {prefix && (
-                <Prefix
-                    text={prefix.text}
-                    pillar={prefix.pillar}
-                    showPulsingDot={prefix.showPulsingDot}
-                    showSlash={prefix.showSlash}
+            {kicker && (
+                <Kicker
+                    text={kicker.text}
+                    pillar={kicker.pillar}
+                    showPulsingDot={kicker.showPulsingDot}
+                    showSlash={kicker.showSlash}
                 />
             )}
             {showQuotes && (
@@ -157,16 +155,16 @@ export const SmallHeadline = ({
     );
 };
 
-const Prefix = ({
+const Kicker = ({
     text,
     pillar = 'news',
     showPulsingDot,
     showSlash = true,
-}: HeadlinePrefix) => {
-    const prefixColour = palette[pillar].main;
+}: KickerType) => {
+    const kickerColour = palette[pillar].main;
     return (
-        <span className={prefixStyles(prefixColour)}>
-            {showPulsingDot && <PulsingDot colour={prefixColour} />}
+        <span className={kickerStyles(kickerColour)}>
+            {showPulsingDot && <PulsingDot colour={kickerColour} />}
             <span className={cx(showSlash && slashStyles)}>{text}</span>
         </span>
     );

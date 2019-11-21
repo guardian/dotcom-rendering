@@ -239,15 +239,38 @@ interface BadgeType {
     svgSrc: () => JSX.Element;
 }
 
-interface PrefixType {
+// Defines a prefix to be used with a headline (e.g. 'Live /')
+interface KickerType {
     text: string;
     pillar?: Pillar;
     showPulsingDot?: boolean;
     showSlash?: boolean;
 }
 
-type ImageSizeType = 'small' | 'medium' | 'large';
-type CardCoverageType = '25%' | '33%' | '50%' | '67%' | '75%';
+type ImagePositionType = 'left' | 'top' | 'right';
+
+type CardImageType = {
+    element: ImageBlockElement;
+    position?: ImagePositionType;
+    size?: ImageSizeType;
+};
+
+type SmallHeadlineSize = 'tiny' | 'xxsmall' | 'xsmall';
+
+interface CardType {
+    linkTo: string;
+    pillar: Pillar;
+    headlineString: string;
+    headlineSize?: SmallHeadlineSize;
+    webPublicationDate?: string;
+    kicker?: KickerType;
+    image?: CardImageType;
+    standfirst?: string;
+    percentage?: CardPercentageType;
+}
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
+type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
 /**
  * the config model will contain useful app/site
@@ -336,13 +359,7 @@ interface Props {
     data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
-// Defines a prefix to be used with a headline (e.g. 'Live /')
-interface HeadlinePrefix {
-    text: string;
-    pillar?: Pillar;
-    showPulsingDot?: boolean;
-    showSlash?: boolean;
-}
+type JSXElements = JSX.Element | JSX.Element[];
 
 interface TrailType {
     url: string;

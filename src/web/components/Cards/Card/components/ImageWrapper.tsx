@@ -2,15 +2,15 @@ import React from 'react';
 import { css } from 'emotion';
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
-    coverage?: CardCoverageType;
+    children: JSXElements;
+    percentage?: CardPercentageType;
 };
 
-export const ImageWrapper = ({ children, coverage }: Props) => {
+export const ImageWrapper = ({ children, percentage }: Props) => {
     return (
         <div
             className={css`
-                flex-basis: ${coverage && coverage};
+                flex-basis: ${percentage && percentage};
 
                 img {
                     width: 100%;

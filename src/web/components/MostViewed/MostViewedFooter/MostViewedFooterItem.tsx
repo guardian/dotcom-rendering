@@ -80,7 +80,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
                         headlineString={trail.linkText}
                         pillar={trail.pillar}
                         size="tiny"
-                        prefix={{
+                        kicker={{
                             text: 'Live',
                             pillar: trail.pillar,
                             showSlash: true,

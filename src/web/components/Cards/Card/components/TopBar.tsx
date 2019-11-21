@@ -2,13 +2,16 @@ import React from 'react';
 import { css } from 'emotion';
 
 type Props = {
-    children: JSX.Element | JSX.Element[];
+    children: JSXElements;
     topBarColour: string;
 };
 
 export const TopBar = ({ children, topBarColour }: Props) => (
     <div
         className={css`
+            display: flex;
+            width: 100%;
+
             /* Styling for top bar */
             :before {
                 background-color: ${topBarColour};
