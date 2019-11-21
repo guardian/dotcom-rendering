@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { css } from 'emotion';
 import { MostViewedRight } from './MostViewedRight';
 
-const wrapperStyles = css`
+const flexGrow = css`
     flex-grow: 1;
 `;
 
@@ -23,7 +23,7 @@ export const MostViewedRightWrapper = ({ ...props }: Props) => {
     // Minimum height needed to render MostViewedRight is its own outer height.
     const minWrapperHeight = 550;
     return (
-        <div ref={bodyRef} className={wrapperStyles}>
+        <div ref={bodyRef} className={flexGrow}>
             {myHeight > minWrapperHeight ? (
                 <MostViewedRight {...props} />
             ) : null}
