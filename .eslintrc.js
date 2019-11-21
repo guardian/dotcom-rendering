@@ -48,6 +48,10 @@ module.exports = {
         'react/jsx-boolean-value': [2, 'always'],
         'import/prefer-default-export': false,
         '@typescript-eslint/explicit-function-return-type': 0,
+        '@typescript-eslint/no-unused-vars': 0, // Duplicated
+        // TODO, review these
+        'react/jsx-one-expression-per-line': [0],
+        'react/no-array-index-key': [0],
     },
     settings: {
         'import/resolver': {
