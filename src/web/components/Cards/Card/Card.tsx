@@ -73,7 +73,7 @@ export const Card = ({
     headlineString,
     headlineSize = 'xxsmall',
     webPublicationDate,
-    prefix,
+    kicker,
     image,
     standfirst,
     percentage,
@@ -117,7 +117,7 @@ export const Card = ({
                                     <SmallHeadline
                                         pillar={pillar}
                                         headlineString={headlineString}
-                                        prefix={prefix}
+                                        kicker={kicker}
                                         size={headlineSize}
                                     />
                                 </HeadlineWrapper>

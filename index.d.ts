@@ -239,7 +239,8 @@ interface BadgeType {
     svgSrc: () => JSX.Element;
 }
 
-interface PrefixType {
+// Defines a prefix to be used with a headline (e.g. 'Live /')
+interface KickerType {
     text: string;
     pillar?: Pillar;
     showPulsingDot?: boolean;
@@ -260,7 +261,7 @@ interface CardType {
     headlineString: string;
     headlineSize?: SmallHeadlineSize;
     webPublicationDate?: string;
-    prefix?: PrefixType;
+    kicker?: KickerType;
     image?: CardImageType;
     standfirst?: string;
     percentage?: CardPercentageType;
@@ -354,14 +355,6 @@ interface DCRDocumentData {
 
 interface Props {
     data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
-}
-
-// Defines a prefix to be used with a headline (e.g. 'Live /')
-interface HeadlinePrefix {
-    text: string;
-    pillar?: Pillar;
-    showPulsingDot?: boolean;
-    showSlash?: boolean;
 }
 
 interface TrailType {

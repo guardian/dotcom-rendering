@@ -65,7 +65,7 @@ type Props = {
 };
 
 type ItemConditionalProps = {
-    prefix?: HeadlinePrefix;
+    kicker?: KickerType;
 };
 
 export const MostViewedRightItem = ({ trail }: Props) => {
@@ -73,7 +73,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
 
     const itemProps: ItemConditionalProps = {};
     if (trail.isLiveBlog) {
-        itemProps.prefix = {
+        itemProps.kicker = {
             text: 'Live',
             pillar: trail.pillar,
             showSlash: false,

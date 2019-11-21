@@ -43,7 +43,7 @@ export const News = () => (
                                         'The Knights Who Say Ni demand a sacrifice',
                                     standfirst:
                                         "I have to push the pram a lot. I'm not a witch. Shut up! The nose? And this isn't my nose. This is a false one. You don't vote for kings.",
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -67,7 +67,7 @@ export const News = () => (
                                     pillar: 'news',
                                     headlineString:
                                         "Yes. We're all individuals",
-                                    prefix: {
+                                    kicker: {
                                         text: 'Brian',
                                         pillar: 'news',
                                     },
@@ -94,7 +94,7 @@ export const News = () => (
                                     pillar: 'culture',
                                     headlineString:
                                         "You can't expect to wield supreme power just 'cause some watery tart threw a sword at you",
-                                    prefix: {
+                                    kicker: {
                                         text: 'Holy Grail',
                                         pillar: 'culture',
                                     },
@@ -119,7 +119,7 @@ export const News = () => (
                                     pillar: 'news',
                                     headlineString:
                                         'Go and boil your bottoms, sons of a silly person!',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -144,7 +144,7 @@ export const News = () => (
                                     headlineString:
                                         'Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony',
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -163,7 +163,7 @@ export const News = () => (
                                     headlineString:
                                         'Are you suggesting that coconuts migrate?',
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Run Away!',
                                         pillar: 'sport',
                                     },
@@ -175,7 +175,7 @@ export const News = () => (
                                     headlineString:
                                         "On second thoughts, let's not go there. It is a silly place",
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -186,7 +186,7 @@ export const News = () => (
                                     pillar: 'news',
                                     headlineString: 'Let us ride to Camelot',
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -198,7 +198,7 @@ export const News = () => (
                                     headlineString:
                                         "Where'd you get the coconuts?",
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -210,7 +210,7 @@ export const News = () => (
                                     headlineString:
                                         'Now, look here, my good man',
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Terry Gillingham',
                                         pillar: 'lifestyle',
                                     },
@@ -222,7 +222,7 @@ export const News = () => (
                                     headlineString:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -256,7 +256,7 @@ export const InDepth = () => (
                                     headlineString:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Holy Grail',
                                         pillar: 'sport',
                                     },
@@ -273,7 +273,7 @@ export const InDepth = () => (
                                     headlineString:
                                         'Now, look here, my good man',
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Holy Grail',
                                         pillar: 'sport',
                                     },
@@ -290,7 +290,7 @@ export const InDepth = () => (
                                     headlineString:
                                         "Where'd you get the coconuts",
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Holy Grail',
                                         pillar: 'sport',
                                     },
@@ -306,7 +306,7 @@ export const InDepth = () => (
                                     pillar: 'sport',
                                     headlineString: 'Let us ride to Camelot!',
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Holy Grail',
                                         pillar: 'sport',
                                     },
@@ -323,7 +323,7 @@ export const InDepth = () => (
                                     headlineString:
                                         'How do you know she is a witch? Burn her!',
                                     headlineSize: 'tiny',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Holy Grail',
                                         pillar: 'sport',
                                     },
@@ -347,7 +347,7 @@ export const InDepth = () => (
                                     headlineString:
                                         'Go and boil your bottoms, sons of a silly person!',
                                     headlineSize: 'xsmall',
-                                    prefix: {
+                                    kicker: {
                                         text: 'Monty Python',
                                         pillar: 'news',
                                     },
@@ -386,7 +386,7 @@ export const Related = () => (
                             headlineSize: 'xxsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'sport',
                             },
@@ -404,7 +404,7 @@ export const Related = () => (
                             headlineSize: 'xxsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'sport',
                             },
@@ -422,7 +422,7 @@ export const Related = () => (
                             headlineSize: 'xxsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'sport',
                             },
@@ -447,7 +447,7 @@ export const Related = () => (
                                 headlineSize: 'tiny',
 
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                prefix: {
+                                kicker: {
                                     text: 'Monty Python',
                                     pillar: 'news',
                                 },
@@ -460,7 +460,7 @@ export const Related = () => (
                                 headlineSize: 'tiny',
 
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                prefix: {
+                                kicker: {
                                     text: 'Holy Grail',
                                     pillar: 'sport',
                                 },
@@ -473,7 +473,7 @@ export const Related = () => (
                                 headlineSize: 'tiny',
 
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                prefix: {
+                                kicker: {
                                     text: 'Holy Grail',
                                     pillar: 'sport',
                                 },
@@ -487,7 +487,7 @@ export const Related = () => (
                                 headlineSize: 'tiny',
 
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                prefix: {
+                                kicker: {
                                     text: 'Holy Grail',
                                     pillar: 'sport',
                                 },
@@ -520,7 +520,7 @@ export const Spotlight = () => (
                             headlineSize: 'xsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'sport',
                             },
@@ -557,7 +557,7 @@ export const Quad = () => (
                             headlineSize: 'xxsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'news',
                             },
@@ -576,7 +576,7 @@ export const Quad = () => (
                             headlineSize: 'xxsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'news',
                             },
@@ -595,7 +595,7 @@ export const Quad = () => (
                             headlineSize: 'xxsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'news',
                             },
@@ -614,7 +614,7 @@ export const Quad = () => (
                             headlineSize: 'xxsmall',
 
                             webPublicationDate: '2019-11-11T09:45:30.000Z',
-                            prefix: {
+                            kicker: {
                                 text: 'Holy Grail',
                                 pillar: 'news',
                             },

@@ -47,7 +47,7 @@ const colourStyles = (colour: string) => css`
     color: ${colour};
 `;
 
-const prefixStyles = (colour: string) => css`
+const kickerStyles = (colour: string) => css`
     color: ${colour};
     font-weight: 700;
     margin-right: 4px;
@@ -86,10 +86,10 @@ type HeadlineLink = {
 
 type Props = {
     headlineString: string; // The text shown
-    pillar: Pillar; // Used to colour the headline (dark) and the prefix (main)
+    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     underlined?: boolean; // Some headlines have an underlined style
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-    prefix?: HeadlinePrefix;
+    kicker?: KickerType;
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: SmallHeadlineSize;
     coloured?: boolean; // When coloured, the headline takes the dark pillar colour
@@ -101,7 +101,7 @@ export const SmallHeadline = ({
     pillar,
     underlined = false,
     showUnderline = false,
-    prefix,
+    kicker,
     showQuotes = false,
     size = 'xxsmall',
     coloured = false,
@@ -124,12 +124,12 @@ export const SmallHeadline = ({
 
     return (
         <h4 className={fontStyles(size)}>
-            {prefix && (
-                <Prefix
-                    text={prefix.text}
-                    pillar={prefix.pillar}
-                    showPulsingDot={prefix.showPulsingDot}
-                    showSlash={prefix.showSlash}
+            {kicker && (
+                <Kicker
+                    text={kicker.text}
+                    pillar={kicker.pillar}
+                    showPulsingDot={kicker.showPulsingDot}
+                    showSlash={kicker.showSlash}
                 />
             )}
             {showQuotes && (
@@ -155,16 +155,16 @@ export const SmallHeadline = ({
     );
 };
 
-const Prefix = ({
+const Kicker = ({
     text,
     pillar = 'news',
     showPulsingDot,
     showSlash = true,
-}: HeadlinePrefix) => {
-    const prefixColour = palette[pillar].main;
+}: KickerType) => {
+    const kickerColour = palette[pillar].main;
     return (
-        <span className={prefixStyles(prefixColour)}>
-            {showPulsingDot && <PulsingDot colour={prefixColour} />}
+        <span className={kickerStyles(kickerColour)}>
+            {showPulsingDot && <PulsingDot colour={kickerColour} />}
             <span className={cx(showSlash && slashStyles)}>{text}</span>
         </span>
     );
