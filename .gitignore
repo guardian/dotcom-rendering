@@ -16,6 +16,7 @@ node_modules
 .idea
 .vscode/*
 !.vscode/extensions.json
+!.vscode/dcr.code-snippets
 
 # System files
 .DS_Store
