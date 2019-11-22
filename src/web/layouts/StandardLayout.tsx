@@ -54,7 +54,6 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                 padded={false}
             >
                 <HeaderAdSlot
-                    config={config}
                     isAdFreeUser={CAPI.isAdFreeUser}
                     shouldHideAds={CAPI.shouldHideAds}
                 />
@@ -128,7 +127,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                         </main>
                     </ArticleContainer>
                     <ArticleRight>
-                        <StickyAd config={config} />
+                        <StickyAd />
                         <MostViewedRightIsland />
                     </ArticleRight>
                 </Flex>

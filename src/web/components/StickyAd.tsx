@@ -14,15 +14,10 @@ const stickyAdSlot = css`
     top: 0;
 `;
 
-type Props = {
-    config: ConfigType;
-};
-
-export const StickyAd = ({ config }: Props) => (
+export const StickyAd = () => (
     <div className={adSlotWrapper}>
         <AdSlot
             asps={namedAdSlotParameters('right')}
-            config={config}
             className={stickyAdSlot}
         />
     </div>

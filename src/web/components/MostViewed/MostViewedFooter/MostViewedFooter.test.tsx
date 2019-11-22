@@ -18,29 +18,6 @@ const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
 describe('MostViewedFooter', () => {
-    const config: ConfigType = {
-        ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-        sentryHost: '',
-        sentryPublicApiKey: '',
-        dcrSentryDsn: '',
-        switches: {},
-        abTests: {},
-        dfpAccountId: '',
-        commercialBundleUrl: '',
-        revisionNumber: '',
-        isDev: false,
-        googletagUrl: '',
-        stage: 'DEV',
-        frontendAssetsFullURL: '',
-        hbImpl: '',
-        adUnit: '',
-        isSensitive: '',
-        videoDuration: 0,
-        edition: '',
-        section: '',
-        sharedAdTargeting: {},
-    };
-
     beforeEach(() => {
         useApi.mockReset();
     });
@@ -49,11 +26,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
+            <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         // Calls api once only
@@ -81,11 +54,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByTestId, getByText } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
+            <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         const firstHeading = responseWithTwoTabs.data[0].heading;
@@ -110,11 +79,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue(responseWithOneTab);
 
         const { queryByText } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
+            <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         expect(
@@ -127,11 +92,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue(responseWithTwoTabs);
 
         const { getByText } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
+            <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         expect(
@@ -160,11 +121,7 @@ describe('MostViewedFooter', () => {
         });
 
         const { getByText } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
+            <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         expect(getByText('Live')).toBeInTheDocument();
@@ -191,11 +148,7 @@ describe('MostViewedFooter', () => {
         });
 
         const { queryByText } = render(
-            <MostViewedFooter
-                config={config}
-                sectionName="Section Name"
-                pillar="news"
-            />,
+            <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         expect(queryByText('Live')).not.toBeInTheDocument();

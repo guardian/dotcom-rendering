@@ -9,29 +9,6 @@ import {
     responseWithOneTab,
 } from './MostViewedFooter.mocks';
 
-const config: ConfigType = {
-    ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-    sentryHost: '',
-    sentryPublicApiKey: '',
-    dcrSentryDsn: '',
-    switches: {},
-    abTests: {},
-    dfpAccountId: '',
-    commercialBundleUrl: '',
-    revisionNumber: '',
-    isDev: false,
-    googletagUrl: '',
-    stage: 'DEV',
-    frontendAssetsFullURL: '',
-    hbImpl: '',
-    adUnit: '',
-    isSensitive: '',
-    videoDuration: 0,
-    edition: '',
-    section: '',
-    sharedAdTargeting: {},
-};
-
 /* tslint:disable */
 export default {
     component: MostViewedFooter,
@@ -47,12 +24,7 @@ export const withTwoTabs = () => {
 
     return (
         <Section>
-            <MostViewedFooter
-                pillar="news"
-                config={config}
-                sectionName="politics"
-            />
-            ;
+            <MostViewedFooter pillar="news" sectionName="politics" />;
         </Section>
     );
 };
@@ -66,7 +38,7 @@ export const withOneTabs = () => {
 
     return (
         <Section>
-            <MostViewedFooter pillar="news" config={config} />;
+            <MostViewedFooter pillar="news" />;
         </Section>
     );
 };
