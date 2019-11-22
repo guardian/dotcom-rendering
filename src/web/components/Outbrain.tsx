@@ -104,9 +104,7 @@ const outbrainContainer = css`
     }
 `;
 
-export const OutbrainContainer: React.FC<{
-    config: ConfigType;
-}> = ({ config }) => {
+export const OutbrainContainer: React.FC<{}> = () => {
     return (
         <div className={outbrainContainer}>
             <OutbrainWidget />
