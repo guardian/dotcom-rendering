@@ -5,7 +5,6 @@ import { verticalDivider } from '../lib/verticalDivider';
 
 const ulStyles = (direction?: 'row' | 'column', padded?: boolean) => css`
     position: relative;
-
     display: flex;
     flex-direction: ${direction};
 `;
