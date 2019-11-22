@@ -108,7 +108,9 @@ const blackBackground = css`
 `;
 
 const maxWidth = css`
-    max-width: 620px;
+    ${from.desktop} {
+        max-width: 620px;
+    }
 `;
 
 const invertedWrapper = css`

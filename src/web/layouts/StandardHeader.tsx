@@ -39,7 +39,9 @@ const headerStyles = css`
 `;
 
 const maxWidth = css`
-    max-width: 620px;
+    ${from.desktop} {
+        max-width: 620px;
+    }
 `;
 
 type Props = {
@@ -79,9 +81,11 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
             <HeaderItem order={3}>
                 <ArticleStandfirst pillar={pillar} standfirst={standfirst} />
             </HeaderItem>
-            <div className={cx(positionMainImage, maxWidth)}>
-                <MainMedia elements={mainMediaElements} pillar={pillar} />
-            </div>
+            <Hide when="below" breakpoint="tablet">
+                <div className={cx(positionMainImage, maxWidth)}>
+                    <MainMedia elements={mainMediaElements} pillar={pillar} />
+                </div>
+            </Hide>
         </header>
     );
 };

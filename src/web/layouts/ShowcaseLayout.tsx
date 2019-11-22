@@ -12,6 +12,7 @@ import { Hide } from '@root/src/web/components/Hide';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
+import { MainMedia } from '@root/src/web/components/MainMedia';
 
 import { palette } from '@guardian/src-foundations';
 import { Header } from '@root/src/web/components/Header/Header';
@@ -65,6 +66,16 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
                 pillar={CAPI.pillar}
             />
         </Section>
+
+        <Hide when="above" breakpoint="tablet">
+            {/* When below tablet, show the main article image in a full width container */}
+            <Section showTopBorder={false} padded={false}>
+                <MainMedia
+                    elements={CAPI.mainMediaElements}
+                    pillar={CAPI.pillar}
+                />
+            </Section>
+        </Hide>
 
         <Section showTopBorder={false}>
             <Flex>
