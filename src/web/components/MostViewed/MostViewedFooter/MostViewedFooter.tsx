@@ -159,7 +159,7 @@ export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
                         >
                             <AdSlot
                                 asps={namedAdSlotParameters('mostpop')}
-                                className={''}
+                                className=""
                             />
                         </div>
                     </section>

@@ -50,7 +50,7 @@ export const Pagination: React.SFC<{
         url: string,
         icon: JSX.Element,
         suffix?: string,
-        hasRightMargin: boolean = false,
+        hasRightMargin = false,
     ): JSX.Element => {
         const styles = paginationLinkStyle(
             suffix !== undefined,

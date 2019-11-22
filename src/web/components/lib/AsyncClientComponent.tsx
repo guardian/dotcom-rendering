@@ -10,13 +10,15 @@ export class AsyncClientComponent<T> extends React.Component<
     { data: T | undefined }
 > {
     public state = { data: undefined };
+
     public componentDidMount() {
         this.props.f().then(data => {
             this.setState({ data });
         });
     }
+
     public render() {
-        const data = this.state.data;
+        const {data} = this.state;
         return this.props.children({ data });
     }
 }

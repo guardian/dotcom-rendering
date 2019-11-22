@@ -45,9 +45,7 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
                     <div data-island="edition-root">
                         <EditionDropdown
                             edition={this.props.edition}
-                            dataLinkName={
-                                'nav2 : topbar : edition-picker: toggle'
-                            }
+                            dataLinkName="nav2 : topbar : edition-picker: toggle"
                         />
                     </div>
                 </Hide>

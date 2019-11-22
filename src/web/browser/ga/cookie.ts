@@ -21,7 +21,7 @@ const getDomainAttribute = (isCrossSubdomain = false): string => {
 
 export const removeCookie = (
     name: string,
-    currentDomainOnly: boolean = false,
+    currentDomainOnly = false,
 ): void => {
     const expires = 'expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     const path = 'path=/;';
@@ -38,7 +38,7 @@ export const addCookie = (
     name: string,
     value: string,
     daysToLive?: number,
-    isCrossSubdomain: boolean = false,
+    isCrossSubdomain = false,
 ): void => {
     const expires = new Date();
 
@@ -93,7 +93,7 @@ const getCookieValues = (name: string): string[] => {
     return cookies.reduce<string[]>((acc, cookie) => {
         const cookieTrimmed = cookie.trim();
 
-        if (cookieTrimmed.indexOf(nameEq) === 0) {
+        if (cookieTrimmed.startsWith(nameEq)) {
             acc.push(
                 cookieTrimmed.substring(nameEq.length, cookieTrimmed.length),
             );

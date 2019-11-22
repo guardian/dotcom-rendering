@@ -87,7 +87,7 @@ test('it gets the correct image height, using aspect ratio', async () => {
         mimeType: 'jpg',
         url: 'https://media.guim.co.uk/abc/1000',
     };
-    const width: number = 600;
+    const width = 600;
     const h = heightEstimate(comparisonImage, width);
 
     expect(h).toBe(360);

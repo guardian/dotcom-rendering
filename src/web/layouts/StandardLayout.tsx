@@ -38,7 +38,7 @@ function checkForGE2019Badge(tags: TagType[]) {
             svgSrc: GE2019,
         };
     }
-    return;
+    
 }
 
 interface Props {

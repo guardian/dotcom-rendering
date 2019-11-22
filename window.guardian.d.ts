@@ -1,7 +1,7 @@
 import { WindowGuardianConfig } from '@root/src/model/window-guardian';
 
 declare global {
-    /*~ Here, declare things that go in the global namespace, or augment
+    /* ~ Here, declare things that go in the global namespace, or augment
      *~ existing declarations in the global namespace
      */
     interface Window {
@@ -36,5 +36,5 @@ declare global {
         ga: UniversalAnalytics.ga;
     }
 }
-/*~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */
+/* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */
 export {};

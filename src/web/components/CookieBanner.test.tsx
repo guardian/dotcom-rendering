@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { CookieBanner } from './CookieBanner';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,
 } from '@root/src/web/browser/cookie';
+import { CookieBanner } from './CookieBanner';
 
 const getCookie: any = getCookie_;
 const addCookie: any = addCookie_;

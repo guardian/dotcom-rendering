@@ -67,8 +67,8 @@ const PaidForByLogo: React.FC<{
             >
                 <amp-img
                     src={logo.src}
-                    width={`140px`}
-                    height={`90px`}
+                    width="140px"
+                    height="90px"
                     alt={sponsorName}
                 />
             </a>
@@ -83,8 +83,7 @@ const Headline: React.FC<{
 export const TopMetaPaidContent: React.FC<{
     articleData: ArticleModel;
 }> = ({ articleData }) => {
-    const branding =
-        articleData.commercialProperties[articleData.editionId].branding;
+    const {branding} = articleData.commercialProperties[articleData.editionId];
 
     return (
         <header>

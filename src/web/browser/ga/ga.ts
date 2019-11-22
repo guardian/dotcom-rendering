@@ -49,19 +49,19 @@ export const sendPageView = (): void => {
     const set = `${tracker.name}.set`;
     const send = `${tracker.name}.send`;
     const identityId = getCookie('GU_U');
-    const ga = window.ga;
+    const {ga} = window;
 
     ga(set, 'forceSSL', true);
     ga(set, 'title', GA.webTitle);
     ga(set, 'anonymizeIp', true);
-    /***************************************************************************************
+    /** *************************************************************************************
      * Custom dimensions common to all platforms across the whole Guardian estate          *
-     ***************************************************************************************/
+     ************************************************************************************** */
     ga(set, 'dimension3', 'theguardian.com'); /* Platform */
-    /***************************************************************************************
+    /** *************************************************************************************
      * Custom dimensions for 'editorial' platforms (this site, the mobile apps, etc.)      *
      * Some of these will be undefined for non-content pages, but that's fine.             *
-     ***************************************************************************************/
+     ************************************************************************************** */
     ga(set, 'dimension4', GA.section);
     ga(set, 'dimension5', GA.contentType);
     ga(set, 'dimension6', GA.commissioningDesks);
