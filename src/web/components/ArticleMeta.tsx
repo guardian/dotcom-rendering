@@ -39,10 +39,9 @@ const metaExtras = css`
 
 type Props = {
     CAPI: CAPIType;
-    config: ConfigType;
 };
 
-export const ArticleMeta = ({ CAPI, config }: Props) => {
+export const ArticleMeta = ({ CAPI }: Props) => {
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
 
     return (
