@@ -28,14 +28,12 @@ const links: Link[] = [
 
 const LABEL = 'Dropdown label';
 
-/*
-        interface Props {
-            id: string;
-            label: string;
-            links: Link[];
-            dataLinkName: string;
-        }
-*/
+// interface Props {
+//     id: string;
+//     label: string;
+//     links: Link[];
+//     dataLinkName: string;
+// }
 
 describe('Dropdown', () => {
     it('should display the given label', () => {

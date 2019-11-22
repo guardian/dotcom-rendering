@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 // Note this will need to be periodically updated - just copy from
 // https://www.theguardian.com/lifeandstyle/2015/aug/30/espigoladors-barcelona-catalan-food-funny-shaped-vegetables-people-need.json?dcr.
 export const bodyJSON = String.raw`
