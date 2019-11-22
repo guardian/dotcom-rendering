@@ -99,12 +99,12 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />
-                        <ArticleMeta CAPI={CAPI} config={config} />
+                        <ArticleMeta CAPI={CAPI} />
                     </ArticleLeft>
                     <ArticleContainer>
                         <StandardHeader CAPI={CAPI} badge={GE2019Badge} />
                         <Hide when="above" breakpoint="leftCol">
-                            <ArticleMeta CAPI={CAPI} config={config} />
+                            <ArticleMeta CAPI={CAPI} />
                         </Hide>
                         <main
                             className={css`

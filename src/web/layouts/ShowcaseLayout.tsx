@@ -71,7 +71,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
             <Flex>
                 <ArticleLeft>
                     <ArticleTitle CAPI={CAPI} inLeftCol={true} />
-                    <ArticleMeta CAPI={CAPI} config={config} />
+                    <ArticleMeta CAPI={CAPI} />
                 </ArticleLeft>
                 <ArticleContainer>
                     {/* When BELOW leftCol we display the header in this position, at the top of the page */}
@@ -83,7 +83,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
                             {/* When ABOVE leftCol we display the header in this position, above the article body, underneath the full width image */}
                             <Hide when="above" breakpoint="leftCol">
                                 <ShowcaseHeader CAPI={CAPI} />
-                                <ArticleMeta CAPI={CAPI} config={config} />
+                                <ArticleMeta CAPI={CAPI} />
                             </Hide>
 
                             <main
