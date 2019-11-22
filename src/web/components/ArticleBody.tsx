@@ -118,9 +118,8 @@ const linkColour = pillarMap(
 
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
-    config: ConfigType;
     isShowcase?: boolean;
-}> = ({ CAPI, config, isShowcase }) => {
+}> = ({ CAPI, isShowcase }) => {
     return (
         <div
             className={cx(bodyStyle, linkColour[CAPI.pillar], {
