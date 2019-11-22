@@ -25,10 +25,10 @@ const marginBottomStyles = css`
 
 type Props = {
     children: JSXElements;
-    percentage?: CardPercentageType;
-    showDivider?: boolean;
-    padSides?: boolean;
-    bottomMargin?: boolean;
+    percentage?: CardPercentageType; // Passed to flex-basis, defaults to flex grow
+    showDivider?: boolean; // If this LI wraps a card in a row this should be true
+    padSides?: boolean; // If this LI directly wraps a card this should be true
+    bottomMargin?: boolean; // True when wrapping a card in a column and not the last item
 };
 
 export const LI = ({
