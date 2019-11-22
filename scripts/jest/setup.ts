@@ -33,7 +33,7 @@ const windowGuardian = {
     },
     modules: {
         sentry: {
-            reportError: (error: Error, feature: string): void => {
+            reportError: (error: Error): void => {
                 // tslint:disable-next-line: no-console
                 console.log(
                     `Error: attempting to log error without having registered sentry.\nError is: ${error.message}`,

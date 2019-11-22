@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import _ from 'react';
 
 // Provides type definition for AMP attributes on React/JSX elements.
