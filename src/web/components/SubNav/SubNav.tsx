@@ -81,6 +81,12 @@ export class SubNav extends Component<
     }
 
     public render() {
+        const { subnav, pillar, currentNavLink } = this.props;
+
+        if (!subnav) {
+            return null;
+        }
+
         const { showMore, isExpanded } = this.state;
         const collapseWrapper = !showMore || !isExpanded;
         const expandSubNav = !showMore || isExpanded;
@@ -88,16 +94,16 @@ export class SubNav extends Component<
         return (
             <div className={subnavWrapper}>
                 <Inner
-                    links={this.props.subnav.links}
-                    pillar={this.props.pillar}
-                    parent={this.props.subnav.parent}
+                    links={subnav.links}
+                    pillar={pillar}
+                    parent={subnav.parent}
                     showMore={showMore}
                     isExpanded={isExpanded}
                     collapseWrapper={collapseWrapper}
                     expandSubNav={expandSubNav}
                     ulRef={this.ulRef}
                     toggle={this.toggle}
-                    currentNavLink={this.props.currentNavLink}
+                    currentNavLink={currentNavLink}
                 />
                 <div className={multiLine} />
             </div>
