@@ -169,9 +169,8 @@ export const AdSlotCore: React.FC<{
 
 export const AdSlot: React.FC<{
     asps: AdSlotParameters;
-    config: ConfigType;
     className: string;
-}> = ({ asps, config, className }) => {
+}> = ({ asps, className }) => {
     return <AdSlotCore {...asps} className={className} />;
 };
 

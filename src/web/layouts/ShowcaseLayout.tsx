@@ -34,7 +34,6 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
     <>
         <Section showTopBorder={false} showSideBorders={false} padded={false}>
             <HeaderAdSlot
-                config={config}
                 isAdFreeUser={CAPI.isAdFreeUser}
                 shouldHideAds={CAPI.shouldHideAds}
             />
@@ -115,7 +114,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
                             </main>
                         </div>
                         <ArticleRight>
-                            <StickyAd config={config} />
+                            <StickyAd />
                             <MostViewedRightIsland />
                         </ArticleRight>
                     </Flex>

@@ -82,7 +82,6 @@ export interface TabType {
 
 interface Props {
     sectionName?: string;
-    config: ConfigType;
     pillar: Pillar;
 }
 
@@ -97,7 +96,7 @@ function buildSectionUrl(sectionName?: string) {
     return `https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`;
 }
 
-export const MostViewedFooter = ({ config, sectionName, pillar }: Props) => {
+export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
     const url = buildSectionUrl(sectionName);
     const { data, error } = useApi<TabType[]>(url);
 
@@ -130,7 +129,6 @@ export const MostViewedFooter = ({ config, sectionName, pillar }: Props) => {
                         >
                             <AdSlot
                                 asps={namedAdSlotParameters('mostpop')}
-                                config={config}
                                 className={''}
                             />
                         </div>

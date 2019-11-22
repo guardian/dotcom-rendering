@@ -34,10 +34,9 @@ const adSlotAboveNav = css`
 `;
 
 export const HeaderAdSlot: React.FC<{
-    config: ConfigType;
     isAdFreeUser: boolean;
     shouldHideAds: boolean;
-}> = ({ config, isAdFreeUser, shouldHideAds }) => (
+}> = ({ isAdFreeUser, shouldHideAds }) => (
     <div className={headerWrapper}>
         <Hide when="below" breakpoint="tablet">
             <div
@@ -48,7 +47,6 @@ export const HeaderAdSlot: React.FC<{
             >
                 <AdSlot
                     asps={namedAdSlotParameters('top-above-nav')}
-                    config={config}
                     className={adSlotAboveNav}
                 />
             </div>
