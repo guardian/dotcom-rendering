@@ -14,24 +14,6 @@ import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/amp/lib/ad-targeting';
 
-const body = (pillar: Pillar, designType: DesignType) => {
-    const defaultStyles: DesignTypesObj = designTypeDefault(
-        palette.neutral[100],
-    );
-
-    // Extend defaultStyles with custom styles for some designTypes
-    const designTypeStyle: DesignTypesObj = {
-        ...defaultStyles,
-        Comment: palette.opinion.faded,
-        AdvertisementFeature: palette.neutral[86],
-    };
-
-    return css`
-        background-color: ${designTypeStyle[designType]};
-        ${bulletStyle(pillar)}
-    `;
-};
-
 const bulletStyle = (pillar: Pillar) => css`
     .bullet {
         color: transparent;
@@ -50,6 +32,24 @@ const bulletStyle = (pillar: Pillar) => css`
     }
 `;
 
+const body = (pillar: Pillar, designType: DesignType) => {
+    const defaultStyles: DesignTypesObj = designTypeDefault(
+        palette.neutral[100],
+    );
+
+    // Extend defaultStyles with custom styles for some designTypes
+    const designTypeStyle: DesignTypesObj = {
+        ...defaultStyles,
+        Comment: palette.opinion.faded,
+        AdvertisementFeature: palette.neutral[86],
+    };
+
+    return css`
+        background-color: ${designTypeStyle[designType]};
+        ${bulletStyle(pillar)}
+    `;
+};
+
 const adStyle = css`
     float: right;
     margin: 4px 0 12px 20px;
@@ -65,7 +65,7 @@ export const Body: React.FC<{
     data: ArticleModel;
     config: ConfigType;
 }> = ({ pillar, data, config }) => {
-    const designType = data.designType;
+    const { designType } = data;
     const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
     const adTargeting = buildAdTargeting(config);
     const elementsWithoutAds = Elements(

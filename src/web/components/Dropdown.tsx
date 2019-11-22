@@ -162,6 +162,7 @@ export class Dropdown extends React.Component<
     { isExpanded: boolean; noJS: boolean }
 > {
     private boundToggle: () => void;
+
     constructor(props: Props) {
         super(props);
         this.state = { isExpanded: false, noJS: true };
@@ -186,7 +187,9 @@ export class Dropdown extends React.Component<
 
         if (this.state.isExpanded) {
             const removeListeners = () => {
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
                 document.removeEventListener('keydown', dismissOnEsc);
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
                 document.removeEventListener('click', dismissOnClick);
             };
             const dismissOnClick = (event: MouseEvent) => {
