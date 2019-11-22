@@ -1,7 +1,7 @@
 
 # Dotcom Onboarding Process
 
-For each person joining the team, create a trello cards on the dotcom-triage board with the following:
+For each person joining the team, create trello cards on the dotcom-triage board with the following:
 
 For Before joining:
 
