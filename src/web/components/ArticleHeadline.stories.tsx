@@ -96,7 +96,7 @@ export const inverted = () => (
                 <MainMedia
                     hideCaption={true}
                     elements={mainMediaElements}
-                    pillar={'news'}
+                    pillar="news"
                 />
             </ArticleContainer>
         </Flex>
@@ -147,7 +147,7 @@ export const Jumbo = () => (
         <MainMedia
             hideCaption={true}
             elements={mainMediaElements}
-            pillar={'news'}
+            pillar="news"
         />
         <Section
             showTopBorder={false}

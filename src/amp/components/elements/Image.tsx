@@ -75,7 +75,7 @@ export const Image: React.FC<{
                         dangerouslySetInnerHTML={{
                             __html: element.data.caption || '',
                         }}
-                        key={'caption'}
+                        key="caption"
                     />{' '}
                     {element.displayCredit && element.data.credit}
                 </figcaption>

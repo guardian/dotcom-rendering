@@ -190,9 +190,9 @@ export const Header: React.FC<{
         <div className={row}>
             <ReaderRevenueButton
                 nav={nav}
-                rrLink={'ampHeader'}
-                rrCategory={'subscribe'}
-                linkLabel={'Subscribe'}
+                rrLink="ampHeader"
+                rrCategory="subscribe"
+                linkLabel="Subscribe"
                 showArrow={false}
             />
 

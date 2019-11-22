@@ -92,7 +92,7 @@ export const paddedLines = () => {
                         <Byline
                             author={{ byline: 'Jane doe' }}
                             tags={[]}
-                            pillar={'news'}
+                            pillar="news"
                         />
                     </ArticleLeft>
                     <ArticleContainer>
@@ -127,7 +127,7 @@ export const squigglyLines = () => {
                         <Byline
                             author={{ byline: 'Jane doe' }}
                             tags={[]}
-                            pillar={'news'}
+                            pillar="news"
                         />
                     </ArticleLeft>
                     <ArticleContainer>

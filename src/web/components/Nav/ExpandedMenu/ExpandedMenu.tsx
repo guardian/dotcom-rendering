@@ -87,7 +87,7 @@ export const ExpandedMenu: React.FC<{
                 })}
                 aria-hidden={!showExpandedMenu}
                 id={id}
-                data-testid={'expanded-menu'}
+                data-testid="expanded-menu"
             >
                 {showExpandedMenu && <Columns nav={nav} />}
             </div>

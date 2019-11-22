@@ -63,7 +63,7 @@ export const Caption: React.FC<{
                     dangerouslySetInnerHTML={{
                         __html: captionText || '',
                     }}
-                    key={'caption'}
+                    key="caption"
                 />
             );
         }

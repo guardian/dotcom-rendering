@@ -107,14 +107,14 @@ export const ShareCount = ({ config, pageId }: Props) => {
                     <ShareIcon className={shareCountIcon} />
                 </div>
                 <div
-                    data-testid={'countFull'}
+                    data-testid="countFull"
                     className={countFull}
                     aria-hidden="true"
                 >
                     {formattedDisplayCount}
                 </div>
                 <div
-                    data-testid={'countShort'}
+                    data-testid="countShort"
                     className={countShort}
                     aria-hidden="true"
                 >

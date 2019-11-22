@@ -40,7 +40,7 @@ const showMore = css`
 `;
 
 export const ShowMoreButton: React.SFC<{}> = () => (
-    <div className={showMore} aria-label={'Show more'}>
+    <div className={showMore} aria-label="Show more">
         <PlusIcon />
         Show more
     </div>

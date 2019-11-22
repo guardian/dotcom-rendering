@@ -156,17 +156,17 @@ const FooterLinks: React.FC<{
                 <div className={supportLink}>Support The&nbsp;Guardian</div>
                 <ReaderRevenueButton
                     nav={nav}
-                    rrLink={'ampFooter'}
-                    rrCategory={'contribute'}
+                    rrLink="ampFooter"
+                    rrCategory="contribute"
                     rightAlignIcon={true}
-                    linkLabel={'Contribute'}
+                    linkLabel="Contribute"
                 />
                 <ReaderRevenueButton
                     nav={nav}
-                    rrLink={'ampFooter'}
-                    rrCategory={'subscribe'}
+                    rrLink="ampFooter"
+                    rrCategory="subscribe"
                     rightAlignIcon={true}
-                    linkLabel={'Subscribe'}
+                    linkLabel="Subscribe"
                 />
             </div>
         </div>
