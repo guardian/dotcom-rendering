@@ -81,11 +81,11 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
             <HeaderItem order={3}>
                 <ArticleStandfirst pillar={pillar} standfirst={standfirst} />
             </HeaderItem>
-            <Hide when="below" breakpoint="tablet">
-                <div className={cx(positionMainImage, maxWidth)}>
+            <div className={cx(positionMainImage, maxWidth)}>
+                <Hide when="below" breakpoint="tablet">
                     <MainMedia elements={mainMediaElements} pillar={pillar} />
-                </div>
-            </Hide>
+                </Hide>
+            </div>
         </header>
     );
 };

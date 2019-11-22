@@ -88,11 +88,11 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
                     />
                 </Hide>
             </HeaderItem>
-            <Hide when="below" breakpoint="tablet">
-                <div className={positionMainImage}>
+            <div className={positionMainImage}>
+                <Hide when="below" breakpoint="tablet">
                     <MainMedia elements={mainMediaElements} pillar={pillar} />
-                </div>
-            </Hide>
+                </Hide>
+            </div>
         </header>
     );
 };
