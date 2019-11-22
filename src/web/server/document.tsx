@@ -4,12 +4,12 @@ import { renderToString } from 'react-dom/server';
 import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
-import { htmlTemplate } from './htmlTemplate';
-import { Article } from '../pages/Article';
 import { escapeData } from '@root/src/lib/escapeData';
 import { getDist } from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
+import { Article } from '../pages/Article';
+import { htmlTemplate } from './htmlTemplate';
 
 interface RenderToStringResult {
     html: string;

@@ -1,8 +1,8 @@
 import React from 'react';
 
+import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 import { Badge } from './Badge';
 
-import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
 /* tslint:disable */
 export default {

@@ -1,5 +1,5 @@
-import { validateAsCAPIType } from './validate';
 import { CAPI } from '@root/fixtures/CAPI';
+import { validateAsCAPIType } from './validate';
 
 describe('validate', () => {
     it('throws on invalid data', () => {

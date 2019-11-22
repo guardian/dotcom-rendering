@@ -1,7 +1,7 @@
-import { document } from './document';
 import { CAPI } from '@root/fixtures/CAPI';
 import { ga } from '@root/fixtures/ga';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
+import { document } from './document';
 
 const linkedData = [{}];
 const result = document({
