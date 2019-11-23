@@ -74,51 +74,41 @@ export const SmallHeadline = ({
     size = 'xxsmall',
     coloured = false,
     link,
-}: SmallHeadlineType) => {
-    // Compose object with attributes that are only relevant when rendering a link tag
-    const linkAttrs: { href?: string; tabIndex?: number } = {};
-
-    // Determine whether to render a link tag or a span
-    const Headline = link && link.to ? 'a' : 'span';
-
-    // Require a 'to' property set on link for the remaining attributes to be considered
-    if (link && link.to) {
-        linkAttrs.href = link.to;
-
-        if (link.preventFocus) {
-            linkAttrs.tabIndex = -1;
-        }
-    }
-
-    return (
-        <h4 className={fontStyles(size)}>
-            {kicker && (
-                <Kicker
-                    text={kicker.text}
-                    pillar={pillar}
-                    showPulsingDot={kicker.showPulsingDot}
-                    showSlash={kicker.showSlash}
-                />
-            )}
-            {showQuotes && (
-                <QuoteIcon colour={palette[pillar].main} size={size} />
-            )}
-            <Headline
+}: SmallHeadlineType) => (
+    <h4 className={fontStyles(size)}>
+        {kicker && (
+            <Kicker
+                text={kicker.text}
+                pillar={pillar}
+                showPulsingDot={kicker.showPulsingDot}
+                showSlash={kicker.showSlash}
+            />
+        )}
+        {showQuotes && <QuoteIcon colour={palette[pillar].main} size={size} />}
+        {link ? (
+            // We were passed a link object so headline should be a link, with link styling
+            <a
                 className={cx(
                     // Composed styles - order matters for colours
-                    link && link.to && linkStyles,
-                    underlined && underlinedStyles(size),
+                    linkStyles,
                     showUnderline && textDecorationUnderline,
-                    coloured && colourStyles(palette[pillar].dark),
-                    link &&
-                        link.to &&
-                        link.visitedColour &&
-                        visitedStyles(link.visitedColour),
+                    link.visitedColour && visitedStyles(link.visitedColour),
                 )}
-                {...linkAttrs}
+                href={link.to}
+                tabIndex={link.preventFocus ? -1 : undefined}
             >
                 {headlineString}
-            </Headline>
-        </h4>
-    );
-};
+            </a>
+        ) : (
+            // We don't have a link so simply use a span here
+            <span
+                className={cx(
+                    underlined && underlinedStyles(size),
+                    coloured && colourStyles(palette[pillar].dark),
+                )}
+            >
+                {headlineString}
+            </span>
+        )}
+    </h4>
+);
