@@ -82,7 +82,6 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
                         size="tiny"
                         kicker={{
                             text: 'Live',
-                            pillar: trail.pillar,
                             showSlash: true,
                             showPulsingDot: true,
                         }}

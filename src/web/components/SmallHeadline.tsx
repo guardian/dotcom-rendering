@@ -95,7 +95,7 @@ export const SmallHeadline = ({
             {kicker && (
                 <Kicker
                     text={kicker.text}
-                    pillar={kicker.pillar}
+                    pillar={pillar}
                     showPulsingDot={kicker.showPulsingDot}
                     showSlash={kicker.showSlash}
                 />

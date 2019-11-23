@@ -51,7 +51,6 @@ export const liveStory = () => (
             pillar="news"
             kicker={{
                 text: 'Live',
-                pillar: 'news',
             }}
         />
     </Section>
@@ -65,7 +64,6 @@ export const noSlash = () => (
             pillar="news"
             kicker={{
                 text: 'Live',
-                pillar: 'news',
                 showSlash: false,
             }}
         />
@@ -80,7 +78,6 @@ export const pulsingDot = () => (
             pillar="news"
             kicker={{
                 text: 'Live',
-                pillar: 'news',
                 showPulsingDot: true,
             }}
         />
@@ -92,10 +89,9 @@ export const cultureVariant = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
             headlineString="This is how a headline with a culture kicker looks"
-            pillar="news"
+            pillar="culture"
             kicker={{
                 text: 'Art and stuff',
-                pillar: 'culture',
             }}
         />
     </Section>
@@ -193,7 +189,6 @@ export const colouredWithKicker = () => (
             coloured={true}
             kicker={{
                 text: 'England 0 - 8 USA',
-                pillar: 'sport',
                 showPulsingDot: true,
                 showSlash: true,
             }}
@@ -210,7 +205,6 @@ export const OpinionKicker = () => (
             showQuotes={true}
             kicker={{
                 text: 'George Monbiot',
-                pillar: 'opinion',
                 showSlash: true,
             }}
         />
@@ -227,7 +221,6 @@ export const Busy = () => (
             coloured={true}
             kicker={{
                 text: 'Aerial Yoga',
-                pillar: 'lifestyle',
                 showSlash: true,
             }}
         />
@@ -244,7 +237,6 @@ export const InUnderlinedState = () => (
             size="tiny"
             kicker={{
                 text: 'I am never underlined',
-                pillar: 'news',
                 showSlash: true,
             }}
         />
@@ -259,7 +251,6 @@ export const linkStory = () => (
             pillar="sport"
             kicker={{
                 text: 'I am not a link',
-                pillar: 'sport',
                 showSlash: true,
             }}
             coloured={true}
@@ -279,7 +270,6 @@ export const visitedLinkStory = () => (
             pillar="sport"
             kicker={{
                 text: 'I am not a link',
-                pillar: 'sport',
                 showSlash: true,
             }}
             coloured={true}
@@ -300,7 +290,6 @@ export const notFocusableLinkStory = () => (
             pillar="sport"
             kicker={{
                 text: 'I am not a link',
-                pillar: 'sport',
                 showSlash: true,
             }}
             coloured={true}

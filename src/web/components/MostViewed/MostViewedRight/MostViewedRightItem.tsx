@@ -75,7 +75,6 @@ export const MostViewedRightItem = ({ trail }: Props) => {
     if (trail.isLiveBlog) {
         itemProps.kicker = {
             text: 'Live',
-            pillar: trail.pillar,
             showSlash: false,
         };
     }
