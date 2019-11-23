@@ -36,6 +36,8 @@ export const defaultStory = () => {
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}
+                            designType="Article"
+                            pillar="news"
                         />
                     </ArticleContainer>
                 </Flex>
@@ -65,6 +67,8 @@ export const eightLines = () => {
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}
+                            designType="Article"
+                            pillar="news"
                         />
                     </ArticleContainer>
                 </Flex>
@@ -100,6 +104,8 @@ export const paddedLines = () => {
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}
+                            designType="Article"
+                            pillar="news"
                         />
                     </ArticleContainer>
                 </Flex>
@@ -135,6 +141,8 @@ export const squigglyLines = () => {
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}
+                            designType="Article"
+                            pillar="news"
                         />
                     </ArticleContainer>
                 </Flex>
