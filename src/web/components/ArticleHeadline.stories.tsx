@@ -161,7 +161,7 @@ export const Jumbo = () => (
                 </ArticleLeft>
                 <ArticleContainer>
                     <ArticleHeadline
-                        headlineString="Here the headling overlays the image above it, the text is larger and the black background should extend to the right"
+                        headlineString="Here the headline overlays the image above it, the text is larger and the black background should extend to the right"
                         webPublicationDate="2014-07-13T18:46:01.933Z"
                         tags={[]}
                         type="jumbo"
