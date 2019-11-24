@@ -13,6 +13,7 @@ type Props = {
     pillar: Pillar;
     webPublicationDate: string; // Used for age warning
     tags: TagType[]; // Used for age warning
+    isShowcase?: boolean;
 };
 
 const curly = (x: any) => x;
@@ -81,6 +82,10 @@ const shiftPosition = (shift?: 'up' | 'down') => css`
     margin-bottom: ${shift && shift === 'down' && '-50px'};
 `;
 
+const shiftSlightly = css`
+    margin-bottom: 16px;
+`;
+
 const invertedStyles = css`
     position: relative;
     color: white;
@@ -127,6 +132,7 @@ const ageWarningMargins = css`
 
 const renderHeadline = (
     designType: DesignType,
+    isShowcase: boolean,
     headlineString: string,
     options?: {
         colour?: string;
@@ -191,7 +197,8 @@ const renderHeadline = (
                     className={cx(
                         invertedFont,
                         invertedWrapper,
-                        shiftPosition('down'),
+                        // We only shift the inverted headline down when main media is showcase
+                        isShowcase ? shiftPosition('down') : shiftSlightly,
                         maxWidth,
                     )}
                 >
@@ -239,6 +246,7 @@ export const ArticleHeadline = ({
     pillar,
     webPublicationDate,
     tags,
+    isShowcase = false,
 }: Props) => {
     const age = getAgeWarning(tags, webPublicationDate);
     return (
@@ -248,7 +256,7 @@ export const ArticleHeadline = ({
                     <AgeWarning age={age} />
                 </div>
             )}
-            {renderHeadline(designType, headlineString, {
+            {renderHeadline(designType, isShowcase, headlineString, {
                 colour: pillarPalette[pillar].dark,
             })}
             {age && <AgeWarning age={age} isScreenReader={true} />}

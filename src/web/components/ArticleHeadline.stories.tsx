@@ -6,6 +6,7 @@ import { Flex } from './Flex';
 import { ArticleLeft } from './ArticleLeft';
 import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
+import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
 
 /* tslint:disable */
@@ -82,6 +83,32 @@ export const Feature = () => (
 );
 Feature.story = { name: 'Feature' };
 
+export const ShowcaseInterview = () => (
+    <Section>
+        <Flex>
+            <ArticleLeft>
+                <></>
+            </ArticleLeft>
+            <ArticleContainer>
+                <ArticleHeadline
+                    headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                    designType="Interview"
+                    pillar="culture"
+                    webPublicationDate=""
+                    tags={[]}
+                    isShowcase={true}
+                />
+                <MainMedia
+                    hideCaption={true}
+                    elements={mainMediaElements}
+                    pillar="news"
+                />
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+ShowcaseInterview.story = { name: 'Interview (with showcase)' };
+
 export const Interview = () => (
     <Section>
         <Flex>
@@ -96,6 +123,10 @@ export const Interview = () => (
                     webPublicationDate=""
                     tags={[]}
                 />
+                <Standfirst
+                    pillar="culture"
+                    standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
+                />
                 <MainMedia
                     hideCaption={true}
                     elements={mainMediaElements}
@@ -105,7 +136,7 @@ export const Interview = () => (
         </Flex>
     </Section>
 );
-Interview.story = { name: 'Interview' };
+Interview.story = { name: 'Interview (without showcase)' };
 
 export const Comment = () => (
     <Section>

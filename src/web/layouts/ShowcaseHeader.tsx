@@ -77,6 +77,7 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
                     pillar={pillar}
                     webPublicationDate={webPublicationDate}
                     tags={tags}
+                    isShowcase={true}
                 />
             </HeaderItem>
             <HeaderItem order={3}>
