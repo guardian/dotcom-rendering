@@ -6,11 +6,14 @@ import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
 import { Standfirst } from '@frontend/web/components/Standfirst';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
+import { Avatar } from '@frontend/web/components/Avatar';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
 import { ImageWrapper } from './components/ImageWrapper';
+import { AvatarPosition } from './components/AvatarPosition';
+import { AvatarContainer } from './components/AvatarContainer';
 import { StandfirstWrapper } from './components/StandfirstWrapper';
 import { LinesWrapper } from './components/LinesWrapper';
 import { CardFooter } from './components/CardFooter';
@@ -59,6 +62,7 @@ export const Card = ({
     webPublicationDate,
     image,
     standfirst,
+    avatar,
 }: CardType) => {
     // If there was no image given or image size was not set, percentage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
@@ -113,6 +117,17 @@ export const Card = ({
                                             standfirst={standfirst}
                                         />
                                     </StandfirstWrapper>
+                                )}
+                                {avatar && (
+                                    <AvatarContainer>
+                                        <AvatarPosition>
+                                            <Avatar
+                                                imageSrc={avatar.src}
+                                                imageAlt={avatar.alt}
+                                                pillar={pillar}
+                                            />
+                                        </AvatarPosition>
+                                    </AvatarContainer>
                                 )}
                                 <CardFooter>
                                     <>

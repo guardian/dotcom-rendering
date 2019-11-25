@@ -257,6 +257,11 @@ type CardImageType = {
 
 type SmallHeadlineSize = 'tiny' | 'xxsmall' | 'xsmall';
 
+type AvatarType = {
+    src: string;
+    alt: string;
+};
+
 interface CardType {
     linkTo: string;
     pillar: Pillar;
@@ -265,6 +270,7 @@ interface CardType {
     webPublicationDate?: string;
     image?: CardImageType;
     standfirst?: string;
+    avatar?: AvatarType;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
