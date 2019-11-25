@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 
 import { Standfirst } from '@frontend/web/components/Standfirst';
 
@@ -14,35 +14,6 @@ const standfirstStyles = css`
     max-width: 550px;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;
-
-    li {
-        ${textSans.medium()};
-        margin-bottom: 6px;
-        padding-left: 20px;
-
-        p {
-            display: inline;
-        }
-    }
-
-    li:before {
-        display: inline-block;
-        content: '';
-        border-radius: 6px;
-        height: 12px;
-        width: 12px;
-        margin-right: 8px;
-        background-color: ${palette.neutral[86]};
-        margin-left: -20px;
-    }
-
-    p {
-        margin-bottom: 8px;
-    }
-
-    li {
-        ${headline.tiny()};
-    }
 `;
 
 const standfirstLinks = pillarMap(
