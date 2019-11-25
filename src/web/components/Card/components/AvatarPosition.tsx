@@ -9,8 +9,8 @@ export const AvatarPosition = ({ children }: Props) => {
     return (
         <div
             className={css`
-                height: 8.25rem;
-                width: 8.25rem;
+                height: 132px;
+                width: 132px;
 
                 position: absolute;
                 right: 0;

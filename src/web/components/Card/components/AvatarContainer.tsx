@@ -11,7 +11,7 @@ export const AvatarContainer = ({ children }: Props) => {
             className={css`
                 position: relative;
 
-                margin-right: 0.625rem;
+                margin-right: 10px;
             `}
         >
             {children}
