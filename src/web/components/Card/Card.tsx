@@ -66,8 +66,6 @@ export const Card = ({
         (image && image.size && coverages.content[image.size]) ||
         coverages.content.medium;
 
-    const spaceContent = !image;
-
     return (
         <CardLink
             linkTo={linkTo}
@@ -86,10 +84,7 @@ export const Card = ({
                                 />
                             </ImageWrapper>
                         )}
-                        <ContentWrapper
-                            percentage={contentCoverage}
-                            spaceContent={spaceContent}
-                        >
+                        <ContentWrapper percentage={contentCoverage}>
                             <HeadlineWrapper>
                                 <SmallHeadline {...headline} />
                             </HeadlineWrapper>
