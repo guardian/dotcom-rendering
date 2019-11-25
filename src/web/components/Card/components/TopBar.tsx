@@ -12,6 +12,10 @@ export const TopBar = ({ children, topBarColour }: Props) => (
             display: flex;
             width: 100%;
 
+            /* We absolutely position the 1 pixel top bar below
+               so this is required here */
+            position: relative;
+
             /* Styling for top bar */
             :before {
                 background-color: ${topBarColour};

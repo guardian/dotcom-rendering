@@ -261,10 +261,10 @@ interface CardType {
     linkTo: string;
     pillar: Pillar;
     headline: SmallHeadlineType;
+    showDivider?: boolean;
     webPublicationDate?: string;
     image?: CardImageType;
     standfirst?: string;
-    percentage?: CardPercentageType;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
