@@ -19,6 +19,7 @@ export const StandfirstWrapper = ({ children }: Props) => (
             })};
             line-height: 20px;
 
+            padding-left: 5px;
             padding-right: 5px;
             padding-bottom: 6px;
         `}

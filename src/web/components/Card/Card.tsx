@@ -114,22 +114,24 @@ export const Card = ({
                                         />
                                     </StandfirstWrapper>
                                 )}
+                                <CardFooter>
+                                    <>
+                                        {webPublicationDate && (
+                                            <CardAge
+                                                webPublicationDate={
+                                                    webPublicationDate
+                                                }
+                                            />
+                                        )}
+                                        {isOpinion && (
+                                            <LinesWrapper>
+                                                <GuardianLines pillar="opinion" />
+                                            </LinesWrapper>
+                                        )}
+                                    </>
+                                </CardFooter>
                             </div>
                         </ContentWrapper>
-                        <CardFooter>
-                            <>
-                                {webPublicationDate && (
-                                    <CardAge
-                                        webPublicationDate={webPublicationDate}
-                                    />
-                                )}
-                                {isOpinion && (
-                                    <LinesWrapper>
-                                        <GuardianLines pillar="opinion" />
-                                    </LinesWrapper>
-                                )}
-                            </>
-                        </CardFooter>
                     </>
                 </CardLayout>
             </TopBar>

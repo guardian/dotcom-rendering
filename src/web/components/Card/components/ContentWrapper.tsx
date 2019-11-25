@@ -11,11 +11,6 @@ const coverageStyles = (percentage: string) => css`
     flex-basis: ${percentage && percentage};
 `;
 
-const paddingStyles = css`
-    padding-left: 5px;
-    padding-right: 5px;
-`;
-
 const spacingStyles = css`
     flex-grow: 1;
     flex-shrink: 0;
@@ -36,7 +31,6 @@ export const ContentWrapper = ({
         className={cx(
             sizingStyles,
             percentage && coverageStyles(percentage),
-            paddingStyles,
             spaceContent && spacingStyles,
         )}
     >

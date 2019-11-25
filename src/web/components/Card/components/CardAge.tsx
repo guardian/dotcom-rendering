@@ -17,8 +17,6 @@ const ageStyles = css`
     padding-left: 5px;
     padding-right: 5px;
 
-    margin-bottom: 10px;
-
     svg {
         fill: ${palette.neutral[46]};
         margin-bottom: -1px;
