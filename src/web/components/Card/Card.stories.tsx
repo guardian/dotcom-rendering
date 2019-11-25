@@ -47,7 +47,7 @@ export const News = () => (
                                         pillar: 'news',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'right',
                                     size: 'large',
@@ -73,7 +73,7 @@ export const News = () => (
                                         pillar: 'news',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[5],
                                     position: 'top',
                                     size: 'small',
@@ -100,7 +100,7 @@ export const News = () => (
                                         pillar: 'culture',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[3],
                                     position: 'top',
                                     size: 'medium',
@@ -127,7 +127,7 @@ export const News = () => (
                                                 pillar: 'news',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[6],
                                             position: 'top',
                                             size: 'small',
@@ -322,7 +322,7 @@ export const InDepth = () => (
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[5],
                                             position: 'left',
                                             size: 'small',
@@ -346,7 +346,7 @@ export const InDepth = () => (
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[6],
                                             position: 'left',
                                             size: 'small',
@@ -370,7 +370,7 @@ export const InDepth = () => (
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[3],
                                             position: 'left',
                                             size: 'small',
@@ -394,7 +394,7 @@ export const InDepth = () => (
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[2],
                                             position: 'left',
                                             size: 'small',
@@ -418,7 +418,7 @@ export const InDepth = () => (
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[1],
                                             position: 'left',
                                             size: 'small',
@@ -444,7 +444,7 @@ export const InDepth = () => (
                                         pillar: 'sport',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'large',
@@ -484,7 +484,7 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[5],
                                     position: 'top',
                                     size: 'small',
@@ -509,7 +509,7 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[6],
                                     position: 'top',
                                     size: 'small',
@@ -534,7 +534,7 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[4],
                                     position: 'top',
                                     size: 'small',
@@ -652,7 +652,7 @@ export const Spotlight = () => (
                             },
                         },
                         webPublicationDate: '2019-11-11T09:45:30.000Z',
-                        image: {
+                        trailImage: {
                             element: imageElements[0],
                             position: 'right',
                             size: 'jumbo',
@@ -690,7 +690,7 @@ export const Quad = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'medium',
@@ -715,7 +715,7 @@ export const Quad = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'medium',
@@ -740,7 +740,7 @@ export const Quad = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'medium',
@@ -765,7 +765,7 @@ export const Quad = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'medium',

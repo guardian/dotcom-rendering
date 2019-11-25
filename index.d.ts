@@ -263,7 +263,7 @@ interface CardType {
     headline: SmallHeadlineType;
     showDivider?: boolean;
     webPublicationDate?: string;
-    image?: CardImageType;
+    trailImage?: CardImageType;
     standfirst?: string;
 }
 
