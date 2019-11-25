@@ -34,9 +34,6 @@ const standfirstStyles = css`
     }
 `;
 
-// type SizeType = 'tiny' | 'small' | 'medium';
-// type WeightType = 'light' | 'regular' | 'medium' | 'bold';
-
 type Props = {
     pillar: Pillar;
     standfirst: string;
