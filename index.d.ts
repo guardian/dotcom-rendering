@@ -261,7 +261,6 @@ interface CardType {
     linkTo: string;
     pillar: Pillar;
     headline: SmallHeadlineType;
-    showDivider?: boolean;
     webPublicationDate?: string;
     image?: CardImageType;
     standfirst?: string;
