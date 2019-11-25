@@ -5,12 +5,15 @@ import { palette } from '@guardian/src-foundations';
 import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
 import { Standfirst } from '@frontend/web/components/Standfirst';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
+import { GuardianLines } from '@frontend/web/components/GuardianLines';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
 import { ImageWrapper } from './components/ImageWrapper';
 import { StandfirstWrapper } from './components/StandfirstWrapper';
+import { LinesWrapper } from './components/LinesWrapper';
+import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
@@ -68,11 +71,20 @@ export const Card = ({
 
     const spaceContent = !image;
 
+    const isOpinion = pillar === 'opinion';
+
     return (
         <CardLink
             linkTo={linkTo}
-            backgroundColour={palette.neutral[97]}
-            backgroundOnHover={palette.neutral[93]}
+            backgroundColour={
+                isOpinion ? palette.opinion.faded : palette.neutral[97]
+            }
+            backgroundOnHover={
+                // TODO: This colour is hard coded here because it does not yet
+                //       exist in src-foundation. Once it's been added, please
+                //       remove this. @siadcock is aware.
+                isOpinion ? '#FDF0E8' : palette.neutral[93]
+            }
         >
             <TopBar topBarColour={palette[pillar].main}>
                 <CardLayout imagePosition={image && image.position}>
@@ -102,13 +114,22 @@ export const Card = ({
                                         />
                                     </StandfirstWrapper>
                                 )}
+                            </div>
+                        </ContentWrapper>
+                        <CardFooter>
+                            <>
                                 {webPublicationDate && (
                                     <CardAge
                                         webPublicationDate={webPublicationDate}
                                     />
                                 )}
-                            </div>
-                        </ContentWrapper>
+                                {isOpinion && (
+                                    <LinesWrapper>
+                                        <GuardianLines pillar="opinion" />
+                                    </LinesWrapper>
+                                )}
+                            </>
+                        </CardFooter>
                     </>
                 </CardLayout>
             </TopBar>
