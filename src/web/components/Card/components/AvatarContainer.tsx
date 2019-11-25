@@ -9,9 +9,11 @@ export const AvatarContainer = ({ children }: Props) => {
     return (
         <div
             className={css`
-                position: relative;
+                display: flex;
+                flex-direction: row-reverse;
 
                 margin-right: 10px;
+                margin-top: 50px;
             `}
         >
             {children}

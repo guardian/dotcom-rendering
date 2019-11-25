@@ -12,7 +12,7 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
 import { ImageWrapper } from './components/ImageWrapper';
-import { AvatarPosition } from './components/AvatarPosition';
+import { AvatarSize } from './components/AvatarSize';
 import { AvatarContainer } from './components/AvatarContainer';
 import { StandfirstWrapper } from './components/StandfirstWrapper';
 import { LinesWrapper } from './components/LinesWrapper';
@@ -120,13 +120,13 @@ export const Card = ({
                                 )}
                                 {avatar && (
                                     <AvatarContainer>
-                                        <AvatarPosition>
+                                        <AvatarSize>
                                             <Avatar
                                                 imageSrc={avatar.src}
                                                 imageAlt={avatar.alt}
                                                 pillar={pillar}
                                             />
-                                        </AvatarPosition>
+                                        </AvatarSize>
                                     </AvatarContainer>
                                 )}
                                 <CardFooter>

@@ -5,16 +5,12 @@ type Props = {
     children: JSXElements;
 };
 
-export const AvatarPosition = ({ children }: Props) => {
+export const AvatarSize = ({ children }: Props) => {
     return (
         <div
             className={css`
                 height: 132px;
                 width: 132px;
-
-                position: absolute;
-                right: 0;
-                bottom: 0;
             `}
         >
             {children}
