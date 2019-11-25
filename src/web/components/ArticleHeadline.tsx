@@ -9,11 +9,11 @@ import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
     headlineString: string;
-    designType: DesignType;
-    pillar: Pillar;
+    designType: DesignType; // Decides headline appearance
+    pillar: Pillar; // Decides headline colour when relevant
     webPublicationDate: string; // Used for age warning
     tags: TagType[]; // Used for age warning
-    isShowcase?: boolean;
+    isShowcase?: boolean; // Used for Interviews to change headline position
 };
 
 const curly = (x: any) => x;
