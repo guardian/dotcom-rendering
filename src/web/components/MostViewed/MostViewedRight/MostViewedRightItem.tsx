@@ -64,21 +64,14 @@ type Props = {
     trail: TrailType;
 };
 
-type ItemConditionalProps = {
-    kicker?: KickerType;
-};
-
 export const MostViewedRightItem = ({ trail }: Props) => {
     const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
-    const itemProps: ItemConditionalProps = {};
-    if (trail.isLiveBlog) {
-        itemProps.kicker = {
-            text: 'Live',
-            pillar: trail.pillar,
-            showSlash: false,
-        };
-    }
+    const linkProps = {
+        to: trail.url,
+        visitedColour: palette.neutral[46],
+        preventFocus: true,
+    };
 
     return (
         <li className={listItemStyles}>
@@ -98,18 +91,27 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                         />
                     </div>
                     <div className={headlineWrapperStyles}>
-                        <SmallHeadline
-                            headlineString={trail.linkText}
-                            pillar={trail.pillar}
-                            size="xxxsmall"
-                            showUnderline={isHovered}
-                            {...itemProps}
-                            link={{
-                                to: trail.url,
-                                visitedColour: palette.neutral[46],
-                                preventFocus: true,
-                            }}
-                        />
+                        {trail.isLiveBlog ? (
+                            <SmallHeadline
+                                headlineString={trail.linkText}
+                                pillar={trail.pillar}
+                                size="xxxsmall"
+                                showUnderline={isHovered}
+                                link={linkProps}
+                                kicker={{
+                                    text: 'Live',
+                                    showSlash: false,
+                                }}
+                            />
+                        ) : (
+                            <SmallHeadline
+                                headlineString={trail.linkText}
+                                pillar={trail.pillar}
+                                size="xxxsmall"
+                                showUnderline={isHovered}
+                                link={linkProps}
+                            />
+                        )}
                         {trail.ageWarning && (
                             <AgeWarning age={trail.ageWarning} size="small" />
                         )}
