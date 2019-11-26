@@ -14,8 +14,7 @@ const commercialPosition = css`
 export const ArticleRenderer: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
-    config: ConfigType;
-}> = ({ elements, pillar, config }) => {
+}> = ({ elements, pillar }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );

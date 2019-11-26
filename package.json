@@ -15,7 +15,8 @@
         "cypress:run:percy": "percy exec -- cypress run --spec 'cypress/integration/percy/**/*'",
         "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
         "storybook": "start-storybook -s ./src/static -p 6006",
-        "storybook:build": "build-storybook"
+        "storybook:build": "build-storybook",
+        "storybook:snapshot": "build-storybook && percy-storybook --widths=320,1139"
     },
     "husky": {
         "hooks": {
@@ -77,6 +78,7 @@
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.3.3",
         "@percy/cypress": "^2.2.0",
+        "@percy/storybook": "^3.2.0",
         "@storybook/addon-a11y": "^5.2.5",
         "@storybook/addon-actions": "^5.2.5",
         "@storybook/addon-links": "^5.2.5",
