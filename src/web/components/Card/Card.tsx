@@ -52,7 +52,6 @@ export const Card = ({
     linkTo,
     pillar,
     headline,
-    showDivider = false,
     webPublicationDate,
     image,
     standfirst,
