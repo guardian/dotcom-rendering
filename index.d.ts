@@ -262,7 +262,7 @@ interface CardType {
     pillar: Pillar;
     headline: SmallHeadlineType;
     webPublicationDate?: string;
-    image?: CardImageType;
+    trailImage?: CardImageType;
     standfirst?: string;
 }
 
