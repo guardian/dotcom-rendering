@@ -73,9 +73,7 @@ const standfirstStyles = (designType: DesignType) => {
 };
 
 type Props = {
-    designType?: DesignType; // TODO Should be required but left as optional
-    // for now to ease through multiple PRs. If you're
-    // reading this, please make this required.
+    designType: DesignType;
     standfirst: string;
 };
 

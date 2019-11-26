@@ -123,7 +123,10 @@ export const Interview = () => (
                     webPublicationDate=""
                     tags={[]}
                 />
-                <Standfirst standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element" />
+                <Standfirst
+                    designType="Interview"
+                    standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
+                />
                 <MainMedia
                     hideCaption={true}
                     elements={mainMediaElements}
