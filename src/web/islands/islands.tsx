@@ -28,7 +28,7 @@ type IslandProps =
           limitItems?: number;
       }
     | {
-          config: ConfigType;
+          ajaxUrl: string;
           pageId: string;
       }
     | {
@@ -61,6 +61,7 @@ export const hydrateIslands = (
     NAV: NavType,
 ) => {
     const { pillar, editionId, sectionName, pageId } = CAPI;
+    const { ajaxUrl } = config;
 
     // Define the list of islands we intend to hydrate. Each island should have a
     // corresponding root element that exists on the DOM with the id value equal to the root property
@@ -100,7 +101,7 @@ export const hydrateIslands = (
         {
             component: ShareCount,
             props: {
-                config,
+                ajaxUrl,
                 pageId,
             },
             root: 'share-count',
