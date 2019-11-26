@@ -22,7 +22,7 @@ const listItemStyles = css`
 const linkTagStyles = css`
     text-decoration: none;
     font-weight: 500;
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
 
     &:link,
     &:active {
@@ -101,7 +101,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                         <SmallHeadline
                             headlineString={trail.linkText}
                             pillar={trail.pillar}
-                            size="tiny"
+                            size="xxxsmall"
                             showUnderline={isHovered}
                             {...itemProps}
                             link={{

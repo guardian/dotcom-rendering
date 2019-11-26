@@ -70,7 +70,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
     text-decoration: none;
     cursor: pointer;
     display: block;
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     height: 36px;
     padding: 9px 4px;
     color: ${palette.neutral[100]};

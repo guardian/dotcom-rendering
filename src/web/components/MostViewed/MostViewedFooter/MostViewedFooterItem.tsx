@@ -53,7 +53,7 @@ const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
     font-weight: 500;
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
 `;
 
 const ageWarningStyles = css`
@@ -79,7 +79,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
                     <SmallHeadline
                         headlineString={trail.linkText}
                         pillar={trail.pillar}
-                        size="tiny"
+                        size="xxxsmall"
                         kicker={{
                             text: 'Live',
                             pillar: trail.pillar,
@@ -91,7 +91,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
                     <SmallHeadline
                         headlineString={trail.linkText}
                         pillar={trail.pillar}
-                        size="tiny"
+                        size="xxxsmall"
                     />
                 )}
             </div>
