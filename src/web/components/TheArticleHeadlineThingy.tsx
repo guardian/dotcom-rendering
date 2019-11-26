@@ -240,7 +240,7 @@ const renderHeadline = (
     }
 };
 
-export const ArticleHeadline = ({
+export const TheArticleHeadlineThingy = ({
     headlineString,
     designType,
     pillar,

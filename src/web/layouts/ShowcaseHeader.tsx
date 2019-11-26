@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { from, until, between } from '@guardian/src-foundations/mq';
 
 import { MainMedia } from '@root/src/web/components/MainMedia';
-import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import { TheArticleHeadlineThingy } from '@root/src/web/components/TheArticleHeadlineThingy';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { HeaderItem } from '@root/src/web/components/HeaderItem';
@@ -14,7 +14,7 @@ const positionMainImage = css`
     /*
         Decide the order for ArticleHeader items. The natural order is:
             - 1. <SeriesSectionLink />
-            - 2. <ArticleHeadline />
+            - 2. <TheArticleHeadlineThingy />
             - 3. <ArticleStandfirst />
             - 4. <MainImage />
     */
@@ -71,7 +71,7 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
                 </Hide>
             </HeaderItem>
             <HeaderItem order={2}>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString={headline}
                     designType={CAPI.designType}
                     pillar={pillar}

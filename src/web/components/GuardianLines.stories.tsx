@@ -6,7 +6,7 @@ import { GuardianLines } from './GuardianLines';
 import { Flex } from './Flex';
 import { ArticleLeft } from './ArticleLeft';
 import { ArticleContainer } from './ArticleContainer';
-import { ArticleHeadline } from './ArticleHeadline';
+import { TheArticleHeadlineThingy } from './TheArticleHeadlineThingy';
 import { Byline } from './Byline';
 
 /* tslint:disable */
@@ -32,7 +32,7 @@ export const defaultStory = () => {
                         <></>
                     </ArticleLeft>
                     <ArticleContainer>
-                        <ArticleHeadline
+                        <TheArticleHeadlineThingy
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}
@@ -63,7 +63,7 @@ export const eightLines = () => {
                         <></>
                     </ArticleLeft>
                     <ArticleContainer>
-                        <ArticleHeadline
+                        <TheArticleHeadlineThingy
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}
@@ -100,7 +100,7 @@ export const paddedLines = () => {
                         />
                     </ArticleLeft>
                     <ArticleContainer>
-                        <ArticleHeadline
+                        <TheArticleHeadlineThingy
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}
@@ -137,7 +137,7 @@ export const squigglyLines = () => {
                         />
                     </ArticleLeft>
                     <ArticleContainer>
-                        <ArticleHeadline
+                        <TheArticleHeadlineThingy
                             headlineString="Headline text"
                             webPublicationDate=""
                             tags={[]}

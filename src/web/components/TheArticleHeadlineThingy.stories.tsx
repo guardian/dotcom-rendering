@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { Section } from './Section';
-import { ArticleHeadline } from './ArticleHeadline';
+import { TheArticleHeadlineThingy } from './TheArticleHeadlineThingy';
 import { Flex } from './Flex';
 import { ArticleLeft } from './ArticleLeft';
 import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
-import { mainMediaElements } from './ArticleHeadline.mocks';
+import { mainMediaElements } from './TheArticleHeadlineThingy.mocks';
 
 /* tslint:disable */
 export default {
-    component: ArticleHeadline,
-    title: 'Components/ArticleHeadline',
+    component: TheArticleHeadlineThingy,
+    title: 'Components/TheArticleHeadlineThingy',
 };
 /* tslint:enable */
 
@@ -23,7 +23,7 @@ export const ArticleStory = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is how the default headline looks"
                     designType="Article"
                     pillar="news"
@@ -43,7 +43,7 @@ export const oldHeadline = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is an old headline"
                     designType="Article"
                     pillar="news"
@@ -70,7 +70,7 @@ export const Feature = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is a Feature headline, it has colour applied based on pillar"
                     designType="Feature"
                     pillar="lifestyle"
@@ -90,7 +90,7 @@ export const ShowcaseInterview = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
                     designType="Interview"
                     pillar="culture"
@@ -116,7 +116,7 @@ export const Interview = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
                     designType="Interview"
                     pillar="culture"
@@ -145,7 +145,7 @@ export const Comment = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="Yes, the billionaire club is one we really need to shut down"
                     designType="Comment"
                     pillar="opinion"
@@ -165,7 +165,7 @@ export const Analysis = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
                     designType="Analysis"
                     pillar="news"
@@ -185,7 +185,7 @@ export const Media = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is Media"
                     designType="Media"
                     pillar="news"
@@ -205,7 +205,7 @@ export const Review = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is Review"
                     designType="Review"
                     pillar="news"
@@ -225,7 +225,7 @@ export const AdvertisementFeature = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is AdvertisementFeature"
                     designType="AdvertisementFeature"
                     pillar="news"
@@ -245,7 +245,7 @@ export const Quiz = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is Quiz"
                     designType="Quiz"
                     pillar="news"
@@ -265,7 +265,7 @@ export const GuardianLabs = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is GuardianLabs"
                     designType="GuardianLabs"
                     pillar="news"
@@ -285,7 +285,7 @@ export const Recipe = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is Recipe"
                     designType="Recipe"
                     pillar="news"
@@ -305,7 +305,7 @@ export const GuardianView = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is GuardianView"
                     designType="GuardianView"
                     pillar="news"
@@ -325,7 +325,7 @@ export const MatchReport = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is MatchReport"
                     designType="MatchReport"
                     pillar="news"
@@ -345,7 +345,7 @@ export const SpecialReport = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is SpecialReport"
                     designType="SpecialReport"
                     pillar="news"
@@ -365,7 +365,7 @@ export const Live = () => (
                 <></>
             </ArticleLeft>
             <ArticleContainer>
-                <ArticleHeadline
+                <TheArticleHeadlineThingy
                     headlineString="This is the headline you see when design type is Live"
                     designType="Live"
                     pillar="news"
@@ -396,7 +396,7 @@ export const Immersive = () => (
                     <></>
                 </ArticleLeft>
                 <ArticleContainer>
-                    <ArticleHeadline
+                    <TheArticleHeadlineThingy
                         headlineString="Here the headline overlays the image above it, the text is larger and the black background should extend to the right"
                         designType="Immersive"
                         pillar="culture"
