@@ -57,22 +57,19 @@ export const Card = ({
     linkTo,
     pillar,
     headline,
-    showDivider = false,
     webPublicationDate,
-    image,
+    trailImage,
     standfirst,
     avatar,
 }: CardType) => {
     // If there was no image given or image size was not set, percentage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
     const imageCoverage =
-        (image && image.size && coverages.image[image.size]) ||
+        (trailImage && trailImage.size && coverages.image[trailImage.size]) ||
         coverages.image.medium;
     const contentCoverage =
-        (image && image.size && coverages.content[image.size]) ||
+        (trailImage && trailImage.size && coverages.content[trailImage.size]) ||
         coverages.content.medium;
-
-    const spaceContent = !image;
 
     const isOpinion = pillar === 'opinion';
 
@@ -90,21 +87,18 @@ export const Card = ({
             }
         >
             <TopBar topBarColour={palette[pillar].main}>
-                <CardLayout imagePosition={image && image.position}>
+                <CardLayout imagePosition={trailImage && trailImage.position}>
                     <>
-                        {image && (
+                        {trailImage && (
                             <ImageWrapper percentage={imageCoverage}>
                                 <ImageComponent
-                                    element={image.element}
+                                    element={trailImage.element}
                                     pillar={pillar}
                                     hideCaption={true}
                                 />
                             </ImageWrapper>
                         )}
-                        <ContentWrapper
-                            percentage={contentCoverage}
-                            spaceContent={spaceContent}
-                        >
+                        <ContentWrapper percentage={contentCoverage}>
                             <HeadlineWrapper>
                                 <SmallHeadline {...headline} />
                             </HeadlineWrapper>

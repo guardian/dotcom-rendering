@@ -10,7 +10,6 @@ const editionDropdown = css`
     right: 11px;
     z-index: 1072;
     transform: translateX(100%);
-    padding-top: 7px;
 
     :before {
         content: '';
@@ -81,12 +80,18 @@ export const EditionDropdown: React.FC<{
     links.unshift(activeEditionLink);
     return (
         <div className={editionDropdown}>
-            <Dropdown
-                label={activeEditionLink.title}
-                links={links}
-                id="edition"
-                dataLinkName={dataLinkName}
-            />
+            <div
+                className={css`
+                    padding-top: 7px;
+                `}
+            >
+                <Dropdown
+                    label={activeEditionLink.title}
+                    links={links}
+                    id="edition"
+                    dataLinkName={dataLinkName}
+                />
+            </div>
         </div>
     );
 };

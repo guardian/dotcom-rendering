@@ -93,7 +93,7 @@ const richLinkHeader = css`
 `;
 
 const richLinkTitle = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     font-size: 14px;
     padding-top: 1px;
     padding-bottom: 1px;
@@ -113,10 +113,10 @@ const richLinkReadMore: (pillar: Pillar) => colour = pillar => {
 };
 
 const readMoreTextStyle = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     font-size: 14px;
     ${from.wide} {
-        ${headline.tiny()}
+        ${headline.xxxsmall()}
     }
     display: inline-block;
     height: 30px;
@@ -128,7 +128,7 @@ const readMoreTextStyle = css`
 `;
 
 const byline = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     font-size: 14px;
     font-style: italic;
     ${from.wide} {

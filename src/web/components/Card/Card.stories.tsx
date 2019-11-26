@@ -47,7 +47,7 @@ export const News = () => (
                                         pillar: 'news',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'right',
                                     size: 'large',
@@ -73,7 +73,7 @@ export const News = () => (
                                         pillar: 'news',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[5],
                                     position: 'top',
                                     size: 'small',
@@ -100,7 +100,7 @@ export const News = () => (
                                         pillar: 'culture',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[3],
                                     position: 'top',
                                     size: 'medium',
@@ -127,7 +127,7 @@ export const News = () => (
                                                 pillar: 'news',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[6],
                                             position: 'top',
                                             size: 'small',
@@ -145,7 +145,7 @@ export const News = () => (
                                             headlineString:
                                                 'Listen. Strange women lying in ponds distributing swords is no basis for a system of government',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                         },
                                     }}
                                 />
@@ -160,7 +160,7 @@ export const News = () => (
                                             headlineString:
                                                 'Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python',
                                                 pillar: 'news',
@@ -183,7 +183,7 @@ export const News = () => (
                                             headlineString:
                                                 'Are you suggesting that coconuts migrate?',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Run Away!',
                                                 pillar: 'sport',
@@ -202,7 +202,7 @@ export const News = () => (
                                             headlineString:
                                                 "On second thoughts, let's not go there. It is a silly place",
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -221,7 +221,7 @@ export const News = () => (
                                             headlineString:
                                                 'Let us ride to Camelot',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -240,7 +240,7 @@ export const News = () => (
                                             headlineString:
                                                 "Where'd you get the coconuts?",
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -259,7 +259,7 @@ export const News = () => (
                                             headlineString:
                                                 'Now, look here, my good man',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Terry Gillingham',
                                                 pillar: 'lifestyle',
@@ -278,7 +278,7 @@ export const News = () => (
                                             headlineString:
                                                 "We shall say 'Ni' again to you, if you do not appease us",
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python',
                                                 pillar: 'news',
@@ -322,7 +322,7 @@ export const InDepth = () => (
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[5],
                                             position: 'left',
                                             size: 'small',
@@ -339,14 +339,14 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 'Now, look here, my good man',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[6],
                                             position: 'left',
                                             size: 'small',
@@ -363,14 +363,14 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 "Where'd you get the coconuts",
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[3],
                                             position: 'left',
                                             size: 'small',
@@ -387,14 +387,14 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 'Let us ride to Camelot!',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[2],
                                             position: 'left',
                                             size: 'small',
@@ -411,14 +411,14 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 'How do you know she is a witch? Burn her!',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
                                                 pillar: 'sport',
                                             },
                                         },
-                                        image: {
+                                        trailImage: {
                                             element: imageElements[1],
                                             position: 'left',
                                             size: 'small',
@@ -444,7 +444,7 @@ export const InDepth = () => (
                                         pillar: 'sport',
                                     },
                                 },
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'large',
@@ -484,7 +484,7 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[5],
                                     position: 'top',
                                     size: 'small',
@@ -509,7 +509,7 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[6],
                                     position: 'top',
                                     size: 'small',
@@ -534,7 +534,7 @@ export const Related = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[4],
                                     position: 'top',
                                     size: 'small',
@@ -553,7 +553,7 @@ export const Related = () => (
                                 headline: {
                                     headlineString:
                                         'Go and boil your bottoms, sons of a silly person!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -572,7 +572,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     headlineString: 'Let us ride to Camelot!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -591,7 +591,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     headlineString: 'Let us ride to Camelot!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -611,7 +611,7 @@ export const Related = () => (
                                 headline: {
                                     headlineString:
                                         'How do you know she is a witch? Burn her!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Holy Grail',
@@ -652,7 +652,7 @@ export const Spotlight = () => (
                             },
                         },
                         webPublicationDate: '2019-11-11T09:45:30.000Z',
-                        image: {
+                        trailImage: {
                             element: imageElements[0],
                             position: 'right',
                             size: 'jumbo',
@@ -713,7 +713,7 @@ export const Quad = () => (
                                     showQuotes: true,
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'medium',
@@ -738,7 +738,7 @@ export const Quad = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'medium',
@@ -763,7 +763,7 @@ export const Quad = () => (
                                     },
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                image: {
+                                trailImage: {
                                     element: imageElements[0],
                                     position: 'top',
                                     size: 'medium',

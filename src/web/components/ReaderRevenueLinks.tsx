@@ -47,7 +47,7 @@ const link = css`
     height: 32px;
     text-decoration: none;
     padding: 6px 12px 0 12px;
-    line-height: 1;
+    line-height: 18px;
     position: relative;
     margin-right: 10px;
     margin-bottom: 6px;
@@ -95,7 +95,7 @@ const hiddenFromTablet = css`
 const subMessage = css`
     color: ${palette.neutral[100]};
     ${textSans.medium()};
-    margin-bottom: 9px;
+    margin-bottom: 5px;
 `;
 
 export const RRButton: React.FC<{

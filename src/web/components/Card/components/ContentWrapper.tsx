@@ -7,33 +7,23 @@ const sizingStyles = css`
     justify-content: space-between;
 `;
 
-const coverageStyles = (percentage: string) => css`
-    flex-basis: ${percentage && percentage};
-`;
-
-const spacingStyles = css`
-    flex-grow: 1;
-    flex-shrink: 0;
-`;
+const coverageStyles = (percentage: string) => {
+    return percentage
+        ? css`
+              flex-basis: ${percentage};
+          `
+        : css`
+              flex-grow: 1;
+          `;
+};
 
 type Props = {
     children: JSXElements;
     percentage?: CardPercentageType;
-    spaceContent?: boolean;
 };
 
-export const ContentWrapper = ({
-    children,
-    percentage,
-    spaceContent,
-}: Props) => (
-    <div
-        className={cx(
-            sizingStyles,
-            percentage && coverageStyles(percentage),
-            spaceContent && spacingStyles,
-        )}
-    >
+export const ContentWrapper = ({ children, percentage }: Props) => (
+    <div className={cx(sizingStyles, percentage && coverageStyles(percentage))}>
         {children}
     </div>
 );

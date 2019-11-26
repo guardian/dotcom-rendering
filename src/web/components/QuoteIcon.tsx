@@ -10,9 +10,9 @@ const quoteStyles = (colour?: string) => css`
     fill: ${colour && colour};
 `;
 
-const sizeStyles = (size: 'tiny' | 'xxsmall' | 'xsmall') => {
+const sizeStyles = (size: 'xxxsmall' | 'xxsmall' | 'xsmall') => {
     switch (size) {
-        case 'tiny':
+        case 'xxxsmall':
             return css`
                 svg {
                     height: 16px;
@@ -47,7 +47,7 @@ const sizeStyles = (size: 'tiny' | 'xxsmall' | 'xsmall') => {
 
 type Props = {
     colour?: string;
-    size?: 'tiny' | 'xxsmall' | 'xsmall';
+    size?: 'xxxsmall' | 'xxsmall' | 'xsmall';
 };
 
 export const QuoteIcon = ({ colour, size = 'xxsmall' }: Props) => (
