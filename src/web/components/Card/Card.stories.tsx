@@ -145,7 +145,7 @@ export const News = () => (
                                             headlineString:
                                                 'Listen. Strange women lying in ponds distributing swords is no basis for a system of government',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                         },
                                     }}
                                 />
@@ -160,7 +160,7 @@ export const News = () => (
                                             headlineString:
                                                 'Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python',
                                                 pillar: 'news',
@@ -183,7 +183,7 @@ export const News = () => (
                                             headlineString:
                                                 'Are you suggesting that coconuts migrate?',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Run Away!',
                                                 pillar: 'sport',
@@ -202,7 +202,7 @@ export const News = () => (
                                             headlineString:
                                                 "On second thoughts, let's not go there. It is a silly place",
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -221,7 +221,7 @@ export const News = () => (
                                             headlineString:
                                                 'Let us ride to Camelot',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -240,7 +240,7 @@ export const News = () => (
                                             headlineString:
                                                 "Where'd you get the coconuts?",
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -259,7 +259,7 @@ export const News = () => (
                                             headlineString:
                                                 'Now, look here, my good man',
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Terry Gillingham',
                                                 pillar: 'lifestyle',
@@ -278,7 +278,7 @@ export const News = () => (
                                             headlineString:
                                                 "We shall say 'Ni' again to you, if you do not appease us",
                                             pillar: 'news',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             kicker: {
                                                 text: 'Monty Python',
                                                 pillar: 'news',
@@ -339,7 +339,7 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 'Now, look here, my good man',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -363,7 +363,7 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 "Where'd you get the coconuts",
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -387,7 +387,7 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 'Let us ride to Camelot!',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -411,7 +411,7 @@ export const InDepth = () => (
                                         headline: {
                                             headlineString:
                                                 'How do you know she is a witch? Burn her!',
-                                            size: 'tiny',
+                                            size: 'xxxsmall',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -553,7 +553,7 @@ export const Related = () => (
                                 headline: {
                                     headlineString:
                                         'Go and boil your bottoms, sons of a silly person!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -572,7 +572,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     headlineString: 'Let us ride to Camelot!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -591,7 +591,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     headlineString: 'Let us ride to Camelot!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -611,7 +611,7 @@ export const Related = () => (
                                 headline: {
                                     headlineString:
                                         'How do you know she is a witch? Burn her!',
-                                    size: 'tiny',
+                                    size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Holy Grail',

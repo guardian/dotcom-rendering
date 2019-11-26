@@ -52,7 +52,7 @@ const subMetaLink = css`
 `;
 
 const subMetaSectionLink = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
 `;
 
 const subMetaKeywordLink = css`

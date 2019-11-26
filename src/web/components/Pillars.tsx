@@ -119,7 +119,7 @@ const pillarDivider = css`
 `;
 
 const linkStyle = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     box-sizing: border-box;
     font-weight: 900;
     color: ${palette.neutral[100]};

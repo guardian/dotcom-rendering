@@ -7,7 +7,7 @@ import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 import { ListStyle, LinkStyle } from '@root/src/amp/components/elements/Text';
 
 const standfirstCss = (pillar: Pillar) => css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     font-weight: 100;
     color: ${palette.neutral[7]};
     margin-bottom: 12px;

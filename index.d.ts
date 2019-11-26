@@ -255,7 +255,7 @@ type CardImageType = {
     size?: ImageSizeType;
 };
 
-type SmallHeadlineSize = 'tiny' | 'xxsmall' | 'xsmall';
+type SmallHeadlineSize = 'xxxsmall' | 'xxsmall' | 'xsmall';
 
 interface CardType {
     linkTo: string;

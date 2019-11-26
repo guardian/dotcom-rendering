@@ -24,14 +24,14 @@ const pillarColours = pillarMap(
 
 const primaryStyle = css`
     font-weight: 700;
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     ${from.leftCol} {
         ${headline.xxsmall()};
     }
 `;
 
 const secondaryStyle = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     display: block;
 `;
 

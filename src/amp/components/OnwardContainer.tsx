@@ -67,11 +67,11 @@ const headlineCSS = css`
     margin: 1px 0 4px;
     font-weight: 500;
     word-wrap: break-word;
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
 `;
 
 const description = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     margin-bottom: 16px;
 `;
 

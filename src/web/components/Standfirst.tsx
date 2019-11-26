@@ -30,11 +30,11 @@ const standfirstStyles = css`
     }
 
     li {
-        ${headline.tiny()};
+        ${headline.xxxsmall()};
     }
 `;
 
-// type SizeType = 'tiny' | 'small' | 'medium';
+// type SizeType = 'xxxsmall' | 'small' | 'medium';
 // type WeightType = 'light' | 'regular' | 'medium' | 'bold';
 
 type Props = {

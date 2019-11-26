@@ -27,7 +27,7 @@ const twitterHandle = css`
 `;
 
 const bylineStyle = (pillar: Pillar) => css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     color: ${pillarPalette[pillar].main};
     padding-bottom: 8px;
     font-style: italic;
