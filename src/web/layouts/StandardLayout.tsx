@@ -110,7 +110,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                                 max-width: 630px;
                             `}
                         >
-                            <ArticleBody CAPI={CAPI} config={config} />
+                            <ArticleBody CAPI={CAPI} />
                             <GuardianLines pillar={CAPI.pillar} />
                             <SubMeta
                                 pillar={CAPI.pillar}
@@ -134,7 +134,7 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
             </Section>
 
             <Section showTopBorder={false}>
-                <OutbrainContainer config={config} />
+                <OutbrainContainer />
             </Section>
 
             <Section islandId="most-viewed-footer" />

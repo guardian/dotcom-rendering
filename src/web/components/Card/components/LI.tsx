@@ -10,7 +10,7 @@ const liStyles = (percentage?: CardPercentageType) => css`
     /* margin-bottom: 12px; */
 
     display: flex;
-    ${percentage ? `flex-basis: ${percentage && percentage};` : `flex-grow: 1;`}
+    ${percentage ? `flex-basis: ${percentage};` : `flex-grow: 1;`}
 `;
 
 const sidePaddingStyles = css`

@@ -23,7 +23,7 @@ const richLink = css`
     font-weight: 500;
     border: 0;
     text-decoration: none;
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     word-wrap: break-word;
     :hover {
         text-decoration: underline;

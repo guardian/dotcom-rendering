@@ -255,16 +255,21 @@ type CardImageType = {
     size?: ImageSizeType;
 };
 
-type SmallHeadlineSize = 'tiny' | 'xxsmall' | 'xsmall';
+type SmallHeadlineSize = 'xxxsmall' | 'xxsmall' | 'xsmall';
+
+type AvatarType = {
+    src: string;
+    alt: string;
+};
 
 interface CardType {
     linkTo: string;
     pillar: Pillar;
     headline: SmallHeadlineType;
-    showDivider?: boolean;
     webPublicationDate?: string;
-    image?: CardImageType;
+    trailImage?: CardImageType;
     standfirst?: string;
+    avatar?: AvatarType;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';

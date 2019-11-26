@@ -72,8 +72,10 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
             <HeaderItem order={2}>
                 <ArticleHeadline
                     headlineString={headline}
-                    tags={tags}
+                    designType={CAPI.designType}
+                    pillar={pillar}
                     webPublicationDate={webPublicationDate}
+                    tags={tags}
                 />
             </HeaderItem>
             <HeaderItem order={3}>

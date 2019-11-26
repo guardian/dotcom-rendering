@@ -12,16 +12,16 @@ export default {
 };
 /* tslint:enable */
 
-export const tinyStory = () => (
+export const xxxsmallStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="This is how a tiny headline link looks"
+            headlineString="This is how a xxxsmall headline link looks"
             pillar="news"
-            size="tiny"
+            size="xxxsmall"
         />
     </Section>
 );
-tinyStory.story = { name: 'Size | tiny' };
+xxxsmallStory.story = { name: 'Size | xxxsmall' };
 
 export const defaultStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -51,7 +51,6 @@ export const liveStory = () => (
             pillar="news"
             kicker={{
                 text: 'Live',
-                pillar: 'news',
             }}
         />
     </Section>
@@ -65,7 +64,6 @@ export const noSlash = () => (
             pillar="news"
             kicker={{
                 text: 'Live',
-                pillar: 'news',
                 showSlash: false,
             }}
         />
@@ -80,7 +78,6 @@ export const pulsingDot = () => (
             pillar="news"
             kicker={{
                 text: 'Live',
-                pillar: 'news',
                 showPulsingDot: true,
             }}
         />
@@ -92,27 +89,26 @@ export const cultureVariant = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
             headlineString="This is how a headline with a culture kicker looks"
-            pillar="news"
+            pillar="culture"
             kicker={{
                 text: 'Art and stuff',
-                pillar: 'culture',
             }}
         />
     </Section>
 );
 cultureVariant.story = { name: 'With a culture kicker' };
 
-export const underlinedTiny = () => (
+export const underlinedxxxsmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="Sometimes tiny headline links are underlined"
+            headlineString="Sometimes xxxsmall headline links are underlined"
             pillar="news"
-            size="tiny"
+            size="xxxsmall"
             underlined={true}
         />
     </Section>
 );
-underlinedTiny.story = { name: 'Underlined | tiny' };
+underlinedxxxsmall.story = { name: 'Underlined | xxxsmall' };
 
 export const underlinedXXSmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -138,17 +134,17 @@ export const underlinedXSmall = () => (
 );
 underlinedXSmall.story = { name: 'Underlined | xsmall' };
 
-export const opinionTiny = () => (
+export const opinionxxxsmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <SmallHeadline
-            headlineString="This is how tiny links to opinion articles look"
+            headlineString="This is how xxxsmall links to opinion articles look"
             pillar="opinion"
             showQuotes={true}
-            size="tiny"
+            size="xxxsmall"
         />
     </Section>
 );
-opinionTiny.story = { name: 'Quotes | tiny' };
+opinionxxxsmall.story = { name: 'Quotes | xxxsmall' };
 
 export const opinionXXSmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -193,7 +189,6 @@ export const colouredWithKicker = () => (
             coloured={true}
             kicker={{
                 text: 'England 0 - 8 USA',
-                pillar: 'sport',
                 showPulsingDot: true,
                 showSlash: true,
             }}
@@ -210,7 +205,6 @@ export const OpinionKicker = () => (
             showQuotes={true}
             kicker={{
                 text: 'George Monbiot',
-                pillar: 'opinion',
                 showSlash: true,
             }}
         />
@@ -227,7 +221,6 @@ export const Busy = () => (
             coloured={true}
             kicker={{
                 text: 'Aerial Yoga',
-                pillar: 'lifestyle',
                 showSlash: true,
             }}
         />
@@ -241,11 +234,14 @@ export const InUnderlinedState = () => (
             headlineString="This is the underlined state when showUnderline is true"
             pillar="news"
             showUnderline={true}
-            size="tiny"
+            size="xxxsmall"
             kicker={{
                 text: 'I am never underlined',
-                pillar: 'news',
                 showSlash: true,
+            }}
+            link={{
+                to:
+                    'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
             }}
         />
     </Section>
@@ -259,7 +255,6 @@ export const linkStory = () => (
             pillar="sport"
             kicker={{
                 text: 'I am not a link',
-                pillar: 'sport',
                 showSlash: true,
             }}
             coloured={true}
@@ -279,7 +274,6 @@ export const visitedLinkStory = () => (
             pillar="sport"
             kicker={{
                 text: 'I am not a link',
-                pillar: 'sport',
                 showSlash: true,
             }}
             coloured={true}
@@ -300,7 +294,6 @@ export const notFocusableLinkStory = () => (
             pillar="sport"
             kicker={{
                 text: 'I am not a link',
-                pillar: 'sport',
                 showSlash: true,
             }}
             coloured={true}

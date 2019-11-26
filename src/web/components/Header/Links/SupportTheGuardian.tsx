@@ -42,14 +42,14 @@ const style = css`
 
 const text = css`
     color: ${palette.neutral[97]};
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     font-weight: 700;
     text-align: center;
     padding: 6px 20px 3px;
     position: relative;
 
     ${from.tablet} {
-        ${headline.tiny()};
+        ${headline.xxxsmall()};
     }
 `;
 

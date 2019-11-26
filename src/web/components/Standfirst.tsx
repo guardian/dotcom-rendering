@@ -30,7 +30,7 @@ const nestedStyles = css`
     }
 
     li {
-        ${headline.tiny()};
+        ${headline.xxxsmall()};
     }
 `;
 
@@ -64,7 +64,7 @@ const standfirstStyles = (designType: DesignType) => {
         case 'Interview':
         default:
             return css`
-                ${headline.tiny({
+                ${headline.xxxsmall({
                     fontWeight: 'bold',
                 })};
                 line-height: 20px;

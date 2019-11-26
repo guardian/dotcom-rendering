@@ -5,7 +5,7 @@ import { pillarPalette } from '@root/src/lib/pillars';
 
 const seriesStyle = (pillar: Pillar) => css`
     color: ${pillarPalette[pillar].main};
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     font-weight: 900;
     text-decoration: none;
     margin-top: 10px;

@@ -1,26 +1,19 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { pillarPalette } from '@root/src/lib/pillars';
 import { getAgeWarning } from '@root/src/lib/age-warning';
-
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
-type HeadlineType =
-    | 'basic'
-    | 'underlined'
-    | 'light'
-    | 'jumbo'
-    | 'inverted'
-    | 'bold';
-
 type Props = {
     headlineString: string;
-    type?: HeadlineType; // Defaults to basic
+    designType: DesignType; // Decides headline appearance
+    pillar: Pillar; // Decides headline colour when relevant
     webPublicationDate: string; // Used for age warning
     tags: TagType[]; // Used for age warning
-    colour?: string; // pass in pillar colour for features, etc.
+    isShowcase?: boolean; // Used for Interviews to change headline position
 };
 
 const curly = (x: any) => x;
@@ -44,6 +37,7 @@ const invertedFont = css`
 `;
 
 const lightFont = css`
+    ${headline.medium()};
     font-weight: normal;
     font-weight: 300;
     font-size: 2.125rem;
@@ -56,11 +50,6 @@ const standardPadding = css`
     ${from.tablet} {
         padding-bottom: 36px;
     }
-`;
-
-const boldPadding = css`
-    padding-bottom: 24px;
-    padding-top: 3px;
 `;
 
 const underlinedStyles = css`
@@ -93,6 +82,10 @@ const shiftPosition = (shift?: 'up' | 'down') => css`
     margin-bottom: ${shift && shift === 'down' && '-50px'};
 `;
 
+const shiftSlightly = css`
+    margin-bottom: 16px;
+`;
+
 const invertedStyles = css`
     position: relative;
     color: white;
@@ -101,6 +94,8 @@ const invertedStyles = css`
     padding-bottom: 5px;
     padding-right: 5px;
     box-shadow: -6px 0 0 black;
+    /* Box decoration is required to push the box shadow out on Firefox */
+    box-decoration-break: clone;
 `;
 
 const blackBackground = css`
@@ -136,34 +131,65 @@ const ageWarningMargins = css`
 `;
 
 const renderHeadline = (
-    type: HeadlineType,
+    designType: DesignType,
+    isShowcase: boolean,
     headlineString: string,
     options?: {
         colour?: string;
     },
 ) => {
-    switch (type) {
-        case 'basic':
-        case 'bold':
-        case 'light':
-        case 'underlined': {
+    switch (designType) {
+        case 'Article':
+        case 'Media':
+        case 'Review':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+            return (
+                <h1 className={cx(standardFont, standardPadding)}>
+                    {curly(headlineString)}
+                </h1>
+            );
+
+        case 'Feature':
             return (
                 <h1
                     className={cx(
-                        standardFont,
+                        boldFont,
                         standardPadding,
-                        type === 'underlined' && underlinedStyles,
-                        type === 'bold' && boldFont,
-                        type === 'bold' && boldPadding,
-                        type === 'light' && lightFont,
-                        options && colourStyles(options.colour),
+                        colourStyles(options && options.colour),
                     )}
                 >
                     {curly(headlineString)}
                 </h1>
             );
-        }
-        case 'inverted': {
+
+        case 'Comment':
+            return (
+                <h1 className={cx(lightFont, standardPadding)}>
+                    {curly(headlineString)}
+                </h1>
+            );
+
+        case 'Analysis':
+            return (
+                <h1
+                    className={cx(
+                        standardFont,
+                        standardPadding,
+                        underlinedStyles,
+                    )}
+                >
+                    {curly(headlineString)}
+                </h1>
+            );
+
+        case 'Interview':
             return (
                 // Inverted headlines have a wrapper div for positioning
                 // and a black background (only for the text)
@@ -171,7 +197,8 @@ const renderHeadline = (
                     className={cx(
                         invertedFont,
                         invertedWrapper,
-                        shiftPosition('down'),
+                        // We only shift the inverted headline down when main media is showcase
+                        isShowcase ? shiftPosition('down') : shiftSlightly,
                         maxWidth,
                     )}
                 >
@@ -180,24 +207,22 @@ const renderHeadline = (
                             blackBackground,
                             invertedStyles,
                             displayInline,
-                            options && colourStyles(options.colour),
                         )}
                     >
                         {curly(headlineString)}
                     </span>
                 </h1>
             );
-        }
-        case 'jumbo': {
+
+        case 'Immersive':
             return (
-                // Jumbo headlines are large and inverted and have their black background
+                // Immersive headlines are large and inverted and have their black background
                 // extended to the right
                 <h1
                     className={cx(
                         invertedWrapper,
                         shiftPosition('up'),
                         blackBackground,
-                        options && colourStyles(options.colour),
                     )}
                 >
                     <span
@@ -206,23 +231,22 @@ const renderHeadline = (
                             maxWidth,
                             invertedStyles,
                             displayBlock,
-                            options && colourStyles(options.colour),
                         )}
                     >
                         {curly(headlineString)}
                     </span>
                 </h1>
             );
-        }
     }
 };
 
 export const ArticleHeadline = ({
     headlineString,
+    designType,
+    pillar,
     webPublicationDate,
     tags,
-    colour,
-    type = 'basic',
+    isShowcase = false,
 }: Props) => {
     const age = getAgeWarning(tags, webPublicationDate);
     return (
@@ -232,8 +256,8 @@ export const ArticleHeadline = ({
                     <AgeWarning age={age} />
                 </div>
             )}
-            {renderHeadline(type, headlineString, {
-                colour,
+            {renderHeadline(designType, isShowcase, headlineString, {
+                colour: pillarPalette[pillar].dark,
             })}
             {age && <AgeWarning age={age} isScreenReader={true} />}
         </>
