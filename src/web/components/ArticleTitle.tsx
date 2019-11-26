@@ -2,7 +2,6 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
-import { Badge } from '@frontend/web/components/Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 const sectionStyles = css`
@@ -48,11 +47,7 @@ export const ArticleTitle = ({
     fallbackToSection = true,
 }: Props) => (
     <div className={cx(inLeftCol && sectionStyles, badge && badgeContainer)}>
-        {badge && (
-            <div className={titleBadgeWrapper}>
-                <Badge svgSrc={badge.svgSrc} linkTo={badge.linkTo} />
-            </div>
-        )}
+        {badge && <div className={titleBadgeWrapper} />}
         <div className={badge && marginTop}>
             <SeriesSectionLink
                 CAPI={CAPI}
