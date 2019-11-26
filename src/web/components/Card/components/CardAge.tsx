@@ -11,6 +11,12 @@ import { makeRelativeDate } from '@frontend/web/components/lib/dateTime';
 const ageStyles = css`
     ${textSans.xsmall()};
     color: ${palette.neutral[60]};
+
+    /* Provide side padding for positioning and also to keep spacing
+    between any sibings (like GuardianLines) */
+    padding-left: 5px;
+    padding-right: 5px;
+
     svg {
         fill: ${palette.neutral[46]};
         margin-bottom: -1px;

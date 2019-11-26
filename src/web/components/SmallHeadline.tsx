@@ -32,7 +32,7 @@ const underlinedStyles = (size: SmallHeadlineSize) => {
         `;
     }
     switch (size) {
-        case 'tiny':
+        case 'xxxsmall':
             return generateUnderlinedCss(20);
         case 'xxsmall':
             return generateUnderlinedCss(23);

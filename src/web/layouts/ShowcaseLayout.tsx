@@ -90,11 +90,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
                                     max-width: 630px;
                                 `}
                             >
-                                <ArticleBody
-                                    CAPI={CAPI}
-                                    config={config}
-                                    isShowcase={true}
-                                />
+                                <ArticleBody CAPI={CAPI} isShowcase={true} />
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta
                                     pillar={CAPI.pillar}
@@ -123,7 +119,7 @@ export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
         </Section>
 
         <Section showTopBorder={false}>
-            <OutbrainContainer config={config} />
+            <OutbrainContainer />
         </Section>
 
         <Section islandId="most-viewed-footer" />

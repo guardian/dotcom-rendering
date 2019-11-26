@@ -21,7 +21,7 @@ const headerStyle = (pillar: Pillar) => css`
 `;
 
 const bylineStyle = (pillar: Pillar) => css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     color: ${pillarPalette[pillar].main};
     padding-top: 3px;
     padding-bottom: 8px;
@@ -36,7 +36,7 @@ const bylineStyle = (pillar: Pillar) => css`
 `;
 
 const standfirstStyle = (pillar: Pillar) => css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     color: ${palette.neutral[100]};
     background-color: ${pillarPalette[pillar].dark};
     font-weight: bold;

@@ -119,7 +119,7 @@ const pillarDivider = css`
 `;
 
 const linkStyle = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     box-sizing: border-box;
     font-weight: 900;
     color: ${palette.neutral[100]};
@@ -142,18 +142,18 @@ const linkStyle = css`
     }
     ${from.tablet} {
         font-size: 22px;
-        padding-top: 13px;
+        padding-top: 9px;
         height: 48px;
         padding-right: 20px;
         padding-left: 9px;
     }
     ${from.desktop} {
-        padding-top: 11px;
+        padding-top: 5px;
         height: 42px;
     }
 
     ${from.wide} {
-        padding-top: 9px;
+        padding-top: 7px;
         font-size: 24px;
     }
 

@@ -12,31 +12,9 @@ jest.mock('@frontend/web/components/lib/api', () => ({
 }));
 
 describe('ShareCount', () => {
-    const config: ConfigType = {
-        ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-        sentryHost: '',
-        sentryPublicApiKey: '',
-        dcrSentryDsn: '',
-        switches: {},
-        abTests: {},
-        dfpAccountId: '',
-        commercialBundleUrl: '',
-        revisionNumber: '',
-        isDev: false,
-        googletagUrl: '',
-        stage: 'DEV',
-        frontendAssetsFullURL: 'http://localhost:9000/assets/',
-        hbImpl: 'prebid',
-        adUnit: '/59666047/theguardian.com/film/article/ng',
-        isSensitive: '',
-        videoDuration: 0,
-        edition: '',
-        section: '',
-        sharedAdTargeting: {},
-    };
+    const ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 
     const { pageId } = CAPI;
-    const { ajaxUrl } = config;
 
     beforeEach(() => {
         useApi.mockReset();
@@ -46,7 +24,7 @@ describe('ShareCount', () => {
         useApi.mockReturnValue({ data: { share_count: 0 } });
 
         const { container } = render(
-            <ShareCount config={config} pageId={CAPI.pageId} />,
+            <ShareCount ajaxUrl={ajaxUrl} pageId={CAPI.pageId} />,
         );
 
         expect(useApi).toHaveBeenCalledWith(
@@ -60,7 +38,7 @@ describe('ShareCount', () => {
         useApi.mockReturnValue({ error: { message: 'Bad' } });
 
         const { container } = render(
-            <ShareCount config={config} pageId={CAPI.pageId} />,
+            <ShareCount ajaxUrl={ajaxUrl} pageId={CAPI.pageId} />,
         );
 
         expect(useApi).toHaveBeenCalledWith(
@@ -74,7 +52,7 @@ describe('ShareCount', () => {
         useApi.mockReturnValue({ data: { share_count: 100 } });
 
         const { container, getByTestId } = render(
-            <ShareCount config={config} pageId={CAPI.pageId} />,
+            <ShareCount ajaxUrl={ajaxUrl} pageId={CAPI.pageId} />,
         );
 
         expect(useApi).toHaveBeenCalledWith(
@@ -90,7 +68,7 @@ describe('ShareCount', () => {
         useApi.mockReturnValue({ data: { share_count: 25000 } });
 
         const { container, getByTestId } = render(
-            <ShareCount config={config} pageId={CAPI.pageId} />,
+            <ShareCount ajaxUrl={ajaxUrl} pageId={CAPI.pageId} />,
         );
 
         expect(useApi).toHaveBeenCalledWith(

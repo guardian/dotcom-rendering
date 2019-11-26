@@ -56,7 +56,7 @@ const unselectedListTab = css`
 `;
 
 const tabButton = css`
-    ${headline.tiny()};
+    ${headline.xxxsmall()};
     margin: 0;
     border: 0;
     background: transparent;

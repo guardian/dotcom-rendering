@@ -7,7 +7,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Standfirst } from '@frontend/web/components/Standfirst';
 
 const standfirstStyles = css`
-    ${headline.tiny({
+    ${headline.xxxsmall({
         fontWeight: 'bold',
     })};
     line-height: 20px;
@@ -41,7 +41,7 @@ const standfirstStyles = css`
     }
 
     li {
-        ${headline.tiny()};
+        ${headline.xxxsmall()};
     }
 `;
 

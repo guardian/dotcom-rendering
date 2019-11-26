@@ -11,7 +11,7 @@ const wrapperStyles = css`
 `;
 
 const headingStyles = css`
-    ${headline.tiny({ fontWeight: 'bold' })}
+    ${headline.xxxsmall({ fontWeight: 'bold' })}
     margin-bottom: 8px;
 `;
 
