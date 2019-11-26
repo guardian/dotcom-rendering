@@ -83,6 +83,7 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
             <HeaderItem order={3}>
                 <Hide when="above" breakpoint="leftCol">
                     <ArticleStandfirst
+                        designType={CAPI.designType}
                         pillar={pillar}
                         standfirst={standfirst}
                     />

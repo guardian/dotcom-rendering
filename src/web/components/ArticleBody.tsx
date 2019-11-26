@@ -132,6 +132,7 @@ export const ArticleBody: React.FC<{
                 // sits inside here so that the right column advert does not get pushed down
                 <Hide when="below" breakpoint="leftCol">
                     <ArticleStandfirst
+                        designType={CAPI.designType}
                         pillar={CAPI.pillar}
                         standfirst={CAPI.standfirst}
                     />

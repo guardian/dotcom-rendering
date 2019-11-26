@@ -97,7 +97,7 @@ export const Card = ({
                                 {standfirst && (
                                     <StandfirstWrapper>
                                         <Standfirst
-                                            pillar={pillar}
+                                            designType="Article"
                                             standfirst={standfirst}
                                         />
                                     </StandfirstWrapper>
