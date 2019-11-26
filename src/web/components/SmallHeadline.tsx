@@ -95,6 +95,9 @@ export const SmallHeadline = ({
                     link.visitedColour && visitedStyles(link.visitedColour),
                 )}
                 href={link.to}
+                // If link.preventFocus is true, set tabIndex to -1 to ensure this
+                // link is not tabbed to. Useful if there is an outer link to the same
+                // place, such as with MostViewed
                 tabIndex={link.preventFocus ? -1 : undefined}
             >
                 {headlineString}
