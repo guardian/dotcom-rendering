@@ -43,7 +43,7 @@ const link = css`
     padding: 7px 0;
 
     ${from.tablet} {
-        padding: 7px 7px;
+        padding: 5px 7px;
     }
 
     :hover,
@@ -56,7 +56,7 @@ const link = css`
         float: left;
         height: 18px;
         width: 18px;
-        margin: 1px 4px 0 0;
+        margin: 3px 4px 0 0;
     }
 `;
 
