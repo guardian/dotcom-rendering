@@ -12,7 +12,6 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
 import { ImageWrapper } from './components/ImageWrapper';
-import { AvatarSize } from './components/AvatarSize';
 import { AvatarContainer } from './components/AvatarContainer';
 import { StandfirstWrapper } from './components/StandfirstWrapper';
 import { LinesWrapper } from './components/LinesWrapper';
@@ -120,13 +119,11 @@ export const Card = ({
                                 )}
                                 {avatar && (
                                     <AvatarContainer>
-                                        <AvatarSize>
-                                            <Avatar
-                                                imageSrc={avatar.src}
-                                                imageAlt={avatar.alt}
-                                                pillar={pillar}
-                                            />
-                                        </AvatarSize>
+                                        <Avatar
+                                            imageSrc={avatar.src}
+                                            imageAlt={avatar.alt}
+                                            pillar={pillar}
+                                        />
                                     </AvatarContainer>
                                 )}
                                 <CardFooter>
