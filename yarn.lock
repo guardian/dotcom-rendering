@@ -1342,10 +1342,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/src-foundations@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.6.0.tgz#a5fc783faedb62686756c7ca92b4e851227e3710"
-  integrity sha512-zuU5VSexP/qZoku3/Tq+3YeeeCCU+f2Sx+mGjZQK7ltE0dBBFlXk204JzSM6iCd9QAvQvn4gTwXOT12NQk/J8g==
+"@guardian/src-foundations@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.8.0.tgz#c8d422324522540c502070845318dad183a336bc"
+  integrity sha512-n0E8BV5wpdZomH6vXesh2gfHbrlTlIUTcGfLuur+xN3WJ//nangJsI1jckf9X6y+XnUiQeFUclrQEgNYFPPIrw==
 
 "@hapi/address@2.x.x":
   version "2.1.2"
