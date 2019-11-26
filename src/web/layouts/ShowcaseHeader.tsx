@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { pillarPalette } from '@root/src/lib/pillars';
 import { from, until, between } from '@guardian/src-foundations/mq';
 
 import { MainMedia } from '@root/src/web/components/MainMedia';
@@ -74,10 +73,11 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
             <HeaderItem order={2}>
                 <ArticleHeadline
                     headlineString={headline}
-                    tags={tags}
+                    designType={CAPI.designType}
+                    pillar={pillar}
                     webPublicationDate={webPublicationDate}
-                    type="bold"
-                    colour={pillarPalette[pillar].dark}
+                    tags={tags}
+                    isShowcase={true}
                 />
             </HeaderItem>
             <HeaderItem order={3}>
