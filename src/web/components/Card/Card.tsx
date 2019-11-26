@@ -65,8 +65,6 @@ export const Card = ({
         (trailImage && trailImage.size && coverages.content[trailImage.size]) ||
         coverages.content.medium;
 
-    const spaceContent = !trailImage;
-
     return (
         <CardLink
             linkTo={linkTo}
@@ -85,10 +83,7 @@ export const Card = ({
                                 />
                             </ImageWrapper>
                         )}
-                        <ContentWrapper
-                            percentage={contentCoverage}
-                            spaceContent={spaceContent}
-                        >
+                        <ContentWrapper percentage={contentCoverage}>
                             <HeadlineWrapper>
                                 <SmallHeadline {...headline} />
                             </HeadlineWrapper>
