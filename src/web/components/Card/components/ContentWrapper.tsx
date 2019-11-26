@@ -17,24 +17,13 @@ const coverageStyles = (percentage: string) => {
           `;
 };
 
-const paddingStyles = css`
-    padding-left: 5px;
-    padding-right: 5px;
-`;
-
 type Props = {
     children: JSXElements;
     percentage?: CardPercentageType;
 };
 
 export const ContentWrapper = ({ children, percentage }: Props) => (
-    <div
-        className={cx(
-            sizingStyles,
-            percentage && coverageStyles(percentage),
-            paddingStyles,
-        )}
-    >
+    <div className={cx(sizingStyles, percentage && coverageStyles(percentage))}>
         {children}
     </div>
 );

@@ -678,22 +678,23 @@ export const Quad = () => (
                             {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
-                                pillar: 'news',
+                                pillar: 'opinion',
                                 headline: {
                                     headlineString:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'xxsmall',
-                                    pillar: 'news',
+                                    pillar: 'opinion',
                                     kicker: {
                                         text: 'Holy Grail',
-                                        pillar: 'news',
+                                        pillar: 'opinion',
                                     },
+                                    showQuotes: true,
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                trailImage: {
-                                    element: imageElements[0],
-                                    position: 'top',
-                                    size: 'medium',
+                                avatar: {
+                                    src:
+                                        'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+                                    alt: 'Avatar alt text',
                                 },
                             }}
                         />
@@ -703,16 +704,13 @@ export const Quad = () => (
                             {...{
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
-                                pillar: 'news',
+                                pillar: 'opinion',
                                 headline: {
                                     headlineString:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'xxsmall',
-                                    pillar: 'news',
-                                    kicker: {
-                                        text: 'Holy Grail',
-                                        pillar: 'news',
-                                    },
+                                    pillar: 'opinion',
+                                    showQuotes: true,
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
