@@ -70,6 +70,10 @@ const colourStyles = (colour?: string) => css`
     color: ${colour && colour};
 `;
 
+const greenStyles = css`
+    color: green;
+`;
+
 const displayBlock = css`
     display: block;
 `;
@@ -146,7 +150,6 @@ const renderHeadline = (
         case 'Review':
         case 'Live':
         case 'SpecialReport':
-        case 'Recipe':
         case 'MatchReport':
         case 'GuardianView':
         case 'GuardianLabs':
@@ -237,6 +240,12 @@ const renderHeadline = (
                     >
                         {curly(headlineString)}
                     </span>
+                </h1>
+            );
+        case 'Recipe':
+            return (
+                <h1 className={cx(lightFont, standardPadding, greenStyles)}>
+                    {curly(headlineString)}
                 </h1>
             );
     }
