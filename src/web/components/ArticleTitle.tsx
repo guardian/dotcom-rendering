@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { from, until } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 const sectionStyles = css`
@@ -21,15 +21,6 @@ type Props = {
     fallbackToSection?: boolean;
 };
 
-const titleBadgeWrapper = css`
-    margin-bottom: 6px;
-    margin-top: 6px;
-    ${until.leftCol} {
-        display: flex;
-        margin-right: 10px;
-    }
-`;
-
 const badgeContainer = css`
     display: flex;
     padding-top: 3px;
@@ -47,7 +38,6 @@ export const ArticleTitle = ({
     fallbackToSection = true,
 }: Props) => (
     <div className={cx(inLeftCol && sectionStyles, badge && badgeContainer)}>
-        {badge && <div className={titleBadgeWrapper} />}
         <div className={badge && marginTop}>
             <SeriesSectionLink
                 CAPI={CAPI}
