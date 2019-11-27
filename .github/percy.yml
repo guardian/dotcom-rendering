@@ -1,0 +1,19 @@
+name: Percy Snapshots
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node.js 10.15
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10.15
+            - name: Run Percy
+              run: make percy
+              env:
+                  PERCY_PAGES_TOKEN: ${{ secrets.PERCY_PAGES_TOKEN }}
+                  PERCY_COMPONENTS_TOKEN: ${{ secrets.PERCY_COMPONENTS_TOKEN }}
