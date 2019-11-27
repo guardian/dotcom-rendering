@@ -13,8 +13,11 @@ function buildUrl(req) {
     const DEFAULT_URL =
         'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
     const url = new URL(req.query.url || DEFAULT_URL);
+    // searchParams will only work for the first set of query params because 'url' is already a query param itself
+    const searchparams = url.searchParams && url.searchParams.toString();
     // Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
-    return `${url.origin}${url.pathname}.json?dcr=true${url.search}`;
+    return `${url.origin}${url.pathname}.json?dcr=true${searchparams &&
+        '&' + searchparams}`;
 }
 
 function ampifyUrl(url) {
