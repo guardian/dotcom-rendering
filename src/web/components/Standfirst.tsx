@@ -39,7 +39,6 @@ const standfirstStyles = (designType: DesignType) => {
         case 'Comment':
         case 'GuardianView':
         case 'Feature':
-        case 'Recipe':
         case 'Review':
             return css`
                 ${headline.xxsmall({
@@ -51,6 +50,14 @@ const standfirstStyles = (designType: DesignType) => {
                 ${headline.xsmall({
                     fontWeight: 'light',
                 })};
+            `;
+
+        case 'Recipe':
+            return css`
+                ${headline.xsmall({
+                    fontWeight: 'light',
+                })};
+                color: pink;
             `;
         case 'Media':
         case 'SpecialReport':
