@@ -60,10 +60,10 @@ dev: clear clean-dist install
 # cypress #####################################
 
 percy: clear clean-dist install
-	$(call log, "taking snapshots from storybook")
-	@yarn storybook:snapshot
-	$(call log, "starting frontend DEV server for Cypress")
-	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'percy exec -- cypress run --spec "cypress/integration/percy/**/*"'
+	$(call log, "starting frontend DEV server for Cypress to take snapshots")
+	@PERCY_TOKEN=${PERCY_PAGES_TOKEN} NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'percy exec -- cypress run --spec "cypress/integration/percy/**/*"'
+	$(call log, "taking snapshots from Storybook")
+	@PERCY_TOKEN=${PERCY_COMPONENTS_TOKEN} yarn storybook:snapshot
 
 cypress: clear clean-dist install
 	$(call log, "starting frontend DEV server for Cypress")
