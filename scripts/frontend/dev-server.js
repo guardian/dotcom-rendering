@@ -16,8 +16,7 @@ function buildUrl(req) {
     // searchParams will only work for the first set of query params because 'url' is already a query param itself
     const searchparams = url.searchParams && url.searchParams.toString();
     // Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
-    return `${url.origin}${url.pathname}.json?dcr=true${searchparams &&
-        '&' + searchparams}`;
+    return `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 }
 
 function ampifyUrl(url) {
