@@ -39,7 +39,9 @@ const headerStyles = css`
 `;
 
 const maxWidth = css`
-    max-width: 620px;
+    ${from.desktop} {
+        max-width: 620px;
+    }
 `;
 
 type Props = {
@@ -86,7 +88,9 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
                 />
             </HeaderItem>
             <div className={cx(positionMainImage, maxWidth)}>
-                <MainMedia elements={mainMediaElements} pillar={pillar} />
+                <Hide when="below" breakpoint="tablet">
+                    <MainMedia elements={mainMediaElements} pillar={pillar} />
+                </Hide>
             </div>
         </header>
     );
