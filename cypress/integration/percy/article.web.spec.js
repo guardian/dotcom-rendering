@@ -9,14 +9,22 @@ describe('For WEB', function() {
     beforeEach(fixTime);
     beforeEach(mockApi);
 
+    const EDITION = 'UK';
+
     articles.map((article, index) => {
         const { url, pillar, designType } = article;
         it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
             // Prevent the Privacy consent banner from obscuring snapshots
             cy.setCookie('GU_TK', 'true');
             // Fix the location to UK (for edition)
-            cy.setCookie('GU_EDITION', 'UK');
-            cy.visit(`Article?url=${url}`, fetchPolyfill);
+            cy.setCookie('GU_EDITION', EDITION);
+            cy.visit(`Article?url=${url}`, {
+                ...fetchPolyfill,
+                // In addition to the GU_EDITION cookie above, we're also setting this header here
+                headers: {
+                    'X-Gu-Edition': EDITION,
+                },
+            });
             cy.percySnapshot(`WEB-${pillar}-${designType}-${index}`, {
                 widths: [739, 979, 1139, 1299, 1400],
             });
