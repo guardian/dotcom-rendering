@@ -1,10 +1,10 @@
 import React from 'react';
-import { Avatar } from './Avatar';
+import { UserProfileCirclePhoto } from './UserProfileCirclePhoto';
 
 /* tslint:disable */
 export default {
-    component: Avatar,
-    title: 'Components/Avatar',
+    component: UserProfileCirclePhoto,
+    title: 'Components/UserProfileCirclePhoto',
 };
 /* tslint:enable */
 
@@ -17,7 +17,7 @@ const imageSrc300Sport =
 
 export const defaultStory = () => (
     <div style={{ width: '136px', height: '136px' }}>
-        <Avatar
+        <UserProfileCirclePhoto
             imageSrc={imageSrc173}
             imageAlt="The alt of the image"
             pillar="opinion"
@@ -28,7 +28,7 @@ defaultStory.story = { name: 'Medium, Opinion (Rich Links)' };
 
 export const largeStory = () => (
     <div style={{ width: '140px', height: '140px' }}>
-        <Avatar
+        <UserProfileCirclePhoto
             imageSrc={imageSrc300}
             imageAlt="The alt of the image"
             pillar="lifestyle"
@@ -39,7 +39,7 @@ largeStory.story = { name: 'Large, Lifestyle (Byline image - Desktop)' };
 
 export const largeStoryNews = () => (
     <div style={{ width: '140px', height: '140px' }}>
-        <Avatar
+        <UserProfileCirclePhoto
             imageSrc={imageSrc300}
             imageAlt="The alt of the image"
             pillar="news"
@@ -50,7 +50,7 @@ largeStoryNews.story = { name: 'Large, News (Byline image - Desktop)' };
 
 export const largeStoryCulture = () => (
     <div style={{ width: '140px', height: '140px' }}>
-        <Avatar
+        <UserProfileCirclePhoto
             imageSrc={imageSrc300}
             imageAlt="The alt of the image"
             pillar="culture"
@@ -61,7 +61,7 @@ largeStoryCulture.story = { name: 'Large, Culture (Byline image - Desktop)' };
 
 export const smallStory = () => (
     <div style={{ width: '60px', height: '60px' }}>
-        <Avatar
+        <UserProfileCirclePhoto
             imageSrc={imageSrc300Sport}
             imageAlt="The alt of the image"
             pillar="sport"

@@ -14,7 +14,7 @@ const pillarBackground = (pillar: Pillar = 'opinion') =>
         background-color: ${pillarPalette[pillar].main};
     `;
 
-export const Avatar: React.FC<{
+export const UserProfileCirclePhoto: React.FC<{
     imageSrc: string;
     imageAlt: string;
     pillar: Pillar;

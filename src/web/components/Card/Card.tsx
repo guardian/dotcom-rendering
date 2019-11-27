@@ -6,7 +6,7 @@ import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
 import { Standfirst } from '@frontend/web/components/Standfirst';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
-import { Avatar } from '@frontend/web/components/Avatar';
+import { UserProfileCirclePhoto } from '@frontend/web/components/UserProfileCirclePhoto';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -113,7 +113,7 @@ export const Card = ({
                                 )}
                                 {avatar && (
                                     <AvatarContainer>
-                                        <Avatar
+                                        <UserProfileCirclePhoto
                                             imageSrc={avatar.src}
                                             imageAlt={avatar.alt}
                                             pillar={pillar}
