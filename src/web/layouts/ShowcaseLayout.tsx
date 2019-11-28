@@ -27,11 +27,10 @@ import { ShowcaseHeader } from './ShowcaseHeader';
 
 interface Props {
     CAPI: CAPIType;
-    config: ConfigType;
     NAV: NavType;
 }
 
-export const ShowcaseLayout = ({ CAPI, config, NAV }: Props) => (
+export const ShowcaseLayout = ({ CAPI, NAV }: Props) => (
     <>
         <Section showTopBorder={false} showSideBorders={false} padded={false}>
             <HeaderAdSlot
