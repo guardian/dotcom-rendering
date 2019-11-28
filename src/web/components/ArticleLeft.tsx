@@ -25,6 +25,23 @@ const leftWidth = css`
     }
 `;
 
+const positionRelative = css`
+    position: relative;
+`;
+
+const partialRightBorder = (colour: string) => css`
+    :before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        height: 30px;
+        width: 1px;
+        background: ${colour};
+    }
+`;
+
 const rightBorder = (colour: string) => css`
     border-right: 1px solid ${colour};
 `;
@@ -33,16 +50,28 @@ type Props = {
     children: JSXElements;
     showRightBorder?: boolean;
     borderColour?: string;
+    showPartialRightBorder?: boolean;
 };
 
 export const ArticleLeft = ({
     children,
     showRightBorder = true,
     borderColour = palette.neutral[86],
+    showPartialRightBorder = false,
 }: Props) => (
     <section
-        className={cx(leftWidth, showRightBorder && rightBorder(borderColour))}
+        className={cx(
+            positionRelative,
+            leftWidth,
+            showRightBorder && rightBorder(borderColour),
+        )}
     >
-        {children}
+        <div
+            className={cx(
+                showPartialRightBorder && partialRightBorder(borderColour),
+            )}
+        >
+            {children}
+        </div>
     </section>
 );
