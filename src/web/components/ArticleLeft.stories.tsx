@@ -29,7 +29,7 @@ export const PartialRightBorder = () => {
                 </ArticleLeft>
                 <ArticleContainer>
                     <img
-                        src="https://www.fillmurray.com/g/300/450"
+                        src="https://www.fillmurray.com/g/600/500"
                         alt="Bill"
                     />
                 </ArticleContainer>
