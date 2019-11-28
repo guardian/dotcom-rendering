@@ -7,7 +7,7 @@ import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 
-import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
+import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 
 const gridItem = (position: number) => css`
     position: relative;
@@ -76,7 +76,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
             </span>
             <div className={headlineHeader}>
                 {trail.isLiveBlog ? (
-                    <SmallHeadline
+                    <LinkHeadline
                         headlineString={trail.linkText}
                         pillar={trail.pillar}
                         size="xxxsmall"
@@ -87,7 +87,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
                         }}
                     />
                 ) : (
-                    <SmallHeadline
+                    <LinkHeadline
                         headlineString={trail.linkText}
                         pillar={trail.pillar}
                         size="xxxsmall"

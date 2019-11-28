@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { SmallHeadline } from '@root/src/web/components/SmallHeadline';
+import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { useHover } from '@root/src/web/components/lib/useHover';
 
 const listItemStyles = css`
@@ -92,7 +92,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                     </div>
                     <div className={headlineWrapperStyles}>
                         {trail.isLiveBlog ? (
-                            <SmallHeadline
+                            <LinkHeadline
                                 headlineString={trail.linkText}
                                 pillar={trail.pillar}
                                 size="xxxsmall"
@@ -104,7 +104,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                                 }}
                             />
                         ) : (
-                            <SmallHeadline
+                            <LinkHeadline
                                 headlineString={trail.linkText}
                                 pillar={trail.pillar}
                                 size="xxxsmall"
