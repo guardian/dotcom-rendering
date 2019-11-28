@@ -14,7 +14,7 @@ export default {
 export const Article = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how an Article card headline looks"
+            headlineText="This is how an Article card headline looks"
             designType="Article"
             pillar="news"
         />
@@ -25,7 +25,7 @@ Article.story = { name: 'Article' };
 export const Analysis = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how an Analysis card headline looks"
+            headlineText="This is how an Analysis card headline looks"
             designType="Analysis"
             pillar="news"
         />
@@ -36,7 +36,7 @@ Analysis.story = { name: 'Analysis' };
 export const Feature = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how a Feature card headline looks"
+            headlineText="This is how a Feature card headline looks"
             designType="Feature"
             pillar="news"
         />
@@ -47,7 +47,7 @@ Feature.story = { name: 'Feature' };
 export const xsmallStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how a xsmall card headline looks"
+            headlineText="This is how a xsmall card headline looks"
             designType="Article"
             pillar="news"
             size="xsmall"
@@ -59,7 +59,7 @@ xsmallStory.story = { name: 'Size | xsmall' };
 export const liveStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how a card headline with a live kicker looks"
+            headlineText="This is how a card headline with a live kicker looks"
             designType="Article"
             pillar="news"
             kicker={{
@@ -73,7 +73,7 @@ liveStory.story = { name: 'With Live kicker' };
 export const noSlash = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how a card headline with no kicker slash looks"
+            headlineText="This is how a card headline with no kicker slash looks"
             designType="Article"
             pillar="news"
             kicker={{
@@ -88,7 +88,7 @@ noSlash.story = { name: 'With Live kicker but no slash' };
 export const pulsingDot = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how a card headline with a pulsing dot looks"
+            headlineText="This is how a card headline with a pulsing dot looks"
             designType="Article"
             pillar="news"
             kicker={{
@@ -103,7 +103,7 @@ pulsingDot.story = { name: 'With pulsing dot' };
 export const cultureVariant = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how a Feature card headline with the culture pillar looks"
+            headlineText="This is how a Feature card headline with the culture pillar looks"
             designType="Feature"
             pillar="culture"
             kicker={{
@@ -117,7 +117,7 @@ cultureVariant.story = { name: 'With a culture kicker' };
 export const AnalysisXSmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="Xsmall card headline for an Analysis article"
+            headlineText="Xsmall card headline for an Analysis article"
             designType="Analysis"
             pillar="lifestyle"
             size="xsmall"
@@ -129,7 +129,7 @@ AnalysisXSmall.story = { name: 'Underlined | xsmall' };
 export const opinionxxxsmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how xxxsmall card headline for opinion articles look"
+            headlineText="This is how xxxsmall card headline for opinion articles look"
             designType="Comment"
             pillar="opinion"
             showQuotes={true}
@@ -142,7 +142,7 @@ opinionxxxsmall.story = { name: 'Quotes | xxxsmall' };
 export const OpinionKicker = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="This is how an opinion card headline with a kicker and quotes looks"
+            headlineText="This is how an opinion card headline with a kicker and quotes looks"
             designType="Article"
             pillar="opinion"
             showQuotes={true}
@@ -158,7 +158,7 @@ OpinionKicker.story = { name: 'With an opinion kicker' };
 export const Busy = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineString="I look life a buffoon. I feel incredible. And then I vomit"
+            headlineText="I look life a buffoon. I feel incredible. And then I vomit"
             designType="Feature"
             pillar="lifestyle"
             showQuotes={true}

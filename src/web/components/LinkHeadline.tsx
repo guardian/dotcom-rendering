@@ -33,7 +33,7 @@ const visitedStyles = (visitedColour: string) => css`
 `;
 
 export const LinkHeadline = ({
-    headlineString,
+    headlineText,
     pillar,
     showUnderline = false,
     kicker,
@@ -66,11 +66,11 @@ export const LinkHeadline = ({
                 // place, such as with MostViewed
                 tabIndex={link.preventFocus ? -1 : undefined}
             >
-                {headlineString}
+                {headlineText}
             </a>
         ) : (
             // We don't have a link so simply use a span here
-            <span>{headlineString}</span>
+            <span>{headlineText}</span>
         )}
     </h4>
 );

@@ -39,7 +39,7 @@ export const News = () => (
                                 pillar: 'news',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         'The Knights Who Say Ni demand a sacrifice',
                                     size: 'xsmall',
                                     pillar: 'news',
@@ -66,8 +66,7 @@ export const News = () => (
                                 pillar: 'news',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
-                                        "Yes. We're all individuals",
+                                    headlineText: "Yes. We're all individuals",
                                     size: 'xsmall',
                                     pillar: 'news',
                                     kicker: {
@@ -95,7 +94,7 @@ export const News = () => (
                                 pillar: 'culture',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         "You can't expect to wield supreme power just 'cause some watery tart threw a sword at you",
                                     pillar: 'news',
                                     kicker: {
@@ -123,7 +122,7 @@ export const News = () => (
                                         pillar: 'news',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Go and boil your bottoms, sons of a silly person!',
                                             pillar: 'news',
                                             kicker: {
@@ -147,7 +146,7 @@ export const News = () => (
                                         pillar: 'news',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Listen. Strange women lying in ponds distributing swords is no basis for a system of government',
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -163,7 +162,7 @@ export const News = () => (
                                         pillar: 'news',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony',
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -187,7 +186,7 @@ export const News = () => (
                                         pillar: 'sport',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Are you suggesting that coconuts migrate?',
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -207,7 +206,7 @@ export const News = () => (
                                         pillar: 'news',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 "On second thoughts, let's not go there. It is a silly place",
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -227,7 +226,7 @@ export const News = () => (
                                         pillar: 'news',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Let us ride to Camelot',
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -247,7 +246,7 @@ export const News = () => (
                                         pillar: 'news',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 "Where'd you get the coconuts?",
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -267,7 +266,7 @@ export const News = () => (
                                         pillar: 'lifestyle',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Now, look here, my good man',
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -287,7 +286,7 @@ export const News = () => (
                                         pillar: 'news',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 "We shall say 'Ni' again to you, if you do not appease us",
                                             pillar: 'news',
                                             size: 'xxxsmall',
@@ -326,7 +325,7 @@ export const InDepth = () => (
                                         pillar: 'sport',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 "We shall say 'Ni' again to you, if you do not appease us",
                                             size: 'xxsmall',
                                             pillar: 'news',
@@ -351,7 +350,7 @@ export const InDepth = () => (
                                         pillar: 'sport',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Now, look here, my good man',
                                             size: 'xxxsmall',
                                             pillar: 'news',
@@ -376,7 +375,7 @@ export const InDepth = () => (
                                         pillar: 'sport',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 "Where'd you get the coconuts",
                                             size: 'xxxsmall',
                                             pillar: 'news',
@@ -401,7 +400,7 @@ export const InDepth = () => (
                                         pillar: 'sport',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'Let us ride to Camelot!',
                                             size: 'xxxsmall',
                                             pillar: 'news',
@@ -426,7 +425,7 @@ export const InDepth = () => (
                                         pillar: 'sport',
                                         headline: {
                                             designType: 'Article',
-                                            headlineString:
+                                            headlineText:
                                                 'How do you know she is a witch? Burn her!',
                                             size: 'xxxsmall',
                                             pillar: 'news',
@@ -453,7 +452,7 @@ export const InDepth = () => (
                                 pillar: 'news',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         "Go and boil your bottoms, sons of a silly person!'",
                                     size: 'xsmall',
                                     pillar: 'news',
@@ -493,7 +492,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'xxsmall',
                                     pillar: 'news',
@@ -519,8 +518,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
-                                        'Now, look here, my good man',
+                                    headlineText: 'Now, look here, my good man',
                                     size: 'xxsmall',
                                     pillar: 'sport',
                                     kicker: {
@@ -545,7 +543,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         "Where'd you get the coconuts",
                                     size: 'xxsmall',
                                     pillar: 'sport',
@@ -573,7 +571,7 @@ export const Related = () => (
                                 pillar: 'news',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         'Go and boil your bottoms, sons of a silly person!',
                                     size: 'xxxsmall',
                                     pillar: 'news',
@@ -594,7 +592,7 @@ export const Related = () => (
                                 pillar: 'sport',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString: 'Let us ride to Camelot!',
+                                    headlineText: 'Let us ride to Camelot!',
                                     size: 'xxxsmall',
                                     pillar: 'news',
                                     kicker: {
@@ -614,7 +612,7 @@ export const Related = () => (
                                 pillar: 'culture',
                                 headline: {
                                     designType: 'Interview',
-                                    headlineString: 'Let us ride to Camelot!',
+                                    headlineText: 'Let us ride to Camelot!',
                                     size: 'xxxsmall',
                                     pillar: 'culture',
                                     kicker: {
@@ -634,7 +632,7 @@ export const Related = () => (
                                 pillar: 'lifestyle',
                                 headline: {
                                     designType: 'Feature',
-                                    headlineString:
+                                    headlineText:
                                         'How do you know she is a witch? Burn her!',
                                     size: 'xxxsmall',
                                     pillar: 'lifestyle',
@@ -668,7 +666,7 @@ export const Spotlight = () => (
                         pillar: 'sport',
                         headline: {
                             designType: 'Feature',
-                            headlineString:
+                            headlineText:
                                 "We shall say 'Ni' again to you, if you do not appease us",
                             size: 'xsmall',
                             pillar: 'sport',
@@ -707,7 +705,7 @@ export const Quad = () => (
                                 pillar: 'opinion',
                                 headline: {
                                     designType: 'Comment',
-                                    headlineString:
+                                    headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'xxsmall',
                                     pillar: 'opinion',
@@ -734,7 +732,7 @@ export const Quad = () => (
                                 pillar: 'opinion',
                                 headline: {
                                     designType: 'Comment',
-                                    headlineString:
+                                    headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'xxsmall',
                                     pillar: 'opinion',
@@ -757,7 +755,7 @@ export const Quad = () => (
                                 pillar: 'news',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'xxsmall',
                                     pillar: 'news',
@@ -783,7 +781,7 @@ export const Quad = () => (
                                 pillar: 'news',
                                 headline: {
                                     designType: 'Article',
-                                    headlineString:
+                                    headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'xxsmall',
                                     pillar: 'news',

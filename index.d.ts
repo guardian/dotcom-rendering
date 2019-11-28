@@ -282,7 +282,7 @@ type HeadlineLink = {
 };
 
 interface LinkHeadlineType {
-    headlineString: string; // The text shown
+    headlineText: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     kicker?: KickerType;
@@ -292,7 +292,7 @@ interface LinkHeadlineType {
 }
 
 interface CardHeadlineType {
-    headlineString: string; // The text shown
+    headlineText: string; // The text shown
     designType: DesignType; // Used to decide when to add type specific styles
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     kicker?: KickerType;

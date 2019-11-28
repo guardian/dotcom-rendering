@@ -73,7 +73,7 @@ const headlineStyles = (
 };
 
 export const CardHeadline = ({
-    headlineString,
+    headlineText,
     designType,
     pillar,
     showQuotes,
@@ -92,7 +92,7 @@ export const CardHeadline = ({
         {showQuotes && <QuoteIcon colour={palette[pillar].main} size={size} />}
 
         <span className={headlineStyles(designType, pillar, size)}>
-            {headlineString}
+            {headlineText}
         </span>
     </h4>
 );

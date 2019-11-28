@@ -77,7 +77,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
             <div className={headlineHeader}>
                 {trail.isLiveBlog ? (
                     <LinkHeadline
-                        headlineString={trail.linkText}
+                        headlineText={trail.linkText}
                         pillar={trail.pillar}
                         size="xxxsmall"
                         kicker={{
@@ -88,7 +88,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
                     />
                 ) : (
                     <LinkHeadline
-                        headlineString={trail.linkText}
+                        headlineText={trail.linkText}
                         pillar={trail.pillar}
                         size="xxxsmall"
                     />

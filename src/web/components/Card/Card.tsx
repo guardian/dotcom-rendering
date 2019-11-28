@@ -101,7 +101,7 @@ export const Card = ({
                         <ContentWrapper percentage={contentCoverage}>
                             <HeadlineWrapper>
                                 <CardHeadline
-                                    headlineString={headline.headlineString}
+                                    headlineText={headline.headlineText}
                                     designType={headline.designType}
                                     pillar={headline.pillar}
                                     size={headline.size}
