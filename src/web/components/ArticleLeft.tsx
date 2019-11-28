@@ -49,8 +49,8 @@ const rightBorder = (colour: string) => css`
 type Props = {
     children: JSXElements;
     showRightBorder?: boolean;
-    borderColour?: string;
     showPartialRightBorder?: boolean;
+    borderColour?: string;
 };
 
 export const ArticleLeft = ({
