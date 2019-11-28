@@ -58,20 +58,27 @@ export const ArticleLeft = ({
     showRightBorder = true,
     borderColour = palette.neutral[86],
     showPartialRightBorder = false,
-}: Props) => (
-    <section
-        className={cx(
-            positionRelative,
-            leftWidth,
-            showRightBorder && rightBorder(borderColour),
-        )}
-    >
-        <div
+}: Props) => {
+    // Make sure we can never have both borders at the same time
+    const shouldShowPartialBorder = showRightBorder
+        ? false
+        : showPartialRightBorder;
+
+    return (
+        <section
             className={cx(
-                showPartialRightBorder && partialRightBorder(borderColour),
+                positionRelative,
+                leftWidth,
+                showRightBorder && rightBorder(borderColour),
             )}
         >
-            {children}
-        </div>
-    </section>
-);
+            <div
+                className={cx(
+                    shouldShowPartialBorder && partialRightBorder(borderColour),
+                )}
+            >
+                {children}
+            </div>
+        </section>
+    );
+};
