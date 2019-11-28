@@ -28,7 +28,6 @@ const readFileP = promisify(fs.readFile);
 
 const id = <A>(a: A): A => a;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getContent(capi: Capi): Result<string, Content> {
 
   const content = capi.response.content;

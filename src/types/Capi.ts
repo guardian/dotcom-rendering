@@ -35,7 +35,6 @@ const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
 const isFeature = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/features');
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any 
 function parseCapi(capiResponse: string): Result<string, Capi> {
     try {
         return new Ok(JSON.parse(capiResponse));
