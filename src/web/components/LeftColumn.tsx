@@ -53,7 +53,7 @@ type Props = {
     borderColour?: string;
 };
 
-export const ArticleLeft = ({
+export const LeftColumn = ({
     children,
     showRightBorder = true,
     borderColour = palette.neutral[86],

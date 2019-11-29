@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 import { Flex } from '@frontend/web/components/Flex';
-import { ArticleLeft } from '@frontend/web/components/ArticleLeft';
+import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 
 import { Card } from './Card';
@@ -26,9 +26,9 @@ export default {
 export const News = () => (
     <Section>
         <Flex>
-            <ArticleLeft showRightBorder={false}>
+            <LeftColumn showRightBorder={false}>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <UL direction="row" bottomMargin={true}>
                     <LI percentage="75%" showDivider={false} padSides={true}>
@@ -310,9 +310,9 @@ News.story = { name: 'News' };
 export const InDepth = () => (
     <Section>
         <Flex>
-            <ArticleLeft showRightBorder={false}>
+            <LeftColumn showRightBorder={false}>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <UL direction="row">
                     <LI percentage="50%" padSides={true}>
@@ -479,9 +479,9 @@ InDepth.story = { name: 'In Depth' };
 export const Related = () => (
     <Section>
         <Flex>
-            <ArticleLeft showRightBorder={false}>
+            <LeftColumn showRightBorder={false}>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <UL direction="row" bottomMargin={true}>
                     <LI padSides={true}>
@@ -655,9 +655,9 @@ Related.story = { name: 'Related Stories' };
 export const Spotlight = () => (
     <Section>
         <Flex>
-            <ArticleLeft showRightBorder={false}>
+            <LeftColumn showRightBorder={false}>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <Card
                     {...{
@@ -692,9 +692,9 @@ Spotlight.story = { name: 'Spotlight' };
 export const Quad = () => (
     <Section>
         <Flex>
-            <ArticleLeft showRightBorder={false}>
+            <LeftColumn showRightBorder={false}>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <UL direction="row">
                     <LI padSides={true}>

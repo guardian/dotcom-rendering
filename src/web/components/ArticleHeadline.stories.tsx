@@ -3,7 +3,7 @@ import React from 'react';
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
-import { ArticleLeft } from './ArticleLeft';
+import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
@@ -19,9 +19,9 @@ export default {
 export const ArticleStory = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is how the default headline looks"
@@ -39,9 +39,9 @@ ArticleStory.story = { name: 'Article' };
 export const oldHeadline = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an old headline"
@@ -66,9 +66,9 @@ oldHeadline.story = { name: 'Article, with age warning' };
 export const Feature = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is a Feature headline, it has colour applied based on pillar"
@@ -86,9 +86,9 @@ Feature.story = { name: 'Feature' };
 export const ShowcaseInterview = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
@@ -112,9 +112,9 @@ ShowcaseInterview.story = { name: 'Interview (with showcase)' };
 export const Interview = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
@@ -141,9 +141,9 @@ Interview.story = { name: 'Interview (without showcase)' };
 export const Comment = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="Yes, the billionaire club is one we really need to shut down"
@@ -161,9 +161,9 @@ Comment.story = { name: 'Comment' };
 export const Analysis = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
@@ -181,9 +181,9 @@ Analysis.story = { name: 'Analysis' };
 export const Media = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Media"
@@ -201,9 +201,9 @@ Media.story = { name: 'Media' };
 export const Review = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Review"
@@ -221,9 +221,9 @@ Review.story = { name: 'Review' };
 export const AdvertisementFeature = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is AdvertisementFeature"
@@ -241,9 +241,9 @@ AdvertisementFeature.story = { name: 'AdvertisementFeature' };
 export const Quiz = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Quiz"
@@ -261,9 +261,9 @@ Quiz.story = { name: 'Quiz' };
 export const GuardianLabs = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianLabs"
@@ -281,9 +281,9 @@ GuardianLabs.story = { name: 'GuardianLabs' };
 export const Recipe = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Recipe"
@@ -301,9 +301,9 @@ Recipe.story = { name: 'Recipe' };
 export const GuardianView = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is GuardianView"
@@ -321,9 +321,9 @@ GuardianView.story = { name: 'GuardianView' };
 export const MatchReport = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is MatchReport"
@@ -341,9 +341,9 @@ MatchReport.story = { name: 'MatchReport' };
 export const SpecialReport = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is SpecialReport"
@@ -361,9 +361,9 @@ SpecialReport.story = { name: 'SpecialReport' };
 export const Live = () => (
     <Section>
         <Flex>
-            <ArticleLeft>
+            <LeftColumn>
                 <></>
-            </ArticleLeft>
+            </LeftColumn>
             <ArticleContainer>
                 <ArticleHeadline
                     headlineString="This is the headline you see when design type is Live"
@@ -392,9 +392,9 @@ export const Immersive = () => (
             shouldCenter={false}
         >
             <Flex>
-                <ArticleLeft showRightBorder={false}>
+                <LeftColumn showRightBorder={false}>
                     <></>
-                </ArticleLeft>
+                </LeftColumn>
                 <ArticleContainer>
                     <ArticleHeadline
                         headlineString="Here the headline overlays the image above it, the text is larger and the black background should extend to the right"
