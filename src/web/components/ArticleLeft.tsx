@@ -25,6 +25,23 @@ const leftWidth = css`
     }
 `;
 
+const positionRelative = css`
+    position: relative;
+`;
+
+const partialRightBorder = (colour: string) => css`
+    :before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        height: 30px;
+        width: 1px;
+        background: ${colour};
+    }
+`;
+
 const rightBorder = (colour: string) => css`
     border-right: 1px solid ${colour};
 `;
@@ -32,6 +49,7 @@ const rightBorder = (colour: string) => css`
 type Props = {
     children: JSXElements;
     showRightBorder?: boolean;
+    showPartialRightBorder?: boolean;
     borderColour?: string;
 };
 
@@ -39,10 +57,28 @@ export const ArticleLeft = ({
     children,
     showRightBorder = true,
     borderColour = palette.neutral[86],
-}: Props) => (
-    <section
-        className={cx(leftWidth, showRightBorder && rightBorder(borderColour))}
-    >
-        {children}
-    </section>
-);
+    showPartialRightBorder = false,
+}: Props) => {
+    // Make sure we can never have both borders at the same time
+    const shouldShowPartialBorder = showRightBorder
+        ? false
+        : showPartialRightBorder;
+
+    return (
+        <section
+            className={cx(
+                positionRelative,
+                leftWidth,
+                showRightBorder && rightBorder(borderColour),
+            )}
+        >
+            <div
+                className={cx(
+                    shouldShowPartialBorder && partialRightBorder(borderColour),
+                )}
+            >
+                {children}
+            </div>
+        </section>
+    );
+};

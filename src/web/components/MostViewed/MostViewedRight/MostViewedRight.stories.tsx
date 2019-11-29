@@ -26,7 +26,10 @@ export const defaultStory = () => {
     return (
         <Section>
             <Flex>
-                <ArticleLeft>
+                <ArticleLeft
+                    showPartialRightBorder={true}
+                    showRightBorder={false}
+                >
                     <></>
                 </ArticleLeft>
                 <ArticleContainer>
