@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { Flex } from '@root/src/web/components/Flex';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
+import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleRight } from '@root/src/web/components/ArticleRight';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -102,14 +102,14 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             <Section showTopBorder={false}>
                 <Flex>
-                    <ArticleLeft>
+                    <LeftColumn>
                         <ArticleTitle
                             CAPI={CAPI}
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />
                         <ArticleMeta CAPI={CAPI} />
-                    </ArticleLeft>
+                    </LeftColumn>
                     <ArticleContainer>
                         <StandardHeader CAPI={CAPI} badge={GE2019Badge} />
                         <Hide when="above" breakpoint="leftCol">

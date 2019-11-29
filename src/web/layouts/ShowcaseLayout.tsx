@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { Flex } from '@root/src/web/components/Flex';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
+import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleRight } from '@root/src/web/components/ArticleRight';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -78,10 +78,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => (
 
         <Section showTopBorder={false}>
             <Flex>
-                <ArticleLeft>
+                <LeftColumn>
                     <ArticleTitle CAPI={CAPI} inLeftCol={true} />
                     <ArticleMeta CAPI={CAPI} />
-                </ArticleLeft>
+                </LeftColumn>
                 <ArticleContainer>
                     {/* When BELOW leftCol we display the header in this position, at the top of the page */}
                     <Hide when="below" breakpoint="leftCol">
