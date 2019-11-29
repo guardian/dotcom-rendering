@@ -8,7 +8,7 @@ import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { Card } from './Card';
 import { UL } from './components/UL';
 import { LI } from './components/LI';
-import { imageElements } from './Card.mocks';
+import { imageUrls } from './Card.mocks';
 
 /* tslint:disable */
 export default {
@@ -49,7 +49,7 @@ export const News = () => (
                                     },
                                 },
                                 trailImage: {
-                                    element: imageElements[0],
+                                    url: imageUrls[0],
                                     position: 'right',
                                     size: 'large',
                                 },
@@ -75,7 +75,7 @@ export const News = () => (
                                     },
                                 },
                                 trailImage: {
-                                    element: imageElements[5],
+                                    url: imageUrls[5],
                                     position: 'top',
                                     size: 'small',
                                 },
@@ -103,7 +103,7 @@ export const News = () => (
                                     },
                                 },
                                 trailImage: {
-                                    element: imageElements[3],
+                                    url: imageUrls[3],
                                     position: 'top',
                                     size: 'medium',
                                 },
@@ -131,7 +131,7 @@ export const News = () => (
                                             },
                                         },
                                         trailImage: {
-                                            element: imageElements[6],
+                                            url: imageUrls[6],
                                             position: 'top',
                                             size: 'small',
                                         },
@@ -335,7 +335,7 @@ export const InDepth = () => (
                                             },
                                         },
                                         trailImage: {
-                                            element: imageElements[5],
+                                            url: imageUrls[5],
                                             position: 'left',
                                             size: 'small',
                                         },
@@ -360,7 +360,7 @@ export const InDepth = () => (
                                             },
                                         },
                                         trailImage: {
-                                            element: imageElements[6],
+                                            url: imageUrls[6],
                                             position: 'left',
                                             size: 'small',
                                         },
@@ -385,7 +385,7 @@ export const InDepth = () => (
                                             },
                                         },
                                         trailImage: {
-                                            element: imageElements[3],
+                                            url: imageUrls[3],
                                             position: 'left',
                                             size: 'small',
                                         },
@@ -410,7 +410,7 @@ export const InDepth = () => (
                                             },
                                         },
                                         trailImage: {
-                                            element: imageElements[2],
+                                            url: imageUrls[2],
                                             position: 'left',
                                             size: 'small',
                                         },
@@ -435,7 +435,7 @@ export const InDepth = () => (
                                             },
                                         },
                                         trailImage: {
-                                            element: imageElements[1],
+                                            url: imageUrls[1],
                                             position: 'left',
                                             size: 'small',
                                         },
@@ -462,7 +462,7 @@ export const InDepth = () => (
                                     },
                                 },
                                 trailImage: {
-                                    element: imageElements[0],
+                                    url: imageUrls[0],
                                     position: 'top',
                                     size: 'large',
                                 },
@@ -503,7 +503,7 @@ export const Related = () => (
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
-                                    element: imageElements[5],
+                                    url: imageUrls[5],
                                     position: 'top',
                                     size: 'small',
                                 },
@@ -528,7 +528,7 @@ export const Related = () => (
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
-                                    element: imageElements[6],
+                                    url: imageUrls[6],
                                     position: 'top',
                                     size: 'small',
                                 },
@@ -554,7 +554,7 @@ export const Related = () => (
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
-                                    element: imageElements[4],
+                                    url: imageUrls[4],
                                     position: 'top',
                                     size: 'small',
                                 },
@@ -677,7 +677,7 @@ export const Spotlight = () => (
                         },
                         webPublicationDate: '2019-11-11T09:45:30.000Z',
                         trailImage: {
-                            element: imageElements[0],
+                            url: imageUrls[0],
                             position: 'right',
                             size: 'jumbo',
                         },
@@ -740,7 +740,7 @@ export const Quad = () => (
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
-                                    element: imageElements[0],
+                                    url: imageUrls[0],
                                     position: 'top',
                                     size: 'medium',
                                 },
@@ -766,7 +766,7 @@ export const Quad = () => (
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
-                                    element: imageElements[0],
+                                    url: imageUrls[0],
                                     position: 'top',
                                     size: 'medium',
                                 },
@@ -792,7 +792,7 @@ export const Quad = () => (
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
-                                    element: imageElements[0],
+                                    url: imageUrls[0],
                                     position: 'top',
                                     size: 'medium',
                                 },

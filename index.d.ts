@@ -249,7 +249,7 @@ interface KickerType {
 type ImagePositionType = 'left' | 'top' | 'right';
 
 type CardImageType = {
-    element: ImageBlockElement;
+    url: string;
     position?: ImagePositionType;
     size?: ImageSizeType;
 };
