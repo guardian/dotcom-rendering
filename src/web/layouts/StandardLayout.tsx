@@ -4,8 +4,8 @@ import { css } from 'emotion';
 import { Flex } from '@root/src/web/components/Flex';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
+import { RightColumn } from '@root/src/web/components/RightColumn';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
-import { ArticleRight } from '@root/src/web/components/ArticleRight';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
@@ -136,10 +136,10 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             />
                         </main>
                     </ArticleContainer>
-                    <ArticleRight>
+                    <RightColumn>
                         <StickyAd />
                         <MostViewedRightIsland />
-                    </ArticleRight>
+                    </RightColumn>
                 </Flex>
             </Section>
 
