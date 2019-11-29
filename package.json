@@ -16,7 +16,7 @@
         "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
         "storybook": "start-storybook -s ./src/static -p 6006",
         "storybook:build": "build-storybook",
-        "storybook:snapshot": "build-storybook && percy-storybook --widths=320,1139"
+        "storybook:snapshot": "build-storybook && percy-storybook --widths=1139"
     },
     "husky": {
         "hooks": {
