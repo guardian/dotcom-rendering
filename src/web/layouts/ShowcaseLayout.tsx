@@ -4,7 +4,7 @@ import { Flex } from '@root/src/web/components/Flex';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
-import { ArticleRight } from '@root/src/web/components/ArticleRight';
+import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
@@ -119,10 +119,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => (
                                 />
                             </main>
                         </div>
-                        <ArticleRight>
+                        <RightColumn>
                             <StickyAd />
                             <MostViewedRightIsland />
-                        </ArticleRight>
+                        </RightColumn>
                     </Flex>
                 </ArticleContainer>
             </Flex>

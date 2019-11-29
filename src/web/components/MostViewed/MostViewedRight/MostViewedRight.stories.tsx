@@ -3,7 +3,7 @@ import fetchMock from 'fetch-mock';
 
 import { Flex } from '@root/src/web/components/Flex';
 import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
-import { ArticleRight } from '@root/src/web/components/ArticleRight';
+import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
 
@@ -35,7 +35,7 @@ export const defaultStory = () => {
                 <ArticleContainer>
                     <></>
                 </ArticleContainer>
-                <ArticleRight>
+                <RightColumn>
                     <Section
                         showSideBorders={false}
                         showTopBorder={false}
@@ -43,7 +43,7 @@ export const defaultStory = () => {
                     >
                         <MostViewedRight />
                     </Section>
-                </ArticleRight>
+                </RightColumn>
             </Flex>
         </Section>
     );
@@ -65,7 +65,7 @@ export const limitItemsStory = () => {
                 <ArticleContainer>
                     <></>
                 </ArticleContainer>
-                <ArticleRight>
+                <RightColumn>
                     <Section
                         showSideBorders={false}
                         showTopBorder={false}
@@ -73,7 +73,7 @@ export const limitItemsStory = () => {
                     >
                         <MostViewedRight limitItems={3} />
                     </Section>
-                </ArticleRight>
+                </RightColumn>
             </Flex>
         </Section>
     );

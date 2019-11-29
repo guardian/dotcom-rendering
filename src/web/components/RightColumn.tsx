@@ -28,7 +28,7 @@ type Props = {
     children: JSXElements;
 };
 
-export const ArticleRight = ({ children }: Props) => {
+export const RightColumn = ({ children }: Props) => {
     return (
         <section className={cx(hideBelowDesktop, padding)}>{children}</section>
     );

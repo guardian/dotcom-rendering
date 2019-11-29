@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Flex } from '@root/src/web/components/Flex';
-import { ArticleRight } from '@root/src/web/components/ArticleRight';
+import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
 
@@ -33,9 +33,9 @@ export const PartialRightBorder = () => {
                         alt="Bill"
                     />
                 </ArticleContainer>
-                <ArticleRight>
+                <RightColumn>
                     <>Right column content</>
-                </ArticleRight>
+                </RightColumn>
             </Flex>
         </Section>
     );
@@ -55,9 +55,9 @@ export const RightBorder = () => {
                         alt="Bill"
                     />
                 </ArticleContainer>
-                <ArticleRight>
+                <RightColumn>
                     <>Right column content</>
-                </ArticleRight>
+                </RightColumn>
             </Flex>
         </Section>
     );
