@@ -2,7 +2,7 @@ import React from 'react';
 import fetchMock from 'fetch-mock';
 
 import { Flex } from '@root/src/web/components/Flex';
-import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
+import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleRight } from '@root/src/web/components/ArticleRight';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
@@ -26,12 +26,12 @@ export const defaultStory = () => {
     return (
         <Section>
             <Flex>
-                <ArticleLeft
+                <LeftColumn
                     showPartialRightBorder={true}
                     showRightBorder={false}
                 >
                     <></>
-                </ArticleLeft>
+                </LeftColumn>
                 <ArticleContainer>
                     <></>
                 </ArticleContainer>
@@ -59,9 +59,9 @@ export const limitItemsStory = () => {
     return (
         <Section>
             <Flex>
-                <ArticleLeft>
+                <LeftColumn>
                     <></>
-                </ArticleLeft>
+                </LeftColumn>
                 <ArticleContainer>
                     <></>
                 </ArticleContainer>

@@ -4,7 +4,7 @@ import { Section } from './Section';
 
 import { GuardianLines } from './GuardianLines';
 import { Flex } from './Flex';
-import { ArticleLeft } from './ArticleLeft';
+import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Byline } from './Byline';
@@ -28,9 +28,9 @@ export const defaultStory = () => {
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
-                    <ArticleLeft>
+                    <LeftColumn>
                         <></>
-                    </ArticleLeft>
+                    </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
                             headlineString="Headline text"
@@ -59,9 +59,9 @@ export const eightLines = () => {
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
-                    <ArticleLeft>
+                    <LeftColumn>
                         <></>
-                    </ArticleLeft>
+                    </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
                             headlineString="Headline text"
@@ -90,7 +90,7 @@ export const paddedLines = () => {
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
-                    <ArticleLeft>
+                    <LeftColumn>
                         <div style={{ marginTop: '30px' }} />
                         <GuardianLines />
                         <Byline
@@ -98,7 +98,7 @@ export const paddedLines = () => {
                             tags={[]}
                             pillar="news"
                         />
-                    </ArticleLeft>
+                    </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
                             headlineString="Headline text"
@@ -127,7 +127,7 @@ export const squigglyLines = () => {
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
-                    <ArticleLeft>
+                    <LeftColumn>
                         <div style={{ marginTop: '30px' }} />
                         <GuardianLines squiggly={true} />
                         <Byline
@@ -135,7 +135,7 @@ export const squigglyLines = () => {
                             tags={[]}
                             pillar="news"
                         />
-                    </ArticleLeft>
+                    </LeftColumn>
                     <ArticleContainer>
                         <ArticleHeadline
                             headlineString="Headline text"
