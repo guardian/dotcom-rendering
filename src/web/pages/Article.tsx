@@ -9,7 +9,6 @@ export const Article: React.FC<{
         <DecideLayout
             designType={data.CAPI.designType}
             CAPI={data.CAPI}
-            config={data.config}
             NAV={data.NAV}
         />
     );

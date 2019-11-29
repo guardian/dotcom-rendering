@@ -41,11 +41,10 @@ function checkForGE2019Badge(tags: TagType[]) {
 
 interface Props {
     CAPI: CAPIType;
-    config: ConfigType;
     NAV: NavType;
 }
 
-export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
+export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     return (
         <>

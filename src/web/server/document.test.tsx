@@ -11,7 +11,6 @@ const result = document({
         page: 'article',
         site: 'site',
         NAV: extractNAV(CAPI.nav),
-        config: CAPI.config,
         GA: ga,
     },
 });

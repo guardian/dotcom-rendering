@@ -5,7 +5,6 @@
 interface ArticleProps {
     CAPI: CAPIType;
     NAV: NavType;
-    config: ConfigType;
 }
 
 // Pillars are used for styling
@@ -378,7 +377,6 @@ interface DCRDocumentData {
     site: string;
     CAPI: CAPIType;
     NAV: NavType;
-    config: ConfigType;
     GA: GADataType;
     linkedData: object;
 }
