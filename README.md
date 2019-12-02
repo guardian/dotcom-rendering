@@ -1,28 +1,40 @@
-# apps-rendering
+## apps-rendering
 
-### Running
-- Working on node v10.16.3 (nvm use 10.16.3)
-- You will need `mobile` Janus credentials to run this project
-1. npm i
-2. npm run build:server (watches for changes)
-3. http://localhost:3040
+### Install
 
-### Architecture decisions
+1. Clone the repo
+2. Make sure you're using Node 12 (specific version found in `.nvmrc`)
+3. Install dependencies:
 
-- Emotion styles combined with components
-  - Easy to migrate current SASS styles
-  - JavaScript to replicate variables and mixins
-  - Closely coupled to components
-  - Supports media queries for dark mode styles https://emotion.sh/docs/media-queries
+```sh
+npm install
+```
 
-- Use React for UI components
-  - Redux and useReducer probably unnecessary
-  - Preference for functional hooks rather than class components
-  - Preference to avoid rehydration of SSR components where possible
-  - Context API can be used to pass pillar styles to all components
+### Run (Development)
 
-- Testing
-  - Jest
+1. Get `mobile` Janus credentials (ask someone if you're unsure what this means)
+2. Run in watch mode:
 
-- Security
-  - NPM, Snyk, GitHub
+```sh
+npm run watch:server
+```
+
+3. View in a browser at http://localhost:3040
+
+_**Note**: You will need to refresh the page to see any changes you make._
+
+### Test
+
+The unit tests are built using Jest. They can be run with the following command:
+
+```sh
+npm run test:run
+```
+
+### Lint
+
+ESLint is used to validate the code. It can be run like this:
+
+```sh
+npm run lint
+```
