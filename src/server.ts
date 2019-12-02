@@ -85,6 +85,7 @@ const app = express();
 
 app.use(express.json({ limit: '50mb' }));
 app.use("/public", express.static(path.resolve(__dirname, '../public')));
+app.use("/static", express.static(path.resolve(__dirname, '../dist')));
 app.use(compression());
 
 app.get('/*', async (req, res) => {
