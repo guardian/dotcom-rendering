@@ -21,7 +21,7 @@ export const Onwards = ({
     pathId,
     component: Content,
 }: Props) => {
-    const url = `${ajaxUrl}/${pathId}/${pageId}.json`;
+    const url = `${new URL(`${pathId}/${pageId}`, ajaxUrl)}.json`;
     const { data, error } = useApi<any>(url);
 
     if (error) {
