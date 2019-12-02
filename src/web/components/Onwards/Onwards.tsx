@@ -32,7 +32,10 @@ export const Onwards = ({
     if (data) {
         return (
             <Flex>
-                <LeftColumn showRightBorder={false}>
+                <LeftColumn
+                    showRightBorder={false}
+                    showPartialRightBorder={true}
+                >
                     <OnwardsTitle title={data.heading} />
                 </LeftColumn>
                 <OnwardsContainer>
