@@ -18,7 +18,8 @@ export const StoryPackage = ({ content }: Props) => (
                         designType: content[0].designType,
                         pillar: 'news',
                         headline: {
-                            headlineString: content[0].linkText,
+                            designType: content[0].designType,
+                            headlineText: content[0].linkText,
                             size: 'xxsmall',
                             pillar: 'news',
                         },
@@ -33,7 +34,8 @@ export const StoryPackage = ({ content }: Props) => (
                         designType: content[1].designType,
                         pillar: 'news',
                         headline: {
-                            headlineString: content[1].linkText,
+                            designType: content[1].designType,
+                            headlineText: content[1].linkText,
                             size: 'xxsmall',
                             pillar: 'news',
                         },
@@ -48,7 +50,8 @@ export const StoryPackage = ({ content }: Props) => (
                         designType: content[2].designType,
                         pillar: 'news',
                         headline: {
-                            headlineString: content[2].linkText,
+                            designType: content[2].designType,
+                            headlineText: content[2].linkText,
                             size: 'xxsmall',
                             pillar: 'news',
                         },
@@ -65,7 +68,8 @@ export const StoryPackage = ({ content }: Props) => (
                         designType: content[3].designType,
                         pillar: 'news',
                         headline: {
-                            headlineString: content[3].linkText,
+                            designType: content[3].designType,
+                            headlineText: content[3].linkText,
                             size: 'xxxsmall',
                             pillar: 'news',
                         },
@@ -80,7 +84,8 @@ export const StoryPackage = ({ content }: Props) => (
                         designType: content[4].designType,
                         pillar: 'news',
                         headline: {
-                            headlineString: content[4].linkText,
+                            designType: content[4].designType,
+                            headlineText: content[4].linkText,
                             size: 'xxxsmall',
                             pillar: 'news',
                         },
@@ -95,7 +100,8 @@ export const StoryPackage = ({ content }: Props) => (
                         designType: content[5].designType,
                         pillar: 'news',
                         headline: {
-                            headlineString: content[5].linkText,
+                            designType: content[5].designType,
+                            headlineText: content[5].linkText,
                             size: 'xxxsmall',
                             pillar: 'news',
                         },
