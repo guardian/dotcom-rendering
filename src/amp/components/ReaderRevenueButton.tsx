@@ -52,9 +52,9 @@ const supportLinkStyles = css`
 
     svg {
         position: absolute;
-        top: -5px;
+        top: -3px;
+
         ${until.mobileMedium} {
-            top: -2px;
             width: 26px;
             height: 26px;
         }
@@ -84,14 +84,12 @@ export const ReaderRevenueButton: React.SFC<{
     rrLink: ReaderRevenuePosition;
     rrCategory: ReaderRevenueCategory;
     rightAlignIcon?: boolean;
-    showArrow?: boolean;
 }> = ({
     nav,
     linkLabel,
     rrLink,
     rrCategory,
     rightAlignIcon,
-    showArrow = true,
 }) => {
     const url = nav.readerRevenueLinks[rrLink][rrCategory];
 
@@ -107,22 +105,15 @@ export const ReaderRevenueButton: React.SFC<{
                 isAmpHeader ? supportHeaderStyles : supportFooterStyles,
             ])}
         >
-            <a
-                className={
-                    showArrow ? supportLinkStyles : supportLinkStylesNoArrow
-                }
-                href={url}
-            >
+            <a className={supportLinkStyles} href={url}>
                 {linkLabel}
-                {showArrow && (
-                    <span
-                        className={cx({
-                            [rightAlignedIcon]: !!rightAlignIcon,
-                        })}
-                    >
-                        <ArrowRight />
-                    </span>
-                )}
+                <span
+                    className={cx({
+                        [rightAlignedIcon]: !!rightAlignIcon,
+                    })}
+                >
+                    <ArrowRight />
+                </span>
             </a>
         </div>
     );
