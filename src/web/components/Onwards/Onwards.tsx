@@ -2,11 +2,7 @@ import React from 'react';
 
 import { useApi } from '@root/src/web/components/lib/api';
 
-import { Flex } from '@frontend/web/components/Flex';
-import { LeftColumn } from '@frontend/web/components/LeftColumn';
-
-import { OnwardsTitle } from './OnwardsTitle';
-import { OnwardsContainer } from './OnwardsContainer';
+import { OnwardsLayout } from './OnwardsLayout';
 
 type Props = {
     ajaxUrl: string;
@@ -15,12 +11,7 @@ type Props = {
     component: React.ElementType;
 };
 
-export const Onwards = ({
-    ajaxUrl,
-    pageId,
-    pathId,
-    component: Content,
-}: Props) => {
+export const Onwards = ({ ajaxUrl, pageId, pathId, component }: Props) => {
     const url = `${new URL(`${pathId}/${pageId}`, ajaxUrl)}.json`;
     const { data, error } = useApi<any>(url);
 
@@ -29,20 +20,10 @@ export const Onwards = ({
         return null;
     }
 
+    console.log(JSON.stringify(data));
+
     if (data) {
-        return (
-            <Flex>
-                <LeftColumn
-                    showRightBorder={false}
-                    showPartialRightBorder={true}
-                >
-                    <OnwardsTitle title={data.heading} />
-                </LeftColumn>
-                <OnwardsContainer>
-                    <Content content={data.trails} />
-                </OnwardsContainer>
-            </Flex>
-        );
+        return <OnwardsLayout content={data} component={component} />;
     }
 
     return null;
