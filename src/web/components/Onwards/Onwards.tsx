@@ -3,7 +3,7 @@ import React from 'react';
 import { useApi } from '@root/src/web/components/lib/api';
 
 import { Flex } from '@frontend/web/components/Flex';
-import { ArticleLeft } from '@frontend/web/components/ArticleLeft';
+import { LeftColumn } from '@frontend/web/components/LeftColumn';
 
 import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
@@ -29,14 +29,12 @@ export const Onwards = ({
         return null;
     }
 
-    console.log('data', data);
-
     if (data) {
         return (
             <Flex>
-                <ArticleLeft showRightBorder={false}>
+                <LeftColumn showRightBorder={false}>
                     <OnwardsTitle title={data.heading} />
-                </ArticleLeft>
+                </LeftColumn>
                 <OnwardsContainer>
                     <Content content={data.trails} />
                 </OnwardsContainer>
