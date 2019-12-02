@@ -24,6 +24,9 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: 'news',
                         },
                         webPublicationDate: content[0].webPublicationDate,
+                        trailImage: {
+                            url: content[0].image,
+                        },
                     }}
                 />
             </LI>
@@ -40,6 +43,9 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: 'news',
                         },
                         webPublicationDate: content[1].webPublicationDate,
+                        trailImage: {
+                            url: content[1].image,
+                        },
                     }}
                 />
             </LI>
@@ -56,12 +62,13 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: 'news',
                         },
                         webPublicationDate: content[2].webPublicationDate,
+                        trailImage: {
+                            url: content[2].image,
+                        },
                     }}
                 />
             </LI>
-        </UL>
-        <UL direction="row">
-            <LI padSides={true} percentage="33%">
+            <LI padSides={true} showDivider={true} percentage="33%">
                 <Card
                     {...{
                         linkTo: content[3].url,
@@ -70,14 +77,19 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[3].designType,
                             headlineText: content[3].linkText,
-                            size: 'xxxsmall',
+                            size: 'xxsmall',
                             pillar: 'news',
                         },
                         webPublicationDate: content[3].webPublicationDate,
+                        trailImage: {
+                            url: content[3].image,
+                        },
                     }}
                 />
             </LI>
-            <LI padSides={true} showDivider={true} percentage="33%">
+        </UL>
+        <UL direction="row">
+            <LI padSides={true} percentage="33%">
                 <Card
                     {...{
                         linkTo: content[4].url,
@@ -97,15 +109,49 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[5].url,
-                        designType: content[5].designType,
+                        // designType: content[5].designType,
+                        designType: 'Analysis',
                         pillar: 'news',
                         headline: {
-                            designType: content[5].designType,
+                            // designType: content[5].designType,
+                            designType: 'Analysis',
                             headlineText: content[5].linkText,
                             size: 'xxxsmall',
                             pillar: 'news',
                         },
                         webPublicationDate: content[5].webPublicationDate,
+                    }}
+                />
+            </LI>
+            <LI padSides={true} percentage="33%">
+                <Card
+                    {...{
+                        linkTo: content[6].url,
+                        designType: content[6].designType,
+                        pillar: 'news',
+                        headline: {
+                            designType: content[6].designType,
+                            headlineText: content[6].linkText,
+                            size: 'xxxsmall',
+                            pillar: 'news',
+                        },
+                        webPublicationDate: content[6].webPublicationDate,
+                    }}
+                />
+            </LI>
+            <LI padSides={true} showDivider={true} percentage="33%">
+                <Card
+                    {...{
+                        linkTo: content[7].url,
+                        designType: content[7].designType,
+                        pillar: 'news',
+                        headline: {
+                            designType: content[7].designType,
+                            headlineText: content[7].linkText,
+                            size: 'xxxsmall',
+                            pillar: 'news',
+                        },
+                        webPublicationDate: content[7].webPublicationDate,
                     }}
                 />
             </LI>
