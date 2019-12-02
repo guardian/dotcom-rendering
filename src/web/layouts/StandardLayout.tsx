@@ -133,6 +133,8 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                 </Flex>
             </Section>
 
+            <Section islandId="story-package" />
+
             <Section showTopBorder={false}>
                 <OutbrainContainer />
             </Section>

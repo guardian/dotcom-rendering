@@ -293,6 +293,8 @@ interface SmallHeadlineType {
     link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
 }
 
+type OnwardsType = 'story-package' | 'more-in-series';
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
