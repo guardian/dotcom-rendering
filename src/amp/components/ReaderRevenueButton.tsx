@@ -61,15 +61,6 @@ const supportLinkStyles = css`
     }
 `;
 
-const supportLinkStylesNoArrow = css`
-    ${supportLinkStyles}
-    padding-right: 0px;
-
-    ${until.mobileMedium} {
-        padding-right: 0px;
-    }
-`;
-
 const rightAlignedIcon = css`
     position: absolute;
     height: 20px;
@@ -84,13 +75,7 @@ export const ReaderRevenueButton: React.SFC<{
     rrLink: ReaderRevenuePosition;
     rrCategory: ReaderRevenueCategory;
     rightAlignIcon?: boolean;
-}> = ({
-    nav,
-    linkLabel,
-    rrLink,
-    rrCategory,
-    rightAlignIcon,
-}) => {
+}> = ({ nav, linkLabel, rrLink, rrCategory, rightAlignIcon }) => {
     const url = nav.readerRevenueLinks[rrLink][rrCategory];
 
     if (url === '') {
