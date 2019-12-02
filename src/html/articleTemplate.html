@@ -96,40 +96,7 @@
 </head>
 <body>
   <div id="root"></div>
-  <script>
-    // common.js
-    function boot(iframe) {
-      window.addEventListener('message', function({ data, source }) {
-        try {
-          if (source === iframe.contentWindow) {
-            const { type, value } = JSON.parse(data);
-
-            if (type === 'set-height') {
-              iframe.height = value;
-            }
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      }, false);
-    }
-
-    Array.from(document.querySelectorAll('.interactive iframe')).forEach(boot);
-
-    function isDarkMode() {
-      if (window.matchMedia) {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-      }
-
-      return false;
-    }
-
-    const themeMeta = document.getElementById('twitter-theme');
-
-    if (isDarkMode() && themeMeta) {
-      themeMeta.setAttribute('content', 'dark');
-    }
-  </script>
+  <script src="/static/client.js"></script>
   <script src="https://platform.twitter.com/widgets.js"></script>
 </body>
 </html>
