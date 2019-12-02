@@ -132,7 +132,7 @@ const clientConfig = {
 const testConfig = {
     name: 'tests',
     mode: 'development',
-    entry: glob.sync("./**/*test.ts", { ignore: './node_modules/**' }).reduce(testEntryPoints, {}),
+    entry: glob.sync("./**/*test.ts*", { ignore: './node_modules/**' }).reduce(testEntryPoints, {}),
     output: {
         filename: '[name].test.js',
     },
