@@ -227,8 +227,7 @@ export const adStyles = css`
                 color: ${palette.neutral[20]};
                 position: relative;
 
-                div {
-                    display: inline-block;
+                span {
                     position: absolute;
                     right: 20px;
                     top: 3px;
