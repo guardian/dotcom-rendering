@@ -1,10 +1,10 @@
 // ----- Procedures ----- //
 
-function handleMessage(interactive: HTMLIFrameElement, message: string) {
+function handleMessage(interactive: HTMLIFrameElement, message: string): void {
 
     try {
         const { type, value } = JSON.parse(message);
-        
+
         if (type === 'set-height') {
             interactive.height = value;
         }
@@ -18,7 +18,7 @@ const updateInteractives = (interactives: Element[]) => ({ data, source }: Messa
     interactives.forEach(elem => {
         if (elem instanceof HTMLIFrameElement && source === elem.contentWindow) {
             handleMessage(elem, data);
-        }    
+        }
     });
 
 function interactives(): void {
