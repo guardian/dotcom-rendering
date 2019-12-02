@@ -9,18 +9,17 @@ import { hasShowcase } from './layoutHelpers';
 type Props = {
     designType: DesignType;
     CAPI: CAPIType;
-    config: ConfigType;
     NAV: NavType;
 };
 
-export const DecideLayout = ({ designType, CAPI, config, NAV }: Props) => {
+export const DecideLayout = ({ designType, CAPI, NAV }: Props) => {
     if (hasShowcase(CAPI.mainMediaElements)) {
-        return <ShowcaseLayout CAPI={CAPI} config={config} NAV={NAV} />;
+        return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
     }
 
     // Otherwise, switch based on designType
     const designTypeContent: DesignTypesObj = designTypeDefault(
-        <StandardLayout CAPI={CAPI} config={config} NAV={NAV} />,
+        <StandardLayout CAPI={CAPI} NAV={NAV} />,
     );
 
     return designTypeContent[designType];

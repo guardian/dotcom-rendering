@@ -83,13 +83,16 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
             <HeaderItem order={3}>
                 <Hide when="above" breakpoint="leftCol">
                     <ArticleStandfirst
+                        designType={CAPI.designType}
                         pillar={pillar}
                         standfirst={standfirst}
                     />
                 </Hide>
             </HeaderItem>
             <div className={positionMainImage}>
-                <MainMedia elements={mainMediaElements} pillar={pillar} />
+                <Hide when="below" breakpoint="tablet">
+                    <MainMedia elements={mainMediaElements} pillar={pillar} />
+                </Hide>
             </div>
         </header>
     );

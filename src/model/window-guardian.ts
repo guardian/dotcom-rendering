@@ -29,32 +29,33 @@ export interface WindowGuardianConfig {
 const makeWindowGuardianConfig = (
     dcrDocumentData: DCRDocumentData,
 ): WindowGuardianConfig => {
+    const { config } = dcrDocumentData.CAPI;
     return {
         // This indicates to the client side code that we are running a dotcom-rendering rendered page.
         isDotcomRendering: true,
-        stage: dcrDocumentData.config.stage,
-        frontendAssetsFullURL: dcrDocumentData.config.frontendAssetsFullURL,
-        page: Object.assign(dcrDocumentData.config, {
+        stage: config.stage,
+        frontendAssetsFullURL: config.frontendAssetsFullURL,
+        page: Object.assign(config, {
             dcrCouldRender: true,
             contentType: dcrDocumentData.CAPI.contentType,
             edition: dcrDocumentData.CAPI.editionId,
-            revisionNumber: dcrDocumentData.config.revisionNumber,
+            revisionNumber: config.revisionNumber,
             dcrSentryDsn:
                 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-            sentryPublicApiKey: dcrDocumentData.config.sentryPublicApiKey,
-            sentryHost: dcrDocumentData.config.sentryHost,
+            sentryPublicApiKey: config.sentryPublicApiKey,
+            sentryHost: config.sentryHost,
             keywordIds: [],
-            dfpAccountId: dcrDocumentData.config.dfpAccountId,
-            adUnit: dcrDocumentData.config.adUnit,
+            dfpAccountId: config.dfpAccountId,
+            adUnit: config.adUnit,
             showRelatedContent: true,
-            ajaxUrl: dcrDocumentData.config.ajaxUrl,
-            hbImpl: dcrDocumentData.config.hbImpl,
+            ajaxUrl: config.ajaxUrl,
+            hbImpl: config.hbImpl,
         }),
         libs: {
-            googletag: dcrDocumentData.config.googletagUrl,
+            googletag: config.googletagUrl,
         },
-        switches: dcrDocumentData.CAPI.config.switches,
-        tests: dcrDocumentData.CAPI.config.abTests || {},
+        switches: config.switches,
+        tests: config.abTests || {},
     } as WindowGuardianConfig;
 };
 

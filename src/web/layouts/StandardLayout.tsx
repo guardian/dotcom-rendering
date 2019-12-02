@@ -4,8 +4,8 @@ import { css } from 'emotion';
 import { Flex } from '@root/src/web/components/Flex';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
-import { ArticleRight } from '@root/src/web/components/ArticleRight';
+import { RightColumn } from '@root/src/web/components/RightColumn';
+import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
@@ -13,6 +13,7 @@ import { Hide } from '@root/src/web/components/Hide';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
+import { MainMedia } from '@root/src/web/components/MainMedia';
 
 import { palette } from '@guardian/src-foundations';
 
@@ -40,11 +41,10 @@ function checkForGE2019Badge(tags: TagType[]) {
 
 interface Props {
     CAPI: CAPIType;
-    config: ConfigType;
     NAV: NavType;
 }
 
-export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
+export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     return (
         <>
@@ -90,16 +90,26 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                 />
             </Section>
 
+            <Hide when="above" breakpoint="tablet">
+                {/* When below tablet, show the main article image in a full width container */}
+                <Section showTopBorder={false} padded={false}>
+                    <MainMedia
+                        elements={CAPI.mainMediaElements}
+                        pillar={CAPI.pillar}
+                    />
+                </Section>
+            </Hide>
+
             <Section showTopBorder={false}>
                 <Flex>
-                    <ArticleLeft>
+                    <LeftColumn>
                         <ArticleTitle
                             CAPI={CAPI}
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />
                         <ArticleMeta CAPI={CAPI} />
-                    </ArticleLeft>
+                    </LeftColumn>
                     <ArticleContainer>
                         <StandardHeader CAPI={CAPI} badge={GE2019Badge} />
                         <Hide when="above" breakpoint="leftCol">
@@ -126,10 +136,10 @@ export const StandardLayout = ({ CAPI, config, NAV }: Props) => {
                             />
                         </main>
                     </ArticleContainer>
-                    <ArticleRight>
+                    <RightColumn>
                         <StickyAd />
                         <MostViewedRightIsland />
-                    </ArticleRight>
+                    </RightColumn>
                 </Flex>
             </Section>
 

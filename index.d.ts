@@ -5,7 +5,6 @@
 interface ArticleProps {
     CAPI: CAPIType;
     NAV: NavType;
-    config: ConfigType;
 }
 
 // Pillars are used for styling
@@ -265,7 +264,7 @@ type AvatarType = {
 interface CardType {
     linkTo: string;
     pillar: Pillar;
-    headline: SmallHeadlineType;
+    headline: CardHeadlineType;
     webPublicationDate?: string;
     trailImage?: CardImageType;
     standfirst?: string;
@@ -281,18 +280,28 @@ type HeadlineLink = {
     preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
 };
 
-interface SmallHeadlineType {
-    headlineString: string; // The text shown
+interface LinkHeadlineType {
+    headlineText: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
-    underlined?: boolean; // Some headlines have an underlined style
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
     kicker?: KickerType;
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: SmallHeadlineSize;
-    coloured?: boolean; // When coloured, the headline takes the dark pillar colour
     link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
 }
 
+interface CardHeadlineType {
+    headlineText: string; // The text shown
+    designType: DesignType; // Used to decide when to add type specific styles
+    pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
+    kicker?: KickerType;
+    showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
+    size?: SmallHeadlineSize;
+}
+
+/**
+ * Onwards
+ */
 type OnwardsType = 'story-package' | 'more-in-series';
 
 /**
@@ -373,7 +382,6 @@ interface DCRDocumentData {
     site: string;
     CAPI: CAPIType;
     NAV: NavType;
-    config: ConfigType;
     GA: GADataType;
     linkedData: object;
 }

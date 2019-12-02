@@ -24,12 +24,15 @@ const ignoreErrors = [
 ];
 
 export const initialiseSentry = (adBlockInUse: boolean) => {
-    const { editionLongForm, contentType } = window.guardian.app.data.CAPI;
     const {
-        isDev,
-        switches: { enableSentryReporting },
-        dcrSentryDsn,
-    } = window.guardian.app.data.config;
+        editionLongForm,
+        contentType,
+        config: {
+            isDev,
+            switches: { enableSentryReporting },
+            dcrSentryDsn,
+        },
+    } = window.guardian.app.data.CAPI;
 
     Sentry.init({
         ignoreErrors,

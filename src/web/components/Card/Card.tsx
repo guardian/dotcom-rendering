@@ -2,7 +2,7 @@ import React from 'react';
 
 import { palette } from '@guardian/src-foundations';
 
-import { SmallHeadline } from '@frontend/web/components/SmallHeadline';
+import { CardHeadline } from '@frontend/web/components/CardHeadline';
 import { Standfirst } from '@frontend/web/components/Standfirst';
 import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
@@ -100,13 +100,20 @@ export const Card = ({
                         )}
                         <ContentWrapper percentage={contentCoverage}>
                             <HeadlineWrapper>
-                                <SmallHeadline {...headline} />
+                                <CardHeadline
+                                    headlineText={headline.headlineText}
+                                    designType={headline.designType}
+                                    pillar={headline.pillar}
+                                    size={headline.size}
+                                    showQuotes={headline.showQuotes}
+                                    kicker={headline.kicker}
+                                />
                             </HeadlineWrapper>
                             <div>
                                 {standfirst && (
                                     <StandfirstWrapper>
                                         <Standfirst
-                                            pillar={pillar}
+                                            designType="Article"
                                             standfirst={standfirst}
                                         />
                                     </StandfirstWrapper>

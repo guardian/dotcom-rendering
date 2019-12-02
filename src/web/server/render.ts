@@ -12,14 +12,16 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 
         const resp = document({
             data: {
-                CAPI,
+                CAPI: {
+                    ...CAPI,
+                    config: {
+                        ...CAPI.config,
+                        isDev: process.env.NODE_ENV !== 'production',
+                    },
+                },
                 site: 'frontend',
                 page: 'Article',
                 NAV: extractNAV(CAPI.nav),
-                config: {
-                    ...CAPI.config,
-                    isDev: process.env.NODE_ENV !== 'production',
-                },
                 GA: extractGA(CAPI),
                 linkedData: CAPI.linkedData,
             },

@@ -1,9 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { until } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 const maxWidth = css`
-    max-width: 630px;
+    ${from.desktop} {
+        max-width: 630px;
+    }
     ${until.phablet} {
         padding: 0 10px;
     }

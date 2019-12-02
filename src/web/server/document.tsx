@@ -18,13 +18,13 @@ interface RenderToStringResult {
 }
 
 export const document = ({ data }: Props) => {
-    const { CAPI, NAV, config, linkedData } = data;
+    const { CAPI, NAV, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <Article data={{ CAPI, NAV, config }} />
+                <Article data={{ CAPI, NAV }} />
             </CacheProvider>,
         ),
     );
@@ -61,7 +61,7 @@ export const document = ({ data }: Props) => {
         polyfillIO,
         getDist('sentry.js'),
         getDist('react.js'),
-        config.commercialBundleUrl,
+        CAPI.config && CAPI.config.commercialBundleUrl,
     ];
 
     /**

@@ -22,7 +22,6 @@ type IslandProps =
           dataLinkName: string;
       }
     | {
-          config: ConfigType;
           pillar: Pillar;
           sectionName?: string;
       }
@@ -63,13 +62,14 @@ type IslandType = {
     root: string;
 };
 
-export const hydrateIslands = (
-    CAPI: CAPIType,
-    config: ConfigType,
-    NAV: NavType,
-) => {
-    const { pillar, editionId, sectionName, pageId } = CAPI;
-    const { ajaxUrl } = config;
+export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
+    const {
+        pillar,
+        editionId,
+        sectionName,
+        pageId,
+        config: { ajaxUrl },
+    } = CAPI;
 
     // Define the list of islands we intend to hydrate. Each island should have a
     // corresponding root element that exists on the DOM with the id value equal to the root property
@@ -117,7 +117,6 @@ export const hydrateIslands = (
         {
             component: MostViewedFooter,
             props: {
-                config,
                 pillar,
                 sectionName,
             },
@@ -165,7 +164,7 @@ export const hydrateIslands = (
                 props: {
                     element,
                     pillar,
-                    ajaxEndpoint: config.ajaxUrl,
+                    ajaxEndpoint: ajaxUrl,
                 },
                 root: `rich-link-${i}`,
             });

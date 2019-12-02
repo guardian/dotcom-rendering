@@ -2,8 +2,8 @@ import React from 'react';
 import fetchMock from 'fetch-mock';
 
 import { Flex } from '@root/src/web/components/Flex';
-import { ArticleLeft } from '@root/src/web/components/ArticleLeft';
-import { ArticleRight } from '@root/src/web/components/ArticleRight';
+import { RightColumn } from '@root/src/web/components/RightColumn';
+import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
 
@@ -26,13 +26,16 @@ export const defaultStory = () => {
     return (
         <Section>
             <Flex>
-                <ArticleLeft>
+                <LeftColumn
+                    showPartialRightBorder={true}
+                    showRightBorder={false}
+                >
                     <></>
-                </ArticleLeft>
+                </LeftColumn>
                 <ArticleContainer>
                     <></>
                 </ArticleContainer>
-                <ArticleRight>
+                <RightColumn>
                     <Section
                         showSideBorders={false}
                         showTopBorder={false}
@@ -40,7 +43,7 @@ export const defaultStory = () => {
                     >
                         <MostViewedRight />
                     </Section>
-                </ArticleRight>
+                </RightColumn>
             </Flex>
         </Section>
     );
@@ -56,13 +59,13 @@ export const limitItemsStory = () => {
     return (
         <Section>
             <Flex>
-                <ArticleLeft>
+                <LeftColumn>
                     <></>
-                </ArticleLeft>
+                </LeftColumn>
                 <ArticleContainer>
                     <></>
                 </ArticleContainer>
-                <ArticleRight>
+                <RightColumn>
                     <Section
                         showSideBorders={false}
                         showTopBorder={false}
@@ -70,7 +73,7 @@ export const limitItemsStory = () => {
                     >
                         <MostViewedRight limitItems={3} />
                     </Section>
-                </ArticleRight>
+                </RightColumn>
             </Flex>
         </Section>
     );

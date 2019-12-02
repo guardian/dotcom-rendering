@@ -1,9 +1,9 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
-const standfirstStyles = css`
+const nestedStyles = css`
     li {
         ${textSans.medium()};
         margin-bottom: 6px;
@@ -34,19 +34,56 @@ const standfirstStyles = css`
     }
 `;
 
-// type SizeType = 'xxxsmall' | 'small' | 'medium';
-// type WeightType = 'light' | 'regular' | 'medium' | 'bold';
+const standfirstStyles = (designType: DesignType) => {
+    switch (designType) {
+        case 'Comment':
+        case 'GuardianView':
+        case 'Feature':
+        case 'Recipe':
+        case 'Review':
+            return css`
+                ${headline.xxsmall({
+                    fontWeight: 'light',
+                })};
+            `;
+        case 'Immersive':
+            return css`
+                ${headline.xsmall({
+                    fontWeight: 'light',
+                })};
+            `;
+        case 'Media':
+        case 'SpecialReport':
+        case 'MatchReport':
+        case 'AdvertisementFeature':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'Article':
+        case 'Live':
+        case 'Analysis':
+        case 'Interview':
+        default:
+            return css`
+                ${headline.xxxsmall({
+                    fontWeight: 'bold',
+                })};
+                line-height: 20px;
+            `;
+    }
+};
 
 type Props = {
-    pillar: Pillar;
+    designType: DesignType;
     standfirst: string;
 };
 
-export const Standfirst = ({ pillar, standfirst }: Props) => (
-    <div // tslint:disable-line:react-no-dangerous-html
-        className={standfirstStyles}
-        dangerouslySetInnerHTML={{
-            __html: standfirst,
-        }}
-    />
-);
+export const Standfirst = ({ designType = 'Article', standfirst }: Props) => {
+    return (
+        <div // tslint:disable-line:react-no-dangerous-html
+            className={cx(nestedStyles, standfirstStyles(designType))}
+            dangerouslySetInnerHTML={{
+                __html: standfirst,
+            }}
+        />
+    );
+};

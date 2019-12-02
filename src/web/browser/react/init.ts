@@ -6,7 +6,7 @@ import { hydrateIslands } from '@frontend/web/islands/islands';
 const init = (): Promise<void> => {
     const {
         cssIDs,
-        data: { CAPI, config, NAV },
+        data: { CAPI, NAV },
     } = window.guardian.app;
 
     /**
@@ -19,7 +19,7 @@ const init = (): Promise<void> => {
         hydrateCSS(cssIDs);
     }
 
-    hydrateIslands(CAPI, config, NAV);
+    hydrateIslands(CAPI, NAV);
 
     return Promise.resolve();
 };

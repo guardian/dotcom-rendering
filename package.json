@@ -16,7 +16,7 @@
         "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
         "storybook": "start-storybook -s ./src/static -p 6006",
         "storybook:build": "build-storybook",
-        "storybook:snapshot": "build-storybook && percy-storybook --widths=320,1139"
+        "storybook:snapshot": "build-storybook && percy-storybook --widths=1139"
     },
     "husky": {
         "hooks": {
@@ -154,7 +154,7 @@
         "tslint-plugin-prettier": "^2.0.1",
         "tslint-react": "^4.0.0",
         "tslint-react-a11y": "^1.0.0",
-        "typescript": "^3.4.5",
+        "typescript": "^3.7.2",
         "typescript-json-schema": "^0.38.3",
         "webpack": "^4.5.0",
         "webpack-assets-manifest": "^3.0.1",
