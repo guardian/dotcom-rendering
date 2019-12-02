@@ -216,6 +216,7 @@ export const adStyles = css`
             h1 {
                 margin: 0;
                 float: left;
+                font-size: 16px;
             }
 
             .ad-hide {
@@ -224,13 +225,23 @@ export const adStyles = css`
                 border: none;
                 font-size: 16px;
                 color: ${palette.neutral[20]};
-                margin-top: -4px;
+                position: relative;
+
+                div {
+                    display: inline-block;
+                    position: absolute;
+                    right: 20px;
+                    top: 3px;
+                }
 
                 &::after {
                     padding-left: ${basePx(1)};
                     ${icons}
                     content: "\\e04F";
                     font-size: 16px;
+                    position: absolute;
+                    right: 0px;
+                    top: 1px;
                 }
 
                 &:focus {
