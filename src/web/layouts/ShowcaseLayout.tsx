@@ -30,132 +30,153 @@ interface Props {
     NAV: NavType;
 }
 
-export const ShowcaseLayout = ({ CAPI, NAV }: Props) => (
-    <>
-        <Section showTopBorder={false} showSideBorders={false} padded={false}>
-            <HeaderAdSlot
-                isAdFreeUser={CAPI.isAdFreeUser}
-                shouldHideAds={CAPI.shouldHideAds}
-            />
-        </Section>
-        <Section
-            showTopBorder={false}
-            showSideBorders={false}
-            padded={false}
-            backgroundColour={palette.brand.main}
-        >
-            <Header nav={NAV} pillar={CAPI.pillar} edition={CAPI.editionId} />
-        </Section>
+export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
+    const { isPaidContent } = CAPI.config;
+    return (
+        <>
+            <Section
+                showTopBorder={false}
+                showSideBorders={false}
+                padded={false}
+            >
+                <HeaderAdSlot
+                    isAdFreeUser={CAPI.isAdFreeUser}
+                    shouldHideAds={CAPI.shouldHideAds}
+                />
+            </Section>
+            <Section
+                showTopBorder={false}
+                showSideBorders={false}
+                padded={false}
+                backgroundColour={palette.brand.main}
+            >
+                <Header
+                    nav={NAV}
+                    pillar={CAPI.pillar}
+                    edition={CAPI.editionId}
+                />
+            </Section>
 
-        <Section
-            islandId="nav-root"
-            showSideBorders={true}
-            borderColour={palette.brand.pastel}
-            showTopBorder={false}
-            padded={false}
-            backgroundColour={palette.brand.main}
-        >
-            <Nav pillar={CAPI.pillar} nav={NAV} />
-        </Section>
+            <Section
+                islandId="nav-root"
+                showSideBorders={true}
+                borderColour={palette.brand.pastel}
+                showTopBorder={false}
+                padded={false}
+                backgroundColour={palette.brand.main}
+            >
+                <Nav pillar={CAPI.pillar} nav={NAV} />
+            </Section>
 
-        <Section backgroundColour={palette.neutral[100]} padded={false}>
-            <SubNav
-                subnav={NAV.subNavSections}
-                currentNavLink={NAV.currentNavLink}
-                pillar={CAPI.pillar}
-            />
-        </Section>
-
-        <Hide when="above" breakpoint="tablet">
-            {/* When below tablet, show the main article image in a full width container */}
-            <Section showTopBorder={false} padded={false}>
-                <MainMedia
-                    elements={CAPI.mainMediaElements}
+            <Section backgroundColour={palette.neutral[100]} padded={false}>
+                <SubNav
+                    subnav={NAV.subNavSections}
+                    currentNavLink={NAV.currentNavLink}
                     pillar={CAPI.pillar}
                 />
             </Section>
-        </Hide>
 
-        <Section showTopBorder={false}>
-            <Flex>
-                <LeftColumn>
-                    <ArticleTitle CAPI={CAPI} inLeftCol={true} />
-                    <ArticleMeta CAPI={CAPI} />
-                </LeftColumn>
-                <ArticleContainer>
-                    {/* When BELOW leftCol we display the header in this position, at the top of the page */}
-                    <Hide when="below" breakpoint="leftCol">
-                        <ShowcaseHeader CAPI={CAPI} />
-                    </Hide>
-                    <Flex>
-                        <div>
-                            {/* When ABOVE leftCol we display the header in this position, above the article body, underneath the full width image */}
-                            <Hide when="above" breakpoint="leftCol">
-                                <ShowcaseHeader CAPI={CAPI} />
-                                <ArticleMeta CAPI={CAPI} />
-                            </Hide>
+            <Hide when="above" breakpoint="tablet">
+                {/* When below tablet, show the main article image in a full width container */}
+                <Section showTopBorder={false} padded={false}>
+                    <MainMedia
+                        elements={CAPI.mainMediaElements}
+                        pillar={CAPI.pillar}
+                    />
+                </Section>
+            </Hide>
 
-                            <main
-                                className={css`
-                                    max-width: 630px;
-                                `}
-                            >
-                                <ArticleBody CAPI={CAPI} isShowcase={true} />
-                                <GuardianLines pillar={CAPI.pillar} />
-                                <SubMeta
-                                    pillar={CAPI.pillar}
-                                    subMetaKeywordLinks={
-                                        CAPI.subMetaKeywordLinks
-                                    }
-                                    subMetaSectionLinks={
-                                        CAPI.subMetaSectionLinks
-                                    }
-                                    pageId={CAPI.pageId}
-                                    webUrl={CAPI.webURL}
-                                    webTitle={CAPI.webTitle}
-                                    showBottomSocialButtons={
-                                        CAPI.showBottomSocialButtons
-                                    }
-                                />
-                            </main>
-                        </div>
-                        <RightColumn>
-                            <StickyAd />
-                            <MostViewedRightIsland />
-                        </RightColumn>
-                    </Flex>
-                </ArticleContainer>
-            </Flex>
-        </Section>
+            <Section showTopBorder={false}>
+                <Flex>
+                    <LeftColumn>
+                        <ArticleTitle CAPI={CAPI} inLeftCol={true} />
+                        <ArticleMeta CAPI={CAPI} />
+                    </LeftColumn>
+                    <ArticleContainer>
+                        {/* When BELOW leftCol we display the header in this position, at the top of the page */}
+                        <Hide when="below" breakpoint="leftCol">
+                            <ShowcaseHeader CAPI={CAPI} />
+                        </Hide>
+                        <Flex>
+                            <div>
+                                {/* When ABOVE leftCol we display the header in this position, above the article body, underneath the full width image */}
+                                <Hide when="above" breakpoint="leftCol">
+                                    <ShowcaseHeader CAPI={CAPI} />
+                                    <ArticleMeta CAPI={CAPI} />
+                                </Hide>
 
-        <Section showTopBorder={false}>
-            <OutbrainContainer />
-        </Section>
+                                <main
+                                    className={css`
+                                        max-width: 630px;
+                                    `}
+                                >
+                                    <ArticleBody
+                                        CAPI={CAPI}
+                                        isShowcase={true}
+                                    />
+                                    <GuardianLines pillar={CAPI.pillar} />
+                                    <SubMeta
+                                        pillar={CAPI.pillar}
+                                        subMetaKeywordLinks={
+                                            CAPI.subMetaKeywordLinks
+                                        }
+                                        subMetaSectionLinks={
+                                            CAPI.subMetaSectionLinks
+                                        }
+                                        pageId={CAPI.pageId}
+                                        webUrl={CAPI.webURL}
+                                        webTitle={CAPI.webTitle}
+                                        showBottomSocialButtons={
+                                            CAPI.showBottomSocialButtons
+                                        }
+                                    />
+                                </main>
+                            </div>
+                            <RightColumn>
+                                <StickyAd />
+                                {!isPaidContent ? (
+                                    <MostViewedRightIsland />
+                                ) : (
+                                    <></>
+                                )}
+                            </RightColumn>
+                        </Flex>
+                    </ArticleContainer>
+                </Flex>
+            </Section>
 
-        <Section islandId="most-viewed-footer" />
+            <Section showTopBorder={false}>
+                <OutbrainContainer />
+            </Section>
+            {!isPaidContent && (
+                <>
+                    <Section islandId="most-viewed-footer" />
+                </>
+            )}
 
-        <Section padded={false}>
-            <SubNav
-                subnav={NAV.subNavSections}
-                pillar={CAPI.pillar}
-                currentNavLink={NAV.currentNavLink}
-            />
-        </Section>
+            <Section padded={false}>
+                <SubNav
+                    subnav={NAV.subNavSections}
+                    pillar={CAPI.pillar}
+                    currentNavLink={NAV.currentNavLink}
+                />
+            </Section>
 
-        <Section
-            padded={false}
-            backgroundColour={palette.brand.main}
-            borderColour={palette.brand.pastel}
-        >
-            <Footer
-                nav={NAV}
-                edition={CAPI.editionId}
-                pageFooter={CAPI.pageFooter}
-                pillar={CAPI.pillar}
-                pillars={NAV.pillars}
-            />
-        </Section>
+            <Section
+                padded={false}
+                backgroundColour={palette.brand.main}
+                borderColour={palette.brand.pastel}
+            >
+                <Footer
+                    nav={NAV}
+                    edition={CAPI.editionId}
+                    pageFooter={CAPI.pageFooter}
+                    pillar={CAPI.pillar}
+                    pillars={NAV.pillars}
+                />
+            </Section>
 
-        <div data-island="cookie-banner" />
-    </>
-);
+            <div data-island="cookie-banner" />
+        </>
+    );
+};

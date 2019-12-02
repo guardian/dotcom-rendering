@@ -46,6 +46,7 @@ interface Props {
 
 export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const GE2019Badge = checkForGE2019Badge(CAPI.tags);
+    const { isPaidContent } = CAPI.config;
     return (
         <>
             <Section
@@ -138,18 +139,22 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </ArticleContainer>
                     <RightColumn>
                         <StickyAd />
-                        <MostViewedRightIsland />
+                        {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                     </RightColumn>
                 </Flex>
             </Section>
 
             <Section islandId="story-package" />
 
-            <Section showTopBorder={false}>
-                <OutbrainContainer />
-            </Section>
+            {!isPaidContent && (
+                <>
+                    <Section showTopBorder={false}>
+                        <OutbrainContainer />
+                    </Section>
 
-            <Section islandId="most-viewed-footer" />
+                    <Section islandId="most-viewed-footer" />
+                </>
+            )}
 
             <Section padded={false}>
                 <SubNav
