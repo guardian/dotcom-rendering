@@ -4,7 +4,6 @@ import { palette } from '@guardian/src-foundations';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
 import { Standfirst } from '@frontend/web/components/Standfirst';
-import { ImageComponent } from '@frontend/web/components/elements/ImageComponent';
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Avatar } from '@frontend/web/components/Avatar';
 
@@ -91,10 +90,10 @@ export const Card = ({
                     <>
                         {trailImage && (
                             <ImageWrapper percentage={imageCoverage}>
-                                <ImageComponent
-                                    element={trailImage.element}
-                                    pillar={pillar}
-                                    hideCaption={true}
+                                <img
+                                    src={trailImage.url}
+                                    alt=""
+                                    role="presentation"
                                 />
                             </ImageWrapper>
                         )}
