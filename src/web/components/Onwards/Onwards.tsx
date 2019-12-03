@@ -22,7 +22,7 @@ export const Onwards = ({ ajaxUrl, pageId, pathId, component }: Props) => {
 
     console.log(JSON.stringify(data));
 
-    if (data) {
+    if (data && data.trails && data.trails.length > 7) {
         return <OnwardsLayout content={data} component={component} />;
     }
 
