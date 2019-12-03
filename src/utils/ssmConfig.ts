@@ -1,6 +1,6 @@
 import {ssm} from "./aws";
 import {App, Stack, Stage} from "./appIdentity";
-import { Option, Some, None } from 'types/Option';
+import { Option, Some, None } from 'types/option';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Config = {[key: string]: any};

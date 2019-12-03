@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 
-import { Option, fromNullable } from 'types/Option';
+import { Option, fromNullable } from 'types/option';
 import { Asset } from 'types/capi-thrift-models';
 
 // ----- Types ----- //

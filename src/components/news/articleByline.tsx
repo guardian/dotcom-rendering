@@ -4,10 +4,10 @@ import { sidePadding, textSans, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { formatDate } from 'utils/date';
-import { Contributor } from 'types/Capi';
-import Avatar from 'components/shared/Avatar';
-import Follow from 'components/shared/Follow';
-import { PillarStyles } from 'types/Pillar';
+import { Contributor } from 'types/capi';
+import Avatar from 'components/shared/avatar';
+import Follow from 'components/shared/follow';
+import { PillarStyles } from 'types/pillar';
 
 const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {

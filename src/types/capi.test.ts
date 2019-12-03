@@ -1,4 +1,4 @@
-import { capiEndpoint } from './Capi';
+import { capiEndpoint } from './capi';
 
 describe('server logic runs as expected', () => {
     it('generates capi endpoint url', () => {

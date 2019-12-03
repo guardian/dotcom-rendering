@@ -1,15 +1,15 @@
 import React from 'react';
 import { textSans } from 'styles';
 
-import { Keyline } from '../shared/Keyline';
+import { Keyline } from '../shared/keyline';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { Contributor } from '../../types/Capi';
+import { Contributor } from '../../types/capi';
 import { formatDate } from 'utils/date';
-import Avatar from 'components/shared/Avatar';
-import LeftColumn from 'components/shared/LeftColumn';
-import { PillarStyles, Pillar } from 'types/Pillar';
+import Avatar from 'components/shared/avatar';
+import LeftColumn from 'components/shared/leftColumn';
+import { PillarStyles, Pillar } from 'types/pillar';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
