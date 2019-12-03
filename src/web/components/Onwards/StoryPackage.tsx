@@ -15,12 +15,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[0].url,
-                        pillar: 'news',
+                        pillar: content[0].pillar,
                         headline: {
                             designType: content[0].designType,
                             headlineText: content[0].linkText,
                             size: 'xxsmall',
-                            pillar: 'news',
+                            pillar: content[0].pillar,
                         },
                         webPublicationDate: content[0].webPublicationDate,
                         trailImage: {
@@ -33,12 +33,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[1].url,
-                        pillar: 'news',
+                        pillar: content[1].pillar,
                         headline: {
                             designType: content[1].designType,
                             headlineText: content[1].linkText,
                             size: 'xxsmall',
-                            pillar: 'news',
+                            pillar: content[1].pillar,
                         },
                         webPublicationDate: content[1].webPublicationDate,
                         trailImage: {
@@ -51,12 +51,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[2].url,
-                        pillar: 'news',
+                        pillar: content[2].pillar,
                         headline: {
                             designType: content[2].designType,
                             headlineText: content[2].linkText,
                             size: 'xxsmall',
-                            pillar: 'news',
+                            pillar: content[2].pillar,
                         },
                         webPublicationDate: content[2].webPublicationDate,
                         trailImage: {
@@ -69,12 +69,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[3].url,
-                        pillar: 'news',
+                        pillar: content[3].pillar,
                         headline: {
                             designType: content[3].designType,
                             headlineText: content[3].linkText,
                             size: 'xxsmall',
-                            pillar: 'news',
+                            pillar: content[3].pillar,
                         },
                         webPublicationDate: content[3].webPublicationDate,
                         trailImage: {
@@ -89,12 +89,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[4].url,
-                        pillar: 'news',
+                        pillar: content[4].pillar,
                         headline: {
                             designType: content[4].designType,
                             headlineText: content[4].linkText,
                             size: 'xxxsmall',
-                            pillar: 'news',
+                            pillar: content[4].pillar,
                         },
                         webPublicationDate: content[4].webPublicationDate,
                     }}
@@ -104,12 +104,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[5].url,
-                        pillar: 'news',
+                        pillar: content[5].pillar,
                         headline: {
                             designType: content[5].designType,
                             headlineText: content[5].linkText,
                             size: 'xxxsmall',
-                            pillar: 'news',
+                            pillar: content[5].pillar,
                         },
                         webPublicationDate: content[5].webPublicationDate,
                     }}
@@ -119,12 +119,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[6].url,
-                        pillar: 'news',
+                        pillar: content[6].pillar,
                         headline: {
                             designType: content[6].designType,
                             headlineText: content[6].linkText,
                             size: 'xxxsmall',
-                            pillar: 'news',
+                            pillar: content[6].pillar,
                         },
                         webPublicationDate: content[6].webPublicationDate,
                     }}
@@ -134,12 +134,12 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[7].url,
-                        pillar: 'news',
+                        pillar: content[7].pillar,
                         headline: {
                             designType: content[7].designType,
                             headlineText: content[7].linkText,
                             size: 'xxxsmall',
-                            pillar: 'news',
+                            pillar: content[7].pillar,
                         },
                         webPublicationDate: content[7].webPublicationDate,
                     }}
