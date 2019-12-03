@@ -304,6 +304,11 @@ interface CardHeadlineType {
  */
 type OnwardsIdType = 'story-package' | 'more-in-series';
 
+type OnwardsType = {
+    heading: string;
+    trails: TrailType[];
+};
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
@@ -397,9 +402,13 @@ interface TrailType {
     url: string;
     linkText: string;
     isLiveBlog: boolean;
-    ageWarning: string;
+    ageWarning?: string;
     image?: string;
     pillar: Pillar;
+    byline?: string;
+    showByline?: boolean;
+    designType?: DesignType;
+    webPublicationDate?: string;
 }
 
 // ------------------------------

@@ -13,14 +13,12 @@ type Props = {
 
 export const Onwards = ({ ajaxUrl, pageId, pathId, component }: Props) => {
     const url = `${new URL(`${pathId}/${pageId}`, ajaxUrl)}.json`;
-    const { data, error } = useApi<any>(url);
+    const { data, error } = useApi<OnwardsType>(url);
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'story-package');
         return null;
     }
-
-    console.log(JSON.stringify(data));
 
     if (data && data.trails && data.trails.length > 7) {
         return <OnwardsLayout content={data} component={component} />;

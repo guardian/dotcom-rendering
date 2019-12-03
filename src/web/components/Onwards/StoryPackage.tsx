@@ -5,7 +5,7 @@ import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
 
 type Props = {
-    content: any[];
+    content: TrailType[];
 };
 
 export const StoryPackage = ({ content }: Props) => (

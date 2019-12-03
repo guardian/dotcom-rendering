@@ -7,7 +7,7 @@ import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 
 type Props = {
-    content: any;
+    content: OnwardsType;
     component: React.ElementType;
 };
 
