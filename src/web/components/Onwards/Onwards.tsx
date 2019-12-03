@@ -7,7 +7,7 @@ import { OnwardsLayout } from './OnwardsLayout';
 type Props = {
     ajaxUrl: string;
     pageId: string;
-    pathId: OnwardsType;
+    pathId: OnwardsIdType;
     component: React.ElementType;
 };
 

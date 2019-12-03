@@ -51,7 +51,7 @@ type IslandProps =
     | {
           ajaxUrl: string;
           pageId: string;
-          pathId: OnwardsType;
+          pathId: OnwardsIdType;
           component: React.ElementType;
       };
 

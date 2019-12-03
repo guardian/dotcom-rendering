@@ -302,7 +302,7 @@ interface CardHeadlineType {
 /**
  * Onwards
  */
-type OnwardsType = 'story-package' | 'more-in-series';
+type OnwardsIdType = 'story-package' | 'more-in-series';
 
 /**
  * the config model will contain useful app/site
