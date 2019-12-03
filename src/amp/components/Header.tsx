@@ -193,7 +193,6 @@ export const Header: React.FC<{
                 rrLink="ampHeader"
                 rrCategory="subscribe"
                 linkLabel="Subscribe"
-                showArrow={false}
             />
 
             <a className={logoStyles} href={guardianBaseURL}>
