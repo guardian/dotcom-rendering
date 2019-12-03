@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "target": "es2019",
         // Enable strictest settings like strictNullChecks & noImplicitAny.
         "strict": true,
         // Import non-ES modules as default imports.
