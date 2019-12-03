@@ -73,7 +73,7 @@ const headlineStyles = (
 
 export const CardHeadline = ({
     headlineText,
-    designType,
+    designType = 'Article',
     pillar,
     showQuotes,
     kicker,
