@@ -15,7 +15,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[0].url,
-                        designType: content[0].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[0].designType,
@@ -34,7 +33,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[1].url,
-                        designType: content[1].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[1].designType,
@@ -53,7 +51,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[2].url,
-                        designType: content[2].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[2].designType,
@@ -72,7 +69,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[3].url,
-                        designType: content[3].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[3].designType,
@@ -93,7 +89,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[4].url,
-                        designType: content[4].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[4].designType,
@@ -109,7 +104,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[5].url,
-                        designType: content[5].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[5].designType,
@@ -125,7 +119,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[6].url,
-                        designType: content[6].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[6].designType,
@@ -141,7 +134,6 @@ export const StoryPackage = ({ content }: Props) => (
                 <Card
                     {...{
                         linkTo: content[7].url,
-                        designType: content[7].designType,
                         pillar: 'news',
                         headline: {
                             designType: content[7].designType,
