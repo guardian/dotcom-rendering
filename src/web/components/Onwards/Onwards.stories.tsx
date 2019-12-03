@@ -21,7 +21,6 @@ export const storyPackage = () => {
                 content={storyPackageTrails}
                 component={StoryPackage}
             />
-            ;
         </Section>
     );
 };
