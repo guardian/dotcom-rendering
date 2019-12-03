@@ -331,7 +331,7 @@ interface ConfigType {
     edition: string;
     section: string;
     sharedAdTargeting: { [key: string]: any };
-    isPaidContent: boolean;
+    isPaidContent?: boolean;
 }
 
 interface GADataType {
