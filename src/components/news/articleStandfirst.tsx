@@ -3,7 +3,7 @@ import { sidePadding, bulletStyles, headlineFont, darkModeCss } from 'styles';
 import { transform } from '../../utils/contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { PillarStyles } from 'types/Pillar';
+import { PillarStyles } from 'types/pillar';
 
 const StandfirstFeatureStyles = `
     color: ${palette.neutral[46]};

@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { Contributor } from 'types/Capi';
-import { isSingleContributor } from 'types/Capi';
+import { Contributor } from 'types/capi';
+import { isSingleContributor } from 'types/capi';
 
 
 // ----- Component ----- //

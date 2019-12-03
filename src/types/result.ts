@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Monad } from './Monad';
+import { Monad } from './monad';
 
 
 // ----- Classes ----- //

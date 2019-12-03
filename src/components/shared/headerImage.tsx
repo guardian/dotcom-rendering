@@ -1,12 +1,12 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 
-import HeaderImageCaption, { captionId } from './HeaderImageCaption';
+import HeaderImageCaption, { captionId } from './headerImageCaption';
 import { BlockElement } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
 import { from } from '@guardian/src-foundations/mq';
 import { wideContentWidth } from 'styles';
-import { Option } from 'types/Option';
+import { Option } from 'types/option';
 
 const headerImageStyles = css`
     figure {

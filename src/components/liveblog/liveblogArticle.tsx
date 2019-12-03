@@ -1,20 +1,20 @@
 import React from 'react';
 
-import LiveblogSeries from './LiveblogSeries';
-import LiveblogHeadline from './LiveblogHeadline';
-import LiveblogStandfirst from './LiveblogStandfirst';
-import LiveblogByline from './LiveblogByline';
-import LiveblogKeyEvents from './LiveblogKeyEvents';
-import LiveblogBody from './LiveblogBody';
-import HeaderImage from '../shared/HeaderImage';
-import Tags from '../shared/Tags';
+import LiveblogSeries from './liveblogSeries';
+import LiveblogHeadline from './liveblogHeadline';
+import LiveblogStandfirst from './liveblogStandfirst';
+import LiveblogByline from './liveblogByline';
+import LiveblogKeyEvents from './liveblogKeyEvents';
+import LiveblogBody from './liveblogBody';
+import HeaderImage from '../shared/headerImage';
+import Tags from '../shared/tags';
 import { wideColumnWidth, baseMultiply } from 'styles';
 import { Content } from 'types/capi-thrift-models';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { articleMainImage, articleSeries, articleContributors } from 'types/Capi';
-import { PillarStyles, pillarFromString, getPillarStyles } from 'types/Pillar';
+import { articleMainImage, articleSeries, articleContributors } from 'types/capi';
+import { PillarStyles, pillarFromString, getPillarStyles } from 'types/pillar';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${palette.neutral[97]};

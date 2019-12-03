@@ -1,20 +1,20 @@
 import React from 'react';
 
-import HeaderImage from '../shared/HeaderImage';
-import ArticleSeries from './ArticleSeries';
-import ArticleHeadline from './ArticleHeadline';
-import ArticleStandfirst from './ArticleStandfirst';
-import ArticleByline from './ArticleByline';
-import ArticleBody from './ArticleBody';
-import Tags from 'components/shared/Tags';
+import HeaderImage from '../shared/headerImage';
+import ArticleSeries from './articleSeries';
+import ArticleHeadline from './articleHeadline';
+import ArticleStandfirst from './articleStandfirst';
+import ArticleByline from './articleByline';
+import ArticleBody from './articleBody';
+import Tags from 'components/shared/tags';
 import { Content } from 'types/capi-thrift-models';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
-import { Keyline } from 'components/shared/Keyline';
-import { isFeature, articleSeries, articleContributors, articleMainImage } from 'types/Capi';
-import { getPillarStyles, pillarFromString } from 'types/Pillar';
+import { Keyline } from 'components/shared/keyline';
+import { isFeature, articleSeries, articleContributors, articleMainImage } from 'types/capi';
+import { getPillarStyles, pillarFromString } from 'types/pillar';
 
 export interface ArticleProps {
     capi: Content;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { bulletStyles, commonArticleStyles } from 'styles';
-import LiveblogBlock from './LiveblogBlock';
-import LiveblogLoadMore from './LiveblogLoadMore';
+import LiveblogBlock from './liveblogBlock';
+import LiveblogLoadMore from './liveblogLoadMore';
 import { render } from 'renderBlocks';
 import { Block } from 'types/capi-thrift-models';
 
 import { css, SerializedStyles } from '@emotion/core'
-import { PillarStyles } from 'types/Pillar';
+import { PillarStyles } from 'types/pillar';
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,

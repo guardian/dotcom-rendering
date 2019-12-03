@@ -4,7 +4,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { Block } from 'types/capi-thrift-models';
 import { makeRelativeDate } from 'utils/date';
-import { PillarStyles } from 'types/Pillar';
+import { PillarStyles } from 'types/pillar';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${palette.neutral[100]};

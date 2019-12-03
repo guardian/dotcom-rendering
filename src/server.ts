@@ -9,13 +9,13 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
-import { fromUnsafe, Result, Ok, Err } from 'types/Result';
+import { fromUnsafe, Result, Ok, Err } from 'types/result';
 import { Content } from 'types/capi-thrift-models';
-import Article from 'components/news/Article';
-import LiveblogArticle from 'components/liveblog/LiveblogArticle';
+import Article from 'components/news/article';
+import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import { getConfigValue } from 'utils/ssmConfig';
-import { parseCapi, capiEndpoint } from 'types/Capi';
-import { Capi } from 'types/Capi';
+import { parseCapi, capiEndpoint } from 'types/capi';
+import { Capi } from 'types/capi';
 
 // ----- Setup ----- //
 
