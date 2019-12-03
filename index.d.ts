@@ -269,6 +269,7 @@ interface CardType {
     trailImage?: CardImageType;
     standfirst?: string;
     avatar?: AvatarType;
+    showClock?: boolean;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';

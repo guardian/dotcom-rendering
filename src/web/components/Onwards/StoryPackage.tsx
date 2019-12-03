@@ -23,6 +23,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[0].pillar,
                         },
                         webPublicationDate: content[0].webPublicationDate,
+                        showClock: false,
                         trailImage: {
                             url: content[0].image,
                         },
@@ -41,6 +42,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[1].pillar,
                         },
                         webPublicationDate: content[1].webPublicationDate,
+                        showClock: false,
                         trailImage: {
                             url: content[1].image,
                         },
@@ -59,6 +61,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[2].pillar,
                         },
                         webPublicationDate: content[2].webPublicationDate,
+                        showClock: false,
                         trailImage: {
                             url: content[2].image,
                         },
@@ -77,6 +80,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[3].pillar,
                         },
                         webPublicationDate: content[3].webPublicationDate,
+                        showClock: false,
                         trailImage: {
                             url: content[3].image,
                         },
@@ -97,6 +101,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[4].pillar,
                         },
                         webPublicationDate: content[4].webPublicationDate,
+                        showClock: false,
                     }}
                 />
             </LI>
@@ -112,6 +117,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[5].pillar,
                         },
                         webPublicationDate: content[5].webPublicationDate,
+                        showClock: false,
                     }}
                 />
             </LI>
@@ -127,6 +133,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[6].pillar,
                         },
                         webPublicationDate: content[6].webPublicationDate,
+                        showClock: false,
                     }}
                 />
             </LI>
@@ -142,6 +149,7 @@ export const StoryPackage = ({ content }: Props) => (
                             pillar: content[7].pillar,
                         },
                         webPublicationDate: content[7].webPublicationDate,
+                        showClock: false,
                     }}
                 />
             </LI>

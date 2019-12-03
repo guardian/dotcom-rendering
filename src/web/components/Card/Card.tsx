@@ -60,6 +60,7 @@ export const Card = ({
     trailImage,
     standfirst,
     avatar,
+    showClock,
 }: CardType) => {
     // If there was no image given or image size was not set, percentage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
@@ -133,6 +134,7 @@ export const Card = ({
                                                 webPublicationDate={
                                                     webPublicationDate
                                                 }
+                                                showClock={showClock}
                                             />
                                         )}
                                         {isOpinion && (
