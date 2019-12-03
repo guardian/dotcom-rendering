@@ -4,13 +4,13 @@ import React from 'react';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { from } from '@guardian/src-foundations/mq';
-import { wideContentWidth, wideColumnWidth } from 'styles';
+import { wideContentWidth, wideColumnWidth, basePx } from 'styles';
 
 
 // ----- Styles ----- //
 
 const LeftColumnStyles = css`
-    padding: 8px;
+    padding: ${basePx(1)};
 
     ${from.phablet} {
         display: flex;

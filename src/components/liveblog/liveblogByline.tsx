@@ -1,5 +1,5 @@
 import React from 'react';
-import { textSans } from 'styles';
+import { textSans, basePx } from 'styles';
 
 import { Keyline } from '../shared/keyline';
 
@@ -13,7 +13,7 @@ import { PillarStyles, Pillar } from 'types/pillar';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
-    padding-bottom: 8px;
+    padding-bottom: ${basePx(1)};
 
     .author {
         padding-bottom: 4px;

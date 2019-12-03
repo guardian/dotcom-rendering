@@ -30,8 +30,8 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
     }
 
     ${until.phablet} {
-        margin-left: 8px;
-        margin-right: 8px;
+        margin-left: ${basePx(1)};
+        margin-right: ${basePx(1)};
     }
 
     .rich-link a {
