@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export declare enum TagType {
+export enum TagType {
   CONTRIBUTOR = 'contributor',
   KEYWORD = 'keyword',
   SERIES = 'series',
