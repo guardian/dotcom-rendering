@@ -2,7 +2,7 @@ import React from 'react';
 import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 
-const widths = [660, 480, 0];
+const widths = [1020, 660, 480, 0];
 
 const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
     const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
@@ -18,10 +18,13 @@ const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
 
 const getSrcSetsForWeighting = (
     imageSources: ImageSource[],
-    forWeighting: Weighting,
+    forWeighting: RoleType,
 ): SrcSet[] =>
-    imageSources.filter(({ weighting }) => weighting === forWeighting)[0]
-        .srcSet;
+    imageSources.filter(
+        ({ weighting }) =>
+            // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
+            weighting.toLowerCase() === forWeighting.toLowerCase(),
+    )[0].srcSet;
 
 const makeSource = (
     hidpi: boolean,
@@ -36,8 +39,11 @@ const makeSource = (
     };
 };
 
-const makeSources = (imageSources: ImageSource[]): PictureSource[] => {
-    const inlineSrcSets = getSrcSetsForWeighting(imageSources, 'inline');
+const makeSources = (
+    imageSources: ImageSource[],
+    role: RoleType,
+): PictureSource[] => {
+    const inlineSrcSets = getSrcSetsForWeighting(imageSources, role);
     const sources: PictureSource[] = [];
 
     // TODO: ideally the imageSources array will come from frontend with prebaked URLs for
@@ -64,7 +70,7 @@ export const ImageComponent: React.FC<{
     hideCaption?: boolean;
     role?: RoleType;
 }> = ({ element, pillar, hideCaption, role }) => {
-    const sources = makeSources(element.imageSources);
+    const sources = makeSources(element.imageSources, element.role);
     if (hideCaption) {
         return (
             <Picture
