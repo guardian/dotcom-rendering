@@ -145,6 +145,8 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </Flex>
             </Section>
 
+            <Section islandId="story-package" />
+
             <Section showTopBorder={false}>
                 <OutbrainContainer />
             </Section>
