@@ -292,7 +292,7 @@ interface LinkHeadlineType {
 
 interface CardHeadlineType {
     headlineText: string; // The text shown
-    designType: DesignType; // Used to decide when to add type specific styles
+    designType?: DesignType; // Used to decide when to add type specific styles
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     kicker?: KickerType;
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
@@ -399,15 +399,15 @@ interface Props {
 type JSXElements = JSX.Element | JSX.Element[];
 
 interface TrailType {
+    designType: DesignType;
     url: string;
     linkText: string;
     isLiveBlog: boolean;
+    image: string;
     ageWarning?: string;
-    image?: string;
     pillar: Pillar;
     byline?: string;
     showByline?: boolean;
-    designType?: DesignType;
     webPublicationDate?: string;
 }
 
