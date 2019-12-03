@@ -8,11 +8,11 @@ import { PillarStyles } from 'types/Pillar';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${palette.neutral[100]};
-    margin-top: -8px;
+    margin-top: ${basePx(-1)};
     min-height: 42px;
-    margin-bottom: 32px;
+    margin-bottom: ${basePx(4)};
     border-bottom: solid 2px ${palette.neutral[93]};
-    padding: 8px 8px 0 8px;
+    padding: ${basePx(1, 1, 0, 1)};
     position: relative;
 
     h2 {
@@ -51,7 +51,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
                 height: 10px;
                 left: -5px;
                 position: absolute;
-                top: 8px;
+                top: ${basePx(1)};
                 width: 10px;
             }
 
@@ -70,7 +70,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
                     height: 1px;
                     left: -1px;
                     top: 12px;
-                    width: 8px;
+                    width: ${basePx(1)};
                     border-radius: 0;
                 }
             }
@@ -82,7 +82,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
                     height: 1px;
                     left: -1px;
                     top: 12px;
-                    width: 8px;
+                    width: ${basePx(1)};
                     border-radius: 0;
                 }
 

@@ -23,7 +23,7 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         float: left;
         clear: left;
         width: ${richLinkWidth};
-        margin: 8px 24px 8px 0;
+        margin: ${basePx(1, 2, 1, 0)};
 
         ${from.wide} {
             margin-left: calc(-${richLinkWidth} - 16px - 24px);

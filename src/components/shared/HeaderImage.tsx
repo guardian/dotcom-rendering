@@ -5,7 +5,7 @@ import HeaderImageCaption, { captionId } from './HeaderImageCaption';
 import { BlockElement } from 'types/capi-thrift-models';
 import { imageElement } from 'components/blocks/image';
 import { from } from '@guardian/src-foundations/mq';
-import { wideContentWidth } from 'styles';
+import { wideContentWidth, basePx } from 'styles';
 import { Option } from 'types/Option';
 
 const headerImageStyles = css`
@@ -26,7 +26,7 @@ const headerImageStyles = css`
         }
     }
 
-    margin-bottom: 8px;
+    margin-bottom: ${basePx(1)};
 `;
 
 interface HeaderImageProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { sidePadding, textSans, darkModeCss } from '../../styles';
+import { sidePadding, textSans, darkModeCss, basePx } from '../../styles';
 import { palette } from '@guardian/src-foundations';
 import { Tag } from 'types/capi-thrift-models';
 
@@ -10,11 +10,11 @@ const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles 
 
     display: block;
     list-style: none;
-    padding: 8px 0 16px 0;
+    padding: ${basePx(1, 0, 2, 0)};
     ${textSans}
 
     li {
-        margin: 8px 8px 4px 0;
+        margin: ${basePx(1, 1, .5, 0)};
         display: inline-block;
 
         a {

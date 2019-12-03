@@ -45,7 +45,7 @@ const HeaderImageCaptionStyles = css`
 		background-color: rgba(0, 0, 0, 0.8);
 		padding: ${basePx(1)};
 		overflow: hidden;
-		padding-right: 48px;
+		padding-right: ${basePx(6)};
 		z-index: 1;
 		color: ${palette.neutral[100]};
 		line-height: 1.6rem;
