@@ -3,7 +3,7 @@ import { basePx, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles } from 'types/pillar';
+import { PillarStyles } from 'pillar';
 
 const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};

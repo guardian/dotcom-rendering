@@ -10,18 +10,19 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/result';
-import { Content } from 'types/capi-thrift-models';
+import { Content } from 'capiThriftModels';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
-import { getConfigValue } from 'utils/ssmConfig';
-import { parseCapi, capiEndpoint } from 'types/capi';
-import { Capi } from 'types/capi';
+import { getConfigValue } from 'server/ssmConfig';
+import { parseCapi, capiEndpoint } from 'capi';
+import { Capi } from 'capi';
 
 // ----- Setup ----- //
 
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 const readFileP = promisify(fs.readFile);
+const templateFile = './src/articleTemplate.html';
 
 
 // ----- Functions ----- //
@@ -71,7 +72,7 @@ const generateArticleHtml = (capiResponse: string, imageSalt: string) =>
 
 async function readTemplate(): Promise<Result<string, string>> {
   try {
-    const data = await readFileP(path.resolve('./src/html/articleTemplate.html'), 'utf8');
+    const data = await readFileP(path.resolve(templateFile), 'utf8');
     return new Ok(data);
   } catch (_) {
     return new Err('Could not read template file');

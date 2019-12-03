@@ -3,7 +3,7 @@ import ArticleRating from './articleRating';
 import { basePx, sidePadding, headlineFont, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
-import { PillarStyles } from 'types/pillar';
+import { PillarStyles } from 'pillar';
 
 const HeadlineStyles = (feature: boolean, { featureHeadline }: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};

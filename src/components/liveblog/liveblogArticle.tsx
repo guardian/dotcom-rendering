@@ -9,12 +9,12 @@ import LiveblogBody from './liveblogBody';
 import HeaderImage from '../shared/headerImage';
 import Tags from '../shared/tags';
 import { wideColumnWidth, baseMultiply } from 'styles';
-import { Content } from 'types/capi-thrift-models';
+import { Content } from 'capiThriftModels';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { articleMainImage, articleSeries, articleContributors } from 'types/capi';
-import { PillarStyles, pillarFromString, getPillarStyles } from 'types/pillar';
+import { articleMainImage, articleSeries, articleContributors } from 'capi';
+import { PillarStyles, pillarFromString, getPillarStyles } from 'pillar';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${palette.neutral[97]};
