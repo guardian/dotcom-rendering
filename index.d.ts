@@ -404,11 +404,11 @@ interface TrailType {
     linkText: string;
     isLiveBlog: boolean;
     image: string;
+    webPublicationDate: string;
     ageWarning?: string;
     pillar: Pillar;
     byline?: string;
     showByline?: boolean;
-    webPublicationDate?: string;
 }
 
 // ------------------------------
