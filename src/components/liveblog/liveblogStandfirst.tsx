@@ -3,8 +3,8 @@ import { bulletStyles } from 'styles';
 import { transform } from '../../utils/contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import LeftColumn from 'components/shared/LeftColumn';
-import { PillarStyles } from 'types/Pillar';
+import LeftColumn from 'components/shared/leftColumn';
+import { PillarStyles } from 'types/pillar';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     padding-bottom: 6px;

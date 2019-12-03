@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import * as AssetUtils from 'utils/Asset';
+import * as AssetUtils from 'utils/asset';
 import { BlockElement } from 'types/capi-thrift-models';
 
 // ----- Setup ----- //

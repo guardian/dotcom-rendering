@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Functor } from './Functor';
+import { Functor } from './functor';
 
 
 // ----- Interface ----- //

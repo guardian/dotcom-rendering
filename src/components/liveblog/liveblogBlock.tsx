@@ -4,8 +4,8 @@ import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'utils/date';
-import LeftColumn from 'components/shared/LeftColumn';
-import { PillarStyles } from 'types/Pillar';
+import LeftColumn from 'components/shared/leftColumn';
+import { PillarStyles } from 'types/pillar';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${palette.neutral[100]};
