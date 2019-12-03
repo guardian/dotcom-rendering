@@ -1,4 +1,4 @@
-export const storyPackageTrails = {
+export const storyPackageTrails: OnwardsType = {
     heading: 'More on this story',
     trails: [
         {
