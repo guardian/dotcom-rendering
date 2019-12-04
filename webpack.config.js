@@ -77,7 +77,7 @@ const nodeConfig = {
 const serverConfig = env => ({
     name: 'server',
     mode: 'development',
-    entry: 'server.ts',
+    entry: 'server/server.ts',
     node: {
         __dirname: false,
     },
@@ -95,7 +95,7 @@ const serverConfig = env => ({
 const clientConfig = {
     name: 'client',
     mode: 'development',
-    entry: 'client.ts',
+    entry: 'client/client.ts',
     target: 'web',
     output: {
         filename: 'client.js',

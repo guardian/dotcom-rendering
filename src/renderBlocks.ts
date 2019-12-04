@@ -3,11 +3,11 @@
 import React from 'react';
 import jsdom from 'jsdom';
 
-import { Result, Err, fromUnsafe } from './types/Result';
+import { Result, Err, fromUnsafe } from './types/result';
 import { imageBlock } from './components/blocks/image';
 import { insertAdPlaceholders } from './ads';
-import { transform } from 'utils/contentTransformations';
-import { BlockElement } from 'types/capi-thrift-models';
+import { transform } from 'contentTransformations';
+import { BlockElement } from 'capiThriftModels';
 
 
 // ----- Setup ----- //

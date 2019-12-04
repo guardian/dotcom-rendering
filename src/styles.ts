@@ -1,7 +1,7 @@
 import { palette } from '@guardian/src-foundations';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core'
-import { PillarStyles } from 'types/Pillar';
+import { PillarStyles } from 'pillar';
 
 const BASE_PADDING = 8;
 
@@ -109,7 +109,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
                 font-size: 2.2rem;
                 content: '\\e11c';
                 display: inline-block;
-                margin-right: 8px;
+                margin-right: ${basePx(1)};
             }
         }
 
@@ -145,7 +145,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         }
 
         p {
-            margin: 8px 0;
+            margin: ${basePx(1, 0)};
         }
 
         span {
@@ -160,7 +160,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
     h2 {
         font-size: 1.8rem;
         line-height: 2.2rem;
-        margin: 8px 0;
+        margin: ${basePx(1, 0)};
         font-weight: 500;
 
         & + p {

@@ -4,6 +4,6 @@
         "target": "es2019"
     },
     "files": [
-        "../src/server.ts"
+        "../src/server/server.ts"
     ]
 }
