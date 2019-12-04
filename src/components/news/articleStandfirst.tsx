@@ -1,9 +1,9 @@
 import React from 'react';
 import { sidePadding, bulletStyles, headlineFont, darkModeCss } from 'styles';
-import { transform } from '../../utils/contentTransformations';
+import { transform } from '../../contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { PillarStyles } from 'types/pillar';
+import { PillarStyles } from 'pillar';
 
 const StandfirstFeatureStyles = `
     color: ${palette.neutral[46]};

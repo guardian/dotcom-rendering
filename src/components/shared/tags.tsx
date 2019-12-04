@@ -2,7 +2,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, darkModeCss, basePx } from '../../styles';
 import { palette } from '@guardian/src-foundations';
-import { Tag } from 'types/capi-thrift-models';
+import { Tag } from 'capiThriftModels';
 
 const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles => css`
     margin-top: 0;

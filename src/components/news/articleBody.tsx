@@ -10,8 +10,8 @@ import {
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 import { render } from "renderBlocks";
-import { BlockElement } from 'types/capi-thrift-models';
-import { PillarStyles } from 'types/pillar';
+import { BlockElement } from 'capiThriftModels';
+import { PillarStyles } from 'pillar';
 
 const richLinkWidth = "13.75rem";
 

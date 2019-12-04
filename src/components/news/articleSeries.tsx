@@ -1,8 +1,8 @@
 import React from 'react';
 import { sidePadding, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { Series } from '../../types/capi';
-import { PillarStyles } from 'types/pillar';
+import { Series } from '../../capi';
+import { PillarStyles } from 'pillar';
 
 const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     ${sidePadding}

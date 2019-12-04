@@ -2,7 +2,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 
 import HeaderImageCaption, { captionId } from './headerImageCaption';
-import { BlockElement } from 'types/capi-thrift-models';
+import { BlockElement } from 'capiThriftModels';
 import { imageElement } from 'components/blocks/image';
 import { from } from '@guardian/src-foundations/mq';
 import { wideContentWidth, basePx } from 'styles';

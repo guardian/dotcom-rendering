@@ -3,7 +3,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss, wideContentWidth, wideColumnWidth, baseMultiply } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { Pillar } from 'types/pillar';
+import { Pillar } from 'pillar';
 
 const BaseStyles = css`
     height: 12px;

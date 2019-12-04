@@ -5,6 +5,6 @@
         "target": "es2020"
     },
     "files": [
-        "../src/client.ts"
+        "../src/client/client.ts"
     ]
 }

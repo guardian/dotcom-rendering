@@ -3,10 +3,10 @@ import { bulletStyles, commonArticleStyles } from 'styles';
 import LiveblogBlock from './liveblogBlock';
 import LiveblogLoadMore from './liveblogLoadMore';
 import { render } from 'renderBlocks';
-import { Block } from 'types/capi-thrift-models';
+import { Block } from 'capiThriftModels';
 
 import { css, SerializedStyles } from '@emotion/core'
-import { PillarStyles } from 'types/pillar';
+import { PillarStyles } from 'pillar';
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,

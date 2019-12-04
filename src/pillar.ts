@@ -2,7 +2,7 @@
 
 import { palette } from '@guardian/src-foundations';
 
-import { compose } from 'utils/lib';
+import { compose } from 'lib';
 
 
 // ----- Types ----- //

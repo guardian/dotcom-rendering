@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Result, Ok, Err } from 'types/result';
-import { Content, Tag, BlockElement } from 'types/capi-thrift-models';
+import { Content, Tag, BlockElement } from 'capiThriftModels';
 import { Option, fromNullable } from 'types/option';
 import { isImage } from 'components/blocks/image';
 

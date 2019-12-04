@@ -1,7 +1,7 @@
 import { palette } from '@guardian/src-foundations';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core'
-import { PillarStyles } from 'types/pillar';
+import { PillarStyles } from 'pillar';
 
 const BASE_PADDING = 8;
 

@@ -1,10 +1,10 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { Contributor } from 'types/capi';
-import { isSingleContributor } from 'types/capi';
+import { Contributor } from 'capi';
+import { isSingleContributor } from 'capi';
 import { css, SerializedStyles } from '@emotion/core';
-import { transformUrl } from 'utils/asset';
+import { transformUrl } from 'asset';
 
 // ----- Styles ----- //
 

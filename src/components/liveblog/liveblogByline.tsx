@@ -5,11 +5,11 @@ import { Keyline } from '../shared/keyline';
 
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { Contributor } from '../../types/capi';
-import { formatDate } from 'utils/date';
+import { Contributor } from '../../capi';
+import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles, Pillar } from 'types/pillar';
+import { PillarStyles, Pillar } from 'pillar';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
