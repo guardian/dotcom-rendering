@@ -98,9 +98,16 @@ const clientConfig = {
     entry: 'client/client.ts',
     target: 'web',
     output: {
+        path: path.resolve(__dirname, 'dist/assets'),
         filename: 'client.js',
     },
     resolve,
+    devServer: {
+        publicPath: '/assets/',
+        proxy: {
+            '**': 'http://localhost:3040',
+        }
+    },
     module: {
         rules: [
             {
