@@ -106,6 +106,7 @@ export const Card = ({
                                     size={headline.size}
                                     showQuotes={headline.showQuotes}
                                     kicker={headline.kicker}
+                                    byline={headline.byline}
                                 />
                             </HeadlineWrapper>
                             <div>

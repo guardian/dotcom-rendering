@@ -288,6 +288,7 @@ interface LinkHeadlineType {
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: SmallHeadlineSize;
     link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
+    byline?: string;
 }
 
 interface CardHeadlineType {
@@ -297,6 +298,7 @@ interface CardHeadlineType {
     kicker?: KickerType;
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
+    byline?: string;
 }
 
 /**
@@ -392,8 +394,10 @@ interface TrailType {
     linkText: string;
     isLiveBlog: boolean;
     ageWarning: string;
-    image?: string;
     pillar: Pillar;
+    image?: string;
+    byline?: string;
+    showByline?: boolean;
 }
 
 // ------------------------------

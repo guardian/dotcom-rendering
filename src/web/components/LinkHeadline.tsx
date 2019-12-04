@@ -6,6 +6,7 @@ import { palette } from '@guardian/src-foundations';
 
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
+import { Byline } from '@root/src/web/components/Byline';
 
 const fontStyles = (size: SmallHeadlineSize) => css`
     ${headline[size]()};
@@ -40,6 +41,7 @@ export const LinkHeadline = ({
     showQuotes = false,
     size = 'xxsmall',
     link,
+    byline,
 }: LinkHeadlineType) => (
     <h4 className={fontStyles(size)}>
         {kicker && (
@@ -53,24 +55,30 @@ export const LinkHeadline = ({
         {showQuotes && <QuoteIcon colour={palette[pillar].main} size={size} />}
         {link ? (
             // We were passed a link object so headline should be a link, with link styling
-            <a
-                className={cx(
-                    // Composed styles - order matters for colours
-                    linkStyles,
-                    showUnderline && textDecorationUnderline,
-                    link.visitedColour && visitedStyles(link.visitedColour),
-                )}
-                href={link.to}
-                // If link.preventFocus is true, set tabIndex to -1 to ensure this
-                // link is not tabbed to. Useful if there is an outer link to the same
-                // place, such as with MostViewed
-                tabIndex={link.preventFocus ? -1 : undefined}
-            >
-                {headlineText}
-            </a>
+            <>
+                <a
+                    className={cx(
+                        // Composed styles - order matters for colours
+                        linkStyles,
+                        showUnderline && textDecorationUnderline,
+                        link.visitedColour && visitedStyles(link.visitedColour),
+                    )}
+                    href={link.to}
+                    // If link.preventFocus is true, set tabIndex to -1 to ensure this
+                    // link is not tabbed to. Useful if there is an outer link to the same
+                    // place, such as with MostViewed
+                    tabIndex={link.preventFocus ? -1 : undefined}
+                >
+                    {headlineText}
+                </a>
+                {byline && <Byline text={byline} pillar={pillar} size={size} />}
+            </>
         ) : (
             // We don't have a link so simply use a span here
-            <span>{headlineText}</span>
+            <>
+                <span>{headlineText}</span>
+                {byline && <Byline text={byline} pillar={pillar} size={size} />}
+            </>
         )}
     </h4>
 );

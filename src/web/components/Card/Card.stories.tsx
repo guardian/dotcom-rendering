@@ -714,6 +714,7 @@ export const Quad = () => (
                                         pillar: 'opinion',
                                     },
                                     showQuotes: true,
+                                    byline: 'George Monbiot',
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 avatar: {

@@ -106,6 +106,9 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                                     text: 'Live',
                                     showSlash: false,
                                 }}
+                                byline={
+                                    trail.showByline ? trail.byline : undefined
+                                }
                             />
                         ) : (
                             <LinkHeadline
@@ -114,6 +117,9 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                                 size="xxxsmall"
                                 showUnderline={isHovered}
                                 link={linkProps}
+                                byline={
+                                    trail.showByline ? trail.byline : undefined
+                                }
                             />
                         )}
                         <div className={marginTopStyles}>
