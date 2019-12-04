@@ -8,6 +8,7 @@
     "ios >= 11"
   ],
   "scripts": {
+    "upload": "node-riffraff-artifact",
     "test:build": "webpack --config webpack.config.js --config-name tests",
     "test:run": "npm run test:build && jest --verbose dist",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
