@@ -60,6 +60,10 @@ const imageTagStyles = css`
     clip-path: circle(36% at 50% 50%);
 `;
 
+const marginTopStyles = css`
+    margin-top: 4px;
+`;
+
 type Props = {
     trail: TrailType;
 };
@@ -112,9 +116,14 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                                 link={linkProps}
                             />
                         )}
-                        {trail.ageWarning && (
-                            <AgeWarning age={trail.ageWarning} size="small" />
-                        )}
+                        <div className={marginTopStyles}>
+                            {trail.ageWarning && (
+                                <AgeWarning
+                                    age={trail.ageWarning}
+                                    size="small"
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
             </a>
