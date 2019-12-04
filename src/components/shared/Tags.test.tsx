@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Tags from 'components/shared/Tags';
-import { Tag, TagType } from 'types/capi-thrift-models';
+import { Tag, TagType } from 'capiThriftModels';
 
 configure({ adapter: new Adapter() });
 
