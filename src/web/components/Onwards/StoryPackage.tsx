@@ -11,7 +11,7 @@ type Props = {
 export const StoryPackage = ({ content }: Props) => (
     <>
         <UL direction="row" bottomMargin={true}>
-            <LI padSides={true} percentage="33%">
+            <LI padSides={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[0].url,
@@ -30,7 +30,7 @@ export const StoryPackage = ({ content }: Props) => (
                     }}
                 />
             </LI>
-            <LI padSides={true} showDivider={true} percentage="33%">
+            <LI padSides={true} showDivider={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[1].url,
@@ -49,7 +49,7 @@ export const StoryPackage = ({ content }: Props) => (
                     }}
                 />
             </LI>
-            <LI padSides={true} showDivider={true} percentage="33%">
+            <LI padSides={true} showDivider={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[2].url,
@@ -68,7 +68,7 @@ export const StoryPackage = ({ content }: Props) => (
                     }}
                 />
             </LI>
-            <LI padSides={true} showDivider={true} percentage="33%">
+            <LI padSides={true} showDivider={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[3].url,
@@ -89,7 +89,7 @@ export const StoryPackage = ({ content }: Props) => (
             </LI>
         </UL>
         <UL direction="row">
-            <LI padSides={true} percentage="33%">
+            <LI padSides={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[4].url,
@@ -105,7 +105,7 @@ export const StoryPackage = ({ content }: Props) => (
                     }}
                 />
             </LI>
-            <LI padSides={true} showDivider={true} percentage="33%">
+            <LI padSides={true} showDivider={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[5].url,
@@ -121,7 +121,7 @@ export const StoryPackage = ({ content }: Props) => (
                     }}
                 />
             </LI>
-            <LI padSides={true} percentage="33%">
+            <LI padSides={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[6].url,
@@ -137,7 +137,7 @@ export const StoryPackage = ({ content }: Props) => (
                     }}
                 />
             </LI>
-            <LI padSides={true} showDivider={true} percentage="33%">
+            <LI padSides={true} showDivider={true} percentage="25%">
                 <Card
                     {...{
                         linkTo: content[7].url,
