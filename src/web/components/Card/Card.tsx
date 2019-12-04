@@ -3,7 +3,6 @@ import React from 'react';
 import { palette } from '@guardian/src-foundations';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
-import { Standfirst } from '@frontend/web/components/Standfirst';
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Avatar } from '@frontend/web/components/Avatar';
 
@@ -111,10 +110,7 @@ export const Card = ({
                             <div>
                                 {standfirst && (
                                     <StandfirstWrapper>
-                                        <Standfirst
-                                            designType="Article"
-                                            standfirst={standfirst}
-                                        />
+                                        {standfirst}
                                     </StandfirstWrapper>
                                 )}
                                 {avatar && (
