@@ -24,6 +24,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.23",
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
+    "@guardian/node-riffraff-artifact": "^0.1.0",
     "@guardian/src-foundations": "^0.5.6",
     "@types/jsdom": "^12.2.4",
     "aws-sdk": "^2.563.0",
