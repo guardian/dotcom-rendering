@@ -54,7 +54,7 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
     return bylineText.split(regex);
 };
 
-const RenderByline: React.FC<{
+const RenderContributor: React.FC<{
     bylineText: string;
     contributorTags: TagType[];
     pillar: Pillar;
@@ -66,7 +66,7 @@ const RenderByline: React.FC<{
             );
             if (associatedTags.length > 0) {
                 return (
-                    <BylineContributor
+                    <ContributorLink
                         contributor={token}
                         contributorTagId={associatedTags[0].id}
                         key={i}
@@ -80,7 +80,7 @@ const RenderByline: React.FC<{
     return <div className={bylineStyle(pillar)}>{renderedTokens}</div>;
 };
 
-const BylineContributor: React.FC<{
+const ContributorLink: React.FC<{
     contributor: string;
     contributorTagId: string;
 }> = ({ contributor, contributorTagId }) => (
@@ -93,7 +93,7 @@ const BylineContributor: React.FC<{
     </a>
 );
 
-export const Byline: React.FC<{
+export const Contributor: React.FC<{
     author: AuthorType;
     tags: TagType[];
     pillar: Pillar;
@@ -104,7 +104,7 @@ export const Byline: React.FC<{
 
     return (
         <address aria-label="Contributor info">
-            <RenderByline
+            <RenderContributor
                 bylineText={author.byline}
                 contributorTags={tags}
                 pillar={pillar}
