@@ -43,12 +43,16 @@ const bylineStyle = (pillar: Pillar) => css`
     }
 `;
 
-// this crazy function aims to split bylines such as
+// This crazy function aims to split bylines such as
 // 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
+// Or
+// 'Jane Doe and John Smith` to ['Jane Doe', ' and ', 'John Smith']
+// It does this so we can have separate links to both contributors
 const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
     const contributorTags = tags
         .filter(t => t.type === 'Contributor')
         .map(c => c.title);
+    // The contributor tag title should exist inside the bylineText for this regex to work
     const regex = new RegExp(`(${contributorTags.join('|')})`);
 
     return bylineText.split(regex);
