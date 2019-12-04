@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Keyline } from 'components/shared/Keyline';
-import { Pillar } from 'Pillar';
+import { Pillar } from 'pillar';
 
 configure({ adapter: new Adapter() });
 

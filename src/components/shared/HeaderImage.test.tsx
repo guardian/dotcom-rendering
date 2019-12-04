@@ -2,8 +2,8 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { BlockElement } from 'capiThriftModels';
-import { None, Option } from 'types/Option';
-import HeaderImage from 'components/shared/HeaderImage';
+import { None, Option } from 'types/option';
+import HeaderImage from 'components/shared/headerImage';
 
 configure({ adapter: new Adapter() });
 

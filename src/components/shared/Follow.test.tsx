@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Follow from 'components/shared/Follow';
+import Follow from 'components/shared/follow';
 
 configure({ adapter: new Adapter() });
 
