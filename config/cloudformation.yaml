@@ -260,6 +260,7 @@ Resources:
           chown -R ${App}:mapi /opt/${App}
           mkdir /var/log/${App}
           chown -R ${App}:mapi /var/log/${App}
+          export SERVER_PORT=9000
           /usr/local/node/pm2 start --uid ${App} --gid mapi /opt/${App}/server.js
           /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} mobile-log-aggregation-${Stage} /var/log/${App}/${App}.log
 
