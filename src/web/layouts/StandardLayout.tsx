@@ -29,6 +29,8 @@ import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
 import { StandardHeader } from './StandardHeader';
 
+import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
         return {
@@ -172,6 +174,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
             </Section>
 
             <div data-island="cookie-banner" />
+            <MobileStickyContainer />
         </>
     );
 };
