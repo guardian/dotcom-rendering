@@ -89,6 +89,8 @@ app.use("/public", express.static(path.resolve(__dirname, '../public')));
 app.use("/static", express.static(path.resolve(__dirname, '../dist')));
 app.use(compression());
 
+app.get('/favicon.ico', (_, res) => res.status(404).end());
+
 app.get('/*', async (req, res) => {
 
   try {
