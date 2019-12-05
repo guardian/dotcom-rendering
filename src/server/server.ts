@@ -89,6 +89,10 @@ app.use('/public', express.static(path.resolve(__dirname, '../public')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
 
+app.get('/healthcheck', (_req, res) => {
+  res.send("Ok");
+});
+
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
 app.get('/*', async (req, res) => {
