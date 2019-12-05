@@ -12,6 +12,8 @@
     "test:run": "npm run test:build && jest --verbose dist",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
+    "watch:client": "webpack-dev-server --config webpack.config.js --config-name client",
+    "watch": "npm run watch:server & npm run watch:client",
     "build:server": "webpack --config webpack.config.js --config-name server",
     "build:client": "webpack --config webpack.config.js --config-name client"
   },
@@ -58,6 +60,7 @@
     "jest": "^24.9.0",
     "ts-loader": "^6.2.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   }
 }
