@@ -22,7 +22,7 @@ This is the simplest way to get started, but will intermingle all the logs toget
 npm run watch
 ```
 
-View in a browser at http://localhost:8080
+View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport))
 
 _**Note**: You will need to refresh the page to see any changes you make to the server code. Any changes to client code should reload automatically._
 
@@ -42,7 +42,7 @@ To start the client:
 npm run watch:client
 ```
 
-View in a browser at http://localhost:8080
+View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport))
 
 _**Note**: You will need to refresh the page to see any changes you make to the server code. Any changes to client code should reload automatically._
 
