@@ -32,7 +32,7 @@ Parameters:
     AllowedValues:
       - mobile
       - mobile-preview
-    Description: Stage
+    Description: Stack
     Type: String
   AMI:
     Description: AMI use by the instances
@@ -292,4 +292,3 @@ Resources:
             Resource: !Ref CapiPreviewRole
       Roles:
         - !Ref DistributionRole
-
