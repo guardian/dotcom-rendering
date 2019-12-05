@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const fetch = require('node-fetch');
+const urljoin = require('url-join');
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -54,6 +55,155 @@ const go = async () => {
             },
         ),
     );
+
+    app.get('/onwards', async (req, res, next) => {
+        const firstPopularTag = (pageTags, isPaidContent) => {
+            // This function looks for the first tag in pageTags, that also exists in our whitelist
+            if (!pageTags) {
+                // If there are no page tags we will never find a match so
+                return false;
+            }
+            // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
+            // If you change this list then you should also update ^
+            // order matters here (first match wins)
+            const whitelistedTags = [
+                // sport tags
+                'sport/cricket',
+                'sport/rugby-union',
+                'sport/rugbyleague',
+                'sport/formulaone',
+                'sport/tennis',
+                'sport/cycling',
+                'sport/motorsports',
+                'sport/golf',
+                'sport/horse-racing',
+                'sport/boxing',
+                'sport/us-sport',
+                'sport/australia-sport',
+
+                // football tags
+                'football/championsleague',
+                'football/premierleague',
+                'football/championship',
+                'football/europeanfootball',
+                'football/world-cup-2014',
+
+                // football team tags
+                'football/manchester-united',
+                'football/chelsea',
+                'football/arsenal',
+                'football/manchestercity',
+                'football/tottenham-hotspur',
+                'football/liverpool',
+            ];
+
+            const isInWhitelist = tag => whitelistedTags.includes(tag);
+
+            // For paid content we just return the first tag, otherwise we
+            // filter for the first tag in the whitelist
+            return isPaidContent ? pageTags[0] : pageTags.find(isInWhitelist);
+        };
+
+        try {
+            if (!req.query.url) {
+                res.status(400).send(
+                    "url query param is required but it wasn't supplied here",
+                );
+            }
+
+            // Call CAPI to get the config data for this article
+            const url = new URL(req.query.url);
+            const {
+                hasRelated,
+                hasStoryPackage,
+                isAdFreeUser,
+                config: {
+                    pageId,
+                    isPaidContent,
+                    ajaxUrl,
+                    showRelatedContent,
+                    keywordIds,
+                    contentType,
+                },
+            } = await fetch(
+                // Reconstruct the passed url adding .json?dcr which we need to force dcr to return json
+                urljoin(url.origin, `${url.pathname}.json?dcr=true`),
+            ).then(article => article.json());
+
+            let onwards = [];
+            if (hasStoryPackage) {
+                // Always fetch the story package is it exists
+                const storyPackage = await fetch(
+                    urljoin(
+                        ajaxUrl,
+                        'story-package',
+                        `${url.pathname}.json?dcr=true`,
+                    ),
+                ).then(result => result.json());
+
+                onwards.push({
+                    ...storyPackage,
+                    layout: 'relatedContent',
+                });
+            } else if (isAdFreeUser && isPaidContent) {
+                // Don't show any related content (other than story packages) for
+                // adfree users when the content is paid for
+            } else if (showRelatedContent && hasRelated) {
+                // Related content can be a collection of articles based on
+                // two things, 1: A popular tag, or 2: A generic text match
+                const pageTags = keywordIds.split(',');
+                const popularTag = firstPopularTag(pageTags, isPaidContent);
+
+                let relatedUrl;
+                if (popularTag) {
+                    // Use popular in tag endpoint
+                    relatedUrl = `/popular-in-tag/${popularTag}.json`;
+                } else {
+                    // Default to generic related endpoint
+                    relatedUrl = `/related/${pageId}.json`;
+                }
+                relatedUrl += '?dcr=true';
+
+                // --- Tag excludes --- //
+                let tagsToExclude = [];
+                // Exclude ad features from non-ad feature content
+                if (!isPaidContent) {
+                    tagsToExclude.push('tone/advertisement-features');
+                }
+                // We don't want to show professional network content on videos or interactives
+                if (
+                    contentType.toLowerCase() === 'video' ||
+                    contentType.toLowerCase() === 'interactive'
+                ) {
+                    tagsToExclude.push(
+                        'guardian-professional/guardian-professional',
+                    );
+                }
+
+                // Add any exclude tags to the url
+                if (tagsToExclude.length > 0) {
+                    const queryParams = tagsToExclude.map(
+                        tag => `exclude-tag=${tag}`,
+                    );
+                    relatedUrl += `&${queryParams.join('&')}`;
+                }
+
+                const relatedContent = await fetch(
+                    urljoin(ajaxUrl, relatedUrl),
+                ).then(result => result.json());
+
+                onwards.push({
+                    ...relatedContent,
+                    layout: 'relatedContent',
+                });
+            }
+
+            res.status(200).send(onwards);
+        } catch (error) {
+            // eslint-disable-next-line @typescript-eslint/tslint/config
+            console.error(error);
+        }
+    });
 
     app.get(
         '/Article',
