@@ -49,7 +49,8 @@ describe('Keyline component renders as expected', () => {
 
     it('Renders link to tag', () => {
         const tags = shallow(<Tags tags={tagsProps} />)
-        expect(tags.find('li').html()).toBe('<li><a href="https://mapi.co.uk/tag">Tag title</a></li>')
+        const link = tags.find('a')
+        expect(link.prop('href')).toBe('https://mapi.co.uk/tag')
     })
 
     it('Renders tag title', () => {
