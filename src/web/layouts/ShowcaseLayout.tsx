@@ -25,6 +25,8 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 
 import { ShowcaseHeader } from './ShowcaseHeader';
 
+import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -157,5 +159,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => (
         </Section>
 
         <div data-island="cookie-banner" />
+        <MobileStickyContainer />
     </>
 );
