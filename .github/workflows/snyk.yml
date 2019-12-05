@@ -1,0 +1,22 @@
+name: Snyk
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  validate:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
