@@ -252,7 +252,15 @@ Resources:
         "Fn::Base64":
           !Sub |
           #!/bin/bash -ev
-          echo "Hello" > /tmp/hello.txt
+          groupadd mapi
+          useradd -r -m -s /usr/bin/nologin -g mapi ${App}
+          aws --region ${AWS::Region} s3 cp s3://mobile-apps-api-dist/${Stack}/${Stage}/${App}/${App}.zip /tmp
+          mkdir -p /opt/${App}
+          unzip /tmp/${App}.zip -d /opt/${App}
+          chown -R ${App}:mapi /opt/${App}
+          mkdir /var/log/${App}
+          chown -R ${App}:mapi /var/log/${App}
+          /usr/local/node/pm2 start --uid ${App} --gid mapi /opt/${App}/server.js
           /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} mobile-log-aggregation-${Stage} /var/log/${App}/${App}.log
 
   ScaleDownPolicy:
