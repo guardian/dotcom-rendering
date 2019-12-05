@@ -100,6 +100,13 @@ export const CardHeadline = ({
                 {headlineText}
             </span>
         </h4>
-        {byline && <Byline text={byline} pillar={pillar} size={size} />}
+        {byline && (
+            <Byline
+                text={byline}
+                designType={designType}
+                pillar={pillar}
+                size={size}
+            />
+        )}
     </>
 );

@@ -281,6 +281,7 @@ type HeadlineLink = {
 };
 
 interface LinkHeadlineType {
+    designType: DesignType;
     headlineText: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
@@ -391,6 +392,7 @@ type JSXElements = JSX.Element | JSX.Element[];
 
 interface TrailType {
     url: string;
+    designType: DesignType;
     linkText: string;
     isLiveBlog: boolean;
     ageWarning: string;

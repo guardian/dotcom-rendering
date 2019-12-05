@@ -34,6 +34,7 @@ const visitedStyles = (visitedColour: string) => css`
 `;
 
 export const LinkHeadline = ({
+    designType,
     headlineText,
     pillar,
     showUnderline = false,
@@ -71,13 +72,27 @@ export const LinkHeadline = ({
                 >
                     {headlineText}
                 </a>
-                {byline && <Byline text={byline} pillar={pillar} size={size} />}
+                {byline && (
+                    <Byline
+                        text={byline}
+                        designType={designType}
+                        pillar={pillar}
+                        size={size}
+                    />
+                )}
             </>
         ) : (
             // We don't have a link so simply use a span here
             <>
                 <span>{headlineText}</span>
-                {byline && <Byline text={byline} pillar={pillar} size={size} />}
+                {byline && (
+                    <Byline
+                        text={byline}
+                        designType={designType}
+                        pillar={pillar}
+                        size={size}
+                    />
+                )}
             </>
         )}
     </h4>
