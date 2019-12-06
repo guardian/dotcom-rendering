@@ -66,7 +66,7 @@ const generateArticleHtml = (parsedCapi: Result<string, Capi>, imageSalt: string
       .map(renderToString)
       .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
 
-const includesTweets = (parsedCapi: Result<string, Capi>): Boolean => parsedCapi
+const includesTweets = (parsedCapi: Result<string, Capi>): boolean => parsedCapi
   .either(
     () => false,
     data => !!data.response.content.blocks.body

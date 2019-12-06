@@ -87,7 +87,7 @@ const ArticleContainerStyles = css`
     }
 `;
 
-function ArticleContainer(includesTweets: Boolean): JSX.Element {
+function ArticleContainer(includesTweets: boolean): JSX.Element {
     const twitterScript = includesTweets
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
