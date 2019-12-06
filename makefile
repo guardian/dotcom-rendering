@@ -55,7 +55,7 @@ logs:
 
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
-	@NODE_ENV=development node scripts/frontend/dev-server
+	@NODE_ENV=development nodemon scripts/frontend/dev-server
 
 # cypress #####################################
 
