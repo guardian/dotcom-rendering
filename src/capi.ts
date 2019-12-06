@@ -6,12 +6,16 @@ import { Option, fromNullable, None, Some } from 'types/option';
 import { isImage } from 'components/blocks/image';
 
 
-// ----- Types ----- //
+// ----- Parsing ----- //
 
-interface Capi {
-    response: {
-        content: Content;
-    };
+const enum ErrorStatus {
+    NotFound,
+    Unknown,
+}
+
+type Error = {
+    status: ErrorStatus,
+    message: string,
 }
 
 interface ErrorResponse {
@@ -28,6 +32,71 @@ interface ErrorMessage {
 // sometimes it returns that message nested inside a `response` object.
 type CapiError = ErrorResponse | ErrorMessage;
 
+const isErrorResponse = (error: CapiError): error is ErrorResponse => 'response' in error;
+const isErrorMessage = (error: CapiError): error is ErrorMessage => 'message' in error;
+
+function extractErrorMessage(capiError: CapiError): Option<string> {
+    if (isErrorResponse(capiError)) {
+        return new Some(capiError.response.message);
+    } else if (isErrorMessage(capiError)) {
+        return new Some(capiError.message);
+    }
+
+    return new None();
+}
+
+function parseCapiError(capiResponse: string): string {
+    try {
+        const capiError: CapiError = JSON.parse(capiResponse);
+
+        return extractErrorMessage(capiError)
+            .map(msg => `It came with this message: ${msg}`)
+            .withDefault('There was no message to explain why.');
+    } catch (e) {
+        return `I wasn\'t able to parse the error message because: ${e}`;
+    }
+}
+
+function parseContent(capiResponse: string): Result<string, Content> {
+    try {
+        const content = JSON.parse(capiResponse).response.content;
+
+        if (content === undefined) {
+            return new Err('I couldn\'t parse the CAPI response because the content field was missing.');
+        }
+        
+        return new Ok(content);
+    } catch (e) {
+        return new Err(`I couldn't parse the CAPI response because: ${e}`);
+    }
+}
+
+function getContentFromResponse(status: number, path: string, responseBody: string): Result<Error, Content> {
+
+    switch (status) {
+        case 200:
+            return parseContent(responseBody).mapError(message => ({
+                status: ErrorStatus.Unknown,
+                message,
+            }));
+    
+        case 404:
+            return new Err({
+                status: ErrorStatus.NotFound,
+                message: `CAPI says that it doesn't recognise this resource: ${path}`,
+            });
+        default:
+            return new Err({
+                status: ErrorStatus.Unknown,
+                message: `When I tried to talk to CAPI I received a ${status}. ${parseCapiError(responseBody)}`,
+            });
+    }
+
+}
+
+
+// ----- Lookups ----- //
+
 interface Series {
     webTitle?: string;
     webUrl?: string;
@@ -40,52 +109,26 @@ interface Contributor {
     bylineLargeImageUrl?: string;
 }
 
-
-// ----- Functions ----- //
-
 const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
     tags.filter((tag: Tag) => tag.type === type_);
 
 const isFeature = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/features');
 
-function parseCapi(capiResponse: string): Result<string, Capi> {
-    try {
-        return new Ok(JSON.parse(capiResponse));
-    } catch (_) {
-        return new Err('Could not parse the CAPI response');
-    }
-}
-
-const isErrorResponse = (error: CapiError): error is ErrorResponse => 'response' in error;
-const isErrorMessage = (error: CapiError): error is ErrorMessage => 'message' in error;
-
-function errorMessage(capiError: CapiError): Option<string> {
-    if (isErrorResponse(capiError)) {
-        return new Some(capiError.response.message);
-    } else if (isErrorMessage(capiError)) {
-        return new Some(capiError.message);
-    }
-
-    return new None();
-}
-
-function parseCapiError(capiResponse: string): Result<string, string> {
-    try {
-        const capiError: CapiError = JSON.parse(capiResponse);
-        const message = errorMessage(capiError);
-
-        return new Ok(message
-            .map(msg => `It came with this message: ${msg}`)
-            .withDefault('There was no message to explain why.')
-        );
-    } catch (_) {
-        return new Err('Could not parse the CAPI error');
-    }
-}
-
 const isSingleContributor = (contributors: Contributor[]): boolean =>
     contributors.length === 1;
+
+const articleSeries = (content: Content): Tag =>
+    tagsOfType('series')(content.tags)[0];
+
+const articleContributors = (content: Content): Tag[] =>
+    tagsOfType('contributor')(content.tags);
+
+const articleMainImage = (content: Content): Option<BlockElement> =>
+    fromNullable(content.blocks.main.elements.filter(isImage)[0]);
+
+
+// ----- Functions ----- //
 
 // TODO: request less data from capi
 const capiEndpoint = (articleId: string, key: string): string => {
@@ -103,28 +146,18 @@ const capiEndpoint = (articleId: string, key: string): string => {
   
 }
 
-const articleSeries = (content: Content): Tag =>
-    tagsOfType('series')(content.tags)[0];
-
-const articleContributors = (content: Content): Tag[] =>
-    tagsOfType('contributor')(content.tags);
-
-const articleMainImage = (content: Content): Option<BlockElement> =>
-    fromNullable(content.blocks.main.elements.filter(isImage)[0]);
-
 
 // ----- Exports ----- //
 
 export {
-    Capi,
     Series,
     Contributor,
+    ErrorStatus as CapiError,
+    getContentFromResponse,
     isFeature,
-    parseCapi,
-    parseCapiError,
     isSingleContributor,
-    capiEndpoint,
     articleSeries,
     articleContributors,
     articleMainImage,
+    capiEndpoint,
 };
