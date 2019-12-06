@@ -7,7 +7,7 @@ import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
-import { Byline } from './Byline';
+import { Contributor } from './Contributor';
 
 /* tslint:disable */
 export default {
@@ -93,7 +93,7 @@ export const paddedLines = () => {
                     <LeftColumn>
                         <div style={{ marginTop: '30px' }} />
                         <GuardianLines />
-                        <Byline
+                        <Contributor
                             author={{ byline: 'Jane doe' }}
                             tags={[]}
                             pillar="news"
@@ -130,7 +130,7 @@ export const squigglyLines = () => {
                     <LeftColumn>
                         <div style={{ marginTop: '30px' }} />
                         <GuardianLines squiggly={true} />
-                        <Byline
+                        <Contributor
                             author={{ byline: 'Jane doe' }}
                             tags={[]}
                             pillar="news"

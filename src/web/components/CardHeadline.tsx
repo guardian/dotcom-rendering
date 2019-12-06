@@ -6,6 +6,7 @@ import { palette } from '@guardian/src-foundations';
 
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
+import { Byline } from '@root/src/web/components/Byline';
 
 const fontStyles = (size: SmallHeadlineSize) => css`
     ${headline[size]()};
@@ -79,20 +80,33 @@ export const CardHeadline = ({
     showQuotes,
     kicker,
     size = 'xxsmall',
+    byline,
 }: CardHeadlineType) => (
-    <h4 className={fontStyles(size)}>
-        {kicker && (
-            <Kicker
-                text={kicker.text}
+    <>
+        <h4 className={fontStyles(size)}>
+            {kicker && (
+                <Kicker
+                    text={kicker.text}
+                    pillar={pillar}
+                    showPulsingDot={kicker.showPulsingDot}
+                    showSlash={kicker.showSlash}
+                />
+            )}
+            {showQuotes && (
+                <QuoteIcon colour={palette[pillar].main} size={size} />
+            )}
+
+            <span className={headlineStyles(designType, pillar, size)}>
+                {headlineText}
+            </span>
+        </h4>
+        {byline && (
+            <Byline
+                text={byline}
+                designType={designType}
                 pillar={pillar}
-                showPulsingDot={kicker.showPulsingDot}
-                showSlash={kicker.showSlash}
+                size={size}
             />
         )}
-        {showQuotes && <QuoteIcon colour={palette[pillar].main} size={size} />}
-
-        <span className={headlineStyles(designType, pillar, size)}>
-            {headlineText}
-        </span>
-    </h4>
+    </>
 );
