@@ -199,7 +199,7 @@ Resources:
             Statement:
               - Action: s3:GetObject
                 Effect: Allow
-                Resource: arn:aws:s3:::mobile-apps-api-dist/${Stack}/${Stage}/${App}/*
+                Resource: arn:aws:s3:::mobile-apps-api-dist/*
               - Action: ec2:DescribeTags
                 Effect: Allow
                 Resource: '*'
