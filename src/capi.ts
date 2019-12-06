@@ -14,6 +14,13 @@ interface Capi {
     };
 }
 
+interface CapiError {
+    response?: {
+        message: string,
+    }
+    message?: string,
+};
+
 interface Series {
     webTitle?: string;
     webUrl?: string;
@@ -40,6 +47,17 @@ function parseCapi(capiResponse: string): Result<string, Capi> {
         return new Ok(JSON.parse(capiResponse));
     } catch (_) {
         return new Err('Could not parse the CAPI response');
+    }
+}
+
+function parseCapiError(capiResponse: string): Result<string, string> {
+    try {
+        const capiError: CapiError = JSON.parse(capiResponse);
+        const message = capiError.response?.message ?? capiError.message;
+
+        return new Ok(message ? `It came with this message: ${message}` : 'There was no message to explain why.');
+    } catch (_) {
+        return new Err('Could not parse the CAPI error');
     }
 }
 
@@ -80,6 +98,7 @@ export {
     Contributor,
     isFeature,
     parseCapi,
+    parseCapiError,
     isSingleContributor,
     capiEndpoint,
     articleSeries,

@@ -3,19 +3,19 @@
 import path from 'path';
 import fs from 'fs';
 import { promisify } from 'util';
-import express from 'express';
+import express, { Response } from 'express';
 import compression from 'compression';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import fetch from 'node-fetch';
+import fetch, { Response as FetchResponse } from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/result';
 import { Content } from 'capiThriftModels';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import { getConfigValue } from 'server/ssmConfig';
-import { parseCapi, capiEndpoint } from 'capi';
-import { Capi } from 'capi';
+import { Capi, parseCapi, capiEndpoint, parseCapiError } from 'capi';
+
 
 // ----- Setup ----- //
 
@@ -79,6 +79,31 @@ async function readTemplate(): Promise<Result<string, string>> {
   }
 }
 
+function renderArticle(template: Result<string, string>, imageSalt: string) {
+
+  return async (capiResponse: FetchResponse): Promise<Result<string, string>> => {
+    const capiData = await capiResponse.text();
+
+    return template.andThen(generateArticleHtml(capiData, imageSalt));
+  };
+
+}
+
+async function capiError(capiResponse: FetchResponse): Promise<string> {
+
+  return parseCapiError(await capiResponse.text())
+    .either(
+      parseError => `Problem talking to CAPI. Received a ${capiResponse.status}, and I'm not sure why because: ${parseError}.`,
+      capiError => `When I tried to talk to CAPI I received a ${capiResponse.status}. ${capiError}`,
+    );
+
+  }
+
+function sendError(res: Response, message: string): void {
+  console.error(message);
+  res.status(500).end();
+}
+
 
 // ----- App ----- //
 
@@ -96,25 +121,32 @@ app.get('/*', async (req, res) => {
   try {
 
     const articleId = req.params[0] || defaultId;
-
     const template = await readTemplate();
     const key = await getConfigValue<string>("capi.key");
     const imageSalt = await getConfigValue<string>('apis.img.salt');
-    const resp = await fetch(capiEndpoint(articleId, key), {});
-    const capi = await resp.text();
+    const capiResponse = await fetch(capiEndpoint(articleId, key));
 
-    template
-      .andThen(generateArticleHtml(capi, imageSalt))
-      .either(
-        err => { throw err },
-        data => res.send(data),
-      );
+    switch (capiResponse.status) {
+      case 200:
+
+        (await renderArticle(template, imageSalt)(capiResponse)).either(
+          err => sendError(res, `Failed to render the article because: ${err}`),
+          html => res.send(html),
+        );
+
+        break;
+      
+      case 404:
+        console.warn(`Request for a resource that CAPI does not recognise: ${req.params[0]}`);
+        res.status(404).end();
+        break;
+      
+      default:
+        sendError(res, await capiError(capiResponse));
+    }
 
   } catch (e) {
-
-    console.error(e);
-    res.status(500).send('An error occurred, check the console');
-
+    sendError(res, `This error occurred, but I don't know why: ${e}`);
   }
 
 });
