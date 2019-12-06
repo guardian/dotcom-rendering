@@ -7,6 +7,7 @@ import { Monad } from './monad';
 
 interface ResultInterface<E, B> extends Monad<B> {
     either<C>(f: (e: E) => C, g: (b: B) => C): C;
+    mapError<F>(g: (e: E) => F): Result<F, B>;
 }
 
 class Ok<E, B> implements ResultInterface<E, B> {
@@ -23,6 +24,10 @@ class Ok<E, B> implements ResultInterface<E, B> {
 
     andThen<C>(f: (b: B) => Result<E, C>): Result<E, C> {
         return f(this.value);
+    }
+
+    mapError<F>(_g: (e: E) => F): Result<F, B> {
+        return new Ok(this.value);
     }
 
     constructor(value: B) {
@@ -45,6 +50,10 @@ class Err<E, B> implements ResultInterface<E, B> {
 
     andThen<C>(_f: (b: B) => Result<E, C>): Result<E, C> {
         return new Err(this.error);
+    }
+
+    mapError<F>(g: (e: E) => F): Result<F, B> {
+        return new Err(g(this.error));
     }
 
     constructor(error: E) {
