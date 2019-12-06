@@ -8,7 +8,7 @@ import { Contributor } from 'capi';
 import Follow from 'components/shared/follow';
 import { PillarStyles } from 'pillar';
 
-const OpinonBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+const OpinionBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {
         margin: ${basePx(1, 0, 2, 0)};
 
@@ -56,7 +56,7 @@ const OpinionByline = ({
     className,
 }: OpinionBylineProps): JSX.Element =>
     <div
-        css={[className, OpinonBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
+        css={[className, OpinionBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
     >
         <div css={sidePadding}>
             <div className="author">
