@@ -14,8 +14,8 @@ const enum ErrorStatus {
 }
 
 type Error = {
-    status: ErrorStatus,
-    message: string,
+    status: ErrorStatus;
+    message: string;
 }
 
 interface ErrorResponse {
@@ -71,7 +71,7 @@ function parseContent(capiResponse: string): Result<string, Content> {
     }
 }
 
-function getContentFromResponse(status: number, path: string, responseBody: string): Result<Error, Content> {
+function getContent(status: number, path: string, responseBody: string): Result<Error, Content> {
 
     switch (status) {
         case 200:
@@ -153,7 +153,7 @@ export {
     Series,
     Contributor,
     ErrorStatus as CapiError,
-    getContentFromResponse,
+    getContent,
     isFeature,
     isSingleContributor,
     articleSeries,

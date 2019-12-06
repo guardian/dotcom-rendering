@@ -14,7 +14,7 @@ import { Content } from 'capiThriftModels';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import { getConfigValue } from 'server/ssmConfig';
-import { CapiError, capiEndpoint, getContentFromResponse } from 'capi';
+import { CapiError, capiEndpoint, getContent } from 'capi';
 
 
 // ----- Setup ----- //
@@ -33,10 +33,10 @@ const enum Support {
 }
 
 type Supported = {
-  kind: Support.Supported,
+  kind: Support.Supported;
 } | {
-  kind: Support.Unsupported,
-  reason: string,
+  kind: Support.Unsupported;
+  reason: string;
 }
 
 function checkSupport(content: Content): Supported {
@@ -100,7 +100,7 @@ app.get('/*', async (req, res) => {
     const imageSalt = await getConfigValue<string>('apis.img.salt');
     const capiResponse = await fetch(capiEndpoint(articleId, key));
 
-    getContentFromResponse(capiResponse.status, articleId, await capiResponse.text()).either(
+    getContent(capiResponse.status, articleId, await capiResponse.text()).either(
       error => {
 
         if (error.status === CapiError.NotFound) {
