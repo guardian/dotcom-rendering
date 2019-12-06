@@ -53,11 +53,11 @@ const getArticleComponent = (imageSalt: string) =>
   function ArticleComponent(capi: Content): React.ReactElement {
     switch (capi.type) {
       case 'article':
-          if (pillarFromString(capi.pillarId) === Pillar.opinion) {
-            return React.createElement(OpinionArticle, { capi, imageSalt });
-          }
+          const ArticleComponent = (pillarFromString(capi.pillarId) === Pillar.opinion)
+            ? OpinionArticle
+            : Article
 
-        return React.createElement(Article, { capi, imageSalt });
+        return React.createElement(ArticleComponent, { capi, imageSalt });
       case 'liveblog':
         return React.createElement(
           LiveblogArticle,

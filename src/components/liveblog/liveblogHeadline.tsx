@@ -1,5 +1,5 @@
 import React from 'react';
-import { basePx, headlineFont } from 'styles';
+import { basePx, headlineFont, headlineFontStyles } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import LeftColumn from 'components/shared/leftColumn';
@@ -9,9 +9,7 @@ const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => c
     padding: ${basePx(0, 0, 4, 0)};
     background: ${kicker};
     h1 {
-        font-size: 2.8rem;
-        line-height: 3.2rem;
-        margin: 0;
+        ${headlineFontStyles}
         ${headlineFont}
         font-weight: 500;
         color: ${palette.neutral[100]};

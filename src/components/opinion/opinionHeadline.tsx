@@ -1,5 +1,5 @@
 import React from 'react';
-import { basePx, headlineFont, darkModeCss } from 'styles';
+import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 import { css } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import { PillarStyles } from 'pillar';
@@ -15,18 +15,15 @@ const HeadlineStyles = css`
     ${headlineFont}
 
     h1 {
-        font-size: 2.8rem;
-        line-height: 3.2rem;
-        margin: 0;
         font-weight: 300;
+        ${headlineFontStyles}
         color: ${palette.neutral[7]};
     }
 
     address a {
-        font-size: 2.8rem;
-        line-height: 3.2rem;
         font-style: italic;
         font-weight: 100;
+        ${headlineFontStyles}
         color: ${palette.opinion.main};
         text-decoration: none;
     }

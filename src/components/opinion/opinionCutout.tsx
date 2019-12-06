@@ -4,6 +4,8 @@ import { css, SerializedStyles } from '@emotion/core';
 import { Contributor, isSingleContributor } from 'capi';
 import { transformUrl } from 'asset';
 
+const imageWidth = 68;
+
 const OpinionCutoutStyles = css`
     position: relative;
 `;
@@ -29,7 +31,7 @@ const OpinionCutout = ({
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl) {
-        const imgSrc = transformUrl(imageSalt, contributor.bylineLargeImageUrl, 68*3);
+        const imgSrc = transformUrl(imageSalt, contributor.bylineLargeImageUrl, imageWidth*3);
         return (
             <div css={[className, OpinionCutoutStyles]}>
                 <img css={ImageStyles} src={imgSrc} alt={contributor.webTitle}/>
