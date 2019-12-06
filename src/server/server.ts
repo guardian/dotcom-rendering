@@ -11,11 +11,14 @@ import fetch from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/result';
 import { Content } from 'capiThriftModels';
-import Article from 'components/news/article';
-import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import { getConfigValue } from 'server/ssmConfig';
 import { parseCapi, capiEndpoint } from 'capi';
 import { Capi } from 'capi';
+import { Pillar, pillarFromString } from 'pillar';
+
+import Article from 'components/news/article';
+import LiveblogArticle from 'components/liveblog/liveblogArticle';
+import OpinionArticle from 'components/opinion/opinionArticle';
 
 // ----- Setup ----- //
 
@@ -50,6 +53,10 @@ const getArticleComponent = (imageSalt: string) =>
   function ArticleComponent(capi: Content): React.ReactElement {
     switch (capi.type) {
       case 'article':
+          if (pillarFromString(capi.pillarId) === Pillar.opinion) {
+            return React.createElement(OpinionArticle, { capi, imageSalt });
+          }
+
         return React.createElement(Article, { capi, imageSalt });
       case 'liveblog':
         return React.createElement(

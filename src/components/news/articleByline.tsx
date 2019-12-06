@@ -25,11 +25,11 @@ const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
             color: ${kicker};
         }
 
-        .date, .follow {
+        time, .follow {
             ${textSans}
         }
 
-        .date {
+        time {
             font-size: 1.4rem;
             color: ${palette.neutral[46]};
         }
@@ -45,7 +45,7 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
             color: ${inverted};
         }
 
-        .date {
+        time {
             color: ${palette.neutral[60]};
         }
     }
