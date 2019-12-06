@@ -1,8 +1,6 @@
 // ----- Imports ----- //
 
 import path from 'path';
-import fs from 'fs';
-import { promisify } from 'util';
 import express from 'express';
 import compression from 'compression';
 import React from 'react';
@@ -10,9 +8,10 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/result';
-import { Content } from 'capiThriftModels';
+import { Content, ElementType } from 'capiThriftModels';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
+import ArticleContainer from 'components/shared/articleContainer';
 import { getConfigValue } from 'server/ssmConfig';
 import { parseCapi, capiEndpoint } from 'capi';
 import { Capi } from 'capi';
@@ -21,9 +20,6 @@ import { Capi } from 'capi';
 
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
-const readFileP = promisify(fs.readFile);
-const templateFile = './src/articleTemplate.html';
-
 
 // ----- Functions ----- //
 
@@ -61,24 +57,22 @@ const getArticleComponent = (imageSalt: string) =>
     }
   }
 
-const generateArticleHtml = (capiResponse: string, imageSalt: string) =>
+const generateArticleHtml = (parsedCapi: Result<string, Capi>, imageSalt: string) =>
   (data: string): Result<string, string> =>
-    parseCapi(capiResponse)
+    parsedCapi
       .andThen(capi => fromUnsafe(() => getContent(capi), 'Unexpected CAPI response structure'))
       .andThen(id)
       .map(getArticleComponent(imageSalt))
       .map(renderToString)
       .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
 
-async function readTemplate(): Promise<Result<string, string>> {
-  try {
-    const data = await readFileP(path.resolve(templateFile), 'utf8');
-    return new Ok(data);
-  } catch (_) {
-    return new Err('Could not read template file');
-  }
-}
-
+const includesTweets = (parsedCapi: Result<string, Capi>): Boolean => parsedCapi
+  .either(
+    () => false,
+    data => !!data.response.content.blocks.body
+      .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
+      .some(Boolean)
+  );
 
 // ----- App ----- //
 
@@ -97,14 +91,15 @@ app.get('/*', async (req, res) => {
 
     const articleId = req.params[0] || defaultId;
 
-    const template = await readTemplate();
     const key = await getConfigValue<string>("capi.key");
     const imageSalt = await getConfigValue<string>('apis.img.salt');
     const resp = await fetch(capiEndpoint(articleId, key), {});
     const capi = await resp.text();
+    const parsedCapi = parseCapi(capi);
+    const articleContainer = ArticleContainer(includesTweets(parsedCapi))
+    const template = renderToString(articleContainer)
 
-    template
-      .andThen(generateArticleHtml(capi, imageSalt))
+    generateArticleHtml(parsedCapi, imageSalt)(template)
       .either(
         err => { throw err },
         data => res.send(data),
