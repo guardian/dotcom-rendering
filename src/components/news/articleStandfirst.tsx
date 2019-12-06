@@ -55,7 +55,11 @@ const ArticleStandfirst = ({
     className
 }: ArticleStandfirstProps): JSX.Element =>
     <div
-        css={[className, StandfirstStyles(feature, pillarStyles), StandfirstDarkStyles(pillarStyles)]}
+        css={[
+            className,
+            StandfirstStyles(feature, pillarStyles),
+            StandfirstDarkStyles(pillarStyles)
+        ]}
         dangerouslySetInnerHTML={{__html: transform(standfirst)}}
     />
 
