@@ -2,7 +2,7 @@
 
 import { Result, Ok, Err } from 'types/result';
 import { Content, Tag, BlockElement } from 'capiThriftModels';
-import { Option, fromNullable } from 'types/option';
+import { Option, fromNullable, None, Some } from 'types/option';
 import { isImage } from 'components/blocks/image';
 
 
@@ -14,12 +14,19 @@ interface Capi {
     };
 }
 
-interface CapiError {
-    response?: {
-        message: string,
-    }
-    message?: string,
-};
+interface ErrorResponse {
+    response: {
+        message: string;
+    };
+}
+
+interface ErrorMessage {
+    message: string;
+}
+
+// Sometimes CAPI returns an error message at the top level of the returned JSON,
+// sometimes it returns that message nested inside a `response` object.
+type CapiError = ErrorResponse | ErrorMessage;
 
 interface Series {
     webTitle?: string;
@@ -50,12 +57,28 @@ function parseCapi(capiResponse: string): Result<string, Capi> {
     }
 }
 
+const isErrorResponse = (error: CapiError): error is ErrorResponse => 'response' in error;
+const isErrorMessage = (error: CapiError): error is ErrorMessage => 'message' in error;
+
+function errorMessage(capiError: CapiError): Option<string> {
+    if (isErrorResponse(capiError)) {
+        return new Some(capiError.response.message);
+    } else if (isErrorMessage(capiError)) {
+        return new Some(capiError.message);
+    }
+
+    return new None();
+}
+
 function parseCapiError(capiResponse: string): Result<string, string> {
     try {
         const capiError: CapiError = JSON.parse(capiResponse);
-        const message = capiError.response?.message ?? capiError.message;
+        const message = errorMessage(capiError);
 
-        return new Ok(message ? `It came with this message: ${message}` : 'There was no message to explain why.');
+        return new Ok(message
+            .map(msg => `It came with this message: ${msg}`)
+            .withDefault('There was no message to explain why.')
+        );
     } catch (_) {
         return new Err('Could not parse the CAPI error');
     }
