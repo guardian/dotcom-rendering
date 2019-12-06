@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  validate:
+  snyk:
 
     runs-on: ubuntu-latest
 
