@@ -82,8 +82,6 @@ async function readTemplate(): Promise<Result<string, string>> {
 
 // ----- App ----- //
 
-const port = process.env.SERVER_PORT ?? 3040;
-
 const app = express();
 
 app.use(express.json({ limit: '50mb' }));
@@ -125,4 +123,5 @@ app.get('/article/*', async (req, res) => {
 
 });
 
+const port = 3040;
 app.listen(port, () => console.log(`apps-rendering listening on port ${port}!`));
