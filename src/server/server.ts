@@ -95,7 +95,7 @@ app.get('/healthcheck', (_req, res) => {
 
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
-app.get('/article/*', async (req, res) => {
+app.get('/*', async (req, res) => {
 
   try {
 
