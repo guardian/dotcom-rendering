@@ -49,20 +49,18 @@ Parameters:
   ASGMaxSize:
     Type: Number
     Description: Maximum size of the autoscaling group
-  CapiPreviewRole:
-    Type: String
-    Description: ARN of the CAPI preview role (optional)
   DefaultVpcSecurityGroup:
     Type: AWS::EC2::SecurityGroup::Id
     Description: The default security group of the MAPI vpc
-
-
-Conditions:
-  HasCapiPreviewRole:
-    !Not
-    - !Equals
-      - ""
-      - !Ref CapiPreviewRole
+  CertificateArn:
+    Type: String
+    Description: The ARN of the SSL certificate used by the ALB
+  HostedZone:
+    Type: String
+    Description: The HostedZone, should contain the trailing dot zone.example.com.
+  DomainName:
+    Type: String
+    Description: The DomainName of the ALB, should contain the trailing dot stuff.zone.example.com.
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -83,6 +81,72 @@ Metadata:
           - ASGMaxSize
 
 Resources:
+
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub rendering-${Stack}-${Stage}
+      Scheme: internal
+      SecurityGroups:
+        - !Ref DefaultVpcSecurityGroup
+        - !Ref LoadBalancerToEc2SecurityGroup
+      Subnets: !Split [ ',', !ImportValue MobileAppsApiVPC-Subnets]
+      Tags:
+        - Key: App
+          Value: !Ref App
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Stack
+          Value: !Ref Stack
+
+  LoadBalancerToEc2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Open up HTTP access to load balancer
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 3040
+          IpProtocol: tcp
+          ToPort: 3040
+      VpcId: !ImportValue MobileAppsApiVPC-VpcId
+
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      DefaultActions:
+        - TargetGroupArn: !Ref AppsRenderingTargetGroup
+          Type: forward
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 443
+      Protocol: HTTPS
+
+  AppsRenderingTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 5
+      HealthCheckPath: /healthcheck
+      HealthCheckPort: 3040
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 3
+      HealthyThresholdCount: 2
+      UnhealthyThresholdCount: 5
+      Name: !Sub rendering-${Stack}-${Stage}
+      Port: 3040
+      Protocol: HTTP
+      Tags:
+        - Key: App
+          Value: mobile-apps-rendering
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Stack
+          Value: !Ref Stack
+      TargetGroupAttributes:
+        - Key: "deregistration_delay.timeout_seconds"
+          Value: "10"
+      VpcId: !ImportValue MobileAppsApiVPC-VpcId
+
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
@@ -91,7 +155,7 @@ Resources:
       HealthCheckType: ELB
       LaunchConfigurationName: !Ref LaunchConfig
       TargetGroupARNs:
-        - Fn::ImportValue: !Sub mobile-router-${Stack}-${Stage}-TargetGroup-${App}
+        - !Ref AppsRenderingTargetGroup
       MaxSize: !Ref ASGMaxSize
       MinSize: !Ref ASGMinSize
       NotificationConfiguration:
@@ -135,16 +199,7 @@ Resources:
             Statement:
               - Action: s3:GetObject
                 Effect: Allow
-                Resource: arn:aws:s3:::mobile-*/*
-              - Action: s3:GetObject
-                Effect: Allow
-                Resource: arn:aws:s3:::gu-skimlinks-store/*
-              - Action: s3:GetObject
-                Effect: Allow
-                Resource: arn:aws:s3:::affiliate-links/*
-              - Action: s3:ListBucket
-                Effect: Allow
-                Resource: arn:aws:s3:::mobile-pa-football-data
+                Resource: arn:aws:s3:::mobile-apps-api-dist/${Stack}/${Stage}/${App}/*
               - Action: ec2:DescribeTags
                 Effect: Allow
                 Resource: '*'
@@ -156,19 +211,11 @@ Resources:
               - Action:
                   - ssm:GetParametersByPath
                 Effect: Allow
-                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/mapi/${Stage}/${Stack}
+                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/mobile-apps-rendering/${Stage}/${Stack}
               - Action:
                   - autoscaling:DescribeAutoScalingInstances
                   - autoscaling:DescribeAutoScalingGroups
                 Resource: '*'
-                Effect: Allow
-              - Action:
-                  - "dynamodb:GetItem"
-                  - "dynamodb:Query"
-                  - "dynamodb:Scan"
-                Resource:
-                  - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/mobile-article-feeds-${Stage}
-                  - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/mobile-article-feeds-${Stage}/index/feed_and_indexedEpochS
                 Effect: Allow
               - Effect: Allow
                 Action:
@@ -230,11 +277,11 @@ Resources:
           IpProtocol: tcp
           ToPort: 443
       SecurityGroupIngress:
-        - FromPort: 9000
+        - FromPort: 3040
           IpProtocol: tcp
           SourceSecurityGroupId:
             Fn::ImportValue: !Sub mobile-router-${Stack}-${Stage}-LoadBalancerSecurityGroup
-          ToPort: 9000
+          ToPort: 3040
       VpcId: !ImportValue MobileAppsApiVPC-VpcId
 
   LaunchConfig:
@@ -260,7 +307,6 @@ Resources:
           chown -R ${App}:mapi /opt/${App}
           mkdir /var/log/${App}
           chown -R ${App}:mapi /var/log/${App}
-          export SERVER_PORT=9000
           /usr/local/node/pm2 start --uid ${App} --gid mapi /opt/${App}/server.js
           /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} mobile-log-aggregation-${Stage} /var/log/${App}/${App}.log
 
@@ -280,15 +326,11 @@ Resources:
       Cooldown: 400
       ScalingAdjustment: 100
 
-  AssumeCapiPreviewRolePolicy:
-    Type: AWS::IAM::Policy
-    Condition: HasCapiPreviewRole
+  DnsRecord:
+    Type: AWS::Route53::RecordSet
     Properties:
-      PolicyName: AssumeCapiPreviewRole
-      PolicyDocument:
-        Statement:
-          - Effect: Allow
-            Action: sts:AssumeRole
-            Resource: !Ref CapiPreviewRole
-      Roles:
-        - !Ref DistributionRole
+      HostedZoneName: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: CNAME
+      TTL: 3600
+      ResourceRecords: [!GetAtt LoadBalancer.DNSName]
