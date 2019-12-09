@@ -282,6 +282,7 @@ type HeadlineLink = {
 };
 
 interface LinkHeadlineType {
+    designType: DesignType;
     headlineText: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
@@ -289,6 +290,7 @@ interface LinkHeadlineType {
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: SmallHeadlineSize;
     link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
+    byline?: string;
 }
 
 interface CardHeadlineType {
@@ -298,6 +300,7 @@ interface CardHeadlineType {
     kicker?: KickerType;
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
+    byline?: string;
 }
 
 /**
@@ -401,13 +404,13 @@ type JSXElements = JSX.Element | JSX.Element[];
 
 interface TrailType {
     designType: DesignType;
+    pillar: Pillar;
     url: string;
     linkText: string;
     isLiveBlog: boolean;
-    image: string;
     webPublicationDate: string;
     ageWarning?: string;
-    pillar: Pillar;
+    image: string;
     byline?: string;
     showByline?: boolean;
 }

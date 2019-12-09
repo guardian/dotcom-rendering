@@ -4,7 +4,7 @@ import { palette } from '@guardian/src-foundations';
 import { between, until } from '@guardian/src-foundations/mq';
 
 import { SharingIcons } from './ShareIcons';
-import { Byline } from '@root/src/web/components/Byline';
+import { Contributor } from '@root/src/web/components/Contributor';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Dateline } from './Dateline';
@@ -15,8 +15,8 @@ const meta = css`
     }
 
     ${until.phablet} {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     padding-top: 2px;
 `;
@@ -30,10 +30,17 @@ const metaExtras = css`
     flex-wrap: wrap;
 
     ${until.phablet} {
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-left: 10px;
-        padding-right: 10px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+`;
+
+const metaContainer = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 `;
 
@@ -45,10 +52,10 @@ export const ArticleMeta = ({ CAPI }: Props) => {
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
 
     return (
-        <>
+        <div className={metaContainer}>
             <GuardianLines pillar={CAPI.pillar} />
             <div className={cx(meta)}>
-                <Byline
+                <Contributor
                     author={CAPI.author}
                     tags={CAPI.tags}
                     pillar={CAPI.pillar}
@@ -66,6 +73,6 @@ export const ArticleMeta = ({ CAPI }: Props) => {
                     <div data-island="share-count" />
                 </div>
             </div>
-        </>
+        </div>
     );
 };

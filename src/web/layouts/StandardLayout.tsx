@@ -29,6 +29,8 @@ import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
 import { StandardHeader } from './StandardHeader';
 
+import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
         return {
@@ -83,13 +85,15 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Section>
 
-            <Section backgroundColour={palette.neutral[100]} padded={false}>
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    currentNavLink={NAV.currentNavLink}
-                    pillar={CAPI.pillar}
-                />
-            </Section>
+            {NAV.subNavSections && (
+                <Section backgroundColour={palette.neutral[100]} padded={false}>
+                    <SubNav
+                        subnav={NAV.subNavSections}
+                        currentNavLink={NAV.currentNavLink}
+                        pillar={CAPI.pillar}
+                    />
+                </Section>
+            )}
 
             <Hide when="above" breakpoint="tablet">
                 {/* When below tablet, show the main article image in a full width container */}
@@ -118,7 +122,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         </Hide>
                         <main
                             className={css`
-                                max-width: 630px;
+                                max-width: 620px;
                             `}
                         >
                             <ArticleBody CAPI={CAPI} />
@@ -156,13 +160,15 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 </>
             )}
 
-            <Section padded={false}>
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    pillar={CAPI.pillar}
-                    currentNavLink={NAV.currentNavLink}
-                />
-            </Section>
+            {NAV.subNavSections && (
+                <Section padded={false}>
+                    <SubNav
+                        subnav={NAV.subNavSections}
+                        pillar={CAPI.pillar}
+                        currentNavLink={NAV.currentNavLink}
+                    />
+                </Section>
+            )}
 
             <Section
                 padded={false}
@@ -179,6 +185,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
             </Section>
 
             <div data-island="cookie-banner" />
+            <MobileStickyContainer />
         </>
     );
 };

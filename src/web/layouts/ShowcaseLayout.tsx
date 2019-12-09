@@ -1,5 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { palette } from '@guardian/src-foundations';
+
 import { Flex } from '@root/src/web/components/Flex';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -13,8 +16,6 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
-
-import { palette } from '@guardian/src-foundations';
 import { Header } from '@root/src/web/components/Header/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -22,6 +23,7 @@ import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
+import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
 
 import { ShowcaseHeader } from './ShowcaseHeader';
 
@@ -68,13 +70,15 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Section>
 
-            <Section backgroundColour={palette.neutral[100]} padded={false}>
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    currentNavLink={NAV.currentNavLink}
-                    pillar={CAPI.pillar}
-                />
-            </Section>
+            {NAV.subNavSections && (
+                <Section backgroundColour={palette.neutral[100]} padded={false}>
+                    <SubNav
+                        subnav={NAV.subNavSections}
+                        currentNavLink={NAV.currentNavLink}
+                        pillar={CAPI.pillar}
+                    />
+                </Section>
+            )}
 
             <Hide when="above" breakpoint="tablet">
                 {/* When below tablet, show the main article image in a full width container */}
@@ -156,13 +160,15 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </>
             )}
 
-            <Section padded={false}>
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    pillar={CAPI.pillar}
-                    currentNavLink={NAV.currentNavLink}
-                />
-            </Section>
+            {NAV.subNavSections && (
+                <Section padded={false}>
+                    <SubNav
+                        subnav={NAV.subNavSections}
+                        pillar={CAPI.pillar}
+                        currentNavLink={NAV.currentNavLink}
+                    />
+                </Section>
+            )}
 
             <Section
                 padded={false}
@@ -179,6 +185,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             </Section>
 
             <div data-island="cookie-banner" />
+            <MobileStickyContainer />
         </>
     );
 };

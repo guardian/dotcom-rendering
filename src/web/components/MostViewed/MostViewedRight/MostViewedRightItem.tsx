@@ -60,6 +60,10 @@ const imageTagStyles = css`
     clip-path: circle(36% at 50% 50%);
 `;
 
+const marginTopStyles = css`
+    margin-top: 4px;
+`;
+
 type Props = {
     trail: TrailType;
 };
@@ -93,6 +97,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                     <div className={headlineWrapperStyles}>
                         {trail.isLiveBlog ? (
                             <LinkHeadline
+                                designType={trail.designType}
                                 headlineText={trail.linkText}
                                 pillar={trail.pillar}
                                 size="xxxsmall"
@@ -102,19 +107,31 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                                     text: 'Live',
                                     showSlash: false,
                                 }}
+                                byline={
+                                    trail.showByline ? trail.byline : undefined
+                                }
                             />
                         ) : (
                             <LinkHeadline
+                                designType={trail.designType}
                                 headlineText={trail.linkText}
                                 pillar={trail.pillar}
                                 size="xxxsmall"
                                 showUnderline={isHovered}
                                 link={linkProps}
+                                byline={
+                                    trail.showByline ? trail.byline : undefined
+                                }
                             />
                         )}
-                        {trail.ageWarning && (
-                            <AgeWarning age={trail.ageWarning} size="small" />
-                        )}
+                        <div className={marginTopStyles}>
+                            {trail.ageWarning && (
+                                <AgeWarning
+                                    age={trail.ageWarning}
+                                    size="small"
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
             </a>
