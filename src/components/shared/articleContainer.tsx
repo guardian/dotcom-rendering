@@ -1,5 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/core';
+import { Result } from 'types/result';
+import { Capi } from 'capi';
+import { ElementType } from 'capiThriftModels';
 
 const ArticleContainerStyles = css`
     @font-face {
@@ -87,10 +90,19 @@ const ArticleContainerStyles = css`
     }
 `;
 
-function ArticleContainer(includesTweets: boolean): JSX.Element {
-    const twitterScript = includesTweets
+function ArticleContainer(parsedCapi: Result<string, Capi>): JSX.Element {
+    const includesTweets = (parsedCapi: Result<string, Capi>): boolean => parsedCapi
+        .either(
+            () => false,
+            data => !!data.response.content.blocks.body
+            .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
+            .some(Boolean)
+        );
+
+    const twitterScript = includesTweets(parsedCapi)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
+
     return <html lang="en-US" css={ArticleContainerStyles}>
         <head>
             <title>Article</title>

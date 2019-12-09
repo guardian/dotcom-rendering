@@ -8,7 +8,7 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { fromUnsafe, Result, Ok, Err } from 'types/result';
-import { Content, ElementType } from 'capiThriftModels';
+import { Content } from 'capiThriftModels';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import ArticleContainer from 'components/shared/articleContainer';
@@ -66,14 +66,6 @@ const generateArticleHtml = (parsedCapi: Result<string, Capi>, imageSalt: string
       .map(renderToString)
       .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
 
-const includesTweets = (parsedCapi: Result<string, Capi>): boolean => parsedCapi
-  .either(
-    () => false,
-    data => !!data.response.content.blocks.body
-      .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
-      .some(Boolean)
-  );
-
 // ----- App ----- //
 
 const app = express();
@@ -96,7 +88,7 @@ app.get('/*', async (req, res) => {
     const resp = await fetch(capiEndpoint(articleId, key), {});
     const capi = await resp.text();
     const parsedCapi = parseCapi(capi);
-    const articleContainer = ArticleContainer(includesTweets(parsedCapi))
+    const articleContainer = ArticleContainer(parsedCapi)
     const template = renderToString(articleContainer)
 
     generateArticleHtml(parsedCapi, imageSalt)(template)
