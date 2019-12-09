@@ -49,15 +49,11 @@ const invertedFont = css`
 `;
 
 const lightFont = css`
-    ${headline.medium()};
-    font-weight: normal;
-    font-weight: 300;
+    ${headline.medium({ fontWeight: 'light' })};
     font-size: 2.125rem;
     line-height: 2.375rem;
     ${until.mobileMedium} {
-        ${headline.small()};
-        font-weight: normal;
-        font-weight: 300;
+        ${headline.small({ fontWeight: 'light' })};
     }
 `;
 
