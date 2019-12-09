@@ -84,13 +84,15 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Section>
 
-            <Section backgroundColour={palette.neutral[100]} padded={false}>
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    currentNavLink={NAV.currentNavLink}
-                    pillar={CAPI.pillar}
-                />
-            </Section>
+            {NAV.subNavSections && (
+                <Section backgroundColour={palette.neutral[100]} padded={false}>
+                    <SubNav
+                        subnav={NAV.subNavSections}
+                        currentNavLink={NAV.currentNavLink}
+                        pillar={CAPI.pillar}
+                    />
+                </Section>
+            )}
 
             <Hide when="above" breakpoint="tablet">
                 {/* When below tablet, show the main article image in a full width container */}
@@ -151,13 +153,15 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             <Section islandId="most-viewed-footer" />
 
-            <Section padded={false}>
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    pillar={CAPI.pillar}
-                    currentNavLink={NAV.currentNavLink}
-                />
-            </Section>
+            {NAV.subNavSections && (
+                <Section padded={false}>
+                    <SubNav
+                        subnav={NAV.subNavSections}
+                        pillar={CAPI.pillar}
+                        currentNavLink={NAV.currentNavLink}
+                    />
+                </Section>
+            )}
 
             <Section
                 padded={false}
