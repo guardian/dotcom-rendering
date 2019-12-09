@@ -4,7 +4,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 
 const maxWidth = css`
     ${from.desktop} {
-        max-width: 630px;
+        max-width: 620px;
     }
     ${until.phablet} {
         padding: 0 10px;

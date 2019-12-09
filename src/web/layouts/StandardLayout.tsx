@@ -121,7 +121,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         </Hide>
                         <main
                             className={css`
-                                max-width: 630px;
+                                max-width: 620px;
                             `}
                         >
                             <ArticleBody CAPI={CAPI} />
