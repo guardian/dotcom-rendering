@@ -1,0 +1,16 @@
+{
+  "projectName": "Mobile::mobile-apps-rendering",
+  "vcsURL": "https://github.com/guardian/apps-rendering",
+  "actions": [
+    {
+      "action": "mobile-apps-rendering",
+      "path": "dist/server.js",
+      "compress": "zip"
+    },
+    {
+      "action": "mobile-apps-rendering-cfn",
+      "path": "config/cloudformation.yaml",
+      "compress": false
+    }
+  ]
+}
