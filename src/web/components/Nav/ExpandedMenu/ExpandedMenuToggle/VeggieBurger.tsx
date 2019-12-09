@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 const veggieBurger = ({
     showExpandedMenu,
@@ -18,7 +18,12 @@ const veggieBurger = ({
     border: 0;
     border-radius: 50%;
     outline: none;
-    z-index: ${showExpandedMenu ? 1071 : 0};
+    ${until.tablet} {
+        z-index: 1;
+    }
+    ${from.tablet} {
+        z-index: ${showExpandedMenu ? 1071 : 0};
+    }
     right: 5px;
     bottom: 48px;
     ${from.mobileMedium} {
