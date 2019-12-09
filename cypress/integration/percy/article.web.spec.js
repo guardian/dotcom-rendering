@@ -17,7 +17,7 @@ describe('For WEB', function() {
             // Make the request, forcing the location to UK (for edition)
             cy.visit(`Article?url=${url}?_edition=UK`, fetchPolyfill);
             cy.percySnapshot(`WEB-${pillar}-${designType}-${index}`, {
-                widths: [739, 979, 1139, 1299, 1400],
+                widths: [600, 979, 1139, 1299, 1400],
             });
         });
     });
