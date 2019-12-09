@@ -15,8 +15,8 @@ const meta = css`
     }
 
     ${until.phablet} {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     padding-top: 2px;
 `;
@@ -30,10 +30,17 @@ const metaExtras = css`
     flex-wrap: wrap;
 
     ${until.phablet} {
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-left: 10px;
-        padding-right: 10px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+`;
+
+const metaContainer = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 `;
 
@@ -45,7 +52,7 @@ export const ArticleMeta = ({ CAPI }: Props) => {
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
 
     return (
-        <>
+        <div className={metaContainer}>
             <GuardianLines pillar={CAPI.pillar} />
             <div className={cx(meta)}>
                 <Contributor
@@ -66,6 +73,6 @@ export const ArticleMeta = ({ CAPI }: Props) => {
                     <div data-island="share-count" />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
