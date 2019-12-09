@@ -1,13 +1,13 @@
 import React from 'react';
 
-import HeaderImage from '../shared/headerImage';
-import ArticleSeries from '../news/articleSeries';
-import OpinionHeadline from '../opinion/opinionHeadline';
-import ArticleStandfirst from '../news/articleStandfirst';
-import OpinionByline from './opinionByline';
-import ArticleBody from '../shared/articleBody';
+import HeaderImage from 'components/shared/headerImage';
+import ArticleSeries from 'components/news/articleSeries';
+import OpinionHeadline from 'components/opinion/opinionHeadline';
+import ArticleStandfirst from 'components/news/articleStandfirst';
+import OpinionByline from 'components/opinion/opinionByline';
+import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import OpinionCutout from './opinionCutout';
+import OpinionCutout from 'components/opinion/opinionCutout';
 import { Content } from 'capiThriftModels';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { palette } from '@guardian/src-foundations';

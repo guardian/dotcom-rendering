@@ -5,7 +5,7 @@ import ArticleSeries from './articleSeries';
 import ArticleHeadline from './articleHeadline';
 import ArticleStandfirst from './articleStandfirst';
 import ArticleByline from './articleByline';
-import ArticleBody from '../shared/articleBody';
+import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
 import { darkModeCss, articleWidthStyles } from 'styles';
