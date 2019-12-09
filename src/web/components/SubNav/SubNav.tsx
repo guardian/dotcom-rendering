@@ -27,7 +27,7 @@ const multiLine = css`
 `;
 
 interface Props {
-    subnav?: {
+    subnav: {
         parent?: LinkType;
         links: LinkType[];
     };
@@ -81,10 +81,6 @@ export class SubNav extends Component<
     }
 
     public render() {
-        if (!this.props.subnav) {
-            return null;
-        }
-
         const { showMore, isExpanded } = this.state;
         const collapseWrapper = !showMore || !isExpanded;
         const expandSubNav = !showMore || isExpanded;
