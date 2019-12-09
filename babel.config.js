@@ -4,6 +4,7 @@ module.exports = {
         'babel-plugin-dynamic-import-node',
         ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
         '@babel/plugin-proposal-class-properties',
+        '@babel/plugin-proposal-optional-chaining',
         [
             'module-resolver',
             {
