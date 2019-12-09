@@ -5,7 +5,7 @@ import { pillarPalette } from '@root/src/lib/pillars';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { headline } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 type Props = {
     headlineString: string;
@@ -20,20 +20,32 @@ const curly = (x: any) => x;
 
 const standardFont = css`
     ${headline.medium()};
+    ${until.tablet} {
+        ${headline.small()};
+    }
 `;
 
 const boldFont = css`
     ${headline.medium({ fontWeight: 'bold' })};
+    ${until.tablet} {
+        ${headline.small({ fontWeight: 'bold' })};
+    }
 `;
 
 const jumboFont = css`
     ${headline.xlarge({ fontWeight: 'bold' })};
     line-height: 56px;
+    ${until.desktop} {
+        ${headline.medium({ fontWeight: 'bold' })};
+    }
 `;
 
 const invertedFont = css`
     ${headline.medium({ fontWeight: 'bold' })};
     line-height: 42px;
+    ${until.tablet} {
+        ${headline.small({ fontWeight: 'bold' })};
+    }
 `;
 
 const lightFont = css`
@@ -42,6 +54,11 @@ const lightFont = css`
     font-weight: 300;
     font-size: 2.125rem;
     line-height: 2.375rem;
+    ${until.mobileMedium} {
+        ${headline.small()};
+        font-weight: normal;
+        font-weight: 300;
+    }
 `;
 
 const standardPadding = css`
@@ -56,11 +73,22 @@ const underlinedStyles = css`
     background-image: repeating-linear-gradient(
         to bottom,
         transparent,
-        transparent 2.9375rem,
+        transparent 47px,
         rgba(171, 6, 19, 0.5)
     );
-    line-height: 3rem;
-    background-size: 0.0625rem 3rem;
+    line-height: 48px;
+    background-size: 1rem 48px;
+    ${until.tablet} {
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 39px,
+            rgba(171, 6, 19, 0.5)
+        );
+        line-height: 40px;
+        background-size: 1px 40px;
+    }
+
     background-position: top left;
     background-clip: content-box;
     background-origin: content-box;
