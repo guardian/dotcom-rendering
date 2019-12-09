@@ -46,6 +46,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     shouldHideAds={CAPI.shouldHideAds}
                 />
             </Section>
+
             <Section
                 showTopBorder={false}
                 showSideBorders={false}
@@ -111,7 +112,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
                                 <main
                                     className={css`
-                                        max-width: 630px;
+                                        max-width: 620px;
                                     `}
                                 >
                                     <ArticleBody
