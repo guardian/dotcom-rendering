@@ -101,7 +101,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => (
 
                             <main
                                 className={css`
-                                    max-width: 630px;
+                                    max-width: 620px;
                                 `}
                             >
                                 <ArticleBody CAPI={CAPI} isShowcase={true} />
