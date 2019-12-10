@@ -27,7 +27,7 @@ type PillarColours = {
     [ pillar in Pillar ]: PillarStyles;
 };
 
-const pillarColours: PillarColours = {
+export const pillarColours: PillarColours = {
     [Pillar.news]: {
         kicker: palette.news.main,
         featureHeadline: palette.news.dark,

@@ -16,7 +16,8 @@
     "watch:client": "webpack-dev-server --config webpack.config.js --config-name client",
     "watch": "npm run watch:server & npm run watch:client",
     "build:server": "webpack --config webpack.config.js --config-name server",
-    "build:client": "webpack --config webpack.config.js --config-name client"
+    "build:client": "webpack --config webpack.config.js --config-name client",
+    "storybook": "start-storybook"
   },
   "author": "",
   "license": "ISC",
@@ -35,14 +36,15 @@
     "jsdom": "^15.2.1",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "typescript": "^3.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
+    "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
+    "@storybook/react": "^5.2.8",
     "@types/compression": "^1.0.1",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
