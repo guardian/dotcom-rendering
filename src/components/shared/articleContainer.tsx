@@ -1,60 +1,20 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { Result } from 'types/result';
-import { Capi } from 'capi';
-import { ElementType } from 'capiThriftModels';
+import { Content } from 'capiThriftModels';
+import { includesTweets } from 'capi';
+import { fontFace } from 'styles';
+import { None, Some } from 'types/option';
 
 const ArticleContainerStyles = css`
-    @font-face {
-        font-family: "Guardian Egyptian Web";
-        src: url('/public/fonts/egyptiantext-regular.otf');
-    }
-
-    @font-face {
-        font-family: "Guardian Egyptian Web";
-        font-weight: 500;
-        src: url("/public/fonts/egyptiantext-medium.otf");
-    }
-
-    @font-face {
-        font-family: "Guardian Egyptian Web";
-        font-weight: bold;
-        src: url("/public/fonts/egyptiantext-medium.otf");
-    }
-
-    @font-face {
-        font-family: "Guardian Text Sans Web";
-        src: url('/public/fonts/GuardianSansWeb-Regular.ttf');
-    }
-
-    @font-face {
-        font-family: "Guardian Headline";
-        font-weight: 200;
-        src: url("/public/fonts/GHGuardianHeadline-Light.ttf");
-    }
-
-    @font-face {
-        font-family: "Guardian Headline";
-        font-weight: 400;
-        src: url("/public/fonts/GHGuardianHeadline-Regular.ttf");
-    }
-
-    @font-face {
-        font-family: "Guardian Headline";
-        font-weight: 500;
-        src: url("/public/fonts/GHGuardianHeadline-Medium.ttf");
-    }
-
-    @font-face {
-        font-family: "Guardian Headline";
-        font-weight: 700;
-        src: url("/public/fonts/GHGuardianHeadline-Bold.ttf");
-    }
-
-    @font-face {
-        font-family: "Guardian Icons";
-        src: url('/public/fonts/icons.otf');
-    }
+    ${fontFace("Guardian Egyptian Web", new None, "/public/fonts/egyptiantext-regular.otf")}
+    ${fontFace("Guardian Egyptian Web", new Some(500), "/public/fonts/egyptiantext-medium.otf")}
+    ${fontFace("Guardian Egyptian Web", new Some("bold"), "/public/fonts/egyptiantext-medium.otf")}
+    ${fontFace("Guardian Text Sans Web", new None, "/public/fonts/GuardianSansWeb-Regular.ttf")}
+    ${fontFace("Guardian Headline", new Some(200), "/public/fonts/GHGuardianHeadline-Light.ttf")}
+    ${fontFace("Guardian Headline", new Some(400), "/public/fonts/GHGuardianHeadline-Regular.ttf")}
+    ${fontFace("Guardian Headline", new Some(500), "/public/fonts/GHGuardianHeadline-Medium.ttf")}
+    ${fontFace("Guardian Headline", new Some(700), "/public/fonts/GHGuardianHeadline-Bold.ttf")}
+    ${fontFace("Guardian Icons", new None, "/public/fonts/icons.otf")}
 
     font-size: 62.5%;
     background: white;
@@ -90,27 +50,19 @@ const ArticleContainerStyles = css`
     }
 `;
 
-function ArticleContainer(parsedCapi: Result<string, Capi>): JSX.Element {
-    const includesTweets = (parsedCapi: Result<string, Capi>): boolean => parsedCapi
-        .either(
-            () => false,
-            data => !!data.response.content.blocks.body
-            .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
-            .some(Boolean)
-        );
-
-    const twitterScript = includesTweets(parsedCapi)
+function ArticleContainer(content: Content, article: JSX.Element): JSX.Element {
+    const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
     return <html lang="en-US" css={ArticleContainerStyles}>
         <head>
-            <title>Article</title>
+            <title>{content.id}</title>
             <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
             <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
         </head>
         <body>
-            <div id="root"></div>
+            { article }
             <script src="/assets/client.js"></script>
             { twitterScript }
         </body>

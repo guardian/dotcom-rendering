@@ -1,0 +1,16 @@
+stacks: [mobile, mobile-preview]
+regions: [eu-west-1]
+deployments:
+  mobile-apps-rendering-cfn:
+    type: cloud-formation
+    app: mobile-apps-rendering
+    parameters:
+      amiTags:
+        Recipe: xenial-mobile-node
+        AmigoStage: PROD
+      templatePath: cloudformation.yaml
+  mobile-apps-rendering:
+    type: autoscaling
+    parameters:
+      bucket: mobile-apps-api-dist
+    dependencies: [mobile-apps-rendering-cfn]

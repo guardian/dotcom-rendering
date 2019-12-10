@@ -7,14 +7,13 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
-import { fromUnsafe, Result, Ok, Err } from 'types/result';
 import { Content } from 'capiThriftModels';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import ArticleContainer from 'components/shared/articleContainer';
 import { getConfigValue } from 'server/ssmConfig';
-import { parseCapi, capiEndpoint } from 'capi';
-import { Capi } from 'capi';
+import { CapiError, capiEndpoint, getContent } from 'capi';
+
 
 // ----- Setup ----- //
 
@@ -23,48 +22,47 @@ const defaultId =
 
 // ----- Functions ----- //
 
-const id = <A>(a: A): A => a;
+const enum Support {
+  Supported,
+  Unsupported,
+}
 
-function getContent(capi: Capi): Result<string, Content> {
+type Supported = {
+  kind: Support.Supported;
+} | {
+  kind: Support.Unsupported;
+  reason: string;
+}
 
-  const content = capi.response.content;
+function checkSupport(content: Content): Supported {
+
   const { fields, atoms } = content;
 
   if (fields.displayHint === 'immersive') {
-    return new Err('Immersive displayHint is not yet supported');
+    return { kind: Support.Unsupported, reason: 'The article contains an immersive displayHint' };
   }
 
   if (atoms) {
-    return new Err('Atoms not yet supported');
+    return { kind: Support.Unsupported, reason: 'The article contains atoms' };
   }
 
-  return new Ok(content);
+  return { kind: Support.Supported };
 
 }
 
-const getArticleComponent = (imageSalt: string) =>
-  function ArticleComponent(capi: Content): React.ReactElement {
-    switch (capi.type) {
-      case 'article':
-        return React.createElement(Article, { capi, imageSalt });
-      case 'liveblog':
-        return React.createElement(
-          LiveblogArticle,
-          { capi, isLive: true, imageSalt }
-        );
-      default:
-        return React.createElement('p', null, `${capi.type} not implemented yet`);
-    }
+function getArticleComponent(imageSalt: string, capi: Content): React.ReactElement {
+  switch (capi.type) {
+    case 'article':
+      return React.createElement(Article, { capi, imageSalt });
+    case 'liveblog':
+      return React.createElement(
+        LiveblogArticle,
+        { capi, isLive: true, imageSalt }
+      );
+    default:
+      return React.createElement('p', null, `${capi.type} not implemented yet`);
   }
-
-const generateArticleHtml = (parsedCapi: Result<string, Capi>, imageSalt: string) =>
-  (data: string): Result<string, string> =>
-    parsedCapi
-      .andThen(capi => fromUnsafe(() => getContent(capi), 'Unexpected CAPI response structure'))
-      .andThen(id)
-      .map(getArticleComponent(imageSalt))
-      .map(renderToString)
-      .map(body => data.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
+}
 
 // ----- App ----- //
 
@@ -75,6 +73,10 @@ app.use('/public', express.static(path.resolve(__dirname, '../public')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
 
+app.get('/healthcheck', (_req, res) => {
+  res.send("Ok");
+});
+
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
 app.get('/*', async (req, res) => {
@@ -82,28 +84,49 @@ app.get('/*', async (req, res) => {
   try {
 
     const articleId = req.params[0] || defaultId;
-
     const key = await getConfigValue<string>("capi.key");
     const imageSalt = await getConfigValue<string>('apis.img.salt');
-    const resp = await fetch(capiEndpoint(articleId, key), {});
-    const capi = await resp.text();
-    const parsedCapi = parseCapi(capi);
-    const articleContainer = ArticleContainer(parsedCapi)
-    const template = renderToString(articleContainer)
+    const capiResponse = await fetch(capiEndpoint(articleId, key));
 
-    generateArticleHtml(parsedCapi, imageSalt)(template)
-      .either(
-        err => { throw err },
-        data => res.send(data),
-      );
+    getContent(capiResponse.status, articleId, await capiResponse.text()).either(
+      error => {
+
+        if (error.status === CapiError.NotFound) {
+
+          console.warn(error.message);
+          res.sendStatus(404);
+
+        } else {
+
+          console.error(error.message);
+          res.sendStatus(500);
+
+        }
+
+      },
+      content => {
+        const support = checkSupport(content);
+
+        if (support.kind === Support.Supported) {
+          const article = getArticleComponent(imageSalt, content);
+          const template = ArticleContainer(content, article);
+          const html = renderToString(template);
+          res.write('<!DOCTYPE html>');
+          res.write(html);
+          res.end();
+        } else {
+          console.warn(`I can\'t render that type of content yet! ${support.reason}`);
+          res.sendStatus(415);
+        }
+      }
+    )
 
   } catch (e) {
-
-    console.error(e);
-    res.status(500).send('An error occurred, check the console');
-
+    console.error(`This error occurred, but I don't know why: ${e}`);
+    res.sendStatus(500);
   }
 
 });
 
-app.listen(3040);
+const port = 3040;
+app.listen(port, () => console.log(`apps-rendering listening on port ${port}!`));
