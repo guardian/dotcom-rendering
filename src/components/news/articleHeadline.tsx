@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleRating from '../shared/articleRating';
+import ArticleRating from 'components/shared/articleRating';
 import { basePx, sidePadding, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
