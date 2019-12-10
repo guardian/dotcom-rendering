@@ -4,8 +4,8 @@ import { pillarColours, Pillar } from 'pillar';
 
 export default { title: 'News' };
 
-export const standard = () => <ArticleHeadline 
-  headline="Headline" 
+export const standard = (): JSX.Element => <ArticleHeadline
+  headline="Headline"
   feature={false}
   analysis={false}
   pillarStyles={pillarColours[Pillar.news]}
