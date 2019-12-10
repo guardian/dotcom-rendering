@@ -11,6 +11,13 @@ module.exports = ({ config }) => {
         use: [
             {
                 loader: require.resolve('awesome-typescript-loader'),
+                options: {
+                    silent: true,
+                    useBabel: true,
+                    babelOptions: {
+                        plugins: ['@babel/plugin-proposal-optional-chaining'],
+                    },
+                },
             },
         ],
     });
