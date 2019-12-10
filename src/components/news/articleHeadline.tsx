@@ -6,7 +6,7 @@ import { palette } from '@guardian/src-foundations'
 import { PillarStyles } from 'pillar';
 import { until } from '@guardian/src-foundations/mq';
 
-const AnalysisHeadlineStyles = (kicker: string) => css`
+const AnalysisHeadlineStyles = (kicker: string): SerializedStyles => css`
     font-weight: 200;
     line-height: 3.6rem;
     background-image: repeating-linear-gradient(to bottom, transparent, transparent calc(3.6rem - 1px), ${kicker});
