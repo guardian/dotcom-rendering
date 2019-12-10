@@ -66,7 +66,7 @@ export const Card = ({
     // Decide how we position the image on the card
     let imageCoverage: CardPercentageType | undefined;
     let contentCoverage: CardPercentageType | undefined;
-    if (trailImage?.size && trailImage.position !== 'top') {
+    if (trailImage && trailImage.size && trailImage.position !== 'top') {
         // We only specifiy an explicit width for the image when
         // we're positioning left or right, not top. Top positioned
         // images flow naturally
@@ -90,7 +90,7 @@ export const Card = ({
             }
         >
             <TopBar topBarColour={palette[pillar].main}>
-                <CardLayout imagePosition={trailImage?.position}>
+                <CardLayout imagePosition={trailImage && trailImage.position}>
                     <>
                         {trailImage && (
                             <ImageWrapper percentage={imageCoverage}>
