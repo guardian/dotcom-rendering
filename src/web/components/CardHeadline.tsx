@@ -3,14 +3,39 @@ import { css, cx } from 'emotion';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { palette } from '@guardian/src-foundations';
+import { until } from '@guardian/src-foundations/mq';
 
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
 
-const fontStyles = (size: SmallHeadlineSize) => css`
-    ${headline[size]()};
-`;
+const fontStyles = (size: SmallHeadlineSize) => {
+    switch (size) {
+        case 'large':
+            return css`
+                ${headline.xsmall()};
+                ${until.desktop} {
+                    ${headline.xxsmall()};
+                }
+            `;
+        case 'medium':
+            return css`
+                ${headline.xxsmall()};
+                ${until.desktop} {
+                    ${headline.xxxsmall()};
+                }
+            `;
+        case 'small':
+            return css`
+                ${headline.xxxsmall()};
+            `;
+        case 'tiny':
+            return css`
+                ${headline.xxxsmall()};
+                font-size: 14px;
+            `;
+    }
+};
 
 const underlinedStyles = (size: SmallHeadlineSize) => {
     function generateUnderlinedCss(baseSize: number) {
@@ -29,11 +54,11 @@ const underlinedStyles = (size: SmallHeadlineSize) => {
         `;
     }
     switch (size) {
-        case 'xxxsmall':
+        case 'small':
             return generateUnderlinedCss(21);
-        case 'xxsmall':
+        case 'medium':
             return generateUnderlinedCss(24);
-        case 'xsmall':
+        case 'large':
             return generateUnderlinedCss(28);
         default:
             return generateUnderlinedCss(23);
@@ -78,7 +103,7 @@ export const CardHeadline = ({
     pillar,
     showQuotes,
     kicker,
-    size = 'xxsmall',
+    size = 'medium',
     byline,
 }: CardHeadlineType) => (
     <>

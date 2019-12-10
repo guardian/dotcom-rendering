@@ -8,9 +8,27 @@ import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
 
-const fontStyles = (size: SmallHeadlineSize) => css`
-    ${headline[size]()};
-`;
+const fontStyles = (size: SmallHeadlineSize) => {
+    switch (size) {
+        case 'large':
+            return css`
+                ${headline.xsmall()};
+            `;
+        case 'medium':
+            return css`
+                ${headline.xxsmall()};
+            `;
+        case 'small':
+            return css`
+                ${headline.xxxsmall()};
+            `;
+        case 'tiny':
+            return css`
+                ${headline.xxxsmall()};
+                font-size: 14px;
+            `;
+    }
+};
 
 const textDecorationUnderline = css`
     text-decoration: underline;
@@ -40,7 +58,7 @@ export const LinkHeadline = ({
     showUnderline = false,
     kicker,
     showQuotes = false,
-    size = 'xxsmall',
+    size = 'medium',
     link,
     byline,
 }: LinkHeadlineType) => (

@@ -22,7 +22,7 @@ const listItemStyles = css`
 const linkTagStyles = css`
     text-decoration: none;
     font-weight: 500;
-    ${headline.xxxsmall()};
+    ${headline.small()};
 
     &:link,
     &:active {
@@ -100,7 +100,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                                 designType={trail.designType}
                                 headlineText={trail.linkText}
                                 pillar={trail.pillar}
-                                size="xxxsmall"
+                                size="small"
                                 showUnderline={isHovered}
                                 link={linkProps}
                                 kicker={{
@@ -116,7 +116,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                                 designType={trail.designType}
                                 headlineText={trail.linkText}
                                 pillar={trail.pillar}
-                                size="xxxsmall"
+                                size="small"
                                 showUnderline={isHovered}
                                 link={linkProps}
                                 byline={

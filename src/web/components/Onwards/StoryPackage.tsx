@@ -19,7 +19,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[0].designType,
                             headlineText: content[0].linkText,
-                            size: 'xxsmall',
+                            size: 'medium',
                             pillar: content[0].pillar,
                         },
                         webPublicationDate: content[0].webPublicationDate,
@@ -38,7 +38,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[1].designType,
                             headlineText: content[1].linkText,
-                            size: 'xxsmall',
+                            size: 'medium',
                             pillar: content[1].pillar,
                         },
                         webPublicationDate: content[1].webPublicationDate,
@@ -57,7 +57,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[2].designType,
                             headlineText: content[2].linkText,
-                            size: 'xxsmall',
+                            size: 'medium',
                             pillar: content[2].pillar,
                         },
                         webPublicationDate: content[2].webPublicationDate,
@@ -76,7 +76,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[3].designType,
                             headlineText: content[3].linkText,
-                            size: 'xxsmall',
+                            size: 'medium',
                             pillar: content[3].pillar,
                         },
                         webPublicationDate: content[3].webPublicationDate,
@@ -97,7 +97,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[4].designType,
                             headlineText: content[4].linkText,
-                            size: 'xxxsmall',
+                            size: 'small',
                             pillar: content[4].pillar,
                         },
                         webPublicationDate: content[4].webPublicationDate,
@@ -113,7 +113,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[5].designType,
                             headlineText: content[5].linkText,
-                            size: 'xxxsmall',
+                            size: 'small',
                             pillar: content[5].pillar,
                         },
                         webPublicationDate: content[5].webPublicationDate,
@@ -129,7 +129,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[6].designType,
                             headlineText: content[6].linkText,
-                            size: 'xxxsmall',
+                            size: 'small',
                             pillar: content[6].pillar,
                         },
                         webPublicationDate: content[6].webPublicationDate,
@@ -145,7 +145,7 @@ export const StoryPackage = ({ content }: Props) => (
                         headline: {
                             designType: content[7].designType,
                             headlineText: content[7].linkText,
-                            size: 'xxxsmall',
+                            size: 'small',
                             pillar: content[7].pillar,
                         },
                         webPublicationDate: content[7].webPublicationDate,

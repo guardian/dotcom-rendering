@@ -10,16 +10,16 @@ const quoteStyles = (colour?: string) => css`
     fill: ${colour && colour};
 `;
 
-const sizeStyles = (size: 'xxxsmall' | 'xxsmall' | 'xsmall') => {
+const sizeStyles = (size: SmallHeadlineSize) => {
     switch (size) {
-        case 'xxxsmall':
+        case 'small':
             return css`
                 svg {
                     height: 16px;
                     width: 8px;
                 }
             `;
-        case 'xxsmall':
+        case 'medium':
             return css`
                 margin-right: 4px;
                 svg {
@@ -27,7 +27,7 @@ const sizeStyles = (size: 'xxxsmall' | 'xxsmall' | 'xsmall') => {
                     width: 11px;
                 }
             `;
-        case 'xsmall':
+        case 'large':
             return css`
                 margin-right: 8px;
                 svg {
@@ -47,10 +47,10 @@ const sizeStyles = (size: 'xxxsmall' | 'xxsmall' | 'xsmall') => {
 
 type Props = {
     colour?: string;
-    size?: 'xxxsmall' | 'xxsmall' | 'xsmall';
+    size?: SmallHeadlineSize;
 };
 
-export const QuoteIcon = ({ colour, size = 'xxsmall' }: Props) => (
+export const QuoteIcon = ({ colour, size = 'medium' }: Props) => (
     <span className={sizeStyles(size)}>
         <svg
             width="70"
