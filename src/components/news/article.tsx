@@ -1,7 +1,7 @@
 import React from 'react';
 
 import HeaderImage from '../shared/headerImage';
-import ArticleSeries from '../shared/articleSeries';
+import ArticleSeries from 'components/shared/articleSeries';
 import ArticleHeadline from './articleHeadline';
 import ArticleStandfirst from './articleStandfirst';
 import ArticleByline from './articleByline';
