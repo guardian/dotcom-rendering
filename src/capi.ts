@@ -115,6 +115,9 @@ const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
 const isFeature = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/features');
 
+const isAnalysis = (content: Content): boolean =>
+    content.tags.some(tag => tag.id === 'tone/analysis');
+
 const isSingleContributor = (contributors: Contributor[]): boolean =>
     contributors.length === 1;
 
@@ -165,4 +168,5 @@ export {
     articleMainImage,
     capiEndpoint,
     includesTweets,
+    isAnalysis,
 };
