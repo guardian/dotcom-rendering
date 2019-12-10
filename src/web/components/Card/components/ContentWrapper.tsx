@@ -7,7 +7,7 @@ const sizingStyles = css`
     justify-content: space-between;
 `;
 
-const coverageStyles = (percentage: string) => {
+const coverageStyles = (percentage?: string) => {
     return percentage
         ? css`
               flex-basis: ${percentage};
@@ -23,7 +23,7 @@ type Props = {
 };
 
 export const ContentWrapper = ({ children, percentage }: Props) => (
-    <div className={cx(sizingStyles, percentage && coverageStyles(percentage))}>
+    <div className={cx(sizingStyles, coverageStyles(percentage))}>
         {children}
     </div>
 );

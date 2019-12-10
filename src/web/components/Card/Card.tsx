@@ -59,15 +59,14 @@ export const Card = ({
     trailImage,
     standfirst,
     avatar,
+    showClock,
 }: CardType) => {
     // If there was no image given or image size was not set, percentage is null and
     // no flex-basis property is set in the wrappers, so content flows normally
     const imageCoverage =
-        (trailImage && trailImage.size && coverages.image[trailImage.size]) ||
-        coverages.image.medium;
+        trailImage && trailImage.size && coverages.image[trailImage.size];
     const contentCoverage =
-        (trailImage && trailImage.size && coverages.content[trailImage.size]) ||
-        coverages.content.medium;
+        trailImage && trailImage.size && coverages.content[trailImage.size];
 
     const isOpinion = pillar === 'opinion';
 
@@ -130,6 +129,7 @@ export const Card = ({
                                                 webPublicationDate={
                                                     webPublicationDate
                                                 }
+                                                showClock={showClock}
                                             />
                                         )}
                                         {isOpinion && (

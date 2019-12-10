@@ -28,9 +28,10 @@ const ageStyles = css`
 
 type Props = {
     webPublicationDate: string;
+    showClock?: boolean;
 };
 
-export const CardAge = ({ webPublicationDate }: Props) => {
+export const CardAge = ({ webPublicationDate, showClock }: Props) => {
     const displayString = makeRelativeDate(
         new Date(webPublicationDate).getTime(),
         {
@@ -44,7 +45,7 @@ export const CardAge = ({ webPublicationDate }: Props) => {
 
     return (
         <span className={ageStyles}>
-            <ClockIcon />
+            {showClock && <ClockIcon />}
             <time dateTime={webPublicationDate}>{displayString}</time>
         </span>
     );

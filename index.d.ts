@@ -269,6 +269,7 @@ interface CardType {
     trailImage?: CardImageType;
     standfirst?: string;
     avatar?: AvatarType;
+    showClock?: boolean;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -294,13 +295,23 @@ interface LinkHeadlineType {
 
 interface CardHeadlineType {
     headlineText: string; // The text shown
-    designType: DesignType; // Used to decide when to add type specific styles
+    designType?: DesignType; // Used to decide when to add type specific styles
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     kicker?: KickerType;
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
     byline?: string;
 }
+
+/**
+ * Onwards
+ */
+type OnwardsIdType = 'story-package' | 'more-in-series';
+
+type OnwardsType = {
+    heading: string;
+    trails: TrailType[];
+};
 
 /**
  * the config model will contain useful app/site
@@ -329,6 +340,7 @@ interface ConfigType {
     edition: string;
     section: string;
     sharedAdTargeting: { [key: string]: any };
+    isPaidContent?: boolean;
 }
 
 interface GADataType {
@@ -391,13 +403,14 @@ interface Props {
 type JSXElements = JSX.Element | JSX.Element[];
 
 interface TrailType {
-    url: string;
     designType: DesignType;
+    pillar: Pillar;
+    url: string;
     linkText: string;
     isLiveBlog: boolean;
-    ageWarning: string;
-    pillar: Pillar;
-    image?: string;
+    webPublicationDate: string;
+    ageWarning?: string;
+    image: string;
     byline?: string;
     showByline?: boolean;
 }

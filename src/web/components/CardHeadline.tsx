@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { palette } from '@guardian/src-foundations';
@@ -15,24 +15,24 @@ const fontStyles = (size: SmallHeadlineSize) => css`
 const underlinedStyles = (size: SmallHeadlineSize) => {
     function generateUnderlinedCss(baseSize: number) {
         return css`
-            display: inline;
             background-image: linear-gradient(
                 to bottom,
                 transparent,
                 transparent ${baseSize - 1}px,
                 rgba(199, 0, 0, 0.5)
             );
-            line-height: ${baseSize}px;
+            line-height: ${baseSize - 1}px;
             background-size: 1px ${baseSize}px;
             background-origin: content-box;
             background-clip: content-box;
+            margin-right: -5px;
         `;
     }
     switch (size) {
         case 'xxxsmall':
-            return generateUnderlinedCss(20);
+            return generateUnderlinedCss(21);
         case 'xxsmall':
-            return generateUnderlinedCss(23);
+            return generateUnderlinedCss(24);
         case 'xsmall':
             return generateUnderlinedCss(28);
         default:
@@ -50,11 +50,10 @@ const headlineStyles = (
     size: SmallHeadlineSize,
 ) => {
     switch (designType) {
-        case 'Analysis':
-            return underlinedStyles(size);
         case 'Feature':
         case 'Interview':
             return colourStyles(palette[pillar].dark);
+        case 'Analysis':
         case 'Article':
         case 'Media':
         case 'Review':
@@ -75,7 +74,7 @@ const headlineStyles = (
 
 export const CardHeadline = ({
     headlineText,
-    designType,
+    designType = 'Article',
     pillar,
     showQuotes,
     kicker,
@@ -83,7 +82,12 @@ export const CardHeadline = ({
     byline,
 }: CardHeadlineType) => (
     <>
-        <h4 className={fontStyles(size)}>
+        <h4
+            className={cx(
+                fontStyles(size),
+                designType === 'Analysis' && underlinedStyles(size),
+            )}
+        >
             {kicker && (
                 <Kicker
                     text={kicker.text}

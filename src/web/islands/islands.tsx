@@ -9,6 +9,8 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
+import { Onwards } from '@frontend/web/components/Onwards/Onwards';
+import { StoryPackage } from '@frontend/web/components/Onwards/StoryPackage';
 
 type IslandProps =
     | {
@@ -45,6 +47,12 @@ type IslandProps =
           element: RichLinkBlockElement;
           pillar: Pillar;
           ajaxEndpoint: string;
+      }
+    | {
+          ajaxUrl: string;
+          pageId: string;
+          pathId: OnwardsIdType;
+          component: React.ElementType;
       };
 
 type IslandType = {
@@ -129,6 +137,16 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             component: CookieBanner,
             props: {},
             root: 'cookie-banner',
+        },
+        {
+            component: Onwards,
+            props: {
+                ajaxUrl: CAPI.config.ajaxUrl,
+                pageId: CAPI.pageId,
+                pathId: 'story-package',
+                component: StoryPackage,
+            },
+            root: 'story-package',
         },
     ];
 
