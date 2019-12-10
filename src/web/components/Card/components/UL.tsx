@@ -11,6 +11,7 @@ const ulStyles = (direction?: 'row' | 'column', padded?: boolean) => css`
     flex-direction: ${direction};
     ${until.tablet} {
         flex-direction: column;
+        width: 100%;
     }
 `;
 
