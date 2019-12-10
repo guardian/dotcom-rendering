@@ -29,7 +29,7 @@ declare enum ContentType {
   AUDIO = 'audio',
 }
 
-declare enum ElementType {
+export enum ElementType {
   TEXT = 'text',
   IMAGE = 'image',
   EMBED = 'embed',
