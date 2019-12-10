@@ -17,6 +17,7 @@ const richLinkWidth = "13.75rem";
 
 const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     position: relative;
+    clear: both;
 
     .rich-link,
     .element-membership {
