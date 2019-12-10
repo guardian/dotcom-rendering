@@ -2,6 +2,7 @@ import { palette } from '@guardian/src-foundations';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core'
 import { PillarStyles } from 'pillar';
+import { Option } from 'types/option';
 
 const BASE_PADDING = 8;
 
@@ -278,3 +279,11 @@ export const adStyles = css`
         }
     }
 `
+
+export const fontFace = (family: string, weight: Option<number | string>, url: string): SerializedStyles => css`
+  @font-face {
+    font-family: ${family};
+    ${weight.map((w: number | string) => `font-weight: ${w};`).withDefault('')}
+    src: url('${url}');
+  }
+`;

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Result, Ok, Err } from 'types/result';
-import { Content, Tag, BlockElement } from 'capiThriftModels';
+import { Content, Tag, BlockElement, ElementType } from 'capiThriftModels';
 import { Option, fromNullable, None, Some } from 'types/option';
 import { isImage } from 'components/blocks/image';
 
@@ -127,6 +127,10 @@ const articleContributors = (content: Content): Tag[] =>
 const articleMainImage = (content: Content): Option<BlockElement> =>
     fromNullable(content.blocks.main.elements.filter(isImage)[0]);
 
+const includesTweets = (content: Content): boolean => content.blocks.body
+    .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
+    .some(Boolean)
+
 
 // ----- Functions ----- //
 
@@ -160,4 +164,5 @@ export {
     articleContributors,
     articleMainImage,
     capiEndpoint,
+    includesTweets,
 };

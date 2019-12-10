@@ -1,15 +1,12 @@
 // ----- Imports ----- //
 
 import path from 'path';
-import fs from 'fs';
-import { promisify } from 'util';
 import express from 'express';
 import compression from 'compression';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
-import { Result, Ok, Err } from 'types/result';
 import { Content } from 'capiThriftModels';
 import { getConfigValue } from 'server/ssmConfig';
 import { Pillar, pillarFromString } from 'pillar';
@@ -23,9 +20,6 @@ import OpinionArticle from 'components/opinion/opinionArticle';
 
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
-const readFileP = promisify(fs.readFile);
-const templateFile = './src/articleTemplate.html';
-
 
 // ----- Functions ----- //
 
@@ -75,16 +69,6 @@ function getArticleComponent(imageSalt: string, capi: Content): React.ReactEleme
   }
 }
 
-async function readTemplate(): Promise<Result<string, string>> {
-  try {
-    const data = await readFileP(path.resolve(templateFile), 'utf8');
-    return new Ok(data);
-  } catch (_) {
-    return new Err('Could not read template file');
-  }
-}
-
-
 // ----- App ----- //
 
 const app = express();
@@ -105,7 +89,6 @@ app.get('/*', async (req, res) => {
   try {
 
     const articleId = req.params[0] || defaultId;
-    const template = await readTemplate();
     const key = await getConfigValue<string>("capi.key");
     const imageSalt = await getConfigValue<string>('apis.img.salt');
     const capiResponse = await fetch(capiEndpoint(articleId, key));
@@ -131,11 +114,11 @@ app.get('/*', async (req, res) => {
 
         if (support.kind === Support.Supported) {
           const article = getArticleComponent(imageSalt, content);
-          const html = renderToString(article);
-
-          template
-            .map(file => file.replace('<div id="root"></div>', `<div id="root">${html}</div>`))
-            .map(document => res.send(document));
+          const template = ArticleContainer(content, article);
+          const html = renderToString(template);
+          res.write('<!DOCTYPE html>');
+          res.write(html);
+          res.end();
         } else {
           console.warn(`I can\'t render that type of content yet! ${support.reason}`);
           res.sendStatus(415);
