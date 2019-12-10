@@ -112,7 +112,7 @@ export const News = () => (
                     </LI>
                     <LI percentage="25%" showDivider={true} padSides={true}>
                         <UL direction="column">
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -135,7 +135,7 @@ export const News = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -151,7 +151,7 @@ export const News = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={false}>
+                            <LI bottomMargin={false} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -175,7 +175,7 @@ export const News = () => (
                     </LI>
                     <LI percentage="25%" showDivider={true} padSides={true}>
                         <UL direction="column">
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -195,7 +195,7 @@ export const News = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -215,7 +215,7 @@ export const News = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -235,7 +235,7 @@ export const News = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -255,7 +255,7 @@ export const News = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -275,7 +275,7 @@ export const News = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={false}>
+                            <LI bottomMargin={false} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -314,7 +314,7 @@ export const InDepth = () => (
                 <UL direction="row">
                     <LI percentage="50%" padSides={true}>
                         <UL direction="column">
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -339,7 +339,7 @@ export const InDepth = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -364,7 +364,7 @@ export const InDepth = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -389,7 +389,7 @@ export const InDepth = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={true}>
+                            <LI bottomMargin={true} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
@@ -414,7 +414,7 @@ export const InDepth = () => (
                                     }}
                                 />
                             </LI>
-                            <LI bottomMargin={false}>
+                            <LI bottomMargin={false} stretch={true}>
                                 <Card
                                     {...{
                                         linkTo:
