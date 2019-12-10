@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { from } from '@guardian/src-foundations/mq';
+
 type Props = {
     children: JSX.Element | JSX.Element[];
 };
@@ -14,7 +16,9 @@ export const OnwardsContainer = ({ children }: Props) => (
 
             margin-top: 10px;
             margin-bottom: 50px;
-            margin-right: 70px;
+            ${from.tablet} {
+                margin-right: 70px;
+            }
         `}
     >
         {children}
