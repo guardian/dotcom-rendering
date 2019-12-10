@@ -13,7 +13,7 @@ import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
-import { isFeature, articleSeries, articleContributors, articleMainImage } from 'capi';
+import { isFeature, isAnalysis, articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString } from 'pillar';
 
 export interface ArticleProps {
@@ -75,6 +75,7 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
                             feature={feature}
                             rating={String(fields.starRating)}
                             pillarStyles={pillarStyles}
+                            analysis={isAnalysis(capi)}
                         />
                         <ArticleStandfirst
                             standfirst={fields.standfirst}
