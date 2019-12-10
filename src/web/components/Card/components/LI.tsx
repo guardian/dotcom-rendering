@@ -1,6 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { until } from '@guardian/src-foundations/mq';
+
 import { verticalDivider } from '../lib/verticalDivider';
 
 const liStyles = css`
@@ -21,7 +23,9 @@ const marginBottomStyles = css`
 `;
 
 const marginTopStyles = css`
-    margin-top: 12px;
+    ${until.tablet} {
+        margin-top: 12px;
+    }
 `;
 
 const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
