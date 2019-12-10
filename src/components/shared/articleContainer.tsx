@@ -58,6 +58,7 @@ function ArticleContainer(content: Content, article: JSX.Element): JSX.Element {
     return <html lang="en-US" css={ArticleContainerStyles}>
         <head>
             <title>{content.id}</title>
+            <meta charSet="UTF-8" />
             <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
             <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
         </head>
