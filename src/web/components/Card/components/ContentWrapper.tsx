@@ -19,6 +19,10 @@ const coverageStyles = (percentage?: string) => {
           `
         : css`
               flex-grow: 1;
+              ${until.tablet} {
+                  /* This value pairs with the flex 1 used if there is an image */
+                  flex: 3;
+              }
           `;
 };
 

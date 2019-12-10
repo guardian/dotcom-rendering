@@ -14,7 +14,8 @@ export const ImageWrapper = ({ children, percentage }: Props) => {
             className={css`
                 flex-basis: ${percentage && percentage};
                 ${until.tablet} {
-                    flex-basis: 25%;
+                    /* Until tablet, images are always left and this value pairs with the flex 3 used for content */
+                    flex: 1;
                 }
 
                 img {
