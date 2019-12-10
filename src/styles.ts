@@ -10,6 +10,12 @@ export const baseMultiply = (value: number): number => value * BASE_PADDING;
 
 export const basePx = (...values: Array<number>): string => values.map(baseMultiply).join("px ") + "px";
 
+export const headlineFontStyles = css`
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+    margin: 0;
+`;
+
 export const sidePadding = css`
     padding-left: ${basePx(1)};
     padding-right: ${basePx(1)};

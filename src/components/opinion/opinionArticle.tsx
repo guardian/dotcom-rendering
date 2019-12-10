@@ -1,28 +1,29 @@
 import React from 'react';
 
-import HeaderImage from '../shared/headerImage';
+import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
-import ArticleHeadline from './articleHeadline';
-import ArticleStandfirst from './articleStandfirst';
-import ArticleByline from './articleByline';
+import OpinionHeadline from 'components/opinion/opinionHeadline';
+import ArticleStandfirst from 'components/news/articleStandfirst';
+import OpinionByline from 'components/opinion/opinionByline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
+import OpinionCutout from 'components/opinion/opinionCutout';
 import { Content } from 'capiThriftModels';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
-import { isFeature, articleSeries, articleContributors, articleMainImage } from 'capi';
+import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString } from 'pillar';
 
-export interface ArticleProps {
+export interface OpinionArticleProps {
     capi: Content;
     imageSalt: string;
 }
 
 const MainStyles = css`
-    background: ${palette.neutral[97]};
+    background: ${palette.opinion.faded};
 `;
 
 const MainDarkStyles = darkModeCss`
@@ -30,7 +31,7 @@ const MainDarkStyles = darkModeCss`
 `;
 
 const BorderStyles = css`
-    background: ${palette.neutral[100]};
+    background: ${palette.opinion.faded};
 
     ${from.wide} {
         width: ${breakpoints.wide}px;
@@ -48,11 +49,10 @@ const HeaderImageStyles = css`
     }
 `;
 
-const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
+const OpinionArticle = ({ capi, imageSalt }: OpinionArticleProps): JSX.Element => {
 
     const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
     const series = articleSeries(capi);
-    const feature = isFeature(capi) || 'starRating' in fields;
     const pillar = pillarFromString(pillarId);
     const pillarStyles = getPillarStyles(pillar);
     const contributors = articleContributors(capi);
@@ -63,34 +63,36 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
         <main css={[MainStyles, MainDarkStyles]}>
             <article css={BorderStyles}>
                 <header>
+                    <div css={articleWidthStyles}>
+                        <ArticleSeries series={series} pillarStyles={pillarStyles}/>
+                        <OpinionHeadline
+                            byline={fields.bylineHtml}
+                            headline={fields.headline}
+                            pillarStyles={pillarStyles}
+                        />
+                    </div>
+                    <OpinionCutout 
+                        contributors={contributors}
+                        imageSalt={imageSalt}
+                        className={articleWidthStyles}
+                    />
+                    <Keyline pillar={pillar} type={'article'}/>
+                    <ArticleStandfirst
+                            standfirst={fields.standfirst}
+                            feature={true}
+                            pillarStyles={pillarStyles}
+                            className={articleWidthStyles}
+                    />
+                    <OpinionByline
+                        pillarStyles={pillarStyles}
+                        publicationDate={webPublicationDate}
+                        contributors={contributors}
+                        className={articleWidthStyles}
+                    />
                     <HeaderImage
                         image={mainImage}
                         imageSalt={imageSalt}
                         className={HeaderImageStyles}
-                    />
-                    <div css={articleWidthStyles}>
-                        <ArticleSeries series={series} pillarStyles={pillarStyles}/>
-                        <ArticleHeadline
-                            headline={fields.headline}
-                            feature={feature}
-                            rating={String(fields.starRating)}
-                            pillarStyles={pillarStyles}
-                        />
-                        <ArticleStandfirst
-                            standfirst={fields.standfirst}
-                            feature={feature}
-                            pillarStyles={pillarStyles}
-                            className={articleWidthStyles}
-                        />
-                    </div>
-                    <Keyline pillar={pillar} type={'article'}/>
-                    <ArticleByline
-                        byline={fields.bylineHtml}
-                        pillarStyles={pillarStyles}
-                        publicationDate={webPublicationDate}
-                        contributors={contributors}
-                        imageSalt={imageSalt}
-                        className={articleWidthStyles}
                     />
                 </header>
                 <ArticleBody
@@ -107,4 +109,4 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
     );
 }
 
-export default Article;
+export default OpinionArticle;

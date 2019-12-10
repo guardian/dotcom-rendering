@@ -8,12 +8,14 @@ import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { Content } from 'capiThriftModels';
-import Article from 'components/news/article';
-import LiveblogArticle from 'components/liveblog/liveblogArticle';
-import ArticleContainer from 'components/shared/articleContainer';
 import { getConfigValue } from 'server/ssmConfig';
+import { Pillar, pillarFromString } from 'pillar';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 
+import Article from 'components/news/article';
+import LiveblogArticle from 'components/liveblog/liveblogArticle';
+import OpinionArticle from 'components/opinion/opinionArticle';
+import ArticleContainer from 'components/shared/articleContainer';
 
 // ----- Setup ----- //
 
@@ -53,7 +55,11 @@ function checkSupport(content: Content): Supported {
 function getArticleComponent(imageSalt: string, capi: Content): React.ReactElement {
   switch (capi.type) {
     case 'article':
-      return React.createElement(Article, { capi, imageSalt });
+        const ArticleComponent = (pillarFromString(capi.pillarId) === Pillar.opinion)
+            ? OpinionArticle
+            : Article
+
+        return React.createElement(ArticleComponent, { capi, imageSalt });
     case 'liveblog':
       return React.createElement(
         LiveblogArticle,

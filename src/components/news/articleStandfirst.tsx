@@ -45,15 +45,21 @@ interface ArticleStandfirstProps {
     standfirst: string;
     feature: boolean;
     pillarStyles: PillarStyles;
+    className: SerializedStyles;
 }
 
 const ArticleStandfirst = ({
     standfirst,
     pillarStyles,
     feature,
+    className
 }: ArticleStandfirstProps): JSX.Element =>
     <div
-        css={[StandfirstStyles(feature, pillarStyles), StandfirstDarkStyles(pillarStyles)]}
+        css={[
+            className,
+            StandfirstStyles(feature, pillarStyles),
+            StandfirstDarkStyles(pillarStyles)
+        ]}
         dangerouslySetInnerHTML={{__html: transform(standfirst)}}
     />
 

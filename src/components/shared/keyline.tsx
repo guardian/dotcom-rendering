@@ -35,6 +35,7 @@ const KeylineNewsStyles = css`
 const KeylineOpinionStyles = css`
     background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
     height: 24px;
+    margin-top: 84px;
 `;
 
 const KeylineDarkStyles = darkModeCss`
@@ -45,7 +46,7 @@ const KeylineDarkStyles = darkModeCss`
 export const Keyline = ({ pillar, type }: { pillar: Pillar; type: string }): JSX.Element => {
     const SelectedKeylineStyles = ((pillar, type): SerializedStyles => {
         if (type === 'liveblog') return KeylineLiveblogStyles;
-        switch(pillar) {
+        switch (pillar) {
             case Pillar.opinion:
                 return KeylineOpinionStyles;
             default:

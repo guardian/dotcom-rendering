@@ -33,11 +33,11 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
             color: ${palette.neutral[100]};
         }
 
-        .date, .follow {
+        time, .follow {
             ${textSans}
         }
 
-        .date {
+        time {
             font-size: 1.4rem;
             color: ${palette.neutral[93]};
             opacity: .8;
@@ -74,7 +74,7 @@ const LiveblogByline = ({
                 />
                 <div className="author">
                     <address dangerouslySetInnerHTML={{__html: byline}}></address>
-                    <time className="date">{ formatDate(new Date(publicationDate)) }</time>
+                    <time>{ formatDate(new Date(publicationDate)) }</time>
                     <div className="follow">Get alerts on this story</div>
                 </div>
             </LeftColumn>
