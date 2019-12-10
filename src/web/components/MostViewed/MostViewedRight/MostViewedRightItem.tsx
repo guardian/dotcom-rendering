@@ -22,7 +22,7 @@ const listItemStyles = css`
 const linkTagStyles = css`
     text-decoration: none;
     font-weight: 500;
-    ${headline.small()};
+    ${headline.xxxsmall()};
 
     &:link,
     &:active {
