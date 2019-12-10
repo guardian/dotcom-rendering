@@ -15,6 +15,7 @@ import { CapiError, capiEndpoint, getContent } from 'capi';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import OpinionArticle from 'components/opinion/opinionArticle';
+import ArticleContainer from 'components/shared/articleContainer';
 
 // ----- Setup ----- //
 
