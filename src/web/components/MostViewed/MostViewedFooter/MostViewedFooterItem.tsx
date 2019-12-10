@@ -53,7 +53,7 @@ const headlineLink = css`
     text-decoration: none;
     color: ${palette.neutral[7]};
     font-weight: 500;
-    ${headline.small()};
+    ${headline.xxxsmall()};
 `;
 
 const ageWarningStyles = css`
