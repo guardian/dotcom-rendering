@@ -1,12 +1,17 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { until } from '@guardian/src-foundations/mq';
+
 import { verticalDivider } from '../lib/verticalDivider';
 
 const ulStyles = (direction?: 'row' | 'column', padded?: boolean) => css`
     position: relative;
     display: flex;
     flex-direction: ${direction};
+    ${until.tablet} {
+        flex-direction: column;
+    }
 `;
 
 const marginBottomStyles = css`

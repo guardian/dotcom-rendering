@@ -1,13 +1,19 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { until } from '@guardian/src-foundations/mq';
+
 type Props = {
     children: JSXElements;
 };
 
-const spacingStyles = css`
+const containerStyles = css`
     display: flex;
     flex-direction: row-reverse;
+
+    ${until.tablet} {
+        display: none;
+    }
 
     margin-right: 10px;
     margin-top: 50px;
@@ -20,7 +26,7 @@ const sizingStyles = css`
 
 export const AvatarContainer = ({ children }: Props) => {
     return (
-        <div className={spacingStyles}>
+        <div className={containerStyles}>
             <div className={sizingStyles}>{children}</div>
         </div>
     );
