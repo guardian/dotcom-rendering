@@ -16,7 +16,7 @@
         "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
         "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
-        "storybook:snapshot": "node --max-old-space-size=4096 $(yarn bin)/build-storybook && percy-storybook --widths=1139"
+        "storybook:snapshot": "node --max-old-space-size=4096 $(yarn bin)/build-storybook && percy-storybook --widths=750,1139"
     },
     "husky": {
         "hooks": {
