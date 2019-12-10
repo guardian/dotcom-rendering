@@ -61,12 +61,16 @@ export const Card = ({
     avatar,
     showClock,
 }: CardType) => {
-    // If there was no image given or image size was not set, percentage is null and
-    // no flex-basis property is set in the wrappers, so content flows normally
-    const imageCoverage =
-        trailImage && trailImage.size && coverages.image[trailImage.size];
-    const contentCoverage =
-        trailImage && trailImage.size && coverages.content[trailImage.size];
+    // Decide how we position the image on the card
+    let imageCoverage: CardPercentageType | undefined;
+    let contentCoverage: CardPercentageType | undefined;
+    if (trailImage?.size && trailImage.position !== 'top') {
+        // We only specifiy an explicit width for the image when
+        // we're positioning left or right, not top. Top positioned
+        // images flow naturally
+        imageCoverage = coverages.image[trailImage.size];
+        contentCoverage = coverages.content[trailImage.size];
+    }
 
     const isOpinion = pillar === 'opinion';
 
@@ -84,7 +88,7 @@ export const Card = ({
             }
         >
             <TopBar topBarColour={palette[pillar].main}>
-                <CardLayout imagePosition={trailImage && trailImage.position}>
+                <CardLayout imagePosition={trailImage?.position}>
                     <>
                         {trailImage && (
                             <ImageWrapper percentage={imageCoverage}>
