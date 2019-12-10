@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
+import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
     text: string;
@@ -18,12 +19,18 @@ const bylineStyles = (size: SmallHeadlineSize) => {
                 display: block;
                 font-style: italic;
                 ${headline.xsmall()};
+                ${until.desktop} {
+                    ${headline.xxsmall()};
+                }
             `;
         case 'medium':
             return css`
                 display: block;
                 font-style: italic;
                 ${headline.xxsmall()};
+                ${until.desktop} {
+                    ${headline.xxxsmall()};
+                }
             `;
         case 'small':
             return css`
