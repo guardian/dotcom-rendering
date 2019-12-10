@@ -11,11 +11,28 @@ type Props = {
     size: SmallHeadlineSize;
 };
 
-const bylineStyles = (size: SmallHeadlineSize) => css`
-    display: block;
-    ${headline[size]()};
-    font-style: italic;
-`;
+const bylineStyles = (size: SmallHeadlineSize) => {
+    switch (size) {
+        case 'large':
+            return css`
+                display: block;
+                font-style: italic;
+                ${headline.xsmall()};
+            `;
+        case 'medium':
+            return css`
+                display: block;
+                font-style: italic;
+                ${headline.xxsmall()};
+            `;
+        case 'small':
+            return css`
+                display: block;
+                font-style: italic;
+                ${headline.xxxsmall()};
+            `;
+    }
+};
 
 const colourStyles = (designType: DesignType, pillar: Pillar) => {
     switch (designType) {

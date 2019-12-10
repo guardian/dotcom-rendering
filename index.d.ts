@@ -254,7 +254,7 @@ type CardImageType = {
     size?: ImageSizeType;
 };
 
-type SmallHeadlineSize = 'xxxsmall' | 'xxsmall' | 'xsmall';
+type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
 type AvatarType = {
     src: string;

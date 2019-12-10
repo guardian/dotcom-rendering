@@ -47,14 +47,14 @@ Feature.story = { name: 'Feature' };
 export const xsmallStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineText="This is how a xsmall card headline looks"
+            headlineText="This is how a large card headline looks"
             designType="Article"
             pillar="news"
-            size="xsmall"
+            size="large"
         />
     </Section>
 );
-xsmallStory.story = { name: 'Size | xsmall' };
+xsmallStory.story = { name: 'Size | large' };
 
 export const liveStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -120,24 +120,24 @@ export const AnalysisXSmall = () => (
             headlineText="Xsmall card headline for an Analysis article"
             designType="Analysis"
             pillar="lifestyle"
-            size="xsmall"
+            size="large"
         />
     </Section>
 );
-AnalysisXSmall.story = { name: 'Underlined | xsmall' };
+AnalysisXSmall.story = { name: 'Underlined | large' };
 
 export const opinionxxxsmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <CardHeadline
-            headlineText="This is how xxxsmall card headline for opinion articles look"
+            headlineText="This is how small card headline for opinion articles look"
             designType="Comment"
             pillar="opinion"
             showQuotes={true}
-            size="xxxsmall"
+            size="small"
         />
     </Section>
 );
-opinionxxxsmall.story = { name: 'Quotes | xxxsmall' };
+opinionxxxsmall.story = { name: 'Quotes | small' };
 
 export const OpinionKicker = () => (
     <Section showTopBorder={false} showSideBorders={false}>
