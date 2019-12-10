@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { until } from '@guardian/src-foundations/mq';
+
 type Props = {
     children: JSXElements;
     imagePosition?: ImagePositionType;
@@ -25,6 +27,9 @@ export const CardLayout = ({ children, imagePosition }: Props) => (
         className={css`
             display: flex;
             flex-direction: ${decideDirection(imagePosition)};
+            ${until.tablet} {
+                flex-direction: row;
+            }
             width: 100%;
         `}
     >

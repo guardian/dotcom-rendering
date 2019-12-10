@@ -41,7 +41,7 @@ export const News = () => (
                                     designType: 'Article',
                                     headlineText:
                                         'The Knights Who Say Ni demand a sacrifice',
-                                    size: 'xsmall',
+                                    size: 'large',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -58,7 +58,12 @@ export const News = () => (
                             }}
                         />
                     </LI>
-                    <LI percentage="25%" showDivider={true} padSides={true}>
+                    <LI
+                        percentage="25%"
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                        padSides={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -67,7 +72,7 @@ export const News = () => (
                                 headline: {
                                     designType: 'Article',
                                     headlineText: "Yes. We're all individuals",
-                                    size: 'xsmall',
+                                    size: 'large',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Brian',
@@ -110,7 +115,12 @@ export const News = () => (
                             }}
                         />
                     </LI>
-                    <LI percentage="25%" showDivider={true} padSides={true}>
+                    <LI
+                        percentage="25%"
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                        padSides={true}
+                    >
                         <UL direction="column">
                             <LI bottomMargin={true} stretch={true}>
                                 <Card
@@ -146,7 +156,7 @@ export const News = () => (
                                             headlineText:
                                                 'Listen. Strange women lying in ponds distributing swords is no basis for a system of government',
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                         },
                                     }}
                                 />
@@ -162,7 +172,7 @@ export const News = () => (
                                             headlineText:
                                                 'Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony',
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             kicker: {
                                                 text: 'Monty Python',
                                                 pillar: 'news',
@@ -173,7 +183,12 @@ export const News = () => (
                             </LI>
                         </UL>
                     </LI>
-                    <LI percentage="25%" showDivider={true} padSides={true}>
+                    <LI
+                        percentage="25%"
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                        padSides={true}
+                    >
                         <UL direction="column">
                             <LI bottomMargin={true} stretch={true}>
                                 <Card
@@ -186,7 +201,7 @@ export const News = () => (
                                             headlineText:
                                                 'Are you suggesting that coconuts migrate?',
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             kicker: {
                                                 text: 'Run Away!',
                                                 pillar: 'sport',
@@ -206,7 +221,7 @@ export const News = () => (
                                             headlineText:
                                                 "On second thoughts, let's not go there. It is a silly place",
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -226,7 +241,7 @@ export const News = () => (
                                             headlineText:
                                                 'Let us ride to Camelot',
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -246,7 +261,7 @@ export const News = () => (
                                             headlineText:
                                                 "Where'd you get the coconuts?",
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             kicker: {
                                                 text: 'Monty Python!',
                                                 pillar: 'news',
@@ -266,7 +281,7 @@ export const News = () => (
                                             headlineText:
                                                 'Now, look here, my good man',
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             kicker: {
                                                 text: 'Terry Gillingham',
                                                 pillar: 'lifestyle',
@@ -286,7 +301,7 @@ export const News = () => (
                                             headlineText:
                                                 "We shall say 'Ni' again to you, if you do not appease us",
                                             pillar: 'news',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             kicker: {
                                                 text: 'Monty Python',
                                                 pillar: 'news',
@@ -324,7 +339,7 @@ export const InDepth = () => (
                                             designType: 'Article',
                                             headlineText:
                                                 "We shall say 'Ni' again to you, if you do not appease us",
-                                            size: 'xxsmall',
+                                            size: 'medium',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -349,7 +364,7 @@ export const InDepth = () => (
                                             designType: 'Article',
                                             headlineText:
                                                 'Now, look here, my good man',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -374,7 +389,7 @@ export const InDepth = () => (
                                             designType: 'Article',
                                             headlineText:
                                                 "Where'd you get the coconuts",
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -399,7 +414,7 @@ export const InDepth = () => (
                                             designType: 'Article',
                                             headlineText:
                                                 'Let us ride to Camelot!',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -424,7 +439,7 @@ export const InDepth = () => (
                                             designType: 'Article',
                                             headlineText:
                                                 'How do you know she is a witch? Burn her!',
-                                            size: 'xxxsmall',
+                                            size: 'small',
                                             pillar: 'news',
                                             kicker: {
                                                 text: 'Holy Grail',
@@ -441,7 +456,12 @@ export const InDepth = () => (
                             </LI>
                         </UL>
                     </LI>
-                    <LI percentage="50%" showDivider={true} padSides={true}>
+                    <LI
+                        percentage="50%"
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                        padSides={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -451,7 +471,7 @@ export const InDepth = () => (
                                     designType: 'Article',
                                     headlineText:
                                         "Go and boil your bottoms, sons of a silly person!'",
-                                    size: 'xsmall',
+                                    size: 'large',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -490,7 +510,7 @@ export const Related = () => (
                                     designType: 'Article',
                                     headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
-                                    size: 'xxsmall',
+                                    size: 'medium',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Holy Grail',
@@ -505,7 +525,11 @@ export const Related = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -514,7 +538,7 @@ export const Related = () => (
                                 headline: {
                                     designType: 'Article',
                                     headlineText: 'Now, look here, my good man',
-                                    size: 'xxsmall',
+                                    size: 'medium',
                                     pillar: 'sport',
                                     kicker: {
                                         text: 'Holy Grail',
@@ -529,7 +553,11 @@ export const Related = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -539,7 +567,7 @@ export const Related = () => (
                                     designType: 'Article',
                                     headlineText:
                                         "Where'd you get the coconuts",
-                                    size: 'xxsmall',
+                                    size: 'medium',
                                     pillar: 'sport',
                                     kicker: {
                                         text: 'Holy Grail',
@@ -566,7 +594,7 @@ export const Related = () => (
                                     designType: 'Article',
                                     headlineText:
                                         'Go and boil your bottoms, sons of a silly person!',
-                                    size: 'xxxsmall',
+                                    size: 'small',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -577,7 +605,11 @@ export const Related = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -586,7 +618,7 @@ export const Related = () => (
                                 headline: {
                                     designType: 'Article',
                                     headlineText: 'Let us ride to Camelot!',
-                                    size: 'xxxsmall',
+                                    size: 'small',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Monty Python',
@@ -597,7 +629,11 @@ export const Related = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -606,7 +642,7 @@ export const Related = () => (
                                 headline: {
                                     designType: 'Interview',
                                     headlineText: 'Let us ride to Camelot!',
-                                    size: 'xxxsmall',
+                                    size: 'small',
                                     pillar: 'culture',
                                     kicker: {
                                         text: 'Monty Python',
@@ -617,7 +653,11 @@ export const Related = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -627,7 +667,7 @@ export const Related = () => (
                                     designType: 'Feature',
                                     headlineText:
                                         'How do you know she is a witch? Burn her!',
-                                    size: 'xxxsmall',
+                                    size: 'small',
                                     pillar: 'lifestyle',
                                     kicker: {
                                         text: 'Holy Grail',
@@ -661,7 +701,7 @@ export const Spotlight = () => (
                             designType: 'Feature',
                             headlineText:
                                 "We shall say 'Ni' again to you, if you do not appease us",
-                            size: 'xsmall',
+                            size: 'large',
                             pillar: 'sport',
                             kicker: {
                                 text: 'Holy Grail',
@@ -700,7 +740,7 @@ export const Quad = () => (
                                     designType: 'Comment',
                                     headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
-                                    size: 'xxsmall',
+                                    size: 'medium',
                                     pillar: 'opinion',
                                     kicker: {
                                         text: 'Holy Grail',
@@ -719,7 +759,11 @@ export const Quad = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -729,7 +773,7 @@ export const Quad = () => (
                                     designType: 'Comment',
                                     headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
-                                    size: 'xxsmall',
+                                    size: 'medium',
                                     pillar: 'opinion',
                                     showQuotes: true,
                                 },
@@ -742,7 +786,11 @@ export const Quad = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -752,7 +800,7 @@ export const Quad = () => (
                                     designType: 'Article',
                                     headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
-                                    size: 'xxsmall',
+                                    size: 'medium',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Holy Grail',
@@ -768,7 +816,11 @@ export const Quad = () => (
                             }}
                         />
                     </LI>
-                    <LI padSides={true} showDivider={true}>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
                         <Card
                             {...{
                                 linkTo:
@@ -778,7 +830,7 @@ export const Quad = () => (
                                     designType: 'Article',
                                     headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
-                                    size: 'xxsmall',
+                                    size: 'medium',
                                     pillar: 'news',
                                     kicker: {
                                         text: 'Holy Grail',

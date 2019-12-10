@@ -5,6 +5,8 @@ import { palette } from '@guardian/src-foundations';
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Avatar } from '@frontend/web/components/Avatar';
+import { Flex } from '@frontend/web/components/Flex';
+import { Hide } from '@frontend/web/components/Hide';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -100,17 +102,32 @@ export const Card = ({
                             </ImageWrapper>
                         )}
                         <ContentWrapper percentage={contentCoverage}>
-                            <HeadlineWrapper>
-                                <CardHeadline
-                                    headlineText={headline.headlineText}
-                                    designType={headline.designType}
-                                    pillar={headline.pillar}
-                                    size={headline.size}
-                                    showQuotes={headline.showQuotes}
-                                    kicker={headline.kicker}
-                                    byline={headline.byline}
-                                />
-                            </HeadlineWrapper>
+                            <Flex>
+                                <HeadlineWrapper>
+                                    <CardHeadline
+                                        headlineText={headline.headlineText}
+                                        designType={headline.designType}
+                                        pillar={headline.pillar}
+                                        size={headline.size}
+                                        showQuotes={headline.showQuotes}
+                                        kicker={headline.kicker}
+                                        byline={headline.byline}
+                                    />
+                                </HeadlineWrapper>
+                                <>
+                                    {avatar && (
+                                        <Hide when="above" breakpoint="tablet">
+                                            <AvatarContainer>
+                                                <Avatar
+                                                    imageSrc={avatar.src}
+                                                    imageAlt={avatar.alt}
+                                                    pillar={pillar}
+                                                />
+                                            </AvatarContainer>
+                                        </Hide>
+                                    )}
+                                </>
+                            </Flex>
                             <div>
                                 {standfirst && (
                                     <StandfirstWrapper>
@@ -118,13 +135,15 @@ export const Card = ({
                                     </StandfirstWrapper>
                                 )}
                                 {avatar && (
-                                    <AvatarContainer>
-                                        <Avatar
-                                            imageSrc={avatar.src}
-                                            imageAlt={avatar.alt}
-                                            pillar={pillar}
-                                        />
-                                    </AvatarContainer>
+                                    <Hide when="below" breakpoint="tablet">
+                                        <AvatarContainer>
+                                            <Avatar
+                                                imageSrc={avatar.src}
+                                                imageAlt={avatar.alt}
+                                                pillar={pillar}
+                                            />
+                                        </AvatarContainer>
+                                    </Hide>
                                 )}
                                 <CardFooter>
                                     <>

@@ -15,13 +15,13 @@ export const xsmallStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <LinkHeadline
             designType="Article"
-            headlineText="This is how a xsmall headline link looks"
+            headlineText="This is how a large headline link looks"
             pillar="news"
-            size="xsmall"
+            size="large"
         />
     </Section>
 );
-xsmallStory.story = { name: 'Size | xsmall' };
+xsmallStory.story = { name: 'Size | large' };
 
 export const liveStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -85,15 +85,15 @@ export const opinionxxxsmall = () => (
     <Section showTopBorder={false} showSideBorders={false}>
         <LinkHeadline
             designType="Comment"
-            headlineText="This is how xxxsmall links to opinion articles look"
+            headlineText="This is how small links to opinion articles look"
             pillar="opinion"
             showQuotes={true}
-            size="xxxsmall"
+            size="small"
             byline="Comment byline"
         />
     </Section>
 );
-opinionxxxsmall.story = { name: 'Quotes | xxxsmall' };
+opinionxxxsmall.story = { name: 'Quotes | small' };
 
 export const OpinionKicker = () => (
     <Section showTopBorder={false} showSideBorders={false}>
@@ -118,7 +118,7 @@ export const InUnderlinedState = () => (
             headlineText="This is the underlined state when showUnderline is true"
             pillar="news"
             showUnderline={true}
-            size="xxxsmall"
+            size="small"
             kicker={{
                 text: 'I am never underlined',
                 showSlash: true,

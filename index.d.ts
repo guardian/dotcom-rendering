@@ -254,7 +254,7 @@ type CardImageType = {
     size?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
 };
 
-type SmallHeadlineSize = 'xxxsmall' | 'xxsmall' | 'xsmall';
+type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
 type AvatarType = {
     src: string;

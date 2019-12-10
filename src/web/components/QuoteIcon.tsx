@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { until } from '@guardian/src-foundations/mq';
+
 const quoteStyles = (colour?: string) => css`
     height: 17px;
     width: 9px;
@@ -10,47 +12,59 @@ const quoteStyles = (colour?: string) => css`
     fill: ${colour && colour};
 `;
 
-const sizeStyles = (size: 'xxxsmall' | 'xxsmall' | 'xsmall') => {
+const sizeStyles = (size: SmallHeadlineSize) => {
+    const smallSvg = css`
+        svg {
+            height: 16px;
+            width: 8px;
+        }
+    `;
+    const mediumSvg = css`
+        margin-right: 4px;
+        svg {
+            height: 20px;
+            width: 11px;
+        }
+    `;
+    const largeSvg = css`
+        margin-right: 8px;
+        svg {
+            height: 24px;
+            width: 13px;
+        }
+    `;
     switch (size) {
-        case 'xxxsmall':
+        case 'small':
             return css`
-                svg {
-                    height: 16px;
-                    width: 8px;
+                ${smallSvg}
+            `;
+        case 'medium':
+            return css`
+                ${mediumSvg}
+                ${until.desktop} {
+                    ${smallSvg}
                 }
             `;
-        case 'xxsmall':
+        case 'large':
             return css`
-                margin-right: 4px;
-                svg {
-                    height: 20px;
-                    width: 11px;
-                }
-            `;
-        case 'xsmall':
-            return css`
-                margin-right: 8px;
-                svg {
-                    height: 24px;
-                    width: 13px;
+                ${largeSvg}
+                ${until.desktop} {
+                    ${mediumSvg}
                 }
             `;
         default:
             return css`
-                svg {
-                    height: 20px;
-                    width: 11px;
-                }
+                ${mediumSvg}
             `;
     }
 };
 
 type Props = {
     colour?: string;
-    size?: 'xxxsmall' | 'xxsmall' | 'xsmall';
+    size?: SmallHeadlineSize;
 };
 
-export const QuoteIcon = ({ colour, size = 'xxsmall' }: Props) => (
+export const QuoteIcon = ({ colour, size = 'medium' }: Props) => (
     <span className={sizeStyles(size)}>
         <svg
             width="70"
