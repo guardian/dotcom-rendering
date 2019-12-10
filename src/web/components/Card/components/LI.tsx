@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { until } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 import { verticalDivider } from '../lib/verticalDivider';
 
@@ -14,8 +14,10 @@ const liStyles = css`
 
 const sidePaddingStyles = css`
     /* Set spacing on the li element */
-    padding-left: 10px;
-    padding-right: 10px;
+    ${from.tablet} {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 `;
 
 const marginBottomStyles = css`
