@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
+import { Hide } from '@frontend/web/components/Hide';
 
 import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
@@ -17,6 +18,9 @@ export const OnwardsLayout = ({ content, component: Content }: Props) => (
             <OnwardsTitle title={content.heading} />
         </LeftColumn>
         <OnwardsContainer>
+            <Hide when="above" breakpoint="leftCol">
+                <OnwardsTitle title={content.heading} />
+            </Hide>
             <Content content={content.trails} />
         </OnwardsContainer>
     </Flex>

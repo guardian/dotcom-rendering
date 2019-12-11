@@ -23,6 +23,10 @@ export const OnwardsTitle = ({ title }: { title: string }) => (
             ${from.wide} {
                 font-weight: 900;
             }
+
+            ${from.tablet} {
+                margin-left: 10px;
+            }
         `}
     >
         {title}
