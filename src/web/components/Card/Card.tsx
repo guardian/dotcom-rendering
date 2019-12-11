@@ -75,8 +75,6 @@ export const Card = ({
         contentCoverage = coverages.content[trailImage.size];
     }
 
-    const isOpinion = pillar === 'opinion';
-
     return (
         <CardLink linkTo={linkTo} designType={designType}>
             <TopBar topBarColour={palette[pillar].main}>
@@ -145,7 +143,7 @@ export const Card = ({
                                                 showClock={showClock}
                                             />
                                         )}
-                                        {isOpinion && (
+                                        {designType === 'Comment' && (
                                             <LinesWrapper>
                                                 <GuardianLines pillar="opinion" />
                                             </LinesWrapper>
