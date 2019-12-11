@@ -18,7 +18,7 @@ export enum TagType {
   CAMPAIGN = 'campaign',
 }
 
-declare enum ContentType {
+export enum ContentType {
   ARTICLE = 'article',
   LIVEBLOG = 'liveblog',
   GALLERY = 'gallery',

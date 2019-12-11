@@ -3,24 +3,21 @@
 import path from 'path';
 import express from 'express';
 import compression from 'compression';
-import React from 'react';
+import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
 import { Content } from 'capiThriftModels';
 import { getConfigValue } from 'server/ssmConfig';
-import { Pillar, pillarFromString } from 'pillar';
 import { CapiError, capiEndpoint, getContent } from 'capi';
+import Page from 'components/shared/page';
 
-import Article from 'components/news/article';
-import LiveblogArticle from 'components/liveblog/liveblogArticle';
-import OpinionArticle from 'components/opinion/opinionArticle';
-import ArticleContainer from 'components/shared/articleContainer';
 
 // ----- Setup ----- //
 
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
+
 
 // ----- Functions ----- //
 
@@ -52,23 +49,6 @@ function checkSupport(content: Content): Supported {
 
 }
 
-function getArticleComponent(imageSalt: string, capi: Content): React.ReactElement {
-  switch (capi.type) {
-    case 'article':
-        const ArticleComponent = (pillarFromString(capi.pillarId) === Pillar.opinion)
-            ? OpinionArticle
-            : Article
-
-        return React.createElement(ArticleComponent, { capi, imageSalt });
-    case 'liveblog':
-      return React.createElement(
-        LiveblogArticle,
-        { capi, isLive: true, imageSalt }
-      );
-    default:
-      return React.createElement('p', null, `${capi.type} not implemented yet`);
-  }
-}
 
 // ----- App ----- //
 
@@ -114,11 +94,10 @@ app.get('/*', async (req, res) => {
         const support = checkSupport(content);
 
         if (support.kind === Support.Supported) {
-          const article = getArticleComponent(imageSalt, content);
-          const template = ArticleContainer(content, article);
-          const html = renderToString(template);
+          const page = h(Page, { content, imageSalt });
+
           res.write('<!DOCTYPE html>');
-          res.write(html);
+          res.write(renderToString(page));
           res.end();
         } else {
           console.warn(`I can\'t render that type of content yet! ${support.reason}`);
