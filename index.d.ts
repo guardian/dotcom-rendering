@@ -251,7 +251,7 @@ type ImagePositionType = 'left' | 'top' | 'right';
 type CardImageType = {
     url: string;
     position?: ImagePositionType;
-    size?: ImageSizeType;
+    size?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
 };
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';

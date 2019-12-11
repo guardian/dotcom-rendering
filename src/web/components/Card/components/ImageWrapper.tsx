@@ -14,7 +14,14 @@ export const ImageWrapper = ({ children, percentage }: Props) => {
             className={css`
                 flex-basis: ${percentage && percentage};
                 ${until.tablet} {
-                    flex-basis: 25%;
+                    /* Below tablet, we fix the size of the image and add a margin
+                       around it. The corresponding content flex grows to fill the space */
+                    margin-left: 6px;
+                    width: 119px;
+                    flex-shrink: 0;
+                    margin-top: 6px;
+                    margin-bottom: 6px;
+                    flex-basis: unset;
                 }
 
                 img {

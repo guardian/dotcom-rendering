@@ -14,7 +14,7 @@ const coverageStyles = (percentage?: string) => {
         ? css`
               flex-basis: ${percentage};
               ${until.tablet} {
-                  flex-basis: 75%;
+                  flex-basis: unset;
               }
           `
         : css`

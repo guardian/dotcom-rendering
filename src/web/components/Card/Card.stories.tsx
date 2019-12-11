@@ -82,7 +82,6 @@ export const News = () => (
                                 trailImage: {
                                     url: imageUrls[5],
                                     position: 'top',
-                                    size: 'small',
                                 },
                                 standfirst:
                                     "Well, obviously it's not meant to be taken literally. It refers to any manufacturer of dairy products",
@@ -110,7 +109,6 @@ export const News = () => (
                                 trailImage: {
                                     url: imageUrls[3],
                                     position: 'top',
-                                    size: 'medium',
                                 },
                                 standfirst:
                                     'The swallow may fly south with the sun, and the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land. Burn her anyway!',
@@ -143,7 +141,6 @@ export const News = () => (
                                         trailImage: {
                                             url: imageUrls[6],
                                             position: 'top',
-                                            size: 'small',
                                         },
                                     }}
                                 />
@@ -484,7 +481,6 @@ export const InDepth = () => (
                                 trailImage: {
                                     url: imageUrls[0],
                                     position: 'top',
-                                    size: 'large',
                                 },
                             }}
                         />
@@ -525,7 +521,6 @@ export const Related = () => (
                                 trailImage: {
                                     url: imageUrls[5],
                                     position: 'top',
-                                    size: 'small',
                                 },
                             }}
                         />
@@ -554,7 +549,6 @@ export const Related = () => (
                                 trailImage: {
                                     url: imageUrls[6],
                                     position: 'top',
-                                    size: 'small',
                                 },
                             }}
                         />
@@ -584,7 +578,6 @@ export const Related = () => (
                                 trailImage: {
                                     url: imageUrls[4],
                                     position: 'top',
-                                    size: 'small',
                                 },
                             }}
                         />
@@ -788,7 +781,6 @@ export const Quad = () => (
                                 trailImage: {
                                     url: imageUrls[0],
                                     position: 'top',
-                                    size: 'medium',
                                 },
                                 showClock: true,
                             }}
@@ -819,7 +811,6 @@ export const Quad = () => (
                                 trailImage: {
                                     url: imageUrls[0],
                                     position: 'top',
-                                    size: 'medium',
                                 },
                                 showClock: true,
                             }}
@@ -850,7 +841,6 @@ export const Quad = () => (
                                 trailImage: {
                                     url: imageUrls[0],
                                     position: 'top',
-                                    size: 'medium',
                                 },
                                 showClock: true,
                             }}
