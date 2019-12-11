@@ -60,24 +60,29 @@ const PageStyles = css`
     }
 `;
 
-function ArticleBody(props: { imageSalt: string, capi: Content }): React.ReactElement {
-    switch (props.capi.type) {
+interface BodyProps {
+    imageSalt: string;
+    capi: Content;
+}
+
+function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
+    switch (capi.type) {
         case 'article':
-            const Component = (pillarFromString(props.capi.pillarId) === Pillar.opinion)
+            const Component = (pillarFromString(capi.pillarId) === Pillar.opinion)
                 ? OpinionArticle
                 : Article;
 
             return <>
-                <Component capi={props.capi} imageSalt={props.imageSalt} />
+                <Component capi={capi} imageSalt={imageSalt} />
                 <script src="/assets/article.js"></script>
             </>;
         case 'liveblog':
             return <>
-                <LiveblogArticle capi={props.capi} imageSalt={props.imageSalt} />
+                <LiveblogArticle capi={capi} imageSalt={imageSalt} />
                 <script src="/assets/liveblog.js"></script>
             </>;
         default:
-            return <p>{props.capi.type} not implemented yet</p>;
+            return <p>{capi.type} not implemented yet</p>;
     }
 }
 
