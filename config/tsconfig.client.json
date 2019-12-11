@@ -4,7 +4,7 @@
         // Output latest features; allow babel to handle browser targeting
         "target": "es2020"
     },
-    "files": [
-        "../src/client/client.ts"
+    "include": [
+        "../src/client/*"
     ]
 }
