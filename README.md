@@ -79,3 +79,10 @@ ESLint is used to validate the code. It can be run like this:
 ```sh
 npm run lint
 ```
+
+### Storybook
+A good way to see components and test them in isolation is to run storybook:
+
+```sh
+npm run storybook
+```

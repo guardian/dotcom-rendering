@@ -11,7 +11,6 @@ const AnalysisHeadlineStyles = (kicker: string): SerializedStyles => css`
     line-height: 3.6rem;
     background-image: repeating-linear-gradient(to bottom, transparent, transparent calc(3.6rem - 1px), ${kicker});
     background-size: 100vw 3.6rem;
-    background-repeat: repeat-y;
 
     ${until.wide} {
         background-position: ${basePx(1)} 0;
