@@ -32,10 +32,18 @@ export const analysis = (): JSX.Element => <ArticleHeadline
   pillarStyles={pillarColours[Pillar.news]}
 />
 
-export const starRating = (): JSX.Element => <ArticleHeadline
+export const highRating = (): JSX.Element => <ArticleHeadline
   headline="Headline"
   feature={false}
   analysis={false}
   pillarStyles={pillarColours[Pillar.news]}
   rating="5"
+/>
+
+export const lowRating = (): JSX.Element => <ArticleHeadline
+  headline="Headline"
+  feature={false}
+  analysis={false}
+  pillarStyles={pillarColours[Pillar.news]}
+  rating="2"
 />
