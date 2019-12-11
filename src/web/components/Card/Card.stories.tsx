@@ -756,6 +756,7 @@ export const Quad = () => (
                                     alt: 'Avatar alt text',
                                 },
                                 showClock: true,
+                                designType: 'Comment',
                             }}
                         />
                     </LI>
@@ -770,12 +771,11 @@ export const Quad = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'opinion',
                                 headline: {
-                                    designType: 'Comment',
+                                    designType: 'Article',
                                     headlineText:
                                         "We shall say 'Ni' again to you, if you do not appease us",
                                     size: 'medium',
                                     pillar: 'opinion',
-                                    showQuotes: true,
                                 },
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 trailImage: {
