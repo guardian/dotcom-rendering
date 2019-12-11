@@ -56,6 +56,7 @@ const coverages: CoveragesType = {
 export const Card = ({
     linkTo,
     pillar,
+    designType,
     headline,
     webPublicationDate,
     trailImage,
@@ -77,18 +78,7 @@ export const Card = ({
     const isOpinion = pillar === 'opinion';
 
     return (
-        <CardLink
-            linkTo={linkTo}
-            backgroundColour={
-                isOpinion ? palette.opinion.faded : palette.neutral[97]
-            }
-            backgroundOnHover={
-                // TODO: This colour is hard coded here because it does not yet
-                //       exist in src-foundation. Once it's been added, please
-                //       remove this. @siadcock is aware.
-                isOpinion ? '#FDF0E8' : palette.neutral[93]
-            }
-        >
+        <CardLink linkTo={linkTo} designType={designType}>
             <TopBar topBarColour={palette[pillar].main}>
                 <CardLayout imagePosition={trailImage && trailImage.position}>
                     <>

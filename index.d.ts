@@ -263,6 +263,7 @@ type AvatarType = {
 
 interface CardType {
     linkTo: string;
+    designType?: DesignType;
     pillar: Pillar;
     headline: CardHeadlineType;
     webPublicationDate?: string;

@@ -756,6 +756,7 @@ export const Quad = () => (
                                     alt: 'Avatar alt text',
                                 },
                                 showClock: true,
+                                designType: 'Comment',
                             }}
                         />
                     </LI>
