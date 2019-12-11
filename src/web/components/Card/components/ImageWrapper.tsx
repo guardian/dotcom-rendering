@@ -21,6 +21,7 @@ export const ImageWrapper = ({ children, percentage }: Props) => {
                     flex-shrink: 0;
                     margin-top: 6px;
                     margin-bottom: 6px;
+                    flex-basis: unset;
                 }
 
                 img {
