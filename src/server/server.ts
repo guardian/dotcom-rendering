@@ -16,6 +16,7 @@ import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import OpinionArticle from 'components/opinion/opinionArticle';
 import ArticleContainer from 'components/shared/articleContainer';
+import ImmersiveArticle from 'components/immersive/immersiveArticle';
 
 // ----- Setup ----- //
 
@@ -38,11 +39,7 @@ type Supported = {
 
 function checkSupport(content: Content): Supported {
 
-  const { fields, atoms } = content;
-
-  if (fields.displayHint === 'immersive') {
-    return { kind: Support.Unsupported, reason: 'The article contains an immersive displayHint' };
-  }
+  const { atoms } = content;
 
   if (atoms) {
     return { kind: Support.Unsupported, reason: 'The article contains atoms' };
@@ -52,13 +49,17 @@ function checkSupport(content: Content): Supported {
 
 }
 
+function getArticleSubtype(capi: Content) {
+  if (pillarFromString(capi.pillarId) === Pillar.opinion) return OpinionArticle;
+  if (capi.fields.displayHint === 'immersive') return ImmersiveArticle;
+
+  return Article;
+}
+
 function getArticleComponent(imageSalt: string, capi: Content): React.ReactElement {
   switch (capi.type) {
     case 'article':
-        const ArticleComponent = (pillarFromString(capi.pillarId) === Pillar.opinion)
-            ? OpinionArticle
-            : Article
-
+        const ArticleComponent = getArticleSubtype(capi);
         return React.createElement(ArticleComponent, { capi, imageSalt });
     case 'liveblog':
       return React.createElement(
