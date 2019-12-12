@@ -5,7 +5,7 @@ import express from 'express';
 import compression from 'compression';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
-import fetch from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 
 import { Content } from 'capiThriftModels';
 import { getConfigValue } from 'server/ssmConfig';
@@ -49,6 +49,18 @@ function checkSupport(content: Content): Supported {
 
 }
 
+async function parseMapiError(mapiResponse: Response): Promise<string> {
+  try {
+    const mapiMsg = (await mapiResponse.json())?.errorMessage;
+    return mapiMsg ? `the following message: ${mapiMsg}` : 'no error message';
+  } catch (_) {
+    return 'a message that I didn\'t understand';
+  }
+}
+
+const mapiError = async (mapiResponse: Response): Promise<string> =>
+  `MAPI wasn't happy about that request, it returned ${mapiResponse.status}, with ${await parseMapiError(mapiResponse)}`;
+
 
 // ----- App ----- //
 
@@ -65,7 +77,7 @@ app.get('/healthcheck', (_req, res) => {
 
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
-app.get('/*', async (req, res) => {
+app.get('/dev-article/*', async (req, res) => {
 
   try {
 
@@ -109,6 +121,24 @@ app.get('/*', async (req, res) => {
   } catch (e) {
     console.error(`This error occurred, but I don't know why: ${e}`);
     res.sendStatus(500);
+  }
+
+});
+
+app.get('/*', async (req, res) => {
+  const url = new URL(req.originalUrl, 'https://mobile.code.dev-guardianapis.com');
+
+  console.log(`I'm asking MAPI for this: ${url.href}...`);
+  const mapiResponse = await fetch(url.href);
+
+  if (mapiResponse.ok) {
+    res.type('json');
+    mapiResponse.body.pipe(res);
+
+    console.log('...and I\'ve passed on the response that MAPI gave me');
+  } else {
+    console.warn(await mapiError(mapiResponse));
+    res.sendStatus(400);
   }
 
 });
