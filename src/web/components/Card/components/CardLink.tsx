@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 
-const linkStyles = (designType: DesignType | undefined) => {
+const linkStyles = (designType?: DesignType) => {
     const baseLinkStyles = css`
         display: flex;
         /* a tag specific styles */
@@ -39,6 +39,18 @@ const linkStyles = (designType: DesignType | undefined) => {
                 }
             `;
         case 'Media':
+            return css`
+                ${baseLinkStyles}
+                background-color: ${palette.neutral[20]};
+               :hover {
+                     /* TODO: This colour is hard coded here because it does not yet
+                           exist in src-foundation. Once it's been added, please
+                           remove this. @siadcock is aware. */
+                    /* stylelint-disable-next-line color-no-hex */
+                    background-color: ${palette.neutral[7]};
+                }
+            `;
+            break;
         case 'Article':
         case 'Review':
         case 'Live':

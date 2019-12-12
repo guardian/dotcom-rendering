@@ -78,9 +78,10 @@ const headlineStyles = (
         case 'Feature':
         case 'Interview':
             return colourStyles(palette[pillar].dark);
+        case 'Media':
+            return colourStyles(palette.neutral[97]);
         case 'Analysis':
         case 'Article':
-        case 'Media':
         case 'Review':
         case 'Live':
         case 'SpecialReport':

@@ -8,14 +8,14 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 
 import { makeRelativeDate } from '@frontend/web/components/lib/dateTime';
 
-const ageStyles = css`
+const ageStyles = (designType?: DesignType) => css`
     ${textSans.xsmall()};
     color: ${palette.neutral[60]};
 
     /* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: ${designType === `Media` ? 0 : `5px`};
+    padding-right: ${designType === `Media` ? 0 : `5px`};
 
     svg {
         fill: ${palette.neutral[46]};
@@ -24,14 +24,23 @@ const ageStyles = css`
         width: 11px;
         margin-right: 2px;
     }
+
+    > time {
+        font-weight: ${designType === `Media` ? `600` : `400`};
+    }
 `;
 
 type Props = {
     webPublicationDate: string;
     showClock?: boolean;
+    designType?: DesignType;
 };
 
-export const CardAge = ({ webPublicationDate, showClock }: Props) => {
+export const CardAge = ({
+    designType,
+    webPublicationDate,
+    showClock,
+}: Props) => {
     const displayString = makeRelativeDate(
         new Date(webPublicationDate).getTime(),
         {
@@ -44,7 +53,7 @@ export const CardAge = ({ webPublicationDate, showClock }: Props) => {
     }
 
     return (
-        <span className={ageStyles}>
+        <span className={ageStyles(designType)}>
             {showClock && <ClockIcon />}
             <time dateTime={webPublicationDate}>{displayString}</time>
         </span>

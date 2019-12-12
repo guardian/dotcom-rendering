@@ -261,9 +261,10 @@ type AvatarType = {
     alt: string;
 };
 
+type MediaType = 'Video' | 'Audio' | 'Photo';
+
 interface CardType {
     linkTo: string;
-    designType?: DesignType;
     pillar: Pillar;
     headline: CardHeadlineType;
     webPublicationDate?: string;
@@ -271,6 +272,9 @@ interface CardType {
     standfirst?: string;
     avatar?: AvatarType;
     showClock?: boolean;
+    designType?: DesignType;
+    mediaType?: MediaType;
+    mediaDuration?: number;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -409,6 +413,8 @@ interface TrailType {
     url: string;
     linkText: string;
     isLiveBlog: boolean;
+    mediaType?: MediaType;
+    mediaDuration?: number;
     webPublicationDate: string;
     ageWarning?: string;
     image: string;
