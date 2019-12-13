@@ -26,7 +26,9 @@ const ageStyles = (designType?: DesignType) => css`
     }
 
     > time {
-        font-weight: ${designType === `Media` ? `600` : `400`};
+        ${textSans.xsmall({
+            fontWeight: designType === `Media` ? `bold` : `regular`,
+        })};
     }
 `;
 

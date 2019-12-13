@@ -15,18 +15,18 @@ type Props = {
 };
 
 const iconWrapperStyles = ({ pillar, mediaType }: Props) => css`
-    width: 1.5rem;
-    height: 1.4375rem;
+    width: 24px;
+    height: 23px;
     background-color: ${palette[pillar].main};
     border-radius: 50%;
     display: inline-block;
 
     > svg {
-        width: 0.875rem;
+        width: 14px;
         height: auto;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 0.375rem;
+        margin-top: 6px;
         display: block;
         transform: ${mediaType === 'Video' ? `translateY(0.0625rem)` : ``};
     }
@@ -34,10 +34,7 @@ const iconWrapperStyles = ({ pillar, mediaType }: Props) => css`
 
 const durationStyles = ({ pillar }: Props) => css`
     color: ${palette[pillar].main};
-    font-size: 0.75rem;
-    line-height: 1rem;
-    ${textSans.xsmall()}
-    font-weight: 600;
+    ${textSans.xsmall({ fontWeight: `bold` })}
 `;
 
 const wrapperStyles = css`
@@ -49,9 +46,23 @@ export function secondsToDuration(secs?: number): string {
     if (typeof secs === `undefined` || secs === 0) {
         return ``;
     }
-    const dtime = new Date(secs * 1000).toISOString();
-    const duration = secs > 3600 ? dtime.substr(11, 8) : dtime.substr(14, 5);
-    return /^0/.test(duration) ? duration.substr(1) : duration;
+    const seconds = Number(secs);
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor((seconds % 3600) % 60);
+
+    const duration = [];
+    if (h > 0) {
+        duration.push(h);
+    }
+    if (m > 0 || h === 0) {
+        // supports 0:59
+        duration.push(m);
+    }
+    if (s > 0) {
+        duration.push(s);
+    }
+    return duration.join(':');
 }
 
 export const Icon = ({ mediaType }: Props) => {

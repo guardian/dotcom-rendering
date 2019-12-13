@@ -43,14 +43,9 @@ const linkStyles = (designType?: DesignType) => {
                 ${baseLinkStyles}
                 background-color: ${palette.neutral[20]};
                :hover {
-                     /* TODO: This colour is hard coded here because it does not yet
-                           exist in src-foundation. Once it's been added, please
-                           remove this. @siadcock is aware. */
-                    /* stylelint-disable-next-line color-no-hex */
                     background-color: ${palette.neutral[7]};
                 }
             `;
-            break;
         case 'Article':
         case 'Review':
         case 'Live':

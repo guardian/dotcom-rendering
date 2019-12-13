@@ -12,13 +12,18 @@ const footerStyles = css`
     align-items: center;
 `;
 
-const mediaFooter = css`
+const mediaFooterStyles = css`
     flex-direction: row-reverse;
-    padding: 0 0.3125rem 0.3125rem 0.3125rem;
+    padding: 0 5px 5px 5px;
 `;
 
 export const CardFooter = ({ children, designType }: Props) => (
-    <footer className={cx(footerStyles, designType === 'Media' && mediaFooter)}>
+    <footer
+        className={cx(
+            footerStyles,
+            designType === 'Media' && mediaFooterStyles,
+        )}
+    >
         {children}
     </footer>
 );
