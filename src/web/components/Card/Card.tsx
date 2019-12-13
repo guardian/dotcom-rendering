@@ -19,6 +19,7 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
+import { MediaMeta } from './components/MediaMeta';
 
 type CoveragesType = {
     image: {
@@ -57,6 +58,8 @@ export const Card = ({
     linkTo,
     pillar,
     designType,
+    mediaType,
+    mediaDuration,
     headline,
     webPublicationDate,
     trailImage,
@@ -133,10 +136,11 @@ export const Card = ({
                                         </AvatarContainer>
                                     </Hide>
                                 )}
-                                <CardFooter>
+                                <CardFooter designType={designType}>
                                     <>
                                         {webPublicationDate && (
                                             <CardAge
+                                                designType={designType}
                                                 webPublicationDate={
                                                     webPublicationDate
                                                 }
@@ -147,6 +151,17 @@ export const Card = ({
                                             <LinesWrapper>
                                                 <GuardianLines pillar="opinion" />
                                             </LinesWrapper>
+                                        )}
+                                        {designType === 'Media' && mediaType && (
+                                            <>
+                                                <MediaMeta
+                                                    pillar={pillar}
+                                                    mediaType={mediaType}
+                                                    mediaDuration={
+                                                        mediaDuration
+                                                    }
+                                                />
+                                            </>
                                         )}
                                     </>
                                 </CardFooter>

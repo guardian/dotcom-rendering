@@ -1,14 +1,29 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 type Props = {
     children: JSXElements;
+    designType?: DesignType;
 };
 
 const footerStyles = css`
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
-export const CardFooter = ({ children }: Props) => (
-    <footer className={footerStyles}>{children}</footer>
+const mediaFooterStyles = css`
+    flex-direction: row-reverse;
+    padding: 0 5px 5px 5px;
+`;
+
+export const CardFooter = ({ children, designType }: Props) => (
+    <footer
+        className={cx(
+            footerStyles,
+            designType === 'Media' && mediaFooterStyles,
+        )}
+    >
+        {children}
+    </footer>
 );

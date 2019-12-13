@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 
-const linkStyles = (designType: DesignType | undefined) => {
+const linkStyles = (designType?: DesignType) => {
     const baseLinkStyles = css`
         display: flex;
         /* a tag specific styles */
@@ -39,6 +39,13 @@ const linkStyles = (designType: DesignType | undefined) => {
                 }
             `;
         case 'Media':
+            return css`
+                ${baseLinkStyles}
+                background-color: ${palette.neutral[20]};
+               :hover {
+                    background-color: ${palette.neutral[7]};
+                }
+            `;
         case 'Article':
         case 'Review':
         case 'Live':

@@ -852,3 +852,112 @@ export const Quad = () => (
     </Section>
 );
 Quad.story = { name: 'Four with image top' };
+
+export const Media = () => (
+    <Section>
+        <Flex>
+            <LeftColumn showRightBorder={false}>
+                <></>
+            </LeftColumn>
+            <ArticleContainer>
+                <UL direction="row">
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
+                        <Card
+                            {...{
+                                linkTo:
+                                    '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+                                pillar: 'culture',
+                                headline: {
+                                    designType: 'Media',
+                                    headlineText:
+                                        "We shall say 'Ni' again to you, if you do not appease us",
+                                    size: 'medium',
+                                    pillar: 'culture',
+                                },
+                                webPublicationDate: '2019-11-11T09:45:30.000Z',
+                                trailImage: {
+                                    url: imageUrls[0],
+                                    position: 'top',
+                                },
+                                showClock: true,
+                                designType: 'Media',
+                                mediaType: 'Photo',
+                            }}
+                        />
+                    </LI>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
+                        <Card
+                            {...{
+                                linkTo:
+                                    '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+                                pillar: 'news',
+                                headline: {
+                                    designType: 'Media',
+                                    headlineText:
+                                        "We shall say 'Ni' again to you, if you do not appease us",
+                                    size: 'medium',
+                                    pillar: 'news',
+                                    kicker: {
+                                        text: 'Holy Grail',
+                                        pillar: 'sport',
+                                    },
+                                },
+                                webPublicationDate: '2019-11-11T09:45:30.000Z',
+                                trailImage: {
+                                    url: imageUrls[0],
+                                    position: 'top',
+                                },
+                                showClock: true,
+                                designType: 'Media',
+                                mediaType: 'Audio',
+                                mediaDuration: 35999,
+                            }}
+                        />
+                    </LI>
+                    <LI
+                        padSides={true}
+                        showDivider={true}
+                        showTopMarginWhenStacked={true}
+                    >
+                        <Card
+                            {...{
+                                linkTo:
+                                    '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
+                                pillar: 'sport',
+                                headline: {
+                                    designType: 'Media',
+                                    headlineText:
+                                        "We shall say 'Ni' again to you, if you do not appease us",
+                                    size: 'medium',
+                                    pillar: 'sport',
+                                    kicker: {
+                                        text: 'Holy Grail',
+                                        pillar: 'sport',
+                                    },
+                                },
+                                webPublicationDate: '2019-11-11T09:45:30.000Z',
+                                trailImage: {
+                                    url: imageUrls[0],
+                                    position: 'top',
+                                },
+                                showClock: true,
+                                designType: 'Media',
+                                mediaType: 'Video',
+                                mediaDuration: 59,
+                            }}
+                        />
+                    </LI>
+                </UL>
+            </ArticleContainer>
+        </Flex>
+    </Section>
+);
+Media.story = { name: 'Media' };
