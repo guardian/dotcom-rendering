@@ -1,33 +1,23 @@
 import React from 'react';
-
 import ImmersiveHeaderImage from 'components/immersive/immersiveHeaderImage';
 import ImmersiveSeries from 'components/immersive/immersiveSeries';
 import ImmersiveHeadline from 'components/immersive/immersiveHeadline';
-// import ImmersiveStandfirst from 'components/news/articleStandfirst';
+import ImmersiveStandfirst from 'components/immersive/immersiveStandfirst';
 import ImmersiveByline from 'components/immersive/ImmersiveByline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
-import { darkModeCss, articleWidthStyles } from 'styles';
-import { palette } from '@guardian/src-foundations';
+import { articleWidthStyles } from 'styles';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString } from 'pillar';
 
-export interface OpinionArticleProps {
+export interface ImmersiveArticleProps {
     capi: Content;
     imageSalt: string;
 }
-
-const MainStyles = css`
-
-`;
-
-const MainDarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
-`;
 
 const BorderStyles = css`
     ${from.wide} {
@@ -46,7 +36,7 @@ const HeaderImageStyles = css`
     }
 `;
 
-const ImmersiveArticle = ({ capi, imageSalt }: OpinionArticleProps): JSX.Element => {
+const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Element => {
 
     const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
     const series = articleSeries(capi);
@@ -57,24 +47,25 @@ const ImmersiveArticle = ({ capi, imageSalt }: OpinionArticleProps): JSX.Element
     const mainImage = articleMainImage(capi);
 
     return (
-        <main css={[MainStyles, MainDarkStyles]}>
+        <main>
             <article css={BorderStyles}>
                 <header>
                     <div css={articleWidthStyles}>
-                    <ImmersiveHeaderImage
+                        <ImmersiveHeaderImage
                             image={mainImage}
                             imageSalt={imageSalt}
                             className={HeaderImageStyles}
                         />
+
                         <ImmersiveSeries series={series} pillarStyles={pillarStyles}/>
                         <ImmersiveHeadline headline={fields.headline}/>
-                        {/* <ImmersiveStandfirst
+
+                        <ImmersiveStandfirst
                             standfirst={fields.standfirst}
-                            feature={true}
                             pillarStyles={pillarStyles}
                             className={articleWidthStyles}
                             byline={fields.bylineHtml}
-                        /> */}
+                        />
                     </div>
                     <Keyline pillar={pillar} type={'article'}/>
                     <ImmersiveByline

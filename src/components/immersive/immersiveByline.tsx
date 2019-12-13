@@ -1,14 +1,13 @@
 import React from 'react';
+import Follow from 'components/shared/follow';
 import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
-
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { formatDate } from 'date';
 import { Contributor } from 'capi';
-import Follow from 'components/shared/follow';
 import { PillarStyles } from 'pillar';
 
-const OpinionBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+const BylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {
         margin: ${basePx(1, 0, 2, 0)};
 
@@ -27,7 +26,7 @@ const OpinionBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
-const OpinionBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const BylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
@@ -42,21 +41,23 @@ const OpinionBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
     }
 `;
 
-interface OpinionBylineProps {
+interface ImmersiveBylineProps {
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
     className: SerializedStyles;
 }
 
-const OpinionByline = ({
+const ImmersiveByline = ({
     pillarStyles,
     publicationDate,
     contributors,
     className,
-}: OpinionBylineProps): JSX.Element =>
-    <div
-        css={[className, OpinionBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
+}: ImmersiveBylineProps): JSX.Element =>
+    <div css={[
+        className,
+        BylineStyles(pillarStyles),
+        BylineDarkStyles(pillarStyles)]}
     >
         <div css={sidePadding}>
             <div className="author">
@@ -66,4 +67,4 @@ const OpinionByline = ({
         </div>
     </div>
 
-export default OpinionByline;
+export default ImmersiveByline;

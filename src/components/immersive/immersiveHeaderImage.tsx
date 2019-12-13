@@ -1,10 +1,9 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-
 import { BlockElement } from 'capiThriftModels';
-import { imageElement } from 'components/blocks/image';
+import { immersiveImageElement } from 'components/blocks/image';
 import { from } from '@guardian/src-foundations/mq';
-import { wideContentWidth, basePx } from 'styles';
+import { wideContentWidth } from 'styles';
 import { Option } from 'types/option';
 
 const headerImageStyles = css`
@@ -26,8 +25,6 @@ const headerImageStyles = css`
             width: ${wideContentWidth}px;
         }
     }
-
-    margin-bottom: ${basePx(1)};
 `;
 
 interface HeaderImageProps {
@@ -43,7 +40,7 @@ const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Ele
         // eslint-disable-next-line react/jsx-key
         <div css={[className, headerImageStyles]}>
             <figure aria-labelledby={""}>
-                { imageElement(imageTypeData.alt, assets, imageSalt) }
+                { immersiveImageElement(imageTypeData.alt, assets, imageSalt) }
             </figure>
         </div>
     );

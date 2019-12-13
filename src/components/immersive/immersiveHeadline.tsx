@@ -2,21 +2,19 @@ import React from 'react';
 import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 import { css } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
-import { until } from '@guardian/src-foundations/mq';
 
 const HeadlineStyles = css`
-    padding: ${basePx(0, 0, 4, 0)};
-    
-    ${until.wide} {
-        padding: ${basePx(0, 1, 4, 1)};
-    }
+    padding: ${basePx(.5, 1, 3, 1)};
+    background: ${palette.neutral[7]};
+    position: relative;
+    margin-top: -78px;
 
     ${headlineFont}
 
     h1 {
-        font-weight: 300;
+        font-weight: 700;
         ${headlineFontStyles}
-        color: ${palette.neutral[7]};
+        color: ${palette.neutral[100]};
     }
 
     address a {
@@ -33,15 +31,15 @@ const HeadlineDarkStyles = darkModeCss`
     color: ${palette.neutral[86]};
 `;
 
-interface OpinionHeadlineProps {
+interface ImmersiveHeadlineProps {
     headline: string;
 }
 
-const OpinionHeadline = ({
+const ImmersiveHeadline = ({
     headline
-}: OpinionHeadlineProps): JSX.Element =>
+}: ImmersiveHeadlineProps): JSX.Element =>
     <div css={[HeadlineStyles, HeadlineDarkStyles]}>
         <h1>{headline}</h1>
     </div>
 
-export default OpinionHeadline;
+export default ImmersiveHeadline;
