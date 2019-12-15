@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -7,6 +7,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
 import { makeRelativeDate } from '@frontend/web/components/lib/dateTime';
+import { decidePillarLight } from '@frontend/web/components/lib/decidePillarLight';
 
 const ageStyles = (designType?: DesignType) => css`
     ${textSans.xsmall()};
@@ -32,14 +33,45 @@ const ageStyles = (designType?: DesignType) => css`
     }
 `;
 
+const colourStyles = (designType: DesignType, pillar: Pillar) => {
+    switch (designType) {
+        case 'Live':
+            return css`
+                /* stylelint-disable-next-line color-no-hex */
+                color: ${decidePillarLight(pillar)};
+            `;
+        case 'Feature':
+        case 'Interview':
+        case 'Media':
+        case 'Analysis':
+        case 'Article':
+        case 'Review':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Comment':
+        case 'Immersive':
+        default:
+            return css`
+                color: ${palette.neutral[60]};
+            `;
+    }
+};
+
 type Props = {
+    designType: DesignType;
+    pillar: Pillar;
     webPublicationDate: string;
     showClock?: boolean;
-    designType?: DesignType;
 };
 
 export const CardAge = ({
     designType,
+    pillar,
     webPublicationDate,
     showClock,
 }: Props) => {
@@ -55,7 +87,12 @@ export const CardAge = ({
     }
 
     return (
-        <span className={ageStyles(designType)}>
+        <span
+            className={cx(
+                ageStyles(designType),
+                colourStyles(designType, pillar),
+            )}
+        >
             {showClock && <ClockIcon />}
             <time dateTime={webPublicationDate}>{displayString}</time>
         </span>

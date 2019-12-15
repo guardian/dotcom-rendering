@@ -20,8 +20,14 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[0].linkText,
                         headlineSize: 'medium',
                         webPublicationDate: content[0].webPublicationDate,
+                        isLiveBlog: content[0].isLiveBlog,
+                        kickerText: content[0].kickerText,
+                        showPulsingDot: content[0].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                         imageUrl: content[0].image,
+                        mediaType: content[0].mediaType,
+                        mediaDuration: content[0].mediaDuration,
                     }}
                 />
             </LI>
@@ -39,8 +45,14 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[1].linkText,
                         headlineSize: 'medium',
                         webPublicationDate: content[1].webPublicationDate,
+                        isLiveBlog: content[1].isLiveBlog,
+                        kickerText: content[1].kickerText,
+                        showPulsingDot: content[1].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                         imageUrl: content[1].image,
+                        mediaType: content[1].mediaType,
+                        mediaDuration: content[1].mediaDuration,
                     }}
                 />
             </LI>
@@ -58,8 +70,14 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[2].linkText,
                         headlineSize: 'medium',
                         webPublicationDate: content[2].webPublicationDate,
+                        isLiveBlog: content[2].isLiveBlog,
+                        kickerText: content[2].kickerText,
+                        showPulsingDot: content[2].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                         imageUrl: content[2].image,
+                        mediaType: content[2].mediaType,
+                        mediaDuration: content[2].mediaDuration,
                     }}
                 />
             </LI>
@@ -77,8 +95,14 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[3].linkText,
                         headlineSize: 'medium',
                         webPublicationDate: content[3].webPublicationDate,
+                        isLiveBlog: content[3].isLiveBlog,
+                        kickerText: content[3].kickerText,
+                        showPulsingDot: content[3].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                         imageUrl: content[3].image,
+                        mediaType: content[3].mediaType,
+                        mediaDuration: content[3].mediaDuration,
                     }}
                 />
             </LI>
@@ -93,6 +117,10 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[4].linkText,
                         headlineSize: 'small',
                         webPublicationDate: content[4].webPublicationDate,
+                        isLiveBlog: content[4].isLiveBlog,
+                        kickerText: content[4].kickerText,
+                        showPulsingDot: content[4].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                     }}
                 />
@@ -111,6 +139,10 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[5].linkText,
                         headlineSize: 'small',
                         webPublicationDate: content[5].webPublicationDate,
+                        isLiveBlog: content[5].isLiveBlog,
+                        kickerText: content[5].kickerText,
+                        showPulsingDot: content[5].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                     }}
                 />
@@ -129,6 +161,10 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[6].linkText,
                         headlineSize: 'small',
                         webPublicationDate: content[6].webPublicationDate,
+                        isLiveBlog: content[6].isLiveBlog,
+                        kickerText: content[6].kickerText,
+                        showPulsingDot: content[6].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                     }}
                 />
@@ -147,6 +183,10 @@ export const StoryPackage = ({ content }: Props) => (
                         headlineText: content[7].linkText,
                         headlineSize: 'small',
                         webPublicationDate: content[7].webPublicationDate,
+                        isLiveBlog: content[7].isLiveBlog,
+                        kickerText: content[7].kickerText,
+                        showPulsingDot: content[7].isLiveBlog,
+                        showSlash: true,
                         showClock: false,
                     }}
                 />

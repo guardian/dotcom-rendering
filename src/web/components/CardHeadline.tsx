@@ -79,11 +79,11 @@ const headlineStyles = (
         case 'Interview':
             return colourStyles(palette[pillar].dark);
         case 'Media':
+        case 'Live':
             return colourStyles(palette.neutral[97]);
         case 'Analysis':
         case 'Article':
         case 'Review':
-        case 'Live':
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
@@ -100,7 +100,7 @@ const headlineStyles = (
 
 export const CardHeadline = ({
     headlineText,
-    designType = 'Article',
+    designType,
     pillar,
     showQuotes,
     kickerText,
@@ -119,9 +119,11 @@ export const CardHeadline = ({
             {kickerText && (
                 <Kicker
                     text={kickerText}
+                    designType={designType}
                     pillar={pillar}
                     showPulsingDot={showPulsingDot}
                     showSlash={showSlash}
+                    inCard={true}
                 />
             )}
             {showQuotes && (

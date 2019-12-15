@@ -241,9 +241,11 @@ interface BadgeType {
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 interface KickerType {
     text: string;
-    pillar?: Pillar;
+    designType: DesignType;
+    pillar: Pillar;
     showPulsingDot?: boolean;
     showSlash?: boolean;
+    inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
 }
 
 type ImagePositionType = 'left' | 'top' | 'right';
@@ -265,6 +267,7 @@ interface CardType {
     headlineSize?: SmallHeadlineSize;
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     byline?: string;
+    isLiveBlog?: boolean; // When designType === 'Live', this denotes if the liveblog is active or not
     webPublicationDate?: string;
     imageUrl?: string;
     imagePosition?: ImagePositionType;
@@ -427,6 +430,7 @@ interface TrailType {
     image: string;
     byline?: string;
     showByline?: boolean;
+    kickerText?: string;
 }
 
 // ------------------------------

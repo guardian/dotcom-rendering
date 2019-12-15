@@ -26,35 +26,37 @@ export const storyPackageTrails: OnwardsType = {
             isLiveBlog: false,
             webPublicationDate: '2019-12-02T09:45:30.000Z',
             pillar: 'news',
-            designType: 'Article',
+            designType: 'Media',
+            mediaType: 'Video',
+            mediaDuration: 378,
         },
         {
             url:
                 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
-            linkText:
-                "'Our house is on fire': EU parliament declares climate emergency",
+            linkText: 'An active live blog',
             showByline: false,
             byline: 'Jennifer Rankin in Brussels',
             image:
                 'https://i.guim.co.uk/img/media/e8de0c5e27a2d92ced64f690daf48fd9b3b5c079/0_0_5101_3061/master/5101.jpg?width=300&quality=85&auto=format&fit=max&s=08722f687b63b5c6cce8c4026282088c',
-            isLiveBlog: false,
+            isLiveBlog: true,
             webPublicationDate: '2019-12-02T09:45:30.000Z',
             pillar: 'news',
-            designType: 'Article',
+            designType: 'Live',
+            kickerText: 'Live',
         },
         {
             url:
                 'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
-            linkText:
-                "Climate emergency: world 'may have crossed tipping points’",
+            linkText: 'An inactive live sport blog',
             showByline: false,
             byline: 'Damian Carrington Environment editor',
             image:
                 'https://i.guim.co.uk/img/media/1774967ff6b9127a43b06c0685d1fd499c965141/98_0_3413_2048/master/3413.jpg?width=300&quality=85&auto=format&fit=max&s=c1f2066373caea54058a665259237f87',
             isLiveBlog: false,
             webPublicationDate: '2019-12-02T09:45:30.000Z',
-            pillar: 'news',
-            designType: 'Article',
+            pillar: 'sport',
+            designType: 'Live',
+            kickerText: 'Live',
         },
         {
             url:

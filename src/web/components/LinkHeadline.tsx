@@ -68,6 +68,7 @@ export const LinkHeadline = ({
         {kickerText && (
             <Kicker
                 text={kickerText}
+                designType={designType}
                 pillar={pillar}
                 showPulsingDot={showPulsingDot}
                 showSlash={showSlash}
