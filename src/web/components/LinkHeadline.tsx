@@ -56,19 +56,21 @@ export const LinkHeadline = ({
     headlineText,
     pillar,
     showUnderline = false,
-    kicker,
+    kickerText,
+    showPulsingDot,
+    showSlash,
     showQuotes = false,
     size = 'medium',
     link,
     byline,
 }: LinkHeadlineType) => (
     <h4 className={fontStyles(size)}>
-        {kicker && (
+        {kickerText && (
             <Kicker
-                text={kicker.text}
+                text={kickerText}
                 pillar={pillar}
-                showPulsingDot={kicker.showPulsingDot}
-                showSlash={kicker.showSlash}
+                showPulsingDot={showPulsingDot}
+                showSlash={showSlash}
             />
         )}
         {showQuotes && <QuoteIcon colour={palette[pillar].main} size={size} />}

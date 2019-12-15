@@ -62,9 +62,7 @@ export const liveStory = () => (
             headlineText="This is how a card headline with a live kicker looks"
             designType="Article"
             pillar="news"
-            kicker={{
-                text: 'Live',
-            }}
+            kickerText="Live"
         />
     </Section>
 );
@@ -76,10 +74,8 @@ export const noSlash = () => (
             headlineText="This is how a card headline with no kicker slash looks"
             designType="Article"
             pillar="news"
-            kicker={{
-                text: 'Live',
-                showSlash: false,
-            }}
+            kickerText="Live"
+            showSlash={false}
         />
     </Section>
 );
@@ -91,10 +87,8 @@ export const pulsingDot = () => (
             headlineText="This is how a card headline with a pulsing dot looks"
             designType="Article"
             pillar="news"
-            kicker={{
-                text: 'Live',
-                showPulsingDot: true,
-            }}
+            kickerText="Live"
+            showPulsingDot={true}
         />
     </Section>
 );
@@ -106,9 +100,7 @@ export const cultureVariant = () => (
             headlineText="This is how a Feature card headline with the culture pillar looks"
             designType="Feature"
             pillar="culture"
-            kicker={{
-                text: 'Art and stuff',
-            }}
+            kickerText="Art and stuff"
         />
     </Section>
 );
@@ -146,10 +138,8 @@ export const OpinionKicker = () => (
             designType="Article"
             pillar="opinion"
             showQuotes={true}
-            kicker={{
-                text: 'George Monbiot',
-                showSlash: true,
-            }}
+            kickerText="George Monbiot"
+            showSlash={true}
         />
     </Section>
 );
@@ -162,10 +152,8 @@ export const Busy = () => (
             designType="Feature"
             pillar="lifestyle"
             showQuotes={true}
-            kicker={{
-                text: 'Aerial Yoga',
-                showSlash: true,
-            }}
+            kickerText="Aerial Yoga"
+            showSlash={true}
         />
     </Section>
 );

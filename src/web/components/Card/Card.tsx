@@ -58,35 +58,43 @@ export const Card = ({
     linkTo,
     pillar,
     designType,
-    mediaType,
-    mediaDuration,
-    headline,
+    headlineText,
+    headlineSize,
+    showQuotes,
+    byline,
     webPublicationDate,
-    trailImage,
+    imageUrl,
+    imagePosition,
+    imageSize,
     standfirst,
     avatar,
     showClock,
+    mediaType,
+    mediaDuration,
+    kickerText,
+    showPulsingDot,
+    showSlash,
 }: CardType) => {
     // Decide how we position the image on the card
     let imageCoverage: CardPercentageType | undefined;
     let contentCoverage: CardPercentageType | undefined;
-    if (trailImage && trailImage.size && trailImage.position !== 'top') {
+    if (imageSize && imagePosition !== 'top') {
         // We only specifiy an explicit width for the image when
         // we're positioning left or right, not top. Top positioned
         // images flow naturally
-        imageCoverage = coverages.image[trailImage.size];
-        contentCoverage = coverages.content[trailImage.size];
+        imageCoverage = coverages.image[imageSize];
+        contentCoverage = coverages.content[imageSize];
     }
 
     return (
         <CardLink linkTo={linkTo} designType={designType}>
             <TopBar topBarColour={palette[pillar].main}>
-                <CardLayout imagePosition={trailImage && trailImage.position}>
+                <CardLayout imagePosition={imagePosition}>
                     <>
-                        {trailImage && (
+                        {imageUrl && (
                             <ImageWrapper percentage={imageCoverage}>
                                 <img
-                                    src={trailImage.url}
+                                    src={imageUrl}
                                     alt=""
                                     role="presentation"
                                 />
@@ -96,13 +104,15 @@ export const Card = ({
                             <Flex>
                                 <HeadlineWrapper>
                                     <CardHeadline
-                                        headlineText={headline.headlineText}
-                                        designType={headline.designType}
-                                        pillar={headline.pillar}
-                                        size={headline.size}
-                                        showQuotes={headline.showQuotes}
-                                        kicker={headline.kicker}
-                                        byline={headline.byline}
+                                        headlineText={headlineText}
+                                        designType={designType}
+                                        pillar={pillar}
+                                        size={headlineSize}
+                                        showQuotes={showQuotes}
+                                        kickerText={kickerText}
+                                        showPulsingDot={showPulsingDot}
+                                        showSlash={showSlash}
+                                        byline={byline}
                                     />
                                 </HeadlineWrapper>
                                 <>

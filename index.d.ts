@@ -248,12 +248,6 @@ interface KickerType {
 
 type ImagePositionType = 'left' | 'top' | 'right';
 
-type CardImageType = {
-    url: string;
-    position?: ImagePositionType;
-    size?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
-};
-
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
 type AvatarType = {
@@ -266,15 +260,24 @@ type MediaType = 'Video' | 'Audio' | 'Photo';
 interface CardType {
     linkTo: string;
     pillar: Pillar;
-    headline: CardHeadlineType;
+    designType: DesignType;
+    headlineText: string;
+    headlineSize?: SmallHeadlineSize;
+    showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
+    byline?: string;
     webPublicationDate?: string;
-    trailImage?: CardImageType;
+    imageUrl?: string;
+    imagePosition?: ImagePositionType;
+    imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
     standfirst?: string;
     avatar?: AvatarType;
     showClock?: boolean;
-    designType?: DesignType;
     mediaType?: MediaType;
     mediaDuration?: number;
+    // Kicker
+    kickerText?: string;
+    showPulsingDot?: boolean;
+    showSlash?: boolean;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -291,7 +294,9 @@ interface LinkHeadlineType {
     headlineText: string; // The text shown
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
     showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-    kicker?: KickerType;
+    kickerText?: string;
+    showPulsingDot?: boolean;
+    showSlash?: boolean;
     showQuotes?: boolean; // When true the QuoteIcon is shown
     size?: SmallHeadlineSize;
     link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
@@ -300,9 +305,11 @@ interface LinkHeadlineType {
 
 interface CardHeadlineType {
     headlineText: string; // The text shown
-    designType?: DesignType; // Used to decide when to add type specific styles
+    designType: DesignType; // Used to decide when to add type specific styles
     pillar: Pillar; // Used to colour the headline (dark) and the kicker (main)
-    kicker?: KickerType;
+    kickerText?: string;
+    showPulsingDot?: boolean;
+    showSlash?: boolean;
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
     byline?: string;
