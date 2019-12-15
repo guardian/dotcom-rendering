@@ -12,8 +12,8 @@ export const storyPackageTrails: OnwardsType = {
                 'https://i.guim.co.uk/img/media/d4124d7bb89be381cbe9d72c849fad136f843086/0_84_4974_2985/master/4974.jpg?width=300&quality=85&auto=format&fit=max&s=149cb6c82d98eb8356309557f114db56',
             isLiveBlog: false,
             webPublicationDate: '2019-12-02T09:45:30.000Z',
-            pillar: 'news',
-            designType: 'Article',
+            pillar: 'opinion',
+            designType: 'Comment',
         },
         {
             url:

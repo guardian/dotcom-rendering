@@ -42,14 +42,19 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
             return css`
                 ${baseLinkStyles}
                 background-color: ${palette.neutral[20]};
-               :hover {
-                    background-color: ${palette.neutral[7]};
+
+                :hover {
+                    filter: brightness(90%);
                 }
             `;
         case 'Live':
             return css`
                 ${baseLinkStyles}
                 background-color: ${palette[pillar].dark};
+
+                :hover {
+                    filter: brightness(90%);
+                }
             `;
         case 'Article':
         case 'Review':
@@ -68,6 +73,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
             return css`
                     ${baseLinkStyles}
                     background-color: ${palette.neutral[97]};
+
                     :hover {
                         background-color: ${palette.neutral[93]};
                     }
