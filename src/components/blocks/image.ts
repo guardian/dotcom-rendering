@@ -1,12 +1,10 @@
 // ----- Imports ----- //
 
-import React from 'react';
+import { createElement as h, ReactNode } from 'react';
 import * as AssetUtils from 'asset';
 import { BlockElement } from 'capiThriftModels';
 
 // ----- Setup ----- //
-
-const h = React.createElement;
 
 interface Image {
     caption: string;
@@ -21,7 +19,7 @@ interface Image {
 const isImage = (elem: BlockElement): boolean =>
   elem.type === 'image';
 
-const immersiveImageElement = (alt: string, assets: AssetUtils.Asset[], salt: string): React.ReactNode =>
+const immersiveImageElement = (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode =>
   h('img', {
       sizes: 'calc(80vh * 5/3)',
       srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
@@ -29,7 +27,7 @@ const immersiveImageElement = (alt: string, assets: AssetUtils.Asset[], salt: st
       src: AssetUtils.toUrl(salt, assets[0]),
   });
 
-const imageElement = (alt: string, assets: AssetUtils.Asset[], salt: string): React.ReactNode =>
+const imageElement = (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode =>
     h('img', {
         sizes: '100%',
         srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
@@ -37,7 +35,7 @@ const imageElement = (alt: string, assets: AssetUtils.Asset[], salt: string): Re
         src: AssetUtils.toUrl(salt, assets[0]),
     });
 
-function imageBlock(image: Image, assets: AssetUtils.Asset[], salt: string): React.ReactNode {
+function imageBlock(image: Image, assets: AssetUtils.Asset[], salt: string): ReactNode {
 
     const caption = image.displayCredit ? `${image.caption} ${image.credit}` : image.caption;
 

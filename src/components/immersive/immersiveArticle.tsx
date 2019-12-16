@@ -9,7 +9,7 @@ import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
 import { articleWidthStyles, basePx } from 'styles';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
-import { css } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString, PillarStyles } from 'pillar';
@@ -26,7 +26,7 @@ const BorderStyles = css`
     }
 `;
 
-const DropCapStyles = (pillarStyles: PillarStyles) => css`
+const DropCapStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .article__body p:first-of-type::first-letter {
         color: ${pillarStyles.kicker};
         font-weight: 100;

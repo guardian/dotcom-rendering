@@ -67,7 +67,7 @@ interface BodyProps {
     capi: Content;
 }
 
-function getArticleSubtype(capi: Content) {
+function getArticleSubtype(capi: Content): (bodyProps: BodyProps) => JSX.Element {
     if (pillarFromString(capi.pillarId) === Pillar.opinion) {
         return OpinionArticle;
     } else if (capi.fields.displayHint === 'immersive') {
