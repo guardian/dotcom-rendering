@@ -13,10 +13,11 @@ type Props = {
 
 const outerStyles = (pillar: Pillar, designType: DesignType) => {
     const baseStyles = css`
-        ${headline.large()}
+        ${headline.large({
+            fontWeight: 'light',
+        })}
         float: left;
         text-transform: uppercase;
-        font-weight: 200;
         box-sizing: border-box;
         margin-right: 4px;
     `;
