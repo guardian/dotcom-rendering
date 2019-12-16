@@ -12,12 +12,6 @@ import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
 
-import Article from 'components/news/article';
-import LiveblogArticle from 'components/liveblog/liveblogArticle';
-import OpinionArticle from 'components/opinion/opinionArticle';
-import ArticleContainer from 'components/shared/articleContainer';
-import ImmersiveArticle from 'components/immersive/immersiveArticle';
-
 // ----- Setup ----- //
 
 const defaultId =
@@ -48,28 +42,6 @@ function checkSupport(content: Content): Supported {
 
   return { kind: Support.Supported };
 
-}
-
-function getArticleSubtype(capi: Content) {
-  if (pillarFromString(capi.pillarId) === Pillar.opinion) return OpinionArticle;
-  if (capi.fields.displayHint === 'immersive') return ImmersiveArticle;
-
-  return Article;
-}
-
-function getArticleComponent(imageSalt: string, capi: Content): React.ReactElement {
-  switch (capi.type) {
-    case 'article':
-        const ArticleComponent = getArticleSubtype(capi);
-        return React.createElement(ArticleComponent, { capi, imageSalt });
-    case 'liveblog':
-      return React.createElement(
-        LiveblogArticle,
-        { capi, isLive: true, imageSalt }
-      );
-    default:
-      return React.createElement('p', null, `${capi.type} not implemented yet`);
-  }
 }
 
 async function parseMapiError(mapiResponse: Response): Promise<string> {
