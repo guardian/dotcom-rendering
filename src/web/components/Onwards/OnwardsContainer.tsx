@@ -19,23 +19,26 @@ export const OnwardsContainer = ({ children }: Props) => (
                 margin-top: 36px;
             }
 
-            margin-bottom: 35px;
-
-            ${from.wide} {
-                margin-right: 70px;
-            }
+            margin-bottom: 60px;
 
             margin-left: 0px;
             margin-right: 0px;
+
             ${from.tablet} {
                 /* Shrink the container to remove the leading and
                    trailing side margins from the list of cards */
                 margin-left: -10px;
                 margin-right: -10px;
             }
+
             ${from.leftCol} {
                 margin-left: 0px;
                 margin-right: -10px;
+            }
+
+            ${from.wide} {
+                margin-right: 70px;
+                margin-top: 8px;
             }
         `}
     >

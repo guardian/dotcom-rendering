@@ -11,9 +11,8 @@ export const OnwardsTitle = ({ title }: { title: string }) => (
             ${headline.xsmall()};
             color: ${palette.neutral[7]};
             font-weight: 900;
-            padding-right: 5px;
             padding-bottom: 14px;
-            padding-top: 3px;
+            padding-top: 6px;
 
             ${from.leftCol} {
                 ${headline.xsmall()};
@@ -24,8 +23,9 @@ export const OnwardsTitle = ({ title }: { title: string }) => (
                 font-weight: 900;
             }
 
-            ${from.tablet} {
-                margin-left: 10px;
+            margin-left: 10px;
+            ${from.leftCol} {
+                margin-left: 0;
             }
         `}
     >
