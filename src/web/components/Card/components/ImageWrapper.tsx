@@ -12,6 +12,9 @@ export const ImageWrapper = ({ children, percentage }: Props) => {
     return (
         <div
             className={css`
+                /* position relative is required here to bound the image overlay */
+                position: relative;
+
                 flex-basis: ${percentage && percentage};
                 ${until.tablet} {
                     /* Below tablet, we fix the size of the image and add a margin
@@ -30,7 +33,11 @@ export const ImageWrapper = ({ children, percentage }: Props) => {
                 }
             `}
         >
-            {children}
+            <>
+                {children}
+                {/* This image overlay is styled when the CardLink is hovered */}
+                <div className="image-overlay" />
+            </>
         </div>
     );
 };
