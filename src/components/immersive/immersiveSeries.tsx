@@ -1,7 +1,7 @@
 import React from 'react';
 import { headlineFont, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { Series } from '../../capi';
+import { Series } from 'capi';
 import { PillarStyles } from 'pillar';
 import { palette } from '@guardian/src-foundations';
 
