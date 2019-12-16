@@ -3,7 +3,7 @@ import ImmersiveHeaderImage from 'components/immersive/immersiveHeaderImage';
 import ImmersiveSeries from 'components/immersive/immersiveSeries';
 import ImmersiveHeadline from 'components/immersive/immersiveHeadline';
 import ImmersiveStandfirst from 'components/immersive/immersiveStandfirst';
-import ImmersiveByline from 'components/immersive/ImmersiveByline';
+import ImmersiveByline from 'components/immersive/immersiveByline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
