@@ -140,6 +140,7 @@ export const ArticleBody: React.FC<{
             <ArticleRenderer
                 elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
                 pillar={CAPI.pillar}
+                designType={CAPI.designType}
             />
         </div>
     );
