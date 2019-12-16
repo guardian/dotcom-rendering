@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import path from 'path';
-import express from 'express';
+import express, { Request, Response as ExpressResponse } from 'express';
 import compression from 'compression';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -61,24 +61,7 @@ async function parseMapiError(mapiResponse: Response): Promise<string> {
 const mapiError = async (mapiResponse: Response): Promise<string> =>
   `MAPI wasn't happy about that request, it returned ${mapiResponse.status}, with ${await parseMapiError(mapiResponse)}`;
 
-
-// ----- App ----- //
-
-const app = express();
-
-app.use(express.json({ limit: '50mb' }));
-app.use('/public', express.static(path.resolve(__dirname, '../public')));
-app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
-app.use(compression());
-
-app.get('/healthcheck', (_req, res) => {
-  res.send("Ok");
-});
-
-app.get('/favicon.ico', (_, res) => res.status(404).end());
-
-app.get('/dev-article/*', async (req, res) => {
-
+async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
   try {
 
     const articleId = req.params[0] || defaultId;
@@ -122,23 +105,46 @@ app.get('/dev-article/*', async (req, res) => {
     console.error(`This error occurred, but I don't know why: ${e}`);
     res.sendStatus(500);
   }
+}
 
-});
-
-app.get('/*', async (req, res) => {
+async function queryMapi(req: Request, res: ExpressResponse): Promise<void> {
   const url = new URL(req.originalUrl, 'https://mobile.code.dev-guardianapis.com');
 
-  console.log(`I'm asking MAPI for this: ${url.href}...`);
-  const mapiResponse = await fetch(url.href);
+    console.log(`I'm asking MAPI for this: ${url.href}...`);
+    const mapiResponse = await fetch(url.href);
 
-  if (mapiResponse.ok) {
-    res.type('json');
-    mapiResponse.body.pipe(res);
+    if (mapiResponse.ok) {
+      res.type('json');
+      mapiResponse.body.pipe(res);
 
-    console.log('...and I\'ve passed on the response that MAPI gave me');
+      console.log('...and I\'ve passed on the response that MAPI gave me');
+    } else {
+      console.warn(await mapiError(mapiResponse));
+      res.sendStatus(400);
+    }
+}
+
+
+// ----- App ----- //
+
+const app = express();
+
+app.use(express.json({ limit: '50mb' }));
+app.use('/public', express.static(path.resolve(__dirname, '../public')));
+app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
+app.use(compression());
+
+app.get('/healthcheck', (_req, res) => {
+  res.send("Ok");
+});
+
+app.get('/favicon.ico', (_, res) => res.status(404).end());
+
+app.get('/*', async (req, res) => {
+  if (req.query.a !== undefined) {
+    serveArticle(req, res);
   } else {
-    console.warn(await mapiError(mapiResponse));
-    res.sendStatus(400);
+    queryMapi(req, res);
   }
 
 });
