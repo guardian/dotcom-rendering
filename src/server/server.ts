@@ -3,14 +3,14 @@
 import path from 'path';
 import express from 'express';
 import compression from 'compression';
-import React from 'react';
+import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
-import fetch from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 
 import { Content } from 'capiThriftModels';
 import { getConfigValue } from 'server/ssmConfig';
-import { Pillar, pillarFromString } from 'pillar';
 import { CapiError, capiEndpoint, getContent } from 'capi';
+import Page from 'components/shared/page';
 
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
@@ -22,6 +22,7 @@ import ImmersiveArticle from 'components/immersive/immersiveArticle';
 
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
+
 
 // ----- Functions ----- //
 
@@ -71,6 +72,19 @@ function getArticleComponent(imageSalt: string, capi: Content): React.ReactEleme
   }
 }
 
+async function parseMapiError(mapiResponse: Response): Promise<string> {
+  try {
+    const mapiMsg = (await mapiResponse.json())?.errorMessage;
+    return mapiMsg ? `the following message: ${mapiMsg}` : 'no error message';
+  } catch (_) {
+    return 'a message that I didn\'t understand';
+  }
+}
+
+const mapiError = async (mapiResponse: Response): Promise<string> =>
+  `MAPI wasn't happy about that request, it returned ${mapiResponse.status}, with ${await parseMapiError(mapiResponse)}`;
+
+
 // ----- App ----- //
 
 const app = express();
@@ -86,7 +100,7 @@ app.get('/healthcheck', (_req, res) => {
 
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
-app.get('/*', async (req, res) => {
+app.get('/dev-article/*', async (req, res) => {
 
   try {
 
@@ -115,11 +129,10 @@ app.get('/*', async (req, res) => {
         const support = checkSupport(content);
 
         if (support.kind === Support.Supported) {
-          const article = getArticleComponent(imageSalt, content);
-          const template = ArticleContainer(content, article);
-          const html = renderToString(template);
+          const page = h(Page, { content, imageSalt });
+
           res.write('<!DOCTYPE html>');
-          res.write(html);
+          res.write(renderToString(page));
           res.end();
         } else {
           console.warn(`I can\'t render that type of content yet! ${support.reason}`);
@@ -131,6 +144,24 @@ app.get('/*', async (req, res) => {
   } catch (e) {
     console.error(`This error occurred, but I don't know why: ${e}`);
     res.sendStatus(500);
+  }
+
+});
+
+app.get('/*', async (req, res) => {
+  const url = new URL(req.originalUrl, 'https://mobile.code.dev-guardianapis.com');
+
+  console.log(`I'm asking MAPI for this: ${url.href}...`);
+  const mapiResponse = await fetch(url.href);
+
+  if (mapiResponse.ok) {
+    res.type('json');
+    mapiResponse.body.pipe(res);
+
+    console.log('...and I\'ve passed on the response that MAPI gave me');
+  } else {
+    console.warn(await mapiError(mapiResponse));
+    res.sendStatus(400);
   }
 
 });

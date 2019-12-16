@@ -95,11 +95,14 @@ const serverConfig = env => ({
 const clientConfig = {
     name: 'client',
     mode: 'development',
-    entry: 'client/client.ts',
+    entry: {
+        article: 'client/article.ts',
+        liveblog: 'client/liveblog.ts',
+    },
     target: 'web',
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
-        filename: 'client.js',
+        filename: '[name].js',
     },
     resolve,
     devServer: {
