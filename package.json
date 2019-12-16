@@ -17,7 +17,8 @@
     "watch": "npm run watch:server & npm run watch:client",
     "build:server": "webpack --config webpack.config.js --config-name server",
     "build:client": "webpack --config webpack.config.js --config-name client",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "author": "",
   "license": "ISC",
@@ -44,7 +45,9 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
+    "@storybook/addon-knobs": "^5.2.8",
     "@storybook/react": "^5.2.8",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@types/compression": "^1.0.1",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",

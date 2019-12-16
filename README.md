@@ -86,3 +86,5 @@ A good way to see components and test them in isolation is to run storybook:
 ```sh
 npm run storybook
 ```
+
+Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering)
