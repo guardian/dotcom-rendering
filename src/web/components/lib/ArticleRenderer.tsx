@@ -32,7 +32,7 @@ export const ArticleRenderer: React.FC<{
                             html={element.html}
                             pillar={pillar}
                             designType={designType}
-                            dropCap={true} // TODO: Plug in the api response here when we have it
+                            dropCap={false} // TODO: Plug in the api response here when we have it
                         />
                     );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
