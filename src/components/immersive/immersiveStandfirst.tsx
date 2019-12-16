@@ -1,6 +1,6 @@
 import React from 'react';
 import { bulletStyles, headlineFont, darkModeCss, basePx } from 'styles';
-import { transform } from '../../contentTransformations';
+import { transform } from 'contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { PillarStyles } from 'pillar';
