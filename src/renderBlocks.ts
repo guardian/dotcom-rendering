@@ -58,6 +58,8 @@ function textElement(node: Node): ReactNode {
             return h('a', getAttrs(node), node.textContent);
         case 'SPAN':
             return h('span', getAttrs(node), node.textContent);
+        case 'HR':
+            return h('span', getAttrs(node), node.textContent);
         default:
             // Fallback to handle any element
             return h(

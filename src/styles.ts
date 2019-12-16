@@ -191,6 +191,17 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         }
     }
 
+    .section__rule {
+        display: block;
+        width: 8.75rem;
+        height: 0.125rem;
+        margin: 0;
+        border: 0;
+        margin-top: 3rem;
+        margin-bottom: 0.1875rem;
+        background-color: ${palette.neutral[93]};
+    }
+
     ${bulletStyles(kicker)}
 `;
 
