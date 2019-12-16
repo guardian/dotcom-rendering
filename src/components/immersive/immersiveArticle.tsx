@@ -7,12 +7,12 @@ import ImmersiveByline from 'components/immersive/ImmersiveByline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
-import { articleWidthStyles } from 'styles';
+import { articleWidthStyles, basePx } from 'styles';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
-import { getPillarStyles, pillarFromString } from 'pillar';
+import { getPillarStyles, pillarFromString, PillarStyles } from 'pillar';
 
 export interface ImmersiveArticleProps {
     capi: Content;
@@ -25,6 +25,18 @@ const BorderStyles = css`
         margin: 0 auto;
     }
 `;
+
+const DropCapStyles = (pillarStyles: PillarStyles) => css`
+    .article__body p:first-of-type::first-letter {
+        color: ${pillarStyles.kicker};
+        font-weight: 100;
+        font-style: normal;
+        font-size: 7em;
+        line-height: 1;
+        padding-right: ${basePx(1)};
+        float: left;
+    }
+`
 
 const HeaderImageStyles = css`
     figure {
@@ -48,7 +60,7 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
 
     return (
         <main>
-            <article css={BorderStyles}>
+            <article css={[BorderStyles, DropCapStyles(pillarStyles)]}>
                 <header>
                     <div css={articleWidthStyles}>
                         <ImmersiveHeaderImage
@@ -56,10 +68,8 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
                             imageSalt={imageSalt}
                             className={HeaderImageStyles}
                         />
-
                         <ImmersiveSeries series={series} pillarStyles={pillarStyles}/>
                         <ImmersiveHeadline headline={fields.headline}/>
-
                         <ImmersiveStandfirst
                             standfirst={fields.standfirst}
                             pillarStyles={pillarStyles}
