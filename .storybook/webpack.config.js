@@ -1,4 +1,5 @@
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = ({ config }) => {
     const rules = config.module.rules;
@@ -12,6 +13,7 @@ module.exports = ({ config }) => {
             {
                 loader: require.resolve('awesome-typescript-loader'),
                 options: {
+                    transpileOnly: true,
                     silent: true,
                     useBabel: true,
                     babelOptions: {
@@ -22,6 +24,8 @@ module.exports = ({ config }) => {
         ],
     });
     extensions.push('.ts', '.tsx');
+
+    config.plugins.push(new ForkTsCheckerWebpackPlugin());
 
     // modify storybook's file-loader rule to avoid conflicts with our svg
     // https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
