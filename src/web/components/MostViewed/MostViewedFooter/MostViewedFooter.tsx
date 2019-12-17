@@ -75,11 +75,6 @@ const mostPopularAdStyle = css`
     ${labelStyles};
 `;
 
-export interface TabType {
-    heading: string;
-    trails: TrailType[];
-}
-
 interface Props {
     sectionName?: string;
     pillar: Pillar;
@@ -98,7 +93,7 @@ function buildSectionUrl(sectionName?: string) {
 
 export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
     const url = buildSectionUrl(sectionName);
-    const { data, error } = useApi<TabType[]>(url);
+    const { data, error } = useApi<MostViewedFooterType | TrailTabType[]>(url);
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
@@ -118,7 +113,7 @@ export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
                     </section>
                     <section className={stackBelow('desktop')}>
                         <MostViewedFooterGrid
-                            data={data}
+                            data={'tabs' in data ? data.tabs : data}
                             sectionName={sectionName}
                             pillar={pillar}
                         />

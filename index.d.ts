@@ -422,6 +422,17 @@ interface TrailType {
     showByline?: boolean;
 }
 
+interface TrailTabType {
+    heading: string;
+    trails: TrailType[];
+}
+
+interface MostViewedFooterType {
+    tabs: TrailTabType[];
+    mostCommented: TrailType;
+    mostShared: TrailType;
+}
+
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------

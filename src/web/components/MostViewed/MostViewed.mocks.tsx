@@ -249,3 +249,29 @@ export const mockTab2 = {
         },
     ],
 };
+
+export const mockMostCommented = {
+    url:
+        'https://www.theguardian.com/politics/2019/sep/15/eu-officials-reject-boris-johnson-claim-huge-progress-brexit-talks',
+    linkText:
+        "LINKTEXT EU officials reject Boris Johnson claim of 'huge progress' in Brexit talks",
+    showByline: true,
+    byline: 'Jennifer Rankin and Daniel Boffey',
+    image:
+        'https://i.guim.co.uk/img/media/85377038aacd71b2c0e55b0a55478165fe6d3014/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=de2cecf52b21492f01daa4520c4f2a97',
+    isLiveBlog: true,
+    pillar: 'news',
+};
+
+export const mockMostShared = {
+    url:
+        'https://www.theguardian.com/us-news/2019/sep/15/brett-kavanaugh-donald-trump-impeachment-supreme-court-justice',
+    linkText: 'LINKTEXT Trump blasts calls for impeachment',
+    showByline: true,
+    byline: 'Martin Pengelly',
+    image:
+        'https://i.guim.co.uk/img/media/579fd19481e46b9d6ed3c69c2a6992483df84478/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=63a6a5c13a8087e607a44ce5c7da2090',
+    isLiveBlog: false,
+    pillar: 'opinion',
+    ageWarning: '1 year old',
+};

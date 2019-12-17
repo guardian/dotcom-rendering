@@ -5,7 +5,6 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
-import { TabType } from './MostViewedFooter';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 const thinGreySolid = `1px solid ${palette.neutral[86]}`;
@@ -94,7 +93,7 @@ const gridContainer = css`
 `;
 
 type Props = {
-    data: TabType[];
+    data: TrailTabType[];
     sectionName?: string;
     pillar: Pillar;
 };
@@ -106,7 +105,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
         <div>
             {Array.isArray(data) && data.length > 1 && (
                 <ul className={tabsContainer} role="tablist">
-                    {data.map((tab: TabType, i: number) => (
+                    {data.map((tab: TrailTabType, i: number) => (
                         <li
                             className={cx(listTab, {
                                 [selectedListTab(pillar)]:
@@ -143,7 +142,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
                     ))}
                 </ul>
             )}
-            {data.map((tab: TabType, i: number) => (
+            {data.map((tab: TrailTabType, i: number) => (
                 <ol
                     className={cx(gridContainer, {
                         [hideList]: i !== selectedTabIndex,
