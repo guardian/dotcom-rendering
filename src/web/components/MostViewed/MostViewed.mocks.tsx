@@ -259,8 +259,10 @@ export const mockMostCommented = {
     byline: 'Jennifer Rankin and Daniel Boffey',
     image:
         'https://i.guim.co.uk/img/media/85377038aacd71b2c0e55b0a55478165fe6d3014/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=de2cecf52b21492f01daa4520c4f2a97',
-    isLiveBlog: true,
+    isLiveBlog: false,
     pillar: 'news',
+    avatarUrl:
+        'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
 };
 
 export const mockMostShared = {

@@ -1,12 +1,16 @@
 import React from 'react';
-import { useApi } from '@root/src/web/components/lib/api';
 import { css, cx } from 'emotion';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
+
+import { useApi } from '@root/src/web/components/lib/api';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
+
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
+import { SecondTierItem } from './SecondTierItem';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
     display: flex;
@@ -112,11 +116,28 @@ export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
                         <h2 className={headingStyles}>Most popular</h2>
                     </section>
                     <section className={stackBelow('desktop')}>
-                        <MostViewedFooterGrid
-                            data={'tabs' in data ? data.tabs : data}
-                            sectionName={sectionName}
-                            pillar={pillar}
-                        />
+                        <div>
+                            <MostViewedFooterGrid
+                                data={'tabs' in data ? data.tabs : data}
+                                sectionName={sectionName}
+                                pillar={pillar}
+                            />
+                            <div className={stackBelow('tablet')}>
+                                {'mostCommented' in data && (
+                                    <SecondTierItem
+                                        trail={data.mostCommented}
+                                        heading="Most commented"
+                                    />
+                                )}
+                                {'mostShared' in data && (
+                                    <SecondTierItem
+                                        trail={data.mostShared}
+                                        heading="Most shared"
+                                        showRightBorder={true}
+                                    />
+                                )}
+                            </div>
+                        </div>
                         <div
                             className={css`
                                 margin: 0.375rem 0 0 0.625rem;

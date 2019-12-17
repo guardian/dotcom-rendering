@@ -413,11 +413,12 @@ interface TrailType {
     url: string;
     linkText: string;
     isLiveBlog: boolean;
+    image: string;
+    webPublicationDate: string;
+    avatarUrl?: string;
     mediaType?: MediaType;
     mediaDuration?: number;
-    webPublicationDate: string;
     ageWarning?: string;
-    image: string;
     byline?: string;
     showByline?: boolean;
 }
