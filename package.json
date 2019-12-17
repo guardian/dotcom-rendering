@@ -17,7 +17,7 @@
     "watch": "npm run watch:server & npm run watch:client",
     "build:server": "webpack --config webpack.config.js --config-name server",
     "build:client": "webpack --config webpack.config.js --config-name client",
-    "storybook": "start-storybook -s ./public",
+    "storybook": "start-storybook",
     "deploy-storybook": "storybook-to-ghpages"
   },
   "author": "",
