@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 
-const linkStyles = (designType?: DesignType) => {
+const linkStyles = (designType: DesignType, pillar: Pillar) => {
     const baseLinkStyles = css`
         display: flex;
         /* a tag specific styles */
@@ -52,13 +52,22 @@ const linkStyles = (designType?: DesignType) => {
             return css`
                 ${baseLinkStyles}
                 background-color: ${palette.neutral[20]};
-               :hover {
-                    background-color: ${palette.neutral[7]};
+
+                :hover {
+                    filter: brightness(90%);
+                }
+            `;
+        case 'Live':
+            return css`
+                ${baseLinkStyles}
+                background-color: ${palette[pillar].dark};
+
+                :hover {
+                    filter: brightness(90%);
                 }
             `;
         case 'Article':
         case 'Review':
-        case 'Live':
         case 'SpecialReport':
         case 'Recipe':
         case 'MatchReport':
@@ -74,6 +83,7 @@ const linkStyles = (designType?: DesignType) => {
             return css`
                     ${baseLinkStyles}
                     background-color: ${palette.neutral[97]};
+
                     :hover {
                         background-color: ${palette.neutral[93]};
                     }
@@ -84,11 +94,12 @@ const linkStyles = (designType?: DesignType) => {
 type Props = {
     children: JSXElements;
     linkTo: string;
-    designType: DesignType | undefined;
+    designType: DesignType;
+    pillar: Pillar;
 };
 
-export const CardLink = ({ children, linkTo, designType }: Props) => (
-    <a href={linkTo} className={linkStyles(designType)}>
+export const CardLink = ({ children, linkTo, designType, pillar }: Props) => (
+    <a href={linkTo} className={linkStyles(designType, pillar)}>
         {children}
     </a>
 );

@@ -88,7 +88,7 @@ export const Card = ({
     }
 
     return (
-        <CardLink linkTo={linkTo} designType={designType}>
+        <CardLink linkTo={linkTo} designType={designType} pillar={pillar}>
             <TopBar topBarColour={palette[pillar].main}>
                 <CardLayout imagePosition={imagePosition}>
                     <>
@@ -153,6 +153,7 @@ export const Card = ({
                                         {webPublicationDate && (
                                             <CardAge
                                                 designType={designType}
+                                                pillar={pillar}
                                                 webPublicationDate={
                                                     webPublicationDate
                                                 }

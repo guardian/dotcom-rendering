@@ -5,6 +5,8 @@ import { palette } from '@guardian/src-foundations';
 
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 
+import { decidePillarLight } from '@frontend/web/components/lib/decidePillarLight';
+
 const kickerStyles = (colour: string) => css`
     color: ${colour};
     font-weight: 700;
@@ -19,13 +21,44 @@ const slashStyles = css`
     }
 `;
 
+const decideColour = (
+    designType: DesignType,
+    pillar: Pillar,
+    inCard?: boolean,
+) => {
+    switch (designType) {
+        case 'Live':
+            // TODO: We need this colour in source foundation
+            return inCard ? decidePillarLight(pillar) : palette[pillar].main;
+        case 'Feature':
+        case 'Interview':
+        case 'Media':
+        case 'Analysis':
+        case 'Article':
+        case 'Review':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Comment':
+        case 'Immersive':
+        default:
+            return palette[pillar].main;
+    }
+};
+
 export const Kicker = ({
     text,
-    pillar = 'news',
+    designType,
+    pillar,
     showPulsingDot,
     showSlash = true,
+    inCard,
 }: KickerType) => {
-    const kickerColour = palette[pillar].main;
+    const kickerColour = decideColour(designType, pillar, inCard);
     return (
         <span className={kickerStyles(kickerColour)}>
             {showPulsingDot && <PulsingDot colour={kickerColour} />}
