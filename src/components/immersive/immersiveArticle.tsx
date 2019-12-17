@@ -27,7 +27,7 @@ const BorderStyles = css`
 `;
 
 const DropCapStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
-    .article__body p:first-of-type::first-letter {
+    p:first-of-type::first-letter {
         color: ${pillarStyles.kicker};
         font-weight: 100;
         font-style: normal;
@@ -60,7 +60,7 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
 
     return (
         <main>
-            <article css={[BorderStyles, DropCapStyles(pillarStyles)]}>
+            <article css={BorderStyles}>
                 <header>
                     <div css={articleWidthStyles}>
                         <ImmersiveHeaderImage
@@ -89,7 +89,7 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
                     pillarStyles={pillarStyles}
                     bodyElements={bodyElements}
                     imageSalt={imageSalt}
-                    className={articleWidthStyles}
+                    className={[articleWidthStyles, DropCapStyles(pillarStyles)]}
                 />
                 <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>

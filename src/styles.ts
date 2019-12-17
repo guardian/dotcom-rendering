@@ -191,7 +191,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         }
     }
 
-    .section__rule {
+    .section-rule {
         display: block;
         width: 8.75rem;
         height: 0.125rem;

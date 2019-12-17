@@ -81,7 +81,7 @@ interface ArticleBodyProps {
     pillarStyles: PillarStyles;
     bodyElements: BlockElement[];
     imageSalt: string;
-    className: SerializedStyles;
+    className: SerializedStyles[];
 }
 
 const ArticleBody = ({
@@ -90,7 +90,7 @@ const ArticleBody = ({
     imageSalt,
     className,
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[className, ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]} className="article__body">
+    <div css={[...className, ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]}>
         {render(bodyElements, imageSalt).html}
     </div>
 

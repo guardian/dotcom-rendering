@@ -99,7 +99,7 @@ const OpinionArticle = ({ capi, imageSalt }: OpinionArticleProps): JSX.Element =
                     pillarStyles={pillarStyles}
                     bodyElements={bodyElements}
                     imageSalt={imageSalt}
-                    className={articleWidthStyles}
+                    className={[articleWidthStyles]}
                 />
                 <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>

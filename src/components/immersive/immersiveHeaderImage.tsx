@@ -39,7 +39,7 @@ const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Ele
         // This is not an iterator, ESLint is confused
         // eslint-disable-next-line react/jsx-key
         <div css={[className, headerImageStyles]}>
-            <figure aria-labelledby={imageTypeData.alt}>
+            <figure>
                 { immersiveImageElement(imageTypeData.alt, assets, imageSalt) }
             </figure>
         </div>
