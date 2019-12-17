@@ -29,9 +29,7 @@ export const liveStory = () => (
             designType="Article"
             headlineText="This is how a headline with a live kicker looks"
             pillar="news"
-            kicker={{
-                text: 'Live',
-            }}
+            kickerText="Live"
         />
     </Section>
 );
@@ -43,10 +41,8 @@ export const noSlash = () => (
             designType="Article"
             headlineText="This is how a headline with no kicker slash looks"
             pillar="news"
-            kicker={{
-                text: 'Live',
-                showSlash: false,
-            }}
+            kickerText="Live"
+            showSlash={false}
         />
     </Section>
 );
@@ -58,10 +54,8 @@ export const pulsingDot = () => (
             designType="Article"
             headlineText="This is how a headline with a pulsing dot looks"
             pillar="news"
-            kicker={{
-                text: 'Live',
-                showPulsingDot: true,
-            }}
+            kickerText="Live"
+            showPulsingDot={true}
         />
     </Section>
 );
@@ -73,9 +67,7 @@ export const cultureVariant = () => (
             designType="Article"
             headlineText="This is how a headline with the culture pillar looks"
             pillar="culture"
-            kicker={{
-                text: 'Art and stuff',
-            }}
+            kickerText="Art and stuff"
         />
     </Section>
 );
@@ -102,10 +94,8 @@ export const OpinionKicker = () => (
             headlineText="This is how an opinion headline with a kicker looks"
             pillar="opinion"
             showQuotes={true}
-            kicker={{
-                text: 'George Monbiot',
-                showSlash: true,
-            }}
+            kickerText="George Monbiot"
+            showSlash={true}
         />
     </Section>
 );
@@ -119,10 +109,8 @@ export const InUnderlinedState = () => (
             pillar="news"
             showUnderline={true}
             size="small"
-            kicker={{
-                text: 'I am never underlined',
-                showSlash: true,
-            }}
+            kickerText="I am never underlined"
+            showSlash={true}
             link={{
                 to:
                     'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
@@ -138,10 +126,8 @@ export const linkStory = () => (
             designType="Article"
             headlineText="This is how a headline looks as a link"
             pillar="sport"
-            kicker={{
-                text: 'I am not a link',
-                showSlash: true,
-            }}
+            kickerText="I am not a link"
+            showSlash={true}
             link={{
                 to:
                     'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',

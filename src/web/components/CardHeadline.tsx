@@ -103,7 +103,9 @@ export const CardHeadline = ({
     designType = 'Article',
     pillar,
     showQuotes,
-    kicker,
+    kickerText,
+    showPulsingDot,
+    showSlash,
     size = 'medium',
     byline,
 }: CardHeadlineType) => (
@@ -114,12 +116,12 @@ export const CardHeadline = ({
                 designType === 'Analysis' && underlinedStyles(size),
             )}
         >
-            {kicker && (
+            {kickerText && (
                 <Kicker
-                    text={kicker.text}
+                    text={kickerText}
                     pillar={pillar}
-                    showPulsingDot={kicker.showPulsingDot}
-                    showSlash={kicker.showSlash}
+                    showPulsingDot={showPulsingDot}
+                    showSlash={showSlash}
                 />
             )}
             {showQuotes && (
