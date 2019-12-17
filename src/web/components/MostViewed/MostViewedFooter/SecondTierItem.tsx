@@ -81,6 +81,8 @@ export const SecondTierItem = ({ trail, heading, showRightBorder }: Props) => {
         avatarUrl,
         image,
         designType,
+        byline,
+        showByline,
         pillar,
         ageWarning,
         linkText,
@@ -101,11 +103,7 @@ export const SecondTierItem = ({ trail, heading, showRightBorder }: Props) => {
                                 headlineText={linkText}
                                 pillar={pillar}
                                 size="small"
-                                kicker={{
-                                    text: 'Live',
-                                    showSlash: true,
-                                    showPulsingDot: true,
-                                }}
+                                byline={showByline ? byline : undefined}
                             />
                         ) : (
                             <LinkHeadline
@@ -113,6 +111,7 @@ export const SecondTierItem = ({ trail, heading, showRightBorder }: Props) => {
                                 headlineText={linkText}
                                 pillar={pillar}
                                 size="small"
+                                byline={showByline ? byline : undefined}
                             />
                         )}
                         {ageWarning && (
