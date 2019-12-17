@@ -23,6 +23,16 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
             right: 0;
             bottom: 0;
         }
+
+        :hover .image-overlay {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            background-color: ${palette.neutral[7]};
+            opacity: 0.1;
+        }
     `;
 
     switch (designType) {

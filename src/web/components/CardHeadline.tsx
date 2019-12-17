@@ -108,6 +108,7 @@ export const CardHeadline = ({
     showSlash,
     size = 'medium',
     byline,
+    showByline,
 }: CardHeadlineType) => (
     <>
         <h4
@@ -134,7 +135,7 @@ export const CardHeadline = ({
                 {headlineText}
             </span>
         </h4>
-        {byline && (
+        {byline && showByline && (
             <Byline
                 text={byline}
                 designType={designType}

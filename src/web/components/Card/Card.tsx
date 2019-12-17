@@ -62,6 +62,7 @@ export const Card = ({
     headlineSize,
     showQuotes,
     byline,
+    showByline,
     webPublicationDate,
     imageUrl,
     imagePosition,
@@ -113,6 +114,7 @@ export const Card = ({
                                         showPulsingDot={showPulsingDot}
                                         showSlash={showSlash}
                                         byline={byline}
+                                        showByline={showByline}
                                     />
                                 </HeadlineWrapper>
                                 <>

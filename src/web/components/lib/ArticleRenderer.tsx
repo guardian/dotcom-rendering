@@ -14,7 +14,8 @@ const commercialPosition = css`
 export const ArticleRenderer: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
-}> = ({ elements, pillar }) => {
+    designType: DesignType;
+}> = ({ elements, pillar, designType }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -25,7 +26,15 @@ export const ArticleRenderer: React.FC<{
         .map((element, i) => {
             switch (element._type) {
                 case 'model.dotcomrendering.pageElements.TextBlockElement':
-                    return <TextBlockComponent key={i} html={element.html} />;
+                    return (
+                        <TextBlockComponent
+                            key={i}
+                            html={element.html}
+                            pillar={pillar}
+                            designType={designType}
+                            dropCap={false} // TODO: Plug in the api response here when we have it
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
                     return (
                         <SubheadingBlockComponent key={i} html={element.html} />

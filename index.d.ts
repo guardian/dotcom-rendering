@@ -268,6 +268,7 @@ interface CardType {
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     byline?: string;
     isLiveBlog?: boolean; // When designType === 'Live', this denotes if the liveblog is active or not
+    showByline?: boolean;
     webPublicationDate?: string;
     imageUrl?: string;
     imagePosition?: ImagePositionType;
@@ -316,6 +317,7 @@ interface CardHeadlineType {
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
     byline?: string;
+    showByline?: boolean;
 }
 
 /**
