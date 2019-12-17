@@ -44,7 +44,7 @@ describe('MostViewedFooter', () => {
         expect(getAllByText(/Live/).length).toBe(3);
 
         // Renders appropriate number of age warnins
-        expect(getAllByText(/This article is more than/).length).toBe(2);
+        expect(getAllByText(/This article is more than/).length).toBe(3);
 
         // Handles &nbsp char
         expect(getByText('Across The Guardian')).toBeInTheDocument();
