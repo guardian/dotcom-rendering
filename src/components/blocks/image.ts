@@ -19,13 +19,14 @@ interface Image {
 const isImage = (elem: BlockElement): boolean =>
   elem.type === 'image';
 
-const element = (sizes: string) => (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode =>
-    h('img', {
-        sizes,
-        srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
-        alt,
-        src: AssetUtils.toUrl(salt, assets[0]),
-    });
+const element = (sizes: string) => 
+    (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode =>
+        h('img', {
+            sizes,
+            srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
+            alt,
+            src: AssetUtils.toUrl(salt, assets[0]),
+        });
 
 const immersiveImageElement = element('calc(80vh * 5/3)');
 const imageElement = element('100%');
