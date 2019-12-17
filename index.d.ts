@@ -265,6 +265,7 @@ interface CardType {
     headlineSize?: SmallHeadlineSize;
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     byline?: string;
+    showByline?: boolean;
     webPublicationDate?: string;
     imageUrl?: string;
     imagePosition?: ImagePositionType;
@@ -313,6 +314,7 @@ interface CardHeadlineType {
     showQuotes?: boolean; // Even with designType !== Comment, a piece can be opinion
     size?: SmallHeadlineSize;
     byline?: string;
+    showByline?: boolean;
 }
 
 /**

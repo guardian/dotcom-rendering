@@ -43,11 +43,7 @@ const bylineStyles = (size: SmallHeadlineSize) => {
 
 const colourStyles = (designType: DesignType, pillar: Pillar) => {
     switch (designType) {
-        // Sometimes comment pieces can have the news pillar but should still be styled as opinion
         case 'Comment':
-            return css`
-                color: ${palette.opinion.main};
-            `;
         case 'Comment':
         case 'Analysis':
         case 'Feature':
