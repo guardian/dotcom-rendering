@@ -79,6 +79,15 @@ const mostPopularAdStyle = css`
     ${labelStyles};
 `;
 
+const secondTierStyles = css`
+    border-left: 1px solid ${palette.neutral[86]};
+    border-right: 1px solid ${palette.neutral[86]};
+
+    ${from.tablet} {
+        padding-top: 24px;
+    }
+`;
+
 interface Props {
     sectionName?: string;
     pillar: Pillar;
@@ -122,18 +131,23 @@ export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
                                 sectionName={sectionName}
                                 pillar={pillar}
                             />
-                            <div className={stackBelow('tablet')}>
+                            <div
+                                className={cx(
+                                    stackBelow('tablet'),
+                                    secondTierStyles,
+                                )}
+                            >
                                 {'mostCommented' in data && (
                                     <SecondTierItem
                                         trail={data.mostCommented}
                                         heading="Most commented"
+                                        showRightBorder={true}
                                     />
                                 )}
                                 {'mostShared' in data && (
                                     <SecondTierItem
                                         trail={data.mostShared}
                                         heading="Most shared"
-                                        showRightBorder={true}
                                     />
                                 )}
                             </div>

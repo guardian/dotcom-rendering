@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
+import { from } from '@guardian/src-foundations/mq';
 
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
@@ -17,8 +18,9 @@ const itemStyles = (showRightBorder?: boolean) => css`
     padding-bottom: 12px;
 
     border-top: 1px solid ${palette.neutral[86]};
-    border-left: 1px solid ${palette.neutral[86]};
-    border-right: ${showRightBorder && `1px solid ${palette.neutral[86]}`};
+    ${from.tablet} {
+        border-right: ${showRightBorder && `1px solid ${palette.neutral[86]}`};
+    }
 
     min-height: 3.25rem;
 
