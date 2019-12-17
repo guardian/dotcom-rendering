@@ -81,11 +81,9 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
                         headlineText={trail.linkText}
                         pillar={trail.pillar}
                         size="small"
-                        kicker={{
-                            text: 'Live',
-                            showSlash: true,
-                            showPulsingDot: true,
-                        }}
+                        kickerText="Live"
+                        showSlash={true}
+                        showPulsingDot={true}
                     />
                 ) : (
                     <LinkHeadline
