@@ -6,6 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 
 const headlineTagWrapper = css`
     margin-left: 6px;
+    margin-top: 6px;
 `;
 
 const headlineTagStyles = (pillar: Pillar) => css`
