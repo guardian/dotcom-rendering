@@ -140,14 +140,14 @@ export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
                                 {'mostCommented' in data && (
                                     <SecondTierItem
                                         trail={data.mostCommented}
-                                        heading="Most commented"
+                                        title="Most commented"
                                         showRightBorder={true}
                                     />
                                 )}
                                 {'mostShared' in data && (
                                     <SecondTierItem
                                         trail={data.mostShared}
-                                        heading="Most shared"
+                                        title="Most shared"
                                     />
                                 )}
                             </div>

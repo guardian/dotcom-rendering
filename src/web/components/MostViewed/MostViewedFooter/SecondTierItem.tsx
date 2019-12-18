@@ -72,11 +72,11 @@ const avatarContainerStyles = css`
 
 type Props = {
     trail: TrailType;
-    heading: string;
+    title: string;
     showRightBorder?: boolean; // Prevents double borders
 };
 
-export const SecondTierItem = ({ trail, heading, showRightBorder }: Props) => {
+export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
     const {
         url,
         isLiveBlog,
@@ -87,7 +87,7 @@ export const SecondTierItem = ({ trail, heading, showRightBorder }: Props) => {
         showByline,
         pillar,
         ageWarning,
-        linkText,
+        headline: headlineText,
     } = trail;
 
     const avatarToShow = avatarUrl || image;
@@ -98,11 +98,11 @@ export const SecondTierItem = ({ trail, heading, showRightBorder }: Props) => {
             <a className={headlineLink} href={url} data-link-name={'article'}>
                 <Flex>
                     <div className={headlineStyles}>
-                        <div className={titleStyles}>{heading}</div>
+                        <div className={titleStyles}>{title}</div>
                         {isLiveBlog ? (
                             <LinkHeadline
                                 designType={designType}
-                                headlineText={linkText}
+                                headlineText={headlineText}
                                 pillar={pillar}
                                 size="small"
                                 byline={showByline ? byline : undefined}
@@ -110,7 +110,7 @@ export const SecondTierItem = ({ trail, heading, showRightBorder }: Props) => {
                         ) : (
                             <LinkHeadline
                                 designType={designType}
-                                headlineText={linkText}
+                                headlineText={headlineText}
                                 pillar={pillar}
                                 size="small"
                                 byline={showByline ? byline : undefined}

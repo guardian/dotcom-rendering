@@ -253,7 +253,7 @@ export const mockTab2 = {
 export const mockMostCommented = {
     url:
         'https://www.theguardian.com/politics/2019/sep/15/eu-officials-reject-boris-johnson-claim-huge-progress-brexit-talks',
-    linkText:
+    headline:
         "EU officials reject Boris Johnson claim of 'huge progress' in Brexit talks",
     showByline: true,
     byline: 'Jennifer Rankin and Daniel Boffey',
@@ -269,7 +269,7 @@ export const mockMostCommented = {
 export const mockMostShared = {
     url:
         'https://www.theguardian.com/us-news/2019/sep/15/brett-kavanaugh-donald-trump-impeachment-supreme-court-justice',
-    linkText: 'Trump blasts calls for impeachment',
+    headline: 'Trump blasts calls for impeachment',
     showByline: false,
     byline: 'Martin Pengelly',
     image:
