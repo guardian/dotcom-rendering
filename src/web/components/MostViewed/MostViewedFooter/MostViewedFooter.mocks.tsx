@@ -1,9 +1,18 @@
-import { mockTab1, mockTab2 } from '../MostViewed.mocks';
+import {
+    mockTab1,
+    mockTab2,
+    mockMostCommented,
+    mockMostShared,
+} from '../MostViewed.mocks';
 
 export const responseWithTwoTabs = {
-    data: [mockTab1, mockTab2],
+    tabs: [mockTab1, mockTab2],
+    mostCommented: mockMostCommented,
+    mostShared: mockMostShared,
 };
 
 export const responseWithOneTab = {
-    data: [mockTab1],
+    tabs: [mockTab1],
+    mostCommented: mockMostCommented,
+    mostShared: mockMostShared,
 };

@@ -19,7 +19,7 @@ export default {
 export const withTwoTabs = () => {
     fetchMock.restore().getOnce('*', {
         status: 200,
-        body: responseWithTwoTabs.data,
+        body: responseWithTwoTabs,
     });
 
     return (
@@ -33,7 +33,7 @@ withTwoTabs.story = { name: 'with two tabs' };
 export const withOneTabs = () => {
     fetchMock.restore().getOnce('*', {
         status: 200,
-        body: responseWithOneTab.data,
+        body: responseWithOneTab,
     });
 
     return (

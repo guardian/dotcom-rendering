@@ -23,7 +23,7 @@ describe('MostViewedFooter', () => {
     });
 
     it('should call the api and render the response as expected', async () => {
-        useApi.mockReturnValue(responseWithTwoTabs);
+        useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByText, getAllByText, getByTestId } = render(
             <MostViewedFooter sectionName="Section Name" pillar="news" />,
@@ -36,7 +36,7 @@ describe('MostViewedFooter', () => {
         expect(getAllByText(/LINKTEXT/).length).toBe(20);
 
         // First tab defaults to visible
-        expect(getByTestId(responseWithTwoTabs.data[0].heading)).toHaveStyle(
+        expect(getByTestId(responseWithTwoTabs.tabs[0].heading)).toHaveStyle(
             VISIBLE,
         );
 
@@ -44,21 +44,21 @@ describe('MostViewedFooter', () => {
         expect(getAllByText(/Live/).length).toBe(3);
 
         // Renders appropriate number of age warnins
-        expect(getAllByText(/This article is more than/).length).toBe(2);
+        expect(getAllByText(/This article is more than/).length).toBe(3);
 
         // Handles &nbsp char
         expect(getByText('Across The Guardian')).toBeInTheDocument();
     });
 
     it('should change the items shown when the associated tab is clicked', async () => {
-        useApi.mockReturnValue(responseWithTwoTabs);
+        useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByTestId, getByText } = render(
             <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
-        const firstHeading = responseWithTwoTabs.data[0].heading;
-        const secondHeading = responseWithTwoTabs.data[1].heading;
+        const firstHeading = responseWithTwoTabs.tabs[0].heading;
+        const secondHeading = responseWithTwoTabs.tabs[1].heading;
 
         expect(getByTestId(firstHeading)).toHaveStyle(VISIBLE);
         expect(getByTestId(secondHeading)).toHaveStyle(HIDDEN);
@@ -76,27 +76,27 @@ describe('MostViewedFooter', () => {
     });
 
     it('should not show the tab menu when there is only one group of tabs', async () => {
-        useApi.mockReturnValue(responseWithOneTab);
+        useApi.mockReturnValue({ data: responseWithOneTab });
 
         const { queryByText } = render(
             <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         expect(
-            queryByText(responseWithOneTab.data[0].heading),
+            queryByText(responseWithOneTab.tabs[0].heading),
         ).not.toBeInTheDocument();
     });
 
     // TODO: Restore this once the component has this feature added to it
     it.skip('should show a byline when this property is set to true', async () => {
-        useApi.mockReturnValue(responseWithTwoTabs);
+        useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByText } = render(
             <MostViewedFooter sectionName="Section Name" pillar="news" />,
         );
 
         expect(
-            getByText(responseWithTwoTabs.data[0].trails[9].byline),
+            getByText(responseWithTwoTabs.tabs[0].trails[9].byline),
         ).toBeInTheDocument();
     });
 
