@@ -1,4 +1,9 @@
-git stash
+diff=`git diff`
+
+if [[ -n $diff ]]; then
+    git stash
+fi
+
 
 if git show-ref --quiet refs/heads/gh-pages; then
     git branch -D gh-pages
@@ -13,4 +18,7 @@ git commit -m "add public"
 git push origin gh-pages
 
 git checkout -
-git stash apply
+
+if [[ -n $diff ]]; then
+    git stash apply
+fi
