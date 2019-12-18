@@ -108,7 +108,7 @@ describe('MostViewedFooter', () => {
                     trails: [
                         {
                             url: '',
-                            linkText: 'Headline',
+                            headline: 'Headline',
                             showByline: false,
                             byline: '',
                             image: '',
@@ -135,7 +135,7 @@ describe('MostViewedFooter', () => {
                     trails: [
                         {
                             url: '',
-                            linkText: 'Headline',
+                            headline: 'Headline',
                             showByline: false,
                             byline: '',
                             image: '',

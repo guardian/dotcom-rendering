@@ -4,7 +4,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/politics/2019/sep/15/eu-officials-reject-boris-johnson-claim-huge-progress-brexit-talks',
-            linkText:
+            headline:
                 "LINKTEXT EU officials reject Boris Johnson claim of 'huge progress' in Brexit talks",
             showByline: true,
             byline: 'Jennifer Rankin and Daniel Boffey',
@@ -16,7 +16,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/us-news/2019/sep/15/brett-kavanaugh-donald-trump-impeachment-supreme-court-justice',
-            linkText: 'LINKTEXT Trump blasts calls for impeachment',
+            headline: 'LINKTEXT Trump blasts calls for impeachment',
             showByline: true,
             byline: 'Martin Pengelly',
             image:
@@ -28,7 +28,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/sport/2019/sep/15/ashes-cricket-series-drawn-england-beat-australia-fifth-test',
-            linkText:
+            headline:
                 'LINKTEXT England win fifth Test to draw Ashes series but Australia keep urn',
             showByline: false,
             byline: 'Vic Marks at the Oval',
@@ -40,7 +40,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/uk-news/2019/sep/15/boris-johnson-bonkers-plan-for-15bn-pound-bridge-derided-by-engineers',
-            linkText:
+            headline:
                 "LINKTEXT Johnson's 'bonkers' plan for £15bn bridge derided by engineers",
             showByline: false,
             byline: 'Simon Murphy',
@@ -52,7 +52,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/politics/2019/sep/15/five-things-we-learned-from-david-cameron-memoir-boris-johnson-michael-gove-referendum',
-            linkText:
+            headline:
                 "LINKTEXT Five things we learned from David Cameron's memoirs",
             howByline: false,
             byline: 'Caroline Davies',
@@ -65,7 +65,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/sport/live/2019/sep/15/ashes-2019-england-v-australia-fifth-test-day-four-live',
-            linkText:
+            headline:
                 'LINKTEXT Ashes 2019: England win fifth Test by 135 runs as series is drawn – as it happened',
             showByline: false,
             byline: 'Tanya Aldred,  Geoff Lemon  & Jonathan Howcroft',
@@ -77,7 +77,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/lifeandstyle/2019/sep/15/how-six-weddings-in-one-year-made-me-love-being-single',
-            linkText:
+            headline:
                 'LINKTEXT How six weddings in one year made me love being single',
             showByline: false,
             byline: 'Sarah Johnson',
@@ -89,7 +89,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/fashion/2019/sep/15/joani-johnson-model-fenty-career-began-at-65-ageing-interview',
-            linkText:
+            headline:
                 'LINKTEXT JoAni Johnson: the sexagenarian model defying convention',
             showByline: false,
             byline: 'Aaron Hicklin',
@@ -101,7 +101,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/fashion/2019/sep/15/victoria-beckham-announces-launch-of-own-makeup-brand',
-            linkText:
+            headline:
                 'LINKTEXT Victoria Beckham launches makeup range and targets wellness market',
             showByline: false,
             byline: 'Jess Cartner-Morley',
@@ -113,7 +113,7 @@ export const mockTab1 = {
         {
             url:
                 'https://www.theguardian.com/commentisfree/2019/sep/15/government-boris-johnson-incredible-hulk-sam-gyimah',
-            linkText:
+            headline:
                 'LINKTEXT There’s nothing normal about this beast of a government | Matthew d’Ancona',
             showByline: true,
             byline: 'Matthew d’Ancona',
@@ -131,7 +131,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/15/bridget-christie-last-night-of-the-proms-jamie-barton-laura-mvula',
-            linkText:
+            headline:
                 "LINKTEXT 'I thought I'd hate it': Bridget Christie on loving the Last Night of the Proms",
             showByline: false,
             byline: 'Bridget Christie',
@@ -143,7 +143,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/15/aphex-twin-review-printworks-london-electronic-music',
-            linkText:
+            headline:
                 'LINKTEXT Aphex Twin review – wild lights, jungle buzzsaw and a boo for Boris',
             showByline: false,
             byline: 'Lauren Martin',
@@ -155,7 +155,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/13/100-best-albums-of-the-21st-century',
-            linkText: 'LINKTEXT The 100 best albums of the 21st century',
+            headline: 'LINKTEXT The 100 best albums of the 21st century',
             howByline: false,
             byline:
                 'Ben Beaumont-Thomas (1-50); Laura Snapes and April Curtin (51-100)',
@@ -167,7 +167,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/14/missy-elliott-interview-beyonce-vmas-katy-perry-misdemeanor',
-            linkText:
+            headline:
                 "LINKTEXT Missy Elliott – Beyoncé said: ‘If I sound crazy, don’t put this out!'",
             showByline: false,
             byline: 'Dorian Lynskey',
@@ -179,7 +179,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/14/beatles-paul-mccartney-ringo-starr-reunite-record-john-lennon-song',
-            linkText:
+            headline:
                 'LINKTEXT Paul McCartney and Ringo Starr reunite to record John Lennon song',
             showByline: false,
             byline: 'Mattha Busby',
@@ -191,7 +191,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/15/on-my-radar-gruff-rhys-interview',
-            linkText: 'LINKTEXT On my radar: Gruff Rhys’s cultural highlights',
+            headline: 'LINKTEXT On my radar: Gruff Rhys’s cultural highlights',
             howByline: false,
             byline: 'Killian Fox',
             image:
@@ -202,7 +202,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/13/sam-smith-on-being-non-binary-im-changing-my-pronouns-to-theythem',
-            linkText:
+            headline:
                 "LINKTEXT Sam Smith on being non-binary: 'I'm changing my pronouns to they/them'",
             showByline: false,
             byline: 'Laura Snapes',
@@ -214,7 +214,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/15/pixies-beneath-the-eyrie-review',
-            linkText:
+            headline:
                 'LINKTEXT Pixies: Beneath the Eyrie review – workaday once again',
             showByline: false,
             byline: 'Phil Mongredien',
@@ -226,7 +226,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/14/emeli-sande-interview-life-on-a-plate-i-loved-spaghetti-so-much',
-            linkText:
+            headline:
                 'LINKTEXT Emeli Sandé: ‘I loved spaghetti so much as a child that I’d eat it from the garden drain’',
             showByline: false,
             byline: 'John Hind',
@@ -238,7 +238,7 @@ export const mockTab2 = {
         {
             url:
                 'https://www.theguardian.com/music/2019/sep/15/joyce-didonato-interview-agrippina-royal-opera-house',
-            linkText:
+            headline:
                 'LINKTEXT Joyce DiDonato: ‘I’m trying to balance activism and joy’',
             showByline: false,
             byline: 'Fiona Maddocks',

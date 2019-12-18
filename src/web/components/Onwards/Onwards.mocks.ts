@@ -4,7 +4,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/business/2019/dec/02/directors-climate-disclosures-tci-hedge-fund',
-            linkText:
+            headline:
                 "Punish directors who don't make climate disclosures, says hedge fund",
             showByline: false,
             byline: 'Julia Kollewe',
@@ -18,7 +18,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/environment/2019/dec/02/migration-v-climate-europes-new-political-divide',
-            linkText: "Migration v climate: Europe's new political divide",
+            headline: "Migration v climate: Europe's new political divide",
             showByline: false,
             byline: 'Shaun Walker in Budapest',
             image:
@@ -33,7 +33,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
-            linkText: 'An active live blog',
+            headline: 'An active live blog',
             showByline: false,
             byline: 'Jennifer Rankin in Brussels',
             image:
@@ -47,7 +47,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
-            linkText: 'An inactive live sport blog',
+            headline: 'An inactive live sport blog',
             showByline: false,
             byline: 'Damian Carrington Environment editor',
             image:
@@ -61,7 +61,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/world/2019/nov/26/european-parliament-split-on-declaring-climate-emergency',
-            linkText:
+            headline:
                 'European parliament split on declaring climate emergency',
             showByline: false,
             byline: 'Jennifer Rankin in Brussels',
@@ -75,7 +75,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/world/2019/nov/23/north-pole-explorers-on-thin-ice-as-climate-change-hits-expedition',
-            linkText:
+            headline:
                 'North Pole  explorers on thin ice as climate change hits expedition',
             showByline: false,
             byline: 'Simon Murphy',
@@ -89,7 +89,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/environment/2019/oct/25/scientists-glacial-rivers-absorb-carbon-faster-rainforests',
-            linkText:
+            headline:
                 'Glacial rivers absorb carbon faster than rainforests, scientists find',
             showByline: false,
             byline: 'Leyland Cecco',
@@ -103,7 +103,7 @@ export const storyPackageTrails: OnwardsType = {
         {
             url:
                 'https://www.theguardian.com/business/2019/oct/20/uk-urges-world-bank-to-channel-more-money-into-tackling-climate-crisis',
-            linkText:
+            headline:
                 'UK urges World Bank to channel more money into tackling climate crisis',
             showByline: false,
             byline: 'Larry Elliott  in Washington',
