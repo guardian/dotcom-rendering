@@ -1,9 +1,9 @@
 diff=`git diff`
 
+# if local changes
 if [[ -n $diff ]]; then
     git stash
 fi
-
 
 if git show-ref --quiet refs/heads/gh-pages; then
     git branch -D gh-pages
@@ -19,6 +19,7 @@ git push origin gh-pages
 
 git checkout -
 
+# if local changes
 if [[ -n $diff ]]; then
     git stash apply
 fi
