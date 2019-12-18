@@ -18,7 +18,7 @@
     "build:server": "webpack --config webpack.config.js --config-name server",
     "build:client": "webpack --config webpack.config.js --config-name client",
     "storybook": "start-storybook",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
   },
   "author": "",
   "license": "ISC",
