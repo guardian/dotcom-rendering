@@ -423,7 +423,7 @@ interface TrailType {
     designType: DesignType;
     pillar: Pillar;
     url: string;
-    linkText: string;
+    headline: string;
     isLiveBlog: boolean;
     mediaType?: MediaType;
     mediaDuration?: number;

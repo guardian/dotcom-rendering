@@ -98,7 +98,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                         {trail.isLiveBlog ? (
                             <LinkHeadline
                                 designType={trail.designType}
-                                headlineText={trail.linkText}
+                                headlineText={trail.headline}
                                 pillar={trail.pillar}
                                 size="small"
                                 showUnderline={isHovered}
@@ -112,7 +112,7 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                         ) : (
                             <LinkHeadline
                                 designType={trail.designType}
-                                headlineText={trail.linkText}
+                                headlineText={trail.headline}
                                 pillar={trail.pillar}
                                 size="small"
                                 showUnderline={isHovered}
