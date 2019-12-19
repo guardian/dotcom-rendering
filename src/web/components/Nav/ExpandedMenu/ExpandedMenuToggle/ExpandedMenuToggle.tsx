@@ -28,10 +28,10 @@ const openExpandedMenu = css`
         height: 42px;
     }
     :hover {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
     }
     :focus {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
     }
 `;
 const checkbox = css`

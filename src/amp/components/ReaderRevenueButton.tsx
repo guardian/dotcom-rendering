@@ -8,7 +8,7 @@ import { until } from '@guardian/src-foundations/mq';
 
 const supportStyles = css`
     align-self: flex-start;
-    background-color: ${palette.yellow.main};
+    background-color: ${palette.brandYellow.main};
     border-radius: 20px;
     display: flex;
     align-items: center;

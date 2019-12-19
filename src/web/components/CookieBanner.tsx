@@ -74,7 +74,7 @@ const button = css`
     ${textSans.medium()};
     border-radius: 1000px;
     height: 42px;
-    background: ${palette.yellow.main};
+    background: ${palette.brandYellow.main};
     color: ${palette.neutral[7]};
     padding: 0 25px 0 46px;
     align-items: flex-start;
