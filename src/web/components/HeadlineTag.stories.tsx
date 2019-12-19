@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { HeadlineTag } from './HeadlineTag';
+import { css } from 'emotion';
 
 /* tslint:disable */
 export default {
@@ -21,10 +22,16 @@ longTagNameStory.story = { name: 'With a longer tag name' };
 
 export const wrappedTagNameStory = () => {
     return (
-        <HeadlineTag
-            tagText="Very long tag name with enough text to wrap to a second line"
-            pillar="labs"
-        />
+        <div
+            className={css`
+                max-width: 400px;
+            `}
+        >
+            <HeadlineTag
+                tagText="Very long tag name with enough text to wrap to a second line"
+                pillar="labs"
+            />
+        </div>
     );
 };
 wrappedTagNameStory.story = { name: 'With wrapped tag name' };
