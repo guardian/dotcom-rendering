@@ -11,6 +11,8 @@ import { Links } from './Links/Links';
 const headerStyles = css`
     /* Ensure header height contains it's children */
     overflow: auto;
+    /* Prevent a scrollbar appearing here on IE/Edge */
+    -ms-overflow-style: none;
 `;
 
 interface Props {
