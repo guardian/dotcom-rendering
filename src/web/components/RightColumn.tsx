@@ -1,35 +1,53 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { from, until } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 
-const hideBelowDesktop = css`
-    ${until.desktop} {
-        /* below 980 */
-        display: none;
+const rightColumnContainerStyles = css`
+    position: relative; /* so that the content can be flow out of this placeholder */
+    height: 0px; /* acts as a placeholder for the real column */
+    margin-left: auto; /* justifies self to right side */
+    max-width: 300px;
+
+    flex-basis: 300px;
+    order: 3;
+
+    ${until.leftCol} {
+        order: 0;
+        right: -320px;
     }
 
-    ${from.desktop} {
-        /* above 980 */
-        display: block;
-        flex-basis: 300px;
-        flex-grow: 0;
-        flex-shrink: 0;
+    ${until.desktop} {
+        display: none;
     }
 `;
 
-const padding = css`
-    padding-top: 6px;
-    /* Use margin here to the prevent flicker on load that you get
-       with padding (because the header section has flex-grow: 1) */
-    margin-left: 10px;
+const showcaseLayout = css`
+    order: 6;
+
+    ${until.leftCol} {
+        order: 4;
+    }
+`;
+
+const rightColumnStyles = css`
+    position: absolute; /* flow out of container */
+    width: 100%;
 `;
 
 type Props = {
     children: JSXElements;
+    layoutType?: LayoutType;
 };
 
-export const RightColumn = ({ children }: Props) => {
+export const RightColumn = ({ children, layoutType }: Props) => {
     return (
-        <section className={cx(hideBelowDesktop, padding)}>{children}</section>
+        <div
+            className={cx(
+                rightColumnContainerStyles,
+                layoutType === 'Showcase' && showcaseLayout,
+            )}
+        >
+            <section className={rightColumnStyles}>{children}</section>
+        </div>
     );
 };

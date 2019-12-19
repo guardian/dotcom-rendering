@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
@@ -10,7 +10,9 @@ const captionFont = css`
     color: ${palette.neutral[46]};
 `;
 
-const mainMedia = css`
+const mainMediaStyles = css`
+    padding-left: 10px;
+    margin-bottom: 14px;
     min-height: 1px;
     /*
     Thank you IE11, broken in stasis for all eternity.
@@ -18,11 +20,18 @@ const mainMedia = css`
     https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
     */
 
-    margin-bottom: 14px;
+    order: 6;
+    flex-basis: 620px;
+
+    ${until.leftCol} {
+        padding-left: 0;
+        flex-basis: 100%;
+    }
 
     ${until.tablet} {
         margin: 0;
         order: -1;
+        padding-left: 0;
 
         figcaption {
             display: none;
@@ -37,6 +46,23 @@ const mainMedia = css`
 
     figcaption {
         ${captionFont};
+    }
+`;
+
+const showcaseLayout = css`
+    max-width: calc(100% - 230px);
+
+    order: 4;
+    flex-basis: calc(100% - 230px);
+
+    ${until.wide} {
+        max-width: calc(100% - 151px);
+        flex-basis: calc(100% - 151px);
+    }
+
+    ${until.leftCol} {
+        max-width: 100%;
+        flex-basis: 100%;
     }
 `;
 
@@ -65,8 +91,14 @@ export const MainMedia: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
     hideCaption?: boolean;
-}> = ({ elements, pillar, hideCaption }) => (
-    <div className={mainMedia}>
+    layoutType?: LayoutType;
+}> = ({ elements, pillar, hideCaption, layoutType = 'Standard' }) => (
+    <div
+        className={cx(
+            mainMediaStyles,
+            layoutType === 'Showcase' && showcaseLayout,
+        )}
+    >
         {elements.map((element, i) =>
             renderElement(element, pillar, i, hideCaption),
         )}

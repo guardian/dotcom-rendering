@@ -151,6 +151,8 @@ interface FooterType {
     footerLinks: FooterLink[][];
 }
 
+type LayoutType = 'Standard' | 'Showcase';
+
 type ContentType =
     | 'article'
     | 'network'

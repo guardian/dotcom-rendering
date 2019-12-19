@@ -1,3 +1,17 @@
+// @ts-ignore
+export const CAPI: CAPIType = {
+    author: { byline: 'Peter Bradshaw', twitterHandle: 'PeterBradshaw1' },
+    sectionLabel: 'Section',
+    sectionUrl: 'section/subsection',
+    tags: [],
+    pillar: `culture`,
+    pageId: 'film/2019/apr/12/monty-pythons-life-of-brian-review',
+    webTitle:
+        "Monty Python's Life of Brian review – an unholy work of satirical genius",
+    standfirst:
+        '<p>Despite its absurdity and button-pushing bad taste, this mock epic stands up four decades on as a stirring paean to tolerance</p>',
+};
+
 export const mainMediaElements: CAPIElement[] = [
     {
         role: 'showcase',

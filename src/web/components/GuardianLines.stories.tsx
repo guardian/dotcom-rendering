@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
+import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
+import { RightColumn } from '@root/src/web/components/RightColumn';
+
 import { Section } from './Section';
 
 import { GuardianLines } from './GuardianLines';
-import { Flex } from './Flex';
-import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
-import { Contributor } from './Contributor';
 
 /* tslint:disable */
 export default {
@@ -27,20 +28,15 @@ export const defaultStory = () => {
                 <GuardianLines />
             </Section>
             <Section showTopBorder={false}>
-                <Flex>
-                    <LeftColumn>
-                        <></>
-                    </LeftColumn>
-                    <ArticleContainer>
-                        <ArticleHeadline
-                            headlineString="Headline text"
-                            webPublicationDate=""
-                            tags={[]}
-                            designType="Article"
-                            pillar="news"
-                        />
-                    </ArticleContainer>
-                </Flex>
+                <ArticleContainer>
+                    <ArticleHeadline
+                        headlineString="Headline text"
+                        webPublicationDate=""
+                        tags={[]}
+                        designType="Article"
+                        pillar="news"
+                    />
+                </ArticleContainer>
             </Section>
         </>
     );
@@ -58,25 +54,32 @@ export const eightLines = () => {
                 <GuardianLines count={8} />
             </Section>
             <Section showTopBorder={false}>
-                <Flex>
-                    <LeftColumn>
-                        <></>
-                    </LeftColumn>
-                    <ArticleContainer>
-                        <ArticleHeadline
-                            headlineString="Headline text"
-                            webPublicationDate=""
-                            tags={[]}
-                            designType="Article"
-                            pillar="news"
-                        />
-                    </ArticleContainer>
-                </Flex>
+                <ArticleContainer>
+                    <ArticleHeadline
+                        headlineString="Headline text"
+                        webPublicationDate=""
+                        tags={[]}
+                        designType="Article"
+                        pillar="news"
+                    />
+                </ArticleContainer>
             </Section>
         </>
     );
 };
 eightLines.story = { name: 'with eight lines' };
+
+// @ts-ignore
+const CAPI = {
+    author: { byline: 'Jane Doe' },
+    pageId: `page-id`,
+    pillar: 'culture',
+    sectionLabel: `Section`,
+    sectionUrl: `https://guardian.co.uk`,
+    webPublicationDateDisplay: '',
+    webTitle: `Page title`,
+    tags: [],
+} as CAPIType;
 
 export const paddedLines = () => {
     return (
@@ -89,26 +92,20 @@ export const paddedLines = () => {
                 <GuardianLines />
             </Section>
             <Section showTopBorder={false}>
-                <Flex>
-                    <LeftColumn>
-                        <div style={{ marginTop: '30px' }} />
-                        <GuardianLines />
-                        <Contributor
-                            author={{ byline: 'Jane doe' }}
-                            tags={[]}
-                            pillar="news"
-                        />
-                    </LeftColumn>
-                    <ArticleContainer>
-                        <ArticleHeadline
-                            headlineString="Headline text"
-                            webPublicationDate=""
-                            tags={[]}
-                            designType="Article"
-                            pillar="news"
-                        />
-                    </ArticleContainer>
-                </Flex>
+                <ArticleContainer>
+                    <ArticleTitle CAPI={CAPI} />
+                    <ArticleHeadline
+                        headlineString="Headline text"
+                        webPublicationDate=""
+                        tags={[]}
+                        designType="Article"
+                        pillar="news"
+                    />
+                    <ArticleMeta CAPI={CAPI} />
+                    <RightColumn>
+                        <span />
+                    </RightColumn>
+                </ArticleContainer>
             </Section>
         </>
     );
@@ -126,26 +123,20 @@ export const squigglyLines = () => {
                 <GuardianLines />
             </Section>
             <Section showTopBorder={false}>
-                <Flex>
-                    <LeftColumn>
-                        <div style={{ marginTop: '30px' }} />
-                        <GuardianLines squiggly={true} />
-                        <Contributor
-                            author={{ byline: 'Jane doe' }}
-                            tags={[]}
-                            pillar="news"
-                        />
-                    </LeftColumn>
-                    <ArticleContainer>
-                        <ArticleHeadline
-                            headlineString="Headline text"
-                            webPublicationDate=""
-                            tags={[]}
-                            designType="Article"
-                            pillar="news"
-                        />
-                    </ArticleContainer>
-                </Flex>
+                <ArticleContainer>
+                    <ArticleTitle CAPI={CAPI} />
+                    <ArticleHeadline
+                        headlineString="Headline text"
+                        webPublicationDate=""
+                        tags={[]}
+                        designType="Article"
+                        pillar="news"
+                    />
+                    <ArticleMeta CAPI={CAPI} hasSquigglyLines={true} />
+                    <RightColumn>
+                        <span />
+                    </RightColumn>
+                </ArticleContainer>
             </Section>
         </>
     );

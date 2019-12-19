@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
-import { between, until } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/src-foundations/mq';
 
 import { SharingIcons } from './ShareIcons';
 import { Contributor } from '@root/src/web/components/Contributor';
@@ -10,15 +10,12 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { Dateline } from './Dateline';
 
 const meta = css`
-    ${between.tablet.and.leftCol} {
-        order: 1;
-    }
+    padding-top: 2px;
 
     ${until.phablet} {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
-    padding-top: 2px;
 `;
 
 const metaExtras = css`
@@ -37,23 +34,68 @@ const metaExtras = css`
     }
 `;
 
-const metaContainer = css`
+const articleMetaStyles = css`
+    padding-right: 10px;
+    max-width: 230px;
+
+    order: 5;
+    flex-basis: 230px;
+
+    border-right: 1px solid ${palette.neutral[86]};
+
+    ${until.wide} {
+        max-width: 151px;
+        flex-basis: 151px;
+    }
+
+    ${until.leftCol} {
+        padding-right: 0;
+        max-width: 620px;
+
+        order: 7;
+        flex-basis: 620px;
+
+        border-right: 0;
+    }
+
+    ${until.desktop} {
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+
     ${until.phablet} {
-        margin-left: -20px;
-        margin-right: -20px;
+        margin-top: 10px;
+    }
+`;
+
+const showcaseLayout = css`
+    order: 4;
+    ${until.phablet} {
+        margin-top: 0;
     }
 `;
 
 type Props = {
     CAPI: CAPIType;
+    layoutType?: LayoutType;
+    hasSquigglyLines?: boolean;
 };
 
-export const ArticleMeta = ({ CAPI }: Props) => {
+export const ArticleMeta = ({
+    CAPI,
+    layoutType = 'Standard',
+    hasSquigglyLines = false,
+}: Props) => {
     const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
 
     return (
-        <div className={metaContainer}>
-            <GuardianLines pillar={CAPI.pillar} />
+        <div
+            className={cx(
+                articleMetaStyles,
+                layoutType === 'Showcase' && showcaseLayout,
+            )}
+        >
+            <GuardianLines pillar={CAPI.pillar} squiggly={hasSquigglyLines} />
             <div className={cx(meta)}>
                 <Contributor
                     author={CAPI.author}

@@ -1,83 +1,42 @@
 import React from 'react';
-import { css, cx } from 'emotion';
-import { from, until } from '@guardian/src-foundations/mq';
-import { labelStyles } from '@root/src/web/components/AdSlot';
+import { css } from 'emotion';
+import { until } from '@guardian/src-foundations/mq';
 
-const articleContainer = css`
-    /* Set min-width: 0 here to prevent flex children breaking out of the
-    containing parent. This ws happening for embedded tweets which have
-    a width: 500px property.
-    See: https://stackoverflow.com/a/47457331 */
-    min-width: 0;
+import { Flex } from '@root/src/web/components/Flex';
+
+const articleContainerStyles = css`
+    padding: 0 20px;
+    position: relative;
 
     ${until.leftCol} {
-        /* below 1140 */
-        padding-left: 0;
+        width: 640px;
+        padding-right: 0;
     }
 
-    ${from.leftCol} {
-        /* above 1140 */
-        padding-left: 10px;
+    ${until.desktop} {
+        width: 100%;
+        padding: 0 20px;
     }
 
-    flex-grow: 1;
-`;
-
-const articleAdStyles = css`
-    .ad-slot {
-        width: 300px;
-        margin: 12px auto;
-        min-width: 300px;
-        min-height: 274px;
-        text-align: center;
+    ${until.phablet} {
+        padding: 0;
     }
-    .ad-slot--mostpop {
-        ${from.desktop} {
-            margin: 0;
-            width: auto;
-        }
-    }
-    .ad-slot--inline {
-        ${from.desktop} {
-            margin: 0;
-            width: auto;
-            float: right;
-            margin-top: 4px;
-            margin-left: 20px;
-        }
-    }
-    .ad-slot--offset-right {
-        ${from.desktop} {
-            float: right;
-            width: auto;
-            margin-right: -328px;
-        }
-
-        ${from.wide}  {
-            margin-right: -388px;
-        }
-    }
-    .ad-slot--outstream {
-        ${from.tablet} {
-            margin-left: 0;
-
-            .ad-slot__label {
-                margin-left: 35px;
-                margin-right: 35px;
-            }
-        }
-    }
-    ${labelStyles};
 `;
 
 type Props = {
     children: JSXElements;
+    layoutType?: LayoutType;
 };
 
-export const ArticleContainer = ({ children }: Props) => {
-    return (
-        <main className={cx(articleContainer, articleAdStyles)}>
-            {children}
-        </main>
-    );
-};
+export const ArticleContainer = ({
+    children,
+    layoutType = 'Standard',
+}: Props) => (
+    <article className={articleContainerStyles}>
+        <Flex wrap="wrap" justify="flex-start">
+            {React.Children.map(children, child =>
+                React.cloneElement(child, { layoutType }),
+            )}
+        </Flex>
+    </article>
+);
