@@ -61,8 +61,7 @@ const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
 const RenderContributor: React.FC<{
     bylineText: string;
     tags: TagType[];
-    pillar: Pillar;
-}> = ({ bylineText, tags, pillar }) => {
+}> = ({ bylineText, tags }) => {
     const renderedTokens = bylineAsTokens(bylineText, tags).map((token, i) => {
         const associatedTags = tags.filter(t => t.title === token);
         if (associatedTags.length > 0) {
@@ -77,7 +76,7 @@ const RenderContributor: React.FC<{
         return token;
     });
 
-    return <div className={bylineStyle(pillar)}>{renderedTokens}</div>;
+    return <>{renderedTokens}</>;
 };
 
 const ContributorLink: React.FC<{
@@ -104,11 +103,9 @@ export const Contributor: React.FC<{
 
     return (
         <address aria-label="Contributor info">
-            <RenderContributor
-                bylineText={author.byline}
-                tags={tags}
-                pillar={pillar}
-            />
+            <div className={bylineStyle(pillar)}>
+                <RenderContributor bylineText={author.byline} tags={tags} />
+            </div>
             {author.twitterHandle && (
                 <div className={twitterHandle}>
                     <TwitterIcon />
