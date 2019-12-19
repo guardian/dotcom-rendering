@@ -1,6 +1,4 @@
-import { createElement, ReactNode } from 'react';
-
-const h = createElement;
+import { createElement as h, ReactNode } from 'react';
 
 function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
     const adIndices = [3, 9];

@@ -6,6 +6,8 @@ import { css } from '@emotion/core';
 import Article from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import OpinionArticle from 'components/opinion/opinionArticle';
+import ImmersiveArticle from 'components/immersive/immersiveArticle';
+
 import { Pillar, pillarFromString } from 'pillar';
 import { Content } from 'capiThriftModels';
 import { includesTweets } from 'capi';
@@ -65,13 +67,20 @@ interface BodyProps {
     capi: Content;
 }
 
+function getArticleSubtype(capi: Content): (bodyProps: BodyProps) => JSX.Element {
+    if (pillarFromString(capi.pillarId) === Pillar.opinion) {
+        return OpinionArticle;
+    } else if (capi.fields.displayHint === 'immersive') {
+        return ImmersiveArticle;
+    }
+  
+    return Article;
+  }
+
 function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
     switch (capi.type) {
         case 'article':
-            const Component = (pillarFromString(capi.pillarId) === Pillar.opinion)
-                ? OpinionArticle
-                : Article;
-
+            const Component = getArticleSubtype(capi);
             return <>
                 <Component capi={capi} imageSalt={imageSalt} />
                 <script src="/assets/article.js"></script>

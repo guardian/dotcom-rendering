@@ -12,7 +12,6 @@ import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
 
-
 // ----- Setup ----- //
 
 const defaultId =
@@ -35,11 +34,7 @@ type Supported = {
 
 function checkSupport(content: Content): Supported {
 
-  const { fields, atoms } = content;
-
-  if (fields.displayHint === 'immersive') {
-    return { kind: Support.Unsupported, reason: 'The article contains an immersive displayHint' };
-  }
+  const { atoms } = content;
 
   if (atoms) {
     return { kind: Support.Unsupported, reason: 'The article contains atoms' };

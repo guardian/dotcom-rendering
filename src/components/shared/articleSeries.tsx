@@ -5,7 +5,6 @@ import { Series } from '../../capi';
 import { PillarStyles } from 'pillar';
 
 const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
-    ${sidePadding}
     a {
         font-weight: 700;
         font-size: 1.6rem;
@@ -13,6 +12,7 @@ const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
         color: ${kicker};
         text-decoration: none;
         ${headlineFont}
+        ${sidePadding}
     }
 `;
 
