@@ -83,11 +83,21 @@ export const darkModeCss = (
     }
 `;
 
-// Styles shared across article types
-export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+export const linkStyle = (kicker: string): SerializedStyles => css`
     a {
         color: ${kicker};
+        text-decoration: none;
+        padding-bottom: 0.15em;
+        background-image: linear-gradient(${kicker} 0%, ${kicker} 100%);
+        background-repeat: repeat-x;
+        background-size: 1px 1px;
+        background-position: 0 bottom;
     }
+`
+
+// Styles shared across article types
+export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+    ${linkStyle(kicker)}
 
     .image img {
         width: 100%; 

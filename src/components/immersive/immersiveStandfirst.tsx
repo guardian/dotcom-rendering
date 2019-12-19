@@ -1,5 +1,5 @@
 import React from 'react';
-import { bulletStyles, headlineFont, darkModeCss, basePx } from 'styles';
+import { bulletStyles, headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
 import { transform } from 'contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
@@ -12,9 +12,7 @@ const StandfirstStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     font-size: 1.8rem;
     line-height: 2.4rem;
 
-    a {
-        color: ${kicker};
-    }
+    ${linkStyle(kicker)}
 
     p, ul {
         margin: 0;
