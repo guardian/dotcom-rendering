@@ -16,14 +16,6 @@ const HeadlineStyles = css`
         ${headlineFontStyles}
         color: ${palette.neutral[100]};
     }
-
-    address a {
-        font-style: italic;
-        font-weight: 100;
-        ${headlineFontStyles}
-        color: ${palette.opinion.main};
-        text-decoration: none;
-    }
 `;
 
 const HeadlineDarkStyles = darkModeCss`
