@@ -22,10 +22,10 @@ const link = css`
     line-height: ${iconHeight};
 
     :hover {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
 
         .icon-container {
-            background-color: ${palette.yellow.main};
+            background-color: ${palette.brandYellow.main};
         }
     }
 `;

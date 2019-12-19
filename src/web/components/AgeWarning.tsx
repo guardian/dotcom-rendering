@@ -11,7 +11,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 const ageWarningStyles = (isSmall: boolean) => css`
     ${isSmall ? textSans.xsmall() : textSans.medium()};
     color: ${palette.neutral[7]};
-    background-color: ${palette.yellow.main};
+    background-color: ${palette.brandYellow.main};
     display: inline-block;
 
     > strong {

@@ -30,7 +30,7 @@ const footerLink = css`
     display: block;
 
     :hover {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
     }
 `;
 
@@ -119,7 +119,7 @@ const backToTopText = css`
 `;
 
 const supportLink = css`
-    color: ${palette.yellow.main};
+    color: ${palette.brandYellow.main};
     ${body.medium()};
     padding-bottom: 0.375rem;
 `;

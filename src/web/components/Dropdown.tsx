@@ -126,7 +126,7 @@ const button = css`
     text-decoration: none;
 
     :hover {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
 
         :after {
             transform: translateY(0) rotate(45deg);

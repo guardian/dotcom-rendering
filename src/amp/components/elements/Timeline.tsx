@@ -18,7 +18,7 @@ const eventStyle = css`
 `;
 
 const highlight = css`
-    background-color: ${palette.yellow.main};
+    background-color: ${palette.brandYellow.main};
 `;
 
 const eventIconStyle = css`

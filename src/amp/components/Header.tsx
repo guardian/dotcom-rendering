@@ -113,7 +113,7 @@ const pillarLinkStyle = (pillar: Pillar) => css`
 `;
 
 const veggieStyles = css`
-    background-color: ${palette.yellow.main};
+    background-color: ${palette.brandYellow.main};
     color: ${palette.neutral[97]};
     height: 42px;
     min-width: 42px;

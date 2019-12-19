@@ -9,7 +9,7 @@ const veggieBurger = ({
 }: {
     showExpandedMenu: boolean;
 }) => css`
-    background-color: ${palette.yellow.main};
+    background-color: ${palette.brandYellow.main};
     color: ${palette.neutral[7]};
     cursor: pointer;
     height: 42px;
