@@ -30,7 +30,10 @@ const HeadlineStyles = (feature: boolean, analysis: boolean, { featureHeadline, 
 
 const HeadlineDarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
-    color: ${palette.neutral[86]};
+
+    h1 {
+        color: ${palette.neutral[86]};
+    }
 `;
 
 interface ArticleHeadlineProps {

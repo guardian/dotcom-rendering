@@ -162,6 +162,8 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         a {
             text-decoration: none;
         }
+
+        ${darkModeCss`background: black;`}
     }
 
     h2 {
