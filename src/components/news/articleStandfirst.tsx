@@ -4,6 +4,7 @@ import { transform } from '../../contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { PillarStyles } from 'pillar';
+import { componentFromHtml } from 'renderBlocks';
 
 const StandfirstFeatureStyles = `
     color: ${palette.neutral[46]};
@@ -60,7 +61,8 @@ const ArticleStandfirst = ({
             StandfirstStyles(feature, pillarStyles),
             StandfirstDarkStyles(pillarStyles)
         ]}
-        dangerouslySetInnerHTML={{__html: transform(standfirst)}}
-    />
+    >
+        {componentFromHtml(transform(standfirst))}
+    </div>
 
 export default ArticleStandfirst;

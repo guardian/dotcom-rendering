@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import { PillarStyles } from 'pillar';
 import { until } from '@guardian/src-foundations/mq';
+import { componentFromHtml } from 'renderBlocks';
 
 const HeadlineStyles = css`
     padding: ${basePx(0, 0, 4, 0)};
@@ -46,7 +47,7 @@ const OpinionHeadline = ({
 }: OpinionHeadlineProps): JSX.Element =>
     <div css={[HeadlineStyles, HeadlineDarkStyles]}>
         <h1>{headline}</h1>
-        <address dangerouslySetInnerHTML={{__html: byline}}></address>
+        <address>{componentFromHtml(byline)}</address>
     </div>
 
 export default OpinionHeadline;
