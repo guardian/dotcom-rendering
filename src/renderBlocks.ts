@@ -59,7 +59,7 @@ function textElement(node: Node): ReactNode {
         case 'SPAN':
             return h('span', getAttrs(node), node.textContent);
         case 'HR':
-            return h('hr', getAttrs(node), node.textContent);
+            return h('hr', getAttrs(node), null);
         default:
             // Fallback to handle any element
             return h(
@@ -177,9 +177,15 @@ function render(bodyElements: BlockElement[], imageSalt: string, ads = true): Re
 
 }
 
+function componentFromHtml(html: string): ReactNode[] {
+    const fragment = JSDOM.fragment(transform(html))
+    return textBlock(fragment)
+}
+
 
 // ----- Exports ----- //
 
 export {
     render,
+    componentFromHtml,
 };

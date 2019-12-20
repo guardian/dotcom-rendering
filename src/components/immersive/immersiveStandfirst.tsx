@@ -4,6 +4,7 @@ import { transform } from 'contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { PillarStyles } from 'pillar';
+import { componentFromHtml } from 'renderBlocks';
 
 const StandfirstStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     ${headlineFont}
@@ -53,8 +54,11 @@ const ImmersiveStandfirst = ({
         StandfirstStyles(pillarStyles),
         StandfirstDarkStyles(pillarStyles)
     ]}>
-        <div dangerouslySetInnerHTML={{__html: transform(standfirst)}}/>
-        <address dangerouslySetInnerHTML={{__html: "By " + byline}}></address>
+        <div>{componentFromHtml(transform(standfirst))}</div>
+        <address>
+            <span>By </span>
+            {componentFromHtml(byline)}
+        </address>
     </div>
 
 export default ImmersiveStandfirst;

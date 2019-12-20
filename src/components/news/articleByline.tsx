@@ -8,6 +8,7 @@ import { Contributor } from 'capi';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
 import { PillarStyles } from 'pillar';
+import { componentFromHtml } from 'renderBlocks';
 
 const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {
@@ -78,7 +79,7 @@ const ArticleByline = ({
                 imageSalt={imageSalt}
             />
             <div className="author">
-                <address dangerouslySetInnerHTML={{__html: byline}}></address>
+                <address>{componentFromHtml(byline)}</address>
                 <time className="date">{ formatDate(new Date(publicationDate)) }</time>
                 <Follow contributors={contributors} />
             </div>
