@@ -22,7 +22,7 @@ const padded = css`
 `;
 
 const message = css`
-    color: ${palette.yellow.main};
+    color: ${palette.brandYellow.main};
     ${headline.xxsmall({ fontWeight: 'bold' })};
     padding-top: 3px;
     margin-bottom: 3px;
@@ -37,7 +37,7 @@ const message = css`
 `;
 
 const link = css`
-    background: ${palette.yellow.main};
+    background: ${palette.brandYellow.main};
     border-radius: 16px;
     box-sizing: border-box;
     color: ${palette.neutral[7]};

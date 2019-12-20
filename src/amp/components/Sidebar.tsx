@@ -92,7 +92,7 @@ const otherLinks = css`
 const membershipLinks = css`
     a {
         font-weight: 700;
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
     }
 `;
 

@@ -89,7 +89,7 @@ const brandExtensionLink = css`
     }
     :hover,
     :focus {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
     }
     > * {
         pointer-events: none;

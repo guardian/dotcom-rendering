@@ -48,7 +48,7 @@ const link = css`
 
     :hover,
     :focus {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
     }
 
     svg {

@@ -67,7 +67,7 @@ const columnLinkTitle = css`
 
     :hover,
     :focus {
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
         text-decoration: underline;
     }
 

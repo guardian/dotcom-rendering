@@ -5,7 +5,7 @@ import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 
 const ratingsWrapper = css`
-    background-color: ${palette.yellow.main};
+    background-color: ${palette.brandYellow.main};
     display: inline-block;
 `;
 

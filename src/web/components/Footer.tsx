@@ -71,7 +71,7 @@ const footerLink = css`
 
     :hover {
         text-decoration: underline;
-        color: ${palette.yellow.main};
+        color: ${palette.brandYellow.main};
     }
 `;
 
