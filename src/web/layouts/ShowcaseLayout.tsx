@@ -96,6 +96,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     <LeftColumn>
                         <ArticleTitle CAPI={CAPI} inLeftCol={true} />
                         <ArticleMeta
+                            designType={CAPI.designType}
                             pillar={CAPI.pillar}
                             pageId={CAPI.pageId}
                             webTitle={CAPI.webTitle}
@@ -117,6 +118,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 <Hide when="above" breakpoint="leftCol">
                                     <ShowcaseHeader CAPI={CAPI} />
                                     <ArticleMeta
+                                        designType={CAPI.designType}
                                         pillar={CAPI.pillar}
                                         pageId={CAPI.pageId}
                                         webTitle={CAPI.webTitle}

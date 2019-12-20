@@ -45,6 +45,7 @@ const metaContainer = css`
 `;
 
 type Props = {
+    designType: DesignType;
     pillar: Pillar;
     pageId: string;
     webTitle: string;
@@ -54,6 +55,7 @@ type Props = {
 };
 
 export const ArticleMeta = ({
+    designType,
     pillar,
     pageId,
     webTitle,
@@ -67,7 +69,10 @@ export const ArticleMeta = ({
         <div className={metaContainer}>
             <GuardianLines pillar={pillar} />
             <div className={cx(meta)}>
-                <Contributor author={author} tags={tags} pillar={pillar} />
+                {/* For interview articles the byline appears below the headline */}
+                {designType !== 'Interview' && (
+                    <Contributor author={author} tags={tags} pillar={pillar} />
+                )}
                 <Dateline
                     dateDisplay={webPublicationDateDisplay}
                     descriptionText="Published on"

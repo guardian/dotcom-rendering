@@ -114,6 +114,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             inLeftCol={true}
                         />
                         <ArticleMeta
+                            designType={CAPI.designType}
                             pillar={CAPI.pillar}
                             pageId={CAPI.pageId}
                             webTitle={CAPI.webTitle}
@@ -128,6 +129,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <StandardHeader CAPI={CAPI} badge={GE2019Badge} />
                         <Hide when="above" breakpoint="leftCol">
                             <ArticleMeta
+                                designType={CAPI.designType}
                                 pillar={CAPI.pillar}
                                 pageId={CAPI.pageId}
                                 webTitle={CAPI.webTitle}
