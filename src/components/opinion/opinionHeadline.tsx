@@ -36,7 +36,7 @@ const HeadlineDarkStyles = darkModeCss`
 `;
 
 interface OpinionHeadlineProps {
-    byline: string;
+    byline?: string;
     headline: string;
     pillarStyles: PillarStyles;
 }
@@ -47,7 +47,7 @@ const OpinionHeadline = ({
 }: OpinionHeadlineProps): JSX.Element =>
     <div css={[HeadlineStyles, HeadlineDarkStyles]}>
         <h1>{headline}</h1>
-        <address>{componentFromHtml(byline)}</address>
+        { byline ? <address>{componentFromHtml(byline)}</address> : null }
     </div>
 
 export default OpinionHeadline;

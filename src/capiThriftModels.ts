@@ -641,7 +641,7 @@ declare class ContentFields {
   shouldHideReaderRevenue: boolean;
   internalCommissionedWordcount: number;
   showAffiliateLinks: boolean;
-  bylineHtml: string;
+  bylineHtml?: string;
 
     constructor(args?: { headline?: string; standfirst?: string; trailText?: string; byline?: string; main?: string; body?: string; newspaperPageNumber?: number; starRating?: number; contributorBio?: string; membershipAccess?: MembershipTier; wordcount?: number; commentCloseDate?: CapiDateTime; commentable?: boolean; creationDate?: CapiDateTime; displayHint?: string; firstPublicationDate?: CapiDateTime; hasStoryPackage?: boolean; internalComposerCode?: string; internalOctopusCode?: string; internalPageCode?: number; internalStoryPackageCode?: number; isInappropriateForSponsorship?: boolean; isPremoderated?: boolean; lastModified?: CapiDateTime; liveBloggingNow?: boolean; newspaperEditionDate?: CapiDateTime; productionOffice?: Office; publication?: string; scheduledPublicationDate?: CapiDateTime; secureThumbnail?: string; shortUrl?: string; shouldHideAdverts?: boolean; showInRelatedContent?: boolean; thumbnail?: string; legallySensitive?: boolean; allowUgc?: boolean; sensitive?: boolean; lang?: string; internalRevision?: number; internalContentCode?: number; isLive?: boolean; internalShortId?: string; shortSocialShareText?: string; socialShareText?: string; bodyText?: string; charCount?: number; internalVideoCode?: string; shouldHideReaderRevenue?: boolean; internalCommissionedWordcount?: number; showAffiliateLinks?: boolean; bylineHtml?: string; });
 }

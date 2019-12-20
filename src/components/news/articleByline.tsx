@@ -53,7 +53,7 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
 `;
 
 interface ArticleBylineProps {
-    byline: string;
+    byline?: string;
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
@@ -79,7 +79,7 @@ const ArticleByline = ({
                 imageSalt={imageSalt}
             />
             <div className="author">
-                <address>{componentFromHtml(byline)}</address>
+                { byline ? <address>{componentFromHtml(byline)}</address> : null }
                 <time className="date">{ formatDate(new Date(publicationDate)) }</time>
                 <Follow contributors={contributors} />
             </div>
