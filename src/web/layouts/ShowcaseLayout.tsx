@@ -95,7 +95,16 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <Flex>
                     <LeftColumn>
                         <ArticleTitle CAPI={CAPI} inLeftCol={true} />
-                        <ArticleMeta CAPI={CAPI} />
+                        <ArticleMeta
+                            pillar={CAPI.pillar}
+                            pageId={CAPI.pageId}
+                            webTitle={CAPI.webTitle}
+                            author={CAPI.author}
+                            tags={CAPI.tags}
+                            webPublicationDateDisplay={
+                                CAPI.webPublicationDateDisplay
+                            }
+                        />
                     </LeftColumn>
                     <ArticleContainer>
                         {/* When BELOW leftCol we display the header in this position, at the top of the page */}
@@ -107,7 +116,16 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 {/* When ABOVE leftCol we display the header in this position, above the article body, underneath the full width image */}
                                 <Hide when="above" breakpoint="leftCol">
                                     <ShowcaseHeader CAPI={CAPI} />
-                                    <ArticleMeta CAPI={CAPI} />
+                                    <ArticleMeta
+                                        pillar={CAPI.pillar}
+                                        pageId={CAPI.pageId}
+                                        webTitle={CAPI.webTitle}
+                                        author={CAPI.author}
+                                        tags={CAPI.tags}
+                                        webPublicationDateDisplay={
+                                            CAPI.webPublicationDateDisplay
+                                        }
+                                    />
                                 </Hide>
 
                                 <main
