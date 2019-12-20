@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ImmersiveHeaderImage from 'components/immersive/immersiveHeaderImage';
 import ImmersiveSeries from 'components/immersive/immersiveSeries';
 import ImmersiveHeadline from 'components/immersive/immersiveHeadline';
@@ -18,6 +18,7 @@ import { palette } from '@guardian/src-foundations';
 export interface ImmersiveArticleProps {
     capi: Content;
     imageSalt: string;
+    children: ReactNode[];
 }
 
 const MainDarkStyles = darkModeCss`
@@ -63,14 +64,13 @@ const HeaderImageStyles = css`
     }
 `;
 
-const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Element => {
+const ImmersiveArticle = ({ capi, imageSalt, children }: ImmersiveArticleProps): JSX.Element => {
 
-    const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
+    const { fields, tags, webPublicationDate, pillarId } = capi;
     const series = articleSeries(capi);
     const pillar = pillarFromString(pillarId);
     const pillarStyles = getPillarStyles(pillar);
     const contributors = articleContributors(capi);
-    const bodyElements = blocks.body[0].elements;
     const mainImage = articleMainImage(capi);
 
     return (
@@ -103,10 +103,10 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
                 </header>
                 <ArticleBody
                     pillarStyles={pillarStyles}
-                    bodyElements={bodyElements}
-                    imageSalt={imageSalt}
                     className={[articleWidthStyles, DropCapStyles(pillarStyles), HeaderStyles]}
-                />
+                >
+                    {children}
+                </ArticleBody>
                 <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>
                 </footer>

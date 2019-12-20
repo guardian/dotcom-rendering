@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { css } from '@emotion/core';
 
 import Article from 'components/news/article';
@@ -67,7 +67,13 @@ interface BodyProps {
     capi: Content;
 }
 
-function getArticleSubtype(capi: Content): (bodyProps: BodyProps) => JSX.Element {
+interface ArticleProps {
+    imageSalt: string;
+    capi: Content;
+    children: ReactNode[];
+}
+
+function getArticleSubtype(capi: Content): FunctionComponent<ArticleProps> {
     if (pillarFromString(capi.pillarId) === Pillar.opinion) {
         return OpinionArticle;
     } else if (capi.fields.displayHint === 'immersive') {
