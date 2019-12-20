@@ -20,8 +20,15 @@ export interface ImmersiveArticleProps {
     imageSalt: string;
 }
 
+const MainStyles = css`
+    background: ${palette.neutral[97]};
+`;
+
+const MainDarkStyles = darkModeCss`
+    background: ${palette.neutral.darkMode};
+`;
+
 const BorderStyles = css`
-    ${darkModeCss`background: ${palette.neutral.darkMode};`}
     ${from.wide} {
         width: ${breakpoints.wide}px;
         margin: 0 auto;
@@ -38,7 +45,7 @@ const DropCapStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         padding-right: ${basePx(1)};
         float: left;
     }
-`
+`;
 
 const HeaderImageStyles = css`
     figure {
@@ -61,7 +68,7 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
     const mainImage = articleMainImage(capi);
 
     return (
-        <main>
+        <main css={[MainStyles, MainDarkStyles]}>
             <article css={BorderStyles}>
                 <header>
                     <div css={articleWidthStyles}>

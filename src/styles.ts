@@ -83,7 +83,7 @@ export const darkModeCss = (
     }
 `;
 
-export const linkStyle = (kicker: string): SerializedStyles => css`
+export const linkStyle = (kicker: string): string => `
     a {
         color: ${kicker};
         text-decoration: none;
