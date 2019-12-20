@@ -1,4 +1,6 @@
-import React from 'react';
+// ----- Imports ----- //
+
+import React, { ReactNode } from 'react';
 
 import HeaderImage from '../shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
@@ -16,9 +18,13 @@ import { Keyline } from 'components/shared/keyline';
 import { isFeature, isAnalysis, articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString } from 'pillar';
 
+
+// ----- Component ----- //
+
 export interface ArticleProps {
     capi: Content;
     imageSalt: string;
+    children: ReactNode[];
 }
 
 const MainStyles = css`
@@ -49,15 +55,14 @@ const HeaderImageStyles = css`
     }
 `;
 
-const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
+const Article = ({ capi, imageSalt, children }: ArticleProps): JSX.Element => {
 
-    const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
+    const { fields, tags, webPublicationDate, pillarId } = capi;
     const series = articleSeries(capi);
     const feature = isFeature(capi) || 'starRating' in fields;
     const pillar = pillarFromString(pillarId);
     const pillarStyles = getPillarStyles(pillar);
     const contributors = articleContributors(capi);
-    const bodyElements = blocks.body[0].elements;
     const mainImage = articleMainImage(capi);
 
     return (
@@ -95,12 +100,9 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
                         className={articleWidthStyles}
                     />
                 </header>
-                <ArticleBody
-                    pillarStyles={pillarStyles}
-                    bodyElements={bodyElements}
-                    imageSalt={imageSalt}
-                    className={[articleWidthStyles]}
-                />
+                <ArticleBody pillarStyles={pillarStyles} className={[articleWidthStyles]}>
+                    {children}
+                </ArticleBody>
                 <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>
                 </footer>
@@ -108,5 +110,8 @@ const Article = ({ capi, imageSalt }: ArticleProps): JSX.Element => {
         </main>
     );
 }
+
+
+// ----- Exports ----- //
 
 export default Article;

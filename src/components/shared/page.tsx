@@ -13,6 +13,10 @@ import { Content } from 'capiThriftModels';
 import { includesTweets } from 'capi';
 import { fontFace } from 'styles';
 import { None, Some } from 'types/option';
+import { renderAll, parseAll } from 'block';
+import { JSDOM } from 'jsdom';
+import { partition } from 'types/result';
+import { insertAdPlaceholders } from 'ads';
 
 
 // ----- Components ----- //
@@ -37,10 +41,6 @@ const PageStyles = css`
         font-size: 1.6em;
         line-height: 1.5em;
         overflow-x: hidden;
-    }
-
-    figure {
-        margin: 1em 0;
     }
 
     figure.element-embed {
@@ -80,9 +80,15 @@ function getArticleSubtype(capi: Content): (bodyProps: BodyProps) => JSX.Element
 function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
     switch (capi.type) {
         case 'article':
+            const parsedBlocks = parseAll(JSDOM.fragment)(capi.blocks.body[0].elements);
+            const body = partition(parsedBlocks).oks;
+            const pillar = pillarFromString(capi.pillarId);
             const Component = getArticleSubtype(capi);
+
             return <>
-                <Component capi={capi} imageSalt={imageSalt} />
+                <Component capi={capi} imageSalt={imageSalt}>
+                    {insertAdPlaceholders(renderAll(imageSalt)(pillar, body))}
+                </Component>
                 <script src="/assets/article.js"></script>
             </>;
         case 'liveblog':
