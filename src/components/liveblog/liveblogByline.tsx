@@ -47,7 +47,7 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
 `;
 
 interface LiveblogBylineProps {
-    byline: string;
+    byline?: string;
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
@@ -74,7 +74,7 @@ const LiveblogByline = ({
                     imageSalt={imageSalt}
                 />
                 <div className="author">
-                    <address>{componentFromHtml(byline)}</address>
+                    { byline ? <address>{componentFromHtml(byline)}</address> : null }
                     <time>{ formatDate(new Date(publicationDate)) }</time>
                     <div className="follow">Get alerts on this story</div>
                 </div>

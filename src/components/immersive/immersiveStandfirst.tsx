@@ -1,6 +1,5 @@
 import React from 'react';
 import { bulletStyles, headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
-import { transform } from 'contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { PillarStyles } from 'pillar';
@@ -40,7 +39,7 @@ interface ArticleStandfirstProps {
     standfirst: string;
     pillarStyles: PillarStyles;
     className: SerializedStyles;
-    byline: string;
+    byline?: string;
 }
 
 const ImmersiveStandfirst = ({
@@ -54,11 +53,13 @@ const ImmersiveStandfirst = ({
         StandfirstStyles(pillarStyles),
         StandfirstDarkStyles(pillarStyles)
     ]}>
-        <div>{componentFromHtml(transform(standfirst))}</div>
-        <address>
-            <span>By </span>
-            {componentFromHtml(byline)}
-        </address>
+        <div>{componentFromHtml(standfirst)}</div>
+        { byline ?
+            <address>
+                <span>By </span>
+                {componentFromHtml(byline)}
+            </address>
+        : null }
     </div>
 
 export default ImmersiveStandfirst;
