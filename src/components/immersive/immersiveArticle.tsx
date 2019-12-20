@@ -7,12 +7,13 @@ import ImmersiveByline from 'components/immersive/immersiveByline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
-import { articleWidthStyles, basePx } from 'styles';
+import { articleWidthStyles, basePx, darkModeCss } from 'styles';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString, PillarStyles } from 'pillar';
+import { palette } from '@guardian/src-foundations';
 
 export interface ImmersiveArticleProps {
     capi: Content;
@@ -20,6 +21,7 @@ export interface ImmersiveArticleProps {
 }
 
 const BorderStyles = css`
+    ${darkModeCss`background: ${palette.neutral.darkMode};`}
     ${from.wide} {
         width: ${breakpoints.wide}px;
         margin: 0 auto;

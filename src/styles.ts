@@ -172,6 +172,8 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         a {
             text-decoration: none;
         }
+
+        ${darkModeCss`background: black;`}
     }
 
     h2 {
@@ -234,6 +236,12 @@ export const adStyles = css`
     .ad-placeholder {
         color: ${palette.neutral[20]};
         background: ${palette.neutral[97]};
+
+        ${darkModeCss`
+            color: ${palette.neutral[86]};
+            background: black;
+        `}
+
         clear: both;
 
         .ad-labels {
@@ -274,6 +282,8 @@ export const adStyles = css`
                 &:focus {
                     text-decoration: underline;
                 }
+
+                ${darkModeCss`color: ${palette.neutral[86]};`}
             }
         }
 
