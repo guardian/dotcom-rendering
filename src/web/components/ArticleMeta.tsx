@@ -69,10 +69,12 @@ export const ArticleMeta = ({
         <div className={metaContainer}>
             <GuardianLines pillar={pillar} />
             <div className={cx(meta)}>
-                {/* For interview articles the byline appears below the headline */}
-                {designType !== 'Interview' && (
-                    <Contributor author={author} tags={tags} pillar={pillar} />
-                )}
+                <Contributor
+                    designType={designType}
+                    author={author}
+                    tags={tags}
+                    pillar={pillar}
+                />
                 <Dateline
                     dateDisplay={webPublicationDateDisplay}
                     descriptionText="Published on"

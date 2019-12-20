@@ -94,6 +94,7 @@ export const paddedLines = () => {
                         <div style={{ marginTop: '30px' }} />
                         <GuardianLines />
                         <Contributor
+                            designType="Article"
                             author={{ byline: 'Jane doe' }}
                             tags={[]}
                             pillar="news"
@@ -131,6 +132,7 @@ export const squigglyLines = () => {
                         <div style={{ marginTop: '30px' }} />
                         <GuardianLines squiggly={true} />
                         <Contributor
+                            designType="Article"
                             author={{ byline: 'Jane doe' }}
                             tags={[]}
                             pillar="news"

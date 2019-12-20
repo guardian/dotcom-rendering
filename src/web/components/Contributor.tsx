@@ -48,19 +48,22 @@ const bylineStyle = (pillar: Pillar) => css`
 `;
 
 export const Contributor: React.FC<{
+    designType: DesignType;
     author: AuthorType;
     tags: TagType[];
     pillar: Pillar;
-}> = ({ author, tags, pillar }) => {
+}> = ({ designType, author, tags, pillar }) => {
     if (!author.byline) {
         return null;
     }
 
     return (
         <address aria-label="Contributor info">
-            <div className={bylineStyle(pillar)}>
-                <BylineLink byline={author.byline} tags={tags} />
-            </div>
+            {designType !== 'Interview' && (
+                <div className={bylineStyle(pillar)}>
+                    <BylineLink byline={author.byline} tags={tags} />
+                </div>
+            )}
             {author.twitterHandle && (
                 <div className={twitterHandle}>
                     <TwitterIcon />
