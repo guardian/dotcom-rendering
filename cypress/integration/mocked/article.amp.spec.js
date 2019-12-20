@@ -13,9 +13,6 @@ describe('For AMP', function() {
         const { url, pillar, designType } = article;
         it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
             cy.visit(`AMPArticle?url=${url}`, fetchPolyfill);
-            cy.percySnapshot(`AMP-${pillar}-${designType}-${index}`, {
-                widths: [375],
-            });
         });
     });
 });
