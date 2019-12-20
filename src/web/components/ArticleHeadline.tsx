@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
+import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -158,6 +159,7 @@ const ageWarningMargins = css`
 
 const renderHeadline = (
     designType: DesignType,
+    pillar: Pillar,
     isShowcase: boolean,
     headlineString: string,
     options?: {
@@ -219,25 +221,28 @@ const renderHeadline = (
             return (
                 // Inverted headlines have a wrapper div for positioning
                 // and a black background (only for the text)
-                <h1
-                    className={cx(
-                        invertedFont,
-                        invertedWrapper,
-                        // We only shift the inverted headline down when main media is showcase
-                        isShowcase ? shiftPosition('down') : shiftSlightly,
-                        maxWidth,
-                    )}
-                >
-                    <span
+                <>
+                    <HeadlineTag tagText="Interview" pillar={pillar} />
+                    <h1
                         className={cx(
-                            blackBackground,
-                            invertedStyles,
-                            displayInline,
+                            invertedFont,
+                            invertedWrapper,
+                            // We only shift the inverted headline down when main media is showcase
+                            isShowcase ? shiftPosition('down') : shiftSlightly,
+                            maxWidth,
                         )}
                     >
-                        {curly(headlineString)}
-                    </span>
-                </h1>
+                        <span
+                            className={cx(
+                                blackBackground,
+                                invertedStyles,
+                                displayInline,
+                            )}
+                        >
+                            {curly(headlineString)}
+                        </span>
+                    </h1>
+                </>
             );
 
         case 'Immersive':
@@ -282,7 +287,7 @@ export const ArticleHeadline = ({
                     <AgeWarning age={age} />
                 </div>
             )}
-            {renderHeadline(designType, isShowcase, headlineString, {
+            {renderHeadline(designType, pillar, isShowcase, headlineString, {
                 colour: pillarPalette[pillar].dark,
             })}
             {age && <AgeWarning age={age} isScreenReader={true} />}
