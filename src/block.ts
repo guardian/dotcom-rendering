@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, Fragment } from 'react';
+import { ReactNode, createElement as h, Fragment, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
@@ -16,29 +16,29 @@ import { getPillarStyles, Pillar } from 'pillar';
 // ----- Types ----- //
 
 type Block = {
-    kind: ElementType.TEXT,
-    doc: DocumentFragment,
+    kind: ElementType.TEXT;
+    doc: DocumentFragment;
 } | {
-    kind: ElementType.IMAGE,
-    alt: string,
-    caption: string,
-    displayCredit: boolean,
-    credit: string,
-    file: string,
+    kind: ElementType.IMAGE;
+    alt: string;
+    caption: string;
+    displayCredit: boolean;
+    credit: string;
+    file: string;
 } | {
-    kind: ElementType.PULLQUOTE,
-    quote: string,
-    attribution: Option<string>,
+    kind: ElementType.PULLQUOTE;
+    quote: string;
+    attribution: Option<string>;
 } | {
-    kind: ElementType.INTERACTIVE,
-    url: string,
+    kind: ElementType.INTERACTIVE;
+    url: string;
 } | {
-    kind: ElementType.RICH_LINK,
-    url: string,
-    linkText: string,
+    kind: ElementType.RICH_LINK;
+    url: string;
+    linkText: string;
 } | {
-    kind: ElementType.TWEET,
-    content: HTMLCollection,
+    kind: ElementType.TWEET;
+    content: HTMLCollection;
 };
 
 type DocParser = (html: string) => DocumentFragment;
@@ -127,21 +127,21 @@ function getAttrs(node: Node): React.AnchorHTMLAttributes<string> {
     }
 }
 
-const Paragraph = (props: { children?: ReactNode }) =>
+const Paragraph = (props: { children?: ReactNode }): ReactElement =>
     h('p', null, props.children);
 
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
 `;
 
-const Anchor = (props: { href: string, text: string, pillar: Pillar }) =>
+const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
     styledH(
         'a',
         { css: anchorStyles(getPillarStyles(props.pillar).kicker), href: props.href },
         props.text,
     );
 
-const bulletStyles = (colour: string) => css`
+const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
 
     &::before {
@@ -154,7 +154,7 @@ const bulletStyles = (colour: string) => css`
     }
 `;
 
-const Bullet = (props: { pillar: Pillar, text: string }) =>
+const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
     h(Fragment, null,
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
@@ -176,7 +176,7 @@ const textElement = (pillar: Pillar) => (node: Node): ReactNode => {
     }
 }
 
-const Text = (props: { doc: DocumentFragment, pillar: Pillar }) =>
+const Text = (props: { doc: DocumentFragment; pillar: Pillar }): ReactElement =>
     styledH(
         Fragment,
         null,
@@ -185,7 +185,7 @@ const Text = (props: { doc: DocumentFragment, pillar: Pillar }) =>
         ),
     );
 
-const makeCaption = (caption: string, displayCredit: boolean, credit: string) =>
+const makeCaption = (caption: string, displayCredit: boolean, credit: string): string =>
     displayCredit ? `${caption} ${credit}` : caption;
 
 interface ImageProps {
@@ -227,7 +227,7 @@ const imageStyles = css`
     }
 `;
 
-const Image = ({ url, alt, salt, caption, displayCredit, credit }: ImageProps) =>
+const Image = ({ url, alt, salt, caption, displayCredit, credit }: ImageProps): ReactElement =>
     styledH('figure', { css: imageStyles },
         h('img', {
             sizes: '100%',
@@ -268,7 +268,13 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
     }
 `;
 
-const Pullquote = (props: { quote: string, attribution: Option<string>, pillar: Pillar }) =>
+type PullquoteProps = {
+    quote: string;
+    attribution: Option<string>;
+    pillar: Pillar;
+};
+
+const Pullquote = (props: PullquoteProps): ReactElement =>
     styledH('aside', { css: pullquoteStyles(getPillarStyles(props.pillar).kicker) },
         h('blockquote', null,
             h('p', null, props.quote)
@@ -317,18 +323,18 @@ const richLinkStyles = css`
     `}
 `;
 
-const RichLink = (props: { url: string, linkText: string, pillar: Pillar }) =>
+const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): ReactElement =>
     styledH('aside', { css: richLinkStyles },
         h('h1', null, props.linkText),
         h(Anchor, { href: props.url, pillar: props.pillar, text: 'Read more' }),
     );
 
-const Interactive = (props: { url: string }) =>
+const Interactive = (props: { url: string }): ReactElement =>
     h('figure', { className: 'interactive' },
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
-const Tweet = (props: { content: HTMLCollection, pillar: Pillar }) =>
+const Tweet = (props: { content: HTMLCollection; pillar: Pillar }): ReactElement =>
     h('blockquote', null, ...Array.from(props.content).map(textElement(props.pillar)));
 
 const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number): ReactNode => {

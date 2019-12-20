@@ -72,7 +72,7 @@ function fromUnsafe<A, E>(f: () => A, error: E): Result<E, A> {
     }
 }
 
-type Partitioned<A, B> = { errs: A[], oks: B[] };
+type Partitioned<A, B> = { errs: A[]; oks: B[] };
 
 const partition = <A, B>(results: Result<A, B>[]): Partitioned<A, B> =>
     results.reduce(({ errs, oks }: Partitioned<A, B>, result) =>
