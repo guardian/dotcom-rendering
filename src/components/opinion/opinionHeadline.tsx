@@ -32,7 +32,9 @@ const HeadlineStyles = css`
 
 const HeadlineDarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
-    color: ${palette.neutral[86]};
+    h1 {
+        color: ${palette.neutral[86]};
+    }
 `;
 
 interface OpinionHeadlineProps {
