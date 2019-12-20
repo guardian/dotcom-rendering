@@ -15,7 +15,7 @@
         "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
         "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
-        "chromatic": "chromatic --build-script-name=storybook:build"
+        "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes"
     },
     "husky": {
         "hooks": {
