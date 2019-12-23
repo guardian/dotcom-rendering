@@ -7,4 +7,4 @@ import { nativeCall } from 'native/nativeApi';
 // ----- Run ----- //
 
 setup();
-nativeCall('insetAdverts')
+nativeCall('insertAdverts')
