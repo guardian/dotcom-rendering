@@ -31,8 +31,8 @@ the effort required at code review.
 Performance targets should be discoverable and highly visible. If they are not met, developers should receive feedback at
 the earliest opportunity.
 
-- [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
-- [Bundle size](https://github.com/guardian/dotcom-rendering/blob/master/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
+-   [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
+-   [Bundle size](https://github.com/guardian/dotcom-rendering/blob/master/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
 
 ## We only deliver the assets that the page needs
 
@@ -61,3 +61,11 @@ The application provides a full suite of unit, integration and end-to-end tests.
 
 At end of life, the dotcom-rendering application (although not the components themselves) can be swapped out for another rendering
 tier. It must be possible to migrate a single content type such as the article within 3 months.
+
+## Component First Development
+
+> Components that are built to the standard where they're sharable are well documented and have good test coverage but sharing them before they are stable can make changes harder
+
+As a principle, we should initially build all core components in isolation as though they were going to be shared, before connecting them into the App. Not because we want to share them but because the act of doing this results in better components
+
+Creating stories in Storybook, carefully crafting the api for the component and just generally giving time and thought to how other developers might experience things all lead to cleaner components that are easier to understand. This is useful for the immediate DCR team and then, if we decide to share it later, to others outside DCR but we should be wary exposing apis to other teams while we are still at a stage where things can be refactored
