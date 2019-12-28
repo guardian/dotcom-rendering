@@ -31,8 +31,8 @@ the effort required at code review.
 Performance targets should be discoverable and highly visible. If they are not met, developers should receive feedback at
 the earliest opportunity.
 
-- [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
-- [Bundle size](https://github.com/guardian/dotcom-rendering/blob/master/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
+-   [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
+-   [Bundle size](https://github.com/guardian/dotcom-rendering/blob/master/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
 
 ## We only deliver the assets that the page needs
 
@@ -61,3 +61,9 @@ The application provides a full suite of unit, integration and end-to-end tests.
 
 At end of life, the dotcom-rendering application (although not the components themselves) can be swapped out for another rendering
 tier. It must be possible to migrate a single content type such as the article within 3 months.
+
+## Sometimes Repeat Yourself
+
+> Verbose code that is easy to move around, change and remove is preferred to elegant code that is prematurely abstracted and hard to change
+
+Or, to put it another way: Do Repeat Yourself. Sometimes. The old maxim of Don't Repeat Yourself is probably the most quoted design principle of them all but its popularity can lead to it becoming less a principle and more of a habit. The above statement challenges the instinctive reflex we all have to pull things out into functions or components, asking us to first consider if the abstraction is useful.
