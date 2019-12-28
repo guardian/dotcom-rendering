@@ -31,8 +31,8 @@ the effort required at code review.
 Performance targets should be discoverable and highly visible. If they are not met, developers should receive feedback at
 the earliest opportunity.
 
-- [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
-- [Bundle size](https://github.com/guardian/dotcom-rendering/blob/master/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
+-   [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
+-   [Bundle size](https://github.com/guardian/dotcom-rendering/blob/master/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
 
 ## We only deliver the assets that the page needs
 
@@ -61,3 +61,11 @@ The application provides a full suite of unit, integration and end-to-end tests.
 
 At end of life, the dotcom-rendering application (although not the components themselves) can be swapped out for another rendering
 tier. It must be possible to migrate a single content type such as the article within 3 months.
+
+## Explicit Props
+
+> Explicit props help new developers quickly understand data flows; abstractions or optimisation patterns can hide where props come from, adding to the cognitive workload
+
+When I see my component being called I want to be absolutely certain that all the props shown being passed in are _all_ the props being passed in. In DCR now, this is currently true in all cases and adds a substantial benefit when trying to reason about data flows
+
+Many other codebases have abstraction patters using HOCs, Context, Themes, etc. None of those things are wrong or bad, indeed they are excellent solutions to common issues, but - at this point in time - none of these technologies or patterns are considered necessary for DCR and we should only introduce them after team discussion
