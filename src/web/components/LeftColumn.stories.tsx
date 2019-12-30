@@ -29,8 +29,8 @@ export const PartialRightBorder = () => {
                 </LeftColumn>
                 <ArticleContainer>
                     <img
-                        src="https://www.fillmurray.com/g/600/500"
-                        alt="Bill"
+                        src="https://via.placeholder.com/600x500.png?text=Placeholder%20to%20push%20content%20down"
+                        alt="Fill"
                     />
                 </ArticleContainer>
                 <RightColumn>
@@ -51,8 +51,8 @@ export const RightBorder = () => {
                 </LeftColumn>
                 <ArticleContainer>
                     <img
-                        src="https://www.fillmurray.com/g/600/500"
-                        alt="Bill"
+                        src="https://via.placeholder.com/600x500.png?text=Placeholder%20to%20push%20content%20down"
+                        alt="Fill"
                     />
                 </ArticleContainer>
                 <RightColumn>
