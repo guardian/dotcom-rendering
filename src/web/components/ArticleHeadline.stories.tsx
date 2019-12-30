@@ -34,7 +34,7 @@ ArticleStory.story = { name: 'Article' };
 
 export const oldHeadline = () => (
     <Section>
-        <ArticleContainer layoutType="Standard">
+        <ArticleContainer>
             <ArticleTitle CAPI={CAPI} />
             <ArticleHeadline
                 headlineString="This is an old headline"
@@ -49,6 +49,7 @@ export const oldHeadline = () => (
                         title: '',
                     },
                 ]}
+                layoutType="Standard"
             />
         </ArticleContainer>
     </Section>
@@ -65,6 +66,7 @@ export const Feature = () => (
                 pillar="lifestyle"
                 webPublicationDate=""
                 tags={[]}
+                layoutType="Standard"
             />
         </ArticleContainer>
     </Section>
@@ -73,7 +75,7 @@ Feature.story = { name: 'Feature' };
 
 export const ShowcaseInterview = () => (
     <Section>
-        <ArticleContainer layoutType="Showcase">
+        <ArticleContainer>
             <ArticleTitle CAPI={CAPI} />
             <ArticleHeadline
                 headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
@@ -88,6 +90,7 @@ export const ShowcaseInterview = () => (
                 hideCaption={true}
                 elements={mainMediaElements}
                 pillar="news"
+                layoutType="Showcase"
             />
         </ArticleContainer>
     </Section>

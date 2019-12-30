@@ -93,7 +93,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
             )}
 
             <Section showTopBorder={false} padded={false}>
-                <ArticleContainer layoutType="Standard">
+                <ArticleContainer>
                     <ArticleTitle
                         CAPI={CAPI}
                         badge={GE2019Badge}
@@ -105,16 +105,19 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         pillar={CAPI.pillar}
                         webPublicationDate={CAPI.webPublicationDate}
                         tags={CAPI.tags}
+                        layoutType="Standard"
                     />
-                    <ArticleMeta CAPI={CAPI} />
+                    <ArticleMeta CAPI={CAPI} layoutType="Standard" />
                     <ArticleStandfirst
                         designType={CAPI.designType}
                         pillar={CAPI.pillar}
                         standfirst={CAPI.standfirst}
+                        layoutType="Standard"
                     />
                     <MainMedia
                         elements={CAPI.mainMediaElements}
                         pillar={CAPI.pillar}
+                        layoutType="Standard"
                     />
                     <ArticleBodyContainer>
                         <ArticleBody CAPI={CAPI} />
@@ -132,7 +135,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             badge={GE2019Badge}
                         />
                     </ArticleBodyContainer>
-                    <RightColumn>
+                    <RightColumn layoutType="Standard">
                         <StickyAd />
                         {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                     </RightColumn>

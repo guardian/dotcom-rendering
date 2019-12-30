@@ -25,18 +25,12 @@ const articleContainerStyles = css`
 
 type Props = {
     children: JSXElements;
-    layoutType?: LayoutType;
 };
 
-export const ArticleContainer = ({
-    children,
-    layoutType = 'Standard',
-}: Props) => (
+export const ArticleContainer = ({ children }: Props) => (
     <article className={articleContainerStyles}>
         <Flex wrap="wrap" justify="flex-start">
-            {React.Children.map(children, child =>
-                React.cloneElement(child, { layoutType }),
-            )}
+            {children}
         </Flex>
     </article>
 );

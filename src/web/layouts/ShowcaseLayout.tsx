@@ -79,7 +79,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             )}
 
             <Section showTopBorder={false} padded={false}>
-                <ArticleContainer layoutType="Showcase">
+                <ArticleContainer>
                     <ArticleTitle CAPI={CAPI} />
                     <ArticleHeadline
                         headlineString={CAPI.headline}
@@ -87,19 +87,22 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         pillar={CAPI.pillar}
                         webPublicationDate={CAPI.webPublicationDate}
                         tags={CAPI.tags}
+                        layoutType="Showcase"
                     />
-                    <ArticleMeta CAPI={CAPI} />
+                    <ArticleMeta CAPI={CAPI} layoutType="Showcase" />
                     <ArticleStandfirst
                         designType={CAPI.designType}
                         pillar={CAPI.pillar}
                         standfirst={CAPI.standfirst}
+                        layoutType="Showcase"
                     />
                     <MainMedia
                         elements={CAPI.mainMediaElements}
                         pillar={CAPI.pillar}
+                        layoutType="Showcase"
                     />
                     <ArticleBodyContainer>
-                        <ArticleBody CAPI={CAPI} />
+                        <ArticleBody CAPI={CAPI} isShowcase={true} />
                         <GuardianLines pillar={CAPI.pillar} />
                         <SubMeta
                             pillar={CAPI.pillar}
@@ -113,7 +116,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             }
                         />
                     </ArticleBodyContainer>
-                    <RightColumn>
+                    <RightColumn layoutType="Showcase">
                         <StickyAd />
                         {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                     </RightColumn>

@@ -88,7 +88,6 @@ const articleAdStyles = css`
 
 type Props = {
     children: JSXElements;
-    layoutType?: LayoutType;
 };
 
 export const ArticleBodyContainer = ({ children }: Props) => {

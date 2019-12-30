@@ -8,8 +8,6 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/components/lib/ArticleRenderer';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
-import { Hide } from '@root/src/web/components/Hide';
 
 const pillarColours = pillarMap(
     pillar =>
@@ -126,17 +124,6 @@ export const ArticleBody: React.FC<{
                 [immersiveBodyStyle]: CAPI.isImmersive,
             })}
         >
-            {isShowcase && (
-                // For articles with main media set as showcase, the standfirst sometimes
-                // sits inside here so that the right column advert does not get pushed down
-                <Hide when="below" breakpoint="leftCol">
-                    <ArticleStandfirst
-                        designType={CAPI.designType}
-                        pillar={CAPI.pillar}
-                        standfirst={CAPI.standfirst}
-                    />
-                </Hide>
-            )}
             <ArticleRenderer
                 elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
                 pillar={CAPI.pillar}
