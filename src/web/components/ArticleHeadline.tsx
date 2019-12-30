@@ -5,6 +5,7 @@ import { pillarPalette } from '@root/src/lib/pillars';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
+import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -14,6 +15,7 @@ type Props = {
     pillar: Pillar; // Decides headline colour when relevant
     webPublicationDate: string; // Used for age warning
     tags: TagType[]; // Used for age warning
+    byline?: string;
     isShowcase?: boolean; // Used for Interviews to change headline position
 };
 
@@ -98,8 +100,14 @@ const colourStyles = (colour?: string) => css`
 const displayBlock = css`
     display: block;
 `;
+
 const displayInline = css`
     display: inline;
+`;
+
+const displayFlex = css`
+    display: flex;
+    flex-direction: column;
 `;
 
 const shiftPosition = (shift?: 'up' | 'down') => css`
@@ -114,7 +122,6 @@ const shiftSlightly = css`
 const invertedStyles = css`
     position: relative;
     color: white;
-    display: 'inline';
     white-space: pre-wrap;
     padding-bottom: 5px;
     padding-right: 5px;
@@ -157,15 +164,25 @@ const ageWarningMargins = css`
     }
 `;
 
-const renderHeadline = (
-    designType: DesignType,
-    pillar: Pillar,
-    isShowcase: boolean,
-    headlineString: string,
+const renderHeadline = ({
+    designType,
+    pillar,
+    isShowcase,
+    headlineString,
+    byline,
+    tags,
+    options,
+}: {
+    designType: DesignType;
+    pillar: Pillar;
+    isShowcase: boolean;
+    headlineString: string;
+    byline?: string;
+    tags: TagType[];
     options?: {
         colour?: string;
-    },
-) => {
+    };
+}) => {
     switch (designType) {
         case 'Article':
         case 'Media':
@@ -221,17 +238,16 @@ const renderHeadline = (
             return (
                 // Inverted headlines have a wrapper div for positioning
                 // and a black background (only for the text)
-                <>
+                <div
+                    className={cx(
+                        // We only shift the inverted headline down when main media is showcase
+                        isShowcase ? shiftPosition('down') : shiftSlightly,
+                        maxWidth,
+                        displayFlex,
+                    )}
+                >
                     <HeadlineTag tagText="Interview" pillar={pillar} />
-                    <h1
-                        className={cx(
-                            invertedFont,
-                            invertedWrapper,
-                            // We only shift the inverted headline down when main media is showcase
-                            isShowcase ? shiftPosition('down') : shiftSlightly,
-                            maxWidth,
-                        )}
-                    >
+                    <h1 className={cx(invertedFont, invertedWrapper)}>
                         <span
                             className={cx(
                                 blackBackground,
@@ -242,7 +258,8 @@ const renderHeadline = (
                             {curly(headlineString)}
                         </span>
                     </h1>
-                </>
+                    {byline && <HeadlineByline byline={byline} tags={tags} />}
+                </div>
             );
 
         case 'Immersive':
@@ -276,6 +293,7 @@ export const ArticleHeadline = ({
     designType,
     pillar,
     webPublicationDate,
+    byline,
     tags,
     isShowcase = false,
 }: Props) => {
@@ -287,8 +305,16 @@ export const ArticleHeadline = ({
                     <AgeWarning age={age} />
                 </div>
             )}
-            {renderHeadline(designType, pillar, isShowcase, headlineString, {
-                colour: pillarPalette[pillar].dark,
+            {renderHeadline({
+                designType,
+                pillar,
+                isShowcase,
+                headlineString,
+                byline,
+                tags,
+                options: {
+                    colour: pillarPalette[pillar].dark,
+                },
             })}
             {age && <AgeWarning age={age} isScreenReader={true} />}
         </>

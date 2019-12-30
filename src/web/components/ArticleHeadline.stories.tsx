@@ -97,6 +97,7 @@ export const ShowcaseInterview = () => (
                     webPublicationDate=""
                     tags={[]}
                     isShowcase={true}
+                    byline="Byline text"
                 />
                 <MainMedia
                     hideCaption={true}
@@ -122,6 +123,7 @@ export const Interview = () => (
                     pillar="culture"
                     webPublicationDate=""
                     tags={[]}
+                    byline="Byline text"
                 />
                 <Standfirst
                     designType="Interview"
