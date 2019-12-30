@@ -28,14 +28,14 @@ const squigglyLines = (pillar: Pillar) => css`
 `;
 
 type Props = {
-    pillar?: Pillar;
     squiggly?: boolean;
+    pillar: Pillar;
     count?: 4 | 8;
 };
 
 export const GuardianLines = ({
-    pillar = 'news',
     squiggly = false,
+    pillar,
     count = 4,
 }: Props) => {
     if (squiggly) {

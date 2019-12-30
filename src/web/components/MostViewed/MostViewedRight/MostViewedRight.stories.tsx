@@ -41,7 +41,7 @@ export const defaultStory = () => {
                         showTopBorder={false}
                         padded={false}
                     >
-                        <MostViewedRight />
+                        <MostViewedRight pillar="news" />
                     </Section>
                 </RightColumn>
             </Flex>
@@ -71,7 +71,7 @@ export const limitItemsStory = () => {
                         showTopBorder={false}
                         padded={false}
                     >
-                        <MostViewedRight limitItems={3} />
+                        <MostViewedRight pillar="news" limitItems={3} />
                     </Section>
                 </RightColumn>
             </Flex>
@@ -88,7 +88,7 @@ export const outsideContextStory = () => {
 
     return (
         <Section>
-            <MostViewedRight />
+            <MostViewedRight pillar="news" />
         </Section>
     );
 };

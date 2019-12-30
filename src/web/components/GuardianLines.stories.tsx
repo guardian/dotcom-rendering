@@ -24,7 +24,7 @@ export const defaultStory = () => {
                 showTopBorder={false}
                 padded={false}
             >
-                <GuardianLines />
+                <GuardianLines pillar="news" />
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
@@ -55,7 +55,7 @@ export const eightLines = () => {
                 showTopBorder={false}
                 padded={false}
             >
-                <GuardianLines count={8} />
+                <GuardianLines pillar="news" count={8} />
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
@@ -86,13 +86,13 @@ export const paddedLines = () => {
                 showTopBorder={false}
                 padded={false}
             >
-                <GuardianLines />
+                <GuardianLines pillar="news" />
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
                     <LeftColumn>
                         <div style={{ marginTop: '30px' }} />
-                        <GuardianLines />
+                        <GuardianLines pillar="news" />
                         <Contributor
                             author={{ byline: 'Jane doe' }}
                             tags={[]}
@@ -123,7 +123,7 @@ export const squigglyLines = () => {
                 showTopBorder={false}
                 padded={false}
             >
-                <GuardianLines />
+                <GuardianLines pillar="news" />
             </Section>
             <Section showTopBorder={false}>
                 <Flex>
