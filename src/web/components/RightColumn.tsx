@@ -3,8 +3,6 @@ import { css, cx } from 'emotion';
 import { until } from '@guardian/src-foundations/mq';
 
 const rightColumnContainerStyles = css`
-    position: relative; /* so that the content can be flow out of this placeholder */
-    height: 0px; /* acts as a placeholder for the real column */
     margin-left: auto; /* justifies self to right side */
     max-width: 300px;
 
@@ -30,8 +28,9 @@ const showcaseLayout = css`
 `;
 
 const rightColumnStyles = css`
-    position: absolute; /* flow out of container */
-    width: 100%;
+    position: absolute;
+    width: 300px;
+    height: 100%;
 `;
 
 type Props = {
