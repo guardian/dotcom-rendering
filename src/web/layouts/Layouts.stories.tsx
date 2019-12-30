@@ -10,9 +10,6 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 export default {
     component: StandardLayout,
     title: 'Layouts/Standard',
-    parameters: {
-        percy: { widths: [600, 979, 1139, 1299, 1400] },
-    },
 };
 /* tslint:enable */
 
