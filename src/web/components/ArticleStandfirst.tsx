@@ -22,11 +22,6 @@ const standfirstStyles = css`
         left: 150px;
     }
 
-    /* @media screen and (-ms-high-contrast: active),
-        (-ms-high-contrast: none) and (max-width: 1299px) {
-        left: 160px;
-    } */
-
     ${until.leftCol} {
         left: 0;
         padding-left: 0;
