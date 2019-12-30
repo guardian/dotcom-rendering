@@ -1,9 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import TwitterIcon from '@frontend/static/icons/twitter.svg';
+
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
+
+import { BylineLink } from '@frontend/web/components/BylineLink';
+
+import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
 const twitterHandle = css`
     ${textSans.xsmall()};
@@ -43,76 +47,23 @@ const bylineStyle = (pillar: Pillar) => css`
     }
 `;
 
-// This crazy function aims to split bylines such as
-// 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
-// Or
-// 'Jane Doe and John Smith` to ['Jane Doe', ' and ', 'John Smith']
-// It does this so we can have separate links to both contributors
-const bylineAsTokens = (bylineText: string, tags: TagType[]): string[] => {
-    const contributorTags = tags
-        .filter(t => t.type === 'Contributor')
-        .map(c => c.title);
-    // The contributor tag title should exist inside the bylineText for this regex to work
-    const regex = new RegExp(`(${contributorTags.join('|')})`);
-
-    return bylineText.split(regex);
-};
-
-const RenderContributor: React.FC<{
-    bylineText: string;
-    contributorTags: TagType[];
-    pillar: Pillar;
-}> = ({ bylineText, contributorTags, pillar }) => {
-    const renderedTokens = bylineAsTokens(bylineText, contributorTags).map(
-        (token, i) => {
-            const associatedTags = contributorTags.filter(
-                t => t.title === token,
-            );
-            if (associatedTags.length > 0) {
-                return (
-                    <ContributorLink
-                        contributor={token}
-                        contributorTagId={associatedTags[0].id}
-                        key={i}
-                    />
-                );
-            }
-            return token;
-        },
-    );
-
-    return <div className={bylineStyle(pillar)}>{renderedTokens}</div>;
-};
-
-const ContributorLink: React.FC<{
-    contributor: string;
-    contributorTagId: string;
-}> = ({ contributor, contributorTagId }) => (
-    <a
-        rel="author"
-        data-link-name="auto tag link"
-        href={`//www.theguardian.com/${contributorTagId}`}
-    >
-        {contributor}
-    </a>
-);
-
 export const Contributor: React.FC<{
+    designType: DesignType;
     author: AuthorType;
     tags: TagType[];
     pillar: Pillar;
-}> = ({ author, tags, pillar }) => {
+}> = ({ designType, author, tags, pillar }) => {
     if (!author.byline) {
         return null;
     }
 
     return (
         <address aria-label="Contributor info">
-            <RenderContributor
-                bylineText={author.byline}
-                contributorTags={tags}
-                pillar={pillar}
-            />
+            {designType !== 'Interview' && (
+                <div className={bylineStyle(pillar)}>
+                    <BylineLink byline={author.byline} tags={tags} />
+                </div>
+            )}
             {author.twitterHandle && (
                 <div className={twitterHandle}>
                     <TwitterIcon />

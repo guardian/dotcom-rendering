@@ -78,6 +78,7 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
                     webPublicationDate={webPublicationDate}
                     tags={tags}
                     isShowcase={true}
+                    byline={CAPI.author.byline}
                 />
             </HeaderItem>
             <HeaderItem order={3}>

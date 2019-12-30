@@ -45,29 +45,44 @@ const metaContainer = css`
 `;
 
 type Props = {
-    CAPI: CAPIType;
+    designType: DesignType;
+    pillar: Pillar;
+    pageId: string;
+    webTitle: string;
+    author: AuthorType;
+    tags: TagType[];
+    webPublicationDateDisplay: string;
 };
 
-export const ArticleMeta = ({ CAPI }: Props) => {
-    const sharingUrls = getSharingUrls(CAPI.pageId, CAPI.webTitle);
+export const ArticleMeta = ({
+    designType,
+    pillar,
+    pageId,
+    webTitle,
+    author,
+    tags,
+    webPublicationDateDisplay,
+}: Props) => {
+    const sharingUrls = getSharingUrls(pageId, webTitle);
 
     return (
         <div className={metaContainer}>
-            <GuardianLines pillar={CAPI.pillar} />
+            <GuardianLines pillar={pillar} />
             <div className={cx(meta)}>
                 <Contributor
-                    author={CAPI.author}
-                    tags={CAPI.tags}
-                    pillar={CAPI.pillar}
+                    designType={designType}
+                    author={author}
+                    tags={tags}
+                    pillar={pillar}
                 />
                 <Dateline
-                    dateDisplay={CAPI.webPublicationDateDisplay}
+                    dateDisplay={webPublicationDateDisplay}
                     descriptionText="Published on"
                 />
                 <div className={metaExtras}>
                     <SharingIcons
                         sharingUrls={sharingUrls}
-                        pillar={CAPI.pillar}
+                        pillar={pillar}
                         displayIcons={['facebook', 'twitter', 'email']}
                     />
                     <div data-island="share-count" />
