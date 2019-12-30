@@ -259,6 +259,8 @@ type AvatarType = {
 
 type MediaType = 'Video' | 'Audio' | 'Photo';
 
+type LineEffectType = 'squiggly' | 'dotted' | 'straight';
+
 interface CardType {
     linkTo: string;
     pillar: Pillar;

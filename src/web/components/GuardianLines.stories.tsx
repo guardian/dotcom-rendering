@@ -130,7 +130,7 @@ export const squigglyLines = () => {
                 <Flex>
                     <LeftColumn>
                         <div style={{ marginTop: '30px' }} />
-                        <GuardianLines squiggly={true} />
+                        <GuardianLines pillar="news" effect="squiggly" />
                         <Contributor
                             designType="Article"
                             author={{ byline: 'Jane doe' }}
@@ -153,3 +153,41 @@ export const squigglyLines = () => {
     );
 };
 squigglyLines.story = { name: 'with squiggly lines' };
+
+export const dottedLines = () => {
+    return (
+        <>
+            <Section
+                showSideBorders={true}
+                showTopBorder={false}
+                padded={false}
+            >
+                <GuardianLines pillar="news" />
+            </Section>
+            <Section showTopBorder={false}>
+                <Flex>
+                    <LeftColumn>
+                        <div style={{ marginTop: '30px' }} />
+                        <GuardianLines pillar="sport" effect="dotted" />
+                        <Contributor
+                            designType="Article"
+                            author={{ byline: 'Jane doe' }}
+                            tags={[]}
+                            pillar="news"
+                        />
+                    </LeftColumn>
+                    <ArticleContainer>
+                        <ArticleHeadline
+                            headlineString="Headline text"
+                            webPublicationDate=""
+                            tags={[]}
+                            designType="Article"
+                            pillar="news"
+                        />
+                    </ArticleContainer>
+                </Flex>
+            </Section>
+        </>
+    );
+};
+dottedLines.story = { name: 'with dotted lines' };
