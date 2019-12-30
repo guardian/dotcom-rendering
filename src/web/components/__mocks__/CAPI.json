@@ -1,0 +1,3494 @@
+{
+    "isAdFreeUser": false,
+    "main": "<figure class=\"element element-image\" data-media-id=\"5ef7d4e1699fc19817f61dba06bb069b4c68b9c9\"> <img src=\"https://media.guim.co.uk/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/1000.jpg\" alt=\"Life of Brian.\" width=\"1000\" height=\"600\" class=\"gu-image\" /> <figcaption> <span class=\"element-image__caption\">Idle thoughts … Life of Brian.</span> <span class=\"element-image__credit\">Photograph: Ronald Grant</span> </figcaption> </figure>",
+    "subMetaSectionLinks": [{ "url": "/film/film", "title": "Film" }],
+    "commercialProperties": {
+        "UK": {
+            "adTargeting": [
+                { "name": "edition", "value": "uk" },
+                {
+                    "name": "k",
+                    "value": [
+                        "john-cleese",
+                        "culture",
+                        "comedy",
+                        "terry-gilliam",
+                        "monty-python-s-life-of-brian",
+                        "film"
+                    ]
+                },
+                { "name": "su", "value": ["0"] },
+                { "name": "ct", "value": "article" },
+                { "name": "p", "value": "ng" },
+                { "name": "sh", "value": "https://gu.com/p/b7ng4" },
+                { "name": "co", "value": ["peterbradshaw"] },
+                { "name": "tn", "value": ["reviews"] },
+                {
+                    "name": "url",
+                    "value": "/film/2019/apr/12/monty-pythons-life-of-brian-review"
+                }
+            ]
+        },
+        "US": {
+            "adTargeting": [
+                {
+                    "name": "k",
+                    "value": [
+                        "john-cleese",
+                        "culture",
+                        "comedy",
+                        "terry-gilliam",
+                        "monty-python-s-life-of-brian",
+                        "film"
+                    ]
+                },
+                { "name": "su", "value": ["0"] },
+                { "name": "ct", "value": "article" },
+                { "name": "p", "value": "ng" },
+                { "name": "edition", "value": "us" },
+                { "name": "sh", "value": "https://gu.com/p/b7ng4" },
+                { "name": "co", "value": ["peterbradshaw"] },
+                { "name": "tn", "value": ["reviews"] },
+                {
+                    "name": "url",
+                    "value": "/film/2019/apr/12/monty-pythons-life-of-brian-review"
+                }
+            ]
+        },
+        "AU": {
+            "adTargeting": [
+                {
+                    "name": "k",
+                    "value": [
+                        "john-cleese",
+                        "culture",
+                        "comedy",
+                        "terry-gilliam",
+                        "monty-python-s-life-of-brian",
+                        "film"
+                    ]
+                },
+                { "name": "su", "value": ["0"] },
+                { "name": "ct", "value": "article" },
+                { "name": "p", "value": "ng" },
+                { "name": "sh", "value": "https://gu.com/p/b7ng4" },
+                { "name": "co", "value": ["peterbradshaw"] },
+                { "name": "tn", "value": ["reviews"] },
+                { "name": "edition", "value": "au" },
+                {
+                    "name": "url",
+                    "value": "/film/2019/apr/12/monty-pythons-life-of-brian-review"
+                }
+            ]
+        },
+        "INT": {
+            "adTargeting": [
+                {
+                    "name": "k",
+                    "value": [
+                        "john-cleese",
+                        "culture",
+                        "comedy",
+                        "terry-gilliam",
+                        "monty-python-s-life-of-brian",
+                        "film"
+                    ]
+                },
+                { "name": "edition", "value": "int" },
+                { "name": "su", "value": ["0"] },
+                { "name": "ct", "value": "article" },
+                { "name": "p", "value": "ng" },
+                { "name": "sh", "value": "https://gu.com/p/b7ng4" },
+                { "name": "co", "value": ["peterbradshaw"] },
+                { "name": "tn", "value": ["reviews"] },
+                {
+                    "name": "url",
+                    "value": "/film/2019/apr/12/monty-pythons-life-of-brian-review"
+                }
+            ]
+        }
+    },
+    "pageFooter": {
+        "footerLinks": [
+            [
+                {
+                    "text": "About us",
+                    "url": "/about",
+                    "dataLinkName": "uk : footer : about us",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Contact us",
+                    "url": "/help/contact-us",
+                    "dataLinkName": "uk : footer : contact us",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Complaints & corrections",
+                    "url": "/info/complaints-and-corrections",
+                    "dataLinkName": "complaints",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "SecureDrop",
+                    "url": "https://www.theguardian.com/securedrop",
+                    "dataLinkName": "securedrop",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Work for us",
+                    "url": "https://workforus.theguardian.com",
+                    "dataLinkName": "uk : footer : work for us",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Privacy policy",
+                    "url": "/info/privacy",
+                    "dataLinkName": "privacy",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Cookie policy",
+                    "url": "/info/cookies",
+                    "dataLinkName": "cookie",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Terms & conditions",
+                    "url": "/help/terms-of-service",
+                    "dataLinkName": "terms",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Help",
+                    "url": "/help",
+                    "dataLinkName": "uk : footer : tech feedback",
+                    "extraClasses": "js-tech-feedback-report"
+                }
+            ],
+            [
+                {
+                    "text": "All topics",
+                    "url": "/index/subjects/a",
+                    "dataLinkName": "uk : footer : all topics",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "All writers",
+                    "url": "/index/contributors",
+                    "dataLinkName": "uk : footer : all contributors",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Modern Slavery Act",
+                    "url": "/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT",
+                    "dataLinkName": "uk : footer : modern slavery act statement",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Digital newspaper archive",
+                    "url": "https://theguardian.newspapers.com",
+                    "dataLinkName": "digital newspaper archive",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Facebook",
+                    "url": "https://www.facebook.com/theguardian",
+                    "dataLinkName": "uk : footer : facebook",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Twitter",
+                    "url": "https://twitter.com/guardian",
+                    "dataLinkName": "uk: footer : twitter",
+                    "extraClasses": ""
+                }
+            ],
+            [
+                {
+                    "text": "Advertise with us",
+                    "url": "https://advertising.theguardian.com",
+                    "dataLinkName": "uk : footer : advertise with us",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Guardian Labs",
+                    "url": "/guardian-labs",
+                    "dataLinkName": "uk : footer : guardian labs",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Search jobs",
+                    "url": "https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS",
+                    "dataLinkName": "uk : footer : jobs",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Dating",
+                    "url": "https://soulmates.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_SOULMATES",
+                    "dataLinkName": "uk : footer : soulmates",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Patrons",
+                    "url": "https://patrons.theguardian.com?INTCMP=footer_patrons",
+                    "dataLinkName": "uk : footer : patrons",
+                    "extraClasses": ""
+                },
+                {
+                    "text": "Discount Codes",
+                    "url": "https://discountcode.theguardian.com/",
+                    "dataLinkName": "uk: footer : discount code",
+                    "extraClasses": "js-discount-code-link"
+                }
+            ]
+        ]
+    },
+    "twitterData": {
+        "twitter:app:id:iphone": "409128287",
+        "twitter:app:name:googleplay": "The Guardian",
+        "twitter:app:name:ipad": "The Guardian",
+        "twitter:image": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTUucG5n&s=7bd1b732b0a1766496cef6b3909524f7",
+        "twitter:site": "@guardian",
+        "twitter:app:url:ipad": "gnmguardian://film/2019/apr/12/monty-pythons-life-of-brian-review?contenttype=Article&source=twitter",
+        "twitter:card": "summary_large_image",
+        "twitter:app:name:iphone": "The Guardian",
+        "twitter:creator": "@PeterBradshaw1",
+        "twitter:app:id:ipad": "409128287",
+        "twitter:app:id:googleplay": "com.guardian",
+        "twitter:app:url:googleplay": "guardian://www.theguardian.com/film/2019/apr/12/monty-pythons-life-of-brian-review",
+        "twitter:app:url:iphone": "gnmguardian://film/2019/apr/12/monty-pythons-life-of-brian-review?contenttype=Article&source=twitter"
+    },
+    "beaconURL": "//phar.gu-web.net",
+    "sectionName": "film",
+    "editionLongForm": "UK edition",
+    "hasRelated": true,
+    "pageType": {
+        "hasShowcaseMainElement": false,
+        "isFront": false,
+        "isLiveblog": false,
+        "isMinuteArticle": false,
+        "isPaidContent": false,
+        "isPreview": false,
+        "isSensitive": false
+    },
+    "hasStoryPackage": false,
+    "publication": "theguardian.com",
+    "trailText": "Despite its obscenity and button-pushing humour, this mock epic stands up four decades on as a stirring paean to tolerance",
+    "subMetaKeywordLinks": [
+        {
+            "url": "/film/monty-python-s-life-of-brian",
+            "title": "Monty Python's Life of Brian"
+        },
+        { "url": "/film/comedy", "title": "Comedy films" },
+        { "url": "/culture/john-cleese", "title": "John Cleese" },
+        { "url": "/film/terry-gilliam", "title": "Terry Gilliam" },
+        { "url": "/tone/reviews", "title": "reviews" }
+    ],
+    "starRating": 5,
+    "headline": "Monty Python's Life of Brian review – an unholy work of satirical genius",
+    "contentType": "Article",
+    "guardianBaseURL": "https://www.theguardian.com",
+    "nav": {
+        "currentUrl": "/film",
+        "pillars": [
+            {
+                "title": "News",
+                "url": "/",
+                "longTitle": "Headlines",
+                "iconName": "home",
+                "children": [
+                    {
+                        "title": "UK",
+                        "url": "/uk-news",
+                        "longTitle": "UK news",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "UK politics",
+                                "url": "/politics",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Education",
+                                "url": "/education",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [
+                                    {
+                                        "title": "Schools",
+                                        "url": "/education/schools",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    },
+                                    {
+                                        "title": "Teachers",
+                                        "url": "/teacher-network",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    },
+                                    {
+                                        "title": "Universities",
+                                        "url": "/education/universities",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    },
+                                    {
+                                        "title": "Students",
+                                        "url": "/education/students",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    }
+                                ],
+                                "classList": []
+                            },
+                            {
+                                "title": "Media",
+                                "url": "/media",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Society",
+                                "url": "/society",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Law",
+                                "url": "/law",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Scotland",
+                                "url": "/uk/scotland",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Wales",
+                                "url": "/uk/wales",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Northern Ireland",
+                                "url": "/uk/northernireland",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "World",
+                        "url": "/world",
+                        "longTitle": "World news",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "Europe",
+                                "url": "/world/europe-news",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "US",
+                                "url": "/us-news",
+                                "longTitle": "US news",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Americas",
+                                "url": "/world/americas",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Asia",
+                                "url": "/world/asia",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Australia",
+                                "url": "/australia-news",
+                                "longTitle": "Australia news",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Middle East",
+                                "url": "/world/middleeast",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Africa",
+                                "url": "/world/africa",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Inequality",
+                                "url": "/inequality",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Cities",
+                                "url": "/cities",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Global development",
+                                "url": "/global-development",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "Business",
+                        "url": "/business",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "Economics",
+                                "url": "/business/economics",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Banking",
+                                "url": "/business/banking",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Money",
+                                "url": "/money",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [
+                                    {
+                                        "title": "Property",
+                                        "url": "/money/property",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    },
+                                    {
+                                        "title": "Pensions",
+                                        "url": "/money/pensions",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    },
+                                    {
+                                        "title": "Savings",
+                                        "url": "/money/savings",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    },
+                                    {
+                                        "title": "Borrowing",
+                                        "url": "/money/debt",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    },
+                                    {
+                                        "title": "Careers",
+                                        "url": "/money/work-and-careers",
+                                        "longTitle": "",
+                                        "iconName": "",
+                                        "children": [],
+                                        "classList": []
+                                    }
+                                ],
+                                "classList": []
+                            },
+                            {
+                                "title": "Markets",
+                                "url": "/business/stock-markets",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Project Syndicate",
+                                "url": "/business/series/project-syndicate-economists",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "B2B",
+                                "url": "/business-to-business",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "Football",
+                        "url": "/football",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "Live scores",
+                                "url": "/football/live",
+                                "longTitle": "football/live",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Tables",
+                                "url": "/football/tables",
+                                "longTitle": "football/tables",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Fixtures",
+                                "url": "/football/fixtures",
+                                "longTitle": "football/fixtures",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Results",
+                                "url": "/football/results",
+                                "longTitle": "football/results",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Competitions",
+                                "url": "/football/competitions",
+                                "longTitle": "football/competitions",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Clubs",
+                                "url": "/football/teams",
+                                "longTitle": "football/teams",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "Environment",
+                        "url": "/environment",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "Climate change",
+                                "url": "/environment/climate-change",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Wildlife",
+                                "url": "/environment/wildlife",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Energy",
+                                "url": "/environment/energy",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Pollution",
+                                "url": "/environment/pollution",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "UK politics",
+                        "url": "/politics",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Education",
+                        "url": "/education",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "Schools",
+                                "url": "/education/schools",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Teachers",
+                                "url": "/teacher-network",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Universities",
+                                "url": "/education/universities",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Students",
+                                "url": "/education/students",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "Society",
+                        "url": "/society",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Science",
+                        "url": "/science",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Tech",
+                        "url": "/technology",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Global development",
+                        "url": "/global-development",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Cities",
+                        "url": "/cities",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Obituaries",
+                        "url": "/tone/obituaries",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            },
+            {
+                "title": "Opinion",
+                "url": "/commentisfree",
+                "longTitle": "Opinion home",
+                "iconName": "home",
+                "children": [
+                    {
+                        "title": "The Guardian view",
+                        "url": "/profile/editorial",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Columnists",
+                        "url": "/index/contributors",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Cartoons",
+                        "url": "/cartoons/archive",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Opinion videos",
+                        "url": "/type/video+tone/comment",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Letters",
+                        "url": "/tone/letters",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            },
+            {
+                "title": "Sport",
+                "url": "/sport",
+                "longTitle": "Sport home",
+                "iconName": "home",
+                "children": [
+                    {
+                        "title": "Football",
+                        "url": "/football",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "Live scores",
+                                "url": "/football/live",
+                                "longTitle": "football/live",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Tables",
+                                "url": "/football/tables",
+                                "longTitle": "football/tables",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Fixtures",
+                                "url": "/football/fixtures",
+                                "longTitle": "football/fixtures",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Results",
+                                "url": "/football/results",
+                                "longTitle": "football/results",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Competitions",
+                                "url": "/football/competitions",
+                                "longTitle": "football/competitions",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Clubs",
+                                "url": "/football/teams",
+                                "longTitle": "football/teams",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "Cricket",
+                        "url": "/sport/cricket",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Rugby union",
+                        "url": "/sport/rugby-union",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Tennis",
+                        "url": "/sport/tennis",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Cycling",
+                        "url": "/sport/cycling",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "F1",
+                        "url": "/sport/formulaone",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Golf",
+                        "url": "/sport/golf",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Boxing",
+                        "url": "/sport/boxing",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Rugby league",
+                        "url": "/sport/rugbyleague",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Racing",
+                        "url": "/sport/horse-racing",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "US sports",
+                        "url": "/sport/us-sport",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            },
+            {
+                "title": "Culture",
+                "url": "/culture",
+                "longTitle": "Culture home",
+                "iconName": "home",
+                "children": [
+                    {
+                        "title": "Film",
+                        "url": "/film",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Music",
+                        "url": "/music",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "TV & radio",
+                        "url": "/tv-and-radio",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Books",
+                        "url": "/books",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Art & design",
+                        "url": "/artanddesign",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Stage",
+                        "url": "/stage",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Games",
+                        "url": "/games",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Classical",
+                        "url": "/music/classicalmusicandopera",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            },
+            {
+                "title": "Lifestyle",
+                "url": "/lifeandstyle",
+                "longTitle": "Lifestyle home",
+                "iconName": "home",
+                "children": [
+                    {
+                        "title": "Fashion",
+                        "url": "/fashion",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Food",
+                        "url": "/food",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Recipes",
+                        "url": "/tone/recipes",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Travel",
+                        "url": "/travel",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "UK",
+                                "url": "/travel/uk",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Europe",
+                                "url": "/travel/europe",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "US",
+                                "url": "/travel/usa",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "Health & fitness",
+                        "url": "/lifeandstyle/health-and-wellbeing",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Women",
+                        "url": "/lifeandstyle/women",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Men",
+                        "url": "/lifeandstyle/men",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Love & sex",
+                        "url": "/lifeandstyle/love-and-sex",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Beauty",
+                        "url": "/fashion/beauty",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Home & garden",
+                        "url": "/lifeandstyle/home-and-garden",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Money",
+                        "url": "/money",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [
+                            {
+                                "title": "Property",
+                                "url": "/money/property",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Pensions",
+                                "url": "/money/pensions",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Savings",
+                                "url": "/money/savings",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Borrowing",
+                                "url": "/money/debt",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            },
+                            {
+                                "title": "Careers",
+                                "url": "/money/work-and-careers",
+                                "longTitle": "",
+                                "iconName": "",
+                                "children": [],
+                                "classList": []
+                            }
+                        ],
+                        "classList": []
+                    },
+                    {
+                        "title": "Cars",
+                        "url": "/technology/motoring",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            }
+        ],
+        "otherLinks": [
+            {
+                "title": "The Guardian app",
+                "url": "https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Video",
+                "url": "/video",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Podcasts",
+                "url": "/podcasts",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Pictures",
+                "url": "/inpictures",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Newsletters",
+                "url": "/email-newsletters",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Today's paper",
+                "url": "/theguardian",
+                "longTitle": "",
+                "iconName": "",
+                "children": [
+                    {
+                        "title": "Obituaries",
+                        "url": "/tone/obituaries",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "G2",
+                        "url": "/theguardian/g2",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Weekend",
+                        "url": "/theguardian/weekend",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "The Guide",
+                        "url": "/theguardian/theguide",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Saturday review",
+                        "url": "/theguardian/guardianreview",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            },
+            {
+                "title": "Inside the Guardian",
+                "url": "https://www.theguardian.com/membership",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "The Observer",
+                "url": "/observer",
+                "longTitle": "",
+                "iconName": "",
+                "children": [
+                    {
+                        "title": "Comment",
+                        "url": "/theobserver/news/comment",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "The New Review",
+                        "url": "/theobserver/new-review",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Observer Magazine",
+                        "url": "/theobserver/magazine",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            },
+            {
+                "title": "Guardian Weekly",
+                "url": "https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Professional networks",
+                "url": "/guardian-professional",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Crosswords",
+                "url": "/crosswords",
+                "longTitle": "",
+                "iconName": "",
+                "children": [
+                    {
+                        "title": "Blog",
+                        "url": "/crosswords/crossword-blog",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Editor",
+                        "url": "/crosswords/series/crossword-editor-update",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Quick",
+                        "url": "/crosswords/series/quick",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Cryptic",
+                        "url": "/crosswords/series/cryptic",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Prize",
+                        "url": "/crosswords/series/prize",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Weekend",
+                        "url": "/crosswords/series/weekend-crossword",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Quiptic",
+                        "url": "/crosswords/series/quiptic",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Genius",
+                        "url": "/crosswords/series/genius",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Speedy",
+                        "url": "/crosswords/series/speedy",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Everyman",
+                        "url": "/crosswords/series/everyman",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    },
+                    {
+                        "title": "Azed",
+                        "url": "/crosswords/series/azed",
+                        "longTitle": "",
+                        "iconName": "",
+                        "children": [],
+                        "classList": []
+                    }
+                ],
+                "classList": []
+            }
+        ],
+        "brandExtensions": [
+            {
+                "title": "Search jobs",
+                "url": "https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Dating",
+                "url": "https://soulmates.theguardian.com?INTCMP=soulmates_uk_web_newheader_dropdown",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Holidays",
+                "url": "https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Live events",
+                "url": "https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Masterclasses",
+                "url": "/guardian-masterclasses",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Digital Archive",
+                "url": "https://theguardian.newspapers.com",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Guardian Print Shop",
+                "url": "/artanddesign/series/gnm-print-sales",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Patrons",
+                "url": "https://patrons.theguardian.com/?INTCMP=header_patrons",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": []
+            },
+            {
+                "title": "Discount Codes",
+                "url": "https://discountcode.theguardian.com",
+                "longTitle": "",
+                "iconName": "",
+                "children": [],
+                "classList": ["js-discount-code-link"]
+            }
+        ],
+        "currentNavLink": {
+            "title": "Film",
+            "url": "/film",
+            "longTitle": "",
+            "iconName": "",
+            "children": [],
+            "classList": []
+        },
+        "currentParent": {
+            "title": "Culture",
+            "url": "/culture",
+            "longTitle": "Culture home",
+            "iconName": "home",
+            "children": [
+                {
+                    "title": "Film",
+                    "url": "/film",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Music",
+                    "url": "/music",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "TV & radio",
+                    "url": "/tv-and-radio",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Books",
+                    "url": "/books",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Art & design",
+                    "url": "/artanddesign",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Stage",
+                    "url": "/stage",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Games",
+                    "url": "/games",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Classical",
+                    "url": "/music/classicalmusicandopera",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                }
+            ],
+            "classList": []
+        },
+        "currentPillar": {
+            "title": "Culture",
+            "url": "/culture",
+            "longTitle": "Culture home",
+            "iconName": "home",
+            "children": [
+                {
+                    "title": "Film",
+                    "url": "/film",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Music",
+                    "url": "/music",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "TV & radio",
+                    "url": "/tv-and-radio",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Books",
+                    "url": "/books",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Art & design",
+                    "url": "/artanddesign",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Stage",
+                    "url": "/stage",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Games",
+                    "url": "/games",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Classical",
+                    "url": "/music/classicalmusicandopera",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                }
+            ],
+            "classList": []
+        },
+        "subNavSections": {
+            "links": [
+                {
+                    "title": "Film",
+                    "url": "/film",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Music",
+                    "url": "/music",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "TV & radio",
+                    "url": "/tv-and-radio",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Books",
+                    "url": "/books",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Art & design",
+                    "url": "/artanddesign",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Stage",
+                    "url": "/stage",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Games",
+                    "url": "/games",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                },
+                {
+                    "title": "Classical",
+                    "url": "/music/classicalmusicandopera",
+                    "longTitle": "",
+                    "iconName": "",
+                    "children": [],
+                    "classList": []
+                }
+            ]
+        },
+        "readerRevenueLinks": {
+            "header": {
+                "contribute": "https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "support": "https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D"
+            },
+            "footer": {
+                "contribute": "https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "support": "https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D"
+            },
+            "sideMenu": {
+                "contribute": "https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "support": "https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D"
+            },
+            "ampHeader": {
+                "contribute": "https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "support": "https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D"
+            },
+            "ampFooter": {
+                "contribute": "https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D",
+                "support": "https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D"
+            }
+        }
+    },
+    "mainMediaElements": [
+        {
+            "role": "inline",
+            "data": {
+                "copyright": "HANDMADE FILMS / PYTHON PICTURES",
+                "alt": "Life of Brian.",
+                "caption": "Idle thoughts … Life of Brian.",
+                "credit": "Photograph: Ronald Grant"
+            },
+            "imageSources": [
+                {
+                    "weighting": "inline",
+                    "srcSet": [
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=620&quality=85&auto=format&fit=max&s=f46420f825dcb9c6876a120cb943c930",
+                            "width": 620
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=605&quality=85&auto=format&fit=max&s=657bf94e7469a5a32cc6a2a2900d9843",
+                            "width": 605
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=445&quality=85&auto=format&fit=max&s=2eca01583f9e37a387eb64be084ce67d",
+                            "width": 445
+                        }
+                    ]
+                },
+                {
+                    "weighting": "thumbnail",
+                    "srcSet": [
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=140&quality=85&auto=format&fit=max&s=811d3c2b031350b069f07667e6cf1dab",
+                            "width": 140
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=120&quality=85&auto=format&fit=max&s=c9db7bdeebc5f47bb7486b58867ca269",
+                            "width": 120
+                        }
+                    ]
+                },
+                {
+                    "weighting": "supporting",
+                    "srcSet": [
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=380&quality=85&auto=format&fit=max&s=a1f7dbd9c659384767829c69f3fb307d",
+                            "width": 380
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=300&quality=85&auto=format&fit=max&s=7b5e7e209abaa370bcdd5f55f7778435",
+                            "width": 300
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=620&quality=85&auto=format&fit=max&s=f46420f825dcb9c6876a120cb943c930",
+                            "width": 620
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=605&quality=85&auto=format&fit=max&s=657bf94e7469a5a32cc6a2a2900d9843",
+                            "width": 605
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=445&quality=85&auto=format&fit=max&s=2eca01583f9e37a387eb64be084ce67d",
+                            "width": 445
+                        }
+                    ]
+                },
+                {
+                    "weighting": "showcase",
+                    "srcSet": [
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=860&quality=85&auto=format&fit=max&s=24e694be93ad96f7292662b2907c5c59",
+                            "width": 860
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=780&quality=85&auto=format&fit=max&s=95873b463946812d8fd534725b83e831",
+                            "width": 780
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=620&quality=85&auto=format&fit=max&s=f46420f825dcb9c6876a120cb943c930",
+                            "width": 620
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=605&quality=85&auto=format&fit=max&s=657bf94e7469a5a32cc6a2a2900d9843",
+                            "width": 605
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=445&quality=85&auto=format&fit=max&s=2eca01583f9e37a387eb64be084ce67d",
+                            "width": 445
+                        }
+                    ]
+                },
+                {
+                    "weighting": "halfwidth",
+                    "srcSet": [
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=620&quality=85&auto=format&fit=max&s=f46420f825dcb9c6876a120cb943c930",
+                            "width": 620
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=605&quality=85&auto=format&fit=max&s=657bf94e7469a5a32cc6a2a2900d9843",
+                            "width": 605
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=445&quality=85&auto=format&fit=max&s=2eca01583f9e37a387eb64be084ce67d",
+                            "width": 445
+                        }
+                    ]
+                },
+                {
+                    "weighting": "immersive",
+                    "srcSet": [
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=620&quality=85&auto=format&fit=max&s=f46420f825dcb9c6876a120cb943c930",
+                            "width": 620
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=605&quality=85&auto=format&fit=max&s=657bf94e7469a5a32cc6a2a2900d9843",
+                            "width": 605
+                        },
+                        {
+                            "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=445&quality=85&auto=format&fit=max&s=2eca01583f9e37a387eb64be084ce67d",
+                            "width": 445
+                        }
+                    ]
+                }
+            ],
+            "_type": "model.dotcomrendering.pageElements.ImageBlockElement",
+            "media": {
+                "allImages": [
+                    {
+                        "index": 0,
+                        "fields": { "height": "84", "width": "140" },
+                        "mediaType": "Image",
+                        "mimeType": "image/jpeg",
+                        "url": "https://media.guim.co.uk/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/140.jpg"
+                    },
+                    {
+                        "index": 1,
+                        "fields": { "height": "300", "width": "500" },
+                        "mediaType": "Image",
+                        "mimeType": "image/jpeg",
+                        "url": "https://media.guim.co.uk/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/500.jpg"
+                    },
+                    {
+                        "index": 2,
+                        "fields": { "height": "600", "width": "1000" },
+                        "mediaType": "Image",
+                        "mimeType": "image/jpeg",
+                        "url": "https://media.guim.co.uk/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/1000.jpg"
+                    },
+                    {
+                        "index": 3,
+                        "fields": { "height": "1200", "width": "2000" },
+                        "mediaType": "Image",
+                        "mimeType": "image/jpeg",
+                        "url": "https://media.guim.co.uk/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/2000.jpg"
+                    },
+                    {
+                        "index": 4,
+                        "fields": { "height": "2419", "width": "4030" },
+                        "mediaType": "Image",
+                        "mimeType": "image/jpeg",
+                        "url": "https://media.guim.co.uk/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/4030.jpg"
+                    },
+                    {
+                        "index": 5,
+                        "fields": {
+                            "isMaster": "true",
+                            "height": "2419",
+                            "width": "4030"
+                        },
+                        "mediaType": "Image",
+                        "mimeType": "image/jpeg",
+                        "url": "https://media.guim.co.uk/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg"
+                    }
+                ]
+            },
+            "displayCredit": true
+        }
+    ],
+    "webPublicationDate": "2019-04-12T09:00:46.000Z",
+    "blocks": [
+        {
+            "id": "5cada2b48f08bc7376aea405",
+            "elements": [
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>Forty years ago, as the newly elected prime minister Margaret Thatcher enjoyed her popularity honeymoon, middle England boiled with rage at reports of the new Monty Python film, about a hapless People’s Front of Judea activist who is mistaken for the son of God. This was a cheeky satire of the life of Jesus. Or a satire of Biblical movie epics, or a satire of organised religion, or a satire of social conformism – these being some of the emollient, diversionary explanations deployed at the time by the film’s supporters to appease the censors and outrage merchants. They didn’t buy it. Rightly so. It’s a satire of the life of Jesus.</p>"
+                },
+                {
+                    "role": "thumbnail",
+                    "prefix": "Related: ",
+                    "_type": "model.dotcomrendering.pageElements.RichLinkBlockElement",
+                    "text": "How George Harrison – and a very naughty boy – saved British cinema",
+                    "url": "https://www.theguardian.com/film/2019/apr/03/george-harrison-beatle-monty-python-life-of-brian-handmade-studios"
+                },
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>The film sparked one of many bad-tempered banning rows of that era, coming after Mary Whitehouse’s successful private prosecution of Gay News over James Kirkup’s poem The Love That Dares to Speak Its Name in 1977 – Python star Graham Chapman was an early supporter of the paper – and before her failed action against Howard Brenton’s play The Romans in Britain at the National Theatre in 1980. And then, nine years after the film’s release, <a href=\"https://www.theguardian.com/books/2009/jan/11/salman-rushdie-satanic-verses\">Salman Rushdie published The Satanic Verses</a> and the Python/blasphemy debaters realised that they had been playing under some very quaint Queensberry rules.</p>"
+                },
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>Monty Python’s Life of Brian still stands up as an amazing achievement, the Pythons’ masterpiece: a 90-minute sketch elevated to an entirely consistent, hugely audacious and ambitious film, shot in Tunisia on sets used for Zeffirelli’s Jesus of Nazareth, <a href=\"https://www.theguardian.com/film/2019/apr/03/george-harrison-beatle-monty-python-life-of-brian-handmade-studios\">with £3</a><a href=\"https://www.theguardian.com/film/2019/apr/03/george-harrison-beatle-monty-python-life-of-brian-handmade-studios\">m of George Harrison’s money provided</a> after EMI Films nervously withdrew its backing. There are tremendously funny set pieces and brilliant visual moments. The point-of-view shot of Brian’s mother as she opens the window to see the ecstatic masses outside her hovel, is superb.</p>"
+                },
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>Part of the Pythonic comedy revolution before this had involved not caring about endings: sketches got interrupted by people declaring it to be silly; <a href=\"https://www.theguardian.com/film/2015/oct/15/monty-python-and-the-holy-grail-review-rerelease\">Monty Python </a><a href=\"https://www.theguardian.com/film/2015/oct/15/monty-python-and-the-holy-grail-review-rerelease\">and </a><a href=\"https://www.theguardian.com/film/2015/oct/15/monty-python-and-the-holy-grail-review-rerelease\">the Holy Grail</a> (1975) had ended in the same anarchic way. Life of Brian was different. It had a truly spectacular and conventionally satisfying ending: the crucifixion scene, reimagined as a musical comedy finale staged in breathtakingly bad taste, with Eric Idle’s jaunty song Always Look on the Bright Side of Life composed in his quasi-Sandy Wilson style. It is preceded by a clever and underappreciated riff on the “I’m Spartacus” moment, as every one of the crucified thieves claim to be Brian – just pardoned by Pilate – to get themselves off the cross.</p>"
+                },
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>Other moments have rightly become the stuff of comedy legend. Brian’s mum saying “He’s not the messiah; he’s a very naughty boy” and “There’s a mess here, but no messiah” ­– lines that have become loved because they sound like things thought up by ordinary people, as opposed to comedy writers.</p>"
+                },
+                {
+                    "role": "inline",
+                    "data": {
+                        "copyright": "HANDMADE FILM / PYTHON PICTURES",
+                        "alt": "Life of Brian.",
+                        "caption": "Roman ridicule … Life of Brian.",
+                        "credit": "Photograph: Ronald Grant"
+                    },
+                    "imageSources": [
+                        {
+                            "weighting": "inline",
+                            "srcSet": [
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=620&quality=85&auto=format&fit=max&s=4993056cd9d7a97577e7b8342241bf5d",
+                                    "width": 620
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=605&quality=85&auto=format&fit=max&s=b7ae436e856564a057ebcff2338c967e",
+                                    "width": 605
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=445&quality=85&auto=format&fit=max&s=c19210b1e58d9760bd66399033e15051",
+                                    "width": 445
+                                }
+                            ]
+                        },
+                        {
+                            "weighting": "thumbnail",
+                            "srcSet": [
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=140&quality=85&auto=format&fit=max&s=5b80b4c3ca3138a2845e18f8502e9043",
+                                    "width": 140
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=120&quality=85&auto=format&fit=max&s=59bb86c47878ce95bf6e19bfdd52a41d",
+                                    "width": 120
+                                }
+                            ]
+                        },
+                        {
+                            "weighting": "supporting",
+                            "srcSet": [
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=380&quality=85&auto=format&fit=max&s=d82d7360e356cf3c0be43c4061b438d9",
+                                    "width": 380
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=300&quality=85&auto=format&fit=max&s=e433e1560deaca817d892e130628d9ac",
+                                    "width": 300
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=620&quality=85&auto=format&fit=max&s=4993056cd9d7a97577e7b8342241bf5d",
+                                    "width": 620
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=605&quality=85&auto=format&fit=max&s=b7ae436e856564a057ebcff2338c967e",
+                                    "width": 605
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=445&quality=85&auto=format&fit=max&s=c19210b1e58d9760bd66399033e15051",
+                                    "width": 445
+                                }
+                            ]
+                        },
+                        {
+                            "weighting": "showcase",
+                            "srcSet": [
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=860&quality=85&auto=format&fit=max&s=584c8008ae3a54cf6191f8301dc3e483",
+                                    "width": 860
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=780&quality=85&auto=format&fit=max&s=fecc5d916831a5d45b3d1dbc58356e65",
+                                    "width": 780
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=620&quality=85&auto=format&fit=max&s=4993056cd9d7a97577e7b8342241bf5d",
+                                    "width": 620
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=605&quality=85&auto=format&fit=max&s=b7ae436e856564a057ebcff2338c967e",
+                                    "width": 605
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=445&quality=85&auto=format&fit=max&s=c19210b1e58d9760bd66399033e15051",
+                                    "width": 445
+                                }
+                            ]
+                        },
+                        {
+                            "weighting": "halfwidth",
+                            "srcSet": [
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=620&quality=85&auto=format&fit=max&s=4993056cd9d7a97577e7b8342241bf5d",
+                                    "width": 620
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=605&quality=85&auto=format&fit=max&s=b7ae436e856564a057ebcff2338c967e",
+                                    "width": 605
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=445&quality=85&auto=format&fit=max&s=c19210b1e58d9760bd66399033e15051",
+                                    "width": 445
+                                }
+                            ]
+                        },
+                        {
+                            "weighting": "immersive",
+                            "srcSet": [
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=620&quality=85&auto=format&fit=max&s=4993056cd9d7a97577e7b8342241bf5d",
+                                    "width": 620
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=605&quality=85&auto=format&fit=max&s=b7ae436e856564a057ebcff2338c967e",
+                                    "width": 605
+                                },
+                                {
+                                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=445&quality=85&auto=format&fit=max&s=c19210b1e58d9760bd66399033e15051",
+                                    "width": 445
+                                }
+                            ]
+                        }
+                    ],
+                    "_type": "model.dotcomrendering.pageElements.ImageBlockElement",
+                    "media": {
+                        "allImages": [
+                            {
+                                "index": 0,
+                                "fields": { "height": "1346", "width": "2244" },
+                                "mediaType": "Image",
+                                "mimeType": "image/jpeg",
+                                "url": "https://media.guim.co.uk/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/2244.jpg"
+                            },
+                            {
+                                "index": 1,
+                                "fields": {
+                                    "isMaster": "true",
+                                    "height": "1346",
+                                    "width": "2244"
+                                },
+                                "mediaType": "Image",
+                                "mimeType": "image/jpeg",
+                                "url": "https://media.guim.co.uk/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg"
+                            },
+                            {
+                                "index": 2,
+                                "fields": { "height": "1200", "width": "2000" },
+                                "mediaType": "Image",
+                                "mimeType": "image/jpeg",
+                                "url": "https://media.guim.co.uk/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/2000.jpg"
+                            },
+                            {
+                                "index": 3,
+                                "fields": { "height": "600", "width": "1000" },
+                                "mediaType": "Image",
+                                "mimeType": "image/jpeg",
+                                "url": "https://media.guim.co.uk/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/1000.jpg"
+                            },
+                            {
+                                "index": 4,
+                                "fields": { "height": "300", "width": "500" },
+                                "mediaType": "Image",
+                                "mimeType": "image/jpeg",
+                                "url": "https://media.guim.co.uk/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/500.jpg"
+                            },
+                            {
+                                "index": 5,
+                                "fields": { "height": "84", "width": "140" },
+                                "mediaType": "Image",
+                                "mimeType": "image/jpeg",
+                                "url": "https://media.guim.co.uk/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/140.jpg"
+                            }
+                        ]
+                    },
+                    "displayCredit": true
+                },
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>Then there is the stoning scene, something with a queasy ultra-modern relevance in view of Brunei’s murderous homophobia. The argument about how Brian should translate Romans Go Home into Latin (“Romani Ite Domum” not “Romanes Eunt Domus”) is hilariously surreal, as are the factional-revolutionary disputes between the People’s Front of Judea, the Popular Front of Judea and the Judean People’s Front and the now legendary argument about what Rome has done for its colonised peoples that turns into a bleak commentary on our love of authority: “If we didn’t have crucifixion, this country’d be in a right mess.”</p>"
+                },
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>Could it be done now? In 2019, the nature of censorship and self-censorship has changed. The speech-impediment gags would be a tricky sell, some of the language that Brian angrily uses to come out as Jewish feels misjudged and the material about the transgender character might get the Pythons into a whole new world of trouble.</p>"
+                },
+                {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
+                    "html": "<p>But what a triumph this film was for Chapman, who gave a convincing, touching performance as the bewildered everyman who decides to make a stand, and in his battle with the evil empire makes a Luke Skywalker-style discovery about his lineage. Life of Brian is an unexpectedly earnest, sweet-natured hymn to the idea of tolerance.</p>"
+                }
+            ],
+            "createdOn": 1554883252000,
+            "createdOnDisplay": "09:00 BST",
+            "lastUpdated": 1554995790000,
+            "lastUpdatedDisplay": "16:16 BST",
+            "firstPublished": 1554883253000,
+            "firstPublishedDisplay": "09:00 BST"
+        }
+    ],
+    "author": { "byline": "Peter Bradshaw", "twitterHandle": "PeterBradshaw1" },
+    "designType": "Review",
+    "linkedData": [
+        {
+            "@type": "NewsArticle",
+            "@context": "https://schema.org",
+            "@id": "https://amp.theguardian.comfilm/2019/apr/12/monty-pythons-life-of-brian-review",
+            "publisher": {
+                "@type": "Organization",
+                "@context": "https://schema.org",
+                "@id": "https://www.theguardian.com#publisher",
+                "name": "The Guardian",
+                "url": "https://www.theguardian.com/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+                    "width": 190,
+                    "height": 60
+                },
+                "sameAs": [
+                    "https://www.facebook.com/theguardian",
+                    "https://twitter.com/guardian",
+                    "https://www.youtube.com/user/TheGuardian"
+                ]
+            },
+            "isAccessibleForFree": true,
+            "isPartOf": {
+                "@type": ["CreativeWork", "Product"],
+                "name": "The Guardian",
+                "productID": "theguardian.com:basic"
+            },
+            "image": [
+                "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTUucG5n&enable=upscale&s=c674f875cb1f178dc77defe676eae169",
+                "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=abe498aa84cf8c35cd72dfebf04234ab",
+                "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=fba1d7753ecb4893ed8a6b29b026cf89",
+                "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1200&quality=85&auto=format&fit=max&s=091051395b31d34cfcb82e16dc7d50f4"
+            ],
+            "author": [
+                {
+                    "@type": "Person",
+                    "name": "Peter Bradshaw",
+                    "sameAs": "https://www.theguardian.com/profile/peterbradshaw"
+                }
+            ],
+            "datePublished": "2019-04-12T09:00:46.000Z",
+            "headline": "Monty Python's Life of Brian review – an unholy work of satirical genius",
+            "dateModified": "2019-04-12T09:12:31.000Z",
+            "mainEntityOfPage": "https://www.theguardian.com/film/2019/apr/12/monty-pythons-life-of-brian-review"
+        },
+        {
+            "@type": "WebPage",
+            "@context": "https://schema.org",
+            "@id": "https://www.theguardian.com/film/2019/apr/12/monty-pythons-life-of-brian-review",
+            "potentialAction": {
+                "@type": "ViewAction",
+                "target": "android-app://com.guardian/https/www.theguardian.com/film/2019/apr/12/monty-pythons-life-of-brian-review"
+            }
+        }
+    ],
+    "webPublicationDateDisplay": "Fri 12 Apr 2019 10.00 BST",
+    "editionId": "UK",
+    "shouldHideAds": false,
+    "standfirst": "<p>Despite its absurdity and button-pushing bad taste, this mock epic stands up four decades on as a stirring paean to tolerance</p>",
+    "webTitle": "Monty Python's Life of Brian review – an unholy work of satirical genius",
+    "openGraphData": {
+        "og:url": "http://www.theguardian.com/film/2019/apr/12/monty-pythons-life-of-brian-review",
+        "article:author": "https://www.theguardian.com/profile/peterbradshaw",
+        "og:image:height": "720",
+        "og:description": "Despite its obscenity and button-pushing humour, this mock epic stands up four decades on as a stirring paean to tolerance",
+        "og:image:width": "1200",
+        "og:image": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTUucG5n&enable=upscale&s=c674f875cb1f178dc77defe676eae169",
+        "al:ios:url": "gnmguardian://film/2019/apr/12/monty-pythons-life-of-brian-review?contenttype=Article&source=applinks",
+        "article:publisher": "https://www.facebook.com/theguardian",
+        "og:type": "article",
+        "al:ios:app_store_id": "409128287",
+        "article:section": "Film",
+        "article:published_time": "2019-04-12T09:00:46.000Z",
+        "og:title": "Monty Python's Life of Brian review – an unholy work of satirical genius",
+        "fb:app_id": "180444840287",
+        "article:tag": "Film,Monty Python's Life of Brian,Culture,Comedy films,John Cleese,Terry Gilliam",
+        "al:ios:app_name": "The Guardian",
+        "og:site_name": "the Guardian",
+        "article:modified_time": "2019-04-12T09:12:31.000Z"
+    },
+    "sectionUrl": "film/film",
+    "pageId": "film/2019/apr/12/monty-pythons-life-of-brian-review",
+    "version": 3,
+    "tags": [
+        { "id": "film/film", "type": "Keyword", "title": "Film" },
+        {
+            "id": "film/monty-python-s-life-of-brian",
+            "type": "Keyword",
+            "title": "Monty Python's Life of Brian"
+        },
+        { "id": "culture/culture", "type": "Keyword", "title": "Culture" },
+        { "id": "film/comedy", "type": "Keyword", "title": "Comedy films" },
+        {
+            "id": "culture/john-cleese",
+            "type": "Keyword",
+            "title": "John Cleese"
+        },
+        {
+            "id": "film/terry-gilliam",
+            "type": "Keyword",
+            "title": "Terry Gilliam"
+        },
+        { "id": "type/article", "type": "Type", "title": "Article" },
+        { "id": "tone/reviews", "type": "Tone", "title": "Reviews" },
+        {
+            "id": "profile/peterbradshaw",
+            "type": "Contributor",
+            "title": "Peter Bradshaw",
+            "twitterHandle": "PeterBradshaw1",
+            "bylineImageUrl": "https://i.guim.co.uk/img/uploads/2018/01/10/Peter_Bradshaw,_L.png?width=300&quality=85&auto=format&fit=max&s=6d421d09a037265190e3742912ce98ca"
+        },
+        {
+            "id": "tracking/commissioningdesk/uk-culture",
+            "type": "Tracking",
+            "title": "UK Culture"
+        }
+    ],
+    "pillar": "culture",
+    "isCommentable": true,
+    "webURL": "https://www.theguardian.com/film/2019/apr/12/monty-pythons-life-of-brian-review",
+    "keyEvents": [],
+    "showBottomSocialButtons": true,
+    "isImmersive": false,
+    "config": {
+        "avatarApiUrl": "https://avatar.theguardian.com",
+        "references": [
+            {
+                "rich-link": "https://www.theguardian.com/info/2016/feb/12/film-today-email-sign-up"
+            }
+        ],
+        "isProd": true,
+        "shortUrlId": "/p/b7ng4",
+        "switches": {
+            "abContributionsBannerArticlesViewed": true,
+            "prebidTrustx": true,
+            "scAdFreeBanner": true,
+            "abCommercialXaxisAdapter": true,
+            "enableSentryReporting": true,
+            "lazyLoadContainers": true,
+            "adFreeStrictExpiryEnforcement": false,
+            "abCommercialAppnexusUsAdapter": true,
+            "remarketing": true,
+            "commercialYoutubePfpAdTargeting": true,
+            "registerWithPhone": false,
+            "subscriptionBanner": true,
+            "lotame": true,
+            "targeting": true,
+            "extendedMostPopularFronts": true,
+            "emailInlineInFooter": true,
+            "prebidPangaea": true,
+            "adomik": true,
+            "facebookTrackingPixel": true,
+            "serviceWorkerEnabled": false,
+            "iasAdTargeting": true,
+            "extendedMostPopular": true,
+            "prebidAnalytics": true,
+            "abContributionsEpicArticlesViewedRound3": false,
+            "imrWorldwide": true,
+            "abCommercialPangaeaAdapter": true,
+            "twitterUwt": true,
+            "membershipEngagementBannerBlockUs": false,
+            "abContributionsBannerUsEoyReaderAppreciationNonsupportersCasuals": false,
+            "prebidAppnexusInvcode": true,
+            "abCommercialCmpUiNoOverlay": false,
+            "prebidAppnexus": true,
+            "enableDiscussionSwitch": true,
+            "enableConsentManagementService": true,
+            "prebidXaxis": true,
+            "oldTlsSupportDeprecation": true,
+            "abContributionsEpicAskFourEarning": true,
+            "abContributionsBannerUsEoyImpeachmentRegulars": true,
+            "interactiveFullHeaderSwitch": false,
+            "discussionAllPageSize": true,
+            "prebidUserSync": true,
+            "audioOnwardJourneySwitch": true,
+            "abSignInGateSecundus": false,
+            "mobileStickyPrebid": true,
+            "breakingNews": true,
+            "externalVideoEmbeds": true,
+            "simpleReach": true,
+            "abCommercialOutbrainTesting": true,
+            "carrotTrafficDriver": true,
+            "geoMostPopular": true,
+            "weAreHiring": true,
+            "relatedContent": true,
+            "thirdPartyEmbedTracking": true,
+            "prebidOzone": true,
+            "abContributionsBannerUsEoyImpeachmentCasuals": true,
+            "abContributionsEpicCountryName": false,
+            "commercialPageViewAnalytics": true,
+            "prebidAdYouLike": true,
+            "membershipEngagementBanner": true,
+            "mostViewedFronts": true,
+            "ampPrebid": true,
+            "googleSearch": true,
+            "abContributionsBannerUsEoyReaderAppreciationSupportersCasuals": false,
+            "membershipEngagementBannerBlockAu": false,
+            "outbrain": true,
+            "commercial": true,
+            "plistaForOutbrainAu": true,
+            "prebidSonobi": true,
+            "abCommercialCmpUiIab": true,
+            "membershipEngagementBannerBlockUk": false,
+            "idProfileNavigation": true,
+            "confiantAdVerification": true,
+            "discussionAllowAnonymousRecommendsSwitch": false,
+            "scrollDepth": true,
+            "permutive": true,
+            "krux": true,
+            "abContributionsBannerUsEoyReaderAppreciationSupporters": false,
+            "webFonts": true,
+            "prebidImproveDigital": true,
+            "abCommercialPrebidSafeframe": true,
+            "ophan": true,
+            "abAcquisitionsEpicAlwaysAskIfTagged": true,
+            "crosswordSvgThumbnails": true,
+            "prebidTriplelift": true,
+            "weather": true,
+            "abContributionsBannerArticlesViewedUkElection": true,
+            "commercialOutbrainNewids": true,
+            "abContributionsBannerUsEoyReaderAppreciationNonsupporters": false,
+            "hostedVideoAutoplay": true,
+            "engagementBannerTestsFromGoogleDocs": true,
+            "prebidS2sozone": false,
+            "abAdblockAsk": true,
+            "prebidPubmatic": true,
+            "useConfiguredEpicTests": true,
+            "serverShareCounts": true,
+            "autoRefresh": true,
+            "enhanceTweets": true,
+            "prebidIndexExchange": true,
+            "prebidOpenx": true,
+            "idCookieRefresh": true,
+            "sharingComments": true,
+            "discussionPageSize": true,
+            "smartAppBanner": false,
+            "dotcomRenderingAdvertisements": true,
+            "prebidPangaeaUsAu": true,
+            "boostGaUserTimingFidelity": false,
+            "historyTags": true,
+            "mobileStickyLeaderboard": true,
+            "videojs": true,
+            "surveys": true,
+            "inizio": true,
+            "abCommercialConsentOptionsButton": false
+        },
+        "hasYouTubeAtom": false,
+        "inBodyInternalLinkCount": 7,
+        "keywordIds": [],
+        "blogIds": "",
+        "sharedAdTargeting": {
+            "ct": "article",
+            "co": ["peterbradshaw"],
+            "url": "/film/2019/apr/12/monty-pythons-life-of-brian-review",
+            "su": ["0"],
+            "edition": "uk",
+            "tn": ["reviews"],
+            "p": "ng",
+            "k": [
+                "john-cleese",
+                "culture",
+                "comedy",
+                "terry-gilliam",
+                "monty-python-s-life-of-brian",
+                "film"
+            ],
+            "sh": "https://gu.com/p/b7ng4"
+        },
+        "beaconUrl": "//phar.gu-web.net",
+        "campaigns": [],
+        "calloutsUrl": "https://callouts.code.dev-guardianapis.com/formstack-campaign/submit",
+        "requiresMembershipAccess": false,
+        "hasMultipleVideosInPage": false,
+        "onwardWebSocket": "ws://api.nextgen.guardianapps.co.uk/recently-published",
+        "pbIndexSites": [
+            { "bp": "D", "id": 208260 },
+            { "bp": "M", "id": 213531 },
+            { "bp": "T", "id": 215466 }
+        ],
+        "toneIds": "tone/reviews",
+        "dcrSentryDsn": "https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847",
+        "idWebAppUrl": "https://oauth.theguardian.com",
+        "discussionApiUrl": "https://discussion.theguardian.com/discussion-api",
+        "sentryPublicApiKey": "344003a8d11c41d8800fbad8383fdc50",
+        "omnitureAccount": "guardiangu-network",
+        "contributorBio": "",
+        "pageCode": "6000835",
+        "pillar": "Arts",
+        "commercialBundleUrl": "https://assets.guim.co.uk/javascripts/c793a6a9032964004151/graun.dotcom-rendering-commercial.js",
+        "discussionApiClientHeader": "nextgen",
+        "membershipUrl": "https://membership.theguardian.com",
+        "cardStyle": "review",
+        "shouldHideReaderRevenue": false,
+        "sentryHost": "app.getsentry.com/35463",
+        "shouldHideAdverts": false,
+        "membershipAccess": "",
+        "isPreview": false,
+        "googletagJsUrl": "//www.googletagservices.com/tag/js/gpt.js",
+        "supportUrl": "https://support.theguardian.com",
+        "hasShowcaseMainElement": false,
+        "isColumn": false,
+        "isPaidContent": false,
+        "sectionName": "Film",
+        "mobileAppsAdUnitRoot": "beta-guardian-app",
+        "dfpAdUnitRoot": "theguardian.com",
+        "headline": "Monty Python's Life of Brian review – an unholy work of satirical genius",
+        "commentable": true,
+        "idApiUrl": "https://idapi.theguardian.com",
+        "showRelatedContent": true,
+        "commissioningDesks": "uk-culture",
+        "inBodyExternalLinkCount": 0,
+        "adUnit": "/59666047/theguardian.com/film/article/ng",
+        "stripePublicToken": "pk_live_2O6zPMHXNs2AGea4bAmq5R7Z",
+        "videoDuration": null,
+        "stage": "PROD",
+        "idOAuthUrl": "https://oauth.theguardian.com",
+        "isSensitive": false,
+        "isDev": false,
+        "thirdPartyAppsAccount": "guardiangu-thirdpartyapps",
+        "richLink": "/info/2016/feb/12/film-today-email-sign-up",
+        "avatarImagesUrl": "https://avatar.guim.co.uk",
+        "trackingNames": "UK Culture",
+        "fbAppId": "180444840287",
+        "externalEmbedHost": "https://embed.theguardian.com",
+        "ajaxUrl": "https://api.nextgen.guardianapps.co.uk",
+        "keywords": "Film,Monty Python's Life of Brian,Culture,Comedy films,John Cleese,Terry Gilliam",
+        "revisionNumber": "DEV",
+        "blogs": "",
+        "section": "film",
+        "hasInlineMerchandise": false,
+        "locationapiurl": "/weatherapi/locations?query=",
+        "buildNumber": "32612",
+        "isPhotoEssay": false,
+        "userAttributesApiUrl": "https://members-data-api.theguardian.com/user-attributes",
+        "isLive": false,
+        "publication": "theguardian.com",
+        "host": "https://www.theguardian.com",
+        "contentType": "Article",
+        "facebookIaAdUnitRoot": "facebook-instant-articles",
+        "ophanEmbedJsUrl": "//j.ophan.co.uk/ophan.embed",
+        "idUrl": "https://profile.theguardian.com",
+        "thumbnail": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/500.jpg?quality=85&auto=format&fit=max&s=ba0c5cf2ece7df127cd95f40777b91f1",
+        "isFront": false,
+        "wordCount": 697,
+        "author": "Peter Bradshaw",
+        "dfpAccountId": "59666047",
+        "nonKeywordTagIds": "type/article,tone/reviews,profile/peterbradshaw,tracking/commissioningdesk/uk-culture",
+        "pageId": "film/2019/apr/12/monty-pythons-life-of-brian-review",
+        "forecastsapiurl": "/weatherapi/forecast",
+        "assetsPath": "https://assets.guim.co.uk/",
+        "lightboxImages": {
+            "id": "film/2019/apr/12/monty-pythons-life-of-brian-review",
+            "headline": "Monty Python's Life of Brian review – an unholy work of satirical genius",
+            "shouldHideAdverts": false,
+            "standfirst": "<p>Despite its absurdity and button-pushing bad taste, this mock epic stands up four decades on as a stirring paean to tolerance</p>",
+            "images": [
+                {
+                    "caption": "Idle thoughts … Life of Brian.",
+                    "credit": "Photograph: Ronald Grant",
+                    "displayCredit": true,
+                    "src": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=700&quality=85&auto=format&fit=max&s=d192e74e9ecd4e046a258200f6b81284",
+                    "srcsets": "https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1920&quality=85&auto=format&fit=max&s=2e897c54cb1359df9025a4e7a1b56ec6 1920w, https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1225&quality=85&auto=format&fit=max&s=2ef88c7fea36a94245eab1d92fcac961 1225w, https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=1065&quality=85&auto=format&fit=max&s=4d068c0309945d179664954f64122397 1065w, https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=965&quality=85&auto=format&fit=max&s=386ac225d46461278d9c1aa99d699e24 965w, https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=725&quality=85&auto=format&fit=max&s=9343d37ce497acebe1934da25e52fd30 725w, https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=645&quality=85&auto=format&fit=max&s=e95925ee7fa1686565160eac10796a28 645w, https://i.guim.co.uk/img/media/5ef7d4e1699fc19817f61dba06bb069b4c68b9c9/0_36_4030_2419/master/4030.jpg?width=465&quality=85&auto=format&fit=max&s=d636b6f01f0e82b31e4de6648abb7544 465w",
+                    "sizes": "(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px",
+                    "ratio": 1.6659776767259198,
+                    "role": "None",
+                    "parentContentId": "film/2019/apr/12/monty-pythons-life-of-brian-review",
+                    "id": "film/2019/apr/12/monty-pythons-life-of-brian-review"
+                },
+                {
+                    "caption": "Roman ridicule … Life of Brian.",
+                    "credit": "Photograph: Ronald Grant",
+                    "displayCredit": true,
+                    "src": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=700&quality=85&auto=format&fit=max&s=d8df5487ca3ad8c054b65777f96b9f88",
+                    "srcsets": "https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=1920&quality=85&auto=format&fit=max&s=617cbb7cb07f24bc9bb6986bcf1dc30b 1920w, https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=1225&quality=85&auto=format&fit=max&s=67927fee7a2ff150b5a357a189070fbf 1225w, https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=1065&quality=85&auto=format&fit=max&s=ec4aa3bc63caa92c1408959ae4e417ed 1065w, https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=965&quality=85&auto=format&fit=max&s=6a2a6c85a08f015d7b5a04d289ea22af 965w, https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=725&quality=85&auto=format&fit=max&s=fd79bbd68ba9863bfd489239c9c6547a 725w, https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=645&quality=85&auto=format&fit=max&s=715f171c38af498fa87eebf66e77336b 645w, https://i.guim.co.uk/img/media/d376d880629e4a9dfe6872580c3a419c4c373229/0_43_2244_1346/master/2244.jpg?width=465&quality=85&auto=format&fit=max&s=d7a062125d35816be48d121f4830ba37 465w",
+                    "sizes": "(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px",
+                    "ratio": 1.6671619613670134,
+                    "role": "None",
+                    "parentContentId": "film/2019/apr/12/monty-pythons-life-of-brian-review",
+                    "id": "film/2019/apr/12/monty-pythons-life-of-brian-review"
+                }
+            ]
+        },
+        "isImmersive": false,
+        "dfpHost": "pubads.g.doubleclick.net",
+        "googletagUrl": "//www.googletagservices.com/tag/js/gpt.js",
+        "mmaUrl": "https://manage.theguardian.com",
+        "hbImpl": "prebid",
+        "abTests": { "oldTlsSupportDeprecationControl": "control" },
+        "shortUrl": "https://gu.com/p/b7ng4",
+        "isContent": true,
+        "contentId": "film/2019/apr/12/monty-pythons-life-of-brian-review",
+        "edition": "UK",
+        "discussionFrontendUrl": "https://assets.guim.co.uk/discussion/discussion-frontend.preact.iife.8bdbd9194e.js",
+        "ophanJsUrl": "//j.ophan.co.uk/ophan.ng",
+        "productionOffice": "Uk",
+        "dfpNonRefreshableLineItemIds": [
+            66664167,
+            66868167,
+            66972327,
+            68842407,
+            69144807,
+            69710127,
+            70516407,
+            70931847,
+            71342607,
+            72502287,
+            72503607,
+            73773207,
+            73829127,
+            74480367,
+            74645967,
+            74823567,
+            74824167,
+            75586767,
+            75588207,
+            76352007,
+            76437927,
+            76443087,
+            76443567,
+            76603287,
+            77324247,
+            77504847,
+            77546367,
+            77561007,
+            77590287,
+            77622207,
+            77747367,
+            78316047,
+            78455967,
+            78470967,
+            78507807,
+            78713607,
+            79009167,
+            79094487,
+            80502447,
+            80568087,
+            80568207,
+            80568327,
+            80568447,
+            80569047,
+            81002967,
+            82211367,
+            82339767,
+            82879287,
+            82881807,
+            83178927,
+            85253487,
+            85558287,
+            85961247,
+            86814567,
+            87004887,
+            87191607,
+            87726207,
+            87852807,
+            87878367,
+            88153527,
+            88333647,
+            88420407,
+            88526727,
+            88621527,
+            88861167,
+            88903647,
+            89035647,
+            89035887,
+            89036607,
+            89084607,
+            89084967,
+            89141967,
+            89356167,
+            89743047,
+            89793087,
+            90159687,
+            90323007,
+            90359967,
+            90935367,
+            91095807,
+            91118247,
+            91732647,
+            91985967,
+            92216007,
+            92355087,
+            92436807,
+            92506887,
+            92681487,
+            92948847,
+            93121767,
+            93550767,
+            93717567,
+            93784887,
+            93785607,
+            93930207,
+            94193007,
+            94625967,
+            94674927,
+            94822527,
+            95840847,
+            95931207,
+            96296367,
+            97911207,
+            97980687,
+            98151207,
+            98165247,
+            98610447,
+            98671647,
+            98893047,
+            101192247,
+            101476527,
+            101684007,
+            101999127,
+            102061647,
+            102066567,
+            102344847,
+            102790767,
+            102792207,
+            102892767,
+            102894687,
+            102895167,
+            102895647,
+            103062327,
+            104218407,
+            106736607,
+            107115927,
+            107235087,
+            107509047,
+            107955087,
+            108799287,
+            108893967,
+            109638687,
+            109648167,
+            109761807,
+            109831287,
+            111055527,
+            111057567,
+            112799127,
+            112882647,
+            112888527,
+            112950567,
+            113374647,
+            113880927,
+            114906327,
+            115133247,
+            116149647,
+            117980727,
+            118054767,
+            118236687,
+            118631847,
+            118934247,
+            119632887,
+            121592967,
+            122583687,
+            123487167,
+            123873927,
+            123978567,
+            123996567,
+            123996927,
+            123997527,
+            124001247,
+            124418247,
+            125878047,
+            126003687,
+            126004167,
+            130630407,
+            130630647,
+            130686687,
+            130686807,
+            130693287,
+            130777407,
+            130840767,
+            130954407,
+            131115447,
+            131135007,
+            131652687,
+            132065367,
+            132325287,
+            132348327,
+            132758367,
+            133502127,
+            133852047,
+            133854327,
+            133989327,
+            134130087,
+            134567967,
+            134876607,
+            134979567,
+            135278007,
+            135292767,
+            135353727,
+            135773007,
+            135776847,
+            135826887,
+            135841887,
+            135850407,
+            136120767,
+            136236207,
+            136278807,
+            136455207,
+            136550247,
+            137025927,
+            137200287,
+            137382567,
+            140139567,
+            140711127,
+            141827967,
+            142466367,
+            142883847,
+            143109567,
+            144237927,
+            144965967,
+            146321007,
+            146324607,
+            146326287,
+            146339727,
+            146355567,
+            147006447,
+            147500367,
+            147801807,
+            148154487,
+            148154607,
+            148446687,
+            148454487,
+            152119407,
+            152146047,
+            153546927,
+            154108047,
+            154108167,
+            154112007,
+            154112367,
+            154113087,
+            154113207,
+            154114887,
+            154125567,
+            154126407,
+            154290807,
+            154290927,
+            154291287,
+            154291407,
+            154291527,
+            154291887,
+            154295007,
+            154295967,
+            154297527,
+            154303287,
+            154303527,
+            154332087,
+            154386087,
+            154387407,
+            154391247,
+            154391967,
+            154392927,
+            154394847,
+            154540527,
+            154544247,
+            154693287,
+            154793967,
+            154794087,
+            155010327,
+            155010447,
+            158149767,
+            160437567,
+            163112127,
+            163372647,
+            165575127,
+            4345086236,
+            4345095356,
+            4345169885,
+            4345177565,
+            4345182855,
+            4345186250,
+            4349172433,
+            4360612711,
+            4360793649,
+            4371265570,
+            4371369115,
+            4393832120,
+            4400994377,
+            4403685582,
+            4428613611,
+            4443205897,
+            4451525654,
+            4480779579,
+            4498662865,
+            4512645730,
+            4516493673,
+            4516698376,
+            4517304218,
+            4517378559,
+            4517379732,
+            4517380203,
+            4539078702,
+            4539981050,
+            4546091198,
+            4548855586,
+            4549107258,
+            4552894255,
+            4555165414,
+            4555183615,
+            4555236856,
+            4555635725,
+            4555650690,
+            4555674903,
+            4555684517,
+            4555688577,
+            4556153989,
+            4556285026,
+            4556324359,
+            4556326294,
+            4556648082,
+            4556678787,
+            4557241378,
+            4557634755,
+            4557708173,
+            4557762374,
+            4557783054,
+            4557975570,
+            4558001894,
+            4558745950,
+            4558957661,
+            4559094602,
+            4559618101,
+            4560130208,
+            4560176292,
+            4560182777,
+            4579011086,
+            4579746196,
+            4584262791,
+            4586005424,
+            4586012639,
+            4598413679,
+            4600377077,
+            4608554346,
+            4612781170,
+            4613725167,
+            4631660550,
+            4652061785,
+            4659761500,
+            4666709965,
+            4667573429,
+            4671027724,
+            4671116147,
+            4680579583,
+            4680686606,
+            4684616813,
+            4688643082,
+            4689601181,
+            4689828177,
+            4698081076,
+            4698085906,
+            4698483837,
+            4698485673,
+            4698836785,
+            4700389583,
+            4702727917,
+            4705009339,
+            4706776058,
+            4715712191,
+            4719669541,
+            4739368280,
+            4740423257,
+            4741268540,
+            4741269263,
+            4752748306,
+            4770577846,
+            4794336160,
+            4795460127,
+            4801997974,
+            4813434715,
+            4814193728,
+            4816151238,
+            4818099525,
+            4843101319,
+            4843259745,
+            4846983242,
+            4875004757,
+            4889122311,
+            4894471199,
+            4898516140,
+            4899249557,
+            4900192015,
+            4914559913,
+            4948313020,
+            4948313458,
+            4949099173,
+            4950965688,
+            4953561994,
+            4954044942,
+            4956216414,
+            4956359904,
+            4957449531,
+            4957639563,
+            4963347489,
+            4963865755,
+            4964615668,
+            4970750314,
+            4972816526,
+            4974103111,
+            4974150367,
+            4974378154,
+            4974421332,
+            4974425718,
+            4974440616,
+            4974909599,
+            4974917942,
+            4979472123,
+            4979611347,
+            4980225738,
+            4981770423,
+            4986877832,
+            4986883844,
+            4988662283,
+            4988900800,
+            4991670386,
+            4992010014,
+            4994594770,
+            4995359684,
+            4995363299,
+            4995664790,
+            4999774536,
+            5000134545,
+            5000531182,
+            5000706923,
+            5000790614,
+            5002624314,
+            5004234716,
+            5008215061,
+            5008428214,
+            5008745198,
+            5014861653,
+            5015013326,
+            5017538127,
+            5017618519,
+            5017627117,
+            5017870049,
+            5017880045,
+            5017883228,
+            5017885847,
+            5018142683,
+            5022785722,
+            5025139359,
+            5030227901,
+            5031882476,
+            5032005985,
+            5033068546,
+            5033399504,
+            5043072122,
+            5044224363,
+            5045865300,
+            5045875566,
+            5048369906,
+            5048446713,
+            5048474394,
+            5048578765,
+            5048623579,
+            5048855939,
+            5048896271,
+            5050809297,
+            5051271119,
+            5051688660,
+            5051862705,
+            5052097433,
+            5058276148,
+            5058861737,
+            5060861401,
+            5064301367,
+            5069717241,
+            5069717757,
+            5069891248,
+            5070083463,
+            5070084600,
+            5070084900,
+            5070085425,
+            5070176819,
+            5070264421,
+            5070265165,
+            5070265579,
+            5070542615,
+            5070542867,
+            5070543512,
+            5070544541,
+            5070545231,
+            5070734376,
+            5070789315,
+            5070789798,
+            5070791445,
+            5070792210,
+            5070975727,
+            5070978478,
+            5070980068,
+            5071288712,
+            5071289186,
+            5071289492,
+            5071291676,
+            5071291904,
+            5071293308,
+            5074013907,
+            5075292382,
+            5080503991,
+            5084422705,
+            5084769575,
+            5086430628,
+            5087749143,
+            5087963482,
+            5087963515,
+            5087963758,
+            5088307652,
+            5088307808,
+            5089439429,
+            5089656445,
+            5092818847,
+            5093816358,
+            5094408955,
+            5094978878,
+            5095477169,
+            5095911984,
+            5100382690,
+            5101503982,
+            5105917836,
+            5105924625,
+            5105925495,
+            5105927196,
+            5106137416,
+            5106145432,
+            5106478940,
+            5106485993,
+            5106489806,
+            5106550992,
+            5106552639,
+            5106557640,
+            5106566805,
+            5106569886,
+            5106571641,
+            5106578097,
+            5106755944,
+            5106762619,
+            5106778033,
+            5106779677,
+            5106798235,
+            5106824086,
+            5107146233,
+            5107156019,
+            5107165619,
+            5107180046,
+            5107196363,
+            5108771973,
+            5108801259,
+            5108834289,
+            5108885655,
+            5109414149,
+            5109477985,
+            5110020623,
+            5112760220,
+            5114958382,
+            5115460784,
+            5119369095,
+            5119589887,
+            5119608376,
+            5119622833,
+            5120038706,
+            5120633507,
+            5122977293,
+            5124775878,
+            5125813833,
+            5126210840,
+            5127381578,
+            5127400238,
+            5132699513,
+            5133611676,
+            5133616221,
+            5134921406,
+            5135185825,
+            5135800503,
+            5135919817,
+            5136222120,
+            5138121327,
+            5138315476,
+            5138858096,
+            5139829373,
+            5139840665,
+            5140474550,
+            5144321936,
+            5146213631,
+            5146604124,
+            5146786705,
+            5149375150,
+            5151561498,
+            5153027495,
+            5153287592,
+            5153589998,
+            5154348200,
+            5154699509,
+            5158983053,
+            5159413879,
+            5159854943,
+            5159859116,
+            5159942800,
+            5162464941,
+            5163825115,
+            5164704205,
+            5168219701,
+            5168254035,
+            5168461886,
+            5168480847,
+            5168728930,
+            5168743192,
+            5168757037,
+            5168769787,
+            5168772901,
+            5168778655,
+            5168970951,
+            5168989869,
+            5169221645,
+            5169233267,
+            5169280048,
+            5169303034,
+            5169331108,
+            5169711263,
+            5169713450,
+            5169776357,
+            5170070115,
+            5170824404,
+            5171104458,
+            5171648064,
+            5171650710,
+            5171896510,
+            5172351482,
+            5174265103,
+            5175867721,
+            5175952556,
+            5176804734,
+            5179364348,
+            5181490686,
+            5182269069,
+            5183914280,
+            5184079599,
+            5184095898,
+            5184981581,
+            5186591196,
+            5186890053,
+            5187953009,
+            5188198704,
+            5188523710,
+            5188524448,
+            5188897892,
+            5189328444,
+            5189431118,
+            5189548223,
+            5189723181,
+            5189828618,
+            5189856415,
+            5190486890,
+            5191810924,
+            5192098697,
+            5192127573,
+            5192169747,
+            5192427313,
+            5193340753,
+            5193544766,
+            5193766979,
+            5193922041,
+            5194297564,
+            5194612509,
+            5194618937,
+            5195742443,
+            5196683170,
+            5197457424,
+            5197478286,
+            5197481271,
+            5197482852,
+            5197484301,
+            5197485798,
+            5197487961,
+            5197491039,
+            5197877884,
+            5197952632,
+            5198109530,
+            5198188307,
+            5198286377,
+            5198289584,
+            5198354561,
+            5198567242,
+            5198762566,
+            5199544925,
+            5199894385,
+            5199933502,
+            5200250154,
+            5200703678,
+            5202346462,
+            5202735047,
+            5202741550,
+            5203815492,
+            5204846310,
+            5207674965,
+            5207965837,
+            5208066656,
+            5208562724,
+            5208584637,
+            5209017052,
+            5209330052,
+            5210136219,
+            5210336775,
+            5210596482,
+            5213823087,
+            5213865762,
+            5214330163,
+            5214574966,
+            5215039902,
+            5215350402,
+            5215604816,
+            5215640099,
+            5216486395,
+            5216601102,
+            5216748930,
+            5217203470,
+            5217508796,
+            5217879594,
+            5218475403,
+            5218881022,
+            5219011836,
+            5219012067,
+            5219182746,
+            5219423456,
+            5219817770,
+            5220268680,
+            5220377643,
+            5221446381,
+            5221774258,
+            5221871230,
+            5222242022,
+            5222243432,
+            5222247341,
+            5222249447,
+            5222438814,
+            5223373412,
+            5224972730,
+            5225213966,
+            5225354826,
+            5225364237,
+            5225595768,
+            5225897402,
+            5226072139,
+            5226187604,
+            5226385619,
+            5226744879,
+            5227172365,
+            5227797744,
+            5228279904,
+            5228520858,
+            5228534094,
+            5228718450,
+            5229141100,
+            5229215437,
+            5230445460,
+            5230787472,
+            5231088402,
+            5231247754,
+            5231387965,
+            5231690126,
+            5231820675,
+            5231908694,
+            5232341998,
+            5232420946,
+            5232636949,
+            5232724060,
+            5232907826,
+            5232927338,
+            5233153111,
+            5233165108,
+            5233477608,
+            5234138801,
+            5234182535,
+            5234306368,
+            5234452311,
+            5234472708,
+            5234756785,
+            5234926540,
+            5235504886,
+            5235889561,
+            5237536072,
+            5237896551,
+            5239107509,
+            5239241440,
+            5239241947,
+            5239269744,
+            5239298864,
+            5239301750,
+            5239320383,
+            5239610122,
+            5240124892,
+            5240125189,
+            5240261655,
+            5240312100,
+            5240318616,
+            5240322429,
+            5240323833,
+            5240771413,
+            5240865085,
+            5240941387,
+            5240942062,
+            5241242393,
+            5241246170,
+            5241377908,
+            5241422765,
+            5241464295,
+            5241794398,
+            5241951727,
+            5242584473,
+            5243101629,
+            5243202897,
+            5243391588,
+            5243679023,
+            5244190773,
+            5244262239,
+            5244374124,
+            5244807061,
+            5244866551,
+            5244914367,
+            5244930648,
+            5244952929,
+            5244954942,
+            5245089789,
+            5245103886,
+            5245294709,
+            5245522465,
+            5245524211,
+            5245533067,
+            5245669417,
+            5245833250,
+            5246067038,
+            5246856420,
+            5246883348,
+            5246997069,
+            5247010539,
+            5247061830,
+            5247385124,
+            5247525532,
+            5247628456,
+            5247641665,
+            5247641668,
+            5248104870,
+            5248512420,
+            5249210781,
+            5249213919,
+            5249213925,
+            5249214381,
+            5249336637,
+            5249693443,
+            5249873641,
+            5249875138,
+            5249913973,
+            5250528661,
+            5250543328,
+            5250738673,
+            5250773992,
+            5251024524,
+            5251160132,
+            5251253462,
+            5251784779,
+            5252141954
+        ],
+        "tones": "Reviews",
+        "plistaPublicApiKey": "462925f4f131001fd974bebe",
+        "isLiveBlog": false,
+        "frontendAssetsFullURL": "https://assets.guim.co.uk/",
+        "googleSearchId": "007466294097402385199:m2ealvuxh1i",
+        "allowUserGeneratedContent": false,
+        "byline": "Peter Bradshaw",
+        "authorIds": "profile/peterbradshaw",
+        "webPublicationDate": 1555059646000,
+        "omnitureAmpAccount": "guardiangu-thirdpartyapps",
+        "isHosted": false,
+        "hasPageSkin": false,
+        "webTitle": "Monty Python's Life of Brian review – an unholy work of satirical genius",
+        "discussionD2Uid": "zHoBy6HNKsk",
+        "weatherapiurl": "/weatherapi/city",
+        "googleSearchUrl": "//www.google.co.uk/cse/cse.js",
+        "optimizeEpicUrl": "https://support.theguardian.com/epic/control/index.html",
+        "isSplash": false,
+        "isNumberedList": false,
+        "dcrCouldRender": true
+    },
+    "sectionLabel": "Film"
+}

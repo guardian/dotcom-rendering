@@ -4,10 +4,12 @@ import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
-import { mainMediaElements, CAPI } from './ArticleHeadline.mocks';
+import { mainMediaElements } from './ArticleHeadline.mocks';
 import { ArticleTitle } from './ArticleTitle';
 import { ArticleMeta } from './ArticleMeta';
 import { ArticleStandfirst } from './ArticleStandfirst';
+
+import jsonCAPI from './__mocks__/CAPI.json';
 
 /* tslint:disable */
 export default {
@@ -15,6 +17,8 @@ export default {
     title: 'Components/ArticleHeadline',
 };
 /* tslint:enable */
+
+const CAPI = (jsonCAPI as unknown) as CAPIType;
 
 export const ArticleStory = () => (
     <Section>

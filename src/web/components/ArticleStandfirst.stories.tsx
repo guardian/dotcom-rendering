@@ -7,6 +7,8 @@ import { ArticleContainer } from './ArticleContainer';
 import { ArticleTitle } from './ArticleTitle';
 import { ArticleHeadline } from './ArticleHeadline';
 
+import jsonCAPI from './__mocks__/CAPI.json';
+
 /* tslint:disable */
 export default {
     component: ArticleStandfirst,
@@ -14,21 +16,13 @@ export default {
 };
 /* tslint:enable */
 
+const CAPI = (jsonCAPI as unknown) as CAPIType;
+
 export const defaultStory = () => {
     return (
         <Section>
             <ArticleContainer>
-                <ArticleTitle
-                    CAPI={
-                        // @ts-ignore
-                        {
-                            sectionLabel: 'Section',
-                            sectionUrl: 'section/subsection',
-                            tags: [],
-                            pillar: `culture`,
-                        } as CAPIType
-                    }
-                />
+                <ArticleTitle CAPI={CAPI} />
                 <ArticleHeadline
                     headlineString="This is how the default headline looks"
                     designType="Article"

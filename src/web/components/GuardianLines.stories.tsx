@@ -10,12 +10,16 @@ import { GuardianLines } from './GuardianLines';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
 
+import jsonCAPI from './__mocks__/CAPI.json';
+
 /* tslint:disable */
 export default {
     component: GuardianLines,
     title: 'Components/GuardianLines',
 };
 /* tslint:enable */
+
+const CAPI = (jsonCAPI as unknown) as CAPIType;
 
 export const defaultStory = () => {
     return (
@@ -68,18 +72,6 @@ export const eightLines = () => {
     );
 };
 eightLines.story = { name: 'with eight lines' };
-
-// @ts-ignore
-const CAPI = {
-    author: { byline: 'Jane Doe' },
-    pageId: `page-id`,
-    pillar: 'culture',
-    sectionLabel: `Section`,
-    sectionUrl: `https://guardian.co.uk`,
-    webPublicationDateDisplay: '',
-    webTitle: `Page title`,
-    tags: [],
-} as CAPIType;
 
 export const paddedLines = () => {
     return (
