@@ -59,7 +59,7 @@ const ArticleStandfirst = ({
             StandfirstDarkStyles(pillarStyles)
         ]}
     >
-        {componentFromHtml(transform(standfirst))}
+        {componentFromHtml(standfirst)}
     </div>
 
 export default ArticleStandfirst;
