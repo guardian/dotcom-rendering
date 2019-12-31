@@ -54,6 +54,19 @@ type Props = {
     webPublicationDateDisplay: string;
 };
 
+const decideEffect = (
+    designType: DesignType,
+    pillar: Pillar,
+): LineEffectType => {
+    if (pillar === 'sport') {
+        return 'dotted';
+    }
+    if (designType === 'Feature') {
+        return 'squiggly';
+    }
+    return 'straight';
+};
+
 export const ArticleMeta = ({
     designType,
     pillar,
@@ -67,7 +80,10 @@ export const ArticleMeta = ({
 
     return (
         <div className={metaContainer}>
-            <GuardianLines pillar={pillar} />
+            <GuardianLines
+                pillar={pillar}
+                effect={decideEffect(designType, pillar)}
+            />
             <div className={cx(meta)}>
                 <Contributor
                     designType={designType}

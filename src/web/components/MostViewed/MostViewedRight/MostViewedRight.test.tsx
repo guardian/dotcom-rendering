@@ -18,7 +18,7 @@ describe('MostViewedList', () => {
     it('should call the api and render the response as expected', async () => {
         useApi.mockReturnValue(response);
 
-        const { getAllByText } = render(<MostViewedRight />);
+        const { getAllByText } = render(<MostViewedRight pillar="news" />);
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);
@@ -36,7 +36,9 @@ describe('MostViewedList', () => {
     it('should implement a limit on the number of items', async () => {
         useApi.mockReturnValue(response);
 
-        const { getAllByText } = render(<MostViewedRight limitItems={3} />);
+        const { getAllByText } = render(
+            <MostViewedRight pillar="news" limitItems={3} />,
+        );
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);

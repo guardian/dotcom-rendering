@@ -16,10 +16,11 @@ const headingStyles = css`
 `;
 
 interface Props {
+    pillar: Pillar;
     limitItems?: number;
 }
 
-export const MostViewedRight = ({ limitItems = 5 }: Props) => {
+export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
     const endpointUrl: string =
         'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
     const { data, error } = useApi<any>(endpointUrl);
@@ -32,7 +33,7 @@ export const MostViewedRight = ({ limitItems = 5 }: Props) => {
     if (data) {
         return (
             <div className={wrapperStyles}>
-                <GuardianLines count={4} />
+                <GuardianLines pillar={pillar} count={4} />
                 <h3 className={headingStyles}>most viewed</h3>
                 <ul>
                     {(data.trails || [])
