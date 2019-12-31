@@ -38,7 +38,7 @@ nativeClient.insertAdverts(adSlots)
 
 const targetNode = document.querySelector('body') as Node;
 const config = { attributes: true, childList: true, subtree: true };
-const callback = function(mutationsList: any) {
+const callback = function(): void {
     const currentAdSlots = getAdSlots();
     if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
         nativeClient.insertAdverts(currentAdSlots);
