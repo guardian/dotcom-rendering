@@ -33,5 +33,18 @@ function getAdSlots(): AdSlot[] {
 
 setup();
 
-const adSlots = getAdSlots();
+let adSlots = getAdSlots();
 nativeClient.insertAdverts(adSlots)
+
+const targetNode = document.querySelector('body') as Node;
+const config = { attributes: true, childList: true, subtree: true };
+const callback = function(mutationsList: any) {
+    const currentAdSlots = getAdSlots();
+    if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+        nativeClient.insertAdverts(currentAdSlots);
+        adSlots = currentAdSlots;
+    }
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(targetNode, config);
