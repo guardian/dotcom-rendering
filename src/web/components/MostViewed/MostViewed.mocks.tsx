@@ -114,7 +114,7 @@ export const mockTab1 = {
             url:
                 'https://www.theguardian.com/commentisfree/2019/sep/15/government-boris-johnson-incredible-hulk-sam-gyimah',
             headline:
-                'LINKTEXT There’s nothing normal about this beast of a government | Matthew d’Ancona',
+                'LINKTEXT There’s nothing normal about this beast of a government',
             showByline: true,
             byline: 'Matthew d’Ancona',
             image:
