@@ -76,7 +76,6 @@ export class NativeConnection<Context = void> extends ThriftConnection {
     }
 
     receive(message: NativeMessage): void {
-        console.log(this.connectionId);
         const resolver = this.promises.shift();
         if (resolver) {
             clearTimeout(resolver.timeoutId)
