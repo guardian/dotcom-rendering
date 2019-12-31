@@ -52,4 +52,13 @@ describe('MostViewedList', () => {
         // Renders appropriate number of age warnins
         expect(getAllByText(/This article is more than/).length).toBe(1);
     });
+
+    // TODO: Restore this once the component has this feature added to it
+    it('should show a byline when this property is set to true', async () => {
+        useApi.mockReturnValue(response);
+
+        const { getByText } = render(<MostViewedRight pillar="news" />);
+
+        expect(getByText(response.data.trails[0].byline)).toBeInTheDocument();
+    });
 });
