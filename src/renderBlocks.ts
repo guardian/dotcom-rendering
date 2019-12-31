@@ -179,7 +179,7 @@ function render(bodyElements: BlockElement[], imageSalt: string, ads = true): Re
 
 function componentFromHtml(html: string): ReactNode[] {
     const fragment = JSDOM.fragment(transform(html))
-    let reactNodes = textBlock(fragment);
+    const reactNodes = textBlock(fragment);
     if (fragment?.lastChild?.nodeName === '#text') {
         reactNodes.push(fragment.lastChild.textContent)
     }
