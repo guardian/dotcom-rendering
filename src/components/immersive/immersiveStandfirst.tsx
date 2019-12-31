@@ -1,9 +1,9 @@
 import React from 'react';
-import { bulletStyles, headlineFont, darkModeCss, basePx } from 'styles';
-import { transform } from 'contentTransformations';
+import { bulletStyles, headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { PillarStyles } from 'pillar';
+import { componentFromHtml } from 'renderBlocks';
 
 const StandfirstStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     ${headlineFont}
@@ -12,9 +12,7 @@ const StandfirstStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     font-size: 1.8rem;
     line-height: 2.4rem;
 
-    a {
-        color: ${kicker};
-    }
+    ${linkStyle(kicker)}
 
     p, ul {
         margin: 0;
@@ -41,7 +39,7 @@ interface ArticleStandfirstProps {
     standfirst: string;
     pillarStyles: PillarStyles;
     className: SerializedStyles;
-    byline: string;
+    byline?: string;
 }
 
 const ImmersiveStandfirst = ({
@@ -55,8 +53,13 @@ const ImmersiveStandfirst = ({
         StandfirstStyles(pillarStyles),
         StandfirstDarkStyles(pillarStyles)
     ]}>
-        <div dangerouslySetInnerHTML={{__html: transform(standfirst)}}/>
-        <address dangerouslySetInnerHTML={{__html: "By " + byline}}></address>
+        <div>{componentFromHtml(standfirst)}</div>
+        { byline ?
+            <address>
+                <span>By </span>
+                {componentFromHtml(byline)}
+            </address>
+        : null }
     </div>
 
 export default ImmersiveStandfirst;

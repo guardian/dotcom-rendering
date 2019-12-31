@@ -8,7 +8,7 @@ import LiveblogKeyEvents from './liveblogKeyEvents';
 import LiveblogBody from './liveblogBody';
 import HeaderImage from '../shared/headerImage';
 import Tags from '../shared/tags';
-import { wideColumnWidth, baseMultiply } from 'styles';
+import { wideColumnWidth, baseMultiply, darkModeCss } from 'styles';
 import { Content } from 'capiThriftModels';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
@@ -21,6 +21,8 @@ const LiveblogArticleStyles: SerializedStyles = css`
 `;
 
 const BorderStyles = css`
+    ${darkModeCss`background: ${palette.neutral.darkMode};`}
+
     ${from.wide} {
         width: 1200px;
         margin: 0 auto;

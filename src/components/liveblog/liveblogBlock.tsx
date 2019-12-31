@@ -1,5 +1,5 @@
 import React from 'react';
-import { textSans, icons, basePx } from 'styles';
+import { textSans, icons, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -34,8 +34,8 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
         margin-right: ${basePx(1)};
     }
 
-    .rich-link a {
-        color: ${kicker};
+    .rich-link {
+        ${linkStyle(kicker)}
     }
 
     blockquote {

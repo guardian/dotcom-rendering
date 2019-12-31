@@ -7,17 +7,26 @@ import ImmersiveByline from 'components/immersive/immersiveByline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
-import { articleWidthStyles, basePx } from 'styles';
+import { articleWidthStyles, basePx, darkModeCss } from 'styles';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString, PillarStyles } from 'pillar';
+import { palette } from '@guardian/src-foundations';
 
 export interface ImmersiveArticleProps {
     capi: Content;
     imageSalt: string;
 }
+
+const MainStyles = css`
+    background: ${palette.neutral[97]};
+`;
+
+const MainDarkStyles = darkModeCss`
+    background: ${palette.neutral.darkMode};
+`;
 
 const BorderStyles = css`
     ${from.wide} {
@@ -36,7 +45,7 @@ const DropCapStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         padding-right: ${basePx(1)};
         float: left;
     }
-`
+`;
 
 const HeaderImageStyles = css`
     figure {
@@ -59,7 +68,7 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
     const mainImage = articleMainImage(capi);
 
     return (
-        <main>
+        <main css={[MainStyles, MainDarkStyles]}>
             <article css={BorderStyles}>
                 <header>
                     <div css={articleWidthStyles}>

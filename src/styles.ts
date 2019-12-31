@@ -83,11 +83,21 @@ export const darkModeCss = (
     }
 `;
 
-// Styles shared across article types
-export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+export const linkStyle = (kicker: string): string => `
     a {
         color: ${kicker};
+        text-decoration: none;
+        padding-bottom: 0.15em;
+        background-image: linear-gradient(${kicker} 0%, ${kicker} 100%);
+        background-repeat: repeat-x;
+        background-size: 1px 1px;
+        background-position: 0 bottom;
     }
+`
+
+// Styles shared across article types
+export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+    ${linkStyle(kicker)}
 
     .image img {
         width: 100%; 
@@ -162,6 +172,8 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         a {
             text-decoration: none;
         }
+
+        ${darkModeCss`background: black;`}
     }
 
     h2 {
@@ -224,6 +236,12 @@ export const adStyles = css`
     .ad-placeholder {
         color: ${palette.neutral[20]};
         background: ${palette.neutral[97]};
+
+        ${darkModeCss`
+            color: ${palette.neutral[86]};
+            background: black;
+        `}
+
         clear: both;
 
         .ad-labels {
@@ -264,6 +282,8 @@ export const adStyles = css`
                 &:focus {
                     text-decoration: underline;
                 }
+
+                ${darkModeCss`color: ${palette.neutral[86]};`}
             }
         }
 

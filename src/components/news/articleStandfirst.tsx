@@ -1,9 +1,10 @@
 import React from 'react';
-import { sidePadding, bulletStyles, headlineFont, darkModeCss } from 'styles';
+import { sidePadding, bulletStyles, headlineFont, darkModeCss, linkStyle } from 'styles';
 import { transform } from '../../contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { PillarStyles } from 'pillar';
+import { componentFromHtml } from 'renderBlocks';
 
 const StandfirstFeatureStyles = `
     color: ${palette.neutral[46]};
@@ -19,14 +20,11 @@ const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles): Serialize
     font-size: 1.6rem;
     line-height: 2rem;
 
-    a {
-        color: ${kicker};
-    }
-
     p, ul {
         margin: 0;
     }
 
+    ${linkStyle(kicker)}
     ${bulletStyles(kicker)}
     ${sidePadding}
     ${feature ? StandfirstFeatureStyles : null}
@@ -60,7 +58,8 @@ const ArticleStandfirst = ({
             StandfirstStyles(feature, pillarStyles),
             StandfirstDarkStyles(pillarStyles)
         ]}
-        dangerouslySetInnerHTML={{__html: transform(standfirst)}}
-    />
+    >
+        {componentFromHtml(transform(standfirst))}
+    </div>
 
 export default ArticleStandfirst;

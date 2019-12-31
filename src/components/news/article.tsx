@@ -31,6 +31,7 @@ const MainDarkStyles = darkModeCss`
 
 const BorderStyles = css`
     background: ${palette.neutral[100]};
+    ${darkModeCss`background: ${palette.neutral.darkMode};`}
 
     ${from.wide} {
         width: ${breakpoints.wide}px;

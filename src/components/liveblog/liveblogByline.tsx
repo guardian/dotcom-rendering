@@ -10,6 +10,7 @@ import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar } from 'pillar';
+import { componentFromHtml } from 'renderBlocks';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -46,7 +47,7 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
 `;
 
 interface LiveblogBylineProps {
-    byline: string;
+    byline?: string;
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
@@ -73,7 +74,7 @@ const LiveblogByline = ({
                     imageSalt={imageSalt}
                 />
                 <div className="author">
-                    <address dangerouslySetInnerHTML={{__html: byline}}></address>
+                    { byline ? <address>{componentFromHtml(byline)}</address> : null }
                     <time>{ formatDate(new Date(publicationDate)) }</time>
                     <div className="follow">Get alerts on this story</div>
                 </div>

@@ -32,6 +32,7 @@ const MainDarkStyles = darkModeCss`
 
 const BorderStyles = css`
     background: ${palette.opinion.faded};
+    ${darkModeCss`background: ${palette.neutral.darkMode};`}
 
     ${from.wide} {
         width: ${breakpoints.wide}px;

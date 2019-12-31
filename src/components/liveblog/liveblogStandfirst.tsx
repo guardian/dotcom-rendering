@@ -5,6 +5,7 @@ import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles } from 'pillar';
+import { componentFromHtml } from 'renderBlocks';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     padding-bottom: 6px;
@@ -32,7 +33,7 @@ interface LiveblogStandfirstProps {
 
 const LiveblogStandfirst = ({ standfirst, pillarStyles }: LiveblogStandfirstProps): JSX.Element =>
     <LeftColumn className={StandfirstStyles(pillarStyles)}>
-        <div dangerouslySetInnerHTML={{__html: transform(standfirst)}} />
+        <div>{componentFromHtml(transform(standfirst))}</div>
     </LeftColumn>
 
 export default LiveblogStandfirst;
