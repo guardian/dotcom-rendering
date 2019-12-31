@@ -13,7 +13,7 @@ const listItemStyles = css`
     margin-bottom: 12px;
     border-top: 1px solid ${palette.neutral[86]};
 
-    &:first-child {
+    &:first-of-type {
         padding-top: 0;
         border-top: none;
     }
