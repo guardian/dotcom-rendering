@@ -15,11 +15,6 @@ const articleContainer = css`
         padding-left: 0;
     }
 
-    ${from.leftCol} {
-        /* above 1140 */
-        padding-left: 10px;
-    }
-
     flex-grow: 1;
 `;
 

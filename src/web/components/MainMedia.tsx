@@ -29,6 +29,11 @@ const mainMedia = css`
         }
     }
 
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
     img {
         flex: 0 0 auto; /* IE */
         width: 100%;
