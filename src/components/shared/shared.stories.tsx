@@ -7,7 +7,7 @@ export default { title: 'Shared', decorators: [withKnobs] };
 
 export const OpinionKeyline = (): JSX.Element => <Keyline
     pillar={Pillar.opinion}
-    type={'article'}
+    type="article"
 />
 
 export const DefaultKeyline = (): JSX.Element => <Keyline
