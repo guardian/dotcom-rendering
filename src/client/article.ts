@@ -2,16 +2,10 @@
 
 import setup from 'client/setup';
 import { nativeClient } from 'native/nativeApi';
+import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
 
 
 // ----- Run ----- //
-
-interface AdSlot {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
 
 function getAdSlots(): AdSlot[] {
     const advertSlots = document.getElementsByClassName('ad-slot');
@@ -22,12 +16,12 @@ function getAdSlots(): AdSlot[] {
 
     return Array.from(advertSlots).map(adSlot => {
         const slotPosition = adSlot.getBoundingClientRect();
-        return {
+        return new AdSlot({
             x: slotPosition.left + scrollLeft,
             y: slotPosition.top + scrollTop,
             width: slotPosition.width,
             height: slotPosition.height
-        }
+        })
     });
 }
 
