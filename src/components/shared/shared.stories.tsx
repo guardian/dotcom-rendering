@@ -17,7 +17,7 @@ export const DefaultKeyline = (): JSX.Element => <Keyline
 
 export const LiveblogKeyline = (): JSX.Element => <Keyline
     pillar={Pillar.news}
-    type={'liveblog'}
+    type="liveblog"
 />
 
 const tagsProps = [{
