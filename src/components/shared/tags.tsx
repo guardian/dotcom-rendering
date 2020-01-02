@@ -2,7 +2,6 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, darkModeCss, basePx } from '../../styles';
 import { palette } from '@guardian/src-foundations';
-import { Tag } from 'capiThriftModels';
 
 const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles => css`
     margin-top: 0;
@@ -43,7 +42,10 @@ const tagsDarkStyles = darkModeCss`
 `;
 
 interface TagsProps {
-    tags: Tag[];
+    tags: {
+        webUrl: string;
+        webTitle: string;
+    }[];
     background?: string;
 }
 
