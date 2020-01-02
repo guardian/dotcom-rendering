@@ -71,7 +71,7 @@ function textElement(node: Node): ReactNode {
 }
 
 function textBlock(fragment: DocumentFragment): ReactNode[] {
-    return Array.from(fragment.children).map(textElement);
+    return Array.from(fragment.childNodes).map(textElement);
 }
 
 function tweetBlock(fragment: DocumentFragment): ReactNode[] {
@@ -179,11 +179,7 @@ function render(bodyElements: BlockElement[], imageSalt: string, ads = true): Re
 
 function componentFromHtml(html: string): ReactNode[] {
     const fragment = JSDOM.fragment(transform(html))
-    const reactNodes = textBlock(fragment);
-    if (fragment?.lastChild?.nodeName === '#text') {
-        reactNodes.push(fragment.lastChild.textContent)
-    }
-    return reactNodes;
+    return textBlock(fragment);
 }
 
 
