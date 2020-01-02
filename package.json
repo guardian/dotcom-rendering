@@ -37,7 +37,7 @@
     "emotion": "^10.0.23",
     "express": "^4.17.1",
     "jsdom": "^15.2.1",
-    "mobile-apps-thrift-typescript": "^1.0.0",
+    "mobile-apps-thrift-typescript": "^0.23.0",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "react": "^16.12.0",
