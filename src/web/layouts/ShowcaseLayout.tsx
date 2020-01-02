@@ -61,10 +61,10 @@ const ShowcaseGrid = ({
                     1fr /* Main content */
                     300px; /* Right Column */
                 grid-template-areas:
-                    'title border headline headline'
-                    'meta border media media'
-                    '. border standfirst right-column'
-                    '. border body right-column';
+                    'title  border  headline    headline'
+                    'meta   border  media       media'
+                    '.      border  standfirst  right-column'
+                    '.      border  body        right-column';
             }
 
             ${until.wide} {
@@ -74,10 +74,10 @@ const ShowcaseGrid = ({
                     1fr /* Main content */
                     300px; /* Right Column */
                 grid-template-areas:
-                    'title border headline right-column'
-                    '. border standfirst right-column'
-                    'meta border media right-column'
-                    '. border body right-column';
+                    'title  border  headline    right-column'
+                    '.      border  standfirst  right-column'
+                    'meta   border  media       right-column'
+                    '.      border  body        right-column';
             }
 
             ${until.leftCol} {
@@ -85,12 +85,12 @@ const ShowcaseGrid = ({
                     1fr /* Main content */
                     300px; /* Right Column */
                 grid-template-areas:
-                    'title right-column'
-                    'headline right-column'
+                    'title      right-column'
+                    'headline   right-column'
                     'standfirst right-column'
-                    'media right-column'
-                    'meta right-column'
-                    'body right-column';
+                    'media      right-column'
+                    'meta       right-column'
+                    'body       right-column';
             }
 
             ${until.desktop} {
