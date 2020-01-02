@@ -233,7 +233,7 @@ const Image = ({ url, alt, salt, caption, displayCredit, credit }: ImageProps): 
         h('img', {
             sizes: '100%',
             srcSet: srcset(salt)(url),
-            alt: alt,
+            alt,
             src: transformUrl(salt, url, 500),
         }),
         h('figcaption', null, makeCaption(caption, displayCredit, credit)),
