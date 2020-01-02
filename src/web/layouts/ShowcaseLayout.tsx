@@ -13,6 +13,7 @@ import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
+import { Shift } from '@root/src/web/components/Shift';
 
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -189,14 +190,16 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <Border />
                     </GridItem>
                     <GridItem area="headline">
-                        <ArticleHeadline
-                            headlineString={CAPI.headline}
-                            designType={CAPI.designType}
-                            pillar={CAPI.pillar}
-                            webPublicationDate={CAPI.webPublicationDate}
-                            tags={CAPI.tags}
-                            byline={CAPI.author.byline}
-                        />
+                        <Shift direction="down" by="100px">
+                            <ArticleHeadline
+                                headlineString={CAPI.headline}
+                                designType={CAPI.designType}
+                                pillar={CAPI.pillar}
+                                webPublicationDate={CAPI.webPublicationDate}
+                                tags={CAPI.tags}
+                                byline={CAPI.author.byline}
+                            />
+                        </Shift>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst

@@ -110,11 +110,6 @@ const displayFlex = css`
     flex-direction: column;
 `;
 
-const shiftPosition = (shift?: 'up' | 'down') => css`
-    margin-top: ${shift && shift === 'up' && '-100px'};
-    margin-bottom: ${shift && shift === 'down' && '-50px'};
-`;
-
 const shiftSlightly = css`
     margin-bottom: 16px;
 `;
@@ -167,7 +162,6 @@ const ageWarningMargins = css`
 const renderHeadline = ({
     designType,
     pillar,
-    isShowcase,
     headlineString,
     byline,
     tags,
@@ -175,7 +169,6 @@ const renderHeadline = ({
 }: {
     designType: DesignType;
     pillar: Pillar;
-    isShowcase: boolean;
     headlineString: string;
     byline?: string;
     tags: TagType[];
@@ -238,14 +231,7 @@ const renderHeadline = ({
             return (
                 // Inverted headlines have a wrapper div for positioning
                 // and a black background (only for the text)
-                <div
-                    className={cx(
-                        // We only shift the inverted headline down when main media is showcase
-                        isShowcase ? shiftPosition('down') : shiftSlightly,
-                        maxWidth,
-                        displayFlex,
-                    )}
-                >
+                <div className={cx(shiftSlightly, maxWidth, displayFlex)}>
                     <HeadlineTag tagText="Interview" pillar={pillar} />
                     <h1 className={cx(invertedFont, invertedWrapper)}>
                         <span
@@ -266,13 +252,7 @@ const renderHeadline = ({
             return (
                 // Immersive headlines are large and inverted and have their black background
                 // extended to the right
-                <h1
-                    className={cx(
-                        invertedWrapper,
-                        shiftPosition('up'),
-                        blackBackground,
-                    )}
-                >
+                <h1 className={cx(invertedWrapper, blackBackground)}>
                     <span
                         className={cx(
                             jumboFont,
@@ -295,7 +275,6 @@ export const ArticleHeadline = ({
     webPublicationDate,
     byline,
     tags,
-    isShowcase = false,
 }: Props) => {
     const age = getAgeWarning(tags, webPublicationDate);
     return (
@@ -308,7 +287,6 @@ export const ArticleHeadline = ({
             {renderHeadline({
                 designType,
                 pillar,
-                isShowcase,
                 headlineString,
                 byline,
                 tags,
