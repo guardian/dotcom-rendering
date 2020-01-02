@@ -38,7 +38,7 @@ type Block = {
     linkText: string;
 } | {
     kind: ElementType.TWEET;
-    content: HTMLCollection;
+    content: NodeList;
 };
 
 type DocParser = (html: string) => DocumentFragment;
@@ -46,11 +46,11 @@ type DocParser = (html: string) => DocumentFragment;
 
 // ----- Parser ----- //
 
-const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, HTMLCollection> => {
+const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
     const blockquote = doc.querySelector('blockquote');
 
     if (blockquote !== null) {
-        return new Ok(blockquote.children);                    
+        return new Ok(blockquote.childNodes);
     }
 
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
@@ -181,7 +181,7 @@ const Text = (props: { doc: DocumentFragment; pillar: Pillar }): ReactElement =>
     styledH(
         Fragment,
         null,
-        Array.from(props.doc.children).map((node, key) =>
+        Array.from(props.doc.childNodes).map((node, key) =>
             h(Fragment, { key }, textElement(props.pillar)(node))
         ),
     );
@@ -335,7 +335,7 @@ const Interactive = (props: { url: string }): ReactElement =>
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
-const Tweet = (props: { content: HTMLCollection; pillar: Pillar }): ReactElement =>
+const Tweet = (props: { content: NodeList; pillar: Pillar }): ReactElement =>
     h('blockquote', null, ...Array.from(props.content).map(textElement(props.pillar)));
 
 const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number): ReactNode => {
