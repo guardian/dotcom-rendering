@@ -7,7 +7,7 @@ import { palette } from '@guardian/src-foundations';
 
 import { BlockElement, ElementType } from 'capiThriftModels';
 import { Result, Ok, Err } from 'types/result';
-import { Option, fromNullable } from 'types/option';
+import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
@@ -117,15 +117,16 @@ function isElement(node: Node): node is Element {
     return node.nodeType === 1;
 }
 
-function getAttrs(node: Node): React.AnchorHTMLAttributes<string> {
-    if (isElement(node)) {
-        return Array.from(node.attributes).reduce((attrs, attr) => {
-            return { ...attrs, [attr.name]: attr.value };
-        }, {});
-    } else {
-        return {};
-    }
-}
+const getAttrs = (node: Node): Option<NamedNodeMap> =>
+    isElement(node) ? new Some(node.attributes) : new None();
+
+const getAttr = (attr: string) => (node: Node): Option<string> =>
+    getAttrs(node).andThen(attrs =>
+        fromNullable(attrs.getNamedItem(attr)).map(attr => attr.value)
+    );
+
+const getHref: (node: Node) => Option<string> =
+    getAttr('href');
 
 const Paragraph = (props: { children?: ReactNode }): ReactElement =>
     h('p', null, props.children);
@@ -170,7 +171,7 @@ const textElement = (pillar: Pillar) => (node: Node): ReactNode => {
         case 'SPAN':
             return node.textContent;
         case 'A':
-            return h(Anchor, { href: getAttrs(node).href ?? '', text: node.textContent ?? '', pillar });
+            return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar });
         default:
             return null;
     }
