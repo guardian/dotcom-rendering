@@ -247,7 +247,8 @@ export const adStyles = css`
         .ad-labels {
             ${textSans}
             padding: ${basePx(1)};
-            padding-bottom: ${adHeight};
+            float: left;
+            width: calc(100% - ${basePx(2)});
 
             h1 {
                 margin: 0;
@@ -262,6 +263,7 @@ export const adStyles = css`
                 font-size: 16px;
                 color: ${palette.neutral[20]};
                 position: relative;
+                margin: 0;
 
                 span {
                     position: absolute;
@@ -285,6 +287,11 @@ export const adStyles = css`
 
                 ${darkModeCss`color: ${palette.neutral[86]};`}
             }
+        }
+
+        .ad-slot {
+            clear: both;
+            padding-bottom: ${adHeight};
         }
 
         ${until.phablet} {

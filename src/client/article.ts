@@ -14,7 +14,7 @@ interface AdSlot {
 }
 
 function getAdSlots(): AdSlot[] {
-    const advertSlots = document.getElementsByClassName('ad-placeholder');
+    const advertSlots = document.getElementsByClassName('ad-slot');
     const scrollLeft = document.scrollingElement 
         ? document.scrollingElement.scrollLeft : document.body.scrollLeft;
     const scrollTop = document.scrollingElement 
@@ -32,15 +32,21 @@ function getAdSlots(): AdSlot[] {
 }
 
 setup();
-
 let adSlots = getAdSlots();
-nativeClient.insertAdverts(adSlots)
+
+// TODO: this can be removed after adding a min-height to images
+setTimeout(() => {
+    adSlots = getAdSlots();
+    nativeClient.insertAdverts(adSlots)
+}, 2000)
 
 const targetNode = document.querySelector('body') as Node;
 const config = { attributes: true, childList: true, subtree: true };
 const callback = function(): void {
     const currentAdSlots = getAdSlots();
     if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+        // TODO: insert adverts needs refactoring to reposition ads
+        // Or we may need a new function to reposition adverts
         nativeClient.insertAdverts(currentAdSlots);
         adSlots = currentAdSlots;
     }
