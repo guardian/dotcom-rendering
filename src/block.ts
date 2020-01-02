@@ -167,7 +167,7 @@ const textElement = (pillar: Pillar) => (node: Node): ReactNode => {
             return h(Paragraph, null, ...Array.from(node.childNodes).map(textElement(pillar)));
         case '#text':
             const text = node.textContent;
-            return text?.includes('•') ? h(Bullet, { pillar: pillar, text }) : text;
+            return text?.includes('•') ? h(Bullet, { pillar, text }) : text;
         case 'SPAN':
             return node.textContent;
         case 'A':
