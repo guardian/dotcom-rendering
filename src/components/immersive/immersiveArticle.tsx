@@ -20,10 +20,6 @@ export interface ImmersiveArticleProps {
     imageSalt: string;
 }
 
-const MainStyles = css`
-    background: ${palette.neutral[97]};
-`;
-
 const MainDarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
 `;
@@ -68,7 +64,7 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
     const mainImage = articleMainImage(capi);
 
     return (
-        <main css={[MainStyles, MainDarkStyles]}>
+        <main css={MainDarkStyles}>
             <article css={BorderStyles}>
                 <header>
                     <div css={articleWidthStyles}>
@@ -83,7 +79,8 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
                             standfirst={fields.standfirst}
                             pillarStyles={pillarStyles}
                             className={articleWidthStyles}
-                            byline={fields.bylineHtml}
+                            bylineHtml={fields.bylineHtml}
+                            byline={fields.byline}
                         />
                     </div>
                     <Keyline pillar={pillar} type={'article'}/>
