@@ -57,6 +57,9 @@ export const Contributor: React.FC<{
         return null;
     }
 
+    const onlyOneContributor: boolean =
+        tags.filter(tag => tag.type === 'Contributor').length === 1;
+
     return (
         <address aria-label="Contributor info">
             {designType !== 'Interview' && (
@@ -64,7 +67,7 @@ export const Contributor: React.FC<{
                     <BylineLink byline={author.byline} tags={tags} />
                 </div>
             )}
-            {author.twitterHandle && (
+            {onlyOneContributor && author.twitterHandle && (
                 <div className={twitterHandle}>
                     <TwitterIcon />
                     <a
