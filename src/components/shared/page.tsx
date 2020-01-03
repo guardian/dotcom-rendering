@@ -25,8 +25,8 @@ const PageStyles = css`
     ${fontFace("Guardian Egyptian Web", new Some(500), new None, "/public/fonts/egyptiantext-medium.otf")}
     ${fontFace("Guardian Egyptian Web", new Some(600), new None, "/public/fonts/egyptiandisplay-bold.otf")}
     ${fontFace("Guardian Egyptian Web", new None, new None, "/public/fonts/egyptiantext-regular.otf")}
-    ${fontFace("Guardian Egyptian Web", new Some("bold"), new None, "/public/fonts/egyptiantext-medium.otf")}
     ${fontFace("Guardian Egyptian Web", new None, new Some("italic"), "/public/fonts/egyptiantext-regularitalic.otf")}
+    ${fontFace("Guardian Egyptian Web", new Some("bold"), new None, "/public/fonts/egyptiantext-medium.otf")}
     ${fontFace("Guardian Egyptian Web", new Some("bold"), new Some("italic"), "/public/fonts/egyptiantext-mediumitalic.otf")}
 
     ${fontFace("Guardian Text Sans Web", new Some(200), new None, "/public/fonts/GuardianSansWeb-Light.ttf")}
