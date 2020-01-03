@@ -174,6 +174,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         }
 
         a {
+            background: none;
             text-decoration: none;
         }
 
@@ -257,6 +258,7 @@ export const adStyles = css`
                 margin: 0;
                 float: left;
                 font-size: 16px;
+                font-weight: 400;
             }
 
             .ad-hide {
