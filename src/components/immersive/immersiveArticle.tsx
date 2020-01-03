@@ -24,6 +24,15 @@ const MainDarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
 `;
 
+const HeaderStyles = css`
+    h2 {
+        margin-top: 3.2rem;
+        font-size: 2.6rem;
+        line-height: 3.2rem;
+        font-weight: 200;
+    }
+`;
+
 const BorderStyles = css`
     ${from.wide} {
         width: ${breakpoints.wide}px;
@@ -32,7 +41,8 @@ const BorderStyles = css`
 `;
 
 const DropCapStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
-    p:first-of-type::first-letter {
+    p:first-child::first-letter,
+    .section-rule + p::first-letter {
         color: ${pillarStyles.kicker};
         font-weight: 100;
         font-style: normal;
@@ -95,7 +105,7 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
                     pillarStyles={pillarStyles}
                     bodyElements={bodyElements}
                     imageSalt={imageSalt}
-                    className={[articleWidthStyles, DropCapStyles(pillarStyles)]}
+                    className={[articleWidthStyles, DropCapStyles(pillarStyles), HeaderStyles]}
                 />
                 <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>

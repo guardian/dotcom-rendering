@@ -90,7 +90,7 @@ const ArticleBody = ({
     imageSalt,
     className,
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[...className, ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles)]}>
+    <div css={[ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles), ...className]}>
         {render(bodyElements, imageSalt).html}
     </div>
 
