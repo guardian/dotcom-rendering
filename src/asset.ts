@@ -87,6 +87,7 @@ const toUrl = (salt: string, asset: Asset): Url =>
 
 export {
     Asset,
+    srcset,
     toSrcset,
     toUrl,
     transformUrl

@@ -1,21 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import {
     sidePadding,
     darkModeCss,
-    commonArticleStyles,
     basePx,
     adStyles
 } from 'styles';
 import { palette } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-foundations/mq';
-import { render } from "renderBlocks";
-import { BlockElement } from 'capiThriftModels';
+import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles } from 'pillar';
 
 const richLinkWidth = "13.75rem";
 
-const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
+const ArticleBodyStyles = css`
     position: relative;
     clear: both;
 
@@ -31,21 +28,17 @@ const ArticleBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         }
     }
 
+    .interactive {
+        margin: 1rem 0;
+    }
+
     iframe {
         width: 100%;
         border: none;
     }
 
-    ${until.wide} {
-        figure:not(.interactive) {
-            margin-left: ${basePx(-1)};
-            margin-right: ${basePx(-1)};
-        }
-    }
-
     ${adStyles}
     ${sidePadding}
-    ${commonArticleStyles(pillarStyles)}
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
@@ -79,19 +72,17 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 
 interface ArticleBodyProps {
     pillarStyles: PillarStyles;
-    bodyElements: BlockElement[];
-    imageSalt: string;
     className: SerializedStyles[];
+    children: ReactNode[];
 }
 
 const ArticleBody = ({
-    bodyElements,
     pillarStyles,
-    imageSalt,
     className,
+    children,
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[ArticleBodyStyles(pillarStyles), ArticleBodyDarkStyles(pillarStyles), ...className]}>
-        {render(bodyElements, imageSalt).html}
+    <div css={[ArticleBodyStyles, ArticleBodyDarkStyles(pillarStyles), ...className]}>
+        {children}
     </div>
 
 export default ArticleBody;
