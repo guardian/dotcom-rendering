@@ -133,6 +133,12 @@ const Paragraph = (props: { children?: ReactNode }): ReactElement =>
 
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
+    text-decoration: none;
+    padding-bottom: 0.15em;
+    background-image: linear-gradient(${colour} 0%, ${colour} 100%);
+    background-repeat: repeat-x;
+    background-size: 1px 1px;
+    background-position: 0 bottom;
 `;
 
 const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
@@ -245,6 +251,10 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     ${headlineFont}
     margin: 0;
+
+    blockquote {
+        margin-left: 0;
+    }
 
     p {
         margin: 1em 0;

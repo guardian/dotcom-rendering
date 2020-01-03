@@ -31,6 +31,11 @@ const HeaderStyles = css`
         font-size: 2.6rem;
         line-height: 3.2rem;
         font-weight: 200;
+        margin-bottom: 8px;
+
+        &+p {
+            margin-top: 0;
+        }
     }
 `;
 
