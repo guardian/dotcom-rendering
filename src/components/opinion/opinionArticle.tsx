@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
@@ -20,6 +20,7 @@ import { getPillarStyles, pillarFromString } from 'pillar';
 export interface OpinionArticleProps {
     capi: Content;
     imageSalt: string;
+    children: ReactNode[];
 }
 
 const MainStyles = css`
@@ -50,14 +51,13 @@ const HeaderImageStyles = css`
     }
 `;
 
-const OpinionArticle = ({ capi, imageSalt }: OpinionArticleProps): JSX.Element => {
+const OpinionArticle = ({ capi, imageSalt, children }: OpinionArticleProps): JSX.Element => {
 
-    const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
+    const { fields, tags, webPublicationDate, pillarId } = capi;
     const series = articleSeries(capi);
     const pillar = pillarFromString(pillarId);
     const pillarStyles = getPillarStyles(pillar);
     const contributors = articleContributors(capi);
-    const bodyElements = blocks.body[0].elements;
     const mainImage = articleMainImage(capi);
 
     return (
@@ -96,12 +96,9 @@ const OpinionArticle = ({ capi, imageSalt }: OpinionArticleProps): JSX.Element =
                         className={HeaderImageStyles}
                     />
                 </header>
-                <ArticleBody
-                    pillarStyles={pillarStyles}
-                    bodyElements={bodyElements}
-                    imageSalt={imageSalt}
-                    className={[articleWidthStyles]}
-                />
+                <ArticleBody pillarStyles={pillarStyles} className={[articleWidthStyles]}>
+                    {children}
+                </ArticleBody>
                 <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>
                 </footer>

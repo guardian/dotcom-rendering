@@ -15,6 +15,10 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         margin: 1em 0;
     }
 
+    figure {
+        margin: 1rem 0;
+    }
+
     ${commonArticleStyles(pillarStyles)}
     ${bulletStyles(pillarStyles.kicker)}
 

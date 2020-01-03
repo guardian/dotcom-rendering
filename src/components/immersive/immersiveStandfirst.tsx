@@ -40,26 +40,42 @@ interface ArticleStandfirstProps {
     pillarStyles: PillarStyles;
     className: SerializedStyles;
     byline?: string;
+    bylineHtml?: string;
 }
 
 const ImmersiveStandfirst = ({
     standfirst,
     pillarStyles,
     className,
-    byline
-}: ArticleStandfirstProps): JSX.Element =>
-    <div css={[
+    byline,
+    bylineHtml
+}: ArticleStandfirstProps): JSX.Element => {
+
+    let standfirstHtml;
+
+    if (byline && bylineHtml) {
+        if (standfirst.includes(byline)) {
+            standfirstHtml = <div>{componentFromHtml(standfirst.replace(byline, bylineHtml))}</div>
+        } else {
+            standfirstHtml = <div>
+                <div>{componentFromHtml(standfirst)}</div>
+                <address>
+                    <span>By </span>
+                    {componentFromHtml(bylineHtml)}
+                </address>
+            </div>
+        }
+    } else {
+        standfirstHtml = <div>{componentFromHtml(standfirst)}</div>
+    }
+
+    return <div css={[
         className,
         StandfirstStyles(pillarStyles),
         StandfirstDarkStyles(pillarStyles)
     ]}>
-        <div>{componentFromHtml(standfirst)}</div>
-        { byline ?
-            <address>
-                <span>By </span>
-                {componentFromHtml(byline)}
-            </address>
-        : null }
+        { standfirstHtml }
     </div>
+}
 
 export default ImmersiveStandfirst;
