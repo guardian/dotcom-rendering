@@ -21,9 +21,10 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
         line-height: 2.2rem;
 
         address {
-            font-style: inherit;
+            font-style: italic;
             a {
                 text-decoration: none;
+                font-style: normal;
                 font-weight: 500;
                 padding-top: 4px;
                 display: block;

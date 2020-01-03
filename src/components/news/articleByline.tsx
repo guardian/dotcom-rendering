@@ -14,11 +14,12 @@ const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {
         address {
             line-height: 2.2rem;
-            font-style: inherit;
+            font-style: italic;
 
             a {
                 text-decoration: none;
                 font-weight: 500;
+                font-style: normal;
             }
         }
 
