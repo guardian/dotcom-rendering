@@ -315,9 +315,15 @@ export const adStyles = css`
     }
 `
 
-export const fontFace = (family: string, weight: Option<number | string>, url: string): SerializedStyles => css`
+export const fontFace = (
+    family: string,
+    weight: Option<number | string>,
+    style: Option<string>,
+    url: string
+): SerializedStyles => css`
   @font-face {
     font-family: ${family};
+    ${style.map((s: string) => `font-style: ${s};`).withDefault('')}
     ${weight.map((w: number | string) => `font-weight: ${w};`).withDefault('')}
     src: url('${url}');
   }
