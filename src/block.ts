@@ -161,6 +161,9 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
         props.text.replace(/•/, ''),
     );
 
+const HeadingTwo = (props: { children?: ReactNode }) =>
+    h('h2', null, props.children);
+
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     switch (node.nodeName) {
         case 'P':
@@ -172,6 +175,8 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
             return node.textContent;
         case 'A':
             return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar, key });
+        case 'H2':
+            return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         default:
             return null;
     }
