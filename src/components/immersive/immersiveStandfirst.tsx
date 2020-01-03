@@ -51,17 +51,23 @@ const ImmersiveStandfirst = ({
     bylineHtml
 }: ArticleStandfirstProps): JSX.Element => {
 
-    const standfirstHtml = byline && bylineHtml
-        ? standfirst.includes(byline)
-            ? <div>{componentFromHtml(standfirst.replace(byline, bylineHtml))}</div>
-            : <div>
+    let standfirstHtml;
+
+    if (byline && bylineHtml) {
+        if (standfirst.includes(byline)) {
+            standfirstHtml = <div>{componentFromHtml(standfirst.replace(byline, bylineHtml))}</div>
+        } else {
+            standfirstHtml = <div>
                 <div>{componentFromHtml(standfirst)}</div>
                 <address>
-                  <span>By </span>
-                  {componentFromHtml(bylineHtml)}
+                    <span>By </span>
+                    {componentFromHtml(bylineHtml)}
                 </address>
-              </div>
-        : <div>{componentFromHtml(standfirst)}</div>
+            </div>
+        }
+    } else {
+        standfirstHtml = <div>{componentFromHtml(standfirst)}</div>
+    }
 
     return <div css={[
         className,
