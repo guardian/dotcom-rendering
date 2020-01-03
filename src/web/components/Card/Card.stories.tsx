@@ -670,7 +670,7 @@ export const Media = () => (
                                 imageUrl: imageUrls[0],
                                 imagePosition: 'top',
                                 showClock: true,
-                                mediaType: 'Photo',
+                                mediaType: 'Gallery',
                             }}
                         />
                     </LI>
