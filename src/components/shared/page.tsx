@@ -22,11 +22,11 @@ import { insertAdPlaceholders } from 'ads';
 // ----- Components ----- //
 
 const PageStyles = css`
-    ${fontFace("Guardian Egyptian Web", new Some(500), new None, "/public/fonts/egyptiantext-medium.otf")}
-    ${fontFace("Guardian Egyptian Web", new None, new None, "/public/fonts/egyptiantext-regular.otf")}
-    ${fontFace("Guardian Egyptian Web", new None, new Some("italic"), "/public/fonts/egyptiantext-regularitalic.otf")}
-    ${fontFace("Guardian Egyptian Web", new Some("bold"), new None, "/public/fonts/egyptiantext-medium.otf")}
-    ${fontFace("Guardian Egyptian Web", new Some("bold"), new Some("italic"), "/public/fonts/egyptiantext-mediumitalic.otf")}
+    ${fontFace("Guardian Egyptian Web", new None, new None, "/public/fonts/GuardianTextEgyptian-Reg.ttf")}
+    ${fontFace("Guardian Egyptian Web", new None, new Some("italic"), "/public/fonts/GuardianTextEgyptian-RegItalic.ttf")}
+    ${fontFace("Guardian Egyptian Web", new Some(500), new None, "/public/fonts/GuardianTextEgyptian-Bold.ttf")}
+    ${fontFace("Guardian Egyptian Web", new Some("bold"), new None, "/public/fonts/GuardianTextEgyptian-Bold.ttf")}
+    ${fontFace("Guardian Egyptian Web", new Some("bold"), new Some("italic"), "/public/fonts/GuardianTextEgyptian-BoldItalic.ttf")}
 
     ${fontFace("Guardian Text Sans Web", new Some(200), new None, "/public/fonts/GuardianSansWeb-Light.ttf")}
     ${fontFace("Guardian Text Sans Web", new Some(300), new None, "/public/fonts/GuardianSansWeb-Regular.ttf")}

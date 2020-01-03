@@ -298,7 +298,7 @@ const richLinkStyles = css`
     padding: ${basePx(1)};
 
     h1 {
-        margin: 0;
+        margin: ${basePx(0, 0, 2, 0)};
     }
 
     p {
@@ -311,6 +311,8 @@ const richLinkStyles = css`
 
     a {
         text-decoration: none;
+        background: none;
+        font-size: 1.25em;
     }
 
     float: left;
