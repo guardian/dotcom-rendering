@@ -67,7 +67,7 @@ export function secondsToDuration(secs?: number): string {
 
 export const Icon = ({ mediaType }: Props) => {
     switch (mediaType) {
-        case 'Photo':
+        case 'Gallery':
             return <Photo />;
         case 'Video':
             return <Video />;

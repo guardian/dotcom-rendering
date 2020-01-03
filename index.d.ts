@@ -257,7 +257,7 @@ type AvatarType = {
     alt: string;
 };
 
-type MediaType = 'Video' | 'Audio' | 'Photo';
+type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
