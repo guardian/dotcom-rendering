@@ -167,7 +167,7 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
         props.text.replace(/•/, ''),
     );
 
-const HeadingTwo = (props: { children?: ReactNode }) =>
+const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
     h('h2', null, props.children);
 
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
