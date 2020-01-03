@@ -161,30 +161,24 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
         props.text.replace(/•/, ''),
     );
 
-const textElement = (pillar: Pillar) => (node: Node): ReactNode => {
+const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     switch (node.nodeName) {
         case 'P':
-            return h(Paragraph, null, ...Array.from(node.childNodes).map(textElement(pillar)));
+            return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case '#text':
             const text = node.textContent;
             return text?.includes('•') ? h(Bullet, { pillar, text }) : text;
         case 'SPAN':
             return node.textContent;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar });
+            return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar, key });
         default:
             return null;
     }
 }
 
-const Text = (props: { doc: DocumentFragment; pillar: Pillar }): ReactElement =>
-    styledH(
-        Fragment,
-        null,
-        Array.from(props.doc.childNodes).map((node, key) =>
-            h(Fragment, { key }, textElement(props.pillar)(node))
-        ),
-    );
+const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
+    Array.from(doc.childNodes).map(textElement(pillar));
 
 const makeCaption = (caption: string, displayCredit: boolean, credit: string): string =>
     displayCredit ? `${caption} ${credit}` : caption;
@@ -335,14 +329,14 @@ const Interactive = (props: { url: string }): ReactElement =>
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
-const Tweet = (props: { content: NodeList; pillar: Pillar }): ReactElement =>
-    h('blockquote', null, ...Array.from(props.content).map(textElement(props.pillar)));
+const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement =>
+    h('blockquote', { key: props.key }, ...Array.from(props.content).map(textElement(props.pillar)));
 
 const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number): ReactNode => {
     switch (block.kind) {
 
         case ElementType.TEXT:
-            return h(Text, { doc: block.doc, pillar, key });
+            return text(block.doc, pillar);
 
         case ElementType.IMAGE:
             const { file, alt, caption, displayCredit, credit } = block;

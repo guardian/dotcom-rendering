@@ -4,7 +4,7 @@ function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
     const adIndices = [3, 9];
     const flattenedNodes = reactNodes.flat();
 
-    const isPara = (node: { type: string }): boolean => node.type === 'p';
+    const isPara = (node: { type: { name?: string } }): boolean => node.type?.name === 'Paragraph';
     const numParas = flattenedNodes.filter(isPara).length;
 
     const className = numParas < 15 ? 'ad-placeholder short' : 'ad-placeholder';
