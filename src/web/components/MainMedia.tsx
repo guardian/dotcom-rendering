@@ -3,7 +3,8 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
-import { MainImageComponent } from '@root/src/web/components/elements/MainImageComponent';
+
+import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
 const captionFont = css`
     ${textSans.xsmall()};
@@ -49,7 +50,7 @@ function renderElement(
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return (
-                <MainImageComponent
+                <ImageComponent
                     key={i}
                     element={element}
                     pillar={pillar}
