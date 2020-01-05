@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
+
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -157,132 +158,114 @@ const buttonExpanded = css`
     }
 `;
 
-export class Dropdown extends React.Component<
-    Props,
-    { isExpanded: boolean; noJS: boolean }
-> {
-    private boundToggle: () => void;
+export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [noJS, setNoJS] = useState(true);
 
-    constructor(props: Props) {
-        super(props);
-        this.state = { isExpanded: false, noJS: true };
-        this.boundToggle = this.toggle.bind(this);
-    }
+    useEffect(() => {
+        // If hook runs we know client-side JS is enabled
+        setNoJS(false);
+    });
 
-    public componentDidMount() {
-        // If componentDidMount runs we know client-side JS is enabled
-        this.setState({
-            noJS: false,
-        });
-    }
+    useEffect(() => {
+        document.addEventListener('keydown', dismissOnEsc, false);
 
-    public toggle() {
-        this.setState(prevState => ({
-            isExpanded: !prevState.isExpanded,
-        }));
-    }
+        // Remove listener on unmount
+        return () => document.removeEventListener('keydown', dismissOnEsc);
+    });
 
-    public render() {
-        const { label, links } = this.props;
+    useEffect(() => {
+        document.addEventListener('click', dismissOnClick, false);
 
-        if (this.state.isExpanded) {
-            const removeListeners = () => {
-                // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                document.removeEventListener('keydown', dismissOnEsc);
-                // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                document.removeEventListener('click', dismissOnClick);
-            };
-            const dismissOnClick = (event: MouseEvent) => {
-                event.stopPropagation();
-                this.setState(() => ({
-                    isExpanded: false,
-                }));
-                removeListeners();
-            };
-            const dismissOnEsc = (event: KeyboardEvent) => {
-                const escKey = 'Escape';
+        // Remove listener on unmount
+        return () => document.removeEventListener('click', dismissOnClick);
+    });
 
-                if (event.code === escKey) {
-                    this.setState(() => ({
-                        isExpanded: false,
-                    }));
-                    removeListeners();
-                }
-            };
-
-            document.addEventListener('keydown', dismissOnEsc, false);
-            document.addEventListener('click', dismissOnClick, false);
+    const dismissOnClick = (event: MouseEvent) => {
+        if (isExpanded) {
+            event.stopPropagation();
+            setIsExpanded(false);
         }
+    };
 
-        // needs to be unique to allow multiple dropdowns on same page
-        // this should be unique because JS is single-threaded
-        const dropdownID = `dropbox-id-${this.props.id}`;
-        const checkboxID = `checkbox-id-${this.props.id}`;
+    const dismissOnEsc = (event: KeyboardEvent) => {
+        if (isExpanded && event.code === 'Escape') {
+            setIsExpanded(false);
+        }
+    };
 
-        return (
-            <>
-                {this.state.noJS ? (
-                    <label
-                        htmlFor={checkboxID}
-                        className={cx({
-                            [button]: true,
-                            [buttonExpanded]: this.state.isExpanded,
-                        })}
-                        aria-controls={dropdownID}
-                        aria-expanded={this.state.isExpanded ? 'true' : 'false'}
-                        role="button"
-                    >
-                        <input
-                            className={input}
-                            type="checkbox"
-                            id={checkboxID}
-                            aria-controls={dropdownID}
-                            aria-checked="false"
-                            tabIndex={-1}
-                            key="OpenMainMenuCheckbox"
-                            role="menuitemcheckbox"
-                        />
-                        {label}
-                    </label>
-                ) : (
-                    <button
-                        onClick={this.boundToggle}
-                        className={cx({
-                            [button]: true,
-                            [buttonExpanded]: this.state.isExpanded,
-                        })}
-                        aria-controls={dropdownID}
-                        aria-expanded={this.state.isExpanded ? 'true' : 'false'}
-                        data-link-name={this.props.dataLinkName}
-                    >
-                        {label}
-                    </button>
-                )}
+    const handleToggle = () => {
+        setIsExpanded(!isExpanded);
+    };
 
-                <ul
-                    id={dropdownID}
+    // needs to be unique to allow multiple dropdowns on same page
+    // this should be unique because JS is single-threaded
+    const dropdownID = `dropbox-id-${id}`;
+    const checkboxID = `checkbox-id-${id}`;
+
+    return (
+        <>
+            {noJS ? (
+                <label
+                    htmlFor={checkboxID}
                     className={cx({
-                        [ul]: true,
-                        [ulExpanded]: this.state.isExpanded,
+                        [button]: true,
+                        [buttonExpanded]: isExpanded,
                     })}
+                    aria-controls={dropdownID}
+                    aria-expanded={isExpanded ? 'true' : 'false'}
+                    role="button"
                 >
-                    {links.map((l, index) => (
-                        <li key={l.title}>
-                            <a
-                                href={l.url}
-                                className={cx({
-                                    [link]: true,
-                                    [linkActive]: !!l.isActive,
-                                    [linkFirst]: index === 0,
-                                })}
-                                data-link-name={l.dataLinkName}
-                            >
-                                {l.title}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </>
-        );
-    }
-}
+                    <input
+                        className={input}
+                        type="checkbox"
+                        id={checkboxID}
+                        aria-controls={dropdownID}
+                        aria-checked="false"
+                        tabIndex={-1}
+                        key="OpenMainMenuCheckbox"
+                        role="menuitemcheckbox"
+                    />
+                    {label}
+                </label>
+            ) : (
+                <button
+                    onClick={handleToggle}
+                    className={cx({
+                        [button]: true,
+                        [buttonExpanded]: isExpanded,
+                    })}
+                    aria-controls={dropdownID}
+                    aria-expanded={isExpanded ? 'true' : 'false'}
+                    data-link-name={dataLinkName}
+                >
+                    {label}
+                </button>
+            )}
+
+            <ul
+                id={dropdownID}
+                className={cx({
+                    [ul]: true,
+                    [ulExpanded]: isExpanded,
+                })}
+            >
+                {links.map((l, index) => (
+                    <li key={l.title}>
+                        <a
+                            href={l.url}
+                            className={cx({
+                                [link]: true,
+                                [linkActive]: !!l.isActive,
+                                [linkFirst]: index === 0,
+                            })}
+                            data-link-name={l.dataLinkName}
+                        >
+                            {l.title}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </>
+    );
+};
