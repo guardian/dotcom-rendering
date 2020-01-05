@@ -97,8 +97,8 @@ const linkActive = css`
         border-top: 0px;
         border-right: 0px;
         position: absolute;
-        top: 14px;
-        left: 10px;
+        top: 19px;
+        left: 12px;
         width: 10px;
         height: 4px;
         transform: rotate(-45deg);
