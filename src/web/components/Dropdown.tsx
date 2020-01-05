@@ -5,7 +5,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
-interface Link {
+interface DropdownLinkType {
     url: string;
     title: string;
     isActive?: boolean;
@@ -15,7 +15,7 @@ interface Link {
 interface Props {
     id: string;
     label: string;
-    links: Link[];
+    links: DropdownLinkType[];
     dataLinkName: string;
 }
 
