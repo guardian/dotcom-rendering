@@ -1,10 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
+
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
+import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 
 const captionFont = css`
     ${textSans.xsmall()};
@@ -55,9 +57,25 @@ function renderElement(
                     element={element}
                     pillar={pillar}
                     hideCaption={hideCaption}
+                    role={element.role}
+                />
+            );
+        case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
+            return (
+                <YouTubeComponent
+                    key={i}
+                    element={element}
+                    pillar={pillar}
+                    hideCaption={hideCaption}
+                    // tslint:disable-next-line react-a11y-role
+                    role="inline"
                 />
             );
         default:
+            // tslint:disable-next-line no-console
+            console.warn(
+                `The following main media element is not supported by DCR ${element._type}`,
+            );
             return null;
     }
 }
