@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Dropdown, Link } from '@root/src/web/components/Dropdown';
+import { Dropdown } from '@root/src/web/components/Dropdown';
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -29,55 +29,44 @@ const editionDropdown = css`
     }
 `;
 
-const editionPickerDataLinkName = 'nav2 : topbar : edition-picker: ';
-
-const ukEditionLink: Link = {
-    url: '/preference/edition/uk',
-    title: 'UK edition',
-    isActive: true,
-    dataLinkName: `${editionPickerDataLinkName}UK`,
-};
-
-const usEditionLink: Link = {
-    url: '/preference/edition/us',
-    title: 'US edition',
-    dataLinkName: `${editionPickerDataLinkName}US`,
-};
-
-const auEditionLink: Link = {
-    url: '/preference/edition/au',
-    title: 'Australian edition',
-    dataLinkName: `${editionPickerDataLinkName}AU`,
-};
-
-const intEditionLink: Link = {
-    url: '/preference/edition/int',
-    title: 'International edition',
-    dataLinkName: `${editionPickerDataLinkName}INT`,
-};
-
-const lookUpEditionLink = (edition: Edition): Link => {
-    const mapping = {
-        UK: ukEditionLink,
-        US: usEditionLink,
-        AU: auEditionLink,
-        INT: intEditionLink,
-    };
-    return mapping[edition];
-};
-
 export const EditionDropdown: React.FC<{
     edition: Edition;
     dataLinkName: string;
 }> = ({ edition, dataLinkName }) => {
-    const activeEditionLink = lookUpEditionLink(edition);
     const links = [
-        ukEditionLink,
-        usEditionLink,
-        auEditionLink,
-        intEditionLink,
-    ].filter(ed => ed.url !== activeEditionLink.url);
-    links.unshift(activeEditionLink);
+        {
+            url: '/preference/edition/uk',
+            isActive: edition === 'UK',
+            title: 'UK edition',
+            dataLinkName: 'nav2 : topbar : edition-picker: UK',
+        },
+        {
+            url: '/preference/edition/us',
+            isActive: edition === 'US',
+            title: 'US edition',
+            dataLinkName: 'nav2 : topbar : edition-picker: US',
+        },
+        {
+            url: '/preference/edition/au',
+            isActive: edition === 'AU',
+            title: 'Australian edition',
+            dataLinkName: 'nav2 : topbar : edition-picker: AU',
+        },
+        {
+            url: '/preference/edition/int',
+            isActive: edition === 'INT',
+            title: 'International edition',
+            dataLinkName: 'nav2 : topbar : edition-picker: INT',
+        },
+    ];
+
+    // Find active link, default to UK
+    const activeLink = links.find(link => link.isActive) || links[0];
+
+    // Remove the active link and add it back to the top of the list
+    const linksToDisplay = links.filter(link => !link.isActive);
+    linksToDisplay.unshift(activeLink);
+
     return (
         <div className={editionDropdown}>
             <div
@@ -86,8 +75,8 @@ export const EditionDropdown: React.FC<{
                 `}
             >
                 <Dropdown
-                    label={activeEditionLink.title}
-                    links={links}
+                    label={activeLink.title}
+                    links={linksToDisplay}
                     id="edition"
                     dataLinkName={dataLinkName}
                 />

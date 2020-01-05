@@ -5,7 +5,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
-export interface Link {
+interface Link {
     url: string;
     title: string;
     isActive?: boolean;
