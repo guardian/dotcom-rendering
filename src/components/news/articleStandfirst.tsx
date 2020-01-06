@@ -1,6 +1,5 @@
 import React from 'react';
 import { sidePadding, bulletStyles, headlineFont, darkModeCss, linkStyle } from 'styles';
-import { transform } from '../../contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { PillarStyles } from 'pillar';
@@ -59,7 +58,7 @@ const ArticleStandfirst = ({
             StandfirstDarkStyles(pillarStyles)
         ]}
     >
-        {componentFromHtml(transform(standfirst))}
+        {componentFromHtml(standfirst)}
     </div>
 
 export default ArticleStandfirst;

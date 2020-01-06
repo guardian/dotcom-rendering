@@ -118,6 +118,10 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         ${headlineFont}
         margin: 0;
 
+        blockquote {
+            margin-left: 0;
+        }
+
         p {
             margin: 1em 0;
 

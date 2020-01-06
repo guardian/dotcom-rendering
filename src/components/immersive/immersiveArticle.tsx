@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ImmersiveHeaderImage from 'components/immersive/immersiveHeaderImage';
 import ImmersiveSeries from 'components/immersive/immersiveSeries';
 import ImmersiveHeadline from 'components/immersive/immersiveHeadline';
@@ -18,14 +18,25 @@ import { palette } from '@guardian/src-foundations';
 export interface ImmersiveArticleProps {
     capi: Content;
     imageSalt: string;
+    children: ReactNode[];
 }
-
-const MainStyles = css`
-    background: ${palette.neutral[97]};
-`;
 
 const MainDarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
+`;
+
+const HeaderStyles = css`
+    h2 {
+        margin-top: 3.2rem;
+        font-size: 2.6rem;
+        line-height: 3.2rem;
+        font-weight: 200;
+        margin-bottom: 8px;
+
+        &+p {
+            margin-top: 0;
+        }
+    }
 `;
 
 const BorderStyles = css`
@@ -36,7 +47,8 @@ const BorderStyles = css`
 `;
 
 const DropCapStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
-    p:first-of-type::first-letter {
+    p:first-child::first-letter,
+    .section-rule + p::first-letter {
         color: ${pillarStyles.kicker};
         font-weight: 100;
         font-style: normal;
@@ -57,18 +69,17 @@ const HeaderImageStyles = css`
     }
 `;
 
-const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Element => {
+const ImmersiveArticle = ({ capi, imageSalt, children }: ImmersiveArticleProps): JSX.Element => {
 
-    const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
+    const { fields, tags, webPublicationDate, pillarId } = capi;
     const series = articleSeries(capi);
     const pillar = pillarFromString(pillarId);
     const pillarStyles = getPillarStyles(pillar);
     const contributors = articleContributors(capi);
-    const bodyElements = blocks.body[0].elements;
     const mainImage = articleMainImage(capi);
 
     return (
-        <main css={[MainStyles, MainDarkStyles]}>
+        <main css={MainDarkStyles}>
             <article css={BorderStyles}>
                 <header>
                     <div css={articleWidthStyles}>
@@ -83,7 +94,8 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
                             standfirst={fields.standfirst}
                             pillarStyles={pillarStyles}
                             className={articleWidthStyles}
-                            byline={fields.bylineHtml}
+                            bylineHtml={fields.bylineHtml}
+                            byline={fields.byline}
                         />
                     </div>
                     <Keyline pillar={pillar} type={'article'}/>
@@ -96,10 +108,10 @@ const ImmersiveArticle = ({ capi, imageSalt }: ImmersiveArticleProps): JSX.Eleme
                 </header>
                 <ArticleBody
                     pillarStyles={pillarStyles}
-                    bodyElements={bodyElements}
-                    imageSalt={imageSalt}
-                    className={[articleWidthStyles, DropCapStyles(pillarStyles)]}
-                />
+                    className={[articleWidthStyles, DropCapStyles(pillarStyles), HeaderStyles]}
+                >
+                    {children}
+                </ArticleBody>
                 <footer css={articleWidthStyles}>
                     <Tags tags={tags}/>
                 </footer>
