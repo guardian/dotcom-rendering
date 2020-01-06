@@ -2,6 +2,8 @@
 
 import { createElement as h, ReactNode } from 'react';
 import * as AssetUtils from 'asset';
+import { css, jsx as styledH } from '@emotion/core';
+import { palette } from '@guardian/src-foundations';
 import { BlockElement } from 'capiThriftModels';
 
 // ----- Setup ----- //
@@ -21,7 +23,8 @@ const isImage = (elem: BlockElement): boolean =>
 
 const element = (sizes: string) => 
     (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode =>
-        h('img', {
+        styledH('img', {
+            css: css`height: calc(100vw * 3/4); background: ${palette.neutral[97]}`,
             sizes,
             srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
             alt,
