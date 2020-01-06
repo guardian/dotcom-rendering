@@ -65,45 +65,52 @@ export const SeriesSectionLink: React.FC<{
     CAPI: CAPIType;
     fallbackToSection: boolean;
 }> = ({ CAPI, fallbackToSection }) => {
-    const tag = CAPI.tags.find(t => t.type === 'Blog' || t.type === 'Series');
+    const { tags, sectionLabel, sectionUrl, guardianBaseURL, pillar } = CAPI;
 
-    if (!tag && !fallbackToSection) {
-        return null;
-    }
+    const blogTag = tags.find(tag => tag.type === 'Blog');
+    const seriesTag = tags.find(tag => tag.type === 'Series');
+    const publicationTag = tags.find(tag => tag.type === 'Publication');
 
-    if (!tag && (CAPI.sectionLabel && CAPI.sectionUrl)) {
-        return (
-            <TagLink
-                pillar={CAPI.pillar}
-                guardianBaseURL={CAPI.guardianBaseURL}
-                tagTitle={CAPI.sectionLabel}
-                tagUrl={CAPI.sectionUrl}
-                dataLinkName="article section"
-                weightingClass={primaryStyle}
-            />
-        );
-    }
+    if (
+        blogTag ||
+        seriesTag ||
+        (publicationTag && publicationTag.title === 'The Observer')
+    ) {
+        // Chose tag to use based on this order or importance
+        const tag = blogTag || seriesTag || publicationTag;
 
-    if (tag) {
-        return (
+        return tag ? (
             <>
                 <TagLink
-                    pillar={CAPI.pillar}
-                    guardianBaseURL={CAPI.guardianBaseURL}
+                    pillar={pillar}
+                    guardianBaseURL={guardianBaseURL}
                     tagTitle={tag.title}
                     tagUrl={tag.id}
                     dataLinkName="article series"
                     weightingClass={primaryStyle}
                 />
                 <TagLink
-                    pillar={CAPI.pillar}
-                    guardianBaseURL={CAPI.guardianBaseURL}
-                    tagTitle={CAPI.sectionLabel}
-                    tagUrl={CAPI.sectionUrl}
+                    pillar={pillar}
+                    guardianBaseURL={guardianBaseURL}
+                    tagTitle={sectionLabel}
+                    tagUrl={sectionUrl}
                     dataLinkName="article section"
                     weightingClass={secondaryStyle}
                 />
             </>
+        ) : null;
+    }
+
+    if (fallbackToSection && (sectionLabel && sectionUrl)) {
+        return (
+            <TagLink
+                pillar={pillar}
+                guardianBaseURL={guardianBaseURL}
+                tagTitle={sectionLabel}
+                tagUrl={sectionUrl}
+                dataLinkName="article section"
+                weightingClass={primaryStyle}
+            />
         );
     }
 
