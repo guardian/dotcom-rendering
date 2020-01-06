@@ -26,19 +26,24 @@ function getAdSlots(): AdSlot[] {
 }
 
 setup();
+let adSlots = getAdSlots();
 
-
-function poller(interval: number, adSlotPositions: AdSlot[]): void {
-    const newAdSlotPositions = getAdSlots();
-    if (JSON.stringify(adSlotPositions) !== JSON.stringify(newAdSlotPositions)) {
-        // TODO: function to be added to Thrift
-        // nativeClient.updateAdverts(newAdSlotPositions);
-    }
-    setTimeout(poller.bind(null, interval + 50, newAdSlotPositions), interval);
-}
-
+// TODO: this can be removed after adding a min-height to images
 setTimeout(() => {
-    const adSlotPositions = getAdSlots();
-    nativeClient.insertAdverts(adSlotPositions)
-    poller(50, adSlotPositions);
+    adSlots = getAdSlots();
+    nativeClient.insertAdverts(adSlots)
 }, 2000)
+
+const targetNode = document.querySelector('body') as Node;
+const config = { attributes: true, childList: true, subtree: true };
+const callback = function(): void {
+    const currentAdSlots = getAdSlots();
+    if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+        // TODO: add this to mobile-apps-thrift and implement client side
+        // nativeClient.updateAdverts(currentAdSlots);
+        adSlots = currentAdSlots;
+    }
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(targetNode, config);
