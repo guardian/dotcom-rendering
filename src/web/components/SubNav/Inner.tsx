@@ -42,10 +42,13 @@ const subnavCollapsed = css`
 `;
 
 const fontStyle = css`
-    ${textSans.medium()};
+    ${textSans.small()};
+    /* Design System: We're overriding source foundation here for parity as 'small' is not small enough */
+    font-size: 14px;
+
     font-weight: 500;
     color: ${palette.neutral[7]};
-    padding: 0 5px;
+    padding: 0 4px;
     height: 36px;
     /* Design System: Line height is being used here for centering layout, we need the primitives */
     /* stylelint-disable-next-line property-blacklist */
@@ -53,6 +56,9 @@ const fontStyle = css`
 
     ${from.tablet} {
         height: 42px;
+        ${textSans.medium()};
+        /* Design System: We're overriding source foundation here for parity as 'medium' is too big */
+        font-size: 16px;
         /* Design System: Line height is being used here for centering layout, we need the primitives */
         /* stylelint-disable-next-line property-blacklist */
         line-height: 42px;
