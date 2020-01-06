@@ -5,6 +5,7 @@ import * as AssetUtils from 'asset';
 import { css, jsx as styledH } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { BlockElement } from 'capiThriftModels';
+import { from } from '@guardian/src-foundations/mq';
 
 // ----- Setup ----- //
 
@@ -24,7 +25,15 @@ const isImage = (elem: BlockElement): boolean =>
 const element = (sizes: string) => 
     (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode =>
         styledH('img', {
-            css: css`height: calc(100vw * 3/4); background: ${palette.neutral[97]}`,
+            css: css`
+                --ratio: ${sizes};
+                height: calc(var(--ratio) * 0.58);
+                background: ${palette.neutral[97]};
+
+                ${from.wide} {
+                    height: calc(620px * 0.58);
+                }
+            `,
             sizes,
             srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
             alt,
@@ -32,7 +41,7 @@ const element = (sizes: string) =>
         });
 
 const immersiveImageElement = element('calc(80vh * 5/3)');
-const imageElement = element('100%');
+const imageElement = element('100vw');
 
 function imageBlock(image: Image, assets: AssetUtils.Asset[], salt: string): ReactNode {
 
