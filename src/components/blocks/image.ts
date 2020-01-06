@@ -6,6 +6,7 @@ import { css, jsx as styledH } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { BlockElement } from 'capiThriftModels';
 import { from } from '@guardian/src-foundations/mq';
+import { fromNullable } from 'types/option';
 
 // ----- Setup ----- //
 
@@ -19,26 +20,35 @@ interface Image {
 
 // ----- Functions ----- //
 
+const imageRatioStyles = (sizes = "100vw", width: number, height: number) => css`
+        --size: ${sizes};
+        height: calc(var(--size) * ${height / width});
+        background: ${palette.neutral[97]};
+
+        ${from.wide} {
+            height: calc(620px * ${height / width});
+        }
+    `
+
 const isImage = (elem: BlockElement): boolean =>
   elem.type === 'image';
 
 const element = (sizes: string) => 
-    (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode =>
-        styledH('img', {
-            css: css`
-                --ratio: ${sizes};
-                height: calc(var(--ratio) * 0.58);
-                background: ${palette.neutral[97]};
+    (alt: string, assets: AssetUtils.Asset[], salt: string): ReactNode => {
+        const masterAsset = assets.find(asset => asset.typeData.isMaster);
+        const aspectRatio: number[] = fromNullable(masterAsset)
+            .map(asset => [asset.typeData.height, asset.typeData.width])
+            .withDefault([3, 5])
+        const [height, width] = aspectRatio;
 
-                ${from.wide} {
-                    height: calc(620px * 0.58);
-                }
-            `,
-            sizes,
-            srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
-            alt,
-            src: AssetUtils.toUrl(salt, assets[0]),
-        });
+            return styledH('img', {
+                css: imageRatioStyles(sizes, width, height),
+                sizes,
+                srcSet: AssetUtils.toSrcset(salt, assets).withDefault(''),
+                alt,
+                src: AssetUtils.toUrl(salt, assets[0]),
+            });
+    }
 
 const immersiveImageElement = element('calc(80vh * 5/3)');
 const imageElement = element('100vw');
@@ -61,4 +71,5 @@ export {
     imageBlock,
     imageElement,
     immersiveImageElement,
+    imageRatioStyles,
 };
