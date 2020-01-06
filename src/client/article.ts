@@ -28,12 +28,10 @@ function getAdSlots(): AdSlot[] {
 setup();
 
 
-function poller(interval: number, adSlotPositions: AdSlot[]) {
+function poller(interval: number, adSlotPositions: AdSlot[]): void {
     const newAdSlotPositions = getAdSlots();
-    console.log(adSlotPositions)
-    console.log(newAdSlotPositions)
-    console.log("-----------")
     if (JSON.stringify(adSlotPositions) !== JSON.stringify(newAdSlotPositions)) {
+        // TODO: function to be added to Thrift
         // nativeClient.updateAdverts(newAdSlotPositions);
     }
     setTimeout(poller.bind(null, interval + 50, newAdSlotPositions), interval);
