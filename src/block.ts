@@ -161,6 +161,17 @@ const bulletStyles = (colour: string): SerializedStyles => css`
     }
 `;
 
+const HeadingTwoStyles = css`
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    margin: ${basePx(1, 0)};
+    font-weight: 500;
+
+    & + p {
+        margin-top: 0;
+    }
+`
+
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
     h(Fragment, null,
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
@@ -168,7 +179,8 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
     );
 
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
-    h('h2', null, props.children);
+    styledH('h2', { css: HeadingTwoStyles }, props.children );
+
 
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     switch (node.nodeName) {
