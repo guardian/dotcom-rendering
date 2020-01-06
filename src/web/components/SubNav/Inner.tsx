@@ -56,7 +56,6 @@ const fontStyle = css`
 
     ${from.tablet} {
         height: 42px;
-        ${textSans.medium()};
         /* Design System: We're overriding source foundation here for parity as 'medium' is too big */
         font-size: 16px;
         /* Design System: Line height is being used here for centering layout, we need the primitives */
