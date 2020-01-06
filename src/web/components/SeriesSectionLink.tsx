@@ -76,7 +76,7 @@ export const SeriesSectionLink: React.FC<{
         seriesTag ||
         (publicationTag && publicationTag.title === 'The Observer')
     ) {
-        // Chose tag to use based on this order or importance
+        // Chose tag to use based on this order of importance
         const tag = blogTag || seriesTag || publicationTag;
 
         return tag ? (
