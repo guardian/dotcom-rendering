@@ -68,4 +68,12 @@ tier. It must be possible to migrate a single content type such as the article w
 
 As a principle, we should initially build all core components in isolation as though they were going to be shared, before connecting them into the App. Not because we want to share them but because the act of doing this results in better components
 
-Creating stories in Storybook, carefully crafting the api for the component and just generally giving time and thought to how other developers might experience things all lead to cleaner components that are easier to understand. This is useful for the immediate DCR team and then, if we decide to share it later, to others outside DCR but we should be wary exposing apis to other teams while we are still at a stage where things can be refactored
+When you create components in Storybook you:
+
+-   Condsider the api
+-   Think about the different ways the component could be used
+-   Become the consumer of the component (when you write the stories)
+
+This leads to cleaner components that are easier to understand which is useful for the immediate DCR team and then, if we decide to actually share the component later, to others outside DCR.
+
+However, we should be wary exposing apis to other teams too soon while we are still at a stage where things can be refactored
