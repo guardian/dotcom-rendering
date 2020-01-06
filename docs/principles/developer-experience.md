@@ -68,4 +68,4 @@ tier. It must be possible to migrate a single content type such as the article w
 
 When I see my component being called I want to be absolutely certain that all the props shown being passed in are _all_ the props being passed in. In DCR now, this is currently true in all cases and adds a substantial benefit when trying to reason about data flows
 
-Many other codebases have abstraction patters using HOCs, Context, Themes, etc. None of those things are wrong or bad, indeed they are excellent solutions to common issues, but - at this point in time - none of these technologies or patterns are considered necessary for DCR and we should only introduce them after team discussion
+Many other codebases have abstraction patterns using HOCs, Context, Themes, etc. None of those things are wrong or bad, indeed they are excellent solutions to common issues, but - at this point in time - none of these technologies or patterns are considered necessary for DCR and we should only introduce them after team discussion
