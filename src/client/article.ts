@@ -26,25 +26,21 @@ function getAdSlots(): AdSlot[] {
 }
 
 setup();
-let adSlots = getAdSlots();
 
-// TODO: this can be removed after adding a min-height to images
-setTimeout(() => {
-    adSlots = getAdSlots();
-    nativeClient.insertAdverts(adSlots)
-}, 2000)
 
-const targetNode = document.querySelector('body') as Node;
-const config = { attributes: true, childList: true, subtree: true };
-const callback = function(): void {
-    const currentAdSlots = getAdSlots();
-    if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
-        // TODO: insert adverts needs refactoring to reposition ads
-        // Or we may need a new function to reposition adverts
-        nativeClient.insertAdverts(currentAdSlots);
-        adSlots = currentAdSlots;
+function poller(interval: number, adSlotPositions: AdSlot[]) {
+    const newAdSlotPositions = getAdSlots();
+    console.log(adSlotPositions)
+    console.log(newAdSlotPositions)
+    console.log("-----------")
+    if (JSON.stringify(adSlotPositions) !== JSON.stringify(newAdSlotPositions)) {
+        // nativeClient.updateAdverts(newAdSlotPositions);
     }
-};
+    setTimeout(poller.bind(null, interval + 50, newAdSlotPositions), interval);
+}
 
-const observer = new MutationObserver(callback);
-observer.observe(targetNode, config);
+setTimeout(() => {
+    const adSlotPositions = getAdSlots();
+    nativeClient.insertAdverts(adSlotPositions)
+    poller(50, adSlotPositions);
+}, 2000)
