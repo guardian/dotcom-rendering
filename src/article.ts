@@ -8,7 +8,7 @@ import { isFeature, isAnalysis, isImmersive, isReview } from 'capi';
 // ----- Types ----- //
 
 const enum Layout {
-    Default,
+    Standard,
     Immersive,
     Feature,
     Review,
@@ -44,7 +44,7 @@ function layoutFromCapi(content: Content): Layout {
             } else if (isAnalysis(content)) {
                 return Layout.Analysis;
             }
-            return Layout.Default;
+            return Layout.Standard;
         case 'liveblog':
             return Layout.Liveblog;
         case 'gallery':
@@ -58,7 +58,7 @@ function layoutFromCapi(content: Content): Layout {
         case 'audio':
             return Layout.Audio;
         default:
-            return Layout.Default;
+            return Layout.Standard;
     }    
 }
 
