@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { textSans, body } from '@guardian/src-foundations/typography';
+import { textSans, body, headline } from '@guardian/src-foundations/typography';
 
 interface OutbrainSelectors {
     widget: string;
@@ -50,10 +50,13 @@ const outbrainContainer = css`
     }
     .ob-widget {
         div.ob-widget-header {
-            ${body.medium()};
+            ${headline.xsmall()};
+            font-weight: 900;
             span,
             .ob_about_this_content a {
-                ${body.small()};
+                ${body.small({ fontWeight: 'regular' })};
+                font-size: 17px;
+
                 text-decoration: none;
                 /* stylelint-disable-next-line color-no-hex */
                 color: #00456e;
@@ -65,7 +68,8 @@ const outbrainContainer = css`
 
         span.ob-rec-text {
             max-height: fit-content;
-            ${textSans.medium()};
+            ${textSans.medium({ fontWeight: 'bold' })};
+            font-size: 16px;
         }
     }
 `;
