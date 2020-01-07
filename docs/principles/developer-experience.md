@@ -70,7 +70,7 @@ As a principle, we should initially build all core components in isolation as th
 
 When you create components in Storybook you:
 
--   Condsider the api
+-   Consider the api
 -   Think about the different ways the component could be used
 -   Become the consumer of the component (when you write the stories)
 
