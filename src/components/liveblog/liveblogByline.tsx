@@ -9,8 +9,9 @@ import { Contributor } from '../../capi';
 import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles, Pillar } from 'pillar';
+import { PillarStyles } from 'pillar';
 import { componentFromHtml } from 'renderBlocks';
+import { Article } from 'article';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -51,7 +52,7 @@ interface LiveblogBylineProps {
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
-    pillar: Pillar;
+    article: Article;
     imageSalt: string;
 }
 
@@ -60,13 +61,13 @@ const LiveblogByline = ({
     pillarStyles,
     publicationDate,
     contributors,
-    pillar,
+    article,
     imageSalt
 }: LiveblogBylineProps): JSX.Element => {
     
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
-            <Keyline pillar={pillar} type={'liveblog'}/>
+            <Keyline article={article}/>
             <LeftColumn>
                 <Avatar
                     contributors={contributors}
