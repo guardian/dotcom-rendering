@@ -92,7 +92,7 @@ const Article = ({ capi, imageSalt, article, children }: ArticleProps): JSX.Elem
                             className={articleWidthStyles}
                         />
                     </div>
-                    <Keyline pillar={pillar}/>
+                    <Keyline article={article}/>
                     <section css={articleWidthStyles}>
                         <ArticleByline
                             byline={fields.bylineHtml}
