@@ -62,7 +62,6 @@ interface ArticleBylineProps {
     publicationDate: string;
     contributors: Contributor[];
     imageSalt: string;
-    className: SerializedStyles;
 }
 
 const ArticleByline = ({
@@ -70,11 +69,10 @@ const ArticleByline = ({
     pillarStyles,
     publicationDate,
     contributors,
-    imageSalt,
-    className,
+    imageSalt
 }: ArticleBylineProps): JSX.Element =>
     <div
-        css={[className, ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}
+        css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}
     >
         <div css={sidePadding}>
             <Avatar

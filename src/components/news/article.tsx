@@ -100,7 +100,6 @@ const Article = ({ capi, imageSalt, article, children }: ArticleProps): JSX.Elem
                             publicationDate={webPublicationDate}
                             contributors={contributors}
                             imageSalt={imageSalt}
-                            className={css``}
                         />
                         {fields.commentable
                                 ? <CommentCount count={0} colour={pillarStyles.kicker}/>
