@@ -3,7 +3,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { css } from '@emotion/core';
 
-import Article from 'components/news/article';
+import ArticleComponent from 'components/news/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import OpinionArticle from 'components/opinion/opinionArticle';
 import ImmersiveArticle from 'components/immersive/immersiveArticle';
@@ -17,6 +17,7 @@ import { renderAll, parseAll } from 'block';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { insertAdPlaceholders } from 'ads';
+import { Article, fromCapi } from 'article';
 
 
 // ----- Components ----- //
@@ -70,6 +71,7 @@ interface BodyProps {
 interface ArticleProps {
     imageSalt: string;
     capi: Content;
+    article: Article;
     children: ReactNode[];
 }
 
@@ -80,26 +82,27 @@ function getArticleSubtype(capi: Content): FunctionComponent<ArticleProps> {
         return ImmersiveArticle;
     }
   
-    return Article;
+    return ArticleComponent;
   }
 
 function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
+    const article = fromCapi(capi);
+
     switch (capi.type) {
         case 'article':
             const parsedBlocks = parseAll(JSDOM.fragment)(capi.blocks.body[0].elements);
             const body = partition(parsedBlocks).oks;
-            const pillar = pillarFromString(capi.pillarId);
             const Component = getArticleSubtype(capi);
 
             return <>
-                <Component capi={capi} imageSalt={imageSalt}>
-                    {insertAdPlaceholders(renderAll(imageSalt)(pillar, body))}
+                <Component capi={capi} imageSalt={imageSalt} article={article}>
+                    {insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body))}
                 </Component>
                 <script src="/assets/article.js"></script>
             </>;
         case 'liveblog':
             return <>
-                <LiveblogArticle capi={capi} imageSalt={imageSalt} />
+                <LiveblogArticle capi={capi} article={article} imageSalt={imageSalt} />
                 <script src="/assets/liveblog.js"></script>
             </>;
         default:
