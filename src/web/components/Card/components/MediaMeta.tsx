@@ -36,7 +36,8 @@ const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
 `;
 
 const durationStyles = (pillar: Pillar) => css`
-    color: ${palette[pillar].main};
+    /* Below we force the colour to be opinion if the pillar is news (because it looks better) */
+    color: ${pillar === 'news' ? palette.opinion.main : palette[pillar].main};
     ${textSans.xsmall({ fontWeight: `bold` })}
 `;
 
