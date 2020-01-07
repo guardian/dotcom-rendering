@@ -112,7 +112,11 @@ const OpinionArticle = ({ capi, imageSalt, children }: OpinionArticleProps): JSX
                             className={css``}
                         />
                         {fields.commentable
-                                ? <CommentCount count={0} colour={pillarStyles.kicker} className={CommentCountStyles}/>
+                                ? <CommentCount
+                                    count={0}
+                                    colour={pillarStyles.kicker}
+                                    className={CommentCountStyles}
+                                  />
                                 : null}
                     </section>
 

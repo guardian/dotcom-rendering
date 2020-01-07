@@ -101,7 +101,11 @@ const LiveblogByline = ({
                     </div>
 
                     {commentable
-                        ? <CommentCount count={0} colour={palette.neutral[100]} className={commentCount(pillarStyles)}/>
+                        ? <CommentCount
+                            count={0}
+                            colour={palette.neutral[100]}
+                            className={commentCount(pillarStyles)}
+                          />
                         : null}
                 </section>
             </LeftColumn>
