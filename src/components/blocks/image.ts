@@ -2,7 +2,7 @@
 
 import { createElement as h, ReactNode } from 'react';
 import * as AssetUtils from 'asset';
-import { css, jsx as styledH } from '@emotion/core';
+import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { BlockElement } from 'capiThriftModels';
 import { from } from '@guardian/src-foundations/mq';
@@ -20,7 +20,7 @@ interface Image {
 
 // ----- Functions ----- //
 
-const imageRatioStyles = (sizes = "100vw", width: number, height: number) => css`
+const imageRatioStyles = (sizes = "100vw", width: number, height: number): SerializedStyles => css`
         --size: ${sizes};
         height: calc(var(--size) * ${height / width});
         background: ${palette.neutral[97]};

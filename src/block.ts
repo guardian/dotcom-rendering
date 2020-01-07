@@ -29,7 +29,7 @@ type Block = {
     typeData?: {
         width: number;
         height: number;
-    }
+    };
 } | {
     kind: ElementType.PULLQUOTE;
     quote: string;
@@ -222,7 +222,7 @@ interface ImageProps {
     typeData?: {
         width: number;
         height: number;
-    }
+    };
 }
 
 const imageStyles = css`
@@ -255,8 +255,9 @@ const imageStyles = css`
     }
 `;
 
-const Image = ({ url, alt, salt, caption, displayCredit, credit, typeData }: ImageProps): ReactElement =>
-    styledH('figure', { css: imageStyles },
+const Image = (imageProps: ImageProps): ReactElement => {
+    const { url, alt, salt, caption, displayCredit, credit, typeData } = imageProps;
+    return styledH('figure', { css: imageStyles },
         h('img', {
             css: imageRatioStyles("100vw", typeData?.width ?? 5, typeData?.height ?? 3),
             sizes: '100%',
@@ -266,6 +267,7 @@ const Image = ({ url, alt, salt, caption, displayCredit, credit, typeData }: Ima
         }),
         h('figcaption', null, makeCaption(caption, displayCredit, credit)),
     );
+}
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     font-weight: 200;
@@ -378,7 +380,8 @@ const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number)
 
         case ElementType.IMAGE:
             const { file, alt, caption, displayCredit, credit, typeData } = block;
-            return h(Image, { url: file, alt, salt, caption, displayCredit, credit, key, typeData });
+            const props = { url: file, alt, salt, caption, displayCredit, credit, key, typeData };
+            return h(Image, props);
 
         case ElementType.PULLQUOTE:
             const { quote, attribution } = block;
