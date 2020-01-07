@@ -53,7 +53,7 @@ const HeaderImageStyles = css`
     }
 `;
 
-const OpinionArticle = ({ capi, imageSalt, article, children }: OpinionArticleProps): JSX.Element => {
+function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticleProps): JSX.Element {
 
     const { fields, tags, webPublicationDate } = capi;
     const series = articleSeries(capi);

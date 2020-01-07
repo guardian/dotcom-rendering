@@ -71,7 +71,12 @@ const HeaderImageStyles = css`
     }
 `;
 
-const ImmersiveArticle = ({ capi, imageSalt, article, children }: ImmersiveArticleProps): JSX.Element => {
+function ImmersiveArticle({
+    capi,
+    imageSalt,
+    article,
+    children,
+}: ImmersiveArticleProps): JSX.Element {
 
     const { fields, tags, webPublicationDate } = capi;
     const series = articleSeries(capi);
