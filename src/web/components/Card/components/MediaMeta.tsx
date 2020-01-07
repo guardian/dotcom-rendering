@@ -17,9 +17,9 @@ type Props = {
 const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
     width: 24px;
     height: 23px;
-    /* Below we force the colour to be opinion if the pillar is news (because it looks better) */
+    /* Below we force the colour to be bright if the pillar is news (because it looks better) */
     background-color: ${pillar === 'news'
-        ? palette.opinion.main
+        ? palette[pillar].bright
         : palette[pillar].main};
     border-radius: 50%;
     display: inline-block;
@@ -36,8 +36,8 @@ const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
 `;
 
 const durationStyles = (pillar: Pillar) => css`
-    /* Below we force the colour to be opinion if the pillar is news (because it looks better) */
-    color: ${pillar === 'news' ? palette.opinion.main : palette[pillar].main};
+    /* Below we force the colour to be bright if the pillar is news (because it looks better) */
+    color: ${pillar === 'news' ? palette[pillar].bright : palette[pillar].main};
     ${textSans.xsmall({ fontWeight: `bold` })}
 `;
 
