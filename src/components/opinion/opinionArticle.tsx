@@ -15,12 +15,14 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
-import { getPillarStyles, pillarFromString } from 'pillar';
 import { CommentCount } from 'components/shared/commentCount';
+import { getPillarStyles } from 'pillar';
+import { Article } from 'article';
 
 export interface OpinionArticleProps {
     capi: Content;
     imageSalt: string;
+    article: Article;
     children: ReactNode[];
 }
 
@@ -70,12 +72,10 @@ const topBorder = css`
     }
 `;
 
-const OpinionArticle = ({ capi, imageSalt, children }: OpinionArticleProps): JSX.Element => {
-
-    const { fields, tags, webPublicationDate, pillarId } = capi;
+function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticleProps): JSX.Element {
+    const { fields, tags, webPublicationDate } = capi;
     const series = articleSeries(capi);
-    const pillar = pillarFromString(pillarId);
-    const pillarStyles = getPillarStyles(pillar);
+    const pillarStyles = getPillarStyles(article.pillar);
     const contributors = articleContributors(capi);
     const mainImage = articleMainImage(capi);
 
@@ -96,7 +96,7 @@ const OpinionArticle = ({ capi, imageSalt, children }: OpinionArticleProps): JSX
                         imageSalt={imageSalt}
                         className={articleWidthStyles}
                     />
-                    <Keyline pillar={pillar} type={'article'}/>
+                    <Keyline article={article}/>
                     <ArticleStandfirst
                             standfirst={fields.standfirst}
                             feature={true}

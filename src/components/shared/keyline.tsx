@@ -4,6 +4,7 @@ import { darkModeCss, wideContentWidth, wideColumnWidth, baseMultiply } from 'st
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { Pillar } from 'pillar';
+import { Article, Layout } from 'article';
 
 const BaseStyles = css`
     height: 12px;
@@ -43,15 +44,15 @@ const KeylineDarkStyles = darkModeCss`
 `;
 
 
-export const Keyline = ({ pillar, type }: { pillar: Pillar; type: string }): JSX.Element => {
-    const SelectedKeylineStyles = ((pillar, type): SerializedStyles => {
-        if (type === 'liveblog') return KeylineLiveblogStyles;
+export const Keyline = ({ article: { pillar, layout } }: { article: Article }): JSX.Element => {
+    const SelectedKeylineStyles = ((pillar, layout): SerializedStyles => {
+        if (layout === Layout.Liveblog) return KeylineLiveblogStyles;
         switch (pillar) {
             case Pillar.opinion:
                 return KeylineOpinionStyles;
             default:
                 return KeylineNewsStyles;
-        }})(pillar, type);
+        }})(pillar, layout);
     
     return <hr css={[BaseStyles, SelectedKeylineStyles, KeylineDarkStyles]} />
 }

@@ -112,8 +112,14 @@ interface Contributor {
 const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
     tags.filter((tag: Tag) => tag.type === type_);
 
+const isImmersive = (content: Content): boolean =>
+    content.fields.displayHint === 'immersive';
+
 const isFeature = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/features');
+
+const isReview = (content: Content): boolean =>
+    'starRating' in content.fields;
 
 const isAnalysis = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/analysis');
@@ -161,12 +167,14 @@ export {
     Contributor,
     ErrorStatus as CapiError,
     getContent,
+    isImmersive,
     isFeature,
+    isReview,
+    isAnalysis,
     isSingleContributor,
     articleSeries,
     articleContributors,
     articleMainImage,
     capiEndpoint,
     includesTweets,
-    isAnalysis,
 };

@@ -11,6 +11,7 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
+import { imageRatioStyles } from 'components/blocks/image';
 
 
 // ----- Types ----- //
@@ -25,6 +26,8 @@ type Block = {
     displayCredit: boolean;
     credit: string;
     file: string;
+    width: number;
+    height: number;
 } | {
     kind: ElementType.PULLQUOTE;
     quote: string;
@@ -67,14 +70,15 @@ const parser = (docParser: DocParser) => (block: BlockElement): Result<string, B
             const masterAsset = block.assets.find(asset => asset.typeData.isMaster);
             const { alt, caption, displayCredit, credit } = block.imageTypeData;
             const imageBlock: Option<Result<string, Block>> = fromNullable(masterAsset)
-                .map(asset => asset.file)
-                .map(file => new Ok({
+                .map(asset => new Ok({
                     kind: ElementType.IMAGE,
                     alt,
                     caption,
                     displayCredit,
                     credit,
-                    file,
+                    file: asset.file,
+                    width: asset.typeData.width,
+                    height: asset.typeData.height,
                 }));
 
             return imageBlock.withDefault(new Err('I couldn\'t find a master asset'));
@@ -213,6 +217,8 @@ interface ImageProps {
     caption: string;
     displayCredit: boolean;
     credit: string;
+    width: number;
+    height: number;
 }
 
 const imageStyles = css`
@@ -245,9 +251,11 @@ const imageStyles = css`
     }
 `;
 
-const Image = ({ url, alt, salt, caption, displayCredit, credit }: ImageProps): ReactElement =>
-    styledH('figure', { css: imageStyles },
+const Image = (props: ImageProps): ReactElement => {
+    const { url, alt, salt, caption, displayCredit, credit, width, height } = props;
+    return styledH('figure', { css: imageStyles },
         h('img', {
+            css: imageRatioStyles("100vw", width ?? 5, height ?? 3),
             sizes: '100%',
             srcSet: srcset(salt)(url),
             alt,
@@ -255,6 +263,7 @@ const Image = ({ url, alt, salt, caption, displayCredit, credit }: ImageProps): 
         }),
         h('figcaption', null, makeCaption(caption, displayCredit, credit)),
     );
+}
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     font-weight: 200;
@@ -366,8 +375,18 @@ const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number)
             return text(block.doc, pillar);
 
         case ElementType.IMAGE:
-            const { file, alt, caption, displayCredit, credit } = block;
-            return h(Image, { url: file, alt, salt, caption, displayCredit, credit, key });
+            const { file, alt, caption, displayCredit, credit, width, height } = block;
+            return h(Image, {
+                url: file,
+                alt,
+                salt,
+                caption,
+                displayCredit,
+                credit,
+                key,
+                width,
+                height
+            });
 
         case ElementType.PULLQUOTE:
             const { quote, attribution } = block;

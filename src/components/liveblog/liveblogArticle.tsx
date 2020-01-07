@@ -14,7 +14,8 @@ import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { articleMainImage, articleSeries, articleContributors } from 'capi';
-import { PillarStyles, pillarFromString, getPillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles } from 'pillar';
+import { Article } from 'article';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${palette.neutral[97]};
@@ -47,15 +48,15 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 
 interface LiveblogArticleProps {
     capi: Content;
+    article: Article;
     imageSalt: string;
 }
 
-const LiveblogArticle = ({ capi, imageSalt }: LiveblogArticleProps): JSX.Element => {
+const LiveblogArticle = ({ capi, article, imageSalt }: LiveblogArticleProps): JSX.Element => {
 
-    const { fields, tags, webPublicationDate, pillarId, blocks } = capi;
+    const { fields, tags, webPublicationDate, blocks } = capi;
     const series = articleSeries(capi);
-    const pillar = pillarFromString(pillarId);
-    const pillarStyles = getPillarStyles(pillar);
+    const pillarStyles = getPillarStyles(article.pillar);
     const contributors = articleContributors(capi);
     const bodyElements = blocks.body;
     const image = articleMainImage(capi);
@@ -69,7 +70,7 @@ const LiveblogArticle = ({ capi, imageSalt }: LiveblogArticleProps): JSX.Element
                 <LiveblogByline
                     byline={fields.bylineHtml}
                     pillarStyles={pillarStyles}
-                    pillar={pillar}
+                    article={article}
                     publicationDate={webPublicationDate}
                     contributors={contributors}
                     imageSalt={imageSalt}
