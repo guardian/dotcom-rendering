@@ -172,7 +172,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
             <Section islandId="story-package" />
 
-            <Section showTopBorder={false}>
+            <Section
+                showTopBorder={false}
+                backgroundColour={palette.neutral[97]}
+                padded={false}
+            >
                 <OutbrainContainer />
             </Section>
             {!isPaidContent && (
