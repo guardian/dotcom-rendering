@@ -4,16 +4,30 @@
         background: white;
     }
     
-    @font-face{font-family:"Guardian Egyptian Web";src:url('./public/fonts/egyptiantext-regular.otf');}
-    @font-face{font-family:"Guardian Egyptian Web";font-weight:500;src:url('./public/fonts/egyptiantext-medium.otf');}
-    @font-face{font-family:"Guardian Egyptian Web";font-weight:bold;src:url('./public/fonts/egyptiantext-medium.otf');}
-    @font-face{font-family:"Guardian Text Sans Web";src:url('./public/fonts/GuardianSansWeb-Regular.ttf');}
-    @font-face{font-family:"Guardian Headline";font-weight:200;src:url('./public/fonts/GHGuardianHeadline-Light.ttf');}
-    @font-face{font-family:"Guardian Headline";font-weight:400;src:url('./public/fonts/GHGuardianHeadline-Regular.ttf');}
-    @font-face{font-family:"Guardian Headline";font-weight:500;src:url('./public/fonts/GHGuardianHeadline-Medium.ttf');}
-    @font-face{font-family:"Guardian Headline";font-weight:700;src:url('./public/fonts/GHGuardianHeadline-Bold.ttf');}
-    @font-face{font-family:"Guardian Icons";src:url('./public/fonts/icons.otf');}
-    body{margin:0;font-family:'Guardian Egyptian Web';font-size:1.6em;line-height:1.5em;overflow-x:hidden;}
+    @font-Face{font-family:"Guardian Text Egyptian Web"; src:url("./public/fonts/GuardianTextEgyptian-Reg.ttf");}
+    @font-Face{font-family:"Guardian Text Egyptian Web"; font-style:"italic"; src:url("./public/fonts/GuardianTextEgyptian-RegItalic.ttf")}
+    @font-Face{font-family:"Guardian Text Egyptian Web"; font-weight:500; src:url("./public/fonts/GuardianTextEgyptian-Bold.ttf")}
+    @font-Face{font-family:"Guardian Text Egyptian Web"; font-weight:"bold"; src:url("./public/fonts/GuardianTextEgyptian-Bold.ttf")}
+    @font-Face{font-family:"Guardian Text Egyptian Web"; font-weight:"bold"; font-style:"italic"; src:url("./public/fonts/GuardianTextEgyptian-BoldItalic.ttf")}
+
+    @font-Face{font-family:"Guardian Sans Web"; font-weight:200; src:url("./public/fonts/GuardianSansWeb-Light.ttf")}
+    @font-Face{font-family:"Guardian Sans Web"; font-weight:300; src:url("./public/fonts/GuardianSansWeb-Regular.ttf")}
+    @font-Face{font-family:"Guardian Sans Web"; font-weight:600; src:url("./public/fonts/GuardianSansWeb-Semibold.ttf")}
+
+    @font-Face{font-family:"Guardian Headline"; font-weight:200; src:url("/public/fonts/GHGuardianHeadline-Light.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:200; font-weight: "italic"; src:url("./public/fonts/GHGuardianHeadline-LightItalic.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:400; src:url("/public/fonts/GHGuardianHeadline-Regular.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:400; font-weight: "italic"; src:url("./public/fonts/GHGuardianHeadline-RegularItalic.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:500; src:url("/public/fonts/GHGuardianHeadline-Medium.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:500; font-weight: "italic"; src:url( "./public/fonts/GHGuardianHeadline-MediumItalic.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:600; src:url("/public/fonts/GHGuardianHeadline-Semibold.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:600; font-weight: "italic"; src:url( "./public/fonts/GHGuardianHeadline-SemiboldItalic.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:700; src:url("/public/fonts/GHGuardianHeadline-Bold.ttf")}
+    @font-Face{font-family:"Guardian Headline"; font-weight:700; font-weight: "italic"; src:url("./public/fonts/GHGuardianHeadline-BoldItalic.ttf")}
+
+    @font-Face{font-family:"Guardian Icons"; src:url("/public/fonts/icons.otf")}
+
+    body{margin:0;font-family:'Guardian Text Egyptian Web';font-size:1.6em;line-height:1.5em;overflow-x:hidden;}
     figure{margin:1em 0;}
     figure.element-embed{margin:2em 0;}
     .js-email-sub__iframe{width:100%;}

@@ -65,7 +65,7 @@ export const bulletStyles = (kicker: string, opacity = 1): string => `
         }
     }`
 
-export const textSans = "font-family: 'Guardian Text Sans Web';";
+export const sans = "font-family: 'Guardian Sans Web';";
 
 export const headlineFont = "font-family: 'Guardian Headline';";
 
@@ -148,7 +148,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         font-size: 1.4rem;
         line-height: 1.8rem;
         color: ${palette.neutral[46]};
-        ${textSans}
+        ${sans}
 
         ${until.phablet} {
             padding-left: ${basePx(1)};
@@ -250,7 +250,7 @@ export const adStyles = css`
         clear: both;
 
         .ad-labels {
-            ${textSans}
+            ${sans}
             padding: ${basePx(1)};
             padding-bottom: ${adHeight};
 

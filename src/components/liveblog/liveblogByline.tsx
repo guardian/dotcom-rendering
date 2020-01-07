@@ -1,5 +1,5 @@
 import React from 'react';
-import { textSans, basePx } from 'styles';
+import { sans, basePx } from 'styles';
 
 import { Keyline } from '../shared/keyline';
 
@@ -36,7 +36,7 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
         }
 
         time, .follow {
-            ${textSans}
+            ${sans}
         }
 
         time {

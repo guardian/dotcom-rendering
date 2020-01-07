@@ -1,6 +1,6 @@
 import React from 'react';
 import Follow from 'components/shared/follow';
-import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
+import { sidePadding, sans, darkModeCss, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { formatDate } from 'date';
@@ -16,7 +16,7 @@ const BylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
         }
 
         time, .follow {
-            ${textSans}
+            ${sans}
         }
 
         time {

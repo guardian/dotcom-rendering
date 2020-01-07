@@ -1,5 +1,5 @@
 import React from 'react';
-import { textSans, icons, basePx, linkStyle } from 'styles';
+import { sans, icons, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -16,7 +16,7 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
 
     time {
         color: ${palette.neutral[46]};
-        ${textSans}
+        ${sans}
         display: inline-block;
         margin: 0;
     }

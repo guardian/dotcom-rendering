@@ -22,15 +22,15 @@ import { insertAdPlaceholders } from 'ads';
 // ----- Components ----- //
 
 const PageStyles = css`
-    ${fontFace("Guardian Egyptian Web", new None, new None, "/public/fonts/GuardianTextEgyptian-Reg.ttf")}
-    ${fontFace("Guardian Egyptian Web", new None, new Some("italic"), "/public/fonts/GuardianTextEgyptian-RegItalic.ttf")}
-    ${fontFace("Guardian Egyptian Web", new Some(500), new None, "/public/fonts/GuardianTextEgyptian-Bold.ttf")}
-    ${fontFace("Guardian Egyptian Web", new Some("bold"), new None, "/public/fonts/GuardianTextEgyptian-Bold.ttf")}
-    ${fontFace("Guardian Egyptian Web", new Some("bold"), new Some("italic"), "/public/fonts/GuardianTextEgyptian-BoldItalic.ttf")}
+    ${fontFace("Guardian Text Egyptian Web", new None, new None, "/public/fonts/GuardianTextEgyptian-Reg.ttf")}
+    ${fontFace("Guardian Text Egyptian Web", new None, new Some("italic"), "/public/fonts/GuardianTextEgyptian-RegItalic.ttf")}
+    ${fontFace("Guardian Text Egyptian Web", new Some(500), new None, "/public/fonts/GuardianTextEgyptian-Bold.ttf")}
+    ${fontFace("Guardian Text Egyptian Web", new Some("bold"), new None, "/public/fonts/GuardianTextEgyptian-Bold.ttf")}
+    ${fontFace("Guardian Text Egyptian Web", new Some("bold"), new Some("italic"), "/public/fonts/GuardianTextEgyptian-BoldItalic.ttf")}
 
-    ${fontFace("Guardian Text Sans Web", new Some(200), new None, "/public/fonts/GuardianSansWeb-Light.ttf")}
-    ${fontFace("Guardian Text Sans Web", new Some(300), new None, "/public/fonts/GuardianSansWeb-Regular.ttf")}
-    ${fontFace("Guardian Text Sans Web", new Some(600), new None, "/public/fonts/GuardianSansWeb-Semibold.ttf")}
+    ${fontFace("Guardian Sans Web", new Some(200), new None, "/public/fonts/GuardianSansWeb-Light.ttf")}
+    ${fontFace("Guardian Sans Web", new Some(300), new None, "/public/fonts/GuardianSansWeb-Regular.ttf")}
+    ${fontFace("Guardian Sans Web", new Some(600), new None, "/public/fonts/GuardianSansWeb-Semibold.ttf")}
 
     ${fontFace("Guardian Headline", new Some(200), new None, "/public/fonts/GHGuardianHeadline-Light.ttf")}
     ${fontFace("Guardian Headline", new Some(200), new Some("italic"), "/public/fonts/GHGuardianHeadline-LightItalic.ttf")}
@@ -50,7 +50,7 @@ const PageStyles = css`
 
     body {
         margin: 0;
-        font-family: 'Guardian Egyptian Web';
+        font-family: 'Guardian Text Egyptian Web';
         font-size: 1.6em;
         line-height: 1.5em;
         overflow-x: hidden;
