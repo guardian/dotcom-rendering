@@ -26,10 +26,8 @@ type Block = {
     displayCredit: boolean;
     credit: string;
     file: string;
-    typeData?: {
-        width: number;
-        height: number;
-    };
+    width: number;
+    height: number;
 } | {
     kind: ElementType.PULLQUOTE;
     quote: string;
@@ -72,15 +70,15 @@ const parser = (docParser: DocParser) => (block: BlockElement): Result<string, B
             const masterAsset = block.assets.find(asset => asset.typeData.isMaster);
             const { alt, caption, displayCredit, credit } = block.imageTypeData;
             const imageBlock: Option<Result<string, Block>> = fromNullable(masterAsset)
-                .map(asset => asset.file)
-                .map(file => new Ok({
+                .map(asset => new Ok({
                     kind: ElementType.IMAGE,
                     alt,
                     caption,
                     displayCredit,
                     credit,
-                    file,
-                    typeData: masterAsset?.typeData
+                    file: asset.file,
+                    width: asset.typeData.width,
+                    height: asset.typeData.height,
                 }));
 
             return imageBlock.withDefault(new Err('I couldn\'t find a master asset'));
@@ -219,10 +217,8 @@ interface ImageProps {
     caption: string;
     displayCredit: boolean;
     credit: string;
-    typeData?: {
-        width: number;
-        height: number;
-    };
+    width: number;
+    height: number;
 }
 
 const imageStyles = css`
@@ -255,11 +251,11 @@ const imageStyles = css`
     }
 `;
 
-const Image = (imageProps: ImageProps): ReactElement => {
-    const { url, alt, salt, caption, displayCredit, credit, typeData } = imageProps;
+const Image = (props: ImageProps): ReactElement => {
+    const { url, alt, salt, caption, displayCredit, credit, width, height } = props;
     return styledH('figure', { css: imageStyles },
         h('img', {
-            css: imageRatioStyles("100vw", typeData?.width ?? 5, typeData?.height ?? 3),
+            css: imageRatioStyles("100vw", width ?? 5, height ?? 3),
             sizes: '100%',
             srcSet: srcset(salt)(url),
             alt,
@@ -379,8 +375,8 @@ const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number)
             return text(block.doc, pillar);
 
         case ElementType.IMAGE:
-            const { file, alt, caption, displayCredit, credit, typeData } = block;
-            const props = { url: file, alt, salt, caption, displayCredit, credit, key, typeData };
+            const { file, alt, caption, displayCredit, credit, width, height } = block;
+            const props = { url: file, alt, salt, caption, displayCredit, credit, key, width, height };
             return h(Image, props);
 
         case ElementType.PULLQUOTE:
