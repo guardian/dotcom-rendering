@@ -98,7 +98,7 @@ const parser = (docParser: DocParser) => (block: BlockElement): Result<string, B
             return new Ok({ kind: ElementType.RICH_LINK, url, linkText });
 
         case ElementType.TWEET:
-            return tweetContent(block.tweetTypeData.id, docParser(block.textTypeData?.html))
+            return tweetContent(block.tweetTypeData.id, docParser(block.tweetTypeData.html))
                 .map(content => ({ kind: ElementType.TWEET, content }));
 
         default:
