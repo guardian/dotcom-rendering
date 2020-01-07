@@ -175,7 +175,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             <Section
                 showTopBorder={false}
                 backgroundColour={palette.neutral[97]}
-                padded={false}
             >
                 <OutbrainContainer />
             </Section>

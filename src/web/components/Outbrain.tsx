@@ -44,6 +44,10 @@ const OutbrainWidget: React.FC<{}> = ({}) => {
 };
 
 const outbrainContainer = css`
+    .js-outbrain-container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
     .ob-widget {
         div.ob-widget-header {
             ${body.medium()};
