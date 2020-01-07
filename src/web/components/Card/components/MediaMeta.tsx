@@ -68,7 +68,7 @@ export function secondsToDuration(secs?: number): string {
     return duration.join(':');
 }
 
-export const Icon = ({ mediaType }: Props) => {
+const Icon = ({ mediaType }: Props) => {
     switch (mediaType) {
         case 'Gallery':
             return <Photo />;
@@ -79,13 +79,13 @@ export const Icon = ({ mediaType }: Props) => {
     }
 };
 
-export const MediaIcon = (props: Props) => (
+const MediaIcon = (props: Props) => (
     <span className={iconWrapperStyles(props)}>
         <Icon {...props} />
     </span>
 );
 
-export const MediaDuration = (props: Props) => (
+const MediaDuration = (props: Props) => (
     <p className={durationStyles(props)}>
         {secondsToDuration(props.mediaDuration)}
     </p>
