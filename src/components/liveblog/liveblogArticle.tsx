@@ -73,6 +73,7 @@ const LiveblogArticle = ({ capi, imageSalt }: LiveblogArticleProps): JSX.Element
                     publicationDate={webPublicationDate}
                     contributors={contributors}
                     imageSalt={imageSalt}
+                    commentable={fields.commentable}
                 />
                 <HeaderImage
                     image={image}

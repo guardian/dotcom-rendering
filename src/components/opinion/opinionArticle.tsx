@@ -9,13 +9,14 @@ import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import OpinionCutout from 'components/opinion/opinionCutout';
 import { Content } from 'capiThriftModels';
-import { darkModeCss, articleWidthStyles } from 'styles';
+import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles, pillarFromString } from 'pillar';
+import { CommentCount } from 'components/shared/commentCount';
 
 export interface OpinionArticleProps {
     capi: Content;
@@ -48,6 +49,24 @@ const HeaderImageStyles = css`
         ${from.wide} {
             margin: 0 auto;
         }
+    }
+`;
+
+const CommentCountStyles = css`
+    background: ${palette.opinion.faded};
+    margin-top: 0;
+
+    button {
+        background: ${palette.opinion.faded};
+    }
+`;
+
+const topBorder = css`
+    border-top: solid 1px ${palette.neutral[86]};
+    margin-top: ${basePx(1)};
+
+    ${from.wide} {
+        margin-top: ${basePx(1)};
     }
 `;
 
@@ -84,12 +103,19 @@ const OpinionArticle = ({ capi, imageSalt, children }: OpinionArticleProps): JSX
                             pillarStyles={pillarStyles}
                             className={articleWidthStyles}
                     />
-                    <OpinionByline
-                        pillarStyles={pillarStyles}
-                        publicationDate={webPublicationDate}
-                        contributors={contributors}
-                        className={articleWidthStyles}
-                    />
+
+                    <section css={[articleWidthStyles, topBorder]}>
+                        <OpinionByline
+                            pillarStyles={pillarStyles}
+                            publicationDate={webPublicationDate}
+                            contributors={contributors}
+                            className={css``}
+                        />
+                        {fields.commentable
+                                ? <CommentCount count={0} colour={pillarStyles.kicker} className={CommentCountStyles}/>
+                                : null}
+                    </section>
+
                     <HeaderImage
                         image={mainImage}
                         imageSalt={imageSalt}

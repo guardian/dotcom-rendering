@@ -11,6 +11,10 @@ import { PillarStyles } from 'pillar';
 import { componentFromHtml } from 'renderBlocks';
 
 const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+    width: 80%;
+    float: left;
+    display: inline-block;
+
     .author {
         address {
             line-height: 2.2rem;

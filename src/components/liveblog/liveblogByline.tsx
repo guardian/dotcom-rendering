@@ -1,8 +1,6 @@
 import React from 'react';
 import { textSans, basePx } from 'styles';
-
 import { Keyline } from '../shared/keyline';
-
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { Contributor } from '../../capi';
@@ -11,6 +9,7 @@ import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar } from 'pillar';
 import { componentFromHtml } from 'renderBlocks';
+import { CommentCount } from 'components/shared/commentCount';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -44,7 +43,24 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
             opacity: .8;
         }
     }
+
+    section {
+        margin-top: ${basePx(-1)};
+
+        .byline {
+            width: 80%;
+            float: left;
+            display: inline-block;
+        }
+    }
 `;
+
+const commentCount = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
+    border-left: solid 1px rgba(220,220,218,.4);
+    button {
+        background: ${liveblogBackground};
+    }
+`
 
 interface LiveblogBylineProps {
     byline?: string;
@@ -53,6 +69,7 @@ interface LiveblogBylineProps {
     contributors: Contributor[];
     pillar: Pillar;
     imageSalt: string;
+    commentable: boolean;
 }
 
 const LiveblogByline = ({
@@ -61,23 +78,32 @@ const LiveblogByline = ({
     publicationDate,
     contributors,
     pillar,
-    imageSalt
+    imageSalt,
+    commentable,
 }: LiveblogBylineProps): JSX.Element => {
     
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline pillar={pillar} type={'liveblog'}/>
             <LeftColumn>
-                <Avatar
-                    contributors={contributors}
-                    bgColour={pillarStyles.featureHeadline}
-                    imageSalt={imageSalt}
-                />
-                <div className="author">
-                    { byline ? <address>{componentFromHtml(byline)}</address> : null }
-                    <time>{ formatDate(new Date(publicationDate)) }</time>
-                    <div className="follow">Get alerts on this story</div>
-                </div>
+                <section>
+                    <div className="byline">
+                        <Avatar
+                            contributors={contributors}
+                            bgColour={pillarStyles.featureHeadline}
+                            imageSalt={imageSalt}
+                        />
+                        <div className="author">
+                            { byline ? <address>{componentFromHtml(byline)}</address> : null }
+                            <time>{ formatDate(new Date(publicationDate)) }</time>
+                            <div className="follow">Get alerts on this story</div>
+                        </div>
+                    </div>
+
+                    {commentable
+                        ? <CommentCount count={0} colour={palette.neutral[100]} className={commentCount(pillarStyles)}/>
+                        : null}
+                </section>
             </LeftColumn>
         </div>
     )
