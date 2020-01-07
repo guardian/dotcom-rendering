@@ -17,7 +17,10 @@ type Props = {
 const iconWrapperStyles = ({ pillar, mediaType }: Props) => css`
     width: 24px;
     height: 23px;
-    background-color: ${palette[pillar].main};
+    /* Below we force the colour to be opinion if the pillar is news (because it looks better) */
+    background-color: ${pillar === 'news'
+        ? palette.opinion.main
+        : palette[pillar].main};
     border-radius: 50%;
     display: inline-block;
 
