@@ -76,4 +76,4 @@ When you create components in Storybook you:
 
 This leads to cleaner components that are easier to understand which is useful for the immediate DCR team and then, if we decide to actually share the component later, to others outside DCR.
 
-However, we should be wary exposing apis to other teams too soon while we are still at a stage where things can be refactored
+However, we should be wary of exposing apis to other teams too soon while we are still at a stage where things can be refactored.
