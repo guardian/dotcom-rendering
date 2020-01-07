@@ -12,12 +12,14 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
-import { getPillarStyles, pillarFromString, PillarStyles } from 'pillar';
+import { getPillarStyles, PillarStyles } from 'pillar';
 import { palette } from '@guardian/src-foundations';
+import { Article } from 'article';
 
 export interface ImmersiveArticleProps {
     capi: Content;
     imageSalt: string;
+    article: Article;
     children: ReactNode[];
 }
 
@@ -69,12 +71,16 @@ const HeaderImageStyles = css`
     }
 `;
 
-const ImmersiveArticle = ({ capi, imageSalt, children }: ImmersiveArticleProps): JSX.Element => {
+function ImmersiveArticle({
+    capi,
+    imageSalt,
+    article,
+    children,
+}: ImmersiveArticleProps): JSX.Element {
 
-    const { fields, tags, webPublicationDate, pillarId } = capi;
+    const { fields, tags, webPublicationDate } = capi;
     const series = articleSeries(capi);
-    const pillar = pillarFromString(pillarId);
-    const pillarStyles = getPillarStyles(pillar);
+    const pillarStyles = getPillarStyles(article.pillar);
     const contributors = articleContributors(capi);
     const mainImage = articleMainImage(capi);
 
@@ -98,7 +104,7 @@ const ImmersiveArticle = ({ capi, imageSalt, children }: ImmersiveArticleProps):
                             byline={fields.byline}
                         />
                     </div>
-                    <Keyline pillar={pillar} type={'article'}/>
+                    <Keyline article={article}/>
                     <ImmersiveByline
                         pillarStyles={pillarStyles}
                         publicationDate={webPublicationDate}

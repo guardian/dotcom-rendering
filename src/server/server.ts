@@ -145,4 +145,4 @@ app.get('/*', async (req, res) => {
 });
 
 const port = 3040;
-app.listen(port, () => console.log(`apps-rendering listening on port ${port}!`));
+app.listen(port, () => console.log(`Server listening on port ${port}!\nWebpack dev server listening on port 8080!`));
