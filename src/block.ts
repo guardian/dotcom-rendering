@@ -376,8 +376,17 @@ const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number)
 
         case ElementType.IMAGE:
             const { file, alt, caption, displayCredit, credit, width, height } = block;
-            const props = { url: file, alt, salt, caption, displayCredit, credit, key, width, height };
-            return h(Image, props);
+            return h(Image, {
+                url: file,
+                alt,
+                salt,
+                caption,
+                displayCredit,
+                credit,
+                key,
+                width,
+                height
+            });
 
         case ElementType.PULLQUOTE:
             const { quote, attribution } = block;
