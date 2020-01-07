@@ -9,7 +9,7 @@ import { BlockElement, ElementType } from 'capiThriftModels';
 import { Result, Ok, Err } from 'types/result';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
-import { basePx, icons, headlineFont, darkModeCss, sans } from 'styles';
+import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { imageRatioStyles } from 'components/blocks/image';
 
@@ -242,7 +242,7 @@ const imageStyles = css`
         font-size: 1.4rem;
         line-height: 1.8rem;
         color: ${palette.neutral[46]};
-        ${sans}
+        ${textSans}
 
         ${until.phablet} {
             padding-left: ${basePx(1)};

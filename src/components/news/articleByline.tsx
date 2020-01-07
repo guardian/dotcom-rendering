@@ -1,5 +1,5 @@
 import React from 'react';
-import { sidePadding, sans, darkModeCss } from 'styles';
+import { sidePadding, textSans, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { formatDate } from 'date';
@@ -27,7 +27,7 @@ const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
         }
 
         time, .follow {
-            ${sans}
+            ${textSans}
         }
 
         time {

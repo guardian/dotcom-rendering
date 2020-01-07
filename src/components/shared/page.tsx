@@ -29,9 +29,10 @@ const PageStyles = css`
     ${fontFace("Guardian Text Egyptian Web", new Some("bold"), new None, "/public/fonts/GuardianTextEgyptian-Bold.ttf")}
     ${fontFace("Guardian Text Egyptian Web", new Some("bold"), new Some("italic"), "/public/fonts/GuardianTextEgyptian-BoldItalic.ttf")}
 
-    ${fontFace("Guardian Sans Web", new Some(200), new None, "/public/fonts/GuardianSansWeb-Light.ttf")}
-    ${fontFace("Guardian Sans Web", new Some(300), new None, "/public/fonts/GuardianSansWeb-Regular.ttf")}
-    ${fontFace("Guardian Sans Web", new Some(600), new None, "/public/fonts/GuardianSansWeb-Semibold.ttf")}
+    ${fontFace("Guardian Text Sans Web", new Some(300), new None, "/public/fonts/GuardianTextSans-Regular.ttf")}
+    ${fontFace("Guardian Text Sans Web", new Some(300), new Some("italic"), "/public/fonts/GuardianTextSans-RegularItalic.ttf")}
+    ${fontFace("Guardian Text Sans Web", new Some(600), new None, "/public/fonts/GuardianTextSans-Bold.ttf")}
+    ${fontFace("Guardian Text Sans Web", new Some(600), new Some("italic"), "/public/fonts/GuardianTextSans-BoldItalic.ttf")}
 
     ${fontFace("Guardian Headline", new Some(200), new None, "/public/fonts/GHGuardianHeadline-Light.ttf")}
     ${fontFace("Guardian Headline", new Some(200), new Some("italic"), "/public/fonts/GHGuardianHeadline-LightItalic.ttf")}
