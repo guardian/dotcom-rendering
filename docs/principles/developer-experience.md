@@ -62,6 +62,12 @@ The application provides a full suite of unit, integration and end-to-end tests.
 At end of life, the dotcom-rendering application (although not the components themselves) can be swapped out for another rendering
 tier. It must be possible to migrate a single content type such as the article within 3 months.
 
+## Sometimes Repeat Yourself
+
+> Verbose code that is easy to move around, change and remove is preferred to elegant code that is prematurely abstracted and hard to change
+
+Or, to put it another way: Do Repeat Yourself. Sometimes. The old maxim of Don't Repeat Yourself is probably the most quoted design principle of them all but its popularity can lead to it becoming less a principle and more of a habit. The above statement challenges the instinctive reflex we all have to pull things out into functions or components, asking us to first consider if the abstraction is useful.
+
 ## Explicit Props
 
 > Explicit props help new developers quickly understand data flows; abstractions or optimisation patterns can hide where props come from, adding to the cognitive workload
