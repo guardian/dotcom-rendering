@@ -48,6 +48,11 @@ const outbrainContainer = css`
         padding-bottom: 12px;
     }
 
+    .ob_about_this_content {
+        display: none;
+    }
+`;
+
 export const OutbrainContainer: React.FC<{}> = () => {
     return (
         <div className={outbrainContainer}>
