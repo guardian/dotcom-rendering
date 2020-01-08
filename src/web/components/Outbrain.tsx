@@ -47,10 +47,6 @@ const outbrainContainer = css`
         padding-top: 6px;
         padding-bottom: 12px;
     }
-
-    .ob_about_this_content {
-        display: none;
-    }
 `;
 
 export const OutbrainContainer: React.FC<{}> = () => {
