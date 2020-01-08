@@ -172,7 +172,10 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             {!isPaidContent && (
                 <>
-                    <Section showTopBorder={false}>
+                    <Section
+                        showTopBorder={false}
+                        backgroundColour={palette.neutral[97]}
+                    >
                         <OutbrainContainer />
                     </Section>
 
