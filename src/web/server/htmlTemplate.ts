@@ -3,6 +3,8 @@ import { getFontsCss } from '@root/src/lib/fonts-css';
 import { getStatic } from '@root/src/lib/assets';
 import { prepareCmpString } from '@root/src/web/browser/prepareCmp';
 
+import { palette } from '@guardian/src-foundations';
+
 export const htmlTemplate = ({
     title = 'The Guardian',
     description,
@@ -71,6 +73,7 @@ export const htmlTemplate = ({
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                <meta name="theme-color" content="${palette.brand.main}" />
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
                 <script type="application/ld+json">

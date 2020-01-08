@@ -6,6 +6,7 @@ import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 
 const editionDropdown = css`
+    display: flex;
     position: absolute;
     right: 11px;
     z-index: 1072;

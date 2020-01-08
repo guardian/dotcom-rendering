@@ -7,11 +7,12 @@ const flexGrow = css`
 `;
 
 interface Props {
+    pillar: Pillar;
     limitItems?: number;
 }
 
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
-export const MostViewedRightWrapper = (props: Props) => {
+export const MostViewedRightWrapper = ({ pillar, limitItems }: Props) => {
     const bodyRef = useRef<any>(null);
     const [myHeight, setMyHeight] = useState(0);
 
@@ -25,7 +26,7 @@ export const MostViewedRightWrapper = (props: Props) => {
     return (
         <div ref={bodyRef} className={flexGrow}>
             {myHeight > minWrapperHeight ? (
-                <MostViewedRight {...props} />
+                <MostViewedRight pillar={pillar} limitItems={limitItems} />
             ) : null}
         </div>
     );
