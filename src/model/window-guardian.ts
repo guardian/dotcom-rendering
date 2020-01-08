@@ -17,7 +17,7 @@ export interface WindowGuardianConfig {
         adUnit: string;
         showRelatedContent: boolean;
         ajaxUrl: string;
-        hbImpl: string;
+        hbImpl: object;
     };
     libs: {
         googletag: string;

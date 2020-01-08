@@ -496,7 +496,7 @@ export const CAPI: CAPIType = {
         googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
         stage: 'DEV',
         frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-        hbImpl: 'prebid',
+        hbImpl: {'prebid': false, 'a9': false },
         adUnit: '/59666047/theguardian.com/film/article/ng',
         isSensitive: '',
         videoDuration: 0,
