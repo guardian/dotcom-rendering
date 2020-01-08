@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from 'emotion';
 
 interface OutbrainSelectors {
     widget: string;
@@ -41,6 +42,16 @@ const OutbrainWidget: React.FC<{}> = ({}) => {
     );
 };
 
+const outbrainContainer = css`
+    .js-outbrain-container {
+        padding-top: 6px;
+        padding-bottom: 12px;
+    }
+
 export const OutbrainContainer: React.FC<{}> = () => {
-    return <OutbrainWidget />;
+    return (
+        <div className={outbrainContainer}>
+            <OutbrainWidget />
+        </div>
+    );
 };
