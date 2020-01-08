@@ -62,6 +62,10 @@ The application provides a full suite of unit, integration and end-to-end tests.
 At end of life, the dotcom-rendering application (although not the components themselves) can be swapped out for another rendering
 tier. It must be possible to migrate a single content type such as the article within 3 months.
 
+## A component should do one thing only
+
+> Components that only do one thing are easier to understand and use
+
 ## Sometimes Repeat Yourself
 
 > Verbose code that is easy to move around, change and remove is preferred to elegant code that is prematurely abstracted and hard to change
