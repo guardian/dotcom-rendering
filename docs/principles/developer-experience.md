@@ -65,3 +65,33 @@ tier. It must be possible to migrate a single content type such as the article w
 ## A component should do one thing only
 
 > Components that only do one thing are easier to understand and use
+
+## Sometimes Repeat Yourself
+
+> Verbose code that is easy to move around, change and remove is preferred to elegant code that is prematurely abstracted and hard to change
+
+Or, to put it another way: Do Repeat Yourself. Sometimes. The old maxim of Don't Repeat Yourself is probably the most quoted design principle of them all but its popularity can lead to it becoming less a principle and more of a habit. The above statement challenges the instinctive reflex we all have to pull things out into functions or components, asking us to first consider if the abstraction is useful.
+
+## Explicit Props
+
+> Explicit props help new developers quickly understand data flows; abstractions or optimisation patterns can hide where props come from, adding to the cognitive workload
+
+When I see my component being called I want to be absolutely certain that all the props shown being passed in are _all_ the props being passed in. In DCR now, this is currently true in all cases and adds a substantial benefit when trying to reason about data flows
+
+Many other codebases have abstraction patterns using HOCs, Context, Themes, etc. None of those things are wrong or bad, indeed they are excellent solutions to common issues, but - at this point in time - none of these technologies or patterns are considered necessary for DCR and we should only introduce them after team discussion
+
+## Component First Development
+
+> Components that are built to the standard where they're sharable are well documented and have good test coverage but sharing them before they are stable can make changes harder
+
+As a principle, we should initially build all core components in isolation as though they were going to be shared, before connecting them into the App. Not because we want to share them but because the act of doing this results in better components
+
+When you create components in Storybook you:
+
+-   Consider the api
+-   Think about the different ways the component could be used
+-   Become the consumer of the component (when you write the stories)
+
+This leads to cleaner components that are easier to understand which is useful for the immediate DCR team and then, if we decide to actually share the component later, to others outside DCR.
+
+However, we should be wary of exposing apis to other teams too soon while we are still at a stage where things can be refactored.

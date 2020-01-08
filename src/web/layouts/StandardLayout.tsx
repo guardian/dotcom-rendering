@@ -113,12 +113,32 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />
-                        <ArticleMeta CAPI={CAPI} />
+                        <ArticleMeta
+                            designType={CAPI.designType}
+                            pillar={CAPI.pillar}
+                            pageId={CAPI.pageId}
+                            webTitle={CAPI.webTitle}
+                            author={CAPI.author}
+                            tags={CAPI.tags}
+                            webPublicationDateDisplay={
+                                CAPI.webPublicationDateDisplay
+                            }
+                        />
                     </LeftColumn>
                     <ArticleContainer>
                         <StandardHeader CAPI={CAPI} badge={GE2019Badge} />
                         <Hide when="above" breakpoint="leftCol">
-                            <ArticleMeta CAPI={CAPI} />
+                            <ArticleMeta
+                                designType={CAPI.designType}
+                                pillar={CAPI.pillar}
+                                pageId={CAPI.pageId}
+                                webTitle={CAPI.webTitle}
+                                author={CAPI.author}
+                                tags={CAPI.tags}
+                                webPublicationDateDisplay={
+                                    CAPI.webPublicationDateDisplay
+                                }
+                            />
                         </Hide>
                         <main
                             className={css`
