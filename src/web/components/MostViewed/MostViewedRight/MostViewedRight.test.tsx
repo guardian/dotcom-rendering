@@ -18,7 +18,7 @@ describe('MostViewedList', () => {
     it('should call the api and render the response as expected', async () => {
         useApi.mockReturnValue(response);
 
-        const { getAllByText } = render(<MostViewedRight />);
+        const { getAllByText } = render(<MostViewedRight pillar="news" />);
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);
@@ -36,7 +36,9 @@ describe('MostViewedList', () => {
     it('should implement a limit on the number of items', async () => {
         useApi.mockReturnValue(response);
 
-        const { getAllByText } = render(<MostViewedRight limitItems={3} />);
+        const { getAllByText } = render(
+            <MostViewedRight pillar="news" limitItems={3} />,
+        );
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);
@@ -49,5 +51,14 @@ describe('MostViewedList', () => {
 
         // Renders appropriate number of age warnins
         expect(getAllByText(/This article is more than/).length).toBe(1);
+    });
+
+    // TODO: Restore this once the component has this feature added to it
+    it('should show a byline when this property is set to true', async () => {
+        useApi.mockReturnValue(response);
+
+        const { getByText } = render(<MostViewedRight pillar="news" />);
+
+        expect(getByText(response.data.trails[0].byline)).toBeInTheDocument();
     });
 });

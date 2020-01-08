@@ -78,6 +78,7 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
                     pillar={pillar}
                     webPublicationDate={webPublicationDate}
                     tags={tags}
+                    byline={CAPI.author.byline}
                 />
             </HeaderItem>
             <HeaderItem order={3}>

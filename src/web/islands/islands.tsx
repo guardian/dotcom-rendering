@@ -103,7 +103,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
         },
         {
             component: MostViewedRightWrapper,
-            props: {},
+            props: { pillar },
             root: 'most-viewed-right',
         },
         {

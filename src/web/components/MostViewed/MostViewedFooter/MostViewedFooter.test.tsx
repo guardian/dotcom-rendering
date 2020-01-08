@@ -87,19 +87,6 @@ describe('MostViewedFooter', () => {
         ).not.toBeInTheDocument();
     });
 
-    // TODO: Restore this once the component has this feature added to it
-    it.skip('should show a byline when this property is set to true', async () => {
-        useApi.mockReturnValue({ data: responseWithTwoTabs });
-
-        const { getByText } = render(
-            <MostViewedFooter sectionName="Section Name" pillar="news" />,
-        );
-
-        expect(
-            getByText(responseWithTwoTabs.tabs[0].trails[9].byline),
-        ).toBeInTheDocument();
-    });
-
     it("should display the text 'Live' for live blogs", () => {
         useApi.mockReturnValue({
             data: [
