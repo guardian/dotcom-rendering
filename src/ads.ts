@@ -1,4 +1,4 @@
-import { createElement as h, ReactNode } from 'react';
+import { createElement as h, ReactNode, ReactElement } from 'react';
 
 function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
     const adIndices = [3, 9];
@@ -9,7 +9,7 @@ function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 
     const className = numParas < 15 ? 'ad-placeholder short' : 'ad-placeholder';
 
-    const ad = (key: number) => h('aside', { className, key },
+    const ad = (key: number): ReactElement => h('aside', { className, key },
         h('div', { className: 'ad-labels' },
             h('h1', null, 'Advertisement'),
             h('button', { className: 'ad-hide' },
