@@ -16,7 +16,7 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
-import { Header } from '@root/src/web/components/Header/Header';
+import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { OutbrainContainer } from '@root/src/web/components/Outbrain';

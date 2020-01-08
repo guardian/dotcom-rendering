@@ -17,7 +17,7 @@ import { MainMedia } from '@root/src/web/components/MainMedia';
 
 import { palette } from '@guardian/src-foundations';
 
-import { Header } from '@root/src/web/components/Header/Header';
+import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { OutbrainContainer } from '@root/src/web/components/Outbrain';
