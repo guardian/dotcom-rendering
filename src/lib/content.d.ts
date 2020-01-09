@@ -50,11 +50,15 @@ interface ImageBlockElement {
 }
 interface YoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
-    id: string;
     assetId: string;
-    channelId?: string;
     mediaTitle: string;
+    id?: string;
+    channelId?: string;
     mediaDuration?: number;
+    posterSrc?: string;
+    src?: string;
+    height?: string;
+    width?: string;
 }
 
 // Note, this is a Video Embed rather than the above Media Atom
