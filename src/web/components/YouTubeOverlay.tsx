@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { MediaMeta } from '@frontend/web/components/Card/components/MediaMeta';
+import { MediaMeta } from '@frontend/web/components/MediaMeta';
 
 const BottomLeft = ({
     children,
