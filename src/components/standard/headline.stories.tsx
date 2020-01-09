@@ -30,10 +30,16 @@ export const Feature = (): ReactNode =>
     <Headline headline={text(copyKnob, copy)} article={{ ...article, layout: Layout.Feature }} />
 
 export const SportFeature = (): ReactNode =>
-    <Headline headline={text(copyKnob, copy)} article={{ pillar: Pillar.sport, layout: Layout.Feature }} />
+    <Headline
+        headline={text(copyKnob, copy)}
+        article={{ pillar: Pillar.sport, layout: Layout.Feature }}
+    />
 
 export const Analysis = (): ReactNode =>
     <Headline headline={text(copyKnob, copy)} article={{ ...article, layout: Layout.Analysis }} />
 
 export const ArtsAnalysis = (): ReactNode =>
-    <Headline headline={text(copyKnob, copy)} article={{ pillar: Pillar.arts, layout: Layout.Analysis }} />
+    <Headline
+        headline={text(copyKnob, copy)}
+        article={{ pillar: Pillar.arts, layout: Layout.Analysis }}
+    />
