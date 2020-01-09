@@ -54,7 +54,7 @@ interface YoutubeBlockElement {
     mediaTitle: string;
     id?: string;
     channelId?: string;
-    mediaDuration?: number;
+    duration?: number;
     posterSrc?: string;
     src?: string;
     height?: string;

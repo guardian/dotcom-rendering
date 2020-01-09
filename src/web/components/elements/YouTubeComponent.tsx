@@ -33,7 +33,7 @@ export const YouTubeComponent: React.FC<{
                     assetId={element.assetId}
                     pillar={pillar}
                     adTargeting={adTargeting}
-                    duration={element.mediaDuration}
+                    duration={element.duration}
                 />
             </Margins>
         );
@@ -51,7 +51,7 @@ export const YouTubeComponent: React.FC<{
                     assetId={element.assetId}
                     pillar={pillar}
                     adTargeting={adTargeting}
-                    duration={element.mediaDuration}
+                    duration={element.duration}
                 />
             </Caption>
         </Margins>
