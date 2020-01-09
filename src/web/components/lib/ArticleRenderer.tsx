@@ -60,7 +60,7 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-                    return <div data-island={`rich-link-${i}`} />;
+                    return <div key={i} data-island={`rich-link-${i}`} />;
                 default:
                     return null;
             }
