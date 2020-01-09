@@ -194,9 +194,7 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
         }
     };
 
-    const handleToggle = () => {
-        setIsExpanded(!isExpanded);
-    };
+    const handleToggle = () => setIsExpanded(!isExpanded);
 
     // needs to be unique to allow multiple dropdowns on same page
     // this should be unique because JS is single-threaded
