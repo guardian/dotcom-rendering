@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 
-import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
+import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { Hide } from '@root/src/web/components/Hide';
-import { getCookie } from '@root/src/web/browser/cookie';
+import { Logo } from '@frontend/web/components/Logo';
+import { Links } from '@frontend/web/components/Links';
 
-import { Logo } from './Logo';
-import { Links } from './Links/Links';
+import { getCookie } from '@root/src/web/browser/cookie';
 
 const headerStyles = css`
     /* Ensure header height contains it's children */
