@@ -18,7 +18,7 @@ import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
 import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles } from 'pillar';
-import { Layout, Article } from 'article';
+import { Article } from 'article';
 
 
 // ----- Component ----- //
@@ -62,7 +62,6 @@ const Article = ({ capi, imageSalt, article, children }: ArticleProps): JSX.Elem
 
     const { fields, tags, webPublicationDate } = capi;
     const series = articleSeries(capi);
-    const feature = article.layout === Layout.Feature || article.layout === Layout.Review;
     const pillarStyles = getPillarStyles(article.pillar);
     const contributors = articleContributors(capi);
     const mainImage = articleMainImage(capi);
@@ -85,8 +84,7 @@ const Article = ({ capi, imageSalt, article, children }: ArticleProps): JSX.Elem
                         />
                         <ArticleStandfirst
                             standfirst={fields.standfirst}
-                            feature={feature}
-                            pillarStyles={pillarStyles}
+                            article={article}
                             className={articleWidthStyles}
                         />
                     </div>
