@@ -51,7 +51,7 @@ const outbrainContainer = css`
         padding-bottom: 12px;
     }
 
-    .ob-widget-header {
+    .ob-widget .ob-widget-section .ob-widget-header {
         ${headline.xsmall()};
         color: ${palette.neutral[7]};
         font-weight: 900;
