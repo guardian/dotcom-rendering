@@ -109,7 +109,6 @@ function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticlePr
                             pillarStyles={pillarStyles}
                             publicationDate={webPublicationDate}
                             contributors={contributors}
-                            className={css``}
                         />
                         {fields.commentable
                                 ? <CommentCount

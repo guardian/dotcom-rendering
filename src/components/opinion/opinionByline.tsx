@@ -50,17 +50,15 @@ interface OpinionBylineProps {
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
-    className: SerializedStyles;
 }
 
 const OpinionByline = ({
     pillarStyles,
     publicationDate,
     contributors,
-    className,
 }: OpinionBylineProps): JSX.Element =>
     <div
-        css={[className, OpinionBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
+        css={[OpinionBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
     >
         <div css={sidePadding}>
             <div className="author">
