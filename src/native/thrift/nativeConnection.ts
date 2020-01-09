@@ -17,7 +17,7 @@ import * as uuid from 'uuid';
 declare global {
     interface Window {
         nativeConnections: { [id: string]: NativeConnection };
-        AndroidWebViewMessage?: (command: string) => {};
+        AndroidWebViewMessage?: (nativeMessage: NativeMessage) => {};
         webkit: {
             messageHandlers: {
                 iOSWebViewMessage: {
@@ -43,7 +43,7 @@ const ACTION_TIMEOUT_MS = 30000;
 
 function sendNativeMessage(nativeMessage: NativeMessage): void {
     if (window.AndroidWebViewMessage) {
-        // window.AndroidWebViewMessage(command)
+        window.AndroidWebViewMessage(nativeMessage)
     } else if (window?.webkit?.messageHandlers?.iOSWebViewMessage?.postMessage) {
         window.webkit.messageHandlers.iOSWebViewMessage.postMessage(nativeMessage)
     } else {
