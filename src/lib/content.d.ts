@@ -54,6 +54,7 @@ interface YoutubeBlockElement {
     assetId: string;
     channelId?: string;
     mediaTitle: string;
+    mediaDuration?: number;
 }
 
 // Note, this is a Video Embed rather than the above Media Atom

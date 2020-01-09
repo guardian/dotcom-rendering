@@ -48,6 +48,7 @@ function renderElement(
     pillar: Pillar,
     i: number,
     hideCaption?: boolean,
+    adTargeting?: AdTargeting,
 ) {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -69,6 +70,7 @@ function renderElement(
                     hideCaption={hideCaption}
                     // tslint:disable-next-line react-a11y-role
                     role="inline"
+                    adTargeting={adTargeting}
                 />
             );
         default:
@@ -84,10 +86,11 @@ export const MainMedia: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
     hideCaption?: boolean;
-}> = ({ elements, pillar, hideCaption }) => (
+    adTargeting?: AdTargeting;
+}> = ({ elements, pillar, hideCaption, adTargeting }) => (
     <div className={mainMedia}>
         {elements.map((element, i) =>
-            renderElement(element, pillar, i, hideCaption),
+            renderElement(element, pillar, i, hideCaption, adTargeting),
         )}
     </div>
 );

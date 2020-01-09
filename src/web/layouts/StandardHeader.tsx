@@ -10,6 +10,8 @@ import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { HeaderItem } from '@root/src/web/components/HeaderItem';
 import { Hide } from '@root/src/web/components/Hide';
 
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+
 const positionMainImage = css`
     /*
         Decide the order for ArticleHeader items. The natural order is:
@@ -57,7 +59,10 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
         pillar,
         mainMediaElements,
         standfirst,
+        config,
     } = CAPI;
+
+    const adTargeting: AdTargeting = buildAdTargeting(config);
 
     return (
         <header className={headerStyles}>
@@ -90,7 +95,11 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
             </HeaderItem>
             <div className={cx(positionMainImage, maxWidth)}>
                 <Hide when="below" breakpoint="tablet">
-                    <MainMedia elements={mainMediaElements} pillar={pillar} />
+                    <MainMedia
+                        elements={mainMediaElements}
+                        pillar={pillar}
+                        adTargeting={adTargeting}
+                    />
                 </Hide>
             </div>
         </header>
