@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleHeadline from './articleHeadline';
+import ArticleHeadline from './headline';
 import { pillarColours, Pillar } from 'pillar';
 import { text, boolean, withKnobs, object } from "@storybook/addon-knobs";
 

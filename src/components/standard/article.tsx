@@ -2,11 +2,11 @@
 
 import React, { ReactNode } from 'react';
 
-import HeaderImage from '../shared/headerImage';
+import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
-import ArticleHeadline from './articleHeadline';
-import ArticleStandfirst from './articleStandfirst';
-import ArticleByline from './articleByline';
+import ArticleHeadline from 'components/standard/headline';
+import ArticleStandfirst from 'components/standard/standfirst';
+import ArticleByline from 'components/standard/byline';
 import { CommentCount } from 'components/shared/commentCount'
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';

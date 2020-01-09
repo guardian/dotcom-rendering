@@ -2,12 +2,12 @@ import React, { ReactNode } from 'react';
 
 import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
-import OpinionHeadline from 'components/opinion/opinionHeadline';
-import ArticleStandfirst from 'components/standard/articleStandfirst';
-import OpinionByline from 'components/opinion/opinionByline';
+import OpinionHeadline from 'components/opinion/headline';
+import ArticleStandfirst from 'components/standard/standfirst';
+import OpinionByline from 'components/opinion/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import OpinionCutout from 'components/opinion/opinionCutout';
+import OpinionCutout from 'components/opinion/cutout';
 import { Content } from 'capiThriftModels';
 import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { palette } from '@guardian/src-foundations';
