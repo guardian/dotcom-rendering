@@ -3,7 +3,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { css } from '@emotion/core';
 
-import ArticleComponent from 'components/news/article';
+import ArticleComponent from 'components/standard/article';
 import LiveblogArticle from 'components/liveblog/liveblogArticle';
 import OpinionArticle from 'components/opinion/opinionArticle';
 import ImmersiveArticle from 'components/immersive/immersiveArticle';

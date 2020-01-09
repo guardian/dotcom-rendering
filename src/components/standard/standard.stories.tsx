@@ -3,7 +3,7 @@ import ArticleHeadline from './articleHeadline';
 import { pillarColours, Pillar } from 'pillar';
 import { text, boolean, withKnobs, object } from "@storybook/addon-knobs";
 
-export default { title: 'News', decorators: [withKnobs] };
+export default { title: 'Standard', decorators: [withKnobs] };
 
 export const Headline = (): JSX.Element => <ArticleHeadline
   headline={text("Headline", "Headline")}
