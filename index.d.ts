@@ -352,7 +352,7 @@ interface ConfigType {
     googletagUrl: string;
     stage: string;
     frontendAssetsFullURL: string;
-    hbImpl: any;
+    hbImpl: object | string;
     adUnit: string;
     isSensitive: string;
     videoDuration: number;
