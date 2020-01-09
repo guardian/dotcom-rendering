@@ -44,6 +44,7 @@ const OutbrainWidget: React.FC<{}> = ({}) => {
 
 const outbrainContainer = css`
     .js-outbrain-container {
+        overflow: hidden;
         padding-top: 6px;
         padding-bottom: 12px;
     }
