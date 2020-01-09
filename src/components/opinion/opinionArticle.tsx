@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
 import OpinionHeadline from 'components/opinion/opinionHeadline';
-import ArticleStandfirst from 'components/news/articleStandfirst';
+import ArticleStandfirst from 'components/standard/articleStandfirst';
 import OpinionByline from 'components/opinion/opinionByline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
