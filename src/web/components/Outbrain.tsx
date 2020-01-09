@@ -1,6 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { palette } from '@guardian/src-foundations';
+import { headline } from '@guardian/src-foundations/typography';
+
 interface OutbrainSelectors {
     widget: string;
     container: string;
@@ -46,6 +49,12 @@ const outbrainContainer = css`
     .js-outbrain-container {
         padding-top: 6px;
         padding-bottom: 12px;
+    }
+
+    .ob-widget-header {
+        ${headline.xsmall()};
+        color: ${palette.neutral[7]};
+        font-weight: 900;
     }
 `;
 
