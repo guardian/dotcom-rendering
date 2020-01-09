@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { Dropdown, Link } from './Dropdown';
+import { Dropdown } from './Dropdown';
 
-const links: Link[] = [
+const links = [
     {
         url: '/preference/edition/uk',
         title: 'UK edition',
@@ -27,13 +27,6 @@ const links: Link[] = [
 ];
 
 const LABEL = 'Dropdown label';
-
-// interface Props {
-//     id: string;
-//     label: string;
-//     links: Link[];
-//     dataLinkName: string;
-// }
 
 describe('Dropdown', () => {
     it('should display the given label', () => {
