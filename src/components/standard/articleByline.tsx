@@ -10,6 +10,10 @@ import { PillarStyles } from 'pillar';
 import { componentFromHtml } from 'renderBlocks';
 
 const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+    width: 80%;
+    float: left;
+    display: inline-block;
+
     .author {
         address {
             line-height: 2.2rem;
@@ -58,7 +62,6 @@ interface ArticleBylineProps {
     publicationDate: string;
     contributors: Contributor[];
     imageSalt: string;
-    className: SerializedStyles;
 }
 
 const ArticleByline = ({
@@ -66,11 +69,10 @@ const ArticleByline = ({
     pillarStyles,
     publicationDate,
     contributors,
-    imageSalt,
-    className,
+    imageSalt
 }: ArticleBylineProps): JSX.Element =>
     <div
-        css={[className, ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}
+        css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}
     >
         <div css={sidePadding}>
             <Avatar

@@ -7,6 +7,7 @@ import ArticleSeries from 'components/shared/articleSeries';
 import ArticleHeadline from './articleHeadline';
 import ArticleStandfirst from './articleStandfirst';
 import ArticleByline from './articleByline';
+import { CommentCount } from 'components/shared/commentCount'
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
@@ -92,14 +93,18 @@ const Article = ({ capi, imageSalt, article, children }: ArticleProps): JSX.Elem
                         />
                     </div>
                     <Keyline article={article}/>
-                    <ArticleByline
-                        byline={fields.bylineHtml}
-                        pillarStyles={pillarStyles}
-                        publicationDate={webPublicationDate}
-                        contributors={contributors}
-                        imageSalt={imageSalt}
-                        className={articleWidthStyles}
-                    />
+                    <section css={articleWidthStyles}>
+                        <ArticleByline
+                            byline={fields.bylineHtml}
+                            pillarStyles={pillarStyles}
+                            publicationDate={webPublicationDate}
+                            contributors={contributors}
+                            imageSalt={imageSalt}
+                        />
+                        {fields.commentable
+                                ? <CommentCount count={0} colour={pillarStyles.kicker}/>
+                                : null}
+                    </section>
                 </header>
                 <ArticleBody pillarStyles={pillarStyles} className={[articleWidthStyles]}>
                     {children}
