@@ -99,8 +99,7 @@ function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticlePr
                     <Keyline article={article}/>
                     <ArticleStandfirst
                             standfirst={fields.standfirst}
-                            feature={true}
-                            pillarStyles={pillarStyles}
+                            article={article}
                             className={articleWidthStyles}
                     />
 
