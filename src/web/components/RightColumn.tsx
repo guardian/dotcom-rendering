@@ -21,7 +21,7 @@ const padding = css`
     padding-top: 6px;
     /* Use margin here to the prevent flicker on load that you get
        with padding (because the header section has flex-grow: 1) */
-    margin-left: 10px;
+    margin-left: 20px;
 `;
 
 type Props = {
