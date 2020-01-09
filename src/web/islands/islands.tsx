@@ -2,7 +2,7 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
-import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
+import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper';
 import { ShareCount } from '@frontend/web/components/ShareCount';
