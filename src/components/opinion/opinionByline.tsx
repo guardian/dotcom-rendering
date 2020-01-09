@@ -9,8 +9,12 @@ import Follow from 'components/shared/follow';
 import { PillarStyles } from 'pillar';
 
 const OpinionBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+    width: 80%;
+    float: left;
+    display: inline-block;
+
     .author {
-        margin: ${basePx(1, 0, 2, 0)};
+        margin: ${basePx(0, 0, 2, 0)};
 
         .follow, a {
             color: ${kicker};
@@ -46,17 +50,15 @@ interface OpinionBylineProps {
     pillarStyles: PillarStyles;
     publicationDate: string;
     contributors: Contributor[];
-    className: SerializedStyles;
 }
 
 const OpinionByline = ({
     pillarStyles,
     publicationDate,
     contributors,
-    className,
 }: OpinionBylineProps): JSX.Element =>
     <div
-        css={[className, OpinionBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
+        css={[OpinionBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
     >
         <div css={sidePadding}>
             <div className="author">

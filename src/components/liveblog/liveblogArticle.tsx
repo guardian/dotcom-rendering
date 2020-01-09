@@ -74,6 +74,7 @@ const LiveblogArticle = ({ capi, article, imageSalt }: LiveblogArticleProps): JS
                     publicationDate={webPublicationDate}
                     contributors={contributors}
                     imageSalt={imageSalt}
+                    commentable={fields.commentable}
                 />
                 <HeaderImage
                     image={image}
