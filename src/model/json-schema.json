@@ -1273,7 +1273,7 @@
                     "type": "string"
                 },
                 "hbImpl": {
-                    "type": "string"
+                    "type": ["object", "string"]
                 },
                 "adUnit": {
                     "type": "string"
