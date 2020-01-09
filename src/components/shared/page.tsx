@@ -4,9 +4,9 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { css } from '@emotion/core';
 
 import ArticleComponent from 'components/standard/article';
-import LiveblogArticle from 'components/liveblog/liveblogArticle';
-import OpinionArticle from 'components/opinion/opinionArticle';
-import ImmersiveArticle from 'components/immersive/immersiveArticle';
+import LiveblogArticle from 'components/liveblog/article';
+import OpinionArticle from 'components/opinion/article';
+import ImmersiveArticle from 'components/immersive/article';
 
 import { Pillar, pillarFromString } from 'pillar';
 import { Content } from 'capiThriftModels';

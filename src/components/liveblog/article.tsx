@@ -1,13 +1,13 @@
 import React from 'react';
 
-import LiveblogSeries from './liveblogSeries';
-import LiveblogHeadline from './liveblogHeadline';
-import LiveblogStandfirst from './liveblogStandfirst';
-import LiveblogByline from './liveblogByline';
-import LiveblogKeyEvents from './liveblogKeyEvents';
-import LiveblogBody from './liveblogBody';
-import HeaderImage from '../shared/headerImage';
-import Tags from '../shared/tags';
+import LiveblogSeries from 'components/liveblog/series';
+import LiveblogHeadline from 'components/liveblog/headline';
+import LiveblogStandfirst from 'components/liveblog/standfirst';
+import LiveblogByline from 'components/liveblog/byline';
+import LiveblogKeyEvents from 'components/liveblog/keyEvents';
+import LiveblogBody from 'components/liveblog/body';
+import HeaderImage from 'components/shared/headerImage';
+import Tags from 'components/shared/tags';
 import { wideColumnWidth, baseMultiply, darkModeCss } from 'styles';
 import { Content } from 'capiThriftModels';
 import { css, SerializedStyles } from '@emotion/core'

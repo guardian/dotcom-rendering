@@ -1,5 +1,5 @@
 import React from 'react';
-import LiveblogLoadMore from './liveblogLoadMore';
+import LiveblogLoadMore from './loadMore';
 import { pillarColours, Pillar } from 'pillar';
 import { withKnobs, object } from "@storybook/addon-knobs";
 

@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import ImmersiveHeaderImage from 'components/immersive/immersiveHeaderImage';
-import ImmersiveSeries from 'components/immersive/immersiveSeries';
-import ImmersiveHeadline from 'components/immersive/immersiveHeadline';
-import ImmersiveStandfirst from 'components/immersive/immersiveStandfirst';
-import ImmersiveByline from 'components/immersive/immersiveByline';
+import ImmersiveHeaderImage from 'components/immersive/headerImage';
+import ImmersiveSeries from 'components/immersive/series';
+import ImmersiveHeadline from 'components/immersive/headline';
+import ImmersiveStandfirst from 'components/immersive/standfirst';
+import ImmersiveByline from 'components/immersive/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { Content } from 'capiThriftModels';
