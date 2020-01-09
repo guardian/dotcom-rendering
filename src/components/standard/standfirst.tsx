@@ -44,19 +44,15 @@ const StandfirstDarkStyles = ({ pillar }: Article): SerializedStyles => darkMode
     }
 `;
 
-interface ArticleStandfirstProps {
+interface Props {
     standfirst: string;
     article: Article;
     className: SerializedStyles;
 }
 
-const ArticleStandfirst = ({
-    standfirst,
-    article,
-    className,
-}: ArticleStandfirstProps): JSX.Element =>
+const Standfirst = ({ standfirst, article, className }: Props): JSX.Element =>
     <div css={[className, StandfirstStyles(article), StandfirstDarkStyles(article)]}>
         {componentFromHtml(standfirst)}
     </div>
 
-export default ArticleStandfirst;
+export default Standfirst;
