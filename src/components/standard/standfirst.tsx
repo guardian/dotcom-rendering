@@ -3,7 +3,7 @@ import { sidePadding, bulletStyles, headlineFont, darkModeCss, linkStyle } from 
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillar';
-import { componentFromHtml } from 'renderBlocks';
+import { renderText } from 'renderer';
 import { Article, Layout } from 'article';
 
 const StandfirstFeatureStyles = `
@@ -45,14 +45,13 @@ const StandfirstDarkStyles = ({ pillar }: Article): SerializedStyles => darkMode
 `;
 
 interface Props {
-    standfirst: string;
     article: Article;
     className: SerializedStyles;
 }
 
-const Standfirst = ({ standfirst, article, className }: Props): JSX.Element =>
+const Standfirst = ({ article, className }: Props): JSX.Element =>
     <div css={[className, StandfirstStyles(article), StandfirstDarkStyles(article)]}>
-        {componentFromHtml(standfirst)}
+        {renderText(article.standfirst, article.pillar)}
     </div>
 
 export default Standfirst;

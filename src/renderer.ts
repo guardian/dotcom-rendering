@@ -5,112 +5,13 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
 
-import { BlockElement, ElementType } from 'capiThriftModels';
-import { Result, Ok, Err } from 'types/result';
+import { ElementType } from 'capiThriftModels';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { imageRatioStyles } from 'components/blocks/image';
-
-// ----- Types ----- //
-
-type Block = {
-    kind: ElementType.TEXT;
-    doc: DocumentFragment;
-} | {
-    kind: ElementType.IMAGE;
-    alt: string;
-    caption: string;
-    displayCredit: boolean;
-    credit: string;
-    file: string;
-    width: number;
-    height: number;
-} | {
-    kind: ElementType.PULLQUOTE;
-    quote: string;
-    attribution: Option<string>;
-} | {
-    kind: ElementType.INTERACTIVE;
-    url: string;
-} | {
-    kind: ElementType.RICH_LINK;
-    url: string;
-    linkText: string;
-} | {
-    kind: ElementType.TWEET;
-    content: NodeList;
-};
-
-type DocParser = (html: string) => DocumentFragment;
-
-
-// ----- Parser ----- //
-
-const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, NodeList> => {
-    const blockquote = doc.querySelector('blockquote');
-
-    if (blockquote !== null) {
-        return new Ok(blockquote.childNodes);
-    }
-
-    return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
-}
-
-const parser = (docParser: DocParser) => (block: BlockElement): Result<string, Block> => {
-    switch (block.type) {
-
-        case ElementType.TEXT:
-            return new Ok({ kind: ElementType.TEXT, doc: docParser(block.textTypeData.html) });
-
-        case ElementType.IMAGE:
-
-            const masterAsset = block.assets.find(asset => asset.typeData.isMaster);
-            const { alt, caption, displayCredit, credit } = block.imageTypeData;
-            const imageBlock: Option<Result<string, Block>> = fromNullable(masterAsset)
-                .map(asset => new Ok({
-                    kind: ElementType.IMAGE,
-                    alt,
-                    caption,
-                    displayCredit,
-                    credit,
-                    file: asset.file,
-                    width: asset.typeData.width,
-                    height: asset.typeData.height,
-                }));
-
-            return imageBlock.withDefault(new Err('I couldn\'t find a master asset'));
-
-        case ElementType.PULLQUOTE:
-
-            const { html: quote, attribution } = block.pullquoteTypeData;
-            return new Ok({
-                kind: ElementType.PULLQUOTE,
-                quote,
-                attribution: fromNullable(attribution),
-            });
-
-        case ElementType.INTERACTIVE:
-            const { iframeUrl } = block.interactiveTypeData;
-            return new Ok({ kind: ElementType.INTERACTIVE, url: iframeUrl });
-
-        case ElementType.RICH_LINK:
-
-            const { url, linkText } = block.richLinkTypeData;
-            return new Ok({ kind: ElementType.RICH_LINK, url, linkText });
-
-        case ElementType.TWEET:
-            return tweetContent(block.tweetTypeData.id, docParser(block.tweetTypeData.html))
-                .map(content => ({ kind: ElementType.TWEET, content }));
-
-        default:
-            return new Err(`I'm afraid I don't understand the block I was given: ${block.type}`);
-    }
-}
-
-const parseAll = (docParser: DocParser) => (blocks: BlockElement[]): Result<string, Block>[] =>
-    blocks.map(parser(docParser));
+import { Block } from 'article';
 
 
 // ----- Renderer ----- //
@@ -414,7 +315,6 @@ const renderAll = (salt: string) => (pillar: Pillar, blocks: Block[]): ReactNode
 // ----- Exports ----- //
 
 export {
-    Block,
-    parseAll,
     renderAll,
+    text as renderText,
 };

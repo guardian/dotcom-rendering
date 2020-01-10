@@ -10,13 +10,11 @@ import ArticleByline from 'components/standard/byline';
 import { CommentCount } from 'components/shared/commentCount'
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { Content } from 'capiThriftModels';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
-import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles } from 'pillar';
 import { Article } from 'article';
 
@@ -24,7 +22,6 @@ import { Article } from 'article';
 // ----- Component ----- //
 
 export interface ArticleProps {
-    capi: Content;
     imageSalt: string;
     article: Article;
     children: ReactNode[];
@@ -58,60 +55,40 @@ const HeaderImageStyles = css`
     }
 `;
 
-const Article = ({ capi, imageSalt, article, children }: ArticleProps): JSX.Element => {
-
-    const { fields, tags, webPublicationDate } = capi;
-    const series = articleSeries(capi);
-    const pillarStyles = getPillarStyles(article.pillar);
-    const contributors = articleContributors(capi);
-    const mainImage = articleMainImage(capi);
-
-    return (
-        <main css={[MainStyles, MainDarkStyles]}>
-            <article css={BorderStyles}>
-                <header>
-                    <HeaderImage
-                        image={mainImage}
-                        imageSalt={imageSalt}
-                        className={HeaderImageStyles}
+const Article = ({ imageSalt, article, children }: ArticleProps): JSX.Element =>
+    <main css={[MainStyles, MainDarkStyles]}>
+        <article css={BorderStyles}>
+            <header>
+                <HeaderImage
+                    image={article.mainImage}
+                    imageSalt={imageSalt}
+                    className={HeaderImageStyles}
+                />
+                <div css={articleWidthStyles}>
+                    <ArticleSeries series={article.series} pillar={article.pillar} />
+                    <ArticleHeadline
+                        headline={article.headline}
+                        article={article}
+                        rating={String(article.starRating)}
                     />
-                    <div css={articleWidthStyles}>
-                        <ArticleSeries series={series} pillarStyles={pillarStyles}/>
-                        <ArticleHeadline
-                            headline={fields.headline}
-                            article={article}
-                            rating={String(fields.starRating)}
-                        />
-                        <ArticleStandfirst
-                            standfirst={fields.standfirst}
-                            article={article}
-                            className={articleWidthStyles}
-                        />
-                    </div>
-                    <Keyline article={article}/>
-                    <section css={articleWidthStyles}>
-                        <ArticleByline
-                            byline={fields.bylineHtml}
-                            pillarStyles={pillarStyles}
-                            publicationDate={webPublicationDate}
-                            contributors={contributors}
-                            imageSalt={imageSalt}
-                        />
-                        {fields.commentable
-                                ? <CommentCount count={0} colour={pillarStyles.kicker}/>
-                                : null}
-                    </section>
-                </header>
-                <ArticleBody pillarStyles={pillarStyles} className={[articleWidthStyles]}>
-                    {children}
-                </ArticleBody>
-                <footer css={articleWidthStyles}>
-                    <Tags tags={tags}/>
-                </footer>
-            </article>
-        </main>
-    );
-}
+                    <ArticleStandfirst article={article} className={articleWidthStyles} />
+                </div>
+                <Keyline article={article}/>
+                <section css={articleWidthStyles}>
+                    <ArticleByline article={article} imageSalt={imageSalt} />
+                    {article.commentable
+                            ? <CommentCount count={0} colour={getPillarStyles(article.pillar).kicker}/>
+                            : null}
+                </section>
+            </header>
+            <ArticleBody pillar={article.pillar} className={[articleWidthStyles]}>
+                {children}
+            </ArticleBody>
+            <footer css={articleWidthStyles}>
+                <Tags tags={article.tags}/>
+            </footer>
+        </article>
+    </main>
 
 
 // ----- Exports ----- //

@@ -113,7 +113,7 @@ function ImmersiveArticle({
                     />
                 </header>
                 <ArticleBody
-                    pillarStyles={pillarStyles}
+                    pillar={article.pillar}
                     className={[articleWidthStyles, DropCapStyles(pillarStyles), HeaderStyles]}
                 >
                     {children}
