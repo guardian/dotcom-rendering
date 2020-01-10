@@ -49,7 +49,7 @@ function textElement(node: Node): ReactNode {
         case 'P':
             return h(
                 'p',
-                null,
+                getAttrs(node),
                 ...Array.from(node.childNodes).map(textElement),
             );
         case '#text':
@@ -179,6 +179,8 @@ function render(bodyElements: BlockElement[], imageSalt: string, ads = true): Re
 
 function componentFromHtml(html: string): ReactNode[] {
     const fragment = JSDOM.fragment(transform(html))
+    Array.from(fragment.children)
+        .forEach((element, index) => element.setAttribute('key', `${index}`))
     return textBlock(fragment);
 }
 
