@@ -360,6 +360,11 @@ interface ConfigType {
     section: string;
     sharedAdTargeting: { [key: string]: any };
     isPaidContent?: boolean;
+    pageId?: string;
+    webPublicationDate?: number;
+    headline?: string;
+    author?: string;
+    keywords?: string;
 }
 
 interface GADataType {
