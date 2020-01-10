@@ -38,6 +38,11 @@ export const render = (
             beacon: `${CAPI.beaconURL}/count/pv.gif`,
             neilsenAPIID: findBySubsection(sectionName).apiID,
             domain: 'amp.theguardian.com',
+            permutive: {
+                namespace: 'guardian',
+                apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
+                payload: generatePermutivePayload(config),
+            },
         };
 
         const metadata = {
@@ -74,4 +79,29 @@ export const render = (
 export const renderPerfTest = (req: express.Request, res: express.Response) => {
     req.body = JSON.parse(bodyJSON);
     render(req, res);
+};
+
+const generatePermutivePayload = (config: ConfigType) => {
+    const publishedAt =
+        config.webPublicationDate &&
+        typeof config.webPublicationDate === 'number'
+            ? new Date(config.webPublicationDate).toISOString()
+            : void 0;
+    const payload: { [key: string]: any } = {
+        'properties.content.Premium': config.isPaidContent,
+        'properties.content.id': config.pageId,
+        'properties.content.title': config.headline,
+        'properties.content.section': config.section,
+        'properties.content.authors!list[string]': config.author,
+        'properties.content.keywords!list[string]': config.keywords,
+        'properties.content.publishedAt': publishedAt,
+        'properties.user.edition': config.edition,
+    };
+    let cleanPayload: { [key: string]: any } = {};
+
+    Object.keys(payload)
+        .filter(key => typeof payload[key] !== undefined)
+        .forEach(key => (cleanPayload[key] = payload[key]));
+
+    return cleanPayload;
 };
