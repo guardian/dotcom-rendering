@@ -57,8 +57,10 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
     }
 `;
 
-const Author = (props: { byline: Option<DocumentFragment>, pillar: Pillar }): JSX.Element | null =>
+const Author = (props: { byline: Option<DocumentFragment>; pillar: Pillar }): JSX.Element | null =>
     props.byline.map<JSX.Element | null>((bylineHtml: DocumentFragment) =>
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
         <address>{renderText(bylineHtml, props.pillar)}</address>
     ).withDefault(null);
 

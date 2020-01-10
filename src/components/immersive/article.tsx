@@ -104,7 +104,7 @@ function ImmersiveArticle({
                             byline={fields.byline}
                         />
                     </div>
-                    <Keyline article={article}/>
+                    <Keyline {...article} />
                     <ImmersiveByline
                         pillarStyles={pillarStyles}
                         publicationDate={webPublicationDate}

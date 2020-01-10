@@ -85,7 +85,7 @@ const LiveblogByline = ({
     
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
-            <Keyline article={article}/>
+            <Keyline {...article} />
             <LeftColumn>
                 <section>
                     <div className="byline">

@@ -96,7 +96,7 @@ function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticlePr
                         imageSalt={imageSalt}
                         className={articleWidthStyles}
                     />
-                    <Keyline article={article}/>
+                    <Keyline {...article} />
                     <ArticleStandfirst
                             article={article}
                             className={articleWidthStyles}

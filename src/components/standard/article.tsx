@@ -73,12 +73,12 @@ const Article = ({ imageSalt, article, children }: ArticleProps): JSX.Element =>
                     />
                     <ArticleStandfirst article={article} className={articleWidthStyles} />
                 </div>
-                <Keyline article={article}/>
+                <Keyline {...article} />
                 <section css={articleWidthStyles}>
                     <ArticleByline article={article} imageSalt={imageSalt} />
                     {article.commentable
-                            ? <CommentCount count={0} colour={getPillarStyles(article.pillar).kicker}/>
-                            : null}
+                        ? <CommentCount count={0} colour={getPillarStyles(article.pillar).kicker}/>
+                        : null}
                 </section>
             </header>
             <ArticleBody pillar={article.pillar} className={[articleWidthStyles]}>
