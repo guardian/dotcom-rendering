@@ -104,7 +104,7 @@ function ImmersiveArticle({
                             byline={fields.byline}
                         />
                     </div>
-                    <Keyline article={article}/>
+                    <Keyline {...article} />
                     <ImmersiveByline
                         pillarStyles={pillarStyles}
                         publicationDate={webPublicationDate}
@@ -113,7 +113,7 @@ function ImmersiveArticle({
                     />
                 </header>
                 <ArticleBody
-                    pillarStyles={pillarStyles}
+                    pillar={article.pillar}
                     className={[articleWidthStyles, DropCapStyles(pillarStyles), HeaderStyles]}
                 >
                     {children}

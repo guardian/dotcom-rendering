@@ -10,21 +10,21 @@ configure({ adapter: new Adapter() });
 describe('Keyline component renders as expected', () => {
     it('Renders styles for liveblogs', () => {
         const article = { pillar: Pillar.opinion, layout: Layout.Liveblog };
-        const keyline = shallow(<Keyline article={article}/>);
+        const keyline = shallow(<Keyline {...article} />);
         expect(keyline.props().css.styles).toContain("background-image:repeating-linear-gradient(#dcdcdc,#dcdcdc 1px,transparent 1px,transparent 3px)")
         expect(keyline.props().css.styles).toContain("opacity:.4;")
     })
 
     it('Renders styles for opinion pillar articles', () => {
         const article = { pillar: Pillar.opinion, layout: Layout.Standard };
-        const keyline = shallow(<Keyline article={article}/>);
+        const keyline = shallow(<Keyline {...article} />);
         expect(keyline.props().css.styles).toContain("background-image:repeating-linear-gradient(#dcdcdc,#dcdcdc 1px,transparent 1px,transparent 3px)")
         expect(keyline.props().css.styles).toContain("height:24px;")
     })
 
     it('Renders styles for news pillar articles', () => {
         const article = { pillar: Pillar.news, layout: Layout.Standard };
-        const keyline = shallow(<Keyline article={article}/>);
+        const keyline = shallow(<Keyline {...article} />);
         expect(keyline.props().css.styles).toContain("background-image:repeating-linear-gradient(#dcdcdc,#dcdcdc 1px,transparent 1px,transparent 3px)")
     })
 });

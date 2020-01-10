@@ -2,7 +2,7 @@ import React from 'react';
 import { sidePadding, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from '../../capi';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
 const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     a {
@@ -18,14 +18,14 @@ const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
 interface ArticleSeriesProps {
     series: Series;
-    pillarStyles: PillarStyles;
+    pillar: Pillar;
 }
 
-const ArticleSeries = ({ series, pillarStyles }: ArticleSeriesProps): JSX.Element | null => {
+const ArticleSeries = ({ series, pillar }: ArticleSeriesProps): JSX.Element | null => {
 
     if (series) {
         return (
-            <nav css={ArticleSeriesStyles(pillarStyles)}>
+            <nav css={ArticleSeriesStyles(getPillarStyles(pillar))}>
                 <a href={series.webUrl}>{series.webTitle}</a>
             </nav>
         )
