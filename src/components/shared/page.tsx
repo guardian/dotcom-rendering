@@ -32,8 +32,8 @@ const PageStyles = css`
 
     ${fontFace("Guardian Text Sans Web", new Some(400), new None, "/public/fonts/GuardianTextSans-Regular.ttf")}
     ${fontFace("Guardian Text Sans Web", new Some(400), new Some("italic"), "/public/fonts/GuardianTextSans-RegularItalic.ttf")}
-    ${fontFace("Guardian Text Sans Web", new Some(600), new None, "/public/fonts/GuardianTextSans-Bold.ttf")}
-    ${fontFace("Guardian Text Sans Web", new Some(600), new Some("italic"), "/public/fonts/GuardianTextSans-BoldItalic.ttf")}
+    ${fontFace("Guardian Text Sans Web", new Some(700), new None, "/public/fonts/GuardianTextSans-Bold.ttf")}
+    ${fontFace("Guardian Text Sans Web", new Some(700), new Some("italic"), "/public/fonts/GuardianTextSans-BoldItalic.ttf")}
 
     ${fontFace("Guardian Headline", new Some(300), new None, "/public/fonts/GHGuardianHeadline-Light.ttf")}
     ${fontFace("Guardian Headline", new Some(300), new Some("italic"), "/public/fonts/GHGuardianHeadline-LightItalic.ttf")}
