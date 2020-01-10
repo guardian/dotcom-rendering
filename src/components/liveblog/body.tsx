@@ -1,7 +1,7 @@
 import React from 'react';
 import { bulletStyles, commonArticleStyles } from 'styles';
-import LiveblogBlock from './liveblogBlock';
-import LiveblogLoadMore from './liveblogLoadMore';
+import LiveblogBlock from './block';
+import LiveblogLoadMore from './loadMore';
 import { render } from 'renderBlocks';
 import { Block } from 'capiThriftModels';
 
