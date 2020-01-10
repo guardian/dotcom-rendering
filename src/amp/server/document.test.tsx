@@ -47,6 +47,13 @@ test('produces valid AMP doc', async () => {
         beacon: `${CAPI.beaconURL}/count/pv.gif`,
         neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
         domain: 'amp.theguardian.com',
+        permutive: {
+            namespace: 'guardian',
+            apiKey: '42-2020',
+            payload: {
+                headline: 'article title',
+            },
+        },
     };
 
     const body = (
