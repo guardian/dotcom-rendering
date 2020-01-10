@@ -1,8 +1,10 @@
-import React from 'react';
-import { sidePadding, textSans, darkModeCss } from 'styles';
+// ----- Imports ----- //
 
+import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
+
+import { sidePadding, textSans, darkModeCss } from 'styles';
 import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
@@ -11,7 +13,10 @@ import { Option } from 'types/option';
 import { renderText } from 'renderer';
 import { Article } from 'article';
 
-const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+
+// ----- Styles ----- //
+
+const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     width: 80%;
     float: left;
     display: inline-block;
@@ -42,7 +47,7 @@ const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
-const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
@@ -57,24 +62,35 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
     }
 `;
 
-const Author = (props: { byline: Option<DocumentFragment>; pillar: Pillar }): JSX.Element | null =>
+
+// ----- Subcomponents ----- //
+
+interface AuthorProps {
+    byline: Option<DocumentFragment>;
+    pillar: Pillar;
+}
+
+const Author = (props: AuthorProps): JSX.Element | null =>
     props.byline.map<JSX.Element | null>((bylineHtml: DocumentFragment) =>
         // This is not an iterator, ESLint is confused
         // eslint-disable-next-line react/jsx-key
         <address>{renderText(bylineHtml, props.pillar)}</address>
     ).withDefault(null);
 
-interface ArticleBylineProps {
+
+// ----- Component ----- //
+
+interface Props {
     article: Article;
     imageSalt: string;
 }
 
-function ArticleByline({ article, imageSalt }: ArticleBylineProps): JSX.Element {
+function Byline({ article, imageSalt }: Props): JSX.Element {
     const pillarStyles = getPillarStyles(article.pillar);
 
     return (
         <div
-            css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}
+            css={[Styles(pillarStyles), DarkStyles(pillarStyles)]}
         >
             <div css={sidePadding}>
                 <Avatar
@@ -92,4 +108,7 @@ function ArticleByline({ article, imageSalt }: ArticleBylineProps): JSX.Element 
     );
 }
 
-export default ArticleByline;
+
+// ----- Exports ----- //
+
+export default Byline;
