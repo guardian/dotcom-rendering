@@ -9,7 +9,7 @@ function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 
     const className = numParas < 15 ? 'ad-placeholder short' : 'ad-placeholder';
 
-    const ad = (para: number): ReactElement => h('aside', { className, key: `ad-after-${para}th-para` },
+    const ad = (para: number): ReactElement => h('aside', { className, key: `ad-after-${para}-para` },
         h('div', { className: 'ad-labels' },
             h('h1', null, 'Advertisement'),
             h('button', { className: 'ad-hide' },
