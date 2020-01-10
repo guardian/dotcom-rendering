@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { headline } from '@guardian/src-foundations/typography';
+
 interface OutbrainSelectors {
     widget: string;
     container: string;
@@ -47,6 +49,11 @@ const outbrainContainer = css`
         overflow: hidden;
         padding-top: 6px;
         padding-bottom: 12px;
+    }
+
+    .ob-widget .ob-widget-section .ob-widget-header {
+        ${headline.xsmall()};
+        font-weight: 900;
     }
 `;
 
