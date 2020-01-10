@@ -27,12 +27,7 @@ function getAdSlots(): AdSlot[] {
 
 setup();
 let adSlots = getAdSlots();
-
-// TODO: this can be removed after adding a min-height to images
-setTimeout(() => {
-    adSlots = getAdSlots();
-    nativeClient.insertAdverts(adSlots)
-}, 2000)
+nativeClient.insertAdverts(adSlots)
 
 const targetNode = document.querySelector('body') as Node;
 const config = { attributes: true, childList: true, subtree: true };
