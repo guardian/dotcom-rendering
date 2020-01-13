@@ -1,23 +1,22 @@
 // ----- Imports ----- //
 
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 import { css } from '@emotion/core';
 
-import ArticleComponent from 'components/standard/article';
+import Standard from 'components/standard/article';
 import LiveblogArticle from 'components/liveblog/article';
-import OpinionArticle from 'components/opinion/article';
-import ImmersiveArticle from 'components/immersive/article';
+import Opinion from 'components/opinion/article';
+import Immersive from 'components/immersive/article';
 
-import { Pillar, pillarFromString } from 'pillar';
 import { Content } from 'capiThriftModels';
 import { includesTweets } from 'capi';
 import { fontFace } from 'styles';
 import { None, Some } from 'types/option';
-import { renderAll, parseAll } from 'block';
+import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { insertAdPlaceholders } from 'ads';
-import { Article, fromCapi } from 'article';
+import { fromCapi, Layout } from 'article';
 
 
 // ----- Components ----- //
@@ -83,43 +82,53 @@ interface BodyProps {
     capi: Content;
 }
 
-interface ArticleProps {
-    imageSalt: string;
-    capi: Content;
-    article: Article;
-    children: ReactNode[];
-}
-
-function getArticleSubtype(capi: Content): FunctionComponent<ArticleProps> {
-    if (pillarFromString(capi.pillarId) === Pillar.opinion) {
-        return OpinionArticle;
-    } else if (capi.fields.displayHint === 'immersive') {
-        return ImmersiveArticle;
-    }
-  
-    return ArticleComponent;
-  }
+const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
+    <>
+        {props.children}
+        <script src={props.src}></script>
+    </>
 
 function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
-    const article = fromCapi(capi);
+    const article = fromCapi(JSDOM.fragment)(capi);
+    const body = partition(article.blocks).oks;
+    const content = insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body));
+    const articleScript = '/assets/article.js';
+    const liveblogScript = '/assets/liveblog.js';
 
-    switch (capi.type) {
-        case 'article':
-            const parsedBlocks = parseAll(JSDOM.fragment)(capi.blocks.body[0].elements);
-            const body = partition(parsedBlocks).oks;
-            const Component = getArticleSubtype(capi);
-
-            return <>
-                <Component capi={capi} imageSalt={imageSalt} article={article}>
-                    {insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body))}
-                </Component>
-                <script src="/assets/article.js"></script>
-            </>;
-        case 'liveblog':
-            return <>
-                <LiveblogArticle capi={capi} article={article} imageSalt={imageSalt} />
-                <script src="/assets/liveblog.js"></script>
-            </>;
+    switch (article.layout) {
+        case Layout.Opinion:
+            return (
+                <WithScript src={articleScript}>
+                    <Opinion capi={capi} imageSalt={imageSalt} article={article}>
+                        {content}
+                    </Opinion>
+                </WithScript>
+            );
+        case Layout.Immersive:
+            return (
+                <WithScript src={articleScript}>
+                    <Immersive capi={capi} imageSalt={imageSalt} article={article}>
+                        {content}
+                    </Immersive>
+                </WithScript>
+            );
+        case Layout.Standard:
+        case Layout.Feature:
+        case Layout.Analysis:
+        case Layout.Review:
+            return (
+                <WithScript src={articleScript}>
+                    <Standard imageSalt={imageSalt} article={article}>
+                        {content}
+                    </Standard>
+                </WithScript>
+            );
+        case Layout.Liveblog:
+            return (
+                <WithScript src={liveblogScript}>
+                    <LiveblogArticle capi={capi} article={article} imageSalt={imageSalt} />
+                </WithScript>
+            );
         default:
             return <p>{capi.type} not implemented yet</p>;
     }

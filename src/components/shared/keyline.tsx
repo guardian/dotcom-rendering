@@ -4,7 +4,7 @@ import { darkModeCss, wideContentWidth, wideColumnWidth, baseMultiply } from 'st
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { Pillar } from 'pillar';
-import { Article, Layout } from 'article';
+import { Layout } from 'article';
 
 const BaseStyles = css`
     height: 12px;
@@ -43,8 +43,12 @@ const KeylineDarkStyles = darkModeCss`
     background-image: repeating-linear-gradient(${palette.neutral[20]}, ${palette.neutral[20]} 1px, transparent 1px, transparent 3px);
 `;
 
+type Props = {
+    pillar: Pillar;
+    layout: Layout;
+};
 
-export const Keyline = ({ article: { pillar, layout } }: { article: Article }): JSX.Element => {
+export const Keyline = ({ pillar, layout }: Props): JSX.Element => {
     const SelectedKeylineStyles = ((pillar, layout): SerializedStyles => {
         if (layout === Layout.Liveblog) return KeylineLiveblogStyles;
         switch (pillar) {

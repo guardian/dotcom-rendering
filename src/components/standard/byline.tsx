@@ -1,15 +1,22 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import { sidePadding, textSans, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
+
+import { sidePadding, textSans, darkModeCss } from 'styles';
 import { formatDate } from 'date';
-import { Contributor } from 'capi';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
-import { PillarStyles } from 'pillar';
-import { componentFromHtml } from 'renderBlocks';
+import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
+import { Option } from 'types/option';
+import { renderText } from 'renderer';
+import { Article } from 'article';
 
-const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+
+// ----- Styles ----- //
+
+const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     width: 80%;
     float: left;
     display: inline-block;
@@ -41,7 +48,7 @@ const ArticleBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
-const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
@@ -56,36 +63,53 @@ const ArticleBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
     }
 `;
 
-interface ArticleBylineProps {
-    byline?: string;
-    pillarStyles: PillarStyles;
-    publicationDate: string;
-    contributors: Contributor[];
+
+// ----- Subcomponents ----- //
+
+interface AuthorProps {
+    byline: Option<DocumentFragment>;
+    pillar: Pillar;
+}
+
+const Author = (props: AuthorProps): JSX.Element | null =>
+    props.byline.map<JSX.Element | null>((bylineHtml: DocumentFragment) =>
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
+        <address>{renderText(bylineHtml, props.pillar)}</address>
+    ).withDefault(null);
+
+
+// ----- Component ----- //
+
+interface Props {
+    article: Article;
     imageSalt: string;
 }
 
-const ArticleByline = ({
-    byline,
-    pillarStyles,
-    publicationDate,
-    contributors,
-    imageSalt
-}: ArticleBylineProps): JSX.Element =>
-    <div
-        css={[ArticleBylineStyles(pillarStyles), ArticleBylineDarkStyles(pillarStyles)]}
-    >
-        <div css={sidePadding}>
-            <Avatar
-                contributors={contributors}
-                bgColour={pillarStyles.inverted}
-                imageSalt={imageSalt}
-            />
-            <div className="author">
-                { byline ? <address>{componentFromHtml(byline)}</address> : null }
-                <time className="date">{ formatDate(new Date(publicationDate)) }</time>
-                <Follow contributors={contributors} />
+function Byline({ article, imageSalt }: Props): JSX.Element {
+    const pillarStyles = getPillarStyles(article.pillar);
+
+    return (
+        <div
+            css={[Styles(pillarStyles), DarkStyles(pillarStyles)]}
+        >
+            <div css={sidePadding}>
+                <Avatar
+                    contributors={article.contributors}
+                    bgColour={pillarStyles.inverted}
+                    imageSalt={imageSalt}
+                />
+                <div className="author">
+                    <Author byline={article.bylineHtml} pillar={article.pillar} />
+                    <time className="date">{ formatDate(new Date(article.publishDate)) }</time>
+                    <Follow contributors={article.contributors} />
+                </div>
             </div>
         </div>
-    </div>
+    );
+}
 
-export default ArticleByline;
+
+// ----- Exports ----- //
+
+export default Byline;

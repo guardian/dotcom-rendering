@@ -1,10 +1,11 @@
 import { insertAdPlaceholders } from './ads';
 import { ReactNode } from 'react';
-import { Block, renderAll } from 'block';
+import { renderAll } from 'renderer';
 import { ElementType } from 'capiThriftModels';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
 import { compose } from 'lib';
+import { Block } from 'article';
 
 const textBlock = (nodes: string[]): Block =>
     ({

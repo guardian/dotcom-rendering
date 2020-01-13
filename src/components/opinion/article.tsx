@@ -84,7 +84,7 @@ function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticlePr
             <article css={BorderStyles}>
                 <header>
                     <div css={articleWidthStyles}>
-                        <ArticleSeries series={series} pillarStyles={pillarStyles}/>
+                        <ArticleSeries series={series} pillar={article.pillar}/>
                         <OpinionHeadline
                             byline={fields.bylineHtml}
                             headline={fields.headline}
@@ -96,11 +96,9 @@ function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticlePr
                         imageSalt={imageSalt}
                         className={articleWidthStyles}
                     />
-                    <Keyline article={article}/>
+                    <Keyline {...article} />
                     <ArticleStandfirst
-                            standfirst={fields.standfirst}
-                            feature={true}
-                            pillarStyles={pillarStyles}
+                            article={article}
                             className={articleWidthStyles}
                     />
 
@@ -125,7 +123,7 @@ function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticlePr
                         className={HeaderImageStyles}
                     />
                 </header>
-                <ArticleBody pillarStyles={pillarStyles} className={[articleWidthStyles]}>
+                <ArticleBody pillar={article.pillar} className={[articleWidthStyles]}>
                     {children}
                 </ArticleBody>
                 <footer css={articleWidthStyles}>

@@ -1,40 +1,31 @@
 // ----- Imports ----- //
 
 import React, { ReactNode } from 'react';
-
-import HeaderImage from 'components/shared/headerImage';
-import ArticleSeries from 'components/shared/articleSeries';
-import ArticleHeadline from 'components/standard/headline';
-import ArticleStandfirst from 'components/standard/standfirst';
-import ArticleByline from 'components/standard/byline';
-import { CommentCount } from 'components/shared/commentCount'
-import ArticleBody from 'components/shared/articleBody';
-import Tags from 'components/shared/tags';
-import { Content } from 'capiThriftModels';
-import { darkModeCss, articleWidthStyles } from 'styles';
+import { css } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
-import { css } from '@emotion/core';
+
+import HeaderImage from 'components/shared/headerImage';
+import Series from 'components/shared/articleSeries';
+import Headline from 'components/standard/headline';
+import Standfirst from 'components/standard/standfirst';
+import Byline from 'components/standard/byline';
+import { CommentCount } from 'components/shared/commentCount'
+import Body from 'components/shared/articleBody';
+import Tags from 'components/shared/tags';
+import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { getPillarStyles } from 'pillar';
-import { Layout, Article } from 'article';
+import { Article } from 'article';
 
 
-// ----- Component ----- //
+// ----- Styles ----- //
 
-export interface ArticleProps {
-    capi: Content;
-    imageSalt: string;
-    article: Article;
-    children: ReactNode[];
-}
-
-const MainStyles = css`
+const Styles = css`
     background: ${palette.neutral[97]};
 `;
 
-const MainDarkStyles = darkModeCss`
+const DarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
 `;
 
@@ -58,64 +49,51 @@ const HeaderImageStyles = css`
     }
 `;
 
-const Article = ({ capi, imageSalt, article, children }: ArticleProps): JSX.Element => {
 
-    const { fields, tags, webPublicationDate } = capi;
-    const series = articleSeries(capi);
-    const feature = article.layout === Layout.Feature || article.layout === Layout.Review;
-    const pillarStyles = getPillarStyles(article.pillar);
-    const contributors = articleContributors(capi);
-    const mainImage = articleMainImage(capi);
+// ----- Component ----- //
 
-    return (
-        <main css={[MainStyles, MainDarkStyles]}>
-            <article css={BorderStyles}>
-                <header>
-                    <HeaderImage
-                        image={mainImage}
-                        imageSalt={imageSalt}
-                        className={HeaderImageStyles}
-                    />
-                    <div css={articleWidthStyles}>
-                        <ArticleSeries series={series} pillarStyles={pillarStyles}/>
-                        <ArticleHeadline
-                            headline={fields.headline}
-                            article={article}
-                            rating={String(fields.starRating)}
-                        />
-                        <ArticleStandfirst
-                            standfirst={fields.standfirst}
-                            feature={feature}
-                            pillarStyles={pillarStyles}
-                            className={articleWidthStyles}
-                        />
-                    </div>
-                    <Keyline article={article}/>
-                    <section css={articleWidthStyles}>
-                        <ArticleByline
-                            byline={fields.bylineHtml}
-                            pillarStyles={pillarStyles}
-                            publicationDate={webPublicationDate}
-                            contributors={contributors}
-                            imageSalt={imageSalt}
-                        />
-                        {fields.commentable
-                                ? <CommentCount count={0} colour={pillarStyles.kicker}/>
-                                : null}
-                    </section>
-                </header>
-                <ArticleBody pillarStyles={pillarStyles} className={[articleWidthStyles]}>
-                    {children}
-                </ArticleBody>
-                <footer css={articleWidthStyles}>
-                    <Tags tags={tags}/>
-                </footer>
-            </article>
-        </main>
-    );
+interface Props {
+    imageSalt: string;
+    article: Article;
+    children: ReactNode[];
 }
+
+const Standard = ({ imageSalt, article, children }: Props): JSX.Element =>
+    <main css={[Styles, DarkStyles]}>
+        <article css={BorderStyles}>
+            <header>
+                <HeaderImage
+                    image={article.mainImage}
+                    imageSalt={imageSalt}
+                    className={HeaderImageStyles}
+                />
+                <div css={articleWidthStyles}>
+                    <Series series={article.series} pillar={article.pillar} />
+                    <Headline
+                        headline={article.headline}
+                        article={article}
+                        rating={String(article.starRating)}
+                    />
+                    <Standfirst article={article} className={articleWidthStyles} />
+                </div>
+                <Keyline {...article} />
+                <section css={articleWidthStyles}>
+                    <Byline article={article} imageSalt={imageSalt} />
+                    {article.commentable
+                        ? <CommentCount count={0} colour={getPillarStyles(article.pillar).kicker}/>
+                        : null}
+                </section>
+            </header>
+            <Body pillar={article.pillar} className={[articleWidthStyles]}>
+                {children}
+            </Body>
+            <footer css={articleWidthStyles}>
+                <Tags tags={article.tags}/>
+            </footer>
+        </article>
+    </main>
 
 
 // ----- Exports ----- //
 
-export default Article;
+export default Standard;

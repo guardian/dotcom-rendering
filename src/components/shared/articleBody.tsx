@@ -8,7 +8,7 @@ import {
 } from 'styles';
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
 const richLinkWidth = "13.75rem";
 
@@ -71,17 +71,17 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 `;
 
 interface ArticleBodyProps {
-    pillarStyles: PillarStyles;
+    pillar: Pillar;
     className: SerializedStyles[];
     children: ReactNode[];
 }
 
 const ArticleBody = ({
-    pillarStyles,
+    pillar,
     className,
     children,
 }: ArticleBodyProps): JSX.Element =>
-    <div css={[ArticleBodyStyles, ArticleBodyDarkStyles(pillarStyles), ...className]}>
+    <div css={[ArticleBodyStyles, ArticleBodyDarkStyles(getPillarStyles(pillar)), ...className]}>
         {children}
     </div>
 

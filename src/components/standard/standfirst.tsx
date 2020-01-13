@@ -1,11 +1,18 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import { sidePadding, bulletStyles, headlineFont, darkModeCss, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { PillarStyles } from 'pillar';
-import { componentFromHtml } from 'renderBlocks';
 
-const StandfirstFeatureStyles = `
+import { sidePadding, bulletStyles, headlineFont, darkModeCss, linkStyle } from 'styles';
+import { getPillarStyles } from 'pillar';
+import { renderText } from 'renderer';
+import { Article, Layout } from 'article';
+
+
+// ----- Styles ----- //
+
+const FeatureStyles = `
     color: ${palette.neutral[46]};
     ${headlineFont}
     font-weight: 400;
@@ -13,52 +20,50 @@ const StandfirstFeatureStyles = `
     line-height: 2.4rem;
 `;
 
-const StandfirstStyles = (feature: boolean, { kicker }: PillarStyles): SerializedStyles => css`
-    padding-bottom: 6px;
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2rem;
+function Styles({ pillar, layout }: Article): SerializedStyles {
+    const { kicker } = getPillarStyles(pillar);
+    const includeFeatureStyles = layout === Layout.Feature || layout === Layout.Review;
 
-    p, ul {
-        margin: 0;
-    }
+    return css`
+        padding-bottom: 6px;
+        font-weight: 500;
+        font-size: 1.6rem;
+        line-height: 2rem;
 
-    ${linkStyle(kicker)}
-    ${bulletStyles(kicker)}
-    ${sidePadding}
-    ${feature ? StandfirstFeatureStyles : null}
-`;
+        p, ul {
+            margin: 0;
+        }
 
-const StandfirstDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+        ${linkStyle(kicker)}
+        ${bulletStyles(kicker)}
+        ${sidePadding}
+        ${includeFeatureStyles ? FeatureStyles : null}
+    `;
+}
+
+const DarkStyles = ({ pillar }: Article): SerializedStyles => darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
     a {
-        color: ${inverted};
+        color: ${getPillarStyles(pillar).inverted};
     }
 `;
 
-interface ArticleStandfirstProps {
-    standfirst: string;
-    feature: boolean;
-    pillarStyles: PillarStyles;
+
+// ----- Component ----- //
+
+interface Props {
+    article: Article;
     className: SerializedStyles;
 }
 
-const ArticleStandfirst = ({
-    standfirst,
-    pillarStyles,
-    feature,
-    className
-}: ArticleStandfirstProps): JSX.Element =>
-    <div
-        css={[
-            className,
-            StandfirstStyles(feature, pillarStyles),
-            StandfirstDarkStyles(pillarStyles)
-        ]}
-    >
-        {componentFromHtml(standfirst)}
+const Standfirst = ({ article, className }: Props): JSX.Element =>
+    <div css={[className, Styles(article), DarkStyles(article)]}>
+        {renderText(article.standfirst, article.pillar)}
     </div>
 
-export default ArticleStandfirst;
+
+// ----- Exports ----- //
+
+export default Standfirst;
