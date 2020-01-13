@@ -14,9 +14,6 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
-
-import { palette } from '@guardian/src-foundations';
-
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -24,12 +21,15 @@ import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
+import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+
+import { palette } from '@guardian/src-foundations';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
 import { StandardHeader } from './StandardHeader';
 
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
@@ -49,6 +49,9 @@ interface Props {
 export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     const { isPaidContent } = CAPI.config;
+
+    const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+
     return (
         <>
             <Section
@@ -101,6 +104,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <MainMedia
                         elements={CAPI.mainMediaElements}
                         pillar={CAPI.pillar}
+                        adTargeting={adTargeting}
                     />
                 </Section>
             </Hide>
@@ -126,7 +130,11 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         />
                     </LeftColumn>
                     <ArticleContainer>
-                        <StandardHeader CAPI={CAPI} badge={GE2019Badge} />
+                        <StandardHeader
+                            CAPI={CAPI}
+                            badge={GE2019Badge}
+                            adTargeting={adTargeting}
+                        />
                         <Hide when="above" breakpoint="leftCol">
                             <ArticleMeta
                                 designType={CAPI.designType}

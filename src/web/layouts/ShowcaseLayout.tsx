@@ -25,6 +25,8 @@ import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
 
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+
 import { ShowcaseHeader } from './ShowcaseHeader';
 
 interface Props {
@@ -34,6 +36,9 @@ interface Props {
 
 export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
     const { isPaidContent } = CAPI.config;
+
+    const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+
     return (
         <>
             <Section
@@ -87,6 +92,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     <MainMedia
                         elements={CAPI.mainMediaElements}
                         pillar={CAPI.pillar}
+                        adTargeting={adTargeting}
                     />
                 </Section>
             </Hide>
@@ -110,7 +116,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     <ArticleContainer>
                         {/* When BELOW leftCol we display the header in this position, at the top of the page */}
                         <Hide when="below" breakpoint="leftCol">
-                            <ShowcaseHeader CAPI={CAPI} />
+                            <ShowcaseHeader
+                                CAPI={CAPI}
+                                adTargeting={adTargeting}
+                            />
                         </Hide>
                         <Flex>
                             <div>

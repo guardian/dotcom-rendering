@@ -12,7 +12,7 @@ import { until } from '@guardian/src-foundations/mq';
 import { WithAds } from '@root/src/amp/components/WithAds';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { buildAdTargeting } from '@root/src/amp/lib/ad-targeting';
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 const bulletStyle = (pillar: Pillar) => css`
     .bullet {

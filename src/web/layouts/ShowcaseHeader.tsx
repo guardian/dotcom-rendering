@@ -46,9 +46,10 @@ const headerStyles = css`
 type Props = {
     CAPI: CAPIType;
     badge?: BadgeType;
+    adTargeting?: AdTargeting;
 };
 
-export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
+export const ShowcaseHeader = ({ CAPI, badge, adTargeting }: Props) => {
     const {
         headline,
         tags,
@@ -92,7 +93,11 @@ export const ShowcaseHeader = ({ CAPI, badge }: Props) => {
             </HeaderItem>
             <div className={positionMainImage}>
                 <Hide when="below" breakpoint="tablet">
-                    <MainMedia elements={mainMediaElements} pillar={pillar} />
+                    <MainMedia
+                        elements={mainMediaElements}
+                        pillar={pillar}
+                        adTargeting={adTargeting}
+                    />
                 </Hide>
             </div>
         </header>

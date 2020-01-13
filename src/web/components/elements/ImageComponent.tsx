@@ -68,7 +68,7 @@ export const ImageComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
-    role?: RoleType;
+    role: RoleType;
 }> = ({ element, pillar, hideCaption, role }) => {
     const sources = makeSources(element.imageSources, element.role);
     if (hideCaption) {

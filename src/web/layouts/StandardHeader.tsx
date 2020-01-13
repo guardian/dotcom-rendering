@@ -47,9 +47,10 @@ const maxWidth = css`
 type Props = {
     CAPI: CAPIType;
     badge?: BadgeType;
+    adTargeting?: AdTargeting;
 };
 
-export const StandardHeader = ({ CAPI, badge }: Props) => {
+export const StandardHeader = ({ CAPI, badge, adTargeting }: Props) => {
     const {
         headline,
         tags,
@@ -90,7 +91,11 @@ export const StandardHeader = ({ CAPI, badge }: Props) => {
             </HeaderItem>
             <div className={cx(positionMainImage, maxWidth)}>
                 <Hide when="below" breakpoint="tablet">
-                    <MainMedia elements={mainMediaElements} pillar={pillar} />
+                    <MainMedia
+                        elements={mainMediaElements}
+                        pillar={pillar}
+                        adTargeting={adTargeting}
+                    />
                 </Hide>
             </div>
         </header>
