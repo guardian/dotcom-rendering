@@ -56,6 +56,28 @@ async function parseMapiError(mapiResponse: Response): Promise<string> {
 const mapiError = async (mapiResponse: Response): Promise<string> =>
   `MAPI wasn't happy about that request, it returned ${mapiResponse.status}, with ${await parseMapiError(mapiResponse)}`;
 
+async function serveArticlePost({ body }: Request, res: ExpressResponse): Promise<void> {
+  try {
+    const support = checkSupport(body);
+    const imageSalt = await getConfigValue<string>('apis.img.salt');
+
+    if (support.kind === Support.Supported) {
+      const page = h(Page, { content: body, imageSalt });
+      const html = renderToString(page);
+
+      res.write('<!DOCTYPE html>');
+      res.write(html);
+      res.end();
+    } else {
+      console.warn(`I can\'t render that type of content yet! ${support.reason}`);
+      res.sendStatus(415);
+    }
+  } catch (e) {
+    console.error(`This error occurred, but I don't know why: ${e}`);
+    res.sendStatus(500);
+  }
+}
+
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
   try {
 
@@ -141,8 +163,11 @@ app.get('/*', async (req, res) => {
   } else {
     queryMapi(req, res);
   }
-
 });
+
+app.post('/article', serveArticlePost);
+  serveArticlePost(req, res);
+})
 
 const port = 3040;
 app.listen(port, () => console.log(`Server listening on port ${port}!\nWebpack dev server listening on port 8080!`));
