@@ -8,6 +8,7 @@ import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
+import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 
 export const render = (
     { body, path }: express.Request,
@@ -79,29 +80,4 @@ export const render = (
 export const renderPerfTest = (req: express.Request, res: express.Response) => {
     req.body = JSON.parse(bodyJSON);
     render(req, res);
-};
-
-const generatePermutivePayload = (config: ConfigType) => {
-    const publishedAt =
-        config.webPublicationDate &&
-        typeof config.webPublicationDate === 'number'
-            ? new Date(config.webPublicationDate).toISOString()
-            : void 0;
-    const payload: { [key: string]: any } = {
-        'properties.content.Premium': config.isPaidContent,
-        'properties.content.id': config.pageId,
-        'properties.content.title': config.headline,
-        'properties.content.section': config.section,
-        'properties.content.authors!list[string]': config.author,
-        'properties.content.keywords!list[string]': config.keywords,
-        'properties.content.publishedAt': publishedAt,
-        'properties.user.edition': config.edition,
-    };
-    const cleanPayload: { [key: string]: any } = {};
-
-    Object.keys(payload)
-        .filter(key => typeof payload[key] !== undefined)
-        .forEach(key => (cleanPayload[key] = payload[key]));
-
-    return cleanPayload;
 };
