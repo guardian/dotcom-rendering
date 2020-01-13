@@ -53,6 +53,7 @@ const outbrainContainer = css`
 
     .ob-widget .ob-widget-section .ob-widget-header {
         ${headline.xsmall()};
+        font-size: 22px;
         font-weight: 900;
     }
 `;
