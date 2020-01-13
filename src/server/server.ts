@@ -166,8 +166,6 @@ app.get('/*', async (req, res) => {
 });
 
 app.post('/article', serveArticlePost);
-  serveArticlePost(req, res);
-})
 
 const port = 3040;
 app.listen(port, () => console.log(`Server listening on port ${port}!\nWebpack dev server listening on port 8080!`));
