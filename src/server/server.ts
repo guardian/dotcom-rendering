@@ -165,7 +165,7 @@ app.get('/*', async (req, res) => {
   }
 });
 
-app.post('/article', async (req, res) => {
+app.post('/article', serveArticlePost);
   serveArticlePost(req, res);
 })
 
