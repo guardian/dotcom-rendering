@@ -1,37 +1,31 @@
 // ----- Imports ----- //
 
 import React, { ReactNode } from 'react';
-
-import HeaderImage from 'components/shared/headerImage';
-import ArticleSeries from 'components/shared/articleSeries';
-import ArticleHeadline from 'components/standard/headline';
-import ArticleStandfirst from 'components/standard/standfirst';
-import ArticleByline from 'components/standard/byline';
-import { CommentCount } from 'components/shared/commentCount'
-import ArticleBody from 'components/shared/articleBody';
-import Tags from 'components/shared/tags';
-import { darkModeCss, articleWidthStyles } from 'styles';
+import { css } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
-import { css } from '@emotion/core';
+
+import HeaderImage from 'components/shared/headerImage';
+import Series from 'components/shared/articleSeries';
+import Headline from 'components/standard/headline';
+import Standfirst from 'components/standard/standfirst';
+import Byline from 'components/standard/byline';
+import { CommentCount } from 'components/shared/commentCount'
+import Body from 'components/shared/articleBody';
+import Tags from 'components/shared/tags';
+import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles } from 'pillar';
 import { Article } from 'article';
 
 
-// ----- Component ----- //
+// ----- Styles ----- //
 
-export interface ArticleProps {
-    imageSalt: string;
-    article: Article;
-    children: ReactNode[];
-}
-
-const MainStyles = css`
+const Styles = css`
     background: ${palette.neutral[97]};
 `;
 
-const MainDarkStyles = darkModeCss`
+const DarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
 `;
 
@@ -55,8 +49,17 @@ const HeaderImageStyles = css`
     }
 `;
 
-const Article = ({ imageSalt, article, children }: ArticleProps): JSX.Element =>
-    <main css={[MainStyles, MainDarkStyles]}>
+
+// ----- Component ----- //
+
+interface Props {
+    imageSalt: string;
+    article: Article;
+    children: ReactNode[];
+}
+
+const Standard = ({ imageSalt, article, children }: Props): JSX.Element =>
+    <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderImage
@@ -65,25 +68,25 @@ const Article = ({ imageSalt, article, children }: ArticleProps): JSX.Element =>
                     className={HeaderImageStyles}
                 />
                 <div css={articleWidthStyles}>
-                    <ArticleSeries series={article.series} pillar={article.pillar} />
-                    <ArticleHeadline
+                    <Series series={article.series} pillar={article.pillar} />
+                    <Headline
                         headline={article.headline}
                         article={article}
                         rating={String(article.starRating)}
                     />
-                    <ArticleStandfirst article={article} className={articleWidthStyles} />
+                    <Standfirst article={article} className={articleWidthStyles} />
                 </div>
                 <Keyline {...article} />
                 <section css={articleWidthStyles}>
-                    <ArticleByline article={article} imageSalt={imageSalt} />
+                    <Byline article={article} imageSalt={imageSalt} />
                     {article.commentable
                         ? <CommentCount count={0} colour={getPillarStyles(article.pillar).kicker}/>
                         : null}
                 </section>
             </header>
-            <ArticleBody pillar={article.pillar} className={[articleWidthStyles]}>
+            <Body pillar={article.pillar} className={[articleWidthStyles]}>
                 {children}
-            </ArticleBody>
+            </Body>
             <footer css={articleWidthStyles}>
                 <Tags tags={article.tags}/>
             </footer>
@@ -93,4 +96,4 @@ const Article = ({ imageSalt, article, children }: ArticleProps): JSX.Element =>
 
 // ----- Exports ----- //
 
-export default Article;
+export default Standard;
