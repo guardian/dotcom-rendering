@@ -97,7 +97,7 @@ const generatePermutivePayload = (config: ConfigType) => {
         'properties.content.publishedAt': publishedAt,
         'properties.user.edition': config.edition,
     };
-    let cleanPayload: { [key: string]: any } = {};
+    const cleanPayload: { [key: string]: any } = {};
 
     Object.keys(payload)
         .filter(key => typeof payload[key] !== undefined)

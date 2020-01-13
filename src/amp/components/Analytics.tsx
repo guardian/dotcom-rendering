@@ -89,7 +89,7 @@ export const Analytics: React.FC<{
                 {
                     "vars": {
                         "namespace": "${permutive.namespace}",
-                        "key": "${permutive.apiKey}",
+                        "key": "${permutive.apiKey}"
                     },
                     "extraUrlParams": ${JSON.stringify(permutive.payload)}
                 }
