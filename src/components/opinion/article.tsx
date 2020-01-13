@@ -1,36 +1,32 @@
+// ----- Imports ----- //
+
 import React, { ReactNode } from 'react';
+import { css } from '@emotion/core';
+import { palette } from '@guardian/src-foundations';
+import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
-import OpinionHeadline from 'components/opinion/headline';
+import Headline from 'components/opinion/headline';
 import ArticleStandfirst from 'components/standard/standfirst';
-import OpinionByline from 'components/opinion/byline';
+import Byline from 'components/opinion/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import OpinionCutout from 'components/opinion/cutout';
-import { Content } from 'capiThriftModels';
+import Cutout from 'components/opinion/cutout';
 import { darkModeCss, articleWidthStyles, basePx } from 'styles';
-import { palette } from '@guardian/src-foundations';
-import { from, breakpoints } from '@guardian/src-foundations/mq';
-import { css } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
-import { articleSeries, articleContributors, articleMainImage } from 'capi';
 import { CommentCount } from 'components/shared/commentCount';
 import { getPillarStyles } from 'pillar';
 import { Article } from 'article';
 
-export interface OpinionArticleProps {
-    capi: Content;
-    imageSalt: string;
-    article: Article;
-    children: ReactNode[];
-}
 
-const MainStyles = css`
+// ----- Styles ----- //
+
+const Styles = css`
     background: ${palette.opinion.faded};
 `;
 
-const MainDarkStyles = darkModeCss`
+const DarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
 `;
 
@@ -72,66 +68,69 @@ const topBorder = css`
     }
 `;
 
-function OpinionArticle({ capi, imageSalt, article, children }: OpinionArticleProps): JSX.Element {
-    const { fields, tags, webPublicationDate } = capi;
-    const series = articleSeries(capi);
-    const pillarStyles = getPillarStyles(article.pillar);
-    const contributors = articleContributors(capi);
-    const mainImage = articleMainImage(capi);
 
-    return (
-        <main css={[MainStyles, MainDarkStyles]}>
-            <article css={BorderStyles}>
-                <header>
-                    <div css={articleWidthStyles}>
-                        <ArticleSeries series={series} pillar={article.pillar}/>
-                        <OpinionHeadline
-                            byline={fields.bylineHtml}
-                            headline={fields.headline}
-                            pillarStyles={pillarStyles}
-                        />
-                    </div>
-                    <OpinionCutout 
-                        contributors={contributors}
-                        imageSalt={imageSalt}
-                        className={articleWidthStyles}
-                    />
-                    <Keyline {...article} />
-                    <ArticleStandfirst
-                            article={article}
-                            className={articleWidthStyles}
-                    />
+// ----- Component ----- //
 
-                    <section css={[articleWidthStyles, topBorder]}>
-                        <OpinionByline
-                            pillarStyles={pillarStyles}
-                            publicationDate={webPublicationDate}
-                            contributors={contributors}
-                        />
-                        {fields.commentable
-                                ? <CommentCount
-                                    count={0}
-                                    colour={pillarStyles.kicker}
-                                    className={CommentCountStyles}
-                                  />
-                                : null}
-                    </section>
-
-                    <HeaderImage
-                        image={mainImage}
-                        imageSalt={imageSalt}
-                        className={HeaderImageStyles}
-                    />
-                </header>
-                <ArticleBody pillar={article.pillar} className={[articleWidthStyles]}>
-                    {children}
-                </ArticleBody>
-                <footer css={articleWidthStyles}>
-                    <Tags tags={tags}/>
-                </footer>
-            </article>
-        </main>
-    );
+interface Props {
+    imageSalt: string;
+    article: Article;
+    children: ReactNode[];
 }
 
-export default OpinionArticle;
+const Opinion = ({ imageSalt, article, children }: Props): JSX.Element =>
+    <main css={[Styles, DarkStyles]}>
+        <article css={BorderStyles}>
+            <header>
+                <div css={articleWidthStyles}>
+                    <ArticleSeries series={article.series} pillar={article.pillar}/>
+                    <Headline
+                        byline={article.bylineHtml}
+                        headline={article.headline}
+                        pillar={article.pillar}
+                    />
+                </div>
+                <Cutout 
+                    contributors={article.contributors}
+                    imageSalt={imageSalt}
+                    className={articleWidthStyles}
+                />
+                <Keyline {...article} />
+                <ArticleStandfirst
+                    article={article}
+                    className={articleWidthStyles}
+                />
+
+                <section css={[articleWidthStyles, topBorder]}>
+                    <Byline
+                        pillar={article.pillar}
+                        publicationDate={article.publishDate}
+                        contributors={article.contributors}
+                    />
+                    {article.commentable
+                        ? <CommentCount
+                            count={0}
+                            colour={getPillarStyles(article.pillar).kicker}
+                            className={CommentCountStyles}
+                            />
+                        : null}
+                </section>
+
+                <HeaderImage
+                    image={article.mainImage}
+                    imageSalt={imageSalt}
+                    className={HeaderImageStyles}
+                />
+            </header>
+            <ArticleBody pillar={article.pillar} className={[articleWidthStyles]}>
+                {children}
+            </ArticleBody>
+            <footer css={articleWidthStyles}>
+                <Tags tags={article.tags}/>
+            </footer>
+        </article>
+    </main>
+
+
+// ----- Exports ----- //
+
+export default Opinion;

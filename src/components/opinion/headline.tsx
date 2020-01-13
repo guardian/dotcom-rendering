@@ -1,12 +1,19 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 import { css } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
-import { PillarStyles } from 'pillar';
 import { until } from '@guardian/src-foundations/mq';
-import { componentFromHtml } from 'renderBlocks';
 
-const HeadlineStyles = css`
+import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
+import { Pillar } from 'pillar';
+import Author from 'components/shared/author';
+import { Option } from 'types/option';
+
+
+// ----- Styles ----- //
+
+const Styles = css`
     padding: ${basePx(0, 0, 4, 0)};
     
     ${until.wide} {
@@ -30,26 +37,29 @@ const HeadlineStyles = css`
     }
 `;
 
-const HeadlineDarkStyles = darkModeCss`
+const DarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
     h1 {
         color: ${palette.neutral[86]};
     }
 `;
 
-interface OpinionHeadlineProps {
-    byline?: string;
+
+// ----- Component ----- //
+
+interface Props {
+    byline: Option<DocumentFragment>;
     headline: string;
-    pillarStyles: PillarStyles;
+    pillar: Pillar;
 }
 
-const OpinionHeadline = ({
-    byline,
-    headline
-}: OpinionHeadlineProps): JSX.Element =>
-    <div css={[HeadlineStyles, HeadlineDarkStyles]}>
+const Headline = ({ byline, headline, pillar }: Props): JSX.Element =>
+    <div css={[Styles, DarkStyles]}>
         <h1>{headline}</h1>
-        { byline ? <address>{componentFromHtml(byline)}</address> : null }
+        <Author byline={byline} pillar={pillar} />
     </div>
 
-export default OpinionHeadline;
+
+// ----- Exports ----- //
+
+export default Headline;

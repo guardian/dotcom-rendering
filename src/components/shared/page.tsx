@@ -99,7 +99,7 @@ function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
         case Layout.Opinion:
             return (
                 <WithScript src={articleScript}>
-                    <Opinion capi={capi} imageSalt={imageSalt} article={article}>
+                    <Opinion imageSalt={imageSalt} article={article}>
                         {content}
                     </Opinion>
                 </WithScript>

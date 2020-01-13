@@ -1,13 +1,19 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
+
+import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
 import { formatDate } from 'date';
 import { Contributor } from 'capi';
 import Follow from 'components/shared/follow';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
-const OpinionBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+
+// ----- Styles ----- //
+
+const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     width: 80%;
     float: left;
     display: inline-block;
@@ -30,7 +36,7 @@ const OpinionBylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
-const OpinionBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
@@ -45,26 +51,31 @@ const OpinionBylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles =
     }
 `;
 
-interface OpinionBylineProps {
-    pillarStyles: PillarStyles;
+
+// ----- Component ----- //
+
+interface Props {
+    pillar: Pillar;
     publicationDate: string;
     contributors: Contributor[];
 }
 
-const OpinionByline = ({
-    pillarStyles,
-    publicationDate,
-    contributors,
-}: OpinionBylineProps): JSX.Element =>
-    <div
-        css={[OpinionBylineStyles(pillarStyles), OpinionBylineDarkStyles(pillarStyles)]}
-    >
-        <div css={sidePadding}>
-            <div className="author">
-                <time>{ formatDate(new Date(publicationDate)) }</time>
-                <Follow contributors={contributors} />
+const Byline = ({ pillar, publicationDate, contributors }: Props): JSX.Element => {
+    const pillarStyles = getPillarStyles(pillar);
+
+    return (
+        <div css={[Styles(pillarStyles), DarkStyles(pillarStyles)]}>
+            <div css={sidePadding}>
+                <div className="author">
+                    <time>{ formatDate(new Date(publicationDate)) }</time>
+                    <Follow contributors={contributors} />
+                </div>
             </div>
         </div>
-    </div>
+    );
+};
 
-export default OpinionByline;
+
+// ----- Exports ----- //
+
+export default Byline;
