@@ -34,6 +34,7 @@ export const YouTubeComponent: React.FC<{
                     pillar={pillar}
                     adTargeting={adTargeting}
                     duration={element.duration}
+                    title={element.mediaTitle}
                 />
             </Margins>
         );
@@ -52,6 +53,7 @@ export const YouTubeComponent: React.FC<{
                     pillar={pillar}
                     adTargeting={adTargeting}
                     duration={element.duration}
+                    title={element.mediaTitle}
                 />
             </Caption>
         </Margins>

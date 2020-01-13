@@ -11,6 +11,7 @@ type Props = {
     adTargeting?: AdTargeting;
     overlayImage?: string;
     duration?: number; // in seconds
+    title?: string;
 };
 
 type EmbedConfig = {
@@ -56,6 +57,7 @@ export const YouTubeEmbed = ({
     adTargeting,
     overlayImage,
     duration,
+    title = 'YouTube video player',
 }: Props) => {
     const embedConfig =
         adTargeting && JSON.stringify(buildEmbedConfig(adTargeting));
@@ -69,7 +71,7 @@ export const YouTubeEmbed = ({
                     duration={duration}
                 />
                 <iframe
-                    title="YouTube video player"
+                    title={title}
                     width="100%"
                     height="350px"
                     src={`https://www.youtube.com/embed/${assetId}?embed_config=${embedConfig}&enablejsapi=1&origin=https://www.theguardian.com&widgetid=1&modestbranding=1`}
@@ -80,7 +82,7 @@ export const YouTubeEmbed = ({
 
     return (
         <iframe
-            title="YouTube video player"
+            title={title}
             width="100%"
             height="350px"
             src={`https://www.youtube.com/embed/${assetId}?embed_config=${embedConfig}&enablejsapi=1&origin=https://www.theguardian.com&widgetid=1&modestbranding=1`}
