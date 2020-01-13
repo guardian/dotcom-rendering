@@ -3,6 +3,20 @@ import { css } from 'emotion';
 
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 
+const overlayStyles = (image: string) => css`
+    background-image: url(${image});
+    background-size: cover;
+    background-position: 49% 49%;
+    background-repeat: no-repeat;
+    z-index: 0;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    max-height: 100vh;
+    cursor: pointer;
+`;
+
 const BottomLeft = ({
     children,
 }: {
@@ -28,21 +42,7 @@ export const YouTubeOverlay = ({
     pillar: Pillar;
     duration?: number;
 }) => (
-    <div
-        className={css`
-            background-image: url(${image});
-            background-size: cover;
-            background-position: 49% 49%;
-            background-repeat: no-repeat;
-            z-index: 0;
-            text-align: center;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            max-height: 100vh;
-            cursor: pointer;
-        `}
-    >
+    <div className={overlayStyles(image)}>
         <BottomLeft>
             <MediaMeta
                 mediaType="Video"
