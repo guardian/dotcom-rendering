@@ -174,6 +174,7 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         }
 
         a {
+            background: none;
             text-decoration: none;
         }
 
@@ -257,6 +258,7 @@ export const adStyles = css`
                 margin: 0;
                 float: left;
                 font-size: 16px;
+                font-weight: 400;
             }
 
             .ad-hide {
@@ -315,9 +317,15 @@ export const adStyles = css`
     }
 `
 
-export const fontFace = (family: string, weight: Option<number | string>, url: string): SerializedStyles => css`
+export const fontFace = (
+    family: string,
+    weight: Option<number | string>,
+    style: Option<string>,
+    url: string
+): SerializedStyles => css`
   @font-face {
     font-family: ${family};
+    ${style.map((s: string) => `font-style: ${s};`).withDefault('')}
     ${weight.map((w: number | string) => `font-weight: ${w};`).withDefault('')}
     src: url('${url}');
   }

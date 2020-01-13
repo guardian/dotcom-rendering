@@ -1,6 +1,5 @@
 import React from 'react';
 import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
-
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import { formatDate } from 'date';
