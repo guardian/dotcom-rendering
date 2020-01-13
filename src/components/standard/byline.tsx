@@ -8,10 +8,9 @@ import { sidePadding, textSans, darkModeCss } from 'styles';
 import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
-import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
-import { Option } from 'types/option';
-import { renderText } from 'renderer';
+import { PillarStyles, getPillarStyles } from 'pillar';
 import { Article } from 'article';
+import Author from 'components/shared/author';
 
 
 // ----- Styles ----- //
@@ -62,21 +61,6 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
         }
     }
 `;
-
-
-// ----- Subcomponents ----- //
-
-interface AuthorProps {
-    byline: Option<DocumentFragment>;
-    pillar: Pillar;
-}
-
-const Author = (props: AuthorProps): JSX.Element | null =>
-    props.byline.map<JSX.Element | null>((bylineHtml: DocumentFragment) =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
-        <address>{renderText(bylineHtml, props.pillar)}</address>
-    ).withDefault(null);
 
 
 // ----- Component ----- //
