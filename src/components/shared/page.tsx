@@ -145,7 +145,7 @@ function Page({ content, imageSalt }: Props): JSX.Element {
         : null
 
     return (
-        <html lang="en-US" css={PageStyles}>
+        <html lang="en" css={PageStyles}>
             <head>
                 <title>{content.id}</title>
                 <meta charSet="UTF-8" />
