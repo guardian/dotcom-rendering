@@ -10,7 +10,7 @@ export interface PermutivePayload {
 }
 
 export const generatePermutivePayload = (
-    rawConfig: ConfigType,
+    rawConfig: CommercialConfigType,
 ): PermutivePayload => {
     const publishedAt =
         rawConfig.webPublicationDate &&
