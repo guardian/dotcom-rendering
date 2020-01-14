@@ -49,6 +49,7 @@ module.exports = {
         'import/prefer-default-export': false,
         '@typescript-eslint/explicit-function-return-type': [0],
         '@typescript-eslint/no-unused-vars': [0], // Duplicated
+        '@typescript-eslint/no-inferrable-types': [0],
         // TODO, review these
         'react/jsx-one-expression-per-line': [0],
         'react/no-array-index-key': [0],

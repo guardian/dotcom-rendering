@@ -97,7 +97,7 @@ function buildSectionUrl(sectionName?: string) {
     const sectionsWithoutPopular = ['info', 'global'];
     const hasSection =
         sectionName && !sectionsWithoutPopular.includes(sectionName);
-    const endpoint = `/most-read${
+    const endpoint: string = `/most-read${
         hasSection ? `/${sectionName}` : ''
     }.json`;
 
