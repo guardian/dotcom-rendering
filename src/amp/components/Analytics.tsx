@@ -1,4 +1,5 @@
 import React from 'react';
+import { PermutivePayload } from '@root/src/amp/lib/permutive';
 
 export interface AnalyticsModel {
     gaTracker: string;
@@ -11,7 +12,11 @@ export interface AnalyticsModel {
     beacon: string;
     neilsenAPIID: string;
     domain: string;
-    permutive: { [key: string]: any };
+    permutive: {
+        namespace: string;
+        apiKey: string;
+        payload: PermutivePayload;
+    };
 }
 
 export const Analytics: React.FC<{

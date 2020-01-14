@@ -1,4 +1,17 @@
-export const generatePermutivePayload = (rawConfig: ConfigType) => {
+export interface PermutivePayload {
+    'properties.content.Premium'?: string;
+    'properties.content.id'?: string;
+    'properties.content.title'?: string;
+    'properties.content.section'?: string;
+    'properties.content.authors!'?: string;
+    'properties.content.keywords!'?: string;
+    'properties.content.publishedAt'?: string;
+    'properties.user.edition'?: string;
+}
+
+export const generatePermutivePayload = (
+    rawConfig: ConfigType,
+): PermutivePayload => {
     const publishedAt =
         rawConfig.webPublicationDate &&
         typeof rawConfig.webPublicationDate === 'number'

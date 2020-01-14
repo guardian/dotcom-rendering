@@ -51,7 +51,7 @@ test('produces valid AMP doc', async () => {
             namespace: 'guardian',
             apiKey: '42-2020',
             payload: {
-                headline: 'article title',
+                'properties.content.title': 'article title',
             },
         },
     };
