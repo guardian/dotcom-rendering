@@ -128,33 +128,34 @@ export const makeRelativeDate = (
     // delta is the number of seconds since the article was published and now
     delta = Math.floor((now.getTime() - then.getTime()) / 1000);
 
-    // tslint:disable no-else-after-return because I think
+    /* eslint-disable no-else-return */
+    // because I think
     // the intention reads better with the else statements here
     if (delta < 0) {
         // Publication dates in the future are not supported
         return false;
-    } if (opts.notAfter && delta > opts.notAfter) {
+    } else if (opts.notAfter && delta > opts.notAfter) {
         // If article was published before the cutoff (notAfter) bail out
         return false;
-    } if (delta < 55) {
+    } else if (delta < 55) {
         // Seconds
         return delta + getSuffix('s', format, delta);
-    } if (delta < 55 * 60) {
+    } else if (delta < 55 * 60) {
         // Minutes
         minutes = Math.round(delta / 60);
         return minutes + getSuffix('m', format, minutes);
-    } if (isToday(then) || (extendedFormatting && isWithin24Hours(then))) {
+    } else if (isToday(then) || (extendedFormatting && isWithin24Hours(then))) {
         // Hours
         hours = Math.round(delta / 3600);
         return hours + getSuffix('h', format, hours);
-    } if (extendedFormatting && isWithinPastWeek(then)) {
+    } else if (extendedFormatting && isWithinPastWeek(then)) {
         // Days
         days = Math.round(delta / 3600 / 24);
         return days + getSuffix('d', format, days);
-    } if (isYesterday(then)) {
+    } else if (isYesterday(then)) {
         // Yesterday
         return `Yesterday${withTime(then)}`;
-    } if (delta < 5 * 24 * 60 * 60) {
+    } else if (delta < 5 * 24 * 60 * 60) {
         // Less than 5 days (and *not* extendedFormatting)
         return (
             [
@@ -171,5 +172,5 @@ export const makeRelativeDate = (
             ' ',
         ) + (opts.showTime ? withTime(then) : '')
     );
-    // tslint:enable no-else-after-return
+    /* eslint-enable no-else-return */
 };
