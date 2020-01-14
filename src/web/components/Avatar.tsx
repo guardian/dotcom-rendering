@@ -11,7 +11,7 @@ const contributorImage = css`
 
 const pillarBackground = (pillar: Pillar = 'opinion') =>
     css`
-        background-color: ${pillarPalette[pillar].main};
+        background-color: ${pillarPalette[pillar].bright};
     `;
 
 export const Avatar: React.FC<{
