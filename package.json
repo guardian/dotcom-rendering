@@ -6,6 +6,7 @@
     "tocList": "README.md docs/contributing/**",
     "scripts": {
         "lint": "eslint . --ext .ts,.tsx",
+        "lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
         "tsc": "tsc",
         "test": "jest",
         "postinstall": "./scripts/git-hooks/install.js",
@@ -58,6 +59,7 @@
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.15.1",
         "eslint-plugin-react-hooks": "^1.7.0",
+        "eslint-stats": "^1.0.1",
         "execa": "^0.10.0",
         "express": "^4.16.4",
         "filesizegzip": "^2.0.0",
