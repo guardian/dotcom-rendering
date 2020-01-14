@@ -15,7 +15,8 @@ function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
             h('button', { className: 'ad-hide' },
                 h('span', null, 'Hide')
             )
-        )
+        ),
+        h('div', { className: 'ad-slot' }, null)
     );
 
     const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
