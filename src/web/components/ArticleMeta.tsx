@@ -2,8 +2,6 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { between, until } from '@guardian/src-foundations/mq';
-
-import { Byline } from '@root/src/web/components/Byline';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
