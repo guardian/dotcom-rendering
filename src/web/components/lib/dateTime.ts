@@ -133,28 +133,28 @@ export const makeRelativeDate = (
     if (delta < 0) {
         // Publication dates in the future are not supported
         return false;
-    } else if (opts.notAfter && delta > opts.notAfter) {
+    } if (opts.notAfter && delta > opts.notAfter) {
         // If article was published before the cutoff (notAfter) bail out
         return false;
-    } else if (delta < 55) {
+    } if (delta < 55) {
         // Seconds
         return delta + getSuffix('s', format, delta);
-    } else if (delta < 55 * 60) {
+    } if (delta < 55 * 60) {
         // Minutes
         minutes = Math.round(delta / 60);
         return minutes + getSuffix('m', format, minutes);
-    } else if (isToday(then) || (extendedFormatting && isWithin24Hours(then))) {
+    } if (isToday(then) || (extendedFormatting && isWithin24Hours(then))) {
         // Hours
         hours = Math.round(delta / 3600);
         return hours + getSuffix('h', format, hours);
-    } else if (extendedFormatting && isWithinPastWeek(then)) {
+    } if (extendedFormatting && isWithinPastWeek(then)) {
         // Days
         days = Math.round(delta / 3600 / 24);
         return days + getSuffix('d', format, days);
-    } else if (isYesterday(then)) {
+    } if (isYesterday(then)) {
         // Yesterday
         return `Yesterday${withTime(then)}`;
-    } else if (delta < 5 * 24 * 60 * 60) {
+    } if (delta < 5 * 24 * 60 * 60) {
         // Less than 5 days (and *not* extendedFormatting)
         return (
             [
