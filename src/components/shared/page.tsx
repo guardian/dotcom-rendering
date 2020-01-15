@@ -107,7 +107,7 @@ function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
         case Layout.Immersive:
             return (
                 <WithScript src={articleScript}>
-                    <Immersive capi={capi} imageSalt={imageSalt} article={article}>
+                    <Immersive imageSalt={imageSalt} article={article}>
                         {content}
                     </Immersive>
                 </WithScript>

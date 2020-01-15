@@ -1,29 +1,26 @@
+// ----- Imports ----- //
+
 import React, { ReactNode } from 'react';
-import ImmersiveHeaderImage from 'components/immersive/headerImage';
-import ImmersiveSeries from 'components/immersive/series';
-import ImmersiveHeadline from 'components/immersive/headline';
-import ImmersiveStandfirst from 'components/immersive/standfirst';
-import ImmersiveByline from 'components/immersive/byline';
+import { css, SerializedStyles } from '@emotion/core';
+import { palette } from '@guardian/src-foundations';
+import { from, breakpoints } from '@guardian/src-foundations/mq';
+
+import HeaderImage from 'components/immersive/headerImage';
+import Series from 'components/immersive/series';
+import Headline from 'components/immersive/headline';
+import Standfirst from 'components/immersive/standfirst';
+import Byline from 'components/immersive/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import { Content } from 'capiThriftModels';
 import { articleWidthStyles, basePx, darkModeCss } from 'styles';
-import { from, breakpoints } from '@guardian/src-foundations/mq';
-import { css, SerializedStyles } from '@emotion/core';
 import { Keyline } from 'components/shared/keyline';
-import { articleSeries, articleContributors, articleMainImage } from 'capi';
-import { getPillarStyles, PillarStyles } from 'pillar';
-import { palette } from '@guardian/src-foundations';
+import { getPillarStyles, Pillar } from 'pillar';
 import { Article } from 'article';
 
-export interface ImmersiveArticleProps {
-    capi: Content;
-    imageSalt: string;
-    article: Article;
-    children: ReactNode[];
-}
 
-const MainDarkStyles = darkModeCss`
+// ----- Styles ----- //
+
+const DarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
 `;
 
@@ -48,18 +45,22 @@ const BorderStyles = css`
     }
 `;
 
-const DropCapStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
-    p:first-child::first-letter,
-    .section-rule + p::first-letter {
-        color: ${pillarStyles.kicker};
-        font-weight: 100;
-        font-style: normal;
-        font-size: 7em;
-        line-height: 1;
-        padding-right: ${basePx(1)};
-        float: left;
-    }
-`;
+const DropCapStyles = (pillar: Pillar): SerializedStyles => {
+    const { kicker } = getPillarStyles(pillar);
+
+    return css`
+        p:first-child::first-letter,
+        .section-rule + p::first-letter {
+            color: ${kicker};
+            font-weight: 100;
+            font-style: normal;
+            font-size: 7em;
+            line-height: 1;
+            padding-right: ${basePx(1)};
+            float: left;
+        }
+    `;
+}
 
 const HeaderImageStyles = css`
     figure {
@@ -71,59 +72,56 @@ const HeaderImageStyles = css`
     }
 `;
 
-function ImmersiveArticle({
-    capi,
-    imageSalt,
-    article,
-    children,
-}: ImmersiveArticleProps): JSX.Element {
 
-    const { fields, tags, webPublicationDate } = capi;
-    const series = articleSeries(capi);
-    const pillarStyles = getPillarStyles(article.pillar);
-    const contributors = articleContributors(capi);
-    const mainImage = articleMainImage(capi);
+// ----- Component ----- //
 
-    return (
-        <main css={MainDarkStyles}>
-            <article css={BorderStyles}>
-                <header>
-                    <div css={articleWidthStyles}>
-                        <ImmersiveHeaderImage
-                            image={mainImage}
-                            imageSalt={imageSalt}
-                            className={HeaderImageStyles}
-                        />
-                        <ImmersiveSeries series={series} pillarStyles={pillarStyles}/>
-                        <ImmersiveHeadline headline={fields.headline}/>
-                        <ImmersiveStandfirst
-                            standfirst={fields.standfirst}
-                            pillarStyles={pillarStyles}
-                            className={articleWidthStyles}
-                            bylineHtml={fields.bylineHtml}
-                            byline={fields.byline}
-                        />
-                    </div>
-                    <Keyline {...article} />
-                    <ImmersiveByline
-                        pillarStyles={pillarStyles}
-                        publicationDate={webPublicationDate}
-                        contributors={contributors}
-                        className={articleWidthStyles}
-                    />
-                </header>
-                <ArticleBody
-                    pillar={article.pillar}
-                    className={[articleWidthStyles, DropCapStyles(pillarStyles), HeaderStyles]}
-                >
-                    {children}
-                </ArticleBody>
-                <footer css={articleWidthStyles}>
-                    <Tags tags={tags}/>
-                </footer>
-            </article>
-        </main>
-    );
+interface Props {
+    imageSalt: string;
+    article: Article;
+    children: ReactNode[];
 }
 
-export default ImmersiveArticle;
+const Immersive = ({ imageSalt, article, children }: Props): JSX.Element =>
+    <main css={DarkStyles}>
+        <article css={BorderStyles}>
+            <header>
+                <div css={articleWidthStyles}>
+                    <HeaderImage
+                        image={article.mainImage}
+                        imageSalt={imageSalt}
+                        className={HeaderImageStyles}
+                    />
+                    <Series series={article.series} pillar={article.pillar}/>
+                    <Headline headline={article.headline}/>
+                    <Standfirst
+                        standfirst={article.standfirst}
+                        pillar={article.pillar}
+                        className={articleWidthStyles}
+                        bylineHtml={article.bylineHtml}
+                        byline={article.byline}
+                    />
+                </div>
+                <Keyline {...article} />
+                <Byline
+                    pillar={article.pillar}
+                    publicationDate={article.publishDate}
+                    contributors={article.contributors}
+                    className={articleWidthStyles}
+                />
+            </header>
+            <ArticleBody
+                pillar={article.pillar}
+                className={[articleWidthStyles, DropCapStyles(article.pillar), HeaderStyles]}
+            >
+                {children}
+            </ArticleBody>
+            <footer css={articleWidthStyles}>
+                <Tags tags={article.tags}/>
+            </footer>
+        </article>
+    </main>
+
+
+// ----- Exports ----- //
+
+export default Immersive;

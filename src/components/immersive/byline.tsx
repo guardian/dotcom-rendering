@@ -1,13 +1,19 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import Follow from 'components/shared/follow';
-import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
+
+import Follow from 'components/shared/follow';
+import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
 import { formatDate } from 'date';
 import { Contributor } from 'capi';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
 
-const BylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+
+// ----- Styles ----- //
+
+const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     .author {
         margin: ${basePx(1, 0, 2, 0)};
 
@@ -26,7 +32,7 @@ const BylineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
-const BylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
@@ -41,30 +47,32 @@ const BylineDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkM
     }
 `;
 
-interface ImmersiveBylineProps {
-    pillarStyles: PillarStyles;
+
+// ----- Component ----- //
+
+interface Props {
+    pillar: Pillar;
     publicationDate: string;
     contributors: Contributor[];
     className: SerializedStyles;
 }
 
-const ImmersiveByline = ({
-    pillarStyles,
-    publicationDate,
-    contributors,
-    className,
-}: ImmersiveBylineProps): JSX.Element =>
-    <div css={[
-        className,
-        BylineStyles(pillarStyles),
-        BylineDarkStyles(pillarStyles)]}
-    >
-        <div css={sidePadding}>
-            <div className="author">
-                <time>{ formatDate(new Date(publicationDate)) }</time>
-                <Follow contributors={contributors} />
+function Byline({ pillar, publicationDate, contributors, className }: Props): JSX.Element {
+    const pillarStyles = getPillarStyles(pillar);
+
+    return (
+        <div css={[className, Styles(pillarStyles), DarkStyles(pillarStyles)]}>
+            <div css={sidePadding}>
+                <div className="author">
+                    <time>{ formatDate(new Date(publicationDate)) }</time>
+                    <Follow contributors={contributors} />
+                </div>
             </div>
         </div>
-    </div>
+    );
+}
 
-export default ImmersiveByline;
+
+// ----- Exports ----- //
+
+export default Byline;

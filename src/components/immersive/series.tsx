@@ -1,11 +1,17 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import { headlineFont, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { Series } from 'capi';
-import { PillarStyles } from 'pillar';
 import { palette } from '@guardian/src-foundations';
 
-const SeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+import { headlineFont, basePx } from 'styles';
+import { Series } from 'capi';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+
+
+// ----- Styles ----- //
+
+const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${kicker};
     padding: ${basePx(.5, 1)};
     display: inline-block;
@@ -23,23 +29,29 @@ const SeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
-interface ImmersiveSeriesProps {
+
+// ----- Component ----- //
+
+interface Props {
     series: Series;
-    pillarStyles: PillarStyles;
+    pillar: Pillar;
 }
 
-const ImmersiveSeries = ({ series, pillarStyles }: ImmersiveSeriesProps): JSX.Element | null => {
+const Series = ({ series, pillar }: Props): JSX.Element | null => {
 
     if (series) {
         return (
-            <nav css={SeriesStyles(pillarStyles)}>
+            <nav css={Styles(getPillarStyles(pillar))}>
                 <a href={series.webUrl}>{series.webTitle}</a>
             </nav>
-        )
+        );
     }
 
     return null;
 
 }
 
-export default ImmersiveSeries;
+
+// ----- Exports ----- //
+
+export default Series;

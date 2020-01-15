@@ -1,12 +1,18 @@
+// ----- Imports ----- //
+
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
+import { from } from '@guardian/src-foundations/mq';
+
 import { BlockElement } from 'capiThriftModels';
 import { immersiveImageElement } from 'components/blocks/image';
-import { from } from '@guardian/src-foundations/mq';
 import { wideContentWidth } from 'styles';
 import { Option } from 'types/option';
 
-const headerImageStyles = css`
+
+// ----- Styles ----- //
+
+const Styles = css`
     figure {
         position: relative;
 
@@ -27,27 +33,27 @@ const headerImageStyles = css`
     }
 `;
 
-interface HeaderImageProps {
+
+// ----- Component ----- //
+
+interface Props {
     image: Option<BlockElement>;
     imageSalt: string;
     className?: SerializedStyles | null;
 }
 
-const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Element | null => {
-
-    const headerImage: Option<JSX.Element | null> = image.map(({ imageTypeData, assets }) =>
+const HeaderImage = ({ className, image, imageSalt }: Props): JSX.Element | null =>
+    image.map<JSX.Element | null>(({ imageTypeData, assets }) =>
         // This is not an iterator, ESLint is confused
         // eslint-disable-next-line react/jsx-key
-        <div css={[className, headerImageStyles]}>
+        <div css={[className, Styles]}>
             <figure>
                 { immersiveImageElement(imageTypeData.alt, assets, imageSalt) }
             </figure>
         </div>
-    );
+    ).withDefault(null);
 
-    // Needed to provide TypeScript with enough type information.
-    return headerImage.withDefault(null);
 
-}
+// ----- Exports ----- //
 
 export default HeaderImage;
