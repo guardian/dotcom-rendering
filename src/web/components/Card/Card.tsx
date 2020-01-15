@@ -162,7 +162,10 @@ export const Card = ({
                                         )}
                                         {designType === 'Comment' && (
                                             <LinesWrapper>
-                                                <GuardianLines pillar="opinion" />
+                                                <GuardianLines
+                                                    pillar="opinion"
+                                                    count={4}
+                                                />
                                             </LinesWrapper>
                                         )}
                                         {designType === 'Media' && mediaType && (
