@@ -53,7 +53,7 @@ const articleAdStyles = css`
             margin-right: -328px;
         }
 
-        ${from.wide}  {
+        ${from.wide} {
             margin-right: -388px;
         }
     }

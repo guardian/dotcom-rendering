@@ -27,9 +27,9 @@ import { palette } from '@guardian/src-foundations';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { StandardHeader } from './StandardHeader';
 
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
@@ -38,7 +38,7 @@ function checkForGE2019Badge(tags: TagType[]) {
             svgSrc: GE2019,
         };
     }
-    return;
+    
 }
 
 interface Props {

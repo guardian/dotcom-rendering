@@ -1,5 +1,5 @@
-import { makeRelativeDate } from './dateTime';
 import MockDate from 'mockdate';
+import { makeRelativeDate } from './dateTime';
 
 describe('makeRelativeDate', () => {
     beforeAll(() => {

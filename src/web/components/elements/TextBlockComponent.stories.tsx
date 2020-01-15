@@ -29,7 +29,7 @@ export const defaultStory = () => {
         <div className={containerStyles}>
             <TextBlockComponent
                 html={html}
-                pillar={'news'}
+                pillar="news"
                 designType="Article"
             />
         </div>
@@ -42,7 +42,7 @@ export const DropCap = () => {
         <div className={containerStyles}>
             <TextBlockComponent
                 html={html}
-                pillar={'culture'}
+                pillar="culture"
                 dropCap={true}
                 designType="Article"
             />
@@ -56,7 +56,7 @@ export const QuotedDropCap = () => {
         <div className={containerStyles}>
             <TextBlockComponent
                 html={quotedHtml}
-                pillar={'opinion'}
+                pillar="opinion"
                 dropCap={true}
                 designType="Comment"
             />
@@ -70,7 +70,7 @@ export const ShortText = () => {
         <div className={containerStyles}>
             <TextBlockComponent
                 html={shortHtml}
-                pillar={'news'}
+                pillar="news"
                 dropCap={true}
                 designType="Article"
             />
@@ -84,7 +84,7 @@ export const NoTags = () => {
         <div className={containerStyles}>
             <TextBlockComponent
                 html={differentWrapperTags}
-                pillar={'news'}
+                pillar="news"
                 dropCap={true}
                 designType="Article"
             />

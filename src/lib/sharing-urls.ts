@@ -98,14 +98,12 @@ export const getSharingUrls = (
             platform as SharePlatform
         ];
 
-        return Object.assign(
-            {
-                [platform]: {
+        return {
+            [platform]: {
                     userMessage,
                     url: appendParamsToBaseUrl(baseUrl, params),
                 },
-            },
-            shareUrls,
-        );
+            ...shareUrls,
+        };
     }, {});
 };

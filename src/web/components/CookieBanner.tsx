@@ -129,7 +129,8 @@ export class CookieBanner extends Component<{}, { show: boolean }> {
     }
 
     public render() {
-        if (!this.state.show) {
+        const { show } = this.state;
+        if (!show) {
             return null;
         }
 

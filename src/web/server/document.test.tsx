@@ -15,7 +15,7 @@ const result = document({
     },
 });
 
-test('that all the required meta SEO fields exist', async () => {
+test('that all the required meta SEO fields exist', () => {
     const names = ['description', 'viewport'];
 
     names.map(name =>
@@ -23,7 +23,7 @@ test('that all the required meta SEO fields exist', async () => {
     );
 });
 
-test('that all the required links exist', async () => {
+test('that all the required links exist', () => {
     const names = ['amphtml'];
 
     names.map(name =>

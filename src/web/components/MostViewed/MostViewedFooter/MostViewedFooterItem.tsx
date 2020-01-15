@@ -70,7 +70,7 @@ type Props = {
 export const MostViewedFooterItem = ({ trail, position }: Props) => (
     <li className={gridItem(position)} data-link-name={`${position} | text`}>
         {/* tslint:disable-next-line:react-a11y-anchors */}
-        <a className={headlineLink} href={trail.url} data-link-name={'article'}>
+        <a className={headlineLink} href={trail.url} data-link-name="article">
             <span className={bigNumber}>
                 <BigNumber index={position} />
             </span>
