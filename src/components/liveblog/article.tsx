@@ -9,7 +9,7 @@ import LiveblogBody from 'components/liveblog/body';
 import HeaderImage from 'components/shared/headerImage';
 import Tags from 'components/shared/tags';
 import { wideColumnWidth, baseMultiply, darkModeCss } from 'styles';
-import { Content } from 'capiThriftModels';
+import { Content } from 'mapiThriftModels/Content';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';

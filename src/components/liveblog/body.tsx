@@ -3,7 +3,7 @@ import { bulletStyles, commonArticleStyles } from 'styles';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 import { render } from 'renderBlocks';
-import { Block } from 'capiThriftModels';
+import { Block } from 'mapiThriftModels/Block';
 
 import { css, SerializedStyles } from '@emotion/core'
 import { PillarStyles } from 'pillar';

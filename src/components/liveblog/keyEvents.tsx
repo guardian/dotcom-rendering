@@ -2,7 +2,7 @@ import React from 'react';
 import { icons, basePx, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
-import { Block } from 'capiThriftModels';
+import { Block } from 'mapiThriftModels/Block';
 import { makeRelativeDate } from 'date';
 import { PillarStyles } from 'pillar';
 

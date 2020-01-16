@@ -7,7 +7,7 @@ import { Result, Err, fromUnsafe } from './types/result';
 import { imageBlock } from './components/blocks/image';
 import { insertAdPlaceholders } from './ads';
 import { transform } from 'contentTransformations';
-import { BlockElement } from 'capiThriftModels';
+import { BlockElement } from 'mapiThriftModels/BlockElement';
 
 
 // ----- Setup ----- //

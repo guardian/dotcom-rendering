@@ -3,7 +3,7 @@
 import { createHash } from 'crypto';
 
 import { Option, fromNullable } from 'types/option';
-import { Asset } from 'capiThriftModels';
+import { Asset } from 'mapiThriftModels/Asset';
 
 // ----- Types ----- //
 

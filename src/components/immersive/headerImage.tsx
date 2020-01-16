@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { from } from '@guardian/src-foundations/mq';
 
-import { BlockElement } from 'capiThriftModels';
+import { BlockElement } from 'mapiThriftModels/BlockElement';
 import { immersiveImageElement } from 'components/blocks/image';
 import { wideContentWidth } from 'styles';
 import { Option } from 'types/option';

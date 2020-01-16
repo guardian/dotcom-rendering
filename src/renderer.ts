@@ -5,7 +5,7 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
 
-import { ElementType } from 'capiThriftModels';
+import { ElementType } from 'mapiThriftModels/ElementType';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';

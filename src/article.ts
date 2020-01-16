@@ -1,7 +1,10 @@
 // ----- Imports ----- //
 
 import { Pillar, pillarFromString } from 'pillar';
-import { Content, ElementType, BlockElement, Tag } from 'capiThriftModels';
+import { Content } from 'mapiThriftModels/Content';
+import { ElementType } from 'mapiThriftModels/ElementType';
+import { BlockElement } from 'mapiThriftModels/BlockElement';
+import { Tag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';

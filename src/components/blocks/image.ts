@@ -4,7 +4,7 @@ import { createElement as h, ReactNode } from 'react';
 import * as AssetUtils from 'asset';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { BlockElement } from 'capiThriftModels';
+import { BlockElement } from 'mapiThriftModels/BlockElement';
 import { from } from '@guardian/src-foundations/mq';
 import { fromNullable } from 'types/option';
 

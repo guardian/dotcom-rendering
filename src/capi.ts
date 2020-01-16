@@ -1,7 +1,11 @@
 // ----- Imports ----- //
 
 import { Result, Ok, Err } from 'types/result';
-import { Content, Tag, BlockElement, ElementType } from 'capiThriftModels';
+import { Content} from 'mapiThriftModels/Content';
+import { Tag } from 'mapiThriftModels/Tag';
+import { BlockElement} from 'mapiThriftModels/BlockElement';
+import { ElementType } from 'mapiThriftModels/ElementType';
+
 import { Option, fromNullable, None, Some } from 'types/option';
 import { isImage } from 'components/blocks/image';
 

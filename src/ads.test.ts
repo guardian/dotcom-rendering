@@ -1,7 +1,7 @@
 import { insertAdPlaceholders } from './ads';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
-import { ElementType } from 'capiThriftModels';
+import { ElementType } from 'mapiThriftModels/ElementType';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
 import { compose } from 'lib';
