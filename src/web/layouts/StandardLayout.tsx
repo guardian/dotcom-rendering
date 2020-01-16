@@ -30,7 +30,6 @@ import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { StandardHeader } from './StandardHeader';
 
-
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
         return {
@@ -38,7 +37,6 @@ function checkForGE2019Badge(tags: TagType[]) {
             svgSrc: GE2019,
         };
     }
-    
 }
 
 interface Props {
@@ -176,7 +174,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 </Flex>
             </Section>
 
-            <Section islandId="story-package" />
+            <Section islandId="onwards-content" />
 
             {!isPaidContent && (
                 <>

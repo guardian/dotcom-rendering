@@ -179,7 +179,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </Flex>
             </Section>
 
-            <Section islandId="story-package" />
+            <Section islandId="onwards-content" />
 
             <Section
                 showTopBorder={false}

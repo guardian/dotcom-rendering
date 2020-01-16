@@ -6,22 +6,40 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
+import { StoryPackage } from './StoryPackage';
 
 type Props = {
-    content: OnwardsType;
-    component: React.ElementType;
+    onwardSections: OnwardsType[];
 };
 
-export const OnwardsLayout = ({ content, component: Content }: Props) => (
-    <Flex>
-        <LeftColumn showRightBorder={false} showPartialRightBorder={true}>
-            <OnwardsTitle title={content.heading} />
-        </LeftColumn>
-        <OnwardsContainer>
-            <Hide when="above" breakpoint="leftCol">
-                <OnwardsTitle title={content.heading} />
-            </Hide>
-            <Content content={content.trails} />
-        </OnwardsContainer>
-    </Flex>
-);
+const decideLayout = (layout: OnwardsLayoutType, trails: TrailType[]) => {
+    switch (layout) {
+        case 'fourAndFour':
+            return <StoryPackage content={trails} />;
+        default:
+            return <></>;
+    }
+};
+
+export const OnwardsLayout = ({ onwardSections }: Props) => {
+    return (
+        <>
+            {onwardSections.map((onward, index) => (
+                <Flex key={`${onward.heading}-${index}`}>
+                    <LeftColumn
+                        showRightBorder={false}
+                        showPartialRightBorder={true}
+                    >
+                        <OnwardsTitle title={onward.heading} />
+                    </LeftColumn>
+                    <OnwardsContainer>
+                        <Hide when="above" breakpoint="leftCol">
+                            <OnwardsTitle title={onward.heading} />
+                        </Hide>
+                        {decideLayout(onward.layout, onward.trails)}
+                    </OnwardsContainer>
+                </Flex>
+            ))}
+        </>
+    );
+};

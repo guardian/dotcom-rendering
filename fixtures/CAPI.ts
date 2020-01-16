@@ -506,6 +506,8 @@ export const CAPI: CAPIType = {
         edition: '',
         section: '',
         sharedAdTargeting: {},
+        keywordIds: [],
+        showRelatedContent: false,
     },
     webTitle: 'Foobar',
     nav: {
