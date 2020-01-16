@@ -334,13 +334,15 @@ type OnwardsType = {
 
 interface CommercialConfigType {
     isPaidContent?: boolean;
-    pageId?: string;
+    pageId: string;
     webPublicationDate?: number;
     headline?: string;
     author?: string;
     keywords?: string;
-    section: string;
-    edition: string;
+    section?: string;
+    edition?: string;
+    series?: string;
+    contentType: string;
 }
 
 /**

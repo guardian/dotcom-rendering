@@ -8,7 +8,7 @@ describe('generatePermutivePayload', () => {
             headline: 'article headline',
             section: 'sport',
             author: 'author name',
-            keywords: 'keyword1, keyword2',
+            keywords: 'keyword1,keyword2',
             edition: 'UK',
             webPublicationDate: 1578926460000,
         };
@@ -19,7 +19,7 @@ describe('generatePermutivePayload', () => {
             'properties.content.title': 'article headline',
             'properties.content.section': 'sport',
             'properties.content.authors!list[string]': 'author name',
-            'properties.content.keywords!list[string]': 'keyword1, keyword2',
+            'properties.content.keywords!list[string]': 'keyword1,keyword2',
             'properties.content.publishedAt': '2020-01-13T14:41:00.000Z',
             'properties.user.edition': 'UK',
         };
@@ -49,6 +49,23 @@ describe('generatePermutivePayload', () => {
         const expected = {
             'properties.content.title': 'article headline',
         };
+        expect(
+            generatePermutivePayload((config as unknown) as ConfigType),
+        ).toStrictEqual(expected);
+    });
+
+    test('generates the right payload given untrimmed keywords or authors', () => {
+        const config = {
+            author: 'author 1 , author 2 ,author3, author 4  ',
+            keywords: ' keyword1,  keyword2  ,keyword3',
+        };
+        const expected = {
+            'properties.content.authors!list[string]':
+                'author 1,author 2,author3,author 4',
+            'properties.content.keywords!list[string]':
+                'keyword1,keyword2,keyword3',
+        };
+
         expect(
             generatePermutivePayload((config as unknown) as ConfigType),
         ).toStrictEqual(expected);

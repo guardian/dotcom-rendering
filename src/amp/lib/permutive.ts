@@ -17,13 +17,29 @@ export const generatePermutivePayload = (
         typeof rawConfig.webPublicationDate === 'number'
             ? new Date(rawConfig.webPublicationDate).toISOString()
             : void 0;
+    const authors =
+        rawConfig.author && typeof rawConfig.author === 'string'
+            ? rawConfig.author
+                  .split(',')
+                  .map(s => s.trim())
+                  .join()
+            : void 0;
+    const keywords =
+        rawConfig.keywords && typeof rawConfig.keywords === 'string'
+            ? rawConfig.keywords
+                  .split(',')
+                  .map(s => s.trim())
+                  .join()
+            : void 0;
     const config: { [key: string]: any } = {
         'properties.content.Premium': rawConfig.isPaidContent,
+        'properties.content.type': rawConfig.contentType,
+        'properties.content.series': rawConfig.series,
         'properties.content.id': rawConfig.pageId,
         'properties.content.title': rawConfig.headline,
         'properties.content.section': rawConfig.section,
-        'properties.content.authors!list[string]': rawConfig.author,
-        'properties.content.keywords!list[string]': rawConfig.keywords,
+        'properties.content.authors!list[string]': authors,
+        'properties.content.keywords!list[string]': keywords,
         'properties.content.publishedAt': publishedAt,
         'properties.user.edition': rawConfig.edition,
     };
