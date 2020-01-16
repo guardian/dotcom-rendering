@@ -270,7 +270,7 @@ const Interactive = (props: { url: string }): ReactElement =>
 const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement =>
     h('blockquote', { key: props.key }, ...Array.from(props.content).map(textElement(props.pillar)));
 
-const render = (salt: string) => (pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
+const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
         case ElementType.TEXT:
@@ -311,7 +311,7 @@ const render = (salt: string) => (pillar: Pillar) => (element: BodyElement, key:
 }
 
 const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
-    elements.map(render(salt)(pillar));
+    elements.map(render(salt, pillar));
 
 
 // ----- Exports ----- //

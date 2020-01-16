@@ -84,7 +84,9 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
-const parseElement = (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
+const parseElement =
+    (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
+
     switch (element.type) {
 
         case ElementType.TEXT:
@@ -133,9 +135,11 @@ const parseElement = (docParser: DocParser) => (element: BlockElement): Result<s
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
     }
+
 }
 
-const parseElements = (docParser: DocParser) => (elements: BlockElement[]): Result<string, BodyElement>[] =>
+const parseElements =
+    (docParser: DocParser) => (elements: BlockElement[]): Result<string, BodyElement>[] =>
     elements.map(parseElement(docParser));
 
 function parseLayout(content: Content): Layout {
