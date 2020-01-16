@@ -356,7 +356,7 @@ interface ConfigType {
     frontendAssetsFullURL: string;
     hbImpl: object | string;
     adUnit: string;
-    isSensitive: string;
+    isSensitive: boolean;
     videoDuration: number;
     edition: string;
     section: string;
