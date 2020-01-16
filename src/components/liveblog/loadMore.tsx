@@ -2,7 +2,7 @@ import React from 'react';
 import { sidePadding, icons, textSans } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
 const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     all: unset;
@@ -32,9 +32,13 @@ const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => c
     }
 `;
 
-const LiveblogLoadMore = ({ pillarStyles }: { pillarStyles: PillarStyles }): JSX.Element => {
+interface Props {
+    pillar: Pillar;
+}
+
+const LiveblogLoadMore = ({ pillar }: Props): JSX.Element => {
     return (
-        <button css={LiveblogLoadMoreStyles(pillarStyles)}>
+        <button css={LiveblogLoadMoreStyles(getPillarStyles(pillar))}>
             <span>View more updates</span>
         </button>
     )

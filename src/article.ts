@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Pillar, pillarFromString } from 'pillar';
-import { Content, ElementType, BlockElement, Tag } from 'capiThriftModels';
+import { Content, ElementType, BlockElement, Tag, Block } from 'capiThriftModels';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
@@ -24,8 +24,7 @@ const enum Layout {
     Audio,
 }
 
-type Article = {
-    layout: Layout;
+interface ArticleFields {
     pillar: Pillar;
     headline: string;
     standfirst: DocumentFragment;
@@ -36,10 +35,28 @@ type Article = {
     contributors: Tag[];
     series: Tag;
     commentable: boolean;
-    starRating: Option<number>;
-    body: Result<string, BodyElement>[];
     tags: Tag[];
-};
+}
+
+type Liveblog = ArticleFields & {
+    layout: Layout.Liveblog;
+    blocks: LiveBlock[];
+}
+
+type Review = ArticleFieldsWithBody & {
+    layout: Layout.Review;
+    starRating: number;
+}
+
+type Standard = ArticleFieldsWithBody & {
+    layout: Exclude<Layout, Layout.Liveblog | Layout.Review>;
+}
+
+type Article
+    = Liveblog
+    | Review
+    | Standard
+    ;
 
 type BodyElement = {
     kind: ElementType.TEXT;
@@ -69,7 +86,20 @@ type BodyElement = {
     content: NodeList;
 };
 
+type LiveBlock = {
+    id: string;
+    isKeyEvent: boolean;
+    title: string;
+    firstPublished: Date;
+    lastModified: Date;
+    body: Result<string, BodyElement>[];
+}
+
 type DocParser = (html: string) => DocumentFragment;
+
+type ArticleFieldsWithBody = ArticleFields & {
+    body: Result<string, BodyElement>[];
+};
 
 
 // ----- Functions ----- //
@@ -142,41 +172,21 @@ const parseElements =
     (docParser: DocParser) => (elements: BlockElement[]): Result<string, BodyElement>[] =>
     elements.map(parseElement(docParser));
 
-function parseLayout(content: Content): Layout {
-    switch (content.type) {
-        case 'article':
-            if (pillarFromString(content.pillarId) === Pillar.opinion) {
-                return Layout.Opinion;
-            } else if (isImmersive(content)) {
-                return Layout.Immersive;
-            } else if (isFeature(content)) {
-                return Layout.Feature;
-            } else if (isReview(content)) {
-                return Layout.Review;
-            } else if (isAnalysis(content)) {
-                return Layout.Analysis;
-            }
-            return Layout.Standard;
-        case 'liveblog':
-            return Layout.Liveblog;
-        case 'gallery':
-            return Layout.Gallery;
-        case 'interactive':
-            return Layout.Interactive;
-        case 'picture':
-            return Layout.Picture;
-        case 'video':
-            return Layout.Video;
-        case 'audio':
-            return Layout.Audio;
-        default:
-            return Layout.Standard;
-    }    
-}
-
-const fromCapi = (docParser: DocParser) => (content: Content): Article =>
+const parseBlock = (docParser: DocParser) => (block: Block): LiveBlock =>
     ({
-        layout: parseLayout(content),
+        id: block.id,
+        isKeyEvent: block.attributes.keyEvent,
+        title: block.title,
+        firstPublished: block.firstPublishedDate,
+        lastModified: block.lastModifiedDate,
+        body: parseElements(docParser)(block.elements),
+    })
+
+const parseBlocks = (docParser: DocParser) => (blocks: Block[]): LiveBlock[] =>
+    blocks.map(parseBlock(docParser));
+
+const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
+    ({
         pillar: pillarFromString(content.pillarId),
         headline: content.fields.headline,
         standfirst: docParser(content.fields.standfirst),
@@ -187,16 +197,77 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article =>
         contributors: articleContributors(content),
         series: articleSeries(content),
         commentable: content.fields.commentable,
-        starRating: fromNullable(content.fields.starRating),
-        body: parseElements(docParser)(content.blocks.body[0].elements),
         tags: content.tags,
+    })
+
+const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleFieldsWithBody =>
+    ({
+        ...articleFields(docParser, content),
+        body: parseElements(docParser)(content.blocks.body[0].elements),
     });
+
+const fromCapi = (docParser: DocParser) => (content: Content): Article => {
+    switch (content.type) {
+        case 'article':
+
+            if (pillarFromString(content.pillarId) === Pillar.opinion) {
+                return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
+
+            } else if (isImmersive(content)) {
+                return { layout: Layout.Immersive, ...articleFieldsWithBody(docParser, content) };
+
+            } else if (isFeature(content)) {
+                return { layout: Layout.Feature, ...articleFieldsWithBody(docParser, content) };
+
+            } else if (isReview(content)) {
+                return {
+                    layout: Layout.Review,
+                    starRating: content.fields.starRating,
+                    ...articleFieldsWithBody(docParser, content),
+                };
+
+            } else if (isAnalysis(content)) {
+                return { layout: Layout.Analysis, ...articleFieldsWithBody(docParser, content) };
+            }
+
+            return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
+
+        case 'liveblog':
+            return {
+                layout: Layout.Liveblog,
+                blocks: parseBlocks(docParser)(content.blocks.body),
+                ...articleFields(docParser, content),
+            };
+
+        case 'gallery':
+            return { layout: Layout.Gallery, ...articleFieldsWithBody(docParser, content) };
+
+        case 'interactive':
+            return { layout: Layout.Interactive, ...articleFieldsWithBody(docParser, content) };
+
+        case 'picture':
+            return { layout: Layout.Picture, ...articleFieldsWithBody(docParser, content) };
+
+        case 'video':
+            return { layout: Layout.Video, ...articleFieldsWithBody(docParser, content) };
+
+        case 'audio':
+            return { layout: Layout.Audio, ...articleFieldsWithBody(docParser, content) };
+
+        default:
+            return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
+    }
+}
 
 
 // ----- Exports ----- //
 
 export {
     Article,
+    Liveblog,
+    Review,
+    Standard,
+    LiveBlock,
     Layout,
     BodyElement,
     fromCapi,

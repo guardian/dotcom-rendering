@@ -9,13 +9,11 @@ import LiveblogBody from 'components/liveblog/body';
 import HeaderImage from 'components/shared/headerImage';
 import Tags from 'components/shared/tags';
 import { wideColumnWidth, baseMultiply, darkModeCss } from 'styles';
-import { Content } from 'capiThriftModels';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { articleMainImage, articleSeries, articleContributors } from 'capi';
 import { PillarStyles, getPillarStyles } from 'pillar';
-import { Article } from 'article';
+import { Liveblog } from 'article';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${palette.neutral[97]};
@@ -47,47 +45,31 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 `;
 
 interface LiveblogArticleProps {
-    capi: Content;
-    article: Article;
+    article: Liveblog;
     imageSalt: string;
 }
 
-const LiveblogArticle = ({ capi, article, imageSalt }: LiveblogArticleProps): JSX.Element => {
-
-    const { fields, tags, webPublicationDate, blocks } = capi;
-    const series = articleSeries(capi);
-    const pillarStyles = getPillarStyles(article.pillar);
-    const contributors = articleContributors(capi);
-    const bodyElements = blocks.body;
-    const image = articleMainImage(capi);
+const LiveblogArticle = ({ article, imageSalt }: LiveblogArticleProps): JSX.Element => {
 
     return (
         <main css={LiveblogArticleStyles}>
             <div css={BorderStyles}>
-                <LiveblogSeries series={series} pillarStyles={pillarStyles} />
-                <LiveblogHeadline headline={fields.headline} pillarStyles={pillarStyles} />
-                <LiveblogStandfirst standfirst={fields.standfirst} pillarStyles={pillarStyles} />
-                <LiveblogByline
-                    byline={fields.bylineHtml}
-                    pillarStyles={pillarStyles}
-                    article={article}
-                    publicationDate={webPublicationDate}
-                    contributors={contributors}
-                    imageSalt={imageSalt}
-                    commentable={fields.commentable}
-                />
+                <LiveblogSeries series={article.series} pillar={article.pillar} />
+                <LiveblogHeadline headline={article.headline} pillar={article.pillar} />
+                <LiveblogStandfirst standfirst={article.standfirst} pillar={article.pillar} />
+                <LiveblogByline article={article} imageSalt={imageSalt} />
                 <HeaderImage
-                    image={image}
+                    image={article.mainImage}
                     imageSalt={imageSalt}
-                    className={HeaderImageStyles(pillarStyles)}
+                    className={HeaderImageStyles(getPillarStyles(article.pillar))}
                 />
-                <LiveblogKeyEvents bodyElements={bodyElements} pillarStyles={pillarStyles} />
+                <LiveblogKeyEvents blocks={article.blocks} pillar={article.pillar} />
                 <LiveblogBody
-                    bodyElements={bodyElements}
-                    pillarStyles={pillarStyles}
+                    blocks={article.blocks}
+                    pillar={article.pillar}
                     imageSalt={imageSalt}
                 />
-                <Tags tags={tags} background={palette.neutral[93]} />
+                <Tags tags={article.tags} background={palette.neutral[93]} />
             </div>
         </main>
     );

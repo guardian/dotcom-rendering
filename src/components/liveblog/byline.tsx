@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { textSans, basePx } from 'styles';
 import { Keyline } from '../shared/keyline';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { Contributor } from '../../capi';
 import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles } from 'pillar';
-import { componentFromHtml } from 'renderBlocks';
+import { PillarStyles, getPillarStyles } from 'pillar';
 import { CommentCount } from 'components/shared/commentCount';
 import { Article } from 'article';
+import { renderText } from 'renderer';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -65,25 +64,19 @@ const commentCount = ({ liveblogBackground }: PillarStyles): SerializedStyles =>
 `
 
 interface LiveblogBylineProps {
-    byline?: string;
-    pillarStyles: PillarStyles;
-    publicationDate: string;
-    contributors: Contributor[];
     article: Article;
     imageSalt: string;
-    commentable: boolean;
 }
 
-const LiveblogByline = ({
-    byline,
-    pillarStyles,
-    publicationDate,
-    contributors,
-    article,
-    imageSalt,
-    commentable
-}: LiveblogBylineProps): JSX.Element => {
-    
+const LiveblogByline = ({ article, imageSalt}: LiveblogBylineProps): JSX.Element => {
+    const pillarStyles = getPillarStyles(article.pillar);
+
+    const byline = article.bylineHtml.map<ReactNode>(html =>
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
+        <address>{ renderText(html, article.pillar) }</address>
+    ).withDefault(null);
+
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline {...article} />
@@ -91,18 +84,18 @@ const LiveblogByline = ({
                 <section>
                     <div className="byline">
                         <Avatar
-                            contributors={contributors}
+                            contributors={article.contributors}
                             bgColour={pillarStyles.featureHeadline}
                             imageSalt={imageSalt}
                         />
                         <div className="author">
-                            { byline ? <address>{componentFromHtml(byline)}</address> : null }
-                            <time>{ formatDate(new Date(publicationDate)) }</time>
+                            { byline }
+                            <time>{ formatDate(new Date(article.publishDate)) }</time>
                             <div className="follow">Get alerts on this story</div>
                         </div>
                     </div>
 
-                    {commentable
+                    {article.commentable
                         ? <CommentCount
                             count={0}
                             colour={palette.neutral[100]}
