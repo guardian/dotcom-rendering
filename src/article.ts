@@ -84,16 +84,16 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
-const parseElement = (docParser: DocParser) => (block: BlockElement): Result<string, BodyElement> => {
-    switch (block.type) {
+const parseElement = (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
+    switch (element.type) {
 
         case ElementType.TEXT:
-            return new Ok({ kind: ElementType.TEXT, doc: docParser(block.textTypeData.html) });
+            return new Ok({ kind: ElementType.TEXT, doc: docParser(element.textTypeData.html) });
 
         case ElementType.IMAGE:
 
-            const masterAsset = block.assets.find(asset => asset.typeData.isMaster);
-            const { alt, caption, displayCredit, credit } = block.imageTypeData;
+            const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
+            const { alt, caption, displayCredit, credit } = element.imageTypeData;
             const imageBlock: Option<Result<string, BodyElement>> = fromNullable(masterAsset)
                 .map(asset => new Ok({
                     kind: ElementType.IMAGE,
@@ -110,7 +110,7 @@ const parseElement = (docParser: DocParser) => (block: BlockElement): Result<str
 
         case ElementType.PULLQUOTE:
 
-            const { html: quote, attribution } = block.pullquoteTypeData;
+            const { html: quote, attribution } = element.pullquoteTypeData;
             return new Ok({
                 kind: ElementType.PULLQUOTE,
                 quote,
@@ -118,25 +118,25 @@ const parseElement = (docParser: DocParser) => (block: BlockElement): Result<str
             });
 
         case ElementType.INTERACTIVE:
-            const { iframeUrl } = block.interactiveTypeData;
+            const { iframeUrl } = element.interactiveTypeData;
             return new Ok({ kind: ElementType.INTERACTIVE, url: iframeUrl });
 
         case ElementType.RICH_LINK:
 
-            const { url, linkText } = block.richLinkTypeData;
+            const { url, linkText } = element.richLinkTypeData;
             return new Ok({ kind: ElementType.RICH_LINK, url, linkText });
 
         case ElementType.TWEET:
-            return tweetContent(block.tweetTypeData.id, docParser(block.tweetTypeData.html))
+            return tweetContent(element.tweetTypeData.id, docParser(element.tweetTypeData.html))
                 .map(content => ({ kind: ElementType.TWEET, content }));
 
         default:
-            return new Err(`I'm afraid I don't understand the block I was given: ${block.type}`);
+            return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
     }
 }
 
-const parseElements = (docParser: DocParser) => (blocks: BlockElement[]): Result<string, BodyElement>[] =>
-    blocks.map(parseElement(docParser));
+const parseElements = (docParser: DocParser) => (elements: BlockElement[]): Result<string, BodyElement>[] =>
+    elements.map(parseElement(docParser));
 
 function parseLayout(content: Content): Layout {
     switch (content.type) {
