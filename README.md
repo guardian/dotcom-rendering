@@ -91,6 +91,4 @@ Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering
 
 ### Generating MAPI thrift files
 1. Import all types into a thrift file `v1.thrift`
-2. ```sh
-node_modules/.bin/thrift-typescript --target thrift-server --outDir definitions v1.thrift
-```
+2. `node_modules/.bin/thrift-typescript --target thrift-server --outDir definitions v1.thrift`
