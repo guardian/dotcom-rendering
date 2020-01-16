@@ -90,7 +90,7 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
 
 function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
     const article = fromCapi(JSDOM.fragment)(capi);
-    const body = partition(article.blocks).oks;
+    const body = partition(article.body).oks;
     const content = insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body));
     const articleScript = '/assets/article.js';
     const liveblogScript = '/assets/liveblog.js';

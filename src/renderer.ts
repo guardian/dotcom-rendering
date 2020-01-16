@@ -11,7 +11,7 @@ import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { imageRatioStyles } from 'components/blocks/image';
-import { Block } from 'article';
+import { BodyElement } from 'article';
 
 
 // ----- Renderer ----- //
@@ -270,14 +270,14 @@ const Interactive = (props: { url: string }): ReactElement =>
 const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement =>
     h('blockquote', { key: props.key }, ...Array.from(props.content).map(textElement(props.pillar)));
 
-const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number): ReactNode => {
-    switch (block.kind) {
+const render = (salt: string) => (pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
+    switch (element.kind) {
 
         case ElementType.TEXT:
-            return text(block.doc, pillar);
+            return text(element.doc, pillar);
 
         case ElementType.IMAGE:
-            const { file, alt, caption, displayCredit, credit, width, height } = block;
+            const { file, alt, caption, displayCredit, credit, width, height } = element;
             return h(Image, {
                 url: file,
                 alt,
@@ -291,18 +291,18 @@ const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number)
             });
 
         case ElementType.PULLQUOTE:
-            const { quote, attribution } = block;
+            const { quote, attribution } = element;
             return h(Pullquote, { quote, attribution, pillar, key });
 
         case ElementType.RICH_LINK:
-            const { url, linkText } = block;
+            const { url, linkText } = element;
             return h(RichLink, { url, linkText, pillar, key });
 
         case ElementType.INTERACTIVE:
-            return h(Interactive, { url: block.url, key });
+            return h(Interactive, { url: element.url, key });
 
         case ElementType.TWEET:
-            return h(Tweet, { content: block.content, pillar, key });
+            return h(Tweet, { content: element.content, pillar, key });
 
         default:
             return null;
@@ -310,8 +310,8 @@ const render = (salt: string) => (pillar: Pillar) => (block: Block, key: number)
     }
 }
 
-const renderAll = (salt: string) => (pillar: Pillar, blocks: Block[]): ReactNode[] =>
-    blocks.map(render(salt)(pillar));
+const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+    elements.map(render(salt)(pillar));
 
 
 // ----- Exports ----- //

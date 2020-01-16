@@ -37,11 +37,11 @@ type Article = {
     series: Tag;
     commentable: boolean;
     starRating: Option<number>;
-    blocks: Result<string, Block>[];
+    body: Result<string, BodyElement>[];
     tags: Tag[];
 };
 
-type Block = {
+type BodyElement = {
     kind: ElementType.TEXT;
     doc: DocumentFragment;
 } | {
@@ -84,7 +84,7 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
-const parseBlock = (docParser: DocParser) => (block: BlockElement): Result<string, Block> => {
+const parseElement = (docParser: DocParser) => (block: BlockElement): Result<string, BodyElement> => {
     switch (block.type) {
 
         case ElementType.TEXT:
@@ -94,7 +94,7 @@ const parseBlock = (docParser: DocParser) => (block: BlockElement): Result<strin
 
             const masterAsset = block.assets.find(asset => asset.typeData.isMaster);
             const { alt, caption, displayCredit, credit } = block.imageTypeData;
-            const imageBlock: Option<Result<string, Block>> = fromNullable(masterAsset)
+            const imageBlock: Option<Result<string, BodyElement>> = fromNullable(masterAsset)
                 .map(asset => new Ok({
                     kind: ElementType.IMAGE,
                     alt,
@@ -135,8 +135,8 @@ const parseBlock = (docParser: DocParser) => (block: BlockElement): Result<strin
     }
 }
 
-const parseBlocks = (docParser: DocParser) => (blocks: BlockElement[]): Result<string, Block>[] =>
-    blocks.map(parseBlock(docParser));
+const parseElements = (docParser: DocParser) => (blocks: BlockElement[]): Result<string, BodyElement>[] =>
+    blocks.map(parseElement(docParser));
 
 function parseLayout(content: Content): Layout {
     switch (content.type) {
@@ -184,7 +184,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article =>
         series: articleSeries(content),
         commentable: content.fields.commentable,
         starRating: fromNullable(content.fields.starRating),
-        blocks: parseBlocks(docParser)(content.blocks.body[0].elements),
+        body: parseElements(docParser)(content.blocks.body[0].elements),
         tags: content.tags,
     });
 
@@ -194,6 +194,6 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article =>
 export {
     Article,
     Layout,
-    Block,
+    BodyElement,
     fromCapi,
 };
