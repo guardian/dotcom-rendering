@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const program = TJS.getProgramFromFiles([
     resolve(root + '/src/lib/content.d.ts'),
-    resolve(root + '/src/index.d.ts'),
+    resolve(root + '/index.d.ts'),
 ]);
 
 const settings = { rejectDateType: true, required: true };
