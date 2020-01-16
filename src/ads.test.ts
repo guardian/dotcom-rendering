@@ -5,23 +5,23 @@ import { ElementType } from 'capiThriftModels';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
 import { compose } from 'lib';
-import { Block } from 'article';
+import { BodyElement } from 'article';
 
-const textBlock = (nodes: string[]): Block =>
+const textElement = (nodes: string[]): BodyElement =>
     ({
         kind: ElementType.TEXT,
         doc: JSDOM.fragment(nodes.join('')),
     });
 
-const generateParas = (paras: number): Block =>
-    textBlock(Array(paras).fill('<p>foo</p>'));
+const generateParas = (paras: number): BodyElement =>
+    textElement(Array(paras).fill('<p>foo</p>'));
 
-const render = (textBlock: Block): ReactNode[] =>
-    renderAll('dummySalt')(Pillar.news, [textBlock]);
+const render = (element: BodyElement): ReactNode[] =>
+    renderAll('dummySalt')(Pillar.news, [element]);
 
 const renderParagraphs = compose(render, generateParas);
 
-const renderTextBlock = compose(render, textBlock);
+const renderTextElement = compose(render, textElement);
 
 describe('Adds the correct number of ad placeholders', () => {
     test('Adds no placeholders for 2 paragraphs', () => {
@@ -81,7 +81,7 @@ describe('Adds short classname correctly', () => {
 
 describe('Handles different DOM structures', () => {
     test('Does not count other tag types', () => {
-        const text = renderTextBlock([
+        const text = renderTextElement([
             '<p></p>',
             '<p></p>',
             '<div></div>',
@@ -95,7 +95,7 @@ describe('Handles different DOM structures', () => {
     });
 
     test('Inserts placeholders at correct positions with other types of tags', () => {
-        const text = renderTextBlock([
+        const text = renderTextElement([
             '<p></p>',
             '<p></p>',
             '<span></span>',
