@@ -1,9 +1,15 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 import { css } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 
-const HeadlineStyles = css`
+import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
+
+
+// ----- Styles ----- //
+
+const Styles = css`
     padding: ${basePx(.5, 1, 3, 1)};
     background: ${palette.neutral[7]};
     position: relative;
@@ -18,20 +24,24 @@ const HeadlineStyles = css`
     }
 `;
 
-const HeadlineDarkStyles = darkModeCss`
+const DarkStyles = darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 `;
 
-interface ImmersiveHeadlineProps {
+
+// ----- Component ----- //
+
+interface Props {
     headline: string;
 }
 
-const ImmersiveHeadline = ({
-    headline
-}: ImmersiveHeadlineProps): JSX.Element =>
-    <div css={[HeadlineStyles, HeadlineDarkStyles]}>
+const Headline = ({ headline }: Props): JSX.Element =>
+    <div css={[Styles, DarkStyles]}>
         <h1>{headline}</h1>
     </div>
 
-export default ImmersiveHeadline;
+
+// ----- Exports ----- //
+
+export default Headline;

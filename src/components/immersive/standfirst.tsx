@@ -1,11 +1,18 @@
+// ----- Imports ----- //
+
 import React from 'react';
-import { bulletStyles, headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
-import { PillarStyles } from 'pillar';
-import { componentFromHtml } from 'renderBlocks';
 
-const StandfirstStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+import { bulletStyles, headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { renderText } from 'renderer';
+import { Option } from 'types/option';
+
+
+// ----- Styles ----- //
+
+const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     ${headlineFont}
     color: ${palette.neutral[46]};
     font-weight: 400;
@@ -26,7 +33,7 @@ const StandfirstStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     ${bulletStyles(kicker)}
 `;
 
-const StandfirstDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
+const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
     background: ${palette.neutral.darkMode};
     color: ${palette.neutral[86]};
 
@@ -35,47 +42,50 @@ const StandfirstDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => d
     }
 `;
 
-interface ArticleStandfirstProps {
-    standfirst: string;
-    pillarStyles: PillarStyles;
+
+// ----- Component ----- //
+
+interface Props {
+    standfirst: DocumentFragment;
+    byline: string;
+    bylineHtml: Option<DocumentFragment>;
+    pillar: Pillar;
     className: SerializedStyles;
-    byline?: string;
-    bylineHtml?: string;
 }
 
-const ImmersiveStandfirst = ({
+const Standfirst = ({
     standfirst,
-    pillarStyles,
-    className,
     byline,
-    bylineHtml
-}: ArticleStandfirstProps): JSX.Element => {
+    bylineHtml,
+    pillar,
+    className,
+}: Props): JSX.Element => {
+    const pillarStyles = getPillarStyles(pillar);
 
-    let standfirstHtml;
-
-    if (byline && bylineHtml) {
-        if (standfirst.includes(byline)) {
-            standfirstHtml = <div>{componentFromHtml(standfirst.replace(byline, bylineHtml))}</div>
+    const content = bylineHtml.map(html => {
+        if (byline !== '' && standfirst.textContent?.includes(byline)) {
+            return <div>{renderText(standfirst, pillar)}</div>;
         } else {
-            standfirstHtml = <div>
-                <div>{componentFromHtml(standfirst)}</div>
-                <address>
-                    <span>By </span>
-                    {componentFromHtml(bylineHtml)}
-                </address>
-            </div>
+            return (
+                <div>
+                    <div>{renderText(standfirst, pillar)}</div>
+                    <address>
+                        <span>By </span>
+                        {renderText(html, pillar)}
+                    </address>
+                </div>
+            );
         }
-    } else {
-        standfirstHtml = <div>{componentFromHtml(standfirst)}</div>
-    }
+    }).withDefault(<div>{ renderText(standfirst, pillar) }</div>)
 
-    return <div css={[
-        className,
-        StandfirstStyles(pillarStyles),
-        StandfirstDarkStyles(pillarStyles)
-    ]}>
-        { standfirstHtml }
-    </div>
+    return (
+        <div css={[ className, Styles(pillarStyles), DarkStyles(pillarStyles) ]}>
+            { content }
+        </div>
+    );
 }
 
-export default ImmersiveStandfirst;
+
+// ----- Exports ----- //
+
+export default Standfirst;
