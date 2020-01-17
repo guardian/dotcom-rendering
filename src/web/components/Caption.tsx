@@ -7,10 +7,10 @@ import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 const figureStyle = css`
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 `;
 const captionStyle = (role?: RoleType) => css`
-    padding-top: 10px;
+    padding-top: 6px;
     ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
