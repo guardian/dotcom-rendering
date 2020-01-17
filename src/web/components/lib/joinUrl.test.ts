@@ -28,7 +28,7 @@ describe('joinUrl', () => {
     });
 
     it('returns an empty string on empty input', () => {
-        const input = [];
+        const input: string[] = [];
 
         expect(joinUrl(input)).toBe('');
     });
