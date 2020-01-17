@@ -58,8 +58,17 @@ type Article
     | Standard
     ;
 
+const enum ElementKind {
+    Text,
+    Image,
+    Pullquote,
+    Interactive,
+    RichLink,
+    Tweet,
+}
+
 type Image = {
-    kind: ElementType.IMAGE;
+    kind: ElementKind.Image;
     alt: string;
     caption: string;
     displayCredit: boolean;
@@ -70,21 +79,21 @@ type Image = {
 }
 
 type BodyElement = {
-    kind: ElementType.TEXT;
+    kind: ElementKind.Text;
     doc: DocumentFragment;
 } | Image | {
-    kind: ElementType.PULLQUOTE;
+    kind: ElementKind.Pullquote;
     quote: string;
     attribution: Option<string>;
 } | {
-    kind: ElementType.INTERACTIVE;
+    kind: ElementKind.Interactive;
     url: string;
 } | {
-    kind: ElementType.RICH_LINK;
+    kind: ElementKind.RichLink;
     url: string;
     linkText: string;
 } | {
-    kind: ElementType.TWEET;
+    kind: ElementKind.Tweet;
     content: NodeList;
 };
 
@@ -121,7 +130,7 @@ const parseImage = (element: BlockElement): Option<Image> => {
     const { alt, caption, displayCredit, credit } = element.imageTypeData;
 
     return fromNullable(masterAsset).map(asset => ({
-        kind: ElementType.IMAGE,
+        kind: ElementKind.Image,
         alt,
         caption,
         displayCredit,
@@ -138,7 +147,7 @@ const parseElement =
     switch (element.type) {
 
         case ElementType.TEXT:
-            return new Ok({ kind: ElementType.TEXT, doc: docParser(element.textTypeData.html) });
+            return new Ok({ kind: ElementKind.Text, doc: docParser(element.textTypeData.html) });
 
         case ElementType.IMAGE:
             return parseImage(element)
@@ -149,23 +158,23 @@ const parseElement =
 
             const { html: quote, attribution } = element.pullquoteTypeData;
             return new Ok({
-                kind: ElementType.PULLQUOTE,
+                kind: ElementKind.Pullquote,
                 quote,
                 attribution: fromNullable(attribution),
             });
 
         case ElementType.INTERACTIVE:
             const { iframeUrl } = element.interactiveTypeData;
-            return new Ok({ kind: ElementType.INTERACTIVE, url: iframeUrl });
+            return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
         case ElementType.RICH_LINK:
 
             const { url, linkText } = element.richLinkTypeData;
-            return new Ok({ kind: ElementType.RICH_LINK, url, linkText });
+            return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
         case ElementType.TWEET:
             return tweetContent(element.tweetTypeData.id, docParser(element.tweetTypeData.html))
-                .map(content => ({ kind: ElementType.TWEET, content }));
+                .map(content => ({ kind: ElementKind.Tweet, content }));
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
@@ -274,6 +283,7 @@ export {
     Standard,
     LiveBlock,
     Layout,
+    ElementKind,
     BodyElement,
     Image,
     fromCapi,

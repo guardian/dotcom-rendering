@@ -5,12 +5,11 @@ import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
 
-import { ElementType } from 'capiThriftModels';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { BodyElement } from 'article';
+import { ElementKind, BodyElement } from 'article';
 
 
 // ----- Renderer ----- //
@@ -290,10 +289,10 @@ const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): React
 const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
-        case ElementType.TEXT:
+        case ElementKind.Text:
             return text(element.doc, pillar);
 
-        case ElementType.IMAGE:
+        case ElementKind.Image:
             const { file, alt, caption, displayCredit, credit, width, height } = element;
             return h(BodyImage, {
                 url: file,
@@ -307,18 +306,18 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
                 height,
             });
 
-        case ElementType.PULLQUOTE:
+        case ElementKind.Pullquote:
             const { quote, attribution } = element;
             return h(Pullquote, { quote, attribution, pillar, key });
 
-        case ElementType.RICH_LINK:
+        case ElementKind.RichLink:
             const { url, linkText } = element;
             return h(RichLink, { url, linkText, pillar, key });
 
-        case ElementType.INTERACTIVE:
+        case ElementKind.Interactive:
             return h(Interactive, { url: element.url, key });
 
-        case ElementType.TWEET:
+        case ElementKind.Tweet:
             return h(Tweet, { content: element.content, pillar, key });
 
         default:
