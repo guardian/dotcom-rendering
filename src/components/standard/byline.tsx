@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
-import { sidePadding, textSans, darkModeCss } from 'styles';
+import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
 import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
@@ -19,6 +19,7 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     width: 80%;
     float: left;
     display: inline-block;
+    margin-bottom: ${basePx(2)};
 
     .author {
         address {
@@ -27,7 +28,8 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
             a {
                 text-decoration: none;
-                font-weight: 500;
+                font-weight: 700;
+                background: none;
                 font-style: normal;
             }
         }
