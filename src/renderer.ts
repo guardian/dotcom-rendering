@@ -242,7 +242,7 @@ const richLinkStyles = css`
     margin: ${basePx(1, 2, 1, 0)};
 
     ${from.wide} {
-        margin-left: calc(-${richLinkWidth} - 16px - 24px);
+        margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(3)});
     }
 
     ${darkModeCss`
