@@ -64,11 +64,12 @@ const firstPopularTag = (pageTags: string[], isPaidContent: boolean) => {
         return false;
     }
 
-    const isInWhitelist = (tag: string) => WHITELISTED_TAGS.includes(tag);
+    const firstTagInWhitelist =
+        pageTags.find((tag: string) => WHITELISTED_TAGS.includes(tag)) || false;
 
     // For paid content we just return the first tag, otherwise we
     // filter for the first tag in the whitelist
-    return isPaidContent ? pageTags[0] : pageTags.find(isInWhitelist);
+    return isPaidContent ? pageTags[0] : firstTagInWhitelist;
 };
 
 type Props = {
