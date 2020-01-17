@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { textSans, icons, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -58,12 +58,12 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
 `;
 
 interface LiveblogBlockProps {
-    pillarStyles: PillarStyles;
+    pillar: Pillar;
     highlighted: boolean;
     firstPublishedDate: Date;
     lastModifiedDate: Date;
     title: string;
-    children: JSX.Element;
+    children: ReactNode;
 }
 
 interface TitleProps {
@@ -79,22 +79,22 @@ const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
     return title ? <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3> : null;
 }
 
-const LiveblogBlock = (props: LiveblogBlockProps): JSX.Element => {
-    const {
-        pillarStyles,
-        highlighted,
-        title,
-        children,
-        firstPublishedDate,
-        lastModifiedDate
-    } = props;
+const LiveblogBlock = ({
+    pillar,
+    highlighted,
+    title,
+    children,
+    firstPublishedDate,
+    lastModifiedDate,
+}: LiveblogBlockProps): JSX.Element => {
     const relativeDate = makeRelativeDate(firstPublishedDate);
     const timeAgo = relativeDate ? <time>{relativeDate}</time> : null;
+
     return (
         <article>
             <LeftColumn
                 columnContent={timeAgo}
-                className={LiveblogBlockStyles(pillarStyles, highlighted)}
+                className={LiveblogBlockStyles(getPillarStyles(pillar), highlighted)}
             >
                 <Title highlighted={highlighted} title={title} />
                 {children}

@@ -3,7 +3,7 @@ import { basePx, headlineFont, headlineFontStyles } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations'
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
 const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};
@@ -18,11 +18,11 @@ const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => c
 
 interface LiveblogHeadlineProps {
     headline: string;
-    pillarStyles: PillarStyles;
+    pillar: Pillar;
 }
 
-const LiveblogHeadline = ({ headline, pillarStyles }: LiveblogHeadlineProps): JSX.Element =>
-    <LeftColumn className={LiveblogHeadlineStyles(pillarStyles)}>
+const LiveblogHeadline = ({ headline, pillar }: LiveblogHeadlineProps): JSX.Element =>
+    <LeftColumn className={LiveblogHeadlineStyles(getPillarStyles(pillar))}>
         <h1>{ headline }</h1>
     </LeftColumn>
 

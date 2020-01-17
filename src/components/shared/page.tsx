@@ -90,25 +90,32 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
 
 function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
     const article = fromCapi(JSDOM.fragment)(capi);
-    const body = partition(article.body).oks;
-    const content = insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body));
+    
     const articleScript = '/assets/article.js';
     const liveblogScript = '/assets/liveblog.js';
 
     switch (article.layout) {
         case Layout.Opinion:
+            const opinionBody = partition(article.body).oks;
+            const opinionContent =
+                insertAdPlaceholders(renderAll(imageSalt)(article.pillar, opinionBody));
+
             return (
                 <WithScript src={articleScript}>
                     <Opinion imageSalt={imageSalt} article={article}>
-                        {content}
+                        {opinionContent}
                     </Opinion>
                 </WithScript>
             );
         case Layout.Immersive:
+            const immersiveBody = partition(article.body).oks;
+            const immersiveContent =
+                insertAdPlaceholders(renderAll(imageSalt)(article.pillar, immersiveBody));
+
             return (
                 <WithScript src={articleScript}>
                     <Immersive imageSalt={imageSalt} article={article}>
-                        {content}
+                        {immersiveContent}
                     </Immersive>
                 </WithScript>
             );
@@ -116,6 +123,9 @@ function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
         case Layout.Feature:
         case Layout.Analysis:
         case Layout.Review:
+            const body = partition(article.body).oks;
+            const content = insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body));
+
             return (
                 <WithScript src={articleScript}>
                     <Standard imageSalt={imageSalt} article={article}>
@@ -126,7 +136,7 @@ function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
         case Layout.Liveblog:
             return (
                 <WithScript src={liveblogScript}>
-                    <LiveblogArticle capi={capi} article={article} imageSalt={imageSalt} />
+                    <LiveblogArticle article={article} imageSalt={imageSalt} />
                 </WithScript>
             );
         default:
