@@ -49,7 +49,7 @@ const articleAdStyles = css`
         }
 
         ${from.wide} {
-            margin-right: -388px;
+            margin-right: -398px;
         }
     }
     .ad-slot--outstream {

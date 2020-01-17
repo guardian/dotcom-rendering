@@ -21,8 +21,6 @@ const mainMedia = css`
     https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
     */
 
-    margin-bottom: 14px;
-
     ${until.tablet} {
         margin: 0;
         order: -1;
