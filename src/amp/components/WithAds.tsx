@@ -13,6 +13,7 @@ interface AdInfo {
     switches: {
         krux: boolean;
         ampPrebid: boolean;
+        permutive: boolean;
     };
     section?: string;
 }
@@ -26,6 +27,7 @@ export const WithAds: React.SFC<{
     const commercialConfig = {
         useKrux: adInfo.switches.krux,
         usePrebid: adInfo.switches.ampPrebid,
+        usePermutive: adInfo.switches.permutive,
     };
 
     const ad = (id: string): JSX.Element => (

@@ -84,6 +84,7 @@ export const Body: React.FC<{
         switches: {
             krux: config.switches.krux,
             ampPrebid: config.switches.ampPrebid,
+            permutive: config.switches.permutive,
         },
     };
 
