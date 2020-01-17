@@ -1,6 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { palette } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-foundations/mq';
+
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -13,24 +16,20 @@ import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
-
-import { palette } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-foundations/mq';
-
-import { Header } from '@root/src/web/components/Header/Header';
+import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
+import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
 import { Border } from './Border';
 import { GridItem } from './GridItem';
-
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
@@ -39,7 +38,6 @@ function checkForGE2019Badge(tags: TagType[]) {
             svgSrc: GE2019,
         };
     }
-    return;
 }
 
 const StandardGrid = ({
@@ -130,6 +128,9 @@ interface Props {
 export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     const { isPaidContent } = CAPI.config;
+
+    const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+
     return (
         <>
             <Section
@@ -209,6 +210,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <MainMedia
                             elements={CAPI.mainMediaElements}
                             pillar={CAPI.pillar}
+                            adTargeting={adTargeting}
                         />
                     </GridItem>
                     <GridItem area="meta">
@@ -265,7 +267,10 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             {!isPaidContent && (
                 <>
-                    <Section showTopBorder={false}>
+                    <Section
+                        showTopBorder={false}
+                        backgroundColour={palette.neutral[97]}
+                    >
                         <OutbrainContainer />
                     </Section>
 

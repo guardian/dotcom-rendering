@@ -14,10 +14,13 @@ type Props = {
     mediaDuration?: number;
 };
 
-const iconWrapperStyles = ({ pillar, mediaType }: Props) => css`
+const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
     width: 24px;
     height: 23px;
-    background-color: ${palette[pillar].main};
+    /* Below we force the colour to be bright if the pillar is news (because it looks better) */
+    background-color: ${pillar === 'news'
+        ? palette[pillar].bright
+        : palette[pillar].main};
     border-radius: 50%;
     display: inline-block;
 
@@ -32,8 +35,9 @@ const iconWrapperStyles = ({ pillar, mediaType }: Props) => css`
     }
 `;
 
-const durationStyles = ({ pillar }: Props) => css`
-    color: ${palette[pillar].main};
+const durationStyles = (pillar: Pillar) => css`
+    /* Below we force the colour to be bright if the pillar is news (because it looks better) */
+    color: ${pillar === 'news' ? palette[pillar].bright : palette[pillar].main};
     ${textSans.xsmall({ fontWeight: `bold` })}
 `;
 
@@ -65,9 +69,9 @@ export function secondsToDuration(secs?: number): string {
     return duration.join(':');
 }
 
-export const Icon = ({ mediaType }: Props) => {
+const Icon = ({ mediaType }: { mediaType: MediaType }) => {
     switch (mediaType) {
-        case 'Photo':
+        case 'Gallery':
             return <Photo />;
         case 'Video':
             return <Video />;
@@ -76,22 +80,34 @@ export const Icon = ({ mediaType }: Props) => {
     }
 };
 
-export const MediaIcon = (props: Props) => (
-    <span className={iconWrapperStyles(props)}>
-        <Icon {...props} />
+const MediaIcon = ({
+    mediaType,
+    pillar,
+}: {
+    mediaType: MediaType;
+    pillar: Pillar;
+}) => (
+    <span className={iconWrapperStyles(mediaType, pillar)}>
+        <Icon mediaType={mediaType} />
     </span>
 );
 
-export const MediaDuration = (props: Props) => (
-    <p className={durationStyles(props)}>
-        {secondsToDuration(props.mediaDuration)}
-    </p>
+const MediaDuration = ({
+    mediaDuration,
+    pillar,
+}: {
+    mediaDuration: number;
+    pillar: Pillar;
+}) => (
+    <p className={durationStyles(pillar)}>{secondsToDuration(mediaDuration)}</p>
 );
 
-export const MediaMeta = (props: Props) => (
+export const MediaMeta = ({ mediaType, mediaDuration, pillar }: Props) => (
     <div className={wrapperStyles}>
-        <MediaIcon {...props} />
+        <MediaIcon mediaType={mediaType} pillar={pillar} />
         &nbsp;
-        {props.mediaDuration && <MediaDuration {...props} />}
+        {mediaDuration && (
+            <MediaDuration mediaDuration={mediaDuration} pillar={pillar} />
+        )}
     </div>
 );

@@ -7,6 +7,7 @@ import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
+import { MediaMeta } from '@frontend/web/components/MediaMeta';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -19,7 +20,6 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
-import { MediaMeta } from './components/MediaMeta';
 
 type CoveragesType = {
     image: {
@@ -162,7 +162,10 @@ export const Card = ({
                                         )}
                                         {designType === 'Comment' && (
                                             <LinesWrapper>
-                                                <GuardianLines pillar="opinion" />
+                                                <GuardianLines
+                                                    pillar="opinion"
+                                                    count={4}
+                                                />
                                             </LinesWrapper>
                                         )}
                                         {designType === 'Media' && mediaType && (

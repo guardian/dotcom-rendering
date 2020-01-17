@@ -1,10 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-    Link as DropdownLink,
-    Dropdown,
-} from '@root/src/web/components/Dropdown';
+import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
 import { palette } from '@guardian/src-foundations';
@@ -140,7 +137,7 @@ const datingUrl =
     'https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader';
 const signInUrl = `${profileSubdomain}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in`;
 
-const identityLinks: DropdownLink[] = [
+const identityLinks: DropdownLinkType[] = [
     {
         url: `${profileSubdomain}/user/id/123`, // TODO use actual user ID once we have a user model
         title: 'Comments and replies',

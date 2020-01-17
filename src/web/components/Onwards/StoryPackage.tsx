@@ -137,6 +137,8 @@ export const StoryPackage = ({ content }: Props) => (
                         showPulsingDot: content[4].isLiveBlog,
                         showSlash: true,
                         showClock: false,
+                        mediaType: content[4].mediaType,
+                        mediaDuration: content[4].mediaDuration,
                     }}
                 />
             </LI>
@@ -162,6 +164,8 @@ export const StoryPackage = ({ content }: Props) => (
                         showPulsingDot: content[5].isLiveBlog,
                         showSlash: true,
                         showClock: false,
+                        mediaType: content[5].mediaType,
+                        mediaDuration: content[5].mediaDuration,
                     }}
                 />
             </LI>
@@ -187,6 +191,8 @@ export const StoryPackage = ({ content }: Props) => (
                         showPulsingDot: content[6].isLiveBlog,
                         showSlash: true,
                         showClock: false,
+                        mediaType: content[6].mediaType,
+                        mediaDuration: content[6].mediaDuration,
                     }}
                 />
             </LI>
@@ -212,6 +218,8 @@ export const StoryPackage = ({ content }: Props) => (
                         showPulsingDot: content[7].isLiveBlog,
                         showSlash: true,
                         showClock: false,
+                        mediaType: content[7].mediaType,
+                        mediaDuration: content[7].mediaDuration,
                     }}
                 />
             </LI>

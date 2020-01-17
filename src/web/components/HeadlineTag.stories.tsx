@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { HeadlineTag } from './HeadlineTag';
 import { css } from 'emotion';
+import { HeadlineTag } from './HeadlineTag';
 
 /* tslint:disable */
 export default {

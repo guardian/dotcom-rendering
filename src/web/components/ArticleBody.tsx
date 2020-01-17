@@ -119,7 +119,8 @@ const linkColour = pillarMap(
 export const ArticleBody: React.FC<{
     CAPI: CAPIType;
     isShowcase?: boolean;
-}> = ({ CAPI, isShowcase }) => {
+    adTargeting?: AdTargeting;
+}> = ({ CAPI, isShowcase, adTargeting }) => {
     return (
         <div
             className={cx(bodyStyle, linkColour[CAPI.pillar], {
@@ -141,6 +142,7 @@ export const ArticleBody: React.FC<{
                 elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
                 pillar={CAPI.pillar}
                 designType={CAPI.designType}
+                adTargeting={adTargeting}
             />
         </div>
     );

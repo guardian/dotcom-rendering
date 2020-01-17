@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 
-import { EditionDropdown } from '@frontend/web/components/Header/EditionDropdown';
+import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { Hide } from '@root/src/web/components/Hide';
-import { getCookie } from '@root/src/web/browser/cookie';
+import { Logo } from '@frontend/web/components/Logo';
+import { Links } from '@frontend/web/components/Links';
 
-import { Logo } from './Logo';
-import { Links } from './Links/Links';
+import { getCookie } from '@root/src/web/browser/cookie';
 
 const headerStyles = css`
     /* Ensure header height contains it's children */
@@ -38,16 +38,15 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
 
     public render() {
         const { isSignedIn } = this.state;
+        const { edition } = this.props;
 
         return (
             <header className={headerStyles}>
                 <Hide when="below" breakpoint="desktop">
                     <div data-island="edition-root">
                         <EditionDropdown
-                            edition={this.props.edition}
-                            dataLinkName={
-                                'nav2 : topbar : edition-picker: toggle'
-                            }
+                            edition={edition}
+                            dataLinkName="nav2 : topbar : edition-picker: toggle"
                         />
                     </div>
                 </Hide>

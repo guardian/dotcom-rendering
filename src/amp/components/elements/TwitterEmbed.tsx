@@ -29,7 +29,7 @@ export const TwitterEmbed: React.FC<{
             data-tweetid={element.id}
         >
             {fallbackHTML && (
-                <div placeholder={''} className={TextStyle(pillar)}>
+                <div placeholder="" className={TextStyle(pillar)}>
                     <blockquote
                         dangerouslySetInnerHTML={{ __html: fallbackHTML }}
                     />

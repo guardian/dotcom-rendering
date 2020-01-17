@@ -15,7 +15,7 @@ export const defaultStory = () => {
 defaultStory.story = { name: 'default' };
 
 export const SmallWarning = () => {
-    return <AgeWarning age="5 months old" size={'small'} />;
+    return <AgeWarning age="5 months old" size="small" />;
 };
 SmallWarning.story = { name: 'with size set to small' };
 

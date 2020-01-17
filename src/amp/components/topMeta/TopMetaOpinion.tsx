@@ -99,8 +99,7 @@ export const TopMetaOpinion: React.FC<{
     articleData: ArticleModel;
     pillar: Pillar;
 }> = ({ articleData, pillar }) => {
-    const branding =
-        articleData.commercialProperties[articleData.editionId].branding;
+    const {branding} = articleData.commercialProperties[articleData.editionId];
 
     return (
         <header>

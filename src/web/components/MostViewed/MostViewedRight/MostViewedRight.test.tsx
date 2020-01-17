@@ -15,7 +15,7 @@ describe('MostViewedList', () => {
     beforeEach(() => {
         useApi.mockReset();
     });
-    it('should call the api and render the response as expected', async () => {
+    it('should call the api and render the response as expected', () => {
         useApi.mockReturnValue(response);
 
         const { getAllByText } = render(<MostViewedRight pillar="news" />);
@@ -33,7 +33,7 @@ describe('MostViewedList', () => {
         expect(getAllByText(/This article is more than/).length).toBe(2);
     });
 
-    it('should implement a limit on the number of items', async () => {
+    it('should implement a limit on the number of items', () => {
         useApi.mockReturnValue(response);
 
         const { getAllByText } = render(

@@ -22,8 +22,6 @@ export const designTypes: DesignType[] = [
 export const designTypeDefault = (defaultVal: any) =>
     designTypes.reduce(
         (prev, curr) =>
-            Object.assign({}, prev, {
-                [curr]: defaultVal,
-            }),
+            ({ ...prev, [curr]: defaultVal,}),
         {} as DesignTypesObj,
     );

@@ -30,9 +30,13 @@ const decideColour = (
         case 'Live':
             // TODO: We need this colour in source foundation
             return inCard ? decidePillarLight(pillar) : palette[pillar].main;
+        case 'Media':
+            // On Media cards, when pillar is news we use the bright colour as this looks better on a dark background vs. main
+            return inCard && pillar === 'news'
+                ? palette[pillar].bright
+                : palette[pillar].main;
         case 'Feature':
         case 'Interview':
-        case 'Media':
         case 'Analysis':
         case 'Article':
         case 'Review':

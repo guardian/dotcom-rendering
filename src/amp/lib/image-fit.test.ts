@@ -1,6 +1,6 @@
 import { bestFitImage, heightEstimate } from './image-fit';
 
-test('chooses smallest image that is still greater than column width', async () => {
+test('chooses smallest image that is still greater than column width', () => {
     const images = [
         {
             weighting: 'inline' as Weighting,
@@ -70,12 +70,12 @@ test('if no image is greater than column width, just return the biggest availabl
     );
 });
 
-test('throws an error if no image', async () => {
+test('throws an error if no image', () => {
     const images: ImageSource[] = [];
     expect(() => bestFitImage(images, 600)).toThrow();
 });
 
-test('it gets the correct image height, using aspect ratio', async () => {
+test('it gets the correct image height, using aspect ratio', () => {
     const comparisonImage: Image = {
         index: 1234,
         fields: {
@@ -87,7 +87,7 @@ test('it gets the correct image height, using aspect ratio', async () => {
         mimeType: 'jpg',
         url: 'https://media.guim.co.uk/abc/1000',
     };
-    const width: number = 600;
+    const width = 600;
     const h = heightEstimate(comparisonImage, width);
 
     expect(h).toBe(360);

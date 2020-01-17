@@ -143,7 +143,7 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
 
     const elementsWithLength = getElementsWithLength(elements);
 
-    for (let i = 0; i < elementsWithLength.length; i = i + 1) {
+    for (let i = 0; i < elementsWithLength.length; i += 1) {
         if (adCount < AD_LIMIT && isTextElement(elements[i])) {
             charsSinceLastAd += elementsWithLength[i].length;
 

@@ -18,7 +18,7 @@ const init = () => {
              * Sentry will have reported any unhandled promise
              * rejections from this chain so return here.
              */
-            return;
+            
         }
     });
 };
