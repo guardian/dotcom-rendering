@@ -62,6 +62,16 @@ export const ArticleRenderer: React.FC<{
                             role={element.role}
                         />
                     );
+                case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+                    return (
+                        <TextBlockComponent
+                            key={i}
+                            html={element.html}
+                            pillar={pillar}
+                            designType={designType}
+                            dropCap={false} // TODO: Plug in the api response here when we have it
+                        />
+                    );
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YouTubeComponent
