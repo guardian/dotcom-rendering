@@ -55,6 +55,11 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
             top: -10px;
         }
     }
+
+    aside {
+        margin-left: 0;
+        width: 100%;
+    }
 `;
 
 interface LiveblogBlockProps {

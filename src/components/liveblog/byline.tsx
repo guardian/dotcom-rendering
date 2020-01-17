@@ -26,7 +26,6 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
                 font-style: normal;
                 font-weight: 500;
                 padding-top: 4px;
-                display: block;
             }
         }
 
@@ -52,6 +51,10 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
             width: 80%;
             float: left;
             display: inline-block;
+
+            a {
+                background: none;
+            }
         }
     }
 `;
