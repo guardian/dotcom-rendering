@@ -39,6 +39,7 @@ export const Caption: React.FC<{
     credit?: string;
     displayCredit?: boolean;
     role?: RoleType;
+    isMainMedia?: boolean;
 }> = ({
     captionText,
     pillar,
@@ -48,6 +49,7 @@ export const Caption: React.FC<{
     displayCredit = true,
     children,
     role,
+    isMainMedia,
 }) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
@@ -84,7 +86,7 @@ export const Caption: React.FC<{
     };
 
     const shouldLimitWidth =
-        role && (role === 'showcase' || role === 'supporting');
+        !isMainMedia && role && (role === 'showcase' || role === 'supporting');
 
     return (
         <figure className={figureStyle}>

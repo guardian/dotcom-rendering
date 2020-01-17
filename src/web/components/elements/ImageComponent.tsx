@@ -69,7 +69,8 @@ export const ImageComponent: React.FC<{
     pillar: Pillar;
     hideCaption?: boolean;
     role: RoleType;
-}> = ({ element, pillar, hideCaption, role }) => {
+    isMainMedia?: boolean;
+}> = ({ element, pillar, hideCaption, role, isMainMedia }) => {
     const sources = makeSources(element.imageSources, element.role);
     if (hideCaption) {
         return (
@@ -88,6 +89,7 @@ export const ImageComponent: React.FC<{
             credit={element.data.credit}
             displayCredit={true}
             role={role}
+            isMainMedia={isMainMedia}
         >
             <Picture
                 sources={sources}

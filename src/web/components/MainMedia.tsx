@@ -64,6 +64,7 @@ function renderElement(
                     pillar={pillar}
                     hideCaption={hideCaption}
                     role={element.role}
+                    isMainMedia={true}
                 />
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
