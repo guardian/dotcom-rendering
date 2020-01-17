@@ -31,7 +31,7 @@ interface ArticleFields {
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     publishDate: string;
-    mainImage: Option<BlockElement>;
+    mainImage: Option<Image>;
     contributors: Tag[];
     series: Tag;
     commentable: boolean;
@@ -58,10 +58,7 @@ type Article
     | Standard
     ;
 
-type BodyElement = {
-    kind: ElementType.TEXT;
-    doc: DocumentFragment;
-} | {
+type Image = {
     kind: ElementType.IMAGE;
     alt: string;
     caption: string;
@@ -70,7 +67,12 @@ type BodyElement = {
     file: string;
     width: number;
     height: number;
-} | {
+}
+
+type BodyElement = {
+    kind: ElementType.TEXT;
+    doc: DocumentFragment;
+} | Image | {
     kind: ElementType.PULLQUOTE;
     quote: string;
     attribution: Option<string>;
@@ -114,6 +116,22 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
+const parseImage = (element: BlockElement): Option<Image> => {
+    const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
+    const { alt, caption, displayCredit, credit } = element.imageTypeData;
+
+    return fromNullable(masterAsset).map(asset => ({
+        kind: ElementType.IMAGE,
+        alt,
+        caption,
+        displayCredit,
+        credit,
+        file: asset.file,
+        width: asset.typeData.width,
+        height: asset.typeData.height,
+    }));
+}
+
 const parseElement =
     (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
 
@@ -123,22 +141,9 @@ const parseElement =
             return new Ok({ kind: ElementType.TEXT, doc: docParser(element.textTypeData.html) });
 
         case ElementType.IMAGE:
-
-            const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
-            const { alt, caption, displayCredit, credit } = element.imageTypeData;
-            const imageBlock: Option<Result<string, BodyElement>> = fromNullable(masterAsset)
-                .map(asset => new Ok({
-                    kind: ElementType.IMAGE,
-                    alt,
-                    caption,
-                    displayCredit,
-                    credit,
-                    file: asset.file,
-                    width: asset.typeData.width,
-                    height: asset.typeData.height,
-                }));
-
-            return imageBlock.withDefault(new Err('I couldn\'t find a master asset'));
+            return parseImage(element)
+                .map<Result<string, Image>>(image => new Ok(image))
+                .withDefault(new Err('I couldn\'t find a master asset'));
 
         case ElementType.PULLQUOTE:
 
@@ -193,7 +198,7 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
         byline: content.fields.byline,
         bylineHtml: fromNullable(content.fields.bylineHtml).map(docParser),
         publishDate: content.webPublicationDate,
-        mainImage: articleMainImage(content),
+        mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),
         series: articleSeries(content),
         commentable: content.fields.commentable,
@@ -270,5 +275,6 @@ export {
     LiveBlock,
     Layout,
     BodyElement,
+    Image,
     fromCapi,
 };

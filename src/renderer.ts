@@ -10,7 +10,6 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { imageRatioStyles } from 'components/blocks/image';
 import { BodyElement } from 'article';
 
 
@@ -114,14 +113,43 @@ interface ImageProps {
     url: string;
     alt: string;
     salt: string;
-    caption: string;
-    displayCredit: boolean;
-    credit: string;
+    sizes: string;
     width: number;
     height: number;
 }
 
-const imageStyles = css`
+type FigureElement = ImageProps & {
+    caption: string;
+    displayCredit: boolean;
+    credit: string;
+    className?: SerializedStyles;
+}
+
+const imageStyles = (width: number, height: number): SerializedStyles => css`
+    height: calc(100vw * ${height / width});
+    background: ${palette.neutral[97]};
+
+    ${from.phablet} {
+        height: calc(620px * ${height / width});
+    }
+`;
+
+const ImageElement = (props: ImageProps): ReactElement =>
+    styledH('img', {
+        sizes: props.sizes,
+        srcSet: srcset(props.salt)(props.url),
+        alt: props.alt,
+        src: transformUrl(props.salt, props.url, 500),
+        css: imageStyles(props.width, props.height),
+    });
+
+const FigureElement = (props: FigureElement): ReactElement =>
+    styledH('figure', { css: props.className },
+        h(ImageElement, props),
+        h('figcaption', null, makeCaption(props.caption, props.displayCredit, props.credit)),
+    );
+
+const bodyImageStyles = css`
     margin-left: ${basePx(-1)};
     margin-right: ${basePx(-1)};
 
@@ -151,19 +179,8 @@ const imageStyles = css`
     }
 `;
 
-const Image = (props: ImageProps): ReactElement => {
-    const { url, alt, salt, caption, displayCredit, credit, width, height } = props;
-    return styledH('figure', { css: imageStyles },
-        h('img', {
-            css: imageRatioStyles("100vw", width ?? 5, height ?? 3),
-            sizes: '100%',
-            srcSet: srcset(salt)(url),
-            alt,
-            src: transformUrl(salt, url, 500),
-        }),
-        h('figcaption', null, makeCaption(caption, displayCredit, credit)),
-    );
-}
+const BodyImage = (props: Omit<FigureElement, 'sizes'>): ReactElement =>
+    h(FigureElement, { ...props, sizes: '100vw', className: bodyImageStyles });
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     font-weight: 200;
@@ -278,7 +295,7 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 
         case ElementType.IMAGE:
             const { file, alt, caption, displayCredit, credit, width, height } = element;
-            return h(Image, {
+            return h(BodyImage, {
                 url: file,
                 alt,
                 salt,
@@ -287,7 +304,7 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
                 credit,
                 key,
                 width,
-                height
+                height,
             });
 
         case ElementType.PULLQUOTE:
@@ -319,4 +336,5 @@ const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): R
 export {
     renderAll,
     text as renderText,
+    ImageElement,
 };
