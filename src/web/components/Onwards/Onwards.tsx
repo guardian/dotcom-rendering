@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useApi } from '@frontend/web/components/lib/api';
+import { joinUrl } from '@frontend/web/components/lib/joinUrl';
 
 import { OnwardsLayout } from './OnwardsLayout';
 
@@ -37,25 +38,6 @@ export const WHITELISTED_TAGS = [
     'football/tottenham-hotspur',
     'football/liverpool',
 ];
-
-const joinUrl = (parts: string[]) => {
-    // Remove any leading or trailing slashes from all parts and then join cleanly on
-    // a single slash - prevents malformed urls
-    const trimmed = parts
-        .map(part => {
-            // Trim left
-            if (part.substr(0, 1) === '/') return part.slice(1);
-            return part;
-        })
-        .map(part => {
-            // Trim right
-            if (part.substr(part.length - 1, 1) === '/')
-                return part.slice(0, -1);
-            return part;
-        });
-
-    return trimmed.join('/');
-};
 
 const firstPopularTag = (pageTags: string[], isPaidContent: boolean) => {
     // This function looks for the first tag in pageTags, that also exists in our whitelist
@@ -169,7 +151,6 @@ export const Onwards = ({
                 layout: 'fourAndFour',
             });
         }
-
     }
 
     if (!onwardSections || onwardSections.length === 0) {
