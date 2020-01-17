@@ -10,6 +10,7 @@ const hideBelowDesktop = css`
 
     ${from.desktop} {
         /* above 980 */
+        height: 100%;
         display: block;
         flex-basis: 300px;
         flex-grow: 0;
