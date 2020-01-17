@@ -120,6 +120,63 @@ const ShowcaseGrid = ({
     </div>
 );
 
+const maxWidth = css`
+    ${from.desktop} {
+        max-width: 620px;
+    }
+`;
+
+const PositionHeadline = ({
+    designType,
+    children,
+}: {
+    designType: DesignType;
+    children: JSX.Element | JSX.Element[];
+}) => {
+    switch (designType) {
+        case 'Interview':
+            return (
+                <div
+                    className={css`
+                        ${from.leftCol} {
+                            margin-bottom: -100px;
+                        }
+                    `}
+                >
+                    <div className={maxWidth}>{children}</div>
+                </div>
+            );
+        case 'Immersive':
+            return (
+                <div
+                    className={css`
+                        ${from.leftCol} {
+                            margin-top: -100px;
+                        }
+                    `}
+                >
+                    {children}
+                </div>
+            );
+        case 'Article':
+        case 'Media':
+        case 'Review':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Feature':
+        case 'Comment':
+        case 'Analysis':
+        default:
+            return <div className={maxWidth}>{children}</div>;
+    }
+};
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -190,13 +247,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <Border />
                     </GridItem>
                     <GridItem area="headline">
-                        <div
-                            className={css`
-                                ${from.leftCol} {
-                                    margin-bottom: -100px;
-                                }
-                            `}
-                        >
+                        <PositionHeadline designType={CAPI.designType}>
                             <ArticleHeadline
                                 headlineString={CAPI.headline}
                                 designType={CAPI.designType}
@@ -205,7 +256,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 tags={CAPI.tags}
                                 byline={CAPI.author.byline}
                             />
-                        </div>
+                        </PositionHeadline>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst

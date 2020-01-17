@@ -120,6 +120,12 @@ const StandardGrid = ({
     </div>
 );
 
+const maxWidth = css`
+    ${from.desktop} {
+        max-width: 620px;
+    }
+`;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -190,14 +196,16 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <Border />
                     </GridItem>
                     <GridItem area="headline">
-                        <ArticleHeadline
-                            headlineString={CAPI.headline}
-                            designType={CAPI.designType}
-                            pillar={CAPI.pillar}
-                            webPublicationDate={CAPI.webPublicationDate}
-                            tags={CAPI.tags}
-                            byline={CAPI.author.byline}
-                        />
+                        <div className={maxWidth}>
+                            <ArticleHeadline
+                                headlineString={CAPI.headline}
+                                designType={CAPI.designType}
+                                pillar={CAPI.pillar}
+                                webPublicationDate={CAPI.webPublicationDate}
+                                tags={CAPI.tags}
+                                byline={CAPI.author.byline}
+                            />
+                        </div>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
