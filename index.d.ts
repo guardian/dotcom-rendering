@@ -327,11 +327,12 @@ interface CardHeadlineType {
 /**
  * Onwards
  */
-type OnwardsIdType = 'story-package' | 'more-in-series';
+type OnwardsLayoutType = 'fourAndFour';
 
 type OnwardsType = {
     heading: string;
     trails: TrailType[];
+    layout: OnwardsLayoutType;
 };
 
 /**
@@ -363,6 +364,8 @@ interface ConfigType {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sharedAdTargeting: { [key: string]: any };
     isPaidContent?: boolean;
+    keywordIds: string[];
+    showRelatedContent: boolean;
 }
 
 interface GADataType {

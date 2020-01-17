@@ -10,7 +10,6 @@ import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkCom
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { Onwards } from '@frontend/web/components/Onwards/Onwards';
-import { StoryPackage } from '@frontend/web/components/Onwards/StoryPackage';
 
 type IslandProps =
     | {
@@ -50,9 +49,14 @@ type IslandProps =
       }
     | {
           ajaxUrl: string;
+          hasRelated: boolean;
+          hasStoryPackage: boolean;
+          isAdFreeUser: boolean;
           pageId: string;
-          pathId: OnwardsIdType;
-          component: React.ElementType;
+          isPaidContent: boolean;
+          showRelatedContent: boolean;
+          keywordIds: string[];
+          contentType: string;
       };
 
 type IslandType = {
@@ -142,11 +146,16 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             component: Onwards,
             props: {
                 ajaxUrl: CAPI.config.ajaxUrl,
+                hasRelated: CAPI.hasRelated,
+                hasStoryPackage: CAPI.hasStoryPackage,
+                isAdFreeUser: CAPI.isAdFreeUser,
                 pageId: CAPI.pageId,
-                pathId: 'story-package',
-                component: StoryPackage,
+                isPaidContent: CAPI.config.isPaidContent,
+                showRelatedContent: CAPI.config.showRelatedContent,
+                keywordIds: CAPI.config.keywordIds,
+                contentType: CAPI.contentType,
             },
-            root: 'story-package',
+            root: 'onwards-content',
         },
     ];
 

@@ -115,4 +115,5 @@ export const storyPackageTrails: OnwardsType = {
             designType: 'Article',
         },
     ],
+    layout: 'fourAndFour',
 };
