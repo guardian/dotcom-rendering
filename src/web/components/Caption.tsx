@@ -71,8 +71,8 @@ export const Caption: React.FC<{
         if (dirtyHtml) {
             return (
                 <span
-                    // tslint:disable-line:react-no-dangerous-html
                     className={captionLink}
+                    // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{
                         __html: captionText || '',
                     }}
