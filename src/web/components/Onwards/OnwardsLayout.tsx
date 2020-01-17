@@ -13,11 +13,12 @@ type Props = {
 };
 
 const decideLayout = (layout: OnwardsLayoutType, trails: TrailType[]) => {
+    // TODO: This switch is a stub pending https://trello.com/c/rBoduy1y/1065-dynamic-onward-layouts
     switch (layout) {
         case 'fourAndFour':
             return <StoryPackage content={trails} />;
         default:
-            return <></>;
+            return <StoryPackage content={trails} />;
     }
 };
 
