@@ -131,7 +131,7 @@ export const Onwards = ({
 
         const { data } = useApi(joinUrl([ajaxUrl, popularInTagUrl]));
 
-        if (data?.trails?.length > 7) {
+        if (data && data.trails && data?.trails?.length > 7) {
             onwardSections.push({
                 heading: data.heading,
                 trails: data.trails,
@@ -144,7 +144,7 @@ export const Onwards = ({
 
         const { data } = useApi(joinUrl([ajaxUrl, relatedUrl]));
 
-        if (data?.trails?.length > 7) {
+        if (data && data.trails && data?.trails?.length > 7) {
             onwardSections.push({
                 heading: data.heading,
                 trails: data.trails,
