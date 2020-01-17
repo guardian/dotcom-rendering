@@ -501,7 +501,7 @@ export const CAPI: CAPIType = {
             a9: false,
         },
         adUnit: '/59666047/theguardian.com/film/article/ng',
-        isSensitive: '',
+        isSensitive: false,
         videoDuration: 0,
         edition: '',
         section: '',
