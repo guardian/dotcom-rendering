@@ -97,6 +97,12 @@ export const Onwards = ({
 }: Props) => {
     const onwardSections: OnwardsType[] = [];
 
+    const dontShowRelatedContent = !showRelatedContent || !hasRelated;
+
+    // Related content can be a collection of articles based on
+    // two things, 1: A popular tag, or 2: A generic text match
+    const tagToFilterBy = firstPopularTag(keywordIds, isPaidContent);
+
     if (hasStoryPackage) {
         // Always fetch the story package if it exists
         const { data } = useApi(
@@ -115,20 +121,11 @@ export const Onwards = ({
     } else if (isAdFreeUser && isPaidContent) {
         // Don't show any related content (other than story packages) for
         // adfree users when the content is paid for
-    } else if (showRelatedContent && hasRelated) {
-        // Related content can be a collection of articles based on
-        // two things, 1: A popular tag, or 2: A generic text match
-        const popularTag = firstPopularTag(keywordIds, isPaidContent);
-
-        let relatedUrl;
-        if (popularTag) {
-            // Use popular in tag endpoint
-            relatedUrl = `/popular-in-tag/${popularTag}.json`;
-        } else {
-            // Default to generic related endpoint
-            relatedUrl = `/related/${pageId}.json`;
-        }
-        relatedUrl += '?dcr=true';
+    } else if (dontShowRelatedContent) {
+        // Then don't show related content
+    } else if (tagToFilterBy) {
+        // Use popular in tag endpoint
+        let popularInTagUrl = `/popular-in-tag/${tagToFilterBy}.json?dcr=true`;
 
         // --- Tag excludes --- //
         const tagsToExclude = [];
@@ -147,20 +144,32 @@ export const Onwards = ({
         // Add any exclude tags to the url
         if (tagsToExclude.length > 0) {
             const queryParams = tagsToExclude.map(tag => `exclude-tag=${tag}`);
-            relatedUrl += `&${queryParams.join('&')}`;
+            popularInTagUrl += `&${queryParams.join('&')}`;
         }
 
-        const { data } = useApi(joinUrl([ajaxUrl, relatedUrl]));
+        const { data } = useApi(joinUrl([ajaxUrl, popularInTagUrl]));
 
-        const relatedContent = data;
-
-        if (data && data.trails && data.trails.length > 7) {
+        if (data?.trails?.length > 7) {
             onwardSections.push({
-                heading: relatedContent.heading,
-                trails: relatedContent.trails,
+                heading: data.heading,
+                trails: data.trails,
                 layout: 'fourAndFour',
             });
         }
+    } else {
+        // Default to generic related endpoint
+        const relatedUrl = `/related/${pageId}.json?dcr=true`;
+
+        const { data } = useApi(joinUrl([ajaxUrl, relatedUrl]));
+
+        if (data?.trails?.length > 7) {
+            onwardSections.push({
+                heading: data.heading,
+                trails: data.trails,
+                layout: 'fourAndFour',
+            });
+        }
+
     }
 
     if (!onwardSections || onwardSections.length === 0) {
