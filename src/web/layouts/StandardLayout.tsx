@@ -47,72 +47,88 @@ const StandardGrid = ({
 }) => (
     <div
         className={css`
-            display: grid;
-            width: 100%;
-
-            grid-column-gap: 10px;
-
-            ${from.wide} {
-                grid-template-columns:
-                    219px /* Left Column (220 - 1px border) */
-                    1px /* Vertical grey border */
-                    1fr /* Main content */
-                    300px; /* Right Column */
-                grid-template-areas:
-                    'title  border  headline    right-column'
-                    '.      border  standfirst  right-column'
-                    'meta   border  media       right-column'
-                    '.      border  body        right-column';
-            }
-
-            ${until.wide} {
-                grid-template-columns:
-                    150px /* Left Column (220 - 1px border) */
-                    1px /* Vertical grey border */
-                    1fr /* Main content */
-                    300px; /* Right Column */
-                grid-template-areas:
-                    'title  border  headline    right-column'
-                    '.      border  standfirst  right-column'
-                    'meta   border  media       right-column'
-                    '.      border  body        right-column';
-            }
-
+            /* IE Fallback */
+            display: flex;
+            flex-direction: column;
             ${until.leftCol} {
-                grid-template-columns:
-                    1fr /* Main content */
-                    300px; /* Right Column */
-                grid-template-areas:
-                    'title      right-column'
-                    'headline   right-column'
-                    'standfirst right-column'
-                    'media      right-column'
-                    'meta       right-column'
-                    'body       right-column';
+                margin-left: 0px;
+            }
+            ${from.leftCol} {
+                margin-left: 151px;
+            }
+            ${from.wide} {
+                margin-left: 230px;
             }
 
-            ${until.desktop} {
-                grid-template-columns: 1fr; /* Main content */
-                grid-template-areas:
-                    'title'
-                    'headline'
-                    'standfirst'
-                    'media'
-                    'meta'
-                    'body';
-            }
+            @supports (display: grid) {
+                display: grid;
+                width: 100%;
+                margin-left: 0;
 
-            ${until.tablet} {
-                grid-column-gap: 0px;
+                grid-column-gap: 10px;
 
-                grid-template-columns: 1fr; /* Main content */
-                grid-template-areas:
-                    'media'
-                    'title'
-                    'headline'
-                    'standfirst'
-                    'meta'
-                    'body';
+                ${from.wide} {
+                    grid-template-columns:
+                        219px /* Left Column (220 - 1px border) */
+                        1px /* Vertical grey border */
+                        1fr /* Main content */
+                        300px; /* Right Column */
+                    grid-template-areas:
+                        'title  border  headline    right-column'
+                        '.      border  standfirst  right-column'
+                        'meta   border  media       right-column'
+                        '.      border  body        right-column';
+                }
+
+                ${until.wide} {
+                    grid-template-columns:
+                        150px /* Left Column (220 - 1px border) */
+                        1px /* Vertical grey border */
+                        1fr /* Main content */
+                        300px; /* Right Column */
+                    grid-template-areas:
+                        'title  border  headline    right-column'
+                        '.      border  standfirst  right-column'
+                        'meta   border  media       right-column'
+                        '.      border  body        right-column';
+                }
+
+                ${until.leftCol} {
+                    grid-template-columns:
+                        1fr /* Main content */
+                        300px; /* Right Column */
+                    grid-template-areas:
+                        'title      right-column'
+                        'headline   right-column'
+                        'standfirst right-column'
+                        'media      right-column'
+                        'meta       right-column'
+                        'body       right-column';
+                }
+
+                ${until.desktop} {
+                    grid-template-columns: 1fr; /* Main content */
+                    grid-template-areas:
+                        'title'
+                        'headline'
+                        'standfirst'
+                        'media'
+                        'meta'
+                        'body';
+                }
+
+                ${until.tablet} {
+                    grid-column-gap: 0px;
+
+                    grid-template-columns: 1fr; /* Main content */
+                    grid-template-areas:
+                        'media'
+                        'title'
+                        'headline'
+                        'standfirst'
+                        'meta'
+                        'body';
+                }
             }
         `}
     >
@@ -224,17 +240,19 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         </div>
                     </GridItem>
                     <GridItem area="meta">
-                        <ArticleMeta
-                            designType={CAPI.designType}
-                            pillar={CAPI.pillar}
-                            pageId={CAPI.pageId}
-                            webTitle={CAPI.webTitle}
-                            author={CAPI.author}
-                            tags={CAPI.tags}
-                            webPublicationDateDisplay={
-                                CAPI.webPublicationDateDisplay
-                            }
-                        />
+                        <div className={maxWidth}>
+                            <ArticleMeta
+                                designType={CAPI.designType}
+                                pillar={CAPI.pillar}
+                                pageId={CAPI.pageId}
+                                webTitle={CAPI.webTitle}
+                                author={CAPI.author}
+                                tags={CAPI.tags}
+                                webPublicationDateDisplay={
+                                    CAPI.webPublicationDateDisplay
+                                }
+                            />
+                        </div>
                     </GridItem>
                     <GridItem area="body">
                         <ArticleContainer>

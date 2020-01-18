@@ -18,6 +18,12 @@ const hideBelowDesktop = css`
     }
 `;
 
+const hideForIE = css`
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        display: none;
+    }
+`;
+
 const padding = css`
     padding-top: 6px;
 `;
@@ -28,6 +34,8 @@ type Props = {
 
 export const RightColumn = ({ children }: Props) => {
     return (
-        <section className={cx(hideBelowDesktop, padding)}>{children}</section>
+        <section className={cx(hideBelowDesktop, hideForIE, padding)}>
+            {children}
+        </section>
     );
 };
