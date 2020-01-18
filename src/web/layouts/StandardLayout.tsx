@@ -215,11 +215,13 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         />
                     </GridItem>
                     <GridItem area="media">
-                        <MainMedia
-                            elements={CAPI.mainMediaElements}
-                            pillar={CAPI.pillar}
-                            adTargeting={adTargeting}
-                        />
+                        <div className={maxWidth}>
+                            <MainMedia
+                                elements={CAPI.mainMediaElements}
+                                pillar={CAPI.pillar}
+                                adTargeting={adTargeting}
+                            />
+                        </div>
                     </GridItem>
                     <GridItem area="meta">
                         <ArticleMeta
@@ -236,11 +238,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="body">
                         <ArticleContainer>
-                            <main
-                                className={css`
-                                    max-width: 620px;
-                                `}
-                            >
+                            <main className={maxWidth}>
                                 <ArticleBody CAPI={CAPI} />
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta
