@@ -14,18 +14,18 @@ interface Props {
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
 export const MostViewedRightWrapper = ({ pillar, limitItems }: Props) => {
     const bodyRef = useRef<any>(null);
-    const [myHeight, setMyHeight] = useState(0);
+    const [availableHeight, setAvailableHeight] = useState(0);
 
     useEffect(() => {
-        const { clientHeight } = bodyRef.current;
-        setMyHeight(clientHeight);
-    }, [myHeight]);
+        const { offsetHeight } = bodyRef.current;
+        setAvailableHeight(offsetHeight);
+    }, [availableHeight]);
 
     // Minimum height needed to render MostViewedRight is its own outer height.
-    const minWrapperHeight = 550;
+    const heightRequired = 482 + 24 + 24;
     return (
         <div ref={bodyRef} className={flexGrow}>
-            {myHeight > minWrapperHeight ? (
+            {availableHeight > heightRequired ? (
                 <MostViewedRight pillar={pillar} limitItems={limitItems} />
             ) : null}
         </div>
