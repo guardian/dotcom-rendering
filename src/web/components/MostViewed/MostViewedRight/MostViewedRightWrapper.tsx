@@ -13,12 +13,14 @@ interface Props {
 
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
 export const MostViewedRightWrapper = ({ pillar, limitItems }: Props) => {
-    const bodyRef = useRef<any>(null);
+    const bodyRef = useRef<HTMLDivElement>(null);
     const [availableHeight, setAvailableHeight] = useState(0);
 
     useEffect(() => {
-        const { offsetHeight } = bodyRef.current;
-        setAvailableHeight(offsetHeight);
+        if (bodyRef.current) {
+            const { offsetHeight } = bodyRef.current;
+            setAvailableHeight(offsetHeight);
+        }
     }, [availableHeight]);
 
     // Minimum height needed to render MostViewedRight is its own outer height.
