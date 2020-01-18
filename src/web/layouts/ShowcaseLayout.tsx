@@ -177,6 +177,44 @@ const PositionHeadline = ({
     }
 };
 
+const PositionMeta = ({
+    designType,
+    children,
+}: {
+    designType: DesignType;
+    children: JSX.Element | JSX.Element[];
+}) => {
+    switch (designType) {
+        case 'Interview':
+            return (
+                <div
+                    className={css`
+                        margin-top: 36px;
+                    `}
+                >
+                    {children}
+                </div>
+            );
+        case 'Immersive':
+        case 'Article':
+        case 'Media':
+        case 'Review':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Feature':
+        case 'Comment':
+        case 'Analysis':
+        default:
+            return <>{children}</>;
+    }
+};
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -273,17 +311,19 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         />
                     </GridItem>
                     <GridItem area="meta">
-                        <ArticleMeta
-                            designType={CAPI.designType}
-                            pillar={CAPI.pillar}
-                            pageId={CAPI.pageId}
-                            webTitle={CAPI.webTitle}
-                            author={CAPI.author}
-                            tags={CAPI.tags}
-                            webPublicationDateDisplay={
-                                CAPI.webPublicationDateDisplay
-                            }
-                        />
+                        <PositionMeta designType={CAPI.designType}>
+                            <ArticleMeta
+                                designType={CAPI.designType}
+                                pillar={CAPI.pillar}
+                                pageId={CAPI.pageId}
+                                webTitle={CAPI.webTitle}
+                                author={CAPI.author}
+                                tags={CAPI.tags}
+                                webPublicationDateDisplay={
+                                    CAPI.webPublicationDateDisplay
+                                }
+                            />
+                        </PositionMeta>
                     </GridItem>
                     <GridItem area="body">
                         <ArticleContainer>
