@@ -186,7 +186,6 @@ const renderHeadline = ({
     switch (designType) {
         case 'Article':
         case 'Media':
-        case 'Review':
         case 'Live':
         case 'SpecialReport':
         case 'Recipe':
@@ -201,6 +200,7 @@ const renderHeadline = ({
                 </h1>
             );
 
+        case 'Review':
         case 'Feature':
             return (
                 <h1
