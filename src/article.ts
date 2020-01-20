@@ -2,7 +2,6 @@
 
 import { Pillar, pillarFromString } from 'pillar';
 import { Content } from 'mapiThriftModels/Content';
-import { ElementType } from 'mapiThriftModels/ElementType';
 import { IBlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
@@ -59,8 +58,7 @@ type Standard = ArticleFieldsWithBody & {
 type Article
     = Liveblog
     | Review
-    | Standard
-    ;
+    | Standard;
 
 const enum ElementKind {
     Text,
@@ -147,22 +145,20 @@ const parseImage = (element: IBlockElement): Option<Image> => {
 
 const parseElement =
     (docParser: DocParser) => (element: IBlockElement): Result<string, BodyElement> => {
-
-    switch (element.type) {
-
-        case ElementType.TEXT:
+    switch (element.type.toString()) {
+        case 'text':
             const html = element?.textTypeData?.html;
             if (!html) {
                 return new Err('No html field on textTypeData')
             }
             return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
 
-        case ElementType.IMAGE:
+        case 'image':
             return parseImage(element)
                 .map<Result<string, Image>>(image => new Ok(image))
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
-        case ElementType.PULLQUOTE:
+        case 'pullquote':
             const { html: quote, attribution } = element.pullquoteTypeData || {};
             if (!quote) {
                 return new Err('No quote field on pullquoteTypeData')
@@ -173,21 +169,21 @@ const parseElement =
                 attribution: fromNullable(attribution),
             });
 
-        case ElementType.INTERACTIVE:
+        case 'interactive':
             const { iframeUrl } = element.interactiveTypeData || {};
             if (!iframeUrl) {
                 return new Err('No iframeUrl field on interactiveTypeData')
             }
             return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
-        case ElementType.RICH_LINK:
+        case 'rich_link':
             const { url, linkText } = element.richLinkTypeData || {};
             if (!url || !linkText) {
                 return new Err('No url/linkText field on richLinkTypeData')
             }
             return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
-        case ElementType.TWEET:
+        case 'tweet':
             const { id, html: h } = element.tweetTypeData || {};
             if (!id || !h) {
                 return new Err('No id/html field on tweetTypeData')
@@ -231,7 +227,9 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
         standfirst: docParser(content?.fields?.standfirst ?? ""),
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).map(docParser),
-        publishDate: content.webPublicationDate?.iso8601 ?? "",
+        // @ts-ignore
+        // CAPI is sending us a string, even though the thrift definition is CapiDateTime
+        publishDate: content?.webPublicationDate,
         mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),
         series: articleSeries(content),
