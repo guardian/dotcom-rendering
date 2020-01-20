@@ -77,6 +77,7 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
     h(Fragment, null,
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
+        h('br', null, null),
     );
 
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>

@@ -38,7 +38,6 @@ interface HeaderImageProps {
 }
 
 const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Element | null => {
-
     const headerImage: Option<JSX.Element | null> = image.map(imageData =>
         // This is not an iterator, ESLint is confused
         // eslint-disable-next-line react/jsx-key
