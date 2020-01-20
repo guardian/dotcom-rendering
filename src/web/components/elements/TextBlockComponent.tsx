@@ -80,7 +80,7 @@ export const TextBlockComponent: React.FC<Props> = ({
     return (
         <RewrappedComponent
             isUnwrapped={isUnwrapped}
-            html={remainingLetters}
+            html={unwrappedHtml}
             elCss={para}
             tagName="p"
         />
