@@ -24,7 +24,7 @@ const Styles = (width: number, height: number): SerializedStyles => css`
 
         ${from.wide} {
             width: ${wideContentWidth}px;
-            height: ${wideContentWidth * height / width};
+            height: ${wideContentWidth * height / width}px;
         }
     }
 
