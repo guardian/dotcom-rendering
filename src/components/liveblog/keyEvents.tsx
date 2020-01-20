@@ -2,9 +2,9 @@ import React from 'react';
 import { icons, basePx, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
-import { Block } from 'mapiThriftModels/Block';
 import { makeRelativeDate } from 'date';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { LiveBlock } from 'article';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -135,21 +135,21 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 `;
 
 interface LiveblogKeyEventsProps {
-    pillarStyles: PillarStyles;
-    bodyElements: Block[];
+    pillar: Pillar;
+    blocks: LiveBlock[];
 }
 
-const LiveblogKeyEvents = ({ pillarStyles, bodyElements }: LiveblogKeyEventsProps): JSX.Element => {
-    const keyEvents = bodyElements.filter(elem => elem.attributes.keyEvent as boolean).slice(0, 7);
+const LiveblogKeyEvents = ({ pillar, blocks }: LiveblogKeyEventsProps): JSX.Element => {
+    const keyEvents = blocks.filter(elem => elem.isKeyEvent).slice(0, 7);
     return (
-        <section css={LiveblogKeyEventsStyles(pillarStyles)}>
+        <section css={LiveblogKeyEventsStyles(getPillarStyles(pillar))}>
             <details>
                 <summary><h2>Key Events ({keyEvents.length})</h2></summary>
                 <ul>
-                    {keyEvents.map((event, index) => {
-                        const relativeDate = makeRelativeDate(event.firstPublishedDate);
+                    {keyEvents.map(event => {
+                        const relativeDate = makeRelativeDate(event.firstPublished);
                         const time = relativeDate ? <time>{relativeDate}</time> : null;
-                        return <li key={index}>
+                        return <li key={event.id}>
                             { time }
                             <a>{event.title}</a>
                         </li>

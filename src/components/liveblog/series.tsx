@@ -4,7 +4,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { palette } from '@guardian/src-foundations';
 import { Series } from '../../capi';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { from } from '@guardian/src-foundations/mq';
 
 const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
@@ -26,14 +26,14 @@ const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css
 
 interface LiveblogSeriesProps {
     series: Series;
-    pillarStyles: PillarStyles;
+    pillar: Pillar;
 }
 
-const LiveblogSeries = ({ series, pillarStyles }: LiveblogSeriesProps): JSX.Element | null => {
+const LiveblogSeries = ({ series, pillar }: LiveblogSeriesProps): JSX.Element | null => {
 
     if (series) {
         return (
-            <LeftColumn className={LiveblogSeriesStyles(pillarStyles)}>
+            <LeftColumn className={LiveblogSeriesStyles(getPillarStyles(pillar))}>
                 <a href={series.webUrl}>{series.webTitle}</a>
             </LeftColumn>
         );

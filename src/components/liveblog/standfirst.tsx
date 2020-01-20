@@ -1,11 +1,10 @@
 import React from 'react';
 import { bulletStyles } from 'styles';
-import { transform } from '../../contentTransformations';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import LeftColumn from 'components/shared/leftColumn';
-import { PillarStyles } from 'pillar';
-import { componentFromHtml } from 'renderBlocks';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { renderText } from 'renderer';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     padding-bottom: 6px;
@@ -27,13 +26,13 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
 `;
 
 interface LiveblogStandfirstProps {
-    standfirst: string;
-    pillarStyles: PillarStyles;
+    standfirst: DocumentFragment;
+    pillar: Pillar;
 }
 
-const LiveblogStandfirst = ({ standfirst, pillarStyles }: LiveblogStandfirstProps): JSX.Element =>
-    <LeftColumn className={StandfirstStyles(pillarStyles)}>
-        <div>{componentFromHtml(transform(standfirst))}</div>
+const LiveblogStandfirst = ({ standfirst, pillar }: LiveblogStandfirstProps): JSX.Element =>
+    <LeftColumn className={StandfirstStyles(getPillarStyles(pillar))}>
+        <div>{ renderText(standfirst, pillar) }</div>
     </LeftColumn>
 
 export default LiveblogStandfirst;

@@ -17,7 +17,7 @@ import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { CommentCount } from 'components/shared/commentCount';
 import { getPillarStyles } from 'pillar';
-import { Article } from 'article';
+import { Standard } from 'article';
 
 
 // ----- Styles ----- //
@@ -73,7 +73,7 @@ const topBorder = css`
 
 interface Props {
     imageSalt: string;
-    article: Article;
+    article: Standard;
     children: ReactNode[];
 }
 

@@ -7,7 +7,6 @@ import { BlockElement} from 'mapiThriftModels/BlockElement';
 import { ElementType } from 'mapiThriftModels/ElementType';
 
 import { Option, fromNullable, None, Some } from 'types/option';
-import { isImage } from 'components/blocks/image';
 
 
 // ----- Parsing ----- //
@@ -136,6 +135,9 @@ const articleSeries = (content: Content): Tag =>
 
 const articleContributors = (content: Content): Tag[] =>
     tagsOfType('contributor')(content.tags);
+
+const isImage = (elem: BlockElement): boolean =>
+    elem.type === 'image';
 
 const articleMainImage = (content: Content): Option<BlockElement> =>
     fromNullable(content.blocks.main.elements.filter(isImage)[0]);

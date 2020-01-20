@@ -27,28 +27,51 @@ const enum Layout {
     Audio,
 }
 
-type Article = {
-    layout: Layout;
+interface ArticleFields {
     pillar: Pillar;
     headline: string;
     standfirst: DocumentFragment;
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     publishDate: string;
-    mainImage: Option<BlockElement>;
+    mainImage: Option<Image>;
     contributors: Tag[];
     series: Tag;
     commentable: boolean;
-    starRating: Option<number>;
-    body: Result<string, BodyElement>[];
     tags: Tag[];
-};
+}
 
-type BodyElement = {
-    kind: ElementType.TEXT;
-    doc: DocumentFragment;
-} | {
-    kind: ElementType.IMAGE;
+type Liveblog = ArticleFields & {
+    layout: Layout.Liveblog;
+    blocks: LiveBlock[];
+}
+
+type Review = ArticleFieldsWithBody & {
+    layout: Layout.Review;
+    starRating: number;
+}
+
+type Standard = ArticleFieldsWithBody & {
+    layout: Exclude<Layout, Layout.Liveblog | Layout.Review>;
+}
+
+type Article
+    = Liveblog
+    | Review
+    | Standard
+    ;
+
+const enum ElementKind {
+    Text,
+    Image,
+    Pullquote,
+    Interactive,
+    RichLink,
+    Tweet,
+}
+
+type Image = {
+    kind: ElementKind.Image;
     alt: string;
     caption: string;
     displayCredit: boolean;
@@ -56,23 +79,41 @@ type BodyElement = {
     file: string;
     width: number;
     height: number;
-} | {
-    kind: ElementType.PULLQUOTE;
+}
+
+type BodyElement = {
+    kind: ElementKind.Text;
+    doc: DocumentFragment;
+} | Image | {
+    kind: ElementKind.Pullquote;
     quote: string;
     attribution: Option<string>;
 } | {
-    kind: ElementType.INTERACTIVE;
+    kind: ElementKind.Interactive;
     url: string;
 } | {
-    kind: ElementType.RICH_LINK;
+    kind: ElementKind.RichLink;
     url: string;
     linkText: string;
 } | {
-    kind: ElementType.TWEET;
+    kind: ElementKind.Tweet;
     content: NodeList;
 };
 
+type LiveBlock = {
+    id: string;
+    isKeyEvent: boolean;
+    title: string;
+    firstPublished: Date;
+    lastModified: Date;
+    body: Result<string, BodyElement>[];
+}
+
 type DocParser = (html: string) => DocumentFragment;
+
+type ArticleFieldsWithBody = ArticleFields & {
+    body: Result<string, BodyElement>[];
+};
 
 
 // ----- Functions ----- //
@@ -87,53 +128,56 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
+const parseImage = (element: BlockElement): Option<Image> => {
+    const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
+    const { alt, caption, displayCredit, credit } = element.imageTypeData;
+
+    return fromNullable(masterAsset).map(asset => ({
+        kind: ElementKind.Image,
+        alt,
+        caption,
+        displayCredit,
+        credit,
+        file: asset.file,
+        width: asset.typeData.width,
+        height: asset.typeData.height,
+    }));
+}
+
 const parseElement =
     (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
 
     switch (element.type) {
 
         case ElementType.TEXT:
-            return new Ok({ kind: ElementType.TEXT, doc: docParser(element.textTypeData.html) });
+            return new Ok({ kind: ElementKind.Text, doc: docParser(element.textTypeData.html) });
 
         case ElementType.IMAGE:
-
-            const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
-            const { alt, caption, displayCredit, credit } = element.imageTypeData;
-            const imageBlock: Option<Result<string, BodyElement>> = fromNullable(masterAsset)
-                .map(asset => new Ok({
-                    kind: ElementType.IMAGE,
-                    alt,
-                    caption,
-                    displayCredit,
-                    credit,
-                    file: asset.file,
-                    width: asset.typeData.width,
-                    height: asset.typeData.height,
-                }));
-
-            return imageBlock.withDefault(new Err('I couldn\'t find a master asset'));
+            return parseImage(element)
+                .map<Result<string, Image>>(image => new Ok(image))
+                .withDefault(new Err('I couldn\'t find a master asset'));
 
         case ElementType.PULLQUOTE:
 
             const { html: quote, attribution } = element.pullquoteTypeData;
             return new Ok({
-                kind: ElementType.PULLQUOTE,
+                kind: ElementKind.Pullquote,
                 quote,
                 attribution: fromNullable(attribution),
             });
 
         case ElementType.INTERACTIVE:
             const { iframeUrl } = element.interactiveTypeData;
-            return new Ok({ kind: ElementType.INTERACTIVE, url: iframeUrl });
+            return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
         case ElementType.RICH_LINK:
 
             const { url, linkText } = element.richLinkTypeData;
-            return new Ok({ kind: ElementType.RICH_LINK, url, linkText });
+            return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
         case ElementType.TWEET:
             return tweetContent(element.tweetTypeData.id, docParser(element.tweetTypeData.html))
-                .map(content => ({ kind: ElementType.TWEET, content }));
+                .map(content => ({ kind: ElementKind.Tweet, content }));
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
@@ -145,62 +189,105 @@ const parseElements =
     (docParser: DocParser) => (elements: BlockElement[]): Result<string, BodyElement>[] =>
     elements.map(parseElement(docParser));
 
-function parseLayout(content: Content): Layout {
-    switch (content.type) {
-        case 'article':
-            if (pillarFromString(content.pillarId) === Pillar.opinion) {
-                return Layout.Opinion;
-            } else if (isImmersive(content)) {
-                return Layout.Immersive;
-            } else if (isFeature(content)) {
-                return Layout.Feature;
-            } else if (isReview(content)) {
-                return Layout.Review;
-            } else if (isAnalysis(content)) {
-                return Layout.Analysis;
-            }
-            return Layout.Standard;
-        case 'liveblog':
-            return Layout.Liveblog;
-        case 'gallery':
-            return Layout.Gallery;
-        case 'interactive':
-            return Layout.Interactive;
-        case 'picture':
-            return Layout.Picture;
-        case 'video':
-            return Layout.Video;
-        case 'audio':
-            return Layout.Audio;
-        default:
-            return Layout.Standard;
-    }    
-}
-
-const fromCapi = (docParser: DocParser) => (content: Content): Article =>
+const parseBlock = (docParser: DocParser) => (block: Block): LiveBlock =>
     ({
-        layout: parseLayout(content),
+        id: block.id,
+        isKeyEvent: block.attributes.keyEvent,
+        title: block.title,
+        firstPublished: block.firstPublishedDate,
+        lastModified: block.lastModifiedDate,
+        body: parseElements(docParser)(block.elements),
+    })
+
+const parseBlocks = (docParser: DocParser) => (blocks: Block[]): LiveBlock[] =>
+    blocks.map(parseBlock(docParser));
+
+const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
+    ({
         pillar: pillarFromString(content.pillarId),
         headline: content.fields.headline,
         standfirst: docParser(content.fields.standfirst),
         byline: content.fields.byline,
         bylineHtml: fromNullable(content.fields.bylineHtml).map(docParser),
         publishDate: content.webPublicationDate,
-        mainImage: articleMainImage(content),
+        mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),
         series: articleSeries(content),
         commentable: content.fields.commentable,
-        starRating: fromNullable(content.fields.starRating),
-        body: parseElements(docParser)(content.blocks.body[0].elements),
         tags: content.tags,
+    })
+
+const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleFieldsWithBody =>
+    ({
+        ...articleFields(docParser, content),
+        body: parseElements(docParser)(content.blocks.body[0].elements),
     });
+
+const fromCapi = (docParser: DocParser) => (content: Content): Article => {
+    switch (content.type) {
+        case 'article':
+
+            if (pillarFromString(content.pillarId) === Pillar.opinion) {
+                return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
+
+            } else if (isImmersive(content)) {
+                return { layout: Layout.Immersive, ...articleFieldsWithBody(docParser, content) };
+
+            } else if (isFeature(content)) {
+                return { layout: Layout.Feature, ...articleFieldsWithBody(docParser, content) };
+
+            } else if (isReview(content)) {
+                return {
+                    layout: Layout.Review,
+                    starRating: content.fields.starRating,
+                    ...articleFieldsWithBody(docParser, content),
+                };
+
+            } else if (isAnalysis(content)) {
+                return { layout: Layout.Analysis, ...articleFieldsWithBody(docParser, content) };
+            }
+
+            return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
+
+        case 'liveblog':
+            return {
+                layout: Layout.Liveblog,
+                blocks: parseBlocks(docParser)(content.blocks.body),
+                ...articleFields(docParser, content),
+            };
+
+        case 'gallery':
+            return { layout: Layout.Gallery, ...articleFieldsWithBody(docParser, content) };
+
+        case 'interactive':
+            return { layout: Layout.Interactive, ...articleFieldsWithBody(docParser, content) };
+
+        case 'picture':
+            return { layout: Layout.Picture, ...articleFieldsWithBody(docParser, content) };
+
+        case 'video':
+            return { layout: Layout.Video, ...articleFieldsWithBody(docParser, content) };
+
+        case 'audio':
+            return { layout: Layout.Audio, ...articleFieldsWithBody(docParser, content) };
+
+        default:
+            return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
+    }
+}
 
 
 // ----- Exports ----- //
 
 export {
     Article,
+    Liveblog,
+    Review,
+    Standard,
+    LiveBlock,
     Layout,
+    ElementKind,
     BodyElement,
+    Image,
     fromCapi,
 };

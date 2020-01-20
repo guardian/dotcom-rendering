@@ -16,7 +16,7 @@ import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles } from 'pillar';
-import { Article } from 'article';
+import { Standard, Review } from 'article';
 
 
 // ----- Styles ----- //
@@ -54,7 +54,7 @@ const HeaderImageStyles = css`
 
 interface Props {
     imageSalt: string;
-    article: Article;
+    article: Standard | Review;
     children: ReactNode[];
 }
 
@@ -72,7 +72,6 @@ const Standard = ({ imageSalt, article, children }: Props): JSX.Element =>
                     <Headline
                         headline={article.headline}
                         article={article}
-                        rating={String(article.starRating)}
                     />
                     <Standfirst article={article} className={articleWidthStyles} />
                 </div>

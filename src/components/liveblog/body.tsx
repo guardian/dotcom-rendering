@@ -2,11 +2,11 @@ import React from 'react';
 import { bulletStyles, commonArticleStyles } from 'styles';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
-import { render } from 'renderBlocks';
-import { Block } from 'mapiThriftModels/Block';
-
 import { css, SerializedStyles } from '@emotion/core'
-import { PillarStyles } from 'pillar';
+import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { LiveBlock } from 'article';
+import { renderAll } from 'renderer';
+import { partition } from 'types/result';
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,
@@ -28,35 +28,37 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 `;
 
 interface LiveblogBodyProps {
-    pillarStyles: PillarStyles;
-    bodyElements: Block[];
+    pillar: Pillar;
+    blocks: LiveBlock[];
     imageSalt: string;
 }
 
-const LiveblogBody= ({ pillarStyles, bodyElements, imageSalt }: LiveblogBodyProps): JSX.Element => {
-    const initialBlocks = bodyElements.slice(0, 7);
+const LiveblogBody = ({ pillar, blocks, imageSalt }: LiveblogBodyProps): JSX.Element => {
+
+    const initialBlocks = blocks.slice(0, 7);
     const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 10
-        ? <LiveblogLoadMore pillarStyles={pillarStyles}/> 
+        ? <LiveblogLoadMore pillar={pillar}/> 
         : null;
-    const ads = false;
+
     return (
-        <article css={LiveBodyStyles(pillarStyles)}>
+        <article css={LiveBodyStyles(getPillarStyles(pillar))}>
             {
-                initialBlocks.map((block: Block) => {
+                initialBlocks.map((block: LiveBlock) => {
                     return <LiveblogBlock
                         key={block.id}
-                        pillarStyles={pillarStyles} 
-                        highlighted={!!block.attributes.keyEvent}
+                        pillar={pillar} 
+                        highlighted={block.isKeyEvent}
                         title={block.title}
-                        firstPublishedDate={block.firstPublishedDate}
-                        lastModifiedDate={block.lastModifiedDate}>
-                            <>{render(block.elements, imageSalt, ads).html}</>
+                        firstPublishedDate={block.firstPublished}
+                        lastModifiedDate={block.lastModified}>
+                            <>{ renderAll(imageSalt)(pillar, partition(block.body).oks) }</>
                         </LiveblogBlock>
                 })
             }
-            <LoadMore total={bodyElements.length}/>
+            <LoadMore total={blocks.length}/>
         </article>
-    )
+    );
+
 }
 
 export default LiveblogBody;

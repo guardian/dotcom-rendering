@@ -36,19 +36,18 @@ const ArticleRatingStyles = css`
 `;
 
 interface ArticleRatingProps {
-   rating: string;
+   rating: number;
 }
 
 const ArticleSeries = ({ rating }: ArticleRatingProps): JSX.Element | null => {
-    const numericalRating = parseInt(rating);
     const acceptedRatings = [0, 1, 2, 3, 4, 5];
-    if (!acceptedRatings.includes(numericalRating)) return null;
+    if (!acceptedRatings.includes(rating)) return null;
 
     return (
         <div css={ArticleRatingStyles}>
             {
                 [...Array(5)].map((_star, index) => {
-                    return index + 1 <= numericalRating
+                    return index + 1 <= rating
                         ? <span key={index} className="filled"></span>
                         : <span key={index}></span>
                 })

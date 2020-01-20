@@ -4,10 +4,10 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { from } from '@guardian/src-foundations/mq';
 
-import { BlockElement } from 'mapiThriftModels/BlockElement';
-import { immersiveImageElement } from 'components/blocks/image';
 import { wideContentWidth } from 'styles';
 import { Option } from 'types/option';
+import { Image } from 'article';
+import { ImageElement } from 'renderer';
 
 
 // ----- Styles ----- //
@@ -37,18 +37,25 @@ const Styles = css`
 // ----- Component ----- //
 
 interface Props {
-    image: Option<BlockElement>;
+    image: Option<Image>;
     imageSalt: string;
     className?: SerializedStyles | null;
 }
 
 const HeaderImage = ({ className, image, imageSalt }: Props): JSX.Element | null =>
-    image.map<JSX.Element | null>(({ imageTypeData, assets }) =>
+    image.map<JSX.Element | null>(imageData =>
         // This is not an iterator, ESLint is confused
         // eslint-disable-next-line react/jsx-key
         <div css={[className, Styles]}>
             <figure>
-                { immersiveImageElement(imageTypeData.alt, assets, imageSalt) }
+                <ImageElement
+                    alt={imageData.alt}
+                    url={imageData.file}
+                    height={imageData.height}
+                    width={imageData.width}
+                    sizes={`calc(80vh * ${imageData.width/imageData.height})`}
+                    salt={imageSalt}
+                />
             </figure>
         </div>
     ).withDefault(null);
