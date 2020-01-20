@@ -97,6 +97,14 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
             return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar, key });
         case 'H2':
             return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'BLOCKQUOTE':
+            return h('blockquote', { key }, node.textContent);
+        case 'STRONG':
+            return h('strong', { key }, node.textContent);
+        case 'EM':
+            return h('em', { key }, node.textContent);
+        case 'BR':
+            return h('br', { key }, null);
         default:
             return null;
     }
