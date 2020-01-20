@@ -124,24 +124,6 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
   }
 }
 
-async function queryMapi(req: Request, res: ExpressResponse): Promise<void> {
-  const url = new URL(req.originalUrl, 'https://mobile.code.dev-guardianapis.com');
-
-    console.log(`I'm asking MAPI for this: ${url.href}...`);
-    const mapiResponse = await fetch(url.href);
-
-    if (mapiResponse.ok) {
-      res.type('json');
-      mapiResponse.body.pipe(res);
-
-      console.log('...and I\'ve passed on the response that MAPI gave me');
-    } else {
-      console.warn(await mapiError(mapiResponse));
-      res.sendStatus(400);
-    }
-}
-
-
 // ----- App ----- //
 
 const app = express();
@@ -157,13 +139,7 @@ app.get('/healthcheck', (_req, res) => {
 
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
-app.get('/*', async (req, res) => {
-  if (req.query.a !== undefined) {
-    serveArticle(req, res);
-  } else {
-    queryMapi(req, res);
-  }
-});
+app.get('/*', serveArticle);
 
 app.post('/article', serveArticlePost);
 
