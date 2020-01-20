@@ -10,6 +10,7 @@ import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkCom
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { Onwards } from '@frontend/web/components/Onwards/Onwards';
+import { LayoutSlotBottom } from '@root/src/web/components/LayoutSlotBottom';
 
 type IslandProps =
     | {
@@ -136,6 +137,11 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
                 inHeader: false,
             },
             root: 'reader-revenue-links-footer',
+        },
+        {
+            component: LayoutSlotBottom,
+            props: {},
+            root: 'layout-slot-bottom',
         },
         {
             component: CookieBanner,

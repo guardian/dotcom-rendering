@@ -366,6 +366,7 @@ interface ConfigType {
     isPaidContent?: boolean;
     keywordIds: string[];
     showRelatedContent: boolean;
+    shouldHideReaderRevenue: boolean;
 }
 
 interface GADataType {

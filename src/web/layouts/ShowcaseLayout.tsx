@@ -39,6 +39,14 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
+    // Allow 'LayoutSlotBottom' component to render if:
+    // - a 'forceEpic' URL flag is set to true (under any circumstance)
+    // - article not set to hide reader revenue (unless 'forceEpic' is set to true)
+    // TODO: plug 'forceEpic' variable below into the URL param through frontend
+    const forceEpic = false;
+    const renderBottomSlot =
+        forceEpic || (forceEpic && !CAPI.config.shouldHideReaderRevenue);
+
     return (
         <>
             <Section
@@ -148,6 +156,16 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                         CAPI={CAPI}
                                         isShowcase={true}
                                     />
+
+                                    {renderBottomSlot && (
+                                        <Section
+                                            islandId="layout-slot-bottom"
+                                            showSideBorders={false}
+                                            showTopBorder={false}
+                                            padded={false}
+                                        />
+                                    )}
+
                                     <GuardianLines pillar={CAPI.pillar} />
                                     <SubMeta
                                         pillar={CAPI.pillar}
