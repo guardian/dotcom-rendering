@@ -208,6 +208,7 @@ interface CAPIType {
     config: ConfigType;
     designType: DesignType;
     showBottomSocialButtons: boolean;
+    shouldHideReaderRevenue: boolean;
 
     // AMP specific (for now)
     guardianBaseURL: string;
