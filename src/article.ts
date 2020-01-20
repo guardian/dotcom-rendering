@@ -239,8 +239,8 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
     })
 
 const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleFieldsWithBody => {
-    const body = content?.blocks?.body;
-    const elements = body?.length ? body[0]?.elements : undefined;
+    const body = content?.blocks?.body ?? [];
+    const elements = body[0]?.elements;
     return ({
         ...articleFields(docParser, content),
         body: parseElements(docParser)(elements),
