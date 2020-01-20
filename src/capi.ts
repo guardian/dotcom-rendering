@@ -138,7 +138,7 @@ const articleContributors = (content: Content): ITag[] =>
     tagsOfType(TagType.CONTRIBUTOR)(content.tags);
 
 const isImage = (elem: IBlockElement): boolean =>
-    elem.type === ElementType.IMAGE;
+    elem.type.toString() === 'image';
 
 const articleMainImage = (content: Content): Option<IBlockElement> =>
     fromNullable(content?.blocks?.main?.elements.filter(isImage)[0]);
