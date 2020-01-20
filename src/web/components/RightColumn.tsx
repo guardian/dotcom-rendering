@@ -19,6 +19,7 @@ const hideBelowDesktop = css`
 `;
 
 const hideForIE = css`
+    /* https://stackoverflow.com/a/28419263 */
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
         display: none;
     }
