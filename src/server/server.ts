@@ -5,7 +5,7 @@ import express, { Request, Response as ExpressResponse } from 'express';
 import compression from 'compression';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
-import fetch, { Response } from 'node-fetch';
+import fetch from 'node-fetch';
 
 import { Content } from 'capiThriftModels';
 import { getConfigValue } from 'server/ssmConfig';
@@ -43,18 +43,6 @@ function checkSupport(content: Content): Supported {
   return { kind: Support.Supported };
 
 }
-
-async function parseMapiError(mapiResponse: Response): Promise<string> {
-  try {
-    const mapiMsg = (await mapiResponse.json())?.errorMessage;
-    return mapiMsg ? `the following message: ${mapiMsg}` : 'no error message';
-  } catch (_) {
-    return 'a message that I didn\'t understand';
-  }
-}
-
-const mapiError = async (mapiResponse: Response): Promise<string> =>
-  `MAPI wasn't happy about that request, it returned ${mapiResponse.status}, with ${await parseMapiError(mapiResponse)}`;
 
 async function serveArticlePost({ body }: Request, res: ExpressResponse): Promise<void> {
   try {
