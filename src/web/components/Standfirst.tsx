@@ -32,6 +32,10 @@ const nestedStyles = css`
     li {
         ${headline.xxxsmall()};
     }
+
+    strong {
+        font-weight: bold;
+    }
 `;
 
 const standfirstStyles = (designType: DesignType) => {
