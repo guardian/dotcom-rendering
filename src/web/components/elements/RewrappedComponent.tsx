@@ -13,12 +13,12 @@ import { unescapeData } from '@root/src/lib/escapeData';
 export const RewrappedComponent = ({
     isUnwrapped,
     html,
-    elCss,
+    elCss = '',
     tagName,
 }: {
     isUnwrapped: boolean;
     html: string;
-    elCss: string;
+    elCss?: string;
     tagName: string;
 }): JSX.Element => {
     const element = isUnwrapped ? tagName : 'span';
