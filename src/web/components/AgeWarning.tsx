@@ -8,6 +8,12 @@ import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
+type Props = {
+    age: string;
+    isScreenReader?: boolean;
+    size?: 'small' | 'medium';
+};
+
 const ageWarningStyles = (isSmall: boolean) => css`
     ${isSmall ? textSans.xsmall() : textSans.medium()};
     color: ${palette.neutral[7]};
@@ -33,15 +39,13 @@ const ageWarningScreenReader = css`
     ${visuallyHidden};
 `;
 
-type Props = {
-    age: string;
-    isScreenReader?: boolean;
-    size?: 'small' | 'medium';
-};
+const ensureOldText = (age: string) =>
+    age.endsWith('old') ? age : `${age} old`;
 
 export const AgeWarning = ({ age, isScreenReader, size = 'medium' }: Props) => {
     const warningPrefix = 'This article is more than ';
     const isSmall = size === 'small';
+    const ageOld = ensureOldText(age);
 
     if (isScreenReader) {
         return (
@@ -52,7 +56,7 @@ export const AgeWarning = ({ age, isScreenReader, size = 'medium' }: Props) => {
     return (
         <div className={ageWarningStyles(isSmall)} aria-hidden="true">
             <ClockIcon /> {warningPrefix}
-            <strong>{age}</strong>
+            <strong>{ageOld}</strong>
         </div>
     );
 };
