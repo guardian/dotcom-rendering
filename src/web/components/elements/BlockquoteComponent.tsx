@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { body } from '@guardian/src-foundations/typography';
-
+import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 // tslint:disable:react-no-dangerous-html
 
@@ -17,11 +17,16 @@ export const BlockquoteComponent: React.FC<Props> = ({ html }: Props) => {
         font-style: italic;
     `;
 
+    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(
+        '<blockquote class="quoted">',
+        '</blockquote>',
+        html,
+    );
+
     return (
         <RewrappedComponent
-            prefix='<blockquote class="quoted">'
-            suffix="</blockquote>"
-            html={html}
+            isUnwrapped={isUnwrapped}
+            html={unwrappedHtml}
             elCss={blockquote}
             tagName="blockquote"
         />

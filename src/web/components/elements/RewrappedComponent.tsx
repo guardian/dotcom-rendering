@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 import { unescapeData } from '@root/src/lib/escapeData';
-import { unwrapHtml } from '@root/src/model/unwrapHtml';
 
 // Ideally we want to want to avoid an unnecessary 'span' wrapper,
 // which also will cause issues with ads (spacefinder rules). React
@@ -12,24 +11,16 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 // paras to be top-level.
 
 export const RewrappedComponent = ({
-    prefix,
-    suffix,
+    isUnwrapped,
     html,
     elCss,
     tagName,
 }: {
-    prefix: string;
-    suffix: string;
+    isUnwrapped: boolean;
     html: string;
     elCss: string;
     tagName: string;
 }): JSX.Element => {
-    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(
-        prefix,
-        suffix,
-        html,
-    );
-
     const element = isUnwrapped ? tagName : 'span';
 
     // If we implement a span, we want to apply the CSS to the inner element
@@ -47,7 +38,7 @@ export const RewrappedComponent = ({
     const ElementComponent = React.createElement(`${element}`, {
         className: style,
         dangerouslySetInnerHTML: {
-            __html: unescapeData(unwrappedHtml),
+            __html: unescapeData(html),
         },
     });
 
