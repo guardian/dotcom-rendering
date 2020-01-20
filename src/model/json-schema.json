@@ -1493,10 +1493,7 @@
                     "type": "boolean"
                 },
                 "keywordIds": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string"
                 },
                 "showRelatedContent": {
                     "type": "boolean"

@@ -507,7 +507,7 @@ export const CAPI: CAPIType = {
         edition: '',
         section: '',
         sharedAdTargeting: {},
-        keywordIds: [],
+        keywordIds: '',
         showRelatedContent: false,
     },
     webTitle: 'Foobar',

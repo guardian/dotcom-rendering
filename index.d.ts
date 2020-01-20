@@ -365,7 +365,7 @@ interface ConfigType {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sharedAdTargeting: { [key: string]: any };
     isPaidContent?: boolean;
-    keywordIds: string[];
+    keywordIds: string;
     showRelatedContent: boolean;
     shouldHideReaderRevenue?: boolean;
 }

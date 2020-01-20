@@ -56,7 +56,7 @@ type IslandProps =
           pageId: string;
           isPaidContent: boolean;
           showRelatedContent: boolean;
-          keywordIds: string[];
+          keywordIds: string;
           contentType: string;
       };
 
