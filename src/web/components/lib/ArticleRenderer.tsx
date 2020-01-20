@@ -6,6 +6,7 @@ import { SubheadingBlockComponent } from '@root/src/web/components/elements/Subh
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteComponent';
+import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
 import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 
 // This is required for spacefinder to work!
@@ -63,15 +64,7 @@ export const ArticleRenderer: React.FC<{
                         />
                     );
                 case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-                    return (
-                        <TextBlockComponent
-                            key={i}
-                            html={element.html}
-                            pillar={pillar}
-                            designType={designType}
-                            dropCap={false} // TODO: Plug in the api response here when we have it
-                        />
-                    );
+                    return <BlockquoteComponent key={i} html={element.html} />;
                 case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
                     return (
                         <YouTubeComponent
