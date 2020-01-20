@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { StickyAd } from '@root/src/web/components/StickyAd';
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -23,7 +23,8 @@ import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
+
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
@@ -369,14 +370,17 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd />
+                            <AdSlot
+                                asps={namedAdSlotParameters('right')}
+                                className=""
+                            />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
                 </ShowcaseGrid>
             </Section>
 
-            <Section islandId="story-package" />
+            <Section islandId="onwards-content" />
 
             {!isPaidContent && (
                 <>

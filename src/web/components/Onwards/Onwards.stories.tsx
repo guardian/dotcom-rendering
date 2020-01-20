@@ -3,7 +3,6 @@ import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 
 import { OnwardsLayout } from './OnwardsLayout';
-import { StoryPackage } from './StoryPackage';
 
 import { storyPackageTrails } from './Onwards.mocks';
 
@@ -17,11 +16,19 @@ export default {
 export const storyPackage = () => {
     return (
         <Section>
-            <OnwardsLayout
-                content={storyPackageTrails}
-                component={StoryPackage}
-            />
+            <OnwardsLayout onwardSections={[storyPackageTrails]} />
         </Section>
     );
 };
 storyPackage.story = { name: 'Story Package' };
+
+export const twoSections = () => {
+    return (
+        <Section>
+            <OnwardsLayout
+                onwardSections={[storyPackageTrails, storyPackageTrails]}
+            />
+        </Section>
+    );
+};
+twoSections.story = { name: 'with two sections' };

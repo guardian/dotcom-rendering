@@ -287,7 +287,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 </StandardGrid>
             </Section>
 
-            <Section islandId="story-package" />
+            <Section islandId="onwards-content" />
 
             {!isPaidContent && (
                 <>
