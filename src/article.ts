@@ -130,17 +130,16 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
 const parseImage = (element: IBlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
     const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData || {};
-
-    return new Some({
+    return fromNullable(masterAsset).map(asset => ({
         kind: ElementKind.Image,
         alt,
         caption,
         displayCredit,
         credit,
-        file: masterAsset?.file ?? "",
-        width: masterAsset?.typeData?.width ?? 0,
-        height: masterAsset?.typeData?.height ?? 0,
-    })
+        file: asset?.file ?? "",
+        width: asset?.typeData?.width ?? 0,
+        height: asset?.typeData?.height ?? 0,
+    }));
 }
 
 const parseElement =
