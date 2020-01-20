@@ -2,11 +2,12 @@
 
 import { Result, Ok, Err } from 'types/result';
 import { Content} from 'mapiThriftModels/Content';
-import { Tag } from 'mapiThriftModels/Tag';
-import { BlockElement} from 'mapiThriftModels/BlockElement';
+import { ITag } from 'mapiThriftModels/Tag';
+import { IBlockElement} from 'mapiThriftModels/BlockElement';
 import { ElementType } from 'mapiThriftModels/ElementType';
 
 import { Option, fromNullable, None, Some } from 'types/option';
+import { TagType } from 'mapiThriftModels';
 
 
 // ----- Parsing ----- //
@@ -112,17 +113,17 @@ interface Contributor {
     bylineLargeImageUrl?: string;
 }
 
-const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
-    tags.filter((tag: Tag) => tag.type === type_);
+const tagsOfType = (type_: TagType) => (tags: ITag[]): ITag[] =>
+    tags.filter((tag: ITag) => tag.type === type_);
 
 const isImmersive = (content: Content): boolean =>
-    content.fields.displayHint === 'immersive';
+    content?.fields?.displayHint === 'immersive';
 
 const isFeature = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/features');
 
 const isReview = (content: Content): boolean =>
-    'starRating' in content.fields;
+    [0,1,2,3,4,5].includes(content?.fields?.starRating ?? -1)
 
 const isAnalysis = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/analysis');
@@ -130,21 +131,29 @@ const isAnalysis = (content: Content): boolean =>
 const isSingleContributor = (contributors: Contributor[]): boolean =>
     contributors.length === 1;
 
-const articleSeries = (content: Content): Tag =>
-    tagsOfType('series')(content.tags)[0];
+const articleSeries = (content: Content): ITag =>
+    tagsOfType(TagType.SERIES)(content.tags)[0];
 
-const articleContributors = (content: Content): Tag[] =>
-    tagsOfType('contributor')(content.tags);
+const articleContributors = (content: Content): ITag[] =>
+    tagsOfType(TagType.CONTRIBUTOR)(content.tags);
 
-const isImage = (elem: BlockElement): boolean =>
-    elem.type === 'image';
+const isImage = (elem: IBlockElement): boolean =>
+    elem.type === ElementType.IMAGE;
 
-const articleMainImage = (content: Content): Option<BlockElement> =>
-    fromNullable(content.blocks.main.elements.filter(isImage)[0]);
+const articleMainImage = (content: Content): Option<IBlockElement> =>
+    fromNullable(content?.blocks?.main?.elements.filter(isImage)[0]);
 
-const includesTweets = (content: Content): boolean => content.blocks.body
-    .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
-    .some(Boolean)
+const includesTweets = (content: Content): boolean => {
+    const body = content?.blocks?.body;
+
+    if (!body) {
+        return false
+    }
+
+    return body
+        .flatMap(block => block.elements.some(element => element.type === ElementType.TWEET))
+        .some(Boolean)
+}
 
 
 // ----- Functions ----- //

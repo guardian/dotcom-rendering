@@ -5,11 +5,6 @@ import { createHash } from 'crypto';
 import { Option, fromNullable } from 'types/option';
 import { Asset } from 'mapiThriftModels/Asset';
 
-// ----- Types ----- //
-
-type Url = string;
-
-
 // ----- Setup ----- //
 
 const imageResizer = 'https://i.guim.co.uk/img';
@@ -34,8 +29,7 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex')    
 
-function transformUrl(salt: string, input: Url, width: number): Url {
-
+function transformUrl(salt: string, input: string, width = 0): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
@@ -48,13 +42,13 @@ function transformUrl(salt: string, input: Url, width: number): Url {
     });
 
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
-
 }
 
-const srcset = (salt: string) => (url: Url): string =>
-    widths
-        .map(width => `${transformUrl(salt, url, width)} ${width}w`)
-        .join(', ')
+const srcset = (salt: string) => (url: string | undefined): string =>
+    url ? widths
+            .map(width => `${transformUrl(salt, url, width)} ${width}w`)
+            .join(', ')
+        : "";
 
 /**
  * Produces a srcset as a string, with the asset URLs transformed into image
@@ -66,7 +60,7 @@ const srcset = (salt: string) => (url: Url): string =>
  * @returns An option of an image srcset.
  */
 const toSrcset = (salt: string, assets: Asset[]): Option<string> =>
-    fromNullable(assets.find(asset => asset.typeData.isMaster))
+    fromNullable(assets.find(asset => asset?.typeData?.isMaster))
         .map(asset => asset.file)
         .map(srcset(salt))
 
@@ -79,8 +73,11 @@ const toSrcset = (salt: string, assets: Asset[]): Option<string> =>
  * @param asset An image asset, typically supplied by CAPI.
  * @returns A URL to retrieve a given image from the image resizer.
  */
-const toUrl = (salt: string, asset: Asset): Url =>
-    transformUrl(salt, asset.file, asset.typeData.width)
+const toUrl = (salt: string, asset: Asset): string =>
+    asset?.file
+        ? transformUrl(salt, asset.file, asset?.typeData?.width)
+        : ""
+
 
 
 // ----- Exports ----- //

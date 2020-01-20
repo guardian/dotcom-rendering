@@ -3,11 +3,12 @@
 import { Pillar, pillarFromString } from 'pillar';
 import { Content } from 'mapiThriftModels/Content';
 import { ElementType } from 'mapiThriftModels/ElementType';
-import { BlockElement } from 'mapiThriftModels/BlockElement';
-import { Tag } from 'mapiThriftModels/Tag';
+import { IBlockElement } from 'mapiThriftModels/BlockElement';
+import { ITag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
-import { Option, fromNullable } from 'types/option';
+import { Option, fromNullable, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
+import { ContentType, IBlock } from 'mapiThriftModels';
 
 
 // ----- Types ----- //
@@ -35,10 +36,10 @@ interface ArticleFields {
     bylineHtml: Option<DocumentFragment>;
     publishDate: string;
     mainImage: Option<Image>;
-    contributors: Tag[];
-    series: Tag;
+    contributors: ITag[];
+    series: ITag;
     commentable: boolean;
-    tags: Tag[];
+    tags: ITag[];
 }
 
 type Liveblog = ArticleFields & {
@@ -128,29 +129,33 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
-const parseImage = (element: BlockElement): Option<Image> => {
-    const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
-    const { alt, caption, displayCredit, credit } = element.imageTypeData;
+const parseImage = (element: IBlockElement): Option<Image> => {
+    const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
+    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData || {};
 
-    return fromNullable(masterAsset).map(asset => ({
+    return new Some({
         kind: ElementKind.Image,
         alt,
         caption,
         displayCredit,
         credit,
-        file: asset.file,
-        width: asset.typeData.width,
-        height: asset.typeData.height,
-    }));
+        file: masterAsset?.file ?? "",
+        width: masterAsset?.typeData?.width ?? 0,
+        height: masterAsset?.typeData?.height ?? 0,
+    })
 }
 
 const parseElement =
-    (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
+    (docParser: DocParser) => (element: IBlockElement): Result<string, BodyElement> => {
 
     switch (element.type) {
 
         case ElementType.TEXT:
-            return new Ok({ kind: ElementKind.Text, doc: docParser(element.textTypeData.html) });
+            const html = element?.textTypeData?.html;
+            if (!html) {
+                return new Err('No html field on textTypeData')
+            }
+            return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
 
         case ElementType.IMAGE:
             return parseImage(element)
@@ -158,8 +163,10 @@ const parseElement =
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
         case ElementType.PULLQUOTE:
-
-            const { html: quote, attribution } = element.pullquoteTypeData;
+            const { html: quote, attribution } = element.pullquoteTypeData || {};
+            if (!quote) {
+                return new Err('No quote field on pullquoteTypeData')
+            }
             return new Ok({
                 kind: ElementKind.Pullquote,
                 quote,
@@ -167,16 +174,25 @@ const parseElement =
             });
 
         case ElementType.INTERACTIVE:
-            const { iframeUrl } = element.interactiveTypeData;
+            const { iframeUrl } = element.interactiveTypeData || {};
+            if (!iframeUrl) {
+                return new Err('No iframeUrl field on interactiveTypeData')
+            }
             return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
         case ElementType.RICH_LINK:
-
-            const { url, linkText } = element.richLinkTypeData;
+            const { url, linkText } = element.richLinkTypeData || {};
+            if (!url || !linkText) {
+                return new Err('No url/linkText field on richLinkTypeData')
+            }
             return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
         case ElementType.TWEET:
-            return tweetContent(element.tweetTypeData.id, docParser(element.tweetTypeData.html))
+            const { id, html: h } = element.tweetTypeData || {};
+            if (!id || !h) {
+                return new Err('No id/html field on tweetTypeData')
+            }
+            return tweetContent(id, docParser(h))
                 .map(content => ({ kind: ElementKind.Tweet, content }));
 
         default:
@@ -185,47 +201,56 @@ const parseElement =
 
 }
 
-const parseElements =
-    (docParser: DocParser) => (elements: BlockElement[]): Result<string, BodyElement>[] =>
-    elements.map(parseElement(docParser));
+type Elements = IBlockElement[] | undefined;
 
-const parseBlock = (docParser: DocParser) => (block: Block): LiveBlock =>
+const parseElements =
+    (docParser: DocParser) => (elements: Elements): Result<string, BodyElement>[] => {
+        if (!elements) {
+            return [new Err('No body elements available')];
+        }
+        return elements.map(parseElement(docParser));
+    }
+
+const parseBlock = (docParser: DocParser) => (block: IBlock): LiveBlock =>
     ({
         id: block.id,
-        isKeyEvent: block.attributes.keyEvent,
-        title: block.title,
-        firstPublished: block.firstPublishedDate,
-        lastModified: block.lastModifiedDate,
+        isKeyEvent: block?.attributes?.keyEvent ?? false,
+        title: block?.title ?? "",
+        firstPublished: new Date(block?.firstPublishedDate?.iso8601 ?? 0),
+        lastModified: new Date(block?.lastModifiedDate?.iso8601 ?? 0),
         body: parseElements(docParser)(block.elements),
     })
 
-const parseBlocks = (docParser: DocParser) => (blocks: Block[]): LiveBlock[] =>
+const parseBlocks = (docParser: DocParser) => (blocks: IBlock[]): LiveBlock[] =>
     blocks.map(parseBlock(docParser));
 
 const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
     ({
-        pillar: pillarFromString(content.pillarId),
-        headline: content.fields.headline,
-        standfirst: docParser(content.fields.standfirst),
-        byline: content.fields.byline,
-        bylineHtml: fromNullable(content.fields.bylineHtml).map(docParser),
-        publishDate: content.webPublicationDate,
+        pillar: pillarFromString(content?.pillarId),
+        headline: content?.fields?.headline ?? "",
+        standfirst: docParser(content?.fields?.standfirst ?? ""),
+        byline: content?.fields?.byline ?? "",
+        bylineHtml: fromNullable(content?.fields?.bylineHtml).map(docParser),
+        publishDate: content.webPublicationDate?.iso8601 ?? "",
         mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),
         series: articleSeries(content),
-        commentable: content.fields.commentable,
+        commentable: content?.fields?.commentable ?? false,
         tags: content.tags,
     })
 
-const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleFieldsWithBody =>
-    ({
+const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleFieldsWithBody => {
+    const body = content?.blocks?.body;
+    const elements = body?.length ? body[0]?.elements : undefined;
+    return ({
         ...articleFields(docParser, content),
-        body: parseElements(docParser)(content.blocks.body[0].elements),
+        body: parseElements(docParser)(elements),
     });
+}
 
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
     switch (content.type) {
-        case 'article':
+        case ContentType.ARTICLE:
 
             if (pillarFromString(content.pillarId) === Pillar.opinion) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
@@ -239,7 +264,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
             } else if (isReview(content)) {
                 return {
                     layout: Layout.Review,
-                    starRating: content.fields.starRating,
+                    starRating: content?.fields?.starRating ?? 0,
                     ...articleFieldsWithBody(docParser, content),
                 };
 
@@ -249,26 +274,27 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
 
             return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
 
-        case 'liveblog':
+        case ContentType.LIVEBLOG:
+            const body = content?.blocks?.body ?? [];
             return {
                 layout: Layout.Liveblog,
-                blocks: parseBlocks(docParser)(content.blocks.body),
+                blocks: parseBlocks(docParser)(body),
                 ...articleFields(docParser, content),
             };
 
-        case 'gallery':
+        case ContentType.GALLERY:
             return { layout: Layout.Gallery, ...articleFieldsWithBody(docParser, content) };
 
-        case 'interactive':
+        case ContentType.INTERACTIVE:
             return { layout: Layout.Interactive, ...articleFieldsWithBody(docParser, content) };
 
-        case 'picture':
+        case ContentType.PICTURE:
             return { layout: Layout.Picture, ...articleFieldsWithBody(docParser, content) };
 
-        case 'video':
+        case ContentType.VIDEO:
             return { layout: Layout.Video, ...articleFieldsWithBody(docParser, content) };
 
-        case 'audio':
+        case ContentType.AUDIO:
             return { layout: Layout.Audio, ...articleFieldsWithBody(docParser, content) };
 
         default:

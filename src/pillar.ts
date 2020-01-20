@@ -67,7 +67,7 @@ export const pillarColours: PillarColours = {
 
 const getPillarStyles = (pillar: Pillar): PillarStyles => pillarColours[pillar];
 
-function pillarFromString(pillar: string): Pillar {
+function pillarFromString(pillar: string | undefined): Pillar {
     switch (pillar) {
         case 'pillar/opinion':
             return Pillar.opinion;
