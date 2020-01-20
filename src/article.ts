@@ -31,7 +31,7 @@ interface ArticleFields {
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     publishDate: string;
-    mainImage: Option<BlockElement>;
+    mainImage: Option<Image>;
     contributors: Tag[];
     series: Tag;
     commentable: boolean;
@@ -58,11 +58,17 @@ type Article
     | Standard
     ;
 
-type BodyElement = {
-    kind: ElementType.TEXT;
-    doc: DocumentFragment;
-} | {
-    kind: ElementType.IMAGE;
+const enum ElementKind {
+    Text,
+    Image,
+    Pullquote,
+    Interactive,
+    RichLink,
+    Tweet,
+}
+
+type Image = {
+    kind: ElementKind.Image;
     alt: string;
     caption: string;
     displayCredit: boolean;
@@ -70,19 +76,24 @@ type BodyElement = {
     file: string;
     width: number;
     height: number;
-} | {
-    kind: ElementType.PULLQUOTE;
+}
+
+type BodyElement = {
+    kind: ElementKind.Text;
+    doc: DocumentFragment;
+} | Image | {
+    kind: ElementKind.Pullquote;
     quote: string;
     attribution: Option<string>;
 } | {
-    kind: ElementType.INTERACTIVE;
+    kind: ElementKind.Interactive;
     url: string;
 } | {
-    kind: ElementType.RICH_LINK;
+    kind: ElementKind.RichLink;
     url: string;
     linkText: string;
 } | {
-    kind: ElementType.TWEET;
+    kind: ElementKind.Tweet;
     content: NodeList;
 };
 
@@ -114,53 +125,56 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
+const parseImage = (element: BlockElement): Option<Image> => {
+    const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
+    const { alt, caption, displayCredit, credit } = element.imageTypeData;
+
+    return fromNullable(masterAsset).map(asset => ({
+        kind: ElementKind.Image,
+        alt,
+        caption,
+        displayCredit,
+        credit,
+        file: asset.file,
+        width: asset.typeData.width,
+        height: asset.typeData.height,
+    }));
+}
+
 const parseElement =
     (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
 
     switch (element.type) {
 
         case ElementType.TEXT:
-            return new Ok({ kind: ElementType.TEXT, doc: docParser(element.textTypeData.html) });
+            return new Ok({ kind: ElementKind.Text, doc: docParser(element.textTypeData.html) });
 
         case ElementType.IMAGE:
-
-            const masterAsset = element.assets.find(asset => asset.typeData.isMaster);
-            const { alt, caption, displayCredit, credit } = element.imageTypeData;
-            const imageBlock: Option<Result<string, BodyElement>> = fromNullable(masterAsset)
-                .map(asset => new Ok({
-                    kind: ElementType.IMAGE,
-                    alt,
-                    caption,
-                    displayCredit,
-                    credit,
-                    file: asset.file,
-                    width: asset.typeData.width,
-                    height: asset.typeData.height,
-                }));
-
-            return imageBlock.withDefault(new Err('I couldn\'t find a master asset'));
+            return parseImage(element)
+                .map<Result<string, Image>>(image => new Ok(image))
+                .withDefault(new Err('I couldn\'t find a master asset'));
 
         case ElementType.PULLQUOTE:
 
             const { html: quote, attribution } = element.pullquoteTypeData;
             return new Ok({
-                kind: ElementType.PULLQUOTE,
+                kind: ElementKind.Pullquote,
                 quote,
                 attribution: fromNullable(attribution),
             });
 
         case ElementType.INTERACTIVE:
             const { iframeUrl } = element.interactiveTypeData;
-            return new Ok({ kind: ElementType.INTERACTIVE, url: iframeUrl });
+            return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
         case ElementType.RICH_LINK:
 
             const { url, linkText } = element.richLinkTypeData;
-            return new Ok({ kind: ElementType.RICH_LINK, url, linkText });
+            return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
         case ElementType.TWEET:
             return tweetContent(element.tweetTypeData.id, docParser(element.tweetTypeData.html))
-                .map(content => ({ kind: ElementType.TWEET, content }));
+                .map(content => ({ kind: ElementKind.Tweet, content }));
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
@@ -193,7 +207,7 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
         byline: content.fields.byline,
         bylineHtml: fromNullable(content.fields.bylineHtml).map(docParser),
         publishDate: content.webPublicationDate,
-        mainImage: articleMainImage(content),
+        mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),
         series: articleSeries(content),
         commentable: content.fields.commentable,
@@ -269,6 +283,8 @@ export {
     Standard,
     LiveBlock,
     Layout,
+    ElementKind,
     BodyElement,
+    Image,
     fromCapi,
 };
