@@ -227,6 +227,7 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
         standfirst: docParser(content?.fields?.standfirst ?? ""),
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).map(docParser),
+        // eslint-disable-next-line
         // @ts-ignore
         // CAPI is sending us a string, even though the thrift definition is CapiDateTime
         publishDate: content?.webPublicationDate,
