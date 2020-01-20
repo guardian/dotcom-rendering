@@ -7,7 +7,7 @@ import { ITag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
-import { ContentType, IBlock } from 'mapiThriftModels';
+import { IBlock } from 'mapiThriftModels';
 
 
 // ----- Types ----- //
@@ -176,7 +176,7 @@ const parseElement =
             }
             return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
-        case 'rich_link':
+        case 'rich-link':
             const { url, linkText } = element.richLinkTypeData || {};
             if (!url || !linkText) {
                 return new Err('No url/linkText field on richLinkTypeData')
@@ -248,8 +248,8 @@ const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleF
 }
 
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
-    switch (content.type) {
-        case ContentType.ARTICLE:
+    switch (content.type.toString()) {
+        case 'article':
 
             if (pillarFromString(content.pillarId) === Pillar.opinion) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
@@ -273,7 +273,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
 
             return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.LIVEBLOG:
+        case 'liveblog':
             const body = content?.blocks?.body ?? [];
             return {
                 layout: Layout.Liveblog,
@@ -281,19 +281,19 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
                 ...articleFields(docParser, content),
             };
 
-        case ContentType.GALLERY:
+        case 'gallery':
             return { layout: Layout.Gallery, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.INTERACTIVE:
+        case 'interactive':
             return { layout: Layout.Interactive, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.PICTURE:
+        case 'picture':
             return { layout: Layout.Picture, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.VIDEO:
+        case 'video':
             return { layout: Layout.Video, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.AUDIO:
+        case 'audio':
             return { layout: Layout.Audio, ...articleFieldsWithBody(docParser, content) };
 
         default:
