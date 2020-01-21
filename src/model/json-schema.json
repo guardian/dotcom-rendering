@@ -206,6 +206,9 @@
         "showBottomSocialButtons": {
             "type": "boolean"
         },
+        "shouldHideReaderRevenue": {
+            "type": "boolean"
+        },
         "guardianBaseURL": {
             "type": "string"
         },
@@ -267,6 +270,7 @@
         "sectionLabel",
         "sectionUrl",
         "shouldHideAds",
+        "shouldHideReaderRevenue",
         "showBottomSocialButtons",
         "standfirst",
         "subMetaKeywordLinks",
@@ -1487,6 +1491,12 @@
                 },
                 "isPaidContent": {
                     "type": "boolean"
+                },
+                "keywordIds": {
+                    "type": "string"
+                },
+                "showRelatedContent": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1501,11 +1511,13 @@
                 "googletagUrl",
                 "hbImpl",
                 "isSensitive",
+                "keywordIds",
                 "revisionNumber",
                 "section",
                 "sentryHost",
                 "sentryPublicApiKey",
                 "sharedAdTargeting",
+                "showRelatedContent",
                 "stage",
                 "switches",
                 "videoDuration"
