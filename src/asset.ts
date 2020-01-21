@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 
-import { Option, fromNullable } from 'types/option';
+import { Option, None, Some } from 'types/option';
 import { Asset } from 'mapiThriftModels/Asset';
 
 // ----- Setup ----- //
@@ -44,11 +44,10 @@ function transformUrl(salt: string, input: string, width = 0): string {
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
-const srcset = (salt: string) => (url: string | undefined): string =>
-    url ? widths
-            .map(width => `${transformUrl(salt, url, width)} ${width}w`)
-            .join(', ')
-        : "";
+const srcset = (url: string, salt: string): string =>
+    widths
+        .map(width => `${transformUrl(salt, url, width)} ${width}w`)
+        .join(', ');
 
 /**
  * Produces a srcset as a string, with the asset URLs transformed into image
@@ -59,10 +58,15 @@ const srcset = (salt: string) => (url: string | undefined): string =>
  * @param assets A list of image assets, typically supplied by CAPI.
  * @returns An option of an image srcset.
  */
-const toSrcset = (salt: string, assets: Asset[]): Option<string> =>
-    fromNullable(assets.find(asset => asset?.typeData?.isMaster))
-        .map(asset => asset.file)
-        .map(srcset(salt))
+const toSrcset = (salt: string, assets: Asset[]): Option<string> => {
+    const master = assets.find(asset => asset?.typeData?.isMaster);
+
+    if (!master || !master?.file) {
+        return new None();
+    }
+
+    return new Some(srcset(master.file, salt));
+}
 
 /**
  * Transforms an image asset from a CAPI response, which contains URLs in

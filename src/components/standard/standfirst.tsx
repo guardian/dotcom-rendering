@@ -58,11 +58,14 @@ interface Props {
     className: SerializedStyles;
 }
 
-const Standfirst = ({ article, className }: Props): JSX.Element =>
-    <div css={[className, Styles(article), DarkStyles(article)]}>
-        {renderText(article.standfirst, article.pillar)}
-    </div>
-
+const Standfirst = ({ article, className }: Props): JSX.Element | null =>
+    article.standfirst.map<JSX.Element | null>(standfirst =>
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
+        <div css={[className, Styles(article), DarkStyles(article)]}>
+            {renderText(standfirst, article.pillar)}
+        </div>
+    ).withDefault(null);
 
 // ----- Exports ----- //
 

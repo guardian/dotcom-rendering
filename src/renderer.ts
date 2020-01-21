@@ -133,14 +133,20 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
     }
 `;
 
-const ImageElement = (props: ImageProps): ReactElement =>
-    styledH('img', {
-        sizes: props.sizes,
-        srcSet: srcset(props.salt)(props.url),
-        alt: props.alt,
-        src: transformUrl(props.salt, props.url, 500),
-        css: imageStyles(props.width, props.height),
+const ImageElement = (props: ImageProps): ReactElement | null => {
+    const { url, sizes, salt, alt, width, height } = props;
+    if (!url) {
+        return null;
+    }
+
+    return styledH('img', {
+        sizes,
+        srcSet: srcset(url, salt),
+        alt,
+        src: transformUrl(salt, url, 500),
+        css: imageStyles(width, height),
     });
+}
 
 const FigureElement = (props: FigureElement): ReactElement =>
     styledH('figure', { css: props.className },

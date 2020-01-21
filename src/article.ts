@@ -3,7 +3,7 @@
 import { Pillar, pillarFromString } from 'pillar';
 import { Content } from 'mapiThriftModels/Content';
 import { IBlockElement } from 'mapiThriftModels/BlockElement';
-import { ITag } from 'mapiThriftModels/Tag';
+import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
@@ -30,15 +30,15 @@ const enum Layout {
 interface ArticleFields {
     pillar: Pillar;
     headline: string;
-    standfirst: DocumentFragment;
+    standfirst: Option<DocumentFragment>;
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     publishDate: string;
     mainImage: Option<Image>;
-    contributors: ITag[];
-    series: ITag;
+    contributors: Tag[];
+    series: Tag;
     commentable: boolean;
-    tags: ITag[];
+    tags: Tag[];
 }
 
 type Liveblog = ArticleFields & {
@@ -129,7 +129,7 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
 
 const parseImage = (element: IBlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
-    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData || {};
+    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
     return fromNullable(masterAsset).map(asset => ({
         kind: ElementKind.Image,
         alt,
@@ -158,7 +158,7 @@ const parseElement =
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
         case 'pullquote':
-            const { html: quote, attribution } = element.pullquoteTypeData || {};
+            const { html: quote, attribution } = element.pullquoteTypeData ?? {};
             if (!quote) {
                 return new Err('No quote field on pullquoteTypeData')
             }
@@ -169,23 +169,27 @@ const parseElement =
             });
 
         case 'interactive':
-            const { iframeUrl } = element.interactiveTypeData || {};
+            const { iframeUrl } = element.interactiveTypeData ?? {};
             if (!iframeUrl) {
                 return new Err('No iframeUrl field on interactiveTypeData')
             }
             return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
         case 'rich-link':
-            const { url, linkText } = element.richLinkTypeData || {};
-            if (!url || !linkText) {
-                return new Err('No url/linkText field on richLinkTypeData')
+            const { url, linkText } = element.richLinkTypeData ?? {};
+            if (!url) {
+                return new Err('No "url" field on richLinkTypeData');
+            } else if (!linkText) {
+                return new Err('No "linkText" field on richLinkTypeData');
             }
             return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
         case 'tweet':
-            const { id, html: h } = element.tweetTypeData || {};
-            if (!id || !h) {
-                return new Err('No id/html field on tweetTypeData')
+            const { id, html: h } = element.tweetTypeData ?? {};
+            if (!id) {
+                return new Err('No "id" field on tweetTypeData')
+            } else if (!h) {
+                return new Err('No "html" field on tweetTypeData')
             }
             return tweetContent(id, docParser(h))
                 .map(content => ({ kind: ElementKind.Tweet, content }));
@@ -223,7 +227,7 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
     ({
         pillar: pillarFromString(content?.pillarId),
         headline: content?.fields?.headline ?? "",
-        standfirst: docParser(content?.fields?.standfirst ?? ""),
+        standfirst: fromNullable(content?.fields?.standfirst).map(docParser),
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).map(docParser),
         // eslint-disable-next-line
@@ -242,7 +246,7 @@ const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleF
     const elements = body[0]?.elements;
     return ({
         ...articleFields(docParser, content),
-        body: parseElements(docParser)(elements),
+        body: elements !== undefined ? parseElements(docParser)(elements): [],
     });
 }
 
@@ -259,10 +263,10 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
             } else if (isFeature(content)) {
                 return { layout: Layout.Feature, ...articleFieldsWithBody(docParser, content) };
 
-            } else if (isReview(content)) {
+            } else if (isReview(content) && content?.fields?.starRating) {
                 return {
                     layout: Layout.Review,
-                    starRating: content?.fields?.starRating ?? 0,
+                    starRating: content.fields.starRating,
                     ...articleFieldsWithBody(docParser, content),
                 };
 
