@@ -7,8 +7,7 @@ const wrapperMargins = css`
 `;
 
 export const LayoutSlotBottom = () => {
-    const endpointUrl =
-        'https://zsxulafpt1.execute-api.eu-west-1.amazonaws.com/prod';
+    const endpointUrl = 'https://contributions.guardianapis.com';
     const { data, error } = useApi(endpointUrl);
 
     if (error) {
