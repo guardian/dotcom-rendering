@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const BlockquoteComponent: React.FC<Props> = ({ html }: Props) => {
-    const blockquote = css`
+    const blockquoteStyles = css`
         margin-bottom: 16px;
         ${body.medium()};
         font-style: italic;
@@ -27,7 +27,7 @@ export const BlockquoteComponent: React.FC<Props> = ({ html }: Props) => {
         <RewrappedComponent
             isUnwrapped={isUnwrapped}
             html={unwrappedHtml}
-            elCss={blockquote}
+            elCss={blockquoteStyles}
             tagName="blockquote"
         />
     );

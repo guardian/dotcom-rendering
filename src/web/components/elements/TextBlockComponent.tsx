@@ -50,7 +50,7 @@ export const TextBlockComponent: React.FC<Props> = ({
         html,
     });
 
-    const para = css`
+    const paraStyles = css`
         margin-bottom: 16px;
         ${body.medium()};
     `;
@@ -70,7 +70,7 @@ export const TextBlockComponent: React.FC<Props> = ({
                 <RewrappedComponent
                     isUnwrapped={isUnwrapped}
                     html={remainingLetters}
-                    elCss={para}
+                    elCss={paraStyles}
                     tagName="p"
                 />
             </>
@@ -81,7 +81,7 @@ export const TextBlockComponent: React.FC<Props> = ({
         <RewrappedComponent
             isUnwrapped={isUnwrapped}
             html={unwrappedHtml}
-            elCss={para}
+            elCss={paraStyles}
             tagName="p"
         />
     );
