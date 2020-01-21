@@ -8,30 +8,44 @@ const ratingsWrapper = css`
     display: inline-block;
 `;
 
-const largeStyles = css`
-    padding: 2px;
-    svg {
-        width: 23px;
-        height: 23px;
-    }
-`;
-
-const smallStyles = css`
-    padding: 2px;
-    svg {
-        width: 15px;
-        height: 15px;
-    }
-`;
+type SizeType = 'large' | 'medium' | 'small';
 
 const emptyStar = css`
     fill: transparent;
     stroke: ${palette.neutral[7]};
 `;
 
+const determinSize = (size: SizeType) => {
+    switch (size) {
+        case 'small':
+            return css`
+                padding: 2px;
+                svg {
+                    width: 15px;
+                    height: 15px;
+                }
+            `;
+        case 'medium':
+            return css`
+                padding: 4px;
+                svg {
+                    width: 19px;
+                    height: 19px;
+                }
+            `;
+        case 'large':
+            return css`
+                padding: 2px;
+                svg {
+                    width: 23px;
+                    height: 23px;
+                }
+            `;
+    }
+};
 export const StarRating: React.FC<{
     rating: number;
-    size: 'large' | 'small';
+    size: SizeType;
 }> = ({ rating, size = 'small' }) => {
     const stars = (n: number) => {
         return Array(5)
@@ -44,13 +58,7 @@ export const StarRating: React.FC<{
             });
     };
     return (
-        <div
-            className={cx(
-                ratingsWrapper,
-                size === 'large' && largeStyles,
-                size === 'small' && smallStyles,
-            )}
-        >
+        <div className={cx(ratingsWrapper, determinSize(size))}>
             {stars(rating)}
         </div>
     );
