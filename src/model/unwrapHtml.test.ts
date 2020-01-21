@@ -3,22 +3,27 @@ import { unwrapHtml } from './unwrapHtml';
 describe('unwrapHtml', () => {
     it('Returns unwrapped HTML if prefix and suffix match', () => {
         // Blockquote, elements inside
-        const bqHtml = '<blockquote class="quote"><p>inner</p></blockquote>';
-        const bqPrefix = '<blockquote class="quote">';
-        const bqSuffix = '</blockquote>';
+        const bqUnwrap = {
+            html: '<blockquote class="quote"><p>inner</p></blockquote>',
+            prefix: '<blockquote class="quote">',
+            suffix: '</blockquote>',
+        };
+
         const {
             willUnwrap: bqIsUnwrapped,
             unwrappedHtml: bqUnwrappedHtml,
-        } = unwrapHtml(bqPrefix, bqSuffix, bqHtml);
+        } = unwrapHtml(bqUnwrap);
 
         // Paragraph, no elements inside
-        const pHtml = '<p>inner</p>';
-        const pPrefix = '<p>';
-        const pSuffix = '</p>';
+        const pUnwrap = {
+            html: '<p>inner</p>',
+            prefix: '<p>',
+            suffix: '</p>',
+        };
         const {
             willUnwrap: pIsUnwrapped,
             unwrappedHtml: pUnwrappedHtml,
-        } = unwrapHtml(pPrefix, pSuffix, pHtml);
+        } = unwrapHtml(pUnwrap);
 
         // Testy test
         expect(bqIsUnwrapped).toBeTruthy();
@@ -28,16 +33,14 @@ describe('unwrapHtml', () => {
     });
 
     it('Returns non-unwrapped HTML if prefix and suffix do not match', () => {
-        const html = '<blockquote><p>inner</p></blockquote>';
-        const prefix = '<blockquote class="quote">';
-        const suffix = '</blockquote>';
-        const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(
-            prefix,
-            suffix,
-            html,
-        );
+        const bqUnwrap = {
+            html: '<blockquote><p>inner</p></blockquote>',
+            prefix: '<blockquote class="quote">',
+            suffix: '</blockquote>',
+        };
+        const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(bqUnwrap);
 
         expect(isUnwrapped).toBeFalsy();
-        expect(unwrappedHtml).toBe(html);
+        expect(unwrappedHtml).toBe(bqUnwrap.html);
     });
 });
