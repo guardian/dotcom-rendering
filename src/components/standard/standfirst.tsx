@@ -22,7 +22,9 @@ const FeatureStyles = `
 
 function Styles({ pillar, layout }: Article): SerializedStyles {
     const { kicker } = getPillarStyles(pillar);
-    const includeFeatureStyles = layout === Layout.Feature || layout === Layout.Review;
+    const includeFeatureStyles = layout === Layout.Feature
+        || layout === Layout.Review
+        || layout === Layout.Opinion;
 
     return css`
         padding-bottom: 6px;
