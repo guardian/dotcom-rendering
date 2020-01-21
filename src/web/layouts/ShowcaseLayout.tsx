@@ -39,13 +39,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // Allow 'LayoutSlotBottom' component to render if:
-    // - a 'forceEpic' URL flag is set to true (under any circumstance)
-    // - article not set to hide reader revenue (unless 'forceEpic' is set to true)
-    // TODO: plug 'forceEpic' variable below into the URL param through frontend
-    const forceEpic = false;
-    const renderBottomSlot =
-        forceEpic || (forceEpic && !CAPI.config.shouldHideReaderRevenue);
+    // Currently hardcode this condition to true or false, so we can easily control the slot during development.
+    const renderBottomSlot = false;
+    // TODO:
+    // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
+    // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
 
     return (
         <>
