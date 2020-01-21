@@ -6,11 +6,11 @@ import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedC
 export const SubheadingBlockComponent: React.FC<{ html: string }> = ({
     html,
 }) => {
-    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(
-        '<h2>',
-        '</h2>',
+    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
+        prefix: '<h2>',
+        suffix: '</h2>',
         html,
-    );
+    });
 
     return (
         <RewrappedComponent

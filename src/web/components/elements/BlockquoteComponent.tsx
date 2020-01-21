@@ -17,11 +17,11 @@ export const BlockquoteComponent: React.FC<Props> = ({ html }: Props) => {
         font-style: italic;
     `;
 
-    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(
-        '<blockquote class="quoted">',
-        '</blockquote>',
+    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
+        prefix: '<blockquote class="quted">',
+        suffix: '</blockquote>',
         html,
-    );
+    });
 
     return (
         <RewrappedComponent

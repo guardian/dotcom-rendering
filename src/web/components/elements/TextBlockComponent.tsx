@@ -44,11 +44,11 @@ export const TextBlockComponent: React.FC<Props> = ({
     designType,
     dropCap,
 }: Props) => {
-    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(
-        '<p>',
-        '</p>',
+    const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml({
+        prefix: '<p>',
+        suffix: '</p>',
         html,
-    );
+    });
 
     const para = css`
         margin-bottom: 16px;
