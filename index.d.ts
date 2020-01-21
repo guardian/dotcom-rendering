@@ -327,12 +327,9 @@ interface CardHeadlineType {
 /**
  * Onwards
  */
-type OnwardsLayoutType = 'fourAndFour';
-
 type OnwardsType = {
     heading: string;
     trails: TrailType[];
-    layout: OnwardsLayoutType;
 };
 
 /**
