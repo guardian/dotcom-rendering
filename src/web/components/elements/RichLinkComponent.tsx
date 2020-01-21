@@ -6,6 +6,7 @@ import Quote from '@frontend/static/icons/quote.svg';
 import { palette } from '@guardian/src-foundations';
 import { StarRating } from '@root/src/web/components/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
+import { Hide } from '@frontend/web/components/Hide';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { useApi } from '@frontend/web/components/lib/api';
@@ -207,8 +208,7 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
 
     const imageCardStyles = ['news', 'letters', 'media', 'feature'];
     const showImage =
-        richLink.thumbnailUrl &&
-        imageCardStyles.includes(richLink.cardStyle);
+        richLink.thumbnailUrl && imageCardStyles.includes(richLink.cardStyle);
     const isPaidContent = richLink.tags
         ? richLink.tags.filter(t => t.id === 'tone/advertisement-features')
               .length > 0
@@ -244,10 +244,20 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                         </div>
                     )}
                     {richLink.starRating && richLink.starRating > 0 && (
-                        <StarRating
-                            rating={richLink.starRating}
-                            size="small"
-                        />
+                        <>
+                            <Hide when="above" breakpoint="wide">
+                                <div
+                                    className={css`
+                                        margin-top: 5px;
+                                    `}
+                                >
+                                    <StarRating rating={3} size="small" />
+                                </div>
+                            </Hide>
+                            <Hide when="below" breakpoint="wide">
+                                <StarRating rating={3} size="large" />
+                            </Hide>
+                        </>
                     )}
                     {isPaidContent && richLink.sponsorName && (
                         <div className={paidForBranding}>
