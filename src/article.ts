@@ -5,6 +5,7 @@ import { Content, ElementType, BlockElement, Tag, Block } from 'capiThriftModels
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
+import { ITag } from 'mapiThriftModels/Tag';
 
 
 // ----- Types ----- //
@@ -220,11 +221,13 @@ const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleF
         body: parseElements(docParser)(content.blocks.body[0].elements),
     });
 
+const containsOpinionTags = (tags: Tag[]) =>
+    tags.some(tag => tag.id === 'tone/comment' || tag.id === 'tone/letters')
+
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
     switch (content.type) {
         case 'article':
-
-            if (pillarFromString(content.pillarId) === Pillar.opinion) {
+            if (pillarFromString(content.pillarId) === Pillar.opinion || containsOpinionTags(content.tags)) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
 
             } else if (isImmersive(content)) {
