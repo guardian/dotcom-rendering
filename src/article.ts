@@ -5,8 +5,6 @@ import { Content, ElementType, BlockElement, Tag, Block } from 'capiThriftModels
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
-import { ITag } from 'mapiThriftModels/Tag';
-
 
 // ----- Types ----- //
 
