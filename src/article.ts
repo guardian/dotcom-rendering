@@ -5,7 +5,7 @@ import { Content } from 'mapiThriftModels/Content';
 import { IBlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
-import { Option, fromNullable, Some } from 'types/option';
+import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
 import { IBlock } from 'mapiThriftModels';
 
