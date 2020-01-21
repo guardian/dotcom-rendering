@@ -16,10 +16,10 @@ export const LayoutSlotBottom = () => {
         return null;
     }
 
-    if (data) {
+    if (data && data.html) {
         return (
             <div className={wrapperMargins}>
-                <style>{data.css}</style>
+                {data.css && <style>{data.css}</style>}
                 <div
                     // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{ __html: data.html }}
