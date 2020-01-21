@@ -219,13 +219,14 @@ const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleF
         body: parseElements(docParser)(content.blocks.body[0].elements),
     });
 
-const containsOpinionTags = (tags: Tag[]) =>
+const containsOpinionTags = (tags: Tag[]): boolean =>
     tags.some(tag => tag.id === 'tone/comment' || tag.id === 'tone/letters')
 
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
-    switch (content.type) {
+    const { type, tags, pillarId, fields, blocks } = content;
+    switch (type) {
         case 'article':
-            if (pillarFromString(content.pillarId) === Pillar.opinion || containsOpinionTags(content.tags)) {
+            if (pillarFromString(pillarId) === Pillar.opinion || containsOpinionTags(tags)) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
 
             } else if (isImmersive(content)) {
@@ -237,7 +238,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
             } else if (isReview(content)) {
                 return {
                     layout: Layout.Review,
-                    starRating: content.fields.starRating,
+                    starRating: fields.starRating,
                     ...articleFieldsWithBody(docParser, content),
                 };
 
@@ -250,7 +251,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
         case 'liveblog':
             return {
                 layout: Layout.Liveblog,
-                blocks: parseBlocks(docParser)(content.blocks.body),
+                blocks: parseBlocks(docParser)(blocks.body),
                 ...articleFields(docParser, content),
             };
 
