@@ -63,6 +63,9 @@
                         "$ref": "#/definitions/PullquoteBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/BlockquoteBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/QABlockElement"
                     },
                     {
@@ -862,6 +865,24 @@
                 "role"
             ]
         },
+        "BlockquoteBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.BlockquoteBlockElement"
+                    ]
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "html"
+            ]
+        },
         "QABlockElement": {
             "type": "object",
             "properties": {
@@ -1219,6 +1240,9 @@
                             },
                             {
                                 "$ref": "#/definitions/PullquoteBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/BlockquoteBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/QABlockElement"
