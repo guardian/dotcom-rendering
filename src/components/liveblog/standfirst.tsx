@@ -21,8 +21,6 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
     a {
         color: ${palette.neutral[93]};
     }
-
-    ${bulletStyles(liveblogBackground, .4)}
 `;
 
 interface LiveblogStandfirstProps {

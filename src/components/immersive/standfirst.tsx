@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
-import { bulletStyles, headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
+import { headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
 import { Option } from 'types/option';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { bulletStyles, commonArticleStyles } from 'styles';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 
@@ -19,9 +18,6 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     figure {
         margin: 1rem 0;
     }
-
-    ${commonArticleStyles(pillarStyles)}
-    ${bulletStyles(pillarStyles.kicker)}
 
     .image, figcaption {
         padding: 0;
