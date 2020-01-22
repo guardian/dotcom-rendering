@@ -110,30 +110,30 @@ const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
     styledH('h2', { css: HeadingTwoStyles }, props.children );
 
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
-    const text = node.textContent ?? "";
+    const text = node.textContent ?? '';
     switch (node.nodeName) {
         case 'P':
             return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case '#text':
             return text?.includes('•') ? h(Bullet, { pillar, text }) : text;
         case 'SPAN':
-            return node.textContent;
+            return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar, key });
+            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key });
         case 'H2':
             return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'BLOCKQUOTE':
-            return h('blockquote', { key }, node.textContent);
+            return h('blockquote', { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'STRONG':
-            return h('strong', { key }, node.textContent);
+            return h('strong', { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'EM':
-            return h('em', { key }, node.textContent);
+            return h('em', { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'BR':
             return h('br', { key }, null);
         case 'UL':
             return styledH('ul', { css: listStyles }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'LI':
-            return styledH('li', { css: listItemStyles }, text);
+            return styledH('li', { css: listItemStyles }, Array.from(node.childNodes).map(textElement(pillar)));
         default:
             return null;
     }
