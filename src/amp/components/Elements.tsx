@@ -87,6 +87,8 @@ export const Elements = (
                 return (
                     <PullQuote key={i} html={element.html} pillar={pillar} />
                 );
+            case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+                return <Text key={i} html={element.html} pillar={pillar} />;
             case 'model.dotcomrendering.pageElements.QABlockElement':
                 return (
                     <Expandable

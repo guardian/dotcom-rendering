@@ -173,6 +173,11 @@ interface PullquoteBlockElement {
     attribution?: string;
 }
 
+interface BlockquoteBlockElement {
+    _type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
+    html: string;
+}
+
 interface QABlockElement {
     _type: 'model.dotcomrendering.pageElements.QABlockElement';
     id: string;
@@ -273,6 +278,7 @@ type CAPIElement =
     | EmbedBlockElement
     | DisclaimerBlockElement
     | PullquoteBlockElement
+    | BlockquoteBlockElement
     | QABlockElement
     | GuideBlockElement
     | ProfileBlockElement

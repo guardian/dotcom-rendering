@@ -355,6 +355,7 @@ export const CAPI: CAPIType = {
     sectionLabel: 'Ticket prices',
     sectionUrl: 'money/ticket-prices',
     shouldHideAds: false,
+    shouldHideReaderRevenue: true,
     isAdFreeUser: false,
     webURL:
         'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
@@ -506,7 +507,7 @@ export const CAPI: CAPIType = {
         edition: '',
         section: '',
         sharedAdTargeting: {},
-        keywordIds: [],
+        keywordIds: '',
         showRelatedContent: false,
     },
     webTitle: 'Foobar',

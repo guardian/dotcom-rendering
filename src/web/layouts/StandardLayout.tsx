@@ -153,6 +153,12 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
+    // Currently hardcode this condition to true or false, so we can easily control the slot during development.
+    const renderBottomSlot = false;
+    // TODO:
+    // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
+    // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+
     return (
         <>
             <Section
@@ -286,6 +292,15 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                 </StandardGrid>
             </Section>
+
+            {renderBottomSlot && (
+                <Section
+                    islandId="layout-slot-bottom"
+                    showSideBorders={false}
+                    showTopBorder={false}
+                    padded={false}
+                />
+            )}
 
             <Section islandId="onwards-content" />
 
