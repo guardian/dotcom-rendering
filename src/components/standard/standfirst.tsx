@@ -36,6 +36,10 @@ function Styles({ pillar, layout }: Article): SerializedStyles {
             margin: 0;
         }
 
+        li {
+            font-weight: 700;
+        }
+
         ${linkStyle(kicker)}
         ${bulletStyles(kicker)}
         ${sidePadding}

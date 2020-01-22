@@ -105,6 +105,10 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
             return h('em', { key }, node.textContent);
         case 'BR':
             return h('br', { key }, null);
+        case 'UL':
+            return h('ul', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'LI':
+            return h('li', { key }, node.textContent);
         default:
             return null;
     }
