@@ -223,8 +223,8 @@ const containsOpinionTags = (tags: Tag[]): boolean =>
     tags.some(tag => tag.id === 'tone/comment' || tag.id === 'tone/letters')
 
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
-    const { type, tags, pillarId, fields, blocks } = content;
-    switch (type) {
+    const { tags, pillarId, fields, blocks } = content;
+    switch (content.type) {
         case 'article':
             if (pillarFromString(pillarId) === Pillar.opinion || containsOpinionTags(tags)) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
