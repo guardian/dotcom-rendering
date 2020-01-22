@@ -19,26 +19,26 @@ const determinSize = (size: SizeType) => {
     switch (size) {
         case 'small':
             return css`
-                padding: 2px;
+                padding: 3px;
                 svg {
-                    width: 15px;
-                    height: 15px;
+                    width: 12px;
+                    height: 12px;
                 }
             `;
         case 'medium':
             return css`
                 padding: 4px;
                 svg {
-                    width: 19px;
-                    height: 19px;
+                    width: 14px;
+                    height: 14px;
                 }
             `;
         case 'large':
             return css`
                 padding: 2px;
                 svg {
-                    width: 23px;
-                    height: 23px;
+                    width: 20px;
+                    height: 20px;
                 }
             `;
     }
