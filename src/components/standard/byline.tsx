@@ -87,7 +87,9 @@ function Byline({ article, imageSalt }: Props): JSX.Element {
                 />
                 <div className="author">
                     <Author byline={article.bylineHtml} pillar={article.pillar} />
-                    <time className="date">{ formatDate(new Date(article.publishDate)) }</time>
+                    { article.publishDate
+                        .map<JSX.Element | null>(date => <time className="date">{ formatDate(new Date(date)) }</time>)
+                        .withDefault(null) }
                     <Follow contributors={article.contributors} />
                 </div>
             </div>

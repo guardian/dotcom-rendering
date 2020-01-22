@@ -29,7 +29,7 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex')    
 
-function transformUrl(salt: string, input: string, width = 0): string {
+function transformUrl(salt: string, input: string, width: number): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
@@ -68,28 +68,11 @@ const toSrcset = (salt: string, assets: Asset[]): Option<string> => {
     return new Some(srcset(master.file, salt));
 }
 
-/**
- * Transforms an image asset from a CAPI response, which contains URLs in
- * Grid-style format (e.g. `https://media.guim.co.uk/...`), to a Fastly image
- * resizer URL (e.g. `https://i.guim.co.uk/img/media/...`).
- * 
- * @param salt Salt used to sign (hash) the image.
- * @param asset An image asset, typically supplied by CAPI.
- * @returns A URL to retrieve a given image from the image resizer.
- */
-const toUrl = (salt: string, asset: Asset): string =>
-    asset?.file
-        ? transformUrl(salt, asset.file, asset?.typeData?.width)
-        : ""
-
-
-
 // ----- Exports ----- //
 
 export {
     Asset,
     srcset,
     toSrcset,
-    toUrl,
     transformUrl
 };
