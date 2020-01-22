@@ -291,8 +291,10 @@ const Interactive = (props: { url: string }): ReactElement =>
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
-const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement =>
-    h('blockquote', { key: props.key }, ...Array.from(props.content).map(textElement(props.pillar)));
+const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
+    // twitter script relies on twitter-tweet class being present
+    return h('blockquote', { key: props.key, className: 'twitter-tweet' }, ...Array.from(props.content).map(textElement(props.pillar)));
+}
 
 const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
