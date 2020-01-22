@@ -239,6 +239,9 @@
         "nav": {},
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
+        },
+        "slotMachineFlags": {
+            "type": "string"
         }
     },
     "required": [
@@ -1496,6 +1499,9 @@
                     "type": "string"
                 },
                 "showRelatedContent": {
+                    "type": "boolean"
+                },
+                "shouldHideReaderRevenue": {
                     "type": "boolean"
                 }
             },

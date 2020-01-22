@@ -27,6 +27,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
+import { parse } from '@frontend/lib/slot-machine-flags';
 import { ShowcaseHeader } from './ShowcaseHeader';
 
 interface Props {
@@ -39,8 +40,9 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // Currently hardcode this condition to true or false, so we can easily control the slot during development.
-    const renderBottomSlot = false;
+    // defaults to false, but use ?slot-machine-flags=showBodyEnd to show
+    const renderBottomSlot = parse(CAPI.slotMachineFlags || '').showBodyEnd;
+
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
     // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.

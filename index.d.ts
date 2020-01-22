@@ -225,6 +225,8 @@ interface CAPIType {
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
 
     pageFooter: FooterType;
+
+    slotMachineFlags?: string;
 }
 
 interface TagType {
