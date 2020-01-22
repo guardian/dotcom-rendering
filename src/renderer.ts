@@ -58,6 +58,7 @@ const listStyles = (colour: string): SerializedStyles => css`
 const listItemStyles: SerializedStyles = css`
     padding-left: 2rem;
     line-height: 2.2rem;
+    padding-bottom: 0.375rem;
 
     &::before {
         display: inline-block;
