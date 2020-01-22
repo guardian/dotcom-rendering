@@ -9,7 +9,6 @@ import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
 import { IBlock } from 'mapiThriftModels';
 
-
 // ----- Types ----- //
 
 const enum Layout {
@@ -250,11 +249,14 @@ const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleF
     });
 }
 
+const containsOpinionTags = (tags: Tag[]): boolean =>
+    tags.some(tag => tag.id === 'tone/comment' || tag.id === 'tone/letters')
+
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
+    const { tags, pillarId, fields } = content;
     switch (content.type.toString()) {
         case 'article':
-
-            if (pillarFromString(content.pillarId) === Pillar.opinion) {
+            if (pillarFromString(pillarId) === Pillar.opinion || containsOpinionTags(tags)) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
 
             } else if (isImmersive(content)) {
@@ -263,10 +265,10 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
             } else if (isFeature(content)) {
                 return { layout: Layout.Feature, ...articleFieldsWithBody(docParser, content) };
 
-            } else if (isReview(content) && content?.fields?.starRating) {
+            } else if (isReview(content) && fields?.starRating) {
                 return {
                     layout: Layout.Review,
-                    starRating: content.fields.starRating,
+                    starRating: fields.starRating,
                     ...articleFieldsWithBody(docParser, content),
                 };
 

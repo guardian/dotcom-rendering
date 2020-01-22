@@ -65,8 +65,8 @@ const bulletStyles = (colour: string): SerializedStyles => css`
 const HeadingTwoStyles = css`
     font-size: 1.8rem;
     line-height: 2.2rem;
-    margin: ${basePx(1, 0)};
-    font-weight: 500;
+    margin: 1rem 0 4px 0;
+    font-weight: 700;
 
     & + p {
         margin-top: 0;
@@ -97,6 +97,14 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
             return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar, key });
         case 'H2':
             return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'BLOCKQUOTE':
+            return h('blockquote', { key }, node.textContent);
+        case 'STRONG':
+            return h('strong', { key }, node.textContent);
+        case 'EM':
+            return h('em', { key }, node.textContent);
+        case 'BR':
+            return h('br', { key }, null);
         default:
             return null;
     }
@@ -289,8 +297,10 @@ const Interactive = (props: { url: string }): ReactElement =>
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
-const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement =>
-    h('blockquote', { key: props.key }, ...Array.from(props.content).map(textElement(props.pillar)));
+const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
+    // twitter script relies on twitter-tweet class being present
+    return h('blockquote', { key: props.key, className: 'twitter-tweet' }, ...Array.from(props.content).map(textElement(props.pillar)));
+}
 
 const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
