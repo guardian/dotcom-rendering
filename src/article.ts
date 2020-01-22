@@ -6,7 +6,6 @@ import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, article
 import { Option, fromNullable } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
 
-
 // ----- Types ----- //
 
 const enum Layout {
@@ -220,11 +219,14 @@ const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleF
         body: parseElements(docParser)(content.blocks.body[0].elements),
     });
 
+const containsOpinionTags = (tags: Tag[]): boolean =>
+    tags.some(tag => tag.id === 'tone/comment' || tag.id === 'tone/letters')
+
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
+    const { tags, pillarId, fields, blocks } = content;
     switch (content.type) {
         case 'article':
-
-            if (pillarFromString(content.pillarId) === Pillar.opinion) {
+            if (pillarFromString(pillarId) === Pillar.opinion || containsOpinionTags(tags)) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
 
             } else if (isImmersive(content)) {
@@ -236,7 +238,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
             } else if (isReview(content)) {
                 return {
                     layout: Layout.Review,
-                    starRating: content.fields.starRating,
+                    starRating: fields.starRating,
                     ...articleFieldsWithBody(docParser, content),
                 };
 
@@ -249,7 +251,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
         case 'liveblog':
             return {
                 layout: Layout.Liveblog,
-                blocks: parseBlocks(docParser)(content.blocks.body),
+                blocks: parseBlocks(docParser)(blocks.body),
                 ...articleFields(docParser, content),
             };
 
