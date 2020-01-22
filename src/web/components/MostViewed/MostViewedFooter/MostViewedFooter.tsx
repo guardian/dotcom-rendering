@@ -91,9 +91,10 @@ const secondTierStyles = css`
 interface Props {
     sectionName?: string;
     pillar: Pillar;
+    ajaxUrl: string;
 }
 
-function buildSectionUrl(sectionName?: string) {
+function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
     const sectionsWithoutPopular = ['info', 'global'];
     const hasSection =
         sectionName && !sectionsWithoutPopular.includes(sectionName);
@@ -101,11 +102,11 @@ function buildSectionUrl(sectionName?: string) {
         hasSection ? `/${sectionName}` : ''
     }.json`;
 
-    return `https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`;
+    return `${ajaxUrl}${endpoint}?dcr=true`;
 }
 
-export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
-    const url = buildSectionUrl(sectionName);
+export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
+    const url = buildSectionUrl(ajaxUrl, sectionName);
     const { data, error } = useApi<
         MostViewedFooterPayloadType | TrailTabType[]
     >(url);
