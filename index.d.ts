@@ -452,7 +452,7 @@ interface TrailTabType {
     trails: TrailType[];
 }
 
-interface MostViewedFooterType {
+interface MostViewedFooterPayloadType {
     tabs: TrailTabType[];
     mostCommented: TrailType;
     mostShared: TrailType;

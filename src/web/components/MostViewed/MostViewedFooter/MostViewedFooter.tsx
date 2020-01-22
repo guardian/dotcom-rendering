@@ -106,7 +106,9 @@ function buildSectionUrl(sectionName?: string) {
 
 export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
     const url = buildSectionUrl(sectionName);
-    const { data, error } = useApi<MostViewedFooterType | TrailTabType[]>(url);
+    const { data, error } = useApi<
+        MostViewedFooterPayloadType | TrailTabType[]
+    >(url);
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
