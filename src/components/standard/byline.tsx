@@ -88,6 +88,8 @@ function Byline({ article, imageSalt }: Props): JSX.Element {
                 <div className="author">
                     <Author byline={article.bylineHtml} pillar={article.pillar} />
                     { article.publishDate
+                        // This is not an iterator, ESLint is confused
+                        // eslint-disable-next-line react/jsx-key
                         .map<JSX.Element | null>(date => <time className="date">{ formatDate(new Date(date)) }</time>)
                         .withDefault(null) }
                     <Follow contributors={article.contributors} />

@@ -95,10 +95,14 @@ const LiveblogBlock = ({
 }: LiveblogBlockProps): JSX.Element => {
 
     const relativeFirstPublished: JSX.Element | null = firstPublishedDate
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
         .map<JSX.Element | null>(date => <time>{makeRelativeDate(date)}</time>)
         .withDefault(null)
 
     const relativeLastModified: JSX.Element | null = lastModifiedDate
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
         .map<JSX.Element | null>(date => <time>Last updated: {formatDate(date)}</time>)
         .withDefault(null)
 
