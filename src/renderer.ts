@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, Fragment, ReactElement } from 'react';
+import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';

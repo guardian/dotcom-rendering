@@ -1,5 +1,4 @@
 import React from 'react';
-import { bulletStyles } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import LeftColumn from 'components/shared/leftColumn';
