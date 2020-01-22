@@ -30,7 +30,6 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 
     padding: ${basePx(1)};
-    ${bulletStyles(kicker)}
 `;
 
 const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`

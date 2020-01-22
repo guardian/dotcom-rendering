@@ -50,6 +50,31 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
         props.text,
     );
 
+const listStyles = (colour: string): SerializedStyles => css`
+    list-style: none;
+    padding-left: 0;
+`
+
+const listItemStyles: SerializedStyles = css`
+    padding-left: 2rem;
+    line-height: 2.2rem;
+
+    &::before {
+        display: inline-block;
+        content: '';
+        border-radius: 0.5rem;
+        height: 1rem;
+        width: 1rem;
+        margin-right: 1rem;
+        background-color: ${palette.neutral[86]};
+        margin-left: -2rem;
+    }
+
+    > p:first-of-type {
+        display: inline;
+    }
+`
+
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
 
@@ -75,21 +100,21 @@ const HeadingTwoStyles = css`
 `
 
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    h(Fragment, null,
+    h('p', null,
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
+        null
     );
 
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
     styledH('h2', { css: HeadingTwoStyles }, props.children );
 
-
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? "";
     switch (node.nodeName) {
         case 'P':
             return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case '#text':
-            const text = node.textContent;
             return text?.includes('•') ? h(Bullet, { pillar, text }) : text;
         case 'SPAN':
             return node.textContent;
@@ -106,9 +131,9 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
         case 'BR':
             return h('br', { key }, null);
         case 'UL':
-            return h('ul', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return styledH('ul', { css: listStyles }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'LI':
-            return h('li', { key }, node.textContent);
+            return styledH('li', { css: listItemStyles }, text);
         default:
             return null;
     }
