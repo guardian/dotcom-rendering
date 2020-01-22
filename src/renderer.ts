@@ -51,6 +51,7 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
 
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
+    display: inline-block;
 
     &::before {
         content: '';
@@ -75,9 +76,9 @@ const HeadingTwoStyles = css`
 
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
     h(Fragment, null,
-        styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
+        styledH('p', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
-        h('br', null, null),
+        null,
     );
 
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
