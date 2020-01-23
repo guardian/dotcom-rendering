@@ -60,9 +60,7 @@ interface Props {
 }
 
 const Standfirst = ({ article, className }: Props): JSX.Element | null =>
-    article.standfirst.map<JSX.Element | null>(standfirst =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    article.standfirst.fmap<JSX.Element | null>(standfirst =>
         <div css={[className, Styles(article), DarkStyles(article)]}>
             {renderText(standfirst, article.pillar)}
         </div>

@@ -164,8 +164,8 @@ export const fontFace = (
 ): SerializedStyles => css`
   @font-face {
     font-family: ${family};
-    ${style.map((s: string) => `font-style: ${s};`).withDefault('')}
-    ${weight.map((w: number | string) => `font-weight: ${w};`).withDefault('')}
+    ${style.fmap((s: string) => `font-style: ${s};`).withDefault('')}
+    ${weight.fmap((w: number | string) => `font-weight: ${w};`).withDefault('')}
     src: url('${url}');
   }
 `;

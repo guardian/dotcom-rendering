@@ -61,16 +61,14 @@ const Standfirst = ({
 }: Props): JSX.Element => {
     const pillarStyles = getPillarStyles(pillar);
 
-    const standfirstHtml = standfirst.map<ReactNode>(html =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    const standfirstHtml = standfirst.fmap<ReactNode>(html =>
         renderText(html, pillar)
     ).withDefault(null)
 
     const standfirstIncludesByline = standfirst
-        .map(doc => doc.textContent?.includes(byline)).withDefault(false);
+        .fmap(doc => doc.textContent?.includes(byline)).withDefault(false);
 
-    const content = bylineHtml.map<ReactNode>(html => {
+    const content = bylineHtml.fmap<ReactNode>(html => {
         if (byline !== '' && standfirstIncludesByline) {
             return <div>{standfirstHtml}</div>;
         } else {

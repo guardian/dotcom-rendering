@@ -74,15 +74,11 @@ interface LiveblogBylineProps {
 const LiveblogByline = ({ article, imageSalt}: LiveblogBylineProps): JSX.Element => {
     const pillarStyles = getPillarStyles(article.pillar);
 
-    const byline = article.bylineHtml.map<ReactNode>(html =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    const byline = article.bylineHtml.fmap<ReactNode>(html =>
         <address>{ renderText(html, article.pillar) }</address>
     ).withDefault(null);
 
-    const date = article.publishDate.map<ReactNode>(date =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    const date = article.publishDate.fmap<ReactNode>(date =>
         <time>{ formatDate(new Date(date)) }</time>
     ).withDefault(null)
 

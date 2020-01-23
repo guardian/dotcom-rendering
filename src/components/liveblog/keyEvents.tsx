@@ -148,9 +148,7 @@ const LiveblogKeyEvents = ({ pillar, blocks }: LiveblogKeyEventsProps): JSX.Elem
                 <ul>
                     {keyEvents.map(event => {
                         const relativeDate: JSX.Element | null = event.firstPublished
-                            // This is not an iterator, ESLint is confused
-                            // eslint-disable-next-line react/jsx-key
-                            .map<JSX.Element | null>(date => <time>{makeRelativeDate(date)}</time>)
+                            .fmap<JSX.Element | null>(date => <time>{makeRelativeDate(date)}</time>)
                             .withDefault(null)
 
                         return <li key={event.id}>

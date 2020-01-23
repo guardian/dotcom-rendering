@@ -18,7 +18,7 @@ class Ok<E, B> implements ResultInterface<E, B> {
         return g(this.value);
     }
 
-    map<C>(f: (a: B) => C): Result<E, C> {
+    fmap<C>(f: (a: B) => C): Result<E, C> {
         return new Ok(f(this.value));
     }
 
@@ -44,7 +44,7 @@ class Err<E, B> implements ResultInterface<E, B> {
         return f(this.error);
     }
 
-    map<C>(_f: (a: B) => C): Result<E, C> {
+    fmap<C>(_f: (a: B) => C): Result<E, C> {
         return new Err(this.error);
     }
 

@@ -43,9 +43,7 @@ interface Props {
 }
 
 const HeaderImage = ({ className, image, imageSalt }: Props): JSX.Element | null =>
-    image.map<JSX.Element | null>(imageData =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    image.fmap<JSX.Element | null>(imageData =>
         <div css={[className, Styles]}>
             <figure>
                 <ImageElement

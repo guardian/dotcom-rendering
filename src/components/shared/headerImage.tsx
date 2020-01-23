@@ -38,9 +38,7 @@ interface HeaderImageProps {
 }
 
 const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Element | null => {
-    const headerImage: Option<JSX.Element | null> = image.map(imageData =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    const headerImage: Option<JSX.Element | null> = image.fmap(imageData =>
         <div css={[className, Styles(imageData.width, imageData.height)]}>
             <figure aria-labelledby={captionId}>
                 <ImageElement

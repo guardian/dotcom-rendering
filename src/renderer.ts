@@ -23,7 +23,7 @@ const getAttrs = (node: Node): Option<NamedNodeMap> =>
 
 const getAttr = (attr: string) => (node: Node): Option<string> =>
     getAttrs(node).andThen(attrs =>
-        fromNullable(attrs.getNamedItem(attr)).map(attr => attr.value)
+        fromNullable(attrs.getNamedItem(attr)).fmap(attr => attr.value)
     );
 
 const getHref: (node: Node) => Option<string> =

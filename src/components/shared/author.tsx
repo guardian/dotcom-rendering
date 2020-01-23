@@ -15,9 +15,7 @@ interface Props {
 }
 
 const Author = (props: Props): JSX.Element | null =>
-    props.byline.map<JSX.Element | null>((bylineHtml: DocumentFragment) =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    props.byline.fmap<JSX.Element | null>((bylineHtml: DocumentFragment) =>
         h('address', null, renderText(bylineHtml, props.pillar))
     ).withDefault(null);
 
