@@ -159,7 +159,7 @@ const parseElement =
 
         case 'image':
             return parseImage(element)
-                .map<Result<string, Image>>(image => new Ok(image))
+                .fmap<Result<string, Image>>(image => new Ok(image))
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
         case 'pullquote':

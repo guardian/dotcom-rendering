@@ -68,9 +68,7 @@ const Byline = ({ pillar, publicationDate, contributors }: Props): JSX.Element =
             <div css={sidePadding}>
                 <div className="author">
                     { publicationDate
-                        // This is not an iterator, ESLint is confused
-                        // eslint-disable-next-line react/jsx-key
-                        .map<JSX.Element | null>(date => <time>{formatDate(date)}</time>)
+                        .fmap<JSX.Element | null>(date => <time>{formatDate(date)}</time>)
                         .withDefault(null) }
                     <Follow contributors={contributors} />
                 </div>

@@ -29,9 +29,7 @@ interface LiveblogStandfirstProps {
 }
 
 const LiveblogStandfirst = ({ standfirst, pillar }: LiveblogStandfirstProps): JSX.Element | null =>
-    standfirst.map<JSX.Element | null>(doc =>
-        // This is not an iterator, ESLint is confused
-        // eslint-disable-next-line react/jsx-key
+    standfirst.fmap<JSX.Element | null>(doc =>
         <LeftColumn className={StandfirstStyles(getPillarStyles(pillar))}>
             <div>{ renderText(doc, pillar) }</div>
         </LeftColumn>

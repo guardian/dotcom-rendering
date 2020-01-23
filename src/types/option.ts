@@ -17,7 +17,7 @@ class Some<A> implements OptionInterface<A> {
         return this.value;
     }
 
-    map<B>(f: (a: A) => B): Option<B> {
+    fmap<B>(f: (a: A) => B): Option<B> {
         return new Some(f(this.value));
     }
 
@@ -37,7 +37,7 @@ class None<A> implements OptionInterface<A> {
         return a;
     }
 
-    map<B>(_f: (a: A) => B): Option<B> {
+    fmap<B>(_f: (a: A) => B): Option<B> {
         return new None();
     }
 
