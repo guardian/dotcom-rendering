@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
@@ -251,11 +252,17 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                                         margin-top: 5px;
                                     `}
                                 >
-                                    <StarRating rating={3} size="small" />
+                                    <StarRating
+                                        rating={richLink.starRating}
+                                        size="small"
+                                    />
                                 </div>
                             </Hide>
                             <Hide when="below" breakpoint="wide">
-                                <StarRating rating={3} size="large" />
+                                <StarRating
+                                    rating={richLink.starRating}
+                                    size="large"
+                                />
                             </Hide>
                         </>
                     )}
