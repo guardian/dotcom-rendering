@@ -155,7 +155,6 @@ const includesTweets = (content: Content): boolean => {
 
 // ----- Functions ----- //
 
-// TODO: request less data from capi
 const capiEndpoint = (articleId: string, key: string): string => {
 
     const params = new URLSearchParams({
