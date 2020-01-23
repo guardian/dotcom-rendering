@@ -135,7 +135,7 @@ const parseImage = (element: BlockElement): Option<Image> => {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return fromNullable(masterAsset).map((asset: any) => ({
+    return fromNullable(masterAsset).fmap((asset: any) => ({
         kind: ElementKind.Image,
         alt,
         caption,
@@ -197,7 +197,7 @@ const parseElement =
                 return new Err('No "html" field on tweetTypeData')
             }
             return tweetContent(id, docParser(h))
-                .map(content => ({ kind: ElementKind.Tweet, content }));
+                .fmap(content => ({ kind: ElementKind.Tweet, content }));
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
@@ -245,9 +245,9 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
     ({
         pillar: pillarFromString(content?.pillarId),
         headline: content?.fields?.headline ?? "",
-        standfirst: fromNullable(content?.fields?.standfirst).map(docParser),
+        standfirst: fromNullable(content?.fields?.standfirst).fmap(docParser),
         byline: content?.fields?.byline ?? "",
-        bylineHtml: fromNullable(content?.fields?.bylineHtml).map(docParser),
+        bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(docParser),
         publishDate: capiDateTimeToDate(content.webPublicationDate),
         mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),

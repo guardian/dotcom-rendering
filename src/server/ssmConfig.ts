@@ -39,7 +39,7 @@ async function getState(): Promise<Config> {
 }
 
 async function fetchConfig(): Promise<Config> {
-    return state.map(s => Promise.resolve(s)).withDefault(getState());
+    return state.fmap(s => Promise.resolve(s)).withDefault(getState());
 }
 
 export async function getConfigValue<A>(key: string, defaultValue?: A): Promise<A> {

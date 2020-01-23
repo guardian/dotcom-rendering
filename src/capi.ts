@@ -51,7 +51,7 @@ function parseCapiError(capiResponse: string): string {
         const capiError: CapiError = JSON.parse(capiResponse);
 
         return extractErrorMessage(capiError)
-            .map(msg => `It came with this message: ${msg}`)
+            .fmap(msg => `It came with this message: ${msg}`)
             .withDefault('There was no message to explain why.');
     } catch (e) {
         return `I wasn\'t able to parse the error message because: ${e}`;
