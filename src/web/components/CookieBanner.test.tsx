@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render /* , fireEvent */ } from '@testing-library/react';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,
@@ -15,7 +15,7 @@ jest.mock('@frontend/web/browser/cookie', () => ({
 }));
 
 describe('CookieBanner', () => {
-    const consentCookie = 'GU_TK';
+    // const consentCookie = 'GU_TK';
 
     beforeEach(() => {
         addCookie.mockReset();
@@ -23,35 +23,39 @@ describe('CookieBanner', () => {
     });
 
     afterEach(() => {
-        expect(getCookie).toHaveBeenCalledWith(consentCookie);
+        // expect(getCookie).toHaveBeenCalledWith(consentCookie);
     });
 
-    it('It should render null if consentCookie set', () => {
-        getCookie.mockImplementation(() => true);
-
+    it('It should render null', () => {
         const { container } = render(<CookieBanner />);
-
         expect(container.firstChild).toBeNull();
     });
+    // it('It should render null if consentCookie set', () => {
+    //     getCookie.mockImplementation(() => true);
 
-    it('It should not render null if consentCookie not set', () => {
-        getCookie.mockImplementation(() => false);
+    //     const { container } = render(<CookieBanner />);
 
-        const { container } = render(<CookieBanner />);
+    //     expect(container.firstChild).toBeNull();
+    // });
 
-        expect(container.firstChild).not.toBeNull();
-    });
+    // it('It should not render null if consentCookie not set', () => {
+    //     getCookie.mockImplementation(() => false);
 
-    it('It should add consentCookie on button click', () => {
-        getCookie.mockImplementation(() => false);
+    //     const { container } = render(<CookieBanner />);
 
-        const { container, getByText } = render(<CookieBanner />);
+    //     expect(container.firstChild).not.toBeNull();
+    // });
 
-        expect(container.firstChild).not.toBeNull();
+    // it('It should add consentCookie on button click', () => {
+    //     getCookie.mockImplementation(() => false);
 
-        fireEvent.click(getByText("I'm OK with that"));
+    //     const { container, getByText } = render(<CookieBanner />);
 
-        expect(container.firstChild).toBeNull();
-        expect(addCookie).toHaveBeenCalled();
-    });
+    //     expect(container.firstChild).not.toBeNull();
+
+    //     fireEvent.click(getByText("I'm OK with that"));
+
+    //     expect(container.firstChild).toBeNull();
+    //     expect(addCookie).toHaveBeenCalled();
+    // });
 });

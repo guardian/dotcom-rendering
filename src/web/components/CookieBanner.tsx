@@ -5,7 +5,7 @@ import { headline, textSans, body } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import TickIcon from '@frontend/static/icons/tick.svg';
 import RoundelIcon from '@frontend/static/icons/the-guardian-roundel.svg';
-import { getCookie, addCookie } from '@root/src/web/browser/cookie';
+import { /* getCookie, */ addCookie } from '@root/src/web/browser/cookie';
 
 const banner = css`
     position: fixed;
@@ -121,12 +121,12 @@ export class CookieBanner extends Component<{}, { show: boolean }> {
         this.setState({ show: false });
     };
 
-    public componentDidMount() {
-        const seenBanner = getCookie(consentCookie);
-        if (!seenBanner) {
-            this.setState({ show: true });
-        }
-    }
+    // public componentDidMount() {
+    //     const seenBanner = getCookie(consentCookie);
+    //     if (!seenBanner) {
+    //         this.setState({ show: true });
+    //     }
+    // }
 
     public render() {
         const { show } = this.state;
