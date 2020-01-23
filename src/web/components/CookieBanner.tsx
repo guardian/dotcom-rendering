@@ -121,6 +121,8 @@ export class CookieBanner extends Component<{}, { show: boolean }> {
         this.setState({ show: false });
     };
 
+    // Below code is temporarily commented out.
+    // See https://github.com/guardian/dotcom-rendering/pull/1097
     // public componentDidMount() {
     //     const seenBanner = getCookie(consentCookie);
     //     if (!seenBanner) {

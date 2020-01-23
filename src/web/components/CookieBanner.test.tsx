@@ -1,5 +1,5 @@
 import React from 'react';
-import { render /* , fireEvent */ } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import {
     getCookie as getCookie_,
     addCookie as addCookie_,
@@ -23,6 +23,8 @@ describe('CookieBanner', () => {
     });
 
     afterEach(() => {
+        // Below tests are temporarily being skipped.
+        // See https://github.com/guardian/dotcom-rendering/pull/1097
         // expect(getCookie).toHaveBeenCalledWith(consentCookie);
     });
 
@@ -30,32 +32,35 @@ describe('CookieBanner', () => {
         const { container } = render(<CookieBanner />);
         expect(container.firstChild).toBeNull();
     });
-    // it('It should render null if consentCookie set', () => {
-    //     getCookie.mockImplementation(() => true);
 
-    //     const { container } = render(<CookieBanner />);
+    // Below tests are temporarily being skipped in favour of the test above.
+    // See https://github.com/guardian/dotcom-rendering/pull/1097
+    it.skip('It should render null if consentCookie set', () => {
+        getCookie.mockImplementation(() => true);
 
-    //     expect(container.firstChild).toBeNull();
-    // });
+        const { container } = render(<CookieBanner />);
 
-    // it('It should not render null if consentCookie not set', () => {
-    //     getCookie.mockImplementation(() => false);
+        expect(container.firstChild).toBeNull();
+    });
 
-    //     const { container } = render(<CookieBanner />);
+    it.skip('It should not render null if consentCookie not set', () => {
+        getCookie.mockImplementation(() => false);
 
-    //     expect(container.firstChild).not.toBeNull();
-    // });
+        const { container } = render(<CookieBanner />);
 
-    // it('It should add consentCookie on button click', () => {
-    //     getCookie.mockImplementation(() => false);
+        expect(container.firstChild).not.toBeNull();
+    });
 
-    //     const { container, getByText } = render(<CookieBanner />);
+    it.skip('It should add consentCookie on button click', () => {
+        getCookie.mockImplementation(() => false);
 
-    //     expect(container.firstChild).not.toBeNull();
+        const { container, getByText } = render(<CookieBanner />);
 
-    //     fireEvent.click(getByText("I'm OK with that"));
+        expect(container.firstChild).not.toBeNull();
 
-    //     expect(container.firstChild).toBeNull();
-    //     expect(addCookie).toHaveBeenCalled();
-    // });
+        fireEvent.click(getByText("I'm OK with that"));
+
+        expect(container.firstChild).toBeNull();
+        expect(addCookie).toHaveBeenCalled();
+    });
 });
