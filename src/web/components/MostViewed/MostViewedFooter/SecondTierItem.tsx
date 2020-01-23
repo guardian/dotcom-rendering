@@ -24,7 +24,7 @@ const itemStyles = (showRightBorder?: boolean) => css`
 
     min-height: 3.25rem;
 
-    flex-basis: 50%;
+    flex-basis: 100%;
 
     &:hover {
         cursor: pointer;
