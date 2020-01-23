@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
@@ -245,26 +244,7 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                         </div>
                     )}
                     {richLink.starRating && richLink.starRating > 0 && (
-                        <>
-                            <Hide when="above" breakpoint="wide">
-                                <div
-                                    className={css`
-                                        margin-top: 5px;
-                                    `}
-                                >
-                                    <StarRating
-                                        rating={richLink.starRating}
-                                        size="small"
-                                    />
-                                </div>
-                            </Hide>
-                            <Hide when="below" breakpoint="wide">
-                                <StarRating
-                                    rating={richLink.starRating}
-                                    size="large"
-                                />
-                            </Hide>
-                        </>
+                        <StarRating rating={richLink.starRating} size="small" />
                     )}
                     {isPaidContent && richLink.sponsorName && (
                         <div className={paidForBranding}>
