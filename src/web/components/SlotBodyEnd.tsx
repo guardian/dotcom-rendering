@@ -6,12 +6,12 @@ const wrapperMargins = css`
     margin: 18px 0;
 `;
 
-export const LayoutSlotBottom = () => {
+export const SlotBodyEnd = () => {
     const endpointUrl = 'https://contributions.guardianapis.com';
     const { data, error } = useApi(endpointUrl);
 
     if (error) {
-        window.guardian.modules.sentry.reportError(error, 'layout-slot-bottom');
+        window.guardian.modules.sentry.reportError(error, 'slot-body-end');
         return null;
     }
 
