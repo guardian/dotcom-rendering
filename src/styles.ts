@@ -25,46 +25,6 @@ export const sidePadding = css`
         padding-right: 0;
     }`;
 
-export const bulletStyles = (kicker: string, opacity = 1): string => `
-    .bullet {
-        color: transparent;
-
-        &::before {
-            content: '';
-            background-color: ${kicker};
-            width: 1rem;
-            height: 1rem;
-            border-radius: .5rem;
-            display: inline-block;
-        }
-    }
-
-    ul {
-        list-style: none;
-        padding-left: 0;
-
-        > li {
-            padding-left: 2rem;
-            line-height: 2.2rem;
-
-            &::before {
-                display: inline-block;
-                content: '';
-                border-radius: 0.5rem;
-                height: 1rem;
-                width: 1rem;
-                margin-right: 1rem;
-                background-color: ${palette.neutral[86]};
-                margin-left: -2rem;
-                opacity: ${opacity}
-            }
-
-            > p:first-of-type {
-                display: inline;
-            }
-        }
-    }`
-
 export const textSans = "font-family: 'Guardian Text Sans Web';";
 
 export const headlineFont = "font-family: 'Guardian Headline';";
@@ -218,8 +178,6 @@ export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles 
         margin-bottom: 0.1875rem;
         background-color: ${palette.neutral[93]};
     }
-
-    ${bulletStyles(kicker)}
 `;
 
 export const wideContentWidth = 620;

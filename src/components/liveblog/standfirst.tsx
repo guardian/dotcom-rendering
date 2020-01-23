@@ -1,5 +1,4 @@
 import React from 'react';
-import { bulletStyles } from 'styles';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 import LeftColumn from 'components/shared/leftColumn';
@@ -21,8 +20,6 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
     a {
         color: ${palette.neutral[93]};
     }
-
-    ${bulletStyles(liveblogBackground, .4)}
 `;
 
 interface LiveblogStandfirstProps {

@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
-import { sidePadding, bulletStyles, headlineFont, darkModeCss, linkStyle } from 'styles';
+import { sidePadding, headlineFont, darkModeCss, linkStyle } from 'styles';
 import { getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
 import { Article, Layout } from 'article';
@@ -37,7 +37,6 @@ function Styles({ pillar, layout }: Article): SerializedStyles {
         }
 
         ${linkStyle(kicker)}
-        ${bulletStyles(kicker)}
         ${sidePadding}
         ${includeFeatureStyles ? FeatureStyles : null}
     `;
