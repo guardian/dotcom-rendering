@@ -127,10 +127,10 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
     styledH('h2', { css: HeadingTwoStyles }, props.children );
 
-const HorizontalRule = () =>
+const HorizontalRule = (): ReactElement =>
     styledH('hr', { css: HorizontalRuleStyles }, null)
 
-const transform = (text: string, pillar: Pillar) => {
+const transform = (text: string, pillar: Pillar): ReactElement | string => {
     if (text?.includes('•')) {
         return h(Bullet, { pillar, text });
     } else if (text?.includes('* * *')) {
