@@ -6,7 +6,6 @@ import { Badge } from '@frontend/web/components/Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 const sectionStyles = css`
-    height: 157px;
     padding-top: 8px;
     display: flex;
     flex-direction: row;

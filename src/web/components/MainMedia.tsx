@@ -21,8 +21,6 @@ const mainMedia = css`
     https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
     */
 
-    margin-bottom: 14px;
-
     ${until.tablet} {
         margin: 0;
         order: -1;
@@ -30,6 +28,11 @@ const mainMedia = css`
         figcaption {
             display: none;
         }
+    }
+
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 
     img {
@@ -59,6 +62,7 @@ function renderElement(
                     pillar={pillar}
                     hideCaption={hideCaption}
                     role={element.role}
+                    isMainMedia={true}
                 />
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
