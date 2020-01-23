@@ -15,7 +15,7 @@ jest.mock('@frontend/web/browser/cookie', () => ({
 }));
 
 describe('CookieBanner', () => {
-    const consentCookie = 'GU_TK';
+    // const consentCookie = 'GU_TK';
 
     beforeEach(() => {
         addCookie.mockReset();
@@ -23,10 +23,19 @@ describe('CookieBanner', () => {
     });
 
     afterEach(() => {
-        expect(getCookie).toHaveBeenCalledWith(consentCookie);
+        // Below tests are temporarily being skipped.
+        // See https://github.com/guardian/dotcom-rendering/pull/1097
+        // expect(getCookie).toHaveBeenCalledWith(consentCookie);
     });
 
-    it('It should render null if consentCookie set', () => {
+    it('It should render null', () => {
+        const { container } = render(<CookieBanner />);
+        expect(container.firstChild).toBeNull();
+    });
+
+    // Below tests are temporarily being skipped in favour of the test above.
+    // See https://github.com/guardian/dotcom-rendering/pull/1097
+    it.skip('It should render null if consentCookie set', () => {
         getCookie.mockImplementation(() => true);
 
         const { container } = render(<CookieBanner />);
@@ -34,7 +43,7 @@ describe('CookieBanner', () => {
         expect(container.firstChild).toBeNull();
     });
 
-    it('It should not render null if consentCookie not set', () => {
+    it.skip('It should not render null if consentCookie not set', () => {
         getCookie.mockImplementation(() => false);
 
         const { container } = render(<CookieBanner />);
@@ -42,7 +51,7 @@ describe('CookieBanner', () => {
         expect(container.firstChild).not.toBeNull();
     });
 
-    it('It should add consentCookie on button click', () => {
+    it.skip('It should add consentCookie on button click', () => {
         getCookie.mockImplementation(() => false);
 
         const { container, getByText } = render(<CookieBanner />);

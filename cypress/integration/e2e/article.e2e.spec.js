@@ -16,7 +16,7 @@ describe('E2E Page rendering', function() {
                 cy.contains('Sign in');
 
                 cy.wait('@getMostRead').then(xhr => {
-                    expect(xhr.response.body.length).to.be.at.least(1);
+                    expect(xhr.response.body).to.have.property('tabs');
                     expect(xhr.status).to.be.equal(200);
 
                     cy.contains('Most popular');
