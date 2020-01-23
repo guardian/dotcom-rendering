@@ -52,7 +52,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
     // defaults to false, but use ?slot-machine-flags=showBodyEnd to show
-    const renderBottomSlot = parse(CAPI.slotMachineFlags || '').showBodyEnd;
+    const showBodyEndSlot = parse(CAPI.slotMachineFlags || '').showBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -161,7 +161,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         >
                             <ArticleBody CAPI={CAPI} />
 
-                            {renderBottomSlot && (
+                            {showBodyEndSlot && (
                                 <Section
                                     islandId="layout-slot-bottom"
                                     showSideBorders={false}
