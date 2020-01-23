@@ -1,5 +1,5 @@
 export interface PermutivePayload {
-    'properties.content.Premium'?: string;
+    'properties.content.premium'?: string;
     'properties.content.id'?: string;
     'properties.content.title'?: string;
     'properties.content.section'?: string;
@@ -32,7 +32,7 @@ export const generatePermutivePayload = (
                   .join()
             : void 0;
     const config: { [key: string]: any } = {
-        'properties.content.Premium': rawConfig.isPaidContent,
+        'properties.content.premium': rawConfig.isPaidContent,
         'properties.content.type': rawConfig.contentType,
         'properties.content.series': rawConfig.series,
         'properties.content.id': rawConfig.pageId,

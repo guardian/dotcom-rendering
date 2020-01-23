@@ -14,7 +14,7 @@ describe('generatePermutivePayload', () => {
         };
 
         const expected = {
-            'properties.content.Premium': false,
+            'properties.content.premium': false,
             'properties.content.id': 'page id',
             'properties.content.title': 'article headline',
             'properties.content.section': 'sport',
