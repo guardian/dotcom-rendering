@@ -9,6 +9,7 @@ import { useApi } from '@root/src/web/components/lib/api';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 
+import { joinUrl } from '@root/src/web/components/lib/joinUrl';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { SecondTierItem } from './SecondTierItem';
 
@@ -101,8 +102,7 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
     const endpoint: string = `/most-read${
         hasSection ? `/${sectionName}` : ''
     }.json`;
-
-    return `${ajaxUrl}${endpoint}?dcr=true`;
+    return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 
 export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
