@@ -75,7 +75,6 @@ interface LinkType extends SimpleLinkType {
 
 interface PillarType extends LinkType {
     pillar: Pillar;
-    more: false;
 }
 
 interface MoreType extends LinkType {
