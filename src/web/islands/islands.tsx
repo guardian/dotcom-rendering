@@ -164,7 +164,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
         {
             component: SlotBodyEnd,
             props: {},
-            root: 'layout-slot-bottom',
+            root: 'slot-body-end',
         },
         {
             component: CookieBanner,

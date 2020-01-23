@@ -271,6 +271,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         <ArticleContainer>
                             <main className={maxWidth}>
                                 <ArticleBody CAPI={CAPI} />
+                                {showBodyEndSlot && (
+                                    <div data-island="slot-body-end" />
+                                )}
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta
                                     pillar={CAPI.pillar}
@@ -299,15 +302,6 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                 </StandardGrid>
             </Section>
-
-            {showBodyEndSlot && (
-                <Section
-                    islandId="layout-slot-bottom"
-                    showSideBorders={false}
-                    showTopBorder={false}
-                    padded={false}
-                />
-            )}
 
             <Section islandId="onwards-content" />
 
