@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
-import { sidePadding, bulletStyles, headlineFont, darkModeCss, linkStyle } from 'styles';
+import { sidePadding, headlineFont, darkModeCss, linkStyle } from 'styles';
 import { getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
 import { Article, Layout } from 'article';
@@ -22,7 +22,9 @@ const FeatureStyles = `
 
 function Styles({ pillar, layout }: Article): SerializedStyles {
     const { kicker } = getPillarStyles(pillar);
-    const includeFeatureStyles = layout === Layout.Feature || layout === Layout.Review;
+    const includeFeatureStyles = layout === Layout.Feature
+        || layout === Layout.Review
+        || layout === Layout.Opinion;
 
     return css`
         padding-bottom: 6px;
@@ -35,7 +37,6 @@ function Styles({ pillar, layout }: Article): SerializedStyles {
         }
 
         ${linkStyle(kicker)}
-        ${bulletStyles(kicker)}
         ${sidePadding}
         ${includeFeatureStyles ? FeatureStyles : null}
     `;
@@ -58,11 +59,14 @@ interface Props {
     className: SerializedStyles;
 }
 
-const Standfirst = ({ article, className }: Props): JSX.Element =>
-    <div css={[className, Styles(article), DarkStyles(article)]}>
-        {renderText(article.standfirst, article.pillar)}
-    </div>
-
+const Standfirst = ({ article, className }: Props): JSX.Element | null =>
+    article.standfirst.map<JSX.Element | null>(standfirst =>
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
+        <div css={[className, Styles(article), DarkStyles(article)]}>
+            {renderText(standfirst, article.pillar)}
+        </div>
+    ).withDefault(null);
 
 // ----- Exports ----- //
 

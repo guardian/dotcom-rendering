@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, Fragment, ReactElement } from 'react';
+import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
@@ -49,8 +49,35 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
         props.text,
     );
 
+const listStyles = (colour: string): SerializedStyles => css`
+    list-style: none;
+    padding-left: 0;
+`
+
+const listItemStyles: SerializedStyles = css`
+    padding-left: 2rem;
+    line-height: 2.2rem;
+    padding-bottom: 0.375rem;
+
+    &::before {
+        display: inline-block;
+        content: '';
+        border-radius: 0.5rem;
+        height: 1rem;
+        width: 1rem;
+        margin-right: 1rem;
+        background-color: ${palette.neutral[86]};
+        margin-left: -2rem;
+    }
+
+    > p:first-of-type {
+        display: inline;
+    }
+`
+
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
+    display: inline-block;
 
     &::before {
         content: '';
@@ -65,8 +92,8 @@ const bulletStyles = (colour: string): SerializedStyles => css`
 const HeadingTwoStyles = css`
     font-size: 1.8rem;
     line-height: 2.2rem;
-    margin: ${basePx(1, 0)};
-    font-weight: 500;
+    margin: 1rem 0 4px 0;
+    font-weight: 700;
 
     & + p {
         margin-top: 0;
@@ -74,29 +101,40 @@ const HeadingTwoStyles = css`
 `
 
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    h(Fragment, null,
+    h('p', null,
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
-        h('br', null, null),
+        null
     );
 
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
     styledH('h2', { css: HeadingTwoStyles }, props.children );
 
-
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? '';
     switch (node.nodeName) {
         case 'P':
             return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case '#text':
-            const text = node.textContent;
             return text?.includes('•') ? h(Bullet, { pillar, text }) : text;
         case 'SPAN':
-            return node.textContent;
+            return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar, key });
+            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key });
         case 'H2':
             return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'BLOCKQUOTE':
+            return h('blockquote', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'STRONG':
+            return h('strong', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'EM':
+            return h('em', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'BR':
+            return h('br', { key }, null);
+        case 'UL':
+            return styledH('ul', { css: listStyles }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'LI':
+            return styledH('li', { css: listItemStyles }, Array.from(node.childNodes).map(textElement(pillar)));
         default:
             return null;
     }
@@ -133,14 +171,20 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
     }
 `;
 
-const ImageElement = (props: ImageProps): ReactElement =>
-    styledH('img', {
-        sizes: props.sizes,
-        srcSet: srcset(props.salt)(props.url),
-        alt: props.alt,
-        src: transformUrl(props.salt, props.url, 500),
-        css: imageStyles(props.width, props.height),
+const ImageElement = (props: ImageProps): ReactElement | null => {
+    const { url, sizes, salt, alt, width, height } = props;
+    if (!url) {
+        return null;
+    }
+
+    return styledH('img', {
+        sizes,
+        srcSet: srcset(url, salt),
+        alt,
+        src: transformUrl(salt, url, 500),
+        css: imageStyles(width, height),
     });
+}
 
 const FigureElement = (props: FigureElement): ReactElement =>
     styledH('figure', { css: props.className },
@@ -283,8 +327,10 @@ const Interactive = (props: { url: string }): ReactElement =>
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
-const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement =>
-    h('blockquote', { key: props.key }, ...Array.from(props.content).map(textElement(props.pillar)));
+const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
+    // twitter script relies on twitter-tweet class being present
+    return h('blockquote', { key: props.key, className: 'twitter-tweet' }, ...Array.from(props.content).map(textElement(props.pillar)));
+}
 
 const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {

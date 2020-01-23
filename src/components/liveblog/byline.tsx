@@ -10,7 +10,6 @@ import { PillarStyles, getPillarStyles } from 'pillar';
 import { CommentCount } from 'components/shared/commentCount';
 import { Article } from 'article';
 import { renderText } from 'renderer';
-import { fromNullable } from 'types/option';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -81,7 +80,7 @@ const LiveblogByline = ({ article, imageSalt}: LiveblogBylineProps): JSX.Element
         <address>{ renderText(html, article.pillar) }</address>
     ).withDefault(null);
 
-    const date = fromNullable(article.publishDate).map<ReactNode>(date =>
+    const date = article.publishDate.map<ReactNode>(date =>
         // This is not an iterator, ESLint is confused
         // eslint-disable-next-line react/jsx-key
         <time>{ formatDate(new Date(date)) }</time>

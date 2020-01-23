@@ -6,6 +6,7 @@ import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { Option } from 'types/option';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${palette.neutral[100]};
@@ -65,8 +66,8 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
 interface LiveblogBlockProps {
     pillar: Pillar;
     highlighted: boolean;
-    firstPublishedDate: Date;
-    lastModifiedDate: Date;
+    firstPublishedDate: Option<Date>;
+    lastModifiedDate: Option<Date>;
     title: string;
     children: ReactNode;
 }
@@ -92,18 +93,28 @@ const LiveblogBlock = ({
     firstPublishedDate,
     lastModifiedDate,
 }: LiveblogBlockProps): JSX.Element => {
-    const relativeDate = makeRelativeDate(firstPublishedDate);
-    const timeAgo = relativeDate ? <time>{relativeDate}</time> : null;
+
+    const relativeFirstPublished: JSX.Element | null = firstPublishedDate
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
+        .map<JSX.Element | null>(date => <time>{makeRelativeDate(date)}</time>)
+        .withDefault(null)
+
+    const relativeLastModified: JSX.Element | null = lastModifiedDate
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
+        .map<JSX.Element | null>(date => <time>Last updated: {formatDate(date)}</time>)
+        .withDefault(null)
 
     return (
         <article>
             <LeftColumn
-                columnContent={timeAgo}
+                columnContent={relativeFirstPublished}
                 className={LiveblogBlockStyles(getPillarStyles(pillar), highlighted)}
             >
                 <Title highlighted={highlighted} title={title} />
                 {children}
-                <time>Last updated: {formatDate(lastModifiedDate)}</time>
+                {relativeLastModified}
             </LeftColumn>
         </article>
     )

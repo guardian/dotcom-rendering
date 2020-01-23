@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 
-import { Option, fromNullable } from 'types/option';
+import { Option, None, Some } from 'types/option';
 import { Asset } from 'mapiThriftModels/Asset';
 
 // ----- Setup ----- //
@@ -29,7 +29,7 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex')    
 
-function transformUrl(salt: string, input: string, width = 0): string {
+function transformUrl(salt: string, input: string, width: number): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
@@ -44,11 +44,10 @@ function transformUrl(salt: string, input: string, width = 0): string {
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
-const srcset = (salt: string) => (url: string | undefined): string =>
-    url ? widths
-            .map(width => `${transformUrl(salt, url, width)} ${width}w`)
-            .join(', ')
-        : "";
+const srcset = (url: string, salt: string): string =>
+    widths
+        .map(width => `${transformUrl(salt, url, width)} ${width}w`)
+        .join(', ');
 
 /**
  * Produces a srcset as a string, with the asset URLs transformed into image
@@ -59,26 +58,15 @@ const srcset = (salt: string) => (url: string | undefined): string =>
  * @param assets A list of image assets, typically supplied by CAPI.
  * @returns An option of an image srcset.
  */
-const toSrcset = (salt: string, assets: Asset[]): Option<string> =>
-    fromNullable(assets.find(asset => asset?.typeData?.isMaster))
-        .map(asset => asset.file)
-        .map(srcset(salt))
+const toSrcset = (salt: string, assets: Asset[]): Option<string> => {
+    const master = assets.find(asset => asset?.typeData?.isMaster);
 
-/**
- * Transforms an image asset from a CAPI response, which contains URLs in
- * Grid-style format (e.g. `https://media.guim.co.uk/...`), to a Fastly image
- * resizer URL (e.g. `https://i.guim.co.uk/img/media/...`).
- * 
- * @param salt Salt used to sign (hash) the image.
- * @param asset An image asset, typically supplied by CAPI.
- * @returns A URL to retrieve a given image from the image resizer.
- */
-const toUrl = (salt: string, asset: Asset): string =>
-    asset?.file
-        ? transformUrl(salt, asset.file, asset?.typeData?.width)
-        : ""
+    if (!master || !master?.file) {
+        return new None();
+    }
 
-
+    return new Some(srcset(master.file, salt));
+}
 
 // ----- Exports ----- //
 
@@ -86,6 +74,5 @@ export {
     Asset,
     srcset,
     toSrcset,
-    toUrl,
     transformUrl
 };

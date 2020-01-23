@@ -2,13 +2,12 @@
 
 import { Pillar, pillarFromString } from 'pillar';
 import { Content } from 'mapiThriftModels/Content';
-import { IBlockElement } from 'mapiThriftModels/BlockElement';
-import { ITag } from 'mapiThriftModels/Tag';
+import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
+import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
-import { Option, fromNullable, Some } from 'types/option';
+import { Option, fromNullable, None, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
-import { ContentType, IBlock } from 'mapiThriftModels';
-
+import { IBlock as Block, ICapiDateTime as CapiDateTime } from 'mapiThriftModels';
 
 // ----- Types ----- //
 
@@ -30,15 +29,15 @@ const enum Layout {
 interface ArticleFields {
     pillar: Pillar;
     headline: string;
-    standfirst: DocumentFragment;
+    standfirst: Option<DocumentFragment>;
     byline: string;
     bylineHtml: Option<DocumentFragment>;
-    publishDate: string;
+    publishDate: Option<Date>;
     mainImage: Option<Image>;
-    contributors: ITag[];
-    series: ITag;
+    contributors: Tag[];
+    series: Tag;
     commentable: boolean;
-    tags: ITag[];
+    tags: Tag[];
 }
 
 type Liveblog = ArticleFields & {
@@ -103,8 +102,8 @@ type LiveBlock = {
     id: string;
     isKeyEvent: boolean;
     title: string;
-    firstPublished: Date;
-    lastModified: Date;
+    firstPublished: Option<Date>;
+    lastModified: Option<Date>;
     body: Result<string, BodyElement>[];
 }
 
@@ -127,24 +126,29 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
-const parseImage = (element: IBlockElement): Option<Image> => {
+const parseImage = (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
-    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData || {};
+    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
 
-    return new Some({
+    if (!masterAsset?.file || !masterAsset?.typeData?.width || !masterAsset?.typeData?.height) {
+        return new None();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return fromNullable(masterAsset).map((asset: any) => ({
         kind: ElementKind.Image,
         alt,
         caption,
         displayCredit,
         credit,
-        file: masterAsset?.file ?? "",
-        width: masterAsset?.typeData?.width ?? 0,
-        height: masterAsset?.typeData?.height ?? 0,
-    })
+        file: asset.file,
+        width: asset.typeData.width,
+        height: asset.typeData.height,
+    }));
 }
 
 const parseElement =
-    (docParser: DocParser) => (element: IBlockElement): Result<string, BodyElement> => {
+    (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type.toString()) {
         case 'text':
             const html = element?.textTypeData?.html;
@@ -159,7 +163,7 @@ const parseElement =
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
         case 'pullquote':
-            const { html: quote, attribution } = element.pullquoteTypeData || {};
+            const { html: quote, attribution } = element.pullquoteTypeData ?? {};
             if (!quote) {
                 return new Err('No quote field on pullquoteTypeData')
             }
@@ -170,23 +174,27 @@ const parseElement =
             });
 
         case 'interactive':
-            const { iframeUrl } = element.interactiveTypeData || {};
+            const { iframeUrl } = element.interactiveTypeData ?? {};
             if (!iframeUrl) {
                 return new Err('No iframeUrl field on interactiveTypeData')
             }
             return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
-        case 'rich_link':
-            const { url, linkText } = element.richLinkTypeData || {};
-            if (!url || !linkText) {
-                return new Err('No url/linkText field on richLinkTypeData')
+        case 'rich-link':
+            const { url, linkText } = element.richLinkTypeData ?? {};
+            if (!url) {
+                return new Err('No "url" field on richLinkTypeData');
+            } else if (!linkText) {
+                return new Err('No "linkText" field on richLinkTypeData');
             }
             return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
         case 'tweet':
-            const { id, html: h } = element.tweetTypeData || {};
-            if (!id || !h) {
-                return new Err('No id/html field on tweetTypeData')
+            const { id, html: h } = element.tweetTypeData ?? {};
+            if (!id) {
+                return new Err('No "id" field on tweetTypeData')
+            } else if (!h) {
+                return new Err('No "html" field on tweetTypeData')
             }
             return tweetContent(id, docParser(h))
                 .map(content => ({ kind: ElementKind.Tweet, content }));
@@ -197,7 +205,7 @@ const parseElement =
 
 }
 
-type Elements = IBlockElement[] | undefined;
+type Elements = BlockElement[] | undefined;
 
 const parseElements =
     (docParser: DocParser) => (elements: Elements): Result<string, BodyElement>[] => {
@@ -207,30 +215,40 @@ const parseElements =
         return elements.map(parseElement(docParser));
     }
 
-const parseBlock = (docParser: DocParser) => (block: IBlock): LiveBlock =>
+const capiDateTimeToDate = (date: CapiDateTime | undefined | string): Option<Date> => {
+    // Thrift definitions define some dates as CapiDateTime but CAPI returns strings
+    try {
+        if (date && typeof date === 'string') {
+            return new Some(new Date(date));
+        }
+        return new None();
+    } catch(e) {
+        console.error(`Unable to convert date from CAPI: ${e}`);
+        return new None();
+    }
+}
+
+const parseBlock = (docParser: DocParser) => (block: Block): LiveBlock =>
     ({
         id: block.id,
         isKeyEvent: block?.attributes?.keyEvent ?? false,
         title: block?.title ?? "",
-        firstPublished: new Date(block?.firstPublishedDate?.iso8601 ?? 0),
-        lastModified: new Date(block?.lastModifiedDate?.iso8601 ?? 0),
+        firstPublished: capiDateTimeToDate(block?.firstPublishedDate),
+        lastModified: capiDateTimeToDate(block?.lastModifiedDate),
         body: parseElements(docParser)(block.elements),
     })
 
-const parseBlocks = (docParser: DocParser) => (blocks: IBlock[]): LiveBlock[] =>
+const parseBlocks = (docParser: DocParser) => (blocks: Block[]): LiveBlock[] =>
     blocks.map(parseBlock(docParser));
 
 const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
     ({
         pillar: pillarFromString(content?.pillarId),
         headline: content?.fields?.headline ?? "",
-        standfirst: docParser(content?.fields?.standfirst ?? ""),
+        standfirst: fromNullable(content?.fields?.standfirst).map(docParser),
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).map(docParser),
-        // eslint-disable-next-line
-        // @ts-ignore
-        // CAPI is sending us a string, even though the thrift definition is CapiDateTime
-        publishDate: content?.webPublicationDate,
+        publishDate: capiDateTimeToDate(content.webPublicationDate),
         mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),
         series: articleSeries(content),
@@ -239,19 +257,22 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
     })
 
 const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleFieldsWithBody => {
-    const body = content?.blocks?.body;
-    const elements = body?.length ? body[0]?.elements : undefined;
+    const body = content?.blocks?.body ?? [];
+    const elements = body[0]?.elements;
     return ({
         ...articleFields(docParser, content),
-        body: parseElements(docParser)(elements),
+        body: elements !== undefined ? parseElements(docParser)(elements): [],
     });
 }
 
-const fromCapi = (docParser: DocParser) => (content: Content): Article => {
-    switch (content.type) {
-        case ContentType.ARTICLE:
+const containsOpinionTags = (tags: Tag[]): boolean =>
+    tags.some(tag => tag.id === 'tone/comment' || tag.id === 'tone/letters')
 
-            if (pillarFromString(content.pillarId) === Pillar.opinion) {
+const fromCapi = (docParser: DocParser) => (content: Content): Article => {
+    const { tags, pillarId, fields } = content;
+    switch (content.type.toString()) {
+        case 'article':
+            if (pillarFromString(pillarId) === Pillar.opinion || containsOpinionTags(tags)) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
 
             } else if (isImmersive(content)) {
@@ -260,10 +281,10 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
             } else if (isFeature(content)) {
                 return { layout: Layout.Feature, ...articleFieldsWithBody(docParser, content) };
 
-            } else if (isReview(content)) {
+            } else if (isReview(content) && fields?.starRating) {
                 return {
                     layout: Layout.Review,
-                    starRating: content?.fields?.starRating ?? 0,
+                    starRating: fields.starRating,
                     ...articleFieldsWithBody(docParser, content),
                 };
 
@@ -273,7 +294,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
 
             return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.LIVEBLOG:
+        case 'liveblog':
             const body = content?.blocks?.body ?? [];
             return {
                 layout: Layout.Liveblog,
@@ -281,19 +302,19 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
                 ...articleFields(docParser, content),
             };
 
-        case ContentType.GALLERY:
+        case 'gallery':
             return { layout: Layout.Gallery, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.INTERACTIVE:
+        case 'interactive':
             return { layout: Layout.Interactive, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.PICTURE:
+        case 'picture':
             return { layout: Layout.Picture, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.VIDEO:
+        case 'video':
             return { layout: Layout.Video, ...articleFieldsWithBody(docParser, content) };
 
-        case ContentType.AUDIO:
+        case 'audio':
             return { layout: Layout.Audio, ...articleFieldsWithBody(docParser, content) };
 
         default:

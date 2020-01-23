@@ -33,7 +33,7 @@ const Styles = css`
         font-weight: 100;
         ${headlineFontStyles}
         color: ${palette.opinion.main};
-        text-decoration: none;
+        background: none;
     }
 `;
 

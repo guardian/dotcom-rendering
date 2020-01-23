@@ -2,13 +2,10 @@
 
 import { Result, Ok, Err } from 'types/result';
 import { Content} from 'mapiThriftModels/Content';
-import { ITag } from 'mapiThriftModels/Tag';
+import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { IBlockElement} from 'mapiThriftModels/BlockElement';
 import { ElementType } from 'mapiThriftModels/ElementType';
-
 import { Option, fromNullable, None, Some } from 'types/option';
-import { TagType } from 'mapiThriftModels';
-
 
 // ----- Parsing ----- //
 
@@ -113,8 +110,8 @@ interface Contributor {
     bylineLargeImageUrl?: string;
 }
 
-const tagsOfType = (type_: TagType) => (tags: ITag[]): ITag[] =>
-    tags.filter((tag: ITag) => tag.type === type_);
+const tagsOfType = (type_: string) => (tags: Tag[]): Tag[] =>
+    tags.filter((tag: Tag) => tag.type.toString() === type_);
 
 const isImmersive = (content: Content): boolean =>
     content?.fields?.displayHint === 'immersive';
@@ -131,11 +128,11 @@ const isAnalysis = (content: Content): boolean =>
 const isSingleContributor = (contributors: Contributor[]): boolean =>
     contributors.length === 1;
 
-const articleSeries = (content: Content): ITag =>
-    tagsOfType(TagType.SERIES)(content.tags)[0];
+const articleSeries = (content: Content): Tag =>
+    tagsOfType('series')(content.tags)[0];
 
-const articleContributors = (content: Content): ITag[] =>
-    tagsOfType(TagType.CONTRIBUTOR)(content.tags);
+const articleContributors = (content: Content): Tag[] =>
+    tagsOfType('contributor')(content.tags);
 
 const isImage = (elem: IBlockElement): boolean =>
     elem.type.toString() === 'image';

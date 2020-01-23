@@ -5,12 +5,12 @@ import express, { Request, Response as ExpressResponse } from 'express';
 import compression from 'compression';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
-import fetch, { Response } from 'node-fetch';
 import bodyParser from 'body-parser';
 import {
   BufferedTransport,
   CompactProtocol
 } from '@creditkarma/thrift-server-core'
+import fetch from 'node-fetch';
 
 import { Content } from 'mapiThriftModels/Content';
 import { getConfigValue } from 'server/ssmConfig';
@@ -48,18 +48,6 @@ function checkSupport(content: Content): Supported {
   return { kind: Support.Supported };
 
 }
-
-async function parseMapiError(mapiResponse: Response): Promise<string> {
-  try {
-    const mapiMsg = (await mapiResponse.json())?.errorMessage;
-    return mapiMsg ? `the following message: ${mapiMsg}` : 'no error message';
-  } catch (_) {
-    return 'a message that I didn\'t understand';
-  }
-}
-
-const mapiError = async (mapiResponse: Response): Promise<string> =>
-  `MAPI wasn't happy about that request, it returned ${mapiResponse.status}, with ${await parseMapiError(mapiResponse)}`;
 
 async function serveArticlePost({ body }: Request, res: ExpressResponse): Promise<void> {
   try {
@@ -132,24 +120,6 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
   }
 }
 
-async function queryMapi(req: Request, res: ExpressResponse): Promise<void> {
-  const url = new URL(req.originalUrl, 'https://mobile.code.dev-guardianapis.com');
-
-    console.log(`I'm asking MAPI for this: ${url.href}...`);
-    const mapiResponse = await fetch(url.href);
-
-    if (mapiResponse.ok) {
-      res.type('json');
-      mapiResponse.body.pipe(res);
-
-      console.log('...and I\'ve passed on the response that MAPI gave me');
-    } else {
-      console.warn(await mapiError(mapiResponse));
-      res.sendStatus(400);
-    }
-}
-
-
 // ----- App ----- //
 
 const app = express();
@@ -164,13 +134,7 @@ app.get('/healthcheck', (_req, res) => {
 
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
-app.get('/*', async (req, res) => {
-  if (req.query.a !== undefined) {
-    serveArticle(req, res);
-  } else {
-    queryMapi(req, res);
-  }
-});
+app.get('/*', serveArticle);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);
 

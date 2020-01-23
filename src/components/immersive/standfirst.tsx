@@ -1,10 +1,10 @@
 // ----- Imports ----- //
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
-import { bulletStyles, headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
+import { headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
 import { Option } from 'types/option';
@@ -30,7 +30,6 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 
     padding: ${basePx(1)};
-    ${bulletStyles(kicker)}
 `;
 
 const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
@@ -46,7 +45,7 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
 // ----- Component ----- //
 
 interface Props {
-    standfirst: DocumentFragment;
+    standfirst: Option<DocumentFragment>;
     byline: string;
     bylineHtml: Option<DocumentFragment>;
     pillar: Pillar;
@@ -62,21 +61,30 @@ const Standfirst = ({
 }: Props): JSX.Element => {
     const pillarStyles = getPillarStyles(pillar);
 
-    const content = bylineHtml.map(html => {
-        if (byline !== '' && standfirst.textContent?.includes(byline)) {
-            return <div>{renderText(standfirst, pillar)}</div>;
+    const standfirstHtml = standfirst.map<ReactNode>(html =>
+        // This is not an iterator, ESLint is confused
+        // eslint-disable-next-line react/jsx-key
+        renderText(html, pillar)
+    ).withDefault(null)
+
+    const standfirstIncludesByline = standfirst
+        .map(doc => doc.textContent?.includes(byline)).withDefault(false);
+
+    const content = bylineHtml.map<ReactNode>(html => {
+        if (byline !== '' && standfirstIncludesByline) {
+            return <div>{standfirstHtml}</div>;
         } else {
             return (
                 <div>
-                    <div>{renderText(standfirst, pillar)}</div>
+                    <div>{standfirstHtml}</div>
                     <address>
                         <span>By </span>
-                        {renderText(html, pillar)}
+                        {standfirstHtml}
                     </address>
                 </div>
             );
         }
-    }).withDefault(<div>{ renderText(standfirst, pillar) }</div>)
+    }).withDefault(standfirstHtml)
 
     return (
         <div css={[ className, Styles(pillarStyles), DarkStyles(pillarStyles) ]}>
