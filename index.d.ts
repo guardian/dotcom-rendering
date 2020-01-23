@@ -75,7 +75,6 @@ interface LinkType extends SimpleLinkType {
 
 interface PillarType extends LinkType {
     pillar: Pillar;
-    more: false;
 }
 
 interface MoreType extends LinkType {
@@ -454,7 +453,7 @@ interface TrailTabType {
     trails: TrailType[];
 }
 
-interface MostViewedFooterType {
+interface MostViewedFooterPayloadType {
     tabs: TrailTabType[];
     mostCommented: TrailType;
     mostShared: TrailType;

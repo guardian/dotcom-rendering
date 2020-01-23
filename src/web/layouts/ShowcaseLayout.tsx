@@ -288,7 +288,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             </Section>
 
             {NAV.subNavSections && (
-                <Section backgroundColour={palette.neutral[100]} padded={false}>
+                <Section
+                    backgroundColour={palette.neutral[100]}
+                    padded={false}
+                    islandId="sub-nav-root"
+                >
                     <SubNav
                         subnav={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
@@ -356,6 +360,9 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <ArticleContainer>
                             <main className={maxWidth}>
                                 <ArticleBody CAPI={CAPI} />
+                                {showBodyEndSlot && (
+                                    <div data-island="slot-body-end" />
+                                )}
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta
                                     pillar={CAPI.pillar}
@@ -388,15 +395,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </ShowcaseGrid>
             </Section>
 
-            {showBodyEndSlot && (
-                <Section
-                    islandId="layout-slot-bottom"
-                    showSideBorders={false}
-                    showTopBorder={false}
-                    padded={false}
-                />
-            )}
-
             <Section islandId="onwards-content" />
 
             {!isPaidContent && (
@@ -413,7 +411,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             )}
 
             {NAV.subNavSections && (
-                <Section padded={false}>
+                <Section padded={false} islandId="sub-nav-root">
                     <SubNav
                         subnav={NAV.subNavSections}
                         pillar={CAPI.pillar}

@@ -11,6 +11,7 @@ import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks'
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { Onwards } from '@frontend/web/components/Onwards/Onwards';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
+import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 
 type IslandProps =
     | {
@@ -18,12 +19,24 @@ type IslandProps =
           nav: NavType;
       }
     | {
+          subnav: {
+              parent?: LinkType;
+              links: LinkType[];
+          };
+          pillar: Pillar;
+          currentNavLink: string;
+      }
+    | {
           edition: Edition;
           dataLinkName: string;
       }
     | {
           pillar: Pillar;
+      }
+    | {
+          pillar: Pillar;
           sectionName?: string;
+          ajaxUrl: string;
       }
     | {
           limitItems?: number;
@@ -95,6 +108,15 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             props: { pillar, nav: NAV },
             root: 'nav-root',
         },
+        {
+            component: SubNav,
+            props: {
+                pillar,
+                subnav: NAV.subNavSections,
+                currentNavLink: NAV.currentNavLink,
+            },
+            root: 'sub-nav-root',
+        },
     ];
 
     const lowPriorityIslands: IslandType[] = [
@@ -124,6 +146,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             props: {
                 pillar,
                 sectionName,
+                ajaxUrl: CAPI.config.ajaxUrl,
             },
             root: 'most-viewed-footer',
         },
@@ -141,7 +164,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
         {
             component: SlotBodyEnd,
             props: {},
-            root: 'layout-slot-bottom',
+            root: 'slot-body-end',
         },
         {
             component: CookieBanner,
