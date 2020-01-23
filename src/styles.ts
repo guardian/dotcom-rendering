@@ -1,6 +1,7 @@
 import { palette } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-foundations/mq';
+import { from, until, between } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core'
+import { PillarStyles } from 'pillar';
 import { Option } from 'types/option';
 
 const BASE_PADDING = 8;
@@ -53,6 +54,131 @@ export const linkStyle = (kicker: string): string => `
         background-position: 0 bottom;
     }
 `
+
+// Styles shared across article types
+export const commonArticleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+    ${linkStyle(kicker)}
+
+    .image img {
+        width: 100%; 
+    }
+
+    .image {
+        ${between.phablet.and.wide} {
+            padding-left: ${basePx(1)};
+            padding-right: ${basePx(1)};
+        }
+    }
+
+    .pullquote {
+        font-weight: 200;
+        font-size: 2.2rem;
+        line-height: 1.3;
+        color: ${kicker};
+        ${headlineFont}
+        margin: 0;
+
+        blockquote {
+            margin-left: 0;
+        }
+
+        p {
+            margin: 1em 0;
+
+            &::before {
+                ${icons}
+                font-size: 2.2rem;
+                content: '\\e11c';
+                display: inline-block;
+                margin-right: ${basePx(1)};
+            }
+        }
+
+        footer {
+            font-size: 1.8rem;
+            margin-top: 4px;
+
+            cite {
+                font-style: normal;
+            }
+        }
+    }
+
+    figcaption {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        color: ${palette.neutral[46]};
+        ${textSans}
+
+        ${until.phablet} {
+            padding-left: ${basePx(1)};
+            padding-right: ${basePx(1)};
+        }
+    }
+
+    .rich-link,
+    .element-membership {
+        background: ${palette.neutral[97]};
+        padding: ${basePx(1)};
+
+        h1 {
+            margin: 0;
+        }
+
+        p {
+            margin: ${basePx(1, 0)};
+        }
+
+        span {
+            display: none;
+        }
+
+        a {
+            background: none;
+            text-decoration: none;
+        }
+
+        ${darkModeCss`background: black;`}
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+        margin: ${basePx(1, 0)};
+        font-weight: 500;
+
+        & + p {
+            margin-top: 0;
+        }
+    }
+
+    .element-video {
+        iframe {
+            width: 100%
+        }
+    }
+
+    p {
+        overflow-wrap: break-word;
+    }
+
+    ${until.wide} {
+        .twitter-tweet {
+            clear: both;
+        }
+    }
+
+    .section-rule {
+        display: block;
+        width: 8.75rem;
+        height: 0.125rem;
+        margin: 0;
+        border: 0;
+        margin-top: 3rem;
+        margin-bottom: 0.1875rem;
+        background-color: ${palette.neutral[93]};
+    }
+`;
 
 export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
