@@ -24,7 +24,12 @@ export const withTwoTabs = () => {
 
     return (
         <Section>
-            <MostViewedFooter pillar="news" sectionName="politics" />;
+            <MostViewedFooter
+                pillar="news"
+                sectionName="politics"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />
+            ;
         </Section>
     );
 };
@@ -38,7 +43,11 @@ export const withOneTabs = () => {
 
     return (
         <Section>
-            <MostViewedFooter pillar="news" />;
+            <MostViewedFooter
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />
+            ;
         </Section>
     );
 };

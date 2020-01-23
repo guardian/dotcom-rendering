@@ -10,6 +10,7 @@ const hideBelowDesktop = css`
 
     ${from.desktop} {
         /* above 980 */
+        height: 100%;
         display: block;
         flex-basis: 300px;
         flex-grow: 0;
@@ -19,9 +20,6 @@ const hideBelowDesktop = css`
 
 const padding = css`
     padding-top: 6px;
-    /* Use margin here to the prevent flicker on load that you get
-       with padding (because the header section has flex-grow: 1) */
-    margin-left: 20px;
 `;
 
 type Props = {

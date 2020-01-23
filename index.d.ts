@@ -75,7 +75,6 @@ interface LinkType extends SimpleLinkType {
 
 interface PillarType extends LinkType {
     pillar: Pillar;
-    more: false;
 }
 
 interface MoreType extends LinkType {
@@ -225,6 +224,8 @@ interface CAPIType {
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
 
     pageFooter: FooterType;
+
+    slotMachineFlags?: string;
 }
 
 interface TagType {
@@ -449,7 +450,7 @@ interface TrailTabType {
     trails: TrailType[];
 }
 
-interface MostViewedFooterType {
+interface MostViewedFooterPayloadType {
     tabs: TrailTabType[];
     mostCommented: TrailType;
     mostShared: TrailType;

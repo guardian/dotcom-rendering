@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from 'emotion';
 
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
@@ -90,15 +91,21 @@ export const ShowcaseInterview = () => (
                 <></>
             </LeftColumn>
             <ArticleContainer>
-                <ArticleHeadline
-                    headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-                    designType="Interview"
-                    pillar="culture"
-                    webPublicationDate=""
-                    tags={[]}
-                    isShowcase={true}
-                    byline="Byline text"
-                />
+                <div
+                    className={css`
+                        margin-bottom: -100px;
+                    `}
+                >
+                    <ArticleHeadline
+                        headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+                        designType="Interview"
+                        pillar="culture"
+                        webPublicationDate=""
+                        tags={[]}
+                        isShowcase={true}
+                        byline="Byline text"
+                    />
+                </div>
                 <MainMedia
                     hideCaption={true}
                     elements={mainMediaElements}
@@ -398,13 +405,19 @@ export const Immersive = () => (
                     <></>
                 </LeftColumn>
                 <ArticleContainer>
-                    <ArticleHeadline
-                        headlineString="Here the headline overlays the image above it, the text is larger and the black background should extend to the right"
-                        designType="Immersive"
-                        pillar="culture"
-                        webPublicationDate=""
-                        tags={[]}
-                    />
+                    <div
+                        className={css`
+                            margin-top: -100px;
+                        `}
+                    >
+                        <ArticleHeadline
+                            headlineString="Here the headline overlays the image above it, the text is larger and the black background should extend to the right"
+                            designType="Immersive"
+                            pillar="culture"
+                            webPublicationDate=""
+                            tags={[]}
+                        />
+                    </div>
                 </ArticleContainer>
             </Flex>
         </Section>

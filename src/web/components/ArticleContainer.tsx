@@ -15,11 +15,6 @@ const articleContainer = css`
         padding-left: 0;
     }
 
-    ${from.leftCol} {
-        /* above 1140 */
-        padding-left: 10px;
-    }
-
     flex-grow: 1;
 `;
 
@@ -50,11 +45,11 @@ const articleAdStyles = css`
         ${from.desktop} {
             float: right;
             width: auto;
-            margin-right: -328px;
+            margin-right: -308px;
         }
 
         ${from.wide} {
-            margin-right: -388px;
+            margin-right: -398px;
         }
     }
     .ad-slot--outstream {
