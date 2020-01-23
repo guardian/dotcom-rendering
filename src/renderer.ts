@@ -31,7 +31,7 @@ const getHref: (node: Node) => Option<string> =
     getAttr('href');
 
 const Paragraph = (props: { children?: ReactNode }): ReactElement =>
-    h('p', null, props.children);
+    styledH('p', { css: css`overflow-wrap: break-word` }, props.children);
 
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
@@ -100,8 +100,25 @@ const HeadingTwoStyles = css`
     }
 `
 
+const HorizontalRuleStyles = css`
+    display: block;
+    width: 8.75rem;
+    height: 0.125rem;
+    margin: 0;
+    border: 0;
+    margin-top: 3rem;
+    margin-bottom: 0.1875rem;
+    background-color: ${palette.neutral[93]};
+`
+
+const TweetStyles = css`
+    ${until.wide} {
+        clear: both;
+    }
+`;
+
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    h('p', null,
+    styledH('p', { css: css`display: inline` },
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
         null
@@ -110,13 +127,26 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
     styledH('h2', { css: HeadingTwoStyles }, props.children );
 
+const HorizontalRule = () =>
+    styledH('hr', { css: HorizontalRuleStyles }, null)
+
+const transform = (text: string, pillar: Pillar) => {
+    if (text?.includes('•')) {
+        return h(Bullet, { pillar, text });
+    } else if (text?.includes('* * *')) {
+        return h(HorizontalRule, null, null);
+    }
+
+    return text;
+}
+
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
     switch (node.nodeName) {
         case 'P':
             return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case '#text':
-            return text?.includes('•') ? h(Bullet, { pillar, text }) : text;
+            return transform(text, pillar);
         case 'SPAN':
             return text;
         case 'A':
@@ -323,7 +353,7 @@ const Interactive = (props: { url: string }): ReactElement =>
 
 const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
     // twitter script relies on twitter-tweet class being present
-    return h('blockquote', { key: props.key, className: 'twitter-tweet' }, ...Array.from(props.content).map(textElement(props.pillar)));
+    return styledH('blockquote', { key: props.key, className: 'twitter-tweet', css: TweetStyles }, ...Array.from(props.content).map(textElement(props.pillar)));
 }
 
 const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
