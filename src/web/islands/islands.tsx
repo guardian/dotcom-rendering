@@ -11,11 +11,20 @@ import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks'
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { Onwards } from '@frontend/web/components/Onwards/Onwards';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
+import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 
 type IslandProps =
     | {
           pillar: Pillar;
           nav: NavType;
+      }
+    | {
+          subnav: {
+              parent?: LinkType;
+              links: LinkType[];
+          };
+          pillar: Pillar;
+          currentNavLink: string;
       }
     | {
           edition: Edition;
@@ -94,6 +103,15 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             component: Nav,
             props: { pillar, nav: NAV },
             root: 'nav-root',
+        },
+        {
+            component: SubNav,
+            props: {
+                pillar,
+                subnav: NAV.subNavSections,
+                currentNavLink: NAV.currentNavLink,
+            },
+            root: 'sub-nav-root',
         },
     ];
 
