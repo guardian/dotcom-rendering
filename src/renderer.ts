@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, Fragment, ReactElement } from 'react';
+import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
@@ -49,6 +49,32 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
         props.text,
     );
 
+const listStyles = (colour: string): SerializedStyles => css`
+    list-style: none;
+    padding-left: 0;
+`
+
+const listItemStyles: SerializedStyles = css`
+    padding-left: 2rem;
+    line-height: 2.2rem;
+    padding-bottom: 0.375rem;
+
+    &::before {
+        display: inline-block;
+        content: '';
+        border-radius: 0.5rem;
+        height: 1rem;
+        width: 1rem;
+        margin-right: 1rem;
+        background-color: ${palette.neutral[86]};
+        margin-left: -2rem;
+    }
+
+    > p:first-of-type {
+        display: inline;
+    }
+`
+
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
     display: inline-block;
@@ -75,37 +101,40 @@ const HeadingTwoStyles = css`
 `
 
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    h(Fragment, null,
-        styledH('p', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
+    h('p', null,
+        styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
-        null,
+        null
     );
 
 const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
     styledH('h2', { css: HeadingTwoStyles }, props.children );
 
-
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? '';
     switch (node.nodeName) {
         case 'P':
             return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case '#text':
-            const text = node.textContent;
             return text?.includes('•') ? h(Bullet, { pillar, text }) : text;
         case 'SPAN':
-            return node.textContent;
+            return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text: node.textContent ?? '', pillar, key });
+            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key });
         case 'H2':
             return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'BLOCKQUOTE':
-            return h('blockquote', { key }, node.textContent);
+            return h('blockquote', { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'STRONG':
-            return h('strong', { key }, node.textContent);
+            return h('strong', { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'EM':
-            return h('em', { key }, node.textContent);
+            return h('em', { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'BR':
             return h('br', { key }, null);
+        case 'UL':
+            return styledH('ul', { css: listStyles }, Array.from(node.childNodes).map(textElement(pillar)));
+        case 'LI':
+            return styledH('li', { css: listItemStyles }, Array.from(node.childNodes).map(textElement(pillar)));
         default:
             return null;
     }
