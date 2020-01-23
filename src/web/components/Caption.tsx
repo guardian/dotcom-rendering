@@ -7,10 +7,10 @@ import { pillarPalette } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 const figureStyle = css`
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 `;
 const captionStyle = (role?: RoleType) => css`
-    padding-top: 10px;
+    padding-top: 6px;
     ${textSans.xsmall()};
     word-wrap: break-word;
     color: ${palette.neutral[46]};
@@ -39,6 +39,7 @@ export const Caption: React.FC<{
     credit?: string;
     displayCredit?: boolean;
     role?: RoleType;
+    isMainMedia?: boolean;
 }> = ({
     captionText,
     pillar,
@@ -48,6 +49,7 @@ export const Caption: React.FC<{
     displayCredit = true,
     children,
     role,
+    isMainMedia,
 }) => {
     const iconStyle = css`
         fill: ${pillarPalette[pillar].main};
@@ -71,8 +73,8 @@ export const Caption: React.FC<{
         if (dirtyHtml) {
             return (
                 <span
-                    // tslint:disable-line:react-no-dangerous-html
                     className={captionLink}
+                    // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{
                         __html: captionText || '',
                     }}
@@ -84,7 +86,7 @@ export const Caption: React.FC<{
     };
 
     const shouldLimitWidth =
-        role && (role === 'showcase' || role === 'supporting');
+        !isMainMedia && (role === 'showcase' || role === 'supporting');
 
     return (
         <figure className={figureStyle}>

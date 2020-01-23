@@ -206,6 +206,9 @@
         "showBottomSocialButtons": {
             "type": "boolean"
         },
+        "shouldHideReaderRevenue": {
+            "type": "boolean"
+        },
         "guardianBaseURL": {
             "type": "string"
         },
@@ -236,6 +239,9 @@
         "nav": {},
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
+        },
+        "slotMachineFlags": {
+            "type": "string"
         }
     },
     "required": [
@@ -267,6 +273,7 @@
         "sectionLabel",
         "sectionUrl",
         "shouldHideAds",
+        "shouldHideReaderRevenue",
         "showBottomSocialButtons",
         "standfirst",
         "subMetaKeywordLinks",
@@ -1487,6 +1494,15 @@
                 },
                 "isPaidContent": {
                     "type": "boolean"
+                },
+                "keywordIds": {
+                    "type": "string"
+                },
+                "showRelatedContent": {
+                    "type": "boolean"
+                },
+                "shouldHideReaderRevenue": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1501,11 +1517,13 @@
                 "googletagUrl",
                 "hbImpl",
                 "isSensitive",
+                "keywordIds",
                 "revisionNumber",
                 "section",
                 "sentryHost",
                 "sentryPublicApiKey",
                 "sharedAdTargeting",
+                "showRelatedContent",
                 "stage",
                 "switches",
                 "videoDuration"
