@@ -5,9 +5,7 @@ import { css } from 'emotion';
 //     'https://cdn.jsdelivr.net/npm/prebid-universal-creative@latest/dist/load-cookie.html';
 
 const hostedIframeSrc =
-    'https://uploads.guim.co.uk/2020/01/21/amp-prebid-permutive.html';
-
-// s3 url https://s3-eu-west-1.amazonaws.com/uploads-origin.guim.co.uk/2020/01/21/amp-prebid-permutive.html
+    'https://uploads.guim.co.uk/2020/01/23/amp-prebid-permutive.html';
 
 const prebidImg =
     'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
