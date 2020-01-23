@@ -288,7 +288,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             </Section>
 
             {NAV.subNavSections && (
-                <Section backgroundColour={palette.neutral[100]} padded={false}>
+                <Section
+                    backgroundColour={palette.neutral[100]}
+                    padded={false}
+                    islandId="sub-nav-root"
+                >
                     <SubNav
                         subnav={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
@@ -413,7 +417,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             )}
 
             {NAV.subNavSections && (
-                <Section padded={false}>
+                <Section padded={false} islandId="sub-nav-root">
                     <SubNav
                         subnav={NAV.subNavSections}
                         pillar={CAPI.pillar}
