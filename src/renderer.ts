@@ -4,7 +4,6 @@ import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
-
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
@@ -78,6 +77,7 @@ const listItemStyles: SerializedStyles = css`
 
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
+    display: inline-block;
 
     &::before {
         content: '';
@@ -171,14 +171,20 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
     }
 `;
 
-const ImageElement = (props: ImageProps): ReactElement =>
-    styledH('img', {
-        sizes: props.sizes,
-        srcSet: srcset(props.salt)(props.url),
-        alt: props.alt,
-        src: transformUrl(props.salt, props.url, 500),
-        css: imageStyles(props.width, props.height),
+const ImageElement = (props: ImageProps): ReactElement | null => {
+    const { url, sizes, salt, alt, width, height } = props;
+    if (!url) {
+        return null;
+    }
+
+    return styledH('img', {
+        sizes,
+        srcSet: srcset(url, salt),
+        alt,
+        src: transformUrl(salt, url, 500),
+        css: imageStyles(width, height),
     });
+}
 
 const FigureElement = (props: FigureElement): ReactElement =>
     styledH('figure', { css: props.className },

@@ -7,7 +7,7 @@ import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
-import { Content } from 'capiThriftModels';
+import { Content } from 'mapiThriftModels/Content';
 import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';

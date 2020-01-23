@@ -9,7 +9,7 @@ import { formatDate } from 'date';
 import { Contributor } from 'capi';
 import Follow from 'components/shared/follow';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
-
+import { Option } from 'types/option';
 
 // ----- Styles ----- //
 
@@ -56,7 +56,7 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
 
 interface Props {
     pillar: Pillar;
-    publicationDate: string;
+    publicationDate: Option<Date>;
     contributors: Contributor[];
 }
 
@@ -67,7 +67,11 @@ const Byline = ({ pillar, publicationDate, contributors }: Props): JSX.Element =
         <div css={[Styles(pillarStyles), DarkStyles(pillarStyles)]}>
             <div css={sidePadding}>
                 <div className="author">
-                    <time>{ formatDate(new Date(publicationDate)) }</time>
+                    { publicationDate
+                        // This is not an iterator, ESLint is confused
+                        // eslint-disable-next-line react/jsx-key
+                        .map<JSX.Element | null>(date => <time>{formatDate(date)}</time>)
+                        .withDefault(null) }
                     <Follow contributors={contributors} />
                 </div>
             </div>

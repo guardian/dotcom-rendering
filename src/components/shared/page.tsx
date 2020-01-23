@@ -8,7 +8,7 @@ import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Immersive from 'components/immersive/article';
 
-import { Content } from 'capiThriftModels';
+import { Content } from 'mapiThriftModels/Content';
 import { includesTweets } from 'capi';
 import { fontFace } from 'styles';
 import { None, Some } from 'types/option';

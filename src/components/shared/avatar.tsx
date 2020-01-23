@@ -37,7 +37,6 @@ interface AvatarProps {
 }
 
 function Avatar({ contributors, bgColour, imageSalt }: AvatarProps): JSX.Element | null {
-
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl) {
