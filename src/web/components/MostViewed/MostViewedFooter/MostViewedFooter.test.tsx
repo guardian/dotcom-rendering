@@ -26,7 +26,11 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewedFooter sectionName="Section Name" pillar="news" />,
+            <MostViewedFooter
+                sectionName="Section Name"
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />,
         );
 
         // Calls api once only
@@ -54,7 +58,11 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByTestId, getByText } = render(
-            <MostViewedFooter sectionName="Section Name" pillar="news" />,
+            <MostViewedFooter
+                sectionName="Section Name"
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />,
         );
 
         const firstHeading = responseWithTwoTabs.tabs[0].heading;
@@ -79,7 +87,11 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithOneTab });
 
         const { queryByText } = render(
-            <MostViewedFooter sectionName="Section Name" pillar="news" />,
+            <MostViewedFooter
+                sectionName="Section Name"
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />,
         );
 
         expect(
@@ -108,7 +120,11 @@ describe('MostViewedFooter', () => {
         });
 
         const { getByText } = render(
-            <MostViewedFooter sectionName="Section Name" pillar="news" />,
+            <MostViewedFooter
+                sectionName="Section Name"
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />,
         );
 
         expect(getByText('Live')).toBeInTheDocument();
@@ -135,7 +151,11 @@ describe('MostViewedFooter', () => {
         });
 
         const { queryByText } = render(
-            <MostViewedFooter sectionName="Section Name" pillar="news" />,
+            <MostViewedFooter
+                sectionName="Section Name"
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />,
         );
 
         expect(queryByText('Live')).not.toBeInTheDocument();

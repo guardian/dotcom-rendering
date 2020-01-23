@@ -23,7 +23,11 @@ type IslandProps =
       }
     | {
           pillar: Pillar;
+      }
+    | {
+          pillar: Pillar;
           sectionName?: string;
+          ajaxUrl: string;
       }
     | {
           limitItems?: number;
@@ -124,6 +128,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             props: {
                 pillar,
                 sectionName,
+                ajaxUrl: CAPI.config.ajaxUrl,
             },
             root: 'most-viewed-footer',
         },
