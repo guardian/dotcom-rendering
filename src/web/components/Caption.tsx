@@ -86,7 +86,7 @@ export const Caption: React.FC<{
     };
 
     const shouldLimitWidth =
-        !isMainMedia && role && (role === 'showcase' || role === 'supporting');
+        !isMainMedia && (role === 'showcase' || role === 'supporting');
 
     return (
         <figure className={figureStyle}>
