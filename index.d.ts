@@ -438,8 +438,8 @@ interface TrailType {
     url: string;
     headline: string;
     isLiveBlog: boolean;
-    image: string;
     webPublicationDate: string;
+    image?: string;
     avatarUrl?: string;
     mediaType?: MediaType;
     mediaDuration?: number;
