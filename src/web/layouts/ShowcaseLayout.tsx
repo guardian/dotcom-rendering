@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
-// import { StarRating } from '@root/src/web/components/StarRating';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -324,12 +323,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 tags={CAPI.tags}
                                 byline={CAPI.author.byline}
                             />
-                            {/* {CAPI.starRating && (
-                                <StarRating
-                                    rating={CAPI.starRating}
-                                    size="medium"
-                                />
-                            )} */}
                         </PositionHeadline>
                     </GridItem>
                     <GridItem area="media">
