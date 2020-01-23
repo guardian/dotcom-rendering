@@ -52,7 +52,7 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
 
 interface Props {
     pillar: Pillar;
-    publicationDate: Option<string>;
+    publicationDate: Option<Date>;
     contributors: Contributor[];
     className: SerializedStyles;
 }
@@ -67,7 +67,7 @@ function Byline({ pillar, publicationDate, contributors, className }: Props): JS
                     { publicationDate
                         // This is not an iterator, ESLint is confused
                         // eslint-disable-next-line react/jsx-key
-                        .map<JSX.Element | null>(date => <time>{formatDate(new Date(date))}</time>)
+                        .map<JSX.Element | null>(date => <time>{formatDate(date)}</time>)
                         .withDefault(null) }
                     <Follow contributors={contributors} />
                 </div>

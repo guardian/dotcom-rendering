@@ -32,7 +32,7 @@ interface ArticleFields {
     standfirst: Option<DocumentFragment>;
     byline: string;
     bylineHtml: Option<DocumentFragment>;
-    publishDate: Option<string>;
+    publishDate: Option<Date>;
     mainImage: Option<Image>;
     contributors: Tag[];
     series: Tag;
@@ -130,7 +130,7 @@ const parseImage = (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
     const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
 
-    if (!masterAsset?.file || !masterAsset.typeData?.width || !masterAsset.typeData.height) {
+    if (!masterAsset?.file || !masterAsset?.typeData?.width || !masterAsset?.typeData?.height) {
         return new None();
     }
 
@@ -248,7 +248,7 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
         standfirst: fromNullable(content?.fields?.standfirst).map(docParser),
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).map(docParser),
-        publishDate: typeof content?.webPublicationDate === 'string' ? new Some(content.webPublicationDate) : new None(),
+        publishDate: capiDateTimeToDate(content.webPublicationDate),
         mainImage: articleMainImage(content).andThen(parseImage),
         contributors: articleContributors(content),
         series: articleSeries(content),
