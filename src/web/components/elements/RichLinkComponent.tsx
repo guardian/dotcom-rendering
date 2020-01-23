@@ -6,7 +6,6 @@ import Quote from '@frontend/static/icons/quote.svg';
 import { palette } from '@guardian/src-foundations';
 import { StarRating } from '@root/src/web/components/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
-import { Hide } from '@frontend/web/components/Hide';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
 import { useApi } from '@frontend/web/components/lib/api';
