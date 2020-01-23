@@ -30,7 +30,6 @@ export const withTwoTabs = () => {
                 sectionName="politics"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
             />
-            ;
         </Section>
     );
 };
@@ -48,7 +47,6 @@ export const withOneTabs = () => {
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
             />
-            ;
         </Section>
     );
 };
@@ -66,7 +64,6 @@ export const withNoMostSharedImage = () => {
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
             />
-            ;
         </Section>
     );
 };
