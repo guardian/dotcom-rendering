@@ -10,7 +10,7 @@ export const SlotBodyEnd = () => {
     const endpointUrl = 'https://contributions.guardianapis.com/epic';
 
     const trackingParams = {
-        ophanPageId: window.guardian.config.ophan.pageViewId,
+        ophanPageId: window.guardian.config.ophan?.pageViewId,
         ophanComponentId: 'ACQUISITIONS_EPIC',
         platformId: 'GUARDIAN_WEB',
         campaignCode: '',
