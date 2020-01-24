@@ -9,7 +9,16 @@ const wrapperMargins = css`
 export const SlotBodyEnd = () => {
     const endpointUrl = 'https://contributions.guardianapis.com/epic';
 
-    const trackingParams = {};
+    const trackingParams = {
+        ophanPageId: window.guardian.config.ophan.pageViewId,
+        ophanComponentId: 'ACQUISITIONS_EPIC',
+        platformId: 'GUARDIAN_WEB',
+        campaignCode: '',
+        abTestName: '',
+        abTestVariant: '',
+        referrerUrl: window.location.href.split('?')[0],
+    };
+
     const { data, error } = useApi(endpointUrl, trackingParams);
 
     if (error) {
