@@ -1,5 +1,26 @@
 import { useState, useEffect } from 'react';
 
+interface FetchOptions {
+    method?:
+        | 'GET'
+        | 'HEAD'
+        | 'POST'
+        | 'PUT'
+        | 'DELETE'
+        | 'CONNECT'
+        | 'OPTIONS'
+        | 'TRACE'
+        | 'PATCH';
+    headers?: {
+        'Content-Type':
+            | 'text/plain'
+            | 'multipart/form-data'
+            | 'application/json'
+            | 'application/x-www-form-urlencoded';
+    };
+    body?: string;
+}
+
 function checkForErrors(response: any) {
     if (!response.ok) {
         throw Error(response.statusText);
@@ -7,24 +28,13 @@ function checkForErrors(response: any) {
     return response;
 }
 
-const callApi = (url: string, body?: object) => {
-    // If a `body` object has been passed in, assume POST request using that data
-    // Otherwise, default to basic GET request
-    const fetchPromise =
-        typeof body === 'object'
-            ? fetch(url, {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded',
-                  },
-                  body: JSON.stringify(body),
-              })
-            : fetch(url);
-
-    return fetchPromise.then(checkForErrors).then(response => response.json());
+const callApi = (url: string, options?: FetchOptions) => {
+    return fetch(url, options)
+        .then(checkForErrors)
+        .then(response => response.json());
 };
 
-export function useApi<T>(url: string, body?: object) {
+export function useApi<T>(url: string, options?: FetchOptions) {
     const [request, setRequest] = useState<{
         loading: boolean;
         data?: T;
@@ -34,7 +44,7 @@ export function useApi<T>(url: string, body?: object) {
     });
 
     useEffect(() => {
-        callApi(url, body)
+        callApi(url, options)
             .then(data => {
                 setRequest({
                     data,
