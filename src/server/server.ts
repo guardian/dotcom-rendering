@@ -81,12 +81,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
     const transport = new BufferedTransport(buffer);
     const protocol = new CompactProtocol(transport);
 
-    if (capiResponse.status === 500 || capiResponse.status === 404) {
-      const response: ErrorResponse = ErrorResponse.read(protocol);
-      console.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message}`);
-      res.sendStatus(500);
-
-    } else if (capiResponse.status === 200) {
+    if (capiResponse.status === 200) {
       const response: CapiResponse = CapiResponse.read(protocol);
 
       if (response.content) {
@@ -116,6 +111,10 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
           }
         )
       }
+    } else {
+      const response: ErrorResponse = ErrorResponse.read(protocol);
+      console.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message}`);
+      res.sendStatus(500);
     }
   } catch (e) {
     console.error(`This error occurred, but I don't know why: ${e}`);
