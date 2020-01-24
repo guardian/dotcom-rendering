@@ -44,6 +44,10 @@ $ make dev
 
 `make dev` will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
 
+Visit the [root path of the dev server](http://localhost:3030) for some example URLs to visit.
+
+You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
+
 ### Detailed Setup
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).
