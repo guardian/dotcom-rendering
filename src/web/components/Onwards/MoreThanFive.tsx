@@ -150,7 +150,7 @@ export const MoreThanFive = ({ content }: Props) => {
                                 pillar: trail.pillar,
                                 designType: trail.designType,
                                 headlineText: trail.headline,
-                                headlineSize: 'medium',
+                                headlineSize: 'small',
                                 byline: trail.byline,
                                 showByline: trail.showByline,
                                 showQuotes: trail.designType === 'Comment',
