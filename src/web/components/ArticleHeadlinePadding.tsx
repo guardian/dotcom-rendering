@@ -1,11 +1,14 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
 
+const paddingTop = css`
+    padding-top: 3px;
+`;
+
 const standardPadding = css`
     padding-bottom: 24px;
-    padding-top: 3px;
     ${from.tablet} {
         padding-bottom: 36px;
     }
@@ -23,11 +26,12 @@ const determinPadding = (designType: DesignType) => {
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-        case 'Review':
         case 'Feature':
         case 'Comment':
         case 'Analysis':
             return standardPadding;
+
+        case 'Review':
         case 'Interview':
         case 'Immersive':
             return null;
@@ -39,5 +43,7 @@ export const ArticleHeadlinePadding: React.FC<{
     designType: DesignType;
 }> = ({ children, designType }) => {
     const paddingClassName = determinPadding(designType);
-    return <div className={paddingClassName || ''}>{children}</div>;
+    return (
+        <div className={cx(paddingTop, paddingClassName || '')}>{children}</div>
+    );
 };
