@@ -47,7 +47,7 @@ export const OnwardsLayout = ({ onwardSections }: Props) => (
                     <Hide when="above" breakpoint="leftCol">
                         <OnwardsTitle title={onward.heading} />
                     </Hide>
-                    {decideLayout(onward.trails)}
+                    {decideLayout(onward.trails.slice(0, 8))}
                 </OnwardsContainer>
             </Flex>
         ))}
