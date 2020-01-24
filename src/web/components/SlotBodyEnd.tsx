@@ -18,8 +18,13 @@ export const SlotBodyEnd = () => {
         abTestVariant: '',
         referrerUrl: window.location.href.split('?')[0],
     };
-
-    const { data, error } = useApi(endpointUrl, trackingParams);
+    const { data, error } = useApi(endpointUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(trackingParams),
+    });
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'slot-body-end');
