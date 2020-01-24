@@ -7,13 +7,24 @@ function checkForErrors(response: any) {
     return response;
 }
 
-const callApi = (url: string) => {
-    return fetch(url)
-        .then(checkForErrors)
-        .then(response => response.json());
+const callApi = (url: string, body?: object) => {
+    // If a `body` object has been passed in, assume POST request using that data
+    // Otherwise, default to basic GET request
+    const fetchPromise =
+        typeof body === 'object'
+            ? fetch(url, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: JSON.stringify(body),
+              })
+            : fetch(url);
+
+    return fetchPromise.then(checkForErrors).then(response => response.json());
 };
 
-export function useApi<T>(url: string) {
+export function useApi<T>(url: string, body?: object) {
     const [request, setRequest] = useState<{
         loading: boolean;
         data?: T;
@@ -23,7 +34,7 @@ export function useApi<T>(url: string) {
     });
 
     useEffect(() => {
-        callApi(url)
+        callApi(url, body)
             .then(data => {
                 setRequest({
                     data,
@@ -40,3 +51,5 @@ export function useApi<T>(url: string) {
 
     return request;
 }
+
+// //////////////////////////////
