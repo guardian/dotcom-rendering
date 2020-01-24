@@ -7,8 +7,16 @@ const wrapperMargins = css`
 `;
 
 export const SlotBodyEnd = () => {
-    const endpointUrl = 'https://contributions.guardianapis.com';
-    const { data, error } = useApi(endpointUrl);
+    const endpointUrl = 'https://contributions.guardianapis.com/epic';
+
+    const trackingParams = {};
+    const { data, error } = useApi(endpointUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(trackingParams),
+    });
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'slot-body-end');
