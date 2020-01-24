@@ -46,7 +46,7 @@ const determinSize = (size: SizeType) => {
 export const StarRating: React.FC<{
     rating: number;
     size: SizeType;
-}> = ({ rating, size = 'small' }) => {
+}> = ({ rating, size }) => {
     const stars = (n: number) => {
         return Array(5)
             .fill(0)
