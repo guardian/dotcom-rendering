@@ -14,10 +14,8 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
-import {
-    ArticleHeadline,
-    ArticleHeadlineWrapper,
-} from '@root/src/web/components/ArticleHeadline';
+import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -318,7 +316,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <PositionHeadline designType={CAPI.designType}>
-                            <ArticleHeadlineWrapper
+                            <ArticleHeadlinePadding
                                 designType={CAPI.designType}
                             >
                                 <ArticleHeadline
@@ -329,7 +327,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     tags={CAPI.tags}
                                     byline={CAPI.author.byline}
                                 />
-                            </ArticleHeadlineWrapper>
+                            </ArticleHeadlinePadding>
                         </PositionHeadline>
                     </GridItem>
                     <GridItem area="media">
