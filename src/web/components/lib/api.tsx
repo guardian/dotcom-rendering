@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+// Not meant to be an exhaustive type definition of the fetch API,
+// just a starting point to get us going on 99% of our possible use cases
 interface FetchOptions {
     method?:
         | 'GET'
