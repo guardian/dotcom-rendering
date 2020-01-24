@@ -2474,6 +2474,14 @@ export const CAPI: CAPIType = {
                 support:
                     'https://support.theguardian.com?INTCMP=header_supp…der_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
             },
+            footer: {
+                contribute:
+                    'https://support.theguardian.com/contribute?INTCMP=…_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                subscribe:
+                    'https://support.theguardian.com/subscribe?INTCMP=h…t_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+                support:
+                    'https://support.theguardian.com?INTCMP=header_supp…der_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+            },
         },
     },
     showBottomSocialButtons: true,

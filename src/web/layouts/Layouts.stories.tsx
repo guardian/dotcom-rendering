@@ -10,6 +10,9 @@ import { StandardLayout } from './StandardLayout';
 /* tslint:disable */
 export default {
     title: 'Components/Layouts',
+    parameters: {
+        chromatic: { delay: 600 },
+    },
 };
 /* tslint:enable */
 
