@@ -150,7 +150,7 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
         case 'SPAN':
             return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key });
+            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'H2':
             return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
         case 'BLOCKQUOTE':

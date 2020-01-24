@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { palette } from '@guardian/src-foundations';
 
-import { sidePadding, headlineFont, darkModeCss, linkStyle } from 'styles';
+import { sidePadding, headlineFont, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
 import { Article, Layout } from 'article';
@@ -20,15 +20,14 @@ const FeatureStyles = `
     line-height: 2.4rem;
 `;
 
-function Styles({ pillar, layout }: Article): SerializedStyles {
-    const { kicker } = getPillarStyles(pillar);
+function Styles({ layout }: Article): SerializedStyles {
     const includeFeatureStyles = layout === Layout.Feature
         || layout === Layout.Review
         || layout === Layout.Opinion;
 
     return css`
         padding-bottom: 6px;
-        font-weight: 500;
+        font-weight: 700;
         font-size: 1.6rem;
         line-height: 2rem;
 
@@ -36,7 +35,6 @@ function Styles({ pillar, layout }: Article): SerializedStyles {
             margin: 0;
         }
 
-        ${linkStyle(kicker)}
         ${sidePadding}
         ${includeFeatureStyles ? FeatureStyles : null}
     `;
