@@ -187,11 +187,7 @@ const renderHeadline = ({
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-            return (
-                <h1 className={cx(standardFont, standardPadding)}>
-                    {curly(headlineString)}
-                </h1>
-            );
+            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
 
         case 'Review':
         case 'Feature':
@@ -199,7 +195,6 @@ const renderHeadline = ({
                 <h1
                     className={cx(
                         boldFont,
-                        standardPadding,
                         colourStyles(options && options.colour),
                     )}
                 >
@@ -208,21 +203,11 @@ const renderHeadline = ({
             );
 
         case 'Comment':
-            return (
-                <h1 className={cx(lightFont, standardPadding)}>
-                    {curly(headlineString)}
-                </h1>
-            );
+            return <h1 className={lightFont}>{curly(headlineString)}</h1>;
 
         case 'Analysis':
             return (
-                <h1
-                    className={cx(
-                        standardFont,
-                        standardPadding,
-                        underlinedStyles,
-                    )}
-                >
+                <h1 className={cx(standardFont, underlinedStyles)}>
                     {curly(headlineString)}
                 </h1>
             );
@@ -266,6 +251,37 @@ const renderHeadline = ({
                 </h1>
             );
     }
+};
+
+const determinPadding = (designType: DesignType) => {
+    switch (designType) {
+        case 'Article':
+        case 'Media':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Review':
+        case 'Feature':
+        case 'Comment':
+        case 'Analysis':
+            return standardPadding;
+        case 'Interview':
+        case 'Immersive':
+            return null;
+    }
+};
+
+export const ArticleHeadlineWrapper: React.FC<{
+    children: React.ReactNode;
+    designType: DesignType;
+}> = ({ children, designType }) => {
+    const paddingClassName = determinPadding(designType);
+    return <div className={paddingClassName || ''}>{children}</div>;
 };
 
 export const ArticleHeadline = ({

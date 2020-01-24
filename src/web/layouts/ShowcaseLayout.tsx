@@ -14,7 +14,10 @@ import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
-import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import {
+    ArticleHeadline,
+    ArticleHeadlineWrapper,
+} from '@root/src/web/components/ArticleHeadline';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -315,14 +318,18 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <PositionHeadline designType={CAPI.designType}>
-                            <ArticleHeadline
-                                headlineString={CAPI.headline}
+                            <ArticleHeadlineWrapper
                                 designType={CAPI.designType}
-                                pillar={CAPI.pillar}
-                                webPublicationDate={CAPI.webPublicationDate}
-                                tags={CAPI.tags}
-                                byline={CAPI.author.byline}
-                            />
+                            >
+                                <ArticleHeadline
+                                    headlineString={CAPI.headline}
+                                    designType={CAPI.designType}
+                                    pillar={CAPI.pillar}
+                                    webPublicationDate={CAPI.webPublicationDate}
+                                    tags={CAPI.tags}
+                                    byline={CAPI.author.byline}
+                                />
+                            </ArticleHeadlineWrapper>
                         </PositionHeadline>
                     </GridItem>
                     <GridItem area="media">
