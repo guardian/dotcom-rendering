@@ -93,11 +93,10 @@ export const Onwards = ({
 
         const storyPackage = data;
 
-        if (data && data.trails && data.trails.length > 7) {
+        if (data && data.trails) {
             onwardSections.push({
                 heading: storyPackage.heading,
                 trails: storyPackage.trails,
-                layout: 'fourAndFour',
             });
         }
     } else if (isAdFreeUser && isPaidContent) {
@@ -131,11 +130,10 @@ export const Onwards = ({
 
         const { data } = useApi(joinUrl([ajaxUrl, popularInTagUrl]));
 
-        if (data && data.trails && data?.trails?.length > 7) {
+        if (data && data.trails) {
             onwardSections.push({
                 heading: data.heading,
                 trails: data.trails,
-                layout: 'fourAndFour',
             });
         }
     } else {
@@ -144,11 +142,10 @@ export const Onwards = ({
 
         const { data } = useApi(joinUrl([ajaxUrl, relatedUrl]));
 
-        if (data && data.trails && data?.trails?.length > 7) {
+        if (data && data.trails) {
             onwardSections.push({
                 heading: data.heading,
                 trails: data.trails,
-                layout: 'fourAndFour',
             });
         }
     }

@@ -6,41 +6,50 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
-import { StoryPackage } from './StoryPackage';
+import { MoreThanFive } from './MoreThanFive';
+import { ExactlyFive } from './ExactlyFive';
+import { FourOrLess } from './FourOrLess';
+import { Spotlight } from './Spotlight';
 
 type Props = {
     onwardSections: OnwardsType[];
 };
 
-const decideLayout = (layout: OnwardsLayoutType, trails: TrailType[]) => {
-    // TODO: This switch is a stub pending https://trello.com/c/rBoduy1y/1065-dynamic-onward-layouts
-    switch (layout) {
-        case 'fourAndFour':
-            return <StoryPackage content={trails} />;
+const decideLayout = (trails: TrailType[]) => {
+    switch (trails.length) {
+        case 1:
+            return <Spotlight content={trails} />;
+        case 2:
+        case 3:
+        case 4:
+            return <FourOrLess content={trails} />;
+        case 5:
+            return <ExactlyFive content={trails} />;
+        case 6:
+        case 7:
+        case 8:
         default:
-            return <StoryPackage content={trails} />;
+            return <MoreThanFive content={trails} />;
     }
 };
 
-export const OnwardsLayout = ({ onwardSections }: Props) => {
-    return (
-        <>
-            {onwardSections.map((onward, index) => (
-                <Flex key={`${onward.heading}-${index}`}>
-                    <LeftColumn
-                        showRightBorder={false}
-                        showPartialRightBorder={true}
-                    >
+export const OnwardsLayout = ({ onwardSections }: Props) => (
+    <>
+        {onwardSections.map((onward, index) => (
+            <Flex key={`${onward.heading}-${index}`}>
+                <LeftColumn
+                    showRightBorder={false}
+                    showPartialRightBorder={true}
+                >
+                    <OnwardsTitle title={onward.heading} />
+                </LeftColumn>
+                <OnwardsContainer>
+                    <Hide when="above" breakpoint="leftCol">
                         <OnwardsTitle title={onward.heading} />
-                    </LeftColumn>
-                    <OnwardsContainer>
-                        <Hide when="above" breakpoint="leftCol">
-                            <OnwardsTitle title={onward.heading} />
-                        </Hide>
-                        {decideLayout(onward.layout, onward.trails)}
-                    </OnwardsContainer>
-                </Flex>
-            ))}
-        </>
-    );
-};
+                    </Hide>
+                    {decideLayout(onward.trails)}
+                </OnwardsContainer>
+            </Flex>
+        ))}
+    </>
+);
