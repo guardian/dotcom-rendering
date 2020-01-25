@@ -25,7 +25,7 @@ const iconContainerStyles = css`
     height: 15px;
     margin: 0;
     text-align: right;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 `;
 
 const iconStyles = css`
