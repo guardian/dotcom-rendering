@@ -18,7 +18,7 @@ type ShareCountType = {
     refreshStatus: boolean;
 };
 
-const shareCount = css`
+const shareCountStyles = css`
     ${textSans.medium()};
     font-weight: bold;
     color: ${palette.neutral[46]};
@@ -37,26 +37,26 @@ const shareCount = css`
     }
 `;
 
-const shareCountContainer = css`
+const containerStyles = css`
     ${from.leftCol} {
         display: inline-block;
     }
 `;
 
-const shareCountHeader = css`
+const headerStyles = css`
     position: relative;
     height: 15px;
     margin: 0;
 `;
 
-const shareCountIcon = css`
+const iconStyles = css`
     position: absolute;
     top: 0;
     right: 0;
     fill: ${palette.neutral[46]};
 `;
 
-const countFull = css`
+const longStyles = css`
     display: block;
 
     ${between.leftCol.and.wide} {
@@ -64,7 +64,7 @@ const countFull = css`
     }
 `;
 
-const countShort = css`
+const shortStyles = css`
     display: none;
 
     ${between.leftCol.and.wide} {
@@ -95,24 +95,24 @@ export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
 
     return (
         <div
-            className={shareCount}
+            className={shareCountStyles}
             aria-label={`${displayCountShort} Shares`}
             data-cy="share-count"
         >
-            <div className={shareCountContainer}>
-                <div className={shareCountHeader}>
-                    <ShareIcon className={shareCountIcon} />
+            <div className={containerStyles}>
+                <div className={headerStyles}>
+                    <ShareIcon className={iconStyles} />
                 </div>
                 <div
                     data-testid="countFull"
-                    className={countFull}
+                    className={longStyles}
                     aria-hidden="true"
                 >
                     {displayCountLong}
                 </div>
                 <div
                     data-testid="countShort"
-                    className={countShort}
+                    className={shortStyles}
                     aria-hidden="true"
                 >
                     {displayCountShort}
