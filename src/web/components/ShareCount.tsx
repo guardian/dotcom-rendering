@@ -72,12 +72,8 @@ const countShort = css`
     }
 `;
 
-function buildUrl(ajaxUrl: string, pageId: string) {
-    return `${ajaxUrl}/sharecount/${pageId}.json`;
-}
-
 export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
-    const url = buildUrl(ajaxUrl, pageId);
+    const url = `${ajaxUrl}/sharecount/${pageId}.json`;
     const { data, error } = useApi<ShareCountType>(url);
 
     if (error) {
