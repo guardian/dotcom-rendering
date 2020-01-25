@@ -14,6 +14,9 @@ const Container = ({ children }: { children: JSXElements }) => (
     <div
         className={css`
             margin: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
         `}
     >
         {children}

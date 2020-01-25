@@ -13,7 +13,9 @@ type Props = {
 };
 
 const containerStyles = css`
-    display: inline-block;
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
     ${textSans.medium()};
     font-weight: bold;
     color: ${palette.neutral[46]};
