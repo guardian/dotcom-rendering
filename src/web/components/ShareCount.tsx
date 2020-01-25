@@ -1,9 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
-import ShareIcon from '@frontend/static/icons/share.svg';
+
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
+
+import ShareIcon from '@frontend/static/icons/share.svg';
 import { integerCommas } from '@root/src/lib/formatters';
 import { useApi } from '@root/src/web/components/lib/api';
 
