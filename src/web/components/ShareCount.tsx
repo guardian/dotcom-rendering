@@ -89,17 +89,17 @@ export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
         return null;
     }
 
-    const displayCount = parseInt(data.share_count.toFixed(0), 10);
-    const formattedDisplayCount = integerCommas(displayCount);
-    const shortDisplayCount =
-        displayCount > 10000
-            ? `${Math.round(displayCount / 1000)}k`
-            : displayCount;
+    const countAsInteger = parseInt(data.share_count.toFixed(0), 10);
+    const displayCountLong = integerCommas(countAsInteger);
+    const displayCountShort =
+        countAsInteger > 10000
+            ? `${Math.round(countAsInteger / 1000)}k`
+            : countAsInteger;
 
     return (
         <div
             className={shareCount}
-            aria-label={`${shortDisplayCount} Shares`}
+            aria-label={`${displayCountShort} Shares`}
             data-cy="share-count"
         >
             <div className={shareCountContainer}>
@@ -111,14 +111,14 @@ export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
                     className={countFull}
                     aria-hidden="true"
                 >
-                    {formattedDisplayCount}
+                    {displayCountLong}
                 </div>
                 <div
                     data-testid="countShort"
                     className={countShort}
                     aria-hidden="true"
                 >
-                    {shortDisplayCount}
+                    {displayCountShort}
                 </div>
             </div>
         </div>
