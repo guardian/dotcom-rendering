@@ -21,7 +21,7 @@ const containerStyles = css`
     color: ${palette.neutral[46]};
 `;
 
-const headerStyles = css`
+const iconContainerStyles = css`
     height: 15px;
     margin: 0;
     text-align: right;
@@ -55,7 +55,7 @@ export const ShareCount = ({ short, long }: Props) => {
             aria-label={`${short} Shares`}
             data-cy="share-comment-counts"
         >
-            <div className={headerStyles}>
+            <div className={iconContainerStyles}>
                 <ShareIcon className={iconStyles} />
             </div>
             <div
