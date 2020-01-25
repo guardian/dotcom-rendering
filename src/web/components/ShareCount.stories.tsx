@@ -20,11 +20,11 @@ const Container = ({ children }: { children: JSXElements }) => (
     </div>
 );
 
-export const Article = () => {
+export const ShareCountStory = () => {
     return (
         <Container>
             <ShareCount short="11k" long="10,898" />
         </Container>
     );
 };
-Article.story = { name: 'default' };
+ShareCountStory.story = { name: 'default' };
