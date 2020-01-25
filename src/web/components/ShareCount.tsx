@@ -7,6 +7,17 @@ import { from, between } from '@guardian/src-foundations/mq';
 import { integerCommas } from '@root/src/lib/formatters';
 import { useApi } from '@root/src/web/components/lib/api';
 
+type Props = {
+    ajaxUrl: string;
+    pageId: string;
+};
+
+type ShareCountType = {
+    path: string;
+    share_count: number;
+    refreshStatus: boolean;
+};
+
 const shareCount = css`
     ${textSans.medium()};
     font-weight: bold;
@@ -61,16 +72,6 @@ const countShort = css`
     }
 `;
 
-interface Props {
-    ajaxUrl: string;
-    pageId: string;
-}
-
-interface ShareCountType {
-    path: string;
-    share_count: number;
-    refreshStatus: boolean;
-}
 function buildUrl(ajaxUrl: string, pageId: string) {
     return `${ajaxUrl}/sharecount/${pageId}.json`;
 }
