@@ -36,6 +36,18 @@ const containerStyles = css`
     align-items: flex-start;
 `;
 
+const NumbersBorder = () => (
+    <div
+        data-testid="numbers-border"
+        className={css`
+            height: 40px;
+            margin-left: 4px;
+            margin-right: 4px;
+            border-left: 1px solid ${palette.neutral[86]};
+        `}
+    />
+);
+
 const formatForDisplay = (count: number) => {
     const countAsInteger = parseInt(count.toFixed(0), 10);
     const displayCountLong = integerCommas(countAsInteger);
@@ -74,12 +86,14 @@ export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
         );
     }
 
-    const hasShareData = shareData && shareData.share_count;
+    // Or false because we use these vars to decide if to render or not and react sees 0 as truthy
+    const hasShareData = (shareData && shareData.share_count) || false;
     const hasCommentData =
-        commentData &&
-        commentData.counts &&
-        commentData.counts[0] &&
-        commentData.counts[0].count;
+        (commentData &&
+            commentData.counts &&
+            commentData.counts[0] &&
+            commentData.counts[0].count) ||
+        false;
     if (!hasShareData && !hasCommentData) {
         return null;
     }
@@ -98,20 +112,15 @@ export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
 
     return (
         <div className={containerStyles}>
-            <ShareCount short={shareShort} long={shareLong} />
-            <div
-                className={css`
-                    height: 40px;
-                    margin-left: 4px;
-                    margin-right: 4px;
-                    border-left: 1px solid ${palette.neutral[86]};
-                `}
-            />
-            <CommentCount
-                short={commentShort}
-                long={commentLong}
-                pillar={pillar}
-            />
+            {hasShareData && <ShareCount short={shareShort} long={shareLong} />}
+            {hasShareData && hasCommentData && <NumbersBorder />}
+            {hasCommentData && (
+                <CommentCount
+                    short={commentShort}
+                    long={commentLong}
+                    pillar={pillar}
+                />
+            )}
         </div>
     );
 };
