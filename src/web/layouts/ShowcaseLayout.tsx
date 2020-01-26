@@ -196,44 +196,6 @@ const PositionHeadline = ({
     }
 };
 
-const PositionMeta = ({
-    designType,
-    children,
-}: {
-    designType: DesignType;
-    children: JSX.Element | JSX.Element[];
-}) => {
-    switch (designType) {
-        case 'Interview':
-            return (
-                <div
-                    className={css`
-                        margin-top: 36px;
-                    `}
-                >
-                    {children}
-                </div>
-            );
-        case 'Immersive':
-        case 'Article':
-        case 'Media':
-        case 'Review':
-        case 'Live':
-        case 'SpecialReport':
-        case 'Recipe':
-        case 'MatchReport':
-        case 'GuardianView':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        case 'Feature':
-        case 'Comment':
-        case 'Analysis':
-        default:
-            return <>{children}</>;
-    }
-};
-
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -341,7 +303,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         />
                     </GridItem>
                     <GridItem area="meta">
-                        <PositionMeta designType={CAPI.designType}>
                             <div className={maxWidth}>
                                 <GuardianLines
                                     pillar={CAPI.pillar}
@@ -363,7 +324,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     }
                                 />
                             </div>
-                        </PositionMeta>
                     </GridItem>
                     <GridItem area="body">
                         <ArticleContainer>
