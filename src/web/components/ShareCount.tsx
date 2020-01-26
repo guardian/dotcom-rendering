@@ -53,7 +53,7 @@ export const ShareCount = ({ short, long }: Props) => {
         <div
             className={containerStyles}
             aria-label={`${short} Shares`}
-            data-cy="share-comment-counts"
+            data-cy="share-counts"
         >
             <div className={iconContainerStyles}>
                 <ShareIcon className={iconStyles} />

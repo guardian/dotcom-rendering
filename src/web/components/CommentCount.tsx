@@ -57,21 +57,21 @@ export const CommentCount = ({ short, long, pillar }: Props) => {
     return (
         <div
             className={containerStyles(pillar)}
-            aria-label={`${short} Shares`}
-            data-cy="share-comment-counts"
+            aria-label={`${short} Comments`}
+            data-cy="comment-counts"
         >
             <div className={iconContainerStyles}>
                 <CommentIcon className={iconStyles(pillar)} />
             </div>
             <div
-                data-testid="long-share-count"
+                data-testid="long-comment-count"
                 className={longStyles}
                 aria-hidden="true"
             >
                 {long}
             </div>
             <div
-                data-testid="short-share-count"
+                data-testid="short-comment-count"
                 className={shortStyles}
                 aria-hidden="true"
             >
