@@ -4,10 +4,6 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { Inner } from './Inner';
 
-const subnavWrapper = css`
-    background-color: white;
-`;
-
 const multiLine = css`
     background-image: repeating-linear-gradient(
         to bottom,
@@ -92,7 +88,7 @@ export class SubNav extends Component<
         const expandSubNav = !showMore || isExpanded;
 
         return (
-            <div className={subnavWrapper}>
+            <div>
                 <Inner
                     links={subnav.links}
                     pillar={pillar}
