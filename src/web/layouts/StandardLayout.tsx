@@ -79,8 +79,9 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title  border  headline    right-column'
                         '.      border  standfirst  right-column'
+                        'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        '.      border  body        right-column';
+                        'meta   border  body        right-column';
                 }
 
                 ${until.wide} {
@@ -92,8 +93,9 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title  border  headline    right-column'
                         '.      border  standfirst  right-column'
+                        'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        '.      border  body        right-column';
+                        'meta   border  body        right-column';
                 }
 
                 ${until.leftCol} {
@@ -105,6 +107,7 @@ const StandardGrid = ({
                         'headline   right-column'
                         'standfirst right-column'
                         'media      right-column'
+                        'lines      right-column'
                         'meta       right-column'
                         'body       right-column';
                 }
@@ -116,6 +119,7 @@ const StandardGrid = ({
                         'headline'
                         'standfirst'
                         'media'
+                        'lines'
                         'meta'
                         'body';
                 }
@@ -129,6 +133,7 @@ const StandardGrid = ({
                         'title'
                         'headline'
                         'standfirst'
+                        'lines'
                         'meta'
                         'body';
                 }
@@ -142,6 +147,13 @@ const StandardGrid = ({
 const maxWidth = css`
     ${from.desktop} {
         max-width: 620px;
+    }
+`;
+
+const stretchLines = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 `;
 
@@ -253,16 +265,22 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             />
                         </div>
                     </GridItem>
+                    <GridItem area="lines">
+                        <div className={maxWidth}>
+                            <div className={stretchLines}>
+                                <GuardianLines
+                                    pillar={CAPI.pillar}
+                                    effect={decideLineEffect(
+                                        CAPI.designType,
+                                        CAPI.pillar,
+                                    )}
+                                    count={decideLineCount(CAPI.designType)}
+                                />
+                            </div>
+                        </div>
+                    </GridItem>
                     <GridItem area="meta">
                         <div className={maxWidth}>
-                            <GuardianLines
-                                pillar={CAPI.pillar}
-                                effect={decideLineEffect(
-                                    CAPI.designType,
-                                    CAPI.pillar,
-                                )}
-                                count={decideLineCount(CAPI.designType)}
-                            />
                             <ArticleMeta
                                 designType={CAPI.designType}
                                 pillar={CAPI.pillar}

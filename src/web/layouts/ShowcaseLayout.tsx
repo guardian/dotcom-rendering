@@ -78,8 +78,9 @@ const ShowcaseGrid = ({
                         300px; /* Right Column */
                     grid-template-areas:
                         'title  border  headline    headline'
+                        'lines  border  media       media'
                         'meta   border  media       media'
-                        '.      border  standfirst  right-column'
+                        'meta   border  standfirst  right-column'
                         '.      border  body        right-column';
                 }
 
@@ -92,8 +93,9 @@ const ShowcaseGrid = ({
                     grid-template-areas:
                         'title  border  headline    right-column'
                         '.      border  standfirst  right-column'
+                        'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        '.      border  body        right-column';
+                        'meta   border  body        right-column';
                 }
 
                 ${until.leftCol} {
@@ -105,6 +107,7 @@ const ShowcaseGrid = ({
                         'headline   right-column'
                         'standfirst right-column'
                         'media      right-column'
+                        'lines      right-column'
                         'meta       right-column'
                         'body       right-column';
                 }
@@ -117,6 +120,7 @@ const ShowcaseGrid = ({
                         'headline'
                         'standfirst'
                         'media'
+                        'lines'
                         'meta'
                         'body';
                 }
@@ -129,6 +133,7 @@ const ShowcaseGrid = ({
                         'title'
                         'headline'
                         'standfirst'
+                        'lines'
                         'meta'
                         'body';
                 }
@@ -142,6 +147,13 @@ const ShowcaseGrid = ({
 const maxWidth = css`
     ${from.desktop} {
         max-width: 620px;
+    }
+`;
+
+const stretchLines = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 `;
 
@@ -302,8 +314,9 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             standfirst={CAPI.standfirst}
                         />
                     </GridItem>
-                    <GridItem area="meta">
-                            <div className={maxWidth}>
+                    <GridItem area="lines">
+                        <div className={maxWidth}>
+                            <div className={stretchLines}>
                                 <GuardianLines
                                     pillar={CAPI.pillar}
                                     effect={decideLineEffect(
@@ -312,18 +325,23 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     )}
                                     count={decideLineCount(CAPI.designType)}
                                 />
-                                <ArticleMeta
-                                    designType={CAPI.designType}
-                                    pillar={CAPI.pillar}
-                                    pageId={CAPI.pageId}
-                                    webTitle={CAPI.webTitle}
-                                    author={CAPI.author}
-                                    tags={CAPI.tags}
-                                    webPublicationDateDisplay={
-                                        CAPI.webPublicationDateDisplay
-                                    }
-                                />
                             </div>
+                        </div>
+                    </GridItem>
+                    <GridItem area="meta">
+                        <div className={maxWidth}>
+                            <ArticleMeta
+                                designType={CAPI.designType}
+                                pillar={CAPI.pillar}
+                                pageId={CAPI.pageId}
+                                webTitle={CAPI.webTitle}
+                                author={CAPI.author}
+                                tags={CAPI.tags}
+                                webPublicationDateDisplay={
+                                    CAPI.webPublicationDateDisplay
+                                }
+                            />
+                        </div>
                     </GridItem>
                     <GridItem area="body">
                         <ArticleContainer>
