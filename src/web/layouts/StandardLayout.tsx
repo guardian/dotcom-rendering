@@ -30,6 +30,7 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
+import { decideLineCount, decideLineEffect } from './layoutHelpers';
 import { Border } from './Border';
 import { GridItem } from './GridItem';
 
@@ -254,6 +255,14 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="meta">
                         <div className={maxWidth}>
+                            <GuardianLines
+                                pillar={CAPI.pillar}
+                                effect={decideLineEffect(
+                                    CAPI.designType,
+                                    CAPI.pillar,
+                                )}
+                                count={decideLineCount(CAPI.designType)}
+                            />
                             <ArticleMeta
                                 designType={CAPI.designType}
                                 pillar={CAPI.pillar}
