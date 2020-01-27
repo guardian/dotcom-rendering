@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations'
+import { neutral, background } from '@guardian/src-foundations/palette'
 import { until } from '@guardian/src-foundations/mq';
 
 import ArticleRating from 'components/shared/articleRating';
@@ -37,7 +37,7 @@ function Styles({ layout, pillar }: Article): SerializedStyles {
             ${headlineFont}
             ${sidePadding}
             font-weight: ${isFeature ? 700 : 500};
-            color: ${isFeature ? featureHeadline : palette.neutral[7]};
+            color: ${isFeature ? featureHeadline : neutral[7]};
             ${isAnalysis ? AnalysisStyles(kicker) : null}
         }
     `;
@@ -45,10 +45,10 @@ function Styles({ layout, pillar }: Article): SerializedStyles {
 }
 
 const DarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
+    background: ${background.inverse};
 
     h1 {
-        color: ${palette.neutral[86]};
+        color: ${neutral[86]};
     }
 `;
 

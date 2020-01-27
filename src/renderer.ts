@@ -3,7 +3,8 @@
 import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
+
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, transformUrl } from 'asset';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
@@ -66,7 +67,7 @@ const listItemStyles: SerializedStyles = css`
         height: 1rem;
         width: 1rem;
         margin-right: 1rem;
-        background-color: ${palette.neutral[86]};
+        background-color: ${neutral[86]};
         margin-left: -2rem;
     }
 
@@ -108,7 +109,7 @@ const HorizontalRuleStyles = css`
     border: 0;
     margin-top: 3rem;
     margin-bottom: 0.1875rem;
-    background-color: ${palette.neutral[93]};
+    background-color: ${neutral[93]};
 `
 
 const TweetStyles = css`
@@ -194,7 +195,7 @@ type FigureElement = ImageProps & {
 
 const imageStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(100vw * ${height / width});
-    background: ${palette.neutral[97]};
+    background: ${neutral[97]};
 
     ${from.phablet} {
         height: calc(620px * ${height / width});
@@ -242,7 +243,7 @@ const bodyImageStyles = css`
     figcaption {
         font-size: 1.4rem;
         line-height: 1.8rem;
-        color: ${palette.neutral[46]};
+        color: ${neutral[46]};
         ${textSans}
 
         ${until.phablet} {
@@ -305,7 +306,7 @@ const Pullquote = (props: PullquoteProps): ReactElement =>
 const richLinkWidth = '13.75rem';
 
 const richLinkStyles = css`
-    background: ${palette.neutral[97]};
+    background: ${neutral[97]};
     padding: ${basePx(1)};
 
     h1 {
@@ -336,11 +337,11 @@ const richLinkStyles = css`
     }
 
     ${darkModeCss`
-        border-top: 1px solid ${palette.neutral[60]};
-        border-bottom: 1px solid ${palette.neutral[60]};
+        border-top: 1px solid ${neutral[60]};
+        border-bottom: 1px solid ${neutral[60]};
         a {
             &::before {
-                color: ${palette.neutral[60]};
+                color: ${neutral[60]};
             }
         }
     `}

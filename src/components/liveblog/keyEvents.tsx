@@ -1,17 +1,17 @@
 import React from 'react';
 import { icons, basePx, headlineFont } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { makeRelativeDate } from 'date';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { LiveBlock } from 'article';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
-    background: ${palette.neutral[100]};
+    background: ${neutral[100]};
     margin-top: ${basePx(-1)};
     min-height: 42px;
     margin-bottom: ${basePx(4)};
-    border-bottom: solid 2px ${palette.neutral[93]};
+    border-bottom: solid 2px ${neutral[93]};
     padding: ${basePx(1, 1, 0, 1)};
     position: relative;
 
@@ -44,7 +44,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
             }
 
             &::before {
-                background: ${palette.neutral[86]};
+                background: ${neutral[86]};
                 border-radius: 50%;
                 content: '';
                 display: block;
@@ -56,7 +56,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
             }
 
             &::after {
-                background: ${palette.neutral[86]};
+                background: ${neutral[86]};
                 content: '';
                 height: 100%;
                 left: -1px;
@@ -116,8 +116,8 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
             transition-duration: .2s;
             text-align: center;
             line-height: 30px;
-            border: 1px solid ${palette.neutral[86]};
-            color: ${palette.neutral[7]};
+            border: 1px solid ${neutral[86]};
+            color: ${neutral[7]};
         }
         
         &::-webkit-details-marker {

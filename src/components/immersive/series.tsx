@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 
 import { headlineFont, basePx } from 'styles';
 import { Series } from 'capi';
@@ -22,7 +22,7 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
         font-weight: 700;
         font-size: 1.6rem;
         line-height: 2.4rem;
-        color: ${palette.neutral[100]};
+        color: ${neutral[100]};
         text-decoration: none;
         white-space: nowrap;
         ${headlineFont}

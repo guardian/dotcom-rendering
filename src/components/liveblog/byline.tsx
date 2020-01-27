@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { textSans, basePx } from 'styles';
 import { Keyline } from '../shared/keyline';
 import { css, SerializedStyles } from '@emotion/core';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
@@ -30,7 +30,7 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
         }
 
         address, .follow, a {
-            color: ${palette.neutral[100]};
+            color: ${neutral[100]};
         }
 
         time, .follow {
@@ -39,7 +39,7 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
 
         time {
             font-size: 1.4rem;
-            color: ${palette.neutral[93]};
+            color: ${neutral[93]};
             opacity: .8;
         }
     }
@@ -103,7 +103,7 @@ const LiveblogByline = ({ article, imageSalt}: LiveblogBylineProps): JSX.Element
                     {article.commentable
                         ? <CommentCount
                             count={0}
-                            colour={palette.neutral[100]}
+                            colour={neutral[100]}
                             className={commentCount(pillarStyles)}
                           />
                         : null}

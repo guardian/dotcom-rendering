@@ -1,7 +1,7 @@
 import React from 'react';
 import { sidePadding, icons } from '../../styles';
 import { css } from '@emotion/core'
-import { palette } from '@guardian/src-foundations'
+import { neutral, brandAlt } from '@guardian/src-foundations/palette'
 
 const ArticleRatingStyles = css`    
     ${sidePadding}
@@ -12,8 +12,8 @@ const ArticleRatingStyles = css`
     padding-top: calc(8px + .4rem);
 
     span {
-        background-color: ${palette.yellow.main};
-        color: ${palette.neutral[7]};
+        background-color: ${brandAlt[400]};
+        color: ${neutral[7]};
         padding: 0 .2rem .4rem;
         font-size: inherit;
 

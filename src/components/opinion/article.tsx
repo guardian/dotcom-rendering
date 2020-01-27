@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { css } from '@emotion/core';
-import { palette } from '@guardian/src-foundations';
+import { neutral, opinion, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/shared/headerImage';
@@ -23,16 +23,16 @@ import { Standard } from 'article';
 // ----- Styles ----- //
 
 const Styles = css`
-    background: ${palette.opinion.faded};
+    background: ${opinion[800]};
 `;
 
 const DarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
+    background: ${background.inverse};
 `;
 
 const BorderStyles = css`
-    background: ${palette.opinion.faded};
-    ${darkModeCss`background: ${palette.neutral.darkMode};`}
+    background: ${opinion[800]};
+    ${darkModeCss`background: ${background.inverse};`}
 
     ${from.wide} {
         width: ${breakpoints.wide}px;
@@ -51,16 +51,16 @@ const HeaderImageStyles = css`
 `;
 
 const CommentCountStyles = css`
-    background: ${palette.opinion.faded};
+    background: ${opinion[800]};
     margin-top: 0;
 
     button {
-        background: ${palette.opinion.faded};
+        background: ${opinion[800]};
     }
 `;
 
 const topBorder = css`
-    border-top: solid 1px ${palette.neutral[86]};
+    border-top: solid 1px ${neutral[86]};
     margin-top: ${basePx(1)};
 
     ${from.wide} {

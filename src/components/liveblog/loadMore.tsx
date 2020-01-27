@@ -1,13 +1,13 @@
 import React from 'react';
 import { sidePadding, icons, textSans } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
 const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     all: unset;
     ${sidePadding}
-    color: ${palette.neutral[100]};
+    color: ${neutral[100]};
     margin: 32px 0 24px 0;
     
     &:focus {

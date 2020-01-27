@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { css } from '@emotion/core'
-import { palette } from '@guardian/src-foundations'
+import { css } from '@emotion/core';
+import { neutral, background } from '@guardian/src-foundations/palette';
 
 import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 
@@ -11,7 +11,7 @@ import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 
 const Styles = css`
     padding: ${basePx(.5, 1, 3, 1)};
-    background: ${palette.neutral[7]};
+    background: ${neutral[7]};
     position: relative;
     margin-top: -78px;
 
@@ -20,13 +20,13 @@ const Styles = css`
     h1 {
         font-weight: 700;
         ${headlineFontStyles}
-        color: ${palette.neutral[100]};
+        color: ${neutral[100]};
     }
 `;
 
 const DarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
-    color: ${palette.neutral[86]};
+    background: ${background.inverse};
+    color: ${neutral[86]};
 `;
 
 

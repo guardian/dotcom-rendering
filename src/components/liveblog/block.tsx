@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { textSans, icons, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations';
+import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
@@ -9,14 +9,14 @@ import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { Option } from 'types/option';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
-    background: ${palette.neutral[100]};
-    border-top: solid 1px ${highlighted ? kicker : palette.neutral[86]};
-    border-bottom: solid 2px ${palette.neutral[93]};
+    background: ${neutral[100]};
+    border-top: solid 1px ${highlighted ? kicker : neutral[86]};
+    border-bottom: solid 2px ${neutral[93]};
     margin-top: 12px;
     margin-bottom: 12px;
 
     time {
-        color: ${palette.neutral[46]};
+        color: ${neutral[46]};
         ${textSans}
         display: inline-block;
         margin: 0;
@@ -80,7 +80,7 @@ interface TitleProps {
 const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
     const TitleStyles = css`
         padding: 0.5rem 0.125rem;
-        background-color: ${palette.yellow.main};
+        background-color: ${brandAlt[400]};
     `
     return title ? <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3> : null;
 }

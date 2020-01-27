@@ -1,7 +1,7 @@
 import React from 'react';
 import { basePx, headlineFont, headlineFontStyles } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations'
+import { neutral } from '@guardian/src-foundations/palette';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
@@ -12,7 +12,7 @@ const LiveblogHeadlineStyles = ({ kicker }: PillarStyles): SerializedStyles => c
         ${headlineFontStyles}
         ${headlineFont}
         font-weight: 500;
-        color: ${palette.neutral[100]};
+        color: ${neutral[100]};
     }
 `;
 

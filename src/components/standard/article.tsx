@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { css } from '@emotion/core';
-import { palette } from '@guardian/src-foundations';
+import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/shared/headerImage';
@@ -22,16 +22,16 @@ import { Standard, Review } from 'article';
 // ----- Styles ----- //
 
 const Styles = css`
-    background: ${palette.neutral[97]};
+    background: ${neutral[97]};
 `;
 
 const DarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
+    background: ${background.inverse};
 `;
 
 const BorderStyles = css`
-    background: ${palette.neutral[100]};
-    ${darkModeCss`background: ${palette.neutral.darkMode};`}
+    background: ${neutral[100]};
+    ${darkModeCss`background: ${background.inverse};`}
 
     ${from.wide} {
         width: ${breakpoints.wide}px;

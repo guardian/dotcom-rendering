@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { palette } from '@guardian/src-foundations';
+import { neutral, background } from '@guardian/src-foundations/palette';
 
 import { headlineFont, darkModeCss, basePx, linkStyle } from 'styles';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
@@ -14,7 +14,7 @@ import { Option } from 'types/option';
 
 const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     ${headlineFont}
-    color: ${palette.neutral[46]};
+    color: ${neutral[46]};
     font-weight: 400;
     font-size: 1.8rem;
     line-height: 2.4rem;
@@ -33,8 +33,8 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
 `;
 
 const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${palette.neutral.darkMode};
-    color: ${palette.neutral[86]};
+    background: ${background.inverse};
+    color: ${neutral[86]};
 
     a {
         color: ${inverted};

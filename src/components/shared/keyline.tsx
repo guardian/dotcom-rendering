@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { darkModeCss, wideContentWidth, wideColumnWidth, baseMultiply } from 'styles';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { Layout } from 'article';
 
@@ -19,7 +19,7 @@ const BaseStyles = css`
 `;
 
 const KeylineLiveblogStyles = css`
-    background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
+    background-image: repeating-linear-gradient(${neutral[86]}, ${neutral[86]} 1px, transparent 1px, transparent 3px);
     opacity: .4;
     margin-right: unset;
 
@@ -29,17 +29,17 @@ const KeylineLiveblogStyles = css`
 `;
 
 const KeylineNewsStyles = css`
-    background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
+    background-image: repeating-linear-gradient(${neutral[86]}, ${neutral[86]} 1px, transparent 1px, transparent 3px);
 `;
 
 const KeylineOpinionStyles = css`
-    background-image: repeating-linear-gradient(${palette.neutral[86]}, ${palette.neutral[86]} 1px, transparent 1px, transparent 3px);
+    background-image: repeating-linear-gradient(${neutral[86]}, ${neutral[86]} 1px, transparent 1px, transparent 3px);
     height: 24px;
     margin-top: 84px;
 `;
 
 const KeylineDarkStyles = darkModeCss`
-    background-image: repeating-linear-gradient(${palette.neutral[20]}, ${palette.neutral[20]} 1px, transparent 1px, transparent 3px);
+    background-image: repeating-linear-gradient(${neutral[20]}, ${neutral[20]} 1px, transparent 1px, transparent 3px);
 `;
 
 type Props = {
