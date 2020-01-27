@@ -13,9 +13,9 @@ export const SlotBodyEnd = () => {
         ophanPageId: window.guardian.config.ophan?.pageViewId,
         ophanComponentId: 'ACQUISITIONS_EPIC',
         platformId: 'GUARDIAN_WEB',
-        campaignCode: '',
-        abTestName: '',
-        abTestVariant: '',
+        campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
+        abTestName: 'remote_epic_test',
+        abTestVariant: 'api',
         referrerUrl: window.location.href.split('?')[0],
     };
     const { data, error } = useApi(endpointUrl, {
