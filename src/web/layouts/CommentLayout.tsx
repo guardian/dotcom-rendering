@@ -77,11 +77,11 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        'meta   border  lines       right-column'
-                        'meta   border  standfirst  right-column'
-                        'meta   border  media       right-column'
-                        '.      border  body        right-column';
+                        'title      border  headline    right-column'
+                        'metalines  border  lines       right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column';
                 }
 
                 ${until.wide} {
@@ -91,11 +91,11 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        'meta   border  lines       right-column'
-                        'meta   border  standfirst  right-column'
-                        'meta   border  media       right-column'
-                        '.      border  body        right-column';
+                        'title      border  headline    right-column'
+                        'metalines  border  lines       right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column';
                 }
 
                 ${until.leftCol} {
@@ -107,8 +107,8 @@ const StandardGrid = ({
                         'headline   right-column'
                         'lines      right-column'
                         'standfirst right-column'
-                        'media      right-column'
                         'meta       right-column'
+                        'media      right-column'
                         'body       right-column';
                 }
 
@@ -119,8 +119,8 @@ const StandardGrid = ({
                         'headline'
                         'lines'
                         'standfirst'
-                        'media'
                         'meta'
+                        'media'
                         'body';
                 }
 
@@ -129,12 +129,12 @@ const StandardGrid = ({
 
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
-                        'media'
                         'title'
                         'headline'
                         'lines'
                         'standfirst'
                         'meta'
+                        'media'
                         'body';
                 }
             }
@@ -249,8 +249,13 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                             </ArticleHeadlinePadding>
                         </div>
                     </GridItem>
-                    <GridItem area="lines">
+                    <GridItem area="metalines">
                         <GuardianLines count={8} pillar={CAPI.pillar} />
+                    </GridItem>
+                    <GridItem area="lines">
+                        <div className={maxWidth}>
+                            <GuardianLines count={8} pillar={CAPI.pillar} />
+                        </div>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
