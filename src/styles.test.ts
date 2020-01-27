@@ -13,11 +13,11 @@ describe('helper functions return correct styles', () => {
     test('Returns correct pillar styles for pillar', () => {
         const pillarStyles = getPillarStyles(Pillar.news);
         const expectedNewsPillarStyles =  {
-            kicker: '#c70000',
-            featureHeadline: '#ab0613',
-            soft: '#f6f6f6',
+            kicker: '#C70000',
+            featureHeadline: '#AB0613',
+            soft: '#F6F6F6',
             inverted: '#FF5943',
-            liveblogBackground: '#ab0613'
+            liveblogBackground: '#AB0613'
         }
         expect(pillarStyles).toEqual(expectedNewsPillarStyles);
     });
