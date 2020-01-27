@@ -12,10 +12,12 @@ import {
 } from '@creditkarma/thrift-server-core'
 import fetch from 'node-fetch';
 
-import { Content } from 'mapiThriftModels/Content';
+import { Response as CapiResponse } from 'mapiThriftModels/Response';
+import { Content as MapiContent, IContent as Content } from 'mapiThriftModels/Content';
 import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
+import { ErrorResponse } from 'mapiThriftModels';
 
 // ----- Setup ----- //
 
@@ -37,26 +39,21 @@ type Supported = {
   reason: string;
 }
 
-function checkSupport(content: Content): Supported {
-
-  const { atoms } = content;
-
+function checkSupport({ atoms }: Content): Supported {
   if (atoms) {
     return { kind: Support.Unsupported, reason: 'The article contains atoms' };
   }
 
   return { kind: Support.Supported };
-
 }
 
 async function serveArticlePost({ body }: Request, res: ExpressResponse): Promise<void> {
   try {
-    const transport = new BufferedTransport(body);
-    const protocol = new CompactProtocol(transport);
-    const content: Content = Content.read(protocol);
-
-    const support = checkSupport(content);
-    const imageSalt = await getConfigValue<string>('apis.img.salt');
+      const transport = new BufferedTransport(body);
+      const protocol = new CompactProtocol(transport);
+      const content: MapiContent = MapiContent.read(protocol);
+      const support = checkSupport(content);
+      const imageSalt = await getConfigValue<string>('apis.img.salt');
 
     if (support.kind === Support.Supported) {
       const page = h(Page, { content, imageSalt });
@@ -76,44 +73,49 @@ async function serveArticlePost({ body }: Request, res: ExpressResponse): Promis
 
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
   try {
-
     const articleId = req.params[0] || defaultId;
     const key = await getConfigValue<string>("capi.key");
     const imageSalt = await getConfigValue<string>('apis.img.salt');
     const capiResponse = await fetch(capiEndpoint(articleId, key));
+    const buffer = await capiResponse.buffer();
+    const transport = new BufferedTransport(buffer);
+    const protocol = new CompactProtocol(transport);
 
-    getContent(capiResponse.status, articleId, await capiResponse.text()).either(
-      error => {
+    if (capiResponse.status === 200) {
+      const response: CapiResponse = CapiResponse.read(protocol);
 
-        if (error.status === CapiError.NotFound) {
+      if (response.content) {
+        getContent(capiResponse.status, articleId, response.content).either(
+          error => {
+            if (error.status === CapiError.NotFound) {
+              console.warn(error.message);
+              res.sendStatus(404);
+            } else {
+              console.error(error.message);
+              res.sendStatus(500);
+            }
+          },
+          content => {
+            const support = checkSupport(content);
 
-          console.warn(error.message);
-          res.sendStatus(404);
+            if (support.kind === Support.Supported) {
+              const page = h(Page, { content, imageSalt });
 
-        } else {
-
-          console.error(error.message);
-          res.sendStatus(500);
-
-        }
-
-      },
-      content => {
-        const support = checkSupport(content);
-
-        if (support.kind === Support.Supported) {
-          const page = h(Page, { content, imageSalt });
-
-          res.write('<!DOCTYPE html>');
-          res.write(renderToString(page));
-          res.end();
-        } else {
-          console.warn(`I can\'t render that type of content yet! ${support.reason}`);
-          res.sendStatus(415);
-        }
+              res.write('<!DOCTYPE html>');
+              res.write(renderToString(page));
+              res.end();
+            } else {
+              console.warn(`I can\'t render that type of content yet! ${support.reason}`);
+              res.sendStatus(415);
+            }
+          }
+        )
       }
-    )
-
+    } else {
+      const response: ErrorResponse = ErrorResponse.read(protocol);
+      console.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message}`);
+      res.sendStatus(500);
+    }
   } catch (e) {
     console.error(`This error occurred, but I don't know why: ${e}`);
     res.sendStatus(500);
@@ -123,18 +125,17 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
 // ----- App ----- //
 
 const app = express();
+app.use(bodyParser.raw({limit: '50mb'}))
 
 app.use('/public', express.static(path.resolve(__dirname, '../public')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
 
-app.get('/healthcheck', (_req, res) => {
-  res.send("Ok");
-});
+app.get('/healthcheck', (_req, res) => res.send("Ok"));
 
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
-app.get('/*', serveArticle);
+app.get('/*', bodyParser.raw(), serveArticle);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);
 

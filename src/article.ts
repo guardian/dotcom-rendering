@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
 import { Pillar, pillarFromString } from 'pillar';
-import { Content } from 'mapiThriftModels/Content';
+import { IContent as Content } from 'mapiThriftModels/Content';
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
 import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable, None, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
-import { IBlock as Block, ICapiDateTime as CapiDateTime } from 'mapiThriftModels';
+import { IBlock as Block, ICapiDateTime as CapiDateTime, ContentType, ElementType } from 'mapiThriftModels';
 
 // ----- Types ----- //
 
@@ -149,20 +149,20 @@ const parseImage = (element: BlockElement): Option<Image> => {
 
 const parseElement =
     (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
-    switch (element.type.toString()) {
-        case 'text':
+    switch (element.type) {
+        case ElementType.TEXT:
             const html = element?.textTypeData?.html;
             if (!html) {
                 return new Err('No html field on textTypeData')
             }
             return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
 
-        case 'image':
+        case ElementType.IMAGE:
             return parseImage(element)
                 .fmap<Result<string, Image>>(image => new Ok(image))
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
-        case 'pullquote':
+        case ElementType.PULLQUOTE:
             const { html: quote, attribution } = element.pullquoteTypeData ?? {};
             if (!quote) {
                 return new Err('No quote field on pullquoteTypeData')
@@ -173,14 +173,14 @@ const parseElement =
                 attribution: fromNullable(attribution),
             });
 
-        case 'interactive':
+        case ElementType.INTERACTIVE:
             const { iframeUrl } = element.interactiveTypeData ?? {};
             if (!iframeUrl) {
                 return new Err('No iframeUrl field on interactiveTypeData')
             }
             return new Ok({ kind: ElementKind.Interactive, url: iframeUrl });
 
-        case 'rich-link':
+        case ElementType.RICH_LINK:
             const { url, linkText } = element.richLinkTypeData ?? {};
             if (!url) {
                 return new Err('No "url" field on richLinkTypeData');
@@ -189,7 +189,7 @@ const parseElement =
             }
             return new Ok({ kind: ElementKind.RichLink, url, linkText });
 
-        case 'tweet':
+        case ElementType.TWEET:
             const { id, html: h } = element.tweetTypeData ?? {};
             if (!id) {
                 return new Err('No "id" field on tweetTypeData')
@@ -215,12 +215,13 @@ const parseElements =
         return elements.map(parseElement(docParser));
     }
 
-const capiDateTimeToDate = (date: CapiDateTime | undefined | string): Option<Date> => {
+const capiDateTimeToDate = (date: CapiDateTime | undefined): Option<Date> => {
     // Thrift definitions define some dates as CapiDateTime but CAPI returns strings
     try {
-        if (date && typeof date === 'string') {
-            return new Some(new Date(date));
+        if (date) {
+            return new Some(new Date(date.iso8601));
         }
+
         return new None();
     } catch(e) {
         console.error(`Unable to convert date from CAPI: ${e}`);
@@ -270,8 +271,8 @@ const containsOpinionTags = (tags: Tag[]): boolean =>
 
 const fromCapi = (docParser: DocParser) => (content: Content): Article => {
     const { tags, pillarId, fields } = content;
-    switch (content.type.toString()) {
-        case 'article':
+    switch (content.type) {
+        case ContentType.ARTICLE:
             if (pillarFromString(pillarId) === Pillar.opinion || containsOpinionTags(tags)) {
                 return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
 
@@ -294,7 +295,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
 
             return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
 
-        case 'liveblog':
+        case ContentType.LIVEBLOG:
             const body = content?.blocks?.body ?? [];
             return {
                 layout: Layout.Liveblog,
@@ -302,19 +303,19 @@ const fromCapi = (docParser: DocParser) => (content: Content): Article => {
                 ...articleFields(docParser, content),
             };
 
-        case 'gallery':
+        case ContentType.GALLERY:
             return { layout: Layout.Gallery, ...articleFieldsWithBody(docParser, content) };
 
-        case 'interactive':
+        case ContentType.INTERACTIVE:
             return { layout: Layout.Interactive, ...articleFieldsWithBody(docParser, content) };
 
-        case 'picture':
+        case ContentType.PICTURE:
             return { layout: Layout.Picture, ...articleFieldsWithBody(docParser, content) };
 
-        case 'video':
+        case ContentType.VIDEO:
             return { layout: Layout.Video, ...articleFieldsWithBody(docParser, content) };
 
-        case 'audio':
+        case ContentType.AUDIO:
             return { layout: Layout.Audio, ...articleFieldsWithBody(docParser, content) };
 
         default:
