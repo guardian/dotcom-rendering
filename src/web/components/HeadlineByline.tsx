@@ -12,7 +12,7 @@ const wrapperStyles = css`
     z-index: 1;
 `;
 
-const headlineBylineStyles = css`
+const yellowBoxStyles = css`
     ${headline.xxsmall({
         fontWeight: 'regular',
         lineHeight: 'loose',
@@ -33,14 +33,58 @@ const headlineBylineStyles = css`
     }
 `;
 
+const opinionStyles = (pillar: Pillar) => css`
+    ${headline.medium({
+        fontWeight: 'light',
+        lineHeight: 'loose',
+    })}
+    font-style: italic;
+    color: ${palette[pillar].main};
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        :hover {
+            text-decoration: underline;
+        }
+    }
+`;
+
+const determineStyles = (designType: DesignType, pillar: Pillar) => {
+    switch (designType) {
+        case 'Interview':
+            return yellowBoxStyles;
+        case 'Comment':
+            return opinionStyles(pillar);
+        case 'Feature':
+        case 'Review':
+        case 'Live':
+        case 'Media':
+        case 'Analysis':
+        case 'Article':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Immersive':
+        default:
+            return undefined;
+    }
+};
+
 type Props = {
+    designType: 'Interview' | 'Comment';
+    pillar: Pillar;
     byline: string;
     tags: TagType[];
 };
 
-export const HeadlineByline = ({ byline, tags }: Props) => (
+export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => (
     <div className={wrapperStyles}>
-        <div className={headlineBylineStyles}>
+        <div className={determineStyles(designType, pillar)}>
             <BylineLink byline={byline} tags={tags} />
         </div>
     </div>

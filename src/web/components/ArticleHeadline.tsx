@@ -221,7 +221,14 @@ const renderHeadline = ({
                             {curly(headlineString)}
                         </span>
                     </h1>
-                    {byline && <HeadlineByline byline={byline} tags={tags} />}
+                    {byline && (
+                        <HeadlineByline
+                            designType={designType}
+                            pillar={pillar}
+                            byline={byline}
+                            tags={tags}
+                        />
+                    )}
                 </div>
             );
 
