@@ -170,8 +170,8 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
     }
 }
 
-const text = (parent: DocumentFragment, pillar: Pillar): ReactNode[] =>
-    Array.from(parent.childNodes).map(textElement(pillar));
+const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
+    Array.from(doc.childNodes).map(textElement(pillar));
 
 const makeCaption = (caption: string, displayCredit: boolean, credit: string): string =>
     displayCredit ? `${caption} ${credit}` : caption;
