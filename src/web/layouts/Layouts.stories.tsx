@@ -1,7 +1,9 @@
 import React from 'react';
+import fetchMock from 'fetch-mock';
 
 import { CAPI } from '@root/fixtures/CAPI';
 import { NAV } from '@root/fixtures/NAV';
+import { mockTab1 } from '@root/fixtures/mostViewed';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -22,11 +24,31 @@ export default {
 // setTimeout(() => hydrateIslands(CAPI, NAV));
 
 export const ShowcaseLayoutRender = () => {
+    fetchMock
+        .restore()
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true',
+            {
+                status: 200,
+                body: mockTab1,
+            },
+        );
+
     setTimeout(() => hydrateIslands(CAPI, NAV));
     return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
 };
 
 export const StandardLayoutRender = () => {
+    fetchMock
+        .restore()
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true',
+            {
+                status: 200,
+                body: mockTab1,
+            },
+        );
+
     setTimeout(() => hydrateIslands(CAPI, NAV));
     return <StandardLayout CAPI={CAPI} NAV={NAV} />;
 };

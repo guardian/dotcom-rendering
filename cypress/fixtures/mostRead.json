@@ -1,8 +1,6 @@
-[
-    {
+[{
         "heading": "Across The&nbsp;Guardian",
-        "trails": [
-            {
+        "trails": [{
                 "url": "https://www.theguardian.com/politics/live/2019/oct/16/brexit-boris-johnson-races-the-clock-as-deadline-for-deal-looms-politics-live",
                 "headline": "Brexit: Irish PM hints extra EU summit  might be needed because 'many issues' still to be resolved– live news",
                 "showByline": false,
@@ -97,8 +95,7 @@
     },
     {
         "heading": "in UK news",
-        "trails": [
-            {
+        "trails": [{
                 "url": "https://www.theguardian.com/uk-news/2019/oct/15/rise-in-homophobic-attacks-in-birmingham-after-lgbt-teaching-protests",
                 "headline": "'Rise in homophobic attacks' in Birmingham after LGBT teaching protests",
                 "showByline": false,

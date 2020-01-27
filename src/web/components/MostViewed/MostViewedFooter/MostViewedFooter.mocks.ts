@@ -3,7 +3,7 @@ import {
     mockTab2,
     mockMostCommented,
     mockMostShared,
-} from '../MostViewed.mocks';
+} from '@root/fixtures/mostViewed';
 
 export const responseWithTwoTabs = {
     tabs: [mockTab1, mockTab2],
