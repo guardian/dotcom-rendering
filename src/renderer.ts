@@ -137,35 +137,35 @@ const transform = (text: string, pillar: Pillar): ReactElement | string => {
     } else if (text?.includes('* * *')) {
         return h(HorizontalRule, null, null);
     }
-
     return text;
 }
 
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
+    const children = Array.from(node.childNodes).map(textElement(pillar));
     switch (node.nodeName) {
         case 'P':
-            return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h(Paragraph, { key }, children);
         case '#text':
             return transform(text, pillar);
         case 'SPAN':
             return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key });
+            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, children);
         case 'H2':
-            return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h(HeadingTwo, { key }, children);
         case 'BLOCKQUOTE':
-            return h('blockquote', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h('blockquote', { key }, children);
         case 'STRONG':
-            return h('strong', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h('strong', { key }, children);
         case 'EM':
-            return h('em', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h('em', { key }, children);
         case 'BR':
             return h('br', { key }, null);
         case 'UL':
-            return styledH('ul', { css: listStyles }, Array.from(node.childNodes).map(textElement(pillar)));
+            return styledH('ul', { css: listStyles }, children);
         case 'LI':
-            return styledH('li', { css: listItemStyles }, Array.from(node.childNodes).map(textElement(pillar)));
+            return styledH('li', { css: listItemStyles }, children);
         default:
             return null;
     }
