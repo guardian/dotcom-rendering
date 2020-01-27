@@ -33,13 +33,35 @@ const meta = css`
     padding-top: 2px;
 `;
 
-const metaExtras = css`
-    border-top: 1px solid ${palette.neutral[86]};
-    padding-top: 6px;
+const metaFlex = css`
     margin-bottom: 6px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+`;
+
+const metaExtras = css`
+    border-top: 1px solid ${palette.neutral[86]};
+    flex-grow: 1;
+    padding-top: 6px;
+
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+`;
+
+const metaNumbers = css`
+    border-top: 1px solid ${palette.neutral[86]};
+    display: flex;
+    flex-grow: 1;
+
+    justify-content: flex-end;
+    ${between.leftCol.and.wide} {
+        justify-content: flex-start;
+    }
 
     ${until.phablet} {
         margin-left: -20px;
@@ -247,13 +269,17 @@ export const ArticleMeta = ({
                         </div>
                     </>
                 </RowBelowLeftCol>
-                <div className={metaExtras}>
-                    <SharingIcons
-                        sharingUrls={sharingUrls}
-                        pillar={pillar}
-                        displayIcons={['facebook', 'twitter', 'email']}
-                    />
-                    <div data-island="share-count" />
+                <div className={metaFlex}>
+                    <div className={metaExtras}>
+                        <SharingIcons
+                            sharingUrls={sharingUrls}
+                            pillar={pillar}
+                            displayIcons={['facebook', 'twitter', 'email']}
+                        />
+                    </div>
+                    <div className={metaNumbers}>
+                        <div data-island="share-comment-counts" />
+                    </div>
                 </div>
             </div>
         </div>

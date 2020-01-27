@@ -5,7 +5,7 @@ import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper';
-import { ShareCount } from '@frontend/web/components/ShareCount';
+import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
@@ -44,6 +44,8 @@ type IslandProps =
     | {
           ajaxUrl: string;
           pageId: string;
+          shortUrlId: string;
+          pillar: Pillar;
       }
     | {
           edition: Edition;
@@ -86,7 +88,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
         editionId,
         sectionName,
         pageId,
-        config: { ajaxUrl },
+        config: { ajaxUrl, shortUrlId, isPaidContent },
     } = CAPI;
 
     // Define the list of islands we intend to hydrate. Each island should have a
@@ -134,12 +136,14 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             root: 'most-viewed-right',
         },
         {
-            component: ShareCount,
+            component: Counts,
             props: {
                 ajaxUrl,
                 pageId,
+                shortUrlId,
+                pillar,
             },
-            root: 'share-count',
+            root: 'share-comment-counts',
         },
         {
             component: MostViewedFooter,
@@ -179,7 +183,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
                 hasStoryPackage: CAPI.hasStoryPackage,
                 isAdFreeUser: CAPI.isAdFreeUser,
                 pageId: CAPI.pageId,
-                isPaidContent: CAPI.config.isPaidContent,
+                isPaidContent: isPaidContent || false,
                 showRelatedContent: CAPI.config.showRelatedContent,
                 keywordIds: CAPI.config.keywordIds,
                 contentType: CAPI.contentType,

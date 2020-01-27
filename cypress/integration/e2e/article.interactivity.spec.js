@@ -26,7 +26,7 @@ describe('Interactivity', function() {
 
         it('should display the share count for an article', function() {
             cy.visit(`/Article?url=${articleUrl}`);
-            cy.get('[data-cy=share-count]').should('exist');
+            cy.get('[data-cy=share-counts]').should('exist');
         });
 
         it('should display all the rich links for an article', function() {
