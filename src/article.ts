@@ -130,21 +130,22 @@ const parseImage = (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
     const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
 
-    if (!masterAsset?.file || !masterAsset?.typeData?.width || !masterAsset?.typeData?.height) {
-        return new None();
-    }
+    return fromNullable(masterAsset).andThen(asset => {
+        if (!asset?.file || !asset?.typeData?.width || !asset?.typeData?.height) {
+            return new None();
+        }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return fromNullable(masterAsset).fmap((asset: any) => ({
-        kind: ElementKind.Image,
-        alt,
-        caption,
-        displayCredit,
-        credit,
-        file: asset.file,
-        width: asset.typeData.width,
-        height: asset.typeData.height,
-    }));
+        return new Some({
+            kind: ElementKind.Image,
+            alt,
+            caption,
+            displayCredit,
+            credit,
+            file: asset.file,
+            width: asset.typeData.width,
+            height: asset.typeData.height,
+        });
+    });
 }
 
 const parseElement =
