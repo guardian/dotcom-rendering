@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/core'
-import { palette } from '@guardian/src-foundations'
+import { neutral, opinion, background } from '@guardian/src-foundations/palette'
 import { until } from '@guardian/src-foundations/mq';
 
 import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
@@ -25,22 +25,22 @@ const Styles = css`
     h1 {
         font-weight: 300;
         ${headlineFontStyles}
-        color: ${palette.neutral[7]};
+        color: ${neutral[7]};
     }
 
     address a {
         font-style: italic;
         font-weight: 100;
         ${headlineFontStyles}
-        color: ${palette.opinion.main};
+        color: ${opinion[400]};
         background: none;
     }
 `;
 
 const DarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
+    background: ${background.inverse};
     h1 {
-        color: ${palette.neutral[86]};
+        color: ${neutral[86]};
     }
 `;
 

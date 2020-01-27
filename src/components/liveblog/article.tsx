@@ -10,17 +10,17 @@ import HeaderImage from 'components/shared/headerImage';
 import Tags from 'components/shared/tags';
 import { wideColumnWidth, baseMultiply, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
-import { palette } from '@guardian/src-foundations';
+import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, getPillarStyles } from 'pillar';
 import { Liveblog } from 'article';
 
 const LiveblogArticleStyles: SerializedStyles = css`
-    background: ${palette.neutral[97]};
+    background: ${neutral[97]};
 `;
 
 const BorderStyles = css`
-    ${darkModeCss`background: ${palette.neutral.darkMode};`}
+    ${darkModeCss`background: ${background.inverse};`}
 
     ${from.wide} {
         width: 1200px;
@@ -69,7 +69,7 @@ const LiveblogArticle = ({ article, imageSalt }: LiveblogArticleProps): JSX.Elem
                     pillar={article.pillar}
                     imageSalt={imageSalt}
                 />
-                <Tags tags={article.tags} background={palette.neutral[93]} />
+                <Tags tags={article.tags} background={neutral[93]} />
             </div>
         </main>
     );

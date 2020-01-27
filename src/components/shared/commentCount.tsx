@@ -1,7 +1,7 @@
 import React from 'react';
 import { SerializedStyles, css } from '@emotion/core';
 import { basePx, icons } from 'styles';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 
 interface CommentCountProps {
     count: number;
@@ -14,7 +14,7 @@ const CommentCountStyles = (colour: string): SerializedStyles => css`
     display: inline-block;
     text-align: right;
     margin-top: -6px;
-    border-left: 1px solid ${palette.neutral[86]};
+    border-left: 1px solid ${neutral[86]};
     box-sizing: border-box;
 
     span::before {

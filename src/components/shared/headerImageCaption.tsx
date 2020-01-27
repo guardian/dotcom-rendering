@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import { basePx, textSans, icons, wideContentWidth } from 'styles';
-import { palette } from '@guardian/src-foundations';
+import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
 const captionId = 'header-image-caption';
@@ -10,8 +10,8 @@ const HeaderImageCaptionStyles = css`
 	summary {
 		line-height: 30px;
         text-align: center;
-        background-color: ${palette.yellow.main};
-        color: ${palette.neutral[7]};
+        background-color: ${brandAlt[400]};
+        color: ${neutral[7]};
         width: ${basePx(4)};
         height: ${basePx(4)};
         display: inline-block;
@@ -47,7 +47,7 @@ const HeaderImageCaptionStyles = css`
 		overflow: hidden;
 		padding-right: ${basePx(6)};
 		z-index: 1;
-		color: ${palette.neutral[100]};
+		color: ${neutral[100]};
 		line-height: 1.6rem;
 		font-size: 1.4rem;
 		${textSans}

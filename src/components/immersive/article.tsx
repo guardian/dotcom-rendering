@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { palette } from '@guardian/src-foundations';
+import { background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/immersive/headerImage';
@@ -21,7 +21,7 @@ import { Standard } from 'article';
 // ----- Styles ----- //
 
 const DarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
+    background: ${background.inverse};
 `;
 
 const HeaderStyles = css`

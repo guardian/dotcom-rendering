@@ -6,7 +6,7 @@ import {
     basePx,
     adStyles
 } from 'styles';
-import { palette } from '@guardian/src-foundations';
+import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
@@ -42,15 +42,15 @@ const ArticleBodyStyles = css`
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${palette.neutral.darkMode};
-    color: ${palette.neutral[86]};
+    background: ${background.inverse};
+    color: ${neutral[86]};
 
     a {
         color: ${inverted};
     }
 
     figcaption {
-        color: ${palette.neutral[60]};
+        color: ${neutral[60]};
     }
 
     p:last-child {
@@ -60,11 +60,11 @@ const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => 
 
     .rich-link,
     .element-membership {
-        border-top: 1px solid ${palette.neutral[60]};
-        border-bottom: 1px solid ${palette.neutral[60]};
+        border-top: 1px solid ${neutral[60]};
+        border-bottom: 1px solid ${neutral[60]};
         a {
             &::before {
-                color: ${palette.neutral[60]};
+                color: ${neutral[60]};
             }
         }
     }

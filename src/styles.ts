@@ -1,4 +1,4 @@
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { css, SerializedStyles } from '@emotion/core'
 import { Option } from 'types/option';
@@ -71,11 +71,11 @@ const adHeight = '250px';
 
 export const adStyles = css`
     .ad-placeholder {
-        color: ${palette.neutral[20]};
-        background: ${palette.neutral[97]};
+        color: ${neutral[20]};
+        background: ${neutral[97]};
 
         ${darkModeCss`
-            color: ${palette.neutral[86]};
+            color: ${neutral[86]};
             background: black;
         `}
 
@@ -99,7 +99,7 @@ export const adStyles = css`
                 background: none;
                 border: none;
                 font-size: 16px;
-                color: ${palette.neutral[20]};
+                color: ${neutral[20]};
                 position: relative;
                 margin: 0;
 
@@ -123,7 +123,7 @@ export const adStyles = css`
                     text-decoration: underline;
                 }
 
-                ${darkModeCss`color: ${palette.neutral[86]};`}
+                ${darkModeCss`color: ${neutral[86]};`}
             }
         }
 

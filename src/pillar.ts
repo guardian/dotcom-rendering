@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { palette } from '@guardian/src-foundations';
+import * as palette from '@guardian/src-foundations/palette';
 
 import { compose } from 'lib';
 
@@ -29,39 +29,39 @@ type PillarColours = {
 
 export const pillarColours: PillarColours = {
     [Pillar.news]: {
-        kicker: palette.news.main,
-        featureHeadline: palette.news.dark,
+        kicker: palette.news[400],
+        featureHeadline: palette.news[300],
         soft: palette.neutral[97],
-        inverted: palette.news.bright,
-        liveblogBackground: palette.news.dark,
+        inverted: palette.news[500],
+        liveblogBackground: palette.news[300],
     },
     [Pillar.opinion]: {
-        kicker: palette.opinion.main,
-        featureHeadline: palette.opinion.dark,
-        soft: palette.opinion.faded,
-        inverted: palette.opinion.bright,
-        liveblogBackground: palette.opinion.dark,
+        kicker: palette.opinion[400],
+        featureHeadline: palette.opinion[300],
+        soft: palette.opinion[800],
+        inverted: palette.opinion[500],
+        liveblogBackground: palette.opinion[300],
     },
     [Pillar.sport]: {
-        kicker: palette.sport.main,
-        featureHeadline: palette.sport.dark,
-        soft: palette.sport.faded,
-        inverted: palette.sport.bright,
-        liveblogBackground: palette.sport.dark,
+        kicker: palette.sport[400],
+        featureHeadline: palette.sport[300],
+        soft: palette.sport[800],
+        inverted: palette.sport[500],
+        liveblogBackground: palette.sport[300],
     },
     [Pillar.arts]: {
-        kicker: palette.culture.main,
-        featureHeadline: palette.culture.dark,
-        soft: palette.culture.faded,
-        inverted: palette.culture.bright,
-        liveblogBackground: palette.culture.dark,
+        kicker: palette.culture[400],
+        featureHeadline: palette.culture[300],
+        soft: palette.culture[800],
+        inverted: palette.culture[500],
+        liveblogBackground: palette.culture[300],
     },
     [Pillar.lifestyle]: {
-        kicker: palette.lifestyle.main,
-        featureHeadline: palette.lifestyle.dark,
-        soft: palette.lifestyle.faded,
-        inverted: palette.lifestyle.bright,
-        liveblogBackground: palette.lifestyle.dark,
+        kicker: palette.lifestyle[400],
+        featureHeadline: palette.lifestyle[300],
+        soft: palette.lifestyle[800],
+        inverted: palette.lifestyle[500],
+        liveblogBackground: palette.lifestyle[300],
     }
 }
 

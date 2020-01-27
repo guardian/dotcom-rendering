@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { palette } from '@guardian/src-foundations';
+import { neutral, background } from '@guardian/src-foundations/palette';
 
 import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
 import { formatDate } from 'date';
@@ -31,14 +31,14 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
         time {
             font-size: 1.4rem;
-            color: ${palette.neutral[46]};
+            color: ${neutral[46]};
         }
     }
 `;
 
 const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${palette.neutral.darkMode};
-    color: ${palette.neutral[86]};
+    background: ${background.inverse};
+    color: ${neutral[86]};
 
     .author {
         .follow, a {
@@ -46,7 +46,7 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
         }
 
         time {
-            color: ${palette.neutral[60]};
+            color: ${neutral[60]};
         }
     }
 `;

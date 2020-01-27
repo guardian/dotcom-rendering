@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
@@ -12,14 +12,14 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
     font-size: 1.6rem;
     line-height: 2rem;
     background: ${liveblogBackground};
-    color: ${palette.neutral[97]};
+    color: ${neutral[97]};
 
     p, ul {
         margin: 0;
     }
 
     a {
-        color: ${palette.neutral[93]};
+        color: ${neutral[93]};
     }
 `;
 

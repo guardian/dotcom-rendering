@@ -1,9 +1,9 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { sidePadding, textSans, darkModeCss, basePx } from '../../styles';
-import { palette } from '@guardian/src-foundations';
+import { neutral, background } from '@guardian/src-foundations/palette';
 
-const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles => css`
+const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
     margin-top: 0;
     margin-bottom: 0;
 
@@ -23,7 +23,7 @@ const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles 
             border-radius: 30px;
             text-overflow: ellipsis;
             max-width: 18.75rem;
-            color: ${palette.neutral[7]};
+            color: ${neutral[7]};
             background-color: ${background};
         }
     }
@@ -32,12 +32,12 @@ const tagsStyles = (background: string = palette.neutral[97]): SerializedStyles 
 `;
 
 const tagsDarkStyles = darkModeCss`
-    background: ${palette.neutral.darkMode};
-    color: ${palette.neutral[86]};
+    background: ${background.inverse};
+    color: ${neutral[86]};
 
     li a {
-        color: ${palette.neutral[60]};
-        background-color: ${palette.neutral[20]};
+        color: ${neutral[60]};
+        background-color: ${neutral[20]};
     }
 `;
 
