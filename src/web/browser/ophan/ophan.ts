@@ -31,7 +31,7 @@ export const sendOphanPlatformRecord = () => {
 
         // Record server-side AB test variants (i.e. control or variant)
         if (window.guardian.config.tests) {
-            const tests = window.guardian.config.tests;
+            const {tests} = window.guardian.config;
             window.guardian.ophan.record(abTestPayload(tests));
         }
     } else {
@@ -50,7 +50,7 @@ export const recordPerformance = () => {
         return;
     }
 
-    const timing = performanceAPI.timing;
+    const {timing} = performanceAPI;
 
     const performance = {
         dns: timing.domainLookupEnd - timing.domainLookupStart,

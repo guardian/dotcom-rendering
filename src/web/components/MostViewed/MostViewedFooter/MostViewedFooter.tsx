@@ -9,6 +9,7 @@ import { useApi } from '@root/src/web/components/lib/api';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 
+import { joinUrl } from '@root/src/web/components/lib/joinUrl';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { SecondTierItem } from './SecondTierItem';
 
@@ -91,22 +92,24 @@ const secondTierStyles = css`
 interface Props {
     sectionName?: string;
     pillar: Pillar;
+    ajaxUrl: string;
 }
 
-function buildSectionUrl(sectionName?: string) {
+function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
     const sectionsWithoutPopular = ['info', 'global'];
     const hasSection =
         sectionName && !sectionsWithoutPopular.includes(sectionName);
     const endpoint: string = `/most-read${
         hasSection ? `/${sectionName}` : ''
     }.json`;
-
-    return `https://api.nextgen.guardianapps.co.uk${endpoint}?dcr=true`;
+    return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 
-export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
-    const url = buildSectionUrl(sectionName);
-    const { data, error } = useApi<MostViewedFooterType | TrailTabType[]>(url);
+export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
+    const url = buildSectionUrl(ajaxUrl, sectionName);
+    const { data, error } = useApi<
+        MostViewedFooterPayloadType | TrailTabType[]
+    >(url);
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
@@ -159,7 +162,7 @@ export const MostViewedFooter = ({ sectionName, pillar }: Props) => {
                         >
                             <AdSlot
                                 asps={namedAdSlotParameters('mostpop')}
-                                className={''}
+                                className=""
                             />
                         </div>
                     </section>

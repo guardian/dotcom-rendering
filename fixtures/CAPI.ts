@@ -355,6 +355,7 @@ export const CAPI: CAPIType = {
     sectionLabel: 'Ticket prices',
     sectionUrl: 'money/ticket-prices',
     shouldHideAds: false,
+    shouldHideReaderRevenue: true,
     isAdFreeUser: false,
     webURL:
         'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
@@ -487,6 +488,7 @@ export const CAPI: CAPIType = {
         dcrSentryDsn:
             'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
         switches: {},
+        shortUrlId: '/p/4k83z',
         abTests: {},
         dfpAccountId: '',
         commercialBundleUrl:
@@ -501,7 +503,7 @@ export const CAPI: CAPIType = {
             a9: false,
         },
         adUnit: '/59666047/theguardian.com/film/article/ng',
-        isSensitive: '',
+        isSensitive: false,
         videoDuration: 0,
         edition: '',
         section: '',
@@ -514,6 +516,8 @@ export const CAPI: CAPIType = {
         series: '',
         contentType: '',
         isPaidContent: false,
+        keywordIds: '',
+        showRelatedContent: false,
     },
     webTitle: 'Foobar',
     nav: {

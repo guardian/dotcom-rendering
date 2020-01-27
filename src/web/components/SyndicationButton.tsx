@@ -51,7 +51,7 @@ export const SyndicationButton: React.FC<{
             <ul>
                 <li>
                     <a
-                        data-link-name={`meta-syndication-article`}
+                        data-link-name="meta-syndication-article"
                         href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
                             webUrl,
                         )}&type=article&internalpagecode=${internalPageCode}`}

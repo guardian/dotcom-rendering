@@ -18,15 +18,15 @@ export const footerLinksNew: Link[][] = [
     [
         {
             title: 'About us',
-            url: '/about',
+            url: 'https://www.theguardian.com/about',
         },
         {
             title: 'Contact us',
-            url: '/help/contact-us',
+            url: 'https://www.theguardian.com/help/contact-us',
         },
         {
             title: 'Complaints and corrections',
-            url: '/info/complaints-and-corrections',
+            url: 'https://www.theguardian.com/info/complaints-and-corrections',
         },
         {
             title: 'Securedrop',
@@ -38,11 +38,11 @@ export const footerLinksNew: Link[][] = [
         },
         {
             title: 'Privacy policy',
-            url: '/info/privacy',
+            url: 'https://www.theguardian.com/info/privacy',
         },
         {
             title: 'Cookie policy',
-            url: '/info/cookies',
+            url: 'https://www.theguardian.com/info/cookies',
         },
         {
             title: 'Your privacy',
@@ -51,26 +51,26 @@ export const footerLinksNew: Link[][] = [
         },
         {
             title: 'Terms & conditions',
-            url: '/help/terms-of-service',
+            url: 'https://www.theguardian.com/help/terms-of-service',
         },
         {
             title: 'Help',
-            url: '/help',
+            url: 'https://www.theguardian.com/help',
         },
     ],
     [
         {
             title: 'All topics',
-            url: '/index/subjects/a',
+            url: 'https://www.theguardian.com/index/subjects/a',
         },
         {
             title: 'All writers',
-            url: '/index/contributors',
+            url: 'https://www.theguardian.com/index/contributors',
         },
         {
             title: 'Modern Slavery Act',
             url:
-                '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+                'https://www.theguardian.com/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
         },
         {
             title: 'Digital newspaper archive',

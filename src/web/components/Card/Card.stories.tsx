@@ -8,7 +8,7 @@ import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { Card } from './Card';
 import { UL } from './components/UL';
 import { LI } from './components/LI';
-import { imageUrls } from './Card.mocks';
+import { images, headlines, standfirsts, kickers } from './Card.mocks';
 
 /* tslint:disable */
 export default {
@@ -38,16 +38,13 @@ export const News = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
                                 designType: 'Article',
-                                headlineText:
-                                    'The Knights Who Say Ni demand a sacrifice',
+                                headlineText: headlines[0],
                                 headlineSize: 'large',
-                                kickerText: 'Monty Python',
-
-                                imageUrl: imageUrls[0],
+                                kickerText: kickers[4],
+                                imageUrl: images[0],
                                 imagePosition: 'right',
                                 imageSize: 'large',
-                                standfirst:
-                                    "I have to push the pram a lot. I'm not a witch. Shut up! The nose? And this isn't my nose. This is a false one. You don't vote for kings.",
+                                standfirst: standfirsts[0],
                             }}
                         />
                     </LI>
@@ -63,14 +60,12 @@ export const News = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
                                 designType: 'Article',
-                                headlineText: "Yes. We're all individuals",
+                                headlineText: headlines[1],
                                 headlineSize: 'large',
-                                kickerText: 'Brian',
-
-                                imageUrl: imageUrls[5],
+                                kickerText: kickers[0],
+                                imageUrl: images[5],
                                 imagePosition: 'top',
-                                standfirst:
-                                    "Well, obviously it's not meant to be taken literally. It refers to any manufacturer of dairy products",
+                                standfirst: standfirsts[0],
                             }}
                         />
                     </LI>
@@ -83,14 +78,11 @@ export const News = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'culture',
                                 designType: 'Article',
-                                headlineText:
-                                    "You can't expect to wield supreme power just 'cause some watery tart threw a sword at you",
-                                kickerText: 'Holy Grail',
-
-                                imageUrl: imageUrls[3],
+                                headlineText: headlines[2],
+                                kickerText: kickers[1],
+                                imageUrl: images[3],
                                 imagePosition: 'top',
-                                standfirst:
-                                    'The swallow may fly south with the sun, and the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land. Burn her anyway!',
+                                standfirst: standfirsts[0],
                             }}
                         />
                     </LI>
@@ -108,10 +100,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
                                         designType: 'Article',
-                                        headlineText:
-                                            'Go and boil your bottoms, sons of a silly person!',
-                                        kickerText: 'Monty Python',
-                                        imageUrl: imageUrls[6],
+                                        headlineText: headlines[3],
+                                        kickerText: kickers[2],
+                                        imageUrl: images[6],
                                         imagePosition: 'top',
                                     }}
                                 />
@@ -123,8 +114,7 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
                                         designType: 'Article',
-                                        headlineText:
-                                            'Listen. Strange women lying in ponds distributing swords is no basis for a system of government',
+                                        headlineText: headlines[4],
                                         headlineSize: 'small',
                                     }}
                                 />
@@ -136,10 +126,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
                                         designType: 'Article',
-                                        headlineText:
-                                            'Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony',
+                                        headlineText: headlines[5],
                                         headlineSize: 'small',
-                                        kickerText: 'Monty Python',
+                                        kickerText: kickers[3],
                                     }}
                                 />
                             </LI>
@@ -159,10 +148,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
                                         designType: 'Article',
-                                        headlineText:
-                                            'Are you suggesting that coconuts migrate?',
+                                        headlineText: headlines[6],
                                         headlineSize: 'small',
-                                        kickerText: 'Run Away!',
+                                        kickerText: kickers[3],
                                     }}
                                 />
                             </LI>
@@ -173,10 +161,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
                                         designType: 'Article',
-                                        headlineText:
-                                            "On second thoughts, let's not go there. It is a silly place",
+                                        headlineText: headlines[7],
                                         headlineSize: 'small',
-                                        kickerText: 'Monty Python!',
+                                        kickerText: kickers[1],
                                     }}
                                 />
                             </LI>
@@ -187,9 +174,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
                                         designType: 'Article',
-                                        headlineText: 'Let us ride to Camelot',
+                                        headlineText: headlines[8],
                                         headlineSize: 'small',
-                                        kickerText: 'Monty Python!',
+                                        kickerText: kickers[0],
                                     }}
                                 />
                             </LI>
@@ -200,10 +187,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
                                         designType: 'Article',
-                                        headlineText:
-                                            "Where'd you get the coconuts?",
+                                        headlineText: headlines[9],
                                         headlineSize: 'small',
-                                        kickerText: 'Monty Python!',
+                                        kickerText: kickers[2],
                                     }}
                                 />
                             </LI>
@@ -214,10 +200,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'lifestyle',
                                         designType: 'Article',
-                                        headlineText:
-                                            'Now, look here, my good man',
+                                        headlineText: headlines[10],
                                         headlineSize: 'small',
-                                        kickerText: 'Terry Gillingham',
+                                        kickerText: kickers[0],
                                     }}
                                 />
                             </LI>
@@ -228,10 +213,9 @@ export const News = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'news',
                                         designType: 'Article',
-                                        headlineText:
-                                            "We shall say 'Ni' again to you, if you do not appease us",
+                                        headlineText: headlines[11],
                                         headlineSize: 'small',
-                                        kickerText: 'Monty Python',
+                                        kickerText: kickers[3],
                                     }}
                                 />
                             </LI>
@@ -261,11 +245,10 @@ export const InDepth = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
                                         designType: 'Article',
-                                        headlineText:
-                                            "We shall say 'Ni' again to you, if you do not appease us",
+                                        headlineText: headlines[6],
                                         headlineSize: 'medium',
-                                        kickerText: 'Holy Grail',
-                                        imageUrl: imageUrls[5],
+                                        kickerText: kickers[4],
+                                        imageUrl: images[5],
                                         imagePosition: 'left',
                                         imageSize: 'small',
                                     }}
@@ -278,11 +261,10 @@ export const InDepth = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
                                         designType: 'Article',
-                                        headlineText:
-                                            'Now, look here, my good man',
+                                        headlineText: headlines[6],
                                         headlineSize: 'small',
-                                        kickerText: 'Holy Grail',
-                                        imageUrl: imageUrls[6],
+                                        kickerText: kickers[3],
+                                        imageUrl: images[6],
                                         imagePosition: 'left',
                                         imageSize: 'small',
                                     }}
@@ -295,11 +277,10 @@ export const InDepth = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
                                         designType: 'Article',
-                                        headlineText:
-                                            "Where'd you get the coconuts",
+                                        headlineText: headlines[6],
                                         headlineSize: 'small',
-                                        kickerText: 'Holy Grail',
-                                        imageUrl: imageUrls[3],
+                                        kickerText: kickers[2],
+                                        imageUrl: images[3],
                                         imagePosition: 'left',
                                         imageSize: 'small',
                                     }}
@@ -312,10 +293,10 @@ export const InDepth = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
                                         designType: 'Article',
-                                        headlineText: 'Let us ride to Camelot!',
+                                        headlineText: headlines[2],
                                         headlineSize: 'small',
-                                        kickerText: 'Holy Grail',
-                                        imageUrl: imageUrls[2],
+                                        kickerText: kickers[1],
+                                        imageUrl: images[2],
                                         imagePosition: 'left',
                                         imageSize: 'small',
                                     }}
@@ -328,11 +309,10 @@ export const InDepth = () => (
                                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                         pillar: 'sport',
                                         designType: 'Article',
-                                        headlineText:
-                                            'How do you know she is a witch? Burn her!',
+                                        headlineText: headlines[7],
                                         headlineSize: 'small',
-                                        kickerText: 'Holy Grail',
-                                        imageUrl: imageUrls[1],
+                                        kickerText: kickers[0],
+                                        imageUrl: images[1],
                                         imagePosition: 'left',
                                         imageSize: 'small',
                                     }}
@@ -352,11 +332,10 @@ export const InDepth = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
                                 designType: 'Article',
-                                headlineText:
-                                    "Go and boil your bottoms, sons of a silly person!'",
+                                headlineText: headlines[7],
                                 headlineSize: 'large',
-                                kickerText: 'Monty Python',
-                                imageUrl: imageUrls[0],
+                                kickerText: kickers[0],
+                                imageUrl: images[0],
                                 imagePosition: 'top',
                             }}
                         />
@@ -383,12 +362,11 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
                                 designType: 'Article',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[7],
                                 headlineSize: 'medium',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[3],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[5],
+                                imageUrl: images[5],
                                 imagePosition: 'top',
                             }}
                         />
@@ -404,11 +382,11 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
                                 designType: 'Article',
-                                headlineText: 'Now, look here, my good man',
+                                headlineText: headlines[8],
                                 headlineSize: 'medium',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[0],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[6],
+                                imageUrl: images[6],
                                 imagePosition: 'top',
                             }}
                         />
@@ -424,11 +402,11 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
                                 designType: 'Article',
-                                headlineText: "Where'd you get the coconuts",
+                                headlineText: headlines[8],
                                 headlineSize: 'medium',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[1],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[4],
+                                imageUrl: images[4],
                                 imagePosition: 'top',
                             }}
                         />
@@ -442,10 +420,9 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
                                 designType: 'Article',
-                                headlineText:
-                                    'Go and boil your bottoms, sons of a silly person!',
+                                headlineText: headlines[9],
                                 headlineSize: 'small',
-                                kickerText: 'Monty Python',
+                                kickerText: kickers[0],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                             }}
                         />
@@ -461,9 +438,9 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
                                 designType: 'Article',
-                                headlineText: 'Let us ride to Camelot!',
+                                headlineText: headlines[10],
                                 headlineSize: 'small',
-                                kickerText: 'Monty Python',
+                                kickerText: kickers[2],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                             }}
                         />
@@ -479,9 +456,9 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'culture',
                                 designType: 'Interview',
-                                headlineText: 'Let us ride to Camelot!',
+                                headlineText: headlines[1],
                                 headlineSize: 'small',
-                                kickerText: 'Monty Python',
+                                kickerText: kickers[1],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                             }}
                         />
@@ -497,10 +474,9 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'lifestyle',
                                 designType: 'Feature',
-                                headlineText:
-                                    'How do you know she is a witch? Burn her!',
+                                headlineText: headlines[3],
                                 headlineSize: 'small',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[0],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                             }}
                         />
@@ -525,12 +501,11 @@ export const Spotlight = () => (
                             '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                         pillar: 'sport',
                         designType: 'Feature',
-                        headlineText:
-                            "We shall say 'Ni' again to you, if you do not appease us",
+                        headlineText: headlines[11],
                         headlineSize: 'large',
-                        kickerText: 'Holy Grail',
+                        kickerText: kickers[1],
                         webPublicationDate: '2019-11-11T09:45:30.000Z',
-                        imageUrl: imageUrls[0],
+                        imageUrl: images[0],
                         imagePosition: 'right',
                         imageSize: 'jumbo',
                     }}
@@ -556,12 +531,11 @@ export const Quad = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'opinion',
                                 designType: 'Comment',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[11],
                                 headlineSize: 'medium',
                                 showQuotes: true,
                                 byline: 'George Monbiot',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[3],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 avatar: {
                                     src:
@@ -583,11 +557,10 @@ export const Quad = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'opinion',
                                 designType: 'Article',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[11],
                                 headlineSize: 'medium',
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[0],
+                                imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
                             }}
@@ -604,12 +577,11 @@ export const Quad = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
                                 designType: 'Article',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[11],
                                 headlineSize: 'medium',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[0],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[0],
+                                imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
                             }}
@@ -626,12 +598,11 @@ export const Quad = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 designType: 'Article',
                                 pillar: 'news',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[11],
                                 headlineSize: 'medium',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[2],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[0],
+                                imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
                             }}
@@ -663,11 +634,10 @@ export const Media = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'culture',
                                 designType: 'Media',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[11],
                                 headlineSize: 'medium',
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[0],
+                                imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
                                 mediaType: 'Gallery',
@@ -685,12 +655,11 @@ export const Media = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
                                 designType: 'Media',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[11],
                                 headlineSize: 'medium',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[0],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[0],
+                                imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
                                 mediaType: 'Audio',
@@ -709,12 +678,11 @@ export const Media = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
                                 designType: 'Media',
-                                headlineText:
-                                    "We shall say 'Ni' again to you, if you do not appease us",
+                                headlineText: headlines[11],
                                 headlineSize: 'medium',
-                                kickerText: 'Holy Grail',
+                                kickerText: kickers[1],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
-                                imageUrl: imageUrls[0],
+                                imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
                                 mediaType: 'Video',

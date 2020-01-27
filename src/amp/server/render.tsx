@@ -17,8 +17,8 @@ export const render = (
     try {
         // TODO remove when migrated to v2
         const CAPI = validateV2(body);
-        const linkedData = CAPI.linkedData;
-        const config = CAPI.config;
+        const {linkedData} = CAPI;
+        const {config} = CAPI;
         const blockElements = CAPI.blocks.map(block => block.elements);
 
         // This is simply to flatten the elements

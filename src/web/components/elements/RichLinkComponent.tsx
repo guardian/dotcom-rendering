@@ -207,8 +207,7 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
 
     const imageCardStyles = ['news', 'letters', 'media', 'feature'];
     const showImage =
-        richLink.thumbnailUrl &&
-        imageCardStyles.indexOf(richLink.cardStyle) >= 0;
+        richLink.thumbnailUrl && imageCardStyles.includes(richLink.cardStyle);
     const isPaidContent = richLink.tags
         ? richLink.tags.filter(t => t.id === 'tone/advertisement-features')
               .length > 0
@@ -244,10 +243,7 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                         </div>
                     )}
                     {richLink.starRating && richLink.starRating > 0 && (
-                        <StarRating
-                            rating={richLink.starRating}
-                            size={'small'}
-                        />
+                        <StarRating rating={richLink.starRating} size="small" />
                     )}
                     {isPaidContent && richLink.sponsorName && (
                         <div className={paidForBranding}>

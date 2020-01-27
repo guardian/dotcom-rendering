@@ -5,12 +5,13 @@ import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper';
-import { ShareCount } from '@frontend/web/components/ShareCount';
+import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
 import { Onwards } from '@frontend/web/components/Onwards/Onwards';
-import { StoryPackage } from '@frontend/web/components/Onwards/StoryPackage';
+import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
+import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 
 type IslandProps =
     | {
@@ -18,12 +19,24 @@ type IslandProps =
           nav: NavType;
       }
     | {
+          subnav: {
+              parent?: LinkType;
+              links: LinkType[];
+          };
+          pillar: Pillar;
+          currentNavLink: string;
+      }
+    | {
           edition: Edition;
           dataLinkName: string;
       }
     | {
           pillar: Pillar;
+      }
+    | {
+          pillar: Pillar;
           sectionName?: string;
+          ajaxUrl: string;
       }
     | {
           limitItems?: number;
@@ -31,6 +44,8 @@ type IslandProps =
     | {
           ajaxUrl: string;
           pageId: string;
+          shortUrlId: string;
+          pillar: Pillar;
       }
     | {
           edition: Edition;
@@ -50,9 +65,14 @@ type IslandProps =
       }
     | {
           ajaxUrl: string;
+          hasRelated: boolean;
+          hasStoryPackage: boolean;
+          isAdFreeUser: boolean;
           pageId: string;
-          pathId: OnwardsIdType;
-          component: React.ElementType;
+          isPaidContent: boolean;
+          showRelatedContent: boolean;
+          keywordIds: string;
+          contentType: string;
       };
 
 type IslandType = {
@@ -68,7 +88,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
         editionId,
         sectionName,
         pageId,
-        config: { ajaxUrl },
+        config: { ajaxUrl, shortUrlId, isPaidContent },
     } = CAPI;
 
     // Define the list of islands we intend to hydrate. Each island should have a
@@ -90,6 +110,15 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             props: { pillar, nav: NAV },
             root: 'nav-root',
         },
+        {
+            component: SubNav,
+            props: {
+                pillar,
+                subnav: NAV.subNavSections,
+                currentNavLink: NAV.currentNavLink,
+            },
+            root: 'sub-nav-root',
+        },
     ];
 
     const lowPriorityIslands: IslandType[] = [
@@ -107,18 +136,21 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             root: 'most-viewed-right',
         },
         {
-            component: ShareCount,
+            component: Counts,
             props: {
                 ajaxUrl,
                 pageId,
+                shortUrlId,
+                pillar,
             },
-            root: 'share-count',
+            root: 'share-comment-counts',
         },
         {
             component: MostViewedFooter,
             props: {
                 pillar,
                 sectionName,
+                ajaxUrl: CAPI.config.ajaxUrl,
             },
             root: 'most-viewed-footer',
         },
@@ -134,6 +166,11 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             root: 'reader-revenue-links-footer',
         },
         {
+            component: SlotBodyEnd,
+            props: {},
+            root: 'slot-body-end',
+        },
+        {
             component: CookieBanner,
             props: {},
             root: 'cookie-banner',
@@ -142,11 +179,16 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             component: Onwards,
             props: {
                 ajaxUrl: CAPI.config.ajaxUrl,
+                hasRelated: CAPI.hasRelated,
+                hasStoryPackage: CAPI.hasStoryPackage,
+                isAdFreeUser: CAPI.isAdFreeUser,
                 pageId: CAPI.pageId,
-                pathId: 'story-package',
-                component: StoryPackage,
+                isPaidContent: isPaidContent || false,
+                showRelatedContent: CAPI.config.showRelatedContent,
+                keywordIds: CAPI.config.keywordIds,
+                contentType: CAPI.contentType,
             },
-            root: 'story-package',
+            root: 'onwards-content',
         },
     ];
 

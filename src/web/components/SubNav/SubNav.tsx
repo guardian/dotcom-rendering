@@ -1,29 +1,12 @@
 import React, { Component, createRef } from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { GuardianLines } from '@frontend/web/components/GuardianLines';
+
 import { Inner } from './Inner';
 
 const subnavWrapper = css`
     background-color: white;
-`;
-
-const multiLine = css`
-    background-image: repeating-linear-gradient(
-        to bottom,
-        ${palette.neutral[86]},
-        ${palette.neutral[86]} 1px,
-        transparent 1px,
-        transparent 4px
-    );
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: 1px 13px;
-    background-color: ${palette.neutral[100]};
-    content: '';
-    clear: left;
-    display: block;
-    height: 13px;
 `;
 
 interface Props {
@@ -81,6 +64,12 @@ export class SubNav extends Component<
     }
 
     public render() {
+        const { subnav, pillar, currentNavLink } = this.props;
+
+        if (!subnav) {
+            return null;
+        }
+
         const { showMore, isExpanded } = this.state;
         const collapseWrapper = !showMore || !isExpanded;
         const expandSubNav = !showMore || isExpanded;
@@ -88,18 +77,18 @@ export class SubNav extends Component<
         return (
             <div className={subnavWrapper}>
                 <Inner
-                    links={this.props.subnav.links}
-                    pillar={this.props.pillar}
-                    parent={this.props.subnav.parent}
+                    links={subnav.links}
+                    pillar={pillar}
+                    parent={subnav.parent}
                     showMore={showMore}
                     isExpanded={isExpanded}
                     collapseWrapper={collapseWrapper}
                     expandSubNav={expandSubNav}
                     ulRef={this.ulRef}
                     toggle={this.toggle}
-                    currentNavLink={this.props.currentNavLink}
+                    currentNavLink={currentNavLink}
                 />
-                <div className={multiLine} />
+                <GuardianLines pillar={pillar} />
             </div>
         );
     }

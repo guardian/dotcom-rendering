@@ -27,6 +27,9 @@ interface RichLinkBlockElement {
     prefix: string;
 }
 
+// aka weighting. RoleType affects how an image is placed. It is called weighting
+// in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
+// in DCR
 type RoleType =
     | 'immersive'
     | 'supporting'
@@ -50,10 +53,14 @@ interface ImageBlockElement {
 }
 interface YoutubeBlockElement {
     _type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
-    id: string;
     assetId: string;
-    channelId?: string;
     mediaTitle: string;
+    id?: string;
+    channelId?: string;
+    duration?: number;
+    posterSrc?: string;
+    height?: string;
+    width?: string;
 }
 
 // Note, this is a Video Embed rather than the above Media Atom
@@ -166,6 +173,11 @@ interface PullquoteBlockElement {
     attribution?: string;
 }
 
+interface BlockquoteBlockElement {
+    _type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
+    html: string;
+}
+
 interface QABlockElement {
     _type: 'model.dotcomrendering.pageElements.QABlockElement';
     id: string;
@@ -266,6 +278,7 @@ type CAPIElement =
     | EmbedBlockElement
     | DisclaimerBlockElement
     | PullquoteBlockElement
+    | BlockquoteBlockElement
     | QABlockElement
     | GuideBlockElement
     | ProfileBlockElement

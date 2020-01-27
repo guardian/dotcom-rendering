@@ -128,7 +128,8 @@ export const makeRelativeDate = (
     // delta is the number of seconds since the article was published and now
     delta = Math.floor((now.getTime() - then.getTime()) / 1000);
 
-    // tslint:disable no-else-after-return because I think
+    /* eslint-disable no-else-return */
+    // because I think
     // the intention reads better with the else statements here
     if (delta < 0) {
         // Publication dates in the future are not supported
@@ -171,5 +172,5 @@ export const makeRelativeDate = (
             ' ',
         ) + (opts.showTime ? withTime(then) : '')
     );
-    // tslint:enable no-else-after-return
+    /* eslint-enable no-else-return */
 };

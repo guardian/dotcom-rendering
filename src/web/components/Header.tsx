@@ -38,16 +38,15 @@ export class Header extends Component<Props, { isSignedIn: boolean }> {
 
     public render() {
         const { isSignedIn } = this.state;
+        const { edition } = this.props;
 
         return (
             <header className={headerStyles}>
                 <Hide when="below" breakpoint="desktop">
                     <div data-island="edition-root">
                         <EditionDropdown
-                            edition={this.props.edition}
-                            dataLinkName={
-                                'nav2 : topbar : edition-picker: toggle'
-                            }
+                            edition={edition}
+                            dataLinkName="nav2 : topbar : edition-picker: toggle"
                         />
                     </div>
                 </Hide>

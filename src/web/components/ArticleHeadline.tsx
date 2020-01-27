@@ -60,14 +60,6 @@ const lightFont = css`
     }
 `;
 
-const standardPadding = css`
-    padding-bottom: 24px;
-    padding-top: 3px;
-    ${from.tablet} {
-        padding-bottom: 36px;
-    }
-`;
-
 const underlinedStyles = css`
     background-image: repeating-linear-gradient(
         to bottom,
@@ -108,11 +100,6 @@ const displayInline = css`
 const displayFlex = css`
     display: flex;
     flex-direction: column;
-`;
-
-const shiftPosition = (shift?: 'up' | 'down') => css`
-    margin-top: ${shift && shift === 'up' && '-100px'};
-    margin-bottom: ${shift && shift === 'down' && '-50px'};
 `;
 
 const shiftSlightly = css`
@@ -167,7 +154,6 @@ const ageWarningMargins = css`
 const renderHeadline = ({
     designType,
     pillar,
-    isShowcase,
     headlineString,
     byline,
     tags,
@@ -175,7 +161,6 @@ const renderHeadline = ({
 }: {
     designType: DesignType;
     pillar: Pillar;
-    isShowcase: boolean;
     headlineString: string;
     byline?: string;
     tags: TagType[];
@@ -186,7 +171,6 @@ const renderHeadline = ({
     switch (designType) {
         case 'Article':
         case 'Media':
-        case 'Review':
         case 'Live':
         case 'SpecialReport':
         case 'Recipe':
@@ -195,18 +179,14 @@ const renderHeadline = ({
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-            return (
-                <h1 className={cx(standardFont, standardPadding)}>
-                    {curly(headlineString)}
-                </h1>
-            );
+            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
 
+        case 'Review':
         case 'Feature':
             return (
                 <h1
                     className={cx(
                         boldFont,
-                        standardPadding,
                         colourStyles(options && options.colour),
                     )}
                 >
@@ -215,21 +195,11 @@ const renderHeadline = ({
             );
 
         case 'Comment':
-            return (
-                <h1 className={cx(lightFont, standardPadding)}>
-                    {curly(headlineString)}
-                </h1>
-            );
+            return <h1 className={lightFont}>{curly(headlineString)}</h1>;
 
         case 'Analysis':
             return (
-                <h1
-                    className={cx(
-                        standardFont,
-                        standardPadding,
-                        underlinedStyles,
-                    )}
-                >
+                <h1 className={cx(standardFont, underlinedStyles)}>
                     {curly(headlineString)}
                 </h1>
             );
@@ -238,14 +208,7 @@ const renderHeadline = ({
             return (
                 // Inverted headlines have a wrapper div for positioning
                 // and a black background (only for the text)
-                <div
-                    className={cx(
-                        // We only shift the inverted headline down when main media is showcase
-                        isShowcase ? shiftPosition('down') : shiftSlightly,
-                        maxWidth,
-                        displayFlex,
-                    )}
-                >
+                <div className={cx(shiftSlightly, maxWidth, displayFlex)}>
                     <HeadlineTag tagText="Interview" pillar={pillar} />
                     <h1 className={cx(invertedFont, invertedWrapper)}>
                         <span
@@ -266,13 +229,7 @@ const renderHeadline = ({
             return (
                 // Immersive headlines are large and inverted and have their black background
                 // extended to the right
-                <h1
-                    className={cx(
-                        invertedWrapper,
-                        shiftPosition('up'),
-                        blackBackground,
-                    )}
-                >
+                <h1 className={cx(invertedWrapper, blackBackground)}>
                     <span
                         className={cx(
                             jumboFont,
@@ -295,7 +252,6 @@ export const ArticleHeadline = ({
     webPublicationDate,
     byline,
     tags,
-    isShowcase = false,
 }: Props) => {
     const age = getAgeWarning(tags, webPublicationDate);
     return (
@@ -308,7 +264,6 @@ export const ArticleHeadline = ({
             {renderHeadline({
                 designType,
                 pillar,
-                isShowcase,
                 headlineString,
                 byline,
                 tags,

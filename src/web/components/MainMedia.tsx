@@ -1,9 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
+
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
-import { MainImageComponent } from '@root/src/web/components/elements/MainImageComponent';
+
+import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
+import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 
 const captionFont = css`
     ${textSans.xsmall()};
@@ -18,8 +21,6 @@ const mainMedia = css`
     https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
     */
 
-    margin-bottom: 14px;
-
     ${until.tablet} {
         margin: 0;
         order: -1;
@@ -27,6 +28,11 @@ const mainMedia = css`
         figcaption {
             display: none;
         }
+    }
+
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 
     img {
@@ -45,18 +51,37 @@ function renderElement(
     pillar: Pillar,
     i: number,
     hideCaption?: boolean,
+    adTargeting?: AdTargeting,
 ) {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
             return (
-                <MainImageComponent
+                <ImageComponent
                     key={i}
                     element={element}
                     pillar={pillar}
                     hideCaption={hideCaption}
+                    role={element.role}
+                    isMainMedia={true}
+                />
+            );
+        case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
+            return (
+                <YouTubeComponent
+                    key={i}
+                    element={element}
+                    pillar={pillar}
+                    hideCaption={hideCaption}
+                    // tslint:disable-next-line react-a11y-role
+                    role="inline"
+                    adTargeting={adTargeting}
                 />
             );
         default:
+            // tslint:disable-next-line no-console
+            console.warn(
+                `The following main media element is not supported by DCR ${element._type}`,
+            );
             return null;
     }
 }
@@ -65,10 +90,11 @@ export const MainMedia: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
     hideCaption?: boolean;
-}> = ({ elements, pillar, hideCaption }) => (
+    adTargeting?: AdTargeting;
+}> = ({ elements, pillar, hideCaption, adTargeting }) => (
     <div className={mainMedia}>
         {elements.map((element, i) =>
-            renderElement(element, pillar, i, hideCaption),
+            renderElement(element, pillar, i, hideCaption, adTargeting),
         )}
     </div>
 );

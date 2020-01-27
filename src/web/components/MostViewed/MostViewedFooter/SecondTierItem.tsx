@@ -24,7 +24,7 @@ const itemStyles = (showRightBorder?: boolean) => css`
 
     min-height: 3.25rem;
 
-    flex-basis: 50%;
+    flex-basis: 100%;
 
     &:hover {
         cursor: pointer;
@@ -95,7 +95,7 @@ export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
     return (
         <div className={itemStyles(showRightBorder)}>
             {/* tslint:disable-next-line:react-a11y-anchors */}
-            <a className={headlineLink} href={url} data-link-name={'article'}>
+            <a className={headlineLink} href={url} data-link-name="article">
                 <Flex>
                     <div className={headlineStyles}>
                         <div className={titleStyles}>{title}</div>
@@ -128,7 +128,7 @@ export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
                                 <div className={avatarSizeStyles}>
                                     <Avatar
                                         imageSrc={avatarToShow}
-                                        imageAlt={''}
+                                        imageAlt=""
                                         pillar={pillar}
                                     />
                                 </div>

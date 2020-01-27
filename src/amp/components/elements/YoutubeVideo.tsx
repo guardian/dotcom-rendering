@@ -1,6 +1,6 @@
 import React from 'react';
 import { Caption } from '@root/src/amp/components/Caption';
-import { constructQuery } from '@root/src/amp/lib/querystring';
+import { constructQuery } from '@root/src/lib/querystring';
 
 interface EmbedConfig {
     adsConfig: {

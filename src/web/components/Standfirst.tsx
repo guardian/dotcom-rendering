@@ -32,6 +32,10 @@ const nestedStyles = css`
     li {
         ${headline.xxxsmall()};
     }
+
+    strong {
+        font-weight: bold;
+    }
 `;
 
 const standfirstStyles = (designType: DesignType) => {
@@ -79,8 +83,9 @@ type Props = {
 
 export const Standfirst = ({ designType = 'Article', standfirst }: Props) => {
     return (
-        <div // tslint:disable-line:react-no-dangerous-html
+        <div
             className={cx(nestedStyles, standfirstStyles(designType))}
+            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
                 __html: standfirst,
             }}

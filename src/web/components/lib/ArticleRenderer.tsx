@@ -1,10 +1,13 @@
+import React from 'react';
+import { css } from 'emotion';
+
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { PullQuoteComponent } from '@root/src/web/components/elements/PullQuoteComponent';
-import React from 'react';
-import { css } from 'emotion';
+import { BlockquoteComponent } from '@root/src/web/components/elements/BlockquoteComponent';
+import { YouTubeComponent } from '@root/src/web/components/elements/YouTubeComponent';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -15,7 +18,8 @@ export const ArticleRenderer: React.FC<{
     elements: CAPIElement[];
     pillar: Pillar;
     designType: DesignType;
-}> = ({ elements, pillar, designType }) => {
+    adTargeting?: AdTargeting;
+}> = ({ elements, pillar, designType, adTargeting }) => {
     // const cleanedElements = elements.map(element =>
     //     'html' in element ? { ...element, html: clean(element.html) } : element,
     // );
@@ -57,6 +61,20 @@ export const ArticleRenderer: React.FC<{
                             pillar={pillar}
                             attribution={element.attribution}
                             role={element.role}
+                        />
+                    );
+                case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+                    return <BlockquoteComponent key={i} html={element.html} />;
+                case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
+                    return (
+                        <YouTubeComponent
+                            key={i}
+                            element={element}
+                            pillar={pillar}
+                            hideCaption={false}
+                            // tslint:disable-next-line react-a11y-role
+                            role="inline"
+                            adTargeting={adTargeting}
                         />
                     );
                 case 'model.dotcomrendering.pageElements.RichLinkBlockElement':

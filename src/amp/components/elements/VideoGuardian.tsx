@@ -7,8 +7,8 @@ export const VideoGuardian: React.FC<{
 }> = ({ element, pillar }) => {
     return (
         <Caption captionText={element.caption} pillar={pillar} dirtyHtml={true}>
-            <amp-video controls={''} width="16" height="9" layout="responsive">
-                <div fallback={''}>
+            <amp-video controls="" width="16" height="9" layout="responsive">
+                <div fallback="">
                     Sorry, your browser is unable to play this video.
                     <br />
                     Please <a href="http://whatbrowser.org/">upgrade</a> to a

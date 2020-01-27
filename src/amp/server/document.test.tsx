@@ -27,9 +27,9 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 // fields. This then errors in Elements.tsx.
 test('produces valid AMP doc', async () => {
     const v = await validator.getInstance();
-    const config = CAPI.config;
+    const {config} = CAPI;
     const nav = extractNAV(CAPI.nav);
-    const linkedData = CAPI.linkedData;
+    const {linkedData} = CAPI;
 
     const metadata = {
         description: CAPI.trailText,

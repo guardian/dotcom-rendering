@@ -110,7 +110,7 @@ export const Blocks: React.SFC<{
             <WithAds
                 items={liveBlogBlocks}
                 adSlots={slotIndexes}
-                adClassName={''}
+                adClassName=""
                 adInfo={adInfo}
             />
         </>

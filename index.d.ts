@@ -38,6 +38,7 @@ interface AdTargetParam {
 
 interface AdTargeting {
     adUnit: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     customParams: { [key: string]: any };
 }
 
@@ -74,7 +75,6 @@ interface LinkType extends SimpleLinkType {
 
 interface PillarType extends LinkType {
     pillar: Pillar;
-    more: false;
 }
 
 interface MoreType extends LinkType {
@@ -207,6 +207,7 @@ interface CAPIType {
     config: ConfigType;
     designType: DesignType;
     showBottomSocialButtons: boolean;
+    shouldHideReaderRevenue: boolean;
 
     // AMP specific (for now)
     guardianBaseURL: string;
@@ -219,9 +220,12 @@ interface CAPIType {
     starRating?: number;
     trailText: string;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
 
     pageFooter: FooterType;
+
+    slotMachineFlags?: string;
 }
 
 interface TagType {
@@ -252,10 +256,10 @@ type ImagePositionType = 'left' | 'top' | 'right';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
-type AvatarType = {
+interface AvatarType {
     src: string;
     alt: string;
-};
+}
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
@@ -289,11 +293,11 @@ interface CardType {
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
-type HeadlineLink = {
+interface HeadlineLink {
     to: string; // the href for the anchor tag
     visitedColour?: string; // a custom colour for the :visited state
     preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
-};
+}
 
 interface LinkHeadlineType {
     designType: DesignType;
@@ -325,12 +329,10 @@ interface CardHeadlineType {
 /**
  * Onwards
  */
-type OnwardsIdType = 'story-package' | 'more-in-series';
-
-type OnwardsType = {
+interface OnwardsType {
     heading: string;
     trails: TrailType[];
-};
+}
 
 interface CommercialConfigType {
     isPaidContent?: boolean;
@@ -361,17 +363,23 @@ interface ConfigType extends CommercialConfigType {
     dfpAccountId: string;
     commercialBundleUrl: string;
     revisionNumber: string;
+    shortUrlId: string;
     isDev?: boolean;
     googletagUrl: string;
     stage: string;
     frontendAssetsFullURL: string;
     hbImpl: object | string;
     adUnit: string;
-    isSensitive: string;
+    isSensitive: boolean;
     videoDuration: number;
     edition: string;
     section: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     sharedAdTargeting: { [key: string]: any };
+    isPaidContent?: boolean;
+    keywordIds: string;
+    showRelatedContent: boolean;
+    shouldHideReaderRevenue?: boolean;
 }
 
 interface GADataType {
@@ -412,6 +420,7 @@ type DesignType =
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
 // and can be used to add TypeSafety when needing to override a style in a designType
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DesignTypesObj = { [key in DesignType]: any };
 
 // ----------------- //
@@ -439,8 +448,8 @@ interface TrailType {
     url: string;
     headline: string;
     isLiveBlog: boolean;
-    image: string;
     webPublicationDate: string;
+    image?: string;
     avatarUrl?: string;
     mediaType?: MediaType;
     mediaDuration?: number;
@@ -455,7 +464,7 @@ interface TrailTabType {
     trails: TrailType[];
 }
 
-interface MostViewedFooterType {
+interface MostViewedFooterPayloadType {
     tabs: TrailTabType[];
     mostCommented: TrailType;
     mostShared: TrailType;
@@ -464,6 +473,7 @@ interface MostViewedFooterType {
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare module 'emotion-server' {
     export const extractCritical: any;
 }
@@ -479,6 +489,7 @@ declare module 'minify-css-string' {
     const minifyCSSString: any;
     export default minifyCSSString;
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 // ------------------------------------- //
 // AMP types                             //
@@ -486,6 +497,7 @@ declare module 'minify-css-string' {
 
 // tslint:disable-next-line no-namespace
 declare namespace JSX {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     interface IntrinsicElements {
         'amp-sidebar': any;
         'amp-accordion': any;
@@ -507,10 +519,12 @@ declare namespace JSX {
         'amp-live-list': any;
         'amp-audio': any;
     }
+    /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
 // SVG handling
 declare module '*.svg' {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const content: any;
     export default content;
 }

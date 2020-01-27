@@ -98,7 +98,7 @@ const getCookieValues = (name: string): string[] => {
     return cookies.reduce<string[]>((acc, cookie) => {
         const cookieTrimmed = cookie.trim();
 
-        if (cookieTrimmed.indexOf(nameEq) === 0) {
+        if (cookieTrimmed.startsWith(nameEq)) {
             acc.push(
                 cookieTrimmed.substring(nameEq.length, cookieTrimmed.length),
             );

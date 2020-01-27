@@ -107,14 +107,12 @@ export const SharingIcons: React.FC<{
         const sharingUrl = sharingUrls[id];
 
         if (icon && sharingUrl) {
-            const listItem: ShareListItemType = Object.assign(
-                {
-                    id,
+            const listItem: ShareListItemType = {
+                id,
                     Icon: icon,
                     mobileOnly: mobileOnlyIcons.includes(id),
-                },
-                sharingUrl,
-            );
+                ...sharingUrl,
+            };
             list.push(listItem);
         }
 
