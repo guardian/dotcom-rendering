@@ -136,42 +136,41 @@ const transform = (text: string, pillar: Pillar): ReactElement | string => {
     } else if (text?.includes('* * *')) {
         return h(HorizontalRule, null, null);
     }
-
     return text;
 }
 
+const text = (parent: DocumentFragment | Node, pillar: Pillar): ReactNode[] =>
+    Array.from(parent.childNodes).map(textElement(pillar));
+
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
-    const text = node.textContent ?? '';
+    const textContext = node.textContent ?? '';
     switch (node.nodeName) {
         case 'P':
-            return h(Paragraph, { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h(Paragraph, { key }, text(node, pillar));
         case '#text':
-            return transform(text, pillar);
+            return transform(textContext, pillar);
         case 'SPAN':
             return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h(Anchor, { href: getHref(node).withDefault(''), text: textContext, pillar, key }, text(node, pillar));
         case 'H2':
-            return h(HeadingTwo, { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h(HeadingTwo, { key }, text(node, pillar));
         case 'BLOCKQUOTE':
-            return h('blockquote', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h('blockquote', { key }, text(node, pillar));
         case 'STRONG':
-            return h('strong', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h('strong', { key }, text(node, pillar));
         case 'EM':
-            return h('em', { key }, Array.from(node.childNodes).map(textElement(pillar)));
+            return h('em', { key }, text(node, pillar));
         case 'BR':
             return h('br', { key }, null);
         case 'UL':
-            return styledH('ul', { css: listStyles }, Array.from(node.childNodes).map(textElement(pillar)));
+            return styledH('ul', { css: listStyles }, text(node, pillar));
         case 'LI':
-            return styledH('li', { css: listItemStyles }, Array.from(node.childNodes).map(textElement(pillar)));
+            return styledH('li', { css: listItemStyles }, text(node, pillar));
         default:
             return null;
     }
 }
-
-const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
-    Array.from(doc.childNodes).map(textElement(pillar));
 
 const makeCaption = (caption: string, displayCredit: boolean, credit: string): string =>
     displayCredit ? `${caption} ${credit}` : caption;
