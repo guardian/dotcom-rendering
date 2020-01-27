@@ -3,7 +3,6 @@ import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { between, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Avatar } from '@root/src/web/components/Avatar';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -86,26 +85,6 @@ const getBylineImageUrl = (tags: TagType[]) => {
 const getAuthorName = (tags: TagType[]) => {
     const contributorTag = tags.find(tag => tag.type === 'Contributor');
     return contributorTag && contributorTag.title;
-};
-
-const decideEffect = (
-    designType: DesignType,
-    pillar: Pillar,
-): LineEffectType => {
-    if (pillar === 'sport') {
-        return 'dotted';
-    }
-    if (designType === 'Feature') {
-        return 'squiggly';
-    }
-    return 'straight';
-};
-
-const decideLineCount = (designType?: DesignType): 8 | 4 => {
-    if (designType === 'Comment') {
-        return 8;
-    }
-    return 4;
 };
 
 const shouldShowAvatar = (designType: DesignType, isImmersive?: boolean) => {
@@ -236,11 +215,6 @@ export const ArticleMeta = ({
 
     return (
         <div className={metaContainer}>
-            <GuardianLines
-                pillar={pillar}
-                effect={decideEffect(designType, pillar)}
-                count={decideLineCount(designType)}
-            />
             <div className={cx(meta)}>
                 <RowBelowLeftCol>
                     <>
