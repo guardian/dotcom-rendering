@@ -36,8 +36,8 @@ const yellowBoxStyles = css`
 const opinionStyles = (pillar: Pillar) => css`
     ${headline.medium({
         fontWeight: 'light',
-        lineHeight: 'loose',
     })}
+    line-height: 38px;
     font-style: italic;
     color: ${palette[pillar].main};
 
