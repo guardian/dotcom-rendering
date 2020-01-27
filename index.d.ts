@@ -329,12 +329,9 @@ interface CardHeadlineType {
 /**
  * Onwards
  */
-type OnwardsLayoutType = 'fourAndFour';
-
 type OnwardsType = {
     heading: string;
     trails: TrailType[];
-    layout: OnwardsLayoutType;
 };
 
 /**
@@ -437,8 +434,8 @@ interface TrailType {
     url: string;
     headline: string;
     isLiveBlog: boolean;
-    image: string;
     webPublicationDate: string;
+    image?: string;
     avatarUrl?: string;
     mediaType?: MediaType;
     mediaDuration?: number;

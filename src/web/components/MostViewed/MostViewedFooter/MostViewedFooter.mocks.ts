@@ -16,3 +16,12 @@ export const responseWithOneTab = {
     mostCommented: mockMostCommented,
     mostShared: mockMostShared,
 };
+
+export const responseWithMissingImage = {
+    tabs: [mockTab1],
+    mostCommented: mockMostCommented,
+    mostShared: {
+        ...mockMostShared,
+        image: null,
+    },
+};

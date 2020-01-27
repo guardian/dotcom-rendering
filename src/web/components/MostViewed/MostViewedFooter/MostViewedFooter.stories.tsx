@@ -7,6 +7,7 @@ import { MostViewedFooter } from './MostViewedFooter';
 import {
     responseWithTwoTabs,
     responseWithOneTab,
+    responseWithMissingImage,
 } from './MostViewedFooter.mocks';
 
 /* tslint:disable */
@@ -29,7 +30,6 @@ export const withTwoTabs = () => {
                 sectionName="politics"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
             />
-            ;
         </Section>
     );
 };
@@ -47,8 +47,24 @@ export const withOneTabs = () => {
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
             />
-            ;
         </Section>
     );
 };
 withOneTabs.story = { name: 'with one tab' };
+
+export const withNoMostSharedImage = () => {
+    fetchMock.restore().getOnce('*', {
+        status: 200,
+        body: responseWithMissingImage,
+    });
+
+    return (
+        <Section>
+            <MostViewedFooter
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />
+        </Section>
+    );
+};
+withNoMostSharedImage.story = { name: 'with a missing image on most shared' };
