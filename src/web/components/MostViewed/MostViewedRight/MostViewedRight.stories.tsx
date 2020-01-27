@@ -7,8 +7,8 @@ import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
 
+import { mockTab1 } from '@root/fixtures/mostViewed';
 import { MostViewedRight } from './MostViewedRight';
-import { response } from './MostViewedRight.mocks';
 
 /* tslint:disable */
 export default {
@@ -20,7 +20,7 @@ export default {
 export const defaultStory = () => {
     fetchMock.restore().getOnce('*', {
         status: 200,
-        body: response.data,
+        body: mockTab1,
     });
 
     return (
@@ -53,7 +53,7 @@ defaultStory.story = { name: 'default' };
 export const limitItemsStory = () => {
     fetchMock.restore().getOnce('*', {
         status: 200,
-        body: response.data,
+        body: mockTab1,
     });
 
     return (
@@ -83,7 +83,7 @@ limitItemsStory.story = { name: 'with a limit of 3 items' };
 export const outsideContextStory = () => {
     fetchMock.restore().getOnce('*', {
         status: 200,
-        body: response.data,
+        body: mockTab1,
     });
 
     return (

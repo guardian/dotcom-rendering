@@ -3,7 +3,8 @@ import fetchMock from 'fetch-mock';
 
 import { CAPI } from '@root/fixtures/CAPI';
 import { NAV } from '@root/fixtures/NAV';
-import { mockTab1 } from '@root/fixtures/mostViewed';
+import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
+import { meta } from '@root/fixtures/article';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -26,12 +27,32 @@ export default {
 export const ShowcaseLayoutRender = () => {
     fetchMock
         .restore()
+        // Most read by Geo
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true',
             {
                 status: 200,
                 body: mockTab1,
             },
+            { overwriteRoutes: false },
+        )
+        // Most read by category
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/most-read/money.json?dcr=true',
+            {
+                status: 200,
+                body: responseWithTwoTabs,
+            },
+            { overwriteRoutes: false },
+        )
+        // Article metadata
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/sharecount/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software.json',
+            {
+                status: 200,
+                body: meta,
+            },
+            { overwriteRoutes: false },
         );
 
     setTimeout(() => hydrateIslands(CAPI, NAV));
@@ -41,12 +62,32 @@ export const ShowcaseLayoutRender = () => {
 export const StandardLayoutRender = () => {
     fetchMock
         .restore()
+        // Most read by Geo
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true',
             {
                 status: 200,
                 body: mockTab1,
             },
+            { overwriteRoutes: false },
+        )
+        // Most read by category
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/most-read/money.json?dcr=true',
+            {
+                status: 200,
+                body: responseWithTwoTabs,
+            },
+            { overwriteRoutes: false },
+        )
+        // Article metadata
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/sharecount/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software.json',
+            {
+                status: 200,
+                body: meta,
+            },
+            { overwriteRoutes: false },
         );
 
     setTimeout(() => hydrateIslands(CAPI, NAV));

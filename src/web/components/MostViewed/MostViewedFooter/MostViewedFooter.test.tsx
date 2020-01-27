@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { MostViewedFooter } from './MostViewedFooter';
 import {
     responseWithTwoTabs,
     responseWithOneTab,
-} from './MostViewedFooter.mocks';
+} from '@root/fixtures/mostViewed';
+import { MostViewedFooter } from './MostViewedFooter';
 
 import { useApi as useApi_ } from '../../lib/api';
 
