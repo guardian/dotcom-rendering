@@ -140,17 +140,17 @@ const transform = (text: string, pillar: Pillar): ReactElement | string => {
 }
 
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
-    const textContext = node.textContent ?? '';
+    const text = node.textContent ?? '';
     const children = Array.from(node.childNodes).map(textElement(pillar));
     switch (node.nodeName) {
         case 'P':
             return h(Paragraph, { key }, children);
         case '#text':
-            return transform(textContext, pillar);
+            return transform(text, pillar);
         case 'SPAN':
-            return textContext;
+            return text;
         case 'A':
-            return h(Anchor, { href: getHref(node).withDefault(''), text: textContext, pillar, key }, children);
+            return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, children);
         case 'H2':
             return h(HeadingTwo, { key }, children);
         case 'BLOCKQUOTE':
