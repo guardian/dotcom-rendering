@@ -626,6 +626,7 @@ export const CAPI: CAPIType = {
         dcrSentryDsn:
             'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
         switches: {},
+        shortUrlId: '/p/4k83z',
         abTests: {},
         dfpAccountId: '',
         commercialBundleUrl:

@@ -1,35 +1,40 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { pillarPalette } from '@root/src/lib/pillars';
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 
-import ShareIcon from '@frontend/static/icons/share.svg';
+import CommentIcon from '@frontend/static/icons/comment.svg';
 
 type Props = {
+    pillar: Pillar;
     short: string;
     long: string;
 };
 
-const containerStyles = css`
+const containerStyles = (pillar: Pillar) => css`
     display: flex;
     align-self: flex-end;
     flex-direction: column;
     ${textSans.medium()};
     font-weight: bold;
-    color: ${palette.neutral[46]};
+    color: ${pillarPalette[pillar].main};
 `;
 
 const iconContainerStyles = css`
     height: 15px;
     margin: 0;
     text-align: right;
-    margin-bottom: 3px;
+    margin-bottom: -2px;
+    svg {
+        height: 18px;
+        width: 18px;
+    }
 `;
 
-const iconStyles = css`
-    fill: ${palette.neutral[46]};
+const iconStyles = (pillar: Pillar) => css`
+    fill: ${pillarPalette[pillar].main};
 `;
 
 const longStyles = css`
@@ -48,25 +53,25 @@ const shortStyles = css`
     }
 `;
 
-export const ShareCount = ({ short, long }: Props) => {
+export const CommentCount = ({ short, long, pillar }: Props) => {
     return (
         <div
-            className={containerStyles}
-            aria-label={`${short} Shares`}
-            data-cy="share-counts"
+            className={containerStyles(pillar)}
+            aria-label={`${short} Comments`}
+            data-cy="comment-counts"
         >
             <div className={iconContainerStyles}>
-                <ShareIcon className={iconStyles} />
+                <CommentIcon className={iconStyles(pillar)} />
             </div>
             <div
-                data-testid="long-share-count"
+                data-testid="long-comment-count"
                 className={longStyles}
                 aria-hidden="true"
             >
                 {long}
             </div>
             <div
-                data-testid="short-share-count"
+                data-testid="short-comment-count"
                 className={shortStyles}
                 aria-hidden="true"
             >
