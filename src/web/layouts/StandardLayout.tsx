@@ -15,6 +15,7 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -30,6 +31,7 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
+import { decideLineCount, decideLineEffect } from './layoutHelpers';
 import { Border } from './Border';
 import { GridItem } from './GridItem';
 
@@ -78,8 +80,9 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title  border  headline    right-column'
                         '.      border  standfirst  right-column'
+                        'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        '.      border  body        right-column';
+                        'meta   border  body        right-column';
                 }
 
                 ${until.wide} {
@@ -91,8 +94,9 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title  border  headline    right-column'
                         '.      border  standfirst  right-column'
+                        'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        '.      border  body        right-column';
+                        'meta   border  body        right-column';
                 }
 
                 ${until.leftCol} {
@@ -104,6 +108,7 @@ const StandardGrid = ({
                         'headline   right-column'
                         'standfirst right-column'
                         'media      right-column'
+                        'lines      right-column'
                         'meta       right-column'
                         'body       right-column';
                 }
@@ -115,6 +120,7 @@ const StandardGrid = ({
                         'headline'
                         'standfirst'
                         'media'
+                        'lines'
                         'meta'
                         'body';
                 }
@@ -128,6 +134,7 @@ const StandardGrid = ({
                         'title'
                         'headline'
                         'standfirst'
+                        'lines'
                         'meta'
                         'body';
                 }
@@ -141,6 +148,13 @@ const StandardGrid = ({
 const maxWidth = css`
     ${from.desktop} {
         max-width: 620px;
+    }
+`;
+
+const stretchLines = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 `;
 
@@ -226,14 +240,18 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
-                            <ArticleHeadline
-                                headlineString={CAPI.headline}
+                            <ArticleHeadlinePadding
                                 designType={CAPI.designType}
-                                pillar={CAPI.pillar}
-                                webPublicationDate={CAPI.webPublicationDate}
-                                tags={CAPI.tags}
-                                byline={CAPI.author.byline}
-                            />
+                            >
+                                <ArticleHeadline
+                                    headlineString={CAPI.headline}
+                                    designType={CAPI.designType}
+                                    pillar={CAPI.pillar}
+                                    webPublicationDate={CAPI.webPublicationDate}
+                                    tags={CAPI.tags}
+                                    byline={CAPI.author.byline}
+                                />
+                            </ArticleHeadlinePadding>
                         </div>
                     </GridItem>
                     <GridItem area="standfirst">
@@ -250,6 +268,20 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 pillar={CAPI.pillar}
                                 adTargeting={adTargeting}
                             />
+                        </div>
+                    </GridItem>
+                    <GridItem area="lines">
+                        <div className={maxWidth}>
+                            <div className={stretchLines}>
+                                <GuardianLines
+                                    pillar={CAPI.pillar}
+                                    effect={decideLineEffect(
+                                        CAPI.designType,
+                                        CAPI.pillar,
+                                    )}
+                                    count={decideLineCount(CAPI.designType)}
+                                />
+                            </div>
                         </div>
                     </GridItem>
                     <GridItem area="meta">

@@ -9,11 +9,19 @@ const wrapperMargins = css`
 export const SlotBodyEnd = () => {
     const endpointUrl = 'https://contributions.guardianapis.com/epic';
 
-    const trackingParams = {};
+    const trackingParams = {
+        ophanPageId: window.guardian.config.ophan?.pageViewId,
+        ophanComponentId: 'ACQUISITIONS_EPIC',
+        platformId: 'GUARDIAN_WEB',
+        campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
+        abTestName: 'remote_epic_test',
+        abTestVariant: 'api',
+        referrerUrl: window.location.href.split('?')[0],
+    };
     const { data, error } = useApi(endpointUrl, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(trackingParams),
     });

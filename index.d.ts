@@ -350,6 +350,7 @@ interface ConfigType {
     dfpAccountId: string;
     commercialBundleUrl: string;
     revisionNumber: string;
+    shortUrlId: string;
     isDev?: boolean;
     googletagUrl: string;
     stage: string;

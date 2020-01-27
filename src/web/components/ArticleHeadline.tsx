@@ -60,14 +60,6 @@ const lightFont = css`
     }
 `;
 
-const standardPadding = css`
-    padding-bottom: 24px;
-    padding-top: 3px;
-    ${from.tablet} {
-        padding-bottom: 36px;
-    }
-`;
-
 const underlinedStyles = css`
     background-image: repeating-linear-gradient(
         to bottom,
@@ -187,11 +179,7 @@ const renderHeadline = ({
         case 'GuardianLabs':
         case 'Quiz':
         case 'AdvertisementFeature':
-            return (
-                <h1 className={cx(standardFont, standardPadding)}>
-                    {curly(headlineString)}
-                </h1>
-            );
+            return <h1 className={standardFont}>{curly(headlineString)}</h1>;
 
         case 'Review':
         case 'Feature':
@@ -199,7 +187,6 @@ const renderHeadline = ({
                 <h1
                     className={cx(
                         boldFont,
-                        standardPadding,
                         colourStyles(options && options.colour),
                     )}
                 >
@@ -208,21 +195,11 @@ const renderHeadline = ({
             );
 
         case 'Comment':
-            return (
-                <h1 className={cx(lightFont, standardPadding)}>
-                    {curly(headlineString)}
-                </h1>
-            );
+            return <h1 className={lightFont}>{curly(headlineString)}</h1>;
 
         case 'Analysis':
             return (
-                <h1
-                    className={cx(
-                        standardFont,
-                        standardPadding,
-                        underlinedStyles,
-                    )}
-                >
+                <h1 className={cx(standardFont, underlinedStyles)}>
                     {curly(headlineString)}
                 </h1>
             );
@@ -244,7 +221,14 @@ const renderHeadline = ({
                             {curly(headlineString)}
                         </span>
                     </h1>
-                    {byline && <HeadlineByline byline={byline} tags={tags} />}
+                    {byline && (
+                        <HeadlineByline
+                            designType={designType}
+                            pillar={pillar}
+                            byline={byline}
+                            tags={tags}
+                        />
+                    )}
                 </div>
             );
 

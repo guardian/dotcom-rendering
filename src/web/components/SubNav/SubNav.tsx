@@ -1,26 +1,8 @@
 import React, { Component, createRef } from 'react';
-import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { GuardianLines } from '@frontend/web/components/GuardianLines';
+
 import { Inner } from './Inner';
-
-const multiLine = css`
-    background-image: repeating-linear-gradient(
-        to bottom,
-        ${palette.neutral[86]},
-        ${palette.neutral[86]} 1px,
-        transparent 1px,
-        transparent 4px
-    );
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: 1px 13px;
-    background-color: ${palette.neutral[100]};
-    content: '';
-    clear: left;
-    display: block;
-    height: 13px;
-`;
 
 interface Props {
     subnav: {
@@ -101,7 +83,7 @@ export class SubNav extends Component<
                     toggle={this.toggle}
                     currentNavLink={currentNavLink}
                 />
-                <div className={multiLine} />
+                <GuardianLines pillar={pillar} />
             </div>
         );
     }
