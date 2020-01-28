@@ -22,7 +22,7 @@ export const SlotBodyEnd = () => {
     // Putting together the request payload
     const postBody = {
         tracking: {
-            ophanPageId: window.guardian.config.ophan.pageViewId,
+            ophanPageId: window.guardian.config.ophan?.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
             campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
