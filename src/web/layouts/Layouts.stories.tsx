@@ -5,6 +5,7 @@ import { CAPI } from '@root/fixtures/CAPI';
 import { NAV } from '@root/fixtures/NAV';
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
 import { meta } from '@root/fixtures/article';
+import { commentCount } from '@root/fixtures/commentCounts';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
 import { ShowcaseLayout } from './ShowcaseLayout';
@@ -33,6 +34,15 @@ export const ShowcaseLayoutRender = () => {
             {
                 status: 200,
                 body: mockTab1,
+            },
+            { overwriteRoutes: false },
+        )
+        // Comment count
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=/p/4k83z',
+            {
+                status: 200,
+                body: commentCount,
             },
             { overwriteRoutes: false },
         )
@@ -68,6 +78,15 @@ export const StandardLayoutRender = () => {
             {
                 status: 200,
                 body: mockTab1,
+            },
+            { overwriteRoutes: false },
+        )
+        // Comment count
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=/p/4k83z',
+            {
+                status: 200,
+                body: commentCount,
             },
             { overwriteRoutes: false },
         )
