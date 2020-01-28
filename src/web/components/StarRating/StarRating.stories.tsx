@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { StarRating } from './StarRating';
+import { StarRatingMargin } from './StarRatingMargin';
 
 /* tslint:disable */
 export default {
@@ -72,3 +73,27 @@ export const LargeStory = () => (
     </>
 );
 LargeStory.story = { name: 'Large stars' };
+
+export const Margin = () => (
+    <>
+        <h1>Margin</h1>
+        <br />
+        <StarRatingMargin>
+            <StarRating rating={2} size="large" />
+        </StarRatingMargin>
+        <StarRatingMargin>
+            <StarRating rating={3} size="large" />
+        </StarRatingMargin>
+        <StarRatingMargin>
+            <StarRating rating={4} size="large" />
+        </StarRatingMargin>
+        <br />
+        <h1>No Margin</h1>
+        <br />
+        <StarRating rating={2} size="large" />
+        <br />
+        <StarRating rating={3} size="large" />
+        <br />
+        <StarRating rating={4} size="large" />
+    </>
+);
