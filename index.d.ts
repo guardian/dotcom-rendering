@@ -190,6 +190,7 @@ interface CAPIType {
     editionLongForm: string;
     editionId: Edition;
     pageId: string;
+    version: number; // TODO: check who uses?
     tags: TagType[];
     pillar: Pillar;
     isImmersive: boolean;
@@ -213,6 +214,8 @@ interface CAPIType {
     guardianBaseURL: string;
     contentType: string;
     hasRelated: boolean;
+    pageType: { [key: string]: boolean };
+    publication: string; // TODO: check who uses?
     hasStoryPackage: boolean;
     beaconURL: string;
     isCommentable: boolean;

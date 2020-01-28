@@ -1,31 +1,27 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
-import { CAPI } from '@root/fixtures/CAPI/CAPI';
+import { showcaseReviewCAPI } from '@root/fixtures/CAPI/review/showcaseReview';
+import { standardReviewCAPI } from '@root/fixtures/CAPI/review/standardReview';
 import { NAV } from '@root/fixtures/NAV';
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
 import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
-import { ShowcaseLayout } from './ShowcaseLayout';
-import { StandardLayout } from './StandardLayout';
+import { ShowcaseLayout } from '@root/src/web/layouts/ShowcaseLayout';
+import { StandardLayout } from '@root/src/web/layouts/StandardLayout';
 
 /* tslint:disable */
 export default {
-    title: 'Components/Layouts',
+    title: 'Articles/Review',
     parameters: {
         chromatic: { delay: 600 },
     },
 };
 /* tslint:enable */
 
-// In order to render React elements of the Layout we need to use hydrateIslands
-// hydrateIslands requires a query selector therefore we need to wrap the function in a setTimeout
-// Storybook runs only what is exported in the const, so we need to add the code in each export const
-// setTimeout(() => hydrateIslands(CAPI, NAV));
-
-export const ShowcaseLayoutRender = () => {
+export const ReviewShowcase = () => {
     fetchMock
         .restore()
         // Most read by Geo
@@ -64,12 +60,12 @@ export const ShowcaseLayoutRender = () => {
             },
             { overwriteRoutes: false },
         );
-
-    setTimeout(() => hydrateIslands(CAPI, NAV));
-    return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
+    // return <div />;
+    setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
+    return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
 };
 
-export const StandardLayoutRender = () => {
+export const ReviewStandard = () => {
     fetchMock
         .restore()
         // Most read by Geo
@@ -108,7 +104,7 @@ export const StandardLayoutRender = () => {
             },
             { overwriteRoutes: false },
         );
-
-    setTimeout(() => hydrateIslands(CAPI, NAV));
-    return <StandardLayout CAPI={CAPI} NAV={NAV} />;
+    // return <div />;
+    setTimeout(() => hydrateIslands(standardReviewCAPI, NAV));
+    return <StandardLayout CAPI={standardReviewCAPI} NAV={NAV} />;
 };
