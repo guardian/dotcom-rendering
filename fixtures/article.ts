@@ -3017,3 +3017,10 @@ export const data = {
     },
     version: 2,
 };
+
+export const meta = {
+    path:
+        'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+    share_count: 273,
+    refreshStatus: true,
+};

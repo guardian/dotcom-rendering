@@ -1,14 +1,13 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
-import { Section } from '@frontend/web/components/Section';
-
-import { MostViewedFooter } from './MostViewedFooter';
 import {
     responseWithTwoTabs,
     responseWithOneTab,
     responseWithMissingImage,
-} from './MostViewedFooter.mocks';
+} from '@root/fixtures/mostViewed';
+import { Section } from '@frontend/web/components/Section';
+import { MostViewedFooter } from './MostViewedFooter';
 
 /* tslint:disable */
 export default {
