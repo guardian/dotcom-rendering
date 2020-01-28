@@ -35,7 +35,7 @@ const withComments = (
     onwardSections: OnwardsType[],
     counts: CommentType[],
 ): OnwardsType[] => {
-    if (counts.length === 0) return [];
+    if (counts.length === 0) return onwardSections;
     const updatedSections: OnwardsType[] = [];
     onwardSections.forEach(section => {
         const updatedTrails = updateTrailsWithCounts(section.trails, counts);
