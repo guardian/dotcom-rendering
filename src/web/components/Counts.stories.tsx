@@ -1,5 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
+import fetchMock from 'fetch-mock';
+
+import { meta } from '@root/fixtures/article';
+import { commentCount } from '@root/fixtures/commentCounts';
 
 import { Counts } from './Counts';
 
@@ -35,6 +39,34 @@ export const Live = () => {
 Live.story = { name: 'with both results' };
 
 export const ShareOnly = () => {
+    fetchMock
+        .restore()
+        // Comment count
+        .getOnce(
+            'begin:https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=',
+            {
+                status: 200,
+                body: {
+                    counts: [
+                        {
+                            id: '/p/4k83z',
+                            count: 0,
+                        },
+                    ],
+                },
+            },
+            { overwriteRoutes: false },
+        )
+        // Share count
+        .getOnce(
+            'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+            {
+                status: 200,
+                body: meta,
+            },
+            { overwriteRoutes: false },
+        );
+
     return (
         <Container>
             <Counts
@@ -49,6 +81,31 @@ export const ShareOnly = () => {
 ShareOnly.story = { name: 'with share count only' };
 
 export const CommentOnly = () => {
+    fetchMock
+        .restore()
+        // Comment count
+        .getOnce(
+            'begin:https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=',
+            {
+                status: 200,
+                body: commentCount,
+            },
+            { overwriteRoutes: false },
+        )
+        // Share count
+        .getOnce(
+            'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+            {
+                status: 200,
+                body: {
+                    path:
+                        'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                    share_count: 0,
+                    refreshStatus: true,
+                },
+            },
+            { overwriteRoutes: false },
+        );
     return (
         <Container>
             <Counts
