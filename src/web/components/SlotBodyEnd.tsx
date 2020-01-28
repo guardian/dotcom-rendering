@@ -7,12 +7,22 @@ const wrapperMargins = css`
 `;
 
 export const SlotBodyEnd = () => {
-    // const endpointUrl = 'https://contributions.guardianapis.com/epic';
-    const endpointUrl = 'http://localhost:8081/epic';
+    // Page properties needed by Contributions service
+    // Destructuring for convenience
+    const {
+        contentType,
+        sectionName,
+        shouldHideReaderRevenue,
+        pageType,
+        tags,
+    } = window.guardian.app.data.CAPI;
 
+    const { isMinuteArticle, isPaidContent } = pageType;
+
+    // Putting together the request payload
     const postBody = {
         tracking: {
-            ophanPageId: window.guardian.config.ophan?.pageViewId,
+            ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
             campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
@@ -21,9 +31,20 @@ export const SlotBodyEnd = () => {
             referrerUrl: window.location.href.split('?')[0],
         },
         localisation: {
-            countryCode: 'GB'
-        }
+            countryCode: 'GB', // TODO: make this dynamic
+        },
+        targeting: {
+            contentType,
+            sectionName,
+            shouldHideReaderRevenue,
+            isMinuteArticle,
+            isPaidContent,
+            tags,
+        },
     };
+
+    // const endpointUrl = 'https://contributions.guardianapis.com/epic';
+    const endpointUrl = 'http://localhost:8081/epic';
     const { data, error } = useApi(endpointUrl, {
         method: 'POST',
         headers: {
