@@ -4,6 +4,8 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
+import { StarRatingMargin } from '@root/src/web/components/StarRating/StarRatingMargin';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -253,6 +255,16 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 />
                             </ArticleHeadlinePadding>
                         </div>
+                        {CAPI.starRating || CAPI.starRating === 0 ? (
+                            <StarRatingMargin>
+                                <StarRating
+                                    rating={CAPI.starRating}
+                                    size="large"
+                                />
+                            </StarRatingMargin>
+                        ) : (
+                            <></>
+                        )}
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst

@@ -8,6 +8,11 @@ const ratingsWrapper = css`
     display: inline-block;
 `;
 
+const starWrapper = css`
+    display: inline-block;
+    padding: 1px;
+`;
+
 type SizeType = 'large' | 'medium' | 'small';
 
 const emptyStar = css`
@@ -50,12 +55,15 @@ export const StarRating: React.FC<{
     const stars = (n: number) => {
         return Array(5)
             .fill(0)
-            .map((el, i) => {
-                if (i < n) {
-                    return <Star key={i} />;
-                }
-                return <Star className={emptyStar} key={i} />;
-            });
+            .map((el, i) => (
+                <div className={starWrapper}>
+                    {i < n ? (
+                        <Star key={i} />
+                    ) : (
+                        <Star className={emptyStar} key={i} />
+                    )}
+                </div>
+            ));
     };
     return (
         <div className={cx(ratingsWrapper, determinSize(size))}>

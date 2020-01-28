@@ -520,7 +520,6 @@ export const CAPI: CAPIType = {
         AU: { adTargeting: [] },
         INT: { adTargeting: [] },
     },
-    starRating: 2,
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',
     keyEvents: [],
