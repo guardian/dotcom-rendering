@@ -36,8 +36,8 @@ const yellowBoxStyles = css`
 const opinionStyles = (pillar: Pillar) => css`
     ${headline.medium({
         fontWeight: 'light',
-        lineHeight: 'loose',
     })}
+    line-height: 38px;
     font-style: italic;
     color: ${palette[pillar].main};
 
@@ -50,31 +50,6 @@ const opinionStyles = (pillar: Pillar) => css`
     }
 `;
 
-const determineStyles = (designType: DesignType, pillar: Pillar) => {
-    switch (designType) {
-        case 'Interview':
-            return yellowBoxStyles;
-        case 'Comment':
-            return opinionStyles(pillar);
-        case 'Feature':
-        case 'Review':
-        case 'Live':
-        case 'Media':
-        case 'Analysis':
-        case 'Article':
-        case 'SpecialReport':
-        case 'Recipe':
-        case 'MatchReport':
-        case 'GuardianView':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        case 'Immersive':
-        default:
-            return undefined;
-    }
-};
-
 type Props = {
     designType: 'Interview' | 'Comment';
     pillar: Pillar;
@@ -82,10 +57,23 @@ type Props = {
     tags: TagType[];
 };
 
-export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => (
-    <div className={wrapperStyles}>
-        <div className={determineStyles(designType, pillar)}>
-            <BylineLink byline={byline} tags={tags} />
-        </div>
-    </div>
-);
+export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
+    switch (designType) {
+        case 'Interview':
+            return (
+                <div className={wrapperStyles}>
+                    <div className={yellowBoxStyles}>
+                        <BylineLink byline={byline} tags={tags} />
+                    </div>
+                </div>
+            );
+        case 'Comment':
+            return (
+                <div className={opinionStyles(pillar)}>
+                    <BylineLink byline={byline} tags={tags} />
+                </div>
+            );
+        default:
+            return null;
+    }
+};
