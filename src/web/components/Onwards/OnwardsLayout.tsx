@@ -4,6 +4,8 @@ import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { Hide } from '@frontend/web/components/Hide';
 
+import { useComments } from '@frontend/web/components/lib/useComments';
+
 import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';
@@ -33,23 +35,27 @@ const decideLayout = (trails: TrailType[]) => {
     }
 };
 
-export const OnwardsLayout = ({ onwardSections }: Props) => (
-    <>
-        {onwardSections.map((onward, index) => (
-            <Flex key={`${onward.heading}-${index}`}>
-                <LeftColumn
-                    showRightBorder={false}
-                    showPartialRightBorder={true}
-                >
-                    <OnwardsTitle title={onward.heading} />
-                </LeftColumn>
-                <OnwardsContainer>
-                    <Hide when="above" breakpoint="leftCol">
+export const OnwardsLayout = ({ onwardSections }: Props) => {
+    const withComments = useComments(onwardSections);
+
+    return (
+        <>
+            {withComments.map((onward, index) => (
+                <Flex key={`${onward.heading}-${index}`}>
+                    <LeftColumn
+                        showRightBorder={false}
+                        showPartialRightBorder={true}
+                    >
                         <OnwardsTitle title={onward.heading} />
-                    </Hide>
-                    {decideLayout(onward.trails.slice(0, 8))}
-                </OnwardsContainer>
-            </Flex>
-        ))}
-    </>
-);
+                    </LeftColumn>
+                    <OnwardsContainer>
+                        <Hide when="above" breakpoint="leftCol">
+                            <OnwardsTitle title={onward.heading} />
+                        </Hide>
+                        {decideLayout(onward.trails.slice(0, 8))}
+                    </OnwardsContainer>
+                </Flex>
+            ))}
+        </>
+    );
+};
