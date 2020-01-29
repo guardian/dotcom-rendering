@@ -25,7 +25,7 @@ export interface WindowGuardianConfig {
     };
     switches: { [key: string]: boolean };
     tests?: { [key: string]: string };
-    ophan?: {
+    ophan: {
         pageViewId: string;
     };
 }

@@ -7,7 +7,7 @@ const wrapperMargins = css`
 `;
 
 export const SlotBodyEnd = () => {
-    // Page properties needed by Contributions service
+    // CAPI data needed by the Contributions service
     // Destructuring for convenience
     const {
         contentType,
@@ -22,7 +22,7 @@ export const SlotBodyEnd = () => {
     // Putting together the request payload
     const postBody = {
         tracking: {
-            ophanPageId: window.guardian.config.ophan?.pageViewId,
+            ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
             campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
@@ -43,8 +43,7 @@ export const SlotBodyEnd = () => {
         },
     };
 
-    // const endpointUrl = 'https://contributions.guardianapis.com/epic';
-    const endpointUrl = 'http://localhost:8081/epic';
+    const endpointUrl = 'https://contributions.guardianapis.com/epic';
     const { data, error } = useApi(endpointUrl, {
         method: 'POST',
         headers: {
