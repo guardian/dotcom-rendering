@@ -5,7 +5,6 @@ import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { StarRatingMargin } from '@root/src/web/components/StarRating/StarRatingMargin';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -160,6 +159,25 @@ const stretchLines = css`
     }
 `;
 
+const starWrapper = css`
+    margin-bottom: 18px;
+    margin-top: 6px;
+    background-color: ${palette.brandYellow.main};
+    display: inline-block;
+
+    ${until.phablet} {
+        padding-left: 20px;
+        margin-left: -20px;
+    }
+    ${until.leftCol} {
+        padding-left: 0px;
+        margin-left: -0px;
+    }
+
+    padding-left: 10px;
+    margin-left: -10px;
+`;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -256,12 +274,12 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             </ArticleHeadlinePadding>
                         </div>
                         {CAPI.starRating || CAPI.starRating === 0 ? (
-                            <StarRatingMargin>
+                            <div className={starWrapper}>
                                 <StarRating
                                     rating={CAPI.starRating}
                                     size="large"
                                 />
-                            </StarRatingMargin>
+                            </div>
                         ) : (
                             <></>
                         )}

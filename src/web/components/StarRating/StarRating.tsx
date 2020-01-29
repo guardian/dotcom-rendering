@@ -1,12 +1,7 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 import Star from '@frontend/static/icons/star.svg';
 import { palette } from '@guardian/src-foundations';
-
-const ratingsWrapper = css`
-    background-color: ${palette.brandYellow.main};
-    display: inline-block;
-`;
 
 const starWrapper = css`
     display: inline-block;
@@ -20,11 +15,11 @@ const emptyStar = css`
     stroke: ${palette.neutral[7]};
 `;
 
-const determinSize = (size: SizeType) => {
+const determinStarSize = (size: SizeType) => {
     switch (size) {
         case 'small':
             return css`
-                padding: 3px;
+                padding: 1px;
                 svg {
                     width: 12px;
                     height: 12px;
@@ -32,10 +27,10 @@ const determinSize = (size: SizeType) => {
             `;
         case 'medium':
             return css`
-                padding: 4px;
+                padding: 1px;
                 svg {
-                    width: 14px;
-                    height: 14px;
+                    width: 16px;
+                    height: 16px;
                 }
             `;
         case 'large':
@@ -65,9 +60,5 @@ export const StarRating: React.FC<{
                 </div>
             ));
     };
-    return (
-        <div className={cx(ratingsWrapper, determinSize(size))}>
-            {stars(rating)}
-        </div>
-    );
+    return <div className={determinStarSize(size)}>{stars(rating)}</div>;
 };

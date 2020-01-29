@@ -16,7 +16,6 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -164,8 +163,25 @@ const mainMediaWrapper = css`
 `;
 
 const starWrapper = css`
-    position: absolute;
     top: 0;
+    position: absolute;
+    background-color: ${palette.brandYellow.main};
+    display: inline-block;
+
+    padding-left: 10px;
+
+    ${until.leftCol} {
+        padding-left: 0px;
+        margin-left: -0px;
+    }
+    ${until.phablet} {
+        padding-left: 20px;
+        margin-left: -20px;
+    }
+    ${until.mobileLandscape} {
+        padding-left: 10px;
+        margin-left: -10px;
+    }
 `;
 
 const PositionHeadline = ({
@@ -301,9 +317,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <PositionHeadline designType={CAPI.designType}>
-                            <ArticleHeadlinePadding
-                                designType={CAPI.designType}
-                            >
+                            <div style={{ paddingBottom: '24px' }}>
                                 <ArticleHeadline
                                     headlineString={CAPI.headline}
                                     designType={CAPI.designType}
@@ -312,7 +326,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     tags={CAPI.tags}
                                     byline={CAPI.author.byline}
                                 />
-                            </ArticleHeadlinePadding>
+                            </div>
                         </PositionHeadline>
                     </GridItem>
                     <GridItem area="media">
