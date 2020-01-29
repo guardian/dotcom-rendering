@@ -60,6 +60,9 @@ const makeWindowGuardianConfig = (
         },
         switches: config.switches,
         tests: config.abTests || {},
+        ophan: {
+            pageViewId: '',
+        },
     } as WindowGuardianConfig;
 };
 
