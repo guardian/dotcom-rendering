@@ -73,6 +73,14 @@ type IslandProps =
           showRelatedContent: boolean;
           keywordIds: string;
           contentType: string;
+      }
+    | {
+          contentType: string;
+          sectionName?: string;
+          shouldHideReaderRevenue: boolean;
+          isMinuteArticle: boolean;
+          isPaidContent: boolean;
+          tags: TagType[];
       };
 
 type IslandType = {
@@ -167,7 +175,14 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
         },
         {
             component: SlotBodyEnd,
-            props: {},
+            props: {
+                contentType: CAPI.contentType,
+                sectionName: CAPI.sectionName,
+                shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
+                isMinuteArticle: CAPI.pageType.isMinuteArticle,
+                isPaidContent: CAPI.pageType.isPaidContent,
+                tags: CAPI.tags,
+            },
             root: 'slot-body-end',
         },
         {

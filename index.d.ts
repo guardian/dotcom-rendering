@@ -168,6 +168,16 @@ type ContentType =
     | 'signup'
     | 'userid';
 
+type PageTypeType = {
+    hasShowcaseMainElement: boolean;
+    isFront: boolean;
+    isLiveblog: boolean;
+    isMinuteArticle: boolean;
+    isPaidContent: boolean;
+    isPreview: boolean;
+    isSensitive: boolean;
+};
+
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
 interface CAPIType {
@@ -226,6 +236,8 @@ interface CAPIType {
     pageFooter: FooterType;
 
     slotMachineFlags?: string;
+
+    pageType: PageTypeType;
 }
 
 interface TagType {

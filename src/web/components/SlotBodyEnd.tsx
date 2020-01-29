@@ -6,19 +6,23 @@ const wrapperMargins = css`
     margin: 18px 0;
 `;
 
-export const SlotBodyEnd = () => {
-    // CAPI data needed by the Contributions service
-    // Destructuring for convenience
-    const {
-        contentType,
-        sectionName,
-        shouldHideReaderRevenue,
-        pageType,
-        tags,
-    } = window.guardian.app.data.CAPI;
+type Props = {
+    contentType: string;
+    sectionName?: string;
+    shouldHideReaderRevenue: boolean;
+    isMinuteArticle: boolean;
+    isPaidContent: boolean;
+    tags: TagType[];
+};
 
-    const { isMinuteArticle, isPaidContent } = pageType;
-
+export const SlotBodyEnd = ({
+    contentType,
+    sectionName,
+    shouldHideReaderRevenue,
+    isMinuteArticle,
+    isPaidContent,
+    tags,
+}: Props) => {
     // Putting together the request payload
     const contributionsPayload = {
         tracking: {
@@ -42,6 +46,9 @@ export const SlotBodyEnd = () => {
             tags,
         },
     };
+
+    console.log('>>> contributionsPayload: ');
+    console.log(contributionsPayload);
 
     const endpointUrl = 'https://contributions.guardianapis.com/epic';
     const { data, error } = useApi(endpointUrl, {
