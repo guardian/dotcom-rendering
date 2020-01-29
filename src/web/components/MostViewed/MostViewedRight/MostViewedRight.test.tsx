@@ -1,10 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { mockTab1 } from '@root/fixtures/mostViewed';
 import { MostViewedRight } from './MostViewedRight';
-import { response } from './MostViewedRight.mocks';
 
 import { useApi as useApi_ } from '../../lib/api';
 
+const response = { data: mockTab1 };
 const useApi: any = useApi_;
 
 jest.mock('../../lib/api', () => ({

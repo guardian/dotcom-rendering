@@ -1,13 +1,8 @@
 import React, { Component, createRef } from 'react';
-import { css } from 'emotion';
 
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
 
 import { Inner } from './Inner';
-
-const subnavWrapper = css`
-    background-color: white;
-`;
 
 interface Props {
     subnav: {
@@ -75,7 +70,7 @@ export class SubNav extends Component<
         const expandSubNav = !showMore || isExpanded;
 
         return (
-            <div className={subnavWrapper}>
+            <div>
                 <Inner
                     links={subnav.links}
                     pillar={pillar}
