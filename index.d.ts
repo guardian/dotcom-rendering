@@ -288,6 +288,7 @@ interface CardType {
     kickerText?: string;
     showPulsingDot?: boolean;
     showSlash?: boolean;
+    commentCount?: number;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';

@@ -8,6 +8,9 @@ import { Avatar } from '@frontend/web/components/Avatar';
 import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
+import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
+
+import { formatCount } from '@root/src/web/components/lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -75,6 +78,7 @@ export const Card = ({
     kickerText,
     showPulsingDot,
     showSlash,
+    commentCount,
 }: CardType) => {
     // Decide how we position the image on the card
     let imageCoverage: CardPercentageType | undefined;
@@ -86,6 +90,8 @@ export const Card = ({
         imageCoverage = coverages.image[imageSize];
         contentCoverage = coverages.content[imageSize];
     }
+
+    const { long: longCount, short: shortCount } = formatCount(commentCount);
 
     return (
         <CardLink linkTo={linkTo} designType={designType} pillar={pillar}>
@@ -179,6 +185,16 @@ export const Card = ({
                                                 />
                                             </>
                                         )}
+                                        {designType !== 'Media' &&
+                                            longCount &&
+                                            shortCount && (
+                                                <>
+                                                    <CardCommentCount
+                                                        long={longCount}
+                                                        short={shortCount}
+                                                    />
+                                                </>
+                                            )}
                                     </>
                                 </CardFooter>
                             </div>

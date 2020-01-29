@@ -17,13 +17,15 @@ const mediaFooterStyles = css`
     padding: 0 5px 5px 5px;
 `;
 
-export const CardFooter = ({ children, designType }: Props) => (
-    <footer
-        className={cx(
-            footerStyles,
-            designType === 'Media' && mediaFooterStyles,
-        )}
-    >
-        {children}
-    </footer>
-);
+export const CardFooter = ({ children, designType }: Props) => {
+    return (
+        <footer
+            className={cx(
+                footerStyles,
+                designType === 'Media' && mediaFooterStyles,
+            )}
+        >
+            {children}
+        </footer>
+    );
+};

@@ -45,6 +45,7 @@ export const News = () => (
                                 imagePosition: 'right',
                                 imageSize: 'large',
                                 standfirst: standfirsts[0],
+                                commentCount: 864,
                             }}
                         />
                     </LI>
@@ -104,6 +105,7 @@ export const News = () => (
                                         kickerText: kickers[2],
                                         imageUrl: images[6],
                                         imagePosition: 'top',
+                                        commentCount: 82224,
                                     }}
                                 />
                             </LI>
@@ -151,6 +153,7 @@ export const News = () => (
                                         headlineText: headlines[6],
                                         headlineSize: 'small',
                                         kickerText: kickers[3],
+                                        commentCount: 26,
                                     }}
                                 />
                             </LI>
@@ -216,6 +219,7 @@ export const News = () => (
                                         headlineText: headlines[11],
                                         headlineSize: 'small',
                                         kickerText: kickers[3],
+                                        commentCount: 44,
                                     }}
                                 />
                             </LI>
@@ -267,6 +271,7 @@ export const InDepth = () => (
                                         imageUrl: images[6],
                                         imagePosition: 'left',
                                         imageSize: 'small',
+                                        commentCount: 864,
                                     }}
                                 />
                             </LI>
@@ -337,6 +342,7 @@ export const InDepth = () => (
                                 kickerText: kickers[0],
                                 imageUrl: images[0],
                                 imagePosition: 'top',
+                                commentCount: 864333,
                             }}
                         />
                     </LI>
@@ -388,6 +394,7 @@ export const Related = () => (
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 imageUrl: images[6],
                                 imagePosition: 'top',
+                                commentCount: 222864,
                             }}
                         />
                     </LI>
@@ -408,6 +415,7 @@ export const Related = () => (
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 imageUrl: images[4],
                                 imagePosition: 'top',
+                                commentCount: 4,
                             }}
                         />
                     </LI>
@@ -543,6 +551,7 @@ export const Quad = () => (
                                     alt: 'Avatar alt text',
                                 },
                                 showClock: true,
+                                commentCount: 3,
                             }}
                         />
                     </LI>
@@ -563,6 +572,7 @@ export const Quad = () => (
                                 imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
+                                commentCount: 30989,
                             }}
                         />
                     </LI>
@@ -584,6 +594,7 @@ export const Quad = () => (
                                 imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
+                                commentCount: 0,
                             }}
                         />
                     </LI>
@@ -641,6 +652,7 @@ export const Media = () => (
                                 imagePosition: 'top',
                                 showClock: true,
                                 mediaType: 'Gallery',
+                                commentCount: 0, // I should not show
                             }}
                         />
                     </LI>
@@ -664,6 +676,7 @@ export const Media = () => (
                                 showClock: true,
                                 mediaType: 'Audio',
                                 mediaDuration: 35999,
+                                commentCount: 864, // I should not show
                             }}
                         />
                     </LI>
