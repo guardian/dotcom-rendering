@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -8,6 +8,8 @@ import { between } from '@guardian/src-foundations/mq';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
 type Props = {
+    designType: DesignType;
+    pillar: Pillar;
     short: string;
     long: string;
 };
@@ -47,9 +49,31 @@ const shortStyles = css`
     }
 `;
 
-export const CardCommentCount = ({ short, long }: Props) => {
+const mediaStyles = (pillar: Pillar) => css`
+    /* Below we force the colour to be bright if the pillar is news (because it looks better) */
+    color: ${pillar === 'news' ? palette[pillar].bright : palette[pillar].main};
+
+    svg {
+        fill: ${pillar === 'news'
+            ? palette[pillar].bright
+            : palette[pillar].main};
+    }
+`;
+
+export const CardCommentCount = ({
+    designType,
+    pillar,
+    short,
+    long,
+}: Props) => {
     return (
-        <div className={containerStyles} aria-label={`${short} Comments`}>
+        <div
+            className={cx(
+                containerStyles,
+                designType === 'Media' && mediaStyles(pillar),
+            )}
+            aria-label={`${short} Comments`}
+        >
             <div className={iconContainerStyles}>
                 <CommentIcon />
             </div>
