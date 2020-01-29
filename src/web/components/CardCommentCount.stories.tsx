@@ -23,8 +23,27 @@ const Container = ({ children }: { children: JSXElements }) => (
 export const CommentCountStory = () => {
     return (
         <Container>
-            <CardCommentCount short="11k" long="10,899" />
+            <CardCommentCount
+                designType="Article"
+                pillar="news"
+                short="11k"
+                long="10,899"
+            />
         </Container>
     );
 };
 CommentCountStory.story = { name: 'default' };
+
+export const MediaStory = () => {
+    return (
+        <Container>
+            <CardCommentCount
+                designType="Media"
+                pillar="culture"
+                short="11k"
+                long="10,899"
+            />
+        </Container>
+    );
+};
+MediaStory.story = { name: 'Media' };

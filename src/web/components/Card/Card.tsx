@@ -3,7 +3,6 @@ import React from 'react';
 import { palette } from '@guardian/src-foundations';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
-import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
@@ -18,7 +17,6 @@ import { CardLayout } from './components/CardLayout';
 import { ImageWrapper } from './components/ImageWrapper';
 import { AvatarContainer } from './components/AvatarContainer';
 import { StandfirstWrapper } from './components/StandfirstWrapper';
-import { LinesWrapper } from './components/LinesWrapper';
 import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
@@ -154,9 +152,10 @@ export const Card = ({
                                         </AvatarContainer>
                                     </Hide>
                                 )}
-                                <CardFooter designType={designType}>
-                                    <>
-                                        {webPublicationDate && (
+                                <CardFooter
+                                    designType={designType}
+                                    age={
+                                        webPublicationDate ? (
                                             <CardAge
                                                 designType={designType}
                                                 pillar={pillar}
@@ -165,16 +164,12 @@ export const Card = ({
                                                 }
                                                 showClock={showClock}
                                             />
-                                        )}
-                                        {designType === 'Comment' && (
-                                            <LinesWrapper>
-                                                <GuardianLines
-                                                    pillar="opinion"
-                                                    count={4}
-                                                />
-                                            </LinesWrapper>
-                                        )}
-                                        {designType === 'Media' && mediaType && (
+                                        ) : (
+                                            undefined
+                                        )
+                                    }
+                                    mediaMeta={
+                                        designType === 'Media' && mediaType ? (
                                             <>
                                                 <MediaMeta
                                                     pillar={pillar}
@@ -184,19 +179,25 @@ export const Card = ({
                                                     }
                                                 />
                                             </>
-                                        )}
-                                        {designType !== 'Media' &&
-                                            longCount &&
-                                            shortCount && (
-                                                <>
-                                                    <CardCommentCount
-                                                        long={longCount}
-                                                        short={shortCount}
-                                                    />
-                                                </>
-                                            )}
-                                    </>
-                                </CardFooter>
+                                        ) : (
+                                            undefined
+                                        )
+                                    }
+                                    commentCount={
+                                        longCount && shortCount ? (
+                                            <>
+                                                <CardCommentCount
+                                                    designType={designType}
+                                                    pillar={pillar}
+                                                    long={longCount}
+                                                    short={shortCount}
+                                                />
+                                            </>
+                                        ) : (
+                                            undefined
+                                        )
+                                    }
+                                />
                             </div>
                         </ContentWrapper>
                     </>

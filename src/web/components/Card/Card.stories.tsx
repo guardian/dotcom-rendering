@@ -45,7 +45,6 @@ export const News = () => (
                                 imagePosition: 'right',
                                 imageSize: 'large',
                                 standfirst: standfirsts[0],
-                                commentCount: 864,
                             }}
                         />
                     </LI>
@@ -336,13 +335,14 @@ export const InDepth = () => (
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
-                                designType: 'Article',
+                                designType: 'Comment',
                                 headlineText: headlines[7],
                                 headlineSize: 'large',
                                 kickerText: kickers[0],
                                 imageUrl: images[0],
                                 imagePosition: 'top',
-                                commentCount: 864333,
+                                webPublicationDate: '2019-11-11T09:45:30.000Z',
+                                commentCount: 3694,
                             }}
                         />
                     </LI>
@@ -408,14 +408,13 @@ export const Related = () => (
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
-                                designType: 'Article',
+                                designType: 'Comment',
                                 headlineText: headlines[8],
                                 headlineSize: 'medium',
                                 kickerText: kickers[1],
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 imageUrl: images[4],
                                 imagePosition: 'top',
-                                commentCount: 4,
                             }}
                         />
                     </LI>
@@ -551,7 +550,6 @@ export const Quad = () => (
                                     alt: 'Avatar alt text',
                                 },
                                 showClock: true,
-                                commentCount: 3,
                             }}
                         />
                     </LI>
@@ -652,7 +650,7 @@ export const Media = () => (
                                 imagePosition: 'top',
                                 showClock: true,
                                 mediaType: 'Gallery',
-                                commentCount: 0, // I should not show
+                                commentCount: 0,
                             }}
                         />
                     </LI>
@@ -676,7 +674,7 @@ export const Media = () => (
                                 showClock: true,
                                 mediaType: 'Audio',
                                 mediaDuration: 35999,
-                                commentCount: 864, // I should not show
+                                commentCount: 864,
                             }}
                         />
                     </LI>
