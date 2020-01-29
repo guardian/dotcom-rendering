@@ -47,9 +47,6 @@ export const SlotBodyEnd = ({
         },
     };
 
-    console.log('>>> contributionsPayload: ');
-    console.log(contributionsPayload);
-
     const endpointUrl = 'https://contributions.guardianapis.com/epic';
     const { data, error } = useApi(endpointUrl, {
         method: 'POST',
