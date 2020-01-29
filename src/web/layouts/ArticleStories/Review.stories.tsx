@@ -44,7 +44,7 @@ export const ReviewShowcase = () => {
         )
         // Most read by category
         .getOnce(
-            'https://api.nextgen.guardianapps.co.uk/most-read/money.json?dcr=true',
+            'https://api.nextgen.guardianapps.co.uk/most-read/tv-and-radio.json?dcr=true',
             {
                 status: 200,
                 body: responseWithTwoTabs,
@@ -53,7 +53,7 @@ export const ReviewShowcase = () => {
         )
         // Article share count
         .getOnce(
-            'https://api.nextgen.guardianapps.co.uk/sharecount/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software.json',
+            'https://api.nextgen.guardianapps.co.uk/sharecount/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix.json',
             {
                 status: 200,
                 body: sharecount,
@@ -88,7 +88,7 @@ export const ReviewStandard = () => {
         )
         // Most read by category
         .getOnce(
-            'https://api.nextgen.guardianapps.co.uk/most-read/money.json?dcr=true',
+            'https://api.nextgen.guardianapps.co.uk/most-read/stage.json?dcr=true',
             {
                 status: 200,
                 body: responseWithTwoTabs,
@@ -97,7 +97,7 @@ export const ReviewStandard = () => {
         )
         // Article share count
         .getOnce(
-            'https://api.nextgen.guardianapps.co.uk/sharecount/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software.json',
+            'https://api.nextgen.guardianapps.co.uk/sharecount/stage/2020/jan/28/flights-review-project-arts-centre-dublin.json',
             {
                 status: 200,
                 body: sharecount,
