@@ -17,14 +17,16 @@ const containerStyles = css`
     flex-direction: row;
     ${textSans.xsmall()};
     color: ${palette.neutral[60]};
+    padding-left: 5px;
+    padding-right: 5px;
 `;
 
 const iconContainerStyles = css`
     svg {
         fill: ${palette.neutral[46]};
-        margin-bottom: -7px;
-        height: 16px;
-        width: 16px;
+        margin-bottom: -5px;
+        height: 14px;
+        width: 14px;
         margin-right: 2px;
     }
 `;
