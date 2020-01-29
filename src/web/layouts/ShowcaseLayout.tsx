@@ -5,6 +5,7 @@ import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -158,6 +159,15 @@ const stretchLines = css`
     }
 `;
 
+const mainMediaWrapper = css`
+    position: relative;
+`;
+
+const starWrapper = css`
+    position: absolute;
+    top: 0;
+`;
+
 const PositionHeadline = ({
     designType,
     children,
@@ -306,11 +316,23 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         </PositionHeadline>
                     </GridItem>
                     <GridItem area="media">
-                        <MainMedia
-                            elements={CAPI.mainMediaElements}
-                            pillar={CAPI.pillar}
-                            adTargeting={adTargeting}
-                        />
+                        <div className={mainMediaWrapper}>
+                            <MainMedia
+                                elements={CAPI.mainMediaElements}
+                                pillar={CAPI.pillar}
+                                adTargeting={adTargeting}
+                            />
+                            {CAPI.starRating || CAPI.starRating === 0 ? (
+                                <div className={starWrapper}>
+                                    <StarRating
+                                        rating={CAPI.starRating}
+                                        size="large"
+                                    />
+                                </div>
+                            ) : (
+                                <></>
+                            )}
+                        </div>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
