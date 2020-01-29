@@ -20,7 +20,7 @@ export const SlotBodyEnd = () => {
     const { isMinuteArticle, isPaidContent } = pageType;
 
     // Putting together the request payload
-    const postBody = {
+    const contributionsPayload = {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
@@ -49,7 +49,7 @@ export const SlotBodyEnd = () => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(postBody),
+        body: JSON.stringify(contributionsPayload),
     });
 
     if (error) {
