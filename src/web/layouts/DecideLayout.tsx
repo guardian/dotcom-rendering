@@ -3,6 +3,7 @@ import { designTypeDefault } from '@root/src/lib/designTypes';
 
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
+import { CommentLayout } from './CommentLayout';
 
 import { hasShowcase } from './layoutHelpers';
 
@@ -21,6 +22,8 @@ export const DecideLayout = ({ designType, CAPI, NAV }: Props) => {
     const designTypeContent: DesignTypesObj = designTypeDefault(
         <StandardLayout CAPI={CAPI} NAV={NAV} />,
     );
+
+    designTypeContent.Comment = <CommentLayout CAPI={CAPI} NAV={NAV} />;
 
     return designTypeContent[designType];
 };

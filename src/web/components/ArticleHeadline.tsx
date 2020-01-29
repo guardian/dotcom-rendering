@@ -195,7 +195,19 @@ const renderHeadline = ({
             );
 
         case 'Comment':
-            return <h1 className={lightFont}>{curly(headlineString)}</h1>;
+            return (
+                <>
+                    <h1 className={lightFont}>{curly(headlineString)}</h1>
+                    {byline && (
+                        <HeadlineByline
+                            designType={designType}
+                            pillar={pillar}
+                            byline={byline}
+                            tags={tags}
+                        />
+                    )}
+                </>
+            );
 
         case 'Analysis':
             return (
