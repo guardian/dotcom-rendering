@@ -1,6 +1,7 @@
 import { integerCommas } from '@root/src/lib/formatters';
 
-export const formatCount = (count: number) => {
+export const formatCount = (count?: number) => {
+    if (!count) return { short: '', long: '' };
     const countAsInteger = parseInt(count.toFixed(0), 10);
     const displayCountLong = integerCommas(countAsInteger);
     const displayCountShort =
