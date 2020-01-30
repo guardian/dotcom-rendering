@@ -35,8 +35,9 @@ export const Picture: React.FC<{
                             '',
                         )}<!--[if IE 9]></video><![endif]--><img itemprop="contentUrl" alt="${alt}" src="${src}" />`,
                 }}
-            />
-            {children}
+            >
+                {children}
+            </picture>
         </>
     );
 };
