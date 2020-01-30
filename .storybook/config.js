@@ -1,5 +1,8 @@
-import { configure, addParameters, addDecorator } from '@storybook/react';
-import { withA11y } from '@storybook/addon-a11y';
+import fetchMock from 'fetch-mock';
+import { configure, addParameters } from '@storybook/react';
+
+import { meta } from '@root/fixtures/article';
+import { commentCount } from '@root/fixtures/commentCounts';
 
 import { defaults } from './default-css';
 
@@ -12,8 +15,6 @@ let style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';
 style.appendChild(document.createTextNode(defaults));
-
-addDecorator(withA11y);
 
 const guardianViewports = {
     mobileMedium: {
@@ -66,6 +67,27 @@ const guardianViewports = {
         },
     },
 };
+
+fetchMock
+    .restore()
+    // Comment count
+    .get(
+        'begin:https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=',
+        {
+            status: 200,
+            body: commentCount,
+        },
+        { overwriteRoutes: false },
+    )
+    // Share count
+    .get(
+        'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+        {
+            status: 200,
+            body: meta,
+        },
+        { overwriteRoutes: false },
+    );
 
 addParameters({
     viewport: {

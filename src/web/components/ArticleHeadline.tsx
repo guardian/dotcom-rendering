@@ -195,7 +195,19 @@ const renderHeadline = ({
             );
 
         case 'Comment':
-            return <h1 className={lightFont}>{curly(headlineString)}</h1>;
+            return (
+                <>
+                    <h1 className={lightFont}>{curly(headlineString)}</h1>
+                    {byline && (
+                        <HeadlineByline
+                            designType={designType}
+                            pillar={pillar}
+                            byline={byline}
+                            tags={tags}
+                        />
+                    )}
+                </>
+            );
 
         case 'Analysis':
             return (
@@ -221,7 +233,14 @@ const renderHeadline = ({
                             {curly(headlineString)}
                         </span>
                     </h1>
-                    {byline && <HeadlineByline byline={byline} tags={tags} />}
+                    {byline && (
+                        <HeadlineByline
+                            designType={designType}
+                            pillar={pillar}
+                            byline={byline}
+                            tags={tags}
+                        />
+                    )}
                 </div>
             );
 

@@ -12,7 +12,7 @@ const wrapperStyles = css`
     z-index: 1;
 `;
 
-const headlineBylineStyles = css`
+const yellowBoxStyles = css`
     ${headline.xxsmall({
         fontWeight: 'regular',
         lineHeight: 'loose',
@@ -33,15 +33,47 @@ const headlineBylineStyles = css`
     }
 `;
 
+const opinionStyles = (pillar: Pillar) => css`
+    ${headline.medium({
+        fontWeight: 'light',
+    })}
+    line-height: 38px;
+    font-style: italic;
+    color: ${palette[pillar].main};
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        :hover {
+            text-decoration: underline;
+        }
+    }
+`;
+
 type Props = {
+    designType: 'Interview' | 'Comment';
+    pillar: Pillar;
     byline: string;
     tags: TagType[];
 };
 
-export const HeadlineByline = ({ byline, tags }: Props) => (
-    <div className={wrapperStyles}>
-        <div className={headlineBylineStyles}>
-            <BylineLink byline={byline} tags={tags} />
-        </div>
-    </div>
-);
+export const HeadlineByline = ({ designType, pillar, byline, tags }: Props) => {
+    switch (designType) {
+        case 'Interview':
+            return (
+                <div className={wrapperStyles}>
+                    <div className={yellowBoxStyles}>
+                        <BylineLink byline={byline} tags={tags} />
+                    </div>
+                </div>
+            );
+        case 'Comment':
+            return (
+                <div className={opinionStyles(pillar)}>
+                    <BylineLink byline={byline} tags={tags} />
+                </div>
+            );
+        default:
+            return null;
+    }
+};

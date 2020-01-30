@@ -12,6 +12,7 @@ type Props = {
     overlayImage?: string;
     duration?: number; // in seconds
     title?: string;
+    children?: JSX.Element | JSX.Element[];
 };
 
 type EmbedConfig = {

@@ -1449,6 +1449,9 @@
                 "revisionNumber": {
                     "type": "string"
                 },
+                "shortUrlId": {
+                    "type": "string"
+                },
                 "isDev": {
                     "type": "boolean"
                 },
@@ -1523,6 +1526,7 @@
                 "sentryHost",
                 "sentryPublicApiKey",
                 "sharedAdTargeting",
+                "shortUrlId",
                 "showRelatedContent",
                 "stage",
                 "switches",

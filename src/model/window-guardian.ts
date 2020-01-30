@@ -18,13 +18,14 @@ export interface WindowGuardianConfig {
         showRelatedContent: boolean;
         ajaxUrl: string;
         hbImpl: object | string;
+        shouldHideReaderRevenue: boolean;
     };
     libs: {
         googletag: string;
     };
     switches: { [key: string]: boolean };
     tests?: { [key: string]: string };
-    ophan?: {
+    ophan: {
         pageViewId: string;
     };
 }
@@ -59,6 +60,9 @@ const makeWindowGuardianConfig = (
         },
         switches: config.switches,
         tests: config.abTests || {},
+        ophan: {
+            pageViewId: '',
+        },
     } as WindowGuardianConfig;
 };
 

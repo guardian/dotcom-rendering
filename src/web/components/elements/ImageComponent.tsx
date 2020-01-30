@@ -70,7 +70,8 @@ export const ImageComponent: React.FC<{
     hideCaption?: boolean;
     role: RoleType;
     isMainMedia?: boolean;
-}> = ({ element, pillar, hideCaption, role, isMainMedia }) => {
+    children?: JSXElements;
+}> = ({ element, pillar, hideCaption, role, isMainMedia, children }) => {
     const sources = makeSources(element.imageSources, element.role);
     if (hideCaption) {
         return (
@@ -78,7 +79,9 @@ export const ImageComponent: React.FC<{
                 sources={sources}
                 alt={element.data.alt || ''}
                 src={getFallback(element.imageSources)}
-            />
+            >
+                {children}
+            </Picture>
         );
     }
     return (
@@ -95,7 +98,9 @@ export const ImageComponent: React.FC<{
                 sources={sources}
                 alt={element.data.alt || ''}
                 src={getFallback(element.imageSources)}
-            />
+            >
+                {children}
+            </Picture>
         </Caption>
     );
 };
