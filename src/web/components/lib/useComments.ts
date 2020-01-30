@@ -19,16 +19,14 @@ const findComments = (counts: CommentType[], shortUrl?: string): number => {
 };
 
 const updateTrailsWithCounts = (trails: TrailType[], counts: CommentType[]) => {
-    const updated: TrailType[] = [];
-    trails.forEach(trail => {
+    return trails.map(trail => {
         const { shortUrl } = trail;
         const countOfComments = findComments(counts, shortUrl);
-        updated.push({
+        return {
             ...trail,
             commentCount: countOfComments,
-        });
+        };
     });
-    return updated;
 };
 
 const withComments = (
