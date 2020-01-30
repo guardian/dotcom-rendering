@@ -668,7 +668,6 @@ export const Media = () => (
                                 headlineText: headlines[11],
                                 headlineSize: 'medium',
                                 kickerText: kickers[0],
-                                webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,

@@ -48,7 +48,8 @@ export const CardFooter = ({
             <footer className={spaceBetween}>
                 <>
                     {mediaMeta}
-                    {commentCount}
+                    {/* Show age if we have it otherwise try for commentCount */}
+                    {age || commentCount}
                 </>
             </footer>
         );
