@@ -7,6 +7,7 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import { CommentCount } from '@frontend/web/components/CommentCount';
 import { integerCommas } from '@root/src/lib/formatters';
 import { useApi } from '@root/src/web/components/lib/api';
+import { joinUrl } from '@root/src/web/components/lib/joinUrl';
 
 type Props = {
     ajaxUrl: string;
@@ -62,12 +63,15 @@ const formatForDisplay = (count: number) => {
 };
 
 export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
-    const shareUrl = `${ajaxUrl}/sharecount/${pageId}.json`;
+    const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
     const { data: shareData, error: shareError } = useApi<ShareCountType>(
         shareUrl,
     );
 
-    const commentUrl = `${ajaxUrl}/discussion/comment-counts.json?shortUrls=${shortUrlId}`;
+    const commentUrl = joinUrl([
+        ajaxUrl,
+        `discussion/comment-counts.json?shortUrls=${shortUrlId}`,
+    ]);
     const { data: commentData, error: commentError } = useApi<
         CommentCountsType
     >(commentUrl);

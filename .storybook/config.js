@@ -1,5 +1,9 @@
+import fetchMock from 'fetch-mock';
 import { configure, addParameters, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
+
+import { meta } from '@root/fixtures/article';
+import { commentCount } from '@root/fixtures/commentCounts';
 
 import { defaults } from './default-css';
 
@@ -66,6 +70,27 @@ const guardianViewports = {
         },
     },
 };
+
+fetchMock
+    .restore()
+    // Comment count
+    .get(
+        'begin:https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=',
+        {
+            status: 200,
+            body: commentCount,
+        },
+        { overwriteRoutes: false },
+    )
+    // Share count
+    .get(
+        'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+        {
+            status: 200,
+            body: meta,
+        },
+        { overwriteRoutes: false },
+    );
 
 addParameters({
     viewport: {
