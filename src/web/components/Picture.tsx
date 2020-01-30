@@ -23,16 +23,20 @@ export const Picture: React.FC<{
     sources: PictureSource[];
     alt: string;
     src: string;
-}> = ({ sources, alt, src }) => {
+    children?: JSXElements;
+}> = ({ sources, alt, src, children }) => {
     return (
-        <picture
-            dangerouslySetInnerHTML={{
-                __html: `<!--[if IE 9]><video style="display: none;"><![endif]-->${sources
-                    .map(forSource)
-                    .join(
-                        '',
-                    )}<!--[if IE 9]></video><![endif]--><img itemprop="contentUrl" alt="${alt}" src="${src}" />`,
-            }}
-        />
+        <>
+            <picture
+                dangerouslySetInnerHTML={{
+                    __html: `<!--[if IE 9]><video style="display: none;"><![endif]-->${sources
+                        .map(forSource)
+                        .join(
+                            '',
+                        )}<!--[if IE 9]></video><![endif]--><img itemprop="contentUrl" alt="${alt}" src="${src}" />`,
+                }}
+            />
+            {children}
+        </>
     );
 };
