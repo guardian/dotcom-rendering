@@ -1,6 +1,5 @@
 import fetchMock from 'fetch-mock';
-import { configure, addParameters, addDecorator } from '@storybook/react';
-import { withA11y } from '@storybook/addon-a11y';
+import { configure, addParameters } from '@storybook/react';
 
 import { meta } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
@@ -16,8 +15,6 @@ let style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';
 style.appendChild(document.createTextNode(defaults));
-
-addDecorator(withA11y);
 
 const guardianViewports = {
     mobileMedium: {
