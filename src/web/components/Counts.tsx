@@ -5,8 +5,8 @@ import { palette } from '@guardian/src-foundations';
 
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { CommentCount } from '@frontend/web/components/CommentCount';
-import { integerCommas } from '@root/src/lib/formatters';
 import { useApi } from '@root/src/web/components/lib/api';
+import { formatCount } from '@root/src/web/components/lib/formatCount';
 import { joinUrl } from '@root/src/web/components/lib/joinUrl';
 
 type Props = {
@@ -49,19 +49,6 @@ const NumbersBorder = () => (
     />
 );
 
-const formatForDisplay = (count: number) => {
-    const countAsInteger = parseInt(count.toFixed(0), 10);
-    const displayCountLong = integerCommas(countAsInteger);
-    const displayCountShort =
-        countAsInteger > 10000
-            ? `${Math.round(countAsInteger / 1000)}k`
-            : countAsInteger.toString();
-    return {
-        short: displayCountShort,
-        long: displayCountLong,
-    };
-};
-
 export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
     const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
     const { data: shareData, error: shareError } = useApi<ShareCountType>(
@@ -102,11 +89,11 @@ export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
         return null;
     }
 
-    const { short: shareShort, long: shareLong } = formatForDisplay(
+    const { short: shareShort, long: shareLong } = formatCount(
         (shareData && shareData.share_count) || 0,
     );
 
-    const { short: commentShort, long: commentLong } = formatForDisplay(
+    const { short: commentShort, long: commentLong } = formatCount(
         (commentData &&
             commentData.counts &&
             commentData.counts[0] &&
