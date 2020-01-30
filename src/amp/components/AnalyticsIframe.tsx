@@ -14,10 +14,10 @@ export const AnalyticsIframe: React.FC<{ url: string }> = ({ url }) => {
         <amp-iframe
             class={prebidIframeStyle}
             data-block-on-consent="_till_accepted"
-            title="User Sync"
+            title="Analytics Iframe"
             height="1"
             width="1"
-            sandbox="allow-scripts allow-same-origin"
+            sandbox="allow-scripts"
             frameborder="0"
             src={url}
         >
