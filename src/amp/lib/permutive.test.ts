@@ -70,4 +70,16 @@ describe('generatePermutivePayload', () => {
             generatePermutivePayload((config as unknown) as ConfigType),
         ).toStrictEqual(expected);
     });
+
+    test('generates the right payload given invalid keywords or authors', () => {
+        const config = {
+            author: null,
+            keywords: undefined,
+        };
+        const expected = {};
+
+        expect(
+            generatePermutivePayload((config as unknown) as ConfigType),
+        ).toStrictEqual(expected);
+    });
 });

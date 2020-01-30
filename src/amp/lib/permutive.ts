@@ -16,21 +16,21 @@ export const generatePermutivePayload = (
         rawConfig.webPublicationDate &&
         typeof rawConfig.webPublicationDate === 'number'
             ? new Date(rawConfig.webPublicationDate).toISOString()
-            : void 0;
+            : null;
     const authors =
         rawConfig.author && typeof rawConfig.author === 'string'
             ? rawConfig.author
                   .split(',')
                   .map(s => s.trim())
                   .join()
-            : void 0;
+            : null;
     const keywords =
         rawConfig.keywords && typeof rawConfig.keywords === 'string'
             ? rawConfig.keywords
                   .split(',')
                   .map(s => s.trim())
                   .join()
-            : void 0;
+            : null;
     const config: { [key: string]: any } = {
         'properties.content.premium': rawConfig.isPaidContent,
         'properties.content.type': rawConfig.contentType,
@@ -45,7 +45,9 @@ export const generatePermutivePayload = (
     };
 
     const payload: { [key: string]: any } = Object.keys(config)
-        .filter(key => typeof config[key] !== 'undefined')
+        .filter(
+            key => typeof config[key] !== 'undefined' && config[key] !== null,
+        )
         .reduce((acc: { [key: string]: any }, key) => {
             acc[key] = config[key];
             return acc;
