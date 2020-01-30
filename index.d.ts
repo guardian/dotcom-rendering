@@ -224,7 +224,6 @@ interface CAPIType {
     guardianBaseURL: string;
     contentType: string;
     hasRelated: boolean;
-    pageType: { [key: string]: boolean };
     publication: string; // TODO: check who uses?
     hasStoryPackage: boolean;
     beaconURL: string;
