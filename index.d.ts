@@ -268,10 +268,10 @@ type ImagePositionType = 'left' | 'top' | 'right';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
-interface AvatarType {
+type AvatarType = {
     src: string;
     alt: string;
-}
+};
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
@@ -305,11 +305,11 @@ interface CardType {
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
-interface HeadlineLink {
+type HeadlineLink = {
     to: string; // the href for the anchor tag
     visitedColour?: string; // a custom colour for the :visited state
     preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
-}
+};
 
 interface LinkHeadlineType {
     designType: DesignType;
@@ -341,10 +341,10 @@ interface CardHeadlineType {
 /**
  * Onwards
  */
-interface OnwardsType {
+type OnwardsType = {
     heading: string;
     trails: TrailType[];
-}
+};
 
 interface CommercialConfigType {
     isPaidContent?: boolean;
