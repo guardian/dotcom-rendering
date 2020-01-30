@@ -52,6 +52,7 @@ function renderElement(
     i: number,
     hideCaption?: boolean,
     adTargeting?: AdTargeting,
+    children?: JSXElements,
 ) {
     switch (element._type) {
         case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -63,7 +64,9 @@ function renderElement(
                     hideCaption={hideCaption}
                     role={element.role}
                     isMainMedia={true}
-                />
+                >
+                    {children}
+                </ImageComponent>
             );
         case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
             return (
@@ -75,7 +78,9 @@ function renderElement(
                     // tslint:disable-next-line react-a11y-role
                     role="inline"
                     adTargeting={adTargeting}
-                />
+                >
+                    {children}
+                </YouTubeComponent>
             );
         default:
             // tslint:disable-next-line no-console
@@ -91,10 +96,18 @@ export const MainMedia: React.FC<{
     pillar: Pillar;
     hideCaption?: boolean;
     adTargeting?: AdTargeting;
-}> = ({ elements, pillar, hideCaption, adTargeting }) => (
+    children?: JSXElements;
+}> = ({ elements, pillar, hideCaption, adTargeting, children }) => (
     <div className={mainMedia}>
         {elements.map((element, i) =>
-            renderElement(element, pillar, i, hideCaption, adTargeting),
+            renderElement(
+                element,
+                pillar,
+                i,
+                hideCaption,
+                adTargeting,
+                children,
+            ),
         )}
     </div>
 );

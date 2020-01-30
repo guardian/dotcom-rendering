@@ -1,11 +1,11 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
+import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -16,6 +16,7 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -24,8 +25,7 @@ import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { Hide } from '@root/src/web/components/Hide';
+import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -45,7 +45,7 @@ function checkForGE2019Badge(tags: TagType[]) {
     }
 }
 
-const ShowcaseGrid = ({
+const StandardGrid = ({
     children,
 }: {
     children: JSX.Element | JSX.Element[];
@@ -79,11 +79,11 @@ const ShowcaseGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    headline'
-                        'lines  border  media       media'
-                        'meta   border  media       media'
-                        'meta   border  standfirst  right-column'
-                        '.      border  body        right-column';
+                        'title  border  headline    right-column'
+                        '.      border  standfirst  right-column'
+                        'lines  border  media       right-column'
+                        'meta   border  media       right-column'
+                        'meta   border  body        right-column';
                 }
 
                 ${until.wide} {
@@ -115,7 +115,6 @@ const ShowcaseGrid = ({
                 }
 
                 ${until.desktop} {
-                    grid-column-gap: 0px;
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
                         'title'
@@ -129,6 +128,7 @@ const ShowcaseGrid = ({
 
                 ${until.tablet} {
                     grid-column-gap: 0px;
+
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
                         'media'
@@ -159,90 +159,24 @@ const stretchLines = css`
     }
 `;
 
-const mainMediaWrapper = css`
-    position: relative;
-`;
-
-const starsPositionTop = css`
-    position: absolute;
-    top: 0;
-`;
-
-const starsPositionBottom = css`
-    position: absolute;
-    bottom: 0;
-`;
-
-const starsWrapper = css`
+const starWrapper = css`
+    margin-bottom: 18px;
+    margin-top: 6px;
     background-color: ${palette.brandYellow.main};
     display: inline-block;
 
-    padding-left: 10px;
-
-    ${until.leftCol} {
-        padding-left: 0px;
-        margin-left: -0px;
-    }
     ${until.phablet} {
         padding-left: 20px;
         margin-left: -20px;
     }
-    ${until.mobileLandscape} {
-        padding-left: 10px;
-        margin-left: -10px;
+    ${until.leftCol} {
+        padding-left: 0px;
+        margin-left: -0px;
     }
-`;
 
-const PositionHeadline = ({
-    designType,
-    children,
-}: {
-    designType: DesignType;
-    children: JSX.Element | JSX.Element[];
-}) => {
-    switch (designType) {
-        case 'Interview':
-            return (
-                <div
-                    className={css`
-                        ${from.leftCol} {
-                            margin-bottom: -100px;
-                        }
-                    `}
-                >
-                    <div className={maxWidth}>{children}</div>
-                </div>
-            );
-        case 'Immersive':
-            return (
-                <div
-                    className={css`
-                        ${from.leftCol} {
-                            margin-top: -100px;
-                        }
-                    `}
-                >
-                    {children}
-                </div>
-            );
-        case 'Article':
-        case 'Media':
-        case 'Review':
-        case 'Live':
-        case 'SpecialReport':
-        case 'Recipe':
-        case 'MatchReport':
-        case 'GuardianView':
-        case 'GuardianLabs':
-        case 'Quiz':
-        case 'AdvertisementFeature':
-        case 'Feature':
-        case 'Comment':
-        case 'Analysis':
-        default:
-            return <div className={maxWidth}>{children}</div>;
-    }
-};
+    padding-left: 10px;
+    margin-left: -10px;
+`;
 
 // The advert is stuck to the top of the container as we scroll
 // until we hit the bottom of the wrapper that contains
@@ -262,12 +196,13 @@ const headerWrapper = css`
     position: relative;
     z-index: 1;
 `;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
 }
 
-export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
+export const StandardLayout = ({ CAPI, NAV }: Props) => {
     const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     const { isPaidContent } = CAPI.config;
 
@@ -337,7 +272,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             </div>
 
             <Section showTopBorder={false}>
-                <ShowcaseGrid>
+                <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
                             CAPI={CAPI}
@@ -349,8 +284,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <Border />
                     </GridItem>
                     <GridItem area="headline">
-                        <PositionHeadline designType={CAPI.designType}>
-                            <div style={{ paddingBottom: '24px' }}>
+                        <div className={maxWidth}>
+                            <ArticleHeadlinePadding
+                                designType={CAPI.designType}
+                            >
                                 <ArticleHeadline
                                     headlineString={CAPI.headline}
                                     designType={CAPI.designType}
@@ -359,49 +296,18 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     tags={CAPI.tags}
                                     byline={CAPI.author.byline}
                                 />
-                            </div>
-                        </PositionHeadline>
-                    </GridItem>
-                    <GridItem area="media">
-                        <div className={mainMediaWrapper}>
-                            <MainMedia
-                                elements={CAPI.mainMediaElements}
-                                pillar={CAPI.pillar}
-                                adTargeting={adTargeting}
-                            />
-                            {CAPI.starRating || CAPI.starRating === 0 ? (
-                                <>
-                                    <Hide when="below" breakpoint="phablet">
-                                        <div
-                                            className={cx(
-                                                starsWrapper,
-                                                starsPositionBottom,
-                                            )}
-                                        >
-                                            <StarRating
-                                                rating={CAPI.starRating}
-                                                size="large"
-                                            />
-                                        </div>
-                                    </Hide>
-                                    <Hide when="above" breakpoint="phablet">
-                                        <div
-                                            className={cx(
-                                                starsWrapper,
-                                                starsPositionTop,
-                                            )}
-                                        >
-                                            <StarRating
-                                                rating={CAPI.starRating}
-                                                size="large"
-                                            />
-                                        </div>
-                                    </Hide>
-                                </>
-                            ) : (
-                                <></>
-                            )}
+                            </ArticleHeadlinePadding>
                         </div>
+                        {CAPI.starRating || CAPI.starRating === 0 ? (
+                            <div className={starWrapper}>
+                                <StarRating
+                                    rating={CAPI.starRating}
+                                    size="large"
+                                />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
@@ -409,6 +315,15 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             pillar={CAPI.pillar}
                             standfirst={CAPI.standfirst}
                         />
+                    </GridItem>
+                    <GridItem area="media">
+                        <div className={maxWidth}>
+                            <MainMedia
+                                elements={CAPI.mainMediaElements}
+                                pillar={CAPI.pillar}
+                                adTargeting={adTargeting}
+                            />
+                        </div>
                     </GridItem>
                     <GridItem area="lines">
                         <div className={maxWidth}>
@@ -468,14 +383,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <AdSlot
-                                asps={namedAdSlotParameters('right')}
-                                className=""
-                            />
+                            <StickyAd />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
-                </ShowcaseGrid>
+                </StandardGrid>
             </Section>
 
             <Section islandId="onwards-content" />

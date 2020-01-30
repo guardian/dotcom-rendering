@@ -9,6 +9,7 @@ type Props = {
     hideCaption?: boolean;
     role: RoleType;
     adTargeting?: AdTargeting;
+    children?: JSX.Element | JSX.Element[];
 };
 
 export const YouTubeComponent = ({
@@ -17,6 +18,7 @@ export const YouTubeComponent = ({
     hideCaption,
     role,
     adTargeting,
+    children,
 }: Props) => {
     if (hideCaption) {
         return (
@@ -26,7 +28,9 @@ export const YouTubeComponent = ({
                 adTargeting={adTargeting}
                 duration={element.duration}
                 title={element.mediaTitle}
-            />
+            >
+                {children}
+            </YouTubeEmbed>
         );
     }
     return (
@@ -43,7 +47,9 @@ export const YouTubeComponent = ({
                 adTargeting={adTargeting}
                 duration={element.duration}
                 title={element.mediaTitle}
-            />
+            >
+                {children}
+            </YouTubeEmbed>
         </Caption>
     );
 };

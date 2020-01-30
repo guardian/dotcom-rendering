@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -32,9 +31,8 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { decideLineCount, decideLineEffect } from '../layoutHelpers';
-import { Border } from '../Border';
-import { GridItem } from '../GridItem';
+import { Border } from './Border';
+import { GridItem } from './GridItem';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
@@ -79,11 +77,11 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        '.      border  standfirst  right-column'
-                        'lines  border  media       right-column'
-                        'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'title      border  headline    right-column'
+                        'metalines  border  lines       right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column';
                 }
 
                 ${until.wide} {
@@ -93,11 +91,11 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title  border  headline    right-column'
-                        '.      border  standfirst  right-column'
-                        'lines  border  media       right-column'
-                        'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'title      border  headline    right-column'
+                        'metalines  border  lines       right-column'
+                        'meta       border  standfirst  right-column'
+                        'meta       border  media       right-column'
+                        '.          border  body        right-column';
                 }
 
                 ${until.leftCol} {
@@ -107,10 +105,10 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title      right-column'
                         'headline   right-column'
-                        'standfirst right-column'
-                        'media      right-column'
                         'lines      right-column'
+                        'standfirst right-column'
                         'meta       right-column'
+                        'media      right-column'
                         'body       right-column';
                 }
 
@@ -119,10 +117,10 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title'
                         'headline'
-                        'standfirst'
-                        'media'
                         'lines'
+                        'standfirst'
                         'meta'
+                        'media'
                         'body';
                 }
 
@@ -131,12 +129,12 @@ const StandardGrid = ({
 
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
-                        'media'
                         'title'
                         'headline'
-                        'standfirst'
                         'lines'
+                        'standfirst'
                         'meta'
+                        'media'
                         'body';
                 }
             }
@@ -152,38 +150,12 @@ const maxWidth = css`
     }
 `;
 
-const stretchLines = css`
-    ${until.phablet} {
-        margin-left: -20px;
-        margin-right: -20px;
-    }
-`;
-
-const starWrapper = css`
-    margin-bottom: 18px;
-    margin-top: 6px;
-    background-color: ${palette.brandYellow.main};
-    display: inline-block;
-
-    ${until.phablet} {
-        padding-left: 20px;
-        margin-left: -20px;
-    }
-    ${until.leftCol} {
-        padding-left: 0px;
-        margin-left: -0px;
-    }
-
-    padding-left: 10px;
-    margin-left: -10px;
-`;
-
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
 }
 
-export const StandardLayout = ({ CAPI, NAV }: Props) => {
+export const CommentLayout = ({ CAPI, NAV }: Props) => {
     const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     const { isPaidContent } = CAPI.config;
 
@@ -234,7 +206,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             {NAV.subNavSections && (
                 <Section
-                    backgroundColour={palette.neutral[100]}
+                    backgroundColour={palette.opinion.faded}
                     padded={false}
                     islandId="sub-nav-root"
                 >
@@ -246,7 +218,10 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 </Section>
             )}
 
-            <Section showTopBorder={false}>
+            <Section
+                showTopBorder={false}
+                backgroundColour={palette.opinion.faded}
+            >
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
@@ -273,16 +248,14 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 />
                             </ArticleHeadlinePadding>
                         </div>
-                        {CAPI.starRating || CAPI.starRating === 0 ? (
-                            <div className={starWrapper}>
-                                <StarRating
-                                    rating={CAPI.starRating}
-                                    size="large"
-                                />
-                            </div>
-                        ) : (
-                            <></>
-                        )}
+                    </GridItem>
+                    <GridItem area="metalines">
+                        <GuardianLines count={8} pillar={CAPI.pillar} />
+                    </GridItem>
+                    <GridItem area="lines">
+                        <div className={maxWidth}>
+                            <GuardianLines count={8} pillar={CAPI.pillar} />
+                        </div>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
@@ -298,20 +271,6 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 pillar={CAPI.pillar}
                                 adTargeting={adTargeting}
                             />
-                        </div>
-                    </GridItem>
-                    <GridItem area="lines">
-                        <div className={maxWidth}>
-                            <div className={stretchLines}>
-                                <GuardianLines
-                                    pillar={CAPI.pillar}
-                                    effect={decideLineEffect(
-                                        CAPI.designType,
-                                        CAPI.pillar,
-                                    )}
-                                    count={decideLineCount(CAPI.designType)}
-                                />
-                            </div>
                         </div>
                     </GridItem>
                     <GridItem area="meta">

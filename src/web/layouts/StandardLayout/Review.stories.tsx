@@ -8,7 +8,7 @@ import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
-import { StandardLayout } from '@root/src/web/layouts/StandardLayouts/StandardLayout';
+import { StandardLayout } from '@root/src/web/layouts/StandardLayout/StandardLayout';
 
 export default {
     title: 'Articles/Review/Standard',

@@ -8,6 +8,15 @@ export const CAPI: CAPIType = {
     designType,
     webPublicationDate: '2018-11-02T09:45:30.000Z',
     webPublicationDateDisplay: 'Fri 02 Mar 2018 09.45 GMT',
+    pageType: {
+        hasShowcaseMainElement: false,
+        isFront: false,
+        isLiveblog: false,
+        isMinuteArticle: false,
+        isPaidContent: false,
+        isPreview: false,
+        isSensitive: false,
+    },
     tags: [
         {
             id: 'money/ticket-prices',

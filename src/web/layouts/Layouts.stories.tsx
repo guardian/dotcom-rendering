@@ -9,7 +9,7 @@ import { commentCount } from '@root/fixtures/commentCounts';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
 import { ShowcaseLayout } from './ShowcaseLayout/ShowcaseLayout';
-import { StandardLayout } from './StandardLayouts/StandardLayout';
+import { StandardLayout } from './StandardLayout/StandardLayout';
 
 /* tslint:disable */
 export default {
