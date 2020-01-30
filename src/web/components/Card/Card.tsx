@@ -170,29 +170,23 @@ export const Card = ({
                                     }
                                     mediaMeta={
                                         designType === 'Media' && mediaType ? (
-                                            <>
-                                                <MediaMeta
-                                                    pillar={pillar}
-                                                    mediaType={mediaType}
-                                                    mediaDuration={
-                                                        mediaDuration
-                                                    }
-                                                />
-                                            </>
+                                            <MediaMeta
+                                                pillar={pillar}
+                                                mediaType={mediaType}
+                                                mediaDuration={mediaDuration}
+                                            />
                                         ) : (
                                             undefined
                                         )
                                     }
                                     commentCount={
                                         longCount && shortCount ? (
-                                            <>
-                                                <CardCommentCount
-                                                    designType={designType}
-                                                    pillar={pillar}
-                                                    long={longCount}
-                                                    short={shortCount}
-                                                />
-                                            </>
+                                            <CardCommentCount
+                                                designType={designType}
+                                                pillar={pillar}
+                                                long={longCount}
+                                                short={shortCount}
+                                            />
                                         ) : (
                                             undefined
                                         )
