@@ -36,23 +36,23 @@ const decideLayout = (trails: TrailType[]) => {
 };
 
 export const OnwardsLayout = ({ onwardSections }: Props) => {
-    const withComments = useComments(onwardSections);
+    const sections = useComments(onwardSections);
 
     return (
         <>
-            {withComments.map((onward, index) => (
-                <Flex key={`${onward.heading}-${index}`}>
+            {sections.map((section, index) => (
+                <Flex key={`${section.heading}-${index}`}>
                     <LeftColumn
                         showRightBorder={false}
                         showPartialRightBorder={true}
                     >
-                        <OnwardsTitle title={onward.heading} />
+                        <OnwardsTitle title={section.heading} />
                     </LeftColumn>
                     <OnwardsContainer>
                         <Hide when="above" breakpoint="leftCol">
-                            <OnwardsTitle title={onward.heading} />
+                            <OnwardsTitle title={section.heading} />
                         </Hide>
-                        {decideLayout(onward.trails.slice(0, 8))}
+                        {decideLayout(section.trails.slice(0, 8))}
                     </OnwardsContainer>
                 </Flex>
             ))}
