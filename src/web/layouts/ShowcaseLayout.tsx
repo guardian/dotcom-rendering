@@ -209,6 +209,24 @@ const PositionHeadline = ({
     }
 };
 
+// The advert is stuck to the top of the container as we scroll
+// until we hit the bottom of the wrapper that contains
+// the top banner and the header/navigation
+// We apply sticky positioning and z-indexes, the stickAdWrapper and headerWrapper
+// classes are tightly coupled.
+
+const stickyAdWrapper = css`
+    background-color: white;
+    border-bottom: 0.0625rem solid ${palette.neutral[86]};
+    position: sticky;
+    top: 0;
+    z-index: 2;
+`;
+
+const headerWrapper = css`
+    position: relative;
+    z-index: 1;
+`;
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -229,53 +247,59 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
     return (
         <>
-            <Section
-                showTopBorder={false}
-                showSideBorders={false}
-                padded={false}
-            >
-                <HeaderAdSlot
-                    isAdFreeUser={CAPI.isAdFreeUser}
-                    shouldHideAds={CAPI.shouldHideAds}
-                />
-            </Section>
-            <Section
-                showTopBorder={false}
-                showSideBorders={false}
-                padded={false}
-                backgroundColour={palette.brand.main}
-            >
-                <Header
-                    nav={NAV}
-                    pillar={CAPI.pillar}
-                    edition={CAPI.editionId}
-                />
-            </Section>
+            <div>
+                <div className={stickyAdWrapper}>
+                    <Section
+                        showTopBorder={false}
+                        showSideBorders={false}
+                        padded={false}
+                    >
+                        <HeaderAdSlot
+                            isAdFreeUser={CAPI.isAdFreeUser}
+                            shouldHideAds={CAPI.shouldHideAds}
+                        />
+                    </Section>
+                </div>
+                <div className={headerWrapper}>
+                    <Section
+                        showTopBorder={false}
+                        showSideBorders={false}
+                        padded={false}
+                        backgroundColour={palette.brand.main}
+                    >
+                        <Header
+                            nav={NAV}
+                            pillar={CAPI.pillar}
+                            edition={CAPI.editionId}
+                        />
+                    </Section>
 
-            <Section
-                islandId="nav-root"
-                showSideBorders={true}
-                borderColour={palette.brand.pastel}
-                showTopBorder={false}
-                padded={false}
-                backgroundColour={palette.brand.main}
-            >
-                <Nav pillar={CAPI.pillar} nav={NAV} />
-            </Section>
+                    <Section
+                        islandId="nav-root"
+                        showSideBorders={true}
+                        borderColour={palette.brand.pastel}
+                        showTopBorder={false}
+                        padded={false}
+                        backgroundColour={palette.brand.main}
+                    >
+                        <Nav pillar={CAPI.pillar} nav={NAV} />
+                    </Section>
 
-            {NAV.subNavSections && (
-                <Section
-                    backgroundColour={palette.neutral[100]}
-                    padded={false}
-                    islandId="sub-nav-root"
-                >
-                    <SubNav
-                        subnav={NAV.subNavSections}
-                        currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
-                    />
-                </Section>
-            )}
+                    {NAV.subNavSections && (
+                        <Section
+                            backgroundColour={palette.neutral[100]}
+                            padded={false}
+                            islandId="sub-nav-root"
+                        >
+                            <SubNav
+                                subnav={NAV.subNavSections}
+                                currentNavLink={NAV.currentNavLink}
+                                pillar={CAPI.pillar}
+                            />
+                        </Section>
+                    )}
+                </div>
+            </div>
 
             <Section showTopBorder={false}>
                 <ShowcaseGrid>
