@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -25,15 +25,16 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
+import { Hide } from '@root/src/web/components/Hide';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { decideLineCount, decideLineEffect } from './layoutHelpers';
-import { Border } from './Border';
-import { GridItem } from './GridItem';
+import { decideLineCount, decideLineEffect } from '../layoutHelpers';
+import { Border } from '../Border';
+import { GridItem } from '../GridItem';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
@@ -162,9 +163,17 @@ const mainMediaWrapper = css`
     position: relative;
 `;
 
-const starWrapper = css`
-    top: 0;
+const starsPositionTop = css`
     position: absolute;
+    top: 0;
+`;
+
+const starsPositionBottom = css`
+    position: absolute;
+    bottom: 0;
+`;
+
+const starsWrapper = css`
     background-color: ${palette.brandYellow.main};
     display: inline-block;
 
@@ -337,12 +346,34 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 adTargeting={adTargeting}
                             />
                             {CAPI.starRating || CAPI.starRating === 0 ? (
-                                <div className={starWrapper}>
-                                    <StarRating
-                                        rating={CAPI.starRating}
-                                        size="large"
-                                    />
-                                </div>
+                                <>
+                                    <Hide when="below" breakpoint="phablet">
+                                        <div
+                                            className={cx(
+                                                starsWrapper,
+                                                starsPositionBottom,
+                                            )}
+                                        >
+                                            <StarRating
+                                                rating={CAPI.starRating}
+                                                size="large"
+                                            />
+                                        </div>
+                                    </Hide>
+                                    <Hide when="above" breakpoint="phablet">
+                                        <div
+                                            className={cx(
+                                                starsWrapper,
+                                                starsPositionTop,
+                                            )}
+                                        >
+                                            <StarRating
+                                                rating={CAPI.starRating}
+                                                size="large"
+                                            />
+                                        </div>
+                                    </Hide>
+                                </>
                             ) : (
                                 <></>
                             )}

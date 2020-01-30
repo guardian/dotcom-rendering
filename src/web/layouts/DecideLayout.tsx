@@ -1,8 +1,8 @@
 import React from 'react';
 import { designTypeDefault } from '@root/src/lib/designTypes';
 
-import { StandardLayout } from './StandardLayout';
-import { ShowcaseLayout } from './ShowcaseLayout';
+import { StandardLayout } from './StandardLayouts/StandardLayout';
+import { ShowcaseLayout } from './ShowcaseLayout/ShowcaseLayout';
 
 import { hasShowcase } from './layoutHelpers';
 
