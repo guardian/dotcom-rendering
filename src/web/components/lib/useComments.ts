@@ -36,15 +36,12 @@ const withComments = (
     counts: CommentType[],
 ): OnwardsType[] => {
     if (counts.length === 0) return onwardSections;
-    const updatedSections: OnwardsType[] = [];
-    onwardSections.forEach(section => {
-        const updatedTrails = updateTrailsWithCounts(section.trails, counts);
-        updatedSections.push({
+    return onwardSections.map(section => {
+        return {
             heading: section.heading,
-            trails: updatedTrails,
-        });
+            trails: updateTrailsWithCounts(section.trails, counts),
+        };
     });
-    return updatedSections;
 };
 
 const buildUrl = (sections: OnwardsType[]) => {
