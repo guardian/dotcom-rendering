@@ -1,12 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-// const prebidSrc =
-//     'https://cdn.jsdelivr.net/npm/prebid-universal-creative@latest/dist/load-cookie.html';
-
-const hostedIframeSrc =
-    'https://uploads.guim.co.uk/2020/01/23/amp-prebid-permutive.html';
-
 const prebidImg =
     'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
 
@@ -15,7 +9,7 @@ const prebidIframeStyle = css`
     top: -1px;
 `;
 
-export const AdUserSync: React.FC<{}> = () => {
+export const AnalyticsIframe: React.FC<{ url: string }> = ({ url }) => {
     return (
         <amp-iframe
             class={prebidIframeStyle}
@@ -25,7 +19,7 @@ export const AdUserSync: React.FC<{}> = () => {
             width="1"
             sandbox="allow-scripts allow-same-origin"
             frameborder="0"
-            src={hostedIframeSrc}
+            src={url}
         >
             <amp-img layout="fill" src={prebidImg} placeholder="" />
         </amp-iframe>

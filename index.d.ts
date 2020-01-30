@@ -345,6 +345,7 @@ interface CommercialConfigType {
     edition?: string;
     series?: string;
     contentType: string;
+    ampIframeUrl: string;
 }
 
 /**
