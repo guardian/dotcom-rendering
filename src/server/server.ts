@@ -140,4 +140,4 @@ app.get('/*', bodyParser.raw(), serveArticle);
 app.post('/article', bodyParser.raw(), serveArticlePost);
 
 const port = 3040;
-app.listen(port, () => console.log(`Server listening on port ${port}!\nWebpack dev server listening on port 8080!`));
+app.listen(port, () => console.log(`Server listening on port ${port}!\nIf you're in dev mode, webpack dev server is listening on port 8080`));
