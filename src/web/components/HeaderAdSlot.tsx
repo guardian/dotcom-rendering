@@ -1,6 +1,5 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';
@@ -29,7 +28,6 @@ const adSlotAboveNav = css`
     padding-top: 18px;
     text-align: left;
     display: table;
-    border-bottom: 0.0625rem solid ${palette.neutral[86]};
     width: 728px;
 `;
 
