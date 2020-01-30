@@ -456,6 +456,8 @@ interface TrailType {
     byline?: string;
     showByline?: boolean;
     kickerText?: string;
+    shortUrl?: string;
+    commentCount?: number;
 }
 
 interface TrailTabType {
