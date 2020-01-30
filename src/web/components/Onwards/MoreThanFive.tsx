@@ -48,6 +48,7 @@ export const MoreThanFive = ({ content }: Props) => {
                             imageUrl: content[0].image,
                             mediaType: content[0].mediaType,
                             mediaDuration: content[0].mediaDuration,
+                            commentCount: content[0].commentCount,
                         }}
                     />
                 </LI>
@@ -76,6 +77,7 @@ export const MoreThanFive = ({ content }: Props) => {
                             imageUrl: content[1].image,
                             mediaType: content[1].mediaType,
                             mediaDuration: content[1].mediaDuration,
+                            commentCount: content[1].commentCount,
                         }}
                     />
                 </LI>
@@ -104,6 +106,7 @@ export const MoreThanFive = ({ content }: Props) => {
                             imageUrl: content[2].image,
                             mediaType: content[2].mediaType,
                             mediaDuration: content[2].mediaDuration,
+                            commentCount: content[2].commentCount,
                         }}
                     />
                 </LI>
@@ -132,6 +135,7 @@ export const MoreThanFive = ({ content }: Props) => {
                             imageUrl: content[3].image,
                             mediaType: content[3].mediaType,
                             mediaDuration: content[3].mediaDuration,
+                            commentCount: content[3].commentCount,
                         }}
                     />
                 </LI>
@@ -162,6 +166,7 @@ export const MoreThanFive = ({ content }: Props) => {
                                 showClock: false,
                                 mediaType: trail.mediaType,
                                 mediaDuration: trail.mediaDuration,
+                                commentCount: trail.commentCount,
                             }}
                         />
                     </LI>
