@@ -32,13 +32,11 @@ export const CardFooter = ({
     if (designType === 'Comment') {
         return (
             <footer className={spaceBetween}>
-                <>
-                    {age}
-                    <LinesWrapper>
-                        <GuardianLines pillar="opinion" count={4} />
-                    </LinesWrapper>
-                    {commentCount}
-                </>
+                {age}
+                <LinesWrapper>
+                    <GuardianLines pillar="opinion" count={4} />
+                </LinesWrapper>
+                {commentCount}
             </footer>
         );
     }
@@ -46,11 +44,9 @@ export const CardFooter = ({
     if (designType === 'Media') {
         return (
             <footer className={spaceBetween}>
-                <>
-                    {mediaMeta}
-                    {/* Show age if we have it otherwise try for commentCount */}
-                    {age || commentCount}
-                </>
+                {mediaMeta}
+                {/* Show age if we have it otherwise try for commentCount */}
+                {age || commentCount}
             </footer>
         );
     }
@@ -58,10 +54,8 @@ export const CardFooter = ({
     if (age) {
         return (
             <footer className={spaceBetween}>
-                <>
-                    {age}
-                    {commentCount}
-                </>
+                {age}
+                {commentCount}
             </footer>
         );
     }
