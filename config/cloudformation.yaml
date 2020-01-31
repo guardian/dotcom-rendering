@@ -211,7 +211,7 @@ Resources:
               - Action:
                   - ssm:GetParametersByPath
                 Effect: Allow
-                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/mobile-apps-rendering/${Stage}/${Stack}
+                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/apps-rendering/${Stage}/${Stack}/
               - Action:
                   - autoscaling:DescribeAutoScalingInstances
                   - autoscaling:DescribeAutoScalingGroups

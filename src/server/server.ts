@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import path from 'path';
-import express, { Request, Response as ExpressResponse } from 'express';
+import express, {NextFunction, Request, Response as ExpressResponse} from 'express';
 import compression from 'compression';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -47,7 +47,11 @@ function checkSupport({ atoms }: Content): Supported {
   return { kind: Support.Supported };
 }
 
-async function serveArticlePost({ body }: Request, res: ExpressResponse): Promise<void> {
+async function serveArticlePost(
+    { body }: Request,
+    res: ExpressResponse,
+    next: NextFunction
+): Promise<void> {
   try {
       const transport = new BufferedTransport(body);
       const protocol = new CompactProtocol(transport);
@@ -67,7 +71,7 @@ async function serveArticlePost({ body }: Request, res: ExpressResponse): Promis
     }
   } catch (e) {
     console.error(`This error occurred, but I don't know why: ${e}`);
-    res.sendStatus(500);
+    next(e);
   }
 }
 
@@ -125,7 +129,17 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
 // ----- App ----- //
 
 const app = express();
-app.use(bodyParser.raw({limit: '50mb'}))
+app.use(bodyParser.raw({limit: '50mb'}));
+
+app.all('*', (request, response, next) => {
+  const start = Date.now();
+  response.once('finish', () => {
+    const duration = Date.now() - start;
+    console.log(`HTTP ${request.method} ${request.path} returned ${response.statusCode} in ${duration}ms`)
+  });
+
+  next();
+});
 
 app.use('/public', express.static(path.resolve(__dirname, '../public')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
@@ -140,4 +154,4 @@ app.get('/*', bodyParser.raw(), serveArticle);
 app.post('/article', bodyParser.raw(), serveArticlePost);
 
 const port = 3040;
-app.listen(port, () => console.log(`Server listening on port ${port}!\nWebpack dev server listening on port 8080!`));
+app.listen(port, () => console.log(`Server listening on port ${port}!\nIf you're in dev mode, webpack dev server is listening on port 8080`));

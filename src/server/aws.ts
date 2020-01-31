@@ -1,10 +1,10 @@
-import {SharedIniFileCredentials, CredentialProviderChain, ECSCredentials} from "aws-sdk/lib/core";
+import {SharedIniFileCredentials, CredentialProviderChain, EC2MetadataCredentials} from "aws-sdk/lib/core";
 import {Region} from "./appIdentity";
 import SSM from "aws-sdk/clients/ssm";
 
 
 const credentialProvider = new CredentialProviderChain([
-    function (): ECSCredentials { return new ECSCredentials(); },
+    function (): EC2MetadataCredentials { return new EC2MetadataCredentials(); },
     function (): SharedIniFileCredentials{ return new SharedIniFileCredentials({
         profile: "mobile"
     }); }                                                                            
