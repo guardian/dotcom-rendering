@@ -61,6 +61,7 @@ const mainMediaWrapper = css`
 `;
 
 const starWrapper = css`
+    background-color: ${palette.brandYellow.main};
     position: absolute;
     bottom: 0;
     margin-top: 2px;
@@ -113,12 +114,13 @@ export const Card = ({
                                         role="presentation"
                                     />
                                 </ImageWrapper>
-                                {3 ? (
+                                {/* TODO: need BE to return StarRating */}
+                                {/* {StarRating ? (
                                     <>
                                         <Hide when="above" breakpoint="desktop">
                                             <div className={starWrapper}>
                                                 <StarRating
-                                                    rating={3}
+                                                    rating={StarRating}
                                                     size="small"
                                                 />
                                             </div>
@@ -126,7 +128,7 @@ export const Card = ({
                                         <Hide when="below" breakpoint="desktop">
                                             <div className={starWrapper}>
                                                 <StarRating
-                                                    rating={3}
+                                                    rating={StarRating}
                                                     size="medium"
                                                 />
                                             </div>
@@ -134,7 +136,7 @@ export const Card = ({
                                     </>
                                 ) : (
                                     <></>
-                                )}
+                                )} */}
                             </div>
                         )}
                         <ContentWrapper percentage={contentCoverage}>
