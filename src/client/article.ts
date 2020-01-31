@@ -44,9 +44,10 @@ function insertAds() {
 }
 
 function ads() {
-    nativeClient.isPremium().then(isPremium => {
-        if (isPremium) {
-            insertAds()
+    nativeClient.isPremium().then(premiumUser => {
+        if (!premiumUser) {
+            // show placeholders (should be hidden by default)
+            insertAds();
         }
     })
 }
