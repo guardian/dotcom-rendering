@@ -73,6 +73,7 @@ type IslandProps =
           showRelatedContent: boolean;
           keywordIds: string;
           contentType: string;
+          tags: TagType[];
       }
     | {
           contentType: string;
@@ -202,6 +203,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
                 showRelatedContent: CAPI.config.showRelatedContent,
                 keywordIds: CAPI.config.keywordIds,
                 contentType: CAPI.contentType,
+                tags: CAPI.tags,
             },
             root: 'onwards-content',
         },
