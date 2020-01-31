@@ -47,7 +47,8 @@ function ads(): void {
     insertAds();
     // nativeClient.isPremium().then(premiumUser => {
     //     if (!premiumUser) {
-    //         Array.from(document.querySelectorAll('.ad-placeholder')).map(placeholder => placeholder.classList.remove('hidden'))
+    //         Array.from(document.querySelectorAll('.ad-placeholder'))
+    //              .map(placeholder => placeholder.classList.remove('hidden'))
     //         insertAds();
     //     }
     // })
@@ -78,7 +79,7 @@ function topics(): void {
     // })
 }
 
-function launchSlideshow(e: any): void {
+function launchSlideshow(e: Event): void {
     // const images = Array.from(document.querySelectorAll('.launch-slideshow'));
     // const imagesWithCaptions = images.map(image => {
     //     new Image({
