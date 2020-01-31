@@ -321,7 +321,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <PositionHeadline designType={CAPI.designType}>
-                            <div style={{ paddingBottom: '24px' }}>
+                            <div
+                                className={css`
+                                    padding-bottom: 24px;
+                                `}
+                            >
                                 <ArticleHeadline
                                     headlineString={CAPI.headline}
                                     designType={CAPI.designType}
