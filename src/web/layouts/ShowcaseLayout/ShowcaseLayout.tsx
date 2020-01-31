@@ -344,7 +344,8 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 pillar={CAPI.pillar}
                                 adTargeting={adTargeting}
                                 starRating={
-                                    CAPI.designType === 'Review'
+                                    CAPI.designType === 'Review' &&
+                                    CAPI.starRating
                                         ? CAPI.starRating
                                         : undefined
                                 }
