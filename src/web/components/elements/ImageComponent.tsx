@@ -90,12 +90,7 @@ const starsWrapper = css`
         margin-left: -0px;
     }
 
-    ${between.mobileLandscape.and.phablet} {
-        padding-left: 10px;
-        margin-left: 0px;
-    }
-
-    ${until.mobileLandscape} {
+    ${until.phablet} {
         padding-left: 10px;
         margin-left: 0px;
     }
