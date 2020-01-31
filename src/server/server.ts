@@ -125,7 +125,17 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
 // ----- App ----- //
 
 const app = express();
-app.use(bodyParser.raw({limit: '50mb'}))
+app.use(bodyParser.raw({limit: '50mb'}));
+
+app.all('*', (request, response, next) => {
+  const start = Date.now();
+  response.once('finish', () => {
+    const duration = Date.now() - start;
+    console.log(`HTTP ${request.method} ${request.path} returned ${response.statusCode} in ${duration}ms`)
+  });
+
+  next();
+});
 
 app.use('/public', express.static(path.resolve(__dirname, '../public')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
