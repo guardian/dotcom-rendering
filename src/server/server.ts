@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import path from 'path';
-import express, { Request, Response as ExpressResponse } from 'express';
+import express, {NextFunction, Request, Response as ExpressResponse} from 'express';
 import compression from 'compression';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -47,7 +47,7 @@ function checkSupport({ atoms }: Content): Supported {
   return { kind: Support.Supported };
 }
 
-async function serveArticlePost({ body }: Request, res: ExpressResponse): Promise<void> {
+async function serveArticlePost({ body }: Request, res: ExpressResponse, next: NextFunction): Promise<void> {
   try {
       const transport = new BufferedTransport(body);
       const protocol = new CompactProtocol(transport);
@@ -67,7 +67,7 @@ async function serveArticlePost({ body }: Request, res: ExpressResponse): Promis
     }
   } catch (e) {
     console.error(`This error occurred, but I don't know why: ${e}`);
-    res.sendStatus(500);
+    next(e);
   }
 }
 
