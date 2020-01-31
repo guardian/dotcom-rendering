@@ -9,7 +9,6 @@ import { Avatar } from '@frontend/web/components/Avatar';
 import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -60,12 +59,12 @@ const mainMediaWrapper = css`
     position: relative;
 `;
 
-const starWrapper = css`
-    background-color: ${palette.brandYellow.main};
-    position: absolute;
-    bottom: 0;
-    margin-top: 2px;
-`;
+// const starWrapper = css`
+//     background-color: ${palette.brandYellow.main};
+//     position: absolute;
+//     bottom: 0;
+//     margin-top: 2px;
+// `;
 
 export const Card = ({
     linkTo,
