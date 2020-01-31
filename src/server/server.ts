@@ -47,7 +47,11 @@ function checkSupport({ atoms }: Content): Supported {
   return { kind: Support.Supported };
 }
 
-async function serveArticlePost({ body }: Request, res: ExpressResponse, next: NextFunction): Promise<void> {
+async function serveArticlePost(
+    { body }: Request,
+    res: ExpressResponse,
+    next: NextFunction
+): Promise<void> {
   try {
       const transport = new BufferedTransport(body);
       const protocol = new CompactProtocol(transport);
