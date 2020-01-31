@@ -24,7 +24,7 @@ function getAdSlots(): AdSlot[] {
     });
 }
 
-function insertAds() {
+function insertAds(): void {
     let adSlots = getAdSlots();
         
     nativeClient.insertAdverts(adSlots)
@@ -43,7 +43,7 @@ function insertAds() {
     observer.observe(targetNode, config);
 }
 
-function ads() {
+function ads(): void {
     nativeClient.isPremium().then(premiumUser => {
         if (!premiumUser) {
             // show placeholders (should be hidden by default)
@@ -52,13 +52,13 @@ function ads() {
     })
 }
 
-function topics() {
+function topics(): void {
     // is user already following?
     // add event listenets
     // add callback functions to call nativeClient
 }
 
-function slideshow() {
+function slideshow(): void {
     // add event listeners to images
     // add callbacks to call nativeClient
 }
