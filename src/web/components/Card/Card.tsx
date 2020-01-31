@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 
@@ -55,16 +54,30 @@ const coverages: CoveragesType = {
     },
 };
 
-const mainMediaWrapper = css`
-    position: relative;
-`;
-
 // const starWrapper = css`
 //     background-color: ${palette.brandYellow.main};
 //     position: absolute;
 //     bottom: 0;
 //     margin-top: 2px;
 // `;
+/* <>
+    <Hide when="above" breakpoint="desktop">
+        <div className={starWrapper}>
+            <StarRating
+                rating={StarRating}
+                size="small"
+            />
+        </div>
+    </Hide>
+    <Hide when="below" breakpoint="desktop">
+        <div className={starWrapper}>
+            <StarRating
+                rating={StarRating}
+                size="medium"
+            />
+        </div>
+    </Hide>
+</> */
 
 export const Card = ({
     linkTo,
@@ -105,38 +118,13 @@ export const Card = ({
                 <CardLayout imagePosition={imagePosition}>
                     <>
                         {imageUrl && (
-                            <div className={mainMediaWrapper}>
-                                <ImageWrapper percentage={imageCoverage}>
-                                    <img
-                                        src={imageUrl}
-                                        alt=""
-                                        role="presentation"
-                                    />
-                                </ImageWrapper>
-                                {/* TODO: need BE to return StarRating */}
-                                {/* {StarRating ? (
-                                    <>
-                                        <Hide when="above" breakpoint="desktop">
-                                            <div className={starWrapper}>
-                                                <StarRating
-                                                    rating={StarRating}
-                                                    size="small"
-                                                />
-                                            </div>
-                                        </Hide>
-                                        <Hide when="below" breakpoint="desktop">
-                                            <div className={starWrapper}>
-                                                <StarRating
-                                                    rating={StarRating}
-                                                    size="medium"
-                                                />
-                                            </div>
-                                        </Hide>
-                                    </>
-                                ) : (
-                                    <></>
-                                )} */}
-                            </div>
+                            <ImageWrapper percentage={imageCoverage}>
+                                <img
+                                    src={imageUrl}
+                                    alt=""
+                                    role="presentation"
+                                />
+                            </ImageWrapper>
                         )}
                         <ContentWrapper percentage={contentCoverage}>
                             <Flex>
