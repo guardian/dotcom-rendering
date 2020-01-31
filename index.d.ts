@@ -303,6 +303,7 @@ interface CardType {
     showPulsingDot?: boolean;
     showSlash?: boolean;
     commentCount?: number;
+    starRating?: number;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -475,6 +476,7 @@ interface TrailType {
     kickerText?: string;
     shortUrl?: string;
     commentCount?: number;
+    starRating?: number;
 }
 
 interface TrailTabType {

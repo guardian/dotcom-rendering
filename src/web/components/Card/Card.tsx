@@ -1,7 +1,9 @@
 import React from 'react';
+import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { Flex } from '@frontend/web/components/Flex';
@@ -55,30 +57,27 @@ const coverages: CoveragesType = {
     },
 };
 
-// const starWrapper = css`
-//     background-color: ${palette.brandYellow.main};
-//     position: absolute;
-//     bottom: 0;
-//     margin-top: 2px;
-// `;
-/* <>
-    <Hide when="above" breakpoint="desktop">
-        <div className={starWrapper}>
-            <StarRating
-                rating={StarRating}
-                size="small"
-            />
-        </div>
-    </Hide>
-    <Hide when="below" breakpoint="desktop">
-        <div className={starWrapper}>
-            <StarRating
-                rating={StarRating}
-                size="medium"
-            />
-        </div>
-    </Hide>
-</> */
+const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
+    <>
+        <Hide when="above" breakpoint="desktop">
+            <div className={starWrapper}>
+                <StarRating rating={rating} size="small" />
+            </div>
+        </Hide>
+        <Hide when="below" breakpoint="desktop">
+            <div className={starWrapper}>
+                <StarRating rating={rating} size="medium" />
+            </div>
+        </Hide>
+    </>
+);
+
+const starWrapper = css`
+    background-color: ${palette.brandYellow.main};
+    position: absolute;
+    bottom: 0;
+    margin-top: 2px;
+`;
 
 export const Card = ({
     linkTo,
@@ -102,6 +101,7 @@ export const Card = ({
     showPulsingDot,
     showSlash,
     commentCount,
+    starRating,
 }: CardType) => {
     // Decide how we position the image on the card
     let imageCoverage: CardPercentageType | undefined;
@@ -115,6 +115,8 @@ export const Card = ({
     }
 
     const { long: longCount, short: shortCount } = formatCount(commentCount);
+    console.log('JUYGVUYGUYGUYGUYG');
+    console.log(starRating);
 
     return (
         <CardLink linkTo={linkTo} designType={designType} pillar={pillar}>
@@ -128,6 +130,13 @@ export const Card = ({
                                     alt=""
                                     role="presentation"
                                 />
+                                <>
+                                    {starRating && (
+                                        <StarRatingComponent
+                                            rating={starRating}
+                                        />
+                                    )}
+                                </>
                             </ImageWrapper>
                         )}
                         <ContentWrapper percentage={contentCoverage}>
