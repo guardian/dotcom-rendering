@@ -92,7 +92,7 @@ fetchMock
     .get(
         'begin:https://api.nextgen.guardianapps.co.uk/sharecount/', {
             status: 200,
-            body: meta,
+            body: sharecount,
         }, {
             overwriteRoutes: false
         },

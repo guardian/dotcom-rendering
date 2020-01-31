@@ -1,11 +1,10 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -25,7 +24,6 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { Hide } from '@root/src/web/components/Hide';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -161,36 +159,6 @@ const stretchLines = css`
 
 const mainMediaWrapper = css`
     position: relative;
-`;
-
-const starsPositionTop = css`
-    position: absolute;
-    top: 0;
-`;
-
-const starsPositionBottom = css`
-    position: absolute;
-    bottom: 0;
-`;
-
-const starsWrapper = css`
-    background-color: ${palette.brandYellow.main};
-    display: inline-block;
-
-    padding-left: 10px;
-
-    ${until.leftCol} {
-        padding-left: 0px;
-        margin-left: -0px;
-    }
-    ${until.phablet} {
-        padding-left: 20px;
-        margin-left: -20px;
-    }
-    ${until.mobileLandscape} {
-        padding-left: 10px;
-        margin-left: -10px;
-    }
 `;
 
 const PositionHeadline = ({
@@ -368,39 +336,12 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 elements={CAPI.mainMediaElements}
                                 pillar={CAPI.pillar}
                                 adTargeting={adTargeting}
+                                starRating={
+                                    CAPI.designType === 'Review'
+                                        ? CAPI.starRating
+                                        : undefined
+                                }
                             />
-                            {CAPI.starRating || CAPI.starRating === 0 ? (
-                                <>
-                                    <Hide when="below" breakpoint="phablet">
-                                        <div
-                                            className={cx(
-                                                starsWrapper,
-                                                starsPositionBottom,
-                                            )}
-                                        >
-                                            <StarRating
-                                                rating={CAPI.starRating}
-                                                size="large"
-                                            />
-                                        </div>
-                                    </Hide>
-                                    <Hide when="above" breakpoint="phablet">
-                                        <div
-                                            className={cx(
-                                                starsWrapper,
-                                                starsPositionTop,
-                                            )}
-                                        >
-                                            <StarRating
-                                                rating={CAPI.starRating}
-                                                size="large"
-                                            />
-                                        </div>
-                                    </Hide>
-                                </>
-                            ) : (
-                                <></>
-                            )}
                         </div>
                     </GridItem>
                     <GridItem area="standfirst">
