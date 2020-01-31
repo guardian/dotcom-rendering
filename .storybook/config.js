@@ -77,6 +77,15 @@ const guardianViewports = {
     },
 };
 
+export const viewports = [375,
+    480,
+    660,
+    740,
+    980,
+    1140,
+    1300,
+]
+
 fetchMock
     .restore()
     // Comment count

@@ -1,6 +1,7 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
+import { viewports } from '@root/.storybook/config';
 import { showcaseReviewCAPI } from '@root/fixtures/CAPI/review/showcaseReview';
 import { NAV } from '@root/fixtures/NAV';
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
@@ -13,7 +14,7 @@ import { ShowcaseLayout } from '@root/src/web/layouts/ShowcaseLayout/ShowcaseLay
 export default {
     title: 'Articles/Review/Showcase',
     parameters: {
-        chromatic: { delay: 600 },
+        chromatic: { delay: 600, viewports },
     },
 };
 
@@ -57,79 +58,8 @@ const mockRESTCalls = () =>
             { overwriteRoutes: false },
         );
 
-export const ReviewMobileMedium = () => {
+export const Review = () => {
     mockRESTCalls();
     setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
     return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
-};
-ReviewMobileMedium.story = {
-    parameters: {
-        viewport: { defaultViewport: 'mobileMedium' },
-    },
-};
-
-export const ReviewMobileLandscape = () => {
-    mockRESTCalls();
-    setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
-    return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
-};
-ReviewMobileLandscape.story = {
-    parameters: {
-        viewport: { defaultViewport: 'mobileLandscape' },
-    },
-};
-
-export const ReviewPhablet = () => {
-    mockRESTCalls();
-    setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
-    return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
-};
-ReviewPhablet.story = {
-    parameters: {
-        viewport: { defaultViewport: 'phablet' },
-    },
-};
-
-export const ReviewTablet = () => {
-    mockRESTCalls();
-    setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
-    return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
-};
-ReviewTablet.story = {
-    parameters: {
-        viewport: { defaultViewport: 'tablet' },
-    },
-};
-
-export const ReviewDesktop = () => {
-    mockRESTCalls();
-    setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
-    return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
-};
-ReviewDesktop.story = {
-    parameters: {
-        viewport: { defaultViewport: 'desktop' },
-    },
-};
-
-export const ReviewLeftCol = () => {
-    mockRESTCalls();
-    setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
-    return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
-};
-ReviewLeftCol.story = {
-    parameters: {
-        viewport: { defaultViewport: 'leftCol' },
-    },
-};
-
-export const ReviewWide = () => {
-    mockRESTCalls();
-    setTimeout(() => hydrateIslands(showcaseReviewCAPI, NAV));
-    return <ShowcaseLayout CAPI={showcaseReviewCAPI} NAV={NAV} />;
-};
-ReviewWide.story = {
-    parameters: {
-        viewport: { defaultViewport: 'wide' },
-    },
 };
