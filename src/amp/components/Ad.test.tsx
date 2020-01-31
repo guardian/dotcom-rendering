@@ -9,6 +9,7 @@ describe('AdComponent', () => {
     const commercialConfig = {
         useKrux: true,
         usePrebid: true,
+        usePermutive: true,
     };
     const commercialProperties = {
         UK: { adTargeting: [] },
@@ -18,6 +19,8 @@ describe('AdComponent', () => {
     };
     const kruxURL =
         'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
+    const permutiveURL =
+        'https://guardian.amp.permutive.com/rtc?type=doubleclick';
     const usPrebidURL =
         'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=7&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
     const auPrebidURL =
@@ -30,7 +33,7 @@ describe('AdComponent', () => {
         commercialConfig.usePrebid = true;
     });
 
-    it('rtc-config returns correctly formed Krux and PreBid URLs when useKrux and usePrebid flags are set to true', () => {
+    it('rtc-config returns correctly formed Krux, Permutive and PreBid URLs when useKrux, usePermutive and usePrebid flags are set to true', () => {
         const { container } = render(
             <Ad
                 edition={edition}
@@ -59,25 +62,29 @@ describe('AdComponent', () => {
                 expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
                     kruxURL,
                     usPrebidURL,
+                    permutiveURL,
                 ]);
             }
             if (auRtcAttribute) {
                 expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
                     kruxURL,
                     auPrebidURL,
+                    permutiveURL,
                 ]);
             }
             if (rowRtcAttribute) {
                 expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
                     kruxURL,
                     rowPrebidURL,
+                    permutiveURL,
                 ]);
             }
         }
     });
 
-    it('rtc-config returns only the correctly formed PreBid URL when useKrux flag is set to false and usePrebid flag is set to true', () => {
+    it('rtc-config returns only the correctly formed PreBid URL when useKrux and usePermutive flags are set to false and usePrebid flag is set to true', () => {
         commercialConfig.useKrux = false;
+        commercialConfig.usePermutive = false;
 
         const { container } = render(
             <Ad
@@ -121,7 +128,7 @@ describe('AdComponent', () => {
         }
     });
 
-    it('rtc-config returns only the Krux URL when useKrux flag is set to true and usePrebid flag is set to false', () => {
+    it('rtc-config returns only the Krux and Permutive URL when useKrux and usePermutive flags are set to true and usePrebid flag is set to false', () => {
         commercialConfig.usePrebid = false;
 
         const { container } = render(
@@ -166,9 +173,10 @@ describe('AdComponent', () => {
         }
     });
 
-    it('rtc-config returns no URLs when useKrux and usePrebid flags are set to false', () => {
+    it('rtc-config returns no URLs when useKrux, usePermutive and usePrebid flags are set to false', () => {
         commercialConfig.useKrux = false;
         commercialConfig.usePrebid = false;
+        commercialConfig.usePermutive = false;
 
         const { container } = render(
             <Ad

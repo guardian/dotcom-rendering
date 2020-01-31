@@ -104,6 +104,7 @@ export const News = () => (
                                         kickerText: kickers[2],
                                         imageUrl: images[6],
                                         imagePosition: 'top',
+                                        commentCount: 82224,
                                     }}
                                 />
                             </LI>
@@ -151,6 +152,7 @@ export const News = () => (
                                         headlineText: headlines[6],
                                         headlineSize: 'small',
                                         kickerText: kickers[3],
+                                        commentCount: 26,
                                     }}
                                 />
                             </LI>
@@ -216,6 +218,7 @@ export const News = () => (
                                         headlineText: headlines[11],
                                         headlineSize: 'small',
                                         kickerText: kickers[3],
+                                        commentCount: 44,
                                     }}
                                 />
                             </LI>
@@ -267,6 +270,7 @@ export const InDepth = () => (
                                         imageUrl: images[6],
                                         imagePosition: 'left',
                                         imageSize: 'small',
+                                        commentCount: 864,
                                     }}
                                 />
                             </LI>
@@ -331,12 +335,14 @@ export const InDepth = () => (
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'news',
-                                designType: 'Article',
+                                designType: 'Comment',
                                 headlineText: headlines[7],
                                 headlineSize: 'large',
                                 kickerText: kickers[0],
                                 imageUrl: images[0],
                                 imagePosition: 'top',
+                                webPublicationDate: '2019-11-11T09:45:30.000Z',
+                                commentCount: 3694,
                             }}
                         />
                     </LI>
@@ -388,6 +394,7 @@ export const Related = () => (
                                 webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 imageUrl: images[6],
                                 imagePosition: 'top',
+                                commentCount: 222864,
                             }}
                         />
                     </LI>
@@ -401,7 +408,7 @@ export const Related = () => (
                                 linkTo:
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
-                                designType: 'Article',
+                                designType: 'Comment',
                                 headlineText: headlines[8],
                                 headlineSize: 'medium',
                                 kickerText: kickers[1],
@@ -563,6 +570,7 @@ export const Quad = () => (
                                 imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
+                                commentCount: 30989,
                             }}
                         />
                     </LI>
@@ -584,6 +592,7 @@ export const Quad = () => (
                                 imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
+                                commentCount: 0,
                             }}
                         />
                     </LI>
@@ -641,6 +650,7 @@ export const Media = () => (
                                 imagePosition: 'top',
                                 showClock: true,
                                 mediaType: 'Gallery',
+                                commentCount: 0,
                             }}
                         />
                     </LI>
@@ -658,12 +668,12 @@ export const Media = () => (
                                 headlineText: headlines[11],
                                 headlineSize: 'medium',
                                 kickerText: kickers[0],
-                                webPublicationDate: '2019-11-11T09:45:30.000Z',
                                 imageUrl: images[0],
                                 imagePosition: 'top',
                                 showClock: true,
                                 mediaType: 'Audio',
                                 mediaDuration: 35999,
+                                commentCount: 864,
                             }}
                         />
                     </LI>

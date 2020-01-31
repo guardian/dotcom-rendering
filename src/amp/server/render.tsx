@@ -8,6 +8,7 @@ import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
+import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 
 export const render = (
     { body, path }: express.Request,
@@ -38,6 +39,11 @@ export const render = (
             beacon: `${CAPI.beaconURL}/count/pv.gif`,
             neilsenAPIID: findBySubsection(sectionName).apiID,
             domain: 'amp.theguardian.com',
+            permutive: {
+                namespace: 'guardian',
+                apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
+                payload: generatePermutivePayload(config),
+            },
         };
 
         const metadata = {

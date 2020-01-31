@@ -15,8 +15,8 @@ const ageStyles = (designType?: DesignType) => css`
 
     /* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
-    padding-left: ${designType === `Media` ? 0 : `5px`};
-    padding-right: ${designType === `Media` ? 0 : `5px`};
+    padding-left: 5px;
+    padding-right: 5px;
 
     svg {
         fill: ${palette.neutral[46]};

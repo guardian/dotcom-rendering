@@ -54,6 +54,7 @@ export const FourOrLess = ({ content }: Props) => {
                                 imageUrl: trail.image,
                                 mediaType: trail.mediaType,
                                 mediaDuration: trail.mediaDuration,
+                                commentCount: trail.commentCount,
                             }}
                         />
                     </LI>
