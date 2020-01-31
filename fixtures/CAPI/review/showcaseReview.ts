@@ -2697,6 +2697,16 @@ export const showcaseReviewCAPI: CAPIType = {
         sharedAdTargeting: {},
         keywordIds: '',
         showRelatedContent: false,
+        pageId: '',
+        webPublicationDate: 1579185778186,
+        headline: '',
+        author: '',
+        keywords: '',
+        series: '',
+        contentType: '',
+        isPaidContent: false,
+        ampIframeUrl:
+            'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
     },
     sectionLabel: 'TV comedy',
 };
