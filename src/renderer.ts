@@ -212,6 +212,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
         sizes,
         srcSet: srcset(url, salt),
         alt,
+        className: 'launch-slideshow',
         src: transformUrl(salt, url, 500),
         css: imageStyles(width, height),
     });

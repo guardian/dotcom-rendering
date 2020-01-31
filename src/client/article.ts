@@ -44,23 +44,57 @@ function insertAds(): void {
 }
 
 function ads(): void {
-    nativeClient.isPremium().then(premiumUser => {
-        if (!premiumUser) {
-            // show placeholders (should be hidden by default)
-            insertAds();
-        }
-    })
+    insertAds();
+    // nativeClient.isPremium().then(premiumUser => {
+    //     if (!premiumUser) {
+    //         // show placeholders (should be hidden by default)
+    //         insertAds();
+    //     }
+    // })
+}
+
+function topicClick(): void {
+    // const follow = document.querySelector('.follow');
+    // const status = follow?.querySelector('.status');
+    // if (status === 'Follow') {
+    //     nativeClient.followTopic().then(response => {
+    //         status?.textContent = "Following";
+    //     })
+    // } else {
+    //     nativeClient.unfollowTopic().then(response => {
+    //         status?.textContent = "Follow";
+    //     })
+    // }
 }
 
 function topics(): void {
-    // is user already following?
-    // add event listenets
-    // add callback functions to call nativeClient
+    // const follow = document.querySelector('.follow');
+    // const status = follow?.querySelector('.status');
+    // follow?.addEventListener('click', topicClick);
+    // nativeClient.isFollowing().then(following => {
+    //     if (following) {
+    //         status?.textContent = "Following";
+    //     }
+    // })
+}
+
+function launchSlideshow(e: any): void {
+    // const images = Array.from(document.querySelectorAll('.launch-slideshow'));
+    // const imagesWithCaptions = images.map(image => {
+    //     new Image({
+    //         url: image.src,
+    //         caption: image.alt,
+    //         credit: image.alt
+    //     })
+    // })
+    // const clickedImageIndex = images.findIndex(image => image.src === e.target.src)
+    // nativeClient.launchSlideshow(imagesWithCaptions, clickedImageIndex);
 }
 
 function slideshow(): void {
-    // add event listeners to images
-    // add callbacks to call nativeClient
+    const images = document.querySelectorAll('.launch-slideshow');
+    Array.from(images)
+        .forEach((image: Node) => image.addEventListener('click', launchSlideshow));
 }
 
 setup();
