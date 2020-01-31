@@ -47,7 +47,7 @@ function ads(): void {
     insertAds();
     // nativeClient.isPremium().then(premiumUser => {
     //     if (!premiumUser) {
-    //         // show placeholders (should be hidden by default)
+    //         Array.from(document.querySelectorAll('.ad-placeholder')).map(placeholder => placeholder.classList.remove('hidden'))
     //         insertAds();
     //     }
     // })
