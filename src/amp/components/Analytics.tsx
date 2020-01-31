@@ -1,4 +1,5 @@
 import React from 'react';
+import { PermutivePayload } from '@root/src/amp/lib/permutive';
 
 export interface AnalyticsModel {
     gaTracker: string;
@@ -11,6 +12,11 @@ export interface AnalyticsModel {
     beacon: string;
     neilsenAPIID: string;
     domain: string;
+    permutive: {
+        namespace: string;
+        apiKey: string;
+        payload: PermutivePayload;
+    };
 }
 
 export const Analytics: React.FC<{
@@ -27,6 +33,7 @@ export const Analytics: React.FC<{
         beacon,
         neilsenAPIID,
         domain,
+        permutive,
     },
 }) => {
     const scripts: string[] = [
@@ -79,6 +86,17 @@ export const Analytics: React.FC<{
                         "section": "${section}",
                         "segC": "Guardian - Google AMP"
                     }
+                }
+            </script>
+        </amp-analytics>`,
+        `<amp-analytics type="permutive">
+            <script type="application/json">
+                {
+                    "vars": {
+                        "namespace": "${permutive.namespace}",
+                        "key": "${permutive.apiKey}"
+                    },
+                    "extraUrlParams": ${JSON.stringify(permutive.payload)}
                 }
             </script>
         </amp-analytics>`,

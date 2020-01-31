@@ -347,13 +347,27 @@ type OnwardsType = {
     trails: TrailType[];
 };
 
+interface CommercialConfigType {
+    isPaidContent?: boolean;
+    pageId: string;
+    webPublicationDate?: number;
+    headline?: string;
+    author?: string;
+    keywords?: string;
+    section?: string;
+    edition?: string;
+    series?: string;
+    contentType: string;
+    ampIframeUrl: string;
+}
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
  * constructed in frontend and passed to dotcom-rendering
  * this data could eventually be defined in dotcom-rendering
  */
-interface ConfigType {
+interface ConfigType extends CommercialConfigType {
     ajaxUrl: string;
     sentryPublicApiKey: string;
     sentryHost: string;

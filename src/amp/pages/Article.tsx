@@ -10,7 +10,7 @@ import { css } from 'emotion';
 import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
-import { AdUserSync } from '@root/src/amp/components/AdUserSync';
+import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
 import { getPillar } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
@@ -43,7 +43,7 @@ export const Article: React.FC<{
 }> = ({ nav, articleData, config, analytics }) => (
     <>
         <Analytics key="analytics" analytics={analytics} />
-        <AdUserSync />
+        <AnalyticsIframe url={config.ampIframeUrl} />
         <AdConsent />
 
         {/* /TODO change to gray bgcolor */}
