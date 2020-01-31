@@ -101,6 +101,12 @@ const starsWrapper = css`
     }
 `;
 
+const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
+    <div className={starsWrapper}>
+        <StarRating rating={rating} size="large" />
+    </div>
+);
+
 export const ImageComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
@@ -122,11 +128,7 @@ export const ImageComponent: React.FC<{
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
                 />
-                {starRating && (
-                    <div className={starsWrapper}>
-                        <StarRating rating={starRating} size="large" />
-                    </div>
-                )}
+                {starRating && <StarRatingComponent rating={starRating} />}
             </div>
         );
     }
@@ -150,11 +152,7 @@ export const ImageComponent: React.FC<{
                     alt={element.data.alt || ''}
                     src={getFallback(element.imageSources)}
                 />
-                {starRating && (
-                    <div className={starsWrapper}>
-                        <StarRating rating={starRating} size="large" />
-                    </div>
-                )}
+                {starRating && <StarRatingComponent rating={starRating} />}
             </div>
         </Caption>
     );
