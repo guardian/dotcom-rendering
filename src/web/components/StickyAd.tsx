@@ -14,7 +14,7 @@ const adSlotWrapper = css`
 
 const stickyAdSlot = css`
     > .ad-slot__content {
-        height: 1095px;
+        height: 1059px;
     }
 
     > .ad-slot__label {
