@@ -50,13 +50,9 @@ export const StarRating: React.FC<{
     const stars = (n: number) => {
         return Array(5)
             .fill(0)
-            .map((el, i) => (
+            .map((_, i) => (
                 <div className={starWrapper}>
-                    {i < n ? (
-                        <Star key={i} />
-                    ) : (
-                        <Star className={emptyStar} key={i} />
-                    )}
+                    <Star className={i > n ? emptyStar : ''} key={i} />
                 </div>
             ));
     };
