@@ -15,7 +15,7 @@ const emptyStar = css`
     stroke: ${palette.neutral[7]};
 `;
 
-const determine = (size: SizeType) => {
+const determineSize = (size: SizeType) => {
     switch (size) {
         case 'small':
             return css`
@@ -56,5 +56,5 @@ export const StarRating: React.FC<{
                 </div>
             ));
     };
-    return <div className={determine(size)}>{stars(rating)}</div>;
+    return <div className={determineSize(size)}>{stars(rating)}</div>;
 };
