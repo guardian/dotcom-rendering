@@ -15,7 +15,7 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
+import { ContributorAvatar } from '@root/src/web/components/ContributorAvatar';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -78,7 +78,7 @@ const StandardGrid = ({
                         300px; /* Right Column */
                     grid-template-areas:
                         'title      border  headline    right-column'
-                        'metalines  border  lines       right-column'
+                        'lines      border  headline    right-column'
                         'meta       border  standfirst  right-column'
                         'meta       border  media       right-column'
                         '.          border  body        right-column';
@@ -92,7 +92,7 @@ const StandardGrid = ({
                         300px; /* Right Column */
                     grid-template-areas:
                         'title      border  headline    right-column'
-                        'metalines  border  lines       right-column'
+                        'lines      border  headline    right-column'
                         'meta       border  standfirst  right-column'
                         'meta       border  media       right-column'
                         '.          border  body        right-column';
@@ -105,7 +105,6 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title      right-column'
                         'headline   right-column'
-                        'lines      right-column'
                         'standfirst right-column'
                         'meta       right-column'
                         'media      right-column'
@@ -117,7 +116,6 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title'
                         'headline'
-                        'lines'
                         'standfirst'
                         'meta'
                         'media'
@@ -131,7 +129,6 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title'
                         'headline'
-                        'lines'
                         'standfirst'
                         'meta'
                         'media'
@@ -148,6 +145,32 @@ const maxWidth = css`
     ${from.desktop} {
         max-width: 620px;
     }
+`;
+
+const avatarHeadlineWrapper = (hasAvatar: boolean) => css`
+    min-height: ${hasAvatar && '259px'};
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+const avatarPositionStyles = css`
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -1.25rem;
+    margin-top: -36px;
+    margin-bottom: -29px;
+`;
+
+const pushToBottom = css`
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+`;
+
+const headlinePadding = css`
+    padding-bottom: 43px;
 `;
 
 interface Props {
@@ -167,6 +190,9 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
     // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+
+    const contributorTag = CAPI.tags.find(tag => tag.type === 'Contributor');
+    const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
 
     return (
         <>
@@ -235,25 +261,42 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
-                            <ArticleHeadlinePadding
-                                designType={CAPI.designType}
-                            >
-                                <ArticleHeadline
-                                    headlineString={CAPI.headline}
-                                    designType={CAPI.designType}
-                                    pillar={CAPI.pillar}
-                                    webPublicationDate={CAPI.webPublicationDate}
-                                    tags={CAPI.tags}
-                                    byline={CAPI.author.byline}
-                                />
-                            </ArticleHeadlinePadding>
+                            <div className={avatarHeadlineWrapper(!!avatarUrl)}>
+                                {/* TOP - we use divs here to position content in groups using flex */}
+                                <div className={!avatarUrl && headlinePadding}>
+                                    <ArticleHeadline
+                                        headlineString={CAPI.headline}
+                                        designType={CAPI.designType}
+                                        pillar={CAPI.pillar}
+                                        webPublicationDate={
+                                            CAPI.webPublicationDate
+                                        }
+                                        tags={CAPI.tags}
+                                        byline={CAPI.author.byline}
+                                    />
+                                </div>
+                                {/* BOTTOM */}
+                                <div>
+                                    {avatarUrl && (
+                                        <div className={avatarPositionStyles}>
+                                            <ContributorAvatar
+                                                imageSrc={avatarUrl}
+                                                imageAlt={
+                                                    CAPI.author.byline || ''
+                                                }
+                                            />
+                                        </div>
+                                    )}
+                                    <GuardianLines
+                                        count={8}
+                                        pillar={CAPI.pillar}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </GridItem>
-                    <GridItem area="metalines">
-                        <GuardianLines count={8} pillar={CAPI.pillar} />
-                    </GridItem>
                     <GridItem area="lines">
-                        <div className={maxWidth}>
+                        <div className={pushToBottom}>
                             <GuardianLines count={8} pillar={CAPI.pillar} />
                         </div>
                     </GridItem>
