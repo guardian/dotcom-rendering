@@ -5,7 +5,7 @@ import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
-import { useHover } from '@root/src/web/components/lib/useHover';
+import { useHover } from '@root/src/web/lib/useHover';
 
 const listItemStyles = css`
     list-style: none;

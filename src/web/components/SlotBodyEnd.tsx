@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { useApi } from '@root/src/web/components/lib/api';
+import { useApi } from '@root/src/web/lib/api';
 
 const wrapperMargins = css`
     margin: 18px 0;

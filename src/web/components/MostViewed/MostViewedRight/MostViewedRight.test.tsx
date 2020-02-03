@@ -1,9 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { mockTab1 } from '@root/fixtures/mostViewed';
+import { useApi as useApi_ } from '@root/src/web/lib/api';
 import { MostViewedRight } from './MostViewedRight';
-
-import { useApi as useApi_ } from '../../lib/api';
 
 const response = { data: mockTab1 };
 const useApi: any = useApi_;

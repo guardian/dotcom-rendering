@@ -5,9 +5,9 @@ import { palette } from '@guardian/src-foundations';
 
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { CommentCount } from '@frontend/web/components/CommentCount';
-import { useApi } from '@root/src/web/components/lib/api';
-import { formatCount } from '@root/src/web/components/lib/formatCount';
-import { joinUrl } from '@root/src/web/components/lib/joinUrl';
+import { useApi } from '@root/src/web/lib/api';
+import { formatCount } from '@root/src/web/lib/formatCount';
+import { joinUrl } from '@root/src/web/lib/joinUrl';
 
 type Props = {
     ajaxUrl: string;

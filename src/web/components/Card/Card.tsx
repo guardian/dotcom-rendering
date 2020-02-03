@@ -11,7 +11,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
-import { formatCount } from '@root/src/web/components/lib/formatCount';
+import { formatCount } from '@root/src/web/lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';

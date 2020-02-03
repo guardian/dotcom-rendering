@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { useApi as useApi_ } from '@root/src/web/components/lib/api';
+import { useApi as useApi_ } from '@root/src/web/lib/api';
 import { Counts } from './Counts';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

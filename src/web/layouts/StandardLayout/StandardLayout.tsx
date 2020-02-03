@@ -32,7 +32,10 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { decideLineCount, decideLineEffect } from '../layoutHelpers';
+import {
+    decideLineCount,
+    decideLineEffect,
+} from '@root/src/web/lib/layoutHelpers';
 import { Border } from '../Border';
 import { GridItem } from '../GridItem';
 

@@ -4,9 +4,8 @@ import {
     responseWithTwoTabs,
     responseWithOneTab,
 } from '@root/fixtures/mostViewed';
+import { useApi as useApi_ } from '@root/src/web/lib/api';
 import { MostViewedFooter } from './MostViewedFooter';
-
-import { useApi as useApi_ } from '../../lib/api';
 
 const useApi: any = useApi_;
 
