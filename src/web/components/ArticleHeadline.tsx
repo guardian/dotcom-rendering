@@ -136,6 +136,13 @@ const invertedWrapper = css`
     margin-left: 6px;
 `;
 
+// Due to MainMedia using position: relative, this seems to effect the rendering order
+// To mitigate we use z-index
+// TODO: find a cleaner solution
+const zIndex = css`
+    z-index: 1;
+`;
+
 const ageWarningMargins = css`
     margin-top: 12px;
     margin-left: -10px;
@@ -222,7 +229,7 @@ const renderHeadline = ({
                 // and a black background (only for the text)
                 <div className={cx(shiftSlightly, maxWidth, displayFlex)}>
                     <HeadlineTag tagText="Interview" pillar={pillar} />
-                    <h1 className={cx(invertedFont, invertedWrapper)}>
+                    <h1 className={cx(invertedFont, invertedWrapper, zIndex)}>
                         <span
                             className={cx(
                                 blackBackground,

@@ -55,6 +55,31 @@ const coverages: CoveragesType = {
     },
 };
 
+// const starWrapper = css`
+//     background-color: ${palette.brandYellow.main};
+//     position: absolute;
+//     bottom: 0;
+//     margin-top: 2px;
+// `;
+/* <>
+    <Hide when="above" breakpoint="desktop">
+        <div className={starWrapper}>
+            <StarRating
+                rating={StarRating}
+                size="small"
+            />
+        </div>
+    </Hide>
+    <Hide when="below" breakpoint="desktop">
+        <div className={starWrapper}>
+            <StarRating
+                rating={StarRating}
+                size="medium"
+            />
+        </div>
+    </Hide>
+</> */
+
 export const Card = ({
     linkTo,
     pillar,

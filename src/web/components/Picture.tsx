@@ -23,21 +23,18 @@ export const Picture: React.FC<{
     sources: PictureSource[];
     alt: string;
     src: string;
-    children?: JSXElements;
-}> = ({ sources, alt, src, children }) => {
+}> = ({ sources, alt, src }) => {
     return (
-        <>
-            <picture
-                dangerouslySetInnerHTML={{
-                    __html: `<!--[if IE 9]><video style="display: none;"><![endif]-->${sources
-                        .map(forSource)
-                        .join(
-                            '',
-                        )}<!--[if IE 9]></video><![endif]--><img itemprop="contentUrl" alt="${alt}" src="${src}" />`,
-                }}
-            >
-                {children}
-            </picture>
-        </>
+        // https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
+        // why did we put `style="vertical-align: middle;"` inside the img tag
+        <picture
+            dangerouslySetInnerHTML={{
+                __html: `<!--[if IE 9]><video style="display: none;"><![endif]-->${sources
+                    .map(forSource)
+                    .join(
+                        '',
+                    )}<!--[if IE 9]></video><![endif]--><img style="vertical-align: middle;" itemprop="contentUrl" alt="${alt}" src="${src}" />`,
+            }}
+        />
     );
 };
