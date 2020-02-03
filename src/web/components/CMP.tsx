@@ -19,8 +19,9 @@ export class CMP extends Component<{}, { show: boolean }> {
 
     public render() {
         const { show } = this.state;
+        const { cmpUi } = window.guardian.app.data.CAPI.config.switches;
 
-        if (!show) {
+        if (!show || !cmpUi) {
             return null;
         }
 
@@ -28,12 +29,6 @@ export class CMP extends Component<{}, { show: boolean }> {
             source: 'dcr',
             onClose: () => {
                 this.setState({ show: false });
-            },
-            fontFamilies: {
-                headlineSerif: 'GH Guardian Headline, Georgia, serif',
-                bodySerif: 'GuardianTextEgyptian, Georgia, serif',
-                bodySans:
-                    'GuardianTextSans, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
             },
         };
 
