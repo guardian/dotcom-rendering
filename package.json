@@ -31,6 +31,7 @@
     ],
     "dependencies": {
         "@emotion/core": "^10.0.5",
+        "@guardian/consent-management-platform": "^2.0.7-beta.0",
         "@guardian/src-foundations": "^0.10.0",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",
