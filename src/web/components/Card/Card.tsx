@@ -115,8 +115,6 @@ export const Card = ({
     }
 
     const { long: longCount, short: shortCount } = formatCount(commentCount);
-    console.log('JUYGVUYGUYGUYGUYG');
-    console.log(starRating);
 
     return (
         <CardLink linkTo={linkTo} designType={designType} pillar={pillar}>
