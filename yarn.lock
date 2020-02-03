@@ -1456,10 +1456,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/consent-management-platform@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-2.0.5.tgz#d7cfa35d096b5f495b0b1756133ead8b10bc98c0"
-  integrity sha512-NIxnb6P7do81OGnfoJstL5XcR4VBnHcNkMHdlmoBSpPeMH4mqwpeKlKxps2ViUO7dIpJAOY39bWh6+g7BdCIxw==
+"@guardian/consent-management-platform@^2.0.7-beta.0":
+  version "2.0.7-beta.0"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-2.0.7-beta.0.tgz#310170381312f2c10e22a079b2d886f26de925b6"
+  integrity sha512-e4LNtCpDHLJViHWw/6IdGcgwh4EPmu/2ezpfey6OHgyTDweL6PiUSXLJAQo30E+UHQ4lydo2HRBpj/clzofJzQ==
   dependencies:
     "@guardian/src-button" "^0.5.1"
     "@guardian/src-foundations" "^0.10.0"
