@@ -146,9 +146,21 @@ export const Card = ({
                                         pillar={pillar}
                                         size={headlineSize}
                                         showQuotes={showQuotes}
-                                        kickerText={kickerText}
-                                        showPulsingDot={showPulsingDot}
-                                        showSlash={showSlash}
+                                        kickerText={
+                                            designType === 'Live'
+                                                ? 'Live'
+                                                : kickerText
+                                        }
+                                        showPulsingDot={
+                                            designType === 'Live'
+                                                ? true
+                                                : showPulsingDot
+                                        }
+                                        showSlash={
+                                            designType === 'Live'
+                                                ? true
+                                                : showSlash
+                                        }
                                         byline={byline}
                                         showByline={showByline}
                                     />
