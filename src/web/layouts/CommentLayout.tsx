@@ -147,11 +147,14 @@ const maxWidth = css`
     }
 `;
 
-const avatarHeadlineWrapper = (hasAvatar: boolean) => css`
-    min-height: ${hasAvatar && '259px'};
+const avatarHeadlineWrapper = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+`;
+
+const minHeightWithAvatar = css`
+    min-height: 259px;
 `;
 
 const avatarPositionStyles = css`
@@ -261,7 +264,12 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
-                            <div className={avatarHeadlineWrapper(!!avatarUrl)}>
+                            <div
+                                className={cx(
+                                    avatarHeadlineWrapper,
+                                    avatarUrl && minHeightWithAvatar,
+                                )}
+                            >
                                 {/* TOP - we use divs here to position content in groups using flex */}
                                 <div
                                     className={cx(
