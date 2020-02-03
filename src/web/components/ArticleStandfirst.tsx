@@ -6,7 +6,7 @@ import { palette } from '@guardian/src-foundations';
 import { Standfirst } from '@frontend/web/components/Standfirst';
 
 const standfirstStyles = css`
-    max-width: 550px;
+    max-width: 540px;
     margin-bottom: 12px;
 `;
 
