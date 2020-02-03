@@ -3,6 +3,8 @@
 import setup from 'client/setup';
 import { nativeClient } from 'native/nativeApi';
 import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
+import { Topic } from 'mobile-apps-thrift-typescript/Topic';
+import { Image } from 'mobile-apps-thrift-typescript/Image';
 
 // ----- Run ----- //
 
@@ -45,57 +47,82 @@ function insertAds(): void {
 
 function ads(): void {
     insertAds();
-    // nativeClient.isPremium().then(premiumUser => {
-    //     if (!premiumUser) {
-    //         Array.from(document.querySelectorAll('.ad-placeholder'))
-    //              .map(placeholder => placeholder.classList.remove('hidden'))
-    //         insertAds();
-    //     }
-    // })
+    nativeClient.isPremiumUser().then(premiumUser => {
+        if (!premiumUser) {
+            Array.from(document.querySelectorAll('.ad-placeholder'))
+                 .map(placeholder => placeholder.classList.remove('hidden'))
+            insertAds();
+        }
+    })
 }
 
-function topicClick(): void {
-    // const follow = document.querySelector('.follow');
-    // const status = follow?.querySelector('.status');
-    // if (status === 'Follow') {
-    //     nativeClient.followTopic().then(response => {
-    //         status?.textContent = "Following";
-    //     })
-    // } else {
-    //     nativeClient.unfollowTopic().then(response => {
-    //         status?.textContent = "Follow";
-    //     })
-    // }
+function topicClick(e: Event): void {
+    const follow = document.querySelector('.follow');
+    const status = follow?.querySelector('.status');
+    const statusText = status?.textContent;
+    const id = follow?.getAttribute('data-id');
+
+    if (!id) {
+        console.error('No id for topic');
+        return;
+    }
+
+    const topic = new Topic({ id });
+
+    if (statusText && statusText === 'Follow') {
+        nativeClient.follow(topic).then(response => {
+            if (status?.textContent) {
+                status.textContent = "Following";
+            }
+        })
+    } else {
+        nativeClient.unfollow(topic).then(response => {
+            if (status?.textContent) {
+                status.textContent = "Follow";
+            }
+        })
+    }
 }
 
 function topics(): void {
-    // const follow = document.querySelector('.follow');
-    // const status = follow?.querySelector('.status');
-    // follow?.addEventListener('click', topicClick);
-    // nativeClient.isFollowing().then(following => {
-    //     if (following) {
-    //         status?.textContent = "Following";
-    //     }
-    // })
+    const follow = document.querySelector('.follow');
+    const status = follow?.querySelector('.status');
+    const id = follow?.getAttribute('data-id');
+
+    if (!id) {
+        console.error('No id for topic');
+        return;
+    }
+
+    const topic = new Topic({ id });
+    follow?.addEventListener('click', topicClick);
+    nativeClient.isFollowing(topic).then(following => {
+        if (following && status?.textContent) {
+            status.textContent = "Following";
+        }
+    })
 }
 
-function launchSlideshow(e: Event): void {
-    // const images = Array.from(document.querySelectorAll('.launch-slideshow'));
-    // const imagesWithCaptions = images.map(image => {
-    //     new Image({
-    //         url: image.src,
-    //         caption: image.alt,
-    //         credit: image.alt
-    //     })
-    // })
-    // const clickedImageIndex = images.findIndex(image => image.src === e.target.src)
-    // nativeClient.launchSlideshow(imagesWithCaptions, clickedImageIndex);
+function launchSlideshow(src: string | null): void {
+    const images = Array.from(document.querySelectorAll('.launch-slideshow'));
+    const imagesWithCaptions: Image[] = images.flatMap((image: Element) => {
+        const url = image.getAttribute('src');
+        const caption =  image.getAttribute('caption') ?? undefined;
+        const credit = image.getAttribute('credit') ?? undefined;
+        return url ? new Image({ url, caption, credit }) : [];
+    });
+    const clickedImageIndex = images.findIndex((image: Element) => image.getAttribute('src') === src);
+    if (imagesWithCaptions.length && clickedImageIndex >= 0) {
+        nativeClient.launchSlideshow(imagesWithCaptions, clickedImageIndex);
+    }
 }
 
 function slideshow(): void {
     const images = document.querySelectorAll('.launch-slideshow');
     Array.from(images)
-        .forEach((image: Node) => image.addEventListener('click', launchSlideshow));
+        .forEach((image: Element) => image.addEventListener('click', (e: Event) => {
+            launchSlideshow(image.getAttribute('src'));
+        }));
 }
 
 setup();

@@ -53,6 +53,8 @@ const HeaderImage = ({ className, image, imageSalt }: Props): JSX.Element | null
                     width={imageData.width}
                     sizes={`calc(80vh * ${imageData.width/imageData.height})`}
                     salt={imageSalt}
+                    caption={imageData.caption}
+                    credit={imageData.credit}
                 />
             </figure>
         </div>

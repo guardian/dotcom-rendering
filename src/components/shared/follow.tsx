@@ -16,7 +16,7 @@ function Follow({ contributors }: Props): JSX.Element | null {
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.apiUrl) {
-        return <div className="follow"><span className="status">Follow</span> { contributor.webTitle }</div>;
+        return <div className="follow" data-id={contributor.id}><span className="status">Follow</span> { contributor.webTitle }</div>;
     }
 
     return null;

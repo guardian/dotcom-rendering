@@ -48,6 +48,8 @@ const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Ele
                     width={imageData.width}
                     sizes={`(min-width: ${breakpoints.wide}px) 620px, 100vw`}
                     salt={imageSalt}
+                    caption={imageData.caption}
+                    credit={imageData.credit}
                 />
                 <HeaderImageCaption caption={imageData.caption} credit={imageData.credit}/>
             </figure>
