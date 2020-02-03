@@ -87,7 +87,7 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
             return css`
                 color: ${palette.neutral[60]};
                 svg {
-                    fill: ${palette.neutral[60]};
+                    fill: ${palette.neutral[46]};
                 }
             `;
     }
