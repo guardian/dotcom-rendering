@@ -49,6 +49,7 @@ export const OnwardsLayout = ({ onwardSections }: Props) => {
                         <OnwardsTitle
                             title={section.heading}
                             description={section.description}
+                            url={section.url}
                         />
                     </LeftColumn>
                     <OnwardsContainer>
@@ -56,6 +57,7 @@ export const OnwardsLayout = ({ onwardSections }: Props) => {
                             <OnwardsTitle
                                 title={section.heading}
                                 description={section.description}
+                                url={section.url}
                             />
                         </Hide>
                         {decideLayout(section.trails.slice(0, 8))}

@@ -3,7 +3,7 @@ import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 
 import {
-    withDescription,
+    linkAndDescription,
     oneTrail,
     twoTrails,
     threeTrails,
@@ -20,12 +20,12 @@ export default {
     title: 'Components/Onwards',
 };
 
-export const withDescriptionStory = () => (
+export const linkAndDescriptionStory = () => (
     <Section>
-        <OnwardsLayout onwardSections={[withDescription]} />
+        <OnwardsLayout onwardSections={[linkAndDescription]} />
     </Section>
 );
-withDescriptionStory.story = { name: 'With description' };
+linkAndDescriptionStory.story = { name: 'With link and description' };
 
 export const oneTrailStory = () => (
     <Section>
