@@ -361,7 +361,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 </StandardGrid>
             </Section>
 
-            <Section padded={false}>
+            <Section padded={false} showTopBorder={false}>
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
                     className=""
