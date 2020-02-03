@@ -7,7 +7,7 @@ import { Counts } from './Counts';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: any = useApi_;
 
-jest.mock('@frontend/web/components/lib/api', () => ({
+jest.mock('../lib/api', () => ({
     useApi: jest.fn(),
 }));
 

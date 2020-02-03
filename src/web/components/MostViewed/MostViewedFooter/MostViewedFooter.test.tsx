@@ -9,7 +9,7 @@ import { MostViewedFooter } from './MostViewedFooter';
 
 const useApi: any = useApi_;
 
-jest.mock('../../lib/api', () => ({
+jest.mock('../../../lib/api', () => ({
     useApi: jest.fn(),
 }));
 
