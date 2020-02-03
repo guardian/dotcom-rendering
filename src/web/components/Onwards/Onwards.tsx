@@ -87,7 +87,10 @@ export const Onwards = ({
     // two things, 1: A popular tag, or 2: A generic text match
     const tagToFilterBy = firstPopularTag(keywordIds, isPaidContent);
 
-    const seriesTag = tags.find(tag => tag.type === 'Series');
+    // In this context, Blog tags are treated the same as Series tags
+    const seriesTag = tags.find(
+        tag => tag.type === 'Series' || tag.type === 'Blog',
+    );
 
     if (hasStoryPackage) {
         // Always fetch the story package if it exists
