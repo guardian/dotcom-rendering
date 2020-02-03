@@ -411,6 +411,13 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </ShowcaseGrid>
             </Section>
 
+            <Section padded={false}>
+                <AdSlot
+                    asps={namedAdSlotParameters('merchandising-high')}
+                    className=""
+                />
+            </Section>
+
             <Section islandId="onwards-content" />
 
             {!isPaidContent && (
