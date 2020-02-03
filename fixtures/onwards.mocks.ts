@@ -157,3 +157,10 @@ export const eightTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 8),
 };
+
+export const withDescription: OnwardsType = {
+    description:
+        'Our writers reflect on the people, issues and curiosities in the news',
+    heading: 'More on this story',
+    trails: trails.slice(0, 8),
+};
