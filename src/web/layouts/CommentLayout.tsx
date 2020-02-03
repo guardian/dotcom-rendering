@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -263,7 +263,11 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                         <div className={maxWidth}>
                             <div className={avatarHeadlineWrapper(!!avatarUrl)}>
                                 {/* TOP - we use divs here to position content in groups using flex */}
-                                <div className={!avatarUrl && headlinePadding}>
+                                <div
+                                    className={cx(
+                                        !avatarUrl && headlinePadding,
+                                    )}
+                                >
                                     <ArticleHeadline
                                         headlineString={CAPI.headline}
                                         designType={CAPI.designType}
