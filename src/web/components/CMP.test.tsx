@@ -10,6 +10,7 @@ const globalAny: any = global;
 
 jest.mock('@guardian/consent-management-platform', () => ({
     shouldShow: jest.fn(),
+    setErrorHandler: jest.fn(),
 }));
 
 jest.mock(
@@ -37,6 +38,11 @@ describe('CMP', () => {
                             },
                         },
                     },
+                },
+            },
+            modules: {
+                sentry: {
+                    reportError: () => {},
                 },
             },
         };
