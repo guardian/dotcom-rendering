@@ -40,6 +40,14 @@ const mockRESTCalls = () =>
             },
             { overwriteRoutes: false },
         )
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=/p/d7m9d,/p/d79vx,/p/d6qze,/p/d6yth',
+            {
+                status: 200,
+                body: commentCount,
+            },
+            { overwriteRoutes: false },
+        )
         // Most read by category
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/most-read/stage.json?dcr=true',
