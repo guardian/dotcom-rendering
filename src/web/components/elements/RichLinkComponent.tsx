@@ -8,7 +8,7 @@ import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
-import { useApi } from '@frontend/web/components/lib/api';
+import { useApi } from '@root/src/web/lib/api';
 
 type colour = string;
 

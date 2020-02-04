@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useApi } from '@frontend/web/components/lib/api';
-import { joinUrl } from '@frontend/web/components/lib/joinUrl';
+import { useApi } from '@root/src/web/lib/api';
+import { joinUrl } from '@root/src/web/lib/joinUrl';
 
 import { OnwardsLayout } from './OnwardsLayout';
 

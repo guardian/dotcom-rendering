@@ -7,7 +7,7 @@ import { palette } from '@guardian/src-foundations';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
-import { ArticleRenderer } from '@root/src/web/components/lib/ArticleRenderer';
+import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Hide } from '@root/src/web/components/Hide';
 

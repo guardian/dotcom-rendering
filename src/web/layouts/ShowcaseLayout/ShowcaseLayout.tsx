@@ -33,7 +33,7 @@ import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 import {
     decideLineCount,
     decideLineEffect,
-} from '@root/src/web/layouts/layoutHelpers';
+} from '@root/src/web/lib/layoutHelpers';
 import { Border } from '@root/src/web/layouts/Border';
 import { GridItem } from '@root/src/web/layouts/GridItem';
 

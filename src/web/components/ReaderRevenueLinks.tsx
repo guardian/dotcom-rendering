@@ -7,7 +7,7 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { getCookie } from '@root/src/web/browser/cookie';
-import { AsyncClientComponent } from '@root/src/web/components/lib/AsyncClientComponent';
+import { AsyncClientComponent } from '@root/src/web/lib/AsyncClientComponent';
 
 const padded = css`
     ${until.mobileLandscape} {
