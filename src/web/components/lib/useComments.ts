@@ -38,6 +38,7 @@ const withComments = (
         return {
             description: section.description,
             heading: section.heading,
+            url: section.url,
             trails: updateTrailsWithCounts(section.trails, counts),
         };
     });
