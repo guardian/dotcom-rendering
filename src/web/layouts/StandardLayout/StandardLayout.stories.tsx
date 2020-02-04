@@ -5,6 +5,7 @@ import { viewports } from '@root/.storybook/config';
 import { standardReviewCAPI } from '@root/fixtures/CAPI/review/standardReview';
 import { NAV } from '@root/fixtures/NAV';
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
+import { series } from '@root/fixtures/series';
 import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 
@@ -45,6 +46,15 @@ const mockRESTCalls = () =>
             {
                 status: 200,
                 body: responseWithTwoTabs,
+            },
+            { overwriteRoutes: false },
+        )
+        // Series
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/series/tv-and-radio/series/tv-review.json?dcr',
+            {
+                status: 200,
+                body: series,
             },
             { overwriteRoutes: false },
         )
