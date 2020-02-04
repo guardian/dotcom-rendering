@@ -14,20 +14,25 @@ const linkStyles = css`
     }
 `;
 
-const TitleWrapper = ({
-    url,
-    children,
-}: {
-    url?: string;
-    children: JSXElements;
-}) =>
-    url ? (
-        <a className={linkStyles} href={url}>
-            {children}
-        </a>
-    ) : (
-        <>{children}</>
-    );
+const headerStyles = css`
+    ${headline.xsmall({ fontWeight: 'bold' })};
+    color: ${palette.neutral[7]};
+    padding-bottom: 14px;
+    padding-top: 6px;
+    margin-left: 10px;
+
+    ${from.leftCol} {
+        margin-left: 0;
+    }
+`;
+
+const descriptionStyles = css`
+    ${headline.xxxsmall({ fontWeight: 'medium' })};
+    color: ${palette.neutral[46]};
+    p {
+        margin-bottom: 8px;
+    }
+`;
 
 export const OnwardsTitle = ({
     title,
@@ -39,43 +44,18 @@ export const OnwardsTitle = ({
     url?: string;
 }) => (
     <>
-        <TitleWrapper url={url}>
-            <h2
-                className={css`
-                    ${headline.xsmall()};
-                    color: ${palette.neutral[7]};
-                    font-weight: 900;
-                    padding-bottom: 14px;
-                    padding-top: 6px;
-
-                    ${from.leftCol} {
-                        ${headline.xsmall()};
-                        font-weight: 900;
-                    }
-
-                    ${from.wide} {
-                        font-weight: 900;
-                    }
-
-                    margin-left: 10px;
-                    ${from.leftCol} {
-                        margin-left: 0;
-                    }
-                `}
-            >
-                {title}
-            </h2>
-        </TitleWrapper>
+        {url ? (
+            <a className={linkStyles} href={url}>
+                <h2 className={headerStyles}>{title}</h2>
+            </a>
+        ) : (
+            <h2 className={headerStyles}>{title}</h2>
+        )}
         {description && (
-            <h3
-                className={css`
-                    ${headline.xxxsmall()};
-                    color: ${palette.neutral[46]};
-                    font-weight: 500;
-                `}
-            >
-                {description}
-            </h3>
+            <p
+                className={descriptionStyles}
+                dangerouslySetInnerHTML={{ __html: description }}
+            />
         )}
     </>
 );
