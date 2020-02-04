@@ -32,8 +32,8 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { Border } from './Border';
-import { GridItem } from './GridItem';
+import { Border } from '../Border';
+import { GridItem } from '../GridItem';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {

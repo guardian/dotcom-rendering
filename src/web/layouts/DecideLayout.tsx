@@ -3,7 +3,7 @@ import { designTypeDefault } from '@root/src/lib/designTypes';
 
 import { StandardLayout } from './StandardLayout/StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout/ShowcaseLayout';
-import { CommentLayout } from './CommentLayout';
+import { CommentLayout } from './CommentLayout/CommentLayout';
 
 import { hasShowcase } from './layoutHelpers';
 
