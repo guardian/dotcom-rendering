@@ -45,16 +45,15 @@ const trails: TrailType[] = [
     {
         url:
             'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
-        headline: 'An inactive live sport blog',
+        headline: 'An inactive live sport blog - as it happened',
         showByline: false,
         byline: 'Damian Carrington Environment editor',
         image:
             'https://i.guim.co.uk/img/media/1774967ff6b9127a43b06c0685d1fd499c965141/98_0_3413_2048/master/3413.jpg?width=900&quality=85&s=7332d70e260400883bfdcb5b1453ef10',
-        isLiveBlog: false,
+        isLiveBlog: true,
         webPublicationDate: '2019-12-02T09:45:30.000Z',
         pillar: 'sport',
-        designType: 'Live',
-        kickerText: 'Live',
+        designType: 'Article',
     },
     {
         url:
