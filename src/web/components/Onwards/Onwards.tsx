@@ -64,6 +64,7 @@ type Props = {
     showRelatedContent: boolean;
     keywordIds: string[];
     contentType: string;
+    tags: TagType[];
 };
 
 export const Onwards = ({
@@ -76,6 +77,7 @@ export const Onwards = ({
     showRelatedContent,
     keywordIds,
     contentType,
+    tags,
 }: Props) => {
     const onwardSections: OnwardsType[] = [];
 
@@ -84,6 +86,11 @@ export const Onwards = ({
     // Related content can be a collection of articles based on
     // two things, 1: A popular tag, or 2: A generic text match
     const tagToFilterBy = firstPopularTag(keywordIds, isPaidContent);
+
+    // In this context, Blog tags are treated the same as Series tags
+    const seriesTag = tags.find(
+        tag => tag.type === 'Series' || tag.type === 'Blog',
+    );
 
     if (hasStoryPackage) {
         // Always fetch the story package if it exists
@@ -102,6 +109,27 @@ export const Onwards = ({
     } else if (isAdFreeUser && isPaidContent) {
         // Don't show any related content (other than story packages) for
         // adfree users when the content is paid for
+    } else if (seriesTag) {
+        // Use the series tag to get other data in the same series
+        // Example: {
+        //              id: "cities/series/the-illustrated-city",
+        //              title: "The illustrated city",
+        //              type: "Series",
+        //          }
+        //
+        const seriesUrl = joinUrl([
+            ajaxUrl,
+            'series',
+            `${seriesTag.id}.json?dcr`,
+        ]);
+        const { data } = useApi(seriesUrl);
+
+        if (data && data.trails) {
+            onwardSections.push({
+                heading: data.displayname, // This displayname property is called 'heading' elsewhere
+                trails: data.trails.slice(0, 4), // Series onwards is four only
+            });
+        }
     } else if (dontShowRelatedContent) {
         // Then don't show related content
     } else if (tagToFilterBy) {

@@ -348,6 +348,8 @@ interface CardHeadlineType {
 type OnwardsType = {
     heading: string;
     trails: TrailType[];
+    description?: string;
+    url?: string;
 };
 
 interface CommercialConfigType {
