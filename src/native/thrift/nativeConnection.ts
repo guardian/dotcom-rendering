@@ -9,10 +9,14 @@ import {
     ITransportConstructor,
     IProtocolConstructor,
     TApplicationException,
-    TApplicationExceptionType
+    TApplicationExceptionType,
+    BufferedTransport,
+    CompactProtocol
 } from '@creditkarma/thrift-server-core'
 
 import * as uuid from 'uuid';
+import * as Webview from 'mobile-apps-thrift-typescript/Webview';
+import { WebviewProcesser, WebviewHandler } from 'native/webviewApi';
 
 declare global {
     interface Window {
@@ -25,6 +29,7 @@ declare global {
                 };
             };
         };
+        receiveiOSMessage: (buffer: Buffer) => void;
     }
 }
 
@@ -117,6 +122,15 @@ export class NativeConnection<Context = void> extends ThriftConnection {
         });
     }
 }
+
+function receiveiOSMessage(buffer: Buffer): void {
+    const transport = new BufferedTransport(buffer);
+    const protocol = new CompactProtocol(transport);
+    const processor = new Webview.Processor(new WebviewHandler);
+    processor.process(protocol, protocol, null);
+}
+
+window.receiveiOSMessage = receiveiOSMessage;
 
 export function createAppClient<TClient extends ThriftClient<void>>(
     ServiceClient: IClientConstructor<TClient, void>, 
