@@ -4,7 +4,8 @@ type staticAdSlotNames =
     | 'right'
     | 'top-above-nav'
     | 'mostpop'
-    | 'merchandising-high';
+    | 'merchandising-high'
+    | 'merchandising';
 
 export const namedAdSlotParameters = (
     name: staticAdSlotNames,
@@ -51,6 +52,18 @@ export const namedAdSlotParameters = (
         },
         'merchandising-high': {
             name: 'merchandising-high',
+            adTypes: [],
+            sizeMapping: {
+                mobile: ['1,1|2,2|88,87|fluid'],
+            },
+            showLabel: false,
+            refresh: false,
+            outOfPage: false,
+            optId: undefined,
+            optClassNames: [],
+        },
+        merchandising: {
+            name: 'merchandising',
             adTypes: [],
             sizeMapping: {
                 mobile: ['1,1|2,2|88,87|fluid'],

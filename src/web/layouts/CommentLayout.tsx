@@ -347,6 +347,18 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 </>
             )}
 
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
+                <AdSlot
+                    asps={namedAdSlotParameters('merchandising')}
+                    className=""
+                />
+            </Section>
+
             {NAV.subNavSections && (
                 <Section padded={false} islandId="sub-nav-root">
                     <SubNav
