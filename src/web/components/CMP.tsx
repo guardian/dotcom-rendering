@@ -1,22 +1,16 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     shouldShow,
     setErrorHandler,
 } from '@guardian/consent-management-platform';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 
-export class CMP extends Component<{}, { show: boolean }> {
-    constructor(props: {}) {
-        super(props);
+export const CMP = () => {
+    const [show, setShow] = useState(false);
 
-        this.state = {
-            show: false,
-        };
-    }
-
-    public componentDidMount() {
+    useEffect(() => {
         if (shouldShow()) {
-            this.setState({ show: true });
+            setShow(true);
 
             // setErrorHandler takes function to be called on errors in the CMP UI
             setErrorHandler((errMsg: string): void => {
@@ -25,23 +19,20 @@ export class CMP extends Component<{}, { show: boolean }> {
                 window.guardian.modules.sentry.reportError(err, 'cmp');
             });
         }
+    }, []);
+
+    const onClose = () => setShow(false);
+
+    const { cmpUi } = window.guardian.app.data.CAPI.config.switches;
+
+    if (!show || !cmpUi) {
+        return null;
     }
 
-    public render() {
-        const { show } = this.state;
-        const { cmpUi } = window.guardian.app.data.CAPI.config.switches;
+    const props = {
+        source: 'dcr',
+        onClose,
+    };
 
-        if (!show || !cmpUi) {
-            return null;
-        }
-
-        const props = {
-            source: 'dcr',
-            onClose: () => {
-                this.setState({ show: false });
-            },
-        };
-
-        return <ConsentManagementPlatform {...props} />;
-    }
-}
+    return <ConsentManagementPlatform {...props} />;
+};
