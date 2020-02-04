@@ -153,14 +153,11 @@ export const Card = ({
                                                 : kickerText
                                         }
                                         showPulsingDot={
-                                            designType === 'Live' && isLiveBlog
-                                                ? true
-                                                : showPulsingDot
+                                            designType === 'Live' ||
+                                            showPulsingDot
                                         }
                                         showSlash={
-                                            designType === 'Live' && isLiveBlog
-                                                ? true
-                                                : showSlash
+                                            designType === 'Live' || showSlash
                                         }
                                         byline={byline}
                                         showByline={showByline}
