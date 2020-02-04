@@ -158,7 +158,8 @@ export const eightTrails: OnwardsType = {
     trails: trails.slice(0, 8),
 };
 
-export const withDescription: OnwardsType = {
+export const linkAndDescription: OnwardsType = {
+    url: 'https://www.theguardian.com/news/shortcuts',
     description:
         'Our writers reflect on the people, issues and curiosities in the news',
     heading: 'More on this story',
