@@ -1,4 +1,4 @@
-import { CAPI } from '@root/fixtures/CAPI';
+import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { ga } from '@root/fixtures/ga';
 import { extract as extractNAV } from '@root/src/model/extract-nav';
 import { document } from './document';

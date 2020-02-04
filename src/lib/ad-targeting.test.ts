@@ -1,4 +1,4 @@
-import { CAPI } from '@root/fixtures/CAPI';
+import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { buildAdTargeting } from './ad-targeting';
 
 describe('buildAdTargeting', () => {

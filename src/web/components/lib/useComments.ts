@@ -36,6 +36,7 @@ const withComments = (
     if (counts.length === 0) return onwardSections;
     return onwardSections.map(section => {
         return {
+            description: section.description,
             heading: section.heading,
             trails: updateTrailsWithCounts(section.trails, counts),
         };

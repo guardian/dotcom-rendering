@@ -1,6 +1,11 @@
 import React from 'react';
+import { css } from 'emotion';
+
 import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
+import { until, from, between } from '@guardian/src-foundations/mq';
+import { palette } from '@guardian/src-foundations';
 
 const widths = [1020, 660, 480, 0];
 
@@ -64,24 +69,62 @@ const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
     return bestFor(300, inlineSrcSets).src;
 };
 
+const starsWrapper = css`
+    background-color: ${palette.brandYellow.main};
+
+    position: absolute;
+    ${until.tablet} {
+        bottom: 0;
+    }
+    ${from.tablet} {
+        top: 0;
+    }
+
+    /* Stars Padding from largest to smallest width */
+    ${from.leftCol} {
+        padding-left: 5px;
+    }
+
+    ${between.phablet.and.leftCol} {
+        padding-left: 0px;
+        margin-left: -0px;
+    }
+
+    ${until.phablet} {
+        padding-left: 10px;
+        margin-left: 0px;
+    }
+`;
+
+const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
+    <div className={starsWrapper}>
+        <StarRating rating={rating} size="large" />
+    </div>
+);
+
 export const ImageComponent: React.FC<{
     element: ImageBlockElement;
     pillar: Pillar;
     hideCaption?: boolean;
     role: RoleType;
     isMainMedia?: boolean;
-    children?: JSXElements;
-}> = ({ element, pillar, hideCaption, role, isMainMedia, children }) => {
+    starRating?: number;
+}> = ({ element, pillar, hideCaption, role, isMainMedia, starRating }) => {
     const sources = makeSources(element.imageSources, element.role);
     if (hideCaption) {
         return (
-            <Picture
-                sources={sources}
-                alt={element.data.alt || ''}
-                src={getFallback(element.imageSources)}
+            <div
+                className={css`
+                    position: relative;
+                `}
             >
-                {children}
-            </Picture>
+                <Picture
+                    sources={sources}
+                    alt={element.data.alt || ''}
+                    src={getFallback(element.imageSources)}
+                />
+                {starRating && <StarRatingComponent rating={starRating} />}
+            </div>
         );
     }
     return (
@@ -94,13 +137,18 @@ export const ImageComponent: React.FC<{
             role={role}
             isMainMedia={isMainMedia}
         >
-            <Picture
-                sources={sources}
-                alt={element.data.alt || ''}
-                src={getFallback(element.imageSources)}
+            <div
+                className={css`
+                    position: relative;
+                `}
             >
-                {children}
-            </Picture>
+                <Picture
+                    sources={sources}
+                    alt={element.data.alt || ''}
+                    src={getFallback(element.imageSources)}
+                />
+                {starRating && <StarRatingComponent rating={starRating} />}
+            </div>
         </Caption>
     );
 };

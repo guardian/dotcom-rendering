@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 
-import { OnwardsLayout } from './OnwardsLayout';
-
 import {
+    withDescription,
+    withLongDescription,
     oneTrail,
     twoTrails,
     threeTrails,
@@ -13,14 +13,27 @@ import {
     sixTrails,
     sevenTrails,
     eightTrails,
-} from './Onwards.mocks';
+} from '@root/fixtures/onwards.mocks';
+import { OnwardsLayout } from './OnwardsLayout';
 
-/* tslint:disable */
 export default {
     component: OnwardsLayout,
     title: 'Components/Onwards',
 };
-/* tslint:enable */
+
+export const withDescriptionStory = () => (
+    <Section>
+        <OnwardsLayout onwardSections={[withDescription]} />
+    </Section>
+);
+withDescriptionStory.story = { name: 'With description' };
+
+export const withLongDescriptionStory = () => (
+    <Section>
+        <OnwardsLayout onwardSections={[withLongDescription]} />
+    </Section>
+);
+withDescriptionStory.story = { name: 'With long description' };
 
 export const oneTrailStory = () => (
     <Section>

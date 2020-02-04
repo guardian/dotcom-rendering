@@ -46,11 +46,17 @@ export const OnwardsLayout = ({ onwardSections }: Props) => {
                         showRightBorder={false}
                         showPartialRightBorder={true}
                     >
-                        <OnwardsTitle title={section.heading} />
+                        <OnwardsTitle
+                            title={section.heading}
+                            description={section.description}
+                        />
                     </LeftColumn>
                     <OnwardsContainer>
                         <Hide when="above" breakpoint="leftCol">
-                            <OnwardsTitle title={section.heading} />
+                            <OnwardsTitle
+                                title={section.heading}
+                                description={section.description}
+                            />
                         </Hide>
                         {decideLayout(section.trails.slice(0, 8))}
                     </OnwardsContainer>
