@@ -4,6 +4,7 @@ import { Section } from '@frontend/web/components/Section';
 
 import {
     withDescription,
+    withLongDescription,
     oneTrail,
     twoTrails,
     threeTrails,
@@ -26,6 +27,13 @@ export const withDescriptionStory = () => (
     </Section>
 );
 withDescriptionStory.story = { name: 'With description' };
+
+export const withLongDescriptionStory = () => (
+    <Section>
+        <OnwardsLayout onwardSections={[withLongDescription]} />
+    </Section>
+);
+withDescriptionStory.story = { name: 'With long description' };
 
 export const oneTrailStory = () => (
     <Section>

@@ -29,14 +29,16 @@ export const OnwardsTitle = ({
             {title}
         </h2>
         {description && (
-            <h3
+            <p
                 className={css`
                     ${headline.xxxsmall({ fontWeight: 'medium' })};
                     color: ${palette.neutral[46]};
+                    p {
+                        margin-bottom: 8px;
+                    }
                 `}
-            >
-                {description}
-            </h3>
+                dangerouslySetInnerHTML={{ __html: description }}
+            />
         )}
     </>
 );
