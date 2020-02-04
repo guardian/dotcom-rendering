@@ -200,6 +200,7 @@ interface CAPIType {
     editionLongForm: string;
     editionId: Edition;
     pageId: string;
+    version: number; // TODO: check who uses?
     tags: TagType[];
     pillar: Pillar;
     isImmersive: boolean;
@@ -223,6 +224,7 @@ interface CAPIType {
     guardianBaseURL: string;
     contentType: string;
     hasRelated: boolean;
+    publication: string; // TODO: check who uses?
     hasStoryPackage: boolean;
     beaconURL: string;
     isCommentable: boolean;
@@ -301,6 +303,7 @@ interface CardType {
     showPulsingDot?: boolean;
     showSlash?: boolean;
     commentCount?: number;
+    starRating?: number;
 }
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -345,6 +348,8 @@ interface CardHeadlineType {
 type OnwardsType = {
     heading: string;
     trails: TrailType[];
+    description?: string;
+    url?: string;
 };
 
 interface CommercialConfigType {
@@ -473,6 +478,7 @@ interface TrailType {
     kickerText?: string;
     shortUrl?: string;
     commentCount?: number;
+    starRating?: number;
 }
 
 interface TrailTabType {

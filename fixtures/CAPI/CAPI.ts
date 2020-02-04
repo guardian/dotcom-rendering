@@ -474,6 +474,7 @@ export const CAPI: CAPIType = {
     ],
     pageId:
         'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+    version: 3,
     isImmersive: false,
     subMetaSectionLinks: [
         {
@@ -510,6 +511,7 @@ export const CAPI: CAPIType = {
     contentType: 'Article',
     hasRelated: false,
     hasStoryPackage: false,
+    publication: 'theguardian.com',
     beaconURL: '//fake.url',
     isCommentable: false,
     commercialProperties: {
@@ -518,7 +520,6 @@ export const CAPI: CAPIType = {
         AU: { adTargeting: [] },
         INT: { adTargeting: [] },
     },
-    starRating: 2,
     trailText:
         'Ticket touts face unlimited fines for using ‘bots’ to buy in bulk',
     keyEvents: [],

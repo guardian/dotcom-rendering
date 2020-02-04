@@ -4,6 +4,8 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -24,16 +26,16 @@ import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { decideLineCount, decideLineEffect } from './layoutHelpers';
-import { Border } from './Border';
-import { GridItem } from './GridItem';
+import { decideLineCount, decideLineEffect } from '../layoutHelpers';
+import { Border } from '../Border';
+import { GridItem } from '../GridItem';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
@@ -158,6 +160,25 @@ const stretchLines = css`
     }
 `;
 
+const starWrapper = css`
+    margin-bottom: 18px;
+    margin-top: 6px;
+    background-color: ${palette.brandYellow.main};
+    display: inline-block;
+
+    ${until.phablet} {
+        padding-left: 20px;
+        margin-left: -20px;
+    }
+    ${until.leftCol} {
+        padding-left: 0px;
+        margin-left: -0px;
+    }
+
+    padding-left: 10px;
+    margin-left: -10px;
+`;
+
 // The advert is stuck to the top of the container as we scroll
 // until we hit the bottom of the wrapper that contains
 // the top banner and the header/navigation
@@ -278,6 +299,16 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 />
                             </ArticleHeadlinePadding>
                         </div>
+                        {CAPI.starRating || CAPI.starRating === 0 ? (
+                            <div className={starWrapper}>
+                                <StarRating
+                                    rating={CAPI.starRating}
+                                    size="large"
+                                />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
@@ -358,6 +389,13 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         </RightColumn>
                     </GridItem>
                 </StandardGrid>
+            </Section>
+
+            <Section padded={false} showTopBorder={false}>
+                <AdSlot
+                    asps={namedAdSlotParameters('merchandising-high')}
+                    className=""
+                />
             </Section>
 
             <Section islandId="onwards-content" />

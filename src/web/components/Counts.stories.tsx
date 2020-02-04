@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
-import { meta } from '@root/fixtures/article';
+import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 
 import { Counts } from './Counts';
@@ -62,7 +62,7 @@ export const ShareOnly = () => {
             'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
             {
                 status: 200,
-                body: meta,
+                body: sharecount,
             },
             { overwriteRoutes: false },
         );

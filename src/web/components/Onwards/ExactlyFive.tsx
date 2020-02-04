@@ -32,6 +32,7 @@ export const ExactlyFive = ({ content }: Props) => (
                         mediaType: content[0].mediaType,
                         mediaDuration: content[0].mediaDuration,
                         commentCount: content[0].commentCount,
+                        starRating: content[0].starRating,
                     }}
                 />
             </LI>
@@ -61,6 +62,7 @@ export const ExactlyFive = ({ content }: Props) => (
                         mediaType: content[1].mediaType,
                         mediaDuration: content[1].mediaDuration,
                         commentCount: content[1].commentCount,
+                        starRating: content[1].starRating,
                     }}
                 />
             </LI>
@@ -92,6 +94,7 @@ export const ExactlyFive = ({ content }: Props) => (
                                 mediaType: content[2].mediaType,
                                 mediaDuration: content[2].mediaDuration,
                                 commentCount: content[2].commentCount,
+                                starRating: content[2].starRating,
                             }}
                         />
                     </LI>
@@ -116,6 +119,7 @@ export const ExactlyFive = ({ content }: Props) => (
                                 mediaType: content[3].mediaType,
                                 mediaDuration: content[3].mediaDuration,
                                 commentCount: content[3].commentCount,
+                                starRating: content[3].starRating,
                             }}
                         />
                     </LI>
@@ -140,6 +144,7 @@ export const ExactlyFive = ({ content }: Props) => (
                                 mediaType: content[4].mediaType,
                                 mediaDuration: content[4].mediaDuration,
                                 commentCount: content[4].commentCount,
+                                starRating: content[4].starRating,
                             }}
                         />
                     </LI>

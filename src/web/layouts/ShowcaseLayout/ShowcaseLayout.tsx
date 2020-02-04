@@ -15,7 +15,6 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -31,9 +30,12 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { decideLineCount, decideLineEffect } from './layoutHelpers';
-import { Border } from './Border';
-import { GridItem } from './GridItem';
+import {
+    decideLineCount,
+    decideLineEffect,
+} from '@root/src/web/layouts/layoutHelpers';
+import { Border } from '@root/src/web/layouts/Border';
+import { GridItem } from '@root/src/web/layouts/GridItem';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
@@ -156,6 +158,10 @@ const stretchLines = css`
         margin-left: -20px;
         margin-right: -20px;
     }
+`;
+
+const mainMediaWrapper = css`
+    position: relative;
 `;
 
 const PositionHeadline = ({
@@ -315,8 +321,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <PositionHeadline designType={CAPI.designType}>
-                            <ArticleHeadlinePadding
-                                designType={CAPI.designType}
+                            <div
+                                className={css`
+                                    padding-bottom: 24px;
+                                `}
                             >
                                 <ArticleHeadline
                                     headlineString={CAPI.headline}
@@ -326,15 +334,23 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     tags={CAPI.tags}
                                     byline={CAPI.author.byline}
                                 />
-                            </ArticleHeadlinePadding>
+                            </div>
                         </PositionHeadline>
                     </GridItem>
                     <GridItem area="media">
-                        <MainMedia
-                            elements={CAPI.mainMediaElements}
-                            pillar={CAPI.pillar}
-                            adTargeting={adTargeting}
-                        />
+                        <div className={mainMediaWrapper}>
+                            <MainMedia
+                                elements={CAPI.mainMediaElements}
+                                pillar={CAPI.pillar}
+                                adTargeting={adTargeting}
+                                starRating={
+                                    CAPI.designType === 'Review' &&
+                                    CAPI.starRating
+                                        ? CAPI.starRating
+                                        : undefined
+                                }
+                            />
+                        </div>
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst
@@ -409,6 +425,13 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         </RightColumn>
                     </GridItem>
                 </ShowcaseGrid>
+            </Section>
+
+            <Section padded={false} showTopBorder={false}>
+                <AdSlot
+                    asps={namedAdSlotParameters('merchandising-high')}
+                    className=""
+                />
             </Section>
 
             <Section islandId="onwards-content" />

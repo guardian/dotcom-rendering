@@ -157,3 +157,18 @@ export const eightTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 8),
 };
+
+export const linkAndDescription: OnwardsType = {
+    url: 'https://www.theguardian.com/news/shortcuts',
+    description:
+        'Our writers reflect on the people, issues and curiosities in the news',
+    heading: 'More on this story',
+    trails: trails.slice(0, 8),
+};
+
+export const withLongDescription: OnwardsType = {
+    description:
+        "<p>A blog by the Guardian's internal Digital team. We build the Guardian website, mobile apps, Editorial tools, revenue products, support our infrastructure and manage all things tech around the Guardian.</p><p>Our team contains Developers, UX, Quality, Product and Enterprise IT. This blog is where we share our experiences and approaches, including software  development tips, code examples, open source software and product  development stories </p>",
+    heading: 'More on this story',
+    trails: trails.slice(0, 8),
+};

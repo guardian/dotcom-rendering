@@ -17,7 +17,7 @@ export const AnalyticsIframe: React.FC<{ url: string }> = ({ url }) => {
             title="Analytics Iframe"
             height="1"
             width="1"
-            sandbox="allow-scripts"
+            sandbox="allow-scripts allow-same-origin"
             frameborder="0"
             src={url}
         >

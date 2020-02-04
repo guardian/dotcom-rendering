@@ -4,7 +4,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
 import { palette } from '@guardian/src-foundations';
-import { StarRating } from '@root/src/web/components/StarRating';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
@@ -181,6 +181,11 @@ const paidForBranding = css`
     color: ${palette.neutral[46]};
 `;
 
+const starWrapper = css`
+    background-color: ${palette.brandYellow.main};
+    display: inline-block;
+`;
+
 const readMoreText: (contentType: string) => string = contentType => {
     switch (contentType) {
         case 'audio':
@@ -243,7 +248,12 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
                         </div>
                     )}
                     {richLink.starRating && richLink.starRating > 0 && (
-                        <StarRating rating={richLink.starRating} size="small" />
+                        <div className={starWrapper}>
+                            <StarRating
+                                rating={richLink.starRating}
+                                size="medium"
+                            />
+                        </div>
                     )}
                     {isPaidContent && richLink.sponsorName && (
                         <div className={paidForBranding}>

@@ -1,15 +1,15 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
-import { CAPI } from '@root/fixtures/CAPI';
+import { CAPI } from '@root/fixtures/CAPI/CAPI';
 import { NAV } from '@root/fixtures/NAV';
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
-import { meta } from '@root/fixtures/article';
+import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
-import { ShowcaseLayout } from './ShowcaseLayout';
-import { StandardLayout } from './StandardLayout';
+import { ShowcaseLayout } from './ShowcaseLayout/ShowcaseLayout';
+import { StandardLayout } from './StandardLayout/StandardLayout';
 
 /* tslint:disable */
 export default {
@@ -55,12 +55,12 @@ export const ShowcaseLayoutRender = () => {
             },
             { overwriteRoutes: false },
         )
-        // Article metadata
+        // Article share count
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/sharecount/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software.json',
             {
                 status: 200,
-                body: meta,
+                body: sharecount,
             },
             { overwriteRoutes: false },
         );
@@ -99,12 +99,12 @@ export const StandardLayoutRender = () => {
             },
             { overwriteRoutes: false },
         )
-        // Article metadata
+        // Article share count
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/sharecount/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software.json',
             {
                 status: 200,
-                body: meta,
+                body: sharecount,
             },
             { overwriteRoutes: false },
         );
