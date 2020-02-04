@@ -16,7 +16,7 @@ import {
 
 import * as uuid from 'uuid';
 import * as Webview from 'mobile-apps-thrift-typescript/Webview';
-import { WebviewProcesser, WebviewHandler } from 'native/webviewApi';
+import { WebviewHandler } from 'native/webviewApi';
 
 declare global {
     interface Window {

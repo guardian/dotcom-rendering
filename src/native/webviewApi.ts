@@ -7,10 +7,10 @@ export class WebviewHandler implements Webview.IHandler {
     }
 
     insertEpics(epics: Epic[]): void {
-
+        console.log("inserting epics");
     }
 
-    insertEpic(epics: Epic): void {
-
+    insertEpic(epic: Epic): void {
+        console.log("inserting epic");
     }
 }
