@@ -15,22 +15,12 @@ export const OnwardsTitle = ({
     <>
         <h2
             className={css`
-                ${headline.xsmall()};
+                ${headline.xsmall({ fontWeight: 'bold' })};
                 color: ${palette.neutral[7]};
-                font-weight: 900;
                 padding-bottom: 14px;
                 padding-top: 6px;
-
-                ${from.leftCol} {
-                    ${headline.xsmall()};
-                    font-weight: 900;
-                }
-
-                ${from.wide} {
-                    font-weight: 900;
-                }
-
                 margin-left: 10px;
+
                 ${from.leftCol} {
                     margin-left: 0;
                 }
@@ -41,9 +31,8 @@ export const OnwardsTitle = ({
         {description && (
             <h3
                 className={css`
-                    ${headline.xxxsmall()};
+                    ${headline.xxxsmall({ fontWeight: 'medium' })};
                     color: ${palette.neutral[46]};
-                    font-weight: 500;
                 `}
             >
                 {description}
