@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { shouldShow } from '@guardian/consent-management-platform';
+import {
+    shouldShow,
+    setErrorHandler,
+} from '@guardian/consent-management-platform';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 
 export class CMP extends Component<{}, { show: boolean }> {
@@ -14,6 +17,13 @@ export class CMP extends Component<{}, { show: boolean }> {
     public componentDidMount() {
         if (shouldShow()) {
             this.setState({ show: true });
+
+            // setErrorHandler takes function to be called on errors in the CMP UI
+            setErrorHandler((errMsg: string): void => {
+                const err = new Error(errMsg);
+
+                window.guardian.modules.sentry.reportError(err, 'cmp');
+            });
         }
     }
 
