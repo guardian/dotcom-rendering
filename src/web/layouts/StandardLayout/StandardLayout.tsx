@@ -87,7 +87,8 @@ const StandardGrid = ({
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -101,7 +102,8 @@ const StandardGrid = ({
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -115,7 +117,8 @@ const StandardGrid = ({
                         'media      right-column'
                         'lines      right-column'
                         'meta       right-column'
-                        'body       right-column';
+                        'body       right-column'
+                        '.          right-column';
                 }
 
                 ${until.desktop} {
