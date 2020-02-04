@@ -87,6 +87,7 @@ export const Card = ({
     headlineSize,
     showQuotes,
     byline,
+    isLiveBlog,
     showByline,
     webPublicationDate,
     imageUrl,
@@ -152,12 +153,12 @@ export const Card = ({
                                                 : kickerText
                                         }
                                         showPulsingDot={
-                                            designType === 'Live'
+                                            designType === 'Live' && isLiveBlog
                                                 ? true
                                                 : showPulsingDot
                                         }
                                         showSlash={
-                                            designType === 'Live'
+                                            designType === 'Live' && isLiveBlog
                                                 ? true
                                                 : showSlash
                                         }
