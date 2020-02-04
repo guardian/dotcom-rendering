@@ -5,7 +5,7 @@ import { palette } from '@guardian/src-foundations';
 
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 
-import { decidePillarLight } from '@frontend/web/components/lib/decidePillarLight';
+import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
 const kickerStyles = (colour: string) => css`
     color: ${colour};

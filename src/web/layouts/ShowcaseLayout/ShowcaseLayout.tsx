@@ -33,7 +33,7 @@ import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 import {
     decideLineCount,
     decideLineEffect,
-} from '@root/src/web/layouts/layoutHelpers';
+} from '@root/src/web/lib/layoutHelpers';
 import { Border } from '@root/src/web/layouts/Border';
 import { GridItem } from '@root/src/web/layouts/GridItem';
 
@@ -427,6 +427,13 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </ShowcaseGrid>
             </Section>
 
+            <Section padded={false} showTopBorder={false}>
+                <AdSlot
+                    asps={namedAdSlotParameters('merchandising-high')}
+                    className=""
+                />
+            </Section>
+
             <Section islandId="onwards-content" />
 
             {!isPaidContent && (
@@ -466,7 +473,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cookie-banner" />
+            <div data-island="cmp" />
             <MobileStickyContainer />
         </>
     );

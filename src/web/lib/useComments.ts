@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useApi } from '@frontend/web/components/lib/api';
+import { useApi } from '@root/src/web/lib/api';
 
 type CommentType = {
     id: string;
@@ -36,7 +36,9 @@ const withComments = (
     if (counts.length === 0) return onwardSections;
     return onwardSections.map(section => {
         return {
+            description: section.description,
             heading: section.heading,
+            url: section.url,
             trails: updateTrailsWithCounts(section.trails, counts),
         };
     });

@@ -4,7 +4,7 @@ import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { Hide } from '@frontend/web/components/Hide';
 
-import { useComments } from '@frontend/web/components/lib/useComments';
+import { useComments } from '@root/src/web/lib/useComments';
 
 import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
@@ -46,11 +46,19 @@ export const OnwardsLayout = ({ onwardSections }: Props) => {
                         showRightBorder={false}
                         showPartialRightBorder={true}
                     >
-                        <OnwardsTitle title={section.heading} />
+                        <OnwardsTitle
+                            title={section.heading}
+                            description={section.description}
+                            url={section.url}
+                        />
                     </LeftColumn>
                     <OnwardsContainer>
                         <Hide when="above" breakpoint="leftCol">
-                            <OnwardsTitle title={section.heading} />
+                            <OnwardsTitle
+                                title={section.heading}
+                                description={section.description}
+                                url={section.url}
+                            />
                         </Hide>
                         {decideLayout(section.trails.slice(0, 8))}
                     </OnwardsContainer>

@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -24,7 +25,7 @@ import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -322,6 +323,13 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                         </RightColumn>
                     </GridItem>
                 </StandardGrid>
+            </Section>
+
+            <Section padded={false} showTopBorder={false}>
+                <AdSlot
+                    asps={namedAdSlotParameters('merchandising-high')}
+                    className=""
+                />
             </Section>
 
             <Section islandId="onwards-content" />

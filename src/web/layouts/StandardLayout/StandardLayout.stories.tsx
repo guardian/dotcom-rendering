@@ -5,6 +5,7 @@ import { viewports } from '@root/.storybook/config';
 import { standardReviewCAPI } from '@root/fixtures/CAPI/review/standardReview';
 import { NAV } from '@root/fixtures/NAV';
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
+import { series } from '@root/fixtures/series';
 import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 
@@ -39,12 +40,29 @@ const mockRESTCalls = () =>
             },
             { overwriteRoutes: false },
         )
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=/p/d7m9d,/p/d79vx,/p/d6qze,/p/d6yth',
+            {
+                status: 200,
+                body: commentCount,
+            },
+            { overwriteRoutes: false },
+        )
         // Most read by category
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/most-read/stage.json?dcr=true',
             {
                 status: 200,
                 body: responseWithTwoTabs,
+            },
+            { overwriteRoutes: false },
+        )
+        // Series
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/series/tv-and-radio/series/tv-review.json?dcr',
+            {
+                status: 200,
+                body: series,
             },
             { overwriteRoutes: false },
         )

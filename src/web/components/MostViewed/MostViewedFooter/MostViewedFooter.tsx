@@ -5,11 +5,11 @@ import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 
-import { useApi } from '@root/src/web/components/lib/api';
+import { useApi } from '@root/src/web/lib/api';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
 
-import { joinUrl } from '@root/src/web/components/lib/joinUrl';
+import { joinUrl } from '@root/src/web/lib/joinUrl';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { SecondTierItem } from './SecondTierItem';
 

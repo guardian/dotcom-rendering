@@ -6,7 +6,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 
 import CommentIcon from '@frontend/static/icons/comment.svg';
-import { decidePillarLight } from '@frontend/web/components/lib/decidePillarLight';
+import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
 type Props = {
     designType: DesignType;

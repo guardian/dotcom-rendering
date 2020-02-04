@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -25,14 +26,17 @@ import { OutbrainContainer } from '@root/src/web/components/Outbrain';
 import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { decideLineCount, decideLineEffect } from '../layoutHelpers';
+import {
+    decideLineCount,
+    decideLineEffect,
+} from '@root/src/web/lib/layoutHelpers';
 import { Border } from '../Border';
 import { GridItem } from '../GridItem';
 
@@ -390,6 +394,13 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 </StandardGrid>
             </Section>
 
+            <Section padded={false} showTopBorder={false}>
+                <AdSlot
+                    asps={namedAdSlotParameters('merchandising-high')}
+                    className=""
+                />
+            </Section>
+
             <Section islandId="onwards-content" />
 
             {!isPaidContent && (
@@ -429,7 +440,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cookie-banner" />
+            <div data-island="cmp" />
             <MobileStickyContainer />
         </>
     );
