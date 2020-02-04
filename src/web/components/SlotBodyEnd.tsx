@@ -32,7 +32,7 @@ export const SlotBodyEnd = ({
             campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
             abTestName: 'remote_epic_test',
             abTestVariant: 'api',
-            referrerUrl: window?.location.href.split('?')[0],
+            referrerUrl: window.location.origin + window.location.pathname
         },
         localisation: {
             countryCode: 'GB', // TODO: make this dynamic
