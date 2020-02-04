@@ -20,9 +20,10 @@ type Props = {
     sectionUrl: string;
     guardianBaseURL: string;
     pillar: Pillar;
-    badge?: BadgeType;
     inLeftCol?: boolean;
     fallbackToSection?: boolean;
+    badge?: BadgeType;
+    frontendAssetsFullURL: string;
 };
 
 const titleBadgeWrapper = css`
@@ -50,14 +51,18 @@ export const ArticleTitle = ({
     sectionUrl,
     guardianBaseURL,
     pillar,
-    badge,
     inLeftCol,
     fallbackToSection = true,
+    badge,
+    frontendAssetsFullURL,
 }: Props) => (
     <div className={cx(inLeftCol && sectionStyles, badge && badgeContainer)}>
         {badge && (
             <div className={titleBadgeWrapper}>
-                <Badge svgSrc={badge.svgSrc} linkTo={badge.linkTo} />
+                <Badge
+                    imageUrl={`${frontendAssetsFullURL}${badge.imageUrl}`}
+                    seriesTag={badge.seriesTag}
+                />
             </div>
         )}
         <div className={badge && marginTop}>

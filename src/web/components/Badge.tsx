@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 import { from } from '@guardian/src-foundations/mq';
 
 const badgeSizingStyles = css`
@@ -14,12 +14,10 @@ const badgeWrapper = css`
     ${badgeSizingStyles}
 `;
 
-const svgStyles = css`
-    svg {
-        display: block;
-        width: auto;
-        ${badgeSizingStyles}
-    }
+const imageStyles = css`
+    display: block;
+    width: auto;
+    ${badgeSizingStyles}
 `;
 
 const badgeLink = css`
@@ -27,28 +25,14 @@ const badgeLink = css`
 `;
 
 type Props = {
-    svgSrc: () => JSX.Element;
-    linkTo?: string;
+    imageUrl: string;
+    seriesTag: string;
 };
 
-export const Badge = ({ svgSrc: Svg, linkTo }: Props) => {
-    if (linkTo) {
-        return (
-            <div className={badgeWrapper}>
-                <a
-                    href={linkTo}
-                    className={cx(badgeLink, svgStyles)}
-                    role="button"
-                >
-                    <Svg />
-                </a>
-            </div>
-        );
-    }
-
-    return (
-        <div className={cx(badgeWrapper, svgStyles)}>
-            <Svg />
-        </div>
-    );
-};
+export const Badge = ({ imageUrl, seriesTag }: Props) => (
+    <div className={badgeWrapper}>
+        <a href={seriesTag} className={badgeLink} role="button">
+            <img className={imageStyles} src={imageUrl} alt="" />
+        </a>
+    </div>
+);
