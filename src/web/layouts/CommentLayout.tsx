@@ -226,7 +226,11 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
-                            CAPI={CAPI}
+                            tags={CAPI.tags}
+                            sectionLabel={CAPI.sectionLabel}
+                            sectionUrl={CAPI.sectionUrl}
+                            guardianBaseURL={CAPI.guardianBaseURL}
+                            pillar={CAPI.pillar}
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />

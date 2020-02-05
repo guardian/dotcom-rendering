@@ -15,7 +15,11 @@ const sectionStyles = css`
 `;
 
 type Props = {
-    CAPI: CAPIType;
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
     badge?: BadgeType;
     inLeftCol?: boolean;
     fallbackToSection?: boolean;
@@ -41,7 +45,11 @@ const marginTop = css`
 `;
 
 export const ArticleTitle = ({
-    CAPI,
+    tags,
+    sectionLabel,
+    sectionUrl,
+    guardianBaseURL,
+    pillar,
     badge,
     inLeftCol,
     fallbackToSection = true,
@@ -54,8 +62,14 @@ export const ArticleTitle = ({
         )}
         <div className={badge && marginTop}>
             <SeriesSectionLink
-                CAPI={CAPI}
-                fallbackToSection={fallbackToSection}
+                {...{
+                    tags,
+                    sectionLabel,
+                    sectionUrl,
+                    guardianBaseURL,
+                    pillar,
+                    fallbackToSection,
+                }}
             />
         </div>
     </div>
