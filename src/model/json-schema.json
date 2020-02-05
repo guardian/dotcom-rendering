@@ -135,6 +135,9 @@
         "pageId": {
             "type": "string"
         },
+        "version": {
+            "type": "number"
+        },
         "tags": {
             "type": "array",
             "items": {
@@ -218,6 +221,9 @@
         "hasRelated": {
             "type": "boolean"
         },
+        "publication": {
+            "type": "string"
+        },
         "hasStoryPackage": {
             "type": "boolean"
         },
@@ -236,12 +242,50 @@
         "trailText": {
             "type": "string"
         },
+        "badge": {
+            "$ref": "#/definitions/BadgeType"
+        },
         "nav": {},
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
         },
         "slotMachineFlags": {
             "type": "string"
+        },
+        "pageType": {
+            "type": "object",
+            "properties": {
+                "hasShowcaseMainElement": {
+                    "type": "boolean"
+                },
+                "isFront": {
+                    "type": "boolean"
+                },
+                "isLiveblog": {
+                    "type": "boolean"
+                },
+                "isMinuteArticle": {
+                    "type": "boolean"
+                },
+                "isPaidContent": {
+                    "type": "boolean"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "isSensitive": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "hasShowcaseMainElement",
+                "isFront",
+                "isLiveblog",
+                "isMinuteArticle",
+                "isPaidContent",
+                "isPreview",
+                "isSensitive"
+            ]
         }
     },
     "required": [
@@ -269,7 +313,9 @@
         "openGraphData",
         "pageFooter",
         "pageId",
+        "pageType",
         "pillar",
+        "publication",
         "sectionLabel",
         "sectionUrl",
         "shouldHideAds",
@@ -281,6 +327,7 @@
         "tags",
         "trailText",
         "twitterData",
+        "version",
         "webPublicationDate",
         "webPublicationDateDisplay",
         "webTitle",
@@ -1506,13 +1553,39 @@
                 },
                 "shouldHideReaderRevenue": {
                     "type": "boolean"
+                },
+                "pageId": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "number"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "string"
+                },
+                "series": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "ampIframeUrl": {
+                    "type": "string"
                 }
             },
             "required": [
                 "abTests",
                 "adUnit",
                 "ajaxUrl",
+                "ampIframeUrl",
                 "commercialBundleUrl",
+                "contentType",
                 "dcrSentryDsn",
                 "dfpAccountId",
                 "edition",
@@ -1521,6 +1594,7 @@
                 "hbImpl",
                 "isSensitive",
                 "keywordIds",
+                "pageId",
                 "revisionNumber",
                 "section",
                 "sentryHost",
@@ -1668,6 +1742,21 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
+            ]
+        },
+        "BadgeType": {
+            "type": "object",
+            "properties": {
+                "seriesTag": {
+                    "type": "string"
+                },
+                "imageUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "imageUrl",
+                "seriesTag"
             ]
         },
         "FooterType": {
