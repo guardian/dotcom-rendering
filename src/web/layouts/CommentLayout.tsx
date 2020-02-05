@@ -325,7 +325,12 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 </StandardGrid>
             </Section>
 
-            <Section padded={false} showTopBorder={false}>
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
                     className=""
