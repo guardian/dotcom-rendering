@@ -15,11 +15,11 @@ const sectionStyles = css`
 `;
 
 type Props = {
-    tags: CAPIType['tags'];
-    sectionLabel: CAPIType['sectionLabel'];
-    sectionUrl: CAPIType['sectionUrl'];
-    guardianBaseURL: CAPIType['guardianBaseURL'];
-    pillar: CAPIType['pillar'];
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
     badge?: BadgeType;
     inLeftCol?: boolean;
     fallbackToSection?: boolean;

@@ -62,12 +62,12 @@ const TagLink: React.FC<{
 };
 
 export const SeriesSectionLink: React.FC<{
-    tags: CAPIType['tags'];
-    sectionLabel: CAPIType['sectionLabel'];
-    sectionUrl: CAPIType['sectionUrl'];
-    guardianBaseURL: CAPIType['guardianBaseURL'];
-    pillar: CAPIType['pillar'];
-    fallbackToSection: boolean;
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
+    fallbackToSection?: boolean;
 }> = ({
     tags,
     sectionLabel,
