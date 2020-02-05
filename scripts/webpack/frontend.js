@@ -43,7 +43,7 @@ const common = ({ platform, page = '' }) => ({
                                 '@babel/preset-typescript',
                                 '@babel/preset-react',
                                 [
-                                    '@babel/preset-env',
+                                    '@babel/preset-modules',
                                     platform === 'browser'
                                         ? {
                                               targets: {
