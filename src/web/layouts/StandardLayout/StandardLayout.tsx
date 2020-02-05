@@ -27,6 +27,8 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
+import { Border } from '@root/src/web/components/Border';
+import { GridItem } from '@root/src/web/components/GridItem';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -37,8 +39,6 @@ import {
     decideLineCount,
     decideLineEffect,
 } from '@root/src/web/lib/layoutHelpers';
-import { Border } from '../Border';
-import { GridItem } from '../GridItem';
 
 function checkForGE2019Badge(tags: TagType[]) {
     if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
