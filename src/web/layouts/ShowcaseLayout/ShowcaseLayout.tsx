@@ -84,7 +84,8 @@ const ShowcaseGrid = ({
                         'lines  border  media       media'
                         'meta   border  media       media'
                         'meta   border  standfirst  right-column'
-                        '.      border  body        right-column';
+                        '.      border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -98,7 +99,8 @@ const ShowcaseGrid = ({
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -112,7 +114,8 @@ const ShowcaseGrid = ({
                         'media      right-column'
                         'lines      right-column'
                         'meta       right-column'
-                        'body       right-column';
+                        'body       right-column'
+                        '.          right-column';
                 }
 
                 ${until.desktop} {
