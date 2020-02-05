@@ -20,6 +20,24 @@
     "storybook": "start-storybook -s ./",
     "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
   },
+  "jest": {
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "coverageThreshold": {
+      "global": {
+          "branches": 75,
+          "functions": 75,
+          "lines": 75,
+          "statements": 75
+      }
+  },
+  "coverageReporters": ["json", "lcov", "text", "clover"],
+    "collectCoverageFrom": [
+      "<rootDir>/src/renderer.ts"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -68,6 +86,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.18.0",
     "jest": "^24.9.0",
+    "ts-jest": "^25.2.0",
     "ts-loader": "^6.2.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
