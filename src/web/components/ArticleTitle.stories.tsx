@@ -45,12 +45,10 @@ const beyondTheBladeCAPI = {
     },
 };
 
-/* tslint:disable */
 export default {
     component: ArticleTitle,
     title: 'Components/ArticleTitle',
 };
-/* tslint:enable */
 
 export const defaultStory = () => {
     return (
