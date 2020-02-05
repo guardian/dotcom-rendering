@@ -25,6 +25,7 @@ interface RichLinkBlockElement {
     url: string;
     text: string;
     prefix: string;
+    role?: Weighting;
 }
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting

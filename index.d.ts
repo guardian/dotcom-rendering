@@ -126,6 +126,7 @@ interface Block {
     elements: CAPIElement[];
     createdOn?: number;
     createdOnDisplay?: string;
+    lastUpdated?: number;
     lastUpdatedDisplay?: string;
     title?: string;
     firstPublished?: number;
