@@ -52,6 +52,7 @@ interface Contributor {
     webUrl?: string;
     apiUrl?: string;
     bylineLargeImageUrl?: string;
+    id: string;
 }
 
 const tagsOfType = (tagType: TagType) => (tags: Tag[]): Tag[] =>

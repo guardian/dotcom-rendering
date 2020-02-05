@@ -71,6 +71,10 @@ const adHeight = '250px';
 
 export const adStyles = css`
     .ad-placeholder {
+        &.hidden {
+            display: none;
+        }
+
         color: ${neutral[20]};
         background: ${neutral[97]};
 

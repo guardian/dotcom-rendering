@@ -8,7 +8,7 @@ configure({ adapter: new Adapter() });
 describe('Follow component renders as expected', () => {
     it('Displays title correctly', () => {
         const contributors = [
-            { apiUrl: "https://mapi.co.uk/test", webTitle: "George Monbiot" }
+            { apiUrl: "https://mapi.co.uk/test", webTitle: "George Monbiot", id: "test" }
         ]
         const follow = shallow(<Follow contributors={contributors} />);
         expect(follow.text()).toBe("Follow George Monbiot")
@@ -16,7 +16,7 @@ describe('Follow component renders as expected', () => {
 
     it('Renders null if no apiUrl', () => {
         const contributors = [
-            { webTitle: "George Monbiot" }
+            { webTitle: "George Monbiot", id: "test" }
         ]
         const follow = shallow(<Follow contributors={contributors} />);
         expect(follow.html()).toBe(null)
@@ -24,8 +24,8 @@ describe('Follow component renders as expected', () => {
 
     it('Renders null if more than one contributor', () => {
         const contributors = [
-            { webTitle: "Contributor 1", apiUrl: "https://mapi.co.uk/test" },
-            { webTitle: "Contributor 2", apiUrl: "https://mapi.co.uk/test" },
+            { webTitle: "Contributor 1", apiUrl: "https://mapi.co.uk/test", id: "test" },
+            { webTitle: "Contributor 2", apiUrl: "https://mapi.co.uk/test", id: "test" },
         ]
         const follow = shallow(<Follow contributors={contributors} />);
         expect(follow.html()).toBe(null)

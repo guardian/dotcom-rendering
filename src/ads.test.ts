@@ -66,15 +66,15 @@ describe('Adds short classname correctly', () => {
     test('Adds short classname for articles with less than 15 paragraphs', () => {
         const fourteenParagraphs = renderParagraphs(14)
         const fourteenParagraphsAndTwoAds: any = insertAdPlaceholders(fourteenParagraphs);
-        expect(fourteenParagraphsAndTwoAds[3].props.className).toBe('ad-placeholder short');
-        expect(fourteenParagraphsAndTwoAds[10].props.className).toBe('ad-placeholder short');
+        expect(fourteenParagraphsAndTwoAds[3].props.className).toBe('ad-placeholder hidden short');
+        expect(fourteenParagraphsAndTwoAds[10].props.className).toBe('ad-placeholder hidden short');
     });
 
     test('Does not add short classnames for articles with 15 paragraphs', () => {
         const fifteenParagrpahs = renderParagraphs(15)
         const fifteenParagrpahsAndTwoAds: any = insertAdPlaceholders(fifteenParagrpahs);
-        expect(fifteenParagrpahsAndTwoAds[3].props.className).toBe('ad-placeholder');
-        expect(fifteenParagrpahsAndTwoAds[10].props.className).toBe('ad-placeholder');
+        expect(fifteenParagrpahsAndTwoAds[3].props.className).toBe('ad-placeholder hidden');
+        expect(fifteenParagrpahsAndTwoAds[10].props.className).toBe('ad-placeholder hidden');
     });
 });
 
@@ -105,6 +105,6 @@ describe('Handles different DOM structures', () => {
 
         const sixTagsWithOneAd: any = insertAdPlaceholders(text);
         expect(sixTagsWithOneAd.length).toBe(7);
-        expect(sixTagsWithOneAd[5].props.className === 'ad-placeholder short');
+        expect(sixTagsWithOneAd[5].props.className === 'ad-placeholder hidden short');
     });
 });
