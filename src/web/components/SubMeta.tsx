@@ -46,7 +46,6 @@ type Props = {
     webTitle: string;
     showBottomSocialButtons: boolean;
     badge?: BadgeType;
-    frontendAssetsFullURL: string;
 };
 
 export const SubMeta = ({
@@ -58,7 +57,6 @@ export const SubMeta = ({
     webTitle,
     showBottomSocialButtons,
     badge,
-    frontendAssetsFullURL,
 }: Props) => {
     const hasSubMetaSectionLinks = subMetaSectionLinks.length > 0;
     const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
@@ -68,7 +66,7 @@ export const SubMeta = ({
             {badge && (
                 <div className={badgeWrapper}>
                     <Badge
-                        imageUrl={`${frontendAssetsFullURL}/${badge.imageUrl}`}
+                        imageUrl={badge.imageUrl}
                         seriesTag={badge.seriesTag}
                     />
                 </div>

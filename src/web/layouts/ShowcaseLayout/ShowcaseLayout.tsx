@@ -309,9 +309,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             pillar={CAPI.pillar}
                             badge={CAPI.badge}
                             inLeftCol={true}
-                            frontendAssetsFullURL={
-                                CAPI.config.frontendAssetsFullURL
-                            }
                         />
                     </GridItem>
                     <GridItem area="border">
@@ -409,9 +406,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                         CAPI.showBottomSocialButtons
                                     }
                                     badge={CAPI.badge}
-                                    frontendAssetsFullURL={
-                                        CAPI.config.frontendAssetsFullURL
-                                    }
                                 />
                             </main>
                         </ArticleContainer>

@@ -23,7 +23,6 @@ type Props = {
     inLeftCol?: boolean;
     fallbackToSection?: boolean;
     badge?: BadgeType;
-    frontendAssetsFullURL: string;
 };
 
 const titleBadgeWrapper = css`
@@ -54,15 +53,11 @@ export const ArticleTitle = ({
     inLeftCol,
     fallbackToSection = true,
     badge,
-    frontendAssetsFullURL,
 }: Props) => (
     <div className={cx(inLeftCol && sectionStyles, badge && badgeContainer)}>
         {badge && (
             <div className={titleBadgeWrapper}>
-                <Badge
-                    imageUrl={`${frontendAssetsFullURL}${badge.imageUrl}`}
-                    seriesTag={badge.seriesTag}
-                />
+                <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
         )}
         <div className={badge && marginTop}>

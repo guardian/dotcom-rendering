@@ -18,7 +18,6 @@ const CAPI = {
     guardianBaseURL: 'https://theguardian.com',
     inLeftCol: true,
     fallbackToSection: true,
-    frontendAssetsFullURL: 'http://localhost:9000/assets/',
 };
 const brexitCAPI = {
     ...CAPI,
