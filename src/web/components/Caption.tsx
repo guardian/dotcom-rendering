@@ -19,7 +19,6 @@ const captionStyle = (role?: RoleType) => css`
 const limitedWidth = css`
     ${from.leftCol} {
         width: 140px;
-        position: absolute;
     }
     ${from.wide} {
         width: 220px;

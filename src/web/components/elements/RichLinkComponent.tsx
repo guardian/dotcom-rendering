@@ -48,6 +48,14 @@ const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkContainer = css`
+    /*
+        TODO: avoid this edge case from appearing in editorials
+        edge case:
+        If rich link div is pushed further inline to the page the "margin-left: -240px;" wont work.
+        Using "clear: left;" allows us to igrnore the effects of other elements on the left.
+    */
+    clear: left;
+
     ${until.wide} {
         width: 140px;
     }
