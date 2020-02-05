@@ -8,7 +8,7 @@ import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
-import { useApi } from '@frontend/web/components/lib/api';
+import { useApi } from '@root/src/web/lib/api';
 
 type colour = string;
 
@@ -48,6 +48,14 @@ const richLinkPillarColour: (pillar: Pillar) => colour = pillar => {
 };
 
 const richLinkContainer = css`
+    /*
+        TODO: avoid this edge case from appearing in editorials
+        edge case:
+        If rich link div is pushed further inline to the page the "margin-left: -240px;" wont work.
+        Using "clear: left;" allows us to igrnore the effects of other elements on the left.
+    */
+    clear: left;
+
     ${until.wide} {
         width: 140px;
     }

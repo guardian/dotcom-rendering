@@ -9,6 +9,7 @@ import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
 import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
 import { Badge } from '@frontend/web/components/Badge';
 import { getSharingUrls } from '@frontend/lib/sharing-urls';
+import { until } from '@guardian/src-foundations/mq';
 
 const subMetaLabel = css`
     ${textSans.xsmall()};
@@ -27,6 +28,13 @@ const subMetaSharingIcons = css`
 const badgeWrapper = css`
     float: right;
     margin-top: 6px;
+`;
+
+const bottomPadding = css`
+    padding-bottom: 72px;
+    ${until.desktop} {
+        padding-bottom: 58px;
+    }
 `;
 
 type Props = {
@@ -54,7 +62,7 @@ export const SubMeta = ({
     const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
     const sharingUrls = getSharingUrls(pageId, webTitle);
     return (
-        <>
+        <div className={bottomPadding}>
             {badge && (
                 <div className={badgeWrapper}>
                     <Badge svgSrc={badge.svgSrc} linkTo={badge.linkTo} />
@@ -96,6 +104,6 @@ export const SubMeta = ({
             {showBottomSocialButtons && (
                 <SyndicationButton webUrl={webUrl} internalPageCode={pageId} />
             )}
-        </>
+        </div>
     );
 };

@@ -11,7 +11,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
-import { formatCount } from '@root/src/web/components/lib/formatCount';
+import { formatCount } from '@root/src/web/lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -87,6 +87,7 @@ export const Card = ({
     headlineSize,
     showQuotes,
     byline,
+    isLiveBlog,
     showByline,
     webPublicationDate,
     imageUrl,
@@ -146,9 +147,18 @@ export const Card = ({
                                         pillar={pillar}
                                         size={headlineSize}
                                         showQuotes={showQuotes}
-                                        kickerText={kickerText}
-                                        showPulsingDot={showPulsingDot}
-                                        showSlash={showSlash}
+                                        kickerText={
+                                            designType === 'Live'
+                                                ? 'Live'
+                                                : kickerText
+                                        }
+                                        showPulsingDot={
+                                            designType === 'Live' ||
+                                            showPulsingDot
+                                        }
+                                        showSlash={
+                                            designType === 'Live' || showSlash
+                                        }
                                         byline={byline}
                                         showByline={showByline}
                                     />

@@ -62,11 +62,20 @@ const TagLink: React.FC<{
 };
 
 export const SeriesSectionLink: React.FC<{
-    CAPI: CAPIType;
-    fallbackToSection: boolean;
-}> = ({ CAPI, fallbackToSection }) => {
-    const { tags, sectionLabel, sectionUrl, guardianBaseURL, pillar } = CAPI;
-
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
+    fallbackToSection?: boolean;
+}> = ({
+    tags,
+    sectionLabel,
+    sectionUrl,
+    guardianBaseURL,
+    pillar,
+    fallbackToSection,
+}) => {
     const blogTag = tags.find(tag => tag.type === 'Blog');
     const seriesTag = tags.find(tag => tag.type === 'Series');
     const publicationTag = tags.find(tag => tag.type === 'Publication');

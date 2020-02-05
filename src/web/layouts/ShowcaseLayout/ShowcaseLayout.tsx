@@ -33,7 +33,7 @@ import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 import {
     decideLineCount,
     decideLineEffect,
-} from '@root/src/web/layouts/layoutHelpers';
+} from '@root/src/web/lib/layoutHelpers';
 import { Border } from '@root/src/web/layouts/Border';
 import { GridItem } from '@root/src/web/layouts/GridItem';
 
@@ -84,7 +84,8 @@ const ShowcaseGrid = ({
                         'lines  border  media       media'
                         'meta   border  media       media'
                         'meta   border  standfirst  right-column'
-                        '.      border  body        right-column';
+                        '.      border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -98,7 +99,8 @@ const ShowcaseGrid = ({
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -112,7 +114,8 @@ const ShowcaseGrid = ({
                         'media      right-column'
                         'lines      right-column'
                         'meta       right-column'
-                        'body       right-column';
+                        'body       right-column'
+                        '.          right-column';
                 }
 
                 ${until.desktop} {
@@ -311,7 +314,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <ShowcaseGrid>
                     <GridItem area="title">
                         <ArticleTitle
-                            CAPI={CAPI}
+                            tags={CAPI.tags}
+                            sectionLabel={CAPI.sectionLabel}
+                            sectionUrl={CAPI.sectionUrl}
+                            guardianBaseURL={CAPI.guardianBaseURL}
+                            pillar={CAPI.pillar}
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />
@@ -427,7 +434,12 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </ShowcaseGrid>
             </Section>
 
-            <Section padded={false} showTopBorder={false}>
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
                     className=""
@@ -473,7 +485,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cookie-banner" />
+            <div data-island="cmp" />
             <MobileStickyContainer />
         </>
     );

@@ -8,7 +8,7 @@ import { MostViewedRightWrapper } from '@frontend/web/components/MostViewed/Most
 import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { CookieBanner } from '@frontend/web/components/CookieBanner';
+import { CMP } from '@frontend/web/components/CMP';
 import { Onwards } from '@frontend/web/components/Onwards/Onwards';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
@@ -187,9 +187,9 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             root: 'slot-body-end',
         },
         {
-            component: CookieBanner,
+            component: CMP,
             props: {},
-            root: 'cookie-banner',
+            root: 'cmp',
         },
         {
             component: Onwards,

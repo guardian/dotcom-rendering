@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApi } from '@root/src/web/components/lib/api';
+import { useApi } from '@root/src/web/lib/api';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { css } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';

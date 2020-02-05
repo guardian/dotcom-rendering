@@ -1456,10 +1456,32 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+"@guardian/consent-management-platform@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-2.0.7.tgz#95b9a08f44cf0efb06e0f87e28e4767af73cd489"
+  integrity sha512-MBgrS4duAojBDenh7nBwqLm4VPjrjwaacO2L2KMx9QxeTRBbFjbYXlgpZuTnNZ1uwEFw+fD52uio0W5/0CVwFA==
+  dependencies:
+    "@guardian/src-button" "^0.5.1"
+    "@guardian/src-foundations" "^0.10.0"
+    "@guardian/src-svgs" "^0.0.6"
+    consent-string "^1.5.1"
+    js-cookie "^2.2.1"
+    whatwg-fetch "^3.0.0"
+
+"@guardian/src-button@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-0.5.1.tgz#b107a5a075e2ad41c59f3d52429a614273f247de"
+  integrity sha512-4i4o+qCd6o/W0Xi5IKcLz0aS+NUBNdBien5pmPlbcRIq/0TBVt7XAKxK4avrf7BiCWAAAtg/0ejq8AWx0wlPjw==
+
 "@guardian/src-foundations@^0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.10.0.tgz#b7773484f2b9e661d31f1d400950a83fb261fe63"
   integrity sha512-w5xvrYqCLngxFUsivhVhJ35EppFi2GtPMAUxN6EG/Hc9FDD3qiWHiT0nwSPOReNq3UXOLH6DxbNxanFVaOelCg==
+
+"@guardian/src-svgs@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-0.0.6.tgz#f8ec43935c5df3860f69cc356b9574a7a72c28e0"
+  integrity sha512-qlHe80XVEyTeiolgNjLsrq7z+19acIa0XIfMByAjo8zDw85S58Fjp/b0XYsYc0V7G8XamZRnMgjFNdF++FUZEw==
 
 "@hapi/address@2.x.x":
   version "2.1.2"
@@ -4199,6 +4221,11 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
+base-64@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/base-64/-/base-64-0.1.0.tgz#780a99c84e7d600260361511c4877613bf24f6bb"
+  integrity sha1-eAqZyE59YAJgNhURxId2E78k9rs=
+
 base64-js@^1.0.2:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.0.tgz#cab1e6118f051095e58b5281aea8c1cd22bfc0e3"
@@ -5250,6 +5277,13 @@ confusing-browser-globals@^1.0.7:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.9.tgz#72bc13b483c0276801681871d4898516f8f54fdd"
   integrity sha512-KbS1Y0jMtyPgIxjO7ZzMAuUpAKMt1SzCL9fsrKsX6b0zJPTaT0SiSPmewwVZg9UAO83HVIlEhZF84LIjZ0lmAw==
+
+consent-string@^1.5.1:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/consent-string/-/consent-string-1.5.2.tgz#cd3615f406a1d7649ebc9722960b5e451cf6a685"
+  integrity sha512-xzfHnFzHQSupiamNY93UGn8FggPajHYExI45pzadhVpXVaj3ztnhnA7lYjKXl09pKRQKCT4hvjytt+2eoH7Jaw==
+  dependencies:
+    base-64 "^0.1.0"
 
 console-browserify@^1.1.0:
   version "1.1.0"
@@ -9882,6 +9916,11 @@ jpeg-js@0.1.2, jpeg-js@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.1.2.tgz#135b992c0575c985cfa0f494a3227ed238583ece"
   integrity sha1-E1uZLAV1yYXPoPSUoyJ+0jhYPs4=
+
+js-cookie@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
 
 js-git@^0.7.8:
   version "0.7.8"
@@ -16461,7 +16500,7 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3, whatwg-encoding@^1.0.5:
   dependencies:
     iconv-lite "0.4.24"
 
-whatwg-fetch@>=0.10.0:
+whatwg-fetch@>=0.10.0, whatwg-fetch@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
   integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==

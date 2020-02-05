@@ -6,6 +6,7 @@ import { NAV } from '@root/fixtures/NAV';
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
 import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
+import { series } from '@root/fixtures/series';
 
 import { hydrateIslands } from '@frontend/web/islands/islands';
 import { ShowcaseLayout } from './ShowcaseLayout/ShowcaseLayout';
@@ -46,12 +47,29 @@ export const ShowcaseLayoutRender = () => {
             },
             { overwriteRoutes: false },
         )
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=/p/d7m9d,/p/d79vx,/p/d6qze,/p/d6yth',
+            {
+                status: 200,
+                body: commentCount,
+            },
+            { overwriteRoutes: false },
+        )
         // Most read by category
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/most-read/money.json?dcr=true',
             {
                 status: 200,
                 body: responseWithTwoTabs,
+            },
+            { overwriteRoutes: false },
+        )
+        // Series
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/series/testseries.json?dcr',
+            {
+                status: 200,
+                body: series,
             },
             { overwriteRoutes: false },
         )
@@ -90,12 +108,29 @@ export const StandardLayoutRender = () => {
             },
             { overwriteRoutes: false },
         )
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=/p/d7m9d,/p/d79vx,/p/d6qze,/p/d6yth',
+            {
+                status: 200,
+                body: commentCount,
+            },
+            { overwriteRoutes: false },
+        )
         // Most read by category
         .getOnce(
             'https://api.nextgen.guardianapps.co.uk/most-read/money.json?dcr=true',
             {
                 status: 200,
                 body: responseWithTwoTabs,
+            },
+            { overwriteRoutes: false },
+        )
+        // Series
+        .getOnce(
+            'https://api.nextgen.guardianapps.co.uk/series/testseries.json?dcr',
+            {
+                status: 200,
+                body: series,
             },
             { overwriteRoutes: false },
         )

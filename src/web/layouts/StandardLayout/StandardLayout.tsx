@@ -33,7 +33,10 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 
 import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
-import { decideLineCount, decideLineEffect } from '../layoutHelpers';
+import {
+    decideLineCount,
+    decideLineEffect,
+} from '@root/src/web/lib/layoutHelpers';
 import { Border } from '../Border';
 import { GridItem } from '../GridItem';
 
@@ -84,7 +87,8 @@ const StandardGrid = ({
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -98,7 +102,8 @@ const StandardGrid = ({
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -112,7 +117,8 @@ const StandardGrid = ({
                         'media      right-column'
                         'lines      right-column'
                         'meta       right-column'
-                        'body       right-column';
+                        'body       right-column'
+                        '.          right-column';
                 }
 
                 ${until.desktop} {
@@ -276,7 +282,11 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
-                            CAPI={CAPI}
+                            tags={CAPI.tags}
+                            sectionLabel={CAPI.sectionLabel}
+                            sectionUrl={CAPI.sectionUrl}
+                            guardianBaseURL={CAPI.guardianBaseURL}
+                            pillar={CAPI.pillar}
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />
@@ -391,7 +401,12 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 </StandardGrid>
             </Section>
 
-            <Section padded={false} showTopBorder={false}>
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
                     className=""
@@ -437,7 +452,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cookie-banner" />
+            <div data-island="cmp" />
             <MobileStickyContainer />
         </>
     );

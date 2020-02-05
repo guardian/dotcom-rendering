@@ -82,7 +82,8 @@ const StandardGrid = ({
                         'lines      border  headline    right-column'
                         'meta       border  standfirst  right-column'
                         'meta       border  media       right-column'
-                        '.          border  body        right-column';
+                        '.          border  body        right-column'
+                        '.          border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -96,7 +97,8 @@ const StandardGrid = ({
                         'lines      border  headline    right-column'
                         'meta       border  standfirst  right-column'
                         'meta       border  media       right-column'
-                        '.          border  body        right-column';
+                        '.          border  body        right-column'
+                        '.          border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -109,7 +111,8 @@ const StandardGrid = ({
                         'standfirst right-column'
                         'meta       right-column'
                         'media      right-column'
-                        'body       right-column';
+                        'body       right-column'
+                        '.          right-column';
                 }
 
                 ${until.desktop} {
@@ -255,7 +258,11 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
-                            CAPI={CAPI}
+                            tags={CAPI.tags}
+                            sectionLabel={CAPI.sectionLabel}
+                            sectionUrl={CAPI.sectionUrl}
+                            guardianBaseURL={CAPI.guardianBaseURL}
+                            pillar={CAPI.pillar}
                             badge={GE2019Badge}
                             inLeftCol={true}
                         />
@@ -380,7 +387,12 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 </StandardGrid>
             </Section>
 
-            <Section padded={false} showTopBorder={false}>
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
                     className=""
