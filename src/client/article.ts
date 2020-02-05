@@ -57,8 +57,8 @@ function ads(): void {
 }
 
 function topicClick(e: Event): void {
-    const follow = document.querySelector('.follow');
-    const status = follow?.querySelector('.status');
+    const follow = document.querySelector('.js-follow');
+    const status = follow?.querySelector('.js-status');
     const statusText = status?.textContent;
     const id = follow?.getAttribute('data-id');
 
@@ -85,8 +85,8 @@ function topicClick(e: Event): void {
 }
 
 function topics(): void {
-    const follow = document.querySelector('.follow');
-    const status = follow?.querySelector('.status');
+    const follow = document.querySelector('.js-follow');
+    const status = follow?.querySelector('.js-status');
     const id = follow?.getAttribute('data-id');
 
     if (!id) {
@@ -104,7 +104,7 @@ function topics(): void {
 }
 
 function launchSlideshow(src: string | null): void {
-    const images = Array.from(document.querySelectorAll('.launch-slideshow'));
+    const images = Array.from(document.querySelectorAll('.js-launch-slideshow'));
     const imagesWithCaptions: Image[] = images.flatMap((image: Element) => {
         const url = image.getAttribute('src');
         const caption =  image.getAttribute('caption') ?? undefined;
@@ -118,7 +118,7 @@ function launchSlideshow(src: string | null): void {
 }
 
 function slideshow(): void {
-    const images = document.querySelectorAll('.launch-slideshow');
+    const images = document.querySelectorAll('.js-launch-slideshow');
     Array.from(images)
         .forEach((image: Element) => image.addEventListener('click', (e: Event) => {
             launchSlideshow(image.getAttribute('src'));
