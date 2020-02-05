@@ -65,11 +65,16 @@ const mockRESTCalls = () =>
                 },
             },
             { overwriteRoutes: false },
-        );
+        )
+        // Rich link
+        .getOnce('begin:https://api.nextgen.guardianapps.co.uk/embed/', {
+            status: 200,
+            body: {},
+        });
 
 export const Default = () => {
     mockRESTCalls();
     setTimeout(() => hydrateIslands(commentCAPI, NAV));
     return <CommentLayout CAPI={commentCAPI} NAV={NAV} />;
 };
-Default.story = {name: 'default'}
+Default.story = { name: 'default' };
