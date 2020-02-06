@@ -48,7 +48,7 @@ export const SlotBodyEnd = ({
     };
 
     const endpointUrl = 'https://contributions.guardianapis.com/epic';
-    const { data, error } = useApi(endpointUrl, {
+    const { data: responseBody, error } = useApi(endpointUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,9 @@ export const SlotBodyEnd = ({
         return null;
     }
 
-    if (data && data.html) {
+    if (responseBody && responseBody.data) {
+        const { data } = responseBody;
+
         return (
             <div className={wrapperMargins}>
                 {data.css && <style>{data.css}</style>}
