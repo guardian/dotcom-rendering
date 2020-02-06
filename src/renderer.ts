@@ -6,7 +6,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 
 import { Option, fromNullable, Some, None } from 'types/option';
-import { srcset, transformUrl } from 'image';
+import { srcset, src } from 'image';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement } from 'article';
@@ -216,7 +216,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
         srcSet: srcset(url, salt),
         alt,
         className: 'js-launch-slideshow',
-        src: transformUrl(salt, url, 500),
+        src: src(salt, url, 500),
         css: imageStyles(width, height),
         caption,
         credit,

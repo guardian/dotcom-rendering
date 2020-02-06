@@ -27,7 +27,7 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex')    
 
-function transformUrl(salt: string, input: string, width: number): string {
+function src(salt: string, input: string, width: number): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
@@ -58,13 +58,13 @@ function transformUrl(salt: string, input: string, width: number): string {
  */
 const srcset = (url: string, salt: string): string =>
     widths
-        .map(width => `${transformUrl(salt, url, width)} ${width}w`)
+        .map(width => `${src(salt, url, width)} ${width}w`)
         .join(', ');
 
 
 // ----- Exports ----- //
 
 export {
+    src,
     srcset,
-    transformUrl
 };
