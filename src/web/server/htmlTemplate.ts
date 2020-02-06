@@ -45,6 +45,9 @@ export const htmlTemplate = ({
             ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
 
+    // ********************************
+    // ****** high priority script ****
+    // ********************************
     const priorityScriptTags = priorityScripts.map(
         src => `<script defer src="${src}"></script>`,
     );
@@ -57,6 +60,9 @@ export const htmlTemplate = ({
         src => `<script defer type="module" src="${src}"></script>`,
     );
 
+    // ********************************
+    // **** low priority scripts ******
+    // ********************************
     const lowPriorityScriptTags = lowPriorityScripts.map(
         src => `<script async src="${src}"></script>`,
     );

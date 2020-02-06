@@ -34,6 +34,8 @@ export const getDist = ({
     return `${CDN}assets/${selectedAssetHash[path] || path}`;
 };
 
+// TODO: Do static files ever appear in the manifest.json?
 // Note we do not have any variation between in compliation for static files
+// therefore we just look up using assetHash
 export const getStatic = (path: string): string =>
     `${CDN}static/frontend/${assetHash[path] || path}`;
