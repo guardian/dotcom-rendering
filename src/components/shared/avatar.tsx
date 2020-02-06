@@ -4,7 +4,7 @@ import React from 'react';
 import { Contributor } from 'capi';
 import { isSingleContributor } from 'capi';
 import { css, SerializedStyles } from '@emotion/core';
-import { transformUrl } from 'asset';
+import { transformUrl } from 'image';
 
 // ----- Styles ----- //
 

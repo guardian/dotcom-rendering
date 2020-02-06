@@ -6,7 +6,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 
 import { Option, fromNullable, Some, None } from 'types/option';
-import { srcset, transformUrl } from 'asset';
+import { srcset, transformUrl } from 'image';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement } from 'article';
