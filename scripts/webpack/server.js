@@ -1,4 +1,6 @@
-const { siteName } = require('../frontend/config');
+const {
+    siteName
+} = require('../frontend/config');
 
 module.exports = () => ({
     entry: {
@@ -20,9 +22,41 @@ module.exports = () => ({
         require('webpack-node-externals')({
             whitelist: [/^@guardian/],
         }),
-        (context, request, callback) =>
-            /manifest\.json$/.test(request)
-                ? callback(null, `commonjs ${request}`)
-                : callback(),
+        (context, request, callback) => {
+            return request.endsWith('manifest.json') ?
+                callback(null, `commonjs ${request}`) :
+                callback()
+        },
     ],
+
+    module: {
+        rules: [{
+                test: /(\.tsx)|(\.js)|(\.ts)$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-typescript',
+                            // TODO: remove @babel/preset-react once we stop using JSX in server folder
+                            '@babel/preset-react',
+                            [
+                                '@babel/preset-env',
+                                {
+                                    targets: {
+                                        node: 'current',
+                                    },
+                                },
+                            ]
+                        ],
+                    },
+                }, ],
+            },
+            // TODO: find a way to remove
+            {
+                test: /\.svg$/,
+                use: ['desvg-loader/react', 'svg-loader'],
+            },
+        ],
+    }
 });
