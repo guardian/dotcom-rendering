@@ -30,7 +30,7 @@ export const CMP = () => {
     }
 
     const props = {
-        source: 'www',
+        source: 'dcr',
         onClose,
     };
 

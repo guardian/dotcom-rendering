@@ -126,6 +126,7 @@ interface Block {
     elements: CAPIElement[];
     createdOn?: number;
     createdOnDisplay?: string;
+    lastUpdated?: number;
     lastUpdatedDisplay?: string;
     title?: string;
     firstPublished?: number;
@@ -231,6 +232,7 @@ interface CAPIType {
     commercialProperties: CommercialProperties;
     starRating?: number;
     trailText: string;
+    badge?: BadgeType;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
@@ -252,8 +254,8 @@ interface TagType {
 }
 
 interface BadgeType {
-    linkTo: string;
-    svgSrc: () => JSX.Element;
+    seriesTag: string;
+    imageUrl: string;
 }
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')

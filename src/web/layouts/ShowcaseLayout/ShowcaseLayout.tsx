@@ -24,27 +24,16 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
+import { Border } from '@root/src/web/components/Border';
+import { GridItem } from '@root/src/web/components/GridItem';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-
-import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
 import {
     decideLineCount,
     decideLineEffect,
 } from '@root/src/web/lib/layoutHelpers';
-import { Border } from '@root/src/web/layouts/Border';
-import { GridItem } from '@root/src/web/layouts/GridItem';
-
-function checkForGE2019Badge(tags: TagType[]) {
-    if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
-        return {
-            linkTo: '/politics/general-election-2019',
-            svgSrc: GE2019,
-        };
-    }
-}
 
 const ShowcaseGrid = ({
     children,
@@ -84,7 +73,8 @@ const ShowcaseGrid = ({
                         'lines  border  media       media'
                         'meta   border  media       media'
                         'meta   border  standfirst  right-column'
-                        '.      border  body        right-column';
+                        '.      border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -98,7 +88,8 @@ const ShowcaseGrid = ({
                         '.      border  standfirst  right-column'
                         'lines  border  media       right-column'
                         'meta   border  media       right-column'
-                        'meta   border  body        right-column';
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -112,7 +103,8 @@ const ShowcaseGrid = ({
                         'media      right-column'
                         'lines      right-column'
                         'meta       right-column'
-                        'body       right-column';
+                        'body       right-column'
+                        '.          right-column';
                 }
 
                 ${until.desktop} {
@@ -239,7 +231,6 @@ interface Props {
 }
 
 export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
-    const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     const { isPaidContent } = CAPI.config;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -311,8 +302,12 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <ShowcaseGrid>
                     <GridItem area="title">
                         <ArticleTitle
-                            CAPI={CAPI}
-                            badge={GE2019Badge}
+                            tags={CAPI.tags}
+                            sectionLabel={CAPI.sectionLabel}
+                            sectionUrl={CAPI.sectionUrl}
+                            guardianBaseURL={CAPI.guardianBaseURL}
+                            pillar={CAPI.pillar}
+                            badge={CAPI.badge}
                             inLeftCol={true}
                         />
                     </GridItem>
@@ -410,7 +405,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     showBottomSocialButtons={
                                         CAPI.showBottomSocialButtons
                                     }
-                                    badge={GE2019Badge}
+                                    badge={CAPI.badge}
                                 />
                             </main>
                         </ArticleContainer>
@@ -427,7 +422,12 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 </ShowcaseGrid>
             </Section>
 
-            <Section padded={false} showTopBorder={false}>
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
                     className=""

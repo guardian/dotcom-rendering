@@ -15,10 +15,14 @@ const sectionStyles = css`
 `;
 
 type Props = {
-    CAPI: CAPIType;
-    badge?: BadgeType;
+    tags: TagType[];
+    sectionLabel: string;
+    sectionUrl: string;
+    guardianBaseURL: string;
+    pillar: Pillar;
     inLeftCol?: boolean;
     fallbackToSection?: boolean;
+    badge?: BadgeType;
 };
 
 const titleBadgeWrapper = css`
@@ -41,21 +45,31 @@ const marginTop = css`
 `;
 
 export const ArticleTitle = ({
-    CAPI,
-    badge,
+    tags,
+    sectionLabel,
+    sectionUrl,
+    guardianBaseURL,
+    pillar,
     inLeftCol,
     fallbackToSection = true,
+    badge,
 }: Props) => (
     <div className={cx(inLeftCol && sectionStyles, badge && badgeContainer)}>
         {badge && (
             <div className={titleBadgeWrapper}>
-                <Badge svgSrc={badge.svgSrc} linkTo={badge.linkTo} />
+                <Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
             </div>
         )}
         <div className={badge && marginTop}>
             <SeriesSectionLink
-                CAPI={CAPI}
-                fallbackToSection={fallbackToSection}
+                {...{
+                    tags,
+                    sectionLabel,
+                    sectionUrl,
+                    guardianBaseURL,
+                    pillar,
+                    fallbackToSection,
+                }}
             />
         </div>
     </div>

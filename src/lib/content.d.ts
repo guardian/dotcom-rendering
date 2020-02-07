@@ -25,6 +25,7 @@ interface RichLinkBlockElement {
     url: string;
     text: string;
     prefix: string;
+    role?: Weighting;
 }
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
@@ -261,6 +262,11 @@ interface VideoBlockElement {
     _type: 'model.dotcomrendering.pageElements.VideoBlockElement';
 }
 
+interface CodeBlockElement {
+    _type: 'model.dotcomrendering.pageElements.CodeBlockElement';
+    isMandatory: boolean;
+}
+
 type CAPIElement =
     | TextBlockElement
     | SubheadingBlockElement
@@ -288,4 +294,5 @@ type CAPIElement =
     | MapBlockElement
     | AudioAtomElement
     | AudioBlockElement
-    | VideoBlockElement;
+    | VideoBlockElement
+    | CodeBlockElement;
