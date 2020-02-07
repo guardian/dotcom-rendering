@@ -94,6 +94,9 @@
                     },
                     {
                         "$ref": "#/definitions/VideoBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/CodeBlockElement"
                     }
                 ]
             }
@@ -387,6 +390,9 @@
                 },
                 "prefix": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/Weighting"
                 }
             },
             "required": [
@@ -395,6 +401,17 @@
                 "text",
                 "url"
             ]
+        },
+        "Weighting": {
+            "enum": [
+                "halfwidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "ImageBlockElement": {
             "type": "object",
@@ -516,17 +533,6 @@
                 "srcSet",
                 "weighting"
             ]
-        },
-        "Weighting": {
-            "enum": [
-                "halfwidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
         },
         "SrcSet": {
             "type": "object",
@@ -1237,6 +1243,24 @@
                 "_type"
             ]
         },
+        "CodeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.CodeBlockElement"
+                    ]
+                },
+                "isMandatory": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "isMandatory"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -1327,6 +1351,9 @@
                             },
                             {
                                 "$ref": "#/definitions/VideoBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/CodeBlockElement"
                             }
                         ]
                     }
@@ -1336,6 +1363,9 @@
                 },
                 "createdOnDisplay": {
                     "type": "string"
+                },
+                "lastUpdated": {
+                    "type": "number"
                 },
                 "lastUpdatedDisplay": {
                     "type": "string"
