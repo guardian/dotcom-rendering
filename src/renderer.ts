@@ -184,6 +184,8 @@ interface ImageProps {
     sizes: string;
     width: number;
     height: number;
+    caption: string;
+    credit: string;
 }
 
 type FigureElement = ImageProps & {
@@ -203,7 +205,8 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
-    const { url, sizes, salt, alt, width, height } = props;
+    const { url, sizes, salt, alt, width, height, credit, caption } = props;
+
     if (!url) {
         return null;
     }
@@ -212,8 +215,11 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
         sizes,
         srcSet: srcset(url, salt),
         alt,
+        className: 'js-launch-slideshow',
         src: transformUrl(salt, url, 500),
         css: imageStyles(width, height),
+        caption,
+        credit,
     });
 }
 

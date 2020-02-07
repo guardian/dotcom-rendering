@@ -9,7 +9,8 @@ describe('Avatar component renders as expected', () => {
     it('Adds correct alt attribute', () => {
         const contributors = [{
             bylineLargeImageUrl: "https://mapi.co.uk/test",
-            webTitle: "Web Title"
+            webTitle: "Web Title",
+            id: "test"
         }]
         const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageSalt="" />);
         expect(avatar.find('img').prop('alt')).toBe("Web Title")
@@ -18,7 +19,8 @@ describe('Avatar component renders as expected', () => {
     it('Uses background colour prop', () => {
         const contributors = [{
             bylineLargeImageUrl: "https://mapi.co.uk/test",
-            webTitle: "Web Title"
+            webTitle: "Web Title",
+            id: "test"
         }];
         const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" imageSalt="" />);
         expect(avatar.props().css.styles).toContain("background-color:pink")
@@ -27,7 +29,8 @@ describe('Avatar component renders as expected', () => {
     it('Generates correct image url', () => {
         const contributors = [{
             bylineLargeImageUrl: "https://mapi.co.uk/test",
-            webTitle: "Web Title"
+            webTitle: "Web Title",
+            id: "test"
         }]
         const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageSalt="SALT" />);
         expect(avatar.find('img').prop('src')).toBe("https://i.guim.co.uk/img/mapi/test?width=204&quality=85&fit=bounds&sig-ignores-params=true&s=06e5f420e98c9153b66fc0f7383a60f7")
@@ -35,8 +38,8 @@ describe('Avatar component renders as expected', () => {
 
     it('Renders null if more than one contributor', () => {
         const contributors = [
-            { webTitle: "Contributor 1" },
-            { webTitle: "Contributor 2" }
+            { webTitle: "Contributor 1", id: "test" },
+            { webTitle: "Contributor 2", id: "test" }
         ]
         const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageSalt="" />);
         expect(avatar.html()).toBe(null)
