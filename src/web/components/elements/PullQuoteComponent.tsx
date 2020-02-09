@@ -20,6 +20,8 @@ const commonStyles = (pillar: Pillar, designType: DesignType) => {
                 ${headline.xxsmall({ fontWeight: 'light' })};
                 line-height: 25px;
                 position: relative;
+                /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
+                /* stylelint-disable-next-line color-no-hex */
                 background-color: #fbe6d5;
                 padding-left: 10px;
                 padding-right: 10px;
@@ -33,6 +35,8 @@ const commonStyles = (pillar: Pillar, designType: DesignType) => {
                     height: ${quoteTail}px;
                     bottom: -${quoteTail}px;
                     position: absolute;
+                    /* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
+                    /* stylelint-disable-next-line color-no-hex */
                     background-color: #fbe6d5;
                 }
             `;
