@@ -129,7 +129,7 @@ export const AdSlotCore: React.FC<{
     outOfPage?: boolean;
     optId?: string;
     optClassNames?: string[];
-    className: string;
+    className?: string;
 }> = ({
     name,
     adTypes,
@@ -168,7 +168,7 @@ export const AdSlotCore: React.FC<{
 
 export const AdSlot: React.FC<{
     asps: AdSlotParameters;
-    className: string;
+    className?: string;
 }> = ({ asps, className }) => {
     return <AdSlotCore {...asps} className={className} />;
 };
