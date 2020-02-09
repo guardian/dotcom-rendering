@@ -77,24 +77,12 @@ const mobileStickyAdStyles = css`
         ${textSans.xsmall()};
     }
 `;
-export interface AdSlotParameters {
-    name: string;
-    adTypes: string[];
-    sizeMapping: {
-        [key: string]: string[];
-    };
-    showLabel?: boolean;
-    refresh?: boolean;
-    outOfPage?: boolean;
-    optId?: string;
-    optClassNames?: string[];
-}
 
-export interface AdSlotInputSizeMappings {
+interface AdSlotInputSizeMappings {
     [key: string]: string[];
 }
 
-export interface AdSlotInternalSizeMappings {
+interface AdSlotInternalSizeMappings {
     [key: string]: string;
 }
 
@@ -111,7 +99,7 @@ export const makeInternalSizeMappings = (
 };
 
 export const makeClassNames = (
-    name: string,
+    name: AdSlotType,
     adTypes: string[],
     optClassNames: string[],
 ): string => {
@@ -121,7 +109,7 @@ export const makeClassNames = (
 };
 
 export const AdSlotCore: React.FC<{
-    name: string;
+    name: AdSlotType;
     adTypes: string[];
     sizeMapping: AdSlotInputSizeMappings;
     showLabel?: boolean;
