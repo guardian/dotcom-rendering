@@ -129,7 +129,7 @@ export const AdSlotCore: React.FC<{
     outOfPage?: boolean;
     optId?: string;
     optClassNames?: string[];
-    className?: string;
+    localStyles?: string;
 }> = ({
     name,
     adTypes,
@@ -139,7 +139,7 @@ export const AdSlotCore: React.FC<{
     outOfPage = false,
     optId,
     optClassNames,
-    className,
+    localStyles,
 }) => {
     // Will export `getOptionalProps` as a function if/when needed - Pascal.
     // const getOptionalProps = (): object => ({
@@ -156,7 +156,7 @@ export const AdSlotCore: React.FC<{
                 name,
                 adTypes,
                 optClassNames || [],
-            )} ${className} ${labelStyles}`}
+            )} ${localStyles} ${labelStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
@@ -168,9 +168,9 @@ export const AdSlotCore: React.FC<{
 
 export const AdSlot: React.FC<{
     asps: AdSlotParameters;
-    className?: string;
-}> = ({ asps, className }) => {
-    return <AdSlotCore {...asps} className={className} />;
+    localStyles?: string;
+}> = ({ asps, localStyles }) => {
+    return <AdSlotCore {...asps} localStyles={localStyles} />;
 };
 
 export const MobileStickyContainer: React.FC<{}> = ({}) => {
