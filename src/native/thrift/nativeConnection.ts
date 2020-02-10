@@ -11,7 +11,8 @@ import {
     TApplicationException,
     TApplicationExceptionType,
     BufferedTransport,
-    CompactProtocol
+    CompactProtocol,
+    ThriftProcessor
 } from '@creditkarma/thrift-server-core'
 
 import * as uuid from 'uuid';
@@ -21,15 +22,19 @@ import { WebviewHandler } from 'native/webviewApi';
 declare global {
     interface Window {
         nativeConnections: { [id: string]: NativeConnection };
-        AndroidWebViewMessage?: (nativeMessage: NativeMessage) => {};
+        AndroidWebViewRequest?: (nativeMessage: NativeMessage) => {};
+        AndroidWebViewResponse?: (nativeMessage: NativeMessage) => {};
         webkit: {
             messageHandlers: {
-                iOSWebViewMessage: {
+                iOSWebViewRequest: {
+                    postMessage: (nativeMessage: NativeMessage) => {};
+                };
+                iOSWebViewResponse: {
                     postMessage: (nativeMessage: NativeMessage) => {};
                 };
             };
         };
-        receiveiOSMessage: (buffer: Buffer) => void;
+        receiveNativeMessage: (nativeMessage: NativeMessage) => void;
     }
 }
 
@@ -45,16 +50,6 @@ interface PromiseResponse {
 }
 
 const ACTION_TIMEOUT_MS = 30000;
-
-function sendNativeMessage(nativeMessage: NativeMessage): void {
-    if (window.AndroidWebViewMessage) {
-        window.AndroidWebViewMessage(nativeMessage)
-    } else if (window?.webkit?.messageHandlers?.iOSWebViewMessage?.postMessage) {
-        window.webkit.messageHandlers.iOSWebViewMessage.postMessage(nativeMessage)
-    } else {
-        console.warn('No native APIs available');
-    }
-}
 
 export class NativeConnection<Context = void> extends ThriftConnection {
     connectionId = uuid.v4();
@@ -94,7 +89,17 @@ export class NativeConnection<Context = void> extends ThriftConnection {
         const message = this.outBuffer.shift();
         if (message) {
             console.log("Sending next message")
-            sendNativeMessage(message)
+            this.sendNativeRequest(message)
+        }
+    }
+
+    private sendNativeRequest(nativeMessage: NativeMessage): void {
+        if (window.AndroidWebViewRequest) {
+            window.AndroidWebViewRequest(nativeMessage)
+        } else if (window?.webkit?.messageHandlers?.iOSWebViewRequest?.postMessage) {
+            window.webkit.messageHandlers.iOSWebViewRequest.postMessage(nativeMessage)
+        } else {
+            console.warn('No native APIs available');
         }
     }
 
@@ -114,7 +119,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
             }
             if (connection.promises.length === 1) {
                 console.log("Sending message immediately")
-                sendNativeMessage(message);
+                connection.sendNativeRequest(message);
             } else {
                 console.log("Queing message because others in flight")
                 connection.outBuffer.push(message);
@@ -123,14 +128,45 @@ export class NativeConnection<Context = void> extends ThriftConnection {
     }
 }
 
-function receiveiOSMessage(buffer: Buffer): void {
-    const transport = new BufferedTransport(buffer);
-    const protocol = new CompactProtocol(transport);
-    const processor = new Webview.Processor(new WebviewHandler);
-    processor.process(protocol, protocol, null);
+class ThriftServer<T> {
+
+    processor: ThriftProcessor<null, T>;
+
+    receive({ connectionId, data }: NativeMessage) {
+        const buffer = Buffer.from(data, 'base64');
+        const inputTransport = new BufferedTransport(buffer);
+        const outputTransport = new BufferedTransport();
+        const inputProtocol = new CompactProtocol(inputTransport);
+        const outputProtocol = new CompactProtocol(outputTransport);
+        this.processor.process(inputProtocol, outputProtocol, null)
+            .then((buffer: Buffer) => {
+                const message: NativeMessage = {
+                    data: buffer.toString("base64"),
+                    connectionId
+                }
+                this.send(message);
+            })
+    }
+
+    send(nativeMessage: NativeMessage): void {
+        if (window.AndroidWebViewResponse) {
+            window.AndroidWebViewResponse(nativeMessage)
+        } else if (window?.webkit?.messageHandlers?.iOSWebViewResponse?.postMessage) {
+            window.webkit.messageHandlers.iOSWebViewResponse.postMessage(nativeMessage)
+        } else {
+            console.warn('No native APIs available');
+        }
+    }
+
+    constructor(processor: ThriftProcessor<null, T>) {
+        this.processor = processor
+        window.receiveNativeMessage = this.receive;
+    }
 }
 
-window.receiveiOSMessage = receiveiOSMessage;
+new ThriftServer(new Webview.Processor(new WebviewHandler));
+
+
 
 export function createAppClient<TClient extends ThriftClient<void>>(
     ServiceClient: IClientConstructor<TClient, void>, 

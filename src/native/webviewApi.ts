@@ -12,5 +12,6 @@ export class WebviewHandler implements Webview.IHandler {
 
     insertEpic(epic: Epic): void {
         console.log("inserting epic");
+        console.log(epic)
     }
 }
