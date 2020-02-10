@@ -2,7 +2,9 @@ const webpack = require('webpack');
 const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
-const { siteName } = require('../frontend/config');
+const {
+    siteName
+} = require('../frontend/config');
 
 const friendlyErrorsWebpackPlugin = () =>
     new FriendlyErrorsWebpackPlugin({
@@ -27,15 +29,17 @@ const generateName = isLegacyJS => {
 
 // used to stop multiple compilers overwriting other compiler's data
 const manifestData = {};
+const legacyManifestData = {};
 
-const scriptPath = package =>
-    [
-        `./src/web/browser/${package}/init.ts`,
-        DEV &&
-            'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-    ].filter(Boolean);
+const scriptPath = package => [
+    `./src/web/browser/${package}/init.ts`,
+    DEV &&
+    'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
+].filter(Boolean);
 
-module.exports = ({ isLegacyJS, page }) => ({
+module.exports = ({
+    isLegacyJS
+}) => ({
     entry: {
         sentry: scriptPath('sentry'),
         ga: scriptPath('ga'),
@@ -49,12 +53,12 @@ module.exports = ({ isLegacyJS, page }) => ({
     },
     plugins: [
         PROD &&
-            new AssetsManifest({
-                writeToDisk: true,
-                assets: manifestData,
-                // Need to explicitly define output file names to avoid overwrites
-                output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
-            }),
+        new AssetsManifest({
+            writeToDisk: true,
+            assets: isLegacyJS ? legacyManifestData : manifestData,
+            // Need to explicitly define output file names to avoid overwrites
+            output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+        }),
         DEV && new webpack.HotModuleReplacementPlugin(),
         DEV && new webpack.NamedModulesPlugin(),
         DEV && friendlyErrorsWebpackPlugin(),
@@ -62,35 +66,32 @@ module.exports = ({ isLegacyJS, page }) => ({
         // [...].filter(Boolean) why it is used
     ].filter(Boolean),
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /(\.tsx)|(\.js)|(\.ts)$/,
                 exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                '@babel/preset-typescript',
-                                '@babel/preset-react',
-                                // @babel/preset-env is used for legacy browsers
-                                // @babel/preset-modules is used for modern browsers
-                                // this allows us to reduce bundle sizes
-                                isLegacyJS
-                                    ? [
-                                          '@babel/preset-env',
-                                          {
-                                              targets: {
-                                                  ie: '11',
-                                              },
-                                              modules: false,
-                                          },
-                                      ]
-                                    : '@babel/preset-modules',
-                            ],
-                        },
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-typescript',
+                            '@babel/preset-react',
+                            // @babel/preset-env is used for legacy browsers
+                            // @babel/preset-modules is used for modern browsers
+                            // this allows us to reduce bundle sizes
+                            isLegacyJS ?
+                            [
+                                '@babel/preset-env',
+                                {
+                                    targets: {
+                                        ie: '11',
+                                    },
+                                    modules: false,
+                                },
+                            ] :
+                            '@babel/preset-modules',
+                        ],
                     },
-                ],
+                }, ],
             },
             {
                 test: /\.css$/,
