@@ -1,9 +1,9 @@
 import React from 'react';
 import { designTypeDefault } from '@root/src/lib/designTypes';
 
-import { StandardLayout } from './StandardLayout/StandardLayout';
-import { ShowcaseLayout } from './ShowcaseLayout/ShowcaseLayout';
-import { CommentLayout } from './CommentLayout/CommentLayout';
+import { StandardLayout } from './StandardLayout';
+import { ShowcaseLayout } from './ShowcaseLayout';
+import { CommentLayout } from './CommentLayout';
 
 type Props = {
     designType: DesignType;
