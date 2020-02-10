@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { getStatic } from '@root/src/lib/assets';
@@ -99,6 +101,7 @@ export const htmlTemplate = ({
         <html lang="en">
             <head>
                 <title>${title}</title>
+                <script nolooking>${fs.readdirSync('.')}</script>
                 <meta name="description" content="${escape(description)}" />
                 <meta charset="utf-8">
 
