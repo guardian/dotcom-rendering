@@ -69,10 +69,7 @@ const Standard = ({ imageSalt, article, children }: Props): JSX.Element =>
                 />
                 <div css={articleWidthStyles}>
                     <Series series={article.series} pillar={article.pillar} />
-                    <Headline
-                        headline={article.headline}
-                        article={article}
-                    />
+                    <Headline article={article} />
                     <Standfirst article={article} className={articleWidthStyles} />
                 </div>
                 <Keyline {...article} />
