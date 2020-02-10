@@ -97,11 +97,23 @@ export const htmlTemplate = ({
 
     const twitterMetaTags = generateMetaTags(twitterData);
 
+    let assetHash;
+    let assetHashLegacy;
+    try {
+        // path is relative to the server bundle
+        assetHash = require('./manifest.json');
+        assetHashLegacy = require('./manifest.legacy.json');
+    } catch (e) {
+        // do nothing
+    }
+
     return `<!doctype html>
         <html lang="en">
             <head>
                 <title>${title}</title>
-                <script nolooking>${fs.readdirSync('.')}</script>
+                <script nolooking>{ files: ${fs.readdirSync(
+                    '.',
+                )}, main: ${assetHash}, legacy ${assetHashLegacy}}</script>
                 <meta name="description" content="${escape(description)}" />
                 <meta charset="utf-8">
 
