@@ -10,37 +10,28 @@ import {
     IProtocolConstructor,
     TApplicationException,
     TApplicationExceptionType,
-    BufferedTransport,
-    CompactProtocol,
-    ThriftProcessor
 } from '@creditkarma/thrift-server-core'
 
 import * as uuid from 'uuid';
-import * as Webview from 'mobile-apps-thrift-typescript/Webview';
-import { WebviewHandler } from 'native/webviewApi';
+import { Message } from './message';
 
 declare global {
     interface Window {
         nativeConnections: { [id: string]: NativeConnection };
-        AndroidWebViewRequest?: (nativeMessage: NativeMessage) => {};
-        AndroidWebViewResponse?: (nativeMessage: NativeMessage) => {};
+        AndroidWebViewRequest?: (message: Message) => {};
+        AndroidNativeResponse?: (message: Message) => {};
         webkit: {
             messageHandlers: {
                 iOSWebViewRequest: {
-                    postMessage: (nativeMessage: NativeMessage) => {};
+                    postMessage: (message: Message) => {};
                 };
-                iOSWebViewResponse: {
-                    postMessage: (nativeMessage: NativeMessage) => {};
+                iOSNativeResponse: {
+                    postMessage: (message: Message) => {};
                 };
             };
         };
-        receiveNativeMessage: (nativeMessage: NativeMessage) => void;
+        receiveNativeRequest: (message: Message) => void;
     }
-}
-
-export interface NativeMessage {
-    data: string;
-    connectionId: string;
 }
 
 interface PromiseResponse {
@@ -54,7 +45,7 @@ const ACTION_TIMEOUT_MS = 30000;
 export class NativeConnection<Context = void> extends ThriftConnection {
     connectionId = uuid.v4();
     promises: PromiseResponse[] = [];
-    outBuffer: NativeMessage[] = [];
+    outBuffer: Message[] = [];
 
     constructor(Transport: ITransportConstructor, Protocol: IProtocolConstructor) {
         super(Transport, Protocol);
@@ -75,7 +66,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
         }
     }
 
-    receive(message: NativeMessage): void {
+    receive(message: Message): void {
         const resolver = this.promises.shift();
         if (resolver) {
             clearTimeout(resolver.timeoutId)
@@ -93,11 +84,11 @@ export class NativeConnection<Context = void> extends ThriftConnection {
         }
     }
 
-    private sendNativeRequest(nativeMessage: NativeMessage): void {
+    private sendNativeRequest(message: Message): void {
         if (window.AndroidWebViewRequest) {
-            window.AndroidWebViewRequest(nativeMessage)
+            window.AndroidWebViewRequest(message)
         } else if (window?.webkit?.messageHandlers?.iOSWebViewRequest?.postMessage) {
-            window.webkit.messageHandlers.iOSWebViewRequest.postMessage(nativeMessage)
+            window.webkit.messageHandlers.iOSWebViewRequest.postMessage(message)
         } else {
             console.warn('No native APIs available');
         }
@@ -113,7 +104,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
                 reject: rej,
                 timeoutId: setTimeout(function() { connection.reset(id); }, ACTION_TIMEOUT_MS)
             });
-            const message: NativeMessage = {
+            const message: Message = {
                 data: dataToSend.toString("base64"),
                 connectionId: id
             }
@@ -127,46 +118,6 @@ export class NativeConnection<Context = void> extends ThriftConnection {
         });
     }
 }
-
-class ThriftServer<T> {
-
-    processor: ThriftProcessor<null, T>;
-
-    receive({ connectionId, data }: NativeMessage): void {
-        const buffer = Buffer.from(data, 'base64');
-        const inputTransport = new BufferedTransport(buffer);
-        const outputTransport = new BufferedTransport();
-        const inputProtocol = new CompactProtocol(inputTransport);
-        const outputProtocol = new CompactProtocol(outputTransport);
-        this.processor.process(inputProtocol, outputProtocol, null)
-            .then((buffer: Buffer) => {
-                const message: NativeMessage = {
-                    data: buffer.toString("base64"),
-                    connectionId
-                }
-                this.send(message);
-            })
-    }
-
-    send(nativeMessage: NativeMessage): void {
-        if (window.AndroidWebViewResponse) {
-            window.AndroidWebViewResponse(nativeMessage)
-        } else if (window?.webkit?.messageHandlers?.iOSWebViewResponse?.postMessage) {
-            window.webkit.messageHandlers.iOSWebViewResponse.postMessage(nativeMessage)
-        } else {
-            console.warn('No native APIs available');
-        }
-    }
-
-    constructor(processor: ThriftProcessor<null, T>) {
-        this.processor = processor
-        window.receiveNativeMessage = this.receive;
-    }
-}
-
-new ThriftServer(new Webview.Processor(new WebviewHandler));
-
-
 
 export function createAppClient<TClient extends ThriftClient<void>>(
     ServiceClient: IClientConstructor<TClient, void>, 
