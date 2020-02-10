@@ -9,6 +9,7 @@ import { from } from '@guardian/src-foundations/mq';
 export const labelStyles = css`
     .ad-slot__label {
         ${textSans.xsmall()};
+        position: relative;
         height: 24px;
         background-color: ${palette.neutral[97]};
         padding: 0 8px;
@@ -77,24 +78,12 @@ const mobileStickyAdStyles = css`
         ${textSans.xsmall()};
     }
 `;
-export interface AdSlotParameters {
-    name: string;
-    adTypes: string[];
-    sizeMapping: {
-        [key: string]: string[];
-    };
-    showLabel?: boolean;
-    refresh?: boolean;
-    outOfPage?: boolean;
-    optId?: string;
-    optClassNames?: string[];
-}
 
-export interface AdSlotInputSizeMappings {
+interface AdSlotInputSizeMappings {
     [key: string]: string[];
 }
 
-export interface AdSlotInternalSizeMappings {
+interface AdSlotInternalSizeMappings {
     [key: string]: string;
 }
 
@@ -111,7 +100,7 @@ export const makeInternalSizeMappings = (
 };
 
 export const makeClassNames = (
-    name: string,
+    name: AdSlotType,
     adTypes: string[],
     optClassNames: string[],
 ): string => {
@@ -121,7 +110,7 @@ export const makeClassNames = (
 };
 
 export const AdSlotCore: React.FC<{
-    name: string;
+    name: AdSlotType;
     adTypes: string[];
     sizeMapping: AdSlotInputSizeMappings;
     showLabel?: boolean;
@@ -129,7 +118,7 @@ export const AdSlotCore: React.FC<{
     outOfPage?: boolean;
     optId?: string;
     optClassNames?: string[];
-    className: string;
+    localStyles?: string;
 }> = ({
     name,
     adTypes,
@@ -139,7 +128,7 @@ export const AdSlotCore: React.FC<{
     outOfPage = false,
     optId,
     optClassNames,
-    className,
+    localStyles,
 }) => {
     // Will export `getOptionalProps` as a function if/when needed - Pascal.
     // const getOptionalProps = (): object => ({
@@ -156,7 +145,7 @@ export const AdSlotCore: React.FC<{
                 name,
                 adTypes,
                 optClassNames || [],
-            )} ${className} ${labelStyles}`}
+            )} ${localStyles} ${labelStyles}`}
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
@@ -168,9 +157,9 @@ export const AdSlotCore: React.FC<{
 
 export const AdSlot: React.FC<{
     asps: AdSlotParameters;
-    className: string;
-}> = ({ asps, className }) => {
-    return <AdSlotCore {...asps} className={className} />;
+    localStyles?: string;
+}> = ({ asps, localStyles }) => {
+    return <AdSlotCore {...asps} localStyles={localStyles} />;
 };
 
 export const MobileStickyContainer: React.FC<{}> = ({}) => {

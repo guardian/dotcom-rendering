@@ -414,7 +414,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <RightColumn>
                             <AdSlot
                                 asps={namedAdSlotParameters('right')}
-                                className=""
                             />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
@@ -430,7 +429,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
-                    className=""
                 />
             </Section>
 

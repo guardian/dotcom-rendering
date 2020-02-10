@@ -501,6 +501,24 @@ interface MostViewedFooterPayloadType {
     mostShared: TrailType;
 }
 
+// ----------
+// AdSlots //
+// ----------
+type AdSlotType = 'right' | 'top-above-nav' | 'mostpop' | 'merchandising-high';
+
+interface AdSlotParameters {
+    name: AdSlotType;
+    adTypes: string[];
+    sizeMapping: {
+        [key: string]: string[];
+    };
+    showLabel?: boolean;
+    refresh?: boolean;
+    outOfPage?: boolean;
+    optId?: string;
+    optClassNames?: string[];
+}
+
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
