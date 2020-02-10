@@ -9,6 +9,7 @@ import { from } from '@guardian/src-foundations/mq';
 export const labelStyles = css`
     .ad-slot__label {
         ${textSans.xsmall()};
+        position: relative;
         height: 24px;
         background-color: ${palette.neutral[97]};
         padding: 0 8px;
