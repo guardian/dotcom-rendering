@@ -130,7 +130,7 @@ function slideshow(): void {
 }
 
 const webviewServer = new WebviewServer(new Webview.Processor(new WebviewHandler));
-window.receiveNativeRequest = (message: Message) => webviewServer.receive(message);
+window.receiveNativeRequest = (message: Message): void => webviewServer.receive(message);
 
 setup();
 ads();
