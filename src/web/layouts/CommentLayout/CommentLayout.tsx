@@ -382,7 +382,6 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
             >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
-                    className=""
                 />
             </Section>
 

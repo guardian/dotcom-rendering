@@ -45,7 +45,7 @@ export const HeaderAdSlot: React.FC<{
             >
                 <AdSlot
                     asps={namedAdSlotParameters('top-above-nav')}
-                    className={adSlotAboveNav}
+                    localStyles={adSlotAboveNav}
                 />
             </div>
         </Hide>

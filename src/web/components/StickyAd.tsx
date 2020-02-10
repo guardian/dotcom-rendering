@@ -33,7 +33,7 @@ export const StickyAd = () => (
     <div className={adSlotWrapper}>
         <AdSlot
             asps={namedAdSlotParameters('right')}
-            className={stickyAdSlot}
+            localStyles={stickyAdSlot}
         />
     </div>
 );

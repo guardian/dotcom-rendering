@@ -1,15 +1,5 @@
-import { AdSlotParameters } from '@root/src/web/components/AdSlot';
-
-type staticAdSlotNames =
-    | 'right'
-    | 'top-above-nav'
-    | 'mostpop'
-    | 'merchandising-high';
-
-export const namedAdSlotParameters = (
-    name: staticAdSlotNames,
-): AdSlotParameters => {
-    const mapping = {
+export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
+    const mapping: { [key: string]: AdSlotParameters } = {
         // The current parameters have been taken from looking at an example of right MPU on an article.
         // regular article: js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad js-sticky-mpu ad-slot--rendered
         // dotcom rendering: js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad ad-slot--rendered js-sticky-mpu
