@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
+import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { useHover } from '@root/src/web/lib/useHover';
 
@@ -42,22 +43,9 @@ const headlineWrapperStyles = css`
 
 const imageWrapperStyles = css`
     width: 72px;
-    min-height: 72px;
+    height: 72px;
     padding-top: 3px;
     margin-right: 10px;
-    overflow: hidden;
-    position: relative;
-    box-sizing: content-box;
-    flex-grow: 0;
-    flex-shrink: 0;
-`;
-
-const imageTagStyles = css`
-    position: absolute;
-    width: auto;
-    height: 72px;
-    left: -24px;
-    clip-path: circle(36% at 50% 50%);
 `;
 
 const marginTopStyles = css`
@@ -86,14 +74,15 @@ export const MostViewedRightItem = ({ trail }: Props) => {
                 ref={hoverRef}
             >
                 <div className={lineWrapperStyles}>
-                    <div className={imageWrapperStyles}>
-                        <img
-                            src={trail.image}
-                            role="presentation"
-                            alt=""
-                            className={imageTagStyles}
-                        />
-                    </div>
+                    {trail.image && (
+                        <div className={imageWrapperStyles}>
+                            <Avatar
+                                imageSrc={trail.image}
+                                imageAlt=""
+                                pillar={trail.pillar}
+                            />
+                        </div>
+                    )}
                     <div className={headlineWrapperStyles}>
                         {trail.isLiveBlog ? (
                             <LinkHeadline
