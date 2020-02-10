@@ -132,7 +132,7 @@ class ThriftServer<T> {
 
     processor: ThriftProcessor<null, T>;
 
-    receive({ connectionId, data }: NativeMessage) {
+    receive({ connectionId, data }: NativeMessage): void {
         const buffer = Buffer.from(data, 'base64');
         const inputTransport = new BufferedTransport(buffer);
         const outputTransport = new BufferedTransport();
