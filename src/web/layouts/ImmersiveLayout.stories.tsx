@@ -20,9 +20,14 @@ import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';
 
+import { viewports } from '.storybook/config';
+
 /* tslint:disable */
 export default {
     title: 'Layouts/Immersive',
+    parameters: {
+        chromatic: { viewports },
+    },
 };
 /* tslint:enable */
 
