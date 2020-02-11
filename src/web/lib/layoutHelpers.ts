@@ -22,5 +22,5 @@ export const decideLineCount = (designType?: DesignType): 8 | 4 => {
 };
 
 export const getCurrentPillar = (CAPI: CAPIType): Pillar => {
-    return CAPI.nav?.currentPillar?.title?.toLowerCase() || CAPI.pillar;
+    return CAPI.nav.currentPillar.title.toLowerCase() || CAPI.pillar;
 };
