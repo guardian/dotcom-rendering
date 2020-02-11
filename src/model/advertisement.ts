@@ -120,17 +120,23 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             name: 'top-above-nav',
             adTypes: ['mpu-banner-ad', 'rendered'],
             sizeMapping: {
-                // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                // The sizes here come from two places in the frontend code
+                // 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                // 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
                 tablet: [
-                    adSizeNamesToString([
-                        'outOfPage',
-                        'empty',
-                        'fabric',
-                        'outstreamMobile',
-                        'mpu',
-                        'fluid',
-                    ]),
+                    [
+                        adSizeNamesToString([
+                            'outOfPage',
+                            'empty',
+                            'fabric',
+                            'outstreamMobile',
+                            'mpu',
+                            'fluid',
+                        ]),
+                        '728,90', // This value comes from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+                    ].join('|'),
                 ],
+                desktop: ['1,1|2,2|728,90|940,230|900,250|970,250|88,71|fluid'], // Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
             },
             showLabel: true,
             refresh: false,
