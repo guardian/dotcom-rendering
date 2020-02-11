@@ -33,7 +33,13 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             name: 'mostpop',
             adTypes: ['mpu-banner-ad', 'rendered'],
             sizeMapping: {
-                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid|300,1050'],
+                mobile: ['1,1|2,2|300,197|300,250|300,274|fluid'],
+                phablet: [
+                    '1,1|2,2|300,197|300,250|300,274|620,350|550,310|fluid',
+                ],
+                desktop: [
+                    '1,1|2,2|300,250|300,274|620,1|620,350|550,310|fluid',
+                ],
             },
             showLabel: true,
             refresh: false,
