@@ -1,13 +1,14 @@
 // ----- IUmports ----- //
 
 import { withKnobs, text, boolean, date } from '@storybook/addon-knobs';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import Byline from 'components/standard/byline';
 import { Pillar } from 'pillar';
 import { Layout, Article } from 'article';
 import { Option, None, Some } from 'types/option';
 import { parse } from 'client/parser';
+import { ITag as Contributor } from 'mapiThriftModels';
 
 
 // ----- Setup ----- //
@@ -38,7 +39,7 @@ const article: Article = {
     tags: [],
 };
 
-const contributor = () => ({
+const contributor = (): Contributor => ({
     id: 'mock_id',
     type: 2,
     webTitle: text('Byline', 'Jane Smith'),
@@ -47,13 +48,13 @@ const contributor = () => ({
     references: [],
 });
 
-const job = () =>
+const job = (): string =>
     text('Job', 'Editor Of Things');
 
-const profileLink = () =>
+const profileLink = (): string =>
     text('Profile Link', 'https://theguardian.com');
 
-const byline = () =>
+const byline = (): string =>
     text('Byline', 'Jane Smith');
 
 function publishDate(): Option<Date> {
