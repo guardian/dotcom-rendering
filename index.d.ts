@@ -55,6 +55,7 @@ interface EditionCommercialProperties {
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
 interface Branding {
+    brandingType?: { name: string };
     sponsorName: string;
     logo: {
         src: string;
@@ -63,6 +64,12 @@ interface Branding {
         dimensions: { width: number; height: number };
     };
     aboutThisLink: string;
+    logoForDarkBackground?: {
+        src: string;
+        dimensions: { width: number; height: number };
+        link: string;
+        label: string;
+    };
 }
 
 interface LinkType extends SimpleLinkType {
