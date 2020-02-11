@@ -56,13 +56,12 @@ const DarkStyles = darkModeCss`
 // ----- Component ----- //
 
 interface Props {
-    headline: string;
     article: Article;
 }
 
-const Headline = ({ headline, article }: Props): JSX.Element =>
+const Headline = ({ article }: Props): JSX.Element =>
     <div css={[Styles(article), DarkStyles]}>
-        <h1>{headline}</h1>
+        <h1>{article.headline}</h1>
         { article.layout === Layout.Review ? <ArticleRating rating={article.starRating} /> : null }
     </div>
 

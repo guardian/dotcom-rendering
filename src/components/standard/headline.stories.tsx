@@ -5,14 +5,33 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 
 import Headline from 'components/standard/headline';
 import { Pillar } from 'pillar';
-import { Layout } from 'article';
+import { Layout, Article } from 'article';
+import { None } from 'types/option';
 
 
 // ----- Setup ----- //
 
-const article = {
+const article: Article = {
     pillar: Pillar.news,
     layout: Layout.Standard,
+    body: [],
+    headline: '',
+    standfirst: new None(),
+    byline: '',
+    bylineHtml: new None(),
+    publishDate: new None(),
+    mainImage: new None(),
+    contributors: [],
+    series: {
+        id: '',
+        type: 0,
+        webTitle: '',
+        webUrl: '',
+        apiUrl: '',
+        references: [],
+    },
+    commentable: false,
+    tags: [],
 };
 
 const copyKnob = 'Headline Copy';
@@ -24,22 +43,37 @@ const copy = 'Reclaimed lakes and giant airports: how Mexico City might have loo
 export default { title: 'Headline', decorators: [ withKnobs ] };
 
 export const Standard = (): ReactNode =>
-    <Headline headline={text(copyKnob, copy)} article={article} />
+    <Headline article={{
+        ...article,
+        headline: text(copyKnob, copy),
+    }} />
 
 export const Feature = (): ReactNode =>
-    <Headline headline={text(copyKnob, copy)} article={{ ...article, layout: Layout.Feature }} />
+    <Headline article={{
+        ...article,
+        layout: Layout.Feature,
+        headline: text(copyKnob, copy),
+    }} />
 
 export const SportFeature = (): ReactNode =>
-    <Headline
-        headline={text(copyKnob, copy)}
-        article={{ pillar: Pillar.sport, layout: Layout.Feature }}
-    />
+    <Headline article={{
+        ...article,
+        pillar: Pillar.sport,
+        layout: Layout.Feature,
+        headline: text(copyKnob, copy),
+    }} />
 
 export const Analysis = (): ReactNode =>
-    <Headline headline={text(copyKnob, copy)} article={{ ...article, layout: Layout.Analysis }} />
+    <Headline article={{
+        ...article,
+        layout: Layout.Analysis,
+        headline: text(copyKnob, copy),
+    }} />
 
-export const ArtsAnalysis = (): ReactNode =>
-    <Headline
-        headline={text(copyKnob, copy)}
-        article={{ pillar: Pillar.arts, layout: Layout.Analysis }}
-    />
+export const CultureAnalysis = (): ReactNode =>
+    <Headline article={{
+        ...article,
+        pillar: Pillar.arts,
+        layout: Layout.Analysis,
+        headline: text(copyKnob, copy),
+    }} />
