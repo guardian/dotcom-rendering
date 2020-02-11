@@ -27,6 +27,11 @@ module.exports = () => ({
                 callback(null, `commonjs ${request}`) :
                 callback()
         },
+        (context, request, callback) => {
+            return request.endsWith('manifest.legacy.json') ?
+                callback(null, `commonjs ${request}`) :
+                callback()
+        },
     ],
 
     module: {
