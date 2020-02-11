@@ -7,7 +7,9 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             name: 'right',
             adTypes: ['mpu-banner-ad', 'rendered'],
             sizeMapping: {
-                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid|300,1050'],
+                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid'],
+                // Pascal: It's not totally obvious where this sequence should come from the frontend code,
+                // but it should be correct.
             },
             showLabel: true,
             refresh: false,
