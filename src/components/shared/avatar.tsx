@@ -4,7 +4,7 @@ import React from 'react';
 import { Contributor } from 'capi';
 import { isSingleContributor } from 'capi';
 import { css, SerializedStyles } from '@emotion/core';
-import { transformUrl } from 'asset';
+import { src } from 'image';
 
 // ----- Styles ----- //
 
@@ -40,7 +40,7 @@ function Avatar({ contributors, bgColour, imageSalt }: AvatarProps): JSX.Element
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl) {
-        const imgSrc = transformUrl(imageSalt, contributor.bylineLargeImageUrl, imageWidth*3);
+        const imgSrc = src(imageSalt, contributor.bylineLargeImageUrl, imageWidth*3);
         return (
             <div css={AvatarStyles(bgColour)}>
                 <img src={imgSrc} alt={contributor.webTitle}/>
