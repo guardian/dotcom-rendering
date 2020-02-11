@@ -21,7 +21,7 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             name: 'top-above-nav',
             adTypes: ['mpu-banner-ad', 'rendered'],
             sizeMapping: {
-                tablet: ['1,1|2,2|728,90|88,71|fluid'],
+                tablet: ['1,1|2,2|88,71|300,197|300,250|fluid'],
             },
             showLabel: true,
             refresh: false,
