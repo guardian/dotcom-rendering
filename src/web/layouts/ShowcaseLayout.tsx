@@ -33,6 +33,7 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 import {
     decideLineCount,
     decideLineEffect,
+    getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 
 const ShowcaseGrid = ({
@@ -225,6 +226,7 @@ const headerWrapper = css`
     position: relative;
     z-index: 1;
 `;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
@@ -279,7 +281,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         padded={false}
                         backgroundColour={palette.brand.main}
                     >
-                        <Nav pillar={CAPI.pillar} nav={NAV} />
+                        <Nav pillar={getCurrentPillar(CAPI)} nav={NAV} />
                     </Section>
 
                     {NAV.subNavSections && (
@@ -412,9 +414,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <AdSlot
-                                asps={namedAdSlotParameters('right')}
-                            />
+                            <AdSlot asps={namedAdSlotParameters('right')} />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
@@ -427,9 +427,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 showSideBorders={false}
                 backgroundColour={palette.neutral[93]}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('merchandising-high')}
-                />
+                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
             <Section islandId="onwards-content" />

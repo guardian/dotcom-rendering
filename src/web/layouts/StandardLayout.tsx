@@ -36,6 +36,7 @@ import { parse } from '@frontend/lib/slot-machine-flags';
 import {
     decideLineCount,
     decideLineEffect,
+    getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 
 const StandardGrid = ({
@@ -247,7 +248,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         padded={false}
                         backgroundColour={palette.brand.main}
                     >
-                        <Nav pillar={CAPI.pillar} nav={NAV} />
+                        <Nav pillar={getCurrentPillar(CAPI)} nav={NAV} />
                     </Section>
 
                     {NAV.subNavSections && (
