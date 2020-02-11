@@ -415,6 +415,7 @@ const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): R
 // ----- Exports ----- //
 
 export {
+    makeCaption,
     renderAll,
     text as renderText,
     ImageElement,
