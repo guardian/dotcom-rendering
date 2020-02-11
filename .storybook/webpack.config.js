@@ -1,4 +1,4 @@
-const [serverConfig, clientConfig, testConfig] = require('../webpack.config.js');
+const [serverConfig, clientConfig] = require('../webpack.config.js');
 
 module.exports = async ({ config }) => {
 	return {

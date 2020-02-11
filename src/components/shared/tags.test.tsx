@@ -10,6 +10,10 @@ const tagsProps = [{
     webUrl: "https://mapi.co.uk/tag"
 }];
 
+const styles = (component: any): string => component.props().css
+    .map(({ styles }: any) => styles)
+    .reduce((a: string, b: string) => a + b, '')
+
 describe('Keyline component renders as expected', () => {
     it('Renders link to tag', () => {
         const tags = shallow(<Tags tags={tagsProps} />)
@@ -29,6 +33,6 @@ describe('Keyline component renders as expected', () => {
 
     it('Uses background prop in styles', () => {
         const tags = shallow(<Tags tags={tagsProps} background={"pink"}/>)
-        expect(tags.props().css.styles).toContain("background-color:pink;")
+        expect(styles(tags)).toContain("background-color: pink;")
     })
 });
