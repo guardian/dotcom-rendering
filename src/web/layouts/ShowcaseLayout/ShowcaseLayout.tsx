@@ -24,27 +24,16 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
+import { Border } from '@root/src/web/components/Border';
+import { GridItem } from '@root/src/web/components/GridItem';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-
-import GE2019 from '@frontend/static/badges/general-election-2019.svg';
 
 import {
     decideLineCount,
     decideLineEffect,
 } from '@root/src/web/lib/layoutHelpers';
-import { Border } from '@root/src/web/layouts/Border';
-import { GridItem } from '@root/src/web/layouts/GridItem';
-
-function checkForGE2019Badge(tags: TagType[]) {
-    if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
-        return {
-            linkTo: '/politics/general-election-2019',
-            svgSrc: GE2019,
-        };
-    }
-}
 
 const ShowcaseGrid = ({
     children,
@@ -242,7 +231,6 @@ interface Props {
 }
 
 export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
-    const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     const { isPaidContent } = CAPI.config;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -319,7 +307,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             sectionUrl={CAPI.sectionUrl}
                             guardianBaseURL={CAPI.guardianBaseURL}
                             pillar={CAPI.pillar}
-                            badge={GE2019Badge}
+                            badge={CAPI.badge}
                             inLeftCol={true}
                         />
                     </GridItem>
@@ -417,7 +405,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                     showBottomSocialButtons={
                                         CAPI.showBottomSocialButtons
                                     }
-                                    badge={GE2019Badge}
+                                    badge={CAPI.badge}
                                 />
                             </main>
                         </ArticleContainer>
