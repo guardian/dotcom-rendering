@@ -38,8 +38,8 @@ type Supported = {
   reason: string;
 }
 
-function getPrefetchScripts(): string {
-  return '<assets/article.js>; rel=prefetch, <assets/liveblog.js>; rel=prefetch'
+function getPrefetchHeader(script: string): string {
+  return `<${script}>; rel=prefetch`
 }
 
 function checkSupport({ atoms }: Content): Supported {
@@ -64,9 +64,8 @@ async function serveArticlePost(
 
     if (support.kind === Support.Supported) {
       const { script, element } = Page({ content, imageSalt });
-      res.set('Link', script);
       const html = renderToString(element);
-      res.set('Link', getPrefetchScripts());
+      res.set('Link', getPrefetchHeader(script));
       res.write('<!DOCTYPE html>');
       res.write(html);
       res.end();
@@ -109,7 +108,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
 
             if (support.kind === Support.Supported) {
               const { script, element } = Page({ content, imageSalt });
-              res.set('Link', script);
+              res.set('Link', getPrefetchHeader(script));
               res.write('<!DOCTYPE html>');
               res.write(renderToString(element));
               res.end();

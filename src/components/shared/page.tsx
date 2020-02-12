@@ -84,7 +84,7 @@ interface BodyProps {
 
 interface elementWithScript {
     element: JSX.Element;
-    script?: string;
+    script: string;
 }
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
@@ -145,7 +145,7 @@ function ArticleBody({ capi, imageSalt }: BodyProps): elementWithScript {
                 </WithScript>
             ), script: liveblogScript };
         default:
-            return { element: <p>{capi.type} not implemented yet</p> };
+            return { element: <p>{capi.type} not implemented yet</p>, script: articleScript };
     }
 }
 
