@@ -3,7 +3,6 @@
 import path from 'path';
 import express, {NextFunction, Request, Response as ExpressResponse} from 'express';
 import compression from 'compression';
-import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import bodyParser from 'body-parser';
 import {
@@ -39,6 +38,10 @@ type Supported = {
   reason: string;
 }
 
+function getPrefetchScripts(): string {
+  return '<assets/article.js>; rel=prefetch, <assets/liveblog.js>; rel=prefetch'
+}
+
 function checkSupport({ atoms }: Content): Supported {
   if (atoms) {
     return { kind: Support.Unsupported, reason: 'The article contains atoms' };
@@ -60,8 +63,10 @@ async function serveArticlePost(
       const imageSalt = await getConfigValue<string>('apis.img.salt');
 
     if (support.kind === Support.Supported) {
-      const page = h(Page, { content, imageSalt });
-      const html = renderToString(page);
+      const { script, element } = Page({ content, imageSalt });
+      res.set('Link', script);
+      const html = renderToString(element);
+      res.set('Link', getPrefetchScripts());
       res.write('<!DOCTYPE html>');
       res.write(html);
       res.end();
@@ -103,10 +108,10 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             const support = checkSupport(content);
 
             if (support.kind === Support.Supported) {
-              const page = h(Page, { content, imageSalt });
-
+              const { script, element } = Page({ content, imageSalt });
+              res.set('Link', script);
               res.write('<!DOCTYPE html>');
-              res.write(renderToString(page));
+              res.write(renderToString(element));
               res.end();
             } else {
               console.warn(`I can\'t render that type of content yet! ${support.reason}`);

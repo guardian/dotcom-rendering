@@ -82,13 +82,18 @@ interface BodyProps {
     capi: Content;
 }
 
+interface elementWithScript {
+    element: JSX.Element;
+    script?: string;
+}
+
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
     <>
         {props.children}
         <script src={props.src}></script>
     </>
 
-function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
+function ArticleBody({ capi, imageSalt }: BodyProps): elementWithScript {
     const article = fromCapi(JSDOM.fragment)(capi);
     
     const articleScript = '/assets/article.js';
@@ -100,25 +105,25 @@ function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
             const opinionContent =
                 insertAdPlaceholders(renderAll(imageSalt)(article.pillar, opinionBody));
 
-            return (
+            return { element: (
                 <WithScript src={articleScript}>
                     <Opinion imageSalt={imageSalt} article={article}>
                         {opinionContent}
                     </Opinion>
                 </WithScript>
-            );
+            ), script: articleScript };
         case Layout.Immersive:
             const immersiveBody = partition(article.body).oks;
             const immersiveContent =
                 insertAdPlaceholders(renderAll(imageSalt)(article.pillar, immersiveBody));
 
-            return (
+            return { element: (
                 <WithScript src={articleScript}>
                     <Immersive imageSalt={imageSalt} article={article}>
                         {immersiveContent}
                     </Immersive>
                 </WithScript>
-            );
+            ), script: articleScript };
         case Layout.Standard:
         case Layout.Feature:
         case Layout.Analysis:
@@ -126,21 +131,21 @@ function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
             const body = partition(article.body).oks;
             const content = insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body));
 
-            return (
+            return { element: (
                 <WithScript src={articleScript}>
                     <Standard imageSalt={imageSalt} article={article}>
                         {content}
                     </Standard>
                 </WithScript>
-            );
+            ), script: articleScript };;
         case Layout.Liveblog:
-            return (
+            return { element: (
                 <WithScript src={liveblogScript}>
                     <LiveblogArticle article={article} imageSalt={imageSalt} />
                 </WithScript>
-            );
+            ), script: liveblogScript };
         default:
-            return <p>{capi.type} not implemented yet</p>;
+            return { element: <p>{capi.type} not implemented yet</p> };
     }
 }
 
@@ -149,12 +154,14 @@ interface Props {
     imageSalt: string;
 }
 
-function Page({ content, imageSalt }: Props): JSX.Element {
+function Page({ content, imageSalt }: Props): elementWithScript {
     const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
-    return (
+    const { element, script } = ArticleBody({ imageSalt, capi: content})
+
+    return { element: (
         <html lang="en" css={PageStyles}>
             <head>
                 <title>{content.id}</title>
@@ -163,11 +170,11 @@ function Page({ content, imageSalt }: Props): JSX.Element {
                 <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
             </head>
             <body>
-                <ArticleBody imageSalt={imageSalt} capi={content} />
+                { element }
                 { twitterScript }
             </body>
         </html>
-    );
+    ), script };
 }
 
 
