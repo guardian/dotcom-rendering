@@ -380,9 +380,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 showSideBorders={false}
                 backgroundColour={palette.neutral[93]}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('merchandising-high')}
-                />
+                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
             <Section islandId="onwards-content" />
@@ -424,7 +422,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cookie-banner" />
+            <div data-island="cmp" />
             <MobileStickyContainer />
         </>
     );
