@@ -38,8 +38,8 @@ type Supported = {
   reason: string;
 }
 
-function getPrefetchHeader(script: string): string {
-  return `<${script}>; rel=prefetch`
+function getPrefetchHeader(resources: string[]): string {
+  return resources.reduce((linkHeader, resource) => linkHeader + `<${resource}>; rel=prefetch,`, '');
 }
 
 function checkSupport({ atoms }: Content): Supported {
@@ -63,9 +63,9 @@ async function serveArticlePost(
       const imageSalt = await getConfigValue<string>('apis.img.salt');
 
     if (support.kind === Support.Supported) {
-      const { script, element } = Page({ content, imageSalt });
+      const { resources, element } = Page({ content, imageSalt });
       const html = renderToString(element);
-      res.set('Link', getPrefetchHeader(script));
+      res.set('Link', getPrefetchHeader(resources));
       res.write('<!DOCTYPE html>');
       res.write(html);
       res.end();
@@ -107,8 +107,8 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             const support = checkSupport(content);
 
             if (support.kind === Support.Supported) {
-              const { script, element } = Page({ content, imageSalt });
-              res.set('Link', getPrefetchHeader(script));
+              const { resources, element } = Page({ content, imageSalt });
+              res.set('Link', getPrefetchHeader(resources));
               res.write('<!DOCTYPE html>');
               res.write(renderToString(element));
               res.end();

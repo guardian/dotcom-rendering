@@ -82,9 +82,9 @@ interface BodyProps {
     capi: Content;
 }
 
-interface ElementWithScript {
-    element: JSX.Element;
-    script: string;
+interface ElementWithResources {
+    element: React.ReactElement;
+    resources: string[];
 }
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
@@ -93,7 +93,7 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
         <script src={props.src}></script>
     </>
 
-function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithScript {
+function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
     const article = fromCapi(JSDOM.fragment)(capi);
     
     const articleScript = '/assets/article.js';
@@ -111,7 +111,7 @@ function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithScript {
                         {opinionContent}
                     </Opinion>
                 </WithScript>
-            ), script: articleScript };
+            ), resources: [articleScript] };
         case Layout.Immersive:
             const immersiveBody = partition(article.body).oks;
             const immersiveContent =
@@ -123,7 +123,7 @@ function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithScript {
                         {immersiveContent}
                     </Immersive>
                 </WithScript>
-            ), script: articleScript };
+            ), resources: [articleScript] };
         case Layout.Standard:
         case Layout.Feature:
         case Layout.Analysis:
@@ -137,15 +137,15 @@ function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithScript {
                         {content}
                     </Standard>
                 </WithScript>
-            ), script: articleScript };;
+            ), resources: [articleScript] };;
         case Layout.Liveblog:
             return { element: (
                 <WithScript src={liveblogScript}>
                     <LiveblogArticle article={article} imageSalt={imageSalt} />
                 </WithScript>
-            ), script: liveblogScript };
+            ), resources: [liveblogScript] };
         default:
-            return { element: <p>{capi.type} not implemented yet</p>, script: articleScript };
+            return { element: <p>{capi.type} not implemented yet</p>, resources: [articleScript] };
     }
 }
 
@@ -154,12 +154,12 @@ interface Props {
     imageSalt: string;
 }
 
-function Page({ content, imageSalt }: Props): ElementWithScript {
+function Page({ content, imageSalt }: Props): ElementWithResources {
     const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
-    const { element, script } = ArticleBody({ imageSalt, capi: content})
+    const { element, resources } = ArticleBody({ imageSalt, capi: content})
 
     return { element: (
         <html lang="en" css={PageStyles}>
@@ -174,7 +174,7 @@ function Page({ content, imageSalt }: Props): ElementWithScript {
                 { twitterScript }
             </body>
         </html>
-    ), script };
+    ), resources };
 }
 
 
