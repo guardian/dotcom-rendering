@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import Plus from '@frontend/static/icons/plus.svg';
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { OnwardContainer } from '@root/src/amp/components/OnwardContainer';
 
@@ -8,18 +9,66 @@ const wrapper = css`
     padding-top: 24px;
 `;
 
+const outbrainStyle = css`
+    border-top: none;
+`;
+
 const outbrainContainer = (webURL: string, isCompliant: boolean) => {
+    const encodedWebURL = encodeURIComponent(`${webURL}`);
+    const encodedAMPURL = encodeURIComponent(`${webURL}?amp`);
     const widgetID = isCompliant ? 'AMP_1' : 'AMP_2';
+    const outbrainParams = `widgetIds=${widgetID}&htmlURL=${encodedWebURL}&ampURL=${encodedAMPURL}`;
+    const outbrainURL = `https://widgets.outbrain.com/hub/amp.html#${outbrainParams}`;
+
+    const isEmbedResponsiveTest = webURL.includes(
+        `world/2007/jan/01/italy.mainsection`,
+    );
+    const isEmbedFixedLayoutTest = webURL.includes(
+        `uk/2007/jan/01/arts.thefarright`,
+    );
+
+    if (isEmbedResponsiveTest) {
+        return (
+            <amp-embed
+                width="100"
+                height="100"
+                type="outbrain"
+                layout="responsive"
+                data-widgetIds={widgetID}
+                data-htmlURL={webURL}
+                data-ampURL={`${webURL}?amp`}
+            />
+        );
+    }
+
+    if (isEmbedFixedLayoutTest) {
+        return (
+            <amp-embed
+                height="485"
+                type="outbrain"
+                layout="fixed-height"
+                data-widgetIds={widgetID}
+                data-htmlURL={webURL}
+                data-ampURL={`${webURL}?amp`}
+            />
+        );
+    }
 
     return (
-        <amp-embed
+        <amp-iframe
+            key={outbrainURL}
             height="480"
-            type="outbrain"
+            sandbox="allow-scripts allow-same-origin allow-popups"
             layout="fixed-height"
-            data-widgetIds={widgetID}
-            data-htmlURL={webURL}
-            data-ampURL={`${webURL}?amp`}
-        />
+            frameborder="0"
+            src={outbrainURL}
+            class={outbrainStyle}
+        >
+            <div overflow="true">
+                More stories
+                <Plus />
+            </div>
+        </amp-iframe>
     );
 };
 
