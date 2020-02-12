@@ -419,10 +419,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 showSideBorders={false}
                 backgroundColour={palette.neutral[93]}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('merchandising')}
-                    className=""
-                />
+                <AdSlot asps={namedAdSlotParameters('merchandising')} />
             </Section>
 
             {NAV.subNavSections && (

@@ -380,9 +380,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 showSideBorders={false}
                 backgroundColour={palette.neutral[93]}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('merchandising-high')}
-                />
+                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
             <Section islandId="onwards-content" />
@@ -406,10 +404,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 showSideBorders={false}
                 backgroundColour={palette.neutral[93]}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('merchandising')}
-                    className=""
-                />
+                <AdSlot asps={namedAdSlotParameters('merchandising')} />
             </Section>
 
             {NAV.subNavSections && (
