@@ -17,11 +17,6 @@
         "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
         "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes"
     },
-    "husky": {
-        "hooks": {
-            "pre-push": "make validate && yarn run createtoc && yarn run addandcommittoc"
-        }
-    },
     "bundlesize": [
         {
             "path": "./dist/ga.*.js",
