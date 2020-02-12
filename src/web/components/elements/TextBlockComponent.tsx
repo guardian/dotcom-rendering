@@ -7,7 +7,6 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-// tslint:disable:react-no-dangerous-html
 
 type Props = {
     html: string;

@@ -186,7 +186,6 @@ export const OnwardContainer: React.FC<{
                                 </div>
                                 <a
                                     className={link}
-                                    // tslint:disable-line:react-a11y-anchors
                                     href={
                                         guardianBaseURL +
                                         moustacheVariable('url')

@@ -32,7 +32,7 @@ const ensure = require('./ensure');
             process.exit(1);
         }
     } catch (e) {
-        // tslint:disable-next-line:no-console
+        // eslint-disable-next-line no-console
         console.log(e);
         process.exit(1);
     }

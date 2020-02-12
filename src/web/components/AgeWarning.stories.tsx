@@ -2,12 +2,10 @@ import React from 'react';
 
 import { AgeWarning } from './AgeWarning';
 
-/* tslint:disable */
 export default {
     component: AgeWarning,
     title: 'Components/AgeWarning',
 };
-/* tslint:enable */
 
 export const defaultStory = () => {
     return <AgeWarning age="10 years old" />;

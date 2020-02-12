@@ -94,7 +94,6 @@ export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
 
     return (
         <div className={itemStyles(showRightBorder)}>
-            {/* tslint:disable-next-line:react-a11y-anchors */}
             <a className={headlineLink} href={url} data-link-name="article">
                 <Flex>
                     <div className={headlineStyles}>

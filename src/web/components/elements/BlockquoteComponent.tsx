@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
-// tslint:disable:react-no-dangerous-html
 
 type Props = {
     html: string;

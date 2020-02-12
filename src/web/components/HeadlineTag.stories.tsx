@@ -3,12 +3,10 @@ import React from 'react';
 import { css } from 'emotion';
 import { HeadlineTag } from './HeadlineTag';
 
-/* tslint:disable */
 export default {
     component: HeadlineTag,
     title: 'Components/HeadlineTag',
 };
-/* tslint:enable */
 
 export const defaultStory = () => {
     return <HeadlineTag tagText="Tag name" pillar="culture" />;

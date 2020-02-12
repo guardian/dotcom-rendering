@@ -10,8 +10,6 @@ import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 // to re-use styling, but generally we should avoid this as it couples
 // components.
 
-// tslint:disable:react-no-dangerous-html
-
 export const ListStyle = (iconColour: string) => css`
     li {
         margin-bottom: 6px;

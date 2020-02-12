@@ -6,8 +6,6 @@ let assetHash: AssetHash = {};
 
 try {
     // path is relative to the server bundle
-
-    // tslint:disable-next-line:no-var-requires
     assetHash = require('./manifest.json');
 } catch (e) {
     // do nothing

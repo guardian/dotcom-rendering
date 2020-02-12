@@ -38,7 +38,7 @@ export const Standfirst: React.SFC<{
     pillar: Pillar;
 }> = ({ text, pillar }) => {
     return (
-        <div // tslint:disable-line:react-no-dangerous-html
+        <div
             className={composeLabsCSS(
                 pillar,
                 cx(standfirstCss(pillar)),

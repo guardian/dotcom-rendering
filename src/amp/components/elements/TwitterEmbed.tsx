@@ -14,7 +14,6 @@ const makeFallback = (html: string): string | null => {
     return q.innerHTML;
 };
 
-// tslint:disable:react-no-dangerous-html
 export const TwitterEmbed: React.FC<{
     element: TweetBlockElement;
     pillar: Pillar;

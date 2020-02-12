@@ -10,12 +10,10 @@ import { Section } from '@frontend/web/components/Section';
 import { mockTab1 } from '@root/fixtures/mostViewed';
 import { MostViewedRight } from './MostViewedRight';
 
-/* tslint:disable */
 export default {
     component: MostViewedRight,
     title: 'Components/MostViewedRight',
 };
-/* tslint:enable */
 
 export const defaultStory = () => {
     fetchMock.restore().getOnce('*', {

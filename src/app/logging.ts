@@ -49,7 +49,7 @@ configure({
 if (process.env.NODE_ENV === 'development') {
     shutdown(e => {
         if (e) {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line no-console
             console.log(e);
         }
     });

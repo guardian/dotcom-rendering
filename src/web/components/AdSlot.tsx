@@ -1,5 +1,3 @@
-// tslint:disable:react-no-dangerous-html
-
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';

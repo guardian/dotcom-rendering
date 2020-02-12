@@ -58,7 +58,6 @@ const PaidForByLogo: React.FC<{
     return (
         <div className={paidForLogoStyle}>
             <div className={paidForLogoLabelStyle}>Paid for by</div>
-            {/* tslint:disable-next-line: react-a11y-anchors */}
             <a
                 href={logo.link}
                 data-sponsor={sponsorName.toLowerCase()}
@@ -83,7 +82,9 @@ const Headline: React.FC<{
 export const TopMetaPaidContent: React.FC<{
     articleData: ArticleModel;
 }> = ({ articleData }) => {
-    const {branding} = articleData.commercialProperties[articleData.editionId];
+    const { branding } = articleData.commercialProperties[
+        articleData.editionId
+    ];
 
     return (
         <header>

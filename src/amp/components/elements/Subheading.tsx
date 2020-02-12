@@ -5,7 +5,6 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 
-// tslint:disable:react-no-dangerous-html
 const style = (pillar: Pillar) => css`
     h2 {
         margin-top: 24px;

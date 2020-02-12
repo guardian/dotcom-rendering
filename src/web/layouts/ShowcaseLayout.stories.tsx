@@ -20,14 +20,12 @@ import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';
 
-/* tslint:disable */
 export default {
     title: 'Layouts/Showcase',
     parameters: {
         chromatic: { viewports: [1300] },
     },
 };
-/* tslint:enable */
 
 // In order to render React elements of the Layout we need to use hydrateIslands
 // hydrateIslands requires a query selector therefore we need to wrap the function in a setTimeout

@@ -15,7 +15,6 @@ export const Disclaimer: React.FC<{
     html: string;
     pillar: Pillar;
 }> = ({ html, pillar }) => (
-    // tslint:disable-next-line:react-no-dangerous-html
     <span
         className={style(pillar)}
         dangerouslySetInnerHTML={{

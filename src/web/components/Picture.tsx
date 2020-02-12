@@ -1,5 +1,4 @@
 import React from 'react';
-// tslint:disable:react-no-dangerous-html
 // IE 9 needs this workaround as per https://scottjehl.github.io/picturefill/
 
 export interface PictureSource {

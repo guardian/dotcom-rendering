@@ -7,12 +7,10 @@ import { commentCount } from '@root/fixtures/commentCounts';
 
 import { Counts } from './Counts';
 
-/* tslint:disable */
 export default {
     component: Counts,
     title: 'Components/Counts',
 };
-/* tslint:enable */
 
 const Container = ({ children }: { children: JSXElements }) => (
     <div

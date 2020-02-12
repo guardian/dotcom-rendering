@@ -9,12 +9,10 @@ import {
 import { Section } from '@frontend/web/components/Section';
 import { MostViewedFooter } from './MostViewedFooter';
 
-/* tslint:disable */
 export default {
     component: MostViewedFooter,
     title: 'Components/MostViewedFooter',
 };
-/* tslint:enable */
 
 export const withTwoTabs = () => {
     fetchMock.restore().getOnce('*', {

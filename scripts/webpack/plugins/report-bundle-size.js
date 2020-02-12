@@ -40,7 +40,7 @@ module.exports = class BundleSizePlugin {
                         }),
                         {},
                     );
-                // tslint:disable-next-line:no-console
+                // eslint-disable-next-line no-console
                 console.log(
                     `\n${columnify(bundles, {
                         showHeaders: false,

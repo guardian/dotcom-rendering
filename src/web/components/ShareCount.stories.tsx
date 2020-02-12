@@ -3,12 +3,10 @@ import { css } from 'emotion';
 
 import { ShareCount } from './ShareCount';
 
-/* tslint:disable */
 export default {
     component: ShareCount,
     title: 'Components/ShareCount',
 };
-/* tslint:enable */
 
 const Container = ({ children }: { children: JSXElements }) => (
     <div

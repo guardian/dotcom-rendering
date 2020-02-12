@@ -197,7 +197,6 @@ const template = `
 </ul>
 `;
 
-// tslint:disable:react-no-dangerous-html
 export const Sidebar: React.FC<{ nav: NavType }> = ({ nav }) => {
     // this next line is necessary cos react has a 'template' object with no 'type' property.
     // By saying 'as {}' we can pretend we're not adding the 'type' property and thus avoid unhappy type errors

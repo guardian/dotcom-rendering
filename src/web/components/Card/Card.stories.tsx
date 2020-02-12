@@ -10,7 +10,6 @@ import { UL } from './components/UL';
 import { LI } from './components/LI';
 import { images, headlines, standfirsts, kickers } from './Card.mocks';
 
-/* tslint:disable */
 export default {
     component: Card,
     title: 'Components/Card',
@@ -21,7 +20,6 @@ export default {
         },
     },
 };
-/* tslint:enable */
 
 export const News = () => (
     <Section>

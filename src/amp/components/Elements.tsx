@@ -156,7 +156,7 @@ export const Elements = (
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
                 return <AudioAtom element={element} />;
             default:
-                // tslint:disable-next-line:no-console
+                // eslint-disable-next-line no-console
                 console.log('Unsupported Element', JSON.stringify(element));
                 if ((element as { isMandatory?: boolean }).isMandatory) {
                     throw new Error(

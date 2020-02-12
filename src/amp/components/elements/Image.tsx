@@ -70,7 +70,6 @@ export const Image: React.FC<{
                         Update: 16th October (Pascal): guui has been decommissioned.
                     */}
                     <span
-                        // tslint:disable-line:react-no-dangerous-html
                         className={captionLink}
                         dangerouslySetInnerHTML={{
                             __html: element.data.caption || '',

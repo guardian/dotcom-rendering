@@ -9,12 +9,10 @@ import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Contributor } from './Contributor';
 
-/* tslint:disable */
 export default {
     component: GuardianLines,
     title: 'Components/GuardianLines',
 };
-/* tslint:enable */
 
 export const defaultStory = () => {
     return (

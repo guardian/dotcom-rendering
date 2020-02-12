@@ -69,7 +69,7 @@ const Headline: React.FC<{
     return (
         <div className={fullWidth}>
             <h1 className={headerStyle(pillar)}>{curly(headlineText)}</h1>
-            <div // tslint:disable-line:react-no-dangerous-html
+            <div
                 className={standfirstStyle(pillar)}
                 dangerouslySetInnerHTML={{
                     __html: standfirst,

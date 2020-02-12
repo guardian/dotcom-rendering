@@ -3,12 +3,10 @@ import { css } from 'emotion';
 
 import { CardCommentCount } from './CardCommentCount';
 
-/* tslint:disable */
 export default {
     component: CardCommentCount,
     title: 'Components/CardCommentCount',
 };
-/* tslint:enable */
 
 const Container = ({ children }: { children: JSXElements }) => (
     <div

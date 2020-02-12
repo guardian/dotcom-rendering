@@ -41,12 +41,10 @@ const tagsWithByTwoContributors = [
     },
 ];
 
-/* tslint:disable */
 export default {
     component: ArticleMeta,
     title: 'Components/ArticleMeta',
 };
-/* tslint:enable */
 
 export const ArticleStory = () => {
     return (

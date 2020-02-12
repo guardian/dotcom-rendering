@@ -3,12 +3,10 @@ import { css } from 'emotion';
 
 import { CommentCount } from './CommentCount';
 
-/* tslint:disable */
 export default {
     component: CommentCount,
     title: 'Components/CommentCount',
 };
-/* tslint:enable */
 
 const Container = ({ children }: { children: JSXElements }) => (
     <div

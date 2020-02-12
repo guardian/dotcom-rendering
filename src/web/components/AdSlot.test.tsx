@@ -1,5 +1,3 @@
-// tslint:disable:react-no-dangerous-html
-
 import { makeInternalSizeMappings, makeClassNames } from './AdSlot';
 
 describe('AdSlot', () => {

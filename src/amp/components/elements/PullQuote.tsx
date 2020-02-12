@@ -24,7 +24,7 @@ export const PullQuote: React.FC<{
 }> = ({ html, pillar }) => (
     <aside className={styles(pillar)}>
         <Quote />{' '}
-        <span // tslint:disable-line:react-no-dangerous-html
+        <span
             dangerouslySetInnerHTML={{
                 __html: html,
             }}

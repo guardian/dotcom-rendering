@@ -2,12 +2,10 @@ import React from 'react';
 
 import { HeadlineByline } from './HeadlineByline';
 
-/* tslint:disable */
 export default {
     component: HeadlineByline,
     title: 'Components/HeadlineByline',
 };
-/* tslint:enable */
 
 export const interviewStory = () => {
     return (

@@ -25,7 +25,6 @@ const noJSStyling = css`
     }
 `;
 
-// tslint:disable:react-no-dangerous-html
 export const TweetBlockComponent: React.FC<{
     element: TweetBlockElement;
 }> = ({ element }) => {

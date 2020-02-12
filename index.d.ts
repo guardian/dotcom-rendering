@@ -549,7 +549,6 @@ declare module 'minify-css-string' {
 // AMP types                             //
 // ------------------------------------- //
 
-// tslint:disable-next-line no-namespace
 declare namespace JSX {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     interface IntrinsicElements {

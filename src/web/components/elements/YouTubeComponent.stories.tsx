@@ -3,12 +3,10 @@ import { css } from 'emotion';
 
 import { YouTubeComponent } from './YouTubeComponent';
 
-/* tslint:disable */
 export default {
     component: YouTubeComponent,
     title: 'Components/YouTubeComponent',
 };
-/* tslint:enable */
 
 const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
     <div
@@ -35,7 +33,6 @@ export const noOverlay = () => {
                     channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
                 }}
                 pillar="news"
-                // tslint:disable-next-line react-a11y-role
                 role="inline"
             />
         </Container>
