@@ -35,11 +35,9 @@
       }
     },
     "coverageReporters": [
-      "json",
-      "lcov",
       "text",
-      "clover",
-      "html"
+      "html",
+      "text-summary"
     ],
     "collectCoverageFrom": [
       "<rootDir>/src/renderer.ts"
