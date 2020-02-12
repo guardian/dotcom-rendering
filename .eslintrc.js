@@ -84,6 +84,7 @@ module.exports = {
         'react/no-unescaped-entities': [0],
         'react/sort-comp': [0],
         'react/state-in-constructor': [0],
+        'react/no-danger': [0],
     },
     settings: {
         'import/resolver': {
