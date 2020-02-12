@@ -55,6 +55,7 @@ interface EditionCommercialProperties {
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
 interface Branding {
+    brandingType?: { name: string };
     sponsorName: string;
     logo: {
         src: string;
@@ -63,6 +64,12 @@ interface Branding {
         dimensions: { width: number; height: number };
     };
     aboutThisLink: string;
+    logoForDarkBackground?: {
+        src: string;
+        dimensions: { width: number; height: number };
+        link: string;
+        label: string;
+    };
 }
 
 interface LinkType extends SimpleLinkType {
@@ -492,6 +499,24 @@ interface MostViewedFooterPayloadType {
     tabs: TrailTabType[];
     mostCommented: TrailType;
     mostShared: TrailType;
+}
+
+// ----------
+// AdSlots //
+// ----------
+type AdSlotType = 'right' | 'top-above-nav' | 'mostpop' | 'merchandising-high';
+
+interface AdSlotParameters {
+    name: AdSlotType;
+    adTypes: string[];
+    sizeMapping: {
+        [key: string]: string[];
+    };
+    showLabel?: boolean;
+    refresh?: boolean;
+    outOfPage?: boolean;
+    optId?: string;
+    optClassNames?: string[];
 }
 
 // ------------------------------

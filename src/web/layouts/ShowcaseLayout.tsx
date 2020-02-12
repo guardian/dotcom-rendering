@@ -1,11 +1,10 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
-import { StickyAd } from '@root/src/web/components/StickyAd';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -16,7 +15,6 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ContributorAvatar } from '@root/src/web/components/ContributorAvatar';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -32,7 +30,12 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
-const StandardGrid = ({
+import {
+    decideLineCount,
+    decideLineEffect,
+} from '@root/src/web/lib/layoutHelpers';
+
+const ShowcaseGrid = ({
     children,
 }: {
     children: JSX.Element | JSX.Element[];
@@ -66,12 +69,12 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column';
+                        'title  border  headline    headline'
+                        'lines  border  media       media'
+                        'meta   border  media       media'
+                        'meta   border  standfirst  right-column'
+                        '.      border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.wide} {
@@ -81,12 +84,12 @@ const StandardGrid = ({
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
-                        'title      border  headline    right-column'
-                        'lines      border  headline    right-column'
-                        'meta       border  standfirst  right-column'
-                        'meta       border  media       right-column'
-                        '.          border  body        right-column'
-                        '.          border  .           right-column';
+                        'title  border  headline    right-column'
+                        '.      border  standfirst  right-column'
+                        'lines  border  media       right-column'
+                        'meta   border  media       right-column'
+                        'meta   border  body        right-column'
+                        '.      border  .           right-column';
                 }
 
                 ${until.leftCol} {
@@ -97,33 +100,36 @@ const StandardGrid = ({
                         'title      right-column'
                         'headline   right-column'
                         'standfirst right-column'
-                        'meta       right-column'
                         'media      right-column'
+                        'lines      right-column'
+                        'meta       right-column'
                         'body       right-column'
                         '.          right-column';
                 }
 
                 ${until.desktop} {
+                    grid-column-gap: 0px;
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
                         'title'
                         'headline'
                         'standfirst'
-                        'meta'
                         'media'
+                        'lines'
+                        'meta'
                         'body';
                 }
 
                 ${until.tablet} {
                     grid-column-gap: 0px;
-
                     grid-template-columns: 1fr; /* Main content */
                     grid-template-areas:
+                        'media'
                         'title'
                         'headline'
                         'standfirst'
+                        'lines'
                         'meta'
-                        'media'
                         'body';
                 }
             }
@@ -139,41 +145,92 @@ const maxWidth = css`
     }
 `;
 
-const avatarHeadlineWrapper = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+const stretchLines = css`
+    ${until.phablet} {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
 `;
 
-const minHeightWithAvatar = css`
-    min-height: 259px;
+const mainMediaWrapper = css`
+    position: relative;
 `;
 
-const avatarPositionStyles = css`
-    display: flex;
-    justify-content: flex-end;
-    margin-right: -1.25rem;
-    margin-top: -36px;
-    margin-bottom: -29px;
+const PositionHeadline = ({
+    designType,
+    children,
+}: {
+    designType: DesignType;
+    children: JSX.Element | JSX.Element[];
+}) => {
+    switch (designType) {
+        case 'Interview':
+            return (
+                <div
+                    className={css`
+                        ${from.leftCol} {
+                            margin-bottom: -100px;
+                        }
+                    `}
+                >
+                    <div className={maxWidth}>{children}</div>
+                </div>
+            );
+        case 'Immersive':
+            return (
+                <div
+                    className={css`
+                        ${from.leftCol} {
+                            margin-top: -100px;
+                        }
+                    `}
+                >
+                    {children}
+                </div>
+            );
+        case 'Article':
+        case 'Media':
+        case 'Review':
+        case 'Live':
+        case 'SpecialReport':
+        case 'Recipe':
+        case 'MatchReport':
+        case 'GuardianView':
+        case 'GuardianLabs':
+        case 'Quiz':
+        case 'AdvertisementFeature':
+        case 'Feature':
+        case 'Comment':
+        case 'Analysis':
+        default:
+            return <div className={maxWidth}>{children}</div>;
+    }
+};
+
+// The advert is stuck to the top of the container as we scroll
+// until we hit the bottom of the wrapper that contains
+// the top banner and the header/navigation
+// We apply sticky positioning and z-indexes, the stickAdWrapper and headerWrapper
+// classes are tightly coupled.
+
+const stickyAdWrapper = css`
+    background-color: white;
+    border-bottom: 0.0625rem solid ${palette.neutral[86]};
+    position: sticky;
+    top: 0;
+    z-index: 2;
 `;
 
-const pushToBottom = css`
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-end;
+const headerWrapper = css`
+    position: relative;
+    z-index: 1;
 `;
-
-const headlinePadding = css`
-    padding-bottom: 43px;
-`;
-
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
 }
 
-export const CommentLayout = ({ CAPI, NAV }: Props) => {
+export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
     const { isPaidContent } = CAPI.config;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -185,64 +242,64 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
     // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
 
-    const contributorTag = CAPI.tags.find(tag => tag.type === 'Contributor');
-    const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
-
     return (
         <>
-            <Section
-                showTopBorder={false}
-                showSideBorders={false}
-                padded={false}
-            >
-                <HeaderAdSlot
-                    isAdFreeUser={CAPI.isAdFreeUser}
-                    shouldHideAds={CAPI.shouldHideAds}
-                />
-            </Section>
-            <Section
-                showTopBorder={false}
-                showSideBorders={false}
-                padded={false}
-                backgroundColour={palette.brand.main}
-            >
-                <Header
-                    nav={NAV}
-                    pillar={CAPI.pillar}
-                    edition={CAPI.editionId}
-                />
-            </Section>
+            <div>
+                <div className={stickyAdWrapper}>
+                    <Section
+                        showTopBorder={false}
+                        showSideBorders={false}
+                        padded={false}
+                    >
+                        <HeaderAdSlot
+                            isAdFreeUser={CAPI.isAdFreeUser}
+                            shouldHideAds={CAPI.shouldHideAds}
+                        />
+                    </Section>
+                </div>
+                <div className={headerWrapper}>
+                    <Section
+                        showTopBorder={false}
+                        showSideBorders={false}
+                        padded={false}
+                        backgroundColour={palette.brand.main}
+                    >
+                        <Header
+                            nav={NAV}
+                            pillar={CAPI.pillar}
+                            edition={CAPI.editionId}
+                        />
+                    </Section>
 
-            <Section
-                islandId="nav-root"
-                showSideBorders={true}
-                borderColour={palette.brand.pastel}
-                showTopBorder={false}
-                padded={false}
-                backgroundColour={palette.brand.main}
-            >
-                <Nav pillar={CAPI.pillar} nav={NAV} />
-            </Section>
+                    <Section
+                        islandId="nav-root"
+                        showSideBorders={true}
+                        borderColour={palette.brand.pastel}
+                        showTopBorder={false}
+                        padded={false}
+                        backgroundColour={palette.brand.main}
+                    >
+                        <Nav pillar={CAPI.pillar} nav={NAV} />
+                    </Section>
 
-            {NAV.subNavSections && (
-                <Section
-                    backgroundColour={palette.opinion.faded}
-                    padded={false}
-                    islandId="sub-nav-root"
-                >
-                    <SubNav
-                        subnav={NAV.subNavSections}
-                        currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
-                    />
-                </Section>
-            )}
+                    {NAV.subNavSections && (
+                        <Section
+                            backgroundColour={palette.neutral[100]}
+                            padded={false}
+                            islandId="sub-nav-root"
+                        >
+                            <SubNav
+                                subnav={NAV.subNavSections}
+                                currentNavLink={NAV.currentNavLink}
+                                pillar={CAPI.pillar}
+                            />
+                        </Section>
+                    )}
+                </div>
+            </div>
 
-            <Section
-                showTopBorder={false}
-                backgroundColour={palette.opinion.faded}
-            >
-                <StandardGrid>
+            <Section showTopBorder={false}>
+                <ShowcaseGrid>
                     <GridItem area="title">
                         <ArticleTitle
                             tags={CAPI.tags}
@@ -258,53 +315,36 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                         <Border />
                     </GridItem>
                     <GridItem area="headline">
-                        <div className={maxWidth}>
+                        <PositionHeadline designType={CAPI.designType}>
                             <div
-                                className={cx(
-                                    avatarHeadlineWrapper,
-                                    avatarUrl && minHeightWithAvatar,
-                                )}
+                                className={css`
+                                    padding-bottom: 24px;
+                                `}
                             >
-                                {/* TOP - we use divs here to position content in groups using flex */}
-                                <div
-                                    className={cx(
-                                        !avatarUrl && headlinePadding,
-                                    )}
-                                >
-                                    <ArticleHeadline
-                                        headlineString={CAPI.headline}
-                                        designType={CAPI.designType}
-                                        pillar={CAPI.pillar}
-                                        webPublicationDate={
-                                            CAPI.webPublicationDate
-                                        }
-                                        tags={CAPI.tags}
-                                        byline={CAPI.author.byline}
-                                    />
-                                </div>
-                                {/* BOTTOM */}
-                                <div>
-                                    {avatarUrl && (
-                                        <div className={avatarPositionStyles}>
-                                            <ContributorAvatar
-                                                imageSrc={avatarUrl}
-                                                imageAlt={
-                                                    CAPI.author.byline || ''
-                                                }
-                                            />
-                                        </div>
-                                    )}
-                                    <GuardianLines
-                                        count={8}
-                                        pillar={CAPI.pillar}
-                                    />
-                                </div>
+                                <ArticleHeadline
+                                    headlineString={CAPI.headline}
+                                    designType={CAPI.designType}
+                                    pillar={CAPI.pillar}
+                                    webPublicationDate={CAPI.webPublicationDate}
+                                    tags={CAPI.tags}
+                                    byline={CAPI.author.byline}
+                                />
                             </div>
-                        </div>
+                        </PositionHeadline>
                     </GridItem>
-                    <GridItem area="lines">
-                        <div className={pushToBottom}>
-                            <GuardianLines count={8} pillar={CAPI.pillar} />
+                    <GridItem area="media">
+                        <div className={mainMediaWrapper}>
+                            <MainMedia
+                                elements={CAPI.mainMediaElements}
+                                pillar={CAPI.pillar}
+                                adTargeting={adTargeting}
+                                starRating={
+                                    CAPI.designType === 'Review' &&
+                                    CAPI.starRating
+                                        ? CAPI.starRating
+                                        : undefined
+                                }
+                            />
                         </div>
                     </GridItem>
                     <GridItem area="standfirst">
@@ -314,13 +354,18 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                             standfirst={CAPI.standfirst}
                         />
                     </GridItem>
-                    <GridItem area="media">
+                    <GridItem area="lines">
                         <div className={maxWidth}>
-                            <MainMedia
-                                elements={CAPI.mainMediaElements}
-                                pillar={CAPI.pillar}
-                                adTargeting={adTargeting}
-                            />
+                            <div className={stretchLines}>
+                                <GuardianLines
+                                    pillar={CAPI.pillar}
+                                    effect={decideLineEffect(
+                                        CAPI.designType,
+                                        CAPI.pillar,
+                                    )}
+                                    count={decideLineCount(CAPI.designType)}
+                                />
+                            </div>
                         </div>
                     </GridItem>
                     <GridItem area="meta">
@@ -367,11 +412,13 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <StickyAd />
+                            <AdSlot
+                                asps={namedAdSlotParameters('right')}
+                            />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
-                </StandardGrid>
+                </ShowcaseGrid>
             </Section>
 
             <Section
@@ -382,7 +429,6 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
             >
                 <AdSlot
                     asps={namedAdSlotParameters('merchandising-high')}
-                    className=""
                 />
             </Section>
 
@@ -425,7 +471,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cookie-banner" />
+            <div data-island="cmp" />
             <MobileStickyContainer />
         </>
     );
