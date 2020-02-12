@@ -1,10 +1,9 @@
 import React from 'react';
 import { designTypeDefault } from '@root/src/lib/designTypes';
 
-import { hasShowcase } from '@root/src/web/lib/layoutHelpers';
-import { StandardLayout } from './StandardLayout/StandardLayout';
-import { ShowcaseLayout } from './ShowcaseLayout/ShowcaseLayout';
-import { CommentLayout } from './CommentLayout/CommentLayout';
+import { StandardLayout } from './StandardLayout';
+import { ShowcaseLayout } from './ShowcaseLayout';
+import { CommentLayout } from './CommentLayout';
 
 type Props = {
     designType: DesignType;
@@ -13,7 +12,7 @@ type Props = {
 };
 
 export const DecideLayout = ({ designType, CAPI, NAV }: Props) => {
-    if (hasShowcase(CAPI.mainMediaElements)) {
+    if (CAPI.pageType.hasShowcaseMainElement) {
         return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
     }
 

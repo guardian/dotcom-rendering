@@ -59,6 +59,7 @@ export const ArticleRenderer: React.FC<{
                             key={i}
                             html={element.html}
                             pillar={pillar}
+                            designType={designType}
                             attribution={element.attribution}
                             role={element.role}
                         />
