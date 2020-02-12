@@ -504,7 +504,12 @@ interface MostViewedFooterPayloadType {
 // ----------
 // AdSlots //
 // ----------
-type AdSlotType = 'right' | 'top-above-nav' | 'mostpop' | 'merchandising-high';
+type AdSlotType =
+    | 'right'
+    | 'top-above-nav'
+    | 'mostpop'
+    | 'merchandising-high'
+    | 'merchandising';
 
 interface AdSlotParameters {
     name: AdSlotType;

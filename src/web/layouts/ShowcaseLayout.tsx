@@ -412,9 +412,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="right-column">
                         <RightColumn>
-                            <AdSlot
-                                asps={namedAdSlotParameters('right')}
-                            />
+                            <AdSlot asps={namedAdSlotParameters('right')} />
                             {!isPaidContent ? <MostViewedRightIsland /> : <></>}
                         </RightColumn>
                     </GridItem>
@@ -427,9 +425,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 showSideBorders={false}
                 backgroundColour={palette.neutral[93]}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('merchandising-high')}
-                />
+                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
             <Section islandId="onwards-content" />
@@ -446,6 +442,15 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     <Section islandId="most-viewed-footer" />
                 </>
             )}
+
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
+                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+            </Section>
 
             {NAV.subNavSections && (
                 <Section padded={false} islandId="sub-nav-root">

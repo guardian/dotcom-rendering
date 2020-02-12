@@ -210,6 +210,26 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             optId: undefined,
             optClassNames: [],
         },
+        merchandising: {
+            name: 'merchandising',
+            adTypes: [],
+            sizeMapping: {
+                // mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+                mobile: [
+                    adSizeNamesToString([
+                        'outOfPage',
+                        'empty',
+                        'merchandising',
+                        'fluid',
+                    ]),
+                ],
+            },
+            showLabel: false,
+            refresh: false,
+            outOfPage: false,
+            optId: undefined,
+            optClassNames: [],
+        },
     };
     return mapping[name];
 };
