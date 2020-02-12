@@ -76,7 +76,7 @@ const StandardGrid = ({
 
                 ${until.wide} {
                     grid-template-columns:
-                        150px /* Left Column (220 - 1px border) */
+                        140px /* Left Column (220 - 1px border) */
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
