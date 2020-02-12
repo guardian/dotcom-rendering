@@ -82,7 +82,7 @@ interface BodyProps {
     capi: Content;
 }
 
-interface elementWithScript {
+interface ElementWithScript {
     element: JSX.Element;
     script: string;
 }
@@ -93,7 +93,7 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
         <script src={props.src}></script>
     </>
 
-function ArticleBody({ capi, imageSalt }: BodyProps): elementWithScript {
+function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithScript {
     const article = fromCapi(JSDOM.fragment)(capi);
     
     const articleScript = '/assets/article.js';
@@ -154,7 +154,7 @@ interface Props {
     imageSalt: string;
 }
 
-function Page({ content, imageSalt }: Props): elementWithScript {
+function Page({ content, imageSalt }: Props): ElementWithScript {
     const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
