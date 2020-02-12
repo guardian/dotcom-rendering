@@ -50,7 +50,7 @@ const articleAdStyles = css`
         ${from.desktop} {
             float: right;
             width: auto;
-            margin-right: -308px;
+            margin-right: -318px;
         }
 
         ${from.wide} {
