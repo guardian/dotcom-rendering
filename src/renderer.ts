@@ -315,7 +315,7 @@ const richLinkStyles = css`
     background: ${neutral[97]};
     padding: ${basePx(1)};
 
-    h4 {
+    h1 {
         margin: ${basePx(0, 0, 2, 0)};
     }
 
@@ -330,6 +330,7 @@ const richLinkStyles = css`
     a {
         text-decoration: none;
         background: none;
+        font-size: 1.25em;
     }
 
     float: left;
@@ -354,7 +355,7 @@ const richLinkStyles = css`
 
 const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): ReactElement =>
     styledH('aside', { css: richLinkStyles },
-        h('h4', null, props.linkText),
+        h('h1', null, props.linkText),
         h(Anchor, { href: props.url, pillar: props.pillar, text: 'Read more' }),
     );
 
