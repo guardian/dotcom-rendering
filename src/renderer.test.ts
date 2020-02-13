@@ -1,8 +1,17 @@
-import { makeCaption } from './renderer';
+import { ImageElement } from './renderer';
 
 describe('renderer returns expected content', () => {
-    test('formats captions', () => {
-        expect(makeCaption("caption", false, "credit")).toBe("caption");
-        expect(makeCaption("caption", true, "credit")).toBe("caption credit");
+    test('ImageElement returns null for no url', () => {
+        const imageProps = {
+            url: '',
+            alt: "alt",
+            salt: "salt",
+            sizes: "sizes",
+            width: 500,
+            height: 500,
+            caption: "caption",
+            credit: "credit"
+        }
+        expect(ImageElement(imageProps)).toBe(null);
     });
 });

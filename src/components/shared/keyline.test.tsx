@@ -1,13 +1,14 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
+import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Keyline } from 'components/shared/keyline';
 import { Layout } from 'article';
 
 configure({ adapter: new Adapter() });
 
-const styles = (component: any): string => component.props().css
-    .map(({ styles }: any) => styles)
+const styles = (component: ShallowWrapper): string => Array.from(component.prop('css'))
+    .flat()
+    .map(({ styles }: { styles: string }) => styles)
     .reduce((a: string, b: string) => a + b, '')
 
 describe('Keyline component renders as expected', () => {
