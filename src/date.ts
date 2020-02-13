@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 function isToday(date: Date): boolean {
     const today = new Date();
     return (date.toDateString() === today.toDateString());
@@ -65,5 +63,15 @@ export function makeRelativeDate(date: Date): string | null {
 }
 
 export function formatDate(date: Date): string {
-    return moment(date).format('HH:mm dddd, D MMMM YYYY');
+    const options = {
+        weekday: "long", year: "numeric", month: "long",
+        day: "numeric", hour: "numeric", minute: "numeric"
+    }
+    const dateParts = new Date(date)
+        .toLocaleTimeString("en-us", options)
+        .replace(/,/g, '')
+        .split(' ');
+
+    // 7:00 Friday, 13 September 2019
+    return `${dateParts[4]} ${dateParts[0]}, ${dateParts[2]} ${dateParts[1]} ${dateParts[3]}`
 }
