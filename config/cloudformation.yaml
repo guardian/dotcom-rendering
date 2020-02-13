@@ -336,4 +336,4 @@ Resources:
       Type: CNAME
       TTL: 3600
       ResourceRecords: [!GetAtt LoadBalancer.DNSName]
-      
+     
