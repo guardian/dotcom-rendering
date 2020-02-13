@@ -129,9 +129,13 @@ function slideshow(): void {
 function formatDates(): void {
     Array.from(document.querySelectorAll('time[data-date]'))
         .forEach(time => {
-            const timestamp = time.getAttribute('data-date');
-            if (timestamp) {
-                time.textContent = formatDate(new Date(timestamp))
+            try {
+                const timestamp = time.getAttribute('data-date');
+                if (timestamp) {
+                    time.textContent = formatDate(new Date(timestamp))
+                }
+            } catch (e) {
+                console.error(e);
             }
         })
 }

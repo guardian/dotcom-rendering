@@ -34,6 +34,7 @@
     "@types/uuid": "^3.4.6",
     "aws-sdk": "^2.604.0",
     "compression": "^1.7.4",
+    "dayjs": "^1.8.20",
     "emotion": "^10.0.27",
     "express": "^4.17.1",
     "jsdom": "^15.2.1",
