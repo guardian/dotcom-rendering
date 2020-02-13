@@ -55,6 +55,7 @@ interface EditionCommercialProperties {
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
 interface Branding {
+    brandingType?: { name: string };
     sponsorName: string;
     logo: {
         src: string;
@@ -63,6 +64,12 @@ interface Branding {
         dimensions: { width: number; height: number };
     };
     aboutThisLink: string;
+    logoForDarkBackground?: {
+        src: string;
+        dimensions: { width: number; height: number };
+        link: string;
+        label: string;
+    };
 }
 
 interface LinkType extends SimpleLinkType {
@@ -494,6 +501,29 @@ interface MostViewedFooterPayloadType {
     mostShared: TrailType;
 }
 
+// ----------
+// AdSlots //
+// ----------
+type AdSlotType =
+    | 'right'
+    | 'top-above-nav'
+    | 'mostpop'
+    | 'merchandising-high'
+    | 'merchandising';
+
+interface AdSlotParameters {
+    name: AdSlotType;
+    adTypes: string[];
+    sizeMapping: {
+        [key: string]: string[];
+    };
+    showLabel?: boolean;
+    refresh?: boolean;
+    outOfPage?: boolean;
+    optId?: string;
+    optClassNames?: string[];
+}
+
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
@@ -542,6 +572,7 @@ declare namespace JSX {
         'amp-consent': any;
         'amp-live-list': any;
         'amp-audio': any;
+        'amp-embed': any;
     }
     /* eslint-enable @typescript-eslint/no-explicit-any */
 }
