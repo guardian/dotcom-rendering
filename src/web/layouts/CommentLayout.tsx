@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -16,7 +16,7 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
+import { ContributorAvatar } from '@root/src/web/components/ContributorAvatar';
 import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
@@ -26,23 +26,11 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
+import { Border } from '@root/src/web/components/Border';
+import { GridItem } from '@root/src/web/components/GridItem';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-
-import GE2019 from '@frontend/static/badges/general-election-2019.svg';
-
-import { Border } from './Border';
-import { GridItem } from './GridItem';
-
-function checkForGE2019Badge(tags: TagType[]) {
-    if (tags.find(tag => tag.id === 'politics/general-election-2019')) {
-        return {
-            linkTo: '/politics/general-election-2019',
-            svgSrc: GE2019,
-        };
-    }
-}
 
 const StandardGrid = ({
     children,
@@ -79,7 +67,7 @@ const StandardGrid = ({
                         300px; /* Right Column */
                     grid-template-areas:
                         'title      border  headline    right-column'
-                        'metalines  border  lines       right-column'
+                        'lines      border  headline    right-column'
                         'meta       border  standfirst  right-column'
                         'meta       border  media       right-column'
                         '.          border  body        right-column'
@@ -88,13 +76,13 @@ const StandardGrid = ({
 
                 ${until.wide} {
                     grid-template-columns:
-                        150px /* Left Column (220 - 1px border) */
+                        140px /* Left Column (220 - 1px border) */
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
                     grid-template-areas:
                         'title      border  headline    right-column'
-                        'metalines  border  lines       right-column'
+                        'lines      border  headline    right-column'
                         'meta       border  standfirst  right-column'
                         'meta       border  media       right-column'
                         '.          border  body        right-column'
@@ -108,7 +96,6 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title      right-column'
                         'headline   right-column'
-                        'lines      right-column'
                         'standfirst right-column'
                         'meta       right-column'
                         'media      right-column'
@@ -121,7 +108,6 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title'
                         'headline'
-                        'lines'
                         'standfirst'
                         'meta'
                         'media'
@@ -135,7 +121,6 @@ const StandardGrid = ({
                     grid-template-areas:
                         'title'
                         'headline'
-                        'lines'
                         'standfirst'
                         'meta'
                         'media'
@@ -154,13 +139,41 @@ const maxWidth = css`
     }
 `;
 
+const avatarHeadlineWrapper = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+const minHeightWithAvatar = css`
+    min-height: 259px;
+`;
+
+const avatarPositionStyles = css`
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -1.25rem;
+    margin-top: -36px;
+    margin-bottom: -29px;
+`;
+
+const pushToBottom = css`
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+`;
+
+const headlinePadding = css`
+    padding-bottom: 43px;
+`;
+
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
 }
 
 export const CommentLayout = ({ CAPI, NAV }: Props) => {
-    const GE2019Badge = checkForGE2019Badge(CAPI.tags);
     const { isPaidContent } = CAPI.config;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
@@ -171,6 +184,9 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
     // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+
+    const contributorTag = CAPI.tags.find(tag => tag.type === 'Contributor');
+    const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
 
     return (
         <>
@@ -234,7 +250,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                             sectionUrl={CAPI.sectionUrl}
                             guardianBaseURL={CAPI.guardianBaseURL}
                             pillar={CAPI.pillar}
-                            badge={GE2019Badge}
+                            badge={CAPI.badge}
                             inLeftCol={true}
                         />
                     </GridItem>
@@ -243,25 +259,51 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="headline">
                         <div className={maxWidth}>
-                            <ArticleHeadlinePadding
-                                designType={CAPI.designType}
+                            <div
+                                className={cx(
+                                    avatarHeadlineWrapper,
+                                    avatarUrl && minHeightWithAvatar,
+                                )}
                             >
-                                <ArticleHeadline
-                                    headlineString={CAPI.headline}
-                                    designType={CAPI.designType}
-                                    pillar={CAPI.pillar}
-                                    webPublicationDate={CAPI.webPublicationDate}
-                                    tags={CAPI.tags}
-                                    byline={CAPI.author.byline}
-                                />
-                            </ArticleHeadlinePadding>
+                                {/* TOP - we use divs here to position content in groups using flex */}
+                                <div
+                                    className={cx(
+                                        !avatarUrl && headlinePadding,
+                                    )}
+                                >
+                                    <ArticleHeadline
+                                        headlineString={CAPI.headline}
+                                        designType={CAPI.designType}
+                                        pillar={CAPI.pillar}
+                                        webPublicationDate={
+                                            CAPI.webPublicationDate
+                                        }
+                                        tags={CAPI.tags}
+                                        byline={CAPI.author.byline}
+                                    />
+                                </div>
+                                {/* BOTTOM */}
+                                <div>
+                                    {avatarUrl && (
+                                        <div className={avatarPositionStyles}>
+                                            <ContributorAvatar
+                                                imageSrc={avatarUrl}
+                                                imageAlt={
+                                                    CAPI.author.byline || ''
+                                                }
+                                            />
+                                        </div>
+                                    )}
+                                    <GuardianLines
+                                        count={8}
+                                        pillar={CAPI.pillar}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </GridItem>
-                    <GridItem area="metalines">
-                        <GuardianLines count={8} pillar={CAPI.pillar} />
-                    </GridItem>
                     <GridItem area="lines">
-                        <div className={maxWidth}>
+                        <div className={pushToBottom}>
                             <GuardianLines count={8} pillar={CAPI.pillar} />
                         </div>
                     </GridItem>
@@ -318,7 +360,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                                     showBottomSocialButtons={
                                         CAPI.showBottomSocialButtons
                                     }
-                                    badge={GE2019Badge}
+                                    badge={CAPI.badge}
                                 />
                             </main>
                         </ArticleContainer>
@@ -338,10 +380,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 showSideBorders={false}
                 backgroundColour={palette.neutral[93]}
             >
-                <AdSlot
-                    asps={namedAdSlotParameters('merchandising-high')}
-                    className=""
-                />
+                <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
             <Section islandId="onwards-content" />
@@ -358,6 +397,15 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     <Section islandId="most-viewed-footer" />
                 </>
             )}
+
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
+                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+            </Section>
 
             {NAV.subNavSections && (
                 <Section padded={false} islandId="sub-nav-root">
@@ -383,7 +431,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cookie-banner" />
+            <div data-island="cmp" />
             <MobileStickyContainer />
         </>
     );

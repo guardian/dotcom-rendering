@@ -9,7 +9,6 @@
         "lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
         "tsc": "tsc",
         "test": "jest",
-        "postinstall": "./scripts/git-hooks/install.js",
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
         "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
         "cypress:open": "cypress open",
@@ -17,11 +16,6 @@
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
         "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
         "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes"
-    },
-    "husky": {
-        "hooks": {
-            "pre-push": "make validate && yarn run createtoc && yarn run addandcommittoc"
-        }
     },
     "bundlesize": [
         {
@@ -31,7 +25,7 @@
     ],
     "dependencies": {
         "@emotion/core": "^10.0.5",
-        "@guardian/consent-management-platform": "^2.0.7",
+        "@guardian/consent-management-platform": "^2.0.8",
         "@guardian/src-foundations": "^0.10.0",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",
@@ -140,7 +134,7 @@
         "eslint-plugin-dcr": "https://github.com/guardian/eslint-plugin-dcr#v0.1.0",
         "fetch-mock": "^8.0.0-alpha.14",
         "friendly-errors-webpack-plugin": "^1.7.0",
-        "husky": "^2.3.0",
+        "husky": "^4.2.2",
         "jest": "^24.8.0",
         "jest-dom": "^2.1.0",
         "jest-teamcity-reporter": "^0.9.0",

@@ -65,7 +65,10 @@ export const SubMeta = ({
         <div className={bottomPadding}>
             {badge && (
                 <div className={badgeWrapper}>
-                    <Badge svgSrc={badge.svgSrc} linkTo={badge.linkTo} />
+                    <Badge
+                        imageUrl={badge.imageUrl}
+                        seriesTag={badge.seriesTag}
+                    />
                 </div>
             )}
             {(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (

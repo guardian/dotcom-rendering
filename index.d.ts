@@ -55,6 +55,7 @@ interface EditionCommercialProperties {
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
 interface Branding {
+    brandingType?: { name: string };
     sponsorName: string;
     logo: {
         src: string;
@@ -63,6 +64,12 @@ interface Branding {
         dimensions: { width: number; height: number };
     };
     aboutThisLink: string;
+    logoForDarkBackground?: {
+        src: string;
+        dimensions: { width: number; height: number };
+        link: string;
+        label: string;
+    };
 }
 
 interface LinkType extends SimpleLinkType {
@@ -126,6 +133,7 @@ interface Block {
     elements: CAPIElement[];
     createdOn?: number;
     createdOnDisplay?: string;
+    lastUpdated?: number;
     lastUpdatedDisplay?: string;
     title?: string;
     firstPublished?: number;
@@ -231,6 +239,7 @@ interface CAPIType {
     commercialProperties: CommercialProperties;
     starRating?: number;
     trailText: string;
+    badge?: BadgeType;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
@@ -252,8 +261,8 @@ interface TagType {
 }
 
 interface BadgeType {
-    linkTo: string;
-    svgSrc: () => JSX.Element;
+    seriesTag: string;
+    imageUrl: string;
 }
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')
@@ -492,6 +501,29 @@ interface MostViewedFooterPayloadType {
     mostShared: TrailType;
 }
 
+// ----------
+// AdSlots //
+// ----------
+type AdSlotType =
+    | 'right'
+    | 'top-above-nav'
+    | 'mostpop'
+    | 'merchandising-high'
+    | 'merchandising';
+
+interface AdSlotParameters {
+    name: AdSlotType;
+    adTypes: string[];
+    sizeMapping: {
+        [key: string]: string[];
+    };
+    showLabel?: boolean;
+    refresh?: boolean;
+    outOfPage?: boolean;
+    optId?: string;
+    optClassNames?: string[];
+}
+
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
@@ -540,6 +572,7 @@ declare namespace JSX {
         'amp-consent': any;
         'amp-live-list': any;
         'amp-audio': any;
+        'amp-embed': any;
     }
     /* eslint-enable @typescript-eslint/no-explicit-any */
 }
