@@ -10,7 +10,11 @@ export const htmlTemplate = ({
     description,
     linkedData,
     priorityScripts,
+    priorityLegacyScripts,
+    priorityNonLegacyScripts,
     lowPriorityScripts,
+    lowPriorityLegacyScripts,
+    lowPriorityNonLegacyScripts,
     css,
     html,
     windowGuardian,
@@ -23,7 +27,11 @@ export const htmlTemplate = ({
     description: string;
     linkedData: object;
     priorityScripts: string[];
+    priorityLegacyScripts: string[];
+    priorityNonLegacyScripts: string[];
     lowPriorityScripts: string[];
+    lowPriorityLegacyScripts: string[];
+    lowPriorityNonLegacyScripts: string[];
     css: string;
     html: string;
     fontFiles?: string[];
@@ -37,12 +45,34 @@ export const htmlTemplate = ({
             ? 'favicon-32x32.ico'
             : 'favicon-32x32-dev-yellow.ico';
 
+    // ********************************
+    // ****** high priority script ****
+    // ********************************
     const priorityScriptTags = priorityScripts.map(
         src => `<script defer src="${src}"></script>`,
     );
+    // transpiled with preset-env
+    const priorityLegacyScriptTags = priorityLegacyScripts.map(
+        src => `<script defer nomodule src="${src}"></script>`,
+    );
+    // transpiled with preset-modules
+    const priorityNonLegacyScriptTags = priorityNonLegacyScripts.map(
+        src => `<script defer type="module" src="${src}"></script>`,
+    );
 
+    // ********************************
+    // **** low priority scripts ******
+    // ********************************
     const lowPriorityScriptTags = lowPriorityScripts.map(
         src => `<script async src="${src}"></script>`,
+    );
+    // transpiled with preset-env
+    const lowPriorityLegacyScriptTags = lowPriorityLegacyScripts.map(
+        src => `<script async nomodule src="${src}"></script>`,
+    );
+    // transpiled with preset-modules
+    const lowPriorityNonLegacyScriptTags = lowPriorityNonLegacyScripts.map(
+        src => `<script async type="module" src="${src}"></script>`,
     );
 
     const fontPreloadTags = fontFiles.map(
@@ -130,14 +160,22 @@ export const htmlTemplate = ({
 
                 <script>${prepareCmpString}</script>
 
-                ${priorityScriptTags.join('\n')}
+                ${[
+                    ...priorityScriptTags,
+                    ...priorityLegacyScriptTags,
+                    ...priorityNonLegacyScriptTags,
+                ].join('\n')}
                 <style>${getFontsCss()}${resetCSS}${css}</style>
 
             </head>
 
             <body>
                 ${html}
-                ${lowPriorityScriptTags.join('\n')}
+                ${[
+                    ...lowPriorityScriptTags,
+                    ...lowPriorityLegacyScriptTags,
+                    ...lowPriorityNonLegacyScriptTags,
+                ].join('\n')}
             </body>
         </html>`;
 };
