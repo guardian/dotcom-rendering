@@ -26,12 +26,17 @@ class LaunchServerPlugin {
 
 // ----- Shared Config ----- //
 
-const resolve = {
-    extensions: ['.ts', '.tsx', '.js'],
-    modules: [
-        path.resolve(__dirname, 'src'),
-        'node_modules',
-    ],
+function resolve(loggerName) {
+    return {
+        extensions: ['.ts', '.tsx', '.js'],
+        modules: [
+            path.resolve(__dirname, 'src'),
+            'node_modules',
+        ],
+        alias: {
+            logger: path.resolve(__dirname, `src/logger/${loggerName}`)
+        },
+    }
 };
 
 // ----- Configs ----- //
@@ -63,7 +68,7 @@ const serverConfig = env => {
         watchOptions: {
             ignored: /node_modules/,
         },
-        resolve,
+        resolve: resolve("server"),
         plugins: plugins,
         module: {
             rules: [
@@ -102,7 +107,7 @@ const clientConfig = {
         path: path.resolve(__dirname, 'dist/assets'),
         filename: '[name].js',
     },
-    resolve,
+    resolve: resolve("clientDev"),
     devServer: {
         publicPath: '/assets/',
         proxy: {
@@ -156,7 +161,8 @@ const clientConfigProduction = {
         assetFilter: function(assetFilename) {
             return assetFilename.endsWith('.js');
         }
-    }
+    },
+    resolve: resolve("clientProd")
 }
 
 // ----- Exports ----- //
