@@ -4,6 +4,7 @@ const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
 const glob = require("glob");
+const CompressionPlugin = require('compression-webpack-plugin');
 
 
 // ----- Functions ----- //
@@ -139,6 +140,28 @@ const clientConfig = {
     }
 };
 
+const clientConfigProduction = {
+    ...clientConfig,
+    name: 'clientProduction',
+    mode: 'production',
+    plugins: [
+        new CompressionPlugin({
+            filename: '[path]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8,
+        }),
+    ],
+    performance: {
+        hints: 'error',
+        maxEntrypointSize: 100000,
+        assetFilter: function(assetFilename) {
+            return assetFilename.endsWith('.js');
+        }
+    }
+}
+
 const testConfig = {
     name: 'tests',
     mode: 'development',
@@ -152,4 +175,4 @@ const testConfig = {
 
 // ----- Exports ----- //
 
-module.exports = [ serverConfig, clientConfig, testConfig ];
+module.exports = [ serverConfig, clientConfig, testConfig, clientConfigProduction ];
