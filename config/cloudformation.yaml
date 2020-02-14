@@ -309,8 +309,13 @@ Resources:
           chown -R ${App}:mapi /var/log/${App}
           export Stack=${Stack}
           export Stage=${Stage}
-          /usr/local/node/pm2 start --uid ${App} --gid mapi --log /var/log/${App} /opt/${App}/server.js
-          /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} mobile-log-aggregation-${Stage} /var/log/${App}/${App}.log
+          mkdir /usr/share/${App}
+          chown -R ${App}:mapi /usr/share/${App}
+          export PM2_HOME="/usr/share/${App}"
+          /usr/local/node/pm2 start --name ${App} --uid ${App} --gid mapi --log /var/log/${App} /opt/${App}/server.js
+          /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} mobile-log-aggregation-${Stage} /var/log/${App}/server-error.log
+          /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} mobile-log-aggregation-${Stage} /var/log/${App}/server-out.log
+          /usr/local/node/pm2 logrotate
 
   ScaleDownPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
