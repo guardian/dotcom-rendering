@@ -2,9 +2,11 @@
     "extends": "../tsconfig",
     "compilerOptions": {
         // Output latest features; allow babel to handle browser targeting
-        "target": "es2020"
+        "target": "es2020",
+        // Don't transpile jsx (handled by babel w/ emotion)
+        "jsx": "preserve",
     },
     "include": [
         "../src/client/*"
-    ]
+    ],
 }

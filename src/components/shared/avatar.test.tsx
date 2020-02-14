@@ -23,7 +23,7 @@ describe('Avatar component renders as expected', () => {
             id: "test"
         }];
         const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" imageSalt="" />);
-        expect(avatar.props().css.styles).toContain("background-color:pink")
+        expect(avatar.props().css.styles).toContain("background-color: pink")
     })
 
     it('Generates correct image url', () => {

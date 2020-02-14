@@ -1,5 +1,5 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
+import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Tags from 'components/shared/tags';
 
@@ -9,6 +9,11 @@ const tagsProps = [{
     webTitle: "Tag title",
     webUrl: "https://mapi.co.uk/tag"
 }];
+
+const styles = (component: ShallowWrapper): string => Array.from(component.prop('css'))
+    .flat()
+    .map(({ styles }: { styles: string }) => styles)
+    .reduce((a: string, b: string) => a + b, '')
 
 describe('Keyline component renders as expected', () => {
     it('Renders link to tag', () => {
@@ -29,6 +34,6 @@ describe('Keyline component renders as expected', () => {
 
     it('Uses background prop in styles', () => {
         const tags = shallow(<Tags tags={tagsProps} background={"pink"}/>)
-        expect(tags.props().css.styles).toContain("background-color:pink;")
+        expect(styles(tags)).toContain("background-color: pink;")
     })
 });

@@ -412,7 +412,6 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map(render(salt, pillar));
 
-
 // ----- Exports ----- //
 
 export {
