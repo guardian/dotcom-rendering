@@ -3,6 +3,7 @@
 const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 // ----- Plugins ----- //
 
