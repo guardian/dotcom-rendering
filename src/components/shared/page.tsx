@@ -121,6 +121,20 @@ function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
         ), resources: [liveblogScript] };
     }
 
+    if (item.display === Display.Immersive) {
+        const immersiveBody = partition(item.body).oks;
+        const immersiveContent =
+            insertAdPlaceholders(renderAll(imageSalt)(item.pillar, immersiveBody));
+
+        return { element: (
+            <WithScript src={articleScript}>
+                <Immersive imageSalt={imageSalt} item={item}>
+                    {immersiveContent}
+                </Immersive>
+            </WithScript>
+        ), resources: [articleScript] };
+    }
+
     if (
         item.design === Design.Feature ||
         item.design === Design.Analysis ||
@@ -135,20 +149,6 @@ function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
                 <Standard imageSalt={imageSalt} item={item}>
                     {content}
                 </Standard>
-            </WithScript>
-        ), resources: [articleScript] };
-    }
-
-    if (item.display === Display.Immersive) {
-        const immersiveBody = partition(item.body).oks;
-        const immersiveContent =
-            insertAdPlaceholders(renderAll(imageSalt)(item.pillar, immersiveBody));
-
-        return { element: (
-            <WithScript src={articleScript}>
-                <Immersive imageSalt={imageSalt} item={item}>
-                    {immersiveContent}
-                </Immersive>
             </WithScript>
         ), resources: [articleScript] };
     }

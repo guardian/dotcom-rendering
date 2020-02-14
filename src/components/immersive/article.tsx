@@ -15,7 +15,7 @@ import Tags from 'components/shared/tags';
 import { articleWidthStyles, basePx, darkModeCss } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles, Pillar } from 'pillar';
-import { Standard } from 'item';
+import { Item } from 'item';
 
 
 // ----- Styles ----- //
@@ -77,7 +77,7 @@ const HeaderImageStyles = css`
 
 interface Props {
     imageSalt: string;
-    item: Standard;
+    item: Item;
     children: ReactNode[];
 }
 
