@@ -6,7 +6,7 @@ import { from } from '@guardian/src-foundations/mq';
 
 import { wideContentWidth } from 'styles';
 import { Option } from 'types/option';
-import { Image } from 'article';
+import { Image } from 'item';
 import { ImageElement } from 'renderer';
 
 

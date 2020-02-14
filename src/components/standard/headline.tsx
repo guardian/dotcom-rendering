@@ -8,7 +8,7 @@ import { until } from '@guardian/src-foundations/mq';
 import ArticleRating from 'components/shared/articleRating';
 import { basePx, sidePadding, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
 import { getPillarStyles } from 'pillar';
-import { Layout, Article } from 'article';
+import { Item, Design } from 'item';
 
 
 // ----- Styles ----- //
@@ -24,10 +24,10 @@ const AnalysisStyles = (kicker: string): SerializedStyles => css`
     }
 `;
 
-function Styles({ layout, pillar }: Article): SerializedStyles {
+function Styles({ design, pillar }: Item): SerializedStyles {
 
-    const isFeature = layout === Layout.Feature;
-    const isAnalysis = layout === Layout.Analysis;
+    const isFeature = design === Design.Feature;
+    const isAnalysis = design === Design.Analysis;
     const { featureHeadline, kicker } = getPillarStyles(pillar);
 
     return css`
@@ -56,13 +56,13 @@ const DarkStyles = darkModeCss`
 // ----- Component ----- //
 
 interface Props {
-    article: Article;
+    item: Item;
 }
 
-const Headline = ({ article }: Props): JSX.Element =>
-    <div css={[Styles(article), DarkStyles]}>
-        <h1>{article.headline}</h1>
-        { article.layout === Layout.Review ? <ArticleRating rating={article.starRating} /> : null }
+const Headline = ({ item }: Props): JSX.Element =>
+    <div css={[Styles(item), DarkStyles]}>
+        <h1>{item.headline}</h1>
+        { item.design === Design.Review ? <ArticleRating rating={item.starRating} /> : null }
     </div>
 
 

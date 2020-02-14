@@ -4,7 +4,7 @@ import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
 import { compose } from 'lib';
-import { ElementKind, BodyElement } from 'article';
+import { ElementKind, BodyElement } from 'item';
 
 const textElement = (nodes: string[]): BodyElement =>
     ({

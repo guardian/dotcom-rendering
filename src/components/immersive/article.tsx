@@ -15,7 +15,7 @@ import Tags from 'components/shared/tags';
 import { articleWidthStyles, basePx, darkModeCss } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles, Pillar } from 'pillar';
-import { Standard } from 'article';
+import { Standard } from 'item';
 
 
 // ----- Styles ----- //
@@ -77,46 +77,46 @@ const HeaderImageStyles = css`
 
 interface Props {
     imageSalt: string;
-    article: Standard;
+    item: Standard;
     children: ReactNode[];
 }
 
-const Immersive = ({ imageSalt, article, children }: Props): JSX.Element =>
+const Immersive = ({ imageSalt, item, children }: Props): JSX.Element =>
     <main css={DarkStyles}>
         <article css={BorderStyles}>
             <header>
                 <div css={articleWidthStyles}>
                     <HeaderImage
-                        image={article.mainImage}
+                        image={item.mainImage}
                         imageSalt={imageSalt}
                         className={HeaderImageStyles}
                     />
-                    <Series series={article.series} pillar={article.pillar}/>
-                    <Headline headline={article.headline}/>
+                    <Series series={item.series} pillar={item.pillar}/>
+                    <Headline headline={item.headline}/>
                     <Standfirst
-                        standfirst={article.standfirst}
-                        pillar={article.pillar}
+                        standfirst={item.standfirst}
+                        pillar={item.pillar}
                         className={articleWidthStyles}
-                        bylineHtml={article.bylineHtml}
-                        byline={article.byline}
+                        bylineHtml={item.bylineHtml}
+                        byline={item.byline}
                     />
                 </div>
-                <Keyline {...article} />
+                <Keyline {...item} />
                 <Byline
-                    pillar={article.pillar}
-                    publicationDate={article.publishDate}
-                    contributors={article.contributors}
+                    pillar={item.pillar}
+                    publicationDate={item.publishDate}
+                    contributors={item.contributors}
                     className={articleWidthStyles}
                 />
             </header>
             <ArticleBody
-                pillar={article.pillar}
-                className={[articleWidthStyles, DropCapStyles(article.pillar), HeaderStyles]}
+                pillar={item.pillar}
+                className={[articleWidthStyles, DropCapStyles(item.pillar), HeaderStyles]}
             >
                 {children}
             </ArticleBody>
             <footer css={articleWidthStyles}>
-                <Tags tags={article.tags}/>
+                <Tags tags={item.tags}/>
             </footer>
         </article>
     </main>

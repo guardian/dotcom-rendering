@@ -4,7 +4,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { makeRelativeDate } from 'date';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
-import { LiveBlock } from 'article';
+import { LiveBlock } from 'item';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${neutral[100]};

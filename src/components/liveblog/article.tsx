@@ -13,7 +13,7 @@ import { css, SerializedStyles } from '@emotion/core'
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, getPillarStyles } from 'pillar';
-import { Liveblog } from 'article';
+import { Liveblog } from 'item';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${neutral[97]};
@@ -45,31 +45,31 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 `;
 
 interface LiveblogArticleProps {
-    article: Liveblog;
+    item: Liveblog;
     imageSalt: string;
 }
 
-const LiveblogArticle = ({ article, imageSalt }: LiveblogArticleProps): JSX.Element => {
+const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element => {
 
     return (
         <main css={LiveblogArticleStyles}>
             <div css={BorderStyles}>
-                <LiveblogSeries series={article.series} pillar={article.pillar} />
-                <LiveblogHeadline headline={article.headline} pillar={article.pillar} />
-                <LiveblogStandfirst standfirst={article.standfirst} pillar={article.pillar} />
-                <LiveblogByline article={article} imageSalt={imageSalt} />
+                <LiveblogSeries series={item.series} pillar={item.pillar} />
+                <LiveblogHeadline headline={item.headline} pillar={item.pillar} />
+                <LiveblogStandfirst standfirst={item.standfirst} pillar={item.pillar} />
+                <LiveblogByline item={item} imageSalt={imageSalt} />
                 <HeaderImage
-                    image={article.mainImage}
+                    image={item.mainImage}
                     imageSalt={imageSalt}
-                    className={HeaderImageStyles(getPillarStyles(article.pillar))}
+                    className={HeaderImageStyles(getPillarStyles(item.pillar))}
                 />
-                <LiveblogKeyEvents blocks={article.blocks} pillar={article.pillar} />
+                <LiveblogKeyEvents blocks={item.blocks} pillar={item.pillar} />
                 <LiveblogBody
-                    blocks={article.blocks}
-                    pillar={article.pillar}
+                    blocks={item.blocks}
+                    pillar={item.pillar}
                     imageSalt={imageSalt}
                 />
-                <Tags tags={article.tags} background={neutral[93]} />
+                <Tags tags={item.tags} background={neutral[93]} />
             </div>
         </main>
     );
