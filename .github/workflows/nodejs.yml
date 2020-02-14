@@ -28,3 +28,5 @@ jobs:
       run: npm run lint
     - name: test
       run: npm run test:run
+    - name: check client bundle size
+      run: npm run build:client:prod
