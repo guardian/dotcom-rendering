@@ -135,6 +135,28 @@ const clientConfig = {
     }
 };
 
+const clientConfigProduction = {
+    ...clientConfig,
+    name: 'clientProduction',
+    mode: 'production',
+    plugins: [
+        new CompressionPlugin({
+            filename: '[path]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8,
+        }),
+    ],
+    performance: {
+        hints: 'error',
+        maxEntrypointSize: 100000,
+        assetFilter: function(assetFilename) {
+            return assetFilename.endsWith('.js');
+        }
+    }
+}
+
 // ----- Exports ----- //
 
-module.exports = [ serverConfig, clientConfig];
+module.exports = [ serverConfig, clientConfig, clientConfigProduction ];
