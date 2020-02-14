@@ -317,6 +317,7 @@ const richLinkStyles = css`
 
     h1 {
         margin: ${basePx(0, 0, 2, 0)};
+        font-size: 1em;
     }
 
     p {
@@ -330,7 +331,6 @@ const richLinkStyles = css`
     a {
         text-decoration: none;
         background: none;
-        font-size: 1.25em;
     }
 
     float: left;
@@ -411,7 +411,6 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 
 const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map(render(salt, pillar));
-
 
 // ----- Exports ----- //
 

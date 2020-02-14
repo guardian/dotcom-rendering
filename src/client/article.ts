@@ -5,6 +5,7 @@ import { nativeClient } from 'native/nativeApi';
 import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
 import { Topic } from 'mobile-apps-thrift-typescript/Topic';
 import { Image } from 'mobile-apps-thrift-typescript/Image';
+import { formatDate } from 'date';
 
 // ----- Run ----- //
 
@@ -125,7 +126,22 @@ function slideshow(): void {
         }));
 }
 
+function formatDates(): void {
+    Array.from(document.querySelectorAll('time[data-date]'))
+        .forEach(time => {
+            try {
+                const timestamp = time.getAttribute('data-date');
+                if (timestamp) {
+                    time.textContent = formatDate(new Date(timestamp))
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })
+}
+
 setup();
 ads();
 topics();
 slideshow();
+formatDates();

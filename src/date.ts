@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 function isToday(date: Date): boolean {
     const today = new Date();
@@ -65,5 +65,5 @@ export function makeRelativeDate(date: Date): string | null {
 }
 
 export function formatDate(date: Date): string {
-    return moment(date).format('HH:mm dddd, D MMMM YYYY');
+    return dayjs(date).format('HH:mm dddd, D MMMM YYYY');
 }

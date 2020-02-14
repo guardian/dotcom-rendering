@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "upload": "node-riffraff-artifact",
-    "test:build": "webpack --config webpack.config.js --config-name tests",
-    "test:run": "npm run test:build && jest --verbose dist",
+    "test:build": "webpack --config webpack.config.js --config-name server --env.test",
+    "test": "npm run test:build && jest --verbose",
+    "test:coverage": "npm run test && open coverage/index.html",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "watch:client": "webpack-dev-server --config webpack.config.js --config-name client",
@@ -20,6 +21,32 @@
     "build:client:prod": "webpack --config webpack.config.js --config-name clientProduction",
     "storybook": "start-storybook -s ./",
     "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "coverageThreshold": {
+      "global": {
+        "branches": 15,
+        "functions": 15,
+        "lines": 15,
+        "statements": 15
+      }
+    },
+    "coverageReporters": [
+      "text",
+      "html",
+      "text-summary"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/src/renderer.ts"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   },
   "author": "",
   "license": "ISC",
@@ -35,11 +62,11 @@
     "@types/uuid": "^3.4.6",
     "aws-sdk": "^2.604.0",
     "compression": "^1.7.4",
+    "dayjs": "^1.8.20",
     "emotion": "^10.0.27",
     "express": "^4.17.1",
     "jsdom": "^15.2.1",
     "mobile-apps-thrift-typescript": "^0.37.0",
-    "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -69,7 +96,8 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.18.0",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.0",
     "ts-loader": "^6.2.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",

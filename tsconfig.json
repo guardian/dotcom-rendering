@@ -6,7 +6,7 @@
         // Import non-ES modules as default imports.
         "esModuleInterop": true,
         // Don't transpile jsx (handled by babel w/ emotion)
-        "jsx": "preserve",
+        "jsx": "react",
         // Allows discovery of node_modules packages
         "moduleResolution": "node",
         "noUnusedLocals": true,
