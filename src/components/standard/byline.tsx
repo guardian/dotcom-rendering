@@ -9,7 +9,7 @@ import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
 import { PillarStyles, getPillarStyles } from 'pillar';
-import { Article } from 'article';
+import { Standard, Review } from 'item';
 import Author from 'components/shared/author';
 
 
@@ -68,12 +68,12 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
 // ----- Component ----- //
 
 interface Props {
-    article: Article;
+    item: Standard | Review;
     imageSalt: string;
 }
 
-function Byline({ article, imageSalt }: Props): JSX.Element {
-    const pillarStyles = getPillarStyles(article.pillar);
+function Byline({ item, imageSalt }: Props): JSX.Element {
+    const pillarStyles = getPillarStyles(item.pillar);
 
     return (
         <div
@@ -81,16 +81,16 @@ function Byline({ article, imageSalt }: Props): JSX.Element {
         >
             <div css={sidePadding}>
                 <Avatar
-                    contributors={article.contributors}
+                    contributors={item.contributors}
                     bgColour={pillarStyles.inverted}
                     imageSalt={imageSalt}
                 />
                 <div className="author">
-                    <Author byline={article.bylineHtml} pillar={article.pillar} />
-                    { article.publishDate
+                    <Author byline={item.bylineHtml} pillar={item.pillar} />
+                    { item.publishDate
                         .fmap<JSX.Element | null>(date => <time data-date={date} className="date">{ formatDate(new Date(date)) }</time>)
                         .withDefault(null) }
-                    <Follow contributors={article.contributors} />
+                    <Follow contributors={item.contributors} />
                 </div>
             </div>
         </div>

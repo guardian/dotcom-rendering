@@ -17,7 +17,7 @@ import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { CommentCount } from 'components/shared/commentCount';
 import { getPillarStyles } from 'pillar';
-import { Standard } from 'article';
+import { Comment } from 'item';
 
 
 // ----- Styles ----- //
@@ -73,59 +73,59 @@ const topBorder = css`
 
 interface Props {
     imageSalt: string;
-    article: Standard;
+    item: Comment;
     children: ReactNode[];
 }
 
-const Opinion = ({ imageSalt, article, children }: Props): JSX.Element =>
+const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
                 <div css={articleWidthStyles}>
-                    <ArticleSeries series={article.series} pillar={article.pillar}/>
+                    <ArticleSeries series={item.series} pillar={item.pillar}/>
                     <Headline
-                        byline={article.bylineHtml}
-                        headline={article.headline}
-                        pillar={article.pillar}
+                        byline={item.bylineHtml}
+                        headline={item.headline}
+                        pillar={item.pillar}
                     />
                 </div>
                 <Cutout 
-                    contributors={article.contributors}
+                    contributors={item.contributors}
                     imageSalt={imageSalt}
                     className={articleWidthStyles}
                 />
-                <Keyline {...article} />
+                <Keyline {...item} />
                 <ArticleStandfirst
-                    article={article}
+                    item={item}
                     className={articleWidthStyles}
                 />
 
                 <section css={[articleWidthStyles, topBorder]}>
                     <Byline
-                        pillar={article.pillar}
-                        publicationDate={article.publishDate}
-                        contributors={article.contributors}
+                        pillar={item.pillar}
+                        publicationDate={item.publishDate}
+                        contributors={item.contributors}
                     />
-                    {article.commentable
+                    {item.commentable
                         ? <CommentCount
                             count={0}
-                            colour={getPillarStyles(article.pillar).kicker}
+                            colour={getPillarStyles(item.pillar).kicker}
                             className={CommentCountStyles}
                             />
                         : null}
                 </section>
 
                 <HeaderImage
-                    image={article.mainImage}
+                    image={item.mainImage}
                     imageSalt={imageSalt}
                     className={HeaderImageStyles}
                 />
             </header>
-            <ArticleBody pillar={article.pillar} className={[articleWidthStyles]}>
+            <ArticleBody pillar={item.pillar} className={[articleWidthStyles]}>
                 {children}
             </ArticleBody>
             <footer css={articleWidthStyles}>
-                <Tags tags={article.tags}/>
+                <Tags tags={item.tags}/>
             </footer>
         </article>
     </main>
