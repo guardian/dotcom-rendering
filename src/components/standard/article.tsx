@@ -66,6 +66,7 @@ const Standard = ({ imageSalt, item, children }: Props): JSX.Element =>
                     image={item.mainImage}
                     imageSalt={imageSalt}
                     className={HeaderImageStyles}
+                    pillar={item.pillar}
                 />
                 <div css={articleWidthStyles}>
                     <Series series={item.series} pillar={item.pillar} />
