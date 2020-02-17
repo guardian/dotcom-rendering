@@ -39,7 +39,8 @@ interface HeaderImageProps {
     pillar: Pillar;
 }
 
-const HeaderImage = ({ className, image, imageSalt, pillar }: HeaderImageProps): JSX.Element | null => {
+const HeaderImage = (props: HeaderImageProps): JSX.Element | null => {
+    const { className, image, imageSalt, pillar } = props;
     const headerImage: Option<JSX.Element | null> = image.fmap(imageData =>
         <div css={[className, Styles(imageData.width, imageData.height)]}>
             <figure aria-labelledby={captionId}>
