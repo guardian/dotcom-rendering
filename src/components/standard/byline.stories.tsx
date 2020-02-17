@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react';
 
 import Byline from 'components/standard/byline';
 import { Pillar } from 'pillar';
-import { Layout, Article } from 'article';
+import { Design, Item, Display } from 'item';
 import { Option, None, Some } from 'types/option';
 import { parse } from 'client/parser';
 import { ITag as Contributor } from 'mapiThriftModels';
@@ -16,9 +16,10 @@ import { ITag as Contributor } from 'mapiThriftModels';
 const parser = new DOMParser();
 const parseByline = parse(parser);
 
-const article: Article = {
+const item: Item = {
     pillar: Pillar.news,
-    layout: Layout.Standard,
+    design: Design.Article,
+    display: Display.Standard,
     body: [],
     headline: '',
     standfirst: new None(),
@@ -74,8 +75,8 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 export default { title: 'Byline', decorators: [ withKnobs ] };
 
 const News = (): ReactNode =>
-    <Byline imageSalt="mock_salt" article={{
-        ...article,
+    <Byline imageSalt="mock_salt" item={{
+        ...item,
         byline: text('Byline', 'Jane Smith'),
         bylineHtml: mockBylineHtml(),
         contributors: boolean('Include Follow', false) ? [contributor()] : [],
@@ -83,8 +84,8 @@ const News = (): ReactNode =>
     }} />
 
 const Sport = (): ReactNode =>
-    <Byline imageSalt="mock_salt" article={{
-        ...article,
+    <Byline imageSalt="mock_salt" item={{
+        ...item,
         byline: text('Byline', 'Jane Smith'),
         pillar: Pillar.sport,
         bylineHtml: mockBylineHtml(),
