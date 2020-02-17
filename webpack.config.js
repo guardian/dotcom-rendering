@@ -3,14 +3,7 @@
 const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
-const glob = require("glob");
-
-
-// ----- Functions ----- //
-
-const testEntryPoints = (entries, current) => ({
-    ...entries, [current.split('/').pop().split('.test.ts')[0]]: current
-})
+const CompressionPlugin = require('compression-webpack-plugin');
 
 // ----- Plugins ----- //
 
@@ -41,7 +34,7 @@ const resolve = {
     ],
 };
 
-const nodeConfig = {
+const nodeConfig = test => ({
     target: 'node',
     resolve,
     // Does not try to require the 'canvas' package,
@@ -63,34 +56,38 @@ const nodeConfig = {
                     },
                     {
                         loader: 'ts-loader',
-                        options: { configFile: 'config/tsconfig.server.json' }
+                        options: { configFile: test ? 'config/tsconfig.test.json' : 'config/tsconfig.server.json' }
                     }
                 ],
             },
         ]
     },
-};
+});
 
 
 // ----- Configs ----- //
 
-const serverConfig = env => ({
-    name: 'server',
-    mode: 'development',
-    entry: 'server/server.ts',
-    node: {
-        __dirname: false,
-    },
-    output: {
-        filename: 'server.js',
-    },
-    watch: env && env.watch,
-    watchOptions: {
-        ignored: /node_modules/,
-    },
-    ...nodeConfig,
-    plugins: (env && env.watch) ? [ ...nodeConfig.plugins, new LaunchServerPlugin() ] : nodeConfig.plugins,
-});
+const serverConfig = env => {
+    const isTest = env && env.test;
+    const config = nodeConfig(isTest);
+    return {
+        name: 'server',
+        mode: 'development',
+        entry: 'server/server.ts',
+        node: {
+            __dirname: false,
+        },
+        output: {
+            filename: 'server.js',
+        },
+        watch: env && env.watch,
+        watchOptions: {
+            ignored: /node_modules/,
+        },
+        ...config,
+        plugins: (env && env.watch) ? [ ...config.plugins, new LaunchServerPlugin() ] : config.plugins,
+    }
+}
 
 const clientConfig = {
     name: 'client',
@@ -139,17 +136,28 @@ const clientConfig = {
     }
 };
 
-const testConfig = {
-    name: 'tests',
-    mode: 'development',
-    entry: glob.sync("./**/*test.ts*", { ignore: './node_modules/**' }).reduce(testEntryPoints, {}),
-    output: {
-        filename: '[name].test.js',
-    },
-    stats: 'errors-warnings',
-    ...nodeConfig,
-};
+const clientConfigProduction = {
+    ...clientConfig,
+    name: 'clientProduction',
+    mode: 'production',
+    plugins: [
+        new CompressionPlugin({
+            filename: '[path]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8,
+        }),
+    ],
+    performance: {
+        hints: 'error',
+        maxEntrypointSize: 100000,
+        assetFilter: function(assetFilename) {
+            return assetFilename.endsWith('.js');
+        }
+    }
+}
 
 // ----- Exports ----- //
 
-module.exports = [ serverConfig, clientConfig, testConfig ];
+module.exports = [ serverConfig, clientConfig, clientConfigProduction ];

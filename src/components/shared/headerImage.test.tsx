@@ -3,7 +3,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { None, Option } from 'types/option';
 import HeaderImage from 'components/shared/headerImage';
-import { Image } from 'article';
+import { Image } from 'item';
 
 configure({ adapter: new Adapter() });
 

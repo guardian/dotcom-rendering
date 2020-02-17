@@ -16,7 +16,7 @@ import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles } from 'pillar';
-import { Standard, Review } from 'article';
+import { Standard, Review } from 'item';
 
 
 // ----- Styles ----- //
@@ -54,40 +54,38 @@ const HeaderImageStyles = css`
 
 interface Props {
     imageSalt: string;
-    article: Standard | Review;
+    item: Standard | Review;
     children: ReactNode[];
 }
 
-const Standard = ({ imageSalt, article, children }: Props): JSX.Element =>
+const Standard = ({ imageSalt, item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderImage
-                    image={article.mainImage}
+                    image={item.mainImage}
                     imageSalt={imageSalt}
                     className={HeaderImageStyles}
                 />
                 <div css={articleWidthStyles}>
-                    <Series series={article.series} pillar={article.pillar} />
-                    <Headline
-                        headline={article.headline}
-                        article={article}
-                    />
-                    <Standfirst article={article} className={articleWidthStyles} />
+                    <Series series={item.series} pillar={item.pillar} />
+                    <Headline item={item} />
+                    <Standfirst item={item} className={articleWidthStyles} />
+
                 </div>
-                <Keyline {...article} />
+                <Keyline {...item} />
                 <section css={articleWidthStyles}>
-                    <Byline article={article} imageSalt={imageSalt} />
-                    {article.commentable
-                        ? <CommentCount count={0} colour={getPillarStyles(article.pillar).kicker}/>
+                    <Byline item={item} imageSalt={imageSalt} />
+                    {item.commentable
+                        ? <CommentCount count={0} colour={getPillarStyles(item.pillar).kicker}/>
                         : null}
                 </section>
             </header>
-            <Body pillar={article.pillar} className={[articleWidthStyles]}>
+            <Body pillar={item.pillar} className={[articleWidthStyles]}>
                 {children}
             </Body>
             <footer css={articleWidthStyles}>
-                <Tags tags={article.tags}/>
+                <Tags tags={item.tags}/>
             </footer>
         </article>
     </main>

@@ -7,7 +7,7 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 import { sidePadding, headlineFont, darkModeCss } from 'styles';
 import { getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
-import { Article, Layout } from 'article';
+import { Design, Item } from 'item';
 
 
 // ----- Styles ----- //
@@ -20,10 +20,10 @@ const FeatureStyles = `
     line-height: 2.4rem;
 `;
 
-function Styles({ layout }: Article): SerializedStyles {
-    const includeFeatureStyles = layout === Layout.Feature
-        || layout === Layout.Review
-        || layout === Layout.Opinion;
+function Styles({ design }: Item): SerializedStyles {
+    const includeFeatureStyles = design === Design.Feature
+        || design === Design.Review
+        || design === Design.Comment;
 
     return css`
         padding-bottom: 6px;
@@ -40,7 +40,7 @@ function Styles({ layout }: Article): SerializedStyles {
     `;
 }
 
-const DarkStyles = ({ pillar }: Article): SerializedStyles => darkModeCss`
+const DarkStyles = ({ pillar }: Item): SerializedStyles => darkModeCss`
     background: ${background.inverse};
     color: ${neutral[86]};
 
@@ -53,14 +53,14 @@ const DarkStyles = ({ pillar }: Article): SerializedStyles => darkModeCss`
 // ----- Component ----- //
 
 interface Props {
-    article: Article;
+    item: Item;
     className: SerializedStyles;
 }
 
-const Standfirst = ({ article, className }: Props): JSX.Element | null =>
-    article.standfirst.fmap<JSX.Element | null>(standfirst =>
-        <div css={[className, Styles(article), DarkStyles(article)]}>
-            {renderText(standfirst, article.pillar)}
+const Standfirst = ({ item, className }: Props): JSX.Element | null =>
+    item.standfirst.fmap<JSX.Element | null>(standfirst =>
+        <div css={[className, Styles(item), DarkStyles(item)]}>
+            {renderText(standfirst, item.pillar)}
         </div>
     ).withDefault(null);
 

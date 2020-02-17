@@ -2,8 +2,6 @@
 
 import { createHash } from 'crypto';
 
-import { Option, None, Some } from 'types/option';
-import { Asset } from 'mapiThriftModels/Asset';
 
 // ----- Setup ----- //
 
@@ -29,7 +27,7 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex')    
 
-function transformUrl(salt: string, input: string, width: number): string {
+function src(salt: string, input: string, width: number): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
@@ -44,35 +42,29 @@ function transformUrl(salt: string, input: string, width: number): string {
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
+/**
+ * Produces a srcset as a string, with the asset URL transformed into image
+ * resizer URLs. The resulting srcset can be used with the `<img>` and
+ * `<source>` tags.
+ * 
+ * @param url The asset URL (supplied by CAPI) that will be used to generate
+ * image resizer URLs
+ * @param salt Salt used to sign (hash) the image
+ * @returns An image srcset using widths ('w')
+ * @example <caption>Create an image with a 'srcset':</caption>
+ * const srcSet = srcset('https://media.guim.co.uk/path/of/image.jpg', salt);
+ * const image = React.createElement('img', { srcSet });
+ * 
+ */
 const srcset = (url: string, salt: string): string =>
     widths
-        .map(width => `${transformUrl(salt, url, width)} ${width}w`)
+        .map(width => `${src(salt, url, width)} ${width}w`)
         .join(', ');
 
-/**
- * Produces a srcset as a string, with the asset URLs transformed into image
- * resizer URLs. The resulting srcset can be used with the `<img>` and
- * `<source>` tags. Will return `None` if required assets are missing.
- * 
- * @param salt Salt used to sign (hash) the image.
- * @param assets A list of image assets, typically supplied by CAPI.
- * @returns An option of an image srcset.
- */
-const toSrcset = (salt: string, assets: Asset[]): Option<string> => {
-    const master = assets.find(asset => asset?.typeData?.isMaster);
-
-    if (!master || !master?.file) {
-        return new None();
-    }
-
-    return new Some(srcset(master.file, salt));
-}
 
 // ----- Exports ----- //
 
 export {
-    Asset,
+    src,
     srcset,
-    toSrcset,
-    transformUrl
 };

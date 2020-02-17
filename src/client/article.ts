@@ -9,6 +9,7 @@ import { WebviewServer } from 'native/thrift/webviewServer';
 import * as Webview from 'mobile-apps-thrift-typescript/Webview';
 import { WebviewHandler } from 'native/webviewApi';
 import { Message } from 'native/thrift/message';
+import { formatDate } from 'date';
 
 // ----- Run ----- //
 
@@ -132,7 +133,22 @@ function slideshow(): void {
 const webviewServer = new WebviewServer(new Webview.Processor(new WebviewHandler));
 window.receiveNativeRequest = (message: Message): void => webviewServer.receive(message);
 
+function formatDates(): void {
+    Array.from(document.querySelectorAll('time[data-date]'))
+        .forEach(time => {
+            try {
+                const timestamp = time.getAttribute('data-date');
+                if (timestamp) {
+                    time.textContent = formatDate(new Date(timestamp))
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })
+}
+
 setup();
 ads();
 topics();
 slideshow();
+formatDates();

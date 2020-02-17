@@ -69,7 +69,7 @@ _**Note**: You will need to refresh the page to see any changes you make to the 
 The unit tests are built using Jest. They can be run with the following command:
 
 ```sh
-npm run test:run
+npm run test
 ```
 
 ### Lint

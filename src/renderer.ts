@@ -6,10 +6,10 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 
 import { Option, fromNullable, Some, None } from 'types/option';
-import { srcset, transformUrl } from 'asset';
+import { srcset, src } from 'image';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { ElementKind, BodyElement } from 'article';
+import { ElementKind, BodyElement } from 'item';
 
 
 // ----- Renderer ----- //
@@ -216,7 +216,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
         srcSet: srcset(url, salt),
         alt,
         className: 'js-launch-slideshow',
-        src: transformUrl(salt, url, 500),
+        src: src(salt, url, 500),
         css: imageStyles(width, height),
         caption,
         credit,
@@ -317,6 +317,7 @@ const richLinkStyles = css`
 
     h1 {
         margin: ${basePx(0, 0, 2, 0)};
+        font-size: 1em;
     }
 
     p {
@@ -330,7 +331,6 @@ const richLinkStyles = css`
     a {
         text-decoration: none;
         background: none;
-        font-size: 1.25em;
     }
 
     float: left;
@@ -411,7 +411,6 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 
 const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map(render(salt, pillar));
-
 
 // ----- Exports ----- //
 

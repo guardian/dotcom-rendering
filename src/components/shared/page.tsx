@@ -16,7 +16,7 @@ import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { insertAdPlaceholders } from 'ads';
-import { fromCapi, Layout } from 'article';
+import { fromCapi, Design, Display } from 'item';
 
 
 // ----- Components ----- //
@@ -82,66 +82,78 @@ interface BodyProps {
     capi: Content;
 }
 
+interface ElementWithResources {
+    element: React.ReactElement;
+    resources: string[];
+}
+
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
     <>
         {props.children}
         <script src={props.src}></script>
     </>
 
-function ArticleBody({ capi, imageSalt }: BodyProps): React.ReactElement {
-    const article = fromCapi(JSDOM.fragment)(capi);
+function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
+    const item = fromCapi(JSDOM.fragment)(capi);
     
     const articleScript = '/assets/article.js';
     const liveblogScript = '/assets/liveblog.js';
 
-    switch (article.layout) {
-        case Layout.Opinion:
-            const opinionBody = partition(article.body).oks;
-            const opinionContent =
-                insertAdPlaceholders(renderAll(imageSalt)(article.pillar, opinionBody));
+    if (item.design === Design.Comment) {
+        const commentBody = partition(item.body).oks;
+        const commentContent =
+            insertAdPlaceholders(renderAll(imageSalt)(item.pillar, commentBody));
 
-            return (
-                <WithScript src={articleScript}>
-                    <Opinion imageSalt={imageSalt} article={article}>
-                        {opinionContent}
-                    </Opinion>
-                </WithScript>
-            );
-        case Layout.Immersive:
-            const immersiveBody = partition(article.body).oks;
-            const immersiveContent =
-                insertAdPlaceholders(renderAll(imageSalt)(article.pillar, immersiveBody));
-
-            return (
-                <WithScript src={articleScript}>
-                    <Immersive imageSalt={imageSalt} article={article}>
-                        {immersiveContent}
-                    </Immersive>
-                </WithScript>
-            );
-        case Layout.Standard:
-        case Layout.Feature:
-        case Layout.Analysis:
-        case Layout.Review:
-            const body = partition(article.body).oks;
-            const content = insertAdPlaceholders(renderAll(imageSalt)(article.pillar, body));
-
-            return (
-                <WithScript src={articleScript}>
-                    <Standard imageSalt={imageSalt} article={article}>
-                        {content}
-                    </Standard>
-                </WithScript>
-            );
-        case Layout.Liveblog:
-            return (
-                <WithScript src={liveblogScript}>
-                    <LiveblogArticle article={article} imageSalt={imageSalt} />
-                </WithScript>
-            );
-        default:
-            return <p>{capi.type} not implemented yet</p>;
+        return { element: (
+            <WithScript src={articleScript}>
+                <Opinion imageSalt={imageSalt} item={item}>
+                    {commentContent}
+                </Opinion>
+            </WithScript>
+        ), resources: [articleScript] };
     }
+
+    if (item.design === Design.Live) {
+        return { element: (
+            <WithScript src={liveblogScript}>
+                <LiveblogArticle item={item} imageSalt={imageSalt} />
+            </WithScript>
+        ), resources: [liveblogScript] };
+    }
+
+    if (item.display === Display.Immersive) {
+        const immersiveBody = partition(item.body).oks;
+        const immersiveContent =
+            insertAdPlaceholders(renderAll(imageSalt)(item.pillar, immersiveBody));
+
+        return { element: (
+            <WithScript src={articleScript}>
+                <Immersive imageSalt={imageSalt} item={item}>
+                    {immersiveContent}
+                </Immersive>
+            </WithScript>
+        ), resources: [articleScript] };
+    }
+
+    if (
+        item.design === Design.Feature ||
+        item.design === Design.Analysis ||
+        item.design === Design.Review ||
+        item.design === Design.Article
+    ) {
+        const body = partition(item.body).oks;
+        const content = insertAdPlaceholders(renderAll(imageSalt)(item.pillar, body));
+
+        return { element: (
+            <WithScript src={articleScript}>
+                <Standard imageSalt={imageSalt} item={item}>
+                    {content}
+                </Standard>
+            </WithScript>
+        ), resources: [articleScript] };
+    }
+
+    return { element: <p>Content format not implemented yet</p>, resources: [] };
 }
 
 interface Props {
@@ -149,12 +161,14 @@ interface Props {
     imageSalt: string;
 }
 
-function Page({ content, imageSalt }: Props): JSX.Element {
+function Page({ content, imageSalt }: Props): ElementWithResources {
     const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
-    return (
+    const { element, resources } = ArticleBody({ imageSalt, capi: content})
+
+    return { element: (
         <html lang="en" css={PageStyles}>
             <head>
                 <title>{content.id}</title>
@@ -163,11 +177,11 @@ function Page({ content, imageSalt }: Props): JSX.Element {
                 <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
             </head>
             <body>
-                <ArticleBody imageSalt={imageSalt} capi={content} />
+                { element }
                 { twitterScript }
             </body>
         </html>
-    );
+    ), resources };
 }
 
 
