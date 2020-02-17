@@ -251,6 +251,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             root: string;
         } = island;
 
+        window.performance.mark(`${root}-start`);
         // Find each root on the dom for this island (rich links can have multiple) and
         // hydrate it
         document
@@ -258,5 +259,7 @@ export const hydrateIslands = (CAPI: CAPIType, NAV: NavType) => {
             .forEach(islandRoot => {
                 hydrate(React.createElement(component, props), islandRoot);
             });
+        window.performance.mark(`${root}-end`);
+        window.performance.measure(`${root}`, `${root}-start`, `${root}-end`);
     });
 };
