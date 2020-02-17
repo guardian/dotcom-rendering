@@ -74,8 +74,8 @@ interface Fields extends Format {
 type Image = {
     kind: ElementKind.Image;
     alt: string;
-    caption: string;
-    displayCredit: boolean;
+    caption: DocumentFragment;
+    captionString: string;
     credit: string;
     file: string;
     width: number;
@@ -167,9 +167,11 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
     return new Err(`There was no blockquote element in the tweet with id: ${tweetId}`);
 }
 
-const parseImage = (element: BlockElement): Option<Image> => {
+const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
     const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
+    const fullCaption = displayCredit ? `${caption} ${credit}` : caption;
+    const parsedCaption = docParser(fullCaption);
 
     return fromNullable(masterAsset).andThen(asset => {
         if (!asset?.file || !asset?.typeData?.width || !asset?.typeData?.height) {
@@ -179,12 +181,12 @@ const parseImage = (element: BlockElement): Option<Image> => {
         return new Some({
             kind: ElementKind.Image,
             alt,
-            caption,
-            displayCredit,
+            caption: parsedCaption,
             credit,
             file: asset.file,
             width: asset.typeData.width,
             height: asset.typeData.height,
+            captionString: caption
         });
     });
 }
@@ -200,7 +202,7 @@ const parseElement =
             return new Ok({ kind: ElementKind.Text, doc: docParser(html) });
 
         case ElementType.IMAGE:
-            return parseImage(element)
+            return parseImage(docParser)(element)
                 .fmap<Result<string, Image>>(image => new Ok(image))
                 .withDefault(new Err('I couldn\'t find a master asset'));
 
@@ -327,7 +329,7 @@ const itemFields = (docParser: DocParser, content: Content): ItemFields =>
         byline: content?.fields?.byline ?? "",
         bylineHtml: fromNullable(content?.fields?.bylineHtml).fmap(docParser),
         publishDate: capiDateTimeToDate(content.webPublicationDate),
-        mainImage: articleMainImage(content).andThen(parseImage),
+        mainImage: articleMainImage(content).andThen(parseImage(docParser)),
         contributors: articleContributors(content),
         series: articleSeries(content),
         commentable: content?.fields?.commentable ?? false,

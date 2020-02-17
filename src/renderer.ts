@@ -4,7 +4,6 @@ import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
-import { JSDOM } from 'jsdom';
 
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
@@ -175,12 +174,6 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
 const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(textElement(pillar));
 
-const makeCaption = (props: FigureElement): ReactNode[] => {
-    const { caption, credit, displayCredit, pillar } = props;
-    const fullCaption = displayCredit ? `${caption} ${credit}` : caption;
-    return text(JSDOM.fragment(fullCaption), pillar);
-}
-
 interface ImageProps {
     url: string;
     alt: string;
@@ -188,16 +181,14 @@ interface ImageProps {
     sizes: string;
     width: number;
     height: number;
-    caption: string;
+    captionString: string;
+    caption: DocumentFragment;
     credit: string;
+    pillar: Pillar;
 }
 
 type FigureElement = ImageProps & {
-    caption: string;
-    displayCredit: boolean;
-    credit: string;
     className?: SerializedStyles;
-    pillar: Pillar;
 }
 
 const imageStyles = (width: number, height: number): SerializedStyles => css`
@@ -210,7 +201,7 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
-    const { url, sizes, salt, alt, width, height, credit, caption } = props;
+    const { url, sizes, salt, alt, width, height, credit, captionString } = props;
 
     if (!url) {
         return null;
@@ -223,7 +214,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
         className: 'js-launch-slideshow',
         src: src(salt, url, 500),
         css: imageStyles(width, height),
-        caption,
+        caption: captionString,
         credit,
     });
 }
@@ -231,7 +222,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 const FigureElement = (props: FigureElement): ReactElement =>
     styledH('figure', { css: props.className },
         h(ImageElement, props),
-        h('figcaption', null, makeCaption(props)),
+        h('figcaption', null, text(props.caption, props.pillar)),
     );
 
 const bodyImageStyles = css`
@@ -381,13 +372,13 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
             return text(element.doc, pillar);
 
         case ElementKind.Image:
-            const { file, alt, caption, displayCredit, credit, width, height } = element;
+            const { file, alt, caption, captionString, credit, width, height } = element;
             return h(BodyImage, {
                 url: file,
                 alt,
                 salt,
                 caption,
-                displayCredit,
+                captionString,
                 credit,
                 key,
                 width,

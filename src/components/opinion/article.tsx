@@ -119,6 +119,7 @@ const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
                     image={item.mainImage}
                     imageSalt={imageSalt}
                     className={HeaderImageStyles}
+                    pillar={item.pillar}
                 />
             </header>
             <ArticleBody pillar={item.pillar} className={[articleWidthStyles]}>

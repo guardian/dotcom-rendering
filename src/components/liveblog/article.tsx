@@ -62,6 +62,7 @@ const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element
                     image={item.mainImage}
                     imageSalt={imageSalt}
                     className={HeaderImageStyles(getPillarStyles(item.pillar))}
+                    pillar={item.pillar}
                 />
                 <LiveblogKeyEvents blocks={item.blocks} pillar={item.pillar} />
                 <LiveblogBody
