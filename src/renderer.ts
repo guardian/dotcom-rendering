@@ -4,6 +4,7 @@ import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
+import { JSDOM } from 'jsdom';
 
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
@@ -174,8 +175,11 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
 const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(textElement(pillar));
 
-const makeCaption = (caption: string, displayCredit: boolean, credit: string): string =>
-    displayCredit ? `${caption} ${credit}` : caption;
+const makeCaption = (props: FigureElement): ReactNode[] => {
+    const { caption, credit, displayCredit, pillar } = props;
+    const fullCaption = displayCredit ? `${caption} ${credit}` : caption;
+    return text(JSDOM.fragment(fullCaption), pillar);
+}
 
 interface ImageProps {
     url: string;
@@ -193,6 +197,7 @@ type FigureElement = ImageProps & {
     displayCredit: boolean;
     credit: string;
     className?: SerializedStyles;
+    pillar: Pillar;
 }
 
 const imageStyles = (width: number, height: number): SerializedStyles => css`
@@ -226,7 +231,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 const FigureElement = (props: FigureElement): ReactElement =>
     styledH('figure', { css: props.className },
         h(ImageElement, props),
-        h('figcaption', null, makeCaption(props.caption, props.displayCredit, props.credit)),
+        h('figcaption', null, makeCaption(props)),
     );
 
 const bodyImageStyles = css`
@@ -387,6 +392,7 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
                 key,
                 width,
                 height,
+                pillar
             });
 
         case ElementKind.Pullquote:
