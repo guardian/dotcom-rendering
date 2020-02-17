@@ -13,7 +13,7 @@ export const VideoYoutube: React.FC<{
         'v',
     );
     return (
-        <Caption captionText={element.caption} pillar={pillar}>
+        <Caption captionText={element.caption} pillar={pillar} dirtyHtml={true}>
             <amp-youtube
                 data-videoid={youtubeId}
                 layout="responsive"
