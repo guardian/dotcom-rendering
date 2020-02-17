@@ -15,7 +15,7 @@ import { MatchReport } from '@root/fixtures/articles/MatchReport';
 
 import { NAV } from '@root/fixtures/NAV';
 
-import { hydrateIslands } from '@frontend/web/islands/islands';
+import { hydrateIslands } from '@root/src/web/hydration/islands';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';

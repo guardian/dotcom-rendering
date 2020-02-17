@@ -1,7 +1,7 @@
 import { hydrate as hydrateCSS } from 'emotion';
 import { startup } from '@root/src/web/browser/startup';
 
-import { hydrateIslands } from '@frontend/web/islands/islands';
+import { hydrateIslands } from '@root/src/web/hydration/islands';
 
 const init = (): Promise<void> => {
     const {
