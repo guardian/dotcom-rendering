@@ -2,17 +2,17 @@ import React from 'react';
 import Tags from './tags';
 import { Keyline } from './keyline';
 import { withKnobs } from "@storybook/addon-knobs";
-import { Layout } from 'article';
+import { Design } from 'item';
 export default { title: 'Shared', decorators: [withKnobs] };
 
 export const OpinionKeyline = (): JSX.Element =>
-    <Keyline layout={ Layout.Opinion } />
+    <Keyline design={ Design.Comment } />
 
 export const DefaultKeyline = (): JSX.Element =>
-    <Keyline layout={ Layout.Standard } />
+    <Keyline design={ Design.Article } />
 
 export const LiveblogKeyline = (): JSX.Element =>
-    <Keyline layout={ Layout.Liveblog } />
+    <Keyline design={ Design.Live } />
 
 const tagsProps = [{
     webTitle: "Tag title",

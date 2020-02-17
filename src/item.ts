@@ -4,30 +4,61 @@ import { Pillar, pillarFromString } from 'pillar';
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { IBlockElement as BlockElement } from 'mapiThriftModels/BlockElement';
 import { ITag as Tag } from 'mapiThriftModels/Tag';
-import { isFeature, isAnalysis, isImmersive, isReview, articleMainImage, articleContributors, articleSeries } from 'capi';
+import { articleMainImage, articleContributors, articleSeries } from 'capi';
 import { Option, fromNullable, None, Some } from 'types/option';
 import { Err, Ok, Result } from 'types/result';
-import { IBlock as Block, ICapiDateTime as CapiDateTime, ContentType, ElementType } from 'mapiThriftModels';
+import {
+    IBlock as Block,
+    ICapiDateTime as CapiDateTime,
+    ElementType,
+    IElement as Element,
+    AssetType,
+    IAsset as Asset,
+} from 'mapiThriftModels';
 
-// ----- Types ----- //
 
-const enum Layout {
-    Standard,
-    Immersive,
-    Feature,
+// ----- Item Type ----- //
+
+const enum Design {
+    Article,
+    Media,
     Review,
     Analysis,
-    Opinion,
-    Liveblog,
-    Gallery,
-    Interactive,
-    Picture,
-    Video,
-    Audio,
+    Comment,
+    Feature,
+    Live,
+    SpecialReport, // Not used?
+    Recipe,
+    MatchReport,
+    Interview,
+    GuardianView,
+    GuardianLabs, // Not used?
+    Quiz,
+    AdvertisementFeature,
 }
 
-interface ArticleFields {
+const enum Display {
+    Standard,
+    Immersive,
+    Showcase,
+}
+
+const enum ElementKind {
+    Text,
+    Image,
+    Pullquote,
+    Interactive,
+    RichLink,
+    Tweet,
+}
+
+interface Format {
     pillar: Pillar;
+    design: Design;
+    display: Display;
+}
+
+interface Fields extends Format {
     headline: string;
     standfirst: Option<DocumentFragment>;
     byline: string;
@@ -38,34 +69,6 @@ interface ArticleFields {
     series: Tag;
     commentable: boolean;
     tags: Tag[];
-}
-
-type Liveblog = ArticleFields & {
-    layout: Layout.Liveblog;
-    blocks: LiveBlock[];
-}
-
-type Review = ArticleFieldsWithBody & {
-    layout: Layout.Review;
-    starRating: number;
-}
-
-type Standard = ArticleFieldsWithBody & {
-    layout: Exclude<Layout, Layout.Liveblog | Layout.Review>;
-}
-
-type Article
-    = Liveblog
-    | Review
-    | Standard;
-
-const enum ElementKind {
-    Text,
-    Image,
-    Pullquote,
-    Interactive,
-    RichLink,
-    Tweet,
 }
 
 type Image = {
@@ -98,20 +101,58 @@ type BodyElement = {
     content: NodeList;
 };
 
+type Body =
+    Result<string, BodyElement>[];
+
 type LiveBlock = {
     id: string;
     isKeyEvent: boolean;
     title: string;
     firstPublished: Option<Date>;
     lastModified: Option<Date>;
-    body: Result<string, BodyElement>[];
+    body: Body;
 }
+
+interface Liveblog extends Fields {
+    design: Design.Live;
+    blocks: LiveBlock[];
+}
+
+interface Review extends Fields {
+    design: Design.Review;
+    body: Body;
+    starRating: number;
+}
+
+interface Comment extends Fields {
+    design: Design.Comment;
+    body: Body;
+}
+
+// Catch-all for other Designs for now. As coverage of Designs increases,
+// this will likely be split out into each Design type.
+interface Standard extends Fields {
+    design: Exclude<Design, Design.Live | Design.Review | Design.Comment>;
+    body: Body;
+}
+
+type Item
+    = Liveblog
+    | Review
+    | Comment
+    | Standard
+    ;
+
+
+// ----- Convenience Types ----- //
 
 type DocParser = (html: string) => DocumentFragment;
 
-type ArticleFieldsWithBody = ArticleFields & {
-    body: Result<string, BodyElement>[];
-};
+type ItemFields =
+    Omit<Fields, 'design'>;
+
+type ItemFieldsWithBody =
+    ItemFields & { body: Body };
 
 
 // ----- Functions ----- //
@@ -243,9 +284,44 @@ const parseBlock = (docParser: DocParser) => (block: Block): LiveBlock =>
 const parseBlocks = (docParser: DocParser) => (blocks: Block[]): LiveBlock[] =>
     blocks.map(parseBlock(docParser));
 
-const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
+// The main image for the page is meant to be shown as showcase.
+function isShowcaseImage(content: Content): boolean {
+    const mainMedia = content.blocks?.main?.elements[0];
+
+    return mainMedia?.imageTypeData?.role === 'showcase';
+}
+
+// The main media for the page is an embed.
+const isMainEmbed = (elem: Element): boolean =>
+    elem.relation === 'main' && elem.type === ElementType.EMBED;
+
+// The first embed asset is meant to be shown as showcase.
+const hasShowcaseAsset = (assets: Asset[]): boolean  =>
+    assets.find(asset => asset.type === AssetType.EMBED)?.typeData?.role === 'showcase';
+
+// There is an embed element that is both the main media for the page,
+// and is meant to be displayed as showcase.
+const isShowcaseEmbed = (content: Content): boolean =>
+    content.elements?.some(elem => isMainEmbed(elem) && hasShowcaseAsset(elem.assets)) ?? false;
+
+function getDisplay(content: Content): Display {
+
+    if (content.fields?.displayHint === 'immersive') {
+        return Display.Immersive;
+    // This is meant to replicate the current logic in frontend:
+    // https://github.com/guardian/frontend/blob/88cfa609c73545085c3e5f3921631ec344a3eb83/common/app/model/meta.scala#L586
+    } else if (isShowcaseImage(content) || isShowcaseEmbed(content)) {
+        return Display.Showcase;
+    }
+
+    return Display.Standard;
+
+}
+
+const itemFields = (docParser: DocParser, content: Content): ItemFields =>
     ({
         pillar: pillarFromString(content?.pillarId),
+        display: getDisplay(content),
         headline: content?.fields?.headline ?? "",
         standfirst: fromNullable(content?.fields?.standfirst).fmap(docParser),
         byline: content?.fields?.byline ?? "",
@@ -258,82 +334,146 @@ const articleFields = (docParser: DocParser, content: Content): ArticleFields =>
         tags: content.tags,
     })
 
-const articleFieldsWithBody = (docParser: DocParser, content: Content): ArticleFieldsWithBody => {
+const itemFieldsWithBody = (docParser: DocParser, content: Content): ItemFieldsWithBody => {
     const body = content?.blocks?.body ?? [];
     const elements = body[0]?.elements;
     return ({
-        ...articleFields(docParser, content),
+        ...itemFields(docParser, content),
         body: elements !== undefined ? parseElements(docParser)(elements): [],
     });
 }
 
-const containsOpinionTags = (tags: Tag[]): boolean =>
-    tags.some(tag => tag.id === 'tone/comment' || tag.id === 'tone/letters')
+const hasSomeTag = (tagIds: string[]) => (tags: Tag[]): boolean =>
+    tags.some(tag => tagIds.includes(tag.id));
 
-const fromCapi = (docParser: DocParser) => (content: Content): Article => {
-    const { tags, pillarId, fields } = content;
-    switch (content.type) {
-        case ContentType.ARTICLE:
-            if (pillarFromString(pillarId) === Pillar.opinion || containsOpinionTags(tags)) {
-                return { layout: Layout.Opinion, ...articleFieldsWithBody(docParser, content) };
+const hasTag = (tagId: string) => (tags: Tag[]): boolean =>
+    tags.some(tag => tag.id === tagId);
 
-            } else if (isImmersive(content)) {
-                return { layout: Layout.Immersive, ...articleFieldsWithBody(docParser, content) };
+const isMedia =
+    hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
 
-            } else if (isFeature(content)) {
-                return { layout: Layout.Feature, ...articleFieldsWithBody(docParser, content) };
+const isReview =
+    hasSomeTag(['tone/reviews', 'tone/livereview', 'tone/albumreview']);
 
-            } else if (isReview(content) && fields?.starRating) {
-                return {
-                    layout: Layout.Review,
-                    starRating: fields.starRating,
-                    ...articleFieldsWithBody(docParser, content),
-                };
+const isAnalysis =
+    hasTag('tone/analysis');
 
-            } else if (isAnalysis(content)) {
-                return { layout: Layout.Analysis, ...articleFieldsWithBody(docParser, content) };
-            }
+const isComment =
+    hasSomeTag(['tone/comment', 'tone/letters']);
 
-            return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
+const isFeature =
+    hasTag('tone/features');
 
-        case ContentType.LIVEBLOG:
-            const body = content?.blocks?.body ?? [];
-            return {
-                layout: Layout.Liveblog,
-                blocks: parseBlocks(docParser)(body),
-                ...articleFields(docParser, content),
-            };
+const isLive =
+    hasTag('tone/minutebyminute');
 
-        case ContentType.GALLERY:
-            return { layout: Layout.Gallery, ...articleFieldsWithBody(docParser, content) };
+const isRecipe =
+    hasTag('tone/recipes');
 
-        case ContentType.INTERACTIVE:
-            return { layout: Layout.Interactive, ...articleFieldsWithBody(docParser, content) };
+const isMatchReport =
+    hasTag('tone/matchreports');
 
-        case ContentType.PICTURE:
-            return { layout: Layout.Picture, ...articleFieldsWithBody(docParser, content) };
+const isInterview =
+    hasTag('tone/interview');
 
-        case ContentType.VIDEO:
-            return { layout: Layout.Video, ...articleFieldsWithBody(docParser, content) };
+const isGuardianView =
+    hasTag('tone/editorials');
 
-        case ContentType.AUDIO:
-            return { layout: Layout.Audio, ...articleFieldsWithBody(docParser, content) };
+const isQuiz =
+    hasTag('tone/quizzes');
 
-        default:
-            return { layout: Layout.Standard, ...articleFieldsWithBody(docParser, content) };
+const isAdvertisementFeature =
+    hasTag('tone/advertisement-features');
+
+const fromCapi = (docParser: DocParser) => (content: Content): Item => {
+    const { tags, fields } = content;
+
+    // These checks aim for parity with the CAPI Scala client:
+    // https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
+    if (isMedia(tags)) {
+        return {
+            design: Design.Media,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (fields?.starRating !== undefined && isReview(tags)) {
+        return {
+            design: Design.Review,
+            starRating: fields?.starRating,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isAnalysis(tags)) {
+        return {
+            design: Design.Analysis,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isComment(tags)) {
+        return {
+            design: Design.Comment,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isFeature(tags)) {
+        return {
+            design: Design.Feature,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isLive(tags)) {
+        const body = content?.blocks?.body ?? [];
+
+        return {
+            design: Design.Live,
+            blocks: parseBlocks(docParser)(body),
+            ...itemFields(docParser, content),
+        };
+    } else if (isRecipe(tags)) {
+        return {
+            design: Design.Recipe,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isMatchReport(tags)) {
+        return {
+            design: Design.MatchReport,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isInterview(tags)) {
+        return {
+            design: Design.Interview,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isGuardianView(tags)) {
+        return {
+            design: Design.GuardianView,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isQuiz(tags)) {
+        return {
+            design: Design.Quiz,
+            ...itemFieldsWithBody(docParser, content),
+        };
+    } else if (isAdvertisementFeature(tags)) {
+        return {
+            design: Design.AdvertisementFeature,
+            ...itemFieldsWithBody(docParser, content),
+        };
     }
+
+    return {
+        design: Design.Article,
+        ...itemFieldsWithBody(docParser, content),
+    };
 }
 
 
 // ----- Exports ----- //
 
 export {
-    Article,
+    Design,
+    Display,
+    Item,
+    Comment,
     Liveblog,
     Review,
     Standard,
     LiveBlock,
-    Layout,
     ElementKind,
     BodyElement,
     Image,

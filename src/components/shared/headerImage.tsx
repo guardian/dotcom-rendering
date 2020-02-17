@@ -5,7 +5,7 @@ import HeaderImageCaption, { captionId } from './headerImageCaption';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 import { wideContentWidth, basePx } from 'styles';
 import { Option } from 'types/option';
-import { Image } from 'article';
+import { Image } from 'item';
 import { ImageElement } from 'renderer';
 
 const Styles = (width: number, height: number): SerializedStyles => css`

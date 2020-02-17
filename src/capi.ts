@@ -109,6 +109,7 @@ const capiEndpoint = (articleId: string, key: string): string => {
       'show-fields': 'all',
       'show-tags': 'all',
       'show-blocks': 'all',
+      'show-elements': 'all',
     })
   
     return `https://content.guardianapis.com/${articleId}?${params.toString()}`;

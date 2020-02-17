@@ -17,7 +17,12 @@ module.exports =  {
         "@typescript-eslint/no-unused-vars": "off",
         'max-len': [
             "error",
-            { code: 100, ignoreStrings: true, ignoreTemplateLiterals: true },
+            {
+                code: 100,
+                ignoreStrings: true,
+                ignoreTemplateLiterals: true,
+                ignoreUrls: true,
+            },
         ],
         '@typescript-eslint/explicit-function-return-type': 2,
         'eqeqeq': 2,

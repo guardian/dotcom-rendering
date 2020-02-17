@@ -8,7 +8,7 @@ import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillar';
 import { CommentCount } from 'components/shared/commentCount';
-import { Article } from 'article';
+import { Liveblog } from 'item';
 import { renderText } from 'renderer';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
@@ -67,29 +67,29 @@ const commentCount = ({ liveblogBackground }: PillarStyles): SerializedStyles =>
 `
 
 interface LiveblogBylineProps {
-    article: Article;
+    item: Liveblog;
     imageSalt: string;
 }
 
-const LiveblogByline = ({ article, imageSalt}: LiveblogBylineProps): JSX.Element => {
-    const pillarStyles = getPillarStyles(article.pillar);
+const LiveblogByline = ({ item, imageSalt}: LiveblogBylineProps): JSX.Element => {
+    const pillarStyles = getPillarStyles(item.pillar);
 
-    const byline = article.bylineHtml.fmap<ReactNode>(html =>
-        <address>{ renderText(html, article.pillar) }</address>
+    const byline = item.bylineHtml.fmap<ReactNode>(html =>
+        <address>{ renderText(html, item.pillar) }</address>
     ).withDefault(null);
 
-    const date = article.publishDate.fmap<ReactNode>(date =>
+    const date = item.publishDate.fmap<ReactNode>(date =>
         <time>{ formatDate(new Date(date)) }</time>
     ).withDefault(null)
 
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
-            <Keyline {...article} />
+            <Keyline {...item} />
             <LeftColumn>
                 <section>
                     <div className="byline">
                         <Avatar
-                            contributors={article.contributors}
+                            contributors={item.contributors}
                             bgColour={pillarStyles.featureHeadline}
                             imageSalt={imageSalt}
                         />
@@ -100,7 +100,7 @@ const LiveblogByline = ({ article, imageSalt}: LiveblogBylineProps): JSX.Element
                         </div>
                     </div>
 
-                    {article.commentable
+                    {item.commentable
                         ? <CommentCount
                             count={0}
                             colour={neutral[100]}

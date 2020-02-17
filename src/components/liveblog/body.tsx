@@ -3,7 +3,7 @@ import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 import { css, SerializedStyles } from '@emotion/core'
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
-import { LiveBlock } from 'article';
+import { LiveBlock } from 'item';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';
 

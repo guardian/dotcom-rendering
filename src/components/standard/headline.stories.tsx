@@ -5,15 +5,16 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 
 import Headline from 'components/standard/headline';
 import { Pillar } from 'pillar';
-import { Layout, Article } from 'article';
+import { Design, Item, Display } from 'item';
 import { None } from 'types/option';
 
 
 // ----- Setup ----- //
 
-const article: Article = {
+const item: Item = {
     pillar: Pillar.news,
-    layout: Layout.Standard,
+    design: Design.Article,
+    display: Display.Standard,
     body: [],
     headline: '',
     standfirst: new None(),
@@ -43,37 +44,37 @@ const copy = 'Reclaimed lakes and giant airports: how Mexico City might have loo
 export default { title: 'Headline', decorators: [ withKnobs ] };
 
 export const Standard = (): ReactNode =>
-    <Headline article={{
-        ...article,
+    <Headline item={{
+        ...item,
         headline: text(copyKnob, copy),
     }} />
 
 export const Feature = (): ReactNode =>
-    <Headline article={{
-        ...article,
-        layout: Layout.Feature,
+    <Headline item={{
+        ...item,
+        design: Design.Feature,
         headline: text(copyKnob, copy),
     }} />
 
 export const SportFeature = (): ReactNode =>
-    <Headline article={{
-        ...article,
+    <Headline item={{
+        ...item,
         pillar: Pillar.sport,
-        layout: Layout.Feature,
+        design: Design.Feature,
         headline: text(copyKnob, copy),
     }} />
 
 export const Analysis = (): ReactNode =>
-    <Headline article={{
-        ...article,
-        layout: Layout.Analysis,
+    <Headline item={{
+        ...item,
+        design: Design.Analysis,
         headline: text(copyKnob, copy),
     }} />
 
 export const CultureAnalysis = (): ReactNode =>
-    <Headline article={{
-        ...article,
+    <Headline item={{
+        ...item,
         pillar: Pillar.arts,
-        layout: Layout.Analysis,
+        design: Design.Analysis,
         headline: text(copyKnob, copy),
     }} />
