@@ -165,7 +165,14 @@ const Hydrate = ({
 }) => {
     const element = document.getElementById(root);
     if (!element) return null;
+    window.performance.mark(`${root}-hydrate-start`);
     ReactDOM.hydrate(children, element);
+    window.performance.mark(`${root}-hydrate-end`);
+    window.performance.measure(
+        `${root}-hydrate`,
+        `${root}-hydrate-start`,
+        `${root}-hydrate-end`,
+    );
     return null;
 };
 
@@ -181,5 +188,12 @@ const Portal = ({
     const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
     const element = document.getElementById(rootId);
     if (!element) return null;
+    window.performance.mark(`${rootId}-portal-start`);
     return ReactDOM.createPortal(children, element);
+    window.performance.mark(`${rootId}-portal-end`);
+    window.performance.measure(
+        `${rootId}-portal`,
+        `${rootId}-portal-start`,
+        `${rootId}-portal-end`,
+    );
 };
