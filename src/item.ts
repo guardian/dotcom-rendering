@@ -15,6 +15,7 @@ import {
     AssetType,
     IAsset as Asset,
 } from 'mapiThriftModels';
+import {logger} from "logger";
 
 
 // ----- Item Type ----- //
@@ -268,7 +269,7 @@ const capiDateTimeToDate = (date: CapiDateTime | undefined): Option<Date> => {
 
         return new None();
     } catch(e) {
-        console.error(`Unable to convert date from CAPI: ${e}`);
+        logger.error("Unable to convert date from CAPI", e);
         return new None();
     }
 }

@@ -26,54 +26,38 @@ class LaunchServerPlugin {
 
 // ----- Shared Config ----- //
 
-const resolve = {
-    extensions: ['.ts', '.tsx', '.js'],
-    modules: [
-        path.resolve(__dirname, 'src'),
-        'node_modules',
-    ],
+function resolve(loggerName) {
+    return {
+        extensions: ['.ts', '.tsx', '.js'],
+        modules: [
+            path.resolve(__dirname, 'src'),
+            'node_modules',
+        ],
+        alias: {
+            logger: path.resolve(__dirname, `src/logger/${loggerName}`)
+        },
+    }
 };
-
-const nodeConfig = test => ({
-    target: 'node',
-    resolve,
-    // Does not try to require the 'canvas' package,
-    // an optional dependency of jsdom that we aren't using.
-    plugins: [ new webpack.IgnorePlugin(/^canvas$/) ],
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                '@babel/preset-react',
-                                '@emotion/babel-preset-css-prop',
-                            ],
-                        },
-                    },
-                    {
-                        loader: 'ts-loader',
-                        options: { configFile: test ? 'config/tsconfig.test.json' : 'config/tsconfig.server.json' }
-                    }
-                ],
-            },
-        ]
-    },
-});
-
 
 // ----- Configs ----- //
 
 const serverConfig = env => {
     const isTest = env && env.test;
-    const config = nodeConfig(isTest);
+
+    // Does not try to require the 'canvas' package,
+    // an optional dependency of jsdom that we aren't using.
+    const plugins = [ new webpack.IgnorePlugin(/^canvas$/) ];
+    if (env && env.watch) {
+        plugins.push(new LaunchServerPlugin());
+    }
+
+    const mode = (env && env.production) ? "production" : "development";
+
     return {
         name: 'server',
-        mode: 'development',
+        mode,
         entry: 'server/server.ts',
+        target: 'node',
         node: {
             __dirname: false,
         },
@@ -84,8 +68,30 @@ const serverConfig = env => {
         watchOptions: {
             ignored: /node_modules/,
         },
-        ...config,
-        plugins: (env && env.watch) ? [ ...config.plugins, new LaunchServerPlugin() ] : config.plugins,
+        resolve: resolve("server"),
+        plugins: plugins,
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [
+                                    '@babel/preset-react',
+                                    '@emotion/babel-preset-css-prop',
+                                ],
+                            },
+                        },
+                        {
+                            loader: 'ts-loader',
+                            options: { configFile: isTest ? 'config/tsconfig.test.json' : 'config/tsconfig.server.json' }
+                        }
+                    ],
+                },
+            ]
+        },
     }
 }
 
@@ -101,7 +107,7 @@ const clientConfig = {
         path: path.resolve(__dirname, 'dist/assets'),
         filename: '[name].js',
     },
-    resolve,
+    resolve: resolve("clientDev"),
     devServer: {
         publicPath: '/assets/',
         proxy: {
@@ -155,7 +161,8 @@ const clientConfigProduction = {
         assetFilter: function(assetFilename) {
             return assetFilename.endsWith('.js');
         }
-    }
+    },
+    resolve: resolve("clientProd")
 }
 
 // ----- Exports ----- //
