@@ -101,6 +101,8 @@
     "ts-loader": "^6.2.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
   }
 }
