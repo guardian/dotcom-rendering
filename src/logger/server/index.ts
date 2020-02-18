@@ -3,6 +3,14 @@ import winston from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
 import {App, Stack, Stage} from "../../server/appIdentity";
 
+interface LogEvent {
+    "@timestamp"?: string;
+    level: 'debug' | 'info' | 'warn' | 'error';
+    message: string;
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    stack_trace?: string;
+}
+
 class ServerLogger implements LoggerFunctions {
 
     underlyingLogger: winston.Logger;
@@ -47,7 +55,7 @@ class ServerLogger implements LoggerFunctions {
         this.underlyingLogger = winston.createLogger(winstonConfig);
     }
 
-    private log(logObject: any): void {
+    private log(logObject: LogEvent): void {
         this.underlyingLogger.log({
             "@timestamp": new Date().toISOString(),
             ...logObject
@@ -72,6 +80,7 @@ class ServerLogger implements LoggerFunctions {
         this.log({
             level: 'warn',
             message,
+            // eslint-disable-next-line @typescript-eslint/camelcase
             stack_trace: error?.stack
         })
     }
@@ -80,6 +89,7 @@ class ServerLogger implements LoggerFunctions {
         this.log({
             level: 'error',
             message,
+            // eslint-disable-next-line @typescript-eslint/camelcase
             stack_trace: error?.stack
         })
     }
