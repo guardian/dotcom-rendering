@@ -1,9 +1,9 @@
-import {ILogger} from "../ILogger";
+import {LoggerFunctions} from "../LoggerFunctions";
 import winston from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
 import {App, Stack, Stage} from "../../server/appIdentity";
 
-class ServerLogger implements ILogger {
+class ServerLogger implements LoggerFunctions {
 
     underlyingLogger: winston.Logger;
 
@@ -85,4 +85,4 @@ class ServerLogger implements ILogger {
     }
 }
 
-export const logger: ILogger = new ServerLogger();
+export const logger: LoggerFunctions = new ServerLogger();

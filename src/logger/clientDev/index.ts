@@ -1,6 +1,6 @@
-import {ILogger} from "../ILogger";
+import {LoggerFunctions} from "../LoggerFunctions";
 
-class ClientDevLogger implements ILogger {
+class ClientDevLogger implements LoggerFunctions {
     debug(message: string): void {
         console.debug(message);
     }
@@ -18,4 +18,4 @@ class ClientDevLogger implements ILogger {
     }
 }
 
-export const logger: ILogger = new ClientDevLogger();
+export const logger: LoggerFunctions = new ClientDevLogger();
