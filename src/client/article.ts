@@ -6,6 +6,7 @@ import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
 import { Topic } from 'mobile-apps-thrift-typescript/Topic';
 import { Image } from 'mobile-apps-thrift-typescript/Image';
 import { formatDate } from 'date';
+import {logger} from "../logger";
 
 // ----- Run ----- //
 
@@ -64,7 +65,7 @@ function topicClick(e: Event): void {
     const id = follow?.getAttribute('data-id');
 
     if (!id) {
-        console.error('No id for topic');
+        logger.error('No id for topic');
         return;
     }
 
@@ -91,7 +92,7 @@ function topics(): void {
     const id = follow?.getAttribute('data-id');
 
     if (!id) {
-        console.error('No id for topic');
+        logger.error('No id for topic');
         return;
     }
 
@@ -135,7 +136,7 @@ function formatDates(): void {
                     time.textContent = formatDate(new Date(timestamp))
                 }
             } catch (e) {
-                console.error(e);
+                logger.error(`Unable to parse and format date ${time}`, e);
             }
         })
 }
