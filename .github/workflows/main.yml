@@ -9,7 +9,7 @@ jobs:
               uses: treosh/lighthouse-ci-action@v2
               with:
                   urls: |
-                      'https://www.theguardian.com/uk-news/2020/feb/18/britain-to-evacuate-citizens-from-coronavirus-hit-cruise-ship-diamond-princess?dcr'
-                      'https://www.theguardian.com/sport/blog/2020/feb/18/anya-shrubsole-world-twenty20-t20-england-cricket-the-spin?dcr'
-                      'https://www.theguardian.com/lifeandstyle/2020/feb/18/i-laugh-maniacally-when-i-orgasm-and-my-boyfriend-can-no-longer-reach-climax?dcr'
+                        https://www.theguardian.com/uk-news/2020/feb/18/britain-to-evacuate-citizens-from-coronavirus-hit-cruise-ship-diamond-princess?dcr
+                        https://www.theguardian.com/sport/blog/2020/feb/18/anya-shrubsole-world-twenty20-t20-england-cricket-the-spin?dcr
+                        https://www.theguardian.com/lifeandstyle/2020/feb/18/i-laugh-maniacally-when-i-orgasm-and-my-boyfriend-can-no-longer-reach-climax?dcr
                   budgetPath: './budgets.json'
