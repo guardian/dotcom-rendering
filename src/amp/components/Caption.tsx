@@ -24,14 +24,12 @@ export const Caption: React.FC<{
     captionText?: string;
     pillar: Pillar;
     padCaption?: boolean;
-    dirtyHtml?: boolean;
     credit?: string;
     displayCredit?: boolean;
 }> = ({
     captionText,
     pillar,
     padCaption = false,
-    dirtyHtml = false,
     credit,
     displayCredit = true,
     children,
@@ -55,19 +53,16 @@ export const Caption: React.FC<{
     `;
 
     const getCaptionHtml = () => {
-        if (dirtyHtml) {
-            return (
-                <span
-                    // tslint:disable-line:react-no-dangerous-html
-                    className={captionLink}
-                    dangerouslySetInnerHTML={{
-                        __html: captionText || '',
-                    }}
-                    key="caption"
-                />
-            );
-        }
-        return captionText;
+        return (
+            <span
+                // tslint:disable-line:react-no-dangerous-html
+                className={captionLink}
+                dangerouslySetInnerHTML={{
+                    __html: captionText || '',
+                }}
+                key="caption"
+            />
+        );
     };
 
     return (
