@@ -12,10 +12,6 @@
             "budget": 400
         },
         {
-            "resourceType": "document",
-            "budget": 80
-        },
-        {
             "resourceType": "total",
             "budget": 1500
         },
