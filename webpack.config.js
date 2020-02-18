@@ -55,7 +55,7 @@ const serverConfig = env => {
 
     return {
         name: 'server',
-        mode: mode,
+        mode,
         entry: 'server/server.ts',
         target: 'node',
         node: {
