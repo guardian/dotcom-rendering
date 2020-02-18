@@ -161,10 +161,10 @@ const Hydrate = ({
     children,
 }: {
     root: RootType;
-    children?: JSX.Element;
+    children: JSX.Element;
 }) => {
     const element = document.getElementById(root);
-    if (!element || !children) return null;
+    if (!element) return null;
     ReactDOM.hydrate(children, element);
     return null;
 };
@@ -175,11 +175,11 @@ const Portal = ({
     richLinkIndex,
 }: {
     root: RootType;
-    children?: JSX.Element;
+    children: JSX.Element;
     richLinkIndex?: number;
 }) => {
     const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
     const element = document.getElementById(rootId);
-    if (!element || !children) return null;
+    if (!element) return null;
     return ReactDOM.createPortal(children, element);
 };
