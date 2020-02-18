@@ -16,7 +16,7 @@
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "watch:client": "webpack-dev-server --config webpack.config.js --config-name client",
     "watch": "npm run watch:server & npm run watch:client",
-    "build:server": "webpack --config webpack.config.js --config-name server",
+    "build:server": "webpack --config webpack.config.js --config-name server --env.production",
     "build:client": "webpack --config webpack.config.js --config-name client",
     "build:client:prod": "webpack --config webpack.config.js --config-name clientProduction",
     "storybook": "start-storybook -s ./",
