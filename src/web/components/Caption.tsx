@@ -34,7 +34,6 @@ export const Caption: React.FC<{
     captionText?: string;
     pillar: Pillar;
     padCaption?: boolean;
-    dirtyHtml?: boolean;
     credit?: string;
     displayCredit?: boolean;
     role?: RoleType;
@@ -43,7 +42,6 @@ export const Caption: React.FC<{
     captionText,
     pillar,
     padCaption = false,
-    dirtyHtml = false,
     credit,
     displayCredit = true,
     children,
@@ -69,19 +67,16 @@ export const Caption: React.FC<{
     `;
 
     const getCaptionHtml = () => {
-        if (dirtyHtml) {
-            return (
-                <span
-                    className={captionLink}
-                    // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{
-                        __html: captionText || '',
-                    }}
-                    key="caption"
-                />
-            );
-        }
-        return captionText;
+        return (
+            <span
+                className={captionLink}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                    __html: captionText || '',
+                }}
+                key="caption"
+            />
+        );
     };
 
     const shouldLimitWidth =

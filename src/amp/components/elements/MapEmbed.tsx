@@ -26,7 +26,6 @@ export const MapEmbed: React.SFC<{
             captionText={element.caption}
             pillar={pillar}
             padCaption={true}
-            dirtyHtml={true}
         >
             <amp-iframe {...attributes} />
         </Caption>

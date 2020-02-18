@@ -235,8 +235,12 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // defaults to false, but use ?slot-machine-flags=showBodyEnd to show
-    const showBodyEndSlot = parse(CAPI.slotMachineFlags || '').showBodyEnd;
+    // Render the slot if one is true:
+    // 1) The flag for this slot exists in the URL (i.e. ?slot-machine-flags=showBodyEnd)
+    // 2) The global switch for this slot is set to true;
+    const showBodyEndSlot =
+        parse(CAPI.slotMachineFlags || '').showBodyEnd ||
+        CAPI.config.switches.slotBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
