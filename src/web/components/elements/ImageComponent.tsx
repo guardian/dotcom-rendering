@@ -131,7 +131,6 @@ export const ImageComponent: React.FC<{
         <Caption
             captionText={element.data.caption || ''}
             pillar={pillar}
-            dirtyHtml={true}
             credit={element.data.credit}
             displayCredit={true}
             role={role}

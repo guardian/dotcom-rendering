@@ -23,6 +23,11 @@ const outbrainContainer = (webURL: string, isCompliant: boolean) => {
     const isEmbedResponsiveTest = webURL.includes(
         `world/2007/jan/01/italy.mainsection`,
     );
+
+    const isEmbedResponsiveTest2 = webURL.includes(
+        `society/2007/feb/02/voluntarysector.comment`,
+    );
+
     const isEmbedFixedLayoutTest = webURL.includes(
         `uk/2007/jan/01/arts.thefarright`,
     );
@@ -32,6 +37,20 @@ const outbrainContainer = (webURL: string, isCompliant: boolean) => {
             <amp-embed
                 width="100"
                 height="100"
+                type="outbrain"
+                layout="responsive"
+                data-widgetIds={widgetID}
+                data-htmlURL={webURL}
+                data-ampURL={`${webURL}?amp`}
+            />
+        );
+    }
+
+    if (isEmbedResponsiveTest2) {
+        return (
+            <amp-embed
+                width="100"
+                height="200"
                 type="outbrain"
                 layout="responsive"
                 data-widgetIds={widgetID}
