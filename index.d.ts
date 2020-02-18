@@ -115,11 +115,13 @@ interface NavType {
     otherLinks: MoreType;
     brandExtensions: LinkType[];
     currentNavLink: string;
-    subNavSections?: {
-        parent?: LinkType;
-        links: LinkType[];
-    };
+    subNavSections?: SubNavType;
     readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface SubNavType {
+    parent?: LinkType;
+    links: LinkType[];
 }
 
 interface AuthorType {

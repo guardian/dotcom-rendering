@@ -387,9 +387,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <ArticleContainer>
                             <main className={maxWidth}>
                                 <ArticleBody CAPI={CAPI} />
-                                {showBodyEndSlot && (
-                                    <div data-island="slot-body-end" />
-                                )}
+                                {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta
                                     pillar={CAPI.pillar}
@@ -476,7 +474,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cmp" />
+            <div id="cmp" />
             <MobileStickyContainer />
         </>
     );
