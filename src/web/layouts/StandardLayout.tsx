@@ -83,7 +83,7 @@ const StandardGrid = ({
 
                 ${until.wide} {
                     grid-template-columns:
-                        150px /* Left Column (220 - 1px border) */
+                        140px /* Left Column */
                         1px /* Vertical grey border */
                         1fr /* Main content */
                         300px; /* Right Column */
@@ -204,8 +204,12 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // defaults to false, but use ?slot-machine-flags=showBodyEnd to show
-    const showBodyEndSlot = parse(CAPI.slotMachineFlags || '').showBodyEnd;
+    // Render the slot if one is true:
+    // 1) The flag for this slot exists in the URL (i.e. ?slot-machine-flags=showBodyEnd)
+    // 2) The global switch for this slot is set to true;
+    const showBodyEndSlot =
+        parse(CAPI.slotMachineFlags || '').showBodyEnd ||
+        CAPI.config.switches.slotBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -413,6 +417,15 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <Section islandId="most-viewed-footer" />
                 </>
             )}
+
+            <Section
+                padded={false}
+                showTopBorder={false}
+                showSideBorders={false}
+                backgroundColour={palette.neutral[93]}
+            >
+                <AdSlot asps={namedAdSlotParameters('merchandising')} />
+            </Section>
 
             {NAV.subNavSections && (
                 <Section padded={false} islandId="sub-nav-root">

@@ -504,7 +504,12 @@ interface MostViewedFooterPayloadType {
 // ----------
 // AdSlots //
 // ----------
-type AdSlotType = 'right' | 'top-above-nav' | 'mostpop' | 'merchandising-high';
+type AdSlotType =
+    | 'right'
+    | 'top-above-nav'
+    | 'mostpop'
+    | 'merchandising-high'
+    | 'merchandising';
 
 interface AdSlotParameters {
     name: AdSlotType;
@@ -567,6 +572,7 @@ declare namespace JSX {
         'amp-consent': any;
         'amp-live-list': any;
         'amp-audio': any;
+        'amp-embed': any;
     }
     /* eslint-enable @typescript-eslint/no-explicit-any */
 }
