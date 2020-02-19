@@ -1,0 +1,65 @@
+// ----- Imports ----- //
+
+import React, { ReactElement } from 'react';
+import { withKnobs, radios } from '@storybook/addon-knobs';
+
+import StarRating from './starRating';
+import { Item, Design, Display } from 'item';
+import { Pillar } from 'pillar';
+import { None } from 'types/option';
+
+
+// ----- Setup ----- //
+
+const item: Item = {
+    pillar: Pillar.news,
+    design: Design.Article,
+    display: Display.Standard,
+    body: [],
+    headline: 'Reclaimed lakes and giant airports: how Mexico City might have looked',
+    standfirst: new None(),
+    byline: '',
+    bylineHtml: new None(),
+    publishDate: new None(),
+    mainImage: new None(),
+    contributors: [],
+    series: {
+        id: '',
+        type: 0,
+        webTitle: '',
+        webUrl: '',
+        apiUrl: '',
+        references: [],
+    },
+    commentable: false,
+    tags: [],
+};
+
+const starRating: Record<number, number> = [1, 2, 3, 4, 5];
+
+
+// ----- Stories ----- //
+
+const Default = (): ReactElement =>
+    <StarRating item={{
+        ...item,
+        design: Design.Review,
+        starRating: radios('Rating', starRating, 3),
+    }} />
+
+const NotReview = (): ReactElement =>
+    <StarRating item={item} />
+
+
+// ----- Exports ----- //
+
+export default {
+    component: StarRating,
+    title: 'Star Rating',
+    decorators: [ withKnobs ],
+}
+
+export {
+    Default,
+    NotReview,
+}
