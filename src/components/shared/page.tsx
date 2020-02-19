@@ -15,7 +15,7 @@ import { None, Some } from 'types/option';
 import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
-import { insertAdPlaceholdersWhenEnabled } from 'ads';
+import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Design, Display } from 'item';
 
 
@@ -95,7 +95,7 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
 
 function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
 
-    const insertAdPlaceholders = insertAdPlaceholdersWhenEnabled(capi.fields?.shouldHideAdverts ?? false);
+    const insertAdPlaceholders = getAdPlaceholderInserter(capi.fields?.shouldHideAdverts ?? false);
 
     const item = fromCapi(JSDOM.fragment)(capi);
     

@@ -34,10 +34,10 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
         .pop();
 }
 
-const insertAdPlaceholdersWhenEnabled =
+const getAdPlaceholderInserter =
     (shouldHideAdverts: boolean): (reactNodes: ReactNode[]) => ReactNode[] =>
         shouldHideAdverts
             ? (reactNodes: ReactNode[]): ReactNode[] => reactNodes
             : insertPlaceholders
 
-export { insertAdPlaceholdersWhenEnabled }
+export { getAdPlaceholderInserter }
