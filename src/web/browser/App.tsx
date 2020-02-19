@@ -157,7 +157,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 <ReaderRevenueLinks
                     urls={CAPI.nav.readerRevenueLinks.header}
                     edition={CAPI.editionId}
-                    dataLinkNamePrefix={'nav2 ={ '}
+                    dataLinkNamePrefix="nav2 : "
                     noResponsive={false}
                     inHeader={true}
                 />
