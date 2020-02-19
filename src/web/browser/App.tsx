@@ -56,16 +56,16 @@ const App = ({ CAPI, NAV }: Props) => {
     });
 
     return (
-    // Do you need to Hydrate or do you want a Portal?
-    //
-    // Hydrate: If your component is server rendered and you're hydrating it with
-    // more data or making it interactive on the client and you do not need to access
-    // global application state.
-    //
-    // Portal: If your component is not server rendered but a pure client-side component
-    // and/or you want to access global application state, you want to use a Portal. 
-    //
-    // Note: Both require a 'root' element that needs to be server rendered.
+        // Do you need to Hydrate or do you want a Portal?
+        //
+        // Hydrate: If your component is server rendered and you're hydrating it with
+        // more data or making it interactive on the client and you do not need to access
+        // global application state.
+        //
+        // Portal: If your component is not server rendered but a pure client-side component
+        // and/or you want to access global application state, you want to use a Portal.
+        //
+        // Note: Both require a 'root' element that needs to be server rendered.
         <>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
