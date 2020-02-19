@@ -15,8 +15,6 @@ const result = document({
     },
 });
 
-console.log(result);
-
 test('that all the required meta SEO fields exist', () => {
     const names = ['description', 'viewport'];
 
