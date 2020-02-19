@@ -12,6 +12,11 @@ import {logger} from "../logger";
 
 function getAdSlots(): AdSlot[] {
     const advertSlots = document.getElementsByClassName('ad-slot');
+
+    if (!advertSlots) {
+        return [];
+    }
+
     const scrollLeft = document.scrollingElement 
         ? document.scrollingElement.scrollLeft : document.body.scrollLeft;
     const scrollTop = document.scrollingElement 
@@ -30,21 +35,22 @@ function getAdSlots(): AdSlot[] {
 
 function insertAds(): void {
     let adSlots = getAdSlots();
-        
-    nativeClient.insertAdverts(adSlots)
-    const targetNode = document.querySelector('body') as Node;
-    const config = { attributes: true, childList: true, subtree: true };
-    const callback = function(): void {
-        const currentAdSlots = getAdSlots();
-        if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
-            // TODO: add this to mobile-apps-thrift and implement client side
-            // nativeClient.updateAdverts(currentAdSlots);
-            adSlots = currentAdSlots;
-        }
-    };
+    if (adSlots) {
+        nativeClient.insertAdverts(adSlots)
+        const targetNode = document.querySelector('body') as Node;
+        const config = { attributes: true, childList: true, subtree: true };
+        const callback = function(): void {
+            const currentAdSlots = getAdSlots();
+            if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+                // TODO: add this to mobile-apps-thrift and implement client side
+                // nativeClient.updateAdverts(currentAdSlots);
+                adSlots = currentAdSlots;
+            }
+        };
 
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+        const observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+    }
 }
 
 function ads(): void {

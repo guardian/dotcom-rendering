@@ -1,10 +1,12 @@
-import { insertAdPlaceholders } from './ads';
+import { insertAdPlaceholdersWhenEnabled } from './ads';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'item';
+
+const insertAdPlaceholders = insertAdPlaceholdersWhenEnabled(true);
 
 const textElement = (nodes: string[]): BodyElement =>
     ({
