@@ -32,6 +32,8 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
+import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
+
 const StandardGrid = ({
     children,
 }: {
@@ -225,7 +227,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 padded={false}
                 backgroundColour={palette.brand.main}
             >
-                <Nav pillar={CAPI.pillar} nav={NAV} />
+                <Nav pillar={getCurrentPillar(CAPI)} nav={NAV} />
             </Section>
 
             {NAV.subNavSections && (
