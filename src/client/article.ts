@@ -35,7 +35,7 @@ function getAdSlots(): AdSlot[] {
 
 function insertAds(): void {
     let adSlots = getAdSlots();
-    if (adSlots) {
+    if (adSlots.length > 0) {
         nativeClient.insertAdverts(adSlots)
         const targetNode = document.querySelector('body') as Node;
         const config = { attributes: true, childList: true, subtree: true };
