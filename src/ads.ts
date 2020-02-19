@@ -35,7 +35,7 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 }
 
 const insertAdPlaceholdersWhenEnabled =
-    (shouldHideAdverts: boolean | undefined): (reactNodes: ReactNode[]) => ReactNode[] =>
+    (shouldHideAdverts: boolean): (reactNodes: ReactNode[]) => ReactNode[] =>
         shouldHideAdverts
             ? (reactNodes: ReactNode[]): ReactNode[] => reactNodes
             : insertPlaceholders
