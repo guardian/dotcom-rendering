@@ -21,7 +21,7 @@ test('that all the required meta SEO fields exist', () => {
     const names = ['description', 'viewport'];
 
     names.map(name =>
-        expect(result.includes(`<meta name="${name}"`)).toBe(true),
+        expect(result).toEqual(expect.stringContaining(`<meta name="${name}"`)),
     );
 });
 
@@ -29,7 +29,9 @@ test('that all the required links exist', () => {
     const names = ['amphtml'];
 
     names.map(name =>
-        expect(result.includes(`<link rel="${name}" href="`)).toBe(true),
+        expect(result).toEqual(
+            expect.stringContaining(`<link rel="${name}" href="`),
+        ),
     );
 });
 
