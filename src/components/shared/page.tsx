@@ -95,7 +95,7 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
 
 function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
 
-    const insertAdPlaceholders = insertAdPlaceholdersWhenEnabled(capi.fields?.shouldHideAdverts);
+    const insertAdPlaceholders = insertAdPlaceholdersWhenEnabled(capi.fields?.shouldHideAdverts ?? false);
 
     const item = fromCapi(JSDOM.fragment)(capi);
     
