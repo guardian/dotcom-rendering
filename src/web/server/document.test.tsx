@@ -15,6 +15,8 @@ const result = document({
     },
 });
 
+console.log(result);
+
 test('that all the required meta SEO fields exist', () => {
     const names = ['description', 'viewport'];
 
@@ -28,5 +30,17 @@ test('that all the required links exist', () => {
 
     names.map(name =>
         expect(result.includes(`<link rel="${name}" href="`)).toBe(true),
+    );
+});
+
+test('Subnav data-link-name exists with correct value', () => {
+    expect(result).toEqual(
+        expect.stringContaining(`data-link-name="nav2 : subnav : money/debt"`),
+    );
+
+    expect(result).toEqual(
+        expect.not.stringContaining(
+            `data-link-name="nav2 : subnav : /money/debt"`,
+        ),
     );
 });

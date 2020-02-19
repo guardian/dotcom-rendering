@@ -154,7 +154,7 @@ export const Inner: React.FC<{
                     [selected]: link.title === currentNavLink,
                 })}
                 href={link.url}
-                data-link-name={`nav2 : subnav : ${link.title}`}
+                data-link-name={`nav2 : subnav : ${link.url.slice(1)}`} // Remove starting slash
             >
                 {link.title}
             </a>
