@@ -55,7 +55,7 @@ const Default = (): ReactElement =>
         pillar: select('Pillar', pillarOptions, Pillar.news),
     }} />
 
-const AnalysisNew = (): ReactElement =>
+const Analysis = (): ReactElement =>
     <Headline item={{
         ...item,
         design: Design.Analysis,
@@ -63,7 +63,7 @@ const AnalysisNew = (): ReactElement =>
         pillar: select('Pillar', pillarOptions, Pillar.news),
     }} />
 
-const FeatureNew = (): ReactElement =>
+const Feature = (): ReactElement =>
     <Headline item={{
         ...item,
         design: Design.Feature,
@@ -71,7 +71,7 @@ const FeatureNew = (): ReactElement =>
         pillar: select('Pillar', pillarOptions, Pillar.news),
     }} />
 
-const ReviewNew = (): ReactElement =>
+const Review = (): ReactElement =>
     <Headline item={{
         ...item,
         design: Design.Review,
@@ -90,7 +90,7 @@ export default {
 
 export {
     Default,
-    AnalysisNew,
-    FeatureNew,
-    ReviewNew,
+    Analysis,
+    Feature,
+    Review,
 }
