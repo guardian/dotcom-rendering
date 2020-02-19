@@ -55,7 +55,7 @@ export const StarRating: React.FC<{
             .fill(0)
             .map((_, i) => (
                 <div className={starWrapper}>
-                    <Star className={i > n ? emptyStar : ''} key={i} />
+                    <Star className={i + 1 > n ? emptyStar : ''} key={i} />
                 </div>
             ));
     };
