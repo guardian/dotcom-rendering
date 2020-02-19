@@ -7,6 +7,7 @@ import { wideContentWidth, basePx } from 'styles';
 import { Option } from 'types/option';
 import { Image } from 'item';
 import { ImageElement } from 'renderer';
+import { Pillar } from 'pillar';
 
 const Styles = (width: number, height: number): SerializedStyles => css`
     figure {
@@ -35,9 +36,11 @@ interface HeaderImageProps {
     image: Option<Image>;
     imageSalt: string;
     className?: SerializedStyles | null;
+    pillar: Pillar;
 }
 
-const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Element | null => {
+const HeaderImage = (props: HeaderImageProps): JSX.Element | null => {
+    const { className, image, imageSalt, pillar } = props;
     const headerImage: Option<JSX.Element | null> = image.fmap(imageData =>
         <div css={[className, Styles(imageData.width, imageData.height)]}>
             <figure aria-labelledby={captionId}>
@@ -49,9 +52,11 @@ const HeaderImage = ({ className, image, imageSalt }: HeaderImageProps): JSX.Ele
                     sizes={`(min-width: ${breakpoints.wide}px) 620px, 100vw`}
                     salt={imageSalt}
                     caption={imageData.caption}
+                    captionString={imageData.captionString}
                     credit={imageData.credit}
+                    pillar={pillar}
                 />
-                <HeaderImageCaption caption={imageData.caption} credit={imageData.credit}/>
+                <HeaderImageCaption caption={imageData.captionString} credit={imageData.credit}/>
             </figure>
         </div>
     );

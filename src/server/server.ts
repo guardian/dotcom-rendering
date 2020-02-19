@@ -17,6 +17,8 @@ import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
 import { ErrorResponse } from 'mapiThriftModels';
+import { logger } from 'logger';
+import {App, Stack, Stage} from "./appIdentity";
 
 // ----- Setup ----- //
 
@@ -70,11 +72,11 @@ async function serveArticlePost(
       res.write(html);
       res.end();
     } else {
-      console.warn(`I can\'t render that type of content yet! ${support.reason}`);
+      logger.warn(`I can\'t render that type of content yet! ${support.reason}`);
       res.sendStatus(415);
     }
   } catch (e) {
-    console.error(`This error occurred, but I don't know why: ${e}`);
+    logger.error(`This error occurred, but I don't know why: ${e}`);
     next(e);
   }
 }
@@ -96,10 +98,10 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
         getContent(capiResponse.status, articleId, response.content).either(
           error => {
             if (error.status === CapiError.NotFound) {
-              console.warn(error.message);
+              logger.warn(error.message);
               res.sendStatus(404);
             } else {
-              console.error(error.message);
+              logger.error(error.message);
               res.sendStatus(500);
             }
           },
@@ -113,7 +115,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
               res.write(renderToString(element));
               res.end();
             } else {
-              console.warn(`I can\'t render that type of content yet! ${support.reason}`);
+              logger.warn(`I can\'t render that type of content yet! ${support.reason}`);
               res.sendStatus(415);
             }
           }
@@ -121,17 +123,20 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
       }
     } else {
       const response: ErrorResponse = ErrorResponse.read(protocol);
-      console.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message}`);
+      logger.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message}`);
       res.sendStatus(500);
     }
   } catch (e) {
-    console.error(`This error occurred, but I don't know why: ${e}`);
+    logger.error(`This error occurred, but I don't know why: ${e}`);
     res.sendStatus(500);
   }
 }
 
 // ----- App ----- //
-
+logger.info(`Starting ${App} in ${Stage} for the stack ${Stack}`);
+if (process.env.NODE_ENV === "production") {
+  logger.info("Node is running in production mode")
+}
 const app = express();
 app.use(bodyParser.raw({limit: '50mb'}));
 
@@ -139,7 +144,7 @@ app.all('*', (request, response, next) => {
   const start = Date.now();
   response.once('finish', () => {
     const duration = Date.now() - start;
-    console.log(`HTTP ${request.method} ${request.path} returned ${response.statusCode} in ${duration}ms`)
+    logger.info(`HTTP ${request.method} ${request.path} returned ${response.statusCode} in ${duration}ms`)
   });
 
   next();
@@ -158,4 +163,9 @@ app.get('/*', bodyParser.raw(), serveArticle);
 app.post('/article', bodyParser.raw(), serveArticlePost);
 
 const port = 3040;
-app.listen(port, () => console.log(`Server listening on port ${port}!\nIf you're in dev mode, webpack dev server is listening on port 8080`));
+app.listen(port, () => {
+  logger.info(`Server listening on port ${port}!`);
+  if (process.env.NODE_ENV !== "production") {
+    logger.info(`Webpack dev server is listening on port 8080`);
+  }
+});

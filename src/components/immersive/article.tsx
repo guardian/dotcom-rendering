@@ -90,6 +90,7 @@ const Immersive = ({ imageSalt, item, children }: Props): JSX.Element =>
                         image={item.mainImage}
                         imageSalt={imageSalt}
                         className={HeaderImageStyles}
+                        pillar={item.pillar}
                     />
                     <Series series={item.series} pillar={item.pillar}/>
                     <Headline headline={item.headline}/>

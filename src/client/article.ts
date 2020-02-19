@@ -11,6 +11,7 @@ import { WebviewHandler } from 'native/webviewApi';
 import { Message } from 'native/thrift/message';
 import { formatDate } from 'date';
 import { epicHtml, injectEpicCreative, addEventListenerScroll } from 'native/epic';
+import {logger} from "../logger";
 
 // ----- Run ----- //
 
@@ -69,7 +70,7 @@ function topicClick(e: Event): void {
     const id = follow?.getAttribute('data-id');
 
     if (!id) {
-        console.error('No id for topic');
+        logger.error('No id for topic');
         return;
     }
 
@@ -96,7 +97,7 @@ function topics(): void {
     const id = follow?.getAttribute('data-id');
 
     if (!id) {
-        console.error('No id for topic');
+        logger.error('No id for topic');
         return;
     }
 
@@ -143,7 +144,7 @@ function formatDates(): void {
                     time.textContent = formatDate(new Date(timestamp))
                 }
             } catch (e) {
-                console.error(e);
+                logger.error(`Unable to parse and format date ${time}`, e);
             }
         })
 }

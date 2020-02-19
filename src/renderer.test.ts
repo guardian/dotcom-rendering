@@ -1,4 +1,6 @@
 import { ImageElement } from './renderer';
+import { JSDOM } from 'jsdom';
+import { Pillar } from 'pillar';
 
 describe('renderer returns expected content', () => {
     test('ImageElement returns null for no url', () => {
@@ -9,8 +11,11 @@ describe('renderer returns expected content', () => {
             sizes: "sizes",
             width: 500,
             height: 500,
-            caption: "caption",
-            credit: "credit"
+            captionString: "caption",
+            caption: JSDOM.fragment('this caption contains <em>html</em>'),
+            credit: "credit",
+            pillar: Pillar.news
+
         }
         expect(ImageElement(imageProps)).toBe(null);
     });

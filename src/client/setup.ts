@@ -1,5 +1,7 @@
 // ----- Procedures ----- //
 
+import {logger} from "../logger";
+
 function handleMessage(interactive: HTMLIFrameElement, message: string): void {
 
     try {
@@ -9,7 +11,7 @@ function handleMessage(interactive: HTMLIFrameElement, message: string): void {
             interactive.height = value;
         }
     } catch (e) {
-        console.error(e);
+        logger.error(e);
     }
 
 }
