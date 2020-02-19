@@ -12,28 +12,14 @@ function isElementPartiallyInViewport(el: Element) {
     return (vertInView && horInView);
 }
 
-function debounce(func: () => void, wait: number) {
-    let args: any;
-    let context: any;
-    let timeout: any;
-    let later;
+const debounce = (fn: () => void, time: number) => {
+    let timeout: NodeJS.Timeout;
 
-    return function() {
-        context = this;
-        args = arguments;
-
-        later = () => {
-            timeout = null;
-            func.apply(context, args);
-        }
-
+    return function(...args: []) {
+        const functionCall = () => fn.apply(null, args);
         clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-
-        if (!timeout) {
-            func.apply(context, args);
-        }
-    };
+        timeout = setTimeout(functionCall, time);
+    }
 }
 
 function isCreativeInView(creativeContainer: any) {
@@ -55,25 +41,25 @@ function injectEpicCreative(creativeContainer: Node) {
 function epicHtml(title: string, body: string, premiumButton: string, contribute: string | undefined) {
     const contributeButton = contribute ? `
         <div>
-            <a class="epic-button" href="#" onClick=${() => nativeClient.launchFrictionScreen()}>
+            <button class="epic-button" href="#" onClick="${() => nativeClient.launchFrictionScreen()}">
                 ${contribute}
                 <svg class="epic-button-arrow" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="5 5 20 20">
                     <path fill="#121212" d="M22.8 14.6L15.2 7l-.7.7 5.5 6.6H6v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9"/>
                 </svg>
-            </a>
-        </div>` : null;
+            </button>
+        </div>` : ``;
 
     return `
         <h1>${title}</h1>
         <div>${body}</div>
         <div class="button-container">
             <div>
-                <a class="epic-button" href="#" onClick=${() => nativeClient.launchFrictionScreen()}>
+                <button class="epic-button" href="#" onClick="${() => nativeClient.launchFrictionScreen()}">
                     ${premiumButton}
                     <svg class="epic-button-arrow" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="5 5 20 20">
                         <path fill="#121212" d="M22.8 14.6L15.2 7l-.7.7 5.5 6.6H6v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9"/>
                     </svg>
-                </a>
+                </button>
             </div>
             ${contributeButton}
         </div>
