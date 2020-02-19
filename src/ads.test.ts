@@ -6,7 +6,7 @@ import { Pillar } from 'pillar';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'item';
 
-const insertAdPlaceholders = insertAdPlaceholdersWhenEnabled(true);
+const insertAdPlaceholders = insertAdPlaceholdersWhenEnabled(false);
 
 const textElement = (nodes: string[]): BodyElement =>
     ({
