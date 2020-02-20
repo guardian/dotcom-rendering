@@ -52,3 +52,22 @@ test('Meta ophan data-attributes exist', () => {
 
     expect(result).toEqual(expect.stringContaining(`data-link-name="byline"`));
 });
+
+test('Section ophan data-attributes do not exist', () => {
+    expect(result).toEqual(expect.stringContaining(`data-component="Section"`));
+
+    expect(result).toEqual(
+        expect.stringContaining(`data-link-name="article section"`),
+    );
+});
+test('Series ophan data-attributes do not exist', () => {
+    // Fixture isn't a series
+    // TODO update fixture to allow testing series
+    expect(result).toEqual(
+        expect.not.stringContaining(`data-component="Series"`),
+    );
+
+    expect(result).toEqual(
+        expect.not.stringContaining(`data-link-name="series article"`),
+    );
+});
