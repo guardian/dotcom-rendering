@@ -14,7 +14,7 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { Header } from '@frontend/web/components/Header';
 
-import { addCookie, getCookie } from '@root/src/web/browser/cookie';
+import { getCookie } from '@root/src/web/browser/cookie';
 
 type Props = { CAPI: CAPIType; NAV: NavType };
 
