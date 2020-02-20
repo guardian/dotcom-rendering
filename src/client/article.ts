@@ -144,7 +144,7 @@ function formatDates(): void {
         })
 }
 
-function insertEpic() {
+function insertEpic(): void {
     if (navigator.onLine && !document.getElementById('creative-container')) {
         nativeClient.getEpics().then((maybeEpic: MaybeEpic) => {
             if (maybeEpic.epic) {

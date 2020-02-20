@@ -79,10 +79,10 @@ const isElementPartiallyInViewport = (el: React.MutableRefObject<HTMLDivElement>
     return (vertInView && horInView);
 }
 
-const debounce = (fn: () => void, time: number) => {
+const debounce = (fn: () => void, time: number): () => void => {
     let timeout: NodeJS.Timeout;
-    return function(...args: []) {
-        const functionCall = () => fn.apply(null, args);
+    return function(...args: []): void {
+        const functionCall = (): void => fn(...args);
         clearTimeout(timeout);
         timeout = setTimeout(functionCall, time);
     }
@@ -100,12 +100,12 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): JSX.Elemen
             }
         }, 100);
         window.addEventListener('scroll', handleSeenEpic);
-        return () => {
+        return (): void => {
             window.removeEventListener('scroll', handleSeenEpic);
         }
     }, [impressionSeen]);
 
-    const epicButton = (text: string, action: () => void) =>
+    const epicButton = (text: string, action: () => void): JSX.Element =>
         <button onClick={action}>
             {text}
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="5 5 20 20">
@@ -119,7 +119,11 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): JSX.Elemen
             <div>{body}</div>
             <div className="button-container">
                 {epicButton(firstButton, () => nativeClient.launchFrictionScreen())}
-                {secondButton ? epicButton(secondButton, () => nativeClient.launchFrictionScreen()) : null}
+                {
+                    secondButton
+                        ? epicButton(secondButton, () => nativeClient.launchFrictionScreen())
+                        : null
+                }
             </div>
         </div>
     )
