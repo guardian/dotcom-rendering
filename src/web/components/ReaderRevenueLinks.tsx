@@ -9,7 +9,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { AsyncClientComponent } from '@root/src/web/lib/AsyncClientComponent';
 
-const padded = css`
+const paddingStyles = css`
     ${until.mobileLandscape} {
         padding-left: 10px;
     }
@@ -21,7 +21,7 @@ const padded = css`
     }
 `;
 
-const message = css`
+const messageStyles = css`
     color: ${palette.brandYellow.main};
     ${headline.xxsmall({ fontWeight: 'bold' })};
     padding-top: 3px;
@@ -36,7 +36,7 @@ const message = css`
     }
 `;
 
-const link = css`
+const linkStyles = css`
     background: ${palette.brandYellow.main};
     border-radius: 16px;
     box-sizing: border-box;
@@ -92,7 +92,7 @@ const hiddenFromTablet = css`
     }
 `;
 
-const subMessage = css`
+const subMessageStyles = css`
     color: ${palette.neutral[100]};
     ${textSans.medium()};
     margin-bottom: 5px;
@@ -106,7 +106,7 @@ export const RRButton: React.FC<{
 }> = ({ url, dataLinkNamePrefix, dataLinkNameSuffix, linkText }) => {
     return (
         <a
-            className={link}
+            className={linkStyles}
             href={url}
             data-link-name={`${dataLinkNamePrefix}${dataLinkNameSuffix}`}
         >
@@ -152,22 +152,22 @@ export const ReaderRevenueLinks: React.FC<{
             {({ data }) => (
                 <>
                     {data && (
-                        <div className={cx(inHeader && padded)}>
+                        <div className={cx(inHeader && paddingStyles)}>
                             <div
                                 className={cx({
                                     [hiddenUntilTablet]: !noResponsive,
                                 })}
                             >
-                                <div className={message}>
+                                <div className={messageStyles}>
                                     Support The&nbsp;Guardian
                                 </div>
                                 {edition === 'US' ? (
-                                    <div className={subMessage}>
+                                    <div className={subMessageStyles}>
                                         Support our journalism with a year-end
                                         gift
                                     </div>
                                 ) : (
-                                    <div className={subMessage}>
+                                    <div className={subMessageStyles}>
                                         Available for everyone, funded by
                                         readers
                                     </div>
