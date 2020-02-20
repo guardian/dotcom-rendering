@@ -116,14 +116,14 @@ const RRButton: React.FC<{
 };
 
 const isRecentContributor: () => boolean = () => {
-    const value = getCookie('gu.contributions.contrib-timestamp');
+    const cookieValue = getCookie('gu.contributions.contrib-timestamp');
 
-    if (!value) {
+    if (!cookieValue) {
         return false;
     }
 
     const now = new Date().getTime();
-    const lastContribution = new Date(value).getTime();
+    const lastContribution = new Date(cookieValue).getTime();
     const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
 
     return diffDays <= 180;
