@@ -144,12 +144,14 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
                                     <SecondTierItem
                                         trail={data.mostCommented}
                                         title="Most commented"
+                                        data-link-name="comment | group-0 | card-@1" // To match Frontend
                                         showRightBorder={true}
                                     />
                                 )}
                                 {'mostShared' in data && (
                                     <SecondTierItem
                                         trail={data.mostShared}
+                                        data-link-name="news | group-0 | card-@1" // To match Frontend
                                         title="Most shared"
                                     />
                                 )}

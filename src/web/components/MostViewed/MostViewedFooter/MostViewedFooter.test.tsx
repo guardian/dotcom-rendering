@@ -159,4 +159,34 @@ describe('MostViewedFooter', () => {
 
         expect(queryByText('Live')).not.toBeInTheDocument();
     });
+
+    it('should render the Ophan data link names as expected', async () => {
+        useApi.mockReturnValue({ data: responseWithTwoTabs });
+
+        const { asFragment } = render(
+            <MostViewedFooter
+                sectionName="Section Name"
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />,
+        );
+
+        // Renders tab data link name
+        expect(
+            asFragment().querySelectorAll('[data-link-name="in Music"]').length,
+        ).toBe(1); // Should add the data-link-name for Section Name tab
+
+        // Renders Trail data-link-names
+        expect(
+            asFragment().querySelectorAll('[data-link-name*="| text"]').length,
+        ).toBe(20); // Total stories in Related Footer (*= selector contains) (both tabs)
+
+        expect(
+            asFragment().querySelectorAll('[data-link-name="1 | text"]').length,
+        ).toBe(2); // 1 indexed so should start at 1, one for each tab
+
+        expect(
+            asFragment().querySelectorAll('[data-link-name="0 | text"]').length,
+        ).toBe(0); // 1 indexed so should start at 1
+    });
 });

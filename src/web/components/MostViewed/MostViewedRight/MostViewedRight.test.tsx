@@ -43,7 +43,7 @@ describe('MostViewedList', () => {
         // Renders Trail data-link-names
         expect(
             asFragment().querySelectorAll('[data-link-name*="trail"]').length,
-        ).toBe(5); // Total stories in Related (*= selector starts with)
+        ).toBe(5); // Total stories in Related (*= selector contains)
 
         expect(
             asFragment().querySelectorAll('[data-link-name="trail | 1"]')
