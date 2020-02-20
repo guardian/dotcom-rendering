@@ -170,6 +170,7 @@ export const htmlTemplate = ({
             </head>
 
             <body>
+                <div id="react-root"></div>
                 ${html}
                 ${[
                     ...lowPriorityScriptTags,
