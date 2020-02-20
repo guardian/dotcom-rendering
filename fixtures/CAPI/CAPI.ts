@@ -1,6 +1,6 @@
 // Copy from https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software.json?dcr
 
-export const CAPI: CAPIType = {
+export const CAPI = {
     shouldHideReaderRevenue: true,
     slotMachineFlags: '',
     isAdFreeUser: true,
