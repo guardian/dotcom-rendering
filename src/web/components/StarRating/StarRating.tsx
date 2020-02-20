@@ -46,18 +46,26 @@ const determineSize = (size: SizeType) => {
             `;
     }
 };
+
 export const StarRating: React.FC<{
     rating: number;
     size: SizeType;
-}> = ({ rating, size }) => {
-    const stars = (n: number) => {
-        return Array(5)
-            .fill(0)
-            .map((_, i) => (
-                <div className={starWrapper}>
-                    <Star className={i > n ? emptyStar : ''} key={i} />
-                </div>
-            ));
-    };
-    return <div className={determineSize(size)}>{stars(rating)}</div>;
-};
+}> = ({ rating, size }) => (
+    <div className={determineSize(size)}>
+        <div className={starWrapper}>
+            <Star className={rating < 1 && emptyStar} />
+        </div>
+        <div className={starWrapper}>
+            <Star className={rating < 2 && emptyStar} />
+        </div>
+        <div className={starWrapper}>
+            <Star className={rating < 3 && emptyStar} />
+        </div>
+        <div className={starWrapper}>
+            <Star className={rating < 4 && emptyStar} />
+        </div>
+        <div className={starWrapper}>
+            <Star className={rating < 5 && emptyStar} />
+        </div>
+    </div>
+);

@@ -22,7 +22,7 @@ export const Image: React.FC<{
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     const containerWidth = 600;
-    const image: SrcSet = bestFitImage(element.imageSources, containerWidth);
+    const image: SrcSetItem = bestFitImage(element.imageSources, containerWidth);
     const height: number = heightEstimate(
         element.media.allImages[0],
         image.width,

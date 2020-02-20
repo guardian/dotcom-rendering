@@ -128,10 +128,10 @@ interface Image {
 
 interface ImageSource {
     weighting: Weighting;
-    srcSet: SrcSet[];
+    srcSet: SrcSetItem[];
 }
 
-interface SrcSet {
+interface SrcSetItem {
     src: string;
     width: number;
 }

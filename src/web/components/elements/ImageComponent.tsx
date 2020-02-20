@@ -9,7 +9,7 @@ import { palette } from '@guardian/src-foundations';
 
 const widths = [1020, 660, 480, 0];
 
-const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
+const bestFor = (desiredWidth: number, inlineSrcSets: SrcSetItem[]): SrcSetItem => {
     const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
 
     return sorted.reduce((best, current) => {
@@ -24,7 +24,7 @@ const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
 const getSrcSetsForWeighting = (
     imageSources: ImageSource[],
     forWeighting: RoleType,
-): SrcSet[] =>
+): SrcSetItem[] =>
     imageSources.filter(
         ({ weighting }) =>
             // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
@@ -34,7 +34,7 @@ const getSrcSetsForWeighting = (
 const makeSource = (
     hidpi: boolean,
     minWidth: number,
-    srcSet: SrcSet,
+    srcSet: SrcSetItem,
 ): PictureSource => {
     return {
         hidpi,

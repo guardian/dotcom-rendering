@@ -252,7 +252,7 @@ export const ArticleMeta = ({
                         />
                     </div>
                     <div className={metaNumbers}>
-                        <div data-island="share-comment-counts" />
+                        <div id="share-comment-counts" />
                     </div>
                 </div>
             </div>
