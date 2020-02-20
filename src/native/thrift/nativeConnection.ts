@@ -17,8 +17,10 @@ import * as uuid from 'uuid';
 declare global {
     interface Window {
         nativeConnections: { [id: string]: NativeConnection };
-        AndroidWebViewMessage?: (nativeMessage: NativeMessage) => {};
-        webkit: {
+        android?: {
+            postMessage: (data: string, connectionId: string) => {};
+        };
+        webkit?: {
             messageHandlers: {
                 iOSWebViewMessage: {
                     postMessage: (nativeMessage: NativeMessage) => {};
@@ -42,9 +44,9 @@ interface PromiseResponse {
 const ACTION_TIMEOUT_MS = 30000;
 
 function sendNativeMessage(nativeMessage: NativeMessage): void {
-    if (window.AndroidWebViewMessage) {
-        window.AndroidWebViewMessage(nativeMessage)
-    } else if (window?.webkit?.messageHandlers?.iOSWebViewMessage?.postMessage) {
+    if (window.android) {
+        window.android.postMessage(nativeMessage.data, nativeMessage.connectionId)
+    } else if (window.webkit) {
         window.webkit.messageHandlers.iOSWebViewMessage.postMessage(nativeMessage)
     } else {
         console.warn('No native APIs available');
