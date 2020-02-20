@@ -20,7 +20,7 @@ declare global {
         android?: {
             postMessage: (data: string, connectionId: string) => {};
         };
-        webkit: {
+        webkit?: {
             messageHandlers: {
                 iOSWebViewMessage: {
                     postMessage: (message: NativeMessage) => {};
@@ -42,11 +42,13 @@ interface PromiseResponse {
     timeoutId: NodeJS.Timeout;
 }
 
-function sendNativeMessage(message: NativeMessage): void {
+const ACTION_TIMEOUT_MS = 30000;
+
+function sendNativeMessage(nativeMessage: NativeMessage): void {
     if (window.android) {
-        window.android.postMessage(message.connectionId, message.data)
+        window.android.postMessage(nativeMessage.data, nativeMessage.connectionId)
     } else if (window.webkit) {
-        window.webkit.messageHandlers.iOSWebViewMessage.postMessage(message)
+        window.webkit.messageHandlers.iOSWebViewMessage.postMessage(nativeMessage)
     } else {
         console.warn('No native APIs available');
     }
