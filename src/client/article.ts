@@ -1,15 +1,16 @@
 // ----- Imports ----- //
 
-import setup from 'client/setup';
 import { nativeClient } from 'native/nativeApi';
-import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
-import { Topic } from 'mobile-apps-thrift-typescript/Topic';
-import { Image } from 'mobile-apps-thrift-typescript/Image';
+import { AdSlot } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/AdSlot'
+import { Topic } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/Topic';
+import { Image } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/Image';
+import { IMaybeEpic as MaybeEpic } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/MaybeEpic';
 import { formatDate } from 'date';
-import {logger} from "../logger";
-import ReactDOM from 'react-dom';
-import { createElement as h } from 'react';
+import { logger } from "../logger";
+import { createElement as h } from "React";
+import setup from 'client/setup';
 import Epic from 'components/shared/Epic';
+import ReactDOM from 'react-dom';
 
 // ----- Run ----- //
 
@@ -143,22 +144,24 @@ function formatDates(): void {
         })
 }
 
+function insertEpic() {
+    if (navigator.onLine && !document.getElementById('creative-container')) {
+        nativeClient.getEpics().then((maybeEpic: MaybeEpic) => {
+            if (maybeEpic.epic) {
+                const creativeContainer = document.createElement('div');
+                creativeContainer.id = 'creative-container';
+                document.querySelector('footer')?.prepend(creativeContainer);
+                const { title, body, firstButton, secondButton } = maybeEpic.epic;
+                const epicProps =  { title, body, firstButton, secondButton };
+                ReactDOM.render(h(Epic, epicProps), creativeContainer)
+            }
+        })
+    }
+}
+
 setup();
 ads();
 topics();
 slideshow();
 formatDates();
-
-
-if (navigator.onLine && !document.getElementById('creative-container')) {
-    const epic = {
-        title: "Title",
-        body: "Body",
-        firstButton: "Subscribe",
-        secondButton: ""
-    }
-    const creativeContainer = document.createElement('div');
-    creativeContainer.id = 'creative-container';
-    document.querySelector('footer')?.prepend(creativeContainer);
-    ReactDOM.render(h(Epic, epic), creativeContainer)
-}
+insertEpic()
