@@ -231,6 +231,7 @@ export const Links = ({ isSignedIn }: Props) => (
             dataLinkName="nav2 : search"
         >
             <SearchIcon />
+            <>Search</>
         </Search>
     </div>
 );
