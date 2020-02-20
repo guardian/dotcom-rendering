@@ -41,6 +41,8 @@ interface PromiseResponse {
     timeoutId: NodeJS.Timeout;
 }
 
+const ACTION_TIMEOUT_MS = 30000;
+
 function sendNativeMessage(nativeMessage: NativeMessage): void {
     if (window.android) {
         window.android.postMessage(nativeMessage.data, nativeMessage.connectionId)
@@ -50,8 +52,6 @@ function sendNativeMessage(nativeMessage: NativeMessage): void {
         console.warn('No native APIs available');
     }
 }
-
-const ACTION_TIMEOUT_MS = 30000;
 
 export class NativeConnection<Context = void> extends ThriftConnection {
     connectionId = uuid.v4();
