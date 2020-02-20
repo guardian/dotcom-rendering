@@ -16,12 +16,10 @@ const headerStyles = css`
 `;
 
 type Props = {
-    nav: NavType;
-    pillar: Pillar;
     edition: Edition;
 };
 
-export const Header = ({ nav, pillar, edition }: Props) => {
+export const Header = ({ edition }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 
     useEffect(() => {
