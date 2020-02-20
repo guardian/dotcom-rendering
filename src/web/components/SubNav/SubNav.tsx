@@ -5,10 +5,7 @@ import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Inner } from './Inner';
 
 interface Props {
-    subnav: {
-        parent?: LinkType;
-        links: LinkType[];
-    };
+    subnav?: SubNavType;
     pillar: Pillar;
     currentNavLink: string;
 }
