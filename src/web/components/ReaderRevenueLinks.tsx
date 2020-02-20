@@ -98,23 +98,6 @@ const subMessageStyles = css`
     margin-bottom: 5px;
 `;
 
-const RRButton: React.FC<{
-    url: string;
-    dataLinkNamePrefix: string;
-    dataLinkNameSuffix: string;
-    linkText: string;
-}> = ({ url, dataLinkNamePrefix, dataLinkNameSuffix, linkText }) => {
-    return (
-        <a
-            className={linkStyles}
-            href={url}
-            data-link-name={`${dataLinkNamePrefix}${dataLinkNameSuffix}`}
-        >
-            {linkText} <ArrowRightIcon />
-        </a>
-    );
-};
-
 const isRecentContributor: () => boolean = () => {
     const cookieValue = getCookie('gu.contributions.contrib-timestamp');
 
@@ -172,18 +155,20 @@ export const ReaderRevenueLinks: React.FC<{
                                         readers
                                     </div>
                                 )}
-                                <RRButton
-                                    url={urls.contribute}
-                                    dataLinkNamePrefix={dataLinkNamePrefix}
-                                    dataLinkNameSuffix="contribute-cta"
-                                    linkText="Contribute"
-                                />
-                                <RRButton
-                                    url={urls.subscribe}
-                                    dataLinkNamePrefix={dataLinkNamePrefix}
-                                    dataLinkNameSuffix="subscribe-cta"
-                                    linkText="Subscribe"
-                                />
+                                <a
+                                    className={linkStyles}
+                                    href={urls.contribute}
+                                    data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                                >
+                                    Contribute <ArrowRightIcon />
+                                </a>
+                                <a
+                                    className={linkStyles}
+                                    href={urls.subscribe}
+                                    data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+                                >
+                                    Subscribe <ArrowRightIcon />
+                                </a>
                             </div>
 
                             <div
@@ -193,19 +178,21 @@ export const ReaderRevenueLinks: React.FC<{
                                 })}
                             >
                                 {edition === 'UK' ? (
-                                    <RRButton
-                                        url={urls.contribute}
-                                        dataLinkNamePrefix={dataLinkNamePrefix}
-                                        dataLinkNameSuffix="contribute-cta"
-                                        linkText="Contribute"
-                                    />
+                                    <a
+                                        className={linkStyles}
+                                        href={urls.contribute}
+                                        data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                                    >
+                                        Contribute <ArrowRightIcon />
+                                    </a>
                                 ) : (
-                                    <RRButton
-                                        url={urls.support}
-                                        dataLinkNamePrefix={dataLinkNamePrefix}
-                                        dataLinkNameSuffix="support-cta"
-                                        linkText="Support us"
-                                    />
+                                    <a
+                                        className={linkStyles}
+                                        href={urls.support}
+                                        data-link-name={`${dataLinkNamePrefix}support-cta`}
+                                    >
+                                        Support us <ArrowRightIcon />
+                                    </a>
                                 )}
                             </div>
                         </div>
