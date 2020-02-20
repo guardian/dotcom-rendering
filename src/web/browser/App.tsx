@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
@@ -12,6 +12,9 @@ import { CMP } from '@frontend/web/components/CMP';
 import { Onwards } from '@frontend/web/components/Onwards/Onwards';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
+import { Header } from '@frontend/web/components/Header';
+
+import { addCookie, getCookie } from '@root/src/web/browser/cookie';
 
 type Props = { CAPI: CAPIType; NAV: NavType };
 
@@ -27,7 +30,8 @@ type RootType =
     | 'slot-body-end'
     | 'cmp'
     | 'onwards-content'
-    | 'rich-link';
+    | 'rich-link'
+    | 'header-root';
 
 export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
     ReactDOM.render(
@@ -37,6 +41,12 @@ export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
 };
 
 const App = ({ CAPI, NAV }: Props) => {
+    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+
+    useEffect(() => {
+        setIsSignedIn(!!getCookie('GU_U'));
+    }, []);
+
     const richLinks: {
         element: RichLinkBlockElement;
         root: RootType;
@@ -67,6 +77,9 @@ const App = ({ CAPI, NAV }: Props) => {
         //
         // Note: Both require a 'root' element that needs to be server rendered.
         <>
+            <Hydrate root="header-root">
+                <Header isSignedIn={isSignedIn} edition={CAPI.editionId} />
+            </Hydrate>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Hydrate>
