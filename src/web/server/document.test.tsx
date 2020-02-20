@@ -33,7 +33,7 @@ test('that all the required links exist', () => {
     );
 });
 
-test('Subnav data-link-name exists with correct value', () => {
+test('Subnav ophan data-link-name exists with correct value', () => {
     expect(result).toEqual(
         expect.stringContaining(`data-link-name="nav2 : subnav : money/debt"`),
     );
@@ -43,4 +43,12 @@ test('Subnav data-link-name exists with correct value', () => {
             `data-link-name="nav2 : subnav : /money/debt"`,
         ),
     );
+});
+
+test('Meta ophan data-attributes exist', () => {
+    expect(result).toEqual(
+        expect.stringContaining(`data-component="meta-byline"`),
+    );
+
+    expect(result).toEqual(expect.stringContaining(`data-link-name="byline"`));
 });
