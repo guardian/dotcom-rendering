@@ -10,8 +10,10 @@ import * as Webview from 'mobile-apps-thrift-typescript/Webview';
 import { WebviewHandler } from 'native/webviewApi';
 import { Message } from 'native/thrift/message';
 import { formatDate } from 'date';
-import { epicHtml, injectEpicCreative, addEventListenerScroll } from 'native/epic';
 import {logger} from "../logger";
+import ReactDOM from 'react-dom';
+import { createElement as h } from 'react';
+import Epic from 'components/shared/Epic';
 
 // ----- Run ----- //
 
@@ -158,15 +160,13 @@ formatDates();
 
 if (navigator.onLine && !document.getElementById('creative-container')) {
     const epic = {
-        title: "title",
-        body: "body",
-        firstButton: "",
+        title: "Title",
+        body: "Body",
+        firstButton: "Subscribe",
         secondButton: ""
     }
-    const { title, body, firstButton, secondButton } = epic;
     const creativeContainer = document.createElement('div');
     creativeContainer.id = 'creative-container';
-    creativeContainer.innerHTML = epicHtml(title, body, firstButton, secondButton);
-    injectEpicCreative(creativeContainer);
-    addEventListenerScroll(creativeContainer);
+    document.querySelector('footer')?.prepend(creativeContainer);
+    ReactDOM.render(h(Epic, epic), creativeContainer)
 }

@@ -70,6 +70,7 @@ interface Fields extends Format {
     series: Tag;
     commentable: boolean;
     tags: Tag[];
+    shouldHideReaderRevenue: boolean;
 }
 
 type Image = {
@@ -135,6 +136,7 @@ interface Comment extends Fields {
 interface Standard extends Fields {
     design: Exclude<Design, Design.Live | Design.Review | Design.Comment>;
     body: Body;
+    shouldHideReaderRevenue: boolean;
 }
 
 type Item
@@ -335,6 +337,7 @@ const itemFields = (docParser: DocParser, content: Content): ItemFields =>
         series: articleSeries(content),
         commentable: content?.fields?.commentable ?? false,
         tags: content.tags,
+        shouldHideReaderRevenue: content.fields?.shouldHideReaderRevenue ?? false
     })
 
 const itemFieldsWithBody = (docParser: DocParser, content: Content): ItemFieldsWithBody => {
