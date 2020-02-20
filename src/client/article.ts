@@ -5,10 +5,6 @@ import { nativeClient } from 'native/nativeApi';
 import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
 import { Topic } from 'mobile-apps-thrift-typescript/Topic';
 import { Image } from 'mobile-apps-thrift-typescript/Image';
-import { WebviewServer } from 'native/thrift/webviewServer';
-import * as Webview from 'mobile-apps-thrift-typescript/Webview';
-import { WebviewHandler } from 'native/webviewApi';
-import { Message } from 'native/thrift/message';
 import { formatDate } from 'date';
 import {logger} from "../logger";
 import ReactDOM from 'react-dom';
@@ -133,9 +129,6 @@ function slideshow(): void {
             launchSlideshow(image.getAttribute('src'));
         }));
 }
-
-const webviewServer = new WebviewServer(new Webview.Processor(new WebviewHandler));
-window.receiveNativeRequest = (message: Message): void => webviewServer.receive(message);
 
 function formatDates(): void {
     Array.from(document.querySelectorAll('time[data-date]'))
