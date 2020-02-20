@@ -33,6 +33,12 @@ test('that all the required links exist', () => {
     );
 });
 
+test('Pillar ophan data-link-name exists with correct value', () => {
+    expect(result).toEqual(
+        expect.stringContaining(`data-link-name="nav2 : primary : Opinion"`),
+    );
+});
+
 test('Subnav ophan data-link-name exists with correct value', () => {
     expect(result).toEqual(
         expect.stringContaining(`data-link-name="nav2 : subnav : money/debt"`),
@@ -69,5 +75,12 @@ test('Series ophan data-attributes do not exist', () => {
 
     expect(result).toEqual(
         expect.not.stringContaining(`data-link-name="series article"`),
+    );
+});
+test('Footer ophan data-attributes exist', () => {
+    expect(result).toEqual(expect.stringContaining(`data-component="footer"`));
+    expect(result).toEqual(expect.stringContaining(`data-link-name="footer"`));
+    expect(result).toEqual(
+        expect.stringContaining(`data-link-name="footer : primary : Opinion"`),
     );
 });

@@ -29,6 +29,7 @@ export const Nav = ({ pillar, nav }: Props) => {
                 mainMenuOpen={showExpandedMenu}
                 pillars={nav.pillars}
                 pillar={pillar}
+                dataLinkName="nav2"
             />
             <ExpandedMenu
                 id={mainMenuId}
