@@ -24,7 +24,7 @@ import { DecideLayout } from './DecideLayout';
 export default {
     title: 'Layouts/Standard',
     parameters: {
-        chromatic: { viewports: [1300] },
+        chromatic: { viewports: [1300], delay: 800 },
     },
 };
 /* tslint:enable */
