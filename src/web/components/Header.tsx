@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from 'emotion';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
@@ -15,50 +15,32 @@ const headerStyles = css`
     -ms-overflow-style: none;
 `;
 
-interface Props {
+type Props = {
     nav: NavType;
     pillar: Pillar;
     edition: Edition;
-}
+};
 
-export class Header extends Component<Props, { isSignedIn: boolean }> {
-    constructor(props: Props) {
-        super(props);
+export const Header = ({ nav, pillar, edition }: Props) => {
+    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 
-        this.state = {
-            isSignedIn: false,
-        };
-    }
+    useEffect(() => {
+        setIsSignedIn(!!getCookie('GU_U'));
+    }, []);
 
-    public componentDidMount() {
-        this.setState({
-            isSignedIn: !!getCookie('GU_U'),
-        });
-    }
-
-    public render() {
-        const { isSignedIn } = this.state;
-        const { edition } = this.props;
-
-        return (
-            <header className={headerStyles}>
-                <Hide when="below" breakpoint="desktop">
-                    <div id="edition-root">
-                        <EditionDropdown
-                            edition={edition}
-                            dataLinkName="nav2 : topbar : edition-picker: toggle"
-                        />
-                    </div>
-                </Hide>
-                <Logo />
-                {/*
-                    TODO: The properties of the Links component
-                    have been hardcoded to false. At some point
-                    these need to be dynamic.
-                */}
-                <div id="reader-revenue-links-header" />
-                <Links isSignedIn={isSignedIn} />
-            </header>
-        );
-    }
-}
+    return (
+        <header className={headerStyles}>
+            <Hide when="below" breakpoint="desktop">
+                <div data-island="edition-root">
+                    <EditionDropdown
+                        edition={edition}
+                        dataLinkName="nav2 : topbar : edition-picker: toggle"
+                    />
+                </div>
+            </Hide>
+            <Logo />
+            <div data-island="reader-revenue-links-header" />
+            <Links isSignedIn={isSignedIn} />
+        </header>
+    );
+};
