@@ -98,7 +98,7 @@ const subMessageStyles = css`
     margin-bottom: 5px;
 `;
 
-export const RRButton: React.FC<{
+const RRButton: React.FC<{
     url: string;
     dataLinkNamePrefix: string;
     dataLinkNameSuffix: string;
