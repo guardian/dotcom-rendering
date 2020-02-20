@@ -9,7 +9,7 @@ import {
     ITransportConstructor,
     IProtocolConstructor,
     TApplicationException,
-    TApplicationExceptionType,
+    TApplicationExceptionType
 } from '@creditkarma/thrift-server-core'
 
 import * as uuid from 'uuid';
@@ -23,9 +23,8 @@ declare global {
         webkit?: {
             messageHandlers: {
                 iOSWebViewMessage: {
-                    postMessage: (message: NativeMessage) => {};
+                    postMessage: (nativeMessage: NativeMessage) => {};
                 };
-
             };
         };
     }
@@ -41,8 +40,6 @@ interface PromiseResponse {
     reject: (error: Error) => void;
     timeoutId: NodeJS.Timeout;
 }
-
-const ACTION_TIMEOUT_MS = 30000;
 
 function sendNativeMessage(nativeMessage: NativeMessage): void {
     if (window.android) {
