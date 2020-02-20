@@ -1,12 +1,13 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
-import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
+
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
+
+import { SignIn } from '@root/src/web/components/SignIn';
 
 const search = css`
     :after {
@@ -30,7 +31,7 @@ const search = css`
     }
 `;
 
-const link = css`
+const linkStyles = css`
     ${textSans.medium()};
     color: ${palette.neutral[100]};
     float: left;
@@ -131,63 +132,16 @@ const links = css`
     }
 `;
 
-const profileSubdomain = 'https://profile.theguardian.com';
 const jobsUrl = 'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader';
 const datingUrl =
     'https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader';
-const signInUrl = `${profileSubdomain}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in`;
 
-const identityLinks: DropdownLinkType[] = [
-    {
-        url: `${profileSubdomain}/user/id/123`, // TODO use actual user ID once we have a user model
-        title: 'Comments and replies',
-        dataLinkName: 'nav2 : topbar : comment activity',
-    },
-    {
-        url: `${profileSubdomain}/public/edit`,
-        title: 'Public profile',
-        dataLinkName: 'nav2 : topbar : edit profile',
-    },
-    {
-        url: `${profileSubdomain}/account/edit`,
-        title: 'Account details',
-        dataLinkName: 'nav2 : topbar : account details',
-    },
-    {
-        url: `${profileSubdomain}/email-prefs`,
-        title: 'Emails and marketing',
-        dataLinkName: 'nav2 : topbar : email prefs',
-    },
-    {
-        url: `${profileSubdomain}/membership/edit`,
-        title: 'Membership',
-        dataLinkName: 'nav2 : topbar : membership',
-    },
-    {
-        url: `${profileSubdomain}/contribution/recurring/edit`,
-        title: 'Contributions',
-        dataLinkName: 'nav2 : topbar : contributions',
-    },
-    {
-        url: `${profileSubdomain}/digitalpack/edit`,
-        title: 'Digital pack',
-        dataLinkName: 'nav2 : topbar : subscriptions',
-    },
-    {
-        url: `${profileSubdomain}/signout`,
-        title: 'Sign out',
-        dataLinkName: 'nav2 : topbar : sign out',
-    },
-];
-
-export const Links: React.FC<{
-    isSignedIn: boolean;
-}> = ({ isSignedIn }) => (
+export const Links: React.FC = () => (
     <div className={links}>
         <div className={seperator} />
         <a
             href={jobsUrl}
-            className={cx(linkTablet({ showAtTablet: false }), link)}
+            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
             data-link-name="nav2 : job-cta"
         >
             Search jobs
@@ -195,34 +149,17 @@ export const Links: React.FC<{
 
         <a
             href={datingUrl}
-            className={cx(linkTablet({ showAtTablet: false }), link)}
+            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
             data-link-name="nav2 : soulmates-cta"
         >
             Dating
         </a>
         <div className={seperatorHide} />
-        {isSignedIn ? (
-            <div className={link}>
-                <ProfileIcon />
-                <Dropdown
-                    label="My account"
-                    links={identityLinks}
-                    id="my-account"
-                    dataLinkName="nav2 : topbar: my account"
-                />
-            </div>
-        ) : (
-            <a
-                className={link}
-                href={signInUrl}
-                data-link-name="nav2 : topbar : signin"
-            >
-                <ProfileIcon /> Sign in
-            </a>
-        )}
+
+        <SignIn linkStyles={linkStyles} />
 
         <Search
-            className={cx(linkTablet({ showAtTablet: false }), link)}
+            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
             dataLinkName="nav2 : search"
         >
