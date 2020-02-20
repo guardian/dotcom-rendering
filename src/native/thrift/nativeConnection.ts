@@ -45,7 +45,6 @@ const ACTION_TIMEOUT_MS = 30000;
 
 function sendNativeMessage(nativeMessage: NativeMessage): void {
     if (window.android) {
-        // Arguments are supplied separately when posting to Android:
         window.android.postMessage(nativeMessage.data, nativeMessage.connectionId)
     } else if (window.webkit) {
         window.webkit.messageHandlers.iOSWebViewMessage.postMessage(nativeMessage)
