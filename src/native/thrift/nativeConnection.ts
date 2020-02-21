@@ -6,6 +6,7 @@ import {
     getProtocol,
     TransportType,
     ProtocolType,
+    TTransport,
     ITransportConstructor,
     IProtocolConstructor,
     TApplicationException,
@@ -13,6 +14,8 @@ import {
 } from '@creditkarma/thrift-server-core'
 
 import * as uuid from 'uuid';
+
+import { TMultiplexedProtocol } from './protocols'
 
 declare global {
     interface Window {
@@ -125,5 +128,12 @@ export function createAppClient<TClient extends ThriftClient<void>>(
     transport: TransportType = 'buffered', 
     protocol: ProtocolType = 'compact'
 ): TClient {
-    return new ServiceClient(new NativeConnection(getTransport(transport), getProtocol(protocol)));
+    class NamedMultiplexedProtocol extends TMultiplexedProtocol {
+        constructor(transport: TTransport) {
+            const Protocol = getProtocol(protocol)
+            super(new Protocol(transport), ServiceClient.serviceName ?? "")
+        }
+    }
+    const connection = new NativeConnection(getTransport(transport), NamedMultiplexedProtocol)
+    return new ServiceClient(connection)
 }
