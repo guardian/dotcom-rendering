@@ -149,6 +149,12 @@ const maxWidth = css`
     }
 `;
 
+const articleWidth = css`
+    ${from.desktop} {
+        width: 620px;
+    }
+`;
+
 const stretchLines = css`
     ${until.phablet} {
         margin-left: -20px;
@@ -360,7 +366,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="body">
                         <ArticleContainer>
-                            <main className={maxWidth}>
+                            <main className={articleWidth}>
                                 <ArticleBody CAPI={CAPI} />
                                 {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines pillar={CAPI.pillar} />
