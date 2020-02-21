@@ -2,7 +2,7 @@
 
 import React, { ReactNode, ReactElement } from 'react';
 import { css } from '@emotion/core';
-import { brandAlt, text } from '@guardian/src-foundations/palette';
+import { brandAltBackground, text } from '@guardian/src-foundations/palette';
 
 import { Item, Design } from 'item';
 import { icons, spaceToRem } from 'styles';
@@ -12,7 +12,7 @@ import { icons, spaceToRem } from 'styles';
 
 const starStyles = css`
     ${icons}
-    background-color: ${brandAlt[400]};
+    background-color: ${brandAltBackground.primary};
     font-size: ${spaceToRem(5)};
     line-height: 1;
     display: inline-block;
