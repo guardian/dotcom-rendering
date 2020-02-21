@@ -39,13 +39,15 @@ export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
                 <ul data-link-name="Right hand most popular geo GB">
                     {(data.trails || [])
                         .slice(0, limitItems)
-                        .map((trail: TrailType, ii: number) => (
-                            <MostViewedRightItem
-                                key={trail.url}
-                                trail={trail}
-                                ii={ii}
-                            />
-                        ))}
+                        .map(
+                            (trail: TrailType, mostViewedItemIndex: number) => (
+                                <MostViewedRightItem
+                                    key={trail.url}
+                                    trail={trail}
+                                    mostViewedItemIndex={mostViewedItemIndex}
+                                />
+                            ),
+                        )}
                 </ul>
             </div>
         );

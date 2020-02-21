@@ -54,10 +54,10 @@ const marginTopStyles = css`
 
 type Props = {
     trail: TrailType;
-    ii: number;
+    mostViewedItemIndex: number;
 };
 
-export const MostViewedRightItem = ({ trail, ii }: Props) => {
+export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
     const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
     const linkProps = {
@@ -67,7 +67,10 @@ export const MostViewedRightItem = ({ trail, ii }: Props) => {
     };
 
     return (
-        <li className={listItemStyles} data-link-name={`trail | ${ii + 1}`}>
+        <li
+            className={listItemStyles}
+            data-link-name={`trail | ${mostViewedItemIndex + 1}`}
+        >
             <a className={linkTagStyles} href={trail.url} ref={hoverRef}>
                 <div className={lineWrapperStyles}>
                     {trail.image && (
