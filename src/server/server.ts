@@ -12,7 +12,7 @@ import {
 import fetch from 'node-fetch';
 
 import { Response as CapiResponse } from 'mapiThriftModels/Response';
-import { Content as MapiContent, IContent as Content } from 'mapiThriftModels/Content';
+import { Content as MapiContent } from 'mapiThriftModels/Content';
 import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
