@@ -1,10 +1,10 @@
 // ----- Imports ----- //
 
 import { nativeClient } from 'native/nativeApi';
-import { AdSlot } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/AdSlot'
-import { Topic } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/Topic';
-import { Image } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/Image';
-import { IMaybeEpic as MaybeEpic } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/MaybeEpic';
+import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
+import { Topic } from 'mobile-apps-thrift-typescript/Topic';
+import { Image } from 'mobile-apps-thrift-typescript/Image';
+import { IMaybeEpic as MaybeEpic } from 'mobile-apps-thrift-typescript/MaybeEpic';
 import { formatDate } from 'date';
 import { logger } from "../logger";
 import { createElement as h } from 'react';
