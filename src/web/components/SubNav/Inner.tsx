@@ -140,6 +140,9 @@ export const Inner: React.FC<{
     isExpanded,
     toggle,
 }) => {
+    const trimLeadingSlash = (url: string): string =>
+        url.substr(0, 1) === '/' ? url.slice(1) : url;
+
     const parentLink = parent && (
         <li key={parent.url} className={cx(ps1, psp[pillar])}>
             <a className={parentLinkStyle} href={parent.url}>
@@ -154,7 +157,7 @@ export const Inner: React.FC<{
                     [selected]: link.title === currentNavLink,
                 })}
                 href={link.url}
-                data-link-name={`nav2 : subnav : ${link.url.slice(1)}`} // Remove starting slash
+                data-link-name={`nav2 : subnav : ${trimLeadingSlash(link.url)}`} // Remove starting slash
             >
                 {link.title}
             </a>
