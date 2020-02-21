@@ -16,6 +16,8 @@ import { Header } from '@frontend/web/components/Header';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
+import { getCountryCode } from '@frontend/web/lib/getCountryCode';
+
 type Props = { CAPI: CAPIType; NAV: NavType };
 
 type RootType =
@@ -42,10 +44,22 @@ export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
 
 const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+    const [countryCode, setCountryCode] = useState<string>('');
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
+
+    useEffect(() => {
+        const callFetch = async () => {
+            setCountryCode(await getCountryCode());
+        };
+        callFetch();
+    }, []);
+
+    console.log(
+        `TODO: Now that we have countryCode ${countryCode} then we should use it (Andre, I'm looking at you)`,
+    );
 
     const richLinks: {
         element: RichLinkBlockElement;
