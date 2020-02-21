@@ -7,7 +7,7 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/shared/headerImage';
 import Series from 'components/shared/articleSeries';
-import Headline from 'components/standard/headline';
+import Headline from 'components/headline';
 import Standfirst from 'components/standard/standfirst';
 import Byline from 'components/standard/byline';
 import { CommentCount } from 'components/shared/commentCount'
