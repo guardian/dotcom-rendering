@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 import { css, SerializedStyles } from '@emotion/core';
-import { basePx } from 'styles';
+import { basePx, headlineFont, textSans } from 'styles';
 import { from } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
 import React, { useState, useEffect, useRef } from 'react';
@@ -10,22 +10,24 @@ import { nativeClient } from 'native/nativeApi';
 
 const EpicStyles = (): SerializedStyles => css`
         margin: ${basePx(1)};
+
         ${from.tablet} {
             margin: ${basePx(1, 0)};
         }
+
         clear: both;
 
         border-top: 1px solid ${palette.brandYellow[300]};
         background: ${palette.neutral[97]};
         width: 100%;
         padding: 12px;
-        font-family: "Guardian Headline", "Guardian Text Egyptian Web", Georgia, serif;
+        ${headlineFont}
         clear: left;
 
         h1:first-of-type {
             font-size: 20px;
             font-weight: 900;
-            font-family: "Guardian Egyptian Web", "Guardian Headline", "Guardian Text Egyptian Web", Georgia, serif;
+            font-family: 'Guardian Text Egyptian Web';
             margin-bottom: 12px;
             line-height: 1.4;
         }
@@ -40,7 +42,7 @@ const EpicStyles = (): SerializedStyles => css`
             padding: 6px 6px 4px 15px;
             font-size: 16px;
             font-weight: 900;
-            font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            ${textSans}
             line-height: 26px;
         }
 

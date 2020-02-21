@@ -7,9 +7,9 @@ import { Image } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thr
 import { IMaybeEpic as MaybeEpic } from 'mobile-apps-thrift-typescript/com/theguardian/webview/thrift/MaybeEpic';
 import { formatDate } from 'date';
 import { logger } from "../logger";
-import { createElement as h } from "React";
+import { createElement as h } from 'react';
 import setup from 'client/setup';
-import Epic from 'components/shared/Epic';
+import Epic from 'components/shared/epic';
 import ReactDOM from 'react-dom';
 
 // ----- Run ----- //
