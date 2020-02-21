@@ -16,3 +16,6 @@ jobs:
                         https://www.theguardian.com/sport/blog/2020/feb/18/anya-shrubsole-world-twenty20-t20-england-cricket-the-spin?dcr
                         https://www.theguardian.com/lifeandstyle/2020/feb/18/i-laugh-maniacally-when-i-orgasm-and-my-boyfriend-can-no-longer-reach-climax?dcr
                   budgetPath: './budgets.json'
+                  
+- name: compressed-size-action
+    uses: preactjs/compressed-size-action@v1
