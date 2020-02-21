@@ -28,12 +28,17 @@ const Styles = css`
         color: ${neutral[7]};
     }
 
-    address a {
+    address {
         font-style: italic;
         font-weight: 100;
         ${headlineFontStyles}
         color: ${opinion[400]};
         background: none;
+
+        a {
+            font-weight: 500;
+            background: none;
+        }
     }
 `;
 
