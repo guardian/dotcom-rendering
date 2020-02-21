@@ -34,5 +34,9 @@ describe('MostViewedList', () => {
                 '[data-link-name="more-on-this-story"]',
             ).length,
         ).toBe(1);
+
+        expect(
+            asFragment().querySelectorAll('[data-link-name="article"]').length,
+        ).toBe(8);
     });
 });
