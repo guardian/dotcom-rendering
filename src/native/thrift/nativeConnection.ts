@@ -132,5 +132,6 @@ export function createAppClient<TClient extends ThriftClient<void>>(
             super(new Protocol(transport), ServiceClient.serviceName ?? "")
         }
     }
-    return new ServiceClient(new NativeConnection(getTransport(transport), NamedMultiplexedProtocol));
+    const connection = new NativeConnection(getTransport(transport), NamedMultiplexedProtocol)
+    return new ServiceClient(connection)
 }
