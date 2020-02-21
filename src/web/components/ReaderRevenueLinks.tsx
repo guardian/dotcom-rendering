@@ -8,6 +8,18 @@ import { from, until } from '@guardian/src-foundations/mq';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
+type Props = {
+    edition: Edition;
+    urls: {
+        subscribe: string;
+        support: string;
+        contribute: string;
+    };
+    dataLinkNamePrefix: string;
+    noResponsive: boolean;
+    inHeader?: boolean;
+};
+
 const paddingStyles = css`
     ${until.mobileLandscape} {
         padding-left: 10px;
@@ -111,17 +123,13 @@ const decideIfRecentContributor: () => boolean = () => {
     return diffDays <= 180;
 };
 
-export const ReaderRevenueLinks: React.FC<{
-    edition: Edition;
-    urls: {
-        subscribe: string;
-        support: string;
-        contribute: string;
-    };
-    dataLinkNamePrefix: string;
-    noResponsive: boolean;
-    inHeader?: boolean;
-}> = ({ edition, urls, dataLinkNamePrefix, noResponsive, inHeader }) => {
+export const ReaderRevenueLinks: React.FC<Props> = ({
+    edition,
+    urls,
+    dataLinkNamePrefix,
+    noResponsive,
+    inHeader,
+}) => {
     const [isPayingMember, setIsPayingMember] = useState<boolean>(false);
     const [isRecentContributor, setIsRecentContributor] = useState<boolean>(
         false,
