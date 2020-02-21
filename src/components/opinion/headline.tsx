@@ -2,18 +2,17 @@
 
 import React from 'react';
 import { css } from '@emotion/core'
-import { neutral, opinion, background } from '@guardian/src-foundations/palette'
+import { neutral, background } from '@guardian/src-foundations/palette'
 import { until } from '@guardian/src-foundations/mq';
-
 import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
-import { Pillar } from 'pillar';
+import { Pillar, getPillarStyles, PillarStyles } from 'pillar';
 import Author from 'components/shared/author';
 import { Option } from 'types/option';
 
 
 // ----- Styles ----- //
 
-const Styles = css`
+const Styles = (styles: PillarStyles) => css`
     padding: ${basePx(0, 0, 4, 0)};
     
     ${until.wide} {
@@ -32,7 +31,7 @@ const Styles = css`
         font-style: italic;
         font-weight: 100;
         ${headlineFontStyles}
-        color: ${opinion[400]};
+        color: ${styles.kicker};
         background: none;
 
         a {
@@ -59,7 +58,7 @@ interface Props {
 }
 
 const Headline = ({ byline, headline, pillar }: Props): JSX.Element =>
-    <div css={[Styles, DarkStyles]}>
+    <div css={[Styles(getPillarStyles(pillar)), DarkStyles]}>
         <h1>{headline}</h1>
         <Author byline={byline} pillar={pillar} />
     </div>
