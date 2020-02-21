@@ -49,7 +49,7 @@ describe('ReaderRevenueLinks', () => {
         // expect nothing to be rendered
         await wait(() => expect(container.firstChild).toBeNull());
 
-        expect(getCookie).toHaveBeenCalledTimes(1);
+        expect(getCookie).toHaveBeenCalledTimes(2);
         expect(getCookie).toHaveBeenCalledWith(contributionsCookie);
     });
 
@@ -59,9 +59,10 @@ describe('ReaderRevenueLinks', () => {
         // set a contribution date of 1 year ago
         contributionDate.setDate(contributionDate.getDate() - 365);
 
-        getCookie
-            .mockReturnValueOnce(contributionDate)
-            .mockReturnValueOnce('true');
+        getCookie.mockImplementation((name: string) => {
+            if (name === contributionsCookie) return contributionDate;
+            if (name === payingMemberCookie) return 'true';
+        });
 
         const { container } = render(
             <ReaderRevenueLinks
