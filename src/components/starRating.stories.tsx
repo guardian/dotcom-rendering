@@ -35,7 +35,7 @@ const item: Item = {
     tags: [],
 };
 
-const starRating: Record<number, number> = [1, 2, 3, 4, 5];
+const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
 
 
 // ----- Stories ----- //
