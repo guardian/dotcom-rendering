@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { css } from '@emotion/core'
+import { css, SerializedStyles } from '@emotion/core'
 import { neutral, background } from '@guardian/src-foundations/palette'
 import { until } from '@guardian/src-foundations/mq';
 import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
@@ -12,7 +12,7 @@ import { Option } from 'types/option';
 
 // ----- Styles ----- //
 
-const Styles = (styles: PillarStyles) => css`
+const Styles = (styles: PillarStyles): SerializedStyles => css`
     padding: ${basePx(0, 0, 4, 0)};
     
     ${until.wide} {
