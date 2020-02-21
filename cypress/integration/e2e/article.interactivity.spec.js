@@ -31,7 +31,7 @@ describe('Interactivity', function() {
 
         it('should display all the rich links for an article', function() {
             cy.visit(`/Article?url=${articleUrl}`);
-            cy.get('[data-link-name=rich-link]')
+            cy.get('[data-component=rich-link]')
                 .should('exist')
                 .its('length')
                 // This count of rich links is dependent on the article that we're testing not changing
