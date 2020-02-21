@@ -3388,13 +3388,6 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash.flow@^3.5.6":
-  version "3.5.6"
-  resolved "https://registry.yarnpkg.com/@types/lodash.flow/-/lodash.flow-3.5.6.tgz#ecbdae376e610313ac6361430f2f59a8dc9a813f"
-  integrity sha512-mpSgC8s1alwO8I5223G//0vSt1BTR395TdxbkprAUgedRaW71Ew9ajSIjk9hsSpWxGki6ExPDnI3zKeJjyeHwQ==
-  dependencies:
-    "@types/lodash" "*"
-
 "@types/lodash.get@^4.4.4":
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.get/-/lodash.get-4.4.6.tgz#0c7ac56243dae0f9f09ab6f75b29471e2e777240"
@@ -11257,11 +11250,6 @@ lodash.findindex@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.findindex/-/lodash.findindex-4.6.0.tgz#a3245dee61fb9b6e0624b535125624bb69c11106"
   integrity sha1-oyRd7mH7m24GJLU1ElYku2nBEQY=
-
-lodash.flow@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.flow/-/lodash.flow-3.5.0.tgz#87bf40292b8cf83e4e8ce1a3ae4209e20071675a"
-  integrity sha1-h79AKSuM+D5OjOGjrkIJ4gBxZ1o=
 
 lodash.foreach@^4.5.0:
   version "4.5.0"
