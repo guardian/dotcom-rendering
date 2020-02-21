@@ -1,6 +1,6 @@
 import { createElement as h, ReactNode, ReactElement } from 'react';
 
-function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
+function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
     const adIndices = [3, 9];
     const flattenedNodes = reactNodes.flat();
 
@@ -34,4 +34,10 @@ function insertAdPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
         .pop();
 }
 
-export { insertAdPlaceholders }
+const getAdPlaceholderInserter =
+    (shouldHideAdverts: boolean): (reactNodes: ReactNode[]) => ReactNode[] =>
+        shouldHideAdverts
+            ? (reactNodes: ReactNode[]): ReactNode[] => reactNodes
+            : insertPlaceholders
+
+export { getAdPlaceholderInserter }
