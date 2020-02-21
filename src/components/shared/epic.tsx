@@ -87,7 +87,7 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): JSX.Elemen
     useEffect(() => {
         const handleSeenEpic = debounce(() => {
             if (!impressionSeen && isElementPartiallyInViewport(creativeContainer)) {
-                // call into native layer to confirm epic has been seen
+                nativeClient.epicSeen();
                 setImpressionSeen(true);
             }
         }, 100);
