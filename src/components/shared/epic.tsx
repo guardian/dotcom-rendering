@@ -2,63 +2,53 @@
 import { css, SerializedStyles } from '@emotion/core';
 import { basePx, headlineFont, textSans } from 'styles';
 import { from } from '@guardian/src-foundations/mq';
-import { palette } from '@guardian/src-foundations';
+import { palette, brandAlt } from '@guardian/src-foundations';
 import React, { useState, useEffect, useRef } from 'react';
 import { nativeClient } from 'native/nativeApi';
+import { SvgArrowRightStraight } from "@guardian/src-svgs"
+import { ThemeProvider } from 'emotion-theming'
+import { Button, buttonReaderRevenue } from '@guardian/src-button'
+
 
 // ----- Styles ----- //
 
 const EpicStyles = (): SerializedStyles => css`
+        width: calc(100% - ${basePx(4)});
         margin: ${basePx(1)};
 
-        ${from.tablet} {
+        ${from.wide} {
             margin: ${basePx(1, 0)};
         }
 
         clear: both;
 
-        border-top: 1px solid ${palette.brandYellow[300]};
+        border-top: 1px solid ${brandAlt[400]};
         background: ${palette.neutral[97]};
-        width: 100%;
-        padding: 12px;
-        ${headlineFont}
+        padding: ${basePx(1)};
+        font-family: 'Guardian Text Egyptian Web';
         clear: left;
 
         h1:first-of-type {
-            font-size: 20px;
-            font-weight: 900;
-            font-family: 'Guardian Text Egyptian Web';
-            margin-bottom: 12px;
-            line-height: 1.4;
+            ${headlineFont}
         }
 
         button {
-            display: inline-block;
-            background-image: none;
-            color: ${palette.neutral[7]};
-            background: ${palette.brandYellow[300]});
-            border-radius: 100px;
-            margin: 0 12px 12px 0;
-            padding: 6px 6px 4px 15px;
-            font-size: 16px;
-            font-weight: 900;
-            ${textSans}
-            line-height: 26px;
+            margin: ${basePx(0, 1, 1, 0)};
         }
 
         .button-container {
-            margin-top: 24px;
+            margin-top: 3rem;
         }
 
         svg {
-            margin-left: 6px;
+            margin-left: 8px;
             margin-top: -4px;
             vertical-align: middle;
         }
 
         mark {
-            background: ${palette.brandYellow[300]};
-            padding: 4px 0;
+            background: ${brandAlt[400]};
+            padding: .1rem .125rem;
         }
 `;
 
@@ -108,24 +98,21 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): JSX.Elemen
     }, [impressionSeen]);
 
     const epicButton = (text: string, action: () => void): JSX.Element =>
-        <button onClick={action}>
-            {text}
-            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="5 5 20 20">
-                <path fill="#121212" d="M22.8 14.6L15.2 7l-.7.7 5.5 6.6H6v1.5h14l-5.5 6.6.7.7 7.6-7.6v-.9"/>
-            </svg>
-        </button>
+        <Button onClick={action} iconSide="right" icon={<SvgArrowRightStraight />}>
+	        {text}
+        </Button>
 
     return (
         <div css={EpicStyles} ref={creativeContainer}>
             <h1>{title}</h1>
-            <div>{body}</div>
+            <div dangerouslySetInnerHTML={{__html: body}}></div>
             <div className="button-container">
-                {epicButton(firstButton, () => nativeClient.launchFrictionScreen())}
-                {
-                    secondButton
+                <ThemeProvider theme={buttonReaderRevenue}>
+                    {epicButton(firstButton, () => nativeClient.launchFrictionScreen())}
+                    {secondButton
                         ? epicButton(secondButton, () => nativeClient.launchFrictionScreen())
-                        : null
-                }
+                        : null}
+                </ThemeProvider>
             </div>
         </div>
     )
