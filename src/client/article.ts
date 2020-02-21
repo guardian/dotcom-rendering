@@ -12,6 +12,11 @@ import {logger} from "../logger";
 
 function getAdSlots(): AdSlot[] {
     const advertSlots = document.getElementsByClassName('ad-slot');
+
+    if (!advertSlots) {
+        return [];
+    }
+
     const scrollLeft = document.scrollingElement 
         ? document.scrollingElement.scrollLeft : document.body.scrollLeft;
     const scrollTop = document.scrollingElement 
@@ -30,20 +35,21 @@ function getAdSlots(): AdSlot[] {
 
 function insertAds(): void {
     let adSlots = getAdSlots();
-        
-    nativeClient.insertAdverts(adSlots)
-    const targetNode = document.querySelector('body') as Node;
-    const config = { attributes: true, childList: true, subtree: true };
-    const callback = function(): void {
-        const currentAdSlots = getAdSlots();
-        if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
-            adSlots = currentAdSlots;
-            nativeClient.updateAdverts(currentAdSlots);
-        }
-    };
+    if (adSlots.length > 0) {
+        nativeClient.insertAdverts(adSlots)
+        const targetNode = document.querySelector('body') as Node;
+        const config = { attributes: true, childList: true, subtree: true };
+        const callback = function(): void {
+            const currentAdSlots = getAdSlots();
+            if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
+                adSlots = currentAdSlots;
+                nativeClient.updateAdverts(currentAdSlots);
+            }
+        };
 
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+        const observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+    }
 }
 
 function ads(): void {
