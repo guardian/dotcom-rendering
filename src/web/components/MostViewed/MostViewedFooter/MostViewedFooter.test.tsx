@@ -188,5 +188,19 @@ describe('MostViewedFooter', () => {
         expect(
             asFragment().querySelectorAll('[data-link-name="0 | text"]').length,
         ).toBe(0); // 1 indexed so should start at 1
+
+        // most commented
+        expect(
+            asFragment().querySelectorAll(
+                '[data-link-name="comment | group-0 | card-@1"]',
+            ).length,
+        ).toBe(1);
+
+        // most shared
+        expect(
+            asFragment().querySelectorAll(
+                '[data-link-name="news | group-0 | card-@1"]',
+            ).length,
+        ).toBe(1);
     });
 });
