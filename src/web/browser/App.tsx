@@ -108,6 +108,7 @@ const App = ({ CAPI, NAV }: Props) => {
                             element={link.element}
                             pillar={CAPI.pillar}
                             ajaxEndpoint={CAPI.config.ajaxUrl}
+                            richLinkIndex={link.richLinkIndex}
                         />
                     </Portal>
                 ))}

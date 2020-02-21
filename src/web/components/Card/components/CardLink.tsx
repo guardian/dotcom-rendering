@@ -99,7 +99,11 @@ type Props = {
 };
 
 export const CardLink = ({ children, linkTo, designType, pillar }: Props) => (
-    <a href={linkTo} className={linkStyles(designType, pillar)}>
+    <a
+        href={linkTo}
+        className={linkStyles(designType, pillar)}
+        data-link-name="article"
+    >
         {children}
     </a>
 );

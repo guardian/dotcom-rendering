@@ -61,7 +61,11 @@ export const Contributor: React.FC<{
         tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     return (
-        <address aria-label="Contributor info">
+        <address
+            aria-label="Contributor info"
+            data-component="meta-byline"
+            data-link-name="byline"
+        >
             {designType !== 'Interview' && (
                 <div className={bylineStyle(pillar)}>
                     <BylineLink byline={author.byline} tags={tags} />

@@ -5,9 +5,10 @@ import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
     children: JSX.Element | JSX.Element[];
+    dataComponentName: string;
 };
 
-export const OnwardsContainer = ({ children }: Props) => (
+export const OnwardsContainer = ({ children, dataComponentName }: Props) => (
     <div
         className={css`
             display: flex;
@@ -41,6 +42,8 @@ export const OnwardsContainer = ({ children }: Props) => (
                 margin-top: 8px;
             }
         `}
+        data-component={dataComponentName}
+        data-link-name={dataComponentName}
     >
         {children}
     </div>

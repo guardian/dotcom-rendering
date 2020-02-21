@@ -18,7 +18,9 @@ describe('MostViewedList', () => {
     it('should call the api and render the response as expected', () => {
         useApi.mockReturnValue(response);
 
-        const { getAllByText } = render(<MostViewedRight pillar="news" />);
+        const { asFragment, getAllByText } = render(
+            <MostViewedRight pillar="news" />,
+        );
 
         // Calls api once only
         expect(useApi).toHaveBeenCalledTimes(1);
@@ -31,6 +33,27 @@ describe('MostViewedList', () => {
 
         // Renders appropriate number of age warnins
         expect(getAllByText(/This article is more than/).length).toBe(2);
+
+        // Renders data-component
+        expect(
+            asFragment().querySelectorAll('[data-component="geo-most-popular"]')
+                .length,
+        ).toBe(1);
+
+        // Renders Trail data-link-names
+        expect(
+            asFragment().querySelectorAll('[data-link-name*="trail"]').length,
+        ).toBe(5); // Total stories in Related (*= selector contains)
+
+        expect(
+            asFragment().querySelectorAll('[data-link-name="trail | 1"]')
+                .length,
+        ).toBe(1); // 1 indexed so should start at 1
+
+        expect(
+            asFragment().querySelectorAll('[data-link-name="trail | 0"]')
+                .length,
+        ).toBe(0); // 1 indexed so should start at 1
     });
 
     it('should implement a limit on the number of items', () => {
@@ -53,7 +76,6 @@ describe('MostViewedList', () => {
         expect(getAllByText(/This article is more than/).length).toBe(1);
     });
 
-    // TODO: Restore this once the component has this feature added to it
     it('should show a byline when this property is set to true', async () => {
         useApi.mockReturnValue(response);
 
