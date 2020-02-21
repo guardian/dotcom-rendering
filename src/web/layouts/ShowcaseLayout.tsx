@@ -270,11 +270,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         padded={false}
                         backgroundColour={palette.brand.main}
                     >
-                        <Header
-                            nav={NAV}
-                            pillar={CAPI.pillar}
-                            edition={CAPI.editionId}
-                        />
+                        <Header edition={CAPI.editionId} />
                     </Section>
 
                     <Section

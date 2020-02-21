@@ -1,12 +1,18 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
-import ProfileIcon from '@frontend/static/icons/profile.svg';
 import SearchIcon from '@frontend/static/icons/search.svg';
+
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
+
+import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
+import ProfileIcon from '@frontend/static/icons/profile.svg';
+
+type Props = {
+    isSignedIn?: boolean;
+};
 
 const search = css`
     :after {
@@ -30,7 +36,7 @@ const search = css`
     }
 `;
 
-const link = css`
+const linkStyles = css`
     ${textSans.medium()};
     color: ${palette.neutral[100]};
     float: left;
@@ -69,7 +75,7 @@ const linkTablet = ({ showAtTablet }: { showAtTablet: boolean }) => css`
     }
 `;
 
-const seperator = css`
+const seperatorStyles = css`
     border-left: 1px solid ${palette.brand.pastel};
     float: left;
     height: 24px;
@@ -81,7 +87,7 @@ const seperator = css`
     }
 `;
 
-const seperatorHide = css`
+const seperatorHideStyles = css`
     border-left: 1px solid ${palette.brand.pastel};
     float: left;
     height: 24px;
@@ -93,22 +99,27 @@ const seperatorHide = css`
     }
 `;
 
-const Search: React.FC<{
+const Search = ({
+    className,
+    children,
+    href,
+    dataLinkName,
+}: {
     href: string;
     className?: string;
     dataLinkName: string;
-}> = ({ className, children, href, dataLinkName, ...props }) => (
+    children: JSXElements;
+}) => (
     <a
         href={href}
         className={cx(search, className)}
-        {...props}
         data-link-name={dataLinkName}
     >
         {children}
     </a>
 );
 
-const links = css`
+const linksStyles = css`
     position: absolute;
     left: 10px;
     top: 0;
@@ -131,78 +142,71 @@ const links = css`
     }
 `;
 
-const profileSubdomain = 'https://profile.theguardian.com';
-const jobsUrl = 'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader';
-const datingUrl =
-    'https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader';
-const signInUrl = `${profileSubdomain}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in`;
-
 const identityLinks: DropdownLinkType[] = [
     {
-        url: `${profileSubdomain}/user/id/123`, // TODO use actual user ID once we have a user model
+        url: `https://profile.theguardian.com/user/id/123`, // TODO use actual user ID once we have a user model
         title: 'Comments and replies',
         dataLinkName: 'nav2 : topbar : comment activity',
     },
     {
-        url: `${profileSubdomain}/public/edit`,
+        url: `https://profile.theguardian.com/public/edit`,
         title: 'Public profile',
         dataLinkName: 'nav2 : topbar : edit profile',
     },
     {
-        url: `${profileSubdomain}/account/edit`,
+        url: `https://profile.theguardian.com/account/edit`,
         title: 'Account details',
         dataLinkName: 'nav2 : topbar : account details',
     },
     {
-        url: `${profileSubdomain}/email-prefs`,
+        url: `https://profile.theguardian.com/email-prefs`,
         title: 'Emails and marketing',
         dataLinkName: 'nav2 : topbar : email prefs',
     },
     {
-        url: `${profileSubdomain}/membership/edit`,
+        url: `https://profile.theguardian.com/membership/edit`,
         title: 'Membership',
         dataLinkName: 'nav2 : topbar : membership',
     },
     {
-        url: `${profileSubdomain}/contribution/recurring/edit`,
+        url: `https://profile.theguardian.com/contribution/recurring/edit`,
         title: 'Contributions',
         dataLinkName: 'nav2 : topbar : contributions',
     },
     {
-        url: `${profileSubdomain}/digitalpack/edit`,
+        url: `https://profile.theguardian.com/digitalpack/edit`,
         title: 'Digital pack',
         dataLinkName: 'nav2 : topbar : subscriptions',
     },
     {
-        url: `${profileSubdomain}/signout`,
+        url: `https://profile.theguardian.com/signout`,
         title: 'Sign out',
         dataLinkName: 'nav2 : topbar : sign out',
     },
 ];
 
-export const Links: React.FC<{
-    isSignedIn: boolean;
-}> = ({ isSignedIn }) => (
-    <div className={links}>
-        <div className={seperator} />
+export const Links = ({ isSignedIn }: Props) => (
+    <div id="links-root" className={linksStyles}>
+        <div className={seperatorStyles} />
         <a
-            href={jobsUrl}
-            className={cx(linkTablet({ showAtTablet: false }), link)}
+            href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
+            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
             data-link-name="nav2 : job-cta"
         >
             Search jobs
         </a>
 
         <a
-            href={datingUrl}
-            className={cx(linkTablet({ showAtTablet: false }), link)}
+            href="https://soulmates.theguardian.com/?INTCMP=soulmates_uk_web_newheader"
+            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
             data-link-name="nav2 : soulmates-cta"
         >
             Dating
         </a>
-        <div className={seperatorHide} />
+        <div className={seperatorHideStyles} />
+
         {isSignedIn ? (
-            <div className={link}>
+            <div className={linkStyles}>
                 <ProfileIcon />
                 <Dropdown
                     label="My account"
@@ -213,8 +217,8 @@ export const Links: React.FC<{
             </div>
         ) : (
             <a
-                className={link}
-                href={signInUrl}
+                className={linkStyles}
+                href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in"
                 data-link-name="nav2 : topbar : signin"
             >
                 <ProfileIcon /> Sign in
@@ -222,11 +226,12 @@ export const Links: React.FC<{
         )}
 
         <Search
-            className={cx(linkTablet({ showAtTablet: false }), link)}
+            className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
             href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
             dataLinkName="nav2 : search"
         >
-            <SearchIcon /> Search
+            <SearchIcon />
+            <>Search</>
         </Search>
     </div>
 );
