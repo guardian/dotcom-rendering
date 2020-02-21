@@ -1,6 +1,6 @@
 {
   "name": "@guardian/dotcom-rendering",
-  "description": "theguardian.com rendering tier",
+  "description": "theguardian.com rendering tier (Dotcom Rendering)",
   "version": "0.1.0-alpha",
   "license": "Apache-2.0",
   "tocList": "README.md docs/contributing/**",
