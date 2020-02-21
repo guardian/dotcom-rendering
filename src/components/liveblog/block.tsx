@@ -79,7 +79,7 @@ interface TitleProps {
 
 const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
     const TitleStyles = css`
-        padding: 0.5rem 0.125rem;
+        padding: 0.1rem 0.125rem;
         background-color: ${brandAlt[400]};
     `
     return title ? <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3> : null;
