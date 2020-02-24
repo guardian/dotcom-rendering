@@ -157,7 +157,6 @@ const App = ({ CAPI, NAV }: Props) => {
                 <OnwardsLower
                     ajaxUrl={CAPI.config.ajaxUrl}
                     hasStoryPackage={CAPI.hasStoryPackage}
-                    pageId={CAPI.pageId}
                     tags={CAPI.tags}
                 />
             </Portal>

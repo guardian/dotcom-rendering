@@ -8,16 +8,10 @@ import { OnwardsLayout } from './OnwardsLayout';
 type Props = {
     ajaxUrl: string;
     hasStoryPackage: boolean;
-    pageId: string;
     tags: TagType[];
 };
 
-export const OnwardsLower = ({
-    ajaxUrl,
-    hasStoryPackage,
-    pageId,
-    tags,
-}: Props) => {
+export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
     const onwardSections: OnwardsType[] = [];
 
     // In this context, Blog tags are treated the same as Series tags
