@@ -31,19 +31,23 @@ export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
     }
 
     if (data) {
+        // Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
         return (
-            <div className={wrapperStyles}>
+            <div className={wrapperStyles} data-component="geo-most-popular">
                 <GuardianLines pillar={pillar} count={4} />
                 <h3 className={headingStyles}>most viewed</h3>
-                <ul>
+                <ul data-link-name="Right hand most popular geo GB">
                     {(data.trails || [])
                         .slice(0, limitItems)
-                        .map((trail: TrailType, ii: number) => (
-                            <MostViewedRightItem
-                                key={trail.url}
-                                trail={trail}
-                            />
-                        ))}
+                        .map(
+                            (trail: TrailType, mostViewedItemIndex: number) => (
+                                <MostViewedRightItem
+                                    key={trail.url}
+                                    trail={trail}
+                                    mostViewedItemIndex={mostViewedItemIndex}
+                                />
+                            ),
+                        )}
                 </ul>
             </div>
         );

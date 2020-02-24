@@ -248,6 +248,11 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
     // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
 
+    const seriesTag = CAPI.tags.find(
+        tag => tag.type === 'Series' || tag.type === 'Blog',
+    );
+    const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
+
     return (
         <>
             <div>
@@ -428,7 +433,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section islandId="onwards-content" />
+            <Section islandId="onwards-upper" />
 
             {!isPaidContent && (
                 <>
@@ -438,6 +443,8 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     >
                         <OutbrainContainer />
                     </Section>
+
+                    {showOnwardsLower && <Section islandId="onwards-lower" />}
 
                     <Section islandId="most-viewed-footer" />
                 </>
