@@ -57,10 +57,6 @@ const App = ({ CAPI, NAV }: Props) => {
         callFetch();
     }, []);
 
-    console.log(
-        `TODO: Now that we have countryCode ${countryCode} then we should use it (Andre, I'm looking at you)`,
-    );
-
     const richLinks: {
         element: RichLinkBlockElement;
         root: RootType;

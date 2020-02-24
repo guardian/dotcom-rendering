@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
-import { useApi } from '@root/src/web/lib/api';
+import {
+    getShowSupportMessaging,
+    getIsRecurringContributor,
+    lastOneOffContributionDate,
+} from '@root/src/web/lib/contributions';
 
 const wrapperMargins = css`
     margin: 18px 0;
@@ -27,53 +31,70 @@ export const SlotBodyEnd = ({
     isPaidContent,
     tags,
 }: Props) => {
-    // Putting together the request payload
-    const contributionsPayload = {
-        tracking: {
-            ophanPageId: window?.guardian.config.ophan.pageViewId,
-            ophanComponentId: 'ACQUISITIONS_EPIC',
-            platformId: 'GUARDIAN_WEB',
-            campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
-            abTestName: 'remote_epic_test',
-            abTestVariant: 'api',
-            referrerUrl: window?.location.origin + window?.location.pathname
-        },
-        localisation: {
-            countryCode: 'GB', // TODO: make this dynamic
-        },
-        targeting: {
-            contentType,
-            sectionName,
-            shouldHideReaderRevenue,
-            isMinuteArticle,
-            isPaidContent,
-            tags,
-        },
-    };
+    const [epicContent, setEpicContent] = useState<{ html: string; css: string}>();
 
-    const endpointUrl = 'https://contributions.guardianapis.com/epic';
-    const { data: responseBody, error } = useApi(endpointUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(contributionsPayload),
-    });
+    useEffect(() => {
+        const callFetch = async () => {
 
-    if (error) {
-        window.guardian.modules.sentry.reportError(error, 'slot-body-end');
-        return null;
-    }
+            // Putting together the request payload
+            const contributionsPayload = {
+                tracking: {
+                    ophanPageId: window?.guardian.config.ophan.pageViewId,
+                    ophanComponentId: 'ACQUISITIONS_EPIC',
+                    platformId: 'GUARDIAN_WEB',
+                    campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
+                    abTestName: 'remote_epic_test',
+                    abTestVariant: 'api',
+                    referrerUrl: window?.location.origin + window?.location.pathname
+                },
+                localisation: {
+                    countryCode
+                },
+                targeting: {
+                    contentType,
+                    sectionName,
+                    shouldHideReaderRevenue,
+                    isMinuteArticle,
+                    isPaidContent,
+                    tags,
+                    showSupportMessaging: getShowSupportMessaging(),
+                    isRecurringContributor: getIsRecurringContributor(isSignedIn),
+                    lastOneOffContributionDate: lastOneOffContributionDate(),
+                },
+            };
 
-    if (responseBody && responseBody.data) {
-        const { data } = responseBody;
+            const getEpicContent = () => {
+                const endpointUrl = 'http://localhost:8081/epic';
+                // const endpointUrl = 'https://contributions.guardianapis.com/epic';
+                return fetch(endpointUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(contributionsPayload)
+                })
+                .then((response) => {
+                    if (!response.ok) {
+                        const apiError = new Error(response.statusText);
+                        window.guardian.modules.sentry.reportError(apiError, 'slot-body-end');
+                    }
+                    return response;
+                })
+                .then(response => response.json())
+            }
+            const epicResponse = await getEpicContent();
+            setEpicContent(epicResponse.data);
+        };
+        callFetch();
+    }, [isSignedIn, countryCode]);
 
+    if (epicContent) {
         return (
             <div className={wrapperMargins}>
-                {data.css && <style>{data.css}</style>}
+                {epicContent.css && <style>{epicContent.css}</style>}
                 <div
                     // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{ __html: data.html }}
+                    dangerouslySetInnerHTML={{ __html: epicContent.html }}
                 />
             </div>
         );
