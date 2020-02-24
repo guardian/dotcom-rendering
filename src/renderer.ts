@@ -166,6 +166,8 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
             return styledH('ul', { css: listStyles }, children);
         case 'LI':
             return styledH('li', { css: listItemStyles }, children);
+        case 'MARK':
+            return styledH('mark', { key }, children);
         default:
             return null;
     }

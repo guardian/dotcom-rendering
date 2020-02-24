@@ -1,21 +1,25 @@
 // ----- Imports ----- //
 import { css, SerializedStyles } from '@emotion/core';
-import { spaceToRem } from 'styles';
-import { headline, body } from '@guardian/src-foundations/typography';
+import { spaceToRem, headlineFont } from 'styles';
 import { from } from '@guardian/src-foundations/mq';
-import { palette, brandAlt } from '@guardian/src-foundations';
+import { palette } from '@guardian/src-foundations';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import React, { useState, useEffect, useRef } from 'react';
 import { nativeClient } from 'native/nativeApi';
 import { SvgArrowRightStraight } from "@guardian/src-svgs"
 import { ThemeProvider } from 'emotion-theming'
 import { Button, buttonReaderRevenue } from '@guardian/src-button'
+import { parse } from 'client/parser';
+import { renderText } from 'renderer';
+import { Pillar } from 'pillar';
 
+const parser = new DOMParser();
+const parseEpic = parse(parser);
 
 // ----- Styles ----- //
 
 const EpicStyles = (): SerializedStyles => css`
-        width: calc(100% - ${basePx(4)});
+        width: calc(100% - ${spaceToRem(2)} - ${spaceToRem(2)} - ${spaceToRem(2)} - ${spaceToRem(2)});
         margin: ${spaceToRem(2)};
 
         ${from.wide} {
@@ -39,7 +43,7 @@ const EpicStyles = (): SerializedStyles => css`
         }
 
         .button-container {
-            margin-top: 3rem;
+            margin-top: ${spaceToRem(9)};
         }
 
         svg {
@@ -104,10 +108,15 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
 	        {text}
         </Button>
 
+    const epicBody = parseEpic(body).either(
+        _ => [null],
+        content => renderText(content, Pillar.news),
+    );
+
     return (
         <div css={EpicStyles} ref={creativeContainer}>
             <h1>{title}</h1>
-            <div dangerouslySetInnerHTML={{__html: body}}></div>
+            {epicBody}
             <div className="button-container">
                 <ThemeProvider theme={buttonReaderRevenue}>
                     {epicButton(firstButton, () => nativeClient.launchFrictionScreen())}
