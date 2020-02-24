@@ -12,7 +12,7 @@ import {
 import fetch from 'node-fetch';
 
 import { Response as CapiResponse } from 'mapiThriftModels/Response';
-import { Content as MapiContent, IContent as Content } from 'mapiThriftModels/Content';
+import { Content as MapiContent } from 'mapiThriftModels/Content';
 import { getConfigValue } from 'server/ssmConfig';
 import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
@@ -28,28 +28,9 @@ const defaultId =
 
 // ----- Functions ----- //
 
-const enum Support {
-  Supported,
-  Unsupported,
-}
-
-type Supported = {
-  kind: Support.Supported;
-} | {
-  kind: Support.Unsupported;
-  reason: string;
-}
 
 function getPrefetchHeader(resources: string[]): string {
   return resources.reduce((linkHeader, resource) => linkHeader + `<${resource}>; rel=prefetch,`, '');
-}
-
-function checkSupport({ atoms }: Content): Supported {
-  if (atoms) {
-    return { kind: Support.Unsupported, reason: 'The article contains atoms' };
-  }
-
-  return { kind: Support.Supported };
 }
 
 async function serveArticlePost(
@@ -58,23 +39,17 @@ async function serveArticlePost(
     next: NextFunction
 ): Promise<void> {
   try {
-      const transport = new BufferedTransport(body);
-      const protocol = new CompactProtocol(transport);
-      const content: MapiContent = MapiContent.read(protocol);
-      const support = checkSupport(content);
-      const imageSalt = await getConfigValue<string>('apis.img.salt');
+    const transport = new BufferedTransport(body);
+    const protocol = new CompactProtocol(transport);
+    const content: MapiContent = MapiContent.read(protocol);
+    const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-    if (support.kind === Support.Supported) {
-      const { resources, element } = Page({ content, imageSalt });
-      const html = renderToString(element);
-      res.set('Link', getPrefetchHeader(resources));
-      res.write('<!DOCTYPE html>');
-      res.write(html);
-      res.end();
-    } else {
-      logger.warn(`I can\'t render that type of content yet! ${support.reason}`);
-      res.sendStatus(415);
-    }
+    const { resources, element } = Page({ content, imageSalt });
+    const html = renderToString(element);
+    res.set('Link', getPrefetchHeader(resources));
+    res.write('<!DOCTYPE html>');
+    res.write(html);
+    res.end();
   } catch (e) {
     logger.error(`This error occurred, but I don't know why: ${e}`);
     next(e);
@@ -106,18 +81,11 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             }
           },
           content => {
-            const support = checkSupport(content);
-
-            if (support.kind === Support.Supported) {
-              const { resources, element } = Page({ content, imageSalt });
-              res.set('Link', getPrefetchHeader(resources));
-              res.write('<!DOCTYPE html>');
-              res.write(renderToString(element));
-              res.end();
-            } else {
-              logger.warn(`I can\'t render that type of content yet! ${support.reason}`);
-              res.sendStatus(415);
-            }
+            const { resources, element } = Page({ content, imageSalt });
+            res.set('Link', getPrefetchHeader(resources));
+            res.write('<!DOCTYPE html>');
+            res.write(renderToString(element));
+            res.end();
           }
         )
       }
