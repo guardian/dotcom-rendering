@@ -140,16 +140,20 @@ const App = ({ CAPI, NAV }: Props) => {
             <Portal root="most-viewed-right">
                 <MostViewedRightWrapper pillar={CAPI.pillar} />
             </Portal>
-            <Portal root="slot-body-end">
-                <SlotBodyEnd
-                    contentType={CAPI.contentType}
-                    sectionName={CAPI.sectionName}
-                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                    isPaidContent={CAPI.pageType.isPaidContent}
-                    tags={CAPI.tags}
-                />
-            </Portal>
+            {isSignedIn !== undefined && countryCode !== undefined && (
+                <Portal root="slot-body-end">
+                    <SlotBodyEnd
+                        isSignedIn={isSignedIn}
+                        countryCode={countryCode}
+                        contentType={CAPI.contentType}
+                        sectionName={CAPI.sectionName}
+                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                        isPaidContent={CAPI.pageType.isPaidContent}
+                        tags={CAPI.tags}
+                    />
+                </Portal>
+            )}
             <Portal root="onwards-content">
                 <Onwards
                     ajaxUrl={CAPI.config.ajaxUrl}

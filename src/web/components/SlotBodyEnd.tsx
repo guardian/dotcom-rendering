@@ -7,6 +7,8 @@ const wrapperMargins = css`
 `;
 
 type Props = {
+    isSignedIn: boolean;
+    countryCode: string;
     contentType: string;
     sectionName?: string;
     shouldHideReaderRevenue: boolean;
@@ -16,6 +18,8 @@ type Props = {
 };
 
 export const SlotBodyEnd = ({
+    isSignedIn,
+    countryCode,
     contentType,
     sectionName,
     shouldHideReaderRevenue,
