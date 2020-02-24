@@ -43,7 +43,7 @@ const EpicStyles = (): SerializedStyles => css`
 
         svg {
             margin-left: ${spaceToRem(2)};
-            margin-top: -4px;
+            margin-top: -${spaceToRem(1)};
             vertical-align: middle;
         }
 
