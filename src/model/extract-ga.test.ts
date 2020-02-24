@@ -14,15 +14,14 @@ const base = {
         'money/ticket-prices,money/consumer-affairs,money/money,technology/internet,money/viagogo',
     pillar: 'lifestyle',
     section: 'money',
-    seriesId: '',
+    seriesId: 'testseries',
     toneIds: 'tone/news',
     webTitle:
         "Ticket touts face unlimited fines for using 'bots' to buy in bulk",
 };
 
 describe('Google Analytics extracts and formats CAPI response correctly', () => {
-    it.skip('GA Extract returns correctly formatted GA response', () => {
-        // TODO FIX ME
+    it('GA Extract returns correctly formatted GA response', () => {
         expect(extract(CAPI)).toEqual(base);
     });
 });
