@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
 import {
-    getShowSupportMessaging,
-    getIsRecurringContributor,
-    lastOneOffContributionDate,
+    shouldShowSupportMessaging,
+    isRecurringContributor,
+    getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
 
 const wrapperMargins = css`
@@ -56,14 +56,15 @@ export const SlotBodyEnd = ({
                     isMinuteArticle,
                     isPaidContent,
                     tags,
-                    showSupportMessaging: getShowSupportMessaging(),
-                    isRecurringContributor: getIsRecurringContributor(isSignedIn),
-                    lastOneOffContributionDate: lastOneOffContributionDate(),
+                    showSupportMessaging: shouldShowSupportMessaging(),
+                    isRecurringContributor: isRecurringContributor(isSignedIn),
+                    lastOneOffContributionDate: getLastOneOffContributionDate(),
                 },
             };
 
             const getEpicContent = () => {
-                const endpointUrl = 'https://contributions.guardianapis.com/epic';
+                // const endpointUrl = 'https://contributions.guardianapis.com/epic';
+                const endpointUrl = 'http://localhost:8081/epic';
                 return fetch(endpointUrl, {
                     method: 'POST',
                     headers: {
