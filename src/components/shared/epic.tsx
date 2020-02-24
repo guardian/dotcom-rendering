@@ -34,7 +34,7 @@ const EpicStyles = (): SerializedStyles => css`
         }
 
         button {
-            margin: ${basePx(0, 1, 1, 0)};
+            margin: 0 ${spaceToRem(2)} ${spaceToRem(2)} 0;
         }
 
         .button-container {
