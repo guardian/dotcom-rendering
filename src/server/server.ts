@@ -23,7 +23,7 @@ import {App, Stack, Stage} from "./appIdentity";
 
 // ----- Setup ----- //
 
-let scriptMappings: { [key: string]: string; };
+let scriptMappings: { [key: string]: string };
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
