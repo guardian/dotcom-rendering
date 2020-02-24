@@ -80,6 +80,7 @@ const PageStyles = css`
 interface BodyProps {
     imageSalt: string;
     capi: Content;
+    scriptMappings: { [key: string]: string; };
 }
 
 interface ElementWithResources {
@@ -93,14 +94,17 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
         <script src={props.src}></script>
     </>
 
-function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
+function ArticleBody({ capi, imageSalt, scriptMappings }: BodyProps): ElementWithResources {
 
     const insertAdPlaceholders = getAdPlaceholderInserter(capi.fields?.shouldHideAdverts ?? false);
 
     const item = fromCapi(JSDOM.fragment)(capi);
-    
-    const articleScript = '/assets/article.js';
-    const liveblogScript = '/assets/liveblog.js';
+
+    const getHashedScript = (scriptName: string) =>
+        `/assets/${scriptMappings[scriptName]}`
+
+    const articleScript = getHashedScript('article.js');
+    const liveblogScript = getHashedScript('liveblog.js');
 
     if (item.design === Design.Comment) {
         const commentBody = partition(item.body).oks;
@@ -162,14 +166,15 @@ function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
 interface Props {
     content: Content;
     imageSalt: string;
+    scriptMappings: { [key: string]: string; }
 }
 
-function Page({ content, imageSalt }: Props): ElementWithResources {
+function Page({ content, imageSalt, scriptMappings }: Props): ElementWithResources {
     const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
-    const { element, resources } = ArticleBody({ imageSalt, capi: content})
+    const { element, resources } = ArticleBody({ imageSalt, capi: content, scriptMappings })
 
     return { element: (
         <html lang="en" css={PageStyles}>

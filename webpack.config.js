@@ -4,6 +4,7 @@ const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 // ----- Plugins ----- //
 
@@ -105,8 +106,11 @@ const clientConfig = {
     target: 'web',
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
-        filename: '[name].js',
+        filename: '[name].[contenthash].js',
     },
+    plugins: [
+        new WebpackAssetsManifest(),
+    ],
     resolve: resolve("clientDev"),
     devServer: {
         publicPath: '/assets/',
