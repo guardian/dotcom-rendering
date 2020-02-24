@@ -428,7 +428,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section islandId="onwards-content" />
+            <Section islandId="onwards-upper" />
 
             {!isPaidContent && (
                 <>
@@ -438,6 +438,8 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     >
                         <OutbrainContainer />
                     </Section>
+
+                    <Section islandId="onwards-lower" />
 
                     <Section islandId="most-viewed-footer" />
                 </>

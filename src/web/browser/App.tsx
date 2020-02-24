@@ -9,7 +9,8 @@ import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CMP } from '@frontend/web/components/CMP';
-import { Onwards } from '@frontend/web/components/Onwards/Onwards';
+import { OnwardsUpper } from '@frontend/web/components/Onwards/OnwardsUpper';
+import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { Header } from '@frontend/web/components/Header';
@@ -29,7 +30,8 @@ type RootType =
     | 'reader-revenue-links-footer'
     | 'slot-body-end'
     | 'cmp'
-    | 'onwards-content'
+    | 'onwards-upper'
+    | 'onwards-lower'
     | 'rich-link'
     | 'header-root';
 
@@ -137,8 +139,8 @@ const App = ({ CAPI, NAV }: Props) => {
                     tags={CAPI.tags}
                 />
             </Portal>
-            <Portal root="onwards-content">
-                <Onwards
+            <Portal root="onwards-upper">
+                <OnwardsUpper
                     ajaxUrl={CAPI.config.ajaxUrl}
                     hasRelated={CAPI.hasRelated}
                     hasStoryPackage={CAPI.hasStoryPackage}
@@ -148,6 +150,14 @@ const App = ({ CAPI, NAV }: Props) => {
                     showRelatedContent={CAPI.config.showRelatedContent}
                     keywordIds={CAPI.config.keywordIds}
                     contentType={CAPI.contentType}
+                    tags={CAPI.tags}
+                />
+            </Portal>
+            <Portal root="onwards-lower">
+                <OnwardsLower
+                    ajaxUrl={CAPI.config.ajaxUrl}
+                    hasStoryPackage={CAPI.hasStoryPackage}
+                    pageId={CAPI.pageId}
                     tags={CAPI.tags}
                 />
             </Portal>
