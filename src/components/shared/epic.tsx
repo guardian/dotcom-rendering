@@ -18,7 +18,7 @@ const EpicStyles = (): SerializedStyles => css`
         margin: ${spaceToRem(2)};
 
         ${from.wide} {
-            margin: ${basePx(1, 0)};
+            margin: ${spaceToRem(2)} 0;
         }
 
         clear: both;
