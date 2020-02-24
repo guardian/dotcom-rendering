@@ -31,7 +31,7 @@ const EpicStyles = (): SerializedStyles => css`
         border-top: 1px solid ${brandAltBackground.primary};
         background: ${palette.neutral[97]};
         padding: ${spaceToRem(2)};
-        font-family: 'Guardian Text Egyptian Web';
+        ${body.medium()}
         clear: left;
 
         h1:first-of-type {
