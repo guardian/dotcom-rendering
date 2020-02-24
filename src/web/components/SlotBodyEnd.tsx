@@ -35,7 +35,6 @@ export const SlotBodyEnd = ({
 
     useEffect(() => {
         const callFetch = async () => {
-
             // Putting together the request payload
             const contributionsPayload = {
                 tracking: {
@@ -64,8 +63,7 @@ export const SlotBodyEnd = ({
             };
 
             const getEpicContent = () => {
-                const endpointUrl = 'http://localhost:8081/epic';
-                // const endpointUrl = 'https://contributions.guardianapis.com/epic';
+                const endpointUrl = 'https://contributions.guardianapis.com/epic';
                 return fetch(endpointUrl, {
                     method: 'POST',
                     headers: {
