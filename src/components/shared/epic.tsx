@@ -4,6 +4,7 @@ import { spaceToRem } from 'styles';
 import { headline, body } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, brandAlt } from '@guardian/src-foundations';
+import { brandAltBackground } from '@guardian/src-foundations/palette';
 import React, { useState, useEffect, useRef } from 'react';
 import { nativeClient } from 'native/nativeApi';
 import { SvgArrowRightStraight } from "@guardian/src-svgs"
