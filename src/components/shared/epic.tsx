@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 import { css, SerializedStyles } from '@emotion/core';
-import { basePx, headlineFont } from 'styles';
+import { spaceToRem } from 'styles';
+import { headline, body } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, brandAlt } from '@guardian/src-foundations';
 import React, { useState, useEffect, useRef } from 'react';
