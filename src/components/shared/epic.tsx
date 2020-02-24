@@ -14,7 +14,7 @@ import { Button, buttonReaderRevenue } from '@guardian/src-button'
 
 const EpicStyles = (): SerializedStyles => css`
         width: calc(100% - ${basePx(4)});
-        margin: ${basePx(1)};
+        margin: ${spaceToRem(2)};
 
         ${from.wide} {
             margin: ${basePx(1, 0)};
