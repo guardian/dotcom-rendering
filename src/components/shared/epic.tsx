@@ -25,7 +25,7 @@ const EpicStyles = (): SerializedStyles => css`
 
         border-top: 1px solid ${brandAlt[400]};
         background: ${palette.neutral[97]};
-        padding: ${basePx(1)};
+        padding: ${spaceToRem(2)};
         font-family: 'Guardian Text Egyptian Web';
         clear: left;
 
