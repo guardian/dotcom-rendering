@@ -48,7 +48,7 @@ const EpicStyles = (): SerializedStyles => css`
         }
 
         mark {
-            background: ${brandAlt[400]};
+            background: ${brandAltBackground.primary};
             padding: .1rem .125rem;
         }
 `;
