@@ -35,7 +35,7 @@ const EpicStyles = (): SerializedStyles => css`
         clear: left;
 
         h1:first-of-type {
-            ${headlineFont}
+            ${headline.large()}
         }
 
         button {
