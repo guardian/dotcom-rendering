@@ -43,8 +43,8 @@ export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
 };
 
 const App = ({ CAPI, NAV }: Props) => {
-    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
-    const [countryCode, setCountryCode] = useState<string>('');
+    const [isSignedIn, setIsSignedIn] = useState<boolean>();
+    const [countryCode, setCountryCode] = useState<string>();
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
