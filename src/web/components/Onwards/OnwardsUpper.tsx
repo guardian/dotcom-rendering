@@ -78,7 +78,7 @@ type Props = {
     tags: TagType[];
 };
 
-export const Onwards = ({
+export const OnwardsUpper = ({
     ajaxUrl,
     hasRelated,
     hasStoryPackage,
