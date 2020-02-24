@@ -82,7 +82,7 @@ const debounce = (fn: () => void, time: number): () => void => {
     }
 }
 
-function Epic({ title, body, firstButton, secondButton }: EpicProps): JSX.Element | null {
+function Epic({ title, body, firstButton, secondButton }: EpicProps): React.ReactElement | null {
     const [impressionSeen, setImpressionSeen] = useState(false);    
     const creativeContainer = useRef() as React.MutableRefObject<HTMLDivElement>;;
 
