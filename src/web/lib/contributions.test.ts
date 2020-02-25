@@ -53,11 +53,8 @@ describe('getLastOneOffContributionDate', () => {
     });
 
     it('returns an empty string if no dates can be parsed correctly', () => {
-        const noDate1 = 'CANT_TOUCH_THIS';
-        setCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, noDate1);
-
-        const noDate2 = 'OR_THIS';
-        setCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, noDate2);
+        setCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, 'CANT_TOUCH_THIS');
+        setCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, 'OR_THIS');
 
         const lastOneOffContributionDate = getLastOneOffContributionDate();
         expect(lastOneOffContributionDate).toBe('');
