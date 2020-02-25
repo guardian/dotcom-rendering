@@ -54,7 +54,7 @@ export const isRecurringContributor = (isSignedIn: boolean): boolean => {
 // SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE (support cookie, when making one-off contribution)
 // Get the date of the latest one-off contribution by looking at the two relevant cookies
 // and returning a Unix epoch string of the latest date found.
-export const getLastOneOffContributionDate = (): string => {
+export const getLastOneOffContributionDate = (): number | undefined => {
     // Attributes cookie - expects YYYY-MM-DD
     const contributionDateFromAttributes = getCookie(
         ONE_OFF_CONTRIBUTION_DATE_COOKIE,
@@ -65,28 +65,23 @@ export const getLastOneOffContributionDate = (): string => {
         SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
     );
 
-    try {
-        // Parse dates into common format so they can be compared
-        const parsedDateFromAttributes = contributionDateFromAttributes
-            ? Date.parse(contributionDateFromAttributes)
-            : 0;
-        const parsedDateFromSupport = contributionDateFromSupport
-            ? parseInt(contributionDateFromSupport, 10)
-            : 0;
-
-        // Determine the latest of two dates
-        const latestOnOffContributionDate = Math.max(
-            parsedDateFromAttributes,
-            parsedDateFromSupport,
-        );
-
-        // Return stringified latest contribution date
-        return latestOnOffContributionDate
-            ? String(latestOnOffContributionDate)
-            : '';
-    } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log('Could not parse latestOneOffContribution date');
-        return '';
+    if (!contributionDateFromAttributes && !contributionDateFromSupport) {
+        return undefined;
     }
+
+    // Parse dates into common format so they can be compared
+    const parsedDateFromAttributes = contributionDateFromAttributes
+        ? Date.parse(contributionDateFromAttributes)
+        : 0;
+    const parsedDateFromSupport = contributionDateFromSupport
+        ? parseInt(contributionDateFromSupport, 10)
+        : 0;
+
+    // Return most recent date
+    // Condition only passed if 'parsedDateFromAttributes' is NOT NaN
+    if (parsedDateFromAttributes > parsedDateFromSupport) {
+        return parsedDateFromAttributes;
+    }
+
+    return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
 };

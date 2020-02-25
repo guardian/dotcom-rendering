@@ -63,8 +63,8 @@ export const SlotBodyEnd = ({
             };
 
             const getEpicContent = () => {
-                const endpointUrl = 'https://contributions.guardianapis.com/epic';
-                return fetch(endpointUrl, {
+                return fetch('http://localhost:8081/epic', {
+                // return fetch('https://contributions.guardianapis.com/epic', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
