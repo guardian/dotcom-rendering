@@ -14,3 +14,9 @@ deployments:
     parameters:
       bucket: mobile-apps-api-dist
     dependencies: [mobile-apps-rendering-cfn]
+  mobile-assets:
+    type: aws-s3
+    parameters:
+      bucket: aws-mobile-assets
+      cacheControl: public, max-age=315360000
+      prefixStack: false
