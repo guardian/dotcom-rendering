@@ -17,14 +17,16 @@
     "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
     "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes"
   },
-  "bundlesize": [{
-    "path": "./dist/ga.*.js",
-    "maxSize": "20 kB"
-  }],
+  "bundlesize": [
+    {
+      "path": "./dist/ga.*.js",
+      "maxSize": "20 kB"
+    }
+  ],
   "dependencies": {
     "@emotion/core": "^10.0.5",
     "@guardian/consent-management-platform": "^2.0.9",
-    "@guardian/src-foundations": "^0.10.0",
+    "@guardian/src-foundations": "^0.13.0",
     "@sentry/browser": "^5.7.1",
     "@types/ajv": "^1.0.0",
     "@types/lodash.escape": "^4.0.6",

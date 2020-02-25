@@ -2098,11 +2098,6 @@
   dependencies:
     "@guardian/src-svgs" "^0.13.0"
 
-"@guardian/src-foundations@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.10.0.tgz#b7773484f2b9e661d31f1d400950a83fb261fe63"
-  integrity sha512-w5xvrYqCLngxFUsivhVhJ35EppFi2GtPMAUxN6EG/Hc9FDD3qiWHiT0nwSPOReNq3UXOLH6DxbNxanFVaOelCg==
-
 "@guardian/src-foundations@^0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.13.0.tgz#8bfed9b94e2e4f24ecacb754bbe573b6e0cfe088"
