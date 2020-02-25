@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "upload": "node-riffraff-artifact",
-    "test:build": "webpack --config webpack.config.js --config-name server --env.test",
+    "test:build": "npm run build:client:prod; webpack --config webpack.config.js --config-name server --env.test",
     "test": "npm run test:build && jest --verbose",
     "test:coverage": "npm run test && open coverage/index.html",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
