@@ -58,8 +58,13 @@ interface Props {
     children: ReactNode[];
 }
 
-const Standard = ({ imageSalt, item, children }: Props): JSX.Element =>
-    <main css={[Styles, DarkStyles]}>
+const Standard = ({ imageSalt, item, children }: Props): JSX.Element => {
+    // client side code won't render an Epic if there's an element with this id
+    const epicContainer = item.shouldHideReaderRevenue
+        ? <div id="epic-container"></div>
+        : null
+
+    return <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderImage
@@ -85,11 +90,13 @@ const Standard = ({ imageSalt, item, children }: Props): JSX.Element =>
             <Body pillar={item.pillar} className={[articleWidthStyles]}>
                 {children}
             </Body>
+            {epicContainer}
             <footer css={articleWidthStyles}>
                 <Tags tags={item.tags}/>
             </footer>
         </article>
     </main>
+}
 
 
 // ----- Exports ----- //

@@ -1,12 +1,16 @@
 // ----- Imports ----- //
 
-import setup from 'client/setup';
 import { nativeClient } from 'native/nativeApi';
 import { AdSlot } from 'mobile-apps-thrift-typescript/AdSlot'
 import { Topic } from 'mobile-apps-thrift-typescript/Topic';
 import { Image } from 'mobile-apps-thrift-typescript/Image';
+import { IMaybeEpic as MaybeEpic } from 'mobile-apps-thrift-typescript/MaybeEpic';
 import { formatDate } from 'date';
-import {logger} from "../logger";
+import { logger } from "../logger";
+import { createElement as h } from 'react';
+import setup from 'client/setup';
+import Epic from 'components/shared/epic';
+import ReactDOM from 'react-dom';
 
 // ----- Run ----- //
 
@@ -146,8 +150,24 @@ function formatDates(): void {
         })
 }
 
+function insertEpic(): void {
+    if (navigator.onLine && !document.getElementById('epic-container')) {
+        nativeClient.getEpics().then((maybeEpic: MaybeEpic) => {
+            if (maybeEpic.epic) {
+                const epicContainer = document.createElement('div');
+                epicContainer.id = 'epic-container';
+                document.querySelector('footer')?.prepend(epicContainer);
+                const { title, body, firstButton, secondButton } = maybeEpic.epic;
+                const epicProps =  { title, body, firstButton, secondButton };
+                ReactDOM.render(h(Epic, epicProps), epicContainer)
+            }
+        })
+    }
+}
+
 setup();
 ads();
 topics();
 slideshow();
 formatDates();
+insertEpic();

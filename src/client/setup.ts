@@ -40,10 +40,8 @@ function twitter(): void {
 }
 
 function setup(): void {
-
     interactives();
     twitter();
-
 }
 
 
