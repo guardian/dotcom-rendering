@@ -138,6 +138,7 @@ const App = ({ CAPI, NAV }: Props) => {
             <Portal root="most-viewed-right">
                 <MostViewedRightWrapper pillar={CAPI.pillar} />
             </Portal>
+            {/* Ensure component only renders after both variables have been assigned true or false */}
             {isSignedIn !== undefined && countryCode !== undefined && (
                 <Portal root="slot-body-end">
                     <SlotBodyEnd
