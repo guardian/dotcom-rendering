@@ -83,11 +83,11 @@ const debounce = (fn: () => void, time: number): () => void => {
 
 function Epic({ title, body, firstButton, secondButton }: EpicProps): React.ReactElement | null {
     const [impressionSeen, setImpressionSeen] = useState(false);    
-    const creativeContainer = useRef() as React.MutableRefObject<HTMLDivElement>;;
+    const epicContainer = useRef() as React.MutableRefObject<HTMLDivElement>;
 
     useEffect(() => {
         const handleSeenEpic = debounce(() => {
-            if (!impressionSeen && isElementPartiallyInViewport(creativeContainer)) {
+            if (!impressionSeen && isElementPartiallyInViewport(epicContainer)) {
                 nativeClient.epicSeen();
                 setImpressionSeen(true);
             }
@@ -104,7 +104,7 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
         </Button>
 
     return (
-        <div css={EpicStyles} ref={creativeContainer}>
+        <div css={EpicStyles} ref={epicContainer}>
             <h1>{title}</h1>
             <div dangerouslySetInnerHTML={{__html: body}}></div>
             <div className="button-container">

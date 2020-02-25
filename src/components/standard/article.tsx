@@ -61,7 +61,7 @@ interface Props {
 const Standard = ({ imageSalt, item, children }: Props): JSX.Element => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
-        ? <div id="creative-container"></div>
+        ? <div id="epic-container"></div>
         : null
 
     return <main css={[Styles, DarkStyles]}>

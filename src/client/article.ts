@@ -151,15 +151,15 @@ function formatDates(): void {
 }
 
 function insertEpic(): void {
-    if (navigator.onLine && !document.getElementById('creative-container')) {
+    if (navigator.onLine && !document.getElementById('epic-container')) {
         nativeClient.getEpics().then((maybeEpic: MaybeEpic) => {
             if (maybeEpic.epic) {
-                const creativeContainer = document.createElement('div');
-                creativeContainer.id = 'creative-container';
-                document.querySelector('footer')?.prepend(creativeContainer);
+                const epicContainer = document.createElement('div');
+                epicContainer.id = 'epic-container';
+                document.querySelector('footer')?.prepend(epicContainer);
                 const { title, body, firstButton, secondButton } = maybeEpic.epic;
                 const epicProps =  { title, body, firstButton, secondButton };
-                ReactDOM.render(h(Epic, epicProps), creativeContainer)
+                ReactDOM.render(h(Epic, epicProps), epicContainer)
             }
         })
     }
