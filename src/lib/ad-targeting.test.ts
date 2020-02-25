@@ -31,8 +31,7 @@ describe('buildAdTargeting', () => {
         },
     };
 
-    it.skip('builds adTargeting correctly', () => {
-        // TODO FIX ME
+    it('builds adTargeting correctly', () => {
         expect(buildAdTargeting(CAPI.config)).toEqual(expectedAdTargeting);
     });
 });
