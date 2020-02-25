@@ -1,12 +1,19 @@
 import React from 'react';
 import { css } from 'emotion';
-import { useApi } from '@root/src/web/lib/api';
+import {
+    shouldShowSupportMessaging,
+    isRecurringContributor,
+    getLastOneOffContributionDate,
+} from '@root/src/web/lib/contributions';
+import { useApi } from '../lib/api';
 
 const wrapperMargins = css`
     margin: 18px 0;
 `;
 
 type Props = {
+    isSignedIn: boolean;
+    countryCode: string;
     contentType: string;
     sectionName?: string;
     shouldHideReaderRevenue: boolean;
@@ -16,6 +23,8 @@ type Props = {
 };
 
 export const SlotBodyEnd = ({
+    isSignedIn,
+    countryCode,
     contentType,
     sectionName,
     shouldHideReaderRevenue,
@@ -23,19 +32,18 @@ export const SlotBodyEnd = ({
     isPaidContent,
     tags,
 }: Props) => {
-    // Putting together the request payload
     const contributionsPayload = {
         tracking: {
-            ophanPageId: window?.guardian.config.ophan.pageViewId,
+            ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
             campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
             abTestName: 'remote_epic_test',
             abTestVariant: 'api',
-            referrerUrl: window?.location.origin + window?.location.pathname
+            referrerUrl: window.location.origin + window.location.pathname,
         },
         localisation: {
-            countryCode: 'GB', // TODO: make this dynamic
+            countryCode,
         },
         targeting: {
             contentType,
@@ -44,11 +52,15 @@ export const SlotBodyEnd = ({
             isMinuteArticle,
             isPaidContent,
             tags,
+            showSupportMessaging: shouldShowSupportMessaging(),
+            isRecurringContributor: isRecurringContributor(isSignedIn),
+            lastOneOffContributionDate: getLastOneOffContributionDate(),
         },
     };
 
-    const endpointUrl = 'https://contributions.guardianapis.com/epic';
-    const { data: responseBody, error } = useApi(endpointUrl, {
+    const { data: bodyResponse, error } = useApi<{
+        data: { html: string; css: string };
+    }>('https://contributions.guardianapis.com/epic', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -58,18 +70,16 @@ export const SlotBodyEnd = ({
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'slot-body-end');
-        return null;
     }
 
-    if (responseBody && responseBody.data) {
-        const { data } = responseBody;
-
+    if (bodyResponse && bodyResponse.data) {
+        const { html: epicHtml, css: epicCss } = bodyResponse.data;
         return (
             <div className={wrapperMargins}>
-                {data.css && <style>{data.css}</style>}
+                {epicCss && <style>{epicCss}</style>}
                 <div
                     // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{ __html: data.html }}
+                    dangerouslySetInnerHTML={{ __html: epicHtml }}
                 />
             </div>
         );

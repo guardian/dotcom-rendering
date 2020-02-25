@@ -53,15 +53,10 @@ const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
-        const callFetch = async () => {
-            setCountryCode(await getCountryCode());
-        };
+        const callFetch = async () =>
+            setCountryCode((await getCountryCode()) || '');
         callFetch();
     }, []);
-
-    console.log(
-        `TODO: Now that we have countryCode ${countryCode} then we should use it (Andre, I'm looking at you)`,
-    );
 
     const richLinks: {
         element: RichLinkBlockElement;
@@ -143,16 +138,21 @@ const App = ({ CAPI, NAV }: Props) => {
             <Portal root="most-viewed-right">
                 <MostViewedRightWrapper pillar={CAPI.pillar} />
             </Portal>
-            <Portal root="slot-body-end">
-                <SlotBodyEnd
-                    contentType={CAPI.contentType}
-                    sectionName={CAPI.sectionName}
-                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                    isPaidContent={CAPI.pageType.isPaidContent}
-                    tags={CAPI.tags}
-                />
-            </Portal>
+            {/* Ensure component only renders after both variables have been assigned true or false */}
+            {isSignedIn !== undefined && countryCode !== undefined && (
+                <Portal root="slot-body-end">
+                    <SlotBodyEnd
+                        isSignedIn={isSignedIn}
+                        countryCode={countryCode}
+                        contentType={CAPI.contentType}
+                        sectionName={CAPI.sectionName}
+                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                        isPaidContent={CAPI.pageType.isPaidContent}
+                        tags={CAPI.tags}
+                    />
+                </Portal>
+            )}
             <Portal root="onwards-upper">
                 <OnwardsUpper
                     ajaxUrl={CAPI.config.ajaxUrl}
