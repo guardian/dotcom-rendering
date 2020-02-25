@@ -90,7 +90,7 @@ const serverConfig = env => {
                             options: { configFile: isTest ? 'config/tsconfig.test.json' : 'config/tsconfig.server.json' }
                         }
                     ],
-                },
+                }
             ]
         },
     }
