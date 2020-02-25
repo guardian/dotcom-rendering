@@ -1,19 +1,40 @@
 import memoize from 'lodash.memoize';
 
 type GroupNames = 'headerGroup' | 'bodyGroup';
+type BodyGroupTuple = typeof bodyGroup; // ['rightColumnArea', 'bodyArea']
+type BodyGroup = BodyGroupTuple[number]; // UnionType: 'rightColumnArea' | 'bodyArea'
+type HeaderGroupTuple = typeof headerGroup;
+type HeaderGroup = HeaderGroupTuple[number];
+
 type GroupObject<GroupNames extends string> = {
-    [name in GroupNames]: string[];
+    [name in GroupNames]: BodyGroupTuple | HeaderGroupTuple;
 };
 type GroupLengths<GroupNames extends string> = {
     [name in GroupNames]: number;
 };
-type GetZIndexProps = { group: GroupNames; name: string };
+type GetZIndexProps = { group: GroupNames; name: BodyGroup | HeaderGroup };
 
 // Ordering matters
-// Later groups have higher z-index
-// Siblings z-index, later = higher z-index
-const bodyGroup = ['rightColumnArea', 'bodyArea'];
-const headerGroup = ['headerWrapper', 'stickyAdWrapper'];
+// You have:
+// 1. ZIndexGroups - An object of {key: groupArr} that contains all the sibling groups, in order.
+// 2. Group Arrays - An ordered list of elements that require a z-index, that live in a group together.
+//    Elements live together in groups - header, footer, body, modal for example.
+
+// A group is an array of siblings.
+// The array is ordered and z-index will be higher for elements
+// that live later in the array.
+// The array is frozen at this point as siblings must only
+// be added here.
+// `as const` allows us to generate a union type from the array.
+const bodyGroup = ['rightColumnArea', 'bodyArea'] as const;
+const headerGroup = ['headerWrapper', 'stickyAdWrapper'] as const;
+
+// The order of the group in the object defines the z-index
+// of the group's children based on the length of the previous
+// group arrays.
+// The util will take each group, looping the siblings of the group
+// incrementally assigning a z-index to each one until the groups are
+// exhausted. Phew.
 const zIndexGroups: GroupObject<string> = {
     bodyGroup,
     headerGroup,
@@ -37,10 +58,11 @@ const getGroupStartIndex = (group: GroupNames): number => {
     return allStartIndexes()[group];
 };
 
-export const getZIndex = ({ group, name }: GetZIndexProps) => {
+export const getZIndex = ({ group, name }: GetZIndexProps): string => {
     const groupStartIndex = getGroupStartIndex(group);
-    const siblingIndexInGroup = zIndexGroups[group].indexOf(name);
-    const zIndex = groupStartIndex + siblingIndexInGroup;
+    const zIndexGroupArray: readonly string[] = zIndexGroups[group];
+    const siblingIdxInGroup = zIndexGroupArray.indexOf(name);
+    const zIndex = groupStartIndex + siblingIdxInGroup;
 
     return `z-index: ${zIndex};`;
 };
