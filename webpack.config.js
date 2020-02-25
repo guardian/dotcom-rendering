@@ -4,7 +4,7 @@ const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
-const WebpackAssetsManifest = require('webpack-assets-manifest');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 // ----- Plugins ----- //
 
@@ -109,7 +109,7 @@ const clientConfig = {
         filename: '[name].js',
     },
     plugins: [
-        new WebpackAssetsManifest(),
+        new ManifestPlugin(),
     ],
     resolve: resolve("clientDev"),
     devServer: {
@@ -158,7 +158,7 @@ const clientConfigProduction = {
             threshold: 10240,
             minRatio: 0.8,
         }),
-        new WebpackAssetsManifest(),
+        new ManifestPlugin(),
     ],
     performance: {
         hints: 'error',

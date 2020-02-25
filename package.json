@@ -15,7 +15,7 @@
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "watch:client": "webpack-dev-server --config webpack.config.js --config-name client",
-    "watch": "npm run build:client; npm run watch:server; npm run watch:client",
+    "watch": "npm run build:client; npm run watch:server & npm run watch:client",
     "build:server": "webpack --config webpack.config.js --config-name server --env.production",
     "build:client": "webpack --config webpack.config.js --config-name client",
     "build:client:prod": "webpack --config webpack.config.js --config-name clientProduction",
@@ -101,9 +101,9 @@
     "ts-jest": "^25.2.0",
     "ts-loader": "^6.2.1",
     "webpack": "^4.41.5",
-    "webpack-assets-manifest": "^3.1.1",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
+    "webpack-manifest-plugin": "^2.2.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
   }
