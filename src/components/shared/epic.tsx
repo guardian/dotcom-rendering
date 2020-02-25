@@ -8,14 +8,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { nativeClient } from 'native/nativeApi';
 import { SvgArrowRightStraight } from "@guardian/src-svgs"
 import { ThemeProvider } from 'emotion-theming'
-import { Button, buttonReaderRevenue } from '@guardian/src-button'
-import { parse } from 'client/parser';
-import { renderText } from 'renderer';
-import { Pillar } from 'pillar';
+import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { body, headline } from '@guardian/src-foundations/typography';
-
-const parser = new DOMParser();
-const parseEpic = parse(parser);
 
 // ----- Styles ----- //
 
@@ -109,15 +103,10 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
 	        {text}
         </Button>
 
-    const epicBody = parseEpic(body).either(
-        _ => [null],
-        content => renderText(content, Pillar.news),
-    );
-
     return (
         <div css={EpicStyles} ref={creativeContainer}>
             <h1>{title}</h1>
-            {epicBody}
+            <div dangerouslySetInnerHTML={{__html: body}}></div>
             <div className="button-container">
                 <ThemeProvider theme={buttonReaderRevenue}>
                     {epicButton(firstButton, () => nativeClient.launchFrictionScreen())}
