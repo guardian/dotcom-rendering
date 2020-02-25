@@ -60,7 +60,7 @@ export const SlotBodyEnd = ({
 
     const { data: bodyResponse, error } = useApi<{
         data: { html: string; css: string };
-    }>('http://localhost:8081/epic', {
+    }>('https://contributions.guardianapis.com/epic', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
