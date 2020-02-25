@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 import { css, SerializedStyles } from '@emotion/core';
-import { spaceToRem, headlineFont } from 'styles';
+import { spaceToRem } from 'styles';
 import { from } from '@guardian/src-foundations/mq';
 import { palette } from '@guardian/src-foundations';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
@@ -12,6 +12,7 @@ import { Button, buttonReaderRevenue } from '@guardian/src-button'
 import { parse } from 'client/parser';
 import { renderText } from 'renderer';
 import { Pillar } from 'pillar';
+import { body, headline } from '@guardian/src-foundations/typography';
 
 const parser = new DOMParser();
 const parseEpic = parse(parser);
