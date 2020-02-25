@@ -106,7 +106,7 @@ const clientConfig = {
     target: 'web',
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
-        filename: '[name].[contenthash].js',
+        filename: '[name].js',
     },
     plugins: [
         new WebpackAssetsManifest(),
@@ -158,6 +158,7 @@ const clientConfigProduction = {
             threshold: 10240,
             minRatio: 0.8,
         }),
+        new WebpackAssetsManifest(),
     ],
     performance: {
         hints: 'error',
@@ -165,6 +166,10 @@ const clientConfigProduction = {
         assetFilter: function(assetFilename) {
             return assetFilename.endsWith('.js');
         }
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist/assets'),
+        filename: '[name].[contenthash].js',
     },
     resolve: resolve("clientProd")
 }
