@@ -8,7 +8,7 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 import HeaderImage from 'components/shared/headerImage';
 import Series from 'components/shared/articleSeries';
 import Headline from 'components/headline';
-import Standfirst from 'components/standard/standfirst';
+import Standfirst from 'components/standfirst';
 import Byline from 'components/standard/byline';
 import { CommentCount } from 'components/shared/commentCount'
 import Body from 'components/shared/articleBody';
@@ -71,7 +71,7 @@ const Standard = ({ imageSalt, item, children }: Props): JSX.Element =>
                 <div css={articleWidthStyles}>
                     <Series series={item.series} pillar={item.pillar} />
                     <Headline item={item} />
-                    <Standfirst item={item} className={articleWidthStyles} />
+                    <Standfirst item={item} />
 
                 </div>
                 <Keyline {...item} />
