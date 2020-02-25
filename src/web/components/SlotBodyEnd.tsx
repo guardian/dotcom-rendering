@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { css } from 'emotion';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
+import { useApi } from '../lib/api';
 
 const wrapperMargins = css`
     margin: 18px 0;
@@ -31,68 +32,54 @@ export const SlotBodyEnd = ({
     isPaidContent,
     tags,
 }: Props) => {
-    const [epicContent, setEpicContent] = useState<{ html: string; css: string}>();
+    const contributionsPayload = {
+        tracking: {
+            ophanPageId: window.guardian.config.ophan.pageViewId,
+            ophanComponentId: 'ACQUISITIONS_EPIC',
+            platformId: 'GUARDIAN_WEB',
+            campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
+            abTestName: 'remote_epic_test',
+            abTestVariant: 'api',
+            referrerUrl: window.location.origin + window.location.pathname,
+        },
+        localisation: {
+            countryCode,
+        },
+        targeting: {
+            contentType,
+            sectionName,
+            shouldHideReaderRevenue,
+            isMinuteArticle,
+            isPaidContent,
+            tags,
+            showSupportMessaging: shouldShowSupportMessaging(),
+            isRecurringContributor: isRecurringContributor(isSignedIn),
+            lastOneOffContributionDate: getLastOneOffContributionDate(),
+        },
+    };
 
-    useEffect(() => {
-        const callFetch = async () => {
-            // Putting together the request payload
-            const contributionsPayload = {
-                tracking: {
-                    ophanPageId: window?.guardian.config.ophan.pageViewId,
-                    ophanComponentId: 'ACQUISITIONS_EPIC',
-                    platformId: 'GUARDIAN_WEB',
-                    campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
-                    abTestName: 'remote_epic_test',
-                    abTestVariant: 'api',
-                    referrerUrl: window?.location.origin + window?.location.pathname
-                },
-                localisation: {
-                    countryCode
-                },
-                targeting: {
-                    contentType,
-                    sectionName,
-                    shouldHideReaderRevenue,
-                    isMinuteArticle,
-                    isPaidContent,
-                    tags,
-                    showSupportMessaging: shouldShowSupportMessaging(),
-                    isRecurringContributor: isRecurringContributor(isSignedIn),
-                    lastOneOffContributionDate: getLastOneOffContributionDate(),
-                },
-            };
+    const { data: bodyResponse, error } = useApi<{
+        data: { html: string; css: string };
+    }>('http://localhost:8081/epic', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contributionsPayload),
+    });
 
-            const getEpicContent = () => {
-                return fetch('http://localhost:8081/epic', {
-                // return fetch('https://contributions.guardianapis.com/epic', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(contributionsPayload)
-                })
-                .then((response) => {
-                    if (!response.ok) {
-                        const apiError = new Error(response.statusText);
-                        window.guardian.modules.sentry.reportError(apiError, 'slot-body-end');
-                    }
-                    return response;
-                })
-                .then(response => response.json())
-            }
-            const epicResponse = await getEpicContent();
-            setEpicContent(epicResponse.data);
-        };
-        callFetch();
-    }, [isSignedIn, countryCode]);
+    if (error) {
+        window.guardian.modules.sentry.reportError(error, 'slot-body-end');
+    }
 
-    if (epicContent) {
+    if (bodyResponse && bodyResponse.data) {
+        const { html: epicHtml, css: epicCss } = bodyResponse.data;
         return (
             <div className={wrapperMargins}>
-                {epicContent.css && <style>{epicContent.css}</style>}
+                {epicCss && <style>{epicCss}</style>}
                 <div
                     // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{ __html: epicContent.html }}
+                    dangerouslySetInnerHTML={{ __html: epicHtml }}
                 />
             </div>
         );

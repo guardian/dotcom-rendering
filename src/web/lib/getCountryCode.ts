@@ -24,21 +24,35 @@ export const getCountryCode = async () => {
         const countryCode = await fetch(
             'https://api.nextgen.guardianapps.co.uk/geolocation',
         )
+            .then(response => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response;
+            })
             .then(response => response.json())
-            .then(json => json.country);
+            .then(json => json.country)
+            .catch(error => {
+                window.guardian.modules.sentry.reportError(
+                    error,
+                    'get-country-code',
+                );
+            });
 
         // What's this setTimeout business?
         // localStorage calls are syncronous and we don't need to wait for this
         // one so we use setTimeout to put this step on the end of the event queue
         // for later, letting the thread continue
         setTimeout(() => {
-            localStorage.setItem(
-                COUNTRY_CODE_KEY,
-                JSON.stringify({
-                    value: countryCode,
-                    expires: new Date().getTime() + TEN_DAYS,
-                }),
-            );
+            if (countryCode) {
+                localStorage.setItem(
+                    COUNTRY_CODE_KEY,
+                    JSON.stringify({
+                        value: countryCode,
+                        expires: new Date().getTime() + TEN_DAYS,
+                    }),
+                );
+            }
         });
         // Return the country value that we got from our fetch call
         return countryCode;

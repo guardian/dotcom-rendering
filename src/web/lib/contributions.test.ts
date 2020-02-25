@@ -1,15 +1,9 @@
+import { addCookie } from '../browser/cookie';
 import {
     getLastOneOffContributionDate,
     ONE_OFF_CONTRIBUTION_DATE_COOKIE,
     SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 } from './contributions';
-
-const setCookie = (name: string, value: string | number) => {
-    Object.defineProperty(window.document, 'cookie', {
-        writable: true,
-        value: `${name}=${value}`,
-    });
-};
 
 const clearAllCookies = () => {
     const cookies = document.cookie.split(';');
@@ -28,7 +22,7 @@ describe('getLastOneOffContributionDate', () => {
 
     it('returns date from attributes cookie if only cookie found', () => {
         const somePastDate = '2020-01-28';
-        setCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, somePastDate);
+        addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, somePastDate);
         const lastOneOffContributionDate = getLastOneOffContributionDate();
 
         // Our function will convert YYYY-MM-DD into a timestamp
@@ -38,25 +32,25 @@ describe('getLastOneOffContributionDate', () => {
 
     it('returns a support cookie date if only cookie found', () => {
         const somePastDate = 1582567969093;
-        setCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, somePastDate);
+        addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, String(somePastDate));
         const lastOneOffContributionDate = getLastOneOffContributionDate();
         expect(lastOneOffContributionDate).toBe(somePastDate);
     });
 
     it('returns the most recent date if both cookies present', () => {
         const muchLongerAgo = '2020-01-28';
-        setCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, muchLongerAgo);
+        addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, muchLongerAgo);
 
         const notSoLongAgo = 1582567969093;
-        setCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, notSoLongAgo);
+        addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, String(notSoLongAgo));
 
         const lastOneOffContributionDate = getLastOneOffContributionDate();
         expect(lastOneOffContributionDate).toBe(notSoLongAgo);
     });
 
     it('returns an empty string if no dates can be parsed correctly', () => {
-        setCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, 'CANT_TOUCH_THIS');
-        setCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, 'OR_THIS');
+        addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, 'CANT_TOUCH_THIS');
+        addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, 'OR_THIS');
 
         const lastOneOffContributionDate = getLastOneOffContributionDate();
         expect(lastOneOffContributionDate).toBeUndefined();

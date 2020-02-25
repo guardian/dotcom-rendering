@@ -53,9 +53,8 @@ const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
-        const callFetch = async () => {
-            setCountryCode(await getCountryCode());
-        };
+        const callFetch = async () =>
+            setCountryCode((await getCountryCode()) || '');
         callFetch();
     }, []);
 
