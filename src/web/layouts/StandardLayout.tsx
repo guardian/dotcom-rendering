@@ -206,7 +206,10 @@ interface Props {
 }
 
 export const StandardLayout = ({ CAPI, NAV }: Props) => {
-    const { isPaidContent } = CAPI.config;
+    const {
+        config: { isPaidContent },
+        pageType: { isSensitive },
+    } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
@@ -412,12 +415,14 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             {!isPaidContent && (
                 <>
-                    <Section
-                        showTopBorder={false}
-                        backgroundColour={palette.neutral[97]}
-                    >
-                        <OutbrainContainer />
-                    </Section>
+                    {!isSensitive && (
+                        <Section
+                            showTopBorder={false}
+                            backgroundColour={palette.neutral[97]}
+                        >
+                            <OutbrainContainer />
+                        </Section>
+                    )}
 
                     {showOnwardsLower && <Section islandId="onwards-lower" />}
 
