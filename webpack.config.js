@@ -62,7 +62,7 @@ const serverConfig = env => {
             __dirname: false,
         },
         output: {
-            filename: 'server.js',
+            filename: 'server/server.js',
         },
         watch: env && env.watch,
         watchOptions: {
