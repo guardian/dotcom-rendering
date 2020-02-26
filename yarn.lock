@@ -2079,10 +2079,10 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@guardian/consent-management-platform@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-2.0.9.tgz#96247e7ca516e447aaad88cc8d7ef9e756211466"
-  integrity sha512-tqmw5+DssU35Vr1HlcKWtOLgoyE01nYnDhRA4SQ/IabSYt7PqkVtdgbeKJDnpPIUvFfjk1PgHZsBSH1D0SVs5A==
+"@guardian/consent-management-platform@^2.0.10":
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-2.0.10.tgz#b1d322f7fa5da858353102fb584224218fffbf37"
+  integrity sha512-SqWbB/47CtB9DSMm5wF4YXyrpknZy0Uk2R791gy3cAjUCiZymaQmjUEmytiUCLtwGDTXKD7ZefmyJ5ecN7/m6A==
   dependencies:
     "@guardian/src-button" "^0.13.0"
     "@guardian/src-foundations" "^0.13.0"
@@ -3387,13 +3387,6 @@
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.get/-/lodash.get-4.4.6.tgz#0c7ac56243dae0f9f09ab6f75b29471e2e777240"
   integrity sha512-E6zzjR3GtNig8UJG/yodBeJeIOtgPkMgsLjDU3CbgCAPC++vJ0eCMnJhVpRZb/ENqEFlov1+3K9TKtY4UdWKtQ==
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash.memoize@^4.1.6":
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/@types/lodash.memoize/-/lodash.memoize-4.1.6.tgz#3221f981790a415cab1a239f25c17efd8b604c23"
-  integrity sha512-mYxjKiKzRadRJVClLKxS4wb3Iy9kzwJ1CkbyKiadVxejnswnRByyofmPMscFKscmYpl36BEEhCMPuWhA1R/1ZQ==
   dependencies:
     "@types/lodash" "*"
 
