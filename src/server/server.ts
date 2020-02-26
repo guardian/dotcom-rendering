@@ -19,7 +19,7 @@ import Page from 'components/shared/page';
 import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
-import scriptMappings from '../../dist/assets/manifest.json';
+import scriptMappings from 'assets/manifest.json';
 
 // ----- Setup ----- //
 

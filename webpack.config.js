@@ -29,8 +29,9 @@ class LaunchServerPlugin {
 
 function resolve(loggerName) {
     return {
-        extensions: ['.ts', '.tsx', '.js'],
+        extensions: ['.json', '.ts', '.tsx', '.js'],
         modules: [
+            path.resolve(__dirname, 'dist'),
             path.resolve(__dirname, 'src'),
             'node_modules',
         ],
@@ -109,7 +110,7 @@ const clientConfig = {
         filename: '[name].js',
     },
     plugins: [
-        new ManifestPlugin(),
+        new ManifestPlugin({ writeToFileEmit: true }),
     ],
     resolve: resolve("clientDev"),
     devServer: {
