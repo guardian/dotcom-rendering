@@ -80,7 +80,7 @@ const PageStyles = css`
 interface BodyProps {
     imageSalt: string;
     capi: Content;
-    scriptMappings: { [key: string]: string };
+    scriptMappings: { [key: string]: string } | null;
 }
 
 interface ElementWithResources {
@@ -100,8 +100,9 @@ function ArticleBody({ capi, imageSalt, scriptMappings }: BodyProps): ElementWit
 
     const item = fromCapi(JSDOM.fragment)(capi);
 
-    const getHashedScript = (scriptName: string): string =>
-        `/assets/${scriptMappings[scriptName]}`
+    const getHashedScript = (scriptName: string): string => scriptMappings
+        ? `/assets/${scriptMappings[scriptName]}`
+        : scriptName
 
     const articleScript = getHashedScript('article.js');
     const liveblogScript = getHashedScript('liveblog.js');
@@ -166,7 +167,7 @@ function ArticleBody({ capi, imageSalt, scriptMappings }: BodyProps): ElementWit
 interface Props {
     content: Content;
     imageSalt: string;
-    scriptMappings: { [key: string]: string };
+    scriptMappings: { [key: string]: string } | null;
 }
 
 function Page({ content, imageSalt, scriptMappings }: Props): ElementWithResources {

@@ -11,10 +11,6 @@
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": false,
-        "baseUrl": ".",
-        "paths": {
-            "*": ["src/*", "dist/*"]
-        },
-        "resolveJsonModule": true,
+        "baseUrl": "src/"
     }
 }

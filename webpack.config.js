@@ -24,14 +24,12 @@ class LaunchServerPlugin {
     }
 }
 
-
 // ----- Shared Config ----- //
 
 function resolve(loggerName) {
     return {
-        extensions: ['.json', '.ts', '.tsx', '.js'],
+        extensions: ['.ts', '.tsx', '.js'],
         modules: [
-            path.resolve(__dirname, 'dist'),
             path.resolve(__dirname, 'src'),
             'node_modules',
         ],
