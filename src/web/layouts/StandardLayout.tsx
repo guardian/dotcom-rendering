@@ -32,7 +32,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 import {
     decideLineCount,
     decideLineEffect,
@@ -192,12 +192,12 @@ const stickyAdWrapper = css`
     border-bottom: 0.0625rem solid ${palette.neutral[86]};
     position: sticky;
     top: 0;
-    z-index: 2;
+    ${getZIndex('stickyAdWrapper')}
 `;
 
 const headerWrapper = css`
     position: relative;
-    z-index: 1;
+    ${getZIndex('headerWrapper')}
 `;
 
 interface Props {

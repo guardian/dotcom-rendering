@@ -27,6 +27,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
@@ -219,12 +220,12 @@ const stickyAdWrapper = css`
     border-bottom: 0.0625rem solid ${palette.neutral[86]};
     position: sticky;
     top: 0;
-    z-index: 2;
+    ${getZIndex('stickyAdWrapper')}
 `;
 
 const headerWrapper = css`
     position: relative;
-    z-index: 1;
+    ${getZIndex('headerWrapper')}
 `;
 
 interface Props {
