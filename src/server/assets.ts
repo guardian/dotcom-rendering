@@ -9,7 +9,7 @@ export const getMappings = (): AssetMapping => {
     }
 
     try {
-        return JSON.parse(fs.readFileSync('./dist/assets/manifest.json').toString());
+        return JSON.parse(fs.readFileSync('./manifest.json').toString());
     } catch(e) {
         logger.error(`Unable to load asset mapping: ${e}`)
         process.exit(1);
