@@ -220,12 +220,12 @@ const stickyAdWrapper = css`
     border-bottom: 0.0625rem solid ${palette.neutral[86]};
     position: sticky;
     top: 0;
-    ${getZIndex({ group: 'headerGroup', name: 'stickyAdWrapper' })}
+    ${getZIndex('stickyAdWrapper')}
 `;
 
 const headerWrapper = css`
     position: relative;
-    ${getZIndex({ group: 'headerGroup', name: 'headerWrapper' })}
+    ${getZIndex('headerWrapper')}
 `;
 
 interface Props {

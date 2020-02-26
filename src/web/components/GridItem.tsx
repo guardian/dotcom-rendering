@@ -15,7 +15,7 @@ const gridAreaStyles = (area: string) => {
             top: 0;
             right: 0;
             /* Pop me below the body */
-            ${getZIndex({ group: 'bodyGroup', name: 'rightColumnArea' })}
+            ${getZIndex('rightColumnArea')}
 
             @supports (display: grid) {
                 position: relative;
@@ -28,7 +28,7 @@ const gridAreaStyles = (area: string) => {
         return css`
             grid-area: ${area};
             /* Pop me above the right column */
-            ${getZIndex({ group: 'bodyGroup', name: 'bodyArea' })}
+            ${getZIndex('bodyArea')}
         `;
     }
 
