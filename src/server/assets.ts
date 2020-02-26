@@ -12,6 +12,6 @@ export const getMappings = (): AssetMapping => {
         return JSON.parse(fs.readFileSync('./manifest.json').toString());
     } catch(e) {
         logger.error(`Unable to load asset mapping: ${e}`)
-        process.exit(1);
+        throw e;
     }
 }
