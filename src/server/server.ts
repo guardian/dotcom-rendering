@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import path from 'path';
-import fs from 'fs';
 import express, {NextFunction, Request, Response as ExpressResponse} from 'express';
 import compression from 'compression';
 import { renderToString } from 'react-dom/server';
@@ -20,10 +19,11 @@ import Page from 'components/shared/page';
 import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
+import { getMappings } from './assets';
 
 // ----- Setup ----- //
 
-let scriptMappings: { [key: string]: string } | null = null;
+const scriptMappings = getMappings();
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
@@ -134,16 +134,10 @@ app.post('/article', bodyParser.raw(), serveArticlePost);
 
 const port = 3040;
 
-fs.readFile('./dist/assets/manifest.json', function (err, data) {
-  if (!err) {
-    scriptMappings = JSON.parse(data.toString());
+app.listen(port, () => {
+  if (process.env.NODE_ENV === "production") {
+    logger.info(`Server listening on port ${port}!`);
+  } else {
+    logger.info(`Webpack dev server is listening on port 8080`);
   }
-
-  app.listen(port, () => {
-    if (process.env.NODE_ENV === "production") {
-      logger.info(`Server listening on port ${port}!`);
-    } else {
-      logger.info(`Webpack dev server is listening on port 8080`);
-    }
-  });
 });
