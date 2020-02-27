@@ -1,11 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
+import { getBodyEnd } from '@guardian/slot-machine-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
-import { useApi } from '../lib/api';
+import { useApiFn } from '../lib/api';
 
 const wrapperMargins = css`
     margin: 18px 0;
@@ -47,7 +48,7 @@ export const SlotBodyEnd = ({
         },
         targeting: {
             contentType,
-            sectionName,
+            sectionName: sectionName || '', // TODO update client to reflect that this is optional
             shouldHideReaderRevenue,
             isMinuteArticle,
             isPaidContent,
@@ -58,15 +59,9 @@ export const SlotBodyEnd = ({
         },
     };
 
-    const { data: bodyResponse, error } = useApi<{
+    const { data: bodyResponse, error } = useApiFn<{
         data: { html: string; css: string };
-    }>('https://contributions.guardianapis.com/epic', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(contributionsPayload),
-    });
+    }>(() => getBodyEnd(contributionsPayload));
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'slot-body-end');
