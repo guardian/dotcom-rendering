@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { select, withKnobs } from '@storybook/addon-knobs';
+import { select, withKnobs, boolean } from '@storybook/addon-knobs';
 import React, { ReactElement } from 'react';
 
 import Standfirst from './standfirst';
@@ -58,6 +58,7 @@ const pillarOptions = {
 const Default = (): ReactElement =>
     <Standfirst item={{
         ...item,
+        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: select('Pillar', pillarOptions, Pillar.news),
     }} />
 
@@ -66,6 +67,7 @@ const Review = (): ReactElement =>
         ...item,
         design: Design.Review,
         starRating: 4,
+        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: select('Pillar', pillarOptions, Pillar.arts),
     }} />
 
@@ -73,6 +75,7 @@ const Feature = (): ReactElement =>
     <Standfirst item={{
         ...item,
         design: Design.Feature,
+        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: select('Pillar', pillarOptions, Pillar.sport),
     }} />
 
@@ -80,6 +83,7 @@ const Comment = (): ReactElement =>
     <Standfirst item={{
         ...item,
         design: Design.Comment,
+        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: select('Pillar', pillarOptions, Pillar.opinion),
     }} />
 
