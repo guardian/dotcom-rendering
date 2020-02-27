@@ -36,6 +36,7 @@ const TagLink: React.FC<{
     guardianBaseURL: string;
     tagTitle: string;
     tagUrl: string;
+    dataComponentName: string;
     dataLinkName: string;
     weightingClass: string;
 }> = ({
@@ -43,6 +44,7 @@ const TagLink: React.FC<{
     guardianBaseURL,
     tagTitle,
     tagUrl,
+    dataComponentName,
     dataLinkName,
     weightingClass,
 }) => {
@@ -54,6 +56,7 @@ const TagLink: React.FC<{
                 pillarColours[pillar],
                 weightingClass,
             )}
+            data-component={dataComponentName}
             data-link-name={dataLinkName}
         >
             <span>{tagTitle}</span>
@@ -95,6 +98,7 @@ export const SeriesSectionLink: React.FC<{
                     guardianBaseURL={guardianBaseURL}
                     tagTitle={tag.title}
                     tagUrl={tag.id}
+                    dataComponentName="Series"
                     dataLinkName="article series"
                     weightingClass={primaryStyle}
                 />
@@ -103,6 +107,7 @@ export const SeriesSectionLink: React.FC<{
                     guardianBaseURL={guardianBaseURL}
                     tagTitle={sectionLabel}
                     tagUrl={sectionUrl}
+                    dataComponentName="Section"
                     dataLinkName="article section"
                     weightingClass={secondaryStyle}
                 />
@@ -117,6 +122,7 @@ export const SeriesSectionLink: React.FC<{
                 guardianBaseURL={guardianBaseURL}
                 tagTitle={sectionLabel}
                 tagUrl={sectionUrl}
+                dataComponentName="Section"
                 dataLinkName="article section"
                 weightingClass={primaryStyle}
             />

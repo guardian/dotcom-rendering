@@ -75,7 +75,7 @@ export const Section = ({
         )}
     >
         <div
-            data-island={islandId}
+            id={islandId}
             className={cx(
                 shouldCenter && center,
                 showSideBorders && sideBorders(borderColour),

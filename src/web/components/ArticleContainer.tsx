@@ -38,10 +38,17 @@ const articleAdStyles = css`
         }
     }
     .ad-slot--inline {
-        ${from.desktop} {
-            margin: 0;
+        ${from.tablet} {
+            margin-right: -100px;
             width: auto;
             float: right;
+            margin-top: 4px;
+            margin-left: 20px;
+        }
+        ${from.desktop} {
+            width: auto;
+            float: right;
+            margin: 0;
             margin-top: 4px;
             margin-left: 20px;
         }

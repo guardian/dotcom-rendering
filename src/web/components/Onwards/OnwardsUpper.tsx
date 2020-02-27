@@ -39,15 +39,26 @@ export const WHITELISTED_TAGS = [
     'football/liverpool',
 ];
 
-const firstPopularTag = (pageTags: string[], isPaidContent: boolean) => {
+const firstPopularTag = (
+    pageTags: string | string[],
+    isPaidContent: boolean,
+) => {
     // This function looks for the first tag in pageTags, that also exists in our whitelist
     if (!pageTags) {
         // If there are no page tags we will never find a match so
         return false;
     }
 
+    // The problem here is keywordIds is sometimes a string and sometimes an array of strings. Fun times.
+    let tags;
+    if (typeof pageTags === 'string') {
+        tags = pageTags.split(',');
+    } else {
+        tags = pageTags;
+    }
+
     const firstTagInWhitelist =
-        pageTags.find((tag: string) => WHITELISTED_TAGS.includes(tag)) || false;
+        tags.find((tag: string) => WHITELISTED_TAGS.includes(tag)) || false;
 
     // For paid content we just return the first tag, otherwise we
     // filter for the first tag in the whitelist
@@ -62,12 +73,12 @@ type Props = {
     pageId: string;
     isPaidContent: boolean;
     showRelatedContent: boolean;
-    keywordIds: string[];
+    keywordIds: string | string[];
     contentType: string;
     tags: TagType[];
 };
 
-export const Onwards = ({
+export const OnwardsUpper = ({
     ajaxUrl,
     hasRelated,
     hasStoryPackage,

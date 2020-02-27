@@ -32,10 +32,11 @@ import { GridItem } from '@root/src/web/components/GridItem';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
-
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 import {
     decideLineCount,
     decideLineEffect,
+    getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 
 const StandardGrid = ({
@@ -148,6 +149,12 @@ const maxWidth = css`
     }
 `;
 
+const articleWidth = css`
+    ${from.desktop} {
+        width: 620px;
+    }
+`;
+
 const stretchLines = css`
     ${until.phablet} {
         margin-left: -20px;
@@ -185,12 +192,12 @@ const stickyAdWrapper = css`
     border-bottom: 0.0625rem solid ${palette.neutral[86]};
     position: sticky;
     top: 0;
-    z-index: 2;
+    ${getZIndex('stickyAdWrapper')}
 `;
 
 const headerWrapper = css`
     position: relative;
-    z-index: 1;
+    ${getZIndex('headerWrapper')}
 `;
 
 interface Props {
@@ -199,16 +206,28 @@ interface Props {
 }
 
 export const StandardLayout = ({ CAPI, NAV }: Props) => {
-    const { isPaidContent } = CAPI.config;
+    const {
+        config: { isPaidContent },
+        pageType: { isSensitive },
+    } = CAPI;
 
     const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-    // defaults to false, but use ?slot-machine-flags=showBodyEnd to show
-    const showBodyEndSlot = parse(CAPI.slotMachineFlags || '').showBodyEnd;
+    // Render the slot if one is true:
+    // 1) The flag for this slot exists in the URL (i.e. ?slot-machine-flags=showBodyEnd)
+    // 2) The global switch for this slot is set to true;
+    const showBodyEndSlot =
+        parse(CAPI.slotMachineFlags || '').showBodyEnd ||
+        CAPI.config.switches.slotBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
     // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+
+    const seriesTag = CAPI.tags.find(
+        tag => tag.type === 'Series' || tag.type === 'Blog',
+    );
+    const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
     return (
         <>
@@ -232,11 +251,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         padded={false}
                         backgroundColour={palette.brand.main}
                     >
-                        <Header
-                            nav={NAV}
-                            pillar={CAPI.pillar}
-                            edition={CAPI.editionId}
-                        />
+                        <Header edition={CAPI.editionId} />
                     </Section>
 
                     <Section
@@ -247,7 +262,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         padded={false}
                         backgroundColour={palette.brand.main}
                     >
-                        <Nav pillar={CAPI.pillar} nav={NAV} />
+                        <Nav pillar={getCurrentPillar(CAPI)} nav={NAV} />
                     </Section>
 
                     {NAV.subNavSections && (
@@ -355,11 +370,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     </GridItem>
                     <GridItem area="body">
                         <ArticleContainer>
-                            <main className={maxWidth}>
+                            <main className={articleWidth}>
                                 <ArticleBody CAPI={CAPI} />
-                                {showBodyEndSlot && (
-                                    <div data-island="slot-body-end" />
-                                )}
+                                {showBodyEndSlot && <div id="slot-body-end" />}
                                 <GuardianLines pillar={CAPI.pillar} />
                                 <SubMeta
                                     pillar={CAPI.pillar}
@@ -398,16 +411,20 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section islandId="onwards-content" />
+            <Section islandId="onwards-upper" />
 
             {!isPaidContent && (
                 <>
-                    <Section
-                        showTopBorder={false}
-                        backgroundColour={palette.neutral[97]}
-                    >
-                        <OutbrainContainer />
-                    </Section>
+                    {!isSensitive && (
+                        <Section
+                            showTopBorder={false}
+                            backgroundColour={palette.neutral[97]}
+                        >
+                            <OutbrainContainer />
+                        </Section>
+                    )}
+
+                    {showOnwardsLower && <Section islandId="onwards-lower" />}
 
                     <Section islandId="most-viewed-footer" />
                 </>
@@ -446,7 +463,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 />
             </Section>
 
-            <div data-island="cmp" />
+            <div id="cmp" />
             <MobileStickyContainer />
         </>
     );

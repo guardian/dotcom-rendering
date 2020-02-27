@@ -121,8 +121,8 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
             <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
                 <div
                     className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
-                    data-link-name="most-viewed"
-                    data-component="most-viewed"
+                    data-link-name="most-popular"
+                    data-component="most-popular"
                 >
                     <section className={asideWidth}>
                         <h2 className={headingStyles}>Most popular</h2>
@@ -144,12 +144,14 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
                                     <SecondTierItem
                                         trail={data.mostCommented}
                                         title="Most commented"
+                                        dataLinkName="comment | group-0 | card-@1" // To match Frontend
                                         showRightBorder={true}
                                     />
                                 )}
                                 {'mostShared' in data && (
                                     <SecondTierItem
                                         trail={data.mostShared}
+                                        dataLinkName="news | group-0 | card-@1" // To match Frontend
                                         title="Most shared"
                                     />
                                 )}
@@ -160,9 +162,7 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
                                 margin: 0.375rem 0 0 0.625rem;
                             `}
                         >
-                            <AdSlot
-                                asps={namedAdSlotParameters('mostpop')}
-                            />
+                            <AdSlot asps={namedAdSlotParameters('mostpop')} />
                         </div>
                     </section>
                 </div>

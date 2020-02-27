@@ -301,7 +301,8 @@ export const RichLinkComponent: React.FC<{
     element: RichLinkBlockElement;
     pillar: Pillar;
     ajaxEndpoint: string;
-}> = ({ element, pillar, ajaxEndpoint }) => {
+    richLinkIndex: number;
+}> = ({ element, pillar, ajaxEndpoint, richLinkIndex }) => {
     const url = buildUrl(element, ajaxEndpoint);
     const { data, loading, error } = useApi<RichLink>(url);
 
@@ -317,7 +318,11 @@ export const RichLinkComponent: React.FC<{
         return null;
     }
     return (
-        <div data-link-name="rich-link" className={pillarBackground(pillar)}>
+        <div
+            data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
+            data-component="rich-link"
+            className={pillarBackground(pillar)}
+        >
             <div className={cx(richLinkContainer, neutralBackground)}>
                 {data && <RichLinkBody richLink={data} />}
             </div>

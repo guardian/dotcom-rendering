@@ -187,7 +187,7 @@ const FooterLinks: React.FC<{
 
     const rrLinks = (
         <div className={readerRevenueLinks}>
-            <div data-island="reader-revenue-links-footer" />
+            <div id="reader-revenue-links-footer" />
         </div>
     );
 
@@ -208,13 +208,14 @@ export const Footer: React.FC<{
     edition: Edition;
     pageFooter: FooterType;
 }> = ({ pillars, pillar, nav, edition, pageFooter }) => (
-    <footer className={footer}>
+    <footer className={footer} data-link-name="footer" data-component="footer">
         <div className={pillarWrap}>
             <Pillars
                 mainMenuOpen={false}
                 pillars={pillars}
                 pillar={pillar}
                 showLastPillarDivider={false}
+                dataLinkName="footer"
             />
         </div>
         <div className={footerItemContainers}>

@@ -30,14 +30,19 @@ AllSizes.story = { name: 'All stars sizes' };
 
 export const SmallStory = () => (
     <>
+        <h1>1 Star</h1>
         <StarRating rating={1} size="small" />
         <br />
+        <h1>2 Star</h1>
         <StarRating rating={2} size="small" />
         <br />
+        <h1>3 Star</h1>
         <StarRating rating={3} size="small" />
         <br />
+        <h1>4 Star</h1>
         <StarRating rating={4} size="small" />
         <br />
+        <h1>5 Star</h1>
         <StarRating rating={5} size="small" />
     </>
 );
@@ -45,14 +50,19 @@ SmallStory.story = { name: 'Small stars' };
 
 export const MediumStory = () => (
     <>
+        <h1>1 Star</h1>
         <StarRating rating={1} size="medium" />
         <br />
+        <h1>2 Star</h1>
         <StarRating rating={2} size="medium" />
         <br />
+        <h1>3 Star</h1>
         <StarRating rating={3} size="medium" />
         <br />
+        <h1>4 Star</h1>
         <StarRating rating={4} size="medium" />
         <br />
+        <h1>5 Star</h1>
         <StarRating rating={5} size="medium" />
     </>
 );
@@ -60,14 +70,19 @@ MediumStory.story = { name: 'Medium stars' };
 
 export const LargeStory = () => (
     <>
+        <h1>1 Star</h1>
         <StarRating rating={1} size="large" />
         <br />
+        <h1>2 Star</h1>
         <StarRating rating={2} size="large" />
         <br />
+        <h1>3 Star</h1>
         <StarRating rating={3} size="large" />
         <br />
+        <h1>4 Star</h1>
         <StarRating rating={4} size="large" />
         <br />
+        <h1>5 Star</h1>
         <StarRating rating={5} size="large" />
     </>
 );

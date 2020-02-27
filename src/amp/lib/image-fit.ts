@@ -1,9 +1,9 @@
 export const bestFitImage = (
     images: ImageSource[],
     containerWidth: number,
-): SrcSet => {
-    const srcSets: SrcSet[] = images.reduce(
-        (acc: SrcSet[], curr: ImageSource) => acc.concat(curr.srcSet),
+): SrcSetItem => {
+    const srcSets: SrcSetItem[] = images.reduce(
+        (acc: SrcSetItem[], curr: ImageSource) => acc.concat(curr.srcSet),
         [],
     );
 

@@ -74,9 +74,15 @@ type Props = {
     trail: TrailType;
     title: string;
     showRightBorder?: boolean; // Prevents double borders
+    dataLinkName: string;
 };
 
-export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
+export const SecondTierItem = ({
+    trail,
+    title,
+    showRightBorder,
+    dataLinkName,
+}: Props) => {
     const {
         url,
         isLiveBlog,
@@ -95,7 +101,11 @@ export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
     return (
         <div className={itemStyles(showRightBorder)}>
             {/* tslint:disable-next-line:react-a11y-anchors */}
-            <a className={headlineLink} href={url} data-link-name="article">
+            <a
+                className={headlineLink}
+                href={url}
+                data-link-name={dataLinkName}
+            >
                 <Flex>
                     <div className={headlineStyles}>
                         <div className={titleStyles}>{title}</div>

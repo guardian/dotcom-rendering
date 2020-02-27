@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
     children: JSX.Element | JSX.Element[];
@@ -13,6 +14,8 @@ const gridAreaStyles = (area: string) => {
             position: absolute;
             top: 0;
             right: 0;
+            /* Pop me below the body */
+            ${getZIndex('rightColumnArea')}
 
             @supports (display: grid) {
                 position: relative;
@@ -20,6 +23,15 @@ const gridAreaStyles = (area: string) => {
             }
         `;
     }
+
+    if (area === 'body') {
+        return css`
+            grid-area: ${area};
+            /* Pop me above the right column */
+            ${getZIndex('bodyArea')}
+        `;
+    }
+
     return css`
         grid-area: ${area};
     `;
