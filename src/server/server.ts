@@ -19,11 +19,11 @@ import Page from 'components/shared/page';
 import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
-import { getMappings } from './assets';
+import { getAssetMappings } from './assets';
 
 // ----- Setup ----- //
 
-const scriptMappings = getMappings();
+const scriptMappings = getAssetMappings();
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
