@@ -147,11 +147,11 @@ export const Card = ({
                                         pillar={pillar}
                                         size={headlineSize}
                                         showQuotes={showQuotes}
-                                        kickerText={
-                                            designType === 'Live'
-                                                ? 'Live'
-                                                : kickerText
-                                        }
+                                        // kickerText={
+                                        //     designType === 'Live'
+                                        //         ? 'Live'
+                                        //         : kickerText
+                                        // }
                                         showPulsingDot={
                                             designType === 'Live' ||
                                             showPulsingDot

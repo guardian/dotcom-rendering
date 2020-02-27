@@ -61,6 +61,15 @@ largeStoryCulture.story = { name: 'Large, Culture (Byline image - Desktop)' };
 
 export const smallStory = () => (
     <div style={{ width: '60px', height: '60px' }}>
+        <p>Avatar With header</p>
+        <Avatar
+            imageSrc={imageSrc300Sport}
+            imageAlt="The alt of the image"
+            pillar="sport"
+            shouldShowHeaderText={true}
+        />
+        <br />
+        <p>Avatar Without header</p>
         <Avatar
             imageSrc={imageSrc300Sport}
             imageAlt="The alt of the image"

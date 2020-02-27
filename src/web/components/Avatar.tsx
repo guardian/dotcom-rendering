@@ -18,12 +18,16 @@ export const Avatar: React.FC<{
     imageSrc: string;
     imageAlt: string;
     pillar: Pillar;
-}> = ({ imageSrc, imageAlt, pillar }) => {
+    shouldShowHeaderText?: boolean;
+}> = ({ imageSrc, imageAlt, pillar, shouldShowHeaderText = false }) => {
     return (
-        <img
-            src={imageSrc}
-            alt={imageAlt}
-            className={cx(pillarBackground(pillar), contributorImage)}
-        />
+        <>
+            {shouldShowHeaderText && <h1>WOW! such a cool profile!</h1>}
+            <img
+                src={imageSrc}
+                alt={imageAlt}
+                className={cx(pillarBackground(pillar), contributorImage)}
+            />
+        </>
     );
 };
