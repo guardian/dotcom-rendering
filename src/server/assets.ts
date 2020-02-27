@@ -26,6 +26,6 @@ function getAssetMappings(): AssetMapping {
 export const getMappedAssetLocation = (): (scriptName: string) => string => {
     const scriptMappings = getAssetMappings();
     return scriptMappings
-        ? (scriptName: string) => `/assets/${scriptMappings[scriptName]}`
-        : (scriptName: string) => `/assets/${scriptName}`
+        ? (scriptName: string): string => `/assets/${scriptMappings[scriptName]}`
+        : (scriptName: string): string => `/assets/${scriptName}`
 }
