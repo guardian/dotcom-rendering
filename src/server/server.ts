@@ -19,11 +19,11 @@ import Page from 'components/shared/page';
 import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
-import { getAssetMappings } from './assets';
+import { getMappedAssetLocation } from './assets';
 
 // ----- Setup ----- //
 
-const scriptMappings = getAssetMappings();
+const getAssetLocation = getMappedAssetLocation();
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
@@ -46,7 +46,7 @@ async function serveArticlePost(
     const content: MapiContent = MapiContent.read(protocol);
     const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-    const { resources, element } = Page({ content, imageSalt, scriptMappings });
+    const { resources, element } = Page({ content, imageSalt, getAssetLocation });
     const html = renderToString(element);
     res.set('Link', getPrefetchHeader(resources));
     res.write('<!DOCTYPE html>');
@@ -83,7 +83,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             }
           },
           content => {
-            const { resources, element } = Page({ content, imageSalt, scriptMappings });
+            const { resources, element } = Page({ content, imageSalt, getAssetLocation });
             res.set('Link', getPrefetchHeader(resources));
             res.write('<!DOCTYPE html>');
             res.write(renderToString(element));

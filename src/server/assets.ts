@@ -3,7 +3,7 @@ import { logger } from 'logger';
 
 type AssetMapping = { [key: string]: string } | null;
 
-export function getAssetMappings(): AssetMapping {
+function getAssetMappings(): AssetMapping {
     if (process.env.NODE_ENV !== "production") {
         return null;
     }
@@ -21,4 +21,11 @@ export function getAssetMappings(): AssetMapping {
         logger.error(`Unable to load asset mapping`, e);
         throw e;
     }
+}
+
+export const getMappedAssetLocation = (): (scriptName: string) => string => {
+    const scriptMappings = getAssetMappings();
+    return scriptMappings
+        ? (scriptName: string) => `/assets/${scriptMappings[scriptName]}`
+        : (scriptName: string) => `/assets/${scriptName}`
 }

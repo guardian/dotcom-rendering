@@ -43,15 +43,16 @@ function resolve(loggerName) {
 
 const serverConfig = env => {
     const isTest = env && env.test;
-
+    const isProd = env && env.production;
+    const isWatch = env && env.watch;
     // Does not try to require the 'canvas' package,
     // an optional dependency of jsdom that we aren't using.
     const plugins = [ new webpack.IgnorePlugin(/^canvas$/) ];
-    if (env && env.watch) {
+    if (isWatch) {
         plugins.push(new LaunchServerPlugin());
     }
 
-    const mode = (env && env.production) ? "production" : "development";
+    const mode = isProd ? "production" : "development";
 
     return {
         name: 'server',
@@ -62,7 +63,7 @@ const serverConfig = env => {
             __dirname: false,
         },
         output: {
-            filename: 'server/server.js',
+            filename: isProd ? 'server/server.js': 'server.js',
         },
         watch: env && env.watch,
         watchOptions: {
