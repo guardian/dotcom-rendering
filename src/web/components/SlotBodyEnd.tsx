@@ -1,12 +1,17 @@
 import React from 'react';
 import { css } from 'emotion';
-import { getBodyEnd } from '@guardian/slot-machine-client';
+import {
+    getBodyEnd,
+    // getViewLog,
+    // logView
+} from '@guardian/slot-machine-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
 import { useApiFn } from '../lib/api';
+// import { getViewLog, logView } from '../lib/viewLog';
 
 const wrapperMargins = css`
     margin: 18px 0;
@@ -33,6 +38,9 @@ export const SlotBodyEnd = ({
     isPaidContent,
     tags,
 }: Props) => {
+    // const epicTestName = 'RemoteRenderEpic';
+    // const epicViewLog = getViewLog();
+
     const contributionsPayload = {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -56,6 +64,7 @@ export const SlotBodyEnd = ({
             showSupportMessaging: shouldShowSupportMessaging(),
             isRecurringContributor: isRecurringContributor(isSignedIn),
             lastOneOffContributionDate: getLastOneOffContributionDate(),
+            // epicViewLog,
         },
     };
 
@@ -68,6 +77,7 @@ export const SlotBodyEnd = ({
     }
 
     if (bodyResponse && bodyResponse.data) {
+        // logView(epicTestName);
         const { html: epicHtml, css: epicCss } = bodyResponse.data;
         return (
             <div className={wrapperMargins}>
