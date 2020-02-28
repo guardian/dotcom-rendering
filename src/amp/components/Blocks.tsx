@@ -99,7 +99,6 @@ export const Blocks: React.SFC<{
         contentType,
         commercialProperties,
         switches: {
-            krux: switches.krux,
             ampPrebid: switches.ampPrebid,
             permutive: switches.permutive,
         },

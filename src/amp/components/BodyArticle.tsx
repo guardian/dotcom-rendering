@@ -82,7 +82,6 @@ export const Body: React.FC<{
         contentType: data.contentType,
         commercialProperties: data.commercialProperties,
         switches: {
-            krux: config.switches.krux,
             ampPrebid: config.switches.ampPrebid,
             permutive: config.switches.permutive,
         },
