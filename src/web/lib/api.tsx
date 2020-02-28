@@ -59,7 +59,7 @@ export function useApi<T>(url: string, options?: FetchOptions) {
                     loading: false,
                 });
             });
-    }, [url]);
+    }, [url, options]);
 
     return request;
 }
