@@ -17,6 +17,6 @@ deployments:
   mobile-assets:
     type: aws-s3
     parameters:
-      bucket: aws-mobile-assets
+      bucket: mobile-apps-rendering-assets
       cacheControl: public, max-age=315360000
       prefixStack: false
