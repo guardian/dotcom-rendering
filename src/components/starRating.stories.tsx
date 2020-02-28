@@ -33,6 +33,7 @@ const item: Item = {
     },
     commentable: false,
     tags: [],
+    shouldHideReaderRevenue: false,
 };
 
 const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
