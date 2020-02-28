@@ -42,6 +42,7 @@ const item: Item = {
     },
     commentable: false,
     tags: [],
+    shouldHideReaderRevenue: false,
 };
 
 const pillarOptions = {
