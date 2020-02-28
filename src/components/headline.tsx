@@ -23,7 +23,7 @@ const darkStyles = darkMode`
 `;
 
 const styles = css`
-    ${headline.large()}
+    ${headline.medium()}
     ${textPadding}
     padding-bottom: ${spaceToRem(9)};
     color: ${text.primary};
@@ -33,7 +33,7 @@ const styles = css`
 `;
 
 const immersiveStyles = css`
-    ${headline.large({ fontWeight: 'bold' })}
+    ${headline.medium({ fontWeight: 'bold' })}
     background-color: ${neutral[7]};
     color: ${neutral[100]};
     font-weight: 700;
@@ -45,7 +45,7 @@ const immersiveStyles = css`
 
 const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     ${styles}
-    ${headline.large({ lineHeight: 'regular', fontWeight: 'light' })}
+    ${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
 
     span {
         box-shadow: inset 0 -0.1rem ${kicker};
@@ -55,7 +55,7 @@ const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
 const featureStyles = ({ featureHeadline }: PillarStyles): SerializedStyles => css`
     ${styles}
-    ${headline.large({ fontWeight: 'bold' })}
+    ${headline.medium({ fontWeight: 'bold' })}
     color: ${featureHeadline};
 `;
 
