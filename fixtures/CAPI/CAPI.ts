@@ -2777,7 +2777,6 @@ export const CAPI: CAPIType = modifyDCRJsonResponse({
             discussionAllowAnonymousRecommendsSwitch: false,
             scrollDepth: true,
             permutive: true,
-            krux: false,
             webFonts: true,
             prebidImproveDigital: true,
             abCommercialPrebidSafeframe: true,
