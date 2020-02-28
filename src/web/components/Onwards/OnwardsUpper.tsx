@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useApi } from '@root/src/web/lib/api';
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 
-import { OnwardsLayout } from './OnwardsLayout';
+import { OnwardsData } from './OnwardsData';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
 // If you change this list then you should also update ^
@@ -90,8 +89,6 @@ export const OnwardsUpper = ({
     contentType,
     tags,
 }: Props) => {
-    const onwardSections: OnwardsType[] = [];
-
     const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
     // Related content can be a collection of articles based on
@@ -103,20 +100,10 @@ export const OnwardsUpper = ({
         tag => tag.type === 'Series' || tag.type === 'Blog',
     );
 
+    let url;
     if (hasStoryPackage) {
         // Always fetch the story package if it exists
-        const { data } = useApi(
-            joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]),
-        );
-
-        const storyPackage = data;
-
-        if (data && data.trails) {
-            onwardSections.push({
-                heading: storyPackage.heading,
-                trails: storyPackage.trails,
-            });
-        }
+        url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
     } else if (isAdFreeUser && isPaidContent) {
         // Don't show any related content (other than story packages) for
         // adfree users when the content is paid for
@@ -128,19 +115,7 @@ export const OnwardsUpper = ({
         //              type: "Series",
         //          }
         //
-        const seriesUrl = joinUrl([
-            ajaxUrl,
-            'series',
-            `${seriesTag.id}.json?dcr`,
-        ]);
-        const { data } = useApi(seriesUrl);
-
-        if (data && data.trails) {
-            onwardSections.push({
-                heading: data.displayname, // This displayname property is called 'heading' elsewhere
-                trails: data.trails.slice(0, 4), // Series onwards is four only
-            });
-        }
+        url = joinUrl([ajaxUrl, 'series', `${seriesTag.id}.json?dcr`]);
     } else if (dontShowRelatedContent) {
         // Then don't show related content
     } else if (tagToFilterBy) {
@@ -167,31 +142,17 @@ export const OnwardsUpper = ({
             popularInTagUrl += `&${queryParams.join('&')}`;
         }
 
-        const { data } = useApi(joinUrl([ajaxUrl, popularInTagUrl]));
-
-        if (data && data.trails) {
-            onwardSections.push({
-                heading: data.heading,
-                trails: data.trails,
-            });
-        }
+        url = joinUrl([ajaxUrl, popularInTagUrl]);
     } else {
         // Default to generic related endpoint
         const relatedUrl = `/related/${pageId}.json?dcr=true`;
 
-        const { data } = useApi(joinUrl([ajaxUrl, relatedUrl]));
-
-        if (data && data.trails) {
-            onwardSections.push({
-                heading: data.heading,
-                trails: data.trails,
-            });
-        }
+        url = joinUrl([ajaxUrl, relatedUrl]);
     }
 
-    if (!onwardSections || onwardSections.length === 0) {
+    if (!url) {
         return null;
     }
 
-    return <OnwardsLayout onwardSections={onwardSections} />;
+    return <OnwardsData url={url} limit={8} />;
 };
