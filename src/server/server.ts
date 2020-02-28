@@ -23,7 +23,7 @@ import { getMappedAssetLocation } from './assets';
 
 // ----- Setup ----- //
 
-const getAssetLocation = getMappedAssetLocation();
+const getAssetLocation: (assetName: string) => string = getMappedAssetLocation();
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
