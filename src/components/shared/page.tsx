@@ -47,14 +47,11 @@ const PageStyles = css`
 
     ${fontFace("Guardian Icons", new None, new None, "/public/fonts/icons.otf")}
 
-    font-size: 62.5%;
     background: white;
 
     body {
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
-        font-size: 1.6em;
-        line-height: 1.5em;
         overflow-x: hidden;
     }
 
