@@ -59,7 +59,14 @@ const featureStyles = ({ featureHeadline }: PillarStyles): SerializedStyles => c
     color: ${featureHeadline};
 `;
 
+const commentStyles = css`
+    ${styles}
+    ${headline.medium({ fontWeight: 'light' })}
+    padding-bottom: ${spaceToRem(1)};
+`;
+
 const getStyles = (item: Item): SerializedStyles => {
+    const pillarStyles = getPillarStyles(item.pillar);
 
     if (item.display === Display.Immersive) {
         return immersiveStyles;
@@ -67,9 +74,11 @@ const getStyles = (item: Item): SerializedStyles => {
 
     switch (item.design) {
         case Design.Analysis:
-            return analysisStyles(getPillarStyles(item.pillar));
+            return analysisStyles(pillarStyles);
         case Design.Feature:
-            return featureStyles(getPillarStyles(item.pillar));
+            return featureStyles(pillarStyles);
+        case Design.Comment:
+            return commentStyles;
         default:
             return styles;
     }
