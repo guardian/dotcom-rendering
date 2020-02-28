@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "upload": "node-riffraff-artifact",
+    "copy-manifest": "cp dist/assets/manifest.json dist/server/manifest.json",
     "test:build": "webpack --config webpack.config.js --config-name server --env.test",
     "test": "npm run test:build && jest --verbose",
     "test:coverage": "npm run test && open coverage/index.html",
@@ -16,8 +17,9 @@
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "watch:client": "webpack-dev-server --config webpack.config.js --config-name client",
     "watch": "npm run watch:server & npm run watch:client",
-    "build:server": "webpack --config webpack.config.js --config-name server --env.production",
+    "build:server": "webpack --config webpack.config.js --config-name server",
     "build:client": "webpack --config webpack.config.js --config-name client",
+    "build:server:prod": "webpack --config webpack.config.js --config-name server --env.production",
     "build:client:prod": "webpack --config webpack.config.js --config-name clientProduction",
     "storybook": "start-storybook -s ./",
     "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
@@ -103,6 +105,7 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
+    "webpack-manifest-plugin": "^2.2.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
   }

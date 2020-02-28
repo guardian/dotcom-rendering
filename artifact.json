@@ -4,7 +4,7 @@
   "actions": [
     {
       "action": "mobile-apps-rendering",
-      "path": "dist/server.js",
+      "path": "dist/server",
       "compress": "zip"
     },
     {

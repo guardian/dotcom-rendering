@@ -8,7 +8,7 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 import HeaderImage from 'components/immersive/headerImage';
 import Series from 'components/immersive/series';
 import Headline from 'components/immersive/headline';
-import Standfirst from 'components/immersive/standfirst';
+import Standfirst from 'components/standfirst';
 import Byline from 'components/immersive/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
@@ -94,13 +94,7 @@ const Immersive = ({ imageSalt, item, children }: Props): JSX.Element =>
                     />
                     <Series series={item.series} pillar={item.pillar}/>
                     <Headline headline={item.headline}/>
-                    <Standfirst
-                        standfirst={item.standfirst}
-                        pillar={item.pillar}
-                        className={articleWidthStyles}
-                        bylineHtml={item.bylineHtml}
-                        byline={item.byline}
-                    />
+                    <Standfirst item={item} />
                 </div>
                 <Keyline {...item} />
                 <Byline
