@@ -21,7 +21,7 @@
     "build:client": "webpack --config webpack.config.js --config-name client",
     "build:server:prod": "webpack --config webpack.config.js --config-name server --env.production",
     "build:client:prod": "webpack --config webpack.config.js --config-name clientProduction",
-    "storybook": "start-storybook -s ./",
+    "storybook": "start-storybook -s ./ -p 8181 --ci",
     "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
   },
   "jest": {
