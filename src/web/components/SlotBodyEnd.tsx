@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { css } from 'emotion';
-import { getBodyEnd } from '@guardian/slot-machine-client';
+import { getBodyEnd, getViewLog, logView } from '@guardian/slot-machine-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
@@ -33,6 +33,11 @@ export const SlotBodyEnd = ({
     isPaidContent,
     tags,
 }: Props) => {
+    // Hardcoding the test ID until we have A/B testing (variants) capability in DCR.
+    const epicTestName = 'DotcomRenderingEpic';
+    // Load the view log from localStorage so it can be added to the Contributions payload
+    const epicViewLog = getViewLog();
+
     const contributionsPayload = {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -56,6 +61,7 @@ export const SlotBodyEnd = ({
             showSupportMessaging: shouldShowSupportMessaging(),
             isRecurringContributor: isRecurringContributor(isSignedIn),
             lastOneOffContributionDate: getLastOneOffContributionDate(),
+            epicViewLog,
         },
     };
 
@@ -73,6 +79,8 @@ export const SlotBodyEnd = ({
     }
 
     if (bodyResponse && bodyResponse.data) {
+        // Add a new entry to the view log when we know an Epic is being rendered
+        logView(epicTestName);
         const { html: epicHtml, css: epicCss } = bodyResponse.data;
         return (
             <div className={wrapperMargins}>
