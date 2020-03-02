@@ -27,7 +27,7 @@ const articleAdStyles = css`
     .ad-slot {
         width: 300px;
         margin: 12px auto;
-        min-width: 300px;
+        min-width: 160px;
         min-height: 274px;
         text-align: center;
     }
