@@ -98,7 +98,7 @@ export const useApiFn = <T,>(fn: () => Promise<Response>): ApiResponse<T> => {
                     loading: false,
                 });
             });
-    }, []);
+    }, [fn]);
 
     return request;
 };
