@@ -35,7 +35,7 @@ export const SlotBodyEnd = ({
 }: Props) => {
     // Hardcoding the test ID until we have A/B testing (variants) capability in DCR.
     // Currently this matches the local vs remote A/B test running on Frontend.
-    const epicTestName = 'RemoteRenderEpic';
+    const epicTestName = 'DotcomRenderingEpic';
     // Load the view log from localStorage so it can be added to the Contributions payload
     const epicViewLog = getViewLog();
 
