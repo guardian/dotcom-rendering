@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { body, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
-import { sanitise } from '@root/src/amp/lib/sanitise-html';
+import { sanitise } from '@frontend/lib/sanitise-html';
 import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 
 // Note, this should only apply basic text styling. It is a case where we want
