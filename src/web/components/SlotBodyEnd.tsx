@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { css } from 'emotion';
 import { getBodyEnd } from '@guardian/slot-machine-client';
 import {
@@ -59,9 +59,14 @@ export const SlotBodyEnd = ({
         },
     };
 
+    const getSlot: () => Promise<Response> = useCallback(
+        () => getBodyEnd(contributionsPayload),
+        [], // empty as we only want to call the API once and payload will always fail a reference equality check anyway
+    );
+
     const { data: bodyResponse, error } = useApiFn<{
         data: { html: string; css: string };
-    }>(() => getBodyEnd(contributionsPayload));
+    }>(getSlot);
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'slot-body-end');
