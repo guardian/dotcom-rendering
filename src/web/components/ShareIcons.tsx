@@ -109,8 +109,8 @@ export const SharingIcons: React.FC<{
         if (icon && sharingUrl) {
             const listItem: ShareListItemType = {
                 id,
-                    Icon: icon,
-                    mobileOnly: mobileOnlyIcons.includes(id),
+                Icon: icon,
+                mobileOnly: mobileOnlyIcons.includes(id),
                 ...sharingUrl,
             };
             list.push(listItem);

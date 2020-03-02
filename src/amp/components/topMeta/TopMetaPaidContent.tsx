@@ -83,7 +83,9 @@ const Headline: React.FC<{
 export const TopMetaPaidContent: React.FC<{
     articleData: ArticleModel;
 }> = ({ articleData }) => {
-    const {branding} = articleData.commercialProperties[articleData.editionId];
+    const { branding } = articleData.commercialProperties[
+        articleData.editionId
+    ];
 
     return (
         <header>

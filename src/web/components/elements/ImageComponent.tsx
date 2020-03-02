@@ -9,7 +9,10 @@ import { palette } from '@guardian/src-foundations';
 
 const widths = [1020, 660, 480, 0];
 
-const bestFor = (desiredWidth: number, inlineSrcSets: SrcSetItem[]): SrcSetItem => {
+const bestFor = (
+    desiredWidth: number,
+    inlineSrcSets: SrcSetItem[],
+): SrcSetItem => {
     const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
 
     return sorted.reduce((best, current) => {

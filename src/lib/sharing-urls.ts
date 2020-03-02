@@ -100,9 +100,9 @@ export const getSharingUrls = (
 
         return {
             [platform]: {
-                    userMessage,
-                    url: appendParamsToBaseUrl(baseUrl, params),
-                },
+                userMessage,
+                url: appendParamsToBaseUrl(baseUrl, params),
+            },
             ...shareUrls,
         };
     }, {});
