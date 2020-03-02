@@ -68,11 +68,14 @@ export const useApi = <T,>(
                     loading: false,
                 });
             });
-    }, [url]);
+    }, [url, options]);
 
     return request;
 };
 
+// Warning: if your function is constructed dynamically in your component, you
+// should use https://reactjs.org/docs/hooks-reference.html#usecallback to wrap
+// it before calling this helper to avoid DoS'ing your API!
 export const useApiFn = <T,>(fn: () => Promise<Response>): ApiResponse<T> => {
     const [request, setRequest] = useState<{
         loading: boolean;

@@ -165,34 +165,34 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
     useEffect(() => {
         // If hook runs we know client-side JS is enabled
         setNoJS(false);
-    });
+    }, []);
 
     useEffect(() => {
+        const dismissOnEsc = (event: KeyboardEvent) => {
+            if (isExpanded && event.code === 'Escape') {
+                setIsExpanded(false);
+            }
+        };
+
         document.addEventListener('keydown', dismissOnEsc, false);
 
         // Remove listener on unmount
         return () => document.removeEventListener('keydown', dismissOnEsc);
-    });
+    }, [isExpanded]);
 
     useEffect(() => {
+        const dismissOnClick = (event: MouseEvent) => {
+            if (isExpanded) {
+                event.stopPropagation();
+                setIsExpanded(false);
+            }
+        };
+
         document.addEventListener('click', dismissOnClick, false);
 
         // Remove listener on unmount
         return () => document.removeEventListener('click', dismissOnClick);
-    });
-
-    const dismissOnClick = (event: MouseEvent) => {
-        if (isExpanded) {
-            event.stopPropagation();
-            setIsExpanded(false);
-        }
-    };
-
-    const dismissOnEsc = (event: KeyboardEvent) => {
-        if (isExpanded && event.code === 'Escape') {
-            setIsExpanded(false);
-        }
-    };
+    }, [isExpanded]);
 
     const handleToggle = () => setIsExpanded(!isExpanded);
 

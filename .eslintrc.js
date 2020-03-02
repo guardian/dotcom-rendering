@@ -19,7 +19,12 @@ module.exports = {
         project: 'tsconfig.json',
         sourceType: 'module',
     },
-    plugins: ['@typescript-eslint', '@typescript-eslint/tslint', 'dcr'],
+    plugins: [
+        '@typescript-eslint',
+        '@typescript-eslint/tslint',
+        'react-hooks',
+        'dcr',
+    ],
     rules: {
         'dcr/only-import-below': [
             'warn',
@@ -84,6 +89,8 @@ module.exports = {
         'react/no-unescaped-entities': [0],
         'react/sort-comp': [0],
         'react/state-in-constructor': [0],
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
     },
     settings: {
         'import/resolver': {
