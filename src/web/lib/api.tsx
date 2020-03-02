@@ -68,7 +68,7 @@ export const useApi = <T,>(
                     loading: false,
                 });
             });
-    }, [url]);
+    }, [url, options]);
 
     return request;
 };

@@ -11,7 +11,7 @@ jest.mock('@root/src/web/lib/api', () => ({
     useApi: jest.fn(),
 }));
 
-describe('MostViewedList', () => {
+describe('OnwardsLayout', () => {
     beforeEach(() => {
         useApi.mockReset();
     });
