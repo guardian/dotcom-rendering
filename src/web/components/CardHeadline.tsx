@@ -94,7 +94,6 @@ const headlineStyles = (
         case 'Comment':
         case 'Immersive':
         default:
-            
     }
 };
 
