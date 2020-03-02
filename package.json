@@ -26,7 +26,6 @@
     "dependencies": {
         "@emotion/core": "^10.0.5",
         "@guardian/consent-management-platform": "^2.0.10",
-        "@guardian/dotcom-rendering": "file:",
         "@guardian/slot-machine-client": "^0.1.60",
         "@guardian/src-foundations": "^0.13.0",
         "@sentry/browser": "^5.7.1",
