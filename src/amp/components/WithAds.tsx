@@ -11,7 +11,6 @@ interface AdInfo {
     contentType: string;
     commercialProperties: CommercialProperties;
     switches: {
-        krux: boolean;
         ampPrebid: boolean;
         permutive: boolean;
     };
@@ -25,7 +24,6 @@ export const WithAds: React.SFC<{
     adInfo: AdInfo;
 }> = ({ items, adSlots, adClassName, adInfo }) => {
     const commercialConfig = {
-        useKrux: adInfo.switches.krux,
         usePrebid: adInfo.switches.ampPrebid,
         usePermutive: adInfo.switches.permutive,
     };

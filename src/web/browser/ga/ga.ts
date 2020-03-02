@@ -49,7 +49,7 @@ export const sendPageView = (): void => {
     const set = `${tracker.name}.set`;
     const send = `${tracker.name}.send`;
     const identityId = getCookie('GU_U');
-    const {ga} = window;
+    const { ga } = window;
 
     ga(set, 'forceSSL', true);
     ga(set, 'title', GA.webTitle);

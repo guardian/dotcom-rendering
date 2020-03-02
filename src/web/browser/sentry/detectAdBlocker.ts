@@ -36,10 +36,7 @@ export const isAdBlockInUse: () => Promise<boolean> = () => {
 
                 adBlockInUse =
                     displayProp === 'none' ||
-                    !!(
-                        mozBindingProp &&
-                        mozBindingProp.includes('about:')
-                    );
+                    !!(mozBindingProp && mozBindingProp.includes('about:'));
 
                 resolve(adBlockInUse);
             });
