@@ -36,11 +36,6 @@ const Paragraph = (props: { children?: ReactNode }): ReactElement =>
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     text-decoration: none;
-    padding-bottom: 0.15em;
-    background-image: linear-gradient(${colour}66 0%, ${colour}66 100%);
-    background-repeat: repeat-x;
-    background-size: 1px 1px;
-    background-position: 0 bottom;
 `;
 
 const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
