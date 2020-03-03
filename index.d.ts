@@ -353,6 +353,27 @@ interface CardHeadlineType {
     showByline?: boolean;
 }
 
+type UserBadge = {
+    name: string;
+};
+
+type UserProfile = {
+    userId: string;
+    displayName: string;
+    webUrl: string;
+    apiUrl: string;
+    avatar: string;
+    secureAvatarUrl: string;
+    badge: UserBadge[];
+
+    // only included from /profile/me endpoint
+    privateFields?: {
+        canPostComment: boolean;
+        isPremoderated: boolean;
+        hasCommented: boolean;
+    };
+};
+
 /**
  * Onwards
  */
