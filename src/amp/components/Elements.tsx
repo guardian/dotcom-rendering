@@ -20,7 +20,7 @@ import { clean } from '@root/src/model/clean';
 import { Timeline } from '@root/src/amp/components/elements/Timeline';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
 import { InteractiveUrl } from '@root/src/amp/components/elements/InteractiveUrl';
-import { InteractiveMarkup } from '@root/src/amp/components/elements/InteractiveMarkup';
+// import { InteractiveMarkup } from '@root/src/amp/components/elements/InteractiveMarkup';
 import { MapEmbed } from '@root/src/amp/components/elements/MapEmbed';
 import { AudioAtom } from '@root/src/amp/components/elements/AudioAtom';
 
@@ -143,14 +143,17 @@ export const Elements = (
                         adTargeting={adTargeting}
                     />
                 );
-            case 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement':
-                return (
-                    <InteractiveMarkup
-                        html={element.html}
-                        styles={element.css}
-                        js={element.js}
-                    />
-                );
+            // Disabled because we were seeing errors when trying to load js from a different
+            // origin but you're not allowed to add the 'allow-same-origin' sandbox property
+            // when using the srcdoc option
+            // case 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement':
+            //     return (
+            //         <InteractiveMarkup
+            //             html={element.html}
+            //             styles={element.css}
+            //             js={element.js}
+            //         />
+            //     );
             case 'model.dotcomrendering.pageElements.InteractiveUrlBlockElement':
                 return <InteractiveUrl url={element.url} />;
             case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
