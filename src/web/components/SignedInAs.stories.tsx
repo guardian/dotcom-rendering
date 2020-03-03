@@ -40,6 +40,19 @@ export const Image = () => {
 };
 Image.story = { name: 'with image' };
 
+export const NoDisplayName = () => {
+    return (
+        <SignedInAs
+            commentCount={32}
+            user={{
+                ...aUser,
+                displayName: '',
+            }}
+        />
+    );
+};
+NoDisplayName.story = { name: 'before a display name has been set' };
+
 export const NotSignedIn = () => {
     return <SignedInAs commentCount={32} />;
 };

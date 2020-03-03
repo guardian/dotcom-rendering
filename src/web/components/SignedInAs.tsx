@@ -93,13 +93,15 @@ export const SignedInAs = ({ commentCount, user }: Props) => {
                                 user.secureAvatarUrl ||
                                 'https://avatar.guim.co.uk/no-user-image.gif'
                             }
-                            alt={user.displayName}
+                            alt={user.displayName || 'Guardian User'}
                             className={imageStyles}
                         />
                     </div>
                     <div className={signedInStyles}>
                         Signed in as
-                        <div className={usernameStyles}>{user.displayName}</div>
+                        <div className={usernameStyles}>
+                            {user.displayName || 'Guardian User'}
+                        </div>
                     </div>
                 </div>
             ) : (
