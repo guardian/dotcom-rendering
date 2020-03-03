@@ -143,7 +143,7 @@ export const Elements = (
                         adTargeting={adTargeting}
                     />
                 );
-            // Disabled because we were seeing errors when trying to load js from a different
+            // TODO: Disabled because we were seeing errors when trying to load js from a different
             // origin but you're not allowed to add the 'allow-same-origin' sandbox property
             // when using the srcdoc option
             // case 'model.dotcomrendering.pageElements.InteractiveMarkupBlockElement':
