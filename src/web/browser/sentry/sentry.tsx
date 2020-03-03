@@ -17,6 +17,8 @@ const ignoreErrors = [
     /InvalidStateError/gi,
     /Fetch error:/gi,
     'Network request failed',
+    'NetworkError',
+    'Failed to fetch',
     'This video is no longer available.',
     'UnknownError',
 ];
