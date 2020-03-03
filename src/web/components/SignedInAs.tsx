@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, space } from '@guardian/src-foundations';
+import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
     commentCount: number;
@@ -17,10 +18,15 @@ const imageStyles = css`
     border-radius: 70px;
     width: 60px;
     height: 60px;
+    ${until.desktop} {
+        width: 36px;
+        height: 36px;
+    }
 `;
 
 const imageWrapper = css`
     padding-bottom: ${space[1]}px;
+    padding-right: ${space[2]}px;
 `;
 
 const headingStyles = css`
@@ -30,6 +36,9 @@ const headingStyles = css`
 
 const signedInStyles = css`
     ${textSans.small()}
+    ${until.desktop} {
+        ${textSans.xsmall()}
+    }
     color: ${palette.neutral[46]};
     padding-bottom: ${space[1]}px;
 `;
@@ -55,6 +64,14 @@ const linkStyles = css`
     }
 `;
 
+const rowUntilDesktop = css`
+    display: flex;
+    flex-direction: column;
+    ${until.desktop} {
+        flex-direction: row;
+    }
+`;
+
 export const SignedInAs = ({ commentCount, user }: Props) => {
     return (
         <div className={containerStyles}>
@@ -69,7 +86,7 @@ export const SignedInAs = ({ commentCount, user }: Props) => {
                 </span>
             </h2>
             {user ? (
-                <>
+                <div className={rowUntilDesktop}>
                     <div className={imageWrapper}>
                         <img
                             src={
@@ -84,7 +101,7 @@ export const SignedInAs = ({ commentCount, user }: Props) => {
                         Signed in as
                         <div className={usernameStyles}>{user.displayName}</div>
                     </div>
-                </>
+                </div>
             ) : (
                 <span className={signedOutStyles}>
                     <a
