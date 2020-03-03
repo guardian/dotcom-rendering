@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { css } from 'emotion';
 import { getBodyEnd, getViewLog, logView } from '@guardian/slot-machine-client';
 import {
@@ -7,6 +7,7 @@ import {
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
 import { useApiFn } from '../lib/api';
+import { getCookie } from '../browser/cookie';
 
 const sendOphanInsertEvent = (): void => {
     const componentEvent = {
@@ -56,6 +57,18 @@ export const SlotBodyEnd = ({
     // Load the view log from localStorage so it can be added to the Contributions payload
     const epicViewLog = getViewLog();
 
+    // These are expensive - only retrieve them once
+    const mvtId = useMemo(() => Number(getCookie('GU_mvt_id')), []);
+    const lastOneOffContributionDate = useMemo(
+        getLastOneOffContributionDate,
+        [],
+    );
+    const showSupportMessaging = useMemo(shouldShowSupportMessaging, []);
+    const recurringContributor = useMemo(
+        () => isRecurringContributor(isSignedIn),
+        [],
+    );
+
     const contributionsPayload = {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -76,10 +89,11 @@ export const SlotBodyEnd = ({
             isMinuteArticle,
             isPaidContent,
             tags,
-            showSupportMessaging: shouldShowSupportMessaging(),
-            isRecurringContributor: isRecurringContributor(isSignedIn),
-            lastOneOffContributionDate: getLastOneOffContributionDate(),
+            showSupportMessaging,
+            isRecurringContributor: recurringContributor,
+            lastOneOffContributionDate,
             epicViewLog,
+            mvtId,
         },
     };
 
