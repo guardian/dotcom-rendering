@@ -27,6 +27,19 @@ export const SignedIn = () => {
 };
 SignedIn.story = { name: 'signed in' };
 
+export const Image = () => {
+    return (
+        <SignedInAs
+            commentCount={32}
+            user={{
+                ...aUser,
+                secureAvatarUrl: 'https://avatar.guim.co.uk/user/101885881',
+            }}
+        />
+    );
+};
+Image.story = { name: 'with image' };
+
 export const NotSignedIn = () => {
     return <SignedInAs commentCount={32} />;
 };
