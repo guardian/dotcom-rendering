@@ -3,8 +3,7 @@
 import { FC, ReactNode } from 'react';
 import React, { css } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
-
-import { spaceToRem } from 'styles';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Component ----- //
@@ -16,7 +15,7 @@ interface Props {
 const styles = css`
     ${body.medium()}
     overflow-wrap: break-word;
-    margin: 0 0 ${spaceToRem(3)};
+    margin: 0 0 ${remSpace[3]};
 `;
 
 const Paragraph: FC<Props> = ({ children }: Props) =>
