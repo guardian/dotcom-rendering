@@ -5,10 +5,11 @@ import { css, SerializedStyles } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
+import { remSpace } from '@guardian/src-foundations';
 
 import { Item, Design, Display } from 'item';
 import { renderText } from 'renderer';
-import { spaceToRem, textPadding, darkModeCss as darkMode } from 'styles';
+import { textPadding, darkModeCss as darkMode } from 'styles';
 import { PillarStyles, getPillarStyles } from 'pillar';
 
 
@@ -28,7 +29,7 @@ const darkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkMode`
 `;
 
 const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
-    margin-bottom: ${spaceToRem(2)};
+    margin-bottom: ${remSpace[2]};
     ${textPadding}
     color: ${text.primary};
 
@@ -58,7 +59,7 @@ const thinHeadline = css`
 const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
     ${styles(pillarStyles)}
     ${headline.xsmall({ fontWeight: 'light' })}
-    margin-top: ${spaceToRem(3)};
+    margin-top: ${remSpace[3]};
 
     a {
         box-shadow: inset 0 -0.1rem ${pillarStyles.kicker};

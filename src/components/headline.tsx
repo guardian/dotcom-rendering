@@ -4,9 +4,10 @@ import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
 
 import { Item, Design, Display } from 'item';
-import { textPadding, darkModeCss as darkMode, spaceToRem } from 'styles';
+import { textPadding, darkModeCss as darkMode } from 'styles';
 import { getPillarStyles, PillarStyles } from 'pillar';
 import StarRating from './starRating';
 
@@ -25,7 +26,7 @@ const darkStyles = darkMode`
 const styles = css`
     ${headline.medium()}
     ${textPadding}
-    padding-bottom: ${spaceToRem(9)};
+    padding-bottom: ${remSpace[9]};
     color: ${text.primary};
     margin: 0;
 
@@ -37,7 +38,7 @@ const immersiveStyles = css`
     background-color: ${neutral[7]};
     color: ${neutral[100]};
     font-weight: 700;
-    padding: ${spaceToRem(1)} ${spaceToRem(2)} ${spaceToRem(6)} ${spaceToRem(2)};
+    padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
     margin: 0;
 
     ${darkStyles}
@@ -62,7 +63,7 @@ const featureStyles = ({ featureHeadline }: PillarStyles): SerializedStyles => c
 const commentStyles = css`
     ${styles}
     ${headline.medium({ fontWeight: 'light' })}
-    padding-bottom: ${spaceToRem(1)};
+    padding-bottom: ${remSpace[1]};
 `;
 
 const getStyles = (item: Item): SerializedStyles => {

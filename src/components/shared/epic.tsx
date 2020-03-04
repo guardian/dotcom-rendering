@@ -1,31 +1,33 @@
 // ----- Imports ----- //
-import { css, SerializedStyles } from '@emotion/core';
-import { spaceToRem } from 'styles';
-import { from } from '@guardian/src-foundations/mq';
-import { palette } from '@guardian/src-foundations';
-import { brandAltBackground } from '@guardian/src-foundations/palette';
+
 import React, { useState, useEffect, useRef } from 'react';
-import { nativeClient } from 'native/nativeApi';
-import { SvgArrowRightStraight } from "@guardian/src-svgs"
+import { css, SerializedStyles } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming'
+import { from } from '@guardian/src-foundations/mq';
+import palette, { brandAltBackground } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
+import { SvgArrowRightStraight } from "@guardian/src-svgs"
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { body, headline } from '@guardian/src-foundations/typography';
+
+import { nativeClient } from 'native/nativeApi';
+
 
 // ----- Styles ----- //
 
 const EpicStyles = (): SerializedStyles => css`
-        width: calc(100% - ${spaceToRem(2)} - ${spaceToRem(2)} - ${spaceToRem(2)} - ${spaceToRem(2)});
-        margin: ${spaceToRem(2)};
+        width: calc(100% - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]});
+        margin: ${remSpace[2]};
 
         ${from.wide} {
-            margin: ${spaceToRem(2)} 0;
+            margin: ${remSpace[2]} 0;
         }
 
         clear: both;
 
         border-top: 1px solid ${brandAltBackground.primary};
         background: ${palette.neutral[97]};
-        padding: ${spaceToRem(2)};
+        padding: ${remSpace[2]};
         ${body.medium()}
         clear: left;
 
@@ -34,16 +36,16 @@ const EpicStyles = (): SerializedStyles => css`
         }
 
         button {
-            margin: 0 ${spaceToRem(2)} ${spaceToRem(2)} 0;
+            margin: 0 ${remSpace[2]} ${remSpace[2]} 0;
         }
 
         .button-container {
-            margin-top: ${spaceToRem(9)};
+            margin-top: ${remSpace[9]};
         }
 
         svg {
-            margin-left: ${spaceToRem(2)};
-            margin-top: -${spaceToRem(1)};
+            margin-left: ${remSpace[2]};
+            margin-top: -${remSpace[1]};
             vertical-align: middle;
         }
 
