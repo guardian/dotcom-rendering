@@ -60,14 +60,14 @@ test('Meta ophan data-attributes exist', () => {
 });
 
 test('Section ophan data-attributes do not exist', () => {
-    expect(result).toEqual(expect.stringContaining(`data-component="Section"`));
+    expect(result).toEqual(expect.stringContaining(`data-component="section"`));
 
     expect(result).toEqual(
         expect.stringContaining(`data-link-name="article section"`),
     );
 });
 test('Series ophan data-attributes exist', () => {
-    expect(result).toEqual(expect.stringContaining(`data-component="Series"`));
+    expect(result).toEqual(expect.stringContaining(`data-component="series"`));
 
     expect(result).toEqual(
         expect.stringContaining(`data-link-name="article series"`),
