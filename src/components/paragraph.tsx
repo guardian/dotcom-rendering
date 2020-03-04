@@ -19,7 +19,7 @@ const styles = css`
     margin: 0 0 ${spaceToRem(3)};
 `;
 
-const Paragraph: FC<Props> = ({ children }) =>
+const Paragraph: FC<Props> = ({ children }: Props) =>
     <p css={styles}>{children}</p>;
 
 
