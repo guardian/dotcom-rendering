@@ -382,7 +382,17 @@ type OnwardsType = {
     trails: TrailType[];
     description?: string;
     url?: string;
+    typeOfOnwards: TypeOfOnwards;
 };
+
+type TypeOfOnwards =
+    | 'series'
+    | 'more-on-this-story'
+    | 'related-stories'
+    | 'related-content'
+    | 'more-media-in-section'
+    | 'more-galleries'
+    | 'default-onwards'; // We should never see this in the analytics data!
 
 interface CommercialConfigType {
     isPaidContent?: boolean;

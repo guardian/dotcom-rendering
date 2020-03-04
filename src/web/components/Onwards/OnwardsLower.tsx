@@ -17,6 +17,8 @@ export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
     );
 
     let url;
+    let typeOfOnwards: TypeOfOnwards = 'default-onwards';
+
     if (hasStoryPackage && seriesTag) {
         // Use the series tag to get other data in the same series
         // Example: {
@@ -26,9 +28,10 @@ export const OnwardsLower = ({ ajaxUrl, hasStoryPackage, tags }: Props) => {
         //          }
         //
         url = joinUrl([ajaxUrl, 'series', `${seriesTag.id}.json?dcr`]);
+        typeOfOnwards = 'series';
     }
 
     if (!url) return null;
 
-    return <OnwardsData url={url} limit={4} />;
+    return <OnwardsData url={url} limit={4} typeOfOnwards={typeOfOnwards} />;
 };
