@@ -115,55 +115,55 @@ const trails: TrailType[] = [
 export const storyPackageTrails: OnwardsType = {
     heading: 'More on this story',
     trails,
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const oneTrail: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 1),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const twoTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 2),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const threeTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 3),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const fourTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 4),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const fiveTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 5),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const sixTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 6),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const sevenTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 7),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const eightTrails: OnwardsType = {
     heading: 'More on this story',
     trails: trails.slice(0, 8),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const linkAndDescription: OnwardsType = {
@@ -172,7 +172,7 @@ export const linkAndDescription: OnwardsType = {
         'Our writers reflect on the people, issues and curiosities in the news',
     heading: 'More on this story',
     trails: trails.slice(0, 8),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };
 
 export const withLongDescription: OnwardsType = {
@@ -180,5 +180,5 @@ export const withLongDescription: OnwardsType = {
         "<p>A blog by the Guardian's internal Digital team. We build the Guardian website, mobile apps, Editorial tools, revenue products, support our infrastructure and manage all things tech around the Guardian.</p><p>Our team contains Developers, UX, Quality, Product and Enterprise IT. This blog is where we share our experiences and approaches, including software  development tips, code examples, open source software and product  development stories </p>",
     heading: 'More on this story',
     trails: trails.slice(0, 8),
-    typeOfOnwards: 'more-on-this-story',
+    ophanComponentName: 'more-on-this-story',
 };

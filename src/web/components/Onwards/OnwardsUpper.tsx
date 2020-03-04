@@ -100,12 +100,12 @@ export const OnwardsUpper = ({
     );
 
     let url;
-    let typeOfOnwards: TypeOfOnwards = 'default-onwards';
+    let ophanComponentName: OphanComponentName = 'default-onwards';
 
     if (hasStoryPackage) {
         // Always fetch the story package if it exists
         url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
-        typeOfOnwards = 'more-on-this-story';
+        ophanComponentName = 'more-on-this-story';
     } else if (isAdFreeUser && isPaidContent) {
         // Don't show any related content (other than story packages) for
         // adfree users when the content is paid for
@@ -118,7 +118,7 @@ export const OnwardsUpper = ({
         //          }
         //
         url = joinUrl([ajaxUrl, 'series', `${seriesTag.id}.json?dcr`]);
-        typeOfOnwards = 'series';
+        ophanComponentName = 'series';
     } else if (dontShowRelatedContent) {
         // Then don't show related content
     } else if (tagToFilterBy) {
@@ -146,18 +146,24 @@ export const OnwardsUpper = ({
         }
 
         url = joinUrl([ajaxUrl, popularInTagUrl]);
-        typeOfOnwards = 'related-content';
+        ophanComponentName = 'related-content';
     } else {
         // Default to generic related endpoint
         const relatedUrl = `/related/${pageId}.json?dcr=true`;
 
         url = joinUrl([ajaxUrl, relatedUrl]);
-        typeOfOnwards = 'related-stories';
+        ophanComponentName = 'related-stories';
     }
 
     if (!url) {
         return null;
     }
 
-    return <OnwardsData url={url} limit={8} typeOfOnwards={typeOfOnwards} />;
+    return (
+        <OnwardsData
+            url={url}
+            limit={8}
+            ophanComponentName={ophanComponentName}
+        />
+    );
 };

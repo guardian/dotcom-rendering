@@ -382,10 +382,10 @@ type OnwardsType = {
     trails: TrailType[];
     description?: string;
     url?: string;
-    typeOfOnwards: TypeOfOnwards;
+    ophanComponentName: OphanComponentName;
 };
 
-type TypeOfOnwards =
+type OphanComponentName =
     | 'series'
     | 'more-on-this-story'
     | 'related-stories'

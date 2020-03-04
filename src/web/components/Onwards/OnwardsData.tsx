@@ -7,17 +7,17 @@ import { OnwardsLayout } from './OnwardsLayout';
 type Props = {
     url: string;
     limit: number; // Limit the number of items shown (the api often returns more)
-    typeOfOnwards: TypeOfOnwards;
+    ophanComponentName: OphanComponentName;
 };
 
-export const OnwardsData = ({ url, limit, typeOfOnwards }: Props) => {
+export const OnwardsData = ({ url, limit, ophanComponentName }: Props) => {
     const { data } = useApi(url);
     const onwardSections: OnwardsType[] = [];
     if (data && data.trails) {
         onwardSections.push({
             heading: data.heading || data.displayname, // Sometimes the api returns heading as 'displayName'
             trails: limit ? data.trails.slice(0, limit) : data.trails,
-            typeOfOnwards,
+            ophanComponentName,
         });
     }
 

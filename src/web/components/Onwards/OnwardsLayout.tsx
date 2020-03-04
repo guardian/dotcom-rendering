@@ -54,7 +54,7 @@ export const OnwardsLayout = ({ onwardSections }: Props) => {
                         />
                     </LeftColumn>
                     <OnwardsContainer
-                        dataComponentName={section.typeOfOnwards}
+                        dataComponentName={section.ophanComponentName}
                         dataLinkName={formatAttrString(section.heading)}
                     >
                         <Hide when="above" breakpoint="leftCol">
