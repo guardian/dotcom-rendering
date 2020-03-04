@@ -15,7 +15,8 @@
         "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
         "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
-        "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes"
+        "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes",
+        "makeBuild": "NODE_ENV=production webpack --config scripts/webpack/frontend"
     },
     "bundlesize": [
         {
