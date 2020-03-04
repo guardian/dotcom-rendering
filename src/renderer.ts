@@ -10,6 +10,7 @@ import { srcset, src } from 'image';
 import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement } from 'item';
+import Paragraph from 'components/paragraph';
 
 
 // ----- Renderer ----- //
@@ -29,9 +30,6 @@ const getAttr = (attr: string) => (node: Node): Option<string> =>
 
 const getHref: (node: Node) => Option<string> =
     getAttr('href');
-
-const Paragraph = (props: { children?: ReactNode }): ReactElement =>
-    styledH('p', { css: css`overflow-wrap: break-word` }, props.children);
 
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
