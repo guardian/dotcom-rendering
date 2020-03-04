@@ -1,5 +1,7 @@
 ![Lighthouse](https://github.com/guardian/dotcom-rendering/workflows/Lighthouse/badge.svg?branch=gtrufitt%2Flighthouse-budgets)
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/2560px-Transgender_Pride_flag.svg.png">
+
 # dotcom-rendering
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
