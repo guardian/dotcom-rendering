@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { Monad } from './monad';
+import { Option, Some, None } from './option';
 
 
 // ----- Classes ----- //
@@ -8,6 +9,7 @@ import { Monad } from './monad';
 interface ResultInterface<E, B> extends Monad<B> {
     either<C>(f: (e: E) => C, g: (b: B) => C): C;
     mapError<F>(g: (e: E) => F): Result<F, B>;
+    toOption(): Option<B>;
 }
 
 class Ok<E, B> implements ResultInterface<E, B> {
@@ -28,6 +30,10 @@ class Ok<E, B> implements ResultInterface<E, B> {
 
     mapError<F>(_g: (e: E) => F): Result<F, B> {
         return new Ok(this.value);
+    }
+
+    toOption(): Option<B> {
+        return new Some(this.value);
     }
 
     constructor(value: B) {
@@ -54,6 +60,10 @@ class Err<E, B> implements ResultInterface<E, B> {
 
     mapError<F>(g: (e: E) => F): Result<F, B> {
         return new Err(g(this.error));
+    }
+
+    toOption(): Option<B> {
+        return new None();
     }
 
     constructor(error: E) {
