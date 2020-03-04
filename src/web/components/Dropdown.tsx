@@ -118,7 +118,6 @@ const button = css`
     background: none;
     border: none;
     /* Design System: The buttons should be components that handle their own layout using primitives  */
-    /* stylelint-disable-next-line property-blacklist */
     line-height: 1.2;
     color: ${palette.neutral[100]};
     transition: color 80ms ease-out;

@@ -48,7 +48,6 @@ const fontStyle = css`
     padding: 0 5px;
     height: 36px;
     /* Design System: Line height is being used here for centering layout, we need the primitives */
-    /* stylelint-disable-next-line property-blacklist */
     line-height: 36px;
 
     ${from.tablet} {
