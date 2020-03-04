@@ -8,6 +8,24 @@ import {
 } from '@root/src/web/lib/contributions';
 import { useApiFn } from '../lib/api';
 
+const sendOphanInsertEvent = (): void => {
+    const componentEvent = {
+        component: {
+            componentType: 'ACQUISITIONS_EPIC',
+            products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
+            campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
+            id: 'gdnwb_copts_memco_remote_epic_test_api',
+        },
+        abTest: {
+            name: 'remote_epic_test',
+            variant: 'api',
+        },
+        action: 'INSERT',
+    };
+
+    window.guardian.ophan.record({ componentEvent });
+};
+
 const wrapperMargins = css`
     margin: 18px 0;
 `;
@@ -81,6 +99,8 @@ export const SlotBodyEnd = ({
     if (bodyResponse && bodyResponse.data) {
         // Add a new entry to the view log when we know an Epic is being rendered
         logView(epicTestName);
+        sendOphanInsertEvent();
+
         const { html: epicHtml, css: epicCss } = bodyResponse.data;
         return (
             <div className={wrapperMargins}>
