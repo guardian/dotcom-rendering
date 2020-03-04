@@ -6,7 +6,7 @@ import React, { ReactElement } from 'react';
 import Standfirst from './standfirst';
 import { Item, Design, Display } from 'item';
 import { Pillar } from 'pillar';
-import { Option, None, Some } from 'types/option';
+import { Option, None } from 'types/option';
 import { parse } from 'client/parser';
 
 
@@ -15,10 +15,9 @@ import { parse } from 'client/parser';
 const parser = new DOMParser();
 const parseStandfirst = parse(parser);
 
-const standfirst: Option<DocumentFragment> = parseStandfirst('<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>').either(
-    _ => new None(),
-    frag => new Some(frag),
-);
+const standfirst: Option<DocumentFragment> =
+    parseStandfirst('<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>')
+        .toOption();
 
 const item: Item = {
     pillar: Pillar.news,

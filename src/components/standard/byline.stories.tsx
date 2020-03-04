@@ -65,10 +65,7 @@ function publishDate(): Option<Date> {
 }
 
 const mockBylineHtml = (): Option<DocumentFragment> =>
-    parseByline(`<a href="${profileLink()}">${byline()}</a> ${job()}`).either(
-        _ => new None(),
-        frag => new Some(frag),
-    );
+    parseByline(`<a href="${profileLink()}">${byline()}</a> ${job()}`).toOption();
 
 
 // ----- Stories ----- //
