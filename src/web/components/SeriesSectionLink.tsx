@@ -98,7 +98,7 @@ export const SeriesSectionLink: React.FC<{
                     guardianBaseURL={guardianBaseURL}
                     tagTitle={tag.title}
                     tagUrl={tag.id}
-                    dataComponentName="Series"
+                    dataComponentName="series"
                     dataLinkName="article series"
                     weightingClass={primaryStyle}
                 />
@@ -107,7 +107,7 @@ export const SeriesSectionLink: React.FC<{
                     guardianBaseURL={guardianBaseURL}
                     tagTitle={sectionLabel}
                     tagUrl={sectionUrl}
-                    dataComponentName="Section"
+                    dataComponentName="section"
                     dataLinkName="article section"
                     weightingClass={secondaryStyle}
                 />
