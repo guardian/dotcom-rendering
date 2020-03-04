@@ -40,6 +40,7 @@ const withComments = (
             heading: section.heading,
             url: section.url,
             trails: updateTrailsWithCounts(section.trails, counts),
+            ophanComponentName: section.ophanComponentName,
         };
     });
 };

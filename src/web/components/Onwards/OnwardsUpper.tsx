@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { joinUrl } from '@root/src/web/lib/joinUrl';
-
 import { OnwardsData } from './OnwardsData';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
@@ -101,9 +100,12 @@ export const OnwardsUpper = ({
     );
 
     let url;
+    let ophanComponentName: OphanComponentName = 'default-onwards';
+
     if (hasStoryPackage) {
         // Always fetch the story package if it exists
         url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
+        ophanComponentName = 'more-on-this-story';
     } else if (isAdFreeUser && isPaidContent) {
         // Don't show any related content (other than story packages) for
         // adfree users when the content is paid for
@@ -116,6 +118,7 @@ export const OnwardsUpper = ({
         //          }
         //
         url = joinUrl([ajaxUrl, 'series', `${seriesTag.id}.json?dcr`]);
+        ophanComponentName = 'series';
     } else if (dontShowRelatedContent) {
         // Then don't show related content
     } else if (tagToFilterBy) {
@@ -143,16 +146,24 @@ export const OnwardsUpper = ({
         }
 
         url = joinUrl([ajaxUrl, popularInTagUrl]);
+        ophanComponentName = 'related-content';
     } else {
         // Default to generic related endpoint
         const relatedUrl = `/related/${pageId}.json?dcr=true`;
 
         url = joinUrl([ajaxUrl, relatedUrl]);
+        ophanComponentName = 'related-stories';
     }
 
     if (!url) {
         return null;
     }
 
-    return <OnwardsData url={url} limit={8} />;
+    return (
+        <OnwardsData
+            url={url}
+            limit={8}
+            ophanComponentName={ophanComponentName}
+        />
+    );
 };
