@@ -3,9 +3,10 @@
 import React, { ReactNode, ReactElement } from 'react';
 import { css } from '@emotion/core';
 import { brandAltBackground, text } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
 
 import { Item, Design } from 'item';
-import { icons, spaceToRem } from 'styles';
+import { icons } from 'styles';
 
 
 // ----- Subcomponents ----- //
@@ -13,18 +14,18 @@ import { icons, spaceToRem } from 'styles';
 const starStyles = css`
     ${icons}
     background-color: ${brandAltBackground.primary};
-    font-size: ${spaceToRem(5)};
+    font-size: ${remSpace[5]};
     line-height: 1;
     display: inline-block;
-    padding: 0 0.2rem ${spaceToRem(1)};
+    padding: 0 0.2rem ${remSpace[1]};
     color: ${text.primary};
 
     &:nth-of-type(1) {
-        padding-left: ${spaceToRem(1)};
+        padding-left: ${remSpace[1]};
     }
 
     &:nth-of-type(5) {
-        padding-right: ${spaceToRem(1)};
+        padding-right: ${remSpace[1]};
     }
 `;
 

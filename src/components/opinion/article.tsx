@@ -7,8 +7,8 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
-import Headline from 'components/opinion/headline';
-import ArticleStandfirst from 'components/standard/standfirst';
+import Headline from 'components/headline';
+import Standfirst from 'components/standfirst';
 import Byline from 'components/opinion/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
@@ -18,6 +18,7 @@ import { Keyline } from 'components/shared/keyline';
 import { CommentCount } from 'components/shared/commentCount';
 import { getPillarStyles } from 'pillar';
 import { Comment } from 'item';
+import Author from 'components/author';
 
 
 // ----- Styles ----- //
@@ -83,11 +84,8 @@ const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
             <header>
                 <div css={articleWidthStyles}>
                     <ArticleSeries series={item.series} pillar={item.pillar}/>
-                    <Headline
-                        byline={item.bylineHtml}
-                        headline={item.headline}
-                        pillar={item.pillar}
-                    />
+                    <Headline item={item} />
+                    <Author item={item} />
                 </div>
                 <Cutout 
                     contributors={item.contributors}
@@ -95,10 +93,9 @@ const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
                     className={articleWidthStyles}
                 />
                 <Keyline {...item} />
-                <ArticleStandfirst
-                    item={item}
-                    className={articleWidthStyles}
-                />
+                <div css={articleWidthStyles}>
+                    <Standfirst item={item} />
+                </div>
 
                 <section css={[articleWidthStyles, topBorder]}>
                     <Byline

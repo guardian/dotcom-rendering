@@ -1,15 +1,23 @@
 // ----- Imports ----- //
 
+import { select, withKnobs, boolean } from '@storybook/addon-knobs';
 import React, { ReactElement } from 'react';
-import { withKnobs, select, boolean, radios } from '@storybook/addon-knobs';
 
-import Headline from './headline';
+import Standfirst from './standfirst';
 import { Item, Design, Display } from 'item';
 import { Pillar } from 'pillar';
-import { None } from 'types/option';
+import { Option, None } from 'types/option';
+import { parse } from 'client/parser';
 
 
 // ----- Setup ----- //
+
+const parser = new DOMParser();
+const parseStandfirst = parse(parser);
+
+const standfirst: Option<DocumentFragment> =
+    parseStandfirst('<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>')
+        .toOption();
 
 const item: Item = {
     pillar: Pillar.news,
@@ -17,7 +25,7 @@ const item: Item = {
     display: Display.Standard,
     body: [],
     headline: 'Reclaimed lakes and giant airports: how Mexico City might have looked',
-    standfirst: new None(),
+    standfirst,
     byline: '',
     bylineHtml: new None(),
     publishDate: new None(),
@@ -44,54 +52,53 @@ const pillarOptions = {
     Lifestyle: Pillar.lifestyle,
 };
 
-const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
-
 
 // ----- Stories ----- //
 
 const Default = (): ReactElement =>
-    <Headline item={{
+    <Standfirst item={{
         ...item,
-        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.news),
-    }} />
-
-const Analysis = (): ReactElement =>
-    <Headline item={{
-        ...item,
-        design: Design.Analysis,
-        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
-        pillar: select('Pillar', pillarOptions, Pillar.news),
-    }} />
-
-const Feature = (): ReactElement =>
-    <Headline item={{
-        ...item,
-        design: Design.Feature,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
         pillar: select('Pillar', pillarOptions, Pillar.news),
     }} />
 
 const Review = (): ReactElement =>
-    <Headline item={{
+    <Standfirst item={{
         ...item,
         design: Design.Review,
-        starRating: radios('Rating', starRating, 3),
+        starRating: 4,
         display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
+        pillar: select('Pillar', pillarOptions, Pillar.arts),
+    }} />
+
+const Feature = (): ReactElement =>
+    <Standfirst item={{
+        ...item,
+        design: Design.Feature,
+        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
+        pillar: select('Pillar', pillarOptions, Pillar.sport),
+    }} />
+
+const Comment = (): ReactElement =>
+    <Standfirst item={{
+        ...item,
+        design: Design.Comment,
+        display: boolean('Immersive', false) ? Display.Immersive : Display.Standard,
+        pillar: select('Pillar', pillarOptions, Pillar.opinion),
     }} />
 
 
 // ----- Exports ----- //
 
 export default {
-    component: Headline,
-    title: 'Headline',
+    component: Standfirst,
+    title: 'Standfirst',
     decorators: [ withKnobs ],
 }
 
 export {
     Default,
-    Analysis,
-    Feature,
     Review,
+    Feature,
+    Comment,
 }

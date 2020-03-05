@@ -4,6 +4,7 @@ const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 // ----- Plugins ----- //
 
@@ -22,7 +23,6 @@ class LaunchServerPlugin {
         });
     }
 }
-
 
 // ----- Shared Config ----- //
 
@@ -43,15 +43,16 @@ function resolve(loggerName) {
 
 const serverConfig = env => {
     const isTest = env && env.test;
-
+    const isProd = env && env.production;
+    const isWatch = env && env.watch;
     // Does not try to require the 'canvas' package,
     // an optional dependency of jsdom that we aren't using.
     const plugins = [ new webpack.IgnorePlugin(/^canvas$/) ];
-    if (env && env.watch) {
+    if (isWatch) {
         plugins.push(new LaunchServerPlugin());
     }
 
-    const mode = (env && env.production) ? "production" : "development";
+    const mode = isProd ? "production" : "development";
 
     return {
         name: 'server',
@@ -62,7 +63,7 @@ const serverConfig = env => {
             __dirname: false,
         },
         output: {
-            filename: 'server.js',
+            filename: isProd ? 'server/server.js': 'server.js',
         },
         watch: env && env.watch,
         watchOptions: {
@@ -89,7 +90,7 @@ const serverConfig = env => {
                             options: { configFile: isTest ? 'config/tsconfig.test.json' : 'config/tsconfig.server.json' }
                         }
                     ],
-                },
+                }
             ]
         },
     }
@@ -107,6 +108,9 @@ const clientConfig = {
         path: path.resolve(__dirname, 'dist/assets'),
         filename: '[name].js',
     },
+    plugins: [
+        new ManifestPlugin({ writeToFileEmit: true }),
+    ],
     resolve: resolve("clientDev"),
     devServer: {
         publicPath: '/assets/',
@@ -154,6 +158,7 @@ const clientConfigProduction = {
             threshold: 10240,
             minRatio: 0.8,
         }),
+        new ManifestPlugin(),
     ],
     performance: {
         hints: 'error',
@@ -161,6 +166,10 @@ const clientConfigProduction = {
         assetFilter: function(assetFilename) {
             return assetFilename.endsWith('.js');
         }
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist/assets'),
+        filename: '[name].[contenthash].js',
     },
     resolve: resolve("clientProd")
 }

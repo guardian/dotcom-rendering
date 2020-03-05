@@ -4,9 +4,10 @@ import React, { ReactElement } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { headline } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
 
 import { Item, Design, Display } from 'item';
-import { textPadding, darkModeCss as darkMode, spaceToRem } from 'styles';
+import { textPadding, darkModeCss as darkMode } from 'styles';
 import { getPillarStyles, PillarStyles } from 'pillar';
 import StarRating from './starRating';
 
@@ -23,9 +24,9 @@ const darkStyles = darkMode`
 `;
 
 const styles = css`
-    ${headline.large()}
+    ${headline.medium()}
     ${textPadding}
-    padding-bottom: ${spaceToRem(9)};
+    padding-bottom: ${remSpace[9]};
     color: ${text.primary};
     margin: 0;
 
@@ -33,11 +34,11 @@ const styles = css`
 `;
 
 const immersiveStyles = css`
-    ${headline.large({ fontWeight: 'bold' })}
+    ${headline.medium({ fontWeight: 'bold' })}
     background-color: ${neutral[7]};
     color: ${neutral[100]};
     font-weight: 700;
-    padding: ${spaceToRem(1)} ${spaceToRem(2)} ${spaceToRem(6)} ${spaceToRem(2)};
+    padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
     margin: 0;
 
     ${darkStyles}
@@ -45,7 +46,7 @@ const immersiveStyles = css`
 
 const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     ${styles}
-    ${headline.large({ lineHeight: 'regular', fontWeight: 'light' })}
+    ${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
 
     span {
         box-shadow: inset 0 -0.1rem ${kicker};
@@ -55,11 +56,18 @@ const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
 const featureStyles = ({ featureHeadline }: PillarStyles): SerializedStyles => css`
     ${styles}
-    ${headline.large({ fontWeight: 'bold' })}
+    ${headline.medium({ fontWeight: 'bold' })}
     color: ${featureHeadline};
 `;
 
+const commentStyles = css`
+    ${styles}
+    ${headline.medium({ fontWeight: 'light' })}
+    padding-bottom: ${remSpace[1]};
+`;
+
 const getStyles = (item: Item): SerializedStyles => {
+    const pillarStyles = getPillarStyles(item.pillar);
 
     if (item.display === Display.Immersive) {
         return immersiveStyles;
@@ -67,9 +75,11 @@ const getStyles = (item: Item): SerializedStyles => {
 
     switch (item.design) {
         case Design.Analysis:
-            return analysisStyles(getPillarStyles(item.pillar));
+            return analysisStyles(pillarStyles);
         case Design.Feature:
-            return featureStyles(getPillarStyles(item.pillar));
+            return featureStyles(pillarStyles);
+        case Design.Comment:
+            return commentStyles;
         default:
             return styles;
     }

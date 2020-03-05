@@ -18,10 +18,12 @@ import { CapiError, capiEndpoint, getContent } from 'capi';
 import Page from 'components/shared/page';
 import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
-import {App, Stack, Stage} from "./appIdentity";
+import { App, Stack, Stage } from './appIdentity';
+import { getMappedAssetLocation } from './assets';
 
 // ----- Setup ----- //
 
+const getAssetLocation: (assetName: string) => string = getMappedAssetLocation();
 const defaultId =
   'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 
@@ -44,7 +46,7 @@ async function serveArticlePost(
     const content: MapiContent = MapiContent.read(protocol);
     const imageSalt = await getConfigValue<string>('apis.img.salt');
 
-    const { resources, element } = Page({ content, imageSalt });
+    const { resources, element } = Page({ content, imageSalt, getAssetLocation });
     const html = renderToString(element);
     res.set('Link', getPrefetchHeader(resources));
     res.write('<!DOCTYPE html>');
@@ -81,7 +83,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             }
           },
           content => {
-            const { resources, element } = Page({ content, imageSalt });
+            const { resources, element } = Page({ content, imageSalt, getAssetLocation });
             res.set('Link', getPrefetchHeader(resources));
             res.write('<!DOCTYPE html>');
             res.write(renderToString(element));
@@ -131,9 +133,11 @@ app.get('/*', bodyParser.raw(), serveArticle);
 app.post('/article', bodyParser.raw(), serveArticlePost);
 
 const port = 3040;
+
 app.listen(port, () => {
-  logger.info(`Server listening on port ${port}!`);
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV === "production") {
+    logger.info(`Server listening on port ${port}!`);
+  } else {
     logger.info(`Webpack dev server is listening on port 8080`);
   }
 });

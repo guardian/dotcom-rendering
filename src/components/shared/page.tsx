@@ -47,14 +47,11 @@ const PageStyles = css`
 
     ${fontFace("Guardian Icons", new None, new None, "/public/fonts/icons.otf")}
 
-    font-size: 62.5%;
     background: white;
 
     body {
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
-        font-size: 1.6em;
-        line-height: 1.5em;
         overflow-x: hidden;
     }
 
@@ -80,6 +77,7 @@ const PageStyles = css`
 interface BodyProps {
     imageSalt: string;
     capi: Content;
+    getAssetLocation: (assetName: string) => string;
 }
 
 interface ElementWithResources {
@@ -93,14 +91,14 @@ const WithScript = (props: { src: string; children: ReactNode }): ReactElement =
         <script src={props.src}></script>
     </>
 
-function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
+function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementWithResources {
 
     const insertAdPlaceholders = getAdPlaceholderInserter(capi.fields?.shouldHideAdverts ?? false);
 
     const item = fromCapi(JSDOM.fragment)(capi);
-    
-    const articleScript = '/assets/article.js';
-    const liveblogScript = '/assets/liveblog.js';
+
+    const articleScript = getAssetLocation('article.js');
+    const liveblogScript = getAssetLocation('liveblog.js');
 
     if (item.design === Design.Comment) {
         const commentBody = partition(item.body).oks;
@@ -162,14 +160,15 @@ function ArticleBody({ capi, imageSalt }: BodyProps): ElementWithResources {
 interface Props {
     content: Content;
     imageSalt: string;
+    getAssetLocation: (assetName: string) => string;
 }
 
-function Page({ content, imageSalt }: Props): ElementWithResources {
+function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResources {
     const twitterScript = includesTweets(content)
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
-    const { element, resources } = ArticleBody({ imageSalt, capi: content})
+    const { element, resources } = ArticleBody({ imageSalt, capi: content, getAssetLocation })
 
     return { element: (
         <html lang="en" css={PageStyles}>
