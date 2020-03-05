@@ -57,7 +57,6 @@ function insertAds(): void {
 }
 
 function ads(): void {
-    insertAds();
     nativeClient.isPremiumUser().then(premiumUser => {
         if (!premiumUser) {
             Array.from(document.querySelectorAll('.ad-placeholder'))
