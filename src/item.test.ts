@@ -172,7 +172,8 @@ describe('fromCapi returns correct Item', () => {
     })
 })
 
-describe('body elements parsed correctly', () => {
+
+describe('text elements', () => {
     test('parses text elements', () => {
         const textElement = {
             type: ElementType.TEXT,
@@ -198,7 +199,9 @@ describe('body elements parsed correctly', () => {
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
         expect(element.kind).toBe(ElementKind.Interactive)
     })
+});
 
+describe('image elements', () => {
     test('parses image elements', () => {
         const item = fromCapi(JSDOM.fragment)(articleContentWithImage) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
@@ -225,7 +228,9 @@ describe('body elements parsed correctly', () => {
         }) as Image;
         expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"))
     })
+});
 
+describe('pullquote elements', () => {
     test('parses pullquote elements', () => {
         const pullquoteElement = {
             type: ElementType.PULLQUOTE,
@@ -253,7 +258,9 @@ describe('body elements parsed correctly', () => {
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
         expect(element.kind).toBe(ElementKind.Interactive)
     })
+});
 
+describe('interactive elements', () => {
     test('parses interactive elements', () => {
         const interactiveElement = {
             type: ElementType.INTERACTIVE,
@@ -279,7 +286,9 @@ describe('body elements parsed correctly', () => {
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
         expect(element.kind).toBe(ElementKind.RichLink)
     })
+});
 
+describe('rich link elements', () => {
     test('parses rich link elements', () => {
         const richLinkElement = {
             type: ElementType.RICH_LINK,
@@ -330,7 +339,9 @@ describe('body elements parsed correctly', () => {
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
         expect(element.kind).toBe(ElementKind.Interactive)
     })
+});
 
+describe('tweet elements', () => {
     test('parses tweet elements', () => {
         const tweetElement = {
             type: ElementType.TWEET,
