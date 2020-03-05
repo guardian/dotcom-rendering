@@ -18,6 +18,7 @@ import { Header } from '@frontend/web/components/Header';
 import { getCookie } from '@root/src/web/browser/cookie';
 
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
+import { getCommentCount } from '@frontend/web/lib/getCommentCount';
 
 type Props = { CAPI: CAPIType; NAV: NavType };
 
@@ -47,6 +48,7 @@ export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
 const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [countryCode, setCountryCode] = useState<string>();
+    const [commentCount, setCommentCount] = useState<number>(0);
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -57,6 +59,17 @@ const App = ({ CAPI, NAV }: Props) => {
             setCountryCode((await getCountryCode()) || '');
         callFetch();
     }, []);
+
+    useEffect(() => {
+        const callFetch = async () =>
+            setCommentCount(
+                await getCommentCount(
+                    CAPI.config.ajaxUrl,
+                    CAPI.config.shortUrlId,
+                ),
+            );
+        callFetch();
+    }, [CAPI.config.ajaxUrl, CAPI.config.shortUrlId]);
 
     const richLinks: {
         element: RichLinkBlockElement;
@@ -131,7 +144,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 <Counts
                     ajaxUrl={CAPI.config.ajaxUrl}
                     pageId={CAPI.config.pageId}
-                    shortUrlId={CAPI.config.shortUrlId}
+                    commentCount={commentCount}
                     pillar={CAPI.pillar}
                 />
             </Portal>
