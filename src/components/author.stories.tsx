@@ -6,7 +6,7 @@ import { text, withKnobs, select } from '@storybook/addon-knobs';
 import Author from './author';
 import { Item, Design, Display } from 'item';
 import { Pillar } from 'pillar';
-import { Option, None, Some } from 'types/option';
+import { Option, None } from 'types/option';
 import { parse } from 'client/parser';
 
 
@@ -47,10 +47,7 @@ const byline = (): string =>
     text('Byline', 'Jane Smith');
 
 const mockBylineHtml = (): Option<DocumentFragment> =>
-    parseByline(`<a href="${profileLink()}">${byline()}</a>`).either(
-        _ => new None(),
-        frag => new Some(frag),
-    );
+    parseByline(`<a href="${profileLink()}">${byline()}</a>`).toOption();
 
 const pillarOptions = {
     News: Pillar.news,
