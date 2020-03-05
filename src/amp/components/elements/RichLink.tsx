@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 
