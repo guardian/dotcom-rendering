@@ -120,7 +120,7 @@ const button = css`
     border: none;
     /* Design System: The buttons should be components that handle their own layout using primitives  */
     line-height: 1.2;
-    color: ${brandText.buttonPrimary};
+    color: ${brandText.primary};
     transition: color 80ms ease-out;
     padding: 0px 10px 6px 5px;
     margin: 1px 0 0;
