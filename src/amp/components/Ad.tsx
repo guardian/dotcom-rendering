@@ -1,5 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
@@ -26,7 +28,7 @@ const adStyle = css`
         font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
             sans-serif;
         padding: 3px 10px;
-        color: ${palette.neutral[46]};
+        color: ${neutral[46]};
         text-align: right;
     }
 `;

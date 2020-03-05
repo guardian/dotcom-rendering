@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 const captionFont = css`
     ${textSans.xsmall()};
-    color: ${palette.neutral[46]};
+    color: ${neutral[46]};
 `;
 
 const dateline = css`

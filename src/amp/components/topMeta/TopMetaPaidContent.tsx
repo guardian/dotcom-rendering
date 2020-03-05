@@ -8,6 +8,7 @@ import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
 import { PaidForBand } from '@root/src/amp/components/topMeta/PaidForBand';
 
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/src-foundations/typography';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -42,7 +43,7 @@ const paidForLogoLabelStyle = css`
     ${textSans.small()};
     font-weight: 700;
     margin-bottom: 6px;
-    color: ${palette.neutral[46]};
+    color: ${neutral[46]};
 `;
 const paidForLogoStyle = css`
     padding-top: 4px;

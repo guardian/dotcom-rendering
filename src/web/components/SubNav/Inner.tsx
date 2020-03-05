@@ -1,5 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -76,7 +78,7 @@ const moreStyle = css`
     cursor: pointer;
     border: none;
     background-color: transparent;
-    color: ${palette.neutral[46]};
+    color: ${neutral[46]};
 
     :hover {
         color: ${palette.news.main};

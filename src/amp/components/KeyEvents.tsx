@@ -1,5 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import DownArrow from '@frontend/static/icons/down-arrow.svg';
@@ -11,7 +13,7 @@ const headingStyle = css`
     padding: 0.375rem 0.625rem;
     font-weight: bold;
     span {
-        background-color: ${palette.neutral[46]};
+        background-color: ${neutral[46]};
         float: right;
         position: relative;
     }

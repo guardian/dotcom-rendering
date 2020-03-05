@@ -1,6 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/src-foundations/typography';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
@@ -81,7 +83,7 @@ const sectionListStyle = css`
 
 const labelStyle = css`
     ${textSans.xsmall()};
-    color: ${palette.neutral[46]};
+    color: ${neutral[46]};
     display: block;
     margin-bottom: -3px;
 `;

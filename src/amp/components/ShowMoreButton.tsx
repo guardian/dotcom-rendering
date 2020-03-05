@@ -1,5 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import PlusIcon from '@frontend/static/icons/plus.svg';
@@ -20,7 +22,7 @@ const showMore = css`
         margin-top: -2px;
         margin-right: 4px;
         margin-left: 5px;
-        fill: ${palette.neutral[46]};
+        fill: ${neutral[46]};
         padding-right: 4px;
     }
 
