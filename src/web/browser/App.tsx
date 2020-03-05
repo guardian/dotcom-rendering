@@ -14,6 +14,7 @@ import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { Header } from '@frontend/web/components/Header';
+import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
@@ -35,7 +36,8 @@ type RootType =
     | 'onwards-upper'
     | 'onwards-lower'
     | 'rich-link'
-    | 'header-root';
+    | 'header-root'
+    | 'comments-root';
 
 export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
     ReactDOM.render(
@@ -173,6 +175,9 @@ const App = ({ CAPI, NAV }: Props) => {
                     hasStoryPackage={CAPI.hasStoryPackage}
                     tags={CAPI.tags}
                 />
+            </Portal>
+            <Portal root="comments-root">
+                <CommentsLayout commentCount={234} />
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter

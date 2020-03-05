@@ -29,6 +29,7 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
+import { Flex } from '@root/src/web/components/Flex';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -229,6 +230,8 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
+    const showComments = CAPI.isCommentable;
+
     return (
         <>
             <div>
@@ -425,6 +428,17 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     )}
 
                     {showOnwardsLower && <Section islandId="onwards-lower" />}
+
+                    {showComments && (
+                        <Section>
+                            <Flex>
+                                <div id="comments-root" />
+                                <RightColumn>
+                                    <p>Comments ad slot goes here</p>
+                                </RightColumn>
+                            </Flex>
+                        </Section>
+                    )}
 
                     <Section islandId="most-viewed-footer" />
                 </>
