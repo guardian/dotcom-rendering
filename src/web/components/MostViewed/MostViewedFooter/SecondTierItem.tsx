@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -32,7 +33,7 @@ const itemStyles = (showRightBorder?: boolean) => css`
 
     &:hover,
     :focus {
-        background: ${palette.neutral[97]};
+        background: ${neutral[97]};
     }
 `;
 

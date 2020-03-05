@@ -4,6 +4,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
 import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -162,7 +163,7 @@ const contributorImageWrapper = css`
 `;
 
 const neutralBackground = css`
-    background-color: ${palette.neutral[97]};
+    background-color: ${neutral[97]};
     a {
         color: inherit;
     }
