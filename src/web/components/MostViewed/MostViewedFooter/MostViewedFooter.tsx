@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 
@@ -81,8 +82,8 @@ const mostPopularAdStyle = css`
 `;
 
 const secondTierStyles = css`
-    border-left: 1px solid ${palette.neutral[86]};
-    border-right: 1px solid ${palette.neutral[86]};
+    border-left: 1px solid ${border.secondary};
+    border-right: 1px solid ${border.secondary};
 
     ${from.tablet} {
         padding-top: 24px;

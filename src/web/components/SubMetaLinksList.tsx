@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { neutral, border } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
@@ -19,7 +19,7 @@ const subMetaLinksList = css`
 const subMetaKeywordLinksList = css`
     padding-bottom: 12px;
     margin-bottom: 6px;
-    border-bottom: 1px solid ${palette.neutral[86]};
+    border-bottom: 1px solid ${border.secondary};
 `;
 
 const subMetaLinksListItem = css`
@@ -37,7 +37,7 @@ const subMetaLinksListItem = css`
         pointer-events: none;
         top: 0;
         right: -3px;
-        color: ${palette.neutral[86]};
+        color: ${neutral[86]};
     }
     a:hover {
         text-decoration: underline;

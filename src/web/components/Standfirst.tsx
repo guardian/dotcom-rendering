@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const nestedStyles = css`
@@ -21,7 +21,7 @@ const nestedStyles = css`
         height: 12px;
         width: 12px;
         margin-right: 8px;
-        background-color: ${palette.neutral[86]};
+        background-color: ${neutral[86]};
         margin-left: -20px;
     }
 

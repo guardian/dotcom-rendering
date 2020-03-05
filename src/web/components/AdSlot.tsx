@@ -3,6 +3,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -13,7 +14,7 @@ export const labelStyles = css`
         height: 24px;
         background-color: ${palette.neutral[97]};
         padding: 0 8px;
-        border-top: 1px solid ${palette.neutral[86]};
+        border-top: 1px solid ${border.secondary};
         color: ${palette.neutral[46]};
         text-align: left;
         box-sizing: border-box;
@@ -71,7 +72,7 @@ const mobileStickyAdStyles = css`
         height: 1.5rem;
         background-color: ${palette.neutral[97]};
         padding: 0 0.5rem;
-        border-top: 0.0625rem solid ${palette.neutral[86]};
+        border-top: 0.0625rem solid ${border.secondary};
         color: ${palette.neutral[60]};
         text-align: left;
         box-sizing: border-box;

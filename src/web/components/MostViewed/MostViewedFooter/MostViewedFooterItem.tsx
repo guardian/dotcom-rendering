@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
@@ -14,16 +15,16 @@ const gridItem = (position: number) => css`
 
     ${until.leftCol} {
         /* Below leftCol always set top border */
-        border-top: 1px solid ${palette.neutral[86]};
+        border-top: 1px solid ${border.secondary};
     }
     /* Above leftCol, don't apply a top border on the 1st and 6th
        items to prevent double borders */
     border-top: ${position !== 1 &&
         position !== 6 &&
-        `1px solid ${palette.neutral[86]}`};
+        `1px solid ${border.secondary}`};
 
     /* The left border is set on the container */
-    border-right: 1px solid ${palette.neutral[86]};
+    border-right: 1px solid ${border.secondary};
     min-height: 3.25rem;
 
     &:hover {

@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, border } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -218,7 +218,7 @@ const PositionHeadline = ({
 
 const stickyAdWrapper = css`
     background-color: white;
-    border-bottom: 0.0625rem solid ${palette.neutral[86]};
+    border-bottom: 0.0625rem solid ${border.secondary};
     position: sticky;
     top: 0;
     ${getZIndex('stickyAdWrapper')}
