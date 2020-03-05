@@ -56,7 +56,7 @@ const interactiveElement = (): BodyElement =>
 const tweetElement = (): BodyElement =>
     ({
         kind: ElementKind.Tweet,
-        content: JSDOM.fragment('<p>Tweet contents<p>').querySelectorAll('p'),
+        content: JSDOM.fragment('<span>Tweet contents<span>').querySelectorAll('span'),
     })
 
 const render = (element: BodyElement): ReactNode[] =>
