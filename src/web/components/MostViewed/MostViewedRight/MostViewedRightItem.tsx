@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
@@ -12,7 +13,7 @@ const listItemStyles = css`
     list-style: none;
     padding-top: 4px;
     margin-bottom: 12px;
-    border-top: 1px solid ${palette.neutral[86]};
+    border-top: 1px solid ${border.secondary};
 
     &:first-of-type {
         padding-top: 0;

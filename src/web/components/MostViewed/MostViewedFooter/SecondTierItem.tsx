@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -17,9 +18,9 @@ const itemStyles = (showRightBorder?: boolean) => css`
     padding-right: 10px;
     padding-bottom: 12px;
 
-    border-top: 1px solid ${palette.neutral[86]};
+    border-top: 1px solid ${border.secondary};
     ${from.tablet} {
-        border-right: ${showRightBorder && `1px solid ${palette.neutral[86]}`};
+        border-right: ${showRightBorder && `1px solid ${border.secondary}`};
     }
 
     min-height: 3.25rem;

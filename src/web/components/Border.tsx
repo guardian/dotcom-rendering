@@ -1,12 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 
 export const Border = () => (
     <div
         className={css`
-            border-left: 1px solid ${palette.neutral[86]};
+            border-left: 1px solid ${border.secondary};
             height: 100%;
         `}
     />

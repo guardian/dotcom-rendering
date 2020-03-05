@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { between, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
@@ -40,7 +40,7 @@ const metaFlex = css`
 `;
 
 const metaExtras = css`
-    border-top: 1px solid ${palette.neutral[86]};
+    border-top: 1px solid ${border.secondary};
     flex-grow: 1;
     padding-top: 6px;
 
@@ -53,7 +53,7 @@ const metaExtras = css`
 `;
 
 const metaNumbers = css`
-    border-top: 1px solid ${palette.neutral[86]};
+    border-top: 1px solid ${border.secondary};
     display: flex;
     flex-grow: 1;
 

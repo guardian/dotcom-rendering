@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, space } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
@@ -57,7 +58,7 @@ const usernameStyles = css`
 const linkStyles = css`
     color: ${palette.news[300]};
     text-decoration: none;
-    border-bottom: 1px solid ${palette.neutral[86]};
+    border-bottom: 1px solid ${border.secondary};
     transition: border-color 0.15s ease-out;
     :hover {
         border-color: ${palette.news[300]};
