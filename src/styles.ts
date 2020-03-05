@@ -181,6 +181,6 @@ export const fontFace = (
     font-family: ${family};
     ${style.fmap((s: string) => `font-style: ${s};`).withDefault('')}
     ${weight.fmap((w: number | string) => `font-weight: ${w};`).withDefault('')}
-    src: url('${url}');
+    src: url('font://${url)}'), url('${url}');
   }
 `;
