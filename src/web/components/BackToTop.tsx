@@ -18,7 +18,7 @@ const iconContainer = css`
 
 const link = css`
     text-decoration: none;
-    color: ${brandText.primary};
+    color: ${brandText.anchorPrimary};
     font-weight: bold;
     line-height: ${iconHeight};
 
