@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { background } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -267,7 +268,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
                     {NAV.subNavSections && (
                         <Section
-                            backgroundColour={palette.neutral[100]}
+                            backgroundColour={background.primary}
                             padded={false}
                             islandId="sub-nav-root"
                         >

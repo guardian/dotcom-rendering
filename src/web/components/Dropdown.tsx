@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -119,7 +120,7 @@ const button = css`
     border: none;
     /* Design System: The buttons should be components that handle their own layout using primitives  */
     line-height: 1.2;
-    color: ${palette.neutral[100]};
+    color: ${brandText.buttonPrimary};
     transition: color 80ms ease-out;
     padding: 0px 10px 6px 5px;
     margin: 1px 0 0;
