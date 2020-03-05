@@ -3,7 +3,6 @@
 const { fork } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
-const CompressionPlugin = require('compression-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
 // ----- Plugins ----- //
@@ -151,22 +150,8 @@ const clientConfigProduction = {
     name: 'clientProduction',
     mode: 'production',
     plugins: [
-        new CompressionPlugin({
-            filename: '[path]',
-            algorithm: 'gzip',
-            test: /\.js$|\.css$|\.html$/,
-            threshold: 10240,
-            minRatio: 0.8,
-        }),
         new ManifestPlugin(),
     ],
-    performance: {
-        hints: 'error',
-        maxEntrypointSize: 100000,
-        assetFilter: function(assetFilename) {
-            return assetFilename.endsWith('.js');
-        }
-    },
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
         filename: '[name].[contenthash].js',
