@@ -1,5 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -22,7 +24,7 @@ export const SyndicationButton: React.FC<{
     `;
 
     const syndicationButton = css`
-        color: ${palette.neutral[46]};
+        color: ${text.supporting};
         background-color: transparent;
         border-color: ${palette.neutral[86]};
         border-radius: 62.5rem;
@@ -34,7 +36,7 @@ export const SyndicationButton: React.FC<{
         &:hover,
         &:focus,
         &:active {
-            border-color: ${palette.neutral[46]};
+            border-color: ${neutral[46]};
         }
 
         line-height: 24px;

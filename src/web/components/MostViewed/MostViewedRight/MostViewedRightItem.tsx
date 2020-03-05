@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
@@ -62,7 +63,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 
     const linkProps = {
         to: trail.url,
-        visitedColour: palette.neutral[46],
+        visitedColour: neutral[46],
         preventFocus: true,
     };
 

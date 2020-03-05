@@ -1,5 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import ChevronRightSingle from '@frontend/static/icons/chevron-right-single.svg';
@@ -37,7 +39,7 @@ const paginationLinkStyle = (isActive: boolean, isMarginRight: boolean) => css`
             left: 9px;
             width: 16px;
             height: 16px;
-            fill: ${isActive ? palette.neutral[46] : palette.neutral[86]};
+            fill: ${isActive ? neutral[46] : palette.neutral[86]};
         }
     }
 `;

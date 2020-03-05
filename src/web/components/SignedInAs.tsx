@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -39,13 +40,13 @@ const signedInStyles = css`
     ${until.desktop} {
         ${textSans.xsmall()}
     }
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
     padding-bottom: ${space[1]}px;
 `;
 
 const signedOutStyles = css`
     ${headline.xxxsmall()}
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
     padding-bottom: ${space[1]}px;
 `;
 
