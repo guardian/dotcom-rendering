@@ -1,5 +1,5 @@
-import { ContentType, Tag, TagType, ElementType, AssetType } from "mapiThriftModels";
-import { fromCapi, Design, Standard, ElementKind } from 'item';
+import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
+import { fromCapi, Design, Standard, ElementKind, Image } from 'item';
 import { JSDOM } from "jsdom";
 
 const articleContent = {
@@ -32,7 +32,7 @@ const reviewContent = {
     }
 }
 
-const articleContentWithText = {
+const articleContentWithElement = (element: BlockElement) => ({
     ...articleContent,
     blocks: {
         body: [
@@ -43,123 +43,67 @@ const articleContentWithText = {
                 attributes: {},
                 published: true,
                 contributors: [],
-                elements: [{
-                    type: ElementType.TEXT,
-                    assets: [],
-                    textTypeData: {
-                        html: "<p>Hong Kong authorities have warned people to avoid kissing their pets</p>"
-                    }
-                }]
+                elements: [element]
             }
         ]
     }
-}
+})
 
-const articleContentWithRichLink = {
-    ...articleContent,
-    blocks: {
-        body: [
-            {
-                id: "",
-                bodyHtml: "",
-                bodyTextSummary: "",
-                attributes: {},
-                published: true,
-                contributors: [],
-                elements: [{
-                    type: ElementType.RICH_LINK,
-                    assets: [],
-                    richLinkTypeData: {
-                        url: "https://www.theguardian.com/",
-                        originalUrl: "https://www.theguardian.com/",
-                        linkText: "Chinese social media censoring 'officially sanctioned facts' on coronavirus",
-                        linkPrefix: "Related: ",
-                        role: "thumbnail"
-                    }
-                }]
+const articleContentWithImage = articleContentWithElement({
+    type: ElementType.IMAGE,
+    assets: [
+        {
+            type: AssetType.IMAGE,
+            mimeType: "image/jpeg",
+            file: "https://gu.com/image.jpg",
+            typeData: {
+                aspectRatio: "5:3",
+                width: 5302,
+                height: 3182,
+                isMaster: true
             }
-        ]
+        }
+    ],
+    imageTypeData: {
+        caption: "caption",
+        copyright: "",
+        displayCredit: true,
+        credit: "credit",
+        source: "",
+        photographer: "",
+        alt: "alt",
+        mediaId: "",
+        mediaApiUri: "https://image.co.uk",
+        suppliersReference: "",
+        imageType: ""
     }
-}
+})
 
-const articleContentWithImage = {
-    ...articleContent,
-    blocks: {
-        body: [
-            {
-                id: "",
-                bodyHtml: "",
-                bodyTextSummary: "",
-                attributes: {},
-                published: true,
-                contributors: [],
-                elements: [{
-                    type: ElementType.IMAGE,
-                    assets: [
-                        {
-                            type: AssetType.IMAGE,
-                            mimeType: "image/jpeg",
-                            file: "https://gu.com/image.jpg",
-                            typeData: {
-                                aspectRatio: "5:3",
-                                width: 2000,
-                                height: 1200
-                            }
-                        },
-                        {
-                            type: AssetType.IMAGE,
-                            mimeType: "image/jpeg",
-                            file: "https://gu.com/image.jpg",
-                            typeData: {
-                                aspectRatio: "5:3",
-                                width: 5302,
-                                height: 3182,
-                                isMaster: true
-                            }
-                        }
-                    ],
-                    imageTypeData: {
-                        caption: "Was forced to bring in snow by helicopter in February as Europe had its warmest winter on record.",
-                        copyright: "gu",
-                        displayCredit: true,
-                        credit: "Photograph: Photographer",
-                        source: "gu",
-                        photographer: "Photographer",
-                        alt: "The ski resort of Superbagnères in the French Pyrenees",
-                        mediaId: "id",
-                        mediaApiUri: "https://image.co.uk",
-                        suppliersReference: "reference",
-                        imageType: "Photograph"
-                    }
-                }]
+const articleContentWithImageWithoutFile = articleContentWithElement({
+    type: ElementType.IMAGE,
+    assets: [
+        {
+            type: AssetType.IMAGE,
+            mimeType: "image/jpeg",
+            file: "",
+            typeData: {
+                aspectRatio: "5:3",
+                width: 5302,
+                height: 3182,
+                isMaster: true
             }
-        ]
+        }
+    ],
+    imageTypeData: {
+        copyright: "",
+        source: "",
+        photographer: "",
+        mediaId: "",
+        mediaApiUri: "https://image.co.uk",
+        suppliersReference: "",
+        imageType: ""
     }
-}
-
-const articleContentWithPullquote = {
-    ...articleContent,
-    blocks: {
-        body: [
-            {
-                id: "",
-                bodyHtml: "",
-                bodyTextSummary: "",
-                attributes: {},
-                published: true,
-                contributors: [],
-                elements: [{
-                    type: ElementType.PULLQUOTE,
-                    assets: [],
-                    pullquoteTypeData: {
-                        html: "<p>pullquote<p>",
-                        attribution: ""
-                    }
-                }]
-            }
-        ]
-    }
-}
+})
 
 describe('fromCapi returns correct Item', () => {
     test('media', () => {
@@ -230,9 +174,29 @@ describe('fromCapi returns correct Item', () => {
 
 describe('body elements parsed correctly', () => {
     test('parses text elements', () => {
-        const item = fromCapi(JSDOM.fragment)(articleContentWithText) as Standard;
+        const textElement = {
+            type: ElementType.TEXT,
+            assets: [],
+            textTypeData: {
+                html: "<p>paragraph</p>"
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(textElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
         expect(element.kind).toBe(ElementKind.Text)
+    })
+
+    test('filters empty text elements', () => {
+        const textElement = {
+            type: ElementType.TEXT,
+            assets: [],
+            textTypeData: {
+                html: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(textElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
     })
 
     test('parses image elements', () => {
@@ -241,27 +205,185 @@ describe('body elements parsed correctly', () => {
         expect(element.kind).toBe(ElementKind.Image)
     })
 
+    test('filters image elements without file url', () => {
+        const item = fromCapi(JSDOM.fragment)(articleContentWithImageWithoutFile) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
+    })
+
+    test('uses displayCredit', () => {
+        const item = fromCapi(JSDOM.fragment)(articleContentWithImage) as Standard;
+        const element = item.body[0].toOption().withDefault({
+            kind: ElementKind.Image,
+            alt: "",
+            caption: JSDOM.fragment("caption"),
+            credit: "",
+            file: "",
+            width: 500,
+            height: 500,
+            captionString: ""
+        }) as Image;
+        expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"))
+    })
+
     test('parses pullquote elements', () => {
-        const item = fromCapi(JSDOM.fragment)(articleContentWithPullquote) as Standard;
+        const pullquoteElement = {
+            type: ElementType.PULLQUOTE,
+            assets: [],
+            pullquoteTypeData: {
+                html: "<p>pullquote<p>",
+                attribution: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(pullquoteElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
         expect(element.kind).toBe(ElementKind.Pullquote)
     })
 
-    test('parses interactive elements', () => {
+    test('filters empty pullquote elements', () => {
+        const pullquoteElement = {
+            type: ElementType.PULLQUOTE,
+            assets: [],
+            pullquoteTypeData: {
+                html: "",
+                attribution: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(pullquoteElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
+    })
 
+    test('parses interactive elements', () => {
+        const interactiveElement = {
+            type: ElementType.INTERACTIVE,
+            assets: [],
+            interactiveTypeData: {
+                iframeUrl: "https://gu.com"
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(interactiveElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
+    })
+
+    test('filters empty interactive elements', () => {
+        const interactiveElement = {
+            type: ElementType.INTERACTIVE,
+            assets: [],
+            interactiveTypeData: {
+                iframeUrl: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(interactiveElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
+        expect(element.kind).toBe(ElementKind.RichLink)
     })
 
     test('parses rich link elements', () => {
-        const item = fromCapi(JSDOM.fragment)(articleContentWithRichLink) as Standard;
+        const richLinkElement = {
+            type: ElementType.RICH_LINK,
+            assets: [],
+            richLinkTypeData: {
+                url: "https://www.theguardian.com/",
+                originalUrl: "https://www.theguardian.com/",
+                linkText: "link text",
+                linkPrefix: "",
+                role: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(richLinkElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
         expect(element.kind).toBe(ElementKind.RichLink)
     })
 
-    test('parses tweet elements', () => {
-
+    test('filters rich link elements with empty urls', () => {
+        const richLinkElement = {
+            type: ElementType.RICH_LINK,
+            assets: [],
+            richLinkTypeData: {
+                url: "",
+                originalUrl: "https://www.theguardian.com/",
+                linkText: "link text",
+                linkPrefix: "",
+                role: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(richLinkElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
     })
 
-    test('handles unknown element', () => {
+    test('filters rich link elements with empty linkText', () => {
+        const richLinkElement = {
+            type: ElementType.RICH_LINK,
+            assets: [],
+            richLinkTypeData: {
+                url: "https://www.theguardian.com/",
+                originalUrl: "",
+                linkText: "",
+                linkPrefix: "",
+                role: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(richLinkElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
+    })
 
+    test('parses tweet elements', () => {
+        const tweetElement = {
+            type: ElementType.TWEET,
+            assets: [],
+            tweetTypeData: {
+                id: "id",
+                html: "<blockquote>tweet<blockquote>"
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Tweet)
+    })
+
+    test('filters tweet elements with empty ids', () => {
+        const tweetElement = {
+            type: ElementType.TWEET,
+            assets: [],
+            tweetTypeData: {
+                id: "",
+                html: "<blockquote>tweet<blockquote>"
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
+    })
+
+    test('filters tweet elements with empty html', () => {
+        const tweetElement = {
+            type: ElementType.TWEET,
+            assets: [],
+            tweetTypeData: {
+                id: "id",
+                html: ""
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
+    })
+
+    test('filters tweet elements with no blockquotes', () => {
+        const tweetElement = {
+            type: ElementType.TWEET,
+            assets: [],
+            tweetTypeData: {
+                id: "id",
+                html: "<span>tweet<span>"
+            }
+        }
+        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
+        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        expect(element.kind).toBe(ElementKind.Interactive)
     })
 });
