@@ -46,14 +46,6 @@ export const Counts = ({ ajaxUrl, pageId, commentCount, pillar }: Props) => {
         shareUrl,
     );
 
-    // const commentUrl = joinUrl([
-    //     ajaxUrl,
-    //     `discussion/comment-counts.json?shortUrls=${shortUrlId}`,
-    // ]);
-    // const { data: commentData, error: commentError } = useApi<
-    //     CommentCountsType
-    // >(commentUrl);
-
     if (shareError) {
         window.guardian.modules.sentry.reportError(
             shareError,
