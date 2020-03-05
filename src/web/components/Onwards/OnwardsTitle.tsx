@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { neutral } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -29,7 +29,7 @@ const headerStyles = css`
 
 const descriptionStyles = css`
     ${headline.xxxsmall({ fontWeight: 'medium' })};
-    color: ${neutral[46]};
+    color: ${text.supporting};
     p {
         margin-bottom: 8px;
     }

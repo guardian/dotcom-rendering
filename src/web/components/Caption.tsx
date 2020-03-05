@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { neutral } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { css, cx } from 'emotion';
@@ -14,7 +14,7 @@ const captionStyle = (role?: RoleType) => css`
     padding-top: 6px;
     ${textSans.xsmall()};
     word-wrap: break-word;
-    color: ${neutral[46]};
+    color: ${text.supporting};
 `;
 
 const limitedWidth = css`

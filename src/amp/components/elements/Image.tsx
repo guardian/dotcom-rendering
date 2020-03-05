@@ -15,7 +15,7 @@ const captionStyle = css`
     padding-top: 8px;
     ${textSans.xsmall()};
     word-wrap: break-word;
-    color: ${neutral[46]};
+    color: ${text.supporting};
 `;
 
 export const Image: React.FC<{

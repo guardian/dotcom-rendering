@@ -28,7 +28,7 @@ const adStyle = css`
         font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
             sans-serif;
         padding: 3px 10px;
-        color: ${neutral[46]};
+        color: ${text.supporting};
         text-align: right;
     }
 `;

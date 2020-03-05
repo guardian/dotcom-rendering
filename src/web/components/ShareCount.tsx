@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 
@@ -18,7 +18,7 @@ const containerStyles = css`
     flex-direction: column;
     ${textSans.medium()};
     font-weight: bold;
-    color: ${neutral[46]};
+    color: ${text.supporting};
 `;
 
 const iconContainerStyles = css`

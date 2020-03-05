@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 
@@ -12,7 +12,7 @@ import TwitterIcon from '@frontend/static/icons/twitter.svg';
 const twitterHandle = css`
     ${textSans.xsmall()};
     font-weight: bold;
-    color: ${neutral[46]};
+    color: ${text.supporting};
 
     padding-right: 10px;
     display: inline-block;
@@ -25,7 +25,7 @@ const twitterHandle = css`
     }
 
     a {
-        color: ${neutral[46]};
+        color: ${text.supporting};
         text-decoration: none;
     }
 `;

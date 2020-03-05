@@ -13,7 +13,7 @@ const captionStyle = css`
     padding-top: 10px;
     ${textSans.xsmall()};
     word-wrap: break-word;
-    color: ${neutral[46]};
+    color: ${text.supporting};
 `;
 
 const captionPadding = css`

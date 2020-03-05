@@ -34,7 +34,7 @@ const richLink = css`
         ${textSans.xsmall()};
         content: 'More on this topic';
         display: block;
-        color: ${neutral[46]};
+        color: ${text.supporting};
         font-weight: 400;
     }
 `;

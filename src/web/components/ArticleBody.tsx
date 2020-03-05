@@ -3,7 +3,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { neutral } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
@@ -34,7 +34,7 @@ const pillarColours = pillarMap(
 
 const captionFont = css`
     ${textSans.xsmall()};
-    color: ${neutral[46]};
+    color: ${text.supporting};
 `;
 
 const bodyStyle = css`

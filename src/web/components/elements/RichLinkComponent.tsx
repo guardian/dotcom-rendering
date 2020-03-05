@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
-import { neutral } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
@@ -188,7 +188,7 @@ const textColour: (pillar: Pillar) => colour = pillar => {
 const paidForBranding = css`
     ${textSans.xsmall()};
     font-weight: bold;
-    color: ${neutral[46]};
+    color: ${text.supporting};
 `;
 
 const starWrapper = css`
