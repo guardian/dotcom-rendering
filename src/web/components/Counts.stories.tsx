@@ -3,7 +3,6 @@ import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
 import { sharecount } from '@root/fixtures/article';
-import { commentCount } from '@root/fixtures/commentCounts';
 
 import { Counts } from './Counts';
 
@@ -29,7 +28,7 @@ export const Live = () => {
         <Container>
             <Counts
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                shortUrlId="/p/4k83z"
+                commentCount={239}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
             />
@@ -41,22 +40,6 @@ Live.story = { name: 'with both results' };
 export const ShareOnly = () => {
     fetchMock
         .restore()
-        // Comment count
-        .getOnce(
-            'begin:https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=',
-            {
-                status: 200,
-                body: {
-                    counts: [
-                        {
-                            id: '/p/4k83z',
-                            count: 0,
-                        },
-                    ],
-                },
-            },
-            { overwriteRoutes: false },
-        )
         // Share count
         .getOnce(
             'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
@@ -71,7 +54,7 @@ export const ShareOnly = () => {
         <Container>
             <Counts
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                shortUrlId="/p/abc"
+                commentCount={0}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
             />
@@ -83,15 +66,6 @@ ShareOnly.story = { name: 'with share count only' };
 export const CommentOnly = () => {
     fetchMock
         .restore()
-        // Comment count
-        .getOnce(
-            'begin:https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=',
-            {
-                status: 200,
-                body: commentCount,
-            },
-            { overwriteRoutes: false },
-        )
         // Share count
         .getOnce(
             'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
@@ -110,7 +84,7 @@ export const CommentOnly = () => {
         <Container>
             <Counts
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-                shortUrlId="/p/4k83z"
+                commentCount={239}
                 pageId="/lifeandstyle/abc"
                 pillar="news"
             />
