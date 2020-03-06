@@ -1,8 +1,6 @@
 import * as Sentry from '@sentry/browser';
 
-// This is set to 10% here rather than the normal 1% so we get good
-// feedback early on. TODO: This should be reduced to 1% once the site is fully deployed.
-const SAMPLE_RATE = 0.1;
+const SAMPLE_RATE = 0.01; // 1%
 
 // Only send errors matching these regexes
 const whitelistUrls = [
@@ -19,6 +17,8 @@ const ignoreErrors = [
     /InvalidStateError/gi,
     /Fetch error:/gi,
     'Network request failed',
+    'NetworkError',
+    'Failed to fetch',
     'This video is no longer available.',
     'UnknownError',
 ];
