@@ -120,7 +120,7 @@ describe('Renders different types of elements', () => {
         const nodes = render(imageElement())
         const bodyImage = shallow(nodes.flat()[0]);
         expect(bodyImage.html()).toContain('img');
-        expect(bodyImage.html()).toContain('<figcaption>');
+        expect(bodyImage.html()).toContain('figcaption');
         expect(bodyImage.html()).toContain('caption="caption"');
         expect(bodyImage.html()).toContain('credit="credit"');
     })
