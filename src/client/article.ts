@@ -14,6 +14,16 @@ import ReactDOM from 'react-dom';
 
 // ----- Run ----- //
 
+interface FontFaceSet {
+    readonly ready: Promise<FontFaceSet>;
+}
+
+declare global {
+    interface Document {
+        fonts: FontFaceSet;
+    }
+}
+
 function getAdSlots(): AdSlot[] {
     const advertSlots = document.getElementsByClassName('ad-slot');
 
@@ -55,7 +65,7 @@ function insertAds(): void {
         observer.observe(targetNode, config);
 
         try {
-            (document as any).fonts.ready.then(() => nativeClient.updateAdverts(getAdSlots()))
+            document.fonts.ready.then(() => nativeClient.updateAdverts(getAdSlots()))
         } catch (e) {
             logger.error(`font loading API not supported: ${e}`)
         }
