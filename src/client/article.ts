@@ -54,8 +54,11 @@ function insertAds(): void {
         const observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
 
-        // handle font loading and changes that do not mutate DOM
-        setTimeout(() => nativeClient.updateAdverts(getAdSlots()), 200);
+        try {
+            (document as any).fonts.ready.then(() => nativeClient.updateAdverts(getAdSlots()))
+        } catch (e) {
+            logger.error(`font loading API not supported: ${e}`)
+        }
     }
 }
 
