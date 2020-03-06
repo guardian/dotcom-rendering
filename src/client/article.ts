@@ -53,6 +53,9 @@ function insertAds(): void {
 
         const observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
+
+        // handle font loading and changes that do not mutate DOM
+        setTimeout(() => nativeClient.updateAdverts(getAdSlots()), 200);
     }
 }
 
@@ -60,7 +63,7 @@ function ads(): void {
     nativeClient.isPremiumUser().then(premiumUser => {
         if (!premiumUser) {
             Array.from(document.querySelectorAll('.ad-placeholder'))
-                 .map(placeholder => placeholder.classList.remove('hidden'))
+                 .forEach(placeholder => placeholder.classList.remove('hidden'))
             insertAds();
         }
     })
