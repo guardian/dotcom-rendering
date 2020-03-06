@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 
 const linkStyles = (designType: DesignType, pillar: Pillar) => {
     const baseLinkStyles = css`
@@ -82,7 +83,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         default:
             return css`
                     ${baseLinkStyles}
-                    background-color: ${palette.neutral[97]};
+                    background-color: ${neutral[97]};
 
                     :hover {
                         background-color: ${palette.neutral[93]};

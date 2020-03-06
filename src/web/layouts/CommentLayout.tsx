@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -398,7 +399,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     {!isSensitive && (
                         <Section
                             showTopBorder={false}
-                            backgroundColour={palette.neutral[97]}
+                            backgroundColour={neutral[97]}
                         >
                             <OutbrainContainer />
                         </Section>
