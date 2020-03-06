@@ -55,7 +55,7 @@ const captionStyles = css`
     color: ${text.supporting};
 `;
 
-const BodyImage: FC<Props> = ({ figcaption, image, pillar }) =>
+const BodyImage: FC<Props> = ({ figcaption, image, pillar }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} />
         <figcaption css={captionStyles}>
