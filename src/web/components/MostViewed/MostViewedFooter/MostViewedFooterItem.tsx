@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
+import { border, neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
@@ -33,7 +33,7 @@ const gridItem = (position: number) => css`
 
     &:hover,
     :focus {
-        background: ${palette.neutral[97]};
+        background: ${neutral[97]};
     }
 `;
 

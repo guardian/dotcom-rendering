@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
@@ -19,7 +20,7 @@ const ageStyles = (designType?: DesignType) => css`
     padding-right: 5px;
 
     svg {
-        fill: ${palette.neutral[46]};
+        fill: ${neutral[46]};
         margin-bottom: -1px;
         height: 11px;
         width: 11px;

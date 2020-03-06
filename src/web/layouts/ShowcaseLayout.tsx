@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { neutral, border } from '@guardian/src-foundations/palette';
+import { neutral, border, background } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -296,7 +296,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
 
                     {NAV.subNavSections && (
                         <Section
-                            backgroundColour={palette.neutral[100]}
+                            backgroundColour={background.primary}
                             padded={false}
                             islandId="sub-nav-root"
                         >
@@ -445,7 +445,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     {!isSensitive && (
                         <Section
                             showTopBorder={false}
-                            backgroundColour={palette.neutral[97]}
+                            backgroundColour={neutral[97]}
                         >
                             <OutbrainContainer />
                         </Section>

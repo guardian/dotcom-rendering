@@ -399,7 +399,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     {!isSensitive && (
                         <Section
                             showTopBorder={false}
-                            backgroundColour={palette.neutral[97]}
+                            backgroundColour={neutral[97]}
                         >
                             <OutbrainContainer />
                         </Section>

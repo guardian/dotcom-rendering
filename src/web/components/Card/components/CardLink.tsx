@@ -83,7 +83,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         default:
             return css`
                     ${baseLinkStyles}
-                    background-color: ${palette.neutral[97]};
+                    background-color: ${neutral[97]};
 
                     :hover {
                         background-color: ${neutral[93]};
