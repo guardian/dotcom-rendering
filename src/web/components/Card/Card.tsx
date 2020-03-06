@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
@@ -73,7 +74,7 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 );
 
 const starWrapper = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
     position: absolute;
     bottom: 0;
     margin-top: 2px;

@@ -4,8 +4,11 @@ import { css, cx } from 'emotion';
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
-import { text, neutral } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
+import {
+    text,
+    neutral,
+    brandAltBackground,
+} from '@guardian/src-foundations/palette';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -192,7 +195,7 @@ const paidForBranding = css`
 `;
 
 const starWrapper = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
     display: inline-block;
 `;
 

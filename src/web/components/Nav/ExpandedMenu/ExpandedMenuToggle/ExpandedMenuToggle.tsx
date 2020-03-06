@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -28,11 +27,9 @@ const openExpandedMenu = css`
         padding-top: 5px;
         height: 42px;
     }
-    :hover {
-        color: ${palette.brandYellow.main};
-    }
+    :hover,
     :focus {
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
     }
 `;
 const checkbox = css`
