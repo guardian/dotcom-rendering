@@ -12,7 +12,7 @@
     "copy-manifest": "cp dist/assets/manifest.json dist/server/manifest.json",
     "test:build": "webpack --config webpack.config.js --config-name server --env.test",
     "test": "npm run test:build && jest --verbose",
-    "test:coverage": "npm run test && open coverage/index.html",
+    "test:coverage": "npm run test; open coverage/index.html",
     "lint": "node_modules/eslint/bin/eslint.js -c config/.eslintrc.js ./ --ext '.ts,.tsx'",
     "watch:server": "webpack --config webpack.config.js --config-name server --env.watch",
     "watch:client": "webpack-dev-server --config webpack.config.js --config-name client",
@@ -31,10 +31,10 @@
     },
     "coverageThreshold": {
       "global": {
-        "branches": 15,
-        "functions": 15,
-        "lines": 15,
-        "statements": 15
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
       }
     },
     "coverageReporters": [
@@ -43,7 +43,8 @@
       "text-summary"
     ],
     "collectCoverageFrom": [
-      "<rootDir>/src/renderer.ts"
+      "<rootDir>/src/renderer.ts",
+      "<rootDir>/src/item.ts"
     ],
     "moduleDirectories": [
       "node_modules",

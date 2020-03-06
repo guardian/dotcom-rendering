@@ -43,7 +43,7 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
         props.text,
     );
 
-const listStyles = (colour: string): SerializedStyles => css`
+const listStyles: SerializedStyles = css`
     list-style: none;
     padding-left: 0;
 `
@@ -118,16 +118,13 @@ const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
         null
     );
 
-const HeadingTwo = (props: { children?: ReactNode }): ReactElement =>
-    styledH('h2', { css: HeadingTwoStyles }, props.children );
-
 const HorizontalRule = (): ReactElement =>
     styledH('hr', { css: HorizontalRuleStyles }, null)
 
 const transform = (text: string, pillar: Pillar): ReactElement | string => {
-    if (text?.includes('•')) {
+    if (text.includes('•')) {
         return h(Bullet, { pillar, text });
-    } else if (text?.includes('* * *')) {
+    } else if (text.includes('* * *')) {
         return h(HorizontalRule, null, null);
     }
     return text;
@@ -146,7 +143,7 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
         case 'A':
             return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, children);
         case 'H2':
-            return h(HeadingTwo, { key }, children);
+            return styledH('h2', { css: HeadingTwoStyles, key }, children );
         case 'BLOCKQUOTE':
             return h('blockquote', { key }, children);
         case 'STRONG':
@@ -394,10 +391,6 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 
         case ElementKind.Tweet:
             return h(Tweet, { content: element.content, pillar, key });
-
-        default:
-            return null;
-
     }
 }
 
