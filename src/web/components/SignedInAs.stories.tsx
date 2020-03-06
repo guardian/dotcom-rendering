@@ -57,3 +57,8 @@ export const NotSignedIn = () => {
     return <SignedInAs commentCount={32} />;
 };
 NotSignedIn.story = { name: 'not signed in' };
+
+export const DiscussionClosed = () => {
+    return <SignedInAs commentCount={32} discussionClosed={true} />;
+};
+DiscussionClosed.story = { name: 'with discussion closed' };

@@ -8,6 +8,7 @@ import { until } from '@guardian/src-foundations/mq';
 type Props = {
     commentCount: number;
     user?: UserProfile;
+    discussionClosed?: boolean;
 };
 
 const containerStyles = css`
@@ -34,7 +35,7 @@ const headingStyles = css`
     padding-bottom: ${space[1]}px;
 `;
 
-const signedInStyles = css`
+const textStyles = css`
     ${textSans.small()}
     ${until.desktop} {
         ${textSans.xsmall()}
@@ -43,7 +44,7 @@ const signedInStyles = css`
     padding-bottom: ${space[1]}px;
 `;
 
-const signedOutStyles = css`
+const headlineStyles = css`
     ${headline.xxxsmall()}
     color: ${palette.neutral[46]};
     padding-bottom: ${space[1]}px;
@@ -72,7 +73,7 @@ const rowUntilDesktop = css`
     }
 `;
 
-export const SignedInAs = ({ commentCount, user }: Props) => {
+export const SignedInAs = ({ commentCount, user, discussionClosed }: Props) => {
     return (
         <div className={containerStyles}>
             <h2 className={headingStyles}>
@@ -85,7 +86,9 @@ export const SignedInAs = ({ commentCount, user }: Props) => {
                     ({commentCount})
                 </span>
             </h2>
-            {user ? (
+
+            {/* Discussion open and user logged in */}
+            {user && !discussionClosed && (
                 <div className={rowUntilDesktop}>
                     <div className={imageWrapper}>
                         <img
@@ -97,15 +100,18 @@ export const SignedInAs = ({ commentCount, user }: Props) => {
                             className={imageStyles}
                         />
                     </div>
-                    <div className={signedInStyles}>
+                    <div className={textStyles}>
                         Signed in as
                         <div className={usernameStyles}>
                             {user.displayName || 'Guardian User'}
                         </div>
                     </div>
                 </div>
-            ) : (
-                <span className={signedOutStyles}>
+            )}
+
+            {/* Discussion open but user is logged out */}
+            {!user && !discussionClosed && (
+                <span className={headlineStyles}>
                     <a
                         href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN"
                         className={linkStyles}
@@ -120,6 +126,13 @@ export const SignedInAs = ({ commentCount, user }: Props) => {
                         create your Guardian account
                     </a>{' '}
                     to join the discussion.
+                </span>
+            )}
+
+            {/* The discussion is closed */}
+            {discussionClosed && (
+                <span className={headlineStyles}>
+                    This discussion is closed for comments
                 </span>
             )}
         </div>
