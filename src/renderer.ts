@@ -7,10 +7,11 @@ import { neutral } from '@guardian/src-foundations/palette';
 
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
-import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
+import { basePx, icons, headlineFont, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement } from 'item';
 import Paragraph from 'components/paragraph';
+import BodyImage from 'components/bodyImage';
 
 
 // ----- Renderer ----- //
@@ -179,10 +180,6 @@ interface ImageProps {
     pillar: Pillar;
 }
 
-type FigureElement = ImageProps & {
-    className?: SerializedStyles;
-}
-
 const imageStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(100vw * ${height / width});
     background: ${neutral[97]};
@@ -210,45 +207,6 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
         credit,
     });
 }
-
-const FigureElement = (props: FigureElement): ReactElement =>
-    styledH('figure', { css: props.className },
-        h(ImageElement, props),
-        h('figcaption', null, text(props.caption, props.pillar)),
-    );
-
-const bodyImageStyles = css`
-    margin-left: ${basePx(-1)};
-    margin-right: ${basePx(-1)};
-
-    ${from.phablet} {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    ${from.wide} {
-        margin: 1em 0;
-    }
-
-    img {
-        width: 100%; 
-    }
-
-    figcaption {
-        font-size: 1.4rem;
-        line-height: 1.8rem;
-        color: ${neutral[46]};
-        ${textSans}
-
-        ${until.phablet} {
-            padding-left: ${basePx(1)};
-            padding-right: ${basePx(1)};
-        }
-    }
-`;
-
-const BodyImage = (props: Omit<FigureElement, 'sizes'>): ReactElement =>
-    h(FigureElement, { ...props, sizes: '100vw', className: bodyImageStyles });
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     font-weight: 200;
@@ -366,16 +324,17 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
         case ElementKind.Image:
             const { file, alt, caption, captionString, credit, width, height } = element;
             return h(BodyImage, {
-                url: file,
-                alt,
-                salt,
-                caption,
-                captionString,
-                credit,
-                key,
-                width,
-                height,
-                pillar
+                image: {
+                    url: file,
+                    alt,
+                    salt,
+                    width,
+                    height,
+                    caption: captionString,
+                    credit,
+                },
+                figcaption: text(caption, pillar),
+                pillar,
             });
 
         case ElementKind.Pullquote:

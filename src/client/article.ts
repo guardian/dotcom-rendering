@@ -117,8 +117,8 @@ function launchSlideshow(src: string | null): void {
     const images = Array.from(document.querySelectorAll('.js-launch-slideshow'));
     const imagesWithCaptions: Image[] = images.flatMap((image: Element) => {
         const url = image.getAttribute('src');
-        const caption =  image.getAttribute('caption') ?? undefined;
-        const credit = image.getAttribute('credit') ?? undefined;
+        const caption =  image.getAttribute('data-caption') ?? undefined;
+        const credit = image.getAttribute('data-credit') ?? undefined;
         return url ? new Image({ url, caption, credit }) : [];
     });
     const clickedImageIndex = images.findIndex((image: Element) => image.getAttribute('src') === src);

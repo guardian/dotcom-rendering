@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import {
-    sidePadding,
     darkModeCss,
     basePx,
     adStyles
@@ -38,7 +37,6 @@ const ArticleBodyStyles = css`
     }
 
     ${adStyles}
-    ${sidePadding}
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
