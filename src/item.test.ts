@@ -1,5 +1,5 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
-import { fromCapi, Design, Standard, ElementKind, Image } from 'item';
+import { fromCapi, Design, Standard, ElementKind, Image, Review } from 'item';
 import { JSDOM } from "jsdom";
 
 const articleContent = {
@@ -105,69 +105,75 @@ const articleContentWithImageWithoutFile = articleContentWithElement({
     }
 })
 
+const f = fromCapi(JSDOM.fragment);
+
+const getFirstBody = (item: Review | Standard) =>
+    item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+
+
 describe('fromCapi returns correct Item', () => {
     test('media', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('type/audio'));
+        const item = f(contentWithTag('type/audio'));
         expect(item.design).toBe(Design.Media)
     })
 
     test('review', () => {
-        const item = fromCapi(JSDOM.fragment)(reviewContent);
+        const item = f(reviewContent);
         expect(item.design).toBe(Design.Review)
     })
 
     test('analysis', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/analysis'));
+        const item = f(contentWithTag('tone/analysis'));
         expect(item.design).toBe(Design.Analysis)
     })
 
     test('comment', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/comment'));
+        const item = f(contentWithTag('tone/comment'));
         expect(item.design).toBe(Design.Comment)
     })
 
     test('feature', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/features'));
+        const item = f(contentWithTag('tone/features'));
         expect(item.design).toBe(Design.Feature)
     })
 
     test('live', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/minutebyminute'));
+        const item = f(contentWithTag('tone/minutebyminute'));
         expect(item.design).toBe(Design.Live)
     })
 
     test('recipe', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/recipes'));
+        const item = f(contentWithTag('tone/recipes'));
         expect(item.design).toBe(Design.Recipe)
     })
 
     test('matchreport', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/matchreports'));
+        const item = f(contentWithTag('tone/matchreports'));
         expect(item.design).toBe(Design.MatchReport)
     })
 
     test('interview', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/interview'));
+        const item = f(contentWithTag('tone/interview'));
         expect(item.design).toBe(Design.Interview)
     })
 
     test('guardianview', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/editorials'));
+        const item = f(contentWithTag('tone/editorials'));
         expect(item.design).toBe(Design.GuardianView)
     })
 
     test('quiz', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/quizzes'));
+        const item = f(contentWithTag('tone/quizzes'));
         expect(item.design).toBe(Design.Quiz)
     })
 
     test('advertisementfeature', () => {
-        const item = fromCapi(JSDOM.fragment)(contentWithTag('tone/advertisement-features'));
+        const item = f(contentWithTag('tone/advertisement-features'));
         expect(item.design).toBe(Design.AdvertisementFeature)
     })
 
     test('article', () => {
-        const item = fromCapi(JSDOM.fragment)(articleContent);
+        const item = f(articleContent);
         expect(item.design).toBe(Design.Article)
     })
 })
@@ -182,8 +188,8 @@ describe('text elements', () => {
                 html: "<p>paragraph</p>"
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(textElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(textElement)) as Standard;
+        const element = getFirstBody(item)
         expect(element.kind).toBe(ElementKind.Text)
     })
 
@@ -195,27 +201,27 @@ describe('text elements', () => {
                 html: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(textElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(textElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 });
 
 describe('image elements', () => {
     test('parses image elements', () => {
-        const item = fromCapi(JSDOM.fragment)(articleContentWithImage) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithImage) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Image)
     })
 
     test('filters image elements without file url', () => {
-        const item = fromCapi(JSDOM.fragment)(articleContentWithImageWithoutFile) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithImageWithoutFile) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 
     test('uses displayCredit', () => {
-        const item = fromCapi(JSDOM.fragment)(articleContentWithImage) as Standard;
+        const item = f(articleContentWithImage) as Standard;
         const element = item.body[0].toOption().withDefault({
             kind: ElementKind.Image,
             alt: "",
@@ -240,8 +246,8 @@ describe('pullquote elements', () => {
                 attribution: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(pullquoteElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(pullquoteElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Pullquote)
     })
 
@@ -254,8 +260,8 @@ describe('pullquote elements', () => {
                 attribution: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(pullquoteElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(pullquoteElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 });
@@ -269,7 +275,7 @@ describe('interactive elements', () => {
                 iframeUrl: "https://gu.com"
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(interactiveElement)) as Standard;
+        const item = f(articleContentWithElement(interactiveElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
         expect(element.kind).toBe(ElementKind.Interactive)
     })
@@ -282,7 +288,7 @@ describe('interactive elements', () => {
                 iframeUrl: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(interactiveElement)) as Standard;
+        const item = f(articleContentWithElement(interactiveElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
         expect(element.kind).toBe(ElementKind.RichLink)
     })
@@ -301,8 +307,8 @@ describe('rich link elements', () => {
                 role: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(richLinkElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(richLinkElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.RichLink)
     })
 
@@ -318,8 +324,8 @@ describe('rich link elements', () => {
                 role: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(richLinkElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(richLinkElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 
@@ -335,8 +341,8 @@ describe('rich link elements', () => {
                 role: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(richLinkElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(richLinkElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 });
@@ -351,8 +357,8 @@ describe('tweet elements', () => {
                 html: "<blockquote>tweet<blockquote>"
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Tweet)
     })
 
@@ -365,8 +371,8 @@ describe('tweet elements', () => {
                 html: "<blockquote>tweet<blockquote>"
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 
@@ -379,8 +385,8 @@ describe('tweet elements', () => {
                 html: ""
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 
@@ -393,8 +399,8 @@ describe('tweet elements', () => {
                 html: "<span>tweet<span>"
             }
         }
-        const item = fromCapi(JSDOM.fragment)(articleContentWithElement(tweetElement)) as Standard;
-        const element = item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+        const item = f(articleContentWithElement(tweetElement)) as Standard;
+        const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 });
