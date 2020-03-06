@@ -14,6 +14,16 @@ import ReactDOM from 'react-dom';
 
 // ----- Run ----- //
 
+interface FontFaceSet {
+    readonly ready: Promise<FontFaceSet>;
+}
+
+declare global {
+    interface Document {
+        fonts: FontFaceSet;
+    }
+}
+
 function getAdSlots(): AdSlot[] {
     const advertSlots = document.getElementsByClassName('ad-slot');
 
@@ -53,6 +63,12 @@ function insertAds(): void {
 
         const observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
+
+        try {
+            document.fonts.ready.then(() => nativeClient.updateAdverts(getAdSlots()))
+        } catch (e) {
+            logger.error(`font loading API not supported: ${e}`)
+        }
     }
 }
 
@@ -60,7 +76,7 @@ function ads(): void {
     nativeClient.isPremiumUser().then(premiumUser => {
         if (!premiumUser) {
             Array.from(document.querySelectorAll('.ad-placeholder'))
-                 .map(placeholder => placeholder.classList.remove('hidden'))
+                 .forEach(placeholder => placeholder.classList.remove('hidden'))
             insertAds();
         }
     })
