@@ -3,8 +3,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
+import { text, neutral, border } from '@guardian/src-foundations/palette';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, between } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
@@ -91,7 +90,7 @@ const bodyStyle = css`
         height: 12px;
         width: 12px;
         margin-right: 8px;
-        background-color: ${palette.neutral[86]};
+        background-color: ${neutral[86]};
         margin-left: -20px;
     }
 `;
@@ -107,7 +106,7 @@ const linkColour = pillarMap(
     pillar => css`
         a {
             text-decoration: none;
-            border-bottom: 1px solid ${palette.neutral[86]};
+            border-bottom: 1px solid ${border.secondary};
             ${pillarColours[pillar]};
 
             :hover {

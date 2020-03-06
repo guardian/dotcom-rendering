@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { text } from '@guardian/src-foundations/palette';
+import { text, border } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -58,7 +58,7 @@ const usernameStyles = css`
 const linkStyles = css`
     color: ${palette.news[300]};
     text-decoration: none;
-    border-bottom: 1px solid ${palette.neutral[86]};
+    border-bottom: 1px solid ${border.secondary};
     transition: border-color 0.15s ease-out;
     :hover {
         border-color: ${palette.news[300]};

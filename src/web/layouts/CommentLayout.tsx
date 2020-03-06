@@ -387,7 +387,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
-                backgroundColour={palette.neutral[93]}
+                backgroundColour={neutral[93]}
             >
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
@@ -415,7 +415,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
-                backgroundColour={palette.neutral[93]}
+                backgroundColour={neutral[93]}
             >
                 <AdSlot asps={namedAdSlotParameters('merchandising')} />
             </Section>

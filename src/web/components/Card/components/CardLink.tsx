@@ -86,7 +86,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
                     background-color: ${neutral[97]};
 
                     :hover {
-                        background-color: ${palette.neutral[93]};
+                        background-color: ${neutral[93]};
                     }
                 `;
     }

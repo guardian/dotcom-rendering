@@ -1,7 +1,7 @@
 import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 
 export const verticalDivider = css`
     ${from.tablet} {
@@ -14,7 +14,7 @@ export const verticalDivider = css`
             left: 0;
             width: 1px;
             height: 100%;
-            border-left: 1px solid ${palette.neutral[86]};
+            border-left: 1px solid ${border.secondary};
         }
     }
 `;

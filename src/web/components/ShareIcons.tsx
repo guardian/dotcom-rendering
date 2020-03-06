@@ -7,7 +7,7 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 
@@ -33,7 +33,7 @@ const shareIconsListItem = css`
 `;
 
 const shareIcon = (colour: string) => css`
-    border: 1px solid ${palette.neutral[86]};
+    border: 1px solid ${border.secondary};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

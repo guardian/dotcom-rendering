@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
+import { neutral, border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
-const thinGreySolid = `1px solid ${palette.neutral[86]}`;
+const thinGreySolid = `1px solid ${border.secondary}`;
 
 const hideList = css`
     display: none;
@@ -49,7 +50,7 @@ const selectedListTab = (pillar: Pillar) => css`
 
 const unselectedListTab = css`
     &:hover {
-        box-shadow: inset 0px 4px 0px 0px ${palette.neutral[86]};
+        box-shadow: inset 0px 4px 0px 0px ${neutral[86]};
         transition: box-shadow 0.3s ease-in-out;
     }
 `;
@@ -89,7 +90,7 @@ const gridContainer = css`
 
     /* We set left border on the grid container, and then right border on
     the gridItems to prevent borders doubling up */
-    border-left: 1px solid ${palette.neutral[86]};
+    border-left: 1px solid ${border.secondary};
 `;
 
 type Props = {

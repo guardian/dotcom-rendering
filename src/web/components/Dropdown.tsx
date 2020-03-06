@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import { neutral, border, brandText } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -70,7 +70,7 @@ const link = css`
     padding: 10px 18px 15px 30px;
 
     :hover {
-        background-color: ${palette.neutral[93]};
+        background-color: ${neutral[93]};
         text-decoration: none;
     }
 
@@ -80,7 +80,7 @@ const link = css`
 
     :before {
         content: '';
-        border-top: 1px solid ${palette.neutral[93]};
+        border-top: 1px solid ${border.secondary};
         display: block;
         position: absolute;
         top: 0px;
