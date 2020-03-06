@@ -15,7 +15,11 @@
     // 	],
     // 	"description": "Log output to console"
     // }
-
+    "Import neutral": {
+        "prefix": "neutral",
+        "body": ["import { neutral } from '@guardian/src-foundations/palette';"],
+        "description": "Import for neutral"
+    },
     "React wrapper component": {
         "prefix": "rw",
         "body": [

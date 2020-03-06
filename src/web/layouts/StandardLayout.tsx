@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { neutral, border, background } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -189,7 +190,7 @@ const starWrapper = css`
 
 const stickyAdWrapper = css`
     background-color: white;
-    border-bottom: 0.0625rem solid ${palette.neutral[86]};
+    border-bottom: 0.0625rem solid ${border.secondary};
     position: sticky;
     top: 0;
     ${getZIndex('stickyAdWrapper')}
@@ -267,7 +268,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
                     {NAV.subNavSections && (
                         <Section
-                            backgroundColour={palette.neutral[100]}
+                            backgroundColour={background.primary}
                             padded={false}
                             islandId="sub-nav-root"
                         >
@@ -406,7 +407,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
-                backgroundColour={palette.neutral[93]}
+                backgroundColour={neutral[93]}
             >
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
@@ -418,7 +419,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     {!isSensitive && (
                         <Section
                             showTopBorder={false}
-                            backgroundColour={palette.neutral[97]}
+                            backgroundColour={neutral[97]}
                         >
                             <OutbrainContainer />
                         </Section>
@@ -434,7 +435,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                 padded={false}
                 showTopBorder={false}
                 showSideBorders={false}
-                backgroundColour={palette.neutral[93]}
+                backgroundColour={neutral[93]}
             >
                 <AdSlot asps={namedAdSlotParameters('merchandising')} />
             </Section>

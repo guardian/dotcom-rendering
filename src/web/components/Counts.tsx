@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { CommentCount } from '@frontend/web/components/CommentCount';
@@ -35,7 +35,7 @@ const NumbersBorder = () => (
             height: 40px;
             margin-left: 4px;
             margin-right: 4px;
-            border-left: 1px solid ${palette.neutral[86]};
+            border-left: 1px solid ${border.secondary};
         `}
     />
 );

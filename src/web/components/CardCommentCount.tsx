@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
@@ -87,7 +88,7 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
             return css`
                 color: ${palette.neutral[60]};
                 svg {
-                    fill: ${palette.neutral[46]};
+                    fill: ${neutral[46]};
                 }
             `;
     }

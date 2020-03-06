@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -12,7 +13,7 @@ const screenReadable = css`
 const openExpandedMenu = css`
     ${headline.xsmall()};
     font-weight: 300;
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     cursor: pointer;
     display: none;
     position: relative;
