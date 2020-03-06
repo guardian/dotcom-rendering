@@ -1,9 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { neutral, text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
+import { neutral, text, border } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 

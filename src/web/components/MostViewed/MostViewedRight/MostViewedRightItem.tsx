@@ -1,9 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, border } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';

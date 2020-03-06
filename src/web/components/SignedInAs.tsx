@@ -1,10 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { text } from '@guardian/src-foundations/palette';
+import { text, border } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, space } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
