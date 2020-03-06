@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -69,7 +70,7 @@ const brandExtensionLink = css`
     background-color: transparent;
     border: 0;
     box-sizing: border-box;
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     cursor: pointer;
     display: inline-block;
     outline: none;

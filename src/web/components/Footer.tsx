@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -21,7 +22,7 @@ const footerBorders = `1px solid ${palette.brand.pastel}`;
 // CSS
 const footer = css`
     background-color: ${palette.brand.main};
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     padding-bottom: 6px;
     ${textSans.medium()};
 `;

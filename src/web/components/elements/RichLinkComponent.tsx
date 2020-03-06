@@ -1,8 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
+import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -187,7 +189,7 @@ const textColour: (pillar: Pillar) => colour = pillar => {
 const paidForBranding = css`
     ${textSans.xsmall()};
     font-weight: bold;
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
 `;
 
 const starWrapper = css`

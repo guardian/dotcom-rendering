@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
-import { palette } from '@guardian/src-foundations';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
@@ -51,14 +51,14 @@ type SharingURLs = {
 const metaStyle = css`
     display: block;
     ${textSans.xsmall()};
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
     padding-top: 2px;
     margin-bottom: 6px;
     text-decoration: none;
 `;
 
 const twitterIcon = css`
-    fill: ${palette.neutral[46]};
+    fill: ${neutral[46]};
     height: 12px;
     margin-bottom: -2px;
     width: 12px;

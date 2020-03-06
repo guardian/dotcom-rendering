@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
@@ -47,7 +47,7 @@ const style = css`
     }
 
     path {
-        fill: ${palette.neutral[100]};
+        fill: ${brandText.primary};
     }
 `;
 

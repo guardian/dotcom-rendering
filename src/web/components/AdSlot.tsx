@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { css } from 'emotion';
+
+import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -15,7 +17,7 @@ export const labelStyles = css`
         background-color: ${neutral[97]};
         padding: 0 8px;
         border-top: 1px solid ${palette.neutral[86]};
-        color: ${palette.neutral[46]};
+        color: ${text.supporting};
         text-align: left;
         box-sizing: border-box;
     }
