@@ -109,8 +109,8 @@ export const SignedInAs = ({ commentCount, user, discussionClosed }: Props) => {
                 </div>
             )}
 
-            {/* Discussion open but user is logged out */}
-            {!user && !discussionClosed && (
+            {/* User is logged out (show this even if the discussion is closed) */}
+            {!user && (
                 <span className={headlineStyles}>
                     <a
                         href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN"
@@ -129,8 +129,8 @@ export const SignedInAs = ({ commentCount, user, discussionClosed }: Props) => {
                 </span>
             )}
 
-            {/* The discussion is closed */}
-            {discussionClosed && (
+            {/* The discussion is closed (only appears for logged in users) */}
+            {user && discussionClosed && (
                 <span className={headlineStyles}>
                     This discussion is closed for comments
                 </span>
