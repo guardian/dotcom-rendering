@@ -64,7 +64,7 @@
         "glob": "^7.1.3",
         "html-minifier": "^3.5.14",
         "inquirer": "^5.2.0",
-        "jsdom": "^13.0.0",
+        "jsdom": "^15.2.0",
         "lodash.escape": "^4.0.1",
         "lodash.get": "^4.4.2",
         "log4js": "4.2.0",
