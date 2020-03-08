@@ -17,6 +17,7 @@ import { Header } from '@frontend/web/components/Header';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
+import { useVisibility } from '@frontend/web/lib/useVisibility';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getCommentCount } from '@frontend/web/lib/getCommentCount';
 
@@ -167,25 +168,29 @@ const App = ({ CAPI, NAV }: Props) => {
                 </Portal>
             )}
             <Portal root="onwards-upper">
-                <OnwardsUpper
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    hasRelated={CAPI.hasRelated}
-                    hasStoryPackage={CAPI.hasStoryPackage}
-                    isAdFreeUser={CAPI.isAdFreeUser}
-                    pageId={CAPI.pageId}
-                    isPaidContent={CAPI.config.isPaidContent || false}
-                    showRelatedContent={CAPI.config.showRelatedContent}
-                    keywordIds={CAPI.config.keywordIds}
-                    contentType={CAPI.contentType}
-                    tags={CAPI.tags}
-                />
+                <Lazy margin={-200}>
+                    <OnwardsUpper
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        hasRelated={CAPI.hasRelated}
+                        hasStoryPackage={CAPI.hasStoryPackage}
+                        isAdFreeUser={CAPI.isAdFreeUser}
+                        pageId={CAPI.pageId}
+                        isPaidContent={CAPI.config.isPaidContent || false}
+                        showRelatedContent={CAPI.config.showRelatedContent}
+                        keywordIds={CAPI.config.keywordIds}
+                        contentType={CAPI.contentType}
+                        tags={CAPI.tags}
+                    />
+                </Lazy>
             </Portal>
             <Portal root="onwards-lower">
-                <OnwardsLower
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    hasStoryPackage={CAPI.hasStoryPackage}
-                    tags={CAPI.tags}
-                />
+                <Lazy margin={-300}>
+                    <OnwardsLower
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        hasStoryPackage={CAPI.hasStoryPackage}
+                        tags={CAPI.tags}
+                    />
+                </Lazy>
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter
@@ -204,13 +209,15 @@ const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Portal root="reader-revenue-links-footer">
-                <ReaderRevenueLinks
-                    urls={CAPI.nav.readerRevenueLinks.header}
-                    edition={CAPI.editionId}
-                    dataLinkNamePrefix="nav2 : "
-                    noResponsive={false}
-                    inHeader={true}
-                />
+                <Lazy margin={-300}>
+                    <ReaderRevenueLinks
+                        urls={CAPI.nav.readerRevenueLinks.header}
+                        edition={CAPI.editionId}
+                        dataLinkNamePrefix="nav2 : "
+                        noResponsive={false}
+                        inHeader={true}
+                    />
+                </Lazy>
             </Portal>
         </>
     );
@@ -256,4 +263,22 @@ const Portal = ({
         `${rootId}-portal-start`,
         `${rootId}-portal-end`,
     );
+};
+
+const Lazy = ({
+    children,
+    margin,
+}: {
+    children: JSX.Element;
+    margin: number;
+}) => {
+    const [hasBeenSeen, setRef] = useVisibility({
+        rootMargin: `${margin}px`,
+    });
+
+    if (typeof setRef !== 'function') {
+        return null;
+    }
+
+    return <div ref={setRef}>{hasBeenSeen && <>{children}</>}</div>;
 };
