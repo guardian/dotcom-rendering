@@ -67,12 +67,16 @@ const App = ({ CAPI, NAV }: Props) => {
 
     useEffect(() => {
         const callFetch = async () => {
-            const { discussion } = await getDiscussion(
+            const response = await getDiscussion(
                 CAPI.config.ajaxUrl,
                 CAPI.config.shortUrlId,
             );
-            setCommentCount(discussion.commentCount);
-            setIsClosedForComments(discussion.isClosedForComments);
+            setCommentCount(
+                (response && response.discussion.commentCount) || 0,
+            );
+            setIsClosedForComments(
+                response && response.discussion.isClosedForComments,
+            );
         };
         callFetch();
     }, [CAPI.config.ajaxUrl, CAPI.config.shortUrlId]);
