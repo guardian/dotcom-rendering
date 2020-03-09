@@ -9,11 +9,12 @@ import { until } from '@guardian/src-foundations/mq';
 type Props = {
     commentCount: number;
     user?: UserProfile;
-    discussionClosed?: boolean;
+    isClosedForComments?: boolean;
 };
 
 const containerStyles = css`
-    padding: ${space[2]}px;
+    padding-top: ${space[1]}px;
+    padding-bottom: ${space[1]}px;
 `;
 
 const imageStyles = css`
@@ -74,7 +75,11 @@ const rowUntilDesktop = css`
     }
 `;
 
-export const SignedInAs = ({ commentCount, user, discussionClosed }: Props) => {
+export const SignedInAs = ({
+    commentCount,
+    user,
+    isClosedForComments,
+}: Props) => {
     return (
         <div className={containerStyles}>
             <h2 className={headingStyles}>
@@ -89,7 +94,7 @@ export const SignedInAs = ({ commentCount, user, discussionClosed }: Props) => {
             </h2>
 
             {/* Discussion open and user logged in */}
-            {user && !discussionClosed && (
+            {user && !isClosedForComments && (
                 <div className={rowUntilDesktop}>
                     <div className={imageWrapper}>
                         <img
@@ -131,7 +136,7 @@ export const SignedInAs = ({ commentCount, user, discussionClosed }: Props) => {
             )}
 
             {/* The discussion is closed (only appears for logged in users) */}
-            {user && discussionClosed && (
+            {user && isClosedForComments && (
                 <span className={headlineStyles}>
                     This discussion is closed for comments
                 </span>

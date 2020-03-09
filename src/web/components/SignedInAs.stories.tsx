@@ -60,13 +60,13 @@ NotSignedIn.story = { name: 'not signed in' };
 
 export const DiscussionClosed = () => {
     return (
-        <SignedInAs commentCount={32} discussionClosed={true} user={aUser} />
+        <SignedInAs commentCount={32} isClosedForComments={true} user={aUser} />
     );
 };
 DiscussionClosed.story = { name: 'discussion closed, user signed in' };
 
 export const DiscussionClosedSignedOut = () => {
-    return <SignedInAs commentCount={32} discussionClosed={true} />;
+    return <SignedInAs commentCount={32} isClosedForComments={true} />;
 };
 DiscussionClosedSignedOut.story = {
     name: 'discussion closed, user not signed in',
