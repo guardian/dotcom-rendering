@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { neutral, border, brandText } from '@guardian/src-foundations/palette';
+import {
+    neutral,
+    border,
+    brandText,
+    brandAlt,
+} from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -127,7 +132,7 @@ const button = css`
     text-decoration: none;
 
     :hover {
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
 
         :after {
             transform: translateY(0) rotate(45deg);

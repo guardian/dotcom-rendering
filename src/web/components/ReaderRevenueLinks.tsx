@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -34,7 +34,7 @@ const paddingStyles = css`
 `;
 
 const messageStyles = css`
-    color: ${palette.brandYellow.main};
+    color: ${brandAlt[400]};
     ${headline.xxsmall({ fontWeight: 'bold' })};
     padding-top: 3px;
     margin-bottom: 3px;
@@ -49,7 +49,7 @@ const messageStyles = css`
 `;
 
 const linkStyles = css`
-    background: ${palette.brandYellow.main};
+    background: ${brandAlt[400]};
     border-radius: 16px;
     box-sizing: border-box;
     color: ${palette.neutral[7]};

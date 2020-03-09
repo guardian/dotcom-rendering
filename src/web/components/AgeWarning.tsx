@@ -4,7 +4,10 @@ import { css } from 'emotion';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
 import { from } from '@guardian/src-foundations/mq';
-import { palette } from '@guardian/src-foundations';
+import {
+    brandAltText,
+    brandAltBackground,
+} from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
@@ -16,8 +19,8 @@ type Props = {
 
 const ageWarningStyles = (isSmall: boolean) => css`
     ${isSmall ? textSans.xsmall() : textSans.medium()};
-    color: ${palette.neutral[7]};
-    background-color: ${palette.brandYellow.main};
+    color: ${brandAltText.primary};
+    background-color: ${brandAltBackground.primary};
     display: inline-block;
 
     > strong {

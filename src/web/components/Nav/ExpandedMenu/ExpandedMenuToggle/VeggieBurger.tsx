@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { brandAlt } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 const veggieBurger = ({
@@ -9,7 +10,7 @@ const veggieBurger = ({
 }: {
     showExpandedMenu: boolean;
 }) => css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAlt[400]};
     color: ${palette.neutral[7]};
     cursor: pointer;
     height: 42px;

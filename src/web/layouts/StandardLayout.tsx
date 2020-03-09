@@ -2,7 +2,12 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { neutral, border, background } from '@guardian/src-foundations/palette';
+import {
+    neutral,
+    border,
+    background,
+    brandAltBackground,
+} from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -166,7 +171,7 @@ const stretchLines = css`
 const starWrapper = css`
     margin-bottom: 18px;
     margin-top: 6px;
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
     display: inline-block;
 
     ${until.phablet} {

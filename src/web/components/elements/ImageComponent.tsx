@@ -5,7 +5,7 @@ import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { until, from, between } from '@guardian/src-foundations/mq';
-import { palette } from '@guardian/src-foundations';
+import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 const widths = [1020, 660, 480, 0];
 
@@ -73,7 +73,7 @@ const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
 };
 
 const starsWrapper = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
 
     position: absolute;
     ${until.tablet} {

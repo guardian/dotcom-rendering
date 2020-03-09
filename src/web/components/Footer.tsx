@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -72,7 +72,7 @@ const footerLink = css`
 
     :hover {
         text-decoration: underline;
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
     }
 `;
 
