@@ -23,7 +23,7 @@ const makeDcrConfig = (CAPI: CAPIType, GA: GADataType): dcrConfig => {
         videoDuration: CAPI.config.videoDuration,
         edition: CAPI.config.edition,
         section: CAPI.config.section,
-        sharedAdTargeting: CAPI.config.sharedAdTargeting, // currently doesn't have definition
+        sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
         adUnit: CAPI.config.adUnit,
     };
 };
