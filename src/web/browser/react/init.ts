@@ -9,6 +9,7 @@ const init = (): Promise<void> => {
         cssIDs,
         data: { CAPI, NAV },
     } = window.guardian.app;
+    const { dcr } = window.guardian;
 
     /**
      * TODO: Remove conditional when Emotion's issue is resolved.
@@ -21,7 +22,7 @@ const init = (): Promise<void> => {
     }
 
     // Partially hydrate the client using a combination of islands and portals
-    hydrateApp({ CAPI, NAV, dcr: window.guardian.dcr });
+    hydrateApp({ CAPI, NAV, dcr });
 
     return Promise.resolve();
 };
