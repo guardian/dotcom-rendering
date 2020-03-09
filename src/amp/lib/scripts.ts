@@ -1,4 +1,6 @@
 const notEmpty = (value: string | null): value is string => value !== null;
+const unique = (value: string | null, index: number, self: any) =>
+    self.indexOf(value) === index;
 
 export const extractScripts: (
     elements: CAPIElement[],
@@ -27,7 +29,8 @@ export const extractScripts: (
                     return null;
             }
         })
-        .filter(notEmpty) as string[];
+        .filter(notEmpty)
+        .filter(unique) as string[];
     // I have no idea why the type predicate isn't working here. I think it has something to do with the union type.
     // It works with simpler arrays of type Array<string | null> but not this one.
 };

@@ -8,7 +8,7 @@ import { escapeData } from '@root/src/lib/escapeData';
 import { getDist } from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
-import { Article } from '../pages/Article';
+import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
 interface RenderToStringResult {
@@ -24,7 +24,7 @@ export const document = ({ data }: Props) => {
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <Article data={{ CAPI, NAV }} />
+                <DecideLayout CAPI={CAPI} NAV={NAV} />
             </CacheProvider>,
         ),
     );

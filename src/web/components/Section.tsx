@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
 const center = css`
@@ -64,7 +64,7 @@ export const Section = ({
     showSideBorders = true,
     showTopBorder = true,
     padded = true,
-    borderColour = palette.neutral[86],
+    borderColour = border.secondary,
     backgroundColour,
     shouldCenter = true,
     children,

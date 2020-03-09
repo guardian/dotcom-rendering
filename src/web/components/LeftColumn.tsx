@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { from, between, until } from '@guardian/src-foundations/mq';
 
 const leftWidth = css`
@@ -56,7 +56,7 @@ type Props = {
 export const LeftColumn = ({
     children,
     showRightBorder = true,
-    borderColour = palette.neutral[86],
+    borderColour = border.secondary,
     showPartialRightBorder = false,
 }: Props) => {
     // Make sure we can never have both borders at the same time

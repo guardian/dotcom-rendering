@@ -2,11 +2,6 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
-interface ArticleProps {
-    CAPI: CAPIType;
-    NAV: NavType;
-}
-
 // Pillars are used for styling
 // RealPillars have Pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
@@ -382,7 +377,17 @@ type OnwardsType = {
     trails: TrailType[];
     description?: string;
     url?: string;
+    ophanComponentName: OphanComponentName;
 };
+
+type OphanComponentName =
+    | 'series'
+    | 'more-on-this-story'
+    | 'related-stories'
+    | 'related-content'
+    | 'more-media-in-section'
+    | 'more-galleries'
+    | 'default-onwards'; // We should never see this in the analytics data!
 
 interface CommercialConfigType {
     isPaidContent?: boolean;
@@ -605,4 +610,12 @@ declare module '*.svg' {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const content: any;
     export default content;
+}
+
+// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
+// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
+// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
+interface PerformanceEntry {
+    loadTime: number;
+    renderTime: number;
 }

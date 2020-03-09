@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import SearchIcon from '@frontend/static/icons/search.svg';
 
 import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -38,7 +39,7 @@ const search = css`
 
 const linkStyles = css`
     ${textSans.medium()};
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     float: left;
     position: relative;
     transition: color 80ms ease-out;

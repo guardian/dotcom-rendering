@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -104,7 +105,7 @@ const hiddenFromTablet = css`
 `;
 
 const subMessageStyles = css`
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     ${textSans.medium()};
     margin-bottom: 5px;
 `;

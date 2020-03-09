@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 
 const headlineTagWrapper = css`
@@ -11,7 +11,7 @@ const headlineTagWrapper = css`
 
 const headlineTagStyles = (pillar: Pillar) => css`
     background-color: ${pillarPalette[pillar].dark};
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     ${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
     box-shadow: 0.25rem 0 0 ${pillarPalette[pillar].dark}, -0.375rem 0 0 ${
     pillarPalette[pillar].dark

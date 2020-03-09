@@ -2108,6 +2108,11 @@
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.13.0.tgz#8bfed9b94e2e4f24ecacb754bbe573b6e0cfe088"
   integrity sha512-8lTZSo49W1lPhBFaaLrg2Eo2jrwUB3VGw6a7ZRI7oBEyTglmlbjFDiciu2Di6WSrzuSWiI+9OJTSSjCP6lTT2A==
 
+"@guardian/src-foundations@^0.14.1":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.14.1.tgz#33cf2e95eedf184fdfc40cc75c1dbca4d6d46fdf"
+  integrity sha512-FiH2nsPvHS6wG7b0AePXTGbDCIV+q0aRHZKhsH2X2WeS9K3fZqEF9y+8lTv22nW3r3sv6nSyh4tT7y5+XPC9pA==
+
 "@guardian/src-svgs@^0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-0.13.0.tgz#97d893a6e33feb255666fef6779ffe18a7c4e2f5"

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
+import { brandText } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { CollapseColumnButton } from './CollapseColumnButton';
@@ -46,7 +47,7 @@ const columnLinkTitle = css`
     text-decoration: none;
     border: 0;
     box-sizing: border-box;
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     cursor: pointer;
     display: inline-block;
     font-weight: 500;

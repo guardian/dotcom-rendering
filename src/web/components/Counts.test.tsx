@@ -15,7 +15,6 @@ describe('Counts', () => {
     const ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
     const pageId =
         '/environment/2020/jan/25/court-probe-carrie-symonds-influence-boris-johnson-badger-cull';
-    const shortUrlId = '/p/4k83z';
 
     beforeEach(() => {
         useApi.mockReset();
@@ -23,14 +22,14 @@ describe('Counts', () => {
 
     it('It should render null if share_count is falsy', () => {
         useApi.mockReturnValue({
-            data: { share_count: 0, counts: [{ id: 'abc', count: 0 }] },
+            data: { share_count: 0 },
         });
 
         const { container } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={0}
                 pillar="news"
             />,
         );
@@ -45,7 +44,7 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={0}
                 pillar="news"
             />,
         );
@@ -60,7 +59,7 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={0}
                 pillar="news"
             />,
         );
@@ -76,7 +75,7 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={0}
                 pillar="news"
             />,
         );
@@ -87,14 +86,14 @@ describe('Counts', () => {
 
     it('It should not render the share component if there are no shares', () => {
         useApi.mockReturnValue({
-            data: { share_count: 0, counts: [{ id: 'abc', count: 280 }] },
+            data: { share_count: 0 },
         });
 
         const { queryAllByTestId } = render(
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={1}
                 pillar="news"
             />,
         );
@@ -112,7 +111,7 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={0}
                 pillar="news"
             />,
         );
@@ -130,7 +129,7 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={1}
                 pillar="news"
             />,
         );
@@ -149,7 +148,7 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={0}
                 pillar="news"
             />,
         );
@@ -168,7 +167,7 @@ describe('Counts', () => {
             <Counts
                 ajaxUrl={ajaxUrl}
                 pageId={pageId}
-                shortUrlId={shortUrlId}
+                commentCount={1}
                 pillar="news"
             />,
         );

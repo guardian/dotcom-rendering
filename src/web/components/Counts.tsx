@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { CommentCount } from '@frontend/web/components/CommentCount';
@@ -12,23 +12,14 @@ import { joinUrl } from '@root/src/web/lib/joinUrl';
 type Props = {
     ajaxUrl: string;
     pageId: string;
-    shortUrlId: string;
     pillar: Pillar;
+    commentCount: number;
 };
 
 type ShareCountType = {
     path: string;
     share_count: number;
     refreshStatus: boolean;
-};
-
-type CountType = {
-    id: string;
-    count: number;
-};
-
-type CommentCountsType = {
-    counts: CountType[];
 };
 
 const containerStyles = css`
@@ -44,24 +35,16 @@ const NumbersBorder = () => (
             height: 40px;
             margin-left: 4px;
             margin-right: 4px;
-            border-left: 1px solid ${palette.neutral[86]};
+            border-left: 1px solid ${border.secondary};
         `}
     />
 );
 
-export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
+export const Counts = ({ ajaxUrl, pageId, commentCount, pillar }: Props) => {
     const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
     const { data: shareData, error: shareError } = useApi<ShareCountType>(
         shareUrl,
     );
-
-    const commentUrl = joinUrl([
-        ajaxUrl,
-        `discussion/comment-counts.json?shortUrls=${shortUrlId}`,
-    ]);
-    const { data: commentData, error: commentError } = useApi<
-        CommentCountsType
-    >(commentUrl);
 
     if (shareError) {
         window.guardian.modules.sentry.reportError(
@@ -70,21 +53,9 @@ export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
         );
     }
 
-    if (commentError) {
-        window.guardian.modules.sentry.reportError(
-            commentError,
-            'comment-count',
-        );
-    }
-
-    // Or false because we use these vars to decide if to render or not and react sees 0 as truthy
+    // We use || false below because we use these vars to decide if to render or not and react sees 0 as truthy
     const hasShareData = (shareData && shareData.share_count) || false;
-    const hasCommentData =
-        (commentData &&
-            commentData.counts &&
-            commentData.counts[0] &&
-            commentData.counts[0].count) ||
-        false;
+    const hasCommentData = commentCount || false;
     if (!hasShareData && !hasCommentData) {
         return null;
     }
@@ -94,11 +65,7 @@ export const Counts = ({ ajaxUrl, pageId, shortUrlId, pillar }: Props) => {
     );
 
     const { short: commentShort, long: commentLong } = formatCount(
-        (commentData &&
-            commentData.counts &&
-            commentData.counts[0] &&
-            commentData.counts[0].count) ||
-            0,
+        commentCount || 0,
     );
 
     return (

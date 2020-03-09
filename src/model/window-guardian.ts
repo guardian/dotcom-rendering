@@ -12,7 +12,7 @@ export interface WindowGuardianConfig {
         dcrSentryDsn: string;
         sentryHost: string;
         sentryPublicApiKey: string;
-        keywordIds: [];
+        keywordIds: string;
         dfpAccountId: string;
         adUnit: string;
         showRelatedContent: boolean;
@@ -48,7 +48,7 @@ const makeWindowGuardianConfig = (
                 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
             sentryPublicApiKey: config.sentryPublicApiKey,
             sentryHost: config.sentryHost,
-            keywordIds: [],
+            keywordIds: config.keywordIds,
             dfpAccountId: config.dfpAccountId,
             adUnit: config.adUnit,
             showRelatedContent: true,

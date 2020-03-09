@@ -1,6 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { palette } from '@guardian/src-foundations';
+import { text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 
@@ -32,7 +34,7 @@ const richLink = css`
         ${textSans.xsmall()};
         content: 'More on this topic';
         display: block;
-        color: ${palette.neutral[46]};
+        color: ${text.supporting};
         font-weight: 400;
     }
 `;
