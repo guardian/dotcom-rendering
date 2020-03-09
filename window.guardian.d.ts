@@ -10,7 +10,7 @@ declare global {
                 data: any;
                 cssIDs: string[];
             };
-            dcr: dcrType;
+            dcr: any; // we should ideally use dcrType
             mustardCut: boolean;
             polyfilled: boolean;
             onPolyfilled: () => void;

@@ -19,6 +19,7 @@ const windowGuardian = {
         data: {},
         cssIDs: [],
     },
+    dcr: {},
     config: windowGuardianConfig,
     mustardCut: false,
     polyfilled: false,
