@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { dcr } from '@root/fixtures/dcr';
 import { Article } from '@root/fixtures/articles/Article';
 import { AdvertisementFeature } from '@root/fixtures/articles/AdvertisementFeature';
 import { Review } from '@root/fixtures/articles/Review';
@@ -48,95 +49,95 @@ const convertToStandard = (CAPI: CAPIType) => {
 export const ArticleStory = () => {
     const CAPI = convertToStandard(Article);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 ArticleStory.story = { name: 'Article' };
 
 export const ReviewStory = () => {
     const CAPI = convertToStandard(Review);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 ReviewStory.story = { name: 'Review' };
 
 export const CommentStory = () => {
     const CAPI = convertToStandard(Comment);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 CommentStory.story = { name: 'Comment' };
 
 export const AdvertisementFeatureStory = () => {
     const CAPI = convertToStandard(AdvertisementFeature);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
 
 export const AnalysisStory = () => {
     const CAPI = convertToStandard(Analysis);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 AnalysisStory.story = { name: 'Analysis' };
 
 export const FeatureStory = () => {
     const CAPI = convertToStandard(Feature);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 FeatureStory.story = { name: 'Feature' };
 
 export const GuardianViewStory = () => {
     const CAPI = convertToStandard(GuardianView);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 GuardianViewStory.story = { name: 'GuardianView' };
 
 export const ImmersiveStory = () => {
     const CAPI = convertToStandard(Immersive);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const InterviewStory = () => {
     const CAPI = convertToStandard(Interview);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 InterviewStory.story = { name: 'Interview' };
 
 export const QuizStory = () => {
     const CAPI = convertToStandard(Quiz);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 QuizStory.story = { name: 'Quiz' };
 
 export const RecipeStory = () => {
     const CAPI = convertToStandard(Recipe);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 RecipeStory.story = { name: 'Recipe' };
 
 export const MatchReportStory = () => {
     const CAPI = convertToStandard(MatchReport);
     mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    setTimeout(() => hydrateApp({ CAPI, NAV, dcr }));
+    return <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };

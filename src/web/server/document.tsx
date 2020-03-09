@@ -8,6 +8,7 @@ import { escapeData } from '@root/src/lib/escapeData';
 import { getDist } from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
+import { makeDcr } from '@root/src/model/dcr';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
@@ -18,13 +19,14 @@ interface RenderToStringResult {
 }
 
 export const document = ({ data }: Props) => {
-    const { CAPI, NAV, linkedData } = data;
+    const { CAPI, NAV, GA, linkedData } = data;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+    const dcr = makeDcr(CAPI, GA);
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <DecideLayout CAPI={CAPI} NAV={NAV} />
+                <DecideLayout CAPI={CAPI} NAV={NAV} dcr={dcr} />
             </CacheProvider>,
         ),
     );
@@ -96,7 +98,7 @@ export const document = ({ data }: Props) => {
      * is placed in a script tag on the page
      */
     const windowGuardian = escapeData(
-        JSON.stringify(makeWindowGuardian(data, cssIDs)),
+        JSON.stringify(makeWindowGuardian(data, cssIDs, dcr)),
     );
 
     const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;

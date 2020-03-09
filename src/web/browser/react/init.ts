@@ -21,7 +21,7 @@ const init = (): Promise<void> => {
     }
 
     // Partially hydrate the client using a combination of islands and portals
-    hydrateApp({ CAPI, NAV });
+    hydrateApp({ CAPI, NAV, dcr: window.guardian.dcr });
 
     return Promise.resolve();
 };

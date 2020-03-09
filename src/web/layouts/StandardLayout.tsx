@@ -224,7 +224,7 @@ export const StandardLayout = ({ CAPI, NAV, dcr }: Props) => {
     // 2) The global switch for this slot is set to true;
     const showBodyEndSlot =
         parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-        (dcr.config && dcr.config.slotBodyEnd);
+        dcr.config.slotBodyEnd;
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render

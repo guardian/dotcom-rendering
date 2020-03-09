@@ -66,35 +66,6 @@ const makeWindowGuardianConfig = (
     } as WindowGuardianConfig;
 };
 
-const makeDcrConfig = (dcrDocumentData: DCRDocumentData): dcrConfig => {
-    return {
-        isDev: process.env.NODE_ENV !== 'production',
-        GA: dcrDocumentData.GA,
-        ajaxUrl: dcrDocumentData.CAPI.config.ajaxUrl,
-        shortUrlId: dcrDocumentData.CAPI.config.shortUrlId,
-        pageId: dcrDocumentData.CAPI.config.pageId,
-        isPaidContent: !!dcrDocumentData.CAPI.config.isPaidContent,
-        showRelatedContent: dcrDocumentData.CAPI.config.showRelatedContent,
-        keywordIds: dcrDocumentData.CAPI.config.keywordIds,
-        ampIframeUrl: dcrDocumentData.CAPI.config.ampIframeUrl,
-        // commercialBundleUrl is only used in SSR
-        // commercialBundleUrl: dcrDocumentData.CAPI.config.commercialBundleUrl,
-
-        // switches
-        cmpUi: dcrDocumentData.CAPI.config.switches.cmpUi,
-        slotBodyEnd: dcrDocumentData.CAPI.config.switches.slotBodyEnd,
-        ampPrebid: dcrDocumentData.CAPI.config.switches.ampPrebid,
-        permutive: dcrDocumentData.CAPI.config.switches.permutive,
-
-        // used by lib/ad-targeting.ts
-        isSensitive: dcrDocumentData.CAPI.config.isSensitive,
-        videoDuration: dcrDocumentData.CAPI.config.videoDuration,
-        edition: dcrDocumentData.CAPI.config.edition,
-        section: dcrDocumentData.CAPI.config.section,
-        sharedAdTargeting: dcrDocumentData.CAPI.config.sharedAdTargeting, // currently doesn't have definition
-        adUnit: dcrDocumentData.CAPI.config.adUnit,
-    };
-};
 export interface WindowGuardian {
     // At least until October 2019, do not modify this interface without checking with Pascal first.
 
@@ -125,15 +96,14 @@ export interface WindowGuardian {
 export const makeWindowGuardian = (
     dcrDocumentData: DCRDocumentData,
     cssIDs: string[],
+    dcr: dcrType,
 ): WindowGuardian => {
     return {
         app: {
             cssIDs,
             data: dcrDocumentData,
         },
-        dcr: {
-            config: makeDcrConfig(dcrDocumentData),
-        },
+        dcr,
         config: makeWindowGuardianConfig(dcrDocumentData),
         polyfilled: false,
         adBlockers: {
