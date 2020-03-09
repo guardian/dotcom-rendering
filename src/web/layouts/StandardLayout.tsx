@@ -209,26 +209,26 @@ const headerWrapper = css`
 interface Props {
     CAPI: CAPIType;
     NAV: NavType;
+    dcr: dcrType;
 }
 
-export const StandardLayout = ({ CAPI, NAV }: Props) => {
+export const StandardLayout = ({ CAPI, NAV, dcr }: Props) => {
     const {
-        config: { isPaidContent },
         pageType: { isSensitive },
     } = CAPI;
 
-    const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+    const adTargeting: AdTargeting = buildAdTargeting(dcr.config);
 
     // Render the slot if one is true:
     // 1) The flag for this slot exists in the URL (i.e. ?slot-machine-flags=showBodyEnd)
     // 2) The global switch for this slot is set to true;
     const showBodyEndSlot =
         parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-        CAPI.config.switches.slotBodyEnd;
+        (dcr.config && dcr.config.slotBodyEnd);
 
     // TODO:
     // 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
-    // 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+    // 2) Otherwise, ensure slot only renders if `dcr.config.shouldHideReaderRevenue` equals false.
 
     const seriesTag = CAPI.tags.find(
         tag => tag.type === 'Series' || tag.type === 'Blog',
@@ -402,7 +402,11 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <GridItem area="right-column">
                         <RightColumn>
                             <StickyAd />
-                            {!isPaidContent ? <MostViewedRightIsland /> : <></>}
+                            {!dcr.config.isPaidContent ? (
+                                <MostViewedRightIsland />
+                            ) : (
+                                <></>
+                            )}
                         </RightColumn>
                     </GridItem>
                 </StandardGrid>
@@ -419,7 +423,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             <Section islandId="onwards-upper" />
 
-            {!isPaidContent && (
+            {!dcr.config.isPaidContent && (
                 <>
                     {!isSensitive && (
                         <Section

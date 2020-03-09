@@ -1,4 +1,4 @@
-export const buildAdTargeting = (config: ConfigType): AdTargeting => {
+export const buildAdTargeting = (config: dcrConfig | ConfigType): AdTargeting => {
     const customParams = {
         sens: config.isSensitive ? 't' : 'f',
         si: 'f',

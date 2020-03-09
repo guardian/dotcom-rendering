@@ -2,6 +2,33 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
+type dcrType = {
+    config: dcrConfig;
+};
+
+type dcrConfig = {
+    isDev: boolean;
+    GA: GADataType;
+    ajaxUrl: string;
+    shortUrlId: string;
+    pageId: string;
+    isPaidContent: boolean;
+    showRelatedContent: boolean;
+    keywordIds: string;
+    ampIframeUrl: string;
+    ampPrebid: boolean;
+    permutive: boolean;
+    cmpUi: boolean;
+    slotBodyEnd: boolean;
+    isSensitive: boolean;
+    videoDuration: number;
+    edition: string;
+    section: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    sharedAdTargeting: { [key: string]: any };
+    adUnit: string;
+};
+
 // Pillars are used for styling
 // RealPillars have Pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article

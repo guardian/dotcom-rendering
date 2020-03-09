@@ -45,7 +45,7 @@ export const init = (): void => {
 };
 
 export const sendPageView = (): void => {
-    const { GA } = window.guardian.app.data;
+    const { GA } = window.guardian.dcr.config;
     const set = `${tracker.name}.set`;
     const send = `${tracker.name}.send`;
     const identityId = getCookie('GU_U');

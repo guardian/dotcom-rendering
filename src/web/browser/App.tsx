@@ -20,7 +20,7 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getCommentCount } from '@frontend/web/lib/getCommentCount';
 
-type Props = { CAPI: CAPIType; NAV: NavType };
+type Props = { CAPI: CAPIType; NAV: NavType; dcr: dcrType };
 
 type RootType =
     | 'reader-revenue-links-header'
@@ -38,14 +38,22 @@ type RootType =
     | 'rich-link'
     | 'header-root';
 
-export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
+export const hydrateApp = ({
+    CAPI,
+    NAV,
+    dcr,
+}: {
+    CAPI: CAPIType;
+    NAV: NavType;
+    dcr: dcrType;
+}) => {
     ReactDOM.render(
-        <App CAPI={CAPI} NAV={NAV} />,
+        <App CAPI={CAPI} NAV={NAV} dcr={dcr} />,
         document.getElementById('react-root'),
     );
 };
 
-const App = ({ CAPI, NAV }: Props) => {
+const App = ({ CAPI, NAV, dcr }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
@@ -64,12 +72,12 @@ const App = ({ CAPI, NAV }: Props) => {
         const callFetch = async () =>
             setCommentCount(
                 await getCommentCount(
-                    CAPI.config.ajaxUrl,
-                    CAPI.config.shortUrlId,
+                    dcr.config.ajaxUrl,
+                    dcr.config.shortUrlId,
                 ),
             );
         callFetch();
-    }, [CAPI.config.ajaxUrl, CAPI.config.shortUrlId]);
+    }, [dcr.config.ajaxUrl, dcr.config.shortUrlId]);
 
     const richLinks: {
         element: RichLinkBlockElement;
@@ -131,19 +139,19 @@ const App = ({ CAPI, NAV }: Props) => {
                         <RichLinkComponent
                             element={link.element}
                             pillar={CAPI.pillar}
-                            ajaxEndpoint={CAPI.config.ajaxUrl}
+                            ajaxEndpoint={dcr.config.ajaxUrl}
                             richLinkIndex={link.richLinkIndex}
                         />
                     </Portal>
                 ))}
 
             <Portal root="cmp">
-                <CMP />
+                <CMP cmpUi={dcr.config.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    pageId={CAPI.config.pageId}
+                    ajaxUrl={dcr.config.ajaxUrl}
+                    pageId={dcr.config.pageId}
                     commentCount={commentCount}
                     pillar={CAPI.pillar}
                 />
@@ -168,21 +176,21 @@ const App = ({ CAPI, NAV }: Props) => {
             )}
             <Portal root="onwards-upper">
                 <OnwardsUpper
-                    ajaxUrl={CAPI.config.ajaxUrl}
+                    ajaxUrl={dcr.config.ajaxUrl}
                     hasRelated={CAPI.hasRelated}
                     hasStoryPackage={CAPI.hasStoryPackage}
                     isAdFreeUser={CAPI.isAdFreeUser}
                     pageId={CAPI.pageId}
-                    isPaidContent={CAPI.config.isPaidContent || false}
-                    showRelatedContent={CAPI.config.showRelatedContent}
-                    keywordIds={CAPI.config.keywordIds}
+                    isPaidContent={dcr.config.isPaidContent || false}
+                    showRelatedContent={dcr.config.showRelatedContent}
+                    keywordIds={dcr.config.keywordIds}
                     contentType={CAPI.contentType}
                     tags={CAPI.tags}
                 />
             </Portal>
             <Portal root="onwards-lower">
                 <OnwardsLower
-                    ajaxUrl={CAPI.config.ajaxUrl}
+                    ajaxUrl={dcr.config.ajaxUrl}
                     hasStoryPackage={CAPI.hasStoryPackage}
                     tags={CAPI.tags}
                 />
@@ -191,7 +199,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 <MostViewedFooter
                     pillar={CAPI.pillar}
                     sectionName={CAPI.sectionName}
-                    ajaxUrl={CAPI.config.ajaxUrl}
+                    ajaxUrl={dcr.config.ajaxUrl}
                 />
             </Portal>
             <Portal root="reader-revenue-links-header">
