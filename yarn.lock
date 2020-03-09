@@ -17634,9 +17634,9 @@ yarn-or-npm@^3.0.1:
     pkg-dir "^4.2.0"
 
 yarn@^1.5.1:
-  version "1.17.3"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.17.3.tgz#60e0b77d079eb78e753bb616f7592b51b6a9adce"
-  integrity sha512-CgA8o7nRZaQvmeF/WBx2FC7f9W/0X59T2IaLYqgMo6637wfp5mMEsM3YXoJtKUspnpmDJKl/gGFhnqS+sON7hA==
+  version "1.22.1"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.1.tgz#888d8b01ac8547669b3bda5fe4b5b8b88c909e8c"
+  integrity sha512-hL7Fd2Psv4fOiE/JjVULDg+LckG0Ql7IPUh5wWC/4UEr6W+eF+VVEWfRu6Q7qbOnqk7+qY7CXYSSLBfJIyElXA==
 
 yauzl@2.10.0:
   version "2.10.0"
