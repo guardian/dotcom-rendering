@@ -415,7 +415,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                             <Flex>
                                 <div id="comments-root" />
                                 <RightColumn>
-                                    <p>TODO:Comments ad slot goes here</p>
+                                    {/* TODO: Comments ad slot goes here */}
                                 </RightColumn>
                             </Flex>
                         </Section>

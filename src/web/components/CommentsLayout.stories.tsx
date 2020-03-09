@@ -17,9 +17,7 @@ export const Default = () => (
     <Section>
         <Flex>
             <CommentsLayout commentCount={345} isClosedForComments={false} />
-            <RightColumn>
-                <p>TODO: Comments ad slot goes here</p>
-            </RightColumn>
+            <RightColumn>{/* TODO: Comments ad slot goes here */}</RightColumn>
         </Flex>
     </Section>
 );
