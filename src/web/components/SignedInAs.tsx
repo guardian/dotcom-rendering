@@ -13,7 +13,8 @@ type Props = {
 };
 
 const containerStyles = css`
-    padding: ${space[2]}px;
+    padding-top: ${space[1]}px;
+    padding-bottom: ${space[1]}px;
 `;
 
 const imageStyles = css`
