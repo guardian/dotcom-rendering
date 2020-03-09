@@ -1,7 +1,7 @@
 import { ImageElement } from './renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
-import { ReactNode } from 'react';
+import { ReactNode, createElement as h } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'item';
@@ -76,10 +76,28 @@ describe('renderer returns expected content', () => {
             captionString: "caption",
             caption: JSDOM.fragment('this caption contains <em>html</em>'),
             credit: "credit",
-            pillar: Pillar.news
-
-        }
+            pillar: Pillar.news,
+        };
         expect(ImageElement(imageProps)).toBe(null);
+    });
+
+    test('ImageElement returns image', () => {
+        const imageProps = {
+            url: 'https://media.guim.co.uk/image.jpg',
+            alt: "alt",
+            salt: "salt",
+            sizes: "sizes",
+            width: 500,
+            height: 500,
+            captionString: "caption",
+            caption: JSDOM.fragment('this caption contains <em>html</em>'),
+            credit: "credit",
+            pillar: Pillar.news,
+        };
+        const image = shallow(h(ImageElement, imageProps));
+
+        expect(image.html()).toContain('img');
+        expect(image.prop('alt')).toBe('alt');
     });
 
     test('Renders supported node types for text elements', () => {
@@ -120,7 +138,7 @@ describe('Renders different types of elements', () => {
         const nodes = render(imageElement())
         const bodyImage = shallow(nodes.flat()[0]);
         expect(bodyImage.html()).toContain('img');
-        expect(bodyImage.html()).toContain('<figcaption>');
+        expect(bodyImage.html()).toContain('figcaption');
         expect(bodyImage.html()).toContain('caption="caption"');
         expect(bodyImage.html()).toContain('credit="credit"');
     })
