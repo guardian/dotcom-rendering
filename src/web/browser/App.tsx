@@ -14,11 +14,12 @@ import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { Header } from '@frontend/web/components/Header';
+import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
-import { getCommentCount } from '@frontend/web/lib/getCommentCount';
+import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
 type Props = { CAPI: CAPIType; NAV: NavType; dcr: dcrType };
 
@@ -36,7 +37,8 @@ type RootType =
     | 'onwards-upper'
     | 'onwards-lower'
     | 'rich-link'
-    | 'header-root';
+    | 'header-root'
+    | 'comments-root';
 
 export const hydrateApp = ({
     CAPI,
@@ -57,6 +59,9 @@ const App = ({ CAPI, NAV, dcr }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
+    const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
+        true,
+    );
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -69,13 +74,18 @@ const App = ({ CAPI, NAV, dcr }: Props) => {
     }, []);
 
     useEffect(() => {
-        const callFetch = async () =>
-            setCommentCount(
-                await getCommentCount(
-                    dcr.config.ajaxUrl,
-                    dcr.config.shortUrlId,
-                ),
+        const callFetch = async () => {
+            const response = await getDiscussion(
+                dcr.config.ajaxUrl,
+                dcr.config.shortUrlId,
             );
+            setCommentCount(
+                (response && response.discussion.commentCount) || 0,
+            );
+            setIsClosedForComments(
+                response && response.discussion.isClosedForComments,
+            );
+        };
         callFetch();
     }, [dcr.config.ajaxUrl, dcr.config.shortUrlId]);
 
@@ -193,6 +203,12 @@ const App = ({ CAPI, NAV, dcr }: Props) => {
                     ajaxUrl={dcr.config.ajaxUrl}
                     hasStoryPackage={CAPI.hasStoryPackage}
                     tags={CAPI.tags}
+                />
+            </Portal>
+            <Portal root="comments-root">
+                <CommentsLayout
+                    commentCount={commentCount}
+                    isClosedForComments={isClosedForComments}
                 />
             </Portal>
             <Portal root="most-viewed-footer">
