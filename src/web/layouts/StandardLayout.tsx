@@ -435,7 +435,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             <Flex>
                                 <div id="comments-root" />
                                 <RightColumn>
-                                    <p>Comments ad slot goes here</p>
+                                    <p>TODO: Comments ad slot goes here</p>
                                 </RightColumn>
                             </Flex>
                         </Section>

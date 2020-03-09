@@ -25,7 +25,7 @@ export const CommentsLayout = ({
             <Hide when="above" breakpoint="leftCol">
                 <SignedInAs commentCount={commentCount} />
             </Hide>
-            <p>Comments go here</p>
+            <p>TODO: Comments go here</p>
         </Flex>
     </Flex>
 );
