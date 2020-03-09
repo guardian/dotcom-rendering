@@ -1,5 +1,3 @@
-import { DateFromISOStringC } from 'io-ts-types/lib/DateFromISOString';
-
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 
 type DiscussionResponse = {
@@ -26,7 +24,7 @@ type CommentType = {
     id: number;
     body: string;
     date: string;
-    isoDateTime: DateFromISOStringC;
+    isoDateTime: string;
     status: string;
     webUrl: string;
     apiUrl: string;
@@ -37,7 +35,7 @@ type CommentType = {
     responseTo?: {
         displayName: string;
         commentApiUrl: string;
-        isoDateTime: DateFromISOStringC;
+        isoDateTime: string;
         date: string;
         commentId: number;
         commentWebUrl: string;
