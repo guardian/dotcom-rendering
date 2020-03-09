@@ -1,13 +1,19 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
-import { getBodyEnd, getViewLog, logView } from '@guardian/slot-machine-client';
+import { getBodyEnd, getViewLog } from '@guardian/slot-machine-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
-import { useApiFn } from '../lib/api';
 import { getCookie } from '../browser/cookie';
+
+const checkForErrors = (response: any) => {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+};
 
 const sendOphanInsertEvent = (): void => {
     const componentEvent = {
@@ -19,7 +25,7 @@ const sendOphanInsertEvent = (): void => {
         },
         abTest: {
             name: 'remote_epic_test',
-            variant: 'api',
+            variant: 'remote',
         },
         action: 'INSERT',
     };
@@ -42,34 +48,9 @@ type Props = {
     tags: TagType[];
 };
 
-export const SlotBodyEnd = ({
-    isSignedIn,
-    countryCode,
-    contentType,
-    sectionName,
-    shouldHideReaderRevenue,
-    isMinuteArticle,
-    isPaidContent,
-    tags,
-}: Props) => {
-    // Hardcoding the test ID until we have A/B testing (variants) capability in DCR.
-    const epicTestName = 'DotcomRenderingEpic';
-    // Load the view log from localStorage so it can be added to the Contributions payload
-    const epicViewLog = getViewLog();
-
-    // These are expensive - only retrieve them once
-    const mvtId = useMemo(() => Number(getCookie('GU_mvt_id')), []);
-    const lastOneOffContributionDate = useMemo(
-        getLastOneOffContributionDate,
-        [],
-    );
-    const showSupportMessaging = useMemo(shouldShowSupportMessaging, []);
-    const recurringContributor = useMemo(
-        () => isRecurringContributor(isSignedIn),
-        [],
-    );
-
-    const contributionsPayload = {
+// TODO specify return type (need to update client to provide this first)
+const buildPayload = (props: Props) => {
+    return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
@@ -80,48 +61,62 @@ export const SlotBodyEnd = ({
             referrerUrl: window.location.origin + window.location.pathname,
         },
         localisation: {
-            countryCode,
+            countryCode: props.countryCode,
         },
         targeting: {
-            contentType,
-            sectionName: sectionName || '', // TODO update client to reflect that this is optional
-            shouldHideReaderRevenue,
-            isMinuteArticle,
-            isPaidContent,
-            tags,
-            showSupportMessaging,
-            isRecurringContributor: recurringContributor,
-            lastOneOffContributionDate,
-            epicViewLog,
-            mvtId,
+            contentType: props.contentType,
+            sectionName: props.sectionName || '', // TODO update client to reflect that this is optional
+            shouldHideReaderRevenue: props.shouldHideReaderRevenue,
+            isMinuteArticle: props.isMinuteArticle,
+            isPaidContent: props.isPaidContent,
+            tags: props.tags,
+            showSupportMessaging: shouldShowSupportMessaging(),
+            isRecurringContributor: isRecurringContributor(props.isSignedIn),
+            lastOneOffContributionDate: getLastOneOffContributionDate(),
+            epicViewLog: getViewLog(),
+            mvtId: Number(getCookie('GU_mvt_id')),
         },
     };
+};
 
-    const getSlot: () => Promise<Response> = useCallback(
-        () => getBodyEnd(contributionsPayload),
-        [], // empty as we only want to call the API once and payload will always fail a reference equality check anyway
-    );
+// Warning, we only fetch slot data on initial render and then *never again*.
+// This is because we only want to call the Slot API once for both scaling and
+// simplicity reasons (monitoring, UX, etc.). So make sure to only call this
+// component when you have the data you need.
+export const SlotBodyEnd = (props: Props) => {
+    const [data, setData] = useState<{
+        slot?: {
+            html: string;
+            css: string;
+        };
+    }>();
 
-    const { data: bodyResponse, error } = useApiFn<{
-        data: { html: string; css: string };
-    }>(getSlot);
+    useEffect(() => {
+        const contributionsPayload = buildPayload(props);
+        getBodyEnd(contributionsPayload)
+            .then(response => response.json())
+            .then(checkForErrors)
+            .then(json =>
+                setData({
+                    slot: { html: json.data.html, css: json.data.css },
+                }),
+            )
+            .then(_ => sendOphanInsertEvent())
+            .catch(error =>
+                window.guardian.modules.sentry.reportError(
+                    error,
+                    'slot-body-end',
+                ),
+            );
+    }, []); // only ever call once (we'd rather fail then call the API multiple times)
 
-    if (error) {
-        window.guardian.modules.sentry.reportError(error, 'slot-body-end');
-    }
-
-    if (bodyResponse && bodyResponse.data) {
-        // Add a new entry to the view log when we know an Epic is being rendered
-        logView(epicTestName);
-        sendOphanInsertEvent();
-
-        const { html: epicHtml, css: epicCss } = bodyResponse.data;
+    if (data && data.slot) {
         return (
             <div className={wrapperMargins}>
-                {epicCss && <style>{epicCss}</style>}
+                {data.slot.css && <style>{data.slot.css}</style>}
                 <div
                     // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{ __html: epicHtml }}
+                    dangerouslySetInnerHTML={{ __html: data.slot.html }}
                 />
             </div>
         );
