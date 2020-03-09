@@ -6,12 +6,11 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 
 type Props = {
-    designType: DesignType;
     CAPI: CAPIType;
     NAV: NavType;
 };
 
-export const DecideLayout = ({ designType, CAPI, NAV }: Props) => {
+export const DecideLayout = ({CAPI, NAV }: Props) => {
     if (CAPI.pageType.hasShowcaseMainElement) {
         return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
     }
@@ -23,5 +22,5 @@ export const DecideLayout = ({ designType, CAPI, NAV }: Props) => {
 
     designTypeContent.Comment = <CommentLayout CAPI={CAPI} NAV={NAV} />;
 
-    return designTypeContent[designType];
+    return designTypeContent[CAPI.designType];
 };
