@@ -31,7 +31,7 @@ export interface WindowGuardianConfig {
 }
 
 const makeWindowGuardianConfig = (
-    dcrDocumentData: DCRDocumentData,
+    dcrDocumentData: DCRServerDocumentData,
 ): WindowGuardianConfig => {
     const { config } = dcrDocumentData.CAPI;
     return {
@@ -66,6 +66,55 @@ const makeWindowGuardianConfig = (
     } as WindowGuardianConfig;
 };
 
+export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => ({
+    config: {
+        isDev: process.env.NODE_ENV !== 'production',
+        ajaxUrl: CAPI.config.ajaxUrl,
+        shortUrlId: CAPI.config.shortUrlId,
+        pageId: CAPI.config.pageId,
+        isPaidContent: !!CAPI.config.isPaidContent,
+        showRelatedContent: CAPI.config.showRelatedContent,
+        keywordIds: CAPI.config.keywordIds,
+        ampIframeUrl: CAPI.config.ampIframeUrl,
+        // commercialBundleUrl is only used in SSR
+        // commercialBundleUrl: CAPI.config.commercialBundleUrl,
+
+        // switches
+        cmpUi: CAPI.config.switches.cmpUi,
+        slotBodyEnd: CAPI.config.switches.slotBodyEnd,
+        ampPrebid: CAPI.config.switches.ampPrebid,
+        permutive: CAPI.config.switches.permutive,
+
+        // used by lib/ad-targeting.ts
+        isSensitive: CAPI.config.isSensitive,
+        videoDuration: CAPI.config.videoDuration,
+        edition: CAPI.config.edition,
+        section: CAPI.config.section,
+        sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
+        adUnit: CAPI.config.adUnit,
+    },
+    blocks: CAPI.blocks,
+    editionId: CAPI.editionId,
+    pillar: CAPI.pillar,
+    contentType: CAPI.contentType,
+    sectionName: CAPI.sectionName,
+    shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
+    pageType: {
+        isMinuteArticle: CAPI.pageType.isMinuteArticle,
+        isPaidContent: CAPI.pageType.isPaidContent,
+    },
+    hasRelated: CAPI.hasRelated,
+    hasStoryPackage: CAPI.hasStoryPackage,
+    isAdFreeUser: CAPI.isAdFreeUser,
+    pageId: CAPI.pageId,
+    tags: CAPI.tags,
+    nav: {
+        readerRevenueLinks: {
+            footer: CAPI.nav.readerRevenueLinks.footer,
+            header: CAPI.nav.readerRevenueLinks.header,
+        },
+    },
+});
 export interface WindowGuardian {
     // At least until October 2019, do not modify this interface without checking with Pascal first.
 
@@ -73,11 +122,11 @@ export interface WindowGuardian {
     // from frontend and the dotcom-rendering server side model
     // to the client side.
     app: {
-        data: DCRDocumentData;
+        data: DCRBrowserDocumentData;
         cssIDs: string[];
     };
 
-    // The 'config' attribute is derived from DCRDocumentData and contains
+    // The 'config' attribute is derived from DCRServerDocumentData and contains
     // all the data that, for legacy reasons, for instance compatibility
     // with the frontend commercial stack, or other scripts, we want to find
     // at window.guardian.config
@@ -92,13 +141,16 @@ export interface WindowGuardian {
 }
 
 export const makeWindowGuardian = (
-    dcrDocumentData: DCRDocumentData,
+    dcrDocumentData: DCRServerDocumentData,
     cssIDs: string[],
 ): WindowGuardian => {
     return {
         app: {
             cssIDs,
-            data: dcrDocumentData,
+            data: {
+                ...dcrDocumentData,
+                CAPI: makeGuardianBrowserCAPI(dcrDocumentData.CAPI),
+            },
         },
         config: makeWindowGuardianConfig(dcrDocumentData),
         polyfilled: false,
