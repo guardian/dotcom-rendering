@@ -1,16 +1,16 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement, ReactNode } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { headline } from '@guardian/src-foundations/typography';
-import { background, neutral, text } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
-import { remSpace } from '@guardian/src-foundations';
+import React, {FC, ReactElement, ReactNode} from 'react';
+import {css, SerializedStyles} from '@emotion/core';
+import {headline} from '@guardian/src-foundations/typography';
+import {background, neutral, text} from '@guardian/src-foundations/palette';
+import {from} from '@guardian/src-foundations/mq';
+import {remSpace} from '@guardian/src-foundations';
 
-import { Item, Design, Display } from 'item';
-import { renderText } from 'renderer';
-import { textPadding, darkModeCss as darkMode } from 'styles';
-import { PillarStyles, getPillarStyles } from 'pillar';
+import {Design, Display, Item} from 'item';
+import {renderText} from 'renderer';
+import {darkModeCss as darkMode, textPadding} from 'styles';
+import {getPillarStyles, PillarStyles} from 'pillar';
 
 
 // ----- Component ----- //
@@ -68,7 +68,11 @@ const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
 `;
 
 const media = css`
-    ${styles()}
+    color: ${neutral[100]};
+    
+    ${darkMode`
+        color: ${neutral[86]};
+    `}
 `;
 
 const getStyles = (item: Item): SerializedStyles => {
@@ -83,6 +87,9 @@ const getStyles = (item: Item): SerializedStyles => {
         case Design.Feature:
         case Design.Comment:
             return css(styles(pillarStyles), thinHeadline);
+
+        case Design.Media:
+            return css(media);
 
         default:
             return css(styles(pillarStyles), normalHeadline);

@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { css } from '@emotion/core';
-import { neutral, background } from '@guardian/src-foundations/palette';
+import { background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/shared/headerImage';
@@ -12,8 +12,7 @@ import Byline from 'components/standard/byline';
 import { CommentCount } from 'components/shared/commentCount'
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
-import {darkModeCss, articleWidthStyles, headlineFontStyles, headlineFont} from 'styles';
-import { Keyline } from 'components/shared/keyline';
+import {darkModeCss, articleWidthStyles} from 'styles';
 import { getPillarStyles } from 'pillar';
 import {Item} from "../../item";
 import Headline from 'components/headline';
