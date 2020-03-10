@@ -35,7 +35,15 @@ describe('CMP', () => {
     it('It should render null if shouldShow returns false', () => {
         shouldShow.mockImplementation(() => false);
 
-        const { container } = render(<CMP />);
+        const { container } = render(<CMP cmpUi={true} />);
+
+        expect(container.firstChild).toBeNull();
+    });
+
+    it('It should render null if shouldShow ireturns true but cmpUi switch is false', () => {
+        shouldShow.mockImplementation(() => true);
+
+        const { container } = render(<CMP cmpUi={false} />);
 
         expect(container.firstChild).toBeNull();
     });
