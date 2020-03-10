@@ -38,8 +38,8 @@ const wrapperMargins = css`
 `;
 
 type Props = {
-    isSignedIn: boolean;
-    countryCode: string;
+    isSignedIn?: boolean;
+    countryCode?: string;
     contentType: string;
     sectionName?: string;
     shouldHideReaderRevenue: boolean;
@@ -71,7 +71,9 @@ const buildPayload = (props: Props) => {
             isPaidContent: props.isPaidContent,
             tags: props.tags,
             showSupportMessaging: shouldShowSupportMessaging(),
-            isRecurringContributor: isRecurringContributor(props.isSignedIn),
+            isRecurringContributor: isRecurringContributor(
+                props.isSignedIn || false,
+            ),
             lastOneOffContributionDate: getLastOneOffContributionDate(),
             epicViewLog: getViewLog(),
             mvtId: Number(getCookie('GU_mvt_id')),
@@ -79,11 +81,7 @@ const buildPayload = (props: Props) => {
     };
 };
 
-// Warning, we only fetch slot data on initial render and then *never again*.
-// This is because we only want to call the Slot API once for both scaling and
-// simplicity reasons (monitoring, UX, etc.). So make sure to only call this
-// component when you have the data you need.
-export const SlotBodyEnd = (props: Props) => {
+const MemoisedInner = (props: Props) => {
     const [data, setData] = useState<{
         slot?: {
             html: string;
@@ -94,14 +92,14 @@ export const SlotBodyEnd = (props: Props) => {
     useEffect(() => {
         const contributionsPayload = buildPayload(props);
         getBodyEnd(contributionsPayload)
-            .then(response => response.json())
             .then(checkForErrors)
+            .then(response => response.json())
             .then(json =>
                 setData({
                     slot: { html: json.data.html, css: json.data.css },
                 }),
             )
-            .then(_ => sendOphanInsertEvent())
+            .then(sendOphanInsertEvent)
             .catch(error =>
                 window.guardian.modules.sentry.reportError(
                     error,
@@ -123,4 +121,16 @@ export const SlotBodyEnd = (props: Props) => {
     }
 
     return null;
+};
+
+export const SlotBodyEnd = (props: Props) => {
+    const { isSignedIn, countryCode } = props;
+    if (isSignedIn === undefined && countryCode === undefined) {
+        return null;
+    }
+
+    // Memoised as we only ever want to call the Slots API once, for simplicity
+    // and performance reasons.
+
+    return <MemoisedInner {...props} />;
 };
