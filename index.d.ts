@@ -270,7 +270,7 @@ type CAPIBrowserType = {
         sharedAdTargeting: { [key: string]: any };
         adUnit: string;
     };
-    blocks: Block[];
+    richLinks: RichLinkBlockElement[];
     editionId: Edition;
     pillar: Pillar;
     contentType: string;
