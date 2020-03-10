@@ -29,10 +29,5 @@ export const CMP = () => {
         return null;
     }
 
-    const props = {
-        source: 'dcr',
-        onClose,
-    };
-
-    return <ConsentManagementPlatform {...props} />;
+    return <ConsentManagementPlatform source="dcr" onClose={onClose} />;
 };
