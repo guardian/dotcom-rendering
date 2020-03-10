@@ -148,7 +148,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 ))}
 
             <Portal root="cmp">
-                <CMP />
+                <CMP cmpUi={CAPI.config.switches.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts

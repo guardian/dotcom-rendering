@@ -5,7 +5,11 @@ import {
 } from '@guardian/consent-management-platform';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 
-export const CMP = () => {
+type Props = {
+    cmpUi: boolean; // A switch to decide if we show CMP or not
+};
+
+export const CMP = ({ cmpUi }: Props) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -22,8 +26,6 @@ export const CMP = () => {
     }, []);
 
     const onClose = () => setShow(false);
-
-    const { cmpUi } = window.guardian.app.data.CAPI.config.switches;
 
     if (!show || !cmpUi) {
         return null;
