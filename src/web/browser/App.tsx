@@ -167,21 +167,19 @@ const App = ({ CAPI, NAV }: Props) => {
             <Portal root="most-viewed-right">
                 <MostViewedRightWrapper pillar={CAPI.pillar} />
             </Portal>
-            {/* Ensure component only renders after both variables have been assigned true or false */}
-            {isSignedIn !== undefined && countryCode !== undefined && (
-                <Portal root="slot-body-end">
-                    <SlotBodyEnd
-                        isSignedIn={isSignedIn}
-                        countryCode={countryCode}
-                        contentType={CAPI.contentType}
-                        sectionName={CAPI.sectionName}
-                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                        isPaidContent={CAPI.pageType.isPaidContent}
-                        tags={CAPI.tags}
-                    />
-                </Portal>
-            )}
+            <Portal root="slot-body-end">
+                <SlotBodyEnd
+                    isSignedIn={isSignedIn}
+                    countryCode={countryCode}
+                    contentType={CAPI.contentType}
+                    sectionName={CAPI.sectionName}
+                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                    isPaidContent={CAPI.pageType.isPaidContent}
+                    tags={CAPI.tags}
+                />
+            </Portal>
+
             <Portal root="onwards-upper">
                 <OnwardsUpper
                     ajaxUrl={CAPI.config.ajaxUrl}

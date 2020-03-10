@@ -5,7 +5,11 @@ import {
 } from '@guardian/consent-management-platform';
 import { ConsentManagementPlatform } from '@guardian/consent-management-platform/lib/ConsentManagementPlatform';
 
-export const CMP = ({ cmpUi }: { cmpUi: boolean }) => {
+type Props = {
+    cmpUi: boolean; // A switch to decide if we show CMP or not
+};
+
+export const CMP = ({ cmpUi }: Props) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -27,10 +31,5 @@ export const CMP = ({ cmpUi }: { cmpUi: boolean }) => {
         return null;
     }
 
-    const props = {
-        source: 'dcr',
-        onClose,
-    };
-
-    return <ConsentManagementPlatform {...props} />;
+    return <ConsentManagementPlatform source="dcr" onClose={onClose} />;
 };

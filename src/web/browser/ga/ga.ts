@@ -166,7 +166,6 @@ const trackLCP = (send: string) => {
                 ga(
                     send,
                     'timing',
-                    'timing',
                     'Javascript Load', // Matches Frontend
                     'LCP', // Largest Contentful Paint (We can filter to DCR with the Dimension 43 segment)
                     lcp,
