@@ -79,6 +79,9 @@ const App = ({ CAPI, NAV }: Props) => {
             );
         };
 
+        if (CAPI.isCommentable) {
+            callFetch();
+        }
     }, [
         CAPI.config.discussionApiUrl,
         CAPI.config.shortUrlId,
