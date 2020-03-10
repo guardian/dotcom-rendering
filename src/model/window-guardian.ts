@@ -1,3 +1,5 @@
+import { makeDcr } from '@root/src/model/dcr';
+
 type stage = 'DEV' | 'CODE' | 'PROD';
 
 export interface WindowGuardianConfig {
@@ -76,6 +78,7 @@ export interface WindowGuardian {
         data: DCRDocumentData;
         cssIDs: string[];
     };
+    dcr: DcrType;
 
     // The 'config' attribute is derived from DCRDocumentData and contains
     // all the data that, for legacy reasons, for instance compatibility
@@ -100,6 +103,7 @@ export const makeWindowGuardian = (
             cssIDs,
             data: dcrDocumentData,
         },
+        dcr: makeDcr(dcrDocumentData.CAPI, dcrDocumentData.GA),
         config: makeWindowGuardianConfig(dcrDocumentData),
         polyfilled: false,
         adBlockers: {
