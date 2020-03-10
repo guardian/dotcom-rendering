@@ -30,13 +30,16 @@ interface LiveblogBodyProps {
     imageSalt: string;
 }
 
-const LiveblogBody = ({ pillar, blocks: initialBlocks, imageSalt, totalBodyBlocks }: LiveblogBodyProps): JSX.Element => {
-    let [blocks] = useState(initialBlocks);
+const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
+    const { pillar, blocks: initialBlocks, imageSalt, totalBodyBlocks } = props;
+    const [blocks] = useState(initialBlocks);
 
-    const loadMoreBlocks = () =>
+    const loadMoreBlocks = (): void => {
+        /* setBlocks(parseNewBlocks(browserParser)(resp.blocks)) */
         fetch('?date=2020-03-09T11%3A11%3A49Z&filter=newer')
             .then(resp => resp.json())
-            .then(resp => /*setBlocks(parseNewBlocks(browserParser)(resp.blocks)) */ console.log(resp))
+            .then(resp => console.log(resp))
+    }
 
     const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 7
         ? <LiveblogLoadMore onLoadMore={loadMoreBlocks} pillar={pillar}/>

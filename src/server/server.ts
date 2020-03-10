@@ -88,7 +88,11 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             }
           },
           content => {
-            const { resources, element, hydrationProps } = Page({ content, imageSalt, getAssetLocation });
+            const {
+              resources,
+              element,
+              hydrationProps
+            } = Page({ content, imageSalt, getAssetLocation });
             const props = JSON.stringify({ ...hydrationProps, imageSalt })
               .replace(/’/g, "&rsquo;")
               .replace(/“/g, "&ldquo;")

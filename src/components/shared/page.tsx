@@ -83,7 +83,7 @@ interface BodyProps {
 interface ElementWithResources {
     element: React.ReactElement;
     resources: string[];
-    hydrationProps: any;
+    hydrationProps: {};
 }
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
@@ -155,7 +155,8 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         ), resources: [articleScript], hydrationProps: {} };
     }
 
-    return { element: <p>Content format not implemented yet</p>, resources: [], hydrationProps: {} };
+    const element = <p>Content format not implemented yet</p>
+    return { element, resources: [], hydrationProps: {} };
 }
 
 interface Props {
@@ -169,7 +170,11 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
-    const { element, resources, hydrationProps } = ArticleBody({ imageSalt, capi: content, getAssetLocation })
+    const {
+        element,
+        resources,
+        hydrationProps
+    } = ArticleBody({ imageSalt, capi: content, getAssetLocation })
 
     return { element: (
         <html lang="en" css={PageStyles}>

@@ -109,9 +109,7 @@ const LiveblogBlock = ({
             setDateJsx(relativeFirstPublished(firstPublishedDate));
         }, 15000);
 
-        return () => {
-          clearInterval(interval);
-        };
+        return (): void => clearInterval(interval);
       }, []);
 
     return (
