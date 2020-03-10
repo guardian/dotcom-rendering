@@ -436,6 +436,7 @@ interface ConfigType extends CommercialConfigType {
     keywordIds: string;
     showRelatedContent: boolean;
     shouldHideReaderRevenue?: boolean;
+    discussionApiUrl: string;
 }
 
 interface GADataType {
