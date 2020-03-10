@@ -6,17 +6,15 @@ import { Series } from '../../capi';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { from } from '@guardian/src-foundations/mq';
+import { headline, body } from '@guardian/src-foundations/typography';
 
 const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     background: ${kicker};
     ${sidePadding}
     a {
         font-weight: 700;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
         color: ${neutral[100]};
         text-decoration: none;
-        ${headlineFont}
 
         ${from.wide} {
             padding: ${basePx(0, 1)};

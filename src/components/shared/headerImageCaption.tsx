@@ -20,7 +20,6 @@ const HeaderImageCaptionStyles = css`
         right: ${basePx(1)};
         border-radius: 100%;
         z-index: 2;
-		font-size: 2.8rem;
 		
 		span {
 			font-size: 0;
@@ -48,8 +47,6 @@ const HeaderImageCaptionStyles = css`
 		padding-right: ${basePx(6)};
 		z-index: 1;
 		color: ${neutral[100]};
-		line-height: 1.6rem;
-		font-size: 1.4rem;
 		${textSans}
 	}
 

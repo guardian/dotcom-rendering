@@ -17,7 +17,6 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
 
     .author {
         padding-bottom: 4px;
-        line-height: 2.2rem;
 
         address {
             font-style: italic;
@@ -38,7 +37,7 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
         }
 
         time {
-            font-size: 1.4rem;
+            ${textSans.small()};
             color: ${neutral[93]};
             opacity: .8;
         }
