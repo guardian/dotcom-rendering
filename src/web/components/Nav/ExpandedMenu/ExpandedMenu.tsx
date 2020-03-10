@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { brandBackground } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -19,7 +19,7 @@ const showExpandedMenuStyles = css`
 `;
 
 const mainMenu = css`
-    background-color: ${palette.brand.main};
+    background-color: ${brandBackground.primary};
     box-sizing: border-box;
     ${textSans.large()};
     left: 0;
