@@ -132,7 +132,7 @@ check-env: # private
 	@node scripts/env/check-yarn.js
 
 clear: # private
-	#@clear
+	@clear
 
 gen-schema:
 	@node scripts/json-schema/gen-schema.js
