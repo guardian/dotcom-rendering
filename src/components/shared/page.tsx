@@ -7,6 +7,7 @@ import Standard from 'components/standard/article';
 import LiveblogArticle from 'components/liveblog/article';
 import Opinion from 'components/opinion/article';
 import Immersive from 'components/immersive/article';
+import Media from 'components/media/article';
 
 import { IContent as Content } from 'mapiThriftModels/Content';
 import { includesTweets } from 'capi';
@@ -134,6 +135,18 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                 </Immersive>
             </WithScript>
         ), resources: [articleScript] };
+    }
+
+    if (item.design === Design.Media) {
+        const body = partition(item.body).oks;
+        const content = insertAdPlaceholders(renderAll(imageSalt)(item.pillar, body));
+        return { element: (
+                <WithScript src={articleScript}>
+                    <Media imageSalt={imageSalt} item={item}>
+                        {content}
+                    </Media>
+                </WithScript>
+            ), resources: [articleScript] };
     }
 
     if (

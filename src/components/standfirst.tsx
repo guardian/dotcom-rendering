@@ -67,6 +67,10 @@ const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
     }
 `;
 
+const media = css`
+    ${styles()}
+`;
+
 const getStyles = (item: Item): SerializedStyles => {
     const pillarStyles = getPillarStyles(item.pillar);
 

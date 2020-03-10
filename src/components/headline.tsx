@@ -1,14 +1,14 @@
 // ----- Imports ----- //
 
-import React, { ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { headline } from '@guardian/src-foundations/typography';
-import { background, neutral, text } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
+import React, {ReactElement} from 'react';
+import {css, SerializedStyles} from '@emotion/core';
+import {headline} from '@guardian/src-foundations/typography';
+import {background, neutral, text} from '@guardian/src-foundations/palette';
+import {remSpace} from '@guardian/src-foundations';
 
-import { Item, Design, Display } from 'item';
-import { textPadding, darkModeCss as darkMode } from 'styles';
-import { getPillarStyles, PillarStyles } from 'pillar';
+import {Design, Display, Item} from 'item';
+import {darkModeCss as darkMode, textPadding} from 'styles';
+import {getPillarStyles, PillarStyles} from 'pillar';
 import StarRating from './starRating';
 
 
@@ -54,6 +54,16 @@ const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     }
 `;
 
+const mediaStyles = css `
+    ${styles}
+    color: ${neutral[100]};
+    font-weight: 500;
+    
+    ${darkMode`
+        color: ${neutral[86]};
+    `}
+`
+
 const featureStyles = ({ featureHeadline }: PillarStyles): SerializedStyles => css`
     ${styles}
     ${headline.medium({ fontWeight: 'bold' })}
@@ -80,6 +90,8 @@ const getStyles = (item: Item): SerializedStyles => {
             return featureStyles(pillarStyles);
         case Design.Comment:
             return commentStyles;
+        case Design.Media:
+            return  mediaStyles;
         default:
             return styles;
     }
