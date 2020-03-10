@@ -69,6 +69,7 @@ const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element
                     blocks={item.blocks}
                     pillar={item.pillar}
                     imageSalt={imageSalt}
+                    totalBodyBlocks={item.totalBodyBlocks}
                 />
                 <Tags tags={item.tags} background={neutral[93]} />
             </div>

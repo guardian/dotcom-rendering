@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
 import { textSans, icons, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
@@ -93,8 +93,7 @@ const LiveblogBlock = ({
     firstPublishedDate,
     lastModifiedDate,
 }: LiveblogBlockProps): JSX.Element => {
-
-    const relativeFirstPublished: JSX.Element | null = firstPublishedDate
+    const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => date
         .fmap<JSX.Element | null>(date => <time>{makeRelativeDate(date)}</time>)
         .withDefault(null)
 
@@ -102,10 +101,23 @@ const LiveblogBlock = ({
         .fmap<JSX.Element | null>(date => <time>Last updated: {formatDate(date)}</time>)
         .withDefault(null)
 
+
+    const [dateJsx, setDateJsx] = useState(relativeFirstPublished(firstPublishedDate));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setDateJsx(relativeFirstPublished(firstPublishedDate));
+        }, 15000);
+
+        return () => {
+          clearInterval(interval);
+        };
+      }, []);
+
     return (
         <article>
             <LeftColumn
-                columnContent={relativeFirstPublished}
+                columnContent={dateJsx}
                 className={LiveblogBlockStyles(getPillarStyles(pillar), highlighted)}
             >
                 <Title highlighted={highlighted} title={title} />

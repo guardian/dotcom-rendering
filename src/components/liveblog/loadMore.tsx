@@ -1,46 +1,19 @@
 import React from 'react';
-import { sidePadding, icons, textSans } from 'styles';
-import { css, SerializedStyles } from '@emotion/core'
-import { neutral } from '@guardian/src-foundations/palette';
-import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
-
-const LiveblogLoadMoreStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
-    all: unset;
-    ${sidePadding}
-    color: ${neutral[100]};
-    margin: 32px 0 24px 0;
-    
-    &:focus {
-        text-decoration: underline;
-    }
-    
-    span {
-        background: ${kicker};
-        padding: 6px 16px;
-        border-radius: 30px;
-        text-overflow: ellipsis;
-        max-width: 18.75rem;
-        ${textSans}
-
-        &::before {
-            ${icons}
-            content: '\\e050';
-            margin-right: 16px;
-            margin-top: -2px;
-            font-size: 1.2rem;
-        }
-    }
-`;
+import { Pillar } from 'pillar';
+import { SvgPlus } from "@guardian/src-svgs"
+// import { ThemeProvider } from 'emotion-theming'
+import { Button } from '@guardian/src-button'
 
 interface Props {
     pillar: Pillar;
+    onLoadMore: () => void;
 }
 
-const LiveblogLoadMore = ({ pillar }: Props): JSX.Element => {
+const LiveblogLoadMore = ({ pillar, onLoadMore }: Props): JSX.Element => {
     return (
-        <button css={LiveblogLoadMoreStyles(getPillarStyles(pillar))}>
-            <span>View more updates</span>
-        </button>
+        <Button onClick={onLoadMore} iconSide="left" icon={<SvgPlus />}>
+            View more updates
+        </Button>
     )
 }
 

@@ -83,6 +83,7 @@ interface BodyProps {
 interface ElementWithResources {
     element: React.ReactElement;
     resources: string[];
+    hydrationProps: any;
 }
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
@@ -111,7 +112,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                     {commentContent}
                 </Opinion>
             </WithScript>
-        ), resources: [articleScript] };
+        ), resources: [articleScript], hydrationProps: {} };
     }
 
     if (item.design === Design.Live) {
@@ -119,7 +120,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
             <WithScript src={liveblogScript}>
                 <LiveblogArticle item={item} imageSalt={imageSalt} />
             </WithScript>
-        ), resources: [liveblogScript] };
+        ), resources: [liveblogScript], hydrationProps: { ...capi } };
     }
 
     if (item.display === Display.Immersive) {
@@ -133,7 +134,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                     {immersiveContent}
                 </Immersive>
             </WithScript>
-        ), resources: [articleScript] };
+        ), resources: [articleScript], hydrationProps: {} };
     }
 
     if (
@@ -151,10 +152,10 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
                     {content}
                 </Standard>
             </WithScript>
-        ), resources: [articleScript] };
+        ), resources: [articleScript], hydrationProps: {} };
     }
 
-    return { element: <p>Content format not implemented yet</p>, resources: [] };
+    return { element: <p>Content format not implemented yet</p>, resources: [], hydrationProps: {} };
 }
 
 interface Props {
@@ -168,7 +169,7 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
         ? <script src="https://platform.twitter.com/widgets.js"></script>
         : null
 
-    const { element, resources } = ArticleBody({ imageSalt, capi: content, getAssetLocation })
+    const { element, resources, hydrationProps } = ArticleBody({ imageSalt, capi: content, getAssetLocation })
 
     return { element: (
         <html lang="en" css={PageStyles}>
@@ -183,7 +184,7 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
                 { twitterScript }
             </body>
         </html>
-    ), resources };
+    ), resources, hydrationProps };
 }
 
 

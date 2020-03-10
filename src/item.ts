@@ -118,6 +118,7 @@ type LiveBlock = {
 interface Liveblog extends Fields {
     design: Design.Live;
     blocks: LiveBlock[];
+    totalBodyBlocks: number;
 }
 
 interface Review extends Fields {
@@ -423,11 +424,12 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
             ...itemFieldsWithBody(docParser, content),
         };
     } else if (isLive(tags)) {
-        const body = content?.blocks?.body ?? [];
+        const body = content?.blocks?.body?.slice(0,7) ?? [];
 
         return {
             design: Design.Live,
             blocks: parseBlocks(docParser)(body),
+            totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
             ...itemFields(docParser, content),
         };
     } else if (isRecipe(tags)) {

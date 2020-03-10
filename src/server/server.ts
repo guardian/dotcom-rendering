@@ -20,6 +20,7 @@ import { ErrorResponse } from 'mapiThriftModels';
 import { logger } from 'logger';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
+import { response } from './liveblogResponse';
 
 // ----- Setup ----- //
 
@@ -60,6 +61,10 @@ async function serveArticlePost(
 
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
   try {
+    // mock content from mapi
+    if (req.query.date || req.query.filter) {
+      res.json(response)
+    }
     const articleId = req.params[0] || defaultId;
     const key = await getConfigValue<string>("capi.key");
     const imageSalt = await getConfigValue<string>('apis.img.salt');
@@ -83,9 +88,15 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             }
           },
           content => {
-            const { resources, element } = Page({ content, imageSalt, getAssetLocation });
+            const { resources, element, hydrationProps } = Page({ content, imageSalt, getAssetLocation });
+            const props = JSON.stringify({ ...hydrationProps, imageSalt })
+              .replace(/’/g, "&rsquo;")
+              .replace(/“/g, "&ldquo;")
+              .replace(/”/g, "&rdquo;")
+              .replace(/…/g, "&hellip;");
             res.set('Link', getPrefetchHeader(resources));
             res.write('<!DOCTYPE html>');
+            res.write(`<script>window.__INITIAL__DATA__ = ${props}</script>`)
             res.write(renderToString(element));
             res.end();
           }

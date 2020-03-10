@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 import { css, SerializedStyles } from '@emotion/core'
@@ -26,20 +26,26 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 interface LiveblogBodyProps {
     pillar: Pillar;
     blocks: LiveBlock[];
+    totalBodyBlocks: number;
     imageSalt: string;
 }
 
-const LiveblogBody = ({ pillar, blocks, imageSalt }: LiveblogBodyProps): JSX.Element => {
+const LiveblogBody = ({ pillar, blocks: initialBlocks, imageSalt, totalBodyBlocks }: LiveblogBodyProps): JSX.Element => {
+    let [blocks] = useState(initialBlocks);
 
-    const initialBlocks = blocks.slice(0, 7);
-    const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 10
-        ? <LiveblogLoadMore pillar={pillar}/> 
+    const loadMoreBlocks = () =>
+        fetch('?date=2020-03-09T11%3A11%3A49Z&filter=newer')
+            .then(resp => resp.json())
+            .then(resp => /*setBlocks(parseNewBlocks(browserParser)(resp.blocks)) */ console.log(resp))
+
+    const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 7
+        ? <LiveblogLoadMore onLoadMore={loadMoreBlocks} pillar={pillar}/>
         : null;
 
     return (
-        <article css={LiveBodyStyles(getPillarStyles(pillar))}>
+        <article id="blocks" css={LiveBodyStyles(getPillarStyles(pillar))}>
             {
-                initialBlocks.map((block: LiveBlock) => {
+                blocks.map((block: LiveBlock) => {
                     return <LiveblogBlock
                         key={block.id}
                         pillar={pillar} 
@@ -51,7 +57,7 @@ const LiveblogBody = ({ pillar, blocks, imageSalt }: LiveblogBodyProps): JSX.Ele
                         </LiveblogBlock>
                 })
             }
-            <LoadMore total={blocks.length}/>
+            <LoadMore total={totalBodyBlocks}/>
         </article>
     );
 
