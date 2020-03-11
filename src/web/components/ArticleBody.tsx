@@ -42,7 +42,7 @@ const bodyStyle = css`
     }
 
     h2 {
-        ${headline.xxsmall()};
+        ${headline.xxsmall({ fontWeight: 'bold' })};
     }
 
     strong {
