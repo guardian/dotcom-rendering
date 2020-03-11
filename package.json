@@ -10,6 +10,7 @@
   "scripts": {
     "upload": "node-riffraff-artifact",
     "copy-manifest": "cp dist/assets/manifest.json dist/server/manifest.json",
+    "copy-fonts": "cp -R assets/fonts dist/assets/fonts",
     "test:build": "webpack --config webpack.config.js --config-name server --env.test",
     "test": "npm run test:build && jest --verbose",
     "test:coverage": "npm run test; open coverage/index.html",
