@@ -59,7 +59,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
-    "@guardian/node-riffraff-artifact": "^0.1.1",
+    "@guardian/node-riffraff-artifact": "^0.1.7",
     "@guardian/src-button": "^0.13.0",
     "@guardian/src-foundations": "^0.14.1",
     "@types/jsdom": "^12.2.4",
