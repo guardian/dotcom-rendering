@@ -6,6 +6,8 @@ import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { LiveBlock } from 'item';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';
+import { BufferedTransport, CompactProtocol } from '@creditkarma/thrift-server-core';
+import { Blocks } from 'mapiThriftModels';
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,
@@ -34,11 +36,13 @@ const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
     const { pillar, blocks: initialBlocks, imageSalt, totalBodyBlocks } = props;
     const [blocks] = useState(initialBlocks);
 
-    const loadMoreBlocks = (): void => {
-        /* setBlocks(parseNewBlocks(browserParser)(resp.blocks)) */
-        fetch('?date=2020-03-09T11%3A11%3A49Z&filter=newer')
-            .then(resp => resp.json())
-            .then(resp => console.log(resp))
+    async function loadMoreBlocks(): Promise<void> {
+        const response = await fetch('?date=2020-03-09T11%3A11%3A49Z&filter=newer');
+        const buffer = Buffer.from(await response.arrayBuffer());
+        const transport = new BufferedTransport(buffer);
+        const protocol = new CompactProtocol(transport);
+        const blocks: Blocks = Blocks.read(protocol);
+        console.log(blocks);
     }
 
     const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 7

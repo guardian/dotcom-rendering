@@ -6,7 +6,7 @@ import { Button } from '@guardian/src-button'
 
 interface Props {
     pillar: Pillar;
-    onLoadMore: () => void;
+    onLoadMore: () => Promise<void>;
 }
 
 const LiveblogLoadMore = ({ pillar, onLoadMore }: Props): JSX.Element => {
