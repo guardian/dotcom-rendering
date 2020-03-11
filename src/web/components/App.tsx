@@ -23,14 +23,7 @@ import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
 type Props = { CAPI: CAPIType; NAV: NavType };
 
-export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
-    ReactDOM.render(
-        <App CAPI={CAPI} NAV={NAV} />,
-        document.getElementById('react-root'),
-    );
-};
-
-const App = ({ CAPI, NAV }: Props) => {
+export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
