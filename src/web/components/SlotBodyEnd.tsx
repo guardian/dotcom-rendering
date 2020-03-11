@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
-import { getBodyEnd, getViewLog } from '@guardian/slot-machine-client';
+import {
+    getBodyEnd,
+    getViewLog,
+    getWeeklyArticleHistory,
+} from '@guardian/slot-machine-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
@@ -76,6 +80,7 @@ const buildPayload = (props: Props) => {
             ),
             lastOneOffContributionDate: getLastOneOffContributionDate(),
             epicViewLog: getViewLog(),
+            weeklyArticleHistory: getWeeklyArticleHistory(),
             mvtId: Number(getCookie('GU_mvt_id')),
         },
     };
