@@ -1,5 +1,5 @@
 import React from 'react';
-import { sidePadding, headlineFont, basePx } from 'styles';
+import { sidePadding, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { Series } from '../../capi';
@@ -12,11 +12,8 @@ const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css
     ${sidePadding}
     a {
         font-weight: 700;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
         color: ${neutral[100]};
         text-decoration: none;
-        ${headlineFont}
 
         ${from.wide} {
             padding: ${basePx(0, 1)};

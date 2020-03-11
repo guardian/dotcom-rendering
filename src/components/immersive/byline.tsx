@@ -26,7 +26,7 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
         }
 
         time {
-            font-size: 1.4rem;
+            ${textSans.small()};
             color: ${neutral[46]};
         }
     }

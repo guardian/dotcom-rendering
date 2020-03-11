@@ -15,6 +15,7 @@ const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
     li {
         margin: ${basePx(1, 1, .5, 0)};
         display: inline-block;
+        padding: ${basePx(.5, 0)};
 
         a {
             text-decoration: none;
