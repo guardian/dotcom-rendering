@@ -3,13 +3,13 @@ import { textSans, basePx } from 'styles';
 import { Keyline } from '../shared/keyline';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
-import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillar';
 import { CommentCount } from 'components/shared/commentCount';
 import { Liveblog } from 'item';
 import { renderText } from 'renderer';
+import Dateline from 'components/dateline';
 
 const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
@@ -77,10 +77,6 @@ const LiveblogByline = ({ item, imageSalt}: LiveblogBylineProps): JSX.Element =>
         <address>{ renderText(html, item.pillar) }</address>
     ).withDefault(null);
 
-    const date = item.publishDate.fmap<ReactNode>(date =>
-        <time>{ formatDate(new Date(date)) }</time>
-    ).withDefault(null)
-
     return (
         <div css={[LiveblogBylineStyles(pillarStyles)]}>
             <Keyline {...item} />
@@ -94,7 +90,7 @@ const LiveblogByline = ({ item, imageSalt}: LiveblogBylineProps): JSX.Element =>
                         />
                         <div className="author">
                             { byline }
-                            { date }
+                            <Dateline date={item.publishDate} />
                             <div className="follow">Get alerts on this story</div>
                         </div>
                     </div>

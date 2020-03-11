@@ -1,0 +1,26 @@
+// ----- Imports ----- //
+
+import React, { FC } from 'react';
+import { date, withKnobs } from '@storybook/addon-knobs';
+
+import { Some } from 'types/option';
+import Dateline from './dateline';
+
+
+// ----- Stories ----- //
+
+const Default: FC = () =>
+    <Dateline date={new Some(new Date(date('Publish Date', new Date())))} />
+
+
+// ----- Exports ----- //
+
+export default {
+    component: Dateline,
+    title: 'Dateline',
+    decorators: [ withKnobs ],
+}
+
+export {
+    Default,
+}

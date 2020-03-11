@@ -1,4 +1,10 @@
-import dayjs from 'dayjs';
+// ----- Setup ----- //
+
+const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+
+// ----- Functions ----- //
 
 function isToday(date: Date): boolean {
     const today = new Date();
@@ -27,7 +33,7 @@ function isValidDate(date: Date): boolean {
     return !isNaN(date.getTime());
 }
 
-export function makeRelativeDate(date: Date): string | null {
+function makeRelativeDate(date: Date): string | null {
     const then: Date = new Date(date);
     const now: Date = new Date();
 
@@ -64,6 +70,25 @@ export function makeRelativeDate(date: Date): string | null {
     }
 }
 
-export function formatDate(date: Date): string {
-    return dayjs(date).format('HH:mm dddd, D MMMM YYYY');
+const day = (date: Date): string =>
+    days[date.getUTCDay()];
+
+const month = (date: Date): string =>
+    months[date.getUTCMonth()];
+
+const padZero = (n: number): string =>
+    n < 10 ? `0${n}` : n.toString();
+
+const time = (date: Date): string =>
+    `${padZero(date.getUTCHours())}.${padZero(date.getUTCMinutes())}`;
+
+const format = (date: Date): string =>
+    `${day(date)} ${date.getUTCDate()} ${month(date)} ${date.getUTCFullYear()} ${time(date)} UTC`;
+
+
+// ----- Exports ----- //
+
+export {
+    makeRelativeDate,
+    format as formatDate,
 }
