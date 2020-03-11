@@ -72,36 +72,3 @@ export const useApi = <T,>(
 
     return request;
 };
-
-// Warning: if your function is constructed dynamically in your component, you
-// should use https://reactjs.org/docs/hooks-reference.html#usecallback to wrap
-// it before calling this helper to avoid DoS'ing your API!
-export const useApiFn = <T,>(fn: () => Promise<Response>): ApiResponse<T> => {
-    const [request, setRequest] = useState<{
-        loading: boolean;
-        data?: T;
-        error?: Error;
-    }>({
-        loading: true,
-    });
-
-    useEffect(() => {
-        fn()
-            .then(checkForErrors)
-            .then(resp => resp.json())
-            .then(data => {
-                setRequest({
-                    data,
-                    loading: false,
-                });
-            })
-            .catch(error => {
-                setRequest({
-                    error,
-                    loading: false,
-                });
-            });
-    }, [fn]);
-
-    return request;
-};

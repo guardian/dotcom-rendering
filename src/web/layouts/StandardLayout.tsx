@@ -2,7 +2,12 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { neutral, border, background } from '@guardian/src-foundations/palette';
+import {
+    neutral,
+    border,
+    background,
+    brandAltBackground,
+} from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -30,6 +35,7 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
+import { Flex } from '@root/src/web/components/Flex';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -166,7 +172,7 @@ const stretchLines = css`
 const starWrapper = css`
     margin-bottom: 18px;
     margin-top: 6px;
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
     display: inline-block;
 
     ${until.phablet} {
@@ -229,6 +235,8 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
         tag => tag.type === 'Series' || tag.type === 'Blog',
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
+
+    const showComments = false; // CAPI.isCommentable;
 
     return (
         <>
@@ -426,6 +434,17 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     )}
 
                     {showOnwardsLower && <Section islandId="onwards-lower" />}
+
+                    {showComments && (
+                        <Section>
+                            <Flex>
+                                <div id="comments-root" />
+                                <RightColumn>
+                                    {/* TODO: Comments ad slot goes here */}
+                                </RightColumn>
+                            </Flex>
+                        </Section>
+                    )}
 
                     <Section islandId="most-viewed-footer" />
                 </>

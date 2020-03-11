@@ -16,7 +16,7 @@
         "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -s ./src/static -p 6006",
         "storybook:build": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
         "chromatic": "chromatic --build-script-name=storybook:build --exit-zero-on-changes",
-        "makeBuild": "NODE_ENV=production webpack --config scripts/webpack/frontend"
+        "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config scripts/webpack/frontend"
     },
     "bundlesize": [
         {
@@ -27,7 +27,7 @@
     "dependencies": {
         "@emotion/core": "^10.0.5",
         "@guardian/consent-management-platform": "^2.0.10",
-        "@guardian/slot-machine-client": "^0.1.60",
+        "@guardian/slot-machine-client": "^0.2.1",
         "@guardian/src-foundations": "^0.14.1",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",

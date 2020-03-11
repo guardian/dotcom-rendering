@@ -19,11 +19,12 @@ const friendlyErrorsWebpackPlugin = () =>
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
+const GITHUB = process.env.CI_ENV === 'github';
 
 // We need to distinguish files compiled by @babel/preset-env with the prefix "legacy"
 const generateName = isLegacyJS => {
     const legacyString = isLegacyJS ? '.legacy' : '';
-    const chunkhashString = PROD ? '.[chunkhash]' : '';
+    const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
     return `[name]${legacyString}${chunkhashString}.js`;
 };
 

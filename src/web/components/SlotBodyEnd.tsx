@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
 import { getBodyEnd, getViewLog, logView } from '@guardian/slot-machine-client';
 import {
@@ -6,9 +6,23 @@ import {
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
-import { useApiFn } from '../lib/api';
+import { getCookie } from '../browser/cookie';
+import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
-const sendOphanInsertEvent = (): void => {
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
+
+const checkForErrors = (response: any) => {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+};
+
+type OphanAction = 'INSERT' | 'VIEW';
+
+const epicTestName = 'DotcomRenderingEpic';
+
+const sendOphanEvent = (action: OphanAction): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
@@ -18,9 +32,9 @@ const sendOphanInsertEvent = (): void => {
         },
         abTest: {
             name: 'remote_epic_test',
-            variant: 'api',
+            variant: 'remote',
         },
-        action: 'INSERT',
+        action,
     };
 
     window.guardian.ophan.record({ componentEvent });
@@ -31,8 +45,8 @@ const wrapperMargins = css`
 `;
 
 type Props = {
-    isSignedIn: boolean;
-    countryCode: string;
+    isSignedIn?: boolean;
+    countryCode?: string;
     contentType: string;
     sectionName?: string;
     shouldHideReaderRevenue: boolean;
@@ -41,22 +55,9 @@ type Props = {
     tags: TagType[];
 };
 
-export const SlotBodyEnd = ({
-    isSignedIn,
-    countryCode,
-    contentType,
-    sectionName,
-    shouldHideReaderRevenue,
-    isMinuteArticle,
-    isPaidContent,
-    tags,
-}: Props) => {
-    // Hardcoding the test ID until we have A/B testing (variants) capability in DCR.
-    const epicTestName = 'DotcomRenderingEpic';
-    // Load the view log from localStorage so it can be added to the Contributions payload
-    const epicViewLog = getViewLog();
-
-    const contributionsPayload = {
+// TODO specify return type (need to update client to provide this first)
+const buildPayload = (props: Props) => {
+    return {
         tracking: {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
@@ -67,51 +68,92 @@ export const SlotBodyEnd = ({
             referrerUrl: window.location.origin + window.location.pathname,
         },
         localisation: {
-            countryCode,
+            countryCode: props.countryCode,
         },
         targeting: {
-            contentType,
-            sectionName: sectionName || '', // TODO update client to reflect that this is optional
-            shouldHideReaderRevenue,
-            isMinuteArticle,
-            isPaidContent,
-            tags,
+            contentType: props.contentType,
+            sectionName: props.sectionName || '', // TODO update client to reflect that this is optional
+            shouldHideReaderRevenue: props.shouldHideReaderRevenue,
+            isMinuteArticle: props.isMinuteArticle,
+            isPaidContent: props.isPaidContent,
+            tags: props.tags,
             showSupportMessaging: shouldShowSupportMessaging(),
-            isRecurringContributor: isRecurringContributor(isSignedIn),
+            isRecurringContributor: isRecurringContributor(
+                props.isSignedIn || false,
+            ),
             lastOneOffContributionDate: getLastOneOffContributionDate(),
-            epicViewLog,
+            epicViewLog: getViewLog(),
+            mvtId: Number(getCookie('GU_mvt_id')),
         },
     };
+};
 
-    const getSlot: () => Promise<Response> = useCallback(
-        () => getBodyEnd(contributionsPayload),
-        [], // empty as we only want to call the API once and payload will always fail a reference equality check anyway
-    );
+const MemoisedInner = (props: Props) => {
+    const [data, setData] = useState<{
+        slot?: {
+            html: string;
+            css: string;
+        };
+    }>();
 
-    const { data: bodyResponse, error } = useApiFn<{
-        data: { html: string; css: string };
-    }>(getSlot);
+    const [hasBeenSeen, setNode] = useHasBeenSeen({
+        threshold: 0.5,
+    }) as HasBeenSeen;
 
-    if (error) {
-        window.guardian.modules.sentry.reportError(error, 'slot-body-end');
-    }
+    useEffect(() => {
+        const contributionsPayload = buildPayload(props);
+        getBodyEnd(contributionsPayload)
+            .then(checkForErrors)
+            .then(response => response.json())
+            .then(json =>
+                setData({
+                    slot: { html: json.data.html, css: json.data.css },
+                }),
+            )
+            .then(() => sendOphanEvent('INSERT'))
+            .catch(error =>
+                window.guardian.modules.sentry.reportError(
+                    error,
+                    'slot-body-end',
+                ),
+            );
+    }, []); // only ever call once (we'd rather fail then call the API multiple times)
 
-    if (bodyResponse && bodyResponse.data) {
-        // Add a new entry to the view log when we know an Epic is being rendered
-        logView(epicTestName);
-        sendOphanInsertEvent();
+    useEffect(() => {
+        // This won't be true until we've successfully fetched the data and
+        // rendered the epic (because of how we're wiring up the ref below). And
+        // because of the way the hook behaves, it'll only ever go from false ->
+        // true once.
+        if (hasBeenSeen) {
+            // Add a new entry to the view log when we know an Epic is viewed
+            logView(epicTestName);
+            sendOphanEvent('VIEW');
+        }
+    }, [hasBeenSeen]);
 
-        const { html: epicHtml, css: epicCss } = bodyResponse.data;
+    if (data && data.slot) {
         return (
-            <div className={wrapperMargins}>
-                {epicCss && <style>{epicCss}</style>}
+            <div ref={setNode} className={wrapperMargins}>
+                {data.slot.css && <style>{data.slot.css}</style>}
                 <div
                     // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{ __html: epicHtml }}
+                    dangerouslySetInnerHTML={{ __html: data.slot.html }}
                 />
             </div>
         );
     }
 
     return null;
+};
+
+export const SlotBodyEnd = (props: Props) => {
+    const { isSignedIn, countryCode } = props;
+    if (isSignedIn === undefined && countryCode === undefined) {
+        return null;
+    }
+
+    // Memoised as we only ever want to call the Slots API once, for simplicity
+    // and performance reasons.
+
+    return <MemoisedInner {...props} />;
 };

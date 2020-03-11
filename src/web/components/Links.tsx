@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import SearchIcon from '@frontend/static/icons/search.svg';
 
 import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -52,7 +52,7 @@ const linkStyles = css`
 
     :hover,
     :focus {
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
     }
 
     svg {

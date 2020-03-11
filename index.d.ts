@@ -2,11 +2,6 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
-interface ArticleProps {
-    CAPI: CAPIType;
-    NAV: NavType;
-}
-
 // Pillars are used for styling
 // RealPillars have Pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
@@ -441,6 +436,7 @@ interface ConfigType extends CommercialConfigType {
     keywordIds: string;
     showRelatedContent: boolean;
     shouldHideReaderRevenue?: boolean;
+    discussionApiUrl: string;
 }
 
 interface GADataType {

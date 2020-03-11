@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
+import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
@@ -18,9 +19,9 @@ const yellowBoxStyles = css`
         lineHeight: 'loose',
     })}
     font-style: italic;
-    background-color: ${palette.brandYellow.main};
-    box-shadow: 4px 0 0 ${palette.brandYellow.main},
-        -6px 0 0 ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
+    box-shadow: 4px 0 0 ${brandAltBackground.primary},
+        -6px 0 0 ${brandAltBackground.primary};
     display: inline-block;
     box-decoration-break: clone;
 

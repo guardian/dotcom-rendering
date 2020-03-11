@@ -2670,6 +2670,7 @@ export const Review: CAPIType = {
     isImmersive: false,
     config: {
         ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+        discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
         sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
         sentryHost: 'app.getsentry.com/35463',
         dcrSentryDsn:

@@ -2,7 +2,11 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import {
+    brandText,
+    brandAlt,
+    brandBackground,
+} from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -21,7 +25,7 @@ const footerBorders = `1px solid ${palette.brand.pastel}`;
 
 // CSS
 const footer = css`
-    background-color: ${palette.brand.main};
+    background-color: ${brandBackground.primary};
     color: ${brandText.primary};
     padding-bottom: 6px;
     ${textSans.medium()};
@@ -72,7 +76,7 @@ const footerLink = css`
 
     :hover {
         text-decoration: underline;
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
     }
 `;
 
@@ -158,7 +162,7 @@ const footerItemContainers = css`
 `;
 
 const bttPosition = css`
-    background-color: ${palette.brand.main};
+    background-color: ${brandBackground.primary};
     padding: 0 5px;
     position: absolute;
     bottom: -21px;

@@ -14,12 +14,13 @@ import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { Header } from '@frontend/web/components/Header';
+import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
 import { useVisibility } from '@frontend/web/lib/useVisibility';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
-import { getCommentCount } from '@frontend/web/lib/getCommentCount';
+import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
 type Props = { CAPI: CAPIType; NAV: NavType };
 
@@ -37,7 +38,8 @@ type RootType =
     | 'onwards-upper'
     | 'onwards-lower'
     | 'rich-link'
-    | 'header-root';
+    | 'header-root'
+    | 'comments-root';
 
 export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
     ReactDOM.render(
@@ -50,6 +52,9 @@ const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
+    const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
+        true,
+    );
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -62,15 +67,27 @@ const App = ({ CAPI, NAV }: Props) => {
     }, []);
 
     useEffect(() => {
-        const callFetch = async () =>
-            setCommentCount(
-                await getCommentCount(
-                    CAPI.config.ajaxUrl,
-                    CAPI.config.shortUrlId,
-                ),
+        const callFetch = async () => {
+            const response = await getDiscussion(
+                CAPI.config.discussionApiUrl,
+                CAPI.config.shortUrlId,
             );
-        callFetch();
-    }, [CAPI.config.ajaxUrl, CAPI.config.shortUrlId]);
+            setCommentCount(
+                (response && response.discussion.commentCount) || 0,
+            );
+            setIsClosedForComments(
+                response && response.discussion.isClosedForComments,
+            );
+        };
+
+        if (CAPI.isCommentable) {
+            callFetch();
+        }
+    }, [
+        CAPI.config.discussionApiUrl,
+        CAPI.config.shortUrlId,
+        CAPI.isCommentable,
+    ]);
 
     const richLinks: {
         element: RichLinkBlockElement;
@@ -139,7 +156,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 ))}
 
             <Portal root="cmp">
-                <CMP />
+                <CMP cmpUi={CAPI.config.switches.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
@@ -152,21 +169,19 @@ const App = ({ CAPI, NAV }: Props) => {
             <Portal root="most-viewed-right">
                 <MostViewedRightWrapper pillar={CAPI.pillar} />
             </Portal>
-            {/* Ensure component only renders after both variables have been assigned true or false */}
-            {isSignedIn !== undefined && countryCode !== undefined && (
-                <Portal root="slot-body-end">
-                    <SlotBodyEnd
-                        isSignedIn={isSignedIn}
-                        countryCode={countryCode}
-                        contentType={CAPI.contentType}
-                        sectionName={CAPI.sectionName}
-                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                        isPaidContent={CAPI.pageType.isPaidContent}
-                        tags={CAPI.tags}
-                    />
-                </Portal>
-            )}
+            <Portal root="slot-body-end">
+                <SlotBodyEnd
+                    isSignedIn={isSignedIn}
+                    countryCode={countryCode}
+                    contentType={CAPI.contentType}
+                    sectionName={CAPI.sectionName}
+                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                    isPaidContent={CAPI.pageType.isPaidContent}
+                    tags={CAPI.tags}
+                />
+            </Portal>
+
             <Portal root="onwards-upper">
                 <Lazy margin={-200}>
                     <OnwardsUpper
@@ -191,6 +206,12 @@ const App = ({ CAPI, NAV }: Props) => {
                         tags={CAPI.tags}
                     />
                 </Lazy>
+            </Portal>
+            <Portal root="comments-root">
+                <CommentsLayout
+                    commentCount={commentCount}
+                    isClosedForComments={isClosedForComments}
+                />
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter

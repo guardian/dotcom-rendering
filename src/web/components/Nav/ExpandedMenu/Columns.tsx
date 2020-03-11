@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -90,7 +90,7 @@ const brandExtensionLink = css`
     }
     :hover,
     :focus {
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
     }
     > * {
         pointer-events: none;
