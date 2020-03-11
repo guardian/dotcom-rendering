@@ -54,7 +54,7 @@ export const getDiscussion = async (
     ajaxUrl: string,
     shortUrl: string,
 ): Promise<DiscussionResponse> => {
-    const url = joinUrl([ajaxUrl, `discussion/${shortUrl}`]);
+    const url = joinUrl([ajaxUrl, 'discussion', shortUrl]);
     return fetch(url)
         .then(response => {
             if (!response.ok) {

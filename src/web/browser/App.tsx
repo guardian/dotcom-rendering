@@ -68,7 +68,7 @@ const App = ({ CAPI, NAV }: Props) => {
     useEffect(() => {
         const callFetch = async () => {
             const response = await getDiscussion(
-                CAPI.config.ajaxUrl,
+                CAPI.config.discussionApiUrl,
                 CAPI.config.shortUrlId,
             );
             setCommentCount(
@@ -78,8 +78,15 @@ const App = ({ CAPI, NAV }: Props) => {
                 response && response.discussion.isClosedForComments,
             );
         };
-        callFetch();
-    }, [CAPI.config.ajaxUrl, CAPI.config.shortUrlId]);
+
+        if (CAPI.isCommentable) {
+            callFetch();
+        }
+    }, [
+        CAPI.config.discussionApiUrl,
+        CAPI.config.shortUrlId,
+        CAPI.isCommentable,
+    ]);
 
     const richLinks: {
         element: RichLinkBlockElement;
@@ -148,7 +155,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 ))}
 
             <Portal root="cmp">
-                <CMP />
+                <CMP cmpUi={CAPI.config.switches.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
@@ -161,21 +168,19 @@ const App = ({ CAPI, NAV }: Props) => {
             <Portal root="most-viewed-right">
                 <MostViewedRightWrapper pillar={CAPI.pillar} />
             </Portal>
-            {/* Ensure component only renders after both variables have been assigned true or false */}
-            {isSignedIn !== undefined && countryCode !== undefined && (
-                <Portal root="slot-body-end">
-                    <SlotBodyEnd
-                        isSignedIn={isSignedIn}
-                        countryCode={countryCode}
-                        contentType={CAPI.contentType}
-                        sectionName={CAPI.sectionName}
-                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                        isPaidContent={CAPI.pageType.isPaidContent}
-                        tags={CAPI.tags}
-                    />
-                </Portal>
-            )}
+            <Portal root="slot-body-end">
+                <SlotBodyEnd
+                    isSignedIn={isSignedIn}
+                    countryCode={countryCode}
+                    contentType={CAPI.contentType}
+                    sectionName={CAPI.sectionName}
+                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                    isPaidContent={CAPI.pageType.isPaidContent}
+                    tags={CAPI.tags}
+                />
+            </Portal>
+
             <Portal root="onwards-upper">
                 <OnwardsUpper
                     ajaxUrl={CAPI.config.ajaxUrl}
