@@ -23,23 +23,6 @@ import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
 type Props = { CAPI: CAPIType; NAV: NavType };
 
-type RootType =
-    | 'reader-revenue-links-header'
-    | 'nav-root'
-    | 'sub-nav-root'
-    | 'edition-root'
-    | 'most-viewed-right'
-    | 'share-comment-counts'
-    | 'most-viewed-footer'
-    | 'reader-revenue-links-footer'
-    | 'slot-body-end'
-    | 'cmp'
-    | 'onwards-upper'
-    | 'onwards-lower'
-    | 'rich-link'
-    | 'header-root'
-    | 'comments-root';
-
 export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
     ReactDOM.render(
         <App CAPI={CAPI} NAV={NAV} />,

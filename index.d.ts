@@ -499,6 +499,23 @@ interface Props {
 
 type JSXElements = JSX.Element | JSX.Element[];
 
+type RootType =
+    | 'reader-revenue-links-header'
+    | 'nav-root'
+    | 'sub-nav-root'
+    | 'edition-root'
+    | 'most-viewed-right'
+    | 'share-comment-counts'
+    | 'most-viewed-footer'
+    | 'reader-revenue-links-footer'
+    | 'slot-body-end'
+    | 'cmp'
+    | 'onwards-upper'
+    | 'onwards-lower'
+    | 'rich-link'
+    | 'header-root'
+    | 'comments-root';
+
 interface TrailType {
     designType: DesignType;
     pillar: Pillar;
