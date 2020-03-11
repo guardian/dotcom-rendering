@@ -68,11 +68,20 @@ const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
 `;
 
 const media = css`
-    color: ${neutral[100]};
+    color: ${neutral[86]};
+    p, ul, li {
+        line-height: 20px;
+    }
     
-    ${darkMode`
+    li:before {
+        height: 0.7rem;
+        width: 0.7rem;
+    }
+   
+    a {
         color: ${neutral[86]};
-    `}
+        box-shadow: inset 0 -0.1rem ${neutral[46]};
+    }
 `;
 
 const getStyles = (item: Item): SerializedStyles => {
