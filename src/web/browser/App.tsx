@@ -74,7 +74,7 @@ const App = ({ CAPI, NAV }: Props) => {
     useEffect(() => {
         const callFetch = async () => {
             const response = await getDiscussion(
-                CAPI.config.ajaxUrl,
+                CAPI.config.discussionApiUrl,
                 CAPI.config.shortUrlId,
             );
             setCommentCount(
@@ -84,8 +84,15 @@ const App = ({ CAPI, NAV }: Props) => {
                 response && response.discussion.isClosedForComments,
             );
         };
-        callFetch();
-    }, [CAPI.config.ajaxUrl, CAPI.config.shortUrlId]);
+
+        if (CAPI.isCommentable) {
+            callFetch();
+        }
+    }, [
+        CAPI.config.discussionApiUrl,
+        CAPI.config.shortUrlId,
+        CAPI.isCommentable,
+    ]);
 
     const richLinks: {
         element: RichLinkBlockElement;
