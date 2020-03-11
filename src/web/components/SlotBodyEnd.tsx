@@ -91,7 +91,7 @@ const MemoisedInner = (props: Props) => {
 
     useEffect(() => {
         const contributionsPayload = buildPayload(props);
-        getBodyEnd(contributionsPayload)
+        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>

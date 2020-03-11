@@ -15,6 +15,7 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { Header } from '@frontend/web/components/Header';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { incrementWeeklyArticleCount } from '@guardian/slot-machine-client';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
@@ -80,6 +81,14 @@ const App = ({ CAPI, NAV }: Props) => {
         };
         callFetch();
     }, [CAPI.config.ajaxUrl, CAPI.config.shortUrlId]);
+
+    // Log an article view using the Slot Machine client lib
+    // This function must be called once per article render.
+    // We should monitor this function call to ensure it only happens within an
+    // article view.
+    useEffect(() => {
+        incrementWeeklyArticleCount();
+    }, []);
 
     const richLinks: {
         element: RichLinkBlockElement;
