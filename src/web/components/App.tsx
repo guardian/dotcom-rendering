@@ -15,6 +15,8 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { Header } from '@frontend/web/components/Header';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { Portal } from '@frontend/web/components/Portal';
+import { Hydrate } from '@frontend/web/components/Hydrate';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 
@@ -210,47 +212,5 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
         </>
-    );
-};
-
-const Hydrate = ({
-    root,
-    children,
-}: {
-    root: IslandType;
-    children: JSX.Element;
-}) => {
-    const element = document.getElementById(root);
-    if (!element) return null;
-    window.performance.mark(`${root}-hydrate-start`);
-    ReactDOM.hydrate(children, element);
-    window.performance.mark(`${root}-hydrate-end`);
-    window.performance.measure(
-        `${root}-hydrate`,
-        `${root}-hydrate-start`,
-        `${root}-hydrate-end`,
-    );
-    return null;
-};
-
-const Portal = ({
-    root,
-    children,
-    richLinkIndex,
-}: {
-    root: IslandType;
-    children: JSX.Element;
-    richLinkIndex?: number;
-}) => {
-    const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
-    const element = document.getElementById(rootId);
-    if (!element) return null;
-    window.performance.mark(`${rootId}-portal-start`);
-    return ReactDOM.createPortal(children, element);
-    window.performance.mark(`${rootId}-portal-end`);
-    window.performance.measure(
-        `${rootId}-portal`,
-        `${rootId}-portal-start`,
-        `${rootId}-portal-end`,
     );
 };
