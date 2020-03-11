@@ -304,7 +304,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                             islandId="sub-nav-root"
                         >
                             <SubNav
-                                subnav={NAV.subNavSections}
+                                subNavSections={NAV.subNavSections}
                                 currentNavLink={NAV.currentNavLink}
                                 pillar={CAPI.pillar}
                             />
@@ -483,7 +483,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             {NAV.subNavSections && (
                 <Section padded={false} islandId="sub-nav-root">
                     <SubNav
-                        subnav={NAV.subNavSections}
+                        subNavSections={NAV.subNavSections}
                         pillar={CAPI.pillar}
                         currentNavLink={NAV.currentNavLink}
                     />
