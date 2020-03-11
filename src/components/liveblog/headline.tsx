@@ -1,5 +1,5 @@
 import React from 'react';
-import { basePx, headlineFont, headlineFontStyles } from 'styles';
+import { basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import LeftColumn from 'components/shared/leftColumn';

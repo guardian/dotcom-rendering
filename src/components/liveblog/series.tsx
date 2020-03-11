@@ -1,12 +1,11 @@
 import React from 'react';
-import { sidePadding, headlineFont, basePx } from 'styles';
+import { sidePadding, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { Series } from '../../capi';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { from } from '@guardian/src-foundations/mq';
-import { headline, body } from '@guardian/src-foundations/typography';
 
 const LiveblogSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     background: ${kicker};
