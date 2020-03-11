@@ -76,8 +76,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => ({
         showRelatedContent: CAPI.config.showRelatedContent,
         keywordIds: CAPI.config.keywordIds,
         ampIframeUrl: CAPI.config.ampIframeUrl,
-        // commercialBundleUrl is only used in SSR
-        // commercialBundleUrl: CAPI.config.commercialBundleUrl,
 
         // switches
         cmpUi: CAPI.config.switches.cmpUi,
@@ -116,11 +114,9 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => ({
     },
 });
 export interface WindowGuardian {
-    // At least until October 2019, do not modify this interface without checking with Pascal first.
-
-    // The 'app' attribute contains all the data that we decided to pass
-    // from frontend and the dotcom-rendering server side model
-    // to the client side.
+    // The app contains only data that we require for app hydration
+    // NOTE: there is a divergence between DCRBrowserDocumentData and DCRServerDocumentData
+    // for perfomance reasons
     app: {
         data: DCRBrowserDocumentData;
         cssIDs: string[];
