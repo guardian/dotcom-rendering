@@ -15,7 +15,7 @@ import { MatchReport } from '@root/fixtures/articles/MatchReport';
 
 import { NAV } from '@root/fixtures/NAV';
 
-import { hydrateApp } from '@root/src/web/browser/App';
+import { hydrateApp } from '@root/src/web/components/App';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';

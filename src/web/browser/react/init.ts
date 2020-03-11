@@ -2,7 +2,7 @@ import { hydrate as hydrateCSS } from 'emotion';
 
 import { startup } from '@root/src/web/browser/startup';
 
-import { hydrateApp } from '@root/src/web/browser/App';
+import { hydrateApp } from '@root/src/web/components/App';
 
 const init = (): Promise<void> => {
     const {
