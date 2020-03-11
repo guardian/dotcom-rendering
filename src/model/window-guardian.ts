@@ -90,6 +90,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => ({
         section: CAPI.config.section,
         sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
         adUnit: CAPI.config.adUnit,
+        discussionApiUrl: CAPI.config.discussionApiUrl,
     },
     blocks: CAPI.blocks,
     editionId: CAPI.editionId,
@@ -106,6 +107,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => ({
     isAdFreeUser: CAPI.isAdFreeUser,
     pageId: CAPI.pageId,
     tags: CAPI.tags,
+    isCommentable: CAPI.isCommentable,
     nav: {
         readerRevenueLinks: {
             footer: CAPI.nav.readerRevenueLinks.footer,

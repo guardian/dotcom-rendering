@@ -269,6 +269,7 @@ type CAPIBrowserType = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         sharedAdTargeting: { [key: string]: any };
         adUnit: string;
+        discussionApiUrl: string;
     };
     blocks: Block[];
     editionId: Edition;
@@ -285,6 +286,7 @@ type CAPIBrowserType = {
     isAdFreeUser: boolean;
     pageId: string;
     tags: TagType[];
+    isCommentable: boolean;
     nav: {
         readerRevenueLinks: {
             footer: ReaderRevenueCategories;
