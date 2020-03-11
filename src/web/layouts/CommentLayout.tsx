@@ -201,7 +201,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-    const showComments = false; // CAPI.isCommentable;
+    const showComments = CAPI.isCommentable;
 
     const contributorTag = CAPI.tags.find(tag => tag.type === 'Contributor');
     const avatarUrl = contributorTag && contributorTag.bylineImageUrl;

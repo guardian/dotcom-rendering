@@ -204,6 +204,7 @@ const App = ({ CAPI, NAV }: Props) => {
             </Portal>
             <Portal root="comments-root">
                 <CommentsLayout
+                    shortUrl={CAPI.config.shortUrlId}
                     commentCount={commentCount}
                     isClosedForComments={isClosedForComments}
                 />

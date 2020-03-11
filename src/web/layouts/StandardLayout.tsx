@@ -236,7 +236,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
     );
     const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-    const showComments = false; // CAPI.isCommentable;
+    const showComments = CAPI.isCommentable;
 
     return (
         <>

@@ -16,7 +16,11 @@ export default {
 export const Default = () => (
     <Section>
         <Flex>
-            <CommentsLayout commentCount={345} isClosedForComments={false} />
+            <CommentsLayout
+                shortUrl="/p/39f5z/"
+                commentCount={345}
+                isClosedForComments={false}
+            />
             <RightColumn>{/* TODO: Comments ad slot goes here */}</RightColumn>
         </Flex>
     </Section>
