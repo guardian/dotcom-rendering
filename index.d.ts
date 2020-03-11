@@ -499,7 +499,7 @@ interface Props {
 
 type JSXElements = JSX.Element | JSX.Element[];
 
-type RootType =
+type IslandType =
     | 'reader-revenue-links-header'
     | 'nav-root'
     | 'sub-nav-root'

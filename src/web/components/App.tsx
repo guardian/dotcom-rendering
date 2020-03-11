@@ -73,7 +73,7 @@ const App = ({ CAPI, NAV }: Props) => {
 
     const richLinks: {
         element: RichLinkBlockElement;
-        root: RootType;
+        root: IslandType;
         richLinkIndex: number;
     }[] = [];
     CAPI.blocks[0].elements.map((element, i) => {
@@ -224,7 +224,7 @@ const Hydrate = ({
     root,
     children,
 }: {
-    root: RootType;
+    root: IslandType;
     children: JSX.Element;
 }) => {
     const element = document.getElementById(root);
@@ -245,7 +245,7 @@ const Portal = ({
     children,
     richLinkIndex,
 }: {
-    root: RootType;
+    root: IslandType;
     children: JSX.Element;
     richLinkIndex?: number;
 }) => {
