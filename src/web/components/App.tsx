@@ -101,13 +101,17 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Hydrate>
-            <Hydrate root="sub-nav-root">
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    currentNavLink={NAV.currentNavLink}
-                    pillar={CAPI.pillar}
-                />
-            </Hydrate>
+            {NAV.subNavSections && (
+                <Hydrate root="sub-nav-root">
+                    <>
+                        <SubNav
+                            subNavSections={NAV.subNavSections}
+                            currentNavLink={NAV.currentNavLink}
+                            pillar={CAPI.pillar}
+                        />
+                    </>
+                </Hydrate>
+            )}
             <Hydrate root="edition-root">
                 <EditionDropdown
                     edition={CAPI.editionId}
