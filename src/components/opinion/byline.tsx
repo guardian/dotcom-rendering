@@ -5,11 +5,12 @@ import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 
 import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
-import { formatDate } from 'date';
 import { Contributor } from 'capi';
 import Follow from 'components/shared/follow';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { Option } from 'types/option';
+import Dateline from 'components/dateline';
+
 
 // ----- Styles ----- //
 
@@ -67,9 +68,7 @@ const Byline = ({ pillar, publicationDate, contributors }: Props): JSX.Element =
         <div css={[Styles(pillarStyles), DarkStyles(pillarStyles)]}>
             <div css={sidePadding}>
                 <div className="author">
-                    { publicationDate
-                        .fmap<JSX.Element | null>(date => <time>{formatDate(date)}</time>)
-                        .withDefault(null) }
+                    <Dateline date={publicationDate} />
                     <Follow contributors={contributors} />
                 </div>
             </div>
