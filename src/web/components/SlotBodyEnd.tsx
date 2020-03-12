@@ -27,12 +27,12 @@ const sendOphanEvent = (action: OphanAction): void => {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
-            id: 'gdnwb_copts_memco_remote_epic_test_api',
+            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_api',
+            id: 'gdnwb_copts_memco_dotcom_rendering_epic_api',
         },
         abTest: {
-            name: 'remote_epic_test',
-            variant: 'remote',
+            name: 'dotcom_rendering_epic',
+            variant: 'api',
         },
         action,
     };
@@ -62,8 +62,8 @@ const buildPayload = (props: Props) => {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
-            campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
-            abTestName: 'remote_epic_test',
+            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_api',
+            abTestName: 'dotcom_rendering_epic',
             abTestVariant: 'api',
             referrerUrl: window.location.origin + window.location.pathname,
         },
@@ -102,7 +102,7 @@ const MemoisedInner = (props: Props) => {
 
     useEffect(() => {
         const contributionsPayload = buildPayload(props);
-        getBodyEnd(contributionsPayload)
+        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
