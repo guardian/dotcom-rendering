@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Article } from '@root/fixtures/articles/Article';
 import { AdvertisementFeature } from '@root/fixtures/articles/AdvertisementFeature';
@@ -20,6 +20,8 @@ import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';
 
+mockRESTCalls();
+
 /* tslint:disable */
 export default {
     title: 'Layouts/Standard',
@@ -28,11 +30,6 @@ export default {
     },
 };
 /* tslint:enable */
-
-// In order to render React elements of the Layout we need to use HydrateApp
-// HydrateApp requires a query selector therefore we need to wrap the function in a setTimeout
-// Storybook runs only what is exported in the const, so we need to add the code in each export const
-// setTimeout(() => HydrateApp({CAPI, NAV}));
 
 const convertToStandard = (CAPI: CAPIType) => {
     return {
@@ -45,98 +42,84 @@ const convertToStandard = (CAPI: CAPIType) => {
     };
 };
 
+// HydratedLayout is used here to simulated the hydration that happens after we init react on
+// the client. We need a separate component so that we can make use of useEffect to ensure
+// the hydrate step only runs once the dom has been rendered.
+const HydratedLayout = ({ CAPI }: { CAPI: CAPIType }) => {
+    useEffect(() => {
+        HydrateApp({ CAPI, NAV });
+    }, [CAPI]);
+    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+};
+
 export const ArticleStory = () => {
     const CAPI = convertToStandard(Article);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 ArticleStory.story = { name: 'Article' };
 
 export const ReviewStory = () => {
     const CAPI = convertToStandard(Review);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
 
 export const CommentStory = () => {
     const CAPI = convertToStandard(Comment);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
 
 export const AdvertisementFeatureStory = () => {
     const CAPI = convertToStandard(AdvertisementFeature);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
 
 export const AnalysisStory = () => {
     const CAPI = convertToStandard(Analysis);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 AnalysisStory.story = { name: 'Analysis' };
 
 export const FeatureStory = () => {
     const CAPI = convertToStandard(Feature);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 FeatureStory.story = { name: 'Feature' };
 
 export const GuardianViewStory = () => {
     const CAPI = convertToStandard(GuardianView);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 GuardianViewStory.story = { name: 'GuardianView' };
 
 export const ImmersiveStory = () => {
     const CAPI = convertToStandard(Immersive);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const InterviewStory = () => {
     const CAPI = convertToStandard(Interview);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 InterviewStory.story = { name: 'Interview' };
 
 export const QuizStory = () => {
     const CAPI = convertToStandard(Quiz);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 QuizStory.story = { name: 'Quiz' };
 
 export const RecipeStory = () => {
     const CAPI = convertToStandard(Recipe);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 RecipeStory.story = { name: 'Recipe' };
 
 export const MatchReportStory = () => {
     const CAPI = convertToStandard(MatchReport);
-    mockRESTCalls();
-    setTimeout(() => HydrateApp({ CAPI, NAV }));
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    return <HydratedLayout CAPI={CAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };

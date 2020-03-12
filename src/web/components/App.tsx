@@ -11,8 +11,8 @@ import { CMP } from '@frontend/web/components/CMP';
 import { OnwardsUpper } from '@frontend/web/components/Onwards/OnwardsUpper';
 import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
+import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
-import { Header } from '@frontend/web/components/Header';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -95,8 +95,8 @@ export const App = ({ CAPI, NAV }: Props) => {
         //
         // Note: Both require a 'root' element that needs to be server rendered.
         <>
-            <Hydrate root="header-root">
-                <Header isSignedIn={isSignedIn} edition={CAPI.editionId} />
+            <Hydrate root="links-root">
+                <Links isSignedIn={isSignedIn} />
             </Hydrate>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
