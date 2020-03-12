@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { basePx, textSans, icons, wideContentWidth } from 'styles';
+import { basePx, icons, wideContentWidth } from 'styles';
+import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -47,7 +48,7 @@ const HeaderImageCaptionStyles = css`
 		padding-right: ${basePx(6)};
 		z-index: 1;
 		color: ${neutral[100]};
-		${textSans}
+		${textSans.small()};
 	}
 
 	position: absolute;

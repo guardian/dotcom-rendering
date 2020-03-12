@@ -7,11 +7,12 @@ import { neutral } from '@guardian/src-foundations/palette';
 
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
-import { basePx, icons, headlineFont, darkModeCss } from 'styles';
+import { basePx, icons, headlineFont, darkModeCss, textPadding } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
+import { headline, body } from '@guardian/src-foundations/typography';
 
 
 // ----- Renderer ----- //
@@ -51,8 +52,7 @@ const listStyles: SerializedStyles = css`
 
 const listItemStyles: SerializedStyles = css`
     padding-left: 2rem;
-    line-height: 2.2rem;
-    padding-bottom: 0.375rem;
+    padding-bottom: .5rem;
 
     &::before {
         display: inline-block;
@@ -63,17 +63,19 @@ const listItemStyles: SerializedStyles = css`
         margin-right: 1rem;
         background-color: ${neutral[86]};
         margin-left: -2rem;
+        vertical-align: middle;
     }
 
     > p:first-of-type {
         display: inline;
+        padding: 0;
     }
 `
 
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
     display: inline-block;
-
+    ${textPadding}
     &::before {
         content: '';
         background-color: ${colour};
@@ -85,10 +87,10 @@ const bulletStyles = (colour: string): SerializedStyles => css`
 `;
 
 const HeadingTwoStyles = css`
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    margin: 1rem 0 4px 0;
+    font-size: 1.4rem;
     font-weight: 700;
+    margin: 1rem 0 4px 0;
+    ${textPadding}
 
     & + p {
         margin-top: 0;
@@ -209,12 +211,10 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 }
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
-    font-weight: 200;
-    font-size: 2.2rem;
-    line-height: 1.3;
     color: ${colour};
-    ${headlineFont}
     margin: 0;
+    ${headline.small({ fontWeight: 'light' })};
+    ${textPadding}
 
     blockquote {
         margin-left: 0;
@@ -229,6 +229,7 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
             content: '\\e11c';
             display: inline-block;
             margin-right: ${basePx(1)};
+            ${headline.small({ fontWeight: 'light' })};
         }
     }
 
@@ -306,7 +307,7 @@ const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): Rea
     );
 
 const Interactive = (props: { url: string }): ReactElement =>
-    h('figure', { className: 'interactive' },
+    styledH('figure', { className: 'interactive', css: css`${textPadding}` },
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
