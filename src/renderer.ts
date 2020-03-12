@@ -51,7 +51,7 @@ const listStyles: SerializedStyles = css`
 
 const listItemStyles: SerializedStyles = css`
     padding-left: 2rem;
-    padding-bottom: .5rem;
+    padding-bottom: ${remSpace[2]};
 
     &::before {
         display: inline-block;
