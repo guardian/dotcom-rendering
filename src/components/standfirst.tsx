@@ -34,7 +34,7 @@ const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
     color: ${text.primary};
 
     p, ul {
-        margin: .5rem 0;
+        margin: ${remSpace[2]} 0;
     }
 
     address {
