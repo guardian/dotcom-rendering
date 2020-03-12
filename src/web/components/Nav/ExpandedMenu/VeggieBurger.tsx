@@ -96,15 +96,15 @@ export const VeggieBurger = ({
     showExpandedMenu: boolean;
     ariaControls: string;
 }) => (
-        <button
-            className={veggieBurger({ showExpandedMenu })}
-            onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-            aria-controls={ariaControls}
-            aria-label="Toggle main menu"
-            data-link-name={`nav2 : veggie-burger : ${
+    <button
+        className={veggieBurger({ showExpandedMenu })}
+        onClick={() => toggleExpandedMenu(!showExpandedMenu)}
+        aria-controls={ariaControls}
+        aria-label="Toggle main menu"
+        data-link-name={`nav2 : veggie-burger : ${
                 showExpandedMenu ? 'hide' : 'show'
                 }`}
-        >
-            <span className={veggieBurgerIcon({ showExpandedMenu })} />
-        </button>
+    >
+        <span className={veggieBurgerIcon({ showExpandedMenu })} />
+    </button>
     )
