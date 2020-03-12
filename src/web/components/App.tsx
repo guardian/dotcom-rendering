@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
@@ -17,38 +16,16 @@ import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 import { incrementWeeklyArticleCount } from '@guardian/slot-machine-client';
 
-import { getCookie } from '@root/src/web/browser/cookie';
+import { Portal } from '@frontend/web/components/Portal';
+import { Hydrate } from '@frontend/web/components/Hydrate';
 
+import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
-type Props = { CAPI: CAPIType; NAV: NavType };
+type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
-type RootType =
-    | 'reader-revenue-links-header'
-    | 'nav-root'
-    | 'sub-nav-root'
-    | 'edition-root'
-    | 'most-viewed-right'
-    | 'share-comment-counts'
-    | 'most-viewed-footer'
-    | 'reader-revenue-links-footer'
-    | 'slot-body-end'
-    | 'cmp'
-    | 'onwards-upper'
-    | 'onwards-lower'
-    | 'rich-link'
-    | 'links-root'
-    | 'comments-root';
-
-export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
-    ReactDOM.render(
-        <App CAPI={CAPI} NAV={NAV} />,
-        document.getElementById('react-root'),
-    );
-};
-
-const App = ({ CAPI, NAV }: Props) => {
+export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
@@ -99,7 +76,7 @@ const App = ({ CAPI, NAV }: Props) => {
 
     const richLinks: {
         element: RichLinkBlockElement;
-        root: RootType;
+        root: IslandType;
         richLinkIndex: number;
     }[] = [];
     CAPI.blocks[0].elements.map((element, i) => {
@@ -164,7 +141,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 ))}
 
             <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.switches.cmpUi} />
+                <CMP cmpUi={CAPI.config.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
@@ -243,47 +220,5 @@ const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
         </>
-    );
-};
-
-const Hydrate = ({
-    root,
-    children,
-}: {
-    root: RootType;
-    children: JSX.Element;
-}) => {
-    const element = document.getElementById(root);
-    if (!element) return null;
-    window.performance.mark(`${root}-hydrate-start`);
-    ReactDOM.hydrate(children, element);
-    window.performance.mark(`${root}-hydrate-end`);
-    window.performance.measure(
-        `${root}-hydrate`,
-        `${root}-hydrate-start`,
-        `${root}-hydrate-end`,
-    );
-    return null;
-};
-
-const Portal = ({
-    root,
-    children,
-    richLinkIndex,
-}: {
-    root: RootType;
-    children: JSX.Element;
-    richLinkIndex?: number;
-}) => {
-    const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
-    const element = document.getElementById(rootId);
-    if (!element) return null;
-    window.performance.mark(`${rootId}-portal-start`);
-    return ReactDOM.createPortal(children, element);
-    window.performance.mark(`${rootId}-portal-end`);
-    window.performance.measure(
-        `${rootId}-portal`,
-        `${rootId}-portal-start`,
-        `${rootId}-portal-end`,
     );
 };
