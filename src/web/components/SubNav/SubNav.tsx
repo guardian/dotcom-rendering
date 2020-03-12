@@ -2,14 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { GuardianLines } from '@frontend/web/components/GuardianLines';
-import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
+import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { pillarPalette, pillarMap } from '@root/src/lib/pillars';
 
 type Props = {
-    subNavSections?: SubNavType;
+    subNavSections: SubNavType;
     pillar: Pillar;
     currentNavLink: string;
 };
@@ -53,7 +52,7 @@ const subnavCollapsed = css`
 const fontStyle = css`
     ${textSans.medium()};
     font-weight: 500;
-    color: ${palette.neutral[7]};
+    color: ${neutral[7]};
     padding: 0 5px;
     height: 36px;
     /* Design System: Line height is being used here for centering layout, we need the primitives */
@@ -88,7 +87,7 @@ const moreStyle = css`
     color: ${text.supporting};
 
     :hover {
-        color: ${palette.news.main};
+        color: ${news.main};
     }
 
     ${from.desktop} {
@@ -108,7 +107,7 @@ const ps1 = css`
         height: 0;
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
-        border-left: 10px solid ${palette.neutral[7]};
+        border-left: 10px solid ${neutral[7]};
         margin-top: 12px;
         margin-left: 2px;
 
