@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
@@ -12,43 +11,21 @@ import { CMP } from '@frontend/web/components/CMP';
 import { OnwardsUpper } from '@frontend/web/components/Onwards/OnwardsUpper';
 import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
+import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
-import { Header } from '@frontend/web/components/Header';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
-import { getCookie } from '@root/src/web/browser/cookie';
+import { Portal } from '@frontend/web/components/Portal';
+import { Hydrate } from '@frontend/web/components/Hydrate';
+import { Lazy } from '@frontend/web/components/Lazy';
 
-import { useVisibility } from '@frontend/web/lib/useVisibility';
+import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
-type Props = { CAPI: CAPIType; NAV: NavType };
+type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
-type RootType =
-    | 'reader-revenue-links-header'
-    | 'nav-root'
-    | 'sub-nav-root'
-    | 'edition-root'
-    | 'most-viewed-right'
-    | 'share-comment-counts'
-    | 'most-viewed-footer'
-    | 'reader-revenue-links-footer'
-    | 'slot-body-end'
-    | 'cmp'
-    | 'onwards-upper'
-    | 'onwards-lower'
-    | 'rich-link'
-    | 'header-root'
-    | 'comments-root';
-
-export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
-    ReactDOM.render(
-        <App CAPI={CAPI} NAV={NAV} />,
-        document.getElementById('react-root'),
-    );
-};
-
-const App = ({ CAPI, NAV }: Props) => {
+export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
@@ -89,24 +66,6 @@ const App = ({ CAPI, NAV }: Props) => {
         CAPI.isCommentable,
     ]);
 
-    const richLinks: {
-        element: RichLinkBlockElement;
-        root: RootType;
-        richLinkIndex: number;
-    }[] = [];
-    CAPI.blocks[0].elements.map((element, i) => {
-        if (
-            element._type ===
-            'model.dotcomrendering.pageElements.RichLinkBlockElement'
-        ) {
-            richLinks.push({
-                element,
-                root: `rich-link`,
-                richLinkIndex: i,
-            });
-        }
-    });
-
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -119,19 +78,23 @@ const App = ({ CAPI, NAV }: Props) => {
         //
         // Note: Both require a 'root' element that needs to be server rendered.
         <>
-            <Hydrate root="header-root">
-                <Header isSignedIn={isSignedIn} edition={CAPI.editionId} />
+            <Hydrate root="links-root">
+                <Links isSignedIn={isSignedIn} />
             </Hydrate>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Hydrate>
-            <Hydrate root="sub-nav-root">
-                <SubNav
-                    subnav={NAV.subNavSections}
-                    currentNavLink={NAV.currentNavLink}
-                    pillar={CAPI.pillar}
-                />
-            </Hydrate>
+            {NAV.subNavSections && (
+                <Hydrate root="sub-nav-root">
+                    <>
+                        <SubNav
+                            subNavSections={NAV.subNavSections}
+                            currentNavLink={NAV.currentNavLink}
+                            pillar={CAPI.pillar}
+                        />
+                    </>
+                </Hydrate>
+            )}
             <Hydrate root="edition-root">
                 <EditionDropdown
                     edition={CAPI.editionId}
@@ -139,24 +102,23 @@ const App = ({ CAPI, NAV }: Props) => {
                 />
             </Hydrate>
 
-            {richLinks &&
-                richLinks.map((link, index) => (
-                    <Portal
-                        key={index}
-                        root={link.root}
-                        richLinkIndex={link.richLinkIndex}
-                    >
-                        <RichLinkComponent
-                            element={link.element}
-                            pillar={CAPI.pillar}
-                            ajaxEndpoint={CAPI.config.ajaxUrl}
-                            richLinkIndex={link.richLinkIndex}
-                        />
-                    </Portal>
-                ))}
+            {CAPI.richLinks.map((link, index) => (
+                <Portal
+                    key={index}
+                    root="rich-link"
+                    richLinkIndex={link.richLinkIndex}
+                >
+                    <RichLinkComponent
+                        element={link}
+                        pillar={CAPI.pillar}
+                        ajaxEndpoint={CAPI.config.ajaxUrl}
+                        richLinkIndex={index}
+                    />
+                </Portal>
+            ))}
 
             <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.switches.cmpUi} />
+                <CMP cmpUi={CAPI.config.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
@@ -242,64 +204,4 @@ const App = ({ CAPI, NAV }: Props) => {
             </Portal>
         </>
     );
-};
-
-const Hydrate = ({
-    root,
-    children,
-}: {
-    root: RootType;
-    children: JSX.Element;
-}) => {
-    const element = document.getElementById(root);
-    if (!element) return null;
-    window.performance.mark(`${root}-hydrate-start`);
-    ReactDOM.hydrate(children, element);
-    window.performance.mark(`${root}-hydrate-end`);
-    window.performance.measure(
-        `${root}-hydrate`,
-        `${root}-hydrate-start`,
-        `${root}-hydrate-end`,
-    );
-    return null;
-};
-
-const Portal = ({
-    root,
-    children,
-    richLinkIndex,
-}: {
-    root: RootType;
-    children: JSX.Element;
-    richLinkIndex?: number;
-}) => {
-    const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
-    const element = document.getElementById(rootId);
-    if (!element) return null;
-    window.performance.mark(`${rootId}-portal-start`);
-    return ReactDOM.createPortal(children, element);
-    window.performance.mark(`${rootId}-portal-end`);
-    window.performance.measure(
-        `${rootId}-portal`,
-        `${rootId}-portal-start`,
-        `${rootId}-portal-end`,
-    );
-};
-
-const Lazy = ({
-    children,
-    margin,
-}: {
-    children: JSX.Element;
-    margin: number;
-}) => {
-    const [hasBeenSeen, setRef] = useVisibility({
-        rootMargin: `${margin}px`,
-    });
-
-    if (typeof setRef !== 'function') {
-        return null;
-    }
-
-    return <div ref={setRef}>{hasBeenSeen && <>{children}</>}</div>;
 };

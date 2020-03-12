@@ -2,7 +2,7 @@ import { hydrate as hydrateCSS } from 'emotion';
 
 import { startup } from '@root/src/web/browser/startup';
 
-import { hydrateApp } from '@root/src/web/browser/App';
+import { HydrateApp } from '@root/src/web/components/HydrateApp';
 
 const init = (): Promise<void> => {
     const {
@@ -21,7 +21,7 @@ const init = (): Promise<void> => {
     }
 
     // Partially hydrate the client using a combination of islands and portals
-    hydrateApp({ CAPI, NAV });
+    HydrateApp({ CAPI, NAV });
 
     return Promise.resolve();
 };
