@@ -21,7 +21,7 @@ type Props = {
 export const Header = ({ isSignedIn, edition }: Props) => (
     <header className={headerStyles}>
         <Hide when="below" breakpoint="desktop">
-            <div data-island="edition-root">
+            <div id="edition-root">
                 <EditionDropdown
                     edition={edition}
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
