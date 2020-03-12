@@ -555,6 +555,23 @@ interface Props {
 
 type JSXElements = JSX.Element | JSX.Element[];
 
+type IslandType =
+    | 'reader-revenue-links-header'
+    | 'nav-root'
+    | 'sub-nav-root'
+    | 'edition-root'
+    | 'most-viewed-right'
+    | 'share-comment-counts'
+    | 'most-viewed-footer'
+    | 'reader-revenue-links-footer'
+    | 'slot-body-end'
+    | 'cmp'
+    | 'onwards-upper'
+    | 'onwards-lower'
+    | 'rich-link'
+    | 'links-root'
+    | 'comments-root';
+
 interface TrailType {
     designType: DesignType;
     pillar: Pillar;

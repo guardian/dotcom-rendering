@@ -16,7 +16,7 @@ import { MatchReport } from '@root/fixtures/articles/MatchReport';
 
 import { NAV } from '@root/fixtures/NAV';
 
-import { hydrateApp } from '@root/src/web/browser/App';
+import { HydrateApp } from '@root/src/web/components/HydrateApp';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';
@@ -49,7 +49,7 @@ const convertToShowcase = (CAPI: CAPIType) => {
 const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
     useEffect(() => {
         const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-        hydrateApp({ CAPI, NAV });
+        HydrateApp({ CAPI, NAV });
     }, [ServerCAPI]);
     return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
