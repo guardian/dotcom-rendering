@@ -30,7 +30,8 @@ const imageElement = (): BodyElement =>
         captionString: "caption",
         credit: "credit",
         width: 500,
-        height: 500
+        height: 500,
+        role: ""
     });
 
 const pullquoteElement = (): BodyElement =>

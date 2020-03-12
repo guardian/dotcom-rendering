@@ -230,7 +230,8 @@ describe('image elements', () => {
             file: "",
             width: 500,
             height: 500,
-            captionString: ""
+            captionString: "",
+            role: ""
         }) as Image;
         expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"))
     })
