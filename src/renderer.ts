@@ -4,15 +4,14 @@ import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
-
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
-import { basePx, icons, headlineFont, darkModeCss, textPadding } from 'styles';
+import { basePx, icons, darkModeCss, textPadding } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
-import { headline, body } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 
 
 // ----- Renderer ----- //
