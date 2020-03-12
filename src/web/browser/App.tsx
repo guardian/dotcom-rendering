@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
@@ -8,62 +9,51 @@ import { Counts } from '@frontend/web/components/Counts';
 import { RichLinkComponent } from '@frontend/web/components/elements/RichLinkComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { CMP } from '@frontend/web/components/CMP';
-import { OnwardsUpper } from '@frontend/web/components/Onwards/OnwardsUpper';
-import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
+import { Onwards } from '@frontend/web/components/Onwards/Onwards';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
-import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
-import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
-import { Portal } from '@frontend/web/components/Portal';
-import { Hydrate } from '@frontend/web/components/Hydrate';
+type Props = { CAPI: CAPIType; NAV: NavType };
 
-import { getCookie } from '@root/src/web/browser/cookie';
-import { getCountryCode } from '@frontend/web/lib/getCountryCode';
-import { getDiscussion } from '@root/src/web/lib/getDiscussion';
+type RootType =
+    | 'reader-revenue-links-header'
+    | 'nav-root'
+    | 'sub-nav-root'
+    | 'edition-root'
+    | 'most-viewed-right'
+    | 'share-comment-counts'
+    | 'most-viewed-footer'
+    | 'reader-revenue-links-footer'
+    | 'slot-body-end'
+    | 'cmp'
+    | 'onwards-content'
+    | 'rich-link';
 
-type Props = { CAPI: CAPIBrowserType; NAV: NavType };
-
-export const App = ({ CAPI, NAV }: Props) => {
-    const [isSignedIn, setIsSignedIn] = useState<boolean>();
-    const [countryCode, setCountryCode] = useState<string>();
-    const [commentCount, setCommentCount] = useState<number>(0);
-    const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
-        true,
+export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
+    ReactDOM.render(
+        <App CAPI={CAPI} NAV={NAV} />,
+        document.getElementById('react-root'),
     );
+};
 
-    useEffect(() => {
-        setIsSignedIn(!!getCookie('GU_U'));
-    }, []);
-
-    useEffect(() => {
-        const callFetch = async () =>
-            setCountryCode((await getCountryCode()) || '');
-        callFetch();
-    }, []);
-
-    useEffect(() => {
-        const callFetch = async () => {
-            const response = await getDiscussion(
-                CAPI.config.discussionApiUrl,
-                CAPI.config.shortUrlId,
-            );
-            setCommentCount(
-                (response && response.discussion.commentCount) || 0,
-            );
-            setIsClosedForComments(
-                response && response.discussion.isClosedForComments,
-            );
-        };
-
-        if (CAPI.isCommentable) {
-            callFetch();
+const App = ({ CAPI, NAV }: Props) => {
+    const richLinks: {
+        element: RichLinkBlockElement;
+        root: RootType;
+        richLinkIndex: number;
+    }[] = [];
+    CAPI.blocks[0].elements.map((element, i) => {
+        if (
+            element._type ===
+            'model.dotcomrendering.pageElements.RichLinkBlockElement'
+        ) {
+            richLinks.push({
+                element,
+                root: `rich-link`,
+                richLinkIndex: i,
+            });
         }
-    }, [
-        CAPI.config.discussionApiUrl,
-        CAPI.config.shortUrlId,
-        CAPI.isCommentable,
-    ]);
+    });
 
     return (
         // Do you need to Hydrate or do you want a Portal?
@@ -77,9 +67,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         //
         // Note: Both require a 'root' element that needs to be server rendered.
         <>
-            <Hydrate root="links-root">
-                <Links isSignedIn={isSignedIn} />
-            </Hydrate>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Hydrate>
@@ -113,13 +100,13 @@ export const App = ({ CAPI, NAV }: Props) => {
             ))}
 
             <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.cmpUi} />
+                <CMP />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
                     ajaxUrl={CAPI.config.ajaxUrl}
                     pageId={CAPI.config.pageId}
-                    commentCount={commentCount}
+                    shortUrlId={CAPI.config.shortUrlId}
                     pillar={CAPI.pillar}
                 />
             </Portal>
@@ -128,8 +115,6 @@ export const App = ({ CAPI, NAV }: Props) => {
             </Portal>
             <Portal root="slot-body-end">
                 <SlotBodyEnd
-                    isSignedIn={isSignedIn}
-                    countryCode={countryCode}
                     contentType={CAPI.contentType}
                     sectionName={CAPI.sectionName}
                     shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
@@ -138,9 +123,8 @@ export const App = ({ CAPI, NAV }: Props) => {
                     tags={CAPI.tags}
                 />
             </Portal>
-
-            <Portal root="onwards-upper">
-                <OnwardsUpper
+            <Portal root="onwards-content">
+                <Onwards
                     ajaxUrl={CAPI.config.ajaxUrl}
                     hasRelated={CAPI.hasRelated}
                     hasStoryPackage={CAPI.hasStoryPackage}
@@ -151,19 +135,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     keywordIds={CAPI.config.keywordIds}
                     contentType={CAPI.contentType}
                     tags={CAPI.tags}
-                />
-            </Portal>
-            <Portal root="onwards-lower">
-                <OnwardsLower
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    hasStoryPackage={CAPI.hasStoryPackage}
-                    tags={CAPI.tags}
-                />
-            </Portal>
-            <Portal root="comments-root">
-                <CommentsLayout
-                    commentCount={commentCount}
-                    isClosedForComments={isClosedForComments}
                 />
             </Portal>
             <Portal root="most-viewed-footer">
@@ -192,5 +163,47 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
         </>
+    );
+};
+
+const Hydrate = ({
+    root,
+    children,
+}: {
+    root: RootType;
+    children: JSX.Element;
+}) => {
+    const element = document.getElementById(root);
+    if (!element) return null;
+    window.performance.mark(`${root}-hydrate-start`);
+    ReactDOM.hydrate(children, element);
+    window.performance.mark(`${root}-hydrate-end`);
+    window.performance.measure(
+        `${root}-hydrate`,
+        `${root}-hydrate-start`,
+        `${root}-hydrate-end`,
+    );
+    return null;
+};
+
+const Portal = ({
+    root,
+    children,
+    richLinkIndex,
+}: {
+    root: RootType;
+    children: JSX.Element;
+    richLinkIndex?: number;
+}) => {
+    const rootId = richLinkIndex ? `${root}-${richLinkIndex}` : root;
+    const element = document.getElementById(rootId);
+    if (!element) return null;
+    window.performance.mark(`${rootId}-portal-start`);
+    return ReactDOM.createPortal(children, element);
+    window.performance.mark(`${rootId}-portal-end`);
+    window.performance.measure(
+        `${rootId}-portal`,
+        `${rootId}-portal-start`,
+        `${rootId}-portal-end`,
     );
 };

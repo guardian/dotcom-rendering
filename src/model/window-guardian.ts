@@ -66,55 +66,74 @@ const makeWindowGuardianConfig = (
     } as WindowGuardianConfig;
 };
 
-export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => ({
-    config: {
-        isDev: process.env.NODE_ENV !== 'production',
-        ajaxUrl: CAPI.config.ajaxUrl,
-        shortUrlId: CAPI.config.shortUrlId,
-        pageId: CAPI.config.pageId,
-        isPaidContent: !!CAPI.config.isPaidContent,
-        showRelatedContent: CAPI.config.showRelatedContent,
-        keywordIds: CAPI.config.keywordIds,
-        ampIframeUrl: CAPI.config.ampIframeUrl,
-
-        // switches
-        cmpUi: CAPI.config.switches.cmpUi,
-        slotBodyEnd: CAPI.config.switches.slotBodyEnd,
-        ampPrebid: CAPI.config.switches.ampPrebid,
-        permutive: CAPI.config.switches.permutive,
-
-        // used by lib/ad-targeting.ts
-        isSensitive: CAPI.config.isSensitive,
-        videoDuration: CAPI.config.videoDuration,
-        edition: CAPI.config.edition,
-        section: CAPI.config.section,
-        sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
-        adUnit: CAPI.config.adUnit,
-        discussionApiUrl: CAPI.config.discussionApiUrl,
-    },
-    blocks: CAPI.blocks,
-    editionId: CAPI.editionId,
-    pillar: CAPI.pillar,
-    contentType: CAPI.contentType,
-    sectionName: CAPI.sectionName,
-    shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
-    pageType: {
-        isMinuteArticle: CAPI.pageType.isMinuteArticle,
-        isPaidContent: CAPI.pageType.isPaidContent,
-    },
-    hasRelated: CAPI.hasRelated,
-    hasStoryPackage: CAPI.hasStoryPackage,
-    isAdFreeUser: CAPI.isAdFreeUser,
-    pageId: CAPI.pageId,
-    tags: CAPI.tags,
-    isCommentable: CAPI.isCommentable,
-    nav: {
-        readerRevenueLinks: {
-            footer: CAPI.nav.readerRevenueLinks.footer,
-            header: CAPI.nav.readerRevenueLinks.header,
+export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
+    // it is important to pass down the index of rich links as well as the component itself
+    const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
+        (acc, element, index: number) => {
+            if (
+                element._type ===
+                'model.dotcomrendering.pageElements.RichLinkBlockElement'
+            ) {
+                acc.push({
+                    ...element,
+                    richLinkIndex: index,
+                } as RichLinkBlockElement);
+            }
+            return acc;
         },
-    },
-});
+        [] as RichLinkBlockElement[],
+    );
+    return ({
+        config: {
+            isDev: process.env.NODE_ENV !== 'production',
+            ajaxUrl: CAPI.config.ajaxUrl,
+            shortUrlId: CAPI.config.shortUrlId,
+            pageId: CAPI.config.pageId,
+            isPaidContent: !!CAPI.config.isPaidContent,
+            showRelatedContent: CAPI.config.showRelatedContent,
+            keywordIds: CAPI.config.keywordIds,
+            ampIframeUrl: CAPI.config.ampIframeUrl,
+
+            // switches
+            cmpUi: CAPI.config.switches.cmpUi,
+            slotBodyEnd: CAPI.config.switches.slotBodyEnd,
+            ampPrebid: CAPI.config.switches.ampPrebid,
+            permutive: CAPI.config.switches.permutive,
+
+            // used by lib/ad-targeting.ts
+            isSensitive: CAPI.config.isSensitive,
+            videoDuration: CAPI.config.videoDuration,
+            edition: CAPI.config.edition,
+            section: CAPI.config.section,
+            sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
+            adUnit: CAPI.config.adUnit,
+            discussionApiUrl: CAPI.config.discussionApiUrl,
+        },
+        richLinks: richLinksWithIndex,
+        editionId: CAPI.editionId,
+        pillar: CAPI.pillar,
+        contentType: CAPI.contentType,
+        sectionName: CAPI.sectionName,
+        shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
+        pageType: {
+            isMinuteArticle: CAPI.pageType.isMinuteArticle,
+            isPaidContent: CAPI.pageType.isPaidContent,
+        },
+        hasRelated: CAPI.hasRelated,
+        hasStoryPackage: CAPI.hasStoryPackage,
+        isAdFreeUser: CAPI.isAdFreeUser,
+        pageId: CAPI.pageId,
+        tags: CAPI.tags,
+        isCommentable: CAPI.isCommentable,
+        nav: {
+            readerRevenueLinks: {
+                footer: CAPI.nav.readerRevenueLinks.footer,
+                header: CAPI.nav.readerRevenueLinks.header,
+            },
+        },
+    });
+}
+
 export interface WindowGuardian {
     // The app contains only data that we require for app hydration
     // NOTE: there is a divergence between DCRBrowserDocumentData and DCRServerDocumentData

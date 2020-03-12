@@ -271,7 +271,7 @@ type CAPIBrowserType = {
         adUnit: string;
         discussionApiUrl: string;
     };
-    blocks: Block[];
+    richLinks: RichLinkBlockElement[];
     editionId: Edition;
     pillar: Pillar;
     contentType: string;
