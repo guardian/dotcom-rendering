@@ -13,7 +13,7 @@ import { Onwards } from '@frontend/web/components/Onwards/Onwards';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 
-type Props = { CAPI: CAPIType; NAV: NavType };
+type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
 type RootType =
     | 'reader-revenue-links-header'
@@ -29,7 +29,7 @@ type RootType =
     | 'onwards-content'
     | 'rich-link';
 
-export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
+export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIBrowserType; NAV: NavType }) => {
     ReactDOM.render(
         <App CAPI={CAPI} NAV={NAV} />,
         document.getElementById('react-root'),
