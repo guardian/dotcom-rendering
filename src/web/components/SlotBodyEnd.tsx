@@ -27,12 +27,12 @@ const sendOphanEvent = (action: OphanAction): void => {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_api',
-            id: 'gdnwb_copts_memco_dotcom_rendering_epic_api',
+            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_remote',
+            id: 'gdnwb_copts_memco_dotcom_rendering_epic_remote',
         },
         abTest: {
             name: 'dotcom_rendering_epic',
-            variant: 'api',
+            variant: 'remote',
         },
         action,
     };
@@ -62,9 +62,9 @@ const buildPayload = (props: Props) => {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
-            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_api',
+            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_remote',
             abTestName: 'dotcom_rendering_epic',
-            abTestVariant: 'api',
+            abTestVariant: 'remote',
             referrerUrl: window.location.origin + window.location.pathname,
         },
         localisation: {
