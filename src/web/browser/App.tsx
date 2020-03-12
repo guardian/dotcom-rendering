@@ -90,9 +90,9 @@ const App = ({ CAPI, NAV }: Props) => {
     ]);
 
     // Log an article view using the Slot Machine client lib
-    // This function must be called once per article render.
+    // This function must be called once per article serving.
     // We should monitor this function call to ensure it only happens within an
-    // article view.
+    // article pages when other pages are supported by DCR.
     useEffect(() => {
         incrementWeeklyArticleCount();
     }, []);
