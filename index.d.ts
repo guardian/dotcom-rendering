@@ -513,7 +513,7 @@ type IslandType =
     | 'onwards-upper'
     | 'onwards-lower'
     | 'rich-link'
-    | 'header-root'
+    | 'links-root'
     | 'comments-root';
 
 interface TrailType {
