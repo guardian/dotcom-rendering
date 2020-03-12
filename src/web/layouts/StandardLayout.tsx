@@ -51,8 +51,8 @@ const StandardGrid = ({
 }: {
     children: JSX.Element | JSX.Element[];
 }) => (
-        <div
-            className={css`
+    <div
+        className={css`
             /* IE Fallback */
             display: flex;
             flex-direction: column;
@@ -145,9 +145,9 @@ const StandardGrid = ({
                 }
             }
         `}
-        >
-            {children}
-        </div>
+    >
+        {children}
+    </div>
     );
 
 const maxWidth = css`
@@ -330,7 +330,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 />
                             </div>
                         ) : (
-                                <></>
+                            <></>
                             )}
                     </GridItem>
                     <GridItem area="standfirst">

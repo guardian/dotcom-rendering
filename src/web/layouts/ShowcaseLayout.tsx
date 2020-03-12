@@ -44,8 +44,8 @@ const ShowcaseGrid = ({
 }: {
     children: JSX.Element | JSX.Element[];
 }) => (
-        <div
-            className={css`
+    <div
+        className={css`
             /* IE Fallback */
             display: flex;
             flex-direction: column;
@@ -138,9 +138,9 @@ const ShowcaseGrid = ({
                 }
             }
         `}
-        >
-            {children}
-        </div>
+    >
+        {children}
+    </div>
     );
 
 const maxWidth = css`
