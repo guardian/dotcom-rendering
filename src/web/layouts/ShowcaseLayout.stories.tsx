@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';
@@ -21,6 +21,8 @@ import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { DecideLayout } from './DecideLayout';
 
+mockRESTCalls();
+
 /* tslint:disable */
 export default {
     title: 'Layouts/Showcase',
@@ -29,11 +31,6 @@ export default {
     },
 };
 /* tslint:enable */
-
-// In order to render React elements of the Layout we need to use hydrateApp
-// hydrateApp requires a query selector therefore we need to wrap the function in a setTimeout
-// Storybook runs only what is exported in the const, so we need to add the code in each export const
-// setTimeout(() => hydrateApp({CAPI, NAV}));
 
 const convertToShowcase = (CAPI: CAPIType) => {
     return {
@@ -46,110 +43,85 @@ const convertToShowcase = (CAPI: CAPIType) => {
     };
 };
 
+// HydratedLayout is used here to simulated the hydration that happens after we init react on
+// the client. We need a separate component so that we can make use of useEffect to ensure
+// the hydrate step only runs once the dom has been rendered.
+const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
+    useEffect(() => {
+        const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
+        hydrateApp({ CAPI, NAV });
+    }, [ServerCAPI]);
+    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+};
+
 export const ArticleStory = () => {
     const ServerCAPI = convertToShowcase(Article);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ArticleStory.story = { name: 'Article' };
 
 export const ReviewStory = () => {
     const ServerCAPI = convertToShowcase(Review);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
 
 export const CommentStory = () => {
     const ServerCAPI = convertToShowcase(Comment);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
 
 export const AdvertisementFeatureStory = () => {
     const ServerCAPI = convertToShowcase(AdvertisementFeature);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
 
 export const AnalysisStory = () => {
     const ServerCAPI = convertToShowcase(Analysis);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AnalysisStory.story = { name: 'Analysis' };
 
 export const FeatureStory = () => {
     const ServerCAPI = convertToShowcase(Feature);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 FeatureStory.story = { name: 'Feature' };
 
 export const GuardianViewStory = () => {
     const ServerCAPI = convertToShowcase(GuardianView);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 GuardianViewStory.story = { name: 'GuardianView' };
 
 export const ImmersiveStory = () => {
     const ServerCAPI = convertToShowcase(Immersive);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const InterviewStory = () => {
     const ServerCAPI = convertToShowcase(Interview);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 InterviewStory.story = { name: 'Interview' };
 
 export const QuizStory = () => {
     const ServerCAPI = convertToShowcase(Quiz);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 QuizStory.story = { name: 'Quiz' };
 
 export const RecipeStory = () => {
     const ServerCAPI = convertToShowcase(Recipe);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 RecipeStory.story = { name: 'Recipe' };
 
 export const MatchReportStory = () => {
     const ServerCAPI = convertToShowcase(MatchReport);
-    const BrowserCAPI = makeGuardianBrowserCAPI(ServerCAPI);
-    mockRESTCalls();
-    setTimeout(() => hydrateApp({ CAPI: BrowserCAPI, NAV }));
-    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
