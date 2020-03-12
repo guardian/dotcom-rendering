@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';
 import { AdvertisementFeature } from '@root/fixtures/articles/AdvertisementFeature';
 import { Review } from '@root/fixtures/articles/Review';
@@ -45,81 +46,82 @@ const convertToShowcase = (CAPI: CAPIType) => {
 // HydratedLayout is used here to simulated the hydration that happens after we init react on
 // the client. We need a separate component so that we can make use of useEffect to ensure
 // the hydrate step only runs once the dom has been rendered.
-const HydratedLayout = ({ CAPI }: { CAPI: CAPIType }) => {
+const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
     useEffect(() => {
+        const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
         hydrateApp({ CAPI, NAV });
-    }, [CAPI]);
-    return <DecideLayout CAPI={CAPI} NAV={NAV} />;
+    }, [ServerCAPI]);
+    return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
 
 export const ArticleStory = () => {
-    const CAPI = convertToShowcase(Article);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Article);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ArticleStory.story = { name: 'Article' };
 
 export const ReviewStory = () => {
-    const CAPI = convertToShowcase(Review);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Review);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
 
 export const CommentStory = () => {
-    const CAPI = convertToShowcase(Comment);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Comment);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
 
 export const AdvertisementFeatureStory = () => {
-    const CAPI = convertToShowcase(AdvertisementFeature);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(AdvertisementFeature);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AdvertisementFeatureStory.story = { name: 'AdvertisementFeature' };
 
 export const AnalysisStory = () => {
-    const CAPI = convertToShowcase(Analysis);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Analysis);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AnalysisStory.story = { name: 'Analysis' };
 
 export const FeatureStory = () => {
-    const CAPI = convertToShowcase(Feature);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Feature);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 FeatureStory.story = { name: 'Feature' };
 
 export const GuardianViewStory = () => {
-    const CAPI = convertToShowcase(GuardianView);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(GuardianView);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 GuardianViewStory.story = { name: 'GuardianView' };
 
 export const ImmersiveStory = () => {
-    const CAPI = convertToShowcase(Immersive);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Immersive);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const InterviewStory = () => {
-    const CAPI = convertToShowcase(Interview);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Interview);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 InterviewStory.story = { name: 'Interview' };
 
 export const QuizStory = () => {
-    const CAPI = convertToShowcase(Quiz);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Quiz);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 QuizStory.story = { name: 'Quiz' };
 
 export const RecipeStory = () => {
-    const CAPI = convertToShowcase(Recipe);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(Recipe);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 RecipeStory.story = { name: 'Recipe' };
 
 export const MatchReportStory = () => {
-    const CAPI = convertToShowcase(MatchReport);
-    return <HydratedLayout CAPI={CAPI} />;
+    const ServerCAPI = convertToShowcase(MatchReport);
+    return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };

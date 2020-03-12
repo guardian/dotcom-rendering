@@ -248,6 +248,53 @@ interface CAPIType {
     pageType: PageTypeType;
 }
 
+type CAPIBrowserType = {
+    config: {
+        isDev: boolean;
+        ajaxUrl: string;
+        shortUrlId: string;
+        pageId: string;
+        isPaidContent: boolean;
+        showRelatedContent: boolean;
+        keywordIds: string;
+        ampIframeUrl: string;
+        ampPrebid: boolean;
+        permutive: boolean;
+        cmpUi: boolean;
+        slotBodyEnd: boolean;
+        isSensitive: boolean;
+        videoDuration: number;
+        edition: string;
+        section: string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        sharedAdTargeting: { [key: string]: any };
+        adUnit: string;
+        discussionApiUrl: string;
+    };
+    blocks: Block[];
+    editionId: Edition;
+    pillar: Pillar;
+    contentType: string;
+    sectionName?: string;
+    shouldHideReaderRevenue: boolean;
+    pageType: {
+        isMinuteArticle: boolean;
+        isPaidContent: boolean;
+    };
+    hasRelated: boolean;
+    hasStoryPackage: boolean;
+    isAdFreeUser: boolean;
+    pageId: string;
+    tags: TagType[];
+    isCommentable: boolean;
+    nav: {
+        readerRevenueLinks: {
+            footer: ReaderRevenueCategories;
+            header: ReaderRevenueCategories;
+        };
+    };
+};
+
 interface TagType {
     id: string;
     type: string;
@@ -484,7 +531,7 @@ type DesignTypesObj = { [key in DesignType]: any };
 // General DataTypes //
 // ----------------- //
 
-interface DCRDocumentData {
+interface DCRServerDocumentData {
     page: string;
     site: string;
     CAPI: CAPIType;
@@ -493,8 +540,17 @@ interface DCRDocumentData {
     linkedData: object;
 }
 
+interface DCRBrowserDocumentData {
+    page: string;
+    site: string;
+    CAPI: CAPIBrowserType;
+    NAV: NavType;
+    GA: GADataType;
+    linkedData: object;
+}
+
 interface Props {
-    data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
+    data: DCRServerDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
 type JSXElements = JSX.Element | JSX.Element[];

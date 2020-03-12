@@ -21,7 +21,7 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
-type Props = { CAPI: CAPIType; NAV: NavType };
+type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
 type RootType =
     | 'reader-revenue-links-header'
@@ -40,7 +40,13 @@ type RootType =
     | 'links-root'
     | 'comments-root';
 
-export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
+export const hydrateApp = ({
+    CAPI,
+    NAV,
+}: {
+    CAPI: CAPIBrowserType;
+    NAV: NavType;
+}) => {
     ReactDOM.render(
         <App CAPI={CAPI} NAV={NAV} />,
         document.getElementById('react-root'),
@@ -155,7 +161,7 @@ const App = ({ CAPI, NAV }: Props) => {
                 ))}
 
             <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.switches.cmpUi} />
+                <CMP cmpUi={CAPI.config.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
