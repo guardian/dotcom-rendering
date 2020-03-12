@@ -187,7 +187,7 @@ const identityLinks: DropdownLinkType[] = [
 ];
 
 export const Links = ({ isSignedIn }: Props) => (
-    <div id="links-root" className={linksStyles}>
+    <div className={linksStyles}>
         <div className={seperatorStyles} />
         <a
             href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
