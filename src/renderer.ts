@@ -12,6 +12,7 @@ import { ElementKind, BodyElement } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import { headline } from '@guardian/src-foundations/typography';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Renderer ----- //
@@ -88,7 +89,7 @@ const bulletStyles = (colour: string): SerializedStyles => css`
 const HeadingTwoStyles = css`
     font-size: 1.4rem;
     font-weight: 700;
-    margin: ${remSpace[4]} 0 ${remSpace[1]} 0;
+    margin: 1rem 0 4px 0;
     ${textPadding}
 
     & + p {
