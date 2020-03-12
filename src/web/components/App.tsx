@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -110,7 +109,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                             currentNavLink={NAV.currentNavLink}
                             pillar={CAPI.pillar}
                         />
-                        <GuardianLines pillar={CAPI.pillar} />
                     </>
                 </Hydrate>
             )}
