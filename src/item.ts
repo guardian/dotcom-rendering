@@ -82,6 +82,7 @@ type Image = {
     file: string;
     width: number;
     height: number;
+    role: string;
 }
 
 type BodyElement = {
@@ -172,7 +173,7 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
 
 const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
-    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
+    const { alt = "", caption = "", displayCredit = false, credit = "", role = "" } = element.imageTypeData ?? {};
     const fullCaption = displayCredit ? `${caption} ${credit}` : caption;
     const parsedCaption = docParser(fullCaption);
 
@@ -189,7 +190,8 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
             file: asset.file,
             width: asset.typeData.width,
             height: asset.typeData.height,
-            captionString: caption
+            captionString: caption,
+            role
         });
     });
 }

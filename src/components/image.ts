@@ -6,6 +6,7 @@ import { createHash } from 'crypto';
 
 import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Setup ----- //
@@ -64,9 +65,10 @@ interface Props {
     sizes: string;
     caption: string;
     credit: string;
+    thumbnail?: boolean;
 }
 
-const styles = (width: number, height: number): SerializedStyles => css`
+const standardStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(100vw * ${height / width});
     background: ${neutral[97]};
 
@@ -75,11 +77,20 @@ const styles = (width: number, height: number): SerializedStyles => css`
     }
 `;
 
-const Image: FC<Props> = ({ url, sizes, salt, alt, width, height, caption, credit }) => {
+const thumbnailStyles = (width: number, height: number): SerializedStyles => css`
+    float: left;
+    clear: left;
+    width: 8.75rem;
+    margin: 0 ${remSpace[3]} 0 ${remSpace[2]};
+`;
+
+const Image: FC<Props> = ({ url, sizes, salt, alt, width, height, caption, credit, thumbnail }) => {
 
     if (url === '') {
         return null;
     }
+
+    const styles = thumbnail ? thumbnailStyles : standardStyles;
 
     return styledH('img', {
         sizes,
