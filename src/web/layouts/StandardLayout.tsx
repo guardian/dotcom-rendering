@@ -148,7 +148,7 @@ const StandardGrid = ({
     >
         {children}
     </div>
-    );
+);
 
 const maxWidth = css`
     ${from.desktop} {
@@ -285,9 +285,16 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                                 currentNavLink={NAV.currentNavLink}
                                 pillar={CAPI.pillar}
                             />
-                            <GuardianLines pillar={CAPI.pillar} />
                         </Section>
                     )}
+
+                    <Section
+                        backgroundColour={background.primary}
+                        padded={false}
+                        showTopBorder={false}
+                    >
+                        <GuardianLines pillar={CAPI.pillar} />
+                    </Section>
                 </div>
             </div>
 
@@ -331,7 +338,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             </div>
                         ) : (
                             <></>
-                            )}
+                        )}
                     </GridItem>
                     <GridItem area="standfirst">
                         <ArticleStandfirst

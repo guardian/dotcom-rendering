@@ -141,7 +141,7 @@ const ShowcaseGrid = ({
     >
         {children}
     </div>
-    );
+);
 
 const maxWidth = css`
     ${from.desktop} {
@@ -308,9 +308,16 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 currentNavLink={NAV.currentNavLink}
                                 pillar={CAPI.pillar}
                             />
-                            <GuardianLines pillar={CAPI.pillar} />
                         </Section>
                     )}
+
+                    <Section
+                        backgroundColour={background.primary}
+                        padded={false}
+                        showTopBorder={false}
+                    >
+                        <GuardianLines pillar={CAPI.pillar} />
+                    </Section>
                 </div>
             </div>
 
@@ -356,7 +363,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 adTargeting={adTargeting}
                                 starRating={
                                     CAPI.designType === 'Review' &&
-                                        CAPI.starRating
+                                    CAPI.starRating
                                         ? CAPI.starRating
                                         : undefined
                                 }
