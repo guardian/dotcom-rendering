@@ -78,8 +78,23 @@ export const App = ({ CAPI, NAV }: Props) => {
         //
         // Note: Both require a 'root' element that needs to be server rendered.
         <>
+            <Portal root="reader-revenue-links-header">
+                <ReaderRevenueLinks
+                    urls={CAPI.nav.readerRevenueLinks.footer}
+                    edition={CAPI.editionId}
+                    dataLinkNamePrefix="footer : "
+                    noResponsive={true}
+                    inHeader={false}
+                />
+            </Portal>
             <Hydrate root="links-root">
                 <Links isSignedIn={isSignedIn} />
+            </Hydrate>
+            <Hydrate root="edition-root">
+                <EditionDropdown
+                    edition={CAPI.editionId}
+                    dataLinkName="nav2 : topbar : edition-picker: toggle"
+                />
             </Hydrate>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
@@ -95,12 +110,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </>
                 </Hydrate>
             )}
-            <Hydrate root="edition-root">
-                <EditionDropdown
-                    edition={CAPI.editionId}
-                    dataLinkName="nav2 : topbar : edition-picker: toggle"
-                />
-            </Hydrate>
 
             {CAPI.richLinks.map((link, index) => (
                 <Portal
@@ -108,18 +117,16 @@ export const App = ({ CAPI, NAV }: Props) => {
                     root="rich-link"
                     richLinkIndex={link.richLinkIndex}
                 >
-                    <RichLinkComponent
-                        element={link}
-                        pillar={CAPI.pillar}
-                        ajaxEndpoint={CAPI.config.ajaxUrl}
-                        richLinkIndex={index}
-                    />
+                    <Lazy margin={-100}>
+                        <RichLinkComponent
+                            element={link}
+                            pillar={CAPI.pillar}
+                            ajaxEndpoint={CAPI.config.ajaxUrl}
+                            richLinkIndex={index}
+                        />
+                    </Lazy>
                 </Portal>
             ))}
-
-            <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.cmpUi} />
-            </Portal>
             <Portal root="share-comment-counts">
                 <Counts
                     ajaxUrl={CAPI.config.ajaxUrl}
@@ -129,23 +136,26 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Portal root="most-viewed-right">
-                <MostViewedRightWrapper pillar={CAPI.pillar} />
+                <Lazy margin={-100}>
+                    <MostViewedRightWrapper pillar={CAPI.pillar} />
+                </Lazy>
             </Portal>
             <Portal root="slot-body-end">
-                <SlotBodyEnd
-                    isSignedIn={isSignedIn}
-                    countryCode={countryCode}
-                    contentType={CAPI.contentType}
-                    sectionName={CAPI.sectionName}
-                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                    isPaidContent={CAPI.pageType.isPaidContent}
-                    tags={CAPI.tags}
-                />
+                <Lazy margin={-300}>
+                    <SlotBodyEnd
+                        isSignedIn={isSignedIn}
+                        countryCode={countryCode}
+                        contentType={CAPI.contentType}
+                        sectionName={CAPI.sectionName}
+                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                        isPaidContent={CAPI.pageType.isPaidContent}
+                        tags={CAPI.tags}
+                    />
+                </Lazy>
             </Portal>
-
             <Portal root="onwards-upper">
-                <Lazy margin={-200}>
+                <Lazy margin={-300}>
                     <OnwardsUpper
                         ajaxUrl={CAPI.config.ajaxUrl}
                         hasRelated={CAPI.hasRelated}
@@ -170,26 +180,22 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Lazy>
             </Portal>
             <Portal root="comments-root">
-                <CommentsLayout
-                    commentCount={commentCount}
-                    isClosedForComments={isClosedForComments}
-                />
+                <Lazy margin={-300}>
+                    <CommentsLayout
+                        commentCount={commentCount}
+                        isClosedForComments={isClosedForComments}
+                    />
+                </Lazy>
             </Portal>
+            {/* TODO: If we lazy load this entire component we won't render the advert */}
             <Portal root="most-viewed-footer">
-                <MostViewedFooter
-                    pillar={CAPI.pillar}
-                    sectionName={CAPI.sectionName}
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                />
-            </Portal>
-            <Portal root="reader-revenue-links-header">
-                <ReaderRevenueLinks
-                    urls={CAPI.nav.readerRevenueLinks.footer}
-                    edition={CAPI.editionId}
-                    dataLinkNamePrefix="footer : "
-                    noResponsive={true}
-                    inHeader={false}
-                />
+                <Lazy margin={-300}>
+                    <MostViewedFooter
+                        pillar={CAPI.pillar}
+                        sectionName={CAPI.sectionName}
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                    />
+                </Lazy>
             </Portal>
             <Portal root="reader-revenue-links-footer">
                 <Lazy margin={-300}>
@@ -201,6 +207,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                         inHeader={true}
                     />
                 </Lazy>
+            </Portal>
+            <Portal root="cmp">
+                <CMP cmpUi={CAPI.config.cmpUi} />
             </Portal>
         </>
     );
