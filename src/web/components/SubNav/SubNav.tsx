@@ -22,7 +22,7 @@ const wrapperCollapsed = css`
     }
 `;
 
-const subnav = css`
+const rootSubnavStyles = css`
     list-style: none;
     padding: 0 5px;
 
@@ -37,11 +37,11 @@ const subnav = css`
 `;
 
 const subnavExpanded = css`
-    ${subnav};
+    ${rootSubnavStyles};
 `;
 
 const subnavCollapsed = css`
-    ${subnav};
+    ${rootSubnavStyles};
     max-width: calc(100% - 60px);
 
     ${from.mobileLandscape} {
@@ -160,7 +160,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
                         [subnavExpanded]: expandSubNav,
                     })}
                 >
-                    {subNavSections && subNavSections.parent && (
+                    {subNavSections.parent && (
                         <li
                             key={subNavSections.parent.url}
                             className={cx(ps1, psp[pillar])}
@@ -173,23 +173,22 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
                             </a>
                         </li>
                     )}
-                    {subNavSections &&
-                        subNavSections.links.map(link => (
-                            <li key={link.url}>
-                                <a
-                                    className={cx(linkStyle, {
-                                        [selected]:
-                                            link.title === currentNavLink,
-                                    })}
-                                    href={link.url}
-                                    data-link-name={`nav2 : subnav : ${trimLeadingSlash(
-                                        link.url,
-                                    )}`}
-                                >
-                                    {link.title}
-                                </a>
-                            </li>
-                        ))}
+                    {subNavSections.links.map(link => (
+                        <li key={link.url}>
+                            <a
+                                className={cx(linkStyle, {
+                                    [selected]:
+                                        link.title === currentNavLink,
+                                })}
+                                href={link.url}
+                                data-link-name={`nav2 : subnav : ${trimLeadingSlash(
+                                    link.url,
+                                )}`}
+                            >
+                                {link.title}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
                 {showMore && (
                     <button
