@@ -44,8 +44,8 @@ const ShowcaseGrid = ({
 }: {
     children: JSX.Element | JSX.Element[];
 }) => (
-    <div
-        className={css`
+        <div
+            className={css`
             /* IE Fallback */
             display: flex;
             flex-direction: column;
@@ -138,10 +138,10 @@ const ShowcaseGrid = ({
                 }
             }
         `}
-    >
-        {children}
-    </div>
-);
+        >
+            {children}
+        </div>
+    );
 
 const maxWidth = css`
     ${from.desktop} {
@@ -308,6 +308,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 currentNavLink={NAV.currentNavLink}
                                 pillar={CAPI.pillar}
                             />
+                            <GuardianLines pillar={CAPI.pillar} />
                         </Section>
                     )}
                 </div>
@@ -355,7 +356,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                                 adTargeting={adTargeting}
                                 starRating={
                                     CAPI.designType === 'Review' &&
-                                    CAPI.starRating
+                                        CAPI.starRating
                                         ? CAPI.starRating
                                         : undefined
                                 }
@@ -484,9 +485,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <Section padded={false} islandId="sub-nav-root">
                     <SubNav
                         subNavSections={NAV.subNavSections}
-                        pillar={CAPI.pillar}
                         currentNavLink={NAV.currentNavLink}
+                        pillar={CAPI.pillar}
                     />
+                    <GuardianLines pillar={CAPI.pillar} />
                 </Section>
             )}
 

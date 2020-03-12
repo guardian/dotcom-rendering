@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
+import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -126,11 +127,14 @@ const App = ({ CAPI, NAV }: Props) => {
             </Hydrate>
             {NAV.subNavSections && (
                 <Hydrate root="sub-nav-root">
-                    <SubNav
-                        subNavSections={NAV.subNavSections}
-                        currentNavLink={NAV.currentNavLink}
-                        pillar={CAPI.pillar}
-                    />
+                    <>
+                        <SubNav
+                            subNavSections={NAV.subNavSections}
+                            currentNavLink={NAV.currentNavLink}
+                            pillar={CAPI.pillar}
+                        />
+                        <GuardianLines pillar={CAPI.pillar} />
+                    </>
                 </Hydrate>
             )}
             <Hydrate root="edition-root">

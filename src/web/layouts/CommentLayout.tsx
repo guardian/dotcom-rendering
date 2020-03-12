@@ -41,8 +41,8 @@ const StandardGrid = ({
 }: {
     children: JSX.Element | JSX.Element[];
 }) => (
-    <div
-        className={css`
+        <div
+            className={css`
             /* IE Fallback */
             display: flex;
             flex-direction: column;
@@ -132,10 +132,10 @@ const StandardGrid = ({
                 }
             }
         `}
-    >
-        {children}
-    </div>
-);
+        >
+            {children}
+        </div>
+    );
 
 const maxWidth = css`
     ${from.desktop} {
@@ -249,6 +249,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                         currentNavLink={NAV.currentNavLink}
                         pillar={CAPI.pillar}
                     />
+                    <GuardianLines pillar={CAPI.pillar} />
                 </Section>
             )}
 
@@ -438,9 +439,10 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 <Section padded={false} islandId="sub-nav-root">
                     <SubNav
                         subNavSections={NAV.subNavSections}
-                        pillar={CAPI.pillar}
                         currentNavLink={NAV.currentNavLink}
+                        pillar={CAPI.pillar}
                     />
+                    <GuardianLines pillar={CAPI.pillar} />
                 </Section>
             )}
 

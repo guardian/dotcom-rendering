@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
-import { GuardianLines } from '@frontend/web/components/GuardianLines';
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -36,11 +35,11 @@ const rootSubnavStyles = css`
     }
 `;
 
-const subnavExpanded = css`
+const expandedStyles = css`
     ${rootSubnavStyles};
 `;
 
-const subnavCollapsed = css`
+const collapsedStyles = css`
     ${rootSubnavStyles};
     max-width: calc(100% - 60px);
 
@@ -61,7 +60,6 @@ const fontStyle = css`
     ${from.tablet} {
         height: 42px;
         /* Design System: Line height is being used here for centering layout, we need the primitives */
-        /* stylelint-disable-next-line property-blacklist */
         line-height: 42px;
     }
 `;
@@ -78,7 +76,7 @@ const linkStyle = css`
 const selected = css`
     font-weight: 700;
 `;
-const moreStyle = css`
+const showMoreStyle = css`
     ${fontStyle};
 
     cursor: pointer;
@@ -99,7 +97,8 @@ const parentLinkStyle = css`
     ${linkStyle};
     font-weight: 700;
 `;
-const ps1 = css`
+
+const listItemStyles = css`
     :after {
         content: '';
         display: inline-block;
@@ -115,8 +114,10 @@ const ps1 = css`
             margin-top: 16px;
         }
     }
-`; // I'm not sure what the palette.neutral is for this should always receive a pillar by types.
-const psp = pillarMap(
+`;
+
+// I'm not sure what the palette.neutral is for this should always receive a pillar by types.
+const leftColBorder = pillarMap(
     pillar => css`
         :after {
             border-left-color: ${pillarPalette[pillar].main};
@@ -151,55 +152,52 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
     const expandSubNav = !showMore || isExpanded;
 
     return (
-        <div>
-            <div className={cx({ [wrapperCollapsed]: collapseWrapper })}>
-                <ul
-                    ref={ulRef}
-                    className={cx({
-                        [subnavCollapsed]: !expandSubNav,
-                        [subnavExpanded]: expandSubNav,
-                    })}
-                >
-                    {subNavSections.parent && (
-                        <li
-                            key={subNavSections.parent.url}
-                            className={cx(ps1, psp[pillar])}
-                        >
-                            <a
-                                className={parentLinkStyle}
-                                href={subNavSections.parent.url}
-                            >
-                                {subNavSections.parent.title}
-                            </a>
-                        </li>
-                    )}
-                    {subNavSections.links.map(link => (
-                        <li key={link.url}>
-                            <a
-                                className={cx(linkStyle, {
-                                    [selected]:
-                                        link.title === currentNavLink,
-                                })}
-                                href={link.url}
-                                data-link-name={`nav2 : subnav : ${trimLeadingSlash(
-                                    link.url,
-                                )}`}
-                            >
-                                {link.title}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-                {showMore && (
-                    <button
-                        onClick={() => setIsExpanded(!isExpanded)}
-                        className={moreStyle}
+        <div className={cx({ [wrapperCollapsed]: collapseWrapper })}>
+            <ul
+                ref={ulRef}
+                className={cx({
+                    [collapsedStyles]: !expandSubNav,
+                    [expandedStyles]: expandSubNav,
+                })}
+            >
+                {subNavSections.parent && (
+                    <li
+                        key={subNavSections.parent.url}
+                        className={cx(listItemStyles, leftColBorder[pillar])}
                     >
-                        {isExpanded ? 'Less' : 'More'}
-                    </button>
+                        <a
+                            className={parentLinkStyle}
+                            href={subNavSections.parent.url}
+                        >
+                            {subNavSections.parent.title}
+                        </a>
+                    </li>
                 )}
-            </div>
-            <GuardianLines pillar={pillar} />
+                {subNavSections.links.map(link => (
+                    <li key={link.url}>
+                        <a
+                            className={cx(linkStyle, {
+                                [selected]:
+                                    link.title === currentNavLink,
+                            })}
+                            href={link.url}
+                            data-link-name={`nav2 : subnav : ${trimLeadingSlash(
+                                link.url,
+                            )}`}
+                        >
+                            {link.title}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+            {showMore && (
+                <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className={showMoreStyle}
+                >
+                    {isExpanded ? 'Less' : 'More'}
+                </button>
+            )}
         </div>
     );
 };
