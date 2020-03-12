@@ -37,24 +37,6 @@ export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIBrowserType; NAV: NavType 
 };
 
 const App = ({ CAPI, NAV }: Props) => {
-    const richLinks: {
-        element: RichLinkBlockElement;
-        root: RootType;
-        richLinkIndex: number;
-    }[] = [];
-    CAPI.blocks[0].elements.map((element, i) => {
-        if (
-            element._type ===
-            'model.dotcomrendering.pageElements.RichLinkBlockElement'
-        ) {
-            richLinks.push({
-                element,
-                root: `rich-link`,
-                richLinkIndex: i,
-            });
-        }
-    });
-
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
