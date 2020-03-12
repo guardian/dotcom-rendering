@@ -1,12 +1,17 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { brandBackground } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { brandBackground, brandText, brandAlt } from '@guardian/src-foundations/palette';
+import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
-import { ExpandedMenuToggle } from './ExpandedMenuToggle/ExpandedMenuToggle';
+import { VeggieBurger } from './VeggieBurger';
 import { Columns } from './Columns';
+
+const screenReadableStyle = css`
+    ${visuallyHidden};
+`;
 
 const showExpandedMenuStyles = css`
     ${from.desktop} {
@@ -68,6 +73,56 @@ const mainMenu = css`
     }
 `;
 
+const openExpandedMenuStyles = css`
+    ${headline.xsmall()};
+    font-weight: 300;
+    color: ${brandText.primary};
+    cursor: pointer;
+    display: none;
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    background-color: transparent;
+    height: 48px;
+    padding-left: 9px;
+    padding-right: 20px;
+    ${from.desktop} {
+        display: block;
+        padding-top: 5px;
+        height: 42px;
+    }
+    :hover,
+    :focus {
+        color: ${brandAlt[400]};
+    }
+`;
+
+const textStyles = ({ showExpandedMenu }: { showExpandedMenu: boolean }) => css`
+    display: block;
+    height: 100%;
+    :after {
+        content: '';
+        border: 1px solid currentColor;
+        border-left: transparent;
+        border-top: transparent;
+        display: inline-block;
+        height: 8px;
+        margin-left: 6px;
+        transform: ${showExpandedMenu
+        ? 'translateY(1px) rotate(-135deg)'
+        : 'translateY(-3px) rotate(45deg)'};
+        transition: transform 250ms ease-out;
+        vertical-align: middle;
+        width: 8px;
+    }
+    :hover:after {
+        transform: ${showExpandedMenu
+        ? 'translateY(-2px) rotate(-135deg)'
+        : 'translateY(0) rotate(45deg)'};
+    }
+`;
+
+
 export const ExpandedMenu: React.FC<{
     id: string;
     nav: NavType;
@@ -76,11 +131,24 @@ export const ExpandedMenu: React.FC<{
 }> = ({ id, nav, showExpandedMenu, toggleExpandedMenu }) => {
     return (
         <>
-            <ExpandedMenuToggle
+            <VeggieBurger
                 showExpandedMenu={showExpandedMenu}
                 toggleExpandedMenu={toggleExpandedMenu}
                 ariaControls={id}
+                key="VeggieBurger"
             />
+            <button
+                className={openExpandedMenuStyles}
+                onClick={() => toggleExpandedMenu(!showExpandedMenu)}
+                aria-controls={id}
+                key="OpenExpandedMenuButton"
+                data-link-name={`nav2 : veggie-burger : ${
+                    showExpandedMenu ? 'show' : 'hide'
+                    }`}
+            >
+                <span className={screenReadableStyle}>Show</span>
+                <span className={textStyles({ showExpandedMenu })}>More</span>
+            </button>
             <div
                 className={cx(mainMenu, {
                     [showExpandedMenuStyles]: showExpandedMenu,

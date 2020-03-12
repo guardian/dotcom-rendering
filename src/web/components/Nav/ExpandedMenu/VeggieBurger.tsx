@@ -70,62 +70,41 @@ const veggieBurgerIcon = ({
             ${lineStyles};
             ${beforeAfterStyles};
             ${showExpandedMenu
-                ? `top: 0;
+            ? `top: 0;
             transform: rotate(-45deg);
             `
-                : 'top: -6px;'};
+            : 'top: -6px;'};
         }
         :after {
             ${lineStyles};
             ${beforeAfterStyles};
             ${showExpandedMenu
-                ? `bottom: 0;
+            ? `bottom: 0;
             transform: rotate(45deg);
             `
-                : 'bottom: -6px;'};
+            : 'bottom: -6px;'};
         }
     `;
 };
 
-export const VeggieBurger: React.FC<{
-    toggleExpandedMenu: (value: boolean) => void;
-    showExpandedMenu: boolean;
-    enhanceCheckbox: boolean;
-    htmlFor: string;
-    ariaControls: string;
-}> = ({
+export const VeggieBurger = ({
     toggleExpandedMenu,
     showExpandedMenu,
-    enhanceCheckbox,
-    htmlFor,
     ariaControls,
-}) => {
-    if (enhanceCheckbox) {
-        return (
-            <button
-                className={veggieBurger({ showExpandedMenu })}
-                onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-                aria-controls={ariaControls}
-                aria-label="Toggle main menu"
-                data-link-name={`nav2 : veggie-burger : ${
-                    showExpandedMenu ? 'hide' : 'show'
-                }`}
-            >
-                <span className={veggieBurgerIcon({ showExpandedMenu })} />
-            </button>
-        );
-    }
-
-    return (
-        <label
+}: {
+    toggleExpandedMenu: (value: boolean) => void;
+    showExpandedMenu: boolean;
+    ariaControls: string;
+}) => (
+        <button
             className={veggieBurger({ showExpandedMenu })}
             onClick={() => toggleExpandedMenu(!showExpandedMenu)}
-            htmlFor={htmlFor}
-            tabIndex={0}
-            role="button"
+            aria-controls={ariaControls}
             aria-label="Toggle main menu"
+            data-link-name={`nav2 : veggie-burger : ${
+                showExpandedMenu ? 'hide' : 'show'
+                }`}
         >
             <span className={veggieBurgerIcon({ showExpandedMenu })} />
-        </label>
-    );
-};
+        </button>
+    )
