@@ -5,12 +5,14 @@ import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
 import { series } from '@root/fixtures/series';
 import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
+import { discussion } from '@root/fixtures/discussion';
+import { storypackage } from '@root/fixtures/storypackage';
 
 export const mockRESTCalls = () =>
     fetchMock
         .restore()
         // Most read by Geo
-        .getOnce(
+        .get(
             /.*api.nextgen.guardianapps.co.uk\/most-read-geo.*/,
             {
                 status: 200,
@@ -19,8 +21,8 @@ export const mockRESTCalls = () =>
             { overwriteRoutes: false },
         )
         // Comment count
-        .getOnce(
-            /.*api.nextgen.guardianapps.co.uk\/discussion.*/,
+        .get(
+            /.*api.nextgen.guardianapps.co.uk\/discussion\/comment-counts.*/,
             {
                 status: 200,
                 body: commentCount,
@@ -28,7 +30,7 @@ export const mockRESTCalls = () =>
             { overwriteRoutes: false },
         )
         // Most read by category
-        .getOnce(
+        .get(
             /.*api.nextgen.guardianapps.co.uk\/most-read.*/,
             {
                 status: 200,
@@ -37,7 +39,7 @@ export const mockRESTCalls = () =>
             { overwriteRoutes: false },
         )
         // Series
-        .getOnce(
+        .get(
             /.*api.nextgen.guardianapps.co.uk\/series.*/,
             {
                 status: 200,
@@ -45,8 +47,17 @@ export const mockRESTCalls = () =>
             },
             { overwriteRoutes: false },
         )
+        // Story package
+        .get(
+            /.*api.nextgen.guardianapps.co.uk\/story-package.*/,
+            {
+                status: 200,
+                body: storypackage,
+            },
+            { overwriteRoutes: false },
+        )
         // Rich link
-        .getOnce(
+        .get(
             /.*api.nextgen.guardianapps.co.uk\/embed\/card.*/,
             {
                 status: 200,
@@ -55,11 +66,29 @@ export const mockRESTCalls = () =>
             { overwriteRoutes: false },
         )
         // Article share count
-        .getOnce(
+        .get(
             /.*api.nextgen.guardianapps.co.uk\/sharecount.*/,
             {
                 status: 200,
                 body: sharecount,
+            },
+            { overwriteRoutes: false },
+        )
+        // Article share count
+        .get(
+            /.*discussion.theguardian.com\/discussion-api\/discussion\/p\/.*/,
+            {
+                status: 200,
+                body: discussion,
+            },
+            { overwriteRoutes: false },
+        )
+        // Article share count
+        .get(
+            /.*api.nextgen.guardianapps.co.uk\/geolocation.*/,
+            {
+                status: 200,
+                body: { country: 'GB' },
             },
             { overwriteRoutes: false },
         );
