@@ -49,7 +49,7 @@ const normalHeadline = css`
     padding: 0;
 
     p, ul {
-        padding-left: 0;
+        ${textPadding}
     }
 `;
 
@@ -61,7 +61,7 @@ const thinHeadline = css`
     }
 
     p, ul {
-        padding-left: 0;
+        ${textPadding}
     }
 `;
 

@@ -7,20 +7,22 @@ import { renderText } from 'renderer';
 import { Option } from 'types/option';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
-    padding-bottom: 6px;
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2rem;
     background: ${liveblogBackground};
     color: ${neutral[97]};
 
     p, ul {
-        margin: 0;
-        padding: 0;
+        margin-left: 0;
+        padding-left: 0;
     }
 
     a {
         color: ${neutral[93]};
+    }
+
+    li {
+        ::before {
+            opacity: .4;
+        }
     }
 `;
 
