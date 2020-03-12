@@ -30,6 +30,8 @@ export const Header = ({ isSignedIn, edition }: Props) => (
         </Hide>
         <Logo />
         <div id="reader-revenue-links-header" />
-        <Links isSignedIn={isSignedIn} />
+        <div id="links-root">
+            <Links isSignedIn={isSignedIn} />
+        </div>
     </header>
 );
