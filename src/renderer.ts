@@ -88,7 +88,7 @@ const bulletStyles = (colour: string): SerializedStyles => css`
 const HeadingTwoStyles = css`
     font-size: 1.4rem;
     font-weight: 700;
-    margin: 1rem 0 4px 0;
+    margin: ${remSpace[4]} 0 ${remSpace[1]} 0;
     ${textPadding}
 
     & + p {
