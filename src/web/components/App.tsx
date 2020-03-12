@@ -22,7 +22,7 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 
-type Props = { CAPI: CAPIType; NAV: NavType };
+type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
@@ -132,7 +132,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 ))}
 
             <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.switches.cmpUi} />
+                <CMP cmpUi={CAPI.config.cmpUi} />
             </Portal>
             <Portal root="share-comment-counts">
                 <Counts
