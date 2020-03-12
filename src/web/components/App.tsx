@@ -65,24 +65,6 @@ export const App = ({ CAPI, NAV }: Props) => {
         CAPI.isCommentable,
     ]);
 
-    const richLinks: {
-        element: RichLinkBlockElement;
-        root: IslandType;
-        richLinkIndex: number;
-    }[] = [];
-    CAPI.blocks[0].elements.map((element, i) => {
-        if (
-            element._type ===
-            'model.dotcomrendering.pageElements.RichLinkBlockElement'
-        ) {
-            richLinks.push({
-                element,
-                root: `rich-link`,
-                richLinkIndex: i,
-            });
-        }
-    });
-
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -119,21 +101,20 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Hydrate>
 
-            {richLinks &&
-                richLinks.map((link, index) => (
-                    <Portal
-                        key={index}
-                        root={link.root}
-                        richLinkIndex={link.richLinkIndex}
-                    >
-                        <RichLinkComponent
-                            element={link.element}
-                            pillar={CAPI.pillar}
-                            ajaxEndpoint={CAPI.config.ajaxUrl}
-                            richLinkIndex={link.richLinkIndex}
-                        />
-                    </Portal>
-                ))}
+            {CAPI.richLinks.map((link, index) => (
+                <Portal
+                    key={index}
+                    root="rich-link"
+                    richLinkIndex={link.richLinkIndex}
+                >
+                    <RichLinkComponent
+                        element={link}
+                        pillar={CAPI.pillar}
+                        ajaxEndpoint={CAPI.config.ajaxUrl}
+                        richLinkIndex={index}
+                    />
+                </Portal>
+            ))}
 
             <Portal root="cmp">
                 <CMP cmpUi={CAPI.config.cmpUi} />
