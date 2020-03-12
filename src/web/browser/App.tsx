@@ -13,7 +13,6 @@ import { OnwardsUpper } from '@frontend/web/components/Onwards/OnwardsUpper';
 import { OnwardsLower } from '@frontend/web/components/Onwards/OnwardsLower';
 import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
-import { Header } from '@frontend/web/components/Header';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -37,7 +36,6 @@ type RootType =
     | 'onwards-upper'
     | 'onwards-lower'
     | 'rich-link'
-    | 'header-root'
     | 'comments-root';
 
 export const hydrateApp = ({ CAPI, NAV }: { CAPI: CAPIType; NAV: NavType }) => {
@@ -118,9 +116,6 @@ const App = ({ CAPI, NAV }: Props) => {
         //
         // Note: Both require a 'root' element that needs to be server rendered.
         <>
-            <Hydrate root="header-root">
-                <Header isSignedIn={isSignedIn} edition={CAPI.editionId} />
-            </Hydrate>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
             </Hydrate>

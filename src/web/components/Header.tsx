@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const Header = ({ isSignedIn, edition }: Props) => (
-    <header id="header-root" className={headerStyles}>
+    <header className={headerStyles}>
         <Hide when="below" breakpoint="desktop">
             <div data-island="edition-root">
                 <EditionDropdown
