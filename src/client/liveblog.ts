@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import LiveblogBody from 'components/liveblog/body';
 import { createElement as h } from 'react';
 import { Content } from 'mapiThriftModels';
+import { partition, Err, Ok } from 'types/result';
+import { parse } from './parser';
 
 // ----- Run ----- //
 
@@ -19,12 +21,11 @@ declare global {
 
 setup();
 
-const browserParser = (string: string): DocumentFragment => {
-    const frag = new DocumentFragment();
-    const docNodes = new DOMParser().parseFromString(string, 'text/html').body.childNodes;
-    Array.from(docNodes).forEach(node => frag.appendChild(node));
-    return frag;
-}
+const browserParser = (string: string): DocumentFragment =>
+    parse(new DOMParser())(string)
+        .toOption()
+        .fmap(frag => frag)
+        .withDefault(new DocumentFragment())
 
 const {
     pillar,
