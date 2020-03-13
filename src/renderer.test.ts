@@ -4,10 +4,10 @@ import { Pillar } from 'pillar';
 import { ReactNode, createElement as h } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';
-import { ElementKind, BodyElement } from 'item';
+import { ElementKind, BodyElement, Role } from 'item';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { None } from 'types/option';
+import { None, Some } from 'types/option';
 
 configure({ adapter: new Adapter() });
 
@@ -31,8 +31,14 @@ const imageElement = (): BodyElement =>
         credit: "credit",
         width: 500,
         height: 500,
-        role: ""
+        role: new None()
     });
+
+const imageElementWithRole = () =>
+    ({
+        ...imageElement(),
+        role: new Some(Role.Thumbnail)
+    })
 
 const pullquoteElement = (): BodyElement =>
     ({
@@ -142,6 +148,12 @@ describe('Renders different types of elements', () => {
         expect(bodyImage.html()).toContain('figcaption');
         expect(bodyImage.html()).toContain('caption="caption"');
         expect(bodyImage.html()).toContain('credit="credit"');
+    })
+
+    test('ElementKind.Image with thumbnail role', () => {
+        const nodes = render(imageElementWithRole())
+        const bodyImage = shallow(nodes.flat()[0]);
+        expect(bodyImage.html()).toContain('img');
     })
 
     test('ElementKind.Pullquote', () => {

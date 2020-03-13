@@ -1,6 +1,7 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
 import { fromCapi, Design, Standard, ElementKind, Image, Review } from 'item';
 import { JSDOM } from "jsdom";
+import { None } from "types/option";
 
 const articleContent = {
     id: "",
@@ -231,7 +232,7 @@ describe('image elements', () => {
             width: 500,
             height: 500,
             captionString: "",
-            role: ""
+            role: new None()
         }) as Image;
         expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"))
     })
