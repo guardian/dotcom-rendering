@@ -2,15 +2,12 @@
 
 import React, { FC, ReactNode } from 'react';
 import { css } from '@emotion/core';
-import { breakpoints } from '@guardian/src-foundations';
-
 import Image, { Props as ImageProps } from 'components/image';
 import { Pillar } from 'pillar';
 
-
 // ----- Setup ----- //
 
-const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
+const sizes = `(min-width: 140px)`;
 
 
 // ----- Component ----- //
