@@ -84,7 +84,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="footer : "
                     noResponsive={true}
-                    inHeader={false}
+                    inHeader={true}
                 />
             </Portal>
             <Hydrate root="links-root">
@@ -196,7 +196,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="nav2 : "
                         noResponsive={false}
-                        inHeader={true}
+                        inHeader={false}
                     />
                 </Lazy>
             </Portal>
