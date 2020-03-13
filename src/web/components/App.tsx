@@ -110,21 +110,18 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </>
                 </Hydrate>
             )}
-
             {CAPI.richLinks.map((link, index) => (
                 <Portal
                     key={index}
                     root="rich-link"
                     richLinkIndex={link.richLinkIndex}
                 >
-                    <Lazy margin={-100}>
-                        <RichLinkComponent
-                            element={link}
-                            pillar={CAPI.pillar}
-                            ajaxEndpoint={CAPI.config.ajaxUrl}
-                            richLinkIndex={index}
-                        />
-                    </Lazy>
+                    <RichLinkComponent
+                        element={link}
+                        pillar={CAPI.pillar}
+                        ajaxEndpoint={CAPI.config.ajaxUrl}
+                        richLinkIndex={index}
+                    />
                 </Portal>
             ))}
             <Portal root="share-comment-counts">
@@ -141,18 +138,16 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Lazy>
             </Portal>
             <Portal root="slot-body-end">
-                <Lazy margin={-300}>
-                    <SlotBodyEnd
-                        isSignedIn={isSignedIn}
-                        countryCode={countryCode}
-                        contentType={CAPI.contentType}
-                        sectionName={CAPI.sectionName}
-                        shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-                        isMinuteArticle={CAPI.pageType.isMinuteArticle}
-                        isPaidContent={CAPI.pageType.isPaidContent}
-                        tags={CAPI.tags}
-                    />
-                </Lazy>
+                <SlotBodyEnd
+                    isSignedIn={isSignedIn}
+                    countryCode={countryCode}
+                    contentType={CAPI.contentType}
+                    sectionName={CAPI.sectionName}
+                    shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+                    isMinuteArticle={CAPI.pageType.isMinuteArticle}
+                    isPaidContent={CAPI.pageType.isPaidContent}
+                    tags={CAPI.tags}
+                />
             </Portal>
             <Portal root="onwards-upper">
                 <Lazy margin={-300}>
@@ -187,15 +182,12 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
-            {/* TODO: If we lazy load this entire component we won't render the advert */}
             <Portal root="most-viewed-footer">
-                <Lazy margin={-300}>
-                    <MostViewedFooter
-                        pillar={CAPI.pillar}
-                        sectionName={CAPI.sectionName}
-                        ajaxUrl={CAPI.config.ajaxUrl}
-                    />
-                </Lazy>
+                <MostViewedFooter
+                    pillar={CAPI.pillar}
+                    sectionName={CAPI.sectionName}
+                    ajaxUrl={CAPI.config.ajaxUrl}
+                />
             </Portal>
             <Portal root="reader-revenue-links-footer">
                 <Lazy margin={-300}>
