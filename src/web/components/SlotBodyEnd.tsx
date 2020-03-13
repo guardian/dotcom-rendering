@@ -20,19 +20,20 @@ const checkForErrors = (response: any) => {
 
 type OphanAction = 'INSERT' | 'VIEW';
 
-const epicTestName = 'DotcomRenderingEpic';
+const epicTestName = 'FrontendDotcomRenderingEpic';
 
 const sendOphanEvent = (action: OphanAction): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_remote',
-            id: 'gdnwb_copts_memco_dotcom_rendering_epic_remote',
+            campaignCode:
+                'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
+            id: 'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
         },
         abTest: {
-            name: 'dotcom_rendering_epic',
-            variant: 'remote',
+            name: 'frontend_dotcom_rendering_epic',
+            variant: 'dcr',
         },
         action,
     };
@@ -62,9 +63,10 @@ const buildPayload = (props: Props) => {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
-            campaignCode: 'gdnwb_copts_memco_dotcom_rendering_epic_remote',
-            abTestName: 'dotcom_rendering_epic',
-            abTestVariant: 'remote',
+            campaignCode:
+                'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
+            abTestName: 'frontend_dotcom_rendering_epic',
+            abTestVariant: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
         },
         localisation: {
@@ -102,7 +104,7 @@ const MemoisedInner = (props: Props) => {
 
     useEffect(() => {
         const contributionsPayload = buildPayload(props);
-        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
+        getBodyEnd(contributionsPayload)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
