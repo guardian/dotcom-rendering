@@ -34,7 +34,7 @@ const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
     color: ${text.primary};
 
     p, ul {
-        margin: 0;
+        margin: ${remSpace[2]} 0;
     }
 
     address {
@@ -46,6 +46,11 @@ const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
 
 const normalHeadline = css`
     ${headline.xxxsmall({ fontWeight: 'bold' })}
+    padding: 0;
+
+    p, ul {
+        padding-left: 0;
+    }
 `;
 
 const thinHeadline = css`
@@ -53,6 +58,10 @@ const thinHeadline = css`
 
     ${from.tablet} {
         ${headline.xxsmall({ fontWeight: 'light' })}
+    }
+
+    p, ul {
+        padding-left: 0;
     }
 `;
 

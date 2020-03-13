@@ -3,10 +3,10 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
-
-import { headlineFont, basePx } from 'styles';
+import { basePx } from 'styles';
 import { Series } from 'capi';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { headline } from '@guardian/src-foundations/typography';
 
 
 // ----- Styles ----- //
@@ -19,13 +19,10 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     top: -78px;
 
     a {
-        font-weight: 700;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
         color: ${neutral[100]};
         text-decoration: none;
         white-space: nowrap;
-        ${headlineFont}
+        ${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
     }
 `;
 
