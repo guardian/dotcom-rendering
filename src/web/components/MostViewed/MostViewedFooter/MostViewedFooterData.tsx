@@ -50,11 +50,9 @@ export const MostViewedFooterData = ({
     ajaxUrl,
 }: Props) => {
     const url = buildSectionUrl(ajaxUrl, sectionName);
-    const { data, error, loading } = useApi<
+    const { data, error } = useApi<
         MostViewedFooterPayloadType | TrailTabType[]
     >(url);
-    console.log('MV rendered');
-    console.log({ data, error, loading });
 
     if (error) {
         window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
