@@ -1,8 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import isChromatic from 'storybook-chromatic/isChromatic';
-
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 
 type Props = {
@@ -26,16 +24,17 @@ export const Lazy = ({ children, margin }: Props) => {
         return null;
     }
 
-    // Why do we check to see if we're irunning in Chromatic here?
-    // Because we use this as a flag to know when a component is
+    // Why do we check to see if we're disabled here? Because we
+    // use this as a flag to know when a component is
     // being loaded as part of a Chromatic story or not so that
     // we can prevent lazy loading our storybook snapshots that we
     // use for visual regression
-    const renderChildren = hasBeenSeen || isChromatic();
-
+    const renderChildren = hasBeenSeen || Lazy.disabled;
     return (
         <div ref={setRef} className={flexGrowStyles}>
             {renderChildren && <>{children}</>}
         </div>
     );
 };
+
+Lazy.disabled = false;
