@@ -4,6 +4,7 @@ import { FC, ReactNode } from 'react';
 import React, { css } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
+import { textPadding } from 'styles';
 
 
 // ----- Component ----- //
@@ -14,6 +15,7 @@ interface Props {
 
 const styles = css`
     ${body.medium()}
+    ${textPadding}
     overflow-wrap: break-word;
     margin: 0 0 ${remSpace[3]};
 `;

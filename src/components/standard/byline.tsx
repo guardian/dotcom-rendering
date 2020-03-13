@@ -5,12 +5,12 @@ import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 
 import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
-import { formatDate } from 'date';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
 import { PillarStyles, getPillarStyles } from 'pillar';
 import { Standard, Review } from 'item';
 import Author from 'components/shared/author';
+import Dateline from 'components/dateline';
 
 
 // ----- Styles ----- //
@@ -23,7 +23,6 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
     .author {
         address {
-            line-height: 2.2rem;
             font-style: italic;
 
             a {
@@ -43,7 +42,7 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
         }
 
         time {
-            font-size: 1.4rem;
+            ${textSans.small()};
             color: ${neutral[46]};
         }
     }
@@ -87,9 +86,7 @@ function Byline({ item, imageSalt }: Props): JSX.Element {
                 />
                 <div className="author">
                     <Author byline={item.bylineHtml} pillar={item.pillar} />
-                    { item.publishDate
-                        .fmap<JSX.Element | null>(date => <time data-date={date} className="date">{ formatDate(new Date(date)) }</time>)
-                        .withDefault(null) }
+                    <Dateline date={item.publishDate} />
                     <Follow contributors={item.contributors} />
                 </div>
             </div>

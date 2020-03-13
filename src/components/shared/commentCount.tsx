@@ -20,7 +20,7 @@ const CommentCountStyles = (colour: string): SerializedStyles => css`
     span::before {
         ${icons};
         display: block;
-        font-size: 2.2rem;
+        font-size: 1.4rem;
         content: '\\e03c';
         color: ${colour};
     }
@@ -28,8 +28,8 @@ const CommentCountStyles = (colour: string): SerializedStyles => css`
     button {
         padding: ${basePx(1, 1, 2, 1)};
         font-weight: 600;
-        font-size: 1.8rem;
-        line-height: 1.8rem;
+        font-size: 1.4rem;
+        line-height: 1.4rem;
         border: none;
         color: ${colour};
     }

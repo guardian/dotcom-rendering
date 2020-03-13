@@ -6,10 +6,11 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 
 import Follow from 'components/shared/follow';
 import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
-import { formatDate } from 'date';
 import { Contributor } from 'capi';
 import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
 import { Option } from 'types/option';
+import Dateline from 'components/dateline';
+
 
 // ----- Styles ----- //
 
@@ -26,7 +27,7 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
         }
 
         time {
-            font-size: 1.4rem;
+            ${textSans.small()};
             color: ${neutral[46]};
         }
     }
@@ -64,9 +65,7 @@ function Byline({ pillar, publicationDate, contributors, className }: Props): JS
         <div css={[className, Styles(pillarStyles), DarkStyles(pillarStyles)]}>
             <div css={sidePadding}>
                 <div className="author">
-                    { publicationDate
-                        .fmap<JSX.Element | null>(date => <time>{formatDate(date)}</time>)
-                        .withDefault(null) }
+                    <Dateline date={publicationDate} />
                     <Follow contributors={contributors} />
                 </div>
             </div>

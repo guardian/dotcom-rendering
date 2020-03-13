@@ -16,6 +16,7 @@ const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyle
 
     p, ul {
         margin: 0;
+        padding: 0;
     }
 
     a {

@@ -4,13 +4,15 @@ import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
-
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
-import { basePx, icons, headlineFont, darkModeCss, textSans } from 'styles';
+import { basePx, icons, darkModeCss, textPadding } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement } from 'item';
 import Paragraph from 'components/paragraph';
+import BodyImage from 'components/bodyImage';
+import { headline } from '@guardian/src-foundations/typography';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Renderer ----- //
@@ -50,8 +52,7 @@ const listStyles: SerializedStyles = css`
 
 const listItemStyles: SerializedStyles = css`
     padding-left: 2rem;
-    line-height: 2.2rem;
-    padding-bottom: 0.375rem;
+    padding-bottom: ${remSpace[2]};
 
     &::before {
         display: inline-block;
@@ -62,17 +63,19 @@ const listItemStyles: SerializedStyles = css`
         margin-right: 1rem;
         background-color: ${neutral[86]};
         margin-left: -2rem;
+        vertical-align: middle;
     }
 
     > p:first-of-type {
         display: inline;
+        padding: 0;
     }
 `
 
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
     display: inline-block;
-
+    ${textPadding}
     &::before {
         content: '';
         background-color: ${colour};
@@ -84,10 +87,10 @@ const bulletStyles = (colour: string): SerializedStyles => css`
 `;
 
 const HeadingTwoStyles = css`
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    margin: 1rem 0 4px 0;
+    font-size: 1.4rem;
     font-weight: 700;
+    margin: 1rem 0 4px 0;
+    ${textPadding}
 
     & + p {
         margin-top: 0;
@@ -179,10 +182,6 @@ interface ImageProps {
     pillar: Pillar;
 }
 
-type FigureElement = ImageProps & {
-    className?: SerializedStyles;
-}
-
 const imageStyles = (width: number, height: number): SerializedStyles => css`
     height: calc(100vw * ${height / width});
     background: ${neutral[97]};
@@ -211,52 +210,11 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
     });
 }
 
-const FigureElement = (props: FigureElement): ReactElement =>
-    styledH('figure', { css: props.className },
-        h(ImageElement, props),
-        h('figcaption', null, text(props.caption, props.pillar)),
-    );
-
-const bodyImageStyles = css`
-    margin-left: ${basePx(-1)};
-    margin-right: ${basePx(-1)};
-
-    ${from.phablet} {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    ${from.wide} {
-        margin: 1em 0;
-    }
-
-    img {
-        width: 100%; 
-    }
-
-    figcaption {
-        font-size: 1.4rem;
-        line-height: 1.8rem;
-        color: ${neutral[46]};
-        ${textSans}
-
-        ${until.phablet} {
-            padding-left: ${basePx(1)};
-            padding-right: ${basePx(1)};
-        }
-    }
-`;
-
-const BodyImage = (props: Omit<FigureElement, 'sizes'>): ReactElement =>
-    h(FigureElement, { ...props, sizes: '100vw', className: bodyImageStyles });
-
 const pullquoteStyles = (colour: string): SerializedStyles => css`
-    font-weight: 200;
-    font-size: 2.2rem;
-    line-height: 1.3;
     color: ${colour};
-    ${headlineFont}
     margin: 0;
+    ${headline.small({ fontWeight: 'light' })};
+    ${textPadding}
 
     blockquote {
         margin-left: 0;
@@ -271,6 +229,7 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
             content: '\\e11c';
             display: inline-block;
             margin-right: ${basePx(1)};
+            ${headline.small({ fontWeight: 'light' })};
         }
     }
 
@@ -348,7 +307,7 @@ const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): Rea
     );
 
 const Interactive = (props: { url: string }): ReactElement =>
-    h('figure', { className: 'interactive' },
+    styledH('figure', { className: 'interactive', css: css`${textPadding}` },
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
@@ -366,16 +325,17 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
         case ElementKind.Image:
             const { file, alt, caption, captionString, credit, width, height } = element;
             return h(BodyImage, {
-                url: file,
-                alt,
-                salt,
-                caption,
-                captionString,
-                credit,
-                key,
-                width,
-                height,
-                pillar
+                image: {
+                    url: file,
+                    alt,
+                    salt,
+                    width,
+                    height,
+                    caption: captionString,
+                    credit,
+                },
+                figcaption: text(caption, pillar),
+                pillar,
             });
 
         case ElementKind.Pullquote:

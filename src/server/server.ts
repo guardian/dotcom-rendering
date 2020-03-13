@@ -54,7 +54,7 @@ async function serveArticlePost(
     res.write(html);
     res.end();
   } catch (e) {
-    logger.error(`This error occurred, but I don't know why: ${e}`);
+    logger.error(`This error occurred`, e);
     next(e);
   }
 }
@@ -108,11 +108,11 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
       }
     } else {
       const response: ErrorResponse = ErrorResponse.read(protocol);
-      logger.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message}`);
+      logger.error(`I received a ${capiResponse.status} code from CAPI with the message: ${response.message} for resource ${articleId}`);
       res.sendStatus(500);
     }
   } catch (e) {
-    logger.error(`This error occurred, but I don't know why: ${e}`);
+    logger.error(`This error occurred`, e);
     res.sendStatus(500);
   }
 }
@@ -135,7 +135,7 @@ app.all('*', (request, response, next) => {
   next();
 });
 
-app.use('/public', express.static(path.resolve(__dirname, '../public')));
+app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
 

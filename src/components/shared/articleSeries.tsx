@@ -1,17 +1,15 @@
 import React from 'react';
-import { sidePadding, headlineFont } from 'styles';
+import { sidePadding } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from '../../capi';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
+import { headline } from '@guardian/src-foundations/typography';
 
 const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     a {
-        font-weight: 700;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
+        ${headline.xxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
         color: ${kicker};
         text-decoration: none;
-        ${headlineFont}
         ${sidePadding}
     }
 `;
