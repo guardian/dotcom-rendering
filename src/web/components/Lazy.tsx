@@ -1,20 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import isChromatic from 'storybook-chromatic/isChromatic';
+
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 
 type Props = {
     children: JSX.Element;
     margin: number;
-};
-
-// See: https://stackoverflow.com/a/326076
-const inIframe = () => {
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
-    }
 };
 
 // Ensure the ref wrapper expands. This is used for componenents like
@@ -33,13 +26,12 @@ export const Lazy = ({ children, margin }: Props) => {
         return null;
     }
 
-    // Why do we check to see if we're in an iframe here?
+    // Why do we check to see if we're irunning in Chromatic here?
     // Because we use this as a flag to know when a component is
-    // being loaded as part of a Storybook story or not so that
+    // being loaded as part of a Chromatic story or not so that
     // we can prevent lazy loading our storybook snapshots that we
-    // use for visual regression. Storybook stories are always in
-    // iframes.
-    const renderChildren = hasBeenSeen || inIframe();
+    // use for visual regression
+    const renderChildren = hasBeenSeen || isChromatic();
 
     return (
         <div ref={setRef} className={flexGrowStyles}>
