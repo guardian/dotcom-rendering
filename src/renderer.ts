@@ -48,10 +48,11 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
 const listStyles: SerializedStyles = css`
     list-style: none;
     padding-left: 0;
+    padding-right: .5rem;
 `
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: 2rem;
+    padding-left: 2.5rem;
     padding-bottom: ${remSpace[2]};
 
     &::before {
