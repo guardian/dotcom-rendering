@@ -1,12 +1,11 @@
 // ----- Imports ----- //
 
 import setup from 'client/setup';
-import { fromCapi, Liveblog } from 'item';
+import { fromCapiLiveBlog } from 'item';
 import ReactDOM from 'react-dom';
 import LiveblogBody from 'components/liveblog/body';
 import { createElement as h } from 'react';
 import { Content } from 'mapiThriftModels';
-import { partition, Err, Ok } from 'types/result';
 import { parse } from './parser';
 
 // ----- Run ----- //
@@ -31,6 +30,6 @@ const {
     pillar,
     blocks,
     totalBodyBlocks
-} = fromCapi(browserParser)(window.__INITIAL__DATA__) as Liveblog;
+} = fromCapiLiveBlog(browserParser)(window.__INITIAL__DATA__);
 const { imageSalt } = window.__INITIAL__DATA__;
 ReactDOM.hydrate(h(LiveblogBody, { pillar, blocks, imageSalt, totalBodyBlocks }), document.querySelector('#blocks'))
