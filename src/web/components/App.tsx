@@ -133,7 +133,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Portal root="most-viewed-right">
-                <Lazy margin={-100}>
+                <Lazy margin={100}>
                     <MostViewedRightWrapper pillar={CAPI.pillar} />
                 </Lazy>
             </Portal>
@@ -150,7 +150,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Portal root="onwards-upper">
-                <Lazy margin={-300}>
+                <Lazy margin={300}>
                     <OnwardsUpper
                         ajaxUrl={CAPI.config.ajaxUrl}
                         hasRelated={CAPI.hasRelated}
@@ -166,7 +166,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Lazy>
             </Portal>
             <Portal root="onwards-lower">
-                <Lazy margin={-300}>
+                <Lazy margin={300}>
                     <OnwardsLower
                         ajaxUrl={CAPI.config.ajaxUrl}
                         hasStoryPackage={CAPI.hasStoryPackage}
@@ -175,7 +175,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Lazy>
             </Portal>
             <Portal root="comments-root">
-                <Lazy margin={-300}>
+                <Lazy margin={300}>
                     <CommentsLayout
                         commentCount={commentCount}
                         isClosedForComments={isClosedForComments}
@@ -190,7 +190,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Portal root="reader-revenue-links-footer">
-                <Lazy margin={-300}>
+                <Lazy margin={300}>
                     <ReaderRevenueLinks
                         urls={CAPI.nav.readerRevenueLinks.header}
                         edition={CAPI.editionId}
