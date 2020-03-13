@@ -51,6 +51,7 @@ const enum ElementKind {
     Interactive,
     RichLink,
     Tweet,
+    Instagram
 }
 
 interface Format {
@@ -101,6 +102,9 @@ type BodyElement = {
 } | {
     kind: ElementKind.Tweet;
     content: NodeList;
+} | {
+    kind: ElementKind.Instagram;
+    html: string;
 };
 
 type Body =
@@ -245,6 +249,10 @@ const parseElement =
             }
             return tweetContent(id, docParser(h))
                 .fmap(content => ({ kind: ElementKind.Tweet, content }));
+
+        case ElementType.INSTAGRAM:
+            const instagramHtml = element.instagramTypeData?.html ?? "";
+            return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);

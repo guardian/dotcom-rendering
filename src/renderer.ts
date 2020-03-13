@@ -351,6 +351,14 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 
         case ElementKind.Tweet:
             return h(Tweet, { content: element.content, pillar, key });
+
+        case ElementKind.Instagram:
+            const props = {
+                dangerouslySetInnerHTML: {
+                  __html: element.html,
+                },
+            };
+            return h('div', props);
     }
 }
 
