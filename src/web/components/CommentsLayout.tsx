@@ -8,7 +8,7 @@ import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { Hide } from '@frontend/web/components/Hide';
 import { Flex } from '@frontend/web/components/Flex';
 
-import { App as Comments } from 'discussion-rendering';
+import { App as Comments } from '@guardian/discussion-rendering';
 
 type Props = {
     shortUrl: string;
