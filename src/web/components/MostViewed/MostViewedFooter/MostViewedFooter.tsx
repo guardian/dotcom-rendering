@@ -104,7 +104,7 @@ export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => (
                 </Lazy>
                 <div
                     className={css`
-                        margin: 0.375rem 0 0 0.625rem;
+                        margin: 6px 0 0 10px;
                     `}
                 >
                     <AdSlot asps={namedAdSlotParameters('mostpop')} />
