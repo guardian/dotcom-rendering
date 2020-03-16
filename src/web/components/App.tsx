@@ -14,6 +14,7 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
+import { incrementWeeklyArticleCount } from '@guardian/slot-machine-client';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -65,6 +66,14 @@ export const App = ({ CAPI, NAV }: Props) => {
         CAPI.config.shortUrlId,
         CAPI.isCommentable,
     ]);
+
+    // Log an article view using the Slot Machine client lib
+    // This function must be called once per article serving.
+    // We should monitor this function call to ensure it only happens within an
+    // article pages when other pages are supported by DCR.
+    useEffect(() => {
+        incrementWeeklyArticleCount();
+    }, []);
 
     return (
         // Do you need to Hydrate or do you want a Portal?
