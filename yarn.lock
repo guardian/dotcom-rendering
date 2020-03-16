@@ -2091,6 +2091,14 @@
     js-cookie "^2.2.1"
     whatwg-fetch "^3.0.0"
 
+"@guardian/discussion-rendering@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-0.1.1.tgz#68d378e07b8f97493f5a35a5be896835cacd5a54"
+  integrity sha512-EcARwj2bp0ndej9bWDYVw+QrQ5ehqKniP9y68zxKo1nBLFMtqVRTdHC6b+TSQmoQPTs8rLYOA8Nr3t3Mmmi7Cw==
+  dependencies:
+    regenerator-runtime "^0.13.3"
+    timeago.js "^4.0.2"
+
 "@guardian/slot-machine-client@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@guardian/slot-machine-client/-/slot-machine-client-0.2.1.tgz#883fd7f2503231c3e1d3fe06947f7b2afe8fce2e"
@@ -14254,6 +14262,11 @@ regenerator-runtime@^0.13.2:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
   integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==
 
+regenerator-runtime@^0.13.3:
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.5.tgz#d878a1d094b4306d10b9096484b33ebd55e26697"
+  integrity sha512-ZS5w8CpKFinUzOwW3c83oPeVXoNsrLsaCoLtJvAClH135j/R77RuymhiSErhm2lKcwSCIpmvIWSbDkIfAqKQlA==
+
 regenerator-transform@^0.14.0:
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.14.1.tgz#3b2fce4e1ab7732c08f665dfdb314749c7ddd2fb"
@@ -16085,6 +16098,11 @@ thunkify@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/thunkify/-/thunkify-2.1.2.tgz#faa0e9d230c51acc95ca13a361ac05ca7e04553d"
   integrity sha1-+qDp0jDFGsyVyhOjYawFyn4EVT0=
+
+timeago.js@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/timeago.js/-/timeago.js-4.0.2.tgz#724e8c8833e3490676c7bb0a75f5daf20e558028"
+  integrity sha512-a7wPxPdVlQL7lqvitHGGRsofhdwtkoSXPGATFuSOA2i1ZNQEPLrGnj68vOp2sOJTCFAQVXPeNMX/GctBaO9L2w==
 
 timed-out@4.0.1, timed-out@^4.0.0:
   version "4.0.1"
