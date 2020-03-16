@@ -1,12 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import {
     neutral,
     border,
     background,
     brandAltBackground,
+    brandBackground,
+    brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -258,7 +259,7 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                         showTopBorder={false}
                         showSideBorders={false}
                         padded={false}
-                        backgroundColour={palette.brand.main}
+                        backgroundColour={brandBackground.primary}
                     >
                         <Header edition={CAPI.editionId} />
                     </Section>
@@ -266,10 +267,10 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                     <Section
                         islandId="nav-root"
                         showSideBorders={true}
-                        borderColour={palette.brand.pastel}
+                        borderColour={brandBorder.primary}
                         showTopBorder={false}
                         padded={false}
-                        backgroundColour={palette.brand.main}
+                        backgroundColour={brandBackground.primary}
                     >
                         <Nav pillar={getCurrentPillar(CAPI)} nav={NAV} />
                     </Section>
@@ -480,8 +481,8 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
 
             <Section
                 padded={false}
-                backgroundColour={palette.brand.main}
-                borderColour={palette.brand.pastel}
+                backgroundColour={brandBackground.primary}
+                borderColour={brandBorder.primary}
             >
                 <Footer
                     nav={NAV}
