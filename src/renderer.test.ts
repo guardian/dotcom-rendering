@@ -59,6 +59,12 @@ const tweetElement = (): BodyElement =>
         content: JSDOM.fragment('<span>Tweet contents<span>').querySelectorAll('span'),
     })
 
+const instagramElement = (): BodyElement =>
+    ({
+        kind: ElementKind.Instagram,
+        html: '<blockquote>Instagram</blockquote>',
+    })
+
 const render = (element: BodyElement): ReactNode[] =>
     renderAll('dummySalt')(Pillar.news, [element]);
 
@@ -166,5 +172,11 @@ describe('Renders different types of elements', () => {
         const nodes = render(tweetElement())
         const tweet = shallow(nodes.flat()[0]);
         expect(tweet.html()).toContain('twitter-tweet');
+    })
+
+    test('ElementKind.Instagram', () => {
+        const nodes = render(instagramElement())
+        const instagram = shallow(nodes.flat()[0]);
+        expect(instagram.html()).toBe('<div><blockquote>Instagram</blockquote></div>');
     })
 });

@@ -404,3 +404,23 @@ describe('tweet elements', () => {
         expect(element.kind).toBe(ElementKind.Interactive)
     })
 });
+
+describe('instagram elements', () => {
+    test('parses instagram elements', () => {
+        const instagramElement = {
+            type: ElementType.INSTAGRAM,
+            assets: [],
+            instagramTypeData: {
+                html: "<p>Instagram post<p>",
+                originalUrl: "",
+                title: "",
+                source: "",
+                authorUrl: "",
+                authorUsername: ""
+            }
+        }
+        const item = f(articleContentWithElement(instagramElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Instagram)
+    })
+});
