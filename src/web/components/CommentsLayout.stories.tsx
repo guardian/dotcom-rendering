@@ -4,6 +4,8 @@ import { Section } from '@frontend/web/components/Section';
 import { RightColumn } from '@frontend/web/components/RightColumn';
 import { Flex } from '@frontend/web/components/Flex';
 
+import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
+
 import { CommentsLayout } from './CommentsLayout';
 
 /* tslint:disable */
@@ -13,11 +15,13 @@ export default {
 };
 /* tslint:enable */
 
+mockRESTCalls();
+
 export const Default = () => (
     <Section>
         <Flex>
             <CommentsLayout
-                shortUrl="/p/39f5z/"
+                shortUrl="p/39f5z/"
                 commentCount={345}
                 isClosedForComments={false}
             />
