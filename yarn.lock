@@ -2091,10 +2091,10 @@
     js-cookie "^2.2.1"
     whatwg-fetch "^3.0.0"
 
-"@guardian/slot-machine-client@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@guardian/slot-machine-client/-/slot-machine-client-0.2.4.tgz#fece85f95c41190c5194ac77b09123faf1c7e293"
-  integrity sha512-4kHpDb1G/x9DoGThDBr5U5vryIBhugBHxuY6T4VbhyJTcEkKf1m99/KnaMHyu+w2Cpa3zqagQrw/en+0Pj2RAw==
+"@guardian/slot-machine-client@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@guardian/slot-machine-client/-/slot-machine-client-0.2.6.tgz#4d323d31322ad4ae56bd9cc578516ec28e3ef36f"
+  integrity sha512-2rPLnFOs0kBp6rvWYyZURSLcsD6gzP9WSiN3bv/ZSC07LLnKyQwhGB8q/sNtFkkgCdt1sbVcMtlzmCAKsNudBA==
 
 "@guardian/src-button@^0.13.0":
   version "0.13.0"
