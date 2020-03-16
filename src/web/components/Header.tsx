@@ -19,9 +19,9 @@ type Props = {
 };
 
 export const Header = ({ isSignedIn, edition }: Props) => (
-    <header id="header-root" className={headerStyles}>
+    <header className={headerStyles}>
         <Hide when="below" breakpoint="desktop">
-            <div data-island="edition-root">
+            <div id="edition-root">
                 <EditionDropdown
                     edition={edition}
                     dataLinkName="nav2 : topbar : edition-picker: toggle"
@@ -30,6 +30,8 @@ export const Header = ({ isSignedIn, edition }: Props) => (
         </Hide>
         <Logo />
         <div id="reader-revenue-links-header" />
-        <Links isSignedIn={isSignedIn} />
+        <div id="links-root">
+            <Links isSignedIn={isSignedIn} />
+        </div>
     </header>
 );

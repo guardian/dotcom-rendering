@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
-import { getBodyEnd, getViewLog } from '@guardian/slot-machine-client';
+import { getBodyEnd, getViewLog, logView } from '@guardian/slot-machine-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
     getLastOneOffContributionDate,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '../browser/cookie';
+import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+
+type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 const checkForErrors = (response: any) => {
     if (!response.ok) {
@@ -15,7 +18,11 @@ const checkForErrors = (response: any) => {
     return response;
 };
 
-const sendOphanInsertEvent = (): void => {
+type OphanAction = 'INSERT' | 'VIEW';
+
+const epicTestName = 'DotcomRenderingEpic';
+
+const sendOphanEvent = (action: OphanAction): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
@@ -27,7 +34,7 @@ const sendOphanInsertEvent = (): void => {
             name: 'remote_epic_test',
             variant: 'remote',
         },
-        action: 'INSERT',
+        action,
     };
 
     window.guardian.ophan.record({ componentEvent });
@@ -89,6 +96,10 @@ const MemoisedInner = (props: Props) => {
         };
     }>();
 
+    const [hasBeenSeen, setNode] = useHasBeenSeen({
+        threshold: 0.5,
+    }) as HasBeenSeen;
+
     useEffect(() => {
         const contributionsPayload = buildPayload(props);
         getBodyEnd(contributionsPayload)
@@ -99,7 +110,7 @@ const MemoisedInner = (props: Props) => {
                     slot: { html: json.data.html, css: json.data.css },
                 }),
             )
-            .then(sendOphanInsertEvent)
+            .then(() => sendOphanEvent('INSERT'))
             .catch(error =>
                 window.guardian.modules.sentry.reportError(
                     error,
@@ -108,9 +119,21 @@ const MemoisedInner = (props: Props) => {
             );
     }, []); // only ever call once (we'd rather fail then call the API multiple times)
 
+    useEffect(() => {
+        // This won't be true until we've successfully fetched the data and
+        // rendered the epic (because of how we're wiring up the ref below). And
+        // because of the way the hook behaves, it'll only ever go from false ->
+        // true once.
+        if (hasBeenSeen) {
+            // Add a new entry to the view log when we know an Epic is viewed
+            logView(epicTestName);
+            sendOphanEvent('VIEW');
+        }
+    }, [hasBeenSeen]);
+
     if (data && data.slot) {
         return (
-            <div className={wrapperMargins}>
+            <div ref={setNode} className={wrapperMargins}>
                 {data.slot.css && <style>{data.slot.css}</style>}
                 <div
                     // eslint-disable-next-line react/no-danger

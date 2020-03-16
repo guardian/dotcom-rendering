@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, background } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
@@ -245,12 +245,20 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                     islandId="sub-nav-root"
                 >
                     <SubNav
-                        subnav={NAV.subNavSections}
+                        subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
                         pillar={CAPI.pillar}
                     />
                 </Section>
             )}
+
+            <Section
+                backgroundColour={background.primary}
+                padded={false}
+                showTopBorder={false}
+            >
+                <GuardianLines pillar={CAPI.pillar} />
+            </Section>
 
             <Section
                 showTopBorder={false}
@@ -437,10 +445,11 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
             {NAV.subNavSections && (
                 <Section padded={false} islandId="sub-nav-root">
                     <SubNav
-                        subnav={NAV.subNavSections}
-                        pillar={CAPI.pillar}
+                        subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
+                        pillar={CAPI.pillar}
                     />
+                    <GuardianLines pillar={CAPI.pillar} />
                 </Section>
             )}
 
