@@ -76,7 +76,7 @@ export const mockRESTCalls = () =>
         )
         // Get discussion
         .get(
-            /.*discussion.theguardian.com\/discussion-api\/discussion\/p\/.*/,
+            /.*discussion.theguardian.com\/discussion-api\/discussion\/.*/,
             {
                 status: 200,
                 body: discussion,
