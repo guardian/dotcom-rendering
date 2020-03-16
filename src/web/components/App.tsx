@@ -17,6 +17,7 @@ import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
+import { Lazy } from '@frontend/web/components/Lazy';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
@@ -77,8 +78,23 @@ export const App = ({ CAPI, NAV }: Props) => {
         //
         // Note: Both require a 'root' element that needs to be server rendered.
         <>
+            <Portal root="reader-revenue-links-header">
+                <ReaderRevenueLinks
+                    urls={CAPI.nav.readerRevenueLinks.footer}
+                    edition={CAPI.editionId}
+                    dataLinkNamePrefix="footer : "
+                    noResponsive={true}
+                    inHeader={true}
+                />
+            </Portal>
             <Hydrate root="links-root">
                 <Links isSignedIn={isSignedIn} />
+            </Hydrate>
+            <Hydrate root="edition-root">
+                <EditionDropdown
+                    edition={CAPI.editionId}
+                    dataLinkName="nav2 : topbar : edition-picker: toggle"
+                />
             </Hydrate>
             <Hydrate root="nav-root">
                 <Nav pillar={CAPI.pillar} nav={NAV} />
@@ -94,13 +110,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     </>
                 </Hydrate>
             )}
-            <Hydrate root="edition-root">
-                <EditionDropdown
-                    edition={CAPI.editionId}
-                    dataLinkName="nav2 : topbar : edition-picker: toggle"
-                />
-            </Hydrate>
-
             {CAPI.richLinks.map((link, index) => (
                 <Portal
                     key={index}
@@ -115,10 +124,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Portal>
             ))}
-
-            <Portal root="cmp">
-                <CMP cmpUi={CAPI.config.cmpUi} />
-            </Portal>
             <Portal root="share-comment-counts">
                 <Counts
                     ajaxUrl={CAPI.config.ajaxUrl}
@@ -128,7 +133,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                 />
             </Portal>
             <Portal root="most-viewed-right">
-                <MostViewedRightWrapper pillar={CAPI.pillar} />
+                <Lazy margin={100}>
+                    <MostViewedRightWrapper pillar={CAPI.pillar} />
+                </Lazy>
             </Portal>
             <Portal root="slot-body-end">
                 <SlotBodyEnd
@@ -142,33 +149,38 @@ export const App = ({ CAPI, NAV }: Props) => {
                     tags={CAPI.tags}
                 />
             </Portal>
-
             <Portal root="onwards-upper">
-                <OnwardsUpper
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    hasRelated={CAPI.hasRelated}
-                    hasStoryPackage={CAPI.hasStoryPackage}
-                    isAdFreeUser={CAPI.isAdFreeUser}
-                    pageId={CAPI.pageId}
-                    isPaidContent={CAPI.config.isPaidContent || false}
-                    showRelatedContent={CAPI.config.showRelatedContent}
-                    keywordIds={CAPI.config.keywordIds}
-                    contentType={CAPI.contentType}
-                    tags={CAPI.tags}
-                />
+                <Lazy margin={300}>
+                    <OnwardsUpper
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        hasRelated={CAPI.hasRelated}
+                        hasStoryPackage={CAPI.hasStoryPackage}
+                        isAdFreeUser={CAPI.isAdFreeUser}
+                        pageId={CAPI.pageId}
+                        isPaidContent={CAPI.config.isPaidContent || false}
+                        showRelatedContent={CAPI.config.showRelatedContent}
+                        keywordIds={CAPI.config.keywordIds}
+                        contentType={CAPI.contentType}
+                        tags={CAPI.tags}
+                    />
+                </Lazy>
             </Portal>
             <Portal root="onwards-lower">
-                <OnwardsLower
-                    ajaxUrl={CAPI.config.ajaxUrl}
-                    hasStoryPackage={CAPI.hasStoryPackage}
-                    tags={CAPI.tags}
-                />
+                <Lazy margin={300}>
+                    <OnwardsLower
+                        ajaxUrl={CAPI.config.ajaxUrl}
+                        hasStoryPackage={CAPI.hasStoryPackage}
+                        tags={CAPI.tags}
+                    />
+                </Lazy>
             </Portal>
             <Portal root="comments-root">
-                <CommentsLayout
-                    commentCount={commentCount}
-                    isClosedForComments={isClosedForComments}
-                />
+                <Lazy margin={300}>
+                    <CommentsLayout
+                        commentCount={commentCount}
+                        isClosedForComments={isClosedForComments}
+                    />
+                </Lazy>
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter
@@ -177,23 +189,19 @@ export const App = ({ CAPI, NAV }: Props) => {
                     ajaxUrl={CAPI.config.ajaxUrl}
                 />
             </Portal>
-            <Portal root="reader-revenue-links-header">
-                <ReaderRevenueLinks
-                    urls={CAPI.nav.readerRevenueLinks.footer}
-                    edition={CAPI.editionId}
-                    dataLinkNamePrefix="footer : "
-                    noResponsive={true}
-                    inHeader={false}
-                />
-            </Portal>
             <Portal root="reader-revenue-links-footer">
-                <ReaderRevenueLinks
-                    urls={CAPI.nav.readerRevenueLinks.header}
-                    edition={CAPI.editionId}
-                    dataLinkNamePrefix="nav2 : "
-                    noResponsive={false}
-                    inHeader={true}
-                />
+                <Lazy margin={300}>
+                    <ReaderRevenueLinks
+                        urls={CAPI.nav.readerRevenueLinks.header}
+                        edition={CAPI.editionId}
+                        dataLinkNamePrefix="nav2 : "
+                        noResponsive={false}
+                        inHeader={false}
+                    />
+                </Lazy>
+            </Portal>
+            <Portal root="cmp">
+                <CMP cmpUi={CAPI.config.cmpUi} />
             </Portal>
         </>
     );

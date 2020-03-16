@@ -2,17 +2,14 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 
-import { useApi } from '@root/src/web/lib/api';
 import { namedAdSlotParameters } from '@root/src/model/advertisement';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
+import { Lazy } from '@root/src/web/components/Lazy';
 
-import { joinUrl } from '@root/src/web/lib/joinUrl';
-import { MostViewedFooterGrid } from './MostViewedFooterGrid';
-import { SecondTierItem } from './SecondTierItem';
+import { MostViewedFooterData } from './MostViewedFooterData';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
     display: flex;
@@ -81,95 +78,38 @@ const mostPopularAdStyle = css`
     ${labelStyles};
 `;
 
-const secondTierStyles = css`
-    border-left: 1px solid ${border.secondary};
-    border-right: 1px solid ${border.secondary};
-
-    ${from.tablet} {
-        padding-top: 24px;
-    }
-`;
-
 interface Props {
     sectionName?: string;
     pillar: Pillar;
     ajaxUrl: string;
 }
 
-function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
-    const sectionsWithoutPopular = ['info', 'global'];
-    const hasSection =
-        sectionName && !sectionsWithoutPopular.includes(sectionName);
-    const endpoint: string = `/most-read${
-        hasSection ? `/${sectionName}` : ''
-    }.json`;
-    return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
-}
-
-export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => {
-    const url = buildSectionUrl(ajaxUrl, sectionName);
-    const { data, error } = useApi<
-        MostViewedFooterPayloadType | TrailTabType[]
-    >(url);
-
-    if (error) {
-        window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
-        return null;
-    }
-
-    if (data) {
-        return (
-            <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+export const MostViewedFooter = ({ sectionName, pillar, ajaxUrl }: Props) => (
+    <div className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}>
+        <div
+            className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
+            data-link-name="most-popular"
+            data-component="most-popular"
+        >
+            <section className={asideWidth}>
+                <h2 className={headingStyles}>Most popular</h2>
+            </section>
+            <section className={stackBelow('desktop')}>
+                <Lazy margin={300}>
+                    <MostViewedFooterData
+                        sectionName={sectionName}
+                        pillar={pillar}
+                        ajaxUrl={ajaxUrl}
+                    />
+                </Lazy>
                 <div
-                    className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
-                    data-link-name="most-popular"
-                    data-component="most-popular"
+                    className={css`
+                        margin: 6px 0 0 10px;
+                    `}
                 >
-                    <section className={asideWidth}>
-                        <h2 className={headingStyles}>Most popular</h2>
-                    </section>
-                    <section className={stackBelow('desktop')}>
-                        <div>
-                            <MostViewedFooterGrid
-                                data={'tabs' in data ? data.tabs : data}
-                                sectionName={sectionName}
-                                pillar={pillar}
-                            />
-                            <div
-                                className={cx(
-                                    stackBelow('tablet'),
-                                    secondTierStyles,
-                                )}
-                            >
-                                {'mostCommented' in data && (
-                                    <SecondTierItem
-                                        trail={data.mostCommented}
-                                        title="Most commented"
-                                        dataLinkName="comment | group-0 | card-@1" // To match Frontend
-                                        showRightBorder={true}
-                                    />
-                                )}
-                                {'mostShared' in data && (
-                                    <SecondTierItem
-                                        trail={data.mostShared}
-                                        dataLinkName="news | group-0 | card-@1" // To match Frontend
-                                        title="Most shared"
-                                    />
-                                )}
-                            </div>
-                        </div>
-                        <div
-                            className={css`
-                                margin: 0.375rem 0 0 0.625rem;
-                            `}
-                        >
-                            <AdSlot asps={namedAdSlotParameters('mostpop')} />
-                        </div>
-                    </section>
+                    <AdSlot asps={namedAdSlotParameters('mostpop')} />
                 </div>
-            </div>
-        );
-    }
-
-    return null;
-};
+            </section>
+        </div>
+    </div>
+);

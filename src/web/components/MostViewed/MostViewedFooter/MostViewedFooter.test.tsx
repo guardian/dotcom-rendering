@@ -5,8 +5,9 @@ import {
     responseWithOneTab,
 } from '@root/fixtures/mostViewed';
 import { useApi as useApi_ } from '@root/src/web/lib/api';
-import { MostViewedFooter } from './MostViewedFooter';
+import { MostViewedFooterData } from './MostViewedFooterData';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: any = useApi_;
 
 jest.mock('../../../lib/api', () => ({
@@ -16,7 +17,7 @@ jest.mock('../../../lib/api', () => ({
 const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
-describe('MostViewedFooter', () => {
+describe('MostViewedFooterData', () => {
     beforeEach(() => {
         useApi.mockReset();
     });
@@ -25,7 +26,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -57,7 +58,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByTestId, getByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -86,7 +87,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithOneTab });
 
         const { queryByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -119,7 +120,7 @@ describe('MostViewedFooter', () => {
         });
 
         const { getByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -150,7 +151,7 @@ describe('MostViewedFooter', () => {
         });
 
         const { queryByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -164,7 +165,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { asFragment } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
