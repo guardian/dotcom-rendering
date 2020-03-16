@@ -20,6 +20,8 @@ export const Lazy = ({ children, margin }: Props) => {
         rootMargin: `${margin}px`,
     });
 
+    // Without this check below typescript complains because it thinks
+    // setRef could be false.
     if (typeof setRef !== 'function') {
         return null;
     }
