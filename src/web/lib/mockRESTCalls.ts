@@ -74,7 +74,7 @@ export const mockRESTCalls = () =>
             },
             { overwriteRoutes: false },
         )
-        // Article share count
+        // Get discussion
         .get(
             /.*discussion.theguardian.com\/discussion-api\/discussion\/p\/.*/,
             {
@@ -83,7 +83,7 @@ export const mockRESTCalls = () =>
             },
             { overwriteRoutes: false },
         )
-        // Article share count
+        // Get country code
         .get(
             /.*api.nextgen.guardianapps.co.uk\/geolocation.*/,
             {
