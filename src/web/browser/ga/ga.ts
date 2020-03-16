@@ -169,6 +169,7 @@ const trackLCP = (send: string) => {
                     'Javascript Load', // Matches Frontend
                     'LCP', // Largest Contentful Paint (We can filter to DCR with the Dimension 43 segment)
                     lcp,
+                    'Largest Contentful Paint'
                 );
                 window.removeEventListener('visibilitychange', fn, true);
             }

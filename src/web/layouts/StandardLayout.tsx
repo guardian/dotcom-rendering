@@ -281,12 +281,20 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             islandId="sub-nav-root"
                         >
                             <SubNav
-                                subnav={NAV.subNavSections}
+                                subNavSections={NAV.subNavSections}
                                 currentNavLink={NAV.currentNavLink}
                                 pillar={CAPI.pillar}
                             />
                         </Section>
                     )}
+
+                    <Section
+                        backgroundColour={background.primary}
+                        padded={false}
+                        showTopBorder={false}
+                    >
+                        <GuardianLines pillar={CAPI.pillar} />
+                    </Section>
                 </div>
             </div>
 
@@ -462,10 +470,11 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
             {NAV.subNavSections && (
                 <Section padded={false} islandId="sub-nav-root">
                     <SubNav
-                        subnav={NAV.subNavSections}
-                        pillar={CAPI.pillar}
+                        subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}
+                        pillar={CAPI.pillar}
                     />
+                    <GuardianLines pillar={CAPI.pillar} />
                 </Section>
             )}
 
