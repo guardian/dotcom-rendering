@@ -252,6 +252,7 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
                     [ul]: true,
                     [ulExpanded]: isExpanded,
                 })}
+                data-cy="dropdown-options"
             >
                 {links.map((l, index) => (
                     <li key={l.title}>

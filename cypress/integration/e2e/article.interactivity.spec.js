@@ -12,11 +12,9 @@ describe('Interactivity', function() {
     describe('Verify elements have been hydrated', function() {
         it('should open the edition dropdown menu when clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
-            cy.contains('Australian').should('not.be.visible');
+            cy.get('[data-cy=dropdown-options]').should('not.be.visible');
             cy.contains('edition').click();
-            cy.contains('Australian')
-                .parents('ul')
-                .should('be.visible');
+            cy.get('[data-cy=dropdown-options]').should('be.visible');
         });
 
         it('should display the expanded pillar menu when More is clicked', function() {
