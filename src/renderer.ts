@@ -8,9 +8,10 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
 import { basePx, icons, darkModeCss, textPadding } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { ElementKind, BodyElement } from 'item';
+import { ElementKind, BodyElement, Role } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
+import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import { headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 
@@ -327,8 +328,12 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
             return text(element.doc, pillar);
 
         case ElementKind.Image:
-            const { file, alt, caption, captionString, credit, width, height } = element;
-            return h(BodyImage, {
+            const { file, alt, caption, captionString, credit, width, height, role } = element;
+            const ImageComponent = role
+                .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
+                .withDefault(BodyImage)
+
+            return h(ImageComponent, {
                 image: {
                     url: file,
                     alt,
@@ -336,7 +341,7 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
                     width,
                     height,
                     caption: captionString,
-                    credit,
+                    credit
                 },
                 figcaption: text(caption, pillar),
                 pillar,

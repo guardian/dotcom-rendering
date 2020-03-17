@@ -54,6 +54,10 @@ const enum ElementKind {
     Instagram
 }
 
+enum Role {
+    Thumbnail,
+}
+
 interface Format {
     pillar: Pillar;
     design: Design;
@@ -83,6 +87,7 @@ type Image = {
     file: string;
     width: number;
     height: number;
+    role: Option<Role>;
 }
 
 type BodyElement = {
@@ -176,10 +181,10 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
 
 const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
-    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
+    const { alt = "", caption = "", displayCredit = false, credit = "", role: roleString } = element.imageTypeData ?? {};
     const fullCaption = displayCredit ? `${caption} ${credit}` : caption;
     const parsedCaption = docParser(fullCaption);
-
+    const role = roleString === 'thumbnail' ? new Some(Role.Thumbnail) : new None<Role>();
     return fromNullable(masterAsset).andThen(asset => {
         if (!asset?.file || !asset?.typeData?.width || !asset?.typeData?.height) {
             return new None();
@@ -193,7 +198,8 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
             file: asset.file,
             width: asset.typeData.width,
             height: asset.typeData.height,
-            captionString: caption
+            captionString: caption,
+            role
         });
     });
 }
@@ -490,6 +496,7 @@ export {
     LiveBlock,
     ElementKind,
     BodyElement,
+    Role,
     Image,
     fromCapi,
 };
