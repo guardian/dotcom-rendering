@@ -241,6 +241,7 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
                     aria-controls={dropdownID}
                     aria-expanded={isExpanded ? 'true' : 'false'}
                     data-link-name={dataLinkName}
+                    data-cy="dropdown-button"
                 >
                     {label}
                 </button>
