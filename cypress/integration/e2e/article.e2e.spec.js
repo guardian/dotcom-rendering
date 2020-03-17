@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable func-names */
 import { getPolyfill } from '../../lib/polyfill';
 import { fetchPolyfill } from '../../lib/config';
 import { articles, AMPArticles } from '../../lib/articles.js';
@@ -13,6 +15,7 @@ describe('E2E Page rendering', function() {
 
             it(`It should load ${designType} articles under the ${pillar} pillar`, function() {
                 cy.visit(`Article?url=${url}`, fetchPolyfill);
+                cy.scrollTo('bottom', { duration: 100 });
                 cy.contains('Sign in');
 
                 cy.wait('@getMostRead').then(xhr => {
