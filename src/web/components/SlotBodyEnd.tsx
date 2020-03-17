@@ -104,6 +104,8 @@ const MemoisedInner = (props: Props) => {
         };
     }>();
 
+    console.log('=== LOOK - Inside component');
+
     const [hasBeenSeen, setNode] = useHasBeenSeen({
         threshold: 0.5,
     }) as HasBeenSeen;
@@ -157,6 +159,12 @@ const MemoisedInner = (props: Props) => {
 export const SlotBodyEnd = (props: Props) => {
     const { isSignedIn, countryCode } = props;
     if (isSignedIn === undefined || countryCode === undefined) {
+        return null;
+    }
+
+    // FIXME - used temporarily to exclude US from the DCR 5% test.
+    // Please check with Slot Machine team if this condition can be removed.
+    if (countryCode === 'US') {
         return null;
     }
 
