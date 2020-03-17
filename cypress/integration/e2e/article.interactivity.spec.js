@@ -13,7 +13,7 @@ describe('Interactivity', function() {
         it('should open the edition dropdown menu when clicked', function() {
             cy.visit(`/Article?url=${articleUrl}`);
             cy.get('[data-cy=dropdown-options]').should('not.be.visible');
-            cy.contains('edition').click();
+            cy.get('[data-cy=dropdown-button]').click();
             cy.get('[data-cy=dropdown-options]').should('be.visible');
         });
 
