@@ -1,5 +1,4 @@
 import React from 'react';
-import { sidePadding } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { Series } from '../../capi';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
@@ -10,7 +9,6 @@ const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
         ${headline.xxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
         color: ${kicker};
         text-decoration: none;
-        ${sidePadding}
     }
 `;
 

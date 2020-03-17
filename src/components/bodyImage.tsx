@@ -8,7 +8,6 @@ import { between, from } from '@guardian/src-foundations/mq';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
 
 import Image, { Props as ImageProps } from 'components/image';
-import { textPadding } from 'styles';
 import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
 
 
@@ -35,10 +34,6 @@ const styles = css`
     img {
         display: block;
         width: 100%;
-
-        ${between.phablet.and.wide} {
-            margin: 0 ${remSpace[2]};
-        }
     }
 `;
 
@@ -50,7 +45,6 @@ const triangleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
 const captionStyles = css`
     ${textSans.xsmall()}
-    ${textPadding}
     padding-top: ${remSpace[2]};
     color: ${text.supporting};
 `;
