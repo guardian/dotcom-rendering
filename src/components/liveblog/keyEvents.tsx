@@ -96,6 +96,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
 
     summary {
         display: block;
+        outline: none;
 
         h2 {
             font-size: 18px;

@@ -48,16 +48,17 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
 const listStyles: SerializedStyles = css`
     list-style: none;
     padding-left: 0;
+    padding-right: .5rem;
 `
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: 2rem;
+    padding-left: 2.5rem;
     padding-bottom: ${remSpace[2]};
 
     &::before {
         display: inline-block;
         content: '';
-        border-radius: 0.5rem;
+        border-radius: .5rem;
         height: 1rem;
         width: 1rem;
         margin-right: 1rem;
@@ -83,6 +84,7 @@ const bulletStyles = (colour: string): SerializedStyles => css`
         height: 1rem;
         border-radius: .5rem;
         display: inline-block;
+        vertical-align: middle;
     }
 `;
 
@@ -109,6 +111,7 @@ const HorizontalRuleStyles = css`
 `
 
 const TweetStyles = css`
+    ${textPadding}
     ${until.wide} {
         clear: both;
     }
@@ -213,7 +216,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     margin: 0;
-    ${headline.small({ fontWeight: 'light' })};
+    ${headline.xsmall({ fontWeight: 'light' })};
     ${textPadding}
 
     blockquote {
@@ -229,7 +232,7 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
             content: '\\e11c';
             display: inline-block;
             margin-right: ${basePx(1)};
-            ${headline.small({ fontWeight: 'light' })};
+            ${headline.xsmall({ fontWeight: 'light' })};
         }
     }
 
@@ -284,6 +287,7 @@ const richLinkStyles = css`
     clear: left;
     width: ${richLinkWidth};
     margin: ${basePx(1, 2, 1, 0)};
+    margin-left: ${remSpace[2]};
 
     ${from.wide} {
         margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(3)});

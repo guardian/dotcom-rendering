@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { textSans, icons, basePx, linkStyle } from 'styles';
+import { textSans, icons, basePx, linkStyle, textMargin, textPadding } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
@@ -7,6 +7,7 @@ import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { Option } from 'types/option';
+import { remSpace } from '@guardian/src-foundations';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${neutral[100]};
@@ -22,12 +23,15 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
         margin: 0;
     }
 
-    time:first-of-type {
-        margin-bottom: 1em;
+    time {
+        ${textPadding}
+        margin-top: 1rem;
     }
 
-    time:last-of-type {
-        margin-top: 1em;
+    time:nth-child(1) {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        padding-left: ${remSpace[2]};
     }
 
     ${until.phablet} {
@@ -43,7 +47,7 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
         font-style: italic;
         position: relative;
         margin-left: 0;
-        padding-left: ${basePx(5)};
+        padding-left: 4rem;
 
         &::before {
             ${icons}
@@ -53,13 +57,14 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
             color: ${kicker};
             position: absolute;
             left: 0;
+            ${textPadding}
             top: -10px;
         }
     }
 
     aside {
-        margin-left: 0;
-        width: 100%;
+        width: calc(100% - 2rem);
+        ${textMargin};
     }
 `;
 
@@ -81,6 +86,7 @@ const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
     const TitleStyles = css`
         padding: 0.1rem 0.125rem;
         background-color: ${brandAlt[400]};
+        ${textMargin}
     `
     return title ? <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3> : null;
 }
