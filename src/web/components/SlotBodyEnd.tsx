@@ -154,7 +154,7 @@ const MemoisedInner = (props: Props) => {
 
 export const SlotBodyEnd = (props: Props) => {
     const { isSignedIn, countryCode } = props;
-    if (isSignedIn === undefined && countryCode === undefined) {
+    if (isSignedIn === undefined || countryCode === undefined) {
         return null;
     }
 
