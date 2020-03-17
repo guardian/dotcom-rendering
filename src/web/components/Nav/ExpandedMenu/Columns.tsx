@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
-import { brandText, brandAlt } from '@guardian/src-foundations/palette';
+import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -17,8 +16,8 @@ const ColumnsStyle = css`
         position: relative;
         margin: 0 auto;
         display: flex;
-        border-left: 1px solid ${palette.brand.pastel};
-        border-right: 1px solid ${palette.brand.pastel};
+        border-left: 1px solid ${brand[600]};
+        border-right: 1px solid ${brand[600]};
     }
     ${from.leftCol} {
         max-width: 1140px;
