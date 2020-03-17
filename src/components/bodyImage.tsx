@@ -4,7 +4,7 @@ import React, { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { between, from } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
 
 import Image, { Props as ImageProps } from 'components/image';
