@@ -10,7 +10,7 @@ import { SvgArrowRightStraight } from "@guardian/src-svgs"
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { body, headline } from '@guardian/src-foundations/typography';
 
-import { nativeClient } from 'native/nativeApi';
+import { acquisitionsClient } from 'native/nativeApi';
 
 
 // ----- Styles ----- //
@@ -90,7 +90,7 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
     useEffect(() => {
         const handleSeenEpic = debounce(() => {
             if (!impressionSeen && isElementPartiallyInViewport(epicContainer)) {
-                nativeClient.epicSeen();
+                acquisitionsClient.epicSeen();
                 setImpressionSeen(true);
             }
         }, 100);
@@ -111,9 +111,9 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
             <div dangerouslySetInnerHTML={{__html: body}}></div>
             <div className="button-container">
                 <ThemeProvider theme={buttonReaderRevenue}>
-                    {epicButton(firstButton, () => nativeClient.launchFrictionScreen())}
+                    {epicButton(firstButton, () => acquisitionsClient.launchFrictionScreen())}
                     {secondButton
-                        ? epicButton(secondButton, () => nativeClient.launchFrictionScreen())
+                        ? epicButton(secondButton, () => acquisitionsClient.launchFrictionScreen())
                         : null}
                 </ThemeProvider>
             </div>
