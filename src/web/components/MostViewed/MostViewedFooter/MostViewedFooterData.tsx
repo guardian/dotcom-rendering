@@ -61,7 +61,11 @@ export const MostViewedFooterData = ({
 
     if (data) {
         return (
-            <div>
+            <div
+                className={css`
+                    width: 100%;
+                `}
+            >
                 <MostViewedFooterGrid
                     data={'tabs' in data ? data.tabs : data}
                     sectionName={sectionName}
