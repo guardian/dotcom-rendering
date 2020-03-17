@@ -104,8 +104,6 @@ const MemoisedInner = (props: Props) => {
         };
     }>();
 
-    console.log('=== LOOK - Inside component');
-
     const [hasBeenSeen, setNode] = useHasBeenSeen({
         threshold: 0.5,
     }) as HasBeenSeen;
