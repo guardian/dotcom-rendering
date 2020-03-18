@@ -1,10 +1,15 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
+import { from } from '@guardian/src-foundations/mq';
 import { brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 
-import { hideDesktop } from './Column';
+const hideDesktop = css`
+    ${from.desktop} {
+        display: none;
+    }
+`;
 
 const showColumnLinksStyle = css`
     :before {
