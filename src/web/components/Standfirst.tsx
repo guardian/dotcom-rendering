@@ -30,7 +30,9 @@ const nestedStyles = css`
     }
 
     li {
-        ${headline.xxxsmall()};
+        ${headline.xxxsmall({
+            fontWeight: 'bold',
+        })};
     }
 
     strong {
