@@ -53,7 +53,6 @@ module.exports = {
         'react/jsx-boolean-value': [2, 'always'],
         'import/prefer-default-export': false,
         '@typescript-eslint/explicit-function-return-type': [0],
-        '@typescript-eslint/no-unused-vars': [0], // Duplicated
         '@typescript-eslint/no-inferrable-types': [0],
         // TODO, review these
         '@typescript-eslint/no-explicit-any': [0],
