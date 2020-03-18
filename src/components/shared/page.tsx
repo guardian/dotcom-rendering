@@ -100,6 +100,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
 
     const articleScript = getAssetLocation('article.js');
     const liveblogScript = getAssetLocation('liveblog.js');
+    const mediaScript = getAssetLocation('media.js');
 
     if (item.design === Design.Comment) {
         const commentBody = partition(item.body).oks;
@@ -141,12 +142,12 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         const body = partition(item.body).oks;
         const content = insertAdPlaceholders(renderAll(imageSalt)(item.pillar, body));
         return { element: (
-                <WithScript src={articleScript}>
+                <WithScript src={mediaScript}>
                     <Media imageSalt={imageSalt} item={item}>
                         {content}
                     </Media>
                 </WithScript>
-            ), resources: [articleScript] };
+            ), resources: [mediaScript] };
     }
 
     if (
