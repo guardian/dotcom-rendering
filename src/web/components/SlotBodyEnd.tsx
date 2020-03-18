@@ -125,6 +125,7 @@ const MemoisedInner = (props: Props) => {
                     'slot-body-end',
                 ),
             );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // only ever call once (we'd rather fail then call the API multiple times)
 
     useEffect(() => {
