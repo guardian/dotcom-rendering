@@ -68,7 +68,6 @@ module.exports = {
         'import/no-named-default': [0],
         'import/no-unresolved': [0],
         'jsx-a11y/aria-role': [0],
-        'jsx-a11y/click-events-have-key-events': [0],
         'jsx-a11y/img-redundant-alt': [0],
         'jsx-a11y/label-has-associated-control': [0],
         'jsx-a11y/no-noninteractive-element-to-interactive-role': [0],
