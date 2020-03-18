@@ -150,6 +150,7 @@ export const AdSlotCore: React.FC<{
             data-link-name={`ad slot ${name}`}
             data-name={name}
             // {...getOptionalProps()}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...sizeMappings}
             aria-hidden="true"
         />
@@ -160,6 +161,7 @@ export const AdSlot: React.FC<{
     asps: AdSlotParameters;
     localStyles?: string;
 }> = ({ asps, localStyles }) => {
+    // eslint-disable-next-line react/jsx-props-no-spreading
     return <AdSlotCore {...asps} localStyles={localStyles} />;
 };
 

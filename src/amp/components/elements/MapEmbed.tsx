@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { css } from 'emotion';
 import { Caption } from '@root/src/amp/components/Caption';

@@ -207,6 +207,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
                 layout="fill"
                 src="https://amp.theguardian.com/editionalised-nav.json"
             >
+                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <template {...props}>
                     <div dangerouslySetInnerHTML={{ __html: template }} />
                 </template>

@@ -79,7 +79,6 @@ module.exports = {
         'no-useless-escape': [0],
         'react/button-has-type': [0],
         'react/jsx-no-target-blank': [0],
-        'react/jsx-props-no-spreading': [0],
         'react/no-unescaped-entities': [0],
         'react/sort-comp': [0],
         'react/state-in-constructor': [0],

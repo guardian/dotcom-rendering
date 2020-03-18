@@ -10,6 +10,7 @@ export const InnerContainer: React.FC<{
     className?: string;
     children: React.ReactNode;
 }> = ({ className, children, ...props }) => (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <div className={cx(style, className)} {...props}>
         {children}
     </div>
