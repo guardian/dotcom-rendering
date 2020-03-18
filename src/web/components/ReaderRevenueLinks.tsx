@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
-import { palette } from '@guardian/src-foundations';
-import { brandText, brandAlt } from '@guardian/src-foundations/palette';
+import {
+    brandText,
+    brandAlt,
+    neutral,
+} from '@guardian/src-foundations/palette';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -52,7 +55,7 @@ const linkStyles = css`
     background: ${brandAlt[400]};
     border-radius: 16px;
     box-sizing: border-box;
-    color: ${palette.neutral[7]};
+    color: ${neutral[7]};
     float: left;
     ${textSans.small()};
     font-weight: 700;

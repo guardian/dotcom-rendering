@@ -2,13 +2,12 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
 const linkStyles = css`
     text-decoration: none;
-    color: ${palette.neutral[7]};
+    color: ${text.anchorSecondary};
 
     :hover {
         text-decoration: underline;
@@ -17,7 +16,7 @@ const linkStyles = css`
 
 const headerStyles = css`
     ${headline.xsmall({ fontWeight: 'bold' })};
-    color: ${palette.neutral[7]};
+    color: ${text.primary};
     padding-bottom: 14px;
     padding-top: 6px;
     margin-left: 10px;

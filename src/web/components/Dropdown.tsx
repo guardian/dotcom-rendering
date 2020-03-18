@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
 import {
+    text,
     neutral,
     border,
     brandText,
@@ -66,7 +67,7 @@ const ulExpanded = css`
 
 const link = css`
     ${textSans.small()};
-    color: ${palette.neutral[7]};
+    color: ${text.anchorSecondary};
     position: relative;
     transition: color 80ms ease-out;
     margin: -1px 0 0 0;
