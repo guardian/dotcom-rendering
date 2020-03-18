@@ -88,7 +88,6 @@ export const Card = ({
     headlineSize,
     showQuotes,
     byline,
-    isLiveBlog,
     showByline,
     webPublicationDate,
     imageUrl,

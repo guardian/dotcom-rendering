@@ -46,7 +46,6 @@ export const FourOrLess = ({ content }: Props) => {
                                 showByline: trail.showByline,
                                 showQuotes: trail.designType === 'Comment',
                                 webPublicationDate: trail.webPublicationDate,
-                                isLiveBlog: trail.isLiveBlog,
                                 kickerText: trail.kickerText,
                                 showPulsingDot: trail.isLiveBlog,
                                 showSlash: true,

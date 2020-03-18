@@ -18,7 +18,6 @@ export const Spotlight = ({ content }: Props) => (
             showByline: content[0].showByline,
             showQuotes: content[0].designType === 'Comment',
             webPublicationDate: content[0].webPublicationDate,
-            isLiveBlog: content[0].isLiveBlog,
             kickerText: content[0].kickerText,
             showPulsingDot: content[0].isLiveBlog,
             showSlash: true,
