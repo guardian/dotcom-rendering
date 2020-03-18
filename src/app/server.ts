@@ -90,7 +90,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 
     // express requires all 4 args here:
-    app.use((err: any, req: any, res: any, next: any) => {
+    app.use((err: any, req: any, res: any) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
 
