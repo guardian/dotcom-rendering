@@ -170,10 +170,8 @@ const bttPosition = css`
 `;
 
 const FooterLinks: React.FC<{
-    nav: NavType;
-    edition: Edition;
     pageFooter: FooterType;
-}> = ({ pageFooter, nav, edition }) => {
+}> = ({ pageFooter }) => {
     const linkGroups = pageFooter.footerLinks.map(linkGroup => {
         const linkList = linkGroup.map((l: FooterLink, index: number) => (
             <li key={`${l.url}${index}`}>
@@ -209,10 +207,8 @@ const year = new Date().getFullYear();
 export const Footer: React.FC<{
     pillars: PillarType[];
     pillar: Pillar;
-    nav: NavType;
-    edition: Edition;
     pageFooter: FooterType;
-}> = ({ pillars, pillar, nav, edition, pageFooter }) => (
+}> = ({ pillars, pillar, pageFooter }) => (
     <footer className={footer} data-link-name="footer" data-component="footer">
         <div className={pillarWrap}>
             <Pillars
@@ -237,7 +233,7 @@ export const Footer: React.FC<{
                 frameBorder="0"
             />
 
-            <FooterLinks nav={nav} edition={edition} pageFooter={pageFooter} />
+            <FooterLinks pageFooter={pageFooter} />
             <div className={bttPosition}>
                 <BackToTop />
             </div>
