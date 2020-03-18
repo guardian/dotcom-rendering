@@ -56,6 +56,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': [0], // Duplicated
         '@typescript-eslint/no-inferrable-types': [0],
         // TODO, review these
+        '@typescript-eslint/no-explicit-any': [0],
         'react/jsx-one-expression-per-line': [0],
         'react/no-array-index-key': [0],
         '@typescript-eslint/no-use-before-define': [0],
