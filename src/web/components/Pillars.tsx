@@ -1,8 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
-import { brandText } from '@guardian/src-foundations/palette';
+import { brand, brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -42,7 +41,7 @@ const pillarsStyles = css`
 
     :after {
         content: '';
-        border-top: 1px solid ${palette.brand.pastel};
+        border-top: 1px solid ${brand[600]};
         position: absolute;
         bottom: 0;
         left: 0;
@@ -107,7 +106,7 @@ const pillarDivider = css`
         top: 0;
         bottom: 0;
         width: 1px;
-        background-color: ${palette.brand.pastel};
+        background-color: ${brand[600]};
 
         ${from.tablet} {
             bottom: 17px;

@@ -3,8 +3,7 @@ import { css, cx } from 'emotion';
 
 import SearchIcon from '@frontend/static/icons/search.svg';
 
-import { palette } from '@guardian/src-foundations';
-import { brandText, brandAlt } from '@guardian/src-foundations/palette';
+import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -77,7 +76,7 @@ const linkTablet = ({ showAtTablet }: { showAtTablet: boolean }) => css`
 `;
 
 const seperatorStyles = css`
-    border-left: 1px solid ${palette.brand.pastel};
+    border-left: 1px solid ${brand[600]};
     float: left;
     height: 24px;
     margin: 0 -2px 0 10px;
@@ -89,7 +88,7 @@ const seperatorStyles = css`
 `;
 
 const seperatorHideStyles = css`
-    border-left: 1px solid ${palette.brand.pastel};
+    border-left: 1px solid ${brand[600]};
     float: left;
     height: 24px;
     margin: 0 -2px 0 10px;

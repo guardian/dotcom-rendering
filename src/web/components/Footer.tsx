@@ -1,8 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import {
+    brand,
     brandText,
     brandAlt,
     brandBackground,
@@ -21,7 +21,7 @@ const emailSignupWidth =
     pillarWidth +
     firstPillarWidth -
     (emailSignupSideMargins * 2 + footerItemContainerPadding);
-const footerBorders = `1px solid ${palette.brand.pastel}`;
+const footerBorders = `1px solid ${brand[600]}`;
 
 // CSS
 const footer = css`
