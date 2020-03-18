@@ -19,8 +19,9 @@ const HeaderImageCaptionStyles = css`
         position: absolute;
         bottom: ${basePx(1)};
         right: ${basePx(1)};
-        border-radius: 100%;
-        z-index: 2;
+		border-radius: 100%;
+		z-index: 2;
+		outline: none;
 		
 		span {
 			font-size: 0;

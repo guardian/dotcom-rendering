@@ -26,6 +26,16 @@ export const textPadding = css`
     }
 `;
 
+export const textMargin = css`
+    margin-left: ${remSpace[2]};
+    margin-right: ${remSpace[2]};
+
+    ${from.wide} {
+        margin-left: 0;
+        margin-right: 0;
+    }
+`;
+
 export const sidePadding = css`
     padding-left: ${basePx(1)};
     padding-right: ${basePx(1)};
