@@ -1,15 +1,28 @@
 const path = require('path');
 const webpack = require('webpack');
-const { promisify } = require('util');
+const {
+    promisify
+} = require('util');
 const glob = promisify(require('glob'));
-const { smart: merge } = require('webpack-merge');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const {
+    smart: merge
+} = require('webpack-merge');
+const {
+    BundleAnalyzerPlugin
+} = require('webpack-bundle-analyzer');
 const ReportBundleSize = require('./plugins/report-bundle-size');
-const { root, dist, siteName } = require('../frontend/config');
+const {
+    root,
+    dist,
+    siteName
+} = require('../frontend/config');
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const PROD = process.env.NODE_ENV === 'production';
 
-const commonConfigs = ({ platform }) => ({
+const commonConfigs = ({
+    platform
+}) => ({
     name: platform,
     mode: process.env.NODE_ENV,
     output: {
@@ -17,10 +30,8 @@ const commonConfigs = ({ platform }) => ({
         path: dist,
     },
     stats: 'errors-only',
-    devtool:
-        process.env.NODE_ENV === 'production'
-            ? 'sourcemap'
-            : 'cheap-module-eval-source-map',
+    devtool: process.env.NODE_ENV === 'production' ?
+        'sourcemap' : 'cheap-module-eval-source-map',
     resolve: {
         alias: {
             '@root': path.resolve(__dirname, '.'),
@@ -36,14 +47,14 @@ const commonConfigs = ({ platform }) => ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
+        new LoadablePlugin(),
         PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
-        PROD &&
-            new BundleAnalyzerPlugin({
-                reportFilename: path.join(dist, `${platform}-bundles.html`),
-                analyzerMode: 'static',
-                openAnalyzer: false,
-                logLevel: 'warn',
-            }),
+        PROD && new BundleAnalyzerPlugin({
+            reportFilename: path.join(dist, `${platform}-bundles.html`),
+            analyzerMode: 'static',
+            openAnalyzer: false,
+            logLevel: 'warn',
+        }),
         // https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
         // [...].filter(Boolean) why it is used
     ].filter(Boolean),

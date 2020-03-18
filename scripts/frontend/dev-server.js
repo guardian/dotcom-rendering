@@ -1,13 +1,17 @@
 const path = require('path');
 const express = require('express');
 const fetch = require('node-fetch');
+const util = require('util')
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const { siteName, root } = require('./config');
+const {
+    siteName,
+    root
+} = require('./config');
 
 function buildUrl(req) {
     const DEFAULT_URL =
@@ -28,6 +32,11 @@ const go = async () => {
     const webpackConfig = await require('../webpack/frontend');
     const compiler = await webpack(webpackConfig);
 
+    // console.log('webpackConfig')
+    // console.log(webpackConfig)
+    // console.log('compiler')
+    // console.log(compiler)
+
     const app = express();
 
     app.use(
@@ -38,7 +47,7 @@ const go = async () => {
     app.use(
         webpackDevMiddleware(compiler, {
             serverSideRender: true,
-            logLevel: 'silent',
+            // logLevel: 'silent',
             publicPath: '/assets/javascript/',
             ignored: [/node_modules([\\]+|\/)+(?!@guardian)/],
         }),
@@ -46,8 +55,7 @@ const go = async () => {
 
     app.use(
         webpackHotMiddleware(
-            compiler.compilers.find(config => config.name === 'browser'),
-            {
+            compiler.compilers.find(config => config.name === 'browser'), {
                 // https://www.npmjs.com/package/friendly-errors-webpack-plugin#turn-off-errors
                 // tslint:disable-next-line:no-empty
                 log: () => {},
@@ -58,46 +66,54 @@ const go = async () => {
     app.get(
         '/Article',
         async (req, res, next) => {
-            try {
-                const url = buildUrl(req);
-                const { html, ...config } = await fetch(url).then(article =>
-                    article.json(),
-                );
+                try {
+                    const url = buildUrl(req);
+                    const {
+                        html,
+                        ...config
+                    } = await fetch(url).then(article =>
+                        article.json(),
+                    );
 
-                req.body = config;
-                next();
-            } catch (error) {
-                // eslint-disable-next-line @typescript-eslint/tslint/config
-                console.error(error);
-            }
-        },
-        webpackHotServerMiddleware(compiler, {
-            chunkName: `${siteName}.server`,
-        }),
+                    req.body = config;
+                    next();
+                } catch (error) {
+                    // eslint-disable-next-line @typescript-eslint/tslint/config
+                    console.error(error);
+                }
+            },
+            webpackHotServerMiddleware(compiler, {
+                chunkName: `${siteName}.server`,
+            }),
     );
 
     app.get(
         '/AMPArticle',
         async (req, res, next) => {
-            try {
-                const url = buildUrl(req);
-                const { html, ...config } = await fetch(ampifyUrl(url)).then(
-                    article => article.json(),
-                );
-                req.body = config;
-                next();
-            } catch (error) {
-                // eslint-disable-next-line @typescript-eslint/tslint/config
-                console.error(error);
-            }
-        },
-        webpackHotServerMiddleware(compiler, {
-            chunkName: `${siteName}.server`,
-            serverRendererOptions: { amp: true },
-        }),
+                try {
+                    const url = buildUrl(req);
+                    const {
+                        html,
+                        ...config
+                    } = await fetch(ampifyUrl(url)).then(
+                        article => article.json(),
+                    );
+                    req.body = config;
+                    next();
+                } catch (error) {
+                    // eslint-disable-next-line @typescript-eslint/tslint/config
+                    console.error(error);
+                }
+            },
+            webpackHotServerMiddleware(compiler, {
+                chunkName: `${siteName}.server`,
+                serverRendererOptions: {
+                    amp: true
+                },
+            }),
     );
 
-    app.get('/', function(req, res) {
+    app.get('/', function (req, res) {
         res.sendFile(
             path.join(root, 'scripts', 'frontend', 'landing', 'index.html'),
         );

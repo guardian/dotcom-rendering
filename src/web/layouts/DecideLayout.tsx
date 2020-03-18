@@ -1,6 +1,6 @@
 import React from 'react';
-import { designTypeDefault } from '@root/src/lib/designTypes';
 
+import { designTypeDefault } from '@root/src/lib/designTypes';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
@@ -10,7 +10,7 @@ type Props = {
     NAV: NavType;
 };
 
-export const DecideLayout = ({CAPI, NAV }: Props) => {
+export const DecideLayout = ({ CAPI, NAV }: Props) => {
     if (CAPI.pageType.hasShowcaseMainElement) {
         return <ShowcaseLayout CAPI={CAPI} NAV={NAV} />;
     }
