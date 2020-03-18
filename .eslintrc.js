@@ -66,7 +66,6 @@ module.exports = {
         'import/no-cycle': [0],
         'import/no-extraneous-dependencies': [0],
         'no-case-declarations': [0],
-        'no-duplicate-case': [0],
         'no-empty-pattern': [0],
         'no-param-reassign': [0],
         'no-restricted-syntax': [0],
