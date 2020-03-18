@@ -58,7 +58,6 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': [0],
         'react/jsx-one-expression-per-line': [0],
         'react/no-array-index-key': [0],
-        '@typescript-eslint/no-use-before-define': [0],
         '@typescript-eslint/require-await': [0],
         'array-callback-return': [0],
         'consistent-return': [0],

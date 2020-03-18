@@ -44,6 +44,61 @@ export const init = (): void => {
     });
 };
 
+// Adapted from https://web.dev/lcp/#measure-lcp-in-javascript
+const trackLCP = (send: string) => {
+    const { ga } = window;
+    // Create a variable to hold the latest LCP value (since it can change).
+    let lcp: number;
+
+    if (!window.PerformanceObserver) {
+        return;
+    }
+
+    // Create the PerformanceObserver instance.
+    const po = new window.PerformanceObserver(entryList => {
+        const entries = entryList.getEntries();
+        const lastEntry = entries[entries.length - 1];
+
+        // Update `lcp` to the latest value, using `renderTime` if it's available,
+        // otherwise using `loadTime`. (Note: `renderTime` may not be available if
+        // the element is an image and it's loaded cross-origin without the
+        // `Timing-Allow-Origin` header.)
+        lcp = lastEntry.renderTime || lastEntry.loadTime;
+    });
+
+    // Observe entries of type `largest-contentful-paint`, including buffered
+    // entries, i.e. entries that occurred before calling `observe()`.
+    try {
+        // This inexplicably fires off an error instead of just ignoring a type it doesn't understand
+        // until fairly recent browsers.
+        // https://github.com/w3c/performance-timeline/issues/87
+        // If we can't observer LCP, catch and return early.
+        po.observe({ type: 'largest-contentful-paint', buffered: true });
+    } catch {
+        return;
+    }
+
+    // Send the latest LCP value to your analytics server once the user
+    // leaves the tab.
+    window.addEventListener(
+        'visibilitychange',
+        function fn() {
+            if (lcp && document.visibilityState === 'hidden') {
+                ga(
+                    send,
+                    'timing',
+                    'Javascript Load', // Matches Frontend
+                    'LCP', // Largest Contentful Paint (We can filter to DCR with the Dimension 43 segment)
+                    lcp,
+                    'Largest Contentful Paint',
+                );
+                window.removeEventListener('visibilitychange', fn, true);
+            }
+        },
+        true,
+    );
+};
+
 export const sendPageView = (): void => {
     const { GA } = window.guardian.app.data;
     const set = `${tracker.name}.set`;
@@ -121,59 +176,4 @@ export const sendPageView = (): void => {
     });
 
     trackLCP(send);
-};
-
-// Adapted from https://web.dev/lcp/#measure-lcp-in-javascript
-const trackLCP = (send: string) => {
-    const { ga } = window;
-    // Create a variable to hold the latest LCP value (since it can change).
-    let lcp: number;
-
-    if (!window.PerformanceObserver) {
-        return;
-    }
-
-    // Create the PerformanceObserver instance.
-    const po = new window.PerformanceObserver(entryList => {
-        const entries = entryList.getEntries();
-        const lastEntry = entries[entries.length - 1];
-
-        // Update `lcp` to the latest value, using `renderTime` if it's available,
-        // otherwise using `loadTime`. (Note: `renderTime` may not be available if
-        // the element is an image and it's loaded cross-origin without the
-        // `Timing-Allow-Origin` header.)
-        lcp = lastEntry.renderTime || lastEntry.loadTime;
-    });
-
-    // Observe entries of type `largest-contentful-paint`, including buffered
-    // entries, i.e. entries that occurred before calling `observe()`.
-    try {
-        // This inexplicably fires off an error instead of just ignoring a type it doesn't understand
-        // until fairly recent browsers.
-        // https://github.com/w3c/performance-timeline/issues/87
-        // If we can't observer LCP, catch and return early.
-        po.observe({ type: 'largest-contentful-paint', buffered: true });
-    } catch {
-        return;
-    }
-
-    // Send the latest LCP value to your analytics server once the user
-    // leaves the tab.
-    window.addEventListener(
-        'visibilitychange',
-        function fn() {
-            if (lcp && document.visibilityState === 'hidden') {
-                ga(
-                    send,
-                    'timing',
-                    'Javascript Load', // Matches Frontend
-                    'LCP', // Largest Contentful Paint (We can filter to DCR with the Dimension 43 segment)
-                    lcp,
-                    'Largest Contentful Paint'
-                );
-                window.removeEventListener('visibilitychange', fn, true);
-            }
-        },
-        true,
-    );
 };
