@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { palette } from '@guardian/src-foundations';
+import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { getCookie } from '@root/src/web/browser/cookie';
-import { AsyncClientComponent } from '@root/src/web/lib/AsyncClientComponent';
 
-const padded = css`
+type Props = {
+    edition: Edition;
+    urls: {
+        subscribe: string;
+        support: string;
+        contribute: string;
+    };
+    dataLinkNamePrefix: string;
+    noResponsive: boolean;
+    inHeader?: boolean;
+};
+
+const paddingStyles = css`
     ${until.mobileLandscape} {
         padding-left: 10px;
     }
@@ -21,8 +33,8 @@ const padded = css`
     }
 `;
 
-const message = css`
-    color: ${palette.brandYellow.main};
+const messageStyles = css`
+    color: ${brandAlt[400]};
     ${headline.xxsmall({ fontWeight: 'bold' })};
     padding-top: 3px;
     margin-bottom: 3px;
@@ -36,8 +48,8 @@ const message = css`
     }
 `;
 
-const link = css`
-    background: ${palette.brandYellow.main};
+const linkStyles = css`
+    background: ${brandAlt[400]};
     border-radius: 16px;
     box-sizing: border-box;
     color: ${palette.neutral[7]};
@@ -92,126 +104,107 @@ const hiddenFromTablet = css`
     }
 `;
 
-const subMessage = css`
-    color: ${palette.neutral[100]};
+const subMessageStyles = css`
+    color: ${brandText.primary};
     ${textSans.medium()};
     margin-bottom: 5px;
 `;
 
-export const RRButton: React.FC<{
-    url: string;
-    dataLinkNamePrefix: string;
-    dataLinkNameSuffix: string;
-    linkText: string;
-}> = ({ url, dataLinkNamePrefix, dataLinkNameSuffix, linkText }) => {
-    return (
-        <a
-            className={link}
-            href={url}
-            data-link-name={`${dataLinkNamePrefix}${dataLinkNameSuffix}`}
-        >
-            {linkText} <ArrowRightIcon />
-        </a>
-    );
-};
+const decideIfRecentContributor: () => boolean = () => {
+    const cookieValue = getCookie('gu.contributions.contrib-timestamp');
 
-const isRecentContributor: () => boolean = () => {
-    const value = getCookie('gu.contributions.contrib-timestamp');
-
-    if (!value) {
+    if (!cookieValue) {
         return false;
     }
 
     const now = new Date().getTime();
-    const lastContribution = new Date(value).getTime();
+    const lastContribution = new Date(cookieValue).getTime();
     const diffDays = Math.ceil((now - lastContribution) / (1000 * 3600 * 24));
 
     return diffDays <= 180;
 };
 
-const isPayingMember: () => boolean = () => {
-    return getCookie('gu_paying_member') === 'true';
-};
+export const ReaderRevenueLinks: React.FC<Props> = ({
+    edition,
+    urls,
+    dataLinkNamePrefix,
+    noResponsive,
+    inHeader,
+}) => {
+    const [isPayingMember, setIsPayingMember] = useState<boolean>(false);
+    const [isRecentContributor, setIsRecentContributor] = useState<boolean>(
+        false,
+    );
 
-const shouldShow: () => Promise<boolean> = () =>
-    Promise.resolve(!(isRecentContributor() || isPayingMember()));
+    useEffect(() => {
+        // Is paying member?
+        setIsPayingMember(getCookie('gu_paying_member') === 'true');
+        // Is recent contributor?
+        setIsRecentContributor(decideIfRecentContributor());
+    }, []);
 
-export const ReaderRevenueLinks: React.FC<{
-    edition: Edition;
-    urls: {
-        subscribe: string;
-        support: string;
-        contribute: string;
-    };
-    dataLinkNamePrefix: string;
-    noResponsive: boolean;
-    inHeader?: boolean;
-}> = ({ edition, urls, dataLinkNamePrefix, noResponsive, inHeader }) => {
-    return (
-        <AsyncClientComponent f={shouldShow}>
-            {({ data }) => (
-                <>
-                    {data && (
-                        <div className={cx(inHeader && padded)}>
-                            <div
-                                className={cx({
-                                    [hiddenUntilTablet]: !noResponsive,
-                                })}
-                            >
-                                <div className={message}>
-                                    Support The&nbsp;Guardian
-                                </div>
-                                {edition === 'US' ? (
-                                    <div className={subMessage}>
-                                        Support our journalism with a year-end
-                                        gift
-                                    </div>
-                                ) : (
-                                    <div className={subMessage}>
-                                        Available for everyone, funded by
-                                        readers
-                                    </div>
-                                )}
-                                <RRButton
-                                    url={urls.contribute}
-                                    dataLinkNamePrefix={dataLinkNamePrefix}
-                                    dataLinkNameSuffix="contribute-cta"
-                                    linkText="Contribute"
-                                />
-                                <RRButton
-                                    url={urls.subscribe}
-                                    dataLinkNamePrefix={dataLinkNamePrefix}
-                                    dataLinkNameSuffix="subscribe-cta"
-                                    linkText="Subscribe"
-                                />
-                            </div>
-
-                            <div
-                                className={cx({
-                                    [hiddenFromTablet]: !noResponsive,
-                                    [hidden]: noResponsive,
-                                })}
-                            >
-                                {edition === 'UK' ? (
-                                    <RRButton
-                                        url={urls.contribute}
-                                        dataLinkNamePrefix={dataLinkNamePrefix}
-                                        dataLinkNameSuffix="contribute-cta"
-                                        linkText="Contribute"
-                                    />
-                                ) : (
-                                    <RRButton
-                                        url={urls.support}
-                                        dataLinkNamePrefix={dataLinkNamePrefix}
-                                        dataLinkNameSuffix="support-cta"
-                                        linkText="Support us"
-                                    />
-                                )}
-                            </div>
+    if (!isPayingMember && !isRecentContributor) {
+        return (
+            <div className={cx(inHeader && paddingStyles)}>
+                <div
+                    className={cx({
+                        [hiddenUntilTablet]: !noResponsive,
+                    })}
+                >
+                    <div className={messageStyles}>
+                        Support The&nbsp;Guardian
+                    </div>
+                    {edition === 'US' ? (
+                        <div className={subMessageStyles}>
+                            Support our journalism with a year-end gift
+                        </div>
+                    ) : (
+                        <div className={subMessageStyles}>
+                            Available for everyone, funded by readers
                         </div>
                     )}
-                </>
-            )}
-        </AsyncClientComponent>
-    );
+                    <a
+                        className={linkStyles}
+                        href={urls.contribute}
+                        data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                    >
+                        Contribute <ArrowRightIcon />
+                    </a>
+                    <a
+                        className={linkStyles}
+                        href={urls.subscribe}
+                        data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+                    >
+                        Subscribe <ArrowRightIcon />
+                    </a>
+                </div>
+
+                <div
+                    className={cx({
+                        [hiddenFromTablet]: !noResponsive,
+                        [hidden]: noResponsive,
+                    })}
+                >
+                    {edition === 'UK' ? (
+                        <a
+                            className={linkStyles}
+                            href={urls.contribute}
+                            data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+                        >
+                            Contribute <ArrowRightIcon />
+                        </a>
+                    ) : (
+                        <a
+                            className={linkStyles}
+                            href={urls.support}
+                            data-link-name={`${dataLinkNamePrefix}support-cta`}
+                        >
+                            Support us <ArrowRightIcon />
+                        </a>
+                    )}
+                </div>
+            </div>
+        );
+    }
+    return null;
 };

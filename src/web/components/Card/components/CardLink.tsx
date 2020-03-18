@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 
 const linkStyles = (designType: DesignType, pillar: Pillar) => {
     const baseLinkStyles = css`
@@ -82,10 +83,10 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         default:
             return css`
                     ${baseLinkStyles}
-                    background-color: ${palette.neutral[97]};
+                    background-color: ${neutral[97]};
 
                     :hover {
-                        background-color: ${palette.neutral[93]};
+                        background-color: ${neutral[93]};
                     }
                 `;
     }
@@ -99,7 +100,11 @@ type Props = {
 };
 
 export const CardLink = ({ children, linkTo, designType, pillar }: Props) => (
-    <a href={linkTo} className={linkStyles(designType, pillar)}>
+    <a
+        href={linkTo}
+        className={linkStyles(designType, pillar)}
+        data-link-name="article"
+    >
         {children}
     </a>
 );

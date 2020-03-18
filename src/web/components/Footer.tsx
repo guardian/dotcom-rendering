@@ -1,7 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import {
+    brand,
+    brandText,
+    brandAlt,
+    brandBackground,
+} from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -16,12 +21,12 @@ const emailSignupWidth =
     pillarWidth +
     firstPillarWidth -
     (emailSignupSideMargins * 2 + footerItemContainerPadding);
-const footerBorders = `1px solid ${palette.brand.pastel}`;
+const footerBorders = `1px solid ${brand[600]}`;
 
 // CSS
 const footer = css`
-    background-color: ${palette.brand.main};
-    color: ${palette.neutral[100]};
+    background-color: ${brandBackground.primary};
+    color: ${brandText.primary};
     padding-bottom: 6px;
     ${textSans.medium()};
 `;
@@ -71,7 +76,7 @@ const footerLink = css`
 
     :hover {
         text-decoration: underline;
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
     }
 `;
 
@@ -157,7 +162,7 @@ const footerItemContainers = css`
 `;
 
 const bttPosition = css`
-    background-color: ${palette.brand.main};
+    background-color: ${brandBackground.primary};
     padding: 0 5px;
     position: absolute;
     bottom: -21px;
@@ -187,7 +192,7 @@ const FooterLinks: React.FC<{
 
     const rrLinks = (
         <div className={readerRevenueLinks}>
-            <div data-island="reader-revenue-links-footer" />
+            <div id="reader-revenue-links-footer" />
         </div>
     );
 
@@ -208,13 +213,14 @@ export const Footer: React.FC<{
     edition: Edition;
     pageFooter: FooterType;
 }> = ({ pillars, pillar, nav, edition, pageFooter }) => (
-    <footer className={footer}>
+    <footer className={footer} data-link-name="footer" data-component="footer">
         <div className={pillarWrap}>
             <Pillars
                 mainMenuOpen={false}
                 pillars={pillars}
                 pillar={pillar}
                 showLastPillarDivider={false}
+                dataLinkName="footer"
             />
         </div>
         <div className={footerItemContainers}>

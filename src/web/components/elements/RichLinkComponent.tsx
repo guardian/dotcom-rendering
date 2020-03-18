@@ -1,9 +1,14 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { pillarPalette } from '@frontend/lib/pillars';
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 import Quote from '@frontend/static/icons/quote.svg';
-import { palette } from '@guardian/src-foundations';
+import {
+    text,
+    neutral,
+    brandAltBackground,
+} from '@guardian/src-foundations/palette';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -162,12 +167,12 @@ const contributorImageWrapper = css`
 `;
 
 const neutralBackground = css`
-    background-color: ${palette.neutral[97]};
+    background-color: ${neutral[97]};
     a {
         color: inherit;
     }
     :hover {
-        background-color: ${palette.neutral[93]};
+        background-color: ${neutral[93]};
     }
 `;
 
@@ -186,11 +191,11 @@ const textColour: (pillar: Pillar) => colour = pillar => {
 const paidForBranding = css`
     ${textSans.xsmall()};
     font-weight: bold;
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
 `;
 
 const starWrapper = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
     display: inline-block;
 `;
 
@@ -301,7 +306,8 @@ export const RichLinkComponent: React.FC<{
     element: RichLinkBlockElement;
     pillar: Pillar;
     ajaxEndpoint: string;
-}> = ({ element, pillar, ajaxEndpoint }) => {
+    richLinkIndex: number;
+}> = ({ element, pillar, ajaxEndpoint, richLinkIndex }) => {
     const url = buildUrl(element, ajaxEndpoint);
     const { data, loading, error } = useApi<RichLink>(url);
 
@@ -317,7 +323,11 @@ export const RichLinkComponent: React.FC<{
         return null;
     }
     return (
-        <div data-link-name="rich-link" className={pillarBackground(pillar)}>
+        <div
+            data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
+            data-component="rich-link"
+            className={pillarBackground(pillar)}
+        >
             <div className={cx(richLinkContainer, neutralBackground)}>
                 {data && <RichLinkBody richLink={data} />}
             </div>

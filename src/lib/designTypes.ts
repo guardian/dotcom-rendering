@@ -21,7 +21,6 @@ export const designTypes: DesignType[] = [
 // Useful for extending overrides
 export const designTypeDefault = (defaultVal: any) =>
     designTypes.reduce(
-        (prev, curr) =>
-            ({ ...prev, [curr]: defaultVal,}),
+        (prev, curr) => ({ ...prev, [curr]: defaultVal }),
         {} as DesignTypesObj,
     );

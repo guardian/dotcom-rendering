@@ -2,11 +2,6 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
-interface ArticleProps {
-    CAPI: CAPIType;
-    NAV: NavType;
-}
-
 // Pillars are used for styling
 // RealPillars have Pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
@@ -115,11 +110,13 @@ interface NavType {
     otherLinks: MoreType;
     brandExtensions: LinkType[];
     currentNavLink: string;
-    subNavSections?: {
-        parent?: LinkType;
-        links: LinkType[];
-    };
+    subNavSections?: SubNavType;
     readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface SubNavType {
+    parent?: LinkType;
+    links: LinkType[];
 }
 
 interface AuthorType {
@@ -251,6 +248,53 @@ interface CAPIType {
     pageType: PageTypeType;
 }
 
+type CAPIBrowserType = {
+    config: {
+        isDev: boolean;
+        ajaxUrl: string;
+        shortUrlId: string;
+        pageId: string;
+        isPaidContent: boolean;
+        showRelatedContent: boolean;
+        keywordIds: string;
+        ampIframeUrl: string;
+        ampPrebid: boolean;
+        permutive: boolean;
+        cmpUi: boolean;
+        slotBodyEnd: boolean;
+        isSensitive: boolean;
+        videoDuration: number;
+        edition: string;
+        section: string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        sharedAdTargeting: { [key: string]: any };
+        adUnit: string;
+        discussionApiUrl: string;
+    };
+    richLinks: RichLinkBlockElement[];
+    editionId: Edition;
+    pillar: Pillar;
+    contentType: string;
+    sectionName?: string;
+    shouldHideReaderRevenue: boolean;
+    pageType: {
+        isMinuteArticle: boolean;
+        isPaidContent: boolean;
+    };
+    hasRelated: boolean;
+    hasStoryPackage: boolean;
+    isAdFreeUser: boolean;
+    pageId: string;
+    tags: TagType[];
+    isCommentable: boolean;
+    nav: {
+        readerRevenueLinks: {
+            footer: ReaderRevenueCategories;
+            header: ReaderRevenueCategories;
+        };
+    };
+};
+
 interface TagType {
     id: string;
     type: string;
@@ -351,6 +395,27 @@ interface CardHeadlineType {
     showByline?: boolean;
 }
 
+type UserBadge = {
+    name: string;
+};
+
+type UserProfile = {
+    userId: string;
+    displayName: string;
+    webUrl: string;
+    apiUrl: string;
+    avatar: string;
+    secureAvatarUrl: string;
+    badge: UserBadge[];
+
+    // only included from /profile/me endpoint
+    privateFields?: {
+        canPostComment: boolean;
+        isPremoderated: boolean;
+        hasCommented: boolean;
+    };
+};
+
 /**
  * Onwards
  */
@@ -359,7 +424,17 @@ type OnwardsType = {
     trails: TrailType[];
     description?: string;
     url?: string;
+    ophanComponentName: OphanComponentName;
 };
+
+type OphanComponentName =
+    | 'series'
+    | 'more-on-this-story'
+    | 'related-stories'
+    | 'related-content'
+    | 'more-media-in-section'
+    | 'more-galleries'
+    | 'default-onwards'; // We should never see this in the analytics data!
 
 interface CommercialConfigType {
     isPaidContent?: boolean;
@@ -408,6 +483,7 @@ interface ConfigType extends CommercialConfigType {
     keywordIds: string;
     showRelatedContent: boolean;
     shouldHideReaderRevenue?: boolean;
+    discussionApiUrl: string;
 }
 
 interface GADataType {
@@ -455,7 +531,7 @@ type DesignTypesObj = { [key in DesignType]: any };
 // General DataTypes //
 // ----------------- //
 
-interface DCRDocumentData {
+interface DCRServerDocumentData {
     page: string;
     site: string;
     CAPI: CAPIType;
@@ -464,11 +540,37 @@ interface DCRDocumentData {
     linkedData: object;
 }
 
+interface DCRBrowserDocumentData {
+    page: string;
+    site: string;
+    CAPI: CAPIBrowserType;
+    NAV: NavType;
+    GA: GADataType;
+    linkedData: object;
+}
+
 interface Props {
-    data: DCRDocumentData; // Do not fall to the tempation to rename 'data' into something else
+    data: DCRServerDocumentData; // Do not fall to the tempation to rename 'data' into something else
 }
 
 type JSXElements = JSX.Element | JSX.Element[];
+
+type IslandType =
+    | 'reader-revenue-links-header'
+    | 'nav-root'
+    | 'sub-nav-root'
+    | 'edition-root'
+    | 'most-viewed-right'
+    | 'share-comment-counts'
+    | 'most-viewed-footer'
+    | 'reader-revenue-links-footer'
+    | 'slot-body-end'
+    | 'cmp'
+    | 'onwards-upper'
+    | 'onwards-lower'
+    | 'rich-link'
+    | 'links-root'
+    | 'comments-root';
 
 interface TrailType {
     designType: DesignType;
@@ -543,6 +645,7 @@ declare module 'minify-css-string' {
     const minifyCSSString: any;
     export default minifyCSSString;
 }
+declare module 'storybook-chromatic/isChromatic';
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 // ------------------------------------- //
@@ -571,6 +674,7 @@ declare namespace JSX {
         'amp-consent': any;
         'amp-live-list': any;
         'amp-audio': any;
+        'amp-embed': any;
     }
     /* eslint-enable @typescript-eslint/no-explicit-any */
 }
@@ -580,4 +684,12 @@ declare module '*.svg' {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const content: any;
     export default content;
+}
+
+// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
+// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
+// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
+interface PerformanceEntry {
+    loadTime: number;
+    renderTime: number;
 }

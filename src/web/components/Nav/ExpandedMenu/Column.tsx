@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
+import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { CollapseColumnButton } from './CollapseColumnButton';
@@ -26,7 +26,7 @@ const pillarDivider = css`
             top: 0;
             bottom: 0;
             width: 1px;
-            background-color: ${palette.brand.pastel};
+            background-color: ${brand[600]};
             z-index: 1;
         }
     }
@@ -46,7 +46,7 @@ const columnLinkTitle = css`
     text-decoration: none;
     border: 0;
     box-sizing: border-box;
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     cursor: pointer;
     display: inline-block;
     font-weight: 500;
@@ -67,7 +67,7 @@ const columnLinkTitle = css`
 
     :hover,
     :focus {
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
         text-decoration: underline;
     }
 
@@ -134,7 +134,7 @@ const firstColumnLinks = css`
 
 const pillarColumnLinks = css`
     ${until.tablet} {
-        background: ${palette.brand.dark};
+        background: ${brand[300]};
     }
 `;
 
@@ -177,7 +177,7 @@ const columnStyle = css`
     position: relative;
 
     :after {
-        background-color: ${palette.brand.pastel};
+        background-color: ${brand[600]};
         top: 0;
         content: '';
         display: block;

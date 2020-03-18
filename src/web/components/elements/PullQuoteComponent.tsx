@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { unescapeData } from '@root/src/lib/escapeData';
@@ -45,7 +45,7 @@ const commonStyles = (pillar: Pillar, designType: DesignType) => {
                 ${headline.xxsmall({ fontWeight: 'bold' })};
                 line-height: 25px;
                 position: relative;
-                background-color: ${palette.neutral[97]};
+                background-color: ${neutral[97]};
                 padding-left: 10px;
                 padding-right: 10px;
                 padding-top: 6px;
@@ -59,7 +59,7 @@ const commonStyles = (pillar: Pillar, designType: DesignType) => {
                     height: ${quoteTail}px;
                     bottom: -${quoteTail}px;
                     position: absolute;
-                    background-color: ${palette.neutral[97]};
+                    background-color: ${neutral[97]};
                 }
             `;
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { brandBackground } from '@guardian/src-foundations/palette';
 
 import { Dropdown } from '@frontend/web/components/Dropdown';
 
@@ -10,7 +10,7 @@ const Header = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
         className={css`
             height: 300px;
             width: 100%;
-            background-color: ${palette.brand.main};
+            background-color: ${brandBackground.primary};
         `}
     >
         {children}

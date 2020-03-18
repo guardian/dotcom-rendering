@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Dropdown } from '@root/src/web/components/Dropdown';
-import { palette } from '@guardian/src-foundations';
+import { brand } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
 const editionDropdown = css`
@@ -14,7 +14,7 @@ const editionDropdown = css`
 
     :before {
         content: '';
-        border-left: 1px solid ${palette.brand.pastel};
+        border-left: 1px solid ${brand[600]};
         display: block;
         float: left;
         height: 24px;

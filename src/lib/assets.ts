@@ -3,10 +3,12 @@ interface AssetHash {
 }
 
 let assetHash: AssetHash = {};
+let assetHashLegacy: AssetHash = {};
 
 try {
     // path is relative to the server bundle
     assetHash = require('./manifest.json');
+    assetHashLegacy = require('./manifest.legacy.json');
 } catch (e) {
     // do nothing
 }
@@ -21,8 +23,19 @@ const CDN = stage
     ? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
     : '/';
 
-export const getDist = (path: string): string =>
-    `${CDN}assets/${assetHash[path] || path}`;
+export const getDist = ({
+    path,
+    legacy,
+}: {
+    path: string;
+    legacy: boolean;
+}): string => {
+    const selectedAssetHash = legacy ? assetHashLegacy : assetHash;
+    return `${CDN}assets/${selectedAssetHash[path] || path}`;
+};
 
+// TODO: Do static files ever appear in the manifest.json?
+// Note we do not have any variation between in compliation for static files
+// therefore we just look up using assetHash
 export const getStatic = (path: string): string =>
     `${CDN}static/frontend/${assetHash[path] || path}`;

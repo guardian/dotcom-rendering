@@ -5,6 +5,7 @@ import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { Hide } from '@frontend/web/components/Hide';
 
 import { useComments } from '@root/src/web/lib/useComments';
+import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 
 import { OnwardsTitle } from './OnwardsTitle';
 import { OnwardsContainer } from './OnwardsContainer';
@@ -52,7 +53,10 @@ export const OnwardsLayout = ({ onwardSections }: Props) => {
                             url={section.url}
                         />
                     </LeftColumn>
-                    <OnwardsContainer>
+                    <OnwardsContainer
+                        dataComponentName={section.ophanComponentName}
+                        dataLinkName={formatAttrString(section.heading)}
+                    >
                         <Hide when="above" breakpoint="leftCol">
                             <OnwardsTitle
                                 title={section.heading}

@@ -5,11 +5,14 @@ import { Picture, PictureSource } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { until, from, between } from '@guardian/src-foundations/mq';
-import { palette } from '@guardian/src-foundations';
+import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 const widths = [1020, 660, 480, 0];
 
-const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
+const bestFor = (
+    desiredWidth: number,
+    inlineSrcSets: SrcSetItem[],
+): SrcSetItem => {
     const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
 
     return sorted.reduce((best, current) => {
@@ -24,7 +27,7 @@ const bestFor = (desiredWidth: number, inlineSrcSets: SrcSet[]): SrcSet => {
 const getSrcSetsForWeighting = (
     imageSources: ImageSource[],
     forWeighting: RoleType,
-): SrcSet[] =>
+): SrcSetItem[] =>
     imageSources.filter(
         ({ weighting }) =>
             // Use toLowerCase to handle cases where we have halfWidth comparing to halfwidth
@@ -34,7 +37,7 @@ const getSrcSetsForWeighting = (
 const makeSource = (
     hidpi: boolean,
     minWidth: number,
-    srcSet: SrcSet,
+    srcSet: SrcSetItem,
 ): PictureSource => {
     return {
         hidpi,
@@ -70,7 +73,7 @@ const getFallback: (imageSources: ImageSource[]) => string = imageSources => {
 };
 
 const starsWrapper = css`
-    background-color: ${palette.brandYellow.main};
+    background-color: ${brandAltBackground.primary};
 
     position: absolute;
     ${until.tablet} {
@@ -131,7 +134,6 @@ export const ImageComponent: React.FC<{
         <Caption
             captionText={element.data.caption || ''}
             pillar={pillar}
-            dirtyHtml={true}
             credit={element.data.credit}
             displayCredit={true}
             role={role}

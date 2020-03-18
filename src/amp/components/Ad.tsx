@@ -1,5 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
+import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
@@ -26,7 +28,7 @@ const adStyle = css`
         font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
             sans-serif;
         padding: 3px 10px;
-        color: ${palette.neutral[46]};
+        color: ${text.supporting};
         text-align: right;
     }
 `;
@@ -89,14 +91,11 @@ const getPlacementId = (adRegion: AdRegion): number => {
 
 const realTimeConfig = (
     adRegion: AdRegion,
-    useKrux: boolean,
     usePrebid: boolean,
     usePermutive: boolean,
 ): any => {
     const placementID = getPlacementId(adRegion);
     const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
-    const kruxURL =
-        'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
     const permutiveURL =
         'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 
@@ -117,7 +116,6 @@ const realTimeConfig = (
 
     const data = {
         urls: [
-            useKrux ? kruxURL : '',
             usePrebid ? prebidURL : '',
             usePermutive ? permutiveURL : '',
         ].filter(url => url),
@@ -127,7 +125,6 @@ const realTimeConfig = (
 };
 
 interface CommercialConfig {
-    useKrux: boolean;
     usePrebid: boolean;
     usePermutive: boolean;
 }
@@ -154,7 +151,6 @@ const ampAdElem = (
             data-slot={ampData(section, contentType)}
             rtc-config={realTimeConfig(
                 adRegion,
-                config.useKrux,
                 config.usePrebid,
                 config.usePermutive,
             )}

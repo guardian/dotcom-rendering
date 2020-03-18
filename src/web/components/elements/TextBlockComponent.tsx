@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { body } from '@guardian/src-foundations/typography';
+import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
@@ -37,6 +38,23 @@ const decideDropCap = (html: string) => {
     return isLetter(first) && first;
 };
 
+const sanitiserOptions = {
+    // Defaults: https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
+    allowedTags: false, // Leave tags from CAPI alone
+    allowedAttributes: false, // Leave attributes from CAPI alone
+    transformTags: {
+        a: (tagName: string, attribs: {}) => ({
+            tagName, // Just return anchors as is
+            attribs: {
+                ...attribs, // Merge into the existing attributes
+                ...{
+                    'data-link-name': 'in body link', // Add the data-link-name for Ophan to anchors
+                },
+            },
+        }),
+    },
+};
+
 export const TextBlockComponent: React.FC<Props> = ({
     html,
     pillar,
@@ -58,6 +76,7 @@ export const TextBlockComponent: React.FC<Props> = ({
     const remainingLetters = firstLetter
         ? unwrappedHtml.substr(firstLetter.length)
         : unwrappedHtml;
+
     if (dropCap && firstLetter && isLongEnough(remainingLetters)) {
         return (
             <>
@@ -68,7 +87,7 @@ export const TextBlockComponent: React.FC<Props> = ({
                 />
                 <RewrappedComponent
                     isUnwrapped={isUnwrapped}
-                    html={remainingLetters}
+                    html={sanitise(remainingLetters, sanitiserOptions)}
                     elCss={paraStyles}
                     tagName="p"
                 />
@@ -79,7 +98,7 @@ export const TextBlockComponent: React.FC<Props> = ({
     return (
         <RewrappedComponent
             isUnwrapped={isUnwrapped}
-            html={unwrappedHtml}
+            html={sanitise(unwrappedHtml, sanitiserOptions)}
             elCss={paraStyles}
             tagName="p"
         />

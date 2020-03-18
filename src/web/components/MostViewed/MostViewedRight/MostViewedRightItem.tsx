@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { neutral, border } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
@@ -12,7 +13,7 @@ const listItemStyles = css`
     list-style: none;
     padding-top: 4px;
     margin-bottom: 12px;
-    border-top: 1px solid ${palette.neutral[86]};
+    border-top: 1px solid ${border.secondary};
 
     &:first-of-type {
         padding-top: 0;
@@ -54,25 +55,24 @@ const marginTopStyles = css`
 
 type Props = {
     trail: TrailType;
+    mostViewedItemIndex: number;
 };
 
-export const MostViewedRightItem = ({ trail }: Props) => {
+export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
     const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
     const linkProps = {
         to: trail.url,
-        visitedColour: palette.neutral[46],
+        visitedColour: neutral[46],
         preventFocus: true,
     };
 
     return (
-        <li className={listItemStyles}>
-            <a
-                className={linkTagStyles}
-                href={trail.url}
-                data-link-name="article"
-                ref={hoverRef}
-            >
+        <li
+            className={listItemStyles}
+            data-link-name={`trail | ${mostViewedItemIndex + 1}`}
+        >
+            <a className={linkTagStyles} href={trail.url} ref={hoverRef}>
                 <div className={lineWrapperStyles}>
                     {trail.image && (
                         <div className={imageWrapperStyles}>

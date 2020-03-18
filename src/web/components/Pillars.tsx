@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { brand, brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -41,7 +41,7 @@ const pillarsStyles = css`
 
     :after {
         content: '';
-        border-top: 1px solid ${palette.brand.pastel};
+        border-top: 1px solid ${brand[600]};
         position: absolute;
         bottom: 0;
         left: 0;
@@ -106,7 +106,7 @@ const pillarDivider = css`
         top: 0;
         bottom: 0;
         width: 1px;
-        background-color: ${palette.brand.pastel};
+        background-color: ${brand[600]};
 
         ${from.tablet} {
             bottom: 17px;
@@ -122,7 +122,7 @@ const linkStyle = css`
     ${headline.xxxsmall()};
     box-sizing: border-box;
     font-weight: 900;
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     cursor: pointer;
     display: block;
     font-size: 15.4px;
@@ -205,7 +205,14 @@ export const Pillars: React.FC<{
     pillars: PillarType[];
     pillar: Pillar;
     showLastPillarDivider?: boolean;
-}> = ({ mainMenuOpen, pillars, pillar, showLastPillarDivider = true }) => (
+    dataLinkName: string;
+}> = ({
+    mainMenuOpen,
+    pillars,
+    pillar,
+    showLastPillarDivider = true,
+    dataLinkName,
+}) => (
     <ul className={pillarsStyles}>
         {pillars.map((p, i) => (
             <li key={p.title} className={pillarStyle}>
@@ -218,7 +225,7 @@ export const Pillars: React.FC<{
                         [forceUnderline]: p.pillar === pillar,
                     })}
                     href={p.url}
-                    data-link-name={`nav2 : primary : ${p.title}`}
+                    data-link-name={`${dataLinkName} : primary : ${p.title}`}
                 >
                     {p.title}
                 </a>

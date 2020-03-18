@@ -1113,8 +1113,6 @@ export const data = {
             idProfileNavigation: true,
             discussionAllowAnonymousRecommendsSwitch: false,
             scrollDepth: true,
-            krux: true,
-            kruxVideoTracking: false,
             epicTestsFromGoogleDocs: true,
             youtubeRelatedVideos: true,
             webFonts: true,

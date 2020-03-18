@@ -1,5 +1,6 @@
 import React from 'react';
-import { palette } from '@guardian/src-foundations';
+
+import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { css, cx } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -12,7 +13,7 @@ const captionStyle = css`
     padding-top: 10px;
     ${textSans.xsmall()};
     word-wrap: break-word;
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
 `;
 
 const captionPadding = css`
@@ -24,14 +25,12 @@ export const Caption: React.FC<{
     captionText?: string;
     pillar: Pillar;
     padCaption?: boolean;
-    dirtyHtml?: boolean;
     credit?: string;
     displayCredit?: boolean;
 }> = ({
     captionText,
     pillar,
     padCaption = false,
-    dirtyHtml = false,
     credit,
     displayCredit = true,
     children,
@@ -55,18 +54,15 @@ export const Caption: React.FC<{
     `;
 
     const getCaptionHtml = () => {
-        if (dirtyHtml) {
-            return (
-                <span
-                    className={captionLink}
-                    dangerouslySetInnerHTML={{
-                        __html: captionText || '',
-                    }}
-                    key="caption"
-                />
-            );
-        }
-        return captionText;
+        return (
+            <span
+                className={captionLink}
+                dangerouslySetInnerHTML={{
+                    __html: captionText || '',
+                }}
+                key="caption"
+            />
+        );
     };
 
     return (

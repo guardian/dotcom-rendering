@@ -5,8 +5,9 @@ import {
     responseWithOneTab,
 } from '@root/fixtures/mostViewed';
 import { useApi as useApi_ } from '@root/src/web/lib/api';
-import { MostViewedFooter } from './MostViewedFooter';
+import { MostViewedFooterData } from './MostViewedFooterData';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: any = useApi_;
 
 jest.mock('../../../lib/api', () => ({
@@ -16,7 +17,7 @@ jest.mock('../../../lib/api', () => ({
 const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
 
-describe('MostViewedFooter', () => {
+describe('MostViewedFooterData', () => {
     beforeEach(() => {
         useApi.mockReset();
     });
@@ -25,7 +26,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByText, getAllByText, getByTestId } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -57,7 +58,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithTwoTabs });
 
         const { getByTestId, getByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -86,7 +87,7 @@ describe('MostViewedFooter', () => {
         useApi.mockReturnValue({ data: responseWithOneTab });
 
         const { queryByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -119,7 +120,7 @@ describe('MostViewedFooter', () => {
         });
 
         const { getByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -150,7 +151,7 @@ describe('MostViewedFooter', () => {
         });
 
         const { queryByText } = render(
-            <MostViewedFooter
+            <MostViewedFooterData
                 sectionName="Section Name"
                 pillar="news"
                 ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -158,5 +159,49 @@ describe('MostViewedFooter', () => {
         );
 
         expect(queryByText('Live')).not.toBeInTheDocument();
+    });
+
+    it('should render the Ophan data link names as expected', async () => {
+        useApi.mockReturnValue({ data: responseWithTwoTabs });
+
+        const { asFragment } = render(
+            <MostViewedFooterData
+                sectionName="Section Name"
+                pillar="news"
+                ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+            />,
+        );
+
+        // Renders tab data link name
+        expect(
+            asFragment().querySelectorAll('[data-link-name="in Music"]').length,
+        ).toBe(1); // Should add the data-link-name for Section Name tab
+
+        // Renders Trail data-link-names
+        expect(
+            asFragment().querySelectorAll('[data-link-name*="| text"]').length,
+        ).toBe(20); // Total stories in Related Footer (*= selector contains) (both tabs)
+
+        expect(
+            asFragment().querySelectorAll('[data-link-name="1 | text"]').length,
+        ).toBe(2); // 1 indexed so should start at 1, one for each tab
+
+        expect(
+            asFragment().querySelectorAll('[data-link-name="0 | text"]').length,
+        ).toBe(0); // 1 indexed so should start at 1
+
+        // most commented
+        expect(
+            asFragment().querySelectorAll(
+                '[data-link-name="comment | group-0 | card-@1"]',
+            ).length,
+        ).toBe(1);
+
+        // most shared
+        expect(
+            asFragment().querySelectorAll(
+                '[data-link-name="news | group-0 | card-@1"]',
+            ).length,
+        ).toBe(1);
     });
 });

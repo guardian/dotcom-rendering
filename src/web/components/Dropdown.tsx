@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import {
+    neutral,
+    border,
+    brandText,
+    brandAlt,
+} from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -69,7 +75,7 @@ const link = css`
     padding: 10px 18px 15px 30px;
 
     :hover {
-        background-color: ${palette.neutral[93]};
+        background-color: ${neutral[93]};
         text-decoration: none;
     }
 
@@ -79,7 +85,7 @@ const link = css`
 
     :before {
         content: '';
-        border-top: 1px solid ${palette.neutral[93]};
+        border-top: 1px solid ${border.secondary};
         display: block;
         position: absolute;
         top: 0px;
@@ -118,16 +124,15 @@ const button = css`
     background: none;
     border: none;
     /* Design System: The buttons should be components that handle their own layout using primitives  */
-    /* stylelint-disable-next-line property-blacklist */
     line-height: 1.2;
-    color: ${palette.neutral[100]};
+    color: ${brandText.primary};
     transition: color 80ms ease-out;
     padding: 0px 10px 6px 5px;
     margin: 1px 0 0;
     text-decoration: none;
 
     :hover {
-        color: ${palette.brandYellow.main};
+        color: ${brandAlt[400]};
 
         :after {
             transform: translateY(0) rotate(45deg);
@@ -165,34 +170,34 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
     useEffect(() => {
         // If hook runs we know client-side JS is enabled
         setNoJS(false);
-    });
+    }, []);
 
     useEffect(() => {
+        const dismissOnEsc = (event: KeyboardEvent) => {
+            if (isExpanded && event.code === 'Escape') {
+                setIsExpanded(false);
+            }
+        };
+
         document.addEventListener('keydown', dismissOnEsc, false);
 
         // Remove listener on unmount
         return () => document.removeEventListener('keydown', dismissOnEsc);
-    });
+    }, [isExpanded]);
 
     useEffect(() => {
+        const dismissOnClick = (event: MouseEvent) => {
+            if (isExpanded) {
+                event.stopPropagation();
+                setIsExpanded(false);
+            }
+        };
+
         document.addEventListener('click', dismissOnClick, false);
 
         // Remove listener on unmount
         return () => document.removeEventListener('click', dismissOnClick);
-    });
-
-    const dismissOnClick = (event: MouseEvent) => {
-        if (isExpanded) {
-            event.stopPropagation();
-            setIsExpanded(false);
-        }
-    };
-
-    const dismissOnEsc = (event: KeyboardEvent) => {
-        if (isExpanded && event.code === 'Escape') {
-            setIsExpanded(false);
-        }
-    };
+    }, [isExpanded]);
 
     const handleToggle = () => setIsExpanded(!isExpanded);
 

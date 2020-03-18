@@ -7,7 +7,6 @@ describe('AdComponent', () => {
     const section = '';
     const contentType = '';
     const commercialConfig = {
-        useKrux: true,
         usePrebid: true,
         usePermutive: true,
     };
@@ -17,8 +16,6 @@ describe('AdComponent', () => {
         AU: { adTargeting: [] },
         INT: { adTargeting: [] },
     };
-    const kruxURL =
-        'https://cdn.krxd.net/userdata/v2/amp/2196ddf0-947c-45ec-9b0d-0a82fb280cb8?segments_key=x&kuid_key=kuid';
     const permutiveURL =
         'https://guardian.amp.permutive.com/rtc?type=doubleclick';
     const usPrebidURL =
@@ -29,11 +26,11 @@ describe('AdComponent', () => {
         'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
 
     beforeEach(() => {
-        commercialConfig.useKrux = true;
+        commercialConfig.usePermutive = true;
         commercialConfig.usePrebid = true;
     });
 
-    it('rtc-config returns correctly formed Krux, Permutive and PreBid URLs when useKrux, usePermutive and usePrebid flags are set to true', () => {
+    it('rtc-config returns correctly formed Permutive and PreBid URLs when usePermutive and usePrebid flags are set to true', () => {
         const { container } = render(
             <Ad
                 edition={edition}
@@ -60,21 +57,18 @@ describe('AdComponent', () => {
 
             if (usRtcAttribute) {
                 expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
-                    kruxURL,
                     usPrebidURL,
                     permutiveURL,
                 ]);
             }
             if (auRtcAttribute) {
                 expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
-                    kruxURL,
                     auPrebidURL,
                     permutiveURL,
                 ]);
             }
             if (rowRtcAttribute) {
                 expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
-                    kruxURL,
                     rowPrebidURL,
                     permutiveURL,
                 ]);
@@ -82,8 +76,7 @@ describe('AdComponent', () => {
         }
     });
 
-    it('rtc-config returns only the correctly formed PreBid URL when useKrux and usePermutive flags are set to false and usePrebid flag is set to true', () => {
-        commercialConfig.useKrux = false;
+    it('rtc-config returns only the correctly formed PreBid URL when usePermutive flag is set to false and usePrebid flag is set to true', () => {
         commercialConfig.usePermutive = false;
 
         const { container } = render(
@@ -128,7 +121,7 @@ describe('AdComponent', () => {
         }
     });
 
-    it('rtc-config returns only the Krux and Permutive URL when useKrux and usePermutive flags are set to true and usePrebid flag is set to false', () => {
+    it('rtc-config returns only the Permutive URL when usePermutive flags is set to true and usePrebid flag is set to false', () => {
         commercialConfig.usePrebid = false;
 
         const { container } = render(
@@ -157,24 +150,23 @@ describe('AdComponent', () => {
 
             if (usRtcAttribute) {
                 expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
-                    kruxURL,
+                    permutiveURL,
                 ]);
             }
             if (auRtcAttribute) {
                 expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
-                    kruxURL,
+                    permutiveURL,
                 ]);
             }
             if (rowRtcAttribute) {
                 expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
-                    kruxURL,
+                    permutiveURL,
                 ]);
             }
         }
     });
 
-    it('rtc-config returns no URLs when useKrux, usePermutive and usePrebid flags are set to false', () => {
-        commercialConfig.useKrux = false;
+    it('rtc-config returns no URLs when usePermutive and usePrebid flags are set to false', () => {
         commercialConfig.usePrebid = false;
         commercialConfig.usePermutive = false;
 

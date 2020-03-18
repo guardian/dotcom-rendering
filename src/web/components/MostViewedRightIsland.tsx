@@ -10,5 +10,5 @@ const stretchWrapperHeight = css`
 `;
 
 export const MostViewedRightIsland = () => (
-    <div data-island="most-viewed-right" className={stretchWrapperHeight} />
+    <div id="most-viewed-right" className={stretchWrapperHeight} />
 );

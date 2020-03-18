@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { palette } from '@guardian/src-foundations';
+import { border, neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -17,9 +18,9 @@ const itemStyles = (showRightBorder?: boolean) => css`
     padding-right: 10px;
     padding-bottom: 12px;
 
-    border-top: 1px solid ${palette.neutral[86]};
+    border-top: 1px solid ${border.secondary};
     ${from.tablet} {
-        border-right: ${showRightBorder && `1px solid ${palette.neutral[86]}`};
+        border-right: ${showRightBorder && `1px solid ${border.secondary}`};
     }
 
     min-height: 3.25rem;
@@ -32,7 +33,7 @@ const itemStyles = (showRightBorder?: boolean) => css`
 
     &:hover,
     :focus {
-        background: ${palette.neutral[97]};
+        background: ${neutral[97]};
     }
 `;
 
@@ -74,9 +75,15 @@ type Props = {
     trail: TrailType;
     title: string;
     showRightBorder?: boolean; // Prevents double borders
+    dataLinkName: string;
 };
 
-export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
+export const SecondTierItem = ({
+    trail,
+    title,
+    showRightBorder,
+    dataLinkName,
+}: Props) => {
     const {
         url,
         isLiveBlog,
@@ -94,7 +101,11 @@ export const SecondTierItem = ({ trail, title, showRightBorder }: Props) => {
 
     return (
         <div className={itemStyles(showRightBorder)}>
-            <a className={headlineLink} href={url} data-link-name="article">
+            <a
+                className={headlineLink}
+                href={url}
+                data-link-name={dataLinkName}
+            >
                 <Flex>
                     <div className={headlineStyles}>
                         <div className={titleStyles}>{title}</div>

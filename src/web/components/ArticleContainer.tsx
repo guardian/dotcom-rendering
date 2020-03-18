@@ -4,12 +4,6 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { labelStyles } from '@root/src/web/components/AdSlot';
 
 const articleContainer = css`
-    /* Set min-width: 0 here to prevent flex children breaking out of the
-    containing parent. This ws happening for embedded tweets which have
-    a width: 500px property.
-    See: https://stackoverflow.com/a/47457331 */
-    min-width: 0;
-
     ${until.leftCol} {
         /* below 1140 */
         padding-left: 0;
@@ -27,7 +21,7 @@ const articleAdStyles = css`
     .ad-slot {
         width: 300px;
         margin: 12px auto;
-        min-width: 300px;
+        min-width: 160px;
         min-height: 274px;
         text-align: center;
     }
@@ -38,10 +32,17 @@ const articleAdStyles = css`
         }
     }
     .ad-slot--inline {
-        ${from.desktop} {
-            margin: 0;
+        ${from.tablet} {
+            margin-right: -100px;
             width: auto;
             float: right;
+            margin-top: 4px;
+            margin-left: 20px;
+        }
+        ${from.desktop} {
+            width: auto;
+            float: right;
+            margin: 0;
             margin-top: 4px;
             margin-left: 20px;
         }
@@ -50,7 +51,7 @@ const articleAdStyles = css`
         ${from.desktop} {
             float: right;
             width: auto;
-            margin-right: -308px;
+            margin-right: -318px;
         }
 
         ${from.wide} {

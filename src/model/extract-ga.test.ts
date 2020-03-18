@@ -3,7 +3,7 @@ import { extract } from './extract-ga';
 
 const base = {
     authorIds: 'profile/rob-davies',
-    beaconUrl: '//fake.url',
+    beaconUrl: '//phar.gu-web.net',
     commissioningDesks: 'ukbusiness',
     contentId:
         'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
@@ -16,11 +16,12 @@ const base = {
     section: 'money',
     seriesId: 'testseries',
     toneIds: 'tone/news',
-    webTitle: 'Foobar',
+    webTitle:
+        "Ticket touts face unlimited fines for using 'bots' to buy in bulk",
 };
 
 describe('Google Analytics extracts and formats CAPI response correctly', () => {
-    test('GA Extract returns correctly formatted GA response', () => {
+    it('GA Extract returns correctly formatted GA response', () => {
         expect(extract(CAPI)).toEqual(base);
     });
 });

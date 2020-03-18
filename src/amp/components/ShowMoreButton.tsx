@@ -1,5 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
+
+import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import PlusIcon from '@frontend/static/icons/plus.svg';
@@ -9,7 +11,6 @@ const showMore = css`
     padding: 0 10px;
     ${textSans.small()};
     /* Design System: Ideally we want a centering primative that we can use in these situations */
-    /* stylelint-disable-next-line property-blacklist */
     line-height: 34px;
     height: 36px;
     font-weight: bold;
@@ -21,7 +22,7 @@ const showMore = css`
         margin-top: -2px;
         margin-right: 4px;
         margin-left: 5px;
-        fill: ${palette.neutral[46]};
+        fill: ${neutral[46]};
         padding-right: 4px;
     }
 

@@ -6,6 +6,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import InfoIcon from '@frontend/static/icons/info.svg';
 import { YoutubeVideo } from '@root/src/amp/components/elements/YoutubeVideo';
+import { scrsetStringFromImagesSources } from '@root/src/amp/lib/srcset-utils';
 
 const figureStyle = css`
     margin: 0 0;
@@ -64,7 +65,10 @@ const labelStyle = css`
 
 const mainImage = (element: ImageBlockElement): JSX.Element | null => {
     const containerWidth = 600;
-    const image: SrcSet = bestFitImage(element.imageSources, containerWidth);
+    const image: SrcSetItem = bestFitImage(
+        element.imageSources,
+        containerWidth,
+    );
     const height: number = heightEstimate(
         element.media.allImages[0],
         image.width,
@@ -83,6 +87,7 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                 height={height.toString()}
                 width={image.width.toString()}
                 layout="responsive"
+                srcset={scrsetStringFromImagesSources(element.imageSources)}
             />
             {(element.data.caption ||
                 (element.data.credit && element.displayCredit)) && (

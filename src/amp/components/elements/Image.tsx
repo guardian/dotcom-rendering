@@ -1,5 +1,6 @@
 import React from 'react';
-import { palette } from '@guardian/src-foundations';
+
+import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -14,7 +15,7 @@ const captionStyle = css`
     padding-top: 8px;
     ${textSans.xsmall()};
     word-wrap: break-word;
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
 `;
 
 export const Image: React.FC<{
@@ -22,7 +23,10 @@ export const Image: React.FC<{
     pillar: Pillar;
 }> = ({ element, pillar }) => {
     const containerWidth = 600;
-    const image: SrcSet = bestFitImage(element.imageSources, containerWidth);
+    const image: SrcSetItem = bestFitImage(
+        element.imageSources,
+        containerWidth,
+    );
     const height: number = heightEstimate(
         element.media.allImages[0],
         image.width,

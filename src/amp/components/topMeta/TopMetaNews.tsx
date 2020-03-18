@@ -63,7 +63,9 @@ export const TopMetaNews: React.FC<{
     articleData: ArticleModel;
     adTargeting?: AdTargeting;
 }> = ({ articleData, adTargeting }) => {
-    const {branding} = articleData.commercialProperties[articleData.editionId];
+    const { branding } = articleData.commercialProperties[
+        articleData.editionId
+    ];
 
     return (
         <header>

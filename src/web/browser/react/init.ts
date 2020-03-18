@@ -1,7 +1,8 @@
 import { hydrate as hydrateCSS } from 'emotion';
+
 import { startup } from '@root/src/web/browser/startup';
 
-import { hydrateIslands } from '@frontend/web/islands/islands';
+import { HydrateApp } from '@root/src/web/components/HydrateApp';
 
 const init = (): Promise<void> => {
     const {
@@ -19,7 +20,8 @@ const init = (): Promise<void> => {
         hydrateCSS(cssIDs);
     }
 
-    hydrateIslands(CAPI, NAV);
+    // Partially hydrate the client using a combination of islands and portals
+    HydrateApp({ CAPI, NAV });
 
     return Promise.resolve();
 };

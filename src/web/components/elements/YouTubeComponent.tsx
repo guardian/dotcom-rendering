@@ -34,7 +34,6 @@ export const YouTubeComponent = ({
         <Caption
             captionText={element.mediaTitle || ''}
             pillar={pillar}
-            dirtyHtml={true}
             displayCredit={false}
             role={role}
         >

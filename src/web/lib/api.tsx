@@ -36,7 +36,16 @@ const callApi = (url: string, options?: FetchOptions) => {
         .then(response => response.json());
 };
 
-export function useApi<T>(url: string, options?: FetchOptions) {
+interface ApiResponse<T> {
+    loading: boolean;
+    data?: T;
+    error?: Error;
+}
+
+export const useApi = <T,>(
+    url: string,
+    options?: FetchOptions,
+): ApiResponse<T> => {
     const [request, setRequest] = useState<{
         loading: boolean;
         data?: T;
@@ -59,7 +68,7 @@ export function useApi<T>(url: string, options?: FetchOptions) {
                     loading: false,
                 });
             });
-    }, [url]);
+    }, [url, options]);
 
     return request;
-}
+};

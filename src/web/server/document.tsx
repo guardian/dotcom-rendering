@@ -8,7 +8,7 @@ import { escapeData } from '@root/src/lib/escapeData';
 import { getDist } from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
-import { Article } from '../pages/Article';
+import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
 interface RenderToStringResult {
@@ -24,7 +24,7 @@ export const document = ({ data }: Props) => {
         renderToString(
             // TODO: CacheProvider can be removed when we've moved over to using @emotion/core
             <CacheProvider value={cache}>
-                <Article data={{ CAPI, NAV }} />
+                <DecideLayout CAPI={CAPI} NAV={NAV} />
             </CacheProvider>,
         ),
     );
@@ -59,9 +59,15 @@ export const document = ({ data }: Props) => {
      */
     const priorityScripts = [
         polyfillIO,
-        getDist('sentry.js'),
-        getDist('react.js'),
         CAPI.config && CAPI.config.commercialBundleUrl,
+    ];
+    const priorityLegacyScripts = [
+        getDist({ path: 'sentry.js', legacy: true }),
+        getDist({ path: 'react.js', legacy: true }),
+    ];
+    const priorityNonLegacyScripts = [
+        getDist({ path: 'sentry.js', legacy: false }),
+        getDist({ path: 'react.js', legacy: false }),
     ];
 
     /**
@@ -72,10 +78,17 @@ export const document = ({ data }: Props) => {
      * unlikely.
      */
     const lowPriorityScripts = [
-        getDist('ga.js'),
-        getDist('ophan.js'),
-        getDist('lotame.js'),
         'https://www.google-analytics.com/analytics.js',
+    ];
+    const lowPriorityLegacyScripts = [
+        getDist({ path: 'ga.js', legacy: true }),
+        getDist({ path: 'ophan.js', legacy: true }),
+        getDist({ path: 'lotame.js', legacy: true }),
+    ];
+    const lowPriorityNonLegacyScripts = [
+        getDist({ path: 'ga.js', legacy: false }),
+        getDist({ path: 'ophan.js', legacy: false }),
+        getDist({ path: 'lotame.js', legacy: false }),
     ];
 
     /**
@@ -95,8 +108,15 @@ export const document = ({ data }: Props) => {
 
     return htmlTemplate({
         linkedData,
+
         priorityScripts,
+        priorityLegacyScripts,
+        priorityNonLegacyScripts,
+
         lowPriorityScripts,
+        lowPriorityLegacyScripts,
+        lowPriorityNonLegacyScripts,
+
         css,
         html,
         fontFiles,

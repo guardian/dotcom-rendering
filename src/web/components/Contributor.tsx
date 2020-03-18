@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 
@@ -12,7 +12,7 @@ import TwitterIcon from '@frontend/static/icons/twitter.svg';
 const twitterHandle = css`
     ${textSans.xsmall()};
     font-weight: bold;
-    color: ${palette.neutral[46]};
+    color: ${text.supporting};
 
     padding-right: 10px;
     display: inline-block;
@@ -21,11 +21,11 @@ const twitterHandle = css`
         height: 10px;
         max-width: 12px;
         margin-right: 0px;
-        fill: ${palette.neutral[46]};
+        fill: ${neutral[46]};
     }
 
     a {
-        color: ${palette.neutral[46]};
+        color: ${text.supporting};
         text-decoration: none;
     }
 `;
@@ -61,7 +61,11 @@ export const Contributor: React.FC<{
         tags.filter(tag => tag.type === 'Contributor').length === 1;
 
     return (
-        <address aria-label="Contributor info">
+        <address
+            aria-label="Contributor info"
+            data-component="meta-byline"
+            data-link-name="byline"
+        >
             {designType !== 'Interview' && (
                 <div className={bylineStyle(pillar)}>
                     <BylineLink byline={author.byline} tags={tags} />

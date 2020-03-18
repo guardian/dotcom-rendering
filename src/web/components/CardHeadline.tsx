@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
@@ -80,7 +81,7 @@ const headlineStyles = (
             return colourStyles(palette[pillar].dark);
         case 'Media':
         case 'Live':
-            return colourStyles(palette.neutral[97]);
+            return colourStyles(neutral[97]);
         case 'Analysis':
         case 'Article':
         case 'Review':
@@ -94,7 +95,6 @@ const headlineStyles = (
         case 'Comment':
         case 'Immersive':
         default:
-            
     }
 };
 
