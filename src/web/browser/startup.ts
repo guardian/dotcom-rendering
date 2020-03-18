@@ -13,7 +13,7 @@ const measure = (name: string, task: () => Promise<void>): void => {
         perf.mark(end);
         perf.measure(name, start, end);
 
-        // eslint:disable-next-line no-console
+        // eslint-disable-next-line no-console
         console.log(JSON.stringify(perf.getEntriesByName(name)));
     }
 

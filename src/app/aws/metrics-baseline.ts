@@ -31,7 +31,7 @@ collectAndSendAWSMetrics(
 export const recordBaselineCloudWatchMetrics = () => {
     disk.check('/', (err, diskinfo) => {
         if (err) {
-            // eslint:disable-next-line no-console
+            // eslint-disable-next-line no-console
             console.error(err);
         } else {
             maxHeapMemory.record(process.memoryUsage().heapTotal);
