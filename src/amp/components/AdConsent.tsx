@@ -130,7 +130,7 @@ export const AdConsent: React.FC<{}> = ({}) => {
                             on="tap:the-adconsent-element.accept"
                             className={cx(buttonStyle, acceptStyle)}
                         >
-                            <Tick /> I'm OK with that
+                            <Tick /> I&apos;m OK with that
                         </button>
                         <button
                             on="tap:the-adconsent-element.reject"
