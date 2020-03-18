@@ -217,7 +217,6 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
                     })}
                     aria-controls={dropdownID}
                     aria-expanded={isExpanded ? 'true' : 'false'}
-                    role="button"
                 >
                     <input
                         className={input}

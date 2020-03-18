@@ -118,13 +118,14 @@ export const VeggieBurger: React.FC<{
 
     return (
         // TODO: Refactor this compone to work better without js. Where better
-        // is working and accessible
+        // means working and accessible
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/label-has-associated-control
         <label
             className={veggieBurger({ showExpandedMenu })}
             onClick={() => toggleExpandedMenu(!showExpandedMenu)}
             htmlFor={htmlFor}
             tabIndex={0}
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
             role="button"
             aria-label="Toggle main menu"
         >

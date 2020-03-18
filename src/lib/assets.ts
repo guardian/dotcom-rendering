@@ -7,7 +7,9 @@ let assetHashLegacy: AssetHash = {};
 
 try {
     // path is relative to the server bundle
+    // eslint-disable-next-line import/no-unresolved
     assetHash = require('./manifest.json');
+    // eslint-disable-next-line import/no-unresolved
     assetHashLegacy = require('./manifest.legacy.json');
 } catch (e) {
     // do nothing
