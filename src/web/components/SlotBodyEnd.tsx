@@ -25,19 +25,20 @@ const checkForErrors = (response: any) => {
 
 type OphanAction = 'INSERT' | 'VIEW';
 
-const epicTestName = 'DotcomRenderingEpic';
+const epicTestName = 'FrontendDotcomRenderingEpic';
 
 const sendOphanEvent = (action: OphanAction): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
-            id: 'gdnwb_copts_memco_remote_epic_test_api',
+            campaignCode:
+                'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
+            id: 'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
         },
         abTest: {
-            name: 'remote_epic_test',
-            variant: 'remote',
+            name: 'frontend_dotcom_rendering_epic',
+            variant: 'dcr',
         },
         action,
     };
@@ -67,9 +68,10 @@ const buildPayload = (props: Props) => {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
-            campaignCode: 'gdnwb_copts_memco_remote_epic_test_api',
-            abTestName: 'remote_epic_test',
-            abTestVariant: 'api',
+            campaignCode:
+                'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
+            abTestName: 'frontend_dotcom_rendering_epic',
+            abTestVariant: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
         },
         localisation: {
@@ -155,6 +157,12 @@ const MemoisedInner = (props: Props) => {
 export const SlotBodyEnd = (props: Props) => {
     const { isSignedIn, countryCode } = props;
     if (isSignedIn === undefined || countryCode === undefined) {
+        return null;
+    }
+
+    // FIXME - used temporarily to exclude US from the DCR 5% test.
+    // Please check with Slot Machine team if this condition can be removed.
+    if (countryCode === 'US') {
         return null;
     }
 
