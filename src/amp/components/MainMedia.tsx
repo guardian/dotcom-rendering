@@ -98,6 +98,7 @@ const mainImage = (element: ImageBlockElement): JSX.Element | null => {
                         id="show-caption"
                         className={inputStyle}
                     />
+                    {/* eslint-disable jsx-a11y/label-has-associated-control */}
                     <label className={labelStyle} htmlFor="show-caption">
                         <span
                             className={css`

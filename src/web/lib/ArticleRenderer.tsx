@@ -73,6 +73,7 @@ export const ArticleRenderer: React.FC<{
                             element={element}
                             pillar={pillar}
                             hideCaption={false}
+                            // eslint-disable-next-line jsx-a11y/aria-role
                             role="inline"
                             adTargeting={adTargeting}
                         />

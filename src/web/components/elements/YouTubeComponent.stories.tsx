@@ -33,6 +33,7 @@ export const noOverlay = () => {
                     channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
                 }}
                 pillar="news"
+                // eslint-disable-next-line jsx-a11y/aria-role
                 role="inline"
             />
         </Container>
