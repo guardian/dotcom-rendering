@@ -69,7 +69,6 @@ module.exports = {
         'no-empty-pattern': [0],
         'no-param-reassign': [0],
         'no-restricted-syntax': [0],
-        'no-return-assign': [0],
         'no-underscore-dangle': [0],
         'no-useless-escape': [0],
         'react/button-has-type': [0],
