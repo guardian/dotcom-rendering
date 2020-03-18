@@ -129,14 +129,12 @@ export const AdConsent: React.FC<{}> = ({}) => {
                         <button
                             on="tap:the-adconsent-element.accept"
                             className={cx(buttonStyle, acceptStyle)}
-                            role="button"
                         >
                             <Tick /> I'm OK with that
                         </button>
                         <button
                             on="tap:the-adconsent-element.reject"
                             className={cx(buttonStyle, rejectStyle)}
-                            role="button"
                         >
                             I do not want to see personalised ads
                         </button>

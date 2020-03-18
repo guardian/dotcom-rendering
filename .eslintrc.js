@@ -72,7 +72,6 @@ module.exports = {
         'jsx-a11y/label-has-associated-control': [0],
         'jsx-a11y/no-noninteractive-element-to-interactive-role': [0],
         'jsx-a11y/no-noninteractive-tabindex': [0],
-        'jsx-a11y/no-redundant-roles': [0],
         'no-case-declarations': [0],
         'no-duplicate-case': [0],
         'no-empty-pattern': [0],
