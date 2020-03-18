@@ -123,9 +123,10 @@ export const AdSlotCore: React.FC<{
     name,
     adTypes,
     sizeMapping,
-    showLabel = true,
-    refresh = true,
-    outOfPage = false,
+    // TODO: Do we need to respect these three properties?
+    // showLabel = true,
+    // refresh = true,
+    // outOfPage = false,
     optId,
     optClassNames,
     localStyles,
