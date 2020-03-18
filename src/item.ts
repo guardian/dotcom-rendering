@@ -51,6 +51,11 @@ const enum ElementKind {
     Interactive,
     RichLink,
     Tweet,
+    Instagram
+}
+
+enum Role {
+    Thumbnail,
 }
 
 interface Format {
@@ -82,6 +87,7 @@ type Image = {
     file: string;
     width: number;
     height: number;
+    role: Option<Role>;
 }
 
 type BodyElement = {
@@ -101,6 +107,9 @@ type BodyElement = {
 } | {
     kind: ElementKind.Tweet;
     content: NodeList;
+} | {
+    kind: ElementKind.Instagram;
+    html: string;
 };
 
 type Body =
@@ -172,10 +181,10 @@ const tweetContent = (tweetId: string, doc: DocumentFragment): Result<string, No
 
 const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Image> => {
     const masterAsset = element.assets.find(asset => asset?.typeData?.isMaster);
-    const { alt = "", caption = "", displayCredit = false, credit = "" } = element.imageTypeData ?? {};
+    const { alt = "", caption = "", displayCredit = false, credit = "", role: roleString } = element.imageTypeData ?? {};
     const fullCaption = displayCredit ? `${caption} ${credit}` : caption;
     const parsedCaption = docParser(fullCaption);
-
+    const role = roleString === 'thumbnail' ? new Some(Role.Thumbnail) : new None<Role>();
     return fromNullable(masterAsset).andThen(asset => {
         if (!asset?.file || !asset?.typeData?.width || !asset?.typeData?.height) {
             return new None();
@@ -189,7 +198,8 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
             file: asset.file,
             width: asset.typeData.width,
             height: asset.typeData.height,
-            captionString: caption
+            captionString: caption,
+            role
         });
     });
 }
@@ -245,6 +255,10 @@ const parseElement =
             }
             return tweetContent(id, docParser(h))
                 .fmap(content => ({ kind: ElementKind.Tweet, content }));
+
+        case ElementType.INSTAGRAM:
+            const instagramHtml = element.instagramTypeData?.html ?? "";
+            return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
@@ -482,6 +496,7 @@ export {
     LiveBlock,
     ElementKind,
     BodyElement,
+    Role,
     Image,
     fromCapi,
 };

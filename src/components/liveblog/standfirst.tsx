@@ -5,22 +5,21 @@ import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { renderText } from 'renderer';
 import { Option } from 'types/option';
+import { textPadding } from 'styles';
 
 const StandfirstStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
-    padding-bottom: 6px;
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2rem;
     background: ${liveblogBackground};
     color: ${neutral[97]};
-
-    p, ul {
-        margin: 0;
-        padding: 0;
-    }
+    ${textPadding}
 
     a {
         color: ${neutral[93]};
+    }
+
+    li {
+        ::before {
+            opacity: .4;
+        }
     }
 `;
 

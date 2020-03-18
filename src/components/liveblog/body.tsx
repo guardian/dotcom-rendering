@@ -6,6 +6,7 @@ import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { LiveBlock } from 'item';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';
+import { textPadding } from 'styles';
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,
@@ -18,8 +19,8 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         margin: 1rem 0;
     }
 
-    .image, figcaption {
-        padding: 0;
+    twitter-widget {
+        ${textPadding}
     }
 `;
 

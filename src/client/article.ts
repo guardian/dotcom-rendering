@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { nativeClient } from 'native/nativeApi';
+import { commercialClient, userClient, notificationsClient, galleryClient, acquisitionsClient } from 'native/nativeApi';
 import { AdSlot } from 'bridget-typescript/AdSlot'
 import { Topic } from 'bridget-typescript/Topic';
 import { Image } from 'bridget-typescript/Image';
@@ -50,14 +50,14 @@ function getAdSlots(): AdSlot[] {
 function insertAds(): void {
     let adSlots = getAdSlots();
     if (adSlots.length > 0) {
-        nativeClient.insertAdverts(adSlots)
+        commercialClient.insertAdverts(adSlots);
         const targetNode = document.querySelector('body') as Node;
         const config = { attributes: true, childList: true, subtree: true };
         const callback = function(): void {
             const currentAdSlots = getAdSlots();
             if (JSON.stringify(adSlots) !== JSON.stringify(currentAdSlots)) {
                 adSlots = currentAdSlots;
-                nativeClient.updateAdverts(currentAdSlots);
+                commercialClient.updateAdverts(currentAdSlots);
             }
         };
 
@@ -65,7 +65,7 @@ function insertAds(): void {
         observer.observe(targetNode, config);
 
         try {
-            document.fonts.ready.then(() => nativeClient.updateAdverts(getAdSlots()))
+            document.fonts.ready.then(() => commercialClient.updateAdverts(getAdSlots()));
         } catch (e) {
             logger.error(`font loading API not supported: ${e}`)
         }
@@ -73,7 +73,7 @@ function insertAds(): void {
 }
 
 function ads(): void {
-    nativeClient.isPremiumUser().then(premiumUser => {
+    userClient.isPremium().then(premiumUser => {
         if (!premiumUser) {
             Array.from(document.querySelectorAll('.ad-placeholder'))
                  .forEach(placeholder => placeholder.classList.remove('hidden'))
@@ -96,13 +96,13 @@ function topicClick(e: Event): void {
     const topic = new Topic({ id });
 
     if (statusText && statusText === 'Follow') {
-        nativeClient.follow(topic).then(response => {
+        notificationsClient.follow(topic).then(response => {
             if (status?.textContent) {
                 status.textContent = "Following";
             }
         })
     } else {
-        nativeClient.unfollow(topic).then(response => {
+        notificationsClient.unfollow(topic).then(response => {
             if (status?.textContent) {
                 status.textContent = "Follow";
             }
@@ -122,7 +122,7 @@ function topics(): void {
 
     const topic = new Topic({ id });
     follow?.addEventListener('click', topicClick);
-    nativeClient.isFollowing(topic).then(following => {
+    notificationsClient.isFollowing(topic).then(following => {
         if (following && status?.textContent) {
             status.textContent = "Following";
         }
@@ -139,7 +139,7 @@ function launchSlideshow(src: string | null): void {
     });
     const clickedImageIndex = images.findIndex((image: Element) => image.getAttribute('src') === src);
     if (imagesWithCaptions.length && clickedImageIndex >= 0) {
-        nativeClient.launchSlideshow(imagesWithCaptions, clickedImageIndex);
+        galleryClient.launchSlideshow(imagesWithCaptions, clickedImageIndex);
     }
 }
 
@@ -167,7 +167,7 @@ function formatDates(): void {
 
 function insertEpic(): void {
     if (navigator.onLine && !document.getElementById('epic-container')) {
-        nativeClient.getEpics().then((maybeEpic: MaybeEpic) => {
+        acquisitionsClient.getEpics().then((maybeEpic: MaybeEpic) => {
             if (maybeEpic.epic) {
                 const epicContainer = document.createElement('div');
                 epicContainer.id = 'epic-container';
