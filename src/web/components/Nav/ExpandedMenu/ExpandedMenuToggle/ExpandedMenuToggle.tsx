@@ -142,7 +142,6 @@ export class ExpandedMenuToggle extends Component<
             <label
                 className={openExpandedMenu}
                 htmlFor={CHECKBOX_ID}
-                tabIndex={0}
                 key="OpenExpandedMenuLabel"
             >
                 <span className={screenReadable}>Show</span>
