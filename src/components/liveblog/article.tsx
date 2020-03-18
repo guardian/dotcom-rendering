@@ -14,6 +14,7 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, getPillarStyles } from 'pillar';
 import { Liveblog } from 'item';
+import { ImageMappings } from 'components/shared/page';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${neutral[97]};
@@ -46,11 +47,11 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 
 interface LiveblogArticleProps {
     item: Liveblog;
+    imageMappings: ImageMappings;
     imageSalt: string;
 }
 
-const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element => {
-
+const LiveblogArticle = ({ item, imageMappings, imageSalt }: LiveblogArticleProps): JSX.Element => {
     return (
         <main css={LiveblogArticleStyles}>
             <div css={BorderStyles}>
@@ -61,6 +62,7 @@ const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element
                 <HeaderImage
                     image={item.mainImage}
                     imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={HeaderImageStyles(getPillarStyles(item.pillar))}
                     pillar={item.pillar}
                 />
@@ -68,7 +70,7 @@ const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element
                 <LiveblogBody
                     blocks={item.blocks}
                     pillar={item.pillar}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     totalBodyBlocks={item.totalBodyBlocks}
                 />
                 <Tags tags={item.tags} background={neutral[93]} />

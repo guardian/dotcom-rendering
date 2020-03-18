@@ -393,7 +393,7 @@ const isAdvertisementFeature =
     hasTag('tone/advertisement-features');
 
 const fromCapiLiveBlog = (docParser: DocParser) => (content: Content): Liveblog => {
-    const body = content?.blocks?.body?.slice(0,7) ?? [];
+    const body = content?.blocks?.body?.slice(0, 7) ?? [];
 
     return {
         design: Design.Live,

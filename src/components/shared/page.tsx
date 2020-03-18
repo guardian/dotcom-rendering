@@ -17,6 +17,8 @@ import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Design, Display } from 'item';
+import { ElementType } from 'mapiThriftModels';
+import { sign } from 'components/image';
 
 
 // ----- Components ----- //
@@ -86,6 +88,26 @@ interface ElementWithResources {
     hydrationProps: {};
 }
 
+export interface ImageMappings {
+    [key: string]: string;
+}
+
+const getImageMappings = (imageSalt: string, capi: Content): ImageMappings => {
+    return capi.blocks?.body
+        ?.flatMap(block => block.elements
+            .filter(element => element.type === ElementType.IMAGE)
+            .flatMap(element => {
+                return element.assets.map(asset => {
+                    if (asset.file) {
+                        const url = new URL(asset.file);
+                        const s = sign(imageSalt, url.pathname);
+                        return { [url.pathname]: s }
+                    }
+                })
+            }))
+            .reduce((a, b) => ({...a, ...b}), {}) ?? {};
+}
+
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
     <>
         {props.children}
@@ -97,6 +119,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     const insertAdPlaceholders = getAdPlaceholderInserter(capi.fields?.shouldHideAdverts ?? false);
 
     const item = fromCapi(JSDOM.fragment)(capi);
+    const imageMappings = getImageMappings(imageSalt, capi);
 
     const articleScript = getAssetLocation('article.js');
     const liveblogScript = getAssetLocation('liveblog.js');
@@ -104,7 +127,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     if (item.design === Design.Comment) {
         const commentBody = partition(item.body).oks;
         const commentContent =
-            insertAdPlaceholders(renderAll(imageSalt)(item.pillar, commentBody));
+            insertAdPlaceholders(renderAll(imageMappings)(item.pillar, commentBody));
 
         return { element: (
             <WithScript src={articleScript}>
@@ -118,19 +141,19 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     if (item.design === Design.Live) {
         return { element: (
             <WithScript src={liveblogScript}>
-                <LiveblogArticle item={item} imageSalt={imageSalt} />
+                <LiveblogArticle item={item} imageSalt={imageSalt} imageMappings={imageMappings} />
             </WithScript>
-        ), resources: [liveblogScript], hydrationProps: { ...capi } };
+        ), resources: [liveblogScript], hydrationProps: { ...capi, imageMappings } };
     }
 
     if (item.display === Display.Immersive) {
         const immersiveBody = partition(item.body).oks;
         const immersiveContent =
-            insertAdPlaceholders(renderAll(imageSalt)(item.pillar, immersiveBody));
+            insertAdPlaceholders(renderAll(imageMappings)(item.pillar, immersiveBody));
 
         return { element: (
             <WithScript src={articleScript}>
-                <Immersive imageSalt={imageSalt} item={item}>
+                <Immersive imageSalt={imageSalt} imageMappings={imageMappings} item={item}>
                     {immersiveContent}
                 </Immersive>
             </WithScript>
@@ -144,7 +167,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
         item.design === Design.Article
     ) {
         const body = partition(item.body).oks;
-        const content = insertAdPlaceholders(renderAll(imageSalt)(item.pillar, body));
+        const content = insertAdPlaceholders(renderAll(imageMappings)(item.pillar, body));
 
         return { element: (
             <WithScript src={articleScript}>
