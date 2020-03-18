@@ -70,11 +70,7 @@ const colourStyles = (colour: string) => css`
     color: ${colour};
 `;
 
-const headlineStyles = (
-    designType: DesignType,
-    pillar: Pillar,
-    size: SmallHeadlineSize,
-) => {
+const headlineStyles = (designType: DesignType, pillar: Pillar) => {
     switch (designType) {
         case 'Feature':
         case 'Interview':
@@ -131,7 +127,7 @@ export const CardHeadline = ({
                 <QuoteIcon colour={palette[pillar].main} size={size} />
             )}
 
-            <span className={headlineStyles(designType, pillar, size)}>
+            <span className={headlineStyles(designType, pillar)}>
                 {headlineText}
             </span>
         </h4>

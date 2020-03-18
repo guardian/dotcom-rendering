@@ -19,7 +19,7 @@ const logFields = (logEvent: any): any => {
     };
 };
 
-addLayout('json', config => {
+addLayout('json', () => {
     return logEvent => {
         return JSON.stringify(logFields(logEvent));
     };

@@ -197,7 +197,7 @@ const template = `
 </ul>
 `;
 
-export const Sidebar: React.FC<{ nav: NavType }> = ({ nav }) => {
+export const Sidebar: React.FC<{ nav: NavType }> = () => {
     // this next line is necessary cos react has a 'template' object with no 'type' property.
     // By saying 'as {}' we can pretend we're not adding the 'type' property and thus avoid unhappy type errors
     const props = { type: 'amp-mustache' } as {};

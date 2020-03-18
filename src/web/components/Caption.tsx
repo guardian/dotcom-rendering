@@ -10,7 +10,7 @@ import TriangleIcon from '@frontend/static/icons/triangle.svg';
 const figureStyle = css`
     margin-bottom: 6px;
 `;
-const captionStyle = (role?: RoleType) => css`
+const captionStyle = css`
     padding-top: 6px;
     ${textSans.xsmall()};
     word-wrap: break-word;
@@ -90,7 +90,7 @@ export const Caption: React.FC<{
                 <>
                     <figcaption
                         className={cx(
-                            captionStyle(role),
+                            captionStyle,
                             shouldLimitWidth && limitedWidth,
                             { [captionPadding]: padCaption },
                         )}
