@@ -157,15 +157,9 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
                     <div className={messageStyles}>
                         Support The&nbsp;Guardian
                     </div>
-                    {edition === 'US' ? (
-                        <div className={subMessageStyles}>
-                            Support our journalism with a year-end gift
-                        </div>
-                    ) : (
-                        <div className={subMessageStyles}>
-                            Available for everyone, funded by readers
-                        </div>
-                    )}
+                    <div className={subMessageStyles}>
+                        Available for everyone, funded by readers
+                    </div>
                     <a
                         className={linkStyles}
                         href={urls.contribute}
