@@ -57,12 +57,12 @@ describe('Interactivity', function() {
 
         it('should render the reader revenue links in the header and footer', function() {
             cy.visit(`/Article?url=${articleUrl}`);
-            cy.scrollTo('bottom', { duration: 100 });
+            cy.scrollTo('bottom', { duration: 1000 });
             cy.get('header')
                 .contains(READER_REVENUE_TITLE_TEXT)
                 .should('be.visible');
             cy.get('footer')
-                .contains(READER_REVENUE_TITLE_TEXT)
+                .contains(READER_REVENUE_TITLE_TEXT, { timeout: 10000 })
                 .should('be.visible');
         });
     });
