@@ -14,8 +14,6 @@ const sizes = `(min-width: 140px)`;
 
 interface Props {
     image: Omit<ImageProps, 'sizes'>;
-    figcaption: ReactNode;
-    pillar: Pillar;
 }
 
 const styles = css`

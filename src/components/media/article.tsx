@@ -8,7 +8,7 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 import HeaderImage from 'components/shared/headerImage';
 import Series from 'components/shared/articleSeries';
 import Standfirst from 'components/standfirst';
-import Byline from 'components/standard/byline';
+import Byline from 'components/media/byline';
 import { CommentCount } from 'components/shared/commentCount'
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
@@ -73,7 +73,13 @@ const Media = ({ imageSalt, item, children }: Props): JSX.Element =>
 
                 </div>
                 <section css={articleWidthStyles}>
-                    <Byline item={item} imageSalt={imageSalt} />
+                <Byline
+                    pillar={item.pillar}
+                    publicationDate={item.publishDate}
+                    contributors={item.contributors}
+                    className={articleWidthStyles}
+                    item={item}
+                />
                     {item.commentable
                         ? <CommentCount count={0} colour={getPillarStyles(item.pillar).kicker}/>
                         : null}

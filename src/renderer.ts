@@ -8,12 +8,14 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
 import { basePx, icons, darkModeCss, textPadding } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { ElementKind, BodyElement, Role } from 'item';
+import { ElementKind, BodyElement, Role, Image, Text } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import { headline } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
+import FigCaption from 'components/figCaption';
+import MediaFigCaption from 'components/media/mediaFigCaption';
 
 
 // ----- Renderer ----- //
@@ -341,11 +343,14 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
                     width,
                     height,
                     caption: captionString,
-                    credit
+                    credit,
                 },
-                figcaption: text(caption, pillar),
+            },
+            h(FigCaption, {
                 pillar,
-            });
+                text: text(caption, pillar)
+            })
+            );
 
         case ElementKind.Pullquote:
             const { quote, attribution } = element;
@@ -374,10 +379,30 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map(render(salt, pillar));
 
+const renderMedia = (salt: string) => (pillar: Pillar, elements: Image[]): ReactNode[] =>
+    elements.map((element) => {
+    const { file, alt, caption, captionString, credit, width, height } = element;
+     return h(BodyImage, {
+        image: {
+            url: file,
+            alt,
+            salt,
+            width,
+            height,
+            caption: captionString,
+            credit
+        },
+    },
+    h(MediaFigCaption, {
+        pillar,
+        text: text(caption, pillar)
+    }))});
+
 // ----- Exports ----- //
 
 export {
     renderAll,
     text as renderText,
     ImageElement,
+    renderMedia,
 };
