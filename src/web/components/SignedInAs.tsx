@@ -54,7 +54,7 @@ const headlineStyles = css`
 
 const usernameStyles = css`
     font-weight: 700;
-    color: ${palette.neutral[7]};
+    color: ${text.primary};
 `;
 
 const linkStyles = css`

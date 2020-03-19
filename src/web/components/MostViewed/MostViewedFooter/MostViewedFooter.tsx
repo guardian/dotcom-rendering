@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
+import { text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
 
@@ -38,7 +38,7 @@ const asideWidth = css`
 
 const headingStyles = css`
     ${headline.xsmall()};
-    color: ${palette.neutral[7]};
+    color: ${text.primary};
     font-weight: 900;
     padding-right: 5px;
     padding-bottom: 14px;
