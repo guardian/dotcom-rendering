@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { sidePadding, textSans, darkModeCss, basePx } from '../../styles';
+import { textSans, darkModeCss, basePx } from '../../styles';
 import { neutral, background } from '@guardian/src-foundations/palette';
 
 const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
@@ -28,8 +28,6 @@ const tagsStyles = (background: string = neutral[97]): SerializedStyles => css`
             background-color: ${background};
         }
     }
-
-    ${sidePadding}
 `;
 
 const tagsDarkStyles = darkModeCss`

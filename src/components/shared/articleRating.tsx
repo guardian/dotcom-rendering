@@ -1,10 +1,9 @@
 import React from 'react';
-import { sidePadding, icons } from '../../styles';
+import { icons } from '../../styles';
 import { css } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette'
 
 const ArticleRatingStyles = css`    
-    ${sidePadding}
     ${icons}
 
     font-size: 2rem;
