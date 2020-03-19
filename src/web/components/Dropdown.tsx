@@ -241,6 +241,7 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
                     aria-controls={dropdownID}
                     aria-expanded={isExpanded ? 'true' : 'false'}
                     data-link-name={dataLinkName}
+                    data-cy="dropdown-button"
                 >
                     {label}
                 </button>
@@ -252,6 +253,7 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
                     [ul]: true,
                     [ulExpanded]: isExpanded,
                 })}
+                data-cy="dropdown-options"
             >
                 {links.map((l, index) => (
                     <li key={l.title}>

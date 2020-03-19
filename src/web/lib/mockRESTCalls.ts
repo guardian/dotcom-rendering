@@ -74,16 +74,16 @@ export const mockRESTCalls = () =>
             },
             { overwriteRoutes: false },
         )
-        // Article share count
+        // Get discussion
         .get(
-            /.*discussion.theguardian.com\/discussion-api\/discussion\/p\/.*/,
+            /.*discussion.theguardian.com\/discussion-api\/discussion\/.*/,
             {
                 status: 200,
                 body: discussion,
             },
             { overwriteRoutes: false },
         )
-        // Article share count
+        // Get country code
         .get(
             /.*api.nextgen.guardianapps.co.uk\/geolocation.*/,
             {
