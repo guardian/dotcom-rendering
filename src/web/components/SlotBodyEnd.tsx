@@ -133,7 +133,7 @@ const MemoisedInner = (props: Props) => {
         // true once.
         if (hasBeenSeen) {
             // Add a new entry to the view log when we know an Epic is viewed
-            logView(epicTestName);
+            logView(testName);
             sendOphanEvent('VIEW');
         }
     }, [hasBeenSeen]);
