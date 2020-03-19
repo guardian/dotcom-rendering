@@ -6,7 +6,6 @@ import { headline } from '@guardian/src-foundations/typography';
 
 import { Item } from 'item';
 import { renderText } from 'renderer';
-import { textPadding } from 'styles';
 
 
 // ----- Component ----- //
@@ -17,7 +16,6 @@ interface Props {
 
 const styles = css`
     ${headline.medium({ fontWeight: 'light' })}
-    ${textPadding}
     font-style: italic;
 `;
 
