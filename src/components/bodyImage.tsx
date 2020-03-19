@@ -35,7 +35,7 @@ const styles = css`
     }
 `;
 
-const BodyImage: FC<Props> = ({ image }: Props) =>
+const BodyImage: FC<Props> = ({ image, children }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} />
         {children}

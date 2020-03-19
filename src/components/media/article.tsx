@@ -10,7 +10,7 @@ import Series from 'components/shared/articleSeries';
 import Standfirst from 'components/standfirst';
 import Byline from 'components/media/byline';
 import { CommentCount } from 'components/shared/commentCount'
-import Body from 'components/shared/articleBody';
+import ArticleBodyMedia from 'components/media/articleBody';
 import Tags from 'components/shared/tags';
 import {darkModeCss, articleWidthStyles} from 'styles';
 import { getPillarStyles } from 'pillar';
@@ -85,9 +85,9 @@ const Media = ({ imageSalt, item, children }: Props): JSX.Element =>
                         : null}
                 </section>
             </header>
-            <Body pillar={item.pillar} className={[articleWidthStyles]}>
+            <ArticleBodyMedia pillar={item.pillar} className={[articleWidthStyles]}>
                 {children}
-            </Body>
+            </ArticleBodyMedia>
             <footer css={articleWidthStyles}>
                 <Tags tags={item.tags}/>
             </footer>

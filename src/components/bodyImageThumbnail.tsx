@@ -22,9 +22,10 @@ const styles = css`
 `;
 
 
-const BodyImageThumbnail: FC<Props> = ({ image }: Props) =>
+const BodyImageThumbnail: FC<Props> = ({ image, children }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} thumbnail={true} />
+        {children}
     </figure>
 
 

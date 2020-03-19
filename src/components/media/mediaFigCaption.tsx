@@ -1,12 +1,11 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement, ReactNode } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { textSans } from '@guardian/src-foundations/typography';
+import React, { FC, ReactNode } from 'react';
+import { css } from '@emotion/core';
+import { textSans, titlepiece, headline, body } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
-import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
+import { Pillar } from 'pillar';
 import { remSpace } from '@guardian/src-foundations';
-import { textPadding } from 'styles';
 
 // ----- Component ----- //
 
@@ -15,22 +14,26 @@ interface Props {
     text: ReactNode;
 }
 
-const triangleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
-    fill: ${kicker};
-    height: 0.8em;
-    padding-right: ${remSpace[1]};
-`;
-
 const captionStyles = css`
-    ${textSans.xsmall()}
-    ${textPadding}
     padding-top: ${remSpace[2]};
-    color: ${text.supporting};
+
+    strong {
+        ${body.medium()}
+        font-weight: 400;
+    }
+
+    em {
+        ${textSans.xsmall()}
+        vertical-align: top;
+    }
+    
+    em br {
+        display: none;
+    }
 `;
 
-const MediaFigCaption: FC<Props> = ({ pillar, text }) =>
+const MediaFigCaption: FC<Props> = ({ text }) =>
     <figcaption css={captionStyles}>
-
         {text}
     </figcaption>
 
