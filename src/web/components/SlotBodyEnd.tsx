@@ -26,18 +26,18 @@ const checkForErrors = (response: any) => {
 type OphanAction = 'INSERT' | 'VIEW';
 
 const epicTestName = 'FrontendDotcomRenderingEpic';
+const epicCampaignCode = 'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr';
 
 const sendOphanEvent = (action: OphanAction): void => {
     const componentEvent = {
         component: {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
-            campaignCode:
-                'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
-            id: 'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
+            campaignCode: epicCampaignCode,
+            id: 'epic_frontend_dotcom_rendering_epic',
         },
         abTest: {
-            name: 'frontend_dotcom_rendering_epic',
+            name: epicTestName,
             variant: 'dcr',
         },
         action,
@@ -68,9 +68,8 @@ const buildPayload = (props: Props) => {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
-            campaignCode:
-                'gdnwb_copts_memco_frontend_dotcom_rendering_epic_dcr',
-            abTestName: 'frontend_dotcom_rendering_epic',
+            campaignCode: epicCampaignCode,
+            abTestName: epicTestName,
             abTestVariant: 'dcr',
             referrerUrl: window.location.origin + window.location.pathname,
         },
