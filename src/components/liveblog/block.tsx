@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
-import { textSans, icons, basePx, linkStyle, textMargin, textPadding } from 'styles';
+import { textSans, icons, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
-import { until } from '@guardian/src-foundations/mq';
+import { until, from } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
@@ -24,7 +24,6 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
     }
 
     time {
-        ${textPadding}
         margin-top: 1rem;
     }
 
@@ -57,14 +56,20 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
             color: ${kicker};
             position: absolute;
             left: 0;
-            ${textPadding}
             top: -10px;
         }
     }
 
     aside {
         width: calc(100% - 2rem);
-        ${textMargin};
+        margin-left: 0;
+        ${from.wide} {
+            width: 100%;
+        }
+    }
+
+    h3 {
+        margin-top: .2rem;
     }
 `;
 
@@ -86,7 +91,6 @@ const Title = ({ title, highlighted }: TitleProps): JSX.Element | null => {
     const TitleStyles = css`
         padding: 0.1rem 0.125rem;
         background-color: ${brandAlt[400]};
-        ${textMargin}
     `
     return title ? <h3><span css={highlighted ? TitleStyles : null}>{title}</span></h3> : null;
 }

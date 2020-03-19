@@ -4,11 +4,10 @@ import React, { FC, ReactNode, Children } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { between, from } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
 
 import Image, { Props as ImageProps } from 'components/image';
-import { textPadding } from 'styles';
 import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
 
 
@@ -33,14 +32,10 @@ const styles = css`
     img {
         display: block;
         width: 100%;
-
-        ${between.phablet.and.wide} {
-            margin: 0 ${remSpace[2]};
-        }
     }
 `;
 
-const BodyImage: FC<Props> = ({ image, children }: Props) =>
+const BodyImage: FC<Props> = ({ image }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} />
         {children}

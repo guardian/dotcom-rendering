@@ -23,7 +23,6 @@ const triangleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
 const captionStyles = css`
     ${textSans.xsmall()}
-    ${textPadding}
     padding-top: ${remSpace[2]};
     color: ${text.supporting};
 `;

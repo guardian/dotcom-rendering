@@ -7,10 +7,10 @@ import {background, neutral, text} from '@guardian/src-foundations/palette';
 import {from} from '@guardian/src-foundations/mq';
 import {remSpace} from '@guardian/src-foundations';
 
-import {Design, Display, Item} from 'item';
-import {renderText} from 'renderer';
-import {darkModeCss as darkMode, textPadding} from 'styles';
-import {getPillarStyles, PillarStyles} from 'pillar';
+import { Item, Design, Display } from 'item';
+import { renderText } from 'renderer';
+import { darkModeCss as darkMode } from 'styles';
+import { PillarStyles, getPillarStyles } from 'pillar';
 
 
 // ----- Component ----- //
@@ -30,7 +30,6 @@ const darkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkMode`
 
 const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
     margin-bottom: ${remSpace[2]};
-    ${textPadding}
     color: ${text.primary};
 
     p, ul {
@@ -47,10 +46,6 @@ const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
 const normalHeadline = css`
     ${headline.xxxsmall({ fontWeight: 'bold' })}
     padding: 0;
-
-    p, ul {
-        ${textPadding}
-    }
 `;
 
 const thinHeadline = css`
@@ -58,10 +53,6 @@ const thinHeadline = css`
 
     ${from.tablet} {
         ${headline.xxsmall({ fontWeight: 'light' })}
-    }
-
-    p, ul {
-        ${textPadding}
     }
 `;
 
