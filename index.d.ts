@@ -270,6 +270,8 @@ type CAPIBrowserType = {
         sharedAdTargeting: { [key: string]: any };
         adUnit: string;
         discussionApiUrl: string;
+        discussionD2Uid: string;
+        discussionApiClientHeader: string;
     };
     richLinks: RichLinkBlockElement[];
     editionId: Edition;
@@ -484,6 +486,8 @@ interface ConfigType extends CommercialConfigType {
     showRelatedContent: boolean;
     shouldHideReaderRevenue?: boolean;
     discussionApiUrl: string;
+    discussionD2Uid: string;
+    discussionApiClientHeader: string;
 }
 
 interface GADataType {

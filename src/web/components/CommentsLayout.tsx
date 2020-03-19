@@ -14,6 +14,8 @@ type Props = {
     shortUrl: string;
     commentCount: number;
     isClosedForComments: boolean;
+    discussionD2Uid: string;
+    discussionApiClientHeader: string;
 };
 
 const containerStyles = css`
@@ -28,6 +30,8 @@ export const CommentsLayout = ({
     shortUrl,
     commentCount,
     isClosedForComments,
+    discussionD2Uid,
+    discussionApiClientHeader,
 }: Props) => (
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
@@ -40,7 +44,13 @@ export const CommentsLayout = ({
             <Hide when="above" breakpoint="leftCol">
                 <SignedInAs commentCount={commentCount} />
             </Hide>
-            <Comments shortUrl={shortUrl} />
+            <Comments
+                shortUrl={shortUrl}
+                additionalHeaders={{
+                    'D2-X-UID': discussionD2Uid,
+                    'GU-Client': discussionApiClientHeader,
+                }}
+            />
         </div>
     </Flex>
 );

@@ -2818,6 +2818,8 @@ export const richLink: CAPIType = {
         showRelatedContent: false,
         ampIframeUrl:
             'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
+        discussionD2Uid: "testD2Header",
+        discussionApiClientHeader: "testClientHeader",
     },
     sectionLabel: 'Eminem',
 };
