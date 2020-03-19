@@ -75,7 +75,7 @@ test('produces valid AMP doc', async () => {
     );
 
     if (result.errors.length > 0) {
-        // tslint:disable-next-line:no-console
+        // eslint-disable-next-line no-console
         console.log(result.errors);
     }
     expect(result.errors.length).toBe(0);

@@ -100,7 +100,6 @@ export const SecondTierItem = ({
 
     return (
         <div className={itemStyles(showRightBorder)}>
-            {/* tslint:disable-next-line:react-a11y-anchors */}
             <a
                 className={headlineLink}
                 href={url}

@@ -132,7 +132,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
                                 >
                                     Most viewed{' '}
                                 </span>
-                                <span // tslint:disable-line:react-no-dangerous-html
+                                <span
                                     // "Across The Guardian" has a non-breaking space entity between "The" and "Guardian"
                                     dangerouslySetInnerHTML={{
                                         __html: tab.heading,

@@ -10,10 +10,7 @@ import { findBySubsection } from '@root/src/model/article-sections';
 import { bodyJSON } from '@root/src/model/exampleBodyJSON';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 
-export const render = (
-    { body, path }: express.Request,
-    res: express.Response,
-) => {
+export const render = ({ body }: express.Request, res: express.Response) => {
     try {
         // TODO remove when migrated to v2
         const CAPI = validateV2(body);

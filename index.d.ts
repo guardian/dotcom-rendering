@@ -652,7 +652,6 @@ declare module 'storybook-chromatic/isChromatic';
 // AMP types                             //
 // ------------------------------------- //
 
-// tslint:disable-next-line no-namespace
 declare namespace JSX {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     interface IntrinsicElements {

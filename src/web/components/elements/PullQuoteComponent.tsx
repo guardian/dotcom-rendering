@@ -65,68 +65,64 @@ const commonStyles = (pillar: Pillar, designType: DesignType) => {
     }
 };
 
-const supportingStyles = (pillar: Pillar) =>
-    css`
-        width: ${gsSpan(3)}px;
-        margin-left: -${gutter / 2}px;
-        margin-right: 0.6rem;
-        clear: left;
-        float: left;
+const supportingStyles = css`
+    width: ${gsSpan(3)}px;
+    margin-left: -${gutter / 2}px;
+    margin-right: 0.6rem;
+    clear: left;
+    float: left;
+
+    ${from.leftCol} {
+        margin-left: -${gutter / 2 + gsSpan(3) / 2}px;
+    }
+
+    :after {
+        left: ${gutter / 2};
+        border-radius: 0 0 ${quoteTail}px;
 
         ${from.leftCol} {
-            margin-left: -${gutter / 2 + gsSpan(3) / 2}px;
+            border-radius: 0 0 0 ${quoteTail}px;
+            left: 0rem;
+            margin-left: ${gsSpan(3) / 2 - quoteTail + 1}px;
         }
+    }
+`;
 
-        :after {
-            left: ${gutter / 2};
-            border-radius: 0 0 ${quoteTail}px;
+const inlineStyles = css`
+    margin-left: 0rem;
+    display: block;
 
-            ${from.leftCol} {
-                border-radius: 0 0 0 ${quoteTail}px;
-                left: 0rem;
-                margin-left: ${gsSpan(3) / 2 - quoteTail + 1}px;
-            }
-        }
-    `;
+    ${from.mobileLandscape} {
+        margin-left: -${gutter}px;
+    }
+    ${from.phablet} {
+        margin-left: -${gutter / 2}px;
+    }
+    ${from.leftCol} {
+        margin-left: -3.5rem;
+    }
 
-const inlineStyles = (pillar: Pillar) =>
-    css`
-        margin-left: 0rem;
-        display: block;
+    :after {
+        left: 0rem;
+        border-radius: 0 0 ${quoteTail}px;
 
         ${from.mobileLandscape} {
-            margin-left: -${gutter}px;
+            left: ${gutter}px;
         }
         ${from.phablet} {
-            margin-left: -${gutter / 2}px;
+            left: ${gutter / 2}px;
+        }
+        ${from.desktop} {
+            left: 0px;
         }
         ${from.leftCol} {
-            margin-left: -3.5rem;
+            left: ${quoteMark + gutter / 2}px;
         }
+    }
+`;
 
-        :after {
-            left: 0rem;
-            border-radius: 0 0 ${quoteTail}px;
-
-            ${from.mobileLandscape} {
-                left: ${gutter}px;
-            }
-            ${from.phablet} {
-                left: ${gutter / 2}px;
-            }
-            ${from.desktop} {
-                left: 0px;
-            }
-            ${from.leftCol} {
-                left: ${quoteMark + gutter / 2}px;
-            }
-        }
-    `;
-
-function getStyles(role: string, pillar: Pillar) {
-    return role === 'supporting'
-        ? supportingStyles(pillar)
-        : inlineStyles(pillar);
+function getStyles(role: string) {
+    return role === 'supporting' ? supportingStyles : inlineStyles;
 }
 
 export const PullQuoteComponent: React.FC<{
@@ -136,12 +132,7 @@ export const PullQuoteComponent: React.FC<{
     role: string;
     attribution?: string;
 }> = ({ html, pillar, designType, attribution, role }) => (
-    <aside
-        className={cx(
-            getStyles(role, pillar),
-            commonStyles(pillar, designType),
-        )}
-    >
+    <aside className={cx(getStyles(role), commonStyles(pillar, designType))}>
         <QuoteIcon colour={pillarPalette[pillar].main} />
         <blockquote
             className={css`

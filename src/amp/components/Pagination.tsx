@@ -65,6 +65,7 @@ export const Pagination: React.SFC<{
         };
 
         return (
+            // eslint-disable-next-line react/jsx-props-no-spreading
             <a {...attrs}>
                 <span>{icon}</span>
             </a>

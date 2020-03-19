@@ -1,4 +1,4 @@
-import { default as minifyCssString } from 'minify-css-string';
+import minifyCssString from 'minify-css-string';
 import { getStatic } from './assets';
 
 type FontFamily =

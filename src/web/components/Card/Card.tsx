@@ -58,6 +58,13 @@ const coverages: CoveragesType = {
     },
 };
 
+const starWrapper = css`
+    background-color: ${brandAltBackground.primary};
+    position: absolute;
+    bottom: 0;
+    margin-top: 2px;
+`;
+
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
     <>
         <Hide when="above" breakpoint="desktop">
@@ -73,13 +80,6 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
     </>
 );
 
-const starWrapper = css`
-    background-color: ${brandAltBackground.primary};
-    position: absolute;
-    bottom: 0;
-    margin-top: 2px;
-`;
-
 export const Card = ({
     linkTo,
     pillar,
@@ -88,7 +88,6 @@ export const Card = ({
     headlineSize,
     showQuotes,
     byline,
-    isLiveBlog,
     showByline,
     webPublicationDate,
     imageUrl,

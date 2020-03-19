@@ -96,7 +96,16 @@ const buildPayload = (props: Props) => {
     };
 };
 
-const MemoisedInner = (props: Props) => {
+const MemoisedInner = ({
+    isSignedIn,
+    countryCode,
+    contentType,
+    sectionName,
+    shouldHideReaderRevenue,
+    isMinuteArticle,
+    isPaidContent,
+    tags,
+}: Props) => {
     const [data, setData] = useState<{
         slot?: {
             html: string;
@@ -109,7 +118,16 @@ const MemoisedInner = (props: Props) => {
     }) as HasBeenSeen;
 
     useEffect(() => {
-        const contributionsPayload = buildPayload(props);
+        const contributionsPayload = buildPayload({
+            isSignedIn,
+            countryCode,
+            contentType,
+            sectionName,
+            shouldHideReaderRevenue,
+            isMinuteArticle,
+            isPaidContent,
+            tags,
+        });
         getBodyEnd(contributionsPayload)
             .then(checkForErrors)
             .then(response => response.json())
@@ -125,6 +143,7 @@ const MemoisedInner = (props: Props) => {
                     'slot-body-end',
                 ),
             );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // only ever call once (we'd rather fail then call the API multiple times)
 
     useEffect(() => {
@@ -154,8 +173,16 @@ const MemoisedInner = (props: Props) => {
     return null;
 };
 
-export const SlotBodyEnd = (props: Props) => {
-    const { isSignedIn, countryCode } = props;
+export const SlotBodyEnd = ({
+    isSignedIn,
+    countryCode,
+    contentType,
+    sectionName,
+    shouldHideReaderRevenue,
+    isMinuteArticle,
+    isPaidContent,
+    tags,
+}: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
     }
@@ -169,5 +196,16 @@ export const SlotBodyEnd = (props: Props) => {
     // Memoised as we only ever want to call the Slots API once, for simplicity
     // and performance reasons.
 
-    return <MemoisedInner {...props} />;
+    return (
+        <MemoisedInner
+            isSignedIn={isSignedIn}
+            countryCode={countryCode}
+            contentType={contentType}
+            sectionName={sectionName}
+            shouldHideReaderRevenue={shouldHideReaderRevenue}
+            isMinuteArticle={isMinuteArticle}
+            isPaidContent={isPaidContent}
+            tags={tags}
+        />
+    );
 };

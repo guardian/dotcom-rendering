@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
@@ -10,7 +11,6 @@ import { UL } from './components/UL';
 import { LI } from './components/LI';
 import { images, headlines, standfirsts, kickers } from './Card.mocks';
 
-/* tslint:disable */
 export default {
     component: Card,
     title: 'Components/Card',
@@ -21,7 +21,6 @@ export default {
         },
     },
 };
-/* tslint:enable */
 
 export const News = () => (
     <Section>
@@ -388,7 +387,6 @@ export const Related = () => (
                                     '/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse',
                                 pillar: 'sport',
                                 designType: 'Live',
-                                isLiveBlog: true,
                                 headlineText: headlines[8],
                                 headlineSize: 'medium',
                                 kickerText: kickers[0],

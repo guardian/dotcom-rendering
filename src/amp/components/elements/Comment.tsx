@@ -61,7 +61,7 @@ export const Comment: React.FC<{
             </a>
         </div>
 
-        <div // tslint:disable-line:react-no-dangerous-html
+        <div
             className={bodyCSS}
             dangerouslySetInnerHTML={{ __html: element.body }}
         />

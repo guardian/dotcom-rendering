@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
 import { Card } from '@frontend/web/components/Card/Card';
@@ -40,7 +41,6 @@ export const MoreThanFive = ({ content }: Props) => {
                             showByline: content[0].showByline,
                             showQuotes: content[0].designType === 'Comment',
                             webPublicationDate: content[0].webPublicationDate,
-                            isLiveBlog: content[0].isLiveBlog,
                             kickerText: content[0].kickerText,
                             showPulsingDot: content[0].isLiveBlog,
                             showSlash: true,
@@ -70,7 +70,6 @@ export const MoreThanFive = ({ content }: Props) => {
                             showByline: content[1].showByline,
                             showQuotes: content[1].designType === 'Comment',
                             webPublicationDate: content[1].webPublicationDate,
-                            isLiveBlog: content[1].isLiveBlog,
                             kickerText: content[1].kickerText,
                             showPulsingDot: content[1].isLiveBlog,
                             showSlash: true,
@@ -100,7 +99,6 @@ export const MoreThanFive = ({ content }: Props) => {
                             showByline: content[2].showByline,
                             showQuotes: content[2].designType === 'Comment',
                             webPublicationDate: content[2].webPublicationDate,
-                            isLiveBlog: content[2].isLiveBlog,
                             kickerText: content[2].kickerText,
                             showPulsingDot: content[2].isLiveBlog,
                             showSlash: true,
@@ -130,7 +128,6 @@ export const MoreThanFive = ({ content }: Props) => {
                             showByline: content[3].showByline,
                             showQuotes: content[3].designType === 'Comment',
                             webPublicationDate: content[3].webPublicationDate,
-                            isLiveBlog: content[3].isLiveBlog,
                             kickerText: content[3].kickerText,
                             showPulsingDot: content[3].isLiveBlog,
                             showSlash: true,
@@ -163,7 +160,6 @@ export const MoreThanFive = ({ content }: Props) => {
                                 showByline: trail.showByline,
                                 showQuotes: trail.designType === 'Comment',
                                 webPublicationDate: trail.webPublicationDate,
-                                isLiveBlog: trail.isLiveBlog,
                                 kickerText: trail.kickerText,
                                 showPulsingDot: trail.isLiveBlog,
                                 showSlash: true,

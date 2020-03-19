@@ -4,12 +4,10 @@ import { Section } from '@frontend/web/components/Section';
 
 import { LinkHeadline } from '@frontend/web/components/LinkHeadline';
 
-/* tslint:disable */
 export default {
     component: LinkHeadline,
     title: 'Components/LinkHeadline',
 };
-/* tslint:enable */
 
 export const xsmallStory = () => (
     <Section showTopBorder={false} showSideBorders={false}>

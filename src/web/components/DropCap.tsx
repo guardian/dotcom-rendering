@@ -28,7 +28,6 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
                 ${baseStyles};
                 color: ${palette.opinion.main};
             `;
-        case 'Comment':
         case 'Analysis':
         case 'Feature':
         case 'Interview':
@@ -67,7 +66,6 @@ const innerStyles = (designType: DesignType) => {
                 ${baseStyles};
                 font-weight: 200;
             `;
-        case 'Comment':
         case 'Analysis':
         case 'Feature':
         case 'Interview':

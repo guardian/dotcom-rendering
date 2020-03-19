@@ -1,5 +1,3 @@
-// tslint:disable:react-no-dangerous-html
-
 import React from 'react';
 import { css, cx } from 'emotion';
 

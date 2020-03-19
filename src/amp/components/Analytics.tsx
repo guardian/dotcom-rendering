@@ -102,6 +102,5 @@ export const Analytics: React.FC<{
         </amp-analytics>`,
     ];
 
-    // tslint:disable-next-line:react-no-dangerous-html
     return <div dangerouslySetInnerHTML={{ __html: scripts.join('\n') }} />;
 };

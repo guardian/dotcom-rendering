@@ -69,12 +69,10 @@ const linksWithNoneActive = [
     { ...links[3] },
 ];
 
-/* tslint:disable */
 export default {
     component: Dropdown,
     title: 'Components/Dropdown',
 };
-/* tslint:enable */
 
 export const DropdownActive = () => (
     <Header>

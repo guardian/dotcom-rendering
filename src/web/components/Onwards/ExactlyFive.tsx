@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
 import { Card } from '@frontend/web/components/Card/Card';
@@ -23,7 +24,6 @@ export const ExactlyFive = ({ content }: Props) => (
                         showByline: content[0].showByline,
                         showQuotes: content[0].designType === 'Comment',
                         webPublicationDate: content[0].webPublicationDate,
-                        isLiveBlog: content[0].isLiveBlog,
                         kickerText: content[0].kickerText,
                         showPulsingDot: content[0].isLiveBlog,
                         showSlash: true,
@@ -53,7 +53,6 @@ export const ExactlyFive = ({ content }: Props) => (
                         showByline: content[1].showByline,
                         showQuotes: content[1].designType === 'Comment',
                         webPublicationDate: content[1].webPublicationDate,
-                        isLiveBlog: content[1].isLiveBlog,
                         kickerText: content[1].kickerText,
                         showPulsingDot: content[1].isLiveBlog,
                         showSlash: true,
@@ -86,7 +85,6 @@ export const ExactlyFive = ({ content }: Props) => (
                                 showQuotes: content[2].designType === 'Comment',
                                 webPublicationDate:
                                     content[2].webPublicationDate,
-                                isLiveBlog: content[2].isLiveBlog,
                                 kickerText: content[2].kickerText,
                                 showPulsingDot: content[2].isLiveBlog,
                                 showSlash: true,
@@ -111,7 +109,6 @@ export const ExactlyFive = ({ content }: Props) => (
                                 showQuotes: content[3].designType === 'Comment',
                                 webPublicationDate:
                                     content[3].webPublicationDate,
-                                isLiveBlog: content[3].isLiveBlog,
                                 kickerText: content[3].kickerText,
                                 showPulsingDot: content[3].isLiveBlog,
                                 showSlash: true,
@@ -136,7 +133,6 @@ export const ExactlyFive = ({ content }: Props) => (
                                 showQuotes: content[4].designType === 'Comment',
                                 webPublicationDate:
                                     content[4].webPublicationDate,
-                                isLiveBlog: content[4].isLiveBlog,
                                 kickerText: content[4].kickerText,
                                 showPulsingDot: content[4].isLiveBlog,
                                 showSlash: true,

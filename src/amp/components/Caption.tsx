@@ -56,7 +56,6 @@ export const Caption: React.FC<{
     const getCaptionHtml = () => {
         return (
             <span
-                // tslint:disable-line:react-no-dangerous-html
                 className={captionLink}
                 dangerouslySetInnerHTML={{
                     __html: captionText || '',

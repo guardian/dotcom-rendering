@@ -139,10 +139,10 @@ export class ExpandedMenuToggle extends Component<
                 key="VeggieBurger"
             />,
             // We can't nest the input inside the label because the structure is important for CSS reasons
+            // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <label
                 className={openExpandedMenu}
                 htmlFor={CHECKBOX_ID}
-                tabIndex={0}
                 key="OpenExpandedMenuLabel"
             >
                 <span className={screenReadable}>Show</span>

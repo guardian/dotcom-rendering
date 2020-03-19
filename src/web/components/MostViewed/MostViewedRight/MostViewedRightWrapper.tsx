@@ -19,17 +19,17 @@ export const MostViewedRightWrapper = ({ pillar, limitItems }: Props) => {
     const bodyRef = useRef<HTMLDivElement>(null);
     const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
-    const checkHeight = (ref: RefObject<HTMLDivElement>) => {
-        if (!heightIsAvailable) {
-            // Don't bother checking if height already available
-            if (ref.current) {
-                const { offsetHeight } = ref.current;
-                setHeightIsAvailable(offsetHeight > HEIGHT_REQUIRED);
-            }
-        }
-    };
-
     useEffect(() => {
+        const checkHeight = (ref: RefObject<HTMLDivElement>) => {
+            if (!heightIsAvailable) {
+                // Don't bother checking if height already available
+                if (ref.current) {
+                    const { offsetHeight } = ref.current;
+                    setHeightIsAvailable(offsetHeight > HEIGHT_REQUIRED);
+                }
+            }
+        };
+
         // Check if we have the available height
         checkHeight(bodyRef);
 

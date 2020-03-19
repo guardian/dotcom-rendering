@@ -4,7 +4,9 @@ import { isAdBlockInUse } from './detectAdBlocker';
 import { initialiseSentry, reportError } from './sentry';
 
 let adBlockInUse = false; // Adblock checking is async so we assume adblock is off until we know it's not
-isAdBlockInUse().then(isInUse => (adBlockInUse = isInUse));
+isAdBlockInUse().then(isInUse => {
+    adBlockInUse = isInUse;
+});
 
 const init = () => {
     return Promise.resolve().then(() => {

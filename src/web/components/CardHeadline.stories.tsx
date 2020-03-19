@@ -4,12 +4,10 @@ import { Section } from '@frontend/web/components/Section';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
 
-/* tslint:disable */
 export default {
     component: CardHeadline,
     title: 'Components/CardHeadline',
 };
-/* tslint:enable */
 
 export const Article = () => (
     <Section showTopBorder={false} showSideBorders={false}>

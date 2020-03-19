@@ -31,7 +31,6 @@ export const Branding: React.FC<{
     return (
         <div className={brandingStyle(pillar)}>
             <div className={brandingLabelStyle}>{branding.logo.label}</div>
-            {/* tslint:disable-next-line: react-a11y-anchors */}
             <a
                 className={brandingLogoStyle}
                 href={logo.link}

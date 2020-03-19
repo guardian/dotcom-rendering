@@ -2,12 +2,10 @@ import React from 'react';
 
 import { StarRating } from './StarRating';
 
-/* tslint:disable */
 export default {
     component: StarRating,
     title: 'Components/StarRating',
 };
-/* tslint:enable */
 
 export const AllSizes = () => (
     <>

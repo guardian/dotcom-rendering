@@ -44,7 +44,6 @@ const bylineStyles = (size: SmallHeadlineSize) => {
 const colourStyles = (designType: DesignType, pillar: Pillar) => {
     switch (designType) {
         case 'Comment':
-        case 'Comment':
         case 'Analysis':
         case 'Feature':
         case 'Interview':

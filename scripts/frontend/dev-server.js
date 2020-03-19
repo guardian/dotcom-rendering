@@ -49,7 +49,6 @@ const go = async () => {
             compiler.compilers.find(config => config.name === 'browser'),
             {
                 // https://www.npmjs.com/package/friendly-errors-webpack-plugin#turn-off-errors
-                // tslint:disable-next-line:no-empty
                 log: () => {},
             },
         ),
@@ -67,7 +66,7 @@ const go = async () => {
                 req.body = config;
                 next();
             } catch (error) {
-                // eslint-disable-next-line @typescript-eslint/tslint/config
+                // eslint-disable-next-line no-console
                 console.error(error);
             }
         },

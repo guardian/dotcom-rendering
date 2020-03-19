@@ -11,7 +11,6 @@ import Number8 from './8.svg';
 import Number9 from './9.svg';
 import Number10 from './10.svg';
 
-// tslint:disable:jsx-key
 // This file contains an array of elements, but only exposes one.
 
 export const BigNumber = ({ index }: { index: number }) => {

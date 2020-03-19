@@ -237,10 +237,7 @@ const RichLinkBody: React.FC<{ richLink: RichLink }> = ({ richLink }) => {
             <div className={richLinkTopBorder(richLink.pillar)} />
             {showImage && (
                 <div>
-                    <img
-                        src={richLink.thumbnailUrl}
-                        alt="link thumbnail image"
-                    />
+                    <img src={richLink.thumbnailUrl} alt="" />
                 </div>
             )}
             <div className={richLinkElements}>

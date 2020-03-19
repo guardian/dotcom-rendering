@@ -20,7 +20,6 @@ import { recordBaselineCloudWatchMetrics } from './aws/metrics-baseline';
 import { logger } from './logging';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
-// tslint:disable-next-line:no-default-export
 export default (options: any) => {
     if ('amp' in options) {
         return renderAMPArticle;
@@ -91,7 +90,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 
     // express requires all 4 args here:
-    app.use((err: any, req: any, res: any, next: any) => {
+    app.use((err: any, req: any, res: any) => {
         res.status(500).send(`<pre>${err.stack}</pre>`);
     });
 

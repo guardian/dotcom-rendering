@@ -7,12 +7,10 @@ import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
 
-/* tslint:disable */
 export default {
     component: ArticleStandfirst,
     title: 'Components/ArticleStandfirst',
 };
-/* tslint:enable */
 
 export const defaultStory = () => {
     return (

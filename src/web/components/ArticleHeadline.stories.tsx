@@ -10,12 +10,10 @@ import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
 
-/* tslint:disable */
 export default {
     component: ArticleHeadline,
     title: 'Components/ArticleHeadline',
 };
-/* tslint:enable */
 
 export const ArticleStory = () => (
     <Section>

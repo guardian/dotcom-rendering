@@ -49,7 +49,7 @@ const getHTML = (events: TimelineEvent[], description?: string): string => {
             )}
             <div>
                 <h3 className={headingStyle}>{e.title}</h3>
-                <div // tslint:disable-line:react-no-dangerous-html
+                <div
                     dangerouslySetInnerHTML={{
                         __html: e.body || '',
                     }}

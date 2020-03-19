@@ -510,8 +510,6 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 borderColour={brandBorder.primary}
             >
                 <Footer
-                    nav={NAV}
-                    edition={CAPI.editionId}
                     pageFooter={CAPI.pageFooter}
                     pillar={CAPI.pillar}
                     pillars={NAV.pillars}

@@ -23,14 +23,12 @@ import { DecideLayout } from './DecideLayout';
 
 mockRESTCalls();
 
-/* tslint:disable */
 export default {
     title: 'Layouts/Showcase',
     parameters: {
         chromatic: { viewports: [1300], delay: 800 },
     },
 };
-/* tslint:enable */
 
 const convertToShowcase = (CAPI: CAPIType) => {
     return {

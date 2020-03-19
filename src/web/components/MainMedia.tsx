@@ -74,13 +74,13 @@ function renderElement(
                     element={element}
                     pillar={pillar}
                     hideCaption={hideCaption}
-                    // tslint:disable-next-line react-a11y-role
+                    // eslint-disable-next-line jsx-a11y/aria-role
                     role="inline"
                     adTargeting={adTargeting}
                 />
             );
         default:
-            // tslint:disable-next-line no-console
+            // eslint-disable-next-line no-console
             console.warn(
                 `The following main media element is not supported by DCR ${element._type}`,
             );

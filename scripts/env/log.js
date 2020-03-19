@@ -1,6 +1,4 @@
 // BRANDED LOGGING
-// tslint:disable:no-shadowed-variable
-// tslint:disable:no-console
 
 const capitalize = str => str.replace(/^([a-z])/, match => match.toUpperCase());
 
@@ -12,6 +10,7 @@ const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 
 const logIt = (messages = [], color = dim) => {
+    // eslint-disable-next-line no-console
     console.log(`${color}%s${reset}`, capitalize(messages.join('\n')));
 };
 

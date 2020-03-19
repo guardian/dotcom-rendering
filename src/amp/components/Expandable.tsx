@@ -139,7 +139,7 @@ export const Expandable: React.FC<{
                     height="100"
                 />
             )}
-            <div // tslint:disable-line:react-no-dangerous-html
+            <div
                 dangerouslySetInnerHTML={{
                     __html: html,
                 }}

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
 import { Card } from '@frontend/web/components/Card/Card';
@@ -18,7 +19,6 @@ export const Spotlight = ({ content }: Props) => (
             showByline: content[0].showByline,
             showQuotes: content[0].designType === 'Comment',
             webPublicationDate: content[0].webPublicationDate,
-            isLiveBlog: content[0].isLiveBlog,
             kickerText: content[0].kickerText,
             showPulsingDot: content[0].isLiveBlog,
             showSlash: true,

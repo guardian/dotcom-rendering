@@ -62,14 +62,12 @@ export const ArticleTitle = ({
         )}
         <div className={badge && marginTop}>
             <SeriesSectionLink
-                {...{
-                    tags,
-                    sectionLabel,
-                    sectionUrl,
-                    guardianBaseURL,
-                    pillar,
-                    fallbackToSection,
-                }}
+                tags={tags}
+                sectionLabel={sectionLabel}
+                sectionUrl={sectionUrl}
+                guardianBaseURL={guardianBaseURL}
+                pillar={pillar}
+                fallbackToSection={fallbackToSection}
             />
         </div>
     </div>

@@ -7,12 +7,10 @@ import { Section } from '@frontend/web/components/Section';
 
 import { LeftColumn } from './LeftColumn';
 
-/* tslint:disable */
 export default {
     component: LeftColumn,
     title: 'Components/LeftColumn',
 };
-/* tslint:enable */
 
 export const PartialRightBorder = () => {
     return (

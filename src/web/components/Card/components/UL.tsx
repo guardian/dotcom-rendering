@@ -5,7 +5,7 @@ import { until } from '@guardian/src-foundations/mq';
 
 import { verticalDivider } from '@root/src/web/lib/verticalDivider';
 
-const ulStyles = (direction?: 'row' | 'column', padded?: boolean) => css`
+const ulStyles = (direction?: 'row' | 'column') => css`
     position: relative;
     display: flex;
     flex-direction: ${direction};

@@ -53,6 +53,7 @@ export default {
 export const defaultStory = () => {
     return (
         <Container>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <ArticleTitle {...brexitCAPI} pillar="sport" />
         </Container>
     );
@@ -62,6 +63,7 @@ defaultStory.story = { name: 'Brexit badge' };
 export const beyondTheBlade = () => {
     return (
         <Container>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <ArticleTitle {...beyondTheBladeCAPI} pillar="news" />
         </Container>
     );

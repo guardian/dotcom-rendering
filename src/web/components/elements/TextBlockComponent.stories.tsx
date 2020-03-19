@@ -17,12 +17,10 @@ const containerStyles = css`
     margin: 20px;
 `;
 
-/* tslint:disable */
 export default {
     component: TextBlockComponent,
     title: 'Components/TextBlockComponent',
 };
-/* tslint:enable */
 
 export const defaultStory = () => {
     return (

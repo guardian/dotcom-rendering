@@ -4,12 +4,10 @@ import { Section } from './Section';
 
 import { Standfirst } from './Standfirst';
 
-/* tslint:disable */
 export default {
     component: Standfirst,
     title: 'Components/Standfirst',
 };
-/* tslint:enable */
 
 export const Article = () => {
     return (

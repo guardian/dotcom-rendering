@@ -19,7 +19,7 @@ module.exports = (...packages) =>
                     try {
                         resolve(packages.map(require));
                     } catch (e2) {
-                        // tslint:disable-next-line:no-console
+                        // eslint-disable-next-line no-console
                         console.log(e2);
                         process.exit(1);
                     }

@@ -42,10 +42,8 @@ const starRatingWrapper = css`
 
 const Headline: React.FC<{
     headlineText: string;
-    standfirst: string;
-    pillar: Pillar;
     starRating?: number;
-}> = ({ headlineText, standfirst, pillar, starRating }) => {
+}> = ({ headlineText, starRating }) => {
     return (
         <div>
             <h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
@@ -91,8 +89,6 @@ export const TopMetaNews: React.FC<{
 
             <Headline
                 headlineText={articleData.headline}
-                standfirst={articleData.standfirst}
-                pillar={articleData.pillar}
                 starRating={articleData.starRating}
             />
 
