@@ -117,7 +117,7 @@ export const VeggieBurger: React.FC<{
     }
 
     return (
-        // TODO: Refactor this compone to work better without js. Where better
+        // TODO: Refactor this component to work better without js. Where better
         // means working and accessible
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/label-has-associated-control
         <label
