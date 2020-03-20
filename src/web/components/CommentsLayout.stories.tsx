@@ -24,6 +24,8 @@ export const Default = () => (
                 shortUrl="p/39f5z/"
                 commentCount={345}
                 isClosedForComments={false}
+                discussionD2Uid="testD2Header"
+                discussionApiClientHeader="testClientHeader"
             />
             <RightColumn>{/* TODO: Comments ad slot goes here */}</RightColumn>
         </Flex>

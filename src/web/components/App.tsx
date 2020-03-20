@@ -189,6 +189,10 @@ export const App = ({ CAPI, NAV }: Props) => {
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
                         isClosedForComments={isClosedForComments}
+                        discussionD2Uid={CAPI.config.discussionD2Uid}
+                        discussionApiClientHeader={
+                            CAPI.config.discussionApiClientHeader
+                        }
                     />
                 </Lazy>
             </Portal>

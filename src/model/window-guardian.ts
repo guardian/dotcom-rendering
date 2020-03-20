@@ -83,7 +83,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
         },
         [] as RichLinkBlockElement[],
     );
-    return ({
+
+    return {
         config: {
             isDev: process.env.NODE_ENV !== 'production',
             ajaxUrl: CAPI.config.ajaxUrl,
@@ -108,6 +109,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
             adUnit: CAPI.config.adUnit,
             discussionApiUrl: CAPI.config.discussionApiUrl,
+            discussionD2Uid: CAPI.config.discussionD2Uid,
+            discussionApiClientHeader: CAPI.config.discussionApiClientHeader,
         },
         richLinks: richLinksWithIndex,
         editionId: CAPI.editionId,
@@ -131,8 +134,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
                 header: CAPI.nav.readerRevenueLinks.header,
             },
         },
-    });
-}
+    };
+};
 
 export interface WindowGuardian {
     // The app contains only data that we require for app hydration
