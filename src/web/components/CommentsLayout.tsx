@@ -11,6 +11,7 @@ import { Flex } from '@frontend/web/components/Flex';
 import { App as Comments } from '@guardian/discussion-rendering';
 
 type Props = {
+    baseUrl: string;
     shortUrl: string;
     commentCount: number;
     isClosedForComments: boolean;
@@ -27,6 +28,7 @@ const containerStyles = css`
 `;
 
 export const CommentsLayout = ({
+    baseUrl,
     shortUrl,
     commentCount,
     isClosedForComments,
@@ -45,6 +47,7 @@ export const CommentsLayout = ({
                 <SignedInAs commentCount={commentCount} />
             </Hide>
             <Comments
+                baseUrl={baseUrl}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,
