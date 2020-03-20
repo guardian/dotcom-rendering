@@ -22,7 +22,7 @@ export const InteractiveUrl: React.SFC<{ url: string }> = ({ url }) => {
             class={styles}
             src={url}
             layout="responsive"
-            sandbox="allow-scripts allow-same-origin"
+            sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation"
             height="1"
             width="8"
             resizable=""
