@@ -4,6 +4,7 @@ import {
     getBodyEnd,
     getViewLog,
     logView,
+    initSlot,
     getWeeklyArticleHistory,
 } from '@guardian/slot-machine-client';
 import {
@@ -127,7 +128,7 @@ const MemoisedInner = ({
             isPaidContent,
             tags,
         });
-        getBodyEnd(contributionsPayload)
+        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
@@ -154,6 +155,7 @@ const MemoisedInner = ({
             // Add a new entry to the view log when we know an Epic is viewed
             logView(testName);
             sendOphanEvent('VIEW');
+            initSlot();
         }
     }, [hasBeenSeen]);
 
