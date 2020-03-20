@@ -75,6 +75,8 @@ export const App = ({ CAPI, NAV }: Props) => {
         incrementWeeklyArticleCount();
     }, []);
 
+    console.log('ca', CAPI);
+
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -186,6 +188,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Portal root="comments-root">
                 <Lazy margin={300}>
                     <CommentsLayout
+                        baseUrl={CAPI.config.discussionApiUrl}
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
                         isClosedForComments={isClosedForComments}
