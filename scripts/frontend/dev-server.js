@@ -32,11 +32,6 @@ const go = async () => {
     const webpackConfig = await require('../webpack/frontend');
     const compiler = await webpack(webpackConfig);
 
-    // console.log('webpackConfig')
-    // console.log(webpackConfig)
-    // console.log('compiler')
-    // console.log(compiler)
-
     const app = express();
 
     app.use(
@@ -47,9 +42,10 @@ const go = async () => {
     app.use(
         webpackDevMiddleware(compiler, {
             serverSideRender: true,
-            // logLevel: 'silent',
+            logLevel: 'silent',
             publicPath: '/assets/javascript/',
             ignored: [/node_modules([\\]+|\/)+(?!@guardian)/],
+            writeToDisk: true
         }),
     );
 

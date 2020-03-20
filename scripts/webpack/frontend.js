@@ -16,7 +16,6 @@ const {
     dist,
     siteName
 } = require('../frontend/config');
-const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -47,7 +46,6 @@ const commonConfigs = ({
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
-        new LoadablePlugin(),
         PROD && !process.env.HIDE_BUNDLES && new ReportBundleSize(),
         PROD && new BundleAnalyzerPlugin({
             reportFilename: path.join(dist, `${platform}-bundles.html`),

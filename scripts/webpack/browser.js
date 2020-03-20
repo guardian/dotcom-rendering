@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const {
     siteName
 } = require('../frontend/config');
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const friendlyErrorsWebpackPlugin = () =>
     new FriendlyErrorsWebpackPlugin({
@@ -53,7 +54,9 @@ module.exports = ({
         chunkFilename: generateName(isLegacyJS),
     },
     plugins: [
-        PROD &&
+        new LoadablePlugin({
+            filename: isLegacyJS ? 'loadable-stats.legacy.json' : 'loadable-stats.json',
+        }),
         new AssetsManifest({
             writeToDisk: true,
             assets: isLegacyJS ? legacyManifestData : manifestData,
@@ -79,8 +82,7 @@ module.exports = ({
                             // @babel/preset-env is used for legacy browsers
                             // @babel/preset-modules is used for modern browsers
                             // this allows us to reduce bundle sizes
-                            isLegacyJS ?
-                            [
+                            isLegacyJS ? [
                                 '@babel/preset-env',
                                 {
                                     targets: {
