@@ -23,11 +23,13 @@ import { Lazy } from '@frontend/web/components/Lazy';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
+import { getUser } from '@root/src/web/lib/getUser';
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
+    const [user, setUser] = useState<UserProfile>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
@@ -37,6 +39,16 @@ export const App = ({ CAPI, NAV }: Props) => {
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
+
+    useEffect(() => {
+        const callGetUser = async () => {
+            setUser(await getUser(CAPI.config.discussionApiUrl));
+        };
+
+        if (isSignedIn) {
+            callGetUser();
+        }
+    }, [isSignedIn, CAPI.config.discussionApiUrl]);
 
     useEffect(() => {
         const callFetch = async () =>
@@ -186,6 +198,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             <Portal root="comments-root">
                 <Lazy margin={300}>
                     <CommentsLayout
+                        user={user}
                         baseUrl={CAPI.config.discussionApiUrl}
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
