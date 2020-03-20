@@ -3,7 +3,7 @@ import { joinUrl } from '@root/src/web/lib/joinUrl';
 export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
     const url = joinUrl([ajaxUrl, 'profile/me']);
     return fetch(url, {
-        credentials: 'same-origin',
+        credentials: 'include',
     })
         .then(response => {
             if (!response.ok) {
