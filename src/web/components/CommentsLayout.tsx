@@ -17,6 +17,7 @@ type Props = {
     isClosedForComments: boolean;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
+    commentPage?: number;
 };
 
 const containerStyles = css`
@@ -31,6 +32,7 @@ export const CommentsLayout = ({
     baseUrl,
     shortUrl,
     commentCount,
+    // commentPage,
     isClosedForComments,
     discussionD2Uid,
     discussionApiClientHeader,
@@ -48,6 +50,8 @@ export const CommentsLayout = ({
             </Hide>
             <Comments
                 baseUrl={baseUrl}
+                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/113 is deployed and a new version published
+                // initialPage={commentPage}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,

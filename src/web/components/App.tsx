@@ -23,6 +23,7 @@ import { Lazy } from '@frontend/web/components/Lazy';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
+import { getCommentPage } from '@root/src/web/lib/getCommentPage';
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
@@ -33,6 +34,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
         true,
     );
+    const [commentPage, setCommentPage] = useState<number>();
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -74,6 +76,25 @@ export const App = ({ CAPI, NAV }: Props) => {
     useEffect(() => {
         incrementWeeklyArticleCount();
     }, []);
+
+    // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
+    // If so, make a call to get the context of this comment so we know what page it is
+    // on.
+    useEffect(() => {
+        const commentIdFromUrl = () => {
+            const { hash } = window.location;
+            return hash && hash.includes('comment') && hash.split('-')[1];
+        };
+
+        const hashCommentId = commentIdFromUrl();
+        if (hashCommentId) {
+            getCommentPage(CAPI.config.discussionApiUrl, hashCommentId).then(
+                page => {
+                    setCommentPage(page);
+                },
+            );
+        }
+    }, [CAPI.config.discussionApiUrl]);
 
     return (
         // Do you need to Hydrate or do you want a Portal?
@@ -189,6 +210,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         baseUrl={CAPI.config.discussionApiUrl}
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
+                        commentPage={commentPage}
                         isClosedForComments={isClosedForComments}
                         discussionD2Uid={CAPI.config.discussionD2Uid}
                         discussionApiClientHeader={
