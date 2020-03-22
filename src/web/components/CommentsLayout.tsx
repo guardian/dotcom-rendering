@@ -18,6 +18,7 @@ type Props = {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     commentPage?: number;
+    commentPageSize?: number;
 };
 
 const containerStyles = css`
@@ -33,6 +34,7 @@ export const CommentsLayout = ({
     shortUrl,
     commentCount,
     // commentPage,
+    // commentPageSize,
     isClosedForComments,
     discussionD2Uid,
     discussionApiClientHeader,
@@ -52,6 +54,8 @@ export const CommentsLayout = ({
                 baseUrl={baseUrl}
                 // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/113 is deployed and a new version published
                 // initialPage={commentPage}
+                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/115 is deployed and a new version published
+                // pageSizeOverride={commentPageSize}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,

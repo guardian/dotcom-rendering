@@ -35,6 +35,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         true,
     );
     const [commentPage, setCommentPage] = useState<number>();
+    const [commentPageSize, setCommentPageSize] = useState<number>();
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -91,6 +92,7 @@ export const App = ({ CAPI, NAV }: Props) => {
             getCommentContext(CAPI.config.discussionApiUrl, hashCommentId).then(
                 context => {
                     setCommentPage(context.page);
+                    setCommentPageSize(context.pageSize);
                 },
             );
         }
@@ -211,6 +213,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
                         commentPage={commentPage}
+                        commentPageSize={commentPageSize}
                         isClosedForComments={isClosedForComments}
                         discussionD2Uid={CAPI.config.discussionD2Uid}
                         discussionApiClientHeader={
