@@ -35,7 +35,12 @@ export const App = ({ CAPI, NAV }: Props) => {
         true,
     );
     const [commentPage, setCommentPage] = useState<number>();
-    const [commentPageSize, setCommentPageSize] = useState<number>();
+    const [commentPageSize, setCommentPageSize] = useState<
+        20 | 25 | 50 | 100
+    >();
+    const [commentOrderBy, setCommentOrderBy] = useState<
+        'newest' | 'oldest' | 'mostrecommended'
+    >();
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -93,6 +98,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 context => {
                     setCommentPage(context.page);
                     setCommentPageSize(context.pageSize);
+                    setCommentOrderBy(context.orderBy);
                 },
             );
         }
@@ -214,6 +220,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                         commentCount={commentCount}
                         commentPage={commentPage}
                         commentPageSize={commentPageSize}
+                        commentOrderBy={commentOrderBy}
                         isClosedForComments={isClosedForComments}
                         discussionD2Uid={CAPI.config.discussionD2Uid}
                         discussionApiClientHeader={

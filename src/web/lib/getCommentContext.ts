@@ -22,7 +22,7 @@ type CommentContextType = {
     discussionKey: string;
     discussionWebUrl: string;
     discussionApiUrl: string;
-    orderBy: 'oldest' | 'newest' | 'recommended';
+    orderBy: 'oldest' | 'newest' | 'mostrecommended';
     pageSize: 20 | 25 | 50 | 100; // TODO: Review these https://trello.com/c/7v4VDNY0/1326-review-page-size-values
     page: number;
 };

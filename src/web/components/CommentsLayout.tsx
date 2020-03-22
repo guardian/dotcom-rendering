@@ -18,7 +18,8 @@ type Props = {
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     commentPage?: number;
-    commentPageSize?: number;
+    commentPageSize?: 20 | 25 | 50 | 100;
+    commentOrderBy?: 'newest' | 'oldest' | 'mostrecommended';
 };
 
 const containerStyles = css`
@@ -33,8 +34,9 @@ export const CommentsLayout = ({
     baseUrl,
     shortUrl,
     commentCount,
-    // commentPage,
-    // commentPageSize,
+    commentPage,
+    commentPageSize,
+    commentOrderBy,
     isClosedForComments,
     discussionD2Uid,
     discussionApiClientHeader,
@@ -56,6 +58,7 @@ export const CommentsLayout = ({
                 // initialPage={commentPage}
                 // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/115 is deployed and a new version published
                 // pageSizeOverride={commentPageSize}
+                // orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,
