@@ -29,9 +29,9 @@ type CommentContextType = {
 
 export const getCommentContext = async (
     ajaxUrl: string,
-    commentId: string,
+    commentId: number,
 ): Promise<CommentContextType> => {
-    const url = joinUrl([ajaxUrl, 'comment', commentId, 'context']);
+    const url = joinUrl([ajaxUrl, 'comment', commentId.toString(), 'context']);
     return fetch(url)
         .then(response => {
             if (!response.ok) {

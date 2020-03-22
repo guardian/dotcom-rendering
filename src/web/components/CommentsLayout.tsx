@@ -17,9 +17,11 @@ type Props = {
     isClosedForComments: boolean;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
+    expanded: boolean;
     commentPage?: number;
     commentPageSize?: 20 | 25 | 50 | 100;
     commentOrderBy?: 'newest' | 'oldest' | 'mostrecommended';
+    commentToScrollTo?: number;
 };
 
 const containerStyles = css`
@@ -35,12 +37,14 @@ export const CommentsLayout = ({
     shortUrl,
     commentCount,
     commentPage,
-    commentPageSize,
-    commentOrderBy,
+    // commentPageSize,
+    // commentOrderBy,
+    // expanded,
     isClosedForComments,
     discussionD2Uid,
     discussionApiClientHeader,
-}: Props) => (
+}: // commentToScrollTo,
+Props) => (
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
             <SignedInAs
@@ -54,16 +58,20 @@ export const CommentsLayout = ({
             </Hide>
             <Comments
                 baseUrl={baseUrl}
-                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/113 is deployed and a new version published
-                // initialPage={commentPage}
+                initialPage={commentPage}
                 // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/115 is deployed and a new version published
                 // pageSizeOverride={commentPageSize}
+                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/116 is deployed and a new version published
                 // orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,
                     'GU-Client': discussionApiClientHeader,
                 }}
+                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/117 is deployed and a new version published
+                // expanded={expanded}
+                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/118 is deployed and a new version published
+                // commentToScrollTo={commentToScrollTo}
             />
         </div>
     </Flex>
