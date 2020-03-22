@@ -23,7 +23,7 @@ import { Lazy } from '@frontend/web/components/Lazy';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
-import { getCommentPage } from '@root/src/web/lib/getCommentPage';
+import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
@@ -88,9 +88,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 
         const hashCommentId = commentIdFromUrl();
         if (hashCommentId) {
-            getCommentPage(CAPI.config.discussionApiUrl, hashCommentId).then(
-                page => {
-                    setCommentPage(page);
+            getCommentContext(CAPI.config.discussionApiUrl, hashCommentId).then(
+                context => {
+                    setCommentPage(context.page);
                 },
             );
         }

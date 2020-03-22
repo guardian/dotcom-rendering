@@ -1,6 +1,6 @@
 import { joinUrl } from '@root/src/web/lib/joinUrl';
 
-// An example /context response
+// GET http://discussion.guardianapis.com/discussion-api/comment/3519111/context
 // {
 //     status: 'ok',
 //     commentId: 3519111,
@@ -15,10 +15,22 @@ import { joinUrl } from '@root/src/web/lib/joinUrl';
 //     page: 1,
 // };
 
-export const getCommentPage = async (
+type CommentContextType = {
+    status: 'ok' | 'error';
+    commentId: number;
+    commentAncestorId: number;
+    discussionKey: string;
+    discussionWebUrl: string;
+    discussionApiUrl: string;
+    orderBy: 'oldest' | 'newest' | 'recommended';
+    pageSize: 20 | 25 | 50 | 100; // TODO: Review these https://trello.com/c/7v4VDNY0/1326-review-page-size-values
+    page: number;
+};
+
+export const getCommentContext = async (
     ajaxUrl: string,
     commentId: string,
-): Promise<number> => {
+): Promise<CommentContextType> => {
     const url = joinUrl([ajaxUrl, 'comment', commentId, 'context']);
     return fetch(url)
         .then(response => {
@@ -28,7 +40,6 @@ export const getCommentPage = async (
             return response;
         })
         .then(response => response.json())
-        .then(json => json.page)
         .catch(error => {
             window.guardian.modules.sentry.reportError(
                 error,
