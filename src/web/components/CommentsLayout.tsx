@@ -22,6 +22,7 @@ type Props = {
 const containerStyles = css`
     display: flex;
     flex-grow: 1;
+    flex-direction: column;
     ${from.desktop} {
         width: 620px;
     }
