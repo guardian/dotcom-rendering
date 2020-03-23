@@ -34,21 +34,3 @@ export const Default = () => (
     </Section>
 );
 Default.story = { name: 'default' };
-
-export const Expanded = () => (
-    <Section>
-        <Flex>
-            <CommentsLayout
-                baseUrl="https://discussion.theguardian.com/discussion-api"
-                shortUrl="p/39f5z/"
-                commentCount={345}
-                isClosedForComments={false}
-                discussionD2Uid="testD2Header"
-                discussionApiClientHeader="testClientHeader"
-                expanded={true}
-            />
-            <RightColumn>{/* TODO: Comments ad slot goes here */}</RightColumn>
-        </Flex>
-    </Section>
-);
-Expanded.story = { name: 'expanded' };
