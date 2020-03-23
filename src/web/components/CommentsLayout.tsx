@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
@@ -28,6 +29,10 @@ const containerStyles = css`
     }
 `;
 
+const bottomPadding = css`
+    padding-bottom: ${space[2]}px;
+`;
+
 export const CommentsLayout = ({
     baseUrl,
     shortUrl,
@@ -45,7 +50,9 @@ export const CommentsLayout = ({
         </LeftColumn>
         <div className={containerStyles}>
             <Hide when="above" breakpoint="leftCol">
-                <SignedInAs commentCount={commentCount} />
+                <div className={bottomPadding}>
+                    <SignedInAs commentCount={commentCount} />
+                </div>
             </Hide>
             <Comments
                 baseUrl={baseUrl}
