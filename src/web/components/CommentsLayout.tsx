@@ -37,14 +37,14 @@ export const CommentsLayout = ({
     shortUrl,
     commentCount,
     commentPage,
-    // commentPageSize,
-    // commentOrderBy,
-    // expanded,
+    commentPageSize,
+    commentOrderBy,
+    expanded,
     isClosedForComments,
     discussionD2Uid,
     discussionApiClientHeader,
-}: // commentToScrollTo,
-Props) => (
+    commentToScrollTo,
+}: Props) => (
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
             <SignedInAs
@@ -59,19 +59,15 @@ Props) => (
             <Comments
                 baseUrl={baseUrl}
                 initialPage={commentPage}
-                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/115 is deployed and a new version published
-                // pageSizeOverride={commentPageSize}
-                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/116 is deployed and a new version published
-                // orderByOverride={commentOrderBy}
+                pageSizeOverride={commentPageSize}
+                orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,
                     'GU-Client': discussionApiClientHeader,
                 }}
-                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/117 is deployed and a new version published
-                // expanded={expanded}
-                // TODO: Enable this when https://github.com/guardian/discussion-rendering/pull/118 is deployed and a new version published
-                // commentToScrollTo={commentToScrollTo}
+                expanded={expanded}
+                commentToScrollTo={commentToScrollTo}
             />
         </div>
     </Flex>
