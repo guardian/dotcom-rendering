@@ -319,7 +319,8 @@ const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): React
     return styledH('blockquote', { key: props.key, className: 'twitter-tweet', css: TweetStyles }, ...Array.from(props.content).map(textElement(props.pillar)));
 }
 
-const render = (pillar: Pillar, imageMappings: ImageMappings) => (element: BodyElement, key: number): ReactNode => {
+const render = (pillar: Pillar, imageMappings: ImageMappings) =>
+    (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
         case ElementKind.Text:
@@ -370,8 +371,9 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) => (element: BodyE
     }
 }
 
-const renderAll = (imageMappings: ImageMappings) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
-    elements.map(render(pillar, imageMappings));
+const renderAll = (imageMappings: ImageMappings) =>
+    (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+        elements.map(render(pillar, imageMappings));
 
 // ----- Exports ----- //
 

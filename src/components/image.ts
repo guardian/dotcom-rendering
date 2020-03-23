@@ -92,7 +92,8 @@ const thumbnailStyles = (width: number, height: number): SerializedStyles => css
     }
 `;
 
-const Image: FC<Props> = ({ url, sizes, salt, alt, width, height, caption, credit, thumbnail, imageMappings }) => {
+const Image: FC<Props> = (props) => {
+    const { url, sizes, alt, width, height, caption, credit, thumbnail, imageMappings } = props;
 
     if (url === '' || !imageMappings) {
         return null;
