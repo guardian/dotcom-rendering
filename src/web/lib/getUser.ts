@@ -4,7 +4,6 @@ export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
     const url = joinUrl([ajaxUrl, 'profile/me']);
     return fetch(url, {
         credentials: 'include',
-        mode: 'no-cors',
     })
         .then(response => {
             if (!response.ok) {
