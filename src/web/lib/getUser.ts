@@ -17,6 +17,7 @@ export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
             return json.userProfile;
         })
         .catch(error => {
+            console.log('error fetching profile', error);
             window.guardian.modules.sentry.reportError(error, 'get-user');
         });
 };
