@@ -13,7 +13,7 @@ export const getUser = async (ajaxUrl: string): Promise<UserProfile> => {
             return response;
         })
         .then(response => response.json())
-        .then(json => json.UserResponse)
+        .then(json => json.userProfile)
         .catch(error => {
             window.guardian.modules.sentry.reportError(error, 'get-user');
         });
