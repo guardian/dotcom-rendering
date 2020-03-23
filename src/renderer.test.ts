@@ -73,7 +73,7 @@ const instagramElement = (): BodyElement =>
     })
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll('dummySalt')(Pillar.news, [element]);
+    renderAll({})(Pillar.news, [element]);
 
 const renderTextElement = compose(render, textElement);
 

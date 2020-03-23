@@ -19,7 +19,7 @@ const generateParas = (paras: number): BodyElement =>
     textElement(Array(paras).fill('<p>foo</p>'));
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll('dummySalt')(Pillar.news, [element]);
+    renderAll({})(Pillar.news, [element]);
 
 const renderParagraphs = compose(render, generateParas);
 
