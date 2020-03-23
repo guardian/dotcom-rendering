@@ -1,6 +1,7 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
 import { fromCapi, Design, Standard, ElementKind, Image, Review } from 'item';
 import { JSDOM } from "jsdom";
+import { None } from "types/option";
 
 const articleContent = {
     id: "",
@@ -230,7 +231,8 @@ describe('image elements', () => {
             file: "",
             width: 500,
             height: 500,
-            captionString: ""
+            captionString: "",
+            role: new None()
         }) as Image;
         expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"))
     })
@@ -402,5 +404,25 @@ describe('tweet elements', () => {
         const item = f(articleContentWithElement(tweetElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Interactive)
+    })
+});
+
+describe('instagram elements', () => {
+    test('parses instagram elements', () => {
+        const instagramElement = {
+            type: ElementType.INSTAGRAM,
+            assets: [],
+            instagramTypeData: {
+                html: "<p>Instagram post<p>",
+                originalUrl: "",
+                title: "",
+                source: "",
+                authorUrl: "",
+                authorUsername: ""
+            }
+        }
+        const item = f(articleContentWithElement(instagramElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Instagram)
     })
 });

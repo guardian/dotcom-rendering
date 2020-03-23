@@ -4,6 +4,7 @@ import { basePx, icons, wideContentWidth } from 'styles';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
+import { remSpace } from '@guardian/src-foundations';
 
 const captionId = 'header-image-caption';
 
@@ -19,8 +20,9 @@ const HeaderImageCaptionStyles = css`
         position: absolute;
         bottom: ${basePx(1)};
         right: ${basePx(1)};
-        border-radius: 100%;
-        z-index: 2;
+		border-radius: 100%;
+		z-index: 2;
+		outline: none;
 		
 		span {
 			font-size: 0;
@@ -43,7 +45,7 @@ const HeaderImageCaptionStyles = css`
 		min-height: 44px;
 		max-height: 999px;
 		background-color: rgba(0, 0, 0, 0.8);
-		padding: ${basePx(1)};
+		padding: ${remSpace[2]};
 		overflow: hidden;
 		padding-right: ${basePx(6)};
 		z-index: 1;
@@ -70,7 +72,7 @@ const HeaderImageCaption = ({ caption, credit }: HeaderImageCaptionProps): JSX.E
 	<figcaption css={HeaderImageCaptionStyles}>
 		<details>
 			<summary><span>Click to see figure caption</span></summary>
-			<span id={captionId}>{caption}&nbsp;{credit}</span>
+			<span id={captionId}>{caption} {credit}</span>
 		</details>
 	</figcaption>
 )

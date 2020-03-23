@@ -9,7 +9,7 @@ import { remSpace } from '@guardian/src-foundations';
 
 import { Item, Design, Display } from 'item';
 import { renderText } from 'renderer';
-import { textPadding, darkModeCss as darkMode } from 'styles';
+import { darkModeCss as darkMode } from 'styles';
 import { PillarStyles, getPillarStyles } from 'pillar';
 
 
@@ -30,7 +30,6 @@ const darkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkMode`
 
 const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
     margin-bottom: ${remSpace[2]};
-    ${textPadding}
     color: ${text.primary};
 
     p, ul {
@@ -47,10 +46,6 @@ const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
 const normalHeadline = css`
     ${headline.xxxsmall({ fontWeight: 'bold' })}
     padding: 0;
-
-    p, ul {
-        padding-left: 0;
-    }
 `;
 
 const thinHeadline = css`
@@ -58,10 +53,6 @@ const thinHeadline = css`
 
     ${from.tablet} {
         ${headline.xxsmall({ fontWeight: 'light' })}
-    }
-
-    p, ul {
-        padding-left: 0;
     }
 `;
 

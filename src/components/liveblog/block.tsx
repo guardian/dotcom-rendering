@@ -2,11 +2,12 @@ import React, { ReactNode, useState, useEffect } from 'react';
 import { textSans, icons, basePx, linkStyle } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
-import { until } from '@guardian/src-foundations/mq';
+import { until, from } from '@guardian/src-foundations/mq';
 import { makeRelativeDate, formatDate } from 'date';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { Option } from 'types/option';
+import { remSpace } from '@guardian/src-foundations';
 
 const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): SerializedStyles => css`
     background: ${neutral[100]};
@@ -22,12 +23,14 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
         margin: 0;
     }
 
-    time:first-of-type {
-        margin-bottom: 1em;
+    time {
+        margin-top: 1rem;
     }
 
-    time:last-of-type {
-        margin-top: 1em;
+    time:nth-child(1) {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        padding-left: ${remSpace[2]};
     }
 
     ${until.phablet} {
@@ -43,7 +46,7 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
         font-style: italic;
         position: relative;
         margin-left: 0;
-        padding-left: ${basePx(5)};
+        padding-left: 4rem;
 
         &::before {
             ${icons}
@@ -58,8 +61,15 @@ const LiveblogBlockStyles = ({ kicker }: PillarStyles, highlighted: boolean): Se
     }
 
     aside {
+        width: calc(100% - 2rem);
         margin-left: 0;
-        width: 100%;
+        ${from.wide} {
+            width: 100%;
+        }
+    }
+
+    h3 {
+        margin-top: .2rem;
     }
 `;
 

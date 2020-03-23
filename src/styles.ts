@@ -16,19 +16,9 @@ export const headlineFontStyles = css`
     margin: 0;
 `;
 
-export const textPadding = css`
+export const sidePadding = css`
     padding-left: ${remSpace[2]};
     padding-right: ${remSpace[2]};
-
-    ${from.wide} {
-        padding-left: 0;
-        padding-right: 0;
-    }
-`;
-
-export const sidePadding = css`
-    padding-left: ${basePx(1)};
-    padding-right: ${basePx(1)};
 
     ${from.wide} {
         padding-left: 0;
@@ -69,6 +59,7 @@ export const wideContentWidth = 620;
 export const wideColumnWidth = 220;
 
 export const articleWidthStyles = css`
+    ${sidePadding}
     ${from.wide} {
         margin: 0 auto;
     }

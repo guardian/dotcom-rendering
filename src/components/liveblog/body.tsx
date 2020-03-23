@@ -20,10 +20,6 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     figure {
         margin: 1rem 0;
     }
-
-    .image, figcaption {
-        padding: 0;
-    }
 `;
 
 interface LiveblogBodyProps {

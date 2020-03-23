@@ -1,16 +1,16 @@
 // ----- Imports ----- //
 
 import React from 'react';
-
 import { css, SerializedStyles } from '@emotion/core';
 import { from } from '@guardian/src-foundations/mq';
-import { wideContentWidth, wideColumnWidth, basePx } from 'styles';
+import { wideContentWidth, wideColumnWidth } from 'styles';
+import { remSpace } from '@guardian/src-foundations';
 
 
 // ----- Styles ----- //
 
 const LeftColumnStyles = css`
-    padding: ${basePx(1)};
+    padding: ${remSpace[2]} 0;
 
     ${from.phablet} {
         display: flex;

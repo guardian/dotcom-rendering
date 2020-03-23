@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 
-import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
+import { textSans, darkModeCss, basePx } from 'styles';
 import { Contributor } from 'capi';
 import Follow from 'components/shared/follow';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
@@ -66,7 +66,7 @@ const Byline = ({ pillar, publicationDate, contributors }: Props): JSX.Element =
 
     return (
         <div css={[Styles(pillarStyles), DarkStyles(pillarStyles)]}>
-            <div css={sidePadding}>
+            <div>
                 <div className="author">
                     <Dateline date={publicationDate} />
                     <Follow contributors={contributors} />

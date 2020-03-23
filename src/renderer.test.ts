@@ -4,10 +4,10 @@ import { Pillar } from 'pillar';
 import { ReactNode, createElement as h } from 'react';
 import { renderAll } from 'renderer';
 import { compose } from 'lib';
-import { ElementKind, BodyElement } from 'item';
+import { ElementKind, BodyElement, Role } from 'item';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { None } from 'types/option';
+import { None, Some } from 'types/option';
 
 configure({ adapter: new Adapter() });
 
@@ -30,8 +30,15 @@ const imageElement = (): BodyElement =>
         captionString: "caption",
         credit: "credit",
         width: 500,
-        height: 500
+        height: 500,
+        role: new None()
     });
+
+const imageElementWithRole = () =>
+    ({
+        ...imageElement(),
+        role: new Some(Role.Thumbnail)
+    })
 
 const pullquoteElement = (): BodyElement =>
     ({
@@ -57,6 +64,12 @@ const tweetElement = (): BodyElement =>
     ({
         kind: ElementKind.Tweet,
         content: JSDOM.fragment('<span>Tweet contents<span>').querySelectorAll('span'),
+    })
+
+const instagramElement = (): BodyElement =>
+    ({
+        kind: ElementKind.Instagram,
+        html: '<blockquote>Instagram</blockquote>',
     })
 
 const render = (element: BodyElement): ReactNode[] =>
@@ -143,6 +156,12 @@ describe('Renders different types of elements', () => {
         expect(bodyImage.html()).toContain('credit="credit"');
     })
 
+    test('ElementKind.Image with thumbnail role', () => {
+        const nodes = render(imageElementWithRole())
+        const bodyImage = shallow(nodes.flat()[0]);
+        expect(bodyImage.html()).toContain('img');
+    })
+
     test('ElementKind.Pullquote', () => {
         const nodes = render(pullquoteElement())
         const pullquote = shallow(nodes.flat()[0]);
@@ -166,5 +185,11 @@ describe('Renders different types of elements', () => {
         const nodes = render(tweetElement())
         const tweet = shallow(nodes.flat()[0]);
         expect(tweet.html()).toContain('twitter-tweet');
+    })
+
+    test('ElementKind.Instagram', () => {
+        const nodes = render(instagramElement())
+        const instagram = shallow(nodes.flat()[0]);
+        expect(instagram.html()).toBe('<div><blockquote>Instagram</blockquote></div>');
     })
 });

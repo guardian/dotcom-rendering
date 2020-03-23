@@ -6,12 +6,13 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
-import { basePx, icons, darkModeCss, textPadding } from 'styles';
+import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { ElementKind, BodyElement } from 'item';
+import { ElementKind, BodyElement, Role } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
-import { headline } from '@guardian/src-foundations/typography';
+import BodyImageThumbnail from 'components/bodyImageThumbnail';
+import { headline, body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
 
@@ -49,6 +50,7 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
 const listStyles: SerializedStyles = css`
     list-style: none;
     padding-left: 0;
+    padding-right: .5rem;
 `
 
 const listItemStyles: SerializedStyles = css`
@@ -58,7 +60,7 @@ const listItemStyles: SerializedStyles = css`
     &::before {
         display: inline-block;
         content: '';
-        border-radius: 0.5rem;
+        border-radius: .5rem;
         height: 1rem;
         width: 1rem;
         margin-right: 1rem;
@@ -76,7 +78,7 @@ const listItemStyles: SerializedStyles = css`
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
     display: inline-block;
-    ${textPadding}
+
     &::before {
         content: '';
         background-color: ${colour};
@@ -84,6 +86,7 @@ const bulletStyles = (colour: string): SerializedStyles => css`
         height: 1rem;
         border-radius: .5rem;
         display: inline-block;
+        vertical-align: middle;
     }
 `;
 
@@ -91,7 +94,6 @@ const HeadingTwoStyles = css`
     font-size: 1.4rem;
     font-weight: 700;
     margin: 1rem 0 4px 0;
-    ${textPadding}
 
     & + p {
         margin-top: 0;
@@ -116,7 +118,7 @@ const TweetStyles = css`
 `;
 
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    styledH('p', { css: css`display: inline` },
+    styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
         null
@@ -215,8 +217,7 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     margin: 0;
-    ${headline.small({ fontWeight: 'light' })};
-    ${textPadding}
+    ${headline.xsmall({ fontWeight: 'light' })};
 
     blockquote {
         margin-left: 0;
@@ -231,7 +232,7 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
             content: '\\e11c';
             display: inline-block;
             margin-right: ${basePx(1)};
-            ${headline.small({ fontWeight: 'light' })};
+            ${headline.xsmall({ fontWeight: 'light' })};
         }
     }
 
@@ -309,7 +310,7 @@ const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): Rea
     );
 
 const Interactive = (props: { url: string }): ReactElement =>
-    styledH('figure', { className: 'interactive', css: css`${textPadding}` },
+    styledH('figure', { className: 'interactive' },
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
@@ -325,8 +326,12 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) => (element: BodyE
             return text(element.doc, pillar);
 
         case ElementKind.Image:
-            const { file, alt, caption, captionString, credit, width, height } = element;
-            return h(BodyImage, {
+            const { file, alt, caption, captionString, credit, width, height, role } = element;
+            const ImageComponent = role
+                .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
+                .withDefault(BodyImage)
+
+            return h(ImageComponent, {
                 image: {
                     url: file,
                     alt,
@@ -335,7 +340,7 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) => (element: BodyE
                     width,
                     height,
                     caption: captionString,
-                    credit,
+                    credit
                 },
                 figcaption: text(caption, pillar),
                 pillar,
@@ -354,6 +359,14 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) => (element: BodyE
 
         case ElementKind.Tweet:
             return h(Tweet, { content: element.content, pillar, key });
+
+        case ElementKind.Instagram:
+            const props = {
+                dangerouslySetInnerHTML: {
+                  __html: element.html,
+                },
+            };
+            return h('div', props);
     }
 }
 

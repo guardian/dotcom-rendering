@@ -8,7 +8,7 @@ import LiveblogKeyEvents from 'components/liveblog/keyEvents';
 import LiveblogBody from 'components/liveblog/body';
 import HeaderImage from 'components/shared/headerImage';
 import Tags from 'components/shared/tags';
-import { wideColumnWidth, baseMultiply, darkModeCss } from 'styles';
+import { wideColumnWidth, darkModeCss } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
@@ -40,7 +40,7 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
         margin: 0;
 
         ${from.wide} {
-            margin-left: ${wideColumnWidth + baseMultiply(1)}px;
+            margin-left: ${wideColumnWidth}px;
         }
     }
 `;
