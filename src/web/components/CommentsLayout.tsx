@@ -40,13 +40,14 @@ export const CommentsLayout = ({
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
             <SignedInAs
+                user={user}
                 commentCount={commentCount}
                 isClosedForComments={isClosedForComments}
             />
         </LeftColumn>
         <div className={containerStyles}>
             <Hide when="above" breakpoint="leftCol">
-                <SignedInAs commentCount={commentCount} />
+                <SignedInAs user={user} commentCount={commentCount} />
             </Hide>
             <Comments
                 user={user}
