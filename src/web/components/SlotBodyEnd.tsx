@@ -4,7 +4,6 @@ import {
     getBodyEnd,
     getViewLog,
     logView,
-    initSlot,
     getWeeklyArticleHistory,
 } from '@guardian/slot-machine-client';
 import {
@@ -60,6 +59,7 @@ type Props = {
     isMinuteArticle: boolean;
     isPaidContent: boolean;
     tags: TagType[];
+    isProd: boolean;
 };
 
 // TODO specify return type (need to update client to provide this first)
@@ -105,11 +105,13 @@ const MemoisedInner = ({
     isMinuteArticle,
     isPaidContent,
     tags,
+    isProd,
 }: Props) => {
     const [data, setData] = useState<{
         slot?: {
             html: string;
             css: string;
+            js: string;
         };
     }>();
 
@@ -127,13 +129,18 @@ const MemoisedInner = ({
             isMinuteArticle,
             isPaidContent,
             tags,
+            isProd,
         });
-        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
+        getBodyEnd(contributionsPayload)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
                 setData({
-                    slot: { html: json.data.html, css: json.data.css },
+                    slot: {
+                        html: json.data.html,
+                        css: json.data.css,
+                        js: json.data.js,
+                    },
                 }),
             )
             .then(() => sendOphanEvent('INSERT'))
@@ -155,9 +162,19 @@ const MemoisedInner = ({
             // Add a new entry to the view log when we know an Epic is viewed
             logView(testName);
             sendOphanEvent('VIEW');
-            initSlot();
         }
     }, [hasBeenSeen]);
+
+    // Rely on useEffect to run a function that initialises the slot once it's
+    // been injected in the DOM.
+    useEffect(() => {
+        if (data && data.slot && data.slot.js) {
+            // This should only run once
+            // eslint-disable-next-line no-eval
+            const init = eval(data.slot.js);
+            init(isProd);
+        }
+    }, [isProd, data]);
 
     if (data && data.slot) {
         return (
@@ -183,6 +200,7 @@ export const SlotBodyEnd = ({
     isMinuteArticle,
     isPaidContent,
     tags,
+    isProd,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -207,6 +225,7 @@ export const SlotBodyEnd = ({
             isMinuteArticle={isMinuteArticle}
             isPaidContent={isPaidContent}
             tags={tags}
+            isProd={isProd}
         />
     );
 };
