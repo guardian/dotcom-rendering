@@ -36,16 +36,16 @@ const PageStyles = css`
     ${fontFace("Guardian Text Sans Web", new Some(700), new None, "/assets/fonts/GuardianTextSans-Bold.ttf")}
     ${fontFace("Guardian Text Sans Web", new Some(700), new Some("italic"), "/assets/fonts/GuardianTextSans-BoldItalic.ttf")}
 
-    ${fontFace("Guardian Headline", new Some(300), new None, "/assets/fonts/GHGuardianHeadline-Light.ttf")}
-    ${fontFace("Guardian Headline", new Some(300), new Some("italic"), "/assets/fonts/GHGuardianHeadline-LightItalic.ttf")}
-    ${fontFace("Guardian Headline", new Some(400), new None, "/assets/fonts/GHGuardianHeadline-Regular.ttf")}
-    ${fontFace("Guardian Headline", new Some(400), new Some("italic"), "/assets/fonts/GHGuardianHeadline-RegularItalic.ttf")}
-    ${fontFace("Guardian Headline", new Some(500), new None,  "/assets/fonts/GHGuardianHeadline-Medium.ttf")}
-    ${fontFace("Guardian Headline", new Some(500), new Some("italic"),  "/assets/fonts/GHGuardianHeadline-MediumItalic.ttf")}
-    ${fontFace("Guardian Headline", new Some(600), new None,  "/assets/fonts/GHGuardianHeadline-Semibold.ttf")}
-    ${fontFace("Guardian Headline", new Some(600), new Some("italic"),  "/assets/fonts/GHGuardianHeadline-SemiboldItalic.ttf")}
-    ${fontFace("Guardian Headline", new Some(700), new None, "/assets/fonts/GHGuardianHeadline-Bold.ttf")}
-    ${fontFace("Guardian Headline", new Some(700), new Some("italic"), "/assets/fonts/GHGuardianHeadline-BoldItalic.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(300), new None, "/assets/fonts/GHGuardianHeadline-Light.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(300), new Some("italic"), "/assets/fonts/GHGuardianHeadline-LightItalic.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(400), new None, "/assets/fonts/GHGuardianHeadline-Regular.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(400), new Some("italic"), "/assets/fonts/GHGuardianHeadline-RegularItalic.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(500), new None,  "/assets/fonts/GHGuardianHeadline-Medium.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(500), new Some("italic"),  "/assets/fonts/GHGuardianHeadline-MediumItalic.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(600), new None,  "/assets/fonts/GHGuardianHeadline-Semibold.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(600), new Some("italic"),  "/assets/fonts/GHGuardianHeadline-SemiboldItalic.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(700), new None, "/assets/fonts/GHGuardianHeadline-Bold.ttf")}
+    ${fontFace("GH Guardian Headline", new Some(700), new Some("italic"), "/assets/fonts/GHGuardianHeadline-BoldItalic.ttf")}
 
     ${fontFace("Guardian Icons", new None, new None, "/assets/fonts/icons.otf")}
 
