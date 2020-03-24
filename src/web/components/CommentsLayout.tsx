@@ -17,6 +17,11 @@ type Props = {
     isClosedForComments: boolean;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
+    expanded: boolean;
+    commentPage?: number;
+    commentPageSize?: 20 | 25 | 50 | 100;
+    commentOrderBy?: 'newest' | 'oldest' | 'mostrecommended';
+    commentToScrollTo?: number;
 };
 
 const containerStyles = css`
@@ -31,9 +36,14 @@ export const CommentsLayout = ({
     baseUrl,
     shortUrl,
     commentCount,
+    commentPage,
+    commentPageSize,
+    commentOrderBy,
+    expanded,
     isClosedForComments,
     discussionD2Uid,
     discussionApiClientHeader,
+    commentToScrollTo,
 }: Props) => (
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
@@ -48,11 +58,16 @@ export const CommentsLayout = ({
             </Hide>
             <Comments
                 baseUrl={baseUrl}
+                initialPage={commentPage}
+                pageSizeOverride={commentPageSize}
+                orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,
                     'GU-Client': discussionApiClientHeader,
                 }}
+                expanded={expanded}
+                commentToScrollTo={commentToScrollTo}
             />
         </div>
     </Flex>

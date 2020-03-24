@@ -27,6 +27,7 @@ export const Default = () => (
                 isClosedForComments={false}
                 discussionD2Uid="testD2Header"
                 discussionApiClientHeader="testClientHeader"
+                expanded={false}
             />
             <RightColumn>{/* TODO: Comments ad slot goes here */}</RightColumn>
         </Flex>
