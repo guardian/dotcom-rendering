@@ -4,7 +4,8 @@ import React from 'react';
 import { css } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 
-import { basePx, headlineFont, darkModeCss, headlineFontStyles } from 'styles';
+import { basePx, darkModeCss } from 'styles';
+import { headline } from '@guardian/src-foundations/typography';
 
 
 // ----- Styles ----- //
@@ -15,11 +16,9 @@ const Styles = css`
     position: relative;
     margin-top: -78px;
 
-    ${headlineFont}
-
     h1 {
-        font-weight: 700;
-        ${headlineFontStyles}
+        ${headline.medium({ fontWeight: 'bold' })}
+        margin: 0;
         color: ${neutral[100]};
     }
 `;
