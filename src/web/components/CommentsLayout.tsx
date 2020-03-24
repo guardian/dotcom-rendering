@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
@@ -18,14 +19,24 @@ type Props = {
     isClosedForComments: boolean;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
+    expanded: boolean;
+    commentPage?: number;
+    commentPageSize?: 20 | 25 | 50 | 100;
+    commentOrderBy?: 'newest' | 'oldest' | 'mostrecommended';
+    commentToScrollTo?: number;
 };
 
 const containerStyles = css`
     display: flex;
     flex-grow: 1;
+    flex-direction: column;
     ${from.desktop} {
         width: 620px;
     }
+`;
+
+const bottomPadding = css`
+    padding-bottom: ${space[2]}px;
 `;
 
 export const CommentsLayout = ({
@@ -33,9 +44,14 @@ export const CommentsLayout = ({
     baseUrl,
     shortUrl,
     commentCount,
+    commentPage,
+    commentPageSize,
+    commentOrderBy,
+    expanded,
     isClosedForComments,
     discussionD2Uid,
     discussionApiClientHeader,
+    commentToScrollTo,
 }: Props) => (
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
@@ -47,16 +63,23 @@ export const CommentsLayout = ({
         </LeftColumn>
         <div className={containerStyles}>
             <Hide when="above" breakpoint="leftCol">
-                <SignedInAs user={user} commentCount={commentCount} />
+                <div className={bottomPadding}>
+                    <SignedInAs user={user} commentCount={commentCount} />
+                </div>
             </Hide>
             <Comments
                 user={user}
                 baseUrl={baseUrl}
+                initialPage={commentPage}
+                pageSizeOverride={commentPageSize}
+                orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{
                     'D2-X-UID': discussionD2Uid,
                     'GU-Client': discussionApiClientHeader,
                 }}
+                expanded={expanded}
+                commentToScrollTo={commentToScrollTo}
             />
         </div>
     </Flex>
