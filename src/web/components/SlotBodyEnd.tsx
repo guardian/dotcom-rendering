@@ -169,10 +169,17 @@ const MemoisedInner = ({
     // been injected in the DOM.
     useEffect(() => {
         if (data && data.slot && data.slot.js) {
-            // This should only run once
-            // eslint-disable-next-line no-eval
-            const init = eval(data.slot.js);
-            init(isProd);
+            // The init function should only be called once
+            try {
+                // eslint-disable-next-line no-eval
+                const init = eval(data.slot.js);
+                init({ isProd });
+            } catch (error) {
+                window.guardian.modules.sentry.reportError(
+                    error,
+                    'slot-body-end',
+                );
+            }
         }
     }, [isProd, data]);
 
