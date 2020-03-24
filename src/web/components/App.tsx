@@ -252,6 +252,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                 ) : (
                     <Lazy margin={300}>
                         <CommentsLayout
+                            user={user}
                             baseUrl={CAPI.config.discussionApiUrl}
                             shortUrl={CAPI.config.shortUrlId}
                             commentCount={commentCount}
