@@ -43,13 +43,14 @@ const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactEle
     styledH(
         'a',
         { css: anchorStyles(getPillarStyles(props.pillar).kicker), href: props.href },
-        props.text,
+        transform(props.text, props.pillar),
     );
 
 const listStyles: SerializedStyles = css`
     list-style: none;
+    margin: ${remSpace[2]} 0;
     padding-left: 0;
-    padding-right: .5rem;
+    padding-right: ${remSpace[2]};
 `
 
 const listItemStyles: SerializedStyles = css`
@@ -226,11 +227,12 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
 
         &::before {
             ${icons}
-            font-size: 2.2rem;
+            font-size: 1.5rem;
+            line-height: 1.15;
+            font-weight: 300;
             content: '\\e11c';
             display: inline-block;
             margin-right: ${basePx(1)};
-            ${headline.xsmall({ fontWeight: 'light' })};
         }
     }
 
