@@ -34,6 +34,52 @@ const getAttr = (attr: string) => (node: Node): Option<string> =>
 const getHref: (node: Node) => Option<string> =
     getAttr('href');
 
+const bulletStyles = (colour: string): SerializedStyles => css`
+    color: transparent;
+    display: inline-block;
+
+    &::before {
+        content: '';
+        background-color: ${colour};
+        width: 1rem;
+        height: 1rem;
+        border-radius: .5rem;
+        display: inline-block;
+        vertical-align: middle;
+    }
+`;
+
+const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
+    styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
+        styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
+        props.text.replace(/•/, ''),
+        null
+    );
+
+const HorizontalRuleStyles = css`
+    display: block;
+    width: 8.75rem;
+    height: 0.125rem;
+    margin: 0;
+    border: 0;
+    margin-top: 3rem;
+    margin-bottom: 0.1875rem;
+    background-color: ${neutral[93]};
+`
+
+const HorizontalRule = (): ReactElement =>
+    styledH('hr', { css: HorizontalRuleStyles }, null)
+
+
+const transform = (text: string, pillar: Pillar): ReactElement | string => {
+    if (text.includes('•')) {
+        return h(Bullet, { pillar, text });
+    } else if (text.includes('* * *')) {
+        return h(HorizontalRule, null, null);
+    }
+    return text;
+}
+
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     text-decoration: none;
@@ -50,7 +96,7 @@ const listStyles: SerializedStyles = css`
     list-style: none;
     margin: ${remSpace[2]} 0;
     padding-left: 0;
-    padding-right: ${remSpace[2]};
+    {remSpace[2]};
 `
 
 const listItemStyles: SerializedStyles = css`
@@ -75,21 +121,6 @@ const listItemStyles: SerializedStyles = css`
     }
 `
 
-const bulletStyles = (colour: string): SerializedStyles => css`
-    color: transparent;
-    display: inline-block;
-
-    &::before {
-        content: '';
-        background-color: ${colour};
-        width: 1rem;
-        height: 1rem;
-        border-radius: .5rem;
-        display: inline-block;
-        vertical-align: middle;
-    }
-`;
-
 const HeadingTwoStyles = css`
     font-size: 1.4rem;
     font-weight: 700;
@@ -100,41 +131,11 @@ const HeadingTwoStyles = css`
     }
 `
 
-const HorizontalRuleStyles = css`
-    display: block;
-    width: 8.75rem;
-    height: 0.125rem;
-    margin: 0;
-    border: 0;
-    margin-top: 3rem;
-    margin-bottom: 0.1875rem;
-    background-color: ${neutral[93]};
-`
-
 const TweetStyles = css`
     ${until.wide} {
         clear: both;
     }
 `;
-
-const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
-        styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
-        props.text.replace(/•/, ''),
-        null
-    );
-
-const HorizontalRule = (): ReactElement =>
-    styledH('hr', { css: HorizontalRuleStyles }, null)
-
-const transform = (text: string, pillar: Pillar): ReactElement | string => {
-    if (text.includes('•')) {
-        return h(Bullet, { pillar, text });
-    } else if (text.includes('* * *')) {
-        return h(HorizontalRule, null, null);
-    }
-    return text;
-}
 
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
