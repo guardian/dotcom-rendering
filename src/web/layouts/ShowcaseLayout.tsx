@@ -470,7 +470,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     {showOnwardsLower && <Section sectionId="onwards-lower" />}
 
                     {showComments && (
-                        <Section>
+                        <Section sectionId="comments">
                             <Flex>
                                 <div id="comments-root" />
                                 <RightColumn>
