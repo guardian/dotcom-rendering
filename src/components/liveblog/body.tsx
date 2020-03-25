@@ -29,22 +29,22 @@ interface LiveblogBodyProps {
     imageMappings: ImageMappings;
 }
 
+async function loadMoreBlocks(): Promise<void> {
+    const response = await fetch('?date=2020-03-09T11%3A11%3A49Z&filter=newer');
+    const buffer = Buffer.from(await response.arrayBuffer());
+    const transport = new BufferedTransport(buffer);
+    const protocol = new CompactProtocol(transport);
+    const blocks: Blocks = Blocks.read(protocol);
+    console.log(blocks);
+}
+
+const LoadMore = ({ total, pillar }: { total: number, pillar: Pillar }): JSX.Element | null => total > 7
+    ? <LiveblogLoadMore onLoadMore={loadMoreBlocks} pillar={pillar}/>
+    : null;
+
 const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
     const { pillar, blocks: initialBlocks, imageMappings, totalBodyBlocks } = props;
     const [blocks] = useState(initialBlocks);
-
-    async function loadMoreBlocks(): Promise<void> {
-        const response = await fetch('?date=2020-03-09T11%3A11%3A49Z&filter=newer');
-        const buffer = Buffer.from(await response.arrayBuffer());
-        const transport = new BufferedTransport(buffer);
-        const protocol = new CompactProtocol(transport);
-        const blocks: Blocks = Blocks.read(protocol);
-        console.log(blocks);
-    }
-
-    const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 7
-        ? <LiveblogLoadMore onLoadMore={loadMoreBlocks} pillar={pillar}/>
-        : null;
 
     return (
         <article id="blocks" css={LiveBodyStyles(getPillarStyles(pillar))}>
@@ -61,7 +61,7 @@ const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
                         </LiveblogBlock>
                 })
             }
-            <LoadMore total={totalBodyBlocks}/>
+            <LoadMore total={totalBodyBlocks} pillar={pillar}/>
         </article>
     );
 
