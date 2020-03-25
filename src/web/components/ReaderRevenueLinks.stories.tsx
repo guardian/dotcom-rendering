@@ -46,6 +46,7 @@ Header.story = {
     name: 'Header - desktop',
     parameters: {
         viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [1300] },
     },
 };
 
@@ -65,6 +66,7 @@ HeaderMobile.story = {
     name: 'Header - mobileMedium',
     parameters: {
         viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [380] },
     },
 };
 
@@ -84,6 +86,7 @@ Footer.story = {
     name: 'Footer - desktop',
     parameters: {
         viewport: { defaultViewport: 'desktop' },
+        chromatic: { viewports: [1300] },
     },
 };
 
@@ -103,5 +106,6 @@ FooterMobile.story = {
     name: 'Footer - mobileMedium',
     parameters: {
         viewport: { defaultViewport: 'mobileMedium' },
+        chromatic: { viewports: [380] },
     },
 };
