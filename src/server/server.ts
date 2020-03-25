@@ -93,14 +93,10 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
               element,
               hydrationProps
             } = Page({ content, imageSalt, getAssetLocation });
-            const props = JSON.stringify({ ...hydrationProps, imageSalt })
-              .replace(/’/g, "&rsquo;")
-              .replace(/“/g, "&ldquo;")
-              .replace(/”/g, "&rdquo;")
-              .replace(/…/g, "&hellip;");
             res.set('Link', getPrefetchHeader(resources));
             res.write('<!DOCTYPE html>');
-            res.write(`<script>window.__INITIAL__DATA__ = ${props}</script>`)
+            res.write('<meta charset="UTF-8" />')
+            res.write(`<script>window.__INITIAL__DATA__ = ${JSON.stringify(hydrationProps)}</script>`)
             res.write(renderToString(element));
             res.end();
           }

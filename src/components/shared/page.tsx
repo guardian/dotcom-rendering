@@ -203,7 +203,6 @@ function Page({ content, imageSalt, getAssetLocation }: Props): ElementWithResou
         <html lang="en" css={PageStyles}>
             <head>
                 <title>{content.id}</title>
-                <meta charSet="UTF-8" />
                 <meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
                 <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
             </head>
