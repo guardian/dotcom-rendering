@@ -53,6 +53,17 @@ const shortStyles = css`
     }
 `;
 
+const linkStyles = css`
+    color: inherit;
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
+    :visited {
+        color: inherit;
+    }
+`;
+
 export const CommentCount = ({ short, long, pillar }: Props) => {
     return (
         <div
@@ -68,7 +79,9 @@ export const CommentCount = ({ short, long, pillar }: Props) => {
                 className={longStyles}
                 aria-hidden="true"
             >
-                {long}
+                <a href="#comments" className={linkStyles}>
+                    {long}
+                </a>
             </div>
             <div
                 data-testid="short-comment-count"
