@@ -11,6 +11,7 @@ type Props = {
     pillar: Pillar;
     short: string;
     long: string;
+    setOpenComments: Function;
 };
 
 const containerStyles = (pillar: Pillar) => css`
@@ -64,7 +65,12 @@ const linkStyles = css`
     }
 `;
 
-export const CommentCount = ({ short, long, pillar }: Props) => {
+export const CommentCount = ({
+    short,
+    long,
+    pillar,
+    setOpenComments,
+}: Props) => {
     return (
         <div
             className={containerStyles(pillar)}
@@ -79,7 +85,11 @@ export const CommentCount = ({ short, long, pillar }: Props) => {
                 className={longStyles}
                 aria-hidden="true"
             >
-                <a href="#comments" className={linkStyles}>
+                <a
+                    href="#comments"
+                    className={linkStyles}
+                    onClick={() => setOpenComments(true)}
+                >
                     {long}
                 </a>
             </div>
