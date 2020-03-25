@@ -38,9 +38,10 @@ async function loadMoreBlocks(): Promise<void> {
     console.log(blocks);
 }
 
-const LoadMore = ({ total, pillar }: { total: number, pillar: Pillar }): JSX.Element | null => total > 7
-    ? <LiveblogLoadMore onLoadMore={loadMoreBlocks} pillar={pillar}/>
-    : null;
+const LoadMore = ({ total, pillar }: { total: number; pillar: Pillar }): JSX.Element | null =>
+    total > 7
+        ? <LiveblogLoadMore onLoadMore={loadMoreBlocks} pillar={pillar}/>
+        : null;
 
 const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
     const { pillar, blocks: initialBlocks, imageMappings, totalBodyBlocks } = props;

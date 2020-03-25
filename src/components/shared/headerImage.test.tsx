@@ -11,7 +11,8 @@ configure({ adapter: new Adapter() });
 describe('HeaderImage component renders as expected', () => {
     it('Renders null if no block element', () => {
         const image: Option<Image> = new None;
-        const headerImage = shallow(<HeaderImage image={image} imageMappings={{}} pillar={Pillar.news}/>)
+        const news = Pillar.news;
+        const headerImage = shallow(<HeaderImage image={image} imageMappings={{}} pillar={news}/>)
         expect(headerImage.html()).toBe(null);
     })
 });
