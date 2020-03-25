@@ -72,7 +72,7 @@ const mobileStickyAdStyles = css`
         background-color: ${neutral[97]};
         padding: 0 0.5rem;
         border-top: 0.0625rem solid ${border.secondary};
-        color: ${palette.neutral[60]};
+        color: ${neutral[60]};
         text-align: left;
         box-sizing: border-box;
         ${textSans.xsmall()};

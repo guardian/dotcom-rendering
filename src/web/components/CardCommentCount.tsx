@@ -86,7 +86,7 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Immersive':
         default:
             return css`
-                color: ${palette.neutral[60]};
+                color: ${neutral[60]};
                 svg {
                     fill: ${neutral[46]};
                 }
