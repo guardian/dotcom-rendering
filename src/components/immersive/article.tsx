@@ -78,7 +78,6 @@ const HeaderImageStyles = css`
 
 interface Props {
     imageMappings: ImageMappings;
-    imageSalt: string;
     item: Item;
     children: ReactNode[];
 }

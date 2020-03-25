@@ -61,8 +61,7 @@ interface Props {
     alt: string;
     width: number;
     height: number;
-    salt: string;
-    imageMappings?: ImageMappings;
+    imageMappings: ImageMappings;
     sizes: string;
     caption: string;
     credit: string;

@@ -17,7 +17,7 @@ import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Design, Display } from 'item';
-import { ElementType } from 'mapiThriftModels';
+import { ElementType, IBlock as Block, IBlockElement as BlockElement } from 'mapiThriftModels';
 import { sign } from 'components/image';
 
 
@@ -93,15 +93,15 @@ export interface ImageMappings {
 }
 
 const getImageMappings = (imageSalt: string, capi: Content): ImageMappings => {
-    return capi.blocks?.body
-        ?.flatMap(block => block.elements
-            .filter(element => element.type === ElementType.IMAGE)
-            .flatMap(element => {
+    const blocks: Block[] = [capi.blocks?.main, capi.blocks?.body].flat()
+    return blocks
+        ?.flatMap(block => block?.elements
+            .filter((element: BlockElement) => element.type === ElementType.IMAGE)
+            .flatMap((element: BlockElement) => {
                 return element.assets.map(asset => {
                     if (asset.file) {
                         const url = new URL(asset.file);
-                        const s = sign(imageSalt, url.pathname);
-                        return { [url.pathname]: s }
+                        return { [url.pathname]: sign(imageSalt, url.pathname) }
                     }
                 })
             }))
@@ -131,7 +131,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
 
         return { element: (
             <WithScript src={articleScript}>
-                <Opinion imageSalt={imageSalt} item={item}>
+                <Opinion imageMappings={imageMappings} item={item}>
                     {commentContent}
                 </Opinion>
             </WithScript>
@@ -141,7 +141,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     if (item.design === Design.Live) {
         return { element: (
             <WithScript src={liveblogScript}>
-                <LiveblogArticle item={item} imageSalt={imageSalt} imageMappings={imageMappings} />
+                <LiveblogArticle item={item} imageMappings={imageMappings} />
             </WithScript>
         ), resources: [liveblogScript], hydrationProps: { ...capi, imageMappings } };
     }
@@ -153,7 +153,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
 
         return { element: (
             <WithScript src={articleScript}>
-                <Immersive imageSalt={imageSalt} imageMappings={imageMappings} item={item}>
+                <Immersive imageMappings={imageMappings} item={item}>
                     {immersiveContent}
                 </Immersive>
             </WithScript>
@@ -171,7 +171,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
 
         return { element: (
             <WithScript src={articleScript}>
-                <Standard imageSalt={imageSalt} item={item}>
+                <Standard imageMappings={imageMappings} item={item}>
                     {content}
                 </Standard>
             </WithScript>

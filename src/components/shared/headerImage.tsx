@@ -35,14 +35,14 @@ const Styles = (width: number, height: number): SerializedStyles => css`
 
 interface HeaderImageProps {
     image: Option<Image>;
-    imageMappings?: ImageMappings;
-    imageSalt?: string;
+    imageMappings: ImageMappings;
     className?: SerializedStyles | null;
     pillar: Pillar;
 }
 
 const HeaderImage = (props: HeaderImageProps): JSX.Element | null => {
-    const { className, image, imageMappings, pillar, imageSalt } = props;
+    const { className, image, imageMappings, pillar} = props;
+    console.log(imageMappings)
     const headerImage: Option<JSX.Element | null> = image.fmap(imageData =>
         <div css={[className, Styles(imageData.width, imageData.height)]}>
             <figure aria-labelledby={captionId}>
@@ -52,7 +52,6 @@ const HeaderImage = (props: HeaderImageProps): JSX.Element | null => {
                     height={imageData.height}
                     width={imageData.width}
                     sizes={`(min-width: ${breakpoints.wide}px) 620px, 100vw`}
-                    imageSalt={imageSalt}
                     imageMappings={imageMappings}
                     caption={imageData.caption}
                     captionString={imageData.captionString}

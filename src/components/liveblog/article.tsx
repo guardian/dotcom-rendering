@@ -48,20 +48,18 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 interface LiveblogArticleProps {
     item: Liveblog;
     imageMappings: ImageMappings;
-    imageSalt: string;
 }
 
-const LiveblogArticle = ({ item, imageMappings, imageSalt }: LiveblogArticleProps): JSX.Element => {
+const LiveblogArticle = ({ item, imageMappings }: LiveblogArticleProps): JSX.Element => {
     return (
         <main css={LiveblogArticleStyles}>
             <div css={BorderStyles}>
                 <LiveblogSeries series={item.series} pillar={item.pillar} />
                 <LiveblogHeadline headline={item.headline} pillar={item.pillar} />
                 <LiveblogStandfirst standfirst={item.standfirst} pillar={item.pillar} />
-                <LiveblogByline item={item} imageSalt={imageSalt} />
+                <LiveblogByline item={item} imageMappings={imageMappings} />
                 <HeaderImage
                     image={item.mainImage}
-                    imageSalt={imageSalt}
                     imageMappings={imageMappings}
                     className={HeaderImageStyles(getPillarStyles(item.pillar))}
                     pillar={item.pillar}

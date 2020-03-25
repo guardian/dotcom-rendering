@@ -177,8 +177,7 @@ const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
 interface ImageProps {
     url: string;
     alt: string;
-    imageMappings?: ImageMappings;
-    imageSalt?: string;
+    imageMappings: ImageMappings;
     sizes: string;
     width: number;
     height: number;
@@ -198,7 +197,7 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
-    const { url, sizes, alt, width, height, credit, captionString, imageSalt = "" } = props;
+    const { url, sizes, alt, width, height, credit, captionString, imageMappings } = props;
 
     if (!url) {
         return null;
@@ -206,10 +205,10 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 
     return styledH('img', {
         sizes,
-        srcSet: srcset(url, imageSalt),
+        srcSet: srcset(url, imageMappings),
         alt,
         className: 'js-launch-slideshow',
-        src: src(imageSalt, url, width),
+        src: src(imageMappings, url, width),
         css: imageStyles(width, height),
         caption: captionString,
         credit,
@@ -339,7 +338,6 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
                 image: {
                     url: file,
                     alt,
-                    salt: "",
                     imageMappings,
                     width,
                     height,

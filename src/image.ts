@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
-import { createHash } from 'crypto';
-
+import { ImageMappings } from 'components/shared/page';
 
 // ----- Setup ----- //
 
@@ -24,10 +23,7 @@ const defaultQuality = 85;
 const getSubdomain = (domain: string): string =>
     domain.split('.')[0];
 
-const sign = (salt: string, path: string): string =>
-    createHash('md5').update(salt + path).digest('hex')    
-
-function src(salt: string, input: string, width: number): string {
+function src(imageMappings: ImageMappings, input: string, width: number): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
@@ -36,29 +32,15 @@ function src(salt: string, input: string, width: number): string {
         quality: defaultQuality.toString(),
         fit: 'bounds',
         'sig-ignores-params': 'true',
-        s: sign(salt, url.pathname),
+        s: imageMappings[url.pathname],
     });
 
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
-/**
- * Produces a srcset as a string, with the asset URL transformed into image
- * resizer URLs. The resulting srcset can be used with the `<img>` and
- * `<source>` tags.
- * 
- * @param url The asset URL (supplied by CAPI) that will be used to generate
- * image resizer URLs
- * @param salt Salt used to sign (hash) the image
- * @returns An image srcset using widths ('w')
- * @example <caption>Create an image with a 'srcset':</caption>
- * const srcSet = srcset('https://media.guim.co.uk/path/of/image.jpg', salt);
- * const image = React.createElement('img', { srcSet });
- * 
- */
-const srcset = (url: string, salt: string): string =>
+const srcset = (url: string, imageMappings: ImageMappings): string =>
     widths
-        .map(width => `${src(salt, url, width)} ${width}w`)
+        .map(width => `${src(imageMappings, url, width)} ${width}w`)
         .join(', ');
 
 

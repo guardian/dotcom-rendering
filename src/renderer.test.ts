@@ -82,7 +82,7 @@ describe('renderer returns expected content', () => {
         const imageProps = {
             url: '',
             alt: "alt",
-            salt: "salt",
+            imageMappings: {},
             sizes: "sizes",
             width: 500,
             height: 500,
@@ -98,7 +98,7 @@ describe('renderer returns expected content', () => {
         const imageProps = {
             url: 'https://media.guim.co.uk/image.jpg',
             alt: "alt",
-            salt: "salt",
+            imageMappings: {},
             sizes: "sizes",
             width: 500,
             height: 500,
