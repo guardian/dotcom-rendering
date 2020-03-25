@@ -1,11 +1,11 @@
 import React from 'react';
-import { icons, basePx, headlineFont } from 'styles';
+import { icons, basePx } from 'styles';
 import { css, SerializedStyles } from '@emotion/core'
 import { neutral } from '@guardian/src-foundations/palette';
 import { makeRelativeDate } from 'date';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { LiveBlock } from 'item';
-import { body } from '@guardian/src-foundations/typography';
+import { body, headline } from '@guardian/src-foundations/typography';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${neutral[100]};
@@ -103,8 +103,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
         outline: none;
 
         h2 {
-            font-size: 18px;
-            ${headlineFont};
+            ${headline.xxxsmall()}
         }
 
         &::after {
