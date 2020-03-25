@@ -29,6 +29,7 @@ export const Live = () => {
                 commentCount={239}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
+                setOpenComments={() => {}}
             />
         </Container>
     );
@@ -55,6 +56,7 @@ export const ShareOnly = () => {
                 commentCount={0}
                 pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
                 pillar="news"
+                setOpenComments={() => {}}
             />
         </Container>
     );
@@ -85,6 +87,7 @@ export const CommentOnly = () => {
                 commentCount={239}
                 pageId="/lifeandstyle/abc"
                 pillar="news"
+                setOpenComments={() => {}}
             />
         </Container>
     );

@@ -31,6 +31,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -46,6 +47,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -61,6 +63,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -77,6 +80,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -95,6 +99,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={1}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -113,6 +118,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -131,6 +137,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={1}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -150,6 +157,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={0}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 
@@ -169,6 +177,7 @@ describe('Counts', () => {
                 pageId={pageId}
                 commentCount={1}
                 pillar="news"
+                setOpenComments={() => {}}
             />,
         );
 

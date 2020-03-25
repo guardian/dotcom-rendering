@@ -36,6 +36,11 @@ const commentIdFromUrl = () => {
     return parseInt(hash.split('-')[1], 10);
 };
 
+const hasCommentsHashInUrl = () => {
+    const { hash } = window.location;
+    return hash && hash === '#comments';
+};
+
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
     const [user, setUser] = useState<UserProfile>();
@@ -51,8 +56,10 @@ export const App = ({ CAPI, NAV }: Props) => {
     const [commentOrderBy, setCommentOrderBy] = useState<
         'newest' | 'oldest' | 'mostrecommended'
     >();
+    const [openComments, setOpenComments] = useState<boolean>(false);
 
     const hashCommentId = commentIdFromUrl();
+    const hasCommentsHash = hasCommentsHashInUrl();
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
@@ -115,10 +122,17 @@ export const App = ({ CAPI, NAV }: Props) => {
                     setCommentPage(context.page);
                     setCommentPageSize(context.pageSize);
                     setCommentOrderBy(context.orderBy);
+                    setOpenComments(true);
                 },
             );
         }
     }, [CAPI.config.discussionApiUrl, hashCommentId]);
+
+    useEffect(() => {
+        if (hasCommentsHash) {
+            setOpenComments(true);
+        }
+    }, [hasCommentsHash]);
 
     return (
         // Do you need to Hydrate or do you want a Portal?
@@ -184,6 +198,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     pageId={CAPI.config.pageId}
                     commentCount={commentCount}
                     pillar={CAPI.pillar}
+                    setOpenComments={setOpenComments}
                 />
             </Portal>
             <Portal root="most-viewed-right">
@@ -229,10 +244,10 @@ export const App = ({ CAPI, NAV }: Props) => {
                 </Lazy>
             </Portal>
 
-            {/* Don't lazy render comments if we have a comment id in the url because
-                we want to scroll the page to it */}
+            {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
+                these cases we will be scrolling to comments and want them loaded */}
             <Portal root="comments-root">
-                {hashCommentId ? (
+                {openComments ? (
                     <CommentsLayout
                         user={user}
                         baseUrl={CAPI.config.discussionApiUrl}
