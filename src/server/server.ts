@@ -61,7 +61,7 @@ async function serveArticlePost(
 
 async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
   try {
-    // mock content from mapi
+    // mock liveblog content from mapi
     if (req.query.date || req.query.filter) {
       res.json(response)
     }
