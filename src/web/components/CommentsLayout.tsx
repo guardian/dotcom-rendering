@@ -33,6 +33,9 @@ const containerStyles = css`
     ${from.desktop} {
         width: 620px;
     }
+
+    padding-top: ${space[3]}px;
+    padding-bottom: ${space[6]}px;
 `;
 
 const bottomPadding = css`
