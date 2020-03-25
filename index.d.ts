@@ -260,6 +260,7 @@ type CAPIBrowserType = {
         ampIframeUrl: string;
         ampPrebid: boolean;
         permutive: boolean;
+        enableSentryReporting: boolean;
         cmpUi: boolean;
         slotBodyEnd: boolean;
         isSensitive: boolean;

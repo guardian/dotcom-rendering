@@ -100,6 +100,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
             slotBodyEnd: CAPI.config.switches.slotBodyEnd,
             ampPrebid: CAPI.config.switches.ampPrebid,
             permutive: CAPI.config.switches.permutive,
+            enableSentryReporting: CAPI.config.switches.enableSentryReporting,
 
             // used by lib/ad-targeting.ts
             isSensitive: CAPI.config.isSensitive,
