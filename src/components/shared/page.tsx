@@ -99,7 +99,7 @@ const getImageMappings = (imageSalt: string, capi: Content): ImageMappings => {
             .filter((element: BlockElement) => element.type === ElementType.IMAGE)
             .flatMap((element: BlockElement) => {
                 return element.assets.map(asset => {
-                    if (asset.file) {
+                    if (asset.typeData?.isMaster && asset.file) {
                         const url = new URL(asset.file);
                         return { [url.pathname]: sign(imageSalt, url.pathname) }
                     }
