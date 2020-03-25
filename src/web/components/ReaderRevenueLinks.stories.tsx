@@ -37,7 +37,6 @@ export const Header = () => {
                 edition="UK"
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
-                noResponsive={true}
                 inHeader={true}
             />
         </Container>
@@ -57,7 +56,6 @@ export const HeaderMobile = () => {
                 edition="UK"
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
-                noResponsive={false}
                 inHeader={true}
             />
         </Container>
@@ -77,7 +75,6 @@ export const Footer = () => {
                 edition="UK"
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
-                noResponsive={false}
                 inHeader={false}
             />
         </Container>
@@ -97,7 +94,6 @@ export const FooterMobile = () => {
                 edition="UK"
                 urls={revenueUrls}
                 dataLinkNamePrefix=""
-                noResponsive={true}
                 inHeader={false}
             />
         </Container>
