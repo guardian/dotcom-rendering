@@ -105,6 +105,11 @@ export const document = ({ data }: Props) => {
 
     const { openGraphData } = CAPI;
     const { twitterData } = CAPI;
+    const keywords =
+        typeof CAPI.config.keywords === 'undefined' ||
+        CAPI.config.keywords === 'Network Front'
+            ? ''
+            : CAPI.config.keywords;
 
     return htmlTemplate({
         linkedData,
@@ -126,5 +131,6 @@ export const document = ({ data }: Props) => {
         ampLink,
         openGraphData,
         twitterData,
+        keywords,
     });
 };

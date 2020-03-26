@@ -22,6 +22,7 @@ export const htmlTemplate = ({
     ampLink,
     openGraphData,
     twitterData,
+    keywords,
 }: {
     title?: string;
     description: string;
@@ -39,6 +40,7 @@ export const htmlTemplate = ({
     ampLink?: string;
     openGraphData: { [key: string]: string };
     twitterData: { [key: string]: string };
+    keywords: string;
 }) => {
     const favicon =
         process.env.NODE_ENV === 'production'
@@ -160,6 +162,9 @@ export const htmlTemplate = ({
 
                 <script>${prepareCmpString}</script>
 
+                <noscript>
+                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${keywords}" />
+                </noscript>
                 ${[
                     ...priorityScriptTags,
                     ...priorityLegacyScriptTags,
