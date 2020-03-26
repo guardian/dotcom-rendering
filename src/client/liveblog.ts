@@ -27,12 +27,20 @@ const browserParser = (html: string): DocumentFragment =>
         .toOption()
         .withDefault(new DocumentFragment())
 
-const {
-    pillar,
-    blocks,
-    totalBodyBlocks
-} = fromCapiLiveBlog(browserParser)(window.__INITIAL__DATA__);
 
-const { imageMappings } = window.__INITIAL__DATA__;
+try {
+    const hydrationProps = JSON.parse(document.getElementById('hydrationProps')?.textContent ?? "");
 
-ReactDOM.hydrate(h(LiveblogBody, { pillar, blocks, imageMappings, totalBodyBlocks }), document.querySelector('#blocks'))
+    if (hydrationProps) {
+        const {
+            pillar,
+            blocks,
+            totalBodyBlocks
+        } = fromCapiLiveBlog(browserParser)(hydrationProps);
+
+        const { imageMappings } = hydrationProps;
+        ReactDOM.hydrate(h(LiveblogBody, { pillar, blocks, imageMappings, totalBodyBlocks }), document.querySelector('#blocks'))
+    }
+} catch (e) {
+    console.error(`Unable to hydrate LiveblogBody: ${e}`)
+}

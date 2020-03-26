@@ -96,7 +96,7 @@ async function serveArticle(req: Request, res: ExpressResponse): Promise<void> {
             res.set('Link', getPrefetchHeader(resources));
             res.write('<!DOCTYPE html>');
             res.write('<meta charset="UTF-8" />')
-            res.write(`<script>window.__INITIAL__DATA__ = ${JSON.stringify(hydrationProps)}</script>`)
+            res.write(`<script id="hydrationProps" type="application/json">${JSON.stringify(hydrationProps)}</script>`)
             res.write(renderToString(element));
             res.end();
           }
