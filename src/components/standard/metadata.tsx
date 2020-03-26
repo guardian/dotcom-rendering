@@ -31,9 +31,14 @@ const textStyles = css`
     padding-top: ${remSpace[1]};
 `;
 
+const avatarStyles = css`
+    margin-right: ${remSpace[3]};
+    margin-top: ${remSpace[1]};
+`;
+
 const Metadata: FC<Props> = ({ item, imageMappings }: Props) =>
     <div css={styles}>
-        <Avatar imageMappings={imageMappings} {...item} />
+        <Avatar className={avatarStyles} imageMappings={imageMappings} {...item} />
         <div css={textStyles}>
             <Byline {...item} />
             <Dateline date={item.publishDate} />

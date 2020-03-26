@@ -2,7 +2,6 @@
 
 import React, { FC } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { remSpace } from '@guardian/src-foundations';
 
 import { srcsetWithWidths } from 'image';
 import { Contributor, isSingleContributor } from 'contributor';
@@ -23,6 +22,7 @@ const srcset = srcsetWithWidths([32, 64, 128, 192, 256]);
 interface Props extends Format {
     contributors: Contributor[];
     imageMappings: ImageMappings;
+    className?: SerializedStyles;
 }
 
 const styles = (background: string): SerializedStyles => css`
@@ -31,7 +31,6 @@ const styles = (background: string): SerializedStyles => css`
     clip-path: circle(50%);
     object-fit: cover;
     background: ${background};
-    margin-right: ${remSpace[3]};
 `;
 
 const getStyles = ({ pillar }: Format): SerializedStyles => {
@@ -40,13 +39,13 @@ const getStyles = ({ pillar }: Format): SerializedStyles => {
     return styles(colours.inverted);
 }
 
-const Avatar: FC<Props> = ({ contributors, imageMappings, ...format }: Props) => {
+const Avatar: FC<Props> = ({ contributors, imageMappings, className, ...format }: Props) => {
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl !== undefined) {
         return (
             <img
-                css={getStyles(format)}
+                css={[getStyles(format), className]}
                 srcSet={srcset(contributor.bylineLargeImageUrl, imageMappings)}
                 alt={contributor.webTitle}
                 sizes={dimensions}
