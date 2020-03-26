@@ -59,7 +59,6 @@ type Props = {
     isMinuteArticle: boolean;
     isPaidContent: boolean;
     tags: TagType[];
-    isProd: boolean;
 };
 
 // TODO specify return type (need to update client to provide this first)
@@ -129,7 +128,6 @@ const MemoisedInner = ({
             isMinuteArticle,
             isPaidContent,
             tags,
-            isProd,
         });
         getBodyEnd(contributionsPayload)
             .then(checkForErrors)
@@ -169,11 +167,11 @@ const MemoisedInner = ({
     // been injected in the DOM.
     useEffect(() => {
         if (data && data.slot && data.slot.js) {
-            // The init function should only be called once
+            // This should only be called once
             try {
                 // eslint-disable-next-line no-eval
                 const init = eval(data.slot.js);
-                init({ isProd });
+                init();
             } catch (error) {
                 window.guardian.modules.sentry.reportError(
                     error,
@@ -181,7 +179,7 @@ const MemoisedInner = ({
                 );
             }
         }
-    }, [isProd, data]);
+    }, [data]);
 
     if (data && data.slot) {
         return (
@@ -207,7 +205,6 @@ export const SlotBodyEnd = ({
     isMinuteArticle,
     isPaidContent,
     tags,
-    isProd,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -232,7 +229,6 @@ export const SlotBodyEnd = ({
             isMinuteArticle={isMinuteArticle}
             isPaidContent={isPaidContent}
             tags={tags}
-            isProd={isProd}
         />
     );
 };

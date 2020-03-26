@@ -215,7 +215,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     isMinuteArticle={CAPI.pageType.isMinuteArticle}
                     isPaidContent={CAPI.pageType.isPaidContent}
                     tags={CAPI.tags}
-                    isProd={window.guardian.config.stage === 'PROD'}
                 />
             </Portal>
             <Portal root="onwards-upper">
