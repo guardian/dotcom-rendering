@@ -74,6 +74,16 @@ const initFiltersFromLocalStorage = (): FilterOptions => {
         pageSize: pageSize ? JSON.parse(pageSize).value : 25,
     };
 };
+
+const buildParams = (filters: FilterOptions) => {
+    return {
+        orderBy: filters.orderBy,
+        pageSize: filters.pageSize,
+        displayThreaded:
+            filters.threads === 'collapsed' || filters.threads === 'expanded',
+    };
+};
+
 export const getCommentContext = async (
     ajaxUrl: string,
     commentId: number,
