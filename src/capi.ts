@@ -102,11 +102,20 @@ const includesTweets = (content: Content): boolean => {
 
 const capiEndpoint = (articleId: string, key: string): string => {
 
+    const fields = [
+        'headline',
+        'standfirst',
+        'bylineHtml',
+        'firstPublicationDate',
+        'shouldHideAdverts',
+        'shouldHideReaderRevenue'
+    ];
+
     const params = new URLSearchParams({
       format: 'thrift',
       'api-key': key,
       'show-atoms': 'all',
-      'show-fields': 'all',
+      'show-fields': fields.join(','),
       'show-tags': 'all',
       'show-blocks': 'all',
       'show-elements': 'all',
