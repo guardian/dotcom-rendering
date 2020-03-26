@@ -506,6 +506,7 @@ export {
     BodyElement,
     Role,
     Image,
+    Format,
     fromCapi,
     fromCapiLiveBlog
 };

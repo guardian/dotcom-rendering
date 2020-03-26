@@ -1,11 +1,12 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { Contributor } from 'capi';
-import { isSingleContributor } from 'capi';
 import { css, SerializedStyles } from '@emotion/core';
+
+import { Contributor, isSingleContributor } from 'contributor';
 import { src } from 'image';
-import { ImageMappings } from './page';
+import { ImageMappings } from 'components/shared/page';
+
 
 // ----- Styles ----- //
 

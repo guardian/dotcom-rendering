@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { Contributor, isSingleContributor } from 'capi';
+
+import { Contributor, isSingleContributor } from 'contributor';
 import { src } from 'image';
 import { ImageMappings } from 'components/shared/page';
 

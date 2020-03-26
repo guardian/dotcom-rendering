@@ -3,7 +3,7 @@ import React from 'react';
 import LiveblogSeries from 'components/liveblog/series';
 import LiveblogHeadline from 'components/liveblog/headline';
 import LiveblogStandfirst from 'components/liveblog/standfirst';
-import LiveblogByline from 'components/liveblog/byline';
+import Metadata from 'components/liveblog/metadata';
 import LiveblogKeyEvents from 'components/liveblog/keyEvents';
 import LiveblogBody from 'components/liveblog/body';
 import HeaderImage from 'components/shared/headerImage';
@@ -57,7 +57,7 @@ const LiveblogArticle = ({ item, imageMappings }: LiveblogArticleProps): JSX.Ele
                 <LiveblogSeries series={item.series} pillar={item.pillar} />
                 <LiveblogHeadline headline={item.headline} pillar={item.pillar} />
                 <LiveblogStandfirst standfirst={item.standfirst} pillar={item.pillar} />
-                <LiveblogByline item={item} imageMappings={imageMappings} />
+                <Metadata item={item} imageMappings={imageMappings} />
                 <HeaderImage
                     image={item.mainImage}
                     imageMappings={imageMappings}

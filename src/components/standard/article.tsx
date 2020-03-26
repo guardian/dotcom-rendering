@@ -9,15 +9,13 @@ import HeaderImage from 'components/shared/headerImage';
 import Series from 'components/shared/articleSeries';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
-import Byline from 'components/standard/byline';
-import { CommentCount } from 'components/shared/commentCount'
 import Body from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { getPillarStyles } from 'pillar';
 import { Standard, Review } from 'item';
 import { ImageMappings } from 'components/shared/page';
+import Metadata from './metadata';
 
 
 // ----- Styles ----- //
@@ -82,10 +80,7 @@ const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
-                    <Byline item={item} imageMappings={imageMappings} />
-                    {item.commentable
-                        ? <CommentCount count={0} colour={getPillarStyles(item.pillar).kicker}/>
-                        : null}
+                    <Metadata imageMappings={imageMappings} item={item} />
                 </section>
             </header>
             <Body pillar={item.pillar} className={[articleWidthStyles]}>

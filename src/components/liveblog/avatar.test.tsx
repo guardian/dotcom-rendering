@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Avatar from 'components/shared/avatar';
+import Avatar from 'components/liveblog/avatar';
 
 configure({ adapter: new Adapter() });
 
@@ -10,7 +10,8 @@ describe('Avatar component renders as expected', () => {
         const contributors = [{
             bylineLargeImageUrl: "https://mapi.co.uk/test",
             webTitle: "Web Title",
-            id: "test"
+            id: "test",
+            apiUrl: 'test',
         }]
         const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{}} />);
         expect(avatar.find('img').prop('alt')).toBe("Web Title")
@@ -20,7 +21,8 @@ describe('Avatar component renders as expected', () => {
         const contributors = [{
             bylineLargeImageUrl: "https://mapi.co.uk/test",
             webTitle: "Web Title",
-            id: "test"
+            id: "test",
+            apiUrl: 'test',
         }];
         const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" imageMappings={{}} />);
         expect(avatar.props().css.styles).toContain("background-color: pink")
@@ -30,7 +32,8 @@ describe('Avatar component renders as expected', () => {
         const contributors = [{
             bylineLargeImageUrl: "https://mapi.co.uk/test",
             webTitle: "Web Title",
-            id: "test"
+            id: "test",
+            apiUrl: 'test',
         }]
         const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{ "/test": "SALT" }}/>);
         expect(avatar.find('img').prop('src')).toBe("https://i.guim.co.uk/img/mapi/test?width=204&quality=85&fit=bounds&sig-ignores-params=true&s=SALT")
@@ -38,8 +41,8 @@ describe('Avatar component renders as expected', () => {
 
     it('Renders null if more than one contributor', () => {
         const contributors = [
-            { webTitle: "Contributor 1", id: "test" },
-            { webTitle: "Contributor 2", id: "test" }
+            { webTitle: "Contributor 1", id: "test", apiUrl: 'test', },
+            { webTitle: "Contributor 2", id: "test", apiUrl: 'test', }
         ]
         const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{}} />);
         expect(avatar.html()).toBe(null)
