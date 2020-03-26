@@ -45,7 +45,7 @@ const getBubbleStyles = ({ pillar }: Format): SerializedStyles => {
     return bubbleStyles(colours.kicker);
 }
 
-const CommentCount: FC<Props> = ({ count, commentable, ...format }) => {
+const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {
     if (!commentable) {
         return null;
     }

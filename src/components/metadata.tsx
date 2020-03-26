@@ -25,7 +25,7 @@ const textStyles = css`
     flex-grow: 1;
 `;
 
-const Metadata: FC<Props> = ({ item }) =>
+const Metadata: FC<Props> = ({ item }: Props) =>
     <div css={styles}>
         <div css={textStyles}>
             <Dateline date={item.publishDate} />

@@ -40,7 +40,7 @@ const getStyles = ({ pillar }: Format): SerializedStyles => {
     return styles(colours.inverted);
 }
 
-const Avatar: FC<Props> = ({ contributors, imageMappings, ...format }) => {
+const Avatar: FC<Props> = ({ contributors, imageMappings, ...format }: Props) => {
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl !== undefined) {

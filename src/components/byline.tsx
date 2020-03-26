@@ -13,7 +13,7 @@ import { remSpace } from '@guardian/src-foundations';
 // ----- Component ----- //
 
 interface Props extends Format {
-    bylineHtml: Option<DocumentFragment>,
+    bylineHtml: Option<DocumentFragment>;
 };
 
 const styles = css`

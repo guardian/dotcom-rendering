@@ -31,7 +31,7 @@ const textStyles = css`
     padding-top: ${remSpace[1]};
 `;
 
-const Metadata: FC<Props> = ({ item, imageMappings }) =>
+const Metadata: FC<Props> = ({ item, imageMappings }: Props) =>
     <div css={styles}>
         <Avatar imageMappings={imageMappings} {...item} />
         <div css={textStyles}>
