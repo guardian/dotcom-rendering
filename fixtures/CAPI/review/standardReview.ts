@@ -1,4 +1,5 @@
 export const standardReviewCAPI: CAPIType = {
+    contributionsServiceUrl: 'https://contributions.guardianapis.com',
     shouldHideReaderRevenue: false,
     slotMachineFlags: '',
     isAdFreeUser: false,
@@ -2385,8 +2386,8 @@ export const standardReviewCAPI: CAPIType = {
         isPaidContent: false,
         ampIframeUrl:
             'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
-        discussionD2Uid: "testD2Header",
-        discussionApiClientHeader: "testClientHeader",
+        discussionD2Uid: 'testD2Header',
+        discussionApiClientHeader: 'testClientHeader',
     },
     sectionLabel: 'Theatre',
 };

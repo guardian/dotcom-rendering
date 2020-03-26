@@ -215,6 +215,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     isMinuteArticle={CAPI.pageType.isMinuteArticle}
                     isPaidContent={CAPI.pageType.isPaidContent}
                     tags={CAPI.tags}
+                    contributionsServiceUrl={CAPI.contributionsServiceUrl}
                 />
             </Portal>
             <Portal root="onwards-upper">

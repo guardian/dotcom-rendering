@@ -135,6 +135,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
                 header: CAPI.nav.readerRevenueLinks.header,
             },
         },
+        contributionsServiceUrl: CAPI.contributionsServiceUrl,
     };
 };
 

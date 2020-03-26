@@ -59,6 +59,7 @@ type Props = {
     isMinuteArticle: boolean;
     isPaidContent: boolean;
     tags: TagType[];
+    contributionsServiceUrl: string;
 };
 
 // TODO specify return type (need to update client to provide this first)
@@ -104,6 +105,7 @@ const MemoisedInner = ({
     isMinuteArticle,
     isPaidContent,
     tags,
+    contributionsServiceUrl,
 }: Props) => {
     const [data, setData] = useState<{
         slot?: {
@@ -126,8 +128,9 @@ const MemoisedInner = ({
             isMinuteArticle,
             isPaidContent,
             tags,
+            contributionsServiceUrl,
         });
-        getBodyEnd(contributionsPayload)
+        getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
@@ -181,6 +184,7 @@ export const SlotBodyEnd = ({
     isMinuteArticle,
     isPaidContent,
     tags,
+    contributionsServiceUrl,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -205,6 +209,7 @@ export const SlotBodyEnd = ({
             isMinuteArticle={isMinuteArticle}
             isPaidContent={isPaidContent}
             tags={tags}
+            contributionsServiceUrl={contributionsServiceUrl}
         />
     );
 };
