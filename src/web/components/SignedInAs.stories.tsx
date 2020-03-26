@@ -23,13 +23,14 @@ export default {
 };
 
 export const SignedIn = () => {
-    return <SignedInAs commentCount={3} user={aUser} />;
+    return <SignedInAs pillar="news" commentCount={3} user={aUser} />;
 };
 SignedIn.story = { name: 'signed in' };
 
 export const Image = () => {
     return (
         <SignedInAs
+            pillar="culture"
             commentCount={32}
             user={{
                 ...aUser,
@@ -43,6 +44,7 @@ Image.story = { name: 'with image' };
 export const NoDisplayName = () => {
     return (
         <SignedInAs
+            pillar="labs"
             commentCount={32}
             user={{
                 ...aUser,
@@ -54,19 +56,50 @@ export const NoDisplayName = () => {
 NoDisplayName.story = { name: 'before a display name has been set' };
 
 export const NotSignedIn = () => {
-    return <SignedInAs commentCount={32} />;
+    return <SignedInAs pillar="lifestyle" commentCount={32} />;
 };
 NotSignedIn.story = { name: 'not signed in' };
 
+export const Culture = () => {
+    return <SignedInAs pillar="culture" commentCount={32} />;
+};
+Culture.story = { name: 'with culture pillar' };
+
+export const Opinion = () => {
+    return <SignedInAs pillar="opinion" commentCount={32} />;
+};
+Opinion.story = { name: 'with opinion pillar' };
+
+export const news = () => {
+    return <SignedInAs pillar="news" commentCount={32} />;
+};
+news.story = { name: 'with news pillar' };
+
+export const Sport = () => {
+    return <SignedInAs pillar="sport" commentCount={32} />;
+};
+Sport.story = { name: 'with sport pillar' };
+
 export const DiscussionClosed = () => {
     return (
-        <SignedInAs commentCount={32} isClosedForComments={true} user={aUser} />
+        <SignedInAs
+            pillar="opinion"
+            commentCount={32}
+            isClosedForComments={true}
+            user={aUser}
+        />
     );
 };
 DiscussionClosed.story = { name: 'discussion closed, user signed in' };
 
 export const DiscussionClosedSignedOut = () => {
-    return <SignedInAs commentCount={32} isClosedForComments={true} />;
+    return (
+        <SignedInAs
+            pillar="sport"
+            commentCount={32}
+            isClosedForComments={true}
+        />
+    );
 };
 DiscussionClosedSignedOut.story = {
     name: 'discussion closed, user not signed in',

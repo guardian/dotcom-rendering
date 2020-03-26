@@ -13,6 +13,7 @@ import { App as Comments } from '@guardian/discussion-rendering';
 
 type Props = {
     user?: UserProfile;
+    pillar: Pillar;
     baseUrl: string;
     shortUrl: string;
     commentCount: number;
@@ -44,6 +45,7 @@ const bottomPadding = css`
 
 export const CommentsLayout = ({
     user,
+    pillar,
     baseUrl,
     shortUrl,
     commentCount,
@@ -59,6 +61,7 @@ export const CommentsLayout = ({
     <Flex direction="row">
         <LeftColumn showRightBorder={false}>
             <SignedInAs
+                pillar={pillar}
                 user={user}
                 commentCount={commentCount}
                 isClosedForComments={isClosedForComments}
@@ -67,7 +70,11 @@ export const CommentsLayout = ({
         <div className={containerStyles}>
             <Hide when="above" breakpoint="leftCol">
                 <div className={bottomPadding}>
-                    <SignedInAs user={user} commentCount={commentCount} />
+                    <SignedInAs
+                        pillar={pillar}
+                        user={user}
+                        commentCount={commentCount}
+                    />
                 </div>
             </Hide>
             <Comments
