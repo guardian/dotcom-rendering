@@ -89,7 +89,10 @@ export const getCommentContext = async (
     commentId: number,
 ): Promise<CommentContextType> => {
     const url = joinUrl([ajaxUrl, 'comment', commentId.toString(), 'context']);
-    return fetch(url)
+    const filters = initFiltersFromLocalStorage();
+    const params = buildParams(filters);
+
+    return fetch(url + objAsParams(params))
         .then(response => {
             if (!response.ok) {
                 throw Error(response.statusText);
