@@ -34,7 +34,7 @@ const sendOphanEvent = (action: OphanAction): void => {
             componentType: 'ACQUISITIONS_EPIC',
             products: ['CONTRIBUTION', 'MEMBERSHIP_SUPPORTER'],
             campaignCode,
-            id: 'epic_frontend_dotcom_rendering_epic',
+            id: campaignCode,
         },
         abTest: {
             name: testName,

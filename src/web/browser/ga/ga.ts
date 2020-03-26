@@ -89,7 +89,7 @@ const trackLCP = (send: string) => {
                     'timing',
                     'Javascript Load', // Matches Frontend
                     'LCP', // Largest Contentful Paint (We can filter to DCR with the Dimension 43 segment)
-                    lcp,
+                    Math.round(lcp),
                     'Largest Contentful Paint',
                 );
                 window.removeEventListener('visibilitychange', fn, true);

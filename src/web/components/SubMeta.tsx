@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 
 import { SharingIcons } from '@frontend/web/components/ShareIcons';
 import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
@@ -14,7 +14,7 @@ import { until } from '@guardian/src-foundations/mq';
 const subMetaLabel = css`
     ${textSans.xsmall()};
     display: block;
-    color: ${palette.neutral[60]};
+    color: ${neutral[60]};
 `;
 
 const subMetaSharingIcons = css`

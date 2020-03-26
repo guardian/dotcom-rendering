@@ -292,7 +292,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                     </Section>
 
                     <Section
-                        islandId="nav-root"
+                        sectionId="nav-root"
                         showSideBorders={true}
                         borderColour={brandBorder.primary}
                         showTopBorder={false}
@@ -306,7 +306,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         <Section
                             backgroundColour={background.primary}
                             padded={false}
-                            islandId="sub-nav-root"
+                            sectionId="sub-nav-root"
                         >
                             <SubNav
                                 subNavSections={NAV.subNavSections}
@@ -454,7 +454,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                 <AdSlot asps={namedAdSlotParameters('merchandising-high')} />
             </Section>
 
-            <Section islandId="onwards-upper" />
+            <Section sectionId="onwards-upper" />
 
             {!isPaidContent && (
                 <>
@@ -467,10 +467,10 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         </Section>
                     )}
 
-                    {showOnwardsLower && <Section islandId="onwards-lower" />}
+                    {showOnwardsLower && <Section sectionId="onwards-lower" />}
 
                     {showComments && (
-                        <Section>
+                        <Section sectionId="comments">
                             <Flex>
                                 <div id="comments-root" />
                                 <RightColumn>
@@ -480,7 +480,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
                         </Section>
                     )}
 
-                    <Section islandId="most-viewed-footer" />
+                    <Section sectionId="most-viewed-footer" />
                 </>
             )}
 
@@ -494,7 +494,7 @@ export const ShowcaseLayout = ({ CAPI, NAV }: Props) => {
             </Section>
 
             {NAV.subNavSections && (
-                <Section padded={false} islandId="sub-nav-root">
+                <Section padded={false} sectionId="sub-nav-root">
                     <SubNav
                         subNavSections={NAV.subNavSections}
                         currentNavLink={NAV.currentNavLink}

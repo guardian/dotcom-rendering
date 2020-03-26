@@ -23,20 +23,57 @@ import { Lazy } from '@frontend/web/components/Lazy';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
+import { getUser } from '@root/src/web/lib/getUser';
+import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 
 type Props = { CAPI: CAPIBrowserType; NAV: NavType };
 
+const commentIdFromUrl = () => {
+    const { hash } = window.location;
+    if (!hash) return;
+    if (!hash.includes('comment')) return;
+    if (!hash.split('-')[1]) return;
+    return parseInt(hash.split('-')[1], 10);
+};
+
+const hasCommentsHashInUrl = () => {
+    const { hash } = window.location;
+    return hash && hash === '#comments';
+};
+
 export const App = ({ CAPI, NAV }: Props) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean>();
+    const [user, setUser] = useState<UserProfile>();
     const [countryCode, setCountryCode] = useState<string>();
     const [commentCount, setCommentCount] = useState<number>(0);
     const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
         true,
     );
+    const [commentPage, setCommentPage] = useState<number>();
+    const [commentPageSize, setCommentPageSize] = useState<
+        20 | 25 | 50 | 100
+    >();
+    const [commentOrderBy, setCommentOrderBy] = useState<
+        'newest' | 'oldest' | 'mostrecommended'
+    >();
+    const [openComments, setOpenComments] = useState<boolean>(false);
+
+    const hashCommentId = commentIdFromUrl();
+    const hasCommentsHash = hasCommentsHashInUrl();
 
     useEffect(() => {
         setIsSignedIn(!!getCookie('GU_U'));
     }, []);
+
+    useEffect(() => {
+        const callGetUser = async () => {
+            setUser(await getUser(CAPI.config.discussionApiUrl));
+        };
+
+        if (isSignedIn) {
+            callGetUser();
+        }
+    }, [isSignedIn, CAPI.config.discussionApiUrl]);
 
     useEffect(() => {
         const callFetch = async () =>
@@ -75,6 +112,28 @@ export const App = ({ CAPI, NAV }: Props) => {
         incrementWeeklyArticleCount();
     }, []);
 
+    // Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
+    // If so, make a call to get the context of this comment so we know what page it is
+    // on.
+    useEffect(() => {
+        if (hashCommentId) {
+            getCommentContext(CAPI.config.discussionApiUrl, hashCommentId).then(
+                context => {
+                    setCommentPage(context.page);
+                    setCommentPageSize(context.pageSize);
+                    setCommentOrderBy(context.orderBy);
+                    setOpenComments(true);
+                },
+            );
+        }
+    }, [CAPI.config.discussionApiUrl, hashCommentId]);
+
+    useEffect(() => {
+        if (hasCommentsHash) {
+            setOpenComments(true);
+        }
+    }, [hasCommentsHash]);
+
     return (
         // Do you need to Hydrate or do you want a Portal?
         //
@@ -92,7 +151,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     urls={CAPI.nav.readerRevenueLinks.footer}
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="footer : "
-                    noResponsive={true}
                     inHeader={true}
                 />
             </Portal>
@@ -139,6 +197,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     pageId={CAPI.config.pageId}
                     commentCount={commentCount}
                     pillar={CAPI.pillar}
+                    setOpenComments={setOpenComments}
                 />
             </Portal>
             <Portal root="most-viewed-right">
@@ -184,18 +243,46 @@ export const App = ({ CAPI, NAV }: Props) => {
                     />
                 </Lazy>
             </Portal>
+
+            {/* Don't lazy render comments if we have a comment id in the url or the comments hash. In
+                these cases we will be scrolling to comments and want them loaded */}
             <Portal root="comments-root">
-                <Lazy margin={300}>
+                {openComments ? (
                     <CommentsLayout
+                        user={user}
+                        baseUrl={CAPI.config.discussionApiUrl}
                         shortUrl={CAPI.config.shortUrlId}
                         commentCount={commentCount}
+                        commentPage={commentPage}
+                        commentPageSize={commentPageSize}
+                        commentOrderBy={commentOrderBy}
                         isClosedForComments={isClosedForComments}
                         discussionD2Uid={CAPI.config.discussionD2Uid}
                         discussionApiClientHeader={
                             CAPI.config.discussionApiClientHeader
                         }
+                        expanded={true}
+                        commentToScrollTo={hashCommentId}
                     />
-                </Lazy>
+                ) : (
+                    <Lazy margin={300}>
+                        <CommentsLayout
+                            user={user}
+                            baseUrl={CAPI.config.discussionApiUrl}
+                            shortUrl={CAPI.config.shortUrlId}
+                            commentCount={commentCount}
+                            commentPage={commentPage}
+                            commentPageSize={commentPageSize}
+                            commentOrderBy={commentOrderBy}
+                            isClosedForComments={isClosedForComments}
+                            discussionD2Uid={CAPI.config.discussionD2Uid}
+                            discussionApiClientHeader={
+                                CAPI.config.discussionApiClientHeader
+                            }
+                            expanded={false}
+                        />
+                    </Lazy>
+                )}
             </Portal>
             <Portal root="most-viewed-footer">
                 <MostViewedFooter
@@ -210,7 +297,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                         urls={CAPI.nav.readerRevenueLinks.header}
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="nav2 : "
-                        noResponsive={false}
                         inHeader={false}
                     />
                 </Lazy>

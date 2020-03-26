@@ -12,7 +12,9 @@ import { Hide } from '@root/src/web/components/Hide';
 const pillarColours = pillarMap(
     pillar =>
         css`
-            color: ${pillarPalette[pillar].main};
+            color: ${pillar === 'opinion' || pillar === 'culture'
+                ? pillarPalette[pillar].dark
+                : pillarPalette[pillar].main};
         `,
 );
 

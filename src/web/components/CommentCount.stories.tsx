@@ -24,7 +24,12 @@ const Container = ({ children }: { children: JSXElements }) => (
 export const CommentCountStory = () => {
     return (
         <Container>
-            <CommentCount short="11k" long="10,898" pillar="news" />
+            <CommentCount
+                short="11k"
+                long="10,898"
+                pillar="news"
+                setOpenComments={() => {}}
+            />
         </Container>
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { text, border } from '@guardian/src-foundations/palette';
+import { text, border, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { palette, space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
@@ -86,7 +86,7 @@ export const SignedInAs = ({
                 comments{' '}
                 <span
                     className={css`
-                        color: ${palette.neutral[60]};
+                        color: ${neutral[60]};
                     `}
                 >
                     ({commentCount})

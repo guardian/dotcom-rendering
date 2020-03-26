@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
@@ -12,7 +11,7 @@ import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 
 const ageStyles = (designType?: DesignType) => css`
     ${textSans.xsmall()};
-    color: ${palette.neutral[60]};
+    color: ${neutral[60]};
 
     /* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
@@ -58,7 +57,7 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Immersive':
         default:
             return css`
-                color: ${palette.neutral[60]};
+                color: ${neutral[60]};
             `;
     }
 };

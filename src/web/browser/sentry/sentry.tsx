@@ -27,11 +27,7 @@ export const initialiseSentry = (adBlockInUse: boolean) => {
     const {
         editionLongForm,
         contentType,
-        config: {
-            isDev,
-            switches: { enableSentryReporting },
-            dcrSentryDsn,
-        },
+        config: { isDev, enableSentryReporting, dcrSentryDsn },
     } = window.guardian.app.data.CAPI;
 
     Sentry.init({

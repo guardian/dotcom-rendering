@@ -14,6 +14,7 @@ type Props = {
     pageId: string;
     pillar: Pillar;
     commentCount: number;
+    setOpenComments: Function;
 };
 
 type ShareCountType = {
@@ -40,7 +41,13 @@ const NumbersBorder = () => (
     />
 );
 
-export const Counts = ({ ajaxUrl, pageId, commentCount, pillar }: Props) => {
+export const Counts = ({
+    ajaxUrl,
+    pageId,
+    commentCount,
+    pillar,
+    setOpenComments,
+}: Props) => {
     const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
     const { data: shareData, error: shareError } = useApi<ShareCountType>(
         shareUrl,
@@ -77,6 +84,7 @@ export const Counts = ({ ajaxUrl, pageId, commentCount, pillar }: Props) => {
                     short={commentShort}
                     long={commentLong}
                     pillar={pillar}
+                    setOpenComments={setOpenComments}
                 />
             )}
         </div>

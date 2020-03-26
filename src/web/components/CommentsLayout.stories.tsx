@@ -21,11 +21,13 @@ export const Default = () => (
     <Section>
         <Flex>
             <CommentsLayout
+                baseUrl="https://discussion.theguardian.com/discussion-api"
                 shortUrl="p/39f5z/"
                 commentCount={345}
                 isClosedForComments={false}
                 discussionD2Uid="testD2Header"
                 discussionApiClientHeader="testClientHeader"
+                expanded={false}
             />
             <RightColumn>{/* TODO: Comments ad slot goes here */}</RightColumn>
         </Flex>
