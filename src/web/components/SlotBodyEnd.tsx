@@ -104,7 +104,6 @@ const MemoisedInner = ({
     isMinuteArticle,
     isPaidContent,
     tags,
-    isProd,
 }: Props) => {
     const [data, setData] = useState<{
         slot?: {
@@ -129,7 +128,7 @@ const MemoisedInner = ({
             isPaidContent,
             tags,
         });
-        getBodyEnd(contributionsPayload)
+        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
