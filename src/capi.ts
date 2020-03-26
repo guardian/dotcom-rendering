@@ -101,7 +101,7 @@ const includesTweets = (content: Content): boolean => {
 // ----- Functions ----- //
 
 const capiEndpoint = (articleId: string, key: string): string => {
-
+    // If you need a new field here, MAPI probably also needs updating
     const fields = [
         'headline',
         'standfirst',
