@@ -54,9 +54,9 @@ const initFiltersFromLocalStorage = (): FilterOptions => {
 
     try {
         // Try to read from local storage
-        orderBy = localStorage.getItem('gu.prefs.discussioni.order');
-        threads = localStorage.getItem('gu.prefs.discussioni.threading');
-        pageSize = localStorage.getItem('gu.prefs.discussioni.pagesize');
+        orderBy = localStorage.getItem('gu.prefs.discussion.order');
+        threads = localStorage.getItem('gu.prefs.discussion.threading');
+        pageSize = localStorage.getItem('gu.prefs.discussion.pagesize');
     } catch (error) {
         // Sometimes it's not possible to access localStorage, we accept this and don't want to
         // capture these errors
