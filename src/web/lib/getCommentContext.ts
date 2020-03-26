@@ -46,6 +46,34 @@ const objAsParams = (obj: any): string => {
 
     return `?${params}`;
 };
+
+const initFiltersFromLocalStorage = (): FilterOptions => {
+    let threads;
+    let pageSize;
+    let orderBy;
+
+    try {
+        // Try to read from local storage
+        orderBy = localStorage.getItem('gu.prefs.discussioni.order');
+        threads = localStorage.getItem('gu.prefs.discussioni.threading');
+        pageSize = localStorage.getItem('gu.prefs.discussioni.pagesize');
+    } catch (error) {
+        // Sometimes it's not possible to access localStorage, we accept this and don't want to
+        // capture these errors
+        return {
+            orderBy: 'newest',
+            pageSize: 25,
+            threads: 'collapsed',
+        };
+    }
+
+    // If we found something in LS, use it, otherwise return defaults
+    return {
+        orderBy: orderBy ? JSON.parse(orderBy).value : 'newest',
+        threads: threads ? JSON.parse(threads).value : 'collapsed',
+        pageSize: pageSize ? JSON.parse(pageSize).value : 25,
+    };
+};
 export const getCommentContext = async (
     ajaxUrl: string,
     commentId: number,
