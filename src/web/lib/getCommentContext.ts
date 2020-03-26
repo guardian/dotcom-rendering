@@ -36,6 +36,16 @@ interface FilterOptions {
     pageSize: PageSizeType;
     threads: ThreadsType;
 }
+
+const objAsParams = (obj: any): string => {
+    const params = Object.keys(obj)
+        .map(key => {
+            return `${key}=${obj[key]}`;
+        })
+        .join('&');
+
+    return `?${params}`;
+};
 export const getCommentContext = async (
     ajaxUrl: string,
     commentId: number,
