@@ -22,11 +22,20 @@ type CommentContextType = {
     discussionKey: string;
     discussionWebUrl: string;
     discussionApiUrl: string;
-    orderBy: 'oldest' | 'newest' | 'mostrecommended';
-    pageSize: 20 | 25 | 50 | 100; // TODO: Review these https://trello.com/c/7v4VDNY0/1326-review-page-size-values
+    orderBy: OrderByType;
+    pageSize: PageSizeType; // TODO: Review these https://trello.com/c/7v4VDNY0/1326-review-page-size-values
     page: number;
 };
 
+type OrderByType = 'newest' | 'oldest' | 'mostrecommended';
+type ThreadsType = 'collapsed' | 'expanded' | 'unthreaded';
+type PageSizeType = 25 | 50 | 100;
+
+interface FilterOptions {
+    orderBy: OrderByType;
+    pageSize: PageSizeType;
+    threads: ThreadsType;
+}
 export const getCommentContext = async (
     ajaxUrl: string,
     commentId: number,
