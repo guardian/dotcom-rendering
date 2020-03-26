@@ -20,8 +20,7 @@ type Props = {
         contribute: string;
     };
     dataLinkNamePrefix: string;
-    noResponsive: boolean;
-    inHeader?: boolean;
+    inHeader: boolean;
 };
 
 const paddingStyles = css`
@@ -131,7 +130,6 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
     edition,
     urls,
     dataLinkNamePrefix,
-    noResponsive,
     inHeader,
 }) => {
     const [isPayingMember, setIsPayingMember] = useState<boolean>(false);
@@ -151,7 +149,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
             <div className={cx(inHeader && paddingStyles)}>
                 <div
                     className={cx({
-                        [hiddenUntilTablet]: !noResponsive,
+                        [hiddenUntilTablet]: inHeader,
                     })}
                 >
                     <div className={messageStyles}>
@@ -178,8 +176,8 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 
                 <div
                     className={cx({
-                        [hiddenFromTablet]: !noResponsive,
-                        [hidden]: noResponsive,
+                        [hiddenFromTablet]: inHeader,
+                        [hidden]: !inHeader,
                     })}
                 >
                     {edition === 'UK' ? (

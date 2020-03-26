@@ -151,7 +151,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                     urls={CAPI.nav.readerRevenueLinks.footer}
                     edition={CAPI.editionId}
                     dataLinkNamePrefix="footer : "
-                    noResponsive={true}
                     inHeader={true}
                 />
             </Portal>
@@ -297,7 +296,6 @@ export const App = ({ CAPI, NAV }: Props) => {
                         urls={CAPI.nav.readerRevenueLinks.header}
                         edition={CAPI.editionId}
                         dataLinkNamePrefix="nav2 : "
-                        noResponsive={false}
                         inHeader={false}
                     />
                 </Lazy>
