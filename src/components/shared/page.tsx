@@ -17,7 +17,7 @@ import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Design, Display } from 'item';
-import { ElementType, IBlock as Block, IBlockElement as BlockElement } from 'mapiThriftModels';
+import { ElementType, IBlock as Block, IBlockElement as BlockElement, TagType, ITag as Tag } from 'mapiThriftModels';
 import { sign } from 'components/image';
 
 
@@ -92,20 +92,41 @@ export interface ImageMappings {
     [key: string]: string;
 }
 
+const mappingsWithUrl = (mappings: ImageMappings, urlString: string, salt: string): ImageMappings => {
+    const url = new URL(urlString);
+    return { ...mappings, [url.pathname]: sign(salt, url.pathname) }
+}
+
+const getContributorMappings = (tags: Tag[], salt: string): ImageMappings => tags
+    .filter(tag => tag.type === TagType.CONTRIBUTOR)
+    .reduce((mappings, { bylineLargeImageUrl }) =>
+        bylineLargeImageUrl
+            ? mappingsWithUrl(mappings, bylineLargeImageUrl, salt)
+            : mappings
+    , {});
+
+const bodyBlocks = (capi: Content): Block[] =>
+    capi.blocks?.body ?? [];
+
+const mainBlocks = (capi: Content): Block[] =>
+    capi.blocks?.main !== undefined ? [capi.blocks.main] : [];
+
 const getImageMappings = (imageSalt: string, capi: Content): ImageMappings => {
-    const blocks: Block[] = [capi.blocks?.main, capi.blocks?.body].flat()
-    return blocks
-        ?.flatMap(block => block?.elements
-            .filter((element: BlockElement) => element.type === ElementType.IMAGE)
-            .flatMap((element: BlockElement) => {
-                return element.assets.map(asset => {
-                    if (asset.typeData?.isMaster && asset.file) {
-                        const url = new URL(asset.file);
-                        return { [url.pathname]: sign(imageSalt, url.pathname) }
-                    }
-                })
-            }))
-            .reduce((a, b) => ({...a, ...b}), {}) ?? {};
+    const blocks = [...bodyBlocks(capi), ...mainBlocks(capi)];
+
+    const blockMappings = blocks.flatMap(block => block.elements)
+        .filter((element: BlockElement) => element.type === ElementType.IMAGE)
+        .reduce((mappings, elem) => {
+            const asset = elem.assets.find(asset => asset.typeData?.isMaster);
+
+            if (asset !== undefined && asset.file !== undefined) {
+                mappingsWithUrl(mappings, asset.file, imageSalt);
+            }
+
+            return mappings;
+        }, {});
+
+        return { ...blockMappings, ...getContributorMappings(capi.tags, imageSalt) }
 }
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
