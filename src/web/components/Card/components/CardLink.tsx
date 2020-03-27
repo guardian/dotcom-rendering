@@ -31,7 +31,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
             width: 100%;
             height: 100%;
             left: 0;
-            background-color: ${palette.neutral[7]};
+            background-color: ${neutral[7]};
             opacity: 0.1;
         }
     `;
@@ -52,7 +52,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Media':
             return css`
                 ${baseLinkStyles}
-                background-color: ${palette.neutral[20]};
+                background-color: ${neutral[20]};
 
                 :hover {
                     filter: brightness(90%);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
@@ -41,7 +40,7 @@ const bigNumber = css`
     position: absolute;
     top: 0.375rem;
     left: 0.625rem;
-    fill: ${palette.neutral[7]};
+    fill: ${text.primary};
 `;
 
 const headlineHeader = css`
