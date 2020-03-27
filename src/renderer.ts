@@ -137,16 +137,6 @@ const TweetStyles = css`
     }
 `;
 
-const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
-    const children = Array.from(node.childNodes).map(textElement(pillar));
-    switch (node.nodeName) {
-        case 'P':
-            return h('p', { key }, children);
-        default:
-            return textElement(pillar)(node, key);
-    }
-}
-
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
     const children = Array.from(node.childNodes).map(textElement(pillar));
@@ -177,6 +167,16 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
             return styledH('mark', { key }, children);
         default:
             return null;
+    }
+}
+
+const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const children = Array.from(node.childNodes).map(textElement(pillar));
+    switch (node.nodeName) {
+        case 'P':
+            return h('p', { key }, children);
+        default:
+            return textElement(pillar)(node, key);
     }
 }
 
