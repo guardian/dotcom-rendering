@@ -8,8 +8,6 @@ import {
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
-import { body } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
 
 const richLinkWidth = "13.75rem";
 
@@ -42,12 +40,6 @@ const ArticleBodyStyles = css`
 
     twitter-widget {
         margin: 1rem 0;
-    }
-
-    p {
-        ${body.medium()}
-        overflow-wrap: break-word;
-        margin: 0 0 ${remSpace[3]};
     }
 `;
 

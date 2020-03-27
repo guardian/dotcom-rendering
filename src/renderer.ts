@@ -137,6 +137,16 @@ const TweetStyles = css`
     }
 `;
 
+const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const children = Array.from(node.childNodes).map(textElement(pillar));
+    switch (node.nodeName) {
+        case 'P':
+            return h('p', { key }, children);
+        default:
+            return textElement(pillar)(node, key);
+    }
+}
+
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
     const children = Array.from(node.childNodes).map(textElement(pillar));
@@ -172,6 +182,9 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
 
 const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(textElement(pillar));
+
+const standfirstText = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
+    Array.from(doc.childNodes).map(standfirstTextElement(pillar));
 
 interface ImageProps {
     url: string;
@@ -378,5 +391,6 @@ const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): R
 export {
     renderAll,
     text as renderText,
+    standfirstText as renderStandfirstText,
     ImageElement,
 };
