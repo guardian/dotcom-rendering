@@ -8,6 +8,7 @@ import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
     commentCount: number;
+    pillar: Pillar;
     user?: UserProfile;
     isClosedForComments?: boolean;
 };
@@ -57,8 +58,8 @@ const usernameStyles = css`
     color: ${text.primary};
 `;
 
-const linkStyles = css`
-    color: ${palette.news[300]};
+const linkStyles = (pillar: Pillar) => css`
+    color: ${palette[pillar][300]};
     text-decoration: none;
     border-bottom: 1px solid ${border.secondary};
     transition: border-color 0.15s ease-out;
@@ -77,6 +78,7 @@ const rowUntilDesktop = css`
 
 export const SignedInAs = ({
     commentCount,
+    pillar,
     user,
     isClosedForComments,
 }: Props) => {
@@ -120,14 +122,14 @@ export const SignedInAs = ({
                 <span className={headlineStyles}>
                     <a
                         href="https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN"
-                        className={linkStyles}
+                        className={linkStyles(pillar)}
                     >
                         Sign in
                     </a>{' '}
                     or{' '}
                     <a
                         href="https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG"
-                        className={linkStyles}
+                        className={linkStyles(pillar)}
                     >
                         create your Guardian account
                     </a>{' '}

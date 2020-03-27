@@ -22,6 +22,7 @@ export const Default = () => (
         <Flex>
             <CommentsLayout
                 baseUrl="https://discussion.theguardian.com/discussion-api"
+                pillar="news"
                 shortUrl="p/39f5z/"
                 commentCount={345}
                 isClosedForComments={false}
