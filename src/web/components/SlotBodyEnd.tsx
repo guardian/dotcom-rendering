@@ -128,7 +128,7 @@ const MemoisedInner = ({
             isPaidContent,
             tags,
         });
-        getBodyEnd(contributionsPayload, 'http://localhost:8081/epic')
+        getBodyEnd(contributionsPayload)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
