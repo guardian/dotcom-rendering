@@ -22,8 +22,12 @@ const profileLink = (): string =>
 const byline = (): string =>
     text('Byline', 'Jane Smith');
 
+const job = (): string =>
+    text('Job Title', 'Editor of things');
+
 const mockBylineHtml = (): Option<DocumentFragment> =>
-    parseByline(`<a href="${profileLink()}">${byline()}</a>`).toOption();
+    parseByline(`<a href="${profileLink()}">${byline()}</a> ${job()}`)
+        .toOption();
 
 
 // ----- Stories ----- //
