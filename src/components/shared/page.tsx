@@ -92,9 +92,9 @@ export interface ImageMappings {
     [key: string]: string;
 }
 
-const mappingsWithUrl = (mappings: ImageMappings, urlString: string, salt: string): ImageMappings => {
-    const url = new URL(urlString);
-    return { ...mappings, [url.pathname]: sign(salt, url.pathname) }
+const mappingsWithUrl = (mappings: ImageMappings, url: string, salt: string): ImageMappings => {
+    const { pathname } = new URL(url);
+    return { ...mappings, [pathname]: sign(salt, pathname) }
 }
 
 const getContributorMappings = (tags: Tag[], salt: string): ImageMappings => tags
