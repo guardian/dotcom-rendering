@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -48,8 +47,8 @@ const mobileStickyAdStyles = css`
     .ad-slot__close-button svg {
         height: 0.75rem;
         width: 0.75rem;
-        stroke: ${palette.neutral[7]};
-        fill: ${palette.neutral[7]};
+        stroke: ${neutral[7]};
+        fill: ${neutral[7]};
         stroke-linecap: round;
         stroke-width: 0;
         text-align: center;
@@ -58,7 +57,7 @@ const mobileStickyAdStyles = css`
         display: block;
     }
     .ad-slot__close-button__x {
-        stroke: ${palette.neutral[7]};
+        stroke: ${neutral[7]};
         fill: transparent;
         stroke-linecap: round;
         stroke-width: 2;
