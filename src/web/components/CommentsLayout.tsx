@@ -80,6 +80,7 @@ export const CommentsLayout = ({
             <Comments
                 user={user}
                 baseUrl={baseUrl}
+                pillar={pillar}
                 initialPage={commentPage}
                 pageSizeOverride={commentPageSize}
                 orderByOverride={commentOrderBy}
