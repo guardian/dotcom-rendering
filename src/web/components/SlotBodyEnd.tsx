@@ -5,7 +5,7 @@ import {
     getViewLog,
     logView,
     getWeeklyArticleHistory,
-} from '@guardian/slot-machine-client';
+} from '@guardian/automat-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
@@ -58,6 +58,7 @@ type Props = {
     shouldHideReaderRevenue: boolean;
     isMinuteArticle: boolean;
     isPaidContent: boolean;
+    isSensitive: boolean;
     tags: TagType[];
     contributionsServiceUrl: string;
 };
@@ -83,6 +84,7 @@ const buildPayload = (props: Props) => {
             shouldHideReaderRevenue: props.shouldHideReaderRevenue,
             isMinuteArticle: props.isMinuteArticle,
             isPaidContent: props.isPaidContent,
+            isSensitive: props.isSensitive,
             tags: props.tags,
             showSupportMessaging: shouldShowSupportMessaging(),
             isRecurringContributor: isRecurringContributor(
@@ -104,6 +106,7 @@ const MemoisedInner = ({
     shouldHideReaderRevenue,
     isMinuteArticle,
     isPaidContent,
+    isSensitive,
     tags,
     contributionsServiceUrl,
 }: Props) => {
@@ -129,6 +132,7 @@ const MemoisedInner = ({
             isPaidContent,
             tags,
             contributionsServiceUrl,
+            isSensitive,
         });
         getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
             .then(checkForErrors)
@@ -183,6 +187,7 @@ export const SlotBodyEnd = ({
     shouldHideReaderRevenue,
     isMinuteArticle,
     isPaidContent,
+    isSensitive,
     tags,
     contributionsServiceUrl,
 }: Props) => {
@@ -208,6 +213,7 @@ export const SlotBodyEnd = ({
             shouldHideReaderRevenue={shouldHideReaderRevenue}
             isMinuteArticle={isMinuteArticle}
             isPaidContent={isPaidContent}
+            isSensitive={isSensitive}
             tags={tags}
             contributionsServiceUrl={contributionsServiceUrl}
         />

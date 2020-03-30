@@ -14,7 +14,7 @@ import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { CommentsLayout } from '@frontend/web/components/CommentsLayout';
-import { incrementWeeklyArticleCount } from '@guardian/slot-machine-client';
+import { incrementWeeklyArticleCount } from '@guardian/automat-client';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Hydrate } from '@frontend/web/components/Hydrate';
@@ -212,6 +212,7 @@ export const App = ({ CAPI, NAV }: Props) => {
                     shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
                     isMinuteArticle={CAPI.pageType.isMinuteArticle}
                     isPaidContent={CAPI.pageType.isPaidContent}
+                    isSensitive={CAPI.config.isSensitive}
                     tags={CAPI.tags}
                     contributionsServiceUrl={CAPI.contributionsServiceUrl}
                 />
