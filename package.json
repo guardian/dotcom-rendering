@@ -27,7 +27,7 @@
     "dependencies": {
         "@emotion/core": "^10.0.5",
         "@guardian/consent-management-platform": "^2.0.10",
-        "@guardian/discussion-rendering": "^0.4.2",
+        "@guardian/discussion-rendering": "^0.5.0",
         "@guardian/slot-machine-client": "^0.2.6",
         "@guardian/src-foundations": "^0.15.1",
         "@sentry/browser": "^5.7.1",
