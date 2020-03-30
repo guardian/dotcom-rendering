@@ -9,12 +9,11 @@ import { srcset, src } from 'image';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement, Role } from 'item';
+import { headline, body } from '@guardian/src-foundations/typography';
+import { remSpace } from '@guardian/src-foundations';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
-import { headline, body } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
-
 
 // ----- Renderer ----- //
 
@@ -146,7 +145,7 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
         case '#text':
             return transform(text, pillar);
         case 'SPAN':
-            return text;
+            return h('span', null, text);
         case 'A':
             return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, children);
         case 'H2':

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import { FC, ReactNode } from 'react';
-import React, { css } from '@emotion/core';
+import React, { FC, ReactNode } from 'react';
+import { css } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 
