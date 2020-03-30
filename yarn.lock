@@ -2091,11 +2091,12 @@
     js-cookie "^2.2.1"
     whatwg-fetch "^3.0.0"
 
-"@guardian/discussion-rendering@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-0.3.1.tgz#265eff7d72b6e06d728cdfc7d5937b4e0bb314bf"
-  integrity sha512-y7ZWVqGvRKKjL7AwCGqSBI0f+Ak0Wc5PBLJw/iFTZqPJwX6Xgv+R/KWkFu1B/0hZ3hfFEAKIxF8GHd4CEI04LQ==
+"@guardian/discussion-rendering@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-0.4.0.tgz#5f99984732c4fd01593df587b0a9b4c06abf2605"
+  integrity sha512-MV1Lh61GUCY9MjcRLyLMC1yLz8/JiE4uYhSDFtnoF5wJ8jweVo9WbMGM3bwkcZYn2cgSaDI47BAKcj1+s4PUfg==
   dependencies:
+    "@guardian/src-link" "^0.15.1"
     regenerator-runtime "^0.13.3"
     timeago.js "^4.0.2"
 
@@ -2120,6 +2121,20 @@
   version "0.15.1"
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-0.15.1.tgz#9e621aa2efee0cdb368ebbee129cd2a7d7e5868e"
   integrity sha512-49Kjd9v6bAy3Xjs9q6/WV+J63bKgUWG5biOScUPE4UKFf3HkNFtafrrvnWf2/1qpDlhGYRFK9tGCh/enagMajA==
+
+"@guardian/src-helpers@^0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-0.15.1.tgz#ec5b75117bb066ef95002bfedaa76a371c4b1b33"
+  integrity sha512-A564LrM0c8SKC5TySb/dUxO+ggKhp5D+yWagQb3r3r/IS8SxWLhKQUzZpgaXNWyNWXrFTX362G7hAwL3SCNE5g==
+  dependencies:
+    "@guardian/src-foundations" "^0.15.1"
+
+"@guardian/src-link@^0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@guardian/src-link/-/src-link-0.15.1.tgz#2b5c196e9c57ac7a920d630ef7c47cacbefa9997"
+  integrity sha512-WZHHoFSd+vx1CU01M5lWAob3lrnNzIoPH00M5cxL5mXvl/3911l2WeiwMGC46MZkmZvHQ+ju3b4khk9nuBDFeA==
+  dependencies:
+    "@guardian/src-helpers" "^0.15.1"
 
 "@guardian/src-svgs@^0.13.0":
   version "0.13.0"
