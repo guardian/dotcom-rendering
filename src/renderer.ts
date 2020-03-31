@@ -145,7 +145,7 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
         case '#text':
             return transform(text, pillar);
         case 'SPAN':
-            return h('span', null, text);
+            return text;
         case 'A':
             return h(Anchor, { href: getHref(node).withDefault(''), text, pillar, key }, children);
         case 'H2':

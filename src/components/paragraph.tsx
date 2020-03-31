@@ -12,7 +12,7 @@ interface Props {
 }
 
 const styles = css`
-    ${body.medium()};
+    ${body.medium()}
     overflow-wrap: break-word;
     margin: 0 0 ${remSpace[3]};
 `;
