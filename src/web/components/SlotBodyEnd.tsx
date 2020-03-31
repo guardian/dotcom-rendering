@@ -5,7 +5,7 @@ import {
     getViewLog,
     logView,
     getWeeklyArticleHistory,
-} from '@guardian/slot-machine-client';
+} from '@guardian/automat-client';
 import {
     shouldShowSupportMessaging,
     isRecurringContributor,
@@ -58,7 +58,9 @@ type Props = {
     shouldHideReaderRevenue: boolean;
     isMinuteArticle: boolean;
     isPaidContent: boolean;
+    isSensitive: boolean;
     tags: TagType[];
+    contributionsServiceUrl: string;
 };
 
 // TODO specify return type (need to update client to provide this first)
@@ -82,6 +84,7 @@ const buildPayload = (props: Props) => {
             shouldHideReaderRevenue: props.shouldHideReaderRevenue,
             isMinuteArticle: props.isMinuteArticle,
             isPaidContent: props.isPaidContent,
+            isSensitive: props.isSensitive,
             tags: props.tags,
             showSupportMessaging: shouldShowSupportMessaging(),
             isRecurringContributor: isRecurringContributor(
@@ -103,7 +106,9 @@ const MemoisedInner = ({
     shouldHideReaderRevenue,
     isMinuteArticle,
     isPaidContent,
+    isSensitive,
     tags,
+    contributionsServiceUrl,
 }: Props) => {
     const [data, setData] = useState<{
         slot?: {
@@ -127,8 +132,10 @@ const MemoisedInner = ({
             isMinuteArticle,
             isPaidContent,
             tags,
+            contributionsServiceUrl,
+            isSensitive,
         });
-        getBodyEnd(contributionsPayload)
+        getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
             .then(checkForErrors)
             .then(response => response.json())
             .then(json =>
@@ -203,7 +210,9 @@ export const SlotBodyEnd = ({
     shouldHideReaderRevenue,
     isMinuteArticle,
     isPaidContent,
+    isSensitive,
     tags,
+    contributionsServiceUrl,
 }: Props) => {
     if (isSignedIn === undefined || countryCode === undefined) {
         return null;
@@ -227,7 +236,9 @@ export const SlotBodyEnd = ({
             shouldHideReaderRevenue={shouldHideReaderRevenue}
             isMinuteArticle={isMinuteArticle}
             isPaidContent={isPaidContent}
+            isSensitive={isSensitive}
             tags={tags}
+            contributionsServiceUrl={contributionsServiceUrl}
         />
     );
 };

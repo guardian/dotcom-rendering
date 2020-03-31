@@ -78,7 +78,7 @@ export const CardAge = ({
     const displayString = makeRelativeDate(
         new Date(webPublicationDate).getTime(),
         {
-            format: 'short',
+            format: 'med',
         },
     );
 

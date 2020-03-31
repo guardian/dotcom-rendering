@@ -243,6 +243,7 @@ interface CAPIType {
 
     pageFooter: FooterType;
 
+    contributionsServiceUrl: string;
     slotMachineFlags?: string;
 
     pageType: PageTypeType;
@@ -296,6 +297,7 @@ type CAPIBrowserType = {
             header: ReaderRevenueCategories;
         };
     };
+    contributionsServiceUrl: string;
 };
 
 interface TagType {

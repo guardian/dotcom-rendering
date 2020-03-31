@@ -252,6 +252,9 @@
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
         },
+        "contributionsServiceUrl": {
+            "type": "string"
+        },
         "slotMachineFlags": {
             "type": "string"
         },
@@ -298,6 +301,7 @@
         "commercialProperties",
         "config",
         "contentType",
+        "contributionsServiceUrl",
         "designType",
         "editionId",
         "editionLongForm",
@@ -393,6 +397,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/Weighting"
+                },
+                "richLinkIndex": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -525,7 +532,7 @@
                 "srcSet": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/SrcSet"
+                        "$ref": "#/definitions/SrcSetItem"
                     }
                 }
             },
@@ -534,7 +541,7 @@
                 "weighting"
             ]
         },
-        "SrcSet": {
+        "SrcSetItem": {
             "type": "object",
             "properties": {
                 "src": {
@@ -1584,6 +1591,15 @@
                 "shouldHideReaderRevenue": {
                     "type": "boolean"
                 },
+                "discussionApiUrl": {
+                    "type": "string"
+                },
+                "discussionD2Uid": {
+                    "type": "string"
+                },
+                "discussionApiClientHeader": {
+                    "type": "string"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -1618,6 +1634,9 @@
                 "contentType",
                 "dcrSentryDsn",
                 "dfpAccountId",
+                "discussionApiClientHeader",
+                "discussionApiUrl",
+                "discussionD2Uid",
                 "edition",
                 "frontendAssetsFullURL",
                 "googletagUrl",
@@ -1726,6 +1745,17 @@
         "Branding": {
             "type": "object",
             "properties": {
+                "brandingType": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
                 "sponsorName": {
                     "type": "string"
                 },
@@ -1766,6 +1796,41 @@
                 },
                 "aboutThisLink": {
                     "type": "string"
+                },
+                "logoForDarkBackground": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
                 }
             },
             "required": [

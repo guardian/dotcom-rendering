@@ -28,8 +28,8 @@
         "@emotion/core": "^10.0.5",
         "@guardian/consent-management-platform": "^2.0.10",
         "@guardian/discussion-rendering": "^0.3.1",
-        "@guardian/slot-machine-client": "^0.2.6",
-        "@guardian/src-foundations": "^0.15.1",
+        "@guardian/automat-client": "^0.2.10",
+        "@guardian/src-foundations": "^0.16.1",
         "@sentry/browser": "^5.7.1",
         "@types/ajv": "^1.0.0",
         "@types/lodash.escape": "^4.0.6",
@@ -65,7 +65,7 @@
         "glob": "^7.1.3",
         "html-minifier": "^3.5.14",
         "inquirer": "^5.2.0",
-        "jsdom": "^13.0.0",
+        "jsdom": "^15.2.0",
         "lodash.escape": "^4.0.1",
         "lodash.get": "^4.4.2",
         "log4js": "4.2.0",
@@ -203,7 +203,8 @@
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
             "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
             "^@root(.*)$": "<rootDir>$1",
-            "^@frontend(.*)$": "<rootDir>/src$1"
+            "^@frontend(.*)$": "<rootDir>/src$1",
+            "^@guardian/src-foundations/(.*)$": "@guardian/src-foundations/$1/cjs"
         },
         "testResultsProcessor": "jest-teamcity-reporter",
         "collectCoverageFrom": [
