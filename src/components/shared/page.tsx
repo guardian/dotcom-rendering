@@ -135,22 +135,21 @@ const getImageMappings = (imageSalt: string, capi: Content): ImageMappings => {
         return { ...blockMappings, ...getContributorMappings(capi.tags, imageSalt) }
 }
 
+const filterBlocks = (block: Block): Block => {
+    const { createdBy, lastModifiedBy, ...blocks } = block;
+    return blocks;
+}
+
 const liveblogProps = (capi: Content): Content => {
     const { id, type, webTitle, webUrl, apiUrl, fields, tags, references, isHosted, blocks } = capi;
-    const { main, body, totalBodyBlocks } = blocks as Blocks;
-    const { createdBy, lastModifiedBy, ...mainBlocks } = main as Block;
-
     return {
         id, type, webTitle, webUrl, apiUrl, fields, references, isHosted,
         tags: tags.map(({ type, webTitle, webUrl, id, references, apiUrl }) =>
             ({ type, webTitle, webUrl, id, references, apiUrl })),
         blocks: {
-            totalBodyBlocks,
-            main: mainBlocks,
-            body: body?.map(block => {
-                const { createdBy, lastModifiedBy, ...bodyBlocks } = block;
-                return bodyBlocks;
-            })
+            totalBodyBlocks: blocks?.totalBodyBlocks,
+            main: blocks?.main ? filterBlocks(blocks?.main) : undefined,
+            body: blocks?.body ? blocks.body.map(filterBlocks) : undefined
         }
     }
 }
