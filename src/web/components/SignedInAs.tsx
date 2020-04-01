@@ -9,6 +9,7 @@ import { until } from '@guardian/src-foundations/mq';
 type Props = {
     commentCount: number;
     pillar: Pillar;
+    enableDiscussionSwitch: boolean;
     user?: UserProfile;
     isClosedForComments?: boolean;
 };
@@ -79,6 +80,7 @@ const rowUntilDesktop = css`
 export const SignedInAs = ({
     commentCount,
     pillar,
+    enableDiscussionSwitch,
     user,
     isClosedForComments,
 }: Props) => {
@@ -95,8 +97,15 @@ export const SignedInAs = ({
                 </span>
             </h2>
 
+            {/* Discussion is disabled sitewide */}
+            {user && enableDiscussionSwitch === false && (
+                <span className={headlineStyles}>
+                    Commenting has been disabled at this time
+                </span>
+            )}
+
             {/* Discussion open and user logged in */}
-            {user && !isClosedForComments && (
+            {enableDiscussionSwitch && user && !isClosedForComments && (
                 <div className={rowUntilDesktop}>
                     <div className={imageWrapper}>
                         <img
@@ -138,7 +147,7 @@ export const SignedInAs = ({
             )}
 
             {/* The discussion is closed (only appears for logged in users) */}
-            {user && isClosedForComments && (
+            {enableDiscussionSwitch && user && isClosedForComments && (
                 <span className={headlineStyles}>
                     This discussion is closed for comments
                 </span>
