@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { css, cx } from 'emotion';
-import { palette } from '@guardian/src-foundations';
 import { neutral, border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
+import { pillarPalette } from '@frontend/lib/pillars';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 const thinGreySolid = `1px solid ${border.secondary}`;
@@ -44,7 +44,7 @@ const firstTab = css`
 
 const selectedListTab = (pillar: Pillar) => css`
     /* TODO: Using a pseudo selector here could be faster? */
-    box-shadow: inset 0px 4px 0px 0px ${pillar && palette[pillar].dark};
+    box-shadow: inset 0px 4px 0px 0px ${pillar && pillarPalette[pillar].dark};
     transition: box-shadow 0.3s ease-in-out;
 `;
 

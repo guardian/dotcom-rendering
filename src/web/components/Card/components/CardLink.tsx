@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral, opinion } from '@guardian/src-foundations/palette';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const linkStyles = (designType: DesignType, pillar: Pillar) => {
     const baseLinkStyles = css`
@@ -40,7 +40,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Comment':
             return css`
                 ${baseLinkStyles}
-                background-color: ${palette.opinion.faded};
+                background-color: ${opinion[800]};
                 :hover {
                      /* TODO: This colour is hard coded here because it does not yet
                            exist in src-foundation. Once it's been added, please
@@ -61,7 +61,7 @@ const linkStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Live':
             return css`
                 ${baseLinkStyles}
-                background-color: ${palette[pillar].dark};
+                background-color: ${pillarPalette[pillar].dark};
 
                 :hover {
                     filter: brightness(90%);

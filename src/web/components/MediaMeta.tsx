@@ -1,9 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 
+import { pillarPalette } from '@frontend/lib/pillars';
 import Audio from '@frontend/static/icons/audio.svg';
 import Photo from '@frontend/static/icons/photo.svg';
 import Video from '@frontend/static/icons/video.svg';
@@ -19,8 +19,8 @@ const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
     height: 23px;
     /* Below we force the colour to be bright if the pillar is news (because it looks better) */
     background-color: ${pillar === 'news'
-        ? palette[pillar].bright
-        : palette[pillar].main};
+        ? pillarPalette[pillar].bright
+        : pillarPalette[pillar].main};
     border-radius: 50%;
     display: inline-block;
 
@@ -37,7 +37,9 @@ const iconWrapperStyles = (mediaType: MediaType, pillar: Pillar) => css`
 
 const durationStyles = (pillar: Pillar) => css`
     /* Below we force the colour to be bright if the pillar is news (because it looks better) */
-    color: ${pillar === 'news' ? palette[pillar].bright : palette[pillar].main};
+    color: ${pillar === 'news'
+        ? pillarPalette[pillar].bright
+        : pillarPalette[pillar].main};
     ${textSans.xsmall({ fontWeight: `bold` })}
 `;
 

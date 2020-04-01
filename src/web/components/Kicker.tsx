@@ -1,11 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
-
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const kickerStyles = (colour: string) => css`
     color: ${colour};
@@ -29,12 +28,14 @@ const decideColour = (
     switch (designType) {
         case 'Live':
             // TODO: We need this colour in source foundation
-            return inCard ? decidePillarLight(pillar) : palette[pillar].main;
+            return inCard
+                ? decidePillarLight(pillar)
+                : pillarPalette[pillar].main;
         case 'Media':
             // On Media cards, when pillar is news we use the bright colour as this looks better on a dark background vs. main
             return inCard && pillar === 'news'
-                ? palette[pillar].bright
-                : palette[pillar].main;
+                ? pillarPalette[pillar].bright
+                : pillarPalette[pillar].main;
         case 'Feature':
         case 'Interview':
         case 'Analysis':
@@ -50,7 +51,7 @@ const decideColour = (
         case 'Comment':
         case 'Immersive':
         default:
-            return palette[pillar].main;
+            return pillarPalette[pillar].main;
     }
 };
 

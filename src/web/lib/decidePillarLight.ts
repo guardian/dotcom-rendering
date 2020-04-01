@@ -1,4 +1,4 @@
-import { palette } from '@guardian/src-foundations';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 export const decidePillarLight = (pillar: Pillar) => {
     // TODO: This function is a tempoary workaround while we wait for source foundation to be updated with
@@ -9,12 +9,12 @@ export const decidePillarLight = (pillar: Pillar) => {
         case 'sport':
             return '#90dcff';
         case 'culture':
-            return palette[pillar].main;
+            return pillarPalette[pillar].main;
         case 'lifestyle':
-            return palette[pillar].main;
+            return pillarPalette[pillar].main;
         case 'opinion':
-            return palette[pillar].main;
+            return pillarPalette[pillar].main;
         default:
-            return palette[pillar].main;
+            return pillarPalette[pillar].main;
     }
 };

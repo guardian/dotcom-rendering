@@ -177,8 +177,7 @@ export const SubNav = ({ subNavSections, pillar, currentNavLink }: Props) => {
                     <li key={link.url}>
                         <a
                             className={cx(linkStyle, {
-                                [selected]:
-                                    link.title === currentNavLink,
+                                [selected]: link.title === currentNavLink,
                             })}
                             href={link.url}
                             data-link-name={`nav2 : subnav : ${trimLeadingSlash(
