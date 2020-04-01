@@ -9,13 +9,14 @@ import { srcset, src } from 'image';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement, Role } from 'item';
+import { headline, body } from '@guardian/src-foundations/typography';
+import { remSpace } from '@guardian/src-foundations';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import { headline, body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
-
 
 // ----- Renderer ----- //
 
@@ -171,8 +172,21 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
     }
 }
 
+const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const children = Array.from(node.childNodes).map(textElement(pillar));
+    switch (node.nodeName) {
+        case 'P':
+            return h('p', { key }, children);
+        default:
+            return textElement(pillar)(node, key);
+    }
+}
+
 const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(textElement(pillar));
+
+const standfirstText = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
+    Array.from(doc.childNodes).map(standfirstTextElement(pillar));
 
 interface ImageProps {
     url: string;
@@ -381,5 +395,6 @@ const renderAll = (imageMappings: ImageMappings) =>
 export {
     renderAll,
     text as renderText,
+    standfirstText as renderStandfirstText,
     ImageElement,
 };

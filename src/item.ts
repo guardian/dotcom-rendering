@@ -439,9 +439,11 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
             ...itemFieldsWithBody(docParser, content),
         };
     } else if (isComment(tags)) {
+        const item = itemFieldsWithBody(docParser, content);
         return {
             design: Design.Comment,
-            ...itemFieldsWithBody(docParser, content),
+            ...item,
+            pillar: item.pillar === Pillar.news ? Pillar.opinion : item.pillar
         };
     } else if (isFeature(tags)) {
         return {
