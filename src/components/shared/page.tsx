@@ -17,9 +17,15 @@ import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
 import { fromCapi, Design, Display } from 'item';
-import { ElementType, IBlock as Block, IBlockElement as BlockElement, TagType, ITag as Tag } from 'mapiThriftModels';
 import { sign } from 'components/image';
-
+import {
+    ElementType,
+    TagType,
+    ITag as Tag,
+    IBlock as Block,
+    IBlocks as Blocks,
+    IBlockElement as BlockElement
+} from 'mapiThriftModels';
 
 // ----- Components ----- //
 
@@ -120,13 +126,32 @@ const getImageMappings = (imageSalt: string, capi: Content): ImageMappings => {
             const asset = elem.assets.find(asset => asset.typeData?.isMaster);
 
             if (asset !== undefined && asset.file !== undefined) {
-                mappingsWithUrl(mappings, asset.file, imageSalt);
+                return mappingsWithUrl(mappings, asset.file, imageSalt);
             }
 
             return mappings;
         }, {});
 
         return { ...blockMappings, ...getContributorMappings(capi.tags, imageSalt) }
+}
+
+const liveblogHydrationProps = (capi: Content): Content => {
+    const { id: contentId, type, webTitle, webUrl, apiUrl, fields, tags, references, isHosted, blocks } = capi;
+    const { main, body, totalBodyBlocks } = blocks as Blocks;
+    const { createdBy, lastModifiedBy, ...mainBlocks } = main as Block;
+
+    return {
+        id: contentId, type, webTitle, webUrl, apiUrl, fields, references, isHosted,
+        tags: tags.map(({ type, webTitle, webUrl, id, references, apiUrl }) => ({ type, webTitle, webUrl, id, references, apiUrl })),
+        blocks: {
+            totalBodyBlocks,
+            main: mainBlocks,
+            body: body?.map(block => {
+                const { createdBy, lastModifiedBy, ...bodyBlocks } = block;
+                return bodyBlocks;
+            });
+        }
+    }
 }
 
 const WithScript = (props: { src: string; children: ReactNode }): ReactElement =>
@@ -164,7 +189,7 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
             <WithScript src={liveblogScript}>
                 <LiveblogArticle item={item} imageMappings={imageMappings} />
             </WithScript>
-        ), resources: [liveblogScript], hydrationProps: { ...capi, imageMappings } };
+        ), resources: [liveblogScript], hydrationProps: { ...liveblogHydrationProps(capi), imageMappings } };
     }
 
     if (item.display === Display.Immersive) {
