@@ -87,10 +87,9 @@ export const CommentsLayout = ({
                 pillar={pillar}
                 initialPage={commentPage}
                 pageSizeOverride={commentPageSize}
-                // TODO: Disabled pending discussion publishing a version supporting this prop
-                // isClosedForComments={
-                //     isClosedForComments || !enableDiscussionSwitch
-                // }
+                isClosedForComments={
+                    isClosedForComments || !enableDiscussionSwitch
+                }
                 orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{
