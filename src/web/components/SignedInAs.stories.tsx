@@ -49,6 +49,24 @@ export const Image = () => {
 };
 Image.story = { name: 'with image' };
 
+export const Banned = () => {
+    return (
+        <SignedInAs
+            pillar="culture"
+            enableDiscussionSwitch={true}
+            commentCount={32}
+            user={{
+                ...aUser,
+                privateFields: {
+                    ...aUser.privateFields,
+                    canPostComment: false,
+                },
+            }}
+        />
+    );
+};
+Banned.story = { name: 'when banned' };
+
 export const NoDisplayName = () => {
     return (
         <SignedInAs
