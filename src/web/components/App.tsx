@@ -261,6 +261,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                         discussionApiClientHeader={
                             CAPI.config.discussionApiClientHeader
                         }
+                        enableDiscussionSwitch={
+                            CAPI.config.enableDiscussionSwitch
+                        }
                         expanded={true}
                         commentToScrollTo={hashCommentId}
                     />
@@ -279,6 +282,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                             discussionD2Uid={CAPI.config.discussionD2Uid}
                             discussionApiClientHeader={
                                 CAPI.config.discussionApiClientHeader
+                            }
+                            enableDiscussionSwitch={
+                                CAPI.config.enableDiscussionSwitch
                             }
                             expanded={false}
                         />

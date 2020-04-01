@@ -70,6 +70,7 @@ const buildPayload = (props: Props) => {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
+            clientName: 'dcr',
             campaignCode,
             abTestName: testName,
             abTestVariant: 'dcr',
