@@ -295,7 +295,7 @@ const richLinkStyles = css`
 
     a {
         text-decoration: none;
-        background: none;
+        border-bottom: none;
     }
 
     float: left;
