@@ -11,12 +11,10 @@ import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement, Role } from 'item';
 import { headline, body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
+import { ImageMappings } from 'components/shared/page';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
-import { headline, body } from '@guardian/src-foundations/typography';
-import { remSpace } from '@guardian/src-foundations';
-import { ImageMappings } from 'components/shared/page';
 
 // ----- Renderer ----- //
 
