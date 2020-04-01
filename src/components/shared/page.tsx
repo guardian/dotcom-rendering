@@ -23,7 +23,6 @@ import {
     TagType,
     ITag as Tag,
     IBlock as Block,
-    IBlocks as Blocks,
     IBlockElement as BlockElement
 } from 'mapiThriftModels';
 
