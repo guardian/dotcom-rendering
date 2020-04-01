@@ -7,7 +7,6 @@ import { createHash } from 'crypto';
 import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { ImageMappings } from './shared/page';
-import { remSpace } from '@guardian/src-foundations';
 
 // ----- Setup ----- //
 
