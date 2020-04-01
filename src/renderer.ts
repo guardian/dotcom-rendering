@@ -374,6 +374,7 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
         case ElementKind.Tweet:
             return h(Tweet, { content: element.content, pillar, key });
 
+        case ElementKind.Audio:
         case ElementKind.Instagram:
             const props = {
                 dangerouslySetInnerHTML: {

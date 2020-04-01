@@ -51,7 +51,8 @@ const enum ElementKind {
     Interactive,
     RichLink,
     Tweet,
-    Instagram
+    Instagram,
+    Audio
 }
 
 enum Role {
@@ -109,6 +110,9 @@ type BodyElement = {
     content: NodeList;
 } | {
     kind: ElementKind.Instagram;
+    html: string;
+} | {
+    kind: ElementKind.Audio;
     html: string;
 };
 
@@ -260,6 +264,10 @@ const parseElement =
         case ElementType.INSTAGRAM:
             const instagramHtml = element.instagramTypeData?.html ?? "";
             return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
+
+        case ElementType.AUDIO:
+            const audioHtml = element.audioTypeData?.html ?? "";
+            return new Ok({ kind: ElementKind.Audio, html: audioHtml });
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
