@@ -78,17 +78,7 @@ const standardStyles = (width: number, height: number): SerializedStyles => css`
 `;
 
 const thumbnailStyles = (width: number, height: number): SerializedStyles => css`
-    float: left;
-    clear: left;
-    width: 8.75rem;
     height: calc(8.75rem * ${height / width});
-    margin: 0 ${remSpace[3]} 0 ${remSpace[2]};
-
-    ${from.wide} {
-        margin-left: calc(-8.75rem - ${remSpace[3]} - ${remSpace[2]});
-        margin-right: 0;
-        padding: 0;
-    }
 `;
 
 const Image: FC<Props> = (props) => {
