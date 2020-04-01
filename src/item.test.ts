@@ -426,3 +426,18 @@ describe('instagram elements', () => {
         expect(element.kind).toBe(ElementKind.Instagram)
     })
 });
+
+describe('audio elements', () => {
+    test('parses audio elements', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {
+                html: "<p>Spotify playlist<p>",
+            }
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Audio)
+    })
+});
