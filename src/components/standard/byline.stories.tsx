@@ -73,7 +73,7 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 export default { title: 'Byline', decorators: [ withKnobs ] };
 
 const News = (): ReactNode =>
-    <Byline imageSalt="mock_salt" item={{
+    <Byline imageMappings={{}} item={{
         ...item,
         byline: text('Byline', 'Jane Smith'),
         bylineHtml: mockBylineHtml(),
@@ -82,7 +82,7 @@ const News = (): ReactNode =>
     }} />
 
 const Sport = (): ReactNode =>
-    <Byline imageSalt="mock_salt" item={{
+    <Byline imageMappings={{}} item={{
         ...item,
         byline: text('Byline', 'Jane Smith'),
         pillar: Pillar.sport,

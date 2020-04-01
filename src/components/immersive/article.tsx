@@ -16,6 +16,7 @@ import { articleWidthStyles, basePx, darkModeCss } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles, Pillar } from 'pillar';
 import { Item } from 'item';
+import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Styles ----- //
@@ -76,19 +77,19 @@ const HeaderImageStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    imageSalt: string;
+    imageMappings: ImageMappings;
     item: Item;
     children: ReactNode[];
 }
 
-const Immersive = ({ imageSalt, item, children }: Props): JSX.Element =>
+const Immersive = ({ imageMappings, item, children }: Props): JSX.Element =>
     <main css={DarkStyles}>
         <article css={BorderStyles}>
             <header>
                 <div css={articleWidthStyles}>
                     <HeaderImage
                         image={item.mainImage}
-                        imageSalt={imageSalt}
+                        imageMappings={imageMappings}
                         className={HeaderImageStyles}
                         pillar={item.pillar}
                     />

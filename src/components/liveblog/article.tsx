@@ -14,6 +14,7 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, getPillarStyles } from 'pillar';
 import { Liveblog } from 'item';
+import { ImageMappings } from 'components/shared/page';
 
 const LiveblogArticleStyles: SerializedStyles = css`
     background: ${neutral[97]};
@@ -46,21 +47,20 @@ const HeaderImageStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 
 interface LiveblogArticleProps {
     item: Liveblog;
-    imageSalt: string;
+    imageMappings: ImageMappings;
 }
 
-const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element => {
-
+const LiveblogArticle = ({ item, imageMappings }: LiveblogArticleProps): JSX.Element => {
     return (
         <main css={LiveblogArticleStyles}>
             <div css={BorderStyles}>
                 <LiveblogSeries series={item.series} pillar={item.pillar} />
                 <LiveblogHeadline headline={item.headline} pillar={item.pillar} />
                 <LiveblogStandfirst standfirst={item.standfirst} pillar={item.pillar} />
-                <LiveblogByline item={item} imageSalt={imageSalt} />
+                <LiveblogByline item={item} imageMappings={imageMappings} />
                 <HeaderImage
                     image={item.mainImage}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={HeaderImageStyles(getPillarStyles(item.pillar))}
                     pillar={item.pillar}
                 />
@@ -68,7 +68,8 @@ const LiveblogArticle = ({ item, imageSalt }: LiveblogArticleProps): JSX.Element
                 <LiveblogBody
                     blocks={item.blocks}
                     pillar={item.pillar}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
+                    totalBodyBlocks={item.totalBodyBlocks}
                 />
                 <Tags tags={item.tags} background={neutral[93]} />
             </div>

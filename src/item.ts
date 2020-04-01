@@ -127,6 +127,7 @@ type LiveBlock = {
 interface Liveblog extends Fields {
     design: Design.Live;
     blocks: LiveBlock[];
+    totalBodyBlocks: number;
 }
 
 interface Review extends Fields {
@@ -405,6 +406,17 @@ const isQuiz =
 const isAdvertisementFeature =
     hasTag('tone/advertisement-features');
 
+const fromCapiLiveBlog = (docParser: DocParser) => (content: Content): Liveblog => {
+    const body = content?.blocks?.body?.slice(0, 7) ?? [];
+
+    return {
+        design: Design.Live,
+        blocks: parseBlocks(docParser)(body),
+        totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
+        ...itemFields(docParser, content),
+    };
+}
+
 const fromCapi = (docParser: DocParser) => (content: Content): Item => {
     const { tags, fields } = content;
 
@@ -439,13 +451,7 @@ const fromCapi = (docParser: DocParser) => (content: Content): Item => {
             ...itemFieldsWithBody(docParser, content),
         };
     } else if (isLive(tags)) {
-        const body = content?.blocks?.body ?? [];
-
-        return {
-            design: Design.Live,
-            blocks: parseBlocks(docParser)(body),
-            ...itemFields(docParser, content),
-        };
+        return fromCapiLiveBlog(docParser)(content);
     } else if (isRecipe(tags)) {
         return {
             design: Design.Recipe,
@@ -501,4 +507,5 @@ export {
     Role,
     Image,
     fromCapi,
+    fromCapiLiveBlog
 };

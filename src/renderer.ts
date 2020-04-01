@@ -11,6 +11,7 @@ import { getPillarStyles, Pillar } from 'pillar';
 import { ElementKind, BodyElement, Role } from 'item';
 import { headline, body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
+import { ImageMappings } from 'components/shared/page';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
@@ -188,7 +189,7 @@ const standfirstText = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
 interface ImageProps {
     url: string;
     alt: string;
-    salt: string;
+    imageMappings: ImageMappings;
     sizes: string;
     width: number;
     height: number;
@@ -208,7 +209,7 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
-    const { url, sizes, salt, alt, width, height, credit, captionString } = props;
+    const { url, sizes, alt, width, height, credit, captionString, imageMappings } = props;
 
     if (!url) {
         return null;
@@ -216,10 +217,10 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 
     return styledH('img', {
         sizes,
-        srcSet: srcset(url, salt),
+        srcSet: srcset(url, imageMappings),
         alt,
         className: 'js-launch-slideshow',
-        src: src(salt, url, 500),
+        src: src(imageMappings, url, width),
         css: imageStyles(width, height),
         caption: captionString,
         credit,
@@ -332,7 +333,8 @@ const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): React
     return styledH('blockquote', { key: props.key, className: 'twitter-tweet', css: TweetStyles }, ...Array.from(props.content).map(textElement(props.pillar)));
 }
 
-const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
+const render = (pillar: Pillar, imageMappings: ImageMappings) =>
+    (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
         case ElementKind.Text:
@@ -348,7 +350,7 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
                 image: {
                     url: file,
                     alt,
-                    salt,
+                    imageMappings,
                     width,
                     height,
                     caption: captionString,
@@ -382,8 +384,9 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
     }
 }
 
-const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
-    elements.map(render(salt, pillar));
+const renderAll = (imageMappings: ImageMappings) =>
+    (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+        elements.map(render(pillar, imageMappings));
 
 // ----- Exports ----- //
 

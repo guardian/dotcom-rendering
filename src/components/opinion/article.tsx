@@ -19,6 +19,7 @@ import { CommentCount } from 'components/shared/commentCount';
 import { getPillarStyles } from 'pillar';
 import { Comment } from 'item';
 import Author from 'components/author';
+import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Styles ----- //
@@ -73,12 +74,12 @@ const topBorder = css`
 // ----- Component ----- //
 
 interface Props {
-    imageSalt: string;
+    imageMappings: ImageMappings;
     item: Comment;
     children: ReactNode[];
 }
 
-const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
+const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
@@ -89,7 +90,7 @@ const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
                 </div>
                 <Cutout 
                     contributors={item.contributors}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={articleWidthStyles}
                 />
                 <Keyline {...item} />
@@ -114,7 +115,7 @@ const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
 
                 <HeaderImage
                     image={item.mainImage}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={HeaderImageStyles}
                     pillar={item.pillar}
                 />

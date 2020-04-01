@@ -17,6 +17,7 @@ import { darkModeCss, articleWidthStyles } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles } from 'pillar';
 import { Standard, Review } from 'item';
+import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Styles ----- //
@@ -53,12 +54,12 @@ const HeaderImageStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    imageSalt: string;
+    imageMappings: ImageMappings;
     item: Standard | Review;
     children: ReactNode[];
 }
 
-const Standard = ({ imageSalt, item, children }: Props): JSX.Element => {
+const Standard = ({ imageMappings, item, children }: Props): JSX.Element => {
     // client side code won't render an Epic if there's an element with this id
     const epicContainer = item.shouldHideReaderRevenue
         ? <div id="epic-container"></div>
@@ -69,7 +70,7 @@ const Standard = ({ imageSalt, item, children }: Props): JSX.Element => {
             <header>
                 <HeaderImage
                     image={item.mainImage}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={HeaderImageStyles}
                     pillar={item.pillar}
                 />
@@ -81,7 +82,7 @@ const Standard = ({ imageSalt, item, children }: Props): JSX.Element => {
                 </div>
                 <Keyline {...item} />
                 <section css={articleWidthStyles}>
-                    <Byline item={item} imageSalt={imageSalt} />
+                    <Byline item={item} imageMappings={imageMappings} />
                     {item.commentable
                         ? <CommentCount count={0} colour={getPillarStyles(item.pillar).kicker}/>
                         : null}

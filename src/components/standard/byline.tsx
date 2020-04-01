@@ -11,6 +11,7 @@ import { PillarStyles, getPillarStyles } from 'pillar';
 import { Standard, Review } from 'item';
 import Author from 'components/shared/author';
 import Dateline from 'components/dateline';
+import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Styles ----- //
@@ -68,10 +69,10 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
 
 interface Props {
     item: Standard | Review;
-    imageSalt: string;
+    imageMappings: ImageMappings;
 }
 
-function Byline({ item, imageSalt }: Props): JSX.Element {
+function Byline({ item, imageMappings }: Props): JSX.Element {
     const pillarStyles = getPillarStyles(item.pillar);
 
     return (
@@ -82,7 +83,7 @@ function Byline({ item, imageSalt }: Props): JSX.Element {
                 <Avatar
                     contributors={item.contributors}
                     bgColour={pillarStyles.inverted}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                 />
                 <div className="author">
                     <Author byline={item.bylineHtml} pillar={item.pillar} />

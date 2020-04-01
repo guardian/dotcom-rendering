@@ -12,7 +12,7 @@ describe('Avatar component renders as expected', () => {
             webTitle: "Web Title",
             id: "test"
         }]
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageSalt="" />);
+        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{}} />);
         expect(avatar.find('img').prop('alt')).toBe("Web Title")
     })
 
@@ -22,7 +22,7 @@ describe('Avatar component renders as expected', () => {
             webTitle: "Web Title",
             id: "test"
         }];
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" imageSalt="" />);
+        const avatar = shallow(<Avatar contributors={contributors} bgColour="pink" imageMappings={{}} />);
         expect(avatar.props().css.styles).toContain("background-color: pink")
     })
 
@@ -32,8 +32,8 @@ describe('Avatar component renders as expected', () => {
             webTitle: "Web Title",
             id: "test"
         }]
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageSalt="SALT" />);
-        expect(avatar.find('img').prop('src')).toBe("https://i.guim.co.uk/img/mapi/test?width=204&quality=85&fit=bounds&sig-ignores-params=true&s=06e5f420e98c9153b66fc0f7383a60f7")
+        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{ "/test": "SALT" }}/>);
+        expect(avatar.find('img').prop('src')).toBe("https://i.guim.co.uk/img/mapi/test?width=204&quality=85&fit=bounds&sig-ignores-params=true&s=SALT")
     })
 
     it('Renders null if more than one contributor', () => {
@@ -41,7 +41,7 @@ describe('Avatar component renders as expected', () => {
             { webTitle: "Contributor 1", id: "test" },
             { webTitle: "Contributor 2", id: "test" }
         ]
-        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageSalt="" />);
+        const avatar = shallow(<Avatar contributors={contributors} bgColour="" imageMappings={{}} />);
         expect(avatar.html()).toBe(null)
     })
 });
