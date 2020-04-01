@@ -52,7 +52,7 @@ const bulletStyles = (colour: string): SerializedStyles => css`
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
     styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
-        props.text.replace(/•/, ''),
+        props.text.replace(/•/g, ''),
         null
     );
 
@@ -96,12 +96,11 @@ const listStyles: SerializedStyles = css`
     list-style: none;
     margin: ${remSpace[2]} 0;
     padding-left: 0;
-    {remSpace[2]};
 `
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: 2rem;
-    padding-bottom: ${remSpace[2]};
+    padding-left: ${remSpace[4]};
+    padding-bottom: .375rem;
 
     &::before {
         display: inline-block;
@@ -109,9 +108,9 @@ const listItemStyles: SerializedStyles = css`
         border-radius: .5rem;
         height: 1rem;
         width: 1rem;
-        margin-right: 1rem;
+        margin-right: ${remSpace[2]};
         background-color: ${neutral[86]};
-        margin-left: -2rem;
+        margin-left: -${remSpace[4]};
         vertical-align: middle;
     }
 
@@ -122,7 +121,7 @@ const listItemStyles: SerializedStyles = css`
 `
 
 const HeadingTwoStyles = css`
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin: 1rem 0 4px 0;
 
@@ -242,7 +241,7 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
         &::before {
             ${icons}
             font-size: 1.5rem;
-            line-height: 1.15;
+            line-height: 1.2;
             font-weight: 300;
             content: '\\e11c';
             display: inline-block;

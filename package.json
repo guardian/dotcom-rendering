@@ -62,7 +62,7 @@
     "@emotion/styled": "^10.0.27",
     "@guardian/node-riffraff-artifact": "^0.1.7",
     "@guardian/src-button": "^0.13.0",
-    "@guardian/src-foundations": "^0.14.1",
+    "@guardian/src-foundations": "^0.16.1",
     "@types/jsdom": "^12.2.4",
     "@types/uuid": "^3.4.6",
     "aws-sdk": "^2.604.0",
