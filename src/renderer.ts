@@ -99,7 +99,7 @@ const listStyles: SerializedStyles = css`
 `
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: ${remSpace[4]};
+    padding-left: 1rem;
     padding-bottom: .375rem;
 
     &::before {
@@ -110,7 +110,7 @@ const listItemStyles: SerializedStyles = css`
         width: 1rem;
         margin-right: ${remSpace[2]};
         background-color: ${neutral[86]};
-        margin-left: -${remSpace[4]};
+        margin-left: -1rem;
         vertical-align: middle;
     }
 
