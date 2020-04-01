@@ -263,6 +263,7 @@ type CAPIBrowserType = {
         permutive: boolean;
         enableSentryReporting: boolean;
         cmpUi: boolean;
+        enableDiscussionSwitch: boolean;
         slotBodyEnd: boolean;
         isSensitive: boolean;
         videoDuration: number;
