@@ -4,7 +4,7 @@ import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
 
-import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
+import { textSans, darkModeCss, basePx } from 'styles';
 import Avatar from 'components/shared/avatar';
 import Follow from 'components/shared/follow';
 import { PillarStyles, getPillarStyles } from 'pillar';
@@ -78,7 +78,7 @@ function Byline({ item, imageSalt }: Props): JSX.Element {
         <div
             css={[Styles(pillarStyles), DarkStyles(pillarStyles)]}
         >
-            <div css={sidePadding}>
+            <div>
                 <Avatar
                     contributors={item.contributors}
                     bgColour={pillarStyles.inverted}

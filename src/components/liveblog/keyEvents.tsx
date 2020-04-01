@@ -5,6 +5,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { makeRelativeDate } from 'date';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { LiveBlock } from 'item';
+import { body } from '@guardian/src-foundations/typography';
 
 const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
     background: ${neutral[100]};
@@ -38,9 +39,12 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
                 user-select: none;
             }
 
-            a {
+            button {
                 color: ${kicker};
                 user-select: none;
+                padding: 0;
+                border: none;
+                ${body.medium()}
             }
 
             &::before {
@@ -130,7 +134,7 @@ const LiveblogKeyEventsStyles = ({ kicker }: PillarStyles): SerializedStyles => 
         transform: rotate(180deg);
     }
 
-    a {
+    button {
         display: block;
     }
 `;
@@ -154,7 +158,7 @@ const LiveblogKeyEvents = ({ pillar, blocks }: LiveblogKeyEventsProps): JSX.Elem
 
                         return <li key={event.id}>
                             { relativeDate }
-                            <a>{event.title}</a>
+                            <button>{event.title}</button>
                         </li>
                     })}
                 </ul>

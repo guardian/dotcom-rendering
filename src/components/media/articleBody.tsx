@@ -22,7 +22,7 @@ interface ArticleBodyProps {
     children: ReactNode[];
 }
 
-const ArticleBodyGallery = ({
+const ArticleBodyMedia = ({
     pillar,
     className,
     children,
@@ -31,4 +31,4 @@ const ArticleBodyGallery = ({
         {children}
     </div>
 
-export default ArticleBodyGallery;
+export default ArticleBodyMedia;

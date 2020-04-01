@@ -6,10 +6,13 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 
 import Follow from 'components/shared/follow';
 import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
-import { formatDate } from 'date';
 import { Contributor } from 'capi';
 import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
 import { Option } from 'types/option';
+import Author from 'components/shared/author';
+import Dateline from 'components/dateline';
+import {Item} from "../../item";
+
 
 // ----- Styles ----- //
 
@@ -26,7 +29,7 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
         }
 
         time {
-            font-size: 1.4rem;
+            ${textSans.small()};
             color: ${neutral[46]};
         }
     }
@@ -55,18 +58,18 @@ interface Props {
     publicationDate: Option<Date>;
     contributors: Contributor[];
     className: SerializedStyles;
+    item: Item;
 }
 
-function Byline({ pillar, publicationDate, contributors, className }: Props): JSX.Element {
+function Byline({ pillar, publicationDate, contributors, className, item }: Props): JSX.Element {
     const pillarStyles = getPillarStyles(pillar);
 
     return (
         <div css={[className, Styles(pillarStyles), DarkStyles(pillarStyles)]}>
             <div css={sidePadding}>
                 <div className="author">
-                    { publicationDate
-                        .fmap<JSX.Element | null>(date => <time>{formatDate(date)}</time>)
-                        .withDefault(null) }
+                    <Author byline={item.bylineHtml} pillar={item.pillar} />
+                    <Dateline date={publicationDate} />
                     <Follow contributors={contributors} />
                 </div>
             </div>

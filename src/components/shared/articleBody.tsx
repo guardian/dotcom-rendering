@@ -4,7 +4,6 @@ import {
     darkModeCss,
     basePx,
     adStyles,
-    textPadding
 } from 'styles';
 import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
@@ -35,10 +34,6 @@ const ArticleBodyStyles = css`
     iframe {
         width: 100%;
         border: none;
-    }
-
-    twitter-widget {
-        ${textPadding}
     }
 
     ${adStyles}

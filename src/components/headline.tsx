@@ -1,14 +1,14 @@
 // ----- Imports ----- //
 
-import React, {ReactElement} from 'react';
-import {css, SerializedStyles} from '@emotion/core';
-import {headline} from '@guardian/src-foundations/typography';
-import {background, neutral, text} from '@guardian/src-foundations/palette';
-import {remSpace} from '@guardian/src-foundations';
+import React, { ReactElement } from 'react';
+import { css, SerializedStyles } from '@emotion/core';
+import { headline } from '@guardian/src-foundations/typography';
+import { background, neutral, text } from '@guardian/src-foundations/palette';
+import { remSpace } from '@guardian/src-foundations';
 
-import {Design, Display, Item} from 'item';
-import {darkModeCss as darkMode, textPadding} from 'styles';
-import {getPillarStyles, PillarStyles} from 'pillar';
+import { Item, Design, Display } from 'item';
+import { darkModeCss as darkMode } from 'styles';
+import { getPillarStyles, PillarStyles } from 'pillar';
 import StarRating from './starRating';
 
 
@@ -25,7 +25,6 @@ const darkStyles = darkMode`
 
 const styles = css`
     ${headline.medium()}
-    ${textPadding}
     padding-bottom: ${remSpace[9]};
     color: ${text.primary};
     margin: 0;

@@ -6,14 +6,16 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
-import { basePx, icons, darkModeCss, textPadding } from 'styles';
+import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { ElementKind, BodyElement, Role } from 'item';
+import { ElementKind, BodyElement, Role, Image, Text } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, body } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
+import FigCaption from 'components/figCaption';
+import MediaFigCaption from 'components/media/mediaFigCaption';
 
 
 // ----- Renderer ----- //
@@ -53,7 +55,7 @@ const listStyles: SerializedStyles = css`
 `
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: 2.5rem;
+    padding-left: 2rem;
     padding-bottom: ${remSpace[2]};
 
     &::before {
@@ -77,7 +79,7 @@ const listItemStyles: SerializedStyles = css`
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
     display: inline-block;
-    ${textPadding}
+
     &::before {
         content: '';
         background-color: ${colour};
@@ -93,7 +95,6 @@ const HeadingTwoStyles = css`
     font-size: 1.4rem;
     font-weight: 700;
     margin: 1rem 0 4px 0;
-    ${textPadding}
 
     & + p {
         margin-top: 0;
@@ -112,14 +113,13 @@ const HorizontalRuleStyles = css`
 `
 
 const TweetStyles = css`
-    ${textPadding}
     ${until.wide} {
         clear: both;
     }
 `;
 
 const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    styledH('p', { css: css`display: inline` },
+    styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
         styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
         props.text.replace(/•/, ''),
         null
@@ -218,7 +218,6 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     margin: 0;
     ${headline.xsmall({ fontWeight: 'light' })};
-    ${textPadding}
 
     blockquote {
         margin-left: 0;
@@ -288,7 +287,6 @@ const richLinkStyles = css`
     clear: left;
     width: ${richLinkWidth};
     margin: ${basePx(1, 2, 1, 0)};
-    margin-left: ${remSpace[2]};
 
     ${from.wide} {
         margin-left: calc(-${richLinkWidth} - ${basePx(2)} - ${basePx(3)});
@@ -312,7 +310,7 @@ const RichLink = (props: { url: string; linkText: string; pillar: Pillar }): Rea
     );
 
 const Interactive = (props: { url: string }): ReactElement =>
-    styledH('figure', { className: 'interactive', css: css`${textPadding}` },
+    styledH('figure', { className: 'interactive' },
         h('iframe', { src: props.url, height: 500 }, null)
     );
 
@@ -341,11 +339,14 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
                     width,
                     height,
                     caption: captionString,
-                    credit
+                    credit,
                 },
-                figcaption: text(caption, pillar),
+            },
+            h(FigCaption, {
                 pillar,
-            });
+                text: text(caption, pillar)
+            })
+            );
 
         case ElementKind.Pullquote:
             const { quote, attribution } = element;
@@ -374,10 +375,30 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map(render(salt, pillar));
 
+const renderMedia = (salt: string) => (pillar: Pillar, elements: Image[]): ReactNode[] =>
+    elements.map((element) => {
+    const { file, alt, caption, captionString, credit, width, height } = element;
+     return h(BodyImage, {
+        image: {
+            url: file,
+            alt,
+            salt,
+            width,
+            height,
+            caption: captionString,
+            credit
+        },
+    },
+    h(MediaFigCaption, {
+        pillar,
+        text: text(caption, pillar)
+    }))});
+
 // ----- Exports ----- //
 
 export {
     renderAll,
     text as renderText,
     ImageElement,
+    renderMedia,
 };

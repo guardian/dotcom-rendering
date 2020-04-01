@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { textSans, basePx, textPadding } from 'styles';
+import { textSans, basePx } from 'styles';
 import { Keyline } from '../shared/keyline';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -44,7 +44,6 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
     }
 
     section {
-        ${textPadding}
         margin-top: ${basePx(-1)};
 
         .byline {

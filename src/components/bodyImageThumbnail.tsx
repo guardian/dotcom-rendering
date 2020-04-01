@@ -14,8 +14,6 @@ const sizes = `(min-width: 140px)`;
 
 interface Props {
     image: Omit<ImageProps, 'sizes'>;
-    figcaption: ReactNode;
-    pillar: Pillar;
 }
 
 const styles = css`
@@ -24,9 +22,10 @@ const styles = css`
 `;
 
 
-const BodyImageThumbnail: FC<Props> = ({ image }: Props) =>
+const BodyImageThumbnail: FC<Props> = ({ image, children }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} thumbnail={true} />
+        {children}
     </figure>
 
 
