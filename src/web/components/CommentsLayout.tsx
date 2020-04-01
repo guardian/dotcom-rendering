@@ -23,7 +23,7 @@ type Props = {
     discussionApiClientHeader: string;
     expanded: boolean;
     commentPage?: number;
-    commentPageSize?: 20 | 25 | 50 | 100;
+    commentPageSize?: 25 | 50 | 100;
     commentOrderBy?: 'newest' | 'oldest' | 'mostrecommended';
     commentToScrollTo?: number;
 };
@@ -84,6 +84,7 @@ export const CommentsLayout = ({
             <Comments
                 user={user}
                 baseUrl={baseUrl}
+                pillar={pillar}
                 initialPage={commentPage}
                 pageSizeOverride={commentPageSize}
                 // TODO: Disabled pending discussion publishing a version supporting this prop
