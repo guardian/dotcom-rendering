@@ -74,9 +74,6 @@ const Media = ({ imageSalt, item, children }: Props): JSX.Element =>
                 </div>
                 <section css={articleWidthStyles}>
                     <Byline item={item} imageSalt={imageSalt} />
-                    {item.commentable
-                        ? <CommentCount count={0} colour={getPillarStyles(item.pillar).kicker}/>
-                        : null}
                 </section>
             </header>
             <Body pillar={item.pillar} className={[articleWidthStyles]}>

@@ -91,7 +91,7 @@ const getStyles = (item: Item): SerializedStyles => {
         case Design.Comment:
             return commentStyles;
         case Design.Media:
-            return  mediaStyles;
+            return mediaStyles;
         default:
             return styles;
     }
