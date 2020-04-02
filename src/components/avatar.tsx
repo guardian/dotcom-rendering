@@ -50,7 +50,7 @@ const Avatar: FC<Props> = ({ contributors, imageMappings, className, ...format }
                 srcSet={srcset(contributor.bylineLargeImageUrl, imageMappings)}
                 alt={contributor.webTitle}
                 sizes={dimensions}
-                src={src(imageSalt, contributor.bylineLargeImageUrl, defaultSrcWidth)}
+                src={src(imageMappings, contributor.bylineLargeImageUrl, defaultSrcWidth)}
             />
         );
     }
