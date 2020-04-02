@@ -121,8 +121,7 @@ const listItemStyles: SerializedStyles = css`
 `
 
 const HeadingTwoStyles = css`
-    font-size: 1.25rem;
-    font-weight: 700;
+    ${headline.xxsmall({ fontWeight: 'bold' })}
     margin: 1rem 0 4px 0;
 
     & + p {
