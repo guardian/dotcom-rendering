@@ -16,6 +16,7 @@ import {
     IAsset as Asset,
 } from 'mapiThriftModels';
 import {logger} from "logger";
+import { AudioProps } from 'components/audio';
 
 
 // ----- Item Type ----- //
@@ -94,7 +95,9 @@ type Image = {
 
 type Audio = {
     kind: ElementKind.Audio;
-    html: string;
+    src: string;
+    height: string;
+    width: string;
 }
 
 type BodyElement = {
@@ -215,17 +218,19 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
     });
 }
 
-const parseIframe = (docParser: DocParser) => (html: string): string | undefined => {
+const parseIframe = (docParser: DocParser) => (html: string): AudioProps | undefined => {
     const iframe = docParser(html).querySelector('iframe');
+    const src = iframe?.getAttribute('src');
 
-    if (!iframe) {
+    if (!iframe || !src) {
         return undefined;
     }
 
-    iframe.removeAttribute('frameborder');
-    iframe.setAttribute('style', 'border: none');
-    iframe.setAttribute('sandbox', 'allow-scripts')
-    return iframe.outerHTML;
+    return {
+        src,
+        width: iframe.getAttribute('width') ?? "300",
+        height: iframe.getAttribute('height') ?? "380"
+    }
 }
 
 const parseElement =
@@ -300,7 +305,9 @@ const parseElement =
                 return new Err('No html field on audioTypeData')
             }
             return fromNullable(parseIframe(docParser)(audioHtml))
-                .fmap<Result<string, Audio>>(html => new Ok({ kind: ElementKind.Audio, html }))
+                .fmap<Result<string, Audio>>(({ src, width, height }) => {
+                    return new Ok({ kind: ElementKind.Audio, src, width, height })
+                })
                 .withDefault(new Err('No iframe within audioTypeData.html'))
 
         default:
