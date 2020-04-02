@@ -135,6 +135,7 @@ const MemoisedInner = ({
             contributionsServiceUrl,
             isSensitive,
         });
+
         getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
             .then(checkForErrors)
             .then(response => response.json())
@@ -176,9 +177,13 @@ const MemoisedInner = ({
             // This should only be called once
             try {
                 // eslint-disable-next-line no-eval
-                const init = eval(data.slot.js);
-                init();
+                window.eval(data.slot.js);
+                if (typeof window.initAutomatJs === 'function') {
+                    window.initAutomatJs();
+                }
             } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error(error);
                 window.guardian.modules.sentry.reportError(
                     error,
                     'slot-body-end',
