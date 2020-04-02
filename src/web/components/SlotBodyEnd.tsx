@@ -182,9 +182,7 @@ const MemoisedInner = ({
                 // eslint-disable-next-line no-eval
                 window.eval(data.slot.js);
                 if (typeof window.initAutomatJs === 'function') {
-                    if (slotRoot.current) {
-                        window.initAutomatJs(slotRoot.current);
-                    }
+                    window.initAutomatJs(slotRoot.current);
                 }
             } catch (error) {
                 // eslint-disable-next-line no-console
