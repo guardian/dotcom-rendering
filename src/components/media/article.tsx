@@ -14,6 +14,7 @@ import Tags from 'components/media/tags';
 import { darkModeCss, articleWidthStyles } from 'styles';
 import { Item } from "../../item";
 import Headline from 'components/headline';
+import {ImageMappings} from "../shared/page";
 
 // ----- Styles ----- //
 
@@ -49,18 +50,18 @@ const HeaderImageStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    imageSalt: string;
+    imageMappings: ImageMappings;
     item: Item;
     children: ReactNode[];
 }
 
-const Media = ({ imageSalt, item, children }: Props): JSX.Element =>
+const Media = ({ imageMappings, item, children }: Props): JSX.Element =>
      <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderImage
                     image={item.mainImage}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={HeaderImageStyles}
                     pillar={item.pillar}
                 />

@@ -1,12 +1,11 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
 import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
 import { remSpace } from '@guardian/src-foundations';
-import { textPadding } from 'styles';
 
 // ----- Component ----- //
 
@@ -37,7 +36,7 @@ const FigCaption: FC<Props> = ({ pillar, text }) =>
             <polygon points="0,9 5,0 10,9 0,9" />
         </svg>
         {text}
-    </figcaption>
+    </figcaption>;
 
 
 // ----- Exports ----- //
