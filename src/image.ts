@@ -6,7 +6,7 @@ import { ImageMappings } from 'components/shared/page';
 
 const imageResizer = 'https://i.guim.co.uk/img';
 
-const widths = [
+const defaultWidths = [
     140,
     500,
     1000,
@@ -38,10 +38,13 @@ function src(imageMappings: ImageMappings, input: string, width: number): string
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
-const srcset = (url: string, imageMappings: ImageMappings): string =>
+const srcsetWithWidths = (widths: number[]) => (url: string, mappings: ImageMappings): string =>
     widths
-        .map(width => `${src(imageMappings, url, width)} ${width}w`)
+        .map(width => `${src(mappings, url, width)} ${width}w`)
         .join(', ');
+
+const srcset: (url: string, mappings: ImageMappings) => string =
+    srcsetWithWidths(defaultWidths)
 
 
 // ----- Exports ----- //
@@ -49,4 +52,5 @@ const srcset = (url: string, imageMappings: ImageMappings): string =>
 export {
     src,
     srcset,
+    srcsetWithWidths,
 };

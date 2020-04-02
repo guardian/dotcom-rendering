@@ -3,16 +3,16 @@ import { textSans, basePx } from 'styles';
 import { Keyline } from '../shared/keyline';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral } from '@guardian/src-foundations/palette';
-import Avatar from 'components/shared/avatar';
+import Avatar from './avatar';
 import LeftColumn from 'components/shared/leftColumn';
 import { PillarStyles, getPillarStyles } from 'pillar';
-import { CommentCount } from 'components/shared/commentCount';
+import { CommentCount } from './commentCount';
 import { Liveblog } from 'item';
 import { renderText } from 'renderer';
 import Dateline from 'components/dateline';
 import { ImageMappings } from 'components/shared/page';
 
-const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
+const styles = ({ liveblogBackground }: PillarStyles): SerializedStyles => css`
     background: ${liveblogBackground};
     padding-bottom: ${basePx(1)};
 
@@ -47,7 +47,7 @@ const LiveblogBylineStyles = ({ liveblogBackground }: PillarStyles): SerializedS
     section {
         margin-top: ${basePx(-1)};
 
-        .byline {
+        .metadata {
             width: 80%;
             float: left;
             display: inline-block;
@@ -66,12 +66,12 @@ const commentCount = ({ liveblogBackground }: PillarStyles): SerializedStyles =>
     }
 `
 
-interface LiveblogBylineProps {
+interface Props {
     item: Liveblog;
     imageMappings: ImageMappings;
 }
 
-const LiveblogByline = ({ item, imageMappings }: LiveblogBylineProps): JSX.Element => {
+const Metadata = ({ item, imageMappings}: Props): JSX.Element => {
     const pillarStyles = getPillarStyles(item.pillar);
 
     const byline = item.bylineHtml.fmap<ReactNode>(html =>
@@ -79,11 +79,11 @@ const LiveblogByline = ({ item, imageMappings }: LiveblogBylineProps): JSX.Eleme
     ).withDefault(null);
 
     return (
-        <div css={[LiveblogBylineStyles(pillarStyles)]}>
+        <div css={[styles(pillarStyles)]}>
             <Keyline {...item} />
             <LeftColumn>
                 <section>
-                    <div className="byline">
+                    <div className="metadata">
                         <Avatar
                             contributors={item.contributors}
                             bgColour={pillarStyles.featureHeadline}
@@ -109,4 +109,4 @@ const LiveblogByline = ({ item, imageMappings }: LiveblogBylineProps): JSX.Eleme
     )
 }
 
-export default LiveblogByline;
+export default Metadata;

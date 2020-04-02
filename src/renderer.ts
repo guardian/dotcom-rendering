@@ -396,4 +396,5 @@ export {
     text as renderText,
     standfirstText as renderStandfirstText,
     ImageElement,
+    getHref,
 };
