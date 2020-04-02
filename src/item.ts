@@ -52,7 +52,8 @@ const enum ElementKind {
     RichLink,
     Tweet,
     Instagram,
-    Audio
+    Audio,
+    Embed
 }
 
 enum Role {
@@ -91,6 +92,11 @@ type Image = {
     role: Option<Role>;
 }
 
+type Audio = {
+    kind: ElementKind.Audio;
+    html: string;
+}
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -111,8 +117,8 @@ type BodyElement = {
 } | {
     kind: ElementKind.Instagram;
     html: string;
-} | {
-    kind: ElementKind.Audio;
+} | Audio | {
+    kind: ElementKind.Embed;
     html: string;
 };
 
@@ -209,6 +215,19 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
     });
 }
 
+const parseIframe = (docParser: DocParser) => (html: string): string | undefined => {
+    const iframe = docParser(html).querySelector('iframe');
+
+    if (!iframe) {
+        return undefined;
+    }
+
+    iframe?.removeAttribute('frameborder');
+    iframe?.setAttribute('style', 'border: none');
+    iframe?.setAttribute('sandbox', 'allow-scripts')
+    return iframe?.outerHTML;
+}
+
 const parseElement =
     (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
@@ -261,13 +280,28 @@ const parseElement =
             return tweetContent(id, docParser(h))
                 .fmap(content => ({ kind: ElementKind.Tweet, content }));
 
+        case ElementType.EMBED:
+            const { html: embedHtml } = element.embedTypeData ?? {};
+            if (!embedHtml) {
+                return new Err('No html field on embedTypeData')
+            }
+            return new Ok({ kind: ElementKind.Embed, html: embedHtml });
+
         case ElementType.INSTAGRAM:
-            const instagramHtml = element.instagramTypeData?.html ?? "";
+            const { html: instagramHtml } = element.instagramTypeData ?? {};
+            if (!instagramHtml) {
+                return new Err('No html field on instagramTypeData')
+            }
             return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
 
         case ElementType.AUDIO:
-            const audioHtml = element.audioTypeData?.html ?? "";
-            return new Ok({ kind: ElementKind.Audio, html: audioHtml });
+            const { html: audioHtml } = element.audioTypeData ?? {};
+            if (!audioHtml) {
+                return new Err('No html field on audioTypeData')
+            }
+            return fromNullable(parseIframe(docParser)(audioHtml))
+                .fmap<Result<string, Audio>>(html => new Ok({ kind: ElementKind.Audio, html }))
+                .withDefault(new Err('No iframe within audioTypeData.html'))
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
