@@ -177,12 +177,8 @@ const captionHeadingStyles = css`
     color: ${neutral[86]};
     
     em {
-        ${textSans.xsmall({ italic: true })}
+        ${textSans.xsmall({ italic: true, fontWeight: 'bold'})}
     }
-    
-        ${darkModeCss`
-            color: ${neutral[86]};
-    `}
 `;
 
 const MediaCaptionText = (props: { text: string; pillar: Pillar }): ReactElement =>
@@ -190,11 +186,7 @@ const MediaCaptionText = (props: { text: string; pillar: Pillar }): ReactElement
         'span',
         { css: css`
               ${textSans.xsmall()}
-    color: ${neutral[86]};
-    
-        ${darkModeCss`
-            color: ${neutral[86]};
-    `}  
+              color: ${neutral[86]};
         ` },
         props.text,
     );
@@ -204,11 +196,8 @@ const CaptionItalicStyles = (props: { text: string; pillar: Pillar }): ReactElem
         'span',
         { css: css`
               ${textSans.xsmall({ italic: true })}
-    color: ${neutral[86]};
-    
-        ${darkModeCss`
-            color: ${neutral[86]};
-    `}  
+               ${textSans.xsmall({ fontWeight: 'bold' })}
+               color: ${neutral[86]};
         ` },
         props.text,
     );
