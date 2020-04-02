@@ -1,10 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { text, border, neutral } from '@guardian/src-foundations/palette';
+import { text, border, neutral, news } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { palette, space } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
     commentCount: number;
@@ -60,12 +61,12 @@ const usernameStyles = css`
 `;
 
 const linkStyles = (pillar: Pillar) => css`
-    color: ${palette[pillar][300]};
+    color: ${pillarPalette[pillar].dark};
     text-decoration: none;
     border-bottom: 1px solid ${border.secondary};
     transition: border-color 0.15s ease-out;
     :hover {
-        border-color: ${palette.news[300]};
+        border-color: ${news[300]};
     }
 `;
 

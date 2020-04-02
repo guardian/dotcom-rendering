@@ -2,13 +2,13 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { headline } from '@guardian/src-foundations/typography';
-import { palette } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const fontStyles = (size: SmallHeadlineSize) => {
     switch (size) {
@@ -74,7 +74,7 @@ const headlineStyles = (designType: DesignType, pillar: Pillar) => {
     switch (designType) {
         case 'Feature':
         case 'Interview':
-            return colourStyles(palette[pillar].dark);
+            return colourStyles(pillarPalette[pillar].dark);
         case 'Media':
         case 'Live':
             return colourStyles(neutral[97]);
@@ -124,7 +124,7 @@ export const CardHeadline = ({
                 />
             )}
             {showQuotes && (
-                <QuoteIcon colour={palette[pillar].main} size={size} />
+                <QuoteIcon colour={pillarPalette[pillar].main} size={size} />
             )}
 
             <span className={headlineStyles(designType, pillar)}>

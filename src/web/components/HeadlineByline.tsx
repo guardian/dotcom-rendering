@@ -1,10 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
-import { palette } from '@guardian/src-foundations';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const wrapperStyles = css`
     margin-left: 6px;
@@ -40,7 +40,7 @@ const opinionStyles = (pillar: Pillar) => css`
     })}
     line-height: 38px;
     font-style: italic;
-    color: ${palette[pillar].main};
+    color: ${pillarPalette[pillar].main};
 
     a {
         color: inherit;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
     text: string;
@@ -61,7 +61,7 @@ const colourStyles = (designType: DesignType, pillar: Pillar) => {
         case 'Immersive':
         default:
             return css`
-                color: ${palette[pillar].main};
+                color: ${pillarPalette[pillar].main};
             `;
     }
 };

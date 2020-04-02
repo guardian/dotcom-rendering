@@ -1,12 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import {
     neutral,
     background,
     brandBorder,
     brandBackground,
+    opinion,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -245,7 +245,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
 
             {NAV.subNavSections && (
                 <Section
-                    backgroundColour={palette.opinion.faded}
+                    backgroundColour={opinion[800]}
                     padded={false}
                     sectionId="sub-nav-root"
                 >
@@ -265,10 +265,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
                 <GuardianLines pillar={CAPI.pillar} />
             </Section>
 
-            <Section
-                showTopBorder={false}
-                backgroundColour={palette.opinion.faded}
-            >
+            <Section showTopBorder={false} backgroundColour={opinion[800]}>
                 <StandardGrid>
                     <GridItem area="title">
                         <ArticleTitle
