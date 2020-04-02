@@ -18,11 +18,12 @@ type Props = {
     shortUrl: string;
     commentCount: number;
     isClosedForComments: boolean;
+    enableDiscussionSwitch: boolean;
     discussionD2Uid: string;
     discussionApiClientHeader: string;
     expanded: boolean;
     commentPage?: number;
-    commentPageSize?: 20 | 25 | 50 | 100;
+    commentPageSize?: 25 | 50 | 100;
     commentOrderBy?: 'newest' | 'oldest' | 'mostrecommended';
     commentToScrollTo?: number;
 };
@@ -54,6 +55,7 @@ export const CommentsLayout = ({
     commentOrderBy,
     expanded,
     isClosedForComments,
+    enableDiscussionSwitch,
     discussionD2Uid,
     discussionApiClientHeader,
     commentToScrollTo,
@@ -62,6 +64,7 @@ export const CommentsLayout = ({
         <LeftColumn showRightBorder={false}>
             <SignedInAs
                 pillar={pillar}
+                enableDiscussionSwitch={enableDiscussionSwitch}
                 user={user}
                 commentCount={commentCount}
                 isClosedForComments={isClosedForComments}
@@ -72,6 +75,7 @@ export const CommentsLayout = ({
                 <div className={bottomPadding}>
                     <SignedInAs
                         pillar={pillar}
+                        enableDiscussionSwitch={enableDiscussionSwitch}
                         user={user}
                         commentCount={commentCount}
                     />
@@ -80,8 +84,13 @@ export const CommentsLayout = ({
             <Comments
                 user={user}
                 baseUrl={baseUrl}
+                pillar={pillar}
                 initialPage={commentPage}
                 pageSizeOverride={commentPageSize}
+                // TODO: Disabled pending discussion publishing a version supporting this prop
+                // isClosedForComments={
+                //     isClosedForComments || !enableDiscussionSwitch
+                // }
                 orderByOverride={commentOrderBy}
                 shortUrl={shortUrl}
                 additionalHeaders={{

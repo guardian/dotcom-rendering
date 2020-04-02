@@ -26,6 +26,7 @@ export const Default = () => (
                 shortUrl="p/39f5z/"
                 commentCount={345}
                 isClosedForComments={false}
+                enableDiscussionSwitch={true}
                 discussionD2Uid="testD2Header"
                 discussionApiClientHeader="testClientHeader"
                 expanded={false}

@@ -2,12 +2,12 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 
 import CommentIcon from '@frontend/static/icons/comment.svg';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
     designType: DesignType;
@@ -51,12 +51,14 @@ const shortStyles = css`
 
 const mediaStyles = (pillar: Pillar) => css`
     /* Below we force the colour to be bright if the pillar is news (because it looks better) */
-    color: ${pillar === 'news' ? palette[pillar].bright : palette[pillar].main};
+    color: ${pillar === 'news'
+        ? pillarPalette[pillar].bright
+        : pillarPalette[pillar].main};
 
     svg {
         fill: ${pillar === 'news'
-            ? palette[pillar].bright
-            : palette[pillar].main};
+            ? pillarPalette[pillar].bright
+            : pillarPalette[pillar].main};
     }
 `;
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
-
 import { headline } from '@guardian/src-foundations/typography';
-
-import { palette } from '@guardian/src-foundations';
+import { opinion } from '@guardian/src-foundations/palette';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
     letter: string;
@@ -26,7 +25,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         case 'Comment':
             return css`
                 ${baseStyles};
-                color: ${palette.opinion.main};
+                color: ${opinion[400]};
             `;
         case 'Analysis':
         case 'Feature':
@@ -46,7 +45,7 @@ const outerStyles = (pillar: Pillar, designType: DesignType) => {
         default:
             return css`
                 ${baseStyles};
-                color: ${palette[pillar].dark};
+                color: ${pillarPalette[pillar].dark};
             `;
     }
 };

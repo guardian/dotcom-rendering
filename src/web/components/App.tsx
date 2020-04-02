@@ -50,9 +50,7 @@ export const App = ({ CAPI, NAV }: Props) => {
         true,
     );
     const [commentPage, setCommentPage] = useState<number>();
-    const [commentPageSize, setCommentPageSize] = useState<
-        20 | 25 | 50 | 100
-    >();
+    const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
     const [commentOrderBy, setCommentOrderBy] = useState<
         'newest' | 'oldest' | 'mostrecommended'
     >();
@@ -263,6 +261,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                         discussionApiClientHeader={
                             CAPI.config.discussionApiClientHeader
                         }
+                        enableDiscussionSwitch={
+                            CAPI.config.enableDiscussionSwitch
+                        }
                         expanded={true}
                         commentToScrollTo={hashCommentId}
                     />
@@ -281,6 +282,9 @@ export const App = ({ CAPI, NAV }: Props) => {
                             discussionD2Uid={CAPI.config.discussionD2Uid}
                             discussionApiClientHeader={
                                 CAPI.config.discussionApiClientHeader
+                            }
+                            enableDiscussionSwitch={
+                                CAPI.config.enableDiscussionSwitch
                             }
                             expanded={false}
                         />

@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -11,6 +10,7 @@ import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 
@@ -119,7 +119,7 @@ export const Card = ({
 
     return (
         <CardLink linkTo={linkTo} designType={designType} pillar={pillar}>
-            <TopBar topBarColour={palette[pillar].main}>
+            <TopBar topBarColour={pillarPalette[pillar].main}>
                 <CardLayout imagePosition={imagePosition}>
                     <>
                         {imageUrl && (

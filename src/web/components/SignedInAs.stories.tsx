@@ -23,7 +23,14 @@ export default {
 };
 
 export const SignedIn = () => {
-    return <SignedInAs pillar="news" commentCount={3} user={aUser} />;
+    return (
+        <SignedInAs
+            pillar="news"
+            enableDiscussionSwitch={true}
+            commentCount={3}
+            user={aUser}
+        />
+    );
 };
 SignedIn.story = { name: 'signed in' };
 
@@ -31,6 +38,7 @@ export const Image = () => {
     return (
         <SignedInAs
             pillar="culture"
+            enableDiscussionSwitch={true}
             commentCount={32}
             user={{
                 ...aUser,
@@ -41,10 +49,29 @@ export const Image = () => {
 };
 Image.story = { name: 'with image' };
 
+export const Banned = () => {
+    return (
+        <SignedInAs
+            pillar="culture"
+            enableDiscussionSwitch={true}
+            commentCount={32}
+            user={{
+                ...aUser,
+                privateFields: {
+                    ...aUser.privateFields,
+                    canPostComment: false,
+                },
+            }}
+        />
+    );
+};
+Banned.story = { name: 'when banned' };
+
 export const NoDisplayName = () => {
     return (
         <SignedInAs
             pillar="labs"
+            enableDiscussionSwitch={true}
             commentCount={32}
             user={{
                 ...aUser,
@@ -56,27 +83,57 @@ export const NoDisplayName = () => {
 NoDisplayName.story = { name: 'before a display name has been set' };
 
 export const NotSignedIn = () => {
-    return <SignedInAs pillar="lifestyle" commentCount={32} />;
+    return (
+        <SignedInAs
+            pillar="lifestyle"
+            enableDiscussionSwitch={true}
+            commentCount={32}
+        />
+    );
 };
 NotSignedIn.story = { name: 'not signed in' };
 
 export const Culture = () => {
-    return <SignedInAs pillar="culture" commentCount={32} />;
+    return (
+        <SignedInAs
+            pillar="culture"
+            enableDiscussionSwitch={true}
+            commentCount={32}
+        />
+    );
 };
 Culture.story = { name: 'with culture pillar' };
 
 export const Opinion = () => {
-    return <SignedInAs pillar="opinion" commentCount={32} />;
+    return (
+        <SignedInAs
+            pillar="opinion"
+            enableDiscussionSwitch={true}
+            commentCount={32}
+        />
+    );
 };
 Opinion.story = { name: 'with opinion pillar' };
 
 export const news = () => {
-    return <SignedInAs pillar="news" commentCount={32} />;
+    return (
+        <SignedInAs
+            pillar="news"
+            enableDiscussionSwitch={true}
+            commentCount={32}
+        />
+    );
 };
 news.story = { name: 'with news pillar' };
 
 export const Sport = () => {
-    return <SignedInAs pillar="sport" commentCount={32} />;
+    return (
+        <SignedInAs
+            pillar="sport"
+            enableDiscussionSwitch={true}
+            commentCount={32}
+        />
+    );
 };
 Sport.story = { name: 'with sport pillar' };
 
@@ -84,6 +141,7 @@ export const DiscussionClosed = () => {
     return (
         <SignedInAs
             pillar="opinion"
+            enableDiscussionSwitch={true}
             commentCount={32}
             isClosedForComments={true}
             user={aUser}
@@ -96,6 +154,7 @@ export const DiscussionClosedSignedOut = () => {
     return (
         <SignedInAs
             pillar="sport"
+            enableDiscussionSwitch={true}
             commentCount={32}
             isClosedForComments={true}
         />
@@ -103,4 +162,33 @@ export const DiscussionClosedSignedOut = () => {
 };
 DiscussionClosedSignedOut.story = {
     name: 'discussion closed, user not signed in',
+};
+
+export const DiscussionDisabled = () => {
+    return (
+        <SignedInAs
+            pillar="opinion"
+            enableDiscussionSwitch={false}
+            commentCount={32}
+            isClosedForComments={false}
+            user={aUser}
+        />
+    );
+};
+DiscussionDisabled.story = {
+    name: 'discussion disabled sitewide, user signed in',
+};
+
+export const DiscussionDisabledSignedOut = () => {
+    return (
+        <SignedInAs
+            pillar="opinion"
+            enableDiscussionSwitch={false}
+            commentCount={32}
+            isClosedForComments={false}
+        />
+    );
+};
+DiscussionDisabledSignedOut.story = {
+    name: 'discussion disabled sitewide, user signed out',
 };

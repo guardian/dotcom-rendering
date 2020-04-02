@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
-import { palette } from '@guardian/src-foundations';
 import {
     text,
     neutral,
     border,
     brandText,
     brandAlt,
+    news,
 } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -100,7 +100,7 @@ const linkActive = css`
 
     :after {
         content: '';
-        border: 2px solid ${palette.news.main};
+        border: 2px solid ${news[400]};
         border-top: 0px;
         border-right: 0px;
         position: absolute;

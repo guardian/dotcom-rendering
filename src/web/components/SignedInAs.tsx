@@ -1,14 +1,16 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { text, border, neutral } from '@guardian/src-foundations/palette';
+import { text, border, neutral, news } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { palette, space } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
     commentCount: number;
     pillar: Pillar;
+    enableDiscussionSwitch: boolean;
     user?: UserProfile;
     isClosedForComments?: boolean;
 };
@@ -59,12 +61,12 @@ const usernameStyles = css`
 `;
 
 const linkStyles = (pillar: Pillar) => css`
-    color: ${palette[pillar][300]};
+    color: ${pillarPalette[pillar].dark};
     text-decoration: none;
     border-bottom: 1px solid ${border.secondary};
     transition: border-color 0.15s ease-out;
     :hover {
-        border-color: ${palette.news[300]};
+        border-color: ${news[300]};
     }
 `;
 
@@ -79,9 +81,15 @@ const rowUntilDesktop = css`
 export const SignedInAs = ({
     commentCount,
     pillar,
+    enableDiscussionSwitch,
     user,
     isClosedForComments,
 }: Props) => {
+    const isBanned =
+        user &&
+        user.privateFields &&
+        user.privateFields.canPostComment === false;
+
     return (
         <div className={containerStyles}>
             <h2 className={headingStyles}>
@@ -95,27 +103,51 @@ export const SignedInAs = ({
                 </span>
             </h2>
 
+            {/* User is banned */}
+            {enableDiscussionSwitch && isBanned && (
+                <span className={headlineStyles}>
+                    Commenting has been disabled for this account (
+                    <a
+                        href="https://www.theguardian.com/community-faqs#321a"
+                        className={linkStyles(pillar)}
+                    >
+                        why?
+                    </a>{' '}
+                    )
+                </span>
+            )}
+
+            {/* Discussion is disabled sitewide */}
+            {user && enableDiscussionSwitch === false && (
+                <span className={headlineStyles}>
+                    Commenting has been disabled at this time
+                </span>
+            )}
+
             {/* Discussion open and user logged in */}
-            {user && !isClosedForComments && (
-                <div className={rowUntilDesktop}>
-                    <div className={imageWrapper}>
-                        <img
-                            src={
-                                user.secureAvatarUrl ||
-                                'https://avatar.guim.co.uk/no-user-image.gif'
-                            }
-                            alt={user.displayName || 'Guardian User'}
-                            className={imageStyles}
-                        />
-                    </div>
-                    <div className={textStyles}>
-                        Signed in as
-                        <div className={usernameStyles}>
-                            {user.displayName || 'Guardian User'}
+            {enableDiscussionSwitch &&
+                user &&
+                !isBanned &&
+                !isClosedForComments && (
+                    <div className={rowUntilDesktop}>
+                        <div className={imageWrapper}>
+                            <img
+                                src={
+                                    user.secureAvatarUrl ||
+                                    'https://avatar.guim.co.uk/no-user-image.gif'
+                                }
+                                alt={user.displayName || 'Guardian User'}
+                                className={imageStyles}
+                            />
+                        </div>
+                        <div className={textStyles}>
+                            Signed in as
+                            <div className={usernameStyles}>
+                                {user.displayName || 'Guardian User'}
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
 
             {/* User is logged out (show this even if the discussion is closed) */}
             {!user && (
@@ -138,7 +170,7 @@ export const SignedInAs = ({
             )}
 
             {/* The discussion is closed (only appears for logged in users) */}
-            {user && isClosedForComments && (
+            {enableDiscussionSwitch && user && isClosedForComments && (
                 <span className={headlineStyles}>
                     This discussion is closed for comments
                 </span>

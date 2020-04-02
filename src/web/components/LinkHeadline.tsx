@@ -2,11 +2,11 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { headline } from '@guardian/src-foundations/typography';
-import { palette } from '@guardian/src-foundations';
 
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
+import { pillarPalette } from '@frontend/lib/pillars';
 
 const fontStyles = (size: SmallHeadlineSize) => {
     switch (size) {
@@ -74,7 +74,9 @@ export const LinkHeadline = ({
                 showSlash={showSlash}
             />
         )}
-        {showQuotes && <QuoteIcon colour={palette[pillar].main} size={size} />}
+        {showQuotes && (
+            <QuoteIcon colour={pillarPalette[pillar].main} size={size} />
+        )}
         {link ? (
             // We were passed a link object so headline should be a link, with link styling
             <>

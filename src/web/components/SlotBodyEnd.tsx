@@ -70,6 +70,7 @@ const buildPayload = (props: Props) => {
             ophanPageId: window.guardian.config.ophan.pageViewId,
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
+            clientName: 'dcr',
             campaignCode,
             abTestName: testName,
             abTestVariant: 'dcr',
@@ -94,6 +95,7 @@ const buildPayload = (props: Props) => {
             epicViewLog: getViewLog(),
             weeklyArticleHistory: getWeeklyArticleHistory(),
             mvtId: Number(getCookie('GU_mvt_id')),
+            countryCode: props.countryCode,
         },
     };
 };
