@@ -26,7 +26,7 @@ const captionStyles = css`
     color: ${text.supporting};
 `;
 
-const FigCaption: FC<Props> = ({ pillar, text }) =>
+const FigCaption: FC<Props> = ({ pillar, text }: Props) =>
     <figcaption css={captionStyles}>
         <svg
             css={triangleStyles(getPillarStyles(pillar))}

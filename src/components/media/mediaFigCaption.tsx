@@ -28,7 +28,7 @@ const captionStyles = css`
     `}
 `;
 
-const MediaFigcaption: FC<Props> = ({ text }) =>
+const MediaFigcaption: FC<Props> = ({ text }: Props) =>
     <figcaption css={captionStyles}>
         {text}
     </figcaption>;

@@ -444,26 +444,27 @@ const renderAll = (imageMappings: ImageMappings) =>
 const renderCaption = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(captionElement(pillar));
 
-const renderMedia = (imageMappings: ImageMappings) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
-    elements.map((element) => {
-        if(element.kind === ElementKind.Image) {
-            const { file, alt, caption, captionString, credit, width, height } = element;
-            return h(BodyImage, {
-                    image: {
-                        url: file,
-                        alt,
-                        imageMappings,
-                        width,
-                        height,
-                        caption: captionString,
-                        credit,
+const renderMedia = (imageMappings: ImageMappings) => 
+    (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+        elements.map((element) => {
+            if(element.kind === ElementKind.Image) {
+                const { file, alt, caption, captionString, credit, width, height } = element;
+                return h(BodyImage, {
+                        image: {
+                            url: file,
+                            alt,
+                            imageMappings,
+                            width,
+                            height,
+                            caption: captionString,
+                            credit,
+                        },
                     },
-                },
-                h(MediaFigCaption, {
-                    text: renderCaption(caption, pillar)
-                }))}
-        return null;
-        });
+                    h(MediaFigCaption, {
+                        text: renderCaption(caption, pillar)
+                    }))}
+            return null;
+            });
 
 // ----- Exports ----- //
 
