@@ -83,6 +83,7 @@ const transform = (text: string, pillar: Pillar): ReactElement | string => {
 const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     text-decoration: none;
+    border-bottom: 0.0625rem solid ${neutral[86]};
 `;
 
 const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
@@ -294,7 +295,7 @@ const richLinkStyles = css`
 
     a {
         text-decoration: none;
-        background: none;
+        border-bottom: none;
     }
 
     float: left;
