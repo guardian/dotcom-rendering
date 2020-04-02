@@ -84,6 +84,7 @@ export const Body: React.FC<{
         switches: {
             ampPrebid: config.switches.ampPrebid,
             permutive: config.switches.permutive,
+            ampOzone: config.switches.ampOzone,
         },
     };
 
@@ -96,7 +97,7 @@ export const Body: React.FC<{
             adClassName={adStyle}
             adInfo={adInfo}
         />
-    );
+        );
     return (
         <InnerContainer className={body(pillar, designType)}>
             <TopMeta

@@ -13,6 +13,7 @@ interface AdInfo {
     switches: {
         ampPrebid: boolean;
         permutive: boolean;
+        ampOzone: boolean;
     };
     section?: string;
 }
@@ -26,6 +27,7 @@ export const WithAds: React.SFC<{
     const commercialConfig = {
         usePrebid: adInfo.switches.ampPrebid,
         usePermutive: adInfo.switches.permutive,
+        useOzone: adInfo.switches.ampOzone,
     };
 
     const ad = (id: string): JSX.Element => (

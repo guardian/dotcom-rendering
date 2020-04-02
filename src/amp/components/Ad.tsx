@@ -89,10 +89,16 @@ const getPlacementId = (adRegion: AdRegion): number => {
     }
 };
 
+interface RtcData {
+    urls: Array<string>;
+    vendors?: { ozone: {} };
+}
+
 const realTimeConfig = (
     adRegion: AdRegion,
     usePrebid: boolean,
     usePermutive: boolean,
+    useOzone: boolean,
 ): any => {
     const placementID = getPlacementId(adRegion);
     const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
@@ -114,12 +120,27 @@ const realTimeConfig = (
         'purl=HREF',
     ].join('&');
 
-    const data = {
+    const ozoneVendor = {
+        ozone: {
+            PUBLISHER_ID: 'OZONE_PROVIDED_PUBLISHER_ID',
+            SITE_ID: 'YOUR_SITE_ID',
+            TAG_ID: 'OZONE_PROVIDED_STORED_REQUEST_ID',
+            PLACEMENT_ID: 'OZONE_PROVIDED_PLACEMENT_ID',
+            AD_UNIT_CODE: 'YOUR_AD_UNIT_CODE',
+            PUBCID: 'YOUR_PUBCID',
+        },
+    };
+
+    const data: RtcData = {
         urls: [
             usePrebid ? prebidURL : '',
             usePermutive ? permutiveURL : '',
         ].filter(url => url),
     };
+
+    if (useOzone) {
+        data.vendors = ozoneVendor;
+    }
 
     return JSON.stringify(data);
 };
@@ -127,6 +148,7 @@ const realTimeConfig = (
 interface CommercialConfig {
     usePrebid: boolean;
     usePermutive: boolean;
+    useOzone: boolean;
 }
 
 const ampAdElem = (
@@ -153,6 +175,7 @@ const ampAdElem = (
                 adRegion,
                 config.usePrebid,
                 config.usePermutive,
+                config.useOzone,
             )}
         />
     );
@@ -175,28 +198,28 @@ export const Ad: React.SFC<{
 }) => (
     <div className={cx(adStyle, className)}>
         {ampAdElem(
-            'US',
-            edition,
-            section || '',
-            contentType,
-            config,
-            commercialProperties,
-        )}
+                    'US',
+                    edition,
+                    section || '',
+                    contentType,
+                    config,
+                    commercialProperties,
+                )}
         {ampAdElem(
-            'AU',
-            edition,
-            section || '',
-            contentType,
-            config,
-            commercialProperties,
-        )}
+                    'AU',
+                    edition,
+                    section || '',
+                    contentType,
+                    config,
+                    commercialProperties,
+                )}
         {ampAdElem(
-            'ROW',
-            edition,
-            section || '',
-            contentType,
-            config,
-            commercialProperties,
-        )}
+                    'ROW',
+                    edition,
+                    section || '',
+                    contentType,
+                    config,
+                    commercialProperties,
+                )}
     </div>
-);
+        );

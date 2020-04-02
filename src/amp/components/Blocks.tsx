@@ -58,60 +58,61 @@ export const Blocks: React.SFC<{
     url,
     shouldHideAds,
 }) => {
-    // TODO add last updated for blocks to show here
-    const liveBlogBlocks = blocks.map(block => {
+        // TODO add last updated for blocks to show here
+        const liveBlogBlocks = blocks.map(block => {
+            return (
+                <div
+                    id={block.id}
+                    data-sort-time={block.firstPublished}
+                    key={block.id}
+                    className={blockStyle(pillar)}
+                >
+                    {block.firstPublishedDisplay && (
+                        <a
+                            className={firstPublishedStyle}
+                            href={blockLink(url, block.id)}
+                        >
+                            {block.firstPublishedDisplay}
+                        </a>
+                    )}
+                    {block.title && <h2>{block.title}</h2>}
+                    {Elements(block.elements, pillar, false)}
+                    {/* Some elements float (e.g. rich links) */}
+                    <div className={clearBoth} />{' '}
+                    {block.lastUpdatedDisplay && (
+                        <div className={lastUpdatedStyle}>
+                            Updated at {block.lastUpdatedDisplay}
+                        </div>
+                    )}
+                </div>
+            );
+        });
+
+        if (shouldHideAds) {
+            return <>{liveBlogBlocks}</>;
+        }
+
+        const slotIndexes = findBlockAdSlots(liveBlogBlocks);
+        const adInfo = {
+            section,
+            edition,
+            contentType,
+            commercialProperties,
+            switches: {
+                ampPrebid: switches.ampPrebid,
+                permutive: switches.permutive,
+                ampOzone: switches.ampOzone,
+            },
+        };
+
         return (
-            <div
-                id={block.id}
-                data-sort-time={block.firstPublished}
-                key={block.id}
-                className={blockStyle(pillar)}
-            >
-                {block.firstPublishedDisplay && (
-                    <a
-                        className={firstPublishedStyle}
-                        href={blockLink(url, block.id)}
-                    >
-                        {block.firstPublishedDisplay}
-                    </a>
-                )}
-                {block.title && <h2>{block.title}</h2>}
-                {Elements(block.elements, pillar, false)}
-                {/* Some elements float (e.g. rich links) */}
-                <div className={clearBoth} />{' '}
-                {block.lastUpdatedDisplay && (
-                    <div className={lastUpdatedStyle}>
-                        Updated at {block.lastUpdatedDisplay}
-                    </div>
-                )}
-            </div>
+            <>
+                <WithAds
+                    items={liveBlogBlocks}
+                    adSlots={slotIndexes}
+                    adClassName=""
+                    adInfo={adInfo}
+                />
+            </>
         );
-    });
-
-    if (shouldHideAds) {
-        return <>{liveBlogBlocks}</>;
-    }
-
-    const slotIndexes = findBlockAdSlots(liveBlogBlocks);
-    const adInfo = {
-        section,
-        edition,
-        contentType,
-        commercialProperties,
-        switches: {
-            ampPrebid: switches.ampPrebid,
-            permutive: switches.permutive,
-        },
     };
-
-    return (
-        <>
-            <WithAds
-                items={liveBlogBlocks}
-                adSlots={slotIndexes}
-                adClassName=""
-                adInfo={adInfo}
-            />
-        </>
-    );
-};
