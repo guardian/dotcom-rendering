@@ -85,6 +85,11 @@ export const SignedInAs = ({
     user,
     isClosedForComments,
 }: Props) => {
+    const isBanned =
+        user &&
+        user.privateFields &&
+        user.privateFields.canPostComment === false;
+
     return (
         <div className={containerStyles}>
             <h2 className={headingStyles}>
@@ -98,6 +103,20 @@ export const SignedInAs = ({
                 </span>
             </h2>
 
+            {/* User is banned */}
+            {enableDiscussionSwitch && isBanned && (
+                <span className={headlineStyles}>
+                    Commenting has been disabled for this account (
+                    <a
+                        href="https://www.theguardian.com/community-faqs#321a"
+                        className={linkStyles(pillar)}
+                    >
+                        why?
+                    </a>{' '}
+                    )
+                </span>
+            )}
+
             {/* Discussion is disabled sitewide */}
             {user && enableDiscussionSwitch === false && (
                 <span className={headlineStyles}>
@@ -106,26 +125,29 @@ export const SignedInAs = ({
             )}
 
             {/* Discussion open and user logged in */}
-            {enableDiscussionSwitch && user && !isClosedForComments && (
-                <div className={rowUntilDesktop}>
-                    <div className={imageWrapper}>
-                        <img
-                            src={
-                                user.secureAvatarUrl ||
-                                'https://avatar.guim.co.uk/no-user-image.gif'
-                            }
-                            alt={user.displayName || 'Guardian User'}
-                            className={imageStyles}
-                        />
-                    </div>
-                    <div className={textStyles}>
-                        Signed in as
-                        <div className={usernameStyles}>
-                            {user.displayName || 'Guardian User'}
+            {enableDiscussionSwitch &&
+                user &&
+                !isBanned &&
+                !isClosedForComments && (
+                    <div className={rowUntilDesktop}>
+                        <div className={imageWrapper}>
+                            <img
+                                src={
+                                    user.secureAvatarUrl ||
+                                    'https://avatar.guim.co.uk/no-user-image.gif'
+                                }
+                                alt={user.displayName || 'Guardian User'}
+                                className={imageStyles}
+                            />
+                        </div>
+                        <div className={textStyles}>
+                            Signed in as
+                            <div className={usernameStyles}>
+                                {user.displayName || 'Guardian User'}
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
 
             {/* User is logged out (show this even if the discussion is closed) */}
             {!user && (
