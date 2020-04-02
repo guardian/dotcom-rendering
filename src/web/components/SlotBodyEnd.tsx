@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { css } from 'emotion';
 import {
     getBodyEnd,
@@ -124,6 +124,8 @@ const MemoisedInner = ({
         threshold: 0.5,
     }) as HasBeenSeen;
 
+    const slotRoot = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         const contributionsPayload = buildPayload({
             isSignedIn,
@@ -137,7 +139,6 @@ const MemoisedInner = ({
             contributionsServiceUrl,
             isSensitive,
         });
-
         getBodyEnd(contributionsPayload, `${contributionsServiceUrl}/epic`)
             .then(checkForErrors)
             .then(response => response.json())
@@ -181,7 +182,9 @@ const MemoisedInner = ({
                 // eslint-disable-next-line no-eval
                 window.eval(data.slot.js);
                 if (typeof window.initAutomatJs === 'function') {
-                    window.initAutomatJs();
+                    if (slotRoot.current) {
+                        window.initAutomatJs(slotRoot.current);
+                    }
                 }
             } catch (error) {
                 // eslint-disable-next-line no-console
@@ -199,6 +202,7 @@ const MemoisedInner = ({
             <div ref={setNode} className={wrapperMargins}>
                 {data.slot.css && <style>{data.slot.css}</style>}
                 <div
+                    ref={slotRoot}
                     // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{ __html: data.slot.html }}
                 />
