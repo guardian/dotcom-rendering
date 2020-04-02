@@ -16,7 +16,7 @@ interface Props extends Format {
 }
 
 const styles = (colour: string): SerializedStyles => css`
-    ${textSans.xsmall()}
+    ${textSans.small()}
     color: ${colour};
     display: block;
     padding: 0;

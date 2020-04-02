@@ -100,7 +100,7 @@ const listStyles: SerializedStyles = css`
 `
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: 1rem;
+    padding-left: 1.5rem;
     padding-bottom: .375rem;
 
     &::before {
@@ -111,7 +111,7 @@ const listItemStyles: SerializedStyles = css`
         width: 1rem;
         margin-right: ${remSpace[2]};
         background-color: ${neutral[86]};
-        margin-left: -1rem;
+        margin-left: -1.5rem;
         vertical-align: middle;
     }
 
@@ -170,7 +170,7 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
 }
 
 const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
-    const children = Array.from(node.childNodes).map(textElement(pillar));
+    const children = Array.from(node.childNodes).map(standfirstTextElement(pillar));
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
@@ -280,7 +280,7 @@ const richLinkStyles = css`
 
     h1 {
         margin: ${basePx(0, 0, 2, 0)};
-        font-size: 1em;
+        font-size: 1rem;
     }
 
     p {
