@@ -75,7 +75,6 @@ const Media = ({ imageMappings, item, children }: Props): JSX.Element =>
                     <Byline
                         pillar={item.pillar}
                         publicationDate={item.publishDate}
-                        contributors={item.contributors}
                         className={articleWidthStyles}
                         item={item}
                     />

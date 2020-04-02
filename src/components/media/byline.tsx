@@ -3,12 +3,9 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
-import Follow from 'components/shared/follow';
 import { sidePadding, darkModeCss, basePx } from 'styles';
-import { Contributor } from 'capi';
 import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
 import { Option } from 'types/option';
-import Author from 'components/shared/author';
 import Dateline from 'components/dateline';
 import { Item } from "../../item";
 import { textSans } from "@guardian/src-foundations/typography";
@@ -56,21 +53,18 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
 interface Props {
     pillar: Pillar;
     publicationDate: Option<Date>;
-    contributors: Contributor[];
     className: SerializedStyles;
     item: Item;
 }
 
-function Byline({ pillar, publicationDate, contributors, className, item }: Props): JSX.Element {
+function Byline({ pillar, publicationDate, className, item }: Props): JSX.Element {
     const pillarStyles = getPillarStyles(pillar);
 
     return (
         <div css={[className, Styles(pillarStyles), DarkStyles(pillarStyles)]}>
             <div css={sidePadding}>
-                <div className="author">
-                    <Author byline={item.bylineHtml} pillar={item.pillar} />
+                <div>
                     <Dateline date={publicationDate} />
-                    <Follow contributors={contributors} />
                 </div>
             </div>
         </div>
