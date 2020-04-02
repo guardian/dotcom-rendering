@@ -1,11 +1,11 @@
 // ----- Imports ----- //
 
 import React, {FC, ReactElement, ReactNode} from 'react';
-import {css, SerializedStyles} from '@emotion/core';
-import {headline} from '@guardian/src-foundations/typography';
-import {background, neutral, text} from '@guardian/src-foundations/palette';
-import {from} from '@guardian/src-foundations/mq';
-import {remSpace} from '@guardian/src-foundations';
+import { css, SerializedStyles } from '@emotion/core';
+import {body, headline} from '@guardian/src-foundations/typography';
+import { background, neutral, text } from '@guardian/src-foundations/palette';
+import { from } from '@guardian/src-foundations/mq';
+import { remSpace } from '@guardian/src-foundations';
 
 import { Item, Design, Display } from 'item';
 import { renderText } from 'renderer';
@@ -70,7 +70,7 @@ const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
 const media = css`
     color: ${neutral[86]};
     p, ul, li {
-        line-height: 20px;
+        ${headline.xxxsmall({ lineHeight: 'loose' })}
     }
     
     li:before {

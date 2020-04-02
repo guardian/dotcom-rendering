@@ -58,7 +58,7 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
         }
 
         time {
-            color: ${neutral[60]};
+            color: ${neutral[86]};
         }
     }
 `;

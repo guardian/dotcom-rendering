@@ -1,18 +1,18 @@
 // ----- Imports ----- //
 
-import { ReactNode, createElement as h, ReactElement } from 'react';
+import {createElement as h, ReactElement, ReactNode} from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
-import { Option, fromNullable, Some, None } from 'types/option';
-import { srcset, src } from 'image';
-import { basePx, icons, darkModeCss } from 'styles';
+import { fromNullable, None, Option, Some } from 'types/option';
+import { src, srcset } from 'image';
+import { basePx, darkModeCss, icons } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { ElementKind, BodyElement, Role, Image, Text } from 'item';
+import { BodyElement, ElementKind, Role } from 'item';
 import Paragraph from 'components/paragraph';
 import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
-import { headline, body } from '@guardian/src-foundations/typography';
+import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import FigCaption from 'components/figCaption';
 import MediaFigCaption from 'components/media/mediaFigCaption';
@@ -168,7 +168,66 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
         default:
             return null;
     }
-}
+};
+
+const captionHeadingStyles = css`
+    ${headline.xxxsmall()}
+    color: ${neutral[86]};
+    
+    em {
+        ${textSans.xsmall({ italic: true })}
+    }
+    
+        ${darkModeCss`
+            color: ${neutral[86]};
+    `}
+`;
+
+const MediaCaptionText = (props: { text: string; pillar: Pillar }): ReactElement =>
+    styledH(
+        'span',
+        { css: css`
+              ${textSans.xsmall()}
+    color: ${neutral[86]};
+    
+        ${darkModeCss`
+            color: ${neutral[86]};
+    `}  
+        ` },
+        props.text,
+    );
+
+const CaptionItalicStyles = (props: { text: string; pillar: Pillar }): ReactElement =>
+    styledH(
+        'span',
+        { css: css`
+              ${textSans.xsmall({ italic: true })}
+    color: ${neutral[86]};
+    
+        ${darkModeCss`
+            color: ${neutral[86]};
+    `}  
+        ` },
+        props.text,
+    );
+
+
+const captionElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const text = node.textContent ?? '';
+    const children = Array.from(node.childNodes).map(textElement(pillar));
+    switch (node.nodeName) {
+        case 'STRONG':
+            return styledH('h2', { css: captionHeadingStyles, key }, children );
+        case 'BR':
+            return null;
+        case 'EM':
+            return h(CaptionItalicStyles, { text, pillar, key }, children);
+        case '#text':
+            return h(MediaCaptionText, { text, pillar, key }, children);
+        default:
+            return textElement(pillar)(node, key);
+    }
+};
 
 const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(textElement(pillar));
@@ -375,24 +434,29 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
 const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map(render(salt, pillar));
 
-const renderMedia = (salt: string) => (pillar: Pillar, elements: Image[]): ReactNode[] =>
+const renderCaption = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
+    Array.from(doc.childNodes).map(captionElement(pillar));
+
+const renderMedia = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map((element) => {
-    const { file, alt, caption, captionString, credit, width, height } = element;
-     return h(BodyImage, {
-        image: {
-            url: file,
-            alt,
-            salt,
-            width,
-            height,
-            caption: captionString,
-            credit
-        },
-    },
-    h(MediaFigCaption, {
-        pillar,
-        text: text(caption, pillar)
-    }))});
+        if(element.kind === ElementKind.Image) {
+            const { file, alt, caption, captionString, credit, width, height } = element;
+            return h(BodyImage, {
+                    image: {
+                        url: file,
+                        alt,
+                        salt,
+                        width,
+                        height,
+                        caption: captionString,
+                        credit
+                    },
+                },
+                h(MediaFigCaption, {
+                    text: renderCaption(caption, pillar)
+                }))}
+        return null;
+        });
 
 // ----- Exports ----- //
 

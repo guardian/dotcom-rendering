@@ -56,7 +56,7 @@ const analysisStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
 const mediaStyles = css `
     ${styles}
     color: ${neutral[100]};
-    font-weight: 500;
+    ${headline.medium({ fontWeight: 'medium' })}
     
     ${darkMode`
         color: ${neutral[86]};

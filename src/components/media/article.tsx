@@ -8,13 +8,11 @@ import { from, breakpoints } from '@guardian/src-foundations/mq';
 import HeaderImage from 'components/shared/headerImage';
 import Series from 'components/shared/articleSeries';
 import Standfirst from 'components/standfirst';
-import Byline from 'components/standard/byline';
-import { CommentCount } from 'components/shared/commentCount'
-import Body from 'components/shared/articleBody';
-import Tags from 'components/shared/tags';
-import {darkModeCss, articleWidthStyles} from 'styles';
-import { getPillarStyles } from 'pillar';
-import {Item} from "../../item";
+import Byline from 'components/media/byline';
+import Body from 'components/media/articleBody';
+import Tags from 'components/media/tags';
+import { darkModeCss, articleWidthStyles } from 'styles';
+import { Item } from "../../item";
 import Headline from 'components/headline';
 
 // ----- Styles ----- //
@@ -73,7 +71,13 @@ const Media = ({ imageSalt, item, children }: Props): JSX.Element =>
 
                 </div>
                 <section css={articleWidthStyles}>
-                    <Byline item={item} imageSalt={imageSalt} />
+                    <Byline
+                        pillar={item.pillar}
+                        publicationDate={item.publishDate}
+                        contributors={item.contributors}
+                        className={articleWidthStyles}
+                        item={item}
+                    />
                 </section>
             </header>
             <Body pillar={item.pillar} className={[articleWidthStyles]}>
@@ -83,7 +87,7 @@ const Media = ({ imageSalt, item, children }: Props): JSX.Element =>
                 <Tags tags={item.tags}/>
             </footer>
         </article>
-    </main>
+    </main>;
 
 
 // ----- Exports ----- //

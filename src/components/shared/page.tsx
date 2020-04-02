@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import React, { ReactNode, ReactElement } from 'react';
-import { css } from '@emotion/core';
+import React, {ReactElement, ReactNode} from 'react';
+import {css} from '@emotion/core';
 
 import Standard from 'components/standard/article';
 import LiveblogArticle from 'components/liveblog/article';
@@ -17,7 +17,7 @@ import { renderAll, renderMedia } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { partition } from 'types/result';
 import { getAdPlaceholderInserter } from 'ads';
-import { fromCapi, Design, Display, Image, Text } from 'item';
+import { Design, Display, fromCapi } from 'item';
 
 
 // ----- Components ----- //
@@ -139,12 +139,11 @@ function ArticleBody({ capi, imageSalt, getAssetLocation }: BodyProps): ElementW
     }
 
     if (item.design === Design.Media) {
-        const body = partition(item.body).oks as Image[];
-        const content = insertAdPlaceholders(renderMedia(imageSalt)(item.pillar, body));
+        const body = partition(item.body).oks;
         return { element: (
                 <WithScript src={mediaScript}>
                     <Media imageSalt={imageSalt} item={item}>
-                        {content}
+                        {renderMedia(imageSalt)(item.pillar, body)}
                     </Media>
                 </WithScript>
             ), resources: [mediaScript] };

@@ -3,15 +3,15 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
-
 import Follow from 'components/shared/follow';
-import { sidePadding, textSans, darkModeCss, basePx } from 'styles';
+import { sidePadding, darkModeCss, basePx } from 'styles';
 import { Contributor } from 'capi';
 import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
 import { Option } from 'types/option';
 import Author from 'components/shared/author';
 import Dateline from 'components/dateline';
-import {Item} from "../../item";
+import { Item } from "../../item";
+import { textSans } from "@guardian/src-foundations/typography";
 
 
 // ----- Styles ----- //
@@ -25,12 +25,12 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
         }
 
         time, .follow {
-            ${textSans}
+            ${textSans.xsmall()}
         }
 
         time {
-            ${textSans.small()};
-            color: ${neutral[46]};
+            ${textSans.xsmall()};
+            color: ${neutral[86]};
         }
     }
 `;
@@ -45,7 +45,7 @@ const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss
         }
 
         time {
-            color: ${neutral[60]};
+            color: ${neutral[86]};
         }
     }
 `;
