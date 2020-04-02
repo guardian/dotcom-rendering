@@ -3,8 +3,9 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 
-import { Contributor, isSingleContributor } from 'capi';
+import { Contributor, isSingleContributor } from 'contributor';
 import { src } from 'image';
+import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Constants ----- //
@@ -30,15 +31,15 @@ const ImageStyles = css`
 
 interface Props {
     contributors: Contributor[];
-    imageSalt: string;
+    imageMappings: ImageMappings;
     className: SerializedStyles;
 }
 
-const Cutout = ({ contributors, imageSalt, className }: Props): JSX.Element | null => {
+const Cutout = ({ contributors, imageMappings, className }: Props): JSX.Element | null => {
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl) {
-        const imgSrc = src(imageSalt, contributor.bylineLargeImageUrl, imageWidth*3);
+        const imgSrc = src(imageMappings, contributor.bylineLargeImageUrl, imageWidth*3);
         return (
             <div css={[className, Styles]}>
                 <img css={ImageStyles} src={imgSrc} alt={contributor.webTitle}/>

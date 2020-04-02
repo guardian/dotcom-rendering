@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LiveblogBlock from './block';
 import LiveblogLoadMore from './loadMore';
 import { css, SerializedStyles } from '@emotion/core'
@@ -6,6 +6,9 @@ import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { LiveBlock } from 'item';
 import { renderAll } from 'renderer';
 import { partition } from 'types/result';
+import { BufferedTransport, CompactProtocol } from '@creditkarma/thrift-server-core';
+import { Blocks } from 'mapiThriftModels';
+import { ImageMappings } from 'components/shared/page';
 
 const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
     .rich-link,
@@ -22,20 +25,32 @@ const LiveBodyStyles = (pillarStyles: PillarStyles): SerializedStyles => css`
 interface LiveblogBodyProps {
     pillar: Pillar;
     blocks: LiveBlock[];
-    imageSalt: string;
+    totalBodyBlocks: number;
+    imageMappings: ImageMappings;
 }
 
-const LiveblogBody = ({ pillar, blocks, imageSalt }: LiveblogBodyProps): JSX.Element => {
+async function loadMoreBlocks(): Promise<void> {
+    const response = await fetch('?date=2020-03-09T11%3A11%3A49Z&filter=newer');
+    const buffer = Buffer.from(await response.arrayBuffer());
+    const transport = new BufferedTransport(buffer);
+    const protocol = new CompactProtocol(transport);
+    const blocks: Blocks = Blocks.read(protocol);
+    console.log(blocks);
+}
 
-    const initialBlocks = blocks.slice(0, 7);
-    const LoadMore = ({ total }: { total: number }): JSX.Element | null => total > 10
-        ? <LiveblogLoadMore pillar={pillar}/> 
+const LoadMore = ({ total, pillar }: { total: number; pillar: Pillar }): JSX.Element | null =>
+    total > 7
+        ? <LiveblogLoadMore onLoadMore={loadMoreBlocks} pillar={pillar}/>
         : null;
 
+const LiveblogBody = (props: LiveblogBodyProps): JSX.Element => {
+    const { pillar, blocks: initialBlocks, imageMappings, totalBodyBlocks } = props;
+    const [blocks] = useState(initialBlocks);
+
     return (
-        <article css={LiveBodyStyles(getPillarStyles(pillar))}>
+        <article id="blocks" css={LiveBodyStyles(getPillarStyles(pillar))}>
             {
-                initialBlocks.map((block: LiveBlock) => {
+                blocks.map((block: LiveBlock) => {
                     return <LiveblogBlock
                         key={block.id}
                         pillar={pillar} 
@@ -43,11 +58,11 @@ const LiveblogBody = ({ pillar, blocks, imageSalt }: LiveblogBodyProps): JSX.Ele
                         title={block.title}
                         firstPublishedDate={block.firstPublished}
                         lastModifiedDate={block.lastModified}>
-                            <>{ renderAll(imageSalt)(pillar, partition(block.body).oks) }</>
+                            <>{ renderAll(imageMappings)(pillar, partition(block.body).oks) }</>
                         </LiveblogBlock>
                 })
             }
-            <LoadMore total={blocks.length}/>
+            <LoadMore total={totalBodyBlocks} pillar={pillar}/>
         </article>
     );
 

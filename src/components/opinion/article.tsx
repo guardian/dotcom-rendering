@@ -9,16 +9,15 @@ import HeaderImage from 'components/shared/headerImage';
 import ArticleSeries from 'components/shared/articleSeries';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
-import Byline from 'components/opinion/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import Cutout from 'components/opinion/cutout';
 import { darkModeCss, articleWidthStyles, basePx } from 'styles';
 import { Keyline } from 'components/shared/keyline';
-import { CommentCount } from 'components/shared/commentCount';
-import { getPillarStyles } from 'pillar';
 import { Comment } from 'item';
-import Author from 'components/author';
+import { ImageMappings } from 'components/shared/page';
+import Byline from 'components/byline';
+import Metadata from 'components/metadata';
 
 
 // ----- Styles ----- //
@@ -51,15 +50,6 @@ const HeaderImageStyles = css`
     }
 `;
 
-const CommentCountStyles = css`
-    background: ${opinion[800]};
-    margin-top: 0;
-
-    button {
-        background: ${opinion[800]};
-    }
-`;
-
 const topBorder = css`
     border-top: solid 1px ${neutral[86]};
     margin-top: ${basePx(1)};
@@ -73,23 +63,23 @@ const topBorder = css`
 // ----- Component ----- //
 
 interface Props {
-    imageSalt: string;
+    imageMappings: ImageMappings;
     item: Comment;
     children: ReactNode[];
 }
 
-const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
+const Opinion = ({ imageMappings, item, children }: Props): JSX.Element =>
     <main css={[Styles, DarkStyles]}>
         <article css={BorderStyles}>
             <header>
                 <div css={articleWidthStyles}>
                     <ArticleSeries series={item.series} pillar={item.pillar}/>
                     <Headline item={item} />
-                    <Author item={item} />
+                    <Byline {...item} />
                 </div>
                 <Cutout 
                     contributors={item.contributors}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={articleWidthStyles}
                 />
                 <Keyline {...item} />
@@ -98,23 +88,12 @@ const Opinion = ({ imageSalt, item, children }: Props): JSX.Element =>
                 </div>
 
                 <section css={[articleWidthStyles, topBorder]}>
-                    <Byline
-                        pillar={item.pillar}
-                        publicationDate={item.publishDate}
-                        contributors={item.contributors}
-                    />
-                    {item.commentable
-                        ? <CommentCount
-                            count={0}
-                            colour={getPillarStyles(item.pillar).kicker}
-                            className={CommentCountStyles}
-                            />
-                        : null}
+                    <Metadata item={item} />
                 </section>
 
                 <HeaderImage
                     image={item.mainImage}
-                    imageSalt={imageSalt}
+                    imageMappings={imageMappings}
                     className={HeaderImageStyles}
                     pillar={item.pillar}
                 />

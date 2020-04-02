@@ -9,13 +9,14 @@ import HeaderImage from 'components/immersive/headerImage';
 import Series from 'components/immersive/series';
 import Headline from 'components/immersive/headline';
 import Standfirst from 'components/standfirst';
-import Byline from 'components/immersive/byline';
 import ArticleBody from 'components/shared/articleBody';
 import Tags from 'components/shared/tags';
 import { articleWidthStyles, basePx, darkModeCss } from 'styles';
 import { Keyline } from 'components/shared/keyline';
 import { getPillarStyles, Pillar } from 'pillar';
 import { Item } from 'item';
+import { ImageMappings } from 'components/shared/page';
+import Metadata from 'components/metadata';
 
 
 // ----- Styles ----- //
@@ -76,33 +77,28 @@ const HeaderImageStyles = css`
 // ----- Component ----- //
 
 interface Props {
-    imageSalt: string;
+    imageMappings: ImageMappings;
     item: Item;
     children: ReactNode[];
 }
 
-const Immersive = ({ imageSalt, item, children }: Props): JSX.Element =>
+const Immersive = ({ imageMappings, item, children }: Props): JSX.Element =>
     <main css={DarkStyles}>
         <article css={BorderStyles}>
             <header>
                 <div css={articleWidthStyles}>
                     <HeaderImage
                         image={item.mainImage}
-                        imageSalt={imageSalt}
+                        imageMappings={imageMappings}
                         className={HeaderImageStyles}
                         pillar={item.pillar}
                     />
                     <Series series={item.series} pillar={item.pillar}/>
                     <Headline headline={item.headline}/>
                     <Standfirst item={item} />
+                    <Keyline {...item} />
+                    <Metadata item={item} />
                 </div>
-                <Keyline {...item} />
-                <Byline
-                    pillar={item.pillar}
-                    publicationDate={item.publishDate}
-                    contributors={item.contributors}
-                    className={articleWidthStyles}
-                />
             </header>
             <ArticleBody
                 pillar={item.pillar}

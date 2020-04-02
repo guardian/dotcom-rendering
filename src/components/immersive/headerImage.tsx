@@ -9,6 +9,7 @@ import { Option } from 'types/option';
 import { Image } from 'item';
 import { ImageElement } from 'renderer';
 import { Pillar } from 'pillar';
+import { ImageMappings } from 'components/shared/page';
 
 
 // ----- Styles ----- //
@@ -39,12 +40,12 @@ const Styles = css`
 
 interface Props {
     image: Option<Image>;
-    imageSalt: string;
+    imageMappings: ImageMappings;
     className?: SerializedStyles | null;
     pillar: Pillar;
 }
 
-const HeaderImage = ({ className, image, imageSalt, pillar }: Props): JSX.Element | null =>
+const HeaderImage = ({ className, image, imageMappings, pillar }: Props): JSX.Element | null =>
     image.fmap<JSX.Element | null>(imageData =>
         <div css={[className, Styles]}>
             <figure>
@@ -54,7 +55,7 @@ const HeaderImage = ({ className, image, imageSalt, pillar }: Props): JSX.Elemen
                     height={imageData.height}
                     width={imageData.width}
                     sizes={`calc(80vh * ${imageData.width/imageData.height})`}
-                    salt={imageSalt}
+                    imageMappings={imageMappings}
                     caption={imageData.caption}
                     captionString={imageData.captionString}
                     credit={imageData.credit}

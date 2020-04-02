@@ -6,8 +6,8 @@ import { from } from '@guardian/src-foundations/mq';
 import { Design } from 'item';
 
 const BaseStyles = css`
-    height: 12px;
-    margin-bottom: 4px;
+    height: 10px;
+    margin-bottom: 0;
     margin-top: 0;
     border: none;
 

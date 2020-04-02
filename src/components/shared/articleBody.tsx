@@ -37,6 +37,10 @@ const ArticleBodyStyles = css`
     }
 
     ${adStyles}
+
+    twitter-widget {
+        margin: 1rem 0;
+    }
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`

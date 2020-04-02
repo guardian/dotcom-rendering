@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 
 const ArticleSeriesStyles = ({ kicker }: PillarStyles): SerializedStyles => css`    
     a {
-        ${headline.xxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
+        ${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
         color: ${kicker};
         text-decoration: none;
     }

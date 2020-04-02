@@ -1,4 +1,4 @@
-import { ImageElement } from './renderer';
+import { ImageElement, renderStandfirstText, renderText } from './renderer';
 import { JSDOM } from 'jsdom';
 import { Pillar } from 'pillar';
 import { ReactNode, createElement as h } from 'react';
@@ -6,8 +6,8 @@ import { renderAll } from 'renderer';
 import { compose } from 'lib';
 import { ElementKind, BodyElement, Role } from 'item';
 import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { None, Some } from 'types/option';
+import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
@@ -73,7 +73,7 @@ const instagramElement = (): BodyElement =>
     })
 
 const render = (element: BodyElement): ReactNode[] =>
-    renderAll('dummySalt')(Pillar.news, [element]);
+    renderAll({})(Pillar.news, [element]);
 
 const renderTextElement = compose(render, textElement);
 
@@ -82,7 +82,7 @@ describe('renderer returns expected content', () => {
         const imageProps = {
             url: '',
             alt: "alt",
-            salt: "salt",
+            imageMappings: {},
             sizes: "sizes",
             width: 500,
             height: 500,
@@ -98,7 +98,7 @@ describe('renderer returns expected content', () => {
         const imageProps = {
             url: 'https://media.guim.co.uk/image.jpg',
             alt: "alt",
-            salt: "salt",
+            imageMappings: {},
             sizes: "sizes",
             width: 500,
             height: 500,
@@ -192,4 +192,20 @@ describe('Renders different types of elements', () => {
         const instagram = shallow(nodes.flat()[0]);
         expect(instagram.html()).toBe('<div><blockquote>Instagram</blockquote></div>');
     })
+});
+
+describe('Paragraph tags rendered correctly', () => {
+    test('Contains no styles in standfirsts', () => {
+        const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
+        const nodes = renderStandfirstText(fragment, Pillar.news);
+        const html = shallow(nodes.flat()[0]).html();
+        expect(html).toBe('<p>Parapraph tag</p>')
+    });
+
+    test('Contains styles in article body', () => {
+        const fragment = JSDOM.fragment('<p>Parapraph tag</p><span>1</span>');
+        const nodes = renderText(fragment, Pillar.news);
+        const html = shallow(nodes.flat()[0]).html();
+        expect(html).not.toBe('<p>Parapraph tag</p>')
+    });
 });

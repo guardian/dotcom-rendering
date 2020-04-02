@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { css } from '@emotion/core';
 import Image, { Props as ImageProps } from 'components/image';
-import { Pillar } from 'pillar';
+import { remSpace, text } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 
 // ----- Setup ----- //
 
@@ -18,15 +19,23 @@ interface Props {
 
 const styles = css`
     display: block;
-    margin: 1rem 0 0 0;
-`;
+    float: left;
+    clear: left;
+    width: 8.75rem;
+    margin: 0 ${remSpace[3]} 0 0;
 
+    ${from.wide} {
+        margin-left: calc(-8.75rem - ${remSpace[3]} - ${remSpace[2]});
+        margin-right: 0;
+        padding: 0;
+    }
+`;
 
 const BodyImageThumbnail: FC<Props> = ({ image, children }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} thumbnail={true} />
         {children}
-    </figure>
+    </figure>;
 
 
 // ----- Exports ----- //

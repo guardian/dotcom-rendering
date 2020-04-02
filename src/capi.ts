@@ -47,14 +47,6 @@ interface Series {
     webUrl?: string;
 }
 
-interface Contributor {
-    webTitle?: string;
-    webUrl?: string;
-    apiUrl?: string;
-    bylineLargeImageUrl?: string;
-    id: string;
-}
-
 const tagsOfType = (tagType: TagType) => (tags: Tag[]): Tag[] =>
     tags.filter((tag: Tag) => tag.type === tagType);
 
@@ -69,9 +61,6 @@ const isReview = (content: Content): boolean =>
 
 const isAnalysis = (content: Content): boolean =>
     content.tags.some(tag => tag.id === 'tone/analysis');
-
-const isSingleContributor = (contributors: Contributor[]): boolean =>
-    contributors.length === 1;
 
 const articleSeries = (content: Content): Tag =>
     tagsOfType(TagType.SERIES)(content.tags)[0];
@@ -101,12 +90,21 @@ const includesTweets = (content: Content): boolean => {
 // ----- Functions ----- //
 
 const capiEndpoint = (articleId: string, key: string): string => {
+    // If you need a new field here, MAPI probably also needs updating
+    const fields = [
+        'headline',
+        'standfirst',
+        'bylineHtml',
+        'firstPublicationDate',
+        'shouldHideAdverts',
+        'shouldHideReaderRevenue'
+    ];
 
     const params = new URLSearchParams({
       format: 'thrift',
       'api-key': key,
       'show-atoms': 'all',
-      'show-fields': 'all',
+      'show-fields': fields.join(','),
       'show-tags': 'all',
       'show-blocks': 'all',
       'show-elements': 'all',
@@ -120,14 +118,12 @@ const capiEndpoint = (articleId: string, key: string): string => {
 
 export {
     Series,
-    Contributor,
     ErrorStatus as CapiError,
     getContent,
     isImmersive,
     isFeature,
     isReview,
     isAnalysis,
-    isSingleContributor,
     articleSeries,
     articleContributors,
     articleMainImage,

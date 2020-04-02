@@ -1,10 +1,12 @@
 // ----- Imports ----- //
 
 import React from 'react';
-import { Contributor } from 'capi';
-import { isSingleContributor } from 'capi';
 import { css, SerializedStyles } from '@emotion/core';
+
+import { Contributor, isSingleContributor } from 'contributor';
 import { src } from 'image';
+import { ImageMappings } from 'components/shared/page';
+
 
 // ----- Styles ----- //
 
@@ -33,14 +35,14 @@ const AvatarStyles = (bgColour: string): SerializedStyles => css`
 interface AvatarProps {
     contributors: Contributor[];
     bgColour: string;
-    imageSalt: string;
+    imageMappings: ImageMappings;
 }
 
-function Avatar({ contributors, bgColour, imageSalt }: AvatarProps): JSX.Element | null {
+function Avatar({ contributors, bgColour, imageMappings }: AvatarProps): JSX.Element | null {
     const [contributor] = contributors;
 
     if (isSingleContributor(contributors) && contributor.bylineLargeImageUrl) {
-        const imgSrc = src(imageSalt, contributor.bylineLargeImageUrl, imageWidth*3);
+        const imgSrc = src(imageMappings, contributor.bylineLargeImageUrl, imageWidth*3);
         return (
             <div css={AvatarStyles(bgColour)}>
                 <img src={imgSrc} alt={contributor.webTitle}/>

@@ -6,8 +6,7 @@ import { createHash } from 'crypto';
 
 import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
-import { remSpace } from '@guardian/src-foundations';
-
+import { ImageMappings } from './shared/page';
 
 // ----- Setup ----- //
 
@@ -33,7 +32,7 @@ const getSubdomain = (domain: string): string =>
 const sign = (salt: string, path: string): string =>
     createHash('md5').update(salt + path).digest('hex')    
 
-function src(salt: string, input: string, width: number): string {
+function src(imageMappings: ImageMappings, input: string, width: number): string {
     const url = new URL(input);
     const service = getSubdomain(url.hostname);
 
@@ -42,15 +41,15 @@ function src(salt: string, input: string, width: number): string {
         quality: defaultQuality.toString(),
         fit: 'bounds',
         'sig-ignores-params': 'true',
-        s: sign(salt, url.pathname),
+        s: imageMappings[url.pathname],
     });
 
     return `${imageResizer}/${service}${url.pathname}?${params.toString()}`;
 }
 
-const srcset = (url: string, salt: string): string =>
+const srcset = (url: string, imageMappings: ImageMappings): string =>
     widths
-        .map(width => `${src(salt, url, width)} ${width}w`)
+        .map(width => `${src(imageMappings, url, width)} ${width}w`)
         .join(', ');
 
 
@@ -61,7 +60,7 @@ interface Props {
     alt: string;
     width: number;
     height: number;
-    salt: string;
+    imageMappings: ImageMappings;
     sizes: string;
     caption: string;
     credit: string;
@@ -78,22 +77,13 @@ const standardStyles = (width: number, height: number): SerializedStyles => css`
 `;
 
 const thumbnailStyles = (width: number, height: number): SerializedStyles => css`
-    float: left;
-    clear: left;
-    width: 8.75rem;
     height: calc(8.75rem * ${height / width});
-    margin: 0 ${remSpace[3]} 0 ${remSpace[2]};
-
-    ${from.wide} {
-        margin-left: calc(-8.75rem - ${remSpace[3]} - ${remSpace[2]});
-        margin-right: 0;
-        padding: 0;
-    }
 `;
 
-const Image: FC<Props> = ({ url, sizes, salt, alt, width, height, caption, credit, thumbnail }) => {
+const Image: FC<Props> = (props) => {
+    const { url, sizes, alt, width, height, caption, credit, thumbnail, imageMappings } = props;
 
-    if (url === '') {
+    if (url === '' || !imageMappings) {
         return null;
     }
 
@@ -101,10 +91,10 @@ const Image: FC<Props> = ({ url, sizes, salt, alt, width, height, caption, credi
 
     return styledH('img', {
         sizes,
-        srcSet: srcset(url, salt),
+        srcSet: srcset(url, imageMappings),
         alt,
         className: 'js-launch-slideshow',
-        src: src(salt, url, 500),
+        src: src(imageMappings, url, 500),
         css: styles(width, height),
         'data-caption': caption,
         'data-credit': credit,
@@ -118,4 +108,5 @@ export default Image;
 
 export {
     Props,
+    sign
 }

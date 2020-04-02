@@ -14,6 +14,7 @@ import BodyImage from 'components/bodyImage';
 import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
+import { ImageMappings } from 'components/shared/page';
 import FigCaption from 'components/figCaption';
 import MediaFigCaption from 'components/media/mediaFigCaption';
 
@@ -36,46 +37,6 @@ const getAttr = (attr: string) => (node: Node): Option<string> =>
 const getHref: (node: Node) => Option<string> =
     getAttr('href');
 
-const anchorStyles = (colour: string): SerializedStyles => css`
-    color: ${colour};
-    text-decoration: none;
-`;
-
-const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
-    styledH(
-        'a',
-        { css: anchorStyles(getPillarStyles(props.pillar).kicker), href: props.href },
-        props.text,
-    );
-
-const listStyles: SerializedStyles = css`
-    list-style: none;
-    padding-left: 0;
-    padding-right: .5rem;
-`
-
-const listItemStyles: SerializedStyles = css`
-    padding-left: 2rem;
-    padding-bottom: ${remSpace[2]};
-
-    &::before {
-        display: inline-block;
-        content: '';
-        border-radius: .5rem;
-        height: 1rem;
-        width: 1rem;
-        margin-right: 1rem;
-        background-color: ${neutral[86]};
-        margin-left: -2rem;
-        vertical-align: middle;
-    }
-
-    > p:first-of-type {
-        display: inline;
-        padding: 0;
-    }
-`
-
 const bulletStyles = (colour: string): SerializedStyles => css`
     color: transparent;
     display: inline-block;
@@ -91,15 +52,12 @@ const bulletStyles = (colour: string): SerializedStyles => css`
     }
 `;
 
-const HeadingTwoStyles = css`
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin: 1rem 0 4px 0;
-
-    & + p {
-        margin-top: 0;
-    }
-`
+const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
+    styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
+        styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
+        props.text.replace(/•/g, ''),
+        null
+    );
 
 const HorizontalRuleStyles = css`
     display: block;
@@ -110,23 +68,11 @@ const HorizontalRuleStyles = css`
     margin-top: 3rem;
     margin-bottom: 0.1875rem;
     background-color: ${neutral[93]};
-`
-
-const TweetStyles = css`
-    ${until.wide} {
-        clear: both;
-    }
 `;
 
-const Bullet = (props: { pillar: Pillar; text: string }): ReactElement =>
-    styledH('p', { css: css`display: inline; ${body.medium({ lineHeight: 'loose' })} overflow-wrap: break-word; margin: 0 0 ${remSpace[3]};` },
-        styledH('span', { css: bulletStyles(getPillarStyles(props.pillar).kicker) }, '•'),
-        props.text.replace(/•/, ''),
-        null
-    );
-
 const HorizontalRule = (): ReactElement =>
-    styledH('hr', { css: HorizontalRuleStyles }, null)
+    styledH('hr', { css: HorizontalRuleStyles }, null);
+
 
 const transform = (text: string, pillar: Pillar): ReactElement | string => {
     if (text.includes('•')) {
@@ -135,7 +81,63 @@ const transform = (text: string, pillar: Pillar): ReactElement | string => {
         return h(HorizontalRule, null, null);
     }
     return text;
-}
+};
+
+const anchorStyles = (colour: string): SerializedStyles => css`
+    color: ${colour};
+    text-decoration: none;
+    border-bottom: 0.0625rem solid ${neutral[86]};
+`;
+
+const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
+    styledH(
+        'a',
+        { css: anchorStyles(getPillarStyles(props.pillar).kicker), href: props.href },
+        transform(props.text, props.pillar),
+    );
+
+const listStyles: SerializedStyles = css`
+    list-style: none;
+    margin: ${remSpace[2]} 0;
+    padding-left: 0;
+`;
+
+const listItemStyles: SerializedStyles = css`
+    padding-left: 1rem;
+    padding-bottom: .375rem;
+
+    &::before {
+        display: inline-block;
+        content: '';
+        border-radius: .5rem;
+        height: 1rem;
+        width: 1rem;
+        margin-right: ${remSpace[2]};
+        background-color: ${neutral[86]};
+        margin-left: -1rem;
+        vertical-align: middle;
+    }
+
+    > p:first-of-type {
+        display: inline;
+        padding: 0;
+    }
+`;
+
+const HeadingTwoStyles = css`
+    ${headline.xxsmall({ fontWeight: 'bold' })}
+    margin: 1rem 0 4px 0;
+
+    & + p {
+        margin-top: 0;
+    }
+`;
+
+const TweetStyles = css`
+    ${until.wide} {
+        clear: both;
+    }
+`;
 
 const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
@@ -229,13 +231,26 @@ const captionElement = (pillar: Pillar) => (node: Node, key: number): ReactNode 
     }
 };
 
+const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
+    const children = Array.from(node.childNodes).map(textElement(pillar));
+    switch (node.nodeName) {
+        case 'P':
+            return h('p', { key }, children);
+        default:
+            return textElement(pillar)(node, key);
+    }
+};
+
 const text = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(textElement(pillar));
+
+const standfirstText = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
+    Array.from(doc.childNodes).map(standfirstTextElement(pillar));
 
 interface ImageProps {
     url: string;
     alt: string;
-    salt: string;
+    imageMappings: ImageMappings;
     sizes: string;
     width: number;
     height: number;
@@ -255,7 +270,7 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
-    const { url, sizes, salt, alt, width, height, credit, captionString } = props;
+    const { url, sizes, alt, width, height, credit, captionString, imageMappings } = props;
 
     if (!url) {
         return null;
@@ -263,15 +278,15 @@ const ImageElement = (props: ImageProps): ReactElement | null => {
 
     return styledH('img', {
         sizes,
-        srcSet: srcset(url, salt),
+        srcSet: srcset(url, imageMappings),
         alt,
         className: 'js-launch-slideshow',
-        src: src(salt, url, 500),
+        src: src(imageMappings, url, width),
         css: imageStyles(width, height),
         caption: captionString,
         credit,
     });
-}
+};
 
 const pullquoteStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
@@ -287,11 +302,12 @@ const pullquoteStyles = (colour: string): SerializedStyles => css`
 
         &::before {
             ${icons}
-            font-size: 2.2rem;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            font-weight: 300;
             content: '\\e11c';
             display: inline-block;
             margin-right: ${basePx(1)};
-            ${headline.xsmall({ fontWeight: 'light' })};
         }
     }
 
@@ -339,7 +355,7 @@ const richLinkStyles = css`
 
     a {
         text-decoration: none;
-        background: none;
+        border-bottom: none;
     }
 
     float: left;
@@ -376,9 +392,10 @@ const Interactive = (props: { url: string }): ReactElement =>
 const Tweet = (props: { content: NodeList; pillar: Pillar; key: number }): ReactElement => {
     // twitter script relies on twitter-tweet class being present
     return styledH('blockquote', { key: props.key, className: 'twitter-tweet', css: TweetStyles }, ...Array.from(props.content).map(textElement(props.pillar)));
-}
+};
 
-const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: number): ReactNode => {
+const render = (pillar: Pillar, imageMappings: ImageMappings) =>
+    (element: BodyElement, key: number): ReactNode => {
     switch (element.kind) {
 
         case ElementKind.Text:
@@ -388,13 +405,13 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
             const { file, alt, caption, captionString, credit, width, height, role } = element;
             const ImageComponent = role
                 .fmap(imageRole => imageRole === Role.Thumbnail ? BodyImageThumbnail : BodyImage)
-                .withDefault(BodyImage)
+                .withDefault(BodyImage);
 
             return h(ImageComponent, {
                 image: {
                     url: file,
                     alt,
-                    salt,
+                    imageMappings,
                     width,
                     height,
                     caption: captionString,
@@ -429,15 +446,16 @@ const render = (salt: string, pillar: Pillar) => (element: BodyElement, key: num
             };
             return h('div', props);
     }
-}
+};
 
-const renderAll = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
-    elements.map(render(salt, pillar));
+const renderAll = (imageMappings: ImageMappings) =>
+    (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+        elements.map(render(pillar, imageMappings));
 
 const renderCaption = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(captionElement(pillar));
 
-const renderMedia = (salt: string) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
+const renderMedia = (imageMappings: ImageMappings) => (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
     elements.map((element) => {
         if(element.kind === ElementKind.Image) {
             const { file, alt, caption, captionString, credit, width, height } = element;
@@ -445,11 +463,11 @@ const renderMedia = (salt: string) => (pillar: Pillar, elements: BodyElement[]):
                     image: {
                         url: file,
                         alt,
-                        salt,
+                        imageMappings,
                         width,
                         height,
                         caption: captionString,
-                        credit
+                        credit,
                     },
                 },
                 h(MediaFigCaption, {
@@ -463,6 +481,8 @@ const renderMedia = (salt: string) => (pillar: Pillar, elements: BodyElement[]):
 export {
     renderAll,
     text as renderText,
+    standfirstText as renderStandfirstText,
     ImageElement,
+    getHref,
     renderMedia,
 };
