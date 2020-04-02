@@ -222,10 +222,10 @@ const parseIframe = (docParser: DocParser) => (html: string): string | undefined
         return undefined;
     }
 
-    iframe?.removeAttribute('frameborder');
-    iframe?.setAttribute('style', 'border: none');
-    iframe?.setAttribute('sandbox', 'allow-scripts')
-    return iframe?.outerHTML;
+    iframe.removeAttribute('frameborder');
+    iframe.setAttribute('style', 'border: none');
+    iframe.setAttribute('sandbox', 'allow-scripts')
+    return iframe.outerHTML;
 }
 
 const parseElement =
@@ -546,6 +546,7 @@ export {
     LiveBlock,
     ElementKind,
     BodyElement,
+    Audio,
     Role,
     Image,
     fromCapi,

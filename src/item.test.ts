@@ -1,5 +1,5 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
-import { fromCapi, Design, Standard, ElementKind, Image, Review } from 'item';
+import { fromCapi, Design, Standard, ElementKind, Image, Review, Audio } from 'item';
 import { JSDOM } from "jsdom";
 import { None } from "types/option";
 
@@ -424,11 +424,95 @@ describe('instagram elements', () => {
         const item = f(articleContentWithElement(instagramElement)) as Standard;
         const element = getFirstBody(item);
         expect(element.kind).toBe(ElementKind.Instagram)
-    })
+    });
+
+    test('filters embed elements without instagramTypeData html', () => {
+        const instagramElement = {
+            type: ElementType.INSTAGRAM,
+            assets: [],
+            instagramTypeData: {
+                originalUrl: "",
+                title: "",
+                source: "",
+                authorUrl: "",
+                authorUsername: ""
+            }
+        }
+        const item = f(articleContentWithElement(instagramElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive)
+    });
+});
+
+describe('embed elements', () => {
+    test('parses embed elements', () => {
+        const embedElement = {
+            type: ElementType.EMBED,
+            assets: [],
+            embedTypeData: {
+                html: "<p>Embed element<p>",
+            }
+        }
+        const item = f(articleContentWithElement(embedElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Embed)
+    });
+
+    test('filters embed elements without embedTypeData html', () => {
+        const embedElement = {
+            type: ElementType.EMBED,
+            assets: [],
+            embedTypeData: {}
+        }
+        const item = f(articleContentWithElement(embedElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive)
+    });
 });
 
 describe('audio elements', () => {
     test('parses audio elements', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {
+                html: "<iframe></iframe>",
+            }
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Audio)
+    });
+
+    test('filters audio elements without audioTypeData html', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {}
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive)
+    });
+
+    test('strips and sets attributes on iframe', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {
+                html: "<iframe frameborder='0'></iframe>",
+            }
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        item.body[0].fmap<Audio>(element => element as Audio)
+            .fmap(({ html }) => {
+                expect(html).toContain('sandbox="allow-scripts"');
+                expect(html).toContain('style="border: none"');
+                expect(html).not.toContain('frameborder');
+            });
+    });
+
+    test('does not render if no iframe inside the html', () => {
         const audioElement = {
             type: ElementType.AUDIO,
             assets: [],
@@ -438,6 +522,6 @@ describe('audio elements', () => {
         }
         const item = f(articleContentWithElement(audioElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Audio)
-    })
+        expect(element.kind).toBe(ElementKind.Interactive)
+    });
 });
