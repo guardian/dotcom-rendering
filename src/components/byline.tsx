@@ -54,7 +54,10 @@ const toReact = (format: Format) => (node: Node): ReactNode => {
 
     switch (node.nodeName) {
         case 'A':
-            const anchorCss = format.design === Design.Comment ? null : anchorStyles(colours.kicker);
+            const anchorCss = format.design === Design.Comment
+                ? null
+                : anchorStyles(colours.kicker);
+
             return (
                 <a href={getHref(node).withDefault('')} css={anchorCss}>
                     {node.textContent ?? ''}
