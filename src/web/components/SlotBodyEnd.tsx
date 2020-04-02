@@ -95,6 +95,7 @@ const buildPayload = (props: Props) => {
             epicViewLog: getViewLog(),
             weeklyArticleHistory: getWeeklyArticleHistory(),
             mvtId: Number(getCookie('GU_mvt_id')),
+            countryCode: props.countryCode,
         },
     };
 };
