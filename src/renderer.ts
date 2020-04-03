@@ -100,7 +100,7 @@ const listStyles: SerializedStyles = css`
 `
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: 1.5rem;
+    padding-left: ${remSpace[6]};
     padding-bottom: .375rem;
 
     &::before {
