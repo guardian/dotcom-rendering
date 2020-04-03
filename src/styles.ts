@@ -62,7 +62,7 @@ export const articleWidthStyles = css`
     }
 `;
 
-const adHeight = '250px';
+const adHeight = '258px';
 
 export const adStyles = css`
     .ad-placeholder {

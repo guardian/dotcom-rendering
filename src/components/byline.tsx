@@ -6,7 +6,6 @@ import { headline } from '@guardian/src-foundations/typography';
 
 import { Design, Format } from 'item';
 import { Option } from 'types/option';
-import { remSpace } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillar';
 import { getHref } from 'renderer';
 
@@ -20,7 +19,6 @@ interface Props extends Format {
 const styles = (colour: string): SerializedStyles => css`
     ${headline.xxxsmall()}
     color: ${colour};
-    margin-bottom: ${remSpace[1]};
 `;
 
 const commentStyles = css`
