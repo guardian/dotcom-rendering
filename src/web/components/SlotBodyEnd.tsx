@@ -75,9 +75,6 @@ const buildPayload = (props: Props) => {
             ophanComponentId: 'ACQUISITIONS_EPIC',
             platformId: 'GUARDIAN_WEB',
             clientName: 'dcr',
-            campaignCode: 'UNUSED', // TODO: remove me
-            abTestName: 'UNUSED', // TODO: remove me
-            abTestVariant: 'UNUSED', // TODO: remove me
             referrerUrl: window.location.origin + window.location.pathname,
         },
         localisation: {
