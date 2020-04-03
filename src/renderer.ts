@@ -206,23 +206,22 @@ const CaptionItalicStyles = (props: { text: string; pillar: Pillar }): ReactElem
         props.text,
     );
 
-
 const captionElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const text = node.textContent ?? '';
     const children = Array.from(node.childNodes).map(textElement(pillar));
     switch (node.nodeName) {
         case 'STRONG':
-            return styledH('h2', { css: captionHeadingStyles, key }, children );
+            return styledH('p', {css: captionHeadingStyles, key}, children);
         case 'BR':
             return null;
         case 'EM':
-            return h(CaptionItalicStyles, { text, pillar, key }, children);
+            return h(CaptionItalicStyles, {text, pillar, key}, children);
         case '#text':
             return h(MediaCaptionText, { text, pillar, key }, children);
         default:
             return textElement(pillar)(node, key);
     }
-};
+}
 
 const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
     const children = Array.from(node.childNodes).map(textElement(pillar));
