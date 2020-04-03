@@ -216,6 +216,10 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
     ${from.phablet} {
         height: calc(620px * ${height / width});
     }
+
+    ${darkModeCss`
+        background: ${neutral[20]};
+    `}
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
