@@ -22,6 +22,7 @@ const styles = (colour: string): SerializedStyles => css`
     padding: 0;
     border: none;
     background: none;
+    margin-left: 0;
 `;
 
 function getStyles({ pillar }: Format): SerializedStyles {
