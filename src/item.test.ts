@@ -1,5 +1,5 @@
 import { ContentType, Tag, TagType, ElementType, AssetType, IBlockElement as BlockElement } from "mapiThriftModels";
-import { fromCapi, Design, Standard, ElementKind, Image, Review } from 'item';
+import { fromCapi, Design, Standard, ElementKind, Image, Review, Audio } from 'item';
 import { JSDOM } from "jsdom";
 import { None } from "types/option";
 
@@ -109,73 +109,73 @@ const articleContentWithImageWithoutFile = articleContentWithElement({
 const f = fromCapi(JSDOM.fragment);
 
 const getFirstBody = (item: Review | Standard) =>
-    item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' })
+    item.body[0].toOption().withDefault({ kind: ElementKind.Interactive, url: '' });
 
 
 describe('fromCapi returns correct Item', () => {
     test('media', () => {
         const item = f(contentWithTag('type/audio'));
-        expect(item.design).toBe(Design.Media)
+        expect(item.design).toBe(Design.Media);
     })
 
     test('review', () => {
         const item = f(reviewContent);
-        expect(item.design).toBe(Design.Review)
+        expect(item.design).toBe(Design.Review);
     })
 
     test('analysis', () => {
         const item = f(contentWithTag('tone/analysis'));
-        expect(item.design).toBe(Design.Analysis)
+        expect(item.design).toBe(Design.Analysis);
     })
 
     test('comment', () => {
         const item = f(contentWithTag('tone/comment'));
-        expect(item.design).toBe(Design.Comment)
+        expect(item.design).toBe(Design.Comment);
     })
 
     test('feature', () => {
         const item = f(contentWithTag('tone/features'));
-        expect(item.design).toBe(Design.Feature)
+        expect(item.design).toBe(Design.Feature);
     })
 
     test('live', () => {
         const item = f(contentWithTag('tone/minutebyminute'));
-        expect(item.design).toBe(Design.Live)
+        expect(item.design).toBe(Design.Live);
     })
 
     test('recipe', () => {
         const item = f(contentWithTag('tone/recipes'));
-        expect(item.design).toBe(Design.Recipe)
+        expect(item.design).toBe(Design.Recipe);
     })
 
     test('matchreport', () => {
         const item = f(contentWithTag('tone/matchreports'));
-        expect(item.design).toBe(Design.MatchReport)
+        expect(item.design).toBe(Design.MatchReport);
     })
 
     test('interview', () => {
         const item = f(contentWithTag('tone/interview'));
-        expect(item.design).toBe(Design.Interview)
+        expect(item.design).toBe(Design.Interview);
     })
 
     test('guardianview', () => {
         const item = f(contentWithTag('tone/editorials'));
-        expect(item.design).toBe(Design.GuardianView)
+        expect(item.design).toBe(Design.GuardianView);
     })
 
     test('quiz', () => {
         const item = f(contentWithTag('tone/quizzes'));
-        expect(item.design).toBe(Design.Quiz)
+        expect(item.design).toBe(Design.Quiz);
     })
 
     test('advertisementfeature', () => {
         const item = f(contentWithTag('tone/advertisement-features'));
-        expect(item.design).toBe(Design.AdvertisementFeature)
+        expect(item.design).toBe(Design.AdvertisementFeature);
     })
 
     test('article', () => {
         const item = f(articleContent);
-        expect(item.design).toBe(Design.Article)
+        expect(item.design).toBe(Design.Article);
     })
 })
 
@@ -191,7 +191,7 @@ describe('text elements', () => {
         }
         const item = f(articleContentWithElement(textElement)) as Standard;
         const element = getFirstBody(item)
-        expect(element.kind).toBe(ElementKind.Text)
+        expect(element.kind).toBe(ElementKind.Text);
     })
 
     test('filters empty text elements', () => {
@@ -204,7 +204,7 @@ describe('text elements', () => {
         }
         const item = f(articleContentWithElement(textElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 });
 
@@ -212,13 +212,13 @@ describe('image elements', () => {
     test('parses image elements', () => {
         const item = f(articleContentWithImage) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Image)
+        expect(element.kind).toBe(ElementKind.Image);
     })
 
     test('filters image elements without file url', () => {
         const item = f(articleContentWithImageWithoutFile) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 
     test('uses displayCredit', () => {
@@ -234,7 +234,7 @@ describe('image elements', () => {
             captionString: "",
             role: new None()
         }) as Image;
-        expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"))
+        expect(element.caption).toStrictEqual(JSDOM.fragment("caption credit"));
     })
 });
 
@@ -250,7 +250,7 @@ describe('pullquote elements', () => {
         }
         const item = f(articleContentWithElement(pullquoteElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Pullquote)
+        expect(element.kind).toBe(ElementKind.Pullquote);
     })
 
     test('filters empty pullquote elements', () => {
@@ -264,7 +264,7 @@ describe('pullquote elements', () => {
         }
         const item = f(articleContentWithElement(pullquoteElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 });
 
@@ -279,7 +279,7 @@ describe('interactive elements', () => {
         }
         const item = f(articleContentWithElement(interactiveElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 
     test('filters empty interactive elements', () => {
@@ -292,7 +292,7 @@ describe('interactive elements', () => {
         }
         const item = f(articleContentWithElement(interactiveElement)) as Standard;
         const element = item.body[0].toOption().withDefault({ kind: ElementKind.RichLink, url: '', linkText: '' })
-        expect(element.kind).toBe(ElementKind.RichLink)
+        expect(element.kind).toBe(ElementKind.RichLink);
     })
 });
 
@@ -311,7 +311,7 @@ describe('rich link elements', () => {
         }
         const item = f(articleContentWithElement(richLinkElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.RichLink)
+        expect(element.kind).toBe(ElementKind.RichLink);
     })
 
     test('filters rich link elements with empty urls', () => {
@@ -328,7 +328,7 @@ describe('rich link elements', () => {
         }
         const item = f(articleContentWithElement(richLinkElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 
     test('filters rich link elements with empty linkText', () => {
@@ -345,7 +345,7 @@ describe('rich link elements', () => {
         }
         const item = f(articleContentWithElement(richLinkElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 });
 
@@ -361,7 +361,7 @@ describe('tweet elements', () => {
         }
         const item = f(articleContentWithElement(tweetElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Tweet)
+        expect(element.kind).toBe(ElementKind.Tweet);
     })
 
     test('filters tweet elements with empty ids', () => {
@@ -375,7 +375,7 @@ describe('tweet elements', () => {
         }
         const item = f(articleContentWithElement(tweetElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 
     test('filters tweet elements with empty html', () => {
@@ -389,7 +389,7 @@ describe('tweet elements', () => {
         }
         const item = f(articleContentWithElement(tweetElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 
     test('filters tweet elements with no blockquotes', () => {
@@ -403,7 +403,7 @@ describe('tweet elements', () => {
         }
         const item = f(articleContentWithElement(tweetElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Interactive)
+        expect(element.kind).toBe(ElementKind.Interactive);
     })
 });
 
@@ -423,6 +423,105 @@ describe('instagram elements', () => {
         }
         const item = f(articleContentWithElement(instagramElement)) as Standard;
         const element = getFirstBody(item);
-        expect(element.kind).toBe(ElementKind.Instagram)
-    })
+        expect(element.kind).toBe(ElementKind.Instagram);
+    });
+
+    test('filters embed elements without instagramTypeData html', () => {
+        const instagramElement = {
+            type: ElementType.INSTAGRAM,
+            assets: [],
+            instagramTypeData: {
+                originalUrl: "",
+                title: "",
+                source: "",
+                authorUrl: "",
+                authorUsername: ""
+            }
+        }
+        const item = f(articleContentWithElement(instagramElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
+});
+
+describe('embed elements', () => {
+    test('parses embed elements', () => {
+        const embedElement = {
+            type: ElementType.EMBED,
+            assets: [],
+            embedTypeData: {
+                html: "<p>Embed element<p>",
+            }
+        }
+        const item = f(articleContentWithElement(embedElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Embed);
+    });
+
+    test('filters embed elements without embedTypeData html', () => {
+        const embedElement = {
+            type: ElementType.EMBED,
+            assets: [],
+            embedTypeData: {}
+        }
+        const item = f(articleContentWithElement(embedElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
+});
+
+describe('audio elements', () => {
+    test('filters out audio elements with no src attributes on iframe', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {
+                html: "<iframe></iframe>",
+            }
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
+
+    test('filters audio elements without audioTypeData html', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {}
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
+
+    test('strips and sets attributes on iframe', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {
+                html: "<iframe src='https://open.spotify.com/embed/track/' width='300' height='300' frameborder='0'></iframe>",
+            }
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        item.body[0].fmap<Audio>(element => element as Audio)
+            .fmap(({ src, width, height }) => {
+                expect(src).toContain('https://open.spotify.com/embed/track/');
+                expect(width).toContain('300');
+                expect(height).not.toContain('380');
+            });
+    });
+
+    test('does not render if no iframe inside the html', () => {
+        const audioElement = {
+            type: ElementType.AUDIO,
+            assets: [],
+            audioTypeData: {
+                html: "<p>Spotify playlist<p>",
+            }
+        }
+        const item = f(articleContentWithElement(audioElement)) as Standard;
+        const element = getFirstBody(item);
+        expect(element.kind).toBe(ElementKind.Interactive);
+    });
 });
