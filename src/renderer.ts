@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
-import {createElement as h, ReactElement, ReactNode} from 'react';
+import { ReactNode, createElement as h, ReactElement } from 'react';
 import { css, jsx as styledH, SerializedStyles } from '@emotion/core';
 import { from, until } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
-import { fromNullable, None, Option, Some } from 'types/option';
-import { src, srcset } from 'image';
-import { basePx, darkModeCss, icons } from 'styles';
+import { Option, fromNullable, Some, None } from 'types/option';
+import { srcset, src } from 'image';
+import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
 import { BodyElement, ElementKind, Role } from 'item';
 import Paragraph from 'components/paragraph';
@@ -427,6 +427,10 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
         case ElementKind.Tweet:
             return h(Tweet, { content: element.content, pillar, key });
 
+        case ElementKind.Audio:
+            return h(Audio, { src: element.src, width: element.width, height: element.height });
+
+        case ElementKind.Embed:
         case ElementKind.Instagram:
             const props = {
                 dangerouslySetInnerHTML: {

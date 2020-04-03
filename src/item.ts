@@ -17,7 +17,6 @@ import {
 } from 'mapiThriftModels';
 import {logger} from "logger";
 
-
 // ----- Item Type ----- //
 
 const enum Design {
@@ -51,7 +50,9 @@ const enum ElementKind {
     Interactive,
     RichLink,
     Tweet,
-    Instagram
+    Instagram,
+    Audio,
+    Embed
 }
 
 enum Role {
@@ -90,6 +91,13 @@ type Image = {
     role: Option<Role>;
 }
 
+type Audio = {
+    kind: ElementKind.Audio;
+    src: string;
+    height: string;
+    width: string;
+}
+
 type BodyElement = {
     kind: ElementKind.Text;
     doc: DocumentFragment;
@@ -109,6 +117,9 @@ type BodyElement = {
     content: NodeList;
 } | {
     kind: ElementKind.Instagram;
+    html: string;
+} | Audio | {
+    kind: ElementKind.Embed;
     html: string;
 };
 
@@ -205,6 +216,22 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
     });
 }
 
+const parseIframe = (docParser: DocParser) => (html: string): Result<string, Audio> => {
+    const iframe = docParser(html).querySelector('iframe');
+    const src = iframe?.getAttribute('src');
+
+    if (!iframe || !src) {
+        return new Err('No iframe within audioTypeData.html');
+    }
+
+    return new Ok({
+        kind: ElementKind.Audio,
+        src,
+        width: iframe.getAttribute('width') ?? "300",
+        height: iframe.getAttribute('height') ?? "380",
+    });
+}
+
 const parseElement =
     (docParser: DocParser) => (element: BlockElement): Result<string, BodyElement> => {
     switch (element.type) {
@@ -257,9 +284,26 @@ const parseElement =
             return tweetContent(id, docParser(h))
                 .fmap(content => ({ kind: ElementKind.Tweet, content }));
 
+        case ElementType.EMBED:
+            const { html: embedHtml } = element.embedTypeData ?? {};
+            if (!embedHtml) {
+                return new Err('No html field on embedTypeData')
+            }
+            return new Ok({ kind: ElementKind.Embed, html: embedHtml });
+
         case ElementType.INSTAGRAM:
-            const instagramHtml = element.instagramTypeData?.html ?? "";
+            const { html: instagramHtml } = element.instagramTypeData ?? {};
+            if (!instagramHtml) {
+                return new Err('No html field on instagramTypeData')
+            }
             return new Ok({ kind: ElementKind.Instagram, html: instagramHtml });
+
+        case ElementType.AUDIO:
+            const { html: audioHtml } = element.audioTypeData ?? {};
+            if (!audioHtml) {
+                return new Err('No html field on audioTypeData')
+            }
+            return parseIframe(docParser)(audioHtml);
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
@@ -504,6 +548,7 @@ export {
     LiveBlock,
     ElementKind,
     BodyElement,
+    Audio,
     Role,
     Image,
     Format,

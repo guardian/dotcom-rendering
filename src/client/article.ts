@@ -1,8 +1,10 @@
 // ----- Imports ----- //
 
-import { notificationsClient, acquisitionsClient } from 'native/nativeApi';
-import { Topic } from 'bridget-typescript/Topic';
-import { IMaybeEpic as MaybeEpic } from 'bridget-typescript/MaybeEpic';
+import { commercialClient, userClient, notificationsClient, galleryClient, acquisitionsClient } from 'native/nativeApi';
+import { AdSlot } from '@guardian/bridget/AdSlot'
+import { Topic } from '@guardian/bridget/Topic';
+import { Image } from '@guardian/bridget/Image';
+import { IMaybeEpic as MaybeEpic } from '@guardian/bridget/MaybeEpic';
 import { formatDate } from 'date';
 import { logger } from "../logger";
 import { createElement as h } from 'react';
