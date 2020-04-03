@@ -1,12 +1,8 @@
 import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import {
-    sidePadding,
-    adStyles,
-    darkModeCss
-} from 'styles';
-import {background, neutral} from '@guardian/src-foundations/palette';
-import {getPillarStyles, Pillar, PillarStyles} from 'pillar';
+import { adStyles, darkModeCss } from 'styles';
+import { background, neutral } from '@guardian/src-foundations/palette';
+import { getPillarStyles, Pillar, PillarStyles } from 'pillar';
 
 const ArticleBodyStyles = css`
     position: relative;
@@ -16,7 +12,6 @@ const ArticleBodyStyles = css`
     color: ${neutral[86]};
 
     ${adStyles}
-    ${sidePadding}
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`

@@ -175,6 +175,9 @@ const textElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => 
 const captionHeadingStyles = css`
     ${headline.xxxsmall()}
     color: ${neutral[86]};
+    padding-bottom: ${remSpace[2]};
+    padding-top: ${remSpace[2]};
+    margin: 0;
     
     em {
         ${textSans.xsmall({ italic: true, fontWeight: 'bold'})}
@@ -183,10 +186,11 @@ const captionHeadingStyles = css`
 
 const MediaCaptionText = (props: { text: string; pillar: Pillar }): ReactElement =>
     styledH(
-        'span',
+        'p',
         { css: css`
-              ${textSans.xsmall()}
+              ${body.small()}
               color: ${neutral[86]};
+              margin: 0;
         ` },
         props.text,
     );

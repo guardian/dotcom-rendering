@@ -71,6 +71,7 @@ const media = css`
     color: ${neutral[86]};
     p, ul, li {
         ${headline.xxxsmall({ lineHeight: 'loose' })}
+        margin: 0;
     }
     
     li:before {

@@ -2,8 +2,8 @@
 
 import React, { FC, ReactNode } from 'react';
 import { css } from '@emotion/core';
-import { textSans } from '@guardian/src-foundations/typography';
-import { neutral, remSpace } from '@guardian/src-foundations';
+import { body } from '@guardian/src-foundations/typography';
+import { neutral } from '@guardian/src-foundations';
 import { darkModeCss } from "../../styles";
 
 // ----- Component ----- //
@@ -13,10 +13,8 @@ interface Props {
 }
 
 const captionStyles = css`
-    padding-top: ${remSpace[2]};
-
     text {
-        ${textSans.xsmall()}
+        ${body.small()}
         vertical-align: top;
         color: ${neutral[86]};
     }

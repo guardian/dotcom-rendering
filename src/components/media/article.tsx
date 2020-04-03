@@ -6,7 +6,7 @@ import { background } from '@guardian/src-foundations/palette';
 import { from, breakpoints } from '@guardian/src-foundations/mq';
 
 import HeaderImage from 'components/shared/headerImage';
-import Series from 'components/shared/articleSeries';
+import Series from 'components/media/articleSeries';
 import Standfirst from 'components/standfirst';
 import Byline from 'components/media/byline';
 import Body from 'components/media/articleBody';
@@ -71,7 +71,7 @@ const Media = ({ imageMappings, item, children }: Props): JSX.Element =>
                     <Standfirst item={item} />
 
                 </div>
-                <section css={articleWidthStyles}>
+                <section>
                     <Byline
                         pillar={item.pillar}
                         publicationDate={item.publishDate}
