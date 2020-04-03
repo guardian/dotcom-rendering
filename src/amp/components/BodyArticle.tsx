@@ -97,7 +97,7 @@ export const Body: React.FC<{
             adClassName={adStyle}
             adInfo={adInfo}
         />
-        );
+    );
     return (
         <InnerContainer className={body(pillar, designType)}>
             <TopMeta

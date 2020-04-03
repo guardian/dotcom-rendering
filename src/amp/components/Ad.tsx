@@ -198,28 +198,28 @@ export const Ad: React.SFC<{
 }) => (
     <div className={cx(adStyle, className)}>
         {ampAdElem(
-                    'US',
-                    edition,
-                    section || '',
-                    contentType,
-                    config,
-                    commercialProperties,
-                )}
+            'US',
+            edition,
+            section || '',
+            contentType,
+            config,
+            commercialProperties,
+        )}
         {ampAdElem(
-                    'AU',
-                    edition,
-                    section || '',
-                    contentType,
-                    config,
-                    commercialProperties,
-                )}
+            'AU',
+            edition,
+            section || '',
+            contentType,
+            config,
+            commercialProperties,
+        )}
         {ampAdElem(
-                    'ROW',
-                    edition,
-                    section || '',
-                    contentType,
-                    config,
-                    commercialProperties,
-                )}
+            'ROW',
+            edition,
+            section || '',
+            contentType,
+            config,
+            commercialProperties,
+        )}
     </div>
-        );
+);

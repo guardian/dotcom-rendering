@@ -34,8 +34,8 @@ describe('AdComponent', () => {
             PLACEMENT_ID: 'OZONE_PROVIDED_PLACEMENT_ID',
             AD_UNIT_CODE: 'YOUR_AD_UNIT_CODE',
             PUBCID: 'YOUR_PUBCID',
-        }
-    }
+        },
+    };
     beforeEach(() => {
         commercialConfig.usePermutive = true;
         commercialConfig.usePrebid = true;
@@ -68,31 +68,28 @@ describe('AdComponent', () => {
             expect(rowRtcAttribute).not.toBeNull();
 
             if (usRtcAttribute) {
-                expect(JSON.parse(usRtcAttribute)).toEqual(expect.objectContaining({
-                    urls: [
-                        usPrebidURL,
-                        permutiveURL,
-                    ],
-                    vendors: ozoneConfig,
-                }));
+                expect(JSON.parse(usRtcAttribute)).toEqual(
+                    expect.objectContaining({
+                        urls: [usPrebidURL, permutiveURL],
+                        vendors: ozoneConfig,
+                    }),
+                );
             }
             if (auRtcAttribute) {
-                expect(JSON.parse(auRtcAttribute)).toEqual(expect.objectContaining({
-                    urls: [
-                        auPrebidURL,
-                        permutiveURL,
-                    ],
-                    vendors: ozoneConfig,
-                }));
+                expect(JSON.parse(auRtcAttribute)).toEqual(
+                    expect.objectContaining({
+                        urls: [auPrebidURL, permutiveURL],
+                        vendors: ozoneConfig,
+                    }),
+                );
             }
             if (rowRtcAttribute) {
-                expect(JSON.parse(rowRtcAttribute)).toEqual(expect.objectContaining({
-                    urls: [
-                        rowPrebidURL,
-                        permutiveURL,
-                    ],
-                    vendors: ozoneConfig,
-                }));
+                expect(JSON.parse(rowRtcAttribute)).toEqual(
+                    expect.objectContaining({
+                        urls: [rowPrebidURL, permutiveURL],
+                        vendors: ozoneConfig,
+                    }),
+                );
             }
         }
     });
@@ -217,28 +214,32 @@ describe('AdComponent', () => {
             expect(auRtcAttribute).not.toBeNull();
             expect(rowRtcAttribute).not.toBeNull();
 
-
-
             if (usRtcAttribute) {
-                expect(JSON.parse(usRtcAttribute)).toEqual(expect.objectContaining({
-                    urls: [],
-                    vendors: ozoneConfig,
-                }));
+                expect(JSON.parse(usRtcAttribute)).toEqual(
+                    expect.objectContaining({
+                        urls: [],
+                        vendors: ozoneConfig,
+                    }),
+                );
             }
             if (auRtcAttribute) {
-                expect(JSON.parse(auRtcAttribute)).toEqual(expect.objectContaining({
-                    urls: [],
-                    vendors: ozoneConfig,
-                }));
+                expect(JSON.parse(auRtcAttribute)).toEqual(
+                    expect.objectContaining({
+                        urls: [],
+                        vendors: ozoneConfig,
+                    }),
+                );
             }
             if (rowRtcAttribute) {
-                expect(JSON.parse(rowRtcAttribute)).toEqual(expect.objectContaining({
-                    urls: [],
-                    vendors: ozoneConfig,
-                }));
+                expect(JSON.parse(rowRtcAttribute)).toEqual(
+                    expect.objectContaining({
+                        urls: [],
+                        vendors: ozoneConfig,
+                    }),
+                );
             }
         }
-    })
+    });
 
     it('rtc-config returns no URLs when usePermutive and usePrebid flags are set to false', () => {
         commercialConfig.usePrebid = false;
