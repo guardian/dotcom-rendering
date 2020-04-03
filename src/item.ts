@@ -16,8 +16,6 @@ import {
     IAsset as Asset,
 } from 'mapiThriftModels';
 import {logger} from "logger";
-import { AudioProps } from 'components/audio';
-
 
 // ----- Item Type ----- //
 
