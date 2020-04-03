@@ -305,11 +305,7 @@ const parseElement =
             if (!audioHtml) {
                 return new Err('No html field on audioTypeData')
             }
-            return fromNullable(parseIframe(docParser)(audioHtml))
-                .fmap<Result<string, Audio>>(({ src, width, height }) => {
-                    return new Ok({ kind: ElementKind.Audio, src, width, height })
-                })
-                .withDefault(new Err('No iframe within audioTypeData.html'))
+            return parseIframe(docParser)(audioHtml);
 
         default:
             return new Err(`I'm afraid I don't understand the element I was given: ${element.type}`);
