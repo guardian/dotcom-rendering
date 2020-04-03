@@ -9,6 +9,7 @@ import { remSpace, breakpoints } from '@guardian/src-foundations';
 
 import Image, { Props as ImageProps } from 'components/image';
 import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
+import { darkModeCss } from 'styles';
 
 
 // ----- Setup ----- //
@@ -37,10 +38,13 @@ const styles = css`
     }
 `;
 
-const triangleStyles = ({ kicker }: PillarStyles): SerializedStyles => css`
+const triangleStyles = ({ kicker, inverted }: PillarStyles): SerializedStyles => css`
     fill: ${kicker};
     height: 0.8em;
     padding-right: ${remSpace[1]};
+    ${darkModeCss`
+        fill: ${inverted};
+    `}
 `;
 
 const captionStyles = css`

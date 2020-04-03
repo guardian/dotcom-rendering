@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { basePx, icons, wideContentWidth } from 'styles';
+import { basePx, icons, wideContentWidth, darkModeCss } from 'styles';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, brandAlt } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
@@ -39,6 +39,11 @@ const HeaderImageCaptionStyles = css`
 		&::-webkit-details-marker {
 			display: none;
 		}
+
+		${darkModeCss`
+			background-color: ${neutral[60]};
+			opacity: .8;
+		`}
 	}
 
 	details[open] {
