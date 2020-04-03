@@ -1,0 +1,14 @@
+name: chromatic 👓
+on: push
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - run: |
+                  yarn && yarn build
+            - uses: chromaui/action@v1
+              with:
+                  appCode: ${{ secrets.CHROMATIC_APP_CODE }}
+                  token: ${{ secrets.GITHUB_TOKEN }}
