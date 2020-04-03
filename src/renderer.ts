@@ -111,7 +111,7 @@ const listItemStyles: SerializedStyles = css`
         width: 1rem;
         margin-right: ${remSpace[2]};
         background-color: ${neutral[86]};
-        margin-left: -1.5rem;
+        margin-left: -${remSpace[6]};
         vertical-align: middle;
     }
 
