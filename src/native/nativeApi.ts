@@ -1,10 +1,10 @@
 import { createAppClient } from './thrift/nativeConnection';
-import * as Environment from 'bridget-typescript/Environment';
-import * as Commercial from 'bridget-typescript/Commercial';
-import * as Acquisitions from 'bridget-typescript/Acquistions';
-import * as Notifications from 'bridget-typescript/Notifications';
-import * as User from 'bridget-typescript/User';
-import * as Gallery from 'bridget-typescript/Gallery';
+import * as Environment from '@guardian/bridget/Environment';
+import * as Commercial from '@guardian/bridget/Commercial';
+import * as Acquisitions from '@guardian/bridget/Acquistions';
+import * as Notifications from '@guardian/bridget/Notifications';
+import * as User from '@guardian/bridget/User';
+import * as Gallery from '@guardian/bridget/Gallery';
 
 const environmentClient: Environment.Client<void> = createAppClient<Environment.Client>(Environment.Client, 'buffered', 'compact');
 const commercialClient: Commercial.Client<void> = createAppClient<Commercial.Client>(Commercial.Client, 'buffered', 'compact');
