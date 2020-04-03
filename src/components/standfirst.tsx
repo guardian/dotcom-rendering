@@ -2,7 +2,7 @@
 
 import React, {FC, ReactElement, ReactNode} from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import {body, headline} from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace } from '@guardian/src-foundations';

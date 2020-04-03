@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
+import React, {FC, ReactNode} from 'react';
 import { css } from '@emotion/core';
 import { from } from '@guardian/src-foundations/mq';
 import { remSpace, breakpoints } from '@guardian/src-foundations';
@@ -17,6 +17,7 @@ const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
 
 interface Props {
     image: Omit<ImageProps, 'sizes'>;
+    children?: ReactNode;
 }
 
 const styles = css`

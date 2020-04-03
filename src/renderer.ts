@@ -444,7 +444,7 @@ const renderAll = (imageMappings: ImageMappings) =>
 const renderCaption = (doc: DocumentFragment, pillar: Pillar): ReactNode[] =>
     Array.from(doc.childNodes).map(captionElement(pillar));
 
-const renderMedia = (imageMappings: ImageMappings) => 
+const renderMedia = (imageMappings: ImageMappings) =>
     (pillar: Pillar, elements: BodyElement[]): ReactNode[] =>
         elements.map((element) => {
             if(element.kind === ElementKind.Image) {
@@ -462,7 +462,9 @@ const renderMedia = (imageMappings: ImageMappings) =>
                     },
                     h(MediaFigCaption, {
                         text: renderCaption(caption, pillar)
-                    }))}
+                    })
+                )
+            }
             return null;
             });
 

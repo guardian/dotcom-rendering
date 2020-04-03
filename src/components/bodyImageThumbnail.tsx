@@ -15,7 +15,7 @@ const sizes = `(min-width: 140px)`;
 
 interface Props {
     image: Omit<ImageProps, 'sizes'>;
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 const styles = css`
