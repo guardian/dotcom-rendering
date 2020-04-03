@@ -186,8 +186,8 @@ const MemoisedInner = ({
         // fine to add it as a dependency because it won't ever change after
         // viewing, so we shouldn't ever run the hook multiple times. If we _do_
         // ever have an implementation where information in data could change
-        // after viewing, we'll need to revising this. Perhaps it's clearer to
-        // remote data from the dependencies and disable the exhaustive-deps
+        // after viewing, we'll need to revisit this. Perhaps it's clearer to
+        // remove data from the dependencies and disable the exhaustive-deps
         // rule, as above.
     }, [hasBeenSeen, data]);
 
