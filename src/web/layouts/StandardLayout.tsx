@@ -449,7 +449,9 @@ export const StandardLayout = ({ CAPI, NAV }: Props) => {
                             <Flex>
                                 <div id="comments-root" />
                                 <RightColumn>
-                                    {/* TODO: Comments ad slot goes here */}
+                                    <AdSlot
+                                        asps={namedAdSlotParameters('comments')}
+                                    />
                                 </RightColumn>
                             </Flex>
                         </Section>

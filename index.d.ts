@@ -619,7 +619,8 @@ type AdSlotType =
     | 'top-above-nav'
     | 'mostpop'
     | 'merchandising-high'
-    | 'merchandising';
+    | 'merchandising'
+    | 'comments';
 
 interface AdSlotParameters {
     name: AdSlotType;

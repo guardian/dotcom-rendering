@@ -116,6 +116,26 @@ export const namedAdSlotParameters = (name: AdSlotType): AdSlotParameters => {
             optId: undefined,
             optClassNames: ['js-sticky-mpu'],
         },
+        comments: {
+            name: 'comments',
+            adTypes: ['mpu-banner-ad', 'rendered'],
+            sizeMapping: {
+                mobile: ['1,1|2,2|300,250|300,274|300,600|fluid'],
+                // Pascal: It's not totally obvious where this sequence should come from the frontend code,
+                // but it should be correct.
+                desktop: [
+                    '1,1|2,2|300,250|300,274|620,1|620,350|550,310|fluid|300,600|160,600',
+                ],
+                phablet: [
+                    '1,1|2,2|300,197|300,250|300,274|620,350|550,310|fluid',
+                ],
+            },
+            showLabel: true,
+            refresh: false,
+            outOfPage: false,
+            optId: undefined,
+            optClassNames: ['js-sticky-mpu'],
+        },
         'top-above-nav': {
             name: 'top-above-nav',
             adTypes: ['mpu-banner-ad', 'rendered'],

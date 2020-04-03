@@ -6,6 +6,9 @@ import { Flex } from '@frontend/web/components/Flex';
 
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
+import { namedAdSlotParameters } from '@root/src/model/advertisement';
+import { AdSlot } from '@root/src/web/components/AdSlot';
+
 import { CommentsLayout } from './CommentsLayout';
 
 /* tslint:disable */
@@ -31,7 +34,9 @@ export const Default = () => (
                 discussionApiClientHeader="testClientHeader"
                 expanded={false}
             />
-            <RightColumn>{/* TODO: Comments ad slot goes here */}</RightColumn>
+            <RightColumn>
+                <AdSlot asps={namedAdSlotParameters('comments')} />
+            </RightColumn>
         </Flex>
     </Section>
 );
