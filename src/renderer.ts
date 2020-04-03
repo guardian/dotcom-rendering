@@ -272,7 +272,7 @@ const Pullquote = (props: PullquoteProps): ReactElement =>
         )
     );
 
-const richLinkWidth = '13.75rem';
+const richLinkWidth = '8.75rem';
 
 const richLinkStyles = css`
     background: ${neutral[97]};
