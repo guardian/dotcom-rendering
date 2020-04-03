@@ -42,7 +42,7 @@ const HeaderImageCaptionStyles = css`
 
 		${darkModeCss`
 			background-color: ${neutral[60]};
-			opacity: .8;
+			opacity: .7;
 		`}
 	}
 
@@ -56,6 +56,10 @@ const HeaderImageCaptionStyles = css`
 		z-index: 1;
 		color: ${neutral[100]};
 		${textSans.small()};
+
+		${darkModeCss`
+			color: ${neutral[60]};
+		`}
 	}
 
 	position: absolute;
