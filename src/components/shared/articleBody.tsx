@@ -9,7 +9,7 @@ import { neutral, background } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 
-const richLinkWidth = "13.75rem";
+const richLinkWidth = '8.75rem';
 
 const ArticleBodyStyles = css`
     position: relative;

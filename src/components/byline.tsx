@@ -27,6 +27,11 @@ const commentStyles = css`
     ${headline.medium({ fontWeight: 'light', italic: true })}
 `;
 
+const commentAnchorStyles = (colour: string): SerializedStyles => css`
+    color: ${colour};
+    text-decoration: none;
+`;
+
 const anchorStyles = (colour: string): SerializedStyles => css`
     ${headline.xxxsmall({ fontWeight: 'bold' })}
     font-style: normal;
@@ -35,13 +40,12 @@ const anchorStyles = (colour: string): SerializedStyles => css`
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
+    const colours = getPillarStyles(format.pillar);
     switch (format.design) {
         case Design.Comment:
             return commentStyles;
 
         default:
-            const colours = getPillarStyles(format.pillar);
-
             return styles(colours.kicker);
     }
 }
@@ -51,8 +55,12 @@ const toReact = (format: Format) => (node: Node): ReactNode => {
 
     switch (node.nodeName) {
         case 'A':
+            const anchor = format.design === Design.Comment
+                ? commentAnchorStyles
+                : anchorStyles
+
             return (
-                <a href={getHref(node).withDefault('')} css={anchorStyles(colours.kicker)}>
+                <a href={getHref(node).withDefault('')} css={anchor(colours.kicker)}>
                     {node.textContent ?? ''}
                 </a>
             );

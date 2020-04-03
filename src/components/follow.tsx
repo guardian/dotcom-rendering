@@ -16,12 +16,13 @@ interface Props extends Format {
 }
 
 const styles = (colour: string): SerializedStyles => css`
-    ${textSans.xsmall()}
+    ${textSans.small()}
     color: ${colour};
     display: block;
     padding: 0;
     border: none;
     background: none;
+    margin-left: 0;
 `;
 
 function getStyles({ pillar }: Format): SerializedStyles {
