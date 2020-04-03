@@ -218,19 +218,20 @@ const parseImage = (docParser: DocParser) => (element: BlockElement): Option<Ima
     });
 }
 
-const parseIframe = (docParser: DocParser) => (html: string): AudioProps | undefined => {
+const parseIframe = (docParser: DocParser) => (html: string): Result<string, Audio> => {
     const iframe = docParser(html).querySelector('iframe');
     const src = iframe?.getAttribute('src');
 
     if (!iframe || !src) {
-        return undefined;
+        return new Err('No iframe within audioTypeData.html');
     }
 
-    return {
+    return new Ok({
+        kind: ElementKind.Audio,
         src,
         width: iframe.getAttribute('width') ?? "300",
-        height: iframe.getAttribute('height') ?? "380"
-    }
+        height: iframe.getAttribute('height') ?? "380",
+    });
 }
 
 const parseElement =
