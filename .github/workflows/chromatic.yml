@@ -3,7 +3,7 @@ on: push
 
 jobs:
     run:
-        runs-on: ubuntu-16.04
+        runs-on: macos-latest
         steps:
             - uses: actions/checkout@v1
             - run: |
