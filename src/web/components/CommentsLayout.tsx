@@ -38,6 +38,7 @@ const containerStyles = css`
 
     padding-top: ${space[3]}px;
     padding-bottom: ${space[6]}px;
+    padding-right: ${space[5]}px;
 `;
 
 const bottomPadding = css`
