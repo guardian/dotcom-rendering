@@ -3,7 +3,6 @@ import { css, cx } from 'emotion';
 
 import {
     neutral,
-    background,
     brandBorder,
     brandBackground,
     opinion,
@@ -258,7 +257,7 @@ export const CommentLayout = ({ CAPI, NAV }: Props) => {
             )}
 
             <Section
-                backgroundColour={background.primary}
+                backgroundColour={opinion[800]}
                 padded={false}
                 showTopBorder={false}
             >
