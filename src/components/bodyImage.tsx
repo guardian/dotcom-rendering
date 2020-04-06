@@ -68,7 +68,7 @@ const BodyImage: FC<Props> = ({ figcaption, image, pillar }: Props) =>
                     </svg>
                     {caption}
                 </figcaption>
-            )
+            ).withDefault(null)
         }
     </figure>
 
