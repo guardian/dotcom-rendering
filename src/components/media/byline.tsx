@@ -1,15 +1,16 @@
 // ----- Imports ----- //
 
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
 import { neutral, background } from '@guardian/src-foundations/palette';
-import { darkModeCss, basePx } from 'styles';
+import { darkModeCss } from 'styles';
 import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
 import { Option } from 'types/option';
 import Dateline from 'components/dateline';
-import { Item } from "../../item";
+import { Item } from 'item';
 import { textSans } from "@guardian/src-foundations/typography";
-import {renderText} from "../../renderer";
+import { renderText } from "../../renderer";
+import { remSpace } from "@guardian/src-foundations";
 
 
 // ----- Styles ----- //
@@ -18,7 +19,7 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
     color: ${neutral[86]};
     
     .author {
-        margin: ${basePx(1, 0, 2, 0)};
+        margin: ${remSpace[2]} 0 ${remSpace[3]} 0;
 
         .follow, a {
             color: ${kicker};

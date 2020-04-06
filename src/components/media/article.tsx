@@ -11,10 +11,10 @@ import Standfirst from 'components/standfirst';
 import Byline from 'components/media/byline';
 import Body from 'components/media/articleBody';
 import Tags from 'components/media/tags';
-import { darkModeCss, articleWidthStyles } from 'styles';
-import { Item } from "../../item";
+import { articleWidthStyles } from 'styles';
+import { Item } from 'item';
 import Headline from 'components/headline';
-import {ImageMappings} from "../shared/page";
+import { ImageMappings } from "../shared/page";
 
 // ----- Styles ----- //
 
@@ -22,13 +22,8 @@ const Styles = css`
     background: ${background.inverse};
 `;
 
-const DarkStyles = darkModeCss`
-    background: ${background.inverse};
-`;
-
 const BorderStyles = css`
     background: ${background.inverse};
-    ${darkModeCss`background: ${background.inverse};`}
 
     ${from.wide} {
         width: ${breakpoints.wide}px;
@@ -56,7 +51,7 @@ interface Props {
 }
 
 const Media = ({ imageMappings, item, children }: Props): JSX.Element =>
-     <main css={[Styles, DarkStyles]}>
+     <main css={[Styles]}>
         <article css={BorderStyles}>
             <header>
                 <HeaderImage

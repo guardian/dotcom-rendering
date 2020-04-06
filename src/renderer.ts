@@ -8,13 +8,14 @@ import { Option, fromNullable, Some, None } from 'types/option';
 import { srcset, src } from 'image';
 import { basePx, icons, darkModeCss } from 'styles';
 import { getPillarStyles, Pillar } from 'pillar';
-import { BodyElement, ElementKind, Role } from 'item';
-import Paragraph from 'components/paragraph';
-import BodyImage from 'components/bodyImage';
-import BodyImageThumbnail from 'components/bodyImageThumbnail';
+import { ElementKind, BodyElement, Role } from 'item';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { remSpace } from '@guardian/src-foundations';
 import { ImageMappings } from 'components/shared/page';
+import Audio from 'components/audio';
+import Paragraph from 'components/paragraph';
+import BodyImage from 'components/bodyImage';
+import BodyImageThumbnail from 'components/bodyImageThumbnail';
 import FigCaption from 'components/figCaption';
 import MediaFigCaption from 'components/media/mediaFigCaption';
 
@@ -87,6 +88,10 @@ const anchorStyles = (colour: string): SerializedStyles => css`
     color: ${colour};
     text-decoration: none;
     border-bottom: 0.0625rem solid ${neutral[86]};
+
+    ${darkModeCss`
+        color: ${neutral[86]};
+    `}
 `;
 
 const Anchor = (props: { href: string; text: string; pillar: Pillar }): ReactElement =>
@@ -103,7 +108,7 @@ const listStyles: SerializedStyles = css`
 `;
 
 const listItemStyles: SerializedStyles = css`
-    padding-left: 1rem;
+    padding-left: ${remSpace[6]};
     padding-bottom: .375rem;
 
     &::before {
@@ -114,7 +119,7 @@ const listItemStyles: SerializedStyles = css`
         width: 1rem;
         margin-right: ${remSpace[2]};
         background-color: ${neutral[86]};
-        margin-left: -1rem;
+        margin-left: -${remSpace[6]};
         vertical-align: middle;
     }
 
@@ -122,6 +127,12 @@ const listItemStyles: SerializedStyles = css`
         display: inline;
         padding: 0;
     }
+
+    ${darkModeCss`
+        &::before {
+            background-color: ${neutral[60]};
+        }
+    `}
 `;
 
 const HeadingTwoStyles = css`
@@ -224,7 +235,7 @@ const captionElement = (pillar: Pillar) => (node: Node, key: number): ReactNode 
 }
 
 const standfirstTextElement = (pillar: Pillar) => (node: Node, key: number): ReactNode => {
-    const children = Array.from(node.childNodes).map(textElement(pillar));
+    const children = Array.from(node.childNodes).map(standfirstTextElement(pillar));
     switch (node.nodeName) {
         case 'P':
             return h('p', { key }, children);
@@ -259,6 +270,10 @@ const imageStyles = (width: number, height: number): SerializedStyles => css`
     ${from.phablet} {
         height: calc(620px * ${height / width});
     }
+
+    ${darkModeCss`
+        background: ${neutral[20]};
+    `}
 `;
 
 const ImageElement = (props: ImageProps): ReactElement | null => {
@@ -326,7 +341,7 @@ const Pullquote = (props: PullquoteProps): ReactElement =>
         )
     );
 
-const richLinkWidth = '13.75rem';
+const richLinkWidth = '8.75rem';
 
 const richLinkStyles = css`
     background: ${neutral[97]};
@@ -334,7 +349,7 @@ const richLinkStyles = css`
 
     h1 {
         margin: ${basePx(0, 0, 2, 0)};
-        font-size: 1em;
+        font-size: 1rem;
     }
 
     p {
@@ -360,12 +375,9 @@ const richLinkStyles = css`
     }
 
     ${darkModeCss`
-        border-top: 1px solid ${neutral[60]};
-        border-bottom: 1px solid ${neutral[60]};
+        background: ${neutral[0]};
         a {
-            &::before {
-                color: ${neutral[60]};
-            }
+            border-bottom: 0.0625rem solid ${neutral[60]};
         }
     `}
 `;

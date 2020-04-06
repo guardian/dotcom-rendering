@@ -7,6 +7,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { Format } from 'item';
 import { getPillarStyles } from 'pillar';
 import { Contributor, isSingleContributor } from 'contributor';
+import { darkModeCss } from 'styles';
 
 
 // ----- Component ----- //
@@ -15,19 +16,24 @@ interface Props extends Format {
     contributors: Contributor[];
 }
 
-const styles = (colour: string): SerializedStyles => css`
-    ${textSans.xsmall()}
-    color: ${colour};
+const styles = (kicker: string, inverted: string): SerializedStyles => css`
+    ${textSans.small()}
+    color: ${kicker};
     display: block;
     padding: 0;
     border: none;
     background: none;
+    margin-left: 0;
+
+    ${darkModeCss`
+        color: ${inverted};
+    `}
 `;
 
 function getStyles({ pillar }: Format): SerializedStyles {
-    const colours = getPillarStyles(pillar);
+    const { kicker, inverted } = getPillarStyles(pillar);
 
-    return styles(colours.kicker);
+    return styles(kicker, inverted);
 }
 
 function Follow({ contributors, ...format }: Props): JSX.Element | null {

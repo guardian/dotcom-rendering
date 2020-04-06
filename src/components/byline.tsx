@@ -6,9 +6,10 @@ import { headline } from '@guardian/src-foundations/typography';
 
 import { Design, Format } from 'item';
 import { Option } from 'types/option';
-import { remSpace } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillar';
 import { getHref } from 'renderer';
+import { darkModeCss } from 'styles';
 
 
 // ----- Component ----- //
@@ -17,42 +18,61 @@ interface Props extends Format {
     bylineHtml: Option<DocumentFragment>;
 };
 
-const styles = (colour: string): SerializedStyles => css`
+const styles = (kicker: string): SerializedStyles => css`
     ${headline.xxxsmall()}
-    color: ${colour};
-    margin-bottom: ${remSpace[1]};
+    color: ${kicker};
+
+    ${darkModeCss`
+        color: ${neutral[60]};
+    `}
 `;
 
 const commentStyles = css`
     ${headline.medium({ fontWeight: 'light', italic: true })}
 `;
 
-const anchorStyles = (colour: string): SerializedStyles => css`
+const commentAnchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
+    color: ${kicker};
+    text-decoration: none;
+
+    ${darkModeCss`
+        color: ${inverted};
+    `}
+`;
+
+const anchorStyles = (kicker: string, inverted: string): SerializedStyles => css`
     ${headline.xxxsmall({ fontWeight: 'bold' })}
     font-style: normal;
-    color: ${colour};
+    color: ${kicker};
     text-decoration: none;
+
+    ${darkModeCss`
+        color: ${inverted};
+    `}
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
+    const { kicker } = getPillarStyles(format.pillar);
     switch (format.design) {
         case Design.Comment:
             return commentStyles;
 
         default:
-            const colours = getPillarStyles(format.pillar);
-
-            return styles(colours.kicker);
+            return styles(kicker);
     }
 }
 
 const toReact = (format: Format) => (node: Node): ReactNode => {
-    const colours = getPillarStyles(format.pillar);
+    const { kicker, inverted } = getPillarStyles(format.pillar);
 
     switch (node.nodeName) {
         case 'A':
+            const anchor = format.design === Design.Comment
+                ? commentAnchorStyles
+                : anchorStyles
+
             return (
-                <a href={getHref(node).withDefault('')} css={anchorStyles(colours.kicker)}>
+                <a href={getHref(node).withDefault('')} css={anchor(kicker, inverted)}>
                     {node.textContent ?? ''}
                 </a>
             );

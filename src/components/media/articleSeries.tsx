@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, SerializedStyles } from '@emotion/core'
-import { Series } from '../../capi';
+import { Series } from 'capi';
 import { PillarStyles, Pillar, getPillarStyles } from 'pillar';
 import { headline } from '@guardian/src-foundations/typography';
 

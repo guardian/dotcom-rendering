@@ -4,7 +4,7 @@ import React, { FC, ReactNode } from 'react';
 import { css } from '@emotion/core';
 import { body } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations';
-import { darkModeCss } from "../../styles";
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 

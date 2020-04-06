@@ -19,16 +19,17 @@ interface Props {
     item: Item;
 }
 
-const darkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkMode`
+const darkStyles: SerializedStyles = darkMode`
     background: ${background.inverse};
-    color: ${neutral[86]};
+    color: ${neutral[60]};
 
     a {
-        color: ${inverted};
+        color: ${neutral[60]};
+        border-bottom: 0.0625rem solid ${neutral[60]};
     }
 `;
 
-const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
+const styles: SerializedStyles = css`
     margin-bottom: ${remSpace[2]};
     color: ${text.primary};
 
@@ -40,7 +41,7 @@ const styles = (pillarStyles: PillarStyles): SerializedStyles => css`
         font-style: normal;
     }
 
-    ${darkStyles(pillarStyles)}
+    ${darkStyles}
 `;
 
 const normalHeadline = css`
@@ -57,7 +58,7 @@ const thinHeadline = css`
 `;
 
 const immersive = (pillarStyles: PillarStyles): SerializedStyles => css`
-    ${styles(pillarStyles)}
+    ${styles}
     ${headline.xsmall({ fontWeight: 'light' })}
     margin-top: ${remSpace[3]};
 
@@ -96,13 +97,13 @@ const getStyles = (item: Item): SerializedStyles => {
         case Design.Review:
         case Design.Feature:
         case Design.Comment:
-            return css(styles(pillarStyles), thinHeadline);
+            return css(styles, thinHeadline);
 
         case Design.Media:
             return css(media);
 
         default:
-            return css(styles(pillarStyles), normalHeadline);
+            return css(styles, normalHeadline);
     }
 }
 

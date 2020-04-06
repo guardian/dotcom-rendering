@@ -3,26 +3,24 @@ import { css, SerializedStyles } from '@emotion/core'
 import { adStyles, darkModeCss } from 'styles';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import { getPillarStyles, Pillar, PillarStyles } from 'pillar';
+import { remSpace } from "@guardian/src-foundations";
 
 const ArticleBodyStyles = css`
     position: relative;
     clear: both;
-    background: ${background.inverse}
-    
+    background: ${background.inverse}    
     color: ${neutral[86]};
 
     ${adStyles}
 `;
 
 const ArticleBodyDarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${background.inverse};
-    color: ${neutral[86]};
     a {
         color: ${inverted};
     }
     p:last-child {
         margin-bottom: 0;
-        padding-bottom: 1em;
+        padding-bottom: ${remSpace[2]};
     }
 `;
 
