@@ -141,8 +141,10 @@ const ampAdElem = (
         <amp-ad
             class={cx(adClass, adRegionClasses[adRegion])}
             data-block-on-consent=""
-            width={300}
-            height={250}
+            width={320}
+            height={480}
+            data-multi-size="300x250"
+            data-multi-size-validation="false"
             data-npa-on-unknown-consent={true}
             data-loading-strategy="prefer-viewability-over-views"
             layout="responsive"
