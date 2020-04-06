@@ -2,9 +2,8 @@
 
 import React, { ReactNode } from 'react';
 import { css, SerializedStyles } from '@emotion/core';
-import { neutral, background } from '@guardian/src-foundations/palette';
-import { darkModeCss } from 'styles';
-import { PillarStyles, getPillarStyles, Pillar } from 'pillar';
+import { neutral } from '@guardian/src-foundations/palette';
+import { Pillar } from 'pillar';
 import { Option } from 'types/option';
 import Dateline from 'components/dateline';
 import { Item } from 'item';
@@ -15,14 +14,14 @@ import { remSpace } from "@guardian/src-foundations";
 
 // ----- Styles ----- //
 
-const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
+const Styles = css`
     color: ${neutral[86]};
     
     .author {
         margin: ${remSpace[2]} 0 ${remSpace[3]} 0;
 
         .follow, a {
-            color: ${kicker};
+            color: ${neutral[86]};
         }
 
         time, .follow {
@@ -31,21 +30,6 @@ const Styles = ({ kicker }: PillarStyles): SerializedStyles => css`
 
         time {
             ${textSans.xsmall()};
-            color: ${neutral[86]};
-        }
-    }
-`;
-
-const DarkStyles = ({ inverted }: PillarStyles): SerializedStyles => darkModeCss`
-    background: ${background.inverse};
-    color: ${neutral[86]};
-
-    .author {
-        .follow, a {
-            color: ${inverted};
-        }
-
-        time {
             color: ${neutral[86]};
         }
     }
@@ -62,14 +46,13 @@ interface Props {
 }
 
 function Byline({ pillar, publicationDate, className, item }: Props): JSX.Element {
-    const pillarStyles = getPillarStyles(pillar);
 
     const byline = item.bylineHtml.fmap<ReactNode>(html =>
         <address>{ renderText(html, item.pillar) }</address>
     ).withDefault(null);
 
     return (
-        <div css={[className, Styles(pillarStyles), DarkStyles(pillarStyles)]}>
+        <div css={[className, Styles]}>
             <div>
                 <div className="author">
                     { byline }
