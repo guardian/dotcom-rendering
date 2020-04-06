@@ -100,7 +100,7 @@ function Epic({ title, body, firstButton, secondButton }: EpicProps): React.Reac
         }
     }, [impressionSeen]);
 
-    const epicButton = (text: string, action: () => void): JSX.Element =>
+    const epicButton = (text: string, action: () => Promise<void>): JSX.Element =>
         <Button onClick={action} iconSide="right" icon={<SvgArrowRightStraight />}>
             {text}
         </Button>

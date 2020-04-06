@@ -4,6 +4,7 @@ module.exports =  {
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:react/recommended',
         'plugin:jsx-a11y/recommended',
     ],
@@ -16,6 +17,7 @@ module.exports =  {
             // Allows for the parsing of JSX
             jsx:  true,
         },
+        project: 'tsconfig.json',
     },
     rules: {
         // Triple-equals equality in JS
