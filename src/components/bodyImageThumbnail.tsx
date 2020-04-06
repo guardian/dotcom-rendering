@@ -7,6 +7,7 @@ import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
 import { remSpace, text } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
+import { Option } from 'types/option';
 
 // ----- Setup ----- //
 
@@ -17,7 +18,7 @@ const sizes = `(min-width: 140px)`;
 
 interface Props {
     image: Omit<ImageProps, 'sizes'>;
-    figcaption: ReactNode;
+    figcaption: Option<ReactNode>;
     pillar: Pillar;
 }
 
@@ -50,16 +51,20 @@ const captionStyles = css`
 const BodyImageThumbnail: FC<Props> = ({ image, figcaption, pillar }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} thumbnail={true} />
-        <figcaption css={captionStyles}>
-            <svg
-                css={triangleStyles(getPillarStyles(pillar))}
-                viewBox="0 0 10 9"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <polygon points="0,9 5,0 10,9 0,9" />
-            </svg>
-            {figcaption}
-        </figcaption>
+        {
+            figcaption.fmap<ReactNode | null>(caption =>
+                <figcaption css={captionStyles}>
+                    <svg
+                        css={triangleStyles(getPillarStyles(pillar))}
+                        viewBox="0 0 10 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <polygon points="0,9 5,0 10,9 0,9" />
+                    </svg>
+                    {caption}
+                </figcaption>
+            ).withDefault(null)
+        }
     </figure>
 
 

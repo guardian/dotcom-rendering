@@ -367,7 +367,7 @@ const render = (pillar: Pillar, imageMappings: ImageMappings) =>
                     caption: captionString,
                     credit
                 },
-                figcaption: text(caption, pillar),
+                figcaption: captionString ? new Some(text(caption, pillar)) : new None<ReactNode>(),
                 pillar,
             });
 

@@ -10,7 +10,7 @@ import { remSpace, breakpoints } from '@guardian/src-foundations';
 import Image, { Props as ImageProps } from 'components/image';
 import { Pillar, PillarStyles, getPillarStyles } from 'pillar';
 import { darkModeCss } from 'styles';
-
+import { Option } from 'types/option';
 
 // ----- Setup ----- //
 
@@ -21,7 +21,7 @@ const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
 
 interface Props {
     image: Omit<ImageProps, 'sizes'>;
-    figcaption: ReactNode;
+    figcaption: Option<ReactNode>;
     pillar: Pillar;
 }
 
@@ -56,16 +56,20 @@ const captionStyles = css`
 const BodyImage: FC<Props> = ({ figcaption, image, pillar }: Props) =>
     <figure css={styles}>
         <Image {...image} sizes={sizes} />
-        <figcaption css={captionStyles}>
-            <svg
-                css={triangleStyles(getPillarStyles(pillar))}
-                viewBox="0 0 10 9"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <polygon points="0,9 5,0 10,9 0,9" />
-            </svg>
-            {figcaption}
-        </figcaption>
+        {
+            figcaption.fmap(caption =>
+                <figcaption css={captionStyles}>
+                    <svg
+                        css={triangleStyles(getPillarStyles(pillar))}
+                        viewBox="0 0 10 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <polygon points="0,9 5,0 10,9 0,9" />
+                    </svg>
+                    {caption}
+                </figcaption>
+            )
+        }
     </figure>
 
 
