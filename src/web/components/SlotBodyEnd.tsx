@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { css } from 'emotion';
 import {
     getBodyEnd,
@@ -116,12 +116,15 @@ const MemoisedInner = ({
         slot?: {
             html: string;
             css: string;
+            js: string;
         };
     }>();
 
     const [hasBeenSeen, setNode] = useHasBeenSeen({
         threshold: 0.5,
     }) as HasBeenSeen;
+
+    const slotRoot = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const contributionsPayload = buildPayload({
@@ -141,7 +144,11 @@ const MemoisedInner = ({
             .then(response => response.json())
             .then(json =>
                 setData({
-                    slot: { html: json.data.html, css: json.data.css },
+                    slot: {
+                        html: json.data.html,
+                        css: json.data.css,
+                        js: json.data.js,
+                    },
                 }),
             )
             .then(() => sendOphanEvent('INSERT'))
@@ -166,11 +173,34 @@ const MemoisedInner = ({
         }
     }, [hasBeenSeen]);
 
+    // Rely on useEffect to run a function that initialises the slot once it's
+    // been injected in the DOM.
+    useEffect(() => {
+        if (data && data.slot && data.slot.js) {
+            // This should only be called once
+            try {
+                // eslint-disable-next-line no-eval
+                window.eval(data.slot.js);
+                if (typeof window.initAutomatJs === 'function') {
+                    window.initAutomatJs(slotRoot.current);
+                }
+            } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error(error);
+                window.guardian.modules.sentry.reportError(
+                    error,
+                    'slot-body-end',
+                );
+            }
+        }
+    }, [data]);
+
     if (data && data.slot) {
         return (
             <div ref={setNode} className={wrapperMargins}>
                 {data.slot.css && <style>{data.slot.css}</style>}
                 <div
+                    ref={slotRoot}
                     // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{ __html: data.slot.html }}
                 />

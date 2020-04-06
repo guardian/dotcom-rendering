@@ -34,6 +34,7 @@ declare global {
         };
         GoogleAnalyticsObject: string;
         ga: UniversalAnalytics.ga;
+        initAutomatJs?: Function;
     }
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */
