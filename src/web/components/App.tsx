@@ -137,7 +137,7 @@ export const App = ({ CAPI, NAV }: Props) => {
     // components are only applied when navigating via keyboard.
     // READ: https://www.theguardian.design/2a1e5182b/p/6691bb-accessibility/t/32e9fb
     useEffect(() => {
-        // FocusStyleManager.onlyShowFocusOnTabs();
+        FocusStyleManager.onlyShowFocusOnTabs();
     }, []);
 
     return (
