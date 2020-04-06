@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 
 import { Design, Format } from 'item';
 import { Option } from 'types/option';
-import { remSpace, neutral } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { getPillarStyles } from 'pillar';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -21,7 +21,6 @@ interface Props extends Format {
 const styles = (kicker: string): SerializedStyles => css`
     ${headline.xxxsmall()}
     color: ${kicker};
-    margin-bottom: ${remSpace[1]};
 
     ${darkModeCss`
         color: ${neutral[60]};
